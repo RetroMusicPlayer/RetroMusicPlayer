@@ -12,7 +12,7 @@
  * permissions and limitations under the License.
  */
 
-package code.name.monkey.retromusic.lyrics;
+package io.github.muntashirakon.music.lyrics;
 
 import android.text.Layout;
 import android.text.StaticLayout;

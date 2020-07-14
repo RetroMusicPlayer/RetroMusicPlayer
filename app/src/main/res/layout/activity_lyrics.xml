@@ -30,7 +30,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <code.name.monkey.retromusic.lyrics.LrcView
+    <io.github.muntashirakon.music.lyrics.LrcView
         android:id="@+id/lyricsView"
         app:lrcLabel="@string/no_lyrics_found"
         app:lrcPadding="16dp"

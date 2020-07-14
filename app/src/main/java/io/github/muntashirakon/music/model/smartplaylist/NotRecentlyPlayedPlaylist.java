@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.model.smartplaylist;
+package io.github.muntashirakon.music.model.smartplaylist;
 
 import android.content.Context;
 import android.os.Parcel;
@@ -7,11 +7,11 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.loaders.TopAndRecentlyPlayedTracksLoader;
-import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.util.MusicUtil;
-import code.name.monkey.retromusic.util.PreferenceUtil;
+import io.github.muntashirakon.music.R;
+import io.github.muntashirakon.music.loaders.TopAndRecentlyPlayedTracksLoader;
+import io.github.muntashirakon.music.model.Song;
+import io.github.muntashirakon.music.util.MusicUtil;
+import io.github.muntashirakon.music.util.PreferenceUtil;
 
 /**
  * @author SC (soncaokim)
