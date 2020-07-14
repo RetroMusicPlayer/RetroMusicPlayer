@@ -17,13 +17,17 @@ package io.github.muntashirakon.music.loaders
 import android.content.Context
 import android.database.Cursor
 import android.provider.BaseColumns
+import android.provider.MediaStore
 import io.github.muntashirakon.music.Constants.NUMBER_OF_TOP_TRACKS
+import io.github.muntashirakon.music.loaders.SongLoader.makeSongCursor
 import io.github.muntashirakon.music.model.Album
 import io.github.muntashirakon.music.model.Artist
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.providers.HistoryStore
 import io.github.muntashirakon.music.providers.SongPlayCountStore
+import io.github.muntashirakon.music.util.PreferenceUtil
 import java.util.*
+
 
 /**
  * Created by hemanths on 16/08/17.
@@ -39,19 +43,23 @@ object TopAndRecentlyPlayedTracksLoader {
         return SongLoader.getSongs(makeTopTracksCursorAndClearUpDatabase(context))
     }
 
-    private fun makeRecentTracksCursorAndClearUpDatabase(context: Context): Cursor? {
-        val retCursor = makeRecentTracksCursorImpl(context)
-
-        // clean up the databases with any ids not found
-        if (retCursor != null) {
-            val missingIds = retCursor.missingIds
-            if (missingIds != null && missingIds.size > 0) {
-                for (id in missingIds) {
-                    HistoryStore.getInstance(context).removeSongId(id)
-                }
-            }
-        }
-        return retCursor
+    fun getNotRecentlyPlayedTracks(context: Context): ArrayList<Song> {
+        val allSongs = SongLoader.getSongs(
+            makeSongCursor(
+                context,
+                null, null,
+                MediaStore.Audio.Media.DATE_ADDED + " ASC"
+            )
+        )
+        val playedSongs = SongLoader.getSongs(
+            makePlayedTracksCursorAndClearUpDatabase(context)
+        )
+        val notRecentlyPlayedSongs = SongLoader.getSongs(
+            makeNotRecentTracksCursorAndClearUpDatabase(context)
+        )
+        allSongs.removeAll(playedSongs)
+        allSongs.addAll(notRecentlyPlayedSongs)
+        return allSongs
     }
 
     private fun makeTopTracksCursorAndClearUpDatabase(context: Context): Cursor? {
@@ -72,21 +80,19 @@ object TopAndRecentlyPlayedTracksLoader {
     private fun makeRecentTracksCursorImpl(context: Context): SortedLongCursor? {
         // first get the top results ids from the internal database
         val songs = HistoryStore.getInstance(context).queryRecentIds()
-
-        try {
+        songs.use {
             return makeSortedCursor(
-                context, songs,
-                songs!!.getColumnIndex(HistoryStore.RecentStoreColumns.ID)
+                context,
+                it,
+                it.getColumnIndex(HistoryStore.RecentStoreColumns.ID)
             )
-        } finally {
-            songs?.close()
         }
     }
 
     private fun makeTopTracksCursorImpl(context: Context): SortedLongCursor? {
         // first get the top results ids from the internal database
-        val songs = SongPlayCountStore.getInstance(context)
-            .getTopPlayedResults(NUMBER_OF_TOP_TRACKS)
+        val songs =
+            SongPlayCountStore.getInstance(context).getTopPlayedResults(NUMBER_OF_TOP_TRACKS)
 
         songs.use { localSongs ->
             return makeSortedCursor(
@@ -144,5 +150,58 @@ object TopAndRecentlyPlayedTracksLoader {
 
     fun getTopArtists(context: Context): ArrayList<Artist> {
         return ArtistLoader.splitIntoArtists(getTopAlbums(context))
+    }
+
+
+    fun makeRecentTracksCursorAndClearUpDatabase(context: Context): Cursor? {
+        return makeRecentTracksCursorAndClearUpDatabaseImpl(context, false, false)
+    }
+
+
+    fun makePlayedTracksCursorAndClearUpDatabase(context: Context): Cursor? {
+        return makeRecentTracksCursorAndClearUpDatabaseImpl(context, true, false)
+    }
+
+
+    fun makeNotRecentTracksCursorAndClearUpDatabase(context: Context): Cursor? {
+        return makeRecentTracksCursorAndClearUpDatabaseImpl(context, false, true)
+    }
+
+    private fun makeRecentTracksCursorAndClearUpDatabaseImpl(
+        context: Context,
+        ignoreCutoffTime: Boolean,
+        reverseOrder: Boolean
+    ): SortedLongCursor? {
+        val retCursor = makeRecentTracksCursorImpl(context, ignoreCutoffTime, reverseOrder)
+        // clean up the databases with any ids not found
+        // clean up the databases with any ids not found
+        if (retCursor != null) {
+            val missingIds = retCursor.missingIds
+            if (missingIds != null && missingIds.size > 0) {
+                for (id in missingIds) {
+                    HistoryStore.getInstance(context).removeSongId(id)
+                }
+            }
+        }
+        return retCursor
+    }
+
+
+    private fun makeRecentTracksCursorImpl(
+        context: Context,
+        ignoreCutoffTime: Boolean,
+        reverseOrder: Boolean
+    ): SortedLongCursor? {
+        val cutoff =
+            (if (ignoreCutoffTime) 0 else PreferenceUtil.getRecentlyPlayedCutoffTimeMillis()).toLong()
+        val songs =
+            HistoryStore.getInstance(context).queryRecentIds(cutoff * if (reverseOrder) -1 else 1)
+        return songs.use {
+            makeSortedCursor(
+                context,
+                it,
+                it.getColumnIndex(HistoryStore.RecentStoreColumns.ID)
+            )
+        }
     }
 }

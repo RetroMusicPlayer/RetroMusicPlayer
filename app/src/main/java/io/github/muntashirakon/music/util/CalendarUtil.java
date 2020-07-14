@@ -127,4 +127,16 @@ public class CalendarUtil {
         final Calendar monthCal = new GregorianCalendar(calendar.get(Calendar.YEAR), month, 1);
         return monthCal.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
+
+    /**
+     * Returns the time elapsed so far last N days in milliseconds.
+     *
+     * @return Time elapsed since N days in milliseconds.
+     */
+    public long getElapsedDays(int numDays) {
+        long elapsed = getElapsedToday();
+        elapsed += numDays * MS_PER_DAY;
+
+        return elapsed;
+    }
 }

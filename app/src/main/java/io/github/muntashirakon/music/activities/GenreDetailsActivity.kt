@@ -8,23 +8,24 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ATHUtil
-import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsSlidingMusicPanelActivity
 import io.github.muntashirakon.music.adapter.song.ShuffleButtonSongAdapter
 import io.github.muntashirakon.music.extensions.applyToolbar
+import io.github.muntashirakon.music.extensions.extraNotNull
 import io.github.muntashirakon.music.helper.menu.GenreMenuHelper
 import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.Genre
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.mvp.presenter.GenreDetailsPresenter
+import io.github.muntashirakon.music.mvp.presenter.GenreDetailsPresenter.GenreDetailsPresenterImpl
 import io.github.muntashirakon.music.mvp.presenter.GenreDetailsView
+import io.github.muntashirakon.music.providers.RepositoryImpl
 import io.github.muntashirakon.music.util.DensityUtil
 import io.github.muntashirakon.music.util.RetroColorUtil
 import com.afollestad.materialcab.MaterialCab
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
 import java.util.*
-import javax.inject.Inject
 
 /**
  * @author Hemanth S (h4h13).
@@ -32,9 +33,8 @@ import javax.inject.Inject
 
 class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDetailsView {
 
-    @Inject
-    lateinit var genreDetailsPresenter: GenreDetailsPresenter
 
+    private lateinit var genreDetailsPresenter: GenreDetailsPresenter
     private lateinit var genre: Genre
     private lateinit var songAdapter: ShuffleButtonSongAdapter
     private var cab: MaterialCab? = null
@@ -62,16 +62,14 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
         setBottomBarVisibility(View.GONE)
-        if (intent.extras != null) {
-            genre = intent?.extras?.getParcelable(EXTRA_GENRE_ID)!!
-        } else {
-            finish()
-        }
+
+        genre = extraNotNull<Genre>(EXTRA_GENRE_ID).value
 
         setUpToolBar()
         setupRecyclerView()
 
-        App.musicComponent.inject(this)
+        genreDetailsPresenter =
+            GenreDetailsPresenterImpl(RepositoryImpl(this))
         genreDetailsPresenter.attachView(this)
     }
 

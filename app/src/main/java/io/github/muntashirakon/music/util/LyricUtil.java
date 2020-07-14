@@ -72,6 +72,11 @@ public class LyricUtil {
         return file.exists();
     }
 
+    public static boolean isLrcOriginalFileExist(@NonNull String path) {
+        File file = new File(getLrcOriginalPath(path));
+        return file.exists();
+    }
+
     @Nullable
     public static File getLocalLyricFile(@NonNull String title, @NonNull String artist) {
         File file = new File(getLrcPath(title, artist));
@@ -82,8 +87,22 @@ public class LyricUtil {
         }
     }
 
+    @Nullable
+    public static File getLocalLyricOriginalFile(@NonNull String path) {
+        File file = new File(getLrcOriginalPath(path));
+        if (file.exists()) {
+            return file;
+        } else {
+            return null;
+        }
+    }
+
     private static String getLrcPath(String title, String artist) {
         return lrcRootPath + title + " - " + artist + ".lrc";
+    }
+
+    private static String getLrcOriginalPath(String filePath) {
+        return filePath.replace(filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length()), "lrc");
     }
 
     @NonNull

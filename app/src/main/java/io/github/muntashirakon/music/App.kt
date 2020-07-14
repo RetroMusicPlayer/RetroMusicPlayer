@@ -18,16 +18,12 @@ import androidx.multidex.MultiDexApplication
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.appshortcuts.DynamicShortcutManager
-import io.github.muntashirakon.music.dagger.DaggerMusicComponent
-import io.github.muntashirakon.music.dagger.MusicComponent
-import io.github.muntashirakon.music.dagger.module.AppModule
 
 class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        musicComponent = initDagger(this)
 
         // default theme
         if (!ThemeStore.isConfigured(this, 3)) {
@@ -41,18 +37,11 @@ class App : MultiDexApplication() {
             DynamicShortcutManager(this).initDynamicShortcuts()
     }
 
-    private fun initDagger(app: App): MusicComponent =
-        DaggerMusicComponent.builder()
-            .appModule(AppModule(app))
-            .build()
-
     companion object {
         private var instance: App? = null
 
         fun getContext(): App {
             return instance!!
         }
-
-        lateinit var musicComponent: MusicComponent
     }
 }

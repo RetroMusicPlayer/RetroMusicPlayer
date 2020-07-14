@@ -19,7 +19,7 @@ import io.github.muntashirakon.music.mvp.Presenter
 import io.github.muntashirakon.music.mvp.PresenterImpl
 import io.github.muntashirakon.music.providers.interfaces.Repository
 import kotlinx.coroutines.*
-import javax.inject.Inject
+
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -35,7 +35,7 @@ interface SearchPresenter : Presenter<SearchView> {
 
     fun search(query: String?)
 
-    class SearchPresenterImpl @Inject constructor(
+    class SearchPresenterImpl constructor(
         private val repository: Repository
     ) : PresenterImpl<SearchView>(), SearchPresenter, CoroutineScope {
 

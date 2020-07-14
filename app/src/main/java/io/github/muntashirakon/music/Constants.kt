@@ -18,10 +18,10 @@ import android.provider.BaseColumns
 import android.provider.MediaStore
 
 object Constants {
-
+    const val PRO_VERSION_PRODUCT_ID = "pro_version"
     const val RATE_ON_GOOGLE_PLAY =
         "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
-    const val TRANSLATE = "http://monkeycodeapp.oneskyapp.com/collaboration/project?id=238534"
+    const val TRANSLATE = "https://github.com/h4h13/RetroMusicPlayer"
     const val GITHUB_PROJECT = "https://github.com/h4h13/RetroMusicPlayer"
     const val TELEGRAM_CHANGE_LOG = "https://t.me/retromusiclog"
     const val USER_PROFILE = "profile.jpg"
@@ -116,6 +116,7 @@ const val IGNORE_MEDIA_STORE_ARTWORK = "ignore_media_store_artwork"
 const val LAST_CHANGELOG_VERSION = "last_changelog_version"
 const val AUTO_DOWNLOAD_IMAGES_POLICY = "auto_download_images_policy"
 const val START_DIRECTORY = "start_directory"
+const val RECENTLY_PLAYED_CUTOFF = "recently_played_interval"
 const val LOCK_SCREEN = "lock_screen"
 const val ALBUM_DETAIL_SONG_SORT_ORDER = "album_detail_song_sort_order"
 const val LYRICS_OPTIONS = "lyrics_tab_position"

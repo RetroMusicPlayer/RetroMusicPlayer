@@ -8,11 +8,8 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:elevation="0dp"
-        app:elevation="0dp">
+        android:layout_width="match_parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -22,7 +19,7 @@
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
             app:subtitleTextAppearance="@style/TextViewCaption"
             app:titleMargin="0dp"
             app:titleMarginStart="0dp"
@@ -30,38 +27,15 @@
             tools:subtitle="@tools:sample/full_names"
             tools:title="@tools:sample/full_names" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            style="@style/TabLayoutStyle"
-            android:background="@android:color/transparent"
-            app:tabTextAppearance="@style/TabTextAppearance">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/synced_lyrics" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/normal_lyrics" />
-        </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <code.name.monkey.retromusic.lyrics.LrcView
+        android:id="@+id/lyricsView"
+        app:lrcLabel="@string/no_lyrics_found"
+        app:lrcPadding="16dp"
+        app:lrcTextGravity="left"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="@string/edit"
-        app:icon="@drawable/ic_edit_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

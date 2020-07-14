@@ -42,6 +42,11 @@ interface Repository {
 
     suspend fun getGenre(genreId: Int): ArrayList<Song>
 
+    suspend fun artistInfo(name: String, lang: String?, cache: String?): LastFmArtist
+
+    suspend fun albumInfo(artist: String, album: String): LastFmAlbum
+
+    suspend fun artistById(artistId: Int): Artist
     suspend fun recentArtists(): Home?
 
     suspend fun topArtists(): Home?
@@ -52,9 +57,5 @@ interface Repository {
 
     suspend fun favoritePlaylist(): Home?
 
-    suspend fun artistInfo(name: String, lang: String?, cache: String?): LastFmArtist
-
-    suspend fun albumInfo(artist: String, album: String): LastFmAlbum
-
-    suspend fun artistById(artistId: Int): Artist
+    suspend fun suggestions(): Home?
 }

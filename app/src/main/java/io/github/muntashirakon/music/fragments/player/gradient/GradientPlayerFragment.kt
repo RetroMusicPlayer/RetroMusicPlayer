@@ -279,6 +279,10 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         updateQueuePosition()
     }
 
+    override fun onQueueChanged() {
+        super.onQueueChanged()
+        updateLabel()
+    }
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title

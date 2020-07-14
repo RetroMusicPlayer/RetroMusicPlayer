@@ -33,7 +33,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
     fun removeSlideEffect() {
         val transformer = ParallaxPagerTransformer(R.id.player_image)
         transformer.setSpeed(0.3f)
-        //viewPager.setPageTransformer(true, transformer)
     }
 
     override fun onCreateView(

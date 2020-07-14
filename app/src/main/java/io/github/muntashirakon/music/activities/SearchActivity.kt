@@ -21,23 +21,22 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsMusicServiceActivity
 import io.github.muntashirakon.music.adapter.SearchAdapter
 import io.github.muntashirakon.music.mvp.presenter.SearchPresenter
+import io.github.muntashirakon.music.mvp.presenter.SearchPresenter.SearchPresenterImpl
 import io.github.muntashirakon.music.mvp.presenter.SearchView
+import io.github.muntashirakon.music.providers.RepositoryImpl
 import io.github.muntashirakon.music.util.RetroUtil
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_search.*
 import java.util.*
-import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatcher, SearchView {
-    @Inject
-    lateinit var searchPresenter: SearchPresenter
 
+    private lateinit var presenter: SearchPresenter
     private var searchAdapter: SearchAdapter? = null
     private var query: String? = null
 
@@ -50,8 +49,8 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
-        App.musicComponent.inject(this)
-        searchPresenter.attachView(this)
+        presenter = SearchPresenterImpl(RepositoryImpl(this))
+        presenter.attachView(this)
 
         setupRecyclerView()
         setUpToolBar()
@@ -117,7 +116,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
 
     override fun onDestroy() {
         super.onDestroy()
-        searchPresenter.detachView()
+        presenter.detachView()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -134,7 +133,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         TransitionManager.beginDelayedTransition(appBarLayout)
         voiceSearch.visibility = if (query.isNotEmpty()) View.GONE else View.VISIBLE
         clearText.visibility = if (query.isNotEmpty()) View.VISIBLE else View.GONE
-        searchPresenter.search(query)
+        presenter.search(query)
     }
 
     override fun onMediaStoreChanged() {
@@ -176,7 +175,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
                         data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                     query = result?.get(0)
                     searchView.setText(query, BufferType.EDITABLE)
-                    searchPresenter.search(query!!)
+                    presenter.search(query!!)
                 }
             }
         }

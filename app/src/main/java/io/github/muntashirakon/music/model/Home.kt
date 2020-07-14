@@ -15,13 +15,10 @@
 package io.github.muntashirakon.music.model
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import io.github.muntashirakon.music.adapter.HomeAdapter.Companion.HomeSection
 
 class Home(
-    val priority: Int,
-    @StringRes val title: Int,
-    val arrayList: ArrayList<*>,
+    val arrayList: List<*>,
     @HomeSection
     val homeSection: Int,
     @DrawableRes

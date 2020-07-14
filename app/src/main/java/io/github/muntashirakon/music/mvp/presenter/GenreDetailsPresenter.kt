@@ -23,7 +23,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -38,7 +37,7 @@ interface GenreDetailsView : BaseView {
 interface GenreDetailsPresenter : Presenter<GenreDetailsView> {
     fun loadGenreSongs(genreId: Int)
 
-    class GenreDetailsPresenterImpl @Inject constructor(
+    class GenreDetailsPresenterImpl constructor(
         private val repository: Repository
     ) : PresenterImpl<GenreDetailsView>(), GenreDetailsPresenter, CoroutineScope {
 

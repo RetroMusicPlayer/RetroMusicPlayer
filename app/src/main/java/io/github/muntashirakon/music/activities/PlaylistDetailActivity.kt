@@ -7,13 +7,13 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ATHUtil
-import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsSlidingMusicPanelActivity
 import io.github.muntashirakon.music.adapter.song.OrderablePlaylistSongAdapter
 import io.github.muntashirakon.music.adapter.song.PlaylistSongAdapter
 import io.github.muntashirakon.music.adapter.song.SongAdapter
 import io.github.muntashirakon.music.extensions.applyToolbar
+import io.github.muntashirakon.music.extensions.extraNotNull
 import io.github.muntashirakon.music.helper.menu.PlaylistMenuHelper
 import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.loaders.PlaylistLoader
@@ -21,7 +21,9 @@ import io.github.muntashirakon.music.model.AbsCustomPlaylist
 import io.github.muntashirakon.music.model.Playlist
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.mvp.presenter.PlaylistSongsPresenter
+import io.github.muntashirakon.music.mvp.presenter.PlaylistSongsPresenter.PlaylistSongsPresenterImpl
 import io.github.muntashirakon.music.mvp.presenter.PlaylistSongsView
+import io.github.muntashirakon.music.providers.RepositoryImpl
 import io.github.muntashirakon.music.util.DensityUtil
 import io.github.muntashirakon.music.util.PlaylistsUtil
 import io.github.muntashirakon.music.util.RetroColorUtil
@@ -30,13 +32,11 @@ import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemA
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
-import javax.inject.Inject
 
 class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, PlaylistSongsView {
 
-    @Inject
-    lateinit var playlistSongsPresenter: PlaylistSongsPresenter
 
+    private lateinit var presenter: PlaylistSongsPresenter
     private lateinit var playlist: Playlist
     private var cab: MaterialCab? = null
     private lateinit var adapter: SongAdapter
@@ -52,14 +52,10 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         setLightNavigationBar(true)
         setBottomBarVisibility(View.GONE)
 
-        App.musicComponent.inject(this)
-        playlistSongsPresenter.attachView(this)
+        presenter = PlaylistSongsPresenterImpl(RepositoryImpl(this))
+        presenter.attachView(this)
 
-        if (intent.extras != null) {
-            playlist = intent.extras!!.getParcelable(EXTRA_PLAYLIST)!!
-        } else {
-            finish()
-        }
+        playlist = extraNotNull<Playlist>(EXTRA_PLAYLIST).value
 
         setUpToolBar()
         setUpRecyclerView()
@@ -114,7 +110,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
 
     override fun onResume() {
         super.onResume()
-        playlistSongsPresenter.loadPlaylistSongs(playlist)
+        presenter.loadPlaylistSongs(playlist)
     }
 
     private fun setUpToolBar() {
@@ -181,7 +177,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
                 setToolbarTitle(playlist.name)
             }
         }
-        playlistSongsPresenter.loadPlaylistSongs(playlist)
+        presenter.loadPlaylistSongs(playlist)
     }
 
     private fun setToolbarTitle(title: String) {
@@ -227,7 +223,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
             wrappedAdapter = null
         }
         super.onDestroy()
-        playlistSongsPresenter.detachView()
+        presenter.detachView()
     }
 
     override fun showEmptyView() {

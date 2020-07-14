@@ -44,6 +44,11 @@ import io.github.muntashirakon.music.activities.bugreport.BugReportActivity;
 import io.github.muntashirakon.music.helper.MusicPlayerRemote;
 import io.github.muntashirakon.music.model.Genre;
 import io.github.muntashirakon.music.model.Playlist;
+import code.name.monkey.retromusic.activities.PurchaseActivity;
+import code.name.monkey.retromusic.activities.SupportDevelopmentActivity;
+
+import static io.github.muntashirakon.music.Constants.RATE_ON_GOOGLE_PLAY;
+import static io.github.muntashirakon.music.util.RetroUtil.openUrl;
 
 public class NavigationUtil {
 

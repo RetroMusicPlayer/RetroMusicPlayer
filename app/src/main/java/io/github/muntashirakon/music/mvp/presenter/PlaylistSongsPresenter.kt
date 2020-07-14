@@ -24,7 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -38,7 +38,7 @@ interface PlaylistSongsView : BaseView {
 interface PlaylistSongsPresenter : Presenter<PlaylistSongsView> {
     fun loadPlaylistSongs(playlist: Playlist)
 
-    class PlaylistSongsPresenterImpl @Inject constructor(
+    class PlaylistSongsPresenterImpl constructor(
         private val repository: Repository
     ) : PresenterImpl<PlaylistSongsView>(), PlaylistSongsPresenter, CoroutineScope {
 

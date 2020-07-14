@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 import io.github.muntashirakon.music.loaders.PlaylistSongsLoader;
+import io.github.muntashirakon.music.util.MusicUtil;
 
 
 public class Playlist implements Parcelable {
@@ -106,5 +107,14 @@ public class Playlist implements Parcelable {
         dest.writeString(this.name);
     }
 
+    @NonNull
+    public String getInfoString(@NonNull Context context) {
+        int songCount = getSongs(context).size();
+        String songCountString = MusicUtil.getSongCountString(context, songCount);
 
+        return MusicUtil.buildInfoString(
+                songCountString,
+                ""
+        );
+    }
 }

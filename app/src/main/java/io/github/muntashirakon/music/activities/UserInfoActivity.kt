@@ -63,7 +63,7 @@ class UserInfoActivity : AbsBaseActivity() {
         next.setOnClickListener {
             val nameString = name.text.toString().trim { it <= ' ' }
             if (TextUtils.isEmpty(nameString)) {
-                Toast.makeText(this, "Umm name is empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Umm you're name can't be empty!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             PreferenceUtil.userName = nameString
