@@ -24,8 +24,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 438
-        versionName '3.5.650'
+        versionCode 10438
+        versionName '3.5.650' + "_" + getDate()
 
         multiDexEnabled true
 
@@ -50,17 +50,6 @@ android {
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix ' DEBUG'
-        }
-    }
-
-
-    flavorDimensions "default"
-
-    productFlavors {
-        normal {
-            versionCode defaultConfig.versionCode + 10000
-            versionName defaultConfig.versionName + "_" + getDate()
-            dimension "default"
         }
     }
 
