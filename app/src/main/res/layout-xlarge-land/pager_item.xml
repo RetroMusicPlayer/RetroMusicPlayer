@@ -14,7 +14,7 @@
         android:layout_height="256dp"
         android:layout_margin="8dp"
         app:cardCornerRadius="16dp"
-        app:cardElevation="0dp">
+        >
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"

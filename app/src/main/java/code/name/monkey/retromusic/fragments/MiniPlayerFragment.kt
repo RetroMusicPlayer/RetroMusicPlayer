@@ -61,8 +61,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
             actionPrevious?.show()
 
         } else {
-            actionNext.visibility =
-                if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
+            actionNext.visibility = if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
             actionPrevious.visibility =
                 if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
         }

@@ -43,7 +43,9 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         ArtistLoader.getArtist(context, artistId)
 
     override suspend fun suggestions(): Home? {
-        val songs = NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().subList(0, 9)
+        val songs = NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().apply {
+            if (size > 9) subList(0, 9)
+        }
         if (songs.isNotEmpty()) {
             return Home(
                 songs,

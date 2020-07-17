@@ -14,7 +14,6 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -67,6 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:circularRadius="16dp"
+                app:indicatorColor="@android:color/black"
                 app:indicatorType="circular"
                 app:indicatorWidth="2dp"
                 app:linearSeamless="true"

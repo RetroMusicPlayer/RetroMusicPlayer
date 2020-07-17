@@ -78,7 +78,8 @@ object ViewUtil {
     }
 
     fun setProgressDrawable(progressIndicator: ProgressIndicator, newColor: Int) {
-        progressIndicator.progressTintList = ColorStateList.valueOf(newColor)
+        progressIndicator.indicatorColors = intArrayOf(newColor)
+        progressIndicator.trackColor = ColorUtil.withAlpha(newColor, 0.2f)
     }
 
     fun hitTest(v: View, x: Int, y: Int): Boolean {

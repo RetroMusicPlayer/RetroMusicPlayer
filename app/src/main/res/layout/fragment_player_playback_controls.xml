@@ -27,9 +27,9 @@
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:maxHeight="2dp"
         android:progressDrawable="@drawable/color_progress_seek"
-        android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
@@ -83,11 +83,9 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:ellipsize="end"
-        android:gravity="center"
         android:maxLines="1"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
@@ -95,24 +93,26 @@
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/songInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleContainer"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songInfo"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:ellipsize="end"
-        android:gravity="center"
         android:maxLines="2"
         android:paddingHorizontal="16dp"
         android:paddingBottom="8dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/playPauseButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="@tools:sample/full_names" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/repeatButton"

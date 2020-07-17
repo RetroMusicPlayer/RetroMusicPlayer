@@ -11,9 +11,12 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.retromusic.PeekingLinearLayoutManager
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.adapter.album.AlbumFullWidthAdapter
+import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.show
@@ -23,6 +26,7 @@ import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
+import com.google.android.material.card.MaterialCardView
 
 class HomeAdapter(
     private val activity: AppCompatActivity,
@@ -40,20 +44,17 @@ class HomeAdapter(
             .inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
+            TOP_ALBUMS, RECENT_ALBUMS -> {
+                AlbumViewHolder(
+                    LayoutInflater.from(activity)
+                        .inflate(R.layout.metal_section_recycler_view, parent, false)
+                )
+            }
             FAVOURITES -> PlaylistViewHolder(layout)
-            SUGGESTIONS -> {
+            else -> {
                 SuggestionsViewHolder(
                     LayoutInflater.from(activity).inflate(
                         R.layout.item_suggestions,
-                        parent,
-                        false
-                    )
-                )
-            }
-            else -> {
-                AlbumViewHolder(
-                    LayoutInflater.from(activity).inflate(
-                        R.layout.metal_section_recycler_view,
                         parent,
                         false
                     )
@@ -133,7 +134,9 @@ class HomeAdapter(
             if (list.isNotEmpty()) {
                 recyclerView.apply {
                     show()
-                    adapter = AlbumFullWidthAdapter(activity, list, displayMetrics)
+                    adapter = AlbumAdapter(activity, list, R.layout.pager_item, null)
+                    layoutManager =
+                        PeekingLinearLayoutManager(activity, HORIZONTAL, false)
                 }
                 title.text = activity.getString(titleRes)
             }
@@ -175,17 +178,20 @@ class HomeAdapter(
         fun bindView(arrayList: List<Song>) {
             val color = ThemeStore.accentColor(activity)
             itemView.findViewById<TextView>(R.id.text).setTextColor(color)
-
-            images.forEachIndexed { index, i ->
-                itemView.findViewById<View>(i).setOnClickListener {
-                    MusicPlayerRemote.playNext(arrayList[index])
-                }
-                SongGlideRequest.Builder.from(Glide.with(activity), arrayList[index])
-                    .asBitmap()
-                    .build()
-                    .into(itemView.findViewById(i))
-
+            itemView.findViewById<MaterialCardView>(R.id.card6).apply {
+                setCardBackgroundColor(ColorUtil.withAlpha(color, 0.2f))
             }
+            if (arrayList.size > 9)
+                images.forEachIndexed { index, i ->
+                    itemView.findViewById<View>(i).setOnClickListener {
+                        MusicPlayerRemote.playNext(arrayList[index])
+                    }
+                    SongGlideRequest.Builder.from(Glide.with(activity), arrayList[index])
+                        .asBitmap()
+                        .build()
+                        .into(itemView.findViewById(i))
+
+                }
         }
     }
 
