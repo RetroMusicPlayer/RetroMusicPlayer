@@ -1316,7 +1316,7 @@ public class MusicService extends Service implements
         if (getRepeatMode() == REPEAT_MODE_THIS) {
             repeatIcon = R.drawable.ic_repeat_one;
         } else if (getRepeatMode() == REPEAT_MODE_ALL) {
-            repeatIcon = R.drawable.ic_repeat_white_circledp;
+            repeatIcon = R.drawable.ic_repeat_white_circle;
         }
         stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
                 CYCLE_REPEAT, getString(R.string.action_cycle_repeat), repeatIcon)
