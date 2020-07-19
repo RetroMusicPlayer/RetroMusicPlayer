@@ -21,10 +21,11 @@ import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -45,12 +46,12 @@ interface PlaylistSongsPresenter : Presenter<PlaylistSongsView> {
         private var job: Job = Job()
 
         override val coroutineContext: CoroutineContext
-            get() = Dispatchers.IO + job
+            get() = IO + job
 
         override fun loadPlaylistSongs(playlist: Playlist) {
             launch {
                 val songs = repository.getPlaylistSongs(playlist)
-                view?.songs(songs)
+                withContext(Main) { view?.songs(songs) }
             }
         }
 

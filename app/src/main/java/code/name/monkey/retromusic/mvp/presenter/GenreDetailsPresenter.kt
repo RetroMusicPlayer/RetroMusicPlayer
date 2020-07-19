@@ -19,10 +19,8 @@ import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.Main
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -54,7 +52,7 @@ interface GenreDetailsPresenter : Presenter<GenreDetailsView> {
         override fun loadGenreSongs(genreId: Int) {
             launch {
                 val result = repository.getGenre(genreId)
-                view?.songs(result)
+                withContext(Main) { view?.songs(result) }
             }
         }
     }

@@ -21,6 +21,7 @@ import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.string
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -65,6 +66,7 @@ class RemoveFromPlaylistDialog : DialogFragment() {
             }
             .setNegativeButton(android.R.string.cancel, null)
             .create()
+            .colorButtons()
     }
 
     companion object {

@@ -21,6 +21,7 @@ import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.ShareInstagramStory
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -48,6 +49,7 @@ class SongShareDialog : DialogFragment() {
                 withAction(which, song, listening)
             }
             .create()
+            .colorButtons()
     }
 
     private fun withAction(

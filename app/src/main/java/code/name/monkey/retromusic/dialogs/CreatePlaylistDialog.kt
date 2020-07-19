@@ -23,6 +23,7 @@ import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
@@ -65,6 +66,7 @@ class CreatePlaylistDialog : DialogFragment() {
                 }
             }
             .create()
+            .colorButtons()
     }
 
     companion object {

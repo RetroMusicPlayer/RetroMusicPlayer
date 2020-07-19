@@ -20,6 +20,7 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PlaylistsUtil
@@ -57,6 +58,7 @@ class DeletePlaylistDialog : DialogFragment() {
                 PlaylistsUtil.deletePlaylists(requireContext(), playlists)
             }
             .create()
+            .colorButtons()
     }
 
     companion object {

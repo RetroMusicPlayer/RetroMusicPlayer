@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.adapter.song
 import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.content.res.Resources
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -25,12 +24,10 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
-import java.util.*
 
 /**
  * Created by hemanths on 13/08/17.
@@ -56,7 +53,7 @@ open class SongAdapter(
     }
 
     open fun swapDataSet(dataSet: List<Song>) {
-        this.dataSet = dataSet.toMutableList()
+        this.dataSet = ArrayList(dataSet)
         notifyDataSetChanged()
     }
 
@@ -109,11 +106,6 @@ open class SongAdapter(
             .checkIgnoreMediaStore(activity)
             .generatePalette(activity).build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    super.onLoadCleared(placeholder)
-
-                }
-
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
                 }
@@ -210,7 +202,6 @@ open class SongAdapter(
     }
 
     companion object {
-
         val TAG: String = SongAdapter::class.java.simpleName
     }
 }

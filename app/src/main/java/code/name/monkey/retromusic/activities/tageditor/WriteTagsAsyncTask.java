@@ -34,8 +34,7 @@ import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListene
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.SAFUtil;
 
-public class WriteTagsAsyncTask extends
-        DialogAsyncTask<WriteTagsAsyncTask.LoadingInfo, Integer, String[]> {
+public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.LoadingInfo, Integer, String[]> {
 
     private WeakReference<Activity> activity;
 

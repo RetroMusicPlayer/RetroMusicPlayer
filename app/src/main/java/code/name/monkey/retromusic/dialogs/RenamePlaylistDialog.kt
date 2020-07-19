@@ -22,6 +22,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -60,6 +61,7 @@ class RenamePlaylistDialog : DialogFragment() {
                 }
             }
             .create()
+            .colorButtons()
     }
 
     companion object {

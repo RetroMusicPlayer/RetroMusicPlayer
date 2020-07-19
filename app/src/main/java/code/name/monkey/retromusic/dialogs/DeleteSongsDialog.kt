@@ -23,6 +23,7 @@ import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
@@ -74,6 +75,7 @@ class DeleteSongsDialog : DialogFragment() {
                 deleteSongsAsyncTask?.execute(DeleteSongsAsyncTask.LoadingInfo(songs, null))
             }
             .create()
+            .colorButtons()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

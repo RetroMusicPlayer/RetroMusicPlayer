@@ -21,11 +21,13 @@ import android.graphics.Color
 import android.widget.CheckBox
 import android.widget.SeekBar
 import androidx.annotation.AttrRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 
 fun Int.ripAlpha(): Int {
@@ -77,4 +79,14 @@ fun SeekBar.addAccentColor() {
     val colorState = ColorStateList.valueOf(ThemeStore.accentColor(context))
     progressTintList = colorState
     thumbTintList = colorState
+}
+
+fun AlertDialog.colorButtons(): AlertDialog {
+    setOnShowListener {
+        getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ThemeStore.accentColor(App.getContext()))
+        getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ThemeStore.accentColor(App.getContext()))
+        getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(ThemeStore.accentColor(App.getContext()))
+
+    }
+    return this
 }

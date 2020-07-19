@@ -31,6 +31,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.addAccentColor
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.ACTION_PENDING_QUIT
@@ -132,6 +133,7 @@ class SleepTimerDialog : DialogFragment() {
                 }
             }
             .create()
+            .colorButtons()
     }
 
     private fun updateTimeDisplayTime() {

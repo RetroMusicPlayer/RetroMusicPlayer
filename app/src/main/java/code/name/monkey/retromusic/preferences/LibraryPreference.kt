@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.CategoryInfoAdapter
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -80,6 +81,7 @@ class LibraryPreferenceDialog : DialogFragment() {
             ) { _, _ -> updateCategories(categoryAdapter.categoryInfos) }
             .setView(view)
             .create()
+            .colorButtons()
     }
 
     private fun updateCategories(categories: List<CategoryInfo>) {

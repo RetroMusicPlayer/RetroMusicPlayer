@@ -25,6 +25,7 @@ import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.BlacklistFolderChooserDialog
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.providers.BlacklistStore
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -80,6 +81,8 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                         ).clear()
                     }
                     .setNegativeButton(android.R.string.cancel, null)
+                    .create()
+                    .colorButtons()
                     .show()
             }
             .setNegativeButton(R.string.add_action) { _, _ ->
@@ -91,8 +94,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                 MaterialAlertDialogBuilder(
                     requireActivity(),
                     R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-                )
-                    .setTitle(R.string.remove_from_blacklist)
+                ).setTitle(R.string.remove_from_blacklist)
                     .setMessage(
                         HtmlCompat.fromHtml(
                             String.format(
@@ -110,9 +112,9 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                         refreshBlacklistData()
                     }
                     .setNegativeButton(android.R.string.cancel, null)
-                    .show()
+                    .show().colorButtons()
             }
-            .create()
+            .create().colorButtons()
     }
 
     private lateinit var paths: ArrayList<String>

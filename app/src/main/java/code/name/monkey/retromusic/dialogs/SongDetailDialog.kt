@@ -29,6 +29,7 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -157,6 +158,7 @@ class SongDetailDialog : DialogFragment() {
             .setPositiveButton(android.R.string.ok, null)
             .setView(dialogView)
             .create()
+            .colorButtons()
     }
 
     companion object {

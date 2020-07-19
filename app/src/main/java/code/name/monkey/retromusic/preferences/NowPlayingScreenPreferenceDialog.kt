@@ -32,6 +32,7 @@ import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
@@ -105,23 +106,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
             }
             .setView(view)
             .create()
-        /*.show {
-            title(R.string.pref_title_now_playing_screen_appearance)
-            positiveButton(R.string.set) {
-                val nowPlayingScreen = values()[viewPagerPosition]
-                if (isNowPlayingThemes(nowPlayingScreen)) {
-                    val result =
-                        getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
-                    Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
-                    NavigationUtil.goToProVersion(requireContext())
-                } else {
-                    PreferenceUtilKT.nowPlayingScreen = nowPlayingScreen
-                }
-            }
-
-            negativeButton(android.R.string.cancel)
-            customView(view = view, scrollable = false, noVerticalPadding = false)
-        }*/
+            .colorButtons()
     }
 
     companion object {
