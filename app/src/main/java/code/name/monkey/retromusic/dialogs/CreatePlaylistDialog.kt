@@ -25,9 +25,9 @@ import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_playlist.view.*
@@ -43,11 +43,7 @@ class CreatePlaylistDialog : DialogFragment() {
         val playlistContainer: TextInputLayout = view.actionNewPlaylistContainer
         MaterialUtil.setTint(playlistContainer, false)
 
-        return MaterialAlertDialogBuilder(
-            requireActivity(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.new_playlist_title)
+        return materialDialog(R.string.new_playlist_title)
             .setView(view)
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(

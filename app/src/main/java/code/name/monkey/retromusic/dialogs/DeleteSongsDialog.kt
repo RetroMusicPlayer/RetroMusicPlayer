@@ -25,11 +25,11 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.SAFUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DeleteSongsDialog : DialogFragment() {
     @JvmField
@@ -58,11 +58,7 @@ class DeleteSongsDialog : DialogFragment() {
             )
         }
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(title)
+        return materialDialog(title)
             .setMessage(message)
             .setCancelable(false)
             .setNegativeButton(android.R.string.cancel, null)

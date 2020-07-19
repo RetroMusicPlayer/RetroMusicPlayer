@@ -30,9 +30,9 @@ import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorButtons
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.audio.exceptions.CannotReadException
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException
@@ -151,10 +151,7 @@ class SongDetailDialog : DialogFragment() {
                 )
             }
         }
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        ).setTitle(R.string.action_details)
+        return materialDialog(R.string.action_details)
             .setPositiveButton(android.R.string.ok, null)
             .setView(dialogView)
             .create()

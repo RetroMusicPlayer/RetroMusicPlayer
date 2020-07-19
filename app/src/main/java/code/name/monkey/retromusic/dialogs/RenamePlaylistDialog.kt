@@ -24,8 +24,8 @@ import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -43,11 +43,7 @@ class RenamePlaylistDialog : DialogFragment() {
             layout.findViewById(R.id.actionNewPlaylistContainer)
         MaterialUtil.setTint(nameContainer, false)
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.rename_playlist_title)
+        return materialDialog(R.string.rename_playlist_title)
             .setView(layout)
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.action_rename) { _, _ ->

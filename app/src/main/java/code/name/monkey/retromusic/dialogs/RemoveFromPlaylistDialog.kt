@@ -22,9 +22,9 @@ import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.extensions.colorButtons
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class RemoveFromPlaylistDialog : DialogFragment() {
 
@@ -52,11 +52,7 @@ class RemoveFromPlaylistDialog : DialogFragment() {
             }
         }
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(title)
+        return materialDialog(title)
             .setMessage(message)
             .setPositiveButton(R.string.remove_action) { _, _ ->
                 PlaylistsUtil.removeFromPlaylist(

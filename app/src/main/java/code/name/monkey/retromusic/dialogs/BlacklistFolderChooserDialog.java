@@ -71,9 +71,9 @@ public class BlacklistFolderChooserDialog extends DialogFragment implements Mate
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                 && ActivityCompat.checkSelfPermission(
-                getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            return new MaterialDialog.Builder(getActivity())
+            return new MaterialDialog.Builder(requireActivity())
                     .title(R.string.md_error_label)
                     .content(R.string.md_storage_perm_error)
                     .positiveText(android.R.string.ok)
@@ -89,7 +89,7 @@ public class BlacklistFolderChooserDialog extends DialogFragment implements Mate
         checkIfCanGoUp();
         parentContents = listFiles();
         MaterialDialog.Builder builder =
-                new MaterialDialog.Builder(getActivity())
+                new MaterialDialog.Builder(requireActivity())
                         .title(parentFolder.getAbsolutePath())
                         .items((CharSequence[]) getContentsArray())
                         .itemsCallback(this)

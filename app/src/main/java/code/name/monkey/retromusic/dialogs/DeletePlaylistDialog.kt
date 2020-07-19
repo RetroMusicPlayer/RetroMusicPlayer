@@ -22,9 +22,9 @@ import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DeletePlaylistDialog : DialogFragment() {
 
@@ -47,10 +47,7 @@ class DeletePlaylistDialog : DialogFragment() {
             )
         }
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
+        return materialDialog(title)
             .setTitle(title)
             .setMessage(message)
             .setNegativeButton(android.R.string.cancel, null)

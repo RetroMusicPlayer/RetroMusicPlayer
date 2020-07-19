@@ -22,9 +22,9 @@ import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.ShareInstagramStory
 import code.name.monkey.retromusic.extensions.colorButtons
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SongShareDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -35,10 +35,7 @@ class SongShareDialog : DialogFragment() {
                 song?.title,
                 song?.artistName
             )
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        ).setTitle(R.string.what_do_you_want_to_share)
+        return materialDialog(R.string.what_do_you_want_to_share)
             .setItems(
                 arrayOf(
                     getString(R.string.the_audio_file),
