@@ -190,18 +190,18 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     override fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_sharp_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat_sharp)
                 repeatButton.setColorFilter(
                     lastDisabledPlaybackControlsColor,
                     PorterDuff.Mode.SRC_IN
                 )
             }
             MusicService.REPEAT_MODE_ALL -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_sharp_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat_sharp)
                 repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
             MusicService.REPEAT_MODE_THIS -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_one_sharp_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat_one_sharp)
                 repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
         }

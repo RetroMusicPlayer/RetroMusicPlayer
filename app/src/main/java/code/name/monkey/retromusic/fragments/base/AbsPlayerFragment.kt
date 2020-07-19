@@ -197,9 +197,9 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
 
             override fun onPostExecute(isFavorite: Boolean) {
                 val res = if (isFavorite)
-                    R.drawable.ic_favorite_white_24dp
+                    R.drawable.ic_favorite
                 else
-                    R.drawable.ic_favorite_border_white_24dp
+                    R.drawable.ic_favorite_border
 
                 val drawable =
                     RetroUtil.getTintedVectorDrawable(requireContext(), res, toolbarIconColor())

@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black"
                 app:title="@string/queue"
                 app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                 tools:ignore="UnusedAttribute" />
@@ -66,7 +66,7 @@
             android:layout_margin="16dp"
             android:text="@string/clear_playing_queue"
             android:textAppearance="@style/TextViewHeadline6"
-            app:icon="@drawable/ic_clear_all_black_24dp" />
+            app:icon="@drawable/ic_clear_all" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
@@ -58,9 +59,15 @@ class LibraryViewModel(application: Application) :
             _repository.suggestions(),
             _repository.favoritePlaylist()
         )
-        for (r in result) {
-            if (r != null) {
-                list.add(r)
+        result.forEach {
+            if (it != null && it.arrayList.isNotEmpty()) {
+                if (it.homeSection == HomeAdapter.SUGGESTIONS) {
+                    if (it.arrayList.size > 9) {
+                        list.add(it)
+                    }
+                } else {
+                    list.add(it)
+                }
             }
         }
         _homeSections.value = list

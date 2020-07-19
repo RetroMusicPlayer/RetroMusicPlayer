@@ -30,7 +30,7 @@
                 style="@style/Toolbar"
                 android:background="?attr/colorSurface"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black"
                 app:title="@string/action_about"
                 app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 

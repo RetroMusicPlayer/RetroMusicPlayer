@@ -100,7 +100,7 @@ class SongFileAdapter(
         if (file.isDirectory) {
             holder.image?.let {
                 it.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
-                it.setImageResource(R.drawable.ic_folder_white_24dp)
+                it.setImageResource(R.drawable.ic_folder)
             }
             holder.imageTextContainer?.setCardBackgroundColor(
                 ATHUtil.resolveColor(
@@ -110,7 +110,7 @@ class SongFileAdapter(
             )
         } else {
             val error = RetroUtil.getTintedVectorDrawable(
-                activity, R.drawable.ic_file_music_white_24dp, iconColor
+                activity, R.drawable.ic_file_music, iconColor
             )
             Glide.with(activity)
                 .load(AudioFileCover(file.path))

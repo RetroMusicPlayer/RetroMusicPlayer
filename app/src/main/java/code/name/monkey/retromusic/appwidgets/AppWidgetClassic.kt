@@ -57,7 +57,7 @@ class AppWidgetClassic : BaseAppWidget() {
             createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
-                    R.drawable.ic_skip_next_white_24dp,
+                    R.drawable.ic_skip_next,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
                 )!!, 1f
             )
@@ -67,7 +67,7 @@ class AppWidgetClassic : BaseAppWidget() {
             createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
-                    R.drawable.ic_skip_previous_white_24dp,
+                    R.drawable.ic_skip_previous,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
                 )!!, 1f
             )
@@ -151,7 +151,7 @@ class AppWidgetClassic : BaseAppWidget() {
                     private fun update(bitmap: Bitmap?, color: Int) {
                         // Set correct drawable for pause state
                         val playPauseRes =
-                            if (isPlaying) R.drawable.ic_pause_white_24dp else R.drawable.ic_play_arrow_white_24dp
+                            if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play_arrow
                         appWidgetView.setImageViewBitmap(
                             R.id.button_toggle_play_pause,
                             ImageUtil.createBitmap(
@@ -169,7 +169,7 @@ class AppWidgetClassic : BaseAppWidget() {
                             ImageUtil.createBitmap(
                                 ImageUtil.getTintedVectorDrawable(
                                     service,
-                                    R.drawable.ic_skip_next_white_24dp,
+                                    R.drawable.ic_skip_next,
                                     color
                                 )
                             )
@@ -179,7 +179,7 @@ class AppWidgetClassic : BaseAppWidget() {
                             ImageUtil.createBitmap(
                                 ImageUtil.getTintedVectorDrawable(
                                     service,
-                                    R.drawable.ic_skip_previous_white_24dp,
+                                    R.drawable.ic_skip_previous,
                                     color
                                 )
                             )

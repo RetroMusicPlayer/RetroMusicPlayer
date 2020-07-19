@@ -129,9 +129,9 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     protected fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
+            miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_pause)
         } else {
-            miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+            miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_play_arrow)
         }
     }
 

@@ -14,7 +14,7 @@
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="@string/pref_title_general_theme"
-            app:icon="@drawable/ic_color_lens_white_24dp" />
+            app:icon="@drawable/ic_color_lens" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:key="black_theme"
@@ -33,7 +33,7 @@
             android:persistent="false"
             android:summary="@string/accent_color_desc"
             android:title="@string/accent_color"
-            app:icon="@drawable/ic_colorize_white_24dp" />
+            app:icon="@drawable/ic_colorize" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"

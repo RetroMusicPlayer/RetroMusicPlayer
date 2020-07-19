@@ -50,7 +50,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
             return Home(
                 songs,
                 HomeAdapter.SUGGESTIONS,
-                R.drawable.ic_audiotrack_white_24dp
+                R.drawable.ic_audiotrack
             )
         }
         return null
@@ -75,7 +75,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         return if (artists.isNotEmpty()) Home(
             artists,
             HomeAdapter.RECENT_ARTISTS,
-            R.drawable.ic_artist_white_24dp
+            R.drawable.ic_artist
         ) else null
     }
 
@@ -84,7 +84,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         return if (albums.isNotEmpty()) Home(
             albums,
             HomeAdapter.RECENT_ALBUMS,
-            R.drawable.ic_album_white_24dp
+            R.drawable.ic_album
         ) else null
     }
 
@@ -93,7 +93,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         return if (albums.isNotEmpty()) Home(
             albums,
             HomeAdapter.TOP_ALBUMS,
-            R.drawable.ic_album_white_24dp
+            R.drawable.ic_album
         ) else null
     }
 
@@ -103,7 +103,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         return if (artists.isNotEmpty()) Home(
             artists,
             HomeAdapter.TOP_ARTISTS,
-            R.drawable.ic_artist_white_24dp
+            R.drawable.ic_artist
         ) else null
 
     }
@@ -113,7 +113,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         return if (playlists.isNotEmpty()) Home(
             playlists,
             HomeAdapter.FAVOURITES,
-            R.drawable.ic_favorite_white_24dp
+            R.drawable.ic_favorite
         ) else null
     }
 

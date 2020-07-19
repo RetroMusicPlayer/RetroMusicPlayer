@@ -192,20 +192,20 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         menu ?: return super.onCreateOptionsMenu(menu)
         if (isPlaylistPage()) {
             menu.add(0, R.id.action_new_playlist, 1, R.string.new_playlist_title)
-                .setIcon(R.drawable.ic_playlist_add_white_24dp)
+                .setIcon(R.drawable.ic_playlist_add)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         }
         if (isHomePage()) {
             menu.add(0, R.id.action_mic, 1, getString(R.string.action_search))
-                .setIcon(R.drawable.ic_mic_white_24dp)
+                .setIcon(R.drawable.ic_mic)
                 .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         }
         if (isFolderPage()) {
             menu.add(0, R.id.action_scan, 0, R.string.scan_media)
-                .setIcon(R.drawable.ic_scanner_white_24dp)
+                .setIcon(R.drawable.ic_scanner)
                 .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM)
             menu.add(0, R.id.action_go_to_start_directory, 1, R.string.action_go_to_start_directory)
-                .setIcon(R.drawable.ic_bookmark_music_white_24dp)
+                .setIcon(R.drawable.ic_bookmark_music)
                 .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         }
         val fragment: Fragment? = getCurrentFragment()
@@ -223,10 +223,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
             menu.removeItem(R.id.action_sort_order)
         }
         menu.add(0, R.id.action_settings, 6, getString(R.string.action_settings))
-            .setIcon(R.drawable.ic_settings_white_24dp)
+            .setIcon(R.drawable.ic_settings)
             .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         menu.add(0, R.id.action_search, 0, getString(R.string.action_search))
-            .setIcon(R.drawable.ic_search_white_24dp)
+            .setIcon(R.drawable.ic_search)
             .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             this,
@@ -772,7 +772,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         }
         cab = MaterialCab(this, R.id.cab_stub)
             .setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+            .setCloseDrawableRes(R.drawable.ic_close)
             .setBackgroundColor(
                 RetroColorUtil.shiftBackgroundColorForLightText(
                     ATHUtil.resolveColor(

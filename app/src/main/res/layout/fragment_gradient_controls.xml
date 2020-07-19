@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/titleContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/titleContainer"
-        app:srcCompat="@drawable/ic_more_vert_white_24dp"
+        app:srcCompat="@drawable/ic_more_vert"
         tools:tint="@color/md_black_1000" />
 
     <LinearLayout
@@ -72,7 +72,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/titleContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/titleContainer"
-        app:srcCompat="@drawable/ic_favorite_border_white_24dp"
+        app:srcCompat="@drawable/ic_favorite_border"
         tools:tint="@color/md_black_1000" />
 
 
@@ -130,7 +130,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
         app:layout_constraintEnd_toStartOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_previous_white_24dp"
+        app:srcCompat="@drawable/ic_skip_previous"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
@@ -157,7 +157,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
         app:layout_constraintStart_toEndOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_next_white_24dp"
+        app:srcCompat="@drawable/ic_skip_next"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 

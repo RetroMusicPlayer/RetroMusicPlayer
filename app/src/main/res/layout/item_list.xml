@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|start"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
+        app:srcCompat="@drawable/ic_drag_vertical"
         app:tint="?attr/colorControlNormal"
         tools:ignore="ContentDescription" />
 

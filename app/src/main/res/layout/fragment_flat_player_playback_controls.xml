@@ -157,7 +157,7 @@
             android:padding="12dp"
             android:scaleType="fitCenter"
             tools:ignore="MissingPrefix"
-            tools:src="@drawable/ic_pause_white_24dp" />
+            tools:src="@drawable/ic_pause" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -173,7 +173,7 @@
                 android:background="?attr/roundSelector"
                 android:padding="22dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_repeat_white_24dp"
+                app:srcCompat="@drawable/ic_repeat"
                 tools:ignore="MissingPrefix" />
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -183,7 +183,7 @@
                 android:background="?attr/roundSelector"
                 android:padding="22dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_shuffle_white_24dp"
+                app:srcCompat="@drawable/ic_shuffle"
                 tools:ignore="MissingPrefix" />
         </LinearLayout>
 

@@ -21,7 +21,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_volume_down_white_24dp"
+        app:srcCompat="@drawable/ic_volume_down"
         app:tint="?attr/colorControlNormal" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
@@ -49,6 +49,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/volumeSeekBar"
         app:layout_constraintTop_toTopOf="@+id/volumeSeekBar"
-        app:srcCompat="@drawable/ic_volume_up_white_24dp"
+        app:srcCompat="@drawable/ic_volume_up"
         app:tint="?attr/colorControlNormal" />
 </androidx.constraintlayout.widget.ConstraintLayout>

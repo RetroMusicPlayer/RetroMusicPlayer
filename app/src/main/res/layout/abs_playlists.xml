@@ -28,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_access_time_white_24dp" />
+            app:srcCompat="@drawable/ic_history" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_library_add_white_24dp" />
+            app:srcCompat="@drawable/ic_library_add" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView"
@@ -100,7 +100,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_trending_up_white_24dp" />
+            app:srcCompat="@drawable/ic_trending_up" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_shuffle_white_24dp" />
+            app:srcCompat="@drawable/ic_shuffle" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"

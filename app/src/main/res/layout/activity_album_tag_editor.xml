@@ -24,7 +24,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/action_tag_editor" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -155,7 +155,7 @@
                 android:paddingBottom="12dp"
                 android:text="@string/save"
                 app:cornerRadius="25dp"
-                app:icon="@drawable/ic_save_white_24dp"
+                app:icon="@drawable/ic_save"
                 app:iconGravity="textStart"
                 tools:backgroundTint="@color/md_red_400" />
 

@@ -35,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:retroCornerSize="21dp"
-        app:srcCompat="@drawable/ic_account_white_24dp"
+        app:srcCompat="@drawable/ic_account"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <com.google.android.material.textview.MaterialTextView

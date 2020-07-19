@@ -36,9 +36,6 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
         super.onLoadFailed(e, errorDrawable)
         val colors = MediaNotificationProcessor(App.getContext(), errorDrawable)
         onColorReady(colors)
-        /* MediaNotificationProcessor(App.getContext()).getPaletteAsync({
-            onColorReady(it)
-        }, errorDrawable)*/
     }
 
     override fun onResourceReady(

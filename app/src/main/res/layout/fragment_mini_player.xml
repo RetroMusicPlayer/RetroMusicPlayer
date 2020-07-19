@@ -25,7 +25,7 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_up"
             app:tint="?attr/colorControlNormal"
             tools:ignore="ContentDescription" />
 
@@ -54,7 +54,7 @@
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
-            app:srcCompat="@drawable/ic_skip_previous_white_24dp"
+            app:srcCompat="@drawable/ic_skip_previous"
             app:tint="?attr/colorControlNormal" />
 
         <FrameLayout
@@ -80,7 +80,7 @@
                 android:layout_gravity="center"
                 android:background="?roundSelector"
                 android:scaleType="center"
-                app:srcCompat="@drawable/ic_pause_white_24dp"
+                app:srcCompat="@drawable/ic_pause"
                 app:tint="?attr/colorControlNormal"
                 tools:ignore="ContentDescription" />
         </FrameLayout>
@@ -92,7 +92,7 @@
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
-            app:srcCompat="@drawable/ic_skip_next_white_24dp"
+            app:srcCompat="@drawable/ic_skip_next"
             app:tint="?attr/colorControlNormal" />
     </LinearLayout>
 

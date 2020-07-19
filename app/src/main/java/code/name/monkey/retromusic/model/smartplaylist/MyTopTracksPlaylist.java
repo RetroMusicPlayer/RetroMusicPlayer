@@ -44,7 +44,7 @@ public class MyTopTracksPlaylist extends AbsSmartPlaylist {
     };
 
     public MyTopTracksPlaylist(@NonNull Context context) {
-        super(context.getString(R.string.my_top_tracks), R.drawable.ic_trending_up_white_24dp);
+        super(context.getString(R.string.my_top_tracks), R.drawable.ic_trending_up);
     }
 
     protected MyTopTracksPlaylist(Parcel in) {

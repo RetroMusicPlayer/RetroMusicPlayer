@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 
 fun Int.ripAlpha(): Int {
@@ -81,5 +82,5 @@ fun SeekBar.addAccentColor() {
 }
 
 fun Button.accentTextColor() {
-    setTextColor(ThemeStore.accentColor(context))
+    setTextColor(ThemeStore.accentColor(App.getContext()))
 }

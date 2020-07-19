@@ -4,24 +4,24 @@
 
     <item
         android:id="@+id/action_toggle_favorite"
-        android:icon="@drawable/ic_favorite_border_white_24dp"
+        android:icon="@drawable/ic_favorite_border"
         android:orderInCategory="1"
         android:title="@string/favorites"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/now_playing"
-        android:icon="@drawable/ic_queue_music_white_24dp"
+        android:icon="@drawable/ic_queue_music"
         android:orderInCategory="2"
         android:title="@string/now_playing_queue"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_go_to_drive_mode"
-        android:icon="@drawable/ic_drive_eta_white_24dp"
+        android:icon="@drawable/ic_drive_eta"
         android:orderInCategory="3"
         android:title="@string/drive_mode" />
     <item
         android:id="@+id/action_go_to_album"
-        android:icon="@drawable/ic_album_white_24dp"
+        android:icon="@drawable/ic_album"
         android:orderInCategory="3"
         android:title="@string/action_go_to_album" />
     <item

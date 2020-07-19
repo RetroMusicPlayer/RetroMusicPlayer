@@ -129,7 +129,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
         if (cab != null && cab!!.isActive) cab?.finish()
         cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+            .setCloseDrawableRes(R.drawable.ic_close)
             .setBackgroundColor(
                 RetroColorUtil.shiftBackgroundColorForLightText(
                     ATHUtil.resolveColor(

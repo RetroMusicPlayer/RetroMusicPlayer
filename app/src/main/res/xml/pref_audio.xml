@@ -8,7 +8,7 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_audio_ducking"
         android:title="@string/pref_title_audio_ducking"
-        app:icon="@drawable/ic_volume_down_white_24dp" />
+        app:icon="@drawable/ic_volume_down" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
@@ -21,7 +21,7 @@
         android:key="equalizer"
         android:layout="@layout/list_item_view_no_title"
         android:title="@string/equalizer"
-        app:icon="@drawable/ic_equalizer_white_24dp" />
+        app:icon="@drawable/ic_equalizer" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
@@ -37,7 +37,7 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_toggle_shuffle"
         android:title="@string/pref_title_toggle_toggle_shuffle"
-        app:icon="@drawable/ic_shuffle_white_24dp" />
+        app:icon="@drawable/ic_shuffle" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"

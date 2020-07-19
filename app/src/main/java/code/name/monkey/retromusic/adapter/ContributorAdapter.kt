@@ -69,8 +69,8 @@ class ContributorAdapter(
             text.text = contributor.summary
             Glide.with(image.context)
                 .load(contributor.profileImage)
-                .error(R.drawable.ic_account_white_24dp)
-                .placeholder(R.drawable.ic_account_white_24dp)
+                .error(R.drawable.ic_account)
+                .placeholder(R.drawable.ic_account)
                 .dontAnimate()
                 .into(image)
         }

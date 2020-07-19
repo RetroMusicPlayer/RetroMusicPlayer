@@ -177,15 +177,15 @@ class SkuDetailsAdapter(
 
     private fun getIcon(position: Int): Int {
         return when (position) {
-            0 -> R.drawable.ic_cookie_white_24dp
-            1 -> R.drawable.ic_take_away_white_24dp
-            2 -> R.drawable.ic_take_away_coffe_white_24dp
-            3 -> R.drawable.ic_beer_white_24dp
-            4 -> R.drawable.ic_fast_food_meal_white_24dp
-            5 -> R.drawable.ic_popcorn_white_24dp
-            6 -> R.drawable.ic_card_giftcard_white_24dp
-            7 -> R.drawable.ic_food_croissant_white_24dp
-            else -> R.drawable.ic_card_giftcard_white_24dp
+            0 -> R.drawable.ic_cookie
+            1 -> R.drawable.ic_take_away
+            2 -> R.drawable.ic_take_away_coffe
+            3 -> R.drawable.ic_beer
+            4 -> R.drawable.ic_fast_food_meal
+            5 -> R.drawable.ic_popcorn
+            6 -> R.drawable.ic_card_giftcard
+            7 -> R.drawable.ic_food_croissant
+            else -> R.drawable.ic_card_giftcard
         }
     }
 

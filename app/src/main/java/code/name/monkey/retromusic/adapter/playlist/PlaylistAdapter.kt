@@ -94,12 +94,12 @@ class PlaylistAdapter(
         return if (MusicUtil.isFavoritePlaylist(activity, playlist))
             TintHelper.createTintedDrawable(
                 activity,
-                R.drawable.ic_favorite_white_24dp,
+                R.drawable.ic_favorite,
                 ThemeStore.accentColor(activity)
             )
         else TintHelper.createTintedDrawable(
             activity,
-            R.drawable.ic_playlist_play_white_24dp,
+            R.drawable.ic_playlist_play,
             ATHUtil.resolveColor(activity, R.attr.colorControlNormal)
         )
     }

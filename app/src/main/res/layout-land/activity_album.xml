@@ -30,7 +30,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black" />
 
         <ViewStub
             android:id="@+id/cab_stub"

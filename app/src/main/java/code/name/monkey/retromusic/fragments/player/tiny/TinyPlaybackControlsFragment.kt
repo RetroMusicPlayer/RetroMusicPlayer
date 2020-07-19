@@ -81,18 +81,18 @@ class TinyPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
-                playerRepeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
+                playerRepeatButton.setImageResource(R.drawable.ic_repeat)
                 playerRepeatButton.setColorFilter(
                     lastDisabledPlaybackControlsColor,
                     PorterDuff.Mode.SRC_IN
                 )
             }
             MusicService.REPEAT_MODE_ALL -> {
-                playerRepeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
+                playerRepeatButton.setImageResource(R.drawable.ic_repeat)
                 playerRepeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
             MusicService.REPEAT_MODE_THIS -> {
-                playerRepeatButton.setImageResource(R.drawable.ic_repeat_one_white_24dp)
+                playerRepeatButton.setImageResource(R.drawable.ic_repeat_one)
                 playerRepeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
         }

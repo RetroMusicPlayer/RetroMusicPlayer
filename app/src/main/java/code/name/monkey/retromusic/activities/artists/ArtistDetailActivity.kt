@@ -49,7 +49,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         }
         cab = MaterialCab(this, R.id.cab_stub)
             .setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+            .setCloseDrawableRes(R.drawable.ic_close)
             .setBackgroundColor(
                 RetroColorUtil.shiftBackgroundColorForLightText(
                     ATHUtil.resolveColor(

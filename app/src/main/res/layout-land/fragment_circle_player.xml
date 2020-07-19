@@ -47,11 +47,11 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/playerToolbar"
         style="@style/Toolbar"
-        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statusBarContainer"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
         tools:layout_editor_absoluteY="24dp" />
 
 

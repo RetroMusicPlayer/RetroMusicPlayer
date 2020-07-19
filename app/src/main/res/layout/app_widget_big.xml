@@ -30,7 +30,7 @@
             android:background="@drawable/widget_selector_dark"
             android:padding="22dp"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_skip_previous_white_24dp"
+            tools:src="@drawable/ic_skip_previous"
             tools:tint="@color/ate_primary_text_dark" />
 
         <ImageButton
@@ -52,7 +52,7 @@
             android:background="@drawable/widget_selector_dark"
             android:padding="22dp"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_skip_next_white_24dp"
+            tools:src="@drawable/ic_skip_next"
             tools:tint="@color/ate_primary_text_dark" />
 
 

@@ -117,7 +117,7 @@
             android:layout_height="38dp"
             android:background="@drawable/notification_selector"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_pause_white_24dp"
+            android:src="@drawable/ic_pause"
             tools:tint="?colorOnPrimary" />
 
         <ImageButton
