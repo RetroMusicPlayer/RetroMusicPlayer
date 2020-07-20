@@ -31,9 +31,9 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.CategoryInfoAdapter
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.colorControlNormal
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class LibraryPreference @JvmOverloads constructor(
@@ -65,11 +65,7 @@ class LibraryPreferenceDialog : DialogFragment() {
         categoryAdapter.attachToRecyclerView(recyclerView)
 
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.library_categories)
+        return materialDialog(R.string.library_categories)
             .setNeutralButton(
                 R.string.reset_action
             ) { _, _ ->

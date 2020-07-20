@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val provideModules = module {
     single {
-        RepositoryImpl(get())
+        RepositoryImpl(get(), get())
     } bind Repository::class
 }

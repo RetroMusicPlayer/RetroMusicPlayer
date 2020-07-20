@@ -35,13 +35,13 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.colorControlNormal
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle.*
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.bumptech.glide.Glide
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AlbumCoverStylePreference @JvmOverloads constructor(
     context: Context,
@@ -80,9 +80,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtil.albumCoverStyle.ordinal
 
-        return MaterialAlertDialogBuilder(requireActivity(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
-            .setTitle(R.string.pref_title_album_cover_style)
+        return materialDialog(R.string.pref_title_album_cover_style)
             .setPositiveButton(R.string.set) { _, _ ->
                 val coverStyle = values()[viewPagerPosition]
                 if (isAlbumCoverStyle(coverStyle)) {

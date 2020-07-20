@@ -34,13 +34,13 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.colorControlNormal
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.bumptech.glide.Glide
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NowPlayingScreenPreference @JvmOverloads constructor(
     context: Context,
@@ -87,11 +87,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtil.nowPlayingScreen.ordinal
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.pref_title_now_playing_screen_appearance)
+        return materialDialog(R.string.pref_title_now_playing_screen_appearance)
             .setCancelable(false)
             .setPositiveButton(R.string.set) { _, _ ->
                 val nowPlayingScreen = values()[viewPagerPosition]

@@ -15,8 +15,8 @@
 package code.name.monkey.retromusic.providers.interfaces
 
 import code.name.monkey.retromusic.model.*
-import code.name.monkey.retromusic.rest.model.LastFmAlbum
-import code.name.monkey.retromusic.rest.model.LastFmArtist
+import code.name.monkey.retromusic.network.model.LastFmAlbum
+import code.name.monkey.retromusic.network.model.LastFmArtist
 
 /**
  * Created by hemanths on 11/08/17.

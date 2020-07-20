@@ -36,7 +36,7 @@ import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.rest.model.LastFmAlbum
+import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.util.*
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab

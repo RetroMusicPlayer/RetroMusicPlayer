@@ -30,7 +30,7 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.rest.model.LastFmArtist
+import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.util.*
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab

@@ -15,8 +15,8 @@
 package code.name.monkey.retromusic.glide.artistimage
 
 import android.content.Context
-import code.name.monkey.retromusic.deezer.Data
 import code.name.monkey.retromusic.deezer.DeezerApiService
+import code.name.monkey.retromusic.deezer.Data
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Priority

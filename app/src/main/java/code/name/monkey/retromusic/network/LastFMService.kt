@@ -12,10 +12,10 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.rest.service
+package code.name.monkey.retromusic.network
 
-import code.name.monkey.retromusic.rest.model.LastFmAlbum
-import code.name.monkey.retromusic.rest.model.LastFmArtist
+import code.name.monkey.retromusic.network.model.LastFmAlbum
+import code.name.monkey.retromusic.network.model.LastFmArtist
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query

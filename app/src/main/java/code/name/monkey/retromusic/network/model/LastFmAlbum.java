@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.rest.model;
+package code.name.monkey.retromusic.network.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

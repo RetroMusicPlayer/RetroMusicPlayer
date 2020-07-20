@@ -20,12 +20,15 @@ import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.loaders.*
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotRecentlyPlayedPlaylist
+import code.name.monkey.retromusic.network.LastFMService
+import code.name.monkey.retromusic.network.model.LastFmAlbum
+import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import code.name.monkey.retromusic.rest.LastFmClient
-import code.name.monkey.retromusic.rest.model.LastFmAlbum
-import code.name.monkey.retromusic.rest.model.LastFmArtist
 
-class RepositoryImpl constructor(private val context: Context) : Repository {
+class RepositoryImpl(
+    private val context: Context,
+    private val lastFMService: LastFMService
+) : Repository {
 
     override suspend fun allAlbums(): List<Album> = AlbumLoader.getAllAlbums(context)
 
@@ -121,12 +124,12 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         name: String,
         lang: String?,
         cache: String?
-    ): LastFmArtist = LastFmClient.getApiService().artistInfo(name, lang, cache)
+    ): LastFmArtist = lastFMService.artistInfo(name, lang, cache)
 
 
     override suspend fun albumInfo(
         artist: String,
         album: String
-    ): LastFmAlbum = LastFmClient.getApiService().albumInfo(artist, album)
+    ): LastFmAlbum = lastFMService.albumInfo(artist, album)
 
 }
