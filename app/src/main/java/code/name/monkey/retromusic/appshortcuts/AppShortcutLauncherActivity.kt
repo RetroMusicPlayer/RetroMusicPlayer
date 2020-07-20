@@ -17,7 +17,7 @@ package code.name.monkey.retromusic.appshortcuts
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import code.name.monkey.retromusic.activities.SearchActivity
+import code.name.monkey.retromusic.activities.search.SearchActivity
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.LastAddedShortcutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.SearchShortCutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.ShuffleAllShortcutType

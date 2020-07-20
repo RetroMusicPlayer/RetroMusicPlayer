@@ -20,8 +20,11 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
+import code.name.monkey.retromusic.providers.provideModules
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class App : MultiDexApplication() {
 
@@ -31,6 +34,10 @@ class App : MultiDexApplication() {
         super.onCreate()
         instance = this
 
+        startKoin {
+            androidContext(this@App)
+            modules(listOf(mainModule, provideModules))
+        }
         // default theme
         if (!ThemeStore.isConfigured(this, 3)) {
             ThemeStore.editTheme(this)

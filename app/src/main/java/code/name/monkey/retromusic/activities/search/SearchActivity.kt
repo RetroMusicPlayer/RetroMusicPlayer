@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.activities
+package code.name.monkey.retromusic.activities.search
 
 import android.app.Activity
 import android.app.Service
@@ -24,19 +24,17 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.SearchAdapter
-import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
-import code.name.monkey.retromusic.mvp.presenter.SearchPresenter.SearchPresenterImpl
-import code.name.monkey.retromusic.mvp.presenter.SearchView
-import code.name.monkey.retromusic.providers.RepositoryImpl
+import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_search.*
+import org.koin.android.ext.android.inject
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatcher, SearchView {
+class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatcher {
 
-    private lateinit var presenter: SearchPresenter
+    private val viewModel: SearchViewModel by inject()
     private var searchAdapter: SearchAdapter? = null
     private var query: String? = null
 
@@ -49,14 +47,11 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
-        presenter = SearchPresenterImpl(RepositoryImpl(this))
-        presenter.attachView(this)
-
         setupRecyclerView()
         setUpToolBar()
         setupSearchView()
 
-        if (intent.getBooleanExtra(EXTRA_SHOW_MIC, false)) {
+        if (extra<Boolean>(EXTRA_SHOW_MIC).value == true) {
             startMicSearch()
         }
 
@@ -84,6 +79,10 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         if (savedInstanceState != null) {
             query = savedInstanceState.getString(QUERY)
         }
+
+        viewModel.getSearchResult().observe(this, androidx.lifecycle.Observer {
+            showData(it)
+        })
     }
 
     private fun setupRecyclerView() {
@@ -114,11 +113,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         searchView.addTextChangedListener(this)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detachView()
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(QUERY, query)
@@ -133,7 +127,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         TransitionManager.beginDelayedTransition(appBarLayout)
         voiceSearch.visibility = if (query.isNotEmpty()) View.GONE else View.VISIBLE
         clearText.visibility = if (query.isNotEmpty()) View.VISIBLE else View.GONE
-        presenter.search(query)
+        viewModel.search(query)
     }
 
     override fun onMediaStoreChanged() {
@@ -158,12 +152,16 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         }
     }
 
-    override fun showEmptyView() {
+    private fun showEmptyView() {
         searchAdapter?.swapDataSet(ArrayList())
     }
 
-    override fun showData(data: MutableList<Any>) {
-        searchAdapter?.swapDataSet(data)
+    private fun showData(data: MutableList<Any>) {
+        if (data.isNotEmpty()) {
+            searchAdapter?.swapDataSet(data)
+        } else {
+            showEmptyView()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -175,7 +173,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
                         data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                     query = result?.get(0)
                     searchView.setText(query, BufferType.EDITABLE)
-                    presenter.search(query!!)
+                    viewModel.search(query!!)
                 }
             }
         }
@@ -190,7 +188,10 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt))
         try {
-            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT)
+            startActivityForResult(
+                intent,
+                REQ_CODE_SPEECH_INPUT
+            )
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             Toast.makeText(this, getString(R.string.speech_not_supported), Toast.LENGTH_SHORT)

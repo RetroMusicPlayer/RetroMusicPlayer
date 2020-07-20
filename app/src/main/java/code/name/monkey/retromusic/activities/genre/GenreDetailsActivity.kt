@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.activities
+package code.name.monkey.retromusic.activities.genre
 
 import android.os.Bundle
 import android.view.Menu
@@ -17,24 +17,25 @@ import code.name.monkey.retromusic.helper.menu.GenreMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter
-import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter.GenreDetailsPresenterImpl
-import code.name.monkey.retromusic.mvp.presenter.GenreDetailsView
-import code.name.monkey.retromusic.providers.RepositoryImpl
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.MaterialCab
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.util.*
 
 /**
  * @author Hemanth S (h4h13).
  */
 
-class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDetailsView {
+class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
 
 
-    private lateinit var genreDetailsPresenter: GenreDetailsPresenter
+    private val detailsViewModel: GenreDetailsViewModel by viewModel {
+        parametersOf(extraNotNull<Genre>(EXTRA_GENRE_ID).value)
+    }
+
     private lateinit var genre: Genre
     private lateinit var songAdapter: ShuffleButtonSongAdapter
     private var cab: MaterialCab? = null
@@ -62,38 +63,25 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
         setBottomBarVisibility(View.GONE)
-
-        genre = extraNotNull<Genre>(EXTRA_GENRE_ID).value
-
-        setUpToolBar()
+        applyToolbar(toolbar)
         setupRecyclerView()
 
-        genreDetailsPresenter =
-            GenreDetailsPresenterImpl(RepositoryImpl(this))
-        genreDetailsPresenter.attachView(this)
-    }
+        detailsViewModel.getSongs().observe(this, androidx.lifecycle.Observer {
+            songs(it)
+        })
 
-    private fun setUpToolBar() {
-        applyToolbar(toolbar)
-        title = genre.name
-    }
+        detailsViewModel.getGenre().observe(this, androidx.lifecycle.Observer {
+            genre = it
+            supportActionBar?.title = it.name
+        })
 
-    override fun onResume() {
-        super.onResume()
-        genreDetailsPresenter.loadGenreSongs(genre.id)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        genreDetailsPresenter.detachView()
+        addMusicServiceEventListener(detailsViewModel)
     }
 
     override fun createContentView(): View {
         return wrapSlidingMusicPanel(R.layout.activity_playlist_detail)
     }
 
-    override fun showEmptyView() {
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_genre_detail, menu)
@@ -122,7 +110,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         })
     }
 
-    override fun songs(songs: List<Song>) {
+    fun songs(songs: List<Song>) {
         songAdapter.swapDataSet(songs)
     }
 
@@ -147,11 +135,6 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
             recyclerView!!.stopScroll()
             super.onBackPressed()
         }
-    }
-
-    override fun onMediaStoreChanged() {
-        super.onMediaStoreChanged()
-        genreDetailsPresenter.loadGenreSongs(genre.id)
     }
 
     companion object {

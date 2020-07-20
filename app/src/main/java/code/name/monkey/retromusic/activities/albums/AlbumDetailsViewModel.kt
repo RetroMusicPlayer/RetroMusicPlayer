@@ -1,9 +1,8 @@
 package code.name.monkey.retromusic.activities.albums
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Album
@@ -16,10 +15,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class AlbumDetailsViewModel(
-    application: Application,
+    private val repository: RepositoryImpl,
     private val albumId: Int
-) : AndroidViewModel(application), MusicServiceEventListener {
-    private val _repository = RepositoryImpl(application.applicationContext)
+) : ViewModel(), MusicServiceEventListener {
+
     private val _album = MutableLiveData<Album>()
     private val _artist = MutableLiveData<Artist>()
     private val _lastFmAlbum = MutableLiveData<LastFmAlbum>()
@@ -38,18 +37,18 @@ class AlbumDetailsViewModel(
     }
 
     fun loadAlbumInfo(album: Album) = viewModelScope.launch(Dispatchers.IO) {
-        val lastFmAlbum = _repository.albumInfo(album.artistName ?: "-", album.title ?: "-")
+        val lastFmAlbum = repository.albumInfo(album.artistName ?: "-", album.title ?: "-")
         _lastFmAlbum.postValue(lastFmAlbum)
     }
 
     fun loadArtist(artistId: Int) = viewModelScope.launch(Dispatchers.IO) {
-        val artist = _repository.artistById(artistId)
+        val artist = repository.artistById(artistId)
         _artist.postValue(artist)
     }
 
     private val loadAlbumAsync: Deferred<Album?>
         get() = viewModelScope.async(Dispatchers.IO) {
-            _repository.albumById(albumId)
+            repository.albumById(albumId)
         }
 
     override fun onMediaStoreChanged() {
