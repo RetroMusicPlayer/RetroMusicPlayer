@@ -1,17 +1,17 @@
-package code.name.monkey.retromusic.activities.playlist
+package io.github.muntashirakon.music.activities.playlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
-import code.name.monkey.retromusic.loaders.PlaylistLoader
-import code.name.monkey.retromusic.model.AbsCustomPlaylist
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.providers.RepositoryImpl
-import code.name.monkey.retromusic.util.PlaylistsUtil
+import io.github.muntashirakon.music.App
+import io.github.muntashirakon.music.interfaces.MusicServiceEventListener
+import io.github.muntashirakon.music.loaders.PlaylistLoader
+import io.github.muntashirakon.music.model.AbsCustomPlaylist
+import io.github.muntashirakon.music.model.Playlist
+import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.providers.RepositoryImpl
+import io.github.muntashirakon.music.util.PlaylistsUtil
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

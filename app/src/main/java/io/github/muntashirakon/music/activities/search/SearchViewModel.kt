@@ -1,10 +1,10 @@
-package code.name.monkey.retromusic.activities.search
+package io.github.muntashirakon.music.activities.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import code.name.monkey.retromusic.providers.RepositoryImpl
+import io.github.muntashirakon.music.providers.RepositoryImpl
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch

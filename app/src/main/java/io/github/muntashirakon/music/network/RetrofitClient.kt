@@ -1,7 +1,7 @@
-package code.name.monkey.retromusic.network
+package io.github.muntashirakon.music.network
 
-import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.Constants.BASE_URL
+import io.github.muntashirakon.music.App
+import io.github.muntashirakon.music.Constants.BASE_URL
 import com.google.gson.Gson
 import okhttp3.Cache
 import okhttp3.ConnectionPool

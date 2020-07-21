@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.providers
+package io.github.muntashirakon.music.providers
 
 import org.eclipse.egit.github.core.Repository
 import org.koin.dsl.bind

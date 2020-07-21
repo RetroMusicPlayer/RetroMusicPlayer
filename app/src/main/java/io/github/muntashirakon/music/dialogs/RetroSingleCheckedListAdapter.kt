@@ -1,8 +1,8 @@
-package code.name.monkey.retromusic.dialogs
+package io.github.muntashirakon.music.dialogs
 
 import android.content.Context
 import android.widget.ArrayAdapter
-import code.name.monkey.retromusic.R
+import io.github.muntashirakon.music.R
 
 class RetroSingleCheckedListAdapter(
     context: Context,

@@ -1,13 +1,13 @@
-package code.name.monkey.retromusic
+package io.github.muntashirakon.music
 
-import code.name.monkey.retromusic.activities.albums.AlbumDetailsViewModel
-import code.name.monkey.retromusic.activities.artists.ArtistDetailsViewModel
-import code.name.monkey.retromusic.activities.genre.GenreDetailsViewModel
-import code.name.monkey.retromusic.activities.playlist.PlaylistDetailsViewModel
-import code.name.monkey.retromusic.activities.search.SearchViewModel
-import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.model.Playlist
+import io.github.muntashirakon.music.activities.albums.AlbumDetailsViewModel
+import io.github.muntashirakon.music.activities.artists.ArtistDetailsViewModel
+import io.github.muntashirakon.music.activities.genre.GenreDetailsViewModel
+import io.github.muntashirakon.music.activities.playlist.PlaylistDetailsViewModel
+import io.github.muntashirakon.music.activities.search.SearchViewModel
+import io.github.muntashirakon.music.fragments.LibraryViewModel
+import io.github.muntashirakon.music.model.Genre
+import io.github.muntashirakon.music.model.Playlist
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

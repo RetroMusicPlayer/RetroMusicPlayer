@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic
+package io.github.muntashirakon.music
 
 import android.content.Context
 import android.util.AttributeSet
