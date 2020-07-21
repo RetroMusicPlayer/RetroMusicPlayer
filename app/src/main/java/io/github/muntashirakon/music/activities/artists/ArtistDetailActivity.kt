@@ -11,12 +11,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.text.HtmlCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
+import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsSlidingMusicPanelActivity
 import io.github.muntashirakon.music.adapter.album.HorizontalAlbumAdapter
 import io.github.muntashirakon.music.adapter.song.SimpleSongAdapter
@@ -30,26 +30,26 @@ import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.Artist
-import io.github.muntashirakon.music.mvp.presenter.ArtistDetailsView
-import io.github.muntashirakon.music.rest.model.LastFmArtist
+import io.github.muntashirakon.music.network.model.LastFmArtist
 import io.github.muntashirakon.music.util.*
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
-import io.github.muntashirakon.music.R
 import kotlinx.android.synthetic.main.activity_artist_content.*
 import kotlinx.android.synthetic.main.activity_artist_details.*
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, CabHolder {
+class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
         cab?.let {
             if (it.isActive) it.finish()
         }
         cab = MaterialCab(this, R.id.cab_stub)
             .setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+            .setCloseDrawableRes(R.drawable.ic_close)
             .setBackgroundColor(
                 RetroColorUtil.shiftBackgroundColorForLightText(
                     ATHUtil.resolveColor(
@@ -68,7 +68,9 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: HorizontalAlbumAdapter
     private var forceDownload: Boolean = false
-    private lateinit var viewModel: ArtistDetailsViewModel
+    private val detailsViewModel: ArtistDetailsViewModel by viewModel {
+        parametersOf(extraNotNull<Int>(EXTRA_ARTIST_ID).value)
+    }
 
     override fun createContentView(): View {
         return wrapSlidingMusicPanel(R.layout.activity_artist_details)
@@ -93,23 +95,16 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         setBottomBarVisibility(View.GONE)
         window.sharedElementsUseOverlay = true
         windowEnterTransition()
-
-        val artistId = extraNotNull<Int>(EXTRA_ARTIST_ID).value
-        val viewModelFactory = ArtistDetailsViewModelFactory(application, artistId)
-        viewModel =
-            ViewModelProvider(this, viewModelFactory).get(ArtistDetailsViewModel::class.java)
-        addMusicServiceEventListener(viewModel)
-        viewModel.getArtist().observe(this, androidx.lifecycle.Observer {
+        ActivityCompat.postponeEnterTransition(this)
+        addMusicServiceEventListener(detailsViewModel)
+        detailsViewModel.getArtist().observe(this, androidx.lifecycle.Observer {
             ActivityCompat.startPostponedEnterTransition(this@ArtistDetailActivity)
             artist(it)
         })
-        viewModel.getArtistInfo().observe(this, androidx.lifecycle.Observer {
+        detailsViewModel.getArtistInfo().observe(this, androidx.lifecycle.Observer {
             artistInfo(it)
         })
-        ActivityCompat.postponeEnterTransition(this)
-
         setupRecyclerView()
-
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
         }
@@ -155,14 +150,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         }
     }
 
-    override fun showEmptyView() {
-    }
-
-    override fun complete() {
+    fun complete() {
         ActivityCompat.startPostponedEnterTransition(this)
     }
 
-    override fun artist(artist: Artist) {
+    fun artist(artist: Artist) {
         complete()
         if (artist.songCount <= 0) {
             finish()
@@ -203,10 +195,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     ) {
         biography = null
         this.lang = lang
-        viewModel.loadBiography(name, lang, null)
+        detailsViewModel.loadBiography(name, lang, null)
     }
 
-    override fun artistInfo(lastFmArtist: LastFmArtist?) {
+    fun artistInfo(lastFmArtist: LastFmArtist?) {
         if (lastFmArtist != null && lastFmArtist.artist != null) {
             val bioContent = lastFmArtist.artist.bio.content
             if (bioContent != null && bioContent.trim { it <= ' ' }.isNotEmpty()) {
@@ -323,7 +315,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
 
     override fun onDestroy() {
         super.onDestroy()
-        removeMusicServiceEventListener(viewModel)
+        removeMusicServiceEventListener(detailsViewModel)
     }
 
     companion object {

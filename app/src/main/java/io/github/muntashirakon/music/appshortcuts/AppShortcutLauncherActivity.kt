@@ -17,7 +17,7 @@ package io.github.muntashirakon.music.appshortcuts
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import io.github.muntashirakon.music.activities.SearchActivity
+import io.github.muntashirakon.music.activities.search.SearchActivity
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.LastAddedShortcutType
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.SearchShortCutType
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.ShuffleAllShortcutType

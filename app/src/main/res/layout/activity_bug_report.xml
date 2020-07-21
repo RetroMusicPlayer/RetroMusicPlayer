@@ -27,7 +27,7 @@
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black"
                 app:title="@string/report_bug"
                 app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
@@ -69,6 +69,6 @@
             style="@style/Fab"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            app:srcCompat="@drawable/ic_send_white_24dp" />
+            app:srcCompat="@drawable/ic_send" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

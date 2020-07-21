@@ -36,7 +36,7 @@ public abstract class AbsSmartPlaylist extends AbsCustomPlaylist {
 
     public AbsSmartPlaylist() {
         super();
-        this.iconRes = R.drawable.ic_queue_music_white_24dp;
+        this.iconRes = R.drawable.ic_queue_music;
     }
 
     protected AbsSmartPlaylist(Parcel in) {

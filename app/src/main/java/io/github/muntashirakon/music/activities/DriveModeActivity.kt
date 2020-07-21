@@ -88,7 +88,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
             val isFavourite =
                 MusicUtil.isFavorite(this@DriveModeActivity, MusicPlayerRemote.currentSong)
             withContext(Dispatchers.Main) {
-                songFavourite.setImageResource(if (isFavourite) R.drawable.ic_favorite_white_24dp else R.drawable.ic_favorite_border_white_24dp)
+                songFavourite.setImageResource(if (isFavourite) R.drawable.ic_favorite else R.drawable.ic_favorite_border)
             }
         }
     }
@@ -161,9 +161,9 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
 
     private fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
+            playPauseButton.setImageResource(R.drawable.ic_pause)
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+            playPauseButton.setImageResource(R.drawable.ic_play_arrow)
         }
     }
 
@@ -183,18 +183,18 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     private fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat)
                 repeatButton.setColorFilter(
                     lastDisabledPlaybackControlsColor,
                     PorterDuff.Mode.SRC_IN
                 )
             }
             MusicService.REPEAT_MODE_ALL -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat)
                 repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
             MusicService.REPEAT_MODE_THIS -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_one_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat_one)
                 repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
         }

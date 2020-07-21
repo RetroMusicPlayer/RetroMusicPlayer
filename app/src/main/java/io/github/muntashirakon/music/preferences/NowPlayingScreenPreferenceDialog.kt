@@ -30,12 +30,13 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.colorControlNormal
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.fragments.NowPlayingScreen.*
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.ViewUtil
 import com.bumptech.glide.Glide
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NowPlayingScreenPreference @JvmOverloads constructor(
     context: Context,
@@ -82,11 +83,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtil.nowPlayingScreen.ordinal
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.pref_title_now_playing_screen_appearance)
+        return materialDialog(R.string.pref_title_now_playing_screen_appearance)
             .setCancelable(false)
             .setPositiveButton(R.string.set) { _, _ ->
                 val nowPlayingScreen = values()[viewPagerPosition]
@@ -94,6 +91,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
             }
             .setView(view)
             .create()
+            .colorButtons()
     }
 
     companion object {

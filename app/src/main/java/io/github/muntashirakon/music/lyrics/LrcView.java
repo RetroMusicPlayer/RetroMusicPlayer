@@ -181,7 +181,7 @@ public class LrcView extends View {
         mTimelineColor = ta.getColor(R.styleable.LrcView_lrcTimelineColor, getResources().getColor(R.color.lrc_timeline_color));
         float timelineHeight = ta.getDimension(R.styleable.LrcView_lrcTimelineHeight, getResources().getDimension(R.dimen.lrc_timeline_height));
         mPlayDrawable = ta.getDrawable(R.styleable.LrcView_lrcPlayDrawable);
-        mPlayDrawable = (mPlayDrawable == null) ? getResources().getDrawable(R.drawable.ic_play_arrow_white_24dp) : mPlayDrawable;
+        mPlayDrawable = (mPlayDrawable == null) ? getResources().getDrawable(R.drawable.ic_play_arrow) : mPlayDrawable;
         mTimeTextColor = ta.getColor(R.styleable.LrcView_lrcTimeTextColor, getResources().getColor(R.color.lrc_time_text_color));
         float timeTextSize = ta.getDimension(R.styleable.LrcView_lrcTimeTextSize, getResources().getDimension(R.dimen.lrc_time_text_size));
         mTextGravity = ta.getInteger(R.styleable.LrcView_lrcTextGravity, LrcEntry.GRAVITY_CENTER);

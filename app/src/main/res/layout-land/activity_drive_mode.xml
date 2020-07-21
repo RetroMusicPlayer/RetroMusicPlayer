@@ -61,7 +61,7 @@
         android:padding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
-        app:srcCompat="@drawable/ic_close_white_24dp" />
+        app:srcCompat="@drawable/ic_close" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/songFavourite"
@@ -73,14 +73,14 @@
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
-        app:srcCompat="@drawable/ic_favorite_border_white_24dp" />
+        app:srcCompat="@drawable/ic_favorite_border" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/playPauseButton"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:background="?roundSelector"
-        android:src="@drawable/ic_pause_white_24dp"
+        android:src="@drawable/ic_pause"
         app:layout_constraintBottom_toBottomOf="@id/previousButton"
         app:layout_constraintEnd_toStartOf="@+id/nextButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -97,7 +97,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_next_white_24dp" />
+        app:srcCompat="@drawable/ic_skip_next" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/previousButton"
@@ -109,7 +109,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/repeatButton"
         app:layout_constraintTop_toTopOf="@+id/repeatButton"
-        app:srcCompat="@drawable/ic_skip_previous_white_24dp" />
+        app:srcCompat="@drawable/ic_skip_previous" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/repeatButton"
@@ -121,7 +121,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/progressSlider"
-        app:srcCompat="@drawable/ic_repeat_white_24dp"
+        app:srcCompat="@drawable/ic_repeat"
         tools:layout_editor_absoluteY="240dp" />
 
 
@@ -135,7 +135,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/nextButton"
         app:layout_constraintTop_toTopOf="@+id/nextButton"
-        app:srcCompat="@drawable/ic_shuffle_white_24dp" />
+        app:srcCompat="@drawable/ic_shuffle" />
 
     <LinearLayout
         android:id="@+id/titleContainer"

@@ -20,7 +20,7 @@
 
     <item
         android:id="@+id/action_grid_size"
-        android:icon="@drawable/ic_grid_size_white_24dp"
+        android:icon="@drawable/ic_grid_size"
         android:orderInCategory="5"
         android:title="@string/action_grid_size"
         app:showAsAction="ifRoom">
@@ -57,7 +57,7 @@
     </item>
     <item
         android:id="@+id/action_layout_type"
-        android:icon="@drawable/ic_dashboard_white_24dp"
+        android:icon="@drawable/ic_dashboard"
         android:orderInCategory="6"
         android:title="@string/grid_style_label"
         app:showAsAction="ifRoom">
@@ -89,7 +89,7 @@
     </item>
     <item
         android:id="@+id/action_sort_order"
-        android:icon="@drawable/ic_sort_white_24dp"
+        android:icon="@drawable/ic_sort"
         android:orderInCategory="2"
         android:title="@string/action_sort_order"
         app:showAsAction="ifRoom">

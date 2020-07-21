@@ -67,7 +67,7 @@
         android:id="@+id/playerToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
         android:paddingBottom="24dp"
         app:contentInsetEndWithActions="0dp"
         app:contentInsetStart="0dp"
@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statusBarContainer"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
         app:titleMargin="0dp"
         app:titleMargins="0dp">
 

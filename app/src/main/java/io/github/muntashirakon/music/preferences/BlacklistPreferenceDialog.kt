@@ -26,7 +26,9 @@ import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.dialogs.BlacklistFolderChooserDialog
+import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.colorControlNormal
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.providers.BlacklistStore
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
@@ -65,25 +67,19 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
             childFragmentManager.findFragmentByTag("FOLDER_CHOOSER") as BlacklistFolderChooserDialog?
         chooserDialog?.setCallback(this)
         refreshBlacklistData()
-        return MaterialAlertDialogBuilder(
-            mActivity!!,
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.blacklist)
+        return materialDialog(R.string.blacklist)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 dismiss()
             }
             .setNeutralButton(R.string.clear_action) { _, _ ->
-                MaterialAlertDialogBuilder(
-                    mActivity!!,
-                    R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-                )
-                    .setTitle(R.string.clear_blacklist)
+                materialDialog(R.string.clear_blacklist)
                     .setMessage(R.string.do_you_want_to_clear_the_blacklist)
                     .setPositiveButton(R.string.clear_action) { _, _ ->
                         BlacklistStore.getInstance(mContext!!).clear()
                     }
                     .setNegativeButton(android.R.string.cancel, null)
+                    .create()
+                    .colorButtons()
                     .show()
             }
             .setNegativeButton(R.string.add_action) { _, _ ->
@@ -92,11 +88,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                 dialog.show(mActivity!!.supportFragmentManager, "FOLDER_CHOOSER")
             }
             .setItems(paths.toTypedArray()) { _, which ->
-                MaterialAlertDialogBuilder(
-                    mActivity!!,
-                    R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-                )
-                    .setTitle(R.string.remove_from_blacklist)
+                materialDialog(R.string.remove_from_blacklist)
                     .setMessage(
                         HtmlCompat.fromHtml(
                             String.format(
@@ -114,9 +106,9 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                         refreshBlacklistData()
                     }
                     .setNegativeButton(android.R.string.cancel, null)
-                    .show()
+                    .show().colorButtons()
             }
-            .create()
+            .create().colorButtons()
     }
 
     private lateinit var paths: ArrayList<String>

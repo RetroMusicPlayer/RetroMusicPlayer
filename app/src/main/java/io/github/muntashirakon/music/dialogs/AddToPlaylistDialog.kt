@@ -19,11 +19,12 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.extraNotNull
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.loaders.PlaylistLoader
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AddToPlaylistDialog : DialogFragment() {
 
@@ -31,17 +32,13 @@ class AddToPlaylistDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): Dialog {
         val playlists = PlaylistLoader.getAllPlaylists(requireContext())
-        val playlistNames = mutableListOf<CharSequence>()
+        val playlistNames = mutableListOf<String>()
         playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
         for (p in playlists) {
             playlistNames.add(p.name)
         }
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.add_playlist_title)
+        return materialDialog(R.string.add_playlist_title)
             .setItems(playlistNames.toTypedArray()) { _, which ->
                 val songs = extraNotNull<ArrayList<Song>>(EXTRA_SONG).value
                 if (which == 0) {
@@ -57,7 +54,7 @@ class AddToPlaylistDialog : DialogFragment() {
                 }
                 dismiss()
             }
-            .create()
+            .create().colorButtons()
     }
 
     companion object {

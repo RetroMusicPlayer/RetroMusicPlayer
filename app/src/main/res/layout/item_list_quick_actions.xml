@@ -28,7 +28,7 @@
         android:layout_weight="1"
         android:text="@string/action_play_all"
         app:backgroundTint="?attr/colorSurface"
-        app:icon="@drawable/ic_play_arrow_white_24dp" />
+        app:icon="@drawable/ic_play_arrow" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shuffleAction"
@@ -39,6 +39,6 @@
         android:layout_weight="1"
         android:text="@string/shuffle"
         app:backgroundTint="?attr/colorSurface"
-        app:icon="@drawable/ic_shuffle_white_24dp" />
+        app:icon="@drawable/ic_shuffle" />
 
 </LinearLayout>

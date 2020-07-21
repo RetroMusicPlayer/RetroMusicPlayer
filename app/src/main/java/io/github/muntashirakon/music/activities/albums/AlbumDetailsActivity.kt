@@ -10,13 +10,13 @@ import android.view.SubMenu
 import android.view.View
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsSlidingMusicPanelActivity
 import io.github.muntashirakon.music.activities.tageditor.AbsTagEditorActivity
 import io.github.muntashirakon.music.activities.tageditor.AlbumTagEditorActivity
@@ -36,26 +36,26 @@ import io.github.muntashirakon.music.helper.SortOrder.AlbumSongSortOrder
 import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.Album
 import io.github.muntashirakon.music.model.Artist
-import io.github.muntashirakon.music.mvp.presenter.AlbumDetailsView
-import io.github.muntashirakon.music.rest.model.LastFmAlbum
+import io.github.muntashirakon.music.network.model.LastFmAlbum
 import io.github.muntashirakon.music.util.*
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
-import io.github.muntashirakon.music.R
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.util.*
 import android.util.Pair as UtilPair
 
-class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, CabHolder {
+class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
         cab?.let {
             if (it.isActive) it.finish()
         }
         cab = MaterialCab(this, R.id.cab_stub)
             .setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+            .setCloseDrawableRes(R.drawable.ic_close)
             .setBackgroundColor(
                 RetroColorUtil.shiftBackgroundColorForLightText(
                     ATHUtil.resolveColor(
@@ -68,7 +68,9 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         return cab as MaterialCab
     }
 
-    private lateinit var viewModel: AlbumDetailsViewModel
+    private val detailsViewModel: AlbumDetailsViewModel by viewModel {
+        parametersOf(extraNotNull<Int>(EXTRA_ALBUM_ID).value)
+    }
     private lateinit var simpleSongAdapter: SimpleSongAdapter
     private lateinit var album: Album
     private lateinit var artistImage: ImageView
@@ -100,19 +102,19 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         window.sharedElementsUseOverlay = true
         windowEnterTransition()
 
-        val albumId = extraNotNull<Int>(EXTRA_ALBUM_ID).value
+        addMusicServiceEventListener(detailsViewModel)
         ActivityCompat.postponeEnterTransition(this)
-        val viewModelFactory = AlbumDetailsViewModelFactory(application, albumId)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(AlbumDetailsViewModel::class.java)
-        addMusicServiceEventListener(viewModel)
-        viewModel.getAlbum().observe(this, androidx.lifecycle.Observer {
+        //val viewModelFactory = AlbumDetailsViewModelFactory(application, albumId)
+        //viewModel = ViewModelProvider(this, viewModelFactory).get(AlbumDetailsViewModel::class.java)
+
+        detailsViewModel.getAlbum().observe(this, androidx.lifecycle.Observer {
             ActivityCompat.startPostponedEnterTransition(this@AlbumDetailsActivity)
             album(it)
         })
-        viewModel.getArtist().observe(this, androidx.lifecycle.Observer {
+        detailsViewModel.getArtist().observe(this, androidx.lifecycle.Observer {
             loadArtistImage(it)
         })
-        viewModel.getAlbumInfo().observe(this, androidx.lifecycle.Observer {
+        detailsViewModel.getAlbumInfo().observe(this, androidx.lifecycle.Observer {
             aboutAlbum(it)
         })
         setupRecyclerView()
@@ -153,11 +155,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         }
     }
 
-    override fun complete() {
+    fun complete() {
         ActivityCompat.startPostponedEnterTransition(this)
     }
 
-    override fun album(album: Album) {
+    fun album(album: Album) {
         complete()
         if (album.songs!!.isEmpty()) {
             finish()
@@ -190,11 +192,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         }
         loadAlbumCover()
         simpleSongAdapter.swapDataSet(album.songs)
-        viewModel.loadArtist(album.artistId)
-        viewModel.loadAlbumInfo(album)
+        detailsViewModel.loadArtist(album.artistId)
+        detailsViewModel.loadAlbumInfo(album)
     }
 
-    override fun moreAlbums(albums: List<Album>) {
+    fun moreAlbums(albums: List<Album>) {
         moreTitle.show()
         moreRecyclerView.show()
         moreTitle.text = String.format(getString(R.string.label_more_from), album.artistName)
@@ -209,7 +211,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         moreRecyclerView.adapter = albumAdapter
     }
 
-    override fun aboutAlbum(lastFmAlbum: LastFmAlbum) {
+    fun aboutAlbum(lastFmAlbum: LastFmAlbum) {
         if (lastFmAlbum.album != null) {
             if (lastFmAlbum.album.wiki != null) {
                 aboutAlbumText.show()
@@ -230,7 +232,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         }
     }
 
-    override fun loadArtistImage(artist: Artist) {
+    fun loadArtistImage(artist: Artist) {
         ArtistGlideRequest.Builder.from(Glide.with(this), artist)
             .generatePalette(this)
             .build()
@@ -391,8 +393,9 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
 
     override fun onDestroy() {
         super.onDestroy()
-        removeMusicServiceEventListener(viewModel)
+        removeMusicServiceEventListener(detailsViewModel)
     }
+
     companion object {
 
         const val EXTRA_ALBUM_ID = "extra_album_id"

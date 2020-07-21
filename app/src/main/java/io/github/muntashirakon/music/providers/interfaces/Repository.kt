@@ -15,8 +15,8 @@
 package io.github.muntashirakon.music.providers.interfaces
 
 import io.github.muntashirakon.music.model.*
-import io.github.muntashirakon.music.rest.model.LastFmAlbum
-import io.github.muntashirakon.music.rest.model.LastFmArtist
+import io.github.muntashirakon.music.network.model.LastFmAlbum
+import io.github.muntashirakon.music.network.model.LastFmArtist
 
 /**
  * Created by hemanths on 11/08/17.

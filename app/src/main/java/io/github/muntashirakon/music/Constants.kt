@@ -31,6 +31,7 @@ object Constants {
     const val APP_TWITTER_LINK = "https://twitter.com/retromusicapp"
     const val FAQ_LINK = "https://github.com/h4h13/RetroMusicPlayer/blob/master/FAQ.md"
     const val PINTEREST = "https://in.pinterest.com/retromusicapp/"
+    const val BASE_URL = "https://ws.audioscrobbler.com/2.0/"
 
     const val IS_MUSIC =
         MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"

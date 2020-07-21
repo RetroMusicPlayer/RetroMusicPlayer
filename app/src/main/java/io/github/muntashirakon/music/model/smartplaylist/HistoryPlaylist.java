@@ -44,7 +44,7 @@ public class HistoryPlaylist extends AbsSmartPlaylist {
     };
 
     public HistoryPlaylist(@NonNull Context context) {
-        super(context.getString(R.string.history), R.drawable.ic_access_time_white_24dp);
+        super(context.getString(R.string.history), R.drawable.ic_history);
     }
 
     protected HistoryPlaylist(Parcel in) {

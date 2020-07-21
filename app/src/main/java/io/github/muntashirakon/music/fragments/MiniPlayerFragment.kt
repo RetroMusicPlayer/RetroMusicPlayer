@@ -15,14 +15,12 @@ import io.github.muntashirakon.music.extensions.show
 import io.github.muntashirakon.music.extensions.textColorPrimary
 import io.github.muntashirakon.music.extensions.textColorSecondary
 import io.github.muntashirakon.music.fragments.base.AbsMusicServiceFragment
-import io.github.muntashirakon.music.glide.SongGlideRequest
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.MusicProgressViewUpdateHelper
 import io.github.muntashirakon.music.helper.PlayPauseButtonOnClickHandler
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.RetroUtil
 import io.github.muntashirakon.music.util.ViewUtil
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_mini_player.*
 import kotlin.math.abs
 
@@ -63,8 +61,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
             actionPrevious?.show()
 
         } else {
-            actionNext.visibility =
-                if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
+            actionNext.visibility = if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
             actionPrevious.visibility =
                 if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
         }
@@ -97,19 +94,6 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
         miniPlayerTitle.isSelected = true
         miniPlayerTitle.text = builder
-
-        if (RetroUtil.isTablet()) {
-            image?.let {
-                SongGlideRequest.Builder.from(
-                    Glide.with(requireContext()),
-                    MusicPlayerRemote.currentSong
-                ).checkIgnoreMediaStore(requireContext())
-                    .ignoreMediaStore(PreferenceUtil.isAllowedToDownloadMetadata())
-                    .asBitmap()
-                    .build()
-                    .into(it)
-            }
-        }
     }
 
     override fun onServiceConnected() {
@@ -145,9 +129,9 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     protected fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            miniPlayerPlayPauseButton!!.setImageResource(R.drawable.ic_pause_white_24dp)
+            miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_pause)
         } else {
-            miniPlayerPlayPauseButton!!.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+            miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_play_arrow)
         }
     }
 

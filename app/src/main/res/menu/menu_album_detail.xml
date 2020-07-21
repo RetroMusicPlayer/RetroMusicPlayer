@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/action_sort_order"
-        android:icon="@drawable/ic_sort_white_24dp"
+        android:icon="@drawable/ic_sort"
         android:title="@string/sort_order"
         app:showAsAction="ifRoom">
         <menu>
@@ -42,7 +42,7 @@
 
     <item
         android:id="@+id/action_tag_editor"
-        android:icon="@drawable/ic_edit_white_24dp"
+        android:icon="@drawable/ic_edit"
         android:title="@string/action_tag_editor"
         app:showAsAction="ifRoom" />
 

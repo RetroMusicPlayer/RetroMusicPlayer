@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="12dp"
+        android:paddingVertical="14dp"
         android:textAppearance="@style/TextViewHeadline6"
         android:textStyle="bold"
         app:layout_constrainedWidth="true"

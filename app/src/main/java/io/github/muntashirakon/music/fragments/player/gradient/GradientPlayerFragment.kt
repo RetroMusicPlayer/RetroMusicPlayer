@@ -355,18 +355,18 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
     fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat)
                 repeatButton.setColorFilter(
                     lastDisabledPlaybackControlsColor,
                     PorterDuff.Mode.SRC_IN
                 )
             }
             MusicService.REPEAT_MODE_ALL -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat)
                 repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
             MusicService.REPEAT_MODE_THIS -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_one_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat_one)
                 repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
         }
@@ -506,9 +506,9 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
                 val activity = activity
                 if (activity != null) {
                     val res = if (isFavorite!!)
-                        R.drawable.ic_favorite_white_24dp
+                        R.drawable.ic_favorite
                     else
-                        R.drawable.ic_favorite_border_white_24dp
+                        R.drawable.ic_favorite_border
 
                     val drawable = TintHelper.createTintedDrawable(activity, res, Color.WHITE)
                     songFavourite?.setImageDrawable(drawable)

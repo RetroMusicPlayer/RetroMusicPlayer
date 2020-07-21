@@ -167,7 +167,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                         val close = createBitmap(
                             RetroUtil.getTintedVectorDrawable(
                                 service,
-                                R.drawable.ic_close_white_24dp,
+                                R.drawable.ic_close,
                                 primary
                             )!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
                         )

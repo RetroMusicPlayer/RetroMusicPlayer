@@ -33,11 +33,11 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/playerToolbar"
                 style="@style/Toolbar"
-                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
                 app:contentInsetLeft="0dp"
                 app:contentInsetStart="0dp"
                 app:contentInsetStartWithNavigation="0dp"
-                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
                 app:subtitleTextAppearance="@style/TextViewCaption"
                 app:titleMargin="0dp"
                 app:titleMarginStart="0dp"

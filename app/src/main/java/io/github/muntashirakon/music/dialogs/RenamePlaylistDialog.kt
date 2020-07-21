@@ -22,9 +22,10 @@ import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.extraNotNull
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -42,11 +43,7 @@ class RenamePlaylistDialog : DialogFragment() {
             layout.findViewById(R.id.actionNewPlaylistContainer)
         MaterialUtil.setTint(nameContainer, false)
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.rename_playlist_title)
+        return materialDialog(R.string.rename_playlist_title)
             .setView(layout)
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.action_rename) { _, _ ->
@@ -60,6 +57,7 @@ class RenamePlaylistDialog : DialogFragment() {
                 }
             }
             .create()
+            .colorButtons()
     }
 
     companion object {

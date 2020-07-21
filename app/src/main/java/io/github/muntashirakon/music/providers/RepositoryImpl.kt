@@ -19,13 +19,16 @@ import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.HomeAdapter
 import io.github.muntashirakon.music.loaders.*
 import io.github.muntashirakon.music.model.*
-import io.github.muntashirakon.music.providers.interfaces.Repository
-import io.github.muntashirakon.music.rest.LastFmClient
-import io.github.muntashirakon.music.rest.model.LastFmAlbum
-import io.github.muntashirakon.music.rest.model.LastFmArtist
 import io.github.muntashirakon.music.model.smartplaylist.NotRecentlyPlayedPlaylist
+import io.github.muntashirakon.music.network.LastFMService
+import io.github.muntashirakon.music.network.model.LastFmAlbum
+import io.github.muntashirakon.music.network.model.LastFmArtist
+import io.github.muntashirakon.music.providers.interfaces.Repository
 
-class RepositoryImpl constructor(private val context: Context) : Repository {
+class RepositoryImpl(
+    private val context: Context,
+    private val lastFMService: LastFMService
+) : Repository {
 
     override suspend fun allAlbums(): List<Album> = AlbumLoader.getAllAlbums(context)
 
@@ -43,12 +46,14 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         ArtistLoader.getArtist(context, artistId)
 
     override suspend fun suggestions(): Home? {
-        val songs = NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().subList(0, 9)
+        val songs = NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().apply {
+            if (size > 9) subList(0, 9)
+        }
         if (songs.isNotEmpty()) {
             return Home(
                 songs,
                 HomeAdapter.SUGGESTIONS,
-                R.drawable.ic_audiotrack_white_24dp
+                R.drawable.ic_audiotrack
             )
         }
         return null
@@ -73,7 +78,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         return if (artists.isNotEmpty()) Home(
             artists,
             HomeAdapter.RECENT_ARTISTS,
-            R.drawable.ic_artist_white_24dp
+            R.drawable.ic_artist
         ) else null
     }
 
@@ -82,7 +87,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         return if (albums.isNotEmpty()) Home(
             albums,
             HomeAdapter.RECENT_ALBUMS,
-            R.drawable.ic_album_white_24dp
+            R.drawable.ic_album
         ) else null
     }
 
@@ -91,7 +96,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         return if (albums.isNotEmpty()) Home(
             albums,
             HomeAdapter.TOP_ALBUMS,
-            R.drawable.ic_album_white_24dp
+            R.drawable.ic_album
         ) else null
     }
 
@@ -101,7 +106,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         return if (artists.isNotEmpty()) Home(
             artists,
             HomeAdapter.TOP_ARTISTS,
-            R.drawable.ic_artist_white_24dp
+            R.drawable.ic_artist
         ) else null
 
     }
@@ -110,8 +115,8 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         val playlists = PlaylistLoader.getFavoritePlaylist(context)
         return if (playlists.isNotEmpty()) Home(
             playlists,
-            HomeAdapter.PLAYLISTS,
-            R.drawable.ic_favorite_white_24dp
+            HomeAdapter.FAVOURITES,
+            R.drawable.ic_favorite
         ) else null
     }
 
@@ -119,12 +124,12 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         name: String,
         lang: String?,
         cache: String?
-    ): LastFmArtist = LastFmClient.getApiService().artistInfo(name, lang, cache)
+    ): LastFmArtist = lastFMService.artistInfo(name, lang, cache)
 
 
     override suspend fun albumInfo(
         artist: String,
         album: String
-    ): LastFmAlbum = LastFmClient.getApiService().albumInfo(artist, album)
+    ): LastFmAlbum = lastFMService.albumInfo(artist, album)
 
 }

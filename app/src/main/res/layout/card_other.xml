@@ -38,7 +38,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sb4"
-            app:listItemIcon="@drawable/ic_file_edit_white_24dp"
+            app:listItemIcon="@drawable/ic_file_edit"
             app:listItemSummary="@string/changelog_summary"
             app:listItemTitle="@string/changelog" />
 
@@ -51,7 +51,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/changelog"
-            app:listItemIcon="@drawable/ic_license_white_24dp"
+            app:listItemIcon="@drawable/ic_license"
             app:listItemSummary="@string/pref_summary_open_source_licences"
             app:listItemTitle="@string/pref_title_open_source_licences" />
 
@@ -64,7 +64,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/openSource"
-            app:listItemIcon="@drawable/ic_info_outline_white_24dp"
+            app:listItemIcon="@drawable/ic_info_outline"
             app:listItemSummary="@string/pref_summary_open_source_licences"
             app:listItemTitle="@string/version" />
 

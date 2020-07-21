@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="0dp"
+
         app:contentPadding="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/itemPrice"
-                app:srcCompat="@drawable/ic_github_circle_white_24dp"
+                app:srcCompat="@drawable/ic_github_circle"
                 app:tint="?attr/colorControlNormal" />
 
 

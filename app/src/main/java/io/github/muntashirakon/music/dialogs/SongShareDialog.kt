@@ -21,9 +21,10 @@ import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.ShareInstagramStory
+import io.github.muntashirakon.music.extensions.colorButtons
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SongShareDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -34,10 +35,7 @@ class SongShareDialog : DialogFragment() {
                 song?.title,
                 song?.artistName
             )
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        ).setTitle(R.string.what_do_you_want_to_share)
+        return materialDialog(R.string.what_do_you_want_to_share)
             .setItems(
                 arrayOf(
                     getString(R.string.the_audio_file),
@@ -48,6 +46,7 @@ class SongShareDialog : DialogFragment() {
                 withAction(which, song, listening)
             }
             .create()
+            .colorButtons()
     }
 
     private fun withAction(

@@ -94,7 +94,7 @@ open class BugReportActivity : AbsThemeActivity() {
             sendFab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
                 override fun onHidden(fab: FloatingActionButton?) {
                     super.onHidden(fab)
-                    sendFab.setImageResource(R.drawable.ic_send_white_24dp)
+                    sendFab.setImageResource(R.drawable.ic_send)
                     sendFab.show()
                 }
             })
@@ -110,7 +110,7 @@ open class BugReportActivity : AbsThemeActivity() {
             sendFab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
                 override fun onHidden(fab: FloatingActionButton?) {
                     super.onHidden(fab)
-                    sendFab.setImageResource(R.drawable.ic_open_in_browser_white_24dp)
+                    sendFab.setImageResource(R.drawable.ic_open_in_browser)
                     sendFab.show()
                 }
             })

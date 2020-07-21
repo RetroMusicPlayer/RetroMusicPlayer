@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_keyboard_arrow_down_black"
+    android:fromDegrees="270" />

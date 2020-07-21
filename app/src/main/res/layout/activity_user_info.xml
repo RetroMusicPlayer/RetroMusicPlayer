@@ -17,7 +17,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/profile"
             app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
@@ -63,7 +63,7 @@
                     android:layout_gravity="end"
                     android:background="?roundSelector"
                     android:padding="16dp"
-                    app:srcCompat="@drawable/ic_add_photo_white_24dp" />
+                    app:srcCompat="@drawable/ic_add_photo" />
 
             </FrameLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -97,7 +97,7 @@
                 android:layout_margin="16dp"
                 android:gravity="center"
                 android:padding="12dp"
-                android:src="@drawable/ic_add_photo_white_24dp"
+                android:src="@drawable/ic_add_photo"
                 app:tint="?attr/colorControlNormal" />
         </FrameLayout>
 
@@ -138,6 +138,6 @@
         android:layout_margin="16dp"
         android:gravity="center"
         android:text="@string/save"
-        app:icon="@drawable/ic_save_white_24dp"
+        app:icon="@drawable/ic_save"
         app:iconGravity="textStart" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

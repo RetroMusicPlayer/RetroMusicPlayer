@@ -1,29 +1,28 @@
 package io.github.muntashirakon.music.activities.artists
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.muntashirakon.music.interfaces.MusicServiceEventListener
 import io.github.muntashirakon.music.model.Artist
 import io.github.muntashirakon.music.providers.RepositoryImpl
-import io.github.muntashirakon.music.rest.model.LastFmArtist
+import io.github.muntashirakon.music.network.model.LastFmArtist
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ArtistDetailsViewModel(
-    application: Application,
+    private val repository: RepositoryImpl,
     private val artistId: Int
-) : AndroidViewModel(application), MusicServiceEventListener {
+) : ViewModel(), MusicServiceEventListener {
 
     private val loadArtistDetailsAsync: Deferred<Artist?>
         get() = viewModelScope.async(Dispatchers.IO) {
-            _repository.artistById(artistId)
+            repository.artistById(artistId)
         }
-    private val _repository = RepositoryImpl(application.applicationContext)
+
     private val _artist = MutableLiveData<Artist>()
     private val _lastFmArtist = MutableLiveData<LastFmArtist>()
 
@@ -41,7 +40,7 @@ class ArtistDetailsViewModel(
     }
 
     fun loadBiography(name: String, lang: String?, cache: String?) = viewModelScope.launch {
-        val info = _repository.artistInfo(name, lang, cache)
+        val info = repository.artistInfo(name, lang, cache)
         _lastFmArtist.postValue(info)
     }
 

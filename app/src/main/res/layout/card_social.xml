@@ -37,7 +37,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sb3"
-            app:listItemIcon="@drawable/ic_pinterest_white_24dp"
+            app:listItemIcon="@drawable/ic_pinterest"
             app:listItemSummary="@string/pinterest_page_summary"
             app:listItemTitle="@string/pinterest_page" />
 
@@ -50,7 +50,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pinterestLink"
-            app:listItemIcon="@drawable/ic_instagram_white_24dp"
+            app:listItemIcon="@drawable/ic_instagram"
             app:listItemSummary="@string/instagram_page_summary"
             app:listItemTitle="@string/instagram_page" />
 
@@ -64,7 +64,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/instagramLink"
-            app:listItemIcon="@drawable/ic_twitter_white_24dp"
+            app:listItemIcon="@drawable/ic_twitter"
             app:listItemSummary="@string/twitter_page_summary"
             app:listItemTitle="@string/twitter_page" />
 

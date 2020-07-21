@@ -31,12 +31,13 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.colorControlNormal
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.fragments.AlbumCoverStyle.*
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.ViewUtil
 import com.bumptech.glide.Glide
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AlbumCoverStylePreference @JvmOverloads constructor(
     context: Context,
@@ -75,15 +76,14 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtil.albumCoverStyle.ordinal
 
-        return MaterialAlertDialogBuilder(requireActivity(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
-            .setTitle(R.string.pref_title_album_cover_style)
+        return materialDialog(R.string.pref_title_album_cover_style)
             .setPositiveButton(R.string.set) { _, _ ->
                 val coverStyle = values()[viewPagerPosition]
                 PreferenceUtil.albumCoverStyle = coverStyle
             }
             .setView(view)
             .create()
+            .colorButtons()
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {

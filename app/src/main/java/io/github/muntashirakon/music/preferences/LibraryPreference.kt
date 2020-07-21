@@ -29,11 +29,11 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.CategoryInfoAdapter
+import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.colorControlNormal
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.model.CategoryInfo
 import io.github.muntashirakon.music.util.PreferenceUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-
 
 class LibraryPreference @JvmOverloads constructor(
     context: Context,
@@ -64,11 +64,7 @@ class LibraryPreferenceDialog : DialogFragment() {
         categoryAdapter.attachToRecyclerView(recyclerView)
 
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.library_categories)
+        return materialDialog(R.string.library_categories)
             .setNeutralButton(
                 R.string.reset_action
             ) { _, _ ->
@@ -80,6 +76,7 @@ class LibraryPreferenceDialog : DialogFragment() {
             ) { _, _ -> updateCategories(categoryAdapter.categoryInfos) }
             .setView(view)
             .create()
+            .colorButtons()
     }
 
     private fun updateCategories(categories: List<CategoryInfo>) {

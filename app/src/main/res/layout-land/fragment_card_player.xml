@@ -40,7 +40,7 @@
                 android:id="@+id/playerToolbar"
                 style="@style/Toolbar"
                 android:background="@android:color/transparent"
-                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
         </LinearLayout>
     </FrameLayout>
 

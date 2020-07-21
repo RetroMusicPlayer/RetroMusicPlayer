@@ -18,6 +18,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.SeekBar
 import androidx.annotation.AttrRes
@@ -26,6 +27,7 @@ import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
+import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
 
 fun Int.ripAlpha(): Int {
@@ -77,4 +79,8 @@ fun SeekBar.addAccentColor() {
     val colorState = ColorStateList.valueOf(ThemeStore.accentColor(context))
     progressTintList = colorState
     thumbTintList = colorState
+}
+
+fun Button.accentTextColor() {
+    setTextColor(ThemeStore.accentColor(App.getContext()))
 }

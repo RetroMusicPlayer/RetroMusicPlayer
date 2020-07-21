@@ -23,10 +23,11 @@ import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import io.github.muntashirakon.music.EXTRA_SONG
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.extraNotNull
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_playlist.view.*
@@ -42,11 +43,7 @@ class CreatePlaylistDialog : DialogFragment() {
         val playlistContainer: TextInputLayout = view.actionNewPlaylistContainer
         MaterialUtil.setTint(playlistContainer, false)
 
-        return MaterialAlertDialogBuilder(
-            requireActivity(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(R.string.new_playlist_title)
+        return materialDialog(R.string.new_playlist_title)
             .setView(view)
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(
@@ -65,6 +62,7 @@ class CreatePlaylistDialog : DialogFragment() {
                 }
             }
             .create()
+            .colorButtons()
     }
 
     companion object {

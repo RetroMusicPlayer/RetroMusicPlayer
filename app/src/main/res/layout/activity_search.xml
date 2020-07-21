@@ -47,7 +47,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="12dp"
-                        app:srcCompat="@drawable/ic_keyboard_backspace_black_24dp"
+                        app:srcCompat="@drawable/ic_keyboard_backspace_black"
                         app:tint="?attr/colorControlNormal" />
 
 
@@ -75,7 +75,7 @@
                             android:layout_height="wrap_content"
                             android:background="?roundSelector"
                             android:padding="12dp"
-                            app:srcCompat="@drawable/ic_mic_white_24dp"
+                            app:srcCompat="@drawable/ic_mic"
                             app:tint="?attr/colorControlNormal"
                             tools:visibility="visible" />
 
@@ -86,7 +86,7 @@
                             android:background="?roundSelector"
                             android:padding="12dp"
                             android:visibility="gone"
-                            app:srcCompat="@drawable/ic_close_white_24dp"
+                            app:srcCompat="@drawable/ic_close"
                             app:tint="?attr/colorControlNormal"
                             tools:visibility="visible" />
                     </FrameLayout>
@@ -123,6 +123,6 @@
             android:layout_margin="16dp"
             android:text="@string/keyboard"
             android:textAppearance="@style/TextViewHeadline6"
-            app:icon="@drawable/ic_keyboard_white_24dp" />
+            app:icon="@drawable/ic_keyboard" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

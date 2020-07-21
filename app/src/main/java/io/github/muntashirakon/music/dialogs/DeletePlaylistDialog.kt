@@ -20,10 +20,11 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_PLAYLIST
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.extraNotNull
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.model.Playlist
 import io.github.muntashirakon.music.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DeletePlaylistDialog : DialogFragment() {
 
@@ -46,10 +47,7 @@ class DeletePlaylistDialog : DialogFragment() {
             )
         }
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
+        return materialDialog(title)
             .setTitle(title)
             .setMessage(message)
             .setNegativeButton(android.R.string.cancel, null)
@@ -57,6 +55,7 @@ class DeletePlaylistDialog : DialogFragment() {
                 PlaylistsUtil.deletePlaylists(requireContext(), playlists)
             }
             .create()
+            .colorButtons()
     }
 
     companion object {

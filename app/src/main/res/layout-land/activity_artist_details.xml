@@ -30,7 +30,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black" />
 
         <ViewStub
             android:id="@+id/cab_stub"
@@ -48,7 +48,6 @@
         android:layout_marginEnd="16dp"
         android:transitionName="@string/transition_artist_image"
         app:cardCornerRadius="24dp"
-        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/container"
         app:layout_constraintHorizontal_bias="0.5"

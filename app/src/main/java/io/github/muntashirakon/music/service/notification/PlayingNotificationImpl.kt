@@ -52,7 +52,7 @@ class PlayingNotificationImpl : PlayingNotification() {
         val playButtonResId =
             if (isPlaying) R.drawable.ic_pause_white_48dp else R.drawable.ic_play_arrow_white_48dp
         val favoriteResId =
-            if (isFavorite) R.drawable.ic_favorite_white_24dp else R.drawable.ic_favorite_border_white_24dp
+            if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
 
         val action = Intent(service, MainActivity::class.java)
         action.putExtra(MainActivity.EXPAND_PANEL, true)

@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_shuffle_playlist"
-        android:icon="@drawable/ic_shuffle_white_24dp"
+        android:icon="@drawable/ic_shuffle"
         android:title="@string/action_shuffle_playlist"
         android:visible="false"
         app:showAsAction="ifRoom" />

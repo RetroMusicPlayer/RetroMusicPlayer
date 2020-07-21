@@ -41,15 +41,6 @@ android {
         }
     }
 
-
-    flavorDimensions "default"
-
-    productFlavors {
-        normal {
-            dimension "default"
-        }
-    }
-
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
@@ -87,17 +78,15 @@ dependencies {
 
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation "androidx.palette:palette:1.0.0"
     implementation "androidx.viewpager2:viewpager2:1.1.0-alpha01"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'androidx.preference:preference:1.1.1'
-
+    implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
     implementation 'androidx.palette:palette-ktx:1.0.0'
 
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta8'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     implementation 'com.google.android.material:material:1.3.0-alpha01'
@@ -118,11 +107,8 @@ dependencies {
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }
-    /*UI Library*/
-    implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
-
+    def kotlin_coroutines_version = "1.3.8"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    def kotlin_coroutines_version = "1.3.3"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
@@ -141,9 +127,13 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     implementation 'me.jorgecastillo:androidcolorx:0.2.0'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
     implementation 'com.github.dhaval2404:imagepicker:1.7.1'
+
+    def koin_version = "2.1.5"
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
 }

@@ -1,24 +1,23 @@
 package io.github.muntashirakon.music.fragments
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.github.muntashirakon.music.adapter.HomeAdapter
 import io.github.muntashirakon.music.fragments.ReloadType.*
 import io.github.muntashirakon.music.interfaces.MusicServiceEventListener
 import io.github.muntashirakon.music.model.*
 import io.github.muntashirakon.music.providers.RepositoryImpl
-import io.github.muntashirakon.music.providers.interfaces.Repository
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class LibraryViewModel(application: Application) :
-    AndroidViewModel(application), MusicServiceEventListener {
+class LibraryViewModel(
+    private val repository: RepositoryImpl
+) : ViewModel(), MusicServiceEventListener {
 
-    private val _repository: Repository = RepositoryImpl(application.applicationContext)
     private val _albums = MutableLiveData<List<Album>>()
     private val _songs = MutableLiveData<List<Song>>()
     private val _artists = MutableLiveData<List<Artist>>()
@@ -51,16 +50,22 @@ class LibraryViewModel(application: Application) :
     private fun loadHomeSections() = viewModelScope.launch {
         val list = mutableListOf<Home>()
         val result = listOf(
-            _repository.topArtists(),
-            _repository.topAlbums(),
-            _repository.recentArtists(),
-            _repository.recentAlbums(),
-            _repository.favoritePlaylist(),
-            _repository.suggestions()
+            repository.topArtists(),
+            repository.topAlbums(),
+            repository.recentArtists(),
+            repository.recentAlbums(),
+            repository.suggestions(),
+            repository.favoritePlaylist()
         )
-        for (r in result) {
-            if (r != null) {
-                list.add(r)
+        result.forEach {
+            if (it != null && it.arrayList.isNotEmpty()) {
+                if (it.homeSection == HomeAdapter.SUGGESTIONS) {
+                    if (it.arrayList.size > 9) {
+                        list.add(it)
+                    }
+                } else {
+                    list.add(it)
+                }
             }
         }
         _homeSections.value = list
@@ -68,27 +73,27 @@ class LibraryViewModel(application: Application) :
 
     private val loadSongs: Deferred<List<Song>>
         get() = viewModelScope.async(IO) {
-            _repository.allSongs()
+            repository.allSongs()
         }
 
     private val loadAlbums: Deferred<List<Album>>
         get() = viewModelScope.async(IO) {
-            _repository.allAlbums()
+            repository.allAlbums()
         }
 
     private val loadArtists: Deferred<List<Artist>>
         get() = viewModelScope.async(IO) {
-            _repository.allArtists()
+            repository.allArtists()
         }
 
     private val loadPlaylists: Deferred<List<Playlist>>
         get() = viewModelScope.async(IO) {
-            _repository.allPlaylists()
+            repository.allPlaylists()
         }
 
     private val loadGenres: Deferred<List<Genre>>
         get() = viewModelScope.async(IO) {
-            _repository.allGenres()
+            repository.allGenres()
         }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {

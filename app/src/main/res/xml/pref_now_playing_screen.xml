@@ -6,7 +6,7 @@
         android:key="now_playing_screen_id"
         android:layout="@layout/list_item_view"
         android:title="@string/pref_title_now_playing_screen_appearance"
-        app:icon="@drawable/ic_play_circle_filled_white_24dp" />
+        app:icon="@drawable/ic_play_circle_filled" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
@@ -23,7 +23,7 @@
             android:key="album_cover_style_id"
             android:layout="@layout/list_item_view"
             android:title="@string/pref_title_album_cover_style"
-            app:icon="@drawable/ic_image_white_24dp" />
+            app:icon="@drawable/ic_image" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="0"
@@ -36,7 +36,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
-            app:icon="@drawable/ic_view_carousel_black_24dp"
+            app:icon="@drawable/ic_view_carousel"
             app:key="carousel_effect"
             app:summary="@string/pref_summary_carousel_effect"
             app:title="@string/pref_title_toggle_carousel_effect" />
@@ -58,7 +58,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
-            app:icon="@drawable/ic_volume_up_white_24dp"
+            app:icon="@drawable/ic_volume_up"
             app:key="toggle_volume"
             app:summary="@string/pref_summary_toggle_volume"
             app:title="@string/pref_title_toggle_volume" />
@@ -66,7 +66,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
-            app:icon="@drawable/ic_expand_less_white_24dp"
+            app:icon="@drawable/ic_expand_less"
             app:key="expand_now_playing_panel"
             app:summary="@string/pref_summary_expand_now_playing_panel"
             app:title="@string/pref_title_expand_now_playing_panel" />
@@ -78,7 +78,7 @@
             android:max="25"
             android:summary="@string/pref_blur_amount_summary"
             android:title="@string/pref_blur_amount_title"
-            app:icon="@drawable/ic_blur_on_white_24dp"
+            app:icon="@drawable/ic_blur_on"
             app:showSeekBarValue="true" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 

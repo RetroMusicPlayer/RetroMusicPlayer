@@ -29,9 +29,10 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.audio.exceptions.CannotReadException
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException
@@ -150,13 +151,11 @@ class SongDetailDialog : DialogFragment() {
                 )
             }
         }
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        ).setTitle(R.string.action_details)
+        return materialDialog(R.string.action_details)
             .setPositiveButton(android.R.string.ok, null)
             .setView(dialogView)
             .create()
+            .colorButtons()
     }
 
     companion object {

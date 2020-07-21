@@ -33,7 +33,7 @@
         android:layout_weight="0"
         android:padding="12dp"
         app:tint="?attr/colorControlNormal"
-        tools:srcCompat="@drawable/ic_folder_white_24dp" />
+        tools:srcCompat="@drawable/ic_folder" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"

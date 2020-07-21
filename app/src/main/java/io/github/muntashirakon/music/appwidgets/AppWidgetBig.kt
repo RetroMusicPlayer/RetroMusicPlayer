@@ -57,7 +57,7 @@ class AppWidgetBig : BaseAppWidget() {
             R.id.button_next, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
-                    R.drawable.ic_skip_next_white_24dp,
+                    R.drawable.ic_skip_next,
                     MaterialValueHelper.getPrimaryTextColor(context, false)
                 )!!, 1f
             )
@@ -66,7 +66,7 @@ class AppWidgetBig : BaseAppWidget() {
             R.id.button_prev, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
-                    R.drawable.ic_skip_previous_white_24dp,
+                    R.drawable.ic_skip_previous,
                     MaterialValueHelper.getPrimaryTextColor(context, false)
                 )!!, 1f
             )
@@ -117,7 +117,7 @@ class AppWidgetBig : BaseAppWidget() {
         val primaryColor = MaterialValueHelper.getPrimaryTextColor(service, false)
         // Set correct drawable for pause state
         val playPauseRes =
-            if (isPlaying) R.drawable.ic_pause_white_24dp else R.drawable.ic_play_arrow_white_32dp
+            if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play_arrow_white_32dp
         appWidgetView.setImageViewBitmap(
             R.id.button_toggle_play_pause, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
@@ -133,7 +133,7 @@ class AppWidgetBig : BaseAppWidget() {
             R.id.button_next, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     service,
-                    R.drawable.ic_skip_next_white_24dp,
+                    R.drawable.ic_skip_next,
                     primaryColor
                 )!!, 1f
             )
@@ -142,7 +142,7 @@ class AppWidgetBig : BaseAppWidget() {
             R.id.button_prev, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     service,
-                    R.drawable.ic_skip_previous_white_24dp,
+                    R.drawable.ic_skip_previous,
                     primaryColor
                 )!!, 1f
             )

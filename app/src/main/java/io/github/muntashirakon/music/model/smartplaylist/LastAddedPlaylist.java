@@ -41,7 +41,7 @@ public class LastAddedPlaylist extends AbsSmartPlaylist {
     };
 
     public LastAddedPlaylist(@NonNull Context context) {
-        super(context.getString(R.string.last_added), R.drawable.ic_library_add_white_24dp);
+        super(context.getString(R.string.last_added), R.drawable.ic_library_add);
     }
 
     protected LastAddedPlaylist(Parcel in) {

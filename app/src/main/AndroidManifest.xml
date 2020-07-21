@@ -106,7 +106,7 @@
         </activity>
         <activity android:name=".activities.albums.AlbumDetailsActivity" />
         <activity android:name=".activities.artists.ArtistDetailActivity" />
-        <activity android:name=".activities.PlaylistDetailActivity" />
+        <activity android:name=".activities.playlist.PlaylistDetailActivity" />
         <activity android:name=".activities.PlayingQueueActivity" />
         <activity android:name=".activities.AboutActivity" />
         <activity android:name=".activities.tageditor.AlbumTagEditorActivity" />
@@ -121,7 +121,7 @@
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
         <activity
-            android:name=".activities.SearchActivity"
+            android:name=".activities.search.SearchActivity"
             android:windowSoftInputMode="stateVisible" />
 
         <activity

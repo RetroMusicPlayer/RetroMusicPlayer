@@ -23,12 +23,13 @@ import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.saf.SAFGuideActivity
+import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.extraNotNull
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.SAFUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DeleteSongsDialog : DialogFragment() {
     @JvmField
@@ -57,11 +58,7 @@ class DeleteSongsDialog : DialogFragment() {
             )
         }
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(title)
+        return materialDialog(title)
             .setMessage(message)
             .setCancelable(false)
             .setNegativeButton(android.R.string.cancel, null)
@@ -74,6 +71,7 @@ class DeleteSongsDialog : DialogFragment() {
                 deleteSongsAsyncTask?.execute(DeleteSongsAsyncTask.LoadingInfo(songs, null))
             }
             .create()
+            .colorButtons()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

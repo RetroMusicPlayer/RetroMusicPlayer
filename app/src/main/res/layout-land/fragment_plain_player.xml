@@ -106,8 +106,8 @@
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/playerToolbar"
                         style="@style/Toolbar"
-                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
+                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
+                        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
                 </FrameLayout>
             </LinearLayout>
 

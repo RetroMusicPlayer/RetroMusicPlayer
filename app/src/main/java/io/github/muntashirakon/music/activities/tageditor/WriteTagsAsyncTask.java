@@ -34,8 +34,7 @@ import io.github.muntashirakon.music.misc.UpdateToastMediaScannerCompletionListe
 import io.github.muntashirakon.music.util.MusicUtil;
 import io.github.muntashirakon.music.util.SAFUtil;
 
-public class WriteTagsAsyncTask extends
-        DialogAsyncTask<WriteTagsAsyncTask.LoadingInfo, Integer, String[]> {
+public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.LoadingInfo, Integer, String[]> {
 
     private WeakReference<Activity> activity;
 

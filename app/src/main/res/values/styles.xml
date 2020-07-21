@@ -25,7 +25,7 @@
     <style name="Theme.RetroMusic.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title" />
 
     <style name="OverFlowButton">
-        <item name="srcCompat">@drawable/ic_more_vert_white_24dp</item>
+        <item name="srcCompat">@drawable/ic_more_vert</item>
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:scaleType">center</item>

@@ -54,7 +54,7 @@ class AppWidgetSmall : BaseAppWidget() {
             createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
-                    R.drawable.ic_skip_next_white_24dp,
+                    R.drawable.ic_skip_next,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
                 )!!, 1f
             )
@@ -64,7 +64,7 @@ class AppWidgetSmall : BaseAppWidget() {
             createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
-                    R.drawable.ic_skip_previous_white_24dp,
+                    R.drawable.ic_skip_previous,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
                 )!!, 1f
             )
@@ -150,7 +150,7 @@ class AppWidgetSmall : BaseAppWidget() {
 
                     private fun update(bitmap: Bitmap?, color: Int) {
                         // Set correct drawable for pause state
-                        val playPauseRes = if (isPlaying) R.drawable.ic_pause_white_24dp
+                        val playPauseRes = if (isPlaying) R.drawable.ic_pause
                         else R.drawable.ic_play_arrow_white_32dp
                         appWidgetView.setImageViewBitmap(
                             R.id.button_toggle_play_pause, createBitmap(
@@ -164,14 +164,14 @@ class AppWidgetSmall : BaseAppWidget() {
                         appWidgetView.setImageViewBitmap(
                             R.id.button_next, createBitmap(
                                 RetroUtil.getTintedVectorDrawable(
-                                    service, R.drawable.ic_skip_next_white_24dp, color
+                                    service, R.drawable.ic_skip_next, color
                                 )!!, 1f
                             )
                         )
                         appWidgetView.setImageViewBitmap(
                             R.id.button_prev, createBitmap(
                                 RetroUtil.getTintedVectorDrawable(
-                                    service, R.drawable.ic_skip_previous_white_24dp, color
+                                    service, R.drawable.ic_skip_previous, color
                                 )!!, 1f
                             )
                         )

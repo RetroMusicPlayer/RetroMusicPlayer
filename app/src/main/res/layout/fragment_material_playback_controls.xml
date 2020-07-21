@@ -129,7 +129,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/previousButton"
-        app:srcCompat="@drawable/ic_repeat_white_24dp"
+        app:srcCompat="@drawable/ic_repeat"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
@@ -145,7 +145,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/repeatButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_previous_sharp_white_24dp"
+        app:srcCompat="@drawable/ic_skip_previous_sharp"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
@@ -174,7 +174,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_next_sharp_white_24dp"
+        app:srcCompat="@drawable/ic_skip_next_sharp"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
@@ -189,7 +189,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nextButton"
         app:layout_constraintTop_toTopOf="@+id/nextButton"
-        app:srcCompat="@drawable/ic_shuffle_sharp_white_24dp"
+        app:srcCompat="@drawable/ic_shuffle_sharp"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 

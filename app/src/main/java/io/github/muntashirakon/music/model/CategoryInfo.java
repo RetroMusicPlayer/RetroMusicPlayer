@@ -59,14 +59,14 @@ public class CategoryInfo implements Parcelable {
     }
 
     public enum Category {
-        Home(R.id.action_home, R.string.home, R.drawable.ic_home_white_24dp),
-        Songs(R.id.action_song, R.string.songs, R.drawable.ic_audiotrack_white_24dp),
-        Albums(R.id.action_album, R.string.albums, R.drawable.ic_album_white_24dp),
-        Artists(R.id.action_artist, R.string.artists, R.drawable.ic_artist_white_24dp),
-        Playlists(R.id.action_playlist, R.string.playlists, R.drawable.ic_playlist_play_white_24dp),
-        Genres(R.id.action_genre, R.string.genres, R.drawable.ic_guitar_white_24dp),
-        Queue(R.id.action_playing_queue, R.string.queue, R.drawable.ic_queue_music_white_24dp),
-        Folder(R.id.action_folder, R.string.folders, R.drawable.ic_folder_white_24dp);
+        Home(R.id.action_home, R.string.home, R.drawable.asld_home),
+        Songs(R.id.action_song, R.string.songs, R.drawable.asld_music_note),
+        Albums(R.id.action_album, R.string.albums, R.drawable.asld_album),
+        Artists(R.id.action_artist, R.string.artists, R.drawable.ic_artist),
+        Playlists(R.id.action_playlist, R.string.playlists, R.drawable.ic_playlist_play),
+        Genres(R.id.action_genre, R.string.genres, R.drawable.ic_guitar),
+        Queue(R.id.action_playing_queue, R.string.queue, R.drawable.ic_queue_music),
+        Folder(R.id.action_folder, R.string.folders, R.drawable.ic_folder);
 
         public final int icon;
 

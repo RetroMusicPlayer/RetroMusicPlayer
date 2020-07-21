@@ -29,7 +29,7 @@ public class NotRecentlyPlayedPlaylist extends AbsSmartPlaylist {
     };
 
     public NotRecentlyPlayedPlaylist(@NonNull Context context) {
-        super(context.getString(R.string.not_recently_played), R.drawable.ic_watch_later_white_24dp);
+        super(context.getString(R.string.not_recently_played), R.drawable.ic_watch_later);
     }
 
     protected NotRecentlyPlayedPlaylist(Parcel in) {

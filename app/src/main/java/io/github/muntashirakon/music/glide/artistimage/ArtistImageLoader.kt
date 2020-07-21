@@ -15,8 +15,8 @@
 package io.github.muntashirakon.music.glide.artistimage
 
 import android.content.Context
-import io.github.muntashirakon.music.deezer.Data
 import io.github.muntashirakon.music.deezer.DeezerApiService
+import io.github.muntashirakon.music.deezer.Data
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import com.bumptech.glide.Priority

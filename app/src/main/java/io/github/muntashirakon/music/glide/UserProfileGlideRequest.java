@@ -23,7 +23,7 @@ import static io.github.muntashirakon.music.Constants.USER_PROFILE;
 
 public class UserProfileGlideRequest {
     private static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.NONE;
-    private static final int DEFAULT_ERROR_IMAGE = R.drawable.ic_account_white_24dp;
+    private static final int DEFAULT_ERROR_IMAGE = R.drawable.ic_account;
     private static final int DEFAULT_ANIMATION = android.R.anim.fade_in;
 
     public static File getUserModel() {
@@ -47,7 +47,7 @@ public class UserProfileGlideRequest {
         private Builder(RequestManager requestManager, File profile) {
             this.requestManager = requestManager;
             this.profile = profile;
-            error = TintHelper.createTintedDrawable(App.Companion.getContext(), R.drawable.ic_account_white_24dp, ThemeStore.Companion.accentColor(App.Companion.getContext()));
+            error = TintHelper.createTintedDrawable(App.Companion.getContext(), R.drawable.ic_account, ThemeStore.Companion.accentColor(App.Companion.getContext()));
         }
 
         public static Builder from(@NonNull RequestManager requestManager, File profile) {

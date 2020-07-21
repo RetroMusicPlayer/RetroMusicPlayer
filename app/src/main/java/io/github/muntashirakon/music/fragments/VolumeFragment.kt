@@ -62,7 +62,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
 
         volumeSeekBar.max = maxVolume
         volumeSeekBar.progress = currentVolume
-        volumeDown.setImageResource(if (currentVolume == 0) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
+        volumeDown.setImageResource(if (currentVolume == 0) R.drawable.ic_volume_off else R.drawable.ic_volume_down)
     }
 
     override fun onDestroyView() {
@@ -74,7 +74,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         val audioManager = audioManager
         audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0)
         setPauseWhenZeroVolume(i < 1)
-        volumeDown?.setImageResource(if (i == 0) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
+        volumeDown?.setImageResource(if (i == 0) R.drawable.ic_volume_off else R.drawable.ic_volume_down)
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar) {

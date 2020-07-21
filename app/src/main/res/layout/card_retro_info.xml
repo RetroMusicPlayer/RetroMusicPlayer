@@ -37,7 +37,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sb2"
-            app:listItemIcon="@drawable/ic_github_circle_white_24dp"
+            app:listItemIcon="@drawable/ic_github_circle"
             app:listItemSummary="@string/git_hub_summary"
             app:listItemTitle="@string/git_hub" />
 
@@ -50,7 +50,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appGithub"
-            app:listItemIcon="@drawable/ic_flag_white_24dp"
+            app:listItemIcon="@drawable/ic_flag"
             app:listItemSummary="@string/translate_community"
             app:listItemTitle="@string/translate" />
 
@@ -64,9 +64,23 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appTranslation"
-            app:listItemIcon="@drawable/ic_star_white_24dp"
+            app:listItemIcon="@drawable/ic_star"
             app:listItemSummary="@string/rate_on_google_play_summary"
             app:listItemTitle="@string/rate_app" />
+
+        <io.github.muntashirakon.music.views.ListItemView
+            android:id="@+id/donateLink"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appRate"
+            app:listItemIcon="@drawable/ic_card_giftcard"
+            app:listItemSummary="@string/donate_summary"
+            app:listItemTitle="@string/donate" />
+
 
         <io.github.muntashirakon.music.views.ListItemView
             android:id="@+id/bugReportLink"
@@ -76,11 +90,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appRate"
-            app:listItemIcon="@drawable/ic_bug_report_white_24dp"
+            app:layout_constraintTop_toBottomOf="@id/donateLink"
+            app:listItemIcon="@drawable/ic_bug_report"
             app:listItemSummary="@string/bug_report_summary"
             app:listItemTitle="@string/report_bug" />
-
 
         <io.github.muntashirakon.music.views.ListItemView
             android:id="@+id/appShare"
@@ -91,7 +104,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bugReportLink"
-            app:listItemIcon="@drawable/ic_share_white_24dp"
+            app:listItemIcon="@drawable/ic_share"
             app:listItemSummary="@string/share_summary"
             app:listItemTitle="@string/action_share" />
 
@@ -104,7 +117,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appShare"
-            app:listItemIcon="@drawable/ic_help_white_24dp"
+            app:listItemIcon="@drawable/ic_help"
             app:listItemSummary="@string/help_summary"
             app:listItemTitle="@string/faq" />
 

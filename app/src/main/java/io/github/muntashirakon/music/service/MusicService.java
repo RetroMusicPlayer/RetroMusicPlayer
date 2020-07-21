@@ -1310,11 +1310,11 @@ public class MusicService extends Service implements
     }
 
     private void setCustomAction(PlaybackStateCompat.Builder stateBuilder) {
-        int repeatIcon = R.drawable.ic_repeat_white_24dp;  // REPEAT_MODE_NONE
+        int repeatIcon = R.drawable.ic_repeat;  // REPEAT_MODE_NONE
         if (getRepeatMode() == REPEAT_MODE_THIS) {
-            repeatIcon = R.drawable.ic_repeat_one_white_24dp;
+            repeatIcon = R.drawable.ic_repeat_one;
         } else if (getRepeatMode() == REPEAT_MODE_ALL) {
-            repeatIcon = R.drawable.ic_repeat_white_circle_24dp;
+            repeatIcon = R.drawable.ic_repeat_white_circle;
         }
         stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
                 CYCLE_REPEAT, getString(R.string.action_cycle_repeat), repeatIcon)
@@ -1327,7 +1327,7 @@ public class MusicService extends Service implements
                 .build());
 
         final int favoriteIcon = MusicUtil.isFavorite(getApplicationContext(), getCurrentSong())
-                ? R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_border_white_24dp;
+                ? R.drawable.ic_favorite : R.drawable.ic_favorite_border;
         stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
                 TOGGLE_FAVORITE, getString(R.string.action_toggle_favorite), favoriteIcon)
                 .build());

@@ -11,9 +11,12 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
+import io.github.muntashirakon.music.PeekingLinearLayoutManager
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.adapter.album.AlbumFullWidthAdapter
+import io.github.muntashirakon.music.adapter.album.AlbumAdapter
 import io.github.muntashirakon.music.adapter.artist.ArtistAdapter
 import io.github.muntashirakon.music.adapter.song.SongAdapter
 import io.github.muntashirakon.music.extensions.show
@@ -24,6 +27,7 @@ import io.github.muntashirakon.music.model.*
 import io.github.muntashirakon.music.model.Playlist
 import io.github.muntashirakon.music.util.PreferenceUtil
 import com.bumptech.glide.Glide
+import com.google.android.material.card.MaterialCardView
 
 class HomeAdapter(
     private val activity: AppCompatActivity,
@@ -41,20 +45,17 @@ class HomeAdapter(
             .inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
-            PLAYLISTS -> PlaylistViewHolder(layout)
-            SUGGESTIONS -> {
+            TOP_ALBUMS, RECENT_ALBUMS -> {
+                AlbumViewHolder(
+                    LayoutInflater.from(activity)
+                        .inflate(R.layout.metal_section_recycler_view, parent, false)
+                )
+            }
+            FAVOURITES -> PlaylistViewHolder(layout)
+            else -> {
                 SuggestionsViewHolder(
                     LayoutInflater.from(activity).inflate(
                         R.layout.item_suggestions,
-                        parent,
-                        false
-                    )
-                )
-            }
-            else -> {
-                AlbumViewHolder(
-                    LayoutInflater.from(activity).inflate(
-                        R.layout.metal_section_recycler_view,
                         parent,
                         false
                     )
@@ -90,17 +91,17 @@ class HomeAdapter(
                 val viewHolder = holder as ArtistViewHolder
                 viewHolder.bindView(list[position].arrayList as List<Artist>, R.string.top_artists)
             }
-            PLAYLISTS -> {
-                val viewHolder = holder as PlaylistViewHolder
-                viewHolder.bindView(
-                    list[position].arrayList as List<Playlist>,
-                    R.string.favorites
-                )
-            }
             SUGGESTIONS -> {
                 val viewHolder = holder as SuggestionsViewHolder
                 viewHolder.bindView(
                     list[position].arrayList as List<Song>
+                )
+            }
+            FAVOURITES -> {
+                val viewHolder = holder as PlaylistViewHolder
+                viewHolder.bindView(
+                    list[position].arrayList as List<Playlist>,
+                    R.string.favorites
                 )
             }
         }
@@ -117,7 +118,7 @@ class HomeAdapter(
 
     companion object {
 
-        @IntDef(RECENT_ALBUMS, TOP_ALBUMS, RECENT_ARTISTS, TOP_ARTISTS, PLAYLISTS, SUGGESTIONS)
+        @IntDef(RECENT_ALBUMS, TOP_ALBUMS, RECENT_ARTISTS, TOP_ARTISTS, SUGGESTIONS, FAVOURITES)
         @Retention(AnnotationRetention.SOURCE)
         annotation class HomeSection
 
@@ -125,8 +126,8 @@ class HomeAdapter(
         const val TOP_ALBUMS = 1
         const val RECENT_ARTISTS = 2
         const val TOP_ARTISTS = 0
-        const val SUGGESTIONS = 4
-        const val PLAYLISTS = 5
+        const val SUGGESTIONS = 5
+        const val FAVOURITES = 4
     }
 
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
@@ -134,7 +135,9 @@ class HomeAdapter(
             if (list.isNotEmpty()) {
                 recyclerView.apply {
                     show()
-                    adapter = AlbumFullWidthAdapter(activity, list, displayMetrics)
+                    adapter = AlbumAdapter(activity, list, R.layout.pager_item, null)
+                    layoutManager =
+                        PeekingLinearLayoutManager(activity, HORIZONTAL, false)
                 }
                 title.text = activity.getString(titleRes)
             }
@@ -176,17 +179,20 @@ class HomeAdapter(
         fun bindView(arrayList: List<Song>) {
             val color = ThemeStore.accentColor(activity)
             itemView.findViewById<TextView>(R.id.text).setTextColor(color)
-
-            images.forEachIndexed { index, i ->
-                itemView.findViewById<View>(i).setOnClickListener {
-                    MusicPlayerRemote.playNext(arrayList[index])
-                }
-                SongGlideRequest.Builder.from(Glide.with(activity), arrayList[index])
-                    .asBitmap()
-                    .build()
-                    .into(itemView.findViewById(i))
-
+            itemView.findViewById<MaterialCardView>(R.id.card6).apply {
+                setCardBackgroundColor(ColorUtil.withAlpha(color, 0.2f))
             }
+            if (arrayList.size > 9)
+                images.forEachIndexed { index, i ->
+                    itemView.findViewById<View>(i).setOnClickListener {
+                        MusicPlayerRemote.playNext(arrayList[index])
+                    }
+                    SongGlideRequest.Builder.from(Glide.with(activity), arrayList[index])
+                        .asBitmap()
+                        .build()
+                        .into(itemView.findViewById(i))
+
+                }
         }
     }
 

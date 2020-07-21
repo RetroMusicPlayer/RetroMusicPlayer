@@ -20,9 +20,10 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
+import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.model.PlaylistSong
 import io.github.muntashirakon.music.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class RemoveFromPlaylistDialog : DialogFragment() {
 
@@ -50,11 +51,7 @@ class RemoveFromPlaylistDialog : DialogFragment() {
             }
         }
 
-        return MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
-        )
-            .setTitle(title)
+        return materialDialog(title)
             .setMessage(message)
             .setPositiveButton(R.string.remove_action) { _, _ ->
                 PlaylistsUtil.removeFromPlaylist(
@@ -64,6 +61,7 @@ class RemoveFromPlaylistDialog : DialogFragment() {
             }
             .setNegativeButton(android.R.string.cancel, null)
             .create()
+            .colorButtons()
     }
 
     companion object {
