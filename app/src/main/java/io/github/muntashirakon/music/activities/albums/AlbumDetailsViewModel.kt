@@ -13,6 +13,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class AlbumDetailsViewModel(
     private val repository: RepositoryImpl,
@@ -37,8 +38,12 @@ class AlbumDetailsViewModel(
     }
 
     fun loadAlbumInfo(album: Album) = viewModelScope.launch(Dispatchers.IO) {
-        val lastFmAlbum = repository.albumInfo(album.artistName ?: "-", album.title ?: "-")
-        _lastFmAlbum.postValue(lastFmAlbum)
+        try {
+            val lastFmAlbum = repository.albumInfo(
+                album.artistName ?: "-", album.title ?: "-"
+            )
+            _lastFmAlbum.postValue(lastFmAlbum)
+        } catch (ignored: Exception) {}
     }
 
     fun loadArtist(artistId: Int) = viewModelScope.launch(Dispatchers.IO) {
