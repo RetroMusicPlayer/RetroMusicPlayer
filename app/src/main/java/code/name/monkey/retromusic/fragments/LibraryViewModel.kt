@@ -24,13 +24,15 @@ class LibraryViewModel(
     private val _playlist = MutableLiveData<List<Playlist>>()
     private val _genre = MutableLiveData<List<Genre>>()
     private val _homeSections = MutableLiveData<List<Home>>()
+    private val _paletteColor = MutableLiveData<Int>()
 
-    fun homeSections(): LiveData<List<Home>> = _homeSections
-    fun allAlbums(): LiveData<List<Album>> = _albums
-    fun allSongs(): LiveData<List<Song>> = _songs
-    fun allArtists(): LiveData<List<Artist>> = _artists
-    fun allPlaylisits(): LiveData<List<Playlist>> = _playlist
-    fun allGenres(): LiveData<List<Genre>> = _genre
+    val paletteColor: LiveData<Int> = _paletteColor
+    val homeSections: LiveData<List<Home>> = _homeSections
+    val allAlbums: LiveData<List<Album>> = _albums
+    val allSongs: LiveData<List<Song>> = _songs
+    val allArtists: LiveData<List<Artist>> = _artists
+    val allPlaylisits: LiveData<List<Playlist>> = _playlist
+    val allGenres: LiveData<List<Genre>> = _genre
 
     init {
         viewModelScope.launch {

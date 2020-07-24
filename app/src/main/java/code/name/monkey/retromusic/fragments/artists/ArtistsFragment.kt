@@ -16,8 +16,8 @@ class ArtistsFragment :
     MainActivityFragmentCallbacks {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allArtists().observe(
-            viewLifecycleOwner, Observer { artists ->
+        mainActivity.libraryViewModel.allArtists
+            .observe(viewLifecycleOwner, Observer { artists ->
                 if (artists.isNotEmpty()) {
                     adapter?.swapDataSet(artists)
                 } else {

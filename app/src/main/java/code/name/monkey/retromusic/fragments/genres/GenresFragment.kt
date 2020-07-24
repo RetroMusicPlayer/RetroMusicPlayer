@@ -28,8 +28,8 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allGenres().observe(
-            viewLifecycleOwner, Observer { genres ->
+        mainActivity.libraryViewModel.allGenres
+            .observe(viewLifecycleOwner, Observer { genres ->
                 if (genres.isNotEmpty()) {
                     adapter?.swapDataSet(genres)
                 } else {

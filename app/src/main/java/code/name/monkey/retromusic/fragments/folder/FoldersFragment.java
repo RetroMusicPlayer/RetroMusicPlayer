@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.fragments.mainactivity;
+package code.name.monkey.retromusic.fragments.folder;
 
 import android.app.Dialog;
 import android.content.Context;

@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.SubMenu
 import android.view.View
-import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,7 +24,6 @@ import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.extraNotNull
-import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
@@ -73,7 +71,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
     }
     private lateinit var simpleSongAdapter: SimpleSongAdapter
     private lateinit var album: Album
-    private lateinit var artistImage: ImageView
     private var cab: MaterialCab? = null
     private val savedSortOrder: String
         get() = PreferenceUtil.albumDetailSongSortOrder
@@ -101,24 +98,25 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         setBottomBarVisibility(View.GONE)
         window.sharedElementsUseOverlay = true
         windowEnterTransition()
+        toolbar.setBackgroundColor(surfaceColor())
 
         addMusicServiceEventListener(detailsViewModel)
         ActivityCompat.postponeEnterTransition(this)
-        //val viewModelFactory = AlbumDetailsViewModelFactory(application, albumId)
-        //viewModel = ViewModelProvider(this, viewModelFactory).get(AlbumDetailsViewModel::class.java)
 
         detailsViewModel.getAlbum().observe(this, androidx.lifecycle.Observer {
             ActivityCompat.startPostponedEnterTransition(this@AlbumDetailsActivity)
-            album(it)
+            showAlbum(it)
         })
         detailsViewModel.getArtist().observe(this, androidx.lifecycle.Observer {
             loadArtistImage(it)
+        })
+        detailsViewModel.getMoreAlbums().observe(this, androidx.lifecycle.Observer {
+            moreAlbums(it)
         })
         detailsViewModel.getAlbumInfo().observe(this, androidx.lifecycle.Observer {
             aboutAlbum(it)
         })
         setupRecyclerView()
-        artistImage = findViewById(R.id.artistImage)
         artistImage.setOnClickListener {
             val artistPairs = ActivityOptions.makeSceneTransitionAnimation(
                 this,
@@ -155,12 +153,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         }
     }
 
-    fun complete() {
-        ActivityCompat.startPostponedEnterTransition(this)
-    }
-
-    fun album(album: Album) {
-        complete()
+    private fun showAlbum(album: Album) {
         if (album.songs!!.isEmpty()) {
             finish()
             return
@@ -196,7 +189,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         detailsViewModel.loadAlbumInfo(album)
     }
 
-    fun moreAlbums(albums: List<Album>) {
+    private fun moreAlbums(albums: List<Album>) {
         moreTitle.show()
         moreRecyclerView.show()
         moreTitle.text = String.format(getString(R.string.label_more_from), album.artistName)
@@ -211,7 +204,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         moreRecyclerView.adapter = albumAdapter
     }
 
-    fun aboutAlbum(lastFmAlbum: LastFmAlbum) {
+    private fun aboutAlbum(lastFmAlbum: LastFmAlbum) {
         if (lastFmAlbum.album != null) {
             if (lastFmAlbum.album.wiki != null) {
                 aboutAlbumText.show()
@@ -232,7 +225,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         }
     }
 
-    fun loadArtistImage(artist: Artist) {
+    private fun loadArtistImage(artist: Artist) {
         ArtistGlideRequest.Builder.from(Glide.with(this), artist)
             .generatePalette(this)
             .build()
@@ -260,15 +253,17 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
     }
 
     private fun setColors(color: MediaNotificationProcessor) {
-        val buttonColor = if (PreferenceUtil.isAdaptiveColor)
-            color.backgroundColor.ripAlpha()
-        else
-            ATHUtil.resolveColor(this, R.attr.colorSurface)
+        MaterialUtil.tintColor(
+            button = shuffleAction,
+            textColor = color.primaryTextColor,
+            backgroundColor = color.backgroundColor
+        )
+        MaterialUtil.tintColor(
+            button = playAction,
+            textColor = color.primaryTextColor,
+            backgroundColor = color.backgroundColor
+        )
 
-        MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
-        MaterialUtil.setTint(button = playAction, color = buttonColor)
-
-        toolbar.setBackgroundColor(surfaceColor())
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
     }

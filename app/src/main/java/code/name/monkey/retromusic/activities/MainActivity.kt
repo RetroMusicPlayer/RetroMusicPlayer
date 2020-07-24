@@ -24,9 +24,9 @@ import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.albums.AlbumsFragment
 import code.name.monkey.retromusic.fragments.artists.ArtistsFragment
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import code.name.monkey.retromusic.fragments.folder.FoldersFragment
 import code.name.monkey.retromusic.fragments.genres.GenresFragment
 import code.name.monkey.retromusic.fragments.home.BannerHomeFragment
-import code.name.monkey.retromusic.fragments.mainactivity.FoldersFragment
 import code.name.monkey.retromusic.fragments.playlists.PlaylistsFragment
 import code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment
 import code.name.monkey.retromusic.fragments.songs.SongsFragment

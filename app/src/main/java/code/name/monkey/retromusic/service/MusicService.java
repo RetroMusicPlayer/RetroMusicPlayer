@@ -170,6 +170,7 @@ public class MusicService extends Service implements
     private AppWidgetSmall appWidgetSmall = AppWidgetSmall.Companion.getInstance();
 
     private AppWidgetText appWidgetText = AppWidgetText.Companion.getInstance();
+
     private final BroadcastReceiver widgetIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {

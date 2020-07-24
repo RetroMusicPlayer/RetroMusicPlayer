@@ -22,7 +22,6 @@ import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.extensions.extraNotNull
-import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
@@ -31,7 +30,10 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.model.LastFmArtist
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.CustomArtistImageUtil
+import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.RetroColorUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
@@ -95,8 +97,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         setBottomBarVisibility(View.GONE)
         window.sharedElementsUseOverlay = true
         windowEnterTransition()
-        ActivityCompat.postponeEnterTransition(this)
+        toolbar.setBackgroundColor(surfaceColor())
+
         addMusicServiceEventListener(detailsViewModel)
+
+        ActivityCompat.postponeEnterTransition(this)
         detailsViewModel.getArtist().observe(this, androidx.lifecycle.Observer {
             ActivityCompat.startPostponedEnterTransition(this@ArtistDetailActivity)
             artist(it)
@@ -150,18 +155,12 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         }
     }
 
-    fun complete() {
-        ActivityCompat.startPostponedEnterTransition(this)
-    }
-
     fun artist(artist: Artist) {
-        complete()
-        if (artist.songCount <= 0) {
+        if (artist.songs.isEmpty()) {
             finish()
         }
         this.artist = artist
-        loadArtistImage()
-
+        loadArtistImage(artist)
         if (RetroUtil.isAllowedToDownloadMetadata(this)) {
             loadBiography(artist.name)
         }
@@ -186,7 +185,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         songTitle.text = songText
         albumTitle.text = albumText
         songAdapter.swapDataSet(artist.songs)
-        albumAdapter.swapDataSet(artist.albums!!)
+        artist.albums?.let { albumAdapter.swapDataSet(it) }
     }
 
     private fun loadBiography(
@@ -198,7 +197,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         detailsViewModel.loadBiography(name, lang, null)
     }
 
-    fun artistInfo(lastFmArtist: LastFmArtist?) {
+    private fun artistInfo(lastFmArtist: LastFmArtist?) {
         if (lastFmArtist != null && lastFmArtist.artist != null) {
             val bioContent = lastFmArtist.artist.bio.content
             if (bioContent != null && bioContent.trim { it <= ' ' }.isNotEmpty()) {
@@ -211,7 +210,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
                     listenersLabel.show()
                     scrobbles.show()
                     scrobblesLabel.show()
-
                     listeners.text =
                         RetroUtil.formatValue(lastFmArtist.artist.stats.listeners.toFloat())
                     scrobbles.text =
@@ -228,8 +226,9 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
 
     private var lang: String? = null
 
-    private fun loadArtistImage() {
-        ArtistGlideRequest.Builder.from(Glide.with(this), artist).generatePalette(this).build()
+    private fun loadArtistImage(artist: Artist) {
+        ArtistGlideRequest.Builder.from(Glide.with(this), artist)
+            .generatePalette(this).build()
             .dontAnimate().into(object : RetroMusicColoredTarget(image) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors)
@@ -238,16 +237,16 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
     }
 
     private fun setColors(color: MediaNotificationProcessor) {
-        val buttonColor = if (PreferenceUtil.isAdaptiveColor)
-            color.backgroundColor.ripAlpha()
-        else
-            ATHUtil.resolveColor(this, R.attr.colorSurface)
-
-        MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
-        MaterialUtil.setTint(button = playAction, color = buttonColor)
-
-
-        toolbar.setBackgroundColor(surfaceColor())
+        MaterialUtil.tintColor(
+            button = shuffleAction,
+            textColor = color.primaryTextColor,
+            backgroundColor = color.backgroundColor
+        )
+        MaterialUtil.tintColor(
+            button = playAction,
+            textColor = color.primaryTextColor,
+            backgroundColor = color.backgroundColor
+        )
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
     }

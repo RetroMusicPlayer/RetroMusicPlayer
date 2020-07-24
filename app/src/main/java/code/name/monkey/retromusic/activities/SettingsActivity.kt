@@ -10,7 +10,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.extensions.applyToolbar
-import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
 import com.afollestad.materialdialogs.color.ColorChooserDialog
 import kotlinx.android.synthetic.main.activity_settings.*
 
@@ -26,11 +25,6 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
         setupToolbar()
-
-        if (savedInstanceState == null) {
-            fragmentManager.beginTransaction().replace(R.id.contentFrame, MainSettingsFragment())
-                .commit()
-        }
     }
 
     private fun setupToolbar() {

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/retro_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="code.name.monkey.retromusic.fragments.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/albumsFragment"
+        android:name="code.name.monkey.retromusic.fragments.albums.AlbumsFragment"
+        android:label="AlbumsFragment" />
+    <fragment
+        android:id="@+id/artistsFragment"
+        android:name="code.name.monkey.retromusic.fragments.artists.ArtistsFragment"
+        android:label="ArtistsFragment" />
+    <fragment
+        android:id="@+id/songsFragment"
+        android:name="code.name.monkey.retromusic.fragments.songs.SongsFragment"
+        android:label="SongsFragment" />
+    <fragment
+        android:id="@+id/genresFragment"
+        android:name="code.name.monkey.retromusic.fragments.genres.GenresFragment"
+        android:label="GenresFragment" />
+    <fragment
+        android:id="@+id/playlistsFragment"
+        android:name="code.name.monkey.retromusic.fragments.playlists.PlaylistsFragment"
+        android:label="PlaylistsFragment" />
+</navigation>

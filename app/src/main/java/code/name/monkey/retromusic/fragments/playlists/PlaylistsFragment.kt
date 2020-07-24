@@ -18,7 +18,7 @@ class PlaylistsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allPlaylisits()
+        mainActivity.libraryViewModel.allPlaylisits
             .observe(viewLifecycleOwner, Observer { playlists ->
                 if (playlists.isNotEmpty()) {
                     adapter?.swapDataSet(playlists)

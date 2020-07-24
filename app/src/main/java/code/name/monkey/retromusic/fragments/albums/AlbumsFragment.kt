@@ -17,7 +17,7 @@ class AlbumsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allAlbums()
+        mainActivity.libraryViewModel.allAlbums
             .observe(viewLifecycleOwner, Observer { albums ->
                 if (albums.isNotEmpty())
                     adapter?.swapDataSet(albums)

@@ -112,7 +112,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             adapter = homeAdapter
         }
 
-        mainActivity.libraryViewModel.homeSections()
+        mainActivity.libraryViewModel.homeSections
             .observe(viewLifecycleOwner, Observer { sections ->
                 homeAdapter.swapData(sections)
             })

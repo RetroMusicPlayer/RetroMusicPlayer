@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.fragments.songs
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
@@ -17,8 +18,8 @@ class SongsFragment :
     MainActivityFragmentCallbacks {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allSongs()
-            .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        mainActivity.libraryViewModel.allSongs
+            .observe(viewLifecycleOwner, Observer {
                 if (it.isNotEmpty()) {
                     adapter?.swapDataSet(it)
                 } else {
@@ -73,7 +74,7 @@ class SongsFragment :
     override fun setGridSize(gridSize: Int) {
         adapter?.notifyDataSetChanged()
     }
- 
+
     override fun loadSortOrder(): String {
         return PreferenceUtil.songSortOrder
     }

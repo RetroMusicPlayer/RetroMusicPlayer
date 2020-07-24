@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.adapter.album
 import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.content.res.Resources
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -106,10 +105,6 @@ open class AlbumAdapter(
             .generatePalette(activity)
             .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    super.onLoadCleared(placeholder)
-                    //setColors(defaultFooterColor, holder)
-                }
 
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)

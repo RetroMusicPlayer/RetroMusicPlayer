@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/now_playing"
+    app:startDestination="@id/mainPlayerFragment">
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.normal.PlayerFragment"
+        android:label="PlayerFragment" />
+    <fragment
+        android:id="@+id/adaptiveFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.adaptive.AdaptiveFragment"
+        android:label="AdaptiveFragment" />
+    <fragment
+        android:id="@+id/blurPlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment"
+        android:label="BlurPlayerFragment" />
+    <fragment
+        android:id="@+id/cardBlurFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.cardblur.CardBlurFragment"
+        android:label="CardBlurFragment" />
+    <fragment
+        android:id="@+id/cardFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.card.CardFragment"
+        android:label="CardFragment" />
+    <fragment
+        android:id="@+id/circlePlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.circle.CirclePlayerFragment"
+        android:label="CirclePlayerFragment" />
+    <fragment
+        android:id="@+id/classicPlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerFragment"
+        android:label="ClassicPlayerFragment" />
+    <fragment
+        android:id="@+id/colorFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.color.ColorFragment"
+        android:label="ColorFragment" />
+    <fragment
+        android:id="@+id/fitFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.fit.FitFragment"
+        android:label="FitFragment" />
+    <fragment
+        android:id="@+id/flatPlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment"
+        android:label="FlatPlayerFragment" />
+    <fragment
+        android:id="@+id/fullPlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.full.FullPlayerFragment"
+        android:label="FullPlayerFragment" />
+    <fragment
+        android:id="@+id/gradientPlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.gradient.GradientPlayerFragment"
+        android:label="GradientPlayerFragment" />
+    <fragment
+        android:id="@+id/materialFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.material.MaterialFragment"
+        android:label="MaterialFragment" />
+
+    <fragment
+        android:id="@+id/peakPlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.peak.PeakPlayerFragment"
+        android:label="PeakPlayerFragment" />
+    <fragment
+        android:id="@+id/plainPlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment"
+        android:label="PlainPlayerFragment" />
+    <fragment
+        android:id="@+id/simplePlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment"
+        android:label="SimplePlayerFragment" />
+    <fragment
+        android:id="@+id/tinyPlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment"
+        android:label="TinyPlayerFragment" />
+    <fragment
+        android:id="@+id/mainPlayerFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.MainPlayerFragment"
+        android:label="MainPlayerFragment">
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_adaptiveFragment"
+            app:destination="@id/adaptiveFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_cardBlurFragment"
+            app:destination="@id/cardBlurFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_circlePlayerFragment"
+            app:destination="@id/circlePlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_blurPlayerFragment"
+            app:destination="@id/blurPlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_classicPlayerFragment"
+            app:destination="@id/classicPlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_plainPlayerFragment"
+            app:destination="@id/plainPlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_flatPlayerFragment"
+            app:destination="@id/flatPlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_gradientPlayerFragment"
+            app:destination="@id/gradientPlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_cardFragment"
+            app:destination="@id/cardFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_fitFragment"
+            app:destination="@id/fitFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_simplePlayerFragment"
+            app:destination="@id/simplePlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_fullPlayerFragment"
+            app:destination="@id/fullPlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_colorFragment"
+            app:destination="@id/colorFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_peakPlayerFragment"
+            app:destination="@id/peakPlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_tinyPlayerFragment"
+            app:destination="@id/tinyPlayerFragment" />
+        <action
+            android:id="@+id/action_mainPlayerFragment_to_materialFragment"
+            app:destination="@id/materialFragment" />
+        <action
+            android:id="@+id/action_mainPlayer_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
+</navigation>
