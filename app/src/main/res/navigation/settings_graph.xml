@@ -55,6 +55,10 @@
             app:exitAnim="@anim/retro_fragment_open_exit"
             app:popEnterAnim="@anim/retro_fragment_close_enter"
             app:popExitAnim="@anim/retro_fragment_close_exit" />
+
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_aboutActivity"
+            app:destination="@id/aboutActivity" />
     </fragment>
 
     <fragment
@@ -85,4 +89,10 @@
         android:id="@+id/themeSettingsFragment"
         android:name="code.name.monkey.retromusic.fragments.settings.ThemeSettingsFragment"
         android:label="ThemeSettingsFragment" />
+
+    <activity
+        android:id="@+id/aboutActivity"
+        android:name="code.name.monkey.retromusic.activities.AboutActivity"
+        android:label="AboutActivity" />
+
 </navigation>
