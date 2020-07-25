@@ -24,6 +24,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
 import code.name.monkey.retromusic.glide.UserProfileGlideRequest
@@ -39,9 +40,12 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks {
+
     private lateinit var homeAdapter: HomeAdapter
+    private val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -112,7 +116,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             adapter = homeAdapter
         }
 
-        mainActivity.libraryViewModel.homeSections
+        libraryViewModel.homeSections
             .observe(viewLifecycleOwner, Observer { sections ->
                 homeAdapter.swapData(sections)
             })

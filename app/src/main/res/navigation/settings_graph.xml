@@ -47,6 +47,10 @@
             app:popExitAnim="@anim/retro_fragment_close_exit" />
         <action
             android:id="@+id/action_mainSettingsFragment_to_personalizeSettingsFragment"
+            app:enterAnim="@anim/retro_fragment_open_enter"
+            app:exitAnim="@anim/retro_fragment_open_exit"
+            app:popEnterAnim="@anim/retro_fragment_close_enter"
+            app:popExitAnim="@anim/retro_fragment_close_exit"
             app:destination="@id/personalizeSettingsFragment" />
         <action
             android:id="@+id/action_mainSettingsFragment_to_notificationSettingsFragment"

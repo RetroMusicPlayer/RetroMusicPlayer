@@ -8,24 +8,28 @@ import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class SongsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
+
+    private val libraryViewModel: LibraryViewModel by sharedViewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allSongs
-            .observe(viewLifecycleOwner, Observer {
-                if (it.isNotEmpty()) {
-                    adapter?.swapDataSet(it)
-                } else {
-                    adapter?.swapDataSet(listOf())
-                }
-            })
+        libraryViewModel.allSongs.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty()) {
+                adapter?.swapDataSet(it)
+            } else {
+                adapter?.swapDataSet(listOf())
+            }
+        })
     }
 
     override val emptyMessage: Int
@@ -93,7 +97,7 @@ class SongsFragment :
     }
 
     override fun setSortOrder(sortOrder: String) {
-        mainActivity.libraryViewModel.forceReload(ReloadType.Songs)
+        libraryViewModel.forceReload(ReloadType.Songs)
     }
 
     companion object {

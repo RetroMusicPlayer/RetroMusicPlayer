@@ -6,17 +6,22 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class ArtistsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
+
+    private val libraryViewModel: LibraryViewModel by sharedViewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allArtists
+        libraryViewModel.allArtists
             .observe(viewLifecycleOwner, Observer { artists ->
                 if (artists.isNotEmpty()) {
                     adapter?.swapDataSet(artists)
@@ -34,7 +39,7 @@ class ArtistsFragment :
         get() = R.string.no_artists
 
     override fun setSortOrder(sortOrder: String) {
-        mainActivity.libraryViewModel.forceReload(ReloadType.Artists)
+         libraryViewModel.forceReload(ReloadType.Artists)
     }
 
     override fun createLayoutManager(): GridLayoutManager {

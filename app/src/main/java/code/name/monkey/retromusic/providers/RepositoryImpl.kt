@@ -32,18 +32,18 @@ class RepositoryImpl(
 
     override suspend fun allAlbums(): List<Album> = AlbumLoader.getAllAlbums(context)
 
+    override suspend fun albumById(albumId: Int): Album = AlbumLoader.getAlbum(context, albumId)
+
     override suspend fun allArtists(): List<Artist> = ArtistLoader.getAllArtists(context)
+
+    override suspend fun artistById(artistId: Int): Artist =
+        ArtistLoader.getArtist(context, artistId)
 
     override suspend fun allPlaylists(): List<Playlist> = PlaylistLoader.getAllPlaylists(context)
 
     override suspend fun allGenres(): List<Genre> = GenreLoader.getAllGenres(context)
 
     override suspend fun allSongs(): List<Song> = SongLoader.getAllSongs(context)
-
-    override suspend fun albumById(albumId: Int): Album = AlbumLoader.getAlbum(context, albumId)
-
-    override suspend fun artistById(artistId: Int): Artist =
-        ArtistLoader.getArtist(context, artistId)
 
     override suspend fun suggestions(): Home? {
         val songs = NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().apply {
@@ -54,6 +54,23 @@ class RepositoryImpl(
                 songs,
                 HomeAdapter.SUGGESTIONS,
                 R.drawable.ic_audiotrack
+            )
+        }
+        return null
+    }
+
+    override suspend fun homeGenres(): Home? {
+        val genres =
+            GenreLoader.getAllGenres(context)
+                .shuffled()
+                .take(10)
+                .filter { it.name.length > 4 }
+
+        if (genres.isNotEmpty()) {
+            return Home(
+                genres,
+                HomeAdapter.GENRES,
+                R.drawable.ic_guitar
             )
         }
         return null

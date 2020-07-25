@@ -6,18 +6,22 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class AlbumsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
 
+    private val libraryViewModel: LibraryViewModel by sharedViewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allAlbums
+        libraryViewModel.allAlbums
             .observe(viewLifecycleOwner, Observer { albums ->
                 if (albums.isNotEmpty())
                     adapter?.swapDataSet(albums)
@@ -73,7 +77,7 @@ class AlbumsFragment :
     }
 
     override fun setSortOrder(sortOrder: String) {
-        mainActivity.libraryViewModel.forceReload(ReloadType.Albums)
+        libraryViewModel.forceReload(ReloadType.Albums)
     }
 
     override fun loadLayoutRes(): Int {

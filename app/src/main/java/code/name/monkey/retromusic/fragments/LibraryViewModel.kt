@@ -57,7 +57,8 @@ class LibraryViewModel(
             repository.recentArtists(),
             repository.recentAlbums(),
             repository.suggestions(),
-            repository.favoritePlaylist()
+            repository.favoritePlaylist(),
+            repository.homeGenres()
         )
         result.forEach {
             if (it != null && it.arrayList.isNotEmpty()) {

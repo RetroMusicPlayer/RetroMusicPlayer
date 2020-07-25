@@ -8,11 +8,20 @@ import code.name.monkey.retromusic.activities.search.SearchViewModel
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Playlist
-import org.koin.android.viewmodel.dsl.viewModel
+import code.name.monkey.retromusic.network.networkModule
+import code.name.monkey.retromusic.providers.RepositoryImpl
+import org.eclipse.egit.github.core.Repository
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
+private val dataModule = module {
+    single {
+        RepositoryImpl(get(), get())
+    } bind Repository::class
+}
 
-val mainModule = module {
+private val viewModules = module {
 
     viewModel {
         LibraryViewModel(get())
@@ -38,3 +47,5 @@ val mainModule = module {
         SearchViewModel(get())
     }
 }
+
+val appModules = listOf(dataModule, viewModules, networkModule)

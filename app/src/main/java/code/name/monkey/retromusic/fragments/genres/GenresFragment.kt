@@ -20,15 +20,19 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.GenreAdapter
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     MainActivityFragmentCallbacks {
 
+    private val libraryViewModel: LibraryViewModel by sharedViewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allGenres
+        libraryViewModel.allGenres
             .observe(viewLifecycleOwner, Observer { genres ->
                 if (genres.isNotEmpty()) {
                     adapter?.swapDataSet(genres)

@@ -74,7 +74,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         const val APP_UPDATE_REQUEST_CODE = 9002
     }
 
-    val libraryViewModel: LibraryViewModel by inject()
+    private val libraryViewModel: LibraryViewModel by inject()
     private var cab: MaterialCab? = null
     private val intentFilter = IntentFilter(Intent.ACTION_SCREEN_OFF)
     private lateinit var currentFragment: MainActivityFragmentCallbacks
@@ -621,8 +621,13 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         fragment: Fragment,
         tag: String
     ) {
-
         supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.retro_fragment_open_enter,
+                R.anim.retro_fragment_open_exit,
+                R.anim.retro_fragment_fade_enter,
+                R.anim.retro_fragment_fade_exit
+            )
             replace(R.id.fragment_container, fragment, tag)
         }
         currentFragment = fragment as MainActivityFragmentCallbacks
