@@ -63,16 +63,14 @@ object PreferenceUtil {
         }
 
     fun registerOnSharedPreferenceChangedListener(
-        changeListener: OnSharedPreferenceChangeListener
-    ) {
-        sharedPreferences.registerOnSharedPreferenceChangeListener(changeListener)
-    }
+        listener: OnSharedPreferenceChangeListener
+    ) = sharedPreferences.registerOnSharedPreferenceChangeListener(listener)
+
 
     fun unregisterOnSharedPreferenceChangedListener(
         changeListener: OnSharedPreferenceChangeListener
-    ) {
-        sharedPreferences.unregisterOnSharedPreferenceChangeListener(changeListener)
-    }
+    ) = sharedPreferences.unregisterOnSharedPreferenceChangeListener(changeListener)
+
 
     val baseTheme get() = sharedPreferences.getStringOrDefault(GENERAL_THEME, "auto")
 

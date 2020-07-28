@@ -271,7 +271,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.backgroundColor)
 
         lastPlaybackControlsColor = color.primaryTextColor
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)

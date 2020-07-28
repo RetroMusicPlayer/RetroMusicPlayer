@@ -57,9 +57,9 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
+        libraryViewModel.updateColor(color.backgroundColor)
         toolbarColor = color.secondaryTextColor
         controlsFragment.setColor(color)
-        callbacks?.onPaletteColorChanged()
 
         title.setTextColor(color.primaryTextColor)
         playerSongTotalTime.setTextColor(color.primaryTextColor)

@@ -23,8 +23,6 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
 
@@ -65,7 +63,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
-        listView.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+        //listView.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
         listView.overScrollMode = View.OVER_SCROLL_NEVER
         listView.setPadding(0, 0, 0, 0)
         listView.setPaddingRelative(0, 0, 0, 0)

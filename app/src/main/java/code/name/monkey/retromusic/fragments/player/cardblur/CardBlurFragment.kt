@@ -54,7 +54,7 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
     override fun onColorChanged(color: MediaNotificationProcessor) {
         playbackControlsFragment.setColor(color)
         lastColor = color.backgroundColor
-        callbacks!!.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.backgroundColor)
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
 
         playerToolbar.setTitleTextColor(Color.WHITE)

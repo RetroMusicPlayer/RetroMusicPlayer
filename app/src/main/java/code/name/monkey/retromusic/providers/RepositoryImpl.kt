@@ -63,8 +63,7 @@ class RepositoryImpl(
         val genres =
             GenreLoader.getAllGenres(context)
                 .shuffled()
-                .take(10)
-                .filter { it.name.length > 4 }
+                .filter { it.name.length in 5..10 }
 
         if (genres.isNotEmpty()) {
             return Home(

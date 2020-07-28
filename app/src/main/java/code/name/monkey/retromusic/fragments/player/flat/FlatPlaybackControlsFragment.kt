@@ -86,14 +86,14 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
     override fun setColor(color: MediaNotificationProcessor) {
         if (ATHUtil.isWindowBackgroundDark(requireContext())) {
             lastPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+                MaterialValueHelper.getSecondaryTextColor(requireContext(), false)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
+                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), false)
         } else {
             lastPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+                MaterialValueHelper.getPrimaryTextColor(requireContext(), true)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
+                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), true)
         }
 
         val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
@@ -116,8 +116,8 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
         val colorSecondary =
             MaterialValueHelper.getSecondaryTextColor(context, ColorUtil.isColorLight(darkColor))
 
-        TintHelper.setTintAuto(playPauseButton!!, colorPrimary, false)
-        TintHelper.setTintAuto(playPauseButton!!, color, true)
+        TintHelper.setTintAuto(playPauseButton, colorPrimary, false)
+        TintHelper.setTintAuto(playPauseButton, color, true)
 
         title.setBackgroundColor(color)
         title.setTextColor(colorPrimary)

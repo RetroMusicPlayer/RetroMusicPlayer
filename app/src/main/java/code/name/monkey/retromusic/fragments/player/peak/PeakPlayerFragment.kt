@@ -102,7 +102,7 @@ class PeakPlayerFragment : AbsPlayerFragment() {
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.primaryTextColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.primaryTextColor)
         controlsFragment.setColor(color)
     }
 

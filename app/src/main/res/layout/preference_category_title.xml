@@ -24,6 +24,7 @@
         android:paddingStart="@dimen/pref_title_padding"
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
         android:textAppearance="@style/TextViewOverline"
         tools:text="@tools:sample/full_names" />
 </LinearLayout>

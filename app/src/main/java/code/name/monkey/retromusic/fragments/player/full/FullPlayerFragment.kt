@@ -202,7 +202,7 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         lastColor = color.backgroundColor
         mask.backgroundTintList = ColorStateList.valueOf(color.backgroundColor)
         controlsFragment.setColor(color)
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.backgroundColor)
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
     }
 

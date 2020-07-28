@@ -84,7 +84,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             FileUtil.fileIsMimeType(file, "audio/*", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/opus", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/ogg", MimeTypeMap.getSingleton()));
-    private static final String PATH = "path";
+    public static final String PATH = "path";
     private static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = 5;
     private SongFileAdapter adapter;
@@ -170,8 +170,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         if (savedInstanceState == null) {
             //noinspection ConstantConditions
-            setCrumb(new BreadCrumbLayout.Crumb(
-                    FileUtil.safeGetCanonicalFile((File) getArguments().getSerializable(PATH))), true);
+            setCrumb(new BreadCrumbLayout.Crumb(FileUtil.safeGetCanonicalFile((File) requireArguments().getSerializable(PATH))), true);
         } else {
             breadCrumbs.restoreFromStateWrapper(savedInstanceState.getParcelable(CRUMBS));
             getLoaderManager().initLoader(LOADER_ID, null, this);

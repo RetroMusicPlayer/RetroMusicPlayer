@@ -201,7 +201,7 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.backgroundColor)
         mask.backgroundTintList = ColorStateList.valueOf(color.backgroundColor)
         colorBackground.setBackgroundColor(color.backgroundColor)
         playerQueueSheet.setBackgroundColor(ColorUtil.darkenColor(color.backgroundColor))

@@ -40,7 +40,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks {
 
@@ -116,7 +116,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             adapter = homeAdapter
         }
 
-        libraryViewModel.homeSections
+        libraryViewModel.homeLiveData
             .observe(viewLifecycleOwner, Observer { sections ->
                 homeAdapter.swapData(sections)
             })

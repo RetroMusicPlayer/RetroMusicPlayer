@@ -50,7 +50,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
         val metrics = resources.displayMetrics
         val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
 
-        if (nps == Full || nps == Classic || nps == Fit || nps == Gradient || nps == Peak) {
+        if (nps == Full || nps == Classic || nps == Fit || nps == Gradient  ) {
             viewPager.offscreenPageLimit = 2
         } else if (PreferenceUtil.isCarouselEffect) {
             viewPager.clipToPadding = false

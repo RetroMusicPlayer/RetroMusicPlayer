@@ -96,7 +96,7 @@ class AdaptiveFragment : AbsPlayerFragment() {
     override fun onColorChanged(color: MediaNotificationProcessor) {
         playbackControlsFragment.setColor(color)
         lastColor = color.primaryTextColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.primaryTextColor)
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),

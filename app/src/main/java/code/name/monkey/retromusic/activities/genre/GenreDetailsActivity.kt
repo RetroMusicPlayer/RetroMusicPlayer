@@ -21,7 +21,7 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.MaterialCab
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
 

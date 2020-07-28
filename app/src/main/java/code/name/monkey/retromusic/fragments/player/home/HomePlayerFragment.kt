@@ -93,7 +93,7 @@ class HomePlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.backgroundColor)
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
             Color.WHITE,

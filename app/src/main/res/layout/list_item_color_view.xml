@@ -12,41 +12,46 @@
   ~ See the GNU General Public License for more details.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/rectSelector"
-    android:minHeight="?attr/listPreferredItemHeight"
-    android:paddingStart="?attr/listPreferredItemPaddingStart"
-    android:paddingTop="16dp"
-    android:paddingEnd="?attr/listPreferredItemPaddingEnd"
-    android:paddingBottom="16dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    tools:ignore="PrivateResource">
+    app:cardCornerRadius="0dp">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@android:id/icon"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/rectSelector"
+        android:minHeight="?attr/listPreferredItemHeight"
+        android:paddingStart="?attr/listPreferredItemPaddingStart"
+        android:paddingTop="16dp"
+        android:paddingEnd="?attr/listPreferredItemPaddingEnd"
+        android:paddingBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="?attr/colorControlNormal"
-        tools:srcCompat="@drawable/ic_telegram_white" />
+        tools:ignore="PrivateResource">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@android:id/title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextViewSubtitle1"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintEnd_toStartOf="@id/circle"
-        app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:maxLines="@string/grid_size_1"
-        tools:text="@tools:sample/lorem" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@android:id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorControlNormal"
+            tools:srcCompat="@drawable/ic_telegram_white" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@android:id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextViewSubtitle1"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/circle"
+            app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:maxLines="@string/grid_size_1"
+            tools:text="@tools:sample/lorem" />
 
     <code.name.monkey.retromusic.views.BaselineGridTextView
         android:id="@android:id/summary"
@@ -62,19 +67,20 @@
         tools:maxLines="2"
         tools:text="@tools:sample/lorem/random" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_front_margin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/list_pref_guideline_begin" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_front_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/list_pref_guideline_begin" />
 
-    <code.name.monkey.appthemehelper.common.prefs.BorderCircleView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/circle"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <code.name.monkey.appthemehelper.common.prefs.BorderCircleView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/circle"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

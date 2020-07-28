@@ -41,7 +41,7 @@ import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
 import android.util.Pair as UtilPair
@@ -66,7 +66,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         return cab as MaterialCab
     }
 
-    private val detailsViewModel: AlbumDetailsViewModel by viewModel {
+    private val detailsViewModel by viewModel<AlbumDetailsViewModel> {
         parametersOf(extraNotNull<Int>(EXTRA_ALBUM_ID).value)
     }
     private lateinit var simpleSongAdapter: SimpleSongAdapter

@@ -52,7 +52,7 @@ class MaterialFragment : AbsPlayerFragment() {
     override fun onColorChanged(color: MediaNotificationProcessor) {
         playbackControlsFragment.setColor(color)
         lastColor = color.backgroundColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.backgroundColor)
 
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,

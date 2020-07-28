@@ -116,7 +116,7 @@ class AlbumCoverPagerAdapter(
 
         private fun getLayoutWithPlayerTheme(): Int {
             return when (PreferenceUtil.nowPlayingScreen) {
-                Card, Peak, Fit, Tiny, Classic, Gradient, Full -> R.layout.fragment_album_full_cover
+                Card, Fit, Tiny, Classic, Gradient, Full -> R.layout.fragment_album_full_cover
                 else -> {
                     if (PreferenceUtil.isCarouselEffect) {
                         R.layout.fragment_album_carousel_cover

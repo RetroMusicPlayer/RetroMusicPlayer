@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -16,6 +19,8 @@ import kotlinx.android.synthetic.main.activity_settings.*
 class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
 
     private val fragmentManager = supportFragmentManager
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
@@ -30,6 +35,19 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
     private fun setupToolbar() {
         setTitle(R.string.action_settings)
         applyToolbar(toolbar)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.contentFrame) as NavHostFragment
+        val navController: NavController = navHostFragment.navController
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            toolbar.title = navController.currentDestination?.label
+        }
+
+        //It removes the back button
+        //appBarConfiguration = AppBarConfiguration(navController.graph)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     fun setupFragment(fragment: Fragment, @StringRes titleName: Int) {

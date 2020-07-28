@@ -108,7 +108,7 @@ class FlatPlayerFragment : AbsPlayerFragment() {
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
         controlsFragment.setColor(color)
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.backgroundColor)
         val isLight = ColorUtil.isColorLight(color.backgroundColor)
         val iconColor = if (PreferenceUtil.isAdaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)

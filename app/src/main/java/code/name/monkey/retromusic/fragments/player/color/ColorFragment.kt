@@ -33,10 +33,11 @@ class ColorFragment : AbsPlayerFragment() {
         get() = navigationColor
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
+        libraryViewModel.updateColor(color.backgroundColor)
         lastColor = color.secondaryTextColor
         playbackControlsFragment.setColor(color)
         navigationColor = color.backgroundColor
-        callbacks?.onPaletteColorChanged()
+
         colorGradientBackground?.setBackgroundColor(color.backgroundColor)
         playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
         Handler().post {

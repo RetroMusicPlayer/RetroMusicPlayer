@@ -12,23 +12,22 @@ import android.view.SubMenu
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+import androidx.navigation.NavOptions
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog.Companion.create
-import code.name.monkey.retromusic.fragments.LibraryViewModel
+import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
+import code.name.monkey.retromusic.extensions.navController
 import code.name.monkey.retromusic.fragments.albums.AlbumsFragment
 import code.name.monkey.retromusic.fragments.artists.ArtistsFragment
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment
-import code.name.monkey.retromusic.fragments.genres.GenresFragment
+import code.name.monkey.retromusic.fragments.folder.FoldersFragment.PATH
 import code.name.monkey.retromusic.fragments.home.BannerHomeFragment
 import code.name.monkey.retromusic.fragments.playlists.PlaylistsFragment
-import code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment
 import code.name.monkey.retromusic.fragments.songs.SongsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.isPlaying
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openAndShuffleQueue
@@ -38,7 +37,6 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote.shuffleMode
 import code.name.monkey.retromusic.helper.SearchQueryHelper.getSongs
 import code.name.monkey.retromusic.helper.SortOrder.*
 import code.name.monkey.retromusic.interfaces.CabHolder
-import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.loaders.AlbumLoader.getAlbum
 import code.name.monkey.retromusic.loaders.ArtistLoader.getArtist
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader.getPlaylistSongList
@@ -63,7 +61,6 @@ import com.google.android.play.core.install.model.InstallStatus.INSTALLED
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
 import kotlinx.android.synthetic.main.activity_main_content.*
-import org.koin.android.ext.android.inject
 import java.util.*
 
 class MainActivity : AbsSlidingMusicPanelActivity(),
@@ -74,10 +71,8 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         const val APP_UPDATE_REQUEST_CODE = 9002
     }
 
-    private val libraryViewModel: LibraryViewModel by inject()
     private var cab: MaterialCab? = null
     private val intentFilter = IntentFilter(Intent.ACTION_SCREEN_OFF)
-    private lateinit var currentFragment: MainActivityFragmentCallbacks
     private var appUpdateManager: AppUpdateManager? = null
     private var blockRequestPermissions = false
     private val listener = object : InstallStateUpdatedListener {
@@ -123,22 +118,33 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         hideStatusBar()
         setBottomBarVisibility(View.VISIBLE)
 
-        addMusicServiceEventListener(libraryViewModel)
-        if (savedInstanceState == null) {
-            selectedFragment(PreferenceUtil.lastPage)
-        } else {
-            restoreCurrentFragment()
-        }
-
         appLaunched(this)
         setupToolbar()
         checkUpdate()
         updateTabs()
-        getBottomNavigationView().selectedItemId = PreferenceUtil.lastPage
+
+        val navController = navController(R.id.fragment_container)
+        val navOptions: NavOptions = NavOptions.Builder()
+            .setLaunchSingleTop(true)
+            .setEnterAnim(R.anim.retro_fragment_open_enter)
+            .setExitAnim(R.anim.retro_fragment_open_exit)
+            .setPopEnterAnim(R.anim.retro_fragment_close_enter)
+            .setPopExitAnim(R.anim.retro_fragment_close_exit)
+            .setPopUpTo(navController.graph.startDestination, false)
+            .build()
         getBottomNavigationView().setOnNavigationItemSelectedListener {
-            PreferenceUtil.lastPage = it.itemId
-            selectedFragment(it.itemId)
-            true
+            var handled = false
+            when (it.itemId) {
+                R.id.action_folder -> navController.navigate(it.itemId, Bundle().apply {
+                    putSerializable(PATH, PreferenceUtil.startDirectory)
+                }, navOptions)
+                else -> if (navController.graph.findNode(it.itemId) != null) {
+                    navController.navigate(it.itemId, null, navOptions)
+                    handled = true;
+                }
+            }
+            return@setOnNavigationItemSelectedListener handled
+
         }
     }
 
@@ -161,7 +167,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
                 }
                 try {
                     if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                        appUpdateManager!!.startUpdateFlowForResult(
+                        appUpdateManager?.startUpdateFlowForResult(
                             appUpdateInfo,
                             AppUpdateType.IMMEDIATE,
                             this,
@@ -238,20 +244,14 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val fragment = getCurrentFragment()
         if (fragment is AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>) {
-            if (handleGridSizeMenuItem(fragment, item)) {
-                return true
-            }
-            if (handleLayoutResType(fragment, item)) {
-                return true
-            }
-            if (handleSortOrderMenuItem(fragment, item)) {
-                return true
-            }
+            if (handleGridSizeMenuItem(fragment, item)) return true
+            if (handleLayoutResType(fragment, item)) return true
+            if (handleSortOrderMenuItem(fragment, item)) return true
         }
         when (item.itemId) {
             R.id.action_search -> NavigationUtil.goToSearch(this)
             R.id.action_new_playlist -> {
-                create().show(supportFragmentManager, "CREATE_PLAYLIST")
+                CreatePlaylistDialog.create().show(supportFragmentManager, "CREATE_PLAYLIST")
                 return true
             }
             R.id.action_mic -> {
@@ -276,32 +276,26 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     ): Boolean {
         var sortOrder: String? = null
         when (fragment) {
-            is AlbumsFragment -> {
-                when (item.itemId) {
-                    R.id.action_album_sort_order_asc -> sortOrder = AlbumSortOrder.ALBUM_A_Z
-                    R.id.action_album_sort_order_desc -> sortOrder = AlbumSortOrder.ALBUM_Z_A
-                    R.id.action_album_sort_order_artist -> sortOrder = AlbumSortOrder.ALBUM_ARTIST
-                    R.id.action_album_sort_order_year -> sortOrder = AlbumSortOrder.ALBUM_YEAR
-                }
+            is AlbumsFragment -> when (item.itemId) {
+                R.id.action_album_sort_order_asc -> sortOrder = AlbumSortOrder.ALBUM_A_Z
+                R.id.action_album_sort_order_desc -> sortOrder = AlbumSortOrder.ALBUM_Z_A
+                R.id.action_album_sort_order_artist -> sortOrder = AlbumSortOrder.ALBUM_ARTIST
+                R.id.action_album_sort_order_year -> sortOrder = AlbumSortOrder.ALBUM_YEAR
             }
-            is ArtistsFragment -> {
-                when (item.itemId) {
-                    R.id.action_artist_sort_order_asc -> sortOrder = ArtistSortOrder.ARTIST_A_Z
-                    R.id.action_artist_sort_order_desc -> sortOrder = ArtistSortOrder.ARTIST_Z_A
-                }
+            is ArtistsFragment -> when (item.itemId) {
+                R.id.action_artist_sort_order_asc -> sortOrder = ArtistSortOrder.ARTIST_A_Z
+                R.id.action_artist_sort_order_desc -> sortOrder = ArtistSortOrder.ARTIST_Z_A
             }
-            is SongsFragment -> {
-                when (item.itemId) {
-                    R.id.action_song_sort_order_asc -> sortOrder = SongSortOrder.SONG_A_Z
-                    R.id.action_song_sort_order_desc -> sortOrder = SongSortOrder.SONG_Z_A
-                    R.id.action_song_sort_order_artist -> sortOrder = SongSortOrder.SONG_ARTIST
-                    R.id.action_song_sort_order_album -> sortOrder = SongSortOrder.SONG_ALBUM
-                    R.id.action_song_sort_order_year -> sortOrder = SongSortOrder.SONG_YEAR
-                    R.id.action_song_sort_order_date -> sortOrder = SongSortOrder.SONG_DATE
-                    R.id.action_song_sort_order_composer -> sortOrder = SongSortOrder.COMPOSER
-                    R.id.action_song_sort_order_date_modified ->
-                        sortOrder = SongSortOrder.SONG_DATE_MODIFIED
-                }
+            is SongsFragment -> when (item.itemId) {
+                R.id.action_song_sort_order_asc -> sortOrder = SongSortOrder.SONG_A_Z
+                R.id.action_song_sort_order_desc -> sortOrder = SongSortOrder.SONG_Z_A
+                R.id.action_song_sort_order_artist -> sortOrder = SongSortOrder.SONG_ARTIST
+                R.id.action_song_sort_order_album -> sortOrder = SongSortOrder.SONG_ALBUM
+                R.id.action_song_sort_order_year -> sortOrder = SongSortOrder.SONG_YEAR
+                R.id.action_song_sort_order_date -> sortOrder = SongSortOrder.SONG_DATE
+                R.id.action_song_sort_order_composer -> sortOrder = SongSortOrder.COMPOSER
+                R.id.action_song_sort_order_date_modified ->
+                    sortOrder = SongSortOrder.SONG_DATE_MODIFIED
             }
         }
 
@@ -617,70 +611,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         snackBar.show()
     }
 
-    private fun setCurrentFragment(
-        fragment: Fragment,
-        tag: String
-    ) {
-        supportFragmentManager.commit {
-            setCustomAnimations(
-                R.anim.retro_fragment_open_enter,
-                R.anim.retro_fragment_open_exit,
-                R.anim.retro_fragment_fade_enter,
-                R.anim.retro_fragment_fade_exit
-            )
-            replace(R.id.fragment_container, fragment, tag)
-        }
-        currentFragment = fragment as MainActivityFragmentCallbacks
-    }
-
-    private fun selectedFragment(itemId: Int) {
-        when (itemId) {
-            R.id.action_album -> setCurrentFragment(
-                AlbumsFragment.newInstance(),
-                AlbumsFragment.TAG
-            )
-            R.id.action_artist -> setCurrentFragment(
-                ArtistsFragment.newInstance(),
-                ArtistsFragment.TAG
-            )
-            R.id.action_playlist -> setCurrentFragment(
-                PlaylistsFragment.newInstance(),
-                PlaylistsFragment.TAG
-            )
-            R.id.action_genre -> setCurrentFragment(
-                GenresFragment.newInstance(),
-                GenresFragment.TAG
-            )
-            R.id.action_playing_queue -> setCurrentFragment(
-                PlayingQueueFragment.newInstance(),
-                PlayingQueueFragment.TAG
-            )
-            R.id.action_song -> setCurrentFragment(
-                SongsFragment.newInstance(),
-                SongsFragment.TAG
-            )
-            R.id.action_folder -> setCurrentFragment(
-                FoldersFragment.newInstance(this),
-                FoldersFragment.TAG
-            )
-            R.id.action_home -> setCurrentFragment(
-                BannerHomeFragment.newInstance(),
-                BannerHomeFragment.TAG
-            )
-            else -> setCurrentFragment(
-                BannerHomeFragment.newInstance(),
-                BannerHomeFragment.TAG
-            )
-        }
-    }
-
-    private fun restoreCurrentFragment() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-        if (fragment != null) {
-            currentFragment = fragment as MainActivityFragmentCallbacks
-        }
-    }
-
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == GENERAL_THEME || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES
         ) {
@@ -766,7 +696,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
             cab?.finish()
             return true
         }
-        return super.handleBackPress() || currentFragment.handleBackPress()
+        return super.handleBackPress()
     }
 
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {

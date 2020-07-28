@@ -22,7 +22,7 @@
     <FrameLayout
         android:id="@+id/slidingPanel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="?attr/colorSurface"
         app:behavior_hideable="false"
         app:behavior_peekHeight="0dp"
@@ -31,6 +31,7 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerFragmentContainer"
             android:layout_width="match_parent"
+            android:name="code.name.monkey.retromusic.fragments.player.NowPlayingPlayerFragment"
             android:layout_height="match_parent" />
 
         <androidx.fragment.app.FragmentContainerView

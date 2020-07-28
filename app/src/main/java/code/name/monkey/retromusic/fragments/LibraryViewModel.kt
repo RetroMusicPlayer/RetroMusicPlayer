@@ -18,21 +18,21 @@ class LibraryViewModel(
     private val repository: RepositoryImpl
 ) : ViewModel(), MusicServiceEventListener {
 
-    private val _albums = MutableLiveData<List<Album>>()
-    private val _songs = MutableLiveData<List<Song>>()
-    private val _artists = MutableLiveData<List<Artist>>()
-    private val _playlist = MutableLiveData<List<Playlist>>()
-    private val _genre = MutableLiveData<List<Genre>>()
-    private val _homeSections = MutableLiveData<List<Home>>()
-    private val _paletteColor = MutableLiveData<Int>()
+    private val albums = MutableLiveData<List<Album>>()
+    private val songs = MutableLiveData<List<Song>>()
+    private val artists = MutableLiveData<List<Artist>>()
+    private val playlists = MutableLiveData<List<Playlist>>()
+    private val genres = MutableLiveData<List<Genre>>()
+    private val home = MutableLiveData<List<Home>>()
+    private val paletteColor = MutableLiveData<Int>()
 
-    val paletteColor: LiveData<Int> = _paletteColor
-    val homeSections: LiveData<List<Home>> = _homeSections
-    val allAlbums: LiveData<List<Album>> = _albums
-    val allSongs: LiveData<List<Song>> = _songs
-    val allArtists: LiveData<List<Artist>> = _artists
-    val allPlaylisits: LiveData<List<Playlist>> = _playlist
-    val allGenres: LiveData<List<Genre>> = _genre
+    val paletteColorLiveData: LiveData<Int> = paletteColor
+    val homeLiveData: LiveData<List<Home>> = home
+    val albumsLiveData: LiveData<List<Album>> = albums
+    val songsLiveData: LiveData<List<Song>> = songs
+    val artistsLiveData: LiveData<List<Artist>> = artists
+    val playlisitsLiveData: LiveData<List<Playlist>> = playlists
+    val genresLiveData: LiveData<List<Genre>> = genres
 
     init {
         viewModelScope.launch {
@@ -41,11 +41,11 @@ class LibraryViewModel(
     }
 
     private fun loadLibraryContent() = viewModelScope.launch {
-        _songs.value = loadSongs.await()
-        _albums.value = loadAlbums.await()
-        _artists.value = loadArtists.await()
-        _playlist.value = loadPlaylists.await()
-        _genre.value = loadGenres.await()
+        songs.value = loadSongs.await()
+        albums.value = loadAlbums.await()
+        artists.value = loadArtists.await()
+        playlists.value = loadPlaylists.await()
+        genres.value = loadGenres.await()
         loadHomeSections()
     }
 
@@ -71,7 +71,7 @@ class LibraryViewModel(
                 }
             }
         }
-        _homeSections.value = list
+        home.value = list
     }
 
     private val loadSongs: Deferred<List<Song>>
@@ -101,11 +101,15 @@ class LibraryViewModel(
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
         when (reloadType) {
-            Songs -> _songs.value = loadSongs.await()
-            Albums -> _albums.value = loadAlbums.await()
-            Artists -> _artists.value = loadArtists.await()
-            HomeSections -> _songs.value = loadSongs.await()
+            Songs -> songs.value = loadSongs.await()
+            Albums -> albums.value = loadAlbums.await()
+            Artists -> artists.value = loadArtists.await()
+            HomeSections -> songs.value = loadSongs.await()
         }
+    }
+
+    fun updateColor(newColor: Int) {
+        paletteColor.postValue(newColor)
     }
 
     override fun onMediaStoreChanged() {
@@ -119,6 +123,7 @@ class LibraryViewModel(
     override fun onPlayStateChanged() {}
     override fun onRepeatModeChanged() {}
     override fun onShuffleModeChanged() {}
+
 }
 
 enum class ReloadType {

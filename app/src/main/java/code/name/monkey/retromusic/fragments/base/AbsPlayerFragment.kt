@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.fragments.base
 
 import android.annotation.SuppressLint
 import android.content.ContentUris
-import android.content.Context
 import android.content.Intent
 import android.media.MediaMetadataRetriever
 import android.os.AsyncTask
@@ -19,6 +18,7 @@ import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.*
 import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
@@ -33,27 +34,11 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
     PaletteColorHolder,
     PlayerAlbumCoverFragment.Callbacks {
 
-    var callbacks: Callbacks? = null
-        private set
+
     private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
     private var updateLyricsAsyncTask: AsyncTask<*, *, *>? = null
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
-
-    override fun onAttach(
-        context: Context
-    ) {
-        super.onAttach(context)
-        try {
-            callbacks = context as Callbacks?
-        } catch (e: ClassCastException) {
-            throw RuntimeException(context.javaClass.simpleName + " must implement " + Callbacks::class.java.simpleName)
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        callbacks = null
-    }
+    protected val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onMenuItemClick(
         item: MenuItem
