@@ -17,9 +17,7 @@ package code.name.monkey.retromusic.fragments.home
 import android.app.ActivityOptions
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.R
@@ -42,22 +40,15 @@ import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks {
+class BannerHomeFragment :
+    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home),
+    MainActivityFragmentCallbacks {
 
-    private lateinit var homeAdapter: HomeAdapter
-    private val libraryViewModel: LibraryViewModel by sharedViewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        viewGroup: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(
-            if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home,
-            viewGroup,
-            false
-        )
+    override fun handleBackPress(): Boolean {
+        return false
     }
+
+    private val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     private val displayMetrics: DisplayMetrics
         get() {
@@ -110,7 +101,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
         titleWelcome?.text = String.format("%s", PreferenceUtil.userName)
 
-        homeAdapter = HomeAdapter(mainActivity, displayMetrics)
+        val homeAdapter = HomeAdapter(mainActivity, displayMetrics)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
@@ -122,10 +113,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             })
 
         loadProfile()
-    }
-
-    override fun handleBackPress(): Boolean {
-        return false
     }
 
     private fun loadProfile() {

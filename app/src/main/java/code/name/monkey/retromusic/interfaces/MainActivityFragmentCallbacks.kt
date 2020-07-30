@@ -11,14 +11,11 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
-
 package code.name.monkey.retromusic.interfaces
 
 /**
  * Created by hemanths on 14/08/17.
  */
-
-interface MainActivityFragmentCallbacks {
-
+internal interface MainActivityFragmentCallbacks {
     fun handleBackPress(): Boolean
 }

@@ -106,6 +106,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private RecyclerView recyclerView;
 
     public FoldersFragment() {
+        super(R.layout.fragment_folder);
     }
 
     public static File getDefaultStartDirectory() {

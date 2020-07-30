@@ -1,9 +1,7 @@
 package code.name.monkey.retromusic.fragments.player
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter
@@ -13,13 +11,13 @@ import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
-
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_player_album_cover.*
 
 
-class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChangeListener {
+class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_player_album_cover),
+    ViewPager.OnPageChangeListener {
     private var callbacks: Callbacks? = null
     private var currentPosition: Int = 0
     private val colorReceiver = object : AlbumCoverFragment.ColorReceiver {
@@ -35,13 +33,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
         transformer.setSpeed(0.3f)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_player_album_cover, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewPager.addOnPageChangeListener(this)
@@ -50,7 +41,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
         val metrics = resources.displayMetrics
         val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
 
-        if (nps == Full || nps == Classic || nps == Fit || nps == Gradient  ) {
+        if (nps == Full || nps == Classic || nps == Fit || nps == Gradient) {
             viewPager.offscreenPageLimit = 2
         } else if (PreferenceUtil.isCarouselEffect) {
             viewPager.clipToPadding = false

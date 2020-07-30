@@ -1,25 +1,25 @@
 package code.name.monkey.retromusic.fragments.songs
 
 import android.os.Bundle
-import android.view.View
+import android.view.*
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
-import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SongsFragment :
-    AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
+    AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
 
-    private val libraryViewModel: LibraryViewModel by sharedViewModel()
+    override fun handleBackPress(): Boolean {
+        return false
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -110,8 +110,71 @@ class SongsFragment :
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        setUpGridSizeMenu(menu.findItem(R.id.action_grid_size).subMenu)
+    }
 
-    override fun handleBackPress(): Boolean {
+    private fun setUpGridSizeMenu(
+
+        gridSizeMenu: SubMenu
+    ) {
+        println(getGridSize())
+        when (getGridSize()) {
+            1 -> gridSizeMenu.findItem(R.id.action_grid_size_1).isChecked = true
+            2 -> gridSizeMenu.findItem(R.id.action_grid_size_2).isChecked = true
+            3 -> gridSizeMenu.findItem(R.id.action_grid_size_3).isChecked = true
+            4 -> gridSizeMenu.findItem(R.id.action_grid_size_4).isChecked = true
+            5 -> gridSizeMenu.findItem(R.id.action_grid_size_5).isChecked = true
+            6 -> gridSizeMenu.findItem(R.id.action_grid_size_6).isChecked = true
+            7 -> gridSizeMenu.findItem(R.id.action_grid_size_7).isChecked = true
+            8 -> gridSizeMenu.findItem(R.id.action_grid_size_8).isChecked = true
+        }
+        val maxGridSize = maxGridSize
+        if (maxGridSize < 8) {
+            gridSizeMenu.findItem(R.id.action_grid_size_8).isVisible = false
+        }
+        if (maxGridSize < 7) {
+            gridSizeMenu.findItem(R.id.action_grid_size_7).isVisible = false
+        }
+        if (maxGridSize < 6) {
+            gridSizeMenu.findItem(R.id.action_grid_size_6).isVisible = false
+        }
+        if (maxGridSize < 5) {
+            gridSizeMenu.findItem(R.id.action_grid_size_5).isVisible = false
+        }
+        if (maxGridSize < 4) {
+            gridSizeMenu.findItem(R.id.action_grid_size_4).isVisible = false
+        }
+        if (maxGridSize < 3) {
+            gridSizeMenu.findItem(R.id.action_grid_size_3).isVisible = false
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (handleGridSizeMenuItem(item)) return true
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun handleGridSizeMenuItem(
+        item: MenuItem
+    ): Boolean {
+        var gridSize = 0
+        when (item.itemId) {
+            R.id.action_grid_size_1 -> gridSize = 1
+            R.id.action_grid_size_2 -> gridSize = 2
+            R.id.action_grid_size_3 -> gridSize = 3
+            R.id.action_grid_size_4 -> gridSize = 4
+            R.id.action_grid_size_5 -> gridSize = 5
+            R.id.action_grid_size_6 -> gridSize = 6
+            R.id.action_grid_size_7 -> gridSize = 7
+            R.id.action_grid_size_8 -> gridSize = 8
+        }
+        if (gridSize > 0) {
+            item.isChecked = true
+            setAndSaveGridSize(gridSize)
+            return true
+        }
         return false
     }
 }

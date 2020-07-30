@@ -8,16 +8,16 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
-import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
+import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PlaylistsFragment :
-    AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>(),
+    AbsRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>() ,
     MainActivityFragmentCallbacks {
 
-    private val libraryViewModel: LibraryViewModel by sharedViewModel()
+    override fun handleBackPress(): Boolean {
+        return false
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,10 +28,6 @@ class PlaylistsFragment :
                 adapter?.swapDataSet(listOf())
             }
         })
-    }
-
-    override fun handleBackPress(): Boolean {
-        return false
     }
 
     override val emptyMessage: Int

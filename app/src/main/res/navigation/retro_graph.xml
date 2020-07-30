@@ -28,16 +28,24 @@
         android:id="@+id/action_playlist"
         android:name="code.name.monkey.retromusic.fragments.playlists.PlaylistsFragment"
         android:label="PlaylistsFragment" />
+
     <fragment
         android:id="@+id/action_playing_queue"
         android:name="code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment"
         android:label="PlayingQueueFragment" />
+
     <fragment
         android:id="@+id/action_folder"
         android:name="code.name.monkey.retromusic.fragments.folder.FoldersFragment"
         android:label="FoldersFragment" />
+
     <fragment
         android:id="@+id/action_home"
         android:name="code.name.monkey.retromusic.fragments.home.BannerHomeFragment"
         android:label="BannerHomeFragment" />
+
+    <fragment
+        android:id="@+id/albumDetailsFragment"
+        android:name="code.name.monkey.retromusic.activities.albums.AlbumDetailsFragment"
+        android:label="AlbumDetailsFragment" />
 </navigation>

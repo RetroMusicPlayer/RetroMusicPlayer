@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import androidx.annotation.LayoutRes
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.VolumeFragment
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -15,7 +16,7 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
  * Created by hemanths on 24/09/17.
  */
 
-abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(),
+abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout),
     MusicProgressViewUpdateHelper.Callback {
 
     protected abstract fun show()

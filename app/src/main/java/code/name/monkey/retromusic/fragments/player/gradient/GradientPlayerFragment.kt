@@ -7,9 +7,7 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.AsyncTask
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.PopupMenu
 import android.widget.SeekBar
@@ -51,7 +49,8 @@ import kotlinx.android.synthetic.main.fragment_gradient_controls.*
 import kotlinx.android.synthetic.main.fragment_gradient_player.*
 import kotlinx.android.synthetic.main.status_bar.*
 
-class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback,
+class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_player),
+    MusicProgressViewUpdateHelper.Callback,
     View.OnLayoutChangeListener, PopupMenu.OnMenuItemClickListener {
     private var lastColor: Int = 0
     private var lastPlaybackControlsColor: Int = 0
@@ -124,13 +123,6 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_gradient_player, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -283,6 +275,7 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         super.onQueueChanged()
         updateLabel()
     }
+
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
@@ -485,35 +478,36 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
+
     @SuppressLint("StaticFieldLeak")
     private fun updateFavorite() {
         if (updateIsFavoriteTask != null) {
             updateIsFavoriteTask?.cancel(false)
         }
         updateIsFavoriteTask =
-        object : AsyncTask<Song, Void, Boolean>() {
-            override fun doInBackground(vararg params: Song): Boolean? {
-                val activity = activity
-                return if (activity != null) {
-                    MusicUtil.isFavorite(requireActivity(), params[0])
-                } else {
-                    cancel(false)
-                    null
+            object : AsyncTask<Song, Void, Boolean>() {
+                override fun doInBackground(vararg params: Song): Boolean? {
+                    val activity = activity
+                    return if (activity != null) {
+                        MusicUtil.isFavorite(requireActivity(), params[0])
+                    } else {
+                        cancel(false)
+                        null
+                    }
                 }
-            }
 
-            override fun onPostExecute(isFavorite: Boolean?) {
-                val activity = activity
-                if (activity != null) {
-                    val res = if (isFavorite!!)
-                        R.drawable.ic_favorite
-                    else
-                        R.drawable.ic_favorite_border
+                override fun onPostExecute(isFavorite: Boolean?) {
+                    val activity = activity
+                    if (activity != null) {
+                        val res = if (isFavorite!!)
+                            R.drawable.ic_favorite
+                        else
+                            R.drawable.ic_favorite_border
 
-                    val drawable = TintHelper.createTintedDrawable(activity, res, Color.WHITE)
-                    songFavourite?.setImageDrawable(drawable)
+                        val drawable = TintHelper.createTintedDrawable(activity, res, Color.WHITE)
+                        songFavourite?.setImageDrawable(drawable)
+                    }
                 }
-            }
-        }.execute(MusicPlayerRemote.currentSong)
+            }.execute(MusicPlayerRemote.currentSong)
     }
 }

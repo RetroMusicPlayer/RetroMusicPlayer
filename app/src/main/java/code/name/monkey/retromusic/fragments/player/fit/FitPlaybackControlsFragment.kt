@@ -31,7 +31,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_fit_playback_controls.*
 
-class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
+class FitPlaybackControlsFragment :
+    AbsPlayerControlsFragment(R.layout.fragment_fit_playback_controls) {
 
 
     private var lastPlaybackControlsColor: Int = 0
@@ -43,13 +44,6 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_fit_playback_controls, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

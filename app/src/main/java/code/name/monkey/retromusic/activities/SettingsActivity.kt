@@ -35,7 +35,8 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
     private fun setupToolbar() {
         setTitle(R.string.action_settings)
         applyToolbar(toolbar)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.contentFrame) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.contentFrame) as NavHostFragment
         val navController: NavController = navHostFragment.navController
         navController.addOnDestinationChangedListener { _, _, _ ->
             toolbar.title = navController.currentDestination?.label

@@ -42,7 +42,7 @@
     </declare-styleable>
 
     <declare-styleable name="SeekArcTheme">
-        <attr name="seekArcStyle" format="reference"/>
+        <attr name="seekArcStyle" format="reference" />
     </declare-styleable>
 
 </resources>

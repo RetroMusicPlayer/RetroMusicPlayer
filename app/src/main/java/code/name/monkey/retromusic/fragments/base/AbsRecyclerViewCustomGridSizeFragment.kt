@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.RetroUtil
 
-abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
-    AbsLibraryPagerRecyclerViewFragment<A, LM>() {
+abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
+    AbsRecyclerViewFragment<A, LM>() {
 
     private var gridSize: Int = 0
     private var sortOrder: String? = null

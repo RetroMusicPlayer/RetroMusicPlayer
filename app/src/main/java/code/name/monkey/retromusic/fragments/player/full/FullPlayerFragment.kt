@@ -4,9 +4,7 @@ import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
@@ -33,7 +31,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
+class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
+    MusicProgressViewUpdateHelper.Callback {
     private lateinit var lyricsLayout: FrameLayout
     private lateinit var lyricsLine1: TextView
     private lateinit var lyricsLine2: TextView
@@ -132,13 +131,6 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         playerToolbar.apply {
             setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_full, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

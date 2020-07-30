@@ -1,9 +1,7 @@
 package code.name.monkey.retromusic.fragments.player.fit
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -15,7 +13,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_fit.*
 
-class FitFragment : AbsPlayerFragment() {
+class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -63,14 +61,6 @@ class FitFragment : AbsPlayerFragment() {
 
     override fun onFavoriteToggled() {
         toggleFavorite(MusicPlayerRemote.currentSong)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_fit, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

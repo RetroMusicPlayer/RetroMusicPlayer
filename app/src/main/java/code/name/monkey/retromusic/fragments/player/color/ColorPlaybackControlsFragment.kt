@@ -28,7 +28,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.*
 
-class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
+class ColorPlaybackControlsFragment :
+    AbsPlayerControlsFragment(R.layout.fragment_adaptive_player_playback_controls) {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0

@@ -12,6 +12,7 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
@@ -29,7 +30,7 @@ import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.FileNotFoundException
 
-abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
+abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout),
     Toolbar.OnMenuItemClickListener,
     PaletteColorHolder,
     PlayerAlbumCoverFragment.Callbacks {

@@ -1,9 +1,7 @@
 package code.name.monkey.retromusic.fragments.player.plain
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -15,7 +13,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_plain_player.*
 
-class PlainPlayerFragment : AbsPlayerFragment() {
+class PlainPlayerFragment : AbsPlayerFragment(R.layout.fragment_plain_player) {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -39,13 +37,6 @@ class PlainPlayerFragment : AbsPlayerFragment() {
     override fun onServiceConnected() {
         super.onServiceConnected()
         updateSong()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_plain_player, container, false)
     }
 
     private fun setUpPlayerToolbar() {

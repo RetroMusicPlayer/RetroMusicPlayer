@@ -2,9 +2,7 @@ package code.name.monkey.retromusic.fragments.player.simple
 
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -20,7 +18,6 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
-
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.*
@@ -29,7 +26,8 @@ import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.*
  * @author Hemanth S (h4h13).
  */
 
-class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
+class SimplePlaybackControlsFragment :
+    AbsPlayerControlsFragment(R.layout.fragment_simple_controls_fragment) {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -57,14 +55,6 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_simple_controls_fragment, container, false)
     }
 
     override fun onResume() {

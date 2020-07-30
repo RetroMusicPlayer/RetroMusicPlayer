@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.webkit.MimeTypeMap
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
@@ -19,7 +20,8 @@ import java.util.*
  * Created by hemanths on 18/08/17.
  */
 
-open class AbsMusicServiceFragment : Fragment(), MusicServiceEventListener {
+open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
+    MusicServiceEventListener {
 
     var playerActivity: AbsMusicServiceActivity? = null
         private set

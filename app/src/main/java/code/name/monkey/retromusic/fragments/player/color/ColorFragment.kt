@@ -3,9 +3,7 @@ package code.name.monkey.retromusic.fragments.player.color
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.os.Handler
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -18,7 +16,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_color_player.*
 
-class ColorFragment : AbsPlayerFragment() {
+class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
 
     private var lastColor: Int = 0
     private var navigationColor: Int = 0
@@ -83,14 +81,6 @@ class ColorFragment : AbsPlayerFragment() {
             valueAnimator!!.cancel()
             valueAnimator = null
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_color_player, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

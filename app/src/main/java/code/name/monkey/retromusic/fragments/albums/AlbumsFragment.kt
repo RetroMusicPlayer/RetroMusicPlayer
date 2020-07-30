@@ -6,18 +6,18 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
-import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AlbumsFragment :
-    AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
+    AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
 
-    private val libraryViewModel: LibraryViewModel by sharedViewModel()
+    override fun handleBackPress(): Boolean {
+        return false
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -88,9 +88,6 @@ class AlbumsFragment :
         PreferenceUtil.albumGridStyle = layoutRes
     }
 
-    override fun handleBackPress(): Boolean {
-        return false
-    }
 
     companion object {
         @JvmField

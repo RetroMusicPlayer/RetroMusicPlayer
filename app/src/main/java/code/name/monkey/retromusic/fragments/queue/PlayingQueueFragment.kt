@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
-import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
+import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.activity_playing_queue.*
  * Created by hemanths on 2019-12-08.
  */
 class PlayingQueueFragment :
-    AbsLibraryPagerRecyclerViewFragment<PlayingQueueAdapter, LinearLayoutManager>(),
+    AbsRecyclerViewFragment<PlayingQueueAdapter, LinearLayoutManager>(),
     MainActivityFragmentCallbacks {
 
     override fun handleBackPress(): Boolean {

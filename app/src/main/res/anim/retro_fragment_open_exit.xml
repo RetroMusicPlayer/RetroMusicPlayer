@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2019 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +24,7 @@
         android:fillAfter="true"
         android:interpolator="@android:anim/linear_interpolator"
         android:startOffset="35"
-        android:duration="50"/>
+        android:duration="50" />
     <scale
         android:fromXScale="1"
         android:toXScale="1.15"
@@ -37,5 +36,5 @@
         android:fillBefore="true"
         android:fillAfter="true"
         android:interpolator="@anim/retro_fragment_fast_out_extra_slow_in"
-        android:duration="300"/>
+        android:duration="300" />
 </set>

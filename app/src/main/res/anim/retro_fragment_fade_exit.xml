@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2019 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,5 +17,4 @@
     android:interpolator="@android:anim/linear_interpolator"
     android:fromAlpha="1.0"
     android:toAlpha="0.0"
-    android:duration="150"
-    />
+    android:duration="150" />
