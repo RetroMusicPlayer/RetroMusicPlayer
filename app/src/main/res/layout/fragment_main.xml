@@ -53,7 +53,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container"
-            android:name="code.name.monkey.retromusic.fragments.main.MainFragment"
+            android:name="io.github.muntashirakon.music.fragments.main.MainFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"

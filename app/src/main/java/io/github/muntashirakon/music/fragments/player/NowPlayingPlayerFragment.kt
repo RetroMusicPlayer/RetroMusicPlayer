@@ -1,12 +1,12 @@
-package code.name.monkey.retromusic.fragments.player
+package io.github.muntashirakon.music.fragments.player
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.navController
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
-import code.name.monkey.retromusic.util.PreferenceUtil
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.navController
+import io.github.muntashirakon.music.fragments.NowPlayingScreen.*
+import io.github.muntashirakon.music.util.PreferenceUtil
 
 class NowPlayingPlayerFragment : Fragment(R.layout.fragment_now_playing_player) {
     companion object {

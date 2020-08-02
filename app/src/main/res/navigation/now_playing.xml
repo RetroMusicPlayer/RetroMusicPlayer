@@ -7,108 +7,108 @@
     <fragment
         tools:layout="@layout/fragment_player"
         android:id="@+id/playerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.normal.PlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.normal.PlayerFragment"
         android:label="PlayerFragment" />
 
     <fragment
         tools:layout="@layout/fragment_adaptive_player"
         android:id="@+id/adaptiveFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.adaptive.AdaptiveFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.adaptive.AdaptiveFragment"
         android:label="AdaptiveFragment" />
 
     <fragment
         tools:layout="@layout/fragment_blur"
         android:id="@+id/blurPlayerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.blur.BlurPlayerFragment"
         android:label="BlurPlayerFragment" />
 
     <fragment
         tools:layout="@layout/fragment_card_blur_player"
         android:id="@+id/cardBlurFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.cardblur.CardBlurFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.cardblur.CardBlurFragment"
         android:label="CardBlurFragment" />
 
     <fragment
         tools:layout="@layout/fragment_card_player"
         android:id="@+id/cardFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.card.CardFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.card.CardFragment"
         android:label="CardFragment" />
 
     <fragment
         tools:layout="@layout/fragment_circle_player"
         android:id="@+id/circlePlayerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.circle.CirclePlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.circle.CirclePlayerFragment"
         android:label="CirclePlayerFragment" />
 
     <fragment
         tools:layout="@layout/fragment_classic_player"
         android:id="@+id/classicPlayerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.classic.ClassicPlayerFragment"
         android:label="ClassicPlayerFragment" />
 
     <fragment
         tools:layout="@layout/fragment_color_player"
         android:id="@+id/colorFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.color.ColorFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.color.ColorFragment"
         android:label="ColorFragment" />
 
     <fragment
         tools:layout="@layout/fragment_fit"
         android:id="@+id/fitFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.fit.FitFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.fit.FitFragment"
         android:label="FitFragment" />
 
     <fragment
         tools:layout="@layout/fragment_flat_player"
         android:id="@+id/flatPlayerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.flat.FlatPlayerFragment"
         android:label="FlatPlayerFragment" />
 
     <fragment
         tools:layout="@layout/fragment_full"
         android:id="@+id/fullPlayerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.full.FullPlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.full.FullPlayerFragment"
         android:label="FullPlayerFragment" />
 
     <fragment
         tools:layout="@layout/fragment_gradient_player"
         android:id="@+id/gradientPlayerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.gradient.GradientPlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.gradient.GradientPlayerFragment"
         android:label="GradientPlayerFragment" />
 
     <fragment
         tools:layout="@layout/fragment_material"
         android:id="@+id/materialFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.material.MaterialFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.material.MaterialFragment"
         android:label="MaterialFragment" />
 
     <fragment
         android:id="@+id/peakPlayerFragment"
         tools:layout="@layout/fragment_peak_player"
-        android:name="code.name.monkey.retromusic.fragments.player.peak.PeakPlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.peak.PeakPlayerFragment"
         android:label="PeakPlayerFragment" />
 
     <fragment
         android:id="@+id/plainPlayerFragment"
         tools:layout="@layout/fragment_plain_player"
-        android:name="code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.plain.PlainPlayerFragment"
         android:label="PlainPlayerFragment" />
 
     <fragment
         tools:layout="@layout/fragment_simple_player"
         android:id="@+id/simplePlayerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.simple.SimplePlayerFragment"
         android:label="SimplePlayerFragment" />
 
     <fragment
         tools:layout="@layout/fragment_tiny_player"
         android:id="@+id/tinyPlayerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.tiny.TinyPlayerFragment"
         android:label="TinyPlayerFragment" />
 
     <fragment
         android:id="@+id/mainPlayerFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.NowPlayingPlayerFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.NowPlayingPlayerFragment"
         android:label="MainPlayerFragment">
         <action
             android:id="@+id/action_mainPlayerFragment_to_adaptiveFragment"

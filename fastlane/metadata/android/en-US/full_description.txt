@@ -1,4 +1,4 @@
-<i>M</i> is a fork of <a href="https://apt.izzysoft.de/fdroid/index/apk/code.name.monkey.retromusic">Retro Music</a> with Google Play API removed and all pro features unlocked.
+<i>Metro</i> is a fork of <a href="https://apt.izzysoft.de/fdroid/index/apk/code.name.monkey.retromusic">Retro Music</a> with Google Play API removed and all pro features unlocked.
 
 <b>Features:</b>
 <ul>

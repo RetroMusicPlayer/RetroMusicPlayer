@@ -1,1 +1,1 @@
-A music player forked from Retro Music Player
+Best material design music player for Android
