@@ -31,8 +31,9 @@ A ".lrc" is like a text file which contains the time stamped lyrics for example,
 ##### STEP 3: 
 Now you have to rename the file you created in this way: <song_name> - <artist_name>.lrc or for better matching copy the <song_name> and the <artist_name> from the tag editor and then rename the file.
 ##### STEP 4: 
-You have to copy or move this file into a location on the SD Card: whatever_sdcard/RetroMusic/lyrics/ and paste it there.
-Finally you will be able to see the lyrics working.
+Now paste the LRC files to the following path : /sdcard/Retromusic/lyrics/
+Here sdcard is your internal storage.
+
 > If you want to skip to particular time stamp, simply scroll to the time stamp from where you want to start from and a 'Play' icon will appear left to the particular stamp. Tap on play button to play from there.
 
 
