@@ -7,17 +7,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.artist.ArtistAdapter
 import io.github.muntashirakon.music.fragments.ReloadType
-import io.github.muntashirakon.music.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import io.github.muntashirakon.music.interfaces.MainActivityFragmentCallbacks
 import io.github.muntashirakon.music.util.PreferenceUtil
 
 class ArtistsFragment :
-    AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
+    AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
+
+    override fun handleBackPress(): Boolean {
+        return false
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allArtists().observe(
-            viewLifecycleOwner, Observer { artists ->
+        libraryViewModel.artistsLiveData
+            .observe(viewLifecycleOwner, Observer { artists ->
                 if (artists.isNotEmpty()) {
                     adapter?.swapDataSet(artists)
                 } else {
@@ -26,15 +32,11 @@ class ArtistsFragment :
             })
     }
 
-    override fun handleBackPress(): Boolean {
-        return false
-    }
-
     override val emptyMessage: Int
         get() = R.string.no_artists
 
     override fun setSortOrder(sortOrder: String) {
-        mainActivity.libraryViewModel.forceReload(ReloadType.Artists)
+        libraryViewModel.forceReload(ReloadType.Artists)
     }
 
     override fun createLayoutManager(): GridLayoutManager {

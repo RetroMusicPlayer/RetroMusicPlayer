@@ -1,9 +1,7 @@
 package io.github.muntashirakon.music.fragments.player.fit
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -15,7 +13,7 @@ import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_fit.*
 
-class FitFragment : AbsPlayerFragment() {
+class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -46,7 +44,7 @@ class FitFragment : AbsPlayerFragment() {
     override fun onColorChanged(color: MediaNotificationProcessor) {
         playbackControlsFragment.setColor(color)
         lastColor = color.primaryTextColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.primaryTextColor)
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
@@ -63,14 +61,6 @@ class FitFragment : AbsPlayerFragment() {
 
     override fun onFavoriteToggled() {
         toggleFavorite(MusicPlayerRemote.currentSong)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_fit, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

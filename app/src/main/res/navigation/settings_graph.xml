@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settings_graph"
+    app:startDestination="@id/mainSettingsFragment">
+
+    <fragment
+        android:id="@+id/mainSettingsFragment"
+        android:name="code.name.monkey.retromusic.fragments.settings.MainSettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_main_settings">
+
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_themeSettingsFragment"
+            app:destination="@id/themeSettingsFragment"
+            app:enterAnim="@anim/retro_fragment_open_enter"
+            app:exitAnim="@anim/retro_fragment_open_exit"
+            app:popEnterAnim="@anim/retro_fragment_close_enter"
+            app:popExitAnim="@anim/retro_fragment_close_exit" />
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_imageSettingFragment"
+            app:destination="@id/imageSettingFragment"
+            app:enterAnim="@anim/retro_fragment_open_enter"
+            app:exitAnim="@anim/retro_fragment_open_exit"
+            app:popEnterAnim="@anim/retro_fragment_close_enter"
+            app:popExitAnim="@anim/retro_fragment_close_exit" />
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_nowPlayingSettingsFragment"
+            app:destination="@id/nowPlayingSettingsFragment"
+            app:enterAnim="@anim/retro_fragment_open_enter"
+            app:exitAnim="@anim/retro_fragment_open_exit"
+            app:popEnterAnim="@anim/retro_fragment_close_enter"
+            app:popExitAnim="@anim/retro_fragment_close_exit" />
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_audioSettings"
+            app:destination="@id/audioSettings"
+            app:enterAnim="@anim/retro_fragment_open_enter"
+            app:exitAnim="@anim/retro_fragment_open_exit"
+            app:popEnterAnim="@anim/retro_fragment_close_enter"
+            app:popExitAnim="@anim/retro_fragment_close_exit" />
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_otherSettingsFragment"
+            app:destination="@id/otherSettingsFragment"
+            app:enterAnim="@anim/retro_fragment_open_enter"
+            app:exitAnim="@anim/retro_fragment_open_exit"
+            app:popEnterAnim="@anim/retro_fragment_close_enter"
+            app:popExitAnim="@anim/retro_fragment_close_exit" />
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_personalizeSettingsFragment"
+            app:enterAnim="@anim/retro_fragment_open_enter"
+            app:exitAnim="@anim/retro_fragment_open_exit"
+            app:popEnterAnim="@anim/retro_fragment_close_enter"
+            app:popExitAnim="@anim/retro_fragment_close_exit"
+            app:destination="@id/personalizeSettingsFragment" />
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_notificationSettingsFragment"
+            app:destination="@id/notificationSettingsFragment"
+            app:enterAnim="@anim/retro_fragment_open_enter"
+            app:exitAnim="@anim/retro_fragment_open_exit"
+            app:popEnterAnim="@anim/retro_fragment_close_enter"
+            app:popExitAnim="@anim/retro_fragment_close_exit" />
+
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_aboutActivity"
+            app:destination="@id/aboutActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/audioSettings"
+        android:name="code.name.monkey.retromusic.fragments.settings.AudioSettings"
+        android:label="Audio" />
+
+    <fragment
+        android:id="@+id/imageSettingFragment"
+        android:name="code.name.monkey.retromusic.fragments.settings.ImageSettingFragment"
+        android:label="Image" />
+
+    <fragment
+        android:id="@+id/notificationSettingsFragment"
+        android:name="code.name.monkey.retromusic.fragments.settings.NotificationSettingsFragment"
+        android:label="Notification" />
+
+    <fragment
+        android:id="@+id/nowPlayingSettingsFragment"
+        android:name="code.name.monkey.retromusic.fragments.settings.NowPlayingSettingsFragment"
+        android:label="Now Playing" />
+
+    <fragment
+        android:id="@+id/otherSettingsFragment"
+        android:name="code.name.monkey.retromusic.fragments.settings.OtherSettingsFragment"
+        android:label="Other" />
+
+    <fragment
+        android:id="@+id/personalizeSettingsFragment"
+        android:name="code.name.monkey.retromusic.fragments.settings.PersonalizeSettingsFragment"
+        android:label="Personalize" />
+
+    <fragment
+        android:id="@+id/themeSettingsFragment"
+        android:name="code.name.monkey.retromusic.fragments.settings.ThemeSettingsFragment"
+        android:label="Look &amp; Feel" />
+
+    <activity
+        android:id="@+id/aboutActivity"
+        android:name="code.name.monkey.retromusic.activities.AboutActivity"
+        android:label="AboutActivity" />
+
+</navigation>

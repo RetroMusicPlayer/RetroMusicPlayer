@@ -88,19 +88,18 @@ public class BlacklistFolderChooserDialog extends DialogFragment implements Mate
         parentFolder = new File(savedInstanceState.getString("current_path", File.pathSeparator));
         checkIfCanGoUp();
         parentContents = listFiles();
-        MaterialDialog.Builder builder =
-                new MaterialDialog.Builder(requireActivity())
-                        .title(parentFolder.getAbsolutePath())
-                        .items((CharSequence[]) getContentsArray())
-                        .itemsCallback(this)
-                        .autoDismiss(false)
-                        .onPositive((dialog, which) -> {
-                            dismiss();
-                            callback.onFolderSelection(BlacklistFolderChooserDialog.this, parentFolder);
-                        })
-                        .onNegative((materialDialog, dialogAction) -> dismiss())
-                        .positiveText(R.string.add_action)
-                        .negativeText(android.R.string.cancel);
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(requireContext())
+                .title(parentFolder.getAbsolutePath())
+                .items((CharSequence[]) getContentsArray())
+                .itemsCallback(this)
+                .autoDismiss(false)
+                .onPositive((dialog, which) -> {
+                    callback.onFolderSelection(BlacklistFolderChooserDialog.this, parentFolder);
+                    dismiss();
+                })
+                .onNegative((materialDialog, dialogAction) -> dismiss())
+                .positiveText(R.string.add_action)
+                .negativeText(android.R.string.cancel);
         return builder.build();
     }
 

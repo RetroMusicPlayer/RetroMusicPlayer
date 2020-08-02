@@ -14,12 +14,14 @@
 
 package io.github.muntashirakon.music.fragments.settings
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.SettingsActivity
 import io.github.muntashirakon.music.util.NavigationUtil
@@ -28,29 +30,14 @@ import kotlinx.android.synthetic.main.fragment_main_settings.*
 class MainSettingsFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.generalSettings -> inflateFragment(
-                ThemeSettingsFragment(),
-                R.string.general_settings_title
-            )
-            R.id.audioSettings -> inflateFragment(AudioSettings(), R.string.pref_header_audio)
-            R.id.nowPlayingSettings -> inflateFragment(
-                NowPlayingSettingsFragment(),
-                R.string.now_playing
-            )
-            R.id.personalizeSettings -> inflateFragment(
-                PersonalizeSettingsFragment(),
-                R.string.personalize
-            )
-            R.id.imageSettings -> inflateFragment(
-                ImageSettingFragment(),
-                R.string.pref_header_images
-            )
-            R.id.notificationSettings -> inflateFragment(
-                NotificationSettingsFragment(),
-                R.string.notification
-            )
-            R.id.otherSettings -> inflateFragment(OtherSettingsFragment(), R.string.others)
-            R.id.aboutSettings -> NavigationUtil.goToAbout(requireActivity())
+            R.id.generalSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_themeSettingsFragment)
+            R.id.audioSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_audioSettings)
+            R.id.personalizeSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_personalizeSettingsFragment)
+            R.id.imageSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_imageSettingFragment)
+            R.id.notificationSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_notificationSettingsFragment)
+            R.id.otherSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_otherSettingsFragment)
+            R.id.aboutSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_aboutActivity)
+            R.id.nowPlayingSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_nowPlayingSettingsFragment)
         }
     }
 

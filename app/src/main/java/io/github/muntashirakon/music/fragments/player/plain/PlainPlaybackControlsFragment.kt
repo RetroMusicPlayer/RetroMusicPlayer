@@ -3,9 +3,7 @@ package io.github.muntashirakon.music.fragments.player.plain
 import android.animation.ObjectAnimator
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
@@ -26,7 +24,6 @@ import io.github.muntashirakon.music.helper.PlayPauseButtonOnClickHandler
 import io.github.muntashirakon.music.misc.SimpleOnSeekbarChangeListener
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.MusicUtil
-
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.*
@@ -43,7 +40,8 @@ import kotlinx.android.synthetic.main.fragment_plain_controls_fragment.songTotal
  * @author Hemanth S (h4h13).
  */
 
-class PlainPlaybackControlsFragment : AbsPlayerControlsFragment() {
+class PlainPlaybackControlsFragment :
+    AbsPlayerControlsFragment(R.layout.fragment_plain_controls_fragment) {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -87,14 +85,6 @@ class PlainPlaybackControlsFragment : AbsPlayerControlsFragment() {
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_plain_controls_fragment, container, false)
-    }
 
     override fun onResume() {
         super.onResume()

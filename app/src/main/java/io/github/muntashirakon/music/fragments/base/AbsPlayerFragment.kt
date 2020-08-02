@@ -2,7 +2,6 @@ package io.github.muntashirakon.music.fragments.base
 
 import android.annotation.SuppressLint
 import android.content.ContentUris
-import android.content.Context
 import android.content.Intent
 import android.media.MediaMetadataRetriever
 import android.os.AsyncTask
@@ -13,12 +12,14 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.tageditor.AbsTagEditorActivity
 import io.github.muntashirakon.music.activities.tageditor.SongTagEditorActivity
 import io.github.muntashirakon.music.dialogs.*
 import io.github.muntashirakon.music.extensions.hide
+import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.PaletteColorHolder
@@ -26,34 +27,19 @@ import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.model.lyrics.Lyrics
 import io.github.muntashirakon.music.util.*
 import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.FileNotFoundException
 
-abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
+abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout),
     Toolbar.OnMenuItemClickListener,
     PaletteColorHolder,
     PlayerAlbumCoverFragment.Callbacks {
 
-    var callbacks: Callbacks? = null
-        private set
+
     private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
     private var updateLyricsAsyncTask: AsyncTask<*, *, *>? = null
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
-
-    override fun onAttach(
-        context: Context
-    ) {
-        super.onAttach(context)
-        try {
-            callbacks = context as Callbacks?
-        } catch (e: ClassCastException) {
-            throw RuntimeException(context.javaClass.simpleName + " must implement " + Callbacks::class.java.simpleName)
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        callbacks = null
-    }
+    protected val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onMenuItemClick(
         item: MenuItem

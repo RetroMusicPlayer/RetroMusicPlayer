@@ -46,7 +46,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/imageText"
@@ -81,7 +81,7 @@
             android:maxLines="1"
             android:textAppearance="@style/TextViewSubtitle1"
             android:textColor="?android:attr/textColorPrimary"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="@tools:sample/full_names" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
@@ -90,7 +90,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="?android:attr/textColorSecondary"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="@tools:sample/full_names" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView

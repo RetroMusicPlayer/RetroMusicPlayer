@@ -20,16 +20,20 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.GenreAdapter
-import io.github.muntashirakon.music.fragments.base.AbsLibraryPagerRecyclerViewFragment
+import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewFragment
 import io.github.muntashirakon.music.interfaces.MainActivityFragmentCallbacks
 
-class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
+class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     MainActivityFragmentCallbacks {
+
+    override fun handleBackPress(): Boolean {
+        return false
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allGenres().observe(
-            viewLifecycleOwner, Observer { genres ->
+        libraryViewModel.genresLiveData
+            .observe(viewLifecycleOwner, Observer { genres ->
                 if (genres.isNotEmpty()) {
                     adapter?.swapDataSet(genres)
                 } else {
@@ -38,9 +42,6 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
             })
     }
 
-    override fun handleBackPress(): Boolean {
-        return false
-    }
 
     override fun createLayoutManager(): LinearLayoutManager {
         return LinearLayoutManager(activity)

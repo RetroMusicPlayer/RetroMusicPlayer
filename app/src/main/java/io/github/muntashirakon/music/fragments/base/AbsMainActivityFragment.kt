@@ -2,13 +2,14 @@ package io.github.muntashirakon.music.fragments.base
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.LayoutRes
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.MainActivity
 
-abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
+abstract class AbsMainActivityFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout) {
 
     val mainActivity: MainActivity
         get() = activity as MainActivity

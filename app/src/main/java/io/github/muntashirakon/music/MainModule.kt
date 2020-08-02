@@ -8,11 +8,20 @@ import io.github.muntashirakon.music.activities.search.SearchViewModel
 import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.model.Genre
 import io.github.muntashirakon.music.model.Playlist
-import org.koin.android.viewmodel.dsl.viewModel
+import io.github.muntashirakon.music.network.networkModule
+import io.github.muntashirakon.music.providers.RepositoryImpl
+import org.eclipse.egit.github.core.Repository
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
+private val dataModule = module {
+    single {
+        RepositoryImpl(get(), get())
+    } bind Repository::class
+}
 
-val mainModule = module {
+private val viewModules = module {
 
     viewModel {
         LibraryViewModel(get())
@@ -38,3 +47,5 @@ val mainModule = module {
         SearchViewModel(get())
     }
 }
+
+val appModules = listOf(dataModule, viewModules, networkModule)

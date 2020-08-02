@@ -18,8 +18,6 @@ import androidx.multidex.MultiDexApplication
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.appshortcuts.DynamicShortcutManager
-import io.github.muntashirakon.music.network.networkModule
-import io.github.muntashirakon.music.providers.provideModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -31,7 +29,7 @@ class App : MultiDexApplication() {
 
         startKoin {
             androidContext(this@App)
-            modules(listOf(mainModule, provideModules, networkModule))
+            modules(appModules)
         }
         // default theme
         if (!ThemeStore.isConfigured(this, 3)) {

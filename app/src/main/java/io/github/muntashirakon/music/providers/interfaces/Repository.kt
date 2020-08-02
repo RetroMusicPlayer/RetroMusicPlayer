@@ -58,4 +58,6 @@ interface Repository {
     suspend fun favoritePlaylist(): Home?
 
     suspend fun suggestions(): Home?
+
+    suspend fun homeGenres(): Home?
 }

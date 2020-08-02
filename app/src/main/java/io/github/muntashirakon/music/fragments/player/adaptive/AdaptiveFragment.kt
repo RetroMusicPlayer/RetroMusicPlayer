@@ -1,9 +1,7 @@
 package io.github.muntashirakon.music.fragments.player.adaptive
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -18,7 +16,7 @@ import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_adaptive_player.*
 
-class AdaptiveFragment : AbsPlayerFragment() {
+class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
 
     override fun playerToolbar(): Toolbar {
         return playerToolbar
@@ -26,14 +24,6 @@ class AdaptiveFragment : AbsPlayerFragment() {
 
     private var lastColor: Int = 0
     private lateinit var playbackControlsFragment: AdaptivePlaybackControlsFragment
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_adaptive_player, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -96,7 +86,7 @@ class AdaptiveFragment : AbsPlayerFragment() {
     override fun onColorChanged(color: MediaNotificationProcessor) {
         playbackControlsFragment.setColor(color)
         lastColor = color.primaryTextColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.primaryTextColor)
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),

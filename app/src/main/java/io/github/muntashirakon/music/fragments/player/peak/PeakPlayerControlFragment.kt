@@ -18,9 +18,7 @@ import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import code.name.monkey.appthemehelper.ThemeStore
@@ -36,7 +34,6 @@ import io.github.muntashirakon.music.helper.PlayPauseButtonOnClickHandler
 import io.github.muntashirakon.music.misc.SimpleOnSeekbarChangeListener
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.MusicUtil
-
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_peak_control_player.*
@@ -45,7 +42,7 @@ import kotlinx.android.synthetic.main.fragment_peak_control_player.*
  * Created by hemanths on 2019-10-04.
  */
 
-class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
+class PeakPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_peak_control_player) {
 
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
     private var lastPlaybackControlsColor: Int = 0
@@ -64,14 +61,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     override fun onPause() {
         super.onPause()
         progressViewUpdateHelper.stop()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_peak_control_player, container, false)
     }
 
     override fun onViewCreated(

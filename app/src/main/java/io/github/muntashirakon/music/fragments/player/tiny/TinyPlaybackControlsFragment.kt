@@ -2,9 +2,7 @@ package io.github.muntashirakon.music.fragments.player.tiny
 
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import code.name.monkey.appthemehelper.util.ColorUtil
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.fragments.base.AbsPlayerControlsFragment
@@ -13,7 +11,8 @@ import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_tiny_controls_fragment.*
 
-class TinyPlaybackControlsFragment : AbsPlayerControlsFragment() {
+class TinyPlaybackControlsFragment :
+    AbsPlayerControlsFragment(R.layout.fragment_tiny_controls_fragment) {
 
     override fun show() {
     }
@@ -38,13 +37,6 @@ class TinyPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_tiny_controls_fragment, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

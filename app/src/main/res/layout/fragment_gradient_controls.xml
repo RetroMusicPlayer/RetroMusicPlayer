@@ -90,7 +90,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
         tools:ignore="RtlHardcoded,RtlSymmetry"
-         tools:text="@tools:sample/date/hhmmss" />
+        tools:text="@tools:sample/date/hhmmss" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
@@ -117,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
         tools:ignore="RtlHardcoded,RtlSymmetry"
-         tools:text="@tools:sample/date/hhmmss" />
+        tools:text="@tools:sample/date/hhmmss" />
 
 
     <androidx.appcompat.widget.AppCompatImageButton

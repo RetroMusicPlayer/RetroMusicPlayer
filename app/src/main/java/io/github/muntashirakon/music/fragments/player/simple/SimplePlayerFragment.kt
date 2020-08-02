@@ -1,9 +1,7 @@
 package io.github.muntashirakon.music.fragments.player.simple
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -19,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_simple_player.*
  * @author Hemanth S (h4h13).
  */
 
-class SimplePlayerFragment : AbsPlayerFragment() {
+class SimplePlayerFragment : AbsPlayerFragment(R.layout.fragment_simple_player) {
 
     override fun playerToolbar(): Toolbar {
         return playerToolbar
@@ -31,13 +29,6 @@ class SimplePlayerFragment : AbsPlayerFragment() {
 
     private lateinit var controlsFragment: SimplePlaybackControlsFragment
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_simple_player, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,7 +62,7 @@ class SimplePlayerFragment : AbsPlayerFragment() {
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.backgroundColor)
         controlsFragment.setColor(color)
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,

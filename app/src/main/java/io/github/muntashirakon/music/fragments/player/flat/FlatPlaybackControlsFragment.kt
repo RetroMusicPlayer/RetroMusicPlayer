@@ -3,9 +3,7 @@ package io.github.muntashirakon.music.fragments.player.flat
 import android.animation.ObjectAnimator
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
@@ -27,12 +25,12 @@ import io.github.muntashirakon.music.helper.PlayPauseButtonOnClickHandler
 import io.github.muntashirakon.music.misc.SimpleOnSeekbarChangeListener
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.MusicUtil
-
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.*
 
-class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
+class FlatPlaybackControlsFragment :
+    AbsPlayerControlsFragment(R.layout.fragment_flat_player_playback_controls), Callback {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -41,13 +39,6 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_flat_player_playback_controls, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,14 +77,14 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
     override fun setColor(color: MediaNotificationProcessor) {
         if (ATHUtil.isWindowBackgroundDark(requireContext())) {
             lastPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+                MaterialValueHelper.getSecondaryTextColor(requireContext(), false)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
+                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), false)
         } else {
             lastPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+                MaterialValueHelper.getPrimaryTextColor(requireContext(), true)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
+                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), true)
         }
 
         val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
@@ -116,8 +107,8 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
         val colorSecondary =
             MaterialValueHelper.getSecondaryTextColor(context, ColorUtil.isColorLight(darkColor))
 
-        TintHelper.setTintAuto(playPauseButton!!, colorPrimary, false)
-        TintHelper.setTintAuto(playPauseButton!!, color, true)
+        TintHelper.setTintAuto(playPauseButton, colorPrimary, false)
+        TintHelper.setTintAuto(playPauseButton, color, true)
 
         title.setBackgroundColor(color)
         title.setTextColor(colorPrimary)

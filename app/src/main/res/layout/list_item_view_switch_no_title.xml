@@ -23,6 +23,8 @@
     android:paddingTop="16dp"
     android:paddingEnd="?attr/listPreferredItemPaddingEnd"
     android:paddingBottom="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     tools:ignore="PrivateResource">
 
     <androidx.appcompat.widget.AppCompatImageView

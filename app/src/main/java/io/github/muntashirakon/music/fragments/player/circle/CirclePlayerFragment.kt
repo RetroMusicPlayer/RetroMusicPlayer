@@ -58,7 +58,8 @@ import kotlinx.android.synthetic.main.fragment_circle_player.*
  * Created by hemanths on 2020-01-06.
  */
 
-class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChangedListener,
+class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player), Callback,
+    OnAudioVolumeChangedListener,
     OnSeekArcChangeListener {
 
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper

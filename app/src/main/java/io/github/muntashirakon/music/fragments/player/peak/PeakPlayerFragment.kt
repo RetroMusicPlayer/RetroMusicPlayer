@@ -15,9 +15,7 @@
 package io.github.muntashirakon.music.fragments.player.peak
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -28,7 +26,6 @@ import io.github.muntashirakon.music.fragments.base.AbsPlayerFragment
 import io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.util.PreferenceUtil
-
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_peak_player.*
 
@@ -36,18 +33,10 @@ import kotlinx.android.synthetic.main.fragment_peak_player.*
  * Created by hemanths on 2019-10-03.
  */
 
-class PeakPlayerFragment : AbsPlayerFragment() {
+class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
 
     private lateinit var controlsFragment: PeakPlayerControlFragment
     private var lastColor: Int = 0
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_peak_player, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -102,7 +91,7 @@ class PeakPlayerFragment : AbsPlayerFragment() {
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.primaryTextColor
-        callbacks?.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.primaryTextColor)
         controlsFragment.setColor(color)
     }
 

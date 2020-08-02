@@ -17,13 +17,12 @@ package io.github.muntashirakon.music.fragments.home
 import android.app.ActivityOptions
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.HomeAdapter
+import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.glide.ProfileBannerGlideRequest
 import io.github.muntashirakon.music.glide.UserProfileGlideRequest
@@ -39,21 +38,17 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks {
-    private lateinit var homeAdapter: HomeAdapter
+class BannerHomeFragment :
+    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home),
+    MainActivityFragmentCallbacks {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        viewGroup: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(
-            if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home,
-            viewGroup,
-            false
-        )
+    override fun handleBackPress(): Boolean {
+        return false
     }
+
+    private val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     private val displayMetrics: DisplayMetrics
         get() {
@@ -106,22 +101,18 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
         titleWelcome?.text = String.format("%s", PreferenceUtil.userName)
 
-        homeAdapter = HomeAdapter(mainActivity, displayMetrics)
+        val homeAdapter = HomeAdapter(mainActivity, displayMetrics)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
 
-        mainActivity.libraryViewModel.homeSections()
+        libraryViewModel.homeLiveData
             .observe(viewLifecycleOwner, Observer { sections ->
                 homeAdapter.swapData(sections)
             })
 
         loadProfile()
-    }
-
-    override fun handleBackPress(): Boolean {
-        return false
     }
 
     private fun loadProfile() {

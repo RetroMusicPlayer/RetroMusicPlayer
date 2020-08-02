@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import androidx.annotation.LayoutRes
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.fragments.VolumeFragment
 import io.github.muntashirakon.music.helper.MusicProgressViewUpdateHelper
@@ -15,7 +16,7 @@ import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
  * Created by hemanths on 24/09/17.
  */
 
-abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(),
+abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout),
     MusicProgressViewUpdateHelper.Callback {
 
     protected abstract fun show()

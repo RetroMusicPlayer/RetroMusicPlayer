@@ -3,9 +3,7 @@ package io.github.muntashirakon.music.fragments.player.cardblur
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -19,12 +17,12 @@ import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
 import io.github.muntashirakon.music.glide.SongGlideRequest
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.Song
-
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_card_blur_player.*
 
-class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
+class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
+    SharedPreferences.OnSharedPreferenceChangeListener {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -54,7 +52,7 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
     override fun onColorChanged(color: MediaNotificationProcessor) {
         playbackControlsFragment.setColor(color)
         lastColor = color.backgroundColor
-        callbacks!!.onPaletteColorChanged()
+        libraryViewModel.updateColor(color.backgroundColor)
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
 
         playerToolbar.setTitleTextColor(Color.WHITE)
@@ -72,13 +70,6 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
         toggleFavorite(MusicPlayerRemote.currentSong)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_card_blur_player, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

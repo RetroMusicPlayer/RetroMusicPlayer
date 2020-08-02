@@ -22,18 +22,19 @@
     <FrameLayout
         android:id="@+id/slidingPanel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="?attr/colorSurface"
         app:behavior_hideable="false"
         app:behavior_peekHeight="0dp"
         app:layout_behavior="io.github.muntashirakon.music.RetroBottomSheetBehavior">
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerFragmentContainer"
             android:layout_width="match_parent"
+            android:name="code.name.monkey.retromusic.fragments.player.NowPlayingPlayerFragment"
             android:layout_height="match_parent" />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/miniPlayerFragment"
             android:name="io.github.muntashirakon.music.fragments.MiniPlayerFragment"
             android:layout_width="match_parent"

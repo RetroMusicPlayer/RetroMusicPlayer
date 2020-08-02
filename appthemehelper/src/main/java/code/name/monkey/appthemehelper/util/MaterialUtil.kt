@@ -1,6 +1,7 @@
 package code.name.monkey.appthemehelper.util
 
 import android.content.res.ColorStateList
+import android.graphics.Color
 import code.name.monkey.appthemehelper.ThemeStore
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
@@ -34,6 +35,20 @@ object MaterialUtil {
             button.setTextColor(colorState)
             button.iconTint = colorState
         }
+    }
+
+    @JvmOverloads
+    @JvmStatic
+    fun tintColor(
+        button: MaterialButton,
+        textColor: Int = Color.WHITE,
+        backgroundColor: Int = Color.BLACK
+    ) {
+        val backgroundColorStateList = ColorStateList.valueOf(backgroundColor)
+        val textColorColorStateList = ColorStateList.valueOf(textColor)
+        button.backgroundTintList = backgroundColorStateList
+        button.setTextColor(textColorColorStateList)
+        button.iconTint = textColorColorStateList
     }
 
     @JvmOverloads

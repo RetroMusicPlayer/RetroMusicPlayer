@@ -24,6 +24,7 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
+import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.dialogs.BlacklistFolderChooserDialog
 import io.github.muntashirakon.music.extensions.colorButtons
@@ -101,12 +102,14 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                         )
                     )
                     .setPositiveButton(R.string.remove_action) { _, _ ->
-                        BlacklistStore.getInstance(mContext!!)
+                        BlacklistStore.getInstance(App.getContext())
                             .removePath(File(paths[which]))
                         refreshBlacklistData()
                     }
                     .setNegativeButton(android.R.string.cancel, null)
-                    .show().colorButtons()
+                    .create()
+                    .colorButtons()
+                    .show()
             }
             .create().colorButtons()
     }
@@ -114,13 +117,13 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
     private lateinit var paths: ArrayList<String>
 
     private fun refreshBlacklistData() {
-        this.paths = BlacklistStore.getInstance(mContext!!).paths
+        this.paths = BlacklistStore.getInstance(App.getContext()).paths
         val dialog = dialog as MaterialAlertDialogBuilder?
         dialog?.setItems(paths.toTypedArray(), null)
     }
 
     override fun onFolderSelection(dialog: BlacklistFolderChooserDialog, folder: File) {
-        BlacklistStore.getInstance(mContext!!).addPath(folder)
+        BlacklistStore.getInstance(App.getContext()).addPath(folder)
         refreshBlacklistData()
     }
 }

@@ -11,7 +11,6 @@
   ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   ~ See the GNU General Public License for more details.
   -->
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -23,6 +22,8 @@
     android:paddingTop="16dp"
     android:paddingEnd="?attr/listPreferredItemPaddingEnd"
     android:paddingBottom="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     tools:ignore="PrivateResource">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -55,12 +56,12 @@
         android:layout_marginTop="2dp"
         android:paddingStart="0dp"
         android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewNormal"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@android:id/checkbox"
         app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
         app:layout_constraintTop_toBottomOf="@android:id/title"
-        android:textAppearance="@style/TextViewNormal"
         tools:maxLines="2"
         tools:text="@tools:sample/lorem/random" />
 

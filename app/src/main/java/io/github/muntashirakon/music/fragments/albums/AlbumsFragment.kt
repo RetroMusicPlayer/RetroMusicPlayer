@@ -7,17 +7,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.album.AlbumAdapter
 import io.github.muntashirakon.music.fragments.ReloadType
-import io.github.muntashirakon.music.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import io.github.muntashirakon.music.interfaces.MainActivityFragmentCallbacks
 import io.github.muntashirakon.music.util.PreferenceUtil
 
 class AlbumsFragment :
-    AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
+    AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
+
+    override fun handleBackPress(): Boolean {
+        return false
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.libraryViewModel.allAlbums()
+        libraryViewModel.albumsLiveData
             .observe(viewLifecycleOwner, Observer { albums ->
                 if (albums.isNotEmpty())
                     adapter?.swapDataSet(albums)
@@ -73,7 +77,7 @@ class AlbumsFragment :
     }
 
     override fun setSortOrder(sortOrder: String) {
-        mainActivity.libraryViewModel.forceReload(ReloadType.Albums)
+        libraryViewModel.forceReload(ReloadType.Albums)
     }
 
     override fun loadLayoutRes(): Int {
@@ -84,9 +88,6 @@ class AlbumsFragment :
         PreferenceUtil.albumGridStyle = layoutRes
     }
 
-    override fun handleBackPress(): Boolean {
-        return false
-    }
 
     companion object {
         @JvmField

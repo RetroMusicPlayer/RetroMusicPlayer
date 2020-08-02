@@ -20,10 +20,10 @@ import io.github.muntashirakon.music.dialogs.CreatePlaylistDialog.Companion.crea
 import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.fragments.albums.AlbumsFragment
 import io.github.muntashirakon.music.fragments.artists.ArtistsFragment
-import io.github.muntashirakon.music.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewCustomGridSizeFragment
+import io.github.muntashirakon.music.fragments.folder.FoldersFragment
 import io.github.muntashirakon.music.fragments.genres.GenresFragment
 import io.github.muntashirakon.music.fragments.home.BannerHomeFragment
-import io.github.muntashirakon.music.fragments.mainactivity.FoldersFragment
 import io.github.muntashirakon.music.fragments.playlists.PlaylistsFragment
 import io.github.muntashirakon.music.fragments.queue.PlayingQueueFragment
 import io.github.muntashirakon.music.fragments.songs.SongsFragment
@@ -60,7 +60,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         const val EXPAND_PANEL = "expand_panel"
     }
 
-    val libraryViewModel: LibraryViewModel by inject()
+    private val libraryViewModel: LibraryViewModel by inject()
     private var cab: MaterialCab? = null
     private val intentFilter = IntentFilter(Intent.ACTION_SCREEN_OFF)
     private lateinit var currentFragment: MainActivityFragmentCallbacks
@@ -157,7 +157,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
                 .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM)
         }
         val fragment: Fragment? = getCurrentFragment()
-        if (fragment != null && fragment is AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>) {
+        if (fragment != null && fragment is AbsRecyclerViewCustomGridSizeFragment<*, *>) {
             val gridSizeItem: MenuItem = menu.findItem(R.id.action_grid_size)
             if (RetroUtil.isLandscape()) {
                 gridSizeItem.setTitle(R.string.action_grid_size_land)
@@ -187,7 +187,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val fragment = getCurrentFragment()
-        if (fragment is AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>) {
+        if (fragment is AbsRecyclerViewCustomGridSizeFragment<*, *>) {
             if (handleGridSizeMenuItem(fragment, item)) {
                 return true
             }
@@ -221,7 +221,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     }
 
     private fun handleSortOrderMenuItem(
-        fragment: AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>,
+        fragment: AbsRecyclerViewCustomGridSizeFragment<*, *>,
         item: MenuItem
     ): Boolean {
         var sortOrder: String? = null
@@ -265,7 +265,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     }
 
     private fun handleLayoutResType(
-        fragment: AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>,
+        fragment: AbsRecyclerViewCustomGridSizeFragment<*, *>,
         item: MenuItem
     ): Boolean {
         var layoutRes = -1
@@ -286,7 +286,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     }
 
     private fun handleGridSizeMenuItem(
-        fragment: AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>,
+        fragment: AbsRecyclerViewCustomGridSizeFragment<*, *>,
         item: MenuItem
     ): Boolean {
         var gridSize = 0
@@ -309,7 +309,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     }
 
     private fun setUpGridSizeMenu(
-        fragment: AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>,
+        fragment: AbsRecyclerViewCustomGridSizeFragment<*, *>,
         gridSizeMenu: SubMenu
     ) {
         when (fragment.getGridSize()) {
@@ -344,7 +344,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     }
 
     private fun setupLayoutMenu(
-        fragment: AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>,
+        fragment: AbsRecyclerViewCustomGridSizeFragment<*, *>,
         subMenu: SubMenu
     ) {
         when (fragment.itemLayoutRes()) {
@@ -366,7 +366,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     }
 
     private fun setUpSortOrderMenu(
-        fragment: AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>,
+        fragment: AbsRecyclerViewCustomGridSizeFragment<*, *>,
         sortOrderMenu: SubMenu
     ) {
         val currentSortOrder = fragment.getSortOrder()
@@ -532,8 +532,13 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         fragment: Fragment,
         tag: String
     ) {
-
         supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.retro_fragment_open_enter,
+                R.anim.retro_fragment_open_exit,
+                R.anim.retro_fragment_fade_enter,
+                R.anim.retro_fragment_fade_exit
+            )
             replace(R.id.fragment_container, fragment, tag)
         }
         currentFragment = fragment as MainActivityFragmentCallbacks

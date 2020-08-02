@@ -1,9 +1,7 @@
 package io.github.muntashirakon.music.fragments.player
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.album.AlbumCoverPagerAdapter
@@ -13,13 +11,13 @@ import io.github.muntashirakon.music.fragments.base.AbsMusicServiceFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.transform.CarousalPagerTransformer
 import io.github.muntashirakon.music.transform.ParallaxPagerTransformer
-
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_player_album_cover.*
 
 
-class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChangeListener {
+class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_player_album_cover),
+    ViewPager.OnPageChangeListener {
     private var callbacks: Callbacks? = null
     private var currentPosition: Int = 0
     private val colorReceiver = object : AlbumCoverFragment.ColorReceiver {
@@ -33,13 +31,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
     fun removeSlideEffect() {
         val transformer = ParallaxPagerTransformer(R.id.player_image)
         transformer.setSpeed(0.3f)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_player_album_cover, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

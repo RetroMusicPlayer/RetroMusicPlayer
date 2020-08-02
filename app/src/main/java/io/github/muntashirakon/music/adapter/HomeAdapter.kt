@@ -51,6 +51,7 @@ class HomeAdapter(
                         .inflate(R.layout.metal_section_recycler_view, parent, false)
                 )
             }
+            GENRES -> GenreViewHolder(layout)
             FAVOURITES -> PlaylistViewHolder(layout)
             else -> {
                 SuggestionsViewHolder(
@@ -104,6 +105,10 @@ class HomeAdapter(
                     R.string.favorites
                 )
             }
+            GENRES -> {
+                val viewHolder = holder as GenreViewHolder
+                viewHolder.bind(list[position].arrayList as List<Genre>, R.string.genres)
+            }
         }
     }
 
@@ -118,7 +123,15 @@ class HomeAdapter(
 
     companion object {
 
-        @IntDef(RECENT_ALBUMS, TOP_ALBUMS, RECENT_ARTISTS, TOP_ARTISTS, SUGGESTIONS, FAVOURITES)
+        @IntDef(
+            RECENT_ALBUMS,
+            TOP_ALBUMS,
+            RECENT_ARTISTS,
+            TOP_ARTISTS,
+            SUGGESTIONS,
+            FAVOURITES,
+            GENRES
+        )
         @Retention(AnnotationRetention.SOURCE)
         annotation class HomeSection
 
@@ -128,6 +141,7 @@ class HomeAdapter(
         const val TOP_ARTISTS = 0
         const val SUGGESTIONS = 5
         const val FAVOURITES = 4
+        const val GENRES = 6
     }
 
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
@@ -211,6 +225,18 @@ class HomeAdapter(
                     }
                     title.text = activity.getString(titleRes)
                 }
+            }
+        }
+    }
+
+    private inner class GenreViewHolder(itemView: View) : AbsHomeViewItem(itemView) {
+        fun bind(genres: List<Genre>, titleRes: Int) {
+            title.text = activity.getString(titleRes)
+            recyclerView.apply {
+                show()
+                layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.HORIZONTAL, false)
+                val genreAdapter = GenreAdapter(activity, genres, R.layout.item_grid_genre)
+                adapter = genreAdapter
             }
         }
     }
