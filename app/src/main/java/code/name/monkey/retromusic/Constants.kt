@@ -21,7 +21,7 @@ object Constants {
     const val PRO_VERSION_PRODUCT_ID = "pro_version"
     const val RATE_ON_GOOGLE_PLAY =
         "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
-    const val TRANSLATE = "https://github.com/h4h13/RetroMusicPlayer"
+    const val TRANSLATE = "https://github.com/h4h13/RetroMusicPlayer/tree/dev/app/src/main/res"
     const val GITHUB_PROJECT = "https://github.com/h4h13/RetroMusicPlayer"
     const val TELEGRAM_CHANGE_LOG = "https://t.me/retromusiclog"
     const val USER_PROFILE = "profile.jpg"
