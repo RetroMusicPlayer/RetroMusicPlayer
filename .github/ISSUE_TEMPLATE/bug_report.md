@@ -23,6 +23,12 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
+**Crash log**
+If the app is crashing, add a crash log
+<details>
+  <summary>Click to view logs</summary>
+PASTE YOUR LOGS HERE.
+</details>
 
 **Device info:**
  - Device: [e.g. OnePlus 7]
