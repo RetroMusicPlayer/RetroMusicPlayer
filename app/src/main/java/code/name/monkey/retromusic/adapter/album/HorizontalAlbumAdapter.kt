@@ -1,10 +1,10 @@
 package code.name.monkey.retromusic.adapter.album
 
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.HorizontalAdapterHelper
@@ -15,11 +15,12 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 
 class HorizontalAlbumAdapter(
-    activity: AppCompatActivity,
+    activity: FragmentActivity,
     dataSet: List<Album>,
-    cabHolder: CabHolder?
+    cabHolder: CabHolder?,
+    albumClickListener: AlbumClickListener
 ) : AlbumAdapter(
-    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, cabHolder
+    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, cabHolder, albumClickListener
 ) {
 
     override fun createViewHolder(view: View, viewType: Int): ViewHolder {
@@ -40,11 +41,6 @@ class HorizontalAlbumAdapter(
             .generatePalette(activity)
             .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    super.onLoadCleared(placeholder)
-                    //setColors(albumArtistFooterColor, holder)
-                }
-
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
                 }

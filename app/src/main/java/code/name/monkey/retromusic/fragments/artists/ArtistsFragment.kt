@@ -2,10 +2,13 @@ package code.name.monkey.retromusic.fragments.artists
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
+import code.name.monkey.retromusic.extensions.findActivityNavController
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
@@ -13,7 +16,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 
 class ArtistsFragment :
     AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
-    MainActivityFragmentCallbacks {
+    MainActivityFragmentCallbacks, ArtistClickListener {
 
     override fun handleBackPress(): Boolean {
         return false
@@ -46,10 +49,11 @@ class ArtistsFragment :
     override fun createAdapter(): ArtistAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
         return ArtistAdapter(
-            mainActivity,
+            requireActivity(),
             dataSet,
-            itemLayoutRes(),
-            mainActivity
+            R.layout.item_grid_circle,
+            null,
+            this
         )
     }
 
@@ -91,12 +95,18 @@ class ArtistsFragment :
     }
 
     companion object {
-        @JvmField
-        val TAG: String = ArtistsFragment::class.java.simpleName
 
-        @JvmStatic
         fun newInstance(): ArtistsFragment {
             return ArtistsFragment()
         }
     }
+
+    override fun onArtist(artistId: Int) {
+        val controller = findActivityNavController(R.id.fragment_container)
+        controller.navigate(R.id.artistDetailsFragment, bundleOf(EXTRA_ARTIST_ID to artistId))
+    }
+}
+
+interface ArtistClickListener {
+    fun onArtist(artistId: Int)
 }

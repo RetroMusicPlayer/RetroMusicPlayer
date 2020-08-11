@@ -1,23 +1,25 @@
-package code.name.monkey.retromusic.activities.albums
+package code.name.monkey.retromusic.fragments.albums
 
-import android.app.ActivityOptions
 import android.os.Bundle
-import android.transition.TransitionInflater
-import android.util.Pair
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.util.MaterialUtil
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
+import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
+import code.name.monkey.retromusic.fragments.MainActivityFragment
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -26,60 +28,56 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
+import kotlinx.android.synthetic.main.activity_album_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
-class AlbumDetailsFragment : AbsMusicServiceFragment(R.layout.fragment_album_details) {
+class AlbumDetailsFragment : MainActivityFragment(R.layout.fragment_album_details),
+    AlbumClickListener {
     private lateinit var simpleSongAdapter: SimpleSongAdapter
     private lateinit var album: Album
+
     private val savedSortOrder: String
         get() = PreferenceUtil.albumDetailSongSortOrder
-    private val detailsViewModel by viewModel<AlbumDetailsViewModel> {
-        parametersOf(extraNotNull<Int>(AlbumDetailsActivity.EXTRA_ALBUM_ID).value)
-    }
 
-    private fun setSharedElementTransitionOnEnter() {
-        sharedElementEnterTransition = TransitionInflater.from(context)
-            .inflateTransition(R.transition.change_bounds)
+    private val detailsViewModel by viewModel<AlbumDetailsViewModel> {
+        parametersOf(extraNotNull<Int>(EXTRA_ALBUM_ID).value)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setSharedElementTransitionOnEnter()
+        mainActivity.setSupportActionBar(toolbar)
+        mainActivity.setBottomBarVisibility(View.GONE)
+        toolbar.title = null
+
         postponeEnterTransition()
         playerActivity?.addMusicServiceEventListener(detailsViewModel)
-
-        detailsViewModel.getAlbum().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
             startPostponedEnterTransition()
             showAlbum(it)
         })
-        detailsViewModel.getArtist().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
             loadArtistImage(it)
         })
-        detailsViewModel.getMoreAlbums().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        detailsViewModel.getMoreAlbums().observe(viewLifecycleOwner, Observer {
             moreAlbums(it)
         })
-        detailsViewModel.getAlbumInfo().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        detailsViewModel.getAlbumInfo().observe(viewLifecycleOwner, Observer {
             aboutAlbum(it)
         })
         setupRecyclerView()
         artistImage.setOnClickListener {
-            val artistPairs = ActivityOptions.makeSceneTransitionAnimation(
-                requireActivity(),
-                Pair.create(
-                    artistImage,
-                    getString(R.string.transition_artist_image)
+            requireActivity().findNavController(R.id.fragment_container)
+                .navigate(
+                    R.id.artistDetailsFragment,
+                    bundleOf(EXTRA_ARTIST_ID to album.artistId)
                 )
-            )
-            NavigationUtil.goToArtistOptions(requireActivity(), album.artistId, artistPairs)
         }
         playAction.setOnClickListener { MusicPlayerRemote.openQueue(album.songs!!, 0, true) }
 
@@ -177,7 +175,7 @@ class AlbumDetailsFragment : AbsMusicServiceFragment(R.layout.fragment_album_det
         moreTitle.text = String.format(getString(R.string.label_more_from), album.artistName)
 
         val albumAdapter =
-            HorizontalAlbumAdapter(requireActivity() as AppCompatActivity, albums, null)
+            HorizontalAlbumAdapter(requireActivity() as AppCompatActivity, albums, null, this)
         moreRecyclerView.layoutManager = GridLayoutManager(
             requireContext(),
             1,
@@ -245,6 +243,13 @@ class AlbumDetailsFragment : AbsMusicServiceFragment(R.layout.fragment_album_det
             button = playAction,
             textColor = color.primaryTextColor,
             backgroundColor = color.backgroundColor
+        )
+    }
+
+    override fun onAlbumClick(albumId: Int) {
+        findNavController().navigate(
+            R.id.albumDetailsFragment,
+            bundleOf("extra_album_id" to albumId)
         )
     }
 }

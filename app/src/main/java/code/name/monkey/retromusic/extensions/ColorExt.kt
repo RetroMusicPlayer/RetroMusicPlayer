@@ -22,13 +22,16 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.SeekBar
 import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 fun Int.ripAlpha(): Int {
     return ColorUtil.stripAlpha(this)
@@ -83,4 +86,20 @@ fun SeekBar.addAccentColor() {
 
 fun Button.accentTextColor() {
     setTextColor(ThemeStore.accentColor(App.getContext()))
+}
+
+fun SeekBar.applyColor(@ColorInt color: Int) {
+    thumbTintList = ColorStateList.valueOf(color)
+    progressTintList = ColorStateList.valueOf(color)
+    progressBackgroundTintList = ColorStateList.valueOf(color)
+}
+
+fun ExtendedFloatingActionButton.accentColor() {
+    val color = ThemeStore.accentColor(context)
+    val textColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color))
+    val colorStateList = ColorStateList.valueOf(color)
+    val textColorStateList = ColorStateList.valueOf(textColor)
+    backgroundTintList = colorStateList
+    setTextColor(textColorStateList)
+    iconTint = textColorStateList
 }

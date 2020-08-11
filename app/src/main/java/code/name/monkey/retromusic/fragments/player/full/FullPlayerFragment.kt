@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.fragments.player.full
 
-import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -8,7 +7,10 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
@@ -22,7 +24,6 @@ import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_full.*
@@ -150,19 +151,11 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
 
     private fun setupArtist() {
         artistImage.setOnClickListener {
-            val transitionName =
-                "${getString(R.string.transition_artist_image)}_${MusicPlayerRemote.currentSong.artistId}"
-            val activityOptions =
-                ActivityOptions.makeSceneTransitionAnimation(
-                    requireActivity(),
-                    artistImage,
-                    transitionName
+            requireActivity().findNavController(R.id.fragment_container)
+                .navigate(
+                    R.id.artistDetailsFragment,
+                    bundleOf(EXTRA_ARTIST_ID to MusicPlayerRemote.currentSong.artistId)
                 )
-            NavigationUtil.goToArtistOptions(
-                requireActivity(),
-                MusicPlayerRemote.currentSong.artistId,
-                activityOptions
-            )
         }
     }
 

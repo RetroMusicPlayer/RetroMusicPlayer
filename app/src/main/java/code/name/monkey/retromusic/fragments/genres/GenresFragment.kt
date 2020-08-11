@@ -49,7 +49,7 @@ class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager
 
     override fun createAdapter(): GenreAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return GenreAdapter(mainActivity, dataSet, R.layout.item_list_no_image)
+        return GenreAdapter(requireActivity(), dataSet, R.layout.item_list_no_image)
     }
 
     override val emptyMessage: Int

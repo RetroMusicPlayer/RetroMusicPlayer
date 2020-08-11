@@ -48,9 +48,3 @@ fun EditText.appHandleColor(): EditText {
     TintHelper.colorHandles(this, ThemeStore.accentColor(context))
     return this
 }
-
-fun SeekBar.applyColor(@ColorInt color: Int) {
-    thumbTintList = ColorStateList.valueOf(color)
-    progressTintList = ColorStateList.valueOf(color)
-    progressBackgroundTintList = ColorStateList.valueOf(color)
-}

@@ -16,84 +16,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DrawerActivity">
-
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/action_search"
+        app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_grid_size"
-        android:icon="@drawable/ic_grid_size"
-        android:orderInCategory="5"
-        android:title="@string/action_grid_size"
-        app:showAsAction="ifRoom">
-        <menu>
-            <group
-                android:id="@+id/group_grid_size"
-                android:checkableBehavior="single">
-                <item
-                    android:id="@+id/action_grid_size_1"
-                    android:title="@string/grid_size_1" />
-                <item
-                    android:id="@+id/action_grid_size_2"
-                    android:title="@string/grid_size_2" />
-                <item
-                    android:id="@+id/action_grid_size_3"
-                    android:title="@string/grid_size_3" />
-                <item
-                    android:id="@+id/action_grid_size_4"
-                    android:title="@string/grid_size_4" />
-                <item
-                    android:id="@+id/action_grid_size_5"
-                    android:title="@string/grid_size_5" />
-                <item
-                    android:id="@+id/action_grid_size_6"
-                    android:title="@string/grid_size_6" />
-                <item
-                    android:id="@+id/action_grid_size_7"
-                    android:title="@string/grid_size_7" />
-                <item
-                    android:id="@+id/action_grid_size_8"
-                    android:title="@string/grid_size_8" />
-            </group>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/action_layout_type"
-        android:icon="@drawable/ic_dashboard"
-        android:orderInCategory="6"
-        android:title="@string/grid_style_label"
-        app:showAsAction="ifRoom">
-        <menu>
-            <group
-                android:id="@+id/group_layout_type"
-                android:checkableBehavior="single">
-                <item
-                    android:id="@+id/action_layout_normal"
-                    android:checked="true"
-                    android:title="@string/normal" />
-                <item
-                    android:id="@+id/action_layout_card"
-                    android:title="@string/card" />
-                <item
-                    android:id="@+id/action_layout_colored_card"
-                    android:title="@string/card_color_style" />
-                <item
-                    android:id="@+id/action_layout_circular"
-                    android:title="@string/circular" />
-                <item
-                    android:id="@+id/action_layout_image"
-                    android:title="@string/image" />
-                <item
-                    android:id="@+id/action_layout_gradient_image"
-                    android:title="@string/image_gradient" />
-            </group>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/action_sort_order"
-        android:icon="@drawable/ic_sort"
-        android:orderInCategory="2"
-        android:title="@string/action_sort_order"
-        app:showAsAction="ifRoom">
-        <menu></menu>
-    </item>
-
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
 </menu>

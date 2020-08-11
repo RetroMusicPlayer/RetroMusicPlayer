@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.fragments.artists.ArtistClickListener
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
@@ -19,17 +20,17 @@ import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.util.*
 
 class ArtistAdapter(
-    val activity: AppCompatActivity,
+    val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
-    cabHolder: CabHolder?
+    cabHolder: CabHolder?,
+    private val artistClickListener: ArtistClickListener
 ) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(
     activity, cabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
@@ -144,9 +145,10 @@ class ArtistAdapter(
                     imageContainerCard ?: image,
                     activity.getString(R.string.transition_artist_image)
                 )
-                NavigationUtil.goToArtistOptions(
+                artistClickListener.onArtist(dataSet[layoutPosition].id)
+                /*NavigationUtil.goToArtistOptions(
                     activity, dataSet[layoutPosition].id, activityOptions
-                )
+                )*/
             }
         }
 

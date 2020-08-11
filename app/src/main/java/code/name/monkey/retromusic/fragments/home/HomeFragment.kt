@@ -18,8 +18,11 @@ import android.app.ActivityOptions
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.fragments.LibraryViewModel
@@ -40,7 +43,7 @@ import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class BannerHomeFragment :
+class HomeFragment :
     AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home),
     MainActivityFragmentCallbacks {
 
@@ -73,13 +76,16 @@ class BannerHomeFragment :
         }
 
         lastAdded.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(requireActivity(), LastAddedPlaylist(requireActivity()))
+            requireActivity().findNavController(R.id.fragment_container).navigate(
+                R.id.playlistDetailsFragment,
+                bundleOf(EXTRA_PLAYLIST to LastAddedPlaylist(requireActivity()))
+            )
         }
 
         topPlayed.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(
-                requireActivity(),
-                MyTopTracksPlaylist(requireActivity())
+            requireActivity().findNavController(R.id.fragment_container).navigate(
+                R.id.playlistDetailsFragment,
+                bundleOf(EXTRA_PLAYLIST to MyTopTracksPlaylist(requireActivity()))
             )
         }
 
@@ -88,7 +94,10 @@ class BannerHomeFragment :
         }
 
         history.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(requireActivity(), HistoryPlaylist(requireActivity()))
+            requireActivity().findNavController(R.id.fragment_container).navigate(
+                R.id.playlistDetailsFragment,
+                bundleOf(EXTRA_PLAYLIST to HistoryPlaylist(requireActivity()))
+            )
         }
 
         userImage.setOnClickListener {
@@ -101,7 +110,7 @@ class BannerHomeFragment :
         }
         titleWelcome?.text = String.format("%s", PreferenceUtil.userName)
 
-        val homeAdapter = HomeAdapter(mainActivity, displayMetrics)
+        val homeAdapter = HomeAdapter(mainActivity)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
@@ -133,8 +142,8 @@ class BannerHomeFragment :
         const val TAG: String = "BannerHomeFragment"
 
         @JvmStatic
-        fun newInstance(): BannerHomeFragment {
-            return BannerHomeFragment()
+        fun newInstance(): HomeFragment {
+            return HomeFragment()
         }
     }
 }

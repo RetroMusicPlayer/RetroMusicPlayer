@@ -34,7 +34,7 @@ android {
     }
     signingConfigs {
         release {
-            Properties properties = getProperties('/Users/h4h13/Documents/Github/retro.properties')
+            Properties properties = getProperties('/Users/apple/Documents/Github/retro.properties')
             storeFile file(getProperty(properties, 'storeFile'))
             keyAlias getProperty(properties, 'keyAlias')
             storePassword getProperty(properties, 'storePassword')
@@ -120,6 +120,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     implementation 'com.google.android.material:material:1.3.0-alpha01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -160,7 +161,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
-    implementation 'com.google.android.play:core:1.7.3'
+    def playcore_version = "1.8.1"
+    implementation "com.google.android.play:core-ktx:$playcore_version"
     implementation 'me.jorgecastillo:androidcolorx:0.2.0'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
     implementation 'com.github.dhaval2404:imagepicker:1.7.1'
@@ -176,5 +178,4 @@ dependencies {
     def nav_version = "2.3.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
 }

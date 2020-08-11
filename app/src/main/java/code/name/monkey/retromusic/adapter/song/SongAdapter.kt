@@ -1,13 +1,15 @@
 package code.name.monkey.retromusic.adapter.song
 
-import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
@@ -22,7 +24,6 @@ import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab
@@ -34,7 +35,7 @@ import me.zhanghai.android.fastscroll.PopupTextProvider
  */
 
 open class SongAdapter(
-    protected val activity: AppCompatActivity,
+    protected val activity: FragmentActivity,
     var dataSet: MutableList<Song>,
     protected var itemLayoutRes: Int,
     cabHolder: CabHolder?,
@@ -175,12 +176,11 @@ open class SongAdapter(
             if (image != null && image!!.visibility == View.VISIBLE) {
                 when (item.itemId) {
                     R.id.action_go_to_album -> {
-                        val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                            activity,
-                            imageContainerCard ?: image,
-                            activity.getString(R.string.transition_album_art)
-                        )
-                        NavigationUtil.goToAlbumOptions(activity, song.albumId, activityOptions)
+                        activity.findNavController(R.id.fragment_container)
+                            .navigate(
+                                R.id.albumDetailsFragment,
+                                bundleOf(EXTRA_ALBUM_ID to song.albumId)
+                            )
                         return true
                     }
                 }

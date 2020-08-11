@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.activities.genre
+package code.name.monkey.retromusic.fragments.genres
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

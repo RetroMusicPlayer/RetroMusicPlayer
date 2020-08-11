@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.activities
+package code.name.monkey.retromusic.fragments.about
 
 import android.content.Intent
 import android.content.pm.PackageManager

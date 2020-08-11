@@ -16,7 +16,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
+    android:gravity="center_vertical|end"
     android:orientation="horizontal">
 
     <com.google.android.material.button.MaterialButton
@@ -27,6 +27,7 @@
         android:layout_marginEnd="4dp"
         android:layout_weight="1"
         android:text="@string/action_play_all"
+        android:visibility="gone"
         app:backgroundTint="?attr/colorSurface"
         app:icon="@drawable/ic_play_arrow" />
 
@@ -38,7 +39,35 @@
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
         android:text="@string/shuffle"
+        android:visibility="gone"
         app:backgroundTint="?attr/colorSurface"
         app:icon="@drawable/ic_shuffle" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/songsMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:padding="16dp"
+        app:srcCompat="@drawable/ic_sort"
+        app:tint="?attr/colorControlNormal" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/gridMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:padding="16dp"
+        app:srcCompat="@drawable/ic_grid_size"
+        app:tint="?attr/colorControlNormal" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:padding="16dp"
+        app:srcCompat="@drawable/ic_layout"
+        app:tint="?attr/colorControlNormal" />
+    
 </LinearLayout>

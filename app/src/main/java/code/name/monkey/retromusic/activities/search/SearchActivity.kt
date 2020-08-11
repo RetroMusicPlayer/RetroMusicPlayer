@@ -35,7 +35,7 @@ import kotlin.collections.ArrayList
 class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatcher {
 
     private val viewModel: SearchViewModel by inject()
-    private var searchAdapter: SearchAdapter? = null
+    private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,10 +87,10 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
 
     private fun setupRecyclerView() {
         searchAdapter = SearchAdapter(this, emptyList())
-        searchAdapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+        searchAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
-                empty.visibility = if (searchAdapter!!.itemCount < 1) View.VISIBLE else View.GONE
+                empty.visibility = if (searchAdapter.itemCount < 1) View.VISIBLE else View.GONE
             }
         })
         recyclerView.apply {
@@ -152,15 +152,11 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         }
     }
 
-    private fun showEmptyView() {
-        searchAdapter?.swapDataSet(ArrayList())
-    }
-
     private fun showData(data: MutableList<Any>) {
         if (data.isNotEmpty()) {
-            searchAdapter?.swapDataSet(data)
+            searchAdapter.swapDataSet(data)
         } else {
-            showEmptyView()
+            searchAdapter.swapDataSet(ArrayList())
         }
     }
 
@@ -215,7 +211,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         const val EXTRA_SHOW_MIC = "extra_show_mic"
         const val QUERY: String = "query"
 
-        private const val REQ_CODE_SPEECH_INPUT = 9002
+        const val REQ_CODE_SPEECH_INPUT = 9002
     }
 }
 

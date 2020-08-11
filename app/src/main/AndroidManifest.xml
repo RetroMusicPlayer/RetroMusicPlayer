@@ -21,12 +21,12 @@
     <application
         android:name=".App"
         android:allowBackup="true"
+        android:configChanges="locale|layoutDirection"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:configChanges="locale|layoutDirection"
         android:theme="@style/Theme.RetroMusic.FollowSystem"
         android:usesCleartextTraffic="false"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
@@ -105,18 +105,13 @@
                 <data android:mimeType="vnd.android.cursor.dir/audio" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.albums.AlbumDetailsActivity" />
-        <activity android:name=".activities.artists.ArtistDetailActivity" />
-        <activity android:name=".activities.playlist.PlaylistDetailActivity" />
         <activity android:name=".activities.PlayingQueueActivity" />
-        <activity android:name=".activities.AboutActivity" />
+        <activity android:name="code.name.monkey.retromusic.fragments.about.AboutActivity" />
         <activity android:name=".activities.tageditor.AlbumTagEditorActivity" />
         <activity android:name=".activities.tageditor.SongTagEditorActivity" />
-        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.LyricsActivity" />
         <activity android:name=".activities.UserInfoActivity" />
         <activity android:name=".activities.SupportDevelopmentActivity" />
-        <activity android:name=".activities.genre.GenreDetailsActivity" />
         <activity android:name=".activities.LicenseActivity" />
         <activity android:name=".activities.PurchaseActivity" />
         <activity android:name=".activities.WhatsNewActivity" />

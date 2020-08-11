@@ -1,0 +1,76 @@
+package code.name.monkey.retromusic.fragments.genres
+
+import android.os.Bundle
+import android.view.View
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import code.name.monkey.retromusic.EXTRA_GENRE
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.song.SongAdapter
+import code.name.monkey.retromusic.extensions.dipToPix
+import code.name.monkey.retromusic.extensions.extraNotNull
+import code.name.monkey.retromusic.fragments.MainActivityFragment
+import code.name.monkey.retromusic.model.Genre
+import code.name.monkey.retromusic.model.Song
+import kotlinx.android.synthetic.main.fragment_playlist_detail.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+import java.util.*
+
+class GenreDetailsFragment : MainActivityFragment(R.layout.fragment_playlist_detail) {
+    private val detailsViewModel: GenreDetailsViewModel by viewModel {
+        parametersOf(extraNotNull<Genre>(EXTRA_GENRE).value)
+    }
+
+    private lateinit var genre: Genre
+    private lateinit var songAdapter: SongAdapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mainActivity.addMusicServiceEventListener(detailsViewModel)
+        mainActivity.setSupportActionBar(toolbar)
+
+        setupRecyclerView()
+        detailsViewModel.getSongs().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            songs(it)
+        })
+        detailsViewModel.getGenre().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            genre = it
+            toolbar?.title = it.name
+        })
+    }
+
+    private fun setupRecyclerView() {
+        songAdapter = SongAdapter(requireActivity(), ArrayList(), R.layout.item_list, null)
+        recyclerView.apply {
+            itemAnimator = DefaultItemAnimator()
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = songAdapter
+        }
+        songAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onChanged() {
+                super.onChanged()
+                checkIsEmpty()
+            }
+        })
+    }
+
+    fun songs(songs: List<Song>) {
+        songAdapter.swapDataSet(songs)
+    }
+
+    private fun getEmojiByUnicode(unicode: Int): String {
+        return String(Character.toChars(unicode))
+    }
+
+    private fun checkIsEmpty() {
+        checkForPadding()
+        emptyEmoji.text = getEmojiByUnicode(0x1F631)
+        empty?.visibility = if (songAdapter.itemCount == 0) View.VISIBLE else View.GONE
+    }
+
+    private fun checkForPadding() {
+        val height = dipToPix(52f).toInt()
+        recyclerView.setPadding(0, 0, 0, height)
+    }
+}

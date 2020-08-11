@@ -3,7 +3,10 @@ package code.name.monkey.retromusic.extensions
 import android.content.Context
 import android.content.res.Configuration
 import android.os.PowerManager
+import android.widget.Toast
+import androidx.annotation.IdRes
 import androidx.annotation.IntegerRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -52,4 +55,18 @@ fun AppCompatActivity.currentFragment(navHostId: Int): Fragment? {
         supportFragmentManager.findFragmentById(navHostId) as NavHostFragment
     navHostFragment.targetFragment
     return navHostFragment?.childFragmentManager?.fragments?.first()
+}
+
+@Suppress("UNCHECKED_CAST")
+fun <T> AppCompatActivity.whichFragment(@IdRes id: Int): T {
+    return supportFragmentManager.findFragmentById(id) as T
+}
+
+
+fun Fragment.showToast(@StringRes stringRes: Int) {
+    showToast(getString(stringRes))
+}
+
+fun Fragment.showToast(message: String) {
+    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }

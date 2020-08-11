@@ -7,10 +7,11 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -20,17 +21,17 @@ import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 open class AlbumAdapter(
-    protected val activity: AppCompatActivity,
+    protected val activity: FragmentActivity,
     var dataSet: List<Album>,
     protected var itemLayoutRes: Int,
-    cabHolder: CabHolder?
+    cabHolder: CabHolder?,
+    private val albumClickListener: AlbumClickListener?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
     activity,
     cabHolder,
@@ -177,11 +178,12 @@ open class AlbumAdapter(
                     imageContainerCard ?: image,
                     activity.getString(R.string.transition_album_art)
                 )
-                NavigationUtil.goToAlbumOptions(
+                albumClickListener?.onAlbumClick(dataSet[layoutPosition].id)
+                /*NavigationUtil.goToAlbumOptions(
                     activity,
                     dataSet[layoutPosition].id,
                     activityOptions
-                )
+                )*/
             }
         }
 

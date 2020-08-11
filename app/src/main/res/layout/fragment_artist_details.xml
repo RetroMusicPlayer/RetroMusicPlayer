@@ -40,7 +40,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp" />
             </FrameLayout>
-
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -56,13 +55,13 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/albumCoverContainer"
+                    android:id="@+id/artistCoverContainer"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:transitionName="@string/transition_album_art"
+                    android:transitionName="@string/transition_artist_image"
                     app:cardCornerRadius="24dp"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -74,66 +73,52 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <code.name.monkey.retromusic.views.RetroShapeableImageView
-                    android:id="@+id/artistImage"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="28dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/albumCoverContainer"
-                    app:retroCornerSize="26dp"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
                 <code.name.monkey.retromusic.views.BaselineGridTextView
-                    android:id="@+id/albumTitle"
+                    android:id="@+id/artistTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
-                    android:maxLines="3"
+                    android:maxLines="2"
                     android:textAppearance="@style/TextViewHeadline5"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textStyle="bold"
-                    app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/artistImage"
-                    app:layout_constraintTop_toTopOf="@id/artistImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/artistCoverContainer"
                     tools:ignore="MissingPrefix"
-                    tools:text="@tools:sample/lorem/random" />
+                    tools:text="@tools:sample/full_names" />
 
                 <code.name.monkey.retromusic.views.BaselineGridTextView
-                    android:id="@+id/albumText"
+                    android:id="@+id/text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
-                    android:singleLine="true"
                     android:textAppearance="@style/TextViewSubtitle2"
                     android:textColor="?android:attr/textColorSecondary"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/artistImage"
-                    app:layout_constraintTop_toBottomOf="@id/albumTitle"
-                    app:lineHeightHint="24sp"
-                    tools:ignore="MissingPrefix"
-                    tools:text="@tools:sample/lorem/random" />
-
-
-                <include
-                    layout="@layout/activity_album_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/albumText" />
+                    app:layout_constraintTop_toBottomOf="@id/artistTitle"
+                    tools:ignore="MissingPrefix"
+                    tools:text="@tools:sample/full_names" />
+
+                <include
+                    layout="@layout/activity_artist_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

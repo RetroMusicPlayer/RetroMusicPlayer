@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.adapter.song
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.isPlaying
@@ -192,7 +193,7 @@ class PlayingQueueAdapter(
     internal class SwipedResultActionRemoveItem(
         private val adapter: PlayingQueueAdapter,
         private val position: Int,
-        private val activity: AppCompatActivity
+        private val activity: FragmentActivity
     ) : SwipeResultActionRemoveItem() {
 
         private var songToRemove: Song? = null

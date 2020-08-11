@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.navController
+import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 
@@ -15,7 +15,7 @@ class NowPlayingPlayerFragment : Fragment(R.layout.fragment_now_playing_player) 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val navController = navController(R.id.playerFragmentContainer)
+        val navController = findNavController(R.id.playerFragmentContainer)
         updateNowPlaying(navController)
     }
 

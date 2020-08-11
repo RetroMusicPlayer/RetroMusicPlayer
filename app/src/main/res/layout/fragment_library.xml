@@ -1,17 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2019 Hemanth Savarala.
-  ~
-  ~ Licensed under the GNU General Public License v3
-  ~
-  ~ This is free software: you can redistribute it and/or modify it under
-  ~ the terms of the GNU General Public License as published by
-  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
-  ~
-  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  ~ See the GNU General Public License for more details.
-  -->
-
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -31,6 +18,7 @@
     </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/mainContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -38,47 +26,38 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:elevation="0dp"
-            app:elevation="0dp"
             app:liftOnScroll="true">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/toolbarContainer"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardUseCompatPadding="true"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <FrameLayout
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorSurface"
+                    app:popupTheme="?attr/toolbarPopupTheme"
+                    app:title="@string/app_name"
+                    app:titleTextAppearance="@style/ToolbarTextAppearanceNormal.Library"
+                    app:titleTextColor="?attr/colorControlNormal"
+                    tools:ignore="UnusedAttribute" />
 
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/toolbar_height"
-                        android:background="?colorSurface"
-                        app:popupTheme="?attr/toolbarPopupTheme"
-                        app:title="@string/action_search"
-                        app:titleTextAppearance="@style/TextViewHeadline6"
-                        app:titleTextColor="?android:attr/textColorSecondary"
-                        tools:ignore="UnusedAttribute" />
-
-                    <ViewStub
-                        android:id="@+id/cab_stub"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/toolbar_height" />
-                </FrameLayout>
-            </com.google.android.material.card.MaterialCardView>
+                <ViewStub
+                    android:id="@+id/cab_stub"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height" />
+            </FrameLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
-            android:id="@+id/fragmentContainer"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
+            app:defaultNavHost="true"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:navGraph="@navigation/library_graph" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

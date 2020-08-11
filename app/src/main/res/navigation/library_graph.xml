@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/retro_graph"
-    app:startDestination="@id/action_song">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/library_graph"
+    app:startDestination="@id/action_home">
 
     <fragment
         android:id="@+id/action_album"
         android:name="code.name.monkey.retromusic.fragments.albums.AlbumsFragment"
-        android:label="AlbumsFragment" />
+        tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_artist"
         android:name="code.name.monkey.retromusic.fragments.artists.ArtistsFragment"
-        android:label="ArtistsFragment" />
+        tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_song"
         android:name="code.name.monkey.retromusic.fragments.songs.SongsFragment"
-        android:label="SongsFragment" />
+        tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_genre"
         android:name="code.name.monkey.retromusic.fragments.genres.GenresFragment"
-        android:label="GenresFragment" />
+        tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_playlist"
         android:name="code.name.monkey.retromusic.fragments.playlists.PlaylistsFragment"
-        android:label="PlaylistsFragment" />
+        tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_playing_queue"
         android:name="code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment"
-        android:label="PlayingQueueFragment" />
+        tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_folder"
         android:name="code.name.monkey.retromusic.fragments.folder.FoldersFragment"
-        android:label="FoldersFragment" />
+        tools:layout="@layout/fragment_folder" />
 
     <fragment
         android:id="@+id/action_home"
-        android:name="code.name.monkey.retromusic.fragments.home.BannerHomeFragment"
-        android:label="BannerHomeFragment" />
-
-    <fragment
-        android:id="@+id/albumDetailsFragment"
-        android:name="code.name.monkey.retromusic.activities.albums.AlbumDetailsFragment"
-        android:label="AlbumDetailsFragment" />
+        android:name="code.name.monkey.retromusic.fragments.home.HomeFragment"
+        tools:layout="@layout/fragment_banner_home" />
 </navigation>

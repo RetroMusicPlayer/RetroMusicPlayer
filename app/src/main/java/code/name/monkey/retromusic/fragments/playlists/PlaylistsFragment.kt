@@ -1,8 +1,6 @@
 package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,7 +10,7 @@ import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 
 class PlaylistsFragment :
-    AbsRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>() ,
+    AbsRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
 
     override fun handleBackPress(): Boolean {
@@ -39,26 +37,14 @@ class PlaylistsFragment :
 
     override fun createAdapter(): PlaylistAdapter {
         return PlaylistAdapter(
-            mainActivity,
+            requireActivity(),
             ArrayList(),
             R.layout.item_list,
-            mainActivity
+            null
         )
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.apply {
-            removeItem(R.id.action_sort_order)
-            removeItem(R.id.action_grid_size)
-        }
-    }
-
     companion object {
-        @JvmField
-        val TAG: String = PlaylistsFragment::class.java.simpleName
-
-        @JvmStatic
         fun newInstance(): PlaylistsFragment {
             return PlaylistsFragment()
         }

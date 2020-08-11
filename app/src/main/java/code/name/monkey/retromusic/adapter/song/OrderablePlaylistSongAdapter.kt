@@ -2,7 +2,7 @@ package code.name.monkey.retromusic.adapter.song
 
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.menu
 import code.name.monkey.retromusic.dialogs.RemoveFromPlaylistDialog
@@ -16,13 +16,16 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
 import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
 
 class OrderablePlaylistSongAdapter(
-    activity: AppCompatActivity,
+    activity: FragmentActivity,
     dataSet: ArrayList<Song>,
     itemLayoutRes: Int,
     cabHolder: CabHolder?,
     private val onMoveItemListener: OnMoveItemListener?
-) : PlaylistSongAdapter(
-    activity, dataSet, itemLayoutRes, cabHolder
+) : SongAdapter(
+    activity,
+    dataSet,
+    itemLayoutRes,
+    cabHolder
 ), DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
 
     init {
@@ -91,7 +94,7 @@ class OrderablePlaylistSongAdapter(
         fun onMoveItem(fromPosition: Int, toPosition: Int)
     }
 
-    inner class ViewHolder(itemView: View) : PlaylistSongAdapter.ViewHolder(itemView),
+    inner class ViewHolder(itemView: View) : SongAdapter.ViewHolder(itemView),
         DraggableItemViewHolder {
         @DraggableItemStateFlags
         private var mDragStateFlags: Int = 0
@@ -131,9 +134,5 @@ class OrderablePlaylistSongAdapter(
         override fun setDragStateFlags(@DraggableItemStateFlags flags: Int) {
             mDragStateFlags = flags
         }
-    }
-
-    companion object {
-        val TAG: String = OrderablePlaylistSongAdapter::class.java.simpleName
     }
 }

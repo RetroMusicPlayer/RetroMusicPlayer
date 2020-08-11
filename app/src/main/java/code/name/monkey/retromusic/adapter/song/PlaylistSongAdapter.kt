@@ -1,14 +1,15 @@
 package code.name.monkey.retromusic.adapter.song
 
-import android.app.ActivityOptions
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.NavigationUtil
 import com.google.android.material.button.MaterialButton
 
 open class PlaylistSongAdapter(
@@ -57,19 +58,14 @@ open class PlaylistSongAdapter(
 
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             if (item.itemId == R.id.action_go_to_album) {
-                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                    activity,
-                    imageContainerCard ?: image,
-                    activity.getString(R.string.transition_album_art)
-                )
-                NavigationUtil.goToAlbumOptions(activity, song.albumId, activityOptions)
+                activity.findNavController(R.id.fragment_container)
+                    .navigate(
+                        R.id.albumDetailsFragment,
+                        bundleOf(EXTRA_ALBUM_ID to song.albumId)
+                    )
                 return true
             }
             return super.onSongMenuItemClick(item)
         }
-    }
-
-    companion object {
-        val TAG: String = PlaylistSongAdapter::class.java.simpleName
     }
 }

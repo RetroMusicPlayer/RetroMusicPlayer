@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.adapter
 
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,18 +7,24 @@ import android.widget.TextView
 import androidx.annotation.IntDef
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
+import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.PeekingLinearLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
+import code.name.monkey.retromusic.fragments.artists.ArtistClickListener
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
@@ -29,8 +34,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
 
 class HomeAdapter(
-    private val activity: AppCompatActivity,
-    private val displayMetrics: DisplayMetrics
+    private val activity: AppCompatActivity
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var list = listOf<Home>()
@@ -143,21 +147,28 @@ class HomeAdapter(
         const val GENRES = 6
     }
 
-    private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
+    private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view), AlbumClickListener {
         fun bindView(list: List<Album>, titleRes: Int) {
             if (list.isNotEmpty()) {
+                val albumAdapter = AlbumAdapter(activity, list, R.layout.pager_item, null, this)
                 recyclerView.apply {
                     show()
-                    adapter = AlbumAdapter(activity, list, R.layout.pager_item, null)
-                    layoutManager =
-                        PeekingLinearLayoutManager(activity, HORIZONTAL, false)
+                    adapter = albumAdapter
+                    layoutManager = PeekingLinearLayoutManager(activity, HORIZONTAL, false)
                 }
                 title.text = activity.getString(titleRes)
             }
         }
+
+        override fun onAlbumClick(albumId: Int) {
+            activity.findNavController(R.id.fragment_container).navigate(
+                R.id.albumDetailsFragment,
+                bundleOf(EXTRA_ALBUM_ID to albumId)
+            )
+        }
     }
 
-    inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
+    private inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view), ArtistClickListener {
         fun bindView(list: List<Artist>, titleRes: Int) {
             if (list.isNotEmpty()) {
                 val manager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -165,7 +176,8 @@ class HomeAdapter(
                     activity,
                     list,
                     PreferenceUtil.homeGridStyle,
-                    null
+                    null,
+                    this
                 )
                 recyclerView.apply {
                     show()
@@ -174,6 +186,13 @@ class HomeAdapter(
                 }
                 title.text = activity.getString(titleRes)
             }
+        }
+
+        override fun onArtist(artistId: Int) {
+            activity.findNavController(R.id.fragment_container).navigate(
+                R.id.artistDetailsFragment,
+                bundleOf(EXTRA_ARTIST_ID to artistId)
+            )
         }
     }
 

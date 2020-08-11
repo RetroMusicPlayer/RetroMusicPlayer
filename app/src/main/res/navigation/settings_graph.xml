@@ -18,6 +18,7 @@
             app:exitAnim="@anim/retro_fragment_open_exit"
             app:popEnterAnim="@anim/retro_fragment_close_enter"
             app:popExitAnim="@anim/retro_fragment_close_exit" />
+
         <action
             android:id="@+id/action_mainSettingsFragment_to_imageSettingFragment"
             app:destination="@id/imageSettingFragment"
@@ -25,6 +26,7 @@
             app:exitAnim="@anim/retro_fragment_open_exit"
             app:popEnterAnim="@anim/retro_fragment_close_enter"
             app:popExitAnim="@anim/retro_fragment_close_exit" />
+
         <action
             android:id="@+id/action_mainSettingsFragment_to_nowPlayingSettingsFragment"
             app:destination="@id/nowPlayingSettingsFragment"
@@ -32,6 +34,7 @@
             app:exitAnim="@anim/retro_fragment_open_exit"
             app:popEnterAnim="@anim/retro_fragment_close_enter"
             app:popExitAnim="@anim/retro_fragment_close_exit" />
+
         <action
             android:id="@+id/action_mainSettingsFragment_to_audioSettings"
             app:destination="@id/audioSettings"
@@ -39,6 +42,7 @@
             app:exitAnim="@anim/retro_fragment_open_exit"
             app:popEnterAnim="@anim/retro_fragment_close_enter"
             app:popExitAnim="@anim/retro_fragment_close_exit" />
+
         <action
             android:id="@+id/action_mainSettingsFragment_to_otherSettingsFragment"
             app:destination="@id/otherSettingsFragment"
@@ -46,13 +50,15 @@
             app:exitAnim="@anim/retro_fragment_open_exit"
             app:popEnterAnim="@anim/retro_fragment_close_enter"
             app:popExitAnim="@anim/retro_fragment_close_exit" />
+
         <action
             android:id="@+id/action_mainSettingsFragment_to_personalizeSettingsFragment"
+            app:destination="@id/personalizeSettingsFragment"
             app:enterAnim="@anim/retro_fragment_open_enter"
             app:exitAnim="@anim/retro_fragment_open_exit"
             app:popEnterAnim="@anim/retro_fragment_close_enter"
-            app:popExitAnim="@anim/retro_fragment_close_exit"
-            app:destination="@id/personalizeSettingsFragment" />
+            app:popExitAnim="@anim/retro_fragment_close_exit" />
+
         <action
             android:id="@+id/action_mainSettingsFragment_to_notificationSettingsFragment"
             app:destination="@id/notificationSettingsFragment"
@@ -101,9 +107,9 @@
         android:name="code.name.monkey.retromusic.fragments.settings.ThemeSettingsFragment"
         android:label="Look &amp; Feel" />
 
-    <activity
+    <fragment
         android:id="@+id/aboutActivity"
-        android:name="code.name.monkey.retromusic.activities.AboutActivity"
-        android:label="AboutActivity" />
+        android:name="code.name.monkey.retromusic.fragments.about.AboutFragment"
+        android:label="About" />
 
 </navigation>

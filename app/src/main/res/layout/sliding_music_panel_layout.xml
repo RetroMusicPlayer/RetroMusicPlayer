@@ -30,11 +30,11 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerFragmentContainer"
-            android:layout_width="match_parent"
             android:name="code.name.monkey.retromusic.fragments.player.NowPlayingPlayerFragment"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <androidx.fragment.app.FragmentContainerView
+        <fragment
             android:id="@+id/miniPlayerFragment"
             android:name="code.name.monkey.retromusic.fragments.MiniPlayerFragment"
             android:layout_width="match_parent"

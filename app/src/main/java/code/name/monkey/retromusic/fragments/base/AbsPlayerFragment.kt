@@ -14,6 +14,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
+import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
@@ -86,11 +90,17 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 return true
             }
             R.id.action_go_to_album -> {
-                NavigationUtil.goToAlbum(requireActivity(), song.albumId)
+                requireActivity().findNavController(R.id.fragment_container).navigate(
+                    R.id.albumDetailsFragment,
+                    bundleOf(EXTRA_ALBUM_ID to song.albumId)
+                )
                 return true
             }
             R.id.action_go_to_artist -> {
-                NavigationUtil.goToArtist(requireActivity(), song.artistId)
+                requireActivity().findNavController(R.id.fragment_container).navigate(
+                    R.id.artistDetailsFragment,
+                    bundleOf(EXTRA_ARTIST_ID to song.artistId)
+                )
                 return true
             }
             R.id.now_playing -> {

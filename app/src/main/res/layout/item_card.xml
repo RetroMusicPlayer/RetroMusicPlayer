@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="1dp"
     android:background="?attr/rectSelector"
     android:clickable="true"
     android:focusable="true">
@@ -11,7 +12,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_margin="5dp"
         app:cardCornerRadius="8dp"
         tools:ignore="MissingPrefix">
 

@@ -19,13 +19,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.SettingsActivity
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -77,13 +75,5 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             buyPremium.setTextColor(it)
             diamondIcon.imageTintList = ColorStateList.valueOf(it)
         }
-    }
-
-    companion object {
-
-    }
-
-    private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {
-        (requireActivity() as SettingsActivity).setupFragment(fragment, title)
     }
 }

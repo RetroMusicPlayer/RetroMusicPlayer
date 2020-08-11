@@ -1,29 +1,23 @@
-package code.name.monkey.retromusic.activities.playlist
+package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
+import android.view.MenuInflater
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
-import code.name.monkey.retromusic.adapter.song.PlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
-import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.extraNotNull
-import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
-import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.fragments.MainActivityFragment
 import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
-import com.afollestad.materialcab.MaterialCab
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
@@ -31,63 +25,52 @@ import kotlinx.android.synthetic.main.activity_playlist_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
-
-
+class PlaylistDetailsFragment : MainActivityFragment(R.layout.fragment_playlist_detail) {
     private val viewModel: PlaylistDetailsViewModel by viewModel {
         parametersOf(extraNotNull<Playlist>(EXTRA_PLAYLIST).value)
     }
     private lateinit var playlist: Playlist
-    private var cab: MaterialCab? = null
     private lateinit var adapter: SongAdapter
+
     private var wrappedAdapter: RecyclerView.Adapter<*>? = null
     private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
-        super.onCreate(savedInstanceState)
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
-        setTaskDescriptionColorAuto()
-        setLightNavigationBar(true)
-        setBottomBarVisibility(View.GONE)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mainActivity.addMusicServiceEventListener(viewModel)
+        mainActivity.setSupportActionBar(toolbar)
 
         playlist = extraNotNull<Playlist>(EXTRA_PLAYLIST).value
 
-        setUpToolBar()
         setUpRecyclerView()
 
-        viewModel.getSongs().observe(this, Observer {
+        viewModel.getSongs().observe(viewLifecycleOwner, Observer {
             songs(it)
         })
 
-        viewModel.getPlaylist().observe(this, Observer {
+        viewModel.getPlaylist().observe(viewLifecycleOwner, Observer {
             playlist = it
-            supportActionBar?.title = it.name
+            toolbar.title = it.name
         })
-        addMusicServiceEventListener(viewModel)
-    }
 
-    override fun createContentView(): View {
-        return wrapSlidingMusicPanel(R.layout.activity_playlist_detail)
     }
 
     private fun setUpRecyclerView() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         if (playlist is AbsCustomPlaylist) {
-            adapter = PlaylistSongAdapter(this, ArrayList(), R.layout.item_list, this)
+            adapter = SongAdapter(requireActivity(), ArrayList(), R.layout.item_list, null)
             recyclerView.adapter = adapter
         } else {
             recyclerViewDragDropManager = RecyclerViewDragDropManager()
             val animator = RefactoredDefaultItemAnimator()
-            adapter = OrderablePlaylistSongAdapter(this,
+            adapter = OrderablePlaylistSongAdapter(requireActivity(),
                 ArrayList(),
                 R.layout.item_list,
-                this,
+                null,
                 object : OrderablePlaylistSongAdapter.OnMoveItemListener {
                     override fun onMoveItem(fromPosition: Int, toPosition: Int) {
                         if (PlaylistsUtil.moveItem(
-                                this@PlaylistDetailActivity,
+                                requireContext(),
                                 playlist.id,
                                 fromPosition,
                                 toPosition
@@ -114,58 +97,18 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         })
     }
 
-    private fun setUpToolBar() {
-        applyToolbar(toolbar)
-        title = playlist.name
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(
             if (playlist is AbsCustomPlaylist) R.menu.menu_smart_playlist_detail
             else R.menu.menu_playlist_detail, menu
         )
-        return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                return true
-            }
-        }
-        return PlaylistMenuHelper.handleMenuClick(this, playlist, item)
-    }
-
-    override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
-        if (cab != null && cab!!.isActive) {
-            cab!!.finish()
-        }
-        cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close)
-            .setBackgroundColor(
-                RetroColorUtil.shiftBackgroundColorForLightText(
-                    ATHUtil.resolveColor(
-                        this,
-                        R.attr.colorSurface
-                    )
-                )
-            ).start(callback)
-        return cab!!
-    }
-
-    override fun onBackPressed() {
-        if (cab != null && cab!!.isActive) {
-            cab!!.finish()
-        } else {
-            recyclerView!!.stopScroll()
-            super.onBackPressed()
-        }
-    }
 
     private fun checkForPadding() {
-        val height = DensityUtil.dip2px(this, 52f)
-        recyclerView.setPadding(0, 0, 0, (height))
+        val height = dipToPix(52f)
+        recyclerView.setPadding(0, 0, 0, height.toInt())
     }
 
     private fun checkIsEmpty() {
@@ -215,9 +158,5 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder {
         } else {
             showEmptyView()
         }
-    }
-
-    companion object {
-        var EXTRA_PLAYLIST = "extra_playlist"
     }
 }

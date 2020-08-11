@@ -19,7 +19,7 @@ import android.app.Activity
 import android.content.Context
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
@@ -38,7 +38,7 @@ import java.util.*
 object PlaylistMenuHelper {
 
     fun handleMenuClick(
-        activity: AppCompatActivity,
+        activity: FragmentActivity,
         playlist: Playlist, item: MenuItem
     ): Boolean {
         when (item.itemId) {

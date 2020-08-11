@@ -2,22 +2,20 @@ package code.name.monkey.retromusic.fragments.albums
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
-import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 class AlbumsFragment :
     AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
-    MainActivityFragmentCallbacks {
-
-    override fun handleBackPress(): Boolean {
-        return false
-    }
+    AlbumClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,10 +38,11 @@ class AlbumsFragment :
     override fun createAdapter(): AlbumAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
         return AlbumAdapter(
-            mainActivity,
+            requireActivity(),
             dataSet,
-            itemLayoutRes(),
-            mainActivity
+            R.layout.item_grid,
+            null,
+            this
         )
     }
 
@@ -90,12 +89,17 @@ class AlbumsFragment :
 
 
     companion object {
-        @JvmField
-        var TAG: String = AlbumsFragment::class.java.simpleName
-
-        @JvmStatic
         fun newInstance(): AlbumsFragment {
             return AlbumsFragment()
         }
     }
+
+    override fun onAlbumClick(albumId: Int) {
+        val controller = requireActivity().findNavController(R.id.fragment_container)
+        controller.navigate(R.id.albumDetailsFragment, bundleOf(EXTRA_ALBUM_ID to albumId))
+    }
+}
+
+interface AlbumClickListener {
+    fun onAlbumClick(albumId: Int)
 }

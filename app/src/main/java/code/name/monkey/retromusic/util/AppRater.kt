@@ -14,12 +14,15 @@
 
 package code.name.monkey.retromusic.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
+import android.widget.Toast
 import code.name.monkey.retromusic.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.play.core.review.ReviewManagerFactory
 
 object AppRater {
     private const val DO_NOT_SHOW_AGAIN = "do_not_show_again"// Package Name
@@ -53,11 +56,27 @@ object AppRater {
         // Wait at least n days before opening
         if (launchCount >= LAUNCHES_UNTIL_PROMPT) {
             if (System.currentTimeMillis() >= dateFirstLaunch + DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000) {
-                showRateDialog(context, editor)
+                //showRateDialog(context, editor)
+                showPlayStoreReviewDialog(context)
             }
         }
 
         editor.commit()
+    }
+
+    private fun showPlayStoreReviewDialog(context: Context) {
+        val manager = ReviewManagerFactory.create(context)
+        manager.requestReviewFlow().addOnCompleteListener { request ->
+            if (request.isSuccessful) {
+                val reviewInfo = request.result
+                manager.launchReviewFlow(context as Activity, reviewInfo).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Toast.makeText(context, "Thanks for the feedback", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        }
     }
 
     private fun showRateDialog(context: Context, editor: SharedPreferences.Editor) {

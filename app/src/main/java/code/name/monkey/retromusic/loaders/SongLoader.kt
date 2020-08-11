@@ -95,10 +95,21 @@ object SongLoader {
         val artistId = cursor.getInt(9)
         val artistName = cursor.getString(10)
         val composer = cursor.getString(11)
-
+        val albumArtist = cursor.getString(12)
         return Song(
-            id, title, trackNumber, year, duration, data, dateModified, albumId,
-            albumName ?: "", artistId, artistName, composer ?: ""
+            id,
+            title,
+            trackNumber,
+            year,
+            duration,
+            data,
+            dateModified,
+            albumId,
+            albumName ?: "",
+            artistId,
+            artistName ?: "",
+            composer ?: "",
+            albumArtist ?: ""
         )
     }
 
@@ -123,13 +134,13 @@ object SongLoader {
             selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
             selectionValuesFinal = addBlacklistSelectionValues(selectionValuesFinal, paths)
         }
-
+        selectionFinal =
+            selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
         try {
             return context.contentResolver.query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 baseProjection,
-                selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " +
-                        (PreferenceUtil.filterLength * 1000),
+                selectionFinal,
                 selectionValuesFinal,
                 sortOrder
             )

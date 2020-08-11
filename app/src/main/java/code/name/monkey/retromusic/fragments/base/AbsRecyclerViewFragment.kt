@@ -7,7 +7,6 @@ import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.DensityUtil
@@ -24,8 +23,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     AppBarLayout.OnOffsetChangedListener {
 
     val libraryViewModel: LibraryViewModel by sharedViewModel()
-    val mainActivity: MainActivity
-        get() = requireActivity() as MainActivity
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -38,7 +36,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.addOnAppBarOffsetChangedListener(this)
         initLayoutManager()
         initAdapter()
         setUpRecyclerView()
@@ -112,7 +109,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
             container.paddingLeft,
             container.paddingTop,
             container.paddingRight,
-            mainActivity.getTotalAppBarScrollingRange() + i
+            i
         )
     }
 
@@ -135,11 +132,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         initAdapter()
         checkIsEmpty()
         recyclerView.adapter = adapter
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mainActivity.removeOnAppBarOffsetChangedListener(this)
     }
 
     fun recyclerView(): RecyclerView {
