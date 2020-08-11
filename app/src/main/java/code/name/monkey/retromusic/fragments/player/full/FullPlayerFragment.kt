@@ -8,12 +8,13 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.findActivityNavController
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
@@ -151,7 +152,8 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
 
     private fun setupArtist() {
         artistImage.setOnClickListener {
-            requireActivity().findNavController(R.id.fragment_container)
+            mainActivity.collapsePanel()
+            findActivityNavController(R.id.fragment_container)
                 .navigate(
                     R.id.artistDetailsFragment,
                     bundleOf(EXTRA_ARTIST_ID to MusicPlayerRemote.currentSong.artistId)
@@ -160,13 +162,10 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
     }
 
     private fun setUpSubFragments() {
-        controlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FullPlaybackControlsFragment
-
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
-        playerAlbumCoverFragment.setCallbacks(this)
-        playerAlbumCoverFragment.removeSlideEffect()
+        controlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val coverFragment: PlayerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
+        coverFragment.setCallbacks(this)
+        coverFragment.removeSlideEffect()
     }
 
     override fun onShow() {

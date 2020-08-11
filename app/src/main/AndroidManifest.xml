@@ -106,7 +106,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.PlayingQueueActivity" />
-        <activity android:name="code.name.monkey.retromusic.fragments.about.AboutActivity" />
         <activity android:name=".activities.tageditor.AlbumTagEditorActivity" />
         <activity android:name=".activities.tageditor.SongTagEditorActivity" />
         <activity android:name=".activities.LyricsActivity" />
@@ -118,9 +117,6 @@
         <activity android:name=".activities.bugreport.BugReportActivity" />
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
-        <activity
-            android:name="code.name.monkey.retromusic.fragments.search.SearchActivity"
-            android:windowSoftInputMode="stateVisible" />
 
         <activity
             android:name=".activities.LockScreenActivity"

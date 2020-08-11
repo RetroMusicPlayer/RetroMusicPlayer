@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_player_album_cover.*
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_player_album_cover),
     ViewPager.OnPageChangeListener {
+
     private var callbacks: Callbacks? = null
     private var currentPosition: Int = 0
     private val colorReceiver = object : AlbumCoverFragment.ColorReceiver {

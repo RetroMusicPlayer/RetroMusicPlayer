@@ -23,8 +23,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     AppBarLayout.OnOffsetChangedListener {
 
     val libraryViewModel: LibraryViewModel by sharedViewModel()
-
-
+    
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)

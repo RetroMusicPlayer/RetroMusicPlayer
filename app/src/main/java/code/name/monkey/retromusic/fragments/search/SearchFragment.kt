@@ -18,15 +18,14 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.fragments.MainActivityFragment
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_search.view.*
 import org.koin.android.ext.android.inject
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SearchFragment : MainActivityFragment(R.layout.fragment_search), TextWatcher {
+class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWatcher {
     companion object {
         const val QUERY = "query"
         const val REQ_CODE_SPEECH_INPUT = 9001
@@ -41,6 +40,7 @@ class SearchFragment : MainActivityFragment(R.layout.fragment_search), TextWatch
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.hideBottomNavigation()
         mainActivity.setBottomBarVisibility(View.GONE)
+
         setupRecyclerView()
         setupSearchView()
         voiceSearch.setOnClickListener { startMicSearch() }

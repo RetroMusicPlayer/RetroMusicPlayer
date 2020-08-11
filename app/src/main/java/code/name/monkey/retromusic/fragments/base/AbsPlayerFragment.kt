@@ -34,11 +34,8 @@ import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.FileNotFoundException
 
-abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout),
-    Toolbar.OnMenuItemClickListener,
-    PaletteColorHolder,
-    PlayerAlbumCoverFragment.Callbacks {
-
+abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
+    Toolbar.OnMenuItemClickListener, PaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
 
     private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
     private var updateLyricsAsyncTask: AsyncTask<*, *, *>? = null
@@ -262,11 +259,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             statusBarShadow?.hide()
-    }
-
-    interface Callbacks {
-
-        fun onPaletteColorChanged()
     }
 
     companion object {

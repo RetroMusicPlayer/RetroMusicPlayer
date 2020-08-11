@@ -10,7 +10,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.extraNotNull
-import code.name.monkey.retromusic.fragments.MainActivityFragment
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
-class GenreDetailsFragment : MainActivityFragment(R.layout.fragment_playlist_detail) {
+class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail) {
     private val detailsViewModel: GenreDetailsViewModel by viewModel {
         parametersOf(extraNotNull<Genre>(EXTRA_GENRE).value)
     }

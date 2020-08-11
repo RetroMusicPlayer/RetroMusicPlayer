@@ -85,7 +85,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         PreferenceUtil.unregisterOnSharedPreferenceChangedListener(this)
     }
 
-
     override fun requestPermissions() {
         if (!blockRequestPermissions) {
             super.requestPermissions()
@@ -180,7 +179,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     }
 
     override fun handleBackPress(): Boolean {
-        getBottomNavigationView().menu.getItem(0).isChecked = true
         if (cab != null && cab!!.isActive) {
             cab?.finish()
             return true

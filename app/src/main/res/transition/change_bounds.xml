@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<changeBounds xmlns:android="http://schemas.android.com/apk/res/android"
-    android:interpolator="@android:interpolator/fast_out_slow_in" />
+<transitionSet>
+    <changeBounds/>
+    <changeTransform/>
+    <changeClipBounds/>
+    <changeImageTransform/>
+</transitionSet>

@@ -12,12 +12,11 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.ContributorAdapter
-import code.name.monkey.retromusic.fragments.MainActivityFragment
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.card_credit.*
 import kotlinx.android.synthetic.main.card_other.*
 import kotlinx.android.synthetic.main.card_retro_info.*
@@ -25,10 +24,9 @@ import kotlinx.android.synthetic.main.card_social.*
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 
-class AboutFragment : MainActivityFragment(R.layout.fragment_about), View.OnClickListener {
+class AboutFragment : AbsMainActivityFragment(R.layout.fragment_about), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.setSupportActionBar(toolbar)
         version.setSummary(getAppVersion())
         setUpView()
         loadContributors()

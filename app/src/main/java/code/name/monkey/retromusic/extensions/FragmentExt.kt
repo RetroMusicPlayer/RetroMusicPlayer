@@ -62,6 +62,10 @@ fun <T> AppCompatActivity.whichFragment(@IdRes id: Int): T {
     return supportFragmentManager.findFragmentById(id) as T
 }
 
+@Suppress("UNCHECKED_CAST")
+fun <T> Fragment.whichFragment(@IdRes id: Int): T {
+    return childFragmentManager.findFragmentById(id) as T
+}
 
 fun Fragment.showToast(@StringRes stringRes: Int) {
     showToast(getString(stringRes))

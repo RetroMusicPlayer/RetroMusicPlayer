@@ -7,6 +7,8 @@ import android.view.View
 import android.webkit.MimeTypeMap
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.navOptions
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Song
@@ -22,7 +24,17 @@ import java.util.*
 
 open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
     MusicServiceEventListener {
-
+    val navOptions by lazy {
+        navOptions {
+            launchSingleTop = true
+            anim {
+                enter = R.anim.retro_fragment_open_enter
+                exit = R.anim.retro_fragment_open_exit
+                popEnter = R.anim.retro_fragment_close_enter
+                popExit = R.anim.retro_fragment_close_exit
+            }
+        }
+    }
     var playerActivity: AbsMusicServiceActivity? = null
         private set
 

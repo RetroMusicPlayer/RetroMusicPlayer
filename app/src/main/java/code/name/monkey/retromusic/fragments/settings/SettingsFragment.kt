@@ -5,10 +5,10 @@ import android.view.View
 import androidx.navigation.NavController
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.findNavController
-import code.name.monkey.retromusic.fragments.MainActivityFragment
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import kotlinx.android.synthetic.main.fragment_settings.*
 
-class SettingsFragment : MainActivityFragment(R.layout.fragment_settings) {
+class SettingsFragment : AbsMainActivityFragment(R.layout.fragment_settings) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

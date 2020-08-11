@@ -8,18 +8,17 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
-import code.name.monkey.retromusic.extensions.extraNotNull
+import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.fragments.MainActivityFragment
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -38,16 +37,17 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
-class AlbumDetailsFragment : MainActivityFragment(R.layout.fragment_album_details),
+class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_details),
     AlbumClickListener {
     private lateinit var simpleSongAdapter: SimpleSongAdapter
     private lateinit var album: Album
+    private val args: AlbumDetailsFragmentArgs by navArgs()
 
     private val savedSortOrder: String
         get() = PreferenceUtil.albumDetailSongSortOrder
 
     private val detailsViewModel by viewModel<AlbumDetailsViewModel> {
-        parametersOf(extraNotNull<Int>(EXTRA_ALBUM_ID).value)
+        parametersOf(args.extraAlbumId)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -55,6 +55,8 @@ class AlbumDetailsFragment : MainActivityFragment(R.layout.fragment_album_detail
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.setBottomBarVisibility(View.GONE)
         toolbar.title = null
+
+        image.transitionName = getString(R.string.transition_album_art)
 
         postponeEnterTransition()
         playerActivity?.addMusicServiceEventListener(detailsViewModel)
@@ -98,13 +100,6 @@ class AlbumDetailsFragment : MainActivityFragment(R.layout.fragment_album_detail
         image.apply {
             transitionName = getString(R.string.transition_album_art)
         }
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val activity = activity as AppCompatActivity
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onDestroy() {
@@ -234,19 +229,11 @@ class AlbumDetailsFragment : MainActivityFragment(R.layout.fragment_album_detail
     }
 
     private fun setColors(color: MediaNotificationProcessor) {
-        MaterialUtil.tintColor(
-            button = shuffleAction,
-            textColor = color.primaryTextColor,
-            backgroundColor = color.backgroundColor
-        )
-        MaterialUtil.tintColor(
-            button = playAction,
-            textColor = color.primaryTextColor,
-            backgroundColor = color.backgroundColor
-        )
+        shuffleAction.applyColor(color.backgroundColor)
+        playAction.applyColor(color.backgroundColor)
     }
 
-    override fun onAlbumClick(albumId: Int) {
+    override fun onAlbumClick(albumId: Int, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf("extra_album_id" to albumId)

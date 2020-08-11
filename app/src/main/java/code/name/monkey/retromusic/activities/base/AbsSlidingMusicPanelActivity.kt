@@ -118,7 +118,7 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
         return slidingMusicPanelLayout
     }
 
-    private fun collapsePanel() {
+    fun collapsePanel() {
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
@@ -302,7 +302,8 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
 
     fun hideBottomNavigation() {
         behavior.isHideable = true
-        behavior.state == BottomSheetBehavior.STATE_HIDDEN
+        behavior.peekHeight = 0
+        setBottomBarVisibility(View.GONE)
     }
 
     fun updateTabs() {

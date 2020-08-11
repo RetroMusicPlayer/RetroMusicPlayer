@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.adapter.album
 
-import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.view.LayoutInflater
@@ -173,17 +172,7 @@ open class AlbumAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                    activity,
-                    imageContainerCard ?: image,
-                    activity.getString(R.string.transition_album_art)
-                )
-                albumClickListener?.onAlbumClick(dataSet[layoutPosition].id)
-                /*NavigationUtil.goToAlbumOptions(
-                    activity,
-                    dataSet[layoutPosition].id,
-                    activityOptions
-                )*/
+                image?.let { albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, it) }
             }
         }
 

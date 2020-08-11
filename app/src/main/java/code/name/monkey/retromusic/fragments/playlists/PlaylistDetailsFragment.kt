@@ -13,7 +13,7 @@ import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.extraNotNull
-import code.name.monkey.retromusic.fragments.MainActivityFragment
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
@@ -21,11 +21,11 @@ import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-import kotlinx.android.synthetic.main.activity_playlist_detail.*
+import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class PlaylistDetailsFragment : MainActivityFragment(R.layout.fragment_playlist_detail) {
+class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail) {
     private val viewModel: PlaylistDetailsViewModel by viewModel {
         parametersOf(extraNotNull<Playlist>(EXTRA_PLAYLIST).value)
     }

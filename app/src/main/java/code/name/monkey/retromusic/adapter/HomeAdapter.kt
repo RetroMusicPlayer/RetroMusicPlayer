@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -167,10 +168,14 @@ class HomeAdapter(
             }
         }
 
-        override fun onAlbumClick(albumId: Int) {
+        override fun onAlbumClick(albumId: Int, view: View) {
             activity.findNavController(R.id.fragment_container).navigate(
                 R.id.albumDetailsFragment,
-                bundleOf(EXTRA_ALBUM_ID to albumId)
+                bundleOf(EXTRA_ALBUM_ID to albumId),
+                null,
+                FragmentNavigatorExtras(
+                    view to activity.getString(R.string.transition_album_art)
+                )
             )
         }
     }

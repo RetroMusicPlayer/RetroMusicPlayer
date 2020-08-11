@@ -6,19 +6,20 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
+import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.fragments.MainActivityFragment
 import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -35,7 +36,7 @@ import org.koin.core.parameter.parametersOf
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ArtistDetailsFragment : MainActivityFragment(R.layout.fragment_artist_details),
+class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_details),
     AlbumClickListener {
 
     private var biography: Spanned? = null
@@ -49,12 +50,12 @@ class ArtistDetailsFragment : MainActivityFragment(R.layout.fragment_artist_deta
         parametersOf(extraNotNull<Int>(EXTRA_ARTIST_ID).value)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.setBottomBarVisibility(View.GONE)
         toolbar.title = null
-
+        setupRecyclerView()
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
             startPostponedEnterTransition()
@@ -63,7 +64,7 @@ class ArtistDetailsFragment : MainActivityFragment(R.layout.fragment_artist_deta
         detailsViewModel.getArtistInfo().observe(viewLifecycleOwner, Observer {
             artistInfo(it)
         })
-        setupRecyclerView()
+
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
         }
@@ -173,22 +174,18 @@ class ArtistDetailsFragment : MainActivityFragment(R.layout.fragment_artist_deta
     }
 
     private fun setColors(color: MediaNotificationProcessor) {
-        MaterialUtil.tintColor(
-            button = shuffleAction,
-            textColor = color.primaryTextColor,
-            backgroundColor = color.backgroundColor
-        )
-        MaterialUtil.tintColor(
-            button = playAction,
-            textColor = color.primaryTextColor,
-            backgroundColor = color.backgroundColor
-        )
+        shuffleAction.applyColor(color.backgroundColor)
+        playAction.applyColor(color.backgroundColor)
     }
 
-    override fun onAlbumClick(albumId: Int) {
+    override fun onAlbumClick(albumId: Int, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
-            bundleOf("extra_album_id" to albumId)
+            bundleOf("extra_album_id" to albumId),
+            null,
+            FragmentNavigatorExtras(
+                view to getString(R.string.transition_album_art)
+            )
         )
     }
 }

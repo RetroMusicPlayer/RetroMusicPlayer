@@ -31,6 +31,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 fun Int.ripAlpha(): Int {
@@ -102,4 +103,17 @@ fun ExtendedFloatingActionButton.accentColor() {
     backgroundTintList = colorStateList
     setTextColor(textColorStateList)
     iconTint = textColorStateList
+}
+
+fun MaterialButton.applyColor(color: Int) {
+    val backgroundColorStateList = ColorStateList.valueOf(color)
+    val textColorColorStateList = ColorStateList.valueOf(
+        MaterialValueHelper.getPrimaryTextColor(
+            context,
+            ColorUtil.isColorLight(color)
+        )
+    )
+    backgroundTintList = backgroundColorStateList
+    setTextColor(textColorColorStateList)
+    iconTint = textColorColorStateList
 }

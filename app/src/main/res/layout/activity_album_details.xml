@@ -105,7 +105,7 @@
                     app:layout_constraintStart_toEndOf="@id/artistImage"
                     app:layout_constraintTop_toTopOf="@id/artistImage"
                     tools:ignore="MissingPrefix"
-                    tools:text="@tools:sample/lorem/random" />
+                    tools:text="@tools:sample/full_names" />
 
                 <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:id="@+id/albumText"
@@ -123,7 +123,7 @@
                     app:layout_constraintTop_toBottomOf="@id/albumTitle"
                     app:lineHeightHint="24sp"
                     tools:ignore="MissingPrefix"
-                    tools:text="@tools:sample/lorem/random" />
+                    tools:text="@tools:sample/full_names" />
 
 
                 <include

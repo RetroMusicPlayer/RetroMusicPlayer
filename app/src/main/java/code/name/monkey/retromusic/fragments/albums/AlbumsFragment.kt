@@ -94,12 +94,15 @@ class AlbumsFragment :
         }
     }
 
-    override fun onAlbumClick(albumId: Int) {
+    override fun onAlbumClick(albumId: Int, view: View) {
         val controller = requireActivity().findNavController(R.id.fragment_container)
-        controller.navigate(R.id.albumDetailsFragment, bundleOf(EXTRA_ALBUM_ID to albumId))
+        controller.navigate(
+            R.id.albumDetailsFragment,
+            bundleOf(EXTRA_ALBUM_ID to albumId)
+        )
     }
 }
 
 interface AlbumClickListener {
-    fun onAlbumClick(albumId: Int)
+    fun onAlbumClick(albumId: Int, view: View)
 }
