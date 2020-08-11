@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.activities.search
+package code.name.monkey.retromusic.fragments.search
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -19,22 +19,30 @@ import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.MainActivityFragment
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_search.view.*
 import org.koin.android.ext.android.inject
 import java.util.*
 import kotlin.collections.ArrayList
 
 class SearchFragment : MainActivityFragment(R.layout.fragment_search), TextWatcher {
+    companion object {
+        const val QUERY = "query"
+        const val REQ_CODE_SPEECH_INPUT = 9001
+    }
+
     private val viewModel: SearchViewModel by inject()
     private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainActivity.setSupportActionBar(toolbar)
+        mainActivity.hideBottomNavigation()
+        mainActivity.setBottomBarVisibility(View.GONE)
         setupRecyclerView()
         setupSearchView()
-        mainActivity.setSupportActionBar(toolbar)
-        mainActivity.setBottomBarVisibility(View.GONE)
         voiceSearch.setOnClickListener { startMicSearch() }
         clearText.setOnClickListener { searchView.clearText() }
 
@@ -48,7 +56,7 @@ class SearchFragment : MainActivityFragment(R.layout.fragment_search), TextWatch
         }
         keyboardPopup.accentColor()
         if (savedInstanceState != null) {
-            query = savedInstanceState.getString(SearchActivity.QUERY)
+            query = savedInstanceState.getString(QUERY)
         }
 
         viewModel.getSearchResult().observe(viewLifecycleOwner, Observer {
@@ -124,11 +132,15 @@ class SearchFragment : MainActivityFragment(R.layout.fragment_search), TextWatch
         try {
             startActivityForResult(
                 intent,
-                SearchActivity.REQ_CODE_SPEECH_INPUT
+                REQ_CODE_SPEECH_INPUT
             )
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             showToast(getString(R.string.speech_not_supported))
         }
     }
+}
+
+fun TextInputEditText.clearText() {
+    text = null
 }

@@ -74,26 +74,33 @@ class HomeAdapter(
                 val viewHolder = holder as AlbumViewHolder
                 viewHolder.bindView(
                     list[position].arrayList as List<Album>,
-                    R.string.recent_albums
+                    R.string.recent_albums,
+                    "Most recently added albums"
                 )
             }
             TOP_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
                 viewHolder.bindView(
                     list[position].arrayList as List<Album>,
-                    R.string.top_albums
+                    R.string.top_albums,
+                    "Most played albums"
                 )
             }
             RECENT_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
                 viewHolder.bindView(
                     list[position].arrayList as List<Artist>,
-                    R.string.recent_artists
+                    R.string.recent_artists,
+                    "Most recently added artists"
                 )
             }
             TOP_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
-                viewHolder.bindView(list[position].arrayList as List<Artist>, R.string.top_artists)
+                viewHolder.bindView(
+                    list[position].arrayList as List<Artist>,
+                    R.string.top_artists,
+                    "Most played artists"
+                )
             }
             SUGGESTIONS -> {
                 val viewHolder = holder as SuggestionsViewHolder
@@ -148,7 +155,7 @@ class HomeAdapter(
     }
 
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view), AlbumClickListener {
-        fun bindView(list: List<Album>, titleRes: Int) {
+        fun bindView(list: List<Album>, titleRes: Int, message: String) {
             if (list.isNotEmpty()) {
                 val albumAdapter = AlbumAdapter(activity, list, R.layout.pager_item, null, this)
                 recyclerView.apply {
@@ -169,7 +176,7 @@ class HomeAdapter(
     }
 
     private inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view), ArtistClickListener {
-        fun bindView(list: List<Artist>, titleRes: Int) {
+        fun bindView(list: List<Artist>, titleRes: Int, message: String) {
             if (list.isNotEmpty()) {
                 val manager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                 val artistAdapter = ArtistAdapter(
@@ -210,7 +217,7 @@ class HomeAdapter(
 
         fun bindView(arrayList: List<Song>) {
             val color = ThemeStore.accentColor(activity)
-            itemView.findViewById<TextView>(R.id.text).setTextColor(color)
+            itemView.findViewById<TextView>(R.id.message).setTextColor(color)
             itemView.findViewById<MaterialCardView>(R.id.card6).apply {
                 setCardBackgroundColor(ColorUtil.withAlpha(color, 0.2f))
             }
@@ -230,6 +237,7 @@ class HomeAdapter(
 
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(arrayList: List<Playlist>, titleRes: Int) {
+            text.text = "You're all time favorites"
             if (arrayList.isNotEmpty()) {
                 val songs = PlaylistSongsLoader.getPlaylistSongList(activity, arrayList[0])
                 if (songs.isNotEmpty()) {
@@ -250,6 +258,7 @@ class HomeAdapter(
     private inner class GenreViewHolder(itemView: View) : AbsHomeViewItem(itemView) {
         fun bind(genres: List<Genre>, titleRes: Int) {
             title.text = activity.getString(titleRes)
+            text.text = "Genres for you"
             recyclerView.apply {
                 show()
                 layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.HORIZONTAL, false)
@@ -262,5 +271,6 @@ class HomeAdapter(
     open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
         val title: AppCompatTextView = itemView.findViewById(R.id.title)
+        val text: AppCompatTextView = itemView.findViewById(R.id.text)
     }
 }

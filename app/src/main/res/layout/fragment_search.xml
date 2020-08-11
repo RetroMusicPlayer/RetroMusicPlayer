@@ -27,29 +27,45 @@
             app:liftOnScroll="true">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:layout_width="match_parent"
                 android:id="@+id/toolbar"
-                android:layout_height="match_parent">
+                style="@style/Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black"
+                app:titleTextAppearance="@style/ToolbarTextAppearanceNormal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/searchView"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/toolbar_height"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="@string/action_search"
-                        android:inputType="text|textAutoComplete"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
-                        android:textAppearance="@style/TextViewSubtitle1">
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:boxStrokeColor="?attr/colorControlNormal"
+                        app:boxStrokeWidth="1dp"
+                        app:hintEnabled="false">
 
-                        <requestFocus />
-                    </com.google.android.material.textfield.TextInputEditText>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/searchView"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/toolbar_height"
+                            android:background="@null"
+                            android:hint="@string/action_search"
+                            android:inputType="text|textAutoComplete"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:textAppearance="@style/TextViewSubtitle1">
+
+                            <requestFocus />
+                        </com.google.android.material.textfield.TextInputEditText>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <FrameLayout
                         android:layout_width="wrap_content"

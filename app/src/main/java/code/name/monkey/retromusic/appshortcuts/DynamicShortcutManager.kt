@@ -22,7 +22,6 @@ import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.os.Build
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.LastAddedShortcutType
-import code.name.monkey.retromusic.appshortcuts.shortcuttype.SearchShortCutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.ShuffleAllShortcutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.TopTracksShortcutType
 import java.util.*
@@ -34,11 +33,9 @@ class DynamicShortcutManager(private val context: Context) {
 
     private val defaultShortcuts: List<ShortcutInfo>
         get() = Arrays.asList(
-            SearchShortCutType(context).shortcutInfo,
             ShuffleAllShortcutType(context).shortcutInfo,
             TopTracksShortcutType(context).shortcutInfo,
             LastAddedShortcutType(context).shortcutInfo
-
         )
 
     fun initDynamicShortcuts() {

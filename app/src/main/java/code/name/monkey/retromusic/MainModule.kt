@@ -4,7 +4,7 @@ import code.name.monkey.retromusic.fragments.albums.AlbumDetailsViewModel
 import code.name.monkey.retromusic.fragments.artists.ArtistDetailsViewModel
 import code.name.monkey.retromusic.fragments.genres.GenreDetailsViewModel
 import code.name.monkey.retromusic.fragments.playlists.PlaylistDetailsViewModel
-import code.name.monkey.retromusic.activities.search.SearchViewModel
+import code.name.monkey.retromusic.fragments.search.SearchViewModel
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Playlist

@@ -119,7 +119,7 @@
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
         <activity
-            android:name=".activities.search.SearchActivity"
+            android:name="code.name.monkey.retromusic.fragments.search.SearchActivity"
             android:windowSoftInputMode="stateVisible" />
 
         <activity

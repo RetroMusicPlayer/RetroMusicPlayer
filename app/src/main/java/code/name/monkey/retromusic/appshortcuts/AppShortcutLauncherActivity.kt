@@ -17,9 +17,7 @@ package code.name.monkey.retromusic.appshortcuts
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import code.name.monkey.retromusic.activities.search.SearchActivity
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.LastAddedShortcutType
-import code.name.monkey.retromusic.appshortcuts.shortcuttype.SearchShortCutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.ShuffleAllShortcutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.TopTracksShortcutType
 import code.name.monkey.retromusic.model.Playlist
@@ -45,25 +43,21 @@ class AppShortcutLauncherActivity : Activity() {
         when (shortcutType) {
             SHORTCUT_TYPE_SHUFFLE_ALL -> {
                 startServiceWithPlaylist(
-                    MusicService.SHUFFLE_MODE_SHUFFLE, ShuffleAllPlaylist(applicationContext)
+                    SHUFFLE_MODE_SHUFFLE, ShuffleAllPlaylist(applicationContext)
                 )
                 DynamicShortcutManager.reportShortcutUsed(this, ShuffleAllShortcutType.id)
             }
             SHORTCUT_TYPE_TOP_TRACKS -> {
                 startServiceWithPlaylist(
-                    MusicService.SHUFFLE_MODE_NONE, MyTopTracksPlaylist(applicationContext)
+                    SHUFFLE_MODE_NONE, MyTopTracksPlaylist(applicationContext)
                 )
                 DynamicShortcutManager.reportShortcutUsed(this, TopTracksShortcutType.id)
             }
             SHORTCUT_TYPE_LAST_ADDED -> {
                 startServiceWithPlaylist(
-                    MusicService.SHUFFLE_MODE_NONE, LastAddedPlaylist(applicationContext)
+                    SHUFFLE_MODE_NONE, LastAddedPlaylist(applicationContext)
                 )
                 DynamicShortcutManager.reportShortcutUsed(this, LastAddedShortcutType.id)
-            }
-            SHORTCUT_TYPE_SEARCH -> {
-                startActivity(Intent(this, SearchActivity::class.java))
-                DynamicShortcutManager.reportShortcutUsed(this, SearchShortCutType.id)
             }
         }
         finish()
@@ -87,7 +81,6 @@ class AppShortcutLauncherActivity : Activity() {
         const val SHORTCUT_TYPE_SHUFFLE_ALL = 0
         const val SHORTCUT_TYPE_TOP_TRACKS = 1
         const val SHORTCUT_TYPE_LAST_ADDED = 2
-        const val SHORTCUT_TYPE_SEARCH = 3
         const val SHORTCUT_TYPE_NONE = 4
     }
 }

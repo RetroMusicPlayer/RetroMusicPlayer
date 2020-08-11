@@ -49,13 +49,6 @@
             app:argType="integer" />
     </fragment>
 
-    <activity
-        android:id="@+id/action_search"
-        android:name="code.name.monkey.retromusic.activities.search.SearchActivity"
-        android:label="Search"
-        tools:layout="@layout/activity_search" />
-
-
     <fragment
         android:id="@+id/libraryFragment"
         android:name="code.name.monkey.retromusic.fragments.library.LibraryFragment"
@@ -71,7 +64,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="code.name.monkey.retromusic.activities.search.SearchFragment"
+        android:name="code.name.monkey.retromusic.fragments.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
 
@@ -80,6 +73,5 @@
         android:name="code.name.monkey.retromusic.fragments.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
-
 
 </navigation>
