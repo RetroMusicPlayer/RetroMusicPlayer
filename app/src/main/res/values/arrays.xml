@@ -125,9 +125,7 @@
         <item>this_year</item>
     </string-array>
 
-    <array name="pref_album_details_style_layout">
-        <item>@layout/activity_album_details</item>
-    </array>
+
     <string-array name="pref_language_names">
         <item>System default</item>
         <item>Afrikaans</item>

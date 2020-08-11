@@ -1,8 +1,9 @@
 package code.name.monkey.retromusic.fragments.albums
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -12,10 +13,16 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
+import code.name.monkey.retromusic.activities.tageditor.AlbumTagEditorActivity
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
+import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
+import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
@@ -23,6 +30,7 @@ import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.model.LastFmAlbum
@@ -31,27 +39,29 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_album_content.*
-import kotlinx.android.synthetic.main.activity_album_details.*
+import kotlinx.android.synthetic.main.fragment_album_content.*
+import kotlinx.android.synthetic.main.fragment_album_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
 class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_details),
     AlbumClickListener {
+
+    private val arguments by navArgs<AlbumDetailsFragmentArgs>()
+    private val detailsViewModel by viewModel<AlbumDetailsViewModel> {
+        parametersOf(arguments.extraAlbumId)
+    }
+
     private lateinit var simpleSongAdapter: SimpleSongAdapter
     private lateinit var album: Album
-    private val args: AlbumDetailsFragmentArgs by navArgs()
 
     private val savedSortOrder: String
         get() = PreferenceUtil.albumDetailSongSortOrder
 
-    private val detailsViewModel by viewModel<AlbumDetailsViewModel> {
-        parametersOf(args.extraAlbumId)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setHasOptionsMenu(true)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.setBottomBarVisibility(View.GONE)
         toolbar.title = null
@@ -107,12 +117,6 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         playerActivity?.removeMusicServiceEventListener(detailsViewModel)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> findNavController().navigateUp()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     private fun setupRecyclerView() {
         simpleSongAdapter = SimpleSongAdapter(
@@ -238,5 +242,115 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             R.id.albumDetailsFragment,
             bundleOf("extra_album_id" to albumId)
         )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_album_detail, menu)
+        val sortOrder = menu.findItem(R.id.action_sort_order)
+        setUpSortOrderMenu(sortOrder.subMenu)
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(
+            requireContext(),
+            toolbar,
+            menu,
+            getToolbarBackgroundColor(toolbar)
+        )
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return handleSortOrderMenuItem(item)
+    }
+
+    private fun handleSortOrderMenuItem(item: MenuItem): Boolean {
+        var sortOrder: String? = null
+        val songs = simpleSongAdapter.dataSet
+        when (item.itemId) {
+            R.id.action_play_next -> {
+                MusicPlayerRemote.playNext(songs)
+                return true
+            }
+            R.id.action_add_to_current_playing -> {
+                MusicPlayerRemote.enqueue(songs)
+                return true
+            }
+            R.id.action_add_to_playlist -> {
+                AddToPlaylistDialog.create(songs).show(childFragmentManager, "ADD_PLAYLIST")
+                return true
+            }
+            R.id.action_delete_from_device -> {
+                DeleteSongsDialog.create(songs).show(childFragmentManager, "DELETE_SONGS")
+                return true
+            }
+            R.id.action_tag_editor -> {
+                val intent = Intent(requireContext(), AlbumTagEditorActivity::class.java)
+                intent.putExtra(AbsTagEditorActivity.EXTRA_ID, album.id)
+                val options = ActivityOptions.makeSceneTransitionAnimation(
+                    requireActivity(),
+                    albumCoverContainer,
+                    "${getString(R.string.transition_album_art)}_${album.id}"
+                )
+                startActivityForResult(
+                    intent,
+                    TAG_EDITOR_REQUEST, options.toBundle()
+                )
+                return true
+            }
+            /*Sort*/
+            R.id.action_sort_order_title -> sortOrder = SortOrder.AlbumSongSortOrder.SONG_A_Z
+            R.id.action_sort_order_title_desc -> sortOrder = SortOrder.AlbumSongSortOrder.SONG_Z_A
+            R.id.action_sort_order_track_list -> sortOrder =
+                SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST
+            R.id.action_sort_order_artist_song_duration ->
+                sortOrder = SortOrder.AlbumSongSortOrder.SONG_DURATION
+        }
+        if (sortOrder != null) {
+            item.isChecked = true
+            setSaveSortOrder(sortOrder)
+        }
+        return true
+    }
+
+    private fun setUpSortOrderMenu(sortOrder: SubMenu) {
+        when (savedSortOrder) {
+            SortOrder.AlbumSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title)
+                .isChecked = true
+            SortOrder.AlbumSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc)
+                .isChecked = true
+            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> sortOrder.findItem(R.id.action_sort_order_track_list)
+                .isChecked = true
+            SortOrder.AlbumSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_artist_song_duration)
+                .isChecked = true
+        }
+    }
+
+    private fun setSaveSortOrder(sortOrder: String) {
+        PreferenceUtil.albumDetailSongSortOrder = sortOrder
+        when (sortOrder) {
+            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs?.sortWith(Comparator { o1, o2 ->
+                o1.trackNumber.compareTo(
+                    o2.trackNumber
+                )
+            })
+            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs?.sortWith(Comparator { o1, o2 ->
+                o1.title.compareTo(
+                    o2.title
+                )
+            })
+            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs?.sortWith(Comparator { o1, o2 ->
+                o2.title.compareTo(
+                    o1.title
+                )
+            })
+            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs?.sortWith(Comparator { o1, o2 ->
+                o1.duration.compareTo(
+                    o2.duration
+                )
+            })
+        }
+        album.songs?.let { simpleSongAdapter.swapDataSet(it) }
+    }
+
+    companion object {
+        const val TAG_EDITOR_REQUEST = 9002
     }
 }

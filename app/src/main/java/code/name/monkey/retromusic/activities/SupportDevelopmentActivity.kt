@@ -28,7 +28,6 @@ import code.name.monkey.retromusic.extensions.textColorSecondary
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.SkuDetails
 import com.anjlab.android.iab.v3.TransactionDetails
-import kotlinx.android.synthetic.main.activity_about.toolbar
 import kotlinx.android.synthetic.main.activity_donation.*
 import java.lang.ref.WeakReference
 import java.util.*

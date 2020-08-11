@@ -33,7 +33,7 @@
         android:id="@+id/albumDetailsFragment"
         android:name="code.name.monkey.retromusic.fragments.albums.AlbumDetailsFragment"
         android:label="AlbumDetailsFragment"
-        tools:layout="@layout/activity_album_details">
+        tools:layout="@layout/fragment_album_details">
         <argument
             android:name="extra_album_id"
             app:argType="integer" />

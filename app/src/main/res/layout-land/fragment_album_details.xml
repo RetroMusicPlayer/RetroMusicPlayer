@@ -133,7 +133,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <include layout="@layout/activity_album_content" />
+            <include layout="@layout/fragment_album_content" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

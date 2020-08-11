@@ -120,6 +120,7 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
 
     fun collapsePanel() {
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        setMiniPlayerAlphaProgress(0f)
     }
 
     fun expandPanel() {

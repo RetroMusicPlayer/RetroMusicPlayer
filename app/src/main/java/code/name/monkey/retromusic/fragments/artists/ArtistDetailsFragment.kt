@@ -1,23 +1,28 @@
 package code.name.monkey.retromusic.fragments.artists
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Spanned
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
+import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.extensions.applyColor
-import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
@@ -25,12 +30,13 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.model.LastFmArtist
+import code.name.monkey.retromusic.util.CustomArtistImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_artist_content.*
-import kotlinx.android.synthetic.main.activity_artist_details.*
+import kotlinx.android.synthetic.main.fragment_artist_content.*
+import kotlinx.android.synthetic.main.fragment_artist_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
@@ -38,20 +44,21 @@ import kotlin.collections.ArrayList
 
 class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_details),
     AlbumClickListener {
+    private val arguments by navArgs<ArtistDetailsFragmentArgs>()
+    private val detailsViewModel: ArtistDetailsViewModel by viewModel {
+        parametersOf(arguments.extraArtistId)
+    }
 
-    private var biography: Spanned? = null
     private lateinit var artist: Artist
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: HorizontalAlbumAdapter
     private var forceDownload: Boolean = false
     private var lang: String? = null
-
-    private val detailsViewModel: ArtistDetailsViewModel by viewModel {
-        parametersOf(extraNotNull<Int>(EXTRA_ARTIST_ID).value)
-    }
+    private var biography: Spanned? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setHasOptionsMenu(true)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.setBottomBarVisibility(View.GONE)
         toolbar.title = null
@@ -187,5 +194,53 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
                 view to getString(R.string.transition_album_art)
             )
         )
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return handleSortOrderMenuItem(item)
+    }
+
+    private fun handleSortOrderMenuItem(item: MenuItem): Boolean {
+        val songs = artist.songs
+        when (item.itemId) {
+            android.R.id.home -> findNavController().navigateUp()
+            R.id.action_play_next -> {
+                MusicPlayerRemote.playNext(songs)
+                return true
+            }
+            R.id.action_add_to_current_playing -> {
+                MusicPlayerRemote.enqueue(songs)
+                return true
+            }
+            R.id.action_add_to_playlist -> {
+                AddToPlaylistDialog.create(songs).show(childFragmentManager, "ADD_PLAYLIST")
+                return true
+            }
+            R.id.action_set_artist_image -> {
+                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                intent.type = "image/*"
+                startActivityForResult(
+                    Intent.createChooser(intent, getString(R.string.pick_from_local_storage)),
+                    REQUEST_CODE_SELECT_IMAGE
+                )
+                return true
+            }
+            R.id.action_reset_artist_image -> {
+                showToast(resources.getString(R.string.updating))
+                CustomArtistImageUtil.getInstance(requireContext()).resetCustomArtistImage(artist)
+                forceDownload = true
+                return true
+            }
+        }
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_artist_detail, menu)
+    }
+
+    companion object {
+        const val REQUEST_CODE_SELECT_IMAGE = 9002
     }
 }

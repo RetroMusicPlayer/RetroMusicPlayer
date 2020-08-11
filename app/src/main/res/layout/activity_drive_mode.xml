@@ -50,7 +50,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/close"
         android:layout_width="52dp"
@@ -62,6 +61,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
         app:srcCompat="@drawable/ic_close" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/car"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/color_circle_gradient"
+        android:backgroundTint="@color/semi_transparent"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@id/songFavourite"
+        app:layout_constraintStart_toEndOf="@id/close"
+        app:layout_constraintTop_toBottomOf="@id/status_bar"
+        app:srcCompat="@drawable/ic_car" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/songFavourite"
@@ -152,7 +164,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:maxLines="3"
-            android:textAppearance="@style/TextViewHeadline5"
+            android:textAppearance="@style/TextViewHeadline4"
             android:textColor="@color/md_white_1000"
             android:textStyle="bold"
             tools:text="@tools:sample/lorem/random" />
@@ -161,10 +173,10 @@
             android:id="@+id/songText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:maxLines="3"
-            android:textAppearance="@style/TextViewHeadline6"
+            android:textAppearance="@style/TextViewHeadline5"
             android:textColor="@color/md_grey_200"
             tools:text="@tools:sample/lorem/random" />
     </LinearLayout>

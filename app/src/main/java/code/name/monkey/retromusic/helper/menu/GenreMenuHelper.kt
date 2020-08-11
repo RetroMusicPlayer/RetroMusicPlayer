@@ -16,8 +16,7 @@ package code.name.monkey.retromusic.helper.menu
 
 import android.app.Activity
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
-
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -27,7 +26,7 @@ import code.name.monkey.retromusic.model.Song
 import java.util.*
 
 object GenreMenuHelper {
-    fun handleMenuClick(activity: AppCompatActivity, genre: Genre, item: MenuItem): Boolean {
+    fun handleMenuClick(activity: FragmentActivity, genre: Genre, item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_play -> {
                 MusicPlayerRemote.openQueue(getGenreSongs(activity, genre), 0, true)

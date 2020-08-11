@@ -87,6 +87,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_go_to_album -> {
+                mainActivity.collapsePanel()
                 requireActivity().findNavController(R.id.fragment_container).navigate(
                     R.id.albumDetailsFragment,
                     bundleOf(EXTRA_ALBUM_ID to song.albumId)
@@ -94,6 +95,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_go_to_artist -> {
+                mainActivity.collapsePanel()
                 requireActivity().findNavController(R.id.fragment_container).navigate(
                     R.id.artistDetailsFragment,
                     bundleOf(EXTRA_ARTIST_ID to song.artistId)

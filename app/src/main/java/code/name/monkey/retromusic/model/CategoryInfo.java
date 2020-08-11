@@ -59,7 +59,7 @@ public class CategoryInfo implements Parcelable {
     }
 
     public enum Category {
-        Home(R.id.action_home, R.string.for_you, R.drawable.ic_baseline),
+        Home(R.id.action_home, R.string.for_you, R.drawable.ic_face),
         Songs(R.id.action_song, R.string.songs, R.drawable.ic_audiotrack),
         Albums(R.id.action_album, R.string.albums, R.drawable.ic_album),
         Artists(R.id.action_artist, R.string.artists, R.drawable.ic_artist),

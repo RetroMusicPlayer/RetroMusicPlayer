@@ -85,7 +85,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
                     android:maxLines="2"
-                    android:textAppearance="@style/TextViewHeadline4"
+                    android:textAppearance="@style/TextViewHeadline5"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +110,7 @@
                     tools:text="@tools:sample/full_names" />
 
                 <include
-                    layout="@layout/activity_artist_content"
+                    layout="@layout/fragment_artist_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"

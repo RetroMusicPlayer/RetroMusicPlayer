@@ -112,7 +112,7 @@
 
             </LinearLayout>
 
-            <include layout="@layout/activity_artist_content" />
+            <include layout="@layout/fragment_artist_content" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

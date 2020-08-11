@@ -89,11 +89,6 @@ public class LrcView extends View {
             }
         }
     };
-
-    public LrcView(Context context) {
-        this(context, null);
-    }
-
     /**
      * 手势监听器
      */
@@ -150,6 +145,10 @@ public class LrcView extends View {
             return super.onSingleTapConfirmed(e);
         }
     };
+
+    public LrcView(Context context) {
+        this(context, null);
+    }
 
     public LrcView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);

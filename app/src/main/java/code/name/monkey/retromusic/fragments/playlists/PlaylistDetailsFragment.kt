@@ -3,17 +3,18 @@ package code.name.monkey.retromusic.fragments.playlists
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
@@ -26,21 +27,25 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail) {
+    private val arguments by navArgs<PlaylistDetailsFragmentArgs>()
     private val viewModel: PlaylistDetailsViewModel by viewModel {
-        parametersOf(extraNotNull<Playlist>(EXTRA_PLAYLIST).value)
+        parametersOf(arguments.extraPlaylist)
     }
+
     private lateinit var playlist: Playlist
     private lateinit var adapter: SongAdapter
 
     private var wrappedAdapter: RecyclerView.Adapter<*>? = null
     private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setHasOptionsMenu(true)
         mainActivity.addMusicServiceEventListener(viewModel)
         mainActivity.setSupportActionBar(toolbar)
+        mainActivity.setBottomBarVisibility(View.GONE)
 
-        playlist = extraNotNull<Playlist>(EXTRA_PLAYLIST).value
+        playlist = arguments.extraPlaylist
 
         setUpRecyclerView()
 
@@ -52,7 +57,6 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
             playlist = it
             toolbar.title = it.name
         })
-
     }
 
     private fun setUpRecyclerView() {
@@ -99,12 +103,15 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(
-            if (playlist is AbsCustomPlaylist) R.menu.menu_smart_playlist_detail
-            else R.menu.menu_playlist_detail, menu
-        )
+        val menuRes = if (playlist is AbsCustomPlaylist)
+            R.menu.menu_smart_playlist_detail
+        else R.menu.menu_playlist_detail
+        inflater.inflate(menuRes, menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return PlaylistMenuHelper.handleMenuClick(requireActivity(), playlist, item)
+    }
 
     private fun checkForPadding() {
         val height = dipToPix(52f)
@@ -147,7 +154,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         super.onDestroy()
     }
 
-    fun showEmptyView() {
+    private fun showEmptyView() {
         empty.visibility = View.VISIBLE
         emptyText.visibility = View.VISIBLE
     }
@@ -159,4 +166,5 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
             showEmptyView()
         }
     }
+
 }
