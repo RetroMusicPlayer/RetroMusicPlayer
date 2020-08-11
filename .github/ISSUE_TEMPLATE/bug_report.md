@@ -7,6 +7,9 @@ assignees: ''
 
 ---
 
+**Have you read the [FAQ](https://www.github.com/h4h13/RetroMusicPlayer/tree/dev/FAQ.md)?**
+[Yes/No]
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
