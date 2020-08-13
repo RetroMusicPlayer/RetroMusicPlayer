@@ -69,7 +69,7 @@ favorite songs. No other music player has this feature.
 We are trying our best to bring you the best user experience. The app is regulary being updated for bug fixes and new features.
 
 ### FAQ
-Please read the FAQ here: https://goo.gl/DR2mE2
+Please read the FAQ here: https://del.dog/RetroFaq
 
 In any case, you find or notice any bugs please report them by
 sending us an [e-mail](mailto:retromusicapp@gmail.com). We will fix bugs as soon as
