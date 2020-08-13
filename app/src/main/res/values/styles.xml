@@ -65,6 +65,8 @@
 
     <style name="ToolbarTextAppearanceNormal.Library" parent="ToolbarTextAppearanceNormal">
         <item name="android:textAppearance">@style/TextViewHeadline6</item>
+        <item name="fontFamily">@font/pacifico</item>
+        <item name="android:fontFamily">@font/pacifico</item>
     </style>
 
     <style name="BigTitleTextAppearanceToolbar">
@@ -130,6 +132,8 @@
     <style name="TextViewSubtitle2" parent="TextAppearance.MaterialComponents.Subtitle2" />
 
     <style name="TextViewBody1" parent="TextAppearance.MaterialComponents.Body1" />
+
+    <style name="TextViewButton" parent="TextAppearance.MaterialComponents.Button" />
 
     <style name="TextViewBody2" parent="TextAppearance.MaterialComponents.Body2" />
 

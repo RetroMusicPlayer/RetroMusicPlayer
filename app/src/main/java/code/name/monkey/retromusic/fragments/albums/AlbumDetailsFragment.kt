@@ -62,17 +62,15 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
+        mainActivity.hideBottomBarVisibility(false)
+        mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.setBottomBarVisibility(View.GONE)
         toolbar.title = null
 
-        image.transitionName = getString(R.string.transition_album_art)
-
         postponeEnterTransition()
-        playerActivity?.addMusicServiceEventListener(detailsViewModel)
         detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
-            startPostponedEnterTransition()
             showAlbum(it)
+            startPostponedEnterTransition()
         })
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
             loadArtistImage(it)

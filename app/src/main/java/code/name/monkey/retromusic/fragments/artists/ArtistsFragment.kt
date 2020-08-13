@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.fragments.artists
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,14 +26,12 @@ class ArtistsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.artistsLiveData
-            .observe(viewLifecycleOwner, Observer { artists ->
-                if (artists.isNotEmpty()) {
-                    adapter?.swapDataSet(artists)
-                } else {
-                    adapter?.swapDataSet(listOf())
-                }
-            })
+        libraryViewModel.artistsLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty())
+                adapter?.swapDataSet(it)
+            else
+                adapter?.swapDataSet(listOf())
+        })
     }
 
     override val emptyMessage: Int
@@ -101,12 +100,12 @@ class ArtistsFragment :
         }
     }
 
-    override fun onArtist(artistId: Int) {
+    override fun onArtist(artistId: Int, imageView: ImageView) {
         val controller = findActivityNavController(R.id.fragment_container)
         controller.navigate(R.id.artistDetailsFragment, bundleOf(EXTRA_ARTIST_ID to artistId))
     }
 }
 
 interface ArtistClickListener {
-    fun onArtist(artistId: Int)
+    fun onArtist(artistId: Int, imageView: ImageView)
 }

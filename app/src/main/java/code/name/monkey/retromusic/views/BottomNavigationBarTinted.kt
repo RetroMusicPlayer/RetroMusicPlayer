@@ -66,5 +66,5 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
 }
 
 fun Int.addAlpha(): Int {
-    return ColorUtil.withAlpha(this, 0.12f)
+    return ColorUtil.withAlpha(this, 0.38f)
 }

@@ -106,6 +106,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.PlayingQueueActivity" />
+        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.tageditor.AlbumTagEditorActivity" />
         <activity android:name=".activities.tageditor.SongTagEditorActivity" />
         <activity android:name=".activities.LyricsActivity" />
@@ -257,5 +258,8 @@
         <meta-data
             android:name="com.android.vending.splits.required"
             android:value="true" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 </manifest>

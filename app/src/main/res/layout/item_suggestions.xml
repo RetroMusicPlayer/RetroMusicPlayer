@@ -10,8 +10,7 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="16dp"
+        android:padding="16dp"
         android:text="@string/suggestion_songs"
         android:textAppearance="@style/TextViewHeadline6"
         android:textStyle="bold"
@@ -20,18 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="4dp"
-        android:text="Randomly selected songs for you"
-        android:textAppearance="@style/TextViewCaption"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card1"
@@ -137,7 +124,6 @@
         android:id="@+id/card6"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
         android:clickable="true"
         android:focusable="true"
         app:cardBackgroundColor="?attr/colorSurface"
@@ -148,7 +134,7 @@
         app:layout_constraintEnd_toStartOf="@id/card7"
         app:layout_constraintHorizontal_weight="4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text">
+        app:layout_constraintTop_toBottomOf="@id/title">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/message"
@@ -164,14 +150,13 @@
         android:id="@+id/card7"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
         app:cardCornerRadius="8dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintDimensionRatio="1,1"
         app:layout_constraintEnd_toStartOf="@id/card8"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@id/card6"
-        app:layout_constraintTop_toBottomOf="@id/text">
+        app:layout_constraintTop_toTopOf="@id/card6">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image1"
@@ -185,14 +170,13 @@
         android:id="@+id/card8"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
         app:cardCornerRadius="8dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintDimensionRatio="1,1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="4"
         app:layout_constraintStart_toEndOf="@id/card7"
-        app:layout_constraintTop_toBottomOf="@id/text">
+        app:layout_constraintTop_toTopOf="@id/card7">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image2"

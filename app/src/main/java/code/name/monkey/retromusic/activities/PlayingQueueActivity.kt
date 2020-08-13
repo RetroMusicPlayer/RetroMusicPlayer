@@ -14,6 +14,7 @@ import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.ThemedFastScroller
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
@@ -103,7 +104,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
                 }
             }
         })
-        //ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
+        val fastScroller = ThemedFastScroller.create(recyclerView)
     }
 
     private fun checkForPadding() {

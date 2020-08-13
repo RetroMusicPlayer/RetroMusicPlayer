@@ -1,12 +1,12 @@
 package code.name.monkey.retromusic.adapter.artist
 
-import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
@@ -131,7 +131,6 @@ class ArtistAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            setImageTransitionName(activity.getString(R.string.transition_artist_image))
             menu?.visibility = View.GONE
         }
 
@@ -140,15 +139,13 @@ class ArtistAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                    activity,
-                    imageContainerCard ?: image,
-                    activity.getString(R.string.transition_artist_image)
-                )
-                artistClickListener.onArtist(dataSet[layoutPosition].id)
-                /*NavigationUtil.goToArtistOptions(
-                    activity, dataSet[layoutPosition].id, activityOptions
-                )*/
+                image?.let {
+                    ViewCompat.setTransitionName(
+                        it,
+                        activity.getString(R.string.transition_artist_image)
+                    )
+                    artistClickListener.onArtist(dataSet[layoutPosition].id, it)
+                }
             }
         }
 

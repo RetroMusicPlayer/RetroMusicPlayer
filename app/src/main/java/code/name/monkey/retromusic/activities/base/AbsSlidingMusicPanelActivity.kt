@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
+import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.dimToPixel
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
@@ -132,9 +137,7 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
         if (miniPlayerFragment?.view == null) return
         val alpha = 1 - progress
         miniPlayerFragment?.view?.alpha = alpha
-        // necessary to make the views below clickable
         miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
-
         bottomNavigationView.translationY = progress * 500
         bottomNavigationView.alpha = alpha
     }
@@ -171,32 +174,25 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
         return bottomNavigationView
     }
 
-    fun setBottomBarVisibility(visible: Int) {
-        bottomNavigationView.visibility = visible
+    fun hideBottomBarVisibility(visible: Boolean) {
+        bottomNavigationView.isVisible = visible
         hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
     }
 
     private fun hideBottomBar(hide: Boolean) {
         val heightOfBar = dimToPixel(R.dimen.mini_player_height)
-        val heightOfBarWithTabs = dimToPixel(R.dimen.mini_player_height_expanded)
+        val isBottomBarVisible = bottomNavigationView.isVisible
 
         if (hide) {
             behavior.isHideable = true
             behavior.peekHeight = 0
-            bottomNavigationView.elevation = dipToPix(10f)
             collapsePanel()
+            ViewCompat.setElevation(bottomNavigationView, 10f)
         } else {
-            if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-                slidingPanel.elevation = dipToPix(10f)
-                bottomNavigationView.elevation = dipToPix(10f)
-                behavior.isHideable = false
-                behavior.peekHeight =
-                    if (bottomNavigationView.visibility == View.VISIBLE) {
-                        heightOfBarWithTabs
-                    } else {
-                        heightOfBar
-                    }
-            }
+            ViewCompat.setElevation(bottomNavigationView, 10f)
+            ViewCompat.setElevation(slidingPanel, 10f)
+            behavior.isHideable = false
+            behavior.peekHeight = if (isBottomBarVisible) heightOfBar * 2 else heightOfBar
         }
     }
 
@@ -304,7 +300,7 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
     fun hideBottomNavigation() {
         behavior.isHideable = true
         behavior.peekHeight = 0
-        setBottomBarVisibility(View.GONE)
+        hideBottomBarVisibility(false)
     }
 
     fun updateTabs() {

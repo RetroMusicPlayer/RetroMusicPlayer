@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/action_album"
         android:name="code.name.monkey.retromusic.fragments.albums.AlbumsFragment"
-        tools:layout="@layout/fragment_main_activity_recycler_view"/>
+        tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_artist"
@@ -43,6 +43,7 @@
     <fragment
         android:id="@+id/action_home"
         android:name="code.name.monkey.retromusic.fragments.home.HomeFragment"
-        tools:layout="@layout/fragment_banner_home" />
+        android:label=""
+        tools:layout="@layout/fragment_banner_home"/>
 
 </navigation>

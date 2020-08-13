@@ -9,10 +9,11 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/imageContainer"
-        android:layout_width="112dp"
-        android:layout_height="156dp"
-        android:layout_margin="8dp"
+        android:layout_width="148dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
         app:cardCornerRadius="12dp"
+        app:layout_constraintDimensionRatio="3:4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,21 +25,23 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/default_album_art"
             tools:src="@tools:sample/avatars" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow_up"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="8dp"
+            android:textAppearance="@style/TextViewBody1"
+            android:textColor="@color/md_white_1000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageContainer"
+            tools:ignore="MissingPrefix"
+            tools:text="@tools:sample/full_names" />
     </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:textAppearance="@style/TextViewNormal"
-        android:textColor="?android:attr/textColorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageContainer"
-        tools:ignore="MissingPrefix"
-        tools:text="@tools:sample/full_names" />
 </androidx.constraintlayout.widget.ConstraintLayout>

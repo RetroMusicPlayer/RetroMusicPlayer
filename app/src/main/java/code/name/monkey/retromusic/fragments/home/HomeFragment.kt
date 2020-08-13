@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
+import code.name.monkey.retromusic.extensions.findActivityNavController
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
@@ -57,9 +58,7 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setStatusBarColorAuto(view)
-
         bannerImage?.setOnClickListener {
             val options = ActivityOptions.makeSceneTransitionAnimation(
                 mainActivity,
@@ -70,14 +69,14 @@ class HomeFragment :
         }
 
         lastAdded.setOnClickListener {
-            requireActivity().findNavController(R.id.fragment_container).navigate(
+            findActivityNavController(R.id.fragment_container).navigate(
                 R.id.playlistDetailsFragment,
                 bundleOf(EXTRA_PLAYLIST to LastAddedPlaylist(requireActivity()))
             )
         }
 
         topPlayed.setOnClickListener {
-            requireActivity().findNavController(R.id.fragment_container).navigate(
+            findActivityNavController(R.id.fragment_container).navigate(
                 R.id.playlistDetailsFragment,
                 bundleOf(EXTRA_PLAYLIST to MyTopTracksPlaylist(requireActivity()))
             )
@@ -110,9 +109,8 @@ class HomeFragment :
             adapter = homeAdapter
         }
 
-        libraryViewModel.homeLiveData
-            .observe(viewLifecycleOwner, Observer { sections ->
-                homeAdapter.swapData(sections)
+        libraryViewModel.homeLiveData.observe(viewLifecycleOwner, Observer {
+                homeAdapter.swapData(it)
             })
 
         loadProfile()

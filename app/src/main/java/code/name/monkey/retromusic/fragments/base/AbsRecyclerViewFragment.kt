@@ -18,12 +18,13 @@ import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+
 abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
     AbsMusicServiceFragment(R.layout.fragment_main_activity_recycler_view),
     AppBarLayout.OnOffsetChangedListener {
 
     val libraryViewModel: LibraryViewModel by sharedViewModel()
-    
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
@@ -41,15 +42,17 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     }
 
     private fun setUpRecyclerView() {
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
-        val fastScroller = create(recyclerView)
-        recyclerView.setOnApplyWindowInsetsListener(
-            ScrollingViewOnApplyWindowInsetsListener(
-                recyclerView,
-                fastScroller
+        recyclerView.apply {
+            layoutManager = this@AbsRecyclerViewFragment.layoutManager
+            adapter = this@AbsRecyclerViewFragment.adapter
+            val fastScroller = create(this)
+            setOnApplyWindowInsetsListener(
+                ScrollingViewOnApplyWindowInsetsListener(
+                    recyclerView,
+                    fastScroller
+                )
             )
-        )
+        }
         checkForPadding()
     }
 

@@ -10,7 +10,6 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
@@ -49,7 +48,7 @@ class UserInfoActivity : AbsBaseActivity() {
         setLightNavigationBar(true)
         applyToolbar(toolbar)
 
-        MaterialUtil.setTint(nameContainer, false)
+        nameContainer.accentColor()
         name.setText(PreferenceUtil.userName)
 
         userImage.setOnClickListener {

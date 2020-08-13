@@ -19,12 +19,11 @@ class PlaylistsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.playlisitsLiveData.observe(viewLifecycleOwner, Observer { playlists ->
-            if (playlists.isNotEmpty()) {
-                adapter?.swapDataSet(playlists)
-            } else {
+        libraryViewModel.playlisitsLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty())
+                adapter?.swapDataSet(it)
+            else
                 adapter?.swapDataSet(listOf())
-            }
         })
     }
 

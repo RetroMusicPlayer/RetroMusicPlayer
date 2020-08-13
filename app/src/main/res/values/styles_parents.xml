@@ -8,11 +8,11 @@
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
-        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">

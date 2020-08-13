@@ -39,7 +39,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         super.onViewCreated(view, savedInstanceState)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.hideBottomNavigation()
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.hideBottomBarVisibility(false)
 
         setupRecyclerView()
         setupSearchView()

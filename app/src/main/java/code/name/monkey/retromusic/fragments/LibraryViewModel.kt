@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
@@ -18,13 +17,13 @@ class LibraryViewModel(
     private val repository: RepositoryImpl
 ) : ViewModel(), MusicServiceEventListener {
 
+    private val paletteColor = MutableLiveData<Int>()
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
     private val playlists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val home = MutableLiveData<List<Home>>()
-    private val paletteColor = MutableLiveData<Int>()
 
     val paletteColorLiveData: LiveData<Int> = paletteColor
     val homeLiveData: LiveData<List<Home>> = home
@@ -46,38 +45,14 @@ class LibraryViewModel(
         artists.value = loadArtists.await()
         playlists.value = loadPlaylists.await()
         genres.value = loadGenres.await()
-        loadHomeSections()
+        home.value = loadHome.await()
     }
 
-    private fun loadHomeSections() = viewModelScope.launch {
-        val list = mutableListOf<Home>()
-        val result = listOf(
-            repository.topArtists(),
-            repository.topAlbums(),
-            repository.recentArtists(),
-            repository.recentAlbums()/*,
-            repository.suggestions(),
-            repository.favoritePlaylist(),
-            repository.homeGenres()*/
-        )
-        result.forEach {
-            if (it != null && it.arrayList.isNotEmpty()) {
-                if (it.homeSection == HomeAdapter.SUGGESTIONS) {
-                    if (it.arrayList.size > 9) {
-                        list.add(it)
-                    }
-                } else {
-                    list.add(it)
-                }
-            }
-        }
-        home.value = list
-    }
+    private val loadHome: Deferred<List<Home>>
+        get() = viewModelScope.async { repository.homeSections() }
 
     private val loadSongs: Deferred<List<Song>>
-        get() = viewModelScope.async(IO) {
-            repository.allSongs()
-        }
+        get() = viewModelScope.async(IO) { repository.allSongs() }
 
     private val loadAlbums: Deferred<List<Album>>
         get() = viewModelScope.async(IO) {
@@ -99,6 +74,7 @@ class LibraryViewModel(
             repository.allGenres()
         }
 
+
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
         when (reloadType) {
             Songs -> songs.value = loadSongs.await()
@@ -114,15 +90,37 @@ class LibraryViewModel(
 
     override fun onMediaStoreChanged() {
         loadLibraryContent()
+        println("onMediaStoreChanged")
     }
 
-    override fun onServiceConnected() {}
-    override fun onServiceDisconnected() {}
-    override fun onQueueChanged() {}
-    override fun onPlayingMetaChanged() {}
-    override fun onPlayStateChanged() {}
-    override fun onRepeatModeChanged() {}
-    override fun onShuffleModeChanged() {}
+
+    override fun onServiceConnected() {
+        println("onServiceConnected")
+    }
+
+    override fun onServiceDisconnected() {
+        println("onServiceDisconnected")
+    }
+
+    override fun onQueueChanged() {
+        println("onQueueChanged")
+    }
+
+    override fun onPlayingMetaChanged() {
+        println("onPlayingMetaChanged")
+    }
+
+    override fun onPlayStateChanged() {
+        println("onPlayStateChanged")
+    }
+
+    override fun onRepeatModeChanged() {
+        println("onRepeatModeChanged")
+    }
+
+    override fun onShuffleModeChanged() {
+        println("onShuffleModeChanged")
+    }
 
 }
 

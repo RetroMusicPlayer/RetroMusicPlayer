@@ -14,9 +14,11 @@
 
 package code.name.monkey.retromusic.providers.interfaces
 
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by hemanths on 11/08/17.
@@ -47,17 +49,41 @@ interface Repository {
     suspend fun albumInfo(artist: String, album: String): LastFmAlbum
 
     suspend fun artistById(artistId: Int): Artist
-    suspend fun recentArtists(): Home?
 
-    suspend fun topArtists(): Home?
+    suspend fun recentArtists(): List<Artist>
 
-    suspend fun topAlbums(): Home?
+    suspend fun topArtists(): List<Artist>
 
-    suspend fun recentAlbums(): Home?
+    suspend fun topAlbums(): List<Album>
 
-    suspend fun favoritePlaylist(): Home?
+    suspend fun recentAlbums(): List<Album>
 
-    suspend fun suggestions(): Home?
+    suspend fun recentArtistsHome(): Home
 
-    suspend fun homeGenres(): Home?
+    suspend fun topArtistsHome(): Home
+
+    suspend fun topAlbumsHome(): Home
+
+    suspend fun recentAlbumsHome(): Home
+
+    suspend fun favoritePlaylistHome(): Home
+
+    suspend fun suggestionsHome(): Home
+
+    suspend fun genresHome(): Home
+
+    suspend fun homeSections(): List<Home>
+
+   suspend fun homeSectionsFlow(): Flow<Result<List<Home>>>
+
+    fun songsFlow(): Flow<Result<List<Song>>>
+
+    fun albumsFlow(): Flow<Result<List<Album>>>
+
+    fun artistsFlow(): Flow<Result<List<Artist>>>
+
+    fun playlistsFlow(): Flow<Result<List<Playlist>>>
+
+    fun genresFlow(): Flow<Result<List<Genre>>>
+
 }

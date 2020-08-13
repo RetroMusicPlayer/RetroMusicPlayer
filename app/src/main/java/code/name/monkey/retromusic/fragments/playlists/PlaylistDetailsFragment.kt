@@ -43,7 +43,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         setHasOptionsMenu(true)
         mainActivity.addMusicServiceEventListener(viewModel)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.hideBottomBarVisibility(false)
 
         playlist = arguments.extraPlaylist
 

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -17,11 +16,21 @@ import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_library.*
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(View.VISIBLE)
+        mainActivity.hideBottomBarVisibility(true)
         mainActivity.setSupportActionBar(toolbar)
+        mainActivity.supportActionBar?.title = null
+        toolbar.setNavigationOnClickListener {
+            findNavController().navigate(
+                R.id.searchFragment,
+                null,
+                navOptions
+            )
+        }
         setupNavigationController()
     }
 
@@ -67,13 +76,8 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> findNavController().navigate(
-                R.id.searchFragment,
-                null,
-                navOptions
-            )
             R.id.action_settings -> findNavController().navigate(
-                R.id.settingsFragment,
+                R.id.settingsActivity,
                 null,
                 navOptions
             )

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        android:textAppearance="@style/TextViewHeadline6"
+        android:textAppearance="@style/TextViewSubtitle1"
         tools:text="@tools:sample/full_names" />
 
 </com.google.android.material.card.MaterialCardView>

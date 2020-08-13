@@ -1,63 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?colorSurface"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <FrameLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="0dp"
-        tools:ignore="UnusedAttribute">
+        app:liftOnScroll="true">
 
-        <include layout="@layout/status_bar" />
-
-    </FrameLayout>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/mainContent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:liftOnScroll="true">
+            app:layout_scrollFlags="scroll|enterAlways">
 
-            <FrameLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways">
+                android:background="?attr/colorSurface"
+                app:navigationIcon="@drawable/ic_search"
+                app:popupTheme="?attr/toolbarPopupTheme"
+                app:title="@null"
+                tools:ignore="UnusedAttribute">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?attr/colorSurface"
-                    app:popupTheme="?attr/toolbarPopupTheme"
-                    app:title="@string/app_name"
-                    app:titleTextAppearance="@style/ToolbarTextAppearanceNormal.Library"
-                    app:titleTextColor="?attr/colorControlNormal"
-                    tools:ignore="UnusedAttribute" />
+                    android:layout_gravity="center"
+                    android:text="@string/app_name"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextViewHeadline6" />
+            </androidx.appcompat.widget.Toolbar>
 
-                <ViewStub
-                    android:id="@+id/cab_stub"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/toolbar_height" />
-            </FrameLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+            <ViewStub
+                android:id="@+id/cab_stub"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_height" />
+        </FrameLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            app:navGraph="@navigation/library_graph" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</LinearLayout>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:navGraph="@navigation/library_graph" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

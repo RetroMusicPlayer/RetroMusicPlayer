@@ -15,8 +15,7 @@
 package code.name.monkey.retromusic.providers
 
 import android.content.Context
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.adapter.HomeAdapter
+import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.loaders.*
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotRecentlyPlayedPlaylist
@@ -24,6 +23,10 @@ import code.name.monkey.retromusic.network.LastFMService
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.providers.interfaces.Repository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flow
 
 class RepositoryImpl(
     private val context: Context,
@@ -39,41 +42,24 @@ class RepositoryImpl(
     override suspend fun artistById(artistId: Int): Artist =
         ArtistLoader.getArtist(context, artistId)
 
+    override suspend fun recentArtists(): List<Artist> =
+        LastAddedSongsLoader.getLastAddedArtists(context)
+
+    override suspend fun topArtists(): List<Artist> =
+        TopAndRecentlyPlayedTracksLoader.getTopArtists(context)
+
+    override suspend fun topAlbums(): List<Album> =
+        TopAndRecentlyPlayedTracksLoader.getTopAlbums(context)
+
+    override suspend fun recentAlbums(): List<Album> =
+        LastAddedSongsLoader.getLastAddedAlbums(context)
+
     override suspend fun allPlaylists(): List<Playlist> = PlaylistLoader.getAllPlaylists(context)
 
     override suspend fun allGenres(): List<Genre> = GenreLoader.getAllGenres(context)
 
     override suspend fun allSongs(): List<Song> = SongLoader.getAllSongs(context)
 
-    override suspend fun suggestions(): Home? {
-        val songs = NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().apply {
-            if (size > 9) subList(0, 9)
-        }
-        if (songs.isNotEmpty()) {
-            return Home(
-                songs,
-                HomeAdapter.SUGGESTIONS,
-                R.drawable.ic_audiotrack
-            )
-        }
-        return null
-    }
-
-    override suspend fun homeGenres(): Home? {
-        val genres =
-            GenreLoader.getAllGenres(context)
-                .shuffled()
-                .filter { it.name.length in 5..10 }
-
-        if (genres.isNotEmpty()) {
-            return Home(
-                genres,
-                HomeAdapter.GENRES,
-                R.drawable.ic_guitar
-            )
-        }
-        return null
-    }
 
     override suspend fun search(query: String?): MutableList<Any> =
         SearchLoader.searchAll(context, query)
@@ -89,52 +75,6 @@ class RepositoryImpl(
     override suspend fun getGenre(genreId: Int): ArrayList<Song> =
         GenreLoader.getSongs(context, genreId)
 
-    override suspend fun recentArtists(): Home? {
-        val artists = LastAddedSongsLoader.getLastAddedArtists(context)
-        return if (artists.isNotEmpty()) Home(
-            artists,
-            HomeAdapter.RECENT_ARTISTS,
-            R.drawable.ic_artist
-        ) else null
-    }
-
-    override suspend fun recentAlbums(): Home? {
-        val albums = LastAddedSongsLoader.getLastAddedAlbums(context)
-        return if (albums.isNotEmpty()) Home(
-            albums,
-            HomeAdapter.RECENT_ALBUMS,
-            R.drawable.ic_album
-        ) else null
-    }
-
-    override suspend fun topAlbums(): Home? {
-        val albums = TopAndRecentlyPlayedTracksLoader.getTopAlbums(context)
-        return if (albums.isNotEmpty()) Home(
-            albums,
-            HomeAdapter.TOP_ALBUMS,
-            R.drawable.ic_album
-        ) else null
-    }
-
-    override suspend fun topArtists(): Home? {
-
-        val artists = TopAndRecentlyPlayedTracksLoader.getTopArtists(context)
-        return if (artists.isNotEmpty()) Home(
-            artists,
-            HomeAdapter.TOP_ARTISTS,
-            R.drawable.ic_artist
-        ) else null
-
-    }
-
-    override suspend fun favoritePlaylist(): Home? {
-        val playlists = PlaylistLoader.getFavoritePlaylist(context)
-        return if (playlists.isNotEmpty()) Home(
-            playlists,
-            HomeAdapter.FAVOURITES,
-            R.drawable.ic_favorite
-        ) else null
-    }
 
     override suspend fun artistInfo(
         name: String,
@@ -148,4 +88,149 @@ class RepositoryImpl(
         album: String
     ): LastFmAlbum = lastFMService.albumInfo(artist, album)
 
+    @ExperimentalCoroutinesApi
+    override suspend fun homeSectionsFlow(): Flow<Result<List<Home>>> {
+        val homes = MutableStateFlow<Result<List<Home>>>(value = Result.Loading)
+        println("homeSections:Loading")
+        val homeSections = mutableListOf<Home>()
+        val sections = listOf(
+            topArtistsHome(),
+            topAlbumsHome(),
+            recentArtistsHome(),
+            recentAlbumsHome(),
+            suggestionsHome(),
+            favoritePlaylistHome(),
+            genresHome()
+        )
+        for (section in sections) {
+            if (section.arrayList.isNotEmpty()) {
+                println("${section.homeSection} -> ${section.arrayList.size}")
+                homeSections.add(section)
+            }
+        }
+        if (homeSections.isEmpty()) {
+            homes.value = Result.Error
+        } else {
+            homes.value = Result.Success(homeSections)
+        }
+        return homes
+    }
+
+    override suspend fun homeSections(): List<Home> {
+        val homeSections = mutableListOf<Home>()
+        val sections = listOf(
+            topArtistsHome(),
+            topAlbumsHome(),
+            recentArtistsHome(),
+            recentAlbumsHome(),
+            suggestionsHome(),
+            favoritePlaylistHome(),
+            genresHome()
+        )
+        for (section in sections) {
+            if (section.arrayList.isNotEmpty()) {
+                println("${section.homeSection} -> ${section.arrayList.size}")
+                homeSections.add(section)
+            }
+        }
+        return homeSections
+    }
+
+    suspend fun playlists(): Home {
+        val playlist = PlaylistLoader.getAllPlaylists(context)
+        return Home(playlist, TOP_ALBUMS)
+    }
+
+    override suspend fun suggestionsHome(): Home {
+        val songs =
+            NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().takeUnless {
+                it.size > 9
+            }?.take(9) ?: emptyList<Song>()
+        return Home(songs, SUGGESTIONS)
+    }
+
+    override suspend fun genresHome(): Home {
+        val genres = GenreLoader.getAllGenres(context).shuffled()
+        return Home(genres, GENRES)
+    }
+
+
+    override suspend fun recentArtistsHome(): Home {
+        val artists = LastAddedSongsLoader.getLastAddedArtists(context).take(5)
+        return Home(artists, RECENT_ARTISTS)
+    }
+
+    override suspend fun recentAlbumsHome(): Home {
+        val albums = LastAddedSongsLoader.getLastAddedAlbums(context).take(5)
+        return Home(albums, RECENT_ALBUMS)
+    }
+
+    override suspend fun topAlbumsHome(): Home {
+        val albums = TopAndRecentlyPlayedTracksLoader.getTopAlbums(context).take(5)
+        return Home(albums, TOP_ALBUMS)
+    }
+
+    override suspend fun topArtistsHome(): Home {
+        val artists = TopAndRecentlyPlayedTracksLoader.getTopArtists(context).take(5)
+        return Home(artists, TOP_ARTISTS)
+    }
+
+    override suspend fun favoritePlaylistHome(): Home {
+        val playlists = PlaylistLoader.getFavoritePlaylist(context).take(5)
+        val songs = if (playlists.isNotEmpty())
+            PlaylistSongsLoader.getPlaylistSongList(context, playlists[0])
+        else emptyList<Song>()
+
+        return Home(songs, FAVOURITES)
+    }
+
+    override fun songsFlow(): Flow<Result<List<Song>>> = flow {
+        emit(Result.Loading)
+        val data = SongLoader.getAllSongs(context)
+        if (data.isEmpty()) {
+            emit(Result.Error)
+        } else {
+            emit(Result.Success(data))
+        }
+    }
+
+    override fun albumsFlow(): Flow<Result<List<Album>>> = flow {
+        emit(Result.Loading)
+        val data = AlbumLoader.getAllAlbums(context)
+        if (data.isEmpty()) {
+            emit(Result.Error)
+        } else {
+            emit(Result.Success(data))
+        }
+    }
+
+    override fun artistsFlow(): Flow<Result<List<Artist>>> = flow {
+        emit(Result.Loading)
+        val data = ArtistLoader.getAllArtists(context)
+        if (data.isEmpty()) {
+            emit(Result.Error)
+        } else {
+            emit(Result.Success(data))
+        }
+    }
+
+    override fun playlistsFlow(): Flow<Result<List<Playlist>>> = flow {
+        emit(Result.Loading)
+        val data = PlaylistLoader.getAllPlaylists(context)
+        if (data.isEmpty()) {
+            emit(Result.Error)
+        } else {
+            emit(Result.Success(data))
+        }
+    }
+
+    override fun genresFlow(): Flow<Result<List<Genre>>> = flow {
+        emit(Result.Loading)
+        val data = GenreLoader.getAllGenres(context)
+        if (data.isEmpty()) {
+            emit(Result.Error)
+        } else {
+            emit(Result.Success(data))
+        }
+    }
 }

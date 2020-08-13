@@ -23,11 +23,10 @@ class SongsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.songsLiveData.observe(viewLifecycleOwner, Observer {
-            if (it.isNotEmpty()) {
+            if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
-            } else {
+            else
                 adapter?.swapDataSet(listOf())
-            }
         })
     }
 

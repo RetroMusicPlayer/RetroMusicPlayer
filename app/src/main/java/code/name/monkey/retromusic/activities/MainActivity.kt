@@ -2,16 +2,13 @@ package code.name.monkey.retromusic.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openAndShuffleQueue
@@ -19,7 +16,6 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote.openQueue
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.playFromUri
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.shuffleMode
 import code.name.monkey.retromusic.helper.SearchQueryHelper.getSongs
-import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.loaders.AlbumLoader.getAlbum
 import code.name.monkey.retromusic.loaders.ArtistLoader.getArtist
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader.getPlaylistSongList
@@ -27,15 +23,10 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater.appLaunched
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
-import com.afollestad.materialcab.MaterialCab
-import com.afollestad.materialdialogs.color.ColorChooserDialog
 import org.koin.android.ext.android.inject
 import java.util.*
 
-class MainActivity : AbsSlidingMusicPanelActivity(),
-    SharedPreferences.OnSharedPreferenceChangeListener, CabHolder,
-    ColorChooserDialog.ColorCallback {
+class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeListener {
     companion object {
         const val TAG = "MainActivity"
         const val EXPAND_PANEL = "expand_panel"
@@ -44,7 +35,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
 
 
     private val libraryViewModel: LibraryViewModel by inject()
-    private var cab: MaterialCab? = null
+
     private var blockRequestPermissions = false
 
     override fun createContentView(): View {
@@ -59,7 +50,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         setLightNavigationBar(true)
         setTaskDescriptionColorAuto()
         hideStatusBar()
-        setBottomBarVisibility(View.VISIBLE)
         appLaunched(this)
         addMusicServiceEventListener(libraryViewModel)
         updateTabs()
@@ -176,47 +166,5 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
             }
         }
         return id
-    }
-
-    override fun handleBackPress(): Boolean {
-        if (cab != null && cab!!.isActive) {
-            cab?.finish()
-            return true
-        }
-        return super.handleBackPress()
-    }
-
-    override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
-        cab?.let {
-            if (it.isActive) it.finish()
-        }
-        cab = MaterialCab(this, R.id.cab_stub)
-            .setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close)
-            .setBackgroundColor(
-                RetroColorUtil.shiftBackgroundColorForLightText(
-                    ATHUtil.resolveColor(
-                        this,
-                        R.attr.colorSurface
-                    )
-                )
-            )
-            .start(callback)
-        return cab as MaterialCab
-    }
-
-    override fun onColorSelection(dialog: ColorChooserDialog, selectedColor: Int) {
-        when (dialog.title) {
-            R.string.accent_color -> {
-                ThemeStore.editTheme(this).accentColor(selectedColor).commit()
-                if (VersionUtils.hasNougatMR())
-                    DynamicShortcutManager(this).updateDynamicShortcuts()
-            }
-        }
-        recreate()
-    }
-
-    override fun onColorChooserDismissed(dialog: ColorChooserDialog) {
-
     }
 }

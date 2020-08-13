@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -36,7 +37,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_diamond_stone"
-                    app:tint="?colorOnSecondary" />
+                    app:tint="?colorOnSecondary"
+                    tools:tint="?attr/colorAccent" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/title"
@@ -47,6 +49,8 @@
                     android:text="@string/retro_music_pro"
                     android:textAppearance="@style/TextViewSubtitle1"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/diamondIcon" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -58,6 +62,9 @@
                     android:paddingEnd="16dp"
                     android:paddingBottom="12dp"
                     android:text="@string/pro_summary"
+                    android:textAppearance="@style/TextViewBody2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/title" />
 
                 <View
@@ -77,6 +84,7 @@
                     android:gravity="start|center_vertical"
                     android:text="@string/buy_now"
                     android:textAllCaps="false"
+                    android:textAppearance="@style/TextViewButton"
                     android:textColor="?colorAccent"
                     android:textStyle="bold"
                     app:backgroundTint="?attr/colorSurface"

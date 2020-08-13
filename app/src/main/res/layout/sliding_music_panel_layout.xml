@@ -49,7 +49,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:elevation="0dp"
-        android:visibility="gone"
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconTint="@drawable/bottom_navigation_item_colors"
         app:itemTextAppearanceActive="@style/BottomSheetItemTextAppearance"

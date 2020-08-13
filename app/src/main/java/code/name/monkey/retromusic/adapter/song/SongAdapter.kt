@@ -148,7 +148,6 @@ open class SongAdapter(
                 return ""
             }
         }
-
         return MusicUtil.getSectionName(sectionName)
     }
 

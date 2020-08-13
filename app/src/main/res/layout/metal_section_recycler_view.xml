@@ -11,28 +11,13 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
-        android:paddingHorizontal="16dp"
-        android:paddingTop="16dp"
+        android:padding="16dp"
         android:textAppearance="@style/TextViewHeadline6"
         android:textStyle="bold"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/full_names" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="4dp"
-        android:textAppearance="@style/TextViewCaption"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"
         tools:text="@tools:sample/full_names" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -42,9 +27,8 @@
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never"
         android:visibility="gone"
-        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

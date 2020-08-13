@@ -52,7 +52,7 @@
     <fragment
         android:id="@+id/libraryFragment"
         android:name="code.name.monkey.retromusic.fragments.library.LibraryFragment"
-        android:label="LibraryFragment"
+        android:label=""
         tools:layout="@layout/fragment_library">
         <action
             android:id="@+id/action_main_to_library"
@@ -63,15 +63,24 @@
     </fragment>
 
     <fragment
+        android:id="@+id/detailListFragment"
+        android:name="code.name.monkey.retromusic.fragments.DetailListFragment"
+        android:label="DetailListFragment">
+        <argument
+            android:name="type"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
         android:id="@+id/searchFragment"
         android:name="code.name.monkey.retromusic.fragments.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
 
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="code.name.monkey.retromusic.fragments.settings.SettingsFragment"
-        android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="code.name.monkey.retromusic.activities.SettingsActivity"
+        android:label="SettingsActivity" />
+
 
 </navigation>

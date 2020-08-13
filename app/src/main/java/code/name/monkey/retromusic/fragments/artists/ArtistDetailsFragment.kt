@@ -56,17 +56,19 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     private var lang: String? = null
     private var biography: Spanned? = null
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.hideBottomBarVisibility(false)
         toolbar.title = null
         setupRecyclerView()
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
-            startPostponedEnterTransition()
+
             showArtist(it)
+            startPostponedEnterTransition()
         })
         detailsViewModel.getArtistInfo().observe(viewLifecycleOwner, Observer {
             artistInfo(it)
@@ -129,7 +131,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
             )
         songTitle.text = songText
         albumTitle.text = albumText
-        songAdapter.swapDataSet(artist.songs)
+        songAdapter.swapDataSet(artist.songs.sortedBy { it.trackNumber })
         artist.albums?.let { albumAdapter.swapDataSet(it) }
     }
 
@@ -175,6 +177,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
             .generatePalette(requireContext()).build()
             .dontAnimate().into(object : RetroMusicColoredTarget(image) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
+                    startPostponedEnterTransition()
                     setColors(colors)
                 }
             })

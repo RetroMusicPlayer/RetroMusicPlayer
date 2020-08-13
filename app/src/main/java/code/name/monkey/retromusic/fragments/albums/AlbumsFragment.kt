@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
@@ -19,13 +20,12 @@ class AlbumsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.albumsLiveData
-            .observe(viewLifecycleOwner, Observer { albums ->
-                if (albums.isNotEmpty())
-                    adapter?.swapDataSet(albums)
-                else
-                    adapter?.swapDataSet(listOf())
-            })
+        libraryViewModel.albumsLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty())
+                adapter?.swapDataSet(it)
+            else
+                adapter?.swapDataSet(listOf())
+        })
     }
 
     override val emptyMessage: Int
@@ -98,7 +98,11 @@ class AlbumsFragment :
         val controller = requireActivity().findNavController(R.id.fragment_container)
         controller.navigate(
             R.id.albumDetailsFragment,
-            bundleOf(EXTRA_ALBUM_ID to albumId)
+            bundleOf(EXTRA_ALBUM_ID to albumId),
+            null,
+            FragmentNavigatorExtras(
+                view to getString(R.string.transition_album_art)
+            )
         )
     }
 }

@@ -33,6 +33,8 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 fun Int.ripAlpha(): Int {
     return ColorUtil.stripAlpha(this)
@@ -116,4 +118,15 @@ fun MaterialButton.applyColor(color: Int) {
     backgroundTintList = backgroundColorStateList
     setTextColor(textColorColorStateList)
     iconTint = textColorColorStateList
+}
+
+fun TextInputLayout.accentColor() {
+    val accentColor = ThemeStore.accentColor(context)
+    val colorState = ColorStateList.valueOf(accentColor)
+    boxStrokeColor = accentColor
+    defaultHintTextColor = colorState
+    isHintAnimationEnabled = true
+}
+fun TextInputEditText.accentColor(){
+
 }
