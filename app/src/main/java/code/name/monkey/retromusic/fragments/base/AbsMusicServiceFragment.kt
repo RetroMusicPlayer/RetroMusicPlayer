@@ -24,9 +24,13 @@ import java.util.*
 
 open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
     MusicServiceEventListener {
+
     val navOptions by lazy {
         navOptions {
-            launchSingleTop = true
+            popUpTo(R.id.action_home) {
+                inclusive = false
+            }
+            launchSingleTop = false
             anim {
                 enter = R.anim.retro_fragment_open_enter
                 exit = R.anim.retro_fragment_open_exit
@@ -35,6 +39,7 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
             }
         }
     }
+
     var playerActivity: AbsMusicServiceActivity? = null
         private set
 

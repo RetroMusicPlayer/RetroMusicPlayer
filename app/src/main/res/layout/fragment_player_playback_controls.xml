@@ -9,7 +9,6 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songCurrentProgress"
         android:layout_width="wrap_content"
@@ -85,10 +84,16 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:freezesText="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         android:textAppearance="@style/TextViewBody1"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constrainedWidth="true"

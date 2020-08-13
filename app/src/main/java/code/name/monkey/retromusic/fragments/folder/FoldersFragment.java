@@ -87,7 +87,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             FileUtil.fileIsMimeType(file, "audio/*", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/opus", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/ogg", MimeTypeMap.getSingleton()));
-    public static final String PATH = "path";
+
     private static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = 5;
     private SongFileAdapter adapter;
@@ -128,18 +128,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         return startFolder;
     }
 
-    public static FoldersFragment newInstance(File directory) {
-        FoldersFragment frag = new FoldersFragment();
-        Bundle b = new Bundle();
-        b.putSerializable(PATH, directory);
-        frag.setArguments(b);
-        return frag;
-    }
-
-    public static FoldersFragment newInstance(Context context) {
-        return newInstance(PreferenceUtil.INSTANCE.getStartDirectory());
-    }
-
     private static File tryGetCanonicalFile(File file) {
         try {
             return file.getCanonicalFile();
@@ -174,7 +162,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         if (savedInstanceState == null) {
             //noinspection ConstantConditions
-            setCrumb(new BreadCrumbLayout.Crumb(FileUtil.safeGetCanonicalFile((File) requireArguments().getSerializable(PATH))), true);
+            setCrumb(new BreadCrumbLayout.Crumb(FileUtil.safeGetCanonicalFile(PreferenceUtil.INSTANCE.getStartDirectory())), true);
         } else {
             breadCrumbs.restoreFromStateWrapper(savedInstanceState.getParcelable(CRUMBS));
             getLoaderManager().initLoader(LOADER_ID, null, this);

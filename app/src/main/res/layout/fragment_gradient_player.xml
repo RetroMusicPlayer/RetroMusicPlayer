@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:paddingBottom="48dp">
 
-        <androidx.fragment.app.FragmentContainerView
+         <fragment
             android:id="@+id/playerAlbumCoverFragment"
             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
             android:layout_width="0dp"

@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true">
 
-    <androidx.fragment.app.FragmentContainerView
+     <fragment
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
         app:layout_constraintBottom_toTopOf="@id/toolbarContainer"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.fragment.app.FragmentContainerView
+         <fragment
             android:id="@+id/playbackControlsFragment"
             android:name="code.name.monkey.retromusic.fragments.player.tiny.TinyPlaybackControlsFragment"
             android:layout_width="match_parent"

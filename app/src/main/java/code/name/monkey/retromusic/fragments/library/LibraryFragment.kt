@@ -5,18 +5,16 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import code.name.monkey.retromusic.fragments.folder.FoldersFragment
-import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_library.*
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -36,26 +34,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
     private fun setupNavigationController() {
         val navController = findNavController(R.id.fragment_container)
-        mainActivity.getBottomNavigationView().setOnNavigationItemSelectedListener {
-            var handled = false
-            if (navController.graph.findNode(it.itemId) != null) {
-                navController.navigate(it.itemId, null, navOptions)
-                handled = true
-            }
-            when (it.itemId) {
-                R.id.action_folder -> navController.navigate(
-                    R.id.action_folder,
-                    Bundle().apply {
-                        putSerializable(
-                            FoldersFragment.PATH,
-                            PreferenceUtil.startDirectory
-                        )
-                    },
-                    navOptions
-                )
-            }
-            return@setOnNavigationItemSelectedListener handled
-        }
+        NavigationUI.setupWithNavController(mainActivity.getBottomNavigationView(), navController)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

@@ -47,7 +47,7 @@
         </FrameLayout>
 
 
-        <androidx.fragment.app.FragmentContainerView
+         <fragment
             android:id="@+id/playerAlbumCoverFragment"
             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
             android:layout_width="72dp"
@@ -114,7 +114,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text"
             tools:text="@tools:sample/lorem/random" />
 
-        <androidx.fragment.app.FragmentContainerView
+         <fragment
             android:id="@+id/playbackControlsFragment"
             android:name="code.name.monkey.retromusic.fragments.player.peak.PeakPlayerControlFragment"
             android:layout_width="match_parent"

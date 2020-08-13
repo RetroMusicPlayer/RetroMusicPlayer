@@ -31,7 +31,7 @@
     </FrameLayout>
 
 
-    <androidx.fragment.app.FragmentContainerView
+     <fragment
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="0dp"
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statusBarContainer" />
 
-    <androidx.fragment.app.FragmentContainerView
+     <fragment
         android:id="@+id/playbackControlsFragment"
         android:name="code.name.monkey.retromusic.fragments.player.color.ColorPlaybackControlsFragment"
         android:layout_width="0dp"

@@ -43,7 +43,7 @@
         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
 
 
-    <androidx.fragment.app.FragmentContainerView
+     <fragment
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="0dp"
@@ -55,7 +55,7 @@
         tools:layout="@layout/fragment_album_flat_cover" />
 
 
-    <androidx.fragment.app.FragmentContainerView
+     <fragment
         android:id="@+id/playbackControlsFragment"
         android:name="code.name.monkey.retromusic.fragments.player.flat.FlatPlaybackControlsFragment"
         android:layout_width="0dp"

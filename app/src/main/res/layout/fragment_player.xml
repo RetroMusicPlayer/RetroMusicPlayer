@@ -32,7 +32,7 @@
     </FrameLayout>
 
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="0dp"
@@ -43,7 +43,7 @@
         app:layout_constraintHeight_percent="0.5" />
 
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/playbackControlsFragment"
         android:name="code.name.monkey.retromusic.fragments.player.normal.PlayerPlaybackControlsFragment"
         android:layout_width="0dp"
