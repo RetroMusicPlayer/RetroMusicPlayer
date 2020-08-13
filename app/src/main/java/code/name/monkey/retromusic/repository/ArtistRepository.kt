@@ -12,46 +12,66 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.loaders
+package code.name.monkey.retromusic.repository
 
-import android.content.Context
 import android.provider.MediaStore.Audio.AudioColumns
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-object ArtistLoader {
+interface ArtistRepository {
+    fun artists(): List<Artist>
+
+    fun artists(query: String): List<Artist>
+
+    fun artist(artistId: Int): Artist
+}
+
+class RealArtistRepository(
+    private val songRepository: RealSongRepository,
+    private val albumRepository: RealAlbumRepository
+) : ArtistRepository {
+
     private fun getSongLoaderSortOrder(): String {
         return PreferenceUtil.artistSortOrder + ", " +
                 PreferenceUtil.artistAlbumSortOrder + ", " +
                 PreferenceUtil.artistSongSortOrder
     }
 
-    fun getAllArtists(context: Context): ArrayList<Artist> {
-        val songs = SongLoader.getSongs(
-            SongLoader.makeSongCursor(
-                context,
+    override fun artists(): List<Artist> {
+        val songs = songRepository.songs(
+            songRepository.makeSongCursor(
                 null, null,
                 getSongLoaderSortOrder()
             )
         )
-        return splitIntoArtists(AlbumLoader.splitIntoAlbums(songs))
+        return splitIntoArtists(albumRepository.splitIntoAlbums(songs))
     }
 
-    fun getArtists(context: Context, query: String): ArrayList<Artist> {
-        val songs = SongLoader.getSongs(
-            SongLoader.makeSongCursor(
-                context,
+    override fun artists(query: String): List<Artist> {
+        val songs = songRepository.songs(
+            songRepository.makeSongCursor(
                 AudioColumns.ARTIST + " LIKE ?",
                 arrayOf("%$query%"),
                 getSongLoaderSortOrder()
             )
         )
-        return splitIntoArtists(AlbumLoader.splitIntoAlbums(songs))
+        return splitIntoArtists(albumRepository.splitIntoAlbums(songs))
     }
 
-    fun splitIntoArtists(albums: ArrayList<Album>?): ArrayList<Artist> {
-        val artists = ArrayList<Artist>()
+    override fun artist(artistId: Int): Artist {
+        val songs = songRepository.songs(
+            songRepository.makeSongCursor(
+                AudioColumns.ARTIST_ID + "=?",
+                arrayOf(artistId.toString()),
+                getSongLoaderSortOrder()
+            )
+        )
+        return Artist(ArrayList(albumRepository.splitIntoAlbums(songs)))
+    }
+
+    fun splitIntoArtists(albums: List<Album>?): List<Artist> {
+        val artists = mutableListOf<Artist>()
         if (albums != null) {
             for (album in albums) {
                 getOrCreateArtist(artists, album.artistId).albums!!.add(album)
@@ -60,7 +80,7 @@ object ArtistLoader {
         return artists
     }
 
-    private fun getOrCreateArtist(artists: ArrayList<Artist>, artistId: Int): Artist {
+    private fun getOrCreateArtist(artists: MutableList<Artist>, artistId: Int): Artist {
         for (artist in artists) {
             if (artist.albums!!.isNotEmpty() && artist.albums[0].songs!!.isNotEmpty() && artist.albums[0].songs!![0].artistId == artistId) {
                 return artist
@@ -69,18 +89,5 @@ object ArtistLoader {
         val album = Artist()
         artists.add(album)
         return album
-    }
-
-    @JvmStatic
-    fun getArtist(context: Context, artistId: Int): Artist {
-        val songs = SongLoader.getSongs(
-            SongLoader.makeSongCursor(
-                context,
-                AudioColumns.ARTIST_ID + "=?",
-                arrayOf(artistId.toString()),
-                getSongLoaderSortOrder()
-            )
-        )
-        return Artist(AlbumLoader.splitIntoAlbums(songs))
     }
 }

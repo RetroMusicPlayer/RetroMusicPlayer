@@ -22,8 +22,8 @@ import code.name.monkey.retromusic.appshortcuts.shortcuttype.ShuffleAllShortcutT
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.TopTracksShortcutType
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
-import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.ShuffleAllPlaylist
+import code.name.monkey.retromusic.model.smartplaylist.TopTracksPlaylist
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.*
 
@@ -49,7 +49,7 @@ class AppShortcutLauncherActivity : Activity() {
             }
             SHORTCUT_TYPE_TOP_TRACKS -> {
                 startServiceWithPlaylist(
-                    SHUFFLE_MODE_NONE, MyTopTracksPlaylist(applicationContext)
+                    SHUFFLE_MODE_NONE, TopTracksPlaylist(applicationContext)
                 )
                 DynamicShortcutManager.reportShortcutUsed(this, TopTracksShortcutType.id)
             }

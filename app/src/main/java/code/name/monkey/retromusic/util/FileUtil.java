@@ -31,15 +31,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import code.name.monkey.retromusic.loaders.SongLoader;
-import code.name.monkey.retromusic.loaders.SortedCursor;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.repository.RealSongRepository;
+import code.name.monkey.retromusic.repository.SortedCursor;
 
 
 public final class FileUtil {
@@ -59,9 +58,9 @@ public final class FileUtil {
     }
 
     @NonNull
-    public static ArrayList<Song> matchFilesWithMediaStore(@NonNull Context context,
-                                                           @Nullable List<File> files) {
-        return SongLoader.INSTANCE.getSongs(makeSongCursor(context, files));
+    public static List<Song> matchFilesWithMediaStore(@NonNull Context context,
+                                                      @Nullable List<File> files) {
+        return new RealSongRepository(context).songs(makeSongCursor(context, files));
     }
 
     public static String safeGetCanonicalPath(File file) {
@@ -89,7 +88,7 @@ public final class FileUtil {
             }
         }
 
-        Cursor songCursor = SongLoader.INSTANCE.makeSongCursor(context, selection, selection == null ? null : paths);
+        Cursor songCursor = new RealSongRepository(context).makeSongCursor(selection, selection == null ? null : paths);
 
         return songCursor == null ? null
                 : new SortedCursor(songCursor, paths, MediaStore.Audio.AudioColumns.DATA);

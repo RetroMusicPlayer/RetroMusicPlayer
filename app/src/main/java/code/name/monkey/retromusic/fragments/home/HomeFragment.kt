@@ -20,6 +20,7 @@ import android.util.DisplayMetrics
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.EXTRA_PLAYLIST
@@ -31,21 +32,24 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
 import code.name.monkey.retromusic.glide.UserProfileGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
-import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
+import code.name.monkey.retromusic.model.smartplaylist.TopTracksPlaylist
+import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment :
     AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home) {
 
+    private val repository by inject<Repository>()
     private val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     private val displayMetrics: DisplayMetrics
@@ -78,12 +82,17 @@ class HomeFragment :
         topPlayed.setOnClickListener {
             findActivityNavController(R.id.fragment_container).navigate(
                 R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to MyTopTracksPlaylist(requireActivity()))
+                bundleOf(EXTRA_PLAYLIST to TopTracksPlaylist(requireActivity()))
             )
         }
 
         actionShuffle.setOnClickListener {
-            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(requireActivity()), true)
+            lifecycleScope.launch {
+                MusicPlayerRemote.openAndShuffleQueue(
+                    repository.allSongs(),
+                    true
+                )
+            }
         }
 
         history.setOnClickListener {
@@ -110,8 +119,8 @@ class HomeFragment :
         }
 
         libraryViewModel.homeLiveData.observe(viewLifecycleOwner, Observer {
-                homeAdapter.swapData(it)
-            })
+            homeAdapter.swapData(it)
+        })
 
         loadProfile()
     }

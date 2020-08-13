@@ -17,44 +17,55 @@ package code.name.monkey.retromusic.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
-import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.repository.PlaylistRepository
 import code.name.monkey.retromusic.util.PlaylistsUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.inject
 
 
 class AddToPlaylistDialog : DialogFragment() {
-
+    private val playlistRepository by inject<PlaylistRepository>()
     override fun onCreateDialog(
         savedInstanceState: Bundle?
     ): Dialog {
-        val playlists = PlaylistLoader.getAllPlaylists(requireContext())
-        val playlistNames = mutableListOf<String>()
-        playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
-        for (p in playlists) {
-            playlistNames.add(p.name)
+        val materialDialog = materialDialog(R.string.add_playlist_title)
+        lifecycleScope.launch {
+            val playlists = playlistRepository.playlists()
+            val playlistNames = mutableListOf<String>()
+            playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
+            for (p in playlists) {
+                playlistNames.add(p.name)
+            }
+
+            withContext(Dispatchers.Main) {
+                materialDialog.setItems(playlistNames.toTypedArray()) { _, which ->
+                    val songs = extraNotNull<ArrayList<Song>>(EXTRA_SONG).value
+                    if (which == 0) {
+                        CreatePlaylistDialog.create(songs)
+                            .show(requireActivity().supportFragmentManager, "ADD_TO_PLAYLIST")
+                    } else {
+                        PlaylistsUtil.addToPlaylist(
+                            requireContext(),
+                            songs,
+                            playlists[which - 1].id,
+                            true
+                        )
+                    }
+                    dismiss()
+                }
+            }
         }
 
         return materialDialog(R.string.add_playlist_title)
-            .setItems(playlistNames.toTypedArray()) { _, which ->
-                val songs = extraNotNull<ArrayList<Song>>(EXTRA_SONG).value
-                if (which == 0) {
-                    CreatePlaylistDialog.create(songs)
-                        .show(requireActivity().supportFragmentManager, "ADD_TO_PLAYLIST")
-                } else {
-                    PlaylistsUtil.addToPlaylist(
-                        requireContext(),
-                        songs,
-                        playlists[which - 1].id,
-                        true
-                    )
-                }
-                dismiss()
-            }
             .create().colorButtons()
     }
 

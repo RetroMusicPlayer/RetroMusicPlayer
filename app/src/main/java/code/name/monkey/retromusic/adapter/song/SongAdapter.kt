@@ -133,7 +133,7 @@ open class SongAdapter(
         return song.title
     }
 
-    override fun onMultipleItemAction(menuItem: MenuItem, selection: ArrayList<Song>) {
+    override fun onMultipleItemAction(menuItem: MenuItem, selection: List<Song>) {
         SongsMenuHelper.handleMenuClick(activity, selection, menuItem.itemId)
     }
 

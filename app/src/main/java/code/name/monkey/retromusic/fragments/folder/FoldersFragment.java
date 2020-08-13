@@ -60,6 +60,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper;
 import code.name.monkey.retromusic.interfaces.CabHolder;
+import code.name.monkey.retromusic.interfaces.Callbacks;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
@@ -76,7 +77,9 @@ import me.zhanghai.android.fastscroll.FastScroller;
 
 public class FoldersFragment extends AbsMainActivityFragment implements
         MainActivityFragmentCallbacks,
-        CabHolder, BreadCrumbLayout.SelectionCallback, SongFileAdapter.Callbacks,
+        CabHolder,
+        BreadCrumbLayout.SelectionCallback,
+        Callbacks,
         LoaderManager.LoaderCallbacks<List<File>> {
 
     public static final String TAG = FoldersFragment.class.getSimpleName();
@@ -619,7 +622,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private static class ListSongsAsyncTask
-            extends ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, ArrayList<Song>> {
+            extends ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, List<Song>> {
 
         private final Object extra;
         private WeakReference<OnSongsListedCallback> callbackWeakReference;
@@ -633,7 +636,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
 
         @Override
-        protected ArrayList<Song> doInBackground(LoadingInfo... params) {
+        protected List<Song> doInBackground(LoadingInfo... params) {
             try {
                 LoadingInfo info = params[0];
                 List<File> files = FileUtil.listFilesDeep(info.files, info.fileFilter);
@@ -659,7 +662,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Song> songs) {
+        protected void onPostExecute(List<Song> songs) {
             super.onPostExecute(songs);
             OnSongsListedCallback callback = checkCallbackReference();
             if (songs != null && callback != null) {
@@ -692,7 +695,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         public interface OnSongsListedCallback {
 
-            void onSongsListed(@NonNull ArrayList<Song> songs, Object extra);
+            void onSongsListed(@NonNull List<Song> songs, Object extra);
         }
 
         static class LoadingInfo {

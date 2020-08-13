@@ -7,14 +7,14 @@ import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
-import code.name.monkey.retromusic.providers.RepositoryImpl
+import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class LibraryViewModel(
-    private val repository: RepositoryImpl
+    private val realRepository: RealRepository
 ) : ViewModel(), MusicServiceEventListener {
 
     private val paletteColor = MutableLiveData<Int>()
@@ -49,29 +49,29 @@ class LibraryViewModel(
     }
 
     private val loadHome: Deferred<List<Home>>
-        get() = viewModelScope.async { repository.homeSections() }
+        get() = viewModelScope.async { realRepository.homeSections() }
 
     private val loadSongs: Deferred<List<Song>>
-        get() = viewModelScope.async(IO) { repository.allSongs() }
+        get() = viewModelScope.async(IO) { realRepository.allSongs() }
 
     private val loadAlbums: Deferred<List<Album>>
         get() = viewModelScope.async(IO) {
-            repository.allAlbums()
+            realRepository.allAlbums()
         }
 
     private val loadArtists: Deferred<List<Artist>>
         get() = viewModelScope.async(IO) {
-            repository.allArtists()
+            realRepository.allArtists()
         }
 
     private val loadPlaylists: Deferred<List<Playlist>>
         get() = viewModelScope.async(IO) {
-            repository.allPlaylists()
+            realRepository.allPlaylists()
         }
 
     private val loadGenres: Deferred<List<Genre>>
         get() = viewModelScope.async(IO) {
-            repository.allGenres()
+            realRepository.allGenres()
         }
 
 

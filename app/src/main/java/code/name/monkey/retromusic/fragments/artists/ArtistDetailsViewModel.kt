@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.providers.RepositoryImpl
+import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -14,13 +14,13 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ArtistDetailsViewModel(
-    private val repository: RepositoryImpl,
+    private val realRepository: RealRepository,
     private val artistId: Int
 ) : ViewModel(), MusicServiceEventListener {
 
     private val loadArtistDetailsAsync: Deferred<Artist?>
         get() = viewModelScope.async(Dispatchers.IO) {
-            repository.artistById(artistId)
+            realRepository.artistById(artistId)
         }
 
     private val _artist = MutableLiveData<Artist>()
@@ -40,7 +40,7 @@ class ArtistDetailsViewModel(
     }
 
     fun loadBiography(name: String, lang: String?, cache: String?) = viewModelScope.launch {
-        val info = repository.artistInfo(name, lang, cache)
+        val info = realRepository.artistInfo(name, lang, cache)
         _lastFmArtist.postValue(info)
     }
 

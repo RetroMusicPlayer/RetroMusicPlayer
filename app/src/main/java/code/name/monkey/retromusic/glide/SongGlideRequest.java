@@ -52,7 +52,7 @@ public class SongGlideRequest {
         if (ignoreMediaStore) {
             return requestManager.load(new AudioFileCover(song.getData()));
         } else {
-            return requestManager.loadFromMediaStore(MusicUtil.getMediaStoreAlbumCoverUri(song.getAlbumId()));
+            return requestManager.loadFromMediaStore(MusicUtil.INSTANCE.getMediaStoreAlbumCoverUri(song.getAlbumId()));
         }
     }
 

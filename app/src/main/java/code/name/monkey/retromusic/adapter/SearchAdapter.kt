@@ -14,9 +14,9 @@ import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
-import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
+import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.util.MusicUtil
 import com.bumptech.glide.Glide
 
@@ -93,7 +93,7 @@ class SearchAdapter(
     private fun getSongs(playlist: Playlist): java.util.ArrayList<Song> {
         val songs = java.util.ArrayList<Song>()
         if (playlist is AbsSmartPlaylist) {
-            songs.addAll(playlist.getSongs(activity))
+            songs.addAll(playlist.getSongs())
         } else {
             songs.addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id))
         }

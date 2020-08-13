@@ -63,7 +63,7 @@ public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.Loadi
             File albumArtFile = null;
             if (info.artworkInfo != null && info.artworkInfo.getArtwork() != null) {
                 try {
-                    albumArtFile = MusicUtil.createAlbumArtFile().getCanonicalFile();
+                    albumArtFile = MusicUtil.INSTANCE.createAlbumArtFile().getCanonicalFile();
                     info.artworkInfo.getArtwork()
                             .compress(Bitmap.CompressFormat.PNG, 0, new FileOutputStream(albumArtFile));
                     artwork = ArtworkFactory.createArtworkFromFile(albumArtFile);
@@ -120,9 +120,9 @@ public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.Loadi
             Context context = getContext();
             if (context != null) {
                 if (wroteArtwork) {
-                    MusicUtil.insertAlbumArt(context, info.artworkInfo.getAlbumId(), albumArtFile.getPath());
+                    MusicUtil.INSTANCE.insertAlbumArt(context, info.artworkInfo.getAlbumId(), albumArtFile.getPath());
                 } else if (deletedArtwork) {
-                    MusicUtil.deleteAlbumArt(context, info.artworkInfo.getAlbumId());
+                    MusicUtil.INSTANCE.deleteAlbumArt(context, info.artworkInfo.getAlbumId());
                 }
             }
 

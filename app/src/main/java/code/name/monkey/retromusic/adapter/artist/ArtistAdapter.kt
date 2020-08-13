@@ -107,12 +107,12 @@ class ArtistAdapter(
     }
 
     override fun onMultipleItemAction(
-        menuItem: MenuItem, selection: ArrayList<Artist>
+        menuItem: MenuItem, selection: List<Artist>
     ) {
         SongsMenuHelper.handleMenuClick(activity, getSongList(selection), menuItem.itemId)
     }
 
-    private fun getSongList(artists: List<Artist>): ArrayList<Song> {
+    private fun getSongList(artists: List<Artist>): List<Song> {
         val songs = ArrayList<Song>()
         for (artist in artists) {
             songs.addAll(artist.songs) // maybe async in future?

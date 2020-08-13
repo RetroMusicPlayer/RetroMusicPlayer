@@ -8,14 +8,14 @@ import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.model.LastFmAlbum
-import code.name.monkey.retromusic.providers.RepositoryImpl
+import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class AlbumDetailsViewModel(
-    private val repository: RepositoryImpl,
+    private val realRepository: RealRepository,
     private val albumId: Int
 ) : ViewModel(), MusicServiceEventListener {
 
@@ -39,12 +39,12 @@ class AlbumDetailsViewModel(
     }
 
     fun loadAlbumInfo(album: Album) = viewModelScope.launch(Dispatchers.IO) {
-        val lastFmAlbum = repository.albumInfo(album.artistName ?: "-", album.title ?: "-")
+        val lastFmAlbum = realRepository.albumInfo(album.artistName ?: "-", album.title ?: "-")
         _lastFmAlbum.postValue(lastFmAlbum)
     }
 
     fun loadArtist(artistId: Int) = viewModelScope.launch(Dispatchers.IO) {
-        val artist = repository.artistById(artistId)
+        val artist = realRepository.artistById(artistId)
         _artist.postValue(artist)
 
         artist.albums?.filter { item -> item.id != albumId }?.let { albums ->
@@ -54,7 +54,7 @@ class AlbumDetailsViewModel(
 
     private val loadAlbumAsync: Deferred<Album?>
         get() = viewModelScope.async(Dispatchers.IO) {
-            repository.albumById(albumId)
+            realRepository.albumById(albumId)
         }
 
     override fun onMediaStoreChanged() {

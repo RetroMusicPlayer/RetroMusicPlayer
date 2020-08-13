@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.afollestad.materialcab.MaterialCab;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.interfaces.CabHolder;
@@ -24,7 +25,7 @@ public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I
     private final CabHolder cabHolder;
     private final Context context;
     private MaterialCab cab;
-    private ArrayList<I> checked;
+    private List<I> checked;
     private int menuRes;
 
     public AbsMultiSelectAdapter(@NonNull Context context, @Nullable CabHolder cabHolder, @MenuRes int menuRes) {
@@ -86,7 +87,7 @@ public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I
         return cab != null && cab.isActive();
     }
 
-    protected abstract void onMultipleItemAction(MenuItem menuItem, ArrayList<I> selection);
+    protected abstract void onMultipleItemAction(MenuItem menuItem, List<I> selection);
 
     protected void setMultiSelectMenuRes(@MenuRes int menuRes) {
         this.menuRes = menuRes;

@@ -18,7 +18,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
-import code.name.monkey.retromusic.loaders.AlbumLoader
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
 import code.name.monkey.retromusic.util.RetroColorUtil.getColor
@@ -31,6 +30,7 @@ import org.jaudiotagger.tag.FieldKey
 import java.util.*
 
 class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
+
     override val contentViewLayout: Int
         get() = R.layout.activity_album_tag_editor
 
@@ -162,13 +162,13 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
         writeValuesToFiles(
             fieldKeyValueMap,
-            if (deleteAlbumArt) AbsTagEditorActivity.ArtworkInfo(id, null)
+            if (deleteAlbumArt) ArtworkInfo(id, null)
             else if (albumArtBitmap == null) null else ArtworkInfo(id, albumArtBitmap!!)
         )
     }
 
-    override fun getSongPaths(): List<String> {
-        val songs = AlbumLoader.getAlbum(this, id).songs
+    override suspend fun getSongPaths(): List<String> {
+        val songs = repository.albumById(id).songs
         val paths = ArrayList<String>(songs!!.size)
         for (song in songs) {
             paths.add(song.data)

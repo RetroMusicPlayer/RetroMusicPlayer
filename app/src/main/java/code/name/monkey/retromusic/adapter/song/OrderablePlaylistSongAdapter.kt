@@ -51,7 +51,7 @@ class OrderablePlaylistSongAdapter(
         return long
     }
 
-    override fun onMultipleItemAction(menuItem: MenuItem, selection: ArrayList<Song>) {
+    override fun onMultipleItemAction(menuItem: MenuItem, selection: List<Song>) {
         when (menuItem.itemId) {
             R.id.action_remove_from_playlist -> {
                 RemoveFromPlaylistDialog.create(selection as ArrayList<PlaylistSong>)

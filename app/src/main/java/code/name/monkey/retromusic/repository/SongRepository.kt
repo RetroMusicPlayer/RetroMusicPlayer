@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.loaders
+package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import android.database.Cursor
@@ -29,55 +29,63 @@ import java.util.*
 /**
  * Created by hemanths on 10/08/17.
  */
+interface SongRepository {
 
-object SongLoader {
+    fun songs(): List<Song>
 
-    fun getAllSongs(
-        context: Context
-    ): ArrayList<Song> {
-        val cursor = makeSongCursor(context, null, null)
-        return getSongs(cursor)
+    fun songs(cursor: Cursor?): List<Song>
+
+    fun songs(query: String): List<Song>
+
+    fun songsByFilePath(filePath: String): List<Song>
+
+    fun song(cursor: Cursor?): Song
+
+    fun song(songId: Int): Song
+}
+
+class RealSongRepository(private val context: Context) : SongRepository {
+
+    override fun songs(): List<Song> {
+        return songs(makeSongCursor(null, null))
     }
 
-    fun getSongs(
-        cursor: Cursor?
-    ): ArrayList<Song> {
+    override fun songs(cursor: Cursor?): List<Song> {
         val songs = arrayListOf<Song>()
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 songs.add(getSongFromCursorImpl(cursor))
             } while (cursor.moveToNext())
         }
-
         cursor?.close()
         return songs
     }
 
-    fun getSongs(
-        context: Context,
-        query: String
-    ): ArrayList<Song> {
-        val cursor = makeSongCursor(context, AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%"))
-        return getSongs(cursor)
-    }
-
-    fun getSong(
-        cursor: Cursor?
-    ): Song {
-        val song: Song
-        if (cursor != null && cursor.moveToFirst()) {
-            song = getSongFromCursorImpl(cursor)
+    override fun song(cursor: Cursor?): Song {
+        val song: Song = if (cursor != null && cursor.moveToFirst()) {
+            getSongFromCursorImpl(cursor)
         } else {
-            song = Song.emptySong
+            Song.emptySong
         }
         cursor?.close()
         return song
     }
 
-    @JvmStatic
-    fun getSong(context: Context, queryId: Int): Song {
-        val cursor = makeSongCursor(context, AudioColumns._ID + "=?", arrayOf(queryId.toString()))
-        return getSong(cursor)
+    override fun songs(query: String): List<Song> {
+        return songs(makeSongCursor(AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%")))
+    }
+
+    override fun song(songId: Int): Song {
+        return song(makeSongCursor(AudioColumns._ID + "=?", arrayOf(songId.toString())))
+    }
+
+    override fun songsByFilePath(filePath: String): List<Song> {
+        return songs(
+            makeSongCursor(
+                MediaStore.Audio.AudioColumns.DATA + "=?",
+                arrayOf(filePath)
+            )
+        )
     }
 
     private fun getSongFromCursorImpl(
@@ -115,7 +123,6 @@ object SongLoader {
 
     @JvmOverloads
     fun makeSongCursor(
-        context: Context,
         selection: String?,
         selectionValues: Array<String>?,
         sortOrder: String = PreferenceUtil.songSortOrder
@@ -131,8 +138,16 @@ object SongLoader {
         // Blacklist
         val paths = BlacklistStore.getInstance(context).paths
         if (paths.isNotEmpty()) {
-            selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
-            selectionValuesFinal = addBlacklistSelectionValues(selectionValuesFinal, paths)
+            selectionFinal =
+                generateBlacklistSelection(
+                    selectionFinal,
+                    paths.size
+                )
+            selectionValuesFinal =
+                addBlacklistSelectionValues(
+                    selectionValuesFinal,
+                    paths
+                )
         }
         selectionFinal =
             selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)

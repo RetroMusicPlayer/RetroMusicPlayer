@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.interfaces.Callbacks
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
@@ -35,7 +36,6 @@ import com.bumptech.glide.signature.MediaStoreSignature
 import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.io.File
 import java.text.DecimalFormat
-import java.util.*
 import kotlin.math.log10
 import kotlin.math.pow
 
@@ -135,9 +135,9 @@ class SongFileAdapter(
         return getFileTitle(`object`)
     }
 
-    override fun onMultipleItemAction(menuItem: MenuItem, selection: ArrayList<File>) {
+    override fun onMultipleItemAction(menuItem: MenuItem, selection: List<File>) {
         if (callbacks == null) return
-        callbacks.onMultipleItemAction(menuItem, selection)
+        callbacks.onMultipleItemAction(menuItem, selection as ArrayList<File>)
     }
 
     override fun getPopupText(position: Int): String {
@@ -148,13 +148,6 @@ class SongFileAdapter(
         return MusicUtil.getSectionName(dataSet[position].name)
     }
 
-    interface Callbacks {
-        fun onFileSelected(file: File)
-
-        fun onFileMenuClicked(file: File, view: View)
-
-        fun onMultipleItemAction(item: MenuItem, files: ArrayList<File>)
-    }
 
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 

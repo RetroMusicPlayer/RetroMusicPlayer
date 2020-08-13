@@ -6,22 +6,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
-import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.providers.RepositoryImpl
+import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class PlaylistDetailsViewModel(
-    private val repository: RepositoryImpl,
+    private val realRepository: RealRepository,
     private var playlist: Playlist
 ) : ViewModel(), MusicServiceEventListener {
     private val _playListSongs = MutableLiveData<List<Song>>()
-
     private val _playlist = MutableLiveData<Playlist>().apply {
         postValue(playlist)
     }
@@ -35,7 +33,7 @@ class PlaylistDetailsViewModel(
     }
 
     private fun loadPlaylistSongs(playlist: Playlist) = viewModelScope.launch {
-        val songs = repository.getPlaylistSongs(playlist)
+        val songs = realRepository.getPlaylistSongs(playlist)
         withContext(Main) { _playListSongs.postValue(songs) }
     }
 
@@ -50,8 +48,10 @@ class PlaylistDetailsViewModel(
             val playlistName =
                 PlaylistsUtil.getNameForPlaylist(App.getContext(), playlist.id.toLong())
             if (playlistName != playlist.name) {
-                playlist = PlaylistLoader.getPlaylist(App.getContext(), playlist.id)
-                _playlist.postValue(playlist)
+                viewModelScope.launch {
+                    playlist = realRepository.playlist(playlist.id)
+                    _playlist.postValue(playlist)
+                }
             }
         }
         loadPlaylistSongs(playlist)

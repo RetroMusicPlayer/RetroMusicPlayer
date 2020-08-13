@@ -24,11 +24,11 @@ import android.provider.MediaStore.Audio.AudioColumns;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import code.name.monkey.retromusic.loaders.SongLoader;
+import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.repository.RealSongRepository;
 
 /**
  * @author Andrew Neal, modified for Phonograph by Karim Abou Zeid
@@ -76,12 +76,12 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     }
 
     @NonNull
-    public ArrayList<Song> getSavedOriginalPlayingQueue() {
+    public List<Song> getSavedOriginalPlayingQueue() {
         return getQueue(ORIGINAL_PLAYING_QUEUE_TABLE_NAME);
     }
 
     @NonNull
-    public ArrayList<Song> getSavedPlayingQueue() {
+    public List<Song> getSavedPlayingQueue() {
         return getQueue(PLAYING_QUEUE_TABLE_NAME);
     }
 
@@ -157,10 +157,10 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     }
 
     @NonNull
-    private ArrayList<Song> getQueue(@NonNull final String tableName) {
+    private List<Song> getQueue(@NonNull final String tableName) {
         Cursor cursor = getReadableDatabase().query(tableName, null,
                 null, null, null, null, null);
-        return SongLoader.INSTANCE.getSongs(cursor);
+        return new RealSongRepository(App.Companion.getContext()).songs(cursor);
     }
 
     /**

@@ -16,7 +16,7 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.providers.RepositoryImpl
+import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -28,7 +28,7 @@ import org.koin.android.ext.android.inject
 class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
     ArtistClickListener, AlbumClickListener {
     private val args by navArgs<DetailListFragmentArgs>()
-    private val repository by inject<RepositoryImpl>()
+    private val repository by inject<RealRepository>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -23,6 +24,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.drawable
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
+import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.SAFUtil
 import com.google.android.material.button.MaterialButton
@@ -31,18 +33,19 @@ import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
+import org.koin.android.ext.android.inject
 import java.io.File
 import java.util.*
 
 abstract class AbsTagEditorActivity : AbsBaseActivity() {
+    val repository by inject<Repository>()
 
+    lateinit var saveFab: MaterialButton
     protected var id: Int = 0
         private set
     private var paletteColorPrimary: Int = 0
     private var isInNoImageMode: Boolean = false
     private var songPaths: List<String>? = null
-    lateinit var saveFab: MaterialButton
-
     private var savedSongPaths: List<String>? = null
     private val currentSongPath: String? = null
     private var savedTags: Map<FieldKey, String>? = null
@@ -172,31 +175,25 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(contentViewLayout)
+        setStatusbarColorAuto()
+        setNavigationbarColorAuto()
+        setTaskDescriptionColorAuto()
 
         saveFab = findViewById(R.id.saveTags)
         getIntentExtras()
 
-        songPaths = getSongPaths()
-        if (songPaths!!.isEmpty()) {
-            finish()
-            return
+        lifecycleScope.launchWhenCreated {
+            songPaths = getSongPaths()
+            if (songPaths!!.isEmpty()) {
+                finish()
+            }
         }
-
         setUpViews()
-
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
-        setTaskDescriptionColorAuto()
     }
 
     private fun setUpViews() {
-        setUpScrollView()
         setUpFab()
         setUpImageView()
-    }
-
-    private fun setUpScrollView() {
-        //observableScrollView.setScrollViewCallbacks(observableScrollViewCallbacks);
     }
 
     private lateinit var items: List<String>
@@ -261,7 +258,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         }
     }
 
-    protected abstract fun getSongPaths(): List<String>
+    protected abstract suspend fun getSongPaths(): List<String>
 
     protected fun searchWebFor(vararg keys: String) {
         val stringBuilder = StringBuilder()
@@ -336,7 +333,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
         hideFab()
 
-        savedSongPaths = getSongPaths()
+        savedSongPaths = songPaths
         savedTags = fieldKeyValueMap
         savedArtworkInfo = artworkInfo
 

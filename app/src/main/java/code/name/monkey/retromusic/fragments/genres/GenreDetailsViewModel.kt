@@ -7,13 +7,13 @@ import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.providers.RepositoryImpl
+import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class GenreDetailsViewModel(
-    private val repository: RepositoryImpl,
+    private val realRepository: RealRepository,
     private val genre: Genre
 ) : ViewModel(), MusicServiceEventListener {
 
@@ -31,7 +31,7 @@ class GenreDetailsViewModel(
     }
 
     private fun loadGenreSongs(genre: Genre) = viewModelScope.launch {
-        val songs = repository.getGenre(genre.id)
+        val songs = realRepository.getGenre(genre.id)
         withContext(Main) { _playListSongs.postValue(songs) }
     }
 

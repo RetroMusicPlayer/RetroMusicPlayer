@@ -129,12 +129,12 @@ open class AlbumAdapter(
     }
 
     override fun onMultipleItemAction(
-        menuItem: MenuItem, selection: ArrayList<Album>
+        menuItem: MenuItem, selection: List<Album>
     ) {
         SongsMenuHelper.handleMenuClick(activity, getSongList(selection), menuItem.itemId)
     }
 
-    private fun getSongList(albums: List<Album>): ArrayList<Song> {
+    private fun getSongList(albums: List<Album>): List<Song> {
         val songs = ArrayList<Song>()
         for (album in albums) {
             songs.addAll(album.songs!!)
@@ -156,7 +156,6 @@ open class AlbumAdapter(
                 dataSet[position].year
             )
         }
-
         return MusicUtil.getSectionName(sectionName)
     }
 

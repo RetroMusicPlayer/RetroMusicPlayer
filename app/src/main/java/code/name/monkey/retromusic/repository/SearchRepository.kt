@@ -12,48 +12,51 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.loaders
+package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Genre
 import java.util.*
 
-object SearchLoader {
+class RealSearchRepository(
+    private val songRepository: SongRepository,
+    private val albumRepository: AlbumRepository,
+    private val artistRepository: RealArtistRepository,
+    private val genreRepository: GenreRepository,
+    private val playlistRepository: PlaylistRepository
+) {
     fun searchAll(context: Context, query: String?): MutableList<Any> {
         val results = mutableListOf<Any>()
         query?.let { searchString ->
-            val songs = SongLoader.getSongs(context, searchString)
+            val songs = songRepository.songs(searchString)
             if (songs.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.songs))
                 results.addAll(songs)
             }
-
-            val artists = ArtistLoader.getArtists(context, searchString)
+            val artists = artistRepository.artists(searchString)
             if (artists.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.artists))
                 results.addAll(artists)
             }
 
-            val albums = AlbumLoader.getAlbums(context, searchString)
+            val albums = albumRepository.albums(searchString)
             if (albums.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.albums))
                 results.addAll(albums)
             }
-            val genres: List<Genre> = GenreLoader.searchGenres(context)
-                .filter { genre ->
-                    genre.name.toLowerCase(Locale.getDefault())
-                        .contains(searchString.toLowerCase(Locale.getDefault()))
-                }
+            val genres: List<Genre> = genreRepository.genres().filter { genre ->
+                genre.name.toLowerCase(Locale.getDefault())
+                    .contains(searchString.toLowerCase(Locale.getDefault()))
+            }
             if (genres.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.genres))
                 results.addAll(genres)
             }
-            val playlist = PlaylistLoader.getAllPlaylists(context)
-                .filter { playlist ->
-                    playlist.name.toLowerCase(Locale.getDefault())
-                        .contains(searchString.toLowerCase(Locale.getDefault()))
-                }
+            val playlist = playlistRepository.playlists().filter { playlist ->
+                playlist.name.toLowerCase(Locale.getDefault())
+                    .contains(searchString.toLowerCase(Locale.getDefault()))
+            }
             if (playlist.isNotEmpty()) {
                 results.add(context.getString(R.string.playlists))
                 results.addAll(playlist)

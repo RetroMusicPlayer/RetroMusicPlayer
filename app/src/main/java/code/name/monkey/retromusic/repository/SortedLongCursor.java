@@ -11,7 +11,7 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
-package code.name.monkey.retromusic.loaders;
+package code.name.monkey.retromusic.repository;
 
 import android.database.AbstractCursor;
 import android.database.Cursor;

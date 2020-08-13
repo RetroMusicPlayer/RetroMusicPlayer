@@ -12,68 +12,133 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.providers
+package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import code.name.monkey.retromusic.*
-import code.name.monkey.retromusic.loaders.*
 import code.name.monkey.retromusic.model.*
-import code.name.monkey.retromusic.model.smartplaylist.NotRecentlyPlayedPlaylist
+import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
-import code.name.monkey.retromusic.providers.interfaces.Repository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 
-class RepositoryImpl(
+interface Repository {
+
+    suspend fun allAlbums(): List<Album>
+
+    suspend fun albumById(albumId: Int): Album
+
+    suspend fun allSongs(): List<Song>
+
+    suspend fun allArtists(): List<Artist>
+
+    suspend fun allPlaylists(): List<Playlist>
+
+    suspend fun allGenres(): List<Genre>
+
+    suspend fun search(query: String?): MutableList<Any>
+
+    suspend fun getPlaylistSongs(playlist: Playlist): List<Song>
+
+    suspend fun getGenre(genreId: Int): List<Song>
+
+    suspend fun artistInfo(name: String, lang: String?, cache: String?): LastFmArtist
+
+    suspend fun albumInfo(artist: String, album: String): LastFmAlbum
+
+    suspend fun artistById(artistId: Int): Artist
+
+    suspend fun recentArtists(): List<Artist>
+
+    suspend fun topArtists(): List<Artist>
+
+    suspend fun topAlbums(): List<Album>
+
+    suspend fun recentAlbums(): List<Album>
+
+    suspend fun recentArtistsHome(): Home
+
+    suspend fun topArtistsHome(): Home
+
+    suspend fun topAlbumsHome(): Home
+
+    suspend fun recentAlbumsHome(): Home
+
+    suspend fun favoritePlaylistHome(): Home
+
+    suspend fun suggestionsHome(): Home
+
+    suspend fun genresHome(): Home
+
+    suspend fun homeSections(): List<Home>
+
+    suspend fun homeSectionsFlow(): Flow<Result<List<Home>>>
+
+    fun songsFlow(): Flow<Result<List<Song>>>
+
+    fun albumsFlow(): Flow<Result<List<Album>>>
+
+    fun artistsFlow(): Flow<Result<List<Artist>>>
+
+    fun playlistsFlow(): Flow<Result<List<Playlist>>>
+
+    fun genresFlow(): Flow<Result<List<Genre>>>
+
+    suspend fun playlist(playlistId: Int): Playlist
+}
+
+class RealRepository(
     private val context: Context,
-    private val lastFMService: LastFMService
+    private val lastFMService: LastFMService,
+    private val songRepository: SongRepository,
+    private val albumRepository: AlbumRepository,
+    private val artistRepository: ArtistRepository,
+    private val genreRepository: GenreRepository,
+    private val lastAddedRepository: LastAddedRepository,
+    private val playlistRepository: PlaylistRepository,
+    private val searchRepository: RealSearchRepository,
+    private val playedTracksRepository: TopPlayedRepository
 ) : Repository {
 
-    override suspend fun allAlbums(): List<Album> = AlbumLoader.getAllAlbums(context)
+    override suspend fun allAlbums(): List<Album> = albumRepository.albums()
 
-    override suspend fun albumById(albumId: Int): Album = AlbumLoader.getAlbum(context, albumId)
+    override suspend fun albumById(albumId: Int): Album = albumRepository.album(albumId)
 
-    override suspend fun allArtists(): List<Artist> = ArtistLoader.getAllArtists(context)
+    override suspend fun allArtists(): List<Artist> = artistRepository.artists()
 
-    override suspend fun artistById(artistId: Int): Artist =
-        ArtistLoader.getArtist(context, artistId)
+    override suspend fun artistById(artistId: Int): Artist = artistRepository.artist(artistId)
 
-    override suspend fun recentArtists(): List<Artist> =
-        LastAddedSongsLoader.getLastAddedArtists(context)
+    override suspend fun recentArtists(): List<Artist> = lastAddedRepository.recentArtists()
 
-    override suspend fun topArtists(): List<Artist> =
-        TopAndRecentlyPlayedTracksLoader.getTopArtists(context)
+    override suspend fun recentAlbums(): List<Album> = lastAddedRepository.recentAlbums()
 
-    override suspend fun topAlbums(): List<Album> =
-        TopAndRecentlyPlayedTracksLoader.getTopAlbums(context)
+    override suspend fun topArtists(): List<Artist> = playedTracksRepository.topArtists()
 
-    override suspend fun recentAlbums(): List<Album> =
-        LastAddedSongsLoader.getLastAddedAlbums(context)
+    override suspend fun topAlbums(): List<Album> = playedTracksRepository.topAlbums()
 
-    override suspend fun allPlaylists(): List<Playlist> = PlaylistLoader.getAllPlaylists(context)
+    override suspend fun allPlaylists(): List<Playlist> = playlistRepository.playlists()
 
-    override suspend fun allGenres(): List<Genre> = GenreLoader.getAllGenres(context)
+    override suspend fun allGenres(): List<Genre> = genreRepository.genres()
 
-    override suspend fun allSongs(): List<Song> = SongLoader.getAllSongs(context)
+    override suspend fun allSongs(): List<Song> = songRepository.songs()
 
 
     override suspend fun search(query: String?): MutableList<Any> =
-        SearchLoader.searchAll(context, query)
+        searchRepository.searchAll(context, query)
 
-    override suspend fun getPlaylistSongs(playlist: Playlist): ArrayList<Song> {
+    override suspend fun getPlaylistSongs(playlist: Playlist): List<Song> {
         return if (playlist is AbsCustomPlaylist) {
-            playlist.getSongs(context)
+            playlist.songs()
         } else {
             PlaylistSongsLoader.getPlaylistSongList(context, playlist.id)
         }
     }
 
-    override suspend fun getGenre(genreId: Int): ArrayList<Song> =
-        GenreLoader.getSongs(context, genreId)
+    override suspend fun getGenre(genreId: Int): List<Song> = genreRepository.songs(genreId)
 
 
     override suspend fun artistInfo(
@@ -137,13 +202,16 @@ class RepositoryImpl(
     }
 
     suspend fun playlists(): Home {
-        val playlist = PlaylistLoader.getAllPlaylists(context)
+        val playlist = playlistRepository.playlists()
         return Home(playlist, TOP_ALBUMS)
     }
 
+    suspend fun playlists(playlistId: Int) =
+        playlistRepository.playlist(playlistId)
+
     override suspend fun suggestionsHome(): Home {
         val songs =
-            NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().takeIf {
+            NotPlayedPlaylist(context).songs().shuffled().takeIf {
                 it.size > 9
             } ?: emptyList()
         println(songs.size)
@@ -151,33 +219,34 @@ class RepositoryImpl(
     }
 
     override suspend fun genresHome(): Home {
-        val genres = GenreLoader.getAllGenres(context).shuffled()
+        val genres = genreRepository.genres().shuffled()
         return Home(genres, GENRES)
     }
 
 
     override suspend fun recentArtistsHome(): Home {
-        val artists = LastAddedSongsLoader.getLastAddedArtists(context).take(5)
+        val artists = lastAddedRepository.recentArtists().take(5)
         return Home(artists, RECENT_ARTISTS)
     }
 
     override suspend fun recentAlbumsHome(): Home {
-        val albums = LastAddedSongsLoader.getLastAddedAlbums(context).take(5)
+        val albums = lastAddedRepository.recentAlbums().take(5)
         return Home(albums, RECENT_ALBUMS)
     }
 
     override suspend fun topAlbumsHome(): Home {
-        val albums = TopAndRecentlyPlayedTracksLoader.getTopAlbums(context).take(5)
+        val albums = playedTracksRepository.topAlbums().take(5)
         return Home(albums, TOP_ALBUMS)
     }
 
     override suspend fun topArtistsHome(): Home {
-        val artists = TopAndRecentlyPlayedTracksLoader.getTopArtists(context).take(5)
+        val artists = playedTracksRepository.topArtists().take(5)
         return Home(artists, TOP_ARTISTS)
     }
 
     override suspend fun favoritePlaylistHome(): Home {
-        val playlists = PlaylistLoader.getFavoritePlaylist(context).take(5)
+        val playlists =
+            playlistRepository.favoritePlaylist(context.getString(R.string.favorites)).take(5)
         val songs = if (playlists.isNotEmpty())
             PlaylistSongsLoader.getPlaylistSongList(context, playlists[0])
         else emptyList<Song>()
@@ -187,7 +256,7 @@ class RepositoryImpl(
 
     override fun songsFlow(): Flow<Result<List<Song>>> = flow {
         emit(Result.Loading)
-        val data = SongLoader.getAllSongs(context)
+        val data = songRepository.songs()
         if (data.isEmpty()) {
             emit(Result.Error)
         } else {
@@ -197,7 +266,7 @@ class RepositoryImpl(
 
     override fun albumsFlow(): Flow<Result<List<Album>>> = flow {
         emit(Result.Loading)
-        val data = AlbumLoader.getAllAlbums(context)
+        val data = albumRepository.albums()
         if (data.isEmpty()) {
             emit(Result.Error)
         } else {
@@ -207,7 +276,7 @@ class RepositoryImpl(
 
     override fun artistsFlow(): Flow<Result<List<Artist>>> = flow {
         emit(Result.Loading)
-        val data = ArtistLoader.getAllArtists(context)
+        val data = artistRepository.artists()
         if (data.isEmpty()) {
             emit(Result.Error)
         } else {
@@ -217,7 +286,7 @@ class RepositoryImpl(
 
     override fun playlistsFlow(): Flow<Result<List<Playlist>>> = flow {
         emit(Result.Loading)
-        val data = PlaylistLoader.getAllPlaylists(context)
+        val data = playlistRepository.playlists()
         if (data.isEmpty()) {
             emit(Result.Error)
         } else {
@@ -227,11 +296,14 @@ class RepositoryImpl(
 
     override fun genresFlow(): Flow<Result<List<Genre>>> = flow {
         emit(Result.Loading)
-        val data = GenreLoader.getAllGenres(context)
+        val data = genreRepository.genres()
         if (data.isEmpty()) {
             emit(Result.Error)
         } else {
             emit(Result.Success(data))
         }
     }
+
+    override suspend fun playlist(playlistId: Int): Playlist =
+        playlistRepository.playlist(playlistId)
 }

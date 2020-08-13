@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.loaders
+package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import android.database.Cursor
@@ -34,19 +34,31 @@ object PlaylistSongsLoader {
     fun getPlaylistSongList(
         context: Context,
         playlist: Playlist
-    ): ArrayList<Song> {
-        return (playlist as? AbsCustomPlaylist)?.getSongs(context)
-            ?: getPlaylistSongList(context, playlist.id)
+    ): List<Song> {
+        return if (playlist is AbsCustomPlaylist) {
+            return playlist.songs()
+        } else {
+            getPlaylistSongList(context, playlist.id)
+        }
     }
 
     @JvmStatic
     fun getPlaylistSongList(context: Context, playlistId: Int): ArrayList<Song> {
         val songs = arrayListOf<Song>()
-        val cursor = makePlaylistSongCursor(context, playlistId)
+        val cursor =
+            makePlaylistSongCursor(
+                context,
+                playlistId
+            )
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                songs.add(getPlaylistSongFromCursorImpl(cursor, playlistId))
+                songs.add(
+                    getPlaylistSongFromCursorImpl(
+                        cursor,
+                        playlistId
+                    )
+                )
             } while (cursor.moveToNext())
         }
         cursor?.close()

@@ -15,19 +15,17 @@
 package code.name.monkey.retromusic.helper.menu
 
 import androidx.fragment.app.FragmentActivity
-
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import java.util.*
 
 
 object SongsMenuHelper {
     fun handleMenuClick(
         activity: FragmentActivity,
-        songs: ArrayList<Song>,
+        songs: List<Song>,
         menuItemId: Int
     ): Boolean {
         when (menuItemId) {

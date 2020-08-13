@@ -12,9 +12,8 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.loaders
+package code.name.monkey.retromusic.repository
 
-import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import code.name.monkey.retromusic.model.Album
@@ -25,28 +24,37 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 /**
  * Created by hemanths on 16/08/17.
  */
+interface LastAddedRepository {
+    fun recentSongs(): List<Song>
 
-object LastAddedSongsLoader {
+    fun recentAlbums(): List<Album>
 
-    fun getLastAddedSongs(context: Context): ArrayList<Song> {
-        return SongLoader.getSongs(makeLastAddedCursor(context))
+    fun recentArtists(): List<Artist>
+}
+
+class RealLastAddedRepository(
+    private val songRepository: RealSongRepository,
+    private val albumRepository: RealAlbumRepository,
+    private val artistRepository: RealArtistRepository
+) : LastAddedRepository {
+    override fun recentSongs(): List<Song> {
+        return songRepository.songs(makeLastAddedCursor())
     }
 
-    private fun makeLastAddedCursor(context: Context): Cursor? {
+    override fun recentAlbums(): List<Album> {
+        return albumRepository.splitIntoAlbums(recentSongs())
+    }
+
+    override fun recentArtists(): List<Artist> {
+        return artistRepository.splitIntoArtists(recentAlbums())
+    }
+
+    private fun makeLastAddedCursor(): Cursor? {
         val cutoff = PreferenceUtil.lastAddedCutoff
-        return SongLoader.makeSongCursor(
-            context,
+        return songRepository.makeSongCursor(
             MediaStore.Audio.Media.DATE_ADDED + ">?",
             arrayOf(cutoff.toString()),
             MediaStore.Audio.Media.DATE_ADDED + " DESC"
         )
-    }
-
-    fun getLastAddedAlbums(context: Context): ArrayList<Album> {
-        return AlbumLoader.splitIntoAlbums(getLastAddedSongs(context))
-    }
-
-    fun getLastAddedArtists(context: Context): ArrayList<Artist> {
-        return ArtistLoader.splitIntoArtists(getLastAddedAlbums(context))
     }
 }

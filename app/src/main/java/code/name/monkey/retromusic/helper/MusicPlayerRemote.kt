@@ -23,21 +23,24 @@ import android.os.Build
 import android.os.Environment
 import android.os.IBinder
 import android.provider.DocumentsContract
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
-
 import code.name.monkey.retromusic.util.PreferenceUtil
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import java.io.File
 import java.util.*
 
-object MusicPlayerRemote {
+object MusicPlayerRemote : KoinComponent {
     val TAG: String = MusicPlayerRemote::class.java.simpleName
     private val mConnectionMap = WeakHashMap<Context, ServiceBinder>()
     var musicService: MusicService? = null
+
+    private val songRepository by inject<SongRepository>()
+
 
     @JvmStatic
     val isPlaying: Boolean
@@ -412,24 +415,17 @@ object MusicPlayerRemote {
                         songId = uri.lastPathSegment
                     }
                     if (songId != null) {
-                        songs = SongLoader.getSongs(
-                            SongLoader.makeSongCursor(
-                                musicService!!,
-                                MediaStore.Audio.AudioColumns._ID + "=?",
-                                arrayOf(songId)
-                            )
-                        )
+                        songs = songRepository.songs(songId)
                     }
                 }
             }
             if (songs == null) {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
-                    songFile =
-                        File(
-                            Environment.getExternalStorageDirectory(),
-                            uri.path?.split(":".toRegex(), 2)?.get(1)
-                        )
+                    songFile = File(
+                        Environment.getExternalStorageDirectory(),
+                        uri.path?.split(":".toRegex(), 2)?.get(1)
+                    )
                 }
                 if (songFile == null) {
                     val path = getFilePathFromUri(musicService!!, uri)
@@ -440,13 +436,7 @@ object MusicPlayerRemote {
                     songFile = File(uri.path)
                 }
                 if (songFile != null) {
-                    songs = SongLoader.getSongs(
-                        SongLoader.makeSongCursor(
-                            musicService!!,
-                            MediaStore.Audio.AudioColumns.DATA + "=?",
-                            arrayOf(songFile.absolutePath)
-                        )
-                    )
+                    songs = songRepository.songsByFilePath(songFile.absolutePath)
                 }
             }
             if (songs != null && songs.isNotEmpty()) {

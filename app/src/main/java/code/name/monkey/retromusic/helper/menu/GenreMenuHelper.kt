@@ -14,42 +14,43 @@
 
 package code.name.monkey.retromusic.helper.menu
 
-import android.app.Activity
 import android.view.MenuItem
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.loaders.GenreLoader
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
-import java.util.*
+import code.name.monkey.retromusic.repository.GenreRepository
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-object GenreMenuHelper {
+object GenreMenuHelper : KoinComponent {
+    private val genreRepository by inject<GenreRepository>()
     fun handleMenuClick(activity: FragmentActivity, genre: Genre, item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_play -> {
-                MusicPlayerRemote.openQueue(getGenreSongs(activity, genre), 0, true)
+                MusicPlayerRemote.openQueue(getGenreSongs(genre), 0, true)
                 return true
             }
             R.id.action_play_next -> {
-                MusicPlayerRemote.playNext(getGenreSongs(activity, genre))
+                MusicPlayerRemote.playNext(getGenreSongs(genre))
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(getGenreSongs(activity, genre))
+                AddToPlaylistDialog.create(getGenreSongs(genre))
                     .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                 return true
             }
             R.id.action_add_to_current_playing -> {
-                MusicPlayerRemote.enqueue(getGenreSongs(activity, genre))
+                MusicPlayerRemote.enqueue(getGenreSongs(genre))
                 return true
             }
         }
         return false
     }
 
-    private fun getGenreSongs(activity: Activity, genre: Genre): ArrayList<Song> {
-        return GenreLoader.getSongs(activity, genre.id)
+    private fun getGenreSongs(genre: Genre): List<Song> {
+        return genreRepository.songs(genre.id)
     }
 }
