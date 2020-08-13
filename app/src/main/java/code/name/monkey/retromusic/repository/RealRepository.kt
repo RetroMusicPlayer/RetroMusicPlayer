@@ -74,6 +74,8 @@ interface Repository {
 
     suspend fun genresHome(): Home
 
+    suspend fun playlists(): Home
+
     suspend fun homeSections(): List<Home>
 
     suspend fun homeSectionsFlow(): Flow<Result<List<Home>>>
@@ -189,8 +191,7 @@ class RealRepository(
             recentArtistsHome(),
             recentAlbumsHome(),
             suggestionsHome(),
-            favoritePlaylistHome(),
-            genresHome()
+            favoritePlaylistHome()
         )
         for (section in sections) {
             if (section.arrayList.isNotEmpty()) {
@@ -201,12 +202,12 @@ class RealRepository(
         return homeSections
     }
 
-    suspend fun playlists(): Home {
+    override suspend fun playlists(): Home {
         val playlist = playlistRepository.playlists()
         return Home(playlist, TOP_ALBUMS)
     }
 
-    suspend fun playlists(playlistId: Int) =
+    override suspend fun playlist(playlistId: Int) =
         playlistRepository.playlist(playlistId)
 
     override suspend fun suggestionsHome(): Home {
@@ -303,7 +304,4 @@ class RealRepository(
             emit(Result.Success(data))
         }
     }
-
-    override suspend fun playlist(playlistId: Int): Playlist =
-        playlistRepository.playlist(playlistId)
 }
