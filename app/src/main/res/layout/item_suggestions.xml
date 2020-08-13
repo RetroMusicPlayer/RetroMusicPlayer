@@ -140,10 +140,14 @@
             android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:autoSizeTextType="uniform"
             android:padding="8dp"
             android:text="New music mix"
-            android:textAppearance="@style/TextViewHeadline4"
-            android:textStyle="bold" />
+            android:textAppearance="@style/TextViewNormal"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="32sp"
+            app:autoSizeMinTextSize="18sp"
+            app:autoSizeStepGranularity="1sp" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView

@@ -14,7 +14,6 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
-import code.name.monkey.retromusic.extensions.dimToPixel
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.whichFragment
@@ -180,7 +179,7 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
     }
 
     private fun hideBottomBar(hide: Boolean) {
-        val heightOfBar = dimToPixel(R.dimen.mini_player_height)
+        val heightOfBar = bottomNavigationView.height
         val isBottomBarVisible = bottomNavigationView.isVisible
 
         if (hide) {
@@ -192,7 +191,7 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
             ViewCompat.setElevation(bottomNavigationView, 10f)
             ViewCompat.setElevation(slidingPanel, 10f)
             behavior.isHideable = false
-            behavior.peekHeight = if (isBottomBarVisible) heightOfBar * 2 else heightOfBar
+            behavior.peekHeight = (if (isBottomBarVisible) heightOfBar * 2 else heightOfBar) - 24
         }
     }
 

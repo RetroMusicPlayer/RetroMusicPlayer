@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
@@ -65,6 +66,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         mainActivity.hideBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
+
         toolbar.title = null
 
         postponeEnterTransition()
@@ -238,7 +240,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     override fun onAlbumClick(albumId: Int, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
-            bundleOf("extra_album_id" to albumId)
+            bundleOf(EXTRA_ALBUM_ID to albumId)
         )
     }
 
@@ -263,6 +265,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         var sortOrder: String? = null
         val songs = simpleSongAdapter.dataSet
         when (item.itemId) {
+            android.R.id.home -> findNavController().navigateUp()
             R.id.action_play_next -> {
                 MusicPlayerRemote.playNext(songs)
                 return true

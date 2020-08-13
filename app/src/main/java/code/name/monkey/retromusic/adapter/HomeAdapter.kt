@@ -166,19 +166,18 @@ class HomeAdapter(
             val color = ThemeStore.accentColor(activity)
             itemView.findViewById<TextView>(R.id.message).setTextColor(color)
             itemView.findViewById<MaterialCardView>(R.id.card6).apply {
-                setCardBackgroundColor(ColorUtil.withAlpha(color, 0.2f))
+                setCardBackgroundColor(ColorUtil.withAlpha(color, 0.12f))
             }
-            if (songs.size > 9)
-                images.forEachIndexed { index, i ->
-                    itemView.findViewById<View>(i).setOnClickListener {
-                        MusicPlayerRemote.playNext(songs[index])
-                    }
-                    SongGlideRequest.Builder.from(Glide.with(activity), songs[index])
-                        .asBitmap()
-                        .build()
-                        .into(itemView.findViewById(i))
-
+            images.forEachIndexed { index, id ->
+                itemView.findViewById<View>(id).setOnClickListener {
+                    MusicPlayerRemote.playNext(songs[index])
                 }
+                SongGlideRequest.Builder.from(Glide.with(activity), songs[index])
+                    .asBitmap()
+                    .build()
+                    .into(itemView.findViewById(id))
+
+            }
         }
     }
 

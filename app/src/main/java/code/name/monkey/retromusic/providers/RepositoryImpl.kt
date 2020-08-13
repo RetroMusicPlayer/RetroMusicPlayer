@@ -143,9 +143,10 @@ class RepositoryImpl(
 
     override suspend fun suggestionsHome(): Home {
         val songs =
-            NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().takeUnless {
+            NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().takeIf {
                 it.size > 9
-            }?.take(9) ?: emptyList<Song>()
+            } ?: emptyList()
+        println(songs.size)
         return Home(songs, SUGGESTIONS)
     }
 

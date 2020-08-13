@@ -10,6 +10,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,14 +40,13 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.hideBottomNavigation()
         mainActivity.hideBottomBarVisibility(false)
 
         setupRecyclerView()
-        setupSearchView()
+        keyboardPopup.accentColor()
+        searchView.addTextChangedListener(this)
         voiceSearch.setOnClickListener { startMicSearch() }
         clearText.setOnClickListener { searchView.clearText() }
-
         keyboardPopup.setOnClickListener {
             val inputManager =
                 getSystemService<InputMethodManager>(
@@ -54,7 +55,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
                 )
             inputManager?.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT)
         }
-        keyboardPopup.accentColor()
+
         if (savedInstanceState != null) {
             query = savedInstanceState.getString(QUERY)
         }
@@ -78,7 +79,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         searchAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
-                empty.visibility = if (searchAdapter.itemCount < 1) View.VISIBLE else View.GONE
+                empty.isVisible = searchAdapter.itemCount < 1
             }
         })
         recyclerView.apply {
@@ -97,10 +98,6 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         }
     }
 
-    private fun setupSearchView() {
-        searchView.addTextChangedListener(this)
-    }
-
     override fun afterTextChanged(newText: Editable?) {
         search(newText.toString())
     }
@@ -116,8 +113,8 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     private fun search(query: String) {
         this.query = query
         TransitionManager.beginDelayedTransition(appBarLayout)
-        voiceSearch.visibility = if (query.isNotEmpty()) View.GONE else View.VISIBLE
-        clearText.visibility = if (query.isNotEmpty()) View.VISIBLE else View.GONE
+        voiceSearch.isGone = query.isNotEmpty()
+        clearText.isVisible = query.isNotEmpty()
         viewModel.search(query)
     }
 
