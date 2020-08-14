@@ -127,6 +127,7 @@ fun TextInputLayout.accentColor() {
     defaultHintTextColor = colorState
     isHintAnimationEnabled = true
 }
-fun TextInputEditText.accentColor(){
+
+fun TextInputEditText.accentColor() {
 
 }

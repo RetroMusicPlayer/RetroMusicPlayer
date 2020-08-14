@@ -191,4 +191,50 @@
         <item name="android:textColor">@color/md_red_400</item>
     </style>
 
+    <style name="MaterialPopupMenuStyle" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_background</item>
+    </style>
+
+    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:dialogCornerRadius" tools:targetApi="p">12dp</item>
+        <item name="materialAlertDialogBodyTextStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Body
+        </item>
+        <item name="materialAlertDialogTitleTextStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Title
+        </item>
+        <item name="buttonBarPositiveButtonStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Button
+        </item>
+        <item name="buttonBarNegativeButtonStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Button
+        </item>
+        <item name="buttonBarNeutralButtonStyle">
+            @style/AppTextAppearance.MaterialAlertDialog.Button
+        </item>
+    </style>
+
+    <style name="AppTextAppearance.MaterialAlertDialog.Button" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppTextAppearance.MaterialAlertDialog.Body" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppTextAppearance.MaterialAlertDialog.Title" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">6dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textAppearance">@style/TextViewNormal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
+    </style>
 </resources>

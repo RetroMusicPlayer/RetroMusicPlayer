@@ -22,6 +22,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 interface ArtistRepository {
     fun artists(): List<Artist>
 
+    fun albumArtists(): List<Artist>
+
     fun artists(query: String): List<Artist>
 
     fun artist(artistId: Int): Artist
@@ -57,6 +59,31 @@ class RealArtistRepository(
             )
         )
         return splitIntoArtists(albumRepository.splitIntoAlbums(songs))
+    }
+
+    override fun albumArtists(): List<Artist> {
+        val songs = songRepository.songs(
+            songRepository.makeSongCursor(
+                null,
+                null,
+                getSongLoaderSortOrder()
+            )
+        )
+        return splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
+    }
+
+    private fun splitIntoAlbumArtists(albums: List<Album>): List<Artist> {
+        // First group the songs in albums by filtering each artist name
+        val amap = hashMapOf<String, Artist>()
+        albums.forEach {
+            val key = it.albumArtist
+            if (key != null) {
+                val artist: Artist = if (amap[key] != null) amap[key]!! else Artist()
+                artist.albums?.add(it)
+                amap[key] = artist
+            }
+        }
+        return ArrayList(amap.values)
     }
 
     override fun artist(artistId: Int): Artist {

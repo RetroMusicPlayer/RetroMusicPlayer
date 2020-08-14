@@ -61,7 +61,7 @@ class LibraryViewModel(
 
     private val loadArtists: Deferred<List<Artist>>
         get() = viewModelScope.async(IO) {
-            realRepository.allArtists()
+            realRepository.albumArtists()
         }
 
     private val loadPlaylists: Deferred<List<Playlist>>

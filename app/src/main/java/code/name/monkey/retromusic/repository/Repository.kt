@@ -36,6 +36,8 @@ interface Repository {
 
     suspend fun allArtists(): List<Artist>
 
+    suspend fun albumArtists(): List<Artist>
+
     suspend fun allPlaylists(): List<Playlist>
 
     suspend fun allGenres(): List<Genre>
@@ -111,6 +113,8 @@ class RealRepository(
     override suspend fun albumById(albumId: Int): Album = albumRepository.album(albumId)
 
     override suspend fun allArtists(): List<Artist> = artistRepository.artists()
+
+    override suspend fun albumArtists(): List<Artist> = artistRepository.albumArtists()
 
     override suspend fun artistById(artistId: Int): Artist = artistRepository.artist(artistId)
 
@@ -212,7 +216,7 @@ class RealRepository(
 
     override suspend fun suggestionsHome(): Home {
         val songs =
-            NotPlayedPlaylist(context).songs().shuffled().takeIf {
+            NotPlayedPlaylist().songs().shuffled().takeIf {
                 it.size > 9
             } ?: emptyList()
         println(songs.size)

@@ -1,12 +1,15 @@
 package code.name.monkey.retromusic.model.smartplaylist
 
-import android.content.Context
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
+import kotlinx.android.parcel.Parcelize
 
-class NotPlayedPlaylist(
-    context: Context
-) : AbsSmartPlaylist(context.getString(R.string.not_recently_played), R.drawable.ic_watch_later) {
+@Parcelize
+class NotPlayedPlaylist : AbsSmartPlaylist(
+    App.getContext().getString(R.string.not_recently_played),
+    R.drawable.ic_watch_later
+) {
     override fun songs(): List<Song> {
         return topPlayedRepository.notRecentlyPlayedTracks()
     }

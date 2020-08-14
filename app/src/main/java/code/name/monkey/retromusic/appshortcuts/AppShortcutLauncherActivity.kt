@@ -43,19 +43,19 @@ class AppShortcutLauncherActivity : Activity() {
         when (shortcutType) {
             SHORTCUT_TYPE_SHUFFLE_ALL -> {
                 startServiceWithPlaylist(
-                    SHUFFLE_MODE_SHUFFLE, ShuffleAllPlaylist(applicationContext)
+                    SHUFFLE_MODE_SHUFFLE, ShuffleAllPlaylist()
                 )
                 DynamicShortcutManager.reportShortcutUsed(this, ShuffleAllShortcutType.id)
             }
             SHORTCUT_TYPE_TOP_TRACKS -> {
                 startServiceWithPlaylist(
-                    SHUFFLE_MODE_NONE, TopTracksPlaylist(applicationContext)
+                    SHUFFLE_MODE_NONE, TopTracksPlaylist()
                 )
                 DynamicShortcutManager.reportShortcutUsed(this, TopTracksShortcutType.id)
             }
             SHORTCUT_TYPE_LAST_ADDED -> {
                 startServiceWithPlaylist(
-                    SHUFFLE_MODE_NONE, LastAddedPlaylist(applicationContext)
+                    SHUFFLE_MODE_NONE, LastAddedPlaylist()
                 )
                 DynamicShortcutManager.reportShortcutUsed(this, LastAddedShortcutType.id)
             }

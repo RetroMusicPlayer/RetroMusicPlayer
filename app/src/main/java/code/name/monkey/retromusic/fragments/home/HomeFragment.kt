@@ -75,14 +75,14 @@ class HomeFragment :
         lastAdded.setOnClickListener {
             findActivityNavController(R.id.fragment_container).navigate(
                 R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to LastAddedPlaylist(requireActivity()))
+                bundleOf(EXTRA_PLAYLIST to LastAddedPlaylist())
             )
         }
 
         topPlayed.setOnClickListener {
             findActivityNavController(R.id.fragment_container).navigate(
                 R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to TopTracksPlaylist(requireActivity()))
+                bundleOf(EXTRA_PLAYLIST to TopTracksPlaylist())
             )
         }
 
@@ -98,7 +98,7 @@ class HomeFragment :
         history.setOnClickListener {
             requireActivity().findNavController(R.id.fragment_container).navigate(
                 R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to HistoryPlaylist(requireActivity()))
+                bundleOf(EXTRA_PLAYLIST to HistoryPlaylist())
             )
         }
 
