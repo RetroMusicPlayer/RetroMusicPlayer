@@ -13,10 +13,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-fun Fragment.getIntRes(@IntegerRes int: Int): Int {
-    return resources.getInteger(int)
-}
-
 fun Context.getIntRes(@IntegerRes int: Int): Int {
     return resources.getInteger(int)
 }
@@ -44,18 +40,6 @@ inline fun <reified T : Any> Fragment.extraNotNull(key: String, default: T? = nu
     requireNotNull(if (value is T) value else default) { key }
 }
 
-val NavHostFragment.currentFragment: Fragment?
-    get() = targetFragment
-
-val FragmentManager.currentNavigationFragment: Fragment?
-    get() = primaryNavigationFragment?.childFragmentManager?.fragments?.first()
-
-fun AppCompatActivity.currentFragment(navHostId: Int): Fragment? {
-    val navHostFragment: NavHostFragment = supportFragmentManager.findFragmentById(navHostId) as NavHostFragment
-    navHostFragment.targetFragment
-    return navHostFragment.childFragmentManager.fragments.first()
-}
-
 @Suppress("UNCHECKED_CAST")
 fun <T> AppCompatActivity.whichFragment(@IdRes id: Int): T {
     return supportFragmentManager.findFragmentById(id) as T
@@ -64,10 +48,6 @@ fun <T> AppCompatActivity.whichFragment(@IdRes id: Int): T {
 @Suppress("UNCHECKED_CAST")
 fun <T> Fragment.whichFragment(@IdRes id: Int): T {
     return childFragmentManager.findFragmentById(id) as T
-}
-
-fun Fragment.showToast(@StringRes stringRes: Int) {
-    showToast(getString(stringRes))
 }
 
 fun Fragment.showToast(message: String) {
