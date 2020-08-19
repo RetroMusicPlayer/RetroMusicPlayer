@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic
 
+import code.name.monkey.retromusic.db.PlaylistDatabase
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.albums.AlbumDetailsViewModel
 import code.name.monkey.retromusic.fragments.artists.ArtistDetailsViewModel
@@ -64,6 +65,10 @@ private val dataModule = module {
 
     single {
         androidContext().contentResolver
+    }
+
+    single {
+        PlaylistDatabase.getDatabase(get())
     }
 }
 
