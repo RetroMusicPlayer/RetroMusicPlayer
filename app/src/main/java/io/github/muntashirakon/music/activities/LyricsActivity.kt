@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_lyrics.*
 class LyricsActivity : AbsMusicServiceActivity(), MusicProgressViewUpdateHelper.Callback {
     private lateinit var updateHelper: MusicProgressViewUpdateHelper
 
-
     private lateinit var song: Song
 
     private val googleSearchLrcUrl: String

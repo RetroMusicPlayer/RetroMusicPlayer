@@ -2,10 +2,14 @@ package io.github.muntashirakon.music.fragments.artists
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import io.github.muntashirakon.music.EXTRA_ARTIST_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.artist.ArtistAdapter
+import io.github.muntashirakon.music.extensions.findActivityNavController
 import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import io.github.muntashirakon.music.interfaces.MainActivityFragmentCallbacks
@@ -13,7 +17,7 @@ import io.github.muntashirakon.music.util.PreferenceUtil
 
 class ArtistsFragment :
     AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
-    MainActivityFragmentCallbacks {
+    MainActivityFragmentCallbacks, ArtistClickListener {
 
     override fun handleBackPress(): Boolean {
         return false
@@ -22,14 +26,12 @@ class ArtistsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.artistsLiveData
-            .observe(viewLifecycleOwner, Observer { artists ->
-                if (artists.isNotEmpty()) {
-                    adapter?.swapDataSet(artists)
-                } else {
-                    adapter?.swapDataSet(listOf())
-                }
-            })
+        libraryViewModel.artistsLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty())
+                adapter?.swapDataSet(it)
+            else
+                adapter?.swapDataSet(listOf())
+        })
     }
 
     override val emptyMessage: Int
@@ -46,10 +48,11 @@ class ArtistsFragment :
     override fun createAdapter(): ArtistAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
         return ArtistAdapter(
-            mainActivity,
+            requireActivity(),
             dataSet,
-            itemLayoutRes(),
-            mainActivity
+            R.layout.item_grid_circle,
+            null,
+            this
         )
     }
 
@@ -91,12 +94,18 @@ class ArtistsFragment :
     }
 
     companion object {
-        @JvmField
-        val TAG: String = ArtistsFragment::class.java.simpleName
 
-        @JvmStatic
         fun newInstance(): ArtistsFragment {
             return ArtistsFragment()
         }
     }
+
+    override fun onArtist(artistId: Int, imageView: ImageView) {
+        val controller = findActivityNavController(R.id.fragment_container)
+        controller.navigate(R.id.artistDetailsFragment, bundleOf(EXTRA_ARTIST_ID to artistId))
+    }
+}
+
+interface ArtistClickListener {
+    fun onArtist(artistId: Int, imageView: ImageView)
 }

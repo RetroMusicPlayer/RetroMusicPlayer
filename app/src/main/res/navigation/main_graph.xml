@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/retro_graph"
+    app:startDestination="@id/libraryFragment">
+
+    <include app:graph="@navigation/settings_graph" />
+
+    <include app:graph="@navigation/library_graph" />
+
+    <fragment
+        android:id="@+id/genreDetailsFragment"
+        android:name="io.github.muntashirakon.music.fragments.genres.GenreDetailsFragment"
+        android:label="GenreDetailsFragment"
+        tools:layout="@layout/fragment_playlist_detail">
+        <argument
+            android:name="extra_genre"
+            app:argType="io.github.muntashirakon.music.model.Genre" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playlistDetailsFragment"
+        android:name="io.github.muntashirakon.music.fragments.playlists.PlaylistDetailsFragment"
+        android:label="PlaylistDetailsFragment"
+        tools:layout="@layout/fragment_playlist_detail">
+        <argument
+            android:name="extra_playlist"
+            app:argType="io.github.muntashirakon.music.model.Playlist" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumDetailsFragment"
+        android:name="io.github.muntashirakon.music.fragments.albums.AlbumDetailsFragment"
+        android:label="AlbumDetailsFragment"
+        tools:layout="@layout/fragment_album_details">
+        <argument
+            android:name="extra_album_id"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/artistDetailsFragment"
+        android:name="io.github.muntashirakon.music.fragments.artists.ArtistDetailsFragment"
+        android:label="ArtistDetailsFragment"
+        tools:layout="@layout/fragment_artist_details">
+        <argument
+            android:name="extra_artist_id"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="io.github.muntashirakon.music.fragments.library.LibraryFragment"
+        android:label=""
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_main_to_library"
+            app:destination="@id/library_graph" />
+        <action
+            android:id="@+id/action_main_to_settings"
+            app:destination="@id/settings_graph" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailListFragment"
+        android:name="io.github.muntashirakon.music.fragments.DetailListFragment"
+        android:label="DetailListFragment">
+        <argument
+            android:name="type"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="io.github.muntashirakon.music.fragments.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
+
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="io.github.muntashirakon.music.activities.SettingsActivity"
+        android:label="SettingsActivity" />
+
+
+</navigation>

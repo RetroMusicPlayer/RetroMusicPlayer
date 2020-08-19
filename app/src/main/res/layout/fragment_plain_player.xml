@@ -61,17 +61,17 @@
             tools:text="Text" />
     </LinearLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/playerAlbumCoverFragment"
-        android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleContainer" />
+     <fragment
+         android:id="@+id/playerAlbumCoverFragment"
+         android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHeight_percent="0.5"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@id/titleContainer" />
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/playbackControlsFragment"
         android:name="io.github.muntashirakon.music.fragments.player.plain.PlainPlaybackControlsFragment"
         android:layout_width="0dp"

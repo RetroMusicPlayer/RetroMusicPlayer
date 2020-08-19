@@ -58,6 +58,6 @@
             android:layout_height="match_parent"
             app:defaultNavHost="true"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            app:navGraph="@navigation/retro_graph" />
+            app:navGraph="@navigation/main_graph" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

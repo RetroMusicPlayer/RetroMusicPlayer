@@ -87,7 +87,7 @@ public class PlaylistsUtil {
         final StringBuilder selection = new StringBuilder();
         selection.append(MediaStore.Audio.Playlists._ID + " IN (");
         for (int i = 0; i < playlists.size(); i++) {
-            selection.append(playlists.get(i).id);
+            selection.append(playlists.get(i).getId());
             if (i < playlists.size() - 1) {
                 selection.append(",");
             }
@@ -195,7 +195,7 @@ public class PlaylistsUtil {
         final int playlistId = songs.get(0).getPlaylistId();
         Uri uri = MediaStore.Audio.Playlists.Members.getContentUri(
                 "external", playlistId);
-        String selectionArgs[] = new String[songs.size()];
+        String[] selectionArgs = new String[songs.size()];
         for (int i = 0; i < selectionArgs.length; i++) {
             selectionArgs[i] = String.valueOf(songs.get(i).getIdInPlayList());
         }

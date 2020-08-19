@@ -24,17 +24,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/colorSurface"
-        app:behavior_hideable="false"
+        app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
         app:layout_behavior="io.github.muntashirakon.music.RetroBottomSheetBehavior">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerFragmentContainer"
-            android:layout_width="match_parent"
             android:name="io.github.muntashirakon.music.fragments.player.NowPlayingPlayerFragment"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <androidx.fragment.app.FragmentContainerView
+        <fragment
             android:id="@+id/miniPlayerFragment"
             android:name="io.github.muntashirakon.music.fragments.MiniPlayerFragment"
             android:layout_width="match_parent"
@@ -46,10 +46,9 @@
     <io.github.muntashirakon.music.views.BottomNavigationBarTinted
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_gravity="bottom"
         android:elevation="0dp"
-        android:visibility="gone"
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconTint="@drawable/bottom_navigation_item_colors"
         app:itemTextAppearanceActive="@style/BottomSheetItemTextAppearance"

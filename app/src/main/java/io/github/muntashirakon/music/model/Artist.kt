@@ -25,10 +25,10 @@ class Artist {
 
     val name: String
         get() {
-            val name = safeGetFirstAlbum().artistName
+            val name = safeGetFirstAlbum().safeGetFirstSong().albumArtist
             return if (MusicUtil.isArtistNameUnknown(name)) {
                 UNKNOWN_ARTIST_DISPLAY_NAME
-            } else name!!
+            } else safeGetFirstAlbum().safeGetFirstSong().artistName
         }
 
     val songCount: Int

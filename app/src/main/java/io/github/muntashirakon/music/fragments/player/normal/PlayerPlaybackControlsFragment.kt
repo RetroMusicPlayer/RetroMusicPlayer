@@ -52,7 +52,7 @@ class PlayerPlaybackControlsFragment :
             showBonceAnimation(playPauseButton)
         }
         title.isSelected = true
-
+        text.isSelected = true
     }
 
     override fun setColor(color: MediaNotificationProcessor) {

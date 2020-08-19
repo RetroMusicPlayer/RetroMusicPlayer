@@ -7,6 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
+import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
+import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
+import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsMusicServiceActivity
 import io.github.muntashirakon.music.adapter.song.PlayingQueueAdapter
@@ -14,11 +19,7 @@ import io.github.muntashirakon.music.extensions.accentColor
 import io.github.muntashirakon.music.extensions.surfaceColor
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.util.MusicUtil
-import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
-import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
-import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
-import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
-import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
+import io.github.muntashirakon.music.util.ThemedFastScroller
 import kotlinx.android.synthetic.main.activity_playing_queue.*
 
 open class PlayingQueueActivity : AbsMusicServiceActivity() {
@@ -103,7 +104,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
                 }
             }
         })
-        //ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
+        val fastScroller = ThemedFastScroller.create(recyclerView)
     }
 
     private fun checkForPadding() {

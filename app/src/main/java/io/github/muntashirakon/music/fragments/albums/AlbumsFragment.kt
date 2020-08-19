@@ -2,32 +2,30 @@ package io.github.muntashirakon.music.fragments.albums
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
+import io.github.muntashirakon.music.EXTRA_ALBUM_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.album.AlbumAdapter
 import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewCustomGridSizeFragment
-import io.github.muntashirakon.music.interfaces.MainActivityFragmentCallbacks
 import io.github.muntashirakon.music.util.PreferenceUtil
 
 class AlbumsFragment :
     AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
-    MainActivityFragmentCallbacks {
-
-    override fun handleBackPress(): Boolean {
-        return false
-    }
+    AlbumClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.albumsLiveData
-            .observe(viewLifecycleOwner, Observer { albums ->
-                if (albums.isNotEmpty())
-                    adapter?.swapDataSet(albums)
-                else
-                    adapter?.swapDataSet(listOf())
-            })
+        libraryViewModel.albumsLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty())
+                adapter?.swapDataSet(it)
+            else
+                adapter?.swapDataSet(listOf())
+        })
     }
 
     override val emptyMessage: Int
@@ -40,10 +38,11 @@ class AlbumsFragment :
     override fun createAdapter(): AlbumAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
         return AlbumAdapter(
-            mainActivity,
+            requireActivity(),
             dataSet,
-            itemLayoutRes(),
-            mainActivity
+            R.layout.item_grid,
+            null,
+            this
         )
     }
 
@@ -90,12 +89,24 @@ class AlbumsFragment :
 
 
     companion object {
-        @JvmField
-        var TAG: String = AlbumsFragment::class.java.simpleName
-
-        @JvmStatic
         fun newInstance(): AlbumsFragment {
             return AlbumsFragment()
         }
     }
+
+    override fun onAlbumClick(albumId: Int, view: View) {
+        val controller = requireActivity().findNavController(R.id.fragment_container)
+        controller.navigate(
+            R.id.albumDetailsFragment,
+            bundleOf(EXTRA_ALBUM_ID to albumId),
+            null,
+            FragmentNavigatorExtras(
+                view to getString(R.string.transition_album_art)
+            )
+        )
+    }
+}
+
+interface AlbumClickListener {
+    fun onAlbumClick(albumId: Int, view: View)
 }

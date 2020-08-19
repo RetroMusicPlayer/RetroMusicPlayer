@@ -6,26 +6,24 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.activities.MainActivity
 import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.util.DensityUtil
 import io.github.muntashirakon.music.util.ThemedFastScroller.create
 import io.github.muntashirakon.music.views.ScrollingViewOnApplyWindowInsetsListener
-import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.*
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
 
 abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
     AbsMusicServiceFragment(R.layout.fragment_main_activity_recycler_view),
     AppBarLayout.OnOffsetChangedListener {
 
     val libraryViewModel: LibraryViewModel by sharedViewModel()
-    val mainActivity: MainActivity
-        get() = requireActivity() as MainActivity
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -38,22 +36,23 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.addOnAppBarOffsetChangedListener(this)
         initLayoutManager()
         initAdapter()
         setUpRecyclerView()
     }
 
     private fun setUpRecyclerView() {
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
-        val fastScroller = create(recyclerView)
-        recyclerView.setOnApplyWindowInsetsListener(
-            ScrollingViewOnApplyWindowInsetsListener(
-                recyclerView,
-                fastScroller
+        recyclerView.apply {
+            layoutManager = this@AbsRecyclerViewFragment.layoutManager
+            adapter = this@AbsRecyclerViewFragment.adapter
+            val fastScroller = create(this)
+            setOnApplyWindowInsetsListener(
+                ScrollingViewOnApplyWindowInsetsListener(
+                    recyclerView,
+                    fastScroller
+                )
             )
-        )
+        }
         checkForPadding()
     }
 
@@ -112,7 +111,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
             container.paddingLeft,
             container.paddingTop,
             container.paddingRight,
-            mainActivity.getTotalAppBarScrollingRange() + i
+            i
         )
     }
 
@@ -135,11 +134,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         initAdapter()
         checkIsEmpty()
         recyclerView.adapter = adapter
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mainActivity.removeOnAppBarOffsetChangedListener(this)
     }
 
     fun recyclerView(): RecyclerView {

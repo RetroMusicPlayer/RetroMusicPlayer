@@ -10,10 +10,16 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.github.dhaval2404.imagepicker.constant.ImageProvider
 import io.github.muntashirakon.music.Constants.USER_BANNER
 import io.github.muntashirakon.music.Constants.USER_PROFILE
+import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsBaseActivity
 import io.github.muntashirakon.music.extensions.accentColor
 import io.github.muntashirakon.music.extensions.applyToolbar
@@ -21,13 +27,6 @@ import io.github.muntashirakon.music.glide.ProfileBannerGlideRequest
 import io.github.muntashirakon.music.glide.UserProfileGlideRequest
 import io.github.muntashirakon.music.util.ImageUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.github.dhaval2404.imagepicker.ImagePicker
-import com.github.dhaval2404.imagepicker.constant.ImageProvider
-import io.github.muntashirakon.music.R
 import kotlinx.android.synthetic.main.activity_user_info.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,7 +48,7 @@ class UserInfoActivity : AbsBaseActivity() {
         setLightNavigationBar(true)
         applyToolbar(toolbar)
 
-        MaterialUtil.setTint(nameContainer, false)
+        nameContainer.accentColor()
         name.setText(PreferenceUtil.userName)
 
         userImage.setOnClickListener {
@@ -161,7 +160,7 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun saveImage(bitmap: Bitmap, fileName: String) {
-        CoroutineScope(Dispatchers.IO).launch() {
+        CoroutineScope(Dispatchers.IO).launch {
             val appDir = applicationContext.filesDir
             val file = File(appDir, fileName)
             var successful = false

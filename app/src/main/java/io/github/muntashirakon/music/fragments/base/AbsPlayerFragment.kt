@@ -14,6 +14,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import io.github.muntashirakon.music.EXTRA_ALBUM_ID
+import io.github.muntashirakon.music.EXTRA_ARTIST_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.tageditor.AbsTagEditorActivity
 import io.github.muntashirakon.music.activities.tageditor.SongTagEditorActivity
@@ -30,11 +34,8 @@ import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.FileNotFoundException
 
-abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout),
-    Toolbar.OnMenuItemClickListener,
-    PaletteColorHolder,
-    PlayerAlbumCoverFragment.Callbacks {
-
+abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
+    Toolbar.OnMenuItemClickListener, PaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
 
     private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
     private var updateLyricsAsyncTask: AsyncTask<*, *, *>? = null
@@ -86,11 +87,19 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 return true
             }
             R.id.action_go_to_album -> {
-                NavigationUtil.goToAlbum(requireActivity(), song.albumId)
+                mainActivity.collapsePanel()
+                requireActivity().findNavController(R.id.fragment_container).navigate(
+                    R.id.albumDetailsFragment,
+                    bundleOf(EXTRA_ALBUM_ID to song.albumId)
+                )
                 return true
             }
             R.id.action_go_to_artist -> {
-                NavigationUtil.goToArtist(requireActivity(), song.artistId)
+                mainActivity.collapsePanel()
+                requireActivity().findNavController(R.id.fragment_container).navigate(
+                    R.id.artistDetailsFragment,
+                    bundleOf(EXTRA_ARTIST_ID to song.artistId)
+                )
                 return true
             }
             R.id.now_playing -> {
@@ -252,11 +261,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             statusBarShadow?.hide()
-    }
-
-    interface Callbacks {
-
-        fun onPaletteColorChanged()
     }
 
     companion object {

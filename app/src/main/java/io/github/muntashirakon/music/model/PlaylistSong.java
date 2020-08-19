@@ -41,9 +41,9 @@ public class PlaylistSong extends Song {
                         @NotNull String artistName,
                         int playlistId,
                         int idInPlayList,
-                        @NotNull String composer) {
-        super(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName,
-                composer);
+                        @NotNull String composer,
+                        String albumArtist) {
+        super(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, composer, albumArtist);
         this.playlistId = playlistId;
         this.idInPlayList = idInPlayList;
     }

@@ -6,10 +6,30 @@
     android:layout_height="match_parent"
     android:transitionName="@string/transition_lyrics">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <io.github.muntashirakon.music.lyrics.LrcView
+        android:id="@+id/lyricsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:lrcLabel="@string/no_lyrics_found"
+        app:lrcNormalTextSize="32sp"
+        app:lrcPadding="16dp"
+        app:lrcTextGravity="left"
+        app:lrcTextSize="32sp" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_gravity="bottom"
+        android:padding="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:hideOnScroll="true"
+        app:titleMargin="0dp"
+        app:titleMarginStart="0dp"
+        tools:backgroundTint="@color/md_red_400">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -27,15 +47,5 @@
             tools:subtitle="@tools:sample/full_names"
             tools:title="@tools:sample/full_names" />
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <io.github.muntashirakon.music.lyrics.LrcView
-        android:id="@+id/lyricsView"
-        app:lrcLabel="@string/no_lyrics_found"
-        app:lrcPadding="16dp"
-        app:lrcTextGravity="left"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -30,7 +30,7 @@ object M3UWriter : M3UConstants {
     ): File? {
         if (!dir.exists()) dir.mkdirs()
         val file = File(dir, playlist.name + "." + M3UConstants.EXTENSION)
-        val songs = playlist.getSongs(context)
+        val songs = playlist.getSongs()
         if (songs.size > 0) {
             val bw = BufferedWriter(FileWriter(file))
             bw.write(M3UConstants.HEADER)

@@ -2,14 +2,14 @@ package io.github.muntashirakon.music.adapter.song
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
 import java.util.*
 
 class SimpleSongAdapter(
-    context: AppCompatActivity,
+    context: FragmentActivity,
     songs: ArrayList<Song>,
     layoutRes: Int,
     cabHolder: CabHolder?

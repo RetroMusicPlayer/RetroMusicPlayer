@@ -8,16 +8,16 @@
     android:focusable="true">
 
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/playerAlbumCoverFragment"
-        android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_album_full_cover" />
+     <fragment
+         android:id="@+id/playerAlbumCoverFragment"
+         android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         tools:layout="@layout/fragment_album_full_cover" />
 
     <View
         android:id="@+id/mask"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/playbackControlsFragment"
         android:name="io.github.muntashirakon.music.fragments.player.full.FullPlaybackControlsFragment"
         android:layout_width="0dp"

@@ -47,13 +47,17 @@ object Constants {
         MediaStore.Audio.AudioColumns.ALBUM, // 8
         MediaStore.Audio.AudioColumns.ARTIST_ID, // 9
         MediaStore.Audio.AudioColumns.ARTIST,// 10
-        MediaStore.Audio.AudioColumns.COMPOSER// 11
+        MediaStore.Audio.AudioColumns.COMPOSER,// 11
+        "album_artist"//12
     )
     const val NUMBER_OF_TOP_TRACKS = 99
 }
 
+const val EXTRA_GENRE = "extra_genre"
+const val EXTRA_PLAYLIST = "extra_playlist"
+const val EXTRA_ALBUM_ID = "extra_album_id"
+const val EXTRA_ARTIST_ID = "extra_artist_id"
 const val EXTRA_SONG = "extra_songs"
-const val EXTRA_PLAYLIST = "extra_list"
 const val LIBRARY_CATEGORIES = "library_categories"
 const val EXTRA_SONG_INFO = "extra_song_info"
 const val DESATURATED_COLOR = "desaturated_color"

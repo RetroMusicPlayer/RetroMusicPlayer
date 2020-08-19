@@ -14,23 +14,23 @@ import android.transition.Slide
 import android.widget.Toast
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
-import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.extensions.appHandleColor
-import io.github.muntashirakon.music.glide.palette.BitmapPaletteTranscoder
-import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
-import io.github.muntashirakon.music.loaders.AlbumLoader
-import io.github.muntashirakon.music.util.ImageUtil
-import io.github.muntashirakon.music.util.RetroColorUtil.generatePalette
-import io.github.muntashirakon.music.util.RetroColorUtil.getColor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.appHandleColor
+import io.github.muntashirakon.music.glide.palette.BitmapPaletteTranscoder
+import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
+import io.github.muntashirakon.music.util.ImageUtil
+import io.github.muntashirakon.music.util.RetroColorUtil.generatePalette
+import io.github.muntashirakon.music.util.RetroColorUtil.getColor
 import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
 import java.util.*
 
 class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
+
     override val contentViewLayout: Int
         get() = R.layout.activity_album_tag_editor
 
@@ -162,13 +162,13 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
         writeValuesToFiles(
             fieldKeyValueMap,
-            if (deleteAlbumArt) AbsTagEditorActivity.ArtworkInfo(id, null)
+            if (deleteAlbumArt) ArtworkInfo(id, null)
             else if (albumArtBitmap == null) null else ArtworkInfo(id, albumArtBitmap!!)
         )
     }
 
-    override fun getSongPaths(): List<String> {
-        val songs = AlbumLoader.getAlbum(this, id).songs
+    override suspend fun getSongPaths(): List<String> {
+        val songs = repository.albumById(id).songs
         val paths = ArrayList<String>(songs!!.size)
         for (song in songs) {
             paths.add(song.data)

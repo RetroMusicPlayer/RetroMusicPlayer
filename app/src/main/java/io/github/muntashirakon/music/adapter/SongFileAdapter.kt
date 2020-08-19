@@ -22,20 +22,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.appthemehelper.util.ATHUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.signature.MediaStoreSignature
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
 import io.github.muntashirakon.music.glide.audiocover.AudioFileCover
 import io.github.muntashirakon.music.interfaces.CabHolder
+import io.github.muntashirakon.music.interfaces.Callbacks
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.RetroUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.signature.MediaStoreSignature
 import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.io.File
 import java.text.DecimalFormat
-import java.util.*
 import kotlin.math.log10
 import kotlin.math.pow
 
@@ -135,9 +135,9 @@ class SongFileAdapter(
         return getFileTitle(`object`)
     }
 
-    override fun onMultipleItemAction(menuItem: MenuItem, selection: ArrayList<File>) {
+    override fun onMultipleItemAction(menuItem: MenuItem, selection: List<File>) {
         if (callbacks == null) return
-        callbacks.onMultipleItemAction(menuItem, selection)
+        callbacks.onMultipleItemAction(menuItem, selection as ArrayList<File>)
     }
 
     override fun getPopupText(position: Int): String {
@@ -148,13 +148,6 @@ class SongFileAdapter(
         return MusicUtil.getSectionName(dataSet[position].name)
     }
 
-    interface Callbacks {
-        fun onFileSelected(file: File)
-
-        fun onFileMenuClicked(file: File, view: View)
-
-        fun onMultipleItemAction(item: MenuItem, files: ArrayList<File>)
-    }
 
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 

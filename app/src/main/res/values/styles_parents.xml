@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowActionBarOverlay">true</item>
@@ -8,11 +8,13 @@
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
-        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+        <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
+        <item name="popupWindowStyle">@style/MaterialPopupMenuStyle</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
@@ -29,11 +31,9 @@
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-
-        <!--Manual setting colors-->
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="android:windowBackground">@color/window_color_dark</item>
-
+        <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="Theme.MaterialComponents.NoActionBar">
@@ -50,6 +50,7 @@
         <item name="colorOnBackground">@color/blackColorSurface</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -65,7 +66,7 @@
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-
+        <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
     </style>
 
 
@@ -87,19 +88,4 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-
-    <style name="MaterialAlertDialogTheme" parent="@style/ThemeOverlay.MaterialComponents.Dialog">
-        <item name="android:dialogCornerRadius" tools:targetApi="p">12dp</item>
-    </style>
-
-    <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
-        <item name="cornerRadius">6dp</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textAppearance">@style/TextViewNormal</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
-        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
-    </style>
 </resources>

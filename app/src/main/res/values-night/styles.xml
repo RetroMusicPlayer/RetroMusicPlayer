@@ -15,11 +15,9 @@
 <resources>
 
     <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
         <item name="md_background_color">?attr/colorSurface</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
-
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="windowActionBarOverlay">true</item>
@@ -29,7 +27,6 @@
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
-        <!--Manual setting colors-->
         <item name="colorPrimary">@color/darkColorPrimary</item>
         <item name="colorSurface">@color/darkColorSurface</item>
     </style>

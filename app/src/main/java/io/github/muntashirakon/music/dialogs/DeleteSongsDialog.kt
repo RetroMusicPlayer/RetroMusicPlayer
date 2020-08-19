@@ -98,7 +98,9 @@ class DeleteSongsDialog : DialogFragment() {
     }
 
     fun deleteSongs(songs: List<Song>, safUris: List<Uri>?) {
-        MusicUtil.deleteTracks(requireActivity(), songs, safUris) { this.dismiss() }
+        MusicUtil.deleteTracks(requireActivity(), songs, safUris, Runnable {
+            dismiss()
+        })
     }
 
     companion object {

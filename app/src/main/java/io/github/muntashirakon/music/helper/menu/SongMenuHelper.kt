@@ -18,8 +18,11 @@ import android.content.Intent
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
+import io.github.muntashirakon.music.EXTRA_ALBUM_ID
+import io.github.muntashirakon.music.EXTRA_ARTIST_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.tageditor.AbsTagEditorActivity
 import io.github.muntashirakon.music.activities.tageditor.SongTagEditorActivity
@@ -30,7 +33,6 @@ import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.PaletteColorHolder
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
-import io.github.muntashirakon.music.util.NavigationUtil
 import io.github.muntashirakon.music.util.RingtoneManager
 
 object SongMenuHelper {
@@ -89,18 +91,24 @@ object SongMenuHelper {
                 return true
             }
             R.id.action_go_to_album -> {
-                NavigationUtil.goToAlbum(activity, song.albumId)
+                activity.findNavController(R.id.fragment_container).navigate(
+                    R.id.albumDetailsFragment,
+                    bundleOf(EXTRA_ALBUM_ID to song.albumId)
+                )
                 return true
             }
             R.id.action_go_to_artist -> {
-                NavigationUtil.goToArtist(activity, song.artistId)
+                activity.findNavController(R.id.fragment_container).navigate(
+                    R.id.artistDetailsFragment,
+                    bundleOf(EXTRA_ARTIST_ID to song.artistId)
+                )
                 return true
             }
         }
         return false
     }
 
-    abstract class OnClickSongMenu protected constructor(private val activity: AppCompatActivity) :
+    abstract class OnClickSongMenu(private val activity: FragmentActivity) :
         View.OnClickListener, PopupMenu.OnMenuItemClickListener {
 
         open val menuRes: Int

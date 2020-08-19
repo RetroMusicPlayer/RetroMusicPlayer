@@ -1,13 +1,17 @@
 package io.github.muntashirakon.music.adapter.song
 
-import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
+import com.afollestad.materialcab.MaterialCab
+import com.bumptech.glide.Glide
+import io.github.muntashirakon.music.EXTRA_ALBUM_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
@@ -22,11 +26,8 @@ import io.github.muntashirakon.music.helper.menu.SongsMenuHelper
 import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
-import io.github.muntashirakon.music.util.NavigationUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import com.afollestad.materialcab.MaterialCab
-import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 /**
@@ -34,7 +35,7 @@ import me.zhanghai.android.fastscroll.PopupTextProvider
  */
 
 open class SongAdapter(
-    protected val activity: AppCompatActivity,
+    protected val activity: FragmentActivity,
     var dataSet: MutableList<Song>,
     protected var itemLayoutRes: Int,
     cabHolder: CabHolder?,
@@ -132,7 +133,7 @@ open class SongAdapter(
         return song.title
     }
 
-    override fun onMultipleItemAction(menuItem: MenuItem, selection: ArrayList<Song>) {
+    override fun onMultipleItemAction(menuItem: MenuItem, selection: List<Song>) {
         SongsMenuHelper.handleMenuClick(activity, selection, menuItem.itemId)
     }
 
@@ -147,7 +148,6 @@ open class SongAdapter(
                 return ""
             }
         }
-
         return MusicUtil.getSectionName(sectionName)
     }
 
@@ -175,12 +175,11 @@ open class SongAdapter(
             if (image != null && image!!.visibility == View.VISIBLE) {
                 when (item.itemId) {
                     R.id.action_go_to_album -> {
-                        val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                            activity,
-                            imageContainerCard ?: image,
-                            activity.getString(R.string.transition_album_art)
-                        )
-                        NavigationUtil.goToAlbumOptions(activity, song.albumId, activityOptions)
+                        activity.findNavController(R.id.fragment_container)
+                            .navigate(
+                                R.id.albumDetailsFragment,
+                                bundleOf(EXTRA_ALBUM_ID to song.albumId)
+                            )
                         return true
                     }
                 }

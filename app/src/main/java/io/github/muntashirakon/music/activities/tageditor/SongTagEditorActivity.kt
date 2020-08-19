@@ -8,15 +8,18 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.extensions.appHandleColor
-import io.github.muntashirakon.music.loaders.SongLoader
+import io.github.muntashirakon.music.repository.SongRepository
 import kotlinx.android.synthetic.main.activity_song_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     override val contentViewLayout: Int
         get() = R.layout.activity_song_tag_editor
+
+    private val songRepository by inject<SongRepository>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,9 +88,9 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         writeValuesToFiles(fieldKeyValueMap, null)
     }
 
-    override fun getSongPaths(): List<String> {
+    override suspend fun getSongPaths(): List<String> {
         val paths = ArrayList<String>(1)
-        paths.add(SongLoader.getSong(this, id).data)
+        paths.add(songRepository.song(id).data)
         return paths
     }
 

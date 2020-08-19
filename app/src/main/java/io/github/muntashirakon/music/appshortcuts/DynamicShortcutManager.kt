@@ -22,7 +22,6 @@ import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.os.Build
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.LastAddedShortcutType
-import io.github.muntashirakon.music.appshortcuts.shortcuttype.SearchShortCutType
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.ShuffleAllShortcutType
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.TopTracksShortcutType
 import java.util.*
@@ -34,11 +33,9 @@ class DynamicShortcutManager(private val context: Context) {
 
     private val defaultShortcuts: List<ShortcutInfo>
         get() = Arrays.asList(
-            SearchShortCutType(context).shortcutInfo,
             ShuffleAllShortcutType(context).shortcutInfo,
             TopTracksShortcutType(context).shortcutInfo,
             LastAddedShortcutType(context).shortcutInfo
-
         )
 
     fun initDynamicShortcuts() {

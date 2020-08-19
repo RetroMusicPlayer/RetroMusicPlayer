@@ -14,13 +14,10 @@
 
 package io.github.muntashirakon.music.extensions
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.SeekBar
-import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -47,10 +44,4 @@ fun View.showOrHide(show: Boolean) = if (show) show() else hide()
 fun EditText.appHandleColor(): EditText {
     TintHelper.colorHandles(this, ThemeStore.accentColor(context))
     return this
-}
-
-fun SeekBar.applyColor(@ColorInt color: Int) {
-    thumbTintList = ColorStateList.valueOf(color)
-    progressTintList = ColorStateList.valueOf(color)
-    progressBackgroundTintList = ColorStateList.valueOf(color)
 }

@@ -3,14 +3,7 @@ package io.github.muntashirakon.music.adapter.song
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.helper.MusicPlayerRemote
-import io.github.muntashirakon.music.helper.MusicPlayerRemote.isPlaying
-import io.github.muntashirakon.music.helper.MusicPlayerRemote.playNextSong
-import io.github.muntashirakon.music.helper.MusicPlayerRemote.removeFromQueue
-import io.github.muntashirakon.music.model.Song
-import io.github.muntashirakon.music.util.MusicUtil
-import io.github.muntashirakon.music.util.ViewUtil
+import androidx.fragment.app.FragmentActivity
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
 import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
@@ -20,6 +13,14 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAct
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionDefault
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionRemoveItem
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.annotation.SwipeableItemResults
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.helper.MusicPlayerRemote
+import io.github.muntashirakon.music.helper.MusicPlayerRemote.isPlaying
+import io.github.muntashirakon.music.helper.MusicPlayerRemote.playNextSong
+import io.github.muntashirakon.music.helper.MusicPlayerRemote.removeFromQueue
+import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.util.MusicUtil
+import io.github.muntashirakon.music.util.ViewUtil
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class PlayingQueueAdapter(
@@ -192,7 +193,7 @@ class PlayingQueueAdapter(
     internal class SwipedResultActionRemoveItem(
         private val adapter: PlayingQueueAdapter,
         private val position: Int,
-        private val activity: AppCompatActivity
+        private val activity: FragmentActivity
     ) : SwipeResultActionRemoveItem() {
 
         private var songToRemove: Song? = null

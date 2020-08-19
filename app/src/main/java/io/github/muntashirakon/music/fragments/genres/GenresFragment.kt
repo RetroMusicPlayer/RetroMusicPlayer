@@ -32,14 +32,12 @@ class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.genresLiveData
-            .observe(viewLifecycleOwner, Observer { genres ->
-                if (genres.isNotEmpty()) {
-                    adapter?.swapDataSet(genres)
-                } else {
-                    adapter?.swapDataSet(listOf())
-                }
-            })
+        libraryViewModel.genresLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty())
+                adapter?.swapDataSet(it)
+            else
+                adapter?.swapDataSet(listOf())
+        })
     }
 
 
@@ -49,7 +47,7 @@ class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager
 
     override fun createAdapter(): GenreAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return GenreAdapter(mainActivity, dataSet, R.layout.item_list_no_image)
+        return GenreAdapter(requireActivity(), dataSet, R.layout.item_list_no_image)
     }
 
     override val emptyMessage: Int

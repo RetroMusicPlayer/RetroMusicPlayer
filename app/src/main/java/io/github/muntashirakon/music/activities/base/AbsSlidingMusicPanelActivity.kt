@@ -7,27 +7,29 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
+import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.RetroBottomSheetBehavior
 import io.github.muntashirakon.music.extensions.hide
 import io.github.muntashirakon.music.extensions.show
+import io.github.muntashirakon.music.extensions.whichFragment
 import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.fragments.MiniPlayerFragment
 import io.github.muntashirakon.music.fragments.NowPlayingScreen
 import io.github.muntashirakon.music.fragments.NowPlayingScreen.*
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.CategoryInfo
-import io.github.muntashirakon.music.util.DensityUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.views.BottomNavigationBarTinted
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
+abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     companion object {
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }
@@ -120,8 +122,9 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
         return slidingMusicPanelLayout
     }
 
-    private fun collapsePanel() {
+    fun collapsePanel() {
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        setMiniPlayerAlphaProgress(0f)
     }
 
     fun expandPanel() {
@@ -133,9 +136,7 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
         if (miniPlayerFragment?.view == null) return
         val alpha = 1 - progress
         miniPlayerFragment?.view?.alpha = alpha
-        // necessary to make the views below clickable
         miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
-
         bottomNavigationView.translationY = progress * 500
         bottomNavigationView.alpha = alpha
     }
@@ -172,40 +173,31 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
         return bottomNavigationView
     }
 
-    fun setBottomBarVisibility(visible: Int) {
-        bottomNavigationView.visibility = visible
+    fun hideBottomBarVisibility(visible: Boolean) {
+        bottomNavigationView.isVisible = visible
         hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
     }
 
     private fun hideBottomBar(hide: Boolean) {
-        val heightOfBar = resources.getDimensionPixelSize(R.dimen.mini_player_height)
-        val heightOfBarWithTabs =
-            resources.getDimensionPixelSize(R.dimen.mini_player_height_expanded)
+        val heightOfBar = bottomNavigationView.height
+        val isBottomBarVisible = bottomNavigationView.isVisible
 
         if (hide) {
             behavior.isHideable = true
             behavior.peekHeight = 0
-            bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
             collapsePanel()
+            ViewCompat.setElevation(bottomNavigationView, 10f)
         } else {
-            if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-                slidingPanel.elevation = DensityUtil.dip2px(this, 10f).toFloat()
-                bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
-                behavior.isHideable = false
-                behavior.peekHeight =
-                    if (bottomNavigationView.visibility == View.VISIBLE) {
-                        heightOfBarWithTabs
-                    } else {
-                        heightOfBar
-                    }
-            }
+            ViewCompat.setElevation(bottomNavigationView, 10f)
+            ViewCompat.setElevation(slidingPanel, 10f)
+            behavior.isHideable = false
+            behavior.peekHeight = (if (isBottomBarVisible) heightOfBar * 2 else heightOfBar) - 24
         }
     }
 
     private fun chooseFragmentForTheme() {
         cps = PreferenceUtil.nowPlayingScreen
-        miniPlayerFragment =
-            supportFragmentManager.findFragmentById(R.id.miniPlayerFragment) as MiniPlayerFragment
+        miniPlayerFragment = whichFragment<MiniPlayerFragment>(R.id.miniPlayerFragment)
         miniPlayerFragment?.view?.setOnClickListener { expandPanel() }
     }
 
@@ -232,7 +224,6 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
     }
 
     open fun handleBackPress(): Boolean {
-
         if (panelState == BottomSheetBehavior.STATE_EXPANDED) {
             collapsePanel()
             return true
@@ -303,6 +294,12 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
         if (panelState == BottomSheetBehavior.STATE_COLLAPSED) {
             super.setTaskDescriptionColor(color)
         }
+    }
+
+    fun hideBottomNavigation() {
+        behavior.isHideable = true
+        behavior.peekHeight = 0
+        hideBottomBarVisibility(false)
     }
 
     fun updateTabs() {

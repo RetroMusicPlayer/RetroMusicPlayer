@@ -2,7 +2,11 @@ package io.github.muntashirakon.music.adapter.song
 
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
+import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemViewHolder
+import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
+import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.R.menu
 import io.github.muntashirakon.music.dialogs.RemoveFromPlaylistDialog
@@ -10,19 +14,18 @@ import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.PlaylistSong
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.ViewUtil
-import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
-import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemViewHolder
-import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
-import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
 
 class OrderablePlaylistSongAdapter(
-    activity: AppCompatActivity,
+    activity: FragmentActivity,
     dataSet: ArrayList<Song>,
     itemLayoutRes: Int,
     cabHolder: CabHolder?,
     private val onMoveItemListener: OnMoveItemListener?
-) : PlaylistSongAdapter(
-    activity, dataSet, itemLayoutRes, cabHolder
+) : SongAdapter(
+    activity,
+    dataSet,
+    itemLayoutRes,
+    cabHolder
 ), DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
 
     init {
@@ -48,7 +51,7 @@ class OrderablePlaylistSongAdapter(
         return long
     }
 
-    override fun onMultipleItemAction(menuItem: MenuItem, selection: ArrayList<Song>) {
+    override fun onMultipleItemAction(menuItem: MenuItem, selection: List<Song>) {
         when (menuItem.itemId) {
             R.id.action_remove_from_playlist -> {
                 RemoveFromPlaylistDialog.create(selection as ArrayList<PlaylistSong>)
@@ -91,7 +94,7 @@ class OrderablePlaylistSongAdapter(
         fun onMoveItem(fromPosition: Int, toPosition: Int)
     }
 
-    inner class ViewHolder(itemView: View) : PlaylistSongAdapter.ViewHolder(itemView),
+    inner class ViewHolder(itemView: View) : SongAdapter.ViewHolder(itemView),
         DraggableItemViewHolder {
         @DraggableItemStateFlags
         private var mDragStateFlags: Int = 0
@@ -131,9 +134,5 @@ class OrderablePlaylistSongAdapter(
         override fun setDragStateFlags(@DraggableItemStateFlags flags: Int) {
             mDragStateFlags = flags
         }
-    }
-
-    companion object {
-        val TAG: String = OrderablePlaylistSongAdapter::class.java.simpleName
     }
 }

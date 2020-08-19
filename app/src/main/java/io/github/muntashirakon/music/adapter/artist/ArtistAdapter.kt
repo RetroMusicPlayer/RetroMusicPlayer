@@ -1,17 +1,19 @@
 package io.github.muntashirakon.music.adapter.artist
 
-import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.fragment.app.FragmentActivity
+import com.bumptech.glide.Glide
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
 import io.github.muntashirakon.music.extensions.hide
+import io.github.muntashirakon.music.fragments.artists.ArtistClickListener
 import io.github.muntashirakon.music.glide.ArtistGlideRequest
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
 import io.github.muntashirakon.music.helper.menu.SongsMenuHelper
@@ -19,17 +21,16 @@ import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.Artist
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
-import io.github.muntashirakon.music.util.NavigationUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.util.*
 
 class ArtistAdapter(
-    val activity: AppCompatActivity,
+    val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
-    cabHolder: CabHolder?
+    cabHolder: CabHolder?,
+    private val artistClickListener: ArtistClickListener
 ) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(
     activity, cabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
@@ -106,12 +107,12 @@ class ArtistAdapter(
     }
 
     override fun onMultipleItemAction(
-        menuItem: MenuItem, selection: ArrayList<Artist>
+        menuItem: MenuItem, selection: List<Artist>
     ) {
         SongsMenuHelper.handleMenuClick(activity, getSongList(selection), menuItem.itemId)
     }
 
-    private fun getSongList(artists: List<Artist>): ArrayList<Song> {
+    private fun getSongList(artists: List<Artist>): List<Song> {
         val songs = ArrayList<Song>()
         for (artist in artists) {
             songs.addAll(artist.songs) // maybe async in future?
@@ -130,7 +131,6 @@ class ArtistAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            setImageTransitionName(activity.getString(R.string.transition_artist_image))
             menu?.visibility = View.GONE
         }
 
@@ -139,14 +139,13 @@ class ArtistAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                    activity,
-                    imageContainerCard ?: image,
-                    activity.getString(R.string.transition_artist_image)
-                )
-                NavigationUtil.goToArtistOptions(
-                    activity, dataSet[layoutPosition].id, activityOptions
-                )
+                image?.let {
+                    ViewCompat.setTransitionName(
+                        it,
+                        activity.getString(R.string.transition_artist_image)
+                    )
+                    artistClickListener.onArtist(dataSet[layoutPosition].id, it)
+                }
             }
         }
 

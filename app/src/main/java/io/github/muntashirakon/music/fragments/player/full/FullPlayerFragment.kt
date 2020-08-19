@@ -1,6 +1,5 @@
 package io.github.muntashirakon.music.fragments.player.full
 
-import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -8,31 +7,36 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import com.bumptech.glide.Glide
+import io.github.muntashirakon.music.EXTRA_ARTIST_ID
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.findActivityNavController
 import io.github.muntashirakon.music.extensions.hide
 import io.github.muntashirakon.music.extensions.show
+import io.github.muntashirakon.music.extensions.whichFragment
 import io.github.muntashirakon.music.fragments.base.AbsPlayerFragment
 import io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment
 import io.github.muntashirakon.music.glide.ArtistGlideRequest
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.MusicProgressViewUpdateHelper
-import io.github.muntashirakon.music.loaders.ArtistLoader
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.model.lyrics.AbsSynchronizedLyrics
 import io.github.muntashirakon.music.model.lyrics.Lyrics
-import io.github.muntashirakon.music.util.NavigationUtil
+import io.github.muntashirakon.music.repository.ArtistRepository
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_full.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.inject
 
 class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
     MusicProgressViewUpdateHelper.Callback {
+    private val artistRepository by inject<ArtistRepository>()
     private lateinit var lyricsLayout: FrameLayout
     private lateinit var lyricsLine1: TextView
     private lateinit var lyricsLine2: TextView
@@ -150,30 +154,20 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
 
     private fun setupArtist() {
         artistImage.setOnClickListener {
-            val transitionName =
-                "${getString(R.string.transition_artist_image)}_${MusicPlayerRemote.currentSong.artistId}"
-            val activityOptions =
-                ActivityOptions.makeSceneTransitionAnimation(
-                    requireActivity(),
-                    artistImage,
-                    transitionName
+            mainActivity.collapsePanel()
+            findActivityNavController(R.id.fragment_container)
+                .navigate(
+                    R.id.artistDetailsFragment,
+                    bundleOf(EXTRA_ARTIST_ID to MusicPlayerRemote.currentSong.artistId)
                 )
-            NavigationUtil.goToArtistOptions(
-                requireActivity(),
-                MusicPlayerRemote.currentSong.artistId,
-                activityOptions
-            )
         }
     }
 
     private fun setUpSubFragments() {
-        controlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FullPlaybackControlsFragment
-
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
-        playerAlbumCoverFragment.setCallbacks(this)
-        playerAlbumCoverFragment.removeSlideEffect()
+        controlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val coverFragment: PlayerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
+        coverFragment.setCallbacks(this)
+        coverFragment.removeSlideEffect()
     }
 
     override fun onShow() {
@@ -228,9 +222,8 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
     }
 
     private fun updateArtistImage() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val artist =
-                ArtistLoader.getArtist(requireContext(), MusicPlayerRemote.currentSong.artistId)
+        lifecycleScope.launch {
+            val artist = artistRepository.artist(MusicPlayerRemote.currentSong.artistId)
             withContext(Dispatchers.Main) {
                 ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
                     .generatePalette(requireContext())

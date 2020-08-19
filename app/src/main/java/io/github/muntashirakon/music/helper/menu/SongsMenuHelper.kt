@@ -15,19 +15,17 @@
 package io.github.muntashirakon.music.helper.menu
 
 import androidx.fragment.app.FragmentActivity
-
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.dialogs.AddToPlaylistDialog
 import io.github.muntashirakon.music.dialogs.DeleteSongsDialog
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.Song
-import java.util.*
 
 
 object SongsMenuHelper {
     fun handleMenuClick(
         activity: FragmentActivity,
-        songs: ArrayList<Song>,
+        songs: List<Song>,
         menuItemId: Int
     ): Boolean {
         when (menuItemId) {

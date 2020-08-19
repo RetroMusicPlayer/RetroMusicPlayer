@@ -327,7 +327,7 @@ public class MusicService extends Service implements
     }
 
     private static String getTrackUri(@NonNull Song song) {
-        return MusicUtil.getSongFileUri(song.getId()).toString();
+        return MusicUtil.INSTANCE.getSongFileUri(song.getId()).toString();
     }
 
     @Override
@@ -790,7 +790,7 @@ public class MusicService extends Service implements
                     pendingQuit = true;
                     break;
                 case TOGGLE_FAVORITE:
-                    MusicUtil.toggleFavorite(getApplicationContext(), getCurrentSong());
+                    MusicUtil.INSTANCE.toggleFavorite(getApplicationContext(), getCurrentSong());
                     break;
             }
         }
@@ -1214,7 +1214,7 @@ public class MusicService extends Service implements
         Playlist playlist = intent.getParcelableExtra(INTENT_EXTRA_PLAYLIST);
         int shuffleMode = intent.getIntExtra(INTENT_EXTRA_SHUFFLE_MODE, getShuffleMode());
         if (playlist != null) {
-            ArrayList<Song> playlistSongs = playlist.getSongs(getApplicationContext());
+            List<Song> playlistSongs = playlist.getSongs();
             if (!playlistSongs.isEmpty()) {
                 if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {
                     int startPosition = new Random().nextInt(playlistSongs.size());
@@ -1327,7 +1327,7 @@ public class MusicService extends Service implements
                 TOGGLE_SHUFFLE, getString(R.string.action_toggle_shuffle), shuffleIcon)
                 .build());
 
-        final int favoriteIcon = MusicUtil.isFavorite(getApplicationContext(), getCurrentSong())
+        final int favoriteIcon = MusicUtil.INSTANCE.isFavorite(getApplicationContext(), getCurrentSong())
                 ? R.drawable.ic_favorite : R.drawable.ic_favorite_border;
         stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
                 TOGGLE_FAVORITE, getString(R.string.action_toggle_favorite), favoriteIcon)

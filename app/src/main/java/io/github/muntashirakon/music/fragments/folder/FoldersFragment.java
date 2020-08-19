@@ -60,6 +60,7 @@ import io.github.muntashirakon.music.helper.MusicPlayerRemote;
 import io.github.muntashirakon.music.helper.menu.SongMenuHelper;
 import io.github.muntashirakon.music.helper.menu.SongsMenuHelper;
 import io.github.muntashirakon.music.interfaces.CabHolder;
+import io.github.muntashirakon.music.interfaces.Callbacks;
 import io.github.muntashirakon.music.interfaces.MainActivityFragmentCallbacks;
 import io.github.muntashirakon.music.misc.DialogAsyncTask;
 import io.github.muntashirakon.music.misc.UpdateToastMediaScannerCompletionListener;
@@ -76,7 +77,9 @@ import me.zhanghai.android.fastscroll.FastScroller;
 
 public class FoldersFragment extends AbsMainActivityFragment implements
         MainActivityFragmentCallbacks,
-        CabHolder, BreadCrumbLayout.SelectionCallback, SongFileAdapter.Callbacks,
+        CabHolder,
+        BreadCrumbLayout.SelectionCallback,
+        Callbacks,
         LoaderManager.LoaderCallbacks<List<File>> {
 
     public static final String TAG = FoldersFragment.class.getSimpleName();
@@ -84,7 +87,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             FileUtil.fileIsMimeType(file, "audio/*", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/opus", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/ogg", MimeTypeMap.getSingleton()));
-    public static final String PATH = "path";
+
     private static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = 5;
     private SongFileAdapter adapter;
@@ -125,18 +128,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         return startFolder;
     }
 
-    public static FoldersFragment newInstance(File directory) {
-        FoldersFragment frag = new FoldersFragment();
-        Bundle b = new Bundle();
-        b.putSerializable(PATH, directory);
-        frag.setArguments(b);
-        return frag;
-    }
-
-    public static FoldersFragment newInstance(Context context) {
-        return newInstance(PreferenceUtil.INSTANCE.getStartDirectory());
-    }
-
     private static File tryGetCanonicalFile(File file) {
         try {
             return file.getCanonicalFile();
@@ -171,7 +162,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         if (savedInstanceState == null) {
             //noinspection ConstantConditions
-            setCrumb(new BreadCrumbLayout.Crumb(FileUtil.safeGetCanonicalFile((File) requireArguments().getSerializable(PATH))), true);
+            setCrumb(new BreadCrumbLayout.Crumb(FileUtil.safeGetCanonicalFile(PreferenceUtil.INSTANCE.getStartDirectory())), true);
         } else {
             breadCrumbs.restoreFromStateWrapper(savedInstanceState.getParcelable(CRUMBS));
             getLoaderManager().initLoader(LOADER_ID, null, this);
@@ -299,7 +290,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     }
                 }
                 if (startIndex > -1) {
-                    MusicPlayerRemote.INSTANCE.openQueue(songs, startIndex, true);
+                    MusicPlayerRemote.openQueue(songs, startIndex, true);
                 } else {
                     final File finalFile = file1;
                     Snackbar.make(coordinatorLayout, Html.fromHtml(
@@ -619,7 +610,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private static class ListSongsAsyncTask
-            extends ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, ArrayList<Song>> {
+            extends ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, List<Song>> {
 
         private final Object extra;
         private WeakReference<OnSongsListedCallback> callbackWeakReference;
@@ -633,7 +624,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
 
         @Override
-        protected ArrayList<Song> doInBackground(LoadingInfo... params) {
+        protected List<Song> doInBackground(LoadingInfo... params) {
             try {
                 LoadingInfo info = params[0];
                 List<File> files = FileUtil.listFilesDeep(info.files, info.fileFilter);
@@ -659,7 +650,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Song> songs) {
+        protected void onPostExecute(List<Song> songs) {
             super.onPostExecute(songs);
             OnSongsListedCallback callback = checkCallbackReference();
             if (songs != null && callback != null) {
@@ -692,7 +683,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         public interface OnSongsListedCallback {
 
-            void onSongsListed(@NonNull ArrayList<Song> songs, Object extra);
+            void onSongsListed(@NonNull List<Song> songs, Object extra);
         }
 
         static class LoadingInfo {

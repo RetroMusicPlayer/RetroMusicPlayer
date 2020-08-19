@@ -24,6 +24,7 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.dialogs.BlacklistFolderChooserDialog
@@ -31,7 +32,6 @@ import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.colorControlNormal
 import io.github.muntashirakon.music.extensions.materialDialog
 import io.github.muntashirakon.music.providers.BlacklistStore
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 import java.util.*
 
@@ -69,7 +69,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
         chooserDialog?.setCallback(this)
         refreshBlacklistData()
         return materialDialog(R.string.blacklist)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
+            .setPositiveButton(R.string.done) { _, _ ->
                 dismiss()
             }
             .setNeutralButton(R.string.clear_action) { _, _ ->

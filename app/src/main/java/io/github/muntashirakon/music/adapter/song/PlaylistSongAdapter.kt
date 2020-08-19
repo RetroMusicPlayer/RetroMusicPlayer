@@ -1,15 +1,16 @@
 package io.github.muntashirakon.music.adapter.song
 
-import android.app.ActivityOptions
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import com.google.android.material.button.MaterialButton
+import io.github.muntashirakon.music.EXTRA_ALBUM_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.Song
-import io.github.muntashirakon.music.util.NavigationUtil
-import com.google.android.material.button.MaterialButton
 
 open class PlaylistSongAdapter(
     activity: AppCompatActivity,
@@ -57,19 +58,14 @@ open class PlaylistSongAdapter(
 
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             if (item.itemId == R.id.action_go_to_album) {
-                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                    activity,
-                    imageContainerCard ?: image,
-                    activity.getString(R.string.transition_album_art)
-                )
-                NavigationUtil.goToAlbumOptions(activity, song.albumId, activityOptions)
+                activity.findNavController(R.id.fragment_container)
+                    .navigate(
+                        R.id.albumDetailsFragment,
+                        bundleOf(EXTRA_ALBUM_ID to song.albumId)
+                    )
                 return true
             }
             return super.onSongMenuItemClick(item)
         }
-    }
-
-    companion object {
-        val TAG: String = PlaylistSongAdapter::class.java.simpleName
     }
 }

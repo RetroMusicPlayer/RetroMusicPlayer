@@ -41,6 +41,9 @@ class Album {
     val songCount: Int
         get() = songs!!.size
 
+    val albumArtist: String?
+        get() = safeGetFirstSong().albumArtist
+
     constructor(songs: ArrayList<Song>) {
         this.songs = songs
     }

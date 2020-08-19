@@ -19,26 +19,24 @@ import android.app.Activity
 import android.content.Context
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.dialogs.AddToPlaylistDialog
 import io.github.muntashirakon.music.dialogs.DeletePlaylistDialog
 import io.github.muntashirakon.music.dialogs.RenamePlaylistDialog
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
-import io.github.muntashirakon.music.loaders.PlaylistSongsLoader
 import io.github.muntashirakon.music.misc.WeakContextAsyncTask
 import io.github.muntashirakon.music.model.AbsCustomPlaylist
 import io.github.muntashirakon.music.model.Playlist
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.PlaylistsUtil
-import java.util.*
 
 
 object PlaylistMenuHelper {
 
     fun handleMenuClick(
-        activity: AppCompatActivity,
+        activity: FragmentActivity,
         playlist: Playlist, item: MenuItem
     ): Boolean {
         when (item.itemId) {
@@ -80,11 +78,11 @@ object PlaylistMenuHelper {
     private fun getPlaylistSongs(
         activity: Activity,
         playlist: Playlist
-    ): ArrayList<Song> {
+    ): List<Song> {
         return if (playlist is AbsCustomPlaylist) {
-            playlist.getSongs(activity)
+            playlist.songs()
         } else {
-            PlaylistSongsLoader.getPlaylistSongList(activity, playlist)
+            playlist.getSongs()
         }
     }
 

@@ -22,12 +22,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/playerAlbumCoverFragment"
-                android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout="@layout/fragment_album_full_cover" />
+             <fragment
+                 android:id="@+id/playerAlbumCoverFragment"
+                 android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 tools:layout="@layout/fragment_album_full_cover" />
 
             <include layout="@layout/shadow_statusbar_toolbar" />
         </FrameLayout>
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0">
 
-            <androidx.fragment.app.FragmentContainerView
+            <fragment
                 android:id="@+id/playbackControlsFragment"
                 android:name="io.github.muntashirakon.music.fragments.player.fit.FitPlaybackControlsFragment"
                 android:layout_width="match_parent"

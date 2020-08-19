@@ -31,15 +31,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import io.github.muntashirakon.music.loaders.SongLoader;
-import io.github.muntashirakon.music.loaders.SortedCursor;
 import io.github.muntashirakon.music.model.Song;
+import io.github.muntashirakon.music.repository.RealSongRepository;
+import io.github.muntashirakon.music.repository.SortedCursor;
 
 
 public final class FileUtil {
@@ -59,9 +58,9 @@ public final class FileUtil {
     }
 
     @NonNull
-    public static ArrayList<Song> matchFilesWithMediaStore(@NonNull Context context,
-                                                           @Nullable List<File> files) {
-        return SongLoader.INSTANCE.getSongs(makeSongCursor(context, files));
+    public static List<Song> matchFilesWithMediaStore(@NonNull Context context,
+                                                      @Nullable List<File> files) {
+        return new RealSongRepository(context).songs(makeSongCursor(context, files));
     }
 
     public static String safeGetCanonicalPath(File file) {
@@ -89,7 +88,7 @@ public final class FileUtil {
             }
         }
 
-        Cursor songCursor = SongLoader.INSTANCE.makeSongCursor(context, selection, selection == null ? null : paths);
+        Cursor songCursor = new RealSongRepository(context).makeSongCursor(selection, selection == null ? null : paths);
 
         return songCursor == null ? null
                 : new SortedCursor(songCursor, paths, MediaStore.Audio.AudioColumns.DATA);
@@ -246,13 +245,9 @@ public final class FileUtil {
                 .equals(android.os.Environment.MEDIA_MOUNTED);
         Boolean isSDSupportedDevice = Environment.isExternalStorageRemovable();
 
-        if (isSDSupportedDevice && isSDPresent) {
-            // yes SD-card is present
-            return true;
-        } else {
-            return false;
-            // Sorry
-        }
+        // yes SD-card is present
+        // Sorry
+        return isSDSupportedDevice && isSDPresent;
     }
 
     public static File safeGetCanonicalFile(File file) {

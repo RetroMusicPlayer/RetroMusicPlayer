@@ -18,8 +18,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import io.github.muntashirakon.music.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import io.github.muntashirakon.music.R
 
 object AppRater {
     private const val DO_NOT_SHOW_AGAIN = "do_not_show_again"// Package Name
@@ -48,13 +48,6 @@ object AppRater {
         if (dateFirstLaunch == 0L) {
             dateFirstLaunch = System.currentTimeMillis()
             editor.putLong(DATE_FIRST_LAUNCH, dateFirstLaunch)
-        }
-
-        // Wait at least n days before opening
-        if (launchCount >= LAUNCHES_UNTIL_PROMPT) {
-            if (System.currentTimeMillis() >= dateFirstLaunch + DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000) {
-                showRateDialog(context, editor)
-            }
         }
 
         editor.commit()

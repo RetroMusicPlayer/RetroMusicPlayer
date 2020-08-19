@@ -47,15 +47,15 @@
         </FrameLayout>
 
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/playerAlbumCoverFragment"
-            android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintHeight_percent="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarContainer" />
+         <fragment
+             android:id="@+id/playerAlbumCoverFragment"
+             android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+             android:layout_width="72dp"
+             android:layout_height="72dp"
+             android:layout_marginStart="16dp"
+             app:layout_constraintHeight_percent="0.5"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/toolbarContainer" />
 
         <LinearLayout
             android:id="@+id/titleContainer"
@@ -114,7 +114,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text"
             tools:text="@tools:sample/lorem/random" />
 
-        <androidx.fragment.app.FragmentContainerView
+        <fragment
             android:id="@+id/playbackControlsFragment"
             android:name="io.github.muntashirakon.music.fragments.player.peak.PeakPlayerControlFragment"
             android:layout_width="match_parent"

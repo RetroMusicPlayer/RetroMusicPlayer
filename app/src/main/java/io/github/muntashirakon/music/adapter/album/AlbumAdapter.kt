@@ -1,16 +1,17 @@
 package io.github.muntashirakon.music.adapter.album
 
-import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import com.bumptech.glide.Glide
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
+import io.github.muntashirakon.music.fragments.albums.AlbumClickListener
 import io.github.muntashirakon.music.glide.AlbumGlideRequest
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
@@ -20,17 +21,16 @@ import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.Album
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
-import io.github.muntashirakon.music.util.NavigationUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 open class AlbumAdapter(
-    protected val activity: AppCompatActivity,
+    protected val activity: FragmentActivity,
     var dataSet: List<Album>,
     protected var itemLayoutRes: Int,
-    cabHolder: CabHolder?
+    cabHolder: CabHolder?,
+    private val albumClickListener: AlbumClickListener?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
     activity,
     cabHolder,
@@ -129,12 +129,12 @@ open class AlbumAdapter(
     }
 
     override fun onMultipleItemAction(
-        menuItem: MenuItem, selection: ArrayList<Album>
+        menuItem: MenuItem, selection: List<Album>
     ) {
         SongsMenuHelper.handleMenuClick(activity, getSongList(selection), menuItem.itemId)
     }
 
-    private fun getSongList(albums: List<Album>): ArrayList<Song> {
+    private fun getSongList(albums: List<Album>): List<Song> {
         val songs = ArrayList<Song>()
         for (album in albums) {
             songs.addAll(album.songs!!)
@@ -156,7 +156,6 @@ open class AlbumAdapter(
                 dataSet[position].year
             )
         }
-
         return MusicUtil.getSectionName(sectionName)
     }
 
@@ -172,16 +171,7 @@ open class AlbumAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                    activity,
-                    imageContainerCard ?: image,
-                    activity.getString(R.string.transition_album_art)
-                )
-                NavigationUtil.goToAlbumOptions(
-                    activity,
-                    dataSet[layoutPosition].id,
-                    activityOptions
-                )
+                image?.let { albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, it) }
             }
         }
 

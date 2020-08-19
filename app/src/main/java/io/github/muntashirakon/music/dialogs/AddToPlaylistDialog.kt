@@ -22,22 +22,22 @@ import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.extraNotNull
 import io.github.muntashirakon.music.extensions.materialDialog
-import io.github.muntashirakon.music.loaders.PlaylistLoader
 import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.repository.PlaylistRepository
 import io.github.muntashirakon.music.util.PlaylistsUtil
+import org.koin.android.ext.android.inject
 
 class AddToPlaylistDialog : DialogFragment() {
-
+    private val playlistRepository by inject<PlaylistRepository>()
     override fun onCreateDialog(
         savedInstanceState: Bundle?
     ): Dialog {
-        val playlists = PlaylistLoader.getAllPlaylists(requireContext())
+        val playlists = playlistRepository.playlists()
         val playlistNames = mutableListOf<String>()
         playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
         for (p in playlists) {
             playlistNames.add(p.name)
         }
-
         return materialDialog(R.string.add_playlist_title)
             .setItems(playlistNames.toTypedArray()) { _, which ->
                 val songs = extraNotNull<ArrayList<Song>>(EXTRA_SONG).value
