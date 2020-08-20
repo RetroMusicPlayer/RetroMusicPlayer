@@ -88,6 +88,8 @@ interface Repository {
 
     suspend fun playlistWithSongs(): List<PlaylistWithSongs>
 
+    suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song>
+
     fun songsFlow(): Flow<Result<List<Song>>>
 
     fun albumsFlow(): Flow<Result<List<Album>>>
@@ -223,6 +225,12 @@ class RealRepository(
     override suspend fun playlistWithSongs(): List<PlaylistWithSongs> =
         roomPlaylistRepository.playlistWithSongs()
 
+    override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs ): List<Song> {
+        return playlistWithSongs.songs.map {
+            songRepository.song(it.songId)
+        }
+    }
+
     override suspend fun suggestionsHome(): Home {
         val songs =
             NotPlayedPlaylist().songs().shuffled().takeIf {
@@ -263,7 +271,7 @@ class RealRepository(
             playlistRepository.favoritePlaylist(context.getString(R.string.favorites)).take(5)
         val songs = if (playlists.isNotEmpty())
             PlaylistSongsLoader.getPlaylistSongList(context, playlists[0])
-        else emptyList<Song>()
+        else emptyList()
 
         return Home(songs, FAVOURITES)
     }

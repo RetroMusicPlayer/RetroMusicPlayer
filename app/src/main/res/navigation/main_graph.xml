@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_playlist_detail">
         <argument
             android:name="extra_playlist"
-            app:argType="code.name.monkey.retromusic.model.Playlist" />
+            app:argType="code.name.monkey.retromusic.db.PlaylistWithSongs" />
     </fragment>
 
     <fragment

@@ -9,7 +9,7 @@ interface PlaylistDao {
     suspend fun checkPlaylistExists(name: String): List<PlaylistEntity>
 
     @Insert
-    suspend fun createPlaylist(playlistEntity: PlaylistEntity)
+    suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
 
     @Query("SELECT * FROM PlaylistEntity")
     suspend fun playlists(): List<PlaylistEntity>
@@ -23,4 +23,7 @@ interface PlaylistDao {
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistName AND song_id = :songId")
     suspend fun checkSongExistsWithPlaylistName(playlistName: String, songId: Int): List<SongEntity>
+
+    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId ORDER BY song_key")
+    suspend fun getSongs(playlistId: Int): List<SongEntity>
 }

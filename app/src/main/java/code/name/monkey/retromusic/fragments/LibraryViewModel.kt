@@ -89,6 +89,8 @@ class LibraryViewModel(
             Albums -> albums.value = loadAlbums.await()
             Artists -> artists.value = loadArtists.await()
             HomeSections -> home.value = loadHome.await()
+            Playlists -> roomPlaylists.value = loadPlaylistsWithSongs.await()
+            Genres -> genres.value = loadGenres.await()
         }
     }
 
@@ -136,5 +138,7 @@ enum class ReloadType {
     Songs,
     Albums,
     Artists,
-    HomeSections
+    HomeSections,
+    Playlists,
+    Genres,
 }

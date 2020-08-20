@@ -151,17 +151,14 @@ class RealSongRepository(private val context: Context) : SongRepository {
         }
         selectionFinal =
             selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
-        try {
-            return context.contentResolver.query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                baseProjection,
-                selectionFinal,
-                selectionValuesFinal,
-                sortOrder
-            )
-        } catch (e: SecurityException) {
-            return null
-        }
+
+        return context.contentResolver.query(
+            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+            baseProjection,
+            selectionFinal,
+            selectionValuesFinal,
+            sortOrder
+        )
     }
 
     private fun generateBlacklistSelection(

@@ -10,7 +10,6 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openAndShuffleQueue
@@ -26,7 +25,6 @@ import code.name.monkey.retromusic.util.AppRater.appLaunched
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -57,11 +55,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         appLaunched(this)
         addMusicServiceEventListener(libraryViewModel)
         updateTabs()
-
-        val playlistRepository = get<RoomPlaylistRepository>()
-        lifecycleScope.launch {
-            println("Size:${playlistRepository.playlistWithSongs()}")
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean =

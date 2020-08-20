@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic
 
 import code.name.monkey.retromusic.db.PlaylistDatabase
+import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.RealRoomPlaylistRepository
 import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.fragments.LibraryViewModel
@@ -10,7 +11,6 @@ import code.name.monkey.retromusic.fragments.genres.GenreDetailsViewModel
 import code.name.monkey.retromusic.fragments.playlists.PlaylistDetailsViewModel
 import code.name.monkey.retromusic.fragments.search.SearchViewModel
 import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.network.networkModule
 import code.name.monkey.retromusic.repository.*
 import org.koin.android.ext.koin.androidContext
@@ -100,7 +100,7 @@ private val viewModules = module {
         )
     }
 
-    viewModel { (playlist: Playlist) ->
+    viewModel { (playlist: PlaylistWithSongs) ->
         PlaylistDetailsViewModel(
             get(),
             playlist

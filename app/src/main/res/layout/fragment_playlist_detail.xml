@@ -70,4 +70,12 @@
             android:textColor="?android:attr/textColorSecondary"
             tools:visibility="visible" />
     </LinearLayout>
+
+    <com.google.android.material.progressindicator.ProgressIndicator
+        android:layout_width="100dp"
+        android:id="@+id/progressIndicator"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:gravity="center" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

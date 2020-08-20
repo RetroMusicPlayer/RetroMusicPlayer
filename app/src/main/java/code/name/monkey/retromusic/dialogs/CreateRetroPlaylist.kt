@@ -11,13 +11,18 @@ import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.fragments.LibraryViewModel
+import code.name.monkey.retromusic.fragments.ReloadType
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_playlist.view.*
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CreateRetroPlaylist : DialogFragment() {
+    private val playlistRepository by inject<RoomPlaylistRepository>()
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_playlist, null)
         val playlistView: TextInputEditText = view.actionNewPlaylist
@@ -29,13 +34,16 @@ class CreateRetroPlaylist : DialogFragment() {
             ) { _, _ ->
                 val playlistName = playlistView.text.toString()
                 if (!TextUtils.isEmpty(playlistName)) {
-                    val playlistRepository: RoomPlaylistRepository = get()
                     lifecycleScope.launch {
                         if (playlistRepository.checkPlaylistExists(playlistName).isEmpty()) {
-                            playlistRepository.createPlaylist(PlaylistEntity(playlistName))
+                            val id: Long =
+                                playlistRepository.createPlaylist(PlaylistEntity(playlistName))
+                            println(id)
+                            libraryViewModel.forceReload(ReloadType.Playlists)
                         } else {
                             println("Playlist exists")
                         }
+
                     }
                 } else {
                     playlistContainer.error = "Playlist is can't be empty"
