@@ -21,7 +21,7 @@ interface PlaylistDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSongs(songEntities: List<SongEntity>)
 
-    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistName AND song_id = :songId")
+    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistName AND id = :songId")
     suspend fun checkSongExistsWithPlaylistName(playlistName: String, songId: Int): List<SongEntity>
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId ORDER BY song_key")

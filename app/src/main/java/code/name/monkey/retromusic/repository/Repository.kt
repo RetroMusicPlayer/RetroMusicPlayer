@@ -227,7 +227,7 @@ class RealRepository(
 
     override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs ): List<Song> {
         return playlistWithSongs.songs.map {
-            songRepository.song(it.songId)
+           it.toSong()
         }
     }
 

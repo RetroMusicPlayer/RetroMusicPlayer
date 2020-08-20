@@ -53,9 +53,7 @@ class AddToRetroPlaylist : DialogFragment() {
 }
 
 private fun List<Song>.withPlaylistIds(playlistEntity: PlaylistEntity): List<SongEntity> {
-    val songEntities = map {
-        SongEntity(it.id, playlistEntity.playListId)
+    return map {
+        it.toSongEntity(playlistEntity.playListId)
     }
-    println(songEntities.size)
-    return songEntities
 }
