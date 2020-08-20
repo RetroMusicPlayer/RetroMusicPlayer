@@ -14,9 +14,15 @@ interface RoomPlaylistRepository {
     suspend fun playlistWithSongs(): List<PlaylistWithSongs>
     suspend fun insertSongs(songs: List<SongEntity>)
     suspend fun getSongs(playlistEntity: PlaylistEntity): List<SongEntity>
+    suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>)
+    suspend fun renamePlaylistEntity(playlistId: Int, name: String)
+    suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
+    suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
 }
 
-class RealRoomPlaylistRepository(private val playlistDao: PlaylistDao) : RoomPlaylistRepository {
+class RealRoomPlaylistRepository(
+    private val playlistDao: PlaylistDao
+) : RoomPlaylistRepository {
     @WorkerThread
     override suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
         playlistDao.createPlaylist(playlistEntity)
@@ -46,4 +52,20 @@ class RealRoomPlaylistRepository(private val playlistDao: PlaylistDao) : RoomPla
     override suspend fun getSongs(playlistEntity: PlaylistEntity): List<SongEntity> {
         return playlistDao.getSongs(playlistEntity.playListId)
     }
+
+    override suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>) =
+        playlistDao.deletePlaylistEntities(playlistEntities)
+
+    override suspend fun renamePlaylistEntity(playlistId: Int, name: String) =
+        playlistDao.renamePlaylistEntity(playlistId, name)
+
+    override suspend fun removeSongsFromPlaylist(songs: List<SongEntity>) =
+        playlistDao.removeSongsFromPlaylist(songs)
+
+    override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) {
+        playlists.forEach {
+            playlistDao.deleteSongsFromPlaylist(it.playListId)
+        }
+    }
+
 }

@@ -4,15 +4,20 @@ import androidx.room.*
 
 @Dao
 interface PlaylistDao {
+    @Insert
+    suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
+
+    @Query("UPDATE PlaylistEntity SET playlist_name = :name WHERE playlist_id = :playlistId")
+    suspend fun renamePlaylistEntity(playlistId: Int, name: String)
 
     @Query("SELECT * FROM PlaylistEntity WHERE playlist_name = :name")
     suspend fun checkPlaylistExists(name: String): List<PlaylistEntity>
 
-    @Insert
-    suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
-
     @Query("SELECT * FROM PlaylistEntity")
     suspend fun playlists(): List<PlaylistEntity>
+
+    @Query("DELETE FROM SongEntity WHERE playlist_creator_id = :playlistId")
+    suspend fun deleteSongsFromPlaylist(playlistId: Int)
 
     @Transaction
     @Query("SELECT * FROM PlaylistEntity")
@@ -24,9 +29,16 @@ interface PlaylistDao {
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistName AND id = :songId")
     suspend fun checkSongExistsWithPlaylistName(playlistName: String, songId: Int): List<SongEntity>
 
-    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId ORDER BY title")
+    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId")
     suspend fun getSongs(playlistId: Int): List<SongEntity>
 
     @Delete
-    suspend fun deletePlaylistEntity(playlistWithSongs: PlaylistWithSongs)
+    suspend fun deletePlaylistEntity(playlistEntity: PlaylistEntity)
+
+    @Delete
+    suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>)
+
+    @Delete
+    suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
+
 }

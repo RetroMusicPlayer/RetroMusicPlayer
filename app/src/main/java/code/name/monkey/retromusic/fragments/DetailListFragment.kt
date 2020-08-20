@@ -34,6 +34,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         super.onActivityCreated(savedInstanceState)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.hideBottomBarVisibility(false)
+        progressIndicator.hide()
         when (args.type) {
             TOP_ARTISTS -> {
                 loadArtists(R.string.top_artists, TOP_ARTISTS)

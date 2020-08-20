@@ -33,7 +33,7 @@ class LibraryViewModel(
     val songsLiveData: LiveData<List<Song>> = songs
     val artistsLiveData: LiveData<List<Artist>> = artists
     val playlisitsLiveData: LiveData<List<Playlist>> = playlists
-    val roomPlaylisitsLiveData: LiveData<List<PlaylistWithSongs>> = roomPlaylists
+    val roomPlaylistsLiveData: LiveData<List<PlaylistWithSongs>> = roomPlaylists
     val genresLiveData: LiveData<List<Genre>> = genres
 
     init {
@@ -43,13 +43,13 @@ class LibraryViewModel(
     }
 
     private fun loadLibraryContent() = viewModelScope.launch {
+        home.value = loadHome.await()
         songs.value = loadSongs.await()
         albums.value = loadAlbums.await()
         artists.value = loadArtists.await()
         playlists.value = loadPlaylists.await()
         roomPlaylists.value = loadPlaylistsWithSongs.await()
         //genres.value = loadGenres.await()
-        home.value = loadHome.await()
     }
 
     private val loadHome: Deferred<List<Home>>
@@ -84,6 +84,7 @@ class LibraryViewModel(
 
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
+        println(reloadType)
         when (reloadType) {
             Songs -> songs.value = loadSongs.await()
             Albums -> albums.value = loadAlbums.await()

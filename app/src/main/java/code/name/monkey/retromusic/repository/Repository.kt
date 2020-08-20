@@ -16,7 +16,9 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService
@@ -28,6 +30,17 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 
 interface Repository {
+
+    fun songsFlow(): Flow<Result<List<Song>>>
+
+    fun albumsFlow(): Flow<Result<List<Album>>>
+
+    fun artistsFlow(): Flow<Result<List<Artist>>>
+
+    fun playlistsFlow(): Flow<Result<List<Playlist>>>
+
+    fun genresFlow(): Flow<Result<List<Genre>>>
+
 
     suspend fun allAlbums(): List<Album>
 
@@ -89,16 +102,21 @@ interface Repository {
 
     suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song>
 
-    fun songsFlow(): Flow<Result<List<Song>>>
+    suspend fun insertSongs(songs: List<SongEntity>)
 
-    fun albumsFlow(): Flow<Result<List<Album>>>
+    suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity>
 
-    fun artistsFlow(): Flow<Result<List<Artist>>>
+    suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
 
-    fun playlistsFlow(): Flow<Result<List<Playlist>>>
+    suspend fun roomPlaylists(): List<PlaylistEntity>
 
-    fun genresFlow(): Flow<Result<List<Genre>>>
+    suspend fun deleteRoomPlaylist(playlists: List<PlaylistEntity>)
 
+    suspend fun renameRoomPlaylist(playlistId: Int, name: String)
+
+    suspend fun removeSongFromPlaylist(songs: List<SongEntity>)
+
+    suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
 }
 
 class RealRepository(
@@ -206,7 +224,6 @@ class RealRepository(
         )
         for (section in sections) {
             if (section.arrayList.isNotEmpty()) {
-                println("${section.homeSection} -> ${section.arrayList.size}")
                 homeSections.add(section)
             }
         }
@@ -224,11 +241,34 @@ class RealRepository(
     override suspend fun playlistWithSongs(): List<PlaylistWithSongs> =
         roomPlaylistRepository.playlistWithSongs()
 
-    override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs ): List<Song> {
+    override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song> {
         return playlistWithSongs.songs.map {
-           it.toSong()
+            it.toSong()
         }
     }
+
+    override suspend fun insertSongs(songs: List<SongEntity>) =
+        roomPlaylistRepository.insertSongs(songs)
+
+    override suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity> =
+        roomPlaylistRepository.checkPlaylistExists(playlistName)
+
+    override suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
+        roomPlaylistRepository.createPlaylist(playlistEntity)
+
+    override suspend fun roomPlaylists(): List<PlaylistEntity> = roomPlaylistRepository.playlists()
+
+    override suspend fun deleteRoomPlaylist(playlists: List<PlaylistEntity>) =
+        roomPlaylistRepository.deletePlaylistEntities(playlists)
+
+    override suspend fun renameRoomPlaylist(playlistId: Int, name: String) =
+        roomPlaylistRepository.renamePlaylistEntity(playlistId, name)
+
+    override suspend fun removeSongFromPlaylist(songs: List<SongEntity>) =
+        roomPlaylistRepository.removeSongsFromPlaylist(songs)
+
+    override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) =
+        roomPlaylistRepository.deleteSongsFromPlaylist(playlists)
 
     override suspend fun suggestionsHome(): Home {
         val songs =

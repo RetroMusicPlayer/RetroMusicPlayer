@@ -15,6 +15,7 @@ import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
@@ -61,25 +62,28 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         } else {*/
         recyclerViewDragDropManager = RecyclerViewDragDropManager()
         val animator = RefactoredDefaultItemAnimator()
-        adapter = OrderablePlaylistSongAdapter(requireActivity(),
-            ArrayList(),
-            R.layout.item_list,
-            null,
-            object : OrderablePlaylistSongAdapter.OnMoveItemListener {
-                override fun onMoveItem(fromPosition: Int, toPosition: Int) {
-                    if (PlaylistsUtil.moveItem(
-                            requireContext(),
-                            playlist.playlistEntity.playListId,
-                            fromPosition,
-                            toPosition
-                        )
-                    ) {
-                        val song = adapter.dataSet.removeAt(fromPosition)
-                        adapter.dataSet.add(toPosition, song)
-                        adapter.notifyItemMoved(fromPosition, toPosition)
+        adapter =
+            OrderablePlaylistSongAdapter(
+                playlist.playlistEntity.playListId,
+                requireActivity(),
+                ArrayList(),
+                R.layout.item_list,
+                null,
+                object : OrderablePlaylistSongAdapter.OnMoveItemListener {
+                    override fun onMoveItem(fromPosition: Int, toPosition: Int) {
+                        if (PlaylistsUtil.moveItem(
+                                requireContext(),
+                                playlist.playlistEntity.playListId,
+                                fromPosition,
+                                toPosition
+                            )
+                        ) {
+                            val song = adapter.dataSet.removeAt(fromPosition)
+                            adapter.dataSet.add(toPosition, song)
+                            adapter.notifyItemMoved(fromPosition, toPosition)
+                        }
                     }
-                }
-            })
+                })
         wrappedAdapter = recyclerViewDragDropManager!!.createWrappedAdapter(adapter)
 
         recyclerView.adapter = wrappedAdapter
@@ -104,7 +108,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-          return true//PlaylistMenuHelper.handleMenuClick(requireActivity(), playlist, item)
+        return PlaylistMenuHelper.handleMenuClick(requireActivity(), playlist, item)
     }
 
     private fun checkForPadding() {

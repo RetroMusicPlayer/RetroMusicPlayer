@@ -24,6 +24,7 @@ import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Playlist
@@ -44,7 +45,6 @@ class PlaylistAdapter(
     cabHolder,
     R.menu.menu_playlists_selection
 ) {
-
 
     init {
         setHasStableIds(true)
@@ -130,14 +130,14 @@ class PlaylistAdapter(
 
     private fun getSongList(playlists: List<PlaylistWithSongs>): List<Song> {
         val songs = ArrayList<Song>()
-       /* for (playlist in playlists) {
-           songs.addAll(playlist.songs)
-            if (playlist is AbsCustomPlaylist) {
-                songs.addAll(playlist.songs())
-            } else {
-                songs.addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id))
-            }
-        }*/
+        /* for (playlist in playlists) {
+            songs.addAll(playlist.songs)
+             if (playlist is AbsCustomPlaylist) {
+                 songs.addAll(playlist.songs())
+             } else {
+                 songs.addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id))
+             }
+         }*/
         return songs
     }
 
@@ -165,7 +165,7 @@ class PlaylistAdapter(
                 val popupMenu = PopupMenu(activity, view)
                 popupMenu.inflate(R.menu.menu_item_playlist)
                 popupMenu.setOnMenuItemClickListener { item ->
-                    return@setOnMenuItemClickListener true  //PlaylistMenuHelper.handleMenuClick(activity, dataSet[layoutPosition], item)
+                    PlaylistMenuHelper.handleMenuClick(activity, dataSet[layoutPosition], item)
                 }
                 popupMenu.show()
             }
@@ -219,7 +219,5 @@ class PlaylistAdapter(
 
     companion object {
         val TAG: String = PlaylistAdapter::class.java.simpleName
-        private const val SMART_PLAYLIST = 0
-        private const val DEFAULT_PLAYLIST = 1
     }
 }

@@ -55,3 +55,9 @@ class SongEntity(
         )
     }
 }
+
+fun List<SongEntity>.toSongs(): List<Song> {
+    return map {
+        it.toSong()
+    }
+}

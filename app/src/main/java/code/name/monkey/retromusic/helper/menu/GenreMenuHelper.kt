@@ -17,12 +17,18 @@ package code.name.monkey.retromusic.helper.menu
 import android.view.MenuItem
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
+import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.GenreRepository
+import code.name.monkey.retromusic.repository.RealRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.core.KoinComponent
+import org.koin.core.get
 import org.koin.core.inject
 
 object GenreMenuHelper : KoinComponent {
@@ -38,8 +44,13 @@ object GenreMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(getGenreSongs(genre))
-                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                CoroutineScope(Dispatchers.IO).launch {
+                    val playlists = get<RealRepository>().roomPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToRetroPlaylist.create(playlists, getGenreSongs(genre))
+                            .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_add_to_current_playing -> {

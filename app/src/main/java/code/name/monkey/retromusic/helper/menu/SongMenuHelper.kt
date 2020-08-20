@@ -26,16 +26,23 @@ import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
-import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
+import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.dialogs.SongDetailDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RingtoneManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.core.KoinComponent
+import org.koin.core.get
 
-object SongMenuHelper {
+object SongMenuHelper : KoinComponent {
     const val MENU_RES = R.menu.menu_item_song
 
     fun handleMenuClick(activity: FragmentActivity, song: Song, menuItemId: Int): Boolean {
@@ -63,8 +70,13 @@ object SongMenuHelper {
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(song)
-                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                CoroutineScope(Dispatchers.IO).launch {
+                    val playlists = get<RealRepository>().roomPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToRetroPlaylist.create(playlists, song)
+                            .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_play_next -> {

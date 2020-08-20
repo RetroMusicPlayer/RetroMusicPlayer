@@ -10,6 +10,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -19,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
-import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
+import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.showToast
@@ -30,6 +31,7 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.model.LastFmArtist
+import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.CustomArtistImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
@@ -37,6 +39,10 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_artist_content.*
 import kotlinx.android.synthetic.main.fragment_artist_details.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
@@ -216,7 +222,13 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(songs).show(childFragmentManager, "ADD_PLAYLIST")
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val playlists = get<RealRepository>().roomPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToRetroPlaylist.create(playlists, songs)
+                            .show(childFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_set_artist_image -> {

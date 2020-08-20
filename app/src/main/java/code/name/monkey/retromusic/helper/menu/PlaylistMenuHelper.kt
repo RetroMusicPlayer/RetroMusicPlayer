@@ -22,53 +22,67 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.dialogs.DeletePlaylistDialog
-import code.name.monkey.retromusic.dialogs.RenamePlaylistDialog
+import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.toSongs
+import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
+import code.name.monkey.retromusic.dialogs.DeleteRetroPlaylist
+import code.name.monkey.retromusic.dialogs.RenameRetroPlaylistDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.misc.WeakContextAsyncTask
 import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.PlaylistsUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.core.KoinComponent
+import org.koin.core.get
 
 
-object PlaylistMenuHelper {
+object PlaylistMenuHelper : KoinComponent {
 
     fun handleMenuClick(
         activity: FragmentActivity,
-        playlist: Playlist, item: MenuItem
+        playlistWithSongs: PlaylistWithSongs, item: MenuItem
     ): Boolean {
         when (item.itemId) {
             R.id.action_play -> {
-                MusicPlayerRemote.openQueue(getPlaylistSongs(activity, playlist), 9, true)
+                MusicPlayerRemote.openQueue(playlistWithSongs.songs.toSongs(), 0, true)
                 return true
             }
             R.id.action_play_next -> {
-                MusicPlayerRemote.playNext(getPlaylistSongs(activity, playlist))
+                MusicPlayerRemote.playNext(playlistWithSongs.songs.toSongs())
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(getPlaylistSongs(activity, playlist))
-                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                CoroutineScope(Dispatchers.IO).launch {
+                    val playlists = get<RealRepository>().roomPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToRetroPlaylist.create(playlists, playlistWithSongs.songs.toSongs())
+                            .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_add_to_current_playing -> {
-                MusicPlayerRemote.enqueue(getPlaylistSongs(activity, playlist))
+                MusicPlayerRemote.enqueue(playlistWithSongs.songs.toSongs())
                 return true
             }
             R.id.action_rename_playlist -> {
-                RenamePlaylistDialog.create(playlist.id.toLong())
+                RenameRetroPlaylistDialog.create(playlistWithSongs.playlistEntity )
                     .show(activity.supportFragmentManager, "RENAME_PLAYLIST")
                 return true
             }
             R.id.action_delete_playlist -> {
-                DeletePlaylistDialog.create(playlist)
+                DeleteRetroPlaylist.create(playlistWithSongs.playlistEntity)
                     .show(activity.supportFragmentManager, "DELETE_PLAYLIST")
                 return true
             }
             R.id.action_save_playlist -> {
-                SavePlaylistAsyncTask(activity).execute(playlist)
+                //SavePlaylistAsyncTask(activity).execute(playlistWithSongs.songs.toSongs())
                 return true
             }
         }

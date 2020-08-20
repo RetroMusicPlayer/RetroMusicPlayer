@@ -4,20 +4,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.repository.RoomPlaylistRepository
-import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
+import code.name.monkey.retromusic.dialogs.CreateRetroPlaylist
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_library.*
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.get
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
@@ -34,12 +29,29 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
                 navOptions
             )
         }
+        addPlaylist.setOnClickListener {
+            CreateRetroPlaylist().show(childFragmentManager, "ShowCreatePlaylistDialog")
+        }
         setupNavigationController()
     }
 
     private fun setupNavigationController() {
         val navController = findNavController(R.id.fragment_container)
         NavigationUI.setupWithNavController(mainActivity.getBottomNavigationView(), navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id in arrayOf(
+                    R.id.action_album,
+                    R.id.action_artist,
+                    R.id.action_home,
+                    R.id.action_song,
+                    R.id.action_genre
+                )
+            ) {
+                addPlaylist.hide()
+            } else {
+                addPlaylist.show()
+            }
+        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -60,32 +72,12 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_settings ->
-                //CreateRetroPlaylist().show(childFragmentManager, "Dialog")
-            lifecycleScope.launch {
-                    val playlistRepository = get<RoomPlaylistRepository>()
-                    AddToRetroPlaylist.getInstance(playlistRepository.playlists())
-                        .show(childFragmentManager, "PlaylistDialog")
-                }
-
-            /*findNavController().navigate(
-           R.id.settingsActivity,
-           null,
-           navOptions
-       )*/
+            R.id.action_settings -> findNavController().navigate(
+                R.id.settingsActivity,
+                null,
+                navOptions
+            )
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun addOnAppBarOffsetChangedListener(changedListener: AppBarLayout.OnOffsetChangedListener) {
-        appBarLayout.addOnOffsetChangedListener(changedListener)
-    }
-
-    fun removeOnAppBarOffsetChangedListener(changedListener: AppBarLayout.OnOffsetChangedListener) {
-        appBarLayout.removeOnOffsetChangedListener(changedListener)
-    }
-
-    fun getTotalAppBarScrollingRange(): Int {
-        return 0
     }
 }

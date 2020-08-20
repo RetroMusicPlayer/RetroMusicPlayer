@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
@@ -29,8 +30,13 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
+import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.*
 import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.FileNotFoundException
 
@@ -64,7 +70,13 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(song).show(childFragmentManager, "ADD_PLAYLIST")
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val playlists = get<RealRepository>().roomPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToRetroPlaylist.create(playlists, song)
+                            .show(childFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_clear_playing_queue -> {
