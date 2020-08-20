@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 class SongEntity(
     @ColumnInfo(name = "song_id")
     val songId: Int,
-    @ColumnInfo(name = "playlist_creator_name")
-    val playlistCreatorName: String
+    @ColumnInfo(name = "playlist_creator_id")
+    val playlistCreatorId: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "song_key")

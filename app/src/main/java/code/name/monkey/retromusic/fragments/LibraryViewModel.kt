@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
@@ -22,6 +23,7 @@ class LibraryViewModel(
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
     private val playlists = MutableLiveData<List<Playlist>>()
+    private val roomPlaylists = MutableLiveData<List<PlaylistWithSongs>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val home = MutableLiveData<List<Home>>()
 
@@ -31,6 +33,7 @@ class LibraryViewModel(
     val songsLiveData: LiveData<List<Song>> = songs
     val artistsLiveData: LiveData<List<Artist>> = artists
     val playlisitsLiveData: LiveData<List<Playlist>> = playlists
+    val roomPlaylisitsLiveData: LiveData<List<PlaylistWithSongs>> = roomPlaylists
     val genresLiveData: LiveData<List<Genre>> = genres
 
     init {
@@ -44,7 +47,8 @@ class LibraryViewModel(
         albums.value = loadAlbums.await()
         artists.value = loadArtists.await()
         playlists.value = loadPlaylists.await()
-        genres.value = loadGenres.await()
+        roomPlaylists.value = loadPlaylistsWithSongs.await()
+        //genres.value = loadGenres.await()
         home.value = loadHome.await()
     }
 
@@ -68,6 +72,10 @@ class LibraryViewModel(
         get() = viewModelScope.async(IO) {
             realRepository.allPlaylists()
         }
+    private val loadPlaylistsWithSongs: Deferred<List<PlaylistWithSongs>>
+        get() = viewModelScope.async(IO) {
+            realRepository.playlistWithSongs()
+        }
 
     private val loadGenres: Deferred<List<Genre>>
         get() = viewModelScope.async(IO) {
@@ -80,7 +88,7 @@ class LibraryViewModel(
             Songs -> songs.value = loadSongs.await()
             Albums -> albums.value = loadAlbums.await()
             Artists -> artists.value = loadArtists.await()
-            HomeSections -> songs.value = loadSongs.await()
+            HomeSections -> home.value = loadHome.await()
         }
     }
 

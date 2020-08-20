@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.PlaylistDatabase
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.materialDialog
 import com.google.android.material.textfield.TextInputEditText
@@ -29,9 +29,13 @@ class CreateRetroPlaylist : DialogFragment() {
             ) { _, _ ->
                 val playlistName = playlistView.text.toString()
                 if (!TextUtils.isEmpty(playlistName)) {
-                    val database: PlaylistDatabase = get()
+                    val playlistRepository: RoomPlaylistRepository = get()
                     lifecycleScope.launch {
-                        database.playlistDao().createPlaylist(PlaylistEntity(playlistName))
+                        if (playlistRepository.checkPlaylistExists(playlistName).isEmpty()) {
+                            playlistRepository.createPlaylist(PlaylistEntity(playlistName))
+                        } else {
+                            println("Playlist exists")
+                        }
                     }
                 } else {
                     playlistContainer.error = "Playlist is can't be empty"

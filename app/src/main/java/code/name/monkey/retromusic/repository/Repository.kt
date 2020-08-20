@@ -16,6 +16,8 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService
@@ -82,6 +84,10 @@ interface Repository {
 
     suspend fun homeSectionsFlow(): Flow<Result<List<Home>>>
 
+    suspend fun playlist(playlistId: Int): Playlist
+
+    suspend fun playlistWithSongs(): List<PlaylistWithSongs>
+
     fun songsFlow(): Flow<Result<List<Song>>>
 
     fun albumsFlow(): Flow<Result<List<Album>>>
@@ -92,7 +98,6 @@ interface Repository {
 
     fun genresFlow(): Flow<Result<List<Genre>>>
 
-    suspend fun playlist(playlistId: Int): Playlist
 }
 
 class RealRepository(
@@ -105,7 +110,8 @@ class RealRepository(
     private val lastAddedRepository: LastAddedRepository,
     private val playlistRepository: PlaylistRepository,
     private val searchRepository: RealSearchRepository,
-    private val playedTracksRepository: TopPlayedRepository
+    private val playedTracksRepository: TopPlayedRepository,
+    private val roomPlaylistRepository: RoomPlaylistRepository
 ) : Repository {
 
     override suspend fun allAlbums(): List<Album> = albumRepository.albums()
@@ -213,6 +219,9 @@ class RealRepository(
 
     override suspend fun playlist(playlistId: Int) =
         playlistRepository.playlist(playlistId)
+
+    override suspend fun playlistWithSongs(): List<PlaylistWithSongs> =
+        roomPlaylistRepository.playlistWithSongs()
 
     override suspend fun suggestionsHome(): Home {
         val songs =

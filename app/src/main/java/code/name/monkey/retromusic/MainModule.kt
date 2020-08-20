@@ -1,6 +1,8 @@
 package code.name.monkey.retromusic
 
 import code.name.monkey.retromusic.db.PlaylistDatabase
+import code.name.monkey.retromusic.db.RealRoomPlaylistRepository
+import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.albums.AlbumDetailsViewModel
 import code.name.monkey.retromusic.fragments.artists.ArtistDetailsViewModel
@@ -16,9 +18,15 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
+private val mainModule = module {
+    single {
+        androidContext().contentResolver
+    }
+
+}
 private val dataModule = module {
     single {
-        RealRepository(get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
+        RealRepository(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
     } bind Repository::class
 
     single {
@@ -64,12 +72,12 @@ private val dataModule = module {
     }
 
     single {
-        androidContext().contentResolver
+        PlaylistDatabase.getDatabase(get()).playlistDao()
     }
 
     single {
-        PlaylistDatabase.getDatabase(get())
-    }
+        RealRoomPlaylistRepository(get())
+    } bind RoomPlaylistRepository::class
 }
 
 private val viewModules = module {
@@ -111,4 +119,4 @@ private val viewModules = module {
     }
 }
 
-val appModules = listOf(dataModule, viewModules, networkModule)
+val appModules = listOf(mainModule, dataModule, viewModules, networkModule)

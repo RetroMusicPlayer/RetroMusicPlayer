@@ -10,7 +10,7 @@ import androidx.navigation.ui.NavigationUI
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.PlaylistDatabase
+import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
@@ -63,8 +63,8 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
             R.id.action_settings ->
                 //CreateRetroPlaylist().show(childFragmentManager, "Dialog")
             lifecycleScope.launch {
-                    val database = get<PlaylistDatabase>()
-                    AddToRetroPlaylist.getInstance(database.playlistDao().playlists())
+                    val playlistRepository = get<RoomPlaylistRepository>()
+                    AddToRetroPlaylist.getInstance(playlistRepository.playlists())
                         .show(childFragmentManager, "PlaylistDialog")
                 }
 

@@ -19,7 +19,7 @@ class PlaylistsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.playlisitsLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.roomPlaylisitsLiveData.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
@@ -42,6 +42,7 @@ class PlaylistsFragment :
             null
         )
     }
+
 
     companion object {
         fun newInstance(): PlaylistsFragment {

@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.removeFromQueue
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Playlist
@@ -187,6 +188,13 @@ object MusicUtil : KoinComponent {
             getSongCountString(context, songs.size),
             getReadableDurationString(duration)
         )
+    }
+
+    fun playlistInfoString(
+        context: Context,
+        songs: List<SongEntity>
+    ): String {
+        return getSongCountString(context, songs.size)
     }
 
     fun getReadableDurationString(songDurationMillis: Long): String? {

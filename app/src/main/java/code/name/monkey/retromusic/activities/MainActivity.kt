@@ -10,7 +10,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.db.PlaylistDatabase
+import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openAndShuffleQueue
@@ -58,11 +58,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         addMusicServiceEventListener(libraryViewModel)
         updateTabs()
 
-        val database: PlaylistDatabase = get()
+        val playlistRepository = get<RoomPlaylistRepository>()
         lifecycleScope.launch {
-            println("Size:${database.playlistDao().playlistsWithSong()}")
+            println("Size:${playlistRepository.playlistWithSongs()}")
         }
-
     }
 
     override fun onSupportNavigateUp(): Boolean =

@@ -6,8 +6,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.PlaylistDatabase
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
@@ -37,15 +37,13 @@ class AddToRetroPlaylist : DialogFragment() {
         return materialDialog(R.string.add_playlist_title)
             .setItems(playlistNames.toTypedArray()) { _, which ->
                 val songs = RealSongRepository(requireContext()).songs()
-                println(songs.size)
                 if (which == 0) {
                     CreateRetroPlaylist().show(requireActivity().supportFragmentManager, "Dialog")
                 } else {
                     lifecycleScope.launch(Dispatchers.IO) {
-                        println(Thread.currentThread().name)
-                        val database: PlaylistDatabase = get()
+                        val playlistRepository = get<RoomPlaylistRepository>()
                         val songEntities = songs.withPlaylistIds(playlistEntities[which - 1])
-                        database.playlistDao().insertSongs(songEntities)
+                        playlistRepository.insertSongs(songEntities)
                     }
                 }
                 dismiss()
@@ -56,7 +54,7 @@ class AddToRetroPlaylist : DialogFragment() {
 
 private fun List<Song>.withPlaylistIds(playlistEntity: PlaylistEntity): List<SongEntity> {
     val songEntities = map {
-        SongEntity(it.id, playlistEntity.playlistName)
+        SongEntity(it.id, playlistEntity.playListId)
     }
     println(songEntities.size)
     return songEntities
