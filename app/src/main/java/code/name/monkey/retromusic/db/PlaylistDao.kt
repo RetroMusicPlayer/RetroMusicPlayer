@@ -24,6 +24,9 @@ interface PlaylistDao {
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistName AND id = :songId")
     suspend fun checkSongExistsWithPlaylistName(playlistName: String, songId: Int): List<SongEntity>
 
-    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId ORDER BY song_key")
+    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId ORDER BY title")
     suspend fun getSongs(playlistId: Int): List<SongEntity>
+
+    @Delete
+    suspend fun deletePlaylistEntity(playlistWithSongs: PlaylistWithSongs)
 }

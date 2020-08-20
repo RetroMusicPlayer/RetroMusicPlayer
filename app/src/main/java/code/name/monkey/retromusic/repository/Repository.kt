@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.repository
 import android.content.Context
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.db.RoomPlaylistRepository
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService

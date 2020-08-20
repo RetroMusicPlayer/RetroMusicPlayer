@@ -10,7 +10,7 @@ import androidx.navigation.ui.NavigationUI
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.RoomPlaylistRepository
+import code.name.monkey.retromusic.repository.RoomPlaylistRepository
 import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment

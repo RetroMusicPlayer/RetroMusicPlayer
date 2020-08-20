@@ -1,6 +1,10 @@
-package code.name.monkey.retromusic.db
+package code.name.monkey.retromusic.repository
 
 import androidx.annotation.WorkerThread
+import code.name.monkey.retromusic.db.PlaylistDao
+import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.SongEntity
 
 
 interface RoomPlaylistRepository {

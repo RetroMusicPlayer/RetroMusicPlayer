@@ -2,8 +2,8 @@ package code.name.monkey.retromusic
 
 import code.name.monkey.retromusic.db.PlaylistDatabase
 import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.db.RealRoomPlaylistRepository
-import code.name.monkey.retromusic.db.RoomPlaylistRepository
+import code.name.monkey.retromusic.repository.RealRoomPlaylistRepository
+import code.name.monkey.retromusic.repository.RoomPlaylistRepository
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.albums.AlbumDetailsViewModel
 import code.name.monkey.retromusic.fragments.artists.ArtistDetailsViewModel

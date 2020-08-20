@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.RoomPlaylistRepository
+import code.name.monkey.retromusic.repository.RoomPlaylistRepository
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
