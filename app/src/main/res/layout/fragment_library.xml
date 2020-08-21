@@ -47,11 +47,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:id="@+id/addPlaylist"
         android:src="@drawable/ic_playlist_add"
-        app:useCompatPadding="true" />
+        app:useCompatPadding="true"
+        app:layout_anchor="@id/fragment_container"
+        app:layout_anchorGravity="end|bottom"
+        android:contentDescription="@string/add_playlist_title" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextViewNormal" parent="">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewHeadline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewCaption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewHeadline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewHeadline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewHeadline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewSubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewSubtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewBody1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewButton" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewBody2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="TextViewOverline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+</resources>
