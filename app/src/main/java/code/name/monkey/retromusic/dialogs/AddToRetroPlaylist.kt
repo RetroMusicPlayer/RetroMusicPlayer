@@ -45,6 +45,7 @@ class AddToRetroPlaylist : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val playlistEntities = extraNotNull<List<PlaylistEntity>>(EXTRA_PLAYLISTS).value
+        val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
         val playlistNames = mutableListOf<String>()
         playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
         for (p in playlistEntities) {
@@ -52,12 +53,11 @@ class AddToRetroPlaylist : DialogFragment() {
         }
         return materialDialog(R.string.add_playlist_title)
             .setItems(playlistNames.toTypedArray()) { _, which ->
-                val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
                 if (which == 0) {
                     CreateRetroPlaylist().show(requireActivity().supportFragmentManager, "Dialog")
                 } else {
                     lifecycleScope.launch(Dispatchers.IO) {
-                        val songEntities = songs.withPlaylistIds(playlistEntities[which - 1])
+                        val songEntities = songs.toSongEntity(playlistEntities[which - 1])
                         repository.insertSongs(songEntities)
                         libraryViewModel.forceReload(ReloadType.Playlists)
                     }
@@ -68,7 +68,7 @@ class AddToRetroPlaylist : DialogFragment() {
     }
 }
 
-private fun List<Song>.withPlaylistIds(playlistEntity: PlaylistEntity): List<SongEntity> {
+private fun List<Song>.toSongEntity(playlistEntity: PlaylistEntity): List<SongEntity> {
     return map {
         it.toSongEntity(playlistEntity.playListId)
     }
