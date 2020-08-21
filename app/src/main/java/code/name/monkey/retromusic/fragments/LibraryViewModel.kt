@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.fragments.ReloadType.*
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
@@ -15,7 +16,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class LibraryViewModel(
-    private val realRepository: RealRepository
+    private val repository: RealRepository
 ) : ViewModel(), MusicServiceEventListener {
 
     private val paletteColor = MutableLiveData<Int>()
@@ -53,33 +54,33 @@ class LibraryViewModel(
     }
 
     private val loadHome: Deferred<List<Home>>
-        get() = viewModelScope.async { realRepository.homeSections() }
+        get() = viewModelScope.async { repository.homeSections() }
 
     private val loadSongs: Deferred<List<Song>>
-        get() = viewModelScope.async(IO) { realRepository.allSongs() }
+        get() = viewModelScope.async(IO) { repository.allSongs() }
 
     private val loadAlbums: Deferred<List<Album>>
         get() = viewModelScope.async(IO) {
-            realRepository.allAlbums()
+            repository.allAlbums()
         }
 
     private val loadArtists: Deferred<List<Artist>>
         get() = viewModelScope.async(IO) {
-            realRepository.albumArtists()
+            repository.albumArtists()
         }
 
     private val loadPlaylists: Deferred<List<Playlist>>
         get() = viewModelScope.async(IO) {
-            realRepository.allPlaylists()
+            repository.allPlaylists()
         }
     private val loadPlaylistsWithSongs: Deferred<List<PlaylistWithSongs>>
         get() = viewModelScope.async(IO) {
-            realRepository.playlistWithSongs()
+            repository.playlistWithSongs()
         }
 
     private val loadGenres: Deferred<List<Genre>>
         get() = viewModelScope.async(IO) {
-            realRepository.allGenres()
+            repository.allGenres()
         }
 
 
@@ -119,6 +120,14 @@ class LibraryViewModel(
 
     override fun onPlayingMetaChanged() {
         println("onPlayingMetaChanged")
+        viewModelScope.launch(IO) {
+            val entity = repository.songPresentInHistory(MusicPlayerRemote.currentSong)
+            if (entity != null) {
+                repository.updateHistorySong(MusicPlayerRemote.currentSong)
+            } else {
+                repository.addSongToHistory(MusicPlayerRemote.currentSong)
+            }
+        }
     }
 
     override fun onPlayStateChanged() {

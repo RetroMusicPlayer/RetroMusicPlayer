@@ -14,6 +14,7 @@
 package code.name.monkey.retromusic.model
 
 import android.os.Parcelable
+import code.name.monkey.retromusic.db.HistoryEntity
 import code.name.monkey.retromusic.db.SongEntity
 import kotlinx.android.parcel.Parcelize
 
@@ -33,6 +34,25 @@ open class Song(
     val composer: String?,
     val albumArtist: String?
 ) : Parcelable {
+    fun toHistoryEntity(timePlayed: Long): HistoryEntity {
+        return HistoryEntity(
+            id,
+            title,
+            trackNumber,
+            year,
+            duration,
+            data,
+            dateModified,
+            albumId,
+            albumName,
+            artistId,
+            artistName,
+            composer,
+            albumArtist,
+            timePlayed
+        )
+    }
+
     fun toSongEntity(playListId: Int): SongEntity {
         return SongEntity(
             playListId,

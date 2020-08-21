@@ -54,7 +54,7 @@ fun AppCompatActivity.replaceFragment(
     tag: String? = null,
     addToBackStack: Boolean = false
 ) {
-    val compatActivity = this ?: return
+    val compatActivity = this
     compatActivity.supportFragmentManager.beginTransaction()
         .apply {
             replace(id, fragment, tag)

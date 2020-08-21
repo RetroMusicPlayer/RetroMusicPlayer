@@ -72,7 +72,7 @@ object PlaylistMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_rename_playlist -> {
-                RenameRetroPlaylistDialog.create(playlistWithSongs.playlistEntity )
+                RenameRetroPlaylistDialog.create(playlistWithSongs.playlistEntity)
                     .show(activity.supportFragmentManager, "RENAME_PLAYLIST")
                 return true
             }
@@ -100,7 +100,7 @@ object PlaylistMenuHelper : KoinComponent {
         }
     }
 
-    private class SavePlaylistAsyncTask internal constructor(context: Context) :
+    private class SavePlaylistAsyncTask(context: Context) :
         WeakContextAsyncTask<Playlist, String, String>(context) {
 
         override fun doInBackground(vararg params: Playlist): String {

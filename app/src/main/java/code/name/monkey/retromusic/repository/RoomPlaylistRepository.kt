@@ -1,10 +1,9 @@
 package code.name.monkey.retromusic.repository
 
 import androidx.annotation.WorkerThread
-import code.name.monkey.retromusic.db.PlaylistDao
-import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.db.SongEntity
+import androidx.lifecycle.LiveData
+import code.name.monkey.retromusic.db.*
+import code.name.monkey.retromusic.model.Song
 
 
 interface RoomPlaylistRepository {
@@ -21,6 +20,10 @@ interface RoomPlaylistRepository {
     suspend fun favoritePlaylist(favorite: String): List<PlaylistEntity>
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
     suspend fun removeSongFromPlaylist(songEntity: SongEntity)
+    suspend fun addSongToHistory(currentSong: Song)
+    suspend fun songPresentInHistory(song: Song): HistoryEntity?
+    suspend fun updateHistorySong(song: Song)
+    fun historySongs(): LiveData<List<HistoryEntity>>
 }
 
 class RealRoomRepository(
@@ -82,5 +85,18 @@ class RealRoomRepository(
 
     override suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
         playlistDao.removeSong(songEntity.playlistCreatorId, songEntity.id)
+
+    override suspend fun addSongToHistory(currentSong: Song) =
+        playlistDao.addSong(currentSong.toHistoryEntity(System.currentTimeMillis()))
+
+    override suspend fun songPresentInHistory(song: Song): HistoryEntity? =
+        playlistDao.songPresentInHistory(song.id)
+
+    override suspend fun updateHistorySong(song: Song) =
+        playlistDao.updateHistorySong(song.toHistoryEntity(System.currentTimeMillis()))
+
+    override fun historySongs(): LiveData<List<HistoryEntity>> {
+        return playlistDao.historySongs()
+    }
 
 }

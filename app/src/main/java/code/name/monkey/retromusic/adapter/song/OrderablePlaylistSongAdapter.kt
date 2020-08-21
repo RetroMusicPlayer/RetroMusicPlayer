@@ -120,7 +120,7 @@ class OrderablePlaylistSongAdapter(
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.action_remove_from_playlist -> {
-                    RemoveSongFromPlaylistDialog.create(  song.toSongEntity(playlistId))
+                    RemoveSongFromPlaylistDialog.create(song.toSongEntity(playlistId))
                         .show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
                     return true
                 }

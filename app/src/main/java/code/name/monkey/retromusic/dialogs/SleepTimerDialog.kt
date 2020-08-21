@@ -158,7 +158,7 @@ class SleepTimerDialog : DialogFragment() {
         }
     }
 
-    private inner class TimerUpdater internal constructor() :
+    private inner class TimerUpdater() :
         CountDownTimer(
             PreferenceUtil.nextSleepTimerElapsedRealTime - SystemClock.elapsedRealtime(),
             1000

@@ -121,7 +121,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     }
 }
 
-private class SkuDetailsLoadAsyncTask internal constructor(supportDevelopmentActivity: SupportDevelopmentActivity) :
+private class SkuDetailsLoadAsyncTask(supportDevelopmentActivity: SupportDevelopmentActivity) :
     AsyncTask<Void, Void, List<SkuDetails>>() {
 
     private val weakReference: WeakReference<SupportDevelopmentActivity> = WeakReference(

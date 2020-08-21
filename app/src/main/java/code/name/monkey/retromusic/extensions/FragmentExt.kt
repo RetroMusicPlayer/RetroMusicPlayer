@@ -51,7 +51,8 @@ val FragmentManager.currentNavigationFragment: Fragment?
     get() = primaryNavigationFragment?.childFragmentManager?.fragments?.first()
 
 fun AppCompatActivity.currentFragment(navHostId: Int): Fragment? {
-    val navHostFragment: NavHostFragment = supportFragmentManager.findFragmentById(navHostId) as NavHostFragment
+    val navHostFragment: NavHostFragment =
+        supportFragmentManager.findFragmentById(navHostId) as NavHostFragment
     navHostFragment.targetFragment
     return navHostFragment.childFragmentManager.fragments.first()
 }

@@ -31,10 +31,11 @@ class PlaylistDetailsViewModel(
         loadPlaylistSongs(playlist)
     }
 
-    private fun loadPlaylistSongs(playlist: PlaylistWithSongs) = viewModelScope.launch(Dispatchers.IO) {
-        val songs: List<Song> = realRepository.playlistSongs(playlist)
-        withContext(Main) { _playListSongs.postValue(songs) }
-    }
+    private fun loadPlaylistSongs(playlist: PlaylistWithSongs) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val songs: List<Song> = realRepository.playlistSongs(playlist)
+            withContext(Main) { _playListSongs.postValue(songs) }
+        }
 
     override fun onMediaStoreChanged() {
         /*if (playlist !is AbsCustomPlaylist) {

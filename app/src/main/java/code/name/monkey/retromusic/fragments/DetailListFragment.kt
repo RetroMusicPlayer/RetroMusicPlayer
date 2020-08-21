@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
@@ -48,10 +49,27 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             RECENT_ALBUMS -> {
                 loadAlbums(R.string.recent_albums, RECENT_ALBUMS)
             }
-            FAVOURITES -> {
-                loadFavorite()
-            }
+            FAVOURITES -> loadFavorite()
+            HISTORY -> loadHistory()
         }
+    }
+
+    private fun loadHistory() {
+        toolbar.setTitle(R.string.history)
+
+        val songAdapter = SongAdapter(
+            requireActivity(),
+            mutableListOf(),
+            R.layout.item_list, null
+        )
+        recyclerView.apply {
+            adapter = songAdapter
+            layoutManager = linearLayoutManager()
+        }
+        repository.historySong().observe(viewLifecycleOwner, Observer {
+            val songs = it.map { historyEntity -> historyEntity.toSong() }
+            songAdapter.swapDataSet(songs)
+        })
     }
 
     private fun loadFavorite() {

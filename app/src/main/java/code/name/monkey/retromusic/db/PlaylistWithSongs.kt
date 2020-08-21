@@ -13,5 +13,5 @@ data class PlaylistWithSongs(
         entityColumn = "playlist_creator_id"
     )
     val songs: List<SongEntity>
-):Parcelable
+) : Parcelable
 

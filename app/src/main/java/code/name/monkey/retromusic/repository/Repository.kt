@@ -15,7 +15,9 @@
 package code.name.monkey.retromusic.repository
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.db.HistoryEntity
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.SongEntity
@@ -32,97 +34,56 @@ import kotlinx.coroutines.flow.flow
 interface Repository {
 
     fun songsFlow(): Flow<Result<List<Song>>>
-
     fun albumsFlow(): Flow<Result<List<Album>>>
-
     fun artistsFlow(): Flow<Result<List<Artist>>>
-
     fun playlistsFlow(): Flow<Result<List<Playlist>>>
-
     fun genresFlow(): Flow<Result<List<Genre>>>
 
-
     suspend fun allAlbums(): List<Album>
-
     suspend fun albumById(albumId: Int): Album
-
     suspend fun allSongs(): List<Song>
-
     suspend fun allArtists(): List<Artist>
-
     suspend fun albumArtists(): List<Artist>
-
     suspend fun allPlaylists(): List<Playlist>
-
     suspend fun allGenres(): List<Genre>
-
     suspend fun search(query: String?): MutableList<Any>
-
     suspend fun getPlaylistSongs(playlist: Playlist): List<Song>
-
     suspend fun getGenre(genreId: Int): List<Song>
-
     suspend fun artistInfo(name: String, lang: String?, cache: String?): LastFmArtist
-
     suspend fun albumInfo(artist: String, album: String): LastFmAlbum
-
     suspend fun artistById(artistId: Int): Artist
-
     suspend fun recentArtists(): List<Artist>
-
     suspend fun topArtists(): List<Artist>
-
     suspend fun topAlbums(): List<Album>
-
     suspend fun recentAlbums(): List<Album>
-
     suspend fun recentArtistsHome(): Home
-
     suspend fun topArtistsHome(): Home
-
     suspend fun topAlbumsHome(): Home
-
     suspend fun recentAlbumsHome(): Home
-
     suspend fun favoritePlaylistHome(): Home
-
     suspend fun suggestionsHome(): Home
-
     suspend fun genresHome(): Home
-
     suspend fun playlists(): Home
-
     suspend fun homeSections(): List<Home>
-
     suspend fun homeSectionsFlow(): Flow<Result<List<Home>>>
-
     suspend fun playlist(playlistId: Int): Playlist
-
     suspend fun playlistWithSongs(): List<PlaylistWithSongs>
-
     suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song>
-
     suspend fun insertSongs(songs: List<SongEntity>)
-
     suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity>
-
     suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
-
     suspend fun roomPlaylists(): List<PlaylistEntity>
-
     suspend fun deleteRoomPlaylist(playlists: List<PlaylistEntity>)
-
     suspend fun renameRoomPlaylist(playlistId: Int, name: String)
-
     suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
-
     suspend fun removeSongFromPlaylist(songEntity: SongEntity)
-
     suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
-
     suspend fun favoritePlaylist(): List<PlaylistEntity>
-
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
+    suspend fun addSongToHistory(currentSong: Song)
+    suspend fun songPresentInHistory(currentSong: Song): HistoryEntity?
+    suspend fun updateHistorySong(currentSong: Song)
+    fun historySong(): LiveData<List<HistoryEntity>>
 }
 
 class RealRepository(
@@ -136,7 +97,7 @@ class RealRepository(
     private val playlistRepository: PlaylistRepository,
     private val searchRepository: RealSearchRepository,
     private val playedTracksRepository: TopPlayedRepository,
-    private val roomPlaylistRepository: RoomPlaylistRepository
+    private val roomRepository: RoomPlaylistRepository
 ) : Repository {
 
     override suspend fun allAlbums(): List<Album> = albumRepository.albums()
@@ -241,7 +202,7 @@ class RealRepository(
         playlistRepository.playlist(playlistId)
 
     override suspend fun playlistWithSongs(): List<PlaylistWithSongs> =
-        roomPlaylistRepository.playlistWithSongs()
+        roomRepository.playlistWithSongs()
 
     override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song> {
         return playlistWithSongs.songs.map {
@@ -250,37 +211,49 @@ class RealRepository(
     }
 
     override suspend fun insertSongs(songs: List<SongEntity>) =
-        roomPlaylistRepository.insertSongs(songs)
+        roomRepository.insertSongs(songs)
 
     override suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity> =
-        roomPlaylistRepository.checkPlaylistExists(playlistName)
+        roomRepository.checkPlaylistExists(playlistName)
 
     override suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
-        roomPlaylistRepository.createPlaylist(playlistEntity)
+        roomRepository.createPlaylist(playlistEntity)
 
-    override suspend fun roomPlaylists(): List<PlaylistEntity> = roomPlaylistRepository.playlists()
+    override suspend fun roomPlaylists(): List<PlaylistEntity> = roomRepository.playlists()
 
     override suspend fun deleteRoomPlaylist(playlists: List<PlaylistEntity>) =
-        roomPlaylistRepository.deletePlaylistEntities(playlists)
+        roomRepository.deletePlaylistEntities(playlists)
 
     override suspend fun renameRoomPlaylist(playlistId: Int, name: String) =
-        roomPlaylistRepository.renamePlaylistEntity(playlistId, name)
+        roomRepository.renamePlaylistEntity(playlistId, name)
 
     override suspend fun removeSongsFromPlaylist(songs: List<SongEntity>) =
-        roomPlaylistRepository.removeSongsFromPlaylist(songs)
+        roomRepository.removeSongsFromPlaylist(songs)
 
     override suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
-        roomPlaylistRepository.removeSongFromPlaylist(songEntity)
+        roomRepository.removeSongFromPlaylist(songEntity)
 
 
     override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) =
-        roomPlaylistRepository.deleteSongsFromPlaylist(playlists)
+        roomRepository.deleteSongsFromPlaylist(playlists)
 
     override suspend fun favoritePlaylist(): List<PlaylistEntity> =
-        roomPlaylistRepository.favoritePlaylist(context.getString(R.string.favorites))
+        roomRepository.favoritePlaylist(context.getString(R.string.favorites))
 
     override suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity> =
-        roomPlaylistRepository.isFavoriteSong(songEntity)
+        roomRepository.isFavoriteSong(songEntity)
+
+    override suspend fun addSongToHistory(currentSong: Song) =
+        roomRepository.addSongToHistory(currentSong)
+
+    override suspend fun songPresentInHistory(currentSong: Song): HistoryEntity? =
+        roomRepository.songPresentInHistory(currentSong)
+
+    override suspend fun updateHistorySong(currentSong: Song) =
+        roomRepository.updateHistorySong(currentSong)
+
+    override fun historySong(): LiveData<List<HistoryEntity>> =
+        roomRepository.historySongs()
 
     override suspend fun suggestionsHome(): Home {
         val songs =

@@ -21,9 +21,9 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.EXTRA_PLAYLIST
+import code.name.monkey.retromusic.HISTORY
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.extensions.findActivityNavController
@@ -32,7 +32,6 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
 import code.name.monkey.retromusic.glide.UserProfileGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.TopTracksPlaylist
 import code.name.monkey.retromusic.repository.Repository
@@ -96,9 +95,9 @@ class HomeFragment :
         }
 
         history.setOnClickListener {
-            requireActivity().findNavController(R.id.fragment_container).navigate(
-                R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to HistoryPlaylist())
+            findActivityNavController(R.id.fragment_container).navigate(
+                R.id.detailListFragment,
+                bundleOf("type" to HISTORY)
             )
         }
 

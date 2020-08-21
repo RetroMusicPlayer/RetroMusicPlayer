@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -43,5 +44,17 @@ interface PlaylistDao {
 
     @Delete
     suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addSong(historyEntity: HistoryEntity)
+
+    @Query("SELECT * FROM HistoryEntity WHERE id = :songId LIMIT 1")
+    suspend fun songPresentInHistory(songId: Int): HistoryEntity?
+
+    @Update
+    suspend fun updateHistorySong(historyEntity: HistoryEntity)
+
+    @Query("SELECT * FROM HistoryEntity ORDER BY time_played DESC")
+    fun historySongs(): LiveData<List<HistoryEntity>>
 
 }
