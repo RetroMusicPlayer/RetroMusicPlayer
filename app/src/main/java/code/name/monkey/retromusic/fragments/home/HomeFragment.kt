@@ -22,9 +22,10 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.retromusic.EXTRA_PLAYLIST
-import code.name.monkey.retromusic.HISTORY
+import code.name.monkey.retromusic.HISTORY_PLAYLIST
+import code.name.monkey.retromusic.LAST_ADDED_PLAYLIST
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.TOP_PLAYED_PLAYLIST
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.extensions.findActivityNavController
 import code.name.monkey.retromusic.fragments.LibraryViewModel
@@ -32,8 +33,6 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
 import code.name.monkey.retromusic.glide.UserProfileGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
-import code.name.monkey.retromusic.model.smartplaylist.TopTracksPlaylist
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -73,15 +72,15 @@ class HomeFragment :
 
         lastAdded.setOnClickListener {
             findActivityNavController(R.id.fragment_container).navigate(
-                R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to LastAddedPlaylist())
+                R.id.detailListFragment,
+                bundleOf("type" to LAST_ADDED_PLAYLIST)
             )
         }
 
         topPlayed.setOnClickListener {
             findActivityNavController(R.id.fragment_container).navigate(
-                R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to TopTracksPlaylist())
+                R.id.detailListFragment,
+                bundleOf("type" to TOP_PLAYED_PLAYLIST)
             )
         }
 
@@ -97,7 +96,7 @@ class HomeFragment :
         history.setOnClickListener {
             findActivityNavController(R.id.fragment_container).navigate(
                 R.id.detailListFragment,
-                bundleOf("type" to HISTORY)
+                bundleOf("type" to HISTORY_PLAYLIST)
             )
         }
 

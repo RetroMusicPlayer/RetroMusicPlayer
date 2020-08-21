@@ -49,7 +49,43 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
                 loadAlbums(R.string.recent_albums, RECENT_ALBUMS)
             }
             FAVOURITES -> loadFavorite()
-            HISTORY -> loadHistory()
+            HISTORY_PLAYLIST -> loadHistory()
+            LAST_ADDED_PLAYLIST -> lastAddedSongs()
+            TOP_PLAYED_PLAYLIST -> topPlayed()
+        }
+    }
+
+    private fun lastAddedSongs() {
+        toolbar.setTitle(R.string.last_added)
+        val songAdapter = SongAdapter(
+            requireActivity(),
+            mutableListOf(),
+            R.layout.item_list, null
+        )
+        recyclerView.apply {
+            adapter = songAdapter
+            layoutManager = linearLayoutManager()
+        }
+        lifecycleScope.launch(IO) {
+            val songs = repository.recentSongs()
+            withContext(Main) { songAdapter.swapDataSet(songs) }
+        }
+    }
+
+    private fun topPlayed() {
+        toolbar.setTitle(R.string.my_top_tracks)
+        val songAdapter = SongAdapter(
+            requireActivity(),
+            mutableListOf(),
+            R.layout.item_list, null
+        )
+        recyclerView.apply {
+            adapter = songAdapter
+            layoutManager = linearLayoutManager()
+        }
+        lifecycleScope.launch(IO) {
+            val songs = repository.recentSongs()
+            withContext(Main) { songAdapter.swapDataSet(songs) }
         }
     }
 

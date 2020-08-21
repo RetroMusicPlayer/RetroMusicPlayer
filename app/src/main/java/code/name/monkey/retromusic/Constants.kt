@@ -53,7 +53,6 @@ object Constants {
     )
     const val NUMBER_OF_TOP_TRACKS = 99
 }
-const val HISTORY = 8
 const val EXTRA_GENRE = "extra_genre"
 const val EXTRA_PLAYLIST = "extra_playlist"
 const val EXTRA_PLAYLIST_ID = "extra_playlist_id"

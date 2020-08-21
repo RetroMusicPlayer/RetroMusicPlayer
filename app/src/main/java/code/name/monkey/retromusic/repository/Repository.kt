@@ -84,6 +84,8 @@ interface Repository {
     suspend fun songPresentInHistory(currentSong: Song): HistoryEntity?
     suspend fun updateHistorySong(currentSong: Song)
     suspend fun favoritePlaylistSongs(): List<SongEntity>
+    suspend fun recentSongs(): List<Song>
+    suspend fun topPlayedSongs(): List<Song>
     fun historySong(): LiveData<List<HistoryEntity>>
     fun favorites(): LiveData<List<SongEntity>>
 }
@@ -98,7 +100,7 @@ class RealRepository(
     private val lastAddedRepository: LastAddedRepository,
     private val playlistRepository: PlaylistRepository,
     private val searchRepository: RealSearchRepository,
-    private val playedTracksRepository: TopPlayedRepository,
+    private val topPlayedRepository: TopPlayedRepository,
     private val roomRepository: RoomPlaylistRepository
 ) : Repository {
 
@@ -116,9 +118,9 @@ class RealRepository(
 
     override suspend fun recentAlbums(): List<Album> = lastAddedRepository.recentAlbums()
 
-    override suspend fun topArtists(): List<Artist> = playedTracksRepository.topArtists()
+    override suspend fun topArtists(): List<Artist> = topPlayedRepository.topArtists()
 
-    override suspend fun topAlbums(): List<Album> = playedTracksRepository.topAlbums()
+    override suspend fun topAlbums(): List<Album> = topPlayedRepository.topAlbums()
 
     override suspend fun allPlaylists(): List<Playlist> = playlistRepository.playlists()
 
@@ -254,9 +256,12 @@ class RealRepository(
     override suspend fun updateHistorySong(currentSong: Song) =
         roomRepository.updateHistorySong(currentSong)
 
-
     override suspend fun favoritePlaylistSongs(): List<SongEntity> =
         roomRepository.favoritePlaylistSongs(context.getString(R.string.favorites))
+
+    override suspend fun recentSongs(): List<Song> = lastAddedRepository.recentSongs()
+
+    override suspend fun topPlayedSongs(): List<Song> = topPlayedRepository.topTracks()
 
     override fun historySong(): LiveData<List<HistoryEntity>> =
         roomRepository.historySongs()
@@ -293,12 +298,12 @@ class RealRepository(
     }
 
     override suspend fun topAlbumsHome(): Home {
-        val albums = playedTracksRepository.topAlbums().take(5)
+        val albums = topPlayedRepository.topAlbums().take(5)
         return Home(albums, TOP_ALBUMS, R.string.top_albums)
     }
 
     override suspend fun topArtistsHome(): Home {
-        val artists = playedTracksRepository.topArtists().take(5)
+        val artists = topPlayedRepository.topArtists().take(5)
         return Home(artists, TOP_ARTISTS, R.string.top_artists)
     }
 
