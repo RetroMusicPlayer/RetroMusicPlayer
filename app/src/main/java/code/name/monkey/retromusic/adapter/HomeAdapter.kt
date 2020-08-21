@@ -109,6 +109,12 @@ class HomeAdapter(
             FAVOURITES -> {
                 val viewHolder = holder as PlaylistViewHolder
                 viewHolder.bindView(home.arrayList, R.string.favorites)
+                viewHolder.clickableArea.setOnClickListener {
+                    activity.findNavController(R.id.fragment_container).navigate(
+                        R.id.detailListFragment,
+                        bundleOf("type" to FAVOURITES)
+                    )
+                }
             }
             GENRES -> {
                 val viewHolder = holder as GenreViewHolder
@@ -183,7 +189,6 @@ class HomeAdapter(
 
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(songs: List<Any>, titleRes: Int) {
-            arrow.hide()
             recyclerView.apply {
                 val songAdapter = SongAdapter(
                     activity,
@@ -210,7 +215,7 @@ class HomeAdapter(
         }
     }
 
-    open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    open class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
         val title: AppCompatTextView = itemView.findViewById(R.id.title)
         val arrow: ImageView = itemView.findViewById(R.id.arrow)

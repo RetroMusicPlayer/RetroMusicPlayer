@@ -63,12 +63,6 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="ToolbarTextAppearanceNormal.Library" parent="ToolbarTextAppearanceNormal">
-        <item name="android:textAppearance">@style/TextViewHeadline6</item>
-        <item name="fontFamily">@font/pacifico</item>
-        <item name="android:fontFamily">@font/pacifico</item>
-    </style>
-
     <style name="BigTitleTextAppearanceToolbar">
         <item name="android:textAppearance">@style/TextViewHeadline6</item>
         <item name="android:layout_width">wrap_content</item>

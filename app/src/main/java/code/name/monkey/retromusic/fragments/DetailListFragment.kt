@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +19,6 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
@@ -56,7 +56,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     private fun loadFavorite() {
         toolbar.setTitle(R.string.favorites)
-        CoroutineScope(IO).launch {
+        lifecycleScope.launch(IO) {
             val songs = repository.favoritePlaylistHome()
             withContext(Main) {
                 recyclerView.apply {
@@ -73,7 +73,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     private fun loadArtists(title: Int, type: Int) {
         toolbar.setTitle(title)
-        CoroutineScope(IO).launch {
+        lifecycleScope.launch(IO) {
             val artists =
                 if (type == TOP_ARTISTS) repository.topArtists() else repository.recentArtists()
             withContext(Main) {
@@ -87,7 +87,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     private fun loadAlbums(title: Int, type: Int) {
         toolbar.setTitle(title)
-        CoroutineScope(IO).launch {
+        lifecycleScope.launch(IO) {
             val albums =
                 if (type == TOP_ALBUMS) repository.topAlbums() else repository.recentAlbums()
             withContext(Main) {

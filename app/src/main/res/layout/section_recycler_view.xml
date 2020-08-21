@@ -30,13 +30,12 @@
             android:textStyle="bold"
             tools:text="@tools:sample/full_names" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <code.name.monkey.retromusic.views.AccentIcon
             android:id="@+id/arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            app:srcCompat="@drawable/ic_arrow_forward"
-            app:tint="?attr/colorControlNormal" />
+            app:srcCompat="@drawable/ic_arrow_forward" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
