@@ -129,7 +129,8 @@ dependencies {
     implementation "com.afollestad.material-dialogs:core:$material_dialog_version"
     implementation "com.afollestad.material-dialogs:commons:$material_dialog_version"
     implementation 'com.afollestad:material-cab:0.1.12'
-
+    implementation 'com.afollestad:recyclical:1.1.1'
+    
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:1.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
@@ -180,5 +181,8 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+
+
+
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }

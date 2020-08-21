@@ -43,5 +43,5 @@ interface PlaylistDao {
 
     @Delete
     suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
-    
+
 }

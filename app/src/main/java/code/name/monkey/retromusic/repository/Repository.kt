@@ -236,10 +236,6 @@ class RealRepository(
         return homeSections
     }
 
-    override suspend fun playlists(): Home {
-        val playlist = playlistRepository.playlists()
-        return Home(playlist, TOP_ALBUMS)
-    }
 
     override suspend fun playlist(playlistId: Int) =
         playlistRepository.playlist(playlistId)
@@ -291,33 +287,37 @@ class RealRepository(
             NotPlayedPlaylist().songs().shuffled().takeIf {
                 it.size > 9
             } ?: emptyList()
-        return Home(songs, SUGGESTIONS)
+        return Home(songs, SUGGESTIONS, R.string.suggestion_songs)
     }
 
     override suspend fun genresHome(): Home {
         val genres = genreRepository.genres().shuffled()
-        return Home(genres, GENRES)
+        return Home(genres, GENRES, R.string.genres)
     }
 
+    override suspend fun playlists(): Home {
+        val playlist = playlistRepository.playlists()
+        return Home(playlist, PLAYLISTS, R.string.playlists)
+    }
 
     override suspend fun recentArtistsHome(): Home {
         val artists = lastAddedRepository.recentArtists().take(5)
-        return Home(artists, RECENT_ARTISTS)
+        return Home(artists, RECENT_ARTISTS, R.string.recent_artists)
     }
 
     override suspend fun recentAlbumsHome(): Home {
         val albums = lastAddedRepository.recentAlbums().take(5)
-        return Home(albums, RECENT_ALBUMS)
+        return Home(albums, RECENT_ALBUMS, R.string.recent_albums)
     }
 
     override suspend fun topAlbumsHome(): Home {
         val albums = playedTracksRepository.topAlbums().take(5)
-        return Home(albums, TOP_ALBUMS)
+        return Home(albums, TOP_ALBUMS, R.string.top_albums)
     }
 
     override suspend fun topArtistsHome(): Home {
         val artists = playedTracksRepository.topArtists().take(5)
-        return Home(artists, TOP_ARTISTS)
+        return Home(artists, TOP_ARTISTS, R.string.top_artists)
     }
 
     override suspend fun favoritePlaylistHome(): Home {
@@ -327,7 +327,7 @@ class RealRepository(
             PlaylistSongsLoader.getPlaylistSongList(context, playlists[0])
         else emptyList()
 
-        return Home(songs, FAVOURITES)
+        return Home(songs, FAVOURITES, R.string.favorites)
     }
 
     override fun songsFlow(): Flow<Result<List<Song>>> = flow {

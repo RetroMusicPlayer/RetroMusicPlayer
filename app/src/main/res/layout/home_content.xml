@@ -39,9 +39,8 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 android:overScrollMode="never"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="3"
                 tools:itemCount="3"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:listitem="@layout/item_album_card" />
 
             <Space
