@@ -40,8 +40,8 @@ class HomeAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val layout = LayoutInflater.from(activity)
-            .inflate(R.layout.section_recycler_view, parent, false)
+        val layout =
+            LayoutInflater.from(activity).inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
             GENRES -> GenreViewHolder(layout)
@@ -205,10 +205,13 @@ class HomeAdapter(
         fun bind(home: Home) {
             arrow.hide()
             title.setText(home.titleRes)
+            val genreAdapter = GenreAdapter(
+                activity,
+                home.arrayList as List<Genre>,
+                R.layout.item_grid_genre
+            )
             recyclerView.apply {
                 layoutManager = GridLayoutManager(activity, 3, GridLayoutManager.HORIZONTAL, false)
-                val genreAdapter =
-                    GenreAdapter(activity, home.arrayList as List<Genre>, R.layout.item_grid_genre)
                 adapter = genreAdapter
             }
         }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.toPlayCount
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
@@ -126,6 +127,14 @@ class LibraryViewModel(
                 repository.updateHistorySong(MusicPlayerRemote.currentSong)
             } else {
                 repository.addSongToHistory(MusicPlayerRemote.currentSong)
+            }
+            val songs = repository.checkSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
+            if (songs.isNotEmpty()) {
+                repository.updateSongInPlayCount(songs.first().apply {
+                    playCount += playCount + 1
+                })
+            } else {
+                repository.insertSongInPlayCount(MusicPlayerRemote.currentSong.toPlayCount())
             }
         }
     }

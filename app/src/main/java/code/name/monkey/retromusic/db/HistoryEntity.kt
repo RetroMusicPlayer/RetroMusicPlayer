@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import code.name.monkey.retromusic.model.Song
 
 @Entity
 class HistoryEntity(
@@ -30,22 +29,4 @@ class HistoryEntity(
     val albumArtist: String?,
     @ColumnInfo(name = "time_played")
     val timePlayed: Long
-) {
-    fun toSong(): Song {
-        return Song(
-            id,
-            title,
-            trackNumber,
-            year,
-            duration,
-            data,
-            dateModified,
-            albumId,
-            albumName,
-            artistId,
-            artistName,
-            composer,
-            albumArtist
-        )
-    }
-}
+)

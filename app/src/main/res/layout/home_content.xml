@@ -29,26 +29,6 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never"
-                tools:itemCount="3"
-                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_album_card" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="112dp" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/emptyContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,6 +53,27 @@
                 android:text="@string/start_play_music"
                 android:textAppearance="@style/TextViewNormal"
                 android:textColor="?android:attr/textColorPrimary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                tools:itemCount="10"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_album_card"
+                tools:spanCount="3" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="112dp" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

@@ -17,10 +17,7 @@ package code.name.monkey.retromusic.repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import code.name.monkey.retromusic.*
-import code.name.monkey.retromusic.db.HistoryEntity
-import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.db.SongEntity
+import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService
@@ -75,7 +72,7 @@ interface Repository {
     suspend fun roomPlaylists(): List<PlaylistEntity>
     suspend fun deleteRoomPlaylist(playlists: List<PlaylistEntity>)
     suspend fun renameRoomPlaylist(playlistId: Int, name: String)
-    suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
+    suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
     suspend fun removeSongFromPlaylist(songEntity: SongEntity)
     suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
     suspend fun favoritePlaylist(): List<PlaylistEntity>
@@ -86,6 +83,11 @@ interface Repository {
     suspend fun favoritePlaylistSongs(): List<SongEntity>
     suspend fun recentSongs(): List<Song>
     suspend fun topPlayedSongs(): List<Song>
+    suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity)
+    suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
+    suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
+    suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
+    suspend fun playCountSongs(): List<PlayCountEntity>
     fun historySong(): LiveData<List<HistoryEntity>>
     fun favorites(): LiveData<List<SongEntity>>
 }
@@ -185,13 +187,14 @@ class RealRepository(
 
     override suspend fun homeSections(): List<Home> {
         val homeSections = mutableListOf<Home>()
-        val sections = listOf(
+        val sections: List<Home> = listOf(
             suggestionsHome(),
             topArtistsHome(),
             topAlbumsHome(),
             recentArtistsHome(),
             recentAlbumsHome(),
-            favoritePlaylistHome()
+            favoritePlaylistHome(),
+            genresHome()
         )
         for (section in sections) {
             if (section.arrayList.isNotEmpty()) {
@@ -231,8 +234,8 @@ class RealRepository(
     override suspend fun renameRoomPlaylist(playlistId: Int, name: String) =
         roomRepository.renamePlaylistEntity(playlistId, name)
 
-    override suspend fun removeSongsFromPlaylist(songs: List<SongEntity>) =
-        roomRepository.removeSongsFromPlaylist(songs)
+    override suspend fun deleteSongsInPlaylist(songs: List<SongEntity>) =
+        roomRepository.deleteSongsInPlaylist(songs)
 
     override suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
         roomRepository.removeSongFromPlaylist(songEntity)
@@ -262,6 +265,21 @@ class RealRepository(
     override suspend fun recentSongs(): List<Song> = lastAddedRepository.recentSongs()
 
     override suspend fun topPlayedSongs(): List<Song> = topPlayedRepository.topTracks()
+
+    override suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity) =
+        roomRepository.insertSongInPlayCount(playCountEntity)
+
+    override suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity) =
+        roomRepository.updateSongInPlayCount(playCountEntity)
+
+    override suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity) =
+        roomRepository.deleteSongInPlayCount(playCountEntity)
+
+    override suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity> =
+        roomRepository.checkSongExistInPlayCount(songId)
+
+    override suspend fun playCountSongs(): List<PlayCountEntity> =
+        roomRepository.playCountSongs()
 
     override fun historySong(): LiveData<List<HistoryEntity>> =
         roomRepository.historySongs()

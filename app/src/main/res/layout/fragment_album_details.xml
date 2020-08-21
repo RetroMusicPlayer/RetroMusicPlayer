@@ -91,7 +91,7 @@
                 app:layout_constraintStart_toEndOf="@id/artistImage"
                 app:layout_constraintTop_toTopOf="@id/artistImage"
                 tools:ignore="MissingPrefix"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/full_names" />
 
             <code.name.monkey.retromusic.views.BaselineGridTextView
                 android:id="@+id/albumText"
@@ -100,7 +100,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:singleLine="true"
-                android:textAppearance="@style/TextViewHeadline6"
+                android:textAppearance="@style/TextViewSubtitle1"
                 android:textColor="?android:attr/textColorSecondary"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +108,7 @@
                 app:layout_constraintTop_toBottomOf="@id/albumTitle"
                 app:lineHeightHint="24sp"
                 tools:ignore="MissingPrefix"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/full_names" />
 
             <include
                 layout="@layout/fragment_album_content"

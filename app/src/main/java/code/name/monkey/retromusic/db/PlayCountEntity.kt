@@ -1,16 +1,12 @@
 package code.name.monkey.retromusic.db
 
-import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 @Entity
-class SongEntity(
-    @ColumnInfo(name = "playlist_creator_id")
-    val playlistCreatorId: Int,
+class PlayCountEntity(
+    @PrimaryKey
     val id: Int,
     val title: String,
     @ColumnInfo(name = "track_number")
@@ -30,11 +26,9 @@ class SongEntity(
     val artistName: String,
     val composer: String?,
     @ColumnInfo(name = "album_artist")
-    val albumArtist: String?
-) : Parcelable {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "song_key")
-    var songPrimaryKey: Long = 0
-
-}
-
+    val albumArtist: String?,
+    @ColumnInfo(name = "time_played")
+    val timePlayed: Long,
+    @ColumnInfo(name = "play_count")
+    var playCount: Int
+)

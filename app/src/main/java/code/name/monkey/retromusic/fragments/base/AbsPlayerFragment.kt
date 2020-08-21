@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
+import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
@@ -169,6 +170,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 repository.removeSongFromPlaylist(songEntity)
             } else {
                 repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
+                libraryViewModel.forceReload(Playlists)
             }
             requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }

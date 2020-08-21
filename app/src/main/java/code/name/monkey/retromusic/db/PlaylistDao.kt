@@ -18,7 +18,7 @@ interface PlaylistDao {
     suspend fun playlists(): List<PlaylistEntity>
 
     @Query("DELETE FROM SongEntity WHERE playlist_creator_id = :playlistId")
-    suspend fun deleteSongsFromPlaylist(playlistId: Int)
+    suspend fun deleteSongsInPlaylist(playlistId: Int)
 
     @Transaction
     @Query("SELECT * FROM PlaylistEntity")
@@ -43,13 +43,13 @@ interface PlaylistDao {
     suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>)
 
     @Delete
-    suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
+    suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addSong(historyEntity: HistoryEntity)
+    suspend fun insertSongInHistory(historyEntity: HistoryEntity)
 
     @Query("SELECT * FROM HistoryEntity WHERE id = :songId LIMIT 1")
-    suspend fun songPresentInHistory(songId: Int): HistoryEntity?
+    suspend fun isSongPresentInHistory(songId: Int): HistoryEntity?
 
     @Update
     suspend fun updateHistorySong(historyEntity: HistoryEntity)
@@ -63,4 +63,18 @@ interface PlaylistDao {
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
     fun favoritesSongs(playlistId: Int): List<SongEntity>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertSongInPlayCount(playCountEntity: PlayCountEntity)
+
+    @Update
+    fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
+
+    @Delete
+    fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
+
+    @Query("SELECT * FROM PlayCountEntity WHERE id =:songId")
+    fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
+
+    @Query("SELECT * FROM PlayCountEntity ORDER BY play_count DESC")
+    fun playCountSongs(): List<PlayCountEntity>
 }

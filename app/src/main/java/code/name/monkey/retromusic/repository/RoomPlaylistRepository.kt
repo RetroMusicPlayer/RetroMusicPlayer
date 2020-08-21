@@ -15,7 +15,7 @@ interface RoomPlaylistRepository {
     suspend fun getSongs(playlistEntity: PlaylistEntity): List<SongEntity>
     suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>)
     suspend fun renamePlaylistEntity(playlistId: Int, name: String)
-    suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
+    suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
     suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
     suspend fun favoritePlaylist(favorite: String): List<PlaylistEntity>
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
@@ -24,6 +24,11 @@ interface RoomPlaylistRepository {
     suspend fun songPresentInHistory(song: Song): HistoryEntity?
     suspend fun updateHistorySong(song: Song)
     suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity>
+    suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity)
+    suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
+    suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
+    suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
+    suspend fun playCountSongs(): List<PlayCountEntity>
     fun historySongs(): LiveData<List<HistoryEntity>>
     fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>>
 }
@@ -67,12 +72,12 @@ class RealRoomRepository(
     override suspend fun renamePlaylistEntity(playlistId: Int, name: String) =
         playlistDao.renamePlaylistEntity(playlistId, name)
 
-    override suspend fun removeSongsFromPlaylist(songs: List<SongEntity>) =
-        playlistDao.removeSongsFromPlaylist(songs)
+    override suspend fun deleteSongsInPlaylist(songs: List<SongEntity>) =
+        playlistDao.deleteSongsInPlaylist(songs)
 
     override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) {
         playlists.forEach {
-            playlistDao.deleteSongsFromPlaylist(it.playListId)
+            playlistDao.deleteSongsInPlaylist(it.playListId)
         }
     }
 
@@ -89,10 +94,10 @@ class RealRoomRepository(
         playlistDao.removeSong(songEntity.playlistCreatorId, songEntity.id)
 
     override suspend fun addSongToHistory(currentSong: Song) =
-        playlistDao.addSong(currentSong.toHistoryEntity(System.currentTimeMillis()))
+        playlistDao.insertSongInHistory(currentSong.toHistoryEntity(System.currentTimeMillis()))
 
     override suspend fun songPresentInHistory(song: Song): HistoryEntity? =
-        playlistDao.songPresentInHistory(song.id)
+        playlistDao.isSongPresentInHistory(song.id)
 
     override suspend fun updateHistorySong(song: Song) =
         playlistDao.updateHistorySong(song.toHistoryEntity(System.currentTimeMillis()))
@@ -106,9 +111,25 @@ class RealRoomRepository(
             playlistDao.checkPlaylistExists(favorite).first().playListId
         )
 
-    override suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity> =
-        playlistDao.favoritesSongs(
-            playlistDao.checkPlaylistExists(favorite).first().playListId
-        )
+    override suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity> {
+        return if (playlistDao.checkPlaylistExists(favorite).isNotEmpty())
+            playlistDao.favoritesSongs(
+                playlistDao.checkPlaylistExists(favorite).first().playListId
+            ) else emptyList()
+    }
 
+    override suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity) =
+        playlistDao.insertSongInPlayCount(playCountEntity)
+
+    override suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity) =
+        playlistDao.updateSongInPlayCount(playCountEntity)
+
+    override suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity) =
+        playlistDao.deleteSongInPlayCount(playCountEntity)
+
+    override suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity> =
+        playlistDao.checkSongExistInPlayCount(songId)
+
+    override suspend fun playCountSongs(): List<PlayCountEntity> =
+        playlistDao.playCountSongs()
 }
