@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.fragments.base
 
-import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.Intent
 import android.media.MediaMetadataRetriever
@@ -193,8 +192,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         updateIsFavorite()
         updateLyrics()
     }
-    
-    @SuppressLint("StaticFieldLeak")
+
     fun updateIsFavorite() {
         lifecycleScope.launch(IO) {
             val playlist: PlaylistEntity = repository.favoritePlaylist().first()
@@ -214,7 +212,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
     private fun updateLyrics() {
         setLyrics(null)
         lifecycleScope.launch(IO) {
@@ -273,7 +270,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     protected fun getUpNextAndQueueTime(): String {
         val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
-
+        
         return MusicUtil.buildInfoString(
             resources.getString(R.string.up_next),
             MusicUtil.getReadableDurationString(duration)
