@@ -110,7 +110,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         }
         if (requestCode == TEZ_REQUEST_CODE) {
             // Process based on the data in response.
-            Log.d("result", data!!.getStringExtra("Status"))
+            //Log.d("result", data!!.getStringExtra("Status"))
         }
     }
 

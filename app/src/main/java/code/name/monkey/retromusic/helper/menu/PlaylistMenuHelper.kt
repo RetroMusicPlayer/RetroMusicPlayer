@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.helper.menu
 
 
-import android.app.Activity
 import android.content.Context
 import android.view.MenuItem
 import android.widget.Toast
@@ -90,7 +89,6 @@ object PlaylistMenuHelper : KoinComponent {
     }
 
     private fun getPlaylistSongs(
-        activity: Activity,
         playlist: Playlist
     ): List<Song> {
         return if (playlist is AbsCustomPlaylist) {

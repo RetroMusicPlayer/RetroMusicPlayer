@@ -109,6 +109,10 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextViewHeadline4.Compress" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">32sp</item>
+    </style>
+
     <style name="TextViewHeadline4" parent="TextAppearance.MaterialComponents.Headline4" />
 
     <style name="TextViewHeadline5" parent="TextAppearance.MaterialComponents.Headline5" />

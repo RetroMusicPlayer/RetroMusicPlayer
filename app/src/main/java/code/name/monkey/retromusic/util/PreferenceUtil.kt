@@ -93,7 +93,7 @@ object PreferenceUtil {
         }
     }
 
-    val languageCode get() = sharedPreferences.getString(LANGUAGE_NAME, "auto")
+    val languageCode: String get() = sharedPreferences.getString(LANGUAGE_NAME, "auto") ?: "auto"
 
     var userName
         get() = sharedPreferences.getString(

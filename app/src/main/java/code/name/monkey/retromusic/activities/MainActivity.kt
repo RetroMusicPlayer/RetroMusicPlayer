@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.*
@@ -112,7 +111,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         if (intent.action != null && (intent.action == MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH)
         ) {
             val songs: List<Song> =
-                getSongs(this, intent.extras!!)
+                getSongs(intent.extras!!)
             if (shuffleMode == MusicService.SHUFFLE_MODE_SHUFFLE) {
                 openAndShuffleQueue(songs, true)
             } else {
@@ -167,7 +166,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                 try {
                     id = idString.toLong()
                 } catch (e: NumberFormatException) {
-                    Log.e(TAG, e.message)
+                    //Log.e(TAG, e.message)
                 }
             }
         }
