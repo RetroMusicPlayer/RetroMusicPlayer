@@ -164,7 +164,8 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         lifecycleScope.launch(IO) {
             val playlist: PlaylistEntity = repository.favoritePlaylist().first()
             val songEntity = song.toSongEntity(playlist.playListId)
-            if (repository.isFavoriteSong(songEntity).isNotEmpty()) {
+            val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
+            if (isFavorite) {
                 repository.removeSongFromPlaylist(songEntity)
             } else {
                 repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))

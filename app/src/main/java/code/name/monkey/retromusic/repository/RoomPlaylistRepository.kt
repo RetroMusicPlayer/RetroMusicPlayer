@@ -23,7 +23,9 @@ interface RoomPlaylistRepository {
     suspend fun addSongToHistory(currentSong: Song)
     suspend fun songPresentInHistory(song: Song): HistoryEntity?
     suspend fun updateHistorySong(song: Song)
+    suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity>
     fun historySongs(): LiveData<List<HistoryEntity>>
+    fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>>
 }
 
 class RealRoomRepository(
@@ -98,5 +100,15 @@ class RealRoomRepository(
     override fun historySongs(): LiveData<List<HistoryEntity>> {
         return playlistDao.historySongs()
     }
+
+    override fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>> =
+        playlistDao.favoritesSongsLiveData(
+            playlistDao.checkPlaylistExists(favorite).first().playListId
+        )
+
+    override suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity> =
+        playlistDao.favoritesSongs(
+            playlistDao.checkPlaylistExists(favorite).first().playListId
+        )
 
 }

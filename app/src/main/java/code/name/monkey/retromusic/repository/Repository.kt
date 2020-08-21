@@ -83,7 +83,9 @@ interface Repository {
     suspend fun addSongToHistory(currentSong: Song)
     suspend fun songPresentInHistory(currentSong: Song): HistoryEntity?
     suspend fun updateHistorySong(currentSong: Song)
+    suspend fun favoritePlaylistSongs(): List<SongEntity>
     fun historySong(): LiveData<List<HistoryEntity>>
+    fun favorites(): LiveData<List<SongEntity>>
 }
 
 class RealRepository(
@@ -252,8 +254,15 @@ class RealRepository(
     override suspend fun updateHistorySong(currentSong: Song) =
         roomRepository.updateHistorySong(currentSong)
 
+
+    override suspend fun favoritePlaylistSongs(): List<SongEntity> =
+        roomRepository.favoritePlaylistSongs(context.getString(R.string.favorites))
+
     override fun historySong(): LiveData<List<HistoryEntity>> =
         roomRepository.historySongs()
+
+    override fun favorites(): LiveData<List<SongEntity>> =
+        roomRepository.favoritePlaylistLiveData(context.getString(R.string.favorites))
 
     override suspend fun suggestionsHome(): Home {
         val songs =
@@ -294,12 +303,10 @@ class RealRepository(
     }
 
     override suspend fun favoritePlaylistHome(): Home {
-        val playlists =
-            playlistRepository.favoritePlaylist(context.getString(R.string.favorites)).take(5)
-        val songs = if (playlists.isNotEmpty())
-            PlaylistSongsLoader.getPlaylistSongList(context, playlists[0])
-        else emptyList()
-
+        val songs = favoritePlaylistSongs().map {
+            it.toSong()
+        }
+        println(songs.size)
         return Home(songs, FAVOURITES, R.string.favorites)
     }
 

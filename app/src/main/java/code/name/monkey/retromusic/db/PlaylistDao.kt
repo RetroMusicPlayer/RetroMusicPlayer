@@ -12,7 +12,7 @@ interface PlaylistDao {
     suspend fun renamePlaylistEntity(playlistId: Int, name: String)
 
     @Query("SELECT * FROM PlaylistEntity WHERE playlist_name = :name")
-    suspend fun checkPlaylistExists(name: String): List<PlaylistEntity>
+    fun checkPlaylistExists(name: String): List<PlaylistEntity>
 
     @Query("SELECT * FROM PlaylistEntity")
     suspend fun playlists(): List<PlaylistEntity>
@@ -56,5 +56,11 @@ interface PlaylistDao {
 
     @Query("SELECT * FROM HistoryEntity ORDER BY time_played DESC")
     fun historySongs(): LiveData<List<HistoryEntity>>
+
+    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
+    fun favoritesSongsLiveData(playlistId: Int): LiveData<List<SongEntity>>
+
+    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
+    fun favoritesSongs(playlistId: Int): List<SongEntity>
 
 }

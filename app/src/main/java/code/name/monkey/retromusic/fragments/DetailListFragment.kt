@@ -17,7 +17,6 @@ import code.name.monkey.retromusic.fragments.artists.ArtistClickListener
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -74,19 +73,20 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     private fun loadFavorite() {
         toolbar.setTitle(R.string.favorites)
-        lifecycleScope.launch(IO) {
-            val songs = repository.favoritePlaylistHome()
-            withContext(Main) {
-                recyclerView.apply {
-                    adapter = SongAdapter(
-                        requireActivity(),
-                        songs.arrayList as MutableList<Song>,
-                        R.layout.item_list, null
-                    )
-                    layoutManager = linearLayoutManager()
-                }
-            }
+        val songAdapter = SongAdapter(
+            requireActivity(),
+            mutableListOf(),
+            R.layout.item_list, null
+        )
+        recyclerView.apply {
+            adapter = songAdapter
+            layoutManager = linearLayoutManager()
         }
+        repository.favorites().observe(viewLifecycleOwner, Observer {
+            println(it.size)
+            val songs = it.map { songEntity -> songEntity.toSong() }
+            songAdapter.swapDataSet(songs)
+        })
     }
 
     private fun loadArtists(title: Int, type: Int) {
