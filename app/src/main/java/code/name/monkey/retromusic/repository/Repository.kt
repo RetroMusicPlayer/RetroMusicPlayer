@@ -114,9 +114,15 @@ interface Repository {
 
     suspend fun renameRoomPlaylist(playlistId: Int, name: String)
 
-    suspend fun removeSongFromPlaylist(songs: List<SongEntity>)
+    suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
+
+    suspend fun removeSongFromPlaylist(songEntity: SongEntity)
 
     suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
+
+    suspend fun favoritePlaylist(): List<PlaylistEntity>
+
+    suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
 }
 
 class RealRepository(
@@ -215,11 +221,11 @@ class RealRepository(
     override suspend fun homeSections(): List<Home> {
         val homeSections = mutableListOf<Home>()
         val sections = listOf(
+            suggestionsHome(),
             topArtistsHome(),
             topAlbumsHome(),
             recentArtistsHome(),
             recentAlbumsHome(),
-            suggestionsHome(),
             favoritePlaylistHome()
         )
         for (section in sections) {
@@ -264,18 +270,27 @@ class RealRepository(
     override suspend fun renameRoomPlaylist(playlistId: Int, name: String) =
         roomPlaylistRepository.renamePlaylistEntity(playlistId, name)
 
-    override suspend fun removeSongFromPlaylist(songs: List<SongEntity>) =
+    override suspend fun removeSongsFromPlaylist(songs: List<SongEntity>) =
         roomPlaylistRepository.removeSongsFromPlaylist(songs)
+
+    override suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
+        roomPlaylistRepository.removeSongFromPlaylist(songEntity)
+
 
     override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) =
         roomPlaylistRepository.deleteSongsFromPlaylist(playlists)
+
+    override suspend fun favoritePlaylist(): List<PlaylistEntity> =
+        roomPlaylistRepository.favoritePlaylist(context.getString(R.string.favorites))
+
+    override suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity> =
+        roomPlaylistRepository.isFavoriteSong(songEntity)
 
     override suspend fun suggestionsHome(): Home {
         val songs =
             NotPlayedPlaylist().songs().shuffled().takeIf {
                 it.size > 9
             } ?: emptyList()
-        println(songs.size)
         return Home(songs, SUGGESTIONS)
     }
 

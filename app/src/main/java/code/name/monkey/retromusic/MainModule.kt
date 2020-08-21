@@ -1,9 +1,8 @@
 package code.name.monkey.retromusic
 
-import code.name.monkey.retromusic.db.PlaylistDatabase
+import androidx.room.Room
 import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.repository.RealRoomPlaylistRepository
-import code.name.monkey.retromusic.repository.RoomPlaylistRepository
+import code.name.monkey.retromusic.db.RetroDatabase
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.albums.AlbumDetailsViewModel
 import code.name.monkey.retromusic.fragments.artists.ArtistDetailsViewModel
@@ -18,6 +17,22 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
+private val roomModule = module {
+    single {
+        Room.databaseBuilder(androidContext(), RetroDatabase::class.java, "playlist.db")
+            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    factory {
+        get<RetroDatabase>().playlistDao()
+    }
+
+    single {
+        RealRoomRepository(get())
+    } bind RoomPlaylistRepository::class
+}
 private val mainModule = module {
     single {
         androidContext().contentResolver
@@ -70,14 +85,6 @@ private val dataModule = module {
             get()
         )
     }
-
-    single {
-        PlaylistDatabase.getDatabase(get()).playlistDao()
-    }
-
-    single {
-        RealRoomPlaylistRepository(get())
-    } bind RoomPlaylistRepository::class
 }
 
 private val viewModules = module {
@@ -119,4 +126,4 @@ private val viewModules = module {
     }
 }
 
-val appModules = listOf(mainModule, dataModule, viewModules, networkModule)
+val appModules = listOf(mainModule, dataModule, viewModules, networkModule, roomModule)

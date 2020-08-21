@@ -26,8 +26,8 @@ interface PlaylistDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSongs(songEntities: List<SongEntity>)
 
-    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistName AND id = :songId")
-    suspend fun checkSongExistsWithPlaylistName(playlistName: String, songId: Int): List<SongEntity>
+    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId AND id = :songId")
+    suspend fun checkSongExistsWithPlaylistId(playlistId: Int, songId: Int): List<SongEntity>
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId")
     suspend fun getSongs(playlistId: Int): List<SongEntity>
@@ -41,4 +41,6 @@ interface PlaylistDao {
     @Delete
     suspend fun removeSongsFromPlaylist(songs: List<SongEntity>)
 
+    @Query("DELETE FROM SongEntity WHERE playlist_creator_id = :playlistId AND id = :songId")
+    fun removeSong(playlistId: Int, songId: Int)
 }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.Intent
 import android.media.MediaMetadataRetriever
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -22,8 +21,10 @@ import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
+import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -31,20 +32,22 @@ import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.repository.RealRepository
+import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.*
 import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
     Toolbar.OnMenuItemClickListener, PaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
 
-    private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
-    private var updateLyricsAsyncTask: AsyncTask<*, *, *>? = null
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
     protected val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
@@ -70,7 +73,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_add_to_playlist -> {
-                lifecycleScope.launch(Dispatchers.IO) {
+                lifecycleScope.launch(IO) {
                     val playlists = get<RealRepository>().roomPlaylists()
                     withContext(Dispatchers.Main) {
                         AddToRetroPlaylist.create(playlists, song)
@@ -159,7 +162,16 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
     }
 
     protected open fun toggleFavorite(song: Song) {
-        MusicUtil.toggleFavorite(requireActivity(), song)
+        lifecycleScope.launch(IO) {
+            val playlist: PlaylistEntity = repository.favoritePlaylist().first()
+            val songEntity = song.toSongEntity(playlist.playListId)
+            if (repository.isFavoriteSong(songEntity).isNotEmpty()) {
+                repository.removeSongFromPlaylist(songEntity)
+            } else {
+                repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
+            }
+            requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
+        }
     }
 
     abstract fun playerToolbar(): Toolbar?
@@ -181,83 +193,63 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         updateIsFavorite()
         updateLyrics()
     }
-
-    override fun onDestroyView() {
-        if (updateIsFavoriteTask != null && !updateIsFavoriteTask!!.isCancelled) {
-            updateIsFavoriteTask!!.cancel(true)
-        }
-        if (updateLyricsAsyncTask != null && !updateLyricsAsyncTask!!.isCancelled) {
-            updateLyricsAsyncTask!!.cancel(true)
-        }
-        super.onDestroyView()
-    }
-
+    
     @SuppressLint("StaticFieldLeak")
     fun updateIsFavorite() {
-        if (updateIsFavoriteTask != null) {
-            updateIsFavoriteTask!!.cancel(false)
-        }
-        updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
-            override fun doInBackground(vararg params: Song): Boolean {
-                return MusicUtil.isFavorite(requireActivity(), params[0])
-            }
-
-            override fun onPostExecute(isFavorite: Boolean) {
-                val res = if (isFavorite)
-                    R.drawable.ic_favorite
-                else
-                    R.drawable.ic_favorite_border
-
+        lifecycleScope.launch(IO) {
+            val playlist: PlaylistEntity = repository.favoritePlaylist().first()
+            val song = MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
+            val isFavorite = repository.isFavoriteSong(song).isNotEmpty()
+            withContext(Dispatchers.Main) {
+                val icon = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                 val drawable =
-                    RetroUtil.getTintedVectorDrawable(requireContext(), res, toolbarIconColor())
-                if (playerToolbar() != null && playerToolbar()!!.menu.findItem(R.id.action_toggle_favorite) != null)
-                    playerToolbar()!!.menu.findItem(R.id.action_toggle_favorite).setIcon(drawable)
-                        .title =
-                        if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(
-                            R.string.action_add_to_favorites
-                        )
+                    RetroUtil.getTintedVectorDrawable(requireContext(), icon, toolbarIconColor())
+                if (playerToolbar() != null) {
+                    playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)
+                        ?.setIcon(drawable)?.title =
+                        if (isFavorite) getString(R.string.action_remove_from_favorites)
+                        else getString(R.string.action_add_to_favorites)
+                }
             }
-        }.execute(MusicPlayerRemote.currentSong)
+        }
     }
 
     @SuppressLint("StaticFieldLeak")
     private fun updateLyrics() {
-        if (updateLyricsAsyncTask != null) updateLyricsAsyncTask!!.cancel(false)
-
-        updateLyricsAsyncTask = object : AsyncTask<Song, Void, Lyrics>() {
-            override fun onPreExecute() {
-                super.onPreExecute()
-                setLyrics(null)
+        setLyrics(null)
+        lifecycleScope.launch(IO) {
+            val song = MusicPlayerRemote.currentSong
+            val lyrics = try {
+                var data: String? = LyricUtil.getStringFromFile(song.title, song.artistName)
+                if (TextUtils.isEmpty(data)) {
+                    data = MusicUtil.getLyrics(song)
+                    if (TextUtils.isEmpty(data)) {
+                        null
+                    } else {
+                        Lyrics.parse(song, data)
+                    }
+                } else Lyrics.parse(song, data!!)
+            } catch (err: FileNotFoundException) {
+                null
             }
-
-            override fun doInBackground(vararg params: Song): Lyrics? {
-                try {
-                    var data: String? =
-                        LyricUtil.getStringFromFile(params[0].title, params[0].artistName)
-                    return if (TextUtils.isEmpty(data)) {
-                        data = MusicUtil.getLyrics(params[0])
-                        return if (TextUtils.isEmpty(data)) {
-                            null
-                        } else {
-                            Lyrics.parse(params[0], data)
-                        }
-                    } else Lyrics.parse(params[0], data!!)
-                } catch (err: FileNotFoundException) {
-                    return null
-                }
+            withContext(Main) {
+                setLyrics(lyrics)
             }
-
-            override fun onPostExecute(l: Lyrics?) {
-                setLyrics(l)
-            }
-
-            override fun onCancelled(s: Lyrics?) {
-                onPostExecute(null)
-            }
-        }.execute(MusicPlayerRemote.currentSong)
+        }
     }
 
     open fun setLyrics(l: Lyrics?) {
+    }
+
+    private val repository by inject<RealRepository>()
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        lifecycleScope.launch(IO) {
+            if (repository.checkPlaylistExists(getString(R.string.favorites)).isEmpty()) {
+                repository.createPlaylist(PlaylistEntity(getString(R.string.favorites)))
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -267,8 +259,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         ) {
             view.findViewById<View>(R.id.status_bar).visibility = View.GONE
         }
-        playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
+        playerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment?.setCallbacks(this)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
