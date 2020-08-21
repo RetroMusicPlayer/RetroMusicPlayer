@@ -270,7 +270,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     protected fun getUpNextAndQueueTime(): String {
         val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
-        
+
         return MusicUtil.buildInfoString(
             resources.getString(R.string.up_next),
             MusicUtil.getReadableDurationString(duration)
