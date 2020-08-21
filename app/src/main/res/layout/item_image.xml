@@ -33,13 +33,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxLines="1"
-        android:padding="8dp"
+        android:maxLines="2"
+        android:padding="12dp"
         android:textAppearance="@style/TextViewBody1"
         android:textColor="?android:attr/textColorPrimary"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageContainer"
-        tools:text="Song name" />
+        tools:text="@tools:sample/full_names" />
 </androidx.constraintlayout.widget.ConstraintLayout>

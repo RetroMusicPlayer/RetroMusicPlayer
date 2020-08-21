@@ -15,7 +15,6 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
@@ -51,8 +50,6 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
 
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
             setMiniPlayerAlphaProgress(slideOffset)
-            dimBackground.show()
-            dimBackground.alpha = slideOffset
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -62,7 +59,6 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
                     onPanelCollapsed()
-                    dimBackground.hide()
                 }
                 else -> {
 
@@ -80,9 +76,6 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
         addMusicServiceEventListener(libraryViewModel)
 
         setupBottomSheet()
-
-        val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
-        dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
 
         libraryViewModel.paletteColorLiveData.observe(this, Observer {
             this.paletteColor = it

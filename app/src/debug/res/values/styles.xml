@@ -10,6 +10,11 @@
         <item name="fontFamily">@font/sans</item>
     </style>
 
+    <style name="TextViewHeadline4.Compress" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/sans</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
     <style name="TextViewHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">@font/sans</item>
     </style>
@@ -51,6 +56,23 @@
     </style>
 
     <style name="TextViewOverline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="AppTextAppearance.MaterialAlertDialog.Button" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/sans</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTextAppearance.MaterialAlertDialog.Body" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
+    <style name="AppTextAppearance.MaterialAlertDialog.Title" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="fontFamily">@font/sans</item>
     </style>
 

@@ -33,6 +33,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -105,6 +106,15 @@ fun ExtendedFloatingActionButton.accentColor() {
     backgroundTintList = colorStateList
     setTextColor(textColorStateList)
     iconTint = textColorStateList
+}
+
+fun FloatingActionButton.accentColor() {
+    val color = ThemeStore.accentColor(context)
+    val textColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color))
+    val colorStateList = ColorStateList.valueOf(color)
+    val textColorStateList = ColorStateList.valueOf(textColor)
+    backgroundTintList = colorStateList
+    imageTintList = textColorStateList
 }
 
 fun MaterialButton.applyColor(color: Int) {
