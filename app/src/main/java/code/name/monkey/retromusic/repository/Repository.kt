@@ -240,7 +240,6 @@ class RealRepository(
     override suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
         roomRepository.removeSongFromPlaylist(songEntity)
 
-
     override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) =
         roomRepository.deleteSongsFromPlaylist(playlists)
 

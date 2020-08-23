@@ -14,9 +14,9 @@
 
     <FrameLayout
         android:id="@+id/slidingPanel"
+        style="@style/Widget.BottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorSurface"
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
         app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">

@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import androidx.core.os.bundleOf
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.EXTRA_PLAYLISTS
 import code.name.monkey.retromusic.EXTRA_SONG
@@ -17,12 +16,13 @@ import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class AddToRetroPlaylist : DialogFragment() {
+class AddToRetroPlaylist : BottomSheetDialogFragment() {
     private val repository by inject<RealRepository>()
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 

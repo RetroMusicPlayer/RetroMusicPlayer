@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.adapter.album
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -30,8 +29,8 @@ class HorizontalAlbumAdapter(
     }
 
     override fun setColors(color: MediaNotificationProcessor, holder: ViewHolder) {
-        holder.title?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorPrimary))
-        holder.text?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorSecondary))
+        //holder.title?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorPrimary))
+        //holder.text?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorSecondary))
     }
 
     override fun loadAlbumCover(album: Album, holder: ViewHolder) {

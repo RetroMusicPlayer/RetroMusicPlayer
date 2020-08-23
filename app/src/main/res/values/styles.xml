@@ -236,4 +236,12 @@
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
     </style>
+
+
+
+    <style name="Widget.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+
+    </style>
+
+
 </resources>
