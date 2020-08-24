@@ -8,6 +8,12 @@ fun List<SongEntity>.toSongs(): List<Song> {
     }
 }
 
+fun List<Song>.toSongs(playlistId: Int): List<SongEntity> {
+    return map {
+        it.toSongEntity(playlistId)
+    }
+}
+
 fun SongEntity.toSong(): Song {
     return Song(
         id,
