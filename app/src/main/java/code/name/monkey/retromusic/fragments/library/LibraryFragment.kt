@@ -20,6 +20,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
+        retainInstance = true
         mainActivity.hideBottomBarVisibility(true)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
@@ -43,17 +44,10 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
         val navController = findNavController(R.id.fragment_container)
         NavigationUI.setupWithNavController(mainActivity.getBottomNavigationView(), navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id in arrayOf(
-                    R.id.action_album,
-                    R.id.action_artist,
-                    R.id.action_home,
-                    R.id.action_song,
-                    R.id.action_genre
-                )
-            ) {
-                addPlaylist.hide()
-            } else {
+            if (destination.id == R.id.action_playlist) {
                 addPlaylist.show()
+            } else {
+                addPlaylist.hide()
             }
         }
     }

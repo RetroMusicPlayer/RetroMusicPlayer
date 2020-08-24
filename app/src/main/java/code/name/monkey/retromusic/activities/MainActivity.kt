@@ -5,13 +5,11 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.extensions.findNavController
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openAndShuffleQueue
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openQueue
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.playFromUri
@@ -36,7 +34,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     }
 
     private val repository by inject<Repository>()
-    private val libraryViewModel by inject<LibraryViewModel>()
 
     private var blockRequestPermissions = false
 
@@ -53,7 +50,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         setTaskDescriptionColorAuto()
         hideStatusBar()
         appLaunched(this)
-        addMusicServiceEventListener(libraryViewModel)
         updateTabs()
     }
 
@@ -167,7 +163,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                 try {
                     id = idString.toLong()
                 } catch (e: NumberFormatException) {
-                    Log.e(TAG, e.message)
+                    println(e.message)
                 }
             }
         }

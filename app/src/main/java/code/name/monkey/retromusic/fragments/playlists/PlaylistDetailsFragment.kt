@@ -64,7 +64,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         val animator = RefactoredDefaultItemAnimator()
         adapter =
             OrderablePlaylistSongAdapter(
-                playlist.playlistEntity.playListId,
+                playlist.playlistEntity,
                 requireActivity(),
                 ArrayList(),
                 R.layout.item_list,

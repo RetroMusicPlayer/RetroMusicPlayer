@@ -13,6 +13,7 @@ import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
+import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,11 +67,8 @@ class RemoveSongFromPlaylistDialog : DialogFragment() {
             .setPositiveButton(R.string.remove_action) { _, _ ->
                 lifecycleScope.launch(Dispatchers.IO) {
                     repository.removeSongFromPlaylist(songs)
+                    libraryViewModel.forceReload(Playlists)
                 }
-                /* PlaylistsUtil.removeFromPlaylist(
-                    requireContext(),
-                    songs as MutableList<PlaylistSong>
-                )*/
             }
             .setNegativeButton(android.R.string.cancel, null)
             .create()
