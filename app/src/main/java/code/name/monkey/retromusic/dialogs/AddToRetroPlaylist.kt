@@ -13,7 +13,7 @@ import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.fragments.ReloadType
+import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -59,7 +59,7 @@ class AddToRetroPlaylist : BottomSheetDialogFragment() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         val songEntities = songs.toSongEntity(playlistEntities[which - 1])
                         repository.insertSongs(songEntities)
-                        libraryViewModel.forceReload(ReloadType.Playlists)
+                        libraryViewModel.forceReload(Playlists)
                     }
                 }
                 dismiss()

@@ -8,6 +8,4 @@ class RetroSingleCheckedListAdapter(
     context: Context,
     resource: Int = R.layout.dialog_list_item,
     objects: MutableList<String>
-) : ArrayAdapter<String>(context, resource, objects) {
-
-}
+) : ArrayAdapter<String>(context, resource, objects)

@@ -280,22 +280,22 @@ open class BugReportActivity : AbsThemeActivity() {
                 RESULT_BAD_CREDENTIALS -> MaterialAlertDialogBuilder(context)
                     .setTitle(R.string.bug_report_failed)
                     .setMessage(R.string.bug_report_failed_wrong_credentials)
-                    .setPositiveButton(android.R.string.ok, null)
+                    .setPositiveButton(R.string.ok, null)
                     .show()
                 RESULT_INVALID_TOKEN -> MaterialAlertDialogBuilder(context)
                     .setTitle(R.string.bug_report_failed)
                     .setMessage(R.string.bug_report_failed_invalid_token)
-                    .setPositiveButton(android.R.string.ok, null).show()
+                    .setPositiveButton(R.string.ok, null).show()
                 RESULT_ISSUES_NOT_ENABLED -> MaterialAlertDialogBuilder(context)
                     .setTitle(R.string.bug_report_failed)
                     .setMessage(R.string.bug_report_failed_issues_not_available)
-                    .setPositiveButton(android.R.string.ok, null)
+                    .setPositiveButton(R.string.ok, null)
 
                 else -> MaterialAlertDialogBuilder(context)
                     .setTitle(R.string.bug_report_failed)
                     .setMessage(R.string.bug_report_failed_unknown)
-                    .setPositiveButton(android.R.string.ok) { _, _ -> tryToFinishActivity() }
-                    .setNegativeButton(android.R.string.cancel) { _, _ -> { tryToFinishActivity() } }
+                    .setPositiveButton(R.string.ok) { _, _ -> tryToFinishActivity() }
+                    .setNegativeButton(android.R.string.cancel) { _, _ -> tryToFinishActivity() }
             }
         }
 

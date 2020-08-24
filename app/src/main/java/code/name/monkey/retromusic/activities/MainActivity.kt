@@ -108,7 +108,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         if (intent.action != null && (intent.action == MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH)
         ) {
             val songs: List<Song> =
-                getSongs(this, intent.extras!!)
+                getSongs(intent.extras!!)
             if (shuffleMode == MusicService.SHUFFLE_MODE_SHUFFLE) {
                 openAndShuffleQueue(songs, true)
             } else {

@@ -66,7 +66,8 @@ class RemoveSongFromPlaylistDialog : DialogFragment() {
             .setMessage(pair.second)
             .setPositiveButton(R.string.remove_action) { _, _ ->
                 lifecycleScope.launch(Dispatchers.IO) {
-                    repository.removeSongFromPlaylist(songs)
+                    //repository.removeSongFromPlaylist(songs)
+                    repository.deleteSongsInPlaylist(songs)
                     libraryViewModel.forceReload(Playlists)
                 }
             }

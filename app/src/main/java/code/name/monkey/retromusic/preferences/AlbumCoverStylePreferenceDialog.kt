@@ -106,7 +106,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
     override fun onPageScrollStateChanged(state: Int) {
     }
 
-    private class AlbumCoverStyleAdapter internal constructor(private val context: Context) :
+    private class AlbumCoverStyleAdapter(private val context: Context) :
         PagerAdapter() {
 
         override fun instantiateItem(collection: ViewGroup, position: Int): Any {

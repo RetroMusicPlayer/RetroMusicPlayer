@@ -310,7 +310,7 @@ object MusicUtil : KoinComponent {
         context: Context,
         playlist: Playlist
     ): Boolean {
-        return playlist.name != null && playlist.name == context.getString(R.string.favorites)
+        return playlist.name == context.getString(R.string.favorites)
     }
 
     fun toggleFavorite(context: Context, song: Song) {
@@ -349,7 +349,7 @@ object MusicUtil : KoinComponent {
             BaseColumns._ID, MediaStore.MediaColumns.DATA
         )
         // Split the query into multiple batches, and merge the resulting cursors
-        var batchStart = 0
+        var batchStart: Int
         var batchEnd = 0
         val batchSize =
             1000000 / 10 // 10^6 being the SQLite limite on the query lenth in bytes, 10 being the max number of digits in an int, used to store the track ID

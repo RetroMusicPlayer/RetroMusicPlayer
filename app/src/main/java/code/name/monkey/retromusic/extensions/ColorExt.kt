@@ -23,6 +23,7 @@ import android.widget.CheckBox
 import android.widget.SeekBar
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
@@ -130,6 +131,12 @@ fun MaterialButton.applyColor(color: Int) {
     iconTint = textColorColorStateList
 }
 
+fun MaterialButton.applyOutlineColor(color: Int) {
+    val textColorColorStateList = ColorStateList.valueOf(color)
+    setTextColor(textColorColorStateList)
+    iconTint = textColorColorStateList
+}
+
 fun TextInputLayout.accentColor() {
     val accentColor = ThemeStore.accentColor(context)
     val colorState = ColorStateList.valueOf(accentColor)
@@ -140,4 +147,8 @@ fun TextInputLayout.accentColor() {
 
 fun TextInputEditText.accentColor() {
 
+}
+
+fun AppCompatImageView.accentColor(): Int {
+    return ThemeStore.accentColor(context)
 }

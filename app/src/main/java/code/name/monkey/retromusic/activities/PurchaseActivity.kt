@@ -108,7 +108,7 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         super.onDestroy()
     }
 
-    private class RestorePurchaseAsyncTask internal constructor(purchaseActivity: PurchaseActivity) :
+    private class RestorePurchaseAsyncTask(purchaseActivity: PurchaseActivity) :
         AsyncTask<Void, Void, Boolean>() {
 
         private val buyActivityWeakReference: WeakReference<PurchaseActivity> = WeakReference(

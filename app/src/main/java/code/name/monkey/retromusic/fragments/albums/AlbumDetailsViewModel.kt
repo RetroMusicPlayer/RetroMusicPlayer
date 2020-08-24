@@ -27,7 +27,7 @@ class AlbumDetailsViewModel(
     fun getAlbum(): LiveData<Album> = _album
     fun getArtist(): LiveData<Artist> = _artist
     fun getAlbumInfo(): LiveData<LastFmAlbum> = _lastFmAlbum
-    fun getMoreAlbums(): LiveData<List<Album>> = _moreAlbums;
+    fun getMoreAlbums(): LiveData<List<Album>> = _moreAlbums
 
     init {
         loadAlbumDetails()

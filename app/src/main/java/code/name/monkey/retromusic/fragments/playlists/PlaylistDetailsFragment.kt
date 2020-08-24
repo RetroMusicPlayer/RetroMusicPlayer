@@ -127,7 +127,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         return String(Character.toChars(unicode))
     }
 
-    public override fun onPause() {
+    override fun onPause() {
         if (recyclerViewDragDropManager != null) {
             recyclerViewDragDropManager!!.cancelDrag()
         }

@@ -4,7 +4,6 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import code.name.monkey.retromusic.model.Song
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -37,27 +36,5 @@ class SongEntity(
     @ColumnInfo(name = "song_key")
     var songPrimaryKey: Long = 0
 
-    fun toSong(): Song {
-        return Song(
-            id,
-            title,
-            trackNumber,
-            year,
-            duration,
-            data,
-            dateModified,
-            albumId,
-            albumName,
-            artistId,
-            artistName,
-            composer,
-            albumArtist
-        )
-    }
 }
 
-fun List<SongEntity>.toSongs(): List<Song> {
-    return map {
-        it.toSong()
-    }
-}

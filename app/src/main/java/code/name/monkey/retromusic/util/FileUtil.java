@@ -245,13 +245,9 @@ public final class FileUtil {
                 .equals(android.os.Environment.MEDIA_MOUNTED);
         Boolean isSDSupportedDevice = Environment.isExternalStorageRemovable();
 
-        if (isSDSupportedDevice && isSDPresent) {
-            // yes SD-card is present
-            return true;
-        } else {
-            return false;
-            // Sorry
-        }
+        // yes SD-card is present
+        // Sorry
+        return isSDSupportedDevice && isSDPresent;
     }
 
     public static File safeGetCanonicalFile(File file) {

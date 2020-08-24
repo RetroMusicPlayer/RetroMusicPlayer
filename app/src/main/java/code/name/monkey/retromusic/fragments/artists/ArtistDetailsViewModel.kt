@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.network.model.LastFmArtist
+import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

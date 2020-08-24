@@ -1,9 +1,12 @@
 package code.name.monkey.retromusic
 
-import code.name.monkey.retromusic.db.PlaylistDatabase
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import code.name.monkey.retromusic.db.BlackListStoreEntity
+import code.name.monkey.retromusic.db.PlaylistDao
 import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.repository.RealRoomPlaylistRepository
-import code.name.monkey.retromusic.repository.RoomPlaylistRepository
+import code.name.monkey.retromusic.db.RetroDatabase
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.albums.AlbumDetailsViewModel
 import code.name.monkey.retromusic.fragments.artists.ArtistDetailsViewModel
@@ -13,11 +16,42 @@ import code.name.monkey.retromusic.fragments.search.SearchViewModel
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.network.networkModule
 import code.name.monkey.retromusic.repository.*
+import code.name.monkey.retromusic.util.FilePathUtil
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
+private val roomModule = module {
+
+    single {
+        Room.databaseBuilder(androidContext(), RetroDatabase::class.java, "playlist.db")
+            .allowMainThreadQueries()
+            .addCallback(object : RoomDatabase.Callback() {
+                override fun onOpen(db: SupportSQLiteDatabase) {
+                    super.onOpen(db)
+                    GlobalScope.launch(IO) {
+                        FilePathUtil.blacklistFilePaths().map {
+                            get<PlaylistDao>().insertBlacklistPath(BlackListStoreEntity(it))
+                        }
+                    }
+                }
+            })
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    factory {
+        get<RetroDatabase>().playlistDao()
+    }
+
+    single {
+        RealRoomRepository(get())
+    } bind RoomPlaylistRepository::class
+}
 private val mainModule = module {
     single {
         androidContext().contentResolver
@@ -70,14 +104,6 @@ private val dataModule = module {
             get()
         )
     }
-
-    single {
-        PlaylistDatabase.getDatabase(get()).playlistDao()
-    }
-
-    single {
-        RealRoomPlaylistRepository(get())
-    } bind RoomPlaylistRepository::class
 }
 
 private val viewModules = module {
@@ -119,4 +145,4 @@ private val viewModules = module {
     }
 }
 
-val appModules = listOf(mainModule, dataModule, viewModules, networkModule)
+val appModules = listOf(mainModule, dataModule, viewModules, networkModule, roomModule)

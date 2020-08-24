@@ -169,7 +169,7 @@ class PlayingQueueAdapter(
         holder: ViewHolder?,
         position: Int, @SwipeableItemResults result: Int
     ): SwipeResultAction {
-        return if (result === SwipeableItemConstants.RESULT_CANCELED) {
+        return if (result == SwipeableItemConstants.RESULT_CANCELED) {
             SwipeResultActionDefault()
         } else {
             SwipedResultActionRemoveItem(this, position, activity)

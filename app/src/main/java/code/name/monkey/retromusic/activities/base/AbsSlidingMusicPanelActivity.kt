@@ -28,7 +28,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
+abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     companion object {
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }

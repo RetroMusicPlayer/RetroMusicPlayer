@@ -44,9 +44,9 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         window.enterTransition = slide
     }
 
-    override fun loadImageFromFile(selectedFileUri: Uri?) {
+    override fun loadImageFromFile(selectedFile: Uri?) {
 
-        Glide.with(this@AlbumTagEditorActivity).load(selectedFileUri).asBitmap()
+        Glide.with(this@AlbumTagEditorActivity).load(selectedFile).asBitmap()
             .transcode(BitmapPaletteTranscoder(this), BitmapPaletteWrapper::class.java)
             .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
             .into(object : SimpleTarget<BitmapPaletteWrapper>() {

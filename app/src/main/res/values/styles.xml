@@ -63,12 +63,6 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="ToolbarTextAppearanceNormal.Library" parent="ToolbarTextAppearanceNormal">
-        <item name="android:textAppearance">@style/TextViewHeadline6</item>
-        <item name="fontFamily">@font/pacifico</item>
-        <item name="android:fontFamily">@font/pacifico</item>
-    </style>
-
     <style name="BigTitleTextAppearanceToolbar">
         <item name="android:textAppearance">@style/TextViewHeadline6</item>
         <item name="android:layout_width">wrap_content</item>
@@ -113,6 +107,10 @@
 
     <style name="TextViewNormal" parent="">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextViewHeadline4.Compress" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">32sp</item>
     </style>
 
     <style name="TextViewHeadline4" parent="TextAppearance.MaterialComponents.Headline4" />
@@ -238,4 +236,12 @@
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
     </style>
+
+
+
+    <style name="Widget.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+
+    </style>
+
+
 </resources>

@@ -93,7 +93,7 @@ object PreferenceUtil {
         }
     }
 
-    val languageCode get() = sharedPreferences.getString(LANGUAGE_NAME, "auto")
+    val languageCode: String get() = sharedPreferences.getString(LANGUAGE_NAME, "auto") ?: "auto"
 
     var userName
         get() = sharedPreferences.getString(
@@ -528,7 +528,7 @@ object PreferenceUtil {
         get() {
             val folderPath = FoldersFragment.getDefaultStartDirectory().path
             val filePath: String = sharedPreferences.getStringOrDefault(START_DIRECTORY, folderPath)
-            return File(filePath) ?: File(FoldersFragment.getDefaultStartDirectory().path)
+            return File(filePath)
         }
         set(value) = sharedPreferences.edit {
             putString(

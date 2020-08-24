@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.helper.menu
 
 
-import android.app.Activity
 import android.content.Context
 import android.view.MenuItem
 import android.widget.Toast
@@ -72,7 +71,7 @@ object PlaylistMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_rename_playlist -> {
-                RenameRetroPlaylistDialog.create(playlistWithSongs.playlistEntity )
+                RenameRetroPlaylistDialog.create(playlistWithSongs.playlistEntity)
                     .show(activity.supportFragmentManager, "RENAME_PLAYLIST")
                 return true
             }
@@ -90,7 +89,6 @@ object PlaylistMenuHelper : KoinComponent {
     }
 
     private fun getPlaylistSongs(
-        activity: Activity,
         playlist: Playlist
     ): List<Song> {
         return if (playlist is AbsCustomPlaylist) {
@@ -100,7 +98,7 @@ object PlaylistMenuHelper : KoinComponent {
         }
     }
 
-    private class SavePlaylistAsyncTask internal constructor(context: Context) :
+    private class SavePlaylistAsyncTask(context: Context) :
         WeakContextAsyncTask<Playlist, String, String>(context) {
 
         override fun doInBackground(vararg params: Playlist): String {

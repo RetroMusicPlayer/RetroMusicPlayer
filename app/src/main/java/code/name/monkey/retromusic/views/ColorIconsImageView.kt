@@ -39,7 +39,7 @@ class ColorIconsImageView @JvmOverloads constructor(
         val attributes =
             context.obtainStyledAttributes(attrs, R.styleable.ColorIconsImageView, 0, 0)
         val color =
-            attributes.getColor(R.styleable.ColorIconsImageView_iconBackgroundColor, Color.RED);
+            attributes.getColor(R.styleable.ColorIconsImageView_iconBackgroundColor, Color.RED)
         setIconBackgroundColor(color)
         attributes.recycle()
     }

@@ -15,8 +15,8 @@
 package code.name.monkey.retromusic.glide.artistimage
 
 import android.content.Context
-import code.name.monkey.retromusic.deezer.DeezerApiService
 import code.name.monkey.retromusic.deezer.Data
+import code.name.monkey.retromusic.deezer.DeezerApiService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Priority
@@ -69,13 +69,13 @@ class ArtistImageFetcher(
             val response = deezerApiService.getArtistImage(artists[0]).execute()
 
             if (!response.isSuccessful) {
-                throw   IOException("Request failed with code: " + response.code());
+                throw   IOException("Request failed with code: " + response.code())
             }
 
             if (isCancelled) return null
 
             return try {
-                val deezerResponse = response.body();
+                val deezerResponse = response.body()
                 val imageUrl = deezerResponse?.data?.get(0)?.let { getHighestQuality(it) }
                 // Fragile way to detect a place holder image returned from Deezer:
                 // ex: "https://e-cdns-images.dzcdn.net/images/artist//250x250-000000-80-0-0.jpg"

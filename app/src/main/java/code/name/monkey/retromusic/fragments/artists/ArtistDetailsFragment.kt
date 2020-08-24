@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
 import code.name.monkey.retromusic.extensions.applyColor
+import code.name.monkey.retromusic.extensions.applyOutlineColor
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
@@ -72,7 +73,6 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         setupRecyclerView()
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
-
             showArtist(it)
             startPostponedEnterTransition()
         })
@@ -191,7 +191,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
 
     private fun setColors(color: MediaNotificationProcessor) {
         shuffleAction.applyColor(color.backgroundColor)
-        playAction.applyColor(color.backgroundColor)
+        playAction.applyOutlineColor(color.backgroundColor)
     }
 
     override fun onAlbumClick(albumId: Int, view: View) {

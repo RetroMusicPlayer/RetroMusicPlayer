@@ -36,11 +36,62 @@ public class ImageUtils {
     private static final int ALPHA_TOLERANCE = 50;
     // Size of the smaller bitmap we're actually going to scan.
     private static final int COMPACT_BITMAP_SIZE = 64; // pixels
+    private final Matrix mTempMatrix = new Matrix();
     private int[] mTempBuffer;
     private Bitmap mTempCompactBitmap;
     private Canvas mTempCompactBitmapCanvas;
     private Paint mTempCompactBitmapPaint;
-    private final Matrix mTempMatrix = new Matrix();
+
+    /**
+     * Classifies a color as grayscale or not. Grayscale here means "very close to a perfect
+     * gray"; if all three channels are approximately equal, this will return true.
+     * <p>
+     * Note that really transparent colors are always grayscale.
+     */
+    public static boolean isGrayscale(int color) {
+        int alpha = 0xFF & (color >> 24);
+        if (alpha < ALPHA_TOLERANCE) {
+            return true;
+        }
+        int r = 0xFF & (color >> 16);
+        int g = 0xFF & (color >> 8);
+        int b = 0xFF & color;
+        return Math.abs(r - g) < TOLERANCE
+                && Math.abs(r - b) < TOLERANCE
+                && Math.abs(g - b) < TOLERANCE;
+    }
+
+    /**
+     * Convert a drawable to a bitmap, scaled to fit within maxWidth and maxHeight.
+     */
+    public static Bitmap buildScaledBitmap(Drawable drawable, int maxWidth,
+                                           int maxHeight) {
+        if (drawable == null) {
+            return null;
+        }
+        int originalWidth = drawable.getIntrinsicWidth();
+        int originalHeight = drawable.getIntrinsicHeight();
+        if ((originalWidth <= maxWidth) && (originalHeight <= maxHeight) &&
+                (drawable instanceof BitmapDrawable)) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+        if (originalHeight <= 0 || originalWidth <= 0) {
+            return null;
+        }
+        // create a new bitmap, scaling down to fit the max dimensions of
+        // a large notification icon if necessary
+        float ratio = Math.min((float) maxWidth / (float) originalWidth,
+                (float) maxHeight / (float) originalHeight);
+        ratio = Math.min(1.0f, ratio);
+        int scaledWidth = (int) (ratio * originalWidth);
+        int scaledHeight = (int) (ratio * originalHeight);
+        Bitmap result = Bitmap.createBitmap(scaledWidth, scaledHeight, Config.ARGB_8888);
+        // and paint our app bitmap on it
+        Canvas canvas = new Canvas(result);
+        drawable.setBounds(0, 0, scaledWidth, scaledHeight);
+        drawable.draw(canvas);
+        return result;
+    }
 
     /**
      * Checks whether a bitmap is grayscale. Grayscale here means "very close to a perfect
@@ -92,56 +143,5 @@ public class ImageUtils {
         if (mTempBuffer == null || mTempBuffer.length < size) {
             mTempBuffer = new int[size];
         }
-    }
-
-    /**
-     * Classifies a color as grayscale or not. Grayscale here means "very close to a perfect
-     * gray"; if all three channels are approximately equal, this will return true.
-     * <p>
-     * Note that really transparent colors are always grayscale.
-     */
-    public static boolean isGrayscale(int color) {
-        int alpha = 0xFF & (color >> 24);
-        if (alpha < ALPHA_TOLERANCE) {
-            return true;
-        }
-        int r = 0xFF & (color >> 16);
-        int g = 0xFF & (color >> 8);
-        int b = 0xFF & color;
-        return Math.abs(r - g) < TOLERANCE
-                && Math.abs(r - b) < TOLERANCE
-                && Math.abs(g - b) < TOLERANCE;
-    }
-
-    /**
-     * Convert a drawable to a bitmap, scaled to fit within maxWidth and maxHeight.
-     */
-    public static Bitmap buildScaledBitmap(Drawable drawable, int maxWidth,
-                                           int maxHeight) {
-        if (drawable == null) {
-            return null;
-        }
-        int originalWidth = drawable.getIntrinsicWidth();
-        int originalHeight = drawable.getIntrinsicHeight();
-        if ((originalWidth <= maxWidth) && (originalHeight <= maxHeight) &&
-                (drawable instanceof BitmapDrawable)) {
-            return ((BitmapDrawable) drawable).getBitmap();
-        }
-        if (originalHeight <= 0 || originalWidth <= 0) {
-            return null;
-        }
-        // create a new bitmap, scaling down to fit the max dimensions of
-        // a large notification icon if necessary
-        float ratio = Math.min((float) maxWidth / (float) originalWidth,
-                (float) maxHeight / (float) originalHeight);
-        ratio = Math.min(1.0f, ratio);
-        int scaledWidth = (int) (ratio * originalWidth);
-        int scaledHeight = (int) (ratio * originalHeight);
-        Bitmap result = Bitmap.createBitmap(scaledWidth, scaledHeight, Config.ARGB_8888);
-        // and paint our app bitmap on it
-        Canvas canvas = new Canvas(result);
-        drawable.setBounds(0, 0, scaledWidth, scaledHeight);
-        drawable.draw(canvas);
-        return result;
     }
 }

@@ -42,24 +42,25 @@ class DeleteSongsDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
-        var title = 0
-        var message: CharSequence = ""
-        if (songs.size > 1) {
-            title = R.string.delete_songs_title
-            message = HtmlCompat.fromHtml(
-                String.format(getString(R.string.delete_x_songs), songs.size),
-                HtmlCompat.FROM_HTML_MODE_LEGACY
+        val pair = if (songs.size > 1) {
+            Pair(
+                R.string.delete_songs_title, HtmlCompat.fromHtml(
+                    String.format(getString(R.string.delete_x_songs), songs.size),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
             )
         } else {
-            title = R.string.delete_song_title
-            message = HtmlCompat.fromHtml(
-                String.format(getString(R.string.delete_song_x), songs[0].title),
-                HtmlCompat.FROM_HTML_MODE_LEGACY
+            Pair(
+                R.string.delete_song_title,
+                HtmlCompat.fromHtml(
+                    String.format(getString(R.string.delete_song_x), songs[0].title),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
             )
         }
 
-        return materialDialog(title)
-            .setMessage(message)
+        return materialDialog(pair.first)
+            .setMessage(pair.second)
             .setCancelable(false)
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.action_delete) { _, _ ->

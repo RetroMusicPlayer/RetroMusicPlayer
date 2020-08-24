@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.menu
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.PlaylistSong
@@ -56,7 +57,7 @@ class OrderablePlaylistSongAdapter(
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<Song>) {
         when (menuItem.itemId) {
             R.id.action_remove_from_playlist -> {
-                RemoveSongFromPlaylistDialog.create(selection.to(playlist.playListId))
+                RemoveSongFromPlaylistDialog.create(selection.toSongs(playlist.playListId))
                     .show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
                 return
             }

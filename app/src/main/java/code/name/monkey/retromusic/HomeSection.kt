@@ -23,3 +23,6 @@ const val SUGGESTIONS = 5
 const val FAVOURITES = 4
 const val GENRES = 6
 const val PLAYLISTS = 7
+const val HISTORY_PLAYLIST = 8
+const val LAST_ADDED_PLAYLIST = 9
+const val TOP_PLAYED_PLAYLIST = 10

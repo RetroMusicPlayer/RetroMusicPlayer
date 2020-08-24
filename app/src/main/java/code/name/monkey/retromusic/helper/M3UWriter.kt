@@ -13,7 +13,6 @@
  */
 package code.name.monkey.retromusic.helper
 
-import android.content.Context
 import code.name.monkey.retromusic.model.Playlist
 import java.io.BufferedWriter
 import java.io.File
@@ -24,14 +23,13 @@ object M3UWriter : M3UConstants {
     @JvmStatic
     @Throws(IOException::class)
     fun write(
-        context: Context,
         dir: File,
         playlist: Playlist
     ): File? {
         if (!dir.exists()) dir.mkdirs()
         val file = File(dir, playlist.name + "." + M3UConstants.EXTENSION)
         val songs = playlist.getSongs()
-        if (songs.size > 0) {
+        if (songs.isNotEmpty()) {
             val bw = BufferedWriter(FileWriter(file))
             bw.write(M3UConstants.HEADER)
             for (song in songs) {
