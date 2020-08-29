@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.SongEntity
@@ -14,14 +13,9 @@ import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.Playlists
-import code.name.monkey.retromusic.repository.Repository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class RemoveSongFromPlaylistDialog : DialogFragment() {
-    private val repository by inject<Repository>()
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     companion object {
@@ -65,11 +59,8 @@ class RemoveSongFromPlaylistDialog : DialogFragment() {
         return materialDialog(pair.first)
             .setMessage(pair.second)
             .setPositiveButton(R.string.remove_action) { _, _ ->
-                lifecycleScope.launch(Dispatchers.IO) {
-                    //repository.removeSongFromPlaylist(songs)
-                    repository.deleteSongsInPlaylist(songs)
-                    libraryViewModel.forceReload(Playlists)
-                }
+                libraryViewModel.deleteSongsInPlaylist(songs)
+                libraryViewModel.forceReload(Playlists)
             }
             .setNegativeButton(android.R.string.cancel, null)
             .create()

@@ -33,7 +33,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }
 
-    private val libraryViewModel by viewModel<LibraryViewModel>()
+    protected val libraryViewModel by viewModel<LibraryViewModel>()
     private lateinit var behavior: RetroBottomSheetBehavior<FrameLayout>
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var cps: NowPlayingScreen? = null
@@ -79,6 +79,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
         libraryViewModel.paletteColorLiveData.observe(this, Observer {
             this.paletteColor = it
+            miniPlayerFragment?.updateProgressBar(it)
             onPaletteColorChanged()
         })
     }

@@ -16,11 +16,9 @@ package code.name.monkey.retromusic.fragments.home
 
 import android.app.ActivityOptions
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.HISTORY_PLAYLIST
 import code.name.monkey.retromusic.LAST_ADDED_PLAYLIST
@@ -32,31 +30,18 @@ import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
 import code.name.monkey.retromusic.glide.UserProfileGlideRequest
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment :
     AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home) {
 
-    private val repository by inject<Repository>()
     private val libraryViewModel: LibraryViewModel by sharedViewModel()
-
-    private val displayMetrics: DisplayMetrics
-        get() {
-            val display = mainActivity.windowManager.defaultDisplay
-            val metrics = DisplayMetrics()
-            display.getMetrics(metrics)
-            return metrics
-        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,12 +70,7 @@ class HomeFragment :
         }
 
         actionShuffle.setOnClickListener {
-            lifecycleScope.launch {
-                MusicPlayerRemote.openAndShuffleQueue(
-                    repository.allSongs(),
-                    true
-                )
-            }
+            libraryViewModel.shuffleSongs()
         }
 
         history.setOnClickListener {

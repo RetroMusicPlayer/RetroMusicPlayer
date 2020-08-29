@@ -11,18 +11,14 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.extensions.textColorPrimary
-import code.name.monkey.retromusic.extensions.textColorSecondary
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_mini_player.*
 import kotlin.math.abs
 
@@ -67,7 +63,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
 
     private fun setUpMiniPlayer() {
         setUpPlayPauseButton()
-        ViewUtil.setProgressDrawable(progressBar, ThemeStore.accentColor(requireContext()))
+        progressBar.accentColor()
     }
 
     private fun setUpPlayPauseButton() {
@@ -127,6 +123,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
         } else {
             miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_play_arrow)
         }
+    }
+
+    fun updateProgressBar(paletteColor: Int) {
+         progressBar.applyColor(paletteColor)
     }
 
     class FlingPlayBackController(context: Context) : View.OnTouchListener {
