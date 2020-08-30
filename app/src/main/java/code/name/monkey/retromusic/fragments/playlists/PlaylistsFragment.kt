@@ -7,15 +7,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
-import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 
-class PlaylistsFragment :
-    AbsRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>(),
-    MainActivityFragmentCallbacks {
-
-    override fun handleBackPress(): Boolean {
-        return false
-    }
+class PlaylistsFragment : AbsRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

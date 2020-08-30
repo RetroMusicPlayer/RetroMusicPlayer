@@ -14,8 +14,7 @@ import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-class AlbumsFragment :
-    AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
+class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     AlbumClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
