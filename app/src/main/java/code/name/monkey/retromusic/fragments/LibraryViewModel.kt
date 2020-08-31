@@ -52,7 +52,7 @@ class LibraryViewModel(
         artists.value = loadArtists.await()
         playlists.value = loadPlaylists.await()
         roomPlaylists.value = loadPlaylistsWithSongs.await()
-        //genres.value = loadGenres.await()
+        genres.value = loadGenres.await()
     }
 
     private val loadHome: Deferred<List<Home>>
