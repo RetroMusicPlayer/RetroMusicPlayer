@@ -15,7 +15,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 class SongsFragment :
     AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
-
     override fun handleBackPress(): Boolean {
         return false
     }

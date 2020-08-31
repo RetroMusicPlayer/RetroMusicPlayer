@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.db.toPlayCount
 import code.name.monkey.retromusic.fragments.ReloadType.*
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
@@ -51,7 +49,7 @@ class LibraryViewModel(
         artists.value = loadArtists.await()
         playlists.value = loadPlaylists.await()
         roomPlaylists.value = loadPlaylistsWithSongs.await()
-        genres.value = loadGenres.await()
+        //genres.value = loadGenres.await()
     }
 
     private val loadHome: Deferred<List<Home>>
@@ -86,7 +84,6 @@ class LibraryViewModel(
 
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
-        println(reloadType)
         when (reloadType) {
             Songs -> songs.value = loadSongs.await()
             Albums -> albums.value = loadAlbums.await()
@@ -121,22 +118,7 @@ class LibraryViewModel(
 
     override fun onPlayingMetaChanged() {
         println("onPlayingMetaChanged")
-        viewModelScope.launch(IO) {
-            val entity = repository.songPresentInHistory(MusicPlayerRemote.currentSong)
-            if (entity != null) {
-                repository.updateHistorySong(MusicPlayerRemote.currentSong)
-            } else {
-                repository.addSongToHistory(MusicPlayerRemote.currentSong)
-            }
-            val songs = repository.checkSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
-            if (songs.isNotEmpty()) {
-                repository.updateSongInPlayCount(songs.first().apply {
-                    playCount += playCount + 1
-                })
-            } else {
-                repository.insertSongInPlayCount(MusicPlayerRemote.currentSong.toPlayCount())
-            }
-        }
+
     }
 
     override fun onPlayStateChanged() {

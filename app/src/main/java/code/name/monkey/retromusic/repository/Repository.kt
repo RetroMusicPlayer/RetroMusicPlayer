@@ -35,9 +35,11 @@ interface Repository {
     fun artistsFlow(): Flow<Result<List<Artist>>>
     fun playlistsFlow(): Flow<Result<List<Playlist>>>
     fun genresFlow(): Flow<Result<List<Genre>>>
-
+    fun historySong(): LiveData<List<HistoryEntity>>
+    fun favorites(): LiveData<List<SongEntity>>
     suspend fun allAlbums(): List<Album>
-    suspend fun albumById(albumId: Int): Album
+    suspend fun albumByIdAsync(albumId: Int): Album
+    fun albumById(albumId: Int): Album
     suspend fun allSongs(): List<Song>
     suspend fun allArtists(): List<Artist>
     suspend fun albumArtists(): List<Artist>
@@ -75,7 +77,7 @@ interface Repository {
     suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
     suspend fun removeSongFromPlaylist(songEntity: SongEntity)
     suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
-    suspend fun favoritePlaylist(): List<PlaylistEntity>
+    suspend fun favoritePlaylist(): PlaylistEntity
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
     suspend fun addSongToHistory(currentSong: Song)
     suspend fun songPresentInHistory(currentSong: Song): HistoryEntity?
@@ -88,8 +90,7 @@ interface Repository {
     suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
-    fun historySong(): LiveData<List<HistoryEntity>>
-    fun favorites(): LiveData<List<SongEntity>>
+    suspend fun blackListPaths(): List<BlackListStoreEntity>
 }
 
 class RealRepository(
@@ -103,13 +104,13 @@ class RealRepository(
     private val playlistRepository: PlaylistRepository,
     private val searchRepository: RealSearchRepository,
     private val topPlayedRepository: TopPlayedRepository,
-    private val roomRepository: RoomPlaylistRepository
+    private val roomRepository: RoomRepository
 ) : Repository {
 
     override suspend fun allAlbums(): List<Album> = albumRepository.albums()
 
-    override suspend fun albumById(albumId: Int): Album = albumRepository.album(albumId)
-
+    override suspend fun albumByIdAsync(albumId: Int): Album = albumRepository.album(albumId)
+    override fun albumById(albumId: Int): Album = albumRepository.album(albumId)
     override suspend fun allArtists(): List<Artist> = artistRepository.artists()
 
     override suspend fun albumArtists(): List<Artist> = artistRepository.albumArtists()
@@ -130,27 +131,23 @@ class RealRepository(
 
     override suspend fun allSongs(): List<Song> = songRepository.songs()
 
-
     override suspend fun search(query: String?): MutableList<Any> =
         searchRepository.searchAll(context, query)
 
-    override suspend fun getPlaylistSongs(playlist: Playlist): List<Song> {
-        return if (playlist is AbsCustomPlaylist) {
+    override suspend fun getPlaylistSongs(playlist: Playlist): List<Song> =
+        if (playlist is AbsCustomPlaylist) {
             playlist.songs()
         } else {
             PlaylistSongsLoader.getPlaylistSongList(context, playlist.id)
         }
-    }
 
     override suspend fun getGenre(genreId: Int): List<Song> = genreRepository.songs(genreId)
-
 
     override suspend fun artistInfo(
         name: String,
         lang: String?,
         cache: String?
     ): LastFmArtist = lastFMService.artistInfo(name, lang, cache)
-
 
     override suspend fun albumInfo(
         artist: String,
@@ -193,8 +190,8 @@ class RealRepository(
             topAlbumsHome(),
             recentArtistsHome(),
             recentAlbumsHome(),
-            favoritePlaylistHome(),
-            genresHome()
+            favoritePlaylistHome()
+            // genresHome()
         )
         for (section in sections) {
             if (section.arrayList.isNotEmpty()) {
@@ -211,11 +208,10 @@ class RealRepository(
     override suspend fun playlistWithSongs(): List<PlaylistWithSongs> =
         roomRepository.playlistWithSongs()
 
-    override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song> {
-        return playlistWithSongs.songs.map {
+    override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song> =
+        playlistWithSongs.songs.map {
             it.toSong()
         }
-    }
 
     override suspend fun insertSongs(songs: List<SongEntity>) =
         roomRepository.insertSongs(songs)
@@ -243,7 +239,7 @@ class RealRepository(
     override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) =
         roomRepository.deleteSongsFromPlaylist(playlists)
 
-    override suspend fun favoritePlaylist(): List<PlaylistEntity> =
+    override suspend fun favoritePlaylist(): PlaylistEntity =
         roomRepository.favoritePlaylist(context.getString(R.string.favorites))
 
     override suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity> =
@@ -279,6 +275,9 @@ class RealRepository(
 
     override suspend fun playCountSongs(): List<PlayCountEntity> =
         roomRepository.playCountSongs()
+
+    override suspend fun blackListPaths(): List<BlackListStoreEntity> =
+        roomRepository.blackListPaths()
 
     override fun historySong(): LiveData<List<HistoryEntity>> =
         roomRepository.historySongs()
@@ -328,7 +327,6 @@ class RealRepository(
         val songs = favoritePlaylistSongs().map {
             it.toSong()
         }
-        println(songs.size)
         return Home(songs, FAVOURITES, R.string.favorites)
     }
 

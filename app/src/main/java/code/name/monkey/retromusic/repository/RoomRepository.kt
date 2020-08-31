@@ -6,7 +6,10 @@ import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.model.Song
 
 
-interface RoomPlaylistRepository {
+interface RoomRepository {
+    fun historySongs(): LiveData<List<HistoryEntity>>
+    fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>>
+    fun insertBlacklistPath(blackListStoreEntity: BlackListStoreEntity)
     suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
     suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity>
     suspend fun playlists(): List<PlaylistEntity>
@@ -17,7 +20,7 @@ interface RoomPlaylistRepository {
     suspend fun renamePlaylistEntity(playlistId: Int, name: String)
     suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
     suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
-    suspend fun favoritePlaylist(favorite: String): List<PlaylistEntity>
+    suspend fun favoritePlaylist(favorite: String): PlaylistEntity
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
     suspend fun removeSongFromPlaylist(songEntity: SongEntity)
     suspend fun addSongToHistory(currentSong: Song)
@@ -29,13 +32,18 @@ interface RoomPlaylistRepository {
     suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
-    fun historySongs(): LiveData<List<HistoryEntity>>
-    fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>>
+    suspend fun insertBlacklistPath(blackListStoreEntities: List<BlackListStoreEntity>)
+    suspend fun deleteBlacklistPath(blackListStoreEntity: BlackListStoreEntity)
+    suspend fun clearBlacklist()
+    suspend fun insertBlacklistPathAsync(blackListStoreEntity: BlackListStoreEntity)
+    suspend fun blackListPaths(): List<BlackListStoreEntity>
 }
 
 class RealRoomRepository(
-    private val playlistDao: PlaylistDao
-) : RoomPlaylistRepository {
+    private val playlistDao: PlaylistDao,
+    private val blackListStoreDao: BlackListStoreDao,
+    private val playCountDao: PlayCountDao
+) : RoomRepository {
     @WorkerThread
     override suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
         playlistDao.createPlaylist(playlistEntity)
@@ -51,20 +59,18 @@ class RealRoomRepository(
     override suspend fun playlistWithSongs(): List<PlaylistWithSongs> =
         playlistDao.playlistsWithSongs()
 
-    @WorkerThread
-    override suspend fun insertSongs(songs: List<SongEntity>) {
-        /* val tempList = ArrayList<SongEntity>(songs)
+    /* val tempList = ArrayList<SongEntity>(songs)
          val existingSongs = songs.map {
              playlistDao.checkSongExistsWithPlaylistName(it.playlistCreatorName, it.songId)
          }.first()
          println("Existing ${existingSongs.size}")
          tempList.removeAll(existingSongs)*/
+    @WorkerThread
+    override suspend fun insertSongs(songs: List<SongEntity>) =
         playlistDao.insertSongsToPlaylist(songs)
-    }
 
-    override suspend fun getSongs(playlistEntity: PlaylistEntity): List<SongEntity> {
-        return playlistDao.songsFromPlaylist(playlistEntity.playListId)
-    }
+    override suspend fun getSongs(playlistEntity: PlaylistEntity): List<SongEntity> =
+        playlistDao.songsFromPlaylist(playlistEntity.playListId)
 
     override suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>) =
         playlistDao.deletePlaylists(playlistEntities)
@@ -75,14 +81,21 @@ class RealRoomRepository(
     override suspend fun deleteSongsInPlaylist(songs: List<SongEntity>) =
         playlistDao.deleteSongsInPlaylist(songs)
 
-    override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) {
+    override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) =
         playlists.forEach {
             playlistDao.deleteSongsInPlaylist(it.playListId)
         }
+
+    override suspend fun favoritePlaylist(favorite: String): PlaylistEntity {
+        val playlist: PlaylistEntity? = playlistDao.isPlaylistExists(favorite).firstOrNull()
+        return if (playlist != null) {
+            playlist
+        } else {
+            createPlaylist(PlaylistEntity(favorite))
+            playlistDao.isPlaylistExists(favorite).first()
+        }
     }
 
-    override suspend fun favoritePlaylist(favorite: String): List<PlaylistEntity> =
-        playlistDao.isPlaylistExists(favorite)
 
     override suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity> =
         playlistDao.isSongExistsInPlaylist(
@@ -111,25 +124,41 @@ class RealRoomRepository(
             playlistDao.isPlaylistExists(favorite).first().playListId
         )
 
-    override suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity> {
-        return if (playlistDao.isPlaylistExists(favorite).isNotEmpty())
+    override suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity> =
+        if (playlistDao.isPlaylistExists(favorite).isNotEmpty())
             playlistDao.favoritesSongs(
                 playlistDao.isPlaylistExists(favorite).first().playListId
             ) else emptyList()
-    }
 
     override suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity) =
-        playlistDao.insertSongInPlayCount(playCountEntity)
+        playCountDao.insertSongInPlayCount(playCountEntity)
 
     override suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity) =
-        playlistDao.updateSongInPlayCount(playCountEntity)
+        playCountDao.updateSongInPlayCount(playCountEntity)
 
     override suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity) =
-        playlistDao.deleteSongInPlayCount(playCountEntity)
+        playCountDao.deleteSongInPlayCount(playCountEntity)
 
     override suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity> =
-        playlistDao.checkSongExistInPlayCount(songId)
+        playCountDao.checkSongExistInPlayCount(songId)
 
     override suspend fun playCountSongs(): List<PlayCountEntity> =
-        playlistDao.playCountSongs()
+        playCountDao.playCountSongs()
+
+    override fun insertBlacklistPath(blackListStoreEntity: BlackListStoreEntity) =
+        blackListStoreDao.insertBlacklistPath(blackListStoreEntity)
+
+    override suspend fun insertBlacklistPath(blackListStoreEntities: List<BlackListStoreEntity>) =
+        blackListStoreDao.insertBlacklistPath(blackListStoreEntities)
+
+    override suspend fun insertBlacklistPathAsync(blackListStoreEntity: BlackListStoreEntity) =
+        blackListStoreDao.insertBlacklistPath(blackListStoreEntity)
+
+    override suspend fun blackListPaths(): List<BlackListStoreEntity> =
+        blackListStoreDao.blackListPaths()
+
+    override suspend fun deleteBlacklistPath(blackListStoreEntity: BlackListStoreEntity) =
+        blackListStoreDao.deleteBlacklistPath(blackListStoreEntity)
+
+    override suspend fun clearBlacklist() = blackListStoreDao.clearBlacklist()
 }

@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments.home
 
 import android.app.ActivityOptions
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -50,13 +49,6 @@ class HomeFragment :
     private val repository by inject<Repository>()
     private val libraryViewModel: LibraryViewModel by sharedViewModel()
 
-    private val displayMetrics: DisplayMetrics
-        get() {
-            val display = mainActivity.windowManager.defaultDisplay
-            val metrics = DisplayMetrics()
-            display.getMetrics(metrics)
-            return metrics
-        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

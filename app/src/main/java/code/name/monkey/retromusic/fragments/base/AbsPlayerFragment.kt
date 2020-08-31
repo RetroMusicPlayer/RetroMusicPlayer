@@ -35,7 +35,6 @@ import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.*
 import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
@@ -75,7 +74,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             R.id.action_add_to_playlist -> {
                 lifecycleScope.launch(IO) {
                     val playlists = get<RealRepository>().roomPlaylists()
-                    withContext(Dispatchers.Main) {
+                    withContext(Main) {
                         AddToRetroPlaylist.create(playlists, song)
                             .show(childFragmentManager, "ADD_PLAYLIST")
                     }
@@ -87,7 +86,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_save_playing_queue -> {
-                CreatePlaylistDialog.create(ArrayList(MusicPlayerRemote.playingQueue))
+                CreateRetroPlaylist.create(ArrayList(MusicPlayerRemote.playingQueue))
                     .show(childFragmentManager, "ADD_TO_PLAYLIST")
                 return true
             }
@@ -163,15 +162,17 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     protected open fun toggleFavorite(song: Song) {
         lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity = repository.favoritePlaylist().first()
-            val songEntity = song.toSongEntity(playlist.playListId)
-            val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
-            if (isFavorite) {
-                repository.removeSongFromPlaylist(songEntity)
-            } else {
-                repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-                libraryViewModel.forceReload(Playlists)
+            val playlist: PlaylistEntity? = repository.favoritePlaylist()
+            if (playlist != null) {
+                val songEntity = song.toSongEntity(playlist.playListId)
+                val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
+                if (isFavorite) {
+                    repository.removeSongFromPlaylist(songEntity)
+                } else {
+                    repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
+                }
             }
+            libraryViewModel.forceReload(Playlists)
             requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
     }
@@ -198,13 +199,18 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     fun updateIsFavorite() {
         lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity = repository.favoritePlaylist().first()
+            val playlist: PlaylistEntity = repository.favoritePlaylist()
             val song = MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
             val isFavorite = repository.isFavoriteSong(song).isNotEmpty()
-            withContext(Dispatchers.Main) {
-                val icon = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            withContext(Main) {
+                val icon = if (isFavorite) R.drawable.ic_favorite
+                else R.drawable.ic_favorite_border
                 val drawable =
-                    RetroUtil.getTintedVectorDrawable(requireContext(), icon, toolbarIconColor())
+                    RetroUtil.getTintedVectorDrawable(
+                        requireContext(),
+                        icon,
+                        toolbarIconColor()
+                    )
                 if (playerToolbar() != null) {
                     playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)
                         ?.setIcon(drawable)?.title =

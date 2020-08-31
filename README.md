@@ -68,7 +68,7 @@ favorite songs. No other music player has this feature.
 
 We are trying our best to bring you the best user experience. The app is regulary being updated for bug fixes and new features.
 
-### FAQ
+### ❓ FAQ
 Please read the FAQ here: https://del.dog/RetroFaq
 
 In any case, you find or notice any bugs please report them by

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
@@ -33,7 +34,7 @@ class PlaylistDetailsViewModel(
 
     private fun loadPlaylistSongs(playlist: PlaylistWithSongs) =
         viewModelScope.launch(Dispatchers.IO) {
-            val songs: List<Song> = realRepository.playlistSongs(playlist)
+            val songs: List<Song> = playlist.songs.toSongs()
             withContext(Main) { _playListSongs.postValue(songs) }
         }
 

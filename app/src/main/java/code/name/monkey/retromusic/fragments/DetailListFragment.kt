@@ -85,7 +85,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             layoutManager = linearLayoutManager()
         }
         lifecycleScope.launch(IO) {
-            val songs = repository.recentSongs()
+            val songs = repository.playCountSongs().map {
+                it.toSong()
+            }
             withContext(Main) { songAdapter.swapDataSet(songs) }
         }
     }

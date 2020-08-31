@@ -1,16 +1,13 @@
 package code.name.monkey.retromusic.fragments.albums
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -24,7 +21,11 @@ class AlbumDetailsViewModel(
     private val _lastFmAlbum = MutableLiveData<LastFmAlbum>()
     private val _moreAlbums = MutableLiveData<List<Album>>()
 
-    fun getAlbum(): LiveData<Album> = _album
+    fun getAlbum(): LiveData<Album> = liveData(IO) {
+        val album = realRepository.albumByIdAsync(albumId)
+        emit(album)
+    }
+
     fun getArtist(): LiveData<Artist> = _artist
     fun getAlbumInfo(): LiveData<LastFmAlbum> = _lastFmAlbum
     fun getMoreAlbums(): LiveData<List<Album>> = _moreAlbums
@@ -33,17 +34,22 @@ class AlbumDetailsViewModel(
         loadAlbumDetails()
     }
 
-    private fun loadAlbumDetails() = viewModelScope.launch {
+    fun getAlbum2() = liveData(context = viewModelScope.coroutineContext + IO) {
+        val album = realRepository.albumByIdAsync(albumId)
+        emit(album)
+    }
+
+    private fun loadAlbumDetails() = viewModelScope.launch(IO) {
         val album = loadAlbumAsync.await() ?: throw NullPointerException("Album couldn't found")
         _album.postValue(album)
     }
 
-    fun loadAlbumInfo(album: Album) = viewModelScope.launch(Dispatchers.IO) {
+    fun loadAlbumInfo(album: Album) = viewModelScope.launch(IO) {
         val lastFmAlbum = realRepository.albumInfo(album.artistName ?: "-", album.title ?: "-")
         _lastFmAlbum.postValue(lastFmAlbum)
     }
 
-    fun loadArtist(artistId: Int) = viewModelScope.launch(Dispatchers.IO) {
+    fun loadArtist(artistId: Int) = viewModelScope.launch(IO) {
         val artist = realRepository.artistById(artistId)
         _artist.postValue(artist)
 
@@ -53,8 +59,8 @@ class AlbumDetailsViewModel(
     }
 
     private val loadAlbumAsync: Deferred<Album?>
-        get() = viewModelScope.async(Dispatchers.IO) {
-            realRepository.albumById(albumId)
+        get() = viewModelScope.async(IO) {
+            realRepository.albumByIdAsync(albumId)
         }
 
     override fun onMediaStoreChanged() {

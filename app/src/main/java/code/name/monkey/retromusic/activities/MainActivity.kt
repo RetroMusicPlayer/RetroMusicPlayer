@@ -34,7 +34,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     }
 
     private val repository by inject<Repository>()
-
     private var blockRequestPermissions = false
 
     override fun createContentView(): View {
@@ -133,7 +132,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
             if (id >= 0) {
                 lifecycleScope.launch(Dispatchers.Main) {
                     val position = intent.getIntExtra("position", 0)
-                    openQueue(repository.albumById(id).songs!!, position, true)
+                    openQueue(repository.albumByIdAsync(id).songs!!, position, true)
                     handled = true
                 }
             }
