@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.fragments.ReloadType.*
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
@@ -132,6 +135,38 @@ class LibraryViewModel(
     override fun onShuffleModeChanged() {
         println("onShuffleModeChanged")
     }
+
+    fun shuffleSongs() = viewModelScope.launch(IO) {
+        val songs = repository.allSongs()
+        MusicPlayerRemote.openAndShuffleQueue(
+            songs,
+            true
+        )
+    }
+
+    fun renameRoomPlaylist(playListId: Int, name: String) = viewModelScope.launch(IO) {
+        repository.renameRoomPlaylist(playListId, name)
+    }
+
+    fun deleteSongsInPlaylist(songs: List<SongEntity>) = viewModelScope.launch(IO) {
+        repository.deleteSongsInPlaylist(songs)
+    }
+
+    fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) = viewModelScope.launch(IO) {
+        repository.deleteSongsFromPlaylist(playlists)
+    }
+
+    fun deleteRoomPlaylist(playlists: List<PlaylistEntity>) = viewModelScope.launch(IO) {
+        repository.deleteRoomPlaylist(playlists)
+    }
+
+    suspend fun albumById(id: Int) = repository.albumById(id)
+    suspend fun artistById(id: Int) = repository.artistById(id)
+    suspend fun favoritePlaylist() = repository.favoritePlaylist()
+    suspend fun isFavoriteSong(song: SongEntity) = repository.isFavoriteSong(song)
+    suspend fun insertSongs(songs: List<SongEntity>) = repository.insertSongs(songs)
+    suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
+        repository.removeSongFromPlaylist(songEntity)
 
 }
 

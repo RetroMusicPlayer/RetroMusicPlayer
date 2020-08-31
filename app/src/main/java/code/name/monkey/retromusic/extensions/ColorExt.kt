@@ -35,6 +35,8 @@ import code.name.monkey.retromusic.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.progressindicator.ProgressIndicator
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 fun Int.ripAlpha(): Int {
@@ -142,6 +144,21 @@ fun TextInputLayout.accentColor() {
     boxStrokeColor = accentColor
     defaultHintTextColor = colorState
     isHintAnimationEnabled = true
+}
+
+fun ProgressIndicator.accentColor() {
+    val accentColor = ThemeStore.accentColor(context)
+    indicatorColors = intArrayOf(accentColor)
+    trackColor = ColorUtil.withAlpha(accentColor, 0.2f)
+}
+
+fun ProgressIndicator.applyColor(color: Int) {
+    indicatorColors = intArrayOf(color)
+    trackColor = ColorUtil.withAlpha(color, 0.2f)
+}
+
+fun TextInputEditText.accentColor() {
+
 }
 
 fun AppCompatImageView.accentColor(): Int {

@@ -12,17 +12,10 @@ import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.extensions.findActivityNavController
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
-import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-class ArtistsFragment :
-    AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
-    MainActivityFragmentCallbacks, ArtistClickListener {
-
-    override fun handleBackPress(): Boolean {
-        return false
-    }
-
+class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
+    ArtistClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

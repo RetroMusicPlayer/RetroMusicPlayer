@@ -9,15 +9,9 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
-import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-class SongsFragment :
-    AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
-    MainActivityFragmentCallbacks {
-    override fun handleBackPress(): Boolean {
-        return false
-    }
+class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

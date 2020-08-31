@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
@@ -14,14 +13,10 @@ import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
-import code.name.monkey.retromusic.repository.Repository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DeleteRetroPlaylist : DialogFragment() {
-    private val repository by inject<Repository>()
+
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     companion object {
@@ -63,11 +58,9 @@ class DeleteRetroPlaylist : DialogFragment() {
             .setMessage(message)
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.action_delete) { _, _ ->
-                lifecycleScope.launch(Dispatchers.IO) {
-                    repository.deleteSongsFromPlaylist(playlists)
-                    repository.deleteRoomPlaylist(playlists)
-                    libraryViewModel.forceReload(ReloadType.Playlists)
-                }
+                libraryViewModel.deleteSongsFromPlaylist(playlists)
+                libraryViewModel.deleteRoomPlaylist(playlists)
+                libraryViewModel.forceReload(ReloadType.Playlists)
             }
             .create()
             .colorButtons()

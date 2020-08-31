@@ -15,15 +15,12 @@ import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.repository.RealRepository
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AddToRetroPlaylist : BottomSheetDialogFragment() {
-    private val repository by inject<RealRepository>()
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     companion object {
@@ -58,7 +55,7 @@ class AddToRetroPlaylist : BottomSheetDialogFragment() {
                 } else {
                     lifecycleScope.launch(Dispatchers.IO) {
                         val songEntities = songs.toSongEntity(playlistEntities[which - 1])
-                        repository.insertSongs(songEntities)
+                        libraryViewModel.insertSongs(songEntities)
                         libraryViewModel.forceReload(Playlists)
                     }
                 }
