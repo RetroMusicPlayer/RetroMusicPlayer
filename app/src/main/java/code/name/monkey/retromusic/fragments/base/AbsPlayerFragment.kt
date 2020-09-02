@@ -197,23 +197,25 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     fun updateIsFavorite() {
         lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist().first()
-            val song = MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
-            val isFavorite = libraryViewModel.isFavoriteSong(song).isNotEmpty()
-            withContext(Main) {
-                val icon =
-                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                val drawable =
-                    RetroUtil.getTintedVectorDrawable(
-                        requireContext(),
-                        icon,
-                        toolbarIconColor()
-                    )
-                if (playerToolbar() != null) {
-                    playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)
-                        ?.setIcon(drawable)?.title =
-                        if (isFavorite) getString(R.string.action_remove_from_favorites)
-                        else getString(R.string.action_add_to_favorites)
+            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist().firstOrNull()
+            if (playlist != null) {
+                val song = MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
+                val isFavorite = libraryViewModel.isFavoriteSong(song).isNotEmpty()
+                withContext(Main) {
+                    val icon =
+                        if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                    val drawable =
+                        RetroUtil.getTintedVectorDrawable(
+                            requireContext(),
+                            icon,
+                            toolbarIconColor()
+                        )
+                    if (playerToolbar() != null) {
+                        playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)
+                            ?.setIcon(drawable)?.title =
+                            if (isFavorite) getString(R.string.action_remove_from_favorites)
+                            else getString(R.string.action_add_to_favorites)
+                    }
                 }
             }
         }

@@ -5,10 +5,6 @@
     android:id="@+id/retro_graph"
     app:startDestination="@id/libraryFragment">
 
-    <include app:graph="@navigation/settings_graph" />
-
-    <include app:graph="@navigation/library_graph" />
-
     <fragment
         android:id="@+id/genreDetailsFragment"
         android:name="code.name.monkey.retromusic.fragments.genres.GenreDetailsFragment"
@@ -53,14 +49,7 @@
         android:id="@+id/libraryFragment"
         android:name="code.name.monkey.retromusic.fragments.library.LibraryFragment"
         android:label=""
-        tools:layout="@layout/fragment_library">
-        <action
-            android:id="@+id/action_main_to_library"
-            app:destination="@id/library_graph" />
-        <action
-            android:id="@+id/action_main_to_settings"
-            app:destination="@id/settings_graph" />
-    </fragment>
+        tools:layout="@layout/fragment_library" />
 
     <fragment
         android:id="@+id/detailListFragment"
