@@ -167,7 +167,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         )
     }
 
-    override suspend fun getSongPaths(): List<String> {
+    override fun getSongPaths(): List<String> {
         val songs = repository.albumById(id).songs
         val paths = ArrayList<String>(songs!!.size)
         for (song in songs) {

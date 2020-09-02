@@ -63,30 +63,6 @@ interface PlaylistDao {
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
     fun favoritesSongs(playlistId: Int): List<SongEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSongInPlayCount(playCountEntity: PlayCountEntity)
 
-    @Update
-    fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
 
-    @Delete
-    fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
-
-    @Query("SELECT * FROM PlayCountEntity WHERE id =:songId")
-    fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
-
-    @Query("SELECT * FROM PlayCountEntity ORDER BY play_count DESC")
-    fun playCountSongs(): List<PlayCountEntity>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBlacklistPath(blackListStoreEntity: BlackListStoreEntity)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertBlacklistPath(blackListStoreEntities: List<BlackListStoreEntity>)
-
-    @Delete
-    suspend fun deleteBlacklistPath(blackListStoreEntity: BlackListStoreEntity)
-
-    @Query("DELETE FROM BlackListStoreEntity")
-    suspend fun clearBlacklist()
 }

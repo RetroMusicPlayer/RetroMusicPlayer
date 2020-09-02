@@ -88,7 +88,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         writeValuesToFiles(fieldKeyValueMap, null)
     }
 
-    override suspend fun getSongPaths(): List<String> {
+    override fun getSongPaths(): List<String> {
         val paths = ArrayList<String>(1)
         paths.add(songRepository.song(id).data)
         return paths

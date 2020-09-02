@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
@@ -32,6 +33,7 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
@@ -77,9 +79,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         toolbar.title = null
 
         postponeEnterTransition()
-        detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
-            showAlbum(it)
+        detailsViewModel.getAlbum2().observe(viewLifecycleOwner, Observer {
             startPostponedEnterTransition()
+            showAlbum(it)
         })
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
             loadArtistImage(it)
@@ -232,16 +234,18 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             .build()
             .dontAnimate()
             .dontTransform()
-            .into(object : RetroMusicColoredTarget(image) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    setColors(colors)
+            .into(object : SingleColorTarget(image) {
+                override fun onColorReady(color: Int) {
+                    setColors(color)
                 }
             })
     }
 
-    private fun setColors(color: MediaNotificationProcessor) {
-        shuffleAction.applyColor(color.backgroundColor)
-        playAction.applyOutlineColor(color.backgroundColor)
+    private fun setColors(color: Int) {
+        val finalColor =
+            if (PreferenceUtil.isAdaptiveColor) color else ThemeStore.accentColor(requireContext())
+        shuffleAction.applyColor(finalColor)
+        playAction.applyOutlineColor(finalColor)
     }
 
     override fun onAlbumClick(albumId: Int, view: View) {

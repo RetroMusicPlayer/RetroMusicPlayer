@@ -154,13 +154,11 @@ class PlaylistAdapter(
 
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
         init {
-
             image?.apply {
                 val iconPadding =
                     activity.resources.getDimensionPixelSize(R.dimen.list_item_image_icon_padding)
                 setPadding(iconPadding, iconPadding, iconPadding, iconPadding)
             }
-
             menu?.setOnClickListener { view ->
                 val popupMenu = PopupMenu(activity, view)
                 popupMenu.inflate(R.menu.menu_item_playlist)

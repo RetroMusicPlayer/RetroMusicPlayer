@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.fragments.base
 
 import android.content.ContentUris
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.media.MediaMetadataRetriever
 import android.os.Build
 import android.os.Bundle
@@ -21,6 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.whichFragment
@@ -85,7 +87,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_save_playing_queue -> {
-                CreatePlaylistDialog.create(ArrayList(MusicPlayerRemote.playingQueue))
+                CreateRetroPlaylist.create(ArrayList(MusicPlayerRemote.playingQueue))
                     .show(childFragmentManager, "ADD_TO_PLAYLIST")
                 return true
             }
@@ -182,29 +184,33 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     protected open fun toggleFavorite(song: Song) {
         lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist().first()
-            val songEntity = song.toSongEntity(playlist.playListId)
-            val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
-            if (isFavorite) {
-                libraryViewModel.removeSongFromPlaylist(songEntity)
-            } else {
-                libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-                libraryViewModel.forceReload(ReloadType.Playlists)
+            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
+            if (playlist != null) {
+                val songEntity = song.toSongEntity(playlist.playListId)
+                val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
+                if (isFavorite) {
+                    libraryViewModel.removeSongFromPlaylist(songEntity)
+                } else {
+                    libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
+                }
             }
+            libraryViewModel.forceReload(ReloadType.Playlists)
             requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
     }
 
     fun updateIsFavorite() {
         lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist().firstOrNull()
+            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
             if (playlist != null) {
-                val song = MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
-                val isFavorite = libraryViewModel.isFavoriteSong(song).isNotEmpty()
+                val song: SongEntity =
+                    MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
+                val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
                 withContext(Main) {
                     val icon =
                         if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                    val drawable =
+                    val drawable: Drawable? =
+                        
                         RetroUtil.getTintedVectorDrawable(
                             requireContext(),
                             icon,

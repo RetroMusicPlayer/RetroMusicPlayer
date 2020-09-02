@@ -3,8 +3,8 @@ package code.name.monkey.retromusic
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import code.name.monkey.retromusic.db.BlackListStoreDao
 import code.name.monkey.retromusic.db.BlackListStoreEntity
-import code.name.monkey.retromusic.db.PlaylistDao
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.RetroDatabase
 import code.name.monkey.retromusic.fragments.LibraryViewModel
@@ -13,6 +13,7 @@ import code.name.monkey.retromusic.fragments.artists.ArtistDetailsViewModel
 import code.name.monkey.retromusic.fragments.genres.GenreDetailsViewModel
 import code.name.monkey.retromusic.fragments.playlists.PlaylistDetailsViewModel
 import code.name.monkey.retromusic.fragments.search.SearchViewModel
+import code.name.monkey.retromusic.fragments.songs.SongsViewModel
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.network.networkModule
 import code.name.monkey.retromusic.repository.*
@@ -35,7 +36,7 @@ private val roomModule = module {
                     super.onOpen(db)
                     GlobalScope.launch(IO) {
                         FilePathUtil.blacklistFilePaths().map {
-                            get<PlaylistDao>().insertBlacklistPath(BlackListStoreEntity(it))
+                            get<BlackListStoreDao>().insertBlacklistPath(BlackListStoreEntity(it))
                         }
                     }
                 }
@@ -48,9 +49,17 @@ private val roomModule = module {
         get<RetroDatabase>().playlistDao()
     }
 
+    factory {
+        get<RetroDatabase>().blackListStore()
+    }
+
+    factory {
+        get<RetroDatabase>().playCountDao()
+    }
+
     single {
-        RealRoomRepository(get())
-    } bind RoomPlaylistRepository::class
+        RealRoomRepository(get(), get(), get())
+    } bind RoomRepository::class
 }
 private val mainModule = module {
     single {
@@ -142,6 +151,10 @@ private val viewModules = module {
 
     viewModel {
         SearchViewModel(get())
+    }
+
+    viewModel {
+        SongsViewModel(get())
     }
 }
 

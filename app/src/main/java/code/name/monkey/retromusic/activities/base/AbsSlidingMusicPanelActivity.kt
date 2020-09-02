@@ -73,7 +73,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setContentView(createContentView())
         chooseFragmentForTheme()
         setupSlidingUpPanel()
-        addMusicServiceEventListener(libraryViewModel)
 
         setupBottomSheet()
 

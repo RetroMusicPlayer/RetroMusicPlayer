@@ -10,4 +10,6 @@ import androidx.room.RoomDatabase
 )
 abstract class RetroDatabase : RoomDatabase() {
     abstract fun playlistDao(): PlaylistDao
+    abstract fun blackListStore(): BlackListStoreDao
+    abstract fun playCountDao(): PlayCountDao
 }
