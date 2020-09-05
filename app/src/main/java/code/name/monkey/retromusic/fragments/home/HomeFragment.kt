@@ -16,6 +16,9 @@ package code.name.monkey.retromusic.fragments.home
 
 import android.app.ActivityOptions
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -96,7 +99,7 @@ class HomeFragment :
             adapter = homeAdapter
         }
 
-        libraryViewModel.homeLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getHome().observe(viewLifecycleOwner, Observer {
             homeAdapter.swapData(it)
         })
 
@@ -114,6 +117,14 @@ class HomeFragment :
             Glide.with(requireActivity()),
             UserProfileGlideRequest.getUserModel()
         ).build().into(userImage)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.removeItem(R.id.action_grid_size)
+        menu.removeItem(R.id.action_layout_type)
+        menu.removeItem(R.id.action_sort_order)
+        menu.findItem(R.id.action_settings).setShowAsAction(SHOW_AS_ACTION_IF_ROOM)
     }
 
     companion object {

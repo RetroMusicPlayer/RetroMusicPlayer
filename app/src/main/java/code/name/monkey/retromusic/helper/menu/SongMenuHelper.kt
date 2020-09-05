@@ -71,7 +71,7 @@ object SongMenuHelper : KoinComponent {
             }
             R.id.action_add_to_playlist -> {
                 CoroutineScope(Dispatchers.IO).launch {
-                    val playlists = get<RealRepository>().roomPlaylists()
+                    val playlists = get<RealRepository>().fetchPlaylists()
                     withContext(Dispatchers.Main) {
                         AddToRetroPlaylist.create(playlists, song)
                             .show(activity.supportFragmentManager, "ADD_PLAYLIST")

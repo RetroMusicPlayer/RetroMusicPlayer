@@ -1,7 +1,7 @@
 package code.name.monkey.retromusic.network
 
 import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.Constants.BASE_URL
+import code.name.monkey.retromusic.Constants.AUDIO_SCROBBLER_URL
 import com.google.gson.Gson
 import okhttp3.Cache
 import okhttp3.ConnectionPool
@@ -37,7 +37,7 @@ fun provideLastFmService(retrofit: Retrofit): LastFMService =
     retrofit.create(LastFMService::class.java)
 
 fun providerRetrofit(okHttpClient: OkHttpClient.Builder): Retrofit = Retrofit.Builder()
-    .baseUrl(BASE_URL)
+    .baseUrl(AUDIO_SCROBBLER_URL)
     .callFactory(okHttpClient.build())
     .addConverterFactory(GsonConverterFactory.create(Gson()))
     .build()

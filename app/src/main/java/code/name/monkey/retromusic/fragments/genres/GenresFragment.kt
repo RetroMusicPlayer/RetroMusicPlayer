@@ -26,7 +26,7 @@ class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.genresLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getGenre().observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else

@@ -60,7 +60,7 @@ class SearchAdapter(
                 holder.title?.text = album.title
                 holder.text?.text = album.artistName
                 AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-                    .checkIgnoreMediaStore(activity).build().into(holder.image)
+                    .checkIgnoreMediaStore().build().into(holder.image)
             }
             ARTIST -> {
                 val artist = dataSet.get(position) as Artist

@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:paddingBottom="12dp">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/history"
         android:layout_width="0dp"

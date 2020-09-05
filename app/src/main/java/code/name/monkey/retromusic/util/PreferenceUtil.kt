@@ -243,7 +243,7 @@ object PreferenceUtil {
 
     val isAlbumArtOnLockScreen
         get() = sharedPreferences.getBoolean(
-            ALBUM_ART_ON_LOCKSCREEN, false
+            ALBUM_ART_ON_LOCK_SCREEN, false
         )
 
     val isAudioDucking
@@ -292,7 +292,7 @@ object PreferenceUtil {
 
     val isGapLessPlayback
         get() = sharedPreferences.getBoolean(
-            GAPLESS_PLAYBACK, false
+            GAP_LESS_PLAYBACK, false
         )
 
     val isAdaptiveColor
@@ -471,7 +471,7 @@ object PreferenceUtil {
 
     var artistGridSizeLand
         get() = sharedPreferences.getInt(
-            ALBUM_GRID_SIZE_LAND,
+            ARTIST_GRID_SIZE_LAND,
             App.getContext().getIntRes(R.integer.default_grid_columns_land)
         )
         set(value) = sharedPreferences.edit {

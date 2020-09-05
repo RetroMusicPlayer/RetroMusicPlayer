@@ -51,7 +51,8 @@ class AddToRetroPlaylist : BottomSheetDialogFragment() {
         return materialDialog(R.string.add_playlist_title)
             .setItems(playlistNames.toTypedArray()) { _, which ->
                 if (which == 0) {
-                    CreateRetroPlaylist.create(songs).show(requireActivity().supportFragmentManager, "Dialog")
+                    CreateRetroPlaylist.create(songs)
+                        .show(requireActivity().supportFragmentManager, "Dialog")
                 } else {
                     lifecycleScope.launch(Dispatchers.IO) {
                         val songEntities = songs.toSongEntity(playlistEntities[which - 1])

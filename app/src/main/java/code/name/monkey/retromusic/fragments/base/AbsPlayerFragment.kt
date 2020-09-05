@@ -74,7 +74,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             }
             R.id.action_add_to_playlist -> {
                 lifecycleScope.launch(IO) {
-                    val playlists = get<RealRepository>().roomPlaylists()
+                    val playlists = get<RealRepository>().fetchPlaylists()
                     withContext(Main) {
                         AddToRetroPlaylist.create(playlists, song)
                             .show(childFragmentManager, "ADD_PLAYLIST")
