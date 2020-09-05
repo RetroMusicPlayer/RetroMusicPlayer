@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.fragments.base
 
 import android.content.ContentUris
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.media.MediaMetadataRetriever
 import android.os.Build
 import android.os.Bundle
@@ -21,6 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.whichFragment
@@ -201,12 +203,14 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         lifecycleScope.launch(IO) {
             val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
             if (playlist != null) {
-                val song = MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
-                val isFavorite = libraryViewModel.isFavoriteSong(song).isNotEmpty()
+                val song: SongEntity =
+                    MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
+                val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
                 withContext(Main) {
                     val icon =
                         if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                    val drawable =
+                    val drawable: Drawable? =
+                        
                         RetroUtil.getTintedVectorDrawable(
                             requireContext(),
                             icon,
