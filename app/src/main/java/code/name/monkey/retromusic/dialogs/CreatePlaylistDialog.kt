@@ -12,7 +12,7 @@ import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.extensions.colorButtons
-import code.name.monkey.retromusic.extensions.extraNotNull
+import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.Playlists
@@ -46,7 +46,7 @@ class CreatePlaylistDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_playlist, null)
-        val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
+        val songs: List<Song> = extra<List<Song>>(EXTRA_SONG).value ?: emptyList()
         val playlistView: TextInputEditText = view.actionNewPlaylist
         val playlistContainer: TextInputLayout = view.actionNewPlaylistContainer
         return materialDialog(R.string.new_playlist_title)
@@ -59,7 +59,6 @@ class CreatePlaylistDialog : DialogFragment() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         if (repository.checkPlaylistExists(playlistName).isEmpty()) {
                             val playlistId = repository.createPlaylist(PlaylistEntity(playlistName))
-                            println(playlistId)
                             repository.insertSongs(songs.map { it.toSongEntity(playlistId.toInt()) })
                             libraryViewModel.forceReload(Playlists)
                         } else {

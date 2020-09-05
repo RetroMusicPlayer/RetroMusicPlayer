@@ -10,7 +10,6 @@ import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackg
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
-import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import kotlinx.android.synthetic.main.fragment_library.*
@@ -31,25 +30,12 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
                 navOptions
             )
         }
-        addPlaylist.apply {
-            accentColor()
-            setOnClickListener {
-                CreatePlaylistDialog().show(childFragmentManager, "ShowCreatePlaylistDialog")
-            }
-        }
         setupNavigationController()
     }
 
     private fun setupNavigationController() {
         val navController = findNavController(R.id.fragment_container)
         NavigationUI.setupWithNavController(mainActivity.getBottomNavigationView(), navController)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.action_playlist) {
-                addPlaylist.show()
-            } else {
-                addPlaylist.hide()
-            }
-        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -74,6 +60,10 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
                 R.id.settingsActivity,
                 null,
                 navOptions
+            )
+            R.id.action_add_to_playlist -> CreatePlaylistDialog().show(
+                childFragmentManager,
+                "ShowCreatePlaylistDialog"
             )
         }
         return super.onOptionsItemSelected(item)

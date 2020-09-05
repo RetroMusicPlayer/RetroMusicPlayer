@@ -43,18 +43,6 @@
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addPlaylist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="117dp"
-        android:contentDescription="@string/add_playlist_title"
-        android:src="@drawable/ic_playlist_add"
-        app:layout_dodgeInsetEdges="all"
-        app:useCompatPadding="true" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
         android:name="androidx.navigation.fragment.NavHostFragment"
