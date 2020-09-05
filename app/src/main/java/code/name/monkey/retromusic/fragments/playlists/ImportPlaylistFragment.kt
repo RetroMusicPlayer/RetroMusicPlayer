@@ -1,9 +1,7 @@
 package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
@@ -63,6 +61,13 @@ class ImportPlaylistFragment :
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.removeItem(R.id.action_grid_size)
+        menu.removeItem(R.id.action_layout_type)
+        menu.removeItem(R.id.action_sort_order)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
 

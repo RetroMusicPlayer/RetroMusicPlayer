@@ -48,7 +48,7 @@
 
     <fragment
         android:id="@+id/action_import_playlist"
-        android:name="code.name.monkey.retromusic.dialogs.ImportPlaylistFragment"
+        android:name="code.name.monkey.retromusic.fragments.playlists.ImportPlaylistFragment"
         android:label="ImportPlaylist"
         tools:layout="@layout/fragment_main_activity_recycler_view" />
 </navigation>
