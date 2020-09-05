@@ -87,3 +87,9 @@ fun Song.toPlayCount(): PlayCountEntity {
         1
     )
 }
+
+fun List<Song>.toSongsEntity(playlistEntity: PlaylistEntity): List<SongEntity> {
+    return map {
+        it.toSongEntity(playlistEntity.playListId)
+    }
+}
