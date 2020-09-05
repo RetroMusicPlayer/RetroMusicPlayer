@@ -79,7 +79,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         toolbar.title = null
 
         postponeEnterTransition()
-        detailsViewModel.getAlbum2().observe(viewLifecycleOwner, Observer {
+        detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
             startPostponedEnterTransition()
             showAlbum(it)
         })
@@ -149,12 +149,11 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         this.album = album
 
         albumTitle.text = album.title
-        val songText =
-            resources.getQuantityString(
-                R.plurals.albumSongs,
-                album.songCount,
-                album.songCount
-            )
+        val songText = resources.getQuantityString(
+            R.plurals.albumSongs,
+            album.songCount,
+            album.songCount
+        )
         songTitle.text = songText
 
         if (MusicUtil.getYearString(album.year) == "-") {
@@ -171,7 +170,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(album.songs))
             )
         }
-        loadAlbumCover()
+        loadAlbumCover(album)
         simpleSongAdapter.swapDataSet(album.songs)
         detailsViewModel.loadArtist(album.artistId)
         detailsViewModel.loadAlbumInfo(album)
@@ -216,6 +215,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     private fun loadArtistImage(artist: Artist) {
         ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
+            .forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
             .generatePalette(requireContext())
             .build()
             .dontAnimate()
@@ -226,14 +226,11 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             })
     }
 
-    private fun loadAlbumCover() {
+    private fun loadAlbumCover(album: Album) {
         AlbumGlideRequest.Builder.from(Glide.with(requireContext()), album.safeGetFirstSong())
-            .checkIgnoreMediaStore(requireContext())
-            .ignoreMediaStore(PreferenceUtil.isIgnoreMediaStoreArtwork)
+            .checkIgnoreMediaStore()
             .generatePalette(requireContext())
             .build()
-            .dontAnimate()
-            .dontTransform()
             .into(object : SingleColorTarget(image) {
                 override fun onColorReady(color: Int) {
                     setColors(color)

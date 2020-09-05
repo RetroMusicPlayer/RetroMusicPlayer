@@ -36,7 +36,7 @@ class HorizontalAlbumAdapter(
     override fun loadAlbumCover(album: Album, holder: ViewHolder) {
         if (holder.image == null) return
         AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-            .checkIgnoreMediaStore(activity)
+            .checkIgnoreMediaStore()
             .generatePalette(activity)
             .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
