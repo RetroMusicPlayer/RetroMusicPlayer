@@ -18,13 +18,16 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.SeekBar
-import androidx.annotation.AttrRes
-import androidx.annotation.ColorInt
+import androidx.annotation.*
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -164,3 +167,21 @@ fun TextInputEditText.accentColor() {
 fun AppCompatImageView.accentColor(): Int {
     return ThemeStore.accentColor(context)
 }
+
+@CheckResult
+fun Drawable.tint(@ColorInt color: Int): Drawable {
+    val tintedDrawable = DrawableCompat.wrap(this).mutate()
+    DrawableCompat.setTint(this, color)
+    return tintedDrawable
+}
+
+@CheckResult
+fun Drawable.tint(context: Context, @ColorRes color: Int): Drawable {
+    return tint(context.getColorCompat(color))
+}
+
+@ColorInt
+fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
+    return ContextCompat.getColor(this, colorRes)
+}
+
