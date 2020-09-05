@@ -84,11 +84,11 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
-import static code.name.monkey.retromusic.ConstantsKt.ALBUM_ART_ON_LOCKSCREEN;
+import static code.name.monkey.retromusic.ConstantsKt.ALBUM_ART_ON_LOCK_SCREEN;
 import static code.name.monkey.retromusic.ConstantsKt.BLURRED_ALBUM_ART;
 import static code.name.monkey.retromusic.ConstantsKt.CLASSIC_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
-import static code.name.monkey.retromusic.ConstantsKt.GAPLESS_PLAYBACK;
+import static code.name.monkey.retromusic.ConstantsKt.GAP_LESS_PLAYBACK;
 import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
 
 /**
@@ -727,7 +727,7 @@ public class MusicService extends Service implements
     @Override
     public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
         switch (key) {
-            case GAPLESS_PLAYBACK:
+            case GAP_LESS_PLAYBACK:
                 if (sharedPreferences.getBoolean(key, false)) {
                     prepareNext();
                 } else {
@@ -736,7 +736,7 @@ public class MusicService extends Service implements
                     }
                 }
                 break;
-            case ALBUM_ART_ON_LOCKSCREEN:
+            case ALBUM_ART_ON_LOCK_SCREEN:
             case BLURRED_ALBUM_ART:
                 updateMediaSessionMetaData();
                 break;

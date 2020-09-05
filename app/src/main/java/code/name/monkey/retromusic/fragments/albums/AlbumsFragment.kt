@@ -23,7 +23,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.albumsLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getAlbums().observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else

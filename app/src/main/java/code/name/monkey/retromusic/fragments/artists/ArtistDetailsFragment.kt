@@ -227,7 +227,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
             }
             R.id.action_add_to_playlist -> {
                 lifecycleScope.launch(Dispatchers.IO) {
-                    val playlists = get<RealRepository>().roomPlaylists()
+                    val playlists = get<RealRepository>().fetchPlaylists()
                     withContext(Dispatchers.Main) {
                         AddToRetroPlaylist.create(playlists, songs)
                             .show(childFragmentManager, "ADD_PLAYLIST")

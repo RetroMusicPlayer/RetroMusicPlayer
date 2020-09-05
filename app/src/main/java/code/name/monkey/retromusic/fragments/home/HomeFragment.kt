@@ -96,7 +96,7 @@ class HomeFragment :
             adapter = homeAdapter
         }
 
-        libraryViewModel.homeLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getHome().observe(viewLifecycleOwner, Observer {
             homeAdapter.swapData(it)
         })
 

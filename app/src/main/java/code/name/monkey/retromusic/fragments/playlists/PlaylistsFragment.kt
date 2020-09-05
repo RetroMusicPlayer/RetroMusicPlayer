@@ -12,7 +12,7 @@ class PlaylistsFragment : AbsRecyclerViewFragment<PlaylistAdapter, GridLayoutMan
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.roomPlaylistsLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getPlaylists().observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else

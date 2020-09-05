@@ -12,9 +12,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class LibraryViewModel(
@@ -25,75 +23,95 @@ class LibraryViewModel(
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
-    private val playlists = MutableLiveData<List<Playlist>>()
-    private val roomPlaylists = MutableLiveData<List<PlaylistWithSongs>>()
+    private val playlists = MutableLiveData<List<PlaylistWithSongs>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val home = MutableLiveData<List<Home>>()
 
     val paletteColorLiveData: LiveData<Int> = paletteColor
-    val homeLiveData: LiveData<List<Home>> = home
-    val albumsLiveData: LiveData<List<Album>> = albums
-    val songsLiveData: LiveData<List<Song>> = songs
-    val artistsLiveData: LiveData<List<Artist>> = artists
-    val playlisitsLiveData: LiveData<List<Playlist>> = playlists
-    val roomPlaylistsLiveData: LiveData<List<PlaylistWithSongs>> = roomPlaylists
-    val genresLiveData: LiveData<List<Genre>> = genres
 
-    init {
-        viewModelScope.launch {
-            loadLibraryContent()
+    private fun loadLibraryContent() = viewModelScope.launch(IO) {
+        fetchSongs()
+        fetchAlbums()
+        fetchArtists()
+        fetchGenres()
+        fetchHomeSections()
+        fetchPlaylists()
+    }
+
+    fun getSongs(): LiveData<List<Song>> {
+        fetchSongs()
+        return songs
+    }
+
+    fun getAlbums(): LiveData<List<Album>> {
+        fetchAlbums()
+        return albums
+    }
+
+    fun getArtists(): LiveData<List<Artist>> {
+        fetchArtists()
+        return artists
+    }
+
+    fun getPlaylists(): LiveData<List<PlaylistWithSongs>> {
+        fetchPlaylists()
+        return playlists
+    }
+
+    fun getGenre(): LiveData<List<Genre>> {
+        fetchGenres()
+        return genres
+    }
+
+    fun getHome(): LiveData<List<Home>> {
+        fetchHomeSections()
+        return home
+    }
+
+    private fun fetchSongs() {
+        viewModelScope.launch(IO) {
+            songs.postValue(repository.allSongs())
         }
     }
 
-    private fun loadLibraryContent() = viewModelScope.launch {
-        home.value = loadHome.await()
-        songs.value = loadSongs.await()
-        albums.value = loadAlbums.await()
-        artists.value = loadArtists.await()
-        playlists.value = loadPlaylists.await()
-        roomPlaylists.value = loadPlaylistsWithSongs.await()
-        genres.value = loadGenres.await()
+    private fun fetchAlbums() {
+        viewModelScope.launch(IO) {
+            albums.postValue(repository.fetchAlbums())
+        }
     }
 
-    private val loadHome: Deferred<List<Home>>
-        get() = viewModelScope.async { repository.homeSections() }
-
-    private val loadSongs: Deferred<List<Song>>
-        get() = viewModelScope.async(IO) { repository.allSongs() }
-
-    private val loadAlbums: Deferred<List<Album>>
-        get() = viewModelScope.async(IO) {
-            repository.allAlbums()
+    private fun fetchArtists() {
+        viewModelScope.launch(IO) {
+            artists.postValue(repository.fetchArtists())
         }
+    }
 
-    private val loadArtists: Deferred<List<Artist>>
-        get() = viewModelScope.async(IO) {
-            repository.albumArtists()
+    private fun fetchPlaylists() {
+        viewModelScope.launch(IO) {
+            playlists.postValue(repository.fetchPlaylistWithSongs())
         }
+    }
 
-    private val loadPlaylists: Deferred<List<Playlist>>
-        get() = viewModelScope.async(IO) {
-            repository.allPlaylists()
+    private fun fetchGenres() {
+        viewModelScope.launch(IO) {
+            genres.postValue(repository.fetchGenres())
         }
-    private val loadPlaylistsWithSongs: Deferred<List<PlaylistWithSongs>>
-        get() = viewModelScope.async(IO) {
-            repository.playlistWithSongs()
-        }
+    }
 
-    private val loadGenres: Deferred<List<Genre>>
-        get() = viewModelScope.async(IO) {
-            repository.allGenres()
+    private fun fetchHomeSections() {
+        viewModelScope.launch(IO) {
+            home.postValue(repository.homeSections())
         }
-
+    }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
         when (reloadType) {
-            Songs -> songs.value = loadSongs.await()
-            Albums -> albums.value = loadAlbums.await()
-            Artists -> artists.value = loadArtists.await()
-            HomeSections -> home.value = loadHome.await()
-            Playlists -> roomPlaylists.value = loadPlaylistsWithSongs.await()
-            Genres -> genres.value = loadGenres.await()
+            Songs -> fetchSongs()
+            Albums -> fetchAlbums()
+            Artists -> fetchArtists()
+            HomeSections -> fetchHomeSections()
+            Playlists -> fetchPlaylists()
+            Genres -> fetchGenres()
         }
     }
 
