@@ -17,17 +17,14 @@ import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.repository.RealRepository
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_playlist.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CreatePlaylistDialog : DialogFragment() {
-    private val repository by inject<RealRepository>()
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     companion object {
@@ -57,9 +54,10 @@ class CreatePlaylistDialog : DialogFragment() {
                 val playlistName = playlistView.text.toString()
                 if (!TextUtils.isEmpty(playlistName)) {
                     lifecycleScope.launch(Dispatchers.IO) {
-                        if (repository.checkPlaylistExists(playlistName).isEmpty()) {
-                            val playlistId = repository.createPlaylist(PlaylistEntity(playlistName))
-                            repository.insertSongs(songs.map { it.toSongEntity(playlistId.toInt()) })
+                        if (libraryViewModel.checkPlaylistExists(playlistName).isEmpty()) {
+                            val playlistId: Long =
+                                libraryViewModel.createPlaylist(PlaylistEntity(playlistName))
+                            libraryViewModel.insertSongs(songs.map { it.toSongEntity(playlistId.toInt()) })
                             libraryViewModel.forceReload(Playlists)
                         } else {
                             Toast.makeText(requireContext(), "Playlist exists", Toast.LENGTH_SHORT)

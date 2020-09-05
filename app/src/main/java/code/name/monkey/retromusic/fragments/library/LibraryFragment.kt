@@ -61,7 +61,8 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
                 null,
                 navOptions
             )
-            R.id.action_add_to_playlist -> CreatePlaylistDialog().show(
+            R.id.action_import_playlist -> findNavController(R.id.fragment_container).navigate(R.id.action_import_playlist)
+            R.id.action_add_to_playlist -> CreatePlaylistDialog.create(emptyList()).show(
                 childFragmentManager,
                 "ShowCreatePlaylistDialog"
             )

@@ -43,7 +43,7 @@ interface Repository {
     suspend fun allSongs(): List<Song>
     suspend fun fetchArtists(): List<Artist>
     suspend fun albumArtists(): List<Artist>
-    suspend fun allPlaylists(): List<Playlist>
+    suspend fun fetchLegacyPlaylist(): List<Playlist>
     suspend fun fetchGenres(): List<Genre>
     suspend fun search(query: String?): MutableList<Any>
     suspend fun getPlaylistSongs(playlist: Playlist): List<Song>
@@ -125,7 +125,7 @@ class RealRepository(
 
     override suspend fun topAlbums(): List<Album> = topPlayedRepository.topAlbums()
 
-    override suspend fun allPlaylists(): List<Playlist> = playlistRepository.playlists()
+    override suspend fun fetchLegacyPlaylist(): List<Playlist> = playlistRepository.playlists()
 
     override suspend fun fetchGenres(): List<Genre> = genreRepository.genres()
 

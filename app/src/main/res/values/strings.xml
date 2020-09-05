@@ -884,4 +884,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="done">Done</string>
     <string name="ok">Ok</string>
+    <string name="import_playlist">Import playlist</string>
 </resources>

@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:textAppearance="@style/TextViewBody2"
+        android:textColor="?android:textColorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"

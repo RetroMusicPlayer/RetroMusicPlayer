@@ -24,6 +24,7 @@ class LibraryViewModel(
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
     private val playlists = MutableLiveData<List<PlaylistWithSongs>>()
+    private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val home = MutableLiveData<List<Home>>()
 
@@ -58,6 +59,11 @@ class LibraryViewModel(
         return playlists
     }
 
+    fun getLegacyPlaylist(): LiveData<List<Playlist>> {
+        fetchLegacyPlaylist()
+        return legacyPlaylists
+    }
+
     fun getGenre(): LiveData<List<Genre>> {
         fetchGenres()
         return genres
@@ -89,6 +95,12 @@ class LibraryViewModel(
     private fun fetchPlaylists() {
         viewModelScope.launch(IO) {
             playlists.postValue(repository.fetchPlaylistWithSongs())
+        }
+    }
+
+    private fun fetchLegacyPlaylist() {
+        viewModelScope.launch(IO) {
+            legacyPlaylists.postValue(repository.fetchLegacyPlaylist())
         }
     }
 
@@ -185,6 +197,12 @@ class LibraryViewModel(
     suspend fun insertSongs(songs: List<SongEntity>) = repository.insertSongs(songs)
     suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
         repository.removeSongFromPlaylist(songEntity)
+
+    suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity> =
+        repository.checkPlaylistExists(playlistName)
+
+    suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
+        repository.createPlaylist(playlistEntity)
 
 }
 

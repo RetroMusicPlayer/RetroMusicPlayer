@@ -44,6 +44,11 @@
         android:id="@+id/action_home"
         android:name="code.name.monkey.retromusic.fragments.home.HomeFragment"
         android:label=""
-        tools:layout="@layout/fragment_banner_home"/>
+        tools:layout="@layout/fragment_banner_home" />
 
+    <fragment
+        android:id="@+id/action_import_playlist"
+        android:name="code.name.monkey.retromusic.dialogs.ImportPlaylistFragment"
+        android:label="ImportPlaylist"
+        tools:layout="@layout/fragment_main_activity_recycler_view" />
 </navigation>
