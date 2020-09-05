@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.dialogs
+package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
 import android.view.LayoutInflater
