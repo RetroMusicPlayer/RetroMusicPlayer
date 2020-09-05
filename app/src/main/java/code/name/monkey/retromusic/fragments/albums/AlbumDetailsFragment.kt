@@ -24,7 +24,7 @@ import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.AlbumTagEditorActivity
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
-import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
+import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.applyOutlineColor
@@ -286,7 +286,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 lifecycleScope.launch(Dispatchers.IO) {
                     val playlists = get<RealRepository>().fetchPlaylists()
                     withContext(Dispatchers.Main) {
-                        AddToRetroPlaylist.create(playlists, songs)
+                        AddToPlaylistDialog.create(playlists, songs)
                             .show(childFragmentManager, "ADD_PLAYLIST")
                     }
                 }

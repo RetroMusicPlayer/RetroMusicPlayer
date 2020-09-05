@@ -76,7 +76,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 lifecycleScope.launch(IO) {
                     val playlists = get<RealRepository>().fetchPlaylists()
                     withContext(Main) {
-                        AddToRetroPlaylist.create(playlists, song)
+                        AddToPlaylistDialog.create(playlists, song)
                             .show(childFragmentManager, "ADD_PLAYLIST")
                     }
                 }
@@ -87,7 +87,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_save_playing_queue -> {
-                CreateRetroPlaylist.create(ArrayList(MusicPlayerRemote.playingQueue))
+                CreatePlaylistDialog.create(ArrayList(MusicPlayerRemote.playingQueue))
                     .show(childFragmentManager, "ADD_TO_PLAYLIST")
                 return true
             }
@@ -209,13 +209,11 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 withContext(Main) {
                     val icon =
                         if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                    val drawable: Drawable? =
-                        
-                        RetroUtil.getTintedVectorDrawable(
-                            requireContext(),
-                            icon,
-                            toolbarIconColor()
-                        )
+                    val drawable: Drawable? = RetroUtil.getTintedVectorDrawable(
+                        requireContext(),
+                        icon,
+                        toolbarIconColor()
+                    )
                     if (playerToolbar() != null) {
                         playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)
                             ?.setIcon(drawable)?.title =

@@ -23,9 +23,9 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.toSongs
-import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
-import code.name.monkey.retromusic.dialogs.DeleteRetroPlaylist
-import code.name.monkey.retromusic.dialogs.RenameRetroPlaylistDialog
+import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
+import code.name.monkey.retromusic.dialogs.DeletePlaylistDialog
+import code.name.monkey.retromusic.dialogs.RenamePlaylistDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.misc.WeakContextAsyncTask
 import code.name.monkey.retromusic.model.AbsCustomPlaylist
@@ -60,7 +60,7 @@ object PlaylistMenuHelper : KoinComponent {
                 CoroutineScope(Dispatchers.IO).launch {
                     val playlists = get<RealRepository>().fetchPlaylists()
                     withContext(Dispatchers.Main) {
-                        AddToRetroPlaylist.create(playlists, playlistWithSongs.songs.toSongs())
+                        AddToPlaylistDialog.create(playlists, playlistWithSongs.songs.toSongs())
                             .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                     }
                 }
@@ -71,17 +71,18 @@ object PlaylistMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_rename_playlist -> {
-                RenameRetroPlaylistDialog.create(playlistWithSongs.playlistEntity)
+                RenamePlaylistDialog.create(playlistWithSongs.playlistEntity)
                     .show(activity.supportFragmentManager, "RENAME_PLAYLIST")
                 return true
             }
             R.id.action_delete_playlist -> {
-                DeleteRetroPlaylist.create(playlistWithSongs.playlistEntity)
+                DeletePlaylistDialog.create(playlistWithSongs.playlistEntity)
                     .show(activity.supportFragmentManager, "DELETE_PLAYLIST")
                 return true
             }
             R.id.action_save_playlist -> {
                 //SavePlaylistAsyncTask(activity).execute(playlistWithSongs.songs.toSongs())
+                Toast.makeText(activity, "Coming soon", Toast.LENGTH_SHORT).show()
                 return true
             }
         }

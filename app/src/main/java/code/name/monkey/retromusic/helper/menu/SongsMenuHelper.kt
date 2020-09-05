@@ -16,7 +16,7 @@ package code.name.monkey.retromusic.helper.menu
 
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
+import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
@@ -47,7 +47,7 @@ object SongsMenuHelper : KoinComponent {
                 CoroutineScope(Dispatchers.IO).launch {
                     val playlists = get<RealRepository>().fetchPlaylists()
                     withContext(Dispatchers.Main) {
-                        AddToRetroPlaylist.create(playlists, songs)
+                        AddToPlaylistDialog.create(playlists, songs)
                             .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                     }
                 }

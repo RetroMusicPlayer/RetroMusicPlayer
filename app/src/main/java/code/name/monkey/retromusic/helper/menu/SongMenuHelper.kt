@@ -26,7 +26,7 @@ import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
-import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
+import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.dialogs.SongDetailDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -73,7 +73,7 @@ object SongMenuHelper : KoinComponent {
                 CoroutineScope(Dispatchers.IO).launch {
                     val playlists = get<RealRepository>().fetchPlaylists()
                     withContext(Dispatchers.Main) {
-                        AddToRetroPlaylist.create(playlists, song)
+                        AddToPlaylistDialog.create(playlists, song)
                             .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                     }
                 }

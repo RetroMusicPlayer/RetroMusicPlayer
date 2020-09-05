@@ -9,7 +9,7 @@ import androidx.navigation.ui.NavigationUI
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.dialogs.CreateRetroPlaylist
+import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
@@ -34,7 +34,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
         addPlaylist.apply {
             accentColor()
             setOnClickListener {
-                CreateRetroPlaylist().show(childFragmentManager, "ShowCreatePlaylistDialog")
+                CreatePlaylistDialog().show(childFragmentManager, "ShowCreatePlaylistDialog")
             }
         }
         setupNavigationController()

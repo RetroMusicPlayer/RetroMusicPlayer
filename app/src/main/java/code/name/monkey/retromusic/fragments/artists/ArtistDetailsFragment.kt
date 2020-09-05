@@ -21,7 +21,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
-import code.name.monkey.retromusic.dialogs.AddToRetroPlaylist
+import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.applyOutlineColor
 import code.name.monkey.retromusic.extensions.show
@@ -229,7 +229,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
                 lifecycleScope.launch(Dispatchers.IO) {
                     val playlists = get<RealRepository>().fetchPlaylists()
                     withContext(Dispatchers.Main) {
-                        AddToRetroPlaylist.create(playlists, songs)
+                        AddToPlaylistDialog.create(playlists, songs)
                             .show(childFragmentManager, "ADD_PLAYLIST")
                     }
                 }
