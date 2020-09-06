@@ -21,6 +21,7 @@ import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService
+import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -48,8 +49,8 @@ interface Repository {
     suspend fun search(query: String?): MutableList<Any>
     suspend fun getPlaylistSongs(playlist: Playlist): List<Song>
     suspend fun getGenre(genreId: Int): List<Song>
-    suspend fun artistInfo(name: String, lang: String?, cache: String?): LastFmArtist
-    suspend fun albumInfo(artist: String, album: String): LastFmAlbum
+    suspend fun artistInfo(name: String, lang: String?, cache: String?): Result<LastFmArtist>
+    suspend fun albumInfo(artist: String, album: String): Result<LastFmAlbum>
     suspend fun artistById(artistId: Int): Artist
     suspend fun recentArtists(): List<Artist>
     suspend fun topArtists(): List<Artist>
@@ -110,7 +111,9 @@ class RealRepository(
     override suspend fun fetchAlbums(): List<Album> = albumRepository.albums()
 
     override suspend fun albumByIdAsync(albumId: Int): Album = albumRepository.album(albumId)
+
     override fun albumById(albumId: Int): Album = albumRepository.album(albumId)
+
     override suspend fun fetchArtists(): List<Artist> = artistRepository.artists()
 
     override suspend fun albumArtists(): List<Artist> = artistRepository.albumArtists()
@@ -147,17 +150,29 @@ class RealRepository(
         name: String,
         lang: String?,
         cache: String?
-    ): LastFmArtist = lastFMService.artistInfo(name, lang, cache)
+    ): Result<LastFmArtist> {
+        return try {
+            Result.Success(lastFMService.artistInfo(name, lang, cache))
+        } catch (e: Exception) {
+            Result.Error
+        }
+    }
 
     override suspend fun albumInfo(
         artist: String,
         album: String
-    ): LastFmAlbum = lastFMService.albumInfo(artist, album)
+    ): Result<LastFmAlbum> {
+        return try {
+            val lastFmAlbum = lastFMService.albumInfo(artist, album)
+            Result.Success(lastFmAlbum)
+        } catch (e: Exception) {
+            Result.Error
+        }
+    }
 
     @ExperimentalCoroutinesApi
     override suspend fun homeSectionsFlow(): Flow<Result<List<Home>>> {
         val homes = MutableStateFlow<Result<List<Home>>>(value = Result.Loading)
-        println("homeSections:Loading")
         val homeSections = mutableListOf<Home>()
         val sections = listOf(
             topArtistsHome(),

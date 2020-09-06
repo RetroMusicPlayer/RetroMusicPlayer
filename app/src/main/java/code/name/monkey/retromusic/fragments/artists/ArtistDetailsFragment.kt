@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.CustomArtistImageUtil
@@ -77,9 +78,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
             showArtist(it)
             startPostponedEnterTransition()
         })
-        detailsViewModel.getArtistInfo().observe(viewLifecycleOwner, Observer {
-            artistInfo(it)
-        })
+
 
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
@@ -140,6 +139,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         albumTitle.text = albumText
         songAdapter.swapDataSet(artist.songs.sortedBy { it.trackNumber })
         artist.albums?.let { albumAdapter.swapDataSet(it) }
+
     }
 
     private fun loadBiography(
@@ -148,7 +148,14 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     ) {
         biography = null
         this.lang = lang
-        detailsViewModel.loadBiography(name, lang, null)
+        detailsViewModel.getArtistInfo(name, lang, null)
+            .observe(viewLifecycleOwner, Observer { result ->
+                when (result) {
+                    is Result.Loading -> println("Loading")
+                    is Result.Error -> println("Error")
+                    is Result.Success -> artistInfo(result.data)
+                }
+            })
     }
 
     private fun artistInfo(lastFmArtist: LastFmArtist?) {
