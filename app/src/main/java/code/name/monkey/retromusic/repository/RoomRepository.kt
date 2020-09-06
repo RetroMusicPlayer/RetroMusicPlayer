@@ -7,9 +7,10 @@ import code.name.monkey.retromusic.model.Song
 
 
 interface RoomRepository {
-    fun historySongs(): LiveData<List<HistoryEntity>>
+    fun historySongs(): List<HistoryEntity>
     fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>>
     fun insertBlacklistPath(blackListStoreEntity: BlackListStoreEntity)
+    fun observableHistorySongs(): LiveData<List<HistoryEntity>>
     suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
     suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity>
     suspend fun playlists(): List<PlaylistEntity>
@@ -42,7 +43,8 @@ interface RoomRepository {
 class RealRoomRepository(
     private val playlistDao: PlaylistDao,
     private val blackListStoreDao: BlackListStoreDao,
-    private val playCountDao: PlayCountDao
+    private val playCountDao: PlayCountDao,
+    private val historyDao: HistoryDao
 ) : RoomRepository {
     @WorkerThread
     override suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
@@ -59,12 +61,6 @@ class RealRoomRepository(
     override suspend fun playlistWithSongs(): List<PlaylistWithSongs> =
         playlistDao.playlistsWithSongs()
 
-    /* val tempList = ArrayList<SongEntity>(songs)
-         val existingSongs = songs.map {
-             playlistDao.checkSongExistsWithPlaylistName(it.playlistCreatorName, it.songId)
-         }.first()
-         println("Existing ${existingSongs.size}")
-         tempList.removeAll(existingSongs)*/
     @WorkerThread
     override suspend fun insertSongs(songs: List<SongEntity>) =
         playlistDao.insertSongsToPlaylist(songs)
@@ -96,7 +92,6 @@ class RealRoomRepository(
         }
     }
 
-
     override suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity> =
         playlistDao.isSongExistsInPlaylist(
             songEntity.playlistCreatorId,
@@ -107,17 +102,18 @@ class RealRoomRepository(
         playlistDao.removeSongFromPlaylist(songEntity.playlistCreatorId, songEntity.id)
 
     override suspend fun addSongToHistory(currentSong: Song) =
-        playlistDao.insertSongInHistory(currentSong.toHistoryEntity(System.currentTimeMillis()))
+        historyDao.insertSongInHistory(currentSong.toHistoryEntity(System.currentTimeMillis()))
 
     override suspend fun songPresentInHistory(song: Song): HistoryEntity? =
-        playlistDao.isSongPresentInHistory(song.id)
+        historyDao.isSongPresentInHistory(song.id)
 
     override suspend fun updateHistorySong(song: Song) =
-        playlistDao.updateHistorySong(song.toHistoryEntity(System.currentTimeMillis()))
+        historyDao.updateHistorySong(song.toHistoryEntity(System.currentTimeMillis()))
 
-    override fun historySongs(): LiveData<List<HistoryEntity>> {
-        return playlistDao.historySongs()
-    }
+    override fun observableHistorySongs(): LiveData<List<HistoryEntity>> =
+        historyDao.observableHistorySongs()
+
+    override fun historySongs(): List<HistoryEntity> = historyDao.historySongs()
 
     override fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>> =
         playlistDao.favoritesSongsLiveData(

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
@@ -208,7 +209,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     override fun onAlbumClick(albumId: Int, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
-            bundleOf("extra_album_id" to albumId),
+            bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
                 view to getString(R.string.transition_album_art)

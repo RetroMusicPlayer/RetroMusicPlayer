@@ -55,6 +55,9 @@ private val roomModule = module {
     factory {
         get<RetroDatabase>().playCountDao()
     }
+    factory {
+        get<RetroDatabase>().historyDao()
+    }
 
     single {
         RealRoomRepository(get(), get(), get())

@@ -36,11 +36,12 @@ interface Repository {
     fun artistsFlow(): Flow<Result<List<Artist>>>
     fun playlistsFlow(): Flow<Result<List<Playlist>>>
     fun genresFlow(): Flow<Result<List<Genre>>>
-    fun historySong(): LiveData<List<HistoryEntity>>
+    fun historySong(): List<HistoryEntity>
     fun favorites(): LiveData<List<SongEntity>>
+    fun observableHistorySongs(): LiveData<List<HistoryEntity>>
+    fun albumById(albumId: Int): Album
     suspend fun fetchAlbums(): List<Album>
     suspend fun albumByIdAsync(albumId: Int): Album
-    fun albumById(albumId: Int): Album
     suspend fun allSongs(): List<Song>
     suspend fun fetchArtists(): List<Artist>
     suspend fun albumArtists(): List<Artist>
@@ -294,7 +295,10 @@ class RealRepository(
     override suspend fun blackListPaths(): List<BlackListStoreEntity> =
         roomRepository.blackListPaths()
 
-    override fun historySong(): LiveData<List<HistoryEntity>> =
+    override fun observableHistorySongs(): LiveData<List<HistoryEntity>> =
+        roomRepository.observableHistorySongs()
+
+    override fun historySong(): List<HistoryEntity> =
         roomRepository.historySongs()
 
     override fun favorites(): LiveData<List<SongEntity>> =

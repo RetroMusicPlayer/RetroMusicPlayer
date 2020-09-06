@@ -168,9 +168,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner, Observer {
             loadArtistImage(it)
         })
-        /*detailsViewModel.getMoreAlbums().observe(viewLifecycleOwner, Observer {
-            moreAlbums(it)
-        })*/
+
         detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Result.Loading -> {
@@ -224,6 +222,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun loadArtistImage(artist: Artist) {
+        detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner, Observer {
+            moreAlbums(it)
+        })
         ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
             .forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
             .generatePalette(requireContext())
