@@ -21,6 +21,7 @@ import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService
+import code.name.monkey.retromusic.network.LyricsRestService
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.Result.*
 import code.name.monkey.retromusic.network.model.LastFmAlbum
@@ -94,6 +95,7 @@ interface Repository {
     suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun blackListPaths(): List<BlackListStoreEntity>
+    suspend fun lyrics(artist: String, title: String): Result<String>
 }
 
 class RealRepository(
@@ -107,8 +109,15 @@ class RealRepository(
     private val playlistRepository: PlaylistRepository,
     private val searchRepository: RealSearchRepository,
     private val topPlayedRepository: TopPlayedRepository,
-    private val roomRepository: RoomRepository
+    private val roomRepository: RoomRepository,
+    private val lyricsRestService: LyricsRestService
 ) : Repository {
+
+    override suspend fun lyrics(artist: String, title: String): Result<String> = try {
+        Success(lyricsRestService.getLyrics(artist, title))
+    } catch (e: Exception) {
+        Error
+    }
 
     override suspend fun fetchAlbums(): List<Album> = albumRepository.albums()
 

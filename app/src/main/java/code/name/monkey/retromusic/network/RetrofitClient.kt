@@ -3,38 +3,16 @@ package code.name.monkey.retromusic.network
 import android.content.Context
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
-import code.name.monkey.retromusic.deezer.DeezerService
+import code.name.monkey.retromusic.network.conversion.LyricsConverterFactory
 import com.google.gson.Gson
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
-
-private const val TIMEOUT: Long = 700
-
-val networkModule = module {
-
-    factory {
-        provideDefaultCache()
-    }
-    factory {
-        provideOkHttp(get(), get())
-    }
-    single {
-        provideLastFmRetrofit(get())
-    }
-    single {
-        provideDeezerRest(get())
-    }
-    single {
-        provideLastFmRest(get())
-    }
-}
 
 fun provideDefaultCache(): Cache? {
     val cacheDir = File(App.getContext().cacheDir.absolutePath, "/okhttp-lastfm/")
@@ -94,4 +72,12 @@ fun provideDeezerRest(retrofit: Retrofit): DeezerService {
         .baseUrl("https://api.deezer.com/")
         .build()
     return newBuilder.create(DeezerService::class.java)
+}
+
+fun provideLyrics(retrofit: Retrofit): LyricsRestService {
+    val newBuilder = retrofit.newBuilder()
+        .baseUrl("https://makeitpersonal.co")
+        .addConverterFactory(LyricsConverterFactory())
+        .build()
+    return newBuilder.create(LyricsRestService::class.java)
 }

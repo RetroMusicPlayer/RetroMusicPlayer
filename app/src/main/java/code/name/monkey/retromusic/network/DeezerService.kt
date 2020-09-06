@@ -1,6 +1,7 @@
-package code.name.monkey.retromusic.deezer
+package code.name.monkey.retromusic.network
 
 import android.content.Context
+import code.name.monkey.retromusic.model.DeezerResponse
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

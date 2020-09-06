@@ -14,7 +14,7 @@ import code.name.monkey.retromusic.fragments.genres.GenreDetailsViewModel
 import code.name.monkey.retromusic.fragments.playlists.PlaylistDetailsViewModel
 import code.name.monkey.retromusic.fragments.search.SearchViewModel
 import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.network.networkModule
+import code.name.monkey.retromusic.network.*
 import code.name.monkey.retromusic.repository.*
 import code.name.monkey.retromusic.util.FilePathUtil
 import kotlinx.coroutines.Dispatchers.IO
@@ -24,6 +24,28 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
+
+val networkModule = module {
+
+    factory {
+        provideDefaultCache()
+    }
+    factory {
+        provideOkHttp(get(), get())
+    }
+    single {
+        provideLastFmRetrofit(get())
+    }
+    single {
+        provideDeezerRest(get())
+    }
+    single {
+        provideLastFmRest(get())
+    }
+    single {
+        provideLyrics(get())
+    }
+}
 
 private val roomModule = module {
 
@@ -72,7 +94,20 @@ private val mainModule = module {
 }
 private val dataModule = module {
     single {
-        RealRepository(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
+        RealRepository(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
     } bind Repository::class
 
     single {

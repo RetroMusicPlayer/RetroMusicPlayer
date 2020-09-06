@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.deezer
+package code.name.monkey.retromusic.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -60,20 +60,23 @@
     </style>
 
     <style name="AppTextAppearance.MaterialAlertDialog.Button" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textAppearance">@style/TextViewButton</item>
         <item name="fontFamily">@font/sans</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:padding">0dp</item>
     </style>
 
     <style name="AppTextAppearance.MaterialAlertDialog.Body" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textAppearance">@style/TextViewBody1</item>
         <item name="fontFamily">@font/sans</item>
+        <item name="android:paddingTop">16dp</item>
     </style>
 
     <style name="AppTextAppearance.MaterialAlertDialog.Title" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textAppearance">@style/TextViewHeadline6</item>
         <item name="android:textStyle">bold</item>
         <item name="fontFamily">@font/sans</item>
+        <item name="android:padding">16dp</item>
     </style>
 
 </resources>
