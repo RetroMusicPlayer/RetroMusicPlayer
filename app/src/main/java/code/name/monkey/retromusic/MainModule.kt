@@ -55,12 +55,13 @@ private val roomModule = module {
     factory {
         get<RetroDatabase>().playCountDao()
     }
+
     factory {
         get<RetroDatabase>().historyDao()
     }
 
     single {
-        RealRoomRepository(get(), get(), get())
+        RealRoomRepository(get(), get(), get(), get())
     } bind RoomRepository::class
 }
 private val mainModule = module {

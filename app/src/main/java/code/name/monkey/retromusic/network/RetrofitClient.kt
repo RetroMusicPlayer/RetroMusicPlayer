@@ -1,12 +1,14 @@
 package code.name.monkey.retromusic.network
 
+import android.content.Context
 import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.Constants.AUDIO_SCROBBLER_URL
+import code.name.monkey.retromusic.BuildConfig
+import code.name.monkey.retromusic.deezer.DeezerService
 import com.google.gson.Gson
 import okhttp3.Cache
-import okhttp3.ConnectionPool
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,50 +18,22 @@ import java.util.concurrent.TimeUnit
 private const val TIMEOUT: Long = 700
 
 val networkModule = module {
-    factory {
-        provideHttpClient(get(), get())
-    }
-    factory {
-        provideCacheControlInterceptor()
-    }
+
     factory {
         provideDefaultCache()
     }
     factory {
-        provideLastFmService(get())
+        provideOkHttp(get(), get())
     }
     single {
-        providerRetrofit(get())
+        provideLastFmRetrofit(get())
     }
-}
-
-fun provideLastFmService(retrofit: Retrofit): LastFMService =
-    retrofit.create(LastFMService::class.java)
-
-fun providerRetrofit(okHttpClient: OkHttpClient.Builder): Retrofit = Retrofit.Builder()
-    .baseUrl(AUDIO_SCROBBLER_URL)
-    .callFactory(okHttpClient.build())
-    .addConverterFactory(GsonConverterFactory.create(Gson()))
-    .build()
-
-fun provideHttpClient(
-    cache: Cache,
-    interceptor: Interceptor
-): OkHttpClient.Builder = OkHttpClient.Builder()
-    .connectionPool(ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
-    .retryOnConnectionFailure(true)
-    .connectTimeout(TIMEOUT, TimeUnit.MINUTES)
-    .writeTimeout(TIMEOUT, TimeUnit.MINUTES)
-    .readTimeout(TIMEOUT, TimeUnit.MINUTES)
-    .cache(cache)
-    .addInterceptor(interceptor)
-
-
-fun provideCacheControlInterceptor(): Interceptor = Interceptor { chain: Interceptor.Chain ->
-    val modifiedRequest = chain.request().newBuilder()
-        .addHeader("Cache-Control", "max-age=31536000, max-stale=31536000")
-        .build()
-    chain.proceed(modifiedRequest)
+    single {
+        provideDeezerRest(get())
+    }
+    single {
+        provideLastFmRest(get())
+    }
 }
 
 fun provideDefaultCache(): Cache? {
@@ -68,4 +42,56 @@ fun provideDefaultCache(): Cache? {
         return Cache(cacheDir, 1024 * 1024 * 10)
     }
     return null
+}
+
+fun logInterceptor(): Interceptor {
+    val loggingInterceptor = HttpLoggingInterceptor()
+    if (BuildConfig.DEBUG) {
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+    } else {
+        // disable retrofit log on release
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
+    }
+    return loggingInterceptor
+}
+
+fun headerInterceptor(context: Context): Interceptor {
+    return Interceptor {
+        val original = it.request()
+        val request = original.newBuilder()
+            .header("User-Agent", context.packageName)
+            .addHeader("Content-Type", "application/json; charset=utf-8")
+            .method(original.method(), original.body())
+            .build()
+        it.proceed(request)
+    }
+}
+
+fun provideOkHttp(context: Context, cache: Cache): OkHttpClient {
+    return OkHttpClient.Builder()
+        .addNetworkInterceptor(logInterceptor())
+        .addInterceptor(headerInterceptor(context))
+        .connectTimeout(1, TimeUnit.SECONDS)
+        .readTimeout(1, TimeUnit.SECONDS)
+        .cache(cache)
+        .build()
+}
+
+fun provideLastFmRetrofit(client: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
+        .baseUrl("https://ws.audioscrobbler.com/2.0/")
+        .addConverterFactory(GsonConverterFactory.create(Gson()))
+        .callFactory { request -> client.newCall(request) }
+        .build()
+}
+
+fun provideLastFmRest(retrofit: Retrofit): LastFMService {
+    return retrofit.create(LastFMService::class.java)
+}
+
+fun provideDeezerRest(retrofit: Retrofit): DeezerService {
+    val newBuilder = retrofit.newBuilder()
+        .baseUrl("https://api.deezer.com/")
+        .build()
+    return newBuilder.create(DeezerService::class.java)
 }

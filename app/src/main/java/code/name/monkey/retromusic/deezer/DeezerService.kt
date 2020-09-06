@@ -16,7 +16,7 @@ import java.util.*
 private const val BASE_QUERY_ARTIST = "search/artist"
 private const val BASE_URL = "https://api.deezer.com/"
 
-interface DeezerApiService {
+interface DeezerService {
 
     @GET("$BASE_QUERY_ARTIST&limit=1")
     fun getArtistImage(
@@ -26,7 +26,7 @@ interface DeezerApiService {
     companion object {
         operator fun invoke(
             client: okhttp3.Call.Factory
-        ): DeezerApiService {
+        ): DeezerService {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .callFactory(client)

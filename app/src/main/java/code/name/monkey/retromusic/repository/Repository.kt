@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService
 import code.name.monkey.retromusic.network.Result
+import code.name.monkey.retromusic.network.Result.*
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -153,9 +154,10 @@ class RealRepository(
         cache: String?
     ): Result<LastFmArtist> {
         return try {
-            Result.Success(lastFMService.artistInfo(name, lang, cache))
+            Success(lastFMService.artistInfo(name, lang, cache))
         } catch (e: Exception) {
-            Result.Error
+            println(e)
+            Error
         }
     }
 
@@ -165,15 +167,16 @@ class RealRepository(
     ): Result<LastFmAlbum> {
         return try {
             val lastFmAlbum = lastFMService.albumInfo(artist, album)
-            Result.Success(lastFmAlbum)
+            Success(lastFmAlbum)
         } catch (e: Exception) {
-            Result.Error
+            println(e)
+            Error
         }
     }
 
     @ExperimentalCoroutinesApi
     override suspend fun homeSectionsFlow(): Flow<Result<List<Home>>> {
-        val homes = MutableStateFlow<Result<List<Home>>>(value = Result.Loading)
+        val homes = MutableStateFlow<Result<List<Home>>>(value = Loading)
         val homeSections = mutableListOf<Home>()
         val sections = listOf(
             topArtistsHome(),
@@ -191,9 +194,9 @@ class RealRepository(
             }
         }
         if (homeSections.isEmpty()) {
-            homes.value = Result.Error
+            homes.value = Error
         } else {
-            homes.value = Result.Success(homeSections)
+            homes.value = Success(homeSections)
         }
         return homes
     }
@@ -350,52 +353,52 @@ class RealRepository(
     }
 
     override fun songsFlow(): Flow<Result<List<Song>>> = flow {
-        emit(Result.Loading)
+        emit(Loading)
         val data = songRepository.songs()
         if (data.isEmpty()) {
-            emit(Result.Error)
+            emit(Error)
         } else {
-            emit(Result.Success(data))
+            emit(Success(data))
         }
     }
 
     override fun albumsFlow(): Flow<Result<List<Album>>> = flow {
-        emit(Result.Loading)
+        emit(Loading)
         val data = albumRepository.albums()
         if (data.isEmpty()) {
-            emit(Result.Error)
+            emit(Error)
         } else {
-            emit(Result.Success(data))
+            emit(Success(data))
         }
     }
 
     override fun artistsFlow(): Flow<Result<List<Artist>>> = flow {
-        emit(Result.Loading)
+        emit(Loading)
         val data = artistRepository.artists()
         if (data.isEmpty()) {
-            emit(Result.Error)
+            emit(Error)
         } else {
-            emit(Result.Success(data))
+            emit(Success(data))
         }
     }
 
     override fun playlistsFlow(): Flow<Result<List<Playlist>>> = flow {
-        emit(Result.Loading)
+        emit(Loading)
         val data = playlistRepository.playlists()
         if (data.isEmpty()) {
-            emit(Result.Error)
+            emit(Error)
         } else {
-            emit(Result.Success(data))
+            emit(Success(data))
         }
     }
 
     override fun genresFlow(): Flow<Result<List<Genre>>> = flow {
-        emit(Result.Loading)
+        emit(Loading)
         val data = genreRepository.genres()
         if (data.isEmpty()) {
-            emit(Result.Error)
+            emit(Error)
         } else {
-            emit(Result.Success(data))
+            emit(Success(data))
         }
     }
 }

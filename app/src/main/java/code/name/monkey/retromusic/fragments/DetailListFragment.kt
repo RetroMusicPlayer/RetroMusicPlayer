@@ -104,7 +104,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        repository.historySong().observe(viewLifecycleOwner, Observer {
+        repository.observableHistorySongs().observe(viewLifecycleOwner, Observer {
             val songs = it.map { historyEntity -> historyEntity.toSong() }
             songAdapter.swapDataSet(songs)
         })
