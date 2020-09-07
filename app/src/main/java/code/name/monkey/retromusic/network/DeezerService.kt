@@ -1,6 +1,7 @@
-package code.name.monkey.retromusic.deezer
+package code.name.monkey.retromusic.network
 
 import android.content.Context
+import code.name.monkey.retromusic.model.DeezerResponse
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -16,7 +17,7 @@ import java.util.*
 private const val BASE_QUERY_ARTIST = "search/artist"
 private const val BASE_URL = "https://api.deezer.com/"
 
-interface DeezerApiService {
+interface DeezerService {
 
     @GET("$BASE_QUERY_ARTIST&limit=1")
     fun getArtistImage(
@@ -26,7 +27,7 @@ interface DeezerApiService {
     companion object {
         operator fun invoke(
             client: okhttp3.Call.Factory
-        ): DeezerApiService {
+        ): DeezerService {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .callFactory(client)

@@ -32,6 +32,7 @@
         android:scaleType="centerCrop"
         app:civ_border="false"
         app:civ_shadow="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:retroCornerSize="21dp"

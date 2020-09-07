@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SearchViewModel(private val realRepository: RealRepository) : ViewModel() {
     private val results = MutableLiveData<MutableList<Any>>()
@@ -17,6 +15,6 @@ class SearchViewModel(private val realRepository: RealRepository) : ViewModel() 
 
     fun search(query: String?) = viewModelScope.launch(IO) {
         val result = realRepository.search(query)
-        withContext(Main) { results.postValue(result) }
+        results.value = result
     }
 }

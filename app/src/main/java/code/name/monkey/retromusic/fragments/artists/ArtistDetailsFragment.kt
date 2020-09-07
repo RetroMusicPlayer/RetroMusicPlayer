@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
@@ -32,6 +33,7 @@ import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.CustomArtistImageUtil
@@ -77,9 +79,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
             showArtist(it)
             startPostponedEnterTransition()
         })
-        detailsViewModel.getArtistInfo().observe(viewLifecycleOwner, Observer {
-            artistInfo(it)
-        })
+
 
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
@@ -140,6 +140,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         albumTitle.text = albumText
         songAdapter.swapDataSet(artist.songs.sortedBy { it.trackNumber })
         artist.albums?.let { albumAdapter.swapDataSet(it) }
+
     }
 
     private fun loadBiography(
@@ -148,7 +149,14 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     ) {
         biography = null
         this.lang = lang
-        detailsViewModel.loadBiography(name, lang, null)
+        detailsViewModel.getArtistInfo(name, lang, null)
+            .observe(viewLifecycleOwner, Observer { result ->
+                when (result) {
+                    is Result.Loading -> println("Loading")
+                    is Result.Error -> println("Error")
+                    is Result.Success -> artistInfo(result.data)
+                }
+            })
     }
 
     private fun artistInfo(lastFmArtist: LastFmArtist?) {
@@ -201,7 +209,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     override fun onAlbumClick(albumId: Int, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
-            bundleOf("extra_album_id" to albumId),
+            bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
                 view to getString(R.string.transition_album_art)

@@ -45,17 +45,6 @@ interface PlaylistDao {
     @Delete
     suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSongInHistory(historyEntity: HistoryEntity)
-
-    @Query("SELECT * FROM HistoryEntity WHERE id = :songId LIMIT 1")
-    suspend fun isSongPresentInHistory(songId: Int): HistoryEntity?
-
-    @Update
-    suspend fun updateHistorySong(historyEntity: HistoryEntity)
-
-    @Query("SELECT * FROM HistoryEntity ORDER BY time_played DESC")
-    fun historySongs(): LiveData<List<HistoryEntity>>
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
     fun favoritesSongsLiveData(playlistId: Int): LiveData<List<SongEntity>>

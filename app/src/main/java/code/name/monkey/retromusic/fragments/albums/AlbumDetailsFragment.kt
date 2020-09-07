@@ -38,6 +38,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.MusicUtil
@@ -83,15 +84,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             startPostponedEnterTransition()
             showAlbum(it)
         })
-        detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
-            loadArtistImage(it)
-        })
-        detailsViewModel.getMoreAlbums().observe(viewLifecycleOwner, Observer {
-            moreAlbums(it)
-        })
-        detailsViewModel.getAlbumInfo().observe(viewLifecycleOwner, Observer {
-            aboutAlbum(it)
-        })
+
         setupRecyclerView()
         artistImage.setOnClickListener {
             requireActivity().findNavController(R.id.fragment_container)
@@ -172,8 +165,23 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         }
         loadAlbumCover(album)
         simpleSongAdapter.swapDataSet(album.songs)
-        detailsViewModel.loadArtist(album.artistId)
-        detailsViewModel.loadAlbumInfo(album)
+        detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner, Observer {
+            loadArtistImage(it)
+        })
+
+        detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is Result.Loading -> {
+                    println("Loading")
+                }
+                is Result.Error -> {
+                    println("Error")
+                }
+                is Result.Success -> {
+                    aboutAlbum(result.data)
+                }
+            }
+        })
     }
 
     private fun moreAlbums(albums: List<Album>) {
@@ -214,6 +222,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun loadArtistImage(artist: Artist) {
+        detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner, Observer {
+            moreAlbums(it)
+        })
         ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
             .forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
             .generatePalette(requireContext())

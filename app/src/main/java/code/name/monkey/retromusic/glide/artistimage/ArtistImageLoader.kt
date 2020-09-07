@@ -15,8 +15,8 @@
 package code.name.monkey.retromusic.glide.artistimage
 
 import android.content.Context
-import code.name.monkey.retromusic.deezer.Data
-import code.name.monkey.retromusic.deezer.DeezerApiService
+import code.name.monkey.retromusic.model.Data
+import code.name.monkey.retromusic.network.DeezerService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Priority
@@ -38,7 +38,7 @@ class ArtistImage(val artistName: String)
 
 class ArtistImageFetcher(
     private val context: Context,
-    private val deezerApiService: DeezerApiService,
+    private val deezerService: DeezerService,
     val model: ArtistImage,
     val urlLoader: ModelLoader<GlideUrl, InputStream>,
     val width: Int,
@@ -66,7 +66,7 @@ class ArtistImageFetcher(
             PreferenceUtil.isAllowedToDownloadMetadata()
         ) {
             val artists = model.artistName.split(",")
-            val response = deezerApiService.getArtistImage(artists[0]).execute()
+            val response = deezerService.getArtistImage(artists[0]).execute()
 
             if (!response.isSuccessful) {
                 throw   IOException("Request failed with code: " + response.code())
@@ -106,7 +106,7 @@ class ArtistImageFetcher(
 
 class ArtistImageLoader(
     val context: Context,
-    private val deezerApiService: DeezerApiService,
+    private val deezerService: DeezerService,
     private val urlLoader: ModelLoader<GlideUrl, InputStream>
 ) : StreamModelLoader<ArtistImage> {
 
@@ -115,7 +115,7 @@ class ArtistImageLoader(
         width: Int,
         height: Int
     ): DataFetcher<InputStream> {
-        return ArtistImageFetcher(context, deezerApiService, model, urlLoader, width, height)
+        return ArtistImageFetcher(context, deezerService, model, urlLoader, width, height)
     }
 }
 
@@ -123,7 +123,7 @@ class Factory(
     val context: Context
 ) : ModelLoaderFactory<ArtistImage, InputStream> {
 
-    private var deezerApiService: DeezerApiService
+    private var deezerService: DeezerService
     private var okHttpFactory: OkHttpUrlLoader.Factory
 
     init {
@@ -134,8 +134,8 @@ class Factory(
                 .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .build()
         )
-        deezerApiService = DeezerApiService.invoke(
-            DeezerApiService.createDefaultOkHttpClient(context)
+        deezerService = DeezerService.invoke(
+            DeezerService.createDefaultOkHttpClient(context)
                 .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
@@ -156,7 +156,7 @@ class Factory(
     ): ModelLoader<ArtistImage, InputStream> {
         return ArtistImageLoader(
             context!!,
-            deezerApiService,
+            deezerService,
             okHttpFactory.build(context, factories)
         )
     }
