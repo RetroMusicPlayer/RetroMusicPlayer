@@ -14,11 +14,11 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/buyProContainer"
+            style="@style/MaterialCardViewStroke"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            app:cardCornerRadius="8dp"
-            app:cardUseCompatPadding="true">
+            app:cardCornerRadius="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

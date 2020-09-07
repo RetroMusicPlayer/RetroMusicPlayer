@@ -78,7 +78,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
         libraryViewModel.paletteColorLiveData.observe(this, Observer {
             this.paletteColor = it
-            miniPlayerFragment?.updateProgressBar(it)
             onPaletteColorChanged()
         })
     }

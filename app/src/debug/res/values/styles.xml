@@ -79,4 +79,13 @@
         <item name="android:padding">16dp</item>
     </style>
 
+    <style name="ToolbarTextAppearanceNormal">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textAppearance">@style/TextViewHeadline6</item>
+        <item name="fontFamily">@font/sans</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.0125</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
 </resources>

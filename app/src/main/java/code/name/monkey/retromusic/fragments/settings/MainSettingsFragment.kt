@@ -63,7 +63,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         aboutSettings.setOnClickListener(this)
 
         buyProContainer.apply {
-            if (!App.isProVersion()) show() else hide()
+            if (App.isProVersion()) hide() else show()
             setOnClickListener {
                 NavigationUtil.goToProVersion(requireContext())
             }

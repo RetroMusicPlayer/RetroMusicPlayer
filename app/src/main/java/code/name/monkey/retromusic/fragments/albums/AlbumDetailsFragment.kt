@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -14,7 +15,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
@@ -76,9 +76,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         mainActivity.hideBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
-
-        toolbar.title = null
-
+        toolbar.title = " "
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
             startPostponedEnterTransition()
@@ -148,7 +146,6 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             album.songCount
         )
         songTitle.text = songText
-
         if (MusicUtil.getYearString(album.year) == "-") {
             albumText.text = String.format(
                 "%s • %s",
@@ -207,7 +204,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 aboutAlbumTitle.show()
                 aboutAlbumTitle.text =
                     String.format(getString(R.string.about_album_label), lastFmAlbum.album.name)
-                aboutAlbumText.text = lastFmAlbum.album.wiki.content
+                aboutAlbumText.text = HtmlCompat.fromHtml(
+                    lastFmAlbum.album.wiki.content,
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
             }
             if (lastFmAlbum.album.listeners.isNotEmpty()) {
                 listeners.show()
@@ -250,10 +250,8 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun setColors(color: Int) {
-        val finalColor =
-            if (PreferenceUtil.isAdaptiveColor) color else ThemeStore.accentColor(requireContext())
-        shuffleAction.applyColor(finalColor)
-        playAction.applyOutlineColor(finalColor)
+        shuffleAction.applyColor(color)
+        playAction.applyOutlineColor(color)
     }
 
     override fun onAlbumClick(albumId: Int, view: View) {
