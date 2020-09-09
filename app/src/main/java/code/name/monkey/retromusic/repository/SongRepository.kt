@@ -155,7 +155,6 @@ class RealSongRepository(private val context: Context) : SongRepository {
 
 
         val uri = if (VersionUtils.hasQ()) {
-
             MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
         } else {
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI

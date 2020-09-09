@@ -144,7 +144,7 @@ class SongDetailDialog : DialogFragment() {
             }
         }
         return materialDialog(R.string.action_details)
-            .setPositiveButton(R.string.ok, null)
+            .setPositiveButton(android.R.string.ok, null)
             .setView(dialogView)
             .create()
             .colorButtons()

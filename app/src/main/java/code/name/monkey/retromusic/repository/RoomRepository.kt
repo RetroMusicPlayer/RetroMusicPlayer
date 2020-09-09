@@ -38,6 +38,7 @@ interface RoomRepository {
     suspend fun clearBlacklist()
     suspend fun insertBlacklistPathAsync(blackListStoreEntity: BlackListStoreEntity)
     suspend fun blackListPaths(): List<BlackListStoreEntity>
+    suspend fun deleteSongs(songs: List<Song>)
 }
 
 class RealRoomRepository(
@@ -152,6 +153,12 @@ class RealRoomRepository(
 
     override suspend fun blackListPaths(): List<BlackListStoreEntity> =
         blackListStoreDao.blackListPaths()
+
+    override suspend fun deleteSongs(songs: List<Song>) {
+        songs.forEach {
+            playCountDao.deleteSong(it.id)
+        }
+    }
 
     override suspend fun deleteBlacklistPath(blackListStoreEntity: BlackListStoreEntity) =
         blackListStoreDao.deleteBlacklistPath(blackListStoreEntity)

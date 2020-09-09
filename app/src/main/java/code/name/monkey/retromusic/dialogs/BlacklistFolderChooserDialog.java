@@ -76,7 +76,7 @@ public class BlacklistFolderChooserDialog extends DialogFragment implements Mate
             return new MaterialDialog.Builder(requireActivity())
                     .title(R.string.md_error_label)
                     .content(R.string.md_storage_perm_error)
-                    .positiveText(R.string.ok)
+                    .positiveText(android.R.string.ok)
                     .build();
         }
         if (savedInstanceState == null) {

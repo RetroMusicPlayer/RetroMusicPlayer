@@ -5,8 +5,7 @@
     android:id="@+id/recentArtistContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="12dp">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/clickable_area"
@@ -14,7 +13,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?attr/rectSelector"
+        android:background="?attr/rectSelector"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

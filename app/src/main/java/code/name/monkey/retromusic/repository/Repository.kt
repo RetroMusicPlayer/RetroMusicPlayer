@@ -96,6 +96,7 @@ interface Repository {
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun blackListPaths(): List<BlackListStoreEntity>
     suspend fun lyrics(artist: String, title: String): Result<String>
+    suspend fun deleteSongs(songs: List<Song>)
 }
 
 class RealRepository(
@@ -118,6 +119,8 @@ class RealRepository(
     } catch (e: Exception) {
         Error
     }
+
+    override suspend fun deleteSongs(songs: List<Song>) = roomRepository.deleteSongs(songs)
 
     override suspend fun fetchAlbums(): List<Album> = albumRepository.albums()
 

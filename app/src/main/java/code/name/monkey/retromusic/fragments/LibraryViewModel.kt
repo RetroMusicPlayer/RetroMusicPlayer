@@ -30,12 +30,16 @@ class LibraryViewModel(
 
     val paletteColorLiveData: LiveData<Int> = paletteColor
 
+    init {
+        fetchHomeSections()
+    }
+
     private fun loadLibraryContent() = viewModelScope.launch(IO) {
+        fetchHomeSections()
         fetchSongs()
         fetchAlbums()
         fetchArtists()
         fetchGenres()
-        fetchHomeSections()
         fetchPlaylists()
     }
 
@@ -70,7 +74,6 @@ class LibraryViewModel(
     }
 
     fun getHome(): LiveData<List<Home>> {
-        fetchHomeSections()
         return home
     }
 
@@ -132,10 +135,9 @@ class LibraryViewModel(
     }
 
     override fun onMediaStoreChanged() {
-        loadLibraryContent()
         println("onMediaStoreChanged")
+        loadLibraryContent()
     }
-
 
     override fun onServiceConnected() {
         println("onServiceConnected")
@@ -203,6 +205,30 @@ class LibraryViewModel(
 
     suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
         repository.createPlaylist(playlistEntity)
+
+    fun importPlaylists() = viewModelScope.launch(IO) {
+        val playlists = repository.fetchLegacyPlaylist()
+        playlists.forEach { playlist ->
+            val playlistEntity = repository.checkPlaylistExists(playlist.name).firstOrNull();
+            if (playlistEntity != null) {
+                val songEntities = playlist.getSongs().map {
+                    it.toSongEntity(playlistEntity.playListId)
+                }
+                repository.insertSongs(songEntities)
+            } else {
+                val playListId = createPlaylist(PlaylistEntity(playlist.name))
+                val songEntities = playlist.getSongs().map {
+                    it.toSongEntity(playListId.toInt())
+                }
+                repository.insertSongs(songEntities)
+            }
+            forceReload(Playlists)
+        }
+    }
+
+    fun deleteTracks(songs: List<Song>) = viewModelScope.launch(IO) {
+        repository.deleteSongs(songs)
+    }
 
 }
 

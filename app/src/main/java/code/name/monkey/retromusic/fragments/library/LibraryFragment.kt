@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
+import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import kotlinx.android.synthetic.main.fragment_library.*
+import java.lang.String
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
@@ -31,6 +35,17 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
             )
         }
         setupNavigationController()
+        setupTitle()
+    }
+
+    private fun setupTitle() {
+        val color = ThemeStore.accentColor(requireContext())
+        val hexColor = String.format("#%06X", 0xFFFFFF and color)
+        val appName = HtmlCompat.fromHtml(
+            "Retro <span  style='color:$hexColor';>Music</span>",
+            HtmlCompat.FROM_HTML_MODE_COMPACT
+        )
+        appNameText.text = appName
     }
 
     private fun setupNavigationController() {
@@ -61,7 +76,10 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
                 null,
                 navOptions
             )
-            R.id.action_import_playlist -> findNavController(R.id.fragment_container).navigate(R.id.action_import_playlist)
+            R.id.action_import_playlist -> ImportPlaylistDialog().show(
+                childFragmentManager,
+                "ImportPlaylist"
+            )
             R.id.action_add_to_playlist -> CreatePlaylistDialog.create(emptyList()).show(
                 childFragmentManager,
                 "ShowCreatePlaylistDialog"

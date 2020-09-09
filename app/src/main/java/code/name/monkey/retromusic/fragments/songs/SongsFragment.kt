@@ -20,7 +20,6 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.getSongs().observe(viewLifecycleOwner, Observer {
-            println(Thread.currentThread().name)
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else

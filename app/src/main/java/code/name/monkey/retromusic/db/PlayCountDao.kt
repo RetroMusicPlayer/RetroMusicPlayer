@@ -18,4 +18,7 @@ interface PlayCountDao {
 
     @Query("SELECT * FROM PlayCountEntity ORDER BY play_count DESC")
     fun playCountSongs(): List<PlayCountEntity>
+
+    @Query("DELETE FROM SongEntity WHERE id =:songId")
+    fun deleteSong(songId: Int)
 }
