@@ -185,7 +185,7 @@ class LibraryViewModel(
     }
 
     fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) = viewModelScope.launch(IO) {
-        repository.deleteSongsFromPlaylist(playlists)
+        repository.deletePlaylistSongs(playlists)
     }
 
     fun deleteRoomPlaylist(playlists: List<PlaylistEntity>) = viewModelScope.launch(IO) {
@@ -209,7 +209,7 @@ class LibraryViewModel(
     fun importPlaylists() = viewModelScope.launch(IO) {
         val playlists = repository.fetchLegacyPlaylist()
         playlists.forEach { playlist ->
-            val playlistEntity = repository.checkPlaylistExists(playlist.name).firstOrNull();
+            val playlistEntity = repository.checkPlaylistExists(playlist.name).firstOrNull()
             if (playlistEntity != null) {
                 val songEntities = playlist.getSongs().map {
                     it.toSongEntity(playlistEntity.playListId)
@@ -228,8 +228,9 @@ class LibraryViewModel(
 
     fun deleteTracks(songs: List<Song>) = viewModelScope.launch(IO) {
         repository.deleteSongs(songs)
+        fetchPlaylists()
+        loadLibraryContent()
     }
-
 }
 
 enum class ReloadType {

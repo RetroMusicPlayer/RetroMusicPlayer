@@ -5,7 +5,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +12,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
@@ -49,17 +49,13 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
 
         setUpRecyclerView()
 
-        viewModel.getSongs().observe(viewLifecycleOwner, Observer {
-            songs(it)
+        viewModel.getSongs().observe(viewLifecycleOwner, {
+            songs(it.toSongs())
         })
     }
 
     private fun setUpRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        /*if (playlist is AbsCustomPlaylist) {
-            adapter = SongAdapter(requireActivity(), ArrayList(), R.layout.item_list, null)
-            recyclerView.adapter = adapter
-        } else {*/
         recyclerViewDragDropManager = RecyclerViewDragDropManager()
         val animator = RefactoredDefaultItemAnimator()
         adapter =

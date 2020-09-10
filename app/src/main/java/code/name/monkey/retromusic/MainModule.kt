@@ -65,6 +65,9 @@ private val roomModule = module {
             .fallbackToDestructiveMigration()
             .build()
     }
+    factory {
+        get<RetroDatabase>().lyricsDao()
+    }
 
     factory {
         get<RetroDatabase>().playlistDao()
@@ -83,7 +86,7 @@ private val roomModule = module {
     }
 
     single {
-        RealRoomRepository(get(), get(), get(), get())
+        RealRoomRepository(get(), get(), get(), get(), get())
     } bind RoomRepository::class
 }
 private val mainModule = module {

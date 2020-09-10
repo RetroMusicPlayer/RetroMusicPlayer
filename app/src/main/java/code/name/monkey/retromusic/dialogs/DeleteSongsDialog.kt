@@ -63,7 +63,6 @@ class DeleteSongsDialog : DialogFragment() {
                 }
                 MusicUtil.deleteTracks(requireActivity(), songs)
                 libraryViewModel.deleteTracks(songs)
-                 
             }
             .create()
             .colorButtons()

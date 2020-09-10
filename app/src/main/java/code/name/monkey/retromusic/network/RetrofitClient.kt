@@ -4,7 +4,7 @@ import android.content.Context
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.network.conversion.LyricsConverterFactory
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -13,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
+
 
 fun provideDefaultCache(): Cache? {
     val cacheDir = File(App.getContext().cacheDir.absolutePath, "/okhttp-lastfm/")
@@ -48,7 +49,7 @@ fun headerInterceptor(context: Context): Interceptor {
 fun provideOkHttp(context: Context, cache: Cache): OkHttpClient {
     return OkHttpClient.Builder()
         .addNetworkInterceptor(logInterceptor())
-        .addInterceptor(headerInterceptor(context))
+        //.addInterceptor(headerInterceptor(context))
         .connectTimeout(1, TimeUnit.SECONDS)
         .readTimeout(1, TimeUnit.SECONDS)
         .cache(cache)
@@ -56,9 +57,12 @@ fun provideOkHttp(context: Context, cache: Cache): OkHttpClient {
 }
 
 fun provideLastFmRetrofit(client: OkHttpClient): Retrofit {
+    val gson = GsonBuilder()
+        .setLenient()
+        .create()
     return Retrofit.Builder()
         .baseUrl("https://ws.audioscrobbler.com/2.0/")
-        .addConverterFactory(GsonConverterFactory.create(Gson()))
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .callFactory { request -> client.newCall(request) }
         .build()
 }

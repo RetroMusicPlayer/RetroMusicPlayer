@@ -18,10 +18,10 @@ interface PlaylistDao {
     suspend fun playlists(): List<PlaylistEntity>
 
     @Query("DELETE FROM SongEntity WHERE playlist_creator_id = :playlistId")
-    suspend fun deleteSongsInPlaylist(playlistId: Int)
+    suspend fun deletePlaylistSongs(playlistId: Int)
 
     @Query("DELETE FROM SongEntity WHERE playlist_creator_id = :playlistId AND id = :songId")
-    suspend fun removeSongFromPlaylist(playlistId: Int, songId: Int)
+    suspend fun deleteSongFromPlaylist(playlistId: Int, songId: Int)
 
     @Transaction
     @Query("SELECT * FROM PlaylistEntity")
@@ -34,7 +34,7 @@ interface PlaylistDao {
     suspend fun isSongExistsInPlaylist(playlistId: Int, songId: Int): List<SongEntity>
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId")
-    suspend fun songsFromPlaylist(playlistId: Int): List<SongEntity>
+    fun songsFromPlaylist(playlistId: Int): LiveData<List<SongEntity>>
 
     @Delete
     suspend fun deletePlaylist(playlistEntity: PlaylistEntity)
@@ -43,7 +43,7 @@ interface PlaylistDao {
     suspend fun deletePlaylists(playlistEntities: List<PlaylistEntity>)
 
     @Delete
-    suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
+    suspend fun deletePlaylistSongs(songs: List<SongEntity>)
 
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
@@ -51,7 +51,6 @@ interface PlaylistDao {
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
     fun favoritesSongs(playlistId: Int): List<SongEntity>
-
 
 
 }

@@ -11,16 +11,16 @@ interface RoomRepository {
     fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>>
     fun insertBlacklistPath(blackListStoreEntity: BlackListStoreEntity)
     fun observableHistorySongs(): LiveData<List<HistoryEntity>>
+    fun getSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>>
     suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
     suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity>
     suspend fun playlists(): List<PlaylistEntity>
     suspend fun playlistWithSongs(): List<PlaylistWithSongs>
     suspend fun insertSongs(songs: List<SongEntity>)
-    suspend fun getSongs(playlistEntity: PlaylistEntity): List<SongEntity>
     suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>)
     suspend fun renamePlaylistEntity(playlistId: Int, name: String)
     suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
-    suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
+    suspend fun deletePlaylistSongs(playlists: List<PlaylistEntity>)
     suspend fun favoritePlaylist(favorite: String): PlaylistEntity
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
     suspend fun removeSongFromPlaylist(songEntity: SongEntity)
@@ -45,7 +45,8 @@ class RealRoomRepository(
     private val playlistDao: PlaylistDao,
     private val blackListStoreDao: BlackListStoreDao,
     private val playCountDao: PlayCountDao,
-    private val historyDao: HistoryDao
+    private val historyDao: HistoryDao,
+    private val lyricsDao: LyricsDao
 ) : RoomRepository {
     @WorkerThread
     override suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
@@ -66,7 +67,7 @@ class RealRoomRepository(
     override suspend fun insertSongs(songs: List<SongEntity>) =
         playlistDao.insertSongsToPlaylist(songs)
 
-    override suspend fun getSongs(playlistEntity: PlaylistEntity): List<SongEntity> =
+    override   fun getSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>> =
         playlistDao.songsFromPlaylist(playlistEntity.playListId)
 
     override suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>) =
@@ -75,12 +76,15 @@ class RealRoomRepository(
     override suspend fun renamePlaylistEntity(playlistId: Int, name: String) =
         playlistDao.renamePlaylist(playlistId, name)
 
-    override suspend fun deleteSongsInPlaylist(songs: List<SongEntity>) =
-        playlistDao.deleteSongsInPlaylist(songs)
+    override suspend fun deleteSongsInPlaylist(songs: List<SongEntity>) {
+        songs.forEach {
+            playlistDao.deleteSongFromPlaylist(it.playlistCreatorId, it.id)
+        }
+    }
 
-    override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) =
+    override suspend fun deletePlaylistSongs(playlists: List<PlaylistEntity>) =
         playlists.forEach {
-            playlistDao.deleteSongsInPlaylist(it.playListId)
+            playlistDao.deletePlaylistSongs(it.playListId)
         }
 
     override suspend fun favoritePlaylist(favorite: String): PlaylistEntity {
@@ -100,7 +104,7 @@ class RealRoomRepository(
         )
 
     override suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
-        playlistDao.removeSongFromPlaylist(songEntity.playlistCreatorId, songEntity.id)
+        playlistDao.deleteSongFromPlaylist(songEntity.playlistCreatorId, songEntity.id)
 
     override suspend fun addSongToHistory(currentSong: Song) =
         historyDao.insertSongInHistory(currentSong.toHistoryEntity(System.currentTimeMillis()))

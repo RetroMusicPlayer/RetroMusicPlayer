@@ -35,7 +35,6 @@ object PreferenceUtil {
         CategoryInfo(CategoryInfo.Category.Artists, true),
         CategoryInfo(CategoryInfo.Category.Playlists, true),
         CategoryInfo(CategoryInfo.Category.Genres, false),
-        CategoryInfo(CategoryInfo.Category.Queue, false),
         CategoryInfo(CategoryInfo.Category.Folder, false)
     )
 

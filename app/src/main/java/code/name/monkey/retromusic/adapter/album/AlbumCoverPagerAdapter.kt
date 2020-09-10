@@ -92,7 +92,7 @@ class AlbumCoverPagerAdapter(
             albumCover = view.findViewById(R.id.player_image)
             albumCover.setOnClickListener {
                 LyricsDialog().show(childFragmentManager, "LyricsDialog")
-                //showLyricsDialog()
+                showLyricsDialog()
             }
             return view
         }

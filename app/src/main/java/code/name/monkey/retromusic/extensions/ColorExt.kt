@@ -22,8 +22,10 @@ import android.graphics.drawable.Drawable
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.SeekBar
-import androidx.annotation.*
-import androidx.appcompat.content.res.AppCompatResources
+import androidx.annotation.AttrRes
+import androidx.annotation.CheckResult
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -94,6 +96,10 @@ fun SeekBar.addAccentColor() {
 }
 
 fun Button.accentTextColor() {
+    setTextColor(ThemeStore.accentColor(App.getContext()))
+}
+
+fun MaterialButton.accentTextColor() {
     setTextColor(ThemeStore.accentColor(App.getContext()))
 }
 

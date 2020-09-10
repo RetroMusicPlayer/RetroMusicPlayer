@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.accentTextColor
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.repository.Repository
@@ -34,16 +36,23 @@ class LyricsDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val song = MusicPlayerRemote.currentSong
+        dialogTitle.text = song.title
+        syncedLyrics.accentTextColor()
         lifecycleScope.launch(IO) {
             val result: Result<String> = repository.lyrics(
-                MusicPlayerRemote.currentSong.artistName,
-                MusicPlayerRemote.currentSong.title
+                song.artistName,
+                song.title
             )
             withContext(Main) {
+
                 when (result) {
-                    is Result.Error -> println("Error")
+                    is Result.Error -> progressBar.hide()
                     is Result.Loading -> println("Loading")
-                    is Result.Success -> lyricsText.text = result.data
+                    is Result.Success -> {
+                        progressBar.hide()
+                        lyricsText.text = result.data
+                    }
                 }
             }
         }

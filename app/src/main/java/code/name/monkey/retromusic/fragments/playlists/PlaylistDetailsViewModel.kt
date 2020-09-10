@@ -3,16 +3,11 @@ package code.name.monkey.retromusic.fragments.playlists
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.db.toSongs
+import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class PlaylistDetailsViewModel(
     private val realRepository: RealRepository,
@@ -26,17 +21,8 @@ class PlaylistDetailsViewModel(
 
     fun getPlaylist(): LiveData<PlaylistWithSongs> = _playlist
 
-    fun getSongs(): LiveData<List<Song>> = _playListSongs
+    fun getSongs(): LiveData<List<SongEntity>> = realRepository.playlistSongs(playlist.playlistEntity)
 
-    init {
-        loadPlaylistSongs(playlist)
-    }
-
-    private fun loadPlaylistSongs(playlist: PlaylistWithSongs) =
-        viewModelScope.launch(Dispatchers.IO) {
-            val songs: List<Song> = playlist.songs.toSongs()
-            withContext(Main) { _playListSongs.postValue(songs) }
-        }
 
     override fun onMediaStoreChanged() {
         /*if (playlist !is AbsCustomPlaylist) {

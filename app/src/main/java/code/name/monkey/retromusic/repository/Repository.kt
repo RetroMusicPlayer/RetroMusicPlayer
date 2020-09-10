@@ -42,6 +42,7 @@ interface Repository {
     fun favorites(): LiveData<List<SongEntity>>
     fun observableHistorySongs(): LiveData<List<HistoryEntity>>
     fun albumById(albumId: Int): Album
+    fun playlistSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>>
     suspend fun fetchAlbums(): List<Album>
     suspend fun albumByIdAsync(albumId: Int): Album
     suspend fun allSongs(): List<Song>
@@ -80,7 +81,7 @@ interface Repository {
     suspend fun renameRoomPlaylist(playlistId: Int, name: String)
     suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
     suspend fun removeSongFromPlaylist(songEntity: SongEntity)
-    suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>)
+    suspend fun deletePlaylistSongs(playlists: List<PlaylistEntity>)
     suspend fun favoritePlaylist(): PlaylistEntity
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
     suspend fun addSongToHistory(currentSong: Song)
@@ -117,7 +118,8 @@ class RealRepository(
     override suspend fun lyrics(artist: String, title: String): Result<String> = try {
         Success(lyricsRestService.getLyrics(artist, title))
     } catch (e: Exception) {
-        Error
+        println(e)
+        Error(e)
     }
 
     override suspend fun deleteSongs(songs: List<Song>) = roomRepository.deleteSongs(songs)
@@ -169,7 +171,7 @@ class RealRepository(
             Success(lastFMService.artistInfo(name, lang, cache))
         } catch (e: Exception) {
             println(e)
-            Error
+            Error(e)
         }
     }
 
@@ -182,7 +184,7 @@ class RealRepository(
             Success(lastFmAlbum)
         } catch (e: Exception) {
             println(e)
-            Error
+            Error(e)
         }
     }
 
@@ -206,7 +208,7 @@ class RealRepository(
             }
         }
         if (homeSections.isEmpty()) {
-            homes.value = Error
+            homes.value = Error(Exception(Throwable("No items")))
         } else {
             homes.value = Success(homeSections)
         }
@@ -244,6 +246,9 @@ class RealRepository(
             it.toSong()
         }
 
+    override fun playlistSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>> =
+        roomRepository.getSongs(playlistEntity)
+
     override suspend fun insertSongs(songs: List<SongEntity>) =
         roomRepository.insertSongs(songs)
 
@@ -267,8 +272,8 @@ class RealRepository(
     override suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
         roomRepository.removeSongFromPlaylist(songEntity)
 
-    override suspend fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) =
-        roomRepository.deleteSongsFromPlaylist(playlists)
+    override suspend fun deletePlaylistSongs(playlists: List<PlaylistEntity>) =
+        roomRepository.deletePlaylistSongs(playlists)
 
     override suspend fun favoritePlaylist(): PlaylistEntity =
         roomRepository.favoritePlaylist(context.getString(R.string.favorites))
@@ -368,7 +373,7 @@ class RealRepository(
         emit(Loading)
         val data = songRepository.songs()
         if (data.isEmpty()) {
-            emit(Error)
+            emit(Error(Exception(Throwable("No items"))))
         } else {
             emit(Success(data))
         }
@@ -378,7 +383,7 @@ class RealRepository(
         emit(Loading)
         val data = albumRepository.albums()
         if (data.isEmpty()) {
-            emit(Error)
+            emit(Error(Exception(Throwable("No items"))))
         } else {
             emit(Success(data))
         }
@@ -388,7 +393,7 @@ class RealRepository(
         emit(Loading)
         val data = artistRepository.artists()
         if (data.isEmpty()) {
-            emit(Error)
+            emit(Error(Exception(Throwable("No items"))))
         } else {
             emit(Success(data))
         }
@@ -398,7 +403,7 @@ class RealRepository(
         emit(Loading)
         val data = playlistRepository.playlists()
         if (data.isEmpty()) {
-            emit(Error)
+            emit(Error(Exception(Throwable("No items"))))
         } else {
             emit(Success(data))
         }
@@ -408,7 +413,7 @@ class RealRepository(
         emit(Loading)
         val data = genreRepository.genres()
         if (data.isEmpty()) {
-            emit(Error)
+            emit(Error(Exception(Throwable("No items"))))
         } else {
             emit(Success(data))
         }
