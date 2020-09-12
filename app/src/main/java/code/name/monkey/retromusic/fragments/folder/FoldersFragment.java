@@ -290,7 +290,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     }
                 }
                 if (startIndex > -1) {
-                    MusicPlayerRemote.INSTANCE.openQueue(songs, startIndex, true);
+                    MusicPlayerRemote.openQueue(songs, startIndex, true);
                 } else {
                     final File finalFile = file1;
                     Snackbar.make(coordinatorLayout, Html.fromHtml(

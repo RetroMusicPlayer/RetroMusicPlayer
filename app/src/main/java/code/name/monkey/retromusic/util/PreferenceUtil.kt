@@ -35,7 +35,6 @@ object PreferenceUtil {
         CategoryInfo(CategoryInfo.Category.Artists, true),
         CategoryInfo(CategoryInfo.Category.Playlists, true),
         CategoryInfo(CategoryInfo.Category.Genres, false),
-        CategoryInfo(CategoryInfo.Category.Queue, false),
         CategoryInfo(CategoryInfo.Category.Folder, false)
     )
 
@@ -93,7 +92,7 @@ object PreferenceUtil {
         }
     }
 
-    val languageCode get() = sharedPreferences.getString(LANGUAGE_NAME, "auto")
+    val languageCode: String get() = sharedPreferences.getString(LANGUAGE_NAME, "auto") ?: "auto"
 
     var userName
         get() = sharedPreferences.getString(
@@ -243,7 +242,7 @@ object PreferenceUtil {
 
     val isAlbumArtOnLockScreen
         get() = sharedPreferences.getBoolean(
-            ALBUM_ART_ON_LOCKSCREEN, false
+            ALBUM_ART_ON_LOCK_SCREEN, false
         )
 
     val isAudioDucking
@@ -292,7 +291,7 @@ object PreferenceUtil {
 
     val isGapLessPlayback
         get() = sharedPreferences.getBoolean(
-            GAPLESS_PLAYBACK, false
+            GAP_LESS_PLAYBACK, false
         )
 
     val isAdaptiveColor
@@ -471,7 +470,7 @@ object PreferenceUtil {
 
     var artistGridSizeLand
         get() = sharedPreferences.getInt(
-            ALBUM_GRID_SIZE_LAND,
+            ARTIST_GRID_SIZE_LAND,
             App.getContext().getIntRes(R.integer.default_grid_columns_land)
         )
         set(value) = sharedPreferences.edit {
@@ -528,7 +527,7 @@ object PreferenceUtil {
         get() {
             val folderPath = FoldersFragment.getDefaultStartDirectory().path
             val filePath: String = sharedPreferences.getStringOrDefault(START_DIRECTORY, folderPath)
-            return File(filePath) ?: File(FoldersFragment.getDefaultStartDirectory().path)
+            return File(filePath)
         }
         set(value) = sharedPreferences.edit {
             putString(

@@ -31,11 +31,6 @@
         tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
-        android:id="@+id/action_playing_queue"
-        android:name="code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment"
-        tools:layout="@layout/fragment_main_activity_recycler_view" />
-
-    <fragment
         android:id="@+id/action_folder"
         android:name="code.name.monkey.retromusic.fragments.folder.FoldersFragment"
         tools:layout="@layout/fragment_folder" />
@@ -44,6 +39,11 @@
         android:id="@+id/action_home"
         android:name="code.name.monkey.retromusic.fragments.home.HomeFragment"
         android:label=""
-        tools:layout="@layout/fragment_banner_home"/>
+        tools:layout="@layout/fragment_banner_home" />
 
+    <fragment
+        android:id="@+id/action_import_playlist"
+        android:name="code.name.monkey.retromusic.fragments.playlists.ImportPlaylistFragment"
+        android:label="ImportPlaylist"
+        tools:layout="@layout/fragment_main_activity_recycler_view" />
 </navigation>

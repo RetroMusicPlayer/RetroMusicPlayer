@@ -18,6 +18,7 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.model.Song
@@ -151,17 +152,21 @@ class RealSongRepository(private val context: Context) : SongRepository {
         }
         selectionFinal =
             selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
-        try {
-            return context.contentResolver.query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                baseProjection,
-                selectionFinal,
-                selectionValuesFinal,
-                sortOrder
-            )
-        } catch (e: SecurityException) {
-            return null
+
+
+        val uri = if (VersionUtils.hasQ()) {
+            MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
+        } else {
+            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         }
+
+        return context.contentResolver.query(
+            uri,
+            baseProjection,
+            selectionFinal,
+            selectionValuesFinal,
+            sortOrder
+        )
     }
 
     private fun generateBlacklistSelection(

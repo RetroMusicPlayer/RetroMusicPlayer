@@ -1,51 +1,37 @@
 package code.name.monkey.retromusic.fragments.artists
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.liveData
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.repository.RealRepository
+import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmArtist
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import code.name.monkey.retromusic.repository.RealRepository
+import kotlinx.coroutines.Dispatchers.IO
 
 class ArtistDetailsViewModel(
     private val realRepository: RealRepository,
     private val artistId: Int
 ) : ViewModel(), MusicServiceEventListener {
 
-    private val loadArtistDetailsAsync: Deferred<Artist?>
-        get() = viewModelScope.async(Dispatchers.IO) {
-            realRepository.artistById(artistId)
-        }
-
-    private val _artist = MutableLiveData<Artist>()
-    private val _lastFmArtist = MutableLiveData<LastFmArtist>()
-
-    fun getArtist(): LiveData<Artist> = _artist
-    fun getArtistInfo(): LiveData<LastFmArtist> = _lastFmArtist
-
-    init {
-        loadArtistDetails()
+    fun getArtist(): LiveData<Artist> = liveData(IO) {
+        val artist = realRepository.artistById(artistId)
+        emit(artist)
     }
 
-    private fun loadArtistDetails() = viewModelScope.launch {
-        val artist =
-            loadArtistDetailsAsync.await() ?: throw NullPointerException("Album couldn't found")
-        _artist.postValue(artist)
-    }
-
-    fun loadBiography(name: String, lang: String?, cache: String?) = viewModelScope.launch {
+    fun getArtistInfo(
+        name: String,
+        lang: String?,
+        cache: String?
+    ): LiveData<Result<LastFmArtist>> = liveData(IO) {
+        emit(Result.Loading)
         val info = realRepository.artistInfo(name, lang, cache)
-        _lastFmArtist.postValue(info)
+        emit(info)
     }
 
     override fun onMediaStoreChanged() {
-        loadArtistDetails()
+        getArtist()
     }
 
     override fun onServiceConnected() {}

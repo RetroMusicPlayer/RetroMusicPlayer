@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.db.PlaylistWithSongs;
 import code.name.monkey.retromusic.helper.M3UWriter;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.PlaylistSong;
@@ -195,7 +196,7 @@ public class PlaylistsUtil {
         final int playlistId = songs.get(0).getPlaylistId();
         Uri uri = MediaStore.Audio.Playlists.Members.getContentUri(
                 "external", playlistId);
-        String selectionArgs[] = new String[songs.size()];
+        String[] selectionArgs = new String[songs.size()];
         for (int i = 0; i < selectionArgs.length; i++) {
             selectionArgs[i] = String.valueOf(songs.get(i).getIdInPlayList());
         }
@@ -247,7 +248,11 @@ public class PlaylistsUtil {
     }
 
     public static File savePlaylist(Context context, Playlist playlist) throws IOException {
-        return M3UWriter.write(context, new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
+        return M3UWriter.write(new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
+    }
+
+    public static File savePlaylistWithSongs(Context context, PlaylistWithSongs playlist) throws IOException {
+        return M3UWriter.writeIO(new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
     }
 
     public static boolean doesPlaylistExist(@NonNull final Context context, final int playlistId) {

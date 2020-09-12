@@ -101,11 +101,10 @@ open class AlbumAdapter(
         }
 
         AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-            .checkIgnoreMediaStore(activity)
+            .checkIgnoreMediaStore()
             .generatePalette(activity)
             .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
-
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
                 }

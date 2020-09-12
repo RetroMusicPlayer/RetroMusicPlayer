@@ -22,7 +22,13 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.GenreRepository
+import code.name.monkey.retromusic.repository.RealRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.core.KoinComponent
+import org.koin.core.get
 import org.koin.core.inject
 
 object GenreMenuHelper : KoinComponent {
@@ -38,8 +44,13 @@ object GenreMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(getGenreSongs(genre))
-                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                CoroutineScope(Dispatchers.IO).launch {
+                    val playlists = get<RealRepository>().fetchPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToPlaylistDialog.create(playlists, getGenreSongs(genre))
+                            .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_add_to_current_playing -> {

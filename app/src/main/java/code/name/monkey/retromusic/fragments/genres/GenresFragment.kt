@@ -21,18 +21,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.GenreAdapter
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
-import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 
-class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
-    MainActivityFragmentCallbacks {
-
-    override fun handleBackPress(): Boolean {
-        return false
-    }
+class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.genresLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getGenre().observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else

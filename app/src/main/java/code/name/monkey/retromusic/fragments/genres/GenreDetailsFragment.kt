@@ -36,7 +36,7 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.hideBottomBarVisibility(false)
-
+        progressIndicator.hide()
         setupRecyclerView()
         detailsViewModel.getSongs().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             songs(it)

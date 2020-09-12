@@ -40,8 +40,8 @@ class HomeAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val layout = LayoutInflater.from(activity)
-            .inflate(R.layout.section_recycler_view, parent, false)
+        val layout =
+            LayoutInflater.from(activity).inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
             GENRES -> GenreViewHolder(layout)
@@ -64,7 +64,7 @@ class HomeAdapter(
         when (getItemViewType(position)) {
             RECENT_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
-                viewHolder.bindView(home.arrayList as List<Album>, R.string.recent_albums)
+                viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
@@ -74,7 +74,7 @@ class HomeAdapter(
             }
             TOP_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
-                viewHolder.bindView(home.arrayList as List<Album>, R.string.top_albums)
+                viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
@@ -84,7 +84,7 @@ class HomeAdapter(
             }
             RECENT_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
-                viewHolder.bindView(home.arrayList, R.string.recent_artists)
+                viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
@@ -94,7 +94,7 @@ class HomeAdapter(
             }
             TOP_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
-                viewHolder.bindView(home.arrayList, R.string.top_artists)
+                viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
@@ -104,15 +104,21 @@ class HomeAdapter(
             }
             SUGGESTIONS -> {
                 val viewHolder = holder as SuggestionsViewHolder
-                viewHolder.bindView(home.arrayList)
+                viewHolder.bindView(home)
             }
             FAVOURITES -> {
                 val viewHolder = holder as PlaylistViewHolder
-                viewHolder.bindView(home.arrayList, R.string.favorites)
+                viewHolder.bindView(home)
+                viewHolder.clickableArea.setOnClickListener {
+                    activity.findNavController(R.id.fragment_container).navigate(
+                        R.id.detailListFragment,
+                        bundleOf("type" to FAVOURITES)
+                    )
+                }
             }
             GENRES -> {
                 val viewHolder = holder as GenreViewHolder
-                viewHolder.bind(home.arrayList, R.string.genres)
+                viewHolder.bind(home)
             }
             PLAYLISTS -> {
 
@@ -130,22 +136,22 @@ class HomeAdapter(
     }
 
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(albums: List<Album>, titleRes: Int) {
-            title.text = activity.getString(titleRes)
+        fun bindView(home: Home) {
+            title.setText(home.titleRes)
             recyclerView.apply {
-                adapter = albumAdapter(albums)
+                adapter = albumAdapter(home.arrayList as List<Album>)
                 layoutManager = gridLayoutManager()
             }
         }
     }
 
     private inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(artists: List<Any>, titleRes: Int) {
+        fun bindView(home: Home) {
+            title.setText(home.titleRes)
             recyclerView.apply {
                 layoutManager = linearLayoutManager()
-                adapter = artistsAdapter(artists as List<Artist>)
+                adapter = artistsAdapter(home.arrayList as List<Artist>)
             }
-            title.text = activity.getString(titleRes)
         }
     }
 
@@ -161,8 +167,7 @@ class HomeAdapter(
             R.id.image8
         )
 
-        fun bindView(songs: List<Any>) {
-            songs as List<Song>
+        fun bindView(home: Home) {
             val color = ThemeStore.accentColor(activity)
             itemView.findViewById<TextView>(R.id.message).setTextColor(color)
             itemView.findViewById<MaterialCardView>(R.id.card6).apply {
@@ -170,9 +175,9 @@ class HomeAdapter(
             }
             images.forEachIndexed { index, id ->
                 itemView.findViewById<View>(id).setOnClickListener {
-                    MusicPlayerRemote.playNext(songs[index])
+                    MusicPlayerRemote.playNext(home.arrayList[index] as Song)
                 }
-                SongGlideRequest.Builder.from(Glide.with(activity), songs[index])
+                SongGlideRequest.Builder.from(Glide.with(activity), home.arrayList[index] as Song)
                     .asBitmap()
                     .build()
                     .into(itemView.findViewById(id))
@@ -182,35 +187,37 @@ class HomeAdapter(
     }
 
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(songs: List<Any>, titleRes: Int) {
-            arrow.hide()
+        fun bindView(home: Home) {
+            title.setText(home.titleRes)
             recyclerView.apply {
                 val songAdapter = SongAdapter(
                     activity,
-                    songs as MutableList<Song>,
+                    home.arrayList as MutableList<Song>,
                     R.layout.item_album_card, null
                 )
                 layoutManager = linearLayoutManager()
                 adapter = songAdapter
             }
-            title.text = activity.getString(titleRes)
         }
     }
 
     private inner class GenreViewHolder(itemView: View) : AbsHomeViewItem(itemView) {
-        fun bind(genres: List<Any>, titleRes: Int) {
+        fun bind(home: Home) {
             arrow.hide()
-            title.text = activity.getString(titleRes)
+            title.setText(home.titleRes)
+            val genreAdapter = GenreAdapter(
+                activity,
+                home.arrayList as List<Genre>,
+                R.layout.item_grid_genre
+            )
             recyclerView.apply {
                 layoutManager = GridLayoutManager(activity, 3, GridLayoutManager.HORIZONTAL, false)
-                val genreAdapter =
-                    GenreAdapter(activity, genres as List<Genre>, R.layout.item_grid_genre)
                 adapter = genreAdapter
             }
         }
     }
 
-    open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    open class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
         val title: AppCompatTextView = itemView.findViewById(R.id.title)
         val arrow: ImageView = itemView.findViewById(R.id.arrow)

@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -25,16 +27,20 @@ import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.applyColor
+import code.name.monkey.retromusic.extensions.applyOutlineColor
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmAlbum
+import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
@@ -42,6 +48,10 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_album_content.*
 import kotlinx.android.synthetic.main.fragment_album_details.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
@@ -66,23 +76,13 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         mainActivity.hideBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
-
-        toolbar.title = null
-
+        toolbar.title = " "
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
-            showAlbum(it)
             startPostponedEnterTransition()
+            showAlbum(it)
         })
-        detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
-            loadArtistImage(it)
-        })
-        detailsViewModel.getMoreAlbums().observe(viewLifecycleOwner, Observer {
-            moreAlbums(it)
-        })
-        detailsViewModel.getAlbumInfo().observe(viewLifecycleOwner, Observer {
-            aboutAlbum(it)
-        })
+
         setupRecyclerView()
         artistImage.setOnClickListener {
             requireActivity().findNavController(R.id.fragment_container)
@@ -140,14 +140,12 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         this.album = album
 
         albumTitle.text = album.title
-        val songText =
-            resources.getQuantityString(
-                R.plurals.albumSongs,
-                album.songCount,
-                album.songCount
-            )
+        val songText = resources.getQuantityString(
+            R.plurals.albumSongs,
+            album.songCount,
+            album.songCount
+        )
         songTitle.text = songText
-
         if (MusicUtil.getYearString(album.year) == "-") {
             albumText.text = String.format(
                 "%s • %s",
@@ -162,10 +160,25 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(album.songs))
             )
         }
-        loadAlbumCover()
+        loadAlbumCover(album)
         simpleSongAdapter.swapDataSet(album.songs)
-        detailsViewModel.loadArtist(album.artistId)
-        detailsViewModel.loadAlbumInfo(album)
+        detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner, Observer {
+            loadArtistImage(it)
+        })
+
+        detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is Result.Loading -> {
+                    println("Loading")
+                }
+                is Result.Error -> {
+                    println("Error")
+                }
+                is Result.Success -> {
+                    aboutAlbum(result.data)
+                }
+            }
+        })
     }
 
     private fun moreAlbums(albums: List<Album>) {
@@ -191,7 +204,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 aboutAlbumTitle.show()
                 aboutAlbumTitle.text =
                     String.format(getString(R.string.about_album_label), lastFmAlbum.album.name)
-                aboutAlbumText.text = lastFmAlbum.album.wiki.content
+                aboutAlbumText.text = HtmlCompat.fromHtml(
+                    lastFmAlbum.album.wiki.content,
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
             }
             if (lastFmAlbum.album.listeners.isNotEmpty()) {
                 listeners.show()
@@ -206,7 +222,11 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun loadArtistImage(artist: Artist) {
+        detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner, Observer {
+            moreAlbums(it)
+        })
         ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
+            .forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
             .generatePalette(requireContext())
             .build()
             .dontAnimate()
@@ -217,24 +237,21 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             })
     }
 
-    private fun loadAlbumCover() {
+    private fun loadAlbumCover(album: Album) {
         AlbumGlideRequest.Builder.from(Glide.with(requireContext()), album.safeGetFirstSong())
-            .checkIgnoreMediaStore(requireContext())
-            .ignoreMediaStore(PreferenceUtil.isIgnoreMediaStoreArtwork)
+            .checkIgnoreMediaStore()
             .generatePalette(requireContext())
             .build()
-            .dontAnimate()
-            .dontTransform()
-            .into(object : RetroMusicColoredTarget(image) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    setColors(colors)
+            .into(object : SingleColorTarget(image) {
+                override fun onColorReady(color: Int) {
+                    setColors(color)
                 }
             })
     }
 
-    private fun setColors(color: MediaNotificationProcessor) {
-        shuffleAction.applyColor(color.backgroundColor)
-        playAction.applyColor(color.backgroundColor)
+    private fun setColors(color: Int) {
+        shuffleAction.applyColor(color)
+        playAction.applyOutlineColor(color)
     }
 
     override fun onAlbumClick(albumId: Int, view: View) {
@@ -275,7 +292,13 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(songs).show(childFragmentManager, "ADD_PLAYLIST")
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val playlists = get<RealRepository>().fetchPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToPlaylistDialog.create(playlists, songs)
+                            .show(childFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_delete_from_device -> {

@@ -8,7 +8,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 fun DialogFragment.materialDialog(title: Int): MaterialAlertDialogBuilder {
     return MaterialAlertDialogBuilder(
         requireContext(),
-        R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        R.style.MaterialAlertDialogTheme
     ).setTitle(title)
 }
 

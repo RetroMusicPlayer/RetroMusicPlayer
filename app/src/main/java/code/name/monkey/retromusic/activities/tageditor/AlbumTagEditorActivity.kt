@@ -44,9 +44,9 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         window.enterTransition = slide
     }
 
-    override fun loadImageFromFile(selectedFileUri: Uri?) {
+    override fun loadImageFromFile(selectedFile: Uri?) {
 
-        Glide.with(this@AlbumTagEditorActivity).load(selectedFileUri).asBitmap()
+        Glide.with(this@AlbumTagEditorActivity).load(selectedFile).asBitmap()
             .transcode(BitmapPaletteTranscoder(this), BitmapPaletteWrapper::class.java)
             .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
             .into(object : SimpleTarget<BitmapPaletteWrapper>() {
@@ -167,7 +167,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         )
     }
 
-    override suspend fun getSongPaths(): List<String> {
+    override fun getSongPaths(): List<String> {
         val songs = repository.albumById(id).songs
         val paths = ArrayList<String>(songs!!.size)
         for (song in songs) {

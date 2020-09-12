@@ -160,7 +160,7 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun saveImage(bitmap: Bitmap, fileName: String) {
-        CoroutineScope(Dispatchers.IO).launch() {
+        CoroutineScope(Dispatchers.IO).launch {
             val appDir = applicationContext.filesDir
             val file = File(appDir, fileName)
             var successful = false

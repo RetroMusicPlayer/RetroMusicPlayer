@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
@@ -70,4 +71,12 @@
             android:textColor="?android:attr/textColorSecondary"
             tools:visibility="visible" />
     </LinearLayout>
+
+    <com.google.android.material.progressindicator.ProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:indeterminate="true" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

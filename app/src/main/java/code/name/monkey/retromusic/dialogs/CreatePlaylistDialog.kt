@@ -1,88 +1,74 @@
-/*
- * Copyright (c) 2019 Hemanth Savarala.
- *
- * Licensed under the GNU General Public License v3
- *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- */
-
 package code.name.monkey.retromusic.dialogs
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import code.name.monkey.appthemehelper.util.MaterialUtil
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.extensions.colorButtons
-import code.name.monkey.retromusic.extensions.extraNotNull
+import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.fragments.LibraryViewModel
+import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.dialog_playlist.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CreatePlaylistDialog : DialogFragment() {
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
-    @SuppressLint("InflateParams")
-    override fun onCreateDialog(
-        savedInstanceState: Bundle?
-    ): Dialog {
+    companion object {
+        fun create(song: Song): CreatePlaylistDialog {
+            val list = mutableListOf<Song>()
+            list.add(song)
+            return create(list)
+        }
+
+        fun create(songs: List<Song>): CreatePlaylistDialog {
+            return CreatePlaylistDialog().apply {
+                arguments = bundleOf(EXTRA_SONG to songs)
+            }
+        }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_playlist, null)
+        val songs: List<Song> = extra<List<Song>>(EXTRA_SONG).value ?: emptyList()
         val playlistView: TextInputEditText = view.actionNewPlaylist
         val playlistContainer: TextInputLayout = view.actionNewPlaylistContainer
-        MaterialUtil.setTint(playlistContainer, false)
-
         return materialDialog(R.string.new_playlist_title)
             .setView(view)
-            .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(
                 R.string.create_action
             ) { _, _ ->
-                val extra = extraNotNull<ArrayList<Song>>(EXTRA_SONG)
                 val playlistName = playlistView.text.toString()
                 if (!TextUtils.isEmpty(playlistName)) {
-                    val playlistId = PlaylistsUtil.createPlaylist(
-                        requireContext(),
-                        playlistView.text.toString()
-                    )
-                    if (playlistId != -1) {
-                        PlaylistsUtil.addToPlaylist(requireContext(), extra.value, playlistId, true)
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        if (libraryViewModel.checkPlaylistExists(playlistName).isEmpty()) {
+                            val playlistId: Long =
+                                libraryViewModel.createPlaylist(PlaylistEntity(playlistName))
+                            libraryViewModel.insertSongs(songs.map { it.toSongEntity(playlistId.toInt()) })
+                            libraryViewModel.forceReload(Playlists)
+                        } else {
+                            Toast.makeText(requireContext(), "Playlist exists", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
+                } else {
+                    playlistContainer.error = "Playlist is can't be empty"
                 }
             }
             .create()
             .colorButtons()
-    }
-
-    companion object {
-        @JvmOverloads
-        @JvmStatic
-        fun create(song: Song? = null): CreatePlaylistDialog {
-            val list = ArrayList<Song>()
-            if (song != null) {
-                list.add(song)
-            }
-            return create(list)
-        }
-
-        @JvmStatic
-        fun create(songs: ArrayList<Song>): CreatePlaylistDialog {
-            val dialog = CreatePlaylistDialog()
-            val args = Bundle()
-            args.putParcelableArrayList(EXTRA_SONG, songs)
-            dialog.arguments = args
-            return dialog
-        }
     }
 }

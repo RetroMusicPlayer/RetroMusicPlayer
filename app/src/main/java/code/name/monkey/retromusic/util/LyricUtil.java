@@ -26,7 +26,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by hefuyi on 2016/11/8.
@@ -102,7 +102,7 @@ public class LyricUtil {
     }
 
     private static String getLrcOriginalPath(String filePath) {
-        return filePath.replace(filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length()), "lrc");
+        return filePath.replace(filePath.substring(filePath.lastIndexOf(".") + 1), "lrc");
     }
 
     @NonNull
@@ -110,16 +110,9 @@ public class LyricUtil {
         if (str == null || str.length() == 0) {
             return null;
         }
-        try {
-            byte[] encode = str.getBytes("UTF-8");
-            // base64 解密
-            return new String(Base64.decode(encode, 0, encode.length, Base64.DEFAULT), "UTF-8");
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        byte[] encode = str.getBytes(StandardCharsets.UTF_8);
+        // base64 解密
+        return new String(Base64.decode(encode, 0, encode.length, Base64.DEFAULT), StandardCharsets.UTF_8);
     }
 
     @NonNull

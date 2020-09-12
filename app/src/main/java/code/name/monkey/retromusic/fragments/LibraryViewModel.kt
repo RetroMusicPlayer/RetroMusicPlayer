@@ -4,83 +4,129 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.fragments.ReloadType.*
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class LibraryViewModel(
-    private val realRepository: RealRepository
+    private val repository: RealRepository
 ) : ViewModel(), MusicServiceEventListener {
 
     private val paletteColor = MutableLiveData<Int>()
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
-    private val playlists = MutableLiveData<List<Playlist>>()
+    private val playlists = MutableLiveData<List<PlaylistWithSongs>>()
+    private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val home = MutableLiveData<List<Home>>()
 
     val paletteColorLiveData: LiveData<Int> = paletteColor
-    val homeLiveData: LiveData<List<Home>> = home
-    val albumsLiveData: LiveData<List<Album>> = albums
-    val songsLiveData: LiveData<List<Song>> = songs
-    val artistsLiveData: LiveData<List<Artist>> = artists
-    val playlisitsLiveData: LiveData<List<Playlist>> = playlists
-    val genresLiveData: LiveData<List<Genre>> = genres
 
     init {
-        viewModelScope.launch {
-            loadLibraryContent()
+        fetchHomeSections()
+    }
+
+    private fun loadLibraryContent() = viewModelScope.launch(IO) {
+        fetchHomeSections()
+        fetchSongs()
+        fetchAlbums()
+        fetchArtists()
+        fetchGenres()
+        fetchPlaylists()
+    }
+
+    fun getSongs(): LiveData<List<Song>> {
+        fetchSongs()
+        return songs
+    }
+
+    fun getAlbums(): LiveData<List<Album>> {
+        fetchAlbums()
+        return albums
+    }
+
+    fun getArtists(): LiveData<List<Artist>> {
+        fetchArtists()
+        return artists
+    }
+
+    fun getPlaylists(): LiveData<List<PlaylistWithSongs>> {
+        fetchPlaylists()
+        return playlists
+    }
+
+    fun getLegacyPlaylist(): LiveData<List<Playlist>> {
+        fetchLegacyPlaylist()
+        return legacyPlaylists
+    }
+
+    fun getGenre(): LiveData<List<Genre>> {
+        fetchGenres()
+        return genres
+    }
+
+    fun getHome(): LiveData<List<Home>> {
+        return home
+    }
+
+    private fun fetchSongs() {
+        viewModelScope.launch(IO) {
+            songs.postValue(repository.allSongs())
         }
     }
 
-    private fun loadLibraryContent() = viewModelScope.launch {
-        songs.value = loadSongs.await()
-        albums.value = loadAlbums.await()
-        artists.value = loadArtists.await()
-        playlists.value = loadPlaylists.await()
-        genres.value = loadGenres.await()
-        home.value = loadHome.await()
+    private fun fetchAlbums() {
+        viewModelScope.launch(IO) {
+            albums.postValue(repository.fetchAlbums())
+        }
     }
 
-    private val loadHome: Deferred<List<Home>>
-        get() = viewModelScope.async { realRepository.homeSections() }
-
-    private val loadSongs: Deferred<List<Song>>
-        get() = viewModelScope.async(IO) { realRepository.allSongs() }
-
-    private val loadAlbums: Deferred<List<Album>>
-        get() = viewModelScope.async(IO) {
-            realRepository.allAlbums()
+    private fun fetchArtists() {
+        viewModelScope.launch(IO) {
+            artists.postValue(repository.fetchArtists())
         }
+    }
 
-    private val loadArtists: Deferred<List<Artist>>
-        get() = viewModelScope.async(IO) {
-            realRepository.albumArtists()
+    private fun fetchPlaylists() {
+        viewModelScope.launch(IO) {
+            playlists.postValue(repository.fetchPlaylistWithSongs())
         }
+    }
 
-    private val loadPlaylists: Deferred<List<Playlist>>
-        get() = viewModelScope.async(IO) {
-            realRepository.allPlaylists()
+    private fun fetchLegacyPlaylist() {
+        viewModelScope.launch(IO) {
+            legacyPlaylists.postValue(repository.fetchLegacyPlaylist())
         }
+    }
 
-    private val loadGenres: Deferred<List<Genre>>
-        get() = viewModelScope.async(IO) {
-            realRepository.allGenres()
+    private fun fetchGenres() {
+        viewModelScope.launch(IO) {
+            genres.postValue(repository.fetchGenres())
         }
+    }
 
+    private fun fetchHomeSections() {
+        viewModelScope.launch(IO) {
+            home.postValue(repository.homeSections())
+        }
+    }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
         when (reloadType) {
-            Songs -> songs.value = loadSongs.await()
-            Albums -> albums.value = loadAlbums.await()
-            Artists -> artists.value = loadArtists.await()
-            HomeSections -> songs.value = loadSongs.await()
+            Songs -> fetchSongs()
+            Albums -> fetchAlbums()
+            Artists -> fetchArtists()
+            HomeSections -> fetchHomeSections()
+            Playlists -> fetchPlaylists()
+            Genres -> fetchGenres()
         }
     }
 
@@ -89,10 +135,9 @@ class LibraryViewModel(
     }
 
     override fun onMediaStoreChanged() {
-        loadLibraryContent()
         println("onMediaStoreChanged")
+        loadLibraryContent()
     }
-
 
     override fun onServiceConnected() {
         println("onServiceConnected")
@@ -108,6 +153,7 @@ class LibraryViewModel(
 
     override fun onPlayingMetaChanged() {
         println("onPlayingMetaChanged")
+
     }
 
     override fun onPlayStateChanged() {
@@ -122,11 +168,76 @@ class LibraryViewModel(
         println("onShuffleModeChanged")
     }
 
+    fun shuffleSongs() = viewModelScope.launch(IO) {
+        val songs = repository.allSongs()
+        MusicPlayerRemote.openAndShuffleQueue(
+            songs,
+            true
+        )
+    }
+
+    fun renameRoomPlaylist(playListId: Int, name: String) = viewModelScope.launch(IO) {
+        repository.renameRoomPlaylist(playListId, name)
+    }
+
+    fun deleteSongsInPlaylist(songs: List<SongEntity>) = viewModelScope.launch(IO) {
+        repository.deleteSongsInPlaylist(songs)
+    }
+
+    fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) = viewModelScope.launch(IO) {
+        repository.deletePlaylistSongs(playlists)
+    }
+
+    fun deleteRoomPlaylist(playlists: List<PlaylistEntity>) = viewModelScope.launch(IO) {
+        repository.deleteRoomPlaylist(playlists)
+    }
+
+    suspend fun albumById(id: Int) = repository.albumById(id)
+    suspend fun artistById(id: Int) = repository.artistById(id)
+    suspend fun favoritePlaylist() = repository.favoritePlaylist()
+    suspend fun isFavoriteSong(song: SongEntity) = repository.isFavoriteSong(song)
+    suspend fun insertSongs(songs: List<SongEntity>) = repository.insertSongs(songs)
+    suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
+        repository.removeSongFromPlaylist(songEntity)
+
+    suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity> =
+        repository.checkPlaylistExists(playlistName)
+
+    suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
+        repository.createPlaylist(playlistEntity)
+
+    fun importPlaylists() = viewModelScope.launch(IO) {
+        val playlists = repository.fetchLegacyPlaylist()
+        playlists.forEach { playlist ->
+            val playlistEntity = repository.checkPlaylistExists(playlist.name).firstOrNull()
+            if (playlistEntity != null) {
+                val songEntities = playlist.getSongs().map {
+                    it.toSongEntity(playlistEntity.playListId)
+                }
+                repository.insertSongs(songEntities)
+            } else {
+                val playListId = createPlaylist(PlaylistEntity(playlist.name))
+                val songEntities = playlist.getSongs().map {
+                    it.toSongEntity(playListId.toInt())
+                }
+                repository.insertSongs(songEntities)
+            }
+            forceReload(Playlists)
+        }
+    }
+
+    fun deleteTracks(songs: List<Song>) = viewModelScope.launch(IO) {
+        repository.deleteSongs(songs)
+        fetchPlaylists()
+        loadLibraryContent()
+    }
 }
 
 enum class ReloadType {
     Songs,
     Albums,
     Artists,
-    HomeSections
+    HomeSections,
+    Playlists,
+    Genres,
 }

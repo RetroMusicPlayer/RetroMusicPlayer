@@ -19,7 +19,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import android.widget.Toast
 import code.name.monkey.retromusic.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.play.core.review.ReviewManagerFactory
@@ -71,8 +70,7 @@ object AppRater {
                 val reviewInfo = request.result
                 manager.launchReviewFlow(context as Activity, reviewInfo).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Toast.makeText(context, "Thanks for the feedback", Toast.LENGTH_SHORT)
-                            .show()
+                        //Toast.makeText(context, "Thanks for the feedback", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

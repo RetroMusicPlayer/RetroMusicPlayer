@@ -21,8 +21,6 @@ import android.os.Bundle
 import android.text.Spanned
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.core.text.HtmlCompat
@@ -40,12 +38,6 @@ import org.jaudiotagger.audio.exceptions.ReadOnlyFileException
 import org.jaudiotagger.tag.TagException
 import java.io.File
 import java.io.IOException
-
-inline fun ViewGroup.forEach(action: (View) -> Unit) {
-    for (i in 0 until childCount) {
-        action(getChildAt(i))
-    }
-}
 
 class SongDetailDialog : DialogFragment() {
 

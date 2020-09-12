@@ -32,10 +32,17 @@ import code.name.monkey.retromusic.dialogs.SongDetailDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RingtoneManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.core.KoinComponent
+import org.koin.core.get
 
-object SongMenuHelper {
+object SongMenuHelper : KoinComponent {
     const val MENU_RES = R.menu.menu_item_song
 
     fun handleMenuClick(activity: FragmentActivity, song: Song, menuItemId: Int): Boolean {
@@ -63,8 +70,13 @@ object SongMenuHelper {
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(song)
-                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                CoroutineScope(Dispatchers.IO).launch {
+                    val playlists = get<RealRepository>().fetchPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToPlaylistDialog.create(playlists, song)
+                            .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_play_next -> {

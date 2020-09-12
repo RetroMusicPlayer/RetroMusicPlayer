@@ -14,7 +14,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -182,11 +181,9 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         saveFab = findViewById(R.id.saveTags)
         getIntentExtras()
 
-        lifecycleScope.launchWhenCreated {
-            songPaths = getSongPaths()
-            if (songPaths!!.isEmpty()) {
-                finish()
-            }
+        songPaths = getSongPaths()
+        if (songPaths!!.isEmpty()) {
+            finish()
         }
         setUpViews()
     }
@@ -258,7 +255,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         }
     }
 
-    protected abstract suspend fun getSongPaths(): List<String>
+    protected abstract fun getSongPaths(): List<String>
 
     protected fun searchWebFor(vararg keys: String) {
         val stringBuilder = StringBuilder()

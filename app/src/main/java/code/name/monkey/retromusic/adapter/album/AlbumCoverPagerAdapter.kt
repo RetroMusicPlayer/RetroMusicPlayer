@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.dialogs.LyricsDialog
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -90,6 +91,7 @@ class AlbumCoverPagerAdapter(
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
             albumCover = view.findViewById(R.id.player_image)
             albumCover.setOnClickListener {
+                LyricsDialog().show(childFragmentManager, "LyricsDialog")
                 showLyricsDialog()
             }
             return view
@@ -97,7 +99,7 @@ class AlbumCoverPagerAdapter(
 
         private fun showLyricsDialog() {
             lifecycleScope.launch(Dispatchers.IO) {
-                val data = MusicUtil.getLyrics(song)
+                val data: String = MusicUtil.getLyrics(song) ?: "No lyrics found"
                 withContext(Dispatchers.Main) {
                     MaterialAlertDialogBuilder(
                         requireContext(),

@@ -1,77 +1,70 @@
-/*
- * Copyright (c) 2019 Hemanth Savarala.
- *
- * Licensed under the GNU General Public License v3
- *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- */
-
 package code.name.monkey.retromusic.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
+import code.name.monkey.retromusic.EXTRA_PLAYLISTS
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.SongEntity
+import code.name.monkey.retromusic.db.toSongsEntity
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.fragments.LibraryViewModel
+import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.repository.PlaylistRepository
-import code.name.monkey.retromusic.util.PlaylistsUtil
-import org.koin.android.ext.android.inject
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AddToPlaylistDialog : DialogFragment() {
-    private val playlistRepository by inject<PlaylistRepository>()
-    override fun onCreateDialog(
-        savedInstanceState: Bundle?
-    ): Dialog {
-        val playlists = playlistRepository.playlists()
-        val playlistNames = mutableListOf<String>()
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
+
+    companion object {
+        fun create(playlistEntities: List<PlaylistEntity>, song: Song): AddToPlaylistDialog {
+            val list: MutableList<Song> = mutableListOf()
+            list.add(song)
+            return create(playlistEntities, list)
+        }
+
+        fun create(playlistEntities: List<PlaylistEntity>, songs: List<Song>): AddToPlaylistDialog {
+            return AddToPlaylistDialog().apply {
+                arguments = bundleOf(
+                    EXTRA_SONG to songs,
+                    EXTRA_PLAYLISTS to playlistEntities
+                )
+            }
+        }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val playlistEntities: List<PlaylistEntity> =
+            extraNotNull<List<PlaylistEntity>>(EXTRA_PLAYLISTS).value
+        val songs: List<Song> = extraNotNull<List<Song>>(EXTRA_SONG).value
+        val playlistNames: MutableList<String> = mutableListOf()
         playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
-        for (p in playlists) {
-            playlistNames.add(p.name)
+        for (entity: PlaylistEntity in playlistEntities) {
+            playlistNames.add(entity.playlistName)
         }
         return materialDialog(R.string.add_playlist_title)
             .setItems(playlistNames.toTypedArray()) { _, which ->
-                val songs = extraNotNull<ArrayList<Song>>(EXTRA_SONG).value
                 if (which == 0) {
                     CreatePlaylistDialog.create(songs)
-                        .show(requireActivity().supportFragmentManager, "ADD_TO_PLAYLIST")
+                        .show(requireActivity().supportFragmentManager, "Dialog")
                 } else {
-                    PlaylistsUtil.addToPlaylist(
-                        requireContext(),
-                        songs,
-                        playlists[which - 1].id,
-                        true
-                    )
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val songEntities: List<SongEntity> =
+                            songs.toSongsEntity(playlistEntities[which - 1])
+                        libraryViewModel.insertSongs(songEntities)
+                        libraryViewModel.forceReload(Playlists)
+                    }
                 }
                 dismiss()
             }
             .create().colorButtons()
-    }
-
-    companion object {
-
-        fun create(song: Song): AddToPlaylistDialog {
-            val list = ArrayList<Song>()
-            list.add(song)
-            return create(list)
-        }
-
-        fun create(songs: List<Song>): AddToPlaylistDialog {
-            val dialog = AddToPlaylistDialog()
-            val args = Bundle()
-            args.putParcelableArrayList(EXTRA_SONG, ArrayList(songs))
-            dialog.arguments = args
-            return dialog
-        }
     }
 }

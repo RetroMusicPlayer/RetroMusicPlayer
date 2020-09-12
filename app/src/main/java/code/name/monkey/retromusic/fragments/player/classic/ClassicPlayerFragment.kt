@@ -20,7 +20,6 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
-import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
@@ -69,9 +68,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
 
     private val bottomSheetCallbackList = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            (requireActivity() as AbsSlidingMusicPanelActivity).getBottomSheetBehavior()
-                .setAllowDragging(false)
-
+            mainActivity.getBottomSheetBehavior().setAllowDragging(false)
             playerQueueSheet.setContentPadding(
                 playerQueueSheet.contentPaddingLeft,
                 (slideOffset * status_bar.height).toInt(),
@@ -83,18 +80,17 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
-            val activity = requireActivity() as AbsSlidingMusicPanelActivity
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED,
                 BottomSheetBehavior.STATE_DRAGGING -> {
-                    activity.getBottomSheetBehavior().setAllowDragging(false)
+                    mainActivity.getBottomSheetBehavior().setAllowDragging(false)
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
                     resetToCurrentPosition()
-                    activity.getBottomSheetBehavior().setAllowDragging(true)
+                    mainActivity.getBottomSheetBehavior().setAllowDragging(true)
                 }
                 else -> {
-                    activity.getBottomSheetBehavior().setAllowDragging(true)
+                    mainActivity.getBottomSheetBehavior().setAllowDragging(true)
                 }
             }
         }
@@ -132,8 +128,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         playerQueueSheet.background = shapeDrawable
 
         playerQueueSheet.setOnTouchListener { _, _ ->
-            (requireActivity() as AbsSlidingMusicPanelActivity).getBottomSheetBehavior()
-                .setAllowDragging(false)
+            mainActivity.getBottomSheetBehavior().setAllowDragging(false)
             getQueuePanel().setAllowDragging(true)
             return@setOnTouchListener false
         }

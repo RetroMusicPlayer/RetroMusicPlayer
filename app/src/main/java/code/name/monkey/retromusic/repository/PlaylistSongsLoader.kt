@@ -23,7 +23,6 @@ import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
-import java.util.*
 
 /**
  * Created by hemanths on 16/08/17.
@@ -43,8 +42,8 @@ object PlaylistSongsLoader {
     }
 
     @JvmStatic
-    fun getPlaylistSongList(context: Context, playlistId: Int): ArrayList<Song> {
-        val songs = arrayListOf<Song>()
+    fun getPlaylistSongList(context: Context, playlistId: Int): List<Song> {
+        val songs = mutableListOf<Song>()
         val cursor =
             makePlaylistSongCursor(
                 context,

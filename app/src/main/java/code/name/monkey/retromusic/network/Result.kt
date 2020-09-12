@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package code.name.monkey.retromusic
+package code.name.monkey.retromusic.network
 
 /**
  * Generic class that holds the network state
@@ -21,5 +21,5 @@ package code.name.monkey.retromusic
 sealed class Result<out R> {
     data class Success<out T>(val data: T) : Result<T>()
     object Loading : Result<Nothing>()
-    object Error : Result<Nothing>()
+    data class Error(val error: Exception) : Result<Nothing>()
 }

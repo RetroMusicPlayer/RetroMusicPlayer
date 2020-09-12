@@ -295,7 +295,7 @@ open class BugReportActivity : AbsThemeActivity() {
                     .setTitle(R.string.bug_report_failed)
                     .setMessage(R.string.bug_report_failed_unknown)
                     .setPositiveButton(android.R.string.ok) { _, _ -> tryToFinishActivity() }
-                    .setNegativeButton(android.R.string.cancel) { _, _ -> { tryToFinishActivity() } }
+                    .setNegativeButton(android.R.string.cancel) { _, _ -> tryToFinishActivity() }
             }
         }
 

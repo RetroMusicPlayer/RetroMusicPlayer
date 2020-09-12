@@ -15,7 +15,6 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
@@ -29,12 +28,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
+abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     companion object {
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }
 
-    private val libraryViewModel by viewModel<LibraryViewModel>()
+    protected val libraryViewModel by viewModel<LibraryViewModel>()
     private lateinit var behavior: RetroBottomSheetBehavior<FrameLayout>
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var cps: NowPlayingScreen? = null
@@ -51,8 +50,6 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
 
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
             setMiniPlayerAlphaProgress(slideOffset)
-            dimBackground.show()
-            dimBackground.alpha = slideOffset
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -62,7 +59,6 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
                     onPanelCollapsed()
-                    dimBackground.hide()
                 }
                 else -> {
 
@@ -77,12 +73,8 @@ abstract class AbsSlidingMusicPanelActivity() : AbsMusicServiceActivity() {
         setContentView(createContentView())
         chooseFragmentForTheme()
         setupSlidingUpPanel()
-        addMusicServiceEventListener(libraryViewModel)
 
         setupBottomSheet()
-
-        val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
-        dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
 
         libraryViewModel.paletteColorLiveData.observe(this, Observer {
             this.paletteColor = it

@@ -53,8 +53,8 @@ class SleepTimerDialog : DialogFragment() {
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         timerUpdater = TimerUpdater()
-        val layout = LayoutInflater.from(requireContext())
-            .inflate(R.layout.dialog_sleep_timer, null)
+        val layout =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dialog_sleep_timer, null)
         shouldFinishLastSong = layout.findViewById(R.id.shouldFinishLastSong)
         seekBar = layout.findViewById(R.id.seekBar)
         timerDisplay = layout.findViewById(R.id.timerDisplay)
@@ -158,7 +158,7 @@ class SleepTimerDialog : DialogFragment() {
         }
     }
 
-    private inner class TimerUpdater internal constructor() :
+    private inner class TimerUpdater() :
         CountDownTimer(
             PreferenceUtil.nextSleepTimerElapsedRealTime - SystemClock.elapsedRealtime(),
             1000

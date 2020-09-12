@@ -4,17 +4,23 @@ import android.Manifest
 import android.content.*
 import android.os.Bundle
 import android.os.IBinder
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.db.toPlayCount
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
+import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import java.lang.ref.WeakReference
 import java.util.*
 
 abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventListener {
 
     private val mMusicServiceEventListeners = ArrayList<MusicServiceEventListener>()
-
+    private val repository: RealRepository by inject()
     private var serviceToken: MusicPlayerRemote.ServiceToken? = null
     private var musicStateReceiver: MusicStateReceiver? = null
     private var receiverRegistered: Boolean = false
@@ -92,6 +98,22 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventLis
     override fun onPlayingMetaChanged() {
         for (listener in mMusicServiceEventListeners) {
             listener.onPlayingMetaChanged()
+        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val entity = repository.songPresentInHistory(MusicPlayerRemote.currentSong)
+            if (entity != null) {
+                repository.updateHistorySong(MusicPlayerRemote.currentSong)
+            } else {
+                repository.addSongToHistory(MusicPlayerRemote.currentSong)
+            }
+            val songs = repository.checkSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
+            if (songs.isNotEmpty()) {
+                repository.updateSongInPlayCount(songs.first().apply {
+                    playCount += 1
+                })
+            } else {
+                repository.insertSongInPlayCount(MusicPlayerRemote.currentSong.toPlayCount())
+            }
         }
     }
 

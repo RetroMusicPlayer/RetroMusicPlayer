@@ -5,18 +5,17 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
+import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
-import code.name.monkey.retromusic.model.AbsCustomPlaylist
-import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
@@ -32,7 +31,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         parametersOf(arguments.extraPlaylist)
     }
 
-    private lateinit var playlist: Playlist
+    private lateinit var playlist: PlaylistWithSongs
     private lateinit var adapter: SongAdapter
 
     private var wrappedAdapter: RecyclerView.Adapter<*>? = null
@@ -46,28 +45,23 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         mainActivity.hideBottomBarVisibility(false)
 
         playlist = arguments.extraPlaylist
+        toolbar.title = playlist.playlistEntity.playlistName
 
         setUpRecyclerView()
 
-        viewModel.getSongs().observe(viewLifecycleOwner, Observer {
-            songs(it)
-        })
-
-        viewModel.getPlaylist().observe(viewLifecycleOwner, Observer {
-            playlist = it
-            toolbar.title = it.name
+        viewModel.getSongs().observe(viewLifecycleOwner, {
+            songs(it.toSongs())
         })
     }
 
     private fun setUpRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        if (playlist is AbsCustomPlaylist) {
-            adapter = SongAdapter(requireActivity(), ArrayList(), R.layout.item_list, null)
-            recyclerView.adapter = adapter
-        } else {
-            recyclerViewDragDropManager = RecyclerViewDragDropManager()
-            val animator = RefactoredDefaultItemAnimator()
-            adapter = OrderablePlaylistSongAdapter(requireActivity(),
+        recyclerViewDragDropManager = RecyclerViewDragDropManager()
+        val animator = RefactoredDefaultItemAnimator()
+        adapter =
+            OrderablePlaylistSongAdapter(
+                playlist.playlistEntity,
+                requireActivity(),
                 ArrayList(),
                 R.layout.item_list,
                 null,
@@ -75,7 +69,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
                     override fun onMoveItem(fromPosition: Int, toPosition: Int) {
                         if (PlaylistsUtil.moveItem(
                                 requireContext(),
-                                playlist.id,
+                                playlist.playlistEntity.playListId,
                                 fromPosition,
                                 toPosition
                             )
@@ -86,13 +80,13 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
                         }
                     }
                 })
-            wrappedAdapter = recyclerViewDragDropManager!!.createWrappedAdapter(adapter)
+        wrappedAdapter = recyclerViewDragDropManager!!.createWrappedAdapter(adapter)
 
-            recyclerView.adapter = wrappedAdapter
-            recyclerView.itemAnimator = animator
+        recyclerView.adapter = wrappedAdapter
+        recyclerView.itemAnimator = animator
 
-            recyclerViewDragDropManager?.attachRecyclerView(recyclerView)
-        }
+        recyclerViewDragDropManager?.attachRecyclerView(recyclerView)
+
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
@@ -103,9 +97,9 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        val menuRes = if (playlist is AbsCustomPlaylist)
+        val menuRes =/* if (playlist is AbsCustomPlaylist)
             R.menu.menu_smart_playlist_detail
-        else R.menu.menu_playlist_detail
+        else*/ R.menu.menu_playlist_detail
         inflater.inflate(menuRes, menu)
     }
 
@@ -129,7 +123,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         return String(Character.toChars(unicode))
     }
 
-    public override fun onPause() {
+    override fun onPause() {
         if (recyclerViewDragDropManager != null) {
             recyclerViewDragDropManager!!.cancelDrag()
         }
@@ -160,11 +154,11 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     }
 
     fun songs(songs: List<Song>) {
+        progressIndicator.hide()
         if (songs.isNotEmpty()) {
             adapter.swapDataSet(songs)
         } else {
             showEmptyView()
         }
     }
-
 }

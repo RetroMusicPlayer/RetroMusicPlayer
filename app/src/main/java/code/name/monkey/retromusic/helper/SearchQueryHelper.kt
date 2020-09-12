@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.helper
 
 import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.provider.MediaStore
 import code.name.monkey.retromusic.model.Song
@@ -33,7 +32,7 @@ object SearchQueryHelper : KoinComponent {
     var songs = ArrayList<Song>()
 
     @JvmStatic
-    fun getSongs(context: Context, extras: Bundle): List<Song> {
+    fun getSongs(extras: Bundle): List<Song> {
         val query = extras.getString(SearchManager.QUERY, null)
         val artistName = extras.getString(MediaStore.EXTRA_MEDIA_ARTIST, null)
         val albumName = extras.getString(MediaStore.EXTRA_MEDIA_ALBUM, null)
@@ -45,9 +44,9 @@ object SearchQueryHelper : KoinComponent {
                 songRepository.makeSongCursor(
                     ARTIST_SELECTION + AND + ALBUM_SELECTION + AND + TITLE_SELECTION,
                     arrayOf(
-                        artistName.toLowerCase(),
-                        albumName.toLowerCase(),
-                        titleName.toLowerCase()
+                        artistName.toLowerCase(Locale.getDefault()),
+                        albumName.toLowerCase(Locale.getDefault()),
+                        titleName.toLowerCase(Locale.getDefault())
                     )
                 )
             )
@@ -59,7 +58,10 @@ object SearchQueryHelper : KoinComponent {
             songs = songRepository.songs(
                 songRepository.makeSongCursor(
                     ARTIST_SELECTION + AND + TITLE_SELECTION,
-                    arrayOf(artistName.toLowerCase(), titleName.toLowerCase())
+                    arrayOf(
+                        artistName.toLowerCase(Locale.getDefault()),
+                        titleName.toLowerCase(Locale.getDefault())
+                    )
                 )
             )
         }
@@ -70,7 +72,10 @@ object SearchQueryHelper : KoinComponent {
             songs = songRepository.songs(
                 songRepository.makeSongCursor(
                     ALBUM_SELECTION + AND + TITLE_SELECTION,
-                    arrayOf(albumName.toLowerCase(), titleName.toLowerCase())
+                    arrayOf(
+                        albumName.toLowerCase(Locale.getDefault()),
+                        titleName.toLowerCase(Locale.getDefault())
+                    )
                 )
             )
         }
@@ -81,7 +86,7 @@ object SearchQueryHelper : KoinComponent {
             songs = songRepository.songs(
                 songRepository.makeSongCursor(
                     ARTIST_SELECTION,
-                    arrayOf(artistName.toLowerCase())
+                    arrayOf(artistName.toLowerCase(Locale.getDefault()))
                 )
             )
         }
@@ -92,7 +97,7 @@ object SearchQueryHelper : KoinComponent {
             songs = songRepository.songs(
                 songRepository.makeSongCursor(
                     ALBUM_SELECTION,
-                    arrayOf(albumName.toLowerCase())
+                    arrayOf(albumName.toLowerCase(Locale.getDefault()))
                 )
             )
         }
@@ -103,7 +108,7 @@ object SearchQueryHelper : KoinComponent {
             songs = songRepository.songs(
                 songRepository.makeSongCursor(
                     TITLE_SELECTION,
-                    arrayOf(titleName.toLowerCase())
+                    arrayOf(titleName.toLowerCase(Locale.getDefault()))
                 )
             )
         }
@@ -113,7 +118,7 @@ object SearchQueryHelper : KoinComponent {
         songs = songRepository.songs(
             songRepository.makeSongCursor(
                 ARTIST_SELECTION,
-                arrayOf(query.toLowerCase())
+                arrayOf(query.toLowerCase(Locale.getDefault()))
             )
         )
 
@@ -123,7 +128,7 @@ object SearchQueryHelper : KoinComponent {
         songs = songRepository.songs(
             songRepository.makeSongCursor(
                 ALBUM_SELECTION,
-                arrayOf(query.toLowerCase())
+                arrayOf(query.toLowerCase(Locale.getDefault()))
             )
         )
         if (songs.isNotEmpty()) {
@@ -132,7 +137,7 @@ object SearchQueryHelper : KoinComponent {
         songs = songRepository.songs(
             songRepository.makeSongCursor(
                 TITLE_SELECTION,
-                arrayOf(query.toLowerCase())
+                arrayOf(query.toLowerCase(Locale.getDefault()))
             )
         )
         return if (songs.isNotEmpty()) {
