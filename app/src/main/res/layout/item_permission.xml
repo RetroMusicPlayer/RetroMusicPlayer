@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/rectSelector"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:paddingStart="?attr/listPreferredItemPaddingStart"
+    android:paddingTop="16dp"
+    android:paddingEnd="?attr/listPreferredItemPaddingEnd"
+    android:paddingBottom="16dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/number"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/color_circle_gradient"
+        android:gravity="center"
+        android:maxLines="3"
+        tools:text="1"
+        android:textAppearance="@style/TextViewButton"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextViewSubtitle1"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:maxLines="@string/grid_size_1"
+        tools:text="@tools:sample/lorem/random" />
+
+    <code.name.monkey.retromusic.views.BaselineGridTextView
+        android:id="@+id/summary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textAppearance="@style/TextViewNormal"
+        android:textColor="?android:attr/textColorSecondary"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:maxLines="2"
+        tools:text="@tools:sample/lorem/random" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        app:cornerRadius="8dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:textAppearance="@style/TextViewButton"
+        app:icon="@drawable/ic_history"
+        app:iconGravity="start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline_front_margin"
+        app:layout_constraintTop_toBottomOf="@id/summary"
+        tools:text="@tools:sample/full_names" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_front_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/list_pref_guideline_begin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

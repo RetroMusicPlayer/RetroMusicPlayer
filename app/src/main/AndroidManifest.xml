@@ -118,6 +118,7 @@
         <activity android:name=".activities.bugreport.BugReportActivity" />
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
+        <activity android:name=".activities.PermissionActivity" />
 
         <activity
             android:name=".activities.LockScreenActivity"

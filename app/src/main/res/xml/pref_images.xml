@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="ignore_media_store_artwork"
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_ignore_media_store_artwork"
@@ -11,7 +11,7 @@
         app:icon="@drawable/ic_image" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
-        android:defaultValue="only_wifi"
+        android:defaultValue="always"
         android:entries="@array/pref_auto_download_images_titles"
         android:entryValues="@array/pref_auto_download_images_values"
         android:key="auto_download_images_policy"

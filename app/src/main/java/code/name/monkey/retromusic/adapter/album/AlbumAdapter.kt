@@ -170,6 +170,7 @@ open class AlbumAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
+                println(dataSet[layoutPosition].id)
                 image?.let { albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, it) }
             }
         }
