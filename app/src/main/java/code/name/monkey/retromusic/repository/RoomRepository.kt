@@ -64,8 +64,11 @@ class RealRoomRepository(
         playlistDao.playlistsWithSongs()
 
     @WorkerThread
-    override suspend fun insertSongs(songs: List<SongEntity>) =
+    override suspend fun insertSongs(songs: List<SongEntity>) {
+
         playlistDao.insertSongsToPlaylist(songs)
+    }
+
 
     override   fun getSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>> =
         playlistDao.songsFromPlaylist(playlistEntity.playListId)
