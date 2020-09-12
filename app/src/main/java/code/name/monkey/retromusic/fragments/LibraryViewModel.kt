@@ -74,6 +74,7 @@ class LibraryViewModel(
     }
 
     fun getHome(): LiveData<List<Home>> {
+        fetchHomeSections()
         return home
     }
 

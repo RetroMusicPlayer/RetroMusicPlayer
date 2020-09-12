@@ -114,13 +114,8 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
 
     private fun checkIsEmpty() {
         checkForPadding()
-        emptyEmoji.text = getEmojiByUnicode(0x1F631)
         empty.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
         emptyText.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
-    }
-
-    private fun getEmojiByUnicode(unicode: Int): String {
-        return String(Character.toChars(unicode))
     }
 
     override fun onPause() {

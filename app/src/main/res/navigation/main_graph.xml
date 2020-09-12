@@ -71,5 +71,9 @@
         android:name="code.name.monkey.retromusic.activities.SettingsActivity"
         android:label="SettingsActivity" />
 
-
+    <activity
+        android:id="@+id/permissionFragment"
+        android:name="code.name.monkey.retromusic.activities.PermissionActivity"
+        android:label="PermissionFragment"
+        tools:layout="@layout/activity_permission" />
 </navigation>

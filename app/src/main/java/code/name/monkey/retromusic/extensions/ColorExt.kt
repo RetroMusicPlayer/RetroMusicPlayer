@@ -49,6 +49,7 @@ fun Int.ripAlpha(): Int {
 }
 
 fun Dialog.colorControlNormal() = resolveColor(android.R.attr.colorControlNormal)
+
 fun Toolbar.backgroundTintList() {
     val surfaceColor = ATHUtil.resolveColor(context, R.attr.colorSurface, Color.BLACK)
     val colorStateList = ColorStateList.valueOf(surfaceColor)
@@ -84,7 +85,6 @@ fun Fragment.resolveColor(@AttrRes attr: Int, fallBackColor: Int = 0) =
 fun Dialog.resolveColor(@AttrRes attr: Int, fallBackColor: Int = 0) =
     ATHUtil.resolveColor(context, attr, fallBackColor)
 
-
 fun CheckBox.addAccentColor() {
     buttonTintList = ColorStateList.valueOf(ThemeStore.accentColor(context))
 }
@@ -101,6 +101,19 @@ fun Button.accentTextColor() {
 
 fun MaterialButton.accentTextColor() {
     setTextColor(ThemeStore.accentColor(App.getContext()))
+}
+
+fun MaterialButton.accentBackgroundColor() {
+    backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(App.getContext()))
+}
+
+fun MaterialButton.accentOutlineColor() {
+    val color = ThemeStore.accentColor(context)
+    val colorStateList = ColorStateList.valueOf(color)
+    iconTint = colorStateList
+    strokeColor = colorStateList
+    setTextColor(colorStateList)
+    rippleColor = colorStateList
 }
 
 fun SeekBar.applyColor(@ColorInt color: Int) {

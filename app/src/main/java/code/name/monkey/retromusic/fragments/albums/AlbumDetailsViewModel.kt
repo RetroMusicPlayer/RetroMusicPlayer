@@ -12,23 +12,23 @@ import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.coroutines.Dispatchers.IO
 
 class AlbumDetailsViewModel(
-    private val realRepository: RealRepository,
+    private val repository: RealRepository,
     private val albumId: Int
 ) : ViewModel(), MusicServiceEventListener {
 
     fun getAlbum(): LiveData<Album> = liveData(IO) {
-        val album = realRepository.albumByIdAsync(albumId)
+        val album = repository.albumByIdAsync(albumId)
         emit(album)
     }
 
     fun getArtist(artistId: Int): LiveData<Artist> = liveData(IO) {
-        val artist = realRepository.artistById(artistId)
+        val artist = repository.artistById(artistId)
         emit(artist)
     }
 
     fun getAlbumInfo(album: Album): LiveData<Result<LastFmAlbum>> = liveData {
         emit(Result.Loading)
-        emit( realRepository.albumInfo(album.artistName ?: "-", album.title ?: "-"))
+        emit(repository.albumInfo(album.artistName ?: "-", album.title ?: "-"))
     }
 
     fun getMoreAlbums(artist: Artist): LiveData<List<Album>> = liveData(IO) {

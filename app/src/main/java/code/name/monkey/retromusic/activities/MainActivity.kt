@@ -16,7 +16,7 @@ import code.name.monkey.retromusic.helper.SearchQueryHelper.getSongs
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.util.AppRater.appLaunched
+import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -37,12 +37,15 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
+        if (!hasPermissions()) {
+            findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
+        }
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
         setTaskDescriptionColorAuto()
         hideStatusBar()
-        appLaunched(this)
+        AppRater.appLaunched(this)
         updateTabs()
     }
 
@@ -61,21 +64,11 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        PreferenceUtil.unregisterOnSharedPreferenceChangedListener(this)
-    }
-
-    override fun requestPermissions() {
-        if (!blockRequestPermissions) {
-            super.requestPermissions()
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (!hasPermissions()) {
-            requestPermissions()
+            //requestPermissions()
         }
     }
 

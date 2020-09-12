@@ -60,13 +60,12 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
     }
 
     override fun album(albumId: Int): Album {
-        val songs = songRepository.songs(
-            songRepository.makeSongCursor(
-                AudioColumns.ALBUM_ID + "=?",
-                arrayOf(albumId.toString()),
-                getSongLoaderSortOrder()
-            )
+        val cursor = songRepository.makeSongCursor(
+            AudioColumns.ALBUM_ID + "=?",
+            arrayOf(albumId.toString()),
+            getSongLoaderSortOrder()
         )
+        val songs = songRepository.songs(cursor)
         val album = Album(ArrayList(songs))
         sortAlbumSongs(album)
         return album

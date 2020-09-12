@@ -178,6 +178,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             behavior.isHideable = true
             behavior.peekHeight = 0
             collapsePanel()
+            ViewCompat.setElevation(slidingPanel, 0f)
             ViewCompat.setElevation(bottomNavigationView, 10f)
         } else {
             ViewCompat.setElevation(bottomNavigationView, 10f)

@@ -46,7 +46,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         if (!hasPermissions()) {
-            requestPermissions()
+            //requestPermissions()
         }
     }
 

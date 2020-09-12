@@ -41,15 +41,9 @@
     public *;
 }
 
--keep class !android.support.v7.internal.view.menu.**,** {*;}
 
 -dontwarn
 -ignorewarnings
-
--keep public class android.support.design.widget.BottomNavigationView { *; }
--keep public class android.support.design.internal.BottomNavigationMenuView { *; }
--keep public class android.support.design.internal.BottomNavigationPresenter { *; }
--keep public class android.support.design.internal.BottomNavigationItemView { *; }
 
 #-dontwarn android.support.v8.renderscript.*
 #-keepclassmembers class android.support.v8.renderscript.RenderScript {
@@ -58,8 +52,3 @@
 #}
 
 #-keep class org.jaudiotagger.** { *; }
-
-
--obfuscationdictionary build/obfuscation-dictionary.txt
--classobfuscationdictionary build/class-dictionary.txt
--packageobfuscationdictionary build/package-dictionary.txt
