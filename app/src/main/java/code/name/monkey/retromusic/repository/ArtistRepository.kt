@@ -69,7 +69,10 @@ class RealArtistRepository(
                 getSongLoaderSortOrder()
             )
         )
-        return splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
+
+        val sortString = if (PreferenceUtil.artistSortOrder.contains("DESC")) String.CASE_INSENSITIVE_ORDER.reversed() else String.CASE_INSENSITIVE_ORDER
+
+        return splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs)).sortedWith(compareBy(sortString) { it.name })
     }
 
     private fun splitIntoAlbumArtists(albums: List<Album>): List<Artist> {
