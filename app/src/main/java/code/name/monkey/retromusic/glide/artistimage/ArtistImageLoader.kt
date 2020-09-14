@@ -14,10 +14,7 @@
 
 package code.name.monkey.retromusic.glide.artistimage
 
-import android.content.ContentResolver
 import android.content.Context
-import androidx.core.net.toFile
-import code.name.monkey.retromusic.repository.ArtistRepository
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Data
 import code.name.monkey.retromusic.network.DeezerService
@@ -34,7 +31,6 @@ import com.bumptech.glide.load.model.stream.StreamModelLoader
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
