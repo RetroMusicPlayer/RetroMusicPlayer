@@ -122,6 +122,13 @@ object PreferenceUtil {
             "only_wifi"
         )
 
+    var albumArtistsOnly
+        get() = sharedPreferences.getBoolean(
+            ALBUM_ARTISTS_ONLY,
+            false
+        )
+        set(value) = sharedPreferences.edit { putBoolean(ALBUM_ARTISTS_ONLY, value) }
+
     var albumDetailSongSortOrder
         get() = sharedPreferences.getStringOrDefault(
             ALBUM_DETAIL_SONG_SORT_ORDER,
@@ -150,7 +157,7 @@ object PreferenceUtil {
     var artistSortOrder
         get() = sharedPreferences.getStringOrDefault(
             ARTIST_SORT_ORDER,
-            AlbumSortOrder.ALBUM_A_Z
+            ArtistSortOrder.ARTIST_A_Z
         )
         set(value) = sharedPreferences.edit {
             putString(ARTIST_SORT_ORDER, value)

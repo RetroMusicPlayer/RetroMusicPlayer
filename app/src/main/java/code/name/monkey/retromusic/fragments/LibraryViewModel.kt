@@ -13,6 +13,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
+import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
@@ -91,8 +92,14 @@ class LibraryViewModel(
     }
 
     private fun fetchArtists() {
-        viewModelScope.launch(IO) {
-            artists.postValue(repository.fetchArtists())
+        if (PreferenceUtil.albumArtistsOnly) {
+            viewModelScope.launch(IO) {
+                artists.postValue(repository.albumArtists())
+            }
+        } else {
+            viewModelScope.launch(IO) {
+                artists.postValue(repository.fetchArtists())
+            }
         }
     }
 
