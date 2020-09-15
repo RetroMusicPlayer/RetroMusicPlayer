@@ -17,8 +17,7 @@ class AlbumDetailsViewModel(
 ) : ViewModel(), MusicServiceEventListener {
 
     fun getAlbum(): LiveData<Album> = liveData(IO) {
-        val album = repository.albumByIdAsync(albumId)
-        emit(album)
+        emit(repository.albumByIdAsync(albumId))
     }
 
     fun getArtist(artistId: Int): LiveData<Artist> = liveData(IO) {

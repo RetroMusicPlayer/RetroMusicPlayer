@@ -28,8 +28,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         const val APP_UPDATE_REQUEST_CODE = 9002
     }
 
-    private var blockRequestPermissions = false
-
     override fun createContentView(): View {
         return wrapSlidingMusicPanel(R.layout.activity_main_content)
     }
@@ -61,14 +59,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         ) {
             expandPanel()
             intent.removeExtra(EXPAND_PANEL)
-        }
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (!hasPermissions()) {
-            //requestPermissions()
         }
     }
 

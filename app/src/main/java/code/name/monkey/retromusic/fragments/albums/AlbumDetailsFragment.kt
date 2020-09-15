@@ -79,7 +79,6 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         toolbar.title = " "
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
-            println(Thread.currentThread().name)
             startPostponedEnterTransition()
             showAlbum(it)
         })
