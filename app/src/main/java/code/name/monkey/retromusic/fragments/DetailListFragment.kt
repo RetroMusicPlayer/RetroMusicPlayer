@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,23 +17,19 @@ import code.name.monkey.retromusic.fragments.artists.ArtistClickListener
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.repository.RealRepository
+import code.name.monkey.retromusic.state.NowPlayingPanelState
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
     ArtistClickListener, AlbumClickListener {
     private val args by navArgs<DetailListFragmentArgs>()
-    private val repository by inject<RealRepository>()
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.hideBottomBarVisibility(false)
         progressIndicator.hide()
         when (args.type) {
             TOP_ARTISTS -> {
@@ -67,10 +62,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        lifecycleScope.launch(IO) {
-            val songs = repository.recentSongs()
-            withContext(Main) { songAdapter.swapDataSet(songs) }
-        }
+        libraryViewModel.recentSongs().observe(viewLifecycleOwner, Observer { songs ->
+            songAdapter.swapDataSet(songs)
+        })
     }
 
     private fun topPlayed() {
@@ -84,12 +78,10 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        lifecycleScope.launch(IO) {
-            val songs = repository.playCountSongs().map {
-                it.toSong()
-            }
-            withContext(Main) { songAdapter.swapDataSet(songs) }
-        }
+        libraryViewModel.playCountSongs().observe(viewLifecycleOwner, Observer { songs ->
+            songAdapter.swapDataSet(songs)
+        })
+
     }
 
     private fun loadHistory() {
@@ -104,7 +96,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        repository.observableHistorySongs().observe(viewLifecycleOwner, Observer {
+        libraryViewModel.observableHistorySongs().observe(viewLifecycleOwner, Observer {
             val songs = it.map { historyEntity -> historyEntity.toSong() }
             songAdapter.swapDataSet(songs)
         })
@@ -121,8 +113,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        repository.favorites().observe(viewLifecycleOwner, Observer {
-            println(it.size)
+        libraryViewModel.favorites().observe(viewLifecycleOwner, {
             val songs = it.map { songEntity -> songEntity.toSong() }
             songAdapter.swapDataSet(songs)
         })
@@ -130,31 +121,22 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     private fun loadArtists(title: Int, type: Int) {
         toolbar.setTitle(title)
-        lifecycleScope.launch(IO) {
-            val artists =
-                if (type == TOP_ARTISTS) repository.topArtists() else repository.recentArtists()
-            withContext(Main) {
-                recyclerView.apply {
-                    adapter = artistAdapter(artists)
-                    layoutManager = gridLayoutManager()
-                }
+        libraryViewModel.artists(type).observe(viewLifecycleOwner, { artists ->
+            recyclerView.apply {
+                adapter = artistAdapter(artists)
+                layoutManager = gridLayoutManager()
             }
-        }
+        })
     }
 
     private fun loadAlbums(title: Int, type: Int) {
         toolbar.setTitle(title)
-        lifecycleScope.launch(IO) {
-            val albums =
-                if (type == TOP_ALBUMS) repository.topAlbums() else repository.recentAlbums()
-            withContext(Main) {
-                recyclerView.apply {
-                    adapter = albumAdapter(albums)
-                    layoutManager = gridLayoutManager()
-
-                }
+        libraryViewModel.albums(type).observe(viewLifecycleOwner, { albums ->
+            recyclerView.apply {
+                adapter = albumAdapter(albums)
+                layoutManager = gridLayoutManager()
             }
-        }
+        })
     }
 
     private fun artistAdapter(artists: List<Artist>): ArtistAdapter = ArtistAdapter(

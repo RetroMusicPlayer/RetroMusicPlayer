@@ -1,17 +1,20 @@
 package code.name.monkey.retromusic.fragments
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import code.name.monkey.retromusic.RECENT_ALBUMS
+import code.name.monkey.retromusic.RECENT_ARTISTS
+import code.name.monkey.retromusic.TOP_ALBUMS
+import code.name.monkey.retromusic.TOP_ARTISTS
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.SongEntity
+import code.name.monkey.retromusic.db.toSong
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
+import code.name.monkey.retromusic.state.NowPlayingPanelState
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
@@ -19,7 +22,7 @@ class LibraryViewModel(
     private val repository: RealRepository
 ) : ViewModel(), MusicServiceEventListener {
 
-    private val paletteColor = MutableLiveData<Int>()
+    private val _paletteColor = MutableLiveData<Int>()
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
@@ -28,10 +31,15 @@ class LibraryViewModel(
     private val genres = MutableLiveData<List<Genre>>()
     private val home = MutableLiveData<List<Home>>()
 
-    val paletteColorLiveData: LiveData<Int> = paletteColor
+    val paletteColor: LiveData<Int> = _paletteColor
+    val panelState: MutableLiveData<NowPlayingPanelState> = MutableLiveData<NowPlayingPanelState>()
 
     init {
         fetchHomeSections()
+    }
+
+    fun setPanelState(state: NowPlayingPanelState) {
+        panelState.postValue(state)
     }
 
     private fun loadLibraryContent() = viewModelScope.launch(IO) {
@@ -132,7 +140,7 @@ class LibraryViewModel(
     }
 
     fun updateColor(newColor: Int) {
-        paletteColor.postValue(newColor)
+        _paletteColor.postValue(newColor)
     }
 
     override fun onMediaStoreChanged() {
@@ -231,6 +239,38 @@ class LibraryViewModel(
         repository.deleteSongs(songs)
         fetchPlaylists()
         loadLibraryContent()
+    }
+
+    fun recentSongs(): LiveData<List<Song>> = liveData {
+        emit(repository.recentSongs())
+    }
+
+    fun playCountSongs(): LiveData<List<Song>> = liveData {
+        emit(repository.playCountSongs().map {
+            it.toSong()
+        })
+    }
+
+    fun observableHistorySongs() = repository.observableHistorySongs()
+
+    fun favorites() = repository.favorites()
+
+    fun artists(type: Int): LiveData<List<Artist>> = liveData {
+        when (type) {
+            TOP_ARTISTS -> emit(repository.topArtists())
+            RECENT_ARTISTS -> {
+                emit(repository.recentArtists())
+            }
+        }
+    }
+
+    fun albums(type: Int): LiveData<List<Album>> = liveData {
+        when (type) {
+            TOP_ALBUMS -> emit(repository.topAlbums())
+            RECENT_ALBUMS -> {
+                emit(repository.recentAlbums())
+            }
+        }
     }
 }
 

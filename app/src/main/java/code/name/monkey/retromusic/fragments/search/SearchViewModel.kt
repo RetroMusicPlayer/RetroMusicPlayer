@@ -15,6 +15,6 @@ class SearchViewModel(private val realRepository: RealRepository) : ViewModel() 
 
     fun search(query: String?) = viewModelScope.launch(IO) {
         val result = realRepository.search(query)
-        results.value = result
+        results.postValue(result)
     }
 }

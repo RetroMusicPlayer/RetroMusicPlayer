@@ -9,7 +9,7 @@ import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
+import androidx.transition.TransitionManager
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
+import code.name.monkey.retromusic.state.NowPlayingPanelState.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -75,12 +76,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setupSlidingUpPanel()
 
         setupBottomSheet()
-
-        libraryViewModel.paletteColorLiveData.observe(this, Observer {
-            this.paletteColor = it
-            onPaletteColorChanged()
-        })
+        updatePanelState()
+        updateColor()
     }
+
 
     fun getBottomSheetBehavior() = behavior
 
@@ -201,7 +200,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    hideBottomBar(false)
+                    if (bottomNavigationView.isVisible) {
+                        libraryViewModel.setPanelState(COLLAPSED_WITH)
+                    } else {
+                        libraryViewModel.setPanelState(COLLAPSED_WITHOUT)
+                    }
                 }
             })
         } // don't call hideBottomBar(true) here as it causes a bug with the SlidingUpPanelLayout
@@ -209,7 +212,16 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     override fun onQueueChanged() {
         super.onQueueChanged()
-        hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
+        val isEmpty = MusicPlayerRemote.playingQueue.isEmpty()
+        if (isEmpty) {
+            libraryViewModel.setPanelState(HIDE)
+        } else {
+            if (bottomNavigationView.isVisible) {
+                libraryViewModel.setPanelState(EXPAND)
+            } else {
+                libraryViewModel.setPanelState(COLLAPSED_WITHOUT)
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -307,5 +319,60 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (bottomNavigationView.menu.size() == 1) {
             bottomNavigationView.hide()
         }
+    }
+
+    private fun updateColor() {
+        libraryViewModel.paletteColor.observe(this, { color ->
+            this.paletteColor = color
+            onPaletteColorChanged()
+        })
+    }
+
+    private fun updatePanelState() {
+        libraryViewModel.panelState.observe(this, { state ->
+            when (state) {
+                EXPAND -> {
+                    println("EXPAND")
+                    expandPanel()
+                }
+                HIDE -> {
+                    println("HIDE")
+                    behavior.isHideable = true
+                    behavior.peekHeight = 0
+                    collapsePanel()
+                    ViewCompat.setElevation(slidingPanel, 0f)
+                    ViewCompat.setElevation(bottomNavigationView, 10f)
+                }
+                COLLAPSED_WITH -> {
+                    println("COLLAPSED_WITH")
+                    TransitionManager.beginDelayedTransition(mainContent)
+                    bottomNavigationView.isVisible = true
+                    val heightOfBar = bottomNavigationView.height
+                    ViewCompat.setElevation(bottomNavigationView, 10f)
+                    ViewCompat.setElevation(slidingPanel, 10f)
+                    behavior.isHideable = false
+                    behavior.peekHeight = (heightOfBar * 2) - 24
+                }
+                COLLAPSED_WITHOUT -> {
+                    println("COLLAPSED_WITHOUT")
+                    TransitionManager.beginDelayedTransition(mainContent)
+                    TransitionManager.beginDelayedTransition(slidingPanel)
+                    val heightOfBar = bottomNavigationView.height
+                    bottomNavigationView.isVisible = false
+                    ViewCompat.setElevation(bottomNavigationView, 10f)
+                    ViewCompat.setElevation(slidingPanel, 10f)
+                    behavior.isHideable = false
+                    behavior.peekHeight = heightOfBar - 24
+                }
+                else -> {
+                    println("ELSE")
+                    behavior.isHideable = true
+                    behavior.peekHeight = 0
+                    collapsePanel()
+                    ViewCompat.setElevation(slidingPanel, 0f)
+                    ViewCompat.setElevation(bottomNavigationView, 10f)
+                }
+            }
+        })
     }
 }
