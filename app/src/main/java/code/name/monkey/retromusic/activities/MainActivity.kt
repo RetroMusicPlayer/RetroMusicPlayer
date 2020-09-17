@@ -97,8 +97,8 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                 MusicPlayerRemote.playFromUri(uri)
                 handled = true
             } else if (MediaStore.Audio.Playlists.CONTENT_TYPE == mimeType) {
-                val id: Int = parseIdFromIntent(intent, "playlistId", "playlist").toInt()
-                if (id >= 0) {
+                val id = parseLongFromIntent(intent, "playlistId", "playlist")
+                if (id >= 0L) {
                     val position: Int = intent.getIntExtra("position", 0)
                     val songs: List<Song> =
                         PlaylistSongsLoader.getPlaylistSongList(this@MainActivity, id)
@@ -106,19 +106,19 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                     handled = true
                 }
             } else if (MediaStore.Audio.Albums.CONTENT_TYPE == mimeType) {
-                val id = parseIdFromIntent(intent, "albumId", "album").toInt()
-                if (id >= 0) {
+                val id = parseLongFromIntent(intent, "albumId", "album")
+                if (id >= 0L) {
                     val position: Int = intent.getIntExtra("position", 0)
                     MusicPlayerRemote.openQueue(
-                        libraryViewModel.albumById(id).songs!!,
+                        libraryViewModel.albumById(id).songs,
                         position,
                         true
                     )
                     handled = true
                 }
             } else if (MediaStore.Audio.Artists.CONTENT_TYPE == mimeType) {
-                val id: Int = parseIdFromIntent(intent, "artistId", "artist").toInt()
-                if (id >= 0) {
+                val id = parseLongFromIntent(intent, "artistId", "artist")
+                if (id >= 0L) {
                     val position: Int = intent.getIntExtra("position", 0)
                     MusicPlayerRemote.openQueue(
                         libraryViewModel.artistById(id).songs,
@@ -135,7 +135,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
 
     }
 
-    private fun parseIdFromIntent(
+    private fun parseLongFromIntent(
         intent: Intent, longKey: String,
         stringKey: String
     ): Long {

@@ -97,7 +97,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         }
     }
 
-    override fun onAlbumClick(albumId: Int, view: View) {
+    override fun onAlbumClick(albumId: Long, view: View) {
         findActivityNavController(R.id.fragment_container).navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
@@ -285,5 +285,5 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
 }
 
 interface AlbumClickListener {
-    fun onAlbumClick(albumId: Int, view: View)
+    fun onAlbumClick(albumId: Long, view: View)
 }

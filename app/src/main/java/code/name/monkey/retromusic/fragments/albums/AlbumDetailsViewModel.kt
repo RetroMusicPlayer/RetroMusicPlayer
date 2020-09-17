@@ -13,14 +13,14 @@ import kotlinx.coroutines.Dispatchers.IO
 
 class AlbumDetailsViewModel(
     private val repository: RealRepository,
-    private val albumId: Int
+    private val albumId: Long
 ) : ViewModel(), MusicServiceEventListener {
 
     fun getAlbum(): LiveData<Album> = liveData(IO) {
         emit(repository.albumByIdAsync(albumId))
     }
 
-    fun getArtist(artistId: Int): LiveData<Artist> = liveData(IO) {
+    fun getArtist(artistId: Long): LiveData<Artist> = liveData(IO) {
         val artist = repository.artistById(artistId)
         emit(artist)
     }
@@ -31,7 +31,7 @@ class AlbumDetailsViewModel(
     }
 
     fun getMoreAlbums(artist: Artist): LiveData<List<Album>> = liveData(IO) {
-        artist.albums?.filter { item -> item.id != albumId }?.let { albums ->
+        artist.albums.filter { item -> item.id != albumId }.let { albums ->
             if (albums.isNotEmpty()) emit(albums)
         }
     }

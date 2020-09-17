@@ -22,6 +22,8 @@ import android.provider.MediaStore
 import android.provider.MediaStore.Audio.Genres
 import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
+import code.name.monkey.retromusic.extensions.getLong
+import code.name.monkey.retromusic.extensions.getString
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -29,7 +31,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 interface GenreRepository {
     fun genres(): List<Genre>
 
-    fun songs(genreId: Int): List<Song>
+    fun songs(genreId: Long): List<Song>
 }
 
 class RealGenreRepository(
@@ -41,25 +43,25 @@ class RealGenreRepository(
         return getGenresFromCursor(makeGenreCursor())
     }
 
-    override fun songs(genreId: Int): List<Song> {
+    override fun songs(genreId: Long): List<Song> {
         // The genres table only stores songs that have a genre specified,
         // so we need to get songs without a genre a different way.
-        return if (genreId == -1) {
+        return if (genreId == -1L) {
             getSongsWithNoGenre()
         } else songRepository.songs(makeGenreSongCursor(genreId))
     }
 
     private fun getGenreFromCursor(cursor: Cursor): Genre {
-        val id = cursor.getInt(0)
-        val name = cursor.getString(1)
+        val id = cursor.getLong(Genres._ID)
+        val name = cursor.getString(Genres.NAME)
         val songCount = songs(id).size
         return Genre(id, name, songCount)
 
     }
 
     private fun getGenreFromCursorWithOutSongs(cursor: Cursor): Genre {
-        val id = cursor.getInt(0)
-        val name = cursor.getString(1)
+        val id = cursor.getLong(Genres._ID)
+        val name = cursor.getString(Genres.NAME)
         return Genre(id, name, -1)
     }
 
@@ -91,9 +93,9 @@ class RealGenreRepository(
         )
     }
 
-    private fun makeGenreSongCursor(genreId: Int): Cursor? {
+    private fun makeGenreSongCursor(genreId: Long): Cursor? {
         return contentResolver.query(
-            Genres.Members.getContentUri("external", genreId.toLong()),
+            Genres.Members.getContentUri("external", genreId),
             baseProjection,
             IS_MUSIC,
             null,

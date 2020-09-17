@@ -18,8 +18,13 @@ import android.content.ContentResolver
 import android.database.Cursor
 import android.provider.BaseColumns
 import android.provider.MediaStore
-import android.provider.MediaStore.Audio.PlaylistsColumns
+import android.provider.MediaStore.Audio.*
+import android.provider.MediaStore.Audio.Playlists.*
 import code.name.monkey.retromusic.Constants
+import code.name.monkey.retromusic.extensions.getInt
+import code.name.monkey.retromusic.extensions.getLong
+import code.name.monkey.retromusic.extensions.getString
+import code.name.monkey.retromusic.extensions.getStringOrNull
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
@@ -40,11 +45,11 @@ interface PlaylistRepository {
 
     fun favoritePlaylist(playlistName: String): List<Playlist>
 
-    fun deletePlaylist(playlistId: Int)
+    fun deletePlaylist(playlistId: Long)
 
-    fun playlist(playlistId: Int): Playlist
+    fun playlist(playlistId: Long): Playlist
 
-    fun playlistSongs(playlistId: Int): List<Song>
+    fun playlistSongs(playlistId: Long): List<Song>
 }
 
 class RealPlaylistRepository(
@@ -52,19 +57,20 @@ class RealPlaylistRepository(
 ) : PlaylistRepository {
 
     override fun playlist(cursor: Cursor?): Playlist {
-        var playlist = Playlist()
-        if (cursor != null && cursor.moveToFirst()) {
-            playlist = getPlaylistFromCursorImpl(cursor)
+        return cursor.use {
+            if (cursor?.moveToFirst() == true) {
+                getPlaylistFromCursorImpl(cursor)
+            } else {
+                Playlist.empty
+            }
         }
-        cursor?.close()
-        return playlist
     }
 
     override fun playlist(playlistName: String): Playlist {
         return playlist(makePlaylistCursor(PlaylistsColumns.NAME + "=?", arrayOf(playlistName)))
     }
 
-    override fun playlist(playlistId: Int): Playlist {
+    override fun playlist(playlistId: Long): Playlist {
         return playlist(
             makePlaylistCursor(
                 BaseColumns._ID + "=?",
@@ -101,8 +107,8 @@ class RealPlaylistRepository(
         )
     }
 
-    override fun deletePlaylist(playlistId: Int) {
-        val localUri = MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI
+    override fun deletePlaylist(playlistId: Long) {
+        val localUri = EXTERNAL_CONTENT_URI
         val localStringBuilder = StringBuilder()
         localStringBuilder.append("_id IN (")
         localStringBuilder.append(playlistId)
@@ -113,12 +119,12 @@ class RealPlaylistRepository(
     private fun getPlaylistFromCursorImpl(
         cursor: Cursor
     ): Playlist {
-        val id = cursor.getInt(0)
-        val name = cursor.getString(1)
+        val id = cursor.getLong(MediaStore.MediaColumns._ID)
+        val name = cursor.getString(NAME)
         return Playlist(id, name)
     }
 
-    override fun playlistSongs(playlistId: Int): List<Song> {
+    override fun playlistSongs(playlistId: Long): List<Song> {
         val songs = arrayListOf<Song>()
         val cursor = makePlaylistSongCursor(playlistId)
 
@@ -131,21 +137,21 @@ class RealPlaylistRepository(
         return songs
     }
 
-    private fun getPlaylistSongFromCursorImpl(cursor: Cursor, playlistId: Int): PlaylistSong {
-        val id = cursor.getInt(0)
-        val title = cursor.getString(1)
-        val trackNumber = cursor.getInt(2)
-        val year = cursor.getInt(3)
-        val duration = cursor.getLong(4)
-        val data = cursor.getString(5)
-        val dateModified = cursor.getLong(6)
-        val albumId = cursor.getInt(7)
-        val albumName = cursor.getString(8)
-        val artistId = cursor.getInt(9)
-        val artistName = cursor.getString(10)
-        val idInPlaylist = cursor.getInt(11)
-        val composer = cursor.getString(12)
-        val albumArtist = cursor.getString(13)
+    private fun getPlaylistSongFromCursorImpl(cursor: Cursor, playlistId: Long): PlaylistSong {
+        val id = cursor.getLong(Members.AUDIO_ID)
+        val title = cursor.getString(AudioColumns.TITLE)
+        val trackNumber = cursor.getInt(AudioColumns.TRACK)
+        val year = cursor.getInt(AudioColumns.YEAR)
+        val duration = cursor.getLong(AudioColumns.DURATION)
+        val data = cursor.getString(AudioColumns.DATA)
+        val dateModified = cursor.getLong(AudioColumns.DATE_MODIFIED)
+        val albumId = cursor.getLong(AudioColumns.ALBUM_ID)
+        val albumName = cursor.getString(AudioColumns.ALBUM)
+        val artistId = cursor.getLong(AudioColumns.ARTIST_ID)
+        val artistName = cursor.getString(AudioColumns.ARTIST)
+        val idInPlaylist = cursor.getLong(Members._ID)
+        val composer = cursor.getString(AudioColumns.COMPOSER)
+        val albumArtist = cursor.getStringOrNull("album_artist")
         return PlaylistSong(
             id,
             title,
@@ -170,37 +176,37 @@ class RealPlaylistRepository(
         values: Array<String>?
     ): Cursor? {
         return contentResolver.query(
-            MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
+            EXTERNAL_CONTENT_URI,
             arrayOf(
                 BaseColumns._ID, /* 0 */
                 PlaylistsColumns.NAME /* 1 */
             ),
             selection,
             values,
-            MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER
+            DEFAULT_SORT_ORDER
         )
     }
 
 
-    private fun makePlaylistSongCursor(playlistId: Int): Cursor? {
+    private fun makePlaylistSongCursor(playlistId: Long): Cursor? {
         return contentResolver.query(
-            MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId.toLong()),
+            Members.getContentUri("external", playlistId),
             arrayOf(
-                MediaStore.Audio.Playlists.Members.AUDIO_ID, // 0
-                MediaStore.Audio.AudioColumns.TITLE, // 1
-                MediaStore.Audio.AudioColumns.TRACK, // 2
-                MediaStore.Audio.AudioColumns.YEAR, // 3
-                MediaStore.Audio.AudioColumns.DURATION, // 4
-                MediaStore.Audio.AudioColumns.DATA, // 5
-                MediaStore.Audio.AudioColumns.DATE_MODIFIED, // 6
-                MediaStore.Audio.AudioColumns.ALBUM_ID, // 7
-                MediaStore.Audio.AudioColumns.ALBUM, // 8
-                MediaStore.Audio.AudioColumns.ARTIST_ID, // 9
-                MediaStore.Audio.AudioColumns.ARTIST, // 10
-                MediaStore.Audio.Playlists.Members._ID,//11
-                MediaStore.Audio.AudioColumns.COMPOSER,//12
+                Members.AUDIO_ID, // 0
+                AudioColumns.TITLE, // 1
+                AudioColumns.TRACK, // 2
+                AudioColumns.YEAR, // 3
+                AudioColumns.DURATION, // 4
+                AudioColumns.DATA, // 5
+                AudioColumns.DATE_MODIFIED, // 6
+                AudioColumns.ALBUM_ID, // 7
+                AudioColumns.ALBUM, // 8
+                AudioColumns.ARTIST_ID, // 9
+                AudioColumns.ARTIST, // 10
+                Members._ID,//11
+                AudioColumns.COMPOSER,//12
                 "album_artist"//13
-            ), Constants.IS_MUSIC, null, MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER
+            ), Constants.IS_MUSIC, null, Members.DEFAULT_SORT_ORDER
         )
     }
 }

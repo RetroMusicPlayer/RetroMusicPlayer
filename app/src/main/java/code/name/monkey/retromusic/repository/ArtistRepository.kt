@@ -26,7 +26,7 @@ interface ArtistRepository {
 
     fun artists(query: String): List<Artist>
 
-    fun artist(artistId: Int): Artist
+    fun artist(artistId: Long): Artist
 }
 
 class RealArtistRepository(
@@ -73,20 +73,18 @@ class RealArtistRepository(
     }
 
     private fun splitIntoAlbumArtists(albums: List<Album>): List<Artist> {
-        // First group the songs in albums by filtering each artist name
-        val amap = hashMapOf<String, Artist>()
-        albums.forEach {
-            val key = it.albumArtist
-            if (key != null) {
-                val artist: Artist = if (amap[key] != null) amap[key]!! else Artist()
-                artist.albums?.add(it)
-                amap[key] = artist
+        return albums.groupBy { it.albumArtist }
+            .map {
+                val currentAlbums = it.value
+                if (albums.isNotEmpty()) {
+                    Artist(currentAlbums[0].id, currentAlbums)
+                } else {
+                    Artist.empty
+                }
             }
-        }
-        return ArrayList(amap.values)
     }
 
-    override fun artist(artistId: Int): Artist {
+    override fun artist(artistId: Long): Artist {
         val songs = songRepository.songs(
             songRepository.makeSongCursor(
                 AudioColumns.ARTIST_ID + "=?",
@@ -94,27 +92,12 @@ class RealArtistRepository(
                 getSongLoaderSortOrder()
             )
         )
-        return Artist(ArrayList(albumRepository.splitIntoAlbums(songs)))
+        return Artist(artistId, albumRepository.splitIntoAlbums(songs))
     }
 
-    fun splitIntoArtists(albums: List<Album>?): List<Artist> {
-        val artists = mutableListOf<Artist>()
-        if (albums != null) {
-            for (album in albums) {
-                getOrCreateArtist(artists, album.artistId).albums!!.add(album)
-            }
-        }
-        return artists
+    fun splitIntoArtists(albums: List<Album>): List<Artist> {
+        return albums.groupBy { it.artistId }
+            .map { Artist(it.key, it.value) }
     }
 
-    private fun getOrCreateArtist(artists: MutableList<Artist>, artistId: Int): Artist {
-        for (artist in artists) {
-            if (artist.albums!!.isNotEmpty() && artist.albums[0].songs!!.isNotEmpty() && artist.albums[0].songs!![0].artistId == artistId) {
-                return artist
-            }
-        }
-        val album = Artist()
-        artists.add(album)
-        return album
-    }
 }
