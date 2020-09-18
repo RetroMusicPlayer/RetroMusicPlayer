@@ -16,10 +16,16 @@ import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSortOrder
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.google.android.material.transition.platform.MaterialFadeThrough
 
 
 class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     AlbumClickListener {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,7 +49,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         return AlbumAdapter(
             requireActivity(),
             dataSet,
-            R.layout.item_grid,
+            itemLayoutRes(),
             null,
             this
         )
