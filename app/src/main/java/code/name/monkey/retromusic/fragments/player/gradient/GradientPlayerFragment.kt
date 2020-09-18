@@ -36,7 +36,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
@@ -61,7 +61,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     private var playingQueueAdapter: PlayingQueueAdapter? = null
     private lateinit var linearLayoutManager: LinearLayoutManager
 
-    private val bottomSheetCallbackList = object : BottomSheetBehavior.BottomSheetCallback() {
+    private val bottomSheetCallbackList = object : BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
             mainActivity.getBottomSheetBehavior().setAllowDragging(false)
             playerQueueSheet.setPadding(
@@ -74,11 +74,11 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             when (newState) {
-                BottomSheetBehavior.STATE_EXPANDED,
-                BottomSheetBehavior.STATE_DRAGGING -> {
+                STATE_EXPANDED,
+                STATE_DRAGGING -> {
                     mainActivity.getBottomSheetBehavior().setAllowDragging(false)
                 }
-                BottomSheetBehavior.STATE_COLLAPSED -> {
+                STATE_COLLAPSED -> {
                     resetToCurrentPosition()
                     mainActivity.getBottomSheetBehavior().setAllowDragging(true)
                 }
@@ -167,9 +167,9 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
 
     override fun onBackPressed(): Boolean {
         var wasExpanded = false
-        if (getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
-            wasExpanded = getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED
-            getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
+        if (getQueuePanel().state == STATE_EXPANDED) {
+            wasExpanded = getQueuePanel().state == STATE_EXPANDED
+            getQueuePanel().state = STATE_COLLAPSED
             return wasExpanded
         }
         return wasExpanded
@@ -359,13 +359,10 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     private fun updateLabel() {
         (MusicPlayerRemote.playingQueue.size - 1).apply {
             if (this == (MusicPlayerRemote.position)) {
-                nextSong.hide()
+                nextSong.text = "Last song"
             } else {
                 val title = MusicPlayerRemote.playingQueue[MusicPlayerRemote.position + 1].title
-                nextSong.apply {
-                    text = title
-                    show()
-                }
+                nextSong.text = title
             }
         }
     }
@@ -469,4 +466,6 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
+
+
 }
