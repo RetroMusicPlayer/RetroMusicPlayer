@@ -13,7 +13,7 @@ interface HistoryDao {
     suspend fun insertSongInHistory(historyEntity: HistoryEntity)
 
     @Query("SELECT * FROM HistoryEntity WHERE id = :songId LIMIT 1")
-    suspend fun isSongPresentInHistory(songId: Int): HistoryEntity?
+    suspend fun isSongPresentInHistory(songId: Long): HistoryEntity?
 
     @Update
     suspend fun updateHistorySong(historyEntity: HistoryEntity)

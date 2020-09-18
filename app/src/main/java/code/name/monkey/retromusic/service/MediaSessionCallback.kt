@@ -90,7 +90,7 @@ class MediaSessionCallback(
         }
     }
 
-    private fun checkAndStartPlaying(songs: ArrayList<Song>, itemId: Int) {
+    private fun checkAndStartPlaying(songs: ArrayList<Song>, itemId: Long) {
         var songIndex = MusicUtil.indexOfSongInList(songs, itemId)
         if (songIndex == -1) {
             songIndex = 0

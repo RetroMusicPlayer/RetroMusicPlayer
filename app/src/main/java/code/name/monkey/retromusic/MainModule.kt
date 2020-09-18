@@ -162,14 +162,14 @@ private val viewModules = module {
         LibraryViewModel(get())
     }
 
-    viewModel { (albumId: Int) ->
+    viewModel { (albumId: Long) ->
         AlbumDetailsViewModel(
             get(),
             albumId
         )
     }
 
-    viewModel { (artistId: Int) ->
+    viewModel { (artistId: Long) ->
         ArtistDetailsViewModel(
             get(),
             artistId

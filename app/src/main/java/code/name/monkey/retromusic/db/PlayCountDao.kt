@@ -14,14 +14,14 @@ interface PlayCountDao {
     fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
 
     @Query("SELECT * FROM PlayCountEntity WHERE id =:songId")
-    fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
+    fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
 
     @Query("SELECT * FROM PlayCountEntity ORDER BY play_count DESC")
     fun playCountSongs(): List<PlayCountEntity>
 
     @Query("DELETE FROM SongEntity WHERE id =:songId")
-    fun deleteSong(songId: Int)
+    fun deleteSong(songId: Long)
 
     @Query("UPDATE PlayCountEntity SET play_count = play_count + 1 WHERE id = :id")
-    fun updateQuantity(id: Int)
+    fun updateQuantity(id: Long)
 }

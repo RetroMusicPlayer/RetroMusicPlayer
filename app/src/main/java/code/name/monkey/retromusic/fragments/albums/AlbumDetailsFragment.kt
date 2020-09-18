@@ -254,7 +254,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         playAction.applyOutlineColor(color)
     }
 
-    override fun onAlbumClick(albumId: Int, view: View) {
+    override fun onAlbumClick(albumId: Long, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId)
@@ -349,29 +349,31 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     private fun setSaveSortOrder(sortOrder: String) {
         PreferenceUtil.albumDetailSongSortOrder = sortOrder
-        when (sortOrder) {
-            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs?.sortWith(Comparator { o1, o2 ->
+        val songs = when (sortOrder) {
+            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs.sortedWith { o1, o2 ->
                 o1.trackNumber.compareTo(
                     o2.trackNumber
                 )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs?.sortWith(Comparator { o1, o2 ->
+            }
+            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs.sortedWith { o1, o2 ->
                 o1.title.compareTo(
                     o2.title
                 )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs?.sortWith(Comparator { o1, o2 ->
+            }
+            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs.sortedWith { o1, o2 ->
                 o2.title.compareTo(
                     o1.title
                 )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs?.sortWith(Comparator { o1, o2 ->
+            }
+            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
                 o1.duration.compareTo(
                     o2.duration
                 )
-            })
+            }
+            else -> throw IllegalArgumentException("invalid $sortOrder")
         }
-        album.songs?.let { simpleSongAdapter.swapDataSet(it) }
+        album = album.copy(songs = songs)
+        simpleSongAdapter.swapDataSet(album.songs)
     }
 
     companion object {

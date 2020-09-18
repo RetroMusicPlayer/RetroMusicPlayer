@@ -40,7 +40,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     val repository by inject<Repository>()
 
     lateinit var saveFab: MaterialButton
-    protected var id: Int = 0
+    protected var id: Long = 0
         private set
     private var paletteColorPrimary: Int = 0
     private var isInNoImageMode: Boolean = false
@@ -251,7 +251,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private fun getIntentExtras() {
         val intentExtras = intent.extras
         if (intentExtras != null) {
-            id = intentExtras.getInt(EXTRA_ID)
+            id = intentExtras.getLong(EXTRA_ID)
         }
     }
 
@@ -396,7 +396,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         }
     }
 
-    class ArtworkInfo constructor(val albumId: Int, val artwork: Bitmap?)
+    class ArtworkInfo constructor(val albumId: Long, val artwork: Bitmap?)
 
     companion object {
 

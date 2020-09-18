@@ -206,7 +206,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     }
 
 
-    override fun onAlbumClick(albumId: Int, view: View) {
+    override fun onAlbumClick(albumId: Long, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),

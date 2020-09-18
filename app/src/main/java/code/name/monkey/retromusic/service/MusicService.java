@@ -618,7 +618,7 @@ public class MusicService extends Service implements
                 break;
             case SHUFFLE_MODE_NONE:
                 this.shuffleMode = shuffleMode;
-                int currentSongId = Objects.requireNonNull(getCurrentSong()).getId();
+                long currentSongId = Objects.requireNonNull(getCurrentSong()).getId();
                 playingQueue = new ArrayList<>(originalPlayingQueue);
                 int newPosition = 0;
                 if (getPlayingQueue() != null) {

@@ -50,9 +50,9 @@ class ImportPlaylistFragment :
             if (playlist.name.isNotEmpty()) {
                 if (libraryViewModel.checkPlaylistExists(playlist.name).isEmpty()) {
                     val playlistId: Long =
-                        libraryViewModel.createPlaylist(PlaylistEntity(playlist.name))
+                        libraryViewModel.createPlaylist(PlaylistEntity(playlistName = playlist.name))
                     libraryViewModel.insertSongs(playlist.getSongs().map {
-                        it.toSongEntity(playlistId.toInt())
+                        it.toSongEntity(playlistId)
                     })
                     libraryViewModel.forceReload(Playlists)
                 } else {

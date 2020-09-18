@@ -16,6 +16,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.SongEntity
+import code.name.monkey.retromusic.extensions.getLong
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.removeFromQueue
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Playlist
@@ -85,7 +86,7 @@ object MusicUtil : KoinComponent {
         return albumArtDir
     }
 
-    fun deleteAlbumArt(context: Context, albumId: Int) {
+    fun deleteAlbumArt(context: Context, albumId: Long) {
         val contentResolver = context.contentResolver
         val localUri = Uri.parse("content://media/external/audio/albumart")
         contentResolver.delete(ContentUris.withAppendedId(localUri, albumId.toLong()), null, null)
@@ -175,10 +176,9 @@ object MusicUtil : KoinComponent {
         return lyrics
     }
 
-    fun getMediaStoreAlbumCoverUri(albumId: Int): Uri {
-        val sArtworkUri =
-            Uri.parse("content://media/external/audio/albumart")
-        return ContentUris.withAppendedId(sArtworkUri, albumId.toLong())
+    fun getMediaStoreAlbumCoverUri(albumId: Long): Uri {
+        val sArtworkUri = Uri.parse("content://media/external/audio/albumart")
+        return ContentUris.withAppendedId(sArtworkUri, albumId)
     }
 
 
@@ -249,7 +249,7 @@ object MusicUtil : KoinComponent {
         return "$songCount $songString"
     }
 
-    fun getSongFileUri(songId: Int): Uri {
+    fun getSongFileUri(songId: Long): Uri {
         return ContentUris.withAppendedId(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
             songId.toLong()
@@ -268,18 +268,13 @@ object MusicUtil : KoinComponent {
         return if (year > 0) year.toString() else "-"
     }
 
-    fun indexOfSongInList(songs: List<Song>, songId: Int): Int {
-        for (i in songs.indices) {
-            if (songs[i].id == songId) {
-                return i
-            }
-        }
-        return -1
+    fun indexOfSongInList(songs: List<Song>, songId: Long): Int {
+        return songs.indexOfFirst { it.id == songId }
     }
 
     fun insertAlbumArt(
         context: Context,
-        albumId: Int,
+        albumId: Long,
         path: String?
     ) {
         val contentResolver = context.contentResolver
@@ -306,7 +301,7 @@ object MusicUtil : KoinComponent {
 
     fun isFavorite(context: Context, song: Song): Boolean {
         return PlaylistsUtil
-            .doPlaylistContains(context, getFavoritesPlaylist(context).id.toLong(), song.id)
+            .doPlaylistContains(context, getFavoritesPlaylist(context).id, song.id)
     }
 
     fun isFavoritePlaylist(
@@ -387,7 +382,7 @@ object MusicUtil : KoinComponent {
                     // as from the album art cache
                     cursor.moveToFirst()
                     while (!cursor.isAfterLast) {
-                        val id = cursor.getInt(0)
+                        val id = cursor.getLong(BaseColumns._ID)
                         val song: Song = songRepository.song(id)
                         removeFromQueue(song)
                         cursor.moveToNext()
@@ -452,7 +447,7 @@ object MusicUtil : KoinComponent {
                 // as from the album art cache
                 cursor.moveToFirst()
                 while (!cursor.isAfterLast) {
-                    val id: Int = cursor.getInt(0)
+                    val id = cursor.getLong(BaseColumns._ID)
                     val song: Song = RealSongRepository(context).song(id)
                     removeFromQueue(song)
                     cursor.moveToNext()

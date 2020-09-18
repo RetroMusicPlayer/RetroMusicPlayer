@@ -56,8 +56,8 @@ class CreatePlaylistDialog : DialogFragment() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         if (libraryViewModel.checkPlaylistExists(playlistName).isEmpty()) {
                             val playlistId: Long =
-                                libraryViewModel.createPlaylist(PlaylistEntity(playlistName))
-                            libraryViewModel.insertSongs(songs.map { it.toSongEntity(playlistId.toInt()) })
+                                libraryViewModel.createPlaylist(PlaylistEntity(playlistName = playlistName))
+                            libraryViewModel.insertSongs(songs.map { it.toSongEntity(playlistId) })
                             libraryViewModel.forceReload(Playlists)
                         } else {
                             Toast.makeText(requireContext(), "Playlist exists", Toast.LENGTH_SHORT)

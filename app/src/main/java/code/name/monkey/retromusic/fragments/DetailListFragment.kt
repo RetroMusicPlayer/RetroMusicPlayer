@@ -178,11 +178,11 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
 
 
-    override fun onArtist(artistId: Int, imageView: ImageView) {
+    override fun onArtist(artistId: Long, imageView: ImageView) {
 
     }
 
-    override fun onAlbumClick(albumId: Int, view: View) {
+    override fun onAlbumClick(albumId: Long, view: View) {
 
     }
 }

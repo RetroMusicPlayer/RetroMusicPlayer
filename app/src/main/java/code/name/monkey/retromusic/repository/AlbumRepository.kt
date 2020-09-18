@@ -31,7 +31,7 @@ interface AlbumRepository {
 
     fun albums(query: String): List<Album>
 
-    fun album(albumId: Int): Album
+    fun album(albumId: Long): Album
 }
 
 class RealAlbumRepository(private val songRepository: RealSongRepository) :
@@ -59,70 +59,42 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
         return splitIntoAlbums(songs)
     }
 
-    override fun album(albumId: Int): Album {
+    override fun album(albumId: Long): Album {
         val cursor = songRepository.makeSongCursor(
             AudioColumns.ALBUM_ID + "=?",
             arrayOf(albumId.toString()),
             getSongLoaderSortOrder()
         )
         val songs = songRepository.songs(cursor)
-        val album = Album(ArrayList(songs))
+        val album = Album(albumId, songs)
         sortAlbumSongs(album)
         return album
     }
 
     fun splitIntoAlbums(
-        songs: List<Song>?
+        songs: List<Song>
     ): List<Album> {
-        val albums = ArrayList<Album>()
-        if (songs != null) {
-            for (song in songs) {
-                getOrCreateAlbum(albums, song.albumId).songs?.add(song)
-            }
-        }
-        for (album in albums) {
-            sortAlbumSongs(album)
-        }
-        return albums
+        return songs.groupBy { it.albumId }
+            .map { sortAlbumSongs(Album(it.key, it.value)) }
     }
 
-    private fun getOrCreateAlbum(
-        albums: ArrayList<Album>,
-        albumId: Int
-    ): Album {
-        for (album in albums) {
-            if (album.songs!!.isNotEmpty() && album.songs[0].albumId == albumId) {
-                return album
+    private fun sortAlbumSongs(album: Album): Album {
+        val songs = when (PreferenceUtil.albumDetailSongSortOrder) {
+            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs.sortedWith { o1, o2 ->
+                o1.trackNumber.compareTo(o2.trackNumber)
             }
+            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs.sortedWith { o1, o2 ->
+                o1.title.compareTo(o2.title)
+            }
+            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs.sortedWith { o1, o2 ->
+                o2.title.compareTo(o1.title)
+            }
+            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
+                o1.duration.compareTo(o2.duration)
+            }
+            else -> throw IllegalArgumentException("invalid ${PreferenceUtil.albumDetailSongSortOrder}")
         }
-        val album = Album()
-        albums.add(album)
-        return album
-    }
-
-    private fun sortAlbumSongs(album: Album) {
-        when (PreferenceUtil.albumDetailSongSortOrder) {
-            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs?.sortWith(Comparator { o1, o2 ->
-                o1.trackNumber.compareTo(
-                    o2.trackNumber
-                )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs?.sortWith(Comparator { o1, o2 ->
-                o1.title.compareTo(
-                    o2.title
-                )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs?.sortWith(Comparator { o1, o2 ->
-                o2.title.compareTo(
-                    o1.title
-                )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs?.sortWith(Comparator { o1, o2 ->
-                o1.duration.compareTo(
-                    o2.duration
-                )
-            })
-        }
+        return album.copy(songs = songs)
     }
 
     private fun getSongLoaderSortOrder(): String {

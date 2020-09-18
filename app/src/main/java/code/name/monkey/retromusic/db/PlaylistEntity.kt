@@ -9,10 +9,9 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 @Parcelize
 class PlaylistEntity(
-    @ColumnInfo(name = "playlist_name")
-    val playlistName: String
-) : Parcelable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "playlist_id")
-    var playListId: Int = 0
-}
+    val playListId: Long = 0,
+    @ColumnInfo(name = "playlist_name")
+    val playlistName: String
+) : Parcelable

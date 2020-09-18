@@ -96,7 +96,7 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         }
     }
 
-    override fun onArtist(artistId: Int, imageView: ImageView) {
+    override fun onArtist(artistId: Long, imageView: ImageView) {
         val controller = findActivityNavController(R.id.fragment_container)
         controller.navigate(R.id.artistDetailsFragment, bundleOf(EXTRA_ARTIST_ID to artistId))
     }
@@ -258,5 +258,5 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
 }
 
 interface ArtistClickListener {
-    fun onArtist(artistId: Int, imageView: ImageView)
+    fun onArtist(artistId: Long, imageView: ImageView)
 }
