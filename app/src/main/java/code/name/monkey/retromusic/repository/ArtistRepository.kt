@@ -39,22 +39,20 @@ class RealArtistRepository(
                 PreferenceUtil.artistAlbumSortOrder + ", " +
                 PreferenceUtil.artistSongSortOrder
     }
-
+    override fun artist(artistId: Long): Artist {
+        val songs = songRepository.songs(
+            songRepository.makeSongCursor(
+                AudioColumns.ARTIST_ID + "=?",
+                arrayOf(artistId.toString()),
+                getSongLoaderSortOrder()
+            )
+        )
+        return Artist(artistId, albumRepository.splitIntoAlbums(songs))
+    }
     override fun artists(): List<Artist> {
         val songs = songRepository.songs(
             songRepository.makeSongCursor(
                 null, null,
-                getSongLoaderSortOrder()
-            )
-        )
-        return splitIntoArtists(albumRepository.splitIntoAlbums(songs))
-    }
-
-    override fun artists(query: String): List<Artist> {
-        val songs = songRepository.songs(
-            songRepository.makeSongCursor(
-                AudioColumns.ARTIST + " LIKE ?",
-                arrayOf("%$query%"),
                 getSongLoaderSortOrder()
             )
         )
@@ -72,6 +70,18 @@ class RealArtistRepository(
         return splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
     }
 
+    override fun artists(query: String): List<Artist> {
+        val songs = songRepository.songs(
+            songRepository.makeSongCursor(
+                AudioColumns.ARTIST + " LIKE ?",
+                arrayOf("%$query%"),
+                getSongLoaderSortOrder()
+            )
+        )
+        return splitIntoArtists(albumRepository.splitIntoAlbums(songs))
+    }
+
+
     private fun splitIntoAlbumArtists(albums: List<Album>): List<Artist> {
         return albums.groupBy { it.albumArtist }
             .map {
@@ -84,20 +94,10 @@ class RealArtistRepository(
             }
     }
 
-    override fun artist(artistId: Long): Artist {
-        val songs = songRepository.songs(
-            songRepository.makeSongCursor(
-                AudioColumns.ARTIST_ID + "=?",
-                arrayOf(artistId.toString()),
-                getSongLoaderSortOrder()
-            )
-        )
-        return Artist(artistId, albumRepository.splitIntoAlbums(songs))
-    }
+
 
     fun splitIntoArtists(albums: List<Album>): List<Artist> {
         return albums.groupBy { it.artistId }
             .map { Artist(it.key, it.value) }
     }
-
 }

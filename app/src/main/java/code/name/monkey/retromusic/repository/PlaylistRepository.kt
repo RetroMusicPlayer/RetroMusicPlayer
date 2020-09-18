@@ -18,8 +18,9 @@ import android.content.ContentResolver
 import android.database.Cursor
 import android.provider.BaseColumns
 import android.provider.MediaStore
-import android.provider.MediaStore.Audio.*
+import android.provider.MediaStore.Audio.AudioColumns
 import android.provider.MediaStore.Audio.Playlists.*
+import android.provider.MediaStore.Audio.PlaylistsColumns
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.extensions.getInt
 import code.name.monkey.retromusic.extensions.getLong
@@ -150,7 +151,7 @@ class RealPlaylistRepository(
         val artistId = cursor.getLong(AudioColumns.ARTIST_ID)
         val artistName = cursor.getString(AudioColumns.ARTIST)
         val idInPlaylist = cursor.getLong(Members._ID)
-        val composer = cursor.getString(AudioColumns.COMPOSER)
+        val composer = cursor.getStringOrNull(AudioColumns.COMPOSER)
         val albumArtist = cursor.getStringOrNull("album_artist")
         return PlaylistSong(
             id,
@@ -166,7 +167,7 @@ class RealPlaylistRepository(
             artistName,
             playlistId,
             idInPlaylist,
-            composer,
+            composer ?: "",
             albumArtist
         )
     }

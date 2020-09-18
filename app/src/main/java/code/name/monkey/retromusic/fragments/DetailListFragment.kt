@@ -3,8 +3,11 @@ package code.name.monkey.retromusic.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -179,10 +182,20 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
 
     override fun onArtist(artistId: Long, imageView: ImageView) {
-
+        findNavController().navigate(
+            R.id.artistDetailsFragment,
+            bundleOf(EXTRA_ARTIST_ID to artistId),
+            null,
+            FragmentNavigatorExtras(imageView to getString(R.string.transition_artist_image))
+        )
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
-
+        findNavController().navigate(
+            R.id.albumDetailsFragment,
+            bundleOf(EXTRA_ALBUM_ID to albumId),
+            null,
+            FragmentNavigatorExtras(view to getString(R.string.transition_album_art))
+        )
     }
 }

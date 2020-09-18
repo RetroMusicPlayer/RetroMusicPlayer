@@ -17,7 +17,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
@@ -38,7 +37,6 @@ import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.CustomArtistImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_artist_content.*
@@ -199,10 +197,8 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     }
 
     private fun setColors(color: Int) {
-        val finalColor = if (PreferenceUtil.isAdaptiveColor) color
-        else ThemeStore.accentColor(requireContext())
-        shuffleAction.applyColor(finalColor)
-        playAction.applyOutlineColor(finalColor)
+        shuffleAction.applyColor(color)
+        playAction.applyOutlineColor(color)
     }
 
 

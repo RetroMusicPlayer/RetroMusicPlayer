@@ -14,12 +14,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
+import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.SongEntity
+import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
@@ -45,6 +49,9 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.fragment_gradient_controls.*
 import kotlinx.android.synthetic.main.fragment_gradient_player.*
 import kotlinx.android.synthetic.main.status_bar.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_player),
     MusicProgressViewUpdateHelper.Callback,
@@ -216,12 +223,29 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     override fun toggleFavorite(song: Song) {
         super.toggleFavorite(song)
         if (song.id == MusicPlayerRemote.currentSong.id) {
-            updateIsFavorite()
+            updateIsFavoriteIcon()
         }
     }
 
     override fun onFavoriteToggled() {
         toggleFavorite(MusicPlayerRemote.currentSong)
+    }
+
+    private fun updateIsFavoriteIcon() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
+            if (playlist != null) {
+                val song: SongEntity =
+                    MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
+                val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
+                withContext(Dispatchers.Main) {
+                    val icon =
+                        if (isFavorite) R.drawable.ic_favorite
+                        else R.drawable.ic_favorite_border
+                    songFavourite.setImageResource(icon)
+                }
+            }
+        }
     }
 
     private fun hideVolumeIfAvailable() {
@@ -241,6 +265,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         updatePlayPauseDrawableState()
         updatePlayPauseDrawableState()
         updateQueue()
+        updateIsFavoriteIcon()
     }
 
     override fun onPlayStateChanged() {
@@ -259,6 +284,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         super.onPlayingMetaChanged()
         updateSong()
         updateQueuePosition()
+        updateIsFavoriteIcon()
     }
 
     override fun onQueueChanged() {
@@ -457,15 +483,11 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
         progressSlider.max = total
-
         val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
         animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
-
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
-
-
 }

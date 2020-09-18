@@ -10,6 +10,7 @@ import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -267,7 +268,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     override fun onAlbumClick(albumId: Long, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
-            bundleOf(EXTRA_ALBUM_ID to albumId)
+            bundleOf(EXTRA_ALBUM_ID to albumId),
+            null,
+            FragmentNavigatorExtras(view to getString(R.string.transition_album_art))
         )
     }
 

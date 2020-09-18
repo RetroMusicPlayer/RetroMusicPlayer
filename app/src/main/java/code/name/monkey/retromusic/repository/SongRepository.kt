@@ -17,8 +17,8 @@ package code.name.monkey.retromusic.repository
 import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
-import android.provider.MediaStore.Audio
-import android.provider.MediaStore.Audio.*
+import android.provider.MediaStore.Audio.AudioColumns
+import android.provider.MediaStore.Audio.Media
 import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.extensions.getInt
@@ -148,17 +148,14 @@ class RealSongRepository(private val context: Context) : SongRepository {
         }
         selectionFinal =
             selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
-        try {
-            return context.contentResolver.query(
-                Media.EXTERNAL_CONTENT_URI,
-                baseProjection,
-                selectionFinal,
-                selectionValuesFinal,
-                sortOrder
-            )
-        } catch (e: SecurityException) {
-            return null
-        }
+
+        return context.contentResolver.query(
+            Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
+            baseProjection,
+            selectionFinal,
+            selectionValuesFinal,
+            sortOrder
+        )
     }
 
     private fun generateBlacklistSelection(
