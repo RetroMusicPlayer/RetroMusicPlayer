@@ -46,6 +46,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_album_content.*
 import kotlinx.android.synthetic.main.fragment_album_details.*
 import kotlinx.coroutines.Dispatchers
@@ -70,8 +71,14 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     private val savedSortOrder: String
         get() = PreferenceUtil.albumDetailSongSortOrder
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = 1000L
+        }
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         mainActivity.hideBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
@@ -91,11 +98,11 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     bundleOf(EXTRA_ARTIST_ID to album.artistId)
                 )
         }
-        playAction.setOnClickListener { MusicPlayerRemote.openQueue(album.songs!!, 0, true) }
+        playAction.setOnClickListener { MusicPlayerRemote.openQueue(album.songs, 0, true) }
 
         shuffleAction.setOnClickListener {
             MusicPlayerRemote.openAndShuffleQueue(
-                album.songs!!,
+                album.songs,
                 true
             )
         }
@@ -134,7 +141,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun showAlbum(album: Album) {
-        if (album.songs!!.isEmpty()) {
+        if (album.songs.isEmpty()) {
             return
         }
         this.album = album

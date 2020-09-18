@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.SongEntity
+import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener

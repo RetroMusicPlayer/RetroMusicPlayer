@@ -35,43 +35,7 @@ open class Song(
     open val composer: String?,
     open val albumArtist: String?
 ) : Parcelable {
-    fun toHistoryEntity(timePlayed: Long): HistoryEntity {
-        return HistoryEntity(
-            id = id,
-            title = title,
-            trackNumber = trackNumber,
-            year = year,
-            duration = duration,
-            data = data,
-            dateModified = dateModified,
-            albumId = albumId,
-            albumName = albumName,
-            artistId = artistId,
-            artistName = artistName,
-            composer = composer,
-            albumArtist = albumArtist,
-            timePlayed = timePlayed
-        )
-    }
 
-    fun toSongEntity(playListId: Long): SongEntity {
-        return SongEntity(
-            playlistCreatorId = playListId,
-            id = id,
-            title = title,
-            trackNumber = trackNumber,
-            year = year,
-            duration = duration,
-            data = data,
-            dateModified = dateModified,
-            albumId = albumId,
-            albumName = albumName,
-            artistId = artistId,
-            artistName = artistName,
-            composer = composer,
-            albumArtist = albumArtist
-        )
-    }
 
     // need to override manually because is open and cannot be a data class
     override fun equals(other: Any?): Boolean {

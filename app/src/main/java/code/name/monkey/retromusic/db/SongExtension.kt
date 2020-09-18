@@ -14,6 +14,44 @@ fun List<Song>.toSongs(playlistId: Long): List<SongEntity> {
     }
 }
 
+fun Song.toHistoryEntity(timePlayed: Long): HistoryEntity {
+    return HistoryEntity(
+        id = id,
+        title = title,
+        trackNumber = trackNumber,
+        year = year,
+        duration = duration,
+        data = data,
+        dateModified = dateModified,
+        albumId = albumId,
+        albumName = albumName,
+        artistId = artistId,
+        artistName = artistName,
+        composer = composer,
+        albumArtist = albumArtist,
+        timePlayed = timePlayed
+    )
+}
+
+fun Song.toSongEntity(playListId: Long): SongEntity {
+    return SongEntity(
+        playlistCreatorId = playListId,
+        id = id,
+        title = title,
+        trackNumber = trackNumber,
+        year = year,
+        duration = duration,
+        data = data,
+        dateModified = dateModified,
+        albumId = albumId,
+        albumName = albumName,
+        artistId = artistId,
+        artistName = artistName,
+        composer = composer,
+        albumArtist = albumArtist
+    )
+}
+
 fun SongEntity.toSong(): Song {
     return Song(
         id = id,

@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.materialDialog
