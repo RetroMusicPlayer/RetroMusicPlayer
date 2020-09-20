@@ -90,7 +90,7 @@ class RealArtistRepository(
             .map {
                 val currentAlbums = it.value
                 if (albums.isNotEmpty()) {
-                    Artist(currentAlbums[0].id, currentAlbums)
+                    Artist(currentAlbums[0].artistId, currentAlbums)
                 } else {
                     Artist.empty
                 }
