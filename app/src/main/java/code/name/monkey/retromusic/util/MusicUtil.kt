@@ -299,7 +299,10 @@ object MusicUtil : KoinComponent {
         return tempName == "unknown" || tempName == "<unknown>"
     }
 
-    fun isVariousArtists(artistName: String): Boolean {
+    fun isVariousArtists(artistName: String?): Boolean {
+        if (TextUtils.isEmpty(artistName)) {
+            return false
+        }
         if (artistName == Artist.VARIOUS_ARTISTS_DISPLAY_NAME) {
             return true
         }
