@@ -27,6 +27,8 @@ data class Artist(
             val name = safeGetFirstAlbum().safeGetFirstSong().albumArtist
             return if (MusicUtil.isArtistNameUnknown(name)) {
                 UNKNOWN_ARTIST_DISPLAY_NAME
+            } else if (MusicUtil.isVariousArtists(name)) {
+                VARIOUS_ARTISTS_DISPLAY_NAME
             } else safeGetFirstAlbum().safeGetFirstSong().artistName
         }
 
@@ -51,6 +53,8 @@ data class Artist(
 
     companion object {
         const val UNKNOWN_ARTIST_DISPLAY_NAME = "Unknown Artist"
+        const val VARIOUS_ARTISTS_DISPLAY_NAME = "Various Artists"
+        const val VARIOUS_ARTISTS_ID : Long = -2
         val empty = Artist(-1, emptyList())
 
     }

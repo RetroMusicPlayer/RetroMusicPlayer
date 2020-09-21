@@ -40,6 +40,19 @@ class RealArtistRepository(
                 PreferenceUtil.artistSongSortOrder
     }
     override fun artist(artistId: Long): Artist {
+        if (artistId == Artist.VARIOUS_ARTISTS_ID) {
+            // Get Various Artists
+            val songs = songRepository.songs(
+                songRepository.makeSongCursor(
+                    null,
+                    null,
+                    getSongLoaderSortOrder()
+                )
+            )
+            val albums = albumRepository.splitIntoAlbums(songs).filter { it.albumArtist == Artist.VARIOUS_ARTISTS_DISPLAY_NAME }
+            return Artist(Artist.VARIOUS_ARTISTS_ID, albums)
+        }
+
         val songs = songRepository.songs(
             songRepository.makeSongCursor(
                 AudioColumns.ARTIST_ID + "=?",
@@ -68,9 +81,7 @@ class RealArtistRepository(
             )
         )
 
-        val sortString = if (PreferenceUtil.artistSortOrder.contains("DESC")) String.CASE_INSENSITIVE_ORDER.reversed() else String.CASE_INSENSITIVE_ORDER
-
-        return splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs)).sortedWith(compareBy(sortString) { it.name })
+        return splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
     }
 
     override fun artists(query: String): List<Artist> {
@@ -89,8 +100,12 @@ class RealArtistRepository(
         return albums.groupBy { it.albumArtist }
             .map {
                 val currentAlbums = it.value
-                if (albums.isNotEmpty()) {
-                    Artist(currentAlbums[0].artistId, currentAlbums)
+                if (currentAlbums.isNotEmpty()) {
+                    if (currentAlbums[0].albumArtist == Artist.VARIOUS_ARTISTS_DISPLAY_NAME) {
+                        Artist(Artist.VARIOUS_ARTISTS_ID, currentAlbums)
+                    } else {
+                        Artist(currentAlbums[0].artistId, currentAlbums)
+                    }
                 } else {
                     Artist.empty
                 }
