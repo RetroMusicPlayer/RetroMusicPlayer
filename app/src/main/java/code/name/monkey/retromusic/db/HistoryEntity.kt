@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 class HistoryEntity(
     @PrimaryKey
-    val id: Int,
+    val id: Long,
     val title: String,
     @ColumnInfo(name = "track_number")
     val trackNumber: Int,
@@ -17,11 +17,11 @@ class HistoryEntity(
     @ColumnInfo(name = "date_modified")
     val dateModified: Long,
     @ColumnInfo(name = "album_id")
-    val albumId: Int,
+    val albumId: Long,
     @ColumnInfo(name = "album_name")
     val albumName: String,
     @ColumnInfo(name = "artist_id")
-    val artistId: Int,
+    val artistId: Long,
     @ColumnInfo(name = "artist_name")
     val artistName: String,
     val composer: String?,

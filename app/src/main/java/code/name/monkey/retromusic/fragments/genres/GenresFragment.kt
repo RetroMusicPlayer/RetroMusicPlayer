@@ -21,8 +21,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.GenreAdapter
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
+import com.google.android.material.transition.platform.MaterialFadeThrough
 
 class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

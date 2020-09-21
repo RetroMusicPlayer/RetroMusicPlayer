@@ -18,6 +18,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
 import code.name.monkey.retromusic.util.RetroColorUtil.getColor
@@ -168,12 +169,8 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     }
 
     override fun getSongPaths(): List<String> {
-        val songs = repository.albumById(id).songs
-        val paths = ArrayList<String>(songs!!.size)
-        for (song in songs) {
-            paths.add(song.data)
-        }
-        return paths
+        return repository.albumById(id).songs
+            .map(Song::data)
     }
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {

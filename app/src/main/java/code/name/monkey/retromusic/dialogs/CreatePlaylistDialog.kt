@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.materialDialog
@@ -56,8 +57,8 @@ class CreatePlaylistDialog : DialogFragment() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         if (libraryViewModel.checkPlaylistExists(playlistName).isEmpty()) {
                             val playlistId: Long =
-                                libraryViewModel.createPlaylist(PlaylistEntity(playlistName))
-                            libraryViewModel.insertSongs(songs.map { it.toSongEntity(playlistId.toInt()) })
+                                libraryViewModel.createPlaylist(PlaylistEntity(playlistName = playlistName))
+                            libraryViewModel.insertSongs(songs.map { it.toSongEntity(playlistId) })
                             libraryViewModel.forceReload(Playlists)
                         } else {
                             Toast.makeText(requireContext(), "Playlist exists", Toast.LENGTH_SHORT)

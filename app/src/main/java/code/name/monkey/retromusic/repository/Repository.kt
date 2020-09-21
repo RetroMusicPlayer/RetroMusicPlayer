@@ -41,10 +41,10 @@ interface Repository {
     fun historySong(): List<HistoryEntity>
     fun favorites(): LiveData<List<SongEntity>>
     fun observableHistorySongs(): LiveData<List<HistoryEntity>>
-    fun albumById(albumId: Int): Album
+    fun albumById(albumId: Long): Album
     fun playlistSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>>
     suspend fun fetchAlbums(): List<Album>
-    suspend fun albumByIdAsync(albumId: Int): Album
+    suspend fun albumByIdAsync(albumId: Long): Album
     suspend fun allSongs(): List<Song>
     suspend fun fetchArtists(): List<Artist>
     suspend fun albumArtists(): List<Artist>
@@ -52,10 +52,10 @@ interface Repository {
     suspend fun fetchGenres(): List<Genre>
     suspend fun search(query: String?): MutableList<Any>
     suspend fun getPlaylistSongs(playlist: Playlist): List<Song>
-    suspend fun getGenre(genreId: Int): List<Song>
+    suspend fun getGenre(genreId: Long): List<Song>
     suspend fun artistInfo(name: String, lang: String?, cache: String?): Result<LastFmArtist>
     suspend fun albumInfo(artist: String, album: String): Result<LastFmAlbum>
-    suspend fun artistById(artistId: Int): Artist
+    suspend fun artistById(artistId: Long): Artist
     suspend fun recentArtists(): List<Artist>
     suspend fun topArtists(): List<Artist>
     suspend fun topAlbums(): List<Album>
@@ -70,7 +70,7 @@ interface Repository {
     suspend fun playlists(): Home
     suspend fun homeSections(): List<Home>
     suspend fun homeSectionsFlow(): Flow<Result<List<Home>>>
-    suspend fun playlist(playlistId: Int): Playlist
+    suspend fun playlist(playlistId: Long): Playlist
     suspend fun fetchPlaylistWithSongs(): List<PlaylistWithSongs>
     suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song>
     suspend fun insertSongs(songs: List<SongEntity>)
@@ -78,7 +78,7 @@ interface Repository {
     suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
     suspend fun fetchPlaylists(): List<PlaylistEntity>
     suspend fun deleteRoomPlaylist(playlists: List<PlaylistEntity>)
-    suspend fun renameRoomPlaylist(playlistId: Int, name: String)
+    suspend fun renameRoomPlaylist(playlistId: Long, name: String)
     suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
     suspend fun removeSongFromPlaylist(songEntity: SongEntity)
     suspend fun deletePlaylistSongs(playlists: List<PlaylistEntity>)
@@ -93,7 +93,7 @@ interface Repository {
     suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
-    suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
+    suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun blackListPaths(): List<BlackListStoreEntity>
     suspend fun lyrics(artist: String, title: String): Result<String>
@@ -126,15 +126,15 @@ class RealRepository(
 
     override suspend fun fetchAlbums(): List<Album> = albumRepository.albums()
 
-    override suspend fun albumByIdAsync(albumId: Int): Album = albumRepository.album(albumId)
+    override suspend fun albumByIdAsync(albumId: Long): Album = albumRepository.album(albumId)
 
-    override fun albumById(albumId: Int): Album = albumRepository.album(albumId)
+    override fun albumById(albumId: Long): Album = albumRepository.album(albumId)
 
     override suspend fun fetchArtists(): List<Artist> = artistRepository.artists()
 
     override suspend fun albumArtists(): List<Artist> = artistRepository.albumArtists()
 
-    override suspend fun artistById(artistId: Int): Artist = artistRepository.artist(artistId)
+    override suspend fun artistById(artistId: Long): Artist = artistRepository.artist(artistId)
 
     override suspend fun recentArtists(): List<Artist> = lastAddedRepository.recentArtists()
 
@@ -160,7 +160,7 @@ class RealRepository(
             PlaylistSongsLoader.getPlaylistSongList(context, playlist.id)
         }
 
-    override suspend fun getGenre(genreId: Int): List<Song> = genreRepository.songs(genreId)
+    override suspend fun getGenre(genreId: Long): List<Song> = genreRepository.songs(genreId)
 
     override suspend fun artistInfo(
         name: String,
@@ -235,7 +235,7 @@ class RealRepository(
     }
 
 
-    override suspend fun playlist(playlistId: Int) =
+    override suspend fun playlist(playlistId: Long) =
         playlistRepository.playlist(playlistId)
 
     override suspend fun fetchPlaylistWithSongs(): List<PlaylistWithSongs> =
@@ -263,7 +263,7 @@ class RealRepository(
     override suspend fun deleteRoomPlaylist(playlists: List<PlaylistEntity>) =
         roomRepository.deletePlaylistEntities(playlists)
 
-    override suspend fun renameRoomPlaylist(playlistId: Int, name: String) =
+    override suspend fun renameRoomPlaylist(playlistId: Long, name: String) =
         roomRepository.renamePlaylistEntity(playlistId, name)
 
     override suspend fun deleteSongsInPlaylist(songs: List<SongEntity>) =
@@ -306,7 +306,7 @@ class RealRepository(
     override suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity) =
         roomRepository.deleteSongInPlayCount(playCountEntity)
 
-    override suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity> =
+    override suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity> =
         roomRepository.checkSongExistInPlayCount(songId)
 
     override suspend fun playCountSongs(): List<PlayCountEntity> =

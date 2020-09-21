@@ -5,10 +5,7 @@ import code.name.monkey.retromusic.RECENT_ALBUMS
 import code.name.monkey.retromusic.RECENT_ARTISTS
 import code.name.monkey.retromusic.TOP_ALBUMS
 import code.name.monkey.retromusic.TOP_ARTISTS
-import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.db.SongEntity
-import code.name.monkey.retromusic.db.toSong
+import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
@@ -82,7 +79,6 @@ class LibraryViewModel(
     }
 
     fun getHome(): LiveData<List<Home>> {
-        fetchHomeSections()
         return home
     }
 
@@ -185,7 +181,7 @@ class LibraryViewModel(
         )
     }
 
-    fun renameRoomPlaylist(playListId: Int, name: String) = viewModelScope.launch(IO) {
+    fun renameRoomPlaylist(playListId: Long, name: String) = viewModelScope.launch(IO) {
         repository.renameRoomPlaylist(playListId, name)
     }
 
@@ -201,8 +197,8 @@ class LibraryViewModel(
         repository.deleteRoomPlaylist(playlists)
     }
 
-    suspend fun albumById(id: Int) = repository.albumById(id)
-    suspend fun artistById(id: Int) = repository.artistById(id)
+    suspend fun albumById(id: Long) = repository.albumById(id)
+    suspend fun artistById(id: Long) = repository.artistById(id)
     suspend fun favoritePlaylist() = repository.favoritePlaylist()
     suspend fun isFavoriteSong(song: SongEntity) = repository.isFavoriteSong(song)
     suspend fun insertSongs(songs: List<SongEntity>) = repository.insertSongs(songs)
@@ -225,9 +221,9 @@ class LibraryViewModel(
                 }
                 repository.insertSongs(songEntities)
             } else {
-                val playListId = createPlaylist(PlaylistEntity(playlist.name))
+                val playListId = createPlaylist(PlaylistEntity(playlistName = playlist.name))
                 val songEntities = playlist.getSongs().map {
-                    it.toSongEntity(playListId.toInt())
+                    it.toSongEntity(playListId)
                 }
                 repository.insertSongs(songEntities)
             }

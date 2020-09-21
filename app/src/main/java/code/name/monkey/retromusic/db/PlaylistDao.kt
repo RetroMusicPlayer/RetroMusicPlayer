@@ -9,7 +9,7 @@ interface PlaylistDao {
     suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
 
     @Query("UPDATE PlaylistEntity SET playlist_name = :name WHERE playlist_id = :playlistId")
-    suspend fun renamePlaylist(playlistId: Int, name: String)
+    suspend fun renamePlaylist(playlistId: Long, name: String)
 
     @Query("SELECT * FROM PlaylistEntity WHERE playlist_name = :name")
     fun isPlaylistExists(name: String): List<PlaylistEntity>
@@ -18,10 +18,10 @@ interface PlaylistDao {
     suspend fun playlists(): List<PlaylistEntity>
 
     @Query("DELETE FROM SongEntity WHERE playlist_creator_id = :playlistId")
-    suspend fun deletePlaylistSongs(playlistId: Int)
+    suspend fun deletePlaylistSongs(playlistId: Long)
 
     @Query("DELETE FROM SongEntity WHERE playlist_creator_id = :playlistId AND id = :songId")
-    suspend fun deleteSongFromPlaylist(playlistId: Int, songId: Int)
+    suspend fun deleteSongFromPlaylist(playlistId: Long, songId: Long)
 
     @Transaction
     @Query("SELECT * FROM PlaylistEntity")
@@ -31,10 +31,10 @@ interface PlaylistDao {
     suspend fun insertSongsToPlaylist(songEntities: List<SongEntity>)
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId AND id = :songId")
-    suspend fun isSongExistsInPlaylist(playlistId: Int, songId: Int): List<SongEntity>
+    suspend fun isSongExistsInPlaylist(playlistId: Long, songId: Long): List<SongEntity>
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId")
-    fun songsFromPlaylist(playlistId: Int): LiveData<List<SongEntity>>
+    fun songsFromPlaylist(playlistId: Long): LiveData<List<SongEntity>>
 
     @Delete
     suspend fun deletePlaylist(playlistEntity: PlaylistEntity)
@@ -47,10 +47,10 @@ interface PlaylistDao {
 
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
-    fun favoritesSongsLiveData(playlistId: Int): LiveData<List<SongEntity>>
+    fun favoritesSongsLiveData(playlistId: Long): LiveData<List<SongEntity>>
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
-    fun favoritesSongs(playlistId: Int): List<SongEntity>
+    fun favoritesSongs(playlistId: Long): List<SongEntity>
 
 
 }
