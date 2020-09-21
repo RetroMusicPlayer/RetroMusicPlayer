@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.menu
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
 import code.name.monkey.retromusic.interfaces.CabHolder

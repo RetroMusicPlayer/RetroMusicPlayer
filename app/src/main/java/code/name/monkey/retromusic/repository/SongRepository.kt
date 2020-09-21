@@ -18,8 +18,13 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
+import android.provider.MediaStore.Audio.Media
 import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
+import code.name.monkey.retromusic.extensions.getInt
+import code.name.monkey.retromusic.extensions.getLong
+import code.name.monkey.retromusic.extensions.getString
+import code.name.monkey.retromusic.extensions.getStringOrNull
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -40,7 +45,7 @@ interface SongRepository {
 
     fun song(cursor: Cursor?): Song
 
-    fun song(songId: Int): Song
+    fun song(songId: Long): Song
 }
 
 class RealSongRepository(private val context: Context) : SongRepository {
@@ -74,14 +79,14 @@ class RealSongRepository(private val context: Context) : SongRepository {
         return songs(makeSongCursor(AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%")))
     }
 
-    override fun song(songId: Int): Song {
+    override fun song(songId: Long): Song {
         return song(makeSongCursor(AudioColumns._ID + "=?", arrayOf(songId.toString())))
     }
 
     override fun songsByFilePath(filePath: String): List<Song> {
         return songs(
             makeSongCursor(
-                MediaStore.Audio.AudioColumns.DATA + "=?",
+                AudioColumns.DATA + "=?",
                 arrayOf(filePath)
             )
         )
@@ -90,19 +95,19 @@ class RealSongRepository(private val context: Context) : SongRepository {
     private fun getSongFromCursorImpl(
         cursor: Cursor
     ): Song {
-        val id = cursor.getInt(0)
-        val title = cursor.getString(1)
-        val trackNumber = cursor.getInt(2)
-        val year = cursor.getInt(3)
-        val duration = cursor.getLong(4)
-        val data = cursor.getString(5)
-        val dateModified = cursor.getLong(6)
-        val albumId = cursor.getInt(7)
-        val albumName = cursor.getString(8)
-        val artistId = cursor.getInt(9)
-        val artistName = cursor.getString(10)
-        val composer = cursor.getString(11)
-        val albumArtist = cursor.getString(12)
+        val id = cursor.getLong(AudioColumns._ID)
+        val title = cursor.getString(AudioColumns.TITLE)
+        val trackNumber = cursor.getInt(AudioColumns.TRACK)
+        val year = cursor.getInt(AudioColumns.YEAR)
+        val duration = cursor.getLong(AudioColumns.DURATION)
+        val data = cursor.getString(AudioColumns.DATA)
+        val dateModified = cursor.getLong(AudioColumns.DATE_MODIFIED)
+        val albumId = cursor.getLong(AudioColumns.ALBUM_ID)
+        val albumName = cursor.getStringOrNull(AudioColumns.ALBUM)
+        val artistId = cursor.getLong(AudioColumns.ARTIST_ID)
+        val artistName = cursor.getStringOrNull(AudioColumns.ARTIST)
+        val composer = cursor.getStringOrNull(AudioColumns.COMPOSER)
+        val albumArtist = cursor.getStringOrNull("album_artist")
         return Song(
             id,
             title,
@@ -142,18 +147,15 @@ class RealSongRepository(private val context: Context) : SongRepository {
             selectionValuesFinal = addBlacklistSelectionValues(selectionValuesFinal, paths)
         }
         selectionFinal =
-            selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
-        try {
-            return context.contentResolver.query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                baseProjection,
-                selectionFinal,
-                selectionValuesFinal,
-                sortOrder
-            )
-        } catch (e: SecurityException) {
-            return null
-        }
+            selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
+
+        return context.contentResolver.query(
+            Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
+            baseProjection,
+            selectionFinal,
+            selectionValuesFinal,
+            sortOrder
+        )
     }
 
     private fun generateBlacklistSelection(

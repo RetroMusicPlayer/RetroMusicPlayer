@@ -36,6 +36,7 @@ import code.name.monkey.retromusic.glide.UserProfileGlideRequest
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
@@ -43,6 +44,10 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment :
     AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+    }
 
     private val libraryViewModel: LibraryViewModel by sharedViewModel()
 

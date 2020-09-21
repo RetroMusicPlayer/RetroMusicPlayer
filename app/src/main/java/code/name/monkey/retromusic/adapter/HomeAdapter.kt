@@ -233,7 +233,7 @@ class HomeAdapter(
     fun gridLayoutManager() = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
     fun linearLayoutManager() = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-    override fun onArtist(artistId: Int, imageView: ImageView) {
+    override fun onArtist(artistId: Long, imageView: ImageView) {
         activity.findNavController(R.id.fragment_container).navigate(
             R.id.artistDetailsFragment,
             bundleOf(EXTRA_ARTIST_ID to artistId),
@@ -244,7 +244,7 @@ class HomeAdapter(
         )
     }
 
-    override fun onAlbumClick(albumId: Int, view: View) {
+    override fun onAlbumClick(albumId: Long, view: View) {
         activity.findNavController(R.id.fragment_container).navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),

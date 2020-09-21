@@ -18,7 +18,7 @@ interface RoomRepository {
     suspend fun playlistWithSongs(): List<PlaylistWithSongs>
     suspend fun insertSongs(songs: List<SongEntity>)
     suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>)
-    suspend fun renamePlaylistEntity(playlistId: Int, name: String)
+    suspend fun renamePlaylistEntity(playlistId: Long, name: String)
     suspend fun deleteSongsInPlaylist(songs: List<SongEntity>)
     suspend fun deletePlaylistSongs(playlists: List<PlaylistEntity>)
     suspend fun favoritePlaylist(favorite: String): PlaylistEntity
@@ -31,7 +31,7 @@ interface RoomRepository {
     suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
-    suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity>
+    suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun insertBlacklistPath(blackListStoreEntities: List<BlackListStoreEntity>)
     suspend fun deleteBlacklistPath(blackListStoreEntity: BlackListStoreEntity)
@@ -70,13 +70,13 @@ class RealRoomRepository(
     }
 
 
-    override   fun getSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>> =
+    override fun getSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>> =
         playlistDao.songsFromPlaylist(playlistEntity.playListId)
 
     override suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>) =
         playlistDao.deletePlaylists(playlistEntities)
 
-    override suspend fun renamePlaylistEntity(playlistId: Int, name: String) =
+    override suspend fun renamePlaylistEntity(playlistId: Long, name: String) =
         playlistDao.renamePlaylist(playlistId, name)
 
     override suspend fun deleteSongsInPlaylist(songs: List<SongEntity>) {
@@ -95,7 +95,7 @@ class RealRoomRepository(
         return if (playlist != null) {
             playlist
         } else {
-            createPlaylist(PlaylistEntity(favorite))
+            createPlaylist(PlaylistEntity(playlistName = favorite))
             playlistDao.isPlaylistExists(favorite).first()
         }
     }
@@ -143,7 +143,7 @@ class RealRoomRepository(
     override suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity) =
         playCountDao.deleteSongInPlayCount(playCountEntity)
 
-    override suspend fun checkSongExistInPlayCount(songId: Int): List<PlayCountEntity> =
+    override suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity> =
         playCountDao.checkSongExistInPlayCount(songId)
 
     override suspend fun playCountSongs(): List<PlayCountEntity> =

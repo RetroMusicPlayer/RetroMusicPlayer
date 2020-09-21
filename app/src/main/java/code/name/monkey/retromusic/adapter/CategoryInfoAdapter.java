@@ -71,13 +71,13 @@ public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapte
     public void onBindViewHolder(@NonNull CategoryInfoAdapter.ViewHolder holder, int position) {
         CategoryInfo categoryInfo = categoryInfos.get(position);
 
-        holder.checkBox.setChecked(categoryInfo.visible);
-        holder.title.setText(holder.title.getResources().getString(categoryInfo.category.stringRes));
+        holder.checkBox.setChecked(categoryInfo.isVisible());
+        holder.title.setText(holder.title.getResources().getString(categoryInfo.getCategory().getStringRes()));
 
         holder.itemView.setOnClickListener(v -> {
-            if (!(categoryInfo.visible && isLastCheckedCategory(categoryInfo))) {
-                categoryInfo.visible = !categoryInfo.visible;
-                holder.checkBox.setChecked(categoryInfo.visible);
+            if (!(categoryInfo.isVisible() && isLastCheckedCategory(categoryInfo))) {
+                categoryInfo.setVisible(!categoryInfo.isVisible());
+                holder.checkBox.setChecked(categoryInfo.isVisible());
             } else {
                 Toast.makeText(holder.itemView.getContext(), R.string.you_have_to_select_at_least_one_category,
                         Toast.LENGTH_SHORT).show();
@@ -110,9 +110,9 @@ public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapte
     }
 
     private boolean isLastCheckedCategory(CategoryInfo categoryInfo) {
-        if (categoryInfo.visible) {
+        if (categoryInfo.isVisible()) {
             for (CategoryInfo c : categoryInfos) {
-                if (c != categoryInfo && c.visible) {
+                if (c != categoryInfo && c.isVisible()) {
                     return false;
                 }
             }

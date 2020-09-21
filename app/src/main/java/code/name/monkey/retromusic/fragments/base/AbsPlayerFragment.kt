@@ -23,6 +23,7 @@ import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.SongEntity
+import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.whichFragment

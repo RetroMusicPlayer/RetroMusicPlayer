@@ -10,6 +10,7 @@ import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -46,6 +47,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
+import com.google.android.material.transition.platform.MaterialArcMotion
+import com.google.android.material.transition.platform.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_album_content.*
 import kotlinx.android.synthetic.main.fragment_album_details.*
 import kotlinx.coroutines.Dispatchers
@@ -70,8 +73,16 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     private val savedSortOrder: String
         get() = PreferenceUtil.albumDetailSongSortOrder
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = 1000L
+            pathMotion = MaterialArcMotion()
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         mainActivity.hideBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
@@ -79,7 +90,6 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         toolbar.title = " "
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
-            println(Thread.currentThread().name)
             startPostponedEnterTransition()
             showAlbum(it)
         })
@@ -92,11 +102,11 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     bundleOf(EXTRA_ARTIST_ID to album.artistId)
                 )
         }
-        playAction.setOnClickListener { MusicPlayerRemote.openQueue(album.songs!!, 0, true) }
+        playAction.setOnClickListener { MusicPlayerRemote.openQueue(album.songs, 0, true) }
 
         shuffleAction.setOnClickListener {
             MusicPlayerRemote.openAndShuffleQueue(
-                album.songs!!,
+                album.songs,
                 true
             )
         }
@@ -135,7 +145,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun showAlbum(album: Album) {
-        if (album.songs!!.isEmpty()) {
+        if (album.songs.isEmpty()) {
             return
         }
         this.album = album
@@ -255,10 +265,12 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         playAction.applyOutlineColor(color)
     }
 
-    override fun onAlbumClick(albumId: Int, view: View) {
+    override fun onAlbumClick(albumId: Long, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
-            bundleOf(EXTRA_ALBUM_ID to albumId)
+            bundleOf(EXTRA_ALBUM_ID to albumId),
+            null,
+            FragmentNavigatorExtras(view to getString(R.string.transition_album_art))
         )
     }
 
@@ -350,29 +362,31 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     private fun setSaveSortOrder(sortOrder: String) {
         PreferenceUtil.albumDetailSongSortOrder = sortOrder
-        when (sortOrder) {
-            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs?.sortWith(Comparator { o1, o2 ->
+        val songs = when (sortOrder) {
+            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs.sortedWith { o1, o2 ->
                 o1.trackNumber.compareTo(
                     o2.trackNumber
                 )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs?.sortWith(Comparator { o1, o2 ->
+            }
+            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs.sortedWith { o1, o2 ->
                 o1.title.compareTo(
                     o2.title
                 )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs?.sortWith(Comparator { o1, o2 ->
+            }
+            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs.sortedWith { o1, o2 ->
                 o2.title.compareTo(
                     o1.title
                 )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs?.sortWith(Comparator { o1, o2 ->
+            }
+            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
                 o1.duration.compareTo(
                     o2.duration
                 )
-            })
+            }
+            else -> throw IllegalArgumentException("invalid $sortOrder")
         }
-        album.songs?.let { simpleSongAdapter.swapDataSet(it) }
+        album = album.copy(songs = songs)
+        simpleSongAdapter.swapDataSet(album.songs)
     }
 
     companion object {

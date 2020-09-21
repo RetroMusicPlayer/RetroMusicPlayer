@@ -136,7 +136,7 @@ open class AlbumAdapter(
     private fun getSongList(albums: List<Album>): List<Song> {
         val songs = ArrayList<Song>()
         for (album in albums) {
-            songs.addAll(album.songs!!)
+            songs.addAll(album.songs)
         }
         return songs
     }
@@ -170,8 +170,7 @@ open class AlbumAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                println(dataSet[layoutPosition].id)
-                image?.let { albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, it) }
+                albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, itemView)
             }
         }
 

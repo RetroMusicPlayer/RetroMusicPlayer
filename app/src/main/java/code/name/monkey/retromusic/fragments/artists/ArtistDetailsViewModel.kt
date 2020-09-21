@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers.IO
 
 class ArtistDetailsViewModel(
     private val realRepository: RealRepository,
-    private val artistId: Int
+    private val artistId: Long
 ) : ViewModel(), MusicServiceEventListener {
 
     fun getArtist(): LiveData<Artist> = liveData(IO) {
