@@ -7,6 +7,12 @@ assignees: ''
 
 ---
 
+<!--
+    Don't report bugs that are already in the issue list of Retro Music: https://github.com/h4h13/RetroMusicPlayer/issues
+
+    [ ] Yes
+-->
+
 **Have you read the [FAQ](https://www.github.com/h4h13/RetroMusicPlayer/tree/dev/FAQ.md)?**
 [Yes/No]
 
