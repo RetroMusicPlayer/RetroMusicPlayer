@@ -69,6 +69,8 @@
 
     <string name="action_sort_order">Sort order</string>
 
+    <string name="action_album_artists_only">Album artists only</string>
+
     <string name="action_tag_editor">Tag editor</string>
 
     <string name="action_toggle_favorite">Toggle favorite</string>
@@ -517,6 +519,7 @@
 
     <string name="pref_snow_fall_title">Snow fall effect</string>
 
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
     <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
@@ -546,6 +549,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
 
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
