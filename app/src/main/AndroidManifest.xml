@@ -29,7 +29,7 @@
         android:theme="@style/Theme.RetroMusic.FollowSystem"
         android:usesCleartextTraffic="false"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
-        tools:targetApi="m">
+        tools:targetApi="q">
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"

@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.network
+package io.github.muntashirakon.music.network
 
 import retrofit2.http.GET
 import retrofit2.http.Headers

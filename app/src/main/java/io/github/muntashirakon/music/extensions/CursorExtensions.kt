@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.extensions
+package io.github.muntashirakon.music.extensions
 
 import android.database.Cursor
 

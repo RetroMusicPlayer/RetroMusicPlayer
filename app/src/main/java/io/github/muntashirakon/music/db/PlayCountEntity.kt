@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.db
+package io.github.muntashirakon.music.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

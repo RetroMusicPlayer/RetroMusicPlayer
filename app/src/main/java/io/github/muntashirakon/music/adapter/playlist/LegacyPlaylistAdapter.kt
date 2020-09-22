@@ -1,13 +1,13 @@
-package code.name.monkey.retromusic.adapter.playlist
+package io.github.muntashirakon.music.adapter.playlist
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.util.MusicUtil
+import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
+import io.github.muntashirakon.music.model.Playlist
+import io.github.muntashirakon.music.util.MusicUtil
 
 class LegacyPlaylistAdapter(
     private val activity: FragmentActivity,

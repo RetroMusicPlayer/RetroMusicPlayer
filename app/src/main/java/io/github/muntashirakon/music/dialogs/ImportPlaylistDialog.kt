@@ -1,12 +1,12 @@
-package code.name.monkey.retromusic.dialogs
+package io.github.muntashirakon.music.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.colorButtons
-import code.name.monkey.retromusic.extensions.materialDialog
-import code.name.monkey.retromusic.fragments.LibraryViewModel
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
+import io.github.muntashirakon.music.extensions.materialDialog
+import io.github.muntashirakon.music.fragments.LibraryViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ImportPlaylistDialog : DialogFragment() {

@@ -3,10 +3,10 @@ package io.github.muntashirakon.music
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import code.name.monkey.retromusic.db.BlackListStoreDao
-import code.name.monkey.retromusic.db.BlackListStoreEntity
-import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.db.RetroDatabase
+import io.github.muntashirakon.music.db.BlackListStoreDao
+import io.github.muntashirakon.music.db.BlackListStoreEntity
+import io.github.muntashirakon.music.db.PlaylistWithSongs
+import io.github.muntashirakon.music.db.RetroDatabase
 import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.fragments.albums.AlbumDetailsViewModel
 import io.github.muntashirakon.music.fragments.artists.ArtistDetailsViewModel

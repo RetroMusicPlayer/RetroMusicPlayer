@@ -1,7 +1,10 @@
-package code.name.monkey.retromusic.db
+package io.github.muntashirakon.music.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import io.github.muntashirakon.music.db.PlaylistEntity
+import io.github.muntashirakon.music.db.PlaylistWithSongs
+import io.github.muntashirakon.music.db.SongEntity
 
 @Dao
 interface PlaylistDao {

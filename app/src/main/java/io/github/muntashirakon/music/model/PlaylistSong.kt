@@ -11,7 +11,7 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
-package code.name.monkey.retromusic.model
+package io.github.muntashirakon.music.model
 
 import kotlinx.android.parcel.Parcelize
 

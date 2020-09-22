@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.dialogs
+package io.github.muntashirakon.music.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
@@ -6,14 +6,14 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.EXTRA_PLAYLIST
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.extensions.colorButtons
-import code.name.monkey.retromusic.extensions.extraNotNull
-import code.name.monkey.retromusic.extensions.materialDialog
-import code.name.monkey.retromusic.util.PlaylistsUtil
+import io.github.muntashirakon.music.App
+import io.github.muntashirakon.music.EXTRA_PLAYLIST
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.db.PlaylistWithSongs
+import io.github.muntashirakon.music.extensions.colorButtons
+import io.github.muntashirakon.music.extensions.extraNotNull
+import io.github.muntashirakon.music.extensions.materialDialog
+import io.github.muntashirakon.music.util.PlaylistsUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.activities
+package io.github.muntashirakon.music.activities
 
 import android.content.Intent
 import android.net.Uri
@@ -7,13 +7,12 @@ import android.provider.Settings
 import androidx.core.text.HtmlCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
-import code.name.monkey.retromusic.extensions.accentBackgroundColor
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.util.RingtoneManager
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.activities.base.AbsMusicServiceActivity
+import io.github.muntashirakon.music.extensions.accentBackgroundColor
+import io.github.muntashirakon.music.extensions.show
+import io.github.muntashirakon.music.util.RingtoneManager
 import kotlinx.android.synthetic.main.activity_permission.*
-import kotlinx.android.synthetic.main.fragment_library.appNameText
 
 
 class PermissionActivity : AbsMusicServiceActivity() {

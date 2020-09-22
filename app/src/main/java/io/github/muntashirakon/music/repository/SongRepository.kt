@@ -150,7 +150,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
             selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
 
         return context.contentResolver.query(
-            Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
+            Media.getContentUri(MediaStore.VOLUME_EXTERNAL),
             baseProjection,
             selectionFinal,
             selectionValuesFinal,

@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.model.smartplaylist
+package io.github.muntashirakon.music.model.smartplaylist
 
 import androidx.annotation.DrawableRes
 import kotlin.math.abs

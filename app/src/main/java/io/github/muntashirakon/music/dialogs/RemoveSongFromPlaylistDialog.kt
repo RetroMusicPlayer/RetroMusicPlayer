@@ -1,18 +1,18 @@
-package code.name.monkey.retromusic.dialogs
+package io.github.muntashirakon.music.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
-import code.name.monkey.retromusic.EXTRA_SONG
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.SongEntity
-import code.name.monkey.retromusic.extensions.colorButtons
-import code.name.monkey.retromusic.extensions.extraNotNull
-import code.name.monkey.retromusic.extensions.materialDialog
-import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.fragments.ReloadType.Playlists
+import io.github.muntashirakon.music.EXTRA_SONG
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.db.SongEntity
+import io.github.muntashirakon.music.extensions.colorButtons
+import io.github.muntashirakon.music.extensions.extraNotNull
+import io.github.muntashirakon.music.extensions.materialDialog
+import io.github.muntashirakon.music.fragments.LibraryViewModel
+import io.github.muntashirakon.music.fragments.ReloadType.Playlists
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class RemoveSongFromPlaylistDialog : DialogFragment() {

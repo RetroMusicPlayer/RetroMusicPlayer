@@ -14,8 +14,6 @@
 package io.github.muntashirakon.music.model
 
 import android.os.Parcelable
-import code.name.monkey.retromusic.db.HistoryEntity
-import code.name.monkey.retromusic.db.SongEntity
 import kotlinx.android.parcel.Parcelize
 
 // update equals and hashcode if fields changes

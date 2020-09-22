@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.dialogs
+package io.github.muntashirakon.music.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.accentTextColor
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.network.Result
-import code.name.monkey.retromusic.repository.Repository
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.accentTextColor
+import io.github.muntashirakon.music.extensions.hide
+import io.github.muntashirakon.music.helper.MusicPlayerRemote
+import io.github.muntashirakon.music.network.Result
+import io.github.muntashirakon.music.repository.Repository
 import kotlinx.android.synthetic.main.lyrics_dialog.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

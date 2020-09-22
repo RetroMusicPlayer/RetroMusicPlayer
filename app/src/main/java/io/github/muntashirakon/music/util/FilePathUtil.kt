@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.util
+package io.github.muntashirakon.music.util
 
 import android.os.Environment
 import java.io.File

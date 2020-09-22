@@ -1,9 +1,10 @@
-package code.name.monkey.retromusic.repository
+package io.github.muntashirakon.music.repository
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import code.name.monkey.retromusic.db.*
-import code.name.monkey.retromusic.model.Song
+import io.github.muntashirakon.music.db.*
+import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.db.*
 
 
 interface RoomRepository {

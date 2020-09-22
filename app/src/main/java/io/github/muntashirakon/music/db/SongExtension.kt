@@ -1,6 +1,6 @@
-package code.name.monkey.retromusic.db
+package io.github.muntashirakon.music.db
 
-import code.name.monkey.retromusic.model.Song
+import io.github.muntashirakon.music.model.Song
 
 fun List<SongEntity>.toSongs(): List<Song> {
     return map {

@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.network.conversion
+package io.github.muntashirakon.music.network.conversion
 
 import okhttp3.MediaType
 import okhttp3.RequestBody

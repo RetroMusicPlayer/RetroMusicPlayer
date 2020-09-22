@@ -11,12 +11,12 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
-package code.name.monkey.retromusic.model
+package io.github.muntashirakon.music.model
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import code.name.monkey.retromusic.R
+import io.github.muntashirakon.music.R
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

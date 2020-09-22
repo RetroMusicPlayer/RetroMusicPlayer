@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.fragments
+package io.github.muntashirakon.music.fragments
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*

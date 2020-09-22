@@ -1,12 +1,12 @@
-package code.name.monkey.retromusic.glide
+package io.github.muntashirakon.music.glide
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.palette.BitmapPaletteTarget
-import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
-import code.name.monkey.retromusic.util.ColorUtil
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.glide.palette.BitmapPaletteTarget
+import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
+import io.github.muntashirakon.music.util.ColorUtil
 import com.bumptech.glide.request.animation.GlideAnimation
 
 

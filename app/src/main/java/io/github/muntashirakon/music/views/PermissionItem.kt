@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.views
+package io.github.muntashirakon.music.views
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -6,8 +6,8 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.accentOutlineColor
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.accentOutlineColor
 import kotlinx.android.synthetic.main.item_permission.view.*
 
 class PermissionItem @JvmOverloads constructor(

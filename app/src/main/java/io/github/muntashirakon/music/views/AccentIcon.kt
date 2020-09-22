@@ -1,10 +1,10 @@
-package code.name.monkey.retromusic.views
+package io.github.muntashirakon.music.views
 
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
-import code.name.monkey.retromusic.extensions.accentColor
+import io.github.muntashirakon.music.extensions.accentColor
 
 class AccentIcon @JvmOverloads constructor(
     context: Context,
