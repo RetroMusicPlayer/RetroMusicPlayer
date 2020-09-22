@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.annotation.LayoutRes
+import androidx.core.animation.doOnEnd
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -54,6 +55,12 @@ fun View.translateXAnimate(value: Float) {
         .apply {
             duration = 300
             start()
+            doOnEnd {
+               
+                if (value != 0f) {
+                    this@translateXAnimate.hide()
+                }
+            }
         }
 }
 
