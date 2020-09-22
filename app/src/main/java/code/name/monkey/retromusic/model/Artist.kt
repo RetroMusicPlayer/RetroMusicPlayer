@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.model
 
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import java.util.*
 
 data class Artist(
@@ -25,6 +26,9 @@ data class Artist(
     val name: String
         get() {
             val name = safeGetFirstAlbum().safeGetFirstSong().albumArtist
+            if (PreferenceUtil.albumArtistsOnly && MusicUtil.isVariousArtists(name)) {
+                return VARIOUS_ARTISTS_DISPLAY_NAME
+            }
             return if (MusicUtil.isArtistNameUnknown(name)) {
                 UNKNOWN_ARTIST_DISPLAY_NAME
             } else safeGetFirstAlbum().safeGetFirstSong().artistName
@@ -51,6 +55,8 @@ data class Artist(
 
     companion object {
         const val UNKNOWN_ARTIST_DISPLAY_NAME = "Unknown Artist"
+        const val VARIOUS_ARTISTS_DISPLAY_NAME = "Various Artists"
+        const val VARIOUS_ARTISTS_ID : Long = -2
         val empty = Artist(-1, emptyList())
 
     }
