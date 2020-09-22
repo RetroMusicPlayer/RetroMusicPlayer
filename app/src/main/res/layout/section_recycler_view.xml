@@ -5,8 +5,7 @@
     android:id="@+id/recentArtistContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="12dp">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/clickable_area"
@@ -14,7 +13,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?attr/rectSelector"
+        android:background="?attr/rectSelector"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,13 +29,12 @@
             android:textStyle="bold"
             tools:text="@tools:sample/full_names" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <code.name.monkey.retromusic.views.AccentIcon
             android:id="@+id/arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            app:srcCompat="@drawable/ic_arrow_forward"
-            app:tint="?attr/colorControlNormal" />
+            app:srcCompat="@drawable/ic_arrow_forward" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

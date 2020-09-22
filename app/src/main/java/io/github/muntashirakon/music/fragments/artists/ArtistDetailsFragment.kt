@@ -10,33 +10,41 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
+import io.github.muntashirakon.music.EXTRA_ALBUM_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.album.HorizontalAlbumAdapter
 import io.github.muntashirakon.music.adapter.song.SimpleSongAdapter
 import io.github.muntashirakon.music.dialogs.AddToPlaylistDialog
 import io.github.muntashirakon.music.extensions.applyColor
+import io.github.muntashirakon.music.extensions.applyOutlineColor
 import io.github.muntashirakon.music.extensions.show
 import io.github.muntashirakon.music.extensions.showToast
 import io.github.muntashirakon.music.fragments.albums.AlbumClickListener
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.glide.ArtistGlideRequest
-import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
+import io.github.muntashirakon.music.glide.SingleColorTarget
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.Artist
+import io.github.muntashirakon.music.network.Result
 import io.github.muntashirakon.music.network.model.LastFmArtist
+import io.github.muntashirakon.music.repository.RealRepository
 import io.github.muntashirakon.music.util.CustomArtistImageUtil
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.RetroUtil
-import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_artist_content.*
 import kotlinx.android.synthetic.main.fragment_artist_details.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
@@ -66,13 +74,10 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         setupRecyclerView()
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
-
             showArtist(it)
             startPostponedEnterTransition()
         })
-        detailsViewModel.getArtistInfo().observe(viewLifecycleOwner, Observer {
-            artistInfo(it)
-        })
+
 
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
@@ -133,6 +138,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         albumTitle.text = albumText
         songAdapter.swapDataSet(artist.songs.sortedBy { it.trackNumber })
         artist.albums?.let { albumAdapter.swapDataSet(it) }
+
     }
 
     private fun loadBiography(
@@ -141,7 +147,14 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     ) {
         biography = null
         this.lang = lang
-        detailsViewModel.loadBiography(name, lang, null)
+        detailsViewModel.getArtistInfo(name, lang, null)
+            .observe(viewLifecycleOwner, Observer { result ->
+                when (result) {
+                    is Result.Loading -> println("Loading")
+                    is Result.Error -> println("Error")
+                    is Result.Success -> artistInfo(result.data)
+                }
+            })
     }
 
     private fun artistInfo(lastFmArtist: LastFmArtist?) {
@@ -175,23 +188,24 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     private fun loadArtistImage(artist: Artist) {
         ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
             .generatePalette(requireContext()).build()
-            .dontAnimate().into(object : RetroMusicColoredTarget(image) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    startPostponedEnterTransition()
-                    setColors(colors)
+            .dontAnimate()
+            .into(object : SingleColorTarget(image) {
+                override fun onColorReady(color: Int) {
+                    setColors(color)
                 }
             })
     }
 
-    private fun setColors(color: MediaNotificationProcessor) {
-        shuffleAction.applyColor(color.backgroundColor)
-        playAction.applyColor(color.backgroundColor)
+    private fun setColors(color: Int) {
+        shuffleAction.applyColor(color)
+        playAction.applyOutlineColor(color)
     }
 
-    override fun onAlbumClick(albumId: Int, view: View) {
+
+    override fun onAlbumClick(albumId: Long, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
-            bundleOf("extra_album_id" to albumId),
+            bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
                 view to getString(R.string.transition_album_art)
@@ -216,7 +230,13 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(songs).show(childFragmentManager, "ADD_PLAYLIST")
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val playlists = get<RealRepository>().fetchPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToPlaylistDialog.create(playlists, songs)
+                            .show(childFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_set_artist_image -> {

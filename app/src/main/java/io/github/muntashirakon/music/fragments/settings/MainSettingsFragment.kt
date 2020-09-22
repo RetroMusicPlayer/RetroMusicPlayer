@@ -14,13 +14,19 @@
 
 package io.github.muntashirakon.music.fragments.settings
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import code.name.monkey.appthemehelper.ThemeStore
+import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.hide
+import io.github.muntashirakon.music.extensions.show
+import io.github.muntashirakon.music.util.NavigationUtil
 import kotlinx.android.synthetic.main.fragment_main_settings.*
 
 class MainSettingsFragment : Fragment(), View.OnClickListener {

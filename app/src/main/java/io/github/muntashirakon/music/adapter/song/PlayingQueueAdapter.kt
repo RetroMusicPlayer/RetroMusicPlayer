@@ -4,15 +4,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
-import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
-import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
-import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
-import com.h6ah4i.android.widget.advrecyclerview.swipeable.SwipeableItemAdapter
-import com.h6ah4i.android.widget.advrecyclerview.swipeable.SwipeableItemConstants
-import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAction
-import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionDefault
-import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionRemoveItem
-import com.h6ah4i.android.widget.advrecyclerview.swipeable.annotation.SwipeableItemResults
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.MusicPlayerRemote.isPlaying
@@ -21,6 +12,14 @@ import io.github.muntashirakon.music.helper.MusicPlayerRemote.removeFromQueue
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.ViewUtil
+import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
+import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
+import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.SwipeableItemAdapter
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.SwipeableItemConstants
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAction
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionDefault
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionRemoveItem
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class PlayingQueueAdapter(
@@ -153,8 +152,8 @@ class PlayingQueueAdapter(
             mDragStateFlags = flags
         }
 
-        override fun getSwipeableContainerView(): View? {
-            return dummyContainer
+        override fun getSwipeableContainerView(): View {
+            return dummyContainer!!
         }
     }
 
@@ -165,18 +164,15 @@ class PlayingQueueAdapter(
         private const val UP_NEXT = 2
     }
 
-    override fun onSwipeItem(
-        holder: ViewHolder?,
-        position: Int, @SwipeableItemResults result: Int
-    ): SwipeResultAction {
-        return if (result === SwipeableItemConstants.RESULT_CANCELED) {
+    override fun onSwipeItem(holder: ViewHolder, position: Int, result: Int): SwipeResultAction? {
+        return if (result == SwipeableItemConstants.RESULT_CANCELED) {
             SwipeResultActionDefault()
         } else {
             SwipedResultActionRemoveItem(this, position, activity)
         }
     }
 
-    override fun onGetSwipeReactionType(holder: ViewHolder?, position: Int, x: Int, y: Int): Int {
+    override fun onGetSwipeReactionType(holder: ViewHolder, position: Int, x: Int, y: Int): Int {
         return if (onCheckCanStartDrag(holder!!, position, x, y)) {
             SwipeableItemConstants.REACTION_CAN_NOT_SWIPE_BOTH_H
         } else {
@@ -184,10 +180,10 @@ class PlayingQueueAdapter(
         }
     }
 
-    override fun onSwipeItemStarted(p0: ViewHolder?, p1: Int) {
+    override fun onSwipeItemStarted(holder: ViewHolder, p1: Int) {
     }
 
-    override fun onSetSwipeBackground(holder: ViewHolder?, position: Int, result: Int) {
+    override fun onSetSwipeBackground(holder: ViewHolder, position: Int, result: Int) {
     }
 
     internal class SwipedResultActionRemoveItem(

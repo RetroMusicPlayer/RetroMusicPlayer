@@ -19,12 +19,16 @@ import android.view.View
 import androidx.preference.Preference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.fragments.LibraryViewModel
+import io.github.muntashirakon.music.fragments.ReloadType.HomeSections
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
  * @author Hemanth S (h4h13).
  */
 
 class OtherSettingsFragment : AbsSettingsFragment() {
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
     override fun invalidateSettings() {
         val languagePreference: ATEListPreference? = findPreference("language_name")
         languagePreference?.setOnPreferenceChangeListener { _, _ ->
@@ -42,6 +46,7 @@ class OtherSettingsFragment : AbsSettingsFragment() {
         val preference: Preference? = findPreference("last_added_interval")
         preference?.setOnPreferenceChangeListener { lastAdded, newValue ->
             setSummary(lastAdded, newValue)
+            libraryViewModel.forceReload(HomeSections)
             true
         }
         val languagePreference: Preference? = findPreference("language_name")

@@ -32,10 +32,17 @@ import io.github.muntashirakon.music.dialogs.SongDetailDialog
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.PaletteColorHolder
 import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.repository.RealRepository
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.RingtoneManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.core.KoinComponent
+import org.koin.core.get
 
-object SongMenuHelper {
+object SongMenuHelper : KoinComponent {
     const val MENU_RES = R.menu.menu_item_song
 
     fun handleMenuClick(activity: FragmentActivity, song: Song, menuItemId: Int): Boolean {
@@ -63,8 +70,13 @@ object SongMenuHelper {
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(song)
-                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                CoroutineScope(Dispatchers.IO).launch {
+                    val playlists = get<RealRepository>().fetchPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToPlaylistDialog.create(playlists, song)
+                            .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_play_next -> {

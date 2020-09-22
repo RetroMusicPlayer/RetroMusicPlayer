@@ -70,7 +70,7 @@ public class RetroUtil {
     }
 
     public static String formatValue(float value) {
-        String arr[] = {"", "K", "M", "B", "T", "P", "E"};
+        String[] arr = {"", "K", "M", "B", "T", "P", "E"};
         int index = 0;
         while ((value / 1000) >= 1) {
             value = value / 1000;

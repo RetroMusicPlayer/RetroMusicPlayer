@@ -69,7 +69,7 @@ public class AlbumGlideRequest {
         }
 
         @NonNull
-        public Builder checkIgnoreMediaStore(@NonNull Context context) {
+        public Builder checkIgnoreMediaStore() {
             return ignoreMediaStore(PreferenceUtil.INSTANCE.isIgnoreMediaStoreArtwork());
         }
 

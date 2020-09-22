@@ -14,12 +14,14 @@
 
 package io.github.muntashirakon.music.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.github.muntashirakon.music.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.play.core.review.ReviewManagerFactory
 
 object AppRater {
     private const val DO_NOT_SHOW_AGAIN = "do_not_show_again"// Package Name

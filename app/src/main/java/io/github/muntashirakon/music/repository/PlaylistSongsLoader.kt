@@ -18,12 +18,16 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
+import android.provider.MediaStore.Audio.Playlists.*
 import io.github.muntashirakon.music.Constants.IS_MUSIC
+import io.github.muntashirakon.music.extensions.getInt
+import io.github.muntashirakon.music.extensions.getLong
+import io.github.muntashirakon.music.extensions.getString
+import io.github.muntashirakon.music.extensions.getStringOrNull
 import io.github.muntashirakon.music.model.AbsCustomPlaylist
 import io.github.muntashirakon.music.model.Playlist
 import io.github.muntashirakon.music.model.PlaylistSong
 import io.github.muntashirakon.music.model.Song
-import java.util.*
 
 /**
  * Created by hemanths on 16/08/17.
@@ -43,8 +47,8 @@ object PlaylistSongsLoader {
     }
 
     @JvmStatic
-    fun getPlaylistSongList(context: Context, playlistId: Int): ArrayList<Song> {
-        val songs = arrayListOf<Song>()
+    fun getPlaylistSongList(context: Context, playlistId: Long): List<Song> {
+        val songs = mutableListOf<Song>()
         val cursor =
             makePlaylistSongCursor(
                 context,
@@ -65,21 +69,22 @@ object PlaylistSongsLoader {
         return songs
     }
 
-    private fun getPlaylistSongFromCursorImpl(cursor: Cursor, playlistId: Int): PlaylistSong {
-        val id = cursor.getInt(0)
-        val title = cursor.getString(1)
-        val trackNumber = cursor.getInt(2)
-        val year = cursor.getInt(3)
-        val duration = cursor.getLong(4)
-        val data = cursor.getString(5)
-        val dateModified = cursor.getLong(6)
-        val albumId = cursor.getInt(7)
-        val albumName = cursor.getString(8)
-        val artistId = cursor.getInt(9)
-        val artistName = cursor.getString(10)
-        val idInPlaylist = cursor.getInt(11)
-        val composer = cursor.getString(12)
-        val albumArtist = cursor.getString(13)
+    // TODO duplicated in [PlaylistRepository.kt]
+    private fun getPlaylistSongFromCursorImpl(cursor: Cursor, playlistId: Long): PlaylistSong {
+        val id = cursor.getLong(Members.AUDIO_ID)
+        val title = cursor.getString(AudioColumns.TITLE)
+        val trackNumber = cursor.getInt(AudioColumns.TRACK)
+        val year = cursor.getInt(AudioColumns.YEAR)
+        val duration = cursor.getLong(AudioColumns.DURATION)
+        val data = cursor.getString(AudioColumns.DATA)
+        val dateModified = cursor.getLong(AudioColumns.DATE_MODIFIED)
+        val albumId = cursor.getLong(AudioColumns.ALBUM_ID)
+        val albumName = cursor.getString(AudioColumns.ALBUM)
+        val artistId = cursor.getLong(AudioColumns.ARTIST_ID)
+        val artistName = cursor.getString(AudioColumns.ARTIST)
+        val idInPlaylist = cursor.getLong(Members._ID)
+        val composer = cursor.getString(AudioColumns.COMPOSER)
+        val albumArtist = cursor.getStringOrNull("album_artist")
         return PlaylistSong(
             id,
             title,
@@ -99,12 +104,12 @@ object PlaylistSongsLoader {
         )
     }
 
-    private fun makePlaylistSongCursor(context: Context, playlistId: Int): Cursor? {
+    private fun makePlaylistSongCursor(context: Context, playlistId: Long): Cursor? {
         try {
             return context.contentResolver.query(
-                MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId.toLong()),
+                Members.getContentUri("external", playlistId),
                 arrayOf(
-                    MediaStore.Audio.Playlists.Members.AUDIO_ID, // 0
+                    Members.AUDIO_ID, // 0
                     AudioColumns.TITLE, // 1
                     AudioColumns.TRACK, // 2
                     AudioColumns.YEAR, // 3
@@ -115,10 +120,10 @@ object PlaylistSongsLoader {
                     AudioColumns.ALBUM, // 8
                     AudioColumns.ARTIST_ID, // 9
                     AudioColumns.ARTIST, // 10
-                    MediaStore.Audio.Playlists.Members._ID,//11
+                    Members._ID,//11
                     AudioColumns.COMPOSER,//12
                     "album_artist"//13
-                ), IS_MUSIC, null, MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER
+                ), IS_MUSIC, null, Members.DEFAULT_SORT_ORDER
             )
         } catch (e: SecurityException) {
             return null

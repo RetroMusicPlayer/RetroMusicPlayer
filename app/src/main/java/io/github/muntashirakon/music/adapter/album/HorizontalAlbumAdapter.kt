@@ -3,8 +3,6 @@ package io.github.muntashirakon.music.adapter.album
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import code.name.monkey.appthemehelper.util.ATHUtil
-import com.bumptech.glide.Glide
 import io.github.muntashirakon.music.fragments.albums.AlbumClickListener
 import io.github.muntashirakon.music.glide.AlbumGlideRequest
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
@@ -13,6 +11,7 @@ import io.github.muntashirakon.music.interfaces.CabHolder
 import io.github.muntashirakon.music.model.Album
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 
 class HorizontalAlbumAdapter(
     activity: FragmentActivity,
@@ -30,14 +29,14 @@ class HorizontalAlbumAdapter(
     }
 
     override fun setColors(color: MediaNotificationProcessor, holder: ViewHolder) {
-        holder.title?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorPrimary))
-        holder.text?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorSecondary))
+        //holder.title?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorPrimary))
+        //holder.text?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorSecondary))
     }
 
     override fun loadAlbumCover(album: Album, holder: ViewHolder) {
         if (holder.image == null) return
         AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-            .checkIgnoreMediaStore(activity)
+            .checkIgnoreMediaStore()
             .generatePalette(activity)
             .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {

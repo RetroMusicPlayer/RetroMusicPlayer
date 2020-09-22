@@ -83,16 +83,16 @@ public final class BitmapEditor {
         int wh = w * h;
         int div = radius + radius + 1;
 
-        int r[] = new int[wh];
-        int g[] = new int[wh];
-        int b[] = new int[wh];
-        int a[] = new int[wh];
+        int[] r = new int[wh];
+        int[] g = new int[wh];
+        int[] b = new int[wh];
+        int[] a = new int[wh];
         int rsum, gsum, bsum, asum, x, y, i, p, yp, yi, yw;
-        int vmin[] = new int[Math.max(w, h)];
+        int[] vmin = new int[Math.max(w, h)];
 
         int divsum = (div + 1) >> 1;
         divsum *= divsum;
-        int dv[] = new int[256 * divsum];
+        int[] dv = new int[256 * divsum];
         for (i = 0; i < 256 * divsum; i++) {
             dv[i] = (i / divsum);
         }
@@ -295,7 +295,7 @@ public final class BitmapEditor {
     public static boolean PerceivedBrightness(int will_White, int[] c) {
         double TBT = Math.sqrt(c[0] * c[0] * .241 + c[1] * c[1] * .691 + c[2] * c[2] * .068);
         //    Log.d("themee",TBT+"");
-        return (TBT > will_White) ? false : true;
+        return !(TBT > will_White);
     }
 
     public static int[] getAverageColorRGB(Bitmap bitmap) {
@@ -404,15 +404,15 @@ public final class BitmapEditor {
         int wh = w * h;
         int div = radius + radius + 1;
 
-        int r[] = new int[wh];
-        int g[] = new int[wh];
-        int b[] = new int[wh];
+        int[] r = new int[wh];
+        int[] g = new int[wh];
+        int[] b = new int[wh];
         int rsum, gsum, bsum, x, y, i, p, yp, yi, yw;
-        int vmin[] = new int[Math.max(w, h)];
+        int[] vmin = new int[Math.max(w, h)];
 
         int divsum = (div + 1) >> 1;
         divsum *= divsum;
-        int dv[] = new int[256 * divsum];
+        int[] dv = new int[256 * divsum];
         for (i = 0; i < 256 * divsum; i++) {
             dv[i] = (i / divsum);
         }
@@ -635,8 +635,7 @@ public final class BitmapEditor {
 
     public static boolean TrueIfBitmapBigger(Bitmap bitmap, int size) {
         int sizeBitmap = (bitmap.getHeight() > bitmap.getWidth()) ? bitmap.getHeight() : bitmap.getWidth();
-        if (sizeBitmap > size) return true;
-        return false;
+        return sizeBitmap > size;
     }
 
     public static Bitmap GetRoundedBitmapWithBlurShadow(Bitmap original, int paddingTop, int paddingBottom, int paddingLeft, int paddingRight) {

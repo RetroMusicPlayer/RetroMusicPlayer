@@ -14,7 +14,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -41,7 +40,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     val repository by inject<Repository>()
 
     lateinit var saveFab: MaterialButton
-    protected var id: Int = 0
+    protected var id: Long = 0
         private set
     private var paletteColorPrimary: Int = 0
     private var isInNoImageMode: Boolean = false
@@ -182,11 +181,9 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         saveFab = findViewById(R.id.saveTags)
         getIntentExtras()
 
-        lifecycleScope.launchWhenCreated {
-            songPaths = getSongPaths()
-            if (songPaths!!.isEmpty()) {
-                finish()
-            }
+        songPaths = getSongPaths()
+        if (songPaths!!.isEmpty()) {
+            finish()
         }
         setUpViews()
     }
@@ -254,11 +251,11 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private fun getIntentExtras() {
         val intentExtras = intent.extras
         if (intentExtras != null) {
-            id = intentExtras.getInt(EXTRA_ID)
+            id = intentExtras.getLong(EXTRA_ID)
         }
     }
 
-    protected abstract suspend fun getSongPaths(): List<String>
+    protected abstract fun getSongPaths(): List<String>
 
     protected fun searchWebFor(vararg keys: String) {
         val stringBuilder = StringBuilder()
@@ -399,7 +396,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         }
     }
 
-    class ArtworkInfo constructor(val albumId: Int, val artwork: Bitmap?)
+    class ArtworkInfo constructor(val albumId: Long, val artwork: Bitmap?)
 
     companion object {
 

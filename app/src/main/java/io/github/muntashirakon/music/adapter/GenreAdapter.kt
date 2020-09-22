@@ -1,5 +1,6 @@
 package io.github.muntashirakon.music.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,14 +23,14 @@ class GenreAdapter(
     var dataSet: List<Genre>,
     private val mItemLayoutRes: Int
 ) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
-
-
+    val colors = listOf<Int>(Color.RED, Color.BLUE)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(activity).inflate(mItemLayoutRes, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val genre = dataSet[position]
+
         holder.title?.text = genre.name
         holder.text?.text = String.format(
             Locale.getDefault(),

@@ -104,7 +104,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
                 }
             }
         })
-        val fastScroller = ThemedFastScroller.create(recyclerView)
+        ThemedFastScroller.create(recyclerView)
     }
 
     private fun checkForPadding() {

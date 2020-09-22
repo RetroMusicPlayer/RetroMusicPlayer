@@ -14,10 +14,13 @@
 
 package io.github.muntashirakon.music.model
 
+import androidx.annotation.StringRes
 import io.github.muntashirakon.music.HomeSection
 
-class Home(
+data class Home(
     val arrayList: List<Any>,
     @HomeSection
-    val homeSection: Int
+    val homeSection: Int,
+    @StringRes
+    val titleRes: Int
 )

@@ -115,6 +115,7 @@
         <activity android:name=".activities.bugreport.BugReportActivity" />
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
+        <activity android:name=".activities.PermissionActivity" />
 
         <activity
             android:name=".activities.LockScreenActivity"
@@ -252,11 +253,9 @@
         <meta-data
             android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
             android:value="GlideModule" />
+
         <meta-data
             android:name="com.android.vending.splits.required"
             android:value="true" />
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 </manifest>

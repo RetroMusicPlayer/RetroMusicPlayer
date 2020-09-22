@@ -16,8 +16,10 @@ package io.github.muntashirakon.music.model
 
 import com.google.gson.annotations.SerializedName
 
-class Contributor(
+data class Contributor(
     val name: String,
     val summary: String,
-    val link: String, @SerializedName("profile_image") val profileImage: String
+    val link: String,
+    @SerializedName("profile_image")
+    val profileImage: String
 )

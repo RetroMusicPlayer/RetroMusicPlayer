@@ -2,12 +2,15 @@ package io.github.muntashirakon.music.extensions
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.drawable.Drawable
 import android.os.PowerManager
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.IntegerRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
@@ -73,4 +76,12 @@ fun Fragment.showToast(@StringRes stringRes: Int) {
 
 fun Fragment.showToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+}
+
+fun Context.getDrawableCompat(@DrawableRes drawableRes: Int): Drawable {
+    return AppCompatResources.getDrawable(this, drawableRes)!!
+}
+
+fun Fragment.getDrawableCompat(@DrawableRes drawableRes: Int): Drawable {
+    return AppCompatResources.getDrawable(requireContext(), drawableRes)!!
 }

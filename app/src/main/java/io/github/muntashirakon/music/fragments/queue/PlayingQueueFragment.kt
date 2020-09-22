@@ -22,7 +22,6 @@ import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.song.PlayingQueueAdapter
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
-import io.github.muntashirakon.music.interfaces.MainActivityFragmentCallbacks
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
@@ -33,13 +32,7 @@ import kotlinx.android.synthetic.main.activity_playing_queue.*
 /**
  * Created by hemanths on 2019-12-08.
  */
-class PlayingQueueFragment :
-    AbsRecyclerViewFragment<PlayingQueueAdapter, LinearLayoutManager>(),
-    MainActivityFragmentCallbacks {
-
-    override fun handleBackPress(): Boolean {
-        return false
-    }
+class PlayingQueueFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, LinearLayoutManager>() {
 
     private lateinit var wrappedAdapter: RecyclerView.Adapter<*>
     private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null

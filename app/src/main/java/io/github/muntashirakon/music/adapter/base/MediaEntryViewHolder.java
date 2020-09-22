@@ -113,6 +113,7 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
         itemView.setOnLongClickListener(this);
     }
 
+    @Nullable
     @Override
     public View getSwipeableContainerView() {
         return null;
@@ -129,11 +130,12 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
     }
 
     public void setImageTransitionName(@NonNull String transitionName) {
-        if (imageContainerCard != null) {
+        itemView.setTransitionName(transitionName);
+        /* if (imageContainerCard != null) {
             imageContainerCard.setTransitionName(transitionName);
         }
         if (image != null) {
             image.setTransitionName(transitionName);
-        }
+        }*/
     }
 }

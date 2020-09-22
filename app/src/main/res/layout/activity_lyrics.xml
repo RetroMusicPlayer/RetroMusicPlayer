@@ -12,10 +12,10 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:lrcLabel="@string/no_lyrics_found"
-        app:lrcNormalTextSize="32sp"
-        app:lrcPadding="16dp"
+        app:lrcNormalTextSize="24sp"
+        app:lrcPadding="24dp"
         app:lrcTextGravity="left"
-        app:lrcTextSize="32sp" />
+        app:lrcTextSize="28sp" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/appBarLayout"

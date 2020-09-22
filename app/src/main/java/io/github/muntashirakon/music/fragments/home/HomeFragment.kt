@@ -16,49 +16,40 @@ package io.github.muntashirakon.music.fragments.home
 
 import android.app.ActivityOptions
 import android.os.Bundle
-import android.util.DisplayMetrics
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import io.github.muntashirakon.music.EXTRA_PLAYLIST
+import io.github.muntashirakon.music.HISTORY_PLAYLIST
+import io.github.muntashirakon.music.LAST_ADDED_PLAYLIST
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.TOP_PLAYED_PLAYLIST
 import io.github.muntashirakon.music.adapter.HomeAdapter
 import io.github.muntashirakon.music.extensions.findActivityNavController
 import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.glide.ProfileBannerGlideRequest
 import io.github.muntashirakon.music.glide.UserProfileGlideRequest
-import io.github.muntashirakon.music.helper.MusicPlayerRemote
-import io.github.muntashirakon.music.model.smartplaylist.HistoryPlaylist
-import io.github.muntashirakon.music.model.smartplaylist.LastAddedPlaylist
-import io.github.muntashirakon.music.model.smartplaylist.TopTracksPlaylist
-import io.github.muntashirakon.music.repository.Repository
 import io.github.muntashirakon.music.util.NavigationUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
+import com.bumptech.glide.Glide
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment :
     AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+    }
 
-    private val repository by inject<Repository>()
     private val libraryViewModel: LibraryViewModel by sharedViewModel()
-
-    private val displayMetrics: DisplayMetrics
-        get() {
-            val display = mainActivity.windowManager.defaultDisplay
-            val metrics = DisplayMetrics()
-            display.getMetrics(metrics)
-            return metrics
-        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,31 +65,26 @@ class HomeFragment :
 
         lastAdded.setOnClickListener {
             findActivityNavController(R.id.fragment_container).navigate(
-                R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to LastAddedPlaylist())
+                R.id.detailListFragment,
+                bundleOf("type" to LAST_ADDED_PLAYLIST)
             )
         }
 
         topPlayed.setOnClickListener {
             findActivityNavController(R.id.fragment_container).navigate(
-                R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to TopTracksPlaylist())
+                R.id.detailListFragment,
+                bundleOf("type" to TOP_PLAYED_PLAYLIST)
             )
         }
 
         actionShuffle.setOnClickListener {
-            lifecycleScope.launch {
-                MusicPlayerRemote.openAndShuffleQueue(
-                    repository.allSongs(),
-                    true
-                )
-            }
+            libraryViewModel.shuffleSongs()
         }
 
         history.setOnClickListener {
-            requireActivity().findNavController(R.id.fragment_container).navigate(
-                R.id.playlistDetailsFragment,
-                bundleOf(EXTRA_PLAYLIST to HistoryPlaylist())
+            findActivityNavController(R.id.fragment_container).navigate(
+                R.id.detailListFragment,
+                bundleOf("type" to HISTORY_PLAYLIST)
             )
         }
 
@@ -118,7 +104,7 @@ class HomeFragment :
             adapter = homeAdapter
         }
 
-        libraryViewModel.homeLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getHome().observe(viewLifecycleOwner, Observer {
             homeAdapter.swapData(it)
         })
 
@@ -136,6 +122,14 @@ class HomeFragment :
             Glide.with(requireActivity()),
             UserProfileGlideRequest.getUserModel()
         ).build().into(userImage)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.removeItem(R.id.action_grid_size)
+        menu.removeItem(R.id.action_layout_type)
+        menu.removeItem(R.id.action_sort_order)
+        menu.findItem(R.id.action_settings).setShowAsAction(SHOW_AS_ACTION_IF_ROOM)
     }
 
     companion object {

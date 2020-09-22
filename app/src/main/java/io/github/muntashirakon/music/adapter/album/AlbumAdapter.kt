@@ -101,11 +101,10 @@ open class AlbumAdapter(
         }
 
         AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-            .checkIgnoreMediaStore(activity)
+            .checkIgnoreMediaStore()
             .generatePalette(activity)
             .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
-
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
                 }
@@ -137,7 +136,7 @@ open class AlbumAdapter(
     private fun getSongList(albums: List<Album>): List<Song> {
         val songs = ArrayList<Song>()
         for (album in albums) {
-            songs.addAll(album.songs!!)
+            songs.addAll(album.songs)
         }
         return songs
     }
@@ -171,7 +170,7 @@ open class AlbumAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                image?.let { albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, it) }
+                albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, itemView)
             }
         }
 

@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.muntashirakon.music.R;
+import io.github.muntashirakon.music.db.PlaylistWithSongs;
 import io.github.muntashirakon.music.helper.M3UWriter;
 import io.github.muntashirakon.music.model.Playlist;
 import io.github.muntashirakon.music.model.PlaylistSong;
@@ -42,7 +43,7 @@ import static android.provider.MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
 
 public class PlaylistsUtil {
 
-    public static int createPlaylist(@NonNull final Context context, @Nullable final String name) {
+    public static long createPlaylist(@NonNull final Context context, @Nullable final String name) {
         int id = -1;
         if (name != null && name.length() > 0) {
             try {
@@ -100,13 +101,13 @@ public class PlaylistsUtil {
         }
     }
 
-    public static void addToPlaylist(@NonNull final Context context, final Song song, final int playlistId, final boolean showToastOnFinish) {
+    public static void addToPlaylist(@NonNull final Context context, final Song song, final long playlistId, final boolean showToastOnFinish) {
         List<Song> helperList = new ArrayList<>();
         helperList.add(song);
         addToPlaylist(context, helperList, playlistId, showToastOnFinish);
     }
 
-    public static void addToPlaylist(@NonNull final Context context, @NonNull final List<Song> songs, final int playlistId, final boolean showToastOnFinish) {
+    public static void addToPlaylist(@NonNull final Context context, @NonNull final List<Song> songs, final long playlistId, final boolean showToastOnFinish) {
         final int size = songs.size();
         final ContentResolver resolver = context.getContentResolver();
         final String[] projection = new String[]{
@@ -179,7 +180,7 @@ public class PlaylistsUtil {
         return "";
     }
 
-    public static void removeFromPlaylist(@NonNull final Context context, @NonNull final Song song, int playlistId) {
+    public static void removeFromPlaylist(@NonNull final Context context, @NonNull final Song song, long playlistId) {
         Uri uri = MediaStore.Audio.Playlists.Members.getContentUri(
                 "external", playlistId);
         String selection = MediaStore.Audio.Playlists.Members.AUDIO_ID + " =?";
@@ -192,7 +193,7 @@ public class PlaylistsUtil {
     }
 
     public static void removeFromPlaylist(@NonNull final Context context, @NonNull final List<PlaylistSong> songs) {
-        final int playlistId = songs.get(0).getPlaylistId();
+        final long playlistId = songs.get(0).getPlaylistId();
         Uri uri = MediaStore.Audio.Playlists.Members.getContentUri(
                 "external", playlistId);
         String[] selectionArgs = new String[songs.size()];
@@ -210,7 +211,7 @@ public class PlaylistsUtil {
         }
     }
 
-    public static boolean doPlaylistContains(@NonNull final Context context, final long playlistId, final int songId) {
+    public static boolean doPlaylistContains(@NonNull final Context context, final long playlistId, final long songId) {
         if (playlistId != -1) {
             try {
                 Cursor c = context.getContentResolver().query(
@@ -228,7 +229,7 @@ public class PlaylistsUtil {
         return false;
     }
 
-    public static boolean moveItem(@NonNull final Context context, int playlistId, int from, int to) {
+    public static boolean moveItem(@NonNull final Context context, long playlistId, int from, int to) {
         return MediaStore.Audio.Playlists.Members.moveItem(context.getContentResolver(),
                 playlistId, from, to);
     }
@@ -247,7 +248,11 @@ public class PlaylistsUtil {
     }
 
     public static File savePlaylist(Context context, Playlist playlist) throws IOException {
-        return M3UWriter.write(context, new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
+        return M3UWriter.write(new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
+    }
+
+    public static File savePlaylistWithSongs(Context context, PlaylistWithSongs playlist) throws IOException {
+        return M3UWriter.writeIO(new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
     }
 
     public static boolean doesPlaylistExist(@NonNull final Context context, final int playlistId) {

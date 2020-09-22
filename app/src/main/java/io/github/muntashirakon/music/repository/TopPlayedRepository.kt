@@ -116,13 +116,13 @@ class RealTopPlayedRepository(
 
     private fun makeTopTracksCursorImpl(): SortedLongCursor? {
         // first get the top results ids from the internal database
-        val songs =
+        val cursor =
             SongPlayCountStore.getInstance(context).getTopPlayedResults(NUMBER_OF_TOP_TRACKS)
 
-        songs.use { localSongs ->
+        cursor.use { songs ->
             return makeSortedCursor(
-                localSongs,
-                localSongs.getColumnIndex(SongPlayCountStore.SongPlayCountColumns.ID)
+                songs,
+                songs.getColumnIndex(SongPlayCountStore.SongPlayCountColumns.ID)
             )
         }
     }

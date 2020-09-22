@@ -71,9 +71,7 @@ class LibraryPreferenceDialog : DialogFragment() {
                 categoryAdapter.categoryInfos = PreferenceUtil.defaultCategories
             }
             .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(
-                android.R.string.ok
-            ) { _, _ -> updateCategories(categoryAdapter.categoryInfos) }
+            .setPositiveButton(android.R.string.ok) { _, _ -> updateCategories(categoryAdapter.categoryInfos) }
             .setView(view)
             .create()
             .colorButtons()

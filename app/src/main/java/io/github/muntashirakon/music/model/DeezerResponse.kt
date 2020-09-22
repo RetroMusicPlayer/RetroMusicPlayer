@@ -1,4 +1,4 @@
-package io.github.muntashirakon.music.deezer
+package io.github.muntashirakon.music.model
 
 import com.google.gson.annotations.SerializedName
 

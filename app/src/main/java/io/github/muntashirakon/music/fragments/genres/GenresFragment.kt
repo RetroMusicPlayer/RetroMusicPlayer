@@ -21,18 +21,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.GenreAdapter
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewFragment
-import io.github.muntashirakon.music.interfaces.MainActivityFragmentCallbacks
+import com.google.android.material.transition.platform.MaterialFadeThrough
 
-class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
-    MainActivityFragmentCallbacks {
-
-    override fun handleBackPress(): Boolean {
-        return false
+class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.genresLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getGenre().observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else

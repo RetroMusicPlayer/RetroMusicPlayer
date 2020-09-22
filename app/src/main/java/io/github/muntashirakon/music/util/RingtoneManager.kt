@@ -73,7 +73,7 @@ class RingtoneManager(val context: Context) {
         }
 
         fun getDialog(context: Context): AlertDialog {
-            return MaterialAlertDialogBuilder(context)
+            return MaterialAlertDialogBuilder(context, R.style.MaterialAlertDialogTheme)
                 .setTitle(R.string.dialog_title_set_ringtone)
                 .setMessage(R.string.dialog_message_set_ringtone)
                 .setPositiveButton(android.R.string.ok) { _, _ ->

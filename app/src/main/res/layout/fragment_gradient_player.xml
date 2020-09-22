@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:paddingBottom="48dp">
 
-         <fragment
+        <fragment
              android:id="@+id/playerAlbumCoverFragment"
              android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
              android:layout_width="0dp"
@@ -74,7 +74,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_default="spread">
+            app:layout_constraintWidth_default="spread"
+            tools:background="@color/md_red_500">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/queueIcon"
@@ -100,8 +101,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="wrap"
                 app:layout_constraintStart_toEndOf="@id/queueIcon"
-                app:layout_constraintTop_toTopOf="@id/queueIcon"
-                tools:text="@tools:sample/lorem/random" />
+                app:layout_constraintTop_toTopOf="@id/queueIcon" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/repeatButton"

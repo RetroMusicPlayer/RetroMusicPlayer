@@ -84,11 +84,11 @@ import io.github.muntashirakon.music.util.MusicUtil;
 import io.github.muntashirakon.music.util.PreferenceUtil;
 import io.github.muntashirakon.music.util.RetroUtil;
 
-import static io.github.muntashirakon.music.ConstantsKt.ALBUM_ART_ON_LOCKSCREEN;
+import static io.github.muntashirakon.music.ConstantsKt.ALBUM_ART_ON_LOCK_SCREEN;
 import static io.github.muntashirakon.music.ConstantsKt.BLURRED_ALBUM_ART;
 import static io.github.muntashirakon.music.ConstantsKt.CLASSIC_NOTIFICATION;
 import static io.github.muntashirakon.music.ConstantsKt.COLORED_NOTIFICATION;
-import static io.github.muntashirakon.music.ConstantsKt.GAPLESS_PLAYBACK;
+import static io.github.muntashirakon.music.ConstantsKt.GAP_LESS_PLAYBACK;
 import static io.github.muntashirakon.music.ConstantsKt.TOGGLE_HEADSET;
 
 /**
@@ -618,7 +618,7 @@ public class MusicService extends Service implements
                 break;
             case SHUFFLE_MODE_NONE:
                 this.shuffleMode = shuffleMode;
-                int currentSongId = Objects.requireNonNull(getCurrentSong()).getId();
+                long currentSongId = Objects.requireNonNull(getCurrentSong()).getId();
                 playingQueue = new ArrayList<>(originalPlayingQueue);
                 int newPosition = 0;
                 if (getPlayingQueue() != null) {
@@ -727,7 +727,7 @@ public class MusicService extends Service implements
     @Override
     public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
         switch (key) {
-            case GAPLESS_PLAYBACK:
+            case GAP_LESS_PLAYBACK:
                 if (sharedPreferences.getBoolean(key, false)) {
                     prepareNext();
                 } else {
@@ -736,7 +736,7 @@ public class MusicService extends Service implements
                     }
                 }
                 break;
-            case ALBUM_ART_ON_LOCKSCREEN:
+            case ALBUM_ART_ON_LOCK_SCREEN:
             case BLURRED_ALBUM_ART:
                 updateMediaSessionMetaData();
                 break;
@@ -1054,15 +1054,17 @@ public class MusicService extends Service implements
 
         final Song song = getCurrentSong();
 
-        intent.putExtra("id", song.getId());
-        intent.putExtra("artist", song.getArtistName());
-        intent.putExtra("album", song.getAlbumName());
-        intent.putExtra("track", song.getTitle());
-        intent.putExtra("duration", song.getDuration());
-        intent.putExtra("position", (long) getSongProgressMillis());
-        intent.putExtra("playing", isPlaying());
-        intent.putExtra("scrobbling_source", RETRO_MUSIC_PACKAGE_NAME);
-        sendStickyBroadcast(intent);
+        if (song != null) {
+            intent.putExtra("id", song.getId());
+            intent.putExtra("artist", song.getArtistName());
+            intent.putExtra("album", song.getAlbumName());
+            intent.putExtra("track", song.getTitle());
+            intent.putExtra("duration", song.getDuration());
+            intent.putExtra("position", (long) getSongProgressMillis());
+            intent.putExtra("playing", isPlaying());
+            intent.putExtra("scrobbling_source", RETRO_MUSIC_PACKAGE_NAME);
+            sendStickyBroadcast(intent);
+        }
     }
 
     public void toggleShuffle() {
@@ -1349,7 +1351,7 @@ public class MusicService extends Service implements
                 0);
 
         mediaSession = new MediaSessionCompat(this,
-                "M",
+                "Metro",
                 mediaButtonReceiverComponentName,
                 mediaButtonReceiverPendingIntent);
         MediaSessionCallback mediasessionCallback = new MediaSessionCallback(

@@ -5,10 +5,6 @@
     android:id="@+id/retro_graph"
     app:startDestination="@id/libraryFragment">
 
-    <include app:graph="@navigation/settings_graph" />
-
-    <include app:graph="@navigation/library_graph" />
-
     <fragment
         android:id="@+id/genreDetailsFragment"
         android:name="io.github.muntashirakon.music.fragments.genres.GenreDetailsFragment"
@@ -26,7 +22,7 @@
         tools:layout="@layout/fragment_playlist_detail">
         <argument
             android:name="extra_playlist"
-            app:argType="io.github.muntashirakon.music.model.Playlist" />
+            app:argType="io.github.muntashirakon.music.db.PlaylistWithSongs" />
     </fragment>
 
     <fragment
@@ -36,7 +32,7 @@
         tools:layout="@layout/fragment_album_details">
         <argument
             android:name="extra_album_id"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
 
     <fragment
@@ -46,21 +42,14 @@
         tools:layout="@layout/fragment_artist_details">
         <argument
             android:name="extra_artist_id"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
 
     <fragment
         android:id="@+id/libraryFragment"
         android:name="io.github.muntashirakon.music.fragments.library.LibraryFragment"
         android:label=""
-        tools:layout="@layout/fragment_library">
-        <action
-            android:id="@+id/action_main_to_library"
-            app:destination="@id/library_graph" />
-        <action
-            android:id="@+id/action_main_to_settings"
-            app:destination="@id/settings_graph" />
-    </fragment>
+        tools:layout="@layout/fragment_library" />
 
     <fragment
         android:id="@+id/detailListFragment"
@@ -82,5 +71,9 @@
         android:name="io.github.muntashirakon.music.activities.SettingsActivity"
         android:label="SettingsActivity" />
 
-
+    <activity
+        android:id="@+id/permissionFragment"
+        android:name="io.github.muntashirakon.music.activities.PermissionActivity"
+        android:label="PermissionFragment"
+        tools:layout="@layout/activity_permission" />
 </navigation>

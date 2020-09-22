@@ -22,8 +22,8 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.text.Html
 import androidx.core.app.NotificationCompat
+import androidx.core.text.HtmlCompat
 import androidx.media.app.NotificationCompat.MediaStyle
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.MainActivity
@@ -132,9 +132,19 @@ class PlayingNotificationImpl : PlayingNotification() {
                             .setLargeIcon(bitmapFinal)
                             .setContentIntent(clickIntent)
                             .setDeleteIntent(deleteIntent)
-                            .setContentTitle(Html.fromHtml("<b>" + song.title + "</b>"))
+                            .setContentTitle(
+                                HtmlCompat.fromHtml(
+                                    "<b>" + song.title + "</b>",
+                                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                                )
+                            )
                             .setContentText(song.artistName)
-                            .setSubText(Html.fromHtml("<b>" + song.albumName + "</b>"))
+                            .setSubText(
+                                HtmlCompat.fromHtml(
+                                    "<b>" + song.albumName + "</b>",
+                                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                                )
+                            )
                             .setOngoing(isPlaying)
                             .setShowWhen(false)
                             .addAction(toggleFavorite)

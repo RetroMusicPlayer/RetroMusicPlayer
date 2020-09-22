@@ -7,8 +7,8 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 abstract class AbsCustomPlaylist(
-    id: Int = -1,
-    name: String = ""
+    id: Long,
+    name: String
 ) : Playlist(id, name), KoinComponent {
 
     abstract fun songs(): List<Song>

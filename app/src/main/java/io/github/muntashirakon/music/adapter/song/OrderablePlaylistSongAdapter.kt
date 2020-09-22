@@ -3,19 +3,23 @@ package io.github.muntashirakon.music.adapter.song
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.R.menu
+import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.toSongEntity
+import code.name.monkey.retromusic.db.toSongs
+import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
+import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.model.PlaylistSong
+import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.ViewUtil
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemViewHolder
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
 import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
-import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.R.menu
-import io.github.muntashirakon.music.dialogs.RemoveFromPlaylistDialog
-import io.github.muntashirakon.music.interfaces.CabHolder
-import io.github.muntashirakon.music.model.PlaylistSong
-import io.github.muntashirakon.music.model.Song
-import io.github.muntashirakon.music.util.ViewUtil
 
 class OrderablePlaylistSongAdapter(
+    private val playlist: PlaylistEntity,
     activity: FragmentActivity,
     dataSet: ArrayList<Song>,
     itemLayoutRes: Int,
@@ -54,8 +58,8 @@ class OrderablePlaylistSongAdapter(
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<Song>) {
         when (menuItem.itemId) {
             R.id.action_remove_from_playlist -> {
-                RemoveFromPlaylistDialog.create(selection as ArrayList<PlaylistSong>)
-                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                RemoveSongFromPlaylistDialog.create(selection.toSongs(playlist.playListId))
+                    .show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
                 return
             }
         }
@@ -118,7 +122,7 @@ class OrderablePlaylistSongAdapter(
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.action_remove_from_playlist -> {
-                    RemoveFromPlaylistDialog.create(song as PlaylistSong)
+                    RemoveSongFromPlaylistDialog.create(song.toSongEntity(playlist.playListId))
                         .show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
                     return true
                 }

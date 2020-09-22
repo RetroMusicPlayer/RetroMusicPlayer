@@ -90,6 +90,7 @@ class AlbumCoverPagerAdapter(
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
             albumCover = view.findViewById(R.id.player_image)
             albumCover.setOnClickListener {
+                //LyricsDialog().show(childFragmentManager, "LyricsDialog")
                 showLyricsDialog()
             }
             return view
@@ -97,7 +98,7 @@ class AlbumCoverPagerAdapter(
 
         private fun showLyricsDialog() {
             lifecycleScope.launch(Dispatchers.IO) {
-                val data = MusicUtil.getLyrics(song)
+                val data: String = MusicUtil.getLyrics(song) ?: "No lyrics found"
                 withContext(Dispatchers.Main) {
                     MaterialAlertDialogBuilder(
                         requireContext(),

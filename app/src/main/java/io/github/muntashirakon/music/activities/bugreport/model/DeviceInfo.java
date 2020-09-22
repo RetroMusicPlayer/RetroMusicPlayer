@@ -87,7 +87,7 @@ public class DeviceInfo {
         return "Device info:\n"
                 + "---\n"
                 + "<table>\n"
-                + "<tr><td>App version</td><td>" + versionName + "</td></tr>\n"
+                + "<tr><td><b>App version</b></td><td>" + versionName + "</td></tr>\n"
                 + "<tr><td>App version code</td><td>" + versionCode + "</td></tr>\n"
                 + "<tr><td>Android build version</td><td>" + buildVersion + "</td></tr>\n"
                 + "<tr><td>Android release version</td><td>" + releaseVersion + "</td></tr>\n"

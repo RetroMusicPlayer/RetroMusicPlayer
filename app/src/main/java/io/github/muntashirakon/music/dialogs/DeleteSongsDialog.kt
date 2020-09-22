@@ -1,110 +1,24 @@
-/*
- * Copyright (c) 2019 Hemanth Savarala.
- *
- * Licensed under the GNU General Public License v3
- *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- */
-
 package io.github.muntashirakon.music.dialogs
 
 import android.app.Dialog
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.activities.saf.SAFGuideActivity
 import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.extraNotNull
 import io.github.muntashirakon.music.extensions.materialDialog
+import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
-import io.github.muntashirakon.music.util.SAFUtil
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DeleteSongsDialog : DialogFragment() {
-    @JvmField
-    var currentSong: Song? = null
-
-    @JvmField
-    var songsToRemove: List<Song>? = null
-
-    private var deleteSongsAsyncTask: DeleteSongsAsyncTask? = null
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
-        var title = 0
-        var message: CharSequence = ""
-        if (songs.size > 1) {
-            title = R.string.delete_songs_title
-            message = HtmlCompat.fromHtml(
-                String.format(getString(R.string.delete_x_songs), songs.size),
-                HtmlCompat.FROM_HTML_MODE_LEGACY
-            )
-        } else {
-            title = R.string.delete_song_title
-            message = HtmlCompat.fromHtml(
-                String.format(getString(R.string.delete_song_x), songs[0].title),
-                HtmlCompat.FROM_HTML_MODE_LEGACY
-            )
-        }
-
-        return materialDialog(title)
-            .setMessage(message)
-            .setCancelable(false)
-            .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(R.string.action_delete) { _, _ ->
-                if ((songs.size == 1) && MusicPlayerRemote.isPlaying(songs[0])) {
-                    MusicPlayerRemote.playNextSong()
-                }
-                songsToRemove = songs
-                deleteSongsAsyncTask = DeleteSongsAsyncTask(this@DeleteSongsDialog)
-                deleteSongsAsyncTask?.execute(DeleteSongsAsyncTask.LoadingInfo(songs, null))
-            }
-            .create()
-            .colorButtons()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            SAFGuideActivity.REQUEST_CODE_SAF_GUIDE -> {
-                SAFUtil.openTreePicker(this)
-            }
-            SAFUtil.REQUEST_SAF_PICK_TREE,
-            SAFUtil.REQUEST_SAF_PICK_FILE -> {
-                if (deleteSongsAsyncTask != null) {
-                    deleteSongsAsyncTask?.cancel(true)
-                }
-                deleteSongsAsyncTask = DeleteSongsAsyncTask(this)
-                deleteSongsAsyncTask?.execute(
-                    DeleteSongsAsyncTask.LoadingInfo(
-                        requestCode,
-                        resultCode,
-                        data
-                    )
-                )
-            }
-        }
-    }
-
-    fun deleteSongs(songs: List<Song>, safUris: List<Uri>?) {
-        MusicUtil.deleteTracks(requireActivity(), songs, safUris, Runnable {
-            dismiss()
-        })
-    }
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     companion object {
-
         fun create(song: Song): DeleteSongsDialog {
             val list = ArrayList<Song>()
             list.add(song)
@@ -119,5 +33,38 @@ class DeleteSongsDialog : DialogFragment() {
             return dialog
         }
     }
-}
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
+        val pair = if (songs.size > 1) {
+            Pair(
+                R.string.delete_songs_title,
+                HtmlCompat.fromHtml(
+                    String.format(getString(R.string.delete_x_songs), songs.size),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
+            )
+        } else {
+            Pair(
+                R.string.delete_song_title,
+                HtmlCompat.fromHtml(
+                    String.format(getString(R.string.delete_song_x), songs[0].title),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
+            )
+        }
+
+        return materialDialog(pair.first)
+            .setMessage(pair.second)
+            .setCancelable(false)
+            .setPositiveButton(R.string.action_delete) { _, _ ->
+                if (songs.isNotEmpty() and (songs.size == 1) and MusicPlayerRemote.isPlaying(songs.first())) {
+                    MusicPlayerRemote.playNextSong()
+                }
+                MusicUtil.deleteTracks(requireActivity(), songs)
+                libraryViewModel.deleteTracks(songs)
+            }
+            .create()
+            .colorButtons()
+    }
+}

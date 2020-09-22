@@ -14,17 +14,18 @@ import android.transition.Slide
 import android.widget.Toast
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.animation.GlideAnimation
-import com.bumptech.glide.request.target.SimpleTarget
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.extensions.appHandleColor
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteTranscoder
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
+import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.ImageUtil
 import io.github.muntashirakon.music.util.RetroColorUtil.generatePalette
 import io.github.muntashirakon.music.util.RetroColorUtil.getColor
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
 import java.util.*
@@ -44,9 +45,9 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         window.enterTransition = slide
     }
 
-    override fun loadImageFromFile(selectedFileUri: Uri?) {
+    override fun loadImageFromFile(selectedFile: Uri?) {
 
-        Glide.with(this@AlbumTagEditorActivity).load(selectedFileUri).asBitmap()
+        Glide.with(this@AlbumTagEditorActivity).load(selectedFile).asBitmap()
             .transcode(BitmapPaletteTranscoder(this), BitmapPaletteWrapper::class.java)
             .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
             .into(object : SimpleTarget<BitmapPaletteWrapper>() {
@@ -167,13 +168,9 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         )
     }
 
-    override suspend fun getSongPaths(): List<String> {
-        val songs = repository.albumById(id).songs
-        val paths = ArrayList<String>(songs!!.size)
-        for (song in songs) {
-            paths.add(song.data)
-        }
-        return paths
+    override fun getSongPaths(): List<String> {
+        return repository.albumById(id).songs
+            .map(Song::data)
     }
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {

@@ -32,7 +32,7 @@ class RetroShapeableImageView @JvmOverloads constructor(
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.RetroShapeableImageView, defStyle, -1)
         val cornerSize =
-            typedArray.getDimension(R.styleable.RetroShapeableImageView_retroCornerSize, 0f);
+            typedArray.getDimension(R.styleable.RetroShapeableImageView_retroCornerSize, 0f)
         updateCornerSize(cornerSize)
         typedArray.recycle()
     }

@@ -3,9 +3,7 @@ package io.github.muntashirakon.music.fragments.player.fit
 import android.animation.ObjectAnimator
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
@@ -26,7 +24,6 @@ import io.github.muntashirakon.music.helper.PlayPauseButtonOnClickHandler
 import io.github.muntashirakon.music.misc.SimpleOnSeekbarChangeListener
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.MusicUtil
-
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_fit_playback_controls.*

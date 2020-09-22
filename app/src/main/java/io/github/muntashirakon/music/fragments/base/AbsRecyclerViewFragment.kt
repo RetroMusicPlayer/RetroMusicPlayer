@@ -78,8 +78,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         return String(Character.toChars(unicode))
     }
 
-    private fun checkIsEmpty() {
-        emptyEmoji.text = getEmojiByUnicode(0x1F631)
+    private fun checkIsEmpty() { 
         emptyText.setText(emptyMessage)
         empty.visibility = if (adapter!!.itemCount == 0) View.VISIBLE else View.GONE
     }

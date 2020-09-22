@@ -1,25 +1,28 @@
 package io.github.muntashirakon.music.fragments.playlists
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.playlist.PlaylistAdapter
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewFragment
-import io.github.muntashirakon.music.interfaces.MainActivityFragmentCallbacks
+import com.google.android.material.transition.platform.MaterialFadeThrough
+import kotlinx.android.synthetic.main.fragment_library.*
 
-class PlaylistsFragment :
-    AbsRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>(),
-    MainActivityFragmentCallbacks {
-
-    override fun handleBackPress(): Boolean {
-        return false
+class PlaylistsFragment : AbsRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.playlisitsLiveData.observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getPlaylists().observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
@@ -30,8 +33,8 @@ class PlaylistsFragment :
     override val emptyMessage: Int
         get() = R.string.no_playlists
 
-    override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(requireContext(), 1)
+    override fun createLayoutManager(): LinearLayoutManager {
+        return LinearLayoutManager(requireContext())
     }
 
     override fun createAdapter(): PlaylistAdapter {
@@ -43,9 +46,18 @@ class PlaylistsFragment :
         )
     }
 
-    companion object {
-        fun newInstance(): PlaylistsFragment {
-            return PlaylistsFragment()
-        }
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.removeItem(R.id.action_grid_size)
+        menu.removeItem(R.id.action_layout_type)
+        menu.removeItem(R.id.action_sort_order)
+        menu.add(0, R.id.action_add_to_playlist, 0, R.string.new_playlist_title)
+        menu.add(0, R.id.action_import_playlist, 0, R.string.import_playlist)
+        menu.findItem(R.id.action_settings).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

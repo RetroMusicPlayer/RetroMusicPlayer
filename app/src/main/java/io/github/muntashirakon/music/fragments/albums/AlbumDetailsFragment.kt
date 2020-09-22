@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -15,7 +18,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
-import com.bumptech.glide.Glide
 import io.github.muntashirakon.music.EXTRA_ALBUM_ID
 import io.github.muntashirakon.music.EXTRA_ARTIST_ID
 import io.github.muntashirakon.music.R
@@ -26,22 +28,33 @@ import io.github.muntashirakon.music.adapter.song.SimpleSongAdapter
 import io.github.muntashirakon.music.dialogs.AddToPlaylistDialog
 import io.github.muntashirakon.music.dialogs.DeleteSongsDialog
 import io.github.muntashirakon.music.extensions.applyColor
+import io.github.muntashirakon.music.extensions.applyOutlineColor
 import io.github.muntashirakon.music.extensions.show
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.glide.AlbumGlideRequest
 import io.github.muntashirakon.music.glide.ArtistGlideRequest
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
+import io.github.muntashirakon.music.glide.SingleColorTarget
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.SortOrder
 import io.github.muntashirakon.music.model.Album
 import io.github.muntashirakon.music.model.Artist
+import io.github.muntashirakon.music.network.Result
 import io.github.muntashirakon.music.network.model.LastFmAlbum
+import io.github.muntashirakon.music.repository.RealRepository
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.RetroUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
+import com.google.android.material.transition.platform.MaterialArcMotion
+import com.google.android.material.transition.platform.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_album_content.*
 import kotlinx.android.synthetic.main.fragment_album_details.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
@@ -60,29 +73,27 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     private val savedSortOrder: String
         get() = PreferenceUtil.albumDetailSongSortOrder
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = 1000L
+            pathMotion = MaterialArcMotion()
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         mainActivity.hideBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
-
-        toolbar.title = null
-
+        toolbar.title = " "
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
-            showAlbum(it)
             startPostponedEnterTransition()
+            showAlbum(it)
         })
-        detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
-            loadArtistImage(it)
-        })
-        detailsViewModel.getMoreAlbums().observe(viewLifecycleOwner, Observer {
-            moreAlbums(it)
-        })
-        detailsViewModel.getAlbumInfo().observe(viewLifecycleOwner, Observer {
-            aboutAlbum(it)
-        })
+
         setupRecyclerView()
         artistImage.setOnClickListener {
             requireActivity().findNavController(R.id.fragment_container)
@@ -91,11 +102,11 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     bundleOf(EXTRA_ARTIST_ID to album.artistId)
                 )
         }
-        playAction.setOnClickListener { MusicPlayerRemote.openQueue(album.songs!!, 0, true) }
+        playAction.setOnClickListener { MusicPlayerRemote.openQueue(album.songs, 0, true) }
 
         shuffleAction.setOnClickListener {
             MusicPlayerRemote.openAndShuffleQueue(
-                album.songs!!,
+                album.songs,
                 true
             )
         }
@@ -134,20 +145,18 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun showAlbum(album: Album) {
-        if (album.songs!!.isEmpty()) {
+        if (album.songs.isEmpty()) {
             return
         }
         this.album = album
 
         albumTitle.text = album.title
-        val songText =
-            resources.getQuantityString(
-                R.plurals.albumSongs,
-                album.songCount,
-                album.songCount
-            )
+        val songText = resources.getQuantityString(
+            R.plurals.albumSongs,
+            album.songCount,
+            album.songCount
+        )
         songTitle.text = songText
-
         if (MusicUtil.getYearString(album.year) == "-") {
             albumText.text = String.format(
                 "%s • %s",
@@ -162,10 +171,25 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(album.songs))
             )
         }
-        loadAlbumCover()
+        loadAlbumCover(album)
         simpleSongAdapter.swapDataSet(album.songs)
-        detailsViewModel.loadArtist(album.artistId)
-        detailsViewModel.loadAlbumInfo(album)
+        detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner, Observer {
+            loadArtistImage(it)
+        })
+
+        detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is Result.Loading -> {
+                    println("Loading")
+                }
+                is Result.Error -> {
+                    println("Error")
+                }
+                is Result.Success -> {
+                    aboutAlbum(result.data)
+                }
+            }
+        })
     }
 
     private fun moreAlbums(albums: List<Album>) {
@@ -191,7 +215,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 aboutAlbumTitle.show()
                 aboutAlbumTitle.text =
                     String.format(getString(R.string.about_album_label), lastFmAlbum.album.name)
-                aboutAlbumText.text = lastFmAlbum.album.wiki.content
+                aboutAlbumText.text = HtmlCompat.fromHtml(
+                    lastFmAlbum.album.wiki.content,
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
             }
             if (lastFmAlbum.album.listeners.isNotEmpty()) {
                 listeners.show()
@@ -206,7 +233,11 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun loadArtistImage(artist: Artist) {
+        detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner, Observer {
+            moreAlbums(it)
+        })
         ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
+            .forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
             .generatePalette(requireContext())
             .build()
             .dontAnimate()
@@ -217,30 +248,29 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             })
     }
 
-    private fun loadAlbumCover() {
+    private fun loadAlbumCover(album: Album) {
         AlbumGlideRequest.Builder.from(Glide.with(requireContext()), album.safeGetFirstSong())
-            .checkIgnoreMediaStore(requireContext())
-            .ignoreMediaStore(PreferenceUtil.isIgnoreMediaStoreArtwork)
+            .checkIgnoreMediaStore()
             .generatePalette(requireContext())
             .build()
-            .dontAnimate()
-            .dontTransform()
-            .into(object : RetroMusicColoredTarget(image) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    setColors(colors)
+            .into(object : SingleColorTarget(image) {
+                override fun onColorReady(color: Int) {
+                    setColors(color)
                 }
             })
     }
 
-    private fun setColors(color: MediaNotificationProcessor) {
-        shuffleAction.applyColor(color.backgroundColor)
-        playAction.applyColor(color.backgroundColor)
+    private fun setColors(color: Int) {
+        shuffleAction.applyColor(color)
+        playAction.applyOutlineColor(color)
     }
 
-    override fun onAlbumClick(albumId: Int, view: View) {
+    override fun onAlbumClick(albumId: Long, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
-            bundleOf(EXTRA_ALBUM_ID to albumId)
+            bundleOf(EXTRA_ALBUM_ID to albumId),
+            null,
+            FragmentNavigatorExtras(view to getString(R.string.transition_album_art))
         )
     }
 
@@ -275,7 +305,13 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(songs).show(childFragmentManager, "ADD_PLAYLIST")
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val playlists = get<RealRepository>().fetchPlaylists()
+                    withContext(Dispatchers.Main) {
+                        AddToPlaylistDialog.create(playlists, songs)
+                            .show(childFragmentManager, "ADD_PLAYLIST")
+                    }
+                }
                 return true
             }
             R.id.action_delete_from_device -> {
@@ -326,29 +362,31 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     private fun setSaveSortOrder(sortOrder: String) {
         PreferenceUtil.albumDetailSongSortOrder = sortOrder
-        when (sortOrder) {
-            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs?.sortWith(Comparator { o1, o2 ->
+        val songs = when (sortOrder) {
+            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs.sortedWith { o1, o2 ->
                 o1.trackNumber.compareTo(
                     o2.trackNumber
                 )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs?.sortWith(Comparator { o1, o2 ->
+            }
+            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs.sortedWith { o1, o2 ->
                 o1.title.compareTo(
                     o2.title
                 )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs?.sortWith(Comparator { o1, o2 ->
+            }
+            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs.sortedWith { o1, o2 ->
                 o2.title.compareTo(
                     o1.title
                 )
-            })
-            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs?.sortWith(Comparator { o1, o2 ->
+            }
+            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
                 o1.duration.compareTo(
                     o2.duration
                 )
-            })
+            }
+            else -> throw IllegalArgumentException("invalid $sortOrder")
         }
-        album.songs?.let { simpleSongAdapter.swapDataSet(it) }
+        album = album.copy(songs = songs)
+        simpleSongAdapter.swapDataSet(album.songs)
     }
 
     companion object {

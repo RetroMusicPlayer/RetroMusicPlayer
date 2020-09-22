@@ -42,4 +42,19 @@ object VersionUtils {
     fun hasOreo(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
     }
+
+    /**
+     * @return true if device is running API >= 27
+     */
+    fun hasP(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
+    }
+
+    /**
+     * @return true if device is running API >= 28
+     */
+    @JvmStatic
+    fun hasQ(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+    }
 }

@@ -108,7 +108,7 @@ public class SongPlayCountStore extends SQLiteOpenHelper {
      */
     @NonNull
     private static String getColumnNameForWeek(final int week) {
-        return SongPlayCountColumns.WEEK_PLAY_COUNT + String.valueOf(week);
+        return SongPlayCountColumns.WEEK_PLAY_COUNT + week;
     }
 
     /**
