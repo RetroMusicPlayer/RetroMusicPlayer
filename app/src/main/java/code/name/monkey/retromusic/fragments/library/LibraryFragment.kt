@@ -14,17 +14,22 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.findNavController
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.state.NowPlayingPanelState
 import kotlinx.android.synthetic.main.fragment_library.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.lang.String
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
+
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
         retainInstance = true
-        mainActivity.hideBottomBarVisibility(true)
+        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITH)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         toolbar.setNavigationOnClickListener {

@@ -73,7 +73,6 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         setHasOptionsMenu(true)
         libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
         mainActivity.setSupportActionBar(toolbar)
-
         toolbar.title = null
         setupRecyclerView()
 

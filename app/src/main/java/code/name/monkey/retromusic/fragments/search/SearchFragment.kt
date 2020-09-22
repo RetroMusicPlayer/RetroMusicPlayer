@@ -20,10 +20,13 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.state.NowPlayingPanelState
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -33,6 +36,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         const val REQ_CODE_SPEECH_INPUT = 9001
     }
 
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
     private val viewModel: SearchViewModel by inject()
     private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
@@ -40,8 +44,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.hideBottomBarVisibility(false)
-
+        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
         setupRecyclerView()
         keyboardPopup.accentColor()
         searchView.addTextChangedListener(this)

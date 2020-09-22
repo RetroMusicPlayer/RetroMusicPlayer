@@ -9,12 +9,13 @@ import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
-import androidx.transition.TransitionManager
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.peekHeightAnimate
+import code.name.monkey.retromusic.extensions.translateXAnimate
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
@@ -217,7 +218,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             libraryViewModel.setPanelState(HIDE)
         } else {
             if (bottomNavigationView.isVisible) {
-                libraryViewModel.setPanelState(EXPAND)
+                libraryViewModel.setPanelState(COLLAPSED_WITH)
             } else {
                 libraryViewModel.setPanelState(COLLAPSED_WITHOUT)
             }
@@ -301,12 +302,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         }
     }
 
-    fun hideBottomNavigation() {
-        behavior.isHideable = true
-        behavior.peekHeight = 0
-        hideBottomBarVisibility(false)
-    }
-
     fun updateTabs() {
         bottomNavigationView.menu.clear()
         val currentTabs: List<CategoryInfo> = PreferenceUtil.libraryCategory
@@ -330,6 +325,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     private fun updatePanelState() {
         libraryViewModel.panelState.observe(this, { state ->
+            val isQueueEmpty = MusicPlayerRemote.playingQueue.isEmpty()
             when (state) {
                 EXPAND -> {
                     println("EXPAND")
@@ -337,32 +333,29 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 }
                 HIDE -> {
                     println("HIDE")
-                    behavior.isHideable = true
-                    behavior.peekHeight = 0
-                    collapsePanel()
                     ViewCompat.setElevation(slidingPanel, 0f)
                     ViewCompat.setElevation(bottomNavigationView, 10f)
+                    behavior.isHideable = true
+                    behavior.peekHeightAnimate(0)
+                    collapsePanel()
                 }
                 COLLAPSED_WITH -> {
                     println("COLLAPSED_WITH")
-                    TransitionManager.beginDelayedTransition(mainContent)
-                    bottomNavigationView.isVisible = true
                     val heightOfBar = bottomNavigationView.height
                     ViewCompat.setElevation(bottomNavigationView, 10f)
                     ViewCompat.setElevation(slidingPanel, 10f)
                     behavior.isHideable = false
-                    behavior.peekHeight = (heightOfBar * 2) - 24
+                    behavior.peekHeightAnimate(if(isQueueEmpty) 0 else (heightOfBar * 2) - 24)
+                    bottomNavigationView.translateXAnimate(0f)
                 }
                 COLLAPSED_WITHOUT -> {
                     println("COLLAPSED_WITHOUT")
-                    TransitionManager.beginDelayedTransition(mainContent)
-                    TransitionManager.beginDelayedTransition(slidingPanel)
                     val heightOfBar = bottomNavigationView.height
-                    bottomNavigationView.isVisible = false
                     ViewCompat.setElevation(bottomNavigationView, 10f)
                     ViewCompat.setElevation(slidingPanel, 10f)
                     behavior.isHideable = false
-                    behavior.peekHeight = heightOfBar - 24
+                    behavior.peekHeightAnimate(if(isQueueEmpty) 0 else heightOfBar - 24)
+                    bottomNavigationView.translateXAnimate(heightOfBar.toFloat())
                 }
                 else -> {
                     println("ELSE")
