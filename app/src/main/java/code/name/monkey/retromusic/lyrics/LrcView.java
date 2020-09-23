@@ -35,13 +35,12 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 
-import androidx.core.content.res.ResourcesCompat;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import code.name.monkey.retromusic.BuildConfig;
 import code.name.monkey.retromusic.R;
 
 /**
@@ -512,7 +511,9 @@ public class LrcView extends View {
             if (i > 0) {
                 y += ((mLrcEntryList.get(i - 1).getHeight() + mLrcEntryList.get(i).getHeight()) >> 1) + mDividerHeight;
             }
-            mLrcPaint.setTypeface(ResourcesCompat.getFont(getContext(), R.font.sans));
+            if (BuildConfig.DEBUG) {
+                //mLrcPaint.setTypeface(ResourcesCompat.getFont(getContext(), R.font.sans));
+            }
             if (i == mCurrentLine) {
                 mLrcPaint.setTextSize(mCurrentTextSize);
                 mLrcPaint.setColor(mCurrentTextColor);
