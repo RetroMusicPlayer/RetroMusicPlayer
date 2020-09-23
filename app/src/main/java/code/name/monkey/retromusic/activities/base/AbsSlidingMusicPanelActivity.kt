@@ -16,6 +16,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
@@ -34,6 +35,7 @@ import code.name.monkey.retromusic.fragments.player.full.FullPlayerFragment
 import code.name.monkey.retromusic.fragments.player.gradient.GradientPlayerFragment
 import code.name.monkey.retromusic.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
+import code.name.monkey.retromusic.fragments.player.peak.PeakPlayerFragment
 import code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment
 import code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment
@@ -68,6 +70,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
             setMiniPlayerAlphaProgress(slideOffset)
+            dimBackground.show()
+            dimBackground.alpha = slideOffset
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -77,6 +81,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 }
                 STATE_COLLAPSED -> {
                     onPanelCollapsed()
+                    dimBackground.hide()
                 }
                 else -> {
                     println("Do something")
@@ -85,6 +90,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         }
     }
 
+    fun getBottomSheetBehavior() = bottomSheetBehavior
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,10 +100,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setupBottomSheet()
         updatePanelState()
         updateColor()
+
+        val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
+        dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
+        dimBackground.setOnClickListener {
+            libraryViewModel.setPanelState(COLLAPSED_WITH)
+        }
     }
-
-
-    fun getBottomSheetBehavior() = bottomSheetBehavior
 
     private fun setupBottomSheet() {
         bottomSheetBehavior = from(slidingPanel) as RetroBottomSheetBehavior
@@ -158,6 +167,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                if (nowPlayingScreen != Peak) {
+                    val params = slidingPanel.layoutParams as ViewGroup.LayoutParams
+                    params.height = ViewGroup.LayoutParams.MATCH_PARENT
+                    slidingPanel.layoutParams = params
+                }
                 when (panelState) {
                     STATE_EXPANDED -> onPanelExpanded()
                     STATE_COLLAPSED -> onPanelCollapsed()
@@ -172,31 +186,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     fun getBottomNavigationView(): BottomNavigationBarTinted {
         return bottomNavigationView
     }
-
-    fun hideBottomBarVisibility(visible: Boolean) {
-        bottomNavigationView.isVisible = visible
-        hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
-    }
-
-    private fun hideBottomBar(hide: Boolean) {
-        val heightOfBar = bottomNavigationView.height
-        val isBottomBarVisible = bottomNavigationView.isVisible
-
-        if (hide) {
-            bottomSheetBehavior.isHideable = true
-            bottomSheetBehavior.peekHeight = 0
-            collapsePanel()
-            ViewCompat.setElevation(slidingPanel, 0f)
-            ViewCompat.setElevation(bottomNavigationView, 10f)
-        } else {
-            ViewCompat.setElevation(bottomNavigationView, 10f)
-            ViewCompat.setElevation(slidingPanel, 10f)
-            bottomSheetBehavior.isHideable = false
-            bottomSheetBehavior.peekHeight =
-                (if (isBottomBarVisible) heightOfBar * 2 else heightOfBar) - 24
-        }
-    }
-
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -379,6 +368,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             }
         })
     }
+
     private var playerFragment: AbsPlayerFragment? = null
     private fun chooseFragmentForTheme() {
         nowPlayingScreen = PreferenceUtil.nowPlayingScreen
@@ -398,7 +388,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             Color -> ColorFragment()
             Gradient -> GradientPlayerFragment()
             Tiny -> TinyPlayerFragment()
-            //PEAK -> PeakPlayerFragment()
+            Peak -> PeakPlayerFragment()
             Circle -> CirclePlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
@@ -406,7 +396,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             .commit()
         supportFragmentManager.executePendingTransactions()
 
-        playerFragment = supportFragmentManager.findFragmentById(R.id.playerFragmentContainer) as AbsPlayerFragment
+        playerFragment =
+            supportFragmentManager.findFragmentById(R.id.playerFragmentContainer) as AbsPlayerFragment
         miniPlayerFragment = whichFragment<MiniPlayerFragment>(R.id.miniPlayerFragment)
         miniPlayerFragment?.view?.setOnClickListener { expandPanel() }
     }
