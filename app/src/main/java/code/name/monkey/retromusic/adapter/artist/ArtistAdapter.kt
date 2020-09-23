@@ -16,7 +16,7 @@ import code.name.monkey.retromusic.fragments.artists.ArtistClickListener
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
-import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
@@ -29,10 +29,10 @@ class ArtistAdapter(
     val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
-    cabHolder: CabHolder?,
+    ICabHolder: ICabHolder?,
     private val artistClickListener: ArtistClickListener
 ) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(
-    activity, cabHolder, R.menu.menu_media_selection
+    activity, ICabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
 
     init {

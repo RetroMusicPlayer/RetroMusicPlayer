@@ -21,9 +21,8 @@
         app:behavior_peekHeight="0dp"
         app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
 
-        <androidx.fragment.app.FragmentContainerView
+        <FrameLayout
             android:id="@+id/playerFragmentContainer"
-            android:name="code.name.monkey.retromusic.fragments.player.NowPlayingPlayerFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

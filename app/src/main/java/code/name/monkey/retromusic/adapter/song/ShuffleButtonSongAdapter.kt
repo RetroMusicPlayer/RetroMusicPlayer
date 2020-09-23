@@ -4,7 +4,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 import com.google.android.material.button.MaterialButton
 
@@ -12,8 +12,8 @@ class ShuffleButtonSongAdapter(
     activity: AppCompatActivity,
     dataSet: MutableList<Song>,
     itemLayoutRes: Int,
-    cabHolder: CabHolder?
-) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, cabHolder) {
+    ICabHolder: ICabHolder?
+) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, ICabHolder) {
 
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {
         return ViewHolder(view)

@@ -15,21 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.interfaces.CabHolder;
+import code.name.monkey.retromusic.interfaces.ICabHolder;
 
 
 public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I> extends RecyclerView.Adapter<V>
         implements MaterialCab.Callback {
 
     @Nullable
-    private final CabHolder cabHolder;
+    private final ICabHolder ICabHolder;
     private final Context context;
     private MaterialCab cab;
     private List<I> checked;
     private int menuRes;
 
-    public AbsMultiSelectAdapter(@NonNull Context context, @Nullable CabHolder cabHolder, @MenuRes int menuRes) {
-        this.cabHolder = cabHolder;
+    public AbsMultiSelectAdapter(@NonNull Context context, @Nullable ICabHolder ICabHolder, @MenuRes int menuRes) {
+        this.ICabHolder = ICabHolder;
         checked = new ArrayList<>();
         this.menuRes = menuRes;
         this.context = context;
@@ -59,7 +59,7 @@ public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I
     }
 
     protected void checkAll() {
-        if (cabHolder != null) {
+        if (ICabHolder != null) {
             checked.clear();
             for (int i = 0; i < getItemCount(); i++) {
                 I identifier = getIdentifier(i);
@@ -94,7 +94,7 @@ public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I
     }
 
     protected boolean toggleChecked(final int position) {
-        if (cabHolder != null) {
+        if (ICabHolder != null) {
             I identifier = getIdentifier(position);
             if (identifier == null) {
                 return false;
@@ -117,9 +117,9 @@ public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I
     }
 
     private void updateCab() {
-        if (cabHolder != null) {
+        if (ICabHolder != null) {
             if (cab == null || !cab.isActive()) {
-                cab = cabHolder.openCab(menuRes, this);
+                cab = ICabHolder.openCab(menuRes, this);
             }
             final int size = checked.size();
             if (size <= 0) {

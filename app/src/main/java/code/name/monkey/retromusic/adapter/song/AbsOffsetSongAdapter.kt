@@ -7,15 +7,15 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 
 abstract class AbsOffsetSongAdapter(
     activity: AppCompatActivity,
     dataSet: MutableList<Song>,
     @LayoutRes itemLayoutRes: Int,
-    cabHolder: CabHolder?
-) : SongAdapter(activity, dataSet, itemLayoutRes, cabHolder) {
+    ICabHolder: ICabHolder?
+) : SongAdapter(activity, dataSet, itemLayoutRes, ICabHolder) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongAdapter.ViewHolder {
         if (viewType == OFFSET_ITEM) {

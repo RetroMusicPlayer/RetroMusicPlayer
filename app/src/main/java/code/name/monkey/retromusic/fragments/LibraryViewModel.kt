@@ -8,7 +8,7 @@ import code.name.monkey.retromusic.TOP_ARTISTS
 import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
+import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
 
@@ -21,23 +21,20 @@ import kotlinx.coroutines.launch
 
 class LibraryViewModel(
     private val repository: RealRepository
-) : ViewModel(), MusicServiceEventListener {
+) : ViewModel(), IMusicServiceEventListener {
 
     private val _paletteColor = MutableLiveData<Int>()
+    private val home = MutableLiveData<List<Home>>()
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
     private val playlists = MutableLiveData<List<PlaylistWithSongs>>()
     private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
-    private val home = MutableLiveData<List<Home>>()
+    private val searchResults = MutableLiveData<List<Any>>()
 
     val paletteColor: LiveData<Int> = _paletteColor
     val panelState: MutableLiveData<NowPlayingPanelState> = MutableLiveData<NowPlayingPanelState>()
-
-    init {
-        fetchHomeSections()
-    }
 
     fun setPanelState(state: NowPlayingPanelState) {
         panelState.postValue(state)
@@ -51,6 +48,8 @@ class LibraryViewModel(
         fetchGenres()
         fetchPlaylists()
     }
+
+    fun getSearchResult(): LiveData<List<Any>> = searchResults
 
     fun getSongs(): LiveData<List<Song>> {
         fetchSongs()
@@ -83,6 +82,7 @@ class LibraryViewModel(
     }
 
     fun getHome(): LiveData<List<Home>> {
+        fetchHomeSections()
         return home
     }
 
@@ -132,6 +132,11 @@ class LibraryViewModel(
         viewModelScope.launch(IO) {
             home.postValue(repository.homeSections())
         }
+    }
+
+    fun search(query: String?) = viewModelScope.launch(IO) {
+        val result = repository.search(query)
+        searchResults.postValue(result)
     }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
@@ -277,6 +282,16 @@ class LibraryViewModel(
                 emit(repository.recentAlbums())
             }
         }
+    }
+
+    fun clearSearchResult() {
+        viewModelScope.launch {
+            searchResults.postValue(emptyList())
+        }
+    }
+
+    fun artist(artistId: Long): LiveData<Artist> = liveData {
+        emit(repository.artistById(artistId))
     }
 }
 

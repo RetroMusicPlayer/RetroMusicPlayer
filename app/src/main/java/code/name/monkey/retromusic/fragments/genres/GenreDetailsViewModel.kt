@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
+import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 class GenreDetailsViewModel(
     private val realRepository: RealRepository,
     private val genre: Genre
-) : ViewModel(), MusicServiceEventListener {
+) : ViewModel(), IMusicServiceEventListener {
 
     private val _playListSongs = MutableLiveData<List<Song>>()
     private val _genre = MutableLiveData<Genre>().apply {

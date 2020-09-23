@@ -3,7 +3,7 @@ package code.name.monkey.retromusic.adapter.song
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import java.util.*
@@ -12,8 +12,8 @@ class SimpleSongAdapter(
     context: FragmentActivity,
     songs: ArrayList<Song>,
     layoutRes: Int,
-    cabHolder: CabHolder?
-) : SongAdapter(context, songs, layoutRes, cabHolder) {
+    ICabHolder: ICabHolder?
+) : SongAdapter(context, songs, layoutRes, ICabHolder) {
 
     override fun swapDataSet(dataSet: List<Song>) {
         this.dataSet = dataSet.toMutableList()

@@ -8,7 +8,6 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
-import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
@@ -25,18 +24,12 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.repository.ArtistRepository
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_full.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.inject
 
 class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
     MusicProgressViewUpdateHelper.Callback {
-    private val artistRepository by inject<ArtistRepository>()
     private lateinit var lyricsLayout: FrameLayout
     private lateinit var lyricsLine1: TextView
     private lateinit var lyricsLine2: TextView
@@ -222,9 +215,8 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
     }
 
     private fun updateArtistImage() {
-        lifecycleScope.launch {
-            val artist = artistRepository.artist(MusicPlayerRemote.currentSong.artistId)
-            withContext(Dispatchers.Main) {
+        libraryViewModel.artist(MusicPlayerRemote.currentSong.artistId)
+            .observe(viewLifecycleOwner, { artist ->
                 ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
                     .generatePalette(requireContext())
                     .build()
@@ -233,8 +225,8 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
 
                         }
                     })
-            }
-        }
+            })
+
     }
 
     override fun onQueueChanged() {

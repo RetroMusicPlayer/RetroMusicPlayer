@@ -25,7 +25,7 @@ class SearchAdapter(
     private var dataSet: List<Any>
 ) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    fun swapDataSet(dataSet: MutableList<Any>) {
+    fun swapDataSet(dataSet: List<Any>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
     }

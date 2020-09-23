@@ -133,7 +133,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     override fun onDestroy() {
         super.onDestroy()
-        playerActivity?.removeMusicServiceEventListener(detailsViewModel)
+        serviceActivity?.removeMusicServiceEventListener(detailsViewModel)
     }
 
 

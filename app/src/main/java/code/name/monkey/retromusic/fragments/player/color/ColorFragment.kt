@@ -37,7 +37,7 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
         navigationColor = color.backgroundColor
 
         colorGradientBackground?.setBackgroundColor(color.backgroundColor)
-        playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
+        serviceActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
         Handler().post {
             ToolbarContentTintHelper.colorizeToolbar(
                 playerToolbar,

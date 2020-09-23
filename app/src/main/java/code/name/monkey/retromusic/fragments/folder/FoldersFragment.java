@@ -21,6 +21,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,8 @@ import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -59,9 +63,9 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper;
-import code.name.monkey.retromusic.interfaces.CabHolder;
-import code.name.monkey.retromusic.interfaces.Callbacks;
-import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
+import code.name.monkey.retromusic.interfaces.ICabHolder;
+import code.name.monkey.retromusic.interfaces.ICallbacks;
+import code.name.monkey.retromusic.interfaces.IMainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
@@ -76,10 +80,10 @@ import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListene
 import me.zhanghai.android.fastscroll.FastScroller;
 
 public class FoldersFragment extends AbsMainActivityFragment implements
-        MainActivityFragmentCallbacks,
-        CabHolder,
+        IMainActivityFragmentCallbacks,
+        ICabHolder,
         BreadCrumbLayout.SelectionCallback,
-        Callbacks,
+        ICallbacks,
         LoaderManager.LoaderCallbacks<List<File>> {
 
     public static final String TAG = FoldersFragment.class.getSimpleName();
@@ -137,6 +141,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
+
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -159,13 +164,12 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        setHasOptionsMenu(true);
         if (savedInstanceState == null) {
-            //noinspection ConstantConditions
             setCrumb(new BreadCrumbLayout.Crumb(FileUtil.safeGetCanonicalFile(PreferenceUtil.INSTANCE.getStartDirectory())), true);
         } else {
             breadCrumbs.restoreFromStateWrapper(savedInstanceState.getParcelable(CRUMBS));
-            getLoaderManager().initLoader(LOADER_ID, null, this);
+            LoaderManager.getInstance(this).initLoader(LOADER_ID, null, this);
         }
     }
 
@@ -181,7 +185,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         if (breadCrumbs != null) {
             outState.putParcelable(CRUMBS, breadCrumbs.getStateWrapper());
         }
-
     }
 
     @Override
@@ -209,7 +212,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     @Override
-    public void onFileMenuClicked(final File file, View view) {
+    public void onFileMenuClicked(final File file, @NotNull View view) {
         PopupMenu popupMenu = new PopupMenu(getActivity(), view);
         if (file.isDirectory()) {
             popupMenu.inflate(R.menu.menu_item_directory);
@@ -222,7 +225,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     case R.id.action_delete_from_device:
                         new ListSongsAsyncTask(getActivity(), null, (songs, extra) -> {
                             if (!songs.isEmpty()) {
-                                SongsMenuHelper.INSTANCE.handleMenuClick(getActivity(), songs, itemId);
+                                SongsMenuHelper.INSTANCE.handleMenuClick(requireActivity(), songs, itemId);
                             }
                         }).execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER,
                                 getFileComparator()));
@@ -256,7 +259,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     case R.id.action_set_as_ringtone:
                     case R.id.action_delete_from_device:
                         new ListSongsAsyncTask(getActivity(), null,
-                                (songs, extra) -> SongMenuHelper.INSTANCE.handleMenuClick(getActivity(),
+                                (songs, extra) -> SongMenuHelper.INSTANCE.handleMenuClick(requireActivity(),
                                         songs.get(0), itemId))
                                 .execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER,
                                         getFileComparator()));
@@ -273,7 +276,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     @Override
-    public void onFileSelected(File file) {
+    public void onFileSelected(@NotNull File file) {
         file = tryGetCanonicalFile(file); // important as we compare the path value later
         if (file.isDirectory()) {
             setCrumb(new BreadCrumbLayout.Crumb(file), true);
@@ -319,11 +322,21 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     @Override
-    public void onMultipleItemAction(MenuItem item, ArrayList<File> files) {
+    public void onMultipleItemAction(MenuItem item, @NotNull ArrayList<File> files) {
         final int itemId = item.getItemId();
         new ListSongsAsyncTask(getActivity(), null,
-                (songs, extra) -> SongsMenuHelper.INSTANCE.handleMenuClick(getActivity(), songs, itemId))
+                (songs, extra) -> SongsMenuHelper.INSTANCE.handleMenuClick(requireActivity(), songs, itemId))
                 .execute(new ListSongsAsyncTask.LoadingInfo(files, AUDIO_FILE_FILTER, getFileComparator()));
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.add(0, R.id.action_scan, 0, R.string.scan_media).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.add(0, R.id.action_go_to_start_directory, 1, R.string.action_go_to_start_directory).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.removeItem(R.id.action_grid_size);
+        menu.removeItem(R.id.action_layout_type);
+        menu.removeItem(R.id.action_sort_order);
     }
 
     @Override
@@ -360,7 +373,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     @NonNull
     @Override
-    public MaterialCab openCab(int menuRes, MaterialCab.Callback callback) {
+    public MaterialCab openCab(int menuRes, @NotNull MaterialCab.Callback callback) {
         if (cab != null && cab.isActive()) {
             cab.finish();
         }
@@ -438,7 +451,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         if (addToHistory) {
             breadCrumbs.addHistory(crumb);
         }
-        getLoaderManager().restartLoader(LOADER_ID, null, this);
+        LoaderManager.getInstance(this).restartLoader(LOADER_ID, null, this);
     }
 
     private void setUpAdapter() {

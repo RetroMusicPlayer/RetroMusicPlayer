@@ -16,7 +16,7 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
-import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
@@ -29,11 +29,11 @@ open class AlbumAdapter(
     protected val activity: FragmentActivity,
     var dataSet: List<Album>,
     protected var itemLayoutRes: Int,
-    cabHolder: CabHolder?,
+    ICabHolder: ICabHolder?,
     private val albumClickListener: AlbumClickListener?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
     activity,
-    cabHolder,
+    ICabHolder,
     R.menu.menu_media_selection
 ), PopupTextProvider {
 

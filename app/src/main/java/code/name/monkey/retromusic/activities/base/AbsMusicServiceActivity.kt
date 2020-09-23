@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.toPlayCount
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
+import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService.*
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +17,9 @@ import org.koin.android.ext.android.inject
 import java.lang.ref.WeakReference
 import java.util.*
 
-abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventListener {
+abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventListener {
 
-    private val mMusicServiceEventListeners = ArrayList<MusicServiceEventListener>()
+    private val mMusicServiceEventListeners = ArrayList<IMusicServiceEventListener>()
     private val repository: RealRepository by inject()
     private var serviceToken: MusicPlayerRemote.ServiceToken? = null
     private var musicStateReceiver: MusicStateReceiver? = null
@@ -49,15 +49,15 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventLis
         }
     }
 
-    fun addMusicServiceEventListener(listener: MusicServiceEventListener?) {
-        if (listener != null) {
-            mMusicServiceEventListeners.add(listener)
+    fun addMusicServiceEventListener(listenerI: IMusicServiceEventListener?) {
+        if (listenerI != null) {
+            mMusicServiceEventListeners.add(listenerI)
         }
     }
 
-    fun removeMusicServiceEventListener(listener: MusicServiceEventListener?) {
-        if (listener != null) {
-            mMusicServiceEventListeners.remove(listener)
+    fun removeMusicServiceEventListener(listenerI: IMusicServiceEventListener?) {
+        if (listenerI != null) {
+            mMusicServiceEventListeners.remove(listenerI)
         }
     }
 

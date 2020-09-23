@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 import com.google.android.material.button.MaterialButton
 
@@ -16,8 +16,8 @@ open class PlaylistSongAdapter(
     activity: AppCompatActivity,
     dataSet: MutableList<Song>,
     itemLayoutRes: Int,
-    cabHolder: CabHolder?
-) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, cabHolder) {
+    ICabHolder: ICabHolder?
+) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, ICabHolder) {
 
     init {
         this.setMultiSelectMenuRes(R.menu.menu_cannot_delete_single_songs_playlist_songs_selection)

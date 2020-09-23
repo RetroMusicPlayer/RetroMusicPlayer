@@ -12,20 +12,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.state.NowPlayingPanelState
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_search.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -37,38 +36,37 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     }
 
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
-    private val viewModel: SearchViewModel by inject()
     private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.setSupportActionBar(toolbar)
         libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
+        mainActivity.setSupportActionBar(toolbar)
+        libraryViewModel.clearSearchResult();
         setupRecyclerView()
-        keyboardPopup.accentColor()
         searchView.addTextChangedListener(this)
         voiceSearch.setOnClickListener { startMicSearch() }
         clearText.setOnClickListener { searchView.clearText() }
-        keyboardPopup.setOnClickListener {
-            val inputManager =
-                getSystemService<InputMethodManager>(
+        keyboardPopup.apply {
+            accentColor()
+            setOnClickListener {
+                val inputManager = getSystemService(
                     requireContext(),
                     InputMethodManager::class.java
                 )
-            inputManager?.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT)
+                inputManager?.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT)
+            }
         }
-
         if (savedInstanceState != null) {
             query = savedInstanceState.getString(QUERY)
         }
-
-        viewModel.getSearchResult().observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getSearchResult().observe(viewLifecycleOwner, {
             showData(it)
         })
     }
 
-    private fun showData(data: MutableList<Any>) {
+    private fun showData(data: List<Any>) {
         if (data.isNotEmpty()) {
             searchAdapter.swapDataSet(data)
         } else {
@@ -83,6 +81,8 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
             override fun onChanged() {
                 super.onChanged()
                 empty.isVisible = searchAdapter.itemCount < 1
+                val height = dipToPix(52f)
+                recyclerView.setPadding(0, 0, 0, height.toInt())
             }
         })
         recyclerView.apply {
@@ -118,7 +118,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         TransitionManager.beginDelayedTransition(appBarLayout)
         voiceSearch.isGone = query.isNotEmpty()
         clearText.isVisible = query.isNotEmpty()
-        viewModel.search(query)
+        libraryViewModel.search(query)
     }
 
     private fun startMicSearch() {

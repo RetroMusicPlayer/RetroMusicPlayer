@@ -11,12 +11,11 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
-
 package code.name.monkey.retromusic.interfaces
 
 /**
- * @author Aidan Follestad (afollestad)
+ * Created by hemanths on 14/08/17.
  */
-interface PaletteColorHolder {
-    val paletteColor: Int
+interface IMainActivityFragmentCallbacks {
+    fun handleBackPress(): Boolean
 }

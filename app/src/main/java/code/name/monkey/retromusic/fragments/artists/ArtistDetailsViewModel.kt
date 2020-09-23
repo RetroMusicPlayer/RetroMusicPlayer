@@ -3,7 +3,7 @@ package code.name.monkey.retromusic.fragments.artists
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
+import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmArtist
@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers.IO
 class ArtistDetailsViewModel(
     private val realRepository: RealRepository,
     private val artistId: Long
-) : ViewModel(), MusicServiceEventListener {
+) : ViewModel(), IMusicServiceEventListener {
 
     fun getArtist(): LiveData<Artist> = liveData(IO) {
         val artist = realRepository.artistById(artistId)

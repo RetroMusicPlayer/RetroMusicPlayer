@@ -9,7 +9,7 @@ import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
-import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.ViewUtil
@@ -23,13 +23,13 @@ class OrderablePlaylistSongAdapter(
     activity: FragmentActivity,
     dataSet: ArrayList<Song>,
     itemLayoutRes: Int,
-    cabHolder: CabHolder?,
+    ICabHolder: ICabHolder?,
     private val onMoveItemListener: OnMoveItemListener?
 ) : SongAdapter(
     activity,
     dataSet,
     itemLayoutRes,
-    cabHolder
+    ICabHolder
 ), DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
 
     init {

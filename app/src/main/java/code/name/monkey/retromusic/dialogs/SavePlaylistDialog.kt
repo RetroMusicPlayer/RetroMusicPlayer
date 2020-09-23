@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.dialogs
 
 import android.app.Dialog
+import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -33,9 +34,15 @@ class SavePlaylistDialog : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch(Dispatchers.IO) {
-            val playlistWithSongs: PlaylistWithSongs =
-                extraNotNull<PlaylistWithSongs>(EXTRA_PLAYLIST).value
-            val file = PlaylistsUtil.savePlaylistWithSongs(requireContext(), playlistWithSongs)
+            val playlistWithSongs = extraNotNull<PlaylistWithSongs>(EXTRA_PLAYLIST).value
+            val file = PlaylistsUtil.savePlaylistWithSongs(playlistWithSongs)
+            MediaScannerConnection.scanFile(
+                requireActivity(),
+                arrayOf<String>(file.path),
+                null
+            ) { _, _ ->
+
+            }
             withContext(Dispatchers.Main) {
                 Toast.makeText(
                     requireContext(),

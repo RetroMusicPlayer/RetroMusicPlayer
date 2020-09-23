@@ -19,7 +19,6 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.state.NowPlayingPanelState
 import kotlinx.android.synthetic.main.fragment_library.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.lang.String
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
