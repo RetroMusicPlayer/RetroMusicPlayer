@@ -15,11 +15,6 @@ import com.google.android.material.transition.platform.MaterialFadeThrough
 import kotlinx.android.synthetic.main.fragment_library.*
 
 class PlaylistsFragment : AbsRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enterTransition = MaterialFadeThrough()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.getPlaylists().observe(viewLifecycleOwner, Observer {

@@ -43,7 +43,7 @@ import kotlinx.android.synthetic.main.fragment_lock_screen_playback_controls.*
 /**
  * @author Hemanth S (h4h13).
  */
-class LockScreenPlayerControlsFragment :
+class LockScreenControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_lock_screen_playback_controls) {
 
     private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null

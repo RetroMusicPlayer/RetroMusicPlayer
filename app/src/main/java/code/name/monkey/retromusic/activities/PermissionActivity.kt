@@ -39,7 +39,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
         }
         finish.accentBackgroundColor()
         finish.setOnClickListener {
-            if (hasPermissions() && !RingtoneManager.requiresDialog(this)) {
+            if (hasPermissions() ) {
                 startActivity(
                     Intent(this, MainActivity::class.java).addFlags(
                         Intent.FLAG_ACTIVITY_NEW_TASK or

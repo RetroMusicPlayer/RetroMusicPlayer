@@ -13,7 +13,10 @@ import code.name.monkey.retromusic.fragments.artists.ArtistDetailsViewModel
 import code.name.monkey.retromusic.fragments.genres.GenreDetailsViewModel
 import code.name.monkey.retromusic.fragments.playlists.PlaylistDetailsViewModel
 import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.network.*
+import code.name.monkey.retromusic.network.provideDefaultCache
+import code.name.monkey.retromusic.network.provideLastFmRest
+import code.name.monkey.retromusic.network.provideLastFmRetrofit
+import code.name.monkey.retromusic.network.provideOkHttp
 import code.name.monkey.retromusic.repository.*
 import code.name.monkey.retromusic.util.FilePathUtil
 import kotlinx.coroutines.Dispatchers.IO
@@ -36,13 +39,7 @@ val networkModule = module {
         provideLastFmRetrofit(get())
     }
     single {
-        provideDeezerRest(get())
-    }
-    single {
         provideLastFmRest(get())
-    }
-    single {
-        provideLyrics(get())
     }
 }
 
@@ -92,7 +89,6 @@ private val mainModule = module {
     single {
         androidContext().contentResolver
     }
-
 }
 private val dataModule = module {
     single {
@@ -109,7 +105,6 @@ private val dataModule = module {
             get(),
             get(),
             get(),
-            get()
         )
     } bind Repository::class
 
