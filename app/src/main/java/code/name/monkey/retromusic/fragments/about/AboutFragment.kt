@@ -13,41 +13,23 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.ContributorAdapter
-import code.name.monkey.retromusic.model.Contributor
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.util.NavigationUtil
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.card_credit.*
 import kotlinx.android.synthetic.main.card_other.*
 import kotlinx.android.synthetic.main.card_retro_info.*
 import kotlinx.android.synthetic.main.card_social.*
-import java.io.IOException
-import java.nio.charset.StandardCharsets
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         version.setSummary(getAppVersion())
         setUpView()
         loadContributors()
     }
-
-    private val contributorsJson: String?
-        get() {
-            val json: String
-            try {
-                val inputStream = requireActivity().assets.open("contributors.json")
-                val size = inputStream.available()
-                val buffer = ByteArray(size)
-                inputStream.read(buffer)
-                inputStream.close()
-                json = String(buffer, StandardCharsets.UTF_8)
-            } catch (ex: IOException) {
-                ex.printStackTrace()
-                return null
-            }
-            return json
-        }
 
 
     private fun openUrl(url: String) {
@@ -111,16 +93,14 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
     }
 
     private fun loadContributors() {
-        val type = object : TypeToken<List<Contributor>>() {
-
-        }.type
-        val contributors = Gson().fromJson<List<Contributor>>(contributorsJson, type)
-
-        val contributorAdapter = ContributorAdapter(contributors)
+        val contributorAdapter = ContributorAdapter(emptyList())
         recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = DefaultItemAnimator()
             adapter = contributorAdapter
         }
+        libraryViewModel.fetchContributors().observe(viewLifecycleOwner, { contributors ->
+            contributorAdapter.swapData(contributors)
+        })
     }
 }

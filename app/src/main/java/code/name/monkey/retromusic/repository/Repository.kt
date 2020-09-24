@@ -98,6 +98,7 @@ interface Repository {
     suspend fun blackListPaths(): List<BlackListStoreEntity>
     suspend fun lyrics(artist: String, title: String): Result<String>
     suspend fun deleteSongs(songs: List<Song>)
+    suspend fun contributor(): List<Contributor>
 }
 
 class RealRepository(
@@ -112,7 +113,8 @@ class RealRepository(
     private val searchRepository: RealSearchRepository,
     private val topPlayedRepository: TopPlayedRepository,
     private val roomRepository: RoomRepository,
-    private val lyricsRestService: LyricsRestService
+    private val lyricsRestService: LyricsRestService,
+    private val localDataRepository: LocalDataRepository
 ) : Repository {
 
     override suspend fun lyrics(artist: String, title: String): Result<String> = try {
@@ -123,6 +125,8 @@ class RealRepository(
     }
 
     override suspend fun deleteSongs(songs: List<Song>) = roomRepository.deleteSongs(songs)
+
+    override suspend fun contributor(): List<Contributor> = localDataRepository.contributors()
 
     override suspend fun fetchAlbums(): List<Album> = albumRepository.albums()
 

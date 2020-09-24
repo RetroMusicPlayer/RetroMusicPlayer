@@ -32,7 +32,6 @@ class LibraryViewModel(
     private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
-
     val paletteColor: LiveData<Int> = _paletteColor
     val panelState: MutableLiveData<NowPlayingPanelState> = MutableLiveData<NowPlayingPanelState>()
 
@@ -292,6 +291,10 @@ class LibraryViewModel(
 
     fun artist(artistId: Long): LiveData<Artist> = liveData {
         emit(repository.artistById(artistId))
+    }
+
+    fun fetchContributors(): LiveData<List<Contributor>> = liveData {
+        emit(repository.contributor())
     }
 }
 
