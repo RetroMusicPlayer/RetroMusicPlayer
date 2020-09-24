@@ -32,6 +32,8 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/container"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"

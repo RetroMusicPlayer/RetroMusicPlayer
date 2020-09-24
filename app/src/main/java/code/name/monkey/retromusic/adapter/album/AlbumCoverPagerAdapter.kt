@@ -98,14 +98,14 @@ class AlbumCoverPagerAdapter(
 
         private fun showLyricsDialog() {
             lifecycleScope.launch(Dispatchers.IO) {
-                val data: String = MusicUtil.getLyrics(song) ?: "No lyrics found"
+                val data: String? = MusicUtil.getLyrics(song)
                 withContext(Dispatchers.Main) {
                     MaterialAlertDialogBuilder(
                         requireContext(),
                         R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
                     ).apply {
                         setTitle(song.title)
-                        setMessage(data)
+                        setMessage(if (data.isNullOrEmpty()) "No lyrics found" else data)
                         setNegativeButton(R.string.synced_lyrics) { _, _ ->
                             NavigationUtil.goToLyrics(requireActivity())
                         }

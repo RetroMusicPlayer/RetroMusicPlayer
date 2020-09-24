@@ -23,9 +23,7 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.DESATURATED_COLOR
-import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.color.ColorChooserDialog
@@ -36,7 +34,7 @@ import com.afollestad.materialdialogs.color.ColorChooserDialog
 
 class ThemeSettingsFragment : AbsSettingsFragment() {
     override fun invalidateSettings() {
-        val generalTheme: Preference? = findPreference("general_theme")
+        val generalTheme: Preference? = findPreference(GENERAL_THEME)
         generalTheme?.let {
             setSummary(it)
             it.setOnPreferenceChangeListener { _, newValue ->
@@ -53,11 +51,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             }
         }
 
-        val accentColorPref: ATEColorPreference = findPreference("accent_color")!!
+        val accentColorPref: ATEColorPreference? = findPreference(ACCENT_COLOR)
         val accentColor = ThemeStore.accentColor(requireContext())
-        accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
-
-        accentColorPref.setOnPreferenceClickListener {
+        accentColorPref?.setColor(accentColor, ColorUtil.darkenColor(accentColor))
+        accentColorPref?.setOnPreferenceClickListener {
             ColorChooserDialog.Builder(requireContext(), R.string.accent_color)
                 .accentMode(true)
                 .allowUserColorInput(true)
@@ -66,7 +63,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 .show(requireActivity())
             return@setOnPreferenceClickListener true
         }
-        val blackTheme: ATESwitchPreference? = findPreference("black_theme")
+        val blackTheme: ATESwitchPreference? = findPreference(BLACK_THEME)
         blackTheme?.setOnPreferenceChangeListener { _, _ ->
             if (!App.isProVersion()) {
                 showProToastAndNavigate("Just Black theme")
@@ -94,12 +91,12 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         }
 
 
-        val colorAppShortcuts: TwoStatePreference = findPreference("should_color_app_shortcuts")!!
+        val colorAppShortcuts: TwoStatePreference? = findPreference(SHOULD_COLOR_APP_SHORTCUTS)
         if (!VersionUtils.hasNougatMR()) {
-            colorAppShortcuts.isVisible = false
+            colorAppShortcuts?.isVisible = false
         } else {
-            colorAppShortcuts.isChecked = PreferenceUtil.isColoredAppShortcuts
-            colorAppShortcuts.setOnPreferenceChangeListener { _, newValue ->
+            colorAppShortcuts?.isChecked = PreferenceUtil.isColoredAppShortcuts
+            colorAppShortcuts?.setOnPreferenceChangeListener { _, newValue ->
                 PreferenceUtil.isColoredAppShortcuts = newValue as Boolean
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 true

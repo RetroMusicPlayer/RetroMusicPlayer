@@ -21,6 +21,7 @@ import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.retromusic.CLASSIC_NOTIFICATION
+import code.name.monkey.retromusic.COLORED_NOTIFICATION
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 
@@ -34,7 +35,7 @@ class NotificationSettingsFragment : AbsSettingsFragment(),
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == CLASSIC_NOTIFICATION) {
             if (VERSION.SDK_INT >= VERSION_CODES.O) {
-                findPreference<Preference>("colored_notification")?.isEnabled =
+                findPreference<Preference>(COLORED_NOTIFICATION)?.isEnabled =
                     sharedPreferences?.getBoolean(key, false)!!
             }
         }
@@ -42,7 +43,7 @@ class NotificationSettingsFragment : AbsSettingsFragment(),
 
     override fun invalidateSettings() {
 
-        val classicNotification: TwoStatePreference? = findPreference("classic_notification")
+        val classicNotification: TwoStatePreference? = findPreference(CLASSIC_NOTIFICATION)
         if (VERSION.SDK_INT < VERSION_CODES.N) {
             classicNotification?.isVisible = false
         } else {
@@ -57,7 +58,7 @@ class NotificationSettingsFragment : AbsSettingsFragment(),
             }
         }
 
-        val coloredNotification: TwoStatePreference? = findPreference("colored_notification")
+        val coloredNotification: TwoStatePreference? = findPreference(COLORED_NOTIFICATION)
         if (VERSION.SDK_INT >= VERSION_CODES.O) {
             coloredNotification?.isEnabled = PreferenceUtil.isClassicNotification
         } else {

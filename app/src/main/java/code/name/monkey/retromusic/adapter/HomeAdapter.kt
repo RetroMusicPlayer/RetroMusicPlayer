@@ -225,10 +225,10 @@ class HomeAdapter(
     }
 
     fun artistsAdapter(artists: List<Artist>) =
-        ArtistAdapter(activity, artists, PreferenceUtil.homeGridStyle, null, this)
+        ArtistAdapter(activity, artists, PreferenceUtil.homeArtistGridStyle, null, this)
 
     fun albumAdapter(albums: List<Album>) =
-        AlbumAdapter(activity, albums, R.layout.item_image, null, this)
+        AlbumAdapter(activity, albums, PreferenceUtil.homeAlbumGridStyle, null, this)
 
     fun gridLayoutManager() = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
     fun linearLayoutManager() = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)

@@ -20,6 +20,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.annotation.LayoutRes
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -50,9 +52,20 @@ fun EditText.appHandleColor(): EditText {
 
 
 fun View.translateXAnimate(value: Float) {
+    println("translateXAnimate $value")
     ObjectAnimator.ofFloat(this, "translationY", value)
         .apply {
             duration = 300
+            doOnStart {
+                if (value == 0f) {
+                    show()
+                }
+            }
+            doOnEnd {
+                if (value != 0f) {
+                    hide()
+                }
+            }
             start()
         }
 }

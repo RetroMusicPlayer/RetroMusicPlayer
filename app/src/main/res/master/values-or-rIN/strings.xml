@@ -313,7 +313,7 @@
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
     <string name="pref_summary_gapless_playback">"Can cause playback issues on some devices."</string>
     <string name="pref_summary_genre_toggle">Toggle genre tab</string>
-    <string name="pref_summary_home_banner">Toggle home banner style</string>
+    <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
@@ -345,8 +345,8 @@
     <string name="pref_title_gapless_playback">Gapless playback</string>
     <string name="pref_title_general_theme">App theme</string>
     <string name="pref_title_genre_toggle">Show genre tab</string>
-    <string name="pref_title_home_artist_grid_style">Home artist grid</string>
-    <string name="pref_title_home_banner">Home banner</string>
+    <string name="pref_title_home_artist_grid_style">Artist grid</string>
+    <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
     <string name="pref_title_last_added_interval">Last added playlist interval</string>
     <string name="pref_title_lock_screen">Fullscreen controls</string>
