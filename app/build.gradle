@@ -25,7 +25,7 @@ android {
     }
     signingConfigs {
         release {
-            Properties properties = getProperties('/Users/apple/Documents/Github/retro.properties ')
+            Properties properties = getProperties('C:/Users/h4h13/Documents/GitHub/retro.properties ')
             storeFile file(getProperty(properties, 'storeFile'))
             keyAlias getProperty(properties, 'keyAlias')
             storePassword getProperty(properties, 'storePassword')

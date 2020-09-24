@@ -27,9 +27,6 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
 
     val navOptions by lazy {
         navOptions {
-            popUpTo(R.id.action_home) {
-                inclusive = false
-            }
             launchSingleTop = false
             anim {
                 enter = R.anim.retro_fragment_open_enter

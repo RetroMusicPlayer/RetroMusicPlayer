@@ -51,8 +51,7 @@ fun EditText.appHandleColor(): EditText {
 }
 
 
-fun View.translateXAnimate(value: Float) {
-    println("translateXAnimate $value")
+fun View.translateXAnimate(value: Float) { 
     ObjectAnimator.ofFloat(this, "translationY", value)
         .apply {
             duration = 300

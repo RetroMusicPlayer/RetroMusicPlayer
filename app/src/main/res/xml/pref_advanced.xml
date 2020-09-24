@@ -59,15 +59,6 @@
             android:title="@string/pref_keep_screen_on_title"
             app:icon="@drawable/ic_settings_brigntness" />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
-            android:defaultValue="16"
-            android:key="dialog_corner"
-            android:layout="@layout/list_item_view_seekbar"
-            android:max="50"
-            android:summary="@string/pref_dialog_corner_summary"
-            android:title="@string/pref_dialog_corner_title"
-            app:icon="@drawable/ic_rounded_corner"
-            app:showSeekBarValue="true" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
