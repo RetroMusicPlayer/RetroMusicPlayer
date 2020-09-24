@@ -8,16 +8,6 @@
     android:orientation="vertical"
     tools:ignore="UnusedAttribute">
 
-    <FrameLayout
-        android:id="@+id/statusBarContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include layout="@layout/status_bar" />
-    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/toolbarContainer"
@@ -25,7 +15,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusBarContainer">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
