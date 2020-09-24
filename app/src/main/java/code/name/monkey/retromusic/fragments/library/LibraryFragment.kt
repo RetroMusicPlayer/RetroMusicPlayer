@@ -55,6 +55,9 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     private fun setupNavigationController() {
         val navController = findNavController(R.id.fragment_container)
         NavigationUI.setupWithNavController(mainActivity.getBottomNavigationView(), navController)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            appBarLayout.setExpanded(true,true)
+        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
