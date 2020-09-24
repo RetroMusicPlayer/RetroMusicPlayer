@@ -26,13 +26,11 @@
 
 -dontwarn java.lang.invoke.*
 -dontwarn **$$Lambda$*
+-dontwarn javax.annotation.**
 
 # RetroFit
 -dontwarn retrofit.**
 -keep class retrofit.** { *; }
--keepattributes Signature
--keepattributes Exceptions
--dontwarn javax.annotation.**
 
 # Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -41,17 +39,18 @@
     public *;
 }
 
+# OkHttp
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep interface com.squareup.okhttp3.** { *; }
+-dontwarn com.squareup.okhttp3.**
 
 -dontwarn
 -ignorewarnings
 
-#-dontwarn android.support.v8.renderscript.*
-#-keepclassmembers class android.support.v8.renderscript.RenderScript {
-#  native *** rsn*(...);
-#  native *** n*(...);
-#}
+-dontwarn org.jaudiotagger.**
+-keep class org.jaudiotagger.** { *; }
 
-#-keep class org.jaudiotagger.** { *; }
 -keepclassmembers enum * { *; }
 -keepattributes *Annotation*, Signature, Exception
 -keepnames class androidx.navigation.fragment.NavHostFragment
