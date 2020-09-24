@@ -4,6 +4,7 @@
     package="code.name.monkey.retromusic">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -119,11 +120,7 @@
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
         <activity android:name=".activities.PermissionActivity" />
-
-        <activity
-            android:name=".activities.LockScreenActivity"
-            android:noHistory="true"
-            android:showOnLockScreen="true" />
+        <activity android:name=".activities.LockScreenActivity" />
 
         <activity
             android:name=".appshortcuts.AppShortcutLauncherActivity"

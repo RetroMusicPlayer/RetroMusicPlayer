@@ -63,6 +63,7 @@ import java.util.Objects;
 import java.util.Random;
 
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.activities.LockScreenActivity;
 import code.name.monkey.retromusic.appwidgets.AppWidgetBig;
 import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
 import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
@@ -245,7 +246,16 @@ public class MusicService extends Service implements
             updateNotification();
         }
     };
-
+    private final BroadcastReceiver lockScreenReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (PreferenceUtil.INSTANCE.isLockScreen() && isPlaying()) {
+                Intent lockIntent = new Intent(context, LockScreenActivity.class);
+                lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(lockIntent);
+            }
+        }
+    };
     private QueueSaveHandler queueSaveHandler;
     private HandlerThread queueSaveHandlerThread;
     private boolean queuesRestored;
@@ -362,6 +372,7 @@ public class MusicService extends Service implements
 
         registerReceiver(widgetIntentReceiver, new IntentFilter(APP_WIDGET_UPDATE));
         registerReceiver(updateFavoriteReceiver, new IntentFilter(FAVORITE_STATE_CHANGED));
+        registerReceiver(lockScreenReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
 
         initNotification();
 
@@ -403,6 +414,7 @@ public class MusicService extends Service implements
     public void onDestroy() {
         unregisterReceiver(widgetIntentReceiver);
         unregisterReceiver(updateFavoriteReceiver);
+        unregisterReceiver(lockScreenReceiver);
         if (becomingNoisyReceiverRegistered) {
             unregisterReceiver(becomingNoisyReceiver);
             becomingNoisyReceiverRegistered = false;

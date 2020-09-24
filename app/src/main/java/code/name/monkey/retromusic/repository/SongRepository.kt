@@ -154,13 +154,17 @@ class RealSongRepository(private val context: Context) : SongRepository {
         } else {
             Media.EXTERNAL_CONTENT_URI
         }
-        return context.contentResolver.query(
-            uri,
-            baseProjection,
-            selectionFinal,
-            selectionValuesFinal,
-            sortOrder
-        )
+        return try {
+            context.contentResolver.query(
+                uri,
+                baseProjection,
+                selectionFinal,
+                selectionValuesFinal,
+                sortOrder
+            )
+        } catch (ex: SecurityException) {
+            return null
+        }
     }
 
     private fun generateBlacklistSelection(

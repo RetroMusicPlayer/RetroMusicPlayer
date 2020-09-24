@@ -330,7 +330,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     ViewCompat.setElevation(slidingPanel, 0f)
                     ViewCompat.setElevation(bottomNavigationView, 10f)
                     bottomSheetBehavior.isHideable = true
-                    bottomSheetBehavior.setPeekHeight(0, true)
+                    bottomSheetBehavior.setPeekHeight(0, false)
                     bottomSheetBehavior.state = STATE_COLLAPSED
                 }
                 COLLAPSED_WITH -> {
@@ -341,7 +341,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     bottomSheetBehavior.isHideable = false
                     bottomSheetBehavior.setPeekHeight(
                         if (isQueueEmpty) 0 else (heightOfBar * 2) - 24,
-                        true
+                        false
                     )
                     bottomNavigationView.isVisible = true
                 }
@@ -353,7 +353,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     bottomSheetBehavior.isHideable = false
                     bottomSheetBehavior.setPeekHeight(
                         if (isQueueEmpty) 0 else heightOfBar - 24,
-                        true
+                        false
                     )
                     bottomNavigationView.isGone = true
                 }

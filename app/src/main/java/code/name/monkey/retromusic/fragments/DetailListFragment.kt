@@ -10,11 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.db.toSong
+import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
 import code.name.monkey.retromusic.fragments.artists.ArtistClickListener
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
@@ -52,6 +54,15 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             LAST_ADDED_PLAYLIST -> lastAddedSongs()
             TOP_PLAYED_PLAYLIST -> topPlayed()
         }
+
+
+        recyclerView.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
+            override fun onChanged() {
+                super.onChanged()
+                val height = dipToPix(52f)
+                recyclerView.setPadding(0, 0, 0, height.toInt())
+            }
+        })
     }
 
     private fun lastAddedSongs() {
@@ -84,7 +95,6 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         libraryViewModel.playCountSongs().observe(viewLifecycleOwner, Observer { songs ->
             songAdapter.swapDataSet(songs)
         })
-
     }
 
     private fun loadHistory() {
@@ -116,8 +126,8 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        libraryViewModel.favorites().observe(viewLifecycleOwner, {
-            val songs = it.map { songEntity -> songEntity.toSong() }
+        libraryViewModel.favorites().observe(viewLifecycleOwner, { songEntities ->
+            val songs = songEntities.map { songEntity -> songEntity.toSong() }
             songAdapter.swapDataSet(songs)
         })
     }

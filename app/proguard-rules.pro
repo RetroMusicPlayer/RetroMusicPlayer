@@ -45,8 +45,10 @@
 -keep interface com.squareup.okhttp3.** { *; }
 -dontwarn com.squareup.okhttp3.**
 
--dontwarn
--ignorewarnings
+#-dontwarn
+#-ignorewarnings
+-dontshrink
+-dontobfuscate
 
 -dontwarn org.jaudiotagger.**
 -keep class org.jaudiotagger.** { *; }
