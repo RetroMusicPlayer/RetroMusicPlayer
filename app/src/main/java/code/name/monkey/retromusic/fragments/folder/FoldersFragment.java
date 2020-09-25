@@ -20,6 +20,7 @@ import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,8 +35,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.text.HtmlCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +61,7 @@ import java.util.List;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.adapter.SongFileAdapter;
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
@@ -79,6 +84,8 @@ import code.name.monkey.retromusic.views.BreadCrumbLayout;
 import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener;
 import me.zhanghai.android.fastscroll.FastScroller;
 
+import static code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor;
+
 public class FoldersFragment extends AbsMainActivityFragment implements
         IMainActivityFragmentCallbacks,
         ICabHolder,
@@ -95,6 +102,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = 5;
     private SongFileAdapter adapter;
+    private Toolbar toolbar;
+    private TextView appNameText;
     private BreadCrumbLayout breadCrumbs;
     private MaterialCab cab;
     private View coordinatorLayout;
@@ -154,11 +163,27 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        getMainActivity().setSupportActionBar(toolbar);
+        getMainActivity().getSupportActionBar().setTitle(null);
         setStatusBarColorAuto(view);
         setUpAppbarColor();
         setUpBreadCrumbs();
         setUpRecyclerView();
         setUpAdapter();
+        setUpTitle();
+    }
+
+    private void setUpTitle() {
+        toolbar.setNavigationOnClickListener(v ->
+                Navigation.findNavController(v).navigate(R.id.searchFragment, null, getNavOptions())
+        );
+        int color = ThemeStore.Companion.accentColor(requireContext());
+        String hexColor = String.format("#%06X", 0xFFFFFF & color);
+        Spanned appName = HtmlCompat.fromHtml(
+                "Retro <span  style='color:" + hexColor + ";'>Music</span>",
+                HtmlCompat.FROM_HTML_MODE_COMPACT
+        );
+        appNameText.setText(appName);
     }
 
     @Override
@@ -330,6 +355,12 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar);
+    }
+
+    @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.add(0, R.id.action_scan, 0, R.string.scan_media).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
@@ -337,6 +368,12 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         menu.removeItem(R.id.action_grid_size);
         menu.removeItem(R.id.action_layout_type);
         menu.removeItem(R.id.action_sort_order);
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(
+                requireContext(),
+                toolbar,
+                menu,
+                getToolbarBackgroundColor(toolbar)
+        );
     }
 
     @Override
@@ -420,6 +457,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         breadCrumbs = view.findViewById(R.id.breadCrumbs);
         empty = view.findViewById(android.R.id.empty);
         emojiText = view.findViewById(R.id.emptyEmoji);
+        toolbar = view.findViewById(R.id.toolbar);
+        appNameText = view.findViewById(R.id.appNameText);
     }
 
     private void saveScrollPosition() {

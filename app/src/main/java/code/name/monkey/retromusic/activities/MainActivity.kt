@@ -8,11 +8,13 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.ui.NavigationUI
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SearchQueryHelper.getSongs
+import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
@@ -45,6 +47,25 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         hideStatusBar()
         AppRater.appLaunched(this)
         updateTabs()
+
+        //NavigationUI.setupWithNavController(getBottomNavigationView(), findNavController(R.id.fragment_container))
+        setupNavigationController()
+    }
+
+    private fun setupNavigationController() {
+        val navController = findNavController(R.id.fragment_container)
+        val navInflater = navController.navInflater
+        val navGraph = navInflater.inflate(R.navigation.main_graph)
+
+        val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
+        if (categoryInfo.visible) {
+            navGraph.startDestination = categoryInfo.category.id
+        }
+        navController.graph = navGraph
+        NavigationUI.setupWithNavController(getBottomNavigationView(), navController)
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            //appBarLayout.setExpanded(true, true)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean =

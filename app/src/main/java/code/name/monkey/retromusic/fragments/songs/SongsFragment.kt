@@ -84,6 +84,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
         val gridSizeItem: MenuItem = menu.findItem(R.id.action_grid_size)
         if (RetroUtil.isLandscape()) {
             gridSizeItem.setTitle(R.string.action_grid_size_land)
@@ -92,7 +93,6 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         val layoutItem = menu.findItem(R.id.action_layout_type)
         setupLayoutMenu(layoutItem.subMenu)
         setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun setUpSortOrderMenu(
