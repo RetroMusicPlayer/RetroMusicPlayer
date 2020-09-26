@@ -165,8 +165,8 @@ class SearchAdapter(
                 }
                 PLAYLIST -> {
                     activity.findNavController(R.id.fragment_container).navigate(
-                        R.id.artistDetailsFragment,
-                        bundleOf(EXTRA_PLAYLIST to (item as Playlist))
+                        R.id.playlistDetailsFragment,
+                        bundleOf(EXTRA_PLAYLIST to (item as PlaylistWithSongs))
                     )
                 }
                 SONG -> {
