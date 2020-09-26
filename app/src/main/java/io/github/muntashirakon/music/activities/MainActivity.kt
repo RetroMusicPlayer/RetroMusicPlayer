@@ -16,7 +16,6 @@ import io.github.muntashirakon.music.helper.SearchQueryHelper.getSongs
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.repository.PlaylistSongsLoader
 import io.github.muntashirakon.music.service.MusicService
-import io.github.muntashirakon.music.util.AppRater
 import io.github.muntashirakon.music.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -43,7 +42,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         setLightNavigationBar(true)
         setTaskDescriptionColorAuto()
         hideStatusBar()
-        AppRater.appLaunched(this)
         updateTabs()
     }
 
