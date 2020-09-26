@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
@@ -87,6 +88,7 @@ open class SongAdapter(
         }
         holder.title?.text = getSongTitle(song)
         holder.text?.text = getSongText(song)
+        holder.text2?.text = getSongText(song)
         loadAlbumCover(song, holder)
     }
 
@@ -119,6 +121,10 @@ open class SongAdapter(
 
     private fun getSongText(song: Song): String? {
         return song.artistName
+    }
+
+    private fun getSongText2(song: Song): String? {
+        return song.albumName
     }
 
     override fun getItemCount(): Int {
@@ -172,7 +178,7 @@ open class SongAdapter(
         }
 
         protected open fun onSongMenuItemClick(item: MenuItem): Boolean {
-            if (image != null && image!!.visibility == View.VISIBLE) {
+            if (image != null && image!!.isVisible) {
                 when (item.itemId) {
                     R.id.action_go_to_album -> {
                         activity.findNavController(R.id.fragment_container)

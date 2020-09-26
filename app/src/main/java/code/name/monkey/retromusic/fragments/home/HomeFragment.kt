@@ -37,24 +37,23 @@ import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.findActivityNavController
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
 import code.name.monkey.retromusic.glide.UserProfileGlideRequest
+import code.name.monkey.retromusic.state.NowPlayingPanelState
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment :
     AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home) {
-    private val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITH)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         setStatusBarColorAuto(view)

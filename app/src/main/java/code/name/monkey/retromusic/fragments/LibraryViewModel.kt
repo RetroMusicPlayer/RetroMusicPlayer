@@ -11,11 +11,8 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
-
 import code.name.monkey.retromusic.state.NowPlayingPanelState
-
 import code.name.monkey.retromusic.util.PreferenceUtil
-
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
@@ -39,6 +36,10 @@ class LibraryViewModel(
         panelState.postValue(state)
     }
 
+    init {
+        loadLibraryContent()
+    }
+
     private fun loadLibraryContent() = viewModelScope.launch(IO) {
         fetchHomeSections()
         fetchSongs()
@@ -51,37 +52,30 @@ class LibraryViewModel(
     fun getSearchResult(): LiveData<List<Any>> = searchResults
 
     fun getSongs(): LiveData<List<Song>> {
-        fetchSongs()
         return songs
     }
 
     fun getAlbums(): LiveData<List<Album>> {
-        fetchAlbums()
         return albums
     }
 
     fun getArtists(): LiveData<List<Artist>> {
-        fetchArtists()
         return artists
     }
 
     fun getPlaylists(): LiveData<List<PlaylistWithSongs>> {
-        fetchPlaylists()
         return playlists
     }
 
     fun getLegacyPlaylist(): LiveData<List<Playlist>> {
-        fetchLegacyPlaylist()
         return legacyPlaylists
     }
 
     fun getGenre(): LiveData<List<Genre>> {
-        fetchGenres()
         return genres
     }
 
     fun getHome(): LiveData<List<Home>> {
-        fetchHomeSections()
         return home
     }
 
@@ -261,10 +255,6 @@ class LibraryViewModel(
         })
     }
 
-    fun observableHistorySongs() = repository.observableHistorySongs()
-
-    fun favorites() = repository.favorites()
-
     fun artists(type: Int): LiveData<List<Artist>> = liveData {
         when (type) {
             TOP_ARTISTS -> emit(repository.topArtists())
@@ -283,18 +273,22 @@ class LibraryViewModel(
         }
     }
 
-    fun clearSearchResult() {
-        viewModelScope.launch {
-            searchResults.postValue(emptyList())
-        }
-    }
-
     fun artist(artistId: Long): LiveData<Artist> = liveData {
         emit(repository.artistById(artistId))
     }
 
     fun fetchContributors(): LiveData<List<Contributor>> = liveData {
         emit(repository.contributor())
+    }
+
+    fun observableHistorySongs() = repository.observableHistorySongs()
+
+    fun favorites() = repository.favorites()
+
+    fun clearSearchResult() {
+        viewModelScope.launch {
+            searchResults.postValue(emptyList())
+        }
     }
 }
 

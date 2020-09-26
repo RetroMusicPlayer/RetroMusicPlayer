@@ -7,6 +7,7 @@
     android:layout_marginStart="1dp"
     android:layout_marginEnd="1dp"
     android:layout_marginBottom="1dp"
+    android:paddingHorizontal="64dp"
     android:background="?rectSelector"
     android:clickable="true"
     android:focusable="true"
@@ -73,12 +74,10 @@
         android:paddingHorizontal="16dp"
         android:textAppearance="@style/TextViewSubtitle1"
         android:textColor="?android:attr/textColorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/text"
-        app:layout_constraintEnd_toStartOf="@id/menu"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@id/imageTextContainer"
+        app:layout_constraintEnd_toStartOf="@id/text"
         app:layout_constraintStart_toEndOf="@id/imageTextContainer"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="@id/imageTextContainer"
         tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -90,11 +89,25 @@
         android:paddingHorizontal="16dp"
         android:textAppearance="@style/TextViewBody2"
         android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        app:layout_constraintEnd_toStartOf="@id/text2"
+        app:layout_constraintStart_toEndOf="@id/title"
+        app:layout_constraintTop_toTopOf="@id/title"
+        tools:text="@tools:sample/full_names" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingHorizontal="16dp"
+        android:textAppearance="@style/TextViewBody2"
+        android:textColor="?android:attr/textColorSecondary"
+        app:layout_constraintBottom_toBottomOf="@id/text"
         app:layout_constraintEnd_toStartOf="@id/menu"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/imageTextContainer"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintStart_toEndOf="@id/text"
+        app:layout_constraintTop_toTopOf="@id/text"
         tools:text="@tools:sample/full_names" />
 
     <androidx.appcompat.widget.AppCompatImageView

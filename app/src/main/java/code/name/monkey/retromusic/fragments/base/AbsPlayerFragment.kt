@@ -27,7 +27,6 @@ import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.whichFragment
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -43,14 +42,12 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
     Toolbar.OnMenuItemClickListener, IPaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
 
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
-    protected val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onMenuItemClick(
         item: MenuItem

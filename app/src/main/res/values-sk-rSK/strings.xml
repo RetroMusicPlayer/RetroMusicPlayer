@@ -370,7 +370,7 @@
     <string name="profile">Profile</string>
     <string name="purchase">Purchase</string>
     <string name="purchase_summary">*Think before buying, don\'t ask for refund.</string>
-    <string name="queue">Queue</string>
+    <string name="queue">Playing Queue</string>
     <string name="rate_app">Rate the app</string>
     <string name="rate_on_google_play_summary">Love this app? Let us know in the Google Play Store how we can make it even better</string>
     <string name="recent_albums">Recent albums</string>

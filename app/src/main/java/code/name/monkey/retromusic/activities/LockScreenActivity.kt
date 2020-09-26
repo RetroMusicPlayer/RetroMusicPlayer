@@ -28,16 +28,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            setShowWhenLocked(true)
-            val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-            keyguardManager.requestDismissKeyguard(this, null)
-        } else {
-            this.window.addFlags(
-                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
-                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-            )
-        }
+        lockScreenInit()
         setContentView(R.layout.activity_lock_screen)
         hideStatusBar()
         setStatusbarColorAuto()
@@ -74,6 +65,19 @@ class LockScreenActivity : AbsMusicServiceActivity() {
             translationY = 100f
             alpha = 0f
             ViewCompat.animate(this).translationY(0f).alpha(1f).setDuration(1500).start()
+        }
+    }
+
+    private fun lockScreenInit() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            val keyguardManager: KeyguardManager = getSystemService(KeyguardManager::class.java)
+            keyguardManager.requestDismissKeyguard(this, null)
+        } else {
+            this.window.addFlags(
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+            )
         }
     }
 

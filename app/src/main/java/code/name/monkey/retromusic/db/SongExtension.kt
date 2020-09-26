@@ -2,6 +2,12 @@ package code.name.monkey.retromusic.db
 
 import code.name.monkey.retromusic.model.Song
 
+fun List<HistoryEntity>.fromHistoryToSongs(): List<Song> {
+    return map {
+        it.toSong()
+    }
+}
+
 fun List<SongEntity>.toSongs(): List<Song> {
     return map {
         it.toSong()
@@ -131,3 +137,4 @@ fun List<Song>.toSongsEntity(playlistEntity: PlaylistEntity): List<SongEntity> {
         it.toSongEntity(playlistEntity.playListId)
     }
 }
+

@@ -22,11 +22,11 @@ import java.util.*
 class RealSearchRepository(
     private val songRepository: SongRepository,
     private val albumRepository: AlbumRepository,
-    private val artistRepository: RealArtistRepository,
+    private val artistRepository: ArtistRepository,
+    private val roomRepository: RoomRepository,
     private val genreRepository: GenreRepository,
-    private val playlistRepository: PlaylistRepository
 ) {
-    fun searchAll(context: Context, query: String?): MutableList<Any> {
+    suspend fun searchAll(context: Context, query: String?): MutableList<Any> {
         val results = mutableListOf<Any>()
         query?.let { searchString ->
             val songs = songRepository.songs(searchString)
@@ -53,8 +53,8 @@ class RealSearchRepository(
                 results.add(context.resources.getString(R.string.genres))
                 results.addAll(genres)
             }
-            val playlist = playlistRepository.playlists().filter { playlist ->
-                playlist.name.toLowerCase(Locale.getDefault())
+            val playlist = roomRepository.playlistWithSongs().filter { playlist ->
+                playlist.playlistEntity.playlistName.toLowerCase(Locale.getDefault())
                     .contains(searchString.toLowerCase(Locale.getDefault()))
             }
             if (playlist.isNotEmpty()) {

@@ -13,7 +13,6 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.state.NowPlayingPanelState
 import code.name.monkey.retromusic.util.DensityUtil
@@ -23,14 +22,11 @@ import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_main_recycler.*
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
     AbsMainActivityFragment(R.layout.fragment_main_recycler),
     AppBarLayout.OnOffsetChangedListener {
-
-    val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

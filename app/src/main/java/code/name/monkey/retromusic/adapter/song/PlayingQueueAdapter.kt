@@ -173,7 +173,7 @@ class PlayingQueueAdapter(
     }
 
     override fun onGetSwipeReactionType(holder: ViewHolder, position: Int, x: Int, y: Int): Int {
-        return if (onCheckCanStartDrag(holder!!, position, x, y)) {
+        return if (onCheckCanStartDrag(holder, position, x, y)) {
             SwipeableItemConstants.REACTION_CAN_NOT_SWIPE_BOTH_H
         } else {
             SwipeableItemConstants.REACTION_CAN_SWIPE_BOTH_H

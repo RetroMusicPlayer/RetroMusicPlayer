@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.model.*
@@ -39,7 +40,7 @@ interface Repository {
     fun genresFlow(): Flow<Result<List<Genre>>>
     fun historySong(): List<HistoryEntity>
     fun favorites(): LiveData<List<SongEntity>>
-    fun observableHistorySongs(): LiveData<List<HistoryEntity>>
+    fun observableHistorySongs(): LiveData<List<Song>>
     fun albumById(albumId: Long): Album
     fun playlistSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>>
     suspend fun fetchAlbums(): List<Album>
@@ -97,6 +98,9 @@ interface Repository {
     suspend fun blackListPaths(): List<BlackListStoreEntity>
     suspend fun deleteSongs(songs: List<Song>)
     suspend fun contributor(): List<Contributor>
+    suspend fun searchArtists(query: String): List<Artist>
+    suspend fun searchSongs(query: String): List<Song>
+    suspend fun searchAlbums(query: String): List<Album>
 }
 
 class RealRepository(
@@ -115,10 +119,16 @@ class RealRepository(
 ) : Repository {
 
 
-
     override suspend fun deleteSongs(songs: List<Song>) = roomRepository.deleteSongs(songs)
 
     override suspend fun contributor(): List<Contributor> = localDataRepository.contributors()
+
+    override suspend fun searchSongs(query: String): List<Song> = songRepository.songs(query)
+
+    override suspend fun searchAlbums(query: String): List<Album> = albumRepository.albums(query)
+
+    override suspend fun searchArtists(query: String): List<Artist> =
+        artistRepository.artists(query)
 
     override suspend fun fetchAlbums(): List<Album> = albumRepository.albums()
 
@@ -311,8 +321,10 @@ class RealRepository(
     override suspend fun blackListPaths(): List<BlackListStoreEntity> =
         roomRepository.blackListPaths()
 
-    override fun observableHistorySongs(): LiveData<List<HistoryEntity>> =
-        roomRepository.observableHistorySongs()
+    override fun observableHistorySongs(): LiveData<List<Song>> =
+        Transformations.map(roomRepository.observableHistorySongs()) {
+            it.fromHistoryToSongs()
+        }
 
     override fun historySong(): List<HistoryEntity> =
         roomRepository.historySongs()

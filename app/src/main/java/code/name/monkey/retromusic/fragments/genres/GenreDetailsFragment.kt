@@ -12,14 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.menu.GenreMenuHelper
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.state.NowPlayingPanelState
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
@@ -29,7 +27,6 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
     private val detailsViewModel: GenreDetailsViewModel by viewModel {
         parametersOf(arguments.extraGenre)
     }
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
     private lateinit var genre: Genre
     private lateinit var songAdapter: SongAdapter
 

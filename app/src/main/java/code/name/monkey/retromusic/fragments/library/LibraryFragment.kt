@@ -15,17 +15,13 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.whichFragment
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.state.NowPlayingPanelState
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_library.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
-
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

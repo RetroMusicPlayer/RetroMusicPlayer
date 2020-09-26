@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.get
 
 class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeListener {
     companion object {
@@ -37,6 +38,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
+        setupNavigationController()
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
         }
@@ -49,7 +51,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         updateTabs()
 
         //NavigationUI.setupWithNavController(getBottomNavigationView(), findNavController(R.id.fragment_container))
-        setupNavigationController()
+
     }
 
     private fun setupNavigationController() {
@@ -121,8 +123,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                 val id = parseLongFromIntent(intent, "playlistId", "playlist")
                 if (id >= 0L) {
                     val position: Int = intent.getIntExtra("position", 0)
-                    val songs: List<Song> =
-                        PlaylistSongsLoader.getPlaylistSongList(this@MainActivity, id)
+                    val songs: List<Song> = PlaylistSongsLoader.getPlaylistSongList(get(), id)
                     MusicPlayerRemote.openQueue(songs, position, true)
                     handled = true
                 }
@@ -130,8 +131,9 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                 val id = parseLongFromIntent(intent, "albumId", "album")
                 if (id >= 0L) {
                     val position: Int = intent.getIntExtra("position", 0)
+                    val songs = libraryViewModel.albumById(id).songs
                     MusicPlayerRemote.openQueue(
-                        libraryViewModel.albumById(id).songs,
+                        songs,
                         position,
                         true
                     )
@@ -141,8 +143,9 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                 val id = parseLongFromIntent(intent, "artistId", "artist")
                 if (id >= 0L) {
                     val position: Int = intent.getIntExtra("position", 0)
+                    val songs: List<Song> = libraryViewModel.artistById(id).songs
                     MusicPlayerRemote.openQueue(
-                        libraryViewModel.artistById(id).songs,
+                        songs,
                         position,
                         true
                     )

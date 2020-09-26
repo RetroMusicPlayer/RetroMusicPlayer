@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 
 abstract class AbsOffsetSongAdapter(
-    activity: AppCompatActivity,
+    activity: FragmentActivity,
     dataSet: MutableList<Song>,
     @LayoutRes itemLayoutRes: Int,
     ICabHolder: ICabHolder?

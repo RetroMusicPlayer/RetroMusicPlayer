@@ -20,12 +20,10 @@ import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.state.NowPlayingPanelState
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_search.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -35,7 +33,6 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         const val REQ_CODE_SPEECH_INPUT = 9001
     }
 
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
     private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
 
