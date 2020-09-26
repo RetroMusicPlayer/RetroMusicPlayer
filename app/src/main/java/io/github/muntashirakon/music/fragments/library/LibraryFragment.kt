@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import io.github.muntashirakon.music.R
@@ -16,7 +14,6 @@ import io.github.muntashirakon.music.dialogs.ImportPlaylistDialog
 import io.github.muntashirakon.music.extensions.findNavController
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import kotlinx.android.synthetic.main.fragment_library.*
-import java.lang.String
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
@@ -39,13 +36,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     }
 
     private fun setupTitle() {
-        val color = ThemeStore.accentColor(requireContext())
-        val hexColor = String.format("#%06X", 0xFFFFFF and color)
-        val appName = HtmlCompat.fromHtml(
-            "Retro <span  style='color:$hexColor';>Music</span>",
-            HtmlCompat.FROM_HTML_MODE_COMPACT
-        )
-        appNameText.text = appName
+        appNameText.text = getText(R.string.app_name)
     }
 
     private fun setupNavigationController() {
