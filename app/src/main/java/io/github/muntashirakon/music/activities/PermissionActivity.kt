@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.core.text.HtmlCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsMusicServiceActivity
@@ -51,10 +50,8 @@ class PermissionActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupTitle() {
-        val color = ThemeStore.accentColor(this)
-        val hexColor = String.format("#%06X", 0xFFFFFF and color)
         val appName = HtmlCompat.fromHtml(
-            "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>",
+            "Hello there! <br>Welcome to <b>Metro</b>",
             HtmlCompat.FROM_HTML_MODE_COMPACT
         )
         appNameText.text = appName
