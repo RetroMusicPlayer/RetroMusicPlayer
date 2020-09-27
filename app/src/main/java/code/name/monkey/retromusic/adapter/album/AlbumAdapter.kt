@@ -6,16 +6,17 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
+import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
@@ -30,7 +31,7 @@ open class AlbumAdapter(
     var dataSet: List<Album>,
     protected var itemLayoutRes: Int,
     ICabHolder: ICabHolder?,
-    private val albumClickListener: AlbumClickListener?
+    private val albumClickListener: IAlbumClickListener?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
     activity,
     ICabHolder,
@@ -75,7 +76,7 @@ open class AlbumAdapter(
         holder.title?.text = getAlbumTitle(album)
         holder.text?.text = getAlbumText(album)
         holder.playSongs?.setOnClickListener {
-            album.songs?.let { songs ->
+            album.songs.let { songs ->
                 MusicPlayerRemote.openQueue(
                     songs,
                     0,
@@ -116,7 +117,7 @@ open class AlbumAdapter(
     }
 
     override fun getItemId(position: Int): Long {
-        return dataSet[position].id.toLong()
+        return dataSet[position].id
     }
 
     override fun getIdentifier(position: Int): Album? {
@@ -161,7 +162,7 @@ open class AlbumAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            setImageTransitionName(activity.getString(R.string.transition_album_art))
+            setImageTransitionName("Album")
             menu?.visibility = View.GONE
         }
 
@@ -170,6 +171,7 @@ open class AlbumAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
+                ViewCompat.setTransitionName(itemView, "album")
                 albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, itemView)
             }
         }

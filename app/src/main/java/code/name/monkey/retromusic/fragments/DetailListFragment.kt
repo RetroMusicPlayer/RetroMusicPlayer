@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -16,9 +15,9 @@ import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.db.toSong
 import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
-import code.name.monkey.retromusic.fragments.artists.ArtistClickListener
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.interfaces.IAlbumClickListener
+import code.name.monkey.retromusic.interfaces.IArtistClickListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.state.NowPlayingPanelState
@@ -26,7 +25,7 @@ import code.name.monkey.retromusic.util.RetroUtil
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 
 class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
-    ArtistClickListener, AlbumClickListener {
+    IArtistClickListener, IAlbumClickListener {
     private val args by navArgs<DetailListFragmentArgs>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -175,12 +174,12 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         return 2
     }
 
-    override fun onArtist(artistId: Long, imageView: ImageView) {
+    override fun onArtist(artistId: Long, view: View) {
         findNavController().navigate(
             R.id.artistDetailsFragment,
             bundleOf(EXTRA_ARTIST_ID to artistId),
             null,
-            FragmentNavigatorExtras(imageView to getString(R.string.transition_artist_image))
+            FragmentNavigatorExtras(view to "artist")
         )
     }
 
@@ -189,7 +188,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
-            FragmentNavigatorExtras(view to getString(R.string.transition_album_art))
+            FragmentNavigatorExtras(
+                view to "album"
+            )
         )
     }
 }

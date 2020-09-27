@@ -3,7 +3,9 @@ package code.name.monkey.retromusic.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.WindowManager
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
@@ -15,7 +17,12 @@ import code.name.monkey.retromusic.lyrics.LrcView
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.transition.platform.MaterialArcMotion
+import com.google.android.material.transition.platform.MaterialContainerTransform
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import kotlinx.android.synthetic.main.activity_lyrics.*
+
 
 class LyricsActivity : AbsMusicServiceActivity(), MusicProgressViewUpdateHelper.Callback {
     private lateinit var updateHelper: MusicProgressViewUpdateHelper
@@ -31,7 +38,23 @@ class LyricsActivity : AbsMusicServiceActivity(), MusicProgressViewUpdateHelper.
             return baseUrl
         }
 
+    private fun buildContainerTransform( ): MaterialContainerTransform {
+        val transform = MaterialContainerTransform()
+        transform.setAllContainerColors(
+            MaterialColors.getColor(findViewById(android.R.id.content), R.attr.colorSurface)
+        )
+        transform.addTarget(android.R.id.content)
+        transform.duration = 300
+        transform.interpolator = FastOutSlowInInterpolator()
+        transform.pathMotion = MaterialArcMotion()
+        return transform
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        findViewById<View>(android.R.id.content).transitionName = "lyrics"
+        setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+        window.sharedElementEnterTransition = buildContainerTransform( )
+        window.sharedElementReturnTransition = buildContainerTransform( )
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lyrics)
         setStatusbarColorAuto()

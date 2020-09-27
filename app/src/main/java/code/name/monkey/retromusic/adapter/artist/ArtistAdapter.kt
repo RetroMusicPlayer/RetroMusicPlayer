@@ -12,10 +12,10 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.fragments.artists.ArtistClickListener
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
+import code.name.monkey.retromusic.interfaces.IArtistClickListener
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
@@ -29,8 +29,8 @@ class ArtistAdapter(
     val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
-    ICabHolder: ICabHolder?,
-    private val artistClickListener: ArtistClickListener
+    val ICabHolder: ICabHolder?,
+    val IArtistClickListener: IArtistClickListener
 ) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(
     activity, ICabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
@@ -45,7 +45,7 @@ class ArtistAdapter(
     }
 
     override fun getItemId(position: Int): Long {
-        return dataSet[position].id.toLong()
+        return dataSet[position].id
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -140,11 +140,8 @@ class ArtistAdapter(
                 toggleChecked(layoutPosition)
             } else {
                 image?.let {
-                    ViewCompat.setTransitionName(
-                        it,
-                        activity.getString(R.string.transition_artist_image)
-                    )
-                    artistClickListener.onArtist(dataSet[layoutPosition].id, it)
+                    ViewCompat.setTransitionName(itemView, "album")
+                    IArtistClickListener.onArtist(dataSet[layoutPosition].id, itemView)
                 }
             }
         }

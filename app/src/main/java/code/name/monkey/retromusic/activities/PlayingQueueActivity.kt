@@ -13,6 +13,7 @@ import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
@@ -20,7 +21,6 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeMana
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.activity_playing_queue.*
-import kotlinx.android.synthetic.main.activity_playing_queue.title as NoImageTitle
 
 open class PlayingQueueActivity : AbsMusicServiceActivity() {
 
@@ -31,6 +31,13 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     private var playingQueueAdapter: PlayingQueueAdapter? = null
     private lateinit var linearLayoutManager: LinearLayoutManager
 
+    private fun getUpNextAndQueueTime(): String {
+        val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
+        return MusicUtil.buildInfoString(
+            resources.getString(R.string.up_next),
+            MusicUtil.getReadableDurationString(duration)
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
@@ -47,6 +54,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
         clearQueue.setOnClickListener {
             MusicPlayerRemote.clearQueue()
         }
+        checkForPadding()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -99,8 +107,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
         ThemedFastScroller.create(recyclerView)
     }
 
-    override fun onServiceConnected() {
-        updateCurrentSong()
+    private fun checkForPadding() {
     }
 
     override fun onQueueChanged() {
@@ -108,6 +115,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
             finish()
             return
         }
+        checkForPadding()
         updateQueue()
         updateCurrentSong()
     }
@@ -118,9 +126,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun updateCurrentSong() {
-        NoImageTitle.text = MusicPlayerRemote.currentSong.title
-        text.text = MusicPlayerRemote.currentSong.artistName
-        text2?.text = MusicPlayerRemote.currentSong.albumName
+        toolbar.subtitle = getUpNextAndQueueTime()
     }
 
     override fun onPlayingMetaChanged() {
@@ -130,6 +136,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     private fun updateQueuePosition() {
         playingQueueAdapter?.setCurrent(MusicPlayerRemote.position)
         resetToCurrentPosition()
+        toolbar.subtitle = getUpNextAndQueueTime()
     }
 
     private fun updateQueue() {
@@ -167,6 +174,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupToolbar() {
+        toolbar.subtitle = getUpNextAndQueueTime()
         toolbar.setBackgroundColor(surfaceColor())
         setSupportActionBar(toolbar)
         clearQueue.backgroundTintList = ColorStateList.valueOf(accentColor())

@@ -37,79 +37,16 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/nowPlaying"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/now_playing"
-                    android:textAppearance="@style/TextViewHeadline6"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:paddingStart="72dp"
-                    android:paddingEnd="16dp"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/nowPlaying"
-                    tools:text="@tools:sample/full_names" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:paddingStart="72dp"
-                    android:paddingEnd="16dp"
-                    android:textAppearance="@style/TextViewBody2"
-                    android:textColor="?android:textColorSecondary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title"
-                    tools:text="@tools:sample/full_names" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/upNext"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/up_next"
-                    android:textAppearance="@style/TextViewHeadline6"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:overScrollMode="never"
-                    android:paddingBottom="96dp"
-                    android:scrollbars="none"
-                    app:layout_constraintTop_toBottomOf="@id/upNext" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
-
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingBottom="96dp"
+            android:scrollbars="none"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            tools:listitem="@layout/item_queue" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@android:id/empty"
@@ -131,6 +68,7 @@
             android:text="@string/clear_playing_queue"
             android:textAppearance="@style/TextViewHeadline6"
             app:icon="@drawable/ic_clear_all" />
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

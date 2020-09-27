@@ -2,23 +2,24 @@ package code.name.monkey.retromusic.fragments.artists
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
-import code.name.monkey.retromusic.extensions.findActivityNavController
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.helper.SortOrder.ArtistSortOrder
+import code.name.monkey.retromusic.interfaces.IArtistClickListener
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 
 
 class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
-    ArtistClickListener {
+    IArtistClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.getArtists().observe(viewLifecycleOwner, Observer {
@@ -95,9 +96,13 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         }
     }
 
-    override fun onArtist(artistId: Long, imageView: ImageView) {
-        val controller = findActivityNavController(R.id.fragment_container)
-        controller.navigate(R.id.artistDetailsFragment, bundleOf(EXTRA_ARTIST_ID to artistId))
+    override fun onArtist(artistId: Long, view: View) {
+        findNavController().navigate(
+            R.id.artistDetailsFragment,
+            bundleOf(EXTRA_ARTIST_ID to artistId),
+            null,
+            FragmentNavigatorExtras(view to "artist")
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -255,8 +260,4 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         }
         return false
     }
-}
-
-interface ArtistClickListener {
-    fun onArtist(artistId: Long, imageView: ImageView)
 }

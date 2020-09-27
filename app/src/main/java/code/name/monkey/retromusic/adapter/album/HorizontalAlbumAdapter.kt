@@ -3,10 +3,10 @@ package code.name.monkey.retromusic.adapter.album
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.HorizontalAdapterHelper
+import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.MusicUtil
@@ -17,7 +17,7 @@ class HorizontalAlbumAdapter(
     activity: FragmentActivity,
     dataSet: List<Album>,
     ICabHolder: ICabHolder?,
-    albumClickListener: AlbumClickListener
+    albumClickListener: IAlbumClickListener
 ) : AlbumAdapter(
     activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, ICabHolder, albumClickListener
 ) {

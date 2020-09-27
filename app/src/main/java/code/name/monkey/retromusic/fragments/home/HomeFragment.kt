@@ -36,7 +36,6 @@ import code.name.monkey.retromusic.TOP_PLAYED_PLAYLIST
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
-import code.name.monkey.retromusic.extensions.findActivityNavController
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
 import code.name.monkey.retromusic.glide.UserProfileGlideRequest
@@ -67,14 +66,14 @@ class HomeFragment :
         }
 
         lastAdded.setOnClickListener {
-            findActivityNavController(R.id.fragment_container).navigate(
+            findNavController().navigate(
                 R.id.detailListFragment,
                 bundleOf("type" to LAST_ADDED_PLAYLIST)
             )
         }
 
         topPlayed.setOnClickListener {
-            findActivityNavController(R.id.fragment_container).navigate(
+            findNavController().navigate(
                 R.id.detailListFragment,
                 bundleOf("type" to TOP_PLAYED_PLAYLIST)
             )
@@ -85,7 +84,7 @@ class HomeFragment :
         }
 
         history.setOnClickListener {
-            findActivityNavController(R.id.fragment_container).navigate(
+            findNavController().navigate(
                 R.id.detailListFragment,
                 bundleOf("type" to HISTORY_PLAYLIST)
             )

@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.transition.Hold
 import kotlinx.android.synthetic.main.fragment_main_recycler.*
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
@@ -36,6 +37,14 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     protected var adapter: A? = null
     protected var layoutManager: LM? = null
 
+    private fun setUpTransitions() {
+        exitTransition = Hold()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setUpTransitions()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

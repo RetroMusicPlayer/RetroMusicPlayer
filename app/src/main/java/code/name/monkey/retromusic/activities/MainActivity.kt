@@ -38,10 +38,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        setupNavigationController()
-        if (!hasPermissions()) {
-            findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
-        }
+
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
@@ -51,7 +48,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         updateTabs()
 
         //NavigationUI.setupWithNavController(getBottomNavigationView(), findNavController(R.id.fragment_container))
-
+        setupNavigationController()
+        if (!hasPermissions()) {
+            findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
+        }
     }
 
     private fun setupNavigationController() {

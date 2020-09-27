@@ -20,10 +20,10 @@ import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
-import code.name.monkey.retromusic.fragments.artists.ArtistClickListener
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.interfaces.IAlbumClickListener
+import code.name.monkey.retromusic.interfaces.IArtistClickListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
@@ -31,7 +31,7 @@ import com.google.android.material.card.MaterialCardView
 
 class HomeAdapter(
     private val activity: AppCompatActivity
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), ArtistClickListener, AlbumClickListener {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), IArtistClickListener, IAlbumClickListener {
 
     private var list = listOf<Home>()
 
@@ -231,15 +231,16 @@ class HomeAdapter(
         AlbumAdapter(activity, albums, PreferenceUtil.homeAlbumGridStyle, null, this)
 
     fun gridLayoutManager() = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+
     fun linearLayoutManager() = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-    override fun onArtist(artistId: Long, imageView: ImageView) {
+    override fun onArtist(artistId: Long, view: View) {
         activity.findNavController(R.id.fragment_container).navigate(
             R.id.artistDetailsFragment,
             bundleOf(EXTRA_ARTIST_ID to artistId),
             null,
             FragmentNavigatorExtras(
-                imageView to activity.getString(R.string.transition_album_art)
+                view to "artist"
             )
         )
     }
@@ -250,7 +251,7 @@ class HomeAdapter(
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to activity.getString(R.string.transition_album_art)
+                view to "album"
             )
         )
     }
