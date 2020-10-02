@@ -1,15 +1,16 @@
 package code.name.monkey.retromusic.activities.base
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
-import androidx.annotation.LayoutRes
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
@@ -124,12 +125,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallbackList)
     }
 
-    protected fun wrapSlidingMusicPanel(@LayoutRes resId: Int): View {
+    @SuppressLint("InflateParams")
+    protected fun wrapSlidingMusicPanel(): View {
         val slidingMusicPanelLayout =
             layoutInflater.inflate(R.layout.sliding_music_panel_layout, null)
         val contentContainer: ViewGroup =
             slidingMusicPanelLayout.findViewById(R.id.mainContentFrame)
-        layoutInflater.inflate(resId, contentContainer)
+        layoutInflater.inflate(R.layout.activity_main_content, contentContainer)
         return slidingMusicPanelLayout
     }
 
@@ -334,8 +336,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 COLLAPSED_WITH -> {
                     val heightOfBar = bottomNavigationView.height
                     val height = if (isQueueEmpty) 0 else (heightOfBar * 2) - 24
-                    ViewCompat.setElevation(bottomNavigationView, 10f)
-                    ViewCompat.setElevation(slidingPanel, 10f)
+                    ViewCompat.setElevation(bottomNavigationView, 20f)
+                    ViewCompat.setElevation(slidingPanel, 20f)
                     bottomSheetBehavior.isHideable = false
                     bottomSheetBehavior.peekHeightAnimate(height)
                     bottomNavigationView.translateXAnimate(0f)
@@ -383,12 +385,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             Classic -> ClassicPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
-        supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment)
-            .commit()
+        supportFragmentManager.commit {
+            replace(R.id.playerFragmentContainer, fragment)
+        }
         supportFragmentManager.executePendingTransactions()
-
-        playerFragment =
-            supportFragmentManager.findFragmentById(R.id.playerFragmentContainer) as AbsPlayerFragment
+        playerFragment = whichFragment<AbsPlayerFragment>(R.id.playerFragmentContainer)
         miniPlayerFragment = whichFragment<MiniPlayerFragment>(R.id.miniPlayerFragment)
         miniPlayerFragment?.view?.setOnClickListener { expandPanel() }
     }

@@ -32,7 +32,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     }
 
     override fun createContentView(): View {
-        return wrapSlidingMusicPanel(R.layout.activity_main_content)
+        return wrapSlidingMusicPanel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

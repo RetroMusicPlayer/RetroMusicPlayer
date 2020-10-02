@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription,UnusedAttribute"
-            tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
