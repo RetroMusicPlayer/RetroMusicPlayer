@@ -426,7 +426,7 @@ object PreferenceUtil {
     val tabTitleMode: Int
         get() {
             return when (sharedPreferences.getStringOrDefault(
-                TAB_TEXT_MODE, "1"
+                TAB_TEXT_MODE, "0"
             ).toInt()) {
                 1 -> LabelVisibilityMode.LABEL_VISIBILITY_LABELED
                 0 -> LabelVisibilityMode.LABEL_VISIBILITY_AUTO

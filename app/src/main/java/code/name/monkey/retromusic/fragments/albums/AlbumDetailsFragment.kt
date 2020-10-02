@@ -10,7 +10,6 @@ import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -31,6 +30,7 @@ import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.applyOutlineColor
+import code.name.monkey.retromusic.extensions.findActivityNavController
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
@@ -106,11 +106,14 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         })
 
         setupRecyclerView()
-        artistImage.setOnClickListener {
-            requireActivity().findNavController(R.id.fragment_container)
+        artistImage.setOnClickListener { artistView ->
+            ViewCompat.setTransitionName(artistView, "artist")
+            findActivityNavController(R.id.fragment_container)
                 .navigate(
                     R.id.artistDetailsFragment,
-                    bundleOf(EXTRA_ARTIST_ID to album.artistId)
+                    bundleOf(EXTRA_ARTIST_ID to album.artistId),
+                    null,
+                    FragmentNavigatorExtras(artistView to "artist")
                 )
         }
         playAction.setOnClickListener { MusicPlayerRemote.openQueue(album.songs, 0, true) }

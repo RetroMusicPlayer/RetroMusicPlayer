@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
     android:orientation="vertical"
     android:transitionName="@string/transition_album_art"
     tools:ignore="UnusedAttribute">
-
 
     <FrameLayout
         android:id="@+id/toolbarContainer"
@@ -29,7 +29,6 @@
             android:layout_height="48dp" />
     </FrameLayout>
 
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/albumCoverContainer"
         android:layout_width="0dp"
@@ -38,9 +37,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         app:cardCornerRadius="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/container"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
 
@@ -53,9 +51,8 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/container"
+        android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:descendantFocusability="beforeDescendants"

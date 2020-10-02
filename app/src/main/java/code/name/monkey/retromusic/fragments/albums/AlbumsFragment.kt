@@ -10,17 +10,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSortOrder
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.afollestad.materialcab.MaterialCab
 
 
 class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
-    IAlbumClickListener {
+    IAlbumClickListener, ICabHolder {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +49,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             requireActivity(),
             dataSet,
             itemLayoutRes(),
-            null,
+            this,
             this
         )
     }
@@ -225,15 +229,14 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     private fun handleSortOrderMenuItem(
         item: MenuItem
     ): Boolean {
-        var sortOrder: String? = null
-
-        when (item.itemId) {
-            R.id.action_album_sort_order_asc -> sortOrder = AlbumSortOrder.ALBUM_A_Z
-            R.id.action_album_sort_order_desc -> sortOrder = AlbumSortOrder.ALBUM_Z_A
-            R.id.action_album_sort_order_artist -> sortOrder = AlbumSortOrder.ALBUM_ARTIST
-            R.id.action_album_sort_order_year -> sortOrder = AlbumSortOrder.ALBUM_YEAR
+        val sortOrder: String = when (item.itemId) {
+            R.id.action_album_sort_order_asc -> AlbumSortOrder.ALBUM_A_Z
+            R.id.action_album_sort_order_desc -> AlbumSortOrder.ALBUM_Z_A
+            R.id.action_album_sort_order_artist -> AlbumSortOrder.ALBUM_ARTIST
+            R.id.action_album_sort_order_year -> AlbumSortOrder.ALBUM_YEAR
+            else -> PreferenceUtil.albumSortOrder
         }
-        if (sortOrder != null) {
+        if (sortOrder != PreferenceUtil.albumSortOrder) {
             item.isChecked = true
             setAndSaveSortOrder(sortOrder)
             return true
@@ -244,16 +247,16 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     private fun handleLayoutResType(
         item: MenuItem
     ): Boolean {
-        var layoutRes = -1
-        when (item.itemId) {
-            R.id.action_layout_normal -> layoutRes = R.layout.item_grid
-            R.id.action_layout_card -> layoutRes = R.layout.item_card
-            R.id.action_layout_colored_card -> layoutRes = R.layout.item_card_color
-            R.id.action_layout_circular -> layoutRes = R.layout.item_grid_circle
-            R.id.action_layout_image -> layoutRes = R.layout.image
-            R.id.action_layout_gradient_image -> layoutRes = R.layout.item_image_gradient
+        val layoutRes = when (item.itemId) {
+            R.id.action_layout_normal -> R.layout.item_grid
+            R.id.action_layout_card -> R.layout.item_card
+            R.id.action_layout_colored_card -> R.layout.item_card_color
+            R.id.action_layout_circular -> R.layout.item_grid_circle
+            R.id.action_layout_image -> R.layout.image
+            R.id.action_layout_gradient_image -> R.layout.item_image_gradient
+            else -> PreferenceUtil.albumGridStyle
         }
-        if (layoutRes != -1) {
+        if (layoutRes != PreferenceUtil.albumGridStyle) {
             item.isChecked = true
             setAndSaveLayoutRes(layoutRes)
             return true
@@ -264,16 +267,16 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     private fun handleGridSizeMenuItem(
         item: MenuItem
     ): Boolean {
-        var gridSize = 0
-        when (item.itemId) {
-            R.id.action_grid_size_1 -> gridSize = 1
-            R.id.action_grid_size_2 -> gridSize = 2
-            R.id.action_grid_size_3 -> gridSize = 3
-            R.id.action_grid_size_4 -> gridSize = 4
-            R.id.action_grid_size_5 -> gridSize = 5
-            R.id.action_grid_size_6 -> gridSize = 6
-            R.id.action_grid_size_7 -> gridSize = 7
-            R.id.action_grid_size_8 -> gridSize = 8
+        val gridSize = when (item.itemId) {
+            R.id.action_grid_size_1 -> 1
+            R.id.action_grid_size_2 -> 2
+            R.id.action_grid_size_3 -> 3
+            R.id.action_grid_size_4 -> 4
+            R.id.action_grid_size_5 -> 5
+            R.id.action_grid_size_6 -> 6
+            R.id.action_grid_size_7 -> 7
+            R.id.action_grid_size_8 -> 8
+            else -> 0
         }
         if (gridSize > 0) {
             item.isChecked = true
@@ -283,4 +286,30 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         return false
     }
 
+    private var cab: MaterialCab? = null
+
+    fun handleBackPress(): Boolean {
+        cab?.let {
+            if (it.isActive) {
+                it.finish()
+                return true
+            }
+        }
+        return false
+    }
+
+    override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
+        cab?.let {
+            println("Cab")
+            if (it.isActive) {
+                it.finish()
+            }
+        }
+        cab = MaterialCab(mainActivity, R.id.cab_stub)
+            .setMenu(menuRes)
+            .setCloseDrawableRes(R.drawable.ic_close)
+            .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(surfaceColor()))
+            .start(callback)
+        return cab as MaterialCab
+    }
 }

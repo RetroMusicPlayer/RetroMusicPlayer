@@ -148,7 +148,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         miniPlayerFragment?.view?.alpha = alpha
         miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
         bottomNavigationView.translationY = progress * 500
-        bottomNavigationView.alpha = alpha
+        //bottomNavigationView.alpha = alpha
     }
 
     open fun onPanelCollapsed() {
@@ -207,8 +207,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     override fun onQueueChanged() {
         super.onQueueChanged()
-        val isEmpty = MusicPlayerRemote.playingQueue.isEmpty()
-        if (isEmpty) {
+        if (MusicPlayerRemote.playingQueue.isEmpty()) {
             libraryViewModel.setPanelState(HIDE)
         } else {
             if (bottomNavigationView.isVisible) {
@@ -229,6 +228,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             collapsePanel()
             return true
         }
+
         return false
     }
 
@@ -323,17 +323,20 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             val isQueueEmpty = MusicPlayerRemote.playingQueue.isEmpty()
             when (state) {
                 EXPAND -> {
+                    println("EXPAND")
                     expandPanel()
                 }
                 HIDE -> {
-                    ViewCompat.setElevation(slidingPanel, 0f)
-                    ViewCompat.setElevation(bottomNavigationView, 10f)
+                    println("HIDE")
+                    bottomNavigationView.translateXAnimate(0f)
                     bottomSheetBehavior.isHideable = true
                     bottomSheetBehavior.peekHeightAnimate(0)
-                    bottomNavigationView.translateXAnimate(0f)
                     bottomSheetBehavior.state = STATE_COLLAPSED
+                    ViewCompat.setElevation(slidingPanel, 0f)
+                    ViewCompat.setElevation(bottomNavigationView, 10f)
                 }
                 COLLAPSED_WITH -> {
+                    println("COLLAPSED_WITH")
                     val heightOfBar = bottomNavigationView.height
                     val height = if (isQueueEmpty) 0 else (heightOfBar * 2) - 24
                     ViewCompat.setElevation(bottomNavigationView, 20f)
@@ -343,6 +346,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     bottomNavigationView.translateXAnimate(0f)
                 }
                 COLLAPSED_WITHOUT -> {
+                    println("COLLAPSED_WITHOUT")
                     val heightOfBar = bottomNavigationView.height
                     val height = if (isQueueEmpty) 0 else heightOfBar - 24
                     ViewCompat.setElevation(bottomNavigationView, 10f)
@@ -352,6 +356,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     bottomNavigationView.translateXAnimate(150f)
                 }
                 else -> {
+                    println("else")
                     bottomSheetBehavior.isHideable = true
                     bottomSheetBehavior.peekHeight = 0
                     collapsePanel()
