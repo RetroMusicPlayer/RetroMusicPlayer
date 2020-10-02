@@ -201,7 +201,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
 
     override fun onPlayStateChanged() {
         updatePlayPauseDrawableState()
-
     }
 
     override fun onRepeatModeChanged() {

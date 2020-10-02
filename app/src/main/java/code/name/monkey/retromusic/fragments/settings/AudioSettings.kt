@@ -18,6 +18,7 @@ import android.content.Intent
 import android.media.audiofx.AudioEffect
 import android.os.Bundle
 import androidx.preference.Preference
+import code.name.monkey.retromusic.EQUALIZER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.NavigationUtil
 
@@ -28,14 +29,14 @@ import code.name.monkey.retromusic.util.NavigationUtil
 
 class AudioSettings : AbsSettingsFragment() {
     override fun invalidateSettings() {
-        val findPreference: Preference = findPreference("equalizer")!!
+        val findPreference: Preference? = findPreference(EQUALIZER)
         if (!hasEqualizer()) {
-            findPreference.isEnabled = false
-            findPreference.summary = resources.getString(R.string.no_equalizer)
+            findPreference?.isEnabled = false
+            findPreference?.summary = resources.getString(R.string.no_equalizer)
         } else {
-            findPreference.isEnabled = true
+            findPreference?.isEnabled = true
         }
-        findPreference.setOnPreferenceClickListener {
+        findPreference?.setOnPreferenceClickListener {
             NavigationUtil.openEqualizer(requireActivity())
             true
         }

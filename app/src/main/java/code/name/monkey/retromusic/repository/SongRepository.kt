@@ -149,13 +149,22 @@ class RealSongRepository(private val context: Context) : SongRepository {
         selectionFinal =
             selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
 
-        return context.contentResolver.query(
-            Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
-            baseProjection,
-            selectionFinal,
-            selectionValuesFinal,
-            sortOrder
-        )
+        val uri = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
+        } else {
+            Media.EXTERNAL_CONTENT_URI
+        }
+        return try {
+            context.contentResolver.query(
+                uri,
+                baseProjection,
+                selectionFinal,
+                selectionValuesFinal,
+                sortOrder
+            )
+        } catch (ex: SecurityException) {
+            return null
+        }
     }
 
     private fun generateBlacklistSelection(

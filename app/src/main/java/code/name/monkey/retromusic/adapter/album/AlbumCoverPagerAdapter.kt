@@ -1,14 +1,17 @@
 package code.name.monkey.retromusic.adapter.album
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.LyricsActivity
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -90,22 +93,27 @@ class AlbumCoverPagerAdapter(
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
             albumCover = view.findViewById(R.id.player_image)
             albumCover.setOnClickListener {
-                //LyricsDialog().show(childFragmentManager, "LyricsDialog")
-                showLyricsDialog()
+                val intent = Intent(requireContext(), LyricsActivity::class.java)
+                val activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    requireActivity(),
+                    it,
+                    "lyrics"
+                )
+                startActivity(intent, activityOptions.toBundle())
             }
             return view
         }
 
         private fun showLyricsDialog() {
             lifecycleScope.launch(Dispatchers.IO) {
-                val data: String = MusicUtil.getLyrics(song) ?: "No lyrics found"
+                val data: String? = MusicUtil.getLyrics(song)
                 withContext(Dispatchers.Main) {
                     MaterialAlertDialogBuilder(
                         requireContext(),
                         R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
                     ).apply {
                         setTitle(song.title)
-                        setMessage(data)
+                        setMessage(if (data.isNullOrEmpty()) "No lyrics found" else data)
                         setNegativeButton(R.string.synced_lyrics) { _, _ ->
                             NavigationUtil.goToLyrics(requireActivity())
                         }

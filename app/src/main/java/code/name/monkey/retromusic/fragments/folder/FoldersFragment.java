@@ -20,7 +20,10 @@ import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,14 +35,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.text.HtmlCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -53,19 +61,21 @@ import java.util.List;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.adapter.SongFileAdapter;
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper;
-import code.name.monkey.retromusic.interfaces.CabHolder;
-import code.name.monkey.retromusic.interfaces.Callbacks;
-import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
+import code.name.monkey.retromusic.interfaces.ICabHolder;
+import code.name.monkey.retromusic.interfaces.ICallbacks;
+import code.name.monkey.retromusic.interfaces.IMainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.state.NowPlayingPanelState;
 import code.name.monkey.retromusic.util.DensityUtil;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -75,11 +85,13 @@ import code.name.monkey.retromusic.views.BreadCrumbLayout;
 import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener;
 import me.zhanghai.android.fastscroll.FastScroller;
 
+import static code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor;
+
 public class FoldersFragment extends AbsMainActivityFragment implements
-        MainActivityFragmentCallbacks,
-        CabHolder,
+        IMainActivityFragmentCallbacks,
+        ICabHolder,
         BreadCrumbLayout.SelectionCallback,
-        Callbacks,
+        ICallbacks,
         LoaderManager.LoaderCallbacks<List<File>> {
 
     public static final String TAG = FoldersFragment.class.getSimpleName();
@@ -91,6 +103,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = 5;
     private SongFileAdapter adapter;
+    private Toolbar toolbar;
+    private TextView appNameText;
     private BreadCrumbLayout breadCrumbs;
     private MaterialCab cab;
     private View coordinatorLayout;
@@ -137,6 +151,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
+
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -149,23 +164,39 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        getLibraryViewModel().setPanelState(NowPlayingPanelState.COLLAPSED_WITH);
+        getMainActivity().setSupportActionBar(toolbar);
+        getMainActivity().getSupportActionBar().setTitle(null);
         setStatusBarColorAuto(view);
         setUpAppbarColor();
         setUpBreadCrumbs();
         setUpRecyclerView();
         setUpAdapter();
+        setUpTitle();
+    }
+
+    private void setUpTitle() {
+        toolbar.setNavigationOnClickListener(v ->
+                Navigation.findNavController(v).navigate(R.id.searchFragment, null, getNavOptions())
+        );
+        int color = ThemeStore.Companion.accentColor(requireContext());
+        String hexColor = String.format("#%06X", 0xFFFFFF & color);
+        Spanned appName = HtmlCompat.fromHtml(
+                "Retro <span  style='color:" + hexColor + ";'>Music</span>",
+                HtmlCompat.FROM_HTML_MODE_COMPACT
+        );
+        appNameText.setText(appName);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        setHasOptionsMenu(true);
         if (savedInstanceState == null) {
-            //noinspection ConstantConditions
             setCrumb(new BreadCrumbLayout.Crumb(FileUtil.safeGetCanonicalFile(PreferenceUtil.INSTANCE.getStartDirectory())), true);
         } else {
             breadCrumbs.restoreFromStateWrapper(savedInstanceState.getParcelable(CRUMBS));
-            getLoaderManager().initLoader(LOADER_ID, null, this);
+            LoaderManager.getInstance(this).initLoader(LOADER_ID, null, this);
         }
     }
 
@@ -181,7 +212,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         if (breadCrumbs != null) {
             outState.putParcelable(CRUMBS, breadCrumbs.getStateWrapper());
         }
-
     }
 
     @Override
@@ -209,7 +239,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     @Override
-    public void onFileMenuClicked(final File file, View view) {
+    public void onFileMenuClicked(final File file, @NotNull View view) {
         PopupMenu popupMenu = new PopupMenu(getActivity(), view);
         if (file.isDirectory()) {
             popupMenu.inflate(R.menu.menu_item_directory);
@@ -222,7 +252,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     case R.id.action_delete_from_device:
                         new ListSongsAsyncTask(getActivity(), null, (songs, extra) -> {
                             if (!songs.isEmpty()) {
-                                SongsMenuHelper.INSTANCE.handleMenuClick(getActivity(), songs, itemId);
+                                SongsMenuHelper.INSTANCE.handleMenuClick(requireActivity(), songs, itemId);
                             }
                         }).execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER,
                                 getFileComparator()));
@@ -256,7 +286,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     case R.id.action_set_as_ringtone:
                     case R.id.action_delete_from_device:
                         new ListSongsAsyncTask(getActivity(), null,
-                                (songs, extra) -> SongMenuHelper.INSTANCE.handleMenuClick(getActivity(),
+                                (songs, extra) -> SongMenuHelper.INSTANCE.handleMenuClick(requireActivity(),
                                         songs.get(0), itemId))
                                 .execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER,
                                         getFileComparator()));
@@ -273,7 +303,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     @Override
-    public void onFileSelected(File file) {
+    public void onFileSelected(@NotNull File file) {
         file = tryGetCanonicalFile(file); // important as we compare the path value later
         if (file.isDirectory()) {
             setCrumb(new BreadCrumbLayout.Crumb(file), true);
@@ -319,11 +349,33 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     @Override
-    public void onMultipleItemAction(MenuItem item, ArrayList<File> files) {
+    public void onMultipleItemAction(MenuItem item, @NotNull ArrayList<File> files) {
         final int itemId = item.getItemId();
         new ListSongsAsyncTask(getActivity(), null,
-                (songs, extra) -> SongsMenuHelper.INSTANCE.handleMenuClick(getActivity(), songs, itemId))
+                (songs, extra) -> SongsMenuHelper.INSTANCE.handleMenuClick(requireActivity(), songs, itemId))
                 .execute(new ListSongsAsyncTask.LoadingInfo(files, AUDIO_FILE_FILTER, getFileComparator()));
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.add(0, R.id.action_scan, 0, R.string.scan_media).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.add(0, R.id.action_go_to_start_directory, 1, R.string.action_go_to_start_directory).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.removeItem(R.id.action_grid_size);
+        menu.removeItem(R.id.action_layout_type);
+        menu.removeItem(R.id.action_sort_order);
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(
+                requireContext(),
+                toolbar,
+                menu,
+                getToolbarBackgroundColor(toolbar)
+        );
     }
 
     @Override
@@ -360,7 +412,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     @NonNull
     @Override
-    public MaterialCab openCab(int menuRes, MaterialCab.Callback callback) {
+    public MaterialCab openCab(int menuRes, @NotNull MaterialCab.Callback callback) {
         if (cab != null && cab.isActive()) {
             cab.finish();
         }
@@ -407,6 +459,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         breadCrumbs = view.findViewById(R.id.breadCrumbs);
         empty = view.findViewById(android.R.id.empty);
         emojiText = view.findViewById(R.id.emptyEmoji);
+        toolbar = view.findViewById(R.id.toolbar);
+        appNameText = view.findViewById(R.id.appNameText);
     }
 
     private void saveScrollPosition() {
@@ -438,7 +492,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         if (addToHistory) {
             breadCrumbs.addHistory(crumb);
         }
-        getLoaderManager().restartLoader(LOADER_ID, null, this);
+        LoaderManager.getInstance(this).restartLoader(LOADER_ID, null, this);
     }
 
     private void setUpAdapter() {

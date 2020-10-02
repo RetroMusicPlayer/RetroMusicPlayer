@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.adapter.base;
 
 import android.graphics.Color;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,14 +40,12 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
 
     @Nullable
     public ImageView image;
+
     @Nullable
     public ImageView artistImage;
 
     @Nullable
     public ImageView playerImage;
-
-    @Nullable
-    public ViewGroup imageContainer;
 
     @Nullable
     public MaterialCardView imageContainerCard;
@@ -78,6 +75,9 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
     public TextView text;
 
     @Nullable
+    public TextView text2;
+
+    @Nullable
     public TextView time;
 
     @Nullable
@@ -87,6 +87,7 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
         super(itemView);
         title = itemView.findViewById(R.id.title);
         text = itemView.findViewById(R.id.text);
+        text2 = itemView.findViewById(R.id.text2);
 
         image = itemView.findViewById(R.id.image);
         artistImage = itemView.findViewById(R.id.artistImage);
@@ -94,7 +95,6 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
         time = itemView.findViewById(R.id.time);
 
         imageText = itemView.findViewById(R.id.imageText);
-        imageContainer = itemView.findViewById(R.id.imageContainer);
         imageTextContainer = itemView.findViewById(R.id.imageTextContainer);
         imageContainerCard = itemView.findViewById(R.id.imageContainerCard);
 

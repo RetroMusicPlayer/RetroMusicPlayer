@@ -7,6 +7,7 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
@@ -30,7 +32,6 @@ import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.applyOutlineColor
 import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
@@ -38,6 +39,7 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
+import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
@@ -49,27 +51,24 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
-import com.google.android.material.transition.platform.MaterialArcMotion
-import com.google.android.material.transition.platform.MaterialContainerTransform
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_album_content.*
 import kotlinx.android.synthetic.main.fragment_album_details.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
 class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_details),
-    AlbumClickListener {
+    IAlbumClickListener {
 
     private val arguments by navArgs<AlbumDetailsFragmentArgs>()
     private val detailsViewModel by viewModel<AlbumDetailsViewModel> {
         parametersOf(arguments.extraAlbumId)
     }
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     private lateinit var simpleSongAdapter: SimpleSongAdapter
     private lateinit var album: Album
@@ -82,12 +81,15 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
     }
 
+    private fun setUpTransitions() {
+        val transform = MaterialContainerTransform()
+        transform.setAllContainerColors(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+        sharedElementEnterTransition = transform
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            duration = 1000L
-            pathMotion = MaterialArcMotion()
-        }
+        setUpTransitions()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,6 +98,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
         toolbar.title = " "
+        ViewCompat.setTransitionName(container, "album")
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
             startPostponedEnterTransition()
@@ -133,9 +136,8 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     override fun onDestroy() {
         super.onDestroy()
-        playerActivity?.removeMusicServiceEventListener(detailsViewModel)
+        serviceActivity?.removeMusicServiceEventListener(detailsViewModel)
     }
-
 
     private fun setupRecyclerView() {
         simpleSongAdapter = SimpleSongAdapter(
@@ -278,7 +280,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
-            FragmentNavigatorExtras(view to getString(R.string.transition_album_art))
+            FragmentNavigatorExtras(
+                view to "album"
+            )
         )
     }
 

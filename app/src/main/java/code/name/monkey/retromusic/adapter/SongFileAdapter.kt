@@ -26,8 +26,8 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
-import code.name.monkey.retromusic.interfaces.CabHolder
-import code.name.monkey.retromusic.interfaces.Callbacks
+import code.name.monkey.retromusic.interfaces.ICabHolder
+import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
@@ -43,10 +43,10 @@ class SongFileAdapter(
     private val activity: AppCompatActivity,
     private var dataSet: List<File>,
     private val itemLayoutRes: Int,
-    private val callbacks: Callbacks?,
-    cabHolder: CabHolder?
+    private val ICallbacks: ICallbacks?,
+    ICabHolder: ICabHolder?
 ) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(
-    activity, cabHolder, R.menu.menu_media_selection
+    activity, ICabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
 
     init {
@@ -136,8 +136,8 @@ class SongFileAdapter(
     }
 
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<File>) {
-        if (callbacks == null) return
-        callbacks.onMultipleItemAction(menuItem, selection as ArrayList<File>)
+        if (ICallbacks == null) return
+        ICallbacks.onMultipleItemAction(menuItem, selection as ArrayList<File>)
     }
 
     override fun getPopupText(position: Int): String {
@@ -152,11 +152,11 @@ class SongFileAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            if (menu != null && callbacks != null) {
+            if (menu != null && ICallbacks != null) {
                 menu?.setOnClickListener { v ->
                     val position = layoutPosition
                     if (isPositionInRange(position)) {
-                        callbacks.onFileMenuClicked(dataSet[position], v)
+                        ICallbacks.onFileMenuClicked(dataSet[position], v)
                     }
                 }
             }
@@ -171,7 +171,7 @@ class SongFileAdapter(
                 if (isInQuickSelectMode) {
                     toggleChecked(position)
                 } else {
-                    callbacks?.onFileSelected(dataSet[position])
+                    ICallbacks?.onFileSelected(dataSet[position])
                 }
             }
         }

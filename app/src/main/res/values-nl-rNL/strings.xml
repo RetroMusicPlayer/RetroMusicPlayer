@@ -313,7 +313,7 @@
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
     <string name="pref_summary_gapless_playback">"Kan afspeelproblemen veroorzaken op sommige toestellen"</string>
     <string name="pref_summary_genre_toggle">Toggle genre tab</string>
-    <string name="pref_summary_home_banner">Toggle home banner style</string>
+    <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Kan album cover kwaliteit verbeteren, maar veroorzaakt langere laadtijden. Alleen aanzetten als je problemen hebt met lage resolutie artworks</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Zet besturing knoppen aan op vergrendelscherm</string>
@@ -345,8 +345,8 @@
     <string name="pref_title_gapless_playback">Afspelen zonder pauzes</string>
     <string name="pref_title_general_theme">Basis thema</string>
     <string name="pref_title_genre_toggle">Show genre tab</string>
-    <string name="pref_title_home_artist_grid_style">Home artist grid</string>
-    <string name="pref_title_home_banner">Home banner</string>
+    <string name="pref_title_home_artist_grid_style">Artist grid</string>
+    <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Negeer media store covers</string>
     <string name="pref_title_last_added_interval">Laatst toegevoegde afspeellijst interval</string>
     <string name="pref_title_lock_screen">Volledig scherm besturing knoppen</string>

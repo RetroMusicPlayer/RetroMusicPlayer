@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.SongEntity
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
+import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 
 class PlaylistDetailsViewModel(
     private val realRepository: RealRepository,
     private var playlist: PlaylistWithSongs
-) : ViewModel(), MusicServiceEventListener {
+) : ViewModel(), IMusicServiceEventListener {
 
     private val _playListSongs = MutableLiveData<List<Song>>()
     private val _playlist = MutableLiveData<PlaylistWithSongs>().apply {

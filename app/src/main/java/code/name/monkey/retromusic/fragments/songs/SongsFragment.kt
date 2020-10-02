@@ -12,15 +12,9 @@ import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeF
 import code.name.monkey.retromusic.helper.SortOrder.SongSortOrder
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.google.android.material.transition.platform.MaterialFadeThrough
 
 
 class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enterTransition = MaterialFadeThrough()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.getSongs().observe(viewLifecycleOwner, Observer {
@@ -90,6 +84,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
         val gridSizeItem: MenuItem = menu.findItem(R.id.action_grid_size)
         if (RetroUtil.isLandscape()) {
             gridSizeItem.setTitle(R.string.action_grid_size_land)
@@ -98,7 +93,6 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         val layoutItem = menu.findItem(R.id.action_layout_type)
         setupLayoutMenu(layoutItem.subMenu)
         setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun setUpSortOrderMenu(

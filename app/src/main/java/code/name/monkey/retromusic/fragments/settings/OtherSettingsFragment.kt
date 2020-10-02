@@ -18,6 +18,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.preference.Preference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+import code.name.monkey.retromusic.LANGUAGE_NAME
+import code.name.monkey.retromusic.LAST_ADDED_CUTOFF
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.HomeSections
@@ -29,8 +31,9 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class OtherSettingsFragment : AbsSettingsFragment() {
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
+
     override fun invalidateSettings() {
-        val languagePreference: ATEListPreference? = findPreference("language_name")
+        val languagePreference: ATEListPreference? = findPreference(LANGUAGE_NAME)
         languagePreference?.setOnPreferenceChangeListener { _, _ ->
             requireActivity().recreate()
             return@setOnPreferenceChangeListener true
@@ -43,13 +46,13 @@ class OtherSettingsFragment : AbsSettingsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val preference: Preference? = findPreference("last_added_interval")
+        val preference: Preference? = findPreference(LAST_ADDED_CUTOFF)
         preference?.setOnPreferenceChangeListener { lastAdded, newValue ->
             setSummary(lastAdded, newValue)
             libraryViewModel.forceReload(HomeSections)
             true
         }
-        val languagePreference: Preference? = findPreference("language_name")
+        val languagePreference: Preference? = findPreference(LANGUAGE_NAME)
         languagePreference?.setOnPreferenceChangeListener { prefs, newValue ->
             setSummary(prefs, newValue)
             true

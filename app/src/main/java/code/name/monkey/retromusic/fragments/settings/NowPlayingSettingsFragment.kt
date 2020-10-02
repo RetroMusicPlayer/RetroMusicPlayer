@@ -33,8 +33,8 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(),
         updateNowPlayingScreenSummary()
         updateAlbumCoverStyleSummary()
 
-        val carouselEffect: TwoStatePreference = findPreference("carousel_effect")!!
-        carouselEffect.setOnPreferenceChangeListener { _, newValue ->
+        val carouselEffect: TwoStatePreference? = findPreference(CAROUSEL_EFFECT)
+        carouselEffect?.setOnPreferenceChangeListener { _, newValue ->
             if (newValue as Boolean && !App.isProVersion()) {
                 showProToastAndNavigate(getString(R.string.pref_title_toggle_carousel_effect))
                 return@setOnPreferenceChangeListener false
@@ -60,7 +60,7 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
-        val preference: Preference? = findPreference("album_cover_transform")
+        val preference: Preference? = findPreference(ALBUM_COVER_TRANSFORM)
         preference?.setOnPreferenceChangeListener { albumPrefs, newValue ->
             setSummary(albumPrefs, newValue)
             true

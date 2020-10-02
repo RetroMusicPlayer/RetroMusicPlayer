@@ -8,8 +8,11 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.fragments.LibraryViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 abstract class AbsMainActivityFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout) {
+    val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     val mainActivity: MainActivity
         get() = activity as MainActivity

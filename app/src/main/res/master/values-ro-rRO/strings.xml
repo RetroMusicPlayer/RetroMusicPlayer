@@ -313,7 +313,7 @@
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
     <string name="pref_summary_gapless_playback">"Poate cauza probleme de redare pe unele dispozitive."</string>
     <string name="pref_summary_genre_toggle">Toggle genre tab</string>
-    <string name="pref_summary_home_banner">Toggle home banner style</string>
+    <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Poate mări calitatea copertei de album, dar cauzează încărcarea mai lentă a imaginilor. Activați această opțiune doar dacă aveți probleme cu coperta de album cu rezoluție mică.</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Comenzi pe ecranul de blocare pentru Retro music.</string>
@@ -345,8 +345,8 @@
     <string name="pref_title_gapless_playback">Redare \"Gapless\"</string>
     <string name="pref_title_general_theme">Temă</string>
     <string name="pref_title_genre_toggle">Show genre tab</string>
-    <string name="pref_title_home_artist_grid_style">Home artist grid</string>
-    <string name="pref_title_home_banner">Home banner</string>
+    <string name="pref_title_home_artist_grid_style">Artist grid</string>
+    <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignoră copertele de pe Magazinul Media</string>
     <string name="pref_title_last_added_interval">Ultimul interval de playlist adăugat</string>
     <string name="pref_title_lock_screen">Comenzi ecran complet</string>

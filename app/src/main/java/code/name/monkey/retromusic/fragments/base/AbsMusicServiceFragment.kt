@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.navOptions
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
+import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.RetroUtil
 import org.jaudiotagger.audio.AudioFileIO
@@ -23,13 +23,10 @@ import java.util.*
  */
 
 open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
-    MusicServiceEventListener {
+    IMusicServiceEventListener {
 
     val navOptions by lazy {
         navOptions {
-            popUpTo(R.id.action_home) {
-                inclusive = false
-            }
             launchSingleTop = false
             anim {
                 enter = R.anim.retro_fragment_open_enter
@@ -40,13 +37,13 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
         }
     }
 
-    var playerActivity: AbsMusicServiceActivity? = null
+    var serviceActivity: AbsMusicServiceActivity? = null
         private set
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            playerActivity = context as AbsMusicServiceActivity?
+            serviceActivity = context as AbsMusicServiceActivity?
         } catch (e: ClassCastException) {
             throw RuntimeException(context.javaClass.simpleName + " must be an instance of " + AbsMusicServiceActivity::class.java.simpleName)
         }
@@ -54,17 +51,17 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
 
     override fun onDetach() {
         super.onDetach()
-        playerActivity = null
+        serviceActivity = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        playerActivity?.addMusicServiceEventListener(this)
+        serviceActivity?.addMusicServiceEventListener(this)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        playerActivity?.removeMusicServiceEventListener(this)
+        serviceActivity?.removeMusicServiceEventListener(this)
     }
 
     override fun onPlayingMetaChanged() {

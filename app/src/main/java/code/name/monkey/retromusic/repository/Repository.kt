@@ -16,12 +16,12 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService
-import code.name.monkey.retromusic.network.LyricsRestService
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.Result.*
 import code.name.monkey.retromusic.network.model.LastFmAlbum
@@ -40,7 +40,7 @@ interface Repository {
     fun genresFlow(): Flow<Result<List<Genre>>>
     fun historySong(): List<HistoryEntity>
     fun favorites(): LiveData<List<SongEntity>>
-    fun observableHistorySongs(): LiveData<List<HistoryEntity>>
+    fun observableHistorySongs(): LiveData<List<Song>>
     fun albumById(albumId: Long): Album
     fun playlistSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>>
     suspend fun fetchAlbums(): List<Album>
@@ -96,8 +96,11 @@ interface Repository {
     suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun blackListPaths(): List<BlackListStoreEntity>
-    suspend fun lyrics(artist: String, title: String): Result<String>
     suspend fun deleteSongs(songs: List<Song>)
+    suspend fun contributor(): List<Contributor>
+    suspend fun searchArtists(query: String): List<Artist>
+    suspend fun searchSongs(query: String): List<Song>
+    suspend fun searchAlbums(query: String): List<Album>
 }
 
 class RealRepository(
@@ -112,17 +115,20 @@ class RealRepository(
     private val searchRepository: RealSearchRepository,
     private val topPlayedRepository: TopPlayedRepository,
     private val roomRepository: RoomRepository,
-    private val lyricsRestService: LyricsRestService
+    private val localDataRepository: LocalDataRepository
 ) : Repository {
 
-    override suspend fun lyrics(artist: String, title: String): Result<String> = try {
-        Success(lyricsRestService.getLyrics(artist, title))
-    } catch (e: Exception) {
-        println(e)
-        Error(e)
-    }
 
     override suspend fun deleteSongs(songs: List<Song>) = roomRepository.deleteSongs(songs)
+
+    override suspend fun contributor(): List<Contributor> = localDataRepository.contributors()
+
+    override suspend fun searchSongs(query: String): List<Song> = songRepository.songs(query)
+
+    override suspend fun searchAlbums(query: String): List<Album> = albumRepository.albums(query)
+
+    override suspend fun searchArtists(query: String): List<Artist> =
+        artistRepository.artists(query)
 
     override suspend fun fetchAlbums(): List<Album> = albumRepository.albums()
 
@@ -315,8 +321,10 @@ class RealRepository(
     override suspend fun blackListPaths(): List<BlackListStoreEntity> =
         roomRepository.blackListPaths()
 
-    override fun observableHistorySongs(): LiveData<List<HistoryEntity>> =
-        roomRepository.observableHistorySongs()
+    override fun observableHistorySongs(): LiveData<List<Song>> =
+        Transformations.map(roomRepository.observableHistorySongs()) {
+            it.fromHistoryToSongs()
+        }
 
     override fun historySong(): List<HistoryEntity> =
         roomRepository.historySongs()

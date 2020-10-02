@@ -30,7 +30,7 @@ import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.dialogs.SongDetailDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.interfaces.PaletteColorHolder
+import code.name.monkey.retromusic.interfaces.IPaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.MusicUtil
@@ -90,10 +90,10 @@ object SongMenuHelper : KoinComponent {
             R.id.action_tag_editor -> {
                 val tagEditorIntent = Intent(activity, SongTagEditorActivity::class.java)
                 tagEditorIntent.putExtra(AbsTagEditorActivity.EXTRA_ID, song.id)
-                if (activity is PaletteColorHolder)
+                if (activity is IPaletteColorHolder)
                     tagEditorIntent.putExtra(
                         AbsTagEditorActivity.EXTRA_PALETTE,
-                        (activity as PaletteColorHolder).paletteColor
+                        (activity as IPaletteColorHolder).paletteColor
                     )
                 activity.startActivity(tagEditorIntent)
                 return true

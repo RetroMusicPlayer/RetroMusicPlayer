@@ -5,27 +5,22 @@ import android.view.*
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
-import code.name.monkey.retromusic.extensions.findActivityNavController
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSortOrder
+import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.google.android.material.transition.platform.MaterialFadeThrough
 
 
 class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
-    AlbumClickListener {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enterTransition = MaterialFadeThrough()
-    }
+    IAlbumClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -104,17 +99,18 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
-        findActivityNavController(R.id.fragment_container).navigate(
+        findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to getString(R.string.transition_album_art)
+                view to "album"
             )
         )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
         val gridSizeItem: MenuItem = menu.findItem(R.id.action_grid_size)
         if (RetroUtil.isLandscape()) {
             gridSizeItem.setTitle(R.string.action_grid_size_land)
@@ -123,7 +119,6 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         val layoutItem = menu.findItem(R.id.action_layout_type)
         setupLayoutMenu(layoutItem.subMenu)
         setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun setUpSortOrderMenu(
@@ -288,8 +283,4 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         return false
     }
 
-}
-
-interface AlbumClickListener {
-    fun onAlbumClick(albumId: Long, view: View)
 }

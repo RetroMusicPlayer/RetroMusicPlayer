@@ -45,7 +45,8 @@
             android:overScrollMode="never"
             android:paddingBottom="96dp"
             android:scrollbars="none"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            tools:listitem="@layout/item_queue" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@android:id/empty"

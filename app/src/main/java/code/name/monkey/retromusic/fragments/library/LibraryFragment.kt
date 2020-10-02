@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.core.text.HtmlCompat
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import code.name.monkey.appthemehelper.ThemeStore
@@ -13,10 +14,12 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
-import code.name.monkey.retromusic.extensions.findNavController
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.model.CategoryInfo
+import code.name.monkey.retromusic.state.NowPlayingPanelState
+import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_library.*
-import java.lang.String
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
@@ -24,7 +27,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
         retainInstance = true
-        mainActivity.hideBottomBarVisibility(true)
+        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITH)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         toolbar.setNavigationOnClickListener {
@@ -49,8 +52,20 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     }
 
     private fun setupNavigationController() {
-        val navController = findNavController(R.id.fragment_container)
+        val navHostFragment = whichFragment<NavHostFragment>(R.id.fragment_container)
+        val navController = navHostFragment.navController
+        val navInflater = navController.navInflater
+        val navGraph = navInflater.inflate(R.navigation.library_graph)
+
+        val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
+        if (categoryInfo.visible) {
+            navGraph.startDestination = categoryInfo.category.id
+        }
+        navController.graph = navGraph
         NavigationUI.setupWithNavController(mainActivity.getBottomNavigationView(), navController)
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            appBarLayout.setExpanded(true, true)
+        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

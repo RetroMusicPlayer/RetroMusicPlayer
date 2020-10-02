@@ -313,7 +313,7 @@
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
     <string name="pref_summary_gapless_playback">"Moze prouzrokovati probleme na pojedinim uredjajima."</string>
     <string name="pref_summary_genre_toggle">Toggle genre tab</string>
-    <string name="pref_summary_home_banner">Toggle home banner style</string>
+    <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">oze poboljsati kvalitet omota albuma ali uzrokuje njegovo sporije ucitavanje. Omoguci ovo samo ukoliko imas problema sa losim kvalitetom slike omota albuma.</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Prikazuj kontrole na zakljucanom ekranu</string>
@@ -345,8 +345,8 @@
     <string name="pref_title_gapless_playback">Neuznemiravano reprodukovanje</string>
     <string name="pref_title_general_theme">Opsta tema</string>
     <string name="pref_title_genre_toggle">Show genre tab</string>
-    <string name="pref_title_home_artist_grid_style">Home artist grid</string>
-    <string name="pref_title_home_banner">Home banner</string>
+    <string name="pref_title_home_artist_grid_style">Artist grid</string>
+    <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignorisi omote sa prodavnice</string>
     <string name="pref_title_last_added_interval">Interval plejliste poslednje dodato</string>
     <string name="pref_title_lock_screen">Kontrole preko celog ekrana</string>

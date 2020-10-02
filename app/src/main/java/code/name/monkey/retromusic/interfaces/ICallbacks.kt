@@ -4,7 +4,7 @@ import android.view.MenuItem
 import android.view.View
 import java.io.File
 
-interface Callbacks {
+interface ICallbacks {
     fun onFileSelected(file: File)
 
     fun onFileMenuClicked(file: File, view: View)

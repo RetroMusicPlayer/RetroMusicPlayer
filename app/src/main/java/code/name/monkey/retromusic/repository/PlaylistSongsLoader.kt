@@ -16,9 +16,8 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import android.database.Cursor
-import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
-import android.provider.MediaStore.Audio.Playlists.*
+import android.provider.MediaStore.Audio.Playlists.Members
 import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.extensions.getInt
 import code.name.monkey.retromusic.extensions.getLong
@@ -83,7 +82,7 @@ object PlaylistSongsLoader {
         val artistId = cursor.getLong(AudioColumns.ARTIST_ID)
         val artistName = cursor.getString(AudioColumns.ARTIST)
         val idInPlaylist = cursor.getLong(Members._ID)
-        val composer = cursor.getString(AudioColumns.COMPOSER)
+        val composer = cursor.getStringOrNull(AudioColumns.COMPOSER)
         val albumArtist = cursor.getStringOrNull("album_artist")
         return PlaylistSong(
             id,

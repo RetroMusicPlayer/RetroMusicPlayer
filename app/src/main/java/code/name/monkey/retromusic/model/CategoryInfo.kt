@@ -39,5 +39,4 @@ data class CategoryInfo(
         Genres(R.id.action_genre, R.string.genres, R.drawable.ic_guitar),
         Folder(R.id.action_folder, R.string.folders, R.drawable.ic_folder);
     }
-
 }

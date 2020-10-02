@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -17,6 +18,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
@@ -26,12 +28,11 @@ import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.applyOutlineColor
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmArtist
@@ -41,25 +42,24 @@ import code.name.monkey.retromusic.util.CustomArtistImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_artist_content.*
 import kotlinx.android.synthetic.main.fragment_artist_details.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
 import kotlin.collections.ArrayList
 
 class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_details),
-    AlbumClickListener {
+    IAlbumClickListener {
     private val arguments by navArgs<ArtistDetailsFragmentArgs>()
     private val detailsViewModel: ArtistDetailsViewModel by viewModel {
         parametersOf(arguments.extraArtistId)
     }
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
     private lateinit var artist: Artist
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: HorizontalAlbumAdapter
@@ -67,21 +67,35 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     private var lang: String? = null
     private var biography: Spanned? = null
 
+    private fun setUpTransitions() {
+        val transform = MaterialContainerTransform()
+        transform.setAllContainerColors(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+        sharedElementEnterTransition = transform
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setUpTransitions()
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
         libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
+
         mainActivity.setSupportActionBar(toolbar)
 
         toolbar.title = null
+
         setupRecyclerView()
+
+        ViewCompat.setTransitionName(container, "artist")
 
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
             startPostponedEnterTransition()
             showArtist(it)
         })
+
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
         }
@@ -211,7 +225,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to getString(R.string.transition_album_art)
+                view to "album"
             )
         )
     }

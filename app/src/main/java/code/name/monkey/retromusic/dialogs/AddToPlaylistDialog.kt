@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
@@ -9,7 +10,6 @@ import code.name.monkey.retromusic.EXTRA_PLAYLISTS
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.db.toSongsEntity
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
@@ -41,30 +41,40 @@ class AddToPlaylistDialog : DialogFragment() {
         }
     }
 
+    private fun playlistAdapter(playlists: List<String>): ArrayAdapter<String> {
+        val adapter = ArrayAdapter<String>(requireContext(), R.layout.item_simple_text, R.id.title)
+        adapter.addAll(playlists)
+        return adapter
+    }
+
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val playlistEntities: List<PlaylistEntity> =
-            extraNotNull<List<PlaylistEntity>>(EXTRA_PLAYLISTS).value
-        val songs: List<Song> = extraNotNull<List<Song>>(EXTRA_SONG).value
-        val playlistNames: MutableList<String> = mutableListOf()
+        val playlistEntities = extraNotNull<List<PlaylistEntity>>(EXTRA_PLAYLISTS).value
+        val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
+        val playlistNames = mutableListOf<String>()
         playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
         for (entity: PlaylistEntity in playlistEntities) {
             playlistNames.add(entity.playlistName)
         }
         return materialDialog(R.string.add_playlist_title)
-            .setItems(playlistNames.toTypedArray()) { _, which ->
+            .setAdapter(
+                playlistAdapter(playlistNames)
+            ) { dialog, which ->
                 if (which == 0) {
-                    CreatePlaylistDialog.create(songs)
-                        .show(requireActivity().supportFragmentManager, "Dialog")
+                    showCreateDialog(songs)
                 } else {
                     lifecycleScope.launch(Dispatchers.IO) {
-                        val songEntities: List<SongEntity> =
-                            songs.toSongsEntity(playlistEntities[which - 1])
+                        val songEntities = songs.toSongsEntity(playlistEntities[which - 1])
                         libraryViewModel.insertSongs(songEntities)
                         libraryViewModel.forceReload(Playlists)
                     }
                 }
-                dismiss()
+                dialog.dismiss()
             }
             .create().colorButtons()
+    }
+
+    private fun showCreateDialog(songs: List<Song>) {
+        CreatePlaylistDialog.create(songs).show(requireActivity().supportFragmentManager, "Dialog")
     }
 }

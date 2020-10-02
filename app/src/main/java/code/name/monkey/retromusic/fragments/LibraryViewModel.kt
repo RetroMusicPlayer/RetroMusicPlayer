@@ -8,39 +8,36 @@ import code.name.monkey.retromusic.TOP_ARTISTS
 import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
+import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
-
 import code.name.monkey.retromusic.state.NowPlayingPanelState
-
 import code.name.monkey.retromusic.util.PreferenceUtil
-
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class LibraryViewModel(
     private val repository: RealRepository
-) : ViewModel(), MusicServiceEventListener {
+) : ViewModel(), IMusicServiceEventListener {
 
     private val _paletteColor = MutableLiveData<Int>()
+    private val home = MutableLiveData<List<Home>>()
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
     private val playlists = MutableLiveData<List<PlaylistWithSongs>>()
     private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
-    private val home = MutableLiveData<List<Home>>()
-
+    private val searchResults = MutableLiveData<List<Any>>()
     val paletteColor: LiveData<Int> = _paletteColor
     val panelState: MutableLiveData<NowPlayingPanelState> = MutableLiveData<NowPlayingPanelState>()
 
-    init {
-        fetchHomeSections()
-    }
-
     fun setPanelState(state: NowPlayingPanelState) {
         panelState.postValue(state)
+    }
+
+    init {
+        loadLibraryContent()
     }
 
     private fun loadLibraryContent() = viewModelScope.launch(IO) {
@@ -52,33 +49,29 @@ class LibraryViewModel(
         fetchPlaylists()
     }
 
+    fun getSearchResult(): LiveData<List<Any>> = searchResults
+
     fun getSongs(): LiveData<List<Song>> {
-        fetchSongs()
         return songs
     }
 
     fun getAlbums(): LiveData<List<Album>> {
-        fetchAlbums()
         return albums
     }
 
     fun getArtists(): LiveData<List<Artist>> {
-        fetchArtists()
         return artists
     }
 
     fun getPlaylists(): LiveData<List<PlaylistWithSongs>> {
-        fetchPlaylists()
         return playlists
     }
 
     fun getLegacyPlaylist(): LiveData<List<Playlist>> {
-        fetchLegacyPlaylist()
         return legacyPlaylists
     }
 
     fun getGenre(): LiveData<List<Genre>> {
-        fetchGenres()
         return genres
     }
 
@@ -132,6 +125,11 @@ class LibraryViewModel(
         viewModelScope.launch(IO) {
             home.postValue(repository.homeSections())
         }
+    }
+
+    fun search(query: String?) = viewModelScope.launch(IO) {
+        val result = repository.search(query)
+        searchResults.postValue(result)
     }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
@@ -257,10 +255,6 @@ class LibraryViewModel(
         })
     }
 
-    fun observableHistorySongs() = repository.observableHistorySongs()
-
-    fun favorites() = repository.favorites()
-
     fun artists(type: Int): LiveData<List<Artist>> = liveData {
         when (type) {
             TOP_ARTISTS -> emit(repository.topArtists())
@@ -276,6 +270,24 @@ class LibraryViewModel(
             RECENT_ALBUMS -> {
                 emit(repository.recentAlbums())
             }
+        }
+    }
+
+    fun artist(artistId: Long): LiveData<Artist> = liveData {
+        emit(repository.artistById(artistId))
+    }
+
+    fun fetchContributors(): LiveData<List<Contributor>> = liveData {
+        emit(repository.contributor())
+    }
+
+    fun observableHistorySongs() = repository.observableHistorySongs()
+
+    fun favorites() = repository.favorites()
+
+    fun clearSearchResult() {
+        viewModelScope.launch {
+            searchResults.postValue(emptyList())
         }
     }
 }

@@ -16,8 +16,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 10438
-        versionName '3.5.650' + "_" + getDate()
+        versionCode 10445
+        versionName '3.6.100' + "_" + getDate()
 
         multiDexEnabled true
 
@@ -34,8 +34,9 @@ android {
     }
     buildTypes {
         release {
+            //debuggable true
             minifyEnabled true
-            shrinkResources true
+            //shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -88,7 +89,7 @@ static def getProperty(Properties properties, String name) {
 }
 
 static def getDate() {
-    new Date().format('MMddyyyy')
+    new Date().format('MMddyyyyss')
 }
 
 

@@ -397,12 +397,23 @@ object PreferenceUtil {
         }
     }
 
-    val homeGridStyle: Int
+    val homeArtistGridStyle: Int
         get() {
-            val position =
-                sharedPreferences.getStringOrDefault(
-                    HOME_ARTIST_GRID_STYLE, "0"
-                ).toInt()
+            val position = sharedPreferences.getStringOrDefault(
+                HOME_ARTIST_GRID_STYLE, "0"
+            ).toInt()
+            val typedArray =
+                App.getContext().resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
+            val layoutRes = typedArray.getResourceId(position, 0)
+            typedArray.recycle()
+            return if (layoutRes == 0) {
+                R.layout.item_artist
+            } else layoutRes
+        }
+
+    val homeAlbumGridStyle: Int
+        get() {
+            val position = sharedPreferences.getStringOrDefault(HOME_ALBUM_GRID_STYLE, "0").toInt()
             val typedArray =
                 App.getContext().resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
             val layoutRes = typedArray.getResourceId(position, 0)

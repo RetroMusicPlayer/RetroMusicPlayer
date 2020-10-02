@@ -9,7 +9,8 @@ import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
-import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenPlayerControlsFragment
+import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenControlsFragment
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -22,21 +23,12 @@ import com.r0adkll.slidr.model.SlidrPosition
 import kotlinx.android.synthetic.main.activity_lock_screen.*
 
 class LockScreenActivity : AbsMusicServiceActivity() {
-    private var fragment: LockScreenPlayerControlsFragment? = null
+    private var fragment: LockScreenControlsFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            setShowWhenLocked(true)
-            setTurnScreenOn(true)
-        } else {
-            this.window.addFlags(
-                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
-                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-            )
-        }
+        lockScreenInit()
         setContentView(R.layout.activity_lock_screen)
         hideStatusBar()
         setStatusbarColorAuto()
@@ -67,13 +59,25 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
         Slidr.attach(this, config)
 
-        fragment =
-            supportFragmentManager.findFragmentById(R.id.playback_controls_fragment) as LockScreenPlayerControlsFragment?
+        fragment = whichFragment<LockScreenControlsFragment>(R.id.playback_controls_fragment)
 
         findViewById<View>(R.id.slide).apply {
             translationY = 100f
             alpha = 0f
             ViewCompat.animate(this).translationY(0f).alpha(1f).setDuration(1500).start()
+        }
+    }
+
+    private fun lockScreenInit() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            val keyguardManager: KeyguardManager = getSystemService(KeyguardManager::class.java)
+            keyguardManager.requestDismissKeyguard(this, null)
+        } else {
+            this.window.addFlags(
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+            )
         }
     }
 

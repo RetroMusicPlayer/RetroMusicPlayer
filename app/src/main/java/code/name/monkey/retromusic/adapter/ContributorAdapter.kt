@@ -59,6 +59,11 @@ class ContributorAdapter(
         return contributors.size
     }
 
+    fun swapData(it: List<Contributor>) {
+        contributors = it
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.title)
         val text: TextView = itemView.findViewById(R.id.text)
@@ -68,7 +73,7 @@ class ContributorAdapter(
             title.text = contributor.name
             text.text = contributor.summary
             Glide.with(image.context)
-                .load(contributor.profileImage)
+                .load(contributor.image)
                 .error(R.drawable.ic_account)
                 .placeholder(R.drawable.ic_account)
                 .dontAnimate()

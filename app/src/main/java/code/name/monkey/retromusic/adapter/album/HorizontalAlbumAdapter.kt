@@ -3,11 +3,11 @@ package code.name.monkey.retromusic.adapter.album
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import code.name.monkey.retromusic.fragments.albums.AlbumClickListener
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.HorizontalAdapterHelper
-import code.name.monkey.retromusic.interfaces.CabHolder
+import code.name.monkey.retromusic.interfaces.IAlbumClickListener
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
@@ -16,10 +16,10 @@ import com.bumptech.glide.Glide
 class HorizontalAlbumAdapter(
     activity: FragmentActivity,
     dataSet: List<Album>,
-    cabHolder: CabHolder?,
-    albumClickListener: AlbumClickListener
+    ICabHolder: ICabHolder?,
+    albumClickListener: IAlbumClickListener
 ) : AlbumAdapter(
-    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, cabHolder, albumClickListener
+    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, ICabHolder, albumClickListener
 ) {
 
     override fun createViewHolder(view: View, viewType: Int): ViewHolder {

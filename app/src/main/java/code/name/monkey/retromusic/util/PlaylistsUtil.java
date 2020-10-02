@@ -251,7 +251,7 @@ public class PlaylistsUtil {
         return M3UWriter.write(new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
     }
 
-    public static File savePlaylistWithSongs(Context context, PlaylistWithSongs playlist) throws IOException {
+    public static File savePlaylistWithSongs(PlaylistWithSongs playlist) throws IOException {
         return M3UWriter.writeIO(new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
     }
 
