@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.fragments.player.card.CardFragment
 import code.name.monkey.retromusic.fragments.player.cardblur.CardBlurFragment
 import code.name.monkey.retromusic.fragments.player.circle.CirclePlayerFragment
+import code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerFragment
 import code.name.monkey.retromusic.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment
@@ -52,6 +53,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     protected val libraryViewModel by viewModel<LibraryViewModel>()
     private lateinit var bottomSheetBehavior: RetroBottomSheetBehavior<FrameLayout>
+    private var playerFragment: AbsPlayerFragment? = null
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var nowPlayingScreen: NowPlayingScreen? = null
     private var navigationBarColor: Int = 0
@@ -358,7 +360,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         })
     }
 
-    private var playerFragment: AbsPlayerFragment? = null
     private fun chooseFragmentForTheme() {
         nowPlayingScreen = PreferenceUtil.nowPlayingScreen
 
@@ -379,6 +380,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             Tiny -> TinyPlayerFragment()
             Peak -> PeakPlayerFragment()
             Circle -> CirclePlayerFragment()
+            Classic -> ClassicPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment)
