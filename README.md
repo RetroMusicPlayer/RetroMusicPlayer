@@ -46,7 +46,7 @@ favorite songs. No other music player has this feature.
 -  Driving Mode
 -  Headset/Bluetooth support
 -  Music duration filter
--  Folder support - Play song by folder
+-  Folder support - Play songs by folder
 -  Gapless playback
 -  Volume controls
 -  Carousel effect for album covers
@@ -63,10 +63,10 @@ favorite songs. No other music player has this feature.
 -  Browse and play your music by songs, albums, artists, playlists and
   genre
 -  Smart Auto Playlists - Recently played, most played and history
--  Build your own playlist on the go
+-  Build your playlist on the go
 
 
-We are trying our best to bring you the best user experience. The app is regulary being updated for bug fixes and new features.
+We are trying our best to bring you the best user experience. The app is regularly being updated for bug fixes and new features.
 
 ### ❓ FAQ
 Please read the FAQ [here](https://github.com/h4h13/RetroMusicPlayer/blob/dev/FAQ.md)
@@ -88,5 +88,5 @@ Retro Music Player is released under the GNU General Public License v3.0
 (GPLv3), which can be found [here](LICENSE.md)
 
 
->Please note: Retro Music player is an offline music player app. It
+>Please note: Retro Music Player is an offline music player app. It
 >doesn't support music downloading or online music streaming.
