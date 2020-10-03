@@ -37,7 +37,7 @@ Dark and Just Black for AMOLED displays. Select your favorite accent
 color from a color palette.
 
 ### 🏠 Home
-Where you can have your recently/top played artists, albums and
+Where you can view your recently/top played artists, albums and
 favorite songs. No other music player has this feature.
 
 ### 📦 Included Features
@@ -49,17 +49,17 @@ favorite songs. No other music player has this feature.
 -  Folder support - Play song by folder
 -  Gapless playback
 -  Volume controls
--  Carousel effect for an album cover
+-  Carousel effect for album covers
 -  Home screen widgets
 -  Lock screen playback controls
 -  Lyrics screen (download and sync with music)
--  Sleep Timer
+-  Sleep timer
 -  Easy drag to sort playlist & play queue
 -  Tag editor
 -  Create, edit and import playlists
 -  Playing queue with reorder
 -  User profile
--  30 Languages support
+-  30+ languages support
 -  Browse and play your music by songs, albums, artists, playlists and
   genre
 -  Smart Auto Playlists - Recently played, most played and history
@@ -69,7 +69,7 @@ favorite songs. No other music player has this feature.
 We are trying our best to bring you the best user experience. The app is regulary being updated for bug fixes and new features.
 
 ### ❓ FAQ
-Please read the FAQ here: https://del.dog/RetroFaq
+Please read the FAQ [here](https://github.com/h4h13/RetroMusicPlayer/blob/dev/FAQ.md)
 
 In any case, you find or notice any bugs please report them by
 sending us an [e-mail](mailto:retromusicapp@gmail.com). We will fix bugs as soon as
@@ -85,7 +85,7 @@ If you have any feature suggestions, please create an issue with detailed inform
 ### 🗂️ License
 
 Retro Music Player is released under the GNU General Public License v3.0
-(GPLv3), which can be found here: [License](LICENSE.md)
+(GPLv3), which can be found [here](LICENSE.md)
 
 
 >Please note: Retro Music player is an offline music player app. It
