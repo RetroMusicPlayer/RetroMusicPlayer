@@ -25,95 +25,50 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/imageContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/bannerImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_margin="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="8dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="21:10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/material_design_default" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/bannerImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="156dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/material_design_default" />
-
-                <View
-                    android:id="@+id/bannerSelect"
-                    android:layout_width="match_parent"
-                    android:layout_height="156dp"
-                    android:background="@color/twenty_percent_black_overlay" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:background="?roundSelector"
-                    android:padding="16dp"
-                    app:srcCompat="@drawable/ic_add_photo" />
-
-            </FrameLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <FrameLayout
-            android:id="@+id/userImageContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
+        <code.name.monkey.retromusic.views.RetroShapeableImageView
+            android:id="@+id/userImage"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center"
             android:layout_marginStart="16dp"
-            android:elevation="8dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
             android:transitionName="@string/transition_user_image"
-            app:layout_constraintBottom_toBottomOf="@id/imageContainer"
-            app:layout_constraintEnd_toEndOf="@id/imageContainer"
-            app:layout_constraintStart_toStartOf="@+id/imageContainer"
-            app:layout_constraintTop_toBottomOf="@id/imageContainer">
-
-            <code.name.monkey.retromusic.views.RetroShapeableImageView
-                android:id="@+id/userImage"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                app:retroCornerSize="36dp"
-                app:srcCompat="@drawable/ic_person_flat" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:gravity="center"
-                android:padding="12dp"
-                android:src="@drawable/ic_add_photo"
-                app:tint="?attr/colorControlNormal" />
-        </FrameLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bannerImage"
+            app:retroCornerSize="36dp"
+            app:srcCompat="@drawable/ic_person_flat" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameContainer"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
+            app:layout_constraintBottom_toBottomOf="@+id/userImage"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userImageContainer">
+            app:layout_constraintStart_toEndOf="@id/userImage"
+            app:layout_constraintTop_toTopOf="@id/userImage">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/name"

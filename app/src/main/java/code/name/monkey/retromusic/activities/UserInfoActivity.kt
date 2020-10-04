@@ -55,7 +55,7 @@ class UserInfoActivity : AbsBaseActivity() {
             pickNewPhoto()
         }
 
-        bannerSelect.setOnClickListener {
+        bannerImage.setOnClickListener {
             selectBannerImage()
         }
 
