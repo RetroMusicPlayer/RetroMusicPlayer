@@ -14,14 +14,10 @@ class PlaylistDetailsViewModel(
     private var playlist: PlaylistWithSongs
 ) : ViewModel(), IMusicServiceEventListener {
 
-    private val _playListSongs = MutableLiveData<List<Song>>()
-    private val _playlist = MutableLiveData<PlaylistWithSongs>().apply {
-        postValue(playlist)
-    }
+    private val playListSongs = MutableLiveData<List<Song>>()
 
-    fun getPlaylist(): LiveData<PlaylistWithSongs> = _playlist
-
-    fun getSongs(): LiveData<List<SongEntity>> = realRepository.playlistSongs(playlist.playlistEntity)
+    fun getSongs(): LiveData<List<SongEntity>> =
+        realRepository.playlistSongs(playlist.playlistEntity.playListId)
 
 
     override fun onMediaStoreChanged() {

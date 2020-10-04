@@ -11,7 +11,7 @@ interface RoomRepository {
     fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>>
     fun insertBlacklistPath(blackListStoreEntity: BlackListStoreEntity)
     fun observableHistorySongs(): LiveData<List<HistoryEntity>>
-    fun getSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>>
+    fun getSongs(playListId: Long): LiveData<List<SongEntity>>
     suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long
     suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity>
     suspend fun playlists(): List<PlaylistEntity>
@@ -70,8 +70,8 @@ class RealRoomRepository(
     }
 
 
-    override fun getSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>> =
-        playlistDao.songsFromPlaylist(playlistEntity.playListId)
+    override fun getSongs(playListId: Long): LiveData<List<SongEntity>> =
+        playlistDao.songsFromPlaylist(playListId)
 
     override suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>) =
         playlistDao.deletePlaylists(playlistEntities)

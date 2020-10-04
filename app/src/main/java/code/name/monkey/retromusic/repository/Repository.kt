@@ -42,7 +42,7 @@ interface Repository {
     fun favorites(): LiveData<List<SongEntity>>
     fun observableHistorySongs(): LiveData<List<Song>>
     fun albumById(albumId: Long): Album
-    fun playlistSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>>
+    fun playlistSongs(playListId: Long): LiveData<List<SongEntity>>
     suspend fun fetchAlbums(): List<Album>
     suspend fun albumByIdAsync(albumId: Long): Album
     suspend fun allSongs(): List<Song>
@@ -252,8 +252,8 @@ class RealRepository(
             it.toSong()
         }
 
-    override fun playlistSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>> =
-        roomRepository.getSongs(playlistEntity)
+    override fun playlistSongs(playListId: Long): LiveData<List<SongEntity>> =
+        roomRepository.getSongs(playListId)
 
     override suspend fun insertSongs(songs: List<SongEntity>) =
         roomRepository.insertSongs(songs)
