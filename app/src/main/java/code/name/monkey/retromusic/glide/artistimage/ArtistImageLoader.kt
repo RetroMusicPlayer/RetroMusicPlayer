@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.glide.artistimage
 
 import android.content.Context
+import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Data
 import code.name.monkey.retromusic.network.DeezerService
 import code.name.monkey.retromusic.util.MusicUtil
@@ -34,7 +35,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
-class ArtistImage(val artistName: String)
+class ArtistImage(val artist: Artist)
 
 class ArtistImageFetcher(
     private val context: Context,
@@ -53,7 +54,7 @@ class ArtistImageFetcher(
     }
 
     override fun getId(): String {
-        return model.artistName
+        return model.artist.name
     }
 
     override fun cancel() {
@@ -62,10 +63,10 @@ class ArtistImageFetcher(
     }
 
     override fun loadData(priority: Priority?): InputStream? {
-        if (!MusicUtil.isArtistNameUnknown(model.artistName) &&
+        if (!MusicUtil.isArtistNameUnknown(model.artist.name) &&
             PreferenceUtil.isAllowedToDownloadMetadata()
         ) {
-            val artists = model.artistName.split(",")
+            val artists = model.artist.name.split(",")
             val response = deezerService.getArtistImage(artists[0]).execute()
 
             if (!response.isSuccessful) {
@@ -85,12 +86,20 @@ class ArtistImageFetcher(
                     val glideUrl = GlideUrl(imageUrl)
                     urlFetcher = urlLoader.getResourceFetcher(glideUrl, width, height)
                     urlFetcher?.loadData(priority)
-                } else null
+                } else {
+                    getFallbackAlbumImage()
+                }
             } catch (e: Exception) {
-                null
+                getFallbackAlbumImage()
             }
         } else return null
     }
+
+    private fun getFallbackAlbumImage(): InputStream? {
+        val imageUri = MusicUtil.getMediaStoreAlbumCoverUri(model.artist.safeGetFirstAlbum().id)
+        return context.contentResolver.openInputStream(imageUri)
+    }
+
 
     private fun getHighestQuality(imageUrl: Data): String {
         return when {

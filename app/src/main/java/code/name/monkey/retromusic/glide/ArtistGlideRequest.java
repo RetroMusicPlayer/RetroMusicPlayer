@@ -62,7 +62,7 @@ public class ArtistGlideRequest {
         boolean hasCustomImage = CustomArtistImageUtil.Companion.getInstance(App.Companion.getContext())
                 .hasCustomArtistImage(artist);
         if (noCustomImage || !hasCustomImage) {
-            return requestManager.load(new ArtistImage(artist.getName()));
+            return requestManager.load(new ArtistImage(artist));
         } else {
             return requestManager.load(CustomArtistImageUtil.getFile(artist));
         }
