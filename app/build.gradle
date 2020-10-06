@@ -167,3 +167,5 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.11.1'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }
+
+apply from: '../spotless.gradle'

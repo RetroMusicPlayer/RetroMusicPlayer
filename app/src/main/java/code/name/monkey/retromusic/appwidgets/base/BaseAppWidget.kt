@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
-
 package code.name.monkey.retromusic.appwidgets.base
 
 import android.app.PendingIntent
@@ -40,7 +40,9 @@ abstract class BaseAppWidget : AppWidgetProvider() {
      * {@inheritDoc}
      */
     override fun onUpdate(
-        context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray
     ) {
         defaultAppWidget(context, appWidgetIds)
         val updateIntent = Intent(APP_WIDGET_UPDATE)
@@ -62,7 +64,9 @@ abstract class BaseAppWidget : AppWidgetProvider() {
     }
 
     protected fun pushUpdate(
-        context: Context, appWidgetIds: IntArray?, views: RemoteViews
+        context: Context,
+        appWidgetIds: IntArray?,
+        views: RemoteViews
     ) {
         val appWidgetManager = AppWidgetManager.getInstance(context)
         if (appWidgetIds != null) {
@@ -86,7 +90,9 @@ abstract class BaseAppWidget : AppWidgetProvider() {
     }
 
     protected fun buildPendingIntent(
-        context: Context, action: String, serviceName: ComponentName
+        context: Context,
+        action: String,
+        serviceName: ComponentName
     ): PendingIntent {
         val intent = Intent(action)
         intent.component = serviceName
@@ -169,7 +175,11 @@ abstract class BaseAppWidget : AppWidgetProvider() {
         }
 
         protected fun composeRoundedRectPath(
-            rect: RectF, tl: Float, tr: Float, bl: Float, br: Float
+            rect: RectF,
+            tl: Float,
+            tr: Float,
+            bl: Float,
+            br: Float
         ): Path {
             val path = Path()
             path.moveTo(rect.left + tl, rect.top)

@@ -14,13 +14,11 @@
 
 package code.name.monkey.retromusic.glide.audiocover;
 
-/**
- * @author Karim Abou Zeid (kabouzeid)
- */
+/** @author Karim Abou Zeid (kabouzeid) */
 public class AudioFileCover {
-    public final String filePath;
+  public final String filePath;
 
-    public AudioFileCover(String filePath) {
-        this.filePath = filePath;
-    }
+  public AudioFileCover(String filePath) {
+    this.filePath = filePath;
+  }
 }

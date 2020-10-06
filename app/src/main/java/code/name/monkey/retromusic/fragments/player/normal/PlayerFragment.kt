@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.fragments.player.normal
 
 import android.animation.ArgbEvaluator
@@ -19,7 +33,6 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.DrawableGradient
 import kotlinx.android.synthetic.main.fragment_player.*
 
-
 class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
     private var lastColor: Int = 0
@@ -28,7 +41,6 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
     private lateinit var controlsFragment: PlayerPlaybackControlsFragment
     private var valueAnimator: ValueAnimator? = null
-
 
     private fun colorize(i: Int) {
         if (valueAnimator != null) {
@@ -99,13 +111,11 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
         toggleFavorite(MusicPlayerRemote.currentSong)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpSubFragments()
         setUpPlayerToolbar()
     }
-
 
     private fun setUpSubFragments() {
         controlsFragment =
@@ -146,4 +156,3 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
         }
     }
 }
-

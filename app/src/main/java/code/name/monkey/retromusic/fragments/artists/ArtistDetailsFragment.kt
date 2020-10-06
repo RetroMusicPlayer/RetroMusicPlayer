@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.fragments.artists
 
 import android.content.Intent
@@ -43,6 +57,8 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialContainerTransform
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlinx.android.synthetic.main.fragment_artist_content.*
 import kotlinx.android.synthetic.main.fragment_artist_details.*
 import kotlinx.coroutines.Dispatchers
@@ -51,8 +67,6 @@ import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.util.*
-import kotlin.collections.ArrayList
 
 class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_details),
     IAlbumClickListener {
@@ -155,7 +169,6 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         albumTitle.text = albumText
         songAdapter.swapDataSet(artist.songs.sortedBy { it.trackNumber })
         artist.albums?.let { albumAdapter.swapDataSet(it) }
-
     }
 
     private fun loadBiography(
@@ -201,7 +214,6 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         }
     }
 
-
     private fun loadArtistImage(artist: Artist) {
         ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
             .generatePalette(requireContext()).build()
@@ -217,7 +229,6 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         shuffleAction.applyColor(color)
         playAction.applyOutlineColor(color)
     }
-
 
     override fun onAlbumClick(albumId: Long, view: View) {
         findNavController().navigate(

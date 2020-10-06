@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.fragments
 
 import android.animation.ObjectAnimator
@@ -12,15 +26,19 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.applyColor
+import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.textColorPrimary
+import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import kotlinx.android.synthetic.main.fragment_mini_player.*
 import kotlin.math.abs
+import kotlinx.android.synthetic.main.fragment_mini_player.*
 
 open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_player),
     MusicProgressViewUpdateHelper.Callback, View.OnClickListener {
@@ -49,7 +67,6 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
             actionPrevious.show()
             actionNext?.show()
             actionPrevious?.show()
-
         } else {
             actionNext.visibility = if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
             actionPrevious.visibility =
@@ -126,7 +143,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
     }
 
     fun updateProgressBar(paletteColor: Int) {
-         progressBar.applyColor(paletteColor)
+        progressBar.applyColor(paletteColor)
     }
 
     class FlingPlayBackController(context: Context) : View.OnTouchListener {
@@ -137,7 +154,9 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
             flingPlayBackController = GestureDetector(context,
                 object : GestureDetector.SimpleOnGestureListener() {
                     override fun onFling(
-                        e1: MotionEvent, e2: MotionEvent, velocityX: Float,
+                        e1: MotionEvent,
+                        e2: MotionEvent,
+                        velocityX: Float,
                         velocityY: Float
                     ): Boolean {
                         if (abs(velocityX) > abs(velocityY)) {

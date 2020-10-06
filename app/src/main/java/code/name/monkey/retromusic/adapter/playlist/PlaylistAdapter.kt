@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.adapter.playlist
 
 import android.graphics.Bitmap
@@ -56,7 +70,7 @@ class PlaylistAdapter(
     }
 
     override fun getItemId(position: Int): Long {
-        return dataSet[position].playlistEntity.playListId.toLong()
+        return dataSet[position].playlistEntity.playListId
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -88,7 +102,7 @@ class PlaylistAdapter(
         } else {
             holder.menu?.show()
         }
-        //PlaylistBitmapLoader(this, holder, playlist).execute()
+        // PlaylistBitmapLoader(this, holder, playlist).execute()
     }
 
     private fun getIconRes(): Drawable = TintHelper.createTintedDrawable(

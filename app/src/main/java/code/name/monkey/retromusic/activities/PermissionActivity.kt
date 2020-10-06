@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.activities
 
 import android.content.Intent
@@ -14,7 +28,6 @@ import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.RingtoneManager
 import kotlinx.android.synthetic.main.activity_permission.*
 import kotlinx.android.synthetic.main.fragment_library.appNameText
-
 
 class PermissionActivity : AbsMusicServiceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +52,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
         }
         finish.accentBackgroundColor()
         finish.setOnClickListener {
-            if (hasPermissions() ) {
+            if (hasPermissions()) {
                 startActivity(
                     Intent(this, MainActivity::class.java).addFlags(
                         Intent.FLAG_ACTIVITY_NEW_TASK or

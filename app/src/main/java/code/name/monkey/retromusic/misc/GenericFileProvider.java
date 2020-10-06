@@ -16,5 +16,4 @@ package code.name.monkey.retromusic.misc;
 
 import androidx.core.content.FileProvider;
 
-public class GenericFileProvider extends FileProvider {
-}
+public class GenericFileProvider extends FileProvider {}

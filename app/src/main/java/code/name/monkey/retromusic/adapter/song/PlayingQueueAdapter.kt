@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.adapter.song
 
 import android.view.MenuItem
@@ -196,17 +210,17 @@ class PlayingQueueAdapter(
         private val isPlaying: Boolean = MusicPlayerRemote.isPlaying
         private val songProgressMillis = 0
         override fun onPerformAction() {
-            //currentlyShownSnackbar = null
+            // currentlyShownSnackbar = null
         }
 
         override fun onSlideAnimationEnd() {
-            //initializeSnackBar(adapter, position, activity, isPlaying)
+            // initializeSnackBar(adapter, position, activity, isPlaying)
             songToRemove = adapter.dataSet[position]
-            //If song removed was the playing song, then play the next song
+            // If song removed was the playing song, then play the next song
             if (isPlaying(songToRemove!!)) {
                 playNextSong()
             }
-            //Swipe animation is much smoother when we do the heavy lifting after it's completed
+            // Swipe animation is much smoother when we do the heavy lifting after it's completed
             adapter.setSongToRemove(songToRemove!!)
             removeFromQueue(songToRemove!!)
         }

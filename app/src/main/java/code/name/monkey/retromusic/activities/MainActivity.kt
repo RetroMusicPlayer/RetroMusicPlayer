@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.activities
 
 import android.content.Intent
@@ -47,7 +61,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         AppRater.appLaunched(this)
         updateTabs()
 
-        //NavigationUI.setupWithNavController(getBottomNavigationView(), findNavController(R.id.fragment_container))
+        // NavigationUI.setupWithNavController(getBottomNavigationView(), findNavController(R.id.fragment_container))
         setupNavigationController()
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
@@ -66,7 +80,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         navController.graph = navGraph
         NavigationUI.setupWithNavController(getBottomNavigationView(), navController)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            //appBarLayout.setExpanded(true, true)
+            // appBarLayout.setExpanded(true, true)
         }
     }
 
@@ -156,11 +170,11 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                 setIntent(Intent())
             }
         }
-
     }
 
     private fun parseLongFromIntent(
-        intent: Intent, longKey: String,
+        intent: Intent,
+        longKey: String,
         stringKey: String
     ): Long {
         var id = intent.getLongExtra(longKey, -1)

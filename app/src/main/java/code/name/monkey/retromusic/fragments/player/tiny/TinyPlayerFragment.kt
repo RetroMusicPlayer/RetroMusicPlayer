@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.fragments.player.tiny
 
 import android.animation.AnimatorSet
@@ -29,7 +43,6 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
     private var lastColor: Int = 0
     private var toolbarColor: Int = 0
 
-
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -48,10 +61,8 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
         return toolbarColor
     }
 
-
     override val paletteColor: Int
         get() = lastColor
-
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
@@ -108,7 +119,6 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
             songInfo.hide()
         }
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

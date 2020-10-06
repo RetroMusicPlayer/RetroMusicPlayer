@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.activities
 
 import android.content.Intent
@@ -17,8 +31,8 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
-import kotlinx.android.synthetic.main.activity_pro_version.*
 import java.lang.ref.WeakReference
+import kotlinx.android.synthetic.main.activity_pro_version.*
 
 class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
@@ -47,7 +61,6 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
             if (restorePurchaseAsyncTask == null || restorePurchaseAsyncTask!!.status != AsyncTask.Status.RUNNING) {
                 restorePurchase()
             }
-
         }
         purchaseButton.setOnClickListener {
             billingProcessor.purchase(this@PurchaseActivity, PRO_VERSION_PRODUCT_ID)

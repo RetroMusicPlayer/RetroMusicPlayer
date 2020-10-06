@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.activities.bugreport
 
 import android.app.Activity
@@ -31,6 +45,7 @@ import code.name.monkey.retromusic.misc.DialogAsyncTask
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
+import java.io.IOException
 import kotlinx.android.synthetic.main.activity_bug_report.*
 import kotlinx.android.synthetic.main.bug_report_card_device_info.*
 import kotlinx.android.synthetic.main.bug_report_card_report.*
@@ -38,7 +53,6 @@ import org.eclipse.egit.github.core.Issue
 import org.eclipse.egit.github.core.client.GitHubClient
 import org.eclipse.egit.github.core.client.RequestException
 import org.eclipse.egit.github.core.service.IssueService
-import java.io.IOException
 
 private const val RESULT_SUCCESS = "RESULT_OK"
 private const val RESULT_BAD_CREDENTIALS = "RESULT_BAD_CREDENTIALS"
@@ -305,7 +319,6 @@ open class BugReportActivity : AbsThemeActivity() {
                 context.finish()
             }
         }
-
 
         companion object {
 

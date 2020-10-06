@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.activities.base
 
 import android.annotation.SuppressLint
@@ -148,7 +162,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         miniPlayerFragment?.view?.alpha = alpha
         miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
         bottomNavigationView.translationY = progress * 500
-        //bottomNavigationView.alpha = alpha
+        // bottomNavigationView.alpha = alpha
     }
 
     open fun onPanelCollapsed() {
@@ -177,7 +191,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     STATE_EXPANDED -> onPanelExpanded()
                     STATE_COLLAPSED -> onPanelCollapsed()
                     else -> {
-                        //playerFragment!!.onHide()
+                        // playerFragment!!.onHide()
                     }
                 }
             }
