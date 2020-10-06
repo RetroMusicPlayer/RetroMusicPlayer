@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.glide.artistimage
 
 import android.content.Context
+import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Data
 import code.name.monkey.retromusic.network.DeezerService
 import code.name.monkey.retromusic.util.MusicUtil
@@ -34,7 +35,15 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
-class ArtistImage(val artistName: String)
+class ArtistImage {
+    val artist: Artist
+    val artistName: String
+
+    constructor(artist: Artist) {
+        this.artist = artist
+        this.artistName = artist.name
+    }
+}
 
 class ArtistImageFetcher(
     private val context: Context,
@@ -85,9 +94,12 @@ class ArtistImageFetcher(
                     val glideUrl = GlideUrl(imageUrl)
                     urlFetcher = urlLoader.getResourceFetcher(glideUrl, width, height)
                     urlFetcher?.loadData(priority)
-                } else null
+                } else {
+                    // Image not found by deezer. Use an album cover instead
+                    getFallbackAlbumImage()
+                }
             } catch (e: Exception) {
-                null
+                getFallbackAlbumImage()
             }
         } else return null
     }
@@ -101,6 +113,11 @@ class ArtistImageFetcher(
             imageUrl.picture.isNotEmpty() -> imageUrl.picture
             else -> ""
         }
+    }
+
+    private fun getFallbackAlbumImage(): InputStream? {
+        val imageUri = MusicUtil.getMediaStoreAlbumCoverUri(model.artist.safeGetFirstAlbum().id)
+        return context.getContentResolver().openInputStream(imageUri)
     }
 }
 
