@@ -15,7 +15,7 @@
             app:argType="code.name.monkey.retromusic.model.Genre" />
     </fragment>
 
-    <!--<fragment
+    <fragment
         android:id="@+id/playlistDetailsFragment"
         android:name="code.name.monkey.retromusic.fragments.playlists.PlaylistDetailsFragment"
         android:label="PlaylistDetailsFragment"
@@ -23,7 +23,7 @@
         <argument
             android:name="extra_playlist"
             app:argType="code.name.monkey.retromusic.db.PlaylistWithSongs" />
-    </fragment>-->
+    </fragment>
 
     <fragment
         android:id="@+id/albumDetailsFragment"
