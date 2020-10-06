@@ -14,4 +14,17 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
     }
+    format 'misc', {
+        target '**/*.gradle', '**/*.md', '**/.gitignore'
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    format 'xml', {
+        target 'src/*.xml'
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
 }
