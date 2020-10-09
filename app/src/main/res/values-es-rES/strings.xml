@@ -511,12 +511,12 @@
     <string name="start_payment">Iniciar pago</string>
     <string name="pref_title_expand_now_playing_panel">Mostrar en pantalla de reproducción</string>
     <string name="pref_summary_expand_now_playing_panel">Al hacer clic en la notificación se mostrará la pantalla de reproducción en lugar de la pantalla de inicio</string>
-    <string name="tiny_card_style">Carta pequeña</string>
+    <string name="tiny_card_style">Tarjeta pequeña</string>
     <string name="about_album_label">Acerca de %s</string>
-    <string name="pref_language_name">Seleccionar idioma</string>
+    <string name="pref_language_name">Seleccionar lenguaje</string>
     <string name="translators">Traductores</string>
-    <string name="translators_summary">La gente que ayudó a traductir esta app</string>
-    <string name="try_retro_music_premium">Prueba Retro Music Premium</string>
+    <string name="translators_summary">Las personas que ayudaron a traducir esta aplicación</string>
+    <string name="try_retro_music_premium">Pruebe Retro Music Premium</string>
     <plurals name="albumSongs">
         <item quantity="one">Canción</item>
         <item quantity="other">Canciones</item>
