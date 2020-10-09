@@ -177,7 +177,6 @@ open class SongAdapter(
             get() = dataSet[layoutPosition]
 
         init {
-            setImageTransitionName(activity.getString(R.string.transition_album_art))
             menu?.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
                 override val song: Song
                     get() = this@ViewHolder.song
