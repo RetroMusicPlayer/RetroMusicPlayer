@@ -23,7 +23,32 @@ import android.provider.MediaStore
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.NavigationUI
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
+import code.name.monkey.retromusic.ALBUM_COVER_STYLE
+import code.name.monkey.retromusic.ALBUM_COVER_TRANSFORM
+import code.name.monkey.retromusic.BANNER_IMAGE_PATH
+import code.name.monkey.retromusic.BLACK_THEME
+import code.name.monkey.retromusic.CAROUSEL_EFFECT
+import code.name.monkey.retromusic.CIRCULAR_ALBUM_ART
+import code.name.monkey.retromusic.DESATURATED_COLOR
+import code.name.monkey.retromusic.EXTRA_SONG_INFO
+import code.name.monkey.retromusic.GENERAL_THEME
+import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
+import code.name.monkey.retromusic.KEEP_SCREEN_ON
+import code.name.monkey.retromusic.LANGUAGE_NAME
+import code.name.monkey.retromusic.LIBRARY_CATEGORIES
+import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
+import code.name.monkey.retromusic.PROFILE_IMAGE_PATH
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.ROUND_CORNERS
+import code.name.monkey.retromusic.TAB_TEXT_MODE
+import code.name.monkey.retromusic.TOGGLE_ADD_CONTROLS
+import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
+import code.name.monkey.retromusic.TOGGLE_GENRE
+import code.name.monkey.retromusic.TOGGLE_HOME_BANNER
+import code.name.monkey.retromusic.TOGGLE_SEPARATE_LINE
+import code.name.monkey.retromusic.TOGGLE_VOLUME
+import code.name.monkey.retromusic.USER_NAME
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -32,6 +57,7 @@ import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.state.NowPlayingPanelState
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
@@ -94,7 +120,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
             intent.getBooleanExtra(EXPAND_PANEL, false) &&
             PreferenceUtil.isExpandPanel
         ) {
-            expandPanel()
+            libraryViewModel.setPanelState(NowPlayingPanelState.EXPAND)
             intent.removeExtra(EXPAND_PANEL)
         }
     }

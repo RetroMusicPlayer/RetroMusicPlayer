@@ -14,18 +14,16 @@
  */
 package code.name.monkey.retromusic.adapter.album
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.LyricsActivity
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -105,15 +103,10 @@ class AlbumCoverPagerAdapter(
             savedInstanceState: Bundle?
         ): View? {
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
+            ViewCompat.setTransitionName(view, "lyrics")
             albumCover = view.findViewById(R.id.player_image)
-            albumCover.setOnClickListener {
-                val intent = Intent(requireContext(), LyricsActivity::class.java)
-                val activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    requireActivity(),
-                    it,
-                    "lyrics"
-                )
-                startActivity(intent, activityOptions.toBundle())
+            view.setOnClickListener {
+                showLyricsDialog()
             }
             return view
         }

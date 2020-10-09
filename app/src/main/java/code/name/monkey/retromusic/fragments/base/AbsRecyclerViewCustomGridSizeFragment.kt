@@ -73,6 +73,7 @@ abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>
 
     fun setAndSaveSortOrder(sortOrder: String) {
         this.sortOrder = sortOrder
+        println(sortOrder)
         saveSortOrder(sortOrder)
         setSortOrder(sortOrder)
     }

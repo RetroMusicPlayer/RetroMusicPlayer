@@ -33,26 +33,7 @@ class PlaylistDetailsViewModel(
     fun getSongs(): LiveData<List<SongEntity>> =
         realRepository.playlistSongs(playlist.playlistEntity.playListId)
 
-    override fun onMediaStoreChanged() {
-        /*if (playlist !is AbsCustomPlaylist) {
-            // Playlist deleted
-            if (!PlaylistsUtil.doesPlaylistExist(App.getContext(), playlist.id)) {
-                //TODO Finish the page
-                return
-            }
-            // Playlist renamed
-            val playlistName =
-                PlaylistsUtil.getNameForPlaylist(App.getContext(), playlist.id.toLong())
-            if (playlistName != playlist.name) {
-                viewModelScope.launch {
-                    playlist = realRepository.playlist(playlist.id)
-                    _playlist.postValue(playlist)
-                }
-            }
-        }
-        loadPlaylistSongs(playlist)*/
-    }
-
+    override fun onMediaStoreChanged() {}
     override fun onServiceConnected() {}
     override fun onServiceDisconnected() {}
     override fun onQueueChanged() {}

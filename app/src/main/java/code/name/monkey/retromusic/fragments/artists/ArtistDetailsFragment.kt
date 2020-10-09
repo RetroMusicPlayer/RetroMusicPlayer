@@ -94,16 +94,14 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
-
         mainActivity.setSupportActionBar(toolbar)
+        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
 
         toolbar.title = null
 
         setupRecyclerView()
 
         ViewCompat.setTransitionName(container, "artist")
-
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
             startPostponedEnterTransition()

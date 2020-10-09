@@ -8,7 +8,75 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
+import code.name.monkey.retromusic.ALBUM_ARTISTS_ONLY
+import code.name.monkey.retromusic.ALBUM_ART_ON_LOCK_SCREEN
+import code.name.monkey.retromusic.ALBUM_COVER_STYLE
+import code.name.monkey.retromusic.ALBUM_COVER_TRANSFORM
+import code.name.monkey.retromusic.ALBUM_DETAIL_SONG_SORT_ORDER
+import code.name.monkey.retromusic.ALBUM_GRID_SIZE
+import code.name.monkey.retromusic.ALBUM_GRID_SIZE_LAND
+import code.name.monkey.retromusic.ALBUM_GRID_STYLE
+import code.name.monkey.retromusic.ALBUM_SONG_SORT_ORDER
+import code.name.monkey.retromusic.ALBUM_SORT_ORDER
+import code.name.monkey.retromusic.ARTIST_ALBUM_SORT_ORDER
+import code.name.monkey.retromusic.ARTIST_GRID_SIZE
+import code.name.monkey.retromusic.ARTIST_GRID_SIZE_LAND
+import code.name.monkey.retromusic.ARTIST_GRID_STYLE
+import code.name.monkey.retromusic.ARTIST_SONG_SORT_ORDER
+import code.name.monkey.retromusic.ARTIST_SORT_ORDER
+import code.name.monkey.retromusic.AUDIO_DUCKING
+import code.name.monkey.retromusic.AUTO_DOWNLOAD_IMAGES_POLICY
+import code.name.monkey.retromusic.App
+import code.name.monkey.retromusic.BLACK_THEME
+import code.name.monkey.retromusic.BLUETOOTH_PLAYBACK
+import code.name.monkey.retromusic.BLURRED_ALBUM_ART
+import code.name.monkey.retromusic.CAROUSEL_EFFECT
+import code.name.monkey.retromusic.CHOOSE_EQUALIZER
+import code.name.monkey.retromusic.CLASSIC_NOTIFICATION
+import code.name.monkey.retromusic.COLORED_APP_SHORTCUTS
+import code.name.monkey.retromusic.COLORED_NOTIFICATION
+import code.name.monkey.retromusic.DESATURATED_COLOR
+import code.name.monkey.retromusic.EXPAND_NOW_PLAYING_PANEL
+import code.name.monkey.retromusic.EXTRA_SONG_INFO
+import code.name.monkey.retromusic.FILTER_SONG
+import code.name.monkey.retromusic.GAP_LESS_PLAYBACK
+import code.name.monkey.retromusic.GENERAL_THEME
+import code.name.monkey.retromusic.GENRE_SORT_ORDER
+import code.name.monkey.retromusic.HOME_ALBUM_GRID_STYLE
+import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
+import code.name.monkey.retromusic.IGNORE_MEDIA_STORE_ARTWORK
+import code.name.monkey.retromusic.INITIALIZED_BLACKLIST
+import code.name.monkey.retromusic.KEEP_SCREEN_ON
+import code.name.monkey.retromusic.LANGUAGE_NAME
+import code.name.monkey.retromusic.LAST_ADDED_CUTOFF
+import code.name.monkey.retromusic.LAST_CHANGELOG_VERSION
+import code.name.monkey.retromusic.LAST_PAGE
+import code.name.monkey.retromusic.LAST_SLEEP_TIMER_VALUE
+import code.name.monkey.retromusic.LIBRARY_CATEGORIES
+import code.name.monkey.retromusic.LOCK_SCREEN
+import code.name.monkey.retromusic.LYRICS_OPTIONS
+import code.name.monkey.retromusic.NEXT_SLEEP_TIMER_ELAPSED_REALTIME
+import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
+import code.name.monkey.retromusic.PAUSE_ON_ZERO_VOLUME
+import code.name.monkey.retromusic.PLAYLIST_SORT_ORDER
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.RECENTLY_PLAYED_CUTOFF
+import code.name.monkey.retromusic.SAF_SDCARD_URI
+import code.name.monkey.retromusic.SLEEP_TIMER_FINISH_SONG
+import code.name.monkey.retromusic.SONG_GRID_SIZE
+import code.name.monkey.retromusic.SONG_GRID_SIZE_LAND
+import code.name.monkey.retromusic.SONG_GRID_STYLE
+import code.name.monkey.retromusic.SONG_SORT_ORDER
+import code.name.monkey.retromusic.START_DIRECTORY
+import code.name.monkey.retromusic.TAB_TEXT_MODE
+import code.name.monkey.retromusic.TOGGLE_ADD_CONTROLS
+import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
+import code.name.monkey.retromusic.TOGGLE_HEADSET
+import code.name.monkey.retromusic.TOGGLE_HOME_BANNER
+import code.name.monkey.retromusic.TOGGLE_SHUFFLE
+import code.name.monkey.retromusic.TOGGLE_VOLUME
+import code.name.monkey.retromusic.USER_NAME
 import code.name.monkey.retromusic.extensions.getIntRes
 import code.name.monkey.retromusic.extensions.getStringOrDefault
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
@@ -16,7 +84,13 @@ import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment
 import code.name.monkey.retromusic.helper.SortOrder.*
 import code.name.monkey.retromusic.model.CategoryInfo
-import code.name.monkey.retromusic.transform.*
+import code.name.monkey.retromusic.transform.CascadingPageTransformer
+import code.name.monkey.retromusic.transform.DepthTransformation
+import code.name.monkey.retromusic.transform.HingeTransformation
+import code.name.monkey.retromusic.transform.HorizontalFlipTransformation
+import code.name.monkey.retromusic.transform.NormalPageTransformer
+import code.name.monkey.retromusic.transform.VerticalFlipTransformation
+import code.name.monkey.retromusic.transform.VerticalStackTransformer
 import code.name.monkey.retromusic.util.theme.ThemeMode
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.gson.Gson
@@ -154,6 +228,7 @@ object PreferenceUtil {
             putString(ALBUM_SORT_ORDER, value)
         }
 
+
     var artistSortOrder
         get() = sharedPreferences.getStringOrDefault(
             ARTIST_SORT_ORDER,
@@ -180,6 +255,15 @@ object PreferenceUtil {
             ARTIST_ALBUM_SORT_ORDER,
             ArtistAlbumSortOrder.ALBUM_A_Z
         )
+
+    var playlistSortOrder
+        get() = sharedPreferences.getStringOrDefault(
+            PLAYLIST_SORT_ORDER,
+            PlaylistSortOrder.PLAYLIST_A_Z
+        )
+        set(value) = sharedPreferences.edit {
+            putString(PLAYLIST_SORT_ORDER, value)
+        }
 
     val genreSortOrder
         get() = sharedPreferences.getStringOrDefault(
@@ -413,7 +497,7 @@ object PreferenceUtil {
 
     val homeAlbumGridStyle: Int
         get() {
-            val position = sharedPreferences.getStringOrDefault(HOME_ALBUM_GRID_STYLE, "0").toInt()
+            val position = sharedPreferences.getStringOrDefault(HOME_ALBUM_GRID_STYLE, "4").toInt()
             val typedArray =
                 App.getContext().resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
             val layoutRes = typedArray.getResourceId(position, 0)

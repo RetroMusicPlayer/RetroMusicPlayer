@@ -184,4 +184,25 @@ class SortOrder {
             const val ALBUM_Z_A = "$GENRE_A_Z DESC"
         }
     }
+
+    /**
+     * Playlist sort order entries.
+     */
+    interface PlaylistSortOrder {
+
+        companion object {
+
+            /* Playlist sort order A-Z */
+            const val PLAYLIST_A_Z = MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER
+
+            /* Playlist sort order Z-A */
+            const val PLAYLIST_Z_A = "$PLAYLIST_A_Z DESC"
+
+            /* Playlist sort order number of songs */
+            const val PLAYLIST_SONG_COUNT = "playlist_song_count"
+
+            /* Playlist sort order number of songs */
+            const val PLAYLIST_SONG_COUNT_DESC = "$PLAYLIST_SONG_COUNT DESC"
+        }
+    }
 }

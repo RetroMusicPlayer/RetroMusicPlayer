@@ -222,8 +222,11 @@ class LibraryViewModel(
         repository.renameRoomPlaylist(playListId, name)
     }
 
-    fun deleteSongsInPlaylist(songs: List<SongEntity>) = viewModelScope.launch(IO) {
-        repository.deleteSongsInPlaylist(songs)
+    fun deleteSongsInPlaylist(songs: List<SongEntity>) {
+        viewModelScope.launch(IO) {
+            repository.deleteSongsInPlaylist(songs)
+            forceReload(Playlists)
+        }
     }
 
     fun deleteSongsFromPlaylist(playlists: List<PlaylistEntity>) = viewModelScope.launch(IO) {

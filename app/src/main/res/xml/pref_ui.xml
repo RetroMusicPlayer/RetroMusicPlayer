@@ -84,14 +84,14 @@
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="true"
-            android:key="album_art_on_lockscreen"
+            android:key="album_art_on_lock_screen"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_album_art_on_lockscreen"
             android:title="@string/pref_title_album_art_on_lockscreen" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
-            android:dependency="album_art_on_lockscreen"
+            android:dependency="album_art_on_lock_screen"
             android:key="blurred_album_art"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_blurred_album_art"

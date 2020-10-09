@@ -15,24 +15,35 @@
 package code.name.monkey.retromusic.fragments.artists
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 class ArtistDetailsViewModel(
     private val realRepository: RealRepository,
     private val artistId: Long
 ) : ViewModel(), IMusicServiceEventListener {
+    private val artistDetails = MutableLiveData<Artist>()
 
-    fun getArtist(): LiveData<Artist> = liveData(IO) {
-        val artist = realRepository.artistById(artistId)
-        emit(artist)
+    init {
+        fetchArtist()
     }
+
+    private fun fetchArtist() {
+        viewModelScope.launch(IO) {
+            artistDetails.postValue(realRepository.artistById(artistId))
+        }
+    }
+
+    fun getArtist(): LiveData<Artist> = artistDetails
 
     fun getArtistInfo(
         name: String,
@@ -45,7 +56,7 @@ class ArtistDetailsViewModel(
     }
 
     override fun onMediaStoreChanged() {
-        getArtist()
+       fetchArtist()
     }
 
     override fun onServiceConnected() {}

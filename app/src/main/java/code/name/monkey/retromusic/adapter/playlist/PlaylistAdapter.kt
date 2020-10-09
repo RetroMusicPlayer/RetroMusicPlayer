@@ -24,12 +24,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
@@ -42,6 +40,7 @@ import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.ICabHolder
+import code.name.monkey.retromusic.interfaces.IPlaylistClickListener
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.PlaylistSongsLoader
@@ -53,7 +52,8 @@ class PlaylistAdapter(
     private val activity: FragmentActivity,
     var dataSet: List<PlaylistWithSongs>,
     private var itemLayoutRes: Int,
-    ICabHolder: ICabHolder?
+    ICabHolder: ICabHolder?,
+    private val listener: IPlaylistClickListener
 ) : AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, PlaylistWithSongs>(
     activity,
     ICabHolder,
@@ -172,10 +172,8 @@ class PlaylistAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                activity.findNavController(R.id.fragment_container).navigate(
-                    R.id.playlistDetailsFragment,
-                    bundleOf(EXTRA_PLAYLIST to dataSet[layoutPosition])
-                )
+                ViewCompat.setTransitionName(itemView, "playlist")
+                listener.onPlaylistClick(dataSet[layoutPosition], itemView)
             }
         }
 

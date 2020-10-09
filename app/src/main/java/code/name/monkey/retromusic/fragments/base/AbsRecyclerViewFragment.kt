@@ -61,6 +61,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        println("AbsRecyclerViewFragment")
         libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITH)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null

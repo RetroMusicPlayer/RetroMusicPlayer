@@ -29,7 +29,11 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.peekHeightAnimate
+import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.translateXAnimate
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
@@ -118,6 +122,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
         dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
         dimBackground.setOnClickListener {
+            println("dimBackground")
             libraryViewModel.setPanelState(COLLAPSED_WITH)
         }
     }
@@ -209,6 +214,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    println("onServiceConnected")
                     if (bottomNavigationView.isVisible) {
                         libraryViewModel.setPanelState(COLLAPSED_WITH)
                     } else {
@@ -225,6 +231,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             libraryViewModel.setPanelState(HIDE)
         } else {
             if (bottomNavigationView.isVisible) {
+                println("onQueueChanged")
                 libraryViewModel.setPanelState(COLLAPSED_WITH)
             } else {
                 libraryViewModel.setPanelState(COLLAPSED_WITHOUT)
@@ -339,6 +346,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 EXPAND -> {
                     println("EXPAND")
                     expandPanel()
+                    bottomNavigationView.translateXAnimate(150f)
                 }
                 HIDE -> {
                     println("HIDE")
