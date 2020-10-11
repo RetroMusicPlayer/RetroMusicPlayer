@@ -166,7 +166,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         miniPlayerFragment?.view?.alpha = alpha
         miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
         bottomNavigationView.translationY = progress * 500
-        // bottomNavigationView.alpha = alpha
+        bottomNavigationView.alpha = alpha
     }
 
     open fun onPanelCollapsed() {
@@ -342,6 +342,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 bottomSheetBehavior.isHideable = false
+                ViewCompat.setElevation(slidingPanel, 10f)
+                ViewCompat.setElevation(bottomNavigationView, 10f)
                 if (isVisible) {
                     bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
                     bottomNavigationView.translateXAnimate(0f)
@@ -349,8 +351,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     bottomSheetBehavior.peekHeightAnimate(heightOfBar)
                     bottomNavigationView.translateXAnimate(500f)
                 }
-                ViewCompat.setElevation(slidingPanel, 10f)
-                ViewCompat.setElevation(bottomNavigationView, 10f)
             }
         }
     }
