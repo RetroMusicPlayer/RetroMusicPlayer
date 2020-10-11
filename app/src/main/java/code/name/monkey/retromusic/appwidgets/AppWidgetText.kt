@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 
 class AppWidgetText : BaseAppWidget() {
@@ -77,7 +78,11 @@ class AppWidgetText : BaseAppWidget() {
      * Link up various button actions using [PendingIntent].
      */
     private fun linkButtons(context: Context, views: RemoteViews) {
-        val action = Intent(context, MainActivity::class.java).putExtra("expand", true)
+        val action = Intent(context, MainActivity::class.java)
+            .putExtra(
+                MainActivity.EXPAND_PANEL,
+                PreferenceUtil.isExpandPanel
+            )
         var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)

@@ -61,7 +61,7 @@ class PlaylistsFragment :
         return PlaylistAdapter(
             requireActivity(),
             ArrayList(),
-            R.layout.item_list,
+            itemLayoutRes(),
             null,
             this
         )

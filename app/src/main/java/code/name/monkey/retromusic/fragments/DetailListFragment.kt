@@ -44,7 +44,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.setSupportActionBar(toolbar)
         progressIndicator.hide()
         when (args.type) {

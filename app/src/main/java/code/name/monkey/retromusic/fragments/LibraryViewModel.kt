@@ -60,11 +60,6 @@ class LibraryViewModel(
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
     val paletteColor: LiveData<Int> = _paletteColor
-    val panelState: MutableLiveData<NowPlayingPanelState> = MutableLiveData<NowPlayingPanelState>()
-
-    fun setPanelState(state: NowPlayingPanelState) {
-        panelState.postValue(state)
-    }
 
     init {
         loadLibraryContent()

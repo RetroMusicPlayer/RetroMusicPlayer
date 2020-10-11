@@ -22,7 +22,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -35,11 +34,10 @@ import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import code.name.monkey.retromusic.state.NowPlayingPanelState
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWatcher {
     companion object {
@@ -52,7 +50,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.setSupportActionBar(toolbar)
         libraryViewModel.clearSearchResult()
         setupRecyclerView()
@@ -86,7 +84,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     }
 
     private fun setupRecyclerView() {
-        searchAdapter = SearchAdapter(requireActivity() as AppCompatActivity, emptyList())
+        searchAdapter = SearchAdapter(requireActivity(), emptyList())
         searchAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()

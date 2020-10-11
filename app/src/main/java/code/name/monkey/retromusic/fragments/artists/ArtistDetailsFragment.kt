@@ -51,14 +51,11 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.repository.RealRepository
-import code.name.monkey.retromusic.state.NowPlayingPanelState
 import code.name.monkey.retromusic.util.CustomArtistImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialContainerTransform
-import java.util.*
-import kotlin.collections.ArrayList
 import kotlinx.android.synthetic.main.fragment_artist_content.*
 import kotlinx.android.synthetic.main.fragment_artist_details.*
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +64,8 @@ import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_details),
     IAlbumClickListener {
@@ -91,22 +90,21 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         super.onCreate(savedInstanceState)
         setUpTransitions()
     }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
+        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
-
         toolbar.title = null
-
-        setupRecyclerView()
-
         ViewCompat.setTransitionName(container, "artist")
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
             startPostponedEnterTransition()
             showArtist(it)
         })
+        setupRecyclerView()
 
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }

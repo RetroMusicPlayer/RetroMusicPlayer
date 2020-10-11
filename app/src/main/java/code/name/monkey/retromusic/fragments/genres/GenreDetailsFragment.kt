@@ -47,9 +47,9 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
         progressIndicator.hide()
         setupRecyclerView()
         detailsViewModel.getSongs().observe(viewLifecycleOwner, androidx.lifecycle.Observer {

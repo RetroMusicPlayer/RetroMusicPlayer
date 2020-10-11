@@ -18,6 +18,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -40,8 +41,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
-        retainInstance = true
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITH)
+        mainActivity.setBottomBarVisibility(View.VISIBLE)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         toolbar.setNavigationOnClickListener {

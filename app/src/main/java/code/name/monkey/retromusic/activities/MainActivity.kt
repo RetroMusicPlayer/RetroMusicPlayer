@@ -57,7 +57,6 @@ import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.state.NowPlayingPanelState
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
@@ -120,7 +119,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
             intent.getBooleanExtra(EXPAND_PANEL, false) &&
             PreferenceUtil.isExpandPanel
         ) {
-            libraryViewModel.setPanelState(NowPlayingPanelState.EXPAND)
+            expandPanel()
             intent.removeExtra(EXPAND_PANEL)
         }
     }

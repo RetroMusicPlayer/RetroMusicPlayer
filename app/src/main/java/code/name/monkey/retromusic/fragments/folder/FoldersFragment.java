@@ -75,7 +75,6 @@ import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.state.NowPlayingPanelState;
 import code.name.monkey.retromusic.util.DensityUtil;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -166,7 +165,7 @@ public class FoldersFragment extends AbsMainActivityFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         getMainActivity().addMusicServiceEventListener(getLibraryViewModel());
-        getLibraryViewModel().setPanelState(NowPlayingPanelState.COLLAPSED_WITH);
+        getMainActivity().setBottomBarVisibility(View.VISIBLE);
         getMainActivity().setSupportActionBar(toolbar);
         getMainActivity().getSupportActionBar().setTitle(null);
         setStatusBarColorAuto(view);

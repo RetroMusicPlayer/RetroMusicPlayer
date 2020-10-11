@@ -52,8 +52,7 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println("AbsMainActivityFragment")
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITH)
+        mainActivity.setBottomBarVisibility(View.VISIBLE)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         setStatusBarColorAuto(view)

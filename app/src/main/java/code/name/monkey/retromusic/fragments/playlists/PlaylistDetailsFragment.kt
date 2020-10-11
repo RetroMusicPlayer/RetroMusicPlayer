@@ -48,14 +48,12 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.addMusicServiceEventListener(viewModel)
         mainActivity.setSupportActionBar(toolbar)
-
         ViewCompat.setTransitionName(container, "playlist")
         playlist = arguments.extraPlaylist
         toolbar.title = playlist.playlistEntity.playlistName
-
         setUpRecyclerView()
         viewModel.getSongs().observe(viewLifecycleOwner, {
             songs(it.toSongs())

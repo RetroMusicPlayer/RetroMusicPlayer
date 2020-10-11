@@ -29,6 +29,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
+import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.peekHeightAnimate
 import code.name.monkey.retromusic.extensions.show
@@ -58,9 +59,9 @@ import code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment
 import code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
-import code.name.monkey.retromusic.state.NowPlayingPanelState.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -116,14 +117,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         chooseFragmentForTheme()
         setupSlidingUpPanel()
         setupBottomSheet()
-        updatePanelState()
         updateColor()
 
         val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
         dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
         dimBackground.setOnClickListener {
             println("dimBackground")
-            libraryViewModel.setPanelState(COLLAPSED_WITH)
+
         }
     }
 
@@ -136,6 +136,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         super.onResume()
         if (nowPlayingScreen != PreferenceUtil.nowPlayingScreen) {
             postRecreate()
+        }
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            setMiniPlayerAlphaProgress(1f)
         }
     }
 
@@ -160,6 +163,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     fun expandPanel() {
         bottomSheetBehavior.state = STATE_EXPANDED
+        setMiniPlayerAlphaProgress(1f)
     }
 
     private fun setMiniPlayerAlphaProgress(progress: Float) {
@@ -214,12 +218,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    println("onServiceConnected")
-                    if (bottomNavigationView.isVisible) {
-                        libraryViewModel.setPanelState(COLLAPSED_WITH)
-                    } else {
-                        libraryViewModel.setPanelState(COLLAPSED_WITHOUT)
-                    }
+                    hideBottomBar(false)
                 }
             })
         } // don't call hideBottomBar(true) here as it causes a bug with the SlidingUpPanelLayout
@@ -227,16 +226,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     override fun onQueueChanged() {
         super.onQueueChanged()
-        if (MusicPlayerRemote.playingQueue.isEmpty()) {
-            libraryViewModel.setPanelState(HIDE)
-        } else {
-            if (bottomNavigationView.isVisible) {
-                println("onQueueChanged")
-                libraryViewModel.setPanelState(COLLAPSED_WITH)
-            } else {
-                libraryViewModel.setPanelState(COLLAPSED_WITHOUT)
-            }
-        }
+        hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
     }
 
     override fun onBackPressed() {
@@ -339,54 +329,35 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         })
     }
 
-    private fun updatePanelState() {
-        libraryViewModel.panelState.observe(this, { state ->
-            val isQueueEmpty = MusicPlayerRemote.playingQueue.isEmpty()
-            when (state) {
-                EXPAND -> {
-                    println("EXPAND")
-                    expandPanel()
-                    bottomNavigationView.translateXAnimate(150f)
-                }
-                HIDE -> {
-                    println("HIDE")
+    fun setBottomBarVisibility(visible: Int) {
+        bottomNavigationView.visibility = visible
+        hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
+    }
+
+    private fun hideBottomBar(hide: Boolean) {
+        val heightOfBar = dip(R.dimen.mini_player_height)
+        val heightOfBarWithTabs = dip(R.dimen.mini_player_height_expanded)
+        val isVisible = bottomNavigationView.isVisible
+        if (hide) {
+            bottomSheetBehavior.isHideable = true
+            bottomSheetBehavior.peekHeight = 0
+            ViewCompat.setElevation(slidingPanel, 0f)
+            ViewCompat.setElevation(bottomNavigationView, 10f)
+            collapsePanel()
+        } else {
+            if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
+                bottomSheetBehavior.isHideable = false
+                if (isVisible) {
+                    bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
                     bottomNavigationView.translateXAnimate(0f)
-                    bottomSheetBehavior.isHideable = true
-                    bottomSheetBehavior.peekHeightAnimate(0)
-                    bottomSheetBehavior.state = STATE_COLLAPSED
-                    ViewCompat.setElevation(slidingPanel, 0f)
-                    ViewCompat.setElevation(bottomNavigationView, 10f)
+                } else {
+                    bottomSheetBehavior.peekHeightAnimate(heightOfBar)
+                    bottomNavigationView.translateXAnimate(500f)
                 }
-                COLLAPSED_WITH -> {
-                    println("COLLAPSED_WITH")
-                    val heightOfBar = bottomNavigationView.height
-                    val height = if (isQueueEmpty) 0 else (heightOfBar * 2) - 24
-                    ViewCompat.setElevation(bottomNavigationView, 20f)
-                    ViewCompat.setElevation(slidingPanel, 20f)
-                    bottomSheetBehavior.isHideable = false
-                    bottomSheetBehavior.peekHeightAnimate(height)
-                    bottomNavigationView.translateXAnimate(0f)
-                }
-                COLLAPSED_WITHOUT -> {
-                    println("COLLAPSED_WITHOUT")
-                    val heightOfBar = bottomNavigationView.height
-                    val height = if (isQueueEmpty) 0 else heightOfBar - 24
-                    ViewCompat.setElevation(bottomNavigationView, 10f)
-                    ViewCompat.setElevation(slidingPanel, 10f)
-                    bottomSheetBehavior.isHideable = false
-                    bottomSheetBehavior.peekHeightAnimate(height)
-                    bottomNavigationView.translateXAnimate(150f)
-                }
-                else -> {
-                    println("else")
-                    bottomSheetBehavior.isHideable = true
-                    bottomSheetBehavior.peekHeight = 0
-                    collapsePanel()
-                    ViewCompat.setElevation(slidingPanel, 0f)
-                    ViewCompat.setElevation(bottomNavigationView, 10f)
-                }
+                ViewCompat.setElevation(slidingPanel, 10f)
+                ViewCompat.setElevation(bottomNavigationView, 10f)
             }
-        })
+        }
     }
 
     private fun chooseFragmentForTheme() {

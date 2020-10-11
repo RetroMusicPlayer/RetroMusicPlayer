@@ -31,6 +31,7 @@ import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
@@ -192,7 +193,11 @@ class AppWidgetSmall : BaseAppWidget() {
      * Link up various button actions using [PendingIntent].
      */
     private fun linkButtons(context: Context, views: RemoteViews) {
-        val action = Intent(context, MainActivity::class.java).putExtra("expand", true)
+        val action = Intent(context, MainActivity::class.java)
+            .putExtra(
+                MainActivity.EXPAND_PANEL,
+                PreferenceUtil.isExpandPanel
+            )
         var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)
