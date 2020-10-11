@@ -1,10 +1,24 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.activities
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.WindowManager
+import androidx.core.view.ViewCompat
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -23,7 +37,6 @@ import com.google.android.material.transition.platform.MaterialContainerTransfor
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import kotlinx.android.synthetic.main.activity_lyrics.*
 
-
 class LyricsActivity : AbsMusicServiceActivity(), MusicProgressViewUpdateHelper.Callback {
     private lateinit var updateHelper: MusicProgressViewUpdateHelper
 
@@ -38,25 +51,20 @@ class LyricsActivity : AbsMusicServiceActivity(), MusicProgressViewUpdateHelper.
             return baseUrl
         }
 
-    private fun buildContainerTransform( ): MaterialContainerTransform {
+    private fun buildContainerTransform(): MaterialContainerTransform {
         val transform = MaterialContainerTransform()
         transform.setAllContainerColors(
-            MaterialColors.getColor(findViewById(android.R.id.content), R.attr.colorSurface)
+            MaterialColors.getColor(findViewById(R.id.container), R.attr.colorSurface)
         )
-        transform.addTarget(android.R.id.content)
+        transform.addTarget(R.id.container)
         transform.duration = 300
-        transform.interpolator = FastOutSlowInInterpolator()
-        transform.pathMotion = MaterialArcMotion()
         return transform
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        findViewById<View>(android.R.id.content).transitionName = "lyrics"
-        setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-        window.sharedElementEnterTransition = buildContainerTransform( )
-        window.sharedElementReturnTransition = buildContainerTransform( )
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lyrics)
+        ViewCompat.setTransitionName(container, "lyrics")
         setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
         setNavigationbarColorAuto()

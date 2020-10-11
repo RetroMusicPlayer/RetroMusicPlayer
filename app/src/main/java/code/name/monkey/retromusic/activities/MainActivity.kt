@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.activities
 
 import android.content.Intent
@@ -9,7 +23,32 @@ import android.provider.MediaStore
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.NavigationUI
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
+import code.name.monkey.retromusic.ALBUM_COVER_STYLE
+import code.name.monkey.retromusic.ALBUM_COVER_TRANSFORM
+import code.name.monkey.retromusic.BANNER_IMAGE_PATH
+import code.name.monkey.retromusic.BLACK_THEME
+import code.name.monkey.retromusic.CAROUSEL_EFFECT
+import code.name.monkey.retromusic.CIRCULAR_ALBUM_ART
+import code.name.monkey.retromusic.DESATURATED_COLOR
+import code.name.monkey.retromusic.EXTRA_SONG_INFO
+import code.name.monkey.retromusic.GENERAL_THEME
+import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
+import code.name.monkey.retromusic.KEEP_SCREEN_ON
+import code.name.monkey.retromusic.LANGUAGE_NAME
+import code.name.monkey.retromusic.LIBRARY_CATEGORIES
+import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
+import code.name.monkey.retromusic.PROFILE_IMAGE_PATH
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.ROUND_CORNERS
+import code.name.monkey.retromusic.TAB_TEXT_MODE
+import code.name.monkey.retromusic.TOGGLE_ADD_CONTROLS
+import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
+import code.name.monkey.retromusic.TOGGLE_GENRE
+import code.name.monkey.retromusic.TOGGLE_HOME_BANNER
+import code.name.monkey.retromusic.TOGGLE_SEPARATE_LINE
+import code.name.monkey.retromusic.TOGGLE_VOLUME
+import code.name.monkey.retromusic.USER_NAME
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -47,7 +86,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         AppRater.appLaunched(this)
         updateTabs()
 
-        //NavigationUI.setupWithNavController(getBottomNavigationView(), findNavController(R.id.fragment_container))
+        // NavigationUI.setupWithNavController(getBottomNavigationView(), findNavController(R.id.fragment_container))
         setupNavigationController()
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
@@ -66,7 +105,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         navController.graph = navGraph
         NavigationUI.setupWithNavController(getBottomNavigationView(), navController)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            //appBarLayout.setExpanded(true, true)
+            // appBarLayout.setExpanded(true, true)
         }
     }
 
@@ -156,11 +195,11 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                 setIntent(Intent())
             }
         }
-
     }
 
     private fun parseLongFromIntent(
-        intent: Intent, longKey: String,
+        intent: Intent,
+        longKey: String,
         stringKey: String
     ): Long {
         var id = intent.getLongExtra(longKey, -1)

@@ -95,8 +95,8 @@ import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal
  */
-public class MusicService extends Service implements
-        SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
+public class MusicService extends Service
+        implements SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
 
     public static final String TAG = MusicService.class.getSimpleName();
     public static final String RETRO_MUSIC_PACKAGE_NAME = "code.name.monkey.retromusic";
@@ -110,17 +110,22 @@ public class MusicService extends Service implements
     public static final String ACTION_REWIND = RETRO_MUSIC_PACKAGE_NAME + ".rewind";
     public static final String ACTION_QUIT = RETRO_MUSIC_PACKAGE_NAME + ".quitservice";
     public static final String ACTION_PENDING_QUIT = RETRO_MUSIC_PACKAGE_NAME + ".pendingquitservice";
-    public static final String INTENT_EXTRA_PLAYLIST = RETRO_MUSIC_PACKAGE_NAME + "intentextra.playlist";
-    public static final String INTENT_EXTRA_SHUFFLE_MODE = RETRO_MUSIC_PACKAGE_NAME + ".intentextra.shufflemode";
+    public static final String INTENT_EXTRA_PLAYLIST =
+            RETRO_MUSIC_PACKAGE_NAME + "intentextra.playlist";
+    public static final String INTENT_EXTRA_SHUFFLE_MODE =
+            RETRO_MUSIC_PACKAGE_NAME + ".intentextra.shufflemode";
     public static final String APP_WIDGET_UPDATE = RETRO_MUSIC_PACKAGE_NAME + ".appwidgetupdate";
     public static final String EXTRA_APP_WIDGET_NAME = RETRO_MUSIC_PACKAGE_NAME + "app_widget_name";
-    // Do not change these three strings as it will break support with other apps (e.g. last.fm scrobbling)
+    // Do not change these three strings as it will break support with other apps (e.g. last.fm
+    // scrobbling)
     public static final String META_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".metachanged";
     public static final String QUEUE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".queuechanged";
     public static final String PLAY_STATE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".playstatechanged";
-    public static final String FAVORITE_STATE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + "favoritestatechanged";
+    public static final String FAVORITE_STATE_CHANGED =
+            RETRO_MUSIC_PACKAGE_NAME + "favoritestatechanged";
     public static final String REPEAT_MODE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".repeatmodechanged";
-    public static final String SHUFFLE_MODE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".shufflemodechanged";
+    public static final String SHUFFLE_MODE_CHANGED =
+            RETRO_MUSIC_PACKAGE_NAME + ".shufflemodechanged";
     public static final String MEDIA_STORE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".mediastorechanged";
     public static final String CYCLE_REPEAT = RETRO_MUSIC_PACKAGE_NAME + ".cyclerepeat";
     public static final String TOGGLE_SHUFFLE = RETRO_MUSIC_PACKAGE_NAME + ".toggleshuffle";
@@ -145,13 +150,14 @@ public class MusicService extends Service implements
     public static final int REPEAT_MODE_ALL = 1;
     public static final int REPEAT_MODE_THIS = 2;
     public static final int SAVE_QUEUES = 0;
-    private static final long MEDIA_SESSION_ACTIONS = PlaybackStateCompat.ACTION_PLAY
-            | PlaybackStateCompat.ACTION_PAUSE
-            | PlaybackStateCompat.ACTION_PLAY_PAUSE
-            | PlaybackStateCompat.ACTION_SKIP_TO_NEXT
-            | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
-            | PlaybackStateCompat.ACTION_STOP
-            | PlaybackStateCompat.ACTION_SEEK_TO;
+    private static final long MEDIA_SESSION_ACTIONS =
+            PlaybackStateCompat.ACTION_PLAY
+                    | PlaybackStateCompat.ACTION_PAUSE
+                    | PlaybackStateCompat.ACTION_PLAY_PAUSE
+                    | PlaybackStateCompat.ACTION_SKIP_TO_NEXT
+                    | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
+                    | PlaybackStateCompat.ACTION_STOP
+                    | PlaybackStateCompat.ACTION_SEEK_TO;
     private final IBinder musicBind = new MusicBinder();
     public int nextPosition = -1;
 
@@ -172,43 +178,44 @@ public class MusicService extends Service implements
 
     private AppWidgetText appWidgetText = AppWidgetText.Companion.getInstance();
 
-    private final BroadcastReceiver widgetIntentReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-            final String command = intent.getStringExtra(EXTRA_APP_WIDGET_NAME);
-            final int[] ids = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
-            if (command != null) {
-                switch (command) {
-                    case AppWidgetClassic.NAME: {
-                        appWidgetClassic.performUpdate(MusicService.this, ids);
-                        break;
-                    }
-                    case AppWidgetSmall.NAME: {
-                        appWidgetSmall.performUpdate(MusicService.this, ids);
-                        break;
-                    }
-                    case AppWidgetBig.NAME: {
-                        appWidgetBig.performUpdate(MusicService.this, ids);
-                        break;
-                    }
-                    case AppWidgetCard.NAME: {
-                        appWidgetCard.performUpdate(MusicService.this, ids);
-                        break;
-                    }
-                    case AppWidgetText.NAME: {
-                        appWidgetText.performUpdate(MusicService.this, ids);
-                        break;
+    private final BroadcastReceiver widgetIntentReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(final Context context, final Intent intent) {
+                    final String command = intent.getStringExtra(EXTRA_APP_WIDGET_NAME);
+                    final int[] ids = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+                    if (command != null) {
+                        switch (command) {
+                            case AppWidgetClassic.NAME: {
+                                appWidgetClassic.performUpdate(MusicService.this, ids);
+                                break;
+                            }
+                            case AppWidgetSmall.NAME: {
+                                appWidgetSmall.performUpdate(MusicService.this, ids);
+                                break;
+                            }
+                            case AppWidgetBig.NAME: {
+                                appWidgetBig.performUpdate(MusicService.this, ids);
+                                break;
+                            }
+                            case AppWidgetCard.NAME: {
+                                appWidgetCard.performUpdate(MusicService.this, ids);
+                                break;
+                            }
+                            case AppWidgetText.NAME: {
+                                appWidgetText.performUpdate(MusicService.this, ids);
+                                break;
+                            }
+                        }
                     }
                 }
-            }
-
-        }
-    };
+            };
     private AudioManager audioManager;
-    private IntentFilter becomingNoisyReceiverIntentFilter = new IntentFilter(
-            AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+    private IntentFilter becomingNoisyReceiverIntentFilter =
+            new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
     private boolean becomingNoisyReceiverRegistered;
-    private IntentFilter bluetoothConnectedIntentFilter = new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
+    private IntentFilter bluetoothConnectedIntentFilter =
+            new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
     private boolean bluetoothConnectedRegistered = false;
     private IntentFilter headsetReceiverIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
     private boolean headsetReceiverRegistered = false;
@@ -220,105 +227,112 @@ public class MusicService extends Service implements
     private List<Song> playingQueue = new ArrayList<>();
     private boolean pausedByTransientLossOfFocus;
 
-    private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, @NonNull Intent intent) {
-            if (intent.getAction() != null && intent.getAction().equals(AudioManager.ACTION_AUDIO_BECOMING_NOISY)) {
-                pause();
-            }
-        }
-    };
+    private final BroadcastReceiver becomingNoisyReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, @NonNull Intent intent) {
+                    if (intent.getAction() != null
+                            && intent.getAction().equals(AudioManager.ACTION_AUDIO_BECOMING_NOISY)) {
+                        pause();
+                    }
+                }
+            };
 
     private PlaybackHandler playerHandler;
 
-    private final AudioManager.OnAudioFocusChangeListener audioFocusListener
-            = new AudioManager.OnAudioFocusChangeListener() {
-        @Override
-        public void onAudioFocusChange(final int focusChange) {
-            playerHandler.obtainMessage(FOCUS_CHANGE, focusChange, 0).sendToTarget();
-        }
-    };
+    private final AudioManager.OnAudioFocusChangeListener audioFocusListener =
+            new AudioManager.OnAudioFocusChangeListener() {
+                @Override
+                public void onAudioFocusChange(final int focusChange) {
+                    playerHandler.obtainMessage(FOCUS_CHANGE, focusChange, 0).sendToTarget();
+                }
+            };
 
     private PlayingNotification playingNotification;
-    private final BroadcastReceiver updateFavoriteReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-            updateNotification();
-        }
-    };
-    private final BroadcastReceiver lockScreenReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (PreferenceUtil.INSTANCE.isLockScreen() && isPlaying()) {
-                Intent lockIntent = new Intent(context, LockScreenActivity.class);
-                lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(lockIntent);
-            }
-        }
-    };
+    private final BroadcastReceiver updateFavoriteReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(final Context context, final Intent intent) {
+                    updateNotification();
+                }
+            };
+    private final BroadcastReceiver lockScreenReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    if (PreferenceUtil.INSTANCE.isLockScreen() && isPlaying()) {
+                        Intent lockIntent = new Intent(context, LockScreenActivity.class);
+                        lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(lockIntent);
+                    }
+                }
+            };
     private QueueSaveHandler queueSaveHandler;
     private HandlerThread queueSaveHandlerThread;
     private boolean queuesRestored;
     private int repeatMode;
     private int shuffleMode;
     private SongPlayCountHelper songPlayCountHelper = new SongPlayCountHelper();
-    private final BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-            String action = intent.getAction();
-            if (action != null) {
-                if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action) &&
-                        PreferenceUtil.INSTANCE.isBluetoothSpeaker()) {
-                    if (VERSION.SDK_INT >= VERSION_CODES.M) {
-                        if (getAudioManager().getDevices(AudioManager.GET_DEVICES_OUTPUTS).length > 0) {
-                            play();
-                        }
-                    } else {
-                        if (getAudioManager().isBluetoothA2dpOn()) {
-                            play();
+    private final BroadcastReceiver bluetoothReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(final Context context, final Intent intent) {
+                    String action = intent.getAction();
+                    if (action != null) {
+                        if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)
+                                && PreferenceUtil.INSTANCE.isBluetoothSpeaker()) {
+                            if (VERSION.SDK_INT >= VERSION_CODES.M) {
+                                if (getAudioManager().getDevices(AudioManager.GET_DEVICES_OUTPUTS).length > 0) {
+                                    play();
+                                }
+                            } else {
+                                if (getAudioManager().isBluetoothA2dpOn()) {
+                                    play();
+                                }
+                            }
                         }
                     }
                 }
-            }
-        }
-    };
-    private PhoneStateListener phoneStateListener = new PhoneStateListener() {
-        @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
-            switch (state) {
-                case TelephonyManager.CALL_STATE_IDLE:
-                    //Not in call: Play music
-                    play();
-                    break;
-                case TelephonyManager.CALL_STATE_RINGING:
-                case TelephonyManager.CALL_STATE_OFFHOOK:
-                    //A call is dialing, active or on hold
-                    pause();
-                    break;
-                default:
-            }
-            super.onCallStateChanged(state, incomingNumber);
-        }
-    };
-    private BroadcastReceiver headsetReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action != null) {
-                if (Intent.ACTION_HEADSET_PLUG.equals(action)) {
-                    int state = intent.getIntExtra("state", -1);
+            };
+    private PhoneStateListener phoneStateListener =
+            new PhoneStateListener() {
+                @Override
+                public void onCallStateChanged(int state, String incomingNumber) {
                     switch (state) {
-                        case 0:
+                        case TelephonyManager.CALL_STATE_IDLE:
+                            // Not in call: Play music
+                            play();
+                            break;
+                        case TelephonyManager.CALL_STATE_RINGING:
+                        case TelephonyManager.CALL_STATE_OFFHOOK:
+                            // A call is dialing, active or on hold
                             pause();
                             break;
-                        case 1:
-                            play();
-                            break;
+                        default:
+                    }
+                    super.onCallStateChanged(state, incomingNumber);
+                }
+            };
+    private BroadcastReceiver headsetReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    if (action != null) {
+                        if (Intent.ACTION_HEADSET_PLUG.equals(action)) {
+                            int state = intent.getIntExtra("state", -1);
+                            switch (state) {
+                                case 0:
+                                    pause();
+                                    break;
+                                case 1:
+                                    play();
+                                    break;
+                            }
+                        }
                     }
                 }
-            }
-        }
-    };
+            };
     private ThrottledSeekHandler throttledSeekHandler;
     private Handler uiThreadHandler;
     private PowerManager.WakeLock wakeLock;
@@ -343,7 +357,8 @@ public class MusicService extends Service implements
     @Override
     public void onCreate() {
         super.onCreate();
-        final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        final TelephonyManager telephonyManager =
+                (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         if (telephonyManager != null) {
             telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
         }
@@ -363,8 +378,10 @@ public class MusicService extends Service implements
 
         setupMediaSession();
 
-        // queue saving needs to run on a separate thread so that it doesn't block the playback handler events
-        queueSaveHandlerThread = new HandlerThread("QueueSaveHandler", Process.THREAD_PRIORITY_BACKGROUND);
+        // queue saving needs to run on a separate thread so that it doesn't block the playback handler
+        // events
+        queueSaveHandlerThread =
+                new HandlerThread("QueueSaveHandler", Process.THREAD_PRIORITY_BACKGROUND);
         queueSaveHandlerThread.start();
         queueSaveHandler = new QueueSaveHandler(this, queueSaveHandlerThread.getLooper());
 
@@ -379,26 +396,36 @@ public class MusicService extends Service implements
         mediaStoreObserver = new MediaStoreObserver(this, playerHandler);
         throttledSeekHandler = new ThrottledSeekHandler(this, playerHandler);
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
 
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Media.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Albums.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Albums.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Artists.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Artists.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Genres.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Genres.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
         getContentResolver()
-                .registerContentObserver(MediaStore.Audio.Playlists.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
+                .registerContentObserver(
+                        MediaStore.Audio.Playlists.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
 
         PreferenceUtil.INSTANCE.registerOnSharedPreferenceChangedListener(this);
 
@@ -603,7 +630,8 @@ public class MusicService extends Service implements
             case REPEAT_MODE_ALL:
             case REPEAT_MODE_THIS:
                 this.repeatMode = repeatMode;
-                PreferenceManager.getDefaultSharedPreferences(this).edit()
+                PreferenceManager.getDefaultSharedPreferences(this)
+                        .edit()
                         .putInt(SAVED_REPEAT_MODE, repeatMode)
                         .apply();
                 prepareNext();
@@ -617,7 +645,8 @@ public class MusicService extends Service implements
     }
 
     public void setShuffleMode(final int shuffleMode) {
-        PreferenceManager.getDefaultSharedPreferences(this).edit()
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .edit()
                 .putInt(SAVED_SHUFFLE_MODE, shuffleMode)
                 .apply();
         switch (shuffleMode) {
@@ -676,8 +705,8 @@ public class MusicService extends Service implements
     }
 
     public void initNotification() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
-                !PreferenceUtil.INSTANCE.isClassicNotification()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+                && !PreferenceUtil.INSTANCE.isClassicNotification()) {
             playingNotification = new PlayingNotificationImpl();
         } else {
             playingNotification = new PlayingNotificationOreo();
@@ -737,7 +766,8 @@ public class MusicService extends Service implements
     }
 
     @Override
-    public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
+    public void onSharedPreferenceChanged(
+            @NonNull SharedPreferences sharedPreferences, @NonNull String key) {
         switch (key) {
             case GAP_LESS_PLAYBACK:
                 if (sharedPreferences.getBoolean(key, false)) {
@@ -829,10 +859,14 @@ public class MusicService extends Service implements
         return true;
     }
 
-    public void openQueue(@Nullable final List<Song> playingQueue, final int startPosition,
-                          final boolean startPlaying) {
-        if (playingQueue != null && !playingQueue.isEmpty() && startPosition >= 0 && startPosition < playingQueue
-                .size()) {
+    public void openQueue(
+            @Nullable final List<Song> playingQueue,
+            final int startPosition,
+            final boolean startPlaying) {
+        if (playingQueue != null
+                && !playingQueue.isEmpty()
+                && startPosition >= 0
+                && startPosition < playingQueue.size()) {
             // it is important to copy the playing queue here first as we might add/remove songs later
             originalPlayingQueue = new ArrayList<>(playingQueue);
             this.playingQueue = new ArrayList<>(originalPlayingQueue);
@@ -890,13 +924,15 @@ public class MusicService extends Service implements
                         }
                         notifyChange(PLAY_STATE_CHANGED);
 
-                        // fixes a bug where the volume would stay ducked because the AudioManager.AUDIOFOCUS_GAIN event is not sent
+                        // fixes a bug where the volume would stay ducked because the
+                        // AudioManager.AUDIOFOCUS_GAIN event is not sent
                         playerHandler.removeMessages(DUCK);
                         playerHandler.sendEmptyMessage(UNDUCK);
                     }
                 }
             } else {
-                Toast.makeText(this, getResources().getString(R.string.audio_focus_denied), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                        this, getResources().getString(R.string.audio_focus_denied), Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -920,7 +956,8 @@ public class MusicService extends Service implements
         if (openTrackAndPrepareNextAt(position)) {
             play();
         } else {
-            Toast.makeText(this, getResources().getString(R.string.unplayable_file), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.unplayable_file), Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 
@@ -1000,12 +1037,15 @@ public class MusicService extends Service implements
     public synchronized void restoreQueuesAndPositionIfNecessary() {
         if (!queuesRestored && playingQueue.isEmpty()) {
             List<Song> restoredQueue = MusicPlaybackQueueStore.getInstance(this).getSavedPlayingQueue();
-            List<Song> restoredOriginalQueue = MusicPlaybackQueueStore.getInstance(this).getSavedOriginalPlayingQueue();
-            int restoredPosition = PreferenceManager.getDefaultSharedPreferences(this).getInt(SAVED_POSITION, -1);
-            int restoredPositionInTrack = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getInt(SAVED_POSITION_IN_TRACK, -1);
+            List<Song> restoredOriginalQueue =
+                    MusicPlaybackQueueStore.getInstance(this).getSavedOriginalPlayingQueue();
+            int restoredPosition =
+                    PreferenceManager.getDefaultSharedPreferences(this).getInt(SAVED_POSITION, -1);
+            int restoredPositionInTrack =
+                    PreferenceManager.getDefaultSharedPreferences(this).getInt(SAVED_POSITION_IN_TRACK, -1);
 
-            if (restoredQueue.size() > 0 && restoredQueue.size() == restoredOriginalQueue.size()
+            if (restoredQueue.size() > 0
+                    && restoredQueue.size() == restoredOriginalQueue.size()
                     && restoredPosition != -1) {
                 this.originalPlayingQueue = restoredOriginalQueue;
                 this.playingQueue = restoredQueue;
@@ -1031,8 +1071,10 @@ public class MusicService extends Service implements
     }
 
     public void savePositionInTrack() {
-        PreferenceManager.getDefaultSharedPreferences(this).edit()
-                .putInt(SAVED_POSITION_IN_TRACK, getSongProgressMillis()).apply();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .edit()
+                .putInt(SAVED_POSITION_IN_TRACK, getSongProgressMillis())
+                .apply();
     }
 
     public void saveQueuesImpl() {
@@ -1088,10 +1130,13 @@ public class MusicService extends Service implements
     }
 
     public void updateMediaSessionPlaybackState() {
-        PlaybackStateCompat.Builder stateBuilder = new PlaybackStateCompat.Builder()
-                .setActions(MEDIA_SESSION_ACTIONS)
-                .setState(isPlaying() ? PlaybackStateCompat.STATE_PLAYING : PlaybackStateCompat.STATE_PAUSED,
-                        getSongProgressMillis(), 1);
+        PlaybackStateCompat.Builder stateBuilder =
+                new PlaybackStateCompat.Builder()
+                        .setActions(MEDIA_SESSION_ACTIONS)
+                        .setState(
+                                isPlaying() ? PlaybackStateCompat.STATE_PLAYING : PlaybackStateCompat.STATE_PAUSED,
+                                getSongProgressMillis(),
+                                1);
 
         setCustomAction(stateBuilder);
 
@@ -1104,7 +1149,8 @@ public class MusicService extends Service implements
         }
     }
 
-    void updateMediaSessionMetaData() {
+    public void updateMediaSessionMetaData() {
+        Log.i(TAG, "onResourceReady: ");
         final Song song = getCurrentSong();
 
         if (song.getId() == -1) {
@@ -1120,13 +1166,15 @@ public class MusicService extends Service implements
                 .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, song.getDuration())
                 .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, getPosition() + 1)
                 .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.getYear())
-                .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
-                .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
+                .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            metaData.putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
+        }
 
         if (PreferenceUtil.INSTANCE.isAlbumArtOnLockScreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
-            final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder
-                    .from(Glide.with(MusicService.this), song)
+            final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder.from(Glide.with(MusicService.this), song)
                     .checkIgnoreMediaStore(MusicService.this)
                     .asBitmap().build();
             if (PreferenceUtil.INSTANCE.isBlurredAlbumArt()) {
@@ -1144,6 +1192,7 @@ public class MusicService extends Service implements
 
                         @Override
                         public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+
                             metaData.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, copy(resource));
                             mediaSession.setMetadata(metaData.build());
                         }
@@ -1156,7 +1205,8 @@ public class MusicService extends Service implements
     }
 
     private void closeAudioEffectSession() {
-        final Intent audioEffectsIntent = new Intent(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION);
+        final Intent audioEffectsIntent =
+                new Intent(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION);
         if (playback != null) {
             audioEffectsIntent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, playback.getAudioSessionId());
         }
@@ -1189,15 +1239,11 @@ public class MusicService extends Service implements
                 savePosition();
                 savePositionInTrack();
                 final Song currentSong = getCurrentSong();
-                if (currentSong != null) {
-                    HistoryStore.getInstance(this).addSongId(currentSong.getId());
-                }
+                HistoryStore.getInstance(this).addSongId(currentSong.getId());
                 if (songPlayCountHelper.shouldBumpPlayCount()) {
                     SongPlayCountStore.getInstance(this).bumpPlayCount(songPlayCountHelper.getSong().getId());
                 }
-                if (currentSong != null) {
-                    songPlayCountHelper.notifySongChanged(currentSong);
-                }
+                songPlayCountHelper.notifySongChanged(currentSong);
                 break;
             case QUEUE_CHANGED:
                 updateMediaSessionMetaData(); // because playing queue size might have changed
@@ -1238,7 +1284,8 @@ public class MusicService extends Service implements
                     openQueue(playlistSongs, 0, true);
                 }
             } else {
-                Toast.makeText(getApplicationContext(), R.string.playlist_is_empty, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.playlist_is_empty, Toast.LENGTH_LONG)
+                        .show();
             }
         } else {
             Toast.makeText(getApplicationContext(), R.string.playlist_is_empty, Toast.LENGTH_LONG).show();
@@ -1292,7 +1339,8 @@ public class MusicService extends Service implements
 
     private boolean requestFocus() {
         return (getAudioManager()
-                .requestAudioFocus(audioFocusListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN)
+                .requestAudioFocus(
+                        audioFocusListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN)
                 == AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
     }
 
@@ -1307,7 +1355,10 @@ public class MusicService extends Service implements
     }
 
     private void savePosition() {
-        PreferenceManager.getDefaultSharedPreferences(this).edit().putInt(SAVED_POSITION, getPosition()).apply();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .edit()
+                .putInt(SAVED_POSITION, getPosition())
+                .apply();
     }
 
     private void saveQueues() {
@@ -1325,56 +1376,60 @@ public class MusicService extends Service implements
     }
 
     private void setCustomAction(PlaybackStateCompat.Builder stateBuilder) {
-        int repeatIcon = R.drawable.ic_repeat;  // REPEAT_MODE_NONE
+        int repeatIcon = R.drawable.ic_repeat; // REPEAT_MODE_NONE
         if (getRepeatMode() == REPEAT_MODE_THIS) {
             repeatIcon = R.drawable.ic_repeat_one;
         } else if (getRepeatMode() == REPEAT_MODE_ALL) {
             repeatIcon = R.drawable.ic_repeat_white_circle;
         }
-        stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
-                CYCLE_REPEAT, getString(R.string.action_cycle_repeat), repeatIcon)
-                .build());
+        stateBuilder.addCustomAction(
+                new PlaybackStateCompat.CustomAction.Builder(
+                        CYCLE_REPEAT, getString(R.string.action_cycle_repeat), repeatIcon)
+                        .build());
 
-        final int shuffleIcon = getShuffleMode() == SHUFFLE_MODE_NONE ? R.drawable.ic_shuffle_off_circled
-                : R.drawable.ic_shuffle_on_circled;
-        stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
-                TOGGLE_SHUFFLE, getString(R.string.action_toggle_shuffle), shuffleIcon)
-                .build());
+        final int shuffleIcon =
+                getShuffleMode() == SHUFFLE_MODE_NONE
+                        ? R.drawable.ic_shuffle_off_circled
+                        : R.drawable.ic_shuffle_on_circled;
+        stateBuilder.addCustomAction(
+                new PlaybackStateCompat.CustomAction.Builder(
+                        TOGGLE_SHUFFLE, getString(R.string.action_toggle_shuffle), shuffleIcon)
+                        .build());
 
-        final int favoriteIcon = MusicUtil.INSTANCE.isFavorite(getApplicationContext(), getCurrentSong())
-                ? R.drawable.ic_favorite : R.drawable.ic_favorite_border;
-        stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
-                TOGGLE_FAVORITE, getString(R.string.action_toggle_favorite), favoriteIcon)
-                .build());
+        final int favoriteIcon =
+                MusicUtil.INSTANCE.isFavorite(getApplicationContext(), getCurrentSong())
+                        ? R.drawable.ic_favorite
+                        : R.drawable.ic_favorite_border;
+        stateBuilder.addCustomAction(
+                new PlaybackStateCompat.CustomAction.Builder(
+                        TOGGLE_FAVORITE, getString(R.string.action_toggle_favorite), favoriteIcon)
+                        .build());
     }
 
     private void setupMediaSession() {
-        ComponentName mediaButtonReceiverComponentName = new ComponentName(
-                getApplicationContext(),
-                MediaButtonIntentReceiver.class);
+        ComponentName mediaButtonReceiverComponentName =
+                new ComponentName(getApplicationContext(), MediaButtonIntentReceiver.class);
 
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
         mediaButtonIntent.setComponent(mediaButtonReceiverComponentName);
 
-        PendingIntent mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(
-                getApplicationContext(),
-                0,
-                mediaButtonIntent,
-                0);
+        PendingIntent mediaButtonReceiverPendingIntent =
+                PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent, 0);
 
-        mediaSession = new MediaSessionCompat(this,
-                "RetroMusicPlayer",
-                mediaButtonReceiverComponentName,
-                mediaButtonReceiverPendingIntent);
-        MediaSessionCallback mediasessionCallback = new MediaSessionCallback(
-                getApplicationContext(), this);
-        mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS
-                | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS
-        );
+        mediaSession =
+                new MediaSessionCompat(
+                        this,
+                        "RetroMusicPlayer",
+                        mediaButtonReceiverComponentName,
+                        mediaButtonReceiverPendingIntent);
+        MediaSessionCallback mediasessionCallback =
+                new MediaSessionCallback(getApplicationContext(), this);
+        mediaSession.setFlags(
+                MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS
+                        | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
         mediaSession.setCallback(mediasessionCallback);
         mediaSession.setActive(true);
         mediaSession.setMediaButtonReceiver(mediaButtonReceiverPendingIntent);
-
     }
 
     public class MusicBinder extends Binder {

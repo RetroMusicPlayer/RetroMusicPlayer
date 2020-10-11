@@ -5,10 +5,12 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.PlaylistSongAdapter
 import code.name.monkey.retromusic.db.PlaylistWithSongs
@@ -18,31 +20,41 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.state.NowPlayingPanelState
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail) {
     private val arguments by navArgs<PlaylistDetailsFragmentArgs>()
-    private val viewModel: PlaylistDetailsViewModel by viewModel {
+    private val viewModel by viewModel<PlaylistDetailsViewModel> {
         parametersOf(arguments.extraPlaylist)
     }
 
     private lateinit var playlist: PlaylistWithSongs
     private lateinit var playlistSongAdapter: PlaylistSongAdapter
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private fun setUpTransitions() {
+        val transform = MaterialContainerTransform()
+        transform.setAllContainerColors(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+        sharedElementEnterTransition = transform
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setUpTransitions()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.addMusicServiceEventListener(viewModel)
         mainActivity.setSupportActionBar(toolbar)
-
+        ViewCompat.setTransitionName(container, "playlist")
         playlist = arguments.extraPlaylist
         toolbar.title = playlist.playlistEntity.playlistName
-
         setUpRecyclerView()
-
         viewModel.getSongs().observe(viewLifecycleOwner, {
             songs(it.toSongs())
         })
@@ -88,7 +100,6 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         empty.isVisible = playlistSongAdapter.itemCount == 0
         emptyText.isVisible = playlistSongAdapter.itemCount == 0
     }
-
 
     override fun onDestroy() {
         recyclerView?.itemAnimator = null

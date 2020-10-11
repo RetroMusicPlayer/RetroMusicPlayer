@@ -1,15 +1,16 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
 package code.name.monkey.retromusic.helper
 
@@ -55,8 +56,8 @@ class SortOrder {
             const val ALBUM_NUMBER_OF_SONGS = MediaStore.Audio.Albums.NUMBER_OF_SONGS + " DESC"
 
             /* Album sort order artist */
-            const val ALBUM_ARTIST = (MediaStore.Audio.Artists.DEFAULT_SORT_ORDER
-                    + ", " + MediaStore.Audio.Albums.DEFAULT_SORT_ORDER)
+            const val ALBUM_ARTIST = (MediaStore.Audio.Artists.DEFAULT_SORT_ORDER +
+                    ", " + MediaStore.Audio.Albums.DEFAULT_SORT_ORDER)
 
             /* Album sort order year */
             const val ALBUM_YEAR = MediaStore.Audio.Media.YEAR + " DESC"
@@ -113,8 +114,8 @@ class SortOrder {
             const val SONG_Z_A = "$SONG_A_Z DESC"
 
             /* Album song sort order track list */
-            const val SONG_TRACK_LIST = (MediaStore.Audio.Media.TRACK + ", "
-                    + MediaStore.Audio.Media.DEFAULT_SORT_ORDER)
+            const val SONG_TRACK_LIST = (MediaStore.Audio.Media.TRACK + ", " +
+                    MediaStore.Audio.Media.DEFAULT_SORT_ORDER)
 
             /* Album song sort order duration */
             const val SONG_DURATION = SongSortOrder.SONG_DURATION
@@ -181,6 +182,27 @@ class SortOrder {
 
             /* Genre sort order Z-A */
             const val ALBUM_Z_A = "$GENRE_A_Z DESC"
+        }
+    }
+
+    /**
+     * Playlist sort order entries.
+     */
+    interface PlaylistSortOrder {
+
+        companion object {
+
+            /* Playlist sort order A-Z */
+            const val PLAYLIST_A_Z = MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER
+
+            /* Playlist sort order Z-A */
+            const val PLAYLIST_Z_A = "$PLAYLIST_A_Z DESC"
+
+            /* Playlist sort order number of songs */
+            const val PLAYLIST_SONG_COUNT = "playlist_song_count"
+
+            /* Playlist sort order number of songs */
+            const val PLAYLIST_SONG_COUNT_DESC = "$PLAYLIST_SONG_COUNT DESC"
         }
     }
 }

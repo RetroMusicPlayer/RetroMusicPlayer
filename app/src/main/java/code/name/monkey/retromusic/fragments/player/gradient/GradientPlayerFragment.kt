@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.fragments.player.gradient
 
 import android.animation.ObjectAnimator
@@ -123,7 +137,6 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideVolumeIfAvailable()
@@ -165,11 +178,9 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     override fun onShow() {
-
     }
 
     override fun onHide() {
-
     }
 
     override fun onBackPressed(): Boolean {
@@ -323,7 +334,6 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_64dp)
         }
     }
-
 
     private fun setUpPlayPauseFab() {
         playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())

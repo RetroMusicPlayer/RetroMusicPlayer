@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.fragments.search
 
 import android.content.ActivityNotFoundException
@@ -8,7 +22,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -21,7 +34,6 @@ import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import code.name.monkey.retromusic.state.NowPlayingPanelState
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.*
@@ -38,9 +50,9 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITHOUT)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.setSupportActionBar(toolbar)
-        libraryViewModel.clearSearchResult();
+        libraryViewModel.clearSearchResult()
         setupRecyclerView()
         searchView.addTextChangedListener(this)
         voiceSearch.setOnClickListener { startMicSearch() }
@@ -71,9 +83,8 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         }
     }
 
-
     private fun setupRecyclerView() {
-        searchAdapter = SearchAdapter(requireActivity() as AppCompatActivity, emptyList())
+        searchAdapter = SearchAdapter(requireActivity(), emptyList())
         searchAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
@@ -103,11 +114,9 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     }
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
     }
 
     private fun search(query: String) {

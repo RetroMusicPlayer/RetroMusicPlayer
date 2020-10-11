@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
-
 package code.name.monkey.retromusic.helper
 
 import android.annotation.TargetApi
@@ -29,10 +29,10 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import java.io.File
 import java.util.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 object MusicPlayerRemote : KoinComponent {
     val TAG: String = MusicPlayerRemote::class.java.simpleName
@@ -40,7 +40,6 @@ object MusicPlayerRemote : KoinComponent {
     var musicService: MusicService? = null
 
     private val songRepository by inject<SongRepository>()
-
 
     @JvmStatic
     val isPlaying: Boolean
@@ -442,7 +441,7 @@ object MusicPlayerRemote : KoinComponent {
             if (songs != null && songs.isNotEmpty()) {
                 openQueue(songs, 0, true)
             } else {
-                //TODO the file is not listed in the media store
+                // TODO the file is not listed in the media store
                 println("The file is not listed in the media store")
             }
         }

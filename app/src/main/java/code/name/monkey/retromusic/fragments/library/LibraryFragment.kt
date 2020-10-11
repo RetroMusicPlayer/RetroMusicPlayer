@@ -1,9 +1,24 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.fragments.library
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -26,8 +41,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
-        retainInstance = true
-        libraryViewModel.setPanelState(NowPlayingPanelState.COLLAPSED_WITH)
+        mainActivity.setBottomBarVisibility(View.VISIBLE)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         toolbar.setNavigationOnClickListener {

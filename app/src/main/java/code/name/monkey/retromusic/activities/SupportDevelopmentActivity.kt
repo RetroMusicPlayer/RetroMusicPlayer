@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package code.name.monkey.retromusic.activities
 
 import android.content.Intent
@@ -28,9 +42,9 @@ import code.name.monkey.retromusic.extensions.textColorSecondary
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.SkuDetails
 import com.anjlab.android.iab.v3.TransactionDetails
-import kotlinx.android.synthetic.main.activity_donation.*
 import java.lang.ref.WeakReference
 import java.util.*
+import kotlinx.android.synthetic.main.activity_donation.*
 
 class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
@@ -91,7 +105,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     }
 
     override fun onProductPurchased(productId: String, details: TransactionDetails?) {
-        //loadSkuDetails();
+        // loadSkuDetails();
         Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show()
     }
 
@@ -100,7 +114,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     }
 
     override fun onPurchaseHistoryRestored() {
-        //loadSkuDetails();
+        // loadSkuDetails();
         Toast.makeText(this, R.string.restored_previous_purchases, Toast.LENGTH_SHORT).show()
     }
 
@@ -110,7 +124,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         }
         if (requestCode == TEZ_REQUEST_CODE) {
             // Process based on the data in response.
-            //Log.d("result", data!!.getStringExtra("Status"))
+            // Log.d("result", data!!.getStringExtra("Status"))
         }
     }
 
@@ -165,7 +179,8 @@ private class SkuDetailsLoadAsyncTask(supportDevelopmentActivity: SupportDevelop
 }
 
 class SkuDetailsAdapter(
-    private var donationsDialog: SupportDevelopmentActivity, objects: List<SkuDetails>
+    private var donationsDialog: SupportDevelopmentActivity,
+    objects: List<SkuDetails>
 ) : RecyclerView.Adapter<SkuDetailsAdapter.ViewHolder>() {
 
     private var skuDetailsList: List<SkuDetails> = ArrayList()
