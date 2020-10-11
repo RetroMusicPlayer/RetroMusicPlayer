@@ -37,7 +37,7 @@
     <string name="action_set">Запустить</string>
     <string name="action_set_as_ringtone">Задать в качества рингтона</string>
     <string name="action_set_as_start_directory">Установить как стартовый каталог</string>
-    <string name="action_settings">"Настройки"</string>
+    <string name="action_settings">Настройки</string>
     <string name="action_share">Поделиться</string>
     <string name="action_shuffle_all">Перемешать всё</string>
     <string name="action_shuffle_playlist">Перемешать плейлист</string>

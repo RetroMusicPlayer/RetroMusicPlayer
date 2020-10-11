@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -43,8 +44,24 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
         applyToolbar(toolbar)
         val navController: NavController = findNavController(R.id.contentFrame)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            toolbar.title = navController.currentDestination?.label
+            toolbar.title = navController.currentDestination?.let { getStringFromDestination(it) }
         }
+    }
+
+    private fun getStringFromDestination(currentDestination: NavDestination): String {
+        val idRes = when (currentDestination.id) {
+            R.id.mainSettingsFragment -> R.string.action_settings
+            R.id.audioSettings -> R.string.pref_header_audio
+            R.id.imageSettingFragment -> R.string.pref_header_images
+            R.id.notificationSettingsFragment -> R.string.notification
+            R.id.nowPlayingSettingsFragment -> R.string.now_playing
+            R.id.otherSettingsFragment -> R.string.others
+            R.id.personalizeSettingsFragment -> R.string.personalize
+            R.id.themeSettingsFragment -> R.string.general_settings_title
+            R.id.aboutActivity -> R.string.action_about
+            else -> R.id.action_settings
+        }
+        return getString(idRes)
     }
 
     override fun onSupportNavigateUp(): Boolean {
