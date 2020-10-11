@@ -29,12 +29,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
-import code.name.monkey.retromusic.extensions.dip
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.peekHeightAnimate
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.extensions.translateXAnimate
-import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
