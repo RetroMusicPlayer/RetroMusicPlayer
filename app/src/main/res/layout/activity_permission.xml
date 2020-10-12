@@ -37,9 +37,9 @@
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:permissionButtonTitle="Grant access"
         app:permissionIcon="@drawable/ic_sd_storage"
-        app:permissionTitle="Storage Access"
+        app:permissionTitle="@string/permission_title"
         app:permissionTitleNumber="1"
-        app:permissionTitleSubTitle="The app needs permission to access your device storage for music files playing music" />
+        app:permissionTitleSubTitle="@string/permission_summary" />
 
     <code.name.monkey.retromusic.views.PermissionItem
         android:id="@+id/audioPermission"
@@ -51,9 +51,9 @@
         app:layout_constraintTop_toBottomOf="@id/storagePermission"
         app:permissionButtonTitle="Grant access"
         app:permissionIcon="@drawable/ic_phonelink_ring"
-        app:permissionTitle="Ringtone"
+        app:permissionTitle="@string/ringtone_title"
         app:permissionTitleNumber="2"
-        app:permissionTitleSubTitle="The app needs permission to access your device settings in order to set music as Ringtone"
+        app:permissionTitleSubTitle="@string/ringtone_summary"
         tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton

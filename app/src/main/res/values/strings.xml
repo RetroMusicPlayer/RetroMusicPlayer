@@ -885,8 +885,6 @@
         <item quantity="one">%d Artist</item>
         <item quantity="other">%d Artists</item>
     </plurals>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="done">Done</string>
     <string name="import_playlist">Import playlist</string>
     <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
@@ -894,4 +892,8 @@
     <string name="sort_order_num_songs">Song count</string>
     <string name="sort_order_asc">Ascending</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
+    <string name="ringtone_title">Ringtone</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
 </resources>
