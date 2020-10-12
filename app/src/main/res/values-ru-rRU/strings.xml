@@ -57,7 +57,9 @@
     <string name="action_set">Запустить</string>
     <string name="action_set_as_ringtone">Задать в качества рингтона</string>
     <string name="action_set_as_start_directory">Установить как стартовый каталог</string>
-    <string name="action_settings">Настройки</string>
+
+    <string name="action_settings">"Настройки"</string>
+
     <string name="action_share">Поделиться</string>
 
     <string name="action_shuffle_all">Перемешать всё</string>
@@ -517,6 +519,7 @@
 
     <string name="pref_snow_fall_title">Эффект снегопада</string>
 
+    <string name="action_album_artists_only">Только альбомы исполнителей</string>
 	<string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущей песни в качестве обоев на экране блокировки.</string>
     <string name="pref_summary_audio_ducking">Снизить громкость воспроизведения когда приходит звуковое уведомление</string>
     <string name="pref_summary_blacklist">Содержимое черного списка скрыто из вашей библиотеки.</string>
@@ -889,4 +892,8 @@
     <string name="sort_order_num_songs">Колличество песен</string>
     <string name="sort_order_asc">По возрастанию</string>
     <string name="sort_order_num_songs_desc">Количество композиций по убыванию</string>
+	<string name="permission_summary">Приложению требуется разрешение на доступ к внутренней памяти вашего устройства для воспроизведения музыки.</string>
+    <string name="permission_title">Доступ к внутренней памяти</string>
+    <string name="ringtone_title">Рингтон</string>
+    <string name="ringtone_summary">Приложению требуется разрешение на доступ к настройкам вашего устройства, чтобы установить музыку в качестве рингтона.</string>
 </resources>
