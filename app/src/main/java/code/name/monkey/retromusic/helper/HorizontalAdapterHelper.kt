@@ -20,7 +20,7 @@ import code.name.monkey.retromusic.R
 
 object HorizontalAdapterHelper {
 
-    const val LAYOUT_RES = R.layout.item_album_card
+    const val LAYOUT_RES = R.layout.item_image
 
     private const val TYPE_FIRST = 1
     private const val TYPE_MIDDLE = 2
@@ -40,7 +40,7 @@ object HorizontalAdapterHelper {
         }
     }
 
-    fun getItemViewtype(position: Int, itemCount: Int): Int {
+    fun getItemViewType(position: Int, itemCount: Int): Int {
         return when (position) {
             0 -> TYPE_FIRST
             itemCount - 1 -> TYPE_LAST

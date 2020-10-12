@@ -65,7 +65,7 @@ class HorizontalAlbumAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return HorizontalAdapterHelper.getItemViewtype(position, itemCount)
+        return HorizontalAdapterHelper.getItemViewType(position, itemCount)
     }
 
     override fun getItemCount(): Int {
