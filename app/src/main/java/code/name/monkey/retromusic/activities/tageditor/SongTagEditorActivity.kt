@@ -23,10 +23,10 @@ import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.repository.SongRepository
-import java.util.*
 import kotlinx.android.synthetic.main.activity_song_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
@@ -102,11 +102,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         writeValuesToFiles(fieldKeyValueMap, null)
     }
 
-    override fun getSongPaths(): List<String> {
-        val paths = ArrayList<String>(1)
-        paths.add(songRepository.song(id).data)
-        return paths
-    }
+    override fun getSongPaths(): List<String> = listOf(songRepository.song(id).data)
 
     override fun loadImageFromFile(selectedFile: Uri?) {
     }
