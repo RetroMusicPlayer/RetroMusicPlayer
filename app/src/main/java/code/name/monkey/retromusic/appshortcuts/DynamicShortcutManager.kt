@@ -32,7 +32,7 @@ class DynamicShortcutManager(private val context: Context) {
         this.context.getSystemService(ShortcutManager::class.java)
 
     private val defaultShortcuts: List<ShortcutInfo>
-        get() = Arrays.asList(
+        get() = listOf(
             ShuffleAllShortcutType(context).shortcutInfo,
             TopTracksShortcutType(context).shortcutInfo,
             LastAddedShortcutType(context).shortcutInfo
@@ -58,8 +58,12 @@ class DynamicShortcutManager(private val context: Context) {
             icon: Icon,
             intent: Intent
         ): ShortcutInfo {
-            return ShortcutInfo.Builder(context, id).setShortLabel(shortLabel)
-                .setLongLabel(longLabel).setIcon(icon).setIntent(intent).build()
+            return ShortcutInfo.Builder(context, id)
+                .setShortLabel(shortLabel)
+                .setLongLabel(longLabel)
+                .setIcon(icon)
+                .setIntent(intent)
+                .build()
         }
 
         fun reportShortcutUsed(context: Context, shortcutId: String) {

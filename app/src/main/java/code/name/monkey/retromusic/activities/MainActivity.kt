@@ -77,7 +77,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
@@ -91,6 +90,12 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
         }
+
+        showPromotionalDialog()
+    }
+
+    private fun showPromotionalDialog() {
+
     }
 
     private fun setupNavigationController() {
@@ -104,9 +109,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         }
         navController.graph = navGraph
         NavigationUI.setupWithNavController(getBottomNavigationView(), navController)
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            // appBarLayout.setExpanded(true, true)
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean =
