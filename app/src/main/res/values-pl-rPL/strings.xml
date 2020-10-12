@@ -417,170 +417,170 @@
 
     <string name="no_playing_queue">Brak odtwarzanych utworów</string>
 
-    <string name="no_playlists">You have no playlists</string>
+    <string name="no_playlists">Brak playlist</string>
 
-    <string name="no_purchase_found">No purchase found.</string>
+    <string name="no_purchase_found">Nie znaleziono zakupu.</string>
 
-    <string name="no_results">No results</string>
+    <string name="no_results">Brak wyników</string>
 
-    <string name="no_songs">You have no songs</string>
+    <string name="no_songs">Brak utworów</string>
 
-    <string name="normal">Normal</string>
+    <string name="normal">Normalnie</string>
 
-    <string name="normal_lyrics">Normal lyrics</string>
+    <string name="normal_lyrics">Normalny tekst utworu</string>
 
-    <string name="normal_style">Normal</string>
+    <string name="normal_style">Normalny</string>
 
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> is not listed in the media store.]]></string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> nie znajduje się w magazynie multimediów.]]></string>
 
-    <string name="nothing_to_scan">Nothing to scan.</string>
-    <string name="nothing_to_see">Nothing to see</string>
+    <string name="nothing_to_scan">Nic do skanowania.</string>
+    <string name="nothing_to_see">Nic do zobaczenia</string>
 
-    <string name="notification">Notification</string>
+    <string name="notification">Powiadomienie</string>
 
-    <string name="notification_settings_summary">Customize the notification style</string>
+    <string name="notification_settings_summary">Zmień wygląd powiadomienia</string>
 
-    <string name="now_playing">Now playing</string>
-    <string name="now_playing_queue">Now playing queue</string>
-    <string name="now_playing_summary">Customize the now playing screen</string>
-    <string name="now_playing_themes">9+ now playing themes</string>
+    <string name="now_playing">Teraz odtwarzane</string>
+    <string name="now_playing_queue">Kolejka odtwarzania</string>
+    <string name="now_playing_summary">Dostosuj ekran kolejki odtwarzania</string>
+    <string name="now_playing_themes">9+ motywów \"Teraz odtwarzane\"</string>
 
-    <string name="only_on_wifi">Only on Wi-Fi</string>
+    <string name="only_on_wifi">Tylko przez Wi-Fi</string>
 
-    <string name="other_settings_summary">Advanced testing features</string>
+    <string name="other_settings_summary">Zaawansowane funkcje eksperymentalne</string>
 
-    <string name="others">Other</string>
+    <string name="others">Inne</string>
 
-    <string name="password">Password</string>
+    <string name="password">Hasło</string>
 
-    <string name="past_three_months">Past 3 months</string>
+    <string name="past_three_months">Ostatnie 3 miesiące</string>
 
-    <string name="paste_lyrics_here">Paste lyrics here</string>
+    <string name="paste_lyrics_here">Wklej tekst utworu tutaj</string>
 
-    <string name="peak">Peak</string>
+    <string name="peak">Szczyt</string>
 
-    <string name="permission_external_storage_denied">Permission to access external storage denied.</string>
+    <string name="permission_external_storage_denied">Odmowa dostępu do pamięci zewnętrznej.</string>
 
-    <string name="permissions_denied">Permissions denied.</string>
+    <string name="permissions_denied">Odmowa dostępu.</string>
 
-    <string name="personalize">Personalize</string>
+    <string name="personalize">Personalizuj</string>
 
-    <string name="personalize_settings_summary">Customize your now playing and UI controls</string>
+    <string name="personalize_settings_summary">Dostosuj interfejs \"Teraz odtwarzane\"</string>
 
-    <string name="pick_from_local_storage">Pick from local storage</string>
+    <string name="pick_from_local_storage">Wybierz z pamięci urządzenia</string>
 
-    <string name="pick_image_intent_text">Pick image</string>
+    <string name="pick_image_intent_text">Wybierz zdjęcie</string>
 
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
+    <string name="pinterest_page_summary">Śledź stronę Retro Music na Pintrest po więcej inspiracji</string>
 
-    <string name="plain">Plain</string>
+    <string name="plain">Wyraźny</string>
 
-    <string name="playing_notification_description">The playing notification provides actions for play/pause etc.</string>
-    <string name="playing_notification_name">Playing notification</string>
+    <string name="playing_notification_description">Powiadomienie odtwarzania pokazuje przyciski play/pauza itp.</string>
+    <string name="playing_notification_name">Powiadomienie odtwarzania</string>
 
-    <string name="playlist_empty_text">Empty playlist</string>
+    <string name="playlist_empty_text">Wyczyść playlistę</string>
 
-    <string name="playlist_is_empty">Playlist is empty</string>
+    <string name="playlist_is_empty">Playlista jest pusta</string>
 
-    <string name="playlist_name_empty">Playlist name</string>
+    <string name="playlist_name_empty">Nazwa playlisty</string>
 
-    <string name="playlists">Playlists</string>
+    <string name="playlists">Playlisty</string>
 
-    <string name="pref_album_detail_style">Album detail style</string>
+    <string name="pref_album_detail_style">Styl informacji o albumie</string>
 
-    <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
-    <string name="pref_blur_amount_title">Blur amount</string>
+    <string name="pref_blur_amount_summary">Ilość rozmycia dla motywów, mniejsza ilość jest szybsza</string>
+    <string name="pref_blur_amount_title">Ilość rozmycia</string>
 
-    <string name="pref_dialog_corner_summary">Adjust the bottom sheet dialog corners</string>
-    <string name="pref_dialog_corner_title">Dialog corner</string>
+    <string name="pref_dialog_corner_summary">Dostosuj rogi dolnego okna dialogowego</string>
+    <string name="pref_dialog_corner_title">Narożniki okna dialogowego</string>
 
-    <string name="pref_filter_song_summary">Filter songs by length</string>
-    <string name="pref_filter_song_title">Filter song duration</string>
+    <string name="pref_filter_song_summary">Filtruj utwory według długości</string>
+    <string name="pref_filter_song_title">Filtruj długość utworów</string>
 
-    <string name="pref_header_advanced">Advanced</string>
-    <string name="pref_header_album">Album style</string>
+    <string name="pref_header_advanced">Zaawansowane</string>
+    <string name="pref_header_album">Styl albumów</string>
     <string name="pref_header_audio">Audio</string>
-    <string name="pref_header_blacklist">Blacklist</string>
-    <string name="pref_header_controls">Controls</string>
-    <string name="pref_header_general">Theme</string>
-    <string name="pref_header_images">Images</string>
-    <string name="pref_header_library">Library</string>
-    <string name="pref_header_lockscreen">Lockscreen</string>
-    <string name="pref_header_playlists">Playlists</string>
+    <string name="pref_header_blacklist">Czarna lista</string>
+    <string name="pref_header_controls">Przełączniki</string>
+    <string name="pref_header_general">Motyw</string>
+    <string name="pref_header_images">Obrazki</string>
+    <string name="pref_header_library">Biblioteka</string>
+    <string name="pref_header_lockscreen">Ekran blokady</string>
+    <string name="pref_header_playlists">Playlisty</string>
 
-    <string name="pref_keep_pause_on_zero_volume_summary">Pauses the song when the volume decreases to zero and starts playing back when the volume level rises. Also works outside the app</string>
-    <string name="pref_keep_pause_on_zero_volume_title">Pause on zero</string>
-    <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
-    <string name="pref_keep_screen_on_title">Keep the screen on</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Zatrzymuje odtwarzanie przy zerowym poziomie głośności i wznawia po jego zwiększeniu. Kiedy zwiększysz głośność, odtwarzanie rozpocznie się nawet gdy jesteś poza aplikacją</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Zatrzymaj przy wyłączonym dźwięku</string>
+    <string name="pref_keep_screen_on_summary">Ta opcja może mieć wpływ na zużycie baterii</string>
+    <string name="pref_keep_screen_on_title">Pozostaw ekran włączony</string>
 
-    <string name="pref_now_playing_screen_summary">Click to open with or slide to without transparent navigation of now playing screen</string>
-    <string name="pref_now_playing_screen_title">Click or Slide</string>
+    <string name="pref_now_playing_screen_summary">Kliknij aby otworzyć z lub przesunąć do przezroczystej nawigacji ekranu teraz odtwarzane</string>
+    <string name="pref_now_playing_screen_title">Kliknij albo przesuń</string>
 
-    <string name="pref_snow_fall_title">Snow fall effect</string>
+    <string name="pref_snow_fall_title">Efekt spadającego śniegu</string>
 
-    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
-    <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
-    <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
-    <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
-    <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
-    <string name="pref_summary_blurred_album_art">Blur the album cover on the lockscreen. Can cause problems with third party apps and widgets</string>
-    <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
-    <string name="pref_summary_classic_notification">Use the classic notification design</string>
-    <string name="pref_summary_colored_app">The background and control button colors change according to the album art from the now playing screen</string>
-    <string name="pref_summary_colored_app_shortcuts">Colors the app shortcuts in the accent color. Every time you change the color please toggle this to take effect</string>
-    <string name="pref_summary_colored_navigation_bar">Colors the navigation bar in the primary color</string>
-    <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color"</string>
-    <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
-    <string name="pref_summary_dominant_color">Most dominant color will be picked from the album or artist cover</string>
-    <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
-    <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
-    <string name="pref_summary_gapless_playback">"Can cause playback issues on some devices."</string>
-    <string name="pref_summary_genre_toggle">Toggle genre tab</string>
-    <string name="pref_summary_home_banner">Show or hide the home banner</string>
-    <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
-    <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
-    <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
-    <string name="pref_summary_open_source_licences">License details for open source software</string>
-    <string name="pref_summary_round_corners">Round the app\'s edges</string>
-    <string name="pref_summary_tab_titles">Toggle titles for the bottom navigation bar tabs</string>
-    <string name="pref_summary_toggle_full_screen">Immersive mode</string>
-    <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
-    <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
-    <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
+    <string name="pref_summary_album_artists_only">Pokazuj artystów albumu w kategorii \"Artyści\"</string>
+    <string name="pref_summary_album_art_on_lockscreen">Używaj okładki aktualnie odtwarzanego albumu jako tapety ekranu blokady</string>
+    <string name="pref_summary_audio_ducking">Zmniejsz głośność kiedy dostajesz powiadomienia</string>
+    <string name="pref_summary_blacklist">Zawartość czarnej listy jest ukryta w twojej bibliotece.</string>
+    <string name="pref_summary_bluetooth_playback">Rozpocznij odtwarzanie po podłączeniu urządzenia bluetooth</string>
+    <string name="pref_summary_blurred_album_art">Rozmazuj okładkę albumu na ekranie blokady. Może powodować problemy z aplikacjami i widżetami innych firm</string>
+    <string name="pref_summary_carousel_effect">Efekt karuzeli na okładce obecnie odtwarzanego albumu. Zwróć uwagę, że motyw karty i rozmycia nie zadziałają</string>
+    <string name="pref_summary_classic_notification">Użyj klasycznego wyglądu powiadomień</string>
+    <string name="pref_summary_colored_app">Tło oraz kolor przycisku sterującego zmieniają się zgodnie z okładką albumu na ekranie odtwarzacza</string>
+    <string name="pref_summary_colored_app_shortcuts">Koloruje skróty aplikacji w kolorze akcentującym. Za każdym razem, gdy zmieniasz kolor, włącz tę opcję, aby zmiany odniosły skutek</string>
+    <string name="pref_summary_colored_navigation_bar">Koloruje pasek nawigacji kolorem wiodącym</string>
+    <string name="pref_summary_colored_notification">"Koloruje powiadomienie dominującym kolorem okładki albumu"</string>
+    <string name="pref_summary_desaturated_color">Zgodnie z zaleceniami Material Design, w trybie ciemnym kolory powinny być mniej nasycone</string>
+    <string name="pref_summary_dominant_color">Najbardziej dominujący kolor zostanie wybrany z okładki albumu lub wykonawcy</string>
+    <string name="pref_summary_extra_controls">Dodaj dodatkowe przyciski do małego odtwarzacza</string>
+    <string name="pref_summary_extra_song_info">Pokaż dodatkowe informacje o utworze, takie jak format pliku, częstość próbkowania i częstotliwość</string>
+    <string name="pref_summary_gapless_playback">"Może powodować problemy z odtwarzaniem na niektórych urządzeniach."</string>
+    <string name="pref_summary_genre_toggle">Przełącz kartę gatunku</string>
+    <string name="pref_summary_home_banner">Pokaż lub ukryj baner strony głównej</string>
+    <string name="pref_summary_ignore_media_store_artwork">Może zwiększyć jakość okładki albumu, ale powoduje spowolnienie ładowania obrazu. Włącz tę opcję tylko jeśli masz problemy z okładkami o niskiej rozdzielczości</string>
+    <string name="pref_summary_library_categories">Skonfiguruj widoczność i kolejność kategorii w bibliotece.</string>
+    <string name="pref_summary_lock_screen">Sterowanie Retro na zablokowanym ekranie</string>
+    <string name="pref_summary_open_source_licences">Szczegóły licencji oprogramowania open source</string>
+    <string name="pref_summary_round_corners">Zaokrągl rogi w aplikacji</string>
+    <string name="pref_summary_tab_titles">Przełącz tytuły kart u dołu</string>
+    <string name="pref_summary_toggle_full_screen">Tryb immersji</string>
+    <string name="pref_summary_toggle_headset">Zacznij odtwarzanie po podłączanie zestawu słuchawkowego</string>
+    <string name="pref_summary_toggle_shuffle">Odtwarzanie losowe zostanie wyłączone podczas odtwarzania nowej listy utworów</string>
+    <string name="pref_summary_toggle_volume">Pokaż sterowanie głośnością na ekranie \"teraz odtwarzane\"</string>
 
-    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
-    <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
-    <string name="pref_title_album_cover_style">Album cover theme</string>
-    <string name="pref_title_album_cover_transform">Album cover skip</string>
-    <string name="pref_title_album_grid_style">Album grid</string>
-    <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
-    <string name="pref_title_artist_grid_style">Artist grid</string>
-    <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
-    <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
-    <string name="pref_title_blacklist">Blacklist</string>
-    <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
-    <string name="pref_title_blurred_album_art">Blur album cover</string>
-    <string name="pref_title_choose_equalizer">Choose equalizer</string>
-    <string name="pref_title_classic_notification">Classic notification design</string>
-    <string name="pref_title_colored_app">Adaptive color</string>
-    <string name="pref_title_colored_notification">Colored notification</string>
-    <string name="pref_title_desaturated_color">Desaturated color</string>
-    <string name="pref_title_extra_controls">Extra controls</string>
-    <string name="pref_title_extra_song_info">Song info</string>
-    <string name="pref_title_gapless_playback">Gapless playback</string>
-    <string name="pref_title_general_theme">App theme</string>
-    <string name="pref_title_genre_toggle">Show genre tab</string>
-    <string name="pref_title_home_artist_grid_style">Artist grid</string>
-    <string name="pref_title_home_album_grid_style">Album grid</string>
-    <string name="pref_title_home_banner">Banner</string>
-    <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
-    <string name="pref_title_last_added_interval">Last added playlist interval</string>
-    <string name="pref_title_lock_screen">Fullscreen controls</string>
-    <string name="pref_title_navigation_bar">Colored navigation bar</string>
-    <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
-    <string name="pref_title_open_source_licences">Open source licences</string>
-    <string name="pref_title_round_corners">Corner edges</string>
+    <string name="pref_title_album_artists_only">Nawiguj po artystach albumów</string>
+    <string name="pref_title_album_art_on_lockscreen">Pokaż okładkę albumu</string>
+    <string name="pref_title_album_cover_style">Wygląd okładki albumu</string>
+    <string name="pref_title_album_cover_transform">Przesuwanie okładki albumu</string>
+    <string name="pref_title_album_grid_style">Siatka albumów</string>
+    <string name="pref_title_app_shortcuts">Kolorowe skróty aplikacji</string>
+    <string name="pref_title_artist_grid_style">Siatka artystów</string>
+    <string name="pref_title_audio_ducking">Zmniejsz głośność przy braku skupienia</string>
+    <string name="pref_title_auto_download_artist_images">Automatycznie pobierz obrazki wykonawców</string>
+    <string name="pref_title_blacklist">Czarna lista</string>
+    <string name="pref_title_bluetooth_playback">Odtwarzanie przez Bluetooth</string>
+    <string name="pref_title_blurred_album_art">Rozmaż okładkę albumu</string>
+    <string name="pref_title_choose_equalizer">Wybierz equalizer</string>
+    <string name="pref_title_classic_notification">Klasyczny wygląd powiadomień</string>
+    <string name="pref_title_colored_app">Kolor adaptacyjny</string>
+    <string name="pref_title_colored_notification">Kolorowe powiadomienia</string>
+    <string name="pref_title_desaturated_color">Mniej nasycony kolor</string>
+    <string name="pref_title_extra_controls">Dodatkowe sterowanie</string>
+    <string name="pref_title_extra_song_info">Informacje o utworze</string>
+    <string name="pref_title_gapless_playback">Odtwarzanie bez przerw</string>
+    <string name="pref_title_general_theme">Motyw aplikacji</string>
+    <string name="pref_title_genre_toggle">Pokaż kartę gatunku</string>
+    <string name="pref_title_home_artist_grid_style">Siatka artystów</string>
+    <string name="pref_title_home_album_grid_style">Siatka albumów</string>
+    <string name="pref_title_home_banner">Baner</string>
+    <string name="pref_title_ignore_media_store_artwork">Ignoruj okładki z Media Store</string>
+    <string name="pref_title_last_added_interval">Ostatnio dodany interwał listy odtwarzania</string>
+    <string name="pref_title_lock_screen">Sterowanie pełno ekranowe</string>
+    <string name="pref_title_navigation_bar">Kolorowy pasek nawigacji</string>
+    <string name="pref_title_now_playing_screen_appearance">Wygląd \"Teraz odtwarzane\"</string>
+    <string name="pref_title_open_source_licences">Licencje open source</string>
+    <string name="pref_title_round_corners">Narożne krawędzie</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_dominant_color">Dominant color</string>
