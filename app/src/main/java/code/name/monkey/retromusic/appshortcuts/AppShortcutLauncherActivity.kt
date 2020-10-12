@@ -20,6 +20,7 @@ import android.os.Bundle
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.LastAddedShortcutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.ShuffleAllShortcutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.TopTracksShortcutType
+import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.ShuffleAllPlaylist
@@ -31,16 +32,7 @@ class AppShortcutLauncherActivity : Activity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        var shortcutType = SHORTCUT_TYPE_NONE
-
-        // Set shortcutType from the intent extras
-        val extras = intent.extras
-        if (extras != null) {
-            shortcutType = extras.getInt(KEY_SHORTCUT_TYPE, SHORTCUT_TYPE_NONE)
-        }
-
-        when (shortcutType) {
+        when (extraNotNull(KEY_SHORTCUT_TYPE, SHORTCUT_TYPE_NONE).value) {
             SHORTCUT_TYPE_SHUFFLE_ALL -> {
                 startServiceWithPlaylist(
                     SHUFFLE_MODE_SHUFFLE, ShuffleAllPlaylist()
@@ -78,9 +70,9 @@ class AppShortcutLauncherActivity : Activity() {
 
     companion object {
         const val KEY_SHORTCUT_TYPE = "code.name.monkey.retromusic.appshortcuts.ShortcutType"
-        const val SHORTCUT_TYPE_SHUFFLE_ALL = 0
-        const val SHORTCUT_TYPE_TOP_TRACKS = 1
-        const val SHORTCUT_TYPE_LAST_ADDED = 2
-        const val SHORTCUT_TYPE_NONE = 4
+        const val SHORTCUT_TYPE_SHUFFLE_ALL = 0L
+        const val SHORTCUT_TYPE_TOP_TRACKS = 1L
+        const val SHORTCUT_TYPE_LAST_ADDED = 2L
+        const val SHORTCUT_TYPE_NONE = 4L
     }
 }

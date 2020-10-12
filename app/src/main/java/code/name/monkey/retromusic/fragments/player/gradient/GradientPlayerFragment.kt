@@ -168,8 +168,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     override fun onPause() {
-        recyclerViewDragDropManager?.cancelDrag()
         super.onPause()
+        recyclerViewDragDropManager?.cancelDrag()
         progressViewUpdateHelper.stop()
     }
 

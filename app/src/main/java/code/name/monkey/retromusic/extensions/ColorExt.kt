@@ -154,6 +154,10 @@ fun MaterialButton.applyColor(color: Int) {
     iconTint = textColorColorStateList
 }
 
+fun MaterialButton.accentColor(){
+    this.applyColor(ThemeStore.accentColor(context))
+}
+
 fun MaterialButton.applyOutlineColor(color: Int) {
     val textColorColorStateList = ColorStateList.valueOf(color)
     setTextColor(textColorColorStateList)

@@ -7,14 +7,15 @@
     android:background="?rectSelector"
     android:orientation="vertical">
 
-    <code.name.monkey.retromusic.views.WidthFitSquareCardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/imageContainer"
         android:layout_width="156dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="8dp"
         android:orientation="vertical"
         app:cardCornerRadius="8dp"
         app:cardPreventCornerOverlap="true"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,7 +27,7 @@
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
 
-    </code.name.monkey.retromusic.views.WidthFitSquareCardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
