@@ -224,7 +224,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         songInfo.setTextColor(lastDisabledPlaybackControlsColor)
 
         volumeFragment?.setTintableColor(lastPlaybackControlsColor.ripAlpha())
-        ViewUtil.setProgressDrawable(progressSlider, color.primaryTextColor.ripAlpha(), true)
+        ViewUtil.setProgressDrawable(progressSlider, lastPlaybackControlsColor.ripAlpha(), true)
 
         updateRepeatState()
         updateShuffleState()

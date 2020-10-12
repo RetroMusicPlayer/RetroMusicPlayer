@@ -345,11 +345,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 ViewCompat.setElevation(slidingPanel, 10f)
                 ViewCompat.setElevation(bottomNavigationView, 10f)
                 if (isVisible) {
-                    bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
+                    bottomSheetBehavior.peekHeight = heightOfBarWithTabs
                     bottomNavigationView.translateYAnimate(0f)
                 } else {
                     bottomNavigationView.translateYAnimate(150f)
-                    bottomSheetBehavior.peekHeightAnimate(heightOfBar)
+                    bottomSheetBehavior.peekHeight = heightOfBar
                 }
             }
         }
