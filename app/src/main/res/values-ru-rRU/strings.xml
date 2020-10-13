@@ -8,13 +8,13 @@
     <string name="action_about">О программe</string>
 
     <string name="action_add_to_favorites">Добавить в избранное</string>
-    <string name="action_add_to_playing_queue">Добавить в очередь проигрывания</string>
+    <string name="action_add_to_playing_queue">Добавить в очередь воспроизведения</string>
     <string name="action_add_to_playlist">Добавить в плейлист</string>
 
-    <string name="action_clear_playing_queue">Очистить очередь проигрывания</string>
+    <string name="action_clear_playing_queue">Очистить очередь воспроизведения</string>
     <string name="action_clear_playlist">Очистить плейлист</string>
 
-    <string name="action_cycle_repeat">Режим повтора цикла</string>
+    <string name="action_cycle_repeat">Режим циклического повтора</string>
 
     <string name="action_delete">Удалить</string>
     <string name="action_delete_from_device">Удалить с устройства</string>
@@ -58,7 +58,7 @@
     <string name="action_set_as_ringtone">Задать в качества рингтона</string>
     <string name="action_set_as_start_directory">Установить как стартовый каталог</string>
 
-    <string name="action_settings">"Настройки"</string>
+    <string name="action_settings">Настройки</string>
 
     <string name="action_share">Поделиться</string>
 
@@ -102,7 +102,7 @@
 
     <string name="always">Всегда</string>
 
-    <string name="app_share">Эй, попробуй этот крутой музыкальный плеер на: https://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_share">Эй, попробуй этот крутой музыкальный плеер на Android: https://play.google.com/store/apps/details?id=%s</string>
 
     <string name="app_shortcut_shuffle_all_short">Перемешать</string>
     <string name="app_shortcut_top_tracks_short">Лучшие треки</string>
@@ -519,6 +519,7 @@
 
     <string name="pref_snow_fall_title">Эффект снегопада</string>
 
+    <string name="pref_summary_album_artists_only">Только альбомы исполнителей</string>
 	<string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущей песни в качестве обоев на экране блокировки.</string>
     <string name="pref_summary_audio_ducking">Снизить громкость воспроизведения когда приходит звуковое уведомление</string>
     <string name="pref_summary_blacklist">Содержимое черного списка скрыто из вашей библиотеки.</string>
@@ -852,7 +853,7 @@
     <string name="pref_summary_expand_now_playing_panel">Нажатие на уведомление будет показывать экран воспроизведения вместо домашнего экрана</string>
 
     <string name="tiny_card_style">Крошечная карточка</string>
-    <string name="about_album_label">О программе %s</string>
+    <string name="about_album_label">Об альбоме %s</string>
     <string name="pref_language_name">Выберите язык</string>
     <string name="translators">Переводчики</string>
     <string name="translators_summary">Люди которые помогали переводить это приложение</string>
