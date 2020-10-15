@@ -183,7 +183,7 @@
     <string name="grid_size_6">6</string>
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
-    <string name="grid_style_label">Les Grilles &amp; Le Style</string>
+    <string name="grid_style_label">Styles d'affichage</string>
     <string name="hinge">Charnière</string>
     <string name="history">Historique</string>
     <string name="home">Accueil</string>
@@ -445,7 +445,7 @@
     <string name="sort_order_artist">Artiste</string>
     <string name="sort_order_composer">Compositeur</string>
     <string name="sort_order_date">Date</string>
-    <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_date_modified">Date de modification</string>
     <string name="sort_order_year">Année</string>
     <string name="sort_order_z_a">Descendant</string>
     <string name="speech_not_supported">Désolé, votre appareil ne supporte pas l\'entrée vocale</string>
