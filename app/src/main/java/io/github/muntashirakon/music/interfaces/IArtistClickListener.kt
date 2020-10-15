@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.interfaces
+package io.github.muntashirakon.music.interfaces
 
 import android.view.View
 

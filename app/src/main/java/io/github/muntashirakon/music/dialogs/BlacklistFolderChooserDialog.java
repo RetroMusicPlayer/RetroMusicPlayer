@@ -10,7 +10,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
-import code.name.monkey.retromusic.R;
+import io.github.muntashirakon.music.R;
 import com.afollestad.materialdialogs.MaterialDialog;
 import java.io.File;
 import java.util.ArrayList;

@@ -6,9 +6,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import androidx.annotation.IntRange;
-import code.name.monkey.retromusic.util.PreferenceUtil;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.Locale;
+
+import io.github.muntashirakon.music.util.PreferenceUtil;
 
 public class DeviceInfo {
 
@@ -59,7 +63,7 @@ public class DeviceInfo {
   private final String versionName;
   private final String selectedLang;
 
-  public DeviceInfo(Context context) {
+  public DeviceInfo(@NotNull Context context) {
     PackageInfo packageInfo;
     try {
       packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
@@ -136,7 +140,7 @@ public class DeviceInfo {
   }
 
   @NotNull
-    @Override
+  @Override
   public String toString() {
     return "App version: "
         + versionName

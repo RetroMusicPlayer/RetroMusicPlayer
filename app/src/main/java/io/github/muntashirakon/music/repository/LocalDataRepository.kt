@@ -1,7 +1,7 @@
-package code.name.monkey.retromusic.repository
+package io.github.muntashirakon.music.repository
 
 import android.content.Context
-import code.name.monkey.retromusic.model.Contributor
+import io.github.muntashirakon.music.model.Contributor
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 

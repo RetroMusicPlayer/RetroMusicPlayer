@@ -17,24 +17,24 @@ package io.github.muntashirakon.music.util;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+
+import org.jetbrains.annotations.NotNull;
+
 import io.github.muntashirakon.music.R;
 import io.github.muntashirakon.music.activities.DriveModeActivity;
 import io.github.muntashirakon.music.activities.LicenseActivity;
 import io.github.muntashirakon.music.activities.LyricsActivity;
 import io.github.muntashirakon.music.activities.PlayingQueueActivity;
-import io.github.muntashirakon.music.activities.PurchaseActivity;
-import io.github.muntashirakon.music.activities.SupportDevelopmentActivity;
 import io.github.muntashirakon.music.activities.UserInfoActivity;
 import io.github.muntashirakon.music.activities.WhatsNewActivity;
 import io.github.muntashirakon.music.activities.bugreport.BugReportActivity;
 import io.github.muntashirakon.music.helper.MusicPlayerRemote;
-import org.jetbrains.annotations.NotNull;
 
 public class NavigationUtil {
 

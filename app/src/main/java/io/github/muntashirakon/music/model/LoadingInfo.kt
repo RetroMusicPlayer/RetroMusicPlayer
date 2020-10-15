@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.model
+package io.github.muntashirakon.music.model
 
 import org.jaudiotagger.tag.FieldKey
 

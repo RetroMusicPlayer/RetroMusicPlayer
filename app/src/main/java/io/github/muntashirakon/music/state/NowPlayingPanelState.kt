@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.state
+package io.github.muntashirakon.music.state
 
 enum class NowPlayingPanelState {
     EXPAND,

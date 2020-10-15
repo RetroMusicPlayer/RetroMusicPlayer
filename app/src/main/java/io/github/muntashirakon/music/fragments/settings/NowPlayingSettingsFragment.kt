@@ -19,8 +19,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
-import code.name.monkey.retromusic.*
-import code.name.monkey.retromusic.util.PreferenceUtil
+import io.github.muntashirakon.music.*
+import io.github.muntashirakon.music.util.PreferenceUtil
 
 /**
  * @author Hemanth S (h4h13).

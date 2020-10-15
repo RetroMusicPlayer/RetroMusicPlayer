@@ -15,7 +15,7 @@
 package io.github.muntashirakon.music.model
 
 import io.github.muntashirakon.music.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+import io.github.muntashirakon.music.util.PreferenceUtil
 import java.util.*
 
 data class Artist(

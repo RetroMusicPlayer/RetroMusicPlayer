@@ -1,7 +1,7 @@
-package code.name.monkey.retromusic.interfaces
+package io.github.muntashirakon.music.interfaces
 
 import android.view.View
-import code.name.monkey.retromusic.db.PlaylistWithSongs
+import io.github.muntashirakon.music.db.PlaylistWithSongs
 
 interface IPlaylistClickListener {
     fun onPlaylistClick(playlistWithSongs: PlaylistWithSongs, view: View)
