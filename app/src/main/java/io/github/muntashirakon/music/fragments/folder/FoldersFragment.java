@@ -180,13 +180,7 @@ public class FoldersFragment extends AbsMainActivityFragment
     private void setUpTitle() {
         toolbar.setNavigationOnClickListener(
                 v -> Navigation.findNavController(v).navigate(R.id.searchFragment, null, getNavOptions()));
-        int color = ThemeStore.Companion.accentColor(requireContext());
-        String hexColor = String.format("#%06X", 0xFFFFFF & color);
-        Spanned appName =
-                HtmlCompat.fromHtml(
-                        "Retro <span  style='color:" + hexColor + ";'>Music</span>",
-                        HtmlCompat.FROM_HTML_MODE_COMPACT);
-        appNameText.setText(appName);
+        appNameText.setText(getString(R.string.app_name));
     }
 
     @Override
