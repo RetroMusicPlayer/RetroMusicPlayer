@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.activities.tageditor
 
 import android.app.Activity
@@ -18,6 +32,7 @@ import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.extensions.appHandleColor
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteTranscoder
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
+import io.github.muntashirakon.music.model.ArtworkInfo
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.ImageUtil
 import io.github.muntashirakon.music.util.RetroColorUtil.generatePalette
@@ -26,9 +41,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
+import java.util.*
 import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
-import java.util.*
 
 class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
@@ -155,7 +170,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     override fun save() {
         val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
         fieldKeyValueMap[FieldKey.ALBUM] = albumText.text.toString()
-        //android seems not to recognize album_artist field so we additionally write the normal artist field
+        // android seems not to recognize album_artist field so we additionally write the normal artist field
         fieldKeyValueMap[FieldKey.ARTIST] = albumArtistText.text.toString()
         fieldKeyValueMap[FieldKey.ALBUM_ARTIST] = albumArtistText.text.toString()
         fieldKeyValueMap[FieldKey.GENRE] = genreTitle.text.toString()
@@ -163,8 +178,11 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
         writeValuesToFiles(
             fieldKeyValueMap,
-            if (deleteAlbumArt) ArtworkInfo(id, null)
-            else if (albumArtBitmap == null) null else ArtworkInfo(id, albumArtBitmap!!)
+            when {
+                deleteAlbumArt -> ArtworkInfo(id, null)
+                albumArtBitmap == null -> null
+                else -> ArtworkInfo(id, albumArtBitmap!!)
+            }
         )
     }
 

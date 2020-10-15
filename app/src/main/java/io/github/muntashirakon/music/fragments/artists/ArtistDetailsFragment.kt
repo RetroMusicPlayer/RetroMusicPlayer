@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.artists
 
 import android.content.Intent
@@ -9,6 +23,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -17,6 +32,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.appthemehelper.util.ATHUtil
 import io.github.muntashirakon.music.EXTRA_ALBUM_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.album.HorizontalAlbumAdapter
@@ -26,11 +42,11 @@ import io.github.muntashirakon.music.extensions.applyColor
 import io.github.muntashirakon.music.extensions.applyOutlineColor
 import io.github.muntashirakon.music.extensions.show
 import io.github.muntashirakon.music.extensions.showToast
-import io.github.muntashirakon.music.fragments.albums.AlbumClickListener
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.glide.ArtistGlideRequest
 import io.github.muntashirakon.music.glide.SingleColorTarget
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
+import io.github.muntashirakon.music.interfaces.IAlbumClickListener
 import io.github.muntashirakon.music.model.Artist
 import io.github.muntashirakon.music.network.Result
 import io.github.muntashirakon.music.network.model.LastFmArtist
@@ -39,6 +55,7 @@ import io.github.muntashirakon.music.util.CustomArtistImageUtil
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.RetroUtil
 import com.bumptech.glide.Glide
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_artist_content.*
 import kotlinx.android.synthetic.main.fragment_artist_details.*
 import kotlinx.coroutines.Dispatchers
@@ -51,12 +68,11 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_details),
-    AlbumClickListener {
+    IAlbumClickListener {
     private val arguments by navArgs<ArtistDetailsFragmentArgs>()
     private val detailsViewModel: ArtistDetailsViewModel by viewModel {
         parametersOf(arguments.extraArtistId)
     }
-
     private lateinit var artist: Artist
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: HorizontalAlbumAdapter
@@ -64,20 +80,31 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     private var lang: String? = null
     private var biography: Spanned? = null
 
+    private fun setUpTransitions() {
+        val transform = MaterialContainerTransform()
+        transform.setAllContainerColors(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+        sharedElementEnterTransition = transform
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setUpTransitions()
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
+        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.hideBottomBarVisibility(false)
         toolbar.title = null
-        setupRecyclerView()
+        ViewCompat.setTransitionName(container, "artist")
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
-            showArtist(it)
             startPostponedEnterTransition()
+            showArtist(it)
         })
-
+        setupRecyclerView()
 
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
@@ -138,7 +165,6 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         albumTitle.text = albumText
         songAdapter.swapDataSet(artist.songs.sortedBy { it.trackNumber })
         artist.albums?.let { albumAdapter.swapDataSet(it) }
-
     }
 
     private fun loadBiography(
@@ -184,7 +210,6 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         }
     }
 
-
     private fun loadArtistImage(artist: Artist) {
         ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
             .generatePalette(requireContext()).build()
@@ -201,14 +226,13 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         playAction.applyOutlineColor(color)
     }
 
-
     override fun onAlbumClick(albumId: Long, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to getString(R.string.transition_album_art)
+                view to "album"
             )
         )
     }

@@ -69,6 +69,8 @@
 
     <string name="action_sort_order">Sort order</string>
 
+    <string name="action_album_artists_only">Album artists only</string>
+
     <string name="action_tag_editor">Tag editor</string>
 
     <string name="action_toggle_favorite">Toggle favorite</string>
@@ -517,6 +519,7 @@
 
     <string name="pref_snow_fall_title">Snow fall effect</string>
 
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
     <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
@@ -534,7 +537,7 @@
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
     <string name="pref_summary_gapless_playback">"Can cause playback issues on some devices."</string>
     <string name="pref_summary_genre_toggle">Toggle genre tab</string>
-    <string name="pref_summary_home_banner">Toggle home banner style</string>
+    <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
@@ -546,6 +549,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
 
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
@@ -567,8 +571,9 @@
     <string name="pref_title_gapless_playback">Gapless playback</string>
     <string name="pref_title_general_theme">App theme</string>
     <string name="pref_title_genre_toggle">Show genre tab</string>
-    <string name="pref_title_home_artist_grid_style">Home artist grid</string>
-    <string name="pref_title_home_banner">Home banner</string>
+    <string name="pref_title_home_artist_grid_style">Artist grid</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
+    <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
     <string name="pref_title_last_added_interval">Last added playlist interval</string>
     <string name="pref_title_lock_screen">Fullscreen controls</string>
@@ -599,7 +604,7 @@
 
     <string name="purchase_summary">*Think before buying, don\'t ask for refund.</string>
 
-    <string name="queue">Queue</string>
+    <string name="queue">Playing Queue</string>
 
     <string name="rate_app">Rate the app</string>
 
@@ -880,10 +885,15 @@
         <item quantity="one">%d Artist</item>
         <item quantity="other">%d Artists</item>
     </plurals>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="done">Done</string>
     <string name="import_playlist">Import playlist</string>
     <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="import_label">Import</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_asc">Ascending</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
+    <string name="ringtone_title">Ringtone</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
 </resources>

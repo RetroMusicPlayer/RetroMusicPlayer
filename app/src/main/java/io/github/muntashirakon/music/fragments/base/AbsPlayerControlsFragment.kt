@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.base
 
 import android.os.Bundle
@@ -8,7 +22,6 @@ import androidx.annotation.LayoutRes
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.fragments.VolumeFragment
 import io.github.muntashirakon.music.helper.MusicProgressViewUpdateHelper
-
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 

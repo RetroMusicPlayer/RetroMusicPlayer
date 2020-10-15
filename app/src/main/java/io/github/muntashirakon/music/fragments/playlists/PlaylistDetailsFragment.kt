@@ -5,89 +5,75 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import code.name.monkey.appthemehelper.util.ATHUtil
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.adapter.song.OrderablePlaylistSongAdapter
-import io.github.muntashirakon.music.adapter.song.SongAdapter
+import io.github.muntashirakon.music.adapter.song.PlaylistSongAdapter
 import io.github.muntashirakon.music.db.PlaylistWithSongs
 import io.github.muntashirakon.music.db.toSongs
 import io.github.muntashirakon.music.extensions.dipToPix
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.helper.menu.PlaylistMenuHelper
 import io.github.muntashirakon.music.model.Song
-import io.github.muntashirakon.music.util.PlaylistsUtil
-import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
-import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
-import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
+import io.github.muntashirakon.music.state.NowPlayingPanelState
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail) {
     private val arguments by navArgs<PlaylistDetailsFragmentArgs>()
-    private val viewModel: PlaylistDetailsViewModel by viewModel {
+    private val viewModel by viewModel<PlaylistDetailsViewModel> {
         parametersOf(arguments.extraPlaylist)
     }
 
     private lateinit var playlist: PlaylistWithSongs
-    private lateinit var adapter: SongAdapter
+    private lateinit var playlistSongAdapter: PlaylistSongAdapter
 
-    private var wrappedAdapter: RecyclerView.Adapter<*>? = null
-    private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null
+    private fun setUpTransitions() {
+        val transform = MaterialContainerTransform()
+        transform.setAllContainerColors(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+        sharedElementEnterTransition = transform
+    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setUpTransitions()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.addMusicServiceEventListener(viewModel)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.hideBottomBarVisibility(false)
-
+        ViewCompat.setTransitionName(container, "playlist")
         playlist = arguments.extraPlaylist
         toolbar.title = playlist.playlistEntity.playlistName
-
         setUpRecyclerView()
-
         viewModel.getSongs().observe(viewLifecycleOwner, {
             songs(it.toSongs())
         })
     }
 
     private fun setUpRecyclerView() {
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerViewDragDropManager = RecyclerViewDragDropManager()
-        val animator = RefactoredDefaultItemAnimator()
-        adapter =
-            OrderablePlaylistSongAdapter(
-                playlist.playlistEntity,
-                requireActivity(),
-                ArrayList(),
-                R.layout.item_list,
-                null,
-                object : OrderablePlaylistSongAdapter.OnMoveItemListener {
-                    override fun onMoveItem(fromPosition: Int, toPosition: Int) {
-                        if (PlaylistsUtil.moveItem(
-                                requireContext(),
-                                playlist.playlistEntity.playListId,
-                                fromPosition,
-                                toPosition
-                            )
-                        ) {
-                            val song = adapter.dataSet.removeAt(fromPosition)
-                            adapter.dataSet.add(toPosition, song)
-                            adapter.notifyItemMoved(fromPosition, toPosition)
-                        }
-                    }
-                })
-        wrappedAdapter = recyclerViewDragDropManager!!.createWrappedAdapter(adapter)
-
-        recyclerView.adapter = wrappedAdapter
-        recyclerView.itemAnimator = animator
-
-        recyclerViewDragDropManager?.attachRecyclerView(recyclerView)
-
-        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+        playlistSongAdapter = PlaylistSongAdapter(
+            playlist.playlistEntity,
+            requireActivity(),
+            ArrayList(),
+            R.layout.item_list,
+            null,
+        )
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = playlistSongAdapter
+        }
+        playlistSongAdapter.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
                 checkIsEmpty()
@@ -97,10 +83,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        val menuRes =/* if (playlist is AbsCustomPlaylist)
-            R.menu.menu_smart_playlist_detail
-        else*/ R.menu.menu_playlist_detail
-        inflater.inflate(menuRes, menu)
+        inflater.inflate(R.menu.menu_playlist_detail, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -114,32 +97,13 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
 
     private fun checkIsEmpty() {
         checkForPadding()
-        empty.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
-        emptyText.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
-    }
-
-    override fun onPause() {
-        if (recyclerViewDragDropManager != null) {
-            recyclerViewDragDropManager!!.cancelDrag()
-        }
-        super.onPause()
+        empty.isVisible = playlistSongAdapter.itemCount == 0
+        emptyText.isVisible = playlistSongAdapter.itemCount == 0
     }
 
     override fun onDestroy() {
-        if (recyclerViewDragDropManager != null) {
-            recyclerViewDragDropManager!!.release()
-            recyclerViewDragDropManager = null
-        }
-
-        if (recyclerView != null) {
-            recyclerView!!.itemAnimator = null
-            recyclerView!!.adapter = null
-        }
-
-        if (wrappedAdapter != null) {
-            WrapperAdapterUtils.releaseAll(wrappedAdapter)
-            wrappedAdapter = null
-        }
+        recyclerView?.itemAnimator = null
+        recyclerView?.adapter = null
         super.onDestroy()
     }
 
@@ -151,7 +115,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     fun songs(songs: List<Song>) {
         progressIndicator.hide()
         if (songs.isNotEmpty()) {
-            adapter.swapDataSet(songs)
+            playlistSongAdapter.swapDataSet(songs)
         } else {
             showEmptyView()
         }

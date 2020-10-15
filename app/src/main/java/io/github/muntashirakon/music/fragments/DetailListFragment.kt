@@ -1,43 +1,51 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.adapter.album.AlbumAdapter
 import io.github.muntashirakon.music.adapter.artist.ArtistAdapter
 import io.github.muntashirakon.music.adapter.song.SongAdapter
 import io.github.muntashirakon.music.db.toSong
-import io.github.muntashirakon.music.fragments.albums.AlbumClickListener
-import io.github.muntashirakon.music.fragments.artists.ArtistClickListener
+import io.github.muntashirakon.music.extensions.dipToPix
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
+import io.github.muntashirakon.music.interfaces.IAlbumClickListener
+import io.github.muntashirakon.music.interfaces.IArtistClickListener
 import io.github.muntashirakon.music.model.Album
 import io.github.muntashirakon.music.model.Artist
-import io.github.muntashirakon.music.repository.RealRepository
+import io.github.muntashirakon.music.state.NowPlayingPanelState
+import io.github.muntashirakon.music.util.RetroUtil
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.inject
 
 class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
-    ArtistClickListener, AlbumClickListener {
+    IArtistClickListener, IAlbumClickListener {
     private val args by navArgs<DetailListFragmentArgs>()
-    private val repository by inject<RealRepository>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.hideBottomBarVisibility(false)
         progressIndicator.hide()
         when (args.type) {
             TOP_ARTISTS -> {
@@ -57,6 +65,14 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             LAST_ADDED_PLAYLIST -> lastAddedSongs()
             TOP_PLAYED_PLAYLIST -> topPlayed()
         }
+
+        recyclerView.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
+            override fun onChanged() {
+                super.onChanged()
+                val height = dipToPix(52f)
+                recyclerView.setPadding(0, 0, 0, height.toInt())
+            }
+        })
     }
 
     private fun lastAddedSongs() {
@@ -70,10 +86,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        lifecycleScope.launch(IO) {
-            val songs = repository.recentSongs()
-            withContext(Main) { songAdapter.swapDataSet(songs) }
-        }
+        libraryViewModel.recentSongs().observe(viewLifecycleOwner, { songs ->
+            songAdapter.swapDataSet(songs)
+        })
     }
 
     private fun topPlayed() {
@@ -87,12 +102,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        lifecycleScope.launch(IO) {
-            val songs = repository.playCountSongs().map {
-                it.toSong()
-            }
-            withContext(Main) { songAdapter.swapDataSet(songs) }
-        }
+        libraryViewModel.playCountSongs().observe(viewLifecycleOwner, { songs ->
+            songAdapter.swapDataSet(songs)
+        })
     }
 
     private fun loadHistory() {
@@ -107,9 +119,8 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        repository.observableHistorySongs().observe(viewLifecycleOwner, Observer {
-            val songs = it.map { historyEntity -> historyEntity.toSong() }
-            songAdapter.swapDataSet(songs)
+        libraryViewModel.observableHistorySongs().observe(viewLifecycleOwner, {
+            songAdapter.swapDataSet(it)
         })
     }
 
@@ -124,40 +135,30 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        repository.favorites().observe(viewLifecycleOwner, Observer {
-            println(it.size)
-            val songs = it.map { songEntity -> songEntity.toSong() }
+        libraryViewModel.favorites().observe(viewLifecycleOwner, { songEntities ->
+            val songs = songEntities.map { songEntity -> songEntity.toSong() }
             songAdapter.swapDataSet(songs)
         })
     }
 
     private fun loadArtists(title: Int, type: Int) {
         toolbar.setTitle(title)
-        lifecycleScope.launch(IO) {
-            val artists =
-                if (type == TOP_ARTISTS) repository.topArtists() else repository.recentArtists()
-            withContext(Main) {
-                recyclerView.apply {
-                    adapter = artistAdapter(artists)
-                    layoutManager = gridLayoutManager()
-                }
+        libraryViewModel.artists(type).observe(viewLifecycleOwner, { artists ->
+            recyclerView.apply {
+                adapter = artistAdapter(artists)
+                layoutManager = gridLayoutManager()
             }
-        }
+        })
     }
 
     private fun loadAlbums(title: Int, type: Int) {
         toolbar.setTitle(title)
-        lifecycleScope.launch(IO) {
-            val albums =
-                if (type == TOP_ALBUMS) repository.topAlbums() else repository.recentAlbums()
-            withContext(Main) {
-                recyclerView.apply {
-                    adapter = albumAdapter(albums)
-                    layoutManager = gridLayoutManager()
-
-                }
+        libraryViewModel.albums(type).observe(viewLifecycleOwner, { albums ->
+            recyclerView.apply {
+                adapter = albumAdapter(albums)
+                layoutManager = gridLayoutManager()
             }
-        }
+        })
     }
 
     private fun artistAdapter(artists: List<Artist>): ArtistAdapter = ArtistAdapter(
@@ -178,15 +179,21 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
     private fun gridLayoutManager(): GridLayoutManager =
-        GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+        GridLayoutManager(requireContext(), gridCount(), GridLayoutManager.VERTICAL, false)
 
+    private fun gridCount(): Int {
+        if (RetroUtil.isTablet()) {
+            return if (RetroUtil.isLandscape()) 6 else 4
+        }
+        return 2
+    }
 
-    override fun onArtist(artistId: Long, imageView: ImageView) {
+    override fun onArtist(artistId: Long, view: View) {
         findNavController().navigate(
             R.id.artistDetailsFragment,
             bundleOf(EXTRA_ARTIST_ID to artistId),
             null,
-            FragmentNavigatorExtras(imageView to getString(R.string.transition_artist_image))
+            FragmentNavigatorExtras(view to "artist")
         )
     }
 
@@ -195,7 +202,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
-            FragmentNavigatorExtras(view to getString(R.string.transition_album_art))
+            FragmentNavigatorExtras(
+                view to "album"
+            )
         )
     }
 }

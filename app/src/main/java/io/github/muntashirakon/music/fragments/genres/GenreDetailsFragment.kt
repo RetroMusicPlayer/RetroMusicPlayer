@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.genres
 
 import android.os.Bundle
@@ -16,26 +30,26 @@ import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.helper.menu.GenreMenuHelper
 import io.github.muntashirakon.music.model.Genre
 import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.state.NowPlayingPanelState
+import java.util.*
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.util.*
 
 class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail) {
     private val arguments by navArgs<GenreDetailsFragmentArgs>()
     private val detailsViewModel: GenreDetailsViewModel by viewModel {
         parametersOf(arguments.extraGenre)
     }
-
     private lateinit var genre: Genre
     private lateinit var songAdapter: SongAdapter
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.hideBottomBarVisibility(false)
         progressIndicator.hide()
         setupRecyclerView()
         detailsViewModel.getSongs().observe(viewLifecycleOwner, androidx.lifecycle.Observer {

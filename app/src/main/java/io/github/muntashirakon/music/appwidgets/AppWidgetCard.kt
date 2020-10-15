@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
-
 package io.github.muntashirakon.music.appwidgets
 
 import android.app.PendingIntent
@@ -32,6 +32,7 @@ import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.service.MusicService.*
 import io.github.muntashirakon.music.util.ImageUtil
+import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.RetroUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
@@ -217,7 +218,11 @@ class AppWidgetCard : BaseAppWidget() {
      * Link up various button actions using [PendingIntent].
      */
     private fun linkButtons(context: Context, views: RemoteViews) {
-        val action: Intent = Intent(context, MainActivity::class.java).putExtra("expand", true)
+        val action = Intent(context, MainActivity::class.java)
+            .putExtra(
+                MainActivity.EXPAND_PANEL,
+                PreferenceUtil.isExpandPanel
+            )
         var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)

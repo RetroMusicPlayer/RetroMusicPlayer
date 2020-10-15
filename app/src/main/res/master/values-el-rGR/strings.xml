@@ -313,7 +313,7 @@
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
     <string name="pref_summary_gapless_playback">"Μπορεί να προκαλέσει προβλήματα με την αναπαραγωγή σε κάποιες συσκευές."</string>
     <string name="pref_summary_genre_toggle">Toggle genre tab</string>
-    <string name="pref_summary_home_banner">Toggle home banner style</string>
+    <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Μπορεί να αυξήσει την ποιότητα των εξωφύλλων άλμπουμ, αλλά προκαλεί αργή φόρτωση εικόνων. Ενεργοποιήστε αυτή την επίλογη μόνο εαν αντιμετωπίζετε προβλήματα με εξώφυλλα χαμηλής ανάλυσης.</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Ενεργοποίηση διακοπτών ρύθμισης στην οθόνη κλειδώματος.</string>
@@ -345,8 +345,8 @@
     <string name="pref_title_gapless_playback">Αναπαραγωγή χωρίς κενά</string>
     <string name="pref_title_general_theme">Γενικό θέμα</string>
     <string name="pref_title_genre_toggle">Show genre tab</string>
-    <string name="pref_title_home_artist_grid_style">Home artist grid</string>
-    <string name="pref_title_home_banner">Home banner</string>
+    <string name="pref_title_home_artist_grid_style">Artist grid</string>
+    <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Παράληψη Media Store για εξώφυλλα</string>
     <string name="pref_title_last_added_interval">Χρονικό διάστημα playlist \"Προστέθηκε τελευταία\"</string>
     <string name="pref_title_lock_screen">Full screen Ρυθμίσεις</string>

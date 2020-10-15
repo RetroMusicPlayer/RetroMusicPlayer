@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.adapter.album
 
 import android.os.Bundle
@@ -5,6 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
@@ -88,9 +103,9 @@ class AlbumCoverPagerAdapter(
             savedInstanceState: Bundle?
         ): View? {
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
+            ViewCompat.setTransitionName(view, "lyrics")
             albumCover = view.findViewById(R.id.player_image)
-            albumCover.setOnClickListener {
-                //LyricsDialog().show(childFragmentManager, "LyricsDialog")
+            view.setOnClickListener {
                 showLyricsDialog()
             }
             return view
@@ -98,14 +113,14 @@ class AlbumCoverPagerAdapter(
 
         private fun showLyricsDialog() {
             lifecycleScope.launch(Dispatchers.IO) {
-                val data: String = MusicUtil.getLyrics(song) ?: "No lyrics found"
+                val data: String? = MusicUtil.getLyrics(song)
                 withContext(Dispatchers.Main) {
                     MaterialAlertDialogBuilder(
                         requireContext(),
                         R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
                     ).apply {
                         setTitle(song.title)
-                        setMessage(data)
+                        setMessage(if (data.isNullOrEmpty()) "No lyrics found" else data)
                         setNegativeButton(R.string.synced_lyrics) { _, _ ->
                             NavigationUtil.goToLyrics(requireActivity())
                         }
@@ -197,4 +212,3 @@ class AlbumCoverPagerAdapter(
         val TAG: String = AlbumCoverPagerAdapter::class.java.simpleName
     }
 }
-

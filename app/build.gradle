@@ -6,7 +6,7 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
-    buildToolsVersion = '30.0.1'
+    buildToolsVersion = '30.0.2'
 
     defaultConfig {
         minSdkVersion 21
@@ -16,8 +16,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId 'io.github.muntashirakon.Music'
-        versionCode 10445
-        versionName '3.5.11'
+        versionCode 10503
+        versionName '4.0.010'
 
         multiDexEnabled true
     }
@@ -135,3 +135,5 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.11.1'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }
+
+apply from: '../spotless.gradle'

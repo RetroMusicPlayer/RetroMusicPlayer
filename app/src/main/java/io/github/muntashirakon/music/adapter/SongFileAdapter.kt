@@ -1,17 +1,16 @@
 /*
- * Copyright 2019 Google LLC
+ * Copyright (c) 2020 Hemanth Savarla.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the GNU General Public License v3
  *
- *     https://www.apache.org/licenses/LICENSE-2.0
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
  */
 package io.github.muntashirakon.music.adapter
 
@@ -22,31 +21,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.appthemehelper.util.ATHUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.signature.MediaStoreSignature
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
 import io.github.muntashirakon.music.glide.audiocover.AudioFileCover
-import io.github.muntashirakon.music.interfaces.CabHolder
-import io.github.muntashirakon.music.interfaces.Callbacks
+import io.github.muntashirakon.music.interfaces.ICabHolder
+import io.github.muntashirakon.music.interfaces.ICallbacks
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.RetroUtil
-import me.zhanghai.android.fastscroll.PopupTextProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.signature.MediaStoreSignature
 import java.io.File
 import java.text.DecimalFormat
 import kotlin.math.log10
 import kotlin.math.pow
+import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class SongFileAdapter(
     private val activity: AppCompatActivity,
     private var dataSet: List<File>,
     private val itemLayoutRes: Int,
-    private val callbacks: Callbacks?,
-    cabHolder: CabHolder?
+    private val ICallbacks: ICallbacks?,
+    ICabHolder: ICabHolder?
 ) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(
-    activity, cabHolder, R.menu.menu_media_selection
+    activity, ICabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
 
     init {
@@ -136,8 +135,8 @@ class SongFileAdapter(
     }
 
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<File>) {
-        if (callbacks == null) return
-        callbacks.onMultipleItemAction(menuItem, selection as ArrayList<File>)
+        if (ICallbacks == null) return
+        ICallbacks.onMultipleItemAction(menuItem, selection as ArrayList<File>)
     }
 
     override fun getPopupText(position: Int): String {
@@ -148,15 +147,14 @@ class SongFileAdapter(
         return MusicUtil.getSectionName(dataSet[position].name)
     }
 
-
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            if (menu != null && callbacks != null) {
+            if (menu != null && ICallbacks != null) {
                 menu?.setOnClickListener { v ->
                     val position = layoutPosition
                     if (isPositionInRange(position)) {
-                        callbacks.onFileMenuClicked(dataSet[position], v)
+                        ICallbacks.onFileMenuClicked(dataSet[position], v)
                     }
                 }
             }
@@ -171,7 +169,7 @@ class SongFileAdapter(
                 if (isInQuickSelectMode) {
                     toggleChecked(position)
                 } else {
-                    callbacks?.onFileSelected(dataSet[position])
+                    ICallbacks?.onFileSelected(dataSet[position])
                 }
             }
         }

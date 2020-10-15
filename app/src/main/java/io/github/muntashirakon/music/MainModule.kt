@@ -12,9 +12,11 @@ import io.github.muntashirakon.music.fragments.albums.AlbumDetailsViewModel
 import io.github.muntashirakon.music.fragments.artists.ArtistDetailsViewModel
 import io.github.muntashirakon.music.fragments.genres.GenreDetailsViewModel
 import io.github.muntashirakon.music.fragments.playlists.PlaylistDetailsViewModel
-import io.github.muntashirakon.music.fragments.search.SearchViewModel
 import io.github.muntashirakon.music.model.Genre
-import io.github.muntashirakon.music.network.*
+import io.github.muntashirakon.music.network.provideDefaultCache
+import io.github.muntashirakon.music.network.provideLastFmRest
+import io.github.muntashirakon.music.network.provideLastFmRetrofit
+import io.github.muntashirakon.music.network.provideOkHttp
 import io.github.muntashirakon.music.repository.*
 import io.github.muntashirakon.music.util.FilePathUtil
 import kotlinx.coroutines.Dispatchers.IO
@@ -37,13 +39,7 @@ val networkModule = module {
         provideLastFmRetrofit(get())
     }
     single {
-        provideDeezerRest(get())
-    }
-    single {
         provideLastFmRest(get())
-    }
-    single {
-        provideLyrics(get())
     }
 }
 
@@ -93,7 +89,6 @@ private val mainModule = module {
     single {
         androidContext().contentResolver
     }
-
 }
 private val dataModule = module {
     single {
@@ -109,7 +104,7 @@ private val dataModule = module {
             get(),
             get(),
             get(),
-            get()
+            get(),
         )
     } bind Repository::class
 
@@ -154,6 +149,9 @@ private val dataModule = module {
             get()
         )
     }
+    single {
+        RealLocalDataRepository(get())
+    } bind LocalDataRepository::class
 }
 
 private val viewModules = module {
@@ -188,10 +186,6 @@ private val viewModules = module {
             get(),
             genre
         )
-    }
-
-    viewModel {
-        SearchViewModel(get())
     }
 }
 

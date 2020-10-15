@@ -8,7 +8,75 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
-import io.github.muntashirakon.music.*
+import io.github.muntashirakon.music.ADAPTIVE_COLOR_APP
+import io.github.muntashirakon.music.ALBUM_ARTISTS_ONLY
+import io.github.muntashirakon.music.ALBUM_ART_ON_LOCK_SCREEN
+import io.github.muntashirakon.music.ALBUM_COVER_STYLE
+import io.github.muntashirakon.music.ALBUM_COVER_TRANSFORM
+import io.github.muntashirakon.music.ALBUM_DETAIL_SONG_SORT_ORDER
+import io.github.muntashirakon.music.ALBUM_GRID_SIZE
+import io.github.muntashirakon.music.ALBUM_GRID_SIZE_LAND
+import io.github.muntashirakon.music.ALBUM_GRID_STYLE
+import io.github.muntashirakon.music.ALBUM_SONG_SORT_ORDER
+import io.github.muntashirakon.music.ALBUM_SORT_ORDER
+import io.github.muntashirakon.music.ARTIST_ALBUM_SORT_ORDER
+import io.github.muntashirakon.music.ARTIST_GRID_SIZE
+import io.github.muntashirakon.music.ARTIST_GRID_SIZE_LAND
+import io.github.muntashirakon.music.ARTIST_GRID_STYLE
+import io.github.muntashirakon.music.ARTIST_SONG_SORT_ORDER
+import io.github.muntashirakon.music.ARTIST_SORT_ORDER
+import io.github.muntashirakon.music.AUDIO_DUCKING
+import io.github.muntashirakon.music.AUTO_DOWNLOAD_IMAGES_POLICY
+import io.github.muntashirakon.music.App
+import io.github.muntashirakon.music.BLACK_THEME
+import io.github.muntashirakon.music.BLUETOOTH_PLAYBACK
+import io.github.muntashirakon.music.BLURRED_ALBUM_ART
+import io.github.muntashirakon.music.CAROUSEL_EFFECT
+import io.github.muntashirakon.music.CHOOSE_EQUALIZER
+import io.github.muntashirakon.music.CLASSIC_NOTIFICATION
+import io.github.muntashirakon.music.COLORED_APP_SHORTCUTS
+import io.github.muntashirakon.music.COLORED_NOTIFICATION
+import io.github.muntashirakon.music.DESATURATED_COLOR
+import io.github.muntashirakon.music.EXPAND_NOW_PLAYING_PANEL
+import io.github.muntashirakon.music.EXTRA_SONG_INFO
+import io.github.muntashirakon.music.FILTER_SONG
+import io.github.muntashirakon.music.GAP_LESS_PLAYBACK
+import io.github.muntashirakon.music.GENERAL_THEME
+import io.github.muntashirakon.music.GENRE_SORT_ORDER
+import io.github.muntashirakon.music.HOME_ALBUM_GRID_STYLE
+import io.github.muntashirakon.music.HOME_ARTIST_GRID_STYLE
+import io.github.muntashirakon.music.IGNORE_MEDIA_STORE_ARTWORK
+import io.github.muntashirakon.music.INITIALIZED_BLACKLIST
+import io.github.muntashirakon.music.KEEP_SCREEN_ON
+import io.github.muntashirakon.music.LANGUAGE_NAME
+import io.github.muntashirakon.music.LAST_ADDED_CUTOFF
+import io.github.muntashirakon.music.LAST_CHANGELOG_VERSION
+import io.github.muntashirakon.music.LAST_PAGE
+import io.github.muntashirakon.music.LAST_SLEEP_TIMER_VALUE
+import io.github.muntashirakon.music.LIBRARY_CATEGORIES
+import io.github.muntashirakon.music.LOCK_SCREEN
+import io.github.muntashirakon.music.LYRICS_OPTIONS
+import io.github.muntashirakon.music.NEXT_SLEEP_TIMER_ELAPSED_REALTIME
+import io.github.muntashirakon.music.NOW_PLAYING_SCREEN_ID
+import io.github.muntashirakon.music.PAUSE_ON_ZERO_VOLUME
+import io.github.muntashirakon.music.PLAYLIST_SORT_ORDER
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.RECENTLY_PLAYED_CUTOFF
+import io.github.muntashirakon.music.SAF_SDCARD_URI
+import io.github.muntashirakon.music.SLEEP_TIMER_FINISH_SONG
+import io.github.muntashirakon.music.SONG_GRID_SIZE
+import io.github.muntashirakon.music.SONG_GRID_SIZE_LAND
+import io.github.muntashirakon.music.SONG_GRID_STYLE
+import io.github.muntashirakon.music.SONG_SORT_ORDER
+import io.github.muntashirakon.music.START_DIRECTORY
+import io.github.muntashirakon.music.TAB_TEXT_MODE
+import io.github.muntashirakon.music.TOGGLE_ADD_CONTROLS
+import io.github.muntashirakon.music.TOGGLE_FULL_SCREEN
+import io.github.muntashirakon.music.TOGGLE_HEADSET
+import io.github.muntashirakon.music.TOGGLE_HOME_BANNER
+import io.github.muntashirakon.music.TOGGLE_SHUFFLE
+import io.github.muntashirakon.music.TOGGLE_VOLUME
+import io.github.muntashirakon.music.USER_NAME
 import io.github.muntashirakon.music.extensions.getIntRes
 import io.github.muntashirakon.music.extensions.getStringOrDefault
 import io.github.muntashirakon.music.fragments.AlbumCoverStyle
@@ -16,7 +84,13 @@ import io.github.muntashirakon.music.fragments.NowPlayingScreen
 import io.github.muntashirakon.music.fragments.folder.FoldersFragment
 import io.github.muntashirakon.music.helper.SortOrder.*
 import io.github.muntashirakon.music.model.CategoryInfo
-import io.github.muntashirakon.music.transform.*
+import io.github.muntashirakon.music.transform.CascadingPageTransformer
+import io.github.muntashirakon.music.transform.DepthTransformation
+import io.github.muntashirakon.music.transform.HingeTransformation
+import io.github.muntashirakon.music.transform.HorizontalFlipTransformation
+import io.github.muntashirakon.music.transform.NormalPageTransformer
+import io.github.muntashirakon.music.transform.VerticalFlipTransformation
+import io.github.muntashirakon.music.transform.VerticalStackTransformer
 import io.github.muntashirakon.music.util.theme.ThemeMode
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.gson.Gson
@@ -122,6 +196,13 @@ object PreferenceUtil {
             "only_wifi"
         )
 
+    var albumArtistsOnly
+        get() = sharedPreferences.getBoolean(
+            ALBUM_ARTISTS_ONLY,
+            false
+        )
+        set(value) = sharedPreferences.edit { putBoolean(ALBUM_ARTISTS_ONLY, value) }
+
     var albumDetailSongSortOrder
         get() = sharedPreferences.getStringOrDefault(
             ALBUM_DETAIL_SONG_SORT_ORDER,
@@ -147,10 +228,11 @@ object PreferenceUtil {
             putString(ALBUM_SORT_ORDER, value)
         }
 
+
     var artistSortOrder
         get() = sharedPreferences.getStringOrDefault(
             ARTIST_SORT_ORDER,
-            AlbumSortOrder.ALBUM_A_Z
+            ArtistSortOrder.ARTIST_A_Z
         )
         set(value) = sharedPreferences.edit {
             putString(ARTIST_SORT_ORDER, value)
@@ -173,6 +255,15 @@ object PreferenceUtil {
             ARTIST_ALBUM_SORT_ORDER,
             ArtistAlbumSortOrder.ALBUM_A_Z
         )
+
+    var playlistSortOrder
+        get() = sharedPreferences.getStringOrDefault(
+            PLAYLIST_SORT_ORDER,
+            PlaylistSortOrder.PLAYLIST_A_Z
+        )
+        set(value) = sharedPreferences.edit {
+            putString(PLAYLIST_SORT_ORDER, value)
+        }
 
     val genreSortOrder
         get() = sharedPreferences.getStringOrDefault(
@@ -390,12 +481,23 @@ object PreferenceUtil {
         }
     }
 
-    val homeGridStyle: Int
+    val homeArtistGridStyle: Int
         get() {
-            val position =
-                sharedPreferences.getStringOrDefault(
-                    HOME_ARTIST_GRID_STYLE, "0"
-                ).toInt()
+            val position = sharedPreferences.getStringOrDefault(
+                HOME_ARTIST_GRID_STYLE, "0"
+            ).toInt()
+            val typedArray =
+                App.getContext().resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
+            val layoutRes = typedArray.getResourceId(position, 0)
+            typedArray.recycle()
+            return if (layoutRes == 0) {
+                R.layout.item_artist
+            } else layoutRes
+        }
+
+    val homeAlbumGridStyle: Int
+        get() {
+            val position = sharedPreferences.getStringOrDefault(HOME_ALBUM_GRID_STYLE, "4").toInt()
             val typedArray =
                 App.getContext().resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
             val layoutRes = typedArray.getResourceId(position, 0)
@@ -408,7 +510,7 @@ object PreferenceUtil {
     val tabTitleMode: Int
         get() {
             return when (sharedPreferences.getStringOrDefault(
-                TAB_TEXT_MODE, "1"
+                TAB_TEXT_MODE, "0"
             ).toInt()) {
                 1 -> LabelVisibilityMode.LABEL_VISIBILITY_LABELED
                 0 -> LabelVisibilityMode.LABEL_VISIBILITY_AUTO

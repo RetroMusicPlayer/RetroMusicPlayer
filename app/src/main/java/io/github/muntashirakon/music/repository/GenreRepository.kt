@@ -24,6 +24,7 @@ import io.github.muntashirakon.music.Constants.IS_MUSIC
 import io.github.muntashirakon.music.Constants.baseProjection
 import io.github.muntashirakon.music.extensions.getLong
 import io.github.muntashirakon.music.extensions.getString
+import io.github.muntashirakon.music.extensions.getStringOrNull
 import io.github.muntashirakon.music.model.Genre
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.PreferenceUtil
@@ -53,9 +54,9 @@ class RealGenreRepository(
 
     private fun getGenreFromCursor(cursor: Cursor): Genre {
         val id = cursor.getLong(Genres._ID)
-        val name = cursor.getString(Genres.NAME)
+        val name = cursor.getStringOrNull(Genres.NAME)
         val songCount = songs(id).size
-        return Genre(id, name, songCount)
+        return Genre(id, name ?: "", songCount)
 
     }
 
@@ -94,13 +95,17 @@ class RealGenreRepository(
     }
 
     private fun makeGenreSongCursor(genreId: Long): Cursor? {
-        return contentResolver.query(
-            Genres.Members.getContentUri("external", genreId),
-            baseProjection,
-            IS_MUSIC,
-            null,
-            PreferenceUtil.songSortOrder
-        )
+        return try {
+            contentResolver.query(
+                Genres.Members.getContentUri("external", genreId),
+                baseProjection,
+                IS_MUSIC,
+                null,
+                PreferenceUtil.songSortOrder
+            )
+        } catch (e: SecurityException) {
+            return null
+        }
     }
 
     private fun getGenresFromCursor(cursor: Cursor?): ArrayList<Genre> {
@@ -142,17 +147,18 @@ class RealGenreRepository(
         return genres
     }
 
-
     private fun makeGenreCursor(): Cursor? {
         val projection = arrayOf(Genres._ID, Genres.NAME)
-        return contentResolver.query(
-            Genres.EXTERNAL_CONTENT_URI,
-            projection,
-            null,
-            null,
-            PreferenceUtil.genreSortOrder
-        )
+        return try {
+            contentResolver.query(
+                Genres.EXTERNAL_CONTENT_URI,
+                projection,
+                null,
+                null,
+                PreferenceUtil.genreSortOrder
+            )
+        } catch (e: SecurityException) {
+            return null
+        }
     }
-
-
 }

@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.adapter.song
 
 import android.content.res.ColorStateList
@@ -7,10 +21,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
-import com.afollestad.materialcab.MaterialCab
-import com.bumptech.glide.Glide
 import io.github.muntashirakon.music.EXTRA_ALBUM_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
@@ -23,11 +36,13 @@ import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.SortOrder
 import io.github.muntashirakon.music.helper.menu.SongMenuHelper
 import io.github.muntashirakon.music.helper.menu.SongsMenuHelper
-import io.github.muntashirakon.music.interfaces.CabHolder
+import io.github.muntashirakon.music.interfaces.ICabHolder
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
+import com.afollestad.materialcab.MaterialCab
+import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 /**
@@ -38,11 +53,11 @@ open class SongAdapter(
     protected val activity: FragmentActivity,
     var dataSet: MutableList<Song>,
     protected var itemLayoutRes: Int,
-    cabHolder: CabHolder?,
+    ICabHolder: ICabHolder?,
     showSectionName: Boolean = true
 ) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(
     activity,
-    cabHolder,
+    ICabHolder,
     R.menu.menu_media_selection
 ), MaterialCab.Callback, PopupTextProvider {
 
@@ -59,7 +74,7 @@ open class SongAdapter(
     }
 
     override fun getItemId(position: Int): Long {
-        return dataSet[position].id.toLong()
+        return dataSet[position].id
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -87,6 +102,7 @@ open class SongAdapter(
         }
         holder.title?.text = getSongTitle(song)
         holder.text?.text = getSongText(song)
+        holder.text2?.text = getSongText(song)
         loadAlbumCover(song, holder)
     }
 
@@ -119,6 +135,10 @@ open class SongAdapter(
 
     private fun getSongText(song: Song): String? {
         return song.artistName
+    }
+
+    private fun getSongText2(song: Song): String? {
+        return song.albumName
     }
 
     override fun getItemCount(): Int {
@@ -157,7 +177,6 @@ open class SongAdapter(
             get() = dataSet[layoutPosition]
 
         init {
-            setImageTransitionName(activity.getString(R.string.transition_album_art))
             menu?.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
                 override val song: Song
                     get() = this@ViewHolder.song
@@ -172,7 +191,7 @@ open class SongAdapter(
         }
 
         protected open fun onSongMenuItemClick(item: MenuItem): Boolean {
-            if (image != null && image!!.visibility == View.VISIBLE) {
+            if (image != null && image!!.isVisible) {
                 when (item.itemId) {
                     R.id.action_go_to_album -> {
                         activity.findNavController(R.id.fragment_container)

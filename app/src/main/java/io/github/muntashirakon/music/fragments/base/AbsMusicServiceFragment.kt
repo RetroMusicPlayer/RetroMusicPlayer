@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.base
 
 import android.content.Context
@@ -10,26 +24,23 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.navOptions
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsMusicServiceActivity
-import io.github.muntashirakon.music.interfaces.MusicServiceEventListener
+import io.github.muntashirakon.music.interfaces.IMusicServiceEventListener
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.RetroUtil
-import org.jaudiotagger.audio.AudioFileIO
 import java.io.File
 import java.net.URLEncoder
 import java.util.*
+import org.jaudiotagger.audio.AudioFileIO
 
 /**
  * Created by hemanths on 18/08/17.
  */
 
 open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
-    MusicServiceEventListener {
+    IMusicServiceEventListener {
 
     val navOptions by lazy {
         navOptions {
-            popUpTo(R.id.action_home) {
-                inclusive = false
-            }
             launchSingleTop = false
             anim {
                 enter = R.anim.retro_fragment_open_enter
@@ -40,13 +51,13 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
         }
     }
 
-    var playerActivity: AbsMusicServiceActivity? = null
+    var serviceActivity: AbsMusicServiceActivity? = null
         private set
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            playerActivity = context as AbsMusicServiceActivity?
+            serviceActivity = context as AbsMusicServiceActivity?
         } catch (e: ClassCastException) {
             throw RuntimeException(context.javaClass.simpleName + " must be an instance of " + AbsMusicServiceActivity::class.java.simpleName)
         }
@@ -54,17 +65,17 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
 
     override fun onDetach() {
         super.onDetach()
-        playerActivity = null
+        serviceActivity = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        playerActivity?.addMusicServiceEventListener(this)
+        serviceActivity?.addMusicServiceEventListener(this)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        playerActivity?.removeMusicServiceEventListener(this)
+        serviceActivity?.removeMusicServiceEventListener(this)
     }
 
     override fun onPlayingMetaChanged() {

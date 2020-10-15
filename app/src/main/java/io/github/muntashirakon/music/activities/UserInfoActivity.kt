@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.activities
 
 import android.app.Activity
@@ -11,12 +25,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.github.dhaval2404.imagepicker.ImagePicker
-import com.github.dhaval2404.imagepicker.constant.ImageProvider
 import io.github.muntashirakon.music.Constants.USER_BANNER
 import io.github.muntashirakon.music.Constants.USER_PROFILE
 import io.github.muntashirakon.music.R
@@ -27,15 +35,21 @@ import io.github.muntashirakon.music.glide.ProfileBannerGlideRequest
 import io.github.muntashirakon.music.glide.UserProfileGlideRequest
 import io.github.muntashirakon.music.util.ImageUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.github.dhaval2404.imagepicker.constant.ImageProvider
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import kotlinx.android.synthetic.main.activity_user_info.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.BufferedOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 class UserInfoActivity : AbsBaseActivity() {
 
@@ -55,7 +69,7 @@ class UserInfoActivity : AbsBaseActivity() {
             pickNewPhoto()
         }
 
-        bannerSelect.setOnClickListener {
+        bannerImage.setOnClickListener {
             selectBannerImage()
         }
 
@@ -113,7 +127,6 @@ class UserInfoActivity : AbsBaseActivity() {
             .compress(1440)
             .start(PICK_IMAGE_REQUEST)
     }
-
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -208,7 +221,6 @@ class UserInfoActivity : AbsBaseActivity() {
             })
             .into(userImage)
     }
-
 
     companion object {
         private const val PICK_IMAGE_REQUEST = 9002

@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.adapter
 
 import android.view.LayoutInflater
@@ -15,23 +29,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
-import com.bumptech.glide.Glide
-import com.google.android.material.card.MaterialCardView
 import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.adapter.album.AlbumAdapter
 import io.github.muntashirakon.music.adapter.artist.ArtistAdapter
 import io.github.muntashirakon.music.adapter.song.SongAdapter
 import io.github.muntashirakon.music.extensions.hide
-import io.github.muntashirakon.music.fragments.albums.AlbumClickListener
-import io.github.muntashirakon.music.fragments.artists.ArtistClickListener
 import io.github.muntashirakon.music.glide.SongGlideRequest
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
+import io.github.muntashirakon.music.interfaces.IAlbumClickListener
+import io.github.muntashirakon.music.interfaces.IArtistClickListener
 import io.github.muntashirakon.music.model.*
 import io.github.muntashirakon.music.util.PreferenceUtil
+import com.bumptech.glide.Glide
+import com.google.android.material.card.MaterialCardView
 
 class HomeAdapter(
     private val activity: AppCompatActivity
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), ArtistClickListener, AlbumClickListener {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), IArtistClickListener, IAlbumClickListener {
 
     private var list = listOf<Home>()
 
@@ -121,7 +135,6 @@ class HomeAdapter(
                 viewHolder.bind(home)
             }
             PLAYLISTS -> {
-
             }
         }
     }
@@ -181,7 +194,6 @@ class HomeAdapter(
                     .asBitmap()
                     .build()
                     .into(itemView.findViewById(id))
-
             }
         }
     }
@@ -225,21 +237,22 @@ class HomeAdapter(
     }
 
     fun artistsAdapter(artists: List<Artist>) =
-        ArtistAdapter(activity, artists, PreferenceUtil.homeGridStyle, null, this)
+        ArtistAdapter(activity, artists, PreferenceUtil.homeArtistGridStyle, null, this)
 
     fun albumAdapter(albums: List<Album>) =
-        AlbumAdapter(activity, albums, R.layout.item_image, null, this)
+        AlbumAdapter(activity, albums, PreferenceUtil.homeAlbumGridStyle, null, this)
 
     fun gridLayoutManager() = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+
     fun linearLayoutManager() = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-    override fun onArtist(artistId: Long, imageView: ImageView) {
+    override fun onArtist(artistId: Long, view: View) {
         activity.findNavController(R.id.fragment_container).navigate(
             R.id.artistDetailsFragment,
             bundleOf(EXTRA_ARTIST_ID to artistId),
             null,
             FragmentNavigatorExtras(
-                imageView to activity.getString(R.string.transition_album_art)
+                view to "artist"
             )
         )
     }
@@ -250,7 +263,7 @@ class HomeAdapter(
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to activity.getString(R.string.transition_album_art)
+                view to "album"
             )
         )
     }

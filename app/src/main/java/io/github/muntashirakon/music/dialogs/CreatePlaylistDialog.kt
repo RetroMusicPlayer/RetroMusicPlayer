@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.dialogs
 
 import android.app.Dialog
@@ -26,7 +40,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CreatePlaylistDialog : DialogFragment() {
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
+    private val io.github.muntashirakon.music by sharedViewModel<LibraryViewModel>()
 
     companion object {
         fun create(song: Song): CreatePlaylistDialog {
@@ -54,17 +68,8 @@ class CreatePlaylistDialog : DialogFragment() {
             ) { _, _ ->
                 val playlistName = playlistView.text.toString()
                 if (!TextUtils.isEmpty(playlistName)) {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        if (libraryViewModel.checkPlaylistExists(playlistName).isEmpty()) {
-                            val playlistId: Long =
-                                libraryViewModel.createPlaylist(PlaylistEntity(playlistName = playlistName))
-                            libraryViewModel.insertSongs(songs.map { it.toSongEntity(playlistId) })
-                            libraryViewModel.forceReload(Playlists)
-                        } else {
-                            Toast.makeText(requireContext(), "Playlist exists", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }
+                    io.github.muntashirakon.music.addToPlaylist(playlistName, songs)
+
                 } else {
                     playlistContainer.error = "Playlist is can't be empty"
                 }

@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.about
 
 import android.content.Intent
@@ -9,45 +23,27 @@ import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.Constants
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.ContributorAdapter
-import io.github.muntashirakon.music.model.Contributor
+import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.util.NavigationUtil
 import kotlinx.android.synthetic.main.card_credit.*
 import kotlinx.android.synthetic.main.card_other.*
 import kotlinx.android.synthetic.main.card_retro_info.*
 import kotlinx.android.synthetic.main.card_social.*
-import java.io.IOException
-import java.nio.charset.StandardCharsets
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
+    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         version.setSummary(getAppVersion())
         setUpView()
         loadContributors()
     }
-
-    private val contributorsJson: String?
-        get() {
-            val json: String
-            try {
-                val inputStream = requireActivity().assets.open("contributors.json")
-                val size = inputStream.available()
-                val buffer = ByteArray(size)
-                inputStream.read(buffer)
-                inputStream.close()
-                json = String(buffer, StandardCharsets.UTF_8)
-            } catch (ex: IOException) {
-                ex.printStackTrace()
-                return null
-            }
-            return json
-        }
-
 
     private fun openUrl(url: String) {
         val i = Intent(Intent.ACTION_VIEW)
@@ -109,16 +105,14 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
     }
 
     private fun loadContributors() {
-        val type = object : TypeToken<List<Contributor>>() {
-
-        }.type
-        val contributors = Gson().fromJson<List<Contributor>>(contributorsJson, type)
-
-        val contributorAdapter = ContributorAdapter(contributors)
+        val contributorAdapter = ContributorAdapter(emptyList())
         recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = DefaultItemAnimator()
             adapter = contributorAdapter
         }
+        libraryViewModel.fetchContributors().observe(viewLifecycleOwner, { contributors ->
+            contributorAdapter.swapData(contributors)
+        })
     }
 }

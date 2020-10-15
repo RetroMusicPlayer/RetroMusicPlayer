@@ -1,25 +1,44 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.activities.base
 
 import android.Manifest
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import androidx.lifecycle.lifecycleScope
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.db.toPlayCount
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
-import io.github.muntashirakon.music.interfaces.MusicServiceEventListener
+import io.github.muntashirakon.music.interfaces.IMusicServiceEventListener
 import io.github.muntashirakon.music.repository.RealRepository
 import io.github.muntashirakon.music.service.MusicService.*
+import java.lang.ref.WeakReference
+import java.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import java.lang.ref.WeakReference
-import java.util.*
 
-abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventListener {
+abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventListener {
 
-    private val mMusicServiceEventListeners = ArrayList<MusicServiceEventListener>()
+    private val mMusicServiceEventListeners = ArrayList<IMusicServiceEventListener>()
     private val repository: RealRepository by inject()
     private var serviceToken: MusicPlayerRemote.ServiceToken? = null
     private var musicStateReceiver: MusicStateReceiver? = null
@@ -49,15 +68,15 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventLis
         }
     }
 
-    fun addMusicServiceEventListener(listener: MusicServiceEventListener?) {
-        if (listener != null) {
-            mMusicServiceEventListeners.add(listener)
+    fun addMusicServiceEventListener(listenerI: IMusicServiceEventListener?) {
+        if (listenerI != null) {
+            mMusicServiceEventListeners.add(listenerI)
         }
     }
 
-    fun removeMusicServiceEventListener(listener: MusicServiceEventListener?) {
-        if (listener != null) {
-            mMusicServiceEventListeners.remove(listener)
+    fun removeMusicServiceEventListener(listenerI: IMusicServiceEventListener?) {
+        if (listenerI != null) {
+            mMusicServiceEventListeners.remove(listenerI)
         }
     }
 

@@ -1,29 +1,46 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.base
 
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
+import androidx.core.text.HtmlCompat
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.AppBarLayout
+import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.fragments.LibraryViewModel
+import io.github.muntashirakon.music.dialogs.CreatePlaylistDialog
+import io.github.muntashirakon.music.dialogs.ImportPlaylistDialog
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
+import io.github.muntashirakon.music.state.NowPlayingPanelState
 import io.github.muntashirakon.music.util.DensityUtil
 import io.github.muntashirakon.music.util.ThemedFastScroller.create
 import io.github.muntashirakon.music.views.ScrollingViewOnApplyWindowInsetsListener
-import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.*
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.transition.Hold
+import kotlinx.android.synthetic.main.fragment_main_recycler.*
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-
 
 abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
-    AbsMusicServiceFragment(R.layout.fragment_main_activity_recycler_view),
+    AbsMainActivityFragment(R.layout.fragment_main_recycler),
     AppBarLayout.OnOffsetChangedListener {
-
-    val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -33,12 +50,41 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     protected var adapter: A? = null
     protected var layoutManager: LM? = null
 
+    private fun setUpTransitions() {
+        exitTransition = Hold()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setUpTransitions()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainActivity.setBottomBarVisibility(View.VISIBLE)
+        mainActivity.setSupportActionBar(toolbar)
+        mainActivity.supportActionBar?.title = null
         initLayoutManager()
         initAdapter()
         setUpRecyclerView()
+        setupTitle()
+    }
+
+    private fun setupTitle() {
+        toolbar.setNavigationOnClickListener {
+            findNavController().navigate(
+                R.id.searchFragment,
+                null,
+                navOptions
+            )
+        }
+        val color = ThemeStore.accentColor(requireContext())
+        val hexColor = String.format("#%06X", 0xFFFFFF and color)
+        val appName = HtmlCompat.fromHtml(
+            "Retro <span  style='color:$hexColor';>Music</span>",
+            HtmlCompat.FROM_HTML_MODE_COMPACT
+        )
+        appNameText.text = appName
     }
 
     private fun setUpRecyclerView() {
@@ -78,7 +124,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         return String(Character.toChars(unicode))
     }
 
-    private fun checkIsEmpty() { 
+    private fun checkIsEmpty() {
         emptyText.setText(emptyMessage)
         empty.visibility = if (adapter!!.itemCount == 0) View.VISIBLE else View.GONE
     }
@@ -94,7 +140,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
             params.bottomMargin = height
         }
     }
-
 
     private fun initLayoutManager() {
         layoutManager = createLayoutManager()
@@ -137,5 +182,40 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     fun recyclerView(): RecyclerView {
         return recyclerView
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(
+            requireContext(),
+            toolbar,
+            menu,
+            ATHToolbarActivity.getToolbarBackgroundColor(toolbar)
+        )
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> findNavController().navigate(
+                R.id.settingsActivity,
+                null,
+                navOptions
+            )
+            R.id.action_import_playlist -> ImportPlaylistDialog().show(
+                childFragmentManager,
+                "ImportPlaylist"
+            )
+            R.id.action_add_to_playlist -> CreatePlaylistDialog.create(emptyList()).show(
+                childFragmentManager,
+                "ShowCreatePlaylistDialog"
+            )
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
-
 package io.github.muntashirakon.music.appshortcuts
 
 import android.app.Activity
@@ -20,6 +20,7 @@ import android.os.Bundle
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.LastAddedShortcutType
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.ShuffleAllShortcutType
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.TopTracksShortcutType
+import io.github.muntashirakon.music.extensions.extraNotNull
 import io.github.muntashirakon.music.model.Playlist
 import io.github.muntashirakon.music.model.smartplaylist.LastAddedPlaylist
 import io.github.muntashirakon.music.model.smartplaylist.ShuffleAllPlaylist
@@ -31,16 +32,7 @@ class AppShortcutLauncherActivity : Activity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        var shortcutType = SHORTCUT_TYPE_NONE
-
-        // Set shortcutType from the intent extras
-        val extras = intent.extras
-        if (extras != null) {
-            shortcutType = extras.getInt(KEY_SHORTCUT_TYPE, SHORTCUT_TYPE_NONE)
-        }
-
-        when (shortcutType) {
+        when (extraNotNull(KEY_SHORTCUT_TYPE, SHORTCUT_TYPE_NONE).value) {
             SHORTCUT_TYPE_SHUFFLE_ALL -> {
                 startServiceWithPlaylist(
                     SHUFFLE_MODE_SHUFFLE, ShuffleAllPlaylist()
@@ -78,9 +70,9 @@ class AppShortcutLauncherActivity : Activity() {
 
     companion object {
         const val KEY_SHORTCUT_TYPE = "io.github.muntashirakon.Music.appshortcuts.ShortcutType"
-        const val SHORTCUT_TYPE_SHUFFLE_ALL = 0
-        const val SHORTCUT_TYPE_TOP_TRACKS = 1
-        const val SHORTCUT_TYPE_LAST_ADDED = 2
-        const val SHORTCUT_TYPE_NONE = 4
+        const val SHORTCUT_TYPE_SHUFFLE_ALL = 0L
+        const val SHORTCUT_TYPE_TOP_TRACKS = 1L
+        const val SHORTCUT_TYPE_LAST_ADDED = 2L
+        const val SHORTCUT_TYPE_NONE = 4L
     }
 }

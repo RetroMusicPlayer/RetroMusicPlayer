@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments
 
 import androidx.annotation.DrawableRes
@@ -24,7 +38,7 @@ enum class NowPlayingScreen constructor(
     Gradient(R.string.gradient, R.drawable.np_gradient, 17),
     Material(R.string.material, R.drawable.np_material, 11),
     Normal(R.string.normal, R.drawable.np_normal, 0),
-    //Peak(R.string.peak, R.drawable.np_peak, 14),
+    Peak(R.string.peak, R.drawable.np_peak, 14),
     Plain(R.string.plain, R.drawable.np_plain, 3),
     Simple(R.string.simple, R.drawable.np_simple, 8),
     Tiny(R.string.tiny, R.drawable.np_tiny, 7),

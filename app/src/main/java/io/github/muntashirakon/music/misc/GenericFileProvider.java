@@ -16,5 +16,4 @@ package io.github.muntashirakon.music.misc;
 
 import androidx.core.content.FileProvider;
 
-public class GenericFileProvider extends FileProvider {
-}
+public class GenericFileProvider extends FileProvider {}

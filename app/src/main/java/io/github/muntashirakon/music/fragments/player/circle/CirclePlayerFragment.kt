@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2020 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
-
 package io.github.muntashirakon.music.fragments.player.circle
 
 import android.animation.ObjectAnimator
@@ -45,7 +45,6 @@ import io.github.muntashirakon.music.helper.PlayPauseButtonOnClickHandler
 import io.github.muntashirakon.music.misc.SimpleOnSeekbarChangeListener
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
-
 import io.github.muntashirakon.music.util.ViewUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import io.github.muntashirakon.music.views.SeekArc
@@ -171,7 +170,6 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         get() = Color.BLACK
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-
     }
 
     override fun onFavoriteToggled() {

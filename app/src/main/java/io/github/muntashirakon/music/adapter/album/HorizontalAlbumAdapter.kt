@@ -1,13 +1,27 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.adapter.album
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import io.github.muntashirakon.music.fragments.albums.AlbumClickListener
 import io.github.muntashirakon.music.glide.AlbumGlideRequest
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
 import io.github.muntashirakon.music.helper.HorizontalAdapterHelper
-import io.github.muntashirakon.music.interfaces.CabHolder
+import io.github.muntashirakon.music.interfaces.IAlbumClickListener
+import io.github.muntashirakon.music.interfaces.ICabHolder
 import io.github.muntashirakon.music.model.Album
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
@@ -16,10 +30,10 @@ import com.bumptech.glide.Glide
 class HorizontalAlbumAdapter(
     activity: FragmentActivity,
     dataSet: List<Album>,
-    cabHolder: CabHolder?,
-    albumClickListener: AlbumClickListener
+    ICabHolder: ICabHolder?,
+    albumClickListener: IAlbumClickListener
 ) : AlbumAdapter(
-    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, cabHolder, albumClickListener
+    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, ICabHolder, albumClickListener
 ) {
 
     override fun createViewHolder(view: View, viewType: Int): ViewHolder {
@@ -29,8 +43,8 @@ class HorizontalAlbumAdapter(
     }
 
     override fun setColors(color: MediaNotificationProcessor, holder: ViewHolder) {
-        //holder.title?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorPrimary))
-        //holder.text?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorSecondary))
+        // holder.title?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorPrimary))
+        // holder.text?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorSecondary))
     }
 
     override fun loadAlbumCover(album: Album, holder: ViewHolder) {
@@ -51,7 +65,7 @@ class HorizontalAlbumAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return HorizontalAdapterHelper.getItemViewtype(position, itemCount)
+        return HorizontalAdapterHelper.getItemViewType(position, itemCount)
     }
 
     override fun getItemCount(): Int {

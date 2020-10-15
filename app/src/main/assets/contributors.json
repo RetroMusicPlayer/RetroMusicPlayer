@@ -3,24 +3,30 @@
     "name": "Hemanth Savarala",
     "summary": "Lead Developer & Designer",
     "link": "https://github.com/h4h13",
-    "profile_image": "https://i.imgur.com/AoVs9oj.jpg"
+    "image": "https://i.imgur.com/AoVs9oj.jpg"
   },
   {
     "name": "Lennart Glamann",
-    "summary": "Play Store banner and Images",
+    "summary": "Play Store Banner & Images",
     "link": "https://t.me/FlixbusLennart",
-    "profile_image": "https://i.imgur.com/Q5Nsx1R.jpg"
+    "image": "https://i.imgur.com/Q5Nsx1R.jpg"
   },
   {
     "name": "Daksh P. Jain",
     "summary": "Support Representative & Moderator",
     "link": "https://daksh.eu.org",
-    "profile_image": "https://i.imgur.com/fnYpg65.jpg"
+    "image": "https://i.imgur.com/fnYpg65.jpg"
   },
   {
     "name": "Milind Goel",
     "summary": "Support Representative & Moderator",
     "link": "https://t.me/MilindGoel15",
-    "profile_image": "https://i.imgur.com/Bz4De21_d.jpg"
+    "image": "https://i.imgur.com/Bz4De21_d.jpg"
+  },
+{
+    "name": "Haythem Gataa",
+    "summary": "App Logo Designer",
+    "link": "https://dribbble.com/haythemgataa",
+    "image": "https://i.imgur.com/g5RuIZq.jpg"
   }
 ]

@@ -16,12 +16,12 @@ package io.github.muntashirakon.music.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.db.*
 import io.github.muntashirakon.music.model.*
 import io.github.muntashirakon.music.model.smartplaylist.NotPlayedPlaylist
 import io.github.muntashirakon.music.network.LastFMService
-import io.github.muntashirakon.music.network.LyricsRestService
 import io.github.muntashirakon.music.network.Result
 import io.github.muntashirakon.music.network.Result.*
 import io.github.muntashirakon.music.network.model.LastFmAlbum
@@ -40,9 +40,9 @@ interface Repository {
     fun genresFlow(): Flow<Result<List<Genre>>>
     fun historySong(): List<HistoryEntity>
     fun favorites(): LiveData<List<SongEntity>>
-    fun observableHistorySongs(): LiveData<List<HistoryEntity>>
+    fun observableHistorySongs(): LiveData<List<Song>>
     fun albumById(albumId: Long): Album
-    fun playlistSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>>
+    fun playlistSongs(playListId: Long): LiveData<List<SongEntity>>
     suspend fun fetchAlbums(): List<Album>
     suspend fun albumByIdAsync(albumId: Long): Album
     suspend fun allSongs(): List<Song>
@@ -96,8 +96,11 @@ interface Repository {
     suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun blackListPaths(): List<BlackListStoreEntity>
-    suspend fun lyrics(artist: String, title: String): Result<String>
     suspend fun deleteSongs(songs: List<Song>)
+    suspend fun contributor(): List<Contributor>
+    suspend fun searchArtists(query: String): List<Artist>
+    suspend fun searchSongs(query: String): List<Song>
+    suspend fun searchAlbums(query: String): List<Album>
 }
 
 class RealRepository(
@@ -112,17 +115,20 @@ class RealRepository(
     private val searchRepository: RealSearchRepository,
     private val topPlayedRepository: TopPlayedRepository,
     private val roomRepository: RoomRepository,
-    private val lyricsRestService: LyricsRestService
+    private val localDataRepository: LocalDataRepository
 ) : Repository {
 
-    override suspend fun lyrics(artist: String, title: String): Result<String> = try {
-        Success(lyricsRestService.getLyrics(artist, title))
-    } catch (e: Exception) {
-        println(e)
-        Error(e)
-    }
 
     override suspend fun deleteSongs(songs: List<Song>) = roomRepository.deleteSongs(songs)
+
+    override suspend fun contributor(): List<Contributor> = localDataRepository.contributors()
+
+    override suspend fun searchSongs(query: String): List<Song> = songRepository.songs(query)
+
+    override suspend fun searchAlbums(query: String): List<Album> = albumRepository.albums(query)
+
+    override suspend fun searchArtists(query: String): List<Artist> =
+        artistRepository.artists(query)
 
     override suspend fun fetchAlbums(): List<Album> = albumRepository.albums()
 
@@ -246,8 +252,8 @@ class RealRepository(
             it.toSong()
         }
 
-    override fun playlistSongs(playlistEntity: PlaylistEntity): LiveData<List<SongEntity>> =
-        roomRepository.getSongs(playlistEntity)
+    override fun playlistSongs(playListId: Long): LiveData<List<SongEntity>> =
+        roomRepository.getSongs(playListId)
 
     override suspend fun insertSongs(songs: List<SongEntity>) =
         roomRepository.insertSongs(songs)
@@ -315,8 +321,10 @@ class RealRepository(
     override suspend fun blackListPaths(): List<BlackListStoreEntity> =
         roomRepository.blackListPaths()
 
-    override fun observableHistorySongs(): LiveData<List<HistoryEntity>> =
-        roomRepository.observableHistorySongs()
+    override fun observableHistorySongs(): LiveData<List<Song>> =
+        Transformations.map(roomRepository.observableHistorySongs()) {
+            it.fromHistoryToSongs()
+        }
 
     override fun historySong(): List<HistoryEntity> =
         roomRepository.historySongs()

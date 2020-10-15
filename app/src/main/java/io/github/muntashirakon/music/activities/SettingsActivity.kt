@@ -1,8 +1,23 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.activities
 
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import com.afollestad.materialdialogs.color.ColorChooserDialog
@@ -29,8 +44,24 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
         applyToolbar(toolbar)
         val navController: NavController = findNavController(R.id.contentFrame)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            toolbar.title = navController.currentDestination?.label
+            toolbar.title = navController.currentDestination?.let { getStringFromDestination(it) }
         }
+    }
+
+    private fun getStringFromDestination(currentDestination: NavDestination): String {
+        val idRes = when (currentDestination.id) {
+            R.id.mainSettingsFragment -> R.string.action_settings
+            R.id.audioSettings -> R.string.pref_header_audio
+            R.id.imageSettingFragment -> R.string.pref_header_images
+            R.id.notificationSettingsFragment -> R.string.notification
+            R.id.nowPlayingSettingsFragment -> R.string.now_playing
+            R.id.otherSettingsFragment -> R.string.others
+            R.id.personalizeSettingsFragment -> R.string.personalize
+            R.id.themeSettingsFragment -> R.string.general_settings_title
+            R.id.aboutActivity -> R.string.action_about
+            else -> R.id.action_settings
+        }
+        return getString(idRes)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -49,7 +80,6 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
     }
 
     override fun onColorChooserDismissed(dialog: ColorChooserDialog) {
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

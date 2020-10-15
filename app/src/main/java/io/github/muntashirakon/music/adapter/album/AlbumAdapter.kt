@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.adapter.album
 
 import android.content.res.ColorStateList
@@ -6,7 +20,23 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
+import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
+import io.github.muntashirakon.music.glide.AlbumGlideRequest
+import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
+import io.github.muntashirakon.music.helper.MusicPlayerRemote
+import io.github.muntashirakon.music.helper.SortOrder
+import io.github.muntashirakon.music.helper.menu.SongsMenuHelper
+import io.github.muntashirakon.music.interfaces.IAlbumClickListener
+import io.github.muntashirakon.music.interfaces.ICabHolder
+import io.github.muntashirakon.music.model.Album
+import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.util.MusicUtil
+import io.github.muntashirakon.music.util.PreferenceUtil
+import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
@@ -29,11 +59,11 @@ open class AlbumAdapter(
     protected val activity: FragmentActivity,
     var dataSet: List<Album>,
     protected var itemLayoutRes: Int,
-    cabHolder: CabHolder?,
-    private val albumClickListener: AlbumClickListener?
+    ICabHolder: ICabHolder?,
+    private val albumClickListener: IAlbumClickListener?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
     activity,
-    cabHolder,
+    ICabHolder,
     R.menu.menu_media_selection
 ), PopupTextProvider {
 
@@ -75,7 +105,7 @@ open class AlbumAdapter(
         holder.title?.text = getAlbumTitle(album)
         holder.text?.text = getAlbumText(album)
         holder.playSongs?.setOnClickListener {
-            album.songs?.let { songs ->
+            album.songs.let { songs ->
                 MusicPlayerRemote.openQueue(
                     songs,
                     0,
@@ -116,7 +146,7 @@ open class AlbumAdapter(
     }
 
     override fun getItemId(position: Int): Long {
-        return dataSet[position].id.toLong()
+        return dataSet[position].id
     }
 
     override fun getIdentifier(position: Int): Album? {
@@ -128,7 +158,8 @@ open class AlbumAdapter(
     }
 
     override fun onMultipleItemAction(
-        menuItem: MenuItem, selection: List<Album>
+        menuItem: MenuItem,
+        selection: List<Album>
     ) {
         SongsMenuHelper.handleMenuClick(activity, getSongList(selection), menuItem.itemId)
     }
@@ -161,7 +192,7 @@ open class AlbumAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            setImageTransitionName(activity.getString(R.string.transition_album_art))
+            setImageTransitionName("Album")
             menu?.visibility = View.GONE
         }
 
@@ -170,6 +201,7 @@ open class AlbumAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
+                ViewCompat.setTransitionName(itemView, "album")
                 albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, itemView)
             }
         }

@@ -6,18 +6,21 @@
         <item name="android:windowBackground">@color/window_color_light</item>
         <item name="android:scrollbars">none</item>
         <item name="dialogCornerRadius">16dp</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
     <style name="Theme.RetroMusic.Black" parent="Theme.RetroMusic.Base.Black">
         <item name="android:windowBackground">@color/window_color_dark</item>
         <item name="android:scrollbars">none</item>
         <item name="dialogCornerRadius">16dp</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
     <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive">
         <item name="android:windowBackground">@color/window_color</item>
         <item name="android:scrollbars">none</item>
         <item name="dialogCornerRadius">16dp</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />
@@ -249,5 +252,16 @@
         <item name="strokeWidth">1dp</item>
         <item name="strokeColor">?android:attr/colorButtonNormal</item>
         <item name="cardElevation">0dp</item>
+    </style>
+
+    <!-- This will set the fade in animation on all your activities by default -->
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">5%</item>
     </style>
 </resources>

@@ -1,15 +1,16 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
 
 package io.github.muntashirakon.music.helper.menu
@@ -30,7 +31,7 @@ import io.github.muntashirakon.music.dialogs.AddToPlaylistDialog
 import io.github.muntashirakon.music.dialogs.DeleteSongsDialog
 import io.github.muntashirakon.music.dialogs.SongDetailDialog
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
-import io.github.muntashirakon.music.interfaces.PaletteColorHolder
+import io.github.muntashirakon.music.interfaces.IPaletteColorHolder
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.repository.RealRepository
 import io.github.muntashirakon.music.util.MusicUtil
@@ -90,10 +91,10 @@ object SongMenuHelper : KoinComponent {
             R.id.action_tag_editor -> {
                 val tagEditorIntent = Intent(activity, SongTagEditorActivity::class.java)
                 tagEditorIntent.putExtra(AbsTagEditorActivity.EXTRA_ID, song.id)
-                if (activity is PaletteColorHolder)
+                if (activity is IPaletteColorHolder)
                     tagEditorIntent.putExtra(
                         AbsTagEditorActivity.EXTRA_PALETTE,
-                        (activity as PaletteColorHolder).paletteColor
+                        (activity as IPaletteColorHolder).paletteColor
                     )
                 activity.startActivity(tagEditorIntent)
                 return true

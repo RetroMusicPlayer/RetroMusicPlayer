@@ -1,17 +1,16 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
-
 package io.github.muntashirakon.music.fragments.settings
 
 import android.os.Build
@@ -23,8 +22,7 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
-import io.github.muntashirakon.music.DESATURATED_COLOR
-import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.appshortcuts.DynamicShortcutManager
 import io.github.muntashirakon.music.util.PreferenceUtil
 import com.afollestad.materialdialogs.color.ColorChooserDialog
@@ -35,7 +33,7 @@ import com.afollestad.materialdialogs.color.ColorChooserDialog
 
 class ThemeSettingsFragment : AbsSettingsFragment() {
     override fun invalidateSettings() {
-        val generalTheme: Preference? = findPreference("general_theme")
+        val generalTheme: Preference? = findPreference(GENERAL_THEME)
         generalTheme?.let {
             setSummary(it)
             it.setOnPreferenceChangeListener { _, newValue ->
@@ -52,11 +50,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             }
         }
 
-        val accentColorPref: ATEColorPreference = findPreference("accent_color")!!
+        val accentColorPref: ATEColorPreference? = findPreference(ACCENT_COLOR)
         val accentColor = ThemeStore.accentColor(requireContext())
-        accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
-
-        accentColorPref.setOnPreferenceClickListener {
+        accentColorPref?.setColor(accentColor, ColorUtil.darkenColor(accentColor))
+        accentColorPref?.setOnPreferenceClickListener {
             ColorChooserDialog.Builder(requireContext(), R.string.accent_color)
                 .accentMode(true)
                 .allowUserColorInput(true)
@@ -65,7 +62,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 .show(requireActivity())
             return@setOnPreferenceClickListener true
         }
-        val blackTheme: ATESwitchPreference? = findPreference("black_theme")
+        val blackTheme: ATESwitchPreference? = findPreference(BLACK_THEME)
         blackTheme?.setOnPreferenceChangeListener { _, _ ->
             ThemeStore.markChanged(requireContext())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
@@ -88,13 +85,12 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             true
         }
 
-
-        val colorAppShortcuts: TwoStatePreference = findPreference("should_color_app_shortcuts")!!
+        val colorAppShortcuts: TwoStatePreference? = findPreference(SHOULD_COLOR_APP_SHORTCUTS)
         if (!VersionUtils.hasNougatMR()) {
-            colorAppShortcuts.isVisible = false
+            colorAppShortcuts?.isVisible = false
         } else {
-            colorAppShortcuts.isChecked = PreferenceUtil.isColoredAppShortcuts
-            colorAppShortcuts.setOnPreferenceChangeListener { _, newValue ->
+            colorAppShortcuts?.isChecked = PreferenceUtil.isColoredAppShortcuts
+            colorAppShortcuts?.setOnPreferenceChangeListener { _, newValue ->
                 PreferenceUtil.isColoredAppShortcuts = newValue as Boolean
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 true

@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.player.adaptive
 
 import android.animation.ObjectAnimator
@@ -25,7 +39,6 @@ import io.github.muntashirakon.music.helper.PlayPauseButtonOnClickHandler
 import io.github.muntashirakon.music.misc.SimpleOnSeekbarChangeListener
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.MusicUtil
-
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.*
@@ -43,7 +56,8 @@ class AdaptivePlaybackControlsFragment :
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(
@@ -149,7 +163,7 @@ class AdaptivePlaybackControlsFragment :
     }
 
     private fun updatePlayPauseColor() {
-        //playPauseButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN);
+        // playPauseButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN);
     }
 
     private fun setUpPlayPauseFab() {
@@ -188,11 +202,9 @@ class AdaptivePlaybackControlsFragment :
     }
 
     override fun show() {
-
     }
 
     override fun hide() {
-
     }
 
     override fun updateShuffleState() {

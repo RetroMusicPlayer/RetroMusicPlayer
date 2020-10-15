@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.player.full
 
 import android.content.res.ColorStateList
@@ -8,12 +22,10 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
-import com.bumptech.glide.Glide
 import io.github.muntashirakon.music.EXTRA_ARTIST_ID
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.extensions.findActivityNavController
 import io.github.muntashirakon.music.extensions.hide
 import io.github.muntashirakon.music.extensions.show
 import io.github.muntashirakon.music.extensions.whichFragment
@@ -26,17 +38,12 @@ import io.github.muntashirakon.music.helper.MusicProgressViewUpdateHelper
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.model.lyrics.AbsSynchronizedLyrics
 import io.github.muntashirakon.music.model.lyrics.Lyrics
-import io.github.muntashirakon.music.repository.ArtistRepository
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_full.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.inject
 
 class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
     MusicProgressViewUpdateHelper.Callback {
-    private val artistRepository by inject<ArtistRepository>()
     private lateinit var lyricsLayout: FrameLayout
     private lateinit var lyricsLine1: TextView
     private lateinit var lyricsLine2: TextView
@@ -155,11 +162,10 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
     private fun setupArtist() {
         artistImage.setOnClickListener {
             mainActivity.collapsePanel()
-            findActivityNavController(R.id.fragment_container)
-                .navigate(
-                    R.id.artistDetailsFragment,
-                    bundleOf(EXTRA_ARTIST_ID to MusicPlayerRemote.currentSong.artistId)
-                )
+            findNavController().navigate(
+                R.id.artistDetailsFragment,
+                bundleOf(EXTRA_ARTIST_ID to MusicPlayerRemote.currentSong.artistId),
+            )
         }
     }
 
@@ -222,19 +228,16 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full),
     }
 
     private fun updateArtistImage() {
-        lifecycleScope.launch {
-            val artist = artistRepository.artist(MusicPlayerRemote.currentSong.artistId)
-            withContext(Dispatchers.Main) {
+        libraryViewModel.artist(MusicPlayerRemote.currentSong.artistId)
+            .observe(viewLifecycleOwner, { artist ->
                 ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
                     .generatePalette(requireContext())
                     .build()
                     .into(object : RetroMusicColoredTarget(artistImage) {
                         override fun onColorReady(colors: MediaNotificationProcessor) {
-
                         }
                     })
-            }
-        }
+            })
     }
 
     override fun onQueueChanged() {

@@ -90,6 +90,7 @@
         <menu></menu>
     </item>
     <item
+        android:orderInCategory="10"
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/action_settings"

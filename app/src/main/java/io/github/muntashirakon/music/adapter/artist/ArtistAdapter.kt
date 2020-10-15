@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.adapter.artist
 
 import android.content.res.ColorStateList
@@ -8,31 +22,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity
-import com.bumptech.glide.Glide
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
 import io.github.muntashirakon.music.extensions.hide
-import io.github.muntashirakon.music.fragments.artists.ArtistClickListener
 import io.github.muntashirakon.music.glide.ArtistGlideRequest
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
 import io.github.muntashirakon.music.helper.menu.SongsMenuHelper
-import io.github.muntashirakon.music.interfaces.CabHolder
+import io.github.muntashirakon.music.interfaces.IArtistClickListener
+import io.github.muntashirakon.music.interfaces.ICabHolder
 import io.github.muntashirakon.music.model.Artist
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import me.zhanghai.android.fastscroll.PopupTextProvider
+import com.bumptech.glide.Glide
 import java.util.*
+import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class ArtistAdapter(
     val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
-    cabHolder: CabHolder?,
-    private val artistClickListener: ArtistClickListener
+    val ICabHolder: ICabHolder?,
+    val IArtistClickListener: IArtistClickListener
 ) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(
-    activity, cabHolder, R.menu.menu_media_selection
+    activity, ICabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
 
     init {
@@ -45,7 +59,7 @@ class ArtistAdapter(
     }
 
     override fun getItemId(position: Int): Long {
-        return dataSet[position].id.toLong()
+        return dataSet[position].id
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -107,7 +121,8 @@ class ArtistAdapter(
     }
 
     override fun onMultipleItemAction(
-        menuItem: MenuItem, selection: List<Artist>
+        menuItem: MenuItem,
+        selection: List<Artist>
     ) {
         SongsMenuHelper.handleMenuClick(activity, getSongList(selection), menuItem.itemId)
     }
@@ -140,11 +155,8 @@ class ArtistAdapter(
                 toggleChecked(layoutPosition)
             } else {
                 image?.let {
-                    ViewCompat.setTransitionName(
-                        it,
-                        activity.getString(R.string.transition_artist_image)
-                    )
-                    artistClickListener.onArtist(dataSet[layoutPosition].id, it)
+                    ViewCompat.setTransitionName(itemView, "album")
+                    IArtistClickListener.onArtist(dataSet[layoutPosition].id, itemView)
                 }
             }
         }

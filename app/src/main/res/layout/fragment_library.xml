@@ -28,10 +28,10 @@
                 tools:ignore="UnusedAttribute">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/appNameText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:id="@+id/appNameText"
                     android:textAppearance="@style/TextViewHeadline6"
                     android:textStyle="bold" />
             </androidx.appcompat.widget.Toolbar>
@@ -48,7 +48,5 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        app:navGraph="@navigation/library_graph" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

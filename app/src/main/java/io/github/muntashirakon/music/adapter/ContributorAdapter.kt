@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.adapter
 
 import android.app.Activity
@@ -59,6 +73,11 @@ class ContributorAdapter(
         return contributors.size
     }
 
+    fun swapData(it: List<Contributor>) {
+        contributors = it
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.title)
         val text: TextView = itemView.findViewById(R.id.text)
@@ -68,7 +87,7 @@ class ContributorAdapter(
             title.text = contributor.name
             text.text = contributor.summary
             Glide.with(image.context)
-                .load(contributor.profileImage)
+                .load(contributor.image)
                 .error(R.drawable.ic_account)
                 .placeholder(R.drawable.ic_account)
                 .dontAnimate()

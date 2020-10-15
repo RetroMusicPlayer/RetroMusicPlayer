@@ -145,8 +145,9 @@
             android:text="New music mix"
             android:textAppearance="@style/TextViewNormal"
             android:textStyle="bold"
+            android:textSize="32sp"
             app:autoSizeMaxTextSize="32sp"
-            app:autoSizeMinTextSize="18sp"
+            app:autoSizeMinTextSize="24sp"
             app:autoSizeStepGranularity="1sp" />
     </com.google.android.material.card.MaterialCardView>
 

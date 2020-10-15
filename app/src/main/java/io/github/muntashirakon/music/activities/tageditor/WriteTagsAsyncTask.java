@@ -5,67 +5,54 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.os.Build;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.CannotWriteException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
+import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.images.Artwork;
 import org.jaudiotagger.tag.images.ArtworkFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import io.github.muntashirakon.music.R;
 import io.github.muntashirakon.music.misc.DialogAsyncTask;
 import io.github.muntashirakon.music.misc.UpdateToastMediaScannerCompletionListener;
+import io.github.muntashirakon.music.model.LoadingInfo;
 import io.github.muntashirakon.music.util.MusicUtil;
-import io.github.muntashirakon.music.util.SAFUtil;
 
-public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.LoadingInfo, Integer, String[]> {
+public class WriteTagsAsyncTask extends DialogAsyncTask<LoadingInfo, Integer, List<String>> {
 
-    private WeakReference<Activity> activity;
-
-    public WriteTagsAsyncTask(@NonNull Activity activity) {
-        super(activity);
-        this.activity = new WeakReference<>(activity);
-    }
-
-    @NonNull
-    @Override
-    protected Dialog createDialog(@NonNull Context context) {
-
-        return new MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.saving_changes)
-                .setCancelable(false)
-                .setView(R.layout.loading)
-                .create();
+    public WriteTagsAsyncTask(Context context) {
+        super(context);
     }
 
     @Override
-    protected String[] doInBackground(LoadingInfo... params) {
+    protected List<String> doInBackground(LoadingInfo... params) {
         try {
             LoadingInfo info = params[0];
 
             Artwork artwork = null;
             File albumArtFile = null;
-            if (info.artworkInfo != null && info.artworkInfo.getArtwork() != null) {
+            if (info.getArtworkInfo() != null && info.getArtworkInfo().getArtwork() != null) {
                 try {
                     albumArtFile = MusicUtil.INSTANCE.createAlbumArtFile().getCanonicalFile();
-                    info.artworkInfo.getArtwork()
-                            .compress(Bitmap.CompressFormat.PNG, 0, new FileOutputStream(albumArtFile));
+                    info.getArtworkInfo().getArtwork().compress(Bitmap.CompressFormat.PNG, 0, new FileOutputStream(albumArtFile));
                     artwork = ArtworkFactory.createArtworkFromFile(albumArtFile);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -75,21 +62,14 @@ public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.Loadi
             int counter = 0;
             boolean wroteArtwork = false;
             boolean deletedArtwork = false;
-            for (String filePath : info.filePaths) {
-                publishProgress(++counter, info.filePaths.size());
+            for (String filePath : info.getFilePaths()) {
+                publishProgress(++counter, info.getFilePaths().size());
                 try {
-                    Uri safUri = null;
-                    if (filePath.contains(SAFUtil.SEPARATOR)) {
-                        String[] fragments = filePath.split(SAFUtil.SEPARATOR);
-                        filePath = fragments[0];
-                        safUri = Uri.parse(fragments[1]);
-                    }
-
                     AudioFile audioFile = AudioFileIO.read(new File(filePath));
                     Tag tag = audioFile.getTagOrCreateAndSetDefault();
 
-                    if (info.fieldKeyValueMap != null) {
-                        for (Map.Entry<FieldKey, String> entry : info.fieldKeyValueMap.entrySet()) {
+                    if (info.getFieldKeyValueMap() != null) {
+                        for (Map.Entry<FieldKey, String> entry : info.getFieldKeyValueMap().entrySet()) {
                             try {
                                 tag.setField(entry.getKey(), entry.getValue());
                             } catch (Exception e) {
@@ -98,8 +78,8 @@ public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.Loadi
                         }
                     }
 
-                    if (info.artworkInfo != null) {
-                        if (info.artworkInfo.getArtwork() == null) {
+                    if (info.getArtworkInfo() != null) {
+                        if (info.getArtworkInfo().getArtwork() == null) {
                             tag.deleteArtworkField();
                             deletedArtwork = true;
                         } else if (artwork != null) {
@@ -109,10 +89,8 @@ public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.Loadi
                         }
                     }
 
-                    Activity activity = this.activity.get();
-                    SAFUtil.write(activity, audioFile, safUri);
-
-                } catch (@NonNull Exception e) {
+                    audioFile.commit();
+                } catch (@NonNull CannotReadException | IOException | CannotWriteException | TagException | ReadOnlyFileException | InvalidAudioFrameException e) {
                     e.printStackTrace();
                 }
             }
@@ -120,24 +98,13 @@ public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.Loadi
             Context context = getContext();
             if (context != null) {
                 if (wroteArtwork) {
-                    MusicUtil.INSTANCE.insertAlbumArt(context, info.artworkInfo.getAlbumId(), albumArtFile.getPath());
+                    MusicUtil.INSTANCE.insertAlbumArt(context, info.getArtworkInfo().getAlbumId(), albumArtFile.getPath());
                 } else if (deletedArtwork) {
-                    MusicUtil.INSTANCE.deleteAlbumArt(context, info.artworkInfo.getAlbumId());
+                    MusicUtil.INSTANCE.deleteAlbumArt(context, info.getArtworkInfo().getAlbumId());
                 }
             }
 
-            Collection<String> paths = info.filePaths;
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-                paths = new ArrayList<>(info.filePaths.size());
-                for (String path : info.filePaths) {
-                    if (path.contains(SAFUtil.SEPARATOR)) {
-                        path = path.split(SAFUtil.SEPARATOR)[0];
-                    }
-                    paths.add(path);
-                }
-            }
-
-            return paths.toArray(new String[paths.size()]);
+            return info.getFilePaths();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -145,48 +112,40 @@ public class WriteTagsAsyncTask extends DialogAsyncTask<WriteTagsAsyncTask.Loadi
     }
 
     @Override
-    protected void onCancelled(String[] toBeScanned) {
-        super.onCancelled(toBeScanned);
-        scan(toBeScanned);
-    }
-
-    @Override
-    protected void onPostExecute(String[] toBeScanned) {
+    protected void onPostExecute(List<String> toBeScanned) {
         super.onPostExecute(toBeScanned);
         scan(toBeScanned);
     }
 
     @Override
+    protected void onCancelled(List<String> toBeScanned) {
+        super.onCancelled(toBeScanned);
+        scan(toBeScanned);
+    }
+
+    private void scan(List<String> toBeScanned) {
+        Context context = getContext();
+        if (toBeScanned == null || toBeScanned.isEmpty()) {
+            Log.i("scan", "scan: Empty");
+            Toast.makeText(context, "Scan file from folder", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        MediaScannerConnection.scanFile(context, toBeScanned.toArray(new String[0]), null, context instanceof Activity ? new UpdateToastMediaScannerCompletionListener((Activity) context, toBeScanned) : null);
+    }
+
+    @Override
+    protected Dialog createDialog(@NonNull Context context) {
+        return new MaterialDialog.Builder(context)
+                .title(R.string.saving_changes)
+                .cancelable(false)
+                .progress(false, 0)
+                .build();
+    }
+
+    @Override
     protected void onProgressUpdate(@NonNull Dialog dialog, Integer... values) {
         super.onProgressUpdate(dialog, values);
-        //((MaterialDialog) dialog).setMaxProgress(values[1]);
-        //((MaterialDialog) dialog).setProgress(values[0]);
-    }
-
-    private void scan(String[] toBeScanned) {
-        Activity activity = this.activity.get();
-        if (activity != null) {
-            MediaScannerConnection.scanFile(activity, toBeScanned, null,
-                    new UpdateToastMediaScannerCompletionListener(activity, toBeScanned));
-        }
-    }
-
-    public static class LoadingInfo {
-
-        @Nullable
-        final Map<FieldKey, String> fieldKeyValueMap;
-
-        final Collection<String> filePaths;
-
-        @Nullable
-        private AbsTagEditorActivity.ArtworkInfo artworkInfo;
-
-        public LoadingInfo(Collection<String> filePaths,
-                           @Nullable Map<FieldKey, String> fieldKeyValueMap,
-                           @Nullable AbsTagEditorActivity.ArtworkInfo artworkInfo) {
-            this.filePaths = filePaths;
-            this.fieldKeyValueMap = fieldKeyValueMap;
-            this.artworkInfo = artworkInfo;
-        }
+        ((MaterialDialog) dialog).setMaxProgress(values[1]);
+        ((MaterialDialog) dialog).setProgress(values[0]);
     }
 }

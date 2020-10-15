@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
-
 package io.github.muntashirakon.music.appshortcuts
 
 import android.annotation.TargetApi
@@ -32,16 +32,16 @@ class DynamicShortcutManager(private val context: Context) {
         this.context.getSystemService(ShortcutManager::class.java)
 
     private val defaultShortcuts: List<ShortcutInfo>
-        get() = Arrays.asList(
+        get() = listOf(
             ShuffleAllShortcutType(context).shortcutInfo,
             TopTracksShortcutType(context).shortcutInfo,
             LastAddedShortcutType(context).shortcutInfo
         )
 
     fun initDynamicShortcuts() {
-        //if (shortcutManager.dynamicShortcuts.size == 0) {
+        // if (shortcutManager.dynamicShortcuts.size == 0) {
         shortcutManager.dynamicShortcuts = defaultShortcuts
-        //}
+        // }
     }
 
     fun updateDynamicShortcuts() {
@@ -58,8 +58,12 @@ class DynamicShortcutManager(private val context: Context) {
             icon: Icon,
             intent: Intent
         ): ShortcutInfo {
-            return ShortcutInfo.Builder(context, id).setShortLabel(shortLabel)
-                .setLongLabel(longLabel).setIcon(icon).setIntent(intent).build()
+            return ShortcutInfo.Builder(context, id)
+                .setShortLabel(shortLabel)
+                .setLongLabel(longLabel)
+                .setIcon(icon)
+                .setIntent(intent)
+                .build()
         }
 
         fun reportShortcutUsed(context: Context, shortcutId: String) {

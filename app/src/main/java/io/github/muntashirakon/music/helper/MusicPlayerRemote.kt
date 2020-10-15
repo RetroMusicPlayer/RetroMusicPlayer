@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
-
 package io.github.muntashirakon.music.helper
 
 import android.annotation.TargetApi
@@ -25,15 +25,14 @@ import android.os.IBinder
 import android.provider.DocumentsContract
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.repository.SongRepository
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.PreferenceUtil
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import java.io.File
 import java.util.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 object MusicPlayerRemote : KoinComponent {
     val TAG: String = MusicPlayerRemote::class.java.simpleName
@@ -41,7 +40,6 @@ object MusicPlayerRemote : KoinComponent {
     var musicService: MusicService? = null
 
     private val songRepository by inject<SongRepository>()
-
 
     @JvmStatic
     val isPlaying: Boolean
@@ -306,7 +304,7 @@ object MusicPlayerRemote : KoinComponent {
             }
             Toast.makeText(
                 musicService,
-                musicService!!.resources.getString(R.string.added_title_to_playing_queue),
+                musicService!!.resources.getString(io.github.muntashirakon.music.R.string.added_title_to_playing_queue),
                 Toast.LENGTH_SHORT
             ).show()
             return true
@@ -322,8 +320,8 @@ object MusicPlayerRemote : KoinComponent {
                 openQueue(songs, 0, false)
             }
             val toast =
-                if (songs.size == 1) musicService!!.resources.getString(R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
-                    R.string.added_x_titles_to_playing_queue,
+                if (songs.size == 1) musicService!!.resources.getString(io.github.muntashirakon.music.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
+                    io.github.muntashirakon.music.R.string.added_x_titles_to_playing_queue,
                     songs.size
                 )
             Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
@@ -343,7 +341,7 @@ object MusicPlayerRemote : KoinComponent {
             }
             Toast.makeText(
                 musicService,
-                musicService!!.resources.getString(R.string.added_title_to_playing_queue),
+                musicService!!.resources.getString(io.github.muntashirakon.music.R.string.added_title_to_playing_queue),
                 Toast.LENGTH_SHORT
             ).show()
             return true
@@ -359,8 +357,8 @@ object MusicPlayerRemote : KoinComponent {
                 openQueue(songs, 0, false)
             }
             val toast =
-                if (songs.size == 1) musicService!!.resources.getString(R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
-                    R.string.added_x_titles_to_playing_queue,
+                if (songs.size == 1) musicService!!.resources.getString(io.github.muntashirakon.music.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
+                    io.github.muntashirakon.music.R.string.added_x_titles_to_playing_queue,
                     songs.size
                 )
             Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
@@ -443,7 +441,7 @@ object MusicPlayerRemote : KoinComponent {
             if (songs != null && songs.isNotEmpty()) {
                 openQueue(songs, 0, true)
             } else {
-                //TODO the file is not listed in the media store
+                // TODO the file is not listed in the media store
                 println("The file is not listed in the media store")
             }
         }

@@ -1,0 +1,30 @@
+apply plugin: "com.diffplug.gradle.spotless"
+spotless {
+    java {
+        target "src/*.java"
+        trimTrailingWhitespace()
+        removeUnusedImports()
+        googleJavaFormat()
+        endWithNewline()
+    }
+    kotlin {
+        target "src/*.kt"
+        ktlint().userData(['indent_size': '4', 'continuation_indent_size': '2', 'disabled_rules': 'no-wildcard-imports'])
+        licenseHeaderFile '../spotless.license.kt'
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    format 'misc', {
+        target '**/*.gradle', '**/*.md', '**/.gitignore'
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    format 'xml', {
+        target 'src/*.xml'
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}

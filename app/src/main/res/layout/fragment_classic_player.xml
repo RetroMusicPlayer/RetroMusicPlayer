@@ -12,15 +12,22 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-         <fragment
-             android:id="@+id/playerAlbumCoverFragment"
-             android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
-             android:layout_width="0dp"
-             android:layout_height="0dp"
-             app:layout_constraintDimensionRatio="1:1"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout
+            android:id="@+id/albumCoverContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <fragment
+                android:id="@+id/playerAlbumCoverFragment"
+                android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_album_cover" />
+        </FrameLayout>
 
 
         <View
@@ -60,9 +67,10 @@
             layout="@layout/fragment_classic_controls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/playerAlbumCoverFragment" />
+            app:layout_constraintTop_toBottomOf="@id/albumCoverContainer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -70,10 +78,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
+        android:theme="@style/TopCornerCardView"
         app:behavior_hideable="false"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="12dp"
-        app:layout_behavior="io.github.muntashirakon.music.RetroBottomSheetBehavior">
+        app:cardElevation="24dp"
+        app:layout_behavior="io.github.muntashirakon.music.RetroBottomSheetBehavior"
+        tools:peekHeight="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,7 +103,7 @@
                 android:paddingTop="16dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:textAppearance="@style/TextViewSubtitle1"
+                android:textAppearance="@style/TextViewHeadline6"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textStyle="bold"
                 tools:text="@tools:sample/lorem/random" />

@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.base
 
 import android.content.ContentUris
@@ -27,30 +41,27 @@ import io.github.muntashirakon.music.db.toSongEntity
 import io.github.muntashirakon.music.dialogs.*
 import io.github.muntashirakon.music.extensions.hide
 import io.github.muntashirakon.music.extensions.whichFragment
-import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
-import io.github.muntashirakon.music.interfaces.PaletteColorHolder
+import io.github.muntashirakon.music.interfaces.IPaletteColorHolder
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.model.lyrics.Lyrics
 import io.github.muntashirakon.music.repository.RealRepository
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.*
+import java.io.FileNotFoundException
 import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
-    Toolbar.OnMenuItemClickListener, PaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
+    Toolbar.OnMenuItemClickListener, IPaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
 
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
-    protected val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onMenuItemClick(
         item: MenuItem
@@ -161,7 +172,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         }
         return false
     }
-
 
     abstract fun playerToolbar(): Toolbar?
 

@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2020 Hemanth Savarla.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ */
 package io.github.muntashirakon.music.fragments.search
 
 import android.content.ActivityNotFoundException
@@ -8,22 +22,20 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
-import com.google.android.material.textfield.TextInputEditText
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.SearchAdapter
 import io.github.muntashirakon.music.extensions.accentColor
+import io.github.muntashirakon.music.extensions.dipToPix
 import io.github.muntashirakon.music.extensions.showToast
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_search.*
-import org.koin.android.ext.android.inject
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -33,39 +45,37 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         const val REQ_CODE_SPEECH_INPUT = 9001
     }
 
-    private val viewModel: SearchViewModel by inject()
     private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainActivity.setBottomBarVisibility(View.GONE)
         mainActivity.setSupportActionBar(toolbar)
-        mainActivity.hideBottomBarVisibility(false)
-
+        libraryViewModel.clearSearchResult()
         setupRecyclerView()
-        keyboardPopup.accentColor()
         searchView.addTextChangedListener(this)
         voiceSearch.setOnClickListener { startMicSearch() }
         clearText.setOnClickListener { searchView.clearText() }
-        keyboardPopup.setOnClickListener {
-            val inputManager =
-                getSystemService<InputMethodManager>(
+        keyboardPopup.apply {
+            accentColor()
+            setOnClickListener {
+                val inputManager = getSystemService(
                     requireContext(),
                     InputMethodManager::class.java
                 )
-            inputManager?.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT)
+                inputManager?.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT)
+            }
         }
-
         if (savedInstanceState != null) {
             query = savedInstanceState.getString(QUERY)
         }
-
-        viewModel.getSearchResult().observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getSearchResult().observe(viewLifecycleOwner, {
             showData(it)
         })
     }
 
-    private fun showData(data: MutableList<Any>) {
+    private fun showData(data: List<Any>) {
         if (data.isNotEmpty()) {
             searchAdapter.swapDataSet(data)
         } else {
@@ -73,13 +83,14 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         }
     }
 
-
     private fun setupRecyclerView() {
-        searchAdapter = SearchAdapter(requireActivity() as AppCompatActivity, emptyList())
+        searchAdapter = SearchAdapter(requireActivity(), emptyList())
         searchAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
                 empty.isVisible = searchAdapter.itemCount < 1
+                val height = dipToPix(52f)
+                recyclerView.setPadding(0, 0, 0, height.toInt())
             }
         })
         recyclerView.apply {
@@ -103,11 +114,9 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     }
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
     }
 
     private fun search(query: String) {
@@ -115,7 +124,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         TransitionManager.beginDelayedTransition(appBarLayout)
         voiceSearch.isGone = query.isNotEmpty()
         clearText.isVisible = query.isNotEmpty()
-        viewModel.search(query)
+        libraryViewModel.search(query)
     }
 
     private fun startMicSearch() {
