@@ -18,8 +18,8 @@
     <string name="action_go_to_genre">Aller au genre</string>
     <string name="action_go_to_start_directory">Aller au dossier de départ</string>
     <string name="action_grant">Accorder</string>
-    <string name="action_grid_size">Taille de la grille</string>
-    <string name="action_grid_size_land">Taille de la grille (paysage)</string>
+    <string name="action_grid_size">Taille de l'affichage</string>
+    <string name="action_grid_size_land">Taille de l'affichage (paysage)</string>
     <string name="action_new_playlist">Nouvelle liste de lecture…</string>
     <string name="action_next">Suivant</string>
     <string name="action_play">Lecture</string>
@@ -495,7 +495,7 @@
     <string name="virtualizer">Virtualisateur</string>
     <string name="volume">Volume</string>
     <string name="web_search">Recherche internet</string>
-    <string name="welcome">Accueillir,</string>
+    <string name="welcome">Bonjour,</string>
     <string name="what_do_you_want_to_share">Que souhaitez-vous partager ?</string>
     <string name="whats_new">Quoi de neuf</string>
     <string name="window">Fenêtre</string>
