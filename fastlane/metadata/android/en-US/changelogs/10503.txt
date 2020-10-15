@@ -1,0 +1,3 @@
+- Fixed crash on clicking app shortcuts
+- Re-added multiple selection
+- Removed billing activity

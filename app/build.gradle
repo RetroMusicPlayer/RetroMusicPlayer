@@ -125,7 +125,6 @@ dependencies {
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     implementation 'com.github.kabouzeid:recyclerview-fastscroll:1.9-kmod'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
-    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:1.6'
     implementation 'com.github.dhaval2404:imagepicker:1.7.1'
