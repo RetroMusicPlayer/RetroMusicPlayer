@@ -42,51 +42,44 @@
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/container"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:transitionGroup="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/item_list" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
+
+    <LinearLayout
+        android:id="@android:id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/emptyEmoji"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            android:transitionGroup="true"
-            app:layout_dodgeInsetEdges="bottom"
-            tools:listitem="@layout/item_list" />
+            android:layout_marginBottom="16dp"
+            android:text="@string/empty_text_emoji"
+            android:textAppearance="@style/TextViewHeadline3" />
 
-        <LinearLayout
-            android:id="@android:id/empty"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/emptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone"
-            tools:visibility="visible">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/emptyEmoji"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="@string/empty_text_emoji"
-                android:textAppearance="@style/TextViewHeadline3" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/emptyText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/empty"
-                android:textAppearance="@style/TextViewHeadline5"
-                android:textColor="?android:attr/textColorSecondary"
-                tools:visibility="visible" />
-        </LinearLayout>
-    </FrameLayout>
-
+            android:text="@string/empty"
+            android:textAppearance="@style/TextViewHeadline5"
+            android:textColor="?android:attr/textColorSecondary"
+            tools:visibility="visible" />
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
