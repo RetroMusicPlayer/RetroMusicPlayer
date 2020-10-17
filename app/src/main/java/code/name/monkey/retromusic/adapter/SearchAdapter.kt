@@ -18,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
@@ -138,6 +139,7 @@ class SearchAdapter(
             itemView.setOnLongClickListener(null)
             imageTextContainer?.isInvisible = true
             if (itemViewType == SONG) {
+                imageTextContainer?.isGone = true
                 menu?.visibility = View.VISIBLE
                 menu?.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
                     override val song: Song
