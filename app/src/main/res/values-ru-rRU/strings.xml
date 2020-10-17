@@ -12,7 +12,6 @@
     <string name="action_add_to_playlist">Добавить в плейлист</string>
 
     <string name="action_clear_playing_queue">Очистить очередь проигрывания</string>
-    <string name="action_clear_playlist">Очистить плейлист</string>
 
     <string name="action_cycle_repeat">Режим повтора цикла</string>
 
@@ -69,8 +68,6 @@
 
     <string name="action_sort_order">Порядок сортировки</string>
 
-    <string name="action_album_artists_only">Только альбомы исполнителей</string>
-
     <string name="action_tag_editor">Редактор тегов</string>
 
     <string name="action_toggle_favorite">Показать избранное</string>
@@ -80,13 +77,7 @@
 
     <string name="add_action">Добавить</string>
 
-    <string name="add_lyrics">Добавить тест песни</string>
-	
-    <string name="add_photo">Добавить \nфото</string>
-
     <string name="add_playlist_title">"Добавить в плейлист"</string>
-
-    <string name="add_time_framed_lryics">Довавить текст песни</string>
 
     <string name="added_title_to_playing_queue">"В очередь добавлен 1 трек"</string>
 
@@ -95,8 +86,6 @@
     <string name="album">Альбом</string>
 
     <string name="album_artist">Исполнитель альбома</string>
-
-    <string name="album_or_artist_empty">Трек или альбом отсутствуют.</string>
 
     <string name="albums">Альбомы</string>
 
@@ -123,12 +112,6 @@
 
     <string name="auto">Авто</string>
 
-    <string name="base_color_theme">Основная цветовая тема</string>
-
-    <string name="bass_boost">Усиление басов</string>
-
-    <string name="bio">Биография</string>
-
     <string name="biography">Биография</string>
 
     <string name="black_theme_name">Чёрная</string>
@@ -151,7 +134,6 @@
     <string name="bug_report_no_title">Пожалуйста, введите название отчета о проблеме</string>
     <string name="bug_report_no_username">Пожалуйста, введите корректно ваше имя пользователя GitHub</string>
     <string name="bug_report_summary">Произошла непредвиденная ошибка. Извините, если это продолжится то \"Очистите данные приложения\" или отправьте сообщение на электронную почту </string>
-    <string name="bug_report_uploading">Загрузка отчета на GitHub…</string>
     <string name="bug_report_use_account">Отправить с помощью учетной записи GitHub</string>
 
     <string name="buy_now">Купить сейчас</string>
@@ -160,23 +142,17 @@
 
     <string name="card">Карточка</string>
 
-    <string name="card_circular_style">Круговой</string>
-
     <string name="card_color_style">Цветная карточка</string>
 
     <string name="card_style">Карточка</string>
 
     <string name="card_square">Квадратная Карточка</string>
 
-    <string name="carousal">Карусель</string>
-
     <string name="carousal_effect_on_now_playing_screen">Эффект карусели на экране воспроизведения</string>
 
     <string name="cascading">Каскадный</string>
 
-    <string name="cast">Транслировать</string>
-
-     <string name="changelog">Список изменений</string>
+    <string name="changelog">Список изменений</string>
 
     <string name="changelog_summary">Список изменений находится на канале Telegram</string>
 
@@ -188,20 +164,11 @@
 
     <string name="clear_action">Очистить</string>
 
-    <string name="clear_app_data">Очистить данные приложения</string>
-
     <string name="clear_blacklist">Очистить черный список</string>
 
     <string name="clear_playing_queue">Очистить очередь</string>
 
-    <string name="clear_playlist_title">Очистить плейлист</string>
-    <string name="clear_playlist_x"><![CDATA[Очистить плейлист <b>%1$s</b>? Это действие отменить невозможно!]]></string>
-
-    <string name="close_notification">Закрыть</string>
-
     <string name="color">Цветная</string>
-
-    <string name="color_theme_name">Цвет</string>
 
     <string name="colors">Цвета</string>
 
@@ -224,8 +191,6 @@
 
     <string name="dark_theme_name">Тёмная</string>
 
-    <string name="default_hint">Нет текста песни</string>
-
     <string name="delete_playlist_title">Удалить плейлист</string>
     <string name="delete_playlist_x"><![CDATA[Удалить плейлист <b>%1$s</b>?]]></string>
 
@@ -239,8 +204,6 @@
     <string name="delete_x_playlists"><![CDATA[Удалить <b>%1$d</b> плейлистов?]]></string>
     <string name="delete_x_songs"><![CDATA[Удалить <b>%1$d</b> песен?]]></string>
     <string name="deleted_x_songs">Удалено %1$d песен.</string>
-
-    <string name="deleting_songs">Удаление песен</string>
 
     <string name="depth">Глубина</string>
 
@@ -261,19 +224,11 @@
 
     <string name="donation_header">Купить мне:</string>
 
-    <string name="download_from_last_fm">Загрузить с Last.fm</string>
-
     <string name="drive_mode">Режим вождения</string>
-
-    <string name="edit">Редактировать</string>
-
-    <string name="edit_cover">Изменить обложку</string>
 
     <string name="empty">Пусто</string>
 
     <string name="equalizer">Эквалайзер</string>
-
-    <string name="error">Ошибка</string>
 
     <string name="faq">ЧаВО</string>
 
@@ -305,8 +260,6 @@
     <string name="genres">Жанры</string>
 
     <string name="git_hub_summary">Развивайте проект на GitHub</string>
-
-    <string name="google_plus_community">Присоединяйтесь к сообществу GooglePlus, где вы можете попросить о помощи или следить за обновлениями Retro Music</string>
 
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
@@ -359,10 +312,6 @@
 
     <string name="last_song">Последняя песня</string>
 
-    <string name="lets_play_something">Давайте послушаем немного музыки</string>
-
-    <string name="library">Библиотека</string>
-
     <string name="library_categories">Разделы библиотеки</string>
 
     <string name="licenses">Лицензии</string>
@@ -393,11 +342,7 @@
 
     <string name="never">Никогда</string>
 
-    <string name="new_banner_photo">Новое фото баннера</string>
-
     <string name="new_playlist_title">Новый плейлист</string>
-
-    <string name="new_profile_photo">Новое фото профиля</string>
 
     <string name="new_start_directory">%s новая стартовая директория.</string>
 
@@ -429,8 +374,6 @@
 
     <string name="normal_lyrics">Обычный текст</string>
 
-    <string name="normal_style">Обычный</string>
-
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> не найден в хранилище медиа.]]></string>
 
     <string name="nothing_to_scan">Нет файлов для сканирования.</string>
@@ -455,8 +398,6 @@
 
     <string name="past_three_months">Последние 3 месяца</string>
 
-    <string name="paste_lyrics_here">Вставьте тест песни сюда</string>
-
     <string name="peak">Панель снизу</string>
 
     <string name="permission_external_storage_denied">Разрешение для доступа у внешнему хранилищу не получено.</string>
@@ -469,8 +410,6 @@
 
     <string name="pick_from_local_storage">Выбрать из хранилища</string>
 
-    <string name="pick_image_intent_text">Выбрать изображение</string>
-
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Подпишитесь на страницу Retro Music в Pinterest</string>
 
@@ -479,21 +418,14 @@
     <string name="playing_notification_description">Уведомление о песне предоставляет действия для воспроизведения/паузы и т.д.</string>
     <string name="playing_notification_name">Уведомления воспроизведения</string>
 
-    <string name="playlist_empty_text">Пустой плейлист</string>
-
     <string name="playlist_is_empty">Плейлист пуст</string>
 
     <string name="playlist_name_empty">Название плейлиста</string>
 
     <string name="playlists">Плейлисты</string>
 
-    <string name="pref_album_detail_style">Стиль деталей альбома</string>
-
     <string name="pref_blur_amount_summary">Степень размытия в соответствующих темах; чем ниже, тем быстрее работает устройство</string>
     <string name="pref_blur_amount_title">Степень размытия</string>
-
-    <string name="pref_dialog_corner_summary">Регулировка углов нижней панели</string>
-    <string name="pref_dialog_corner_title">Диалоговое окно</string>
 
     <string name="pref_filter_song_summary">Фильтровать песни по длине</string>
     <string name="pref_filter_song_title">Фильтровать песни по длительности</string>
@@ -514,12 +446,7 @@
     <string name="pref_keep_screen_on_summary">Имейте в виду, что включение этой функции может повлиять на заряд батареи</string>
     <string name="pref_keep_screen_on_title">Оставить экран включенным</string>
 
-    <string name="pref_now_playing_screen_summary">Нажмите, чтобы открыть экран воспроизведения с прозрачной навигации или проведите чтобы открыть без прозрачной навигации</string>
-    <string name="pref_now_playing_screen_title">Нажмите или Проведите</string>
-
-    <string name="pref_snow_fall_title">Эффект снегопада</string>
-
-	<string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущей песни в качестве обоев на экране блокировки.</string>
+    <string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущей песни в качестве обоев на экране блокировки.</string>
     <string name="pref_summary_audio_ducking">Снизить громкость воспроизведения когда приходит звуковое уведомление</string>
     <string name="pref_summary_blacklist">Содержимое черного списка скрыто из вашей библиотеки.</string>
     <string name="pref_summary_bluetooth_playback">Начать воспроизведение сразу же после подключения Bluetooth-устройства</string>
@@ -528,21 +455,16 @@
     <string name="pref_summary_classic_notification">Использовать классический дизайн уведомлений.</string>
     <string name="pref_summary_colored_app">Цвет кнопок фона и кнопок управления изменяется в соответствии с обложкой альбома с экрана воспроизведения</string>
     <string name="pref_summary_colored_app_shortcuts">Окрашивает ярлыки в основной цвет. Каждый раз, когда вы меняете цвет, вкл-выкл эту настройку, чтобы изменение вступило в силу</string>
-    <string name="pref_summary_colored_navigation_bar">Окрашивает панель навигации в главный цвет</string>
     <string name="pref_summary_colored_notification">"Окрашивает уведомление в доминирубщий цвет обложки альбома"</string>
     <string name="pref_summary_desaturated_color">Согласно Material Design в темном режиме цвета должны быть немного обесцвечены</string>
-    <string name="pref_summary_dominant_color">Наиболее доминирующий цвет будет выбран из обложки альбома или исполнителя</string>
     <string name="pref_summary_extra_controls">Добавить дополнительные элементы управления для мини-плеера</string>
     <string name="pref_summary_extra_song_info">Показать дополнительную информацию о песне, такую как формат файла, битрейт и частота</string>
     <string name="pref_summary_gapless_playback">"Может вызвать проблемы с воспроизведением на некоторых устройствах."</string>
-    <string name="pref_summary_genre_toggle">Включить вкладку жанр</string>
     <string name="pref_summary_home_banner">Показывать кнопку Домой</string>
     <string name="pref_summary_ignore_media_store_artwork">Может повысить качество обложки альбома, но привести к более медленной загрузки изображения. Включите это только в том случае, если у вас есть картинки с низким разрешением</string>
     <string name="pref_summary_library_categories">Настроить вид и порядок категорий в библиотеке.</string>
     <string name="pref_summary_lock_screen">Используйте собственный экран блокировки Retro Music</string>
     <string name="pref_summary_open_source_licences">Сведения о лицензии для программного обеспечения с открытым исходным кодом</string>
-    <string name="pref_summary_round_corners">Закруглить углы в приложении</string>
-    <string name="pref_summary_tab_titles">Включить заголовки для вкладок нижней панели навигации</string>
     <string name="pref_summary_toggle_full_screen">Полноэкранный режим</string>
     <string name="pref_summary_toggle_headset">Начать воспроизведение музыки сразу после подключения наушников</string>
     <string name="pref_summary_toggle_shuffle">Режим перемешивания выключится при проигрывании нового списка песен</string>
@@ -552,15 +474,12 @@
 	<string name="pref_title_album_art_on_lockscreen">Показать обложку альбома</string>
     <string name="pref_title_album_cover_style">Тема обложки альбома</string>
     <string name="pref_title_album_cover_transform">Стиль смены обложки альбома</string>
-    <string name="pref_title_album_grid_style">Сетка альбомов</string>
     <string name="pref_title_app_shortcuts">Цветные ярлыки</string>
-    <string name="pref_title_artist_grid_style">Сетка исполнителей</string>
     <string name="pref_title_audio_ducking">Уменьшить громкость при получении уведомлении</string>
     <string name="pref_title_auto_download_artist_images">Автозагрузка изображений исполнителя</string>
     <string name="pref_title_blacklist">Черный список</string>
     <string name="pref_title_bluetooth_playback">Воспроизведение при подключении Bluetooth</string>
     <string name="pref_title_blurred_album_art">Размытие обложки альбома</string>
-    <string name="pref_title_choose_equalizer">Выбрать эквалайзер</string>
     <string name="pref_title_classic_notification">Классический дизайн уведомлений</string>
     <string name="pref_title_colored_app">Адаптированный цвет</string>
     <string name="pref_title_colored_notification">Цветное уведомление</string>
@@ -569,29 +488,20 @@
     <string name="pref_title_extra_song_info">Информация о песне</string>
     <string name="pref_title_gapless_playback">Непрерывное воспроизведение</string>
     <string name="pref_title_general_theme">Тема приложения</string>
-    <string name="pref_title_genre_toggle">Показать вкладку жанра</string>
     <string name="pref_title_home_artist_grid_style">Сетка исполнителя на Главной странице</string>
     <string name="pref_title_home_album_grid_style">Сетка альбома на Главной странице</string>
 	<string name="pref_title_home_banner">Кнопка Домой</string>
     <string name="pref_title_ignore_media_store_artwork">Игнорировать обложки из хранилища</string>
     <string name="pref_title_last_added_interval">Дата последнего добавления плейлиста</string>
     <string name="pref_title_lock_screen">Полноэкранное управление</string>
-    <string name="pref_title_navigation_bar">Цветная панель навигации</string>
     <string name="pref_title_now_playing_screen_appearance">Тема экрана воспроизведения</string>
     <string name="pref_title_open_source_licences">Лицензии с открытым кодом</string>
-    <string name="pref_title_round_corners">Круглые углы</string>
     <string name="pref_title_tab_text_mode">Название нижних кнопок</string>
     <string name="pref_title_toggle_carousel_effect">Эффект карусели</string>
-    <string name="pref_title_toggle_dominant_color">Доминирующий цвет</string>
     <string name="pref_title_toggle_full_screen">Полноэкранное приложение</string>
-    <string name="pref_title_toggle_tab_titles">Заголовки</string>
     <string name="pref_title_toggle_toggle_headset">Автовоспроизведение</string>
     <string name="pref_title_toggle_toggle_shuffle">Режим перемешивания</string>
     <string name="pref_title_toggle_volume">Регулировка громкости</string>
-    <string name="pref_title_user_info">Информация о пользователе</string>
-
-    <string name="primary_color">Основной цвет</string>
-    <string name="primary_color_desc">Основной цвет темы, по умолчанию - серо-синий, теперь работает с темными цветами</string>
 
     <string name="pro">Pro</string>
 
@@ -600,8 +510,6 @@
     <string name="profile">Профиль</string>
 
     <string name="purchase">Купить</string>
-
-    <string name="purchase_summary">*Подумайте, прежде чем покупать, не просите возврата.</string>
 
     <string name="queue">Очередь</string>
 
@@ -615,13 +523,9 @@
 
     <string name="remove_action">Удалить</string>
 
-    <string name="remove_banner_photo">Удалить фотографию баннера</string>
-
     <string name="remove_cover">Удалить обложку</string>
 
     <string name="remove_from_blacklist">Удалить из черного списка</string>
-
-    <string name="remove_profile_photo">Удалить фотографию профиля</string>
 
     <string name="remove_song_from_playlist_title">Удалить песню из плейлиста</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Удалить песню <b>%1$s</b> из плейлиста?]]></string>
@@ -646,8 +550,6 @@
     <string name="restored_previous_purchases">Восстановленные предыдущие покупки.</string>
 
     <string name="restoring_purchase">Восстановление покупки ...</string>
-
-    <string name="retro_equalizer">Эквалайзер Retro Music</string>
 
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
@@ -686,21 +588,13 @@
 
     <string name="scrobbles_label">Скробблинг</string>
 
-    <string name="search_hint">Найдите свою библиотеку ...</string>
-
     <string name="select_all">Выбрать все</string>
 
-    <string name="select_banner_photo">Выбрать фото баннера</string>
-
     <string name="selected">Выбранная кнопка</string>
-
-    <string name="send_crash_log">Отправить лог ошибки</string>
 
     <string name="set">Установить</string>
 
     <string name="set_artist_image">Установить изображение исполнителя</string>
-
-    <string name="set_photo">Выбрать фото профиля</string>
 
     <string name="share_app">Поделиться приложением</string>
 
@@ -712,10 +606,6 @@
 
     <string name="sleep_timer_canceled">Таймер отключения отменен.</string>
     <string name="sleep_timer_set">Таймер сна установлен на %d минут.</string>
-
-    <string name="slide">Провести</string>
-
-    <string name="small">Маленький альбом</string>
 
     <string name="social">Социальный</string>
 
@@ -747,15 +637,11 @@
 
     <string name="suggestion_songs">Предложения</string>
 
-    <string name="summary_user_info">Просто покажите свое имя на главном экране</string>
-
     <string name="support_development">Поддержать разработку</string>
 
     <string name="swipe_to_unlock">Проведите, чтобы разблокировать</string>
 
     <string name="synced_lyrics">Синхронизируемый текст</string>
-
-    <string name="system_equalizer">Системный эквалайзер</string>
 
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -774,16 +660,6 @@
     <string name="tiny">Маленькая</string>
 
     <string name="title">Название</string>
-
-    <string name="title_dashboard">Панель приборов</string>
-
-    <string name="title_good_afternoon">Добрый день</string>
-    <string name="title_good_day">Добрый день</string>
-    <string name="title_good_evening">Добрый вечер</string>
-    <string name="title_good_morning">Доброе утро</string>
-    <string name="title_good_night">Доброй ночи</string>
-
-    <string name="title_user_info">Как тебя зовут</string>
 
     <string name="today">Сегодня</string>
 
@@ -818,8 +694,6 @@
 
     <string name="vertical_flip">Вертикальный поворт</string>
 
-    <string name="virtualizer">Виртуализация</string>
-
     <string name="volume">Громкость</string>
 
     <string name="web_search">Поиск в интернете</string>
@@ -845,17 +719,12 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Данные вашей учетной записи используются только для аутентификации.</string>
-    <string name="amount">Количество</string>
-    <string name="note">Примечание (необязательно)</string>
-    <string name="start_payment">Начать оплату</string>
     <string name="pref_title_expand_now_playing_panel">Показать экран воспроизведения</string>
     <string name="pref_summary_expand_now_playing_panel">Нажатие на уведомление будет показывать экран воспроизведения вместо домашнего экрана</string>
 
     <string name="tiny_card_style">Крошечная карточка</string>
     <string name="about_album_label">О программе %s</string>
     <string name="pref_language_name">Выберите язык</string>
-    <string name="translators">Переводчики</string>
-    <string name="translators_summary">Люди которые помогали переводить это приложение</string>
     <string name="try_retro_music_premium">Попробуйте Retro Music Premium</string>
     <string name="share_summary">Поделитесь приложением со своими друзьями и родственниками</string>
     <string name="help_summary">Нужна ещё помощь?</string>
@@ -872,24 +741,11 @@
         <item quantity="one">Альбом</item>
         <item quantity="other">Альбомы</item>
     </plurals>
-    <plurals name="numSongs">
-        <item quantity="one">%d Песня</item>
-        <item quantity="other">%d Песен</item>
-    </plurals>
-    <plurals name="numAlbums">
-        <item quantity="one">%d Альбом</item>
-        <item quantity="other">%d Альбомов</item>
-    </plurals>
-    <plurals name="numArtists">
-        <item quantity="one">%d Исполнитель</item>
-        <item quantity="other">%d исполнителей</item>
-    </plurals>
     <string name="done">Готов</string>
     <string name="import_playlist">Импорт плейлиста</string>
     <string name="import_playlist_message">Импортирует все плейлисты, перечисленные в Android Media Store с песнями, если плейлисты уже существуют, песни будут объединены.</string>
     <string name="import_label">Импорт</string>
     <string name="sort_order_num_songs">Колличество песен</string>
-    <string name="sort_order_asc">По возрастанию</string>
     <string name="sort_order_num_songs_desc">Количество композиций по убыванию</string>
 	<string name="permission_summary">Приложению требуется разрешение на доступ к внутренней памяти вашего устройства для воспроизведения музыки.</string>
     <string name="permission_title">Доступ к внутренней памяти</string>

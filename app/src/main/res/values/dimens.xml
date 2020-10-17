@@ -3,8 +3,6 @@
     <dimen name="status_bar_padding">0dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
 
-    <dimen name="card_elevation">2dp</dimen>
-
     <dimen name="progress_container_height">20dp</dimen>
 
 
@@ -37,17 +35,10 @@
 
     <dimen name="icon_notification_dimen">32dp</dimen>
     <dimen name="mini_player_height_expanded">104dp</dimen>
-    <dimen name="progress_slider_height">30dp</dimen>
     <dimen name="toolbar_margin_horizontal">8dp</dimen>
     <dimen name="toolbar_height">48dp</dimen>
-    <dimen name="toolbar_margin_vertical">0dp</dimen>
     <dimen name="item_song_height">52dp</dimen>
     <dimen name="button_padding_vertical">10dp</dimen>
-    <dimen name="button_margin_horizontal">16dp</dimen>
-    <dimen name="home_icon_padding">14dp</dimen>
-    <dimen name="button_corner">24dp</dimen>
-    <dimen name="bottom_sheet_peek_1_height">56dp</dimen>
-    <dimen name="bottom_sheet_peek_2_height">32dp</dimen>
     <dimen name="list_pref_guideline_begin">56dp</dimen>
     <dimen name="pref_title_padding">72dp</dimen>
     <dimen name="slider_thumb_radius">6dp</dimen>
@@ -55,5 +46,4 @@
     <dimen name="adaptive_icon_size">46dp</dimen>
     <dimen name="adaptive_icon_padding">12dp</dimen>
     <dimen name="about_card_radius">16dp</dimen>
-    <dimen name="about_card_elevation">2dp</dimen>
 </resources>

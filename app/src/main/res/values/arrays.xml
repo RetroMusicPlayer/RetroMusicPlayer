@@ -52,33 +52,6 @@
         <item>auto</item>
     </string-array>
 
-    <string-array name="pref_grid_style_list_titles">
-        <item>@string/normal_style</item>
-        <item>@string/card_style</item>
-        <item>@string/card_color_style</item>
-        <item>@string/card_circular_style</item>
-        <item>@string/image</item>
-        <item>@string/image_gradient</item>
-    </string-array>
-
-    <string-array name="pref_grid_style_list_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-
-    <array name="pref_grid_style_layout">
-        <item>@layout/item_grid</item>
-        <item>@layout/item_card</item>
-        <item>@layout/item_card_color</item>
-        <item>@layout/item_grid_circle</item>
-        <item>@layout/image</item>
-        <item>@layout/item_image_gradient</item>
-    </array>
-
     <string-array name="pref_home_grid_style_list_titles">
         <item>@string/circular</item>
         <item>@string/card_color_style</item>

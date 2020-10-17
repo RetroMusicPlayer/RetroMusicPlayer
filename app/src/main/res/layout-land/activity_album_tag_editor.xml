@@ -1,7 +1,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/gradient_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface">
@@ -64,7 +63,6 @@
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
                 <LinearLayout
-                    android:id="@+id/editables"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"

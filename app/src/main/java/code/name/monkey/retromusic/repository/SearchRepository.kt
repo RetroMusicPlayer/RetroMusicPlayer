@@ -26,7 +26,7 @@ class RealSearchRepository(
     private val roomRepository: RoomRepository,
     private val genreRepository: GenreRepository,
 ) {
-    suspend fun searchAll(context: Context, query: String?): MutableList<Any> {
+    fun searchAll(context: Context, query: String?): MutableList<Any> {
         val results = mutableListOf<Any>()
         query?.let { searchString ->
             val songs = songRepository.songs(searchString)
@@ -53,14 +53,14 @@ class RealSearchRepository(
                 results.add(context.resources.getString(R.string.genres))
                 results.addAll(genres)
             }
-            val playlist = roomRepository.playlistWithSongs().filter { playlist ->
-                playlist.playlistEntity.playlistName.toLowerCase(Locale.getDefault())
-                    .contains(searchString.toLowerCase(Locale.getDefault()))
-            }
-            if (playlist.isNotEmpty()) {
-                results.add(context.getString(R.string.playlists))
-                results.addAll(playlist)
-            }
+            /* val playlist = roomRepository.playlists().filter { playlist ->
+                 playlist.playlistName.toLowerCase(Locale.getDefault())
+                     .contains(searchString.toLowerCase(Locale.getDefault()))
+             }
+             if (playlist.isNotEmpty()) {
+                 results.add(context.getString(R.string.playlists))
+                 results.addAll(playlist)
+             }*/
         }
         return results
     }
