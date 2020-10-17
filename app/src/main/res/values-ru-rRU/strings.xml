@@ -445,7 +445,7 @@
     <string name="pref_keep_screen_on_title">Оставить экран включенным</string>
 
 
-  
+
     <string name="pref_summary_album_artists_only">Только альбомы исполнителей</string>
 	<string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущей песни в качестве обоев на экране блокировки.</string>
 
@@ -733,9 +733,8 @@
     <string name="gradient">Градиент</string>
     <string name="user_name">Имя Пользователя</string>
     <string name="not_recently_played">Сейчас не проигрывается</string>
-    <string name="past_seven_days">Последние 7 дней</string>
 
-     <plurals name="albumSongs">
+    <plurals name="albumSongs">
         <item quantity="one">Песня</item>
         <item quantity="other">Песни</item>
     </plurals>

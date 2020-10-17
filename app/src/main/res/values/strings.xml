@@ -732,7 +732,6 @@
     <string name="gradient">Gradient</string>
     <string name="user_name">User Name</string>
     <string name="not_recently_played">Not recently played</string>
-    <string name="past_seven_days">Past 7 days</string>
 
     <plurals name="albumSongs">
         <item quantity="one">Song</item>
