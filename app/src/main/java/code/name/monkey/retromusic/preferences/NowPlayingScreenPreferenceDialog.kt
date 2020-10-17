@@ -32,9 +32,7 @@ import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.colorButtons
-import code.name.monkey.retromusic.extensions.colorControlNormal
-import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -93,7 +91,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
                 val nowPlayingScreen = values()[viewPagerPosition]
                 if (isNowPlayingThemes(nowPlayingScreen)) {
                     val result =
-                        getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
+                        "${getString(nowPlayingScreen.titleRes)} theme is Pro version feature."
                     Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
                     NavigationUtil.goToProVersion(requireContext())
                 } else {
@@ -131,9 +129,10 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
         Glide.with(context).load(nowPlayingScreen.drawableResId).into(image)
         title.setText(nowPlayingScreen.titleRes)
         if (isNowPlayingThemes(nowPlayingScreen)) {
+            proText.show()
             proText.setText(R.string.pro)
-        } else {
-            proText.setText(R.string.free)
+        }else{
+            proText.hide()
         }
         return layout
     }
@@ -160,14 +159,5 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
 }
 
 private fun isNowPlayingThemes(screen: NowPlayingScreen): Boolean {
-    return (screen == Full ||
-            screen == Card ||
-            screen == Plain ||
-            screen == Blur ||
-            screen == Color ||
-            screen == Simple ||
-            screen == BlurCard ||
-            screen == Circle ||
-            screen == Adaptive)
-            && !App.isProVersion()
+    return (screen == Full || screen == Card || screen == Plain || screen == Blur || screen == Color || screen == Simple || screen == BlurCard || screen == Circle || screen == Adaptive) && !App.isProVersion()
 }
