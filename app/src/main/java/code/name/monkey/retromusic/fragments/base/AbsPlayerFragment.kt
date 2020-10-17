@@ -50,13 +50,13 @@ import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.*
-import java.io.FileNotFoundException
 import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
+import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
     Toolbar.OnMenuItemClickListener, IPaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {

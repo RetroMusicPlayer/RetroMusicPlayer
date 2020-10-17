@@ -223,8 +223,8 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     }
 
     private fun setColors(color: Int) {
-        shuffleAction.applyColor(color)
-        playAction.applyOutlineColor(color)
+        shuffleAction?.applyColor(color)
+        playAction?.applyOutlineColor(color)
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
