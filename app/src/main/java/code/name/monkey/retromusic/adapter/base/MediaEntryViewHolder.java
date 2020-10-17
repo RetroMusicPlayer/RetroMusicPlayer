@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 import code.name.monkey.retromusic.R;
 import com.google.android.material.card.MaterialCardView;
@@ -47,7 +48,7 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
 
   @Nullable public View mask;
 
-  @Nullable public View menu;
+  @Nullable public AppCompatImageView menu;
 
   @Nullable public View paletteColorContainer;
 
