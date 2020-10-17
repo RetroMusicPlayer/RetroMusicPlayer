@@ -38,6 +38,7 @@ import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.interfaces.IArtistClickListener
+import code.name.monkey.retromusic.interfaces.IGenreClickListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
@@ -45,7 +46,8 @@ import com.google.android.material.card.MaterialCardView
 
 class HomeAdapter(
     private val activity: AppCompatActivity
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), IArtistClickListener, IAlbumClickListener {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), IArtistClickListener, IAlbumClickListener,
+    IGenreClickListener {
 
     private var list = listOf<Home>()
 
@@ -220,7 +222,8 @@ class HomeAdapter(
             val genreAdapter = GenreAdapter(
                 activity,
                 home.arrayList as List<Genre>,
-                R.layout.item_grid_genre
+                R.layout.item_grid_genre,
+                this@HomeAdapter
             )
             recyclerView.apply {
                 layoutManager = GridLayoutManager(activity, 3, GridLayoutManager.HORIZONTAL, false)
@@ -267,4 +270,16 @@ class HomeAdapter(
             )
         )
     }
+
+    override fun onClickGenre(genre: Genre, view: View) {
+        activity.findNavController(R.id.fragment_container).navigate(
+            R.id.genreDetailsFragment,
+            bundleOf(EXTRA_GENRE to genre),
+            null,
+            FragmentNavigatorExtras(
+                view to "genre"
+            )
+        )
+    }
+
 }

@@ -17,13 +17,12 @@ package code.name.monkey.retromusic.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.retromusic.EXTRA_GENRE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.interfaces.IGenreClickListener
 import code.name.monkey.retromusic.model.Genre
 import java.util.*
 
@@ -34,7 +33,8 @@ import java.util.*
 class GenreAdapter(
     private val activity: FragmentActivity,
     var dataSet: List<Genre>,
-    private val mItemLayoutRes: Int
+    private val mItemLayoutRes: Int,
+    private val listener: IGenreClickListener
 ) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(activity).inflate(mItemLayoutRes, parent, false))
@@ -62,10 +62,8 @@ class GenreAdapter(
 
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
         override fun onClick(v: View?) {
-            activity.findNavController(R.id.fragment_container).navigate(
-                R.id.genreDetailsFragment,
-                bundleOf(EXTRA_GENRE to dataSet[layoutPosition])
-            )
+            ViewCompat.setTransitionName(itemView, "genre")
+            listener.onClickGenre(dataSet[layoutPosition], itemView)
         }
     }
 }

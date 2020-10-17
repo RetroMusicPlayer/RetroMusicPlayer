@@ -50,15 +50,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     protected var adapter: A? = null
     protected var layoutManager: LM? = null
 
-    private fun setUpTransitions() {
-        exitTransition = Hold()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setUpTransitions()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity.setBottomBarVisibility(View.VISIBLE)
