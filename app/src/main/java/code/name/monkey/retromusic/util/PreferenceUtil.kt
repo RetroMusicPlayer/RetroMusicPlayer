@@ -399,8 +399,8 @@ object PreferenceUtil {
             val position = sharedPreferences.getStringOrDefault(
                 HOME_ARTIST_GRID_STYLE, "0"
             ).toInt()
-            val typedArray =
-                App.getContext().resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
+            val typedArray = App.getContext()
+                .resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
             val layoutRes = typedArray.getResourceId(position, 0)
             typedArray.recycle()
             return if (layoutRes == 0) {
@@ -410,10 +410,12 @@ object PreferenceUtil {
 
     val homeAlbumGridStyle: Int
         get() {
-            val position = sharedPreferences.getStringOrDefault(HOME_ALBUM_GRID_STYLE, "4").toInt()
-            val typedArray =
-                App.getContext().resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
-            val layoutRes = typedArray.getResourceId(position, 0)
+            val position = sharedPreferences.getStringOrDefault(
+                HOME_ALBUM_GRID_STYLE, "4"
+            ).toInt()
+            val typedArray = App.getContext()
+                .resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
+            val layoutRes = typedArray.getResourceId(position, 4)
             typedArray.recycle()
             return if (layoutRes == 0) {
                 R.layout.item_artist
@@ -423,7 +425,7 @@ object PreferenceUtil {
     val tabTitleMode: Int
         get() {
             return when (sharedPreferences.getStringOrDefault(
-                TAB_TEXT_MODE, "0"
+                TAB_TEXT_MODE, "1"
             ).toInt()) {
                 1 -> LabelVisibilityMode.LABEL_VISIBILITY_LABELED
                 0 -> LabelVisibilityMode.LABEL_VISIBILITY_AUTO
