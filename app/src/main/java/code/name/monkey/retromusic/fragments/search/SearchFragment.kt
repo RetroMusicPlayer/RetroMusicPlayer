@@ -21,6 +21,8 @@ import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +32,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.extensions.focusAndShowKeyboard
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import com.google.android.material.textfield.TextInputEditText
@@ -53,16 +54,17 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         mainActivity.setSupportActionBar(toolbar)
         libraryViewModel.clearSearchResult()
         setupRecyclerView()
-        searchView.apply {
-            addTextChangedListener(this@SearchFragment)
-            focusAndShowKeyboard()
-        }
+        searchView.addTextChangedListener(this)
         voiceSearch.setOnClickListener { startMicSearch() }
         clearText.setOnClickListener { searchView.clearText() }
         keyboardPopup.apply {
             accentColor()
             setOnClickListener {
-                searchView.focusAndShowKeyboard()
+                val inputManager = getSystemService(
+                    requireContext(),
+                    InputMethodManager::class.java
+                )
+                inputManager?.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT)
             }
         }
         if (savedInstanceState != null) {
