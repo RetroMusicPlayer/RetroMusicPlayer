@@ -11,6 +11,8 @@
     <string name="action_add_to_playing_queue">Добавить в очередь воспроизведения</string>
     <string name="action_add_to_playlist">Добавить в плейлист</string>
 
+    <string name="action_clear_playing_queue">Очистить очередь воспроизведения</string>
+
     <string name="action_cycle_repeat">Режим циклического повтора</string>
 
     <string name="action_delete">Удалить</string>
@@ -444,11 +446,8 @@
     <string name="pref_keep_screen_on_summary">Имейте в виду, что включение этой функции может повлиять на заряд батареи</string>
     <string name="pref_keep_screen_on_title">Оставить экран включенным</string>
 
-
-
     <string name="pref_summary_album_artists_only">Только альбомы исполнителей</string>
 	<string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущей песни в качестве обоев на экране блокировки.</string>
-
     <string name="pref_summary_audio_ducking">Снизить громкость воспроизведения когда приходит звуковое уведомление</string>
     <string name="pref_summary_blacklist">Содержимое черного списка скрыто из вашей библиотеки.</string>
     <string name="pref_summary_bluetooth_playback">Начать воспроизведение сразу же после подключения Bluetooth-устройства</string>
