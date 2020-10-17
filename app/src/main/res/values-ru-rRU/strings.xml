@@ -10,6 +10,7 @@
     <string name="action_add_to_favorites">Добавить в избранное</string>
     <string name="action_add_to_playing_queue">Добавить в очередь воспроизведения</string>
     <string name="action_add_to_playlist">Добавить в плейлист</string>
+	<string name="action_clear_playing_queue">Очистить очередь воспроизведения</string>
     <string name="action_cycle_repeat">Режим циклического повтора</string>
     <string name="action_delete">Удалить</string>
     <string name="action_delete_from_device">Удалить с устройства</string>
