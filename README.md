@@ -2,13 +2,34 @@
 
 Material Design music player for Android music lovers
 
+## Table of contents
+- [Downloads](#downloads)
+- [Differences between Metro and RetroMusicPlayer](#differences-between-metro-and-retromusicplayer)
+- [Screenshots](#screenshots)
+    - [App Themes](#app-themes)
+    - [Player screen](#player-screen)
+    - [9+ Now playing themes](#9-now-playing-themes)
+- [Navigation never made easier](#-navigation-never-made-easier)
+- [Colorful](#-colorful)
+- [Home](#-home)
+- [Included Features](#-included-features)
+- [License](#%EF%B8%8F-license)
 
-## Differences between RetroMusicPlayer and Metro
-|Metro|Retro|
-|:---:|:---:|
-|Google Play libraries removed|Available in Play Store|
-|Pro features for free|Paid pro version in play store|
-|Bug fixes||
+## Downloads
+
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/en/packages/io.github.muntashirakon.Music/)
+
+[<img src="https://camo.githubusercontent.com/70bffd8873ab81e1bb0bccc44e488c3a989e3bd5/68747470733a2f2f692e6962622e636f2f71306d6463345a2f6765742d69742d6f6e2d6769746875622e706e67"
+     alt="Get it on GitHub"
+     height="80">](https://github.com/MuntashirAkon/Metro/releases)
+
+## Differences between Metro and [RetroMusicPlayer](https://github.com/h4h13/RetroMusicPlayer)
+- Google Play libraries removed (fully libre)
+- Pro features available for free
+- Bug fixes
+- Minor differences in UI
 
 ## Screenshots
 ### App Themes
@@ -31,19 +52,19 @@ Material Design music player for Android music lovers
 |:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
 | Classic 	| Adaptive 	| Blur 	| Tiny 	| Peak 	|
 
-### 🧭 Navigation never made easier 
+## 🧭 Navigation never made easier 
 Self-explanatory interface without overloaded menus.
 
-### 🎨 Colorful
+## 🎨 Colorful
 You can choose between three different main themes: Clearly White, Kinda
 Dark and Just Black for AMOLED displays. Select your favorite accent
 color from a color palette.
 
-### 🏠 Home
+## 🏠 Home
 Where you can view your recently/top played artists, albums and
 favorite songs. No other music player has this feature.
 
-### 📦 Included Features
+## 📦 Included Features
 -  Base 3 themes (Clearly White, Kinda Dark and Just Black)
 -  Choose from 10+ now playing themes
 -  Driving Mode
@@ -71,7 +92,7 @@ favorite songs. No other music player has this feature.
 
 We are trying our best to bring you the best user experience. The app is regularly being updated for bug fixes and new features.
 
-### 🗂️ License
+## 🗂️ License
 
 Metro is released under the GNU General Public License v3.0
 (GPLv3), which can be found [here](LICENSE.md)
