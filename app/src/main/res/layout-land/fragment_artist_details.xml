@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="4dp"
-                    android:textAppearance="@style/TextViewSubtitle2"
+                    android:textAppearance="@style/TextViewCaption"
                     android:textColor="?android:attr/textColorSecondary"
                     app:lineHeightHint="24sp"
                     tools:ignore="MissingPrefix"

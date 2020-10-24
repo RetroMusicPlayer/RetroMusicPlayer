@@ -113,7 +113,7 @@
                         android:ellipsize="end"
                         android:paddingTop="4dp"
                         android:singleLine="true"
-                        android:textAppearance="@style/TextViewSubtitle2"
+                        android:textAppearance="@style/TextViewCaption"
                         android:textColor="?android:attr/textColorSecondary"
                         app:lineHeightHint="24sp"
                         tools:ignore="MissingPrefix"
