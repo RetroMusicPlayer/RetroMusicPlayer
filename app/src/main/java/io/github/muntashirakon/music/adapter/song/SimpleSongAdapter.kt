@@ -15,6 +15,7 @@
 package io.github.muntashirakon.music.adapter.song
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import io.github.muntashirakon.music.interfaces.ICabHolder
@@ -41,9 +42,12 @@ class SimpleSongAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
         val fixedTrackNumber = MusicUtil.getFixedTrackNumber(dataSet[position].trackNumber)
+        val trackAndTime = (if (fixedTrackNumber > 0) "$fixedTrackNumber | " else "") +
+                MusicUtil.getReadableDurationString(dataSet[position].duration)
 
-        holder.imageText?.text = if (fixedTrackNumber > 0) fixedTrackNumber.toString() else "-"
-        holder.time?.text = MusicUtil.getReadableDurationString(dataSet[position].duration)
+        holder.imageText?.visibility = View.GONE
+        holder.time?.text = trackAndTime
+        holder.text2?.text = dataSet[position].artistName
     }
 
     override fun getItemCount(): Int {

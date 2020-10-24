@@ -31,36 +31,44 @@
             android:minHeight="40dp"
             android:textAppearance="@style/TextViewNormal"
             android:textColor="?android:attr/textColorSecondary"
-            tools:text="@tools:sample/date/hhmm" />
+            tools:text="@tools:sample/us_zipcodes" />
     </FrameLayout>
-
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:maxLines="1"
-        android:textAppearance="@style/TextViewBody1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/time"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:paddingTop="8dp"
+        android:textAppearance="@style/TextViewBody2"
+        app:layout_constraintEnd_toStartOf="@+id/menu"
         app:layout_constraintStart_toEndOf="@+id/imageContainer"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem/random" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:maxLines="1"
+        android:textAppearance="@style/TextViewCaption"
+        app:layout_constraintStart_toEndOf="@id/imageContainer"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:padding="8dp"
-        android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/menu"
-        app:layout_constraintTop_toTopOf="parent"
+        android:maxLines="1"
+        android:textAppearance="@style/TextViewCaption"
+        app:layout_constraintEnd_toStartOf="@id/menu"
+        app:layout_constraintTop_toBottomOf="@id/title"
         tools:text="@tools:sample/date/hhmm" />
-
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/menu"
@@ -74,4 +82,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="?attr/colorControlNormal"
         tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
