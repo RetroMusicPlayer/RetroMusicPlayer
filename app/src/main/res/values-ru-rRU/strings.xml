@@ -315,7 +315,7 @@
     <string name="next_song">Следующая песня</string>
 
     <string name="no_albums">Альбомы отсутствуют</string>
-    <string name="no_artists">Исполнители отсутствую</string>
+    <string name="no_artists">Исполнители отсутствуют</string>
     <string name="no_audio_ID">"Сначала проиграйте песню, затем попробуйте заново."</string>
     <string name="no_equalizer">Эквалайзер не найден</string>
     <string name="no_genres">Жанры отсутствуют</string>
