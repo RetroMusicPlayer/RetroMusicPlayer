@@ -33,12 +33,13 @@
     </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/titleContainer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageContainer">
 
@@ -59,6 +60,17 @@
             android:singleLine="true"
             tools:text="@tools:sample/full_names" />
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/menu"
+        style="@style/OverFlowButton"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        app:layout_constraintBottom_toBottomOf="@id/titleContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/titleContainer"
+        app:layout_constraintTop_toTopOf="@id/titleContainer"
+        app:tint="?attr/colorControlNormal" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

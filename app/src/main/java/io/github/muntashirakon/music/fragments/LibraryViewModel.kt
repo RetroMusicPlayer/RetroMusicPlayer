@@ -15,36 +15,19 @@
 package io.github.muntashirakon.music.fragments
 
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
-import io.github.muntashirakon.music.App
-import io.github.muntashirakon.music.RECENT_ALBUMS
-import io.github.muntashirakon.music.RECENT_ARTISTS
-import io.github.muntashirakon.music.TOP_ALBUMS
-import io.github.muntashirakon.music.TOP_ARTISTS
-import io.github.muntashirakon.music.db.PlaylistEntity
-import io.github.muntashirakon.music.db.PlaylistWithSongs
-import io.github.muntashirakon.music.db.SongEntity
-import io.github.muntashirakon.music.db.toSong
-import io.github.muntashirakon.music.db.toSongEntity
+import androidx.lifecycle.*
+import io.github.muntashirakon.music.*
+import io.github.muntashirakon.music.db.*
 import io.github.muntashirakon.music.fragments.ReloadType.*
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.IMusicServiceEventListener
-import io.github.muntashirakon.music.model.Album
-import io.github.muntashirakon.music.model.Artist
-import io.github.muntashirakon.music.model.Contributor
-import io.github.muntashirakon.music.model.Genre
-import io.github.muntashirakon.music.model.Home
-import io.github.muntashirakon.music.model.Playlist
-import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.model.*
 import io.github.muntashirakon.music.repository.RealRepository
-import io.github.muntashirakon.music.state.NowPlayingPanelState
 import io.github.muntashirakon.music.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LibraryViewModel(
     private val repository: RealRepository
@@ -152,9 +135,11 @@ class LibraryViewModel(
         }
     }
 
-    fun search(query: String?) = viewModelScope.launch(IO) {
-        val result = repository.search(query)
-        searchResults.postValue(result)
+    fun search(query: String?) {
+        viewModelScope.launch(IO) {
+            val result = repository.search(query)
+            withContext(Main) { searchResults.postValue(result) }
+        }
     }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
@@ -322,7 +307,8 @@ class LibraryViewModel(
         viewModelScope.launch(IO) {
             val playlists = checkPlaylistExists(playlistName)
             if (playlists.isEmpty()) {
-                val playlistId: Long = createPlaylist(PlaylistEntity(playlistName = playlistName))
+                val playlistId: Long =
+                    createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
                 forceReload(Playlists)
             } else {

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="about_album_label">Про додаток %s</string>
     <string name="about_settings_summary">Команда, посилання на соц. мережі</string>
+
     <string name="accent_color">Акцентний колір</string>
     <string name="accent_color_desc">Акцентний колір, за замовчуванням фіолетовий</string>
+
     <string name="action_about">Про додаток</string>
     <string name="action_add_to_favorites">Додати в обране</string>
     <string name="action_add_to_playing_queue">Додати до черги відтворення</string>
     <string name="action_add_to_playlist">Додати до списку відтворення</string>
     <string name="action_clear_playing_queue">Очистити чергу відтворення</string>
-    <string name="action_clear_playlist">Очистити список відтворення</string>
     <string name="action_cycle_repeat">Циклічне повторення</string>
     <string name="action_delete">Видалити</string>
     <string name="action_delete_from_device">Видалити з пристрою</string>
@@ -46,19 +48,36 @@
     <string name="action_tag_editor">Редактор тегів</string>
     <string name="action_toggle_favorite">Перемкнути улюблене</string>
     <string name="action_toggle_shuffle">Перемкнути режим змішування</string>
+
     <string name="adaptive">Адаптивний</string>
+
     <string name="add_action">Додати</string>
-    <string name="add_lyrics">Додати текст пісні</string>
-    <string name="add_photo">Додати \nфото</string>
     <string name="add_playlist_title">"Додати до списку відтворення"</string>
-    <string name="add_time_framed_lryics">Додати текст з мітками часу</string>
+
     <string name="added_title_to_playing_queue">"Додано 1 композицію до черги відтворення."</string>
     <string name="added_x_titles_to_playing_queue">Додано %1$d композицій до черги відтворення.</string>
+
     <string name="album">Альбом</string>
+
+    <plurals name="albumSongs">
+        <item quantity="one">Пісня</item>
+        <item quantity="few">Пісні</item>
+        <item quantity="many">Пісні</item>
+        <item quantity="other">Пісні</item>
+    </plurals>
+
     <string name="album_artist">Виконавець альбому</string>
-    <string name="album_or_artist_empty">Назва або виконавець відсутні.</string>
+
     <string name="albums">Альбоми</string>
+    <plurals name="albums">
+        <item quantity="one">Альбом</item>
+        <item quantity="few">Альбоми</item>
+        <item quantity="many">Альбоми</item>
+        <item quantity="other">Альбоми</item>
+    </plurals>
+
     <string name="always">Завжди</string>
+
     <string name="app_share">Привіт, перегляньте цей крутий музичний плеєр за адресою: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Перемішати</string>
     <string name="app_shortcut_top_tracks_short">Кращі треки</string>
@@ -67,19 +86,25 @@
     <string name="app_widget_classic_name">Ретро-музика - Класичний</string>
     <string name="app_widget_small_name">Ретро-музика - Малий</string>
     <string name="app_widget_text_name">Ретро-музика - Текст</string>
+
     <string name="artist">Виконавець</string>
+
     <string name="artists">Виконавці</string>
+
     <string name="audio_focus_denied">В отриманні аудіофокусу відмовлено.</string>
     <string name="audio_settings_summary">Змінити налаштування звуку та налаштувати параметри еквалайзера</string>
+
     <string name="auto">Автоматично</string>
-    <string name="base_color_theme">Основна колірна тема</string>
-    <string name="bass_boost">Підсилення басу</string>
-    <string name="bio">Життєпис</string>
+
     <string name="biography">Життєпис</string>
+
     <string name="black_theme_name">Чорний</string>
+
     <string name="blacklist">Чорний список</string>
+
     <string name="blur">Розмиття</string>
     <string name="blur_card">Розмита картка</string>
+
     <string name="bug_report_failed">Не вдалося надіслати звіт</string>
     <string name="bug_report_failed_invalid_token">Недійсний токен доступу. Зв’яжіться з розробником додатка.</string>
     <string name="bug_report_failed_issues_not_available">Проблеми не включені для вибраного сховища. Зверніться до розробника програми.</string>
@@ -92,45 +117,56 @@
     <string name="bug_report_no_title">Введіть заголовок проблеми</string>
     <string name="bug_report_no_username">Введіть своє дійсне ім’я користувача GitHub</string>
     <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте \"Очистити дані додатка\" або надішліть лист на ел. пошту </string>
-    <string name="bug_report_uploading">Завантаження звіту на GitHub…</string>
     <string name="bug_report_use_account">Надіслати через обліковий запис GitHub</string>
+
     <string name="buy_now">Придбайте вже</string>
+
     <string name="cancel_current_timer">Відмінити</string>
+
     <string name="card">Картка</string>
-    <string name="card_circular_style">Кільце</string>
     <string name="card_color_style">Кольорова картка</string>
     <string name="card_style">Картка</string>
-    <string name="carousal">Карусель</string>
+
     <string name="carousal_effect_on_now_playing_screen">Карусель на екрані відтворення</string>
+
     <string name="cascading">Каскад</string>
-    <string name="cast">Транслювати</string>
+
     <string name="changelog">Історія змін</string>
     <string name="changelog_summary">Журнал змін доступний у каналі Telegram</string>
+
     <string name="circle">Коло</string>
+
     <string name="circular">Круглий</string>
+
     <string name="classic">Класичний</string>
+
     <string name="clear_action">Очистити</string>
-    <string name="clear_app_data">Очистити дані додатку</string>
     <string name="clear_blacklist">Очистити чорний список</string>
     <string name="clear_playing_queue">Очистити чергу</string>
-    <string name="clear_playlist_title">Очистити список відтворення</string>
-    <string name="clear_playlist_x"><![CDATA[Очистити список відтворення <b>%1$s</b>? Це незворотня дія!]]></string>
-    <string name="close_notification">Закрити</string>
+
     <string name="color">Колір</string>
-    <string name="color_theme_name">Колір</string>
+
     <string name="colors">Кольори</string>
+
     <string name="composer">Композитор</string>
+
     <string name="copied_device_info_to_clipboard">Скопійовано інформацію про пристрій у буфер обміну.</string>
+
     <string name="could_not_create_playlist">Не вдалося створити список відтворення.</string>
     <string name="could_not_download_album_cover">"Не вдалося завантажити відповідну обкладинку альбому."</string>
     <string name="could_not_restore_purchase">Не вдалося відновити покупку.</string>
     <string name="could_not_scan_files">Не вдалося просканувати %d файлів.</string>
+
     <string name="create_action">Створити</string>
+
     <string name="created_playlist_x">Створено список відтворення %1$s.</string>
+
     <string name="credit_title">Учасники та меценати </string>
+
     <string name="currently_listening_to_x_by_x">Зараз грає %1$s від %2$s.</string>
+
     <string name="dark_theme_name">Майже темна</string>
-    <string name="default_hint">Текст відсутній</string>
+
     <string name="delete_playlist_title">Видалити список відтворення</string>
     <string name="delete_playlist_x"><![CDATA[Видалити список відтворення <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Видалити списки відтворення</string>
@@ -139,42 +175,62 @@
     <string name="delete_songs_title">Видалити пісні</string>
     <string name="delete_x_playlists"><![CDATA[Видалити <b>%1$d</b> списки відтворення?]]></string>
     <string name="delete_x_songs"><![CDATA[Видалити <b>%1$d</b> пісень?]]></string>
+
     <string name="deleted_x_songs">Видалено %1$d пісень.</string>
-    <string name="deleting_songs">Видалення пісень</string>
+
     <string name="depth">Глибина</string>
+
     <string name="description">Опис</string>
+
     <string name="device_info">Інформація про пристрій</string>
+
     <string name="dialog_message_set_ringtone">Дозволити Retro Music змінювати налаштування звуку</string>
     <string name="dialog_title_set_ringtone">Встановити як мелодію дзвінка</string>
+
     <string name="do_you_want_to_clear_the_blacklist">Ви хочете очистити чорний список?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Вилучити <b>%1$s</b> з чорного списку?]]></string>
+
     <string name="donate">Підтримати</string>
     <string name="donate_summary">Якщо ви вважаєте, що я заслуговую на оплату своєї праці, ви можете залишити гроші тут</string>
+
     <string name="donation_header">Купіть мені:</string>
-    <string name="download_from_last_fm">Завантажити з Last.fm</string>
+
     <string name="drive_mode">Режим водія</string>
-    <string name="edit">Редагувати</string>
-    <string name="edit_cover">Редагувати обкладинку</string>
+
     <string name="empty">Порожньо</string>
+
     <string name="equalizer">Еквалайзер</string>
-    <string name="error">Помилка</string>
+
     <string name="faq">ЧаП</string>
+
     <string name="favorites">Обране</string>
+
     <string name="finish_last_song">Закінчити останню пісню</string>
+
     <string name="fit">Вмістити</string>
+
     <string name="flat">Плоский</string>
+
     <string name="folders">Папки</string>
+
     <string name="follow_system">Наслідувати систему</string>
+
     <string name="for_you">Для Вас</string>
+
     <string name="free">Безкоштовно</string>
+
     <string name="full">Повний</string>
     <string name="full_card">Повна картка</string>
+
     <string name="general_settings_summary">Змінити тему і кольори додатку</string>
     <string name="general_settings_title">Вигляд</string>
+
     <string name="genre">Жанр</string>
+
     <string name="genres">Жанри</string>
+
     <string name="git_hub_summary">Розгалужити проект на GitHub</string>
-    <string name="google_plus_community">Приєднайтеся до спільноти Google Plus, де ви можете звернутися по допомогу або слідкувати за оновленнями в Retro Music</string>
+
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -184,16 +240,25 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Стиль сітки</string>
+
     <string name="hinge">Завіса</string>
+
     <string name="history">Історія</string>
+
     <string name="home">Домашня сторінка</string>
+
     <string name="horizontal_flip">Горизонтальне перевернення</string>
+
     <string name="image">Зображення</string>
     <string name="image_gradient">Градієнтне зображення</string>
     <string name="image_settings_summary">Змінити параметри завантаження зображення виконавця</string>
+
     <string name="inserted_x_songs_into_playlist_x">Додано %1$d пісень до списку відтворення %2$s.</string>
+
     <string name="instagram_page_summary">Похизуйтеся вашими налаштуваннями Retro Music у Instagram</string>
+
     <string name="keyboard">Клавіатура</string>
+
     <string name="label_bit_rate">Бітрейт</string>
     <string name="label_file_format">Формат</string>
     <string name="label_file_name">Назва файлу</string>
@@ -202,31 +267,45 @@
     <string name="label_more_from">Більше від %s</string>
     <string name="label_sampling_rate">Частота дискретизації</string>
     <string name="label_track_length">Довжина</string>
+
     <string name="labeled">З відміткою</string>
+
     <string name="last_added">Нещодавно додане</string>
     <string name="last_song">Остання пісня</string>
-    <string name="lets_play_something">Нумо слухати музику</string>
-    <string name="library">Бібліотека</string>
+
     <string name="library_categories">Категорії бібліотеки</string>
+
     <string name="licenses">Ліцензії</string>
+
     <string name="light_theme_name">Яскраво-білий</string>
+
     <string name="listeners_label">Слухачі</string>
+
     <string name="listing_files">Список файлів</string>
+
     <string name="loading_products">Завантаження продуктів…</string>
+
     <string name="login">Логін</string>
+
     <string name="lyrics">Текст</string>
+
     <string name="made_with_love">Зроблено з ❤ в Індії</string>
+
     <string name="material">Матеріал</string>
+
     <string name="md_error_label">Помилка</string>
     <string name="md_storage_perm_error">Помилка дозволу</string>
+
     <string name="my_name">Назва</string>
     <string name="my_top_tracks">Найчастіше відтворювані</string>
+
     <string name="never">Ніколи</string>
-    <string name="new_banner_photo">Нове фото банеру</string>
+
     <string name="new_playlist_title">Новий список відтворення</string>
-    <string name="new_profile_photo">Нове фото профілю</string>
     <string name="new_start_directory">%s є новим початковим каталогом.</string>
+
     <string name="next_song">Наступна пісня</string>
+
     <string name="no_albums">Немає жодного альбому</string>
     <string name="no_artists">Немає жодного виконавця</string>
     <string name="no_audio_ID">"Спочатку відтворіть пісню, а потім спробуйте ще раз."</string>
@@ -238,45 +317,59 @@
     <string name="no_purchase_found">Покупки не знайдено.</string>
     <string name="no_results">Немає результатів</string>
     <string name="no_songs">У вас немає пісень</string>
+
     <string name="normal">Нормальний</string>
     <string name="normal_lyrics">Стандартний текст</string>
-    <string name="normal_style">Нормальний</string>
+
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> не вказано в медіа сховищі.]]></string>
+
     <string name="nothing_to_scan">Нічого сканувати.</string>
     <string name="nothing_to_see">Порожньо</string>
+
     <string name="notification">Сповіщення</string>
     <string name="notification_settings_summary">Налаштувати стиль сповіщення</string>
+
     <string name="now_playing">Відтворюється зараз</string>
     <string name="now_playing_queue">Зараз в черзі відтворення</string>
     <string name="now_playing_summary">Налаштування екрану відтворення</string>
     <string name="now_playing_themes">9+ тем екрану відтворення</string>
+
     <string name="only_on_wifi">Лише через Wi-Fi</string>
+
     <string name="other_settings_summary">Розширені функції тестування</string>
+
     <string name="others">Інше</string>
+
     <string name="password">Пароль</string>
+
     <string name="past_three_months">Останні 3 місяці</string>
-    <string name="paste_lyrics_here">Вставити текст сюди</string>
+
     <string name="peak">Пік</string>
+
     <string name="permission_external_storage_denied">Відмовлено у доступі до зовнішнього сховища.</string>
+
     <string name="permissions_denied">У доступі відмовлено.</string>
+
     <string name="personalize">Персоналізація</string>
     <string name="personalize_settings_summary">Налаштуйте екран відтворення та зовнішній вигляд</string>
+
     <string name="pick_from_local_storage">Вибрати з локального сховища</string>
-    <string name="pick_image_intent_text">Вибрати зображення</string>
+
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Слідкуйте за сторінкою Pinterest від Retro Music для натхнення дизайну</string>
+
     <string name="plain">Звичайний</string>
+
     <string name="playing_notification_description">Сповіщення про відтворення надає дії для відтворення/паузи тощо.</string>
     <string name="playing_notification_name">Сповіщення про відтворення</string>
-    <string name="playlist_empty_text">Порожній список відтворення</string>
+
     <string name="playlist_is_empty">Список відтворення порожній</string>
     <string name="playlist_name_empty">Назва списку відтворення</string>
+
     <string name="playlists">Списки відтворення</string>
-    <string name="pref_album_detail_style">Стиль деталей альбому</string>
+
     <string name="pref_blur_amount_summary">Величина розмиття, що застосовується для розмиття тем, менше - швидше</string>
     <string name="pref_blur_amount_title">Величина розмиття</string>
-    <string name="pref_dialog_corner_summary">Налаштування кутів діалогового вікна знизу</string>
-    <string name="pref_dialog_corner_title">Куточок діалогового вікна</string>
     <string name="pref_filter_song_summary">Сортувати пісні за довжиною</string>
     <string name="pref_filter_song_title">Сортувати пісні за тривалістю</string>
     <string name="pref_header_advanced">Додатково</string>
@@ -293,9 +386,7 @@
     <string name="pref_keep_pause_on_zero_volume_title">Пауза при нулі</string>
     <string name="pref_keep_screen_on_summary">Майте на увазі, що увімкнення цієї функції може вплинути на заряд акумулятора</string>
     <string name="pref_keep_screen_on_title">Не вимикати екран</string>
-    <string name="pref_now_playing_screen_summary">Натисніть, щоб відкрити або проведіть, щоб уникнути прозорої навігації на екрані відтворення</string>
-    <string name="pref_now_playing_screen_title">Клацніть або проведіть</string>
-    <string name="pref_snow_fall_title">Ефект снігопаду</string>
+    <string name="pref_language_name">Обрати мову</string>
     <string name="pref_summary_album_art_on_lockscreen">Використовувати обкладинку альбому пісні як шпалери екрана блокування</string>
     <string name="pref_summary_audio_ducking">Зменшення гучності при відтворенні системного звуку або сповіщення</string>
     <string name="pref_summary_blacklist">Вміст тек чорного списку приховано з вашої бібліотеки.</string>
@@ -305,21 +396,17 @@
     <string name="pref_summary_classic_notification">Використовувати класичне оформлення сповіщення</string>
     <string name="pref_summary_colored_app">Тло і кольори кнопок керування міняються в залежності від обкладинки екрана відтворення</string>
     <string name="pref_summary_colored_app_shortcuts">Фарбує ярлики додатків у колір акценту. Кожного разу, коли ви змінюєте колір, будь ласка, перемкніть його, щоб зміни вступили в силу</string>
-    <string name="pref_summary_colored_navigation_bar">Фарбує панель навігації у переважаючий колір</string>
     <string name="pref_summary_colored_notification">"Фарбує повідомлення в обкладинці альбому яскравим кольором"</string>
     <string name="pref_summary_desaturated_color">Для Material Design лінії в темному режимі мають бути ненасичені</string>
-    <string name="pref_summary_dominant_color">Домінуючий колір буде взято з обкладинки альбому або виконавця</string>
+    <string name="pref_summary_expand_now_playing_panel">При натисканні на сповіщення буде показано екран відтворення замість домашнього екрану</string>
     <string name="pref_summary_extra_controls">Додати додаткові елементи керування до міні-програвача</string>
     <string name="pref_summary_extra_song_info">Показати додаткову інформацію про пісню, таку як формат файлів, бітрейт та частоту</string>
     <string name="pref_summary_gapless_playback">"Може викликати проблеми з відтворенням на деяких пристроях."</string>
-    <string name="pref_summary_genre_toggle">Сховати вкладку жанрів</string>
     <string name="pref_summary_home_banner">Сховати головний банер</string>
     <string name="pref_summary_ignore_media_store_artwork">Може збільшити якість обкладинки альбому, але збільшує час завантаження зображення. Використовуйте тільки якщо у вас проблеми з обкладинками низької роздільної здатності</string>
     <string name="pref_summary_library_categories">Налаштувати видимість та порядок категорій бібліотеки.</string>
     <string name="pref_summary_lock_screen">Використовувати керування музикою на екрані блокування від Retro Music</string>
     <string name="pref_summary_open_source_licences">Деталі ліцензії для програмного забезпечення з відкритим кодом</string>
-    <string name="pref_summary_round_corners">Заокруглити кути додатку</string>
-    <string name="pref_summary_tab_titles">Сховати назви для вкладок у нижній панелі навігації</string>
     <string name="pref_summary_toggle_full_screen">Режим занурення</string>
     <string name="pref_summary_toggle_headset">Почати відтворення відразу після підключення навушників</string>
     <string name="pref_summary_toggle_shuffle">Випадковий режим вимкнеться при відтворенні нового списку пісень</string>
@@ -327,75 +414,76 @@
     <string name="pref_title_album_art_on_lockscreen">Показати обкладинку альбому</string>
     <string name="pref_title_album_cover_style">Тема обкладинки альбому</string>
     <string name="pref_title_album_cover_transform">Пропустити обкладинку альбому</string>
-    <string name="pref_title_album_grid_style">Сітка альбому</string>
     <string name="pref_title_app_shortcuts">Кольорові ярлики додатків</string>
-    <string name="pref_title_artist_grid_style">Сітка виконавців</string>
     <string name="pref_title_audio_ducking">Зменшити гучність при сторонніх звуках</string>
     <string name="pref_title_auto_download_artist_images">Автоматично завантажувати зображення виконавців</string>
     <string name="pref_title_blacklist">Чорний список</string>
     <string name="pref_title_bluetooth_playback">Відтворення Bluetooth</string>
     <string name="pref_title_blurred_album_art">Розмити обкладинку альбому</string>
-    <string name="pref_title_choose_equalizer">Вибрати еквалайзер</string>
     <string name="pref_title_classic_notification">Класичне оформлення сповіщень</string>
     <string name="pref_title_colored_app">Адаптивний колір</string>
     <string name="pref_title_colored_notification">Кольорове сповіщення</string>
     <string name="pref_title_desaturated_color">Ненасичений колір</string>
+    <string name="pref_title_expand_now_playing_panel">Показувати на екрані відтворення</string>
     <string name="pref_title_extra_controls">Додаткові елементи керування</string>
     <string name="pref_title_extra_song_info">Інформація про пісню</string>
     <string name="pref_title_gapless_playback">Безперервне відтворення</string>
     <string name="pref_title_general_theme">Тема додатку</string>
-    <string name="pref_title_genre_toggle">Показати вкладку жанрів</string>
     <string name="pref_title_home_artist_grid_style">Домашня сітка виконавця</string>
     <string name="pref_title_home_banner">Головний банер</string>
     <string name="pref_title_ignore_media_store_artwork">Ігнорувати обкладинки з Медіасховища</string>
     <string name="pref_title_last_added_interval">Інтервал останнього доданого списку відтворення</string>
     <string name="pref_title_lock_screen">Повноекранне керування</string>
-    <string name="pref_title_navigation_bar">Кольорова панель навігації</string>
     <string name="pref_title_now_playing_screen_appearance">Тема відтворення</string>
     <string name="pref_title_open_source_licences">Ліцензії з відкритим кодом</string>
-    <string name="pref_title_round_corners">Кути</string>
     <string name="pref_title_tab_text_mode">Режим назв вкладок</string>
     <string name="pref_title_toggle_carousel_effect">Ефект Каруселі</string>
-    <string name="pref_title_toggle_dominant_color">Головний колір</string>
     <string name="pref_title_toggle_full_screen">На весь екран</string>
-    <string name="pref_title_toggle_tab_titles">Назви вкладок</string>
     <string name="pref_title_toggle_toggle_headset">Автоматичне відтворення</string>
     <string name="pref_title_toggle_toggle_shuffle">Режим перемішування</string>
     <string name="pref_title_toggle_volume">Регулювання гучності</string>
-    <string name="pref_title_user_info">Інформація про користувача</string>
-    <string name="primary_color">Основний колір</string>
-    <string name="primary_color_desc">Основний колір теми, за замовчуванням сіро-синій, відтепер працює з темними кольорами</string>
+
     <string name="pro">Pro</string>
     <string name="pro_summary">Чорна тема, теми відтворення, ефект каруселі та інше..</string>
+
     <string name="profile">Профіль</string>
+
     <string name="purchase">Придбати</string>
-    <string name="purchase_summary">*Подумайте перед придбанням, не просіть повернути гроші.</string>
+
     <string name="queue">Черга</string>
+
     <string name="rate_app">Оцініть додаток</string>
     <string name="rate_on_google_play_summary">Подобається цей додаток? Напишіть відгук нам у Google Play Store, як ми можемо зробити його ще кращим</string>
+
     <string name="recent_albums">Останні альбоми</string>
     <string name="recent_artists">Останні виконавці</string>
+
     <string name="remove_action">Вилучити</string>
-    <string name="remove_banner_photo">Видалити фото банера</string>
     <string name="remove_cover">Видалити обкладинку</string>
     <string name="remove_from_blacklist">Видалити з чорного списку</string>
-    <string name="remove_profile_photo">Видалити фото профілю</string>
     <string name="remove_song_from_playlist_title">Видалити пісню зі списку відтворення</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Видалити пісню <b>%1$s</b> зі списку відтворення?]]></string>
     <string name="remove_songs_from_playlist_title">Видалити пісні зі списку відтворення</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[Видалити <b>%1$d</b> пісень зі списку відтворення?]]></string>
+
     <string name="rename_playlist_title">Перейменувати список відтворення</string>
+
     <string name="report_an_issue">Повідомити про помилку</string>
     <string name="report_bug">Повідомити про помилку</string>
+
     <string name="reset_action">Скинути</string>
     <string name="reset_artist_image">Скинути зображення виконавця</string>
+
     <string name="restore">Відновити</string>
+
     <string name="restored_previous_purchase_please_restart">Відновлено попередню покупку. Перезапустіть додаток, щоб скористатися всіма функціями.</string>
     <string name="restored_previous_purchases">Відновлені попередні покупки.</string>
+
     <string name="restoring_purchase">Відновлення покупки…</string>
-    <string name="retro_equalizer">Еквалайзер Retro Music</string>
+
     <string name="retro_music_player">Retro Music плеєр</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+
     <string name="saf_delete_failed">Помилка видалення файлу: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Неможливо отримати URI SAF</string>
@@ -408,37 +496,48 @@
     <string name="saf_guide_slide3_description">Не відкривайте вкладені папки</string>
     <string name="saf_guide_slide3_title">Натисніть кнопку \"вибрати\" внизу екрана</string>
     <string name="saf_write_failed">Не вдалося записати файл: %s</string>
+
     <string name="save">Зберегти</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">Зберегти як файл</string>
     <string name="save_playlists_title">Зберегти як файли</string>
+
     <string name="saved_playlist_to">Збережено список відтворення в %s.</string>
+
     <string name="saving_changes">Збереження змін</string>
+
     <string name="scan_media">Сканувати медіа</string>
+
     <string name="scanned_files">Проскановано %1$d з %2$d файлів.</string>
+
     <string name="scrobbles_label">Персоналізація</string>
-    <string name="search_hint">Пошук у бібліотеці…</string>
+
     <string name="select_all">Виділити все</string>
-    <string name="select_banner_photo">Обрати фото банера</string>
+
     <string name="selected">Обрано</string>
-    <string name="send_crash_log">Надіслати журнал збою</string>
+
     <string name="set">Встановити</string>
     <string name="set_artist_image">Встановити зображення виконавця</string>
-    <string name="set_photo">Встановити фото профілю</string>
+
     <string name="share_app">Поділитися додатком</string>
     <string name="share_to_stories">Поділитися в Історії</string>
+
     <string name="shuffle">Перемішати</string>
+
     <string name="simple">Простий</string>
+
     <string name="sleep_timer_canceled">Таймер сну скасовано.</string>
     <string name="sleep_timer_set">Таймер сну спрацює за %d хвилин.</string>
-    <string name="slide">Слайд</string>
-    <string name="small">Маленький альбом</string>
+
     <string name="social">Соціальні мережі</string>
     <string name="social_stories">Поділитися історією</string>
+
     <string name="song">Пісня</string>
     <string name="song_duration">Тривалість пісні</string>
+
     <string name="songs">Пісні</string>
+
     <string name="sort_order">Порядок сортування</string>
     <string name="sort_order_a_z">За зростанням</string>
     <string name="sort_order_album">Альбом</string>
@@ -448,103 +547,91 @@
     <string name="sort_order_date_modified">Дата змінення</string>
     <string name="sort_order_year">Рік</string>
     <string name="sort_order_z_a">За спаданням</string>
+
     <string name="speech_not_supported">Вибачте! Ваш пристрій не підтримує введення мови</string>
     <string name="speech_prompt">Пошук у бібліотеці</string>
+
     <string name="stack">Стек</string>
+
     <string name="start_play_music">Почати програвати музику.</string>
+
     <string name="suggestion_songs">Пропозиції</string>
-    <string name="summary_user_info">Показувати своє ім\'я на домашньому екрані</string>
+
     <string name="support_development">Підтримати розробку</string>
+
     <string name="swipe_to_unlock">Свайпніть, щоб розблокувати</string>
+
     <string name="synced_lyrics">Синхронізовані тексти</string>
-    <string name="system_equalizer">Системний еквалайзер</string>
+
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Приєднуйтесь до групи Telegram щоб обговорити помилки, робити пропозиції та інше</string>
+
     <string name="thank_you">Щиро дякую!</string>
+
     <string name="the_audio_file">Аудіофайл</string>
+
     <string name="this_month">Цього місяця</string>
     <string name="this_week">Цього тижня</string>
     <string name="this_year">Цього року</string>
+
     <string name="tiny">Дрібний</string>
+    <string name="tiny_card_style">Крихітна картка</string>
+
     <string name="title">Назва</string>
-    <string name="title_dashboard">Головна панель</string>
-    <string name="title_good_afternoon">Добрий день</string>
-    <string name="title_good_day">Доброго дня</string>
-    <string name="title_good_evening">Доброго вечора</string>
-    <string name="title_good_morning">Доброго ранку</string>
-    <string name="title_good_night">Надобраніч</string>
-    <string name="title_user_info">Як вас звати</string>
+
     <string name="today">Сьогодні</string>
+
     <string name="top_albums">Топ альбомів</string>
     <string name="top_artists">Топ виконавців</string>
+
     <string name="track_hint">"Доріжка (2 для доріжки 2 або 3004 для CD3 доріжки 4)"</string>
     <string name="track_list">Номер пісні</string>
+
     <string name="translate">Перекласти</string>
     <string name="translate_community">Допоможіть нам перекласти додаток на вашу мову</string>
+
+    <string name="try_retro_music_premium">Спробуйте Retro Music Преміум</string>
+
     <string name="twitter_page">Твіттер</string>
     <string name="twitter_page_summary">Поділіться своїм дизайном із Retro Music</string>
+
     <string name="unlabeled">Без позначки</string>
+
     <string name="unplayable_file">Не можу відтворити пісню.</string>
+
     <string name="up_next">Наступне</string>
+
     <string name="update_image">Оновити зображення</string>
+
     <string name="updating">Оновлення…</string>
+
     <string name="username">Ім\'я користувача</string>
+
     <string name="version">Версія додатку</string>
+
     <string name="vertical_flip">Вертикальне сальто</string>
-    <string name="virtualizer">Віртуалізатор</string>
+
     <string name="volume">Гучність</string>
+
     <string name="web_search">Пошук в інтернеті</string>
+
     <string name="welcome">Вітаємо вас,</string>
+
     <string name="what_do_you_want_to_share">Чим ви хочете поділитися?</string>
+
     <string name="whats_new">Що нового</string>
+
     <string name="window">Вікно</string>
     <string name="window_corner_edges">Закруглені кути</string>
+
     <string name="x_has_been_set_as_ringtone">Встановити %1$s як мелодію дзвінка.</string>
     <string name="x_selected">%1$d обрано</string>
+
     <string name="year">Рік</string>
+
     <string name="you_have_to_select_at_least_one_category">Виберіть принаймні одну категорію.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вас буде перенаправлено на сайт відстеження проблем.</string>
+
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
-    <string name="amount">Кількість</string>
-    <string name="note">Примітка (необов\'язково)</string>
-    <string name="start_payment">Розпочати оплату</string>
-    <string name="pref_title_expand_now_playing_panel">Показувати на екрані відтворення</string>
-    <string name="pref_summary_expand_now_playing_panel">При натисканні на сповіщення буде показано екран відтворення замість домашнього екрану</string>
-    <string name="tiny_card_style">Крихітна картка</string>
-    <string name="about_album_label">Про додаток %s</string>
-    <string name="pref_language_name">Обрати мову</string>
-    <string name="translators">Перекладачі</string>
-    <string name="translators_summary">Люди, які допомогли перекласти цей додаток</string>
-    <string name="try_retro_music_premium">Спробуйте Retro Music Преміум</string>
-    <plurals name="albumSongs">
-        <item quantity="one">Пісня</item>
-        <item quantity="few">Пісні</item>
-        <item quantity="many">Пісні</item>
-        <item quantity="other">Пісні</item>
-    </plurals>
-    <plurals name="albums">
-        <item quantity="one">Альбом</item>
-        <item quantity="few">Альбоми</item>
-        <item quantity="many">Альбоми</item>
-        <item quantity="other">Альбоми</item>
-    </plurals>
-    <plurals name="numSongs">
-        <item quantity="one">%d Пісня</item>
-        <item quantity="few">%d пісні</item>
-        <item quantity="many">%d пісні</item>
-        <item quantity="other">%d пісні</item>
-    </plurals>
-    <plurals name="numAlbums">
-        <item quantity="one">%d Альбом</item>
-        <item quantity="few">%d Альбоми</item>
-        <item quantity="many">%d Альбоми</item>
-        <item quantity="other">%d Альбоми</item>
-    </plurals>
-    <plurals name="numArtists">
-        <item quantity="one">%d Виконавець</item>
-        <item quantity="few">%d Виконавці</item>
-        <item quantity="many">%d Виконавці</item>
-        <item quantity="other">%d Виконавці</item>
-    </plurals>
 </resources>

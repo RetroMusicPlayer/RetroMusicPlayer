@@ -4,9 +4,7 @@
     <integer name="default_grid_columns_land">4</integer>
 
     <integer name="default_list_columns">1</integer>
-    <integer name="default_list_artist_columns">2</integer>
     <integer name="default_list_columns_land">2</integer>
-    <integer name="default_list_artist_columns_land">4</integer>
 
     <integer name="max_columns">4</integer>
     <integer name="max_columns_land">6</integer>

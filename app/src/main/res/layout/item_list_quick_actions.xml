@@ -44,7 +44,6 @@
         app:icon="@drawable/ic_shuffle" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/songsMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -53,7 +52,6 @@
         app:tint="?attr/colorControlNormal" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/gridMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -62,7 +60,6 @@
         app:tint="?attr/colorControlNormal" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"

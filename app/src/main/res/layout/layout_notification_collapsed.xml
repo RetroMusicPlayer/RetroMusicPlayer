@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:background="@color/md_red_500"
@@ -138,7 +137,6 @@
             android:visibility="gone" />
 
         <ImageButton
-            android:id="@+id/fifth"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:background="@drawable/notification_selector"

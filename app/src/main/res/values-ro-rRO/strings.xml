@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="about_album_label">About %s</string>
     <string name="about_settings_summary">Team, social links</string>
+
     <string name="accent_color">Culoare ton</string>
     <string name="accent_color_desc">Culoarea de accent, implicit, se face verde.</string>
+
     <string name="action_about">Despre</string>
     <string name="action_add_to_favorites">Adaugă la favorite</string>
     <string name="action_add_to_playing_queue">Adaugă la coada de redare</string>
     <string name="action_add_to_playlist">Adaugă la un playlist</string>
     <string name="action_clear_playing_queue">Curăță coada de redare</string>
-    <string name="action_clear_playlist">Șterge playlist</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">Șterge</string>
     <string name="action_delete_from_device">Șterge de pe dispozitiv</string>
@@ -46,19 +48,34 @@
     <string name="action_tag_editor">Redactor info</string>
     <string name="action_toggle_favorite">Toggle favorite</string>
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
+
     <string name="adaptive">Adaptive</string>
+
     <string name="add_action">Adaugă</string>
-    <string name="add_lyrics">Add lyrics</string>
-    <string name="add_photo">Adaugă fotografie</string>
     <string name="add_playlist_title">"Adaugă la playlist"</string>
-    <string name="add_time_framed_lryics">Add time frame lyrics</string>
+
     <string name="added_title_to_playing_queue">"Adăugat 1 titlu la coada de redare."</string>
     <string name="added_x_titles_to_playing_queue">Adăugate %1$d titluri la coada de redare</string>
+
     <string name="album">Album</string>
+
+    <plurals name="albumSongs">
+        <item quantity="one">Song</item>
+        <item quantity="few">Songs</item>
+        <item quantity="other">Songs</item>
+    </plurals>
+
     <string name="album_artist">Artistul albumului</string>
-    <string name="album_or_artist_empty">Titlul ori numele artistului nu e completat</string>
+
     <string name="albums">Albume</string>
+    <plurals name="albums">
+        <item quantity="one">Album</item>
+        <item quantity="few">Albums</item>
+        <item quantity="other">Albums</item>
+    </plurals>
+
     <string name="always">Mereu</string>
+
     <string name="app_share">Hey! încearcă acest music player la adresa: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Amestecă</string>
     <string name="app_shortcut_top_tracks_short">Top cântece</string>
@@ -67,19 +84,25 @@
     <string name="app_widget_classic_name">Classic</string>
     <string name="app_widget_small_name">Mic</string>
     <string name="app_widget_text_name">Text</string>
+
     <string name="artist">Artist</string>
+
     <string name="artists">Artiști</string>
+
     <string name="audio_focus_denied">Folcalizarea audio a fost respinsă.</string>
     <string name="audio_settings_summary">Ajustați setările de sunet și comenzile egalizatorului</string>
+
     <string name="auto">Auto</string>
-    <string name="base_color_theme">Base color theme</string>
-    <string name="bass_boost">Bass Boost</string>
-    <string name="bio">Bio</string>
+
     <string name="biography">Biografie</string>
+
     <string name="black_theme_name">Negru</string>
+
     <string name="blacklist">Lista neagră</string>
+
     <string name="blur">Blur</string>
     <string name="blur_card">Blur Card</string>
+
     <string name="bug_report_failed">Unable to send report</string>
     <string name="bug_report_failed_invalid_token">Invalid access token. Please contact the app developer.</string>
     <string name="bug_report_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
@@ -92,45 +115,56 @@
     <string name="bug_report_no_title">Please enter an issue title</string>
     <string name="bug_report_no_username">Please enter your valid GitHub username</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
-    <string name="bug_report_uploading">Uploading report to GitHub…</string>
     <string name="bug_report_use_account">Send using GitHub account</string>
+
     <string name="buy_now">Buy now</string>
+
     <string name="cancel_current_timer">Anulează cronometrul curent</string>
+
     <string name="card">Card</string>
-    <string name="card_circular_style">Circular</string>
     <string name="card_color_style">Colored Card</string>
     <string name="card_style">Card</string>
-    <string name="carousal">Carousel</string>
+
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
+
     <string name="cascading">Cascading</string>
-    <string name="cast">Cast</string>
+
     <string name="changelog">Modificări</string>
     <string name="changelog_summary">Lista de modificări păstrată din aplicația \"Telegram\"</string>
+
     <string name="circle">Circle</string>
+
     <string name="circular">Circular</string>
+
     <string name="classic">Classic</string>
+
     <string name="clear_action">Șterge</string>
-    <string name="clear_app_data">Clear app data</string>
     <string name="clear_blacklist">Șterge \"Lista neagră\"</string>
     <string name="clear_playing_queue">Clear queue</string>
-    <string name="clear_playlist_title">Șterge playlist</string>
-    <string name="clear_playlist_x"><![CDATA[Dori\u021bi s\u0103 \u0219terge\u021bi playlist-ul  <b>%1$s</b>? Aceast\u0103 ac\u021biune nu poate fi \u00eenapoiat\u0103!]]></string>
-    <string name="close_notification">Close</string>
+
     <string name="color">Culoare</string>
-    <string name="color_theme_name">Culoare</string>
+
     <string name="colors">Culori</string>
+
     <string name="composer">Composer</string>
+
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
+
     <string name="could_not_create_playlist">Nu s-a putut crea playlist.</string>
     <string name="could_not_download_album_cover">"Nu s-a putut desc\u0103rca o copert\u0103 de album corespunz\u0103toare."</string>
     <string name="could_not_restore_purchase">Nu a putut fi restabilită achiziția.</string>
     <string name="could_not_scan_files">Nu s-au putut scana %d fișiere</string>
+
     <string name="create_action">Crează</string>
+
     <string name="created_playlist_x">S-a creat playlist-ul %1$s.</string>
+
     <string name="credit_title">Members and contributors </string>
+
     <string name="currently_listening_to_x_by_x">Acum ascultați %1$s de %2$s.</string>
+
     <string name="dark_theme_name">Suriu</string>
-    <string name="default_hint">Nu există versuri</string>
+
     <string name="delete_playlist_title">Șterge playlist</string>
     <string name="delete_playlist_x"><![CDATA[Doriți să ștergeți playlist-ul <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Șterge playlist-uri</string>
@@ -139,42 +173,62 @@
     <string name="delete_songs_title">Delete songs</string>
     <string name="delete_x_playlists"><![CDATA[Doriți să ștergeți <b>%1$d</b> playlist-uri?]]></string>
     <string name="delete_x_songs"><![CDATA[Doriți să ștergeți <b>%1$d</b> cântece?]]></string>
+
     <string name="deleted_x_songs">Au fost șterse %1$d cântece.</string>
-    <string name="deleting_songs">Deleting songs</string>
+
     <string name="depth">Depth</string>
+
     <string name="description">Description</string>
+
     <string name="device_info">Device info</string>
+
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
     <string name="dialog_title_set_ringtone">Set ringtone</string>
+
     <string name="do_you_want_to_clear_the_blacklist">Doriți să ștergeți lista neagră?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Doriți să ștergeți <b>%1$s</b> din lista neagră?]]></string>
+
     <string name="donate">Donează</string>
     <string name="donate_summary">Dacă ești de părere că merit să fiu plătit pentru munca mea,  poți să donezi aici.</string>
+
     <string name="donation_header">Cumpăraţi-mi o(un)</string>
-    <string name="download_from_last_fm">Descarcă de pe Last.fm</string>
+
     <string name="drive_mode">Drive mode</string>
-    <string name="edit">Edit</string>
-    <string name="edit_cover">Edit cover</string>
+
     <string name="empty">Gol</string>
+
     <string name="equalizer">Egalizator</string>
-    <string name="error">Error</string>
+
     <string name="faq">FAQ</string>
+
     <string name="favorites">Favorite</string>
+
     <string name="finish_last_song">Finish last song</string>
+
     <string name="fit">Fit</string>
+
     <string name="flat">Uniform</string>
+
     <string name="folders">Mape</string>
+
     <string name="follow_system">Follow system</string>
+
     <string name="for_you">Pentru dvs.</string>
+
     <string name="free">Free</string>
+
     <string name="full">Plin</string>
     <string name="full_card">Full card</string>
+
     <string name="general_settings_summary">Schimbați culorile generale ale aplicației</string>
     <string name="general_settings_title">Aspect</string>
+
     <string name="genre">Gen muzical</string>
+
     <string name="genres">Genuri</string>
+
     <string name="git_hub_summary">Fork the project on GitHub</string>
-    <string name="google_plus_community">Join the Google Plus community where you can ask for help or follow Retro Music updates</string>
+
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -184,16 +238,25 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Grid style</string>
+
     <string name="hinge">Hinge</string>
+
     <string name="history">Istoric</string>
+
     <string name="home">Acasă</string>
+
     <string name="horizontal_flip">Horizontal flip</string>
+
     <string name="image">Image</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
+
     <string name="inserted_x_songs_into_playlist_x">Au fost insertate %1$d cântece în playlist-ul %2$s.</string>
+
     <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
+
     <string name="keyboard">Keyboard</string>
+
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Numele fișierului</string>
@@ -202,31 +265,45 @@
     <string name="label_more_from">More from %s</string>
     <string name="label_sampling_rate">Rata de eșantionare</string>
     <string name="label_track_length">Lungime</string>
+
     <string name="labeled">Labeled</string>
+
     <string name="last_added">Adăugate recent</string>
     <string name="last_song">Last song</string>
-    <string name="lets_play_something">Hai să ascultăm ceva</string>
-    <string name="library">Biblioteca</string>
+
     <string name="library_categories">Library categories</string>
+
     <string name="licenses">Licențe</string>
+
     <string name="light_theme_name">Alb</string>
+
     <string name="listeners_label">Listeners</string>
+
     <string name="listing_files">Listarea fișierelor</string>
+
     <string name="loading_products">Se încarcă produsele...</string>
+
     <string name="login">Login</string>
+
     <string name="lyrics">Versuri</string>
+
     <string name="made_with_love">Made with ❤️ in India</string>
+
     <string name="material">Material</string>
+
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Permission error</string>
+
     <string name="my_name">Numele Meu</string>
     <string name="my_top_tracks">Top cântece redate</string>
+
     <string name="never">Niciodată</string>
-    <string name="new_banner_photo">New banner photo</string>
+
     <string name="new_playlist_title">Playlist nou</string>
-    <string name="new_profile_photo">New profile photo</string>
     <string name="new_start_directory">%s a fost setat ca noul registru principal.</string>
+
     <string name="next_song">Next Song</string>
+
     <string name="no_albums">Niciun album</string>
     <string name="no_artists">Niciun artist</string>
     <string name="no_audio_ID">"Mai întâi redă un cântec, apoi incearcă din nou."</string>
@@ -238,45 +315,59 @@
     <string name="no_purchase_found">Nu s-a găsit nicio achiziție.</string>
     <string name="no_results">Niciun rezultat</string>
     <string name="no_songs">Niciun cântec</string>
+
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normal lyrics</string>
-    <string name="normal_style">Normal</string>
+
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> nu este litsat în magazinul media.]]></string>
+
     <string name="nothing_to_scan">Nimic de scanat.</string>
     <string name="nothing_to_see">Nothing to see</string>
+
     <string name="notification">Notificare</string>
     <string name="notification_settings_summary">Personalizează stil de notificare</string>
+
     <string name="now_playing">Se redă</string>
     <string name="now_playing_queue">Coada de redare</string>
     <string name="now_playing_summary">Customize the now playing screen</string>
     <string name="now_playing_themes">9+ now playing themes</string>
+
     <string name="only_on_wifi">Doar pe Wi-Fi</string>
+
     <string name="other_settings_summary">Advanced testing features</string>
+
     <string name="others">Altele</string>
+
     <string name="password">Password</string>
+
     <string name="past_three_months">Ultimele 3 luni</string>
-    <string name="paste_lyrics_here">Paste lyrics here</string>
+
     <string name="peak">Peak</string>
+
     <string name="permission_external_storage_denied">Accesul la stocarea externă este respinsă.</string>
+
     <string name="permissions_denied">Permisiunile au fost respinse.</string>
+
     <string name="personalize">Personalizare</string>
     <string name="personalize_settings_summary">Personalizează UI si pagina de redare</string>
+
     <string name="pick_from_local_storage">Alegeți din spațiul de stocare local</string>
-    <string name="pick_image_intent_text">Pick image</string>
+
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
+
     <string name="plain">Simplu</string>
+
     <string name="playing_notification_description">Notificarea de redare oferă acțiuni de redare / pauză etc.</string>
     <string name="playing_notification_name">Notificarea de redare</string>
-    <string name="playlist_empty_text">Playlist gol</string>
+
     <string name="playlist_is_empty">Playlist-ul este gol</string>
     <string name="playlist_name_empty">Numele playlist-ului</string>
+
     <string name="playlists">Playlist-uri</string>
-    <string name="pref_album_detail_style">Album detail style</string>
+
     <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
     <string name="pref_blur_amount_title">Blur amount</string>
-    <string name="pref_dialog_corner_summary">Adjust the bottom sheet dialog corners</string>
-    <string name="pref_dialog_corner_title">Dialog corner</string>
     <string name="pref_filter_song_summary">Filter songs by length</string>
     <string name="pref_filter_song_title">Filter song duration</string>
     <string name="pref_header_advanced">Advanced</string>
@@ -293,9 +384,7 @@
     <string name="pref_keep_pause_on_zero_volume_title">Pause on zero</string>
     <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
-    <string name="pref_now_playing_screen_summary">Click to open with or slide to without transparent navigation of now playing screen</string>
-    <string name="pref_now_playing_screen_title">Click or Slide</string>
-    <string name="pref_snow_fall_title">Snow fall effect</string>
+    <string name="pref_language_name">Select language</string>
     <string name="pref_summary_album_art_on_lockscreen">Folosește coperta de album curentă ca imagine de fundal pe ecranul de blocare.</string>
     <string name="pref_summary_audio_ducking">Notificațiile, navigarea etc.</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
@@ -305,21 +394,17 @@
     <string name="pref_summary_classic_notification">Folosește designul classic de notificare.</string>
     <string name="pref_summary_colored_app">Culoarea fundalului și a butonului de control se schimbă în dependență de coperta albumului din ecranul de redare</string>
     <string name="pref_summary_colored_app_shortcuts">Colorează comenzile rapide în culoarea de accent. De fiecare dată cînd schimbați culoarea, comutați această opțiune pentru effect</string>
-    <string name="pref_summary_colored_navigation_bar">Colorează bara de navigare în culoarea primară.</string>
     <string name="pref_summary_colored_notification">"Coloreaz\u0103 notificarea dup\u0103 culoarea copertei de album."</string>
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
-    <string name="pref_summary_dominant_color">Cea mai dominantă culoare va fi selectată din coperta albumului sau a artistului.</string>
+    <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
     <string name="pref_summary_gapless_playback">"Poate cauza probleme de redare pe unele dispozitive."</string>
-    <string name="pref_summary_genre_toggle">Toggle genre tab</string>
     <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Poate mări calitatea copertei de album, dar cauzează încărcarea mai lentă a imaginilor. Activați această opțiune doar dacă aveți probleme cu coperta de album cu rezoluție mică.</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Comenzi pe ecranul de blocare pentru Retro music.</string>
     <string name="pref_summary_open_source_licences">Detalii privind licența pentru software open source</string>
-    <string name="pref_summary_round_corners">Colțuri rotunjite pentru ecran, coperta de album etc.</string>
-    <string name="pref_summary_tab_titles">Activare/Dezactivare file cu titluri de jos</string>
     <string name="pref_summary_toggle_full_screen">Mod imersiv</string>
     <string name="pref_summary_toggle_headset">Începe redarea imediat ce sunt conectate căștile.</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
@@ -327,75 +412,76 @@
     <string name="pref_title_album_art_on_lockscreen">Afișați coperta albumului</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
-    <string name="pref_title_album_grid_style">Album grid</string>
     <string name="pref_title_app_shortcuts">Comenzi rapide colorate</string>
-    <string name="pref_title_artist_grid_style">Artist grid</string>
     <string name="pref_title_audio_ducking">Reduce volumul la pierderea focalizării</string>
     <string name="pref_title_auto_download_artist_images">Descărcați automat imagini ale artistului</string>
     <string name="pref_title_blacklist">Blacklist</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Spălăcește coperta albumului</string>
-    <string name="pref_title_choose_equalizer">Choose equalizer</string>
     <string name="pref_title_classic_notification">Design classic de notificare</string>
     <string name="pref_title_colored_app">Culoare adaptivă</string>
     <string name="pref_title_colored_notification">Notificare colorată</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
+    <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
     <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Redare \"Gapless\"</string>
     <string name="pref_title_general_theme">Temă</string>
-    <string name="pref_title_genre_toggle">Show genre tab</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignoră copertele de pe Magazinul Media</string>
     <string name="pref_title_last_added_interval">Ultimul interval de playlist adăugat</string>
     <string name="pref_title_lock_screen">Comenzi ecran complet</string>
-    <string name="pref_title_navigation_bar">Bara de navigare colorată</string>
     <string name="pref_title_now_playing_screen_appearance">Aspect</string>
     <string name="pref_title_open_source_licences">Licențe open source</string>
-    <string name="pref_title_round_corners">Colțuri rotunjite</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">Efect de carusel</string>
-    <string name="pref_title_toggle_dominant_color">Culoarea dominantă</string>
     <string name="pref_title_toggle_full_screen">Ecran complet</string>
-    <string name="pref_title_toggle_tab_titles">Titlurile categoriior</string>
     <string name="pref_title_toggle_toggle_headset">Redare automată</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Controale volum</string>
-    <string name="pref_title_user_info">Info utilizator</string>
-    <string name="primary_color">Culoarea de bază</string>
-    <string name="primary_color_desc">Culoarea temei primare, implicită în gri albastru, pentru moment funcționează doar cu culori închise</string>
+
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+
     <string name="profile">Profile</string>
+
     <string name="purchase">Procurare</string>
-    <string name="purchase_summary">*Think before buying, don\'t ask for refund.</string>
+
     <string name="queue">Coadă</string>
+
     <string name="rate_app">Evaluaţi aplicaţia</string>
     <string name="rate_on_google_play_summary">Dacă vă place această aplicație, anunțați-ne în magazinul Google Play pentru a oferi o experiență mai bună</string>
+
     <string name="recent_albums">Albume recente</string>
     <string name="recent_artists">Artişti recenţi</string>
+
     <string name="remove_action">Eliminare</string>
-    <string name="remove_banner_photo">Remove banner photo</string>
     <string name="remove_cover">Eliminare copertă</string>
     <string name="remove_from_blacklist">Eliminare din lista neagră</string>
-    <string name="remove_profile_photo">Remove profile photo</string>
     <string name="remove_song_from_playlist_title">Eliminați melodia din lista de redare</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Eliminaţi melodia <b>%1$s</b> din lista de redare?]]></string>
     <string name="remove_songs_from_playlist_title">Eliminare melodii din lista de redare</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[Eliminaţi <b>%1$d</b> melodii din lista de redare?]]></string>
+
     <string name="rename_playlist_title">Redenumiţi lista de redare</string>
+
     <string name="report_an_issue">Report an issue</string>
     <string name="report_bug">Report bug</string>
+
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">Reseteţi imaginea artistului</string>
+
     <string name="restore">Restabilire</string>
+
     <string name="restored_previous_purchase_please_restart">A fost restaurată achiziția anterioară. Reporniți aplicația pentru a utiliza toate funcțiile.</string>
     <string name="restored_previous_purchases">Au fost restabilite achizițiile anterioare.</string>
+
     <string name="restoring_purchase">Se restabilește achiziția...</string>
-    <string name="retro_equalizer">Retro Egalizator</string>
+
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Cumpărați RetroMusic Pro</string>
+
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -408,37 +494,48 @@
     <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
     <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
     <string name="saf_write_failed">File write failed: %s</string>
+
     <string name="save">Save</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">Salvare ca fişier</string>
     <string name="save_playlists_title">Save as files</string>
+
     <string name="saved_playlist_to">Salvaţi lista de redare în %s.</string>
+
     <string name="saving_changes">Salvare modificări</string>
+
     <string name="scan_media">Scan media</string>
+
     <string name="scanned_files">Au fost scanate %1$d din %2$d fişiere.</string>
+
     <string name="scrobbles_label">Scrobbles</string>
-    <string name="search_hint">Căutare în bibliotecă...</string>
+
     <string name="select_all">Select all</string>
-    <string name="select_banner_photo">Select banner photo</string>
+
     <string name="selected">Selected</string>
-    <string name="send_crash_log">Send crash log</string>
+
     <string name="set">Set</string>
     <string name="set_artist_image">Setaţi imaginea artistului</string>
-    <string name="set_photo">Set a profile photo</string>
+
     <string name="share_app">Share app</string>
     <string name="share_to_stories">Share to Stories</string>
+
     <string name="shuffle">Amestecare</string>
+
     <string name="simple">Simplu</string>
+
     <string name="sleep_timer_canceled">Temporizatorul a fost anulat.</string>
     <string name="sleep_timer_set">Temporizatorul este setat pentru %d minute de acum.</string>
-    <string name="slide">Slide</string>
-    <string name="small">Small album</string>
+
     <string name="social">Social</string>
     <string name="social_stories">Share story</string>
+
     <string name="song">Melodie</string>
     <string name="song_duration">Durată</string>
+
     <string name="songs">Melodii</string>
+
     <string name="sort_order">ordinea de sortare</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">Album</string>
@@ -448,98 +545,91 @@
     <string name="sort_order_date_modified">Date modified</string>
     <string name="sort_order_year">Year</string>
     <string name="sort_order_z_a">Descending</string>
+
     <string name="speech_not_supported">Scuze! Dispozitivul tau nu suporta comenzi vocale</string>
     <string name="speech_prompt">Caută în colecția ta</string>
+
     <string name="stack">Stack</string>
+
     <string name="start_play_music">Start playing music.</string>
+
     <string name="suggestion_songs">Suggestions</string>
-    <string name="summary_user_info">Numele tău va fi afișat pe ecranul de pornire</string>
+
     <string name="support_development">Susţineţi dezvoltarea</string>
+
     <string name="swipe_to_unlock">Swipe to unlock</string>
+
     <string name="synced_lyrics">Synced lyrics</string>
-    <string name="system_equalizer">System Equalizer</string>
+
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
+
     <string name="thank_you">Mulțumesc!</string>
+
     <string name="the_audio_file">Fișier audio</string>
+
     <string name="this_month">Luna aceasta</string>
     <string name="this_week">Săptămâna aceasta</string>
     <string name="this_year">Anul acesta</string>
+
     <string name="tiny">Mic</string>
+    <string name="tiny_card_style">Tiny card</string>
+
     <string name="title">Title</string>
-    <string name="title_dashboard">Tablou de bord</string>
-    <string name="title_good_afternoon">Bună ziua</string>
-    <string name="title_good_day">O zi bună</string>
-    <string name="title_good_evening">Bună seara</string>
-    <string name="title_good_morning">Bună dimineaţa</string>
-    <string name="title_good_night">Noapte bună</string>
-    <string name="title_user_info">Numele dvs.</string>
+
     <string name="today">Astăzi</string>
+
     <string name="top_albums">Albume de top</string>
     <string name="top_artists">Artişti de top</string>
+
     <string name="track_hint">"Melodie (2 pentru melodia 2 sau 3004 pentru CD3 melodia 4)"</string>
     <string name="track_list">Numărul piesei</string>
+
     <string name="translate">Traducere</string>
     <string name="translate_community">Help us translate the app to your language</string>
+
+    <string name="try_retro_music_premium">Try Retro Music Premium</string>
+
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Share your design with Retro Music</string>
+
     <string name="unlabeled">Unlabeled</string>
+
     <string name="unplayable_file">Nu s-a putut reda aceast\u0103 melodie.</string>
+
     <string name="up_next">Urmează</string>
+
     <string name="update_image">Actualizare imagine</string>
+
     <string name="updating">Se actualizează...</string>
+
     <string name="username">Username</string>
+
     <string name="version">Versiune</string>
+
     <string name="vertical_flip">Vertical flip</string>
-    <string name="virtualizer">Virtualizer</string>
+
     <string name="volume">Volume</string>
+
     <string name="web_search">Căutare pe internet</string>
+
     <string name="welcome">Welcome,</string>
+
     <string name="what_do_you_want_to_share">Ce doriți să expediați?</string>
+
     <string name="whats_new">What\'s New</string>
+
     <string name="window">Fereastră</string>
     <string name="window_corner_edges">Rounded corners</string>
+
     <string name="x_has_been_set_as_ringtone">Setează %1$s ca ton de apel</string>
     <string name="x_selected">%1$d selectat</string>
+
     <string name="year">Anul</string>
+
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
+
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="amount">Amount</string>
-    <string name="note">Note(Optional)</string>
-    <string name="start_payment">Start payment</string>
-    <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
-    <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
-    <string name="tiny_card_style">Tiny card</string>
-    <string name="about_album_label">About %s</string>
-    <string name="pref_language_name">Select language</string>
-    <string name="translators">Translators</string>
-    <string name="translators_summary">The people who helped translate this app</string>
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
-    <plurals name="albumSongs">
-        <item quantity="one">Song</item>
-        <item quantity="few">Songs</item>
-        <item quantity="other">Songs</item>
-    </plurals>
-    <plurals name="albums">
-        <item quantity="one">Album</item>
-        <item quantity="few">Albums</item>
-        <item quantity="other">Albums</item>
-    </plurals>
-    <plurals name="numSongs">
-        <item quantity="one">%d Song</item>
-        <item quantity="few">%d Songs</item>
-        <item quantity="other">%d Songs</item>
-    </plurals>
-    <plurals name="numAlbums">
-        <item quantity="one">%d Album</item>
-        <item quantity="few">%d Albums</item>
-        <item quantity="other">%d Albums</item>
-    </plurals>
-    <plurals name="numArtists">
-        <item quantity="one">%d Artist</item>
-        <item quantity="few">%d Artists</item>
-        <item quantity="other">%d Artists</item>
-    </plurals>
 </resources>

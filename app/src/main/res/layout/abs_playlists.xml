@@ -65,7 +65,6 @@
             app:srcCompat="@drawable/ic_library_add" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -152,7 +151,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/shortcuts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="history,lastAdded,topPlayed,actionShuffle" />

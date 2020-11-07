@@ -10,6 +10,7 @@
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
 package io.github.muntashirakon.music
 
@@ -51,7 +52,7 @@ object Constants {
     )
     const val NUMBER_OF_TOP_TRACKS = 99
 }
-
+const val EXTRA_PLAYLIST_TYPE = "type"
 const val EXTRA_GENRE = "extra_genre"
 const val EXTRA_PLAYLIST = "extra_playlist"
 const val EXTRA_PLAYLIST_ID = "extra_playlist_id"

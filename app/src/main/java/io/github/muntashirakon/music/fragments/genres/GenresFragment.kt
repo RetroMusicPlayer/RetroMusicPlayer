@@ -16,13 +16,20 @@ package io.github.muntashirakon.music.fragments.genres
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.github.muntashirakon.music.EXTRA_GENRE
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.GenreAdapter
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewFragment
+import io.github.muntashirakon.music.interfaces.IGenreClickListener
+import io.github.muntashirakon.music.model.Genre
 
-class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>() {
+class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
+    IGenreClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.getGenre().observe(viewLifecycleOwner, Observer {
@@ -39,7 +46,7 @@ class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager
 
     override fun createAdapter(): GenreAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return GenreAdapter(requireActivity(), dataSet, R.layout.item_list_no_image)
+        return GenreAdapter(requireActivity(), dataSet, R.layout.item_list_no_image, this)
     }
 
     override val emptyMessage: Int
@@ -53,5 +60,16 @@ class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager
         fun newInstance(): GenresFragment {
             return GenresFragment()
         }
+    }
+
+    override fun onClickGenre(genre: Genre, view: View) {
+        findNavController().navigate(
+            R.id.genreDetailsFragment,
+            bundleOf(EXTRA_GENRE to genre),
+            null,
+            FragmentNavigatorExtras(
+                view to "genre"
+            )
+        )
     }
 }

@@ -50,13 +50,13 @@ import io.github.muntashirakon.music.model.lyrics.Lyrics
 import io.github.muntashirakon.music.repository.RealRepository
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.*
-import java.io.FileNotFoundException
 import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
+import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
     Toolbar.OnMenuItemClickListener, IPaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {

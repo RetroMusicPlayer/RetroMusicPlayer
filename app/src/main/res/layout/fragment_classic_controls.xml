@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/playback_controls"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -10,56 +9,50 @@
     android:paddingBottom="8dp"
     tools:ignore="MissingPrefix">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/progressContainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/progress_container_height"
         android:background="@color/twenty_percent_black_overlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
-            android:layout_width="0dp"
-            android:minWidth="40dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
             android:gravity="center_vertical|left|end"
-            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="?colorOnSecondary"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="@tools:sample/date/hhmmss" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/songTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right|end"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textColor="?colorOnSecondary"
+            android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="@tools:sample/date/hhmmss" />
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
             style="@style/MusicProgressSlider"
-            android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toStartOf="@id/songTotalTime"
-            app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
+            android:layout_toLeftOf="@id/songTotalTime"
+            android:layout_toRightOf="@id/songCurrentProgress"
             tools:ignore="RtlHardcoded,UnusedAttribute" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/songTotalTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|right|end"
-            android:paddingEnd="8dp"
-            android:singleLine="true"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlHardcoded,RtlSymmetry"
-            tools:text="@tools:sample/date/hhmmss" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 
     <androidx.appcompat.widget.AppCompatImageButton

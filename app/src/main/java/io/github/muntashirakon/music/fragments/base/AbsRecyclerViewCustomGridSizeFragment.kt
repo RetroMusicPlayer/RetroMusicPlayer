@@ -112,7 +112,7 @@ abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>
         } else {
             0
         }
-        recyclerView.setPadding(padding, padding, padding, padding)
+        //recyclerView.setPadding(padding, padding, padding, padding)
     }
 
     protected abstract fun setGridSize(gridSize: Int)

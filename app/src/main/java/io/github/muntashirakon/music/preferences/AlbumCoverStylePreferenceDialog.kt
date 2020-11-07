@@ -30,11 +30,12 @@ import androidx.fragment.app.DialogFragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
+import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.extensions.colorButtons
-import io.github.muntashirakon.music.extensions.colorControlNormal
-import io.github.muntashirakon.music.extensions.materialDialog
+import io.github.muntashirakon.music.extensions.*
+import io.github.muntashirakon.music.fragments.AlbumCoverStyle
 import io.github.muntashirakon.music.fragments.AlbumCoverStyle.*
+import io.github.muntashirakon.music.util.NavigationUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.ViewUtil
 import com.bumptech.glide.Glide
@@ -115,7 +116,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
             val proText = layout.findViewById<TextView>(R.id.proText)
             Glide.with(context).load(albumCoverStyle.drawableResId).into(image)
             title.setText(albumCoverStyle.titleRes)
-            proText.setText(R.string.pro)
+            proText.hide()
             return layout
         }
 

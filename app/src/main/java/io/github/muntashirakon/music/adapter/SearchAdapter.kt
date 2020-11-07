@@ -18,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
+import io.github.muntashirakon.music.db.PlaylistEntity
 import io.github.muntashirakon.music.db.PlaylistWithSongs
 import io.github.muntashirakon.music.glide.AlbumGlideRequest
 import io.github.muntashirakon.music.glide.ArtistGlideRequest
@@ -52,7 +54,7 @@ class SearchAdapter(
         if (dataSet[position] is Album) return ALBUM
         if (dataSet[position] is Artist) return ARTIST
         if (dataSet[position] is Genre) return GENRE
-        if (dataSet[position] is PlaylistWithSongs) return PLAYLIST
+        if (dataSet[position] is PlaylistEntity) return PLAYLIST
         return if (dataSet[position] is Song) SONG else HEADER
     }
 
@@ -107,9 +109,9 @@ class SearchAdapter(
                 )
             }
             PLAYLIST -> {
-                val playlist = dataSet[position] as PlaylistWithSongs
-                holder.title?.text = playlist.playlistEntity.playlistName
-                holder.text?.text = MusicUtil.playlistInfoString(activity, playlist.songs)
+                val playlist = dataSet[position] as PlaylistEntity
+                holder.title?.text = playlist.playlistName
+                //holder.text?.text = MusicUtil.playlistInfoString(activity, playlist.songs)
             }
             else -> {
                 holder.title?.text = dataSet[position].toString()
@@ -137,6 +139,7 @@ class SearchAdapter(
             itemView.setOnLongClickListener(null)
             imageTextContainer?.isInvisible = true
             if (itemViewType == SONG) {
+                imageTextContainer?.isGone = true
                 menu?.visibility = View.VISIBLE
                 menu?.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
                     override val song: Song

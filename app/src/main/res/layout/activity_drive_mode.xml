@@ -63,7 +63,6 @@
         app:srcCompat="@drawable/ic_close" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/car"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_margin="16dp"
