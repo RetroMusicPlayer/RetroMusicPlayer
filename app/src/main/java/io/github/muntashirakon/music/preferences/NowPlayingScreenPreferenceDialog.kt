@@ -29,15 +29,15 @@ import androidx.fragment.app.DialogFragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
-import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.*
-import code.name.monkey.retromusic.fragments.NowPlayingScreen
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
-import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.ViewUtil
 import com.bumptech.glide.Glide
+import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorButtons
+import io.github.muntashirakon.music.extensions.colorControlNormal
+import io.github.muntashirakon.music.extensions.hide
+import io.github.muntashirakon.music.extensions.materialDialog
+import io.github.muntashirakon.music.fragments.NowPlayingScreen.values
+import io.github.muntashirakon.music.util.PreferenceUtil
+import io.github.muntashirakon.music.util.ViewUtil
 
 class NowPlayingScreenPreference @JvmOverloads constructor(
     context: Context,
