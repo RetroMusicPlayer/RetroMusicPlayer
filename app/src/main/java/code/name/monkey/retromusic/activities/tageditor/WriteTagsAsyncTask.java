@@ -98,7 +98,8 @@ public class WriteTagsAsyncTask extends DialogAsyncTask<LoadingInfo, Integer, Li
             Context context = getContext();
             if (context != null) {
                 if (wroteArtwork) {
-                    MusicUtil.INSTANCE.insertAlbumArt(context, info.getArtworkInfo().getAlbumId(), albumArtFile.getPath());
+                    MusicUtil.INSTANCE.
+                            insertAlbumArt(context, info.getArtworkInfo().getAlbumId(), albumArtFile.getPath());
                 } else if (deletedArtwork) {
                     MusicUtil.INSTANCE.deleteAlbumArt(context, info.getArtworkInfo().getAlbumId());
                 }
