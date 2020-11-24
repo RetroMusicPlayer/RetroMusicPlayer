@@ -45,10 +45,8 @@ class RealSearchRepository(
                 results.add(context.resources.getString(R.string.albums))
                 results.addAll(albums)
             }
-            val genres: List<Genre> = genreRepository.genres().filter { genre ->
-                genre.name.toLowerCase(Locale.getDefault())
-                    .contains(searchString.toLowerCase(Locale.getDefault()))
-            }
+
+            val genres = genreRepository.genres(searchString)
             if (genres.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.genres))
                 results.addAll(genres)
