@@ -6,31 +6,15 @@
     <color name="window_color_dark">@android:color/black</color>
 
     <color name="twenty_percent_black_overlay">#34000000</color>
-    <color name="eighty_percent_black_overlay">#80000000</color>
     <color name="app_shortcut_default_foreground">#607d8b</color>
     <color name="app_shortcut_default_background">#f5f5f5</color>
     <color name="md_indigo_A400">#3D5AFE</color>
     <color name="dark_color">#202124</color>
-    <color name="dark_grey">#17181a</color>
-    <color name="card_dark_color">#222326</color>
     <color name="black_color">#202124</color>
 
-    <color name="lightColorPrimary">#FFFFFF</color>
-    <color name="lightColorOnPrimary">#202020</color>
-    <color name="lightColorSecondary">#FEFEFE</color>
-    <color name="lightColorBackground">#FFFFFF</color>
-    <color name="lightColorSurface">#FEFEFE</color>
-
     <color name="darkColorPrimary">#202124</color>
-    <color name="darkColorOnPrimary">#ffffff</color>
-    <color name="darkColorSecondary">#202124</color>
-    <color name="darkColorBackground">#202124</color>
     <color name="darkColorSurface">#202124</color>
 
-    <color name="blackColorPrimary">#000000</color>
-    <color name="blackColorOnPrimary">#ffffff</color>
-    <color name="blackColorSecondary">#000000</color>
-    <color name="blackColorBackground">#000000</color>
     <color name="blackColorSurface">#000000</color>
 
     <color name="transparent">#00000000</color>
@@ -39,10 +23,8 @@
     <color name="card_background">#ffffff</color>
     <color name="card_shadow_1">#d4d4d4</color>
     <color name="card_shadow_2">#dddddd</color>
-    <color name="card_detailing">#eee</color>
 
     <color name="progress_gray">#FFD8D8D8</color>
-    <color name="progress_gray_dark">#FF383838</color>
     <color name="default_blue_light">#ff33b5e5</color>
 
 

@@ -7,7 +7,5 @@
     <string name="transition_artist_image" translatable="false">artist_image_transition</string>
     <string name="transition_artist_name" translatable="false" tools:keep="@string/transition_artist_name">artist_image_transition</string>
     <string name="transition_artist_text" translatable="false" tools:keep="@string/transition_artist_text">artist_image_transition</string>
-    <string name="transition_mini_player" translatable="false">mini_player_transition</string>
-    <string name="transition_toolbar" translatable="false">toolbar_transition</string>
     <string name="transition_lyrics" translatable="false">toolbar_transition</string>
 </resources>

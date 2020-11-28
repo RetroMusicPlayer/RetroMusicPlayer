@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="about_album_label">About %s</string>
     <string name="about_settings_summary">Team, soziale Netzwerke</string>
+
     <string name="accent_color">Akzentfarbe</string>
     <string name="accent_color_desc">Akzentfarbe des Farbthemas, Standard ist Grün</string>
+
     <string name="action_about">Über</string>
     <string name="action_add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="action_add_to_playing_queue">Zur Wiedergabeliste hinzufügen</string>
     <string name="action_add_to_playlist">Zur Playlist hinzufügen...</string>
     <string name="action_clear_playing_queue">Wiedergabeliste leeren</string>
-    <string name="action_clear_playlist">Playlist leeren</string>
     <string name="action_cycle_repeat">Wiederholungsmodus wechseln</string>
     <string name="action_delete">Löschen</string>
     <string name="action_delete_from_device">Vom Gerät löschen</string>
@@ -46,19 +48,32 @@
     <string name="action_tag_editor">Tag-Editor</string>
     <string name="action_toggle_favorite">Favorit umschalten</string>
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
+
     <string name="adaptive">Adaptiv</string>
+
     <string name="add_action">Hinzufügen</string>
-    <string name="add_lyrics">Songtext hinzufügen</string>
-    <string name="add_photo">Bild \nhinzufügen</string>
     <string name="add_playlist_title">"Zur Playlist hinzufügen"</string>
-    <string name="add_time_framed_lryics">Synchronisierten Songtext hinzufügen</string>
+
     <string name="added_title_to_playing_queue">"1 Titel wurde zur Wiedergabeliste hinzugefügt."</string>
     <string name="added_x_titles_to_playing_queue">%1$d Titel wurden zur Wiedergabeliste hinzugefügt.</string>
+
     <string name="album">Album</string>
+
+    <plurals name="albumSongs">
+        <item quantity="one">Song</item>
+        <item quantity="other">Songs</item>
+    </plurals>
+
     <string name="album_artist">Album Künstler</string>
-    <string name="album_or_artist_empty">Titel oder Künstler ist leer.</string>
+
     <string name="albums">Alben</string>
+    <plurals name="albums">
+        <item quantity="one">Album</item>
+        <item quantity="other">Albums</item>
+    </plurals>
+
     <string name="always">Immer</string>
+
     <string name="app_share">Hey, schau dir diesen coolen Music Player an: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Zufällig</string>
     <string name="app_shortcut_top_tracks_short">Top Songs</string>
@@ -67,19 +82,25 @@
     <string name="app_widget_classic_name">Classic</string>
     <string name="app_widget_small_name">Klein</string>
     <string name="app_widget_text_name">Text</string>
+
     <string name="artist">Künstler</string>
+
     <string name="artists">Künstler</string>
+
     <string name="audio_focus_denied">Audio Fokus verweigert.</string>
     <string name="audio_settings_summary">Sound- und Equalizer-Optionen einstellen</string>
+
     <string name="auto">Automatisch</string>
-    <string name="base_color_theme">Grundfarbe</string>
-    <string name="bass_boost">Bassboost</string>
-    <string name="bio">Beschreibung</string>
+
     <string name="biography">Biografie</string>
+
     <string name="black_theme_name">Sehr schwarz</string>
+
     <string name="blacklist">Schwarze Liste</string>
+
     <string name="blur">Unschärfe</string>
     <string name="blur_card">Karte (Unschärfe)</string>
+
     <string name="bug_report_failed">Fehler beim Melden</string>
     <string name="bug_report_failed_invalid_token">Ungültiger Token. Bitte kontaktiere den Entwickler.</string>
     <string name="bug_report_failed_issues_not_available">Für diese Repository sind Fehlermeldungen nicht aktiviert. Bitte den Entwickler kontaktieren.</string>
@@ -92,45 +113,56 @@
     <string name="bug_report_no_title">Bitte gebe einen Titel ein</string>
     <string name="bug_report_no_username">Bitte nutze einen gültigen GitHub-Nutzernamen</string>
     <string name="bug_report_summary">Sorry! Ein unerwarteter Fehler ist aufgetreten. Die App-Daten zurückzusetzen, könnte helfen.</string>
-    <string name="bug_report_uploading">Meldung zu GitHub hochladen...</string>
     <string name="bug_report_use_account">Via GitHub senden</string>
+
     <string name="buy_now">Jetzt kaufen</string>
+
     <string name="cancel_current_timer">Timer stoppen</string>
+
     <string name="card">Karte</string>
-    <string name="card_circular_style">Rund</string>
     <string name="card_color_style">Karte (Farbe)</string>
     <string name="card_style">Karte</string>
-    <string name="carousal">Karussell</string>
+
     <string name="carousal_effect_on_now_playing_screen">Karussell-Effekt auf dem Abspielbildschirm</string>
+
     <string name="cascading">Kaskadierend</string>
-    <string name="cast">Übertragen</string>
+
     <string name="changelog">Änderungen</string>
     <string name="changelog_summary">Changelog über Telegram-App verwaltet.</string>
+
     <string name="circle">Kreis</string>
+
     <string name="circular">Rund</string>
+
     <string name="classic">Klassik</string>
+
     <string name="clear_action">Leer</string>
-    <string name="clear_app_data">App-Daten zurücksetzen</string>
     <string name="clear_blacklist">Blacklist leeren</string>
     <string name="clear_playing_queue">Leeren</string>
-    <string name="clear_playlist_title">Playlist leeren</string>
-    <string name="clear_playlist_x"><![CDATA[Playlist <b>%1$s</b> leeren? Dies kann nicht r\u00fcckg\u00e4ngig gemacht werden!]]></string>
-    <string name="close_notification">Schließen</string>
+
     <string name="color">Farbe</string>
-    <string name="color_theme_name">Farbe</string>
+
     <string name="colors">Farben</string>
+
     <string name="composer">Komponist</string>
+
     <string name="copied_device_info_to_clipboard">Geräteinformationen wurden kopiert</string>
+
     <string name="could_not_create_playlist">Playlist konnte nicht erstellt werden.</string>
     <string name="could_not_download_album_cover">"Passendes Album Cover konnte nicht gedownloadet werden."</string>
     <string name="could_not_restore_purchase">Kauf konnte nicht wiederhergestellt werden.</string>
     <string name="could_not_scan_files">%d Dateien konnte(n) nicht gescannt werden.</string>
+
     <string name="create_action">Erstellen</string>
+
     <string name="created_playlist_x">Playlist %1$s erstellt.</string>
+
     <string name="credit_title">Helfende Hände</string>
+
     <string name="currently_listening_to_x_by_x">Spielt zur Zeit %1$s von %2$s.</string>
+
     <string name="dark_theme_name">Dunkel</string>
-    <string name="default_hint">keine Lyrics</string>
+
     <string name="delete_playlist_title">Playlist löschen</string>
     <string name="delete_playlist_x"><![CDATA[Playlist <b>%1$s</b> löschen?]]></string>
     <string name="delete_playlists_title">Playlisten löschen</string>
@@ -139,42 +171,62 @@
     <string name="delete_songs_title">Songs löschen</string>
     <string name="delete_x_playlists"><![CDATA[<b>%1$d</b> Playlisten löschen?]]></string>
     <string name="delete_x_songs"><![CDATA[<b>%1$d</b> Songs löschen?]]></string>
+
     <string name="deleted_x_songs">%1$d Songs gelöscht.</string>
-    <string name="deleting_songs">Lösche Songs</string>
+
     <string name="depth">Tiefe</string>
+
     <string name="description">Beschreibung</string>
+
     <string name="device_info">Geräteinfo</string>
+
     <string name="dialog_message_set_ringtone">Retro Music erlauben, Audioeinstellungen zu verändern</string>
     <string name="dialog_title_set_ringtone">Klingelton festlegen</string>
+
     <string name="do_you_want_to_clear_the_blacklist">Möchtest du die Blacklist leeren?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Möchtest du <b>%1$s</b> von der Blacklist entfernen?]]></string>
+
     <string name="donate">Spenden</string>
     <string name="donate_summary">Falls du denkst ich habe mir etwas für meine Arbeit verdient, kannst du hier gerne ein bisschen Geld hinterlassen.</string>
+
     <string name="donation_header">Kauf\' mir:</string>
-    <string name="download_from_last_fm">Von Last.fm downloaden</string>
+
     <string name="drive_mode">Fahrmodus</string>
-    <string name="edit">Bearbeiten</string>
-    <string name="edit_cover">Cover bearbeiten</string>
+
     <string name="empty">Leer</string>
+
     <string name="equalizer">Equalizer</string>
-    <string name="error">Fehler</string>
+
     <string name="faq">FAQ</string>
+
     <string name="favorites">Favoriten</string>
+
     <string name="finish_last_song">Letzten Song ganz spielen</string>
+
     <string name="fit">Anpassen</string>
+
     <string name="flat">Flach</string>
+
     <string name="folders">Ordner</string>
+
     <string name="follow_system">System folgen</string>
+
     <string name="for_you">Für dich</string>
+
     <string name="free">Kostenlos</string>
+
     <string name="full">Voll</string>
     <string name="full_card">Karte (Voll)</string>
+
     <string name="general_settings_summary">Allgemeine Farben der App ändern</string>
     <string name="general_settings_title">Aussehen</string>
+
     <string name="genre">Genre</string>
+
     <string name="genres">Genres</string>
+
     <string name="git_hub_summary">Projekt von GitHub forken</string>
-    <string name="google_plus_community">Tritt\' der Google Plus-Community bei, um nach Hilfe zu fragen oder Updates zu Retro Music zu erhalten</string>
+
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -184,16 +236,25 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Vorschaubilder</string>
+
     <string name="hinge">Scharnier</string>
+
     <string name="history">Verlauf</string>
+
     <string name="home">Zuhause</string>
+
     <string name="horizontal_flip">Horizontale Drehung</string>
+
     <string name="image">Bild</string>
     <string name="image_gradient">Bild mit Farbverlauf</string>
     <string name="image_settings_summary">Download-Verhalten für Interpretenbilder ändern</string>
+
     <string name="inserted_x_songs_into_playlist_x">%1$d Song(s) in Playlist %2$s eingefügt.</string>
+
     <string name="instagram_page_summary">Teile dein Retro Music-Design auf Instagram</string>
+
     <string name="keyboard">Tastatur</string>
+
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Formattieren</string>
     <string name="label_file_name">Dateiname</string>
@@ -202,31 +263,45 @@
     <string name="label_more_from">Mehr von %s</string>
     <string name="label_sampling_rate">Sampling Rate</string>
     <string name="label_track_length">Länge</string>
+
     <string name="labeled">Beschriftet</string>
+
     <string name="last_added">Zuletzt hinzugefügt</string>
     <string name="last_song">Letzter Song</string>
-    <string name="lets_play_something">Lass uns etwas abspielen</string>
-    <string name="library">Bibliothek</string>
+
     <string name="library_categories">Bibliothekkategorien</string>
+
     <string name="licenses">Lizenzen</string>
+
     <string name="light_theme_name">Sehr weiß</string>
+
     <string name="listeners_label">Zuhörer</string>
+
     <string name="listing_files">Gelistete Dateien</string>
+
     <string name="loading_products">Produkte werden geladen...</string>
+
     <string name="login">Login</string>
+
     <string name="lyrics">Songtext</string>
+
     <string name="made_with_love">Hergestellt mit ❤ in Indien</string>
+
     <string name="material">Material</string>
+
     <string name="md_error_label">Fehler</string>
     <string name="md_storage_perm_error">Berechtigungsfehler</string>
+
     <string name="my_name">Mein Name</string>
     <string name="my_top_tracks">Meine Top Lieder</string>
+
     <string name="never">Nie</string>
-    <string name="new_banner_photo">Neues Banner-Foto</string>
+
     <string name="new_playlist_title">Neue Playlist</string>
-    <string name="new_profile_photo">Neues Profilbild</string>
     <string name="new_start_directory">%s ist das neue Startverzeichnis.</string>
+
     <string name="next_song">Nächster Song</string>
+
     <string name="no_albums">Keine Alben</string>
     <string name="no_artists">Keine Künstler</string>
     <string name="no_audio_ID">"Song abspielen und anschließend erneut versuchen."</string>
@@ -238,45 +313,59 @@
     <string name="no_purchase_found">Kein Kauf gefunden.</string>
     <string name="no_results">Keine Ergebnisse</string>
     <string name="no_songs">Keine Songs</string>
+
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normaler Songtext</string>
-    <string name="normal_style">Normal</string>
+
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> ist nicht im Medienspeicher aufgeführt.]]></string>
+
     <string name="nothing_to_scan">Nichts zu scannen.</string>
     <string name="nothing_to_see">Nichts zu sehen</string>
+
     <string name="notification">Benachrichtigung</string>
     <string name="notification_settings_summary">Benachrichtigungen bearbeiten</string>
+
     <string name="now_playing">Derzeit gespielt</string>
     <string name="now_playing_queue">Aktuelle Wiedergabeliste</string>
     <string name="now_playing_summary">Passe den Abspielbildschirm an</string>
     <string name="now_playing_themes">Mehr als 10 Abspiel-Themes</string>
+
     <string name="only_on_wifi">Nur über Wi-Fi</string>
+
     <string name="other_settings_summary">Erweiterte Testfunktionen</string>
+
     <string name="others">Anderes</string>
+
     <string name="password">Passwort</string>
+
     <string name="past_three_months">Letzte 3 Monate</string>
-    <string name="paste_lyrics_here">Songtext hier einfügen</string>
+
     <string name="peak">Spitze</string>
+
     <string name="permission_external_storage_denied">Berechtigung für den Zugriff auf externen Speicher verweigert.</string>
+
     <string name="permissions_denied">Berechtigung verweigert.</string>
+
     <string name="personalize">Personalisieren</string>
     <string name="personalize_settings_summary">Abspiel-Bildschirm und Interface bearbeiten</string>
+
     <string name="pick_from_local_storage">Vom lokalen Speicher wählen</string>
-    <string name="pick_image_intent_text">Bild auswählen</string>
+
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Folge der Pinterest-Seite für Retro Music Design Inspirationen</string>
+
     <string name="plain">Einfach</string>
+
     <string name="playing_notification_description">Die Abspielbenachrichtigung bietet Play/Pause-Steuerung</string>
     <string name="playing_notification_name">Abspielbenachrichtigung</string>
-    <string name="playlist_empty_text">Leere Playlist</string>
+
     <string name="playlist_is_empty">Playlist ist leer</string>
     <string name="playlist_name_empty">Playlistname</string>
+
     <string name="playlists">Wiedergabelisten</string>
-    <string name="pref_album_detail_style">Style der Albumdetails</string>
+
     <string name="pref_blur_amount_summary">Geringere Unschärfe benötigt weniger Rechenleistung.</string>
     <string name="pref_blur_amount_title">Unschärfe</string>
-    <string name="pref_dialog_corner_summary">Adjust the bottom sheet dialog corners</string>
-    <string name="pref_dialog_corner_title">Dialog corner</string>
     <string name="pref_filter_song_summary">Lieder nach Länge filtern</string>
     <string name="pref_filter_song_title">Nach Spieldauer filtern</string>
     <string name="pref_header_advanced">Erweitert</string>
@@ -293,9 +382,7 @@
     <string name="pref_keep_pause_on_zero_volume_title">Bei Stummstellung pausieren</string>
     <string name="pref_keep_screen_on_summary">Beachte, dass diese Funktion sich auf die Akkulaufzeit auswirkt.</string>
     <string name="pref_keep_screen_on_title">Bildschirm anlassen</string>
-    <string name="pref_now_playing_screen_summary">Tippen oder wischen, um den Abspielbildschirm zu öffnen. Ist Wischen aktiv, kann die Navigationsleiste nicht transparent sein.</string>
-    <string name="pref_now_playing_screen_title">Wischgesten</string>
-    <string name="pref_snow_fall_title">Schneefall-Effekt</string>
+    <string name="pref_language_name">Select language</string>
     <string name="pref_summary_album_art_on_lockscreen">Aktuelles Album-Cover als Sperrbildschrim verwenden.</string>
     <string name="pref_summary_audio_ducking">Benachrichtigungen, Benachrichtigung etc.</string>
     <string name="pref_summary_blacklist">Die Musik in Ordnern von der schwarzen Liste wird nicht angezeigt.</string>
@@ -305,21 +392,17 @@
     <string name="pref_summary_classic_notification">Nutze das klassische Benachrichtigungs-Design</string>
     <string name="pref_summary_colored_app">Hintergrund und Bedienelemente färben sich je nach Album-Cover</string>
     <string name="pref_summary_colored_app_shortcuts">Färbt die App-Verknüpfungen in der Akzentfarbe. Bitte bei Änderung der Akzentfarbe erneut einschalten.</string>
-    <string name="pref_summary_colored_navigation_bar">Färbt die Navigationsleiste in der Primärfarbe.</string>
     <string name="pref_summary_colored_notification">"F\u00e4rbt die Benachrichtigung passend zum Albumcover"</string>
     <string name="pref_summary_desaturated_color">Wie nach Material Design Leitfaden sollten Linien in dunklen Modusfarben desaturatiert werden</string>
-    <string name="pref_summary_dominant_color">Dominierende Farbe wird vom Album- oder Interpretencover gewählt.</string>
+    <string name="pref_summary_expand_now_playing_panel">Wenn Sie auf die Benachrichtigung klicken, wird das \"Now Playing\" Bildschirms statt des Startbildschirms angezeigt</string>
     <string name="pref_summary_extra_controls">Zusätzliche Schaltflächen für den Mini-Player</string>
     <string name="pref_summary_extra_song_info">Zeige zusätzliche Songinformationen wie Dateiformat, Bitrate und Häufigkeit</string>
     <string name="pref_summary_gapless_playback">"Kann bei manchen Geräten Probleme beim Playback verursachen."</string>
-    <string name="pref_summary_genre_toggle">Genre-Tab</string>
     <string name="pref_summary_home_banner">Home-Banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Erhöt die Qualität des Album Covers aber verlangsamt die Ladezeit. Nur aktivieren, falls Probleme mit niedriger Auflösung entstehen.</string>
     <string name="pref_summary_library_categories">Stelle Sichtbarkeit und Reihenfolge der Bibliothekkategorien ein.</string>
     <string name="pref_summary_lock_screen">Vollständige Musiksteuerung auf dem Sperrbildschirm einschalten.</string>
     <string name="pref_summary_open_source_licences">Details zu den Lizensen der Open Source Software</string>
-    <string name="pref_summary_round_corners">Abgerundete Ecken für den Bildschirm, Album Cover, etc.</string>
-    <string name="pref_summary_tab_titles">Kategorienbezeichnungen in Navigationsleiste ein/ausschalten.</string>
     <string name="pref_summary_toggle_full_screen">Schalte den immersiven Modus ein.</string>
     <string name="pref_summary_toggle_headset">Mit Wiedergabe starten, sobald Kopfhörer verbunden sind.</string>
     <string name="pref_summary_toggle_shuffle">Shufflemodus wird ausgeschaltet, sobald neue Wiedergabe gestartet wird</string>
@@ -327,75 +410,76 @@
     <string name="pref_title_album_art_on_lockscreen">Album Cover anzeigen</string>
     <string name="pref_title_album_cover_style">Aussehen des Albumcovers</string>
     <string name="pref_title_album_cover_transform">Stil des Album-Covers</string>
-    <string name="pref_title_album_grid_style">Album-Rasteransicht</string>
     <string name="pref_title_app_shortcuts">Gefärbte App Shortcuts</string>
-    <string name="pref_title_artist_grid_style">Interpreten-Rasteransicht</string>
     <string name="pref_title_audio_ducking">Lautstärke bei Fokusverlust reduzieren</string>
     <string name="pref_title_auto_download_artist_images">Künstler Bild automatisch downloaden</string>
     <string name="pref_title_blacklist">Schwarze Liste</string>
     <string name="pref_title_bluetooth_playback">Bluetooth-Wiedergabe</string>
     <string name="pref_title_blurred_album_art">Album Cover weichzeichnen</string>
-    <string name="pref_title_choose_equalizer">Equalizer wählen</string>
     <string name="pref_title_classic_notification">Klassisches Design für Benachrichtigungen.</string>
     <string name="pref_title_colored_app">selbstanpassende Farbe</string>
     <string name="pref_title_colored_notification">Gefärbte Benachrichtigung</string>
     <string name="pref_title_desaturated_color">Desaturatierte Farbe</string>
+    <string name="pref_title_expand_now_playing_panel">\"Now Playing\" Bildschirm anzeigen</string>
     <string name="pref_title_extra_controls">Zusätzliche Schaltflächen</string>
     <string name="pref_title_extra_song_info">Song-Info</string>
     <string name="pref_title_gapless_playback">Lückenlose Wiedergabe</string>
     <string name="pref_title_general_theme">Hauptthema</string>
-    <string name="pref_title_genre_toggle">Genre-Tab anzeigen</string>
     <string name="pref_title_home_artist_grid_style">Künstlerbilder auf der Startseite</string>
     <string name="pref_title_home_banner">Home-Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Media Store Cover ignorieren</string>
     <string name="pref_title_last_added_interval">Zuletzt hinzugefügtes Playlist Intervall</string>
     <string name="pref_title_lock_screen">Vollbildschirmsteuerung</string>
-    <string name="pref_title_navigation_bar">Gefärbte Navigationsleiste</string>
     <string name="pref_title_now_playing_screen_appearance">Erscheinungsbild</string>
     <string name="pref_title_open_source_licences">Open Source Lizenzen</string>
-    <string name="pref_title_round_corners">abgerundet Ecken</string>
     <string name="pref_title_tab_text_mode">Beschriftung der Navigationselemente</string>
     <string name="pref_title_toggle_carousel_effect">Karussell-Effekt</string>
-    <string name="pref_title_toggle_dominant_color">Dominante Farbe</string>
     <string name="pref_title_toggle_full_screen">Vollbild App</string>
-    <string name="pref_title_toggle_tab_titles">Navigationsleistentitel</string>
     <string name="pref_title_toggle_toggle_headset">Automatische Wiedergabe</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle-Modus</string>
     <string name="pref_title_toggle_volume">Lautstärkeregler</string>
-    <string name="pref_title_user_info">Benutzerinformationen</string>
-    <string name="primary_color">Hauptfarbe</string>
-    <string name="primary_color_desc">Primäre Farbe des Farbthemas, Standard ist indigo</string>
+
     <string name="pro">Pro</string>
     <string name="pro_summary">Themes für \"Now Playing\", Karussell-Effekte und mehr</string>
+
     <string name="profile">Profil</string>
+
     <string name="purchase">Kaufen</string>
-    <string name="purchase_summary">*Denke vor dem Kauf nach, frage nicht nach einer Rückerstattung.</string>
+
     <string name="queue">Warteschlange</string>
+
     <string name="rate_app">App bewerten</string>
     <string name="rate_on_google_play_summary">Hinterlasse eine positive Bewertung auf Google Play, wenn die Retro Music gefällt.</string>
+
     <string name="recent_albums">Kürzlich gespielte Alben</string>
     <string name="recent_artists">Kürzlich gehörte Interpreten</string>
+
     <string name="remove_action">Entfernen</string>
-    <string name="remove_banner_photo">Banner-Foto entfernen</string>
     <string name="remove_cover">Cover entfernen</string>
     <string name="remove_from_blacklist">Von der Blacklist löschen</string>
-    <string name="remove_profile_photo">Profilbild entfernen</string>
     <string name="remove_song_from_playlist_title">Songs von Playlist entfernen</string>
     <string name="remove_song_x_from_playlist"><![CDATA[<b>%1$s</b> von der Playlist entfernen?]]></string>
     <string name="remove_songs_from_playlist_title">Songs von Playlist entfernen</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[<b>%1$d</b> Songs von der Playlist entfernen?]]></string>
+
     <string name="rename_playlist_title">Playlist umbenennen</string>
+
     <string name="report_an_issue">Fehler melden</string>
     <string name="report_bug">Einen Fehler melden</string>
+
     <string name="reset_action">Zurücksetzen</string>
     <string name="reset_artist_image">Interpretenbild zurücksetzen</string>
+
     <string name="restore">Wiederherstellen</string>
+
     <string name="restored_previous_purchase_please_restart">Vorherigen Kauf wiederherstellen. Starte die App bitte neu, um den Vorgang abzuschließen.</string>
     <string name="restored_previous_purchases">Käufe wiederhergestellt</string>
+
     <string name="restoring_purchase">Kauf wird wiederhergestellt...</string>
-    <string name="retro_equalizer">Retro Music-Equalizer</string>
+
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+
     <string name="saf_delete_failed">Löschen der Datei fehlgeschlagen: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">SAF-URI kann nicht geladen werden</string>
@@ -408,37 +492,48 @@
     <string name="saf_guide_slide3_description">Keine Unterordner öffnen</string>
     <string name="saf_guide_slide3_title">Tippe auf die \'auswählen\' Taste am unteren Bildschirmrand</string>
     <string name="saf_write_failed">Datei schreiben fehlgeschlagen: %s</string>
+
     <string name="save">Speichern</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">Als Datei speichern</string>
     <string name="save_playlists_title">Als Dateien speichern</string>
+
     <string name="saved_playlist_to">Playlist gespeichert zu %s.</string>
+
     <string name="saving_changes">Änderungen speichern</string>
+
     <string name="scan_media">Medien scannen</string>
+
     <string name="scanned_files">%1$d von %2$d Dateien gescannt.</string>
+
     <string name="scrobbles_label">Scrobbles</string>
-    <string name="search_hint">Bibliothek durchsuchen...</string>
+
     <string name="select_all">Alle auswählen</string>
-    <string name="select_banner_photo">Banner-Foto auswählen</string>
+
     <string name="selected">Ausgewähltes beschriftet</string>
-    <string name="send_crash_log">Crashlogs senden</string>
+
     <string name="set">Setzen</string>
     <string name="set_artist_image">Wähle ein Interpretenbild</string>
-    <string name="set_photo">Profilfoto festlegen</string>
+
     <string name="share_app">App teilen</string>
     <string name="share_to_stories">In Stories teilen</string>
+
     <string name="shuffle">Zufall</string>
+
     <string name="simple">Einfach</string>
+
     <string name="sleep_timer_canceled">Sleep-Timer abgebrochen</string>
     <string name="sleep_timer_set">Sleep-Timer wurde auf %d minuten eingestellt.</string>
-    <string name="slide">Folie</string>
-    <string name="small">Kleines Album</string>
+
     <string name="social">Sozial</string>
     <string name="social_stories">Story teilen</string>
+
     <string name="song">Lied</string>
     <string name="song_duration">Songdauer</string>
+
     <string name="songs">Titel</string>
+
     <string name="sort_order">Sortierreihenfolge</string>
     <string name="sort_order_a_z">Aufsteigend</string>
     <string name="sort_order_album">Album</string>
@@ -448,93 +543,91 @@
     <string name="sort_order_date_modified">Änderungsdatum</string>
     <string name="sort_order_year">Jahr</string>
     <string name="sort_order_z_a">Absteigend</string>
+
     <string name="speech_not_supported">Tut uns leid! Dein Gerät unterstützt keine Spracheingabe</string>
     <string name="speech_prompt">Bibliothek durchsuchen</string>
+
     <string name="stack">Gestapelt</string>
+
     <string name="start_play_music">Beginne Musik zu spielen.</string>
+
     <string name="suggestion_songs">Für dich</string>
-    <string name="summary_user_info">Zeige nur deinen Namen auf dem Startbildschirm</string>
+
     <string name="support_development">Entwickler unterstützen</string>
+
     <string name="swipe_to_unlock">Wischen zum Entsperren</string>
+
     <string name="synced_lyrics">Synchronisierter Songtext</string>
-    <string name="system_equalizer">System-Equalizer</string>
+
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Betritt die Telegram-Gruppe um über Fehler zu diskutieren, um Vorschläge zu geben usw.</string>
+
     <string name="thank_you">Vielen Dank!</string>
+
     <string name="the_audio_file">Die Audiodatei</string>
+
     <string name="this_month">Diesen Monat</string>
     <string name="this_week">Diese Woche</string>
     <string name="this_year">Dieses Jahr</string>
+
     <string name="tiny">Winzig</string>
+    <string name="tiny_card_style">Kleinkartenschrank</string>
+
     <string name="title">Titel</string>
-    <string name="title_dashboard">Bedienfläche</string>
-    <string name="title_good_afternoon">Guten Nachmittag!</string>
-    <string name="title_good_day">Guten Tag!</string>
-    <string name="title_good_evening">Einen schönen Abend!</string>
-    <string name="title_good_morning">Guten Morgen!</string>
-    <string name="title_good_night">Gute Nacht</string>
-    <string name="title_user_info">Wie heißt du?</string>
+
     <string name="today">Heute</string>
+
     <string name="top_albums">Top Alben</string>
     <string name="top_artists">Top Interpreten</string>
+
     <string name="track_hint">"Songnummer (2 für Song 2 oder 3004 für CD3 Song 4)"</string>
     <string name="track_list">Songnummer</string>
+
     <string name="translate">Übersetzen</string>
     <string name="translate_community">Hilf\' uns, die App in deine Sprache zu übersetzen!</string>
+
+    <string name="try_retro_music_premium">Try Retro Music Premium</string>
+
     <string name="twitter_page">Twitter-Seite</string>
     <string name="twitter_page_summary">Teile dein Design mit RetroMusic</string>
+
     <string name="unlabeled">Unbeschriftet</string>
+
     <string name="unplayable_file">Song konnte nicht abgespielt werden.</string>
+
     <string name="up_next">Als Nächstes</string>
+
     <string name="update_image">Bild aktualisieren</string>
+
     <string name="updating">Aktualisieren...</string>
+
     <string name="username">Benutzername</string>
+
     <string name="version">Version</string>
+
     <string name="vertical_flip">Vertikale Drehung</string>
-    <string name="virtualizer">Surroundsound</string>
+
     <string name="volume">Lautstärke</string>
+
     <string name="web_search">Internetsuche</string>
+
     <string name="welcome">Willkommen,</string>
+
     <string name="what_do_you_want_to_share">Was möchtest du teilen?</string>
+
     <string name="whats_new">Neuigkeiten</string>
+
     <string name="window">Fenster</string>
     <string name="window_corner_edges">Runde Ecken</string>
+
     <string name="x_has_been_set_as_ringtone">%1$s als Klingelton verwenden.</string>
     <string name="x_selected">%1$d ausgewählt</string>
+
     <string name="year">Jahr</string>
+
     <string name="you_have_to_select_at_least_one_category">Du musst mindestens eine Kategorie auswählen</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Du wirst auf die Issue Tracker-Seite weitergeleitet.</string>
+
     <string name="your_account_data_is_only_used_for_authentication">Deine Accountdaten werden ausschließlich zur Authentifizierung genutzt</string>
-    <string name="amount">Anzahl</string>
-    <string name="note">Notiz(Optional)</string>
-    <string name="start_payment">Zahlung starten</string>
-    <string name="pref_title_expand_now_playing_panel">\"Now Playing\" Bildschirm anzeigen</string>
-    <string name="pref_summary_expand_now_playing_panel">Wenn Sie auf die Benachrichtigung klicken, wird das \"Now Playing\" Bildschirms statt des Startbildschirms angezeigt</string>
-    <string name="tiny_card_style">Kleinkartenschrank</string>
-    <string name="about_album_label">About %s</string>
-    <string name="pref_language_name">Select language</string>
-    <string name="translators">Translators</string>
-    <string name="translators_summary">The people who helped translate this app</string>
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
-    <plurals name="albumSongs">
-        <item quantity="one">Song</item>
-        <item quantity="other">Songs</item>
-    </plurals>
-    <plurals name="albums">
-        <item quantity="one">Album</item>
-        <item quantity="other">Albums</item>
-    </plurals>
-    <plurals name="numSongs">
-        <item quantity="one">%d Song</item>
-        <item quantity="other">%d Songs</item>
-    </plurals>
-    <plurals name="numAlbums">
-        <item quantity="one">%d Album</item>
-        <item quantity="other">%d Albums</item>
-    </plurals>
-    <plurals name="numArtists">
-        <item quantity="one">%d Artist</item>
-        <item quantity="other">%d Artists</item>
-    </plurals>
 </resources>

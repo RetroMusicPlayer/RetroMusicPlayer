@@ -25,7 +25,7 @@ import com.bumptech.glide.request.animation.GlideAnimation
 
 abstract class SingleColorTarget(view: ImageView) : BitmapPaletteTarget(view) {
 
-    protected val defaultFooterColor: Int
+    private val defaultFooterColor: Int
         get() = ATHUtil.resolveColor(view.context, R.attr.colorControlNormal)
 
     abstract fun onColorReady(color: Int)

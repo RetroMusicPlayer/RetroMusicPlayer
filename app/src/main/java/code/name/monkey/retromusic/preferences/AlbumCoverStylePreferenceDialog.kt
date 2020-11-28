@@ -33,9 +33,7 @@ import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.colorButtons
-import code.name.monkey.retromusic.extensions.colorControlNormal
-import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle.*
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -126,9 +124,10 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
             Glide.with(context).load(albumCoverStyle.drawableResId).into(image)
             title.setText(albumCoverStyle.titleRes)
             if (isAlbumCoverStyle(albumCoverStyle)) {
+                proText.show()
                 proText.setText(R.string.pro)
             } else {
-                proText.setText(R.string.free)
+                proText.hide()
             }
             return layout
         }

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="about_album_label">關於 %s</string>
     <string name="about_settings_summary">我們的團隊，以及社交媒體</string>
+
     <string name="accent_color">主題色</string>
     <string name="accent_color_desc">主題重色，預設為藍綠色</string>
+
     <string name="action_about">關於</string>
     <string name="action_add_to_favorites">加入至我的最愛</string>
     <string name="action_add_to_playing_queue">加入至播放列表</string>
     <string name="action_add_to_playlist">加入至播放清單</string>
     <string name="action_clear_playing_queue">清除播放列表</string>
-    <string name="action_clear_playlist">清除播放清單</string>
     <string name="action_cycle_repeat">循環播放模式</string>
     <string name="action_delete">刪除</string>
     <string name="action_delete_from_device">由裝置記憶體刪除</string>
@@ -46,19 +48,30 @@
     <string name="action_tag_editor">標籤編輯</string>
     <string name="action_toggle_favorite">切換至我的最愛</string>
     <string name="action_toggle_shuffle">切換隨機播放模式</string>
+
     <string name="adaptive">自適應</string>
+
     <string name="add_action">增加</string>
-    <string name="add_lyrics">增加歌詞</string>
-    <string name="add_photo">增加\n相片</string>
     <string name="add_playlist_title">"加入至播放清單"</string>
-    <string name="add_time_framed_lryics">增加時間同步歌詞</string>
+
     <string name="added_title_to_playing_queue">"已經將1首歌曲新增至播放列表。"</string>
     <string name="added_x_titles_to_playing_queue">已經將 %1$d 歌曲新增至播放列表。</string>
+
     <string name="album">專輯</string>
+
+    <plurals name="albumSongs">
+        <item quantity="other">Songs</item>
+    </plurals>
+
     <string name="album_artist">專輯歌手</string>
-    <string name="album_or_artist_empty">標題或歌手一欄是空白的。</string>
+
     <string name="albums">專輯</string>
+    <plurals name="albums">
+        <item quantity="other">Albums</item>
+    </plurals>
+
     <string name="always">經常</string>
+
     <string name="app_share">嗨，看看這個很有型的播放器吧: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">隨機播放</string>
     <string name="app_shortcut_top_tracks_short">歌曲榜</string>
@@ -67,19 +80,25 @@
     <string name="app_widget_classic_name">經典模式</string>
     <string name="app_widget_small_name">小型模式</string>
     <string name="app_widget_text_name">文字模式</string>
+
     <string name="artist">歌手</string>
+
     <string name="artists">歌手</string>
+
     <string name="audio_focus_denied">無法找到音頻焦點。</string>
     <string name="audio_settings_summary">更改音頻設定及調整等化器</string>
+
     <string name="auto">自動</string>
-    <string name="base_color_theme">基色主題</string>
-    <string name="bass_boost">低音增強</string>
-    <string name="bio">個人簡歷</string>
+
     <string name="biography">演出者資料</string>
+
     <string name="black_theme_name">純黑</string>
+
     <string name="blacklist">黑名單</string>
+
     <string name="blur">模糊</string>
     <string name="blur_card">模糊卡片</string>
+
     <string name="bug_report_failed">無法上傳報告</string>
     <string name="bug_report_failed_invalid_token">存取金鑰無效。請與程式開發人員聯絡。</string>
     <string name="bug_report_failed_issues_not_available">已選的版本庫(repo)並未針對此問題而啟用。請與程式開發人員聯絡。</string>
@@ -92,45 +111,56 @@
     <string name="bug_report_no_title">請輸入問題標題</string>
     <string name="bug_report_no_username">請輸入您的有效GitHub用戶名稱</string>
     <string name="bug_report_summary">發生未預期的錯誤。真抱歉您發現了這個bug，如果一直崩潰請\"清除程式數據\"，或者傳送電郵給我們</string>
-    <string name="bug_report_uploading">正在上傳報告至GitHub...</string>
     <string name="bug_report_use_account">使用Github帳戶傳送</string>
+
     <string name="buy_now">現在購買</string>
+
     <string name="cancel_current_timer">取消</string>
+
     <string name="card">卡片</string>
-    <string name="card_circular_style">圓形化</string>
     <string name="card_color_style">彩色卡片</string>
     <string name="card_style">卡片</string>
-    <string name="carousal">轉盤</string>
+
     <string name="carousal_effect_on_now_playing_screen">在現在播放的轉盤效果</string>
+
     <string name="cascading">階層式</string>
-    <string name="cast">投放</string>
+
     <string name="changelog">版本最新動向</string>
     <string name="changelog_summary">在Telegram頻道取得更新動向</string>
+
     <string name="circle">圓形</string>
+
     <string name="circular">圓盤</string>
+
     <string name="classic">基本</string>
+
     <string name="clear_action">清除</string>
-    <string name="clear_app_data">清除程式數據</string>
     <string name="clear_blacklist">清除黑名單</string>
     <string name="clear_playing_queue">清除列表</string>
-    <string name="clear_playlist_title">清除播放清單</string>
-    <string name="clear_playlist_x"><![CDATA[要清除<b>%1$s</b>播放清單嗎？此動作將無法復原！]]></string>
-    <string name="close_notification">關閉</string>
+
     <string name="color">彩色</string>
-    <string name="color_theme_name">彩色</string>
+
     <string name="colors">色彩</string>
+
     <string name="composer">作曲者</string>
+
     <string name="copied_device_info_to_clipboard">已複製裝置內容到剪貼簿</string>
+
     <string name="could_not_create_playlist">無法建立播放清單。</string>
     <string name="could_not_download_album_cover">"無法下載符合的專輯圖片。"</string>
     <string name="could_not_restore_purchase">無法恢復購買狀態。</string>
     <string name="could_not_scan_files">無法掃描 %d 個檔案。</string>
+
     <string name="create_action">新增</string>
+
     <string name="created_playlist_x">已新增%1$s播放清單。</string>
+
     <string name="credit_title">成員和貢獻者</string>
+
     <string name="currently_listening_to_x_by_x">我在聽由 %2$s 唱的 %1$s</string>
+
     <string name="dark_theme_name">暗黑</string>
-    <string name="default_hint">沒有歌詞</string>
+
     <string name="delete_playlist_title">移除播放清單</string>
     <string name="delete_playlist_x"><![CDATA[要移除<b>%1$s</b>播放清單嗎?]]></string>
     <string name="delete_playlists_title">移除多個播放清單</string>
@@ -139,42 +169,62 @@
     <string name="delete_songs_title">刪除多首歌曲</string>
     <string name="delete_x_playlists"><![CDATA[要移除<b>%1$d</b>個播放清單嗎?]]></string>
     <string name="delete_x_songs"><![CDATA[要移除<b>%1$d</b>個歌曲嗎?]]></string>
+
     <string name="deleted_x_songs">已刪除%1$d首歌曲。</string>
-    <string name="deleting_songs">正在刪除歌曲</string>
+
     <string name="depth">深度式</string>
+
     <string name="description">描述</string>
+
     <string name="device_info">裝置內容</string>
+
     <string name="dialog_message_set_ringtone">允許Retro Music更改音效設定</string>
     <string name="dialog_title_set_ringtone">設定鈴聲</string>
+
     <string name="do_you_want_to_clear_the_blacklist">要清除黑名單嗎?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[您想要將<b>%1$s</b>由黑名單移除嗎?]]></string>
+
     <string name="donate">捐款</string>
     <string name="donate_summary">若果您覺得我的開發工作值得回報，可以捐助幾元給我</string>
+
     <string name="donation_header">給我買個:</string>
-    <string name="download_from_last_fm">由Last.fm下載</string>
+
     <string name="drive_mode">駕駛模式</string>
-    <string name="edit">編輯</string>
-    <string name="edit_cover">編輯專輯圖片</string>
+
     <string name="empty">空白</string>
+
     <string name="equalizer">等化器</string>
-    <string name="error">錯誤</string>
+
     <string name="faq">常見問題</string>
+
     <string name="favorites">我的最愛</string>
+
     <string name="finish_last_song">最後一首已經結束播放</string>
+
     <string name="fit">合身</string>
+
     <string name="flat">平面</string>
+
     <string name="folders">資料夾</string>
+
     <string name="follow_system">跟隨系統</string>
+
     <string name="for_you">給您的</string>
+
     <string name="free">免費</string>
+
     <string name="full">全螢幕</string>
     <string name="full_card">完整卡片</string>
+
     <string name="general_settings_summary">更改程式主題及色彩</string>
     <string name="general_settings_title">介面外觀</string>
+
     <string name="genre">類型</string>
+
     <string name="genres">類型</string>
+
     <string name="git_hub_summary">在Github參與專案</string>
-    <string name="google_plus_community">加入Google+社交圈，在那裡您可以提出疑問或追蹤Retro Music的更新</string>
+
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -184,16 +234,25 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">網格及樣式</string>
+
     <string name="hinge">鉸鏈式</string>
+
     <string name="history">歷史</string>
+
     <string name="home">主頁</string>
+
     <string name="horizontal_flip">水平翻轉式</string>
+
     <string name="image">圖片</string>
     <string name="image_gradient">漸變圖像</string>
     <string name="image_settings_summary">更改下載歌手相片設定</string>
+
     <string name="inserted_x_songs_into_playlist_x">已新增%1$d首歌曲到%2$s播放清單。</string>
+
     <string name="instagram_page_summary">在Instagram分享以展示您的RetroMusic版面</string>
+
     <string name="keyboard">鍵盤</string>
+
     <string name="label_bit_rate">位元率</string>
     <string name="label_file_format">格式</string>
     <string name="label_file_name">檔案名</string>
@@ -202,31 +261,45 @@
     <string name="label_more_from">來自%s的更多資訊</string>
     <string name="label_sampling_rate">取樣頻率</string>
     <string name="label_track_length">長度</string>
+
     <string name="labeled">已標記</string>
+
     <string name="last_added">最近新增</string>
     <string name="last_song">最後一首</string>
-    <string name="lets_play_something">讓我們播放音樂吧</string>
-    <string name="library">媒體庫</string>
+
     <string name="library_categories">類別庫</string>
+
     <string name="licenses">許可證</string>
+
     <string name="light_theme_name">淺白色</string>
+
     <string name="listeners_label">聽眾</string>
+
     <string name="listing_files">正在列出檔案</string>
+
     <string name="loading_products">載入中...</string>
+
     <string name="login">登入</string>
+
     <string name="lyrics">歌詞</string>
+
     <string name="made_with_love">在印度用❤️做</string>
+
     <string name="material">物質</string>
+
     <string name="md_error_label">錯誤</string>
     <string name="md_storage_perm_error">權限錯誤</string>
+
     <string name="my_name">名字</string>
     <string name="my_top_tracks">最常播放</string>
+
     <string name="never">永不</string>
-    <string name="new_banner_photo">新橫幅圖片</string>
+
     <string name="new_playlist_title">新播放清單</string>
-    <string name="new_profile_photo">新個人資料圖片</string>
     <string name="new_start_directory">最新的主目錄是%s。</string>
+
     <string name="next_song">下一首</string>
+
     <string name="no_albums">沒有專輯</string>
     <string name="no_artists">沒有歌手</string>
     <string name="no_audio_ID">"請先播放一首歌曲，然後再試一次。"</string>
@@ -238,45 +311,59 @@
     <string name="no_purchase_found">無法找到購買狀態。</string>
     <string name="no_results">沒有結果</string>
     <string name="no_songs">沒有歌曲</string>
+
     <string name="normal">常用</string>
     <string name="normal_lyrics">正常歌詞</string>
-    <string name="normal_style">常用</string>
+
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b>不在媒體庫。]]></string>
+
     <string name="nothing_to_scan">沒有項目可以掃描。</string>
     <string name="nothing_to_see">沒有什麼可以看的</string>
+
     <string name="notification">通知欄</string>
     <string name="notification_settings_summary">個人化通知欄樣式</string>
+
     <string name="now_playing">現在播放</string>
     <string name="now_playing_queue">現在播放清單</string>
     <string name="now_playing_summary">個人化現在播放界面</string>
     <string name="now_playing_themes">9+ 現在播放介面主題</string>
+
     <string name="only_on_wifi">僅透過Wi-Fi</string>
+
     <string name="other_settings_summary">進階測試功能</string>
+
     <string name="others">其他</string>
+
     <string name="password">密碼</string>
+
     <string name="past_three_months">在3個月內</string>
-    <string name="paste_lyrics_here">在此貼上歌詞</string>
+
     <string name="peak">波紋</string>
+
     <string name="permission_external_storage_denied">存取外置儲存空間權限被拒。</string>
+
     <string name="permissions_denied">存取權限被拒。</string>
+
     <string name="personalize">個人化</string>
     <string name="personalize_settings_summary">個人化現在播放及用戶界面</string>
+
     <string name="pick_from_local_storage">由裝置儲存空間選擇</string>
-    <string name="pick_image_intent_text">選擇圖片</string>
+
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">加入我們的Pinterest來知道更多Retro Music的設計靈感</string>
+
     <string name="plain">單色</string>
+
     <string name="playing_notification_description">播放通知欄包含了播放/暫停等動作。</string>
     <string name="playing_notification_name">播放通知欄</string>
-    <string name="playlist_empty_text">空白播放清單</string>
+
     <string name="playlist_is_empty">空白播放清單</string>
     <string name="playlist_name_empty">播放清單名稱</string>
+
     <string name="playlists">播放清單</string>
-    <string name="pref_album_detail_style">專輯詳細樣式</string>
+
     <string name="pref_blur_amount_summary">給模糊模式主題的值，每值愈低就愈快</string>
     <string name="pref_blur_amount_title">模糊值</string>
-    <string name="pref_dialog_corner_summary">調整底部對話框圓角</string>
-    <string name="pref_dialog_corner_title">對話框圓角</string>
     <string name="pref_filter_song_summary">以歌曲長度過濾歌曲</string>
     <string name="pref_filter_song_title">過濾歌曲長度</string>
     <string name="pref_header_advanced">進階</string>
@@ -293,9 +380,7 @@
     <string name="pref_keep_pause_on_zero_volume_title">無音量時暫停</string>
     <string name="pref_keep_screen_on_summary">請記住當您啟用此選項後或會影響電池壽命</string>
     <string name="pref_keep_screen_on_title">螢幕保持開啟</string>
-    <string name="pref_now_playing_screen_summary">點擊或滑動開啟無透明現在播放導航欄</string>
-    <string name="pref_now_playing_screen_title">點擊或滑動</string>
-    <string name="pref_snow_fall_title">雪花效果</string>
+    <string name="pref_language_name">選擇語言</string>
     <string name="pref_summary_album_art_on_lockscreen">使用現在播放歌曲的專輯圖片來用作鎖定畫面背景圖片</string>
     <string name="pref_summary_audio_ducking">當播放系統聲音或收到通知時降低音量</string>
     <string name="pref_summary_blacklist">列入黑名單的資料夾內的資料會在您的媒體庫隱藏。</string>
@@ -305,21 +390,17 @@
     <string name="pref_summary_classic_notification">使用基本的通知欄設計</string>
     <string name="pref_summary_colored_app">背景及控制按鈕色彩根據現在播放中的專輯圖片而轉變</string>
     <string name="pref_summary_colored_app_shortcuts">將重色設為程式捷徑色彩。每次更改色彩後請切換此選項來生效</string>
-    <string name="pref_summary_colored_navigation_bar">設定導航欄色彩為主色調</string>
     <string name="pref_summary_colored_notification">"\u5f9e\u5c08\u8f2f\u5716\u7247\u4e2d\u6700\u9bae\u660e\u7684\u8272\u5f69\u4f86\u6311\u9078\u901a\u77e5\u6b04\u8272\u5f69"</string>
     <string name="pref_summary_desaturated_color">根據物質設計指南(Material Design guide)，在暗黑模式下的顏色應完全去飽和化</string>
-    <string name="pref_summary_dominant_color">大多數主色會從專輯或歌手圖片中挑選</string>
+    <string name="pref_summary_expand_now_playing_panel">點擊現在播放將顯示現在播放而非主頁</string>
     <string name="pref_summary_extra_controls">在迷你播放器增加控制項</string>
     <string name="pref_summary_extra_song_info">顯示更多歌曲資料，如檔案格式、位元率及頻率</string>
     <string name="pref_summary_gapless_playback">"或會引致某些裝置播放功能無法正常運作。"</string>
-    <string name="pref_summary_genre_toggle">切換類型標籤</string>
     <string name="pref_summary_home_banner">切換首頁橫幅樣式</string>
     <string name="pref_summary_ignore_media_store_artwork">可以提升專輯圖片質素，但這會引致加長圖片載入時間。建議只有當您的載入專輯圖片時質素較差時啟用</string>
     <string name="pref_summary_library_categories">修改類別的可視性及順序。</string>
     <string name="pref_summary_lock_screen">使用Retro Music自訂鎖定螢幕控制</string>
     <string name="pref_summary_open_source_licences">開放軟件特許條款內容</string>
-    <string name="pref_summary_round_corners">將程式的邊角圓角化</string>
-    <string name="pref_summary_tab_titles">切換底部導航欄的標題標籤</string>
     <string name="pref_summary_toggle_full_screen">全螢幕模式</string>
     <string name="pref_summary_toggle_headset">當耳機連接後開始立即播放</string>
     <string name="pref_summary_toggle_shuffle">播放新清單時會關閉隨機播放模式</string>
@@ -327,75 +408,76 @@
     <string name="pref_title_album_art_on_lockscreen">顯示專輯圖片</string>
     <string name="pref_title_album_cover_style">專輯圖片主題</string>
     <string name="pref_title_album_cover_transform">專輯圖片轉場</string>
-    <string name="pref_title_album_grid_style">專輯網格</string>
     <string name="pref_title_app_shortcuts">彩色化程式捷徑</string>
-    <string name="pref_title_artist_grid_style">歌手網格</string>
     <string name="pref_title_audio_ducking">失去音頻焦點時降低音量</string>
     <string name="pref_title_auto_download_artist_images">自動下載歌手相片</string>
     <string name="pref_title_blacklist">黑名單</string>
     <string name="pref_title_bluetooth_playback">藍牙播放</string>
     <string name="pref_title_blurred_album_art">模糊化專輯圖片</string>
-    <string name="pref_title_choose_equalizer">選擇等化器</string>
     <string name="pref_title_classic_notification">基本通知欄設計</string>
     <string name="pref_title_colored_app">自適應色彩</string>
     <string name="pref_title_colored_notification">彩色通知欄</string>
     <string name="pref_title_desaturated_color">飽和色</string>
+    <string name="pref_title_expand_now_playing_panel">顯示現在播放</string>
     <string name="pref_title_extra_controls">額外控制項</string>
     <string name="pref_title_extra_song_info">歌曲內容</string>
     <string name="pref_title_gapless_playback">無縫播放</string>
     <string name="pref_title_general_theme">應用主題</string>
-    <string name="pref_title_genre_toggle">顯示類型標籤</string>
     <string name="pref_title_home_artist_grid_style">首頁歌手網格</string>
     <string name="pref_title_home_banner">首頁橫幅</string>
     <string name="pref_title_ignore_media_store_artwork">忽略音樂檔內含的專輯圖片</string>
     <string name="pref_title_last_added_interval">最近新增播放清單間隔</string>
     <string name="pref_title_lock_screen">全螢幕控制</string>
-    <string name="pref_title_navigation_bar">彩色導航欄</string>
     <string name="pref_title_now_playing_screen_appearance">現在播放介面主題</string>
     <string name="pref_title_open_source_licences">開放源碼認證</string>
-    <string name="pref_title_round_corners">螢幕圓角</string>
     <string name="pref_title_tab_text_mode">標題標籤模式</string>
     <string name="pref_title_toggle_carousel_effect">轉盤效果</string>
-    <string name="pref_title_toggle_dominant_color">主色</string>
     <string name="pref_title_toggle_full_screen">全螢幕程式</string>
-    <string name="pref_title_toggle_tab_titles">標題標籤</string>
     <string name="pref_title_toggle_toggle_headset">自動播放</string>
     <string name="pref_title_toggle_toggle_shuffle">隨機模式</string>
     <string name="pref_title_toggle_volume">音量控制</string>
-    <string name="pref_title_user_info">使用者資料</string>
-    <string name="primary_color">原色</string>
-    <string name="primary_color_desc">主原色預設為灰藍色，現在適用於深色色彩</string>
+
     <string name="pro">Pro</string>
     <string name="pro_summary">現時播放主題、轉盤效果，還有更多...</string>
+
     <string name="profile">個人資料</string>
+
     <string name="purchase">購買</string>
-    <string name="purchase_summary">*購買前要三思，切勿要求退款</string>
+
     <string name="queue">播放列表</string>
+
     <string name="rate_app">為這個App評分</string>
     <string name="rate_on_google_play_summary">喜歡這個App嗎?請讓我們知道如何提供更好的體驗</string>
+
     <string name="recent_albums">近期專輯</string>
     <string name="recent_artists">近期歌手</string>
+
     <string name="remove_action">移除</string>
-    <string name="remove_banner_photo">移除橫幅圖片</string>
     <string name="remove_cover">移除專輯圖片</string>
     <string name="remove_from_blacklist">由黑名單中移除</string>
-    <string name="remove_profile_photo">移除個人資料圖片</string>
     <string name="remove_song_from_playlist_title">將歌曲由播放清單移除</string>
     <string name="remove_song_x_from_playlist"><![CDATA[要將 <b>%1$s</b> 歌曲由播放清單移除嗎?]]></string>
     <string name="remove_songs_from_playlist_title">將多首歌曲由播放清單移除</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[要將 <b>%1$d</b> 首歌曲由播放清單移除嗎?]]></string>
+
     <string name="rename_playlist_title">重新命名播放清單</string>
+
     <string name="report_an_issue">回報問題</string>
     <string name="report_bug">回報錯誤</string>
+
     <string name="reset_action">重設</string>
     <string name="reset_artist_image">重設歌手相片</string>
+
     <string name="restore">恢復</string>
+
     <string name="restored_previous_purchase_please_restart">已恢復上次購買狀態。請重新啟動程式來應用所有功能。</string>
     <string name="restored_previous_purchases">回復購買狀態</string>
+
     <string name="restoring_purchase">正在恢復購買狀態...</string>
-    <string name="retro_equalizer">Retro等化器</string>
+
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+
     <string name="saf_delete_failed">刪除檔案失敗: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">獲取SAF URI失敗</string>
@@ -408,37 +490,48 @@
     <string name="saf_guide_slide3_description">不要開啟任何子資料夾</string>
     <string name="saf_guide_slide3_title">點擊螢幕底下的\'選擇\'按鈕</string>
     <string name="saf_write_failed">寫人檔案失敗: %s</string>
+
     <string name="save">儲存</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">儲存檔案</string>
     <string name="save_playlists_title">儲存為多個檔案</string>
+
     <string name="saved_playlist_to">已儲存播放清單到%s。</string>
+
     <string name="saving_changes">儲存</string>
+
     <string name="scan_media">掃描媒體</string>
+
     <string name="scanned_files">成功掃描 %2$d 項目 中的 %1$d 項目。</string>
+
     <string name="scrobbles_label">塗鴉</string>
-    <string name="search_hint">搜尋媒體庫...</string>
+
     <string name="select_all">選擇全部</string>
-    <string name="select_banner_photo">選擇橫幅圖片</string>
+
     <string name="selected">已選</string>
-    <string name="send_crash_log">傳送報告</string>
+
     <string name="set">設定</string>
     <string name="set_artist_image">設定歌手相片</string>
-    <string name="set_photo">設定個人資料圖片</string>
+
     <string name="share_app">分享程式</string>
     <string name="share_to_stories">分享到故事</string>
+
     <string name="shuffle">隨機播放</string>
+
     <string name="simple">簡單</string>
+
     <string name="sleep_timer_canceled">休眠計時器已經取消。</string>
     <string name="sleep_timer_set">休眠計時器從現在開始 %d 分鐘後停止播放。</string>
-    <string name="slide">滑動</string>
-    <string name="small">迷你專輯</string>
+
     <string name="social">社交</string>
     <string name="social_stories">分享故事</string>
+
     <string name="song">歌曲</string>
     <string name="song_duration">歌曲長度</string>
+
     <string name="songs">歌曲</string>
+
     <string name="sort_order">排序</string>
     <string name="sort_order_a_z">遞增</string>
     <string name="sort_order_album">專輯</string>
@@ -448,88 +541,91 @@
     <string name="sort_order_date_modified">修改日期</string>
     <string name="sort_order_year">年份</string>
     <string name="sort_order_z_a">遞減</string>
+
     <string name="speech_not_supported">對不起！您的裝置不支援語音服務</string>
     <string name="speech_prompt">搜尋媒體庫</string>
+
     <string name="stack">堆疊</string>
+
     <string name="start_play_music">開始播放音樂。</string>
+
     <string name="suggestion_songs">建議</string>
-    <string name="summary_user_info">只會在首頁顯示您的名字</string>
+
     <string name="support_development">開發支援</string>
+
     <string name="swipe_to_unlock">滑動螢幕以解鎖</string>
+
     <string name="synced_lyrics">同步歌詞</string>
-    <string name="system_equalizer">系統等化器</string>
+
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">加入Telegram群組，討論程式錯誤、給予建議、炫耀一下，還有更多</string>
+
     <string name="thank_you">多謝您!</string>
+
     <string name="the_audio_file">音樂檔案</string>
+
     <string name="this_month">這個月</string>
     <string name="this_week">這個星期</string>
     <string name="this_year">這年</string>
+
     <string name="tiny">迷你</string>
+    <string name="tiny_card_style">迷你卡片</string>
+
     <string name="title">標題</string>
-    <string name="title_dashboard">通知板</string>
-    <string name="title_good_afternoon">您好</string>
-    <string name="title_good_day">今天真美好</string>
-    <string name="title_good_evening">晚安</string>
-    <string name="title_good_morning">早晨</string>
-    <string name="title_good_night">晚安</string>
-    <string name="title_user_info">您的名字是...</string>
+
     <string name="today">今天</string>
+
     <string name="top_albums">專輯榜</string>
     <string name="top_artists">歌手榜</string>
+
     <string name="track_hint">"音軌 (2指音軌2或3004指CD3中的音軌4)"</string>
     <string name="track_list">歌曲號碼</string>
+
     <string name="translate">翻譯</string>
     <string name="translate_community">協助我們將這個應用程式翻譯成為您的語言</string>
+
+    <string name="try_retro_music_premium">Try Retro Music Premium</string>
+
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">分享您的Retro Music設計</string>
+
     <string name="unlabeled">未標記</string>
+
     <string name="unplayable_file">\u7121\u6cd5\u64ad\u653e\u9019\u9996\u6b4c\u66f2\u3002</string>
+
     <string name="up_next">下一首</string>
+
     <string name="update_image">更新圖片</string>
+
     <string name="updating">更新中...</string>
+
     <string name="username">用戶名稱</string>
+
     <string name="version">版本</string>
+
     <string name="vertical_flip">垂直翻轉式</string>
-    <string name="virtualizer">音樂效果</string>
+
     <string name="volume">音量</string>
+
     <string name="web_search">網路搜尋</string>
+
     <string name="welcome">歡迎，</string>
+
     <string name="what_do_you_want_to_share">有什麼內容想分享的?</string>
+
     <string name="whats_new">最新動向</string>
+
     <string name="window">視窗</string>
     <string name="window_corner_edges">圓角</string>
+
     <string name="x_has_been_set_as_ringtone">已經將%1$s設定為您的鈴聲。</string>
     <string name="x_selected">%1$d個已選擇</string>
+
     <string name="year">年份</string>
+
     <string name="you_have_to_select_at_least_one_category">您必須選擇最少一項類別。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">您將會轉到問題跟蹤網站。</string>
+
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶只會用於認證用途。</string>
-    <string name="amount">數量</string>
-    <string name="note">註解(可選)</string>
-    <string name="start_payment">開始付款</string>
-    <string name="pref_title_expand_now_playing_panel">顯示現在播放</string>
-    <string name="pref_summary_expand_now_playing_panel">點擊現在播放將顯示現在播放而非主頁</string>
-    <string name="tiny_card_style">迷你卡片</string>
-    <string name="about_album_label">關於 %s</string>
-    <string name="pref_language_name">選擇語言</string>
-    <string name="translators">翻譯者</string>
-    <string name="translators_summary">協助翻譯這個App的人們</string>
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
-    <plurals name="albumSongs">
-        <item quantity="other">Songs</item>
-    </plurals>
-    <plurals name="albums">
-        <item quantity="other">Albums</item>
-    </plurals>
-    <plurals name="numSongs">
-        <item quantity="other">%d 首歌曲</item>
-    </plurals>
-    <plurals name="numAlbums">
-        <item quantity="other">%d 個專輯</item>
-    </plurals>
-    <plurals name="numArtists">
-        <item quantity="other">%d 位歌手</item>
-    </plurals>
 </resources>

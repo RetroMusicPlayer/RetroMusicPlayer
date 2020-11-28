@@ -53,7 +53,6 @@
 
 
     <LinearLayout
-        android:id="@+id/cardContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -124,29 +123,6 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/carousal_effect_on_now_playing_screen"
-                android:textAppearance="@style/TextViewSubtitle1"
-                android:textColor="@color/md_white_1000" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_check_circle"
-                app:tint="@color/md_white_1000" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/window_corner_edges"
                 android:textAppearance="@style/TextViewSubtitle1"
                 android:textColor="@color/md_white_1000" />
         </LinearLayout>

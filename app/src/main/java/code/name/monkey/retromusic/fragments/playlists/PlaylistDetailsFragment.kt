@@ -12,14 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.adapter.song.PlaylistSongAdapter
+import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.state.NowPlayingPanelState
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,7 +31,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     }
 
     private lateinit var playlist: PlaylistWithSongs
-    private lateinit var playlistSongAdapter: PlaylistSongAdapter
+    private lateinit var playlistSongAdapter: ShuffleButtonSongAdapter
 
     private fun setUpTransitions() {
         val transform = MaterialContainerTransform()
@@ -61,8 +60,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     }
 
     private fun setUpRecyclerView() {
-        playlistSongAdapter = PlaylistSongAdapter(
-            playlist.playlistEntity,
+        playlistSongAdapter = ShuffleButtonSongAdapter(
             requireActivity(),
             ArrayList(),
             R.layout.item_list,

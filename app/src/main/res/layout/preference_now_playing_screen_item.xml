@@ -37,9 +37,9 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="8dp"
-        android:text="@string/pro"
         android:textAppearance="@style/TextViewHeadline6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/pro" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,9 +22,7 @@
         android:title="@string/action_grid_size"
         app:showAsAction="never">
         <menu>
-            <group
-                android:id="@+id/group_grid_size"
-                android:checkableBehavior="single">
+            <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/action_grid_size_1"
                     android:title="@string/grid_size_1" />
@@ -58,9 +56,7 @@
         android:title="@string/grid_style_label"
         app:showAsAction="never">
         <menu>
-            <group
-                android:id="@+id/group_layout_type"
-                android:checkableBehavior="single">
+            <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/action_layout_normal"
                     android:title="@string/normal" />
