@@ -86,6 +86,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             setMiniPlayerAlphaProgress(slideOffset)
             dimBackground.show()
             dimBackground.alpha = slideOffset
+            println(slideOffset)
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -97,6 +98,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     onPanelCollapsed()
                     dimBackground.hide()
                 }
+
                 else -> {
                     println("Do something")
                 }
@@ -114,11 +116,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setupBottomSheet()
         updateColor()
 
-        val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
+        val themeColor = resolveColor(android.R.attr.windowBackground, Color.GRAY)
         dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
         dimBackground.setOnClickListener {
             println("dimBackground")
-
+            collapsePanel()
         }
     }
 
@@ -154,6 +156,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     fun collapsePanel() {
         bottomSheetBehavior.state = STATE_COLLAPSED
+        setMiniPlayerAlphaProgress(0f)
     }
 
     fun expandPanel() {

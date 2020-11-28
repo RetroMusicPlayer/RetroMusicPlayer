@@ -15,7 +15,9 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.SongEntity
+import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.getLong
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.removeFromQueue
 import code.name.monkey.retromusic.model.Artist
@@ -24,8 +26,11 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.repository.RealPlaylistRepository
 import code.name.monkey.retromusic.repository.RealSongRepository
+import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
 import org.koin.core.KoinComponent
@@ -89,7 +94,7 @@ object MusicUtil : KoinComponent {
     fun deleteAlbumArt(context: Context, albumId: Long) {
         val contentResolver = context.contentResolver
         val localUri = Uri.parse("content://media/external/audio/albumart")
-        contentResolver.delete(ContentUris.withAppendedId(localUri, albumId.toLong()), null, null)
+        contentResolver.delete(ContentUris.withAppendedId(localUri, albumId), null, null)
         contentResolver.notifyChange(localUri, null)
     }
 
@@ -160,7 +165,7 @@ object MusicUtil : KoinComponent {
                         try {
                             val newLyrics =
                                 FileUtil.read(f)
-                            if (newLyrics != null && !newLyrics.trim { it <= ' ' }.isEmpty()) {
+                            if (newLyrics != null && newLyrics.trim { it <= ' ' }.isNotEmpty()) {
                                 if (AbsSynchronizedLyrics.isSynchronized(newLyrics)) {
                                     return newLyrics
                                 }
@@ -278,9 +283,8 @@ object MusicUtil : KoinComponent {
         path: String?
     ) {
         val contentResolver = context.contentResolver
-        val artworkUri =
-            Uri.parse("content://media/external/audio/albumart")
-        contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId.toLong()), null, null)
+        val artworkUri = Uri.parse("content://media/external/audio/albumart")
+        contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId), null, null)
         val values = ContentValues()
         values.put("album_id", albumId)
         values.put("_data", path)
@@ -321,16 +325,21 @@ object MusicUtil : KoinComponent {
         return playlist.name == context.getString(R.string.favorites)
     }
 
+    val repository = get<Repository>()
     fun toggleFavorite(context: Context, song: Song) {
-        if (isFavorite(context, song)) {
-            PlaylistsUtil.removeFromPlaylist(context, song, getFavoritesPlaylist(context).id)
-        } else {
-            PlaylistsUtil.addToPlaylist(
-                context, song, getOrCreateFavoritesPlaylist(context).id,
-                false
-            )
+        GlobalScope.launch {
+            val playlist: PlaylistEntity? = repository.favoritePlaylist()
+            if (playlist != null) {
+                val songEntity = song.toSongEntity(playlist.playListId)
+                val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
+                if (isFavorite) {
+                    repository.removeSongFromPlaylist(songEntity)
+                } else {
+                    repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
+                }
+            }
+            context.sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
-        context.sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
     }
 
     private fun getFavoritesPlaylist(context: Context): Playlist {
@@ -434,9 +443,7 @@ object MusicUtil : KoinComponent {
     }
 
     fun deleteTracks(context: Context, songs: List<Song>) {
-        val projection = arrayOf(
-            BaseColumns._ID, MediaStore.MediaColumns.DATA
-        )
+        val projection = arrayOf(BaseColumns._ID, MediaStore.MediaColumns.DATA)
         val selection = StringBuilder()
         selection.append(BaseColumns._ID + " IN (")
         for (i in songs.indices) {

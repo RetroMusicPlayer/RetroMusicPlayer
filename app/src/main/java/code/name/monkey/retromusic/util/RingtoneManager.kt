@@ -73,7 +73,7 @@ class RingtoneManager(val context: Context) {
             return false
         }
 
-        fun getDialog(context: Context): AlertDialog {
+        fun getDialog(context: Context) {
             return MaterialAlertDialogBuilder(context, R.style.MaterialAlertDialogTheme)
                 .setTitle(R.string.dialog_title_set_ringtone)
                 .setMessage(R.string.dialog_message_set_ringtone)
@@ -83,7 +83,7 @@ class RingtoneManager(val context: Context) {
                     context.startActivity(intent)
                 }
                 .setNegativeButton(android.R.string.cancel, null)
-                .create()
+                .create().show()
         }
     }
 }

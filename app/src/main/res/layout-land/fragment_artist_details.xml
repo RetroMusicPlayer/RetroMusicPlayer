@@ -67,7 +67,6 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
 
         <LinearLayout
-            android:id="@+id/background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

@@ -21,7 +21,6 @@
         tools:layout="@layout/fragment_album_full_cover" />
 
     <FrameLayout
-        android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

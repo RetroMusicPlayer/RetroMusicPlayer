@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 import code.name.monkey.retromusic.R;
 import com.google.android.material.card.MaterialCardView;
@@ -47,11 +48,10 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
 
   @Nullable public View mask;
 
-  @Nullable public View menu;
+  @Nullable public AppCompatImageView menu;
 
   @Nullable public View paletteColorContainer;
 
-  @Nullable public ImageButton playSongs;
 
   @Nullable public RecyclerView recyclerView;
 
@@ -83,7 +83,6 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
     paletteColorContainer = itemView.findViewById(R.id.paletteColorContainer);
     recyclerView = itemView.findViewById(R.id.recycler_view);
     mask = itemView.findViewById(R.id.mask);
-    playSongs = itemView.findViewById(R.id.playSongs);
     dummyContainer = itemView.findViewById(R.id.dummy_view);
 
     if (imageContainerCard != null) {

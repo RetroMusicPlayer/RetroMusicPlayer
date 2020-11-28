@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.fragments.search
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
@@ -22,7 +23,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dipToPix
+import code.name.monkey.retromusic.extensions.focusAndShowKeyboard
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import com.google.android.material.textfield.TextInputEditText
@@ -54,17 +55,16 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         mainActivity.setSupportActionBar(toolbar)
         libraryViewModel.clearSearchResult()
         setupRecyclerView()
-        searchView.addTextChangedListener(this)
+        searchView.apply {
+            addTextChangedListener(this@SearchFragment)
+            focusAndShowKeyboard()
+        }
         voiceSearch.setOnClickListener { startMicSearch() }
         clearText.setOnClickListener { searchView.clearText() }
         keyboardPopup.apply {
             accentColor()
             setOnClickListener {
-                val inputManager = getSystemService(
-                    requireContext(),
-                    InputMethodManager::class.java
-                )
-                inputManager?.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT)
+                searchView.focusAndShowKeyboard()
             }
         }
         if (savedInstanceState != null) {
@@ -143,6 +143,19 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             showToast(getString(R.string.speech_not_supported))
+        }
+    }
+
+    override fun onDestroyView() {
+        hideKeyboard(view)
+        super.onDestroyView()
+    }
+
+    private fun hideKeyboard(view: View?) {
+        if (view != null) {
+            val imm: InputMethodManager =
+                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }

@@ -33,11 +33,11 @@ abstract class BaseShortcutType(internal var context: Context) {
      * @param shortcutType Describes the type of shortcut to create (ShuffleAll, TopTracks, custom playlist, etc.)
      * @return
      */
-    internal fun getPlaySongsIntent(shortcutType: Int): Intent {
+    internal fun getPlaySongsIntent(shortcutType: Long): Intent {
         val intent = Intent(context, AppShortcutLauncherActivity::class.java)
         intent.action = Intent.ACTION_VIEW
         val b = Bundle()
-        b.putInt(AppShortcutLauncherActivity.KEY_SHORTCUT_TYPE, shortcutType)
+        b.putLong(AppShortcutLauncherActivity.KEY_SHORTCUT_TYPE, shortcutType)
         intent.putExtras(b)
         return intent
     }

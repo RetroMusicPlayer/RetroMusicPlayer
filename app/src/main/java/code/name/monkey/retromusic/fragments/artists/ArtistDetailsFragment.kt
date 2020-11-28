@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.fragments.artists
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Spanned
@@ -137,7 +138,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         }
     }
 
-    fun showArtist(artist: Artist) {
+    private fun showArtist(artist: Artist) {
         this.artist = artist
         loadArtistImage(artist)
         if (RetroUtil.isAllowedToDownloadMetadata(requireContext())) {
@@ -164,7 +165,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         songTitle.text = songText
         albumTitle.text = albumText
         songAdapter.swapDataSet(artist.songs.sortedBy { it.trackNumber })
-        artist.albums?.let { albumAdapter.swapDataSet(it) }
+        albumAdapter.swapDataSet(artist.albums)
     }
 
     private fun loadBiography(
@@ -174,7 +175,7 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
         biography = null
         this.lang = lang
         detailsViewModel.getArtistInfo(name, lang, null)
-            .observe(viewLifecycleOwner, Observer { result ->
+            .observe(viewLifecycleOwner, { result ->
                 when (result) {
                     is Result.Loading -> println("Loading")
                     is Result.Error -> println("Error")
@@ -222,8 +223,8 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     }
 
     private fun setColors(color: Int) {
-        shuffleAction.applyColor(color)
-        playAction.applyOutlineColor(color)
+        shuffleAction?.applyColor(color)
+        playAction?.applyOutlineColor(color)
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
@@ -280,6 +281,21 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
             }
         }
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQUEST_CODE_SELECT_IMAGE -> if (resultCode == Activity.RESULT_OK) {
+                data?.data?.let {
+                    CustomArtistImageUtil.getInstance(requireContext())
+                        .setCustomArtistImage(artist, it)
+                }
+            }
+            else -> if (resultCode == Activity.RESULT_OK) {
+                println("OK")
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

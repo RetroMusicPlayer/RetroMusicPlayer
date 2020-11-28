@@ -29,17 +29,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
-import code.name.monkey.retromusic.HISTORY_PLAYLIST
-import code.name.monkey.retromusic.LAST_ADDED_PLAYLIST
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.TOP_PLAYED_PLAYLIST
+import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
 import code.name.monkey.retromusic.glide.UserProfileGlideRequest
-import code.name.monkey.retromusic.state.NowPlayingPanelState
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
@@ -68,14 +64,14 @@ class HomeFragment :
         lastAdded.setOnClickListener {
             findNavController().navigate(
                 R.id.detailListFragment,
-                bundleOf("type" to LAST_ADDED_PLAYLIST)
+                bundleOf(EXTRA_PLAYLIST_TYPE to LAST_ADDED_PLAYLIST)
             )
         }
 
         topPlayed.setOnClickListener {
             findNavController().navigate(
                 R.id.detailListFragment,
-                bundleOf("type" to TOP_PLAYED_PLAYLIST)
+                bundleOf(EXTRA_PLAYLIST_TYPE to TOP_PLAYED_PLAYLIST)
             )
         }
 
@@ -86,7 +82,7 @@ class HomeFragment :
         history.setOnClickListener {
             findNavController().navigate(
                 R.id.detailListFragment,
-                bundleOf("type" to HISTORY_PLAYLIST)
+                bundleOf(EXTRA_PLAYLIST_TYPE to HISTORY_PLAYLIST)
             )
         }
 

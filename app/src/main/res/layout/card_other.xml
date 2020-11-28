@@ -70,7 +70,6 @@
             app:listItemTitle="@string/version" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/madeText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

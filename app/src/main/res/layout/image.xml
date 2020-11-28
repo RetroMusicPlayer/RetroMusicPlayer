@@ -32,6 +32,5 @@
         android:padding="12dp"
         android:textAppearance="@style/TextViewSubtitle1"
         android:textColor="@color/md_white_1000"
-        tools:text="@tools:sample/lorem/random" />
-
+        tools:text="@tools:sample/full_names" />
 </code.name.monkey.retromusic.views.WidthFitSquareLayout>

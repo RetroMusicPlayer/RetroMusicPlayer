@@ -72,8 +72,10 @@ import code.name.monkey.retromusic.appwidgets.AppWidgetText;
 import code.name.monkey.retromusic.glide.BlurTransformation;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
+import code.name.monkey.retromusic.model.AbsCustomPlaylist;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist;
 import code.name.monkey.retromusic.providers.HistoryStore;
 import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore;
 import code.name.monkey.retromusic.providers.SongPlayCountStore;
@@ -1271,10 +1273,10 @@ public class MusicService extends Service
     }
 
     private void playFromPlaylist(Intent intent) {
-        Playlist playlist = intent.getParcelableExtra(INTENT_EXTRA_PLAYLIST);
+        AbsSmartPlaylist playlist = intent.getParcelableExtra(INTENT_EXTRA_PLAYLIST);
         int shuffleMode = intent.getIntExtra(INTENT_EXTRA_SHUFFLE_MODE, getShuffleMode());
         if (playlist != null) {
-            List<Song> playlistSongs = playlist.getSongs();
+            List<Song> playlistSongs = playlist.songs();
             if (!playlistSongs.isEmpty()) {
                 if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {
                     int startPosition = new Random().nextInt(playlistSongs.size());

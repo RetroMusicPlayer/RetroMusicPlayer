@@ -54,24 +54,12 @@
     </style>
 
 
-    <style name="ToolbarTextAppearanceSearch" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
-        <item name="android:textSize">16sp</item>
-    </style>
-
     <style name="ToolbarTextAppearanceNormal">
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">20sp</item>
         <item name="android:letterSpacing">0.0125</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
-
-    <style name="BigTitleTextAppearanceToolbar">
-        <item name="android:textAppearance">@style/TextViewHeadline6</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
     </style>
 
     <style name="SubTitleTextAppearance">
@@ -87,26 +75,6 @@
     </style>
 
     <style name="Fab" parent="FabParent" />
-
-    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textAllCaps">false</item>
-        <item name="textAllCaps">false</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
-        <item name="tabIndicator">@drawable/tab_indicator</item>
-        <item name="tabIndicatorFullWidth">false</item>
-        <item name="tabMode">fixed</item>
-        <item name="tabIndicatorAnimationDuration">@integer/anim_duration_medium</item>
-        <item name="tabIndicatorHeight">4dp</item>
-        <item name="tabInlineLabel">true</item>
-        <item name="tabTextAppearance">@style/TabTextAppearance</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="ErrorHandlingTheme" parent="Theme.MaterialComponents.Light.NoActionBar" />
 
     <style name="TextViewNormal" parent="">
         <item name="android:textSize">14sp</item>
@@ -152,44 +120,10 @@
         <item name="cornerSize">0dp</item>
     </style>
 
-    <style name="TopCornerCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlayCardViewTopCorners</item>
-    </style>
-
-
-    <style name="ShapeAppearanceOverlayCardViewTopCorners" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">16dp</item>
-        <item name="cornerSizeTopLeft">16dp</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
-    </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="CircularShapeAppearance" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">22dp</item>
-    </style>
-
-    <style name="BigCircularShapeAppearance" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">56dp</item>
-    </style>
-
-    <style name="ExtraBigCircularShapeAppearance" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">78dp</item>
-    </style>
-
-    <style name="RetroSliderTooltip" parent="Widget.MaterialComponents.Tooltip">
-        <item name="backgroundColor">@color/md_white_1000</item>
-        <item name="background">@color/md_white_1000</item>
-        <item name="android:background">@color/md_white_1000</item>
-        <item name="android:textColor">@color/md_red_400</item>
     </style>
 
     <style name="MaterialPopupMenuStyle" parent="Widget.MaterialComponents.PopupMenu">

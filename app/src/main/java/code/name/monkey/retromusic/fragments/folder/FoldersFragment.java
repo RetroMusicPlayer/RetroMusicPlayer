@@ -54,6 +54,7 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -520,7 +521,7 @@ public class FoldersFragment extends AbsMainActivityFragment
                     getActivity().getApplicationContext(),
                     toBeScanned,
                     null,
-                    new UpdateToastMediaScannerCompletionListener(getActivity(), toBeScanned));
+                    new UpdateToastMediaScannerCompletionListener(getActivity(), Arrays.asList(toBeScanned)));
         }
     }
 

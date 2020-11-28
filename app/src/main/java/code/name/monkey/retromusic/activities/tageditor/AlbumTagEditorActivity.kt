@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
+import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
@@ -177,8 +178,11 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
         writeValuesToFiles(
             fieldKeyValueMap,
-            if (deleteAlbumArt) ArtworkInfo(id, null)
-            else if (albumArtBitmap == null) null else ArtworkInfo(id, albumArtBitmap!!)
+            when {
+                deleteAlbumArt -> ArtworkInfo(id, null)
+                albumArtBitmap == null -> null
+                else -> ArtworkInfo(id, albumArtBitmap!!)
+            }
         )
     }
 
