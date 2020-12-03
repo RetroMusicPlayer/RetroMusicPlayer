@@ -41,7 +41,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(View.VISIBLE)
+        mainActivity.setBottomBarVisibility(true)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         toolbar.setNavigationOnClickListener {

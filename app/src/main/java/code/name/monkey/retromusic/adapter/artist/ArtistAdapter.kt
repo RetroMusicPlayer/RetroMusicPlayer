@@ -155,8 +155,8 @@ class ArtistAdapter(
                 toggleChecked(layoutPosition)
             } else {
                 image?.let {
-                    ViewCompat.setTransitionName(itemView, "album")
-                    IArtistClickListener.onArtist(dataSet[layoutPosition].id, itemView)
+                    ViewCompat.setTransitionName(it, "artist")
+                    IArtistClickListener.onArtist(dataSet[layoutPosition].id, it)
                 }
             }
         }

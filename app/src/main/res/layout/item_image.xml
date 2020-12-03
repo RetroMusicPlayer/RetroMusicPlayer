@@ -10,12 +10,11 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/imageContainer"
         android:layout_width="156dp"
-        android:layout_height="0dp"
+        android:layout_height="156dp"
         android:layout_margin="8dp"
         android:orientation="vertical"
         app:cardCornerRadius="8dp"
         app:cardPreventCornerOverlap="true"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

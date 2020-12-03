@@ -31,9 +31,12 @@ class RetroShapeableImageView @JvmOverloads constructor(
     init {
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.RetroShapeableImageView, defStyle, -1)
-        val cornerSize =
-            typedArray.getDimension(R.styleable.RetroShapeableImageView_retroCornerSize, 0f)
-        updateCornerSize(cornerSize)
+        val cornerSize = typedArray.getDimension(R.styleable.RetroShapeableImageView_retroCornerSize, 0f)
+        val circleShape = typedArray.getBoolean(R.styleable.RetroShapeableImageView_circleShape, false)
+        addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            val radius = width / 2f
+            shapeAppearanceModel = ShapeAppearanceModel().withCornerSize(radius)
+        }
         typedArray.recycle()
     }
 

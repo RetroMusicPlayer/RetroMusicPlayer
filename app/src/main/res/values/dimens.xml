@@ -12,7 +12,7 @@
 
     <dimen name="list_item_image_icon_padding">8dp</dimen>
 
-    <dimen name="mini_player_height">48dp</dimen>
+    <dimen name="mini_player_height">56dp</dimen>
 
     <dimen name="app_widget_classic_height">96dp</dimen>
     <dimen name="app_widget_classic_image_size">96dp</dimen>
@@ -34,7 +34,7 @@
     <dimen name="now_playing_top_margin">12dp</dimen>
 
     <dimen name="icon_notification_dimen">32dp</dimen>
-    <dimen name="mini_player_height_expanded">104dp</dimen>
+    <dimen name="mini_player_height_expanded">112dp</dimen>
     <dimen name="toolbar_margin_horizontal">8dp</dimen>
     <dimen name="toolbar_height">48dp</dimen>
     <dimen name="item_song_height">52dp</dimen>

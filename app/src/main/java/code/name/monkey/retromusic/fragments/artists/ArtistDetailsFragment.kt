@@ -55,6 +55,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialElevationScale
 import kotlinx.android.synthetic.main.fragment_artist_content.*
 import kotlinx.android.synthetic.main.fragment_artist_details.*
 import kotlinx.coroutines.Dispatchers
@@ -92,13 +93,13 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.setBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
         toolbar.title = null
-        ViewCompat.setTransitionName(container, "artist")
+        ViewCompat.setTransitionName(artistCoverContainer, "artist")
         postponeEnterTransition()
-        detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
+        detailsViewModel.getArtist().observe(viewLifecycleOwner,  {
             startPostponedEnterTransition()
             showArtist(it)
         })
@@ -147,14 +148,12 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
             MusicUtil.getArtistInfoString(requireContext(), artist),
             MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(artist.songs))
         )
-        val songText =
-            resources.getQuantityString(
+        val songText = resources.getQuantityString(
                 R.plurals.albumSongs,
                 artist.songCount,
                 artist.songCount
             )
-        val albumText =
-            resources.getQuantityString(
+        val albumText = resources.getQuantityString(
                 R.plurals.albums,
                 artist.songCount,
                 artist.songCount
@@ -225,6 +224,12 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = 300L
+        }
+        reenterTransition = MaterialElevationScale(false).apply {
+            duration = 300L
+        }
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),

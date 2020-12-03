@@ -56,7 +56,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         super.onViewCreated(view, savedInstanceState)
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
-        mainActivity.setBottomBarVisibility(View.VISIBLE)
+        mainActivity.setBottomBarVisibility(true)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         initLayoutManager()

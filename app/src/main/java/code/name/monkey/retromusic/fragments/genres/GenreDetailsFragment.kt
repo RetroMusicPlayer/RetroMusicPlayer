@@ -62,7 +62,7 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.setBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
         ViewCompat.setTransitionName(container, "genre")

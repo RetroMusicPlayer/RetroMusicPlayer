@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.fragments.search
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.text.Editable
@@ -30,12 +31,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.SearchAdapter
-import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.extensions.focusAndShowKeyboard
-import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.transition.MaterialArcMotion
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -49,18 +49,30 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.fragment_container
+            duration = 300L
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+            setPathMotion(MaterialArcMotion())
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.setBottomBarVisibility(false)
         mainActivity.setSupportActionBar(toolbar)
         libraryViewModel.clearSearchResult()
         setupRecyclerView()
+
+        voiceSearch.setOnClickListener { startMicSearch() }
+        clearText.setOnClickListener { searchView.clearText() }
         searchView.apply {
             addTextChangedListener(this@SearchFragment)
             focusAndShowKeyboard()
         }
-        voiceSearch.setOnClickListener { startMicSearch() }
-        clearText.setOnClickListener { searchView.clearText() }
         keyboardPopup.apply {
             accentColor()
             setOnClickListener {

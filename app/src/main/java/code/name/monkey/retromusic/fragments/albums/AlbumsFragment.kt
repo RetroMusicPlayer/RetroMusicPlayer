@@ -26,7 +26,6 @@ import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
-import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSortOrder
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.interfaces.ICabHolder
@@ -118,7 +117,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         exitTransition = MaterialElevationScale(false).apply {
             duration = 300L
         }
-        reenterTransition = MaterialElevationScale(true).apply {
+        reenterTransition = MaterialElevationScale(false).apply {
             duration = 300L
         }
         findNavController().navigate(
@@ -154,28 +153,28 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             0,
             R.string.sort_order_a_z
         ).isChecked =
-            currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_A_Z)
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_A_Z)
         sortOrderMenu.add(
             0,
             R.id.action_album_sort_order_desc,
             1,
             R.string.sort_order_z_a
         ).isChecked =
-            currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_Z_A)
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_Z_A)
         sortOrderMenu.add(
             0,
             R.id.action_album_sort_order_artist,
             2,
             R.string.sort_order_artist
         ).isChecked =
-            currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_ARTIST)
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_ARTIST)
         sortOrderMenu.add(
             0,
             R.id.action_album_sort_order_year,
             3,
             R.string.sort_order_year
         ).isChecked =
-            currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_YEAR)
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_YEAR)
 
         sortOrderMenu.setGroupCheckable(0, true, true)
     }
@@ -305,16 +304,6 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     }
 
     private var cab: MaterialCab? = null
-
-    fun handleBackPress(): Boolean {
-        cab?.let {
-            if (it.isActive) {
-                it.finish()
-                return true
-            }
-        }
-        return false
-    }
 
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
         cab?.let {

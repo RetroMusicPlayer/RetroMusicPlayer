@@ -166,7 +166,7 @@ public class FoldersFragment extends AbsMainActivityFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         getMainActivity().addMusicServiceEventListener(getLibraryViewModel());
-        getMainActivity().setBottomBarVisibility(View.VISIBLE);
+        getMainActivity().setBottomBarVisibility(true);
         getMainActivity().setSupportActionBar(toolbar);
         getMainActivity().getSupportActionBar().setTitle(null);
         setStatusBarColorAuto(view);

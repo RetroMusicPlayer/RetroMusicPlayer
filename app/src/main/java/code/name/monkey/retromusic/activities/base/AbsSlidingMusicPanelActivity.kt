@@ -56,7 +56,6 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -133,7 +132,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (nowPlayingScreen != PreferenceUtil.nowPlayingScreen) {
             postRecreate()
         }
-        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+        if (bottomSheetBehavior.state == STATE_EXPANDED) {
             setMiniPlayerAlphaProgress(1f)
         }
     }
@@ -326,14 +325,14 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         })
     }
 
-    fun setBottomBarVisibility(visible: Int) {
-        bottomNavigationView.visibility = visible
+    fun setBottomBarVisibility(visible: Boolean) {
+        bottomNavigationView.isVisible = visible
         hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
     }
 
     private fun hideBottomBar(hide: Boolean) {
         val heightOfBar = dip(R.dimen.mini_player_height)
-        val heightOfBarWithTabs = dip(R.dimen.mini_player_height_expanded)
+        val heightOfBarWithTabs = heightOfBar * 2
         val isVisible = bottomNavigationView.isVisible
         if (hide) {
             bottomSheetBehavior.isHideable = true
@@ -347,10 +346,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 ViewCompat.setElevation(slidingPanel, 10f)
                 ViewCompat.setElevation(bottomNavigationView, 10f)
                 if (isVisible) {
-                    bottomSheetBehavior.peekHeight = heightOfBarWithTabs
-                    bottomNavigationView.translateYAnimate(0f)
+                    println("List")
+                    bottomSheetBehavior.peekHeight = heightOfBarWithTabs - 22
                 } else {
-                    bottomNavigationView.translateYAnimate(150f)
+                    println("Details")
                     bottomSheetBehavior.peekHeight = heightOfBar
                 }
             }

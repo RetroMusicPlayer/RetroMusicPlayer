@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.adapter.album
 
 import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -27,7 +26,6 @@ import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
@@ -41,14 +39,14 @@ import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 open class AlbumAdapter(
-    protected val activity: FragmentActivity,
+    val activity: FragmentActivity,
     var dataSet: List<Album>,
-    protected var itemLayoutRes: Int,
-    ICabHolder: ICabHolder?,
-    private val albumClickListener: IAlbumClickListener?
+    var itemLayoutRes: Int,
+    iCabHolder: ICabHolder?,
+    val listener: IAlbumClickListener?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
     activity,
-    ICabHolder,
+    iCabHolder,
     R.menu.menu_media_selection
 ), PopupTextProvider {
 
@@ -62,12 +60,7 @@ open class AlbumAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            try {
-                LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
-            } catch (e: Resources.NotFoundException) {
-                LayoutInflater.from(activity).inflate(R.layout.item_grid, parent, false)
-            }
+        val view = LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
         return createViewHolder(view, viewType)
     }
 
@@ -99,7 +92,7 @@ open class AlbumAdapter(
             holder.paletteColorContainer?.setBackgroundColor(color.backgroundColor)
         }
         holder.mask?.backgroundTintList = ColorStateList.valueOf(color.primaryTextColor)
-    }
+        holder.imageContainerCard?.setCardBackgroundColor(color.backgroundColor) }
 
     protected open fun loadAlbumCover(album: Album, holder: ViewHolder) {
         if (holder.image == null) {
@@ -177,8 +170,11 @@ open class AlbumAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                ViewCompat.setTransitionName(itemView, "album")
-                albumClickListener?.onAlbumClick(dataSet[layoutPosition].id, itemView)
+                image?.let {
+                    ViewCompat.setTransitionName(it, "album")
+                    listener?.onAlbumClick(dataSet[layoutPosition].id, it)
+                }
+
             }
         }
 
