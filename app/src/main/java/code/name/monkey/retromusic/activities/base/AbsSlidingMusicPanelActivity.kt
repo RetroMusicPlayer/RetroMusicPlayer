@@ -86,7 +86,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             setMiniPlayerAlphaProgress(slideOffset)
             dimBackground.show()
             dimBackground.alpha = slideOffset
-            println(slideOffset)
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {

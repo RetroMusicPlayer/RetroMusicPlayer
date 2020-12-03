@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.fragments.genres
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -24,14 +25,15 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.dipToPix
+import code.name.monkey.retromusic.extensions.resolveColor
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.menu.GenreMenuHelper
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
+import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,15 +47,16 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
     }
     private lateinit var genre: Genre
     private lateinit var songAdapter: SongAdapter
-    private fun setUpTransitions() {
-        val transform = MaterialContainerTransform()
-        transform.setAllContainerColors(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
-        sharedElementEnterTransition = transform
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setUpTransitions()
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.fragment_container
+            duration = 300L
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+            setPathMotion(MaterialArcMotion())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

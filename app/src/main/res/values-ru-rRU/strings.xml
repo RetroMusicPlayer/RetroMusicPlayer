@@ -10,7 +10,7 @@
     <string name="action_add_to_favorites">Добавить в избранное</string>
     <string name="action_add_to_playing_queue">Добавить в очередь воспроизведения</string>
     <string name="action_add_to_playlist">Добавить в плейлист</string>
-	<string name="action_clear_playing_queue">Очистить очередь воспроизведения</string>
+    <string name="action_clear_playing_queue">Очистить очередь воспроизведения</string>
     <string name="action_cycle_repeat">Режим циклического повтора</string>
     <string name="action_delete">Удалить</string>
     <string name="action_delete_from_device">Удалить с устройства</string>
@@ -655,5 +655,4 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Данные вашей учетной записи используются только для аутентификации.</string>
-
 </resources>

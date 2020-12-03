@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.adapter.GenreAdapter
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
 import code.name.monkey.retromusic.interfaces.IGenreClickListener
 import code.name.monkey.retromusic.model.Genre
+import com.google.android.material.transition.MaterialElevationScale
 
 class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     IGenreClickListener {
@@ -63,6 +64,12 @@ class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager
     }
 
     override fun onClickGenre(genre: Genre, view: View) {
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = 300L
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = 300L
+        }
         findNavController().navigate(
             R.id.genreDetailsFragment,
             bundleOf(EXTRA_GENRE to genre),

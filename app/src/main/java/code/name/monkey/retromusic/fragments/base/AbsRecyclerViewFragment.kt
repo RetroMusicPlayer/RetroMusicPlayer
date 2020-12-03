@@ -22,6 +22,7 @@ import android.view.View
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.core.text.HtmlCompat
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.updatePadding
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -53,6 +54,8 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
         mainActivity.setBottomBarVisibility(View.VISIBLE)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
