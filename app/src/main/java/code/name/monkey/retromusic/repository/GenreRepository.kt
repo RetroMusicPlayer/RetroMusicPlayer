@@ -32,6 +32,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 interface GenreRepository {
     fun genres(): List<Genre>
 
+    fun genres(query: String): List<Genre>
+
     fun songs(genreId: Long): List<Song>
 }
 
@@ -44,6 +46,9 @@ class RealGenreRepository(
         return getGenresFromCursor(makeGenreCursor())
     }
 
+    override fun genres(query: String): List<Genre> {
+        return getGenresFromCursor(makeGenreCursor(arrayOf("%$query%")))
+    }
     override fun songs(genreId: Long): List<Song> {
         // The genres table only stores songs that have a genre specified,
         // so we need to get songs without a genre a different way.
@@ -155,6 +160,21 @@ class RealGenreRepository(
                 projection,
                 null,
                 null,
+                PreferenceUtil.genreSortOrder
+            )
+        } catch (e: SecurityException) {
+            return null
+        }
+    }
+    private fun makeGenreCursor(selectionValues: Array<String>?): Cursor? {
+        val selection = MediaStore.Audio.GenresColumns.NAME + " LIKE ?"
+        val projection = arrayOf(Genres._ID, Genres.NAME)
+        return try {
+            contentResolver.query(
+                Genres.EXTERNAL_CONTENT_URI,
+                projection,
+                selection,
+                selectionValues,
                 PreferenceUtil.genreSortOrder
             )
         } catch (e: SecurityException) {
