@@ -115,10 +115,10 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
     }
 
     override fun onArtist(artistId: Long, view: View) {
-        exitTransition = MaterialElevationScale(false).apply {
+        exitTransition = MaterialElevationScale(true).apply {
             duration = 300L
         }
-        reenterTransition = MaterialElevationScale(true).apply {
+        reenterTransition = MaterialElevationScale(false).apply {
             duration = 300L
         }
         findNavController().navigate(
