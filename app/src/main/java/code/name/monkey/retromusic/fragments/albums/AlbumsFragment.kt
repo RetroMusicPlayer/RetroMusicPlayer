@@ -114,10 +114,10 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
-        exitTransition = MaterialElevationScale(true).apply {
+        exitTransition = MaterialElevationScale(false).apply {
             duration = 300L
         }
-        reenterTransition = MaterialElevationScale(false).apply {
+        reenterTransition = MaterialElevationScale(true).apply {
             duration = 300L
         }
         findNavController().navigate(

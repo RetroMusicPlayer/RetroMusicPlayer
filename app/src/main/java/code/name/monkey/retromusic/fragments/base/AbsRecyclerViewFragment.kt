@@ -54,8 +54,10 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
+
         mainActivity.setBottomBarVisibility(true)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
@@ -87,7 +89,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
             layoutManager = this@AbsRecyclerViewFragment.layoutManager
             adapter = this@AbsRecyclerViewFragment.adapter
             val fastScroller = create(this)
-
         }
         checkForPadding()
     }
