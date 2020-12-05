@@ -24,13 +24,13 @@ import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 
-open class PlaylistSongAdapter(
+class PlaylistSongAdapter(
     private val playlist: PlaylistEntity,
     activity: FragmentActivity,
     dataSet: MutableList<Song>,
     itemLayoutRes: Int,
-    ICabHolder: ICabHolder?
-) : SongAdapter(activity, dataSet, itemLayoutRes, ICabHolder) {
+    iCabHolder: ICabHolder?
+) : SongAdapter(activity, dataSet, itemLayoutRes, iCabHolder) {
 
     init {
         this.setMultiSelectMenuRes(R.menu.menu_cannot_delete_single_songs_playlist_songs_selection)

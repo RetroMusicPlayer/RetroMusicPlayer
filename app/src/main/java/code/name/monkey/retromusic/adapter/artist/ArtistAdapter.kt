@@ -85,7 +85,7 @@ class ArtistAdapter(
         loadArtistImage(artist, holder)
     }
 
-    fun setColors(processor: MediaNotificationProcessor, holder: ViewHolder) {
+    private fun setColors(processor: MediaNotificationProcessor, holder: ViewHolder) {
         holder.mask?.backgroundTintList = ColorStateList.valueOf(processor.primaryTextColor)
         if (holder.paletteColorContainer != null) {
             holder.paletteColorContainer?.setBackgroundColor(processor.backgroundColor)

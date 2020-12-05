@@ -42,10 +42,10 @@ class SongFileAdapter(
     private val activity: AppCompatActivity,
     private var dataSet: List<File>,
     private val itemLayoutRes: Int,
-    private val ICallbacks: ICallbacks?,
-    ICabHolder: ICabHolder?
+    private val iCallbacks: ICallbacks?,
+    iCabHolder: ICabHolder?
 ) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(
-    activity, ICabHolder, R.menu.menu_media_selection
+    activity, iCabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
 
     init {
@@ -135,8 +135,8 @@ class SongFileAdapter(
     }
 
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<File>) {
-        if (ICallbacks == null) return
-        ICallbacks.onMultipleItemAction(menuItem, selection as ArrayList<File>)
+        if (iCallbacks == null) return
+        iCallbacks.onMultipleItemAction(menuItem, selection as ArrayList<File>)
     }
 
     override fun getPopupText(position: Int): String {
@@ -150,11 +150,11 @@ class SongFileAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            if (menu != null && ICallbacks != null) {
+            if (menu != null && iCallbacks != null) {
                 menu?.setOnClickListener { v ->
                     val position = layoutPosition
                     if (isPositionInRange(position)) {
-                        ICallbacks.onFileMenuClicked(dataSet[position], v)
+                        iCallbacks.onFileMenuClicked(dataSet[position], v)
                     }
                 }
             }
@@ -169,7 +169,7 @@ class SongFileAdapter(
                 if (isInQuickSelectMode) {
                     toggleChecked(position)
                 } else {
-                    ICallbacks?.onFileSelected(dataSet[position])
+                    iCallbacks?.onFileSelected(dataSet[position])
                 }
             }
         }
