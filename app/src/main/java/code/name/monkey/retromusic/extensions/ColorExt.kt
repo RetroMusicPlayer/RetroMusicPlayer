@@ -95,13 +95,7 @@ fun SeekBar.addAccentColor() {
     thumbTintList = colorState
 }
 
-fun Button.accentTextColor() {
-    setTextColor(ThemeStore.accentColor(App.getContext()))
-}
-
-fun MaterialButton.accentTextColor() {
-    setTextColor(ThemeStore.accentColor(App.getContext()))
-}
+fun Button.accentTextColor() = setTextColor(ThemeStore.accentColor(App.getContext()))
 
 fun MaterialButton.accentBackgroundColor() {
     backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(App.getContext()))
@@ -154,9 +148,7 @@ fun MaterialButton.applyColor(color: Int) {
     iconTint = textColorColorStateList
 }
 
-fun MaterialButton.accentColor() {
-    this.applyColor(ThemeStore.accentColor(context))
-}
+fun MaterialButton.accentColor() = applyColor(ThemeStore.accentColor(context))
 
 fun MaterialButton.applyOutlineColor(color: Int) {
     val textColorColorStateList = ColorStateList.valueOf(color)
@@ -183,12 +175,7 @@ fun CircularProgressIndicator.applyColor(color: Int) {
     trackColor = ColorUtil.withAlpha(color, 0.2f)
 }
 
-fun TextInputEditText.accentColor() {
-}
-
-fun AppCompatImageView.accentColor(): Int {
-    return ThemeStore.accentColor(context)
-}
+fun AppCompatImageView.accentColor(): Int = ThemeStore.accentColor(context)
 
 @CheckResult
 fun Drawable.tint(@ColorInt color: Int): Drawable {
@@ -198,9 +185,8 @@ fun Drawable.tint(@ColorInt color: Int): Drawable {
 }
 
 @CheckResult
-fun Drawable.tint(context: Context, @ColorRes color: Int): Drawable {
-    return tint(context.getColorCompat(color))
-}
+fun Drawable.tint(context: Context, @ColorRes color: Int): Drawable =
+    tint(context.getColorCompat(color))
 
 @ColorInt
 fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
