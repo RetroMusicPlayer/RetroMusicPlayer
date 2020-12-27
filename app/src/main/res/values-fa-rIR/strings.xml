@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="about_album_label">درباره %s</string>
     <string name="about_settings_summary">Team, social links</string>
@@ -9,20 +9,20 @@
     <string name="action_about">درباره</string>
     <string name="action_add_to_favorites">Add to favorites</string>
     <string name="action_add_to_playing_queue">Add to playing queue</string>
-    <string name="action_add_to_playlist">Add to playlist</string>
+    <string name="action_add_to_playlist">افزودن به پهرست</string>
     <string name="action_clear_playing_queue">Clear playing queue</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">هذف</string>
-    <string name="action_delete_from_device">هذف از دستگاه</string>
+    <string name="action_delete_from_device">Delete from device</string>
     <string name="action_details">Details</string>
-    <string name="action_go_to_album">به سوی جُنگ</string>
-    <string name="action_go_to_artist">به سوی هنرمند</string>
+    <string name="action_go_to_album">بسوی جُنگ</string>
+    <string name="action_go_to_artist">بسوی هنرمند</string>
     <string name="action_go_to_genre">Go to genre</string>
     <string name="action_go_to_start_directory">Go to start directory</string>
     <string name="action_grant">Grant</string>
     <string name="action_grid_size">Grid size</string>
     <string name="action_grid_size_land">Grid size (land)</string>
-    <string name="action_new_playlist">New playlist</string>
+    <string name="action_new_playlist">پهرست نو</string>
     <string name="action_next">Next</string>
     <string name="action_play">پخش</string>
     <string name="action_play_all">پخش همه</string>
@@ -31,15 +31,15 @@
     <string name="action_previous">پیشین</string>
     <string name="action_remove_from_favorites">Remove from favorites</string>
     <string name="action_remove_from_playing_queue">Remove from playing queue</string>
-    <string name="action_remove_from_playlist">هذف از پهرست</string>
+    <string name="action_remove_from_playlist">Remove from playlist</string>
     <string name="action_rename">Rename</string>
     <string name="action_save_playing_queue">Save playing queue</string>
-    <string name="action_scan">Scan</string>
+    <string name="action_scan">پویش</string>
     <string name="action_search">جستجو</string>
     <string name="action_set">آغاز</string>
     <string name="action_set_as_ringtone">Set as ringtone</string>
     <string name="action_set_as_start_directory">Set as start directory</string>
-    <string name="action_settings">"ساماندهی"</string>
+    <string name="action_settings">ساماندهی</string>
     <string name="action_share">همرسانی</string>
     <string name="action_shuffle_all">Shuffle all</string>
     <string name="action_shuffle_playlist">Shuffle playlist</string>
@@ -52,7 +52,7 @@
     <string name="adaptive">Adaptive</string>
 
     <string name="add_action">افزودن</string>
-    <string name="add_playlist_title">"افزودن به پهرست"</string>
+    <string name="add_playlist_title">افزودن به پهرست</string>
 
     <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
     <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
@@ -64,9 +64,9 @@
         <item quantity="other">آهنگ</item>
     </plurals>
 
-    <string name="album_artist">هنرمند جُنگ</string>
+    <string name="album_artist">Album artist</string>
 
-    <string name="albums">جُنگ‌ها</string>
+    <string name="albums">Albums</string>
     <plurals name="albums">
         <item quantity="one">جُنگ</item>
         <item quantity="other">جُنگ</item>
@@ -85,12 +85,12 @@
 
     <string name="artist">هنرمند</string>
 
-    <string name="artists">هنرمندان</string>
+    <string name="artists">Artists</string>
 
     <string name="audio_focus_denied">Audio focus denied.</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
 
-    <string name="auto">خودکار</string>
+    <string name="auto">Auto</string>
 
     <string name="biography">Biography</string>
 
@@ -106,7 +106,7 @@
     <string name="bug_report_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
     <string name="bug_report_failed_unknown">An unexpected error occurred. Please contact the app developer.</string>
     <string name="bug_report_failed_wrong_credentials">Wrong username or password</string>
-    <string name="bug_report_issue">جستار</string>
+    <string name="bug_report_issue">Issue</string>
     <string name="bug_report_manual">Send manually</string>
     <string name="bug_report_no_description">Please enter an issue description</string>
     <string name="bug_report_no_password">Please enter your valid GitHub password</string>
@@ -141,9 +141,9 @@
     <string name="clear_blacklist">Clear blacklist</string>
     <string name="clear_playing_queue">Clear queue</string>
 
-    <string name="color">رنگ</string>
+    <string name="color">Color</string>
 
-    <string name="colors">رنگ‌ها</string>
+    <string name="colors">Colors</string>
 
     <string name="composer">Composer</string>
 
@@ -154,7 +154,7 @@
     <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Could not scan %d files.</string>
 
-    <string name="create_action">ساخت</string>
+    <string name="create_action">Create</string>
 
     <string name="created_playlist_x">Created playlist %1$s.</string>
 
@@ -164,10 +164,10 @@
 
     <string name="dark_theme_name">Kinda Dark</string>
 
-    <string name="delete_playlist_title">هذف پهرست</string>
+    <string name="delete_playlist_title">Delete playlist</string>
     <string name="delete_playlist_x"><![CDATA[Delete the playlist <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Delete playlists</string>
-    <string name="delete_song_title">هذف آهنگ</string>
+    <string name="delete_song_title">Delete song</string>
     <string name="delete_song_x"><![CDATA[Delete the song <b>%1$s</b>?]]></string>
     <string name="delete_songs_title">Delete songs</string>
     <string name="delete_x_playlists"><![CDATA[Delete <b>%1$d</b> playlists?]]></string>
@@ -196,7 +196,7 @@
 
     <string name="drive_mode">Drive mode</string>
 
-    <string name="empty">تهی</string>
+    <string name="empty">Empty</string>
 
     <string name="equalizer">Equalizer</string>
 
@@ -252,7 +252,7 @@
 
     <string name="horizontal_flip">Horizontal flip</string>
 
-    <string name="image">Image</string>
+    <string name="image">نگاره</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
 
@@ -283,7 +283,7 @@
 
     <string name="library_categories">Library categories</string>
 
-    <string name="licenses">گواهینامه</string>
+    <string name="licenses">گواهینامه‌ها</string>
 
     <string name="light_theme_name">Clearly White</string>
 
@@ -293,7 +293,7 @@
 
     <string name="loading_products">Loading products…</string>
 
-    <string name="login">ورود</string>
+    <string name="login">Login</string>
 
     <string name="lyrics">Lyrics</string>
 
@@ -335,7 +335,7 @@
     <string name="nothing_to_scan">Nothing to scan.</string>
     <string name="nothing_to_see">Nothing to see</string>
 
-    <string name="notification">آگهداد</string>
+    <string name="notification">Notification</string>
     <string name="notification_settings_summary">Customize the notification style</string>
 
     <string name="now_playing">Now playing</string>
@@ -366,13 +366,13 @@
 
     <string name="pick_from_local_storage">Pick from local storage</string>
 
-    <string name="pinterest_page">Pinterest</string>
+    <string name="pinterest_page">پینترست</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
 
     <string name="plain">Plain</string>
 
     <string name="playing_notification_description">The playing notification provides actions for play/pause etc.</string>
-    <string name="playing_notification_name">آگهداد پخش</string>
+    <string name="playing_notification_name">Playing notification</string>
 
     <string name="playlist_is_empty">پهرست تهی‌ست</string>
     <string name="playlist_name_empty">نام پهرست</string>
@@ -385,7 +385,7 @@
     <string name="pref_filter_song_title">Filter song duration</string>
     <string name="pref_header_advanced">پیشرفته</string>
     <string name="pref_header_album">Album style</string>
-    <string name="pref_header_audio">Audio</string>
+    <string name="pref_header_audio">آوا</string>
     <string name="pref_header_blacklist">Blacklist</string>
     <string name="pref_header_controls">Controls</string>
     <string name="pref_header_general">پوسته</string>
@@ -425,7 +425,7 @@
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
-    <string name="pref_title_album_cover_style">پوسته جلد آلبوم</string>
+    <string name="pref_title_album_cover_style">پوسته جلد جُنگ</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
@@ -435,11 +435,11 @@
     <string name="pref_title_blurred_album_art">Blur album cover</string>
     <string name="pref_title_classic_notification">Classic notification design</string>
     <string name="pref_title_colored_app">Adaptive color</string>
-    <string name="pref_title_colored_notification">آگهداد رنگی</string>
+    <string name="pref_title_colored_notification">Colored notification</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
-    <string name="pref_title_extra_song_info">درباره آهنگ</string>
+    <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Gapless playback</string>
     <string name="pref_title_general_theme">پوسته برنامه</string>
     <string name="pref_title_home_album_grid_style">Album grid</string>
@@ -453,7 +453,7 @@
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">Fullscreen app</string>
-    <string name="pref_title_toggle_toggle_headset">پخش خودکار</string>
+    <string name="pref_title_toggle_toggle_headset">Auto-play</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Volume controls</string>
 
@@ -532,7 +532,7 @@
 
     <string name="select_all">گزینش همه</string>
 
-    <string name="selected">گزیده شد</string>
+    <string name="selected">Selected</string>
 
     <string name="set">Set</string>
     <string name="set_artist_image">Set artist image</string>
@@ -549,7 +549,7 @@
     <string name="sleep_timer_set">Sleep timer set for %d minutes from now.</string>
 
     <string name="social">Social</string>
-    <string name="social_stories">همرسانی داستان</string>
+    <string name="social_stories">Share story</string>
 
     <string name="song">آهنگ</string>
     <string name="song_duration">Song duration</string>
@@ -595,7 +595,7 @@
     <string name="this_week">این هفته</string>
     <string name="this_year">این سال</string>
 
-    <string name="tiny">Tiny</string>
+    <string name="tiny">کوچک</string>
     <string name="tiny_card_style">Tiny card</string>
 
     <string name="title">Title</string>
@@ -626,11 +626,11 @@
 
     <string name="updating">Updating…</string>
 
-    <string name="user_name">نام کاربر</string>
+    <string name="user_name">User Name</string>
 
-    <string name="username">نام کاربری</string>
+    <string name="username">Username</string>
 
-    <string name="version">نگارش</string>
+    <string name="version">Version</string>
 
     <string name="vertical_flip">Vertical flip</string>
 
@@ -648,7 +648,7 @@
     <string name="window_corner_edges">Rounded corners</string>
 
     <string name="x_has_been_set_as_ringtone">Set %1$s as your ringtone.</string>
-    <string name="x_selected">%1$d گزیده شد</string>
+    <string name="x_selected">%1$d selected</string>
 
     <string name="year">سال</string>
 
