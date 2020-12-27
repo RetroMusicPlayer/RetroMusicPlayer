@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_album_label">درباره %s</string>
     <string name="about_settings_summary">Team, social links</string>
@@ -13,12 +13,12 @@
     <string name="action_clear_playing_queue">Clear playing queue</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">هذف</string>
-    <string name="action_delete_from_device">Delete from device</string>
+    <string name="action_delete_from_device">هذف از دستگاه</string>
     <string name="action_details">Details</string>
     <string name="action_go_to_album">بسوی جُنگ</string>
     <string name="action_go_to_artist">بسوی هنرمند</string>
     <string name="action_go_to_genre">Go to genre</string>
-    <string name="action_go_to_start_directory">Go to start directory</string>
+    <string name="action_go_to_start_directory">بسوی شاخه آغازین</string>
     <string name="action_grant">Grant</string>
     <string name="action_grid_size">Grid size</string>
     <string name="action_grid_size_land">Grid size (land)</string>
@@ -31,7 +31,7 @@
     <string name="action_previous">پیشین</string>
     <string name="action_remove_from_favorites">Remove from favorites</string>
     <string name="action_remove_from_playing_queue">Remove from playing queue</string>
-    <string name="action_remove_from_playlist">Remove from playlist</string>
+    <string name="action_remove_from_playlist">هذف از پهرست</string>
     <string name="action_rename">Rename</string>
     <string name="action_save_playing_queue">Save playing queue</string>
     <string name="action_scan">پویش</string>
@@ -39,7 +39,7 @@
     <string name="action_set">آغاز</string>
     <string name="action_set_as_ringtone">Set as ringtone</string>
     <string name="action_set_as_start_directory">Set as start directory</string>
-    <string name="action_settings">ساماندهی</string>
+    <string name="action_settings">"ساماندهی"</string>
     <string name="action_share">همرسانی</string>
     <string name="action_shuffle_all">Shuffle all</string>
     <string name="action_shuffle_playlist">Shuffle playlist</string>
@@ -52,7 +52,7 @@
     <string name="adaptive">Adaptive</string>
 
     <string name="add_action">افزودن</string>
-    <string name="add_playlist_title">افزودن به پهرست</string>
+    <string name="add_playlist_title">"افزودن به پهرست"</string>
 
     <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
     <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
@@ -64,9 +64,9 @@
         <item quantity="other">آهنگ</item>
     </plurals>
 
-    <string name="album_artist">Album artist</string>
+    <string name="album_artist">هنرمند جُنگ</string>
 
-    <string name="albums">Albums</string>
+    <string name="albums">جُنگ‌ها</string>
     <plurals name="albums">
         <item quantity="one">جُنگ</item>
         <item quantity="other">جُنگ</item>
@@ -77,20 +77,20 @@
     <string name="app_share">Hey check out this cool music player at: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">Top Tracks</string>
-    <string name="app_widget_big_name">Full Image</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Card</string>
     <string name="app_widget_classic_name">Classic</string>
     <string name="app_widget_small_name">Small</string>
-    <string name="app_widget_text_name">Minimal Text</string>
+    <string name="app_widget_text_name">Text</string>
 
     <string name="artist">هنرمند</string>
 
-    <string name="artists">Artists</string>
+    <string name="artists">هنرمندان</string>
 
     <string name="audio_focus_denied">Audio focus denied.</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
 
-    <string name="auto">Auto</string>
+    <string name="auto">خودکار</string>
 
     <string name="biography">Biography</string>
 
@@ -121,7 +121,6 @@
 
     <string name="card">Card</string>
     <string name="card_color_style">Colored Card</string>
-    <string name="card_square">Square Card</string>
     <string name="card_style">Card</string>
 
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
@@ -137,13 +136,13 @@
 
     <string name="classic">Classic</string>
 
-    <string name="clear_action">Clear</string>
+    <string name="clear_action">زدایش</string>
     <string name="clear_blacklist">Clear blacklist</string>
     <string name="clear_playing_queue">Clear queue</string>
 
-    <string name="color">Color</string>
+    <string name="color">رنگ</string>
 
-    <string name="colors">Colors</string>
+    <string name="colors">رنگ‌ها</string>
 
     <string name="composer">Composer</string>
 
@@ -154,7 +153,7 @@
     <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Could not scan %d files.</string>
 
-    <string name="create_action">Create</string>
+    <string name="create_action">ساختن</string>
 
     <string name="created_playlist_x">Created playlist %1$s.</string>
 
@@ -164,12 +163,12 @@
 
     <string name="dark_theme_name">Kinda Dark</string>
 
-    <string name="delete_playlist_title">Delete playlist</string>
+    <string name="delete_playlist_title">هذف پهرست</string>
     <string name="delete_playlist_x"><![CDATA[Delete the playlist <b>%1$s</b>?]]></string>
-    <string name="delete_playlists_title">Delete playlists</string>
-    <string name="delete_song_title">Delete song</string>
+    <string name="delete_playlists_title">هذف پهرست‌ها</string>
+    <string name="delete_song_title">هذف آهنگ</string>
     <string name="delete_song_x"><![CDATA[Delete the song <b>%1$s</b>?]]></string>
-    <string name="delete_songs_title">Delete songs</string>
+    <string name="delete_songs_title">هذف آهنگ‌ها</string>
     <string name="delete_x_playlists"><![CDATA[Delete <b>%1$d</b> playlists?]]></string>
     <string name="delete_x_songs"><![CDATA[Delete <b>%1$d</b> songs?]]></string>
 
@@ -192,11 +191,9 @@
 
     <string name="donation_header">Buy me a:</string>
 
-    <string name="done">Done</string>
+    <string name="drive_mode">شیوه رانندگی</string>
 
-    <string name="drive_mode">Drive mode</string>
-
-    <string name="empty">Empty</string>
+    <string name="empty">تهی</string>
 
     <string name="equalizer">Equalizer</string>
 
@@ -230,8 +227,6 @@
 
     <string name="git_hub_summary">Fork the project on GitHub</string>
 
-    <string name="gradient">Gradient</string>
-
     <string name="grid_size_1">۱</string>
     <string name="grid_size_2">۲</string>
     <string name="grid_size_3">۳</string>
@@ -242,8 +237,6 @@
     <string name="grid_size_8">۸</string>
     <string name="grid_style_label">Grid style</string>
 
-    <string name="help_summary">Need more help?</string>
-
     <string name="hinge">Hinge</string>
 
     <string name="history">پیشینه</string>
@@ -252,17 +245,12 @@
 
     <string name="horizontal_flip">Horizontal flip</string>
 
-    <string name="image">نگاره</string>
+    <string name="image">Image</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
 
-    <string name="import_label">Import</string>
-    <string name="import_playlist">Import playlist</string>
-    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
-
     <string name="inserted_x_songs_into_playlist_x">Inserted %1$d songs into the playlist %2$s.</string>
 
-    <string name="instagram_page" translatable="false">اینستاگرام</string>
     <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
 
     <string name="keyboard">کلیدبرگ</string>
@@ -272,7 +260,7 @@
     <string name="label_file_name">نام پرونده</string>
     <string name="label_file_path">File path</string>
     <string name="label_file_size">اندازه</string>
-    <string name="label_more_from">More from %s</string>
+    <string name="label_more_from">بیشتر از %s</string>
     <string name="label_sampling_rate">Sampling rate</string>
     <string name="label_track_length">Length</string>
 
@@ -301,7 +289,7 @@
 
     <string name="material">Material</string>
 
-    <string name="md_error_label">Error</string>
+    <string name="md_error_label">کژی</string>
     <string name="md_storage_perm_error">Permission error</string>
 
     <string name="my_name">نام</string>
@@ -323,19 +311,18 @@
     <string name="no_playing_queue">No songs playing</string>
     <string name="no_playlists">You have no playlists</string>
     <string name="no_purchase_found">No purchase found.</string>
-    <string name="no_results">No results</string>
+    <string name="no_results">بی هیچ دستاورد</string>
     <string name="no_songs">You have no songs</string>
 
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normal lyrics</string>
 
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> is not listed in the media store.]]></string>
-    <string name="not_recently_played">Not recently played</string>
 
     <string name="nothing_to_scan">Nothing to scan.</string>
     <string name="nothing_to_see">Nothing to see</string>
 
-    <string name="notification">Notification</string>
+    <string name="notification">آگهداد</string>
     <string name="notification_settings_summary">Customize the notification style</string>
 
     <string name="now_playing">Now playing</string>
@@ -356,8 +343,6 @@
     <string name="peak">Peak</string>
 
     <string name="permission_external_storage_denied">Permission to access external storage denied.</string>
-    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
-    <string name="permission_title">Storage Access</string>
 
     <string name="permissions_denied">Permissions denied.</string>
 
@@ -390,16 +375,15 @@
     <string name="pref_header_controls">Controls</string>
     <string name="pref_header_general">پوسته</string>
     <string name="pref_header_images">Images</string>
-    <string name="pref_header_library">کتابخانه</string>
+    <string name="pref_header_library">Library</string>
     <string name="pref_header_lockscreen">Lockscreen</string>
-    <string name="pref_header_playlists">Playlists</string>
+    <string name="pref_header_playlists">پهرست‌ها</string>
     <string name="pref_keep_pause_on_zero_volume_summary">Pauses the song when the volume decreases to zero and starts playing back when the volume level rises. Also works outside the app</string>
-    <string name="pref_keep_pause_on_zero_volume_title">Pause on zero</string>
+    <string name="pref_keep_pause_on_zero_volume_title">درنگ در صفر</string>
     <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">گزینش زبان</string>
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
-    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
@@ -424,7 +408,6 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
-    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">پوسته جلد جُنگ</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
@@ -441,8 +424,7 @@
     <string name="pref_title_extra_controls">Extra controls</string>
     <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Gapless playback</string>
-    <string name="pref_title_general_theme">پوسته برنامه</string>
-    <string name="pref_title_home_album_grid_style">Album grid</string>
+    <string name="pref_title_general_theme">App theme</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
@@ -453,7 +435,7 @@
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">Fullscreen app</string>
-    <string name="pref_title_toggle_toggle_headset">Auto-play</string>
+    <string name="pref_title_toggle_toggle_headset">پخش خودکار</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Volume controls</string>
 
@@ -498,9 +480,6 @@
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
 
-    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
-    <string name="ringtone_title">Ringtone</string>
-
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -538,7 +517,6 @@
     <string name="set_artist_image">Set artist image</string>
 
     <string name="share_app">همرسانی برنامه</string>
-    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
 
     <string name="shuffle">Shuffle</string>
@@ -563,8 +541,6 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
-    <string name="sort_order_num_songs">Song count</string>
-    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">سال</string>
     <string name="sort_order_z_a">Descending</string>
 
@@ -625,8 +601,6 @@
     <string name="update_image">Update image</string>
 
     <string name="updating">Updating…</string>
-
-    <string name="user_name">User Name</string>
 
     <string name="username">Username</string>
 
