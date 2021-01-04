@@ -58,7 +58,6 @@ import io.github.muntashirakon.music.model.CategoryInfo
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.repository.PlaylistSongsLoader
 import io.github.muntashirakon.music.service.MusicService
-import io.github.muntashirakon.music.util.AppRater
 import io.github.muntashirakon.music.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
