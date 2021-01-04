@@ -48,7 +48,7 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.setBottomBarVisibility(View.VISIBLE)
+        mainActivity.setBottomBarVisibility(true)
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         setStatusBarColorAuto(view)

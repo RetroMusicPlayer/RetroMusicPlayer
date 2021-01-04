@@ -10,7 +10,7 @@
     <string name="action_add_to_favorites">Добавить в избранное</string>
     <string name="action_add_to_playing_queue">Добавить в очередь воспроизведения</string>
     <string name="action_add_to_playlist">Добавить в плейлист</string>
-	<string name="action_clear_playing_queue">Очистить очередь воспроизведения</string>
+    <string name="action_clear_playing_queue">Очистить очередь воспроизведения</string>
     <string name="action_cycle_repeat">Режим циклического повтора</string>
     <string name="action_delete">Удалить</string>
     <string name="action_delete_from_device">Удалить с устройства</string>
@@ -315,7 +315,7 @@
     <string name="next_song">Следующая песня</string>
 
     <string name="no_albums">Альбомы отсутствуют</string>
-    <string name="no_artists">Исполнители отсутствую</string>
+    <string name="no_artists">Исполнители отсутствуют</string>
     <string name="no_audio_ID">"Сначала проиграйте песню, затем попробуйте заново."</string>
     <string name="no_equalizer">Эквалайзер не найден</string>
     <string name="no_genres">Жанры отсутствуют</string>
@@ -443,7 +443,6 @@
     <string name="pref_title_gapless_playback">Непрерывное воспроизведение</string>
     <string name="pref_title_general_theme">Тема приложения</string>
     <string name="pref_title_home_album_grid_style">Сетка альбома на Главной странице</string>
-    <string name="pref_title_home_artist_grid_style">Сетка исполнителя на Главной странице</string>
     <string name="pref_title_home_banner">Кнопка Домой</string>
     <string name="pref_title_ignore_media_store_artwork">Игнорировать обложки из хранилища</string>
     <string name="pref_title_last_added_interval">Дата последнего добавления плейлиста</string>

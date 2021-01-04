@@ -17,6 +17,7 @@ package io.github.muntashirakon.music.dialogs
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
 import io.github.muntashirakon.music.R
@@ -93,11 +94,11 @@ class SongShareDialog : DialogFragment() {
     companion object {
 
         fun create(song: Song): SongShareDialog {
-            val dialog = SongShareDialog()
-            val args = Bundle()
-            args.putParcelable(EXTRA_SONG, song)
-            dialog.arguments = args
-            return dialog
+            return SongShareDialog().apply {
+                arguments = bundleOf(
+                    EXTRA_SONG to song
+                )
+            }
         }
     }
 }

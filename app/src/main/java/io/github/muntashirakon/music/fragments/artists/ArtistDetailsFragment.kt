@@ -16,6 +16,7 @@ package io.github.muntashirakon.music.fragments.artists
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Spanned
 import android.view.Menu
@@ -39,10 +40,7 @@ import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.album.HorizontalAlbumAdapter
 import io.github.muntashirakon.music.adapter.song.SimpleSongAdapter
 import io.github.muntashirakon.music.dialogs.AddToPlaylistDialog
-import io.github.muntashirakon.music.extensions.applyColor
-import io.github.muntashirakon.music.extensions.applyOutlineColor
-import io.github.muntashirakon.music.extensions.show
-import io.github.muntashirakon.music.extensions.showToast
+import io.github.muntashirakon.music.extensions.*
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.glide.ArtistGlideRequest
 import io.github.muntashirakon.music.glide.SingleColorTarget
@@ -57,6 +55,7 @@ import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.RetroUtil
 import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialElevationScale
 import kotlinx.android.synthetic.main.fragment_artist_content.*
 import kotlinx.android.synthetic.main.fragment_artist_details.*
 import kotlinx.coroutines.Dispatchers
@@ -81,27 +80,26 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     private var lang: String? = null
     private var biography: Spanned? = null
 
-    private fun setUpTransitions() {
-        val transform = MaterialContainerTransform()
-        transform.setAllContainerColors(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
-        sharedElementEnterTransition = transform
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setUpTransitions()
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.fragment_container
+            duration = 300L
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.setBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
         toolbar.title = null
-        ViewCompat.setTransitionName(container, "artist")
+        ViewCompat.setTransitionName(artistCoverContainer, "artist")
         postponeEnterTransition()
-        detailsViewModel.getArtist().observe(viewLifecycleOwner, Observer {
+        detailsViewModel.getArtist().observe(viewLifecycleOwner,  {
             startPostponedEnterTransition()
             showArtist(it)
         })
@@ -150,14 +148,12 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
             MusicUtil.getArtistInfoString(requireContext(), artist),
             MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(artist.songs))
         )
-        val songText =
-            resources.getQuantityString(
+        val songText = resources.getQuantityString(
                 R.plurals.albumSongs,
                 artist.songCount,
                 artist.songCount
             )
-        val albumText =
-            resources.getQuantityString(
+        val albumText = resources.getQuantityString(
                 R.plurals.albums,
                 artist.songCount,
                 artist.songCount
@@ -228,6 +224,12 @@ class ArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_d
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = 300L
+        }
+        reenterTransition = MaterialElevationScale(false).apply {
+            duration = 300L
+        }
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),

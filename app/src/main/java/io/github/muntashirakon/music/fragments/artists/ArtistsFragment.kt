@@ -34,6 +34,7 @@ import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.RetroColorUtil
 import io.github.muntashirakon.music.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
+import com.google.android.material.transition.MaterialElevationScale
 
 class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
     IArtistClickListener, ICabHolder {
@@ -114,6 +115,12 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
     }
 
     override fun onArtist(artistId: Long, view: View) {
+        exitTransition = MaterialElevationScale(true).apply {
+            duration = 300L
+        }
+        reenterTransition = MaterialElevationScale(false).apply {
+            duration = 300L
+        }
         findNavController().navigate(
             R.id.artistDetailsFragment,
             bundleOf(EXTRA_ARTIST_ID to artistId),
@@ -160,13 +167,13 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         when (itemLayoutRes()) {
             R.layout.item_card -> subMenu.findItem(R.id.action_layout_card).isChecked = true
             R.layout.item_grid -> subMenu.findItem(R.id.action_layout_normal).isChecked = true
-            R.layout.item_card_color ->
-                subMenu.findItem(R.id.action_layout_colored_card).isChecked = true
-            R.layout.item_grid_circle ->
-                subMenu.findItem(R.id.action_layout_circular).isChecked = true
+            R.layout.item_card_color -> subMenu.findItem(R.id.action_layout_colored_card).isChecked =
+                true
+            R.layout.item_grid_circle -> subMenu.findItem(R.id.action_layout_circular).isChecked =
+                true
             R.layout.image -> subMenu.findItem(R.id.action_layout_image).isChecked = true
-            R.layout.item_image_gradient ->
-                subMenu.findItem(R.id.action_layout_gradient_image).isChecked = true
+            R.layout.item_image_gradient -> subMenu.findItem(R.id.action_layout_gradient_image).isChecked =
+                true
         }
     }
 
@@ -275,21 +282,11 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         }
         return false
     }
-    private var cab: MaterialCab? = null
 
-    fun handleBackPress(): Boolean {
-        cab?.let {
-            if (it.isActive) {
-                it.finish()
-                return true
-            }
-        }
-        return false
-    }
+    private var cab: MaterialCab? = null
 
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
         cab?.let {
-            println("Cab")
             if (it.isActive) {
                 it.finish()
             }

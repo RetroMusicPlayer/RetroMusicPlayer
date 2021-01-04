@@ -20,8 +20,8 @@
     <string name="action_go_to_genre">Aller au genre</string>
     <string name="action_go_to_start_directory">Aller au dossier de départ</string>
     <string name="action_grant">Accorder</string>
-    <string name="action_grid_size">Taille de la grille</string>
-    <string name="action_grid_size_land">Taille de la grille (paysage)</string>
+    <string name="action_grid_size">Taille de l\'affichage</string>
+    <string name="action_grid_size_land">Taille de l\'affichage (paysage)</string>
     <string name="action_new_playlist">Nouvelle liste de lecture…</string>
     <string name="action_next">Suivant</string>
     <string name="action_play">Lecture</string>
@@ -540,7 +540,7 @@
     <string name="sort_order_artist">Artiste</string>
     <string name="sort_order_composer">Compositeur</string>
     <string name="sort_order_date">Date</string>
-    <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_date_modified">Date de modification</string>
     <string name="sort_order_year">Année</string>
     <string name="sort_order_z_a">Descendant</string>
 

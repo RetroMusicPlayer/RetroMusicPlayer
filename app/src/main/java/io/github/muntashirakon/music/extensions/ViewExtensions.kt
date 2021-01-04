@@ -27,6 +27,8 @@ import androidx.core.animation.doOnStart
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.ShapeAppearanceModel
 
 @Suppress("UNCHECKED_CAST")
 fun <T : View> ViewGroup.inflate(@LayoutRes layout: Int): T {
@@ -112,4 +114,11 @@ fun View.focusAndShowKeyboard() {
                 }
             })
     }
-} 
+}
+
+fun ShapeableImageView.setCircleShape(boolean: Boolean) {
+    addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+        val radius = width / 2f
+        shapeAppearanceModel = ShapeAppearanceModel().withCornerSize(radius)
+    }
+}

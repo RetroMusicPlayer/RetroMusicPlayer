@@ -56,7 +56,6 @@ import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.CategoryInfo
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.views.BottomNavigationBarTinted
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -97,6 +96,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     onPanelCollapsed()
                     dimBackground.hide()
                 }
+
                 else -> {
                     println("Do something")
                 }
@@ -114,11 +114,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setupBottomSheet()
         updateColor()
 
-        val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
+        val themeColor = resolveColor(android.R.attr.windowBackground, Color.GRAY)
         dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
         dimBackground.setOnClickListener {
             println("dimBackground")
-
+            collapsePanel()
         }
     }
 
@@ -132,7 +132,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (nowPlayingScreen != PreferenceUtil.nowPlayingScreen) {
             postRecreate()
         }
-        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+        if (bottomSheetBehavior.state == STATE_EXPANDED) {
             setMiniPlayerAlphaProgress(1f)
         }
     }
@@ -154,6 +154,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     fun collapsePanel() {
         bottomSheetBehavior.state = STATE_COLLAPSED
+        setMiniPlayerAlphaProgress(0f)
     }
 
     fun expandPanel() {
@@ -324,14 +325,14 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         })
     }
 
-    fun setBottomBarVisibility(visible: Int) {
-        bottomNavigationView.visibility = visible
+    fun setBottomBarVisibility(visible: Boolean) {
+        bottomNavigationView.isVisible = visible
         hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
     }
 
     private fun hideBottomBar(hide: Boolean) {
         val heightOfBar = dip(R.dimen.mini_player_height)
-        val heightOfBarWithTabs = dip(R.dimen.mini_player_height_expanded)
+        val heightOfBarWithTabs = heightOfBar * 2
         val isVisible = bottomNavigationView.isVisible
         if (hide) {
             bottomSheetBehavior.isHideable = true
@@ -345,10 +346,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 ViewCompat.setElevation(slidingPanel, 10f)
                 ViewCompat.setElevation(bottomNavigationView, 10f)
                 if (isVisible) {
-                    bottomSheetBehavior.peekHeight = heightOfBarWithTabs
-                    bottomNavigationView.translateYAnimate(0f)
+                    println("List")
+                    bottomSheetBehavior.peekHeight = heightOfBarWithTabs - 22
                 } else {
-                    bottomNavigationView.translateYAnimate(150f)
+                    println("Details")
                     bottomSheetBehavior.peekHeight = heightOfBar
                 }
             }

@@ -15,12 +15,15 @@
 package io.github.muntashirakon.music.fragments.search
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,12 +31,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.SearchAdapter
-import io.github.muntashirakon.music.extensions.accentColor
-import io.github.muntashirakon.music.extensions.dipToPix
-import io.github.muntashirakon.music.extensions.focusAndShowKeyboard
-import io.github.muntashirakon.music.extensions.showToast
+import io.github.muntashirakon.music.extensions.*
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.transition.MaterialArcMotion
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -47,18 +49,30 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.fragment_container
+            duration = 300L
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+            setPathMotion(MaterialArcMotion())
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.setBottomBarVisibility(false)
         mainActivity.setSupportActionBar(toolbar)
         libraryViewModel.clearSearchResult()
         setupRecyclerView()
+
+        voiceSearch.setOnClickListener { startMicSearch() }
+        clearText.setOnClickListener { searchView.clearText() }
         searchView.apply {
             addTextChangedListener(this@SearchFragment)
             focusAndShowKeyboard()
         }
-        voiceSearch.setOnClickListener { startMicSearch() }
-        clearText.setOnClickListener { searchView.clearText() }
         keyboardPopup.apply {
             accentColor()
             setOnClickListener {
@@ -141,6 +155,19 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             showToast(getString(R.string.speech_not_supported))
+        }
+    }
+
+    override fun onDestroyView() {
+        hideKeyboard(view)
+        super.onDestroyView()
+    }
+
+    private fun hideKeyboard(view: View?) {
+        if (view != null) {
+            val imm: InputMethodManager =
+                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }

@@ -38,7 +38,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.progressindicator.ProgressIndicator
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import io.github.muntashirakon.music.App
@@ -95,13 +95,7 @@ fun SeekBar.addAccentColor() {
     thumbTintList = colorState
 }
 
-fun Button.accentTextColor() {
-    setTextColor(ThemeStore.accentColor(App.getContext()))
-}
-
-fun MaterialButton.accentTextColor() {
-    setTextColor(ThemeStore.accentColor(App.getContext()))
-}
+fun Button.accentTextColor() = setTextColor(ThemeStore.accentColor(App.getContext()))
 
 fun MaterialButton.accentBackgroundColor() {
     backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(App.getContext()))
@@ -154,9 +148,7 @@ fun MaterialButton.applyColor(color: Int) {
     iconTint = textColorColorStateList
 }
 
-fun MaterialButton.accentColor(){
-    this.applyColor(ThemeStore.accentColor(context))
-}
+fun MaterialButton.accentColor() = applyColor(ThemeStore.accentColor(context))
 
 fun MaterialButton.applyOutlineColor(color: Int) {
     val textColorColorStateList = ColorStateList.valueOf(color)
@@ -172,23 +164,18 @@ fun TextInputLayout.accentColor() {
     isHintAnimationEnabled = true
 }
 
-fun ProgressIndicator.accentColor() {
-    val accentColor = ThemeStore.accentColor(context)
-    indicatorColors = intArrayOf(accentColor)
-    trackColor = ColorUtil.withAlpha(accentColor, 0.2f)
-}
-
-fun ProgressIndicator.applyColor(color: Int) {
-    indicatorColors = intArrayOf(color)
+fun CircularProgressIndicator.accentColor() {
+    val color = ThemeStore.accentColor(context)
+    setIndicatorColor(color)
     trackColor = ColorUtil.withAlpha(color, 0.2f)
 }
 
-fun TextInputEditText.accentColor() {
+fun CircularProgressIndicator.applyColor(color: Int) {
+    setIndicatorColor(color)
+    trackColor = ColorUtil.withAlpha(color, 0.2f)
 }
 
-fun AppCompatImageView.accentColor(): Int {
-    return ThemeStore.accentColor(context)
-}
+fun AppCompatImageView.accentColor(): Int = ThemeStore.accentColor(context)
 
 @CheckResult
 fun Drawable.tint(@ColorInt color: Int): Drawable {
@@ -198,9 +185,8 @@ fun Drawable.tint(@ColorInt color: Int): Drawable {
 }
 
 @CheckResult
-fun Drawable.tint(context: Context, @ColorRes color: Int): Drawable {
-    return tint(context.getColorCompat(color))
-}
+fun Drawable.tint(context: Context, @ColorRes color: Int): Drawable =
+    tint(context.getColorCompat(color))
 
 @ColorInt
 fun Context.getColorCompat(@ColorRes colorRes: Int): Int {

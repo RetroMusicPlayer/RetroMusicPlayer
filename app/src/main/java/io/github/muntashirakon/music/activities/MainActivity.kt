@@ -50,6 +50,7 @@ import io.github.muntashirakon.music.TOGGLE_SEPARATE_LINE
 import io.github.muntashirakon.music.TOGGLE_VOLUME
 import io.github.muntashirakon.music.USER_NAME
 import io.github.muntashirakon.music.activities.base.AbsSlidingMusicPanelActivity
+import io.github.muntashirakon.music.extensions.extra
 import io.github.muntashirakon.music.extensions.findNavController
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.SearchQueryHelper.getSongs
@@ -57,6 +58,7 @@ import io.github.muntashirakon.music.model.CategoryInfo
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.repository.PlaylistSongsLoader
 import io.github.muntashirakon.music.service.MusicService
+import io.github.muntashirakon.music.util.AppRater
 import io.github.muntashirakon.music.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -66,7 +68,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     companion object {
         const val TAG = "MainActivity"
         const val EXPAND_PANEL = "expand_panel"
-        const val APP_UPDATE_REQUEST_CODE = 9002
     }
 
     override fun createContentView(): View {
@@ -83,17 +84,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         hideStatusBar()
         updateTabs()
 
-        // NavigationUI.setupWithNavController(getBottomNavigationView(), findNavController(R.id.fragment_container))
         setupNavigationController()
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
         }
-
-        showPromotionalDialog()
-    }
-
-    private fun showPromotionalDialog() {
-
     }
 
     private fun setupNavigationController() {
@@ -115,27 +109,27 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     override fun onResume() {
         super.onResume()
         PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
-        if (intent.hasExtra(EXPAND_PANEL) &&
-            intent.getBooleanExtra(EXPAND_PANEL, false) &&
-            PreferenceUtil.isExpandPanel
-        ) {
+        val expand = extra<Boolean>(EXPAND_PANEL).value ?: false
+        if (expand && PreferenceUtil.isExpandPanel) {
             expandPanel()
             intent.removeExtra(EXPAND_PANEL)
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        PreferenceUtil.unregisterOnSharedPreferenceChangedListener(this)
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == GENERAL_THEME || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES
-        ) {
+        if (key == GENERAL_THEME || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES) {
             postRecreate()
         }
     }
 
     override fun onServiceConnected() {
         super.onServiceConnected()
-        if (intent == null) {
-            return
-        }
+        intent ?: return
         handlePlaybackIntent(intent)
     }
 

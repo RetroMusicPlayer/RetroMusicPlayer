@@ -100,7 +100,6 @@ class RealRoomRepository(
         playlistDao.insertSongsToPlaylist(songs)
     }
 
-
     override fun getSongs(playListId: Long): LiveData<List<SongEntity>> =
         playlistDao.songsFromPlaylist(playListId)
 
@@ -160,10 +159,9 @@ class RealRoomRepository(
         )
 
     override suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity> =
-        if (playlistDao.isPlaylistExists(favorite).isNotEmpty())
-            playlistDao.favoritesSongs(
-                playlistDao.isPlaylistExists(favorite).first().playListId
-            ) else emptyList()
+        if (playlistDao.isPlaylistExists(favorite).isNotEmpty()) playlistDao.favoritesSongs(
+            playlistDao.isPlaylistExists(favorite).first().playListId
+        ) else emptyList()
 
     override suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity) =
         playCountDao.insertSongInPlayCount(playCountEntity)
@@ -192,10 +190,8 @@ class RealRoomRepository(
     override suspend fun blackListPaths(): List<BlackListStoreEntity> =
         blackListStoreDao.blackListPaths()
 
-    override suspend fun deleteSongs(songs: List<Song>) {
-        songs.forEach {
-            playCountDao.deleteSong(it.id)
-        }
+    override suspend fun deleteSongs(songs: List<Song>) = songs.forEach {
+        playCountDao.deleteSong(it.id)
     }
 
     override suspend fun deleteBlacklistPath(blackListStoreEntity: BlackListStoreEntity) =

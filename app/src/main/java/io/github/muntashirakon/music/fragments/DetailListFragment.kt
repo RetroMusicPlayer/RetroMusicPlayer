@@ -26,15 +26,16 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.adapter.album.AlbumAdapter
 import io.github.muntashirakon.music.adapter.artist.ArtistAdapter
+import io.github.muntashirakon.music.adapter.song.ShuffleButtonSongAdapter
 import io.github.muntashirakon.music.adapter.song.SongAdapter
 import io.github.muntashirakon.music.db.toSong
 import io.github.muntashirakon.music.extensions.dipToPix
+import io.github.muntashirakon.music.extensions.hide
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.interfaces.IAlbumClickListener
 import io.github.muntashirakon.music.interfaces.IArtistClickListener
 import io.github.muntashirakon.music.model.Album
 import io.github.muntashirakon.music.model.Artist
-import io.github.muntashirakon.music.state.NowPlayingPanelState
 import io.github.muntashirakon.music.util.RetroUtil
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 
@@ -44,22 +45,14 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.setBottomBarVisibility(false)
         mainActivity.setSupportActionBar(toolbar)
         progressIndicator.hide()
         when (args.type) {
-            TOP_ARTISTS -> {
-                loadArtists(R.string.top_artists, TOP_ARTISTS)
-            }
-            RECENT_ARTISTS -> {
-                loadArtists(R.string.recent_artists, RECENT_ARTISTS)
-            }
-            TOP_ALBUMS -> {
-                loadAlbums(R.string.top_albums, TOP_ALBUMS)
-            }
-            RECENT_ALBUMS -> {
-                loadAlbums(R.string.recent_albums, RECENT_ALBUMS)
-            }
+            TOP_ARTISTS -> loadArtists(R.string.top_artists, TOP_ARTISTS)
+            RECENT_ARTISTS -> loadArtists(R.string.recent_artists, RECENT_ARTISTS)
+            TOP_ALBUMS -> loadAlbums(R.string.top_albums, TOP_ALBUMS)
+            RECENT_ALBUMS -> loadAlbums(R.string.recent_albums, RECENT_ALBUMS)
             FAVOURITES -> loadFavorite()
             HISTORY_PLAYLIST -> loadHistory()
             LAST_ADDED_PLAYLIST -> lastAddedSongs()
@@ -77,7 +70,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     private fun lastAddedSongs() {
         toolbar.setTitle(R.string.last_added)
-        val songAdapter = SongAdapter(
+        val songAdapter = ShuffleButtonSongAdapter(
             requireActivity(),
             mutableListOf(),
             R.layout.item_list, null
@@ -93,7 +86,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     private fun topPlayed() {
         toolbar.setTitle(R.string.my_top_tracks)
-        val songAdapter = SongAdapter(
+        val songAdapter = ShuffleButtonSongAdapter(
             requireActivity(),
             mutableListOf(),
             R.layout.item_list, null
@@ -110,7 +103,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     private fun loadHistory() {
         toolbar.setTitle(R.string.history)
 
-        val songAdapter = SongAdapter(
+        val songAdapter = ShuffleButtonSongAdapter(
             requireActivity(),
             mutableListOf(),
             R.layout.item_list, null

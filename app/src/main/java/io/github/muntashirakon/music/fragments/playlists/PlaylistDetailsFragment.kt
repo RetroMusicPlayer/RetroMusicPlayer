@@ -1,5 +1,6 @@
 package io.github.muntashirakon.music.fragments.playlists
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -12,14 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ATHUtil
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.adapter.song.PlaylistSongAdapter
+import io.github.muntashirakon.music.adapter.song.ShuffleButtonSongAdapter
 import io.github.muntashirakon.music.db.PlaylistWithSongs
 import io.github.muntashirakon.music.db.toSongs
 import io.github.muntashirakon.music.extensions.dipToPix
+import io.github.muntashirakon.music.extensions.resolveColor
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.helper.menu.PlaylistMenuHelper
 import io.github.muntashirakon.music.model.Song
-import io.github.muntashirakon.music.state.NowPlayingPanelState
+import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,23 +34,23 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     }
 
     private lateinit var playlist: PlaylistWithSongs
-    private lateinit var playlistSongAdapter: PlaylistSongAdapter
-
-    private fun setUpTransitions() {
-        val transform = MaterialContainerTransform()
-        transform.setAllContainerColors(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
-        sharedElementEnterTransition = transform
-    }
+    private lateinit var playlistSongAdapter: ShuffleButtonSongAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setUpTransitions()
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.fragment_container
+            duration = 300L
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+            setPathMotion(MaterialArcMotion())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.setBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(viewModel)
         mainActivity.setSupportActionBar(toolbar)
         ViewCompat.setTransitionName(container, "playlist")
@@ -61,8 +63,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     }
 
     private fun setUpRecyclerView() {
-        playlistSongAdapter = PlaylistSongAdapter(
-            playlist.playlistEntity,
+        playlistSongAdapter = ShuffleButtonSongAdapter(
             requireActivity(),
             ArrayList(),
             R.layout.item_list,

@@ -94,7 +94,7 @@ object MusicUtil : KoinComponent {
     fun deleteAlbumArt(context: Context, albumId: Long) {
         val contentResolver = context.contentResolver
         val localUri = Uri.parse("content://media/external/audio/albumart")
-        contentResolver.delete(ContentUris.withAppendedId(localUri, albumId.toLong()), null, null)
+        contentResolver.delete(ContentUris.withAppendedId(localUri, albumId), null, null)
         contentResolver.notifyChange(localUri, null)
     }
 
@@ -165,7 +165,7 @@ object MusicUtil : KoinComponent {
                         try {
                             val newLyrics =
                                 FileUtil.read(f)
-                            if (newLyrics != null && !newLyrics.trim { it <= ' ' }.isEmpty()) {
+                            if (newLyrics != null && newLyrics.trim { it <= ' ' }.isNotEmpty()) {
                                 if (AbsSynchronizedLyrics.isSynchronized(newLyrics)) {
                                     return newLyrics
                                 }
@@ -283,9 +283,8 @@ object MusicUtil : KoinComponent {
         path: String?
     ) {
         val contentResolver = context.contentResolver
-        val artworkUri =
-            Uri.parse("content://media/external/audio/albumart")
-        contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId.toLong()), null, null)
+        val artworkUri = Uri.parse("content://media/external/audio/albumart")
+        contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId), null, null)
         val values = ContentValues()
         values.put("album_id", albumId)
         values.put("_data", path)
@@ -444,9 +443,7 @@ object MusicUtil : KoinComponent {
     }
 
     fun deleteTracks(context: Context, songs: List<Song>) {
-        val projection = arrayOf(
-            BaseColumns._ID, MediaStore.MediaColumns.DATA
-        )
+        val projection = arrayOf(BaseColumns._ID, MediaStore.MediaColumns.DATA)
         val selection = StringBuilder()
         selection.append(BaseColumns._ID + " IN (")
         for (i in songs.indices) {

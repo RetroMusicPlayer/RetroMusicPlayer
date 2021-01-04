@@ -17,7 +17,6 @@ package io.github.muntashirakon.music.fragments.albums
 import android.os.Bundle
 import android.view.*
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,7 +26,6 @@ import io.github.muntashirakon.music.adapter.album.AlbumAdapter
 import io.github.muntashirakon.music.extensions.surfaceColor
 import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewCustomGridSizeFragment
-import io.github.muntashirakon.music.helper.SortOrder
 import io.github.muntashirakon.music.helper.SortOrder.AlbumSortOrder
 import io.github.muntashirakon.music.interfaces.IAlbumClickListener
 import io.github.muntashirakon.music.interfaces.ICabHolder
@@ -35,13 +33,14 @@ import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.RetroColorUtil
 import io.github.muntashirakon.music.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
+import com.google.android.material.transition.MaterialElevationScale
 
 class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     IAlbumClickListener, ICabHolder {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getAlbums().observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getAlbums().observe(viewLifecycleOwner, {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
@@ -115,6 +114,12 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = 300L
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = 300L
+        }
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
@@ -148,28 +153,28 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             0,
             R.string.sort_order_a_z
         ).isChecked =
-            currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_A_Z)
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_A_Z)
         sortOrderMenu.add(
             0,
             R.id.action_album_sort_order_desc,
             1,
             R.string.sort_order_z_a
         ).isChecked =
-            currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_Z_A)
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_Z_A)
         sortOrderMenu.add(
             0,
             R.id.action_album_sort_order_artist,
             2,
             R.string.sort_order_artist
         ).isChecked =
-            currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_ARTIST)
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_ARTIST)
         sortOrderMenu.add(
             0,
             R.id.action_album_sort_order_year,
             3,
             R.string.sort_order_year
         ).isChecked =
-            currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_YEAR)
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_YEAR)
 
         sortOrderMenu.setGroupCheckable(0, true, true)
     }
@@ -299,16 +304,6 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     }
 
     private var cab: MaterialCab? = null
-
-    fun handleBackPress(): Boolean {
-        cab?.let {
-            if (it.isActive) {
-                it.finish()
-                return true
-            }
-        }
-        return false
-    }
 
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
         cab?.let {

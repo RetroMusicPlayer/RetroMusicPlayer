@@ -23,6 +23,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
@@ -155,11 +156,11 @@ class SongDetailDialog : DialogFragment() {
         val TAG: String = SongDetailDialog::class.java.simpleName
 
         fun create(song: Song): SongDetailDialog {
-            val dialog = SongDetailDialog()
-            val args = Bundle()
-            args.putParcelable(EXTRA_SONG, song)
-            dialog.arguments = args
-            return dialog
+            return SongDetailDialog().apply {
+                arguments = bundleOf(
+                    EXTRA_SONG to song
+                )
+            }
         }
 
         private fun makeTextWithTitle(context: Context, titleResId: Int, text: String?): Spanned {

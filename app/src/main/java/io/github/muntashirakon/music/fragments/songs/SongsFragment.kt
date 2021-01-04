@@ -20,6 +20,7 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.adapter.song.ShuffleButtonSongAdapter
 import io.github.muntashirakon.music.adapter.song.SongAdapter
 import io.github.muntashirakon.music.extensions.surfaceColor
 import io.github.muntashirakon.music.fragments.ReloadType
@@ -35,7 +36,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
     ICabHolder {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getSongs().observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getSongs().observe(viewLifecycleOwner, {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
@@ -52,7 +53,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
 
     override fun createAdapter(): SongAdapter {
         val dataSet = if (adapter == null) mutableListOf() else adapter!!.dataSet
-        return SongAdapter(
+        return ShuffleButtonSongAdapter(
             requireActivity(),
             dataSet,
             itemLayoutRes(),
@@ -198,8 +199,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         gridSizeMenu: SubMenu
     ) {
         when (getGridSize()) {
-            1 -> gridSizeMenu.findItem(R.id.action_grid_size_1).isChecked =
-                true
+            1 -> gridSizeMenu.findItem(R.id.action_grid_size_1).isChecked = true
             2 -> gridSizeMenu.findItem(R.id.action_grid_size_2).isChecked = true
             3 -> gridSizeMenu.findItem(R.id.action_grid_size_3).isChecked = true
             4 -> gridSizeMenu.findItem(R.id.action_grid_size_4).isChecked = true

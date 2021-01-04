@@ -9,7 +9,7 @@
     android:padding="4dp"
     tools:ignore="MissingPrefix">
 
-    <io.github.muntashirakon.music.views.CircularImageView
+    <io.github.muntashirakon.music.views.RetroShapeableImageView
         android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="0dp"

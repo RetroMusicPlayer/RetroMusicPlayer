@@ -12,59 +12,48 @@
   ~ See the GNU General Public License for more details.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical|end"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playAction"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="4dp"
-        android:layout_weight="1"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:text="@string/action_play_all"
-        android:visibility="gone"
+        android:textColor="?android:attr/textColorPrimary"
         app:backgroundTint="?attr/colorSurface"
-        app:icon="@drawable/ic_play_arrow" />
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/shuffleAction"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shuffleAction"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_weight="1"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:text="@string/shuffle"
-        android:visibility="gone"
+        android:textColor="?android:attr/textColorPrimary"
         app:backgroundTint="?attr/colorSurface"
-        app:icon="@drawable/ic_shuffle" />
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/playAction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/playAction"
+        app:layout_constraintTop_toTopOf="@+id/playAction" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:padding="16dp"
-        app:srcCompat="@drawable/ic_sort"
-        app:tint="?attr/colorControlNormal" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:padding="16dp"
-        app:srcCompat="@drawable/ic_grid_size"
-        app:tint="?attr/colorControlNormal" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:padding="16dp"
-        app:srcCompat="@drawable/ic_layout"
-        app:tint="?attr/colorControlNormal" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

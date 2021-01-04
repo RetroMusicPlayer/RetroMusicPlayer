@@ -15,5 +15,6 @@
 <resources>
     <declare-styleable name="RetroShapeableImageView">
         <attr name="retroCornerSize" format="dimension" />
+        <attr name="circleShape" format="boolean" />
     </declare-styleable>
 </resources>

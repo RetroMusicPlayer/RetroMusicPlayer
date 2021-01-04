@@ -14,6 +14,7 @@
  */
 package io.github.muntashirakon.music.fragments.genres
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -24,14 +25,15 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.util.ATHUtil
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.song.SongAdapter
 import io.github.muntashirakon.music.extensions.dipToPix
+import io.github.muntashirakon.music.extensions.resolveColor
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.helper.menu.GenreMenuHelper
 import io.github.muntashirakon.music.model.Genre
 import io.github.muntashirakon.music.model.Song
+import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.android.synthetic.main.fragment_playlist_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,21 +47,22 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
     }
     private lateinit var genre: Genre
     private lateinit var songAdapter: SongAdapter
-    private fun setUpTransitions() {
-        val transform = MaterialContainerTransform()
-        transform.setAllContainerColors(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
-        sharedElementEnterTransition = transform
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setUpTransitions()
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.fragment_container
+            duration = 300L
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+            setPathMotion(MaterialArcMotion())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(View.GONE)
+        mainActivity.setBottomBarVisibility(false)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(toolbar)
         ViewCompat.setTransitionName(container, "genre")

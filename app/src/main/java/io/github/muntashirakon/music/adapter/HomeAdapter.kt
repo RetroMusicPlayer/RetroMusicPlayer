@@ -239,15 +239,17 @@ class HomeAdapter(
         val clickableArea: ViewGroup = itemView.findViewById(R.id.clickable_area)
     }
 
-    fun artistsAdapter(artists: List<Artist>) =
+    private fun artistsAdapter(artists: List<Artist>) =
         ArtistAdapter(activity, artists, PreferenceUtil.homeArtistGridStyle, null, this)
 
-    fun albumAdapter(albums: List<Album>) =
+    private fun albumAdapter(albums: List<Album>) =
         AlbumAdapter(activity, albums, PreferenceUtil.homeAlbumGridStyle, null, this)
 
-    fun gridLayoutManager() = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+    private fun gridLayoutManager() =
+        GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
 
-    fun linearLayoutManager() = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+    private fun linearLayoutManager() =
+        LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
     override fun onArtist(artistId: Long, view: View) {
         activity.findNavController(R.id.fragment_container).navigate(

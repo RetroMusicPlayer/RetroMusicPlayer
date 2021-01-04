@@ -16,9 +16,11 @@ package io.github.muntashirakon.music.fragments.player.full
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.MenuItem
@@ -27,12 +29,18 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.PopupMenu
 import android.widget.SeekBar
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.db.PlaylistEntity
+import io.github.muntashirakon.music.db.SongEntity
+import io.github.muntashirakon.music.db.toSongEntity
 import io.github.muntashirakon.music.extensions.applyColor
 import io.github.muntashirakon.music.extensions.hide
 import io.github.muntashirakon.music.extensions.show
+import io.github.muntashirakon.music.fragments.LibraryViewModel
+import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.base.AbsPlayerControlsFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.MusicProgressViewUpdateHelper
@@ -42,8 +50,13 @@ import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
+import io.github.muntashirakon.music.util.RetroUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_full_player_controls.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
  * Created by hemanths on 20/09/17.
@@ -56,6 +69,7 @@ class FullPlaybackControlsFragment :
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
+    private val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -158,7 +172,6 @@ class FullPlaybackControlsFragment :
     }
 
     private fun setUpPlayPauseFab() {
-
         playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
         playPauseButton.post {
             if (playPauseButton != null) {
@@ -283,44 +296,41 @@ class FullPlaybackControlsFragment :
         }
     }
 
-    private fun toggleFavorite(song: Song) {
-        MusicUtil.toggleFavorite(requireContext(), song)
-        if (song.id == MusicPlayerRemote.currentSong.id) {
-            updateIsFavorite()
-        }
-    }
-
-    private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
-
-    @SuppressLint("StaticFieldLeak")
     fun updateIsFavorite() {
-        if (updateIsFavoriteTask != null) {
-            updateIsFavoriteTask?.cancel(false)
-        }
-        updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
-            override fun doInBackground(vararg params: Song): Boolean? {
-                val activity = activity
-                return if (activity != null) {
-                    MusicUtil.isFavorite(requireActivity(), params[0])
-                } else {
-                    cancel(false)
-                    null
-                }
-            }
-
-            override fun onPostExecute(isFavorite: Boolean?) {
-                val activity = activity
-                if (activity != null) {
-                    val res = if (isFavorite!!)
-                        R.drawable.ic_favorite
-                    else
-                        R.drawable.ic_favorite_border
-
-                    val drawable = TintHelper.createTintedDrawable(activity, res, Color.WHITE)
+        lifecycleScope.launch(Dispatchers.IO) {
+            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
+            if (playlist != null) {
+                val song: SongEntity =
+                    MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
+                val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
+                withContext(Dispatchers.Main) {
+                    val icon =
+                        if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                    val drawable = TintHelper.createTintedDrawable(activity, icon, Color.WHITE)
                     songFavourite?.setImageDrawable(drawable)
                 }
             }
-        }.execute(MusicPlayerRemote.currentSong)
+        }
+    }
+
+    private fun toggleFavorite(song: Song) {
+        if (song.id == MusicPlayerRemote.currentSong.id) {
+            updateIsFavorite()
+        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
+            if (playlist != null) {
+                val songEntity = song.toSongEntity(playlist.playListId)
+                val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
+                if (isFavorite) {
+                    libraryViewModel.removeSongFromPlaylist(songEntity)
+                } else {
+                    libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
+                }
+            }
+            libraryViewModel.forceReload(ReloadType.Playlists)
+            requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
+        }
     }
 
     fun onFavoriteToggled() {

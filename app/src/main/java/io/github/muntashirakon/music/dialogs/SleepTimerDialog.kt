@@ -164,7 +164,6 @@ class SleepTimerDialog : DialogFragment() {
         ) {
 
         override fun onTick(millisUntilFinished: Long) {
-            println("onTick: $millisUntilFinished")
             seekBar.progress = millisUntilFinished.toInt()
         }
 

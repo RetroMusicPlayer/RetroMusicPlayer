@@ -27,6 +27,7 @@ import io.github.muntashirakon.music.adapter.GenreAdapter
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewFragment
 import io.github.muntashirakon.music.interfaces.IGenreClickListener
 import io.github.muntashirakon.music.model.Genre
+import com.google.android.material.transition.MaterialElevationScale
 
 class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     IGenreClickListener {
@@ -63,6 +64,12 @@ class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager
     }
 
     override fun onClickGenre(genre: Genre, view: View) {
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = 300L
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = 300L
+        }
         findNavController().navigate(
             R.id.genreDetailsFragment,
             bundleOf(EXTRA_GENRE to genre),

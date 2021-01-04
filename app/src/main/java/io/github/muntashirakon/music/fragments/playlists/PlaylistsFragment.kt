@@ -35,6 +35,7 @@ import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewCustomGridSiz
 import io.github.muntashirakon.music.helper.SortOrder.PlaylistSortOrder
 import io.github.muntashirakon.music.interfaces.IPlaylistClickListener
 import io.github.muntashirakon.music.util.PreferenceUtil
+import com.google.android.material.transition.MaterialElevationScale
 import kotlinx.android.synthetic.main.fragment_library.*
 
 class PlaylistsFragment :
@@ -183,6 +184,12 @@ class PlaylistsFragment :
     }
 
     override fun onPlaylistClick(playlistWithSongs: PlaylistWithSongs, view: View) {
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = 300L
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = 300L
+        }
         findNavController().navigate(
             R.id.playlistDetailsFragment,
             bundleOf(EXTRA_PLAYLIST to playlistWithSongs),

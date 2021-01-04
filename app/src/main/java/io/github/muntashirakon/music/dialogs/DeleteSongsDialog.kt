@@ -16,6 +16,7 @@ package io.github.muntashirakon.music.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
@@ -40,11 +41,11 @@ class DeleteSongsDialog : DialogFragment() {
         }
 
         fun create(songs: List<Song>): DeleteSongsDialog {
-            val dialog = DeleteSongsDialog()
-            val args = Bundle()
-            args.putParcelableArrayList(EXTRA_SONG, ArrayList(songs))
-            dialog.arguments = args
-            return dialog
+            return DeleteSongsDialog().apply {
+                arguments = bundleOf(
+                    EXTRA_SONG to ArrayList(songs)
+                )
+            }
         }
     }
 

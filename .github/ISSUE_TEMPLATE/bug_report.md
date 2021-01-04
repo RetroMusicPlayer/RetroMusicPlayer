@@ -16,6 +16,9 @@ assignees: ''
 **Have you read the [FAQ](https://www.github.com/h4h13/RetroMusicPlayer/tree/dev/FAQ.md)?**
 [Yes/No]
 
+**Has the bug already been reported? Please search in GitHub issue tab before creating an issue.**
+[Yes/No]
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 

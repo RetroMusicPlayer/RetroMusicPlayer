@@ -49,14 +49,3 @@ fun Drawable.getBitmapDrawable(): Bitmap {
     draw(canvas)
     return bmp
 }
-
-fun getAdaptiveIconDrawable(context: Context): Drawable {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        AdaptiveIconDrawable(
-            ContextCompat.getDrawable(context, R.drawable.ic_launcher_background),
-            ContextCompat.getDrawable(context, R.drawable.ic_launcher_background)
-        )
-    } else {
-        ContextCompat.getDrawable(context, R.drawable.color_circle_gradient)!!
-    }
-}

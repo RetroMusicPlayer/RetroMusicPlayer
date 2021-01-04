@@ -122,10 +122,6 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         volumeSeekBar.applyColor(color)
     }
 
-    fun removeThumb() {
-        volumeSeekBar.thumb = null
-    }
-
     private fun setPauseWhenZeroVolume(pauseWhenZeroVolume: Boolean) {
         if (PreferenceUtil.isPauseOnZeroVolume)
             if (MusicPlayerRemote.isPlaying && pauseWhenZeroVolume)
