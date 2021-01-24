@@ -70,7 +70,7 @@
     <string name="history">ประวัติ</string>
     <string name="hinge">บานพับ</string>
     <string name="app_share">นี่ มาลองใช้แอปฟังเพลงนี้ดูสิ หวังว่าจะชอบนะ: https://play.google.com/store/apps/details?id=%s</string>
-    <string name="translate_community">มาช่วยแปลภาษาในแอปเรากันเถอะ</string>
+    <string name="translate_community">มาช่วยแปลภาษาในแอปเรากันเถอะ(ไหว้หละ)</string>
     <string name="home">หน้าหลัก</string>
     <string name="horizontal_flip">พลิกแนวนอน</string>
     <string name="md_error_label">ผิดพลาด</string>
@@ -82,7 +82,7 @@
     <string name="send_crash_log">ส่งข้อมูลผิดพลาด</string>
     <string name="title_dashboard">แดชบอร์ด</string>
     <string name="title_good_afternoon">สวัสดีตอนบ่าย</string>
-    <string name="title_good_day">เป็นวันที่เนอะ</string>
+    <string name="title_good_day">เป็นวันที่ดีนะ</string>
     <string name="title_good_night">อรุณสวัส</string>
     <string name="title_good_morning">ต้อนรับเช้าวันใหม่</string>
     <string name="title_good_evening">สวัสดีตอนเที่ยง อย่าลืมกินข้าวนะ</string>
@@ -194,7 +194,7 @@
     <string name="image_gradient">ภาพไล่ระดับสี</string>
     <string name="action_grant">ให้สิทธิ์</string>
     <string name="action_grid_size">ขนาดตาราง</string>
-    <string name="action_grid_size_land">ขนาดตาราง (ที่ดิน)</string>
+    <string name="action_grid_size_land">ขนาดตาราง (ต่อขนาดจอ)</string>
     <string name="grid_style_label">รูปแบบตาราง</string>
     <string name="pref_summary_toggle_volume">หากมีพื้นที่เพียงพอให้แสดงตัวควบคุมระดับเสียงในหน้าจอที่กำลังเล่นอยู่</string>
     <string name="donate_summary">ถ้าคิดว่าแอปนี้ดีหละก็ สนับสนุนเราได้นะ</string>
@@ -251,7 +251,7 @@
     <string name="others">อื่นๆ</string>
     <string name="password">รหัสผ่าน</string>
     <string name="past_three_months">" 3 เดือนที่ผ่านมา"</string>
-    <string name="peak">จุดสูงสุด</string>
+    <string name="peak">จุดพีค</string>
     <string name="permission_external_storage_denied">ไม่มีสิทธิเข้าถึงข้อมูล</string>
     <string name="permissions_denied">" สิทธิ์ถูกปฏิเสธ"</string>
     <string name="personalize">" ปรับแต่ง"</string>
@@ -283,7 +283,7 @@
     <string name="translate">แปลภาษา</string>
     <string name="today">วันนี้</string>
     <string name="twitter_page">ทวิตเตอร์</string>
-    <string name="twitter_page_summary">แชร์ะีมของคุณด้วย Retro Music</string>
+    <string name="twitter_page_summary">แชร์ะีมของคุณด้วยแอปเรโทรมิวสิค</string>
     <string name="unlabeled">ไม่มีป้ายกำกับ</string>
     <string name="up_next">ต่อไป</string>
     <string name="update_image">อัปเดตรูปภาพ</string>
@@ -392,7 +392,7 @@
     <string name="pref_title_genre_toggle">แสดงแท็บประเภท</string>
     <string name="pref_title_home_artist_grid_style">ปกศิลปิน</string>
     <string name="pref_title_round_corners">ขอบมุม</string>
-    <string name="pref_title_tab_text_mode">"  โหมดชื่อแท็บ"</string>
+    <string name="pref_title_tab_text_mode">โหมดชื่อแท็บ</string>
     <string name="pref_title_toggle_dominant_color">สีที่โดดเด่น</string>
     <string name="pref_title_toggle_tab_titles">ชื่อแท็บ</string>
     <string name="pref_title_toggle_volume">ควบคุมระดับเสียง</string>
@@ -428,7 +428,7 @@
     <string name="pref_summary_ignore_media_store_artwork">"เปิดใช้งานเฉพาะเมื่อคุณมีปัญหารูปภาพปกไม่ค่อยชัด สามารถเพิ่มคุณภาพปกอัลบั้มได้ แต่ทำให้เวลาโหลดภาพช้าลง "</string>
     <string name="pref_summary_lock_screen">ใช้การควบคุมหน้าจอล็อกที่กำหนดเองของ Retro Music</string>
     <string name="pref_summary_round_corners">ปัดขอบของแอป</string>
-    <string name="pref_summary_toggle_full_screen">โหมดใหญ่พิเศษ</string>
+    <string name="pref_summary_toggle_full_screen">โหมดเต็มจอ</string>
     <string name="pref_summary_toggle_shuffle">โหมดสุ่มจะปิดเมื่อเล่นรายการเพลงใหม่</string>
     <string name="pref_title_choose_equalizer">เลือกอีควอไลเซอร์</string>
     <string name="pref_summary_toggle_headset">เริ่มเล่นทันทีหลังจากเชื่อมต่อหูฟัง</string>
@@ -444,8 +444,8 @@
     <string name="restored_previous_purchase_please_restart">ถ้าซื้อแล้ว กรุณารีสตาร์ทเพื่อใช้ฟีเจอร์ทั้งหมดในแอปได้อย่างสมบูรณ์แบบ</string>
     <string name="restored_previous_purchases">กู้คืนการซื้อก่อนหน้านี้</string>
     <string name="restoring_purchase">กำลังกู้คืนการซื้อ ...</string>
-    <string name="retro_equalizer">อีควอไลเซอร์ Retro Music</string>
-    <string name="retro_music_pro">Retro Music โปร</string>
+    <string name="retro_equalizer">"อีควอไลเซอร์ เรโทรมิวสิค "</string>
+    <string name="retro_music_pro">เรโทรมิวสิค โปร</string>
     <string name="saf_error_uri">ไม่สามรถรับ SAF URI ได้</string>
     <string name="saf_guide_slide1_description">เปิดลิ้นชักการนำทาง</string>
     <string name="saf_guide_slide1_description_before_o">เปิดใช้งาน \"แสดงการ์ด SD\" ในเมนูรายการเพิ่มเติม</string>
@@ -523,5 +523,12 @@
     <string name="created_playlist_x">สร้างเพลย์ลิสต์ %1$s</string>
     <string name="could_not_create_playlist">ไม่สามารถสร้างเพลย์ลิสต์ได้</string>
     <string name="could_not_download_album_cover">ไม่สามารถดาวน์โหลดปกอัลบั้มที่ตรงกันได้</string>
+    <string name="pinterest_page">Pinterest</string>
+    <string name="pref_summary_tab_titles">สลับชื่อเรื่องสำหรับแท็บแถบนำทางด้านล่าง</string>
+    <string name="retro_music_player">"เรโทรมิวสิค "</string>
+    <string name="scrobbles_label">Scrobbles</string>
+    <string name="unplayable_file">ไม่สามารถเล่นเพลงนี้ได้</string>
+    <string name="web_search">ค้นหาเว็บ</string>
+    <string name="delete_x_songs"><![CDATA[ลบ <b>%1$d</b> เพลง?]]></string>
 
 </resources>
