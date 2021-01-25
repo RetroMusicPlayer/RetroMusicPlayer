@@ -22,10 +22,10 @@
     <string name="action_grant">承諾</string>
     <string name="action_grid_size">グリッドサイズ</string>
     <string name="action_grid_size_land">グリッドサイズ（土地）</string>
-    <string name="action_new_playlist">New playlist</string>
+    <string name="action_new_playlist">新しいプレイリスト</string>
     <string name="action_next">次</string>
     <string name="action_play">再生</string>
-    <string name="action_play_all">Play all</string>
+    <string name="action_play_all">全て再生</string>
     <string name="action_play_next">次に再生する</string>
     <string name="action_play_pause">再生/一時停止</string>
     <string name="action_previous">前</string>
@@ -60,14 +60,14 @@
     <string name="album">アルバム</string>
 
     <plurals name="albumSongs">
-        <item quantity="other">Songs</item>
+        <item quantity="other">曲</item>
     </plurals>
 
     <string name="album_artist">アルバム アーティスト</string>
 
     <string name="albums">アルバム</string>
     <plurals name="albums">
-        <item quantity="other">Albums</item>
+        <item quantity="other">アルバム</item>
     </plurals>
 
     <string name="always">常に</string>
@@ -92,12 +92,12 @@
 
     <string name="biography">バイオグラフィー</string>
 
-    <string name="black_theme_name">黒</string>
+    <string name="black_theme_name">ダークテーマ時に漆黒にする</string>
 
     <string name="blacklist">ブラックリスト</string>
 
     <string name="blur">ぼかし</string>
-    <string name="blur_card">ブラーとカード</string>
+    <string name="blur_card">ブラーカード</string>
 
     <string name="bug_report_failed">レポートを送信できませんでした</string>
     <string name="bug_report_failed_invalid_token">無効なトークン:アプリの開発者に連絡してください</string>
@@ -114,7 +114,7 @@
 このバグが何度も発生する場合は、端末のアプリ設定より「データを削除する(Androidバージョンによって異なります)」を実行するか、概要をメールで送信してください。</string>
     <string name="bug_report_use_account">GitHubアカウントを使って送信</string>
 
-    <string name="buy_now">Buy now</string>
+    <string name="buy_now">今すぐ購入</string>
 
     <string name="cancel_current_timer">キャンセル</string>
 
@@ -129,7 +129,7 @@
     <string name="changelog">パッチノート</string>
     <string name="changelog_summary">電報チャネルで変更ログが維持されています</string>
 
-    <string name="circle">Circle</string>
+    <string name="circle">サークル</string>
 
     <string name="circular">円</string>
 
@@ -160,7 +160,7 @@
 
     <string name="currently_listening_to_x_by_x">現在、 %1$s によって %2$s で聴いています。</string>
 
-    <string name="dark_theme_name">ちょっと暗い</string>
+    <string name="dark_theme_name">ダーク</string>
 
     <string name="delete_playlist_title">プレイリストを削除</string>
     <string name="delete_playlist_x"><![CDATA[プレイリスト <b>%1$s</b> を削除しますか?]]></string>
@@ -185,12 +185,12 @@
     <string name="do_you_want_to_clear_the_blacklist">ブラックリストを削除しますか?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[<b>%1$s</b> をブラックリストから削除しますか?]]></string>
 
-    <string name="donate">寄付します</string>
+    <string name="donate">寄付する</string>
     <string name="donate_summary">私が自分の仕事に払う価値があると思うなら、あなたはここにお金を残すことができます</string>
 
     <string name="donation_header">俺を購入：</string>
 
-    <string name="drive_mode">Drive mode</string>
+    <string name="drive_mode">運転モード</string>
 
     <string name="empty">空の</string>
 
@@ -208,13 +208,13 @@
 
     <string name="folders">フォルダ</string>
 
-    <string name="follow_system">Follow system</string>
+    <string name="follow_system">システムに従う</string>
 
     <string name="for_you">あなたのために</string>
 
     <string name="free">Free</string>
 
-    <string name="full">いっぱい</string>
+    <string name="full">フル</string>
     <string name="full_card">全体のカード</string>
 
     <string name="general_settings_summary">このアプリのテーマや色を変更します</string>
@@ -234,7 +234,7 @@
     <string name="grid_size_6">６</string>
     <string name="grid_size_7">７</string>
     <string name="grid_size_8">８</string>
-    <string name="grid_style_label">Grid style</string>
+    <string name="grid_style_label">表示スタイル</string>
 
     <string name="hinge">ヒンジ</string>
 
@@ -245,14 +245,14 @@
     <string name="horizontal_flip">水平方向に反転</string>
 
     <string name="image">画像</string>
-    <string name="image_gradient">Gradient image</string>
+    <string name="image_gradient">グラディエント</string>
     <string name="image_settings_summary">アーティスト画像のダウンロード設定を変更する</string>
 
     <string name="inserted_x_songs_into_playlist_x">プレイリスト %2$s に %1$d 曲を追加しました</string>
 
-    <string name="instagram_page_summary">君のRetro Music設定を共有してInstagramにショーケースしましょう</string>
+    <string name="instagram_page_summary">あなたのRetro Music設定を共有してInstagramにショーケースしましょう</string>
 
-    <string name="keyboard">Keyboard</string>
+    <string name="keyboard">キーボードを表示</string>
 
     <string name="label_bit_rate">ビットレート</string>
     <string name="label_file_format">フォーマット</string>
@@ -263,16 +263,16 @@
     <string name="label_sampling_rate">サンプリングレート</string>
     <string name="label_track_length">長さ</string>
 
-    <string name="labeled">ラベル付き</string>
+    <string name="labeled">ラベルを表示する</string>
 
     <string name="last_added">最後に追加された</string>
     <string name="last_song">前の曲</string>
 
-    <string name="library_categories">Library categories</string>
+    <string name="library_categories">ライブラリの表示項目</string>
 
     <string name="licenses">ライセンス</string>
 
-    <string name="light_theme_name">はっきり白</string>
+    <string name="light_theme_name">ライト</string>
 
     <string name="listeners_label">Listeners</string>
 
@@ -324,7 +324,7 @@
     <string name="notification">通知</string>
     <string name="notification_settings_summary">通知スタイルを変更</string>
 
-    <string name="now_playing">再生中</string>
+    <string name="now_playing">再生画面</string>
     <string name="now_playing_queue">再生中のキュー</string>
     <string name="now_playing_summary">再生中の画面をカスタマイズ</string>
     <string name="now_playing_themes">9種類以上の再生中テーマ</string>
@@ -339,13 +339,13 @@
 
     <string name="past_three_months">過去3ヶ月</string>
 
-    <string name="peak">Peak</string>
+    <string name="peak">ピーク</string>
 
     <string name="permission_external_storage_denied">外部ストレージへのアクセスが拒否されました</string>
 
     <string name="permissions_denied">許可が拒否されました</string>
 
-    <string name="personalize">個人用設定</string>
+    <string name="personalize">個人設定</string>
     <string name="personalize_settings_summary">再生中のUI画面をカスタマイズ</string>
 
     <string name="pick_from_local_storage">ローカルストレージから選択</string>
@@ -367,42 +367,42 @@
     <string name="pref_blur_amount_title">ぼかしの強さ</string>
     <string name="pref_filter_song_summary">Filter songs by length</string>
     <string name="pref_filter_song_title">曲の長さをフィルター</string>
-    <string name="pref_header_advanced">Advanced</string>
-    <string name="pref_header_album">Album style</string>
+    <string name="pref_header_advanced">高度な設定</string>
+    <string name="pref_header_album">アルバムのスタイル</string>
     <string name="pref_header_audio">オーディオ</string>
-    <string name="pref_header_blacklist">Blacklist</string>
-    <string name="pref_header_controls">Controls</string>
+    <string name="pref_header_blacklist">ブラックリスト</string>
+    <string name="pref_header_controls">コントロール</string>
     <string name="pref_header_general">テーマ</string>
     <string name="pref_header_images">画像</string>
-    <string name="pref_header_library">Library</string>
+    <string name="pref_header_library">ライブラリ</string>
     <string name="pref_header_lockscreen">ロック画面</string>
     <string name="pref_header_playlists">プレイリスト</string>
     <string name="pref_keep_pause_on_zero_volume_summary">音量がゼロになると自動的に音楽が一時停止し、再び音量を上げると音楽が再生されます。※あなたがアプリ外で音量を上げると、Retro Musicも再生を開始します。</string>
     <string name="pref_keep_pause_on_zero_volume_title">音量をゼロで一時停止</string>
     <string name="pref_keep_screen_on_summary">この機能をオンにすると、バッテリー寿命に影響する可能性があります</string>
     <string name="pref_keep_screen_on_title">画面をオンのままにする</string>
-    <string name="pref_language_name">Select language</string>
+    <string name="pref_language_name">言語を選択</string>
     <string name="pref_summary_album_art_on_lockscreen">再生中のジャケットをロック画面の壁紙に適用する</string>
     <string name="pref_summary_audio_ducking">システムでサウンドが再生されたとき、または通知が受信されたときに一時的に音量を下げる</string>
     <string name="pref_summary_blacklist">ブラックリストに登録されたフォルダの内容はコレクションには表示されません。</string>
-    <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
+    <string name="pref_summary_bluetooth_playback">端末にBluetoothデバイスが接続されたとき、再生を開始する</string>
     <string name="pref_summary_blurred_album_art">ロック画面のジャケットをぼかします。他のアプリやウィジェットに問題を及ぼす可能性があります</string>
     <string name="pref_summary_carousel_effect">再生中のジャケットにスライドエフェクトを適用する。この設定を適用するとカードテーマの設定は自動的にオフになります</string>
     <string name="pref_summary_classic_notification">古い通知デザインを使用する</string>
     <string name="pref_summary_colored_app">ジャケットから抽出された色が背景と再生ボタンに適用されます</string>
     <string name="pref_summary_colored_app_shortcuts">アプリのショートカットアイコンをアクセントカラーに切り替えます。アクセントカラーを変更した場合はトグルを切り替えて設定を適用してください</string>
     <string name="pref_summary_colored_notification">"\u30b8\u30e3\u30b1\u30c3\u30c8\u304b\u3089\u62bd\u51fa\u3055\u308c\u305f\u8272\u3067\u901a\u77e5\u3092\u7740\u8272\u3059\u308b"</string>
-    <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
-    <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
+    <string name="pref_summary_desaturated_color">マテリアルデザインのガイドラインに従いダークモードで彩度の低い色を使用する</string>
+    <string name="pref_summary_expand_now_playing_panel">通知をタップすることでアプリのトップ画面ではなく、再生画面を表示するようにする</string>
     <string name="pref_summary_extra_controls">ミニプレイヤー専用のコントロールボタンを追加する</string>
-    <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
+    <string name="pref_summary_extra_song_info">ファイル形式、ビットレート、サンプリング周波数などの曲のメタデータを再生画面に表示する</string>
     <string name="pref_summary_gapless_playback">"一部のデバイスでは再生に問題が発生する場合があります"</string>
     <string name="pref_summary_home_banner">ホーム画面を切り替える</string>
     <string name="pref_summary_ignore_media_store_artwork">アルバムジャケットのクオリティを上げますが、読み込みに時間がかかる場合があります。低解像度の画像で問題がある場合に有効です。</string>
-    <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
+    <string name="pref_summary_library_categories">ライブラリに表示される項目と、順番を変更する</string>
     <string name="pref_summary_lock_screen">Retro Musicのカスタムされたロック画面を使用する</string>
     <string name="pref_summary_open_source_licences">オープンソースライセンスの詳細</string>
-    <string name="pref_summary_toggle_full_screen">フルスクリーンモード</string>
+    <string name="pref_summary_toggle_full_screen">アプリをフルスクリーン表示にする</string>
     <string name="pref_summary_toggle_headset">ヘッドフォンが接続されたら自動で再生を開始する</string>
     <string name="pref_summary_toggle_shuffle">新しいリストの楽曲を再生する時にシャッフルは自動的にオフになります</string>
     <string name="pref_summary_toggle_volume">再生画面に十分なスペースがある場合に音量コントロールを追加する</string>
@@ -413,27 +413,27 @@
     <string name="pref_title_audio_ducking">フォーカスロス時に音量を下げる</string>
     <string name="pref_title_auto_download_artist_images">アーティスト画像を自動でダウンロードする</string>
     <string name="pref_title_blacklist">ブラックリスト</string>
-    <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
+    <string name="pref_title_bluetooth_playback">Bluetooth接続時に再生</string>
     <string name="pref_title_blurred_album_art">アルバムジャケットにぼかしを適用する</string>
     <string name="pref_title_classic_notification">古い通知デザイン</string>
     <string name="pref_title_colored_app">アダプティブカラー</string>
     <string name="pref_title_colored_notification">色付きの通知</string>
-    <string name="pref_title_desaturated_color">Desaturated color</string>
-    <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
-    <string name="pref_title_extra_controls">追加のコントロール</string>
-    <string name="pref_title_extra_song_info">Song info</string>
+    <string name="pref_title_desaturated_color">彩度の低い色</string>
+    <string name="pref_title_expand_now_playing_panel">通知から再生画面を開く</string>
+    <string name="pref_title_extra_controls">追加コントロール</string>
+    <string name="pref_title_extra_song_info">曲の情報を表示</string>
     <string name="pref_title_gapless_playback">ギャップレス再生</string>
     <string name="pref_title_general_theme">アプリのテーマ</string>
-    <string name="pref_title_home_artist_grid_style">アーティストの間隔</string>
+    <string name="pref_title_home_artist_grid_style">アーティストの表示</string>
     <string name="pref_title_home_banner">ホーム画面</string>
     <string name="pref_title_ignore_media_store_artwork">Media Store のカバーを無視する</string>
     <string name="pref_title_last_added_interval">最後に追加されたプレイリストの間隔</string>
     <string name="pref_title_lock_screen">フルスクリーンコントロール</string>
     <string name="pref_title_now_playing_screen_appearance">再生中のテーマ</string>
     <string name="pref_title_open_source_licences">オープンソースライセンス</string>
-    <string name="pref_title_tab_text_mode">タブのラベルモード</string>
+    <string name="pref_title_tab_text_mode">タブのラベル</string>
     <string name="pref_title_toggle_carousel_effect">カルーセルエフェクト</string>
-    <string name="pref_title_toggle_full_screen">フルスクリーンアプリ</string>
+    <string name="pref_title_toggle_full_screen">フルスクリーン表示</string>
     <string name="pref_title_toggle_toggle_headset">自動再生</string>
     <string name="pref_title_toggle_toggle_shuffle">シャッフルモード</string>
     <string name="pref_title_toggle_volume">ボリュームコントロール</string>
@@ -448,7 +448,7 @@
     <string name="queue">キュー</string>
 
     <string name="rate_app">アプリを評価する</string>
-    <string name="rate_on_google_play_summary">このアプリを気に入りましたか？アプリをより良いものにするために、Google Play Storeで問題の報告と意見をよろしくお願いします。</string>
+    <string name="rate_on_google_play_summary">このアプリを気に入りましたか？アプリをより良いものにするために、Google Playストアで問題の報告と意見をよろしくお願いします。</string>
 
     <string name="recent_albums">最近のアルバム</string>
     <string name="recent_artists">最近のアーティスト</string>
@@ -539,7 +539,7 @@
     <string name="sort_order_artist">アーティスト</string>
     <string name="sort_order_composer">作曲家</string>
     <string name="sort_order_date">日付</string>
-    <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_date_modified">最後の編集日</string>
     <string name="sort_order_year">年</string>
     <string name="sort_order_z_a">降順</string>
 
@@ -570,7 +570,7 @@
     <string name="this_week">今週</string>
     <string name="this_year">今年</string>
 
-    <string name="tiny">小さい</string>
+    <string name="tiny">ティニー</string>
     <string name="tiny_card_style">Tiny card</string>
 
     <string name="title">主題</string>
@@ -591,7 +591,7 @@
     <string name="twitter_page">ツイッター</string>
     <string name="twitter_page_summary">あなたのデザインを皆に共有しましょう</string>
 
-    <string name="unlabeled">ラベル付きでない</string>
+    <string name="unlabeled">ラベルを表示しない</string>
 
     <string name="unplayable_file">\u3053\u306e\u66f2\u3092\u518d\u751f\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f</string>
 
@@ -611,7 +611,7 @@
 
     <string name="web_search">ウェブで検索</string>
 
-    <string name="welcome">Welcome,</string>
+    <string name="welcome">ようこそ,</string>
 
     <string name="what_do_you_want_to_share">何を共有しますか?</string>
 
@@ -620,13 +620,19 @@
     <string name="window">ウィンドウ</string>
     <string name="window_corner_edges">角を丸める</string>
 
-    <string name="x_has_been_set_as_ringtone">%1$s をあなたの着信音として設定しました</string>
+    <string name="x_has_been_set_as_ringtone">%1$s を着信音として設定しました</string>
     <string name="x_selected">%1$d が選択されました</string>
 
     <string name="year">年</string>
 
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
-    <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに転送されます</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
 
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
+    <string name="pref_title_album_artists_only">アルバムのアーティストを表示</string>
+    <string name="pref_summary_album_artists_only">アーティストカテゴリ内にアルバムのアーティストを表示する</string>
+    <string name="pref_title_home_album_grid_style">アルバムの表示</string>
+    <string name="sort_order_num_songs">曲数順（昇順）</string>
+    <string name="sort_order_num_songs_desc">曲数順（降順）</string>
+    <string name="image_gradient">傾斜イメージ</string>
 </resources>
