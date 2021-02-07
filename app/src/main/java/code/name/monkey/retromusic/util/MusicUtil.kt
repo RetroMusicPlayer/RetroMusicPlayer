@@ -477,8 +477,7 @@ object MusicUtil : KoinComponent {
                     val id: Int = cursor.getInt(0)
                     val name: String = cursor.getString(1)
                     try { // File.delete can throw a security exception
-                        val f = File(name)
-                        if (f.delete()) {
+                        if (SAFUtil.delete(context, name, null)) {
                             // Step 3: Remove selected track from the database
                             context.contentResolver.delete(
                                 ContentUris.withAppendedId(
@@ -488,8 +487,6 @@ object MusicUtil : KoinComponent {
                             )
                             deletedCount++
                         } else {
-                            // I'm not sure if we'd ever get here (deletion would
-                            // have to fail, but no exception thrown)
                             Log.e("MusicUtils", "Failed to delete file $name")
                         }
                         cursor.moveToNext()
