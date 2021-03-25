@@ -5,6 +5,9 @@
 [![Generic badge](https://img.shields.io/badge/Download-Google_Play-green.svg)](https://play.google.com/store/apps/details?id=code.name.monkey.retromusic&hl=en_IN)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/h4h13/RetroMusicPlayer/blob/master/LICENSE.txt)
 [![Twitter Follow](https://img.shields.io/twitter/follow/retromusicapp?style=social)](https://twitter.com/retromusicapp)
+
+# ⚠ The app is discontinued, [here's why](https://t.me/retromusiclog/919).
+
 ## 🆕 Material Design music player for Android music lovers 
 
 ## Screenshots
