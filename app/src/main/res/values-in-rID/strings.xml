@@ -17,11 +17,11 @@
     <string name="action_details">Rincian</string>
     <string name="action_go_to_album">Ke album</string>
     <string name="action_go_to_artist">Ke artis</string>
-    <string name="action_go_to_genre">Ke aliran</string>
+    <string name="action_go_to_genre">Ke genre</string>
     <string name="action_go_to_start_directory">Ke direktori awal</string>
     <string name="action_grant">Izinkan</string>
-    <string name="action_grid_size">Jumlah kisi</string>
-    <string name="action_grid_size_land">Ukuran kisi (lanskap)</string>
+    <string name="action_grid_size">Jumlah grid</string>
+    <string name="action_grid_size_land">Jumlah grid (lanskap)</string>
     <string name="action_new_playlist">Daftar putar baru</string>
     <string name="action_next">Selanjutnya</string>
     <string name="action_play">Putar</string>
@@ -43,11 +43,11 @@
     <string name="action_share">Bagikan</string>
     <string name="action_shuffle_all">Acak semua</string>
     <string name="action_shuffle_playlist">Acak daftar putar</string>
-    <string name="action_sleep_timer">Pewaktu tidur</string>
+    <string name="action_sleep_timer">Pengatur waktu tidur</string>
     <string name="action_sort_order">Urutkan</string>
     <string name="action_tag_editor">Pengubah tag</string>
-    <string name="action_toggle_favorite">Toggle favorit</string>
-    <string name="action_toggle_shuffle">Toggle mode acak</string>
+    <string name="action_toggle_favorite">Beralih favorit</string>
+    <string name="action_toggle_shuffle">Beralih mode acak</string>
 
     <string name="adaptive">Adaptif</string>
 
@@ -72,7 +72,7 @@
 
     <string name="always">Selalu</string>
 
-    <string name="app_share">Hei lihat pemutar musik keren ini di:
+    <string name="app_share">Hei, lihat pemutar musik keren ini di:
 https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Acak</string>
     <string name="app_shortcut_top_tracks_short">Lagu teratas</string>
@@ -101,18 +101,18 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="blur_card">Kartu Buram</string>
 
     <string name="bug_report_failed">Tidak dapat mengirimkan laporan</string>
-    <string name="bug_report_failed_invalid_token">Token akses tidak valid. Mohon hubungi pengembang apl.</string>
-    <string name="bug_report_failed_issues_not_available">Masalah tidak diaktifkan untuk repositori yang dipilih. Mohon hubungi pengembang apl.</string>
-    <string name="bug_report_failed_unknown">Terjadi kesalahan tak terduga. Mohon hubungi pengembang apl.</string>
+    <string name="bug_report_failed_invalid_token">Token akses tidak valid. Mohon hubungi pengembang aplikasi.</string>
+    <string name="bug_report_failed_issues_not_available">Masalah tidak diaktifkan untuk repositori yang dipilih. Mohon hubungi pengembang aplikasi.</string>
+    <string name="bug_report_failed_unknown">Terjadi kesalahan tak terduga. Mohon hubungi pengembang aplikasi.</string>
     <string name="bug_report_failed_wrong_credentials">Nama pengguna atau kata sandi salah</string>
-    <string name="bug_report_issue">Isu</string>
+    <string name="bug_report_issue">Masalah</string>
     <string name="bug_report_manual">Kirimkan secara manual</string>
-    <string name="bug_report_no_description">Mohon masukkan deskripsi dari isu tersebut</string>
+    <string name="bug_report_no_description">Mohon masukkan deskripsi dari permasalahan tersebut</string>
     <string name="bug_report_no_password">Mohon masukkan kata sandi GitHub yang valid</string>
-    <string name="bug_report_no_title">Mohon masukkan judul isu</string>
+    <string name="bug_report_no_title">Mohon masukkan judul permasalahan</string>
     <string name="bug_report_no_username">Mohon masukkan nama akun GitHub yang valid</string>
     <string name="bug_report_summary">Terjadi kesalahan tidak terduga. Maaf kamu mengalami masalah ini, jika
-tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
+tetap bermasalah, \"Hapus data Aplikasi\" atau kirimkan Email </string>
     <string name="bug_report_use_account">Kirim menggunakan akun GitHub</string>
 
     <string name="buy_now">Beli sekarang</string>
@@ -123,7 +123,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="card_color_style">Kartu Berwarna</string>
     <string name="card_style">Kartu</string>
 
-    <string name="carousal_effect_on_now_playing_screen">Efek karosel pada layar sedang diputar</string>
+    <string name="carousal_effect_on_now_playing_screen">Efek karosel pada layar yang sedang diputar</string>
 
     <string name="cascading">Tersusun ke bawah</string>
 
@@ -151,7 +151,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="could_not_create_playlist">Tidak dapat membuat daftar putar</string>
     <string name="could_not_download_album_cover">"Tidak dapat mengunduh sampul album yang cocok."</string>
     <string name="could_not_restore_purchase">Tidak dapat mengembalikan pembelian</string>
-    <string name="could_not_scan_files">Tidak dapat memindai %d file</string>
+    <string name="could_not_scan_files">Tidak dapat memindai berkas %d</string>
 
     <string name="create_action">Buat</string>
 
@@ -159,7 +159,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="credit_title">Member dan kontributor </string>
 
-    <string name="currently_listening_to_x_by_x">Terakhir kali mengdengarkan %1$s oleh %2$s.</string>
+    <string name="currently_listening_to_x_by_x">Terakhir kali mendengarkan %1$s oleh %2$s.</string>
 
     <string name="dark_theme_name">Agak gelap</string>
 
@@ -187,7 +187,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Hapus <b>%1$s</b> dari daftar hitam?]]></string>
 
     <string name="donate">Donasi</string>
-    <string name="donate_summary">Jika anda rasa saya berhak dibayar untuk karya saya, anda dapat berdonasi disini</string>
+    <string name="donate_summary">Jika kamu merasa saya berhak dibayar berdasarkan karya saya, kamu dapat berdonasi disini</string>
 
     <string name="donation_header">Belikan saya:</string>
 
@@ -201,7 +201,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="favorites">Favorit</string>
 
-    <string name="finish_last_song">Menyelesaikan lagu terakhir</string>
+    <string name="finish_last_song">Selesaikan lagu terakhir</string>
 
     <string name="fit">Pas</string>
 
@@ -211,7 +211,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="follow_system">Ikuti sistem</string>
 
-    <string name="for_you">Untuk anda</string>
+    <string name="for_you">Untuk kamu</string>
 
     <string name="free">Gratis</string>
 
@@ -221,9 +221,9 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="general_settings_summary">Ubah tema dan warna dari aplikasi</string>
     <string name="general_settings_title">Tampilan</string>
 
-    <string name="genre">Aliran</string>
+    <string name="genre">Genre</string>
 
-    <string name="genres">Aliran</string>
+    <string name="genres">Genre</string>
 
     <string name="git_hub_summary">Fork projek di GitHub</string>
 
@@ -235,7 +235,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="grid_size_6">6</string>
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
-    <string name="grid_style_label">Gaya kisi</string>
+    <string name="grid_style_label">Gaya grid</string>
 
     <string name="hinge">Engsel</string>
 
@@ -251,7 +251,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="inserted_x_songs_into_playlist_x">Lagu %1$d dimasukan ke daftar putar %2$s</string>
 
-    <string name="instagram_page_summary">Bagikan pengaturan Retro Musicmu di Instagram untuk menunjukannya</string>
+    <string name="instagram_page_summary">Bagikan pengaturan Retro Musicmu di Instagram untuk memamerkannya</string>
 
     <string name="keyboard">Papan ketik</string>
 
@@ -285,11 +285,11 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="lyrics">Lirik</string>
 
-    <string name="made_with_love">Dibuat dengan cinta ❤️ di India</string>
+    <string name="made_with_love">Dibuat dengan ❤️ di India</string>
 
     <string name="material">Material</string>
 
-    <string name="md_error_label">Galat</string>
+    <string name="md_error_label">Gagal</string>
     <string name="md_storage_perm_error">Kesalahan perizinan</string>
 
     <string name="my_name">Nama</string>
@@ -304,11 +304,11 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="no_albums">Tidak ada album</string>
     <string name="no_artists">Tidak ada artis</string>
-    <string name="no_audio_ID">"Putar lagu lebih dahulu, lalu coba lagi"</string>
+    <string name="no_audio_ID">"Putar lagu lebih dulu, lalu coba lagi"</string>
     <string name="no_equalizer">Ekualiser tidak ditemukan</string>
     <string name="no_genres">Tidak ada genre</string>
     <string name="no_lyrics_found">Lirik tidak ditemukan</string>
-    <string name="no_playing_queue">Tidak ada lagu diputar</string>
+    <string name="no_playing_queue">Tidak ada lagu yang sedang diputar</string>
     <string name="no_playlists">Tidak ada daftar putar</string>
     <string name="no_purchase_found">Pembelian tidak ditemukan</string>
     <string name="no_results">Tidak ada hasil</string>
@@ -319,14 +319,14 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> tidak ada di daftar media]]></string>
 
-    <string name="nothing_to_scan">Tak ada apapun untuk dipindai</string>
+    <string name="nothing_to_scan">Tidak ada apapun untuk dipindai</string>
     <string name="nothing_to_see">Tidak ada apapun untuk dilihat</string>
 
     <string name="notification">Pemberitahuan</string>
     <string name="notification_settings_summary">Sesuaikan gaya pemberitahuan</string>
 
     <string name="now_playing">Sedang diputar</string>
-    <string name="now_playing_queue">Antrean sedang dimutar</string>
+    <string name="now_playing_queue">Antrean sedang diputar</string>
     <string name="now_playing_summary">Kostumisasi layar sedang diputar</string>
     <string name="now_playing_themes">9+ gaya sedang diputar</string>
 
@@ -356,7 +356,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="plain">Polos</string>
 
-    <string name="playing_notification_description">Notifikasi pemutaran menyediakan tindakan untuk mainkan/jeda, dsb.</string>
+    <string name="playing_notification_description">Notifikasi pemutaran menyediakan aksi untuk mainkan/jeda, dsb.</string>
     <string name="playing_notification_name">Notifikasi pemutaran</string>
 
     <string name="playlist_is_empty">Daftar putar kosong</string>
@@ -366,8 +366,8 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="pref_blur_amount_summary">Tingkat keburaman diaplikasikan pada tema buram, lebih rendah membuat lebih cepat</string>
     <string name="pref_blur_amount_title">Tingkat keburaman</string>
-    <string name="pref_filter_song_summary">Urutkan berdasar panjang lagu</string>
-    <string name="pref_filter_song_title">Filter berdasar durasi lagu</string>
+    <string name="pref_filter_song_summary">Filter lagu berdasarkan panjang</string>
+    <string name="pref_filter_song_title">Filter lagu berdasarkan durasi</string>
     <string name="pref_header_advanced">Lanjutan</string>
     <string name="pref_header_album">Gaya album</string>
     <string name="pref_header_audio">Audio</string>
@@ -385,7 +385,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="pref_language_name">Pilih bahasa</string>
     <string name="pref_summary_album_art_on_lockscreen">Menggunakan sampul album lagu yang sedang diputar sebagai wallpaper layar kunci</string>
     <string name="pref_summary_audio_ducking">Volume lebih rendah ketika suara sistem diputar atau terdapat notifikasi baru</string>
-    <string name="pref_summary_blacklist">Konten folder yang telah didaftar hitamkan disembunyikan dari pustaka.</string>
+    <string name="pref_summary_blacklist">Konten folder yang berada di daftar hitam disembunyikan dari pustaka.</string>
     <string name="pref_summary_bluetooth_playback">Mulai pemutaran saat terhubung dengan perangkat bluetooth</string>
     <string name="pref_summary_blurred_album_art">Blur sampul album di layar kunci. Dapat menyebabkan masalah dengan aplikasi pihak ketiga dan widget.</string>
     <string name="pref_summary_carousel_effect">Efek karosel di sampul album yang sedang diputar. Ingat bahwa Kartu dan Kartu Buram tidak akan bekerja</string>
@@ -393,23 +393,23 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="pref_summary_colored_app">Latar belakang, Warna tombol kontrol berubah sesuai sampul album lagu yang diputar</string>
     <string name="pref_summary_colored_app_shortcuts">Warna pintasan aplikasi dalam warna aksen. Setiap kali anda mengubahnya, restart aplikasi untuk menerapkan efek</string>
     <string name="pref_summary_colored_notification">"Warna notifikasi berdasarkan warna dominan sampul album"</string>
-    <string name="pref_summary_desaturated_color">Berdasarkan peraturan Desain Material dalam mode gelap, warna haruslah didesaturasikan</string>
-    <string name="pref_summary_expand_now_playing_panel">Mengklik pada notifikasi akan menampilkan layar sedang diputar bukan layar beranda</string>
+    <string name="pref_summary_desaturated_color">Berdasarkan aturan Material Design dalam mode gelap, warna haruslah didesaturasikan</string>
+    <string name="pref_summary_expand_now_playing_panel">Ketuk notifikasi akan menampilkan layar sedang diputar bukan layar beranda</string>
     <string name="pref_summary_extra_controls">Tambahkan kontrol tambahan untuk pemutar mini</string>
     <string name="pref_summary_extra_song_info">Tampilkan informasi lagu tambahan, seperti format file, bitrate dan frekuensi</string>
     <string name="pref_summary_gapless_playback">"Dapat menyebabkan masalah pemutaran pada beberapa perangkat."</string>
-    <string name="pref_summary_home_banner">Toggle gaya banner beranda</string>
+    <string name="pref_summary_home_banner">Beralih gaya banner beranda</string>
     <string name="pref_summary_ignore_media_store_artwork">Dapat meningkatkan kualitas sampul album tetapi menyebabkan waktu pemuatan gambar lebih lambat. Hanya aktifkan ini jika Anda memiliki masalah dengan gambar resolusi rendah.</string>
     <string name="pref_summary_library_categories">Atur visibilitas dan perintah dari kategori pustaka.</string>
     <string name="pref_summary_lock_screen">Gunakan kontrol layar kunci Retro Music</string>
-    <string name="pref_summary_open_source_licences">Rincian Lisensi untuk aplikasi sumber terbuka</string>
+    <string name="pref_summary_open_source_licences">Rincian Lisensi untuk aplikasi open-source</string>
     <string name="pref_summary_toggle_full_screen">Mode immersif</string>
     <string name="pref_summary_toggle_headset">Putar segera setelah headphones terhubung.</string>
     <string name="pref_summary_toggle_shuffle">Mode acak akan non-aktif ketika memutar lagu baru dari daftar</string>
-    <string name="pref_summary_toggle_volume">Jika tersedia ruang yang memadai, tampilkan pengendai suara di layar sedang diputar</string>
+    <string name="pref_summary_toggle_volume">Jika tersedia ruang yang memadai, tampilkan pengatur volume di layar sedang diputar</string>
     <string name="pref_title_album_art_on_lockscreen">Tampilkan sampul album</string>
     <string name="pref_title_album_cover_style">Tema sampul album</string>
-    <string name="pref_title_album_cover_transform">Sampul album lewati</string>
+    <string name="pref_title_album_cover_transform">Lewati sampul album</string>
     <string name="pref_title_app_shortcuts">Pintasan aplikasi berwarna</string>
     <string name="pref_title_audio_ducking">Kurangi volume ketika hilang fokus</string>
     <string name="pref_title_auto_download_artist_images">Otomatis unduh gambar artis</string>
@@ -425,13 +425,13 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="pref_title_extra_song_info">Info lagu</string>
     <string name="pref_title_gapless_playback">Pemutaran tanpa jeda</string>
     <string name="pref_title_general_theme">Tema aplikasi</string>
-    <string name="pref_title_home_artist_grid_style">Kisi beranda artis</string>
+    <string name="pref_title_home_artist_grid_style">Grid beranda artis</string>
     <string name="pref_title_home_banner">Banner beranda</string>
-    <string name="pref_title_ignore_media_store_artwork">Abaikan sampul Media Store</string>
+    <string name="pref_title_ignore_media_store_artwork">Abaikan sampul penyimpanan media</string>
     <string name="pref_title_last_added_interval">Interval daftar putar terbaru</string>
     <string name="pref_title_lock_screen">Kontrol layar penuh</string>
     <string name="pref_title_now_playing_screen_appearance">Tema sedang diputar</string>
-    <string name="pref_title_open_source_licences">Lisensi sumber terbuka</string>
+    <string name="pref_title_open_source_licences">Lisensi open-source</string>
     <string name="pref_title_tab_text_mode">Mode tab judul</string>
     <string name="pref_title_toggle_carousel_effect">Efek Karosel</string>
     <string name="pref_title_toggle_full_screen">Layar penuh aplikasi</string>
@@ -464,7 +464,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
 
     <string name="rename_playlist_title">Ganti nama daftar putar</string>
 
-    <string name="report_an_issue">Laporkan isu</string>
+    <string name="report_an_issue">Laporkan permasalahan</string>
     <string name="report_bug">Laporkan bug</string>
 
     <string name="reset_action">Setel ulang</string>
@@ -483,21 +483,21 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="saf_delete_failed">Gagal menghapus file: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Gagal mendapatkan SAF URI</string>
-    <string name="saf_guide_slide1_description">Buka laci notifikasi</string>
-    <string name="saf_guide_slide1_description_before_o">Aktifkan \'Tampilkan Kartu SD\' di menu luapan</string>
+    <string name="saf_guide_slide1_description">Buka kotak navigasi</string>
+    <string name="saf_guide_slide1_description_before_o">Aktifkan \'Tampilkan Kartu SD\' di menu overflow</string>
     <!-- SAF guide -->
     <string name="saf_guide_slide1_title">%s membutuhkan akses kartu SD</string>
     <string name="saf_guide_slide2_description">Anda perlu memilih direktori akar kartu SD anda</string>
-    <string name="saf_guide_slide2_title">Pilih kartu SD anda di laci navigasi</string>
+    <string name="saf_guide_slide2_title">Pilih kartu SD anda di kotak navigasi</string>
     <string name="saf_guide_slide3_description">Jangan buka sub-folder apapun</string>
-    <string name="saf_guide_slide3_title">Ketuk tombol \'pilih\' pada bagaian bawah layar</string>
-    <string name="saf_write_failed">Gagal menulis file: %s</string>
+    <string name="saf_guide_slide3_title">Ketuk tombol \'pilih\' pada bagian bawah layar</string>
+    <string name="saf_write_failed">Gagal menuliskan berkas: %s</string>
 
     <string name="save">Simpan</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">Simpan berkas sebagai</string>
-    <string name="save_playlists_title">Simpan file sebagai</string>
+    <string name="save_playlists_title">Simpan berkas sebagai</string>
 
     <string name="saved_playlist_to">Daftar putar disimpan ke %s.</string>
 
@@ -516,7 +516,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="set">Atur</string>
     <string name="set_artist_image">Setel gambar artis</string>
 
-    <string name="share_app">Bagikan Apl</string>
+    <string name="share_app">Bagikan Apllikasi</string>
     <string name="share_to_stories">Bagikan ke Cerita</string>
 
     <string name="shuffle">Acak</string>
@@ -524,7 +524,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="simple">Sederhana</string>
 
     <string name="sleep_timer_canceled">Waktu tidur dibatalkan.</string>
-    <string name="sleep_timer_set">Pewaktu tidur diatur %d menit dari sekarang.</string>
+    <string name="sleep_timer_set">Pengatur waktu tidur diatur %d menit dari sekarang.</string>
 
     <string name="social">Sosial</string>
     <string name="social_stories">Bagikan cerita</string>
@@ -568,7 +568,7 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="the_audio_file">Berkas audio</string>
 
     <string name="this_month">Bulan ini</string>
-    <string name="this_week">Pekan ini</string>
+    <string name="this_week">Minggu ini</string>
     <string name="this_year">Tahun ini</string>
 
     <string name="tiny">Kecil</string>
@@ -585,9 +585,9 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="track_list">Nomor trek</string>
 
     <string name="translate">Terjemahkan</string>
-    <string name="translate_community">Bantu kami untuk menerjemahkan aplikasi ke bahasa anda</string>
+    <string name="translate_community">Bantu kami untuk menerjemahkan aplikasi ke bahasa kamu</string>
 
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
+    <string name="try_retro_music_premium">Coba Retro Music versi Premium</string>
 
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Bagikan desain anda dengan Retro Music</string>
