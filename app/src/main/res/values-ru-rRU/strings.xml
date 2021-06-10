@@ -102,6 +102,7 @@
     <string name="cancel_current_timer">Отменить</string>
     <string name="card">Карточка</string>
     <string name="card_color_style">Цветная карточка</string>
+    <string name="card_square">Квадратная Карточка</string>
     <string name="card_style">Карточка</string>
     <string name="carousal_effect_on_now_playing_screen">Эффект карусели на экране воспроизведения</string>
     <string name="cascading">Каскадный</string>
@@ -145,6 +146,7 @@
     <string name="donate">Пожертвовать</string>
     <string name="donate_summary">Если вы считаете, что я заслуживаю награды за свой труд, можете отправить мне несколько рублей здесь</string>
     <string name="donation_header">Купить мне:</string>
+    <string name="done">Готов</string>
     <string name="drive_mode">Режим вождения</string>
     <string name="empty">Пусто</string>
     <string name="equalizer">Эквалайзер</string>
@@ -164,6 +166,7 @@
     <string name="genre">Жанр</string>
     <string name="genres">Жанры</string>
     <string name="git_hub_summary">Развивайте проект на GitHub</string>
+    <string name="gradient">Градиент</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -173,6 +176,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Стиль сетки</string>
+    <string name="help_summary">Нужна ещё помощь?</string>
     <string name="hinge">Пластинки</string>
     <string name="history">История</string>
     <string name="home">Главная</string>
@@ -180,6 +184,9 @@
     <string name="image">Изображение</string>
     <string name="image_gradient">Градиентное изображение</string>
     <string name="image_settings_summary">Изменение настроек загрузки изображения артиста</string>
+    <string name="import_label">Импорт</string>
+    <string name="import_playlist">Импорт плейлиста</string>
+    <string name="import_playlist_message">Импортирует все плейлисты, перечисленные в Android Media Store с песнями, если плейлисты уже существуют, песни будут объединены.</string>
     <string name="inserted_x_songs_into_playlist_x">В плейлист %2$s внесено %1$d  песен.</string>
     <string name="instagram_page_summary">Поделитесь своим обзором на приложение Retro Music в Instagram</string>
     <string name="keyboard">Клавиатура</string>
@@ -226,6 +233,7 @@
     <string name="normal">Обычная</string>
     <string name="normal_lyrics">Обычный текст</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> не найден в хранилище медиа.]]></string>
+    <string name="not_recently_played">Сейчас не проигрывается</string>
     <string name="nothing_to_scan">Нет файлов для сканирования.</string>
     <string name="nothing_to_see">Нет файлов для сканирования</string>
     <string name="notification">Уведомления</string>
@@ -241,6 +249,8 @@
     <string name="past_three_months">Последние 3 месяца</string>
     <string name="peak">Панель снизу</string>
     <string name="permission_external_storage_denied">Разрешение для доступа у внешнему хранилищу не получено.</string>
+    <string name="permission_summary">Приложению требуется разрешение на доступ к внутренней памяти вашего устройства для воспроизведения музыки.</string>
+    <string name="permission_title">Доступ к внутренней памяти</string>
     <string name="permissions_denied">Разрешения не получены.</string>
     <string name="personalize">Персонализация</string>
     <string name="personalize_settings_summary">Настройте управление экрана воспроизведения и интерфейс управления музыкой</string>
@@ -273,6 +283,7 @@
     <string name="pref_keep_screen_on_title">Оставить экран включенным</string>
     <string name="pref_language_name">Выберите язык</string>
     <string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущей песни в качестве обоев на экране блокировки.</string>
+    <string name="pref_summary_album_artists_only">Только альбомы исполнителей</string>
     <string name="pref_summary_audio_ducking">Снизить громкость воспроизведения когда приходит звуковое уведомление</string>
     <string name="pref_summary_blacklist">Содержимое черного списка скрыто из вашей библиотеки.</string>
     <string name="pref_summary_bluetooth_playback">Начать воспроизведение сразу же после подключения Bluetooth-устройства</string>
@@ -297,6 +308,7 @@
     <string name="pref_summary_toggle_shuffle">Режим перемешивания выключится при проигрывании нового списка песен</string>
     <string name="pref_summary_toggle_volume">Если доступно достаточно места, показывать регулировку громкости на экране воспроизведения</string>
     <string name="pref_title_album_art_on_lockscreen">Показать обложку альбома</string>
+    <string name="pref_title_album_artists_only">Показывать обложку альбома в разделе исполнители</string>
     <string name="pref_title_album_cover_style">Тема обложки альбома</string>
     <string name="pref_title_album_cover_transform">Стиль смены обложки альбома</string>
     <string name="pref_title_app_shortcuts">Цветные ярлыки</string>
@@ -314,6 +326,7 @@
     <string name="pref_title_extra_song_info">Информация о песне</string>
     <string name="pref_title_gapless_playback">Непрерывное воспроизведение</string>
     <string name="pref_title_general_theme">Тема приложения</string>
+    <string name="pref_title_home_album_grid_style">Сетка альбома на Главной странице</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Кнопка Домой</string>
     <string name="pref_title_ignore_media_store_artwork">Игнорировать обложки из хранилища</string>
@@ -354,6 +367,8 @@
     <string name="restoring_purchase">Восстановление покупки ...</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+    <string name="ringtone_summary">Приложению требуется разрешение на доступ к настройкам вашего устройства, чтобы установить музыку в качестве рингтона.</string>
+    <string name="ringtone_title">Рингтон</string>
     <string name="saf_delete_failed">Ошибка при удалении файла: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Не удается получить SAF URI</string>
@@ -381,6 +396,7 @@
     <string name="set">Установить</string>
     <string name="set_artist_image">Установить изображение исполнителя</string>
     <string name="share_app">Поделиться приложением</string>
+    <string name="share_summary">Поделитесь приложением со своими друзьями и родственниками</string>
     <string name="share_to_stories">Поделиться в Историях</string>
     <string name="shuffle">Перемешать</string>
     <string name="simple">Простая</string>
@@ -398,6 +414,8 @@
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата</string>
     <string name="sort_order_date_modified">Дата изменения</string>
+    <string name="sort_order_num_songs">Колличество песен</string>
+    <string name="sort_order_num_songs_desc">Количество композиций по убыванию</string>
     <string name="sort_order_year">Год</string>
     <string name="sort_order_z_a">По убыванию</string>
     <string name="speech_not_supported">Извините! Ваше устройство не поддерживает ввод с помощью речи</string>
@@ -434,6 +452,7 @@
     <string name="up_next">Следующие песни</string>
     <string name="update_image">Обновить изображение</string>
     <string name="updating">Обновляется…</string>
+    <string name="user_name">Имя Пользователя</string>
     <string name="username">Имя пользователя</string>
     <string name="version">Версия</string>
     <string name="vertical_flip">Вертикальный поворт</string>
