@@ -68,7 +68,7 @@
     <string name="app_share">Hey! încearcă acest music player la adresa: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Amestecă</string>
     <string name="app_shortcut_top_tracks_short">Top cântece</string>
-    <string name="app_widget_big_name">Mare</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Card</string>
     <string name="app_widget_classic_name">Classic</string>
     <string name="app_widget_small_name">Mic</string>

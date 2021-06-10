@@ -74,11 +74,11 @@
     <string name="app_share">مرحبا القي نظرة على مشغل الموسيقى الرائع هذا في: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">عشوائي</string>
     <string name="app_shortcut_top_tracks_short">المسارات الاكثر شعبية</string>
-    <string name="app_widget_big_name">ريترو ميوزك - كبير</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">ريترو ميوزك - بطاقة</string>
     <string name="app_widget_classic_name">ريترو ميوزك - تقليدي</string>
     <string name="app_widget_small_name">ريترو ميوزك - صغير</string>
-    <string name="app_widget_text_name">ريترو ميوزك - نص</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">فنان</string>
     <string name="artists">فنانين</string>
     <string name="audio_focus_denied">تم منع تركيز الصوت</string>

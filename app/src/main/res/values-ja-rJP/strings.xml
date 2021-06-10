@@ -64,11 +64,11 @@
     <string name="app_share">クールな音楽プレイヤーをチェックしよう: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">シャッフル</string>
     <string name="app_shortcut_top_tracks_short">トップ曲</string>
-    <string name="app_widget_big_name">レトロミュージック - ビッグ</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">レトロミュージック - カード</string>
     <string name="app_widget_classic_name">レトロミュージック - クラシック</string>
     <string name="app_widget_small_name">レトロミュージック - 小</string>
-    <string name="app_widget_text_name">テキスト</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">アーティスト</string>
     <string name="artists">アーティスト</string>
     <string name="audio_focus_denied">オーディオのフォーカスが拒否されました。</string>

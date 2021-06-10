@@ -67,11 +67,11 @@
 https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Casuale</string>
     <string name="app_shortcut_top_tracks_short">Tracce migliori</string>
-    <string name="app_widget_big_name">Grande</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Card</string>
     <string name="app_widget_classic_name">Classico</string>
     <string name="app_widget_small_name">Piccolo</string>
-    <string name="app_widget_text_name">Testo</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Artista</string>
     <string name="artists">Artisti</string>
     <string name="audio_focus_denied">Focalizzazione audio negata.</string>

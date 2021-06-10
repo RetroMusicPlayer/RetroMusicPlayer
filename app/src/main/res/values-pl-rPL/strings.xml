@@ -70,11 +70,11 @@
     <string name="app_share">Hej, sprawdź ten fajny odtwarzacz muzyki na: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Losowo</string>
     <string name="app_shortcut_top_tracks_short">Najczęściej odtwarzane utwory</string>
-    <string name="app_widget_big_name">Duży</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Karta</string>
     <string name="app_widget_classic_name">Klasyczny</string>
     <string name="app_widget_small_name">Mały</string>
-    <string name="app_widget_text_name">Tekst</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Wykonawca</string>
     <string name="artists">Wykonawcy</string>
     <string name="audio_focus_denied">Odrzucono fokus dźwiękowy.</string>

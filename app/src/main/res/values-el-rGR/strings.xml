@@ -66,11 +66,11 @@
     <string name="app_share">Τσεκάρετε αυτό το κούλ music player στο:https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Τυχαία αναπαραγωγή</string>
     <string name="app_shortcut_top_tracks_short">Κορυφαία Κομμάτια</string>
-    <string name="app_widget_big_name">Μεγάλο</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Κάρτα</string>
     <string name="app_widget_classic_name">Κλασσικό</string>
     <string name="app_widget_small_name">Μικρό</string>
-    <string name="app_widget_text_name">&gt;Κείμενο</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Καλλιτέχνης</string>
     <string name="artists">Καλλιτέχνες</string>
     <string name="audio_focus_denied">Η εστίαση ήχου απορρίφθηκε.</string>

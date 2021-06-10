@@ -70,11 +70,11 @@
     <string name="app_share">Привіт, перегляньте цей крутий музичний плеєр за адресою: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Перемішати</string>
     <string name="app_shortcut_top_tracks_short">Кращі треки</string>
-    <string name="app_widget_big_name">Ретро-музика - Великий</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Ретро музика - Картка</string>
     <string name="app_widget_classic_name">Ретро-музика - Класичний</string>
     <string name="app_widget_small_name">Ретро-музика - Малий</string>
-    <string name="app_widget_text_name">Ретро-музика - Текст</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Виконавець</string>
     <string name="artists">Виконавці</string>
     <string name="audio_focus_denied">В отриманні аудіофокусу відмовлено.</string>

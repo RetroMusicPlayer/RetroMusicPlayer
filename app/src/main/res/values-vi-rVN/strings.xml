@@ -64,7 +64,7 @@
     <string name="app_share">Hãy dùng thử trình phát nhạc siêu chất này tại: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Ngẫu nhiên</string>
     <string name="app_shortcut_top_tracks_short">Bản nhạc hàng đầu</string>
-    <string name="app_widget_big_name">Lớn</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Thẻ</string>
     <string name="app_widget_classic_name">Cổ điển</string>
     <string name="app_widget_small_name">Nhỏ</string>
