@@ -102,6 +102,7 @@
     <string name="cancel_current_timer">Anuluj</string>
     <string name="card">Karta</string>
     <string name="card_color_style">Kolorowa Karta</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">Karta</string>
     <string name="carousal_effect_on_now_playing_screen">Efekt karuzeli na ekranie Teraz odtwarzane</string>
     <string name="cascading">Kaskadowy</string>
@@ -145,6 +146,7 @@
     <string name="donate">Wesprzyj nas</string>
     <string name="donate_summary">Jeżeli uważasz, że zasługuje na zapłatę za moją pracę możesz zostawić tu drobną sumę</string>
     <string name="donation_header">Kup mi:</string>
+    <string name="done">Done</string>
     <string name="drive_mode">Tryb samochodowy</string>
     <string name="empty">Pusto</string>
     <string name="equalizer">Korektor dźwięku</string>
@@ -164,6 +166,7 @@
     <string name="genre">Gatunek</string>
     <string name="genres">Gatunki</string>
     <string name="git_hub_summary">Zobacz kod na GitHubie</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -173,6 +176,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Styl siatki</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">Zawias</string>
     <string name="history">Historia</string>
     <string name="home">Strona główna</string>
@@ -180,6 +184,9 @@
     <string name="image">Grafika</string>
     <string name="image_gradient">Grafika gradientowy</string>
     <string name="image_settings_summary">Zmień ustawienia pobierania grafiki wykonawcy</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">Dodano %1$d utworów do playlisty %2$s.</string>
     <string name="instagram_page_summary">Udostępnij swój desigm aplikacji Retro Music na Instagramie</string>
     <string name="keyboard">Klawiatura</string>
@@ -226,6 +233,7 @@
     <string name="normal">Normalne</string>
     <string name="normal_lyrics">Normalny tekst utworu</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> nie znajduje się w magazynie multimediów.]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Brak elementów do przeskanowania.</string>
     <string name="nothing_to_see">Pusto</string>
     <string name="notification">Powiadomienie</string>
@@ -241,6 +249,8 @@
     <string name="past_three_months">Ostatnie 3 miesiące</string>
     <string name="peak">Szczyt</string>
     <string name="permission_external_storage_denied">Odmowa dostępu do pamięci zewnętrznej.</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">Odmowa dostępu.</string>
     <string name="personalize">Personalizuj</string>
     <string name="personalize_settings_summary">Dostosuj interfejs i odtwarzacz</string>
@@ -273,6 +283,7 @@
     <string name="pref_keep_screen_on_title">Pozostaw ekran włączony</string>
     <string name="pref_language_name">Wybierz język</string>
     <string name="pref_summary_album_art_on_lockscreen">Używaj okładki aktualnie odtwarzanego albumu jako tła ekranu blokady</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Zmniejsz głośność kiedy dostajesz powiadomienia</string>
     <string name="pref_summary_blacklist">Foldery zawarte na czarnej listy są ukryte w Twojej bibliotece.</string>
     <string name="pref_summary_bluetooth_playback">Rozpocznij odtwarzanie po podłączeniu urządzenia Bluetooth</string>
@@ -297,6 +308,7 @@
     <string name="pref_summary_toggle_shuffle">Odtwarzanie losowe zostanie wyłączone podczas odtwarzania nowej listy utworów</string>
     <string name="pref_summary_toggle_volume">Pokaż sterowanie głośnością w odtwarzaczu, gdy jest wystarczająco wolnego miejsca</string>
     <string name="pref_title_album_art_on_lockscreen">Pokaż okładkę albumu</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Wygląd okładki albumu</string>
     <string name="pref_title_album_cover_transform">Przesuwanie okładki albumu</string>
     <string name="pref_title_app_shortcuts">Kolorowe skróty aplikacji</string>
@@ -314,6 +326,7 @@
     <string name="pref_title_extra_song_info">Informacje o utworze</string>
     <string name="pref_title_gapless_playback">Odtwarzanie bez przerw</string>
     <string name="pref_title_general_theme">Motyw aplikacji</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Siatka wykonawców</string>
     <string name="pref_title_home_banner">Baner strony głównej</string>
     <string name="pref_title_ignore_media_store_artwork">Ignoruj okładki z Media Store</string>
@@ -354,6 +367,8 @@
     <string name="restoring_purchase">Przywracanie zakupu...</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">Nie udało się usunąć pliku: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Nie można uzyskać URI SAF</string>
@@ -381,6 +396,7 @@
     <string name="set">Ustaw</string>
     <string name="set_artist_image">Ustaw grafikę wykonawcy</string>
     <string name="share_app">Udostępnij aplikację</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Udostępnik jako Stories</string>
     <string name="shuffle">Losowo</string>
     <string name="simple">Prosty</string>
@@ -398,6 +414,8 @@
     <string name="sort_order_composer">Kompozytor</string>
     <string name="sort_order_date">Data dodania</string>
     <string name="sort_order_date_modified">Data modyfikacji</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Rok</string>
     <string name="sort_order_z_a">Malejąco</string>
     <string name="speech_not_supported">Twoje urządzenie nie obsługuje wprowadzania głosowego</string>
@@ -434,6 +452,7 @@
     <string name="up_next">Następne</string>
     <string name="update_image">Zaktualizuj grafikę</string>
     <string name="updating">Aktualizowanie…</string>
+    <string name="user_name">User Name</string>
     <string name="username">Nazwa użytkownika</string>
     <string name="version">Wersja</string>
     <string name="vertical_flip">Obrót pionowy</string>
