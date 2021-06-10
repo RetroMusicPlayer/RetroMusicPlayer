@@ -102,6 +102,7 @@
     <string name="cancel_current_timer">Відмінити</string>
     <string name="card">Картка</string>
     <string name="card_color_style">Кольорова картка</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">Картка</string>
     <string name="carousal_effect_on_now_playing_screen">Карусель на екрані відтворення</string>
     <string name="cascading">Каскад</string>
@@ -145,6 +146,7 @@
     <string name="donate">Підтримати</string>
     <string name="donate_summary">Якщо ви вважаєте, що я заслуговую на оплату своєї праці, ви можете залишити гроші тут</string>
     <string name="donation_header">Купіть мені:</string>
+    <string name="done">Done</string>
     <string name="drive_mode">Режим водія</string>
     <string name="empty">Порожньо</string>
     <string name="equalizer">Еквалайзер</string>
@@ -164,6 +166,7 @@
     <string name="genre">Жанр</string>
     <string name="genres">Жанри</string>
     <string name="git_hub_summary">Розгалужити проект на GitHub</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -173,6 +176,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Стиль сітки</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">Завіса</string>
     <string name="history">Історія</string>
     <string name="home">Домашня сторінка</string>
@@ -180,6 +184,9 @@
     <string name="image">Зображення</string>
     <string name="image_gradient">Градієнтне зображення</string>
     <string name="image_settings_summary">Змінити параметри завантаження зображення виконавця</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">Додано %1$d пісень до списку відтворення %2$s.</string>
     <string name="instagram_page_summary">Похизуйтеся вашими налаштуваннями Retro Music у Instagram</string>
     <string name="keyboard">Клавіатура</string>
@@ -226,6 +233,7 @@
     <string name="normal">Нормальний</string>
     <string name="normal_lyrics">Стандартний текст</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> не вказано в медіа сховищі.]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Нічого сканувати.</string>
     <string name="nothing_to_see">Порожньо</string>
     <string name="notification">Сповіщення</string>
@@ -241,6 +249,8 @@
     <string name="past_three_months">Останні 3 місяці</string>
     <string name="peak">Пік</string>
     <string name="permission_external_storage_denied">Відмовлено у доступі до зовнішнього сховища.</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">У доступі відмовлено.</string>
     <string name="personalize">Персоналізація</string>
     <string name="personalize_settings_summary">Налаштуйте екран відтворення та зовнішній вигляд</string>
@@ -273,6 +283,7 @@
     <string name="pref_keep_screen_on_title">Не вимикати екран</string>
     <string name="pref_language_name">Обрати мову</string>
     <string name="pref_summary_album_art_on_lockscreen">Використовувати обкладинку альбому пісні як шпалери екрана блокування</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Зменшення гучності при відтворенні системного звуку або сповіщення</string>
     <string name="pref_summary_blacklist">Вміст тек чорного списку приховано з вашої бібліотеки.</string>
     <string name="pref_summary_bluetooth_playback">Почати відтворення відразу при під\'єднанні до Bluetooth пристрою</string>
@@ -297,6 +308,7 @@
     <string name="pref_summary_toggle_shuffle">Випадковий режим вимкнеться при відтворенні нового списку пісень</string>
     <string name="pref_summary_toggle_volume">Якщо вистачає місця, показувати панель гучності на екрані відтворення</string>
     <string name="pref_title_album_art_on_lockscreen">Показати обкладинку альбому</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Тема обкладинки альбому</string>
     <string name="pref_title_album_cover_transform">Пропустити обкладинку альбому</string>
     <string name="pref_title_app_shortcuts">Кольорові ярлики додатків</string>
@@ -314,6 +326,7 @@
     <string name="pref_title_extra_song_info">Інформація про пісню</string>
     <string name="pref_title_gapless_playback">Безперервне відтворення</string>
     <string name="pref_title_general_theme">Тема додатку</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Домашня сітка виконавця</string>
     <string name="pref_title_home_banner">Головний банер</string>
     <string name="pref_title_ignore_media_store_artwork">Ігнорувати обкладинки з Медіасховища</string>
@@ -354,6 +367,8 @@
     <string name="restoring_purchase">Відновлення покупки…</string>
     <string name="retro_music_player">Retro Music плеєр</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">Помилка видалення файлу: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Неможливо отримати URI SAF</string>
@@ -381,6 +396,7 @@
     <string name="set">Встановити</string>
     <string name="set_artist_image">Встановити зображення виконавця</string>
     <string name="share_app">Поділитися додатком</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Поділитися в Історії</string>
     <string name="shuffle">Перемішати</string>
     <string name="simple">Простий</string>
@@ -398,6 +414,8 @@
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата додавання</string>
     <string name="sort_order_date_modified">Дата змінення</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Рік</string>
     <string name="sort_order_z_a">За спаданням</string>
     <string name="speech_not_supported">Вибачте! Ваш пристрій не підтримує введення мови</string>
@@ -434,6 +452,7 @@
     <string name="up_next">Наступне</string>
     <string name="update_image">Оновити зображення</string>
     <string name="updating">Оновлення…</string>
+    <string name="user_name">User Name</string>
     <string name="username">Ім\'я користувача</string>
     <string name="version">Версія додатку</string>
     <string name="vertical_flip">Вертикальне сальто</string>
