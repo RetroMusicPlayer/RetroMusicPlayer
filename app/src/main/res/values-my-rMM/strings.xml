@@ -264,7 +264,7 @@
     <string name="pref_header_advanced">ပိုမိုဆန်းသစ်သော</string>
     <string name="pref_header_album">Album စတိုင်</string>
     <string name="pref_header_audio">အသံပိုင်းဆိုင်ရာ</string>
-    <string name="pref_header_blacklist">Blacklist</string>
+    <string name="pref_header_blacklist">လစ်လျူရှုမည့်စာရင်း</string>
     <string name="pref_header_controls">ထိန်းချုပ်မှုဆိုင်ရာ</string>
     <string name="pref_header_general">Theme</string>
     <string name="pref_header_images">Images</string>
@@ -308,7 +308,7 @@
     <string name="pref_title_app_shortcuts">Colored App shortcuts</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_auto_download_artist_images">အဆိုတော်ဓာတ်ပုံများကို အလိုအလျောက်ဒေါင်းလုဒ်ဆွဲခြင်း</string>
-    <string name="pref_title_blacklist">Blacklist</string>
+    <string name="pref_title_blacklist">လစ်လျူရှုမည့်စာရင်း</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Album cover အဝါး</string>
     <string name="pref_title_classic_notification">Notification ဒီဇိုင်းအဟောင်း</string>
