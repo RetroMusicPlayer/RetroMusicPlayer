@@ -102,6 +102,7 @@
     <string name="cancel_current_timer">Zrušit aktuální časovač</string>
     <string name="card">Card</string>
     <string name="card_color_style">Colored Card</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">Card</string>
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
     <string name="cascading">Cascading</string>
@@ -145,6 +146,7 @@
     <string name="donate">Darovat</string>
     <string name="donate_summary">Pokud si myslíte, že si zasloužím odměnu za svou práci, můžete mi nechat pár dolarů.</string>
     <string name="donation_header">Buy me a:</string>
+    <string name="done">Done</string>
     <string name="drive_mode">Drive mode</string>
     <string name="empty">Prázdný</string>
     <string name="equalizer">Equalizer</string>
@@ -164,6 +166,7 @@
     <string name="genre">Žánr</string>
     <string name="genres">Genres</string>
     <string name="git_hub_summary">Fork the project on GitHub</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -173,6 +176,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Grid style</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">Hinge</string>
     <string name="history">Historie</string>
     <string name="home">Domov</string>
@@ -180,6 +184,9 @@
     <string name="image">Image</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">Do playlistu %2$s byly vloženy %1$d skladby.</string>
     <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
     <string name="keyboard">Keyboard</string>
@@ -226,6 +233,7 @@
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normal lyrics</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> není uveden v úložišti médií.]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Nic pro skenování.</string>
     <string name="nothing_to_see">Nothing to see</string>
     <string name="notification">Upozornění</string>
@@ -241,6 +249,8 @@
     <string name="past_three_months">Past 3 months</string>
     <string name="peak">Peak</string>
     <string name="permission_external_storage_denied">Povolení přístupu k externímu úložišti bylo zamítnuto.</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">Oprávnění byla odepřena.</string>
     <string name="personalize">Personalize</string>
     <string name="personalize_settings_summary">Customize your now playing and UI controls</string>
@@ -273,6 +283,7 @@
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
     <string name="pref_summary_album_art_on_lockscreen">Používá současný obal alba písní jako tapetu zámku.</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Oznámení, navigace atd.</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
@@ -297,6 +308,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_title_album_art_on_lockscreen">Zobrazit obal alba</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Barevné zkratky aplikace</string>
@@ -314,6 +326,7 @@
     <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Přehrávání bez mezery</string>
     <string name="pref_title_general_theme">Hlavní téma</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignorovat obaly v zařízení</string>
@@ -354,6 +367,8 @@
     <string name="restoring_purchase">Restoring purchase…</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -381,6 +396,7 @@
     <string name="set">Set</string>
     <string name="set_artist_image">Set artist image</string>
     <string name="share_app">Share app</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
     <string name="shuffle">Náhodně</string>
     <string name="simple">Simple</string>
@@ -398,6 +414,8 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>
     <string name="sort_order_z_a">Descending</string>
     <string name="speech_not_supported">Promiňte! Vaše zařízení nepodporuje vstup řeči</string>
@@ -434,6 +452,7 @@
     <string name="up_next">Up next</string>
     <string name="update_image">Aktualizovat obrázek</string>
     <string name="updating">Aktualizace...</string>
+    <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Verze</string>
     <string name="vertical_flip">Vertical flip</string>
