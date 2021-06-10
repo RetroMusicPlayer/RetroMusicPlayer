@@ -106,6 +106,7 @@
     <string name="cancel_current_timer">إلغاء</string>
     <string name="card">بطاقة</string>
     <string name="card_color_style">بطاقة ملونة</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">بطاقة</string>
     <string name="carousal_effect_on_now_playing_screen">التاثير الدائري على شاشة التشغيل الآن</string>
     <string name="cascading">المتتالية</string>
@@ -150,6 +151,7 @@
     <string name="donate_summary">إذا كنت تعتقد أنني أستحق الحصول على المال مقابل عملي ،
 يمكنك ترك بعض المال هنا.</string>
     <string name="donation_header">اشتري لي:</string>
+    <string name="done">Done</string>
     <string name="drive_mode">وضع القيادة</string>
     <string name="empty">فارغ</string>
     <string name="equalizer">موازن الصوت</string>
@@ -169,6 +171,7 @@
     <string name="genre">فئة</string>
     <string name="genres">فئات</string>
     <string name="git_hub_summary">اجلب المشروع على GitHub</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -178,6 +181,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">الشبكة والأسلوب</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">مفصل</string>
     <string name="history">السجل</string>
     <string name="home">الشاشة الرئيسية</string>
@@ -185,6 +189,9 @@
     <string name="image">صورة</string>
     <string name="image_gradient">الصورة المتدرجة</string>
     <string name="image_settings_summary">تغيير إعدادات تنزيل صور الفنان</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">إدراج %1$d الأغاني في قائمة التشغيل %2$s.</string>
     <string name="instagram_page_summary">شارك إعداد Retro Music الخاص بك للعرض على إنستقرام</string>
     <string name="keyboard">الكيبورد</string>
@@ -231,6 +238,7 @@
     <string name="normal">الافتراضي</string>
     <string name="normal_lyrics">كلمات عادية</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> غير مدرج في مخزن الوسائط]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">لاشيء لفحصه.</string>
     <string name="nothing_to_see">لاشيء لفحصه</string>
     <string name="notification">إشعارات</string>
@@ -246,6 +254,8 @@
     <string name="past_three_months">أخر 3 أشهر</string>
     <string name="peak">الذروة</string>
     <string name="permission_external_storage_denied">تم رفض إذن الوصول إلى وحدة التخزين الخارجي.</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">تم رفض الأذونات.</string>
     <string name="personalize">تخصيص</string>
     <string name="personalize_settings_summary">تخصيص المشغل و الواجهة</string>
@@ -278,6 +288,7 @@
     <string name="pref_keep_screen_on_title">ابقاء الشاشة تعمل</string>
     <string name="pref_language_name">حدد اللغة</string>
     <string name="pref_summary_album_art_on_lockscreen">استخدم غلاف ألبوم الأغنية قيد التشغيل حاليًا كخلفية لشاشة القفل</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">خفض مستوى الصوت عند تشغيل صوت نظام أو تلقي إشعارات</string>
     <string name="pref_summary_blacklist">محتويات مجلدات القائمة السوداء يتم أخفائها من مكتبتك الموسيقية.</string>
     <string name="pref_summary_bluetooth_playback">بدء التشغيل بمجرد توصيل جهاز بلوتوث</string>
@@ -302,6 +313,7 @@
     <string name="pref_summary_toggle_shuffle">سوف يتم تعطيل وضع الخلط عند التشغيل من قائمة جديدة</string>
     <string name="pref_summary_toggle_volume">في حال توفر مساحة كافية قم بعرض شريط التحكم بالصوت في شاشة التشغيل الآن</string>
     <string name="pref_title_album_art_on_lockscreen">عرض غطاء الالبوم</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">ثيم غطاء الالبوم</string>
     <string name="pref_title_album_cover_transform">تخطي غطاء الالبوم</string>
     <string name="pref_title_app_shortcuts">تلوين اختصارات التطبيق</string>
@@ -319,6 +331,7 @@
     <string name="pref_title_extra_song_info">معلومات الأغنية</string>
     <string name="pref_title_gapless_playback">تشغيل متتابع</string>
     <string name="pref_title_general_theme">سمات التطبيق</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">شبكة الفنان الرئيسية</string>
     <string name="pref_title_home_banner">صورة الواجهة</string>
     <string name="pref_title_ignore_media_store_artwork">تجاهل صور تخزين الميديا</string>
@@ -359,6 +372,8 @@
     <string name="restoring_purchase">استرداد عملية الشراء...</string>
     <string name="retro_music_player">مشغل الموسيقى Retro</string>
     <string name="retro_music_pro">ريترو ميوزك - الكامل</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">فشل حذف الملف: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">لا يمكن الحصول على URI SAF</string>
@@ -386,6 +401,7 @@
     <string name="set">تعيين</string>
     <string name="set_artist_image">اختيار صورة الفنان</string>
     <string name="share_app">مشاركة التطبيق</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">شارك في القصص</string>
     <string name="shuffle">خلط</string>
     <string name="simple">بسيط</string>
@@ -403,6 +419,8 @@
     <string name="sort_order_composer">المؤلف</string>
     <string name="sort_order_date">التاريخ</string>
     <string name="sort_order_date_modified">تاريخ التعديل</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">السنة</string>
     <string name="sort_order_z_a">تنازلي</string>
     <string name="speech_not_supported">عذرا! جهازك لايدعم الادخال الصوتي</string>
@@ -439,6 +457,7 @@
     <string name="up_next">التالي</string>
     <string name="update_image">تحديث الصورة</string>
     <string name="updating">تحديث...</string>
+    <string name="user_name">User Name</string>
     <string name="username">أسم المستخدم</string>
     <string name="version">الإصدار</string>
     <string name="vertical_flip">تدوير رأسي</string>
