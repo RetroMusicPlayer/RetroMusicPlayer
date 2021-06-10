@@ -99,14 +99,14 @@
     <string name="card">कार्ड</string>
     <string name="card_color_style">Colored Card</string>
     <string name="card_square">Square Card</string>
-    <string name="card_style">Card</string>
+    <string name="card_style">रेट्रो म्यूजिक - कार्ड</string>
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
     <string name="cascading">Cascading</string>
     <string name="changelog">चेंजलाग</string>
     <string name="changelog_summary">साफ़</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
-    <string name="classic">Classic</string>
+    <string name="classic">रेट्रो म्यूजिक - क्लासिक</string>
     <string name="clear_action">साफ़</string>
     <string name="clear_blacklist">Clear blacklist</string>
     <string name="clear_playing_queue">Clear queue</string>
@@ -212,7 +212,7 @@
     <string name="my_name">Name</string>
     <string name="my_top_tracks">Most played</string>
     <string name="never">Never</string>
-    <string name="new_playlist_title">New playlist</string>
+    <string name="new_playlist_title">नई प्लेलिस्ट</string>
     <string name="new_start_directory">%s is the new start directory.</string>
     <string name="next_song">Next Song</string>
     <string name="no_albums">You have no albums</string>
@@ -266,7 +266,7 @@
     <string name="pref_header_advanced">Advanced</string>
     <string name="pref_header_album">Album style</string>
     <string name="pref_header_audio">Audio</string>
-    <string name="pref_header_blacklist">Blacklist</string>
+    <string name="pref_header_blacklist">ब्लैकलिस्ट</string>
     <string name="pref_header_controls">Controls</string>
     <string name="pref_header_general">Theme</string>
     <string name="pref_header_images">Images</string>
@@ -310,7 +310,7 @@
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
-    <string name="pref_title_blacklist">Blacklist</string>
+    <string name="pref_title_blacklist">ब्लैकलिस्ट</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Blur album cover</string>
     <string name="pref_title_classic_notification">Classic notification design</string>
@@ -394,7 +394,7 @@
     <string name="share_app">Share app</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
-    <string name="shuffle">Shuffle</string>
+    <string name="shuffle">शफ़ल</string>
     <string name="simple">Simple</string>
     <string name="sleep_timer_canceled">Sleep timer canceled.</string>
     <string name="sleep_timer_set">Sleep timer set for %d minutes from now.</string>
@@ -403,10 +403,10 @@
     <string name="song">Song</string>
     <string name="song_duration">Song duration</string>
     <string name="songs">Songs</string>
-    <string name="sort_order">Sort order</string>
+    <string name="sort_order">क्रमबद्ध आदेश</string>
     <string name="sort_order_a_z">Ascending</string>
-    <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Artist</string>
+    <string name="sort_order_album">एल्बम</string>
+    <string name="sort_order_artist">कलाकार</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
