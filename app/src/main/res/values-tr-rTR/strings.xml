@@ -66,11 +66,11 @@
     <string name="app_share">Hey, şu havalı müzik çalara şuradan bir göz atmaya ne dersin: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Karıştır</string>
     <string name="app_shortcut_top_tracks_short">Sık oynatılan parçalar</string>
-    <string name="app_widget_big_name">Retro müzik - Büyük</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Retro müzik - Kart</string>
     <string name="app_widget_classic_name">Retro müzik - Klasik</string>
     <string name="app_widget_small_name">Retro müzik - Küçük</string>
-    <string name="app_widget_text_name">Retro müzik - Metin</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Sanatçı</string>
     <string name="artists">Sanatçılar</string>
     <string name="audio_focus_denied">Ses odaklaması reddedildi.</string>
