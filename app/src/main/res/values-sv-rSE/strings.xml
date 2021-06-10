@@ -2,10 +2,8 @@
 <resources>
     <string name="about_album_label">Om %s</string>
     <string name="about_settings_summary">Vårt team, länkar</string>
-
     <string name="accent_color">Accentfärg</string>
     <string name="accent_color_desc">Temats accentfärg, standard är lila</string>
-
     <string name="action_about">Om</string>
     <string name="action_add_to_favorites">Lägg till i favoriter</string>
     <string name="action_add_to_playing_queue">Lägg till i spelkön</string>
@@ -48,32 +46,23 @@
     <string name="action_tag_editor">Tag redigerare</string>
     <string name="action_toggle_favorite">Favorit</string>
     <string name="action_toggle_shuffle">Shuffleläge</string>
-
     <string name="adaptive">Adaptiv</string>
-
     <string name="add_action">Lägg till</string>
     <string name="add_playlist_title">"Lägg till i spellista"</string>
-
     <string name="added_title_to_playing_queue">"Lade till en titel i spelkön."</string>
     <string name="added_x_titles_to_playing_queue">Lade till %1$d titlar i spelkön.</string>
-
     <string name="album">Album</string>
-
     <plurals name="albumSongs">
         <item quantity="one">Låt</item>
         <item quantity="other">Låtar</item>
     </plurals>
-
     <string name="album_artist">Albumartist</string>
-
     <string name="albums">Album</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
         <item quantity="other">Album</item>
     </plurals>
-
     <string name="always">Alltid</string>
-
     <string name="app_share">Kolla in den här coola musikspelaren på: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">Topplåtar</string>
@@ -82,25 +71,16 @@
     <string name="app_widget_classic_name">Klassisk</string>
     <string name="app_widget_small_name">Liten</string>
     <string name="app_widget_text_name">Text</string>
-
     <string name="artist">Artist</string>
-
     <string name="artists">Artister</string>
-
     <string name="audio_focus_denied">Ljudfokus nekas.</string>
     <string name="audio_settings_summary">Ändra ljudinställningarna och justera equalizer-kontrollerna</string>
-
     <string name="auto">Auto</string>
-
     <string name="biography">Biografi</string>
-
     <string name="black_theme_name">Helt svart</string>
-
     <string name="blacklist">Svartlista</string>
-
     <string name="blur">Oskärpa</string>
     <string name="blur_card">Kort med oskärpa</string>
-
     <string name="bug_report_failed">Det gick inte att skicka rapport</string>
     <string name="bug_report_failed_invalid_token">Invalid access token. Please contact the app developer.</string>
     <string name="bug_report_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
@@ -114,55 +94,34 @@
     <string name="bug_report_no_username">Please enter your valid GitHub username</string>
     <string name="bug_report_summary">Ett oväntat fel uppstod. Tråkigt att du hittade denna bug, om det fortsätter att krascha, testa att \"Rensa appdata\" eller skicka ett e-postmeddelande</string>
     <string name="bug_report_use_account">Send using GitHub account</string>
-
     <string name="buy_now">Köp nu</string>
-
     <string name="cancel_current_timer">Avbryt</string>
-
     <string name="card">Kort</string>
     <string name="card_color_style">Färgat kort</string>
     <string name="card_style">Kort</string>
-
     <string name="carousal_effect_on_now_playing_screen">Karuselleffekt på spelarskärmen</string>
-
     <string name="cascading">Släng iväg</string>
-
     <string name="changelog">Ändringslogg</string>
     <string name="changelog_summary">Ändringsloggen befinner sig på Telegram</string>
-
     <string name="circle">Cirkel</string>
-
     <string name="circular">Cirkulär</string>
-
     <string name="classic">Klassisk</string>
-
     <string name="clear_action">Rensa</string>
     <string name="clear_blacklist">Rensa svartlista</string>
     <string name="clear_playing_queue">Rensa spelkö</string>
-
     <string name="color">Färg</string>
-
     <string name="colors">Färger</string>
-
     <string name="composer">Kompositör</string>
-
     <string name="copied_device_info_to_clipboard">Kopierade enhetsinfo till urklipp.</string>
-
     <string name="could_not_create_playlist">Det gick inte att skapa spellista.</string>
     <string name="could_not_download_album_cover">"Kunde inte ladda ner ett matchande albumomslag."</string>
     <string name="could_not_restore_purchase">Det gick inte att återställa köpet.</string>
     <string name="could_not_scan_files">Det gick inte att skanna %d filer.</string>
-
     <string name="create_action">Skapa</string>
-
     <string name="created_playlist_x">Skapade spellistan %1$s.</string>
-
     <string name="credit_title">Medlemmar och bidragsgivare</string>
-
     <string name="currently_listening_to_x_by_x">Lyssnar just nu på %1$s av %2$s.</string>
-
     <string name="dark_theme_name">Ganska mörkt</string>
-
     <string name="delete_playlist_title">Radera spellista</string>
     <string name="delete_playlist_x"><![CDATA[Radera spellistan <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Radera spellistor</string>
@@ -171,62 +130,36 @@
     <string name="delete_songs_title">Radera låtar</string>
     <string name="delete_x_playlists"><![CDATA[Radera <b>%1$d</b> spellistor?]]></string>
     <string name="delete_x_songs"><![CDATA[Radera <b>%1$d</b> låtar?]]></string>
-
     <string name="deleted_x_songs">%1$d låtar har raderats.</string>
-
     <string name="depth">Djup</string>
-
     <string name="description">Beskrivning</string>
-
     <string name="device_info">Enhetsinformation</string>
-
     <string name="dialog_message_set_ringtone">Låt Retro Music ändra ljudinställningar</string>
     <string name="dialog_title_set_ringtone">Ställ in ringsignal</string>
-
     <string name="do_you_want_to_clear_the_blacklist">Vill du rensa svartlistan?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Vill du ta bort <b>%1$s</b> från svartlistan?]]></string>
-
     <string name="donate">Donera</string>
     <string name="donate_summary">Om du tycker att jag förtjänar någon ersättning för mitt arbete, kan du gärna donera lite pengar här</string>
-
     <string name="donation_header">Köp mig en:</string>
-
     <string name="drive_mode">Förarläge</string>
-
     <string name="empty">Tom</string>
-
     <string name="equalizer">Equalizer</string>
-
     <string name="faq">FAQ</string>
-
     <string name="favorites">Favoriter</string>
-
     <string name="finish_last_song">Spela färdigt sista låten</string>
-
     <string name="fit">Passa</string>
-
     <string name="flat">Platt</string>
-
     <string name="folders">Mappar</string>
-
     <string name="follow_system">Följ systemet</string>
-
     <string name="for_you">För dig</string>
-
     <string name="free">Fri</string>
-
     <string name="full">Full</string>
     <string name="full_card">Fullt kort</string>
-
     <string name="general_settings_summary">Ändra appens tema och färger</string>
     <string name="general_settings_title">Utseende och känsla</string>
-
     <string name="genre">Genre</string>
-
     <string name="genres">Genrer</string>
-
     <string name="git_hub_summary">Gör en fork av projektet på GitHub</string>
-
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -236,25 +169,16 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Rutnätstil</string>
-
     <string name="hinge">Gångjärn</string>
-
     <string name="history">Historik</string>
-
     <string name="home">Hem</string>
-
     <string name="horizontal_flip">Vänd horisontellt</string>
-
     <string name="image">Bild</string>
     <string name="image_gradient">Tonad bild</string>
     <string name="image_settings_summary">Ändra inställningar för nedladdning av artistbild</string>
-
     <string name="inserted_x_songs_into_playlist_x">La till %1$d låtar i spellistan %2$s.</string>
-
     <string name="instagram_page_summary">Dela din Retro Music-setup för att visa upp på Instagram</string>
-
     <string name="keyboard">Tangentbord</string>
-
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Filnamn</string>
@@ -263,45 +187,27 @@
     <string name="label_more_from">Mer från %s</string>
     <string name="label_sampling_rate">Sampling rate</string>
     <string name="label_track_length">Längd</string>
-
     <string name="labeled">Labeled</string>
-
     <string name="last_added">Senast tillagd</string>
     <string name="last_song">Sista låten</string>
-
     <string name="library_categories">Bibliotekskategorier</string>
-
     <string name="licenses">Licenser</string>
-
     <string name="light_theme_name">Snövitt</string>
-
     <string name="listeners_label">Lyssnare</string>
-
     <string name="listing_files">Listar filer</string>
-
     <string name="loading_products">Laddar produkter…</string>
-
     <string name="login">Logga in</string>
-
     <string name="lyrics">Låttext</string>
-
     <string name="made_with_love">Skapad med ❤️ i Indien</string>
-
     <string name="material">Material</string>
-
     <string name="md_error_label">Fel</string>
     <string name="md_storage_perm_error">Behörighetsfel</string>
-
     <string name="my_name">Namn</string>
     <string name="my_top_tracks">Mest spelade</string>
-
     <string name="never">Aldrig</string>
-
     <string name="new_playlist_title">Ny spellista</string>
     <string name="new_start_directory">%s är den nya startmappen.</string>
-
     <string name="next_song">Nästa låt</string>
-
     <string name="no_albums">Du har inga album</string>
     <string name="no_artists">Du har inga artister</string>
     <string name="no_audio_ID">"Spela en låt först och försök igen."</string>
@@ -313,57 +219,36 @@
     <string name="no_purchase_found">Inget köp hittades.</string>
     <string name="no_results">Inga resultat</string>
     <string name="no_songs">Du har inga låtar</string>
-
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normal låttext</string>
-
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> är inte listad i Media Store.]]></string>
-
     <string name="nothing_to_scan">Inget att skanna.</string>
     <string name="nothing_to_see">Ingenting att se</string>
-
     <string name="notification">Notis</string>
     <string name="notification_settings_summary">Anpassa utseendet på notisen</string>
-
     <string name="now_playing">Spelare</string>
     <string name="now_playing_queue">Spelkö</string>
     <string name="now_playing_summary">Anpassa spelarskärmen</string>
     <string name="now_playing_themes">9+ spelarteman</string>
-
     <string name="only_on_wifi">Endast via Wi-Fi</string>
-
     <string name="other_settings_summary">Avancerade testfunktioner</string>
-
     <string name="others">Övrigt</string>
-
     <string name="password">Lösenord</string>
-
     <string name="past_three_months">De senaste 3 månaderna</string>
-
     <string name="peak">Peak</string>
-
     <string name="permission_external_storage_denied">Behörighet att få tillgång till extern lagring nekas.</string>
-
     <string name="permissions_denied">Behörighet nekas.</string>
-
     <string name="personalize">Skräddarsy</string>
     <string name="personalize_settings_summary">Anpassa appens UI till din smak</string>
-
     <string name="pick_from_local_storage">Välj från lokal lagring</string>
-
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Följ vår Pinterestsida för lite designinspiration till Retro Music</string>
-
     <string name="plain">Enkel</string>
-
     <string name="playing_notification_description">Notisen har knappar för play/pause etc.</string>
     <string name="playing_notification_name">Notis</string>
-
     <string name="playlist_is_empty">Spellistan är tom</string>
     <string name="playlist_name_empty">Namn på spellista</string>
-
     <string name="playlists">Spellistor</string>
-
     <string name="pref_blur_amount_summary">Mängden oskärpa som används för suddiga teman, lägre är snabbare</string>
     <string name="pref_blur_amount_title">Oskärpa</string>
     <string name="pref_filter_song_summary">Filtrera låtar efter dess längd</string>
@@ -438,22 +323,15 @@
     <string name="pref_title_toggle_toggle_headset">Auto-play</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffleläge</string>
     <string name="pref_title_toggle_volume">Volymkontroller</string>
-
     <string name="pro">Pro</string>
     <string name="pro_summary">Helt svart tema, spelarteman, karuselleffekt med mera…</string>
-
     <string name="profile">Profil</string>
-
     <string name="purchase">Köp</string>
-
     <string name="queue">Spelkö</string>
-
     <string name="rate_app">Betygsätt appen</string>
     <string name="rate_on_google_play_summary">Älskar du den här appen? Låt oss veta i Google Play Store hur vi kan göra den ännu bättre</string>
-
     <string name="recent_albums">Senaste album</string>
     <string name="recent_artists">Senaste artister</string>
-
     <string name="remove_action">Ta bort</string>
     <string name="remove_cover">Ta bort omslag</string>
     <string name="remove_from_blacklist">Ta bort från svartlistan</string>
@@ -461,25 +339,17 @@
     <string name="remove_song_x_from_playlist"><![CDATA[Ta bort låten <b>%1$s</b> från spellistan?]]></string>
     <string name="remove_songs_from_playlist_title">Ta bort låtar från spellistan</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[Ta bort <b>%1$d</b> låtar från spellistan?]]></string>
-
     <string name="rename_playlist_title">Byt namn på spellista</string>
-
     <string name="report_an_issue">Rapportera ett problem</string>
     <string name="report_bug">Rapportera fel</string>
-
     <string name="reset_action">Återställ</string>
     <string name="reset_artist_image">Återställ artistbild</string>
-
     <string name="restore">Restore</string>
-
     <string name="restored_previous_purchase_please_restart">Återställde tidigare köp. Starta om appen för att använda alla funktioner.</string>
     <string name="restored_previous_purchases">Återställde tidigare köp.</string>
-
     <string name="restoring_purchase">Återställer köp…</string>
-
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
-
     <string name="saf_delete_failed">Radering av fil misslyckades: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Kan inte hämta SAF URI</string>
@@ -492,48 +362,31 @@
     <string name="saf_guide_slide3_description">Öppna inga submappar</string>
     <string name="saf_guide_slide3_title">Klicka på \'välj\'-knappen längst ner på skärmen</string>
     <string name="saf_write_failed">Filskrivning misslyckades: %s</string>
-
     <string name="save">Spara</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">Spara som fil</string>
     <string name="save_playlists_title">Spara som filer</string>
-
     <string name="saved_playlist_to">Sparade spellista till %s.</string>
-
     <string name="saving_changes">Sparar ändringar</string>
-
     <string name="scan_media">Skanna media</string>
-
     <string name="scanned_files">Skannade %1$d av %2$d filer.</string>
-
     <string name="scrobbles_label">Scrobbles</string>
-
     <string name="select_all">Välj alla</string>
-
     <string name="selected">Vald</string>
-
     <string name="set">Ställ in</string>
     <string name="set_artist_image">Ställ in artistbild</string>
-
     <string name="share_app">Dela app</string>
     <string name="share_to_stories">Dela till Stories</string>
-
     <string name="shuffle">Shuffle</string>
-
     <string name="simple">Enkel</string>
-
     <string name="sleep_timer_canceled">Sömntimer inaktiverad.</string>
     <string name="sleep_timer_set">Sömntimern är inställd på %d minuter från och med nu.</string>
-
     <string name="social">Socialt</string>
     <string name="social_stories">Dela Story</string>
-
     <string name="song">Låt</string>
     <string name="song_duration">Låtlängd</string>
-
     <string name="songs">Låtar</string>
-
     <string name="sort_order">Sorteras efter</string>
     <string name="sort_order_a_z">Stigande</string>
     <string name="sort_order_album">Album</string>
@@ -543,91 +396,54 @@
     <string name="sort_order_date_modified">Ändringsdatum</string>
     <string name="sort_order_year">År</string>
     <string name="sort_order_z_a">Sjunkande</string>
-
     <string name="speech_not_supported">Hoppsan! Din enhet stöder inte talinmatning</string>
     <string name="speech_prompt">Sök i ditt bibliotek</string>
-
     <string name="stack">Stack</string>
-
     <string name="start_play_music">Börja spela musik.</string>
-
     <string name="suggestion_songs">Förslag</string>
-
     <string name="support_development">Stöd utvecklingen</string>
-
     <string name="swipe_to_unlock">Svep för att låsa upp</string>
-
     <string name="synced_lyrics">Synkad låttext</string>
-
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Gå med i Telegram-gruppen för att diskutera buggar, lämna förslag, briljera och mycket annat</string>
-
     <string name="thank_you">Tack!</string>
-
     <string name="the_audio_file">Ljudfilen</string>
-
     <string name="this_month">Den här månaden</string>
     <string name="this_week">Denna vecka</string>
     <string name="this_year">Det här året</string>
-
     <string name="tiny">Minimal</string>
     <string name="tiny_card_style">Litet kort</string>
-
     <string name="title">Titel</string>
-
     <string name="today">I dag</string>
-
     <string name="top_albums">Toppalbum</string>
     <string name="top_artists">Toppartister</string>
-
     <string name="track_hint">"Spår (2 för spår 2 eller 3004 för CD3 spår 4)"</string>
     <string name="track_list">Spårnummer</string>
-
     <string name="translate">Översätt</string>
     <string name="translate_community">Hjälp oss att översätta appen till ditt språk</string>
-
     <string name="try_retro_music_premium">Prova Retro Music Premium</string>
-
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Dela din design med Retro Music</string>
-
     <string name="unlabeled">Omärkt</string>
-
     <string name="unplayable_file">Kunde inte spela den här låten.</string>
-
     <string name="up_next">Spelas härnäst</string>
-
     <string name="update_image">Uppdatera bilden</string>
-
     <string name="updating">Uppdaterar…</string>
-
     <string name="username">Användarnamn</string>
-
     <string name="version">Version</string>
-
     <string name="vertical_flip">Vänd vertikalt</string>
-
     <string name="volume">Volym</string>
-
     <string name="web_search">Webbsökning</string>
-
     <string name="welcome">Välkommen,</string>
-
     <string name="what_do_you_want_to_share">Vad vill du dela?</string>
-
     <string name="whats_new">Vad är nytt?</string>
-
     <string name="window">Fönster</string>
     <string name="window_corner_edges">Rundade hörn</string>
-
     <string name="x_has_been_set_as_ringtone">Använd %1$s som ringsignal.</string>
     <string name="x_selected">%1$d valda</string>
-
     <string name="year">År</string>
-
     <string name="you_have_to_select_at_least_one_category">Du måste välja minst en kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
-
     <string name="your_account_data_is_only_used_for_authentication">Dina kontodata används endast för verifiering.</string>
 </resources>
