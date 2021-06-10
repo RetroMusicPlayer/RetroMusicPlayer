@@ -96,6 +96,7 @@
     <string name="cancel_current_timer">현재 타이머 취소</string>
     <string name="card">카드</string>
     <string name="card_color_style">Colored Card</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">카드</string>
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
     <string name="cascading">Cascading</string>
@@ -139,6 +140,7 @@
     <string name="donate">기부하기</string>
     <string name="donate_summary">제 작업에 대한 대가를 받을 자격이 있다고 생각하신다면 여기서 저를 위해 소액을 기부할 수 있습니다.</string>
     <string name="donation_header">사주세요!</string>
+    <string name="done">Done</string>
     <string name="drive_mode">Drive mode</string>
     <string name="empty">비어 있음</string>
     <string name="equalizer">이퀄라이저</string>
@@ -158,6 +160,7 @@
     <string name="genre">장르</string>
     <string name="genres">장르</string>
     <string name="git_hub_summary">Fork the project on GitHub</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -167,6 +170,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Grid style</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">Hinge</string>
     <string name="history">기록</string>
     <string name="home">홈</string>
@@ -174,6 +178,9 @@
     <string name="image">Image</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">%2$s 재생목록에 %1$d개의 노래를 추가했습니다.</string>
     <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
     <string name="keyboard">Keyboard</string>
@@ -220,6 +227,7 @@
     <string name="normal">일반</string>
     <string name="normal_lyrics">Normal lyrics</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b>은(는) 미디어 저장소에 없는 항목입니다.]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">스캔할 것이 없습니다.</string>
     <string name="nothing_to_see">Nothing to see</string>
     <string name="notification">알림</string>
@@ -235,6 +243,8 @@
     <string name="past_three_months">이전 3개월</string>
     <string name="peak">Peak</string>
     <string name="permission_external_storage_denied">외부 저장소 접근 권한이 거부되었습니다.</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">권한이 거부되었습니다.</string>
     <string name="personalize">개인화</string>
     <string name="personalize_settings_summary">지금 재생 중 화면과 UI 변경</string>
@@ -267,6 +277,7 @@
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
     <string name="pref_summary_album_art_on_lockscreen">현재 재생 중인 노래의 앨범 커버를 잠금 화면 배경화면으로 사용합니다.</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">알림, 탐색 등</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
@@ -291,6 +302,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">음악 재생 화면에서 공간이 있을 시 볼륨 컨트롤을 보입니다</string>
     <string name="pref_title_album_art_on_lockscreen">앨범 커버 표시</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">앱 바로가기 색상 틴트</string>
@@ -308,6 +320,7 @@
     <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">지연없이 재생하기</string>
     <string name="pref_title_general_theme">기본 테마</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">미디어 저장소 커버 무시</string>
@@ -348,6 +361,8 @@
     <string name="restoring_purchase">구매 복원 중...</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">RetroMusic Pro 구매</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -375,6 +390,7 @@
     <string name="set">Set</string>
     <string name="set_artist_image">아티스트 이미지 설정</string>
     <string name="share_app">Share app</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
     <string name="shuffle">무작위 재생</string>
     <string name="simple">심플</string>
@@ -392,6 +408,8 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>
     <string name="sort_order_z_a">Descending</string>
     <string name="speech_not_supported">음성 입력을 지원하지 않는 기기입니다</string>
@@ -428,6 +446,7 @@
     <string name="up_next">다음 곡으로 재생</string>
     <string name="update_image">이미지 갱신</string>
     <string name="updating">갱신 중...</string>
+    <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">버전</string>
     <string name="vertical_flip">Vertical flip</string>
