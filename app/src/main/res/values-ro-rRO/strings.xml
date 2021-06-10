@@ -100,6 +100,7 @@
     <string name="cancel_current_timer">Anulează cronometrul curent</string>
     <string name="card">Card</string>
     <string name="card_color_style">Colored Card</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">Card</string>
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
     <string name="cascading">Cascading</string>
@@ -143,6 +144,7 @@
     <string name="donate">Donează</string>
     <string name="donate_summary">Dacă ești de părere că merit să fiu plătit pentru munca mea,  poți să donezi aici.</string>
     <string name="donation_header">Cumpăraţi-mi o(un)</string>
+    <string name="done">Done</string>
     <string name="drive_mode">Drive mode</string>
     <string name="empty">Gol</string>
     <string name="equalizer">Egalizator</string>
@@ -162,6 +164,7 @@
     <string name="genre">Gen muzical</string>
     <string name="genres">Genuri</string>
     <string name="git_hub_summary">Fork the project on GitHub</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -171,6 +174,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Grid style</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">Hinge</string>
     <string name="history">Istoric</string>
     <string name="home">Acasă</string>
@@ -178,6 +182,9 @@
     <string name="image">Image</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">Au fost insertate %1$d cântece în playlist-ul %2$s.</string>
     <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
     <string name="keyboard">Keyboard</string>
@@ -224,6 +231,7 @@
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normal lyrics</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> nu este litsat în magazinul media.]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Nimic de scanat.</string>
     <string name="nothing_to_see">Nothing to see</string>
     <string name="notification">Notificare</string>
@@ -239,6 +247,8 @@
     <string name="past_three_months">Ultimele 3 luni</string>
     <string name="peak">Peak</string>
     <string name="permission_external_storage_denied">Accesul la stocarea externă este respinsă.</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">Permisiunile au fost respinse.</string>
     <string name="personalize">Personalizare</string>
     <string name="personalize_settings_summary">Personalizează UI si pagina de redare</string>
@@ -271,6 +281,7 @@
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
     <string name="pref_summary_album_art_on_lockscreen">Folosește coperta de album curentă ca imagine de fundal pe ecranul de blocare.</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Notificațiile, navigarea etc.</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
@@ -295,6 +306,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">Dacă aveți spațiu pe ecranul de redare, activați controalele de volum</string>
     <string name="pref_title_album_art_on_lockscreen">Afișați coperta albumului</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Comenzi rapide colorate</string>
@@ -312,6 +324,7 @@
     <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Redare \"Gapless\"</string>
     <string name="pref_title_general_theme">Temă</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignoră copertele de pe Magazinul Media</string>
@@ -352,6 +365,8 @@
     <string name="restoring_purchase">Se restabilește achiziția...</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Cumpărați RetroMusic Pro</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -379,6 +394,7 @@
     <string name="set">Set</string>
     <string name="set_artist_image">Setaţi imaginea artistului</string>
     <string name="share_app">Share app</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
     <string name="shuffle">Amestecare</string>
     <string name="simple">Simplu</string>
@@ -396,6 +412,8 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>
     <string name="sort_order_z_a">Descending</string>
     <string name="speech_not_supported">Scuze! Dispozitivul tau nu suporta comenzi vocale</string>
@@ -432,6 +450,7 @@
     <string name="up_next">Urmează</string>
     <string name="update_image">Actualizare imagine</string>
     <string name="updating">Se actualizează...</string>
+    <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Versiune</string>
     <string name="vertical_flip">Vertical flip</string>
