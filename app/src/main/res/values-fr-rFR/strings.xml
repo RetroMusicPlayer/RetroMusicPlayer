@@ -66,11 +66,11 @@
     <string name="app_share">Hey, jetez un coup d\'œil à ce super lecteur de musique : https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Aléatoire</string>
     <string name="app_shortcut_top_tracks_short">Pistes préférées</string>
-    <string name="app_widget_big_name">Retro Music – Grand</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Retro Music – Carte</string>
     <string name="app_widget_classic_name">Retro Music – Classique</string>
     <string name="app_widget_small_name">Retro Music – Petit</string>
-    <string name="app_widget_text_name">Texte</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Artiste</string>
     <string name="artists">Artistes</string>
     <string name="audio_focus_denied">Focus audio refusé.</string>
