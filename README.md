@@ -5,6 +5,7 @@
 [![Generic badge](https://img.shields.io/badge/Download-Google_Play-green.svg)](https://play.google.com/store/apps/details?id=code.name.monkey.retromusic&hl=en_IN)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/h4h13/RetroMusicPlayer/blob/master/LICENSE.txt)
 [![Twitter Follow](https://img.shields.io/twitter/follow/retromusicapp?style=social)](https://twitter.com/retromusicapp)
+[![Crowdin](https://badges.crowdin.net/retromusicplayer/localized.svg)](https://crowdin.com/project/retromusicplayer)
 
 ## 🆕 Material Design music player for Android music lovers 
 
@@ -60,7 +61,7 @@ favorite songs. No other music player has this feature.
 -  Create, edit and import playlists
 -  Playing queue with reorder
 -  User profile
--  30+ languages support
+-  30+ languages support (help translate the project: [Crowdin](https://crowdin.com/project/retromusicplayer)
 -  Browse and play your music by songs, albums, artists, playlists and
   genre
 -  Smart Auto Playlists - Recently played, most played and history
