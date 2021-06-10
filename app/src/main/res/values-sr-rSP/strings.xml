@@ -100,6 +100,7 @@
     <string name="cancel_current_timer">Otkazi trenutni tajmer</string>
     <string name="card">Card</string>
     <string name="card_color_style">Colored Card</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">Card</string>
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
     <string name="cascading">Cascading</string>
@@ -143,6 +144,7 @@
     <string name="donate">Doniraj</string>
     <string name="donate_summary">Ako mislis da zasluzujem da budem placen za ovaj posao, mozes mi poslati par dolara</string>
     <string name="donation_header">Kupi mi</string>
+    <string name="done">Done</string>
     <string name="drive_mode">Drive mode</string>
     <string name="empty">Nema pesama</string>
     <string name="equalizer">Ekvilajzer</string>
@@ -162,6 +164,7 @@
     <string name="genre">Zanr</string>
     <string name="genres">Genres</string>
     <string name="git_hub_summary">Fork the project on GitHub</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -171,6 +174,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Grid style</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">Hinge</string>
     <string name="history">Istorija reprodukovanja</string>
     <string name="home">Pocetak</string>
@@ -178,6 +182,9 @@
     <string name="image">Image</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">Ubaceno %1$d pesama u plejlistu %2$s.</string>
     <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
     <string name="keyboard">Keyboard</string>
@@ -224,6 +231,7 @@
     <string name="normal">Normalno</string>
     <string name="normal_lyrics">Normal lyrics</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> nije pronadjen u prodavnici pesama]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Nema se sta skenirati</string>
     <string name="nothing_to_see">Nothing to see</string>
     <string name="notification">Obavestenja</string>
@@ -239,6 +247,8 @@
     <string name="past_three_months">Prosla 3 meseca</string>
     <string name="peak">Peak</string>
     <string name="permission_external_storage_denied">Dozvola za pristup spoljasnjem skladistu je odbijena</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">Dozvola odbijena.</string>
     <string name="personalize">Personalize</string>
     <string name="personalize_settings_summary">Customize your now playing and UI controls</string>
@@ -271,6 +281,7 @@
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
     <string name="pref_summary_album_art_on_lockscreen">Koristi omot albuma kao pozadinu kada se reprodukuje muzika</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Obavestenja, navigacija itd.</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
@@ -295,6 +306,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">Ukoliko imas prostora na ekranu za pustanje omoguci kontroler jacine zvuka.</string>
     <string name="pref_title_album_art_on_lockscreen">Prikazi omot albuma</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Obojene ikone aplikacije</string>
@@ -312,6 +324,7 @@
     <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Neuznemiravano reprodukovanje</string>
     <string name="pref_title_general_theme">Opsta tema</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignorisi omote sa prodavnice</string>
@@ -352,6 +365,8 @@
     <string name="restoring_purchase">Restoring purchase…</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -379,6 +394,7 @@
     <string name="set">Set</string>
     <string name="set_artist_image">Postavi sliku izvodjaca</string>
     <string name="share_app">Share app</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
     <string name="shuffle">Nasumicno pusti</string>
     <string name="simple">Jednostavan</string>
@@ -396,6 +412,8 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>
     <string name="sort_order_z_a">Descending</string>
     <string name="speech_not_supported">Izvini! Tvoj uredjaj ne podrzava unos govorom</string>
@@ -432,6 +450,7 @@
     <string name="up_next">Sledece</string>
     <string name="update_image">Azuriraj sliku</string>
     <string name="updating">Azurira se...</string>
+    <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Verzija</string>
     <string name="vertical_flip">Vertical flip</string>
