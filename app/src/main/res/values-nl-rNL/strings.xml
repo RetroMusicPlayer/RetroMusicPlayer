@@ -98,6 +98,7 @@
     <string name="cancel_current_timer">Annuleer huidige timer</string>
     <string name="card">Kaart</string>
     <string name="card_color_style">Colored Card</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">Kaart</string>
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
     <string name="cascading">Cascading</string>
@@ -141,6 +142,7 @@
     <string name="donate">Doneren</string>
     <string name="donate_summary">Als je vindt dat ik het verdien om geld te krijgen voor mijn werk, dan kun je hier een paar euro\'s doneren.</string>
     <string name="donation_header">Koop mij een</string>
+    <string name="done">Done</string>
     <string name="drive_mode">Drive mode</string>
     <string name="empty">Leeg</string>
     <string name="equalizer">Equalizer</string>
@@ -160,6 +162,7 @@
     <string name="genre">Genre</string>
     <string name="genres">Genres</string>
     <string name="git_hub_summary">Fork the project on GitHub</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -169,6 +172,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Grid style</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">Hinge</string>
     <string name="history">Geschiedenis</string>
     <string name="home">Start</string>
@@ -176,6 +180,9 @@
     <string name="image">Image</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">%1$d liedjes toegevoegd aan afspeellijst %2$s.</string>
     <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
     <string name="keyboard">Keyboard</string>
@@ -222,6 +229,7 @@
     <string name="normal">Normaal</string>
     <string name="normal_lyrics">Normal lyrics</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> staat niet in de media store]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Niets om te scannen</string>
     <string name="nothing_to_see">Nothing to see</string>
     <string name="notification">Notificatie</string>
@@ -237,6 +245,8 @@
     <string name="past_three_months">Laatste 3 maanden</string>
     <string name="peak">Peak</string>
     <string name="permission_external_storage_denied">Permissie voor toegang tot extern opslag is afgewezen</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">Permissies afgewezen</string>
     <string name="personalize">Personalize</string>
     <string name="personalize_settings_summary">Customize your now playing and UI controls</string>
@@ -269,6 +279,7 @@
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
     <string name="pref_summary_album_art_on_lockscreen">Gebruik de huidige cover als vergrendelscherm achtergrond.</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Notificaties, bediening etc.</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
@@ -293,6 +304,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">Als er ruimte is in het nu afspelen scherm, zet volume knoppen aan</string>
     <string name="pref_title_album_art_on_lockscreen">Laat album cover zien</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Gekleurde app snelkoppelingen</string>
@@ -310,6 +322,7 @@
     <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Afspelen zonder pauzes</string>
     <string name="pref_title_general_theme">Basis thema</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Negeer media store covers</string>
@@ -350,6 +363,8 @@
     <string name="restoring_purchase">Restoring purchase…</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -377,6 +392,7 @@
     <string name="set">Set</string>
     <string name="set_artist_image">Stel artiest afbeelding in</string>
     <string name="share_app">Share app</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
     <string name="shuffle">Shuffle</string>
     <string name="simple">Simpel</string>
@@ -394,6 +410,8 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>
     <string name="sort_order_z_a">Descending</string>
     <string name="speech_not_supported">Sorry! Je apparaat ondersteunt geen spraak invoer</string>
@@ -430,6 +448,7 @@
     <string name="up_next">Volgende</string>
     <string name="update_image">Update afbeelding</string>
     <string name="updating">Bijwerken...</string>
+    <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Versie</string>
     <string name="vertical_flip">Vertical flip</string>
