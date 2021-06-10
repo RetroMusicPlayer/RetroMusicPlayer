@@ -64,11 +64,11 @@
     <string name="app_share">ဟေ့ အရမ်းမိုက်တဲ့ဒီ Music Player ကိုတစ်ချက်ကြည့်ကြည့်! https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">ထိပ်ဆုံးသီချင်းများ</string>
-    <string name="app_widget_big_name">ပုံအပြည့်</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">ကတ်</string>
     <string name="app_widget_classic_name">ရိုးရိုး</string>
     <string name="app_widget_small_name">အသေး</string>
-    <string name="app_widget_text_name">စာပါဝင်မှုနည်း</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">အဆိုတော်</string>
     <string name="artists">အဆိုတော်များ</string>
     <string name="audio_focus_denied">အသံအာရုံစိုက်ခြင်းအား ပယ်ဖျက်ခဲ့သည်</string>
