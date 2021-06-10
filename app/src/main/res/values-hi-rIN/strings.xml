@@ -66,7 +66,7 @@
     <string name="app_share">इस बढ़िया म्यूजिक प्लेयर को यहां देखें:https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">शफ़ल</string>
     <string name="app_shortcut_top_tracks_short">टॉप गीत</string>
-    <string name="app_widget_big_name">रेट्रो म्यूजिक - बिग</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">रेट्रो म्यूजिक - कार्ड</string>
     <string name="app_widget_classic_name">रेट्रो म्यूजिक - क्लासिक</string>
     <string name="app_widget_small_name">Small</string>
