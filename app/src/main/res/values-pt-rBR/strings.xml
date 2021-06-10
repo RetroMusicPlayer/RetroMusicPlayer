@@ -66,11 +66,11 @@
     <string name="app_share">Ei, confira este reprodutor de música legal em: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Aleatório</string>
     <string name="app_shortcut_top_tracks_short">Músicas favoritas</string>
-    <string name="app_widget_big_name">Música Retrô-Grande</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Música Retrô-Cartão</string>
     <string name="app_widget_classic_name">Música Retrô-Clássico</string>
     <string name="app_widget_small_name">Música Retrô-Pequeno</string>
-    <string name="app_widget_text_name">Música Retrô-Texto</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Artista</string>
     <string name="artists">Artistas</string>
     <string name="audio_focus_denied">Foco de áudio negado</string>
