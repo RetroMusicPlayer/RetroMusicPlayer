@@ -98,6 +98,7 @@
     <string name="cancel_current_timer">İptal et</string>
     <string name="card">Kart</string>
     <string name="card_color_style">Renkli Kart</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">Kart</string>
     <string name="carousal_effect_on_now_playing_screen">Şimdi oynatılıyor ekranında atlıkarınca efekti</string>
     <string name="cascading">Basamaklı</string>
@@ -141,6 +142,7 @@
     <string name="donate">Bağış yapın</string>
     <string name="donate_summary">Çalışmalarımın karşılığı olarak para hakettiğimi düşünüyorsanız bana biraz bahşiş bırakabilirsiniz</string>
     <string name="donation_header">Bağışlayacağınız tutar:</string>
+    <string name="done">Done</string>
     <string name="drive_mode">Sürüş modu</string>
     <string name="empty">Boş</string>
     <string name="equalizer">Ekolayzır</string>
@@ -160,6 +162,7 @@
     <string name="genre">Janr</string>
     <string name="genres">Janrlar</string>
     <string name="git_hub_summary">Projeyi GitHub\'da çatalla</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -169,6 +172,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Izgara şekli</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">Menteşe</string>
     <string name="history">Geçmiş</string>
     <string name="home">Ana sayfa</string>
@@ -176,6 +180,9 @@
     <string name="image">Görüntü</string>
     <string name="image_gradient">Gradyan görüntü</string>
     <string name="image_settings_summary">Şarkıcı resimlerinin indirme ayarlarını değiştirin</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">%2$s listesine %1$d parçalar eklendi.</string>
     <string name="instagram_page_summary">Instagram\'da Retro Müzik temanızı paylaşın</string>
     <string name="keyboard">Klavye</string>
@@ -222,6 +229,7 @@
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normal şarkı sözleri</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> medya deposunda listelenmiyor.]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Aranacak herhangi bir şey yok.</string>
     <string name="nothing_to_see">Hiçbir şey yok</string>
     <string name="notification">Bildirim</string>
@@ -237,6 +245,8 @@
     <string name="past_three_months">Son 3 ay</string>
     <string name="peak">Zirve</string>
     <string name="permission_external_storage_denied">Harici depolama izni reddedildi.</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">İzinler reddedildi.</string>
     <string name="personalize">Kişiselleştirme</string>
     <string name="personalize_settings_summary">Şimdi çalıyor ve kullanıcı arayüzü kontrollerinizi özelleştirin</string>
@@ -269,6 +279,7 @@
     <string name="pref_keep_screen_on_title">Ekranı açık tut</string>
     <string name="pref_language_name">Dil seçiniz</string>
     <string name="pref_summary_album_art_on_lockscreen">Çalmakta olan şarkı albüm kapağını kilit ekranı duvar kağıdı olarak kullanın</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Sistem sesi çalındığında veya bir bildirim alındığında sesi kısın</string>
     <string name="pref_summary_blacklist">Kara listedeki klasörlerin içeriği kütüphanenizden gizlenir.</string>
     <string name="pref_summary_bluetooth_playback">Bluetooth cihazına bağlanır bağlanmaz çalmaya başla</string>
@@ -293,6 +304,7 @@
     <string name="pref_summary_toggle_shuffle">Yeni bir şarkı listesi çalınırken karıştırma modu kapanacak</string>
     <string name="pref_summary_toggle_volume">Eğer yeterli alan varsa ses kontrollerini şimdi oynatılıyor ekranında göster</string>
     <string name="pref_title_album_art_on_lockscreen">Albüm kapağını göster</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Albüm kapağı teması</string>
     <string name="pref_title_album_cover_transform">Albüm kapağını atla</string>
     <string name="pref_title_app_shortcuts">Renkli uygulama kısayolları</string>
@@ -310,6 +322,7 @@
     <string name="pref_title_extra_song_info">Şarkı bilgisi</string>
     <string name="pref_title_gapless_playback">Boşluksuz playback</string>
     <string name="pref_title_general_theme">Uygulama teması</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Ana sayfa sanatçı ızgarası</string>
     <string name="pref_title_home_banner">Ana sayfa afişi</string>
     <string name="pref_title_ignore_media_store_artwork">Media Store kapaklarını yoksay</string>
@@ -350,6 +363,8 @@
     <string name="restoring_purchase">Satın alım geri yükleniyor ...</string>
     <string name="retro_music_player">Retro Müzik Çalar</string>
     <string name="retro_music_pro">Retro Müzik Pro</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">Dosya silme başarısız oldu: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">SAF url\'si alınamıyor.</string>
@@ -377,6 +392,7 @@
     <string name="set">Ayarla</string>
     <string name="set_artist_image">Sanatçı resmini ayarla</string>
     <string name="share_app">Uygulamayı paylaş</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Hikayende paylaş</string>
     <string name="shuffle">Karıştır</string>
     <string name="simple">Basit</string>
@@ -394,6 +410,8 @@
     <string name="sort_order_composer">Besteci</string>
     <string name="sort_order_date">Tarih eklendi</string>
     <string name="sort_order_date_modified">Zaman ayarlandı</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Yıl</string>
     <string name="sort_order_z_a">Azalan</string>
     <string name="speech_not_supported">Üzgünüz, ancak cihazın konuşma girişini desteklemiyor.</string>
@@ -430,6 +448,7 @@
     <string name="up_next">Bir sonraki</string>
     <string name="update_image">Resmi güncelle</string>
     <string name="updating">Güncelleniyor ...</string>
+    <string name="user_name">User Name</string>
     <string name="username">Kullanıcı Adı</string>
     <string name="version">Sürüm</string>
     <string name="vertical_flip">Dikey çevir</string>
