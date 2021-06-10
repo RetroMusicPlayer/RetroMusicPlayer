@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="about_album_label">About %s</string>
     <string name="about_settings_summary">အဖွဲ့နှင့် လူမှုကွန်ယက်လင့်ခ်များ</string>
@@ -53,22 +53,24 @@
     <string name="added_x_titles_to_playing_queue">နားထောင်နေသည့်စာရင်းထဲသို့ %1$d ပုဒ်ပေါင်းထည့်ခဲ့သည်</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
+        <item quantity="one">သီချင်း</item>
         <item quantity="other">သီချင်းများ</item>
     </plurals>
     <string name="album_artist">Album အားသီဆိုသူ</string>
     <string name="albums">Albums</string>
     <plurals name="albums">
+        <item quantity="one">Album</item>
         <item quantity="other">Albums</item>
     </plurals>
     <string name="always">Always</string>
     <string name="app_share">ဟေ့ အရမ်းမိုက်တဲ့ဒီ Music Player ကိုတစ်ချက်ကြည့်ကြည့်! https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">ထိပ်ဆုံးသီချင်းများ</string>
-    <string name="app_widget_big_name">Big</string>
+    <string name="app_widget_big_name">ပုံအပြည့်</string>
     <string name="app_widget_card_name">ကတ်</string>
     <string name="app_widget_classic_name">ရိုးရိုး</string>
     <string name="app_widget_small_name">အသေး</string>
-    <string name="app_widget_text_name">Text</string>
+    <string name="app_widget_text_name">စာပါဝင်မှုနည်း</string>
     <string name="artist">အဆိုတော်</string>
     <string name="artists">အဆိုတော်များ</string>
     <string name="audio_focus_denied">အသံအာရုံစိုက်ခြင်းအား ပယ်ဖျက်ခဲ့သည်</string>
@@ -182,6 +184,7 @@
     <string name="import_playlist">Import playlist</string>
     <string name="import_playlist_message">Android မီဒီယာစတိုးမှ Playlist များကိုသီချင်းများနှင့်အတူ import လုပ်သွားမည်ဖြစ်ပြီး ရှိပြီးသား Playlist ဖြစ်ပါကသီချင်းများကိုထည့်ပေါင်းသွားပါမည်။</string>
     <string name="inserted_x_songs_into_playlist_x">Playlist %2$s သို့သီချင်း %1$d ပုဒ်ထည့်ပြီးပါပြီ</string>
+    <string name="instagram_page" translatable="false">Instagram</string>
     <string name="instagram_page_summary">သင့်ရဲ့ Retro Music setup ကို Instagram တွင်ပြသလိုက်ပါ</string>
     <string name="keyboard">ကီးဘုတ်</string>
     <string name="label_bit_rate">Bitrate</string>
@@ -264,7 +267,7 @@
     <string name="pref_header_advanced">ပိုမိုဆန်းသစ်သော</string>
     <string name="pref_header_album">Album စတိုင်</string>
     <string name="pref_header_audio">အသံပိုင်းဆိုင်ရာ</string>
-    <string name="pref_header_blacklist">လစ်လျူရှုမည့်စာရင်း</string>
+    <string name="pref_header_blacklist">Blacklist</string>
     <string name="pref_header_controls">ထိန်းချုပ်မှုဆိုင်ရာ</string>
     <string name="pref_header_general">Theme</string>
     <string name="pref_header_images">Images</string>
@@ -292,7 +295,7 @@
     <string name="pref_summary_extra_controls">Mini player တွင် ထိန်းချုပ်ခလုတ်အပိုများထပ်ပေါင်းမည်</string>
     <string name="pref_summary_extra_song_info">သီချင်းဖိုင်၏အသေးစိတ်အချက်အလက်များ ပြသမည်၊ ဥပမာ - ဖိုင်အမျိုးအစား၊ bitrate နှင့် ကြိမ်နှုန်း</string>
     <string name="pref_summary_gapless_playback">"အချို့ device များတွင် playback ပြဿနာများဖြစ်ပေါ်နိုင်သည်"</string>
-    <string name="pref_summary_home_banner">Home banner အား ပြသခြင်း၊ ဖျောက်ထားခြင်း</string>
+    <string name="pref_summary_home_banner">Home banner အား ပြသခြင်း၊ ဖျောက်ထားခြင်း</string> 
     <string name="pref_summary_ignore_media_store_artwork">Album cover အရည်အသွေးပိုမိုကောင်းမွန်လာနိုင်သော်လည်း Loading time ပိုကြာနိုင်သည်။ အရည်အသွေးနိမ့်သောပုံများနှင့်အဆင်မပြေမှသာလျှင် ဤခလုတ်ကိုဖွင့်ပါ။</string>
     <string name="pref_summary_library_categories">Library category များ ဖော်ခြင်း၊ ဖျောက်ခြင်းနှင့် အထားအသိုများ ချိန်ညှိမည်</string>
     <string name="pref_summary_lock_screen">Retro Music ၏ ပြင်ဆင်ထားသော Lockscreen controls များကိုသုံးမည်</string>
@@ -308,7 +311,7 @@
     <string name="pref_title_app_shortcuts">Colored App shortcuts</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_auto_download_artist_images">အဆိုတော်ဓာတ်ပုံများကို အလိုအလျောက်ဒေါင်းလုဒ်ဆွဲခြင်း</string>
-    <string name="pref_title_blacklist">လစ်လျူရှုမည့်စာရင်း</string>
+    <string name="pref_title_blacklist">Blacklist</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Album cover အဝါး</string>
     <string name="pref_title_classic_notification">Notification ဒီဇိုင်းအဟောင်း</string>
