@@ -97,6 +97,7 @@
     <string name="cancel_current_timer">キャンセル</string>
     <string name="card">カード</string>
     <string name="card_color_style">色付きのカード</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">カード</string>
     <string name="carousal_effect_on_now_playing_screen">再生中画面でのカルーセル効果</string>
     <string name="cascading">重ねて表示</string>
@@ -140,6 +141,7 @@
     <string name="donate">寄付する</string>
     <string name="donate_summary">私が自分の仕事に払う価値があると思うなら、あなたはここにお金を残すことができます</string>
     <string name="donation_header">俺を購入：</string>
+    <string name="done">Done</string>
     <string name="drive_mode">運転モード</string>
     <string name="empty">空の</string>
     <string name="equalizer">イコライザー</string>
@@ -159,6 +161,7 @@
     <string name="genre">ジャンル</string>
     <string name="genres">ジャンル</string>
     <string name="git_hub_summary">GitHubでプロジェクトにフォークする</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">１</string>
     <string name="grid_size_2">２</string>
     <string name="grid_size_3">３</string>
@@ -168,6 +171,7 @@
     <string name="grid_size_7">７</string>
     <string name="grid_size_8">８</string>
     <string name="grid_style_label">表示スタイル</string>
+    <string name="help_summary">Need more help?</string>
     <string name="hinge">ヒンジ</string>
     <string name="history">履歴</string>
     <string name="home">ホーム</string>
@@ -175,6 +179,9 @@
     <string name="image">画像</string>
     <string name="image_gradient">傾斜イメージ</string>
     <string name="image_settings_summary">アーティスト画像のダウンロード設定を変更する</string>
+    <string name="import_label">Import</string>
+    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">プレイリスト %2$s に %1$d 曲を追加しました</string>
     <string name="instagram_page_summary">あなたのRetro Music設定を共有してInstagramにショーケースしましょう</string>
     <string name="keyboard">キーボードを表示</string>
@@ -221,6 +228,7 @@
     <string name="normal">通常</string>
     <string name="normal_lyrics">通常の歌詞</string>
     <string name="not_listed_in_media_store"><![CDATA[メディアストアに <b>%s</b> がリストされたされていません。]]></string>
+    <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">スキャン対象がありません</string>
     <string name="nothing_to_see">Nothing to see</string>
     <string name="notification">通知</string>
@@ -236,6 +244,8 @@
     <string name="past_three_months">過去3ヶ月</string>
     <string name="peak">ピーク</string>
     <string name="permission_external_storage_denied">外部ストレージへのアクセスが拒否されました</string>
+    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
+    <string name="permission_title">Storage Access</string>
     <string name="permissions_denied">許可が拒否されました</string>
     <string name="personalize">個人設定</string>
     <string name="personalize_settings_summary">再生中のUI画面をカスタマイズ</string>
@@ -268,6 +278,7 @@
     <string name="pref_keep_screen_on_title">画面をオンのままにする</string>
     <string name="pref_language_name">言語を選択</string>
     <string name="pref_summary_album_art_on_lockscreen">再生中のジャケットをロック画面の壁紙に適用する</string>
+    <string name="pref_summary_album_artists_only">アーティストカテゴリ内にアルバムのアーティストを表示する</string>
     <string name="pref_summary_audio_ducking">システムでサウンドが再生されたとき、または通知が受信されたときに一時的に音量を下げる</string>
     <string name="pref_summary_blacklist">ブラックリストに登録されたフォルダの内容はコレクションには表示されません。</string>
     <string name="pref_summary_bluetooth_playback">端末にBluetoothデバイスが接続されたとき、再生を開始する</string>
@@ -292,6 +303,7 @@
     <string name="pref_summary_toggle_shuffle">新しいリストの楽曲を再生する時にシャッフルは自動的にオフになります</string>
     <string name="pref_summary_toggle_volume">再生画面に十分なスペースがある場合に音量コントロールを追加する</string>
     <string name="pref_title_album_art_on_lockscreen">アルバムジャケットを表示</string>
+    <string name="pref_title_album_artists_only">アルバムのアーティストを表示</string>
     <string name="pref_title_album_cover_style">アルバムカバーのテーマ</string>
     <string name="pref_title_album_cover_transform">アルバムジャケットをスキップ</string>
     <string name="pref_title_app_shortcuts">色のついたアプリショートカット</string>
@@ -309,6 +321,7 @@
     <string name="pref_title_extra_song_info">曲の情報を表示</string>
     <string name="pref_title_gapless_playback">ギャップレス再生</string>
     <string name="pref_title_general_theme">アプリのテーマ</string>
+    <string name="pref_title_home_album_grid_style">アルバムの表示</string>
     <string name="pref_title_home_artist_grid_style">アーティストの表示</string>
     <string name="pref_title_home_banner">ホーム画面</string>
     <string name="pref_title_ignore_media_store_artwork">Media Store のカバーを無視する</string>
@@ -349,6 +362,8 @@
     <string name="restoring_purchase">購入を復元しています...</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Ringtone</string>
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -376,6 +391,7 @@
     <string name="set">決定</string>
     <string name="set_artist_image">アーティスト画像を設定</string>
     <string name="share_app">アプリを共有する</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
     <string name="shuffle">シャッフル</string>
     <string name="simple">シンプル</string>
@@ -393,6 +409,8 @@
     <string name="sort_order_composer">作曲家</string>
     <string name="sort_order_date">日付</string>
     <string name="sort_order_date_modified">最後の編集日</string>
+    <string name="sort_order_num_songs">曲数順（昇順）</string>
+    <string name="sort_order_num_songs_desc">曲数順（降順）</string>
     <string name="sort_order_year">年</string>
     <string name="sort_order_z_a">降順</string>
     <string name="speech_not_supported">ごめんなさい! このデバイスは音声入力に対応しておりません</string>
@@ -429,6 +447,7 @@
     <string name="up_next">次</string>
     <string name="update_image">画像を更新</string>
     <string name="updating">更新中...</string>
+    <string name="user_name">User Name</string>
     <string name="username">ユーザー名</string>
     <string name="version">バージョン</string>
     <string name="vertical_flip">垂直方向に反転</string>
