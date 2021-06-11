@@ -185,6 +185,7 @@
     <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">Inserted %1$d songs into the playlist %2$s.</string>
     <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
+    <string name="instagram_page" translatable="false">Instagram</string>
     <string name="keyboard">Keyboard</string>
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Format</string>
