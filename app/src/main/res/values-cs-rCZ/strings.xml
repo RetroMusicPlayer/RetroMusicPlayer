@@ -59,7 +59,7 @@
         <item quantity="other">Songs</item>
     </plurals>
     <string name="album_artist">Umělec alba</string>
-    <string name="albums">Albumy</string>
+    <string name="albums">Alba</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
         <item quantity="few">Albums</item>
