@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
-    <string name="about_settings_summary">Team, social links</string>
+    <string name="about_album_label">درباره‌ی%s</string>
+    <string name="about_settings_summary">تیم، پیوندهای اجتماعی</string>
     <string name="accent_color">Accent color</string>
     <string name="accent_color_desc">The theme accent color, defaults to purple</string>
-    <string name="action_about">About</string>
+    <string name="action_about">درباره</string>
     <string name="action_add_to_favorites">Add to favorites</string>
     <string name="action_add_to_playing_queue">Add to playing queue</string>
     <string name="action_add_to_playlist">Add to playlist</string>
     <string name="action_clear_playing_queue">Clear playing queue</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
-    <string name="action_delete">Delete</string>
-    <string name="action_delete_from_device">Delete from device</string>
-    <string name="action_details">Details</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_delete_from_device">حذف از دستگاه</string>
+    <string name="action_details">جزئيات</string>
     <string name="action_go_to_album">Go to album</string>
     <string name="action_go_to_artist">Go to artist</string>
     <string name="action_go_to_genre">Go to genre</string>
