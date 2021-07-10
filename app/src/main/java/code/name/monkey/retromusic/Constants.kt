@@ -29,7 +29,7 @@ object Constants {
     const val APP_INSTAGRAM_LINK = "https://www.instagram.com/retromusicapp/"
     const val APP_TELEGRAM_LINK = "https://t.me/retromusicapp/"
     const val APP_TWITTER_LINK = "https://twitter.com/retromusicapp"
-    const val FAQ_LINK = "https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/dev/FAQ.md"
+    const val FAQ_LINK = "https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/FAQ.md"
     const val PINTEREST = "https://in.pinterest.com/retromusicapp/"
     const val AUDIO_SCROBBLER_URL = "https://ws.audioscrobbler.com/2.0/"
 

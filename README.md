@@ -3,7 +3,7 @@
 [![Generic badge](https://img.shields.io/badge/Platform-Android-green.svg)](https://github.com/RetroMusicPlayer/RetroMusicPlayer)
 [![Generic badge](https://img.shields.io/badge/minSdkVersion-21-green.svg)](https://github.com/RetroMusicPlayer/RetroMusicPlayer)
 [![Generic badge](https://img.shields.io/badge/Download-Google_Play-green.svg)](https://play.google.com/store/apps/details?id=code.name.monkey.retromusic&hl=en_IN)
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/dev/LICENSE.md)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/LICENSE.md)
 [![Twitter Follow](https://img.shields.io/twitter/follow/retromusicapp?style=social)](https://twitter.com/retromusicapp)
 [![Crowdin](https://badges.crowdin.net/retromusicplayer/localized.svg)](https://crowdin.com/project/retromusicplayer)
 
@@ -71,7 +71,7 @@ favorite songs. No other music player has this feature.
 We are trying our best to bring you the best user experience. The app is regularly being updated for bug fixes and new features.
 
 ### ❓ FAQ
-Please read the FAQ [here](https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/dev/FAQ.md)
+Please read the FAQ [here](https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/FAQ.md)
 
 In any case, you find or notice any bugs please report them by
 sending us an [e-mail](mailto:retromusicapp@gmail.com). We will fix bugs as soon as
