@@ -1,7 +1,7 @@
 # Contributing
 
 ## Using the issue tracker
-The [issue tracker](https://github.com/h4h13/RetroMusicPlayer/issues) is the preferred channel for bug reports, feature requests and submitting pull requests, but please follow these rules:
+The [issue tracker](https://github.com/RetroMusicPlayer/RetroMusicPlayer/issues) is the preferred channel for bug reports, feature requests and submitting pull requests, but please follow these rules:
 
 * Please **do not** derail or troll issues. Keep the discussion on topic and respect the opinions of others.
 
@@ -30,6 +30,6 @@ Feature requests are welcome, please make sure to be as detailed as possible and
 **Please ask first** before embarking on any significant pull request (e.g. implementing features, refactoring code), otherwise you risk spending a lot of time working on something that developers might not want to merge into the project. To avoid that, you can join the official [Telegram group](https://t.me/retromusicapp) or open an issue.
 
 ## License
-By contributing your code, you agree to license your contribution under the [GNU General Public License](https://github.com/h4h13/RetroMusicPlayer/blob/dev/LICENSE.md). 
+By contributing your code, you agree to license your contribution under the [GNU General Public License](https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/LICENSE.md). 
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.

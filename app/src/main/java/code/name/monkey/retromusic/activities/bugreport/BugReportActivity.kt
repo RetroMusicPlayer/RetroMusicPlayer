@@ -230,7 +230,7 @@ open class BugReportActivity : AbsThemeActivity() {
         onSaveExtraInfo()
 
         val report = Report(bugTitle, bugDescription, deviceInfo, extraInfo)
-        val target = GithubTarget("h4h13", "RetroMusicPlayer")
+        val target = GithubTarget("RetroMusicPlayer", "RetroMusicPlayer")
 
         ReportIssueAsyncTask.report(this, report, target, login)
     }
@@ -337,6 +337,6 @@ open class BugReportActivity : AbsThemeActivity() {
 
         private const val STATUS_BAD_CREDENTIALS = 401
         private const val STATUS_ISSUES_NOT_ENABLED = 410
-        private const val ISSUE_TRACKER_LINK = "https://github.com/h4h13/RetroMusicPlayer"
+        private const val ISSUE_TRACKER_LINK = "https://github.com/RetroMusicPlayer/RetroMusicPlayer"
     }
 }
