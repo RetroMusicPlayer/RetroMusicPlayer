@@ -8,11 +8,13 @@
     <string name="action_add_to_favorites">Ajouter aux favoris</string>
     <string name="action_add_to_playing_queue">Ajouter à la file d\'attente</string>
     <string name="action_add_to_playlist">Ajouter à la playlist</string>
+    <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">Vider la file d\'attente</string>
     <string name="action_cycle_repeat">Mode de répétition du cycle</string>
     <string name="action_delete">Supprimer</string>
     <string name="action_delete_from_device">Supprimer de l\'appareil</string>
     <string name="action_details">Détails</string>
+    <string name="action_edit">Edit</string>
     <string name="action_go_to_album">Aller à l\'album</string>
     <string name="action_go_to_artist">Aller à l\'artiste</string>
     <string name="action_go_to_genre">Aller au genre</string>
@@ -49,6 +51,7 @@
     <string name="adaptive">Adaptatif</string>
     <string name="add_action">Ajouter</string>
     <string name="add_playlist_title">"Ajouter à playlist"</string>
+    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
     <string name="added_title_to_playing_queue">"1 titre à été ajoutée à la file d'attente."</string>
     <string name="added_x_titles_to_playing_queue">%1$d titres ont été ajoutés à la file d\'attente.</string>
     <string name="album">Album</string>
@@ -56,7 +59,7 @@
         <item quantity="one">Song</item>
         <item quantity="other">Songs</item>
     </plurals>
-    <string name="album_artist">Artiste de l\'album</string>
+    <string name="album_artist">Album Artist</string>
     <string name="albums">Albums</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
@@ -66,13 +69,14 @@
     <string name="app_share">Hey, jetez un coup d\'œil à ce super lecteur de musique : https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Aléatoire</string>
     <string name="app_shortcut_top_tracks_short">Pistes préférées</string>
-    <string name="app_widget_big_name">Big</string>
+    <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Retro Music – Carte</string>
     <string name="app_widget_classic_name">Retro Music – Classique</string>
     <string name="app_widget_small_name">Retro Music – Petit</string>
-    <string name="app_widget_text_name">Text</string>
+    <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artiste</string>
     <string name="artists">Artistes</string>
+    <string name="audio_fade_duration">Audio Fade Duration</string>
     <string name="audio_focus_denied">Focus audio refusé.</string>
     <string name="audio_settings_summary">Changer les paramètres audio et ajuster l\'égaliseur</string>
     <string name="auto">Auto</string>
@@ -103,7 +107,7 @@
     <string name="carousal_effect_on_now_playing_screen">Effet carousel sur l\'écran de lecture en cours</string>
     <string name="cascading">En cascade</string>
     <string name="changelog">Liste des changements</string>
-    <string name="changelog_summary">Liste des changements maintenu sur la canal Telegram</string>
+    <string name="changelog_summary">Check out What\'s New</string>
     <string name="circle">Circle</string>
     <string name="circular">Circulaire</string>
     <string name="classic">Classique</string>
@@ -132,6 +136,7 @@
     <string name="delete_x_playlists"><![CDATA[Supprimer les listes <b>%1$d</b> ?]]></string>
     <string name="delete_x_songs"><![CDATA[Supprimer les morceaux <b>%1$d</b> ?]]></string>
     <string name="deleted_x_songs">%1$d à été supprimé.</string>
+    <string name="deleting_songs">Deleting Songs</string>
     <string name="depth">Profondeur</string>
     <string name="description">Description</string>
     <string name="device_info">Infos sur l\'appareil</string>
@@ -144,6 +149,9 @@
     <string name="donation_header">Achetez moi :</string>
     <string name="done">Done</string>
     <string name="drive_mode">Drive mode</string>
+    <string name="edit_fab">Edit Button</string>
+    <string name="edit_normal_lyrics">Edit Lyrics</string>
+    <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Vide</string>
     <string name="equalizer">Égaliseur</string>
     <string name="faq">FAQ</string>
@@ -243,6 +251,8 @@
     <string name="others">Autre</string>
     <string name="password">Mot de passe</string>
     <string name="past_three_months">3 derniers mois</string>
+    <string name="paste_lyrics_here">Paste Lyrics Here</string>
+    <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
     <string name="peak">Peak</string>
     <string name="permission_external_storage_denied">La permission pour accéder au stockage externe a été refusée.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
@@ -281,6 +291,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Utiliser la couverture d\'album de la piste en cours de lecture comme fond sur l\'écran de verrouillage</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Baisser le volume quand un son système ou une notification est reçue</string>
+    <string name="pref_summary_audio_fade">Fade Audio when Song is Paused or Played</string>
     <string name="pref_summary_blacklist">Le contenu des dossiers en liste noire est masqué de votre bibliothèque.</string>
     <string name="pref_summary_bluetooth_playback">Commencez à jouer dès que vous êtes connecté à un appareil Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Flouter la couverture de l\'album sur l\'écran de verrouillage. Cela peut poser des problèmes avec des applications et widgets tiers.</string>
@@ -299,6 +310,8 @@
     <string name="pref_summary_library_categories">Configurer la visibilité et l\'ordre des catégories de la librairie.</string>
     <string name="pref_summary_lock_screen">Utiliser les contrôles personnalisés de Retro Music sur l\'écran de verrouillage</string>
     <string name="pref_summary_open_source_licences">Détails des licences pour les logiciels open source</string>
+    <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Mode immersif</string>
     <string name="pref_summary_toggle_headset">Commencer immédiatement la lecture lors du branchement d\'un casque</string>
     <string name="pref_summary_toggle_shuffle">Le mode aléatoire se désactivera lors de la lecture d\'une nouvelle liste de morceaux</string>
@@ -309,6 +322,7 @@
     <string name="pref_title_album_cover_transform">Style du balayage de l\'image d\'album</string>
     <string name="pref_title_app_shortcuts">Raccourcis d\'application colorés</string>
     <string name="pref_title_audio_ducking">Réduire le volume à la perte de focus</string>
+    <string name="pref_title_audio_fade">Fade Audio</string>
     <string name="pref_title_auto_download_artist_images">Télécharger automatiquement les photos des artistes</string>
     <string name="pref_title_blacklist">Liste noire</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
@@ -330,6 +344,8 @@
     <string name="pref_title_lock_screen">Contrôles plein-écran</string>
     <string name="pref_title_now_playing_screen_appearance">Thème d\'écran de lecture</string>
     <string name="pref_title_open_source_licences">Licences open source</string>
+    <string name="pref_title_show_lyrics">Show Lyrics</string>
+    <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Mode Titres onglets</string>
     <string name="pref_title_toggle_carousel_effect">Effet carousel</string>
     <string name="pref_title_toggle_full_screen">App en plein écran</string>
@@ -364,7 +380,7 @@
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
-    <string name="ringtone_title">Ringtone</string>
+    <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -452,8 +468,11 @@
     <string name="username">Nom d\'utilisateur</string>
     <string name="version">version</string>
     <string name="vertical_flip">Balayage vertical</string>
+    <string name="view_on_telegram">View on Telegram</string>
     <string name="volume">Volume</string>
     <string name="web_search">Recherche internet</string>
+    <string name="website">Website</string>
+    <string name="website_summary">Check out our Website</string>
     <string name="welcome">Bienvenue,</string>
     <string name="what_do_you_want_to_share">Que souhaitez-vous partager ?</string>
     <string name="whats_new">Quoi de neuf</string>
@@ -465,4 +484,6 @@
     <string name="you_have_to_select_at_least_one_category">Vous devez sélectionner au moins une catégorie.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
+    <string name="show_album_artists">Show Album Artists</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
 </resources>
