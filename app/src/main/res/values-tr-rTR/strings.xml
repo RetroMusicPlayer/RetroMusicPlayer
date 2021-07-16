@@ -8,11 +8,13 @@
     <string name="action_add_to_favorites">Favorilere ekle</string>
     <string name="action_add_to_playing_queue">Oynatma kuyruğuna ekle</string>
     <string name="action_add_to_playlist">Oynatma listesine ekle</string>
+    <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">Oynatma kuyruğunu temizle</string>
     <string name="action_cycle_repeat">Tekrarlı oynatma modu</string>
     <string name="action_delete">Sil</string>
     <string name="action_delete_from_device">Cihazdan sil</string>
     <string name="action_details">Ayrıntılar</string>
+    <string name="action_edit">Edit</string>
     <string name="action_go_to_album">Albüme git</string>
     <string name="action_go_to_artist">Sanatçıya git</string>
     <string name="action_go_to_genre">Şarkı türüne git</string>
@@ -49,6 +51,7 @@
     <string name="adaptive">Uyarlanabilir</string>
     <string name="add_action">Ekle</string>
     <string name="add_playlist_title">"Oynatma listesine ekle"</string>
+    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
     <string name="added_title_to_playing_queue">"Kuyruğa 1 parça eklendi."</string>
     <string name="added_x_titles_to_playing_queue">%1$d şarkı kuyruğuna eklendi.</string>
     <string name="album">Albüm</string>
@@ -56,7 +59,7 @@
         <item quantity="one">Şarkı</item>
         <item quantity="other">Şarkılar</item>
     </plurals>
-    <string name="album_artist">Albüm sanatçısı</string>
+    <string name="album_artist">Album Artist</string>
     <string name="albums">Albümler</string>
     <plurals name="albums">
         <item quantity="one">Albüm</item>
@@ -66,13 +69,14 @@
     <string name="app_share">Hey, şu havalı müzik çalara şuradan bir göz atmaya ne dersin: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Karıştır</string>
     <string name="app_shortcut_top_tracks_short">Sık oynatılan parçalar</string>
-    <string name="app_widget_big_name">Big</string>
+    <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Retro müzik - Kart</string>
     <string name="app_widget_classic_name">Retro müzik - Klasik</string>
     <string name="app_widget_small_name">Retro müzik - Küçük</string>
-    <string name="app_widget_text_name">Text</string>
+    <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Sanatçı</string>
     <string name="artists">Sanatçılar</string>
+    <string name="audio_fade_duration">Audio Fade Duration</string>
     <string name="audio_focus_denied">Ses odaklaması reddedildi.</string>
     <string name="audio_settings_summary">Ses ayarlarını değiştirin ve ekolayzır kontrollerini ayarlayın</string>
     <string name="auto">Otomatik</string>
@@ -103,7 +107,7 @@
     <string name="carousal_effect_on_now_playing_screen">Şimdi oynatılıyor ekranında atlıkarınca efekti</string>
     <string name="cascading">Basamaklı</string>
     <string name="changelog">Değişim kayıt günlüğü</string>
-    <string name="changelog_summary">Sürümlerdeki değişiklik kayıtları Telegram üzerinde tutulmaktadır.</string>
+    <string name="changelog_summary">Check out What\'s New</string>
     <string name="circle">Çember</string>
     <string name="circular">Dairesel</string>
     <string name="classic">Klasik</string>
@@ -132,6 +136,7 @@
     <string name="delete_x_playlists"><![CDATA[<b>%1$d</b> çalma listeleri silinsin mi?]]></string>
     <string name="delete_x_songs"><![CDATA[<b>%1$d</b> parçaları silinsin mi?]]></string>
     <string name="deleted_x_songs">%1$d parça silindi.</string>
+    <string name="deleting_songs">Deleting Songs</string>
     <string name="depth">Derinlik</string>
     <string name="description">Açıklama</string>
     <string name="device_info">Cihaz Bilgisi</string>
@@ -144,6 +149,9 @@
     <string name="donation_header">Bağışlayacağınız tutar:</string>
     <string name="done">Done</string>
     <string name="drive_mode">Sürüş modu</string>
+    <string name="edit_fab">Edit Button</string>
+    <string name="edit_normal_lyrics">Edit Lyrics</string>
+    <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Boş</string>
     <string name="equalizer">Ekolayzır</string>
     <string name="faq">SSS</string>
@@ -243,6 +251,8 @@
     <string name="others">Diğer</string>
     <string name="password">Şifre</string>
     <string name="past_three_months">Son 3 ay</string>
+    <string name="paste_lyrics_here">Paste Lyrics Here</string>
+    <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
     <string name="peak">Zirve</string>
     <string name="permission_external_storage_denied">Harici depolama izni reddedildi.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
@@ -281,6 +291,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Çalmakta olan şarkı albüm kapağını kilit ekranı duvar kağıdı olarak kullanın</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Sistem sesi çalındığında veya bir bildirim alındığında sesi kısın</string>
+    <string name="pref_summary_audio_fade">Fade Audio when Song is Paused or Played</string>
     <string name="pref_summary_blacklist">Kara listedeki klasörlerin içeriği kütüphanenizden gizlenir.</string>
     <string name="pref_summary_bluetooth_playback">Bluetooth cihazına bağlanır bağlanmaz çalmaya başla</string>
     <string name="pref_summary_blurred_album_art">Albüm kapağını kilit ekranında bulanıklaştır. Üçüncü taraf uygulamalar ve widget\'lar ile sorunlara neden olabilir</string>
@@ -299,6 +310,8 @@
     <string name="pref_summary_library_categories">Kütüphane kategorilerinin görünürlük ve sırasını yapılandırın</string>
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
+    <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
     <string name="pref_summary_toggle_headset">Kulaklık bağlandıktan hemen sonra çalmaya başla</string>
     <string name="pref_summary_toggle_shuffle">Yeni bir şarkı listesi çalınırken karıştırma modu kapanacak</string>
@@ -309,6 +322,7 @@
     <string name="pref_title_album_cover_transform">Albüm kapağını atla</string>
     <string name="pref_title_app_shortcuts">Renkli uygulama kısayolları</string>
     <string name="pref_title_audio_ducking">Odak kaybında ses hacmini azaltın</string>
+    <string name="pref_title_audio_fade">Fade Audio</string>
     <string name="pref_title_auto_download_artist_images">Sanatçı resimlerini otomatik indir</string>
     <string name="pref_title_blacklist">Kara Liste</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
@@ -330,6 +344,8 @@
     <string name="pref_title_lock_screen">Tam ekran kontrolleri</string>
     <string name="pref_title_now_playing_screen_appearance">Şimdi oynatılıyor teması</string>
     <string name="pref_title_open_source_licences">Açık kaynak lisansları</string>
+    <string name="pref_title_show_lyrics">Show Lyrics</string>
+    <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Sekme başlıkları modu</string>
     <string name="pref_title_toggle_carousel_effect">Atlıkarınca efekti</string>
     <string name="pref_title_toggle_full_screen">Uygulamayı tam ekran yapın</string>
@@ -364,7 +380,7 @@
     <string name="retro_music_player">Retro Müzik Çalar</string>
     <string name="retro_music_pro">Retro Müzik Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
-    <string name="ringtone_title">Ringtone</string>
+    <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="saf_delete_failed">Dosya silme başarısız oldu: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">SAF url\'si alınamıyor.</string>
@@ -452,8 +468,11 @@
     <string name="username">Kullanıcı Adı</string>
     <string name="version">Sürüm</string>
     <string name="vertical_flip">Dikey çevir</string>
+    <string name="view_on_telegram">View on Telegram</string>
     <string name="volume">Ses</string>
     <string name="web_search">İnternette ara</string>
+    <string name="website">Website</string>
+    <string name="website_summary">Check out our Website</string>
     <string name="welcome">Hoşgeldiniz,</string>
     <string name="what_do_you_want_to_share">Ne paylaşmak istiyorsunuz?</string>
     <string name="whats_new">Yenilikler</string>
@@ -465,4 +484,6 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
+    <string name="show_album_artists">Show Album Artists</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
 </resources>
