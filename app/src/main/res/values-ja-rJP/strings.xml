@@ -8,11 +8,13 @@
     <string name="action_add_to_favorites">お気に入りに追加</string>
     <string name="action_add_to_playing_queue">再生キューに追加</string>
     <string name="action_add_to_playlist">プレイリストに追加…</string>
+    <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">再生キューをクリア</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">削除</string>
     <string name="action_delete_from_device">デバイスから削除</string>
     <string name="action_details">詳細</string>
+    <string name="action_edit">Edit</string>
     <string name="action_go_to_album">アルバムに移動</string>
     <string name="action_go_to_artist">アーティストに移動</string>
     <string name="action_go_to_genre">ジャンルに移動</string>
@@ -49,13 +51,14 @@
     <string name="adaptive">アダプティブ</string>
     <string name="add_action">追加</string>
     <string name="add_playlist_title">"プレイリストに追加"</string>
+    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
     <string name="added_title_to_playing_queue">"1曲が再生キューに追加されました"</string>
     <string name="added_x_titles_to_playing_queue">%1$d 曲が再生キューに追加されました</string>
     <string name="album">アルバム</string>
     <plurals name="albumSongs">
         <item quantity="other">曲</item>
     </plurals>
-    <string name="album_artist">アルバム アーティスト</string>
+    <string name="album_artist">Album Artist</string>
     <string name="albums">アルバム</string>
     <plurals name="albums">
         <item quantity="other">アルバム</item>
@@ -64,13 +67,14 @@
     <string name="app_share">クールな音楽プレイヤーをチェックしよう: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">シャッフル</string>
     <string name="app_shortcut_top_tracks_short">トップ曲</string>
-    <string name="app_widget_big_name">Big</string>
+    <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">レトロミュージック - カード</string>
     <string name="app_widget_classic_name">レトロミュージック - クラシック</string>
     <string name="app_widget_small_name">レトロミュージック - 小</string>
-    <string name="app_widget_text_name">Text</string>
+    <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">アーティスト</string>
     <string name="artists">アーティスト</string>
+    <string name="audio_fade_duration">Audio Fade Duration</string>
     <string name="audio_focus_denied">オーディオのフォーカスが拒否されました。</string>
     <string name="audio_settings_summary">サウンド設定を変更し、イコライザーコントロールを調整する</string>
     <string name="auto">自動</string>
@@ -102,7 +106,7 @@
     <string name="carousal_effect_on_now_playing_screen">再生中画面でのカルーセル効果</string>
     <string name="cascading">重ねて表示</string>
     <string name="changelog">パッチノート</string>
-    <string name="changelog_summary">電報チャネルで変更ログが維持されています</string>
+    <string name="changelog_summary">Check out What\'s New</string>
     <string name="circle">サークル</string>
     <string name="circular">円</string>
     <string name="classic">クラシック</string>
@@ -131,6 +135,7 @@
     <string name="delete_x_playlists"><![CDATA[プレイリスト <b>%1$d</b> を削除しますか?]]></string>
     <string name="delete_x_songs"><![CDATA[<b>%1$d</b> 曲を削除しますか?]]></string>
     <string name="deleted_x_songs">%1$d 曲を削除しました</string>
+    <string name="deleting_songs">Deleting Songs</string>
     <string name="depth">深さ</string>
     <string name="description">説明</string>
     <string name="device_info">端末の情報</string>
@@ -143,6 +148,9 @@
     <string name="donation_header">俺を購入：</string>
     <string name="done">Done</string>
     <string name="drive_mode">運転モード</string>
+    <string name="edit_fab">Edit Button</string>
+    <string name="edit_normal_lyrics">Edit Lyrics</string>
+    <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">空の</string>
     <string name="equalizer">イコライザー</string>
     <string name="faq">よくある質問</string>
@@ -242,6 +250,8 @@
     <string name="others">その他</string>
     <string name="password">パスワード</string>
     <string name="past_three_months">過去3ヶ月</string>
+    <string name="paste_lyrics_here">Paste Lyrics Here</string>
+    <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
     <string name="peak">ピーク</string>
     <string name="permission_external_storage_denied">外部ストレージへのアクセスが拒否されました</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
@@ -280,6 +290,7 @@
     <string name="pref_summary_album_art_on_lockscreen">再生中のジャケットをロック画面の壁紙に適用する</string>
     <string name="pref_summary_album_artists_only">アーティストカテゴリ内にアルバムのアーティストを表示する</string>
     <string name="pref_summary_audio_ducking">システムでサウンドが再生されたとき、または通知が受信されたときに一時的に音量を下げる</string>
+    <string name="pref_summary_audio_fade">Fade Audio when Song is Paused or Played</string>
     <string name="pref_summary_blacklist">ブラックリストに登録されたフォルダの内容はコレクションには表示されません。</string>
     <string name="pref_summary_bluetooth_playback">端末にBluetoothデバイスが接続されたとき、再生を開始する</string>
     <string name="pref_summary_blurred_album_art">ロック画面のジャケットをぼかします。他のアプリやウィジェットに問題を及ぼす可能性があります</string>
@@ -298,6 +309,8 @@
     <string name="pref_summary_library_categories">ライブラリに表示される項目と、順番を変更する</string>
     <string name="pref_summary_lock_screen">Retro Musicのカスタムされたロック画面を使用する</string>
     <string name="pref_summary_open_source_licences">オープンソースライセンスの詳細</string>
+    <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">アプリをフルスクリーン表示にする</string>
     <string name="pref_summary_toggle_headset">ヘッドフォンが接続されたら自動で再生を開始する</string>
     <string name="pref_summary_toggle_shuffle">新しいリストの楽曲を再生する時にシャッフルは自動的にオフになります</string>
@@ -308,6 +321,7 @@
     <string name="pref_title_album_cover_transform">アルバムジャケットをスキップ</string>
     <string name="pref_title_app_shortcuts">色のついたアプリショートカット</string>
     <string name="pref_title_audio_ducking">フォーカスロス時に音量を下げる</string>
+    <string name="pref_title_audio_fade">Fade Audio</string>
     <string name="pref_title_auto_download_artist_images">アーティスト画像を自動でダウンロードする</string>
     <string name="pref_title_blacklist">ブラックリスト</string>
     <string name="pref_title_bluetooth_playback">Bluetooth接続時に再生</string>
@@ -329,6 +343,8 @@
     <string name="pref_title_lock_screen">フルスクリーンコントロール</string>
     <string name="pref_title_now_playing_screen_appearance">再生中のテーマ</string>
     <string name="pref_title_open_source_licences">オープンソースライセンス</string>
+    <string name="pref_title_show_lyrics">Show Lyrics</string>
+    <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">タブのラベル</string>
     <string name="pref_title_toggle_carousel_effect">カルーセルエフェクト</string>
     <string name="pref_title_toggle_full_screen">フルスクリーン表示</string>
@@ -363,7 +379,7 @@
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
-    <string name="ringtone_title">Ringtone</string>
+    <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -451,8 +467,11 @@
     <string name="username">ユーザー名</string>
     <string name="version">バージョン</string>
     <string name="vertical_flip">垂直方向に反転</string>
+    <string name="view_on_telegram">View on Telegram</string>
     <string name="volume">Volume</string>
     <string name="web_search">ウェブで検索</string>
+    <string name="website">Website</string>
+    <string name="website_summary">Check out our Website</string>
     <string name="welcome">ようこそ,</string>
     <string name="what_do_you_want_to_share">何を共有しますか?</string>
     <string name="whats_new">更新内容</string>
@@ -464,4 +483,6 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
+    <string name="show_album_artists">Show Album Artists</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
 </resources>
