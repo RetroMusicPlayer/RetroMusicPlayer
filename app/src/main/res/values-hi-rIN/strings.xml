@@ -59,7 +59,7 @@
         <item quantity="one">Song</item>
         <item quantity="other">Songs</item>
     </plurals>
-    <string name="album_artist">Album Artist</string>
+    <string name="album_artist">एल्बम कलाकार</string>
     <string name="albums">एल्बम</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
