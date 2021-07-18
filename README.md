@@ -9,6 +9,8 @@
 
 ## 🆕 Material Design music player for Android music lovers 
 
+## ⚠ Join [@retromusiclog](https://t.me/retromusiclog) on Telegram for important updates.
+
 ## Screenshots
 ### App Themes
 | <img src="screenshots/home.jpeg" width="200"/> | <img src="screenshots/home_dark.jpeg" width="200"/> | <img src="screenshots/home_black.jpeg" width="200"/> |
