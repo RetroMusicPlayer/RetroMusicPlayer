@@ -8,13 +8,13 @@
     <string name="action_add_to_favorites">Hozzáadás a kedvencekhez</string>
     <string name="action_add_to_playing_queue">Hozzáadás a lejátszási sorhoz</string>
     <string name="action_add_to_playlist">Hozzáadás lejátszási listához</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">Tartalomátküldés</string>
     <string name="action_clear_playing_queue">Lejátszási sor törlése</string>
     <string name="action_cycle_repeat">Ciklus ismétlés üzemmód</string>
     <string name="action_delete">Törlés</string>
     <string name="action_delete_from_device">Törlés az eszközről</string>
     <string name="action_details">Részletek</string>
-    <string name="action_edit">Edit</string>
+    <string name="action_edit">Szerkesztés</string>
     <string name="action_go_to_album">Ugrás az albumhoz</string>
     <string name="action_go_to_artist">Ugrás az előadóhoz</string>
     <string name="action_go_to_genre">Ugrás a műfajhoz</string>
@@ -51,7 +51,7 @@
     <string name="adaptive">AdaptÍv</string>
     <string name="add_action">Hozzáad</string>
     <string name="add_playlist_title">"Hozzáadás lejátszási listához"</string>
-    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="add_time_framed_lryics">Időzített dalszöveg hozzáadása</string>
     <string name="added_title_to_playing_queue">"1 cím lett hozzáadva a lejátszási sorhoz."</string>
     <string name="added_x_titles_to_playing_queue">%1$d cím hozzáadva a lejátszási sorhoz.</string>
     <string name="album">Album</string>
@@ -59,7 +59,7 @@
         <item quantity="one">Dal</item>
         <item quantity="other">Dalok</item>
     </plurals>
-    <string name="album_artist">Album Artist</string>
+    <string name="album_artist">Album előadó</string>
     <string name="albums">Albumok</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
@@ -69,14 +69,14 @@
     <string name="app_share">Hé, nézd meg ezt a menő zenelejátszót itt: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Keverés</string>
     <string name="app_shortcut_top_tracks_short">Legjobb zeneszámok</string>
-    <string name="app_widget_big_name">Full Image</string>
+    <string name="app_widget_big_name">Teljes kép</string>
     <string name="app_widget_card_name">Kártya</string>
     <string name="app_widget_classic_name">Retro zene - Klasszikus</string>
     <string name="app_widget_small_name">Retro zene - Kicsi</string>
-    <string name="app_widget_text_name">Minimal Text</string>
+    <string name="app_widget_text_name">Minimális szöveg</string>
     <string name="artist">Előadó</string>
     <string name="artists">Előadók</string>
-    <string name="audio_fade_duration">Audio Fade Duration</string>
+    <string name="audio_fade_duration">Hangáttünés hossza</string>
     <string name="audio_focus_denied">Az audiofókusz megtagadva.</string>
     <string name="audio_settings_summary">Módosítsa a hangbeállításokat és állítsa be a hangszínszabályzó irányítását</string>
     <string name="auto">Autó</string>
@@ -102,12 +102,12 @@
     <string name="cancel_current_timer">Mégse</string>
     <string name="card">Kártya</string>
     <string name="card_color_style">Színes Kártya</string>
-    <string name="card_square">Square Card</string>
+    <string name="card_square">Négyzet Kártya</string>
     <string name="card_style">Kártya</string>
     <string name="carousal_effect_on_now_playing_screen">Kőrhinta effekt a most játszik képernyőn</string>
     <string name="cascading">Növelés</string>
     <string name="changelog">Változtatási napló</string>
-    <string name="changelog_summary">Check out What\'s New</string>
+    <string name="changelog_summary">Nézd meg az újdonságokat</string>
     <string name="circle">Kör</string>
     <string name="circular">Kör alakú</string>
     <string name="classic">Klasszikus</string>
@@ -136,7 +136,7 @@
     <string name="delete_x_playlists"><![CDATA[Törli a <b>%1$d</b> lejátszási listát?]]></string>
     <string name="delete_x_songs"><![CDATA[Törli a <b>%1$d</b> zenéket?]]></string>
     <string name="deleted_x_songs">Törölte a %1$d zenét.</string>
-    <string name="deleting_songs">Deleting Songs</string>
+    <string name="deleting_songs">Zenék törlése</string>
     <string name="depth">Mélység</string>
     <string name="description">Leírás</string>
     <string name="device_info">Eszköz információ</string>
@@ -147,11 +147,11 @@
     <string name="donate">Támogatás</string>
     <string name="donate_summary">Ha úgy gondolja, hogy megérdemlem fizetni a munkámért, hagyhatsz néhányat pénzt itt</string>
     <string name="donation_header">Vegyél nekem egy:</string>
-    <string name="done">Done</string>
+    <string name="done">Kész</string>
     <string name="drive_mode">Vezetés mód</string>
-    <string name="edit_fab">Edit Button</string>
-    <string name="edit_normal_lyrics">Edit Lyrics</string>
-    <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
+    <string name="edit_fab">Szerkesztés gomb</string>
+    <string name="edit_normal_lyrics">Dalszöveg szerkesztése</string>
+    <string name="edit_synced_lyrics">Szinkronizált dalszöveg szerkesztése</string>
     <string name="empty">Üres</string>
     <string name="equalizer">Hangszínszabályzó</string>
     <string name="faq">GYIK</string>
@@ -170,7 +170,7 @@
     <string name="genre">Műfaj</string>
     <string name="genres">Műfajok</string>
     <string name="git_hub_summary">Szerezd meg a projektet a githubon</string>
-    <string name="gradient">Gradient</string>
+    <string name="gradient">Színátmenet</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -180,7 +180,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Rácsok és stílus</string>
-    <string name="help_summary">Need more help?</string>
+    <string name="help_summary">További segítségre van szüksége?</string>
     <string name="hinge">Zsanér</string>
     <string name="history">Előzmény</string>
     <string name="home">Kezdőlap</string>
@@ -188,8 +188,8 @@
     <string name="image">Kép</string>
     <string name="image_gradient">Színátmenet kép</string>
     <string name="image_settings_summary">A művészképek letöltésének megváltoztatása.</string>
-    <string name="import_label">Import</string>
-    <string name="import_playlist">Import playlist</string>
+    <string name="import_label">Importálás</string>
+    <string name="import_playlist">Lejátszólista importálása</string>
     <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">%1$d dalt betett a %2$s lejátszási listába.</string>
     <string name="instagram_page_summary">Ossza meg Retro Music beállításait, hogy bemutassa a Instagram-on</string>
