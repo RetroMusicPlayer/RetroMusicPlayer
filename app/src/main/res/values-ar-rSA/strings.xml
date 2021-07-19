@@ -156,7 +156,7 @@
     <string name="donate_summary">إذا كنت تعتقد أنني أستحق الحصول على المال مقابل عملي ،
 يمكنك ترك بعض المال هنا.</string>
     <string name="donation_header">اشتري لي:</string>
-    <string name="done">Done</string>
+    <string name="done">تم</string>
     <string name="drive_mode">وضع القيادة</string>
     <string name="edit_fab">Edit Button</string>
     <string name="edit_normal_lyrics">Edit Lyrics</string>
@@ -180,9 +180,9 @@
     <string name="genres">فئات</string>
     <string name="git_hub_summary">اجلب المشروع على GitHub</string>
     <string name="gradient">Gradient</string>
-    <string name="grid_size_1">1</string>
-    <string name="grid_size_2">2</string>
-    <string name="grid_size_3">3</string>
+    <string name="grid_size_1">١</string>
+    <string name="grid_size_2">٢</string>
+    <string name="grid_size_3">٣</string>
     <string name="grid_size_4">4</string>
     <string name="grid_size_5">5</string>
     <string name="grid_size_6">6</string>
@@ -435,7 +435,7 @@
     <string name="sort_order_composer">المؤلف</string>
     <string name="sort_order_date">التاريخ</string>
     <string name="sort_order_date_modified">تاريخ التعديل</string>
-    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs">عدد الأغاني</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">السنة</string>
     <string name="sort_order_z_a">تنازلي</string>
@@ -473,7 +473,7 @@
     <string name="up_next">التالي</string>
     <string name="update_image">تحديث الصورة</string>
     <string name="updating">تحديث...</string>
-    <string name="user_name">User Name</string>
+    <string name="user_name">إسم المستخدم</string>
     <string name="username">أسم المستخدم</string>
     <string name="version">الإصدار</string>
     <string name="vertical_flip">تدوير رأسي</string>
