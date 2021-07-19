@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
+    <string name="about_album_label">Sobre %s</string>
     <string name="about_settings_summary">Time, links sociais</string>
     <string name="accent_color">Cor de destaque</string>
     <string name="accent_color_desc">A cor de destaque do tema, o padrão é verde</string>
@@ -8,13 +8,13 @@
     <string name="action_add_to_favorites">Adicionar aos favoritos</string>
     <string name="action_add_to_playing_queue">Adicionar à lista de reprodução</string>
     <string name="action_add_to_playlist">Adicionar à lista</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">Transmitir</string>
     <string name="action_clear_playing_queue">Limpar a atual fila de reprodução</string>
     <string name="action_cycle_repeat">Alternar modo de repetição</string>
     <string name="action_delete">Excluir</string>
     <string name="action_delete_from_device">Excluir do dispositivo</string>
     <string name="action_details">Detalhes</string>
-    <string name="action_edit">Edit</string>
+    <string name="action_edit">Editar</string>
     <string name="action_go_to_album">Ir para o álbum</string>
     <string name="action_go_to_artist">Ir para o artista</string>
     <string name="action_go_to_genre">Ir para o gênero</string>
@@ -51,7 +51,7 @@
     <string name="adaptive">Adaptável</string>
     <string name="add_action">Adicionar</string>
     <string name="add_playlist_title">"Adicionar à lista"</string>
-    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="add_time_framed_lryics">Adicione Letras no Período de Tempo</string>
     <string name="added_title_to_playing_queue">"Uma música foi adicionada à fila de reprodução"</string>
     <string name="added_x_titles_to_playing_queue">Foram adicionadas %1$d músicas na fila de reprodução</string>
     <string name="album">Álbum</string>
@@ -189,7 +189,7 @@
     <string name="image_gradient">Imagem degradê</string>
     <string name="image_settings_summary">Alterar as configurações de download das imagens dos artistas</string>
     <string name="import_label">Import</string>
-    <string name="import_playlist">Import playlist</string>
+    <string name="import_playlist">Importar Playlist</string>
     <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">%1$d músicas adicionadas na playlist %2$s.</string>
     <string name="instagram_page_summary">Compartilhe seu perfil do Retro Music para mostrá-lo no Instagram</string>
