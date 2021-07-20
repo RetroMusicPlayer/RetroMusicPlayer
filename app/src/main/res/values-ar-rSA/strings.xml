@@ -14,7 +14,7 @@
     <string name="action_delete">حذف</string>
     <string name="action_delete_from_device">حذف من الجهاز</string>
     <string name="action_details">تفاصيل</string>
-    <string name="action_edit">Edit</string>
+    <string name="action_edit">تعديل</string>
     <string name="action_go_to_album">إنتقل إلى الالبوم</string>
     <string name="action_go_to_artist">إنتقل إلى الفنان</string>
     <string name="action_go_to_genre">إنتقل إلى النوع</string>
@@ -156,10 +156,10 @@
     <string name="donate_summary">إذا كنت تعتقد أنني أستحق الحصول على المال مقابل عملي ،
 يمكنك ترك بعض المال هنا.</string>
     <string name="donation_header">اشتري لي:</string>
-    <string name="done">Done</string>
+    <string name="done">تم</string>
     <string name="drive_mode">وضع القيادة</string>
-    <string name="edit_fab">Edit Button</string>
-    <string name="edit_normal_lyrics">Edit Lyrics</string>
+    <string name="edit_fab">زر التعديل</string>
+    <string name="edit_normal_lyrics">تعديل كلمات الأغنية</string>
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">فارغ</string>
     <string name="equalizer">موازن الصوت</string>
@@ -180,14 +180,14 @@
     <string name="genres">فئات</string>
     <string name="git_hub_summary">اجلب المشروع على GitHub</string>
     <string name="gradient">Gradient</string>
-    <string name="grid_size_1">1</string>
-    <string name="grid_size_2">2</string>
-    <string name="grid_size_3">3</string>
-    <string name="grid_size_4">4</string>
-    <string name="grid_size_5">5</string>
-    <string name="grid_size_6">6</string>
-    <string name="grid_size_7">7</string>
-    <string name="grid_size_8">8</string>
+    <string name="grid_size_1">١</string>
+    <string name="grid_size_2">٢</string>
+    <string name="grid_size_3">٣</string>
+    <string name="grid_size_4">٤</string>
+    <string name="grid_size_5">٥</string>
+    <string name="grid_size_6">٦</string>
+    <string name="grid_size_7">٧</string>
+    <string name="grid_size_8">٨</string>
     <string name="grid_style_label">الشبكة والأسلوب</string>
     <string name="help_summary">Need more help?</string>
     <string name="hinge">مفصل</string>
@@ -354,7 +354,7 @@
     <string name="pref_title_now_playing_screen_appearance">ثيم التشغيل الان</string>
     <string name="pref_title_open_source_licences">التراخيص مفتوحة المصدر</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
-    <string name="pref_title_suggestions">Show Suggestions</string>
+    <string name="pref_title_suggestions">عرض الإقتراحات</string>
     <string name="pref_title_tab_text_mode">وضع عناوين التبويبات</string>
     <string name="pref_title_toggle_carousel_effect">تاثير التتالي</string>
     <string name="pref_title_toggle_full_screen">التطبيق في كامل الشاشة</string>
@@ -388,8 +388,8 @@
     <string name="restoring_purchase">استرداد عملية الشراء...</string>
     <string name="retro_music_player">مشغل الموسيقى Retro</string>
     <string name="retro_music_pro">ريترو ميوزك - الكامل</string>
-    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
-    <string name="ringtone_title">Ringtone (Optional)</string>
+    <string name="ringtone_summary">يحتاج التطبيق إلى إذن للوصول إلى إعدادات جهازك من أجل تعيين الموسيقى كنغمة رنين</string>
+    <string name="ringtone_title">نغمة الرنين (إختياري)</string>
     <string name="saf_delete_failed">فشل حذف الملف: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">لا يمكن الحصول على URI SAF</string>
@@ -417,7 +417,7 @@
     <string name="set">تعيين</string>
     <string name="set_artist_image">اختيار صورة الفنان</string>
     <string name="share_app">مشاركة التطبيق</string>
-    <string name="share_summary">Share the app with your friends and family</string>
+    <string name="share_summary">شارك التطبيق مع أصدقائك وأسرتك</string>
     <string name="share_to_stories">شارك في القصص</string>
     <string name="shuffle">خلط</string>
     <string name="simple">بسيط</string>
@@ -435,7 +435,7 @@
     <string name="sort_order_composer">المؤلف</string>
     <string name="sort_order_date">التاريخ</string>
     <string name="sort_order_date_modified">تاريخ التعديل</string>
-    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs">عدد الأغاني</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">السنة</string>
     <string name="sort_order_z_a">تنازلي</string>
@@ -473,7 +473,7 @@
     <string name="up_next">التالي</string>
     <string name="update_image">تحديث الصورة</string>
     <string name="updating">تحديث...</string>
-    <string name="user_name">User Name</string>
+    <string name="user_name">إسم المستخدم</string>
     <string name="username">أسم المستخدم</string>
     <string name="version">الإصدار</string>
     <string name="vertical_flip">تدوير رأسي</string>
