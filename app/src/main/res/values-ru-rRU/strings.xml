@@ -314,8 +314,8 @@
     <string name="pref_summary_library_categories">Настроить вид и порядок категорий в библиотеке.</string>
     <string name="pref_summary_lock_screen">Используйте собственный экран блокировки Retro Music</string>
     <string name="pref_summary_open_source_licences">Сведения о лицензии для программного обеспечения с открытым исходным кодом</string>
-    <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
-    <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
+    <string name="pref_summary_show_lyrics">Показывать синхронизированный текст песни поверх обложки альбома</string>
+    <string name="pref_summary_suggestions">Показывать миксы новый музыки на главном экране</string>
     <string name="pref_summary_toggle_full_screen">Полноэкранный режим</string>
     <string name="pref_summary_toggle_headset">Начать воспроизведение музыки сразу после подключения наушников</string>
     <string name="pref_summary_toggle_shuffle">Режим перемешивания выключится при проигрывании нового списка песен</string>
@@ -326,7 +326,7 @@
     <string name="pref_title_album_cover_transform">Стиль смены обложки альбома</string>
     <string name="pref_title_app_shortcuts">Цветные ярлыки</string>
     <string name="pref_title_audio_ducking">Уменьшить громкость при получении уведомлении</string>
-    <string name="pref_title_audio_fade">Fade Audio</string>
+    <string name="pref_title_audio_fade">Затухание аудио</string>
     <string name="pref_title_auto_download_artist_images">Автозагрузка изображений исполнителя</string>
     <string name="pref_title_blacklist">Черный список</string>
     <string name="pref_title_bluetooth_playback">Воспроизведение при подключении Bluetooth</string>
@@ -341,15 +341,15 @@
     <string name="pref_title_gapless_playback">Непрерывное воспроизведение</string>
     <string name="pref_title_general_theme">Тема приложения</string>
     <string name="pref_title_home_album_grid_style">Сетка альбома на Главной странице</string>
-    <string name="pref_title_home_artist_grid_style">Artist grid</string>
+    <string name="pref_title_home_artist_grid_style">Сетка исполнителей</string>
     <string name="pref_title_home_banner">Кнопка Домой</string>
     <string name="pref_title_ignore_media_store_artwork">Игнорировать обложки из хранилища</string>
     <string name="pref_title_last_added_interval">Дата последнего добавления плейлиста</string>
     <string name="pref_title_lock_screen">Полноэкранное управление</string>
     <string name="pref_title_now_playing_screen_appearance">Тема экрана воспроизведения</string>
     <string name="pref_title_open_source_licences">Лицензии с открытым кодом</string>
-    <string name="pref_title_show_lyrics">Show Lyrics</string>
-    <string name="pref_title_suggestions">Show Suggestions</string>
+    <string name="pref_title_show_lyrics">Показать текст песни</string>
+    <string name="pref_title_suggestions">Показывать советы</string>
     <string name="pref_title_tab_text_mode">Название нижних кнопок</string>
     <string name="pref_title_toggle_carousel_effect">Эффект карусели</string>
     <string name="pref_title_toggle_full_screen">Полноэкранное приложение</string>
@@ -384,7 +384,7 @@
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Приложению требуется разрешение на доступ к настройкам вашего устройства, чтобы установить музыку в качестве рингтона.</string>
-    <string name="ringtone_title">Ringtone (Optional)</string>
+    <string name="ringtone_title">Мелодия звонка (необязательно)</string>
     <string name="saf_delete_failed">Ошибка при удалении файла: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Не удается получить SAF URI</string>
@@ -472,11 +472,11 @@
     <string name="username">Имя пользователя</string>
     <string name="version">Версия</string>
     <string name="vertical_flip">Вертикальный поворт</string>
-    <string name="view_on_telegram">View on Telegram</string>
+    <string name="view_on_telegram">Смотреть в Telegram</string>
     <string name="volume">Громкость</string>
     <string name="web_search">Поиск в интернете</string>
-    <string name="website">Website</string>
-    <string name="website_summary">Check out our Website</string>
+    <string name="website">Сайт</string>
+    <string name="website_summary">Посмотрите наш веб-сайт</string>
     <string name="welcome">Добро пожаловать,</string>
     <string name="what_do_you_want_to_share">Чем вы хотите поделиться?</string>
     <string name="whats_new">Что нового :</string>
@@ -488,6 +488,6 @@
     <string name="you_have_to_select_at_least_one_category">Выберите хотя бы одну категорию.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
     <string name="your_account_data_is_only_used_for_authentication">Данные вашей учетной записи используются только для аутентификации.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="show_album_artists">Показать исполнителей альбома</string>
+    <string name="action_add_to_blacklist">Добавить в чёрный список</string>
 </resources>
