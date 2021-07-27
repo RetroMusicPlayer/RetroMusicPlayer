@@ -99,7 +99,7 @@
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
     <string name="bug_report_use_account">Send using GitHub account</string>
     <string name="buy_now">Buy now</string>
-    <string name="cancel_current_timer">Cancel</string>
+    <string name="cancel_current_timer">انصراف</string>
     <string name="card">کارت</string>
     <string name="card_color_style">Colored Card</string>
     <string name="card_square">Square Card</string>
