@@ -8,7 +8,7 @@
     <string name="action_add_to_favorites">اضافة الى المفضلة</string>
     <string name="action_add_to_playing_queue">إضافة الى قائمة التشغيل الحالية</string>
     <string name="action_add_to_playlist">أضف إلى قائمة التشغيل</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">ممثلين</string>
     <string name="action_clear_playing_queue">إخلاء قائمة التشغيل الحالية</string>
     <string name="action_cycle_repeat">وضع تكرار الدورة</string>
     <string name="action_delete">حذف</string>
@@ -51,13 +51,13 @@
     <string name="adaptive">متكيف</string>
     <string name="add_action">إضافة</string>
     <string name="add_playlist_title">"إضافة الى قائمة التشغيل"</string>
-    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="add_time_framed_lryics">أضف وقت كلمات الأغاني</string>
     <string name="added_title_to_playing_queue">"إضافة ١ من العناوين الى قائمة التشغيل الحالية"</string>
     <string name="added_x_titles_to_playing_queue">إضافة %1$d من العناوين الى قائمة التشغيل الحالية</string>
     <string name="album">البوم</string>
     <plurals name="albumSongs">
-        <item quantity="zero">Songs</item>
-        <item quantity="one">Song</item>
+        <item quantity="zero">الاغاني</item>
+        <item quantity="one">الاغنية</item>
         <item quantity="two">Songs</item>
         <item quantity="few">Songs</item>
         <item quantity="many">Songs</item>
