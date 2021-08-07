@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">Sobre %s  </string>
-    <string name="about_settings_summary">Time, links sociais </string>
-    <string name="accent_color">Cor de destaque </string>
-    <string name="accent_color_desc">A cor de destaque do tema, o padrão é verde </string>
+    <string name="about_album_label">Sobre %s</string>
+    <string name="about_settings_summary">Time, links sociais</string>
+    <string name="accent_color">Cor de destaque</string>
+    <string name="accent_color_desc">A cor de destaque do tema, o padrão é verde</string>
     <string name="action_about">Sobre</string>
     <string name="action_add_to_favorites">Adicionar aos favoritos</string>
     <string name="action_add_to_playing_queue">Adicionar à lista de reprodução</string>
