@@ -490,4 +490,7 @@
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
     <string name="show_album_artists">Show Album Artists</string>
     <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="home_only_profile">Тільки профіль</string>
+    <string name="home_banner_full">Зображення і профіль</string>
+    <string name="home_no_profile">Приховати</string>
 </resources>

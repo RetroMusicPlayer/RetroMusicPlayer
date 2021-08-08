@@ -27,12 +27,16 @@
             android:title="@string/pref_title_home_album_grid_style"
              />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="toggle_home_banner"
-            android:layout="@layout/list_item_view_switch"
-            android:summary="@string/pref_summary_home_banner"
-            android:title="@string/pref_title_home_banner" />
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+            android:defaultValue="0"
+            android:entries="@array/pref_type_home_banner_titles"
+            android:entryValues="@array/pref_type_home_banner_values"
+            android:key="type_home_banner"
+            android:layout="@layout/list_item_view"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/pref_title_home_banner"
+            />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
