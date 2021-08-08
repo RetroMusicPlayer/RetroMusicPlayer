@@ -8,7 +8,7 @@
     <string name="action_add_to_favorites">Toevoegen aan favorieten</string>
     <string name="action_add_to_playing_queue">Voeg toe aan afspeel wachtrij</string>
     <string name="action_add_to_playlist">Voeg toe aan afspeellijst...</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">Casten</string>
     <string name="action_clear_playing_queue">Afspeel wachtrij legen</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">Verwijder</string>
