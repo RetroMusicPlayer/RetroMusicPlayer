@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
+    <string name="about_album_label">Over %s</string>
     <string name="about_settings_summary">Team, social links</string>
     <string name="accent_color">Accent kleur</string>
     <string name="accent_color_desc">De accent kleur, standaard naar groen</string>
@@ -14,18 +14,18 @@
     <string name="action_delete">Verwijder</string>
     <string name="action_delete_from_device">Verwijder van apparaat</string>
     <string name="action_details">Details</string>
-    <string name="action_edit">Edit</string>
+    <string name="action_edit">Bewerk</string>
     <string name="action_go_to_album">Ga naar album </string>
     <string name="action_go_to_artist">Ga naar artiest</string>
-    <string name="action_go_to_genre">Go to genre</string>
+    <string name="action_go_to_genre">Ga naar genre</string>
     <string name="action_go_to_start_directory">Ga naar begin directory</string>
     <string name="action_grant">Geef toestemming</string>
     <string name="action_grid_size">Raster grootte</string>
     <string name="action_grid_size_land">Raster grootte (land)</string>
-    <string name="action_new_playlist">New playlist</string>
+    <string name="action_new_playlist">Nieuwe afspeellijst</string>
     <string name="action_next">Volgende</string>
     <string name="action_play">Afspelen. </string>
-    <string name="action_play_all">Play all</string>
+    <string name="action_play_all">Speel alles</string>
     <string name="action_play_next">Volgende afspelen </string>
     <string name="action_play_pause">Afspelen/pauzeren</string>
     <string name="action_previous">Vorige</string>
@@ -34,7 +34,7 @@
     <string name="action_remove_from_playlist">Verwijder van afspeellijst</string>
     <string name="action_rename">Hernoem</string>
     <string name="action_save_playing_queue">Afspeel wachtrij opslaan</string>
-    <string name="action_scan">Scan</string>
+    <string name="action_scan">Scannen</string>
     <string name="action_search">Zoek</string>
     <string name="action_set">Instellen</string>
     <string name="action_set_as_ringtone">Stel in als ringtone</string>
@@ -46,9 +46,9 @@
     <string name="action_sleep_timer">Slaap timer</string>
     <string name="action_sort_order">Sort order</string>
     <string name="action_tag_editor">Tags aanpassen</string>
-    <string name="action_toggle_favorite">Toggle favorite</string>
-    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
-    <string name="adaptive">Adaptive</string>
+    <string name="action_toggle_favorite">Favorieten in-/uitschakelen</string>
+    <string name="action_toggle_shuffle">Shuffle mode in-/uitschakelen</string>
+    <string name="adaptive">Adaptief</string>
     <string name="add_action">Toevoegen</string>
     <string name="add_playlist_title">"Toevogen aan afspeellijst"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
@@ -57,9 +57,9 @@
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Song</item>
-        <item quantity="other">Songs</item>
+        <item quantity="other">Nummers</item>
     </plurals>
-    <string name="album_artist">Album Artist</string>
+    <string name="album_artist">Albumartiest</string>
     <string name="albums">Albums</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
@@ -69,14 +69,14 @@
     <string name="app_share">Hey, bekijk deze coole muziekspeler op:https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">Top tracks</string>
-    <string name="app_widget_big_name">Full Image</string>
+    <string name="app_widget_big_name">Volledige Afbeelding</string>
     <string name="app_widget_card_name">Kaart</string>
     <string name="app_widget_classic_name">Klassiek</string>
     <string name="app_widget_small_name">Klein</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artiest</string>
     <string name="artists">Artiesten</string>
-    <string name="audio_fade_duration">Audio Fade Duration</string>
+    <string name="audio_fade_duration">Audio Fade Duur</string>
     <string name="audio_focus_denied">Geluid focus geweigerd </string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
     <string name="auto">Auto</string>
