@@ -52,7 +52,7 @@
     <string name="add_action">添加</string>
     <string name="add_playlist_title">"添加到播放列表"</string>
     <string name="add_time_framed_lryics">添加时段歌词</string>
-    <string name="added_title_to_playing_queue">"已添加1首歌到播放队列。"</string>
+    <string name="added_title_to_playing_queue">"已添加 1 首歌到播放队列。"</string>
     <string name="added_x_titles_to_playing_queue">已添加 %1$d 首歌到播放队列。</string>
     <string name="album">专辑</string>
     <plurals name="albumSongs">
@@ -85,7 +85,7 @@
     <string name="blur_card">模糊卡片</string>
     <string name="bug_report_failed">无法提交报告</string>
     <string name="bug_report_failed_invalid_token">无效的访问令牌，请联系应用开发者。</string>
-    <string name="bug_report_failed_issues_not_available">目的仓库的 Issues 未启用，请联系应用开发者。</string>
+    <string name="bug_report_failed_issues_not_available">所选仓库未启用 issues，请联系应用开发者。</string>
     <string name="bug_report_failed_unknown">发生未知错误，请联系应用开发者。</string>
     <string name="bug_report_failed_wrong_credentials">错误的用户名或密码</string>
     <string name="bug_report_issue">问题</string>
@@ -94,7 +94,7 @@
     <string name="bug_report_no_password">请您输入有效的 GitHub 密码</string>
     <string name="bug_report_no_title">请输入问题标题</string>
     <string name="bug_report_no_username">请您输入有效的 GitHub 用户名</string>
-    <string name="bug_report_summary">出错了，如一直崩溃请尝试清除应用数据或发送邮件给开发者</string>
+    <string name="bug_report_summary">发生未知错误。很抱歉让您遇到此错误，如一直崩溃，请尝试“清除应用数据”或发送邮件</string>
     <string name="bug_report_use_account">使用 GitHub 帐户发送</string>
     <string name="buy_now">立即购买</string>
     <string name="cancel_current_timer">取消</string>
@@ -123,7 +123,7 @@
     <string name="create_action">创建</string>
     <string name="created_playlist_x">已创建播放列表 %1$s。</string>
     <string name="credit_title">开发团队和贡献者</string>
-    <string name="currently_listening_to_x_by_x">正通过 %2$s 收听 %1$s。</string>
+    <string name="currently_listening_to_x_by_x">正在收听 %2$s 的 %1$s。</string>
     <string name="dark_theme_name">略暗</string>
     <string name="delete_playlist_title">删除播放列表</string>
     <string name="delete_playlist_x"><![CDATA[确定删除播放列表 <b>%1$s</b> 吗？]]></string>
@@ -185,12 +185,12 @@
     <string name="horizontal_flip">水平翻转</string>
     <string name="image">图片</string>
     <string name="image_gradient">渐变图片</string>
-    <string name="image_settings_summary">更改下载艺术家图像方式</string>
+    <string name="image_settings_summary">更改艺术家图像下载设置</string>
     <string name="import_label">导入</string>
     <string name="import_playlist">导入播放列表</string>
     <string name="import_playlist_message">这会导入 Android 媒体存储中的所有播放列表，并合并重复的播放列表</string>
-    <string name="inserted_x_songs_into_playlist_x">将歌曲 %1$d 加入 %2$s 列表。</string>
-    <string name="instagram_page_summary">将您的设置分享到 Instagram</string>
+    <string name="inserted_x_songs_into_playlist_x">将 %1$d 首歌曲加入列表 %2$s。</string>
+    <string name="instagram_page_summary">将您的 Retro Music 配置晒到 Instagram</string>
     <string name="keyboard">键盘</string>
     <string name="label_bit_rate">比特率</string>
     <string name="label_file_format">格式</string>
@@ -206,12 +206,12 @@
     <string name="library_categories">媒体库分类</string>
     <string name="licenses">许可</string>
     <string name="light_theme_name">纯白</string>
-    <string name="listeners_label">监听器</string>
-    <string name="listing_files">正在罗列所有文件</string>
-    <string name="loading_products">加载产品...</string>
+    <string name="listeners_label">听众</string>
+    <string name="listing_files">正在列出文件</string>
+    <string name="loading_products">正在加载产品...</string>
     <string name="login">登录</string>
     <string name="lyrics">歌词</string>
-    <string name="made_with_love">印度 ❤️ 制造</string>
+    <string name="made_with_love">用❤️创造，印度出品</string>
     <string name="material">质感</string>
     <string name="md_error_label">错误</string>
     <string name="md_storage_perm_error">权限错误</string>
@@ -252,7 +252,7 @@
     <string name="paste_lyrics_here">在此粘贴歌词</string>
     <string name="paste_timeframe_lyrics_here">在此粘贴时段歌词</string>
     <string name="peak">顶点</string>
-    <string name="permission_external_storage_denied">访问外部存储权限时被拒绝。</string>
+    <string name="permission_external_storage_denied">访问外部存储权限被拒绝。</string>
     <string name="permission_summary">应用需要设备存储访问权限来播放音乐</string>
     <string name="permission_title">存储空间权限</string>
     <string name="permissions_denied">权限被拒绝。</string>
@@ -403,7 +403,7 @@
     <string name="saving_changes">保存修改</string>
     <string name="scan_media">扫描媒体</string>
     <string name="scanned_files">已扫描 %1$d 个，共计 %2$d 个文件。</string>
-    <string name="scrobbles_label">滚动条</string>
+    <string name="scrobbles_label">音乐记录</string>
     <string name="select_all">全选</string>
     <string name="selected">已选中</string>
     <string name="set">设置</string>
