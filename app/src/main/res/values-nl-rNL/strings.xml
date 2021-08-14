@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_album_label">Over %s</string>
-    <string name="about_settings_summary">Team, social links</string>
+    <string name="about_settings_summary">Team, sociale linkjes</string>
     <string name="accent_color">Accent kleur</string>
     <string name="accent_color_desc">De accent kleur, standaard naar groen</string>
     <string name="action_about">Over</string>
@@ -10,7 +10,7 @@
     <string name="action_add_to_playlist">Voeg toe aan afspeellijst...</string>
     <string name="action_cast">Casten</string>
     <string name="action_clear_playing_queue">Afspeel wachtrij legen</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_cycle_repeat">Wissel herhalingmodus</string>
     <string name="action_delete">Verwijder</string>
     <string name="action_delete_from_device">Verwijder van apparaat</string>
     <string name="action_details">Details</string>
@@ -44,7 +44,7 @@
     <string name="action_shuffle_all">Shuffle alles</string>
     <string name="action_shuffle_playlist">Shuffle afspeellijst</string>
     <string name="action_sleep_timer">Slaap timer</string>
-    <string name="action_sort_order">Sort order</string>
+    <string name="action_sort_order">Sorteer volgorde</string>
     <string name="action_tag_editor">Tags aanpassen</string>
     <string name="action_toggle_favorite">Favorieten in-/uitschakelen</string>
     <string name="action_toggle_shuffle">Shuffle mode in-/uitschakelen</string>
