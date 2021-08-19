@@ -481,7 +481,7 @@
     <string name="up_next">Up next</string>
     <string name="update_image">Update image</string>
     <string name="updating">Updating…</string>
-    <string name="user_name">User Name</string>
+    <string name="user_name">Retro User</string>
     <string name="username">Username</string>
     <string name="version">Version</string>
     <string name="vertical_flip">Vertical flip</string>
@@ -503,4 +503,5 @@
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
     <string name="show_album_artists">Show Album Artists</string>
     <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="retroUser">Retro User</string>
 </resources>

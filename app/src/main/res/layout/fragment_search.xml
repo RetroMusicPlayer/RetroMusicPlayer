@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="62dp"
+        android:layout_marginBottom="72dp"
         android:text="@string/keyboard"
         android:textAppearance="@style/TextViewHeadline6"
         app:icon="@drawable/ic_keyboard" />
