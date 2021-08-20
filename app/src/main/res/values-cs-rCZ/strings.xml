@@ -8,7 +8,7 @@
     <string name="action_add_to_favorites">Přidat k oblíbeným</string>
     <string name="action_add_to_playing_queue">Přidat do fronty </string>
     <string name="action_add_to_playlist">Přidat do seznamu skladeb…</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">Hliník</string>
     <string name="action_clear_playing_queue">Vyčistit frontu</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">Smazat</string>
