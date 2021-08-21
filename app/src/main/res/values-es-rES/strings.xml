@@ -486,4 +486,7 @@
     <string name="your_account_data_is_only_used_for_authentication">Los datos de tu cuenta sólo se utilizan para la autenticación.</string>
     <string name="show_album_artists">Mostrar Artistas del Álbum</string>
     <string name="action_add_to_blacklist">Añadir a la Lista negra</string>
+    <string name="home_only_profile">Only profile</string>
+    <string name="home_banner_full">Image and profile</string>
+    <string name="home_no_profile">Hide</string>
 </resources>
