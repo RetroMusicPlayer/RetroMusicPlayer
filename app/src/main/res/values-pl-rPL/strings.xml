@@ -490,4 +490,7 @@
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
     <string name="show_album_artists">Pokaż wykonawców albumu</string>
     <string name="action_add_to_blacklist">Dodaj do czarnej listy</string>
+    <string name="home_only_profile">Only profile</string>
+    <string name="home_banner_full">Image and profile</string>
+    <string name="home_no_profile">Hide</string>
 </resources>
