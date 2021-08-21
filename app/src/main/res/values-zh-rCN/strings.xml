@@ -487,4 +487,7 @@
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
     <string name="show_album_artists">显示专辑艺术家</string>
     <string name="action_add_to_blacklist">添加至黑名单</string>
+    <string name="home_only_profile">Only profile</string>
+    <string name="home_banner_full">Image and profile</string>
+    <string name="home_no_profile">Hide</string>
 </resources>
