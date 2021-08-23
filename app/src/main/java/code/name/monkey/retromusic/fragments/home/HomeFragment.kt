@@ -44,7 +44,7 @@ import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
 
 class HomeFragment :
-    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home) {
+    AbsMainActivityFragment(if (PreferenceUtil.typeHomeBanner == 1) R.layout.fragment_banner_home else R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,13 +52,21 @@ class HomeFragment :
         mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         setStatusBarColorAuto(view)
-        bannerImage?.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(
-                mainActivity,
-                userImage,
-                getString(R.string.transition_user_image)
-            )
-            NavigationUtil.goToUserInfo(requireActivity(), options)
+        val needShowProfileOrBanner = (PreferenceUtil.typeHomeBanner != 2)
+
+        if (needShowProfileOrBanner) {
+            bannerImage?.setOnClickListener {
+                val options = ActivityOptions.makeSceneTransitionAnimation(
+                    mainActivity,
+                    userImage,
+                    getString(R.string.transition_user_image)
+                )
+                NavigationUtil.goToUserInfo(requireActivity(), options)
+            }
+        } else {
+            userImage?.visibility = View.GONE
+            titleWelcome?.visibility = View.GONE
+            text?.visibility = View.GONE
         }
 
         lastAdded.setOnClickListener {
@@ -86,15 +94,17 @@ class HomeFragment :
             )
         }
 
-        userImage.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(
-                mainActivity,
-                userImage,
-                getString(R.string.transition_user_image)
-            )
-            NavigationUtil.goToUserInfo(requireActivity(), options)
+        if (needShowProfileOrBanner) {
+            userImage.setOnClickListener {
+                val options = ActivityOptions.makeSceneTransitionAnimation(
+                    mainActivity,
+                    userImage,
+                    getString(R.string.transition_user_image)
+                )
+                NavigationUtil.goToUserInfo(requireActivity(), options)
+            }
+            titleWelcome?.text = String.format("%s", PreferenceUtil.userName)
         }
-        titleWelcome?.text = String.format("%s", PreferenceUtil.userName)
 
         val homeAdapter = HomeAdapter(mainActivity)
         recyclerView.apply {
@@ -106,7 +116,10 @@ class HomeFragment :
             homeAdapter.swapData(it)
         })
 
-        loadProfile()
+        if (needShowProfileOrBanner) {
+            loadProfile()
+        }
+
         setupTitle()
     }
 
