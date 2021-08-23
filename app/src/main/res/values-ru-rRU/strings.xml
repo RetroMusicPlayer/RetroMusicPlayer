@@ -309,7 +309,7 @@
     <string name="pref_summary_extra_controls">Добавить дополнительные элементы управления для мини-плеера</string>
     <string name="pref_summary_extra_song_info">Показать дополнительную информацию о песне, такую как формат файла, битрейт и частота</string>
     <string name="pref_summary_gapless_playback">"Может вызвать проблемы с воспроизведением на некоторых устройствах."</string>
-    <string name="pref_summary_home_banner">Баннер на домашней странице</string>
+    <string name="pref_summary_home_banner">Показывать кнопку Домой</string>
     <string name="pref_summary_ignore_media_store_artwork">Может повысить качество обложки альбома, но привести к более медленной загрузки изображения. Включите это только в том случае, если у вас есть картинки с низким разрешением</string>
     <string name="pref_summary_library_categories">Настроить вид и порядок категорий в библиотеке.</string>
     <string name="pref_summary_lock_screen">Используйте собственный экран блокировки Retro Music</string>
@@ -342,7 +342,7 @@
     <string name="pref_title_general_theme">Тема приложения</string>
     <string name="pref_title_home_album_grid_style">Сетка альбома на Главной странице</string>
     <string name="pref_title_home_artist_grid_style">Сетка исполнителей</string>
-    <string name="pref_title_home_banner">Баннер</string>
+    <string name="pref_title_home_banner">Кнопка Домой</string>
     <string name="pref_title_ignore_media_store_artwork">Игнорировать обложки из хранилища</string>
     <string name="pref_title_last_added_interval">Дата последнего добавления плейлиста</string>
     <string name="pref_title_lock_screen">Полноэкранное управление</string>
