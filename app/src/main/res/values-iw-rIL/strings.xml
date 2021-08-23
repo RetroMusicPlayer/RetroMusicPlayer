@@ -490,4 +490,8 @@
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
     <string name="show_album_artists">Show Album Artists</string>
     <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
