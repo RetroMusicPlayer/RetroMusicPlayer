@@ -486,7 +486,8 @@
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
     <string name="show_album_artists">Show Album Artists</string>
     <string name="action_add_to_blacklist">Προσθήκη στην μαύρη λίστα</string>
-    <string name="home_only_profile">Μόνο προφίλ</string>
-    <string name="home_banner_full">Εικόνα και προφίλ</string>
-    <string name="home_no_profile">Απόκρυψη</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
