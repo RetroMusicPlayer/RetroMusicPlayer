@@ -490,7 +490,8 @@
     <string name="your_account_data_is_only_used_for_authentication">Vaše údaje k účtu jsou použity pouze k ověření.</string>
     <string name="show_album_artists">Show Album Artists</string>
     <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="home_only_profile">Only profile</string>
-    <string name="home_banner_full">Image and profile</string>
-    <string name="home_no_profile">Hide</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
