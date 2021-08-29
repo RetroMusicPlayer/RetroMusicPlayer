@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
+    <string name="about_album_label">Über %s</string>
     <string name="about_settings_summary">Team, soziale Netzwerke</string>
     <string name="accent_color">Akzentfarbe</string>
     <string name="accent_color_desc">Akzentfarbe des Farbthemas, Standard ist Grün</string>
@@ -14,7 +14,7 @@
     <string name="action_delete">Löschen</string>
     <string name="action_delete_from_device">Vom Gerät löschen</string>
     <string name="action_details">Details</string>
-    <string name="action_edit">Edit</string>
+    <string name="action_edit">Bearbeiten</string>
     <string name="action_go_to_album">Zum Album gehen</string>
     <string name="action_go_to_artist">Zum Künstler gehen</string>
     <string name="action_go_to_genre">Zu Genre gehen</string>
@@ -56,10 +56,10 @@
     <string name="added_x_titles_to_playing_queue">%1$d Titel wurden zur Wiedergabeliste hinzugefügt.</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
-        <item quantity="one">Song</item>
+        <item quantity="one">Lied</item>
         <item quantity="other">Songs</item>
     </plurals>
-    <string name="album_artist">Album Artist</string>
+    <string name="album_artist">Album-Interpret</string>
     <string name="albums">Alben</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
@@ -69,11 +69,11 @@
     <string name="app_share">Hey, schau dir diesen coolen Music Player an: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Zufällig</string>
     <string name="app_shortcut_top_tracks_short">Top Songs</string>
-    <string name="app_widget_big_name">Full Image</string>
+    <string name="app_widget_big_name">Vollständiges Bild</string>
     <string name="app_widget_card_name">Retro Musik - Karte</string>
-    <string name="app_widget_classic_name">Classic</string>
+    <string name="app_widget_classic_name">Klassik</string>
     <string name="app_widget_small_name">Klein</string>
-    <string name="app_widget_text_name">Minimal Text</string>
+    <string name="app_widget_text_name">Minimaler Text</string>
     <string name="artist">Künstler</string>
     <string name="artists">Künstler</string>
     <string name="audio_fade_duration">Audio Fade Duration</string>
