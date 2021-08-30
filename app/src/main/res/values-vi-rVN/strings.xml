@@ -107,8 +107,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="cascading">Xếp tầng</string>
     <string name="changelog">Thay đổi</string>
     <string name="changelog_summary">Xem có gì mới</string>
-    <string name="circle">Circle</string>
-    <string name="circular">Thông tư</string>
+    <string name="circle">Vòng tròn</string>
+    <string name="circular">Dạng tròn</string>
     <string name="classic">Cổ điển</string>
     <string name="clear_action">Xóa</string>
     <string name="clear_blacklist">Xóa danh sách đen</string>
@@ -216,12 +216,12 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="material">Material</string>
     <string name="md_error_label">Lỗi</string>
     <string name="md_storage_perm_error">Lỗi quyền truy cập</string>
-    <string name="my_name">Tên của bạn</string>
+    <string name="my_name">Tên</string>
     <string name="my_top_tracks">Phát nhiều nhất</string>
     <string name="never">Không bao giờ</string>
     <string name="new_playlist_title">Danh sách phát mới</string>
     <string name="new_start_directory">%s là trang bắt đầu mới.</string>
-    <string name="next_song">Bài kế</string>
+    <string name="next_song">Bài tiếp theo</string>
     <string name="no_albums">Không có album</string>
     <string name="no_artists">Không có nghệ sĩ</string>
     <string name="no_audio_ID">"Phát một bài hát trước, sau đó thử lại."</string>
@@ -236,7 +236,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="normal">Tiêu chuẩn</string>
     <string name="normal_lyrics">Lời chuẩn</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> không được liệt kê trong thư mục nhạc.]]></string>
-    <string name="not_recently_played">Not recently played</string>
+    <string name="not_recently_played">Không phát gần đây</string>
     <string name="nothing_to_scan">Không có gì để quét.</string>
     <string name="nothing_to_see">Không có gì để hiển thị</string>
     <string name="notification">Thông báo</string>
@@ -244,7 +244,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="now_playing">Đang phát</string>
     <string name="now_playing_queue">Đang phát danh sách chờ</string>
     <string name="now_playing_summary">Tùy chỉnh màn hình đang phát</string>
-    <string name="now_playing_themes">Hơn 9 giao diện đang phát</string>
+    <string name="now_playing_themes">Hơn 9 giao diện phát nhạc</string>
     <string name="only_on_wifi">Chỉ khi dùng Wi-Fi</string>
     <string name="other_settings_summary">Tính năng nâng cao đang kiểm thử</string>
     <string name="others">Khác</string>
