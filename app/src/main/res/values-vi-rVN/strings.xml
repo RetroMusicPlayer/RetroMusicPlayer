@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
-    <string name="about_settings_summary">Đường dẫn tổ đội, mạng xã hội</string>
-    <string name="accent_color">Màu sắc nhấn mạnh</string>
-    <string name="accent_color_desc">Màu sắc chủ đạo của chủ đề, mặc định là xanh ngọc</string>
+    <string name="about_album_label">Thông tin về %s</string>
+    <string name="about_settings_summary">Liên kết đến nhóm, mạng xã hội</string>
+    <string name="accent_color">Màu chủ đạo</string>
+    <string name="accent_color_desc">Màu chủ đạo của chủ đề, mặc định là màu tía</string>
     <string name="action_about">Về chúng tôi</string>
     <string name="action_add_to_favorites">Thêm vào yêu thích</string>
-    <string name="action_add_to_playing_queue">Thêm vào hàng đợi</string>
+    <string name="action_add_to_playing_queue">Thêm vào danh sách phát</string>
     <string name="action_add_to_playlist">Thêm vào danh sách phát</string>
-    <string name="action_cast">Cast</string>
-    <string name="action_clear_playing_queue">Xoá hàng đợi</string>
+    <string name="action_cast">Truyền màn hình</string>
+    <string name="action_clear_playing_queue">Xoá danh sách phát</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">Xoá</string>
     <string name="action_delete_from_device">Xóa khỏi thiết bị</string>
@@ -30,10 +30,10 @@
     <string name="action_play_pause">Phát/Tạm dừng</string>
     <string name="action_previous">Trước</string>
     <string name="action_remove_from_favorites">Loại bỏ khỏi mục yêu thích</string>
-    <string name="action_remove_from_playing_queue">Xoá khỏi hàng đợi</string>
+    <string name="action_remove_from_playing_queue">Xoá khỏi danh sách phát</string>
     <string name="action_remove_from_playlist">Xoá khỏi danh sách phát</string>
     <string name="action_rename">Đổi tên</string>
-    <string name="action_save_playing_queue">Lưu hàng đợi phát</string>
+    <string name="action_save_playing_queue">Lưu danh sách phát</string>
     <string name="action_scan">Quét</string>
     <string name="action_search">Tìm kiếm</string>
     <string name="action_set">Bắt đầu</string>
