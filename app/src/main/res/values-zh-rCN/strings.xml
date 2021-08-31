@@ -487,8 +487,8 @@
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
     <string name="show_album_artists">显示专辑艺术家</string>
     <string name="action_add_to_blacklist">添加至黑名单</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
+    <string name="pref_title_remember_tab">记住最后打开页面</string>
+    <string name="pref_summary_remember_tab">启动时打开上次使用的页面</string>
+    <string name="pref_summary_whitelist">仅显示 /Music 目录的音乐</string>
+    <string name="pref_title_whitelist">白名单音乐</string>
 </resources>
