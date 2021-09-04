@@ -5,6 +5,7 @@
     <string name="accent_color">Màu sắc chủ đạo</string>
     <string name="accent_color_desc">Màu sắc chủ đạo của chủ đề, mặc định là màu tía</string>
     <string name="action_about">Về chúng tôi</string>
+    <string name="action_add_to_blacklist">Thêm vào danh sách đen</string>
     <string name="action_add_to_favorites">Thêm vào yêu thích</string>
     <string name="action_add_to_playing_queue">Thêm vào danh sách chờ phát</string>
     <string name="action_add_to_playlist">Thêm vào danh sách phát</string>
@@ -299,6 +300,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_colored_app">Màu nền và các nút điều khiển sẽ thay đổi theo màu sắc ảnh bìa album từ màn hình phát</string>
     <string name="pref_summary_colored_app_shortcuts">Màu sắc trong lối tắt ứng dụng dùng màu sắc chủ đạo. Mỗi khi bạn thay đổi màu chủ đạo, hãy bật/tắt lại công tắc này để thay đổi có hiệu lực</string>
     <string name="pref_summary_colored_notification">"M\u00e0u s\u1eafc th\u00f4ng b\u00e1o thay \u0111\u1ed5i theo m\u00e0u s\u1eafc chi ph\u1ed1i \u1ea3nh b\u00eca album"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">Để phù hợp với Thiết kế Material, màu sắc sẽ được điều chỉnh để tương thích với chế độ tối</string>
     <string name="pref_summary_expand_now_playing_panel">Nhấn vào thông báo sẽ hiển thị màn hình phát nhạc thay vì màn hình chính</string>
     <string name="pref_summary_extra_controls">Thêm điều khiển bổ sung cho trình phát mini</string>
@@ -309,12 +311,14 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_library_categories">Khả năng hiển thị và thứ tự của các danh mục trong thư viện.</string>
     <string name="pref_summary_lock_screen">Sử dụng các điều khiển màn hình khóa tùy chỉnh của Retro Music</string>
     <string name="pref_summary_open_source_licences">Chi tiết giấy phép của phần mềm mã nguồn mở</string>
+    <string name="pref_summary_remember_tab">Điều hướng đến tab được sử dụng gần nhất lúc bắt đầu</string>
     <string name="pref_summary_show_lyrics">Hiển thị Lời Đồng bộ trên bìa Album</string>
     <string name="pref_summary_suggestions">Hiển thị Danh sách nhạc kết hợp mới trên Màn hình chính</string>
     <string name="pref_summary_toggle_full_screen">Chế độ hoà nhập</string>
     <string name="pref_summary_toggle_headset">Tự động phát nhạc khi kết nối tai nghe</string>
     <string name="pref_summary_toggle_shuffle">Chế độ phát ngẫu nhiên sẽ tắt khi phát danh sách bài hát mới</string>
     <string name="pref_summary_toggle_volume">Hiện thanh điều chỉnh âm lượng nếu có không gian trống trong màn hình phát</string>
+    <string name="pref_summary_whitelist">Chỉ hiện thị nhạc từ /Thư mục Nhạc</string>
     <string name="pref_title_album_art_on_lockscreen">Hiện ảnh bìa album</string>
     <string name="pref_title_album_artists_only">Điều hướng theo Album Nghệ sĩ</string>
     <string name="pref_title_album_cover_style">Chủ đề bìa album</string>
@@ -329,6 +333,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_classic_notification">Thiết kế thông báo cổ điển</string>
     <string name="pref_title_colored_app">Màu sắc thích nghi</string>
     <string name="pref_title_colored_notification">Đổi màu thông báo</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Màu sắc tương thích</string>
     <string name="pref_title_expand_now_playing_panel">Hiển thị màn hình phát nhạc</string>
     <string name="pref_title_extra_controls">Điều khiển bổ sung</string>
@@ -343,6 +348,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_lock_screen">Điều khiển toàn màn hình.</string>
     <string name="pref_title_now_playing_screen_appearance">Giao diện màn hình phát</string>
     <string name="pref_title_open_source_licences">Giấy phép nguồn mở</string>
+    <string name="pref_title_remember_tab">Ghi nhớ tab cuối cùng</string>
     <string name="pref_title_show_lyrics">Hiển thị lời</string>
     <string name="pref_title_suggestions">Hiển thị đề xuất</string>
     <string name="pref_title_tab_text_mode">Chế độ tiêu đề thẻ</string>
@@ -351,6 +357,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_toggle_toggle_headset">Tự động phát</string>
     <string name="pref_title_toggle_toggle_shuffle">Chế độ ngẫu nhiên</string>
     <string name="pref_title_toggle_volume">Điều khiển âm lượng</string>
+    <string name="pref_title_whitelist">Danh sách trắng</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Chủ đề đen, Chủ đề màn hình phát, Hiệu ứng băng chuyền, v.v.</string>
     <string name="profile">Hồ sơ</string>
@@ -409,6 +416,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="share_app">Chia sẽ ứng dụng</string>
     <string name="share_summary">Chia sẻ ứng dụng với bạn bè và gia đình của bạn</string>
     <string name="share_to_stories">Chia sẻ đến Các story</string>
+    <string name="show_album_artists">Hiển thị Album Nghệ sĩ</string>
     <string name="shuffle">Ngẫu nhiên</string>
     <string name="simple">Đơn giản</string>
     <string name="sleep_timer_canceled">Đã huỷ hẹn giờ ngừng phát.</string>
@@ -437,7 +445,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="support_development">Hỗ trợ nhà phát triển</string>
     <string name="swipe_to_unlock">Trượt để mở khóa</string>
     <string name="synced_lyrics">Lời Đồng bộ</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Tham gia nhóm Telegram để thảo luận về lỗi, đưa ra đề xuất, và hơn thế nữa</string>
     <string name="thank_you">Cảm ơn bạn!</string>
@@ -483,10 +490,4 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="you_have_to_select_at_least_one_category">Bạn phải chọn ít nhất một danh mục.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Bạn sẽ được chuyển tiếp đến trang web theo dõi vấn đề.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
-    <string name="show_album_artists">Hiển thị Album Nghệ sĩ</string>
-    <string name="action_add_to_blacklist">Thêm vào danh sách đen</string>
-    <string name="pref_title_remember_tab">Ghi nhớ tab cuối cùng</string>
-    <string name="pref_summary_remember_tab">Điều hướng đến tab được sử dụng gần nhất lúc bắt đầu</string>
-    <string name="pref_summary_whitelist">Chỉ hiện thị nhạc từ /Thư mục Nhạc</string>
-    <string name="pref_title_whitelist">Danh sách trắng</string>
 </resources>
