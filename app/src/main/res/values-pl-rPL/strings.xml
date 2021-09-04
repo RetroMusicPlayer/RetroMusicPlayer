@@ -5,6 +5,7 @@
     <string name="accent_color">Kolor wiodący</string>
     <string name="accent_color_desc">Kolor wiodący motywu, domyślnie morski</string>
     <string name="action_about">O aplikacji</string>
+    <string name="action_add_to_blacklist">Dodaj do czarnej listy</string>
     <string name="action_add_to_favorites">Dodaj do ulubionych</string>
     <string name="action_add_to_playing_queue">Dodaj do kolejki</string>
     <string name="action_add_to_playlist">Dodaj do playlisty</string>
@@ -304,6 +305,7 @@
     <string name="pref_summary_colored_app">Tło oraz kolory przycisków sterujących będą zmieniać się zgodnie z okładką albumu na ekranie odtwarzacza</string>
     <string name="pref_summary_colored_app_shortcuts">Koloruje skróty aplikacji w kolorze wiodącym. Za każdym razem, gdy zmieniasz kolor, włącz tę opcję, aby zmiany odniosły skutek.</string>
     <string name="pref_summary_colored_notification">"Koloruje powiadomienie dominującym kolorem okładki albumu."</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">Podążaj za zaleceniami Material Design; w trybie ciemnym kolory powinny być mniej nasycone</string>
     <string name="pref_summary_expand_now_playing_panel">Kliknięcie powiadomienia pokaże odtwarzacz zamiast ekranu głównego</string>
     <string name="pref_summary_extra_controls">Dodaj dodatkowe przyciski do miniodtwarzacza</string>
@@ -314,12 +316,14 @@
     <string name="pref_summary_library_categories">Dostosuj widoczność i kolejność kategorii bibliotek.</string>
     <string name="pref_summary_lock_screen">Użyj niestandardowych przycisków kontroli na ekranie blokady</string>
     <string name="pref_summary_open_source_licences">Szczegóły licencji oprogramowania typu open source</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Tryb imersji</string>
     <string name="pref_summary_toggle_headset">Rozpocznij odtwarzanie po podłączeniu zestawu słuchawkowego</string>
     <string name="pref_summary_toggle_shuffle">Odtwarzanie losowe zostanie wyłączone podczas odtwarzania nowej listy utworów</string>
     <string name="pref_summary_toggle_volume">Pokaż sterowanie głośnością w odtwarzaczu, gdy jest wystarczająco wolnego miejsca</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Pokaż okładkę albumu</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Wygląd okładki albumu</string>
@@ -334,6 +338,7 @@
     <string name="pref_title_classic_notification">Klasyczny wygląd powiadomień</string>
     <string name="pref_title_colored_app">Kolor adaptacyjny</string>
     <string name="pref_title_colored_notification">Kolorowe powiadomienia</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Mniej nasycony kolor</string>
     <string name="pref_title_expand_now_playing_panel">Wyświetl teraz odtwarzane</string>
     <string name="pref_title_extra_controls">Dodatkowe przyciski kontroli</string>
@@ -348,6 +353,7 @@
     <string name="pref_title_lock_screen">Sterowanie pełnoekranowe</string>
     <string name="pref_title_now_playing_screen_appearance">Wyglądodtwarzacza</string>
     <string name="pref_title_open_source_licences">Licencje typu Open Source</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Wygląd tytułów kart</string>
@@ -356,6 +362,7 @@
     <string name="pref_title_toggle_toggle_headset">Autoodtwarzanie</string>
     <string name="pref_title_toggle_toggle_shuffle">Tryb losowy</string>
     <string name="pref_title_toggle_volume">Sterowanie głośnością</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Efekt karuzeli, tryb czarny i wiele więcej...</string>
     <string name="profile">Profil</string>
@@ -414,6 +421,7 @@
     <string name="share_app">Udostępnij aplikację</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Udostępnik jako Stories</string>
+    <string name="show_album_artists">Pokaż wykonawców albumu</string>
     <string name="shuffle">Losowo</string>
     <string name="simple">Prosty</string>
     <string name="sleep_timer_canceled">Wyłącznik czasowy wyłączony.</string>
@@ -442,7 +450,6 @@
     <string name="support_development">Wspieraj rozwój</string>
     <string name="swipe_to_unlock">Przesuń, aby odblokować</string>
     <string name="synced_lyrics">Synchronizowany tekst utworu</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Dołącz do grupy Telegram, aby zgłosić błędy lub zasugerować zmiany</string>
     <string name="thank_you">Dziękuję!</string>
@@ -488,10 +495,4 @@
     <string name="you_have_to_select_at_least_one_category">Zaznacz przynajmniej jedną kategorię</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Zostaniesz przekierowany do strony ze zgłoszeniami.</string>
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
-    <string name="show_album_artists">Pokaż wykonawców albumu</string>
-    <string name="action_add_to_blacklist">Dodaj do czarnej listy</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
