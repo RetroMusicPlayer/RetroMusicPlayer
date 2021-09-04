@@ -5,6 +5,7 @@
     <string name="accent_color">강조 색상</string>
     <string name="accent_color_desc">강조 색상을 지정합니다. 기본값은 녹색입니다.</string>
     <string name="action_about">정보</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">즐겨찾기에 추가</string>
     <string name="action_add_to_playing_queue">재생 대기열에 추가</string>
     <string name="action_add_to_playlist">재생목록에 추가...</string>
@@ -298,6 +299,7 @@
     <string name="pref_summary_colored_app">배경과 조작 버튼의 색상을 재생 화면의 앨범 사진에 따라 바꿉니다.</string>
     <string name="pref_summary_colored_app_shortcuts">강조 색상의 앱 바로 가기 색상을 지정합니다. 색깔을 바꿀 때마다 이 설정을 다시 켜주세요</string>
     <string name="pref_summary_colored_notification">"\uc568\ubc94 \uc544\ud2b8\ub85c\ubd80\ud130 \ucd94\ucd9c\ud55c \uc0c9\uc0c1\uc73c\ub85c \uc54c\ub9bc \uc0c9\uc0c1\uc744 \uc9c0\uc815\ud569\ub2c8\ub2e4."</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
@@ -308,12 +310,14 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Retro music에서 제공하는 자체 잠금 화면 사용</string>
     <string name="pref_summary_open_source_licences">오픈소스 소프트웨어의 상세 라이센스 정보</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">몰입 모드</string>
     <string name="pref_summary_toggle_headset">이어폰이 연결되면 바로 음악을 재생합니다.</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">음악 재생 화면에서 공간이 있을 시 볼륨 컨트롤을 보입니다</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">앨범 커버 표시</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -328,6 +332,7 @@
     <string name="pref_title_classic_notification">클래식 알림 디자인</string>
     <string name="pref_title_colored_app">반응형 색상 지정</string>
     <string name="pref_title_colored_notification">알림 색상 틴트</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
@@ -342,6 +347,7 @@
     <string name="pref_title_lock_screen">전체 화면 컨트롤</string>
     <string name="pref_title_now_playing_screen_appearance">테마</string>
     <string name="pref_title_open_source_licences">오픈소스 라이선스</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
@@ -350,6 +356,7 @@
     <string name="pref_title_toggle_toggle_headset">자동 재생</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">볼륨 조절</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
@@ -408,6 +415,7 @@
     <string name="share_app">Share app</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">무작위 재생</string>
     <string name="simple">심플</string>
     <string name="sleep_timer_canceled">수면 타이머가 취소되었습니다.</string>
@@ -436,7 +444,6 @@
     <string name="support_development">개발 지원</string>
     <string name="swipe_to_unlock">Swipe to unlock</string>
     <string name="synced_lyrics">Synced lyrics</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
     <string name="thank_you">감사합니다!</string>
@@ -482,10 +489,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
