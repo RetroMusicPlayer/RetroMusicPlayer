@@ -5,6 +5,7 @@
     <string name="accent_color">Акцентний колір</string>
     <string name="accent_color_desc">Акцентний колір, за замовчуванням фіолетовий</string>
     <string name="action_about">Про додаток</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">Додати в обране</string>
     <string name="action_add_to_playing_queue">Додати до черги відтворення</string>
     <string name="action_add_to_playlist">Додати до списку відтворення</string>
@@ -304,6 +305,7 @@
     <string name="pref_summary_colored_app">Тло і кольори кнопок керування міняються в залежності від обкладинки екрана відтворення</string>
     <string name="pref_summary_colored_app_shortcuts">Фарбує ярлики додатків у колір акценту. Кожного разу, коли ви змінюєте колір, будь ласка, перемкніть його, щоб зміни вступили в силу</string>
     <string name="pref_summary_colored_notification">"Фарбує повідомлення в обкладинці альбому яскравим кольором"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">Для Material Design лінії в темному режимі мають бути ненасичені</string>
     <string name="pref_summary_expand_now_playing_panel">При натисканні на сповіщення буде показано екран відтворення замість домашнього екрану</string>
     <string name="pref_summary_extra_controls">Додати додаткові елементи керування до міні-програвача</string>
@@ -314,12 +316,14 @@
     <string name="pref_summary_library_categories">Налаштувати видимість та порядок категорій бібліотеки.</string>
     <string name="pref_summary_lock_screen">Використовувати керування музикою на екрані блокування від Retro Music</string>
     <string name="pref_summary_open_source_licences">Деталі ліцензії для програмного забезпечення з відкритим кодом</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Режим занурення</string>
     <string name="pref_summary_toggle_headset">Почати відтворення відразу після підключення навушників</string>
     <string name="pref_summary_toggle_shuffle">Випадковий режим вимкнеться при відтворенні нового списку пісень</string>
     <string name="pref_summary_toggle_volume">Якщо вистачає місця, показувати панель гучності на екрані відтворення</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Показати обкладинку альбому</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Тема обкладинки альбому</string>
@@ -334,6 +338,7 @@
     <string name="pref_title_classic_notification">Класичне оформлення сповіщень</string>
     <string name="pref_title_colored_app">Адаптивний колір</string>
     <string name="pref_title_colored_notification">Кольорове сповіщення</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Ненасичений колір</string>
     <string name="pref_title_expand_now_playing_panel">Показувати на екрані відтворення</string>
     <string name="pref_title_extra_controls">Додаткові елементи керування</string>
@@ -348,6 +353,7 @@
     <string name="pref_title_lock_screen">Повноекранне керування</string>
     <string name="pref_title_now_playing_screen_appearance">Тема відтворення</string>
     <string name="pref_title_open_source_licences">Ліцензії з відкритим кодом</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Режим назв вкладок</string>
@@ -356,6 +362,7 @@
     <string name="pref_title_toggle_toggle_headset">Автоматичне відтворення</string>
     <string name="pref_title_toggle_toggle_shuffle">Режим перемішування</string>
     <string name="pref_title_toggle_volume">Регулювання гучності</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Чорна тема, теми відтворення, ефект каруселі та інше..</string>
     <string name="profile">Профіль</string>
@@ -414,6 +421,7 @@
     <string name="share_app">Поділитися додатком</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Поділитися в Історії</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">Перемішати</string>
     <string name="simple">Простий</string>
     <string name="sleep_timer_canceled">Таймер сну скасовано.</string>
@@ -442,7 +450,6 @@
     <string name="support_development">Підтримати розробку</string>
     <string name="swipe_to_unlock">Свайпніть, щоб розблокувати</string>
     <string name="synced_lyrics">Синхронізовані тексти</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Приєднуйтесь до групи Telegram щоб обговорити помилки, робити пропозиції та інше</string>
     <string name="thank_you">Щиро дякую!</string>
@@ -488,10 +495,4 @@
     <string name="you_have_to_select_at_least_one_category">Виберіть принаймні одну категорію.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вас буде перенаправлено на сайт відстеження проблем.</string>
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
