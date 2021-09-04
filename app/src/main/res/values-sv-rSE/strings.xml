@@ -5,6 +5,7 @@
     <string name="accent_color">Accentfärg</string>
     <string name="accent_color_desc">Temats accentfärg, standard är lila</string>
     <string name="action_about">Om</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">Lägg till i favoriter</string>
     <string name="action_add_to_playing_queue">Lägg till i spelkön</string>
     <string name="action_add_to_playlist">Lägg till i spellista</string>
@@ -300,6 +301,7 @@
     <string name="pref_summary_colored_app">Bakgrunds- och kontrollknapparnas färger ändras enligt albumomslaget från spelarskärmen</string>
     <string name="pref_summary_colored_app_shortcuts">Färgar appens genvägar i accentfärgen. Se till att aktivera detta varje gång du ändrar färg, för att ändringen ska träda i kraft</string>
     <string name="pref_summary_colored_notification">"Färgar notisen i albumomslagets framträdande färg"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">I enlighet med riktlinjer för Material Design ska färger desatureras i mörkt läge</string>
     <string name="pref_summary_expand_now_playing_panel">När du klickar på notisen visas spelarskärmen istället för hemskärmen</string>
     <string name="pref_summary_extra_controls">Lägg till extra kontroller för minispelaren</string>
@@ -310,12 +312,14 @@
     <string name="pref_summary_library_categories">Konfigurera synlighet och ordning för bibliotekskategorier.</string>
     <string name="pref_summary_lock_screen">Använd Retro Music:s anpassade låsskärmskontroller</string>
     <string name="pref_summary_open_source_licences">Licensinformation för programvara med öppen källkod</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Uppslukande läge</string>
     <string name="pref_summary_toggle_headset">Börja spela direkt då hörlurar ansluts</string>
     <string name="pref_summary_toggle_shuffle">Shuffleläget stängs av när du spelar en ny lista med låtar</string>
     <string name="pref_summary_toggle_volume">Visa volymkontroller på spelarskärmen, om det finns tillräckligt med utrymme </string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Visa albumomslag</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Tema för albumomslag</string>
@@ -330,6 +334,7 @@
     <string name="pref_title_classic_notification">Klassisk notisssdesign</string>
     <string name="pref_title_colored_app">Adaptiv färg</string>
     <string name="pref_title_colored_notification">Färgad notis</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Desaturerad färg</string>
     <string name="pref_title_expand_now_playing_panel">Öppna spelaren</string>
     <string name="pref_title_extra_controls">Extra kontroller</string>
@@ -344,6 +349,7 @@
     <string name="pref_title_lock_screen">Helskärmskontroller</string>
     <string name="pref_title_now_playing_screen_appearance">Spelartema</string>
     <string name="pref_title_open_source_licences">Licenser för öppen källkod</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Fliktitlar</string>
@@ -352,6 +358,7 @@
     <string name="pref_title_toggle_toggle_headset">Auto-play</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffleläge</string>
     <string name="pref_title_toggle_volume">Volymkontroller</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Helt svart tema, spelarteman, karuselleffekt med mera…</string>
     <string name="profile">Profil</string>
@@ -410,6 +417,7 @@
     <string name="share_app">Dela app</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Dela till Stories</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">Shuffle</string>
     <string name="simple">Enkel</string>
     <string name="sleep_timer_canceled">Sömntimer inaktiverad.</string>
@@ -438,7 +446,6 @@
     <string name="support_development">Stöd utvecklingen</string>
     <string name="swipe_to_unlock">Svep för att låsa upp</string>
     <string name="synced_lyrics">Synkad låttext</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Gå med i Telegram-gruppen för att diskutera buggar, lämna förslag, briljera och mycket annat</string>
     <string name="thank_you">Tack!</string>
@@ -484,10 +491,4 @@
     <string name="you_have_to_select_at_least_one_category">Du måste välja minst en kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dina kontodata används endast för verifiering.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
