@@ -5,6 +5,7 @@
     <string name="accent_color">اللون الأساسي</string>
     <string name="accent_color_desc">لون تمييز المظهر ، يتم تعيينه إلى اللون الأرجواني</string>
     <string name="action_about">حول</string>
+    <string name="action_add_to_blacklist">إضافة إلى القائمة السوداء</string>
     <string name="action_add_to_favorites">اضافة الى المفضلة</string>
     <string name="action_add_to_playing_queue">إضافة الى قائمة التشغيل الحالية</string>
     <string name="action_add_to_playlist">أضف إلى قائمة التشغيل</string>
@@ -311,6 +312,7 @@
     <string name="pref_summary_colored_app">تتغير ألوان أزرار الخلفية والتحكم وفقًا لصورة الألبوم من شاشة التشغيل الآن</string>
     <string name="pref_summary_colored_app_shortcuts">تلوين اختصارات التطبيق باللون الثانوي . في كل مرة تقوم فيها بتغيير اللون ، يرجى تفعيل هذا الخيار ليتم تطبيق التغييرات</string>
     <string name="pref_summary_colored_notification">"تلوين الإشعارات في غلاف الألبوم\u2019لون نشط"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">حسب خطوط دليل تصميم المواد بالألوان في الوضع المظلم يجب أن لاتكون مشتته</string>
     <string name="pref_summary_expand_now_playing_panel">النقر على الإشعار سيظهر الآن مايتم تشغيله بدلاً من الشاشة الرئيسية لتطبيق</string>
     <string name="pref_summary_extra_controls">اضافة المزيد من التحكم في المشغل المصغر</string>
@@ -321,12 +323,14 @@
     <string name="pref_summary_library_categories">تكوين وعرض وترتيب فئات المكتبة.</string>
     <string name="pref_summary_lock_screen">استخدم شاشة القفل المخصصة من ريترو ميوزك لتحكم بالتشغيل</string>
     <string name="pref_summary_open_source_licences">الرخصة والتفاصيل للبرمجيات مفتوحة المصدر</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">عرض كلمات الأغاني المتزامنة عبر غلاف الألبوم</string>
     <string name="pref_summary_suggestions">إظهار خليط موسيقي جديد على الشاشة الرئيسية</string>
     <string name="pref_summary_toggle_full_screen">وضع الشاشة الكاملة</string>
     <string name="pref_summary_toggle_headset">تشغيل تلقائيا عند توصيل السماعة</string>
     <string name="pref_summary_toggle_shuffle">سوف يتم تعطيل وضع الخلط عند التشغيل من قائمة جديدة</string>
     <string name="pref_summary_toggle_volume">في حال توفر مساحة كافية قم بعرض شريط التحكم بالصوت في شاشة التشغيل الآن</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">عرض غطاء الالبوم</string>
     <string name="pref_title_album_artists_only">التنقل بواسطة ألبوم الفنان</string>
     <string name="pref_title_album_cover_style">ثيم غطاء الالبوم</string>
@@ -341,6 +345,7 @@
     <string name="pref_title_classic_notification">تصميم التنبيهات الكلاسيكي</string>
     <string name="pref_title_colored_app">اللون المتكيف</string>
     <string name="pref_title_colored_notification">التنبيهات الملونة</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">لون مفصّل</string>
     <string name="pref_title_expand_now_playing_panel">إظهار شاشة التشغيل</string>
     <string name="pref_title_extra_controls">المزيد من أزرار التحكم</string>
@@ -355,6 +360,7 @@
     <string name="pref_title_lock_screen">ازار التحكم في كامل الشاشة</string>
     <string name="pref_title_now_playing_screen_appearance">ثيم التشغيل الان</string>
     <string name="pref_title_open_source_licences">التراخيص مفتوحة المصدر</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">عرض الكلمات</string>
     <string name="pref_title_suggestions">عرض الإقتراحات</string>
     <string name="pref_title_tab_text_mode">وضع عناوين التبويبات</string>
@@ -363,6 +369,7 @@
     <string name="pref_title_toggle_toggle_headset">التشغيل التلقائي</string>
     <string name="pref_title_toggle_toggle_shuffle">وضع الخلط</string>
     <string name="pref_title_toggle_volume">التحكم بالصوت</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">الكامل</string>
     <string name="pro_summary">تشغيل الآن السمات ، وتأثير التكدس ، وموضوع اللون وأكثر من ذلك ..</string>
     <string name="profile">الملف الشخصي</string>
@@ -421,6 +428,7 @@
     <string name="share_app">مشاركة التطبيق</string>
     <string name="share_summary">شارك التطبيق مع أصدقائك وأسرتك</string>
     <string name="share_to_stories">شارك في القصص</string>
+    <string name="show_album_artists">إظهار ألبوم الفنان</string>
     <string name="shuffle">خلط</string>
     <string name="simple">بسيط</string>
     <string name="sleep_timer_canceled">تم إلغاء مؤقت النوم.</string>
@@ -449,7 +457,6 @@
     <string name="support_development">دعم التطوير</string>
     <string name="swipe_to_unlock">اسخب للفتح</string>
     <string name="synced_lyrics">مزامنة الكلمات</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">تيليجرام</string>
     <string name="telegram_group_summary">انضم لمجموعة التيليجرام لمناقشة المشاكل, و طرح اقتراحات والمزيد</string>
     <string name="thank_you">شكرا</string>
@@ -495,10 +502,4 @@
     <string name="you_have_to_select_at_least_one_category">عليك اختيار فئة واحدة على الأقل.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">سيتم تحويلك الى صفحة سجل الاخطاء</string>
     <string name="your_account_data_is_only_used_for_authentication">بيانات حسابك تستخدم لتوثيق فقط.</string>
-    <string name="show_album_artists">إظهار ألبوم الفنان</string>
-    <string name="action_add_to_blacklist">إضافة إلى القائمة السوداء</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
