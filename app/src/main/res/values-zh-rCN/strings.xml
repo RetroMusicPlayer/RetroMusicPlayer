@@ -5,6 +5,7 @@
     <string name="accent_color">强调色</string>
     <string name="accent_color_desc">主题强调色，默认为紫色</string>
     <string name="action_about">关于</string>
+    <string name="action_add_to_blacklist">添加至黑名单</string>
     <string name="action_add_to_favorites">添加到收藏夹</string>
     <string name="action_add_to_playing_queue">添加到播放队列</string>
     <string name="action_add_to_playlist">添加到播放列表</string>
@@ -300,6 +301,7 @@
     <string name="pref_summary_colored_app">背景色以及控件色跟随正在播放界面的专辑封面变化</string>
     <string name="pref_summary_colored_app_shortcuts">将快捷方式颜色更改为强调色，每次颜色更改后需要切换一下该设置才能生效</string>
     <string name="pref_summary_colored_notification">"将通知栏颜色修改为专辑封面的强调色"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">根据材料设计指南，黑色模式时颜色应该降低饱和度</string>
     <string name="pref_summary_expand_now_playing_panel">点击通知将显示「正在播放界面」而不是「主界面」</string>
     <string name="pref_summary_extra_controls">给迷你播放器添加额外控件</string>
@@ -311,12 +313,14 @@
     <string name="pref_summary_library_categories">配置媒体库的可见性和顺序</string>
     <string name="pref_summary_lock_screen">使用 Retro Music 的自定义锁屏</string>
     <string name="pref_summary_open_source_licences">开源许可详情</string>
+    <string name="pref_summary_remember_tab">启动时打开上次使用的页面</string>
     <string name="pref_summary_show_lyrics">在专辑封面上显示同步歌词</string>
     <string name="pref_summary_suggestions">在主屏幕上显示新歌单</string>
     <string name="pref_summary_toggle_full_screen">沉浸模式</string>
     <string name="pref_summary_toggle_headset">连接耳机后立即开始播放</string>
     <string name="pref_summary_toggle_shuffle">播放新列表时关闭随机播放</string>
     <string name="pref_summary_toggle_volume">空间充足时在播放界面显示音量控制控件</string>
+    <string name="pref_summary_whitelist">仅显示 /Music 目录的音乐</string>
     <string name="pref_title_album_art_on_lockscreen">显示专辑封面</string>
     <string name="pref_title_album_artists_only">按专辑艺术家排序</string>
     <string name="pref_title_album_cover_style">专辑封面主题</string>
@@ -331,6 +335,7 @@
     <string name="pref_title_classic_notification">经典通知栏设计</string>
     <string name="pref_title_colored_app">自适应颜色</string>
     <string name="pref_title_colored_notification">着色通知栏</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">不饱和色</string>
     <string name="pref_title_expand_now_playing_panel">显示正在播放界面</string>
     <string name="pref_title_extra_controls">额外控件</string>
@@ -345,6 +350,7 @@
     <string name="pref_title_lock_screen">全屏控件</string>
     <string name="pref_title_now_playing_screen_appearance">正在播放主题</string>
     <string name="pref_title_open_source_licences">开源许可</string>
+    <string name="pref_title_remember_tab">记住最后打开页面</string>
     <string name="pref_title_show_lyrics">显示歌词</string>
     <string name="pref_title_suggestions">显示建议</string>
     <string name="pref_title_tab_text_mode">标签标题模式</string>
@@ -353,6 +359,7 @@
     <string name="pref_title_toggle_toggle_headset">自动播放</string>
     <string name="pref_title_toggle_toggle_shuffle">随机播放</string>
     <string name="pref_title_toggle_volume">音量控件</string>
+    <string name="pref_title_whitelist">白名单音乐</string>
     <string name="pro">高级版</string>
     <string name="pro_summary">黑色主题，正在播放主题，轮播效果和更多...</string>
     <string name="profile">个人信息</string>
@@ -411,6 +418,7 @@
     <string name="share_app">分享应用</string>
     <string name="share_summary">与您的朋友和家人分享此应用</string>
     <string name="share_to_stories">分享到故事</string>
+    <string name="show_album_artists">显示专辑艺术家</string>
     <string name="shuffle">随机播放</string>
     <string name="simple">简单</string>
     <string name="sleep_timer_canceled">睡眠定时已取消。</string>
@@ -439,7 +447,6 @@
     <string name="support_development">支持开发者</string>
     <string name="swipe_to_unlock">滑动以解锁</string>
     <string name="synced_lyrics">滚动歌词</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">加入 Telegram 团队，讨论错误，提出建议，展示信息等等</string>
     <string name="thank_you">谢谢您！</string>
@@ -485,10 +492,4 @@
     <string name="you_have_to_select_at_least_one_category">请至少选择一个分类。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
-    <string name="show_album_artists">显示专辑艺术家</string>
-    <string name="action_add_to_blacklist">添加至黑名单</string>
-    <string name="pref_title_remember_tab">记住最后打开页面</string>
-    <string name="pref_summary_remember_tab">启动时打开上次使用的页面</string>
-    <string name="pref_summary_whitelist">仅显示 /Music 目录的音乐</string>
-    <string name="pref_title_whitelist">白名单音乐</string>
 </resources>
