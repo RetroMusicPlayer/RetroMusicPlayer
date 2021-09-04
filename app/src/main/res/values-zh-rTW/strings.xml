@@ -5,6 +5,7 @@
     <string name="accent_color">重點色調</string>
     <string name="accent_color_desc">重點色調，預設為粉紅色。</string>
     <string name="action_about">關於</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">加到最愛</string>
     <string name="action_add_to_playing_queue">加入播放佇列</string>
     <string name="action_add_to_playlist">加入播放清單...</string>
@@ -298,6 +299,7 @@
     <string name="pref_summary_colored_app">在播放面板上，背景與控制按鈕的顏色將根據的專輯封面顏色而改變</string>
     <string name="pref_summary_colored_app_shortcuts">將重點色調設為應用快捷方式的顏色。每次更改重點色調後，請切換此功能以生效。</string>
     <string name="pref_summary_colored_notification">"\u72c0\u614b\u5217\u984f\u8272\u8207\u5c08\u8f2f\u5716\u7247\u984f\u8272\u4e00\u81f4"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
@@ -308,12 +310,14 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯封面</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -328,6 +332,7 @@
     <string name="pref_title_classic_notification">Classic notification design</string>
     <string name="pref_title_colored_app">自適應顏色</string>
     <string name="pref_title_colored_notification">彩色的狀態列</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
@@ -342,6 +347,7 @@
     <string name="pref_title_lock_screen">Fullscreen controls</string>
     <string name="pref_title_now_playing_screen_appearance">外觀</string>
     <string name="pref_title_open_source_licences">開源授權協議</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
@@ -350,6 +356,7 @@
     <string name="pref_title_toggle_toggle_headset">Auto-play</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Volume controls</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
@@ -408,6 +415,7 @@
     <string name="share_app">Share app</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">隨機播放</string>
     <string name="simple">Simple</string>
     <string name="sleep_timer_canceled">已取消睡眠定時器。</string>
@@ -436,7 +444,6 @@
     <string name="support_development">支援開發</string>
     <string name="swipe_to_unlock">Swipe to unlock</string>
     <string name="synced_lyrics">Synced lyrics</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
     <string name="thank_you">感謝你！</string>
@@ -482,10 +489,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
