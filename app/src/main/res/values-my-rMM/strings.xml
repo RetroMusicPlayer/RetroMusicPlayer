@@ -5,6 +5,7 @@
     <string name="accent_color">Accent Color</string>
     <string name="accent_color_desc">The theme accent color (ခရမ်းရောင်သည်မူလအရောင်)</string>
     <string name="action_about">About</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">အကြိုက်ဆုံးသို့ထည့်မည်</string>
     <string name="action_add_to_playing_queue">နားထောင်နေသည့်စာရင်းထဲသို့ထည့်မည်</string>
     <string name="action_add_to_playlist">Playlist သို့ထည့်မည်</string>
@@ -298,6 +299,7 @@
     <string name="pref_summary_colored_app">နောက်ခံအရောင်နှင့်ထိန်းချုပ်ခလုတ်အရောင်များသည် Now Playing screen မှ Album cover အရောင်အတိုင်း ပြောင်းလဲပါမည်</string>
     <string name="pref_summary_colored_app_shortcuts">Accent color မှ App shortcuts များကိုအရောင်ပြောင်းလဲသည်။ Accent color ပြောင်းသည့်အခါတိုင်း App ကိုသက်ရောက်မှုရှိစေရန် ဤခလုတ်ကိုအဖွင့်၊အပိတ်လုပ်ပေးပါ။</string>
     <string name="pref_summary_colored_notification">"Notification အရောင်ကို Album cover မှထင်ရှားသည့်အရောင်အတိုင်း ပြောင်းမည်"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">Material ဒီဇိုင်းညွှန်ကြားချက်များအရ Dark Mode ဖွင့်ထားချိန်တွင်အရောင်များမှိန်နေသင့်သည်</string>
     <string name="pref_summary_expand_now_playing_panel">Notification ကိုနှိပ်သည့်အခါ Home screen သို့ရောက်မည့်အစား Now Playing screen သို့တိုက်ရိုက်ရောက်သွားမည်</string>
     <string name="pref_summary_extra_controls">Mini player တွင် ထိန်းချုပ်ခလုတ်အပိုများထပ်ပေါင်းမည်</string>
@@ -308,12 +310,14 @@
     <string name="pref_summary_library_categories">Library category များ ဖော်ခြင်း၊ ဖျောက်ခြင်းနှင့် အထားအသိုများ ချိန်ညှိမည်</string>
     <string name="pref_summary_lock_screen">Retro Music ၏ ပြင်ဆင်ထားသော Lockscreen controls များကိုသုံးမည်</string>
     <string name="pref_summary_open_source_licences">Open Source software အတွက် လိုင်စင်အချက်အလက်များ</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">နားကြပ်နှင့်ချိတ်ဆက်ပြီးသည့်နှင့် စတင် play မည်</string>
     <string name="pref_summary_toggle_shuffle">သီချင်းဖွင့်မည့်စာရင်း\'အသစ်\'ကို play သည့်အခါ Shuffle Mode ပိတ်သွားပါမည်</string>
     <string name="pref_summary_toggle_volume">နေရာလုံလုံလောက်လောက်ရှိပါက Now Playing screen တွင် အသံအတိုးအကျယ်ခလုတ်များပြသမည်</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Album cover ပြသခြင်း</string>
     <string name="pref_title_album_artists_only">Album သီဆိုသူဖြင့် ရှာဖွေခြင်း</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -328,6 +332,7 @@
     <string name="pref_title_classic_notification">Notification ဒီဇိုင်းအဟောင်း</string>
     <string name="pref_title_colored_app">Adaptive color</string>
     <string name="pref_title_colored_notification">အရောင်ပါသော notification</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Now Playing screen ပြသခြင်း</string>
     <string name="pref_title_extra_controls">အပိုထိန်းချုပ်မှုများ</string>
@@ -342,6 +347,7 @@
     <string name="pref_title_lock_screen">Lockscreen အပြည့် controls</string>
     <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
     <string name="pref_title_open_source_licences">Open source licences</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Tab ခေါင်းစဉ်ပြသခြင်း</string>
@@ -350,6 +356,7 @@
     <string name="pref_title_toggle_toggle_headset">အလိုအလျောက် play ခြင်း</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">အသံထိန်းချုပ်မှု</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme ၊ Now playing themes နှင့် Carousel effect စသည်များ...</string>
     <string name="profile">Profile</string>
@@ -408,6 +415,7 @@
     <string name="share_app">App ကိုမျှဝေမည်</string>
     <string name="share_summary">သင့်မိသားစုနှင့် သူငယ်ချင်းများကိုပြန်လည်မျှဝေလိုက်ပါ</string>
     <string name="share_to_stories">Stories သို့မျှဝေမည်</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">Shuffle</string>
     <string name="simple">ရိုးရိုးရှင်းရှင်း</string>
     <string name="sleep_timer_canceled">Sleep timer ကိုဖျက်ပြီးပါပြီ</string>
@@ -436,7 +444,6 @@
     <string name="support_development">Support development</string>
     <string name="swipe_to_unlock">Swipe to unlock</string>
     <string name="synced_lyrics">ချိန်ကိုက်ထားသောသီချင်းစာသား</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Bugs များကို ဆွေးနွေးရန်၊ အကြံပြုချက်များပေးရန်၊ ကြွားရန်နှင့် စသည်များ...</string>
     <string name="thank_you">ကျေးဇူးတင်ပါတယ်</string>
@@ -482,10 +489,4 @@
     <string name="you_have_to_select_at_least_one_category">အနည်းဆုံး category တစ်ခုရွေးချယ်ရန်လိုအပ်သည်</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Issue tracker website သို့ခေါ်ဆောင်သွားပါမည်</string>
     <string name="your_account_data_is_only_used_for_authentication">သင့်အကောင့်အချက်အလက်ကို အတည်ပြုရန်အတွက်သာအသုံးပြုပါသည်။</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
