@@ -5,6 +5,7 @@
     <string name="accent_color">Vurgu rengi</string>
     <string name="accent_color_desc">Tema vurgu rengi, varsayılan olarak mor renktedir</string>
     <string name="action_about">Hakkında</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">Favorilere ekle</string>
     <string name="action_add_to_playing_queue">Oynatma kuyruğuna ekle</string>
     <string name="action_add_to_playlist">Oynatma listesine ekle</string>
@@ -300,6 +301,7 @@
     <string name="pref_summary_colored_app">Arka plan ve kontrol düğmesinin renkleri, çalmakta olan ekranda albüm resmine göre değişir</string>
     <string name="pref_summary_colored_app_shortcuts">Vurgu rengindeki uygulama kısayollarını renklendirir. Lütfen rengi her değiştirdiğinizde, etkili olması için bu düğmeyi değiştirin.</string>
     <string name="pref_summary_colored_notification">"Alb\u00fcm kapa\u011f\u0131n\u0131n canl\u0131 rengindeki bildirimi renklendirir"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">Karanlık modda malzeme tasarım kurallarına göre renkler doymamış olmalıdır</string>
     <string name="pref_summary_expand_now_playing_panel">Bildirime tıklamak ana ekran yerine şimdi oynatılıyor ekranını gösterecek</string>
     <string name="pref_summary_extra_controls">Mini oynatıcı için ekstra kontroller ekle</string>
@@ -310,12 +312,14 @@
     <string name="pref_summary_library_categories">Kütüphane kategorilerinin görünürlük ve sırasını yapılandırın</string>
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
     <string name="pref_summary_toggle_headset">Kulaklık bağlandıktan hemen sonra çalmaya başla</string>
     <string name="pref_summary_toggle_shuffle">Yeni bir şarkı listesi çalınırken karıştırma modu kapanacak</string>
     <string name="pref_summary_toggle_volume">Eğer yeterli alan varsa ses kontrollerini şimdi oynatılıyor ekranında göster</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Albüm kapağını göster</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Albüm kapağı teması</string>
@@ -330,6 +334,7 @@
     <string name="pref_title_classic_notification">Klasik bildirim tasarımı</string>
     <string name="pref_title_colored_app">Adaptif renk</string>
     <string name="pref_title_colored_notification">Renkli bildirim</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Doymamış renk</string>
     <string name="pref_title_expand_now_playing_panel">Şimdi oynatılıyor ekranını göster</string>
     <string name="pref_title_extra_controls">Ekstra kontroller</string>
@@ -344,6 +349,7 @@
     <string name="pref_title_lock_screen">Tam ekran kontrolleri</string>
     <string name="pref_title_now_playing_screen_appearance">Şimdi oynatılıyor teması</string>
     <string name="pref_title_open_source_licences">Açık kaynak lisansları</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Sekme başlıkları modu</string>
@@ -352,6 +358,7 @@
     <string name="pref_title_toggle_toggle_headset">Otomatik oynatma</string>
     <string name="pref_title_toggle_toggle_shuffle">Karıştır modu</string>
     <string name="pref_title_toggle_volume">Ses kontrolleri</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Şimdi Oynatılıyor temaları, Atlıkarınca efekti, Renkli tema ve daha fazlası..</string>
     <string name="profile">Profil</string>
@@ -410,6 +417,7 @@
     <string name="share_app">Uygulamayı paylaş</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Hikayende paylaş</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">Karıştır</string>
     <string name="simple">Basit</string>
     <string name="sleep_timer_canceled">Uyku zamanlayıcısı iptal edildi.</string>
@@ -438,7 +446,6 @@
     <string name="support_development">Destek geliştirme</string>
     <string name="swipe_to_unlock">Açmak için kaydırın</string>
     <string name="synced_lyrics">Senkronize şarkı sözleri</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Hataları tartışmak, önerilerde bulunmak ve daha fazlası için Telegram grubuna katılın</string>
     <string name="thank_you">Teşekkür ederiz!</string>
@@ -484,10 +491,4 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
