@@ -77,7 +77,7 @@
     <string name="app_widget_text_name">Texto mínimo</string>
     <string name="artist">Artista</string>
     <string name="artists">Artistas</string>
-    <string name="audio_fade_duration">Duração do Aumento Gradual</string>
+    <string name="audio_fade_duration">Duração de transição entre músicas</string>
     <string name="audio_focus_denied">Foco de áudio negado</string>
     <string name="audio_settings_summary">Altere as configurações de som e ajuste os controles do equalizador</string>
     <string name="auto">Automático</string>
