@@ -5,6 +5,7 @@
     <string name="accent_color">Kiemelő szín</string>
     <string name="accent_color_desc">Az kiemelő téma színe alapértelmezés szerint színtiszta</string>
     <string name="action_about">Rólunk</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">Hozzáadás a kedvencekhez</string>
     <string name="action_add_to_playing_queue">Hozzáadás a lejátszási sorhoz</string>
     <string name="action_add_to_playlist">Hozzáadás lejátszási listához</string>
@@ -300,6 +301,7 @@
     <string name="pref_summary_colored_app">A háttér és a vezérlőgombok színe a most játszott képernyőn megjelenő albumborító szerint változik</string>
     <string name="pref_summary_colored_app_shortcuts">Színek az alkalmazás parancsikonjai az akcentus színében. Minden alkalommal, amikor megváltoztatta a színét, kérjük, kapcsolja be ezt a hatást</string>
     <string name="pref_summary_colored_notification">"Sz\u00ednek az \u00e9rtes\u00edt\u00e9st az albumbor\u00edt\u00f3 \u00e9l\u00e9nk sz\u00edn\u00e9ben."</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">Az Anyagtervezés szerint a sötét módban a színeket deszaturálni kell</string>
     <string name="pref_summary_expand_now_playing_panel">Az értesítésre kattintva a kezdőképernyő helyett a lejátszási képernyő jelenik meg</string>
     <string name="pref_summary_extra_controls">Extra irányítás a mini lejátszóhoz</string>
@@ -310,12 +312,14 @@
     <string name="pref_summary_library_categories">A láthatóság és a könyvtári kategóriák sorrendjének beállítása.</string>
     <string name="pref_summary_lock_screen">Retro zeneszámok zárolása a képernyőn.</string>
     <string name="pref_summary_open_source_licences">A nyílt forráskódú szoftverek licence részletei</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Kiterjesztett üzemmód</string>
     <string name="pref_summary_toggle_headset">Indítsa el a lejátszást, amikor a fejhallgató csatlakoztatva van.</string>
     <string name="pref_summary_toggle_shuffle">A véletlen sorrendű mód kikapcsol, ha új számlistát játszik le</string>
     <string name="pref_summary_toggle_volume">Ha van szabad hely a képernyőn engedélyezett hangerőszabályzókkal</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Az album borítójának megjelenítése</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album borító téma</string>
@@ -330,6 +334,7 @@
     <string name="pref_title_classic_notification">Klasszikus értesítési terv</string>
     <string name="pref_title_colored_app">Adaptív szín</string>
     <string name="pref_title_colored_notification">Színes értesítés</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Deszaturált szín</string>
     <string name="pref_title_expand_now_playing_panel">Jelenítse meg a most játszó képernyőt</string>
     <string name="pref_title_extra_controls">Extra vezérlők</string>
@@ -344,6 +349,7 @@
     <string name="pref_title_lock_screen">Teljes képernyős vezérlők</string>
     <string name="pref_title_now_playing_screen_appearance">Megjelenés</string>
     <string name="pref_title_open_source_licences">Nyílt forráskódú licencek</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Lap címek módja</string>
@@ -352,6 +358,7 @@
     <string name="pref_title_toggle_toggle_headset">Automatikus lejátszás</string>
     <string name="pref_title_toggle_toggle_shuffle">Kevert mód</string>
     <string name="pref_title_toggle_volume">Hangerőszabályzók</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Jelenleg témákat játszik, körhinta effektus és még sok más ..</string>
     <string name="profile">Profil</string>
@@ -410,6 +417,7 @@
     <string name="share_app">Alkalmazás megosztása</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Ossza meg a Történet-ben</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">Keverés</string>
     <string name="simple">Egyszerű</string>
     <string name="sleep_timer_canceled">Az elalváskapcsoló kikapcsolva.</string>
@@ -438,7 +446,6 @@
     <string name="support_development">Támogatás fejlesztése</string>
     <string name="swipe_to_unlock">Csúsztasd fel a feloldáshoz</string>
     <string name="synced_lyrics">Szinkronizált dalszövegek</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Csatlakozz a Telegram csoporthoz hogy megbeszélhesd a hibákat, ajánlásokat tegyél, bemutass valamit stb...</string>
     <string name="thank_you">Köszönöm!</string>
@@ -484,10 +491,4 @@
     <string name="you_have_to_select_at_least_one_category">Legalább egy kategóriát kell kiválasztania</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Továbbítani fogjuk a problémakezelő weboldalra.</string>
     <string name="your_account_data_is_only_used_for_authentication">Fiókja adatait kizárólag a hitelesítéshez fogjuk használni.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>

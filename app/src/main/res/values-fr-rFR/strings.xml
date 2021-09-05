@@ -5,6 +5,7 @@
     <string name="accent_color">Couleur d\'accentuation</string>
     <string name="accent_color_desc">La couleur d\'accentuation du thème, verte par défaut</string>
     <string name="action_about">À propos</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">Ajouter aux favoris</string>
     <string name="action_add_to_playing_queue">Ajouter à la file d\'attente</string>
     <string name="action_add_to_playlist">Ajouter à la playlist</string>
@@ -300,6 +301,7 @@
     <string name="pref_summary_colored_app">La couleur du fond et des boutons de contrôles change en fonction de l\'image d\'album sur l\'écran de lecture en cours</string>
     <string name="pref_summary_colored_app_shortcuts">Les raccourcis rapides de l\'application prendront la couleur d\'accent. Chaque fois que vous changez de couleur, veuillez activer ceci afin que le changement soit pris en compte</string>
     <string name="pref_summary_colored_notification">"Colorer la notification avec la couleur dominante des couvertures d'albums"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Ajouter des contrôles supplémentaires pour le mini lecteur</string>
@@ -310,12 +312,14 @@
     <string name="pref_summary_library_categories">Configurer la visibilité et l\'ordre des catégories de la librairie.</string>
     <string name="pref_summary_lock_screen">Utiliser les contrôles personnalisés de Retro Music sur l\'écran de verrouillage</string>
     <string name="pref_summary_open_source_licences">Détails des licences pour les logiciels open source</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Mode immersif</string>
     <string name="pref_summary_toggle_headset">Commencer immédiatement la lecture lors du branchement d\'un casque</string>
     <string name="pref_summary_toggle_shuffle">Le mode aléatoire se désactivera lors de la lecture d\'une nouvelle liste de morceaux</string>
     <string name="pref_summary_toggle_volume">Si vous avez assez de place, affiche les contrôle du volume sur l\'écran de lecture</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Afficher la couverture de l\'album</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Thème de la couverture d\'album</string>
@@ -330,6 +334,7 @@
     <string name="pref_title_classic_notification">Design de notification classique</string>
     <string name="pref_title_colored_app">Couleur adaptative</string>
     <string name="pref_title_colored_notification">Notification colorée</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Contrôles supplémentaires</string>
@@ -344,6 +349,7 @@
     <string name="pref_title_lock_screen">Contrôles plein-écran</string>
     <string name="pref_title_now_playing_screen_appearance">Thème d\'écran de lecture</string>
     <string name="pref_title_open_source_licences">Licences open source</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Mode Titres onglets</string>
@@ -352,6 +358,7 @@
     <string name="pref_title_toggle_toggle_headset">Lecture automatique</string>
     <string name="pref_title_toggle_toggle_shuffle">Mode aléatoire</string>
     <string name="pref_title_toggle_volume">Contrôles de volume</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Maintenant les thèmes de jeu, L\'effet de carrousel, thème de couleur et plus..</string>
     <string name="profile">Profil</string>
@@ -410,6 +417,7 @@
     <string name="share_app">Partager l\'app</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">Aléatoire</string>
     <string name="simple">Simple</string>
     <string name="sleep_timer_canceled">Minuteur d\'extinction annulé.</string>
@@ -438,7 +446,6 @@
     <string name="support_development">Aider le développement</string>
     <string name="swipe_to_unlock">Glisser pour déverrouiller</string>
     <string name="synced_lyrics">Paroles synchronisées</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Rejoignez le groupe Telegram pour discuter des bugs, faire des suggestions, montrer votre configuration, etc.</string>
     <string name="thank_you">Merci !</string>
@@ -484,10 +491,4 @@
     <string name="you_have_to_select_at_least_one_category">Vous devez sélectionner au moins une catégorie.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>

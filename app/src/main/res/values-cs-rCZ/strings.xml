@@ -5,6 +5,7 @@
     <string name="accent_color">Barva akcentů</string>
     <string name="accent_color_desc">Barva motivu akcentu je výchozí k růžové barvě.</string>
     <string name="action_about">Informace</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">Přidat k oblíbeným</string>
     <string name="action_add_to_playing_queue">Přidat do fronty </string>
     <string name="action_add_to_playlist">Přidat do seznamu skladeb…</string>
@@ -304,6 +305,7 @@
     <string name="pref_summary_colored_app">Pozadí, barva ovládacích tlačítek se mění podle vzhledu alb z obrazovky přehrávače</string>
     <string name="pref_summary_colored_app_shortcuts">Vybarvit zkratky aplikací v barvě odstínu. Pokaždé, když změníte barvu, přepněte toto nastavení, aby se projevil efekt</string>
     <string name="pref_summary_colored_notification">"Vybarv\u00ed ozn\u00e1men\u00ed v \u017eiv\u00e9 barv\u011b krytu alba."</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
@@ -314,12 +316,14 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">Začít přehrávat ihned po připojení sluchátek</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Zobrazit obal alba</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Motiv obalu alba</string>
@@ -334,6 +338,7 @@
     <string name="pref_title_classic_notification">Klasický vzhled oznámení</string>
     <string name="pref_title_colored_app">Adaptivní barva</string>
     <string name="pref_title_colored_notification">Barevné notifikace</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
@@ -348,6 +353,7 @@
     <string name="pref_title_lock_screen">Ovládání na celou obrazovku</string>
     <string name="pref_title_now_playing_screen_appearance">Vzhled</string>
     <string name="pref_title_open_source_licences">Licence Open source</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
@@ -356,6 +362,7 @@
     <string name="pref_title_toggle_toggle_headset">Automatické přehrávání</string>
     <string name="pref_title_toggle_toggle_shuffle">Režim zamíchání</string>
     <string name="pref_title_toggle_volume">Ovládání hlasitosti</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Černý motiv, motivy stránky přehrávání, kolotočový efekt a další..</string>
     <string name="profile">Profil</string>
@@ -414,6 +421,7 @@
     <string name="share_app">Sdílet aplikaci</string>
     <string name="share_summary">Sdílejte aplikaci s přáteli a rodinou</string>
     <string name="share_to_stories">Sdílet do příběhu</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">Náhodně</string>
     <string name="simple">Simple</string>
     <string name="sleep_timer_canceled">Časovač vypnutí byl zrušen.</string>
@@ -442,7 +450,6 @@
     <string name="support_development">Podpora vývoje</string>
     <string name="swipe_to_unlock">Odemkněte posunutím prstu</string>
     <string name="synced_lyrics">Synchronizované texty</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Připojte se ke skupině na Telegramu, abyste mohli diskutovat o chybách, předkládat návrhy, předvádět se a více</string>
     <string name="thank_you">Děkujeme!</string>
@@ -488,10 +495,4 @@
     <string name="you_have_to_select_at_least_one_category">Musíte zvolit alespoň jednu kategorii.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Budete přesměrováni na webovou stránku pro zadání problému.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vaše údaje k účtu jsou použity pouze k ověření.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>

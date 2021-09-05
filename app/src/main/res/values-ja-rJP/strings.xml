@@ -5,6 +5,7 @@
     <string name="accent_color">アクセントカラー</string>
     <string name="accent_color_desc">テーマのアクセントカラー、既定は青緑色です。</string>
     <string name="action_about">このアプリについて</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">お気に入りに追加</string>
     <string name="action_add_to_playing_queue">再生キューに追加</string>
     <string name="action_add_to_playlist">プレイリストに追加…</string>
@@ -299,6 +300,7 @@
     <string name="pref_summary_colored_app">ジャケットから抽出された色が背景と再生ボタンに適用されます</string>
     <string name="pref_summary_colored_app_shortcuts">アプリのショートカットアイコンをアクセントカラーに切り替えます。アクセントカラーを変更した場合はトグルを切り替えて設定を適用してください</string>
     <string name="pref_summary_colored_notification">"\u30b8\u30e3\u30b1\u30c3\u30c8\u304b\u3089\u62bd\u51fa\u3055\u308c\u305f\u8272\u3067\u901a\u77e5\u3092\u7740\u8272\u3059\u308b"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">マテリアルデザインのガイドラインに従いダークモードで彩度の低い色を使用する</string>
     <string name="pref_summary_expand_now_playing_panel">通知をタップすることでアプリのトップ画面ではなく、再生画面を表示するようにする</string>
     <string name="pref_summary_extra_controls">ミニプレイヤー専用のコントロールボタンを追加する</string>
@@ -309,12 +311,14 @@
     <string name="pref_summary_library_categories">ライブラリに表示される項目と、順番を変更する</string>
     <string name="pref_summary_lock_screen">Retro Musicのカスタムされたロック画面を使用する</string>
     <string name="pref_summary_open_source_licences">オープンソースライセンスの詳細</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">アプリをフルスクリーン表示にする</string>
     <string name="pref_summary_toggle_headset">ヘッドフォンが接続されたら自動で再生を開始する</string>
     <string name="pref_summary_toggle_shuffle">新しいリストの楽曲を再生する時にシャッフルは自動的にオフになります</string>
     <string name="pref_summary_toggle_volume">再生画面に十分なスペースがある場合に音量コントロールを追加する</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">アルバムジャケットを表示</string>
     <string name="pref_title_album_artists_only">アルバムのアーティストを表示</string>
     <string name="pref_title_album_cover_style">アルバムカバーのテーマ</string>
@@ -329,6 +333,7 @@
     <string name="pref_title_classic_notification">古い通知デザイン</string>
     <string name="pref_title_colored_app">アダプティブカラー</string>
     <string name="pref_title_colored_notification">色付きの通知</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">彩度の低い色</string>
     <string name="pref_title_expand_now_playing_panel">通知から再生画面を開く</string>
     <string name="pref_title_extra_controls">追加コントロール</string>
@@ -343,6 +348,7 @@
     <string name="pref_title_lock_screen">フルスクリーンコントロール</string>
     <string name="pref_title_now_playing_screen_appearance">再生中のテーマ</string>
     <string name="pref_title_open_source_licences">オープンソースライセンス</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">タブのラベル</string>
@@ -351,6 +357,7 @@
     <string name="pref_title_toggle_toggle_headset">自動再生</string>
     <string name="pref_title_toggle_toggle_shuffle">シャッフルモード</string>
     <string name="pref_title_toggle_volume">ボリュームコントロール</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">プロフィール</string>
@@ -409,6 +416,7 @@
     <string name="share_app">アプリを共有する</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">シャッフル</string>
     <string name="simple">シンプル</string>
     <string name="sleep_timer_canceled">スリープタイマーがキャンセルされました</string>
@@ -437,7 +445,6 @@
     <string name="support_development">開発を支援</string>
     <string name="swipe_to_unlock">スワイプしてアンロック</string>
     <string name="synced_lyrics">連動した歌詞</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Telegram のグループに参加して、バグについて話し合ったり、提案したりしましょう</string>
     <string name="thank_you">ありがとう!</string>
@@ -483,10 +490,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>

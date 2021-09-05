@@ -5,6 +5,7 @@
     <string name="accent_color">Χρώμα έμφασης</string>
     <string name="accent_color_desc">Το χρώμα έμφασης του θέματος, η προεπιλογή είναι το μωβ</string>
     <string name="action_about">Σχετικά με</string>
+    <string name="action_add_to_blacklist">Προσθήκη στην μαύρη λίστα</string>
     <string name="action_add_to_favorites">Προσθήκη στα αγαπημένα</string>
     <string name="action_add_to_playing_queue">Προσθήκη στην ουρά αναπαραγωγής</string>
     <string name="action_add_to_playlist">Προσθήκη στη λίστα αναπαραγωγής</string>
@@ -300,6 +301,7 @@
     <string name="pref_summary_colored_app">Το φόντο και το κουμπί ελέγχου αλλάζουν σύμφωνα με το εξώφυλλο άλμπουμ</string>
     <string name="pref_summary_colored_app_shortcuts">Χρωματίζει τα app shortcuts με το επιλεγμένο χρώμα τονισμού.</string>
     <string name="pref_summary_colored_notification">"\u03a7\u03c1\u03c9\u03bc\u03b1\u03c4\u03af\u03b6\u03b5\u03b9 \u03c4\u03b7\u03bd \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7 \u03bc\u03b5 \u03c4\u03bf \u03b6\u03c9\u03bd\u03c4\u03b1\u03bd\u03cc \u03c7\u03c1\u03ce\u03bc\u03b1 \u03c4\u03bf\u03c5 \u03b5\u03be\u03c9\u03c6\u03cd\u03bb\u03bb\u03bf\u03c5 \u03ac\u03bb\u03bc\u03c0\u03bf\u03c5\u03bc."</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">Σύμφωνα με τις γραμμές οδηγών του Material Design τα χρώματα θα πρέπει να αποκορεσθούν σε σκοτεινή λειτουργία</string>
     <string name="pref_summary_expand_now_playing_panel">Κάνοντας κλικ στην ειδοποίηση θα εμφανίζεται η οθόνη αναπαραγωγής αντί της αρχικής οθόνης</string>
     <string name="pref_summary_extra_controls">Προσθήκη επιπλέον ελέγχων για τον μίνι αναπαραγωγέα</string>
@@ -310,12 +312,14 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Ενεργοποίηση διακοπτών ρύθμισης στην οθόνη κλειδώματος.</string>
     <string name="pref_summary_open_source_licences">Λεπτομέρειες άδειας για τη χρήση open source λογισμικού</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Ενεργοποίηση της επιλογής για χρήση πλήρους οθόνης</string>
     <string name="pref_summary_toggle_headset">Όταν συνδεθούν ηχεία/ακουστικά , αρχίζει η αναπαραγωγή</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">Εαν υπάρχει χώρος στην οθόνη αναπαραγωγής, ενεργοποιήστε τον πίνακα ελέγχου έντασης.</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Εμφάνιση εξωφύλλου άλμπουμ.</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -330,6 +334,7 @@
     <string name="pref_title_classic_notification">Κλασσικό design ειδοποίησης</string>
     <string name="pref_title_colored_app">Προσαρμοστικό Χρώμα</string>
     <string name="pref_title_colored_notification">Χρωματιστή ειδοποίηση</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
@@ -344,6 +349,7 @@
     <string name="pref_title_lock_screen">Full screen Ρυθμίσεις</string>
     <string name="pref_title_now_playing_screen_appearance">Εμφάνιση</string>
     <string name="pref_title_open_source_licences">Άδειες λογισμικού open source</string>
+    <string name="pref_title_remember_tab">Remember Last Tab</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
     <string name="pref_title_suggestions">Show Suggestions</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
@@ -352,6 +358,7 @@
     <string name="pref_title_toggle_toggle_headset">Αυτόματη αναπαραγωγή</string>
     <string name="pref_title_toggle_toggle_shuffle">Τυχαία λειτουργία</string>
     <string name="pref_title_toggle_volume">Πίνακας Ελέγχου Έντασης</string>
+    <string name="pref_title_whitelist">Whitelist Music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Μαύρο θέμα, Θέματα στο Τώρα παίζει, εφέ Καρουσέλ και πολλά άλλα..</string>
     <string name="profile">Προφίλ</string>
@@ -410,6 +417,7 @@
     <string name="share_app">Share app</string>
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">Τυχαία Αναπαραγωγή</string>
     <string name="simple">Απλό</string>
     <string name="sleep_timer_canceled">Χρονοδιακόπτης ύπνου ακυρώθηκε.</string>
@@ -438,7 +446,6 @@
     <string name="support_development">Υποστήριξη ανάπτυξης της εφαρμογής</string>
     <string name="swipe_to_unlock">Σύρετε για ξεκλείδωμα</string>
     <string name="synced_lyrics">Συγχρονισμένοι στίχοι</string>
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Γίνετε μέλος της ομάδας Telegram για να συζητήσετε σφάλματα, να κάνετε προτάσεις, να επιδείξετε και άλλα</string>
     <string name="thank_you">Σας ευχαριστούμε!</string>
@@ -484,10 +491,4 @@
     <string name="you_have_to_select_at_least_one_category">Πρέπει να επιλέξετε τουλάχιστον μία κατηγορία.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Θα προωθηθείτε στον ιστότοπο παρακολούθησης ζητημάτων.</string>
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
-    <string name="show_album_artists">Show Album Artists</string>
-    <string name="action_add_to_blacklist">Προσθήκη στην μαύρη λίστα</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
 </resources>
