@@ -292,7 +292,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Usar a capa do álbum da música em reprodução como papel de parede na tela de bloqueio</string>
     <string name="pref_summary_album_artists_only">Mostrar artistas do álbum na categoria do artista</string>
     <string name="pref_summary_audio_ducking">Diminua o volume quando um som do sistema for reproduzido ou uma notificação for recebida</string>
-    <string name="pref_summary_audio_fade">Fade áudio quando a música é pausada ou reproduzida</string>
+    <string name="pref_summary_audio_fade">Diminuir ou aumentar áudio gradualmente quando a música é pausada ou reproduzida</string>
     <string name="pref_summary_blacklist">O conteúdo das pastas na lista negra está oculto da sua biblioteca.</string>
     <string name="pref_summary_bluetooth_playback">Comece a tocar assim que conectado ao dispositivo bluetooth</string>
     <string name="pref_summary_blurred_album_art">Desfoque a capa do álbum na tela de bloqueio. Pode causar problemas com aplicativos e widgets de terceiros</string>
@@ -301,9 +301,9 @@
     <string name="pref_summary_colored_app">As cores de fundo e do botão de controle mudam de acordo com a capa do álbum a partir da tela que está sendo reproduzida</string>
     <string name="pref_summary_colored_app_shortcuts">Colore os atalhos do aplicativo na cor de destaque. Toda vez que você mudar a cor alterne essa opção para ter efeito</string>
     <string name="pref_summary_colored_notification">"Colore a notifica\u00e7\u00e3o na cor vibrante da capa do \u00e1lbum"</string>
-    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
+    <string name="pref_summary_cross_fade">Duração de transição entre músicas</string>
     <string name="pref_summary_desaturated_color">Conforme o guia do Material Design as cores devem ser dessaturadas no modo escuro</string>
-    <string name="pref_summary_expand_now_playing_panel">Clicando na notificação mostrará a tela inicial em vez da tela inicial</string>
+    <string name="pref_summary_expand_now_playing_panel">Clicando na notificação irá mostrar a tela de reprodução ao invés da tela inicial</string>
     <string name="pref_summary_extra_controls">Adicionar botões extras para o mini reprodutor</string>
     <string name="pref_summary_extra_song_info">Mostrar informações extras da música, como formato de arquivo, taxa de bits e frequência</string>
     <string name="pref_summary_gapless_playback">"Pode causar problemas de reprodução em alguns dispositivos"</string>
@@ -326,7 +326,8 @@
     <string name="pref_title_album_cover_transform">Pular a capa do álbum</string>
     <string name="pref_title_app_shortcuts">Colorir os atalhos do aplicativo</string>
     <string name="pref_title_audio_ducking">Reduza o volume na perda de foco</string>
-    <string name="pref_title_audio_fade">Áudio de Transição</string>
+    <string name="pref_title_audio_fade">Áudio de Transição
+Description: Diminuir ou aumentar áudio gradualmente quando a música é pausada ou reproduzida</string>
     <string name="pref_title_auto_download_artist_images">Baixar automaticamente as imagens dos artistas</string>
     <string name="pref_title_blacklist">Lista negra</string>
     <string name="pref_title_bluetooth_playback">Reprodução Bluetooth</string>
@@ -334,8 +335,7 @@
     <string name="pref_title_classic_notification">Design de notificação clássico</string>
     <string name="pref_title_colored_app">Cor adaptável</string>
     <string name="pref_title_colored_notification">Notificações coloridas</string>
-    <string name="pref_title_cross_fade">Transição (Beta)
-Description: Duração de transição entre músicas</string>
+    <string name="pref_title_cross_fade">Transição (Beta)</string>
     <string name="pref_title_desaturated_color">Cor dessaturada</string>
     <string name="pref_title_expand_now_playing_panel">Mostrar tela de reprodução</string>
     <string name="pref_title_extra_controls">Controles extras</string>
