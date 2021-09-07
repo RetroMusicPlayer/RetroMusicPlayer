@@ -353,9 +353,9 @@
     <string name="pref_title_lock_screen">Sterowanie pełnoekranowe</string>
     <string name="pref_title_now_playing_screen_appearance">Wyglądodtwarzacza</string>
     <string name="pref_title_open_source_licences">Licencje typu Open Source</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
+    <string name="pref_title_remember_tab">Zapamiętaj ostatnią kartę</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
-    <string name="pref_title_suggestions">Show Suggestions</string>
+    <string name="pref_title_suggestions">Pokaż sugestie</string>
     <string name="pref_title_tab_text_mode">Wygląd tytułów kart</string>
     <string name="pref_title_toggle_carousel_effect">Efekt karuzeli</string>
     <string name="pref_title_toggle_full_screen">Aplikacja pełnoekranowa</string>
@@ -475,7 +475,7 @@
     <string name="up_next">Następne</string>
     <string name="update_image">Zaktualizuj grafikę</string>
     <string name="updating">Aktualizowanie…</string>
-    <string name="user_name">User Name</string>
+    <string name="user_name">Nazwa użytkownika</string>
     <string name="username">Nazwa użytkownika</string>
     <string name="version">Wersja</string>
     <string name="vertical_flip">Obrót pionowy</string>
