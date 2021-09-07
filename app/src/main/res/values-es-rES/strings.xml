@@ -3,7 +3,7 @@
     <string name="about_album_label">Acerca de %s</string>
     <string name="about_settings_summary">Equipo, enlaces sociales</string>
     <string name="accent_color">Color de énfasis</string>
-    <string name="accent_color_desc">El color de énfasis del tema, es morado por defecto</string>
+    <string name="accent_color_desc">El color del acento del tema, por defecto es morado</string>
     <string name="action_about">Acerca de</string>
     <string name="action_add_to_blacklist">Añadir a la Lista negra</string>
     <string name="action_add_to_favorites">Añadir a favoritos</string>
@@ -21,8 +21,8 @@
     <string name="action_go_to_genre">Ir al género</string>
     <string name="action_go_to_start_directory">Ir al directorio de inicio</string>
     <string name="action_grant">Permitir</string>
-    <string name="action_grid_size">Tamaño de cuadrícula</string>
-    <string name="action_grid_size_land">Tamaño de cuadrícula (horizontal)</string>
+    <string name="action_grid_size">Tamaño de la cuadricula</string>
+    <string name="action_grid_size_land">Tamaño de la cuadrícula (horizontal)</string>
     <string name="action_new_playlist">Nueva lista de reproducción</string>
     <string name="action_next">Siguiente</string>
     <string name="action_play">Reproducir</string>
@@ -334,7 +334,7 @@
     <string name="pref_title_classic_notification">Diseño de notificación clásico</string>
     <string name="pref_title_colored_app">Color adaptable</string>
     <string name="pref_title_colored_notification">Notificación coloreada</string>
-    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_cross_fade">Transición (Beta)</string>
     <string name="pref_title_desaturated_color">Color desaturado</string>
     <string name="pref_title_expand_now_playing_panel">Mostrar en pantalla de reproducción actual</string>
     <string name="pref_title_extra_controls">Controles extras</string>
