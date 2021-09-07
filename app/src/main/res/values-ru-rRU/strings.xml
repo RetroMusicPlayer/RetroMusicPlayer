@@ -305,7 +305,7 @@
     <string name="pref_summary_colored_app">Цвет кнопок фона и кнопок управления изменяется в соответствии с обложкой альбома с экрана воспроизведения</string>
     <string name="pref_summary_colored_app_shortcuts">Окрашивает ярлыки в основной цвет. Каждый раз, когда вы меняете цвет, вкл-выкл эту настройку, чтобы изменение вступило в силу</string>
     <string name="pref_summary_colored_notification">"Окрашивает уведомление в доминирубщий цвет обложки альбома"</string>
-    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
+    <string name="pref_summary_cross_fade">Продолжительность crossfade между песнями</string>
     <string name="pref_summary_desaturated_color">Согласно Material Design в темном режиме цвета должны быть немного обесцвечены</string>
     <string name="pref_summary_expand_now_playing_panel">Нажатие на уведомление будет показывать экран воспроизведения вместо домашнего экрана</string>
     <string name="pref_summary_extra_controls">Добавить дополнительные элементы управления для мини-плеера</string>
@@ -316,14 +316,14 @@
     <string name="pref_summary_library_categories">Настроить вид и порядок категорий в библиотеке.</string>
     <string name="pref_summary_lock_screen">Используйте собственный экран блокировки Retro Music</string>
     <string name="pref_summary_open_source_licences">Сведения о лицензии для программного обеспечения с открытым исходным кодом</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_remember_tab">Перейдите к последней использованной вкладке при запуске</string>
     <string name="pref_summary_show_lyrics">Показывать синхронизированный текст песни поверх обложки альбома</string>
     <string name="pref_summary_suggestions">Показывать миксы новый музыки на главном экране</string>
     <string name="pref_summary_toggle_full_screen">Полноэкранный режим</string>
     <string name="pref_summary_toggle_headset">Начать воспроизведение музыки сразу после подключения наушников</string>
     <string name="pref_summary_toggle_shuffle">Режим перемешивания выключится при проигрывании нового списка песен</string>
     <string name="pref_summary_toggle_volume">Если доступно достаточно места, показывать регулировку громкости на экране воспроизведения</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_whitelist">Показывать музыку только из папки /Music</string>
     <string name="pref_title_album_art_on_lockscreen">Показать обложку альбома</string>
     <string name="pref_title_album_artists_only">Показывать обложку альбома в разделе исполнители</string>
     <string name="pref_title_album_cover_style">Тема обложки альбома</string>
@@ -338,7 +338,7 @@
     <string name="pref_title_classic_notification">Классический дизайн уведомлений</string>
     <string name="pref_title_colored_app">Адаптированный цвет</string>
     <string name="pref_title_colored_notification">Цветное уведомление</string>
-    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_cross_fade">Crossfade (бета)</string>
     <string name="pref_title_desaturated_color">Немного обесцвеченный цвет </string>
     <string name="pref_title_expand_now_playing_panel">Показать экран воспроизведения</string>
     <string name="pref_title_extra_controls">Дополнительные элементы управления</string>
@@ -353,7 +353,7 @@
     <string name="pref_title_lock_screen">Полноэкранное управление</string>
     <string name="pref_title_now_playing_screen_appearance">Тема экрана воспроизведения</string>
     <string name="pref_title_open_source_licences">Лицензии с открытым кодом</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
+    <string name="pref_title_remember_tab">Запомнить последнюю вкладку</string>
     <string name="pref_title_show_lyrics">Показать текст песни</string>
     <string name="pref_title_suggestions">Показывать советы</string>
     <string name="pref_title_tab_text_mode">Название нижних кнопок</string>
@@ -362,7 +362,7 @@
     <string name="pref_title_toggle_toggle_headset">Автовоспроизведение</string>
     <string name="pref_title_toggle_toggle_shuffle">Режим перемешивания</string>
     <string name="pref_title_toggle_volume">Регулировка громкости</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
+    <string name="pref_title_whitelist">Музыка в белом списке</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Черная тема, Темы экрана воспроизведения, Эффект карусели и многое другое..</string>
     <string name="profile">Профиль</string>
