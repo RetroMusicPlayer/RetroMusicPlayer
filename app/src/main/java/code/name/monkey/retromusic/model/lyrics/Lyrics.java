@@ -14,8 +14,9 @@
 
 package code.name.monkey.retromusic.model.lyrics;
 
-import code.name.monkey.retromusic.model.Song;
 import java.util.ArrayList;
+
+import code.name.monkey.retromusic.model.Song;
 
 public class Lyrics {
 

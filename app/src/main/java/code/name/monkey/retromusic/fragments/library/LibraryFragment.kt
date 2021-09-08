@@ -27,24 +27,32 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentLibraryBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.CategoryInfo
-import code.name.monkey.retromusic.state.NowPlayingPanelState
 import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_library.*
+import com.google.android.gms.cast.framework.CastButtonFactory
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
+
+    private var _binding: FragmentLibraryBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentLibraryBinding.bind(view)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
         mainActivity.setBottomBarVisibility(true)
-        mainActivity.setSupportActionBar(toolbar)
+        mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
-        toolbar.setNavigationOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             findNavController().navigate(
                 R.id.searchFragment,
                 null,
@@ -62,7 +70,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
             "Retro <span  style='color:$hexColor';>Music</span>",
             HtmlCompat.FROM_HTML_MODE_COMPACT
         )
-        appNameText.text = appName
+        binding.appNameText.text = appName
     }
 
     private fun setupNavigationController() {
@@ -73,18 +81,18 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
         val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
         if (categoryInfo.visible) {
-            navGraph.startDestination = categoryInfo.category.id
+            navGraph.setStartDestination(categoryInfo.category.id)
         }
         navController.graph = navGraph
         NavigationUI.setupWithNavController(mainActivity.getBottomNavigationView(), navController)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            appBarLayout.setExpanded(true, true)
+            binding.appBarLayout.setExpanded(true, true)
         }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -92,10 +100,12 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
         inflater.inflate(R.menu.menu_main, menu)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
-            toolbar,
+            binding.toolbar,
             menu,
-            getToolbarBackgroundColor(toolbar)
+            getToolbarBackgroundColor(binding.toolbar)
         )
+        //Setting up cast button
+        CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -115,5 +125,10 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
             )
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

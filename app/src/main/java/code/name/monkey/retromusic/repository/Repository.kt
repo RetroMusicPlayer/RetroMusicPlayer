@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.Result.*
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
+import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -50,12 +51,13 @@ interface Repository {
     suspend fun albumArtists(): List<Artist>
     suspend fun fetchLegacyPlaylist(): List<Playlist>
     suspend fun fetchGenres(): List<Genre>
-    suspend fun search(query: String?): MutableList<Any>
+    suspend fun search(query: String?, filters: List<Boolean>): MutableList<Any>
     suspend fun getPlaylistSongs(playlist: Playlist): List<Song>
     suspend fun getGenre(genreId: Long): List<Song>
     suspend fun artistInfo(name: String, lang: String?, cache: String?): Result<LastFmArtist>
     suspend fun albumInfo(artist: String, album: String): Result<LastFmAlbum>
     suspend fun artistById(artistId: Long): Artist
+    suspend fun albumArtistByName(name: String): Artist
     suspend fun recentArtists(): List<Artist>
     suspend fun topArtists(): List<Artist>
     suspend fun topAlbums(): List<Album>
@@ -101,6 +103,7 @@ interface Repository {
     suspend fun searchArtists(query: String): List<Artist>
     suspend fun searchSongs(query: String): List<Song>
     suspend fun searchAlbums(query: String): List<Album>
+    fun getSongByGenre(genreId: Long): Song
 }
 
 class RealRepository(
@@ -127,6 +130,8 @@ class RealRepository(
 
     override suspend fun searchAlbums(query: String): List<Album> = albumRepository.albums(query)
 
+    override fun getSongByGenre(genreId: Long): Song = genreRepository.song(genreId)
+
     override suspend fun searchArtists(query: String): List<Artist> =
         artistRepository.artists(query)
 
@@ -142,6 +147,8 @@ class RealRepository(
 
     override suspend fun artistById(artistId: Long): Artist = artistRepository.artist(artistId)
 
+    override suspend fun albumArtistByName(name: String): Artist = artistRepository.albumArtist(name)
+
     override suspend fun recentArtists(): List<Artist> = lastAddedRepository.recentArtists()
 
     override suspend fun recentAlbums(): List<Album> = lastAddedRepository.recentAlbums()
@@ -156,8 +163,8 @@ class RealRepository(
 
     override suspend fun allSongs(): List<Song> = songRepository.songs()
 
-    override suspend fun search(query: String?): MutableList<Any> =
-        searchRepository.searchAll(context, query)
+    override suspend fun search(query: String?, filters: List<Boolean>): MutableList<Any> =
+        searchRepository.searchAll(context, query, filters)
 
     override suspend fun getPlaylistSongs(playlist: Playlist): List<Song> =
         if (playlist is AbsCustomPlaylist) {
@@ -234,7 +241,9 @@ class RealRepository(
         )
         for (section in sections) {
             if (section.arrayList.isNotEmpty()) {
-                homeSections.add(section)
+                if (section.homeSection != SUGGESTIONS || PreferenceUtil.homeSuggestions) {
+                    homeSections.add(section)
+                }
             }
         }
         return homeSections
@@ -332,12 +341,25 @@ class RealRepository(
     override fun favorites(): LiveData<List<SongEntity>> =
         roomRepository.favoritePlaylistLiveData(context.getString(R.string.favorites))
 
+    var suggestions = Home(
+        listOf(), SUGGESTIONS,
+        R.string.suggestion_songs
+    )
+
     override suspend fun suggestionsHome(): Home {
-        val songs =
-            NotPlayedPlaylist().songs().shuffled().takeIf {
+        if (!PreferenceUtil.homeSuggestions) return Home(
+            listOf(),
+            SUGGESTIONS,
+            R.string.suggestion_songs
+        )
+        // Don't reload Suggestions everytime
+        if (suggestions.arrayList.isEmpty()) {
+            val songs = NotPlayedPlaylist().songs().shuffled().takeIf {
                 it.size > 9
             } ?: emptyList()
-        return Home(songs, SUGGESTIONS, R.string.suggestion_songs)
+            suggestions = Home(songs, SUGGESTIONS, R.string.suggestion_songs)
+        }
+        return suggestions
     }
 
     override suspend fun genresHome(): Home {

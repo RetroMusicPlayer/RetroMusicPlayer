@@ -20,12 +20,12 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentSimplePlayerBinding
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_simple_player.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -33,8 +33,11 @@ import kotlinx.android.synthetic.main.fragment_simple_player.*
 
 class SimplePlayerFragment : AbsPlayerFragment(R.layout.fragment_simple_player) {
 
+    private var _binding: FragmentSimplePlayerBinding? = null
+    private val binding get() = _binding!!
+
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private var lastColor: Int = 0
@@ -45,6 +48,7 @@ class SimplePlayerFragment : AbsPlayerFragment(R.layout.fragment_simple_player) 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentSimplePlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
     }
@@ -78,7 +82,7 @@ class SimplePlayerFragment : AbsPlayerFragment(R.layout.fragment_simple_player) 
         libraryViewModel.updateColor(color.backgroundColor)
         controlsFragment.setColor(color)
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
+            binding.playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
@@ -96,13 +100,18 @@ class SimplePlayerFragment : AbsPlayerFragment(R.layout.fragment_simple_player) 
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        playerToolbar.setOnMenuItemClickListener(this)
+        binding.playerToolbar.inflateMenu(R.menu.menu_player)
+        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.playerToolbar.setOnMenuItemClickListener(this)
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
+            binding.playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -14,11 +14,12 @@
 
 package code.name.monkey.retromusic.util;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import androidx.annotation.NonNull;
-import com.bumptech.glide.signature.StringSignature;
+
+import com.bumptech.glide.signature.ObjectKey;
 
 /** @author Karim Abou Zeid (kabouzeid) */
 public class ArtistSignatureUtil {
@@ -39,16 +40,15 @@ public class ArtistSignatureUtil {
     return sInstance;
   }
 
-  @SuppressLint("CommitPrefEdits")
   public void updateArtistSignature(String artistName) {
-    mPreferences.edit().putLong(artistName, System.currentTimeMillis()).commit();
+    mPreferences.edit().putLong(artistName, System.currentTimeMillis()).apply();
   }
 
   public long getArtistSignatureRaw(String artistName) {
     return mPreferences.getLong(artistName, 0);
   }
 
-  public StringSignature getArtistSignature(String artistName) {
-    return new StringSignature(String.valueOf(getArtistSignatureRaw(artistName)));
+  public ObjectKey getArtistSignature(String artistName) {
+    return new ObjectKey(String.valueOf(getArtistSignatureRaw(artistName)));
   }
 }

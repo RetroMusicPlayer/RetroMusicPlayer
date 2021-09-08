@@ -64,7 +64,7 @@
             android:layout_marginEnd="64dp"
             android:layout_weight="1">
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/playerAlbumCoverFragment"
                 android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
@@ -81,7 +81,7 @@
         android:layout_marginStart="96dp"
         android:layout_marginEnd="96dp">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playbackControlsFragment"
             android:name="code.name.monkey.retromusic.fragments.player.cardblur.CardBlurPlaybackControlsFragment"
             android:layout_width="match_parent"

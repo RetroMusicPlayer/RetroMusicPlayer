@@ -29,43 +29,45 @@ import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.databinding.ActivityProVersionBinding
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
 import java.lang.ref.WeakReference
-import kotlinx.android.synthetic.main.activity_pro_version.*
 
 class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
+    private lateinit var binding: ActivityProVersionBinding
     private lateinit var billingProcessor: BillingProcessor
     private var restorePurchaseAsyncTask: AsyncTask<*, *, *>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pro_version)
+        binding = ActivityProVersionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setStatusbarColor(Color.TRANSPARENT)
         setLightStatusbar(false)
         setNavigationbarColor(Color.BLACK)
         setLightNavigationBar(false)
-        toolbar.navigationIcon?.setTint(Color.WHITE)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        binding.toolbar.navigationIcon?.setTint(Color.WHITE)
+        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
 
-        restoreButton.isEnabled = false
-        purchaseButton.isEnabled = false
+        binding.restoreButton.isEnabled = false
+        binding.purchaseButton.isEnabled = false
 
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
 
-        MaterialUtil.setTint(purchaseButton, true)
+        MaterialUtil.setTint(binding.purchaseButton, true)
 
-        restoreButton.setOnClickListener {
+        binding.restoreButton.setOnClickListener {
             if (restorePurchaseAsyncTask == null || restorePurchaseAsyncTask!!.status != AsyncTask.Status.RUNNING) {
                 restorePurchase()
             }
         }
-        purchaseButton.setOnClickListener {
+        binding.purchaseButton.setOnClickListener {
             billingProcessor.purchase(this@PurchaseActivity, PRO_VERSION_PRODUCT_ID)
         }
-        bannerContainer.backgroundTintList =
+        binding.bannerContainer.backgroundTintList =
             ColorStateList.valueOf(ThemeStore.accentColor(this))
     }
 
@@ -99,8 +101,8 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
     }
 
     override fun onBillingInitialized() {
-        restoreButton.isEnabled = true
-        purchaseButton.isEnabled = true
+        binding.restoreButton.isEnabled = true
+        binding.purchaseButton.isEnabled = true
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

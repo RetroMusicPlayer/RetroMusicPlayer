@@ -71,6 +71,122 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:scrollbarSize="0dp">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/searchFilterGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_audio"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/songs"
+                    android:textSize="16sp"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="10dp"
+                    app:chipIcon="@drawable/ic_audiotrack"
+                    app:chipIconEnabled="true"
+                    app:chipMinHeight="40dp"
+                    app:chipStartPadding="10dp"
+                    app:iconEndPadding="5dp" />
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_artists"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/artists"
+                    android:textSize="16sp"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="10dp"
+                    app:chipIcon="@drawable/ic_artist"
+                    app:chipIconEnabled="true"
+                    app:chipMinHeight="40dp"
+                    app:chipStartPadding="10dp"
+                    app:iconEndPadding="5dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_albums"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/albums"
+                    android:textSize="16sp"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="10dp"
+                    app:chipIcon="@drawable/ic_album"
+                    app:chipIconEnabled="true"
+                    app:chipMinHeight="40dp"
+                    app:chipStartPadding="10dp"
+                    app:iconEndPadding="5dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_album_artists"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/album_artist"
+                    android:textSize="16sp"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="10dp"
+                    app:chipIcon="@drawable/ic_album_artist"
+                    app:chipIconEnabled="true"
+                    app:chipMinHeight="40dp"
+                    app:chipStartPadding="10dp"
+                    app:iconEndPadding="5dp" />
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_genres"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/genres"
+                    android:textSize="16sp"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="10dp"
+                    app:chipIcon="@drawable/ic_guitar"
+                    app:chipIconEnabled="true"
+                    app:chipMinHeight="40dp"
+                    app:chipStartPadding="10dp"
+                    app:iconEndPadding="5dp" />
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+    </LinearLayout>
+
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@android:id/empty"
         android:layout_width="wrap_content"
@@ -82,16 +198,6 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/keyboardPopup"
         android:layout_width="wrap_content"
@@ -102,4 +208,5 @@
         android:text="@string/keyboard"
         android:textAppearance="@style/TextViewHeadline6"
         app:icon="@drawable/ic_keyboard" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

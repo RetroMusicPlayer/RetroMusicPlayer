@@ -25,6 +25,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentFlatPlayerBinding
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -33,11 +34,10 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.DrawableGradient
-import kotlinx.android.synthetic.main.fragment_flat_player.*
 
 class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private var valueAnimator: ValueAnimator? = null
@@ -45,6 +45,10 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
     private var lastColor: Int = 0
     override val paletteColor: Int
         get() = lastColor
+
+    private var _binding: FragmentFlatPlayerBinding? = null
+    private val binding get() = _binding!!
+
 
     private fun setUpSubFragments() {
         controlsFragment =
@@ -55,11 +59,11 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { _ -> requireActivity().onBackPressed() }
-        playerToolbar.setOnMenuItemClickListener(this)
+        binding.playerToolbar.inflateMenu(R.menu.menu_player)
+        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.playerToolbar.setOnMenuItemClickListener(this)
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
+            binding.playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
@@ -76,13 +80,14 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(animation.animatedValue as Int, android.R.color.transparent), 0
             )
-            colorGradientBackground?.background = drawable
+            binding.colorGradientBackground.background = drawable
         }
         valueAnimator?.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong())?.start()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentFlatPlayerBinding.bind(view)
         setUpPlayerToolbar()
         setUpSubFragments()
     }
@@ -117,7 +122,11 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
             MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, requireActivity())
+        ToolbarContentTintHelper.colorizeToolbar(
+            binding.playerToolbar,
+            iconColor,
+            requireActivity()
+        )
         if (PreferenceUtil.isAdaptiveColor) {
             colorize(color.backgroundColor)
         }
@@ -132,5 +141,10 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
         if (song.id == MusicPlayerRemote.currentSong.id) {
             updateIsFavorite()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -23,28 +23,31 @@ import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.NEW_BLUR_AMOUNT
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentCardBlurPlayerBinding
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_card_blur_player.*
 
 class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     SharedPreferences.OnSharedPreferenceChangeListener {
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private var lastColor: Int = 0
     override val paletteColor: Int
         get() = lastColor
     private lateinit var playbackControlsFragment: CardBlurPlaybackControlsFragment
+
+    private var _binding: FragmentCardBlurPlayerBinding? = null
+    private val binding get() = _binding!!
 
     override fun onShow() {
         playbackControlsFragment.show()
@@ -67,10 +70,10 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         playbackControlsFragment.setColor(color)
         lastColor = color.backgroundColor
         libraryViewModel.updateColor(color.backgroundColor)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
+        ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
 
-        playerToolbar.setTitleTextColor(Color.WHITE)
-        playerToolbar.setSubtitleTextColor(Color.WHITE)
+        binding.playerToolbar.setTitleTextColor(Color.WHITE)
+        binding.playerToolbar.setSubtitleTextColor(Color.WHITE)
     }
 
     override fun toggleFavorite(song: Song) {
@@ -86,6 +89,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentCardBlurPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
     }
@@ -99,12 +103,12 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setTitleTextColor(Color.WHITE)
             setSubtitleTextColor(Color.WHITE)
-            ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
+            ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
         }.setOnMenuItemClickListener(this)
     }
 
@@ -122,7 +126,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             title = song.title
             subtitle = song.artistName
         }
@@ -131,19 +135,19 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     private fun updateBlur() {
         val blurAmount = PreferenceManager.getDefaultSharedPreferences(requireContext())
             .getInt(NEW_BLUR_AMOUNT, 25)
-        colorBackground!!.clearColorFilter()
-        SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
-            .checkIgnoreMediaStore(requireContext())
-            .generatePalette(requireContext()).build()
+        binding.colorBackground.clearColorFilter()
+        GlideApp.with(requireActivity()).asBitmapPalette()
+            .songCoverOptions(MusicPlayerRemote.currentSong)
+            .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
             .dontAnimate()
             .transform(
                 BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
                     .build()
             )
-            .into(object : RetroMusicColoredTarget(colorBackground) {
+            .into(object : RetroMusicColoredTarget(binding.colorBackground) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     if (colors.backgroundColor == defaultFooterColor) {
-                        colorBackground.setColorFilter(colors.backgroundColor)
+                        binding.colorBackground.setColorFilter(colors.backgroundColor)
                     }
                 }
             })
@@ -159,6 +163,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         super.onDestroyView()
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .unregisterOnSharedPreferenceChangeListener(this)
+        _binding = null
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {

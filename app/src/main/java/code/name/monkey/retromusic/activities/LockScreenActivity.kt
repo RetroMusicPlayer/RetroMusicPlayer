@@ -23,27 +23,29 @@ import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
+import code.name.monkey.retromusic.databinding.ActivityLockScreenBinding
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenControlsFragment
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrListener
 import com.r0adkll.slidr.model.SlidrPosition
-import kotlinx.android.synthetic.main.activity_lock_screen.*
 
 class LockScreenActivity : AbsMusicServiceActivity() {
+    private lateinit var binding: ActivityLockScreenBinding
     private var fragment: LockScreenControlsFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         lockScreenInit()
-        setContentView(R.layout.activity_lock_screen)
+        binding = ActivityLockScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         hideStatusBar()
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
@@ -107,9 +109,12 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
     private fun updateSongs() {
         val song = MusicPlayerRemote.currentSong
-        SongGlideRequest.Builder.from(Glide.with(this), song).checkIgnoreMediaStore(this)
-            .generatePalette(this).build().dontAnimate()
-            .into(object : RetroMusicColoredTarget(image) {
+        GlideApp.with(this)
+            .asBitmapPalette()
+            .songCoverOptions(song)
+            .load(RetroGlideExtension.getSongModel(song))
+            .dontAnimate()
+            .into(object : RetroMusicColoredTarget(binding.image) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     fragment?.setColor(colors)
                 }

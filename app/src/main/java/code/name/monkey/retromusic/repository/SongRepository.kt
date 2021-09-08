@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import android.database.Cursor
+import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
 import android.provider.MediaStore.Audio.Media
@@ -140,12 +141,24 @@ class RealSongRepository(private val context: Context) : SongRepository {
             IS_MUSIC
         }
 
-        // Blacklist
-        val paths = BlacklistStore.getInstance(context).paths
-        if (paths.isNotEmpty()) {
-            selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
-            selectionValuesFinal = addBlacklistSelectionValues(selectionValuesFinal, paths)
+        // Whitelist
+        if (PreferenceUtil.isWhiteList) {
+            selectionFinal =
+                selectionFinal + " AND " + AudioColumns.DATA + " LIKE ?"
+            selectionValuesFinal = addSelectionValues(
+                selectionValuesFinal, arrayListOf(
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).canonicalPath
+                )
+            )
+        } else {
+            // Blacklist
+            val paths = BlacklistStore.getInstance(context).paths
+            if (paths.isNotEmpty()) {
+                selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
+                selectionValuesFinal = addSelectionValues(selectionValuesFinal, paths)
+            }
         }
+
         selectionFinal =
             selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
 
@@ -180,10 +193,10 @@ class RealSongRepository(private val context: Context) : SongRepository {
         return newSelection.toString()
     }
 
-    private fun addBlacklistSelectionValues(
+    private fun addSelectionValues(
         selectionValues: Array<String>?,
         paths: ArrayList<String>
-    ): Array<String>? {
+    ): Array<String> {
         var selectionValuesFinal = selectionValues
         if (selectionValuesFinal == null) {
             selectionValuesFinal = emptyArray()

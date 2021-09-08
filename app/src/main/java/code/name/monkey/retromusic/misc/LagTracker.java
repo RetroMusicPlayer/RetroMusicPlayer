@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.misc;
 
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +26,7 @@ public class LagTracker {
   private boolean mEnabled = true;
 
   private LagTracker() {
-    mMap = new HashMap();
+    mMap = new HashMap<>();
   }
 
   public static LagTracker get() {
@@ -64,7 +65,7 @@ public class LagTracker {
     long nanoTime = System.nanoTime();
     if (this.mEnabled) {
       if (mMap.containsKey(str)) {
-        print(str, nanoTime - mMap.get(str).longValue());
+        print(str, nanoTime - mMap.get(str));
         mMap.remove(str);
         return;
       }
@@ -77,7 +78,7 @@ public class LagTracker {
   public void start(String str) {
     long nanoTime = System.nanoTime();
     if (this.mEnabled) {
-      mMap.put(str, Long.valueOf(nanoTime));
+      mMap.put(str, nanoTime);
     } else if (!mMap.isEmpty()) {
       mMap.clear();
     }

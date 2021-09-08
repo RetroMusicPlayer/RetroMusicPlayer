@@ -24,6 +24,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
 import code.name.monkey.retromusic.R;
 
 /**
@@ -206,10 +207,6 @@ public class SeekArc extends View {
           updateOnTouch(event);
           break;
         case MotionEvent.ACTION_UP:
-          onStopTrackingTouch();
-          setPressed(false);
-          this.getParent().requestDisallowInterceptTouchEvent(false);
-          break;
         case MotionEvent.ACTION_CANCEL:
           onStopTrackingTouch();
           setPressed(false);

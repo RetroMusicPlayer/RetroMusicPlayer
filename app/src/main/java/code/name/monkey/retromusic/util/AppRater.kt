@@ -60,7 +60,7 @@ object AppRater {
             }
         }
 
-        editor.commit()
+        editor.apply()
     }
 
     private fun showPlayStoreReviewDialog(context: Activity, editor: SharedPreferences.Editor) {

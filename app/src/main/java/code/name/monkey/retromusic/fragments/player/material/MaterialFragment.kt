@@ -20,13 +20,13 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentMaterialBinding
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_material.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.fragment_material.*
 class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
 
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private var lastColor: Int = 0
@@ -43,6 +43,10 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
         get() = lastColor
 
     private lateinit var playbackControlsFragment: MaterialControlsFragment
+
+    private var _binding: FragmentMaterialBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onShow() {
         playbackControlsFragment.show()
@@ -67,7 +71,7 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
         libraryViewModel.updateColor(color.backgroundColor)
 
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
+            binding.playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
@@ -86,6 +90,7 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentMaterialBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
     }
@@ -99,7 +104,7 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@MaterialFragment)
@@ -124,5 +129,10 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
         fun newInstance(): PlayerFragment {
             return PlayerFragment()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

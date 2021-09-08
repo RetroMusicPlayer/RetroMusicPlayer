@@ -21,8 +21,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+
+import org.jetbrains.annotations.NotNull;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.DriveModeActivity;
 import code.name.monkey.retromusic.activities.LicenseActivity;
@@ -34,7 +38,6 @@ import code.name.monkey.retromusic.activities.UserInfoActivity;
 import code.name.monkey.retromusic.activities.WhatsNewActivity;
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
-import org.jetbrains.annotations.NotNull;
 
 public class NavigationUtil {
 

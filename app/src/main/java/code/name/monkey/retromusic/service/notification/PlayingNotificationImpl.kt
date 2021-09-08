@@ -29,7 +29,8 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
-import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.*
@@ -37,9 +38,9 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
@@ -79,11 +80,11 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
                 .getDimensionPixelSize(R.dimen.notification_big_image_size)
             service.runOnUiThread {
                 if (target != null) {
-                    Glide.clear(target)
+                    Glide.with(service).clear(target)
                 }
-                target = SongGlideRequest.Builder.from(Glide.with(service), song)
-                    .checkIgnoreMediaStore(service)
-                    .generatePalette(service).build()
+                target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
+                    .load(RetroGlideExtension.getSongModel(song))
+                    //.checkIgnoreMediaStore()
                     .centerCrop()
                     .into(object : SimpleTarget<BitmapPaletteWrapper>(
                         bigNotificationImageSize,
@@ -91,7 +92,7 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
                     ) {
                         override fun onResourceReady(
                             resource: BitmapPaletteWrapper,
-                            glideAnimation: GlideAnimation<in BitmapPaletteWrapper>
+                            transition: Transition<in BitmapPaletteWrapper>?
                         ) {
                             update(
                                 resource.bitmap,
@@ -99,8 +100,8 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
                             )
                         }
 
-                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                            super.onLoadFailed(e, errorDrawable)
+                        override fun onLoadFailed(errorDrawable: Drawable?) {
+                            super.onLoadFailed(errorDrawable)
                             update(null, Color.TRANSPARENT)
                         }
 

@@ -35,6 +35,7 @@
 
     <dimen name="icon_notification_dimen">32dp</dimen>
     <dimen name="mini_player_height_expanded">112dp</dimen>
+    <dimen name="mini_cast_player_height_expanded">120dp</dimen>
     <dimen name="toolbar_margin_horizontal">8dp</dimen>
     <dimen name="toolbar_height">48dp</dimen>
     <dimen name="item_song_height">52dp</dimen>
@@ -46,4 +47,10 @@
     <dimen name="adaptive_icon_size">46dp</dimen>
     <dimen name="adaptive_icon_padding">12dp</dimen>
     <dimen name="about_card_radius">16dp</dimen>
+
+    <dimen name="normal_lyrics_padding">20dp</dimen>
+    <dimen name="lyrics_text_size">18sp</dimen>
+    <dimen name="indicator_radius">10dp</dimen>
+    <dimen name="lyrics_dialog_radius">20dp</dimen>
+    <dimen name="cast_mini_player_height">64dp</dimen>
 </resources>

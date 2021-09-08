@@ -14,11 +14,7 @@
  */
 package code.name.monkey.retromusic.fragments.albums
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
@@ -51,6 +47,11 @@ class AlbumDetailsViewModel(
         emit(artist)
     }
 
+    fun getAlbumArtist(artistName: String): LiveData<Artist> = liveData(IO) {
+        val artist = repository.albumArtistByName(artistName)
+        emit(artist)
+    }
+
     fun getAlbumInfo(album: Album): LiveData<Result<LastFmAlbum>> = liveData {
         emit(Result.Loading)
         emit(repository.albumInfo(album.artistName ?: "-", album.title ?: "-"))
@@ -73,4 +74,5 @@ class AlbumDetailsViewModel(
     override fun onPlayStateChanged() {}
     override fun onRepeatModeChanged() {}
     override fun onShuffleModeChanged() {}
+    override fun onFavoriteStateChanged() {}
 }

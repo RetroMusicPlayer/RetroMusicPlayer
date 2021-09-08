@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:paddingBottom="48dp">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerAlbumCoverFragment"
             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
             android:layout_width="0dp"
@@ -53,13 +53,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/status_bar" />
+            <include
+                android:id="@+id/status_bar_layout"
+                layout="@layout/status_bar" />
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/playerQueueSheet"
+        style="@style/Widget.BottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:behavior_hideable="false"

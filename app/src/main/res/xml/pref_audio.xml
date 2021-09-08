@@ -10,6 +10,22 @@
         android:title="@string/pref_title_audio_ducking"
         app:icon="@drawable/ic_volume_down" />
 
+    <code.name.monkey.retromusic.preferences.DurationPreference
+        android:defaultValue="0"
+        android:key="audio_fade_duration"
+        android:layout="@layout/list_item_view"
+        android:summary="@string/pref_summary_audio_fade"
+        android:title="@string/pref_title_audio_fade" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
+        android:defaultValue="0"
+        android:key="cross_fade_duration"
+        android:layout="@layout/list_item_view_seekbar"
+        android:max="12"
+        android:summary="@string/pref_summary_cross_fade"
+        android:title="@string/pref_title_cross_fade"
+        app:showSeekBarValue="true" />
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
         android:key="gapless_playback"

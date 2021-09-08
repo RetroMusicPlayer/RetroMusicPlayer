@@ -19,13 +19,13 @@ data class Album(
     val songs: List<Song>
 ) {
 
-    val title: String?
+    val title: String
         get() = safeGetFirstSong().albumName
 
     val artistId: Long
         get() = safeGetFirstSong().artistId
 
-    val artistName: String?
+    val artistName: String
         get() = safeGetFirstSong().artistName
 
     val year: Int

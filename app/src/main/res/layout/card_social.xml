@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <code.name.monkey.retromusic.views.ListItemView
-            android:id="@+id/pinterestLink"
+            android:id="@+id/websiteLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constrainedWidth="true"
@@ -37,6 +37,19 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sb3"
+            app:listItemIcon="@drawable/ic_baseline"
+            app:listItemTitle="@string/website"
+            app:listItemSummary="@string/website_summary"/>
+
+        <code.name.monkey.retromusic.views.ListItemView
+            android:id="@+id/pinterestLink"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/websiteLink"
             app:listItemIcon="@drawable/ic_pinterest"
             app:listItemSummary="@string/pinterest_page_summary"
             app:listItemTitle="@string/pinterest_page" />

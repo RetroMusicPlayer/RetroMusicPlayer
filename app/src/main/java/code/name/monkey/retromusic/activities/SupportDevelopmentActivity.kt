@@ -37,6 +37,7 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.databinding.ActivityDonationBinding
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import com.anjlab.android.iab.v3.BillingProcessor
@@ -44,9 +45,10 @@ import com.anjlab.android.iab.v3.SkuDetails
 import com.anjlab.android.iab.v3.TransactionDetails
 import java.lang.ref.WeakReference
 import java.util.*
-import kotlinx.android.synthetic.main.activity_donation.*
 
 class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
+
+    lateinit var binding: ActivityDonationBinding
 
     companion object {
         val TAG: String = SupportDevelopmentActivity::class.java.simpleName
@@ -72,6 +74,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityDonationBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_donation)
 
         setStatusbarColorAuto()
@@ -82,15 +85,15 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         setupToolbar()
 
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
-        TintHelper.setTint(progress, ThemeStore.accentColor(this))
-        donation.setTextColor(ThemeStore.accentColor(this))
+        TintHelper.setTint(binding.progress, ThemeStore.accentColor(this))
+        binding.donation.setTextColor(ThemeStore.accentColor(this))
     }
 
     private fun setupToolbar() {
         val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        toolbar.setBackgroundColor(toolbarColor)
-        ToolbarContentTintHelper.colorBackButton(toolbar)
-        setSupportActionBar(toolbar)
+        binding.toolbar.setBackgroundColor(toolbarColor)
+        ToolbarContentTintHelper.colorBackButton(binding.toolbar)
+        setSupportActionBar(binding.toolbar)
     }
 
     override fun onBillingInitialized() {
@@ -146,8 +149,8 @@ private class SkuDetailsLoadAsyncTask(supportDevelopmentActivity: SupportDevelop
         super.onPreExecute()
         val supportDevelopmentActivity = weakReference.get() ?: return
 
-        supportDevelopmentActivity.progressContainer.visibility = View.VISIBLE
-        supportDevelopmentActivity.recyclerView.visibility = View.GONE
+        supportDevelopmentActivity.binding.progressContainer.visibility = View.VISIBLE
+        supportDevelopmentActivity.binding.recyclerView.visibility = View.GONE
     }
 
     override fun doInBackground(vararg params: Void): List<SkuDetails>? {
@@ -166,15 +169,17 @@ private class SkuDetailsLoadAsyncTask(supportDevelopmentActivity: SupportDevelop
         val dialog = weakReference.get() ?: return
 
         if (skuDetails == null || skuDetails.isEmpty()) {
-            dialog.progressContainer.visibility = View.GONE
+            dialog.binding.progressContainer.visibility = View.GONE
             return
         }
 
-        dialog.progressContainer.visibility = View.GONE
-        dialog.recyclerView.itemAnimator = DefaultItemAnimator()
-        dialog.recyclerView.layoutManager = GridLayoutManager(dialog, 2)
-        dialog.recyclerView.adapter = SkuDetailsAdapter(dialog, skuDetails)
-        dialog.recyclerView.visibility = View.VISIBLE
+        dialog.binding.progressContainer.visibility = View.GONE
+        dialog.binding.recyclerView.apply {
+            itemAnimator = DefaultItemAnimator()
+            layoutManager = GridLayoutManager(dialog, 2)
+            adapter = SkuDetailsAdapter(dialog, skuDetails)
+            visibility = View.VISIBLE
+        }
     }
 }
 

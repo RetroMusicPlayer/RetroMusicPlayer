@@ -19,11 +19,10 @@ import android.database.Cursor;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.repository.RealSongRepository;
-import code.name.monkey.retromusic.repository.SortedCursor;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,6 +35,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.repository.RealSongRepository;
+import code.name.monkey.retromusic.repository.SortedCursor;
 
 public final class FileUtil {
 

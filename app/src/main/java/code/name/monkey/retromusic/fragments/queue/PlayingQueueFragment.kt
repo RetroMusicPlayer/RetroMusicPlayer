@@ -28,7 +28,6 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-import kotlinx.android.synthetic.main.activity_playing_queue.*
 
 /**
  * Created by hemanths on 2019-12-08.
@@ -39,6 +38,8 @@ class PlayingQueueFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Linear
     private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null
     private var recyclerViewSwipeManager: RecyclerViewSwipeManager? = null
     private var recyclerViewTouchActionGuardManager: RecyclerViewTouchActionGuardManager? = null
+    override val titleRes: Int
+        get() = R.string.now_playing_queue
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,9 +60,9 @@ class PlayingQueueFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Linear
         recyclerView().layoutManager = layoutManager
         recyclerView().adapter = wrappedAdapter
         recyclerView().itemAnimator = animator
-        recyclerViewTouchActionGuardManager?.attachRecyclerView(recyclerView)
-        recyclerViewDragDropManager?.attachRecyclerView(recyclerView)
-        recyclerViewSwipeManager?.attachRecyclerView(recyclerView)
+        recyclerViewTouchActionGuardManager?.attachRecyclerView(recyclerView())
+        recyclerViewDragDropManager?.attachRecyclerView(recyclerView())
+        recyclerViewSwipeManager?.attachRecyclerView(recyclerView())
 
         layoutManager?.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
@@ -104,7 +105,7 @@ class PlayingQueueFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Linear
     }
 
     private fun resetToCurrentPosition() {
-        recyclerView.stopScroll()
+        recyclerView().stopScroll()
         layoutManager?.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
 

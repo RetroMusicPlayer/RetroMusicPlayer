@@ -21,6 +21,8 @@ interface IMusicServiceEventListener {
 
     fun onQueueChanged()
 
+    fun onFavoriteStateChanged()
+
     fun onPlayingMetaChanged()
 
     fun onPlayStateChanged()

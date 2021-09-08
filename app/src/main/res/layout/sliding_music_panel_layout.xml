@@ -37,8 +37,14 @@
             android:id="@+id/miniPlayerFragment"
             android:name="code.name.monkey.retromusic.fragments.MiniPlayerFragment"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/mini_player_height"
             tools:layout="@layout/fragment_mini_player" />
+
+        <ViewStub
+            android:id="@+id/cast_stub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/cast_controller_layout"/>
 
     </FrameLayout>
 

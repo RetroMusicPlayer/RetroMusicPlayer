@@ -32,12 +32,15 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentCirclePlayerBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.base.goToAlbum
+import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
@@ -51,7 +54,6 @@ import code.name.monkey.retromusic.views.SeekArc
 import code.name.monkey.retromusic.views.SeekArc.OnSeekArcChangeListener
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
-import kotlinx.android.synthetic.main.fragment_circle_player.*
 
 /**
  * Created by hemanths on 2020-01-06.
@@ -67,6 +69,9 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     private val audioManager: AudioManager?
         get() = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
+    private var _binding: FragmentCirclePlayerBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
@@ -76,18 +81,25 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_circle_player, container, false)
+    ): View {
+        _binding = FragmentCirclePlayerBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
-        title.isSelected = true
+        binding.title.isSelected = true
+        binding.title.setOnClickListener {
+            goToAlbum(requireActivity())
+        }
+        binding.text.setOnClickListener {
+            goToArtist(requireActivity())
+        }
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@CirclePlayerFragment)
@@ -102,12 +114,12 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     private fun setupViews() {
         setUpProgressSlider()
         ViewUtil.setProgressDrawable(
-            progressSlider,
+            binding.progressSlider,
             ThemeStore.accentColor(requireContext()),
             false
         )
-        volumeSeekBar.progressColor = accentColor()
-        volumeSeekBar.arcColor = ColorUtil.withAlpha(accentColor(), 0.25f)
+        binding.volumeSeekBar.progressColor = accentColor()
+        binding.volumeSeekBar.arcColor = ColorUtil.withAlpha(accentColor(), 0.25f)
         setUpPlayPauseFab()
         setUpPrevNext()
         setUpPlayerToolbar()
@@ -115,19 +127,23 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
 
     private fun setUpPrevNext() {
         updatePrevNextColor()
-        nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
-        previousButton.setOnClickListener { MusicPlayerRemote.back() }
+        binding.nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
+        binding.previousButton.setOnClickListener { MusicPlayerRemote.back() }
     }
 
     private fun updatePrevNextColor() {
         val accentColor = ThemeStore.accentColor(requireContext())
-        nextButton.setColorFilter(accentColor, PorterDuff.Mode.SRC_IN)
-        previousButton.setColorFilter(accentColor, PorterDuff.Mode.SRC_IN)
+        binding.nextButton.setColorFilter(accentColor, PorterDuff.Mode.SRC_IN)
+        binding.previousButton.setColorFilter(accentColor, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpPlayPauseFab() {
-        TintHelper.setTintAuto(playPauseButton, ThemeStore.accentColor(requireContext()), false)
-        playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
+        TintHelper.setTintAuto(
+            binding.playPauseButton,
+            ThemeStore.accentColor(requireContext()),
+            false
+        )
+        binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
     }
 
     override fun onResume() {
@@ -140,10 +156,10 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
 
         val audioManager = audioManager
         if (audioManager != null) {
-            volumeSeekBar.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-            volumeSeekBar.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+            binding.volumeSeekBar.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+            binding.volumeSeekBar.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
         }
-        volumeSeekBar.setOnSeekArcChangeListener(this)
+        binding.volumeSeekBar.setOnSeekArcChangeListener(this)
     }
 
     override fun onPause() {
@@ -151,8 +167,8 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         progressViewUpdateHelper.stop()
     }
 
-    override fun playerToolbar(): Toolbar? {
-        return playerToolbar
+    override fun playerToolbar(): Toolbar {
+        return binding.playerToolbar
     }
 
     override fun onShow() {
@@ -192,30 +208,27 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        title.text = song.title
-        text.text = song.artistName
+        binding.title.text = song.title
+        binding.text.text = song.artistName
 
         if (PreferenceUtil.isSongInfo) {
-            songInfo.text = getSongInfo(song)
-            songInfo.show()
+            binding.songInfo.text = getSongInfo(song)
+            binding.songInfo.show()
         } else {
-            songInfo.hide()
+            binding.songInfo.hide()
         }
     }
 
     private fun updatePlayPauseDrawableState() {
         when {
-            MusicPlayerRemote.isPlaying -> playPauseButton.setImageResource(R.drawable.ic_pause)
-            else -> playPauseButton.setImageResource(R.drawable.ic_play_arrow)
+            MusicPlayerRemote.isPlaying -> binding.playPauseButton.setImageResource(R.drawable.ic_pause)
+            else -> binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow)
         }
     }
 
     override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
-        if (volumeSeekBar == null) {
-            return
-        }
-        volumeSeekBar.max = maxVolume
-        volumeSeekBar.progress = currentVolume
+        _binding?.volumeSeekBar?.max = maxVolume
+        _binding?.volumeSeekBar?.progress = currentVolume
     }
 
     override fun onDestroyView() {
@@ -223,6 +236,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         if (audioVolumeObserver != null) {
             audioVolumeObserver!!.unregister()
         }
+        _binding = null
     }
 
     override fun onProgressChanged(seekArc: SeekArc?, progress: Int, fromUser: Boolean) {
@@ -237,8 +251,8 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     }
 
     fun setUpProgressSlider() {
-        progressSlider.applyColor(accentColor())
-        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
+        binding.progressSlider.applyColor(accentColor())
+        binding.progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     MusicPlayerRemote.seekTo(progress)
@@ -252,14 +266,14 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
+        binding.progressSlider.max = total
 
-        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
+        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
         animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
 
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+        binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
+        binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 }

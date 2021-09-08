@@ -30,8 +30,9 @@ import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
@@ -42,7 +43,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab
-import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 /**
@@ -120,9 +120,8 @@ open class SongAdapter(
         if (holder.image == null) {
             return
         }
-        SongGlideRequest.Builder.from(Glide.with(activity), song)
-            .checkIgnoreMediaStore(activity)
-            .generatePalette(activity).build()
+        GlideApp.with(activity).asBitmapPalette().songCoverOptions(song)
+            .load(RetroGlideExtension.getSongModel(song))
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
@@ -130,15 +129,15 @@ open class SongAdapter(
             })
     }
 
-    private fun getSongTitle(song: Song): String? {
+    private fun getSongTitle(song: Song): String {
         return song.title
     }
 
-    private fun getSongText(song: Song): String? {
+    private fun getSongText(song: Song): String {
         return song.artistName
     }
 
-    private fun getSongText2(song: Song): String? {
+    private fun getSongText2(song: Song): String {
         return song.albumName
     }
 
@@ -165,6 +164,7 @@ open class SongAdapter(
             SortOrder.SongSortOrder.SONG_ARTIST -> dataSet[position].artistName
             SortOrder.SongSortOrder.SONG_YEAR -> return MusicUtil.getYearString(dataSet[position].year)
             SortOrder.SongSortOrder.COMPOSER -> dataSet[position].composer
+            SortOrder.SongSortOrder.SONG_ALBUM_ARTIST -> dataSet[position].albumArtist
             else -> {
                 return ""
             }

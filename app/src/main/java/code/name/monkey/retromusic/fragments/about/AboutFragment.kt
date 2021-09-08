@@ -27,20 +27,20 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.ContributorAdapter
+import code.name.monkey.retromusic.databinding.FragmentAboutBinding
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.util.NavigationUtil
-import kotlinx.android.synthetic.main.card_credit.*
-import kotlinx.android.synthetic.main.card_other.*
-import kotlinx.android.synthetic.main.card_retro_info.*
-import kotlinx.android.synthetic.main.card_social.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
+    private var _binding: FragmentAboutBinding? = null
+    private val binding get() = _binding!!
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        version.setSummary(getAppVersion())
+        _binding = FragmentAboutBinding.bind(view)
+        binding.aboutContent.cardOther.version.setSummary(getAppVersion())
         setUpView()
         loadContributors()
     }
@@ -53,19 +53,20 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
     }
 
     private fun setUpView() {
-        appGithub.setOnClickListener(this)
-        faqLink.setOnClickListener(this)
-        telegramLink.setOnClickListener(this)
-        appRate.setOnClickListener(this)
-        appTranslation.setOnClickListener(this)
-        appShare.setOnClickListener(this)
-        donateLink.setOnClickListener(this)
-        instagramLink.setOnClickListener(this)
-        twitterLink.setOnClickListener(this)
-        changelog.setOnClickListener(this)
-        openSource.setOnClickListener(this)
-        pinterestLink.setOnClickListener(this)
-        bugReportLink.setOnClickListener(this)
+        binding.aboutContent.cardRetroInfo.appGithub.setOnClickListener(this)
+        binding.aboutContent.cardRetroInfo.faqLink.setOnClickListener(this)
+        binding.aboutContent.cardSocial.telegramLink.setOnClickListener(this)
+        binding.aboutContent.cardRetroInfo.appRate.setOnClickListener(this)
+        binding.aboutContent.cardRetroInfo.appTranslation.setOnClickListener(this)
+        binding.aboutContent.cardRetroInfo.appShare.setOnClickListener(this)
+        binding.aboutContent.cardRetroInfo.donateLink.setOnClickListener(this)
+        binding.aboutContent.cardSocial.instagramLink.setOnClickListener(this)
+        binding.aboutContent.cardSocial.twitterLink.setOnClickListener(this)
+        binding.aboutContent.cardOther.changelog.setOnClickListener(this)
+        binding.aboutContent.cardOther.openSource.setOnClickListener(this)
+        binding.aboutContent.cardSocial.pinterestLink.setOnClickListener(this)
+        binding.aboutContent.cardRetroInfo.bugReportLink.setOnClickListener(this)
+        binding.aboutContent.cardSocial.websiteLink.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -80,9 +81,10 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
             R.id.donateLink -> NavigationUtil.goToSupportDevelopment(requireActivity())
             R.id.instagramLink -> openUrl(Constants.APP_INSTAGRAM_LINK)
             R.id.twitterLink -> openUrl(Constants.APP_TWITTER_LINK)
-            R.id.changelog -> openUrl(Constants.TELEGRAM_CHANGE_LOG)
+            R.id.changelog -> NavigationUtil.gotoWhatNews(requireActivity())
             R.id.openSource -> NavigationUtil.goToOpenSource(requireActivity())
             R.id.bugReportLink -> NavigationUtil.bugReport(requireActivity())
+            R.id.websiteLink -> openUrl(Constants.WEBSITE)
         }
     }
 
@@ -99,7 +101,7 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
     }
 
     private fun shareApp() {
-        ShareCompat.IntentBuilder.from(requireActivity()).setType("text/plain")
+        ShareCompat.IntentBuilder(requireActivity()).setType("text/plain")
             .setChooserTitle(R.string.share_app)
             .setText(String.format(getString(R.string.app_share), requireActivity().packageName))
             .startChooser()
@@ -107,7 +109,7 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
 
     private fun loadContributors() {
         val contributorAdapter = ContributorAdapter(emptyList())
-        recyclerView.apply {
+        binding.aboutContent.cardCredit.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = DefaultItemAnimator()
             adapter = contributorAdapter
@@ -115,5 +117,10 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
         libraryViewModel.fetchContributors().observe(viewLifecycleOwner, { contributors ->
             contributorAdapter.swapData(contributors)
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

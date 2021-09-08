@@ -17,6 +17,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
+            android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/profile"
             app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
@@ -33,7 +34,7 @@
             android:id="@+id/bannerImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="21:10"
             app:layout_constraintEnd_toEndOf="parent"

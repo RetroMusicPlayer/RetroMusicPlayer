@@ -105,7 +105,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text">
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        android:clickable="false">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
@@ -116,7 +117,7 @@
             android:background="@color/md_red_500"
             android:ellipsize="marquee"
             android:focusable="true"
-            android:focusableInTouchMode="true"
+            android:clickable="true"
             android:fontFeatureSettings="smcp"
             android:freezesText="true"
             android:gravity="center"

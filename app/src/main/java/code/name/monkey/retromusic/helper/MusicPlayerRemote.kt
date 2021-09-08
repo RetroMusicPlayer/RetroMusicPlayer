@@ -29,10 +29,11 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
-import java.io.File
-import java.util.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.io.File
+import java.util.*
+
 
 object MusicPlayerRemote : KoinComponent {
     val TAG: String = MusicPlayerRemote::class.java.simpleName
@@ -40,6 +41,15 @@ object MusicPlayerRemote : KoinComponent {
     var musicService: MusicService? = null
 
     private val songRepository by inject<SongRepository>()
+
+    var isCasting: Boolean = false
+        set(value) {
+            field = value
+            if (value) {
+                musicService?.quit()
+            }
+            println(value.toString() + "" + isCasting.toString())
+        }
 
     @JvmStatic
     val isPlaying: Boolean
@@ -54,6 +64,11 @@ object MusicPlayerRemote : KoinComponent {
     val currentSong: Song
         get() = if (musicService != null) {
             musicService!!.currentSong
+        } else Song.emptySong
+
+    val nextSong: Song?
+        get() = if (musicService != null) {
+            musicService?.nextSong
         } else Song.emptySong
 
     /**
@@ -73,7 +88,7 @@ object MusicPlayerRemote : KoinComponent {
     val playingQueue: List<Song>
         get() = if (musicService != null) {
             musicService?.playingQueue as List<Song>
-        } else listOf<Song>()
+        } else listOf()
 
     val songProgressMillis: Int
         get() = if (musicService != null) {
@@ -295,7 +310,7 @@ object MusicPlayerRemote : KoinComponent {
 
     fun playNext(song: Song): Boolean {
         if (musicService != null) {
-            if (playingQueue.size > 0) {
+            if (playingQueue.isNotEmpty()) {
                 musicService?.addSong(position + 1, song)
             } else {
                 val queue = ArrayList<Song>()
@@ -314,7 +329,7 @@ object MusicPlayerRemote : KoinComponent {
 
     fun playNext(songs: List<Song>): Boolean {
         if (musicService != null) {
-            if (playingQueue.size > 0) {
+            if (playingQueue.isNotEmpty()) {
                 musicService?.addSongs(position + 1, songs)
             } else {
                 openQueue(songs, 0, false)
@@ -332,7 +347,7 @@ object MusicPlayerRemote : KoinComponent {
 
     fun enqueue(song: Song): Boolean {
         if (musicService != null) {
-            if (playingQueue.size > 0) {
+            if (playingQueue.isNotEmpty()) {
                 musicService?.addSong(song)
             } else {
                 val queue = ArrayList<Song>()
@@ -351,7 +366,7 @@ object MusicPlayerRemote : KoinComponent {
 
     fun enqueue(songs: List<Song>): Boolean {
         if (musicService != null) {
-            if (playingQueue.size > 0) {
+            if (playingQueue.isNotEmpty()) {
                 musicService?.addSongs(songs)
             } else {
                 openQueue(songs, 0, false)

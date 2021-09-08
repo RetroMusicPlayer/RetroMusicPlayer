@@ -20,38 +20,15 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.ui.NavigationUI
-import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
-import code.name.monkey.retromusic.ALBUM_COVER_STYLE
-import code.name.monkey.retromusic.ALBUM_COVER_TRANSFORM
-import code.name.monkey.retromusic.BANNER_IMAGE_PATH
-import code.name.monkey.retromusic.BLACK_THEME
-import code.name.monkey.retromusic.CAROUSEL_EFFECT
-import code.name.monkey.retromusic.CIRCULAR_ALBUM_ART
-import code.name.monkey.retromusic.DESATURATED_COLOR
-import code.name.monkey.retromusic.EXTRA_SONG_INFO
-import code.name.monkey.retromusic.GENERAL_THEME
-import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
-import code.name.monkey.retromusic.KEEP_SCREEN_ON
-import code.name.monkey.retromusic.LANGUAGE_NAME
-import code.name.monkey.retromusic.LIBRARY_CATEGORIES
-import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
-import code.name.monkey.retromusic.PROFILE_IMAGE_PATH
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.ROUND_CORNERS
-import code.name.monkey.retromusic.TAB_TEXT_MODE
-import code.name.monkey.retromusic.TOGGLE_ADD_CONTROLS
-import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
-import code.name.monkey.retromusic.TOGGLE_GENRE
-import code.name.monkey.retromusic.TYPE_HOME_BANNER
-import code.name.monkey.retromusic.TOGGLE_SEPARATE_LINE
-import code.name.monkey.retromusic.TOGGLE_VOLUME
-import code.name.monkey.retromusic.USER_NAME
-import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
+import androidx.navigation.ui.setupWithNavController
+import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.activities.base.AbsCastActivity
+import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
+import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
+import code.name.monkey.retromusic.fragments.home.HomeFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SearchQueryHelper.getSongs
 import code.name.monkey.retromusic.model.CategoryInfo
@@ -64,13 +41,13 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
-class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeListener {
+class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
     companion object {
         const val TAG = "MainActivity"
         const val EXPAND_PANEL = "expand_panel"
     }
 
-    override fun createContentView(): View {
+    override fun createContentView(): SlidingMusicPanelLayoutBinding {
         return wrapSlidingMusicPanel()
     }
 
@@ -98,10 +75,50 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
 
         val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
         if (categoryInfo.visible) {
-            navGraph.startDestination = categoryInfo.category.id
+            navGraph.setStartDestination(
+                if (PreferenceUtil.rememberLastTab) {
+                    PreferenceUtil.lastTab.let {
+                        if (it == 0) {
+                            categoryInfo.category.id
+                        } else {
+                            it
+                        }
+                    }
+                } else categoryInfo.category.id
+            )
         }
         navController.graph = navGraph
-        NavigationUI.setupWithNavController(getBottomNavigationView(), navController)
+        getBottomNavigationView().setupWithNavController(navController)
+        // Scroll Fragment to top
+        getBottomNavigationView().setOnItemReselectedListener {
+            supportFragmentManager.findFragmentById(R.id.fragment_container)?.childFragmentManager?.fragments?.get(0)
+                .also {
+                    if (it is AbsRecyclerViewFragment<*, *>) {
+                        it.scrollToTop()
+                    }
+                    if (it is HomeFragment) {
+                        it.scrollToTop()
+                    }
+                }
+        }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre -> {
+                    // Save the last tab
+                    if (PreferenceUtil.rememberLastTab) {
+                        saveTab(destination.id)
+                    }
+                    // Show Bottom Navigation Bar
+                    setBottomBarVisibility(true)
+                }
+                else -> setBottomBarVisibility(false) // Hide Bottom Navigation Bar
+            }
+
+        }
+    }
+
+    private fun saveTab(id: Int) {
+        PreferenceUtil.lastTab = id
     }
 
     override fun onSupportNavigateUp(): Boolean =
@@ -112,6 +129,8 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
         val expand = extra<Boolean>(EXPAND_PANEL).value ?: false
         if (expand && PreferenceUtil.isExpandPanel) {
+            setBottomBarVisibility(false)
+            fromNotification = true
             expandPanel()
             intent.removeExtra(EXPAND_PANEL)
         }
@@ -123,7 +142,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == GENERAL_THEME || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TYPE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES) {
+        if (key == GENERAL_THEME || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES) {
             postRecreate()
         }
     }

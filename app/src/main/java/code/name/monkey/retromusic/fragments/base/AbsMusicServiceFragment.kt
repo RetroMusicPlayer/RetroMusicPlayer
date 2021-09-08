@@ -27,10 +27,9 @@ import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.RetroUtil
+import org.jaudiotagger.audio.AudioFileIO
 import java.io.File
 import java.net.URLEncoder
-import java.util.*
-import org.jaudiotagger.audio.AudioFileIO
 
 /**
  * Created by hemanths on 18/08/17.
@@ -78,6 +77,9 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
         serviceActivity?.removeMusicServiceEventListener(this)
     }
 
+    override fun onFavoriteStateChanged() {
+    }
+
     override fun onPlayingMetaChanged() {
     }
 
@@ -121,10 +123,10 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
         return "-"
     }
 
-    private fun getMimeType(url: String): String? {
+    private fun getMimeType(url: String): String {
         var type: String? = MimeTypeMap.getFileExtensionFromUrl(
             URLEncoder.encode(url, "utf-8")
-        ).toUpperCase(Locale.getDefault())
+        ).uppercase()
         if (type == null) {
             type = url.substring(url.lastIndexOf(".") + 1)
         }

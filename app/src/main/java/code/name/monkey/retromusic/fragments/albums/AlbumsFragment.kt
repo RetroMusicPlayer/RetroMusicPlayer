@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments.albums
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -33,7 +34,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
-import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.gms.cast.framework.CastButtonFactory
 
 class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     IAlbumClickListener, ICabHolder {
@@ -46,7 +47,16 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             else
                 adapter?.swapDataSet(listOf())
         })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (!handleBackPress()) {
+                remove()
+                requireActivity().onBackPressed()
+            }
+        }
     }
+
+    override val titleRes: Int
+        get() = R.string.albums
 
     override val emptyMessage: Int
         get() = R.string.no_albums
@@ -114,20 +124,15 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
-        exitTransition = MaterialElevationScale(false).apply {
-            duration = 300L
-        }
-        reenterTransition = MaterialElevationScale(true).apply {
-            duration = 300L
-        }
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to "album"
+                view to albumId.toString()
             )
         )
+        reenterTransition = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -140,6 +145,8 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         val layoutItem = menu.findItem(R.id.action_layout_type)
         setupLayoutMenu(layoutItem.subMenu)
         setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
+        //Setting up cast button
+        CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
     }
 
     private fun setUpSortOrderMenu(
@@ -175,6 +182,13 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             R.string.sort_order_year
         ).isChecked =
             currentSortOrder.equals(AlbumSortOrder.ALBUM_YEAR)
+        sortOrderMenu.add(
+            0,
+            R.id.action_album_sort_order_num_songs,
+            4,
+            R.string.sort_order_num_songs
+        ).isChecked =
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_NUMBER_OF_SONGS)
 
         sortOrderMenu.setGroupCheckable(0, true, true)
     }
@@ -251,6 +265,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             R.id.action_album_sort_order_desc -> AlbumSortOrder.ALBUM_Z_A
             R.id.action_album_sort_order_artist -> AlbumSortOrder.ALBUM_ARTIST
             R.id.action_album_sort_order_year -> AlbumSortOrder.ALBUM_YEAR
+            R.id.action_album_sort_order_num_songs -> AlbumSortOrder.ALBUM_NUMBER_OF_SONGS
             else -> PreferenceUtil.albumSortOrder
         }
         if (sortOrder != PreferenceUtil.albumSortOrder) {
@@ -299,6 +314,21 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             item.isChecked = true
             setAndSaveGridSize(gridSize)
             return true
+        }
+        return false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        libraryViewModel.forceReload(ReloadType.Albums)
+    }
+
+    private fun handleBackPress(): Boolean {
+        cab?.let {
+            if (it.isActive) {
+                it.finish()
+                return true
+            }
         }
         return false
     }

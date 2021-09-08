@@ -16,10 +16,10 @@ package code.name.monkey.retromusic.views
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.FrameLayout
 import code.name.monkey.retromusic.R
-import kotlinx.android.synthetic.main.list_setting_item_view.view.*
+import code.name.monkey.retromusic.databinding.ListSettingItemViewBinding
 
 /**
  * Created by hemanths on 2019-12-10.
@@ -30,22 +30,26 @@ class SettingListItemView @JvmOverloads constructor(
     defStyleAttr: Int = -1,
     defStyleRes: Int = -1
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
+    private var binding: ListSettingItemViewBinding =
+        ListSettingItemViewBinding.inflate(LayoutInflater.from(context))
+
     init {
-        View.inflate(context, R.layout.list_setting_item_view, this)
+        addView(binding.root)
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.SettingListItemView)
-        icon as ColorIconsImageView
+        binding.icon
         if (typedArray.hasValue(R.styleable.SettingListItemView_settingListItemIcon)) {
-            icon.setImageDrawable(typedArray.getDrawable(R.styleable.SettingListItemView_settingListItemIcon))
+            binding.icon.setImageDrawable(typedArray.getDrawable(R.styleable.SettingListItemView_settingListItemIcon))
         }
-        icon.setIconBackgroundColor(
+        binding.icon.setIconBackgroundColor(
             typedArray.getColor(
                 R.styleable.SettingListItemView_settingListItemIconColor,
                 Color.WHITE
             )
         )
-        title.text = typedArray.getText(R.styleable.SettingListItemView_settingListItemTitle)
-        text.text = typedArray.getText(R.styleable.SettingListItemView_settingListItemText)
+        binding.title.text =
+            typedArray.getText(R.styleable.SettingListItemView_settingListItemTitle)
+        binding.text.text = typedArray.getText(R.styleable.SettingListItemView_settingListItemText)
         typedArray.recycle()
     }
 }

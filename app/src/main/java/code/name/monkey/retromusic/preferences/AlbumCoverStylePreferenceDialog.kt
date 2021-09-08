@@ -70,7 +70,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         @SuppressLint("InflateParams") val view =
-            LayoutInflater.from(requireContext())
+            layoutInflater
                 .inflate(R.layout.preference_dialog_now_playing_screen, null)
         val viewPager = view.findViewById<ViewPager>(R.id.now_playing_screen_view_pager)
         viewPager.adapter = AlbumCoverStyleAdapter(requireContext())

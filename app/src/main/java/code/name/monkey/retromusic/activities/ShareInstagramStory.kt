@@ -26,21 +26,22 @@ import androidx.core.view.drawToBitmap
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.databinding.ActivityShareInstagramBinding
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.Share
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_share_instagram.*
 
 /**
  * Created by hemanths on 2020-02-02.
  */
 
 class ShareInstagramStory : AbsBaseActivity() {
+
+    private lateinit var binding: ActivityShareInstagramBinding
 
     companion object {
         const val EXTRA_SONG = "extra_song"
@@ -57,32 +58,33 @@ class ShareInstagramStory : AbsBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_share_instagram)
+        binding = ActivityShareInstagramBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setStatusbarColor(Color.TRANSPARENT)
         setNavigationbarColor(Color.BLACK)
 
-        toolbar.setBackgroundColor(Color.TRANSPARENT)
-        setSupportActionBar(toolbar)
+        binding.toolbar.setBackgroundColor(Color.TRANSPARENT)
+        setSupportActionBar(binding.toolbar)
 
         val song = intent.extras?.getParcelable<Song>(EXTRA_SONG)
         song?.let { songFinal ->
-            SongGlideRequest.Builder.from(Glide.with(this), songFinal)
-                .checkIgnoreMediaStore(this@ShareInstagramStory)
-                .generatePalette(this@ShareInstagramStory)
-                .build()
-                .into(object : RetroMusicColoredTarget(image) {
+            GlideApp.with(this)
+                .asBitmapPalette()
+                .songCoverOptions(songFinal)
+                .load(RetroGlideExtension.getSongModel(songFinal))
+                .into(object : RetroMusicColoredTarget(binding.image) {
                     override fun onColorReady(colors: MediaNotificationProcessor) {
                         val isColorLight = ColorUtil.isColorLight(colors.backgroundColor)
                         setColors(isColorLight, colors.backgroundColor)
                     }
                 })
 
-            shareTitle.text = songFinal.title
-            shareText.text = songFinal.artistName
-            shareButton.setOnClickListener {
+            binding.shareTitle.text = songFinal.title
+            binding.shareText.text = songFinal.artistName
+            binding.shareButton.setOnClickListener {
                 val path: String = Media.insertImage(
                     contentResolver,
-                    mainContent.drawToBitmap(Bitmap.Config.ARGB_8888),
+                    binding.mainContent.drawToBitmap(Bitmap.Config.ARGB_8888),
                     "Design", null
                 )
                 val uri = Uri.parse(path)
@@ -92,24 +94,25 @@ class ShareInstagramStory : AbsBaseActivity() {
                 )
             }
         }
-        shareButton.setTextColor(
+        binding.shareButton.setTextColor(
             MaterialValueHelper.getPrimaryTextColor(
                 this,
                 ColorUtil.isColorLight(ThemeStore.accentColor(this))
             )
         )
-        shareButton.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+        binding.shareButton.backgroundTintList =
+            ColorStateList.valueOf(ThemeStore.accentColor(this))
     }
 
     private fun setColors(colorLight: Boolean, color: Int) {
         setLightStatusbar(colorLight)
-        toolbar.setTitleTextColor(
+        binding.toolbar.setTitleTextColor(
             MaterialValueHelper.getPrimaryTextColor(
                 this@ShareInstagramStory,
                 colorLight
             )
         )
-        toolbar.navigationIcon?.setTintList(
+        binding.toolbar.navigationIcon?.setTintList(
             ColorStateList.valueOf(
                 MaterialValueHelper.getPrimaryTextColor(
                     this@ShareInstagramStory,
@@ -117,7 +120,7 @@ class ShareInstagramStory : AbsBaseActivity() {
                 )
             )
         )
-        mainContent.background =
+        binding.mainContent.background =
             GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(color, Color.BLACK)

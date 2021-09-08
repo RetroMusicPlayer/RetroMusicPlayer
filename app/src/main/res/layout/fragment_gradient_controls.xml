@@ -26,6 +26,7 @@
         app:layout_constraintBottom_toTopOf="@+id/progressSlider"
         app:layout_constraintEnd_toStartOf="@+id/playerMenu"
         app:layout_constraintStart_toEndOf="@+id/songFavourite"
+        android:clickable="false"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
@@ -40,6 +41,8 @@
             android:textColor="@color/md_white_1000"
             android:textStyle="bold"
             tools:text="@tools:sample/lorem/random"
+            android:clickable="true"
+            android:focusable="true"
             tools:textColor="@color/md_black_1000" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -58,6 +61,8 @@
             app:layout_constraintTop_toBottomOf="@+id/title"
             tools:layout_editor_absoluteX="48dp"
             tools:text="@tools:sample/lorem/random"
+            android:clickable="true"
+            android:focusable="true"
             tools:textColor="@color/md_black_1000" />
 
     </LinearLayout>

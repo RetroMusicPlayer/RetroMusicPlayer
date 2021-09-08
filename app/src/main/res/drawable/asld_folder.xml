@@ -1,0 +1,13 @@
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/state_on"
+        android:drawable="@drawable/ic_folder"
+        android:state_checked="true" />
+    <item
+        android:id="@+id/state_off"
+        android:drawable="@drawable/ic_folder" />
+    <transition
+        android:drawable="@drawable/avd_folder"
+        android:fromId="@id/state_off"
+        android:toId="@id/state_on" />
+</animated-selector>

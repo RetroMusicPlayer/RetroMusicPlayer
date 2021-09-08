@@ -50,7 +50,9 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/media_button" />
+    <include
+        android:id="@+id/media_button"
+        layout="@layout/media_button" />
 
     <FrameLayout
         android:id="@+id/volumeFragmentContainer"
@@ -87,6 +89,7 @@
             android:layout_marginBottom="12dp"
             android:layout_weight="1.0"
             android:orientation="vertical"
+            android:clickable="false"
             android:paddingStart="0dp"
             android:paddingEnd="16dp">
 
@@ -96,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
+                android:clickable="true"
                 android:freezesText="true"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
@@ -110,8 +113,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
+                android:clickable="true"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:freezesText="true"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"

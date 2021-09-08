@@ -14,91 +14,98 @@
  */
 package code.name.monkey.retromusic.activities.tageditor
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.widget.ImageView
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.repository.SongRepository
-import kotlinx.android.synthetic.main.activity_song_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
 import java.util.*
 
-class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
+class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>(), TextWatcher {
 
-    override val contentViewLayout: Int
-        get() = R.layout.activity_song_tag_editor
+    override val bindingInflater: (LayoutInflater) -> ActivitySongTagEditorBinding =
+        ActivitySongTagEditorBinding::inflate
+
 
     private val songRepository by inject<SongRepository>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setNoImageMode()
         setUpViews()
-        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
-        setSupportActionBar(toolbar)
+        setNoImageMode()
+        binding.toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+        setSupportActionBar(binding.toolbar)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setUpViews() {
         fillViewsWithFileTags()
-        MaterialUtil.setTint(songTextContainer, false)
-        MaterialUtil.setTint(composerContainer, false)
-        MaterialUtil.setTint(albumTextContainer, false)
-        MaterialUtil.setTint(artistContainer, false)
-        MaterialUtil.setTint(albumArtistContainer, false)
-        MaterialUtil.setTint(yearContainer, false)
-        MaterialUtil.setTint(genreContainer, false)
-        MaterialUtil.setTint(trackNumberContainer, false)
-        MaterialUtil.setTint(lyricsContainer, false)
+        MaterialUtil.setTint(binding.songTextContainer, false)
+        MaterialUtil.setTint(binding.composerContainer, false)
+        MaterialUtil.setTint(binding.albumTextContainer, false)
+        MaterialUtil.setTint(binding.artistContainer, false)
+        MaterialUtil.setTint(binding.albumArtistContainer, false)
+        MaterialUtil.setTint(binding.yearContainer, false)
+        MaterialUtil.setTint(binding.genreContainer, false)
+        MaterialUtil.setTint(binding.trackNumberContainer, false)
+        MaterialUtil.setTint(binding.lyricsContainer, false)
 
-        songText.appHandleColor().addTextChangedListener(this)
-        albumText.appHandleColor().addTextChangedListener(this)
-        albumArtistText.appHandleColor().addTextChangedListener(this)
-        artistText.appHandleColor().addTextChangedListener(this)
-        genreText.appHandleColor().addTextChangedListener(this)
-        yearText.appHandleColor().addTextChangedListener(this)
-        trackNumberText.appHandleColor().addTextChangedListener(this)
-        lyricsText.appHandleColor().addTextChangedListener(this)
-        songComposerText.appHandleColor().addTextChangedListener(this)
+        binding.songText.appHandleColor().addTextChangedListener(this)
+        binding.albumText.appHandleColor().addTextChangedListener(this)
+        binding.albumArtistText.appHandleColor().addTextChangedListener(this)
+        binding.artistText.appHandleColor().addTextChangedListener(this)
+        binding.genreText.appHandleColor().addTextChangedListener(this)
+        binding.yearText.appHandleColor().addTextChangedListener(this)
+        binding.trackNumberText.appHandleColor().addTextChangedListener(this)
+        binding.lyricsText.appHandleColor().addTextChangedListener(this)
+        binding.songComposerText.appHandleColor().addTextChangedListener(this)
+
+        binding.lyricsText.setOnTouchListener { view, _ ->
+            view.parent.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+        }
     }
 
     private fun fillViewsWithFileTags() {
-        songText.setText(songTitle)
-        albumArtistText.setText(albumArtist)
-        albumText.setText(albumTitle)
-        artistText.setText(artistName)
-        genreText.setText(genreName)
-        yearText.setText(songYear)
-        trackNumberText.setText(trackNumber)
-        lyricsText.setText(lyrics)
-        songComposerText.setText(composer)
+        binding.songText.setText(songTitle)
+        binding.albumArtistText.setText(albumArtist)
+        binding.albumText.setText(albumTitle)
+        binding.artistText.setText(artistName)
+        binding.genreText.setText(genreName)
+        binding.yearText.setText(songYear)
+        binding.trackNumberText.setText(trackNumber)
+        binding.lyricsText.setText(lyrics)
+        binding.songComposerText.setText(composer)
+        println(songTitle + songYear)
     }
 
-    override fun loadCurrentImage() {
-    }
+    override fun loadCurrentImage() {}
 
-    override fun searchImageOnWeb() {
-    }
+    override fun searchImageOnWeb() {}
 
-    override fun deleteImage() {
-    }
+    override fun deleteImage() {}
 
     override fun save() {
         val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
-        fieldKeyValueMap[FieldKey.TITLE] = songText.text.toString()
-        fieldKeyValueMap[FieldKey.ALBUM] = albumText.text.toString()
-        fieldKeyValueMap[FieldKey.ARTIST] = artistText.text.toString()
-        fieldKeyValueMap[FieldKey.GENRE] = genreText.text.toString()
-        fieldKeyValueMap[FieldKey.YEAR] = yearText.text.toString()
-        fieldKeyValueMap[FieldKey.TRACK] = trackNumberText.text.toString()
-        fieldKeyValueMap[FieldKey.LYRICS] = lyricsText.text.toString()
-        fieldKeyValueMap[FieldKey.ALBUM_ARTIST] = albumArtistText.text.toString()
-        fieldKeyValueMap[FieldKey.COMPOSER] = songComposerText.text.toString()
+        fieldKeyValueMap[FieldKey.TITLE] = binding.songText.text.toString()
+        fieldKeyValueMap[FieldKey.ALBUM] = binding.albumText.text.toString()
+        fieldKeyValueMap[FieldKey.ARTIST] = binding.artistText.text.toString()
+        fieldKeyValueMap[FieldKey.GENRE] = binding.genreText.text.toString()
+        fieldKeyValueMap[FieldKey.YEAR] = binding.yearText.text.toString()
+        fieldKeyValueMap[FieldKey.TRACK] = binding.trackNumberText.text.toString()
+        fieldKeyValueMap[FieldKey.LYRICS] = binding.lyricsText.text.toString()
+        fieldKeyValueMap[FieldKey.ALBUM_ARTIST] = binding.albumArtistText.text.toString()
+        fieldKeyValueMap[FieldKey.COMPOSER] = binding.songComposerText.text.toString()
         writeValuesToFiles(fieldKeyValueMap, null)
     }
 
@@ -120,4 +127,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     companion object {
         val TAG: String = SongTagEditorActivity::class.java.simpleName
     }
+
+    override val editorImage: ImageView?
+        get() = null
 }

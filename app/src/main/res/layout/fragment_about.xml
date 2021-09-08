@@ -7,5 +7,7 @@
     android:overScrollMode="never"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    <include layout="@layout/fragment_about_content" />
+    <include
+        android:id="@+id/about_content"
+        layout="@layout/fragment_about_content" />
 </androidx.core.widget.NestedScrollView>

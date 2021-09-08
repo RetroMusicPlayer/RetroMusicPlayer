@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 
 public class StatusBarView extends View {

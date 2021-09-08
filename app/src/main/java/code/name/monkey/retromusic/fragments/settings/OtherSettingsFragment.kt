@@ -23,7 +23,10 @@ import code.name.monkey.retromusic.LAST_ADDED_CUTOFF
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.HomeSections
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
+import com.google.android.play.core.splitinstall.SplitInstallRequest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -35,6 +38,7 @@ class OtherSettingsFragment : AbsSettingsFragment() {
     override fun invalidateSettings() {
         val languagePreference: ATEListPreference? = findPreference(LANGUAGE_NAME)
         languagePreference?.setOnPreferenceChangeListener { _, _ ->
+            println("Invalidated")
             requireActivity().recreate()
             return@setOnPreferenceChangeListener true
         }
@@ -55,6 +59,21 @@ class OtherSettingsFragment : AbsSettingsFragment() {
         val languagePreference: Preference? = findPreference(LANGUAGE_NAME)
         languagePreference?.setOnPreferenceChangeListener { prefs, newValue ->
             setSummary(prefs, newValue)
+            val code = newValue.toString()
+            val manager = SplitInstallManagerFactory.create(requireContext())
+            if (code != "auto") {
+                // Try to download language resources
+                val request =
+                    SplitInstallRequest.newBuilder().addLanguage(Locale.forLanguageTag(code))
+                        .build()
+                manager.startInstall(request)
+                    // Recreate the activity on download complete
+                    .addOnCompleteListener {
+                        activity?.recreate()
+                    }
+            } else {
+                requireActivity().recreate()
+            }
             true
         }
     }

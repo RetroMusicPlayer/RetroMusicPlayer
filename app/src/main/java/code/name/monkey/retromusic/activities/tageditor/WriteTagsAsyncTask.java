@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -136,17 +136,17 @@ public class WriteTagsAsyncTask extends DialogAsyncTask<LoadingInfo, Integer, Li
 
     @Override
     protected Dialog createDialog(@NonNull Context context) {
-        return new MaterialDialog.Builder(context)
-                .title(R.string.saving_changes)
-                .cancelable(false)
-                .progress(false, 0)
-                .build();
+        return new MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.saving_changes)
+                .setCancelable(false)
+                .setView(R.layout.loading)
+                .create();
     }
 
     @Override
     protected void onProgressUpdate(@NonNull Dialog dialog, Integer... values) {
         super.onProgressUpdate(dialog, values);
-        ((MaterialDialog) dialog).setMaxProgress(values[1]);
-        ((MaterialDialog) dialog).setProgress(values[0]);
+//        ((MaterialDialog) dialog).setMaxProgress(values[1]);
+//        ((MaterialDialog) dialog).setProgress(values[0]);
     }
 }

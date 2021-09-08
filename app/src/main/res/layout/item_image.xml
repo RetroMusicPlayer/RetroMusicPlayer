@@ -13,6 +13,7 @@
         android:layout_height="156dp"
         android:layout_margin="8dp"
         android:orientation="vertical"
+        app:cardBackgroundColor="@color/transparent"
         app:cardCornerRadius="8dp"
         app:cardPreventCornerOverlap="true"
         app:layout_constraintEnd_toEndOf="parent"

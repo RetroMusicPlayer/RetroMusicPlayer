@@ -15,80 +15,73 @@
 package code.name.monkey.retromusic.fragments.base
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
-import androidx.core.text.HtmlCompat
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.updatePadding
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentMainRecyclerBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
-import com.google.android.material.appbar.AppBarLayout
-import kotlinx.android.synthetic.main.fragment_main_recycler.*
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.MaterialSharedAxis
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 
 abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
-    AbsMainActivityFragment(R.layout.fragment_main_recycler),
-    AppBarLayout.OnOffsetChangedListener {
+    AbsMainActivityFragment(R.layout.fragment_main_recycler) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
+    private var _binding: FragmentMainRecyclerBinding? = null
+    private val binding get() = _binding!!
     protected var adapter: A? = null
     protected var layoutManager: LM? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        _binding = FragmentMainRecyclerBinding.bind(view)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
 
-        mainActivity.setBottomBarVisibility(true)
-        mainActivity.setSupportActionBar(toolbar)
+        mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         initLayoutManager()
         initAdapter()
         setUpRecyclerView()
-        setupTitle()
+        setupToolbar()
     }
 
-    private fun setupTitle() {
-        toolbar.setNavigationOnClickListener {
+    private fun setupToolbar() {
+        binding.toolbar.setNavigationOnClickListener {
+            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(requireView())
+            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
             findNavController().navigate(
                 R.id.searchFragment,
                 null,
                 navOptions
             )
         }
-        val color = ThemeStore.accentColor(requireContext())
-        val hexColor = String.format("#%06X", 0xFFFFFF and color)
-        val appName = HtmlCompat.fromHtml(
-            "Retro <span  style='color:$hexColor';>Music</span>",
-            HtmlCompat.FROM_HTML_MODE_COMPACT
-        )
-        appNameText.text = appName
+        val appName = resources.getString(titleRes)
+        binding.appNameText.text = appName
     }
 
+    abstract val titleRes: Int
+
     private fun setUpRecyclerView() {
-        recyclerView.apply {
+        binding.recyclerView.apply {
             layoutManager = this@AbsRecyclerViewFragment.layoutManager
             adapter = this@AbsRecyclerViewFragment.adapter
-            val fastScroller = create(this)
+            create(this)
         }
         checkForPadding()
     }
@@ -116,8 +109,8 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     }
 
     private fun checkIsEmpty() {
-        emptyText.setText(emptyMessage)
-        empty.visibility = if (adapter!!.itemCount == 0) View.VISIBLE else View.GONE
+        binding.emptyText.setText(emptyMessage)
+        binding.empty.visibility = if (adapter!!.itemCount == 0) View.VISIBLE else View.GONE
     }
 
     private fun checkForPadding() {
@@ -125,10 +118,10 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
         if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
             val height = DensityUtil.dip2px(requireContext(), 112f)
-            recyclerView.updatePadding(0, 0, 0, height)
+            binding.recyclerView.updatePadding(0, 0, 0, height)
         } else {
             val height = DensityUtil.dip2px(requireContext(), 56f)
-            recyclerView.updatePadding(0, 0, 0, height)
+            binding.recyclerView.updatePadding(0, 0, 0, height)
         }
     }
 
@@ -140,15 +133,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     @NonNull
     protected abstract fun createAdapter(): A
-
-    override fun onOffsetChanged(p0: AppBarLayout?, i: Int) {
-        /*recyclerView.setPadding(
-            recyclerView.paddingLeft,
-            recyclerView.paddingTop,
-            recyclerView.paddingRight,
-            i
-        )*/
-    }
 
     override fun onQueueChanged() {
         super.onQueueChanged()
@@ -162,22 +146,31 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     protected fun invalidateLayoutManager() {
         initLayoutManager()
-        recyclerView.layoutManager = layoutManager
+        binding.recyclerView.layoutManager = layoutManager
     }
 
     protected fun invalidateAdapter() {
         initAdapter()
         checkIsEmpty()
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
     }
 
     fun recyclerView(): RecyclerView {
-        return recyclerView
+        return binding.recyclerView
+    }
+
+    fun getContainer(): CoordinatorLayout {
+        return binding.root
+    }
+
+    fun scrollToTop() {
+        recyclerView().scrollToPosition(0)
+        binding.appBarLayout.setExpanded(true, true)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -185,9 +178,9 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         inflater.inflate(R.menu.menu_main, menu)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
-            toolbar,
+            binding.toolbar,
             menu,
-            ATHToolbarActivity.getToolbarBackgroundColor(toolbar)
+            ATHToolbarActivity.getToolbarBackgroundColor(binding.toolbar)
         )
     }
 
@@ -208,5 +201,10 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
             )
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

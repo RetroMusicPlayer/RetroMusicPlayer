@@ -34,12 +34,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
-import code.name.monkey.retromusic.BuildConfig;
-import code.name.monkey.retromusic.R;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import code.name.monkey.retromusic.BuildConfig;
+import code.name.monkey.retromusic.R;
 
 /** 歌词 Created by wcy on 2015/11/9. */
 @SuppressLint("StaticFieldLeak")
@@ -109,6 +111,7 @@ public class LrcView extends View {
             mOffset = Math.min(mOffset, getOffset(0));
             mOffset = Math.max(mOffset, getOffset(mLrcEntryList.size() - 1));
             invalidate();
+            getParent().requestDisallowInterceptTouchEvent(true);
             return true;
           }
           return super.onScroll(e1, e2, distanceX, distanceY);

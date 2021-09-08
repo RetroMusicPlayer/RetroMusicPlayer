@@ -52,7 +52,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal">
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playerAlbumCoverFragment"
                     android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playbackControlsFragment"
                     android:name="code.name.monkey.retromusic.fragments.player.blur.BlurPlaybackControlsFragment"
                     android:layout_width="match_parent"

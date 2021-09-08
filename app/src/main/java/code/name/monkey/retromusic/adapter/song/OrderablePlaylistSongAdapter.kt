@@ -17,121 +17,105 @@ package code.name.monkey.retromusic.adapter.song
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.R.menu
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
-import code.name.monkey.retromusic.db.toSongs
+import code.name.monkey.retromusic.db.toSongsEntity
 import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
+import code.name.monkey.retromusic.extensions.applyColor
+import code.name.monkey.retromusic.extensions.applyOutlineColor
+import code.name.monkey.retromusic.fragments.LibraryViewModel
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.ICabHolder
-import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.ViewUtil
+import com.google.android.material.button.MaterialButton
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
-import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemViewHolder
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
-import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OrderablePlaylistSongAdapter(
     private val playlist: PlaylistEntity,
     activity: FragmentActivity,
-    dataSet: ArrayList<Song>,
+    dataSet: MutableList<Song>,
     itemLayoutRes: Int,
     ICabHolder: ICabHolder?,
-    private val onMoveItemListener: OnMoveItemListener?
-) : SongAdapter(
-    activity,
-    dataSet,
-    itemLayoutRes,
-    ICabHolder
-), DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
+) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, ICabHolder),
+    DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
+
+    val libraryViewModel: LibraryViewModel by activity.viewModel()
+    val tempDataSet = dataSet
 
     init {
-        setMultiSelectMenuRes(menu.menu_playlists_songs_selection)
+        this.setHasStableIds(true)
+        this.setMultiSelectMenuRes(R.menu.menu_playlists_songs_selection)
+    }
+
+    override fun getItemId(position: Int): Long {
+        // requires static value, it means need to keep the same value
+        // even if the item position has been changed.
+        return if (position != 0) {
+            dataSet[position - 1].id
+        } else {
+            -1
+        }
+
+
     }
 
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {
         return ViewHolder(view)
     }
 
-    override fun getItemId(position: Int): Long {
-        var positionFinal = position
-        positionFinal--
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) OFFSET_ITEM else SONG
+    }
 
-        var long: Long = 0
-        if (positionFinal < 0) {
-            long = -2
-        } else {
-            if (dataSet[positionFinal] is PlaylistSong) {
-                long = (dataSet[positionFinal] as PlaylistSong).idInPlayList.toLong()
+    override fun onBindViewHolder(holder: SongAdapter.ViewHolder, position: Int) {
+        if (holder.itemViewType == OFFSET_ITEM) {
+            val color = ThemeStore.accentColor(activity)
+            val viewHolder = holder as ViewHolder
+            viewHolder.playAction?.let {
+                it.setOnClickListener {
+                    MusicPlayerRemote.openQueue(dataSet, 0, true)
+                }
+                it.applyOutlineColor(color)
             }
+            viewHolder.shuffleAction?.let {
+                it.setOnClickListener {
+                    MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
+                }
+                it.applyColor(color)
+            }
+        } else {
+            super.onBindViewHolder(holder, position - 1)
         }
-        return long
     }
 
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<Song>) {
         when (menuItem.itemId) {
-            R.id.action_remove_from_playlist -> {
-                RemoveSongFromPlaylistDialog.create(selection.toSongs(playlist.playListId))
-                    .show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
-                return
-            }
-        }
-        super.onMultipleItemAction(menuItem, selection)
-    }
-
-    override fun onCheckCanStartDrag(holder: ViewHolder, position: Int, x: Int, y: Int): Boolean {
-        return onMoveItemListener != null && position > 0 && (ViewUtil.hitTest(
-            holder.dragView!!, x, y
-        ) || ViewUtil.hitTest(holder.image!!, x, y))
-    }
-
-    override fun onGetItemDraggableRange(holder: ViewHolder, position: Int): ItemDraggableRange {
-        return ItemDraggableRange(1, dataSet.size)
-    }
-
-    override fun onMoveItem(fromPosition: Int, toPosition: Int) {
-        if (onMoveItemListener != null && fromPosition != toPosition) {
-            onMoveItemListener.onMoveItem(fromPosition - 1, toPosition - 1)
+            R.id.action_remove_from_playlist -> RemoveSongFromPlaylistDialog.create(
+                selection.toSongsEntity(
+                    playlist
+                )
+            )
+                .show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
+            else -> super.onMultipleItemAction(menuItem, selection)
         }
     }
 
-    override fun onCheckCanDrop(draggingPosition: Int, dropPosition: Int): Boolean {
-        return dropPosition > 0
-    }
-
-    override fun onItemDragStarted(position: Int) {
-        notifyDataSetChanged()
-    }
-
-    override fun onItemDragFinished(fromPosition: Int, toPosition: Int, result: Boolean) {
-        notifyDataSetChanged()
-    }
-
-    interface OnMoveItemListener {
-        fun onMoveItem(fromPosition: Int, toPosition: Int)
-    }
-
-    inner class ViewHolder(itemView: View) : SongAdapter.ViewHolder(itemView),
-        DraggableItemViewHolder {
-        @DraggableItemStateFlags
-        private var mDragStateFlags: Int = 0
+    inner class ViewHolder(itemView: View) : AbsOffsetSongAdapter.ViewHolder(itemView) {
+        val playAction: MaterialButton? = itemView.findViewById(R.id.playAction)
+        val shuffleAction: MaterialButton? = itemView.findViewById(R.id.shuffleAction)
 
         override var songMenuRes: Int
             get() = R.menu.menu_item_playlist_song
             set(value) {
                 super.songMenuRes = value
             }
-
-        init {
-            if (dragView != null) {
-                if (onMoveItemListener != null) {
-                    dragView?.visibility = View.VISIBLE
-                } else {
-                    dragView?.visibility = View.GONE
-                }
-            }
-        }
 
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             when (item.itemId) {
@@ -144,13 +128,58 @@ class OrderablePlaylistSongAdapter(
             return super.onSongMenuItemClick(item)
         }
 
-        @DraggableItemStateFlags
-        override fun getDragStateFlags(): Int {
-            return mDragStateFlags
+        init {
+            dragView?.visibility = View.VISIBLE
         }
 
-        override fun setDragStateFlags(@DraggableItemStateFlags flags: Int) {
-            mDragStateFlags = flags
+        override fun onClick(v: View?) {
+            if (itemViewType == OFFSET_ITEM) {
+                MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
+                return
+            }
+            super.onClick(v)
+        }
+    }
+
+    override fun onCheckCanStartDrag(holder: ViewHolder, position: Int, x: Int, y: Int): Boolean {
+        if (dataSet.size == 0 or 1) {
+            return false
+        }
+        val dragHandle = holder.dragView ?: return false
+
+        val handleWidth = dragHandle.width
+        val handleHeight = dragHandle.height
+        val handleLeft = dragHandle.left
+        val handleTop = dragHandle.top
+
+        return (x >= handleLeft && x < handleLeft + handleWidth &&
+                y >= handleTop && y < handleTop + handleHeight) && position != 0
+    }
+
+    override fun onMoveItem(fromPosition: Int, toPosition: Int) {
+        dataSet.add(toPosition - 1, dataSet.removeAt(fromPosition - 1))
+    }
+
+
+    override fun onGetItemDraggableRange(holder: ViewHolder, position: Int): ItemDraggableRange {
+        return ItemDraggableRange(1, itemCount - 1)
+    }
+
+    override fun onCheckCanDrop(draggingPosition: Int, dropPosition: Int): Boolean {
+        return true
+    }
+
+    override fun onItemDragStarted(position: Int) {
+        notifyDataSetChanged()
+    }
+
+    override fun onItemDragFinished(fromPosition: Int, toPosition: Int, result: Boolean) {
+        notifyDataSetChanged()
+    }
+
+    fun saveSongs(playlistEntity: PlaylistEntity) {
+        activity.lifecycleScope.launch(Dispatchers.IO) {
+            libraryViewModel.insertSongs(dataSet.toSongsEntity(playlistEntity))
         }
     }
 }

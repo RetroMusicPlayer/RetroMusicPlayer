@@ -24,12 +24,17 @@ import androidx.navigation.fragment.findNavController
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentMainSettingsBinding
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
-import kotlinx.android.synthetic.main.fragment_main_settings.*
 
 class MainSettingsFragment : Fragment(), View.OnClickListener {
+
+    private var _binding: FragmentMainSettingsBinding? = null
+    private val binding get() = _binding!!
+
+
     override fun onClick(view: View) {
         when (view.id) {
             R.id.generalSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_themeSettingsFragment)
@@ -47,34 +52,40 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_main_settings, container, false)
+    ): View {
+        _binding = FragmentMainSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        generalSettings.setOnClickListener(this)
-        audioSettings.setOnClickListener(this)
-        nowPlayingSettings.setOnClickListener(this)
-        personalizeSettings.setOnClickListener(this)
-        imageSettings.setOnClickListener(this)
-        notificationSettings.setOnClickListener(this)
-        otherSettings.setOnClickListener(this)
-        aboutSettings.setOnClickListener(this)
+        binding.generalSettings.setOnClickListener(this)
+        binding.audioSettings.setOnClickListener(this)
+        binding.nowPlayingSettings.setOnClickListener(this)
+        binding.personalizeSettings.setOnClickListener(this)
+        binding.imageSettings.setOnClickListener(this)
+        binding.notificationSettings.setOnClickListener(this)
+        binding.otherSettings.setOnClickListener(this)
+        binding.aboutSettings.setOnClickListener(this)
 
-        buyProContainer.apply {
+        binding.buyProContainer.apply {
             if (App.isProVersion()) hide() else show()
             setOnClickListener {
                 NavigationUtil.goToProVersion(requireContext())
             }
         }
-        buyPremium.setOnClickListener {
+        binding.buyPremium.setOnClickListener {
             NavigationUtil.goToProVersion(requireContext())
         }
         ThemeStore.accentColor(requireContext()).let {
-            buyPremium.setTextColor(it)
-            diamondIcon.imageTintList = ColorStateList.valueOf(it)
+            binding.buyPremium.setTextColor(it)
+            binding.diamondIcon.imageTintList = ColorStateList.valueOf(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

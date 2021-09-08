@@ -16,8 +16,10 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.model.Album
+import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Genre
-import java.util.*
+import code.name.monkey.retromusic.model.Song
 
 class RealSearchRepository(
     private val songRepository: SongRepository,
@@ -26,28 +28,54 @@ class RealSearchRepository(
     private val roomRepository: RoomRepository,
     private val genreRepository: GenreRepository,
 ) {
-    fun searchAll(context: Context, query: String?): MutableList<Any> {
+    fun searchAll(context: Context, query: String?, filters: List<Boolean>): MutableList<Any> {
         val results = mutableListOf<Any>()
         query?.let { searchString ->
-            val songs = songRepository.songs(searchString)
+            val isAll = !filters.contains(true)
+            val songs: List<Song> = if (filters[0] || isAll) {
+                songRepository.songs(searchString)
+            } else {
+                emptyList()
+            }
+
             if (songs.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.songs))
                 results.addAll(songs)
             }
-            val artists = artistRepository.artists(searchString)
+            val artists: List<Artist> = if (filters[1] || isAll) {
+                artistRepository.artists(searchString)
+            } else {
+                emptyList()
+            }
             if (artists.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.artists))
                 results.addAll(artists)
             }
-
-            val albums = albumRepository.albums(searchString)
+            val albums: List<Album> = if (filters[2] || isAll) {
+                albumRepository.albums(searchString)
+            } else {
+                emptyList()
+            }
             if (albums.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.albums))
                 results.addAll(albums)
             }
-            val genres: List<Genre> = genreRepository.genres().filter { genre ->
-                genre.name.toLowerCase(Locale.getDefault())
-                    .contains(searchString.toLowerCase(Locale.getDefault()))
+            val albumArtists: List<Artist> = if (filters[3] || isAll) {
+                artistRepository.albumArtists(searchString)
+            } else {
+                emptyList()
+            }
+            if (albumArtists.isNotEmpty()) {
+                results.add(context.resources.getString(R.string.album_artist))
+                results.addAll(albumArtists)
+            }
+            val genres: List<Genre> = if (filters[4] || isAll) {
+                genreRepository.genres().filter { genre ->
+                    genre.name.lowercase()
+                        .contains(searchString.lowercase())
+                }
+            } else {
+                emptyList()
             }
             if (genres.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.genres))

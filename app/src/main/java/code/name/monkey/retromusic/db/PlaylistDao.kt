@@ -47,7 +47,7 @@ interface PlaylistDao {
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId AND id = :songId")
     suspend fun isSongExistsInPlaylist(playlistId: Long, songId: Long): List<SongEntity>
 
-    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId")
+    @Query("SELECT * FROM SongEntity WHERE playlist_creator_id = :playlistId ORDER BY song_key asc")
     fun songsFromPlaylist(playlistId: Long): LiveData<List<SongEntity>>
 
     @Delete

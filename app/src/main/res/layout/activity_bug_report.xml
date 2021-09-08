@@ -45,12 +45,14 @@
                 android:orientation="vertical">
 
                 <include
+                    android:id="@+id/card_report"
                     layout="@layout/bug_report_card_report"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp" />
 
                 <include
+                    android:id="@+id/card_device_info"
                     layout="@layout/bug_report_card_device_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

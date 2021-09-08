@@ -112,6 +112,7 @@
                 tools:text="@tools:sample/full_names" />
 
             <include
+                android:id="@+id/fragment_album_content"
                 layout="@layout/fragment_album_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -28,26 +29,48 @@ import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
+import code.name.monkey.retromusic.databinding.FragmentPlaylistDetailBinding
 import code.name.monkey.retromusic.db.toSong
 import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.interfaces.IArtistClickListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.util.RetroUtil
-import kotlinx.android.synthetic.main.fragment_playlist_detail.*
+import com.google.android.material.transition.MaterialSharedAxis
 
 class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
     IArtistClickListener, IAlbumClickListener {
     private val args by navArgs<DetailListFragmentArgs>()
+    private var _binding: FragmentPlaylistDetailBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentPlaylistDetailBinding.bind(view)
+        when (args.type) {
+            TOP_ARTISTS,
+            RECENT_ARTISTS,
+            TOP_ALBUMS,
+            RECENT_ALBUMS,
+            FAVOURITES -> {
+                enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+                returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
+            }
+            else -> {
+                enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
+                returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
+            }
+        }
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mainActivity.setBottomBarVisibility(false)
-        mainActivity.setSupportActionBar(toolbar)
-        progressIndicator.hide()
+        mainActivity.setSupportActionBar(binding.toolbar)
+        binding.progressIndicator.hide()
         when (args.type) {
             TOP_ARTISTS -> loadArtists(R.string.top_artists, TOP_ARTISTS)
             RECENT_ARTISTS -> loadArtists(R.string.recent_artists, RECENT_ARTISTS)
@@ -59,23 +82,23 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             TOP_PLAYED_PLAYLIST -> topPlayed()
         }
 
-        recyclerView.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
+        binding.recyclerView.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
                 val height = dipToPix(52f)
-                recyclerView.setPadding(0, 0, 0, height.toInt())
+                binding.recyclerView.setPadding(0, 0, 0, height.toInt())
             }
         })
     }
 
     private fun lastAddedSongs() {
-        toolbar.setTitle(R.string.last_added)
+        binding.toolbar.setTitle(R.string.last_added)
         val songAdapter = ShuffleButtonSongAdapter(
             requireActivity(),
             mutableListOf(),
             R.layout.item_list, null
         )
-        recyclerView.apply {
+        binding.recyclerView.apply {
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
@@ -85,13 +108,13 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     }
 
     private fun topPlayed() {
-        toolbar.setTitle(R.string.my_top_tracks)
+        binding.toolbar.setTitle(R.string.my_top_tracks)
         val songAdapter = ShuffleButtonSongAdapter(
             requireActivity(),
             mutableListOf(),
             R.layout.item_list, null
         )
-        recyclerView.apply {
+        binding.recyclerView.apply {
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
@@ -101,14 +124,14 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     }
 
     private fun loadHistory() {
-        toolbar.setTitle(R.string.history)
+        binding.toolbar.setTitle(R.string.history)
 
         val songAdapter = ShuffleButtonSongAdapter(
             requireActivity(),
             mutableListOf(),
             R.layout.item_list, null
         )
-        recyclerView.apply {
+        binding.recyclerView.apply {
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
@@ -118,13 +141,13 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     }
 
     private fun loadFavorite() {
-        toolbar.setTitle(R.string.favorites)
+        binding.toolbar.setTitle(R.string.favorites)
         val songAdapter = SongAdapter(
             requireActivity(),
             mutableListOf(),
             R.layout.item_list, null
         )
-        recyclerView.apply {
+        binding.recyclerView.apply {
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
@@ -135,9 +158,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     }
 
     private fun loadArtists(title: Int, type: Int) {
-        toolbar.setTitle(title)
+        binding.toolbar.setTitle(title)
         libraryViewModel.artists(type).observe(viewLifecycleOwner, { artists ->
-            recyclerView.apply {
+            binding.recyclerView.apply {
                 adapter = artistAdapter(artists)
                 layoutManager = gridLayoutManager()
             }
@@ -145,9 +168,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     }
 
     private fun loadAlbums(title: Int, type: Int) {
-        toolbar.setTitle(title)
+        binding.toolbar.setTitle(title)
         libraryViewModel.albums(type).observe(viewLifecycleOwner, { albums ->
-            recyclerView.apply {
+            binding.recyclerView.apply {
                 adapter = albumAdapter(albums)
                 layoutManager = gridLayoutManager()
             }
@@ -186,7 +209,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             R.id.artistDetailsFragment,
             bundleOf(EXTRA_ARTIST_ID to artistId),
             null,
-            FragmentNavigatorExtras(view to "artist")
+            FragmentNavigatorExtras(view to artistId.toString())
         )
     }
 
@@ -196,8 +219,13 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to "album"
+                view to albumId.toString()
             )
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

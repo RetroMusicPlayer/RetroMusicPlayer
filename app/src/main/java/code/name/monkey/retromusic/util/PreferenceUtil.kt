@@ -17,7 +17,7 @@ import code.name.monkey.retromusic.helper.SortOrder.*
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.transform.*
 import code.name.monkey.retromusic.util.theme.ThemeMode
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
@@ -218,11 +218,10 @@ object PreferenceUtil {
             TOGGLE_ADD_CONTROLS, false
         )
 
-    val typeHomeBanner
-        get() = sharedPreferences.getStringOrDefault(
-            TYPE_HOME_BANNER, "0"
-        ).toInt()
-
+    val isHomeBanner
+        get() = sharedPreferences.getBoolean(
+            TOGGLE_HOME_BANNER, false
+        )
     var isClassicNotification
         get() = sharedPreferences.getBoolean(CLASSIC_NOTIFICATION, false)
         set(value) = sharedPreferences.edit { putBoolean(CLASSIC_NOTIFICATION, value) }
@@ -416,10 +415,10 @@ object PreferenceUtil {
             ).toInt()
             val typedArray = App.getContext()
                 .resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
-            val layoutRes = typedArray.getResourceId(position, 4)
+            val layoutRes = typedArray.getResourceId(position, 0)
             typedArray.recycle()
             return if (layoutRes == 0) {
-                R.layout.item_artist
+                R.layout.item_image
             } else layoutRes
         }
 
@@ -428,11 +427,11 @@ object PreferenceUtil {
             return when (sharedPreferences.getStringOrDefault(
                 TAB_TEXT_MODE, "1"
             ).toInt()) {
-                1 -> LabelVisibilityMode.LABEL_VISIBILITY_LABELED
-                0 -> LabelVisibilityMode.LABEL_VISIBILITY_AUTO
-                2 -> LabelVisibilityMode.LABEL_VISIBILITY_SELECTED
-                3 -> LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
-                else -> LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+                1 -> BottomNavigationView.LABEL_VISIBILITY_LABELED
+                0 -> BottomNavigationView.LABEL_VISIBILITY_AUTO
+                2 -> BottomNavigationView.LABEL_VISIBILITY_SELECTED
+                3 -> BottomNavigationView.LABEL_VISIBILITY_UNLABELED
+                else -> BottomNavigationView.LABEL_VISIBILITY_LABELED
             }
         }
 
@@ -556,8 +555,7 @@ object PreferenceUtil {
 
     fun getRecentlyPlayedCutoffTimeMillis(): Long {
         val calendarUtil = CalendarUtil()
-        val interval: Long
-        interval = when (sharedPreferences.getString(RECENTLY_PLAYED_CUTOFF, "")) {
+        val interval: Long = when (sharedPreferences.getString(RECENTLY_PLAYED_CUTOFF, "")) {
             "today" -> calendarUtil.elapsedToday
             "this_week" -> calendarUtil.elapsedWeek
             "past_seven_days" -> calendarUtil.getElapsedDays(7)
@@ -583,4 +581,35 @@ object PreferenceUtil {
                 }
             return (System.currentTimeMillis() - interval) / 1000
         }
+
+    val homeSuggestions: Boolean
+        get() = sharedPreferences.getBoolean(
+            TOGGLE_SUGGESTIONS,
+            true
+        )
+
+    var audioFadeDuration
+        get() = sharedPreferences
+            .getInt(AUDIO_FADE_DURATION, 0)
+        set(value) = sharedPreferences.edit { putInt(AUDIO_FADE_DURATION, value) }
+
+    var showLyrics: Boolean
+        get() = sharedPreferences.getBoolean(SHOW_LYRICS, false)
+        set(value) = sharedPreferences.edit { putBoolean(SHOW_LYRICS, value) }
+
+    val rememberLastTab: Boolean
+        get() = sharedPreferences.getBoolean(REMEMBER_LAST_TAB, true)
+
+    var lastTab: Int
+        get() = sharedPreferences
+            .getInt(LAST_USED_TAB, 0)
+        set(value) = sharedPreferences.edit { putInt(LAST_USED_TAB, value) }
+
+    val isWhiteList: Boolean
+        get() = sharedPreferences.getBoolean(WHITELIST_MUSIC, false)
+
+    var crossFadeDuration
+        get() = sharedPreferences
+            .getInt(CROSS_FADE_DURATION, 0)
+        set(value) = sharedPreferences.edit { putInt(CROSS_FADE_DURATION, value) }
 }

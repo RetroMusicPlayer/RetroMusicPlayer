@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/container"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:transitionName="@string/transition_lyrics">
-
-    <code.name.monkey.retromusic.lyrics.LrcView
-        android:id="@+id/lyricsView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        app:lrcLabel="@string/no_lyrics_found"
-        app:lrcNormalTextSize="24sp"
-        app:lrcPadding="24dp"
-        app:lrcTextGravity="left"
-        app:lrcTextSize="28sp" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/appBarLayout"
@@ -27,6 +17,7 @@
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
+        app:fabAlignmentMode="end"
         app:hideOnScroll="true"
         app:titleMargin="0dp"
         app:titleMarginStart="0dp"
@@ -36,6 +27,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="start"
             android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
@@ -49,4 +41,35 @@
             tools:title="@tools:sample/full_names" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/lyricsPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLyrics">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLyrics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicator="@drawable/tab_lyrics_indicator"
+            app:tabIndicatorAnimationMode="elastic"
+            android:elevation="@dimen/toolbar_elevation"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="5dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,29 +1,39 @@
 package code.name.monkey.retromusic.adapter.base;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
-import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.interfaces.ICabHolder;
+
 import com.afollestad.materialcab.MaterialCab;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I>
-    extends RecyclerView.Adapter<V> implements MaterialCab.Callback {
+import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.interfaces.ICabHolder;
 
-  @Nullable private final ICabHolder ICabHolder;
+public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I>
+        extends RecyclerView.Adapter<V> implements MaterialCab.Callback {
+
+  @Nullable
+  private final ICabHolder ICabHolder;
   private final Context context;
   private MaterialCab cab;
-  private List<I> checked;
+  private final List<I> checked;
   private int menuRes;
+  private AppCompatTextView dummyText;
+  private int oldSize = 0;
 
   public AbsMultiSelectAdapter(
-      @NonNull Context context, @Nullable ICabHolder ICabHolder, @MenuRes int menuRes) {
+          @NonNull Context context, @Nullable ICabHolder ICabHolder, @MenuRes int menuRes) {
     this.ICabHolder = ICabHolder;
     checked = new ArrayList<>();
     this.menuRes = menuRes;
@@ -32,12 +42,16 @@ public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I
 
   @Override
   public boolean onCabCreated(MaterialCab materialCab, Menu menu) {
+    playCreateAnim(materialCab);
+    createDummyTextView();
     return true;
   }
 
   @Override
   public boolean onCabFinished(MaterialCab materialCab) {
     clearChecked();
+    cab.getToolbar().removeView(dummyText);
+    oldSize = 0;
     return true;
   }
 
@@ -111,6 +125,7 @@ public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I
     notifyDataSetChanged();
   }
 
+  @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
   private void updateCab() {
     if (ICabHolder != null) {
       if (cab == null || !cab.isActive()) {
@@ -120,10 +135,48 @@ public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I
       if (size <= 0) {
         cab.finish();
       } else if (size == 1) {
-        cab.setTitle(getName(checked.get(0)));
-      } else {
         cab.setTitle(context.getString(R.string.x_selected, size));
+        if (oldSize == 0) {
+          cab.getToolbar().addView(dummyText);
+        }
+      } else {
+        AppCompatTextView title = (AppCompatTextView) cab.getToolbar().getChildAt(2);
+        dummyText.setText(title.getText());
+
+        title.setAlpha(0);
+
+        cab.setTitle(context.getString(R.string.x_selected, size));
+        dummyText.setTranslationX(title.getLeft() - dummyText.getLeft());
+
+        dummyText.setAlpha(1);
+
+        dummyText.setTranslationY(0);
+        if (oldSize > size) {
+          title.setTranslationY(40);
+          dummyText.animate().translationY(-40).alpha(0.0F).setDuration(300).start();
+        } else {
+          title.setTranslationY(-40);
+          dummyText.animate().translationY(40).alpha(0.0F).setDuration(300).start();
+        }
+        title.animate().translationY(0).alpha(1.0F).setDuration(300).start();
       }
+      oldSize = size;
     }
+  }
+
+  private void playCreateAnim(MaterialCab materialCab) {
+    Toolbar cabToolbar = materialCab.getToolbar();
+    int height = context.getResources().getDimensionPixelSize(R.dimen.toolbar_height);
+    cabToolbar.setTranslationY(-height);
+    cabToolbar.animate().translationYBy(height).setDuration(300).start();
+  }
+
+  private void createDummyTextView() {
+    if (dummyText != null) return;
+    dummyText = new AppCompatTextView(context);
+    dummyText.setSingleLine();
+    dummyText.setTextAppearance(context, R.style.ToolbarTextAppearanceNormal);
+    Toolbar.LayoutParams l1 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+    dummyText.setLayoutParams(l1);
   }
 }

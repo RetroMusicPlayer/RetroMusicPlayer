@@ -238,13 +238,13 @@ public final class ToolbarContentTintHelper {
 
     private static class ATHMenuPresenterCallback implements MenuPresenter.Callback {
 
-        private int mColor;
+        private final int mColor;
 
-        private Context mContext;
+        private final Context mContext;
 
-        private MenuPresenter.Callback mParentCb;
+        private final MenuPresenter.Callback mParentCb;
 
-        private Toolbar mToolbar;
+        private final Toolbar mToolbar;
 
         public ATHMenuPresenterCallback(Context context, final @ColorInt int color,
                 MenuPresenter.Callback parentCb, Toolbar toolbar) {
@@ -270,13 +270,13 @@ public final class ToolbarContentTintHelper {
 
     private static class ATHOnMenuItemClickListener implements Toolbar.OnMenuItemClickListener {
 
-        private int mColor;
+        private final int mColor;
 
-        private Context mContext;
+        private final Context mContext;
 
-        private Toolbar.OnMenuItemClickListener mParentListener;
+        private final Toolbar.OnMenuItemClickListener mParentListener;
 
-        private Toolbar mToolbar;
+        private final Toolbar mToolbar;
 
         public ATHOnMenuItemClickListener(Context context, final @ColorInt int color,
                 Toolbar.OnMenuItemClickListener parentCb, Toolbar toolbar) {
@@ -528,14 +528,14 @@ public final class ToolbarContentTintHelper {
     @CheckResult
     @ColorInt
     public static int toolbarSubtitleColor(@NonNull Context context, @ColorInt int toolbarColor) {
-        return MaterialValueHelper.INSTANCE
+        return MaterialValueHelper
                 .getSecondaryTextColor(context, ColorUtil.INSTANCE.isColorLight(toolbarColor));
     }
 
     @CheckResult
     @ColorInt
     public static int toolbarTitleColor(@NonNull Context context, @ColorInt int toolbarColor) {
-        return MaterialValueHelper.INSTANCE
+        return MaterialValueHelper
                 .getPrimaryTextColor(context, ColorUtil.INSTANCE.isColorLight(toolbarColor));
     }
 

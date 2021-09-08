@@ -18,15 +18,18 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.palette.graphics.Palette;
-import code.name.monkey.appthemehelper.util.ColorUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import code.name.monkey.appthemehelper.util.ColorUtil;
 
 public class RetroColorUtil {
   public static int desaturateColor(int color, float ratio) {
