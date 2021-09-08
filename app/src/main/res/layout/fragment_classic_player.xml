@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/playerAlbumCoverFragment"
                 android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
@@ -88,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/colorSurface"
+            android:clickable="false"
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
@@ -96,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
+                android:clickable="true"
                 android:freezesText="true"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:paddingHorizontal="16dp"
@@ -114,6 +115,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingHorizontal="16dp"
                 android:textAppearance="@style/TextViewBody1"
                 android:textColor="?android:attr/textColorSecondary"

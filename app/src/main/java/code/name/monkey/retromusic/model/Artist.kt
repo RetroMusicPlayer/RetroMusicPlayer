@@ -15,23 +15,34 @@
 package code.name.monkey.retromusic.model
 
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.*
 
 data class Artist(
     val id: Long,
-    val albums: List<Album>
+    val albums: List<Album>,
+    val isAlbumArtist: Boolean = false
 ) {
+    constructor(
+        artistName: String,
+        albums: List<Album>,
+        isAlbumArtist: Boolean = false
+    ) : this(albums[0].artistId, albums, isAlbumArtist) {
+        name = artistName
+    }
 
-    val name: String
+    var name: String = ""
+        set(value) {
+            field = value
+        }
         get() {
-            val name = safeGetFirstAlbum().safeGetFirstSong().albumArtist
-            if (PreferenceUtil.albumArtistsOnly && MusicUtil.isVariousArtists(name)) {
-                return VARIOUS_ARTISTS_DISPLAY_NAME
+            val name = if (isAlbumArtist) getAlbumArtistName()
+            else getArtistName()
+            return when {
+                MusicUtil.isVariousArtists(name) ->
+                    VARIOUS_ARTISTS_DISPLAY_NAME
+                MusicUtil.isArtistNameUnknown(name) ->
+                    UNKNOWN_ARTIST_DISPLAY_NAME
+                else -> name!!
             }
-            return if (MusicUtil.isArtistNameUnknown(name)) {
-                UNKNOWN_ARTIST_DISPLAY_NAME
-            } else safeGetFirstAlbum().safeGetFirstSong().artistName
         }
 
     val songCount: Int
@@ -53,10 +64,18 @@ data class Artist(
         return albums.firstOrNull() ?: Album.empty
     }
 
+    private fun getArtistName(): String {
+        return safeGetFirstAlbum().safeGetFirstSong().artistName
+    }
+
+    private fun getAlbumArtistName(): String? {
+        return safeGetFirstAlbum().safeGetFirstSong().albumArtist
+    }
+
     companion object {
         const val UNKNOWN_ARTIST_DISPLAY_NAME = "Unknown Artist"
         const val VARIOUS_ARTISTS_DISPLAY_NAME = "Various Artists"
-        const val VARIOUS_ARTISTS_ID : Long = -2
+        const val VARIOUS_ARTISTS_ID: Long = -2
         val empty = Artist(-1, emptyList())
 
     }

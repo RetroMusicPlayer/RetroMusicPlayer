@@ -16,18 +16,19 @@ package code.name.monkey.retromusic.views
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.FrameLayout
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.ListItemViewNoCardBinding
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
-import kotlinx.android.synthetic.main.list_item_view.view.*
 
 /**
  * Created by hemanths on 2019-10-02.
  */
 class ListItemView : FrameLayout {
 
+    private lateinit var binding: ListItemViewNoCardBinding
 
     constructor(context: Context) : super(context) {
         init(context, null)
@@ -46,27 +47,27 @@ class ListItemView : FrameLayout {
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
-        View.inflate(context, R.layout.list_item_view_no_card, this)
+        binding = ListItemViewNoCardBinding.inflate(LayoutInflater.from(context))
+        addView(binding.root)
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ListItemView)
         if (typedArray.hasValue(R.styleable.ListItemView_listItemIcon)) {
-            icon.setImageDrawable(typedArray.getDrawable(R.styleable.ListItemView_listItemIcon))
+            binding.icon.setImageDrawable(typedArray.getDrawable(R.styleable.ListItemView_listItemIcon))
         } else {
-
-            icon.hide()
+            binding.icon.hide()
         }
 
-        title.text = typedArray.getText(R.styleable.ListItemView_listItemTitle)
+        binding.title.text = typedArray.getText(R.styleable.ListItemView_listItemTitle)
         if (typedArray.hasValue(R.styleable.ListItemView_listItemSummary)) {
-            summary.text = typedArray.getText(R.styleable.ListItemView_listItemSummary)
+            binding.summary.text = typedArray.getText(R.styleable.ListItemView_listItemSummary)
         } else {
-            summary.hide()
+            binding.summary.hide()
         }
         typedArray.recycle()
     }
 
     fun setSummary(appVersion: String) {
-        summary.show()
-        summary.text = appVersion
+        binding.summary.show()
+        binding.summary.text = appVersion
     }
 }

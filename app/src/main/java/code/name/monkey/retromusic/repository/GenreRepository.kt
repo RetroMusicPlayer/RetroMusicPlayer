@@ -18,7 +18,6 @@ import android.content.ContentResolver
 import android.database.Cursor
 import android.net.Uri
 import android.provider.BaseColumns
-import android.provider.MediaStore
 import android.provider.MediaStore.Audio.Genres
 import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
@@ -33,6 +32,8 @@ interface GenreRepository {
     fun genres(): List<Genre>
 
     fun songs(genreId: Long): List<Song>
+
+    fun song(genreId: Long): Song
 }
 
 class RealGenreRepository(
@@ -50,6 +51,10 @@ class RealGenreRepository(
         return if (genreId == -1L) {
             getSongsWithNoGenre()
         } else songRepository.songs(makeGenreSongCursor(genreId))
+    }
+
+    override fun song(genreId: Long): Song {
+        return songRepository.song(makeGenreSongCursor(genreId))
     }
 
     private fun getGenreFromCursor(cursor: Cursor): Genre {
@@ -87,7 +92,7 @@ class RealGenreRepository(
     }
 
     private fun makeAllSongsWithGenreCursor(): Cursor? {
-        println(MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI.toString())
+        println(Genres.EXTERNAL_CONTENT_URI.toString())
         return contentResolver.query(
             Uri.parse("content://media/external/audio/genres/all/members"),
             arrayOf(Genres.Members.AUDIO_ID), null, null, null

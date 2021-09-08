@@ -14,12 +14,10 @@
 
 package code.name.monkey.retromusic.preferences
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
@@ -52,9 +50,8 @@ class LibraryPreference @JvmOverloads constructor(
 
 class LibraryPreferenceDialog : DialogFragment() {
 
-    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = LayoutInflater.from(requireContext())
+        val view = layoutInflater
             .inflate(R.layout.preference_dialog_library_categories, null)
 
         val categoryAdapter = CategoryInfoAdapter()

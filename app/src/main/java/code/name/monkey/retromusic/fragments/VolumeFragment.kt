@@ -26,34 +26,38 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentVolumeBinding
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
-import kotlinx.android.synthetic.main.fragment_volume.*
 
 class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolumeChangedListener,
     View.OnClickListener {
 
+    private var _binding: FragmentVolumeBinding? = null
+    private val binding get() = _binding!!
+
     private var audioVolumeObserver: AudioVolumeObserver? = null
 
-    private val audioManager: AudioManager?
+    private val audioManager: AudioManager
         get() = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_volume, container, false)
+    ): View {
+        _binding = FragmentVolumeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setTintable(ThemeStore.accentColor(requireContext()))
-        volumeDown.setOnClickListener(this)
-        volumeUp.setOnClickListener(this)
+        binding.volumeDown.setOnClickListener(this)
+        binding.volumeUp.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -64,33 +68,30 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         audioVolumeObserver?.register(AudioManager.STREAM_MUSIC, this)
 
         val audioManager = audioManager
-        if (audioManager != null) {
-            volumeSeekBar.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-            volumeSeekBar.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-        }
-        volumeSeekBar.setOnSeekBarChangeListener(this)
+        binding.volumeSeekBar.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        binding.volumeSeekBar.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+        binding.volumeSeekBar.setOnSeekBarChangeListener(this)
     }
 
     override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
-        if (volumeSeekBar == null) {
-            return
+        if (_binding != null) {
+            binding.volumeSeekBar.max = maxVolume
+            binding.volumeSeekBar.progress = currentVolume
+            binding.volumeDown.setImageResource(if (currentVolume == 0) R.drawable.ic_volume_off else R.drawable.ic_volume_down)
         }
-
-        volumeSeekBar.max = maxVolume
-        volumeSeekBar.progress = currentVolume
-        volumeDown.setImageResource(if (currentVolume == 0) R.drawable.ic_volume_off else R.drawable.ic_volume_down)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         audioVolumeObserver?.unregister()
+        _binding = null
     }
 
     override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
         val audioManager = audioManager
-        audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0)
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0)
         setPauseWhenZeroVolume(i < 1)
-        volumeDown?.setImageResource(if (i == 0) R.drawable.ic_volume_off else R.drawable.ic_volume_down)
+        binding.volumeDown.setImageResource(if (i == 0) R.drawable.ic_volume_off else R.drawable.ic_volume_down)
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -102,10 +103,10 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     override fun onClick(view: View) {
         val audioManager = audioManager
         when (view.id) {
-            R.id.volumeDown -> audioManager?.adjustStreamVolume(
+            R.id.volumeDown -> audioManager.adjustStreamVolume(
                 AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, 0
             )
-            R.id.volumeUp -> audioManager?.adjustStreamVolume(
+            R.id.volumeUp -> audioManager.adjustStreamVolume(
                 AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 0
             )
         }
@@ -113,13 +114,13 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
 
     fun tintWhiteColor() {
         val color = Color.WHITE
-        volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-        volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-        volumeSeekBar.applyColor(color)
+        binding.volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        binding.volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        binding.volumeSeekBar.applyColor(color)
     }
 
     fun setTintable(color: Int) {
-        volumeSeekBar.applyColor(color)
+        binding.volumeSeekBar.applyColor(color)
     }
 
     private fun setPauseWhenZeroVolume(pauseWhenZeroVolume: Boolean) {
@@ -129,10 +130,10 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     fun setTintableColor(color: Int) {
-        volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-        volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        binding.volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        binding.volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         // TintHelper.setTint(volumeSeekBar, color, false)
-        volumeSeekBar.applyColor(color)
+        binding.volumeSeekBar.applyColor(color)
     }
 
     companion object {

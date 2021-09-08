@@ -29,15 +29,14 @@ import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.glide.AlbumGlideRequest
-import code.name.monkey.retromusic.glide.ArtistGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.util.MusicUtil
-import com.bumptech.glide.Glide
 import java.util.*
 
 class SearchAdapter(
@@ -52,7 +51,7 @@ class SearchAdapter(
 
     override fun getItemViewType(position: Int): Int {
         if (dataSet[position] is Album) return ALBUM
-        if (dataSet[position] is Artist) return ARTIST
+        if (dataSet[position] is Artist) return if ((dataSet[position] as Artist).isAlbumArtist) ALBUM_ARTIST else ARTIST
         if (dataSet[position] is Genre) return GENRE
         if (dataSet[position] is PlaylistEntity) return PLAYLIST
         return if (dataSet[position] is Song) SONG else HEADER
@@ -66,6 +65,14 @@ class SearchAdapter(
                 false
             ), viewType
         )
+        else if (viewType == ALBUM || viewType == ARTIST || viewType== ALBUM_ARTIST)
+            ViewHolder(
+                LayoutInflater.from(activity).inflate(
+                    R.layout.item_list_big,
+                    parent,
+                    false
+                ), viewType
+            )
         else
             ViewHolder(
                 LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false),
@@ -80,21 +87,23 @@ class SearchAdapter(
                 val album = dataSet[position] as Album
                 holder.title?.text = album.title
                 holder.text?.text = album.artistName
-                AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-                    .checkIgnoreMediaStore().build().into(holder.image)
+                GlideApp.with(activity).asDrawable().albumCoverOptions(album.safeGetFirstSong()).load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
+                    .into(holder.image!!)
             }
             ARTIST -> {
                 holder.imageTextContainer?.isVisible = true
                 val artist = dataSet[position] as Artist
                 holder.title?.text = artist.name
                 holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
-                ArtistGlideRequest.Builder.from(Glide.with(activity), artist).build()
-                    .into(holder.image)
+                GlideApp.with(activity).asDrawable().artistImageOptions(artist).load(
+                    RetroGlideExtension.getArtistModel(artist)).into(holder.image!!)
             }
             SONG -> {
+                holder.imageTextContainer?.isVisible = true
                 val song = dataSet[position] as Song
                 holder.title?.text = song.title
                 holder.text?.text = song.albumName
+                GlideApp.with(activity).asDrawable().songCoverOptions(song).load(RetroGlideExtension.getSongModel(song)).into(holder.image!!)
             }
             GENRE -> {
                 val genre = dataSet[position] as Genre
@@ -112,6 +121,14 @@ class SearchAdapter(
                 val playlist = dataSet[position] as PlaylistEntity
                 holder.title?.text = playlist.playlistName
                 //holder.text?.text = MusicUtil.playlistInfoString(activity, playlist.songs)
+            }
+            ALBUM_ARTIST -> {
+                holder.imageTextContainer?.isVisible = true
+                val artist = dataSet[position] as Artist
+                holder.title?.text = artist.name
+                holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
+                GlideApp.with(activity).asDrawable().artistImageOptions(artist).load(artist)
+                    .into(holder.image!!)
             }
             else -> {
                 holder.title?.text = dataSet[position].toString()
@@ -174,6 +191,12 @@ class SearchAdapter(
                         bundleOf(EXTRA_ARTIST_ID to (item as Artist).id)
                     )
                 }
+                ALBUM_ARTIST ->{
+                    activity.findNavController(R.id.fragment_container).navigate(
+                        R.id.albumArtistDetailsFragment,
+                        bundleOf(EXTRA_ARTIST_NAME to (item as Artist).name)
+                    )
+                }
                 GENRE -> {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.genreDetailsFragment,
@@ -202,5 +225,6 @@ class SearchAdapter(
         private const val SONG = 3
         private const val GENRE = 4
         private const val PLAYLIST = 5
+        private const val ALBUM_ARTIST = 6
     }
 }

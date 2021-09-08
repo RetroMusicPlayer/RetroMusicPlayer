@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,4 +9,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never" />
+
+    <FrameLayout
+        android:id="@+id/playerLyrics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:clipToPadding="false"
+        android:elevation="20dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <View
+            android:id="@+id/mask_lyrics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/lyrics_mask" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/player_lyrics_line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:shadowColor="@color/md_black_1000"
+            android:shadowRadius="4"
+            android:textAppearance="@style/TextViewHeadline5"
+            android:textColor="@color/md_white_1000"
+            android:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/player_lyrics_line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:shadowColor="@color/md_black_1000"
+            android:shadowRadius="4"
+            android:textAppearance="@style/TextViewHeadline5"
+            android:textColor="@color/md_white_1000" />
+
+    </FrameLayout>
 </FrameLayout>

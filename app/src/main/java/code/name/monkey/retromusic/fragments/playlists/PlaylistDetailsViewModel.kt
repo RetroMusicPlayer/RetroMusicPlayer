@@ -41,4 +41,5 @@ class PlaylistDetailsViewModel(
     override fun onPlayStateChanged() {}
     override fun onRepeatModeChanged() {}
     override fun onShuffleModeChanged() {}
+    override fun onFavoriteStateChanged() {}
 }

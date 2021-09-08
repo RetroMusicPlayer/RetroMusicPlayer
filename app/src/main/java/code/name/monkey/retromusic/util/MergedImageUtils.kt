@@ -13,7 +13,7 @@ internal object MergedImageUtils {
     fun joinImages(list: List<Bitmap>): Bitmap {
         assertBackgroundThread()
 
-        val arranged = arrangeBitmaps(list.shuffled())
+        val arranged = arrangeBitmaps(list)
 
         val mergedImage = create(
             arranged,

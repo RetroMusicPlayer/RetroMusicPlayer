@@ -98,18 +98,6 @@
         <item>this_year</item>
     </string-array>
 
-    <string-array name="pref_type_home_banner_titles">
-        <item>@string/home_only_profile</item>
-        <item>@string/home_banner_full</item>
-        <item>@string/home_no_profile</item>
-    </string-array>
-
-    <string-array name="pref_type_home_banner_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
 
     <string-array name="pref_language_names">
         <item>System default</item>
@@ -125,6 +113,7 @@
         <item>Czech</item>
         <item>Danish</item>
         <item>Dutch</item>
+        <item>English</item>
         <item>Finnish</item>
         <item>French</item>
         <item>German</item>
@@ -171,6 +160,7 @@
         <item>cs-cz</item>
         <item>da-DK</item>
         <item>nl-NL</item>
+        <item>en</item>
         <item>fi-FI</item>
         <item>fr</item>
         <item>de</item>

@@ -17,13 +17,18 @@ package code.name.monkey.retromusic.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
+import android.view.ViewOutlineProvider
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.interfaces.IGenreClickListener
 import code.name.monkey.retromusic.model.Genre
+import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import java.util.*
 
 /**
@@ -36,6 +41,15 @@ class GenreAdapter(
     private val mItemLayoutRes: Int,
     private val listener: IGenreClickListener
 ) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
+
+    init {
+        this.setHasStableIds(true)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return dataSet[position].id
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(activity).inflate(mItemLayoutRes, parent, false))
     }
@@ -49,6 +63,28 @@ class GenreAdapter(
             genre.songCount,
             if (genre.songCount > 1) activity.getString(R.string.songs) else activity.getString(R.string.song)
         )
+        loadGenreImage(genre, holder)
+    }
+
+    private fun loadGenreImage(genre: Genre, holder: GenreAdapter.ViewHolder) {
+        val genreSong = MusicUtil.songByGenre(genre.id)
+        GlideApp.with(activity)
+            .asBitmapPalette()
+            .load(RetroGlideExtension.getSongModel(genreSong))
+            .songCoverOptions(genreSong)
+            .into(object : RetroMusicColoredTarget(holder.image!!) {
+                override fun onColorReady(colors: MediaNotificationProcessor) {
+                    setColors(holder, colors)
+                }
+            })
+        // Just for a bit of shadow around image
+        holder.image?.outlineProvider = ViewOutlineProvider.BOUNDS
+    }
+
+    private fun setColors(holder: ViewHolder, color: MediaNotificationProcessor) {
+        holder.imageContainerCard?.setCardBackgroundColor(color.backgroundColor)
+        holder.title?.setTextColor(color.primaryTextColor)
+        holder.text?.setTextColor(color.secondaryTextColor)
     }
 
     override fun getItemCount(): Int {
@@ -62,7 +98,6 @@ class GenreAdapter(
 
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
         override fun onClick(v: View?) {
-            ViewCompat.setTransitionName(itemView, "genre")
             listener.onClickGenre(dataSet[layoutPosition], itemView)
         }
     }

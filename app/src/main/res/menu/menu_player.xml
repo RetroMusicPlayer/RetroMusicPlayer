@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <item
+        android:id="@+id/action_toggle_lyrics"
+        android:checkable="true"
+        android:icon="@drawable/ic_lyrics_outline"
+        android:orderInCategory="1"
+        android:title="@string/lyrics"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_toggle_favorite"
-        android:icon="@drawable/ic_favorite_border"
-        android:orderInCategory="1"
+        android:icon="@drawable/ic_favorite"
+        android:orderInCategory="2"
         android:title="@string/favorites"
-        app:showAsAction="ifRoom" />
+        android:checkable="true"
+        app:showAsAction="always" />
     <item
         android:id="@+id/now_playing"
         android:icon="@drawable/ic_queue_music"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:title="@string/now_playing_queue"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_go_to_drive_mode"
         android:icon="@drawable/ic_drive_eta"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         android:title="@string/drive_mode" />
     <item
         android:id="@+id/action_go_to_album"
         android:icon="@drawable/ic_album"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         android:title="@string/action_go_to_album" />
     <item
         android:id="@+id/action_go_to_artist"

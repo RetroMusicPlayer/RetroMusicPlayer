@@ -18,11 +18,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
+import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.cycleRepeatMode
+import code.name.monkey.retromusic.helper.ShuffleHelper.makeShuffleList
+import code.name.monkey.retromusic.model.Album
+import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.repository.*
 import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.MusicUtil
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import java.util.*
 
 
@@ -33,7 +41,76 @@ import java.util.*
 class MediaSessionCallback(
     private val context: Context,
     private val musicService: MusicService
-) : MediaSessionCompat.Callback() {
+) : MediaSessionCompat.Callback(), KoinComponent {
+
+    private val songRepository by inject<SongRepository>()
+    private val albumRepository by inject<AlbumRepository>()
+    private val artistRepository by inject<ArtistRepository>()
+    private val genreRepository by inject<GenreRepository>()
+    private val playlistRepository by inject<PlaylistRepository>()
+    private val topPlayedRepository by inject<TopPlayedRepository>()
+
+    override fun onPlayFromMediaId(mediaId: String?, extras: Bundle?) {
+        super.onPlayFromMediaId(mediaId, extras)
+        val musicId = AutoMediaIDHelper.extractMusicID(mediaId!!)
+        println(musicId)
+        val itemId = musicId?.toLong() ?: -1
+        val songs: ArrayList<Song> = ArrayList()
+        val category = AutoMediaIDHelper.extractCategory(mediaId)
+        when (category) {
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM -> {
+                val album: Album = albumRepository.album(itemId)
+                songs.addAll(album.songs)
+                musicService.openQueue(songs, 0, true)
+            }
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ARTIST -> {
+                val artist: Artist = artistRepository.artist(itemId)
+                songs.addAll(artist.songs)
+                musicService.openQueue(songs, 0, true)
+            }
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM_ARTIST -> {
+                val artist: Artist =
+                    artistRepository.albumArtist(albumRepository.album(itemId).albumArtist!!)
+                songs.addAll(artist.songs)
+                musicService.openQueue(songs, 0, true)
+            }
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_PLAYLIST -> {
+                val playlist: Playlist = playlistRepository.playlist(itemId)
+                songs.addAll(playlist.getSongs())
+                musicService.openQueue(songs, 0, true)
+            }
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE -> {
+                songs.addAll(genreRepository.songs(itemId))
+                musicService.openQueue(songs, 0, true)
+            }
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SHUFFLE -> {
+                val allSongs: ArrayList<Song> = songRepository.songs() as ArrayList<Song>
+                makeShuffleList(allSongs, -1)
+                musicService.openQueue(allSongs, 0, true)
+            }
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY,
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SUGGESTIONS,
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS,
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE -> {
+                val tracks: List<Song> = when (category) {
+                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY -> topPlayedRepository.recentlyPlayedTracks()
+                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SUGGESTIONS -> topPlayedRepository.recentlyPlayedTracks()
+                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS -> topPlayedRepository.recentlyPlayedTracks()
+                    else -> musicService.playingQueue as List<Song>
+                }
+                songs.addAll(tracks)
+                var songIndex = MusicUtil.indexOfSongInList(tracks, itemId)
+                if (songIndex == -1) {
+                    songIndex = 0
+                }
+                musicService.openQueue(songs, songIndex, true)
+            }
+            else -> {
+            }
+        }
+        musicService.play()
+    }
+
 
     override fun onPlay() {
         super.onPlay()

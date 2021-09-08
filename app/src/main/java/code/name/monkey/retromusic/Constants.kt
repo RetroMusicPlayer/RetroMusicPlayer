@@ -21,7 +21,8 @@ object Constants {
     const val PRO_VERSION_PRODUCT_ID = "pro_version"
     const val RATE_ON_GOOGLE_PLAY =
         "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
-    const val TRANSLATE = "https://github.com/RetroMusicPlayer/RetroMusicPlayer"
+    const val TRANSLATE = "https://crowdin.com/project/retromusicplayer"
+    const val WEBSITE = "https://retromusic.app"
     const val GITHUB_PROJECT = "https://github.com/RetroMusicPlayer/RetroMusicPlayer"
     const val TELEGRAM_CHANGE_LOG = "https://t.me/retromusiclog"
     const val USER_PROFILE = "profile.jpg"
@@ -49,7 +50,7 @@ object Constants {
         MediaStore.Audio.AudioColumns.ARTIST_ID, // 9
         MediaStore.Audio.AudioColumns.ARTIST, // 10
         MediaStore.Audio.AudioColumns.COMPOSER, // 11
-        "album_artist" // 12
+        ALBUM_ARTIST // 12
     )
     const val NUMBER_OF_TOP_TRACKS = 99
 }
@@ -66,7 +67,7 @@ const val EXTRA_SONG_INFO = "extra_song_info"
 const val DESATURATED_COLOR = "desaturated_color"
 const val BLACK_THEME = "black_theme"
 const val KEEP_SCREEN_ON = "keep_screen_on"
-const val TYPE_HOME_BANNER = "type_home_banner"
+const val TOGGLE_HOME_BANNER = "toggle_home_banner"
 const val NOW_PLAYING_SCREEN_ID = "now_playing_screen_id"
 const val CAROUSEL_EFFECT = "carousel_effect"
 const val COLORED_NOTIFICATION = "colored_notification"
@@ -129,6 +130,7 @@ const val START_DIRECTORY = "start_directory"
 const val RECENTLY_PLAYED_CUTOFF = "recently_played_interval"
 const val LOCK_SCREEN = "lock_screen"
 const val ALBUM_ARTISTS_ONLY = "album_artists_only"
+const val ALBUM_ARTIST = "album_artist"
 const val ALBUM_DETAIL_SONG_SORT_ORDER = "album_detail_song_sort_order"
 const val LYRICS_OPTIONS = "lyrics_tab_position"
 const val CHOOSE_EQUALIZER = "choose_equalizer"
@@ -138,3 +140,11 @@ const val SONG_GRID_STYLE = "song_grid_style"
 const val PAUSE_ON_ZERO_VOLUME = "pause_on_zero_volume"
 const val FILTER_SONG = "filter_song"
 const val EXPAND_NOW_PLAYING_PANEL = "expand_now_playing_panel"
+const val EXTRA_ARTIST_NAME = "extra_artist_name"
+const val TOGGLE_SUGGESTIONS = "toggle_suggestions"
+const val AUDIO_FADE_DURATION = "audio_fade_duration"
+const val CROSS_FADE_DURATION = "cross_fade_duration"
+const val SHOW_LYRICS = "show_lyrics"
+const val REMEMBER_LAST_TAB = "remember_last_tab"
+const val LAST_USED_TAB = "last_used_tab"
+const val WHITELIST_MUSIC = "whitelist_music"

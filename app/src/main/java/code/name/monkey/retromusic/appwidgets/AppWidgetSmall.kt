@@ -27,16 +27,17 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
-import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 
 class AppWidgetSmall : BaseAppWidget() {
     private var target: Target<BitmapPaletteWrapper>? = null // for cancellation
@@ -123,14 +124,16 @@ class AppWidgetSmall : BaseAppWidget() {
         val appContext = service.applicationContext
         service.runOnUiThread {
             if (target != null) {
-                Glide.clear(target)
+                Glide.with(service).clear(target)
             }
-            target = SongGlideRequest.Builder.from(Glide.with(service), song)
-                .checkIgnoreMediaStore(service).generatePalette(service).build().centerCrop()
+            target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
+                //.checkIgnoreMediaStore()
+                .load(RetroGlideExtension.getSongModel(song))
+                .centerCrop()
                 .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
                     override fun onResourceReady(
                         resource: BitmapPaletteWrapper,
-                        glideAnimation: GlideAnimation<in BitmapPaletteWrapper>
+                        transition: Transition<in BitmapPaletteWrapper>?
                     ) {
                         val palette = resource.palette
                         update(
@@ -144,8 +147,8 @@ class AppWidgetSmall : BaseAppWidget() {
                         )
                     }
 
-                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                        super.onLoadFailed(e, errorDrawable)
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
                         update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
                     }
 

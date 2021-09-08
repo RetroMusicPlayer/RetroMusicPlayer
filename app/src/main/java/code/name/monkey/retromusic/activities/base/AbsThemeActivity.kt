@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.activities.base
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -23,12 +24,12 @@ import android.view.View
 import android.view.WindowManager
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
+import androidx.core.os.ConfigurationCompat
 import code.name.monkey.appthemehelper.ATH
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialDialogsUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.LanguageContextWrapper
 import code.name.monkey.retromusic.R
@@ -48,7 +49,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         setImmersiveFullscreen()
         registerSystemUiVisibility()
         toggleScreenOn()
-        MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
+        //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
     }
 
     private fun updateTheme() {
@@ -213,8 +214,12 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
     override fun attachBaseContext(newBase: Context?) {
         val code = PreferenceUtil.languageCode
-        if (code != "auto") {
-            super.attachBaseContext(LanguageContextWrapper.wrap(newBase, Locale(code)))
-        } else super.attachBaseContext(newBase)
+        val locale = if (code == "auto") {
+            // Get the device default locale
+            ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
+        } else {
+            Locale.forLanguageTag(code)
+        }
+        super.attachBaseContext(LanguageContextWrapper.wrap(newBase, locale))
     }
 }

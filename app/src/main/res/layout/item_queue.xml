@@ -39,7 +39,7 @@
                 tools:visibility="visible" />
 
 
-            <FrameLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/imageContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                     android:visibility="gone"
                     tools:text="100"
                     tools:visibility="visible" />
-            </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
 
 
             <com.google.android.material.textview.MaterialTextView

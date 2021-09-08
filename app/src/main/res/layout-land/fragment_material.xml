@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playerAlbumCoverFragment"
                     android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <fragment
+                    <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/playbackControlsFragment"
                         android:name="code.name.monkey.retromusic.fragments.player.material.MaterialControlsFragment"
                         android:layout_width="match_parent"

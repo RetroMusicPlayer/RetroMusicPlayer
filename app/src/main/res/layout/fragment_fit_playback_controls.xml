@@ -18,7 +18,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:gravity="center_vertical|left|end"
@@ -66,6 +66,7 @@
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:clickable="false"
         app:layout_constraintTop_toBottomOf="@+id/progressContainer">
 
         <com.google.android.material.textview.MaterialTextView
@@ -75,7 +76,7 @@
             android:layout_gravity="center"
             android:ellipsize="marquee"
             android:focusable="true"
-            android:focusableInTouchMode="true"
+            android:clickable="true"
             android:freezesText="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"

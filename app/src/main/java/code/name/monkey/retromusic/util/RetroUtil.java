@@ -35,14 +35,21 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.text.DecimalFormat;
+import java.util.Collections;
+import java.util.List;
+
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
-import java.text.DecimalFormat;
 
 public class RetroUtil {
 
@@ -203,8 +210,43 @@ public class RetroUtil {
 
   public static void setAllowDrawUnderStatusBar(@NonNull Window window) {
     window
-        .getDecorView()
-        .setSystemUiVisibility(
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            .getDecorView()
+            .setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+  }
+
+  public static String getIpAddress(boolean useIPv4) {
+    try {
+      List<NetworkInterface> interfaces =
+              Collections.list(NetworkInterface.getNetworkInterfaces());
+      for (NetworkInterface intf : interfaces) {
+        List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
+        for (InetAddress addr : addrs) {
+          if (!addr.isLoopbackAddress()) {
+            String sAddr = addr.getHostAddress();
+            //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
+            boolean isIPv4 = sAddr.indexOf(':') < 0;
+            if (useIPv4) {
+              if (isIPv4) return sAddr;
+            } else {
+              if (!isIPv4) {
+                int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
+                if (delim < 0) {
+                  return sAddr.toUpperCase();
+                } else {
+                  return sAddr.substring(
+                          0,
+                          delim
+                  ).toUpperCase();
+                }
+              }
+            }
+          }
+        }
+
+      }
+    } catch (Exception ignored) {
+    }
+    return "";
   }
 }

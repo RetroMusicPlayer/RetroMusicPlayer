@@ -29,8 +29,10 @@ import code.name.monkey.retromusic.repository.RealSongRepository
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
 import org.koin.core.KoinComponent
@@ -127,7 +129,7 @@ object MusicUtil : KoinComponent {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        if (lyrics == null || lyrics.trim { it <= ' ' }.isEmpty() || !AbsSynchronizedLyrics
+        if (lyrics == null || lyrics.trim { it <= ' ' }.isEmpty() || AbsSynchronizedLyrics
                 .isSynchronized(lyrics)
         ) {
             val dir = file.absoluteFile.parentFile
@@ -205,7 +207,7 @@ object MusicUtil : KoinComponent {
         return getSongCountString(context, songs.size)
     }
 
-    fun getReadableDurationString(songDurationMillis: Long): String? {
+    fun getReadableDurationString(songDurationMillis: Long): String {
         var minutes = songDurationMillis / 1000 / 60
         val seconds = songDurationMillis / 1000 % 60
         return if (minutes < 60) {
@@ -217,7 +219,7 @@ object MusicUtil : KoinComponent {
             )
         } else {
             val hours = minutes / 60
-            minutes = minutes % 60
+            minutes %= 60
             String.format(
                 Locale.getDefault(),
                 "%02d:%02d:%02d",
@@ -228,13 +230,13 @@ object MusicUtil : KoinComponent {
         }
     }
 
-    fun getSectionName(musicMediaTitle: String?): String {
-        var musicMediaTitle = musicMediaTitle
+    fun getSectionName(mediaTitle: String?): String {
+        var musicMediaTitle = mediaTitle
         return try {
             if (TextUtils.isEmpty(musicMediaTitle)) {
                 return ""
             }
-            musicMediaTitle = musicMediaTitle!!.trim { it <= ' ' }.toLowerCase()
+            musicMediaTitle = musicMediaTitle!!.trim { it <= ' ' }.lowercase()
             if (musicMediaTitle.startsWith("the ")) {
                 musicMediaTitle = musicMediaTitle.substring(4)
             } else if (musicMediaTitle.startsWith("a ")) {
@@ -242,7 +244,7 @@ object MusicUtil : KoinComponent {
             }
             if (musicMediaTitle.isEmpty()) {
                 ""
-            } else musicMediaTitle.substring(0, 1).toUpperCase()
+            } else musicMediaTitle.substring(0, 1).uppercase()
         } catch (e: Exception) {
             ""
         }
@@ -257,8 +259,19 @@ object MusicUtil : KoinComponent {
     fun getSongFileUri(songId: Long): Uri {
         return ContentUris.withAppendedId(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-            songId.toLong()
+            songId
         )
+    }
+
+    fun getSongFilePath(context: Context, uri: Uri): String? {
+        val projection = arrayOf(MediaStore.MediaColumns.DATA)
+        return context.contentResolver.query(uri, projection, null, null, null)?.use {
+            if (it.moveToFirst()) {
+                it.getString(0)
+            } else {
+                ""
+            }
+        }
     }
 
     fun getTotalDuration(songs: List<Song>): Long {
@@ -299,7 +312,7 @@ object MusicUtil : KoinComponent {
         if (artistName == Artist.UNKNOWN_ARTIST_DISPLAY_NAME) {
             return true
         }
-        val tempName = artistName!!.trim { it <= ' ' }.toLowerCase()
+        val tempName = artistName!!.trim { it <= ' ' }.lowercase()
         return tempName == "unknown" || tempName == "<unknown>"
     }
 
@@ -442,7 +455,7 @@ object MusicUtil : KoinComponent {
         }
     }
 
-    fun deleteTracks(context: Context, songs: List<Song>) {
+    suspend fun deleteTracks(context: Context, songs: List<Song>) {
         val projection = arrayOf(BaseColumns._ID, MediaStore.MediaColumns.DATA)
         val selection = StringBuilder()
         selection.append(BaseColumns._ID + " IN (")
@@ -501,13 +514,19 @@ object MusicUtil : KoinComponent {
                 }
                 cursor.close()
             }
-            Toast.makeText(
-                context,
-                context.getString(R.string.deleted_x_songs, deletedCount),
-                Toast.LENGTH_SHORT
-            ).show()
+            withContext(Dispatchers.Main) {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.deleted_x_songs, deletedCount),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         } catch (ignored: SecurityException) {
         }
     }
 
+    fun songByGenre(genreId: Long): Song {
+        return repository.getSongByGenre(genreId)
+    }
 }

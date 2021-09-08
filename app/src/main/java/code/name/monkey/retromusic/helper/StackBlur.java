@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.helper;
 
 import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;

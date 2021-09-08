@@ -27,8 +27,8 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.model.Artist
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -38,34 +38,26 @@ import java.util.*
 
 class CustomArtistImageUtil private constructor(context: Context) {
 
-    private val mPreferences: SharedPreferences
-
-    init {
-        mPreferences = context.applicationContext.getSharedPreferences(
-            CUSTOM_ARTIST_IMAGE_PREFS,
-            Context.MODE_PRIVATE
-        )
-    }
+    private val mPreferences: SharedPreferences = context.applicationContext.getSharedPreferences(
+        CUSTOM_ARTIST_IMAGE_PREFS,
+        Context.MODE_PRIVATE
+    )
 
     fun setCustomArtistImage(artist: Artist, uri: Uri) {
         Glide.with(App.getContext())
-            .load(uri)
             .asBitmap()
+            .load(uri)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
             .into(object : SimpleTarget<Bitmap>() {
-                override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                    super.onLoadFailed(e, errorDrawable)
-                    e!!.printStackTrace()
-                    Toast.makeText(App.getContext(), e.toString(), Toast.LENGTH_LONG).show()
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    Toast.makeText(App.getContext(), "Load Failed", Toast.LENGTH_LONG).show()
                 }
 
-                override fun onResourceReady(
-                    resource: Bitmap,
-                    glideAnimation: GlideAnimation<in Bitmap>
-                ) {
+                @SuppressLint("StaticFieldLeak")
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     object : AsyncTask<Void, Void, Void>() {
-                        @SuppressLint("ApplySharedPref")
                         override fun doInBackground(vararg params: Void): Void? {
                             val dir = File(App.getContext().filesDir, FOLDER_NAME)
                             if (!dir.exists()) {
@@ -87,7 +79,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
                             }
 
                             if (succesful) {
-                                mPreferences.edit().putBoolean(getFileName(artist), true).commit()
+                                mPreferences.edit().putBoolean(getFileName(artist), true).apply()
                                 ArtistSignatureUtil.getInstance(App.getContext())
                                     .updateArtistSignature(artist.name)
                                 App.getContext().contentResolver.notifyChange(
@@ -102,6 +94,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
             })
     }
 
+    @SuppressLint("StaticFieldLeak")
     fun resetCustomArtistImage(artist: Artist) {
         object : AsyncTask<Void, Void, Void>() {
             @SuppressLint("ApplySharedPref")

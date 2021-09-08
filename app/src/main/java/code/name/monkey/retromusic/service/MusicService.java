@@ -14,8 +14,15 @@
 
 package code.name.monkey.retromusic.service;
 
+import static org.koin.java.KoinJavaComponent.get;
+import static code.name.monkey.retromusic.ConstantsKt.ALBUM_ART_ON_LOCK_SCREEN;
+import static code.name.monkey.retromusic.ConstantsKt.BLURRED_ALBUM_ART;
+import static code.name.monkey.retromusic.ConstantsKt.CLASSIC_NOTIFICATION;
+import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
+import static code.name.monkey.retromusic.ConstantsKt.CROSS_FADE_DURATION;
+import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
+
 import android.app.PendingIntent;
-import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -34,12 +41,14 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.Process;
 import android.provider.MediaStore;
+import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -50,11 +59,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.media.MediaBrowserServiceCompat;
 import androidx.preference.PreferenceManager;
 
-import com.bumptech.glide.BitmapRequestBuilder;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
@@ -69,11 +77,13 @@ import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
 import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
 import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
 import code.name.monkey.retromusic.appwidgets.AppWidgetText;
+import code.name.monkey.retromusic.auto.AutoMediaIDHelper;
+import code.name.monkey.retromusic.auto.AutoMusicProvider;
 import code.name.monkey.retromusic.glide.BlurTransformation;
-import code.name.monkey.retromusic.glide.SongGlideRequest;
+import code.name.monkey.retromusic.glide.GlideApp;
+import code.name.monkey.retromusic.glide.RetroGlideExtension;
+import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
-import code.name.monkey.retromusic.model.AbsCustomPlaylist;
-import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist;
 import code.name.monkey.retromusic.providers.HistoryStore;
@@ -84,20 +94,14 @@ import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl;
 import code.name.monkey.retromusic.service.notification.PlayingNotificationOreo;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.MusicUtil;
+import code.name.monkey.retromusic.util.PackageValidator;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
-
-import static code.name.monkey.retromusic.ConstantsKt.ALBUM_ART_ON_LOCK_SCREEN;
-import static code.name.monkey.retromusic.ConstantsKt.BLURRED_ALBUM_ART;
-import static code.name.monkey.retromusic.ConstantsKt.CLASSIC_NOTIFICATION;
-import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
-import static code.name.monkey.retromusic.ConstantsKt.GAP_LESS_PLAYBACK;
-import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal
  */
-public class MusicService extends Service
+public class MusicService extends MediaBrowserServiceCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
 
     public static final String TAG = MusicService.class.getSimpleName();
@@ -167,6 +171,12 @@ public class MusicService extends Service
 
     @Nullable
     public Playback playback;
+
+    private PackageValidator mPackageValidator;
+
+    private final AutoMusicProvider mMusicProvider = get(AutoMusicProvider.class);
+
+    public boolean trackEndedByCrossfade = false;
 
     public int position = -1;
 
@@ -338,6 +348,7 @@ public class MusicService extends Service
     private ThrottledSeekHandler throttledSeekHandler;
     private Handler uiThreadHandler;
     private PowerManager.WakeLock wakeLock;
+    private AudioFader fader;
 
     private static Bitmap copy(Bitmap bitmap) {
         Bitmap.Config config = bitmap.getConfig();
@@ -375,7 +386,13 @@ public class MusicService extends Service
         musicPlayerHandlerThread.start();
         playerHandler = new PlaybackHandler(this, musicPlayerHandlerThread.getLooper());
 
-        playback = new MultiPlayer(this);
+        // Set MultiPlayer when crossfade duration is 0 i.e. off
+        if (PreferenceUtil.INSTANCE.getCrossFadeDuration() == 0) {
+            playback = new MultiPlayer(this);
+        } else {
+            playback = new CrossFadePlayer(this);
+        }
+
         playback.setCallbacks(this);
 
         setupMediaSession();
@@ -437,6 +454,10 @@ public class MusicService extends Service
 
         registerHeadsetEvents();
         registerBluetoothConnected();
+
+        mPackageValidator = new PackageValidator(this, R.xml.allowed_media_browser_callers);
+        mMusicProvider.setMusicService(this);
+        setSessionToken(mediaSession.getSessionToken());
     }
 
     @Override
@@ -534,6 +555,14 @@ public class MusicService extends Service
     @NonNull
     public Song getCurrentSong() {
         return getSongAt(getPosition());
+    }
+
+    public Song getNextSong() {
+        if (!isLastTrack() || getRepeatMode() == REPEAT_MODE_THIS) {
+            return getSongAt(getNextPosition(false));
+        } else {
+            return null;
+        }
     }
 
     @NonNull
@@ -764,19 +793,68 @@ public class MusicService extends Service
     @NonNull
     @Override
     public IBinder onBind(Intent intent) {
+        // For Android auto, need to call super, or onGetRoot won't be called.
+        if (intent != null && "android.media.browse.MediaBrowserService".equals(intent.getAction())) {
+            return super.onBind(intent);
+        }
         return musicBind;
+    }
+
+    @Nullable
+    @Override
+    public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
+
+        // Check origin to ensure we're not allowing any arbitrary app to browse app contents
+        if (!mPackageValidator.isKnownCaller(clientPackageName, clientUid)) {
+            // Request from an untrusted package: return an empty browser root
+            return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT, null);
+        }
+
+        return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_ROOT, null);
+    }
+
+    @Override
+    public void onLoadChildren(@NonNull String parentId, @NonNull MediaBrowserServiceCompat.Result<List<MediaBrowserCompat.MediaItem>> result) {
+        result.sendResult(mMusicProvider.getChildren(parentId, getResources()));
     }
 
     @Override
     public void onSharedPreferenceChanged(
             @NonNull SharedPreferences sharedPreferences, @NonNull String key) {
         switch (key) {
-            case GAP_LESS_PLAYBACK:
-                if (sharedPreferences.getBoolean(key, false)) {
-                    prepareNext();
-                } else {
+            case CROSS_FADE_DURATION:
+                int progress = getSongProgressMillis();
+                boolean wasPlaying = isPlaying();
+                /* Switch to MultiPlayer if Crossfade duration is 0 and
+                Playback is not an instance of MultiPlayer */
+                if (!(playback instanceof MultiPlayer) && PreferenceUtil.INSTANCE.getCrossFadeDuration() == 0) {
                     if (playback != null) {
-                        playback.setNextDataSource(null);
+                        playback.release();
+                    }
+                    playback = null;
+                    playback = new MultiPlayer(this);
+                    playback.setCallbacks(this);
+                    if (openTrackAndPrepareNextAt(position)) {
+                        seek(progress);
+                        if (wasPlaying) {
+                            play();
+                        }
+                    }
+                }
+                /* Switch to CrossFadePlayer if Crossfade duration is greater than 0 and
+                Playback is not an instance of CrossFadePlayer */
+                else if (!(playback instanceof CrossFadePlayer) && PreferenceUtil.INSTANCE.getCrossFadeDuration() > 0) {
+                    if (playback != null) {
+                        playback.release();
+                    }
+                    playback = null;
+                    playback = new CrossFadePlayer(this);
+                    playback.setCallbacks(this);
+                    if (openTrackAndPrepareNextAt(position)) {
+                        seek(progress);
+                        if (wasPlaying) {
+                            play();
+                        }
                     }
                 }
                 break;
@@ -903,6 +981,22 @@ public class MusicService extends Service
     public void pause() {
         pausedByTransientLossOfFocus = false;
         if (playback != null && playback.isPlaying()) {
+            if (fader != null) {
+                fader.stop();
+            }
+            fader = new AudioFader(playback, PreferenceUtil.INSTANCE.getAudioFadeDuration(), false, () -> {
+                if (playback != null && playback.isPlaying()) {
+                    playback.pause();
+                    notifyChange(PLAY_STATE_CHANGED);
+                }
+            });
+            fader.start();
+        }
+    }
+
+    public void forcePause() {
+        pausedByTransientLossOfFocus = false;
+        if (playback != null && playback.isPlaying()) {
             playback.pause();
             notifyChange(PLAY_STATE_CHANGED);
         }
@@ -915,21 +1009,31 @@ public class MusicService extends Service
                     if (!playback.isInitialized()) {
                         playSongAt(getPosition());
                     } else {
-                        playback.start();
-                        if (!becomingNoisyReceiverRegistered) {
-                            registerReceiver(becomingNoisyReceiver, becomingNoisyReceiverIntentFilter);
-                            becomingNoisyReceiverRegistered = true;
+                        //Don't Start playing when it's casting
+                        if (MusicPlayerRemote.INSTANCE.isCasting()) {
+                            return;
                         }
-                        if (notHandledMetaChangedForCurrentTrack) {
-                            handleChangeInternal(META_CHANGED);
-                            notHandledMetaChangedForCurrentTrack = false;
+                        if (fader != null) {
+                            fader.stop();
                         }
-                        notifyChange(PLAY_STATE_CHANGED);
+                        fader = new AudioFader(playback, PreferenceUtil.INSTANCE.getAudioFadeDuration(), false, () -> {
+                            if (!becomingNoisyReceiverRegistered) {
+                                registerReceiver(becomingNoisyReceiver, becomingNoisyReceiverIntentFilter);
+                                becomingNoisyReceiverRegistered = true;
+                            }
+                            if (notHandledMetaChangedForCurrentTrack) {
+                                handleChangeInternal(META_CHANGED);
+                                notHandledMetaChangedForCurrentTrack = false;
+                            }
 
-                        // fixes a bug where the volume would stay ducked because the
-                        // AudioManager.AUDIOFOCUS_GAIN event is not sent
-                        playerHandler.removeMessages(DUCK);
-                        playerHandler.sendEmptyMessage(UNDUCK);
+                            // fixes a bug where the volume would stay ducked because the
+                            // AudioManager.AUDIOFOCUS_GAIN event is not sent
+                            playerHandler.removeMessages(DUCK);
+                            playerHandler.sendEmptyMessage(UNDUCK);
+                        });
+                        playback.start();
+                        notifyChange(PLAY_STATE_CHANGED);
+                        fader.start();
                     }
                 }
             } else {
@@ -955,6 +1059,14 @@ public class MusicService extends Service
     }
 
     public void playSongAtImpl(int position) {
+        if (!trackEndedByCrossfade) {
+            // This is only imp if we are using crossfade
+            if (playback instanceof CrossFadePlayer) {
+                ((CrossFadePlayer) playback).sourceChangedByUser();
+            }
+        } else  {
+            trackEndedByCrossfade = false;
+        }
         if (openTrackAndPrepareNextAt(position)) {
             play();
         } else {
@@ -978,7 +1090,7 @@ public class MusicService extends Service
         }
     }
 
-    public boolean prepareNextImpl() {
+    public void prepareNextImpl() {
         synchronized (this) {
             try {
                 int nextPosition = getNextPosition(false);
@@ -986,9 +1098,7 @@ public class MusicService extends Service
                     playback.setNextDataSource(getTrackUri(Objects.requireNonNull(getSongAt(nextPosition))));
                 }
                 this.nextPosition = nextPosition;
-                return true;
             } catch (Exception e) {
-                return false;
             }
         }
     }
@@ -1176,9 +1286,7 @@ public class MusicService extends Service
 
         if (PreferenceUtil.INSTANCE.isAlbumArtOnLockScreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
-            final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder.from(Glide.with(MusicService.this), song)
-                    .checkIgnoreMediaStore(MusicService.this)
-                    .asBitmap().build();
+            final RequestBuilder<Bitmap> request = GlideApp.with(MusicService.this).asBitmap().songCoverOptions(song).load(RetroGlideExtension.INSTANCE.getSongModel(song));
             if (PreferenceUtil.INSTANCE.isBlurredAlbumArt()) {
                 request.transform(new BlurTransformation.Builder(MusicService.this).build());
             }
@@ -1187,14 +1295,13 @@ public class MusicService extends Service
                 public void run() {
                     request.into(new SimpleTarget<Bitmap>(screenSize.x, screenSize.y) {
                         @Override
-                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                            super.onLoadFailed(e, errorDrawable);
+                        public void onLoadFailed(Drawable errorDrawable) {
+                            super.onLoadFailed(errorDrawable);
                             mediaSession.setMetadata(metaData.build());
                         }
 
                         @Override
-                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable com.bumptech.glide.request.transition.Transition<? super Bitmap> transition) {
                             metaData.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, copy(resource));
                             mediaSession.setMetadata(metaData.build());
                         }
@@ -1238,6 +1345,7 @@ public class MusicService extends Service
             case META_CHANGED:
                 updateNotification();
                 updateMediaSessionMetaData();
+                updateMediaSessionPlaybackState();
                 savePosition();
                 savePositionInTrack();
                 final Song currentSong = getCurrentSong();
@@ -1266,6 +1374,7 @@ public class MusicService extends Service
                     return playback.setDataSource(getTrackUri(Objects.requireNonNull(getCurrentSong())));
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 return false;
             }
         }

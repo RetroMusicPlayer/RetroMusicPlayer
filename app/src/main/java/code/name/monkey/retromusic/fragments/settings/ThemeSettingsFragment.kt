@@ -18,6 +18,8 @@ import android.os.Build
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
+import code.name.monkey.appthemehelper.ACCENT_COLORS
+import code.name.monkey.appthemehelper.ACCENT_COLORS_SUB
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -26,7 +28,8 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.color.ColorChooserDialog
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.color.colorChooser
 
 /**
  * @author Hemanth S (h4h13).
@@ -55,12 +58,19 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         val accentColor = ThemeStore.accentColor(requireContext())
         accentColorPref?.setColor(accentColor, ColorUtil.darkenColor(accentColor))
         accentColorPref?.setOnPreferenceClickListener {
-            ColorChooserDialog.Builder(requireContext(), R.string.accent_color)
-                .accentMode(true)
-                .allowUserColorInput(true)
-                .allowUserColorInputAlpha(false)
-                .preselect(accentColor)
-                .show(requireActivity())
+            MaterialDialog(requireContext()).show {
+                colorChooser(
+                    initialSelection = accentColor,
+                    showAlphaSelector = false,
+                    colors = ACCENT_COLORS,
+                    subColors = ACCENT_COLORS_SUB, allowCustomArgb = true
+                ) { _, color ->
+                    ThemeStore.editTheme(requireContext()).accentColor(color).commit()
+                    if (VersionUtils.hasNougatMR())
+                        DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
+                    requireActivity().recreate()
+                }
+            }
             return@setOnPreferenceClickListener true
         }
         val blackTheme: ATESwitchPreference? = findPreference(BLACK_THEME)

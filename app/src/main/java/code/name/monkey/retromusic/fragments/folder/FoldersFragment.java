@@ -14,13 +14,14 @@
 
 package code.name.monkey.retromusic.fragments.folder;
 
+import static code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,13 +31,11 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.webkit.MimeTypeMap;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.text.HtmlCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.navigation.Navigation;
@@ -46,25 +45,36 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.transition.MaterialFadeThrough;
+import com.google.android.material.transition.MaterialSharedAxis;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
+import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.adapter.SongFileAdapter;
+import code.name.monkey.retromusic.adapter.Storage;
+import code.name.monkey.retromusic.adapter.StorageAdapter;
+import code.name.monkey.retromusic.adapter.StorageClickListener;
+import code.name.monkey.retromusic.databinding.FragmentFolderBinding;
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
@@ -76,6 +86,7 @@ import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.providers.BlacklistStore;
 import code.name.monkey.retromusic.util.DensityUtil;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -85,15 +96,14 @@ import code.name.monkey.retromusic.views.BreadCrumbLayout;
 import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener;
 import me.zhanghai.android.fastscroll.FastScroller;
 
-import static code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor;
-
 public class FoldersFragment extends AbsMainActivityFragment
         implements IMainActivityFragmentCallbacks,
         ICabHolder,
         BreadCrumbLayout.SelectionCallback,
         ICallbacks,
-        LoaderManager.LoaderCallbacks<List<File>> {
+        LoaderManager.LoaderCallbacks<List<File>>, StorageClickListener {
 
+    private FragmentFolderBinding binding;
     public static final String TAG = FoldersFragment.class.getSimpleName();
     public static final FileFilter AUDIO_FILE_FILTER =
             file ->
@@ -106,14 +116,9 @@ public class FoldersFragment extends AbsMainActivityFragment
     private static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = 5;
     private SongFileAdapter adapter;
-    private Toolbar toolbar;
-    private TextView appNameText;
-    private BreadCrumbLayout breadCrumbs;
+    private StorageAdapter storageAdapter;
     private MaterialCab cab;
-    private View coordinatorLayout;
-    private View empty;
-    private TextView emojiText;
-    private Comparator<File> fileComparator =
+    private final Comparator<File> fileComparator =
             (lhs, rhs) -> {
                 if (lhs.isDirectory() && !rhs.isDirectory()) {
                     return -1;
@@ -123,7 +128,7 @@ public class FoldersFragment extends AbsMainActivityFragment
                     return lhs.getName().compareToIgnoreCase(rhs.getName());
                 }
             };
-    private RecyclerView recyclerView;
+    private final ArrayList<Storage> storageItems = new ArrayList<>();
 
     public FoldersFragment() {
         super(R.layout.fragment_folder);
@@ -158,35 +163,43 @@ public class FoldersFragment extends AbsMainActivityFragment
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_folder, container, false);
-        initViews(view);
-        return view;
+        binding = FragmentFolderBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        setEnterTransition(new MaterialFadeThrough());
+        setExitTransition(new MaterialFadeThrough());
         getMainActivity().addMusicServiceEventListener(getLibraryViewModel());
-        getMainActivity().setBottomBarVisibility(true);
-        getMainActivity().setSupportActionBar(toolbar);
+        getMainActivity().setSupportActionBar(binding.toolbar);
         getMainActivity().getSupportActionBar().setTitle(null);
         setStatusBarColorAuto(view);
         setUpAppbarColor();
         setUpBreadCrumbs();
         setUpRecyclerView();
+        listRoots();
         setUpAdapter();
         setUpTitle();
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (!handleBackPress()) {
+                    remove();
+                    requireActivity().onBackPressed();
+                }
+            }
+        });
     }
 
     private void setUpTitle() {
-        toolbar.setNavigationOnClickListener(
-                v -> Navigation.findNavController(v).navigate(R.id.searchFragment, null, getNavOptions()));
-        int color = ThemeStore.Companion.accentColor(requireContext());
-        String hexColor = String.format("#%06X", 0xFFFFFF & color);
-        Spanned appName =
-                HtmlCompat.fromHtml(
-                        "Retro <span  style='color:" + hexColor + ";'>Music</span>",
-                        HtmlCompat.FROM_HTML_MODE_COMPACT);
-        appNameText.setText(appName);
+        binding.toolbar.setNavigationOnClickListener(
+                v -> {
+                    setExitTransition(new MaterialSharedAxis(MaterialSharedAxis.Z, true).setDuration(300));
+                    setReenterTransition(new MaterialSharedAxis(MaterialSharedAxis.Z, false).setDuration(300));
+                    Navigation.findNavController(v).navigate(R.id.searchFragment, null, getNavOptions());
+                });
+        binding.appNameText.setText(getResources().getString(R.string.folders));
     }
 
     @Override
@@ -194,12 +207,14 @@ public class FoldersFragment extends AbsMainActivityFragment
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
         if (savedInstanceState == null) {
+            switchToFileAdapter();
             setCrumb(
                     new BreadCrumbLayout.Crumb(
                             FileUtil.safeGetCanonicalFile(PreferenceUtil.INSTANCE.getStartDirectory())),
                     true);
+
         } else {
-            breadCrumbs.restoreFromStateWrapper(savedInstanceState.getParcelable(CRUMBS));
+            binding.breadCrumbs.restoreFromStateWrapper(savedInstanceState.getParcelable(CRUMBS));
             LoaderManager.getInstance(this).initLoader(LOADER_ID, null, this);
         }
     }
@@ -213,8 +228,8 @@ public class FoldersFragment extends AbsMainActivityFragment
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (breadCrumbs != null) {
-            outState.putParcelable(CRUMBS, breadCrumbs.getStateWrapper());
+        if (binding != null) {
+            outState.putParcelable(CRUMBS, binding.breadCrumbs.getStateWrapper());
         }
     }
 
@@ -224,8 +239,8 @@ public class FoldersFragment extends AbsMainActivityFragment
             cab.finish();
             return true;
         }
-        if (breadCrumbs != null && breadCrumbs.popHistory()) {
-            setCrumb(breadCrumbs.lastHistory(), false);
+        if (binding.breadCrumbs.popHistory()) {
+            setCrumb(binding.breadCrumbs.lastHistory(), false);
             return true;
         }
         return false;
@@ -267,6 +282,9 @@ public class FoldersFragment extends AbsMainActivityFragment
                                         .execute(
                                                 new ListSongsAsyncTask.LoadingInfo(
                                                         toList(file), AUDIO_FILE_FILTER, getFileComparator()));
+                                return true;
+                            case R.id.action_add_to_blacklist:
+                                BlacklistStore.getInstance(App.Companion.getContext()).addPath(file);
                                 return true;
                             case R.id.action_set_as_start_directory:
                                 PreferenceUtil.INSTANCE.setStartDirectory(file);
@@ -347,7 +365,7 @@ public class FoldersFragment extends AbsMainActivityFragment
                         } else {
                             final File finalFile = file1;
                             Snackbar.make(
-                                    coordinatorLayout,
+                                    binding.coordinatorLayout,
                                     Html.fromHtml(
                                             String.format(
                                                     getString(R.string.not_listed_in_media_store), file1.getName())),
@@ -376,7 +394,7 @@ public class FoldersFragment extends AbsMainActivityFragment
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<File>> loader) {
-        updateAdapter(new LinkedList<File>());
+        updateAdapter(new LinkedList<>());
     }
 
     @Override
@@ -393,7 +411,7 @@ public class FoldersFragment extends AbsMainActivityFragment
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar);
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar);
     }
 
     @Override
@@ -407,7 +425,7 @@ public class FoldersFragment extends AbsMainActivityFragment
         menu.removeItem(R.id.action_layout_type);
         menu.removeItem(R.id.action_sort_order);
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
-                requireContext(), toolbar, menu, getToolbarBackgroundColor(toolbar));
+                requireContext(), binding.toolbar, menu, getToolbarBackgroundColor(binding.toolbar));
     }
 
     @Override
@@ -462,26 +480,32 @@ public class FoldersFragment extends AbsMainActivityFragment
 
     private void checkForPadding() {
         final int count = adapter.getItemCount();
-        final MarginLayoutParams params = (MarginLayoutParams) coordinatorLayout.getLayoutParams();
-        params.bottomMargin =
-                count > 0 && !MusicPlayerRemote.getPlayingQueue().isEmpty()
-                        ? DensityUtil.dip2px(requireContext(), 104f)
-                        : DensityUtil.dip2px(requireContext(), 54f);
+        if (binding != null) {
+            final MarginLayoutParams params = (MarginLayoutParams) binding.coordinatorLayout.getLayoutParams();
+            params.bottomMargin =
+                    count > 0 && !MusicPlayerRemote.getPlayingQueue().isEmpty()
+                            ? DensityUtil.dip2px(requireContext(), 104f)
+                            : DensityUtil.dip2px(requireContext(), 54f);
+            binding.coordinatorLayout.setLayoutParams(params);
+        }
     }
 
     private void checkIsEmpty() {
-        emojiText.setText(getEmojiByUnicode(0x1F631));
-        if (empty != null) {
-            empty.setVisibility(
+        if (binding != null) {
+            binding.emptyEmoji.setText(getEmojiByUnicode(0x1F631));
+            binding.empty.setVisibility(
                     adapter == null || adapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
         }
     }
 
     @Nullable
     private BreadCrumbLayout.Crumb getActiveCrumb() {
-        return breadCrumbs != null && breadCrumbs.size() > 0
-                ? breadCrumbs.getCrumb(breadCrumbs.getActiveIndex())
-                : null;
+        if (binding != null) {
+            return binding.breadCrumbs.size() > 0
+                    ? binding.breadCrumbs.getCrumb(binding.breadCrumbs.getActiveIndex())
+                    : null;
+        }
+        return null;
     }
 
     private String getEmojiByUnicode(int unicode) {
@@ -492,21 +516,11 @@ public class FoldersFragment extends AbsMainActivityFragment
         return fileComparator;
     }
 
-    private void initViews(View view) {
-        coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        breadCrumbs = view.findViewById(R.id.breadCrumbs);
-        empty = view.findViewById(android.R.id.empty);
-        emojiText = view.findViewById(R.id.emptyEmoji);
-        toolbar = view.findViewById(R.id.toolbar);
-        appNameText = view.findViewById(R.id.appNameText);
-    }
-
     private void saveScrollPosition() {
         BreadCrumbLayout.Crumb crumb = getActiveCrumb();
         if (crumb != null) {
             crumb.setScrollPosition(
-                    ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
+                    ((LinearLayoutManager) binding.recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
         }
     }
 
@@ -529,46 +543,39 @@ public class FoldersFragment extends AbsMainActivityFragment
         if (crumb == null) {
             return;
         }
-        saveScrollPosition();
-        breadCrumbs.setActiveOrAdd(crumb, false);
-        if (addToHistory) {
-            breadCrumbs.addHistory(crumb);
+        String path = crumb.getFile().getPath();
+        if (path.equals("/") || path.equals("/storage") || path.equals("/storage/emulated")) {
+            switchToStorageAdapter();
+        } else {
+            saveScrollPosition();
+            binding.breadCrumbs.setActiveOrAdd(crumb, false);
+            if (addToHistory) {
+                binding.breadCrumbs.addHistory(crumb);
+            }
+            LoaderManager.getInstance(this).restartLoader(LOADER_ID, null, this);
         }
-        LoaderManager.getInstance(this).restartLoader(LOADER_ID, null, this);
     }
 
     private void setUpAdapter() {
-        adapter =
-                new SongFileAdapter(getMainActivity(), new LinkedList<>(), R.layout.item_list, this, this);
-        adapter.registerAdapterDataObserver(
-                new RecyclerView.AdapterDataObserver() {
-                    @Override
-                    public void onChanged() {
-                        super.onChanged();
-                        checkIsEmpty();
-                        checkForPadding();
-                    }
-                });
-        recyclerView.setAdapter(adapter);
-        checkIsEmpty();
+        switchToFileAdapter();
     }
 
     private void setUpAppbarColor() {
-        breadCrumbs.setActivatedContentColor(
+        binding.breadCrumbs.setActivatedContentColor(
                 ATHUtil.INSTANCE.resolveColor(requireContext(), android.R.attr.textColorPrimary));
-        breadCrumbs.setDeactivatedContentColor(
+        binding.breadCrumbs.setDeactivatedContentColor(
                 ATHUtil.INSTANCE.resolveColor(requireContext(), android.R.attr.textColorSecondary));
     }
 
     private void setUpBreadCrumbs() {
-        breadCrumbs.setCallback(this);
+        binding.breadCrumbs.setCallback(this);
     }
 
     private void setUpRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FastScroller fastScroller = ThemedFastScroller.INSTANCE.create(recyclerView);
-        recyclerView.setOnApplyWindowInsetsListener(
-                new ScrollingViewOnApplyWindowInsetsListener(recyclerView, fastScroller));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        FastScroller fastScroller = ThemedFastScroller.INSTANCE.create(binding.recyclerView);
+        binding.recyclerView.setOnApplyWindowInsetsListener(
+                new ScrollingViewOnApplyWindowInsetsListener(binding.recyclerView, fastScroller));
     }
 
     private ArrayList<File> toList(File file) {
@@ -580,16 +587,22 @@ public class FoldersFragment extends AbsMainActivityFragment
     private void updateAdapter(@NonNull List<File> files) {
         adapter.swapDataSet(files);
         BreadCrumbLayout.Crumb crumb = getActiveCrumb();
-        if (crumb != null && recyclerView != null) {
-            ((LinearLayoutManager) recyclerView.getLayoutManager())
+        if (crumb != null) {
+            ((LinearLayoutManager) binding.recyclerView.getLayoutManager())
                     .scrollToPositionWithOffset(crumb.getScrollPosition(), 0);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     public static class ListPathsAsyncTask
             extends ListingFilesDialogAsyncTask<ListPathsAsyncTask.LoadingInfo, String, String[]> {
 
-        private WeakReference<OnPathsListedCallback> onPathsListedCallbackWeakReference;
+        private final WeakReference<OnPathsListedCallback> onPathsListedCallbackWeakReference;
 
         public ListPathsAsyncTask(Context context, OnPathsListedCallback callback) {
             super(context);
@@ -679,7 +692,7 @@ public class FoldersFragment extends AbsMainActivityFragment
 
     private static class AsyncFileLoader extends WrappedAsyncTaskLoader<List<File>> {
 
-        private WeakReference<FoldersFragment> fragmentWeakReference;
+        private final WeakReference<FoldersFragment> fragmentWeakReference;
 
         AsyncFileLoader(FoldersFragment foldersFragment) {
             super(foldersFragment.requireActivity());
@@ -710,8 +723,8 @@ public class FoldersFragment extends AbsMainActivityFragment
             extends ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, List<Song>> {
 
         private final Object extra;
-        private WeakReference<OnSongsListedCallback> callbackWeakReference;
-        private WeakReference<Context> contextWeakReference;
+        private final WeakReference<OnSongsListedCallback> callbackWeakReference;
+        private final WeakReference<Context> contextWeakReference;
 
         ListSongsAsyncTask(Context context, Object extra, OnSongsListedCallback callback) {
             super(context);
@@ -822,5 +835,108 @@ public class FoldersFragment extends AbsMainActivityFragment
                     .setOnDismissListener(dialog -> cancel(false))
                     .create();
         }
+    }
+
+    // https://github.com/DrKLO/Telegram/blob/ab221dafadbc17459d78d9ea3e643ae18e934b16/TMessagesProj/src/main/java/org/telegram/ui/Components/ChatAttachAlertDocumentLayout.java#L939
+    private void listRoots() {
+        storageItems.clear();
+        HashSet<String> paths = new HashSet<>();
+        String defaultPath = Environment.getExternalStorageDirectory().getPath();
+        String defaultPathState = Environment.getExternalStorageState();
+        if (defaultPathState.equals(Environment.MEDIA_MOUNTED) || defaultPathState.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
+            Storage ext = new Storage();
+            if (Environment.isExternalStorageRemovable()) {
+                ext.title = "SD Card";
+            } else {
+                ext.title = "Internal Storage";
+            }
+            ext.file = Environment.getExternalStorageDirectory();
+            storageItems.add(ext);
+            paths.add(defaultPath);
+        }
+
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new FileReader("/proc/mounts"));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.contains("vfat") || line.contains("/mnt")) {
+                    StringTokenizer tokens = new StringTokenizer(line, " ");
+                    tokens.nextToken();
+                    String path = tokens.nextToken();
+                    if (paths.contains(path)) {
+                        continue;
+                    }
+                    if (line.contains("/dev/block/vold")) {
+                        if (!line.contains("/mnt/secure") && !line.contains("/mnt/asec") && !line.contains("/mnt/obb") && !line.contains("/dev/mapper") && !line.contains("tmpfs")) {
+                            if (!new File(path).isDirectory()) {
+                                int index = path.lastIndexOf('/');
+                                if (index != -1) {
+                                    String newPath = "/storage/" + path.substring(index + 1);
+                                    if (new File(newPath).isDirectory()) {
+                                        path = newPath;
+                                    }
+                                }
+                            }
+                            paths.add(path);
+                            try {
+                                Storage item = new Storage();
+                                if (path.toLowerCase().contains("sd")) {
+                                    item.title = "SD Card";
+                                } else {
+                                    item.title = "External Storage";
+                                }
+                                item.file = new File(path);
+                                storageItems.add(item);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onStorageClicked(@NonNull Storage storage) {
+        switchToFileAdapter();
+        setCrumb(
+                new BreadCrumbLayout.Crumb(
+                        FileUtil.safeGetCanonicalFile(storage.file)),
+                true);
+    }
+
+    public void switchToFileAdapter() {
+        adapter =
+                new SongFileAdapter(getMainActivity(), new LinkedList<>(), R.layout.item_list, this, this);
+        adapter.registerAdapterDataObserver(
+                new RecyclerView.AdapterDataObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        checkIsEmpty();
+                        checkForPadding();
+                    }
+                });
+        binding.recyclerView.setAdapter(adapter);
+        checkIsEmpty();
+    }
+
+    public void switchToStorageAdapter() {
+        listRoots();
+        storageAdapter = new StorageAdapter(storageItems, this);
+        binding.recyclerView.setAdapter(storageAdapter);
+        binding.breadCrumbs.clearCrumbs();
     }
 }

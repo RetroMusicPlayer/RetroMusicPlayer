@@ -41,18 +41,16 @@ import code.name.monkey.retromusic.activities.bugreport.model.Report
 import code.name.monkey.retromusic.activities.bugreport.model.github.ExtraInfo
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubLogin
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubTarget
+import code.name.monkey.retromusic.databinding.ActivityBugReportBinding
 import code.name.monkey.retromusic.misc.DialogAsyncTask
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
-import java.io.IOException
-import kotlinx.android.synthetic.main.activity_bug_report.*
-import kotlinx.android.synthetic.main.bug_report_card_device_info.*
-import kotlinx.android.synthetic.main.bug_report_card_report.*
 import org.eclipse.egit.github.core.Issue
 import org.eclipse.egit.github.core.client.GitHubClient
 import org.eclipse.egit.github.core.client.RequestException
 import org.eclipse.egit.github.core.service.IssueService
+import java.io.IOException
 
 private const val RESULT_SUCCESS = "RESULT_OK"
 private const val RESULT_BAD_CREDENTIALS = "RESULT_BAD_CREDENTIALS"
@@ -72,12 +70,14 @@ private annotation class Result
 
 open class BugReportActivity : AbsThemeActivity() {
 
+    private lateinit var binding: ActivityBugReportBinding
     private var deviceInfo: DeviceInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bug_report)
+        binding = ActivityBugReportBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
@@ -87,50 +87,50 @@ open class BugReportActivity : AbsThemeActivity() {
         if (TextUtils.isEmpty(title)) setTitle(R.string.report_an_issue)
 
         deviceInfo = DeviceInfo(this)
-        airTextDeviceInfo.text = deviceInfo.toString()
+        binding.cardDeviceInfo.airTextDeviceInfo.text = deviceInfo.toString()
     }
 
     private fun initViews() {
         val accentColor = ThemeStore.accentColor(this)
         val primaryColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        toolbar.setBackgroundColor(primaryColor)
-        setSupportActionBar(toolbar)
-        ToolbarContentTintHelper.colorBackButton(toolbar)
+        binding.toolbar.setBackgroundColor(primaryColor)
+        setSupportActionBar(binding.toolbar)
+        ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        TintHelper.setTintAuto(optionUseAccount, accentColor, false)
-        optionUseAccount?.setOnClickListener {
-            inputTitle.isEnabled = true
-            inputDescription.isEnabled = true
-            inputUsername.isEnabled = true
-            inputPassword.isEnabled = true
+        TintHelper.setTintAuto(binding.cardReport.optionUseAccount, accentColor, false)
+        binding.cardReport.optionUseAccount.setOnClickListener {
+            binding.cardReport.inputTitle.isEnabled = true
+            binding.cardReport.inputDescription.isEnabled = true
+            binding.cardReport.inputUsername.isEnabled = true
+            binding.cardReport.inputPassword.isEnabled = true
 
-            optionAnonymous.isChecked = false
-            sendFab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
+            binding.cardReport.optionAnonymous.isChecked = false
+            binding.sendFab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
                 override fun onHidden(fab: FloatingActionButton?) {
                     super.onHidden(fab)
-                    sendFab.setImageResource(R.drawable.ic_send)
-                    sendFab.show()
+                    binding.sendFab.setImageResource(R.drawable.ic_send)
+                    binding.sendFab.show()
                 }
             })
         }
-        TintHelper.setTintAuto(optionAnonymous, accentColor, false)
-        optionAnonymous.setOnClickListener {
-            inputTitle.isEnabled = false
-            inputDescription.isEnabled = false
-            inputUsername.isEnabled = false
-            inputPassword.isEnabled = false
+        TintHelper.setTintAuto(binding.cardReport.optionAnonymous, accentColor, false)
+        binding.cardReport.optionAnonymous.setOnClickListener {
+            binding.cardReport.inputTitle.isEnabled = false
+            binding.cardReport.inputDescription.isEnabled = false
+            binding.cardReport.inputUsername.isEnabled = false
+            binding.cardReport.inputPassword.isEnabled = false
 
-            optionUseAccount.isChecked = false
-            sendFab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
+            binding.cardReport.optionUseAccount.isChecked = false
+            binding.sendFab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
                 override fun onHidden(fab: FloatingActionButton?) {
                     super.onHidden(fab)
-                    sendFab.setImageResource(R.drawable.ic_open_in_browser)
-                    sendFab.show()
+                    binding.sendFab.setImageResource(R.drawable.ic_open_in_browser)
+                    binding.sendFab.show()
                 }
             })
         }
 
-        inputPassword.setOnEditorActionListener { _, actionId, _ ->
+        binding.cardReport.inputPassword.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEND) {
                 reportIssue()
                 return@setOnEditorActionListener true
@@ -138,22 +138,22 @@ open class BugReportActivity : AbsThemeActivity() {
             false
         }
 
-        airTextDeviceInfo.setOnClickListener { copyDeviceInfoToClipBoard() }
+        binding.cardDeviceInfo.airTextDeviceInfo.setOnClickListener { copyDeviceInfoToClipBoard() }
 
-        TintHelper.setTintAuto(sendFab, accentColor, true)
-        sendFab.setOnClickListener { reportIssue() }
+        TintHelper.setTintAuto(binding.sendFab, accentColor, true)
+        binding.sendFab.setOnClickListener { reportIssue() }
 
-        MaterialUtil.setTint(inputLayoutTitle, false)
-        MaterialUtil.setTint(inputLayoutDescription, false)
-        MaterialUtil.setTint(inputLayoutUsername, false)
-        MaterialUtil.setTint(inputLayoutPassword, false)
+        MaterialUtil.setTint(binding.cardReport.inputLayoutTitle, false)
+        MaterialUtil.setTint(binding.cardReport.inputLayoutDescription, false)
+        MaterialUtil.setTint(binding.cardReport.inputLayoutUsername, false)
+        MaterialUtil.setTint(binding.cardReport.inputLayoutPassword, false)
     }
 
     private fun reportIssue() {
-        if (optionUseAccount.isChecked) {
+        if (binding.cardReport.optionUseAccount.isChecked) {
             if (!validateInput()) return
-            val username = inputUsername.text.toString()
-            val password = inputPassword.text.toString()
+            val username = binding.cardReport.inputUsername.text.toString()
+            val password = binding.cardReport.inputPassword.text.toString()
             sendBugReport(GithubLogin(username, password))
         } else {
             copyDeviceInfoToClipBoard()
@@ -179,34 +179,34 @@ open class BugReportActivity : AbsThemeActivity() {
     private fun validateInput(): Boolean {
         var hasErrors = false
 
-        if (optionUseAccount.isChecked) {
-            if (TextUtils.isEmpty(inputUsername.text)) {
-                setError(inputLayoutUsername, R.string.bug_report_no_username)
+        if (binding.cardReport.optionUseAccount.isChecked) {
+            if (TextUtils.isEmpty(binding.cardReport.inputUsername.text)) {
+                setError(binding.cardReport.inputLayoutUsername, R.string.bug_report_no_username)
                 hasErrors = true
             } else {
-                removeError(inputLayoutUsername)
+                removeError(binding.cardReport.inputLayoutUsername)
             }
 
-            if (TextUtils.isEmpty(inputPassword.text)) {
-                setError(inputLayoutPassword, R.string.bug_report_no_password)
+            if (TextUtils.isEmpty(binding.cardReport.inputPassword.text)) {
+                setError(binding.cardReport.inputLayoutPassword, R.string.bug_report_no_password)
                 hasErrors = true
             } else {
-                removeError(inputLayoutPassword)
+                removeError(binding.cardReport.inputLayoutPassword)
             }
         }
 
-        if (TextUtils.isEmpty(inputTitle.text)) {
-            setError(inputLayoutTitle, R.string.bug_report_no_title)
+        if (TextUtils.isEmpty(binding.cardReport.inputTitle.text)) {
+            setError(binding.cardReport.inputLayoutTitle, R.string.bug_report_no_title)
             hasErrors = true
         } else {
-            removeError(inputLayoutTitle)
+            removeError(binding.cardReport.inputLayoutTitle)
         }
 
-        if (TextUtils.isEmpty(inputDescription.text)) {
-            setError(inputLayoutDescription, R.string.bug_report_no_description)
+        if (TextUtils.isEmpty(binding.cardReport.inputDescription.text)) {
+            setError(binding.cardReport.inputLayoutDescription, R.string.bug_report_no_description)
             hasErrors = true
         } else {
-            removeError(inputLayoutDescription)
+            removeError(binding.cardReport.inputLayoutDescription)
         }
 
         return !hasErrors
@@ -223,8 +223,8 @@ open class BugReportActivity : AbsThemeActivity() {
     private fun sendBugReport(login: GithubLogin) {
         if (!validateInput()) return
 
-        val bugTitle = inputTitle.text.toString()
-        val bugDescription = inputDescription.text.toString()
+        val bugTitle = binding.cardReport.inputTitle.text.toString()
+        val bugDescription = binding.cardReport.inputDescription.text.toString()
 
         val extraInfo = ExtraInfo()
         onSaveExtraInfo()

@@ -17,10 +17,13 @@ package code.name.monkey.retromusic.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import code.name.monkey.retromusic.R;
+
 import com.bumptech.glide.Glide;
+
+import code.name.monkey.retromusic.R;
 
 /** @author Hemanth S (h4h13). */
 public class NetworkImageView extends CircularImageView {

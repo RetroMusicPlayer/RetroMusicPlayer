@@ -176,7 +176,7 @@
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
-        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+        style="@style/Widget.MaterialComponents.LinearProgressIndicator"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="8"

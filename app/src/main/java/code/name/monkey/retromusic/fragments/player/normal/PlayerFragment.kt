@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentPlayerBinding
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -31,7 +32,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.DrawableGradient
-import kotlinx.android.synthetic.main.fragment_player.*
 
 class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
@@ -41,6 +41,10 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
     private lateinit var controlsFragment: PlayerPlaybackControlsFragment
     private var valueAnimator: ValueAnimator? = null
+
+    private var _binding: FragmentPlayerBinding? = null
+    private val binding get() = _binding!!
+
 
     private fun colorize(i: Int) {
         if (valueAnimator != null) {
@@ -61,7 +65,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
                         ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)
                     ), 0
                 )
-                colorGradientBackground?.background = drawable
+                binding.colorGradientBackground.background = drawable
             }
         }
         valueAnimator?.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong())?.start()
@@ -90,7 +94,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
         libraryViewModel.updateColor(color.backgroundColor)
 
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
+            binding.playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
@@ -113,8 +117,14 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setUpSubFragments() {
@@ -126,12 +136,13 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        playerToolbar.setOnMenuItemClickListener(this)
+        binding.playerToolbar.inflateMenu(R.menu.menu_player)
+        //binding.playerToolbar.menu.setUpWithIcons()
+        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.playerToolbar.setOnMenuItemClickListener(this)
 
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
+            binding.playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
@@ -146,7 +157,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
     }
 
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     companion object {

@@ -20,14 +20,16 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentPeakPlayerBinding
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.base.goToAlbum
+import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_peak_player.*
 
 /**
  * Created by hemanths on 2019-10-03.
@@ -37,12 +39,22 @@ class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
 
     private lateinit var controlsFragment: PeakPlayerControlFragment
     private var lastColor: Int = 0
+    private var _binding: FragmentPeakPlayerBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentPeakPlayerBinding.bind(view)
         setUpPlayerToolbar()
         setUpSubFragments()
-        title.isSelected = true
+        binding.title.isSelected = true
+        binding.title.setOnClickListener {
+            goToAlbum(requireActivity())
+        }
+        binding.text.setOnClickListener {
+            goToArtist(requireActivity())
+        }
     }
 
     private fun setUpSubFragments() {
@@ -55,7 +67,7 @@ class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@PeakPlayerFragment)
@@ -68,7 +80,7 @@ class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
     }
 
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     override fun onShow() {
@@ -99,14 +111,14 @@ class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        title.text = song.title
-        text.text = song.artistName
+        binding.title.text = song.title
+        binding.text.text = song.artistName
 
         if (PreferenceUtil.isSongInfo) {
-            songInfo.text = getSongInfo(song)
-            songInfo.show()
+            binding.songInfo.text = getSongInfo(song)
+            binding.songInfo.show()
         } else {
-            songInfo.hide()
+            binding.songInfo.hide()
         }
     }
 
@@ -118,5 +130,10 @@ class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
     override fun onPlayingMetaChanged() {
         super.onPlayingMetaChanged()
         updateSong()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

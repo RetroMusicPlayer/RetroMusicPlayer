@@ -26,23 +26,26 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentMiniPlayerBinding
 import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import kotlin.math.abs
-import kotlinx.android.synthetic.main.fragment_mini_player.*
 
 open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_player),
     MusicProgressViewUpdateHelper.Callback, View.OnClickListener {
 
+    private var _binding: FragmentMiniPlayerBinding? = null
+    private val binding get() = _binding!!
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,38 +62,38 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentMiniPlayerBinding.bind(view)
         view.setOnTouchListener(FlingPlayBackController(requireContext()))
         setUpMiniPlayer()
 
         if (RetroUtil.isTablet()) {
-            actionNext.show()
-            actionPrevious.show()
-            actionNext?.show()
-            actionPrevious?.show()
+            binding.actionNext.show()
+            binding.actionPrevious.show()
         } else {
-            actionNext.visibility = if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
-            actionPrevious.visibility =
+            binding.actionNext.visibility =
+                if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
+            binding.actionPrevious.visibility =
                 if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
         }
-        actionNext.setOnClickListener(this)
-        actionPrevious.setOnClickListener(this)
-        actionNext?.setOnClickListener(this)
-        actionPrevious?.setOnClickListener(this)
+        binding.actionNext.setOnClickListener(this)
+        binding.actionPrevious.setOnClickListener(this)
     }
 
     private fun setUpMiniPlayer() {
         setUpPlayPauseButton()
-        progressBar.accentColor()
+        binding.progressBar.accentColor()
     }
 
     private fun setUpPlayPauseButton() {
-        miniPlayerPlayPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
+        binding.miniPlayerPlayPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
     }
 
     private fun updateSongTitle() {
-        val builder = SpannableStringBuilder()
 
         val song = MusicPlayerRemote.currentSong
+
+        val builder = SpannableStringBuilder()
+
         val title = SpannableString(song.title)
         title.setSpan(ForegroundColorSpan(textColorPrimary()), 0, title.length, 0)
 
@@ -99,17 +102,34 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
 
         builder.append(title).append(" • ").append(text)
 
-        miniPlayerTitle.isSelected = true
-        miniPlayerTitle.text = builder
+        binding.miniPlayerTitle.isSelected = true
+        binding.miniPlayerTitle.text = builder
+
+//        binding.title.isSelected = true
+//        binding.title.text = song.title
+//        binding.text.isSelected = true
+//        binding.text.text = song.artistName
+    }
+
+    private fun updateSongCover() {
+//        val song = MusicPlayerRemote.currentSong
+//        GlideApp.with(requireContext())
+//            .asBitmap()
+//            .songCoverOptions(song)
+//            .transition(RetroGlideExtension.getDefaultTransition())
+//            .load(RetroGlideExtension.getSongModel(song))
+//            .into(binding.image)
     }
 
     override fun onServiceConnected() {
         updateSongTitle()
+        updateSongCover()
         updatePlayPauseDrawableState()
     }
 
     override fun onPlayingMetaChanged() {
         updateSongTitle()
+        updateSongCover()
     }
 
     override fun onPlayStateChanged() {
@@ -117,8 +137,8 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressBar.max = total
-        val animator = ObjectAnimator.ofInt(progressBar, "progress", progress)
+        binding.progressBar.max = total
+        val animator = ObjectAnimator.ofInt(binding.progressBar, "progress", progress)
         animator.duration = 1000
         animator.interpolator = DecelerateInterpolator()
         animator.start()
@@ -136,14 +156,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
 
     protected fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_pause)
+            binding.miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_pause)
         } else {
-            miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_play_arrow)
+            binding.miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_play_arrow)
         }
-    }
-
-    fun updateProgressBar(paletteColor: Int) {
-        progressBar.applyColor(paletteColor)
     }
 
     class FlingPlayBackController(context: Context) : View.OnTouchListener {
@@ -177,5 +193,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
         override fun onTouch(v: View, event: MotionEvent): Boolean {
             return flingPlayBackController.onTouchEvent(event)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

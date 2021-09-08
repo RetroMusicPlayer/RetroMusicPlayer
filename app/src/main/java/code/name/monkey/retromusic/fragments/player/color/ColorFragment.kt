@@ -19,16 +19,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.core.animation.doOnEnd
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentColorPlayerBinding
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_color_player.*
 
 class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
 
@@ -36,9 +37,12 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
     private var navigationColor: Int = 0
     private lateinit var playbackControlsFragment: ColorPlaybackControlsFragment
     private var valueAnimator: ValueAnimator? = null
+    private var _binding: FragmentColorPlayerBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     override val paletteColor: Int
@@ -50,11 +54,17 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
         playbackControlsFragment.setColor(color)
         navigationColor = color.backgroundColor
 
-        colorGradientBackground?.setBackgroundColor(color.backgroundColor)
+        binding.colorGradientBackground.setBackgroundColor(color.backgroundColor)
+        val animator =
+            playbackControlsFragment.createRevealAnimator(binding.colorGradientBackground)
+        animator.doOnEnd {
+            _binding?.root?.setBackgroundColor(color.backgroundColor)
+        }
+        animator.start()
         serviceActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
         Handler().post {
             ToolbarContentTintHelper.colorizeToolbar(
-                playerToolbar,
+                binding.playerToolbar,
                 color.secondaryTextColor,
                 requireActivity()
             )
@@ -95,10 +105,12 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
             valueAnimator!!.cancel()
             valueAnimator = null
         }
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentColorPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
         val playerAlbumCoverFragment =
@@ -112,7 +124,7 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@ColorFragment)

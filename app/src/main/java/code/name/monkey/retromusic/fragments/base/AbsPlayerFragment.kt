@@ -14,31 +14,41 @@
  */
 package code.name.monkey.retromusic.fragments.base
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ContentUris
+import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.media.MediaMetadataRetriever
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.view.GestureDetector
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.viewpager.widget.ViewPager
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
+import code.name.monkey.retromusic.extensions.currentFragment
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.ReloadType
@@ -50,13 +60,14 @@ import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.*
-import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
 import java.io.FileNotFoundException
+import kotlin.math.abs
 
 abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
     Toolbar.OnMenuItemClickListener, IPaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
@@ -68,6 +79,11 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
     ): Boolean {
         val song = MusicPlayerRemote.currentSong
         when (item.itemId) {
+            R.id.action_toggle_lyrics -> {
+                PreferenceUtil.showLyrics = !PreferenceUtil.showLyrics
+                showLyricsIcon(item)
+                return true
+            }
             R.id.action_toggle_favorite -> {
                 toggleFavorite(song)
                 return true
@@ -114,6 +130,8 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_go_to_album -> {
+                //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
+                mainActivity.setBottomBarVisibility(false)
                 mainActivity.collapsePanel()
                 requireActivity().findNavController(R.id.fragment_container).navigate(
                     R.id.albumDetailsFragment,
@@ -122,11 +140,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_go_to_artist -> {
-                mainActivity.collapsePanel()
-                requireActivity().findNavController(R.id.fragment_container).navigate(
-                    R.id.artistDetailsFragment,
-                    bundleOf(EXTRA_ARTIST_ID to song.artistId)
-                )
+                goToArtist(requireActivity())
                 return true
             }
             R.id.now_playing -> {
@@ -158,7 +172,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 val trackUri =
                     ContentUris.withAppendedId(
                         MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                        song.id.toLong()
+                        song.id
                     )
                 retriever.setDataSource(activity, trackUri)
                 var genre: String? =
@@ -173,6 +187,18 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         return false
     }
 
+    private fun showLyricsIcon(item: MenuItem) {
+        val icon =
+            if (PreferenceUtil.showLyrics) R.drawable.ic_lyrics else R.drawable.ic_lyrics_outline
+        val drawable: Drawable? = RetroUtil.getTintedVectorDrawable(
+            requireContext(),
+            icon,
+            toolbarIconColor()
+        )
+        item.isChecked = PreferenceUtil.showLyrics
+        item.icon = drawable
+    }
+
     abstract fun playerToolbar(): Toolbar?
 
     abstract fun onShow()
@@ -185,7 +211,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     override fun onServiceConnected() {
         updateIsFavorite()
-        updateLyrics()
     }
 
     override fun onPlayingMetaChanged() {
@@ -193,9 +218,13 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         updateLyrics()
     }
 
+    override fun onFavoriteStateChanged() {
+        updateIsFavorite(animate = true)
+    }
+
     protected open fun toggleFavorite(song: Song) {
         lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
+            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
             if (playlist != null) {
                 val songEntity = song.toSongEntity(playlist.playListId)
                 val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
@@ -210,26 +239,36 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         }
     }
 
-    fun updateIsFavorite() {
+    fun updateIsFavorite(animate: Boolean = false) {
         lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
+            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
             if (playlist != null) {
                 val song: SongEntity =
                     MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
                 val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
                 withContext(Main) {
-                    val icon =
+                    val icon = if (animate) {
+                        if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
+                    } else {
                         if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                    }
                     val drawable: Drawable? = RetroUtil.getTintedVectorDrawable(
                         requireContext(),
                         icon,
                         toolbarIconColor()
                     )
                     if (playerToolbar() != null) {
-                        playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)
-                            ?.setIcon(drawable)?.title =
-                            if (isFavorite) getString(R.string.action_remove_from_favorites)
-                            else getString(R.string.action_add_to_favorites)
+                        playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)?.apply {
+                            setIcon(drawable)
+                            title =
+                                if (isFavorite) getString(R.string.action_remove_from_favorites)
+                                else getString(R.string.action_add_to_favorites)
+                            getIcon().also {
+                                if (it is AnimatedVectorDrawable) {
+                                    it.start()
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -273,7 +312,50 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         playerAlbumCoverFragment?.setCallbacks(this)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            statusBarShadow?.hide()
+            view.findViewById<RelativeLayout>(R.id.statusBarShadow)?.hide()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onStart() {
+        super.onStart()
+        requireView().setOnTouchListener(
+            SwipeDetector(
+                requireContext(),
+                playerAlbumCoverFragment?.viewPager,
+                requireView()
+            )
+        )
+    }
+
+    class SwipeDetector(val context: Context, val viewPager: ViewPager?, val view: View) :
+        View.OnTouchListener {
+        private var flingPlayBackController: GestureDetector = GestureDetector(
+            context,
+            object : GestureDetector.SimpleOnGestureListener() {
+                override fun onScroll(
+                    e1: MotionEvent?,
+                    e2: MotionEvent?,
+                    distanceX: Float,
+                    distanceY: Float
+                ): Boolean {
+                    return when {
+                        abs(distanceX) > abs(distanceY) -> {
+                            // Disallow Intercept Touch Event so that parent(BottomSheet) doesn't consume the events
+                            view.parent.requestDisallowInterceptTouchEvent(true)
+                            true
+                        }
+                        else -> {
+                            false
+                        }
+                    }
+                }
+            })
+
+        @SuppressLint("ClickableViewAccessibility")
+        override fun onTouch(v: View, event: MotionEvent?): Boolean {
+            viewPager?.dispatchTouchEvent(event)
+            return flingPlayBackController.onTouchEvent(event)
+        }
     }
 
     companion object {
@@ -287,6 +369,47 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         return MusicUtil.buildInfoString(
             resources.getString(R.string.up_next),
             MusicUtil.getReadableDurationString(duration)
+        )
+    }
+}
+
+fun goToArtist(activity: Activity) {
+    if (activity !is MainActivity) return
+    val song = MusicPlayerRemote.currentSong
+    activity.apply {
+
+        // Remove exit transition of current fragment so
+        // it doesn't exit with a weird transition
+        currentFragment(R.id.fragment_container)?.exitTransition = null
+
+        //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
+        setBottomBarVisibility(false)
+        if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
+            collapsePanel()
+        }
+
+        findNavController(R.id.fragment_container).navigate(
+            R.id.artistDetailsFragment,
+            bundleOf(EXTRA_ARTIST_ID to song.artistId)
+        )
+    }
+}
+
+fun goToAlbum(activity: Activity) {
+    if (activity !is MainActivity) return
+    val song = MusicPlayerRemote.currentSong
+    activity.apply {
+        currentFragment(R.id.fragment_container)?.exitTransition = null
+
+        //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
+        setBottomBarVisibility(false)
+        if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
+            collapsePanel()
+        }
+
+        findNavController(R.id.fragment_container).navigate(
+            R.id.albumDetailsFragment,
+            bundleOf(EXTRA_ALBUM_ID to song.albumId)
         )
     }
 }

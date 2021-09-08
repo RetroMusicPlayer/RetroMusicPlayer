@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Hemanth Savarla.
+ * Cop()yright (c) 2020 Hemanth Savarla.
  *
  * Licensed under the GNU General Public License v3
  *
@@ -16,8 +16,8 @@ package code.name.monkey.retromusic.fragments.songs
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.annotation.LayoutRes
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
@@ -31,6 +31,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
+import com.google.android.gms.cast.framework.CastButtonFactory
 
 class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
     ICabHolder {
@@ -42,13 +43,29 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
             else
                 adapter?.swapDataSet(listOf())
         })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (!handleBackPress()) {
+                remove()
+                requireActivity().onBackPressed()
+            }
+        }
     }
+
+
+    override val titleRes: Int
+        get() = R.string.songs
 
     override val emptyMessage: Int
         get() = R.string.no_songs
 
     override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(requireActivity(), getGridSize())
+        return GridLayoutManager(requireActivity(), getGridSize()).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return if (position == 0) getGridSize() else 1
+                }
+            }
+        }
     }
 
     override fun createAdapter(): SongAdapter {
@@ -112,6 +129,8 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         val layoutItem = menu.findItem(R.id.action_layout_type)
         setupLayoutMenu(layoutItem.subMenu)
         setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
+        //Setting up cast button
+        CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
     }
 
     private fun setUpSortOrderMenu(
@@ -175,6 +194,13 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
             R.string.sort_order_composer
         ).isChecked =
             currentSortOrder == SongSortOrder.COMPOSER
+        sortOrderMenu.add(
+            0,
+            R.id.action_song_sort_order_album_artist,
+            8,
+            R.string.album_artist
+        ).isChecked =
+            currentSortOrder == SongSortOrder.SONG_ALBUM_ARTIST
 
         sortOrderMenu.setGroupCheckable(0, true, true)
     }
@@ -249,6 +275,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
             R.id.action_song_sort_order_asc -> SongSortOrder.SONG_A_Z
             R.id.action_song_sort_order_desc -> SongSortOrder.SONG_Z_A
             R.id.action_song_sort_order_artist -> SongSortOrder.SONG_ARTIST
+            R.id.action_song_sort_order_album_artist -> SongSortOrder.SONG_ALBUM_ARTIST
             R.id.action_song_sort_order_album -> SongSortOrder.SONG_ALBUM
             R.id.action_song_sort_order_year -> SongSortOrder.SONG_YEAR
             R.id.action_song_sort_order_date -> SongSortOrder.SONG_DATE
@@ -306,6 +333,11 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         return false
     }
 
+    override fun onResume() {
+        super.onResume()
+        libraryViewModel.forceReload(ReloadType.Songs)
+    }
+
     companion object {
         @JvmField
         var TAG: String = SongsFragment::class.java.simpleName
@@ -318,7 +350,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
 
     private var cab: MaterialCab? = null
 
-    fun handleBackPress(): Boolean {
+    private fun handleBackPress(): Boolean {
         cab?.let {
             if (it.isActive) {
                 it.finish()

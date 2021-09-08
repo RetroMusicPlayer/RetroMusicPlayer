@@ -26,25 +26,28 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.glide.ArtistGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
+import code.name.monkey.retromusic.interfaces.IAlbumArtistClickListener
 import code.name.monkey.retromusic.interfaces.IArtistClickListener
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
-import java.util.*
 import me.zhanghai.android.fastscroll.PopupTextProvider
+import java.util.*
 
 class ArtistAdapter(
     val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
     val ICabHolder: ICabHolder?,
-    val IArtistClickListener: IArtistClickListener
+    val IArtistClickListener: IArtistClickListener,
+    val IAlbumArtistClickListener: IAlbumArtistClickListener? = null
 ) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(
     activity, ICabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
@@ -82,6 +85,13 @@ class ArtistAdapter(
         holder.itemView.isActivated = isChecked
         holder.title?.text = artist.name
         holder.text?.hide()
+        holder.image?.let {
+            if (PreferenceUtil.albumArtistsOnly) {
+                ViewCompat.setTransitionName(it, artist.name)
+            } else {
+                ViewCompat.setTransitionName(it, artist.id.toString())
+            }
+        }
         loadArtistImage(artist, holder)
     }
 
@@ -98,9 +108,11 @@ class ArtistAdapter(
         if (holder.image == null) {
             return
         }
-        ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
-            .generatePalette(activity)
-            .build()
+        GlideApp.with(activity)
+            .asBitmapPalette()
+            .load(RetroGlideExtension.getArtistModel(artist))
+            .artistImageOptions(artist)
+            .transition(RetroGlideExtension.getDefaultTransition())
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
@@ -112,7 +124,7 @@ class ArtistAdapter(
         return dataSet.size
     }
 
-    override fun getIdentifier(position: Int): Artist? {
+    override fun getIdentifier(position: Int): Artist {
         return dataSet[position]
     }
 
@@ -154,16 +166,19 @@ class ArtistAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
+                val artist = dataSet[layoutPosition]
                 image?.let {
-                    ViewCompat.setTransitionName(it, "artist")
-                    IArtistClickListener.onArtist(dataSet[layoutPosition].id, it)
+                    if (PreferenceUtil.albumArtistsOnly && IAlbumArtistClickListener != null) {
+                        IAlbumArtistClickListener.onAlbumArtist(artist.name, it)
+                    } else {
+                        IArtistClickListener.onArtist(artist.id, it)
+                    }
                 }
             }
         }
 
         override fun onLongClick(v: View?): Boolean {
-            toggleChecked(layoutPosition)
-            return super.onLongClick(v)
+            return toggleChecked(layoutPosition)
         }
     }
 }

@@ -28,13 +28,16 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.util.Pair;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.FloatRange;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import code.name.monkey.retromusic.R;
+
 import java.util.WeakHashMap;
+
+import code.name.monkey.retromusic.R;
 
 /**
  * Helper class to process legacy (Holo) notifications to make them look like material

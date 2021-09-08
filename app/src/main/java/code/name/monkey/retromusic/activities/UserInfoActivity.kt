@@ -27,54 +27,58 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.databinding.ActivityUserInfoBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.applyToolbar
-import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
-import code.name.monkey.retromusic.glide.UserProfileGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.constant.ImageProvider
-import java.io.BufferedOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import kotlinx.android.synthetic.main.activity_user_info.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class UserInfoActivity : AbsBaseActivity() {
 
+    private lateinit var binding: ActivityUserInfoBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_info)
+        binding = ActivityUserInfoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        applyToolbar(toolbar)
+        applyToolbar(binding.toolbar)
 
-        nameContainer.accentColor()
-        name.setText(PreferenceUtil.userName)
+        binding.nameContainer.accentColor()
+        binding.name.setText(PreferenceUtil.userName)
 
-        userImage.setOnClickListener {
+        binding.userImage.setOnClickListener {
             pickNewPhoto()
         }
 
-        bannerImage.setOnClickListener {
+        binding.bannerImage.setOnClickListener {
             selectBannerImage()
         }
 
-        next.setOnClickListener {
-            val nameString = name.text.toString().trim { it <= ' ' }
+        binding.next.setOnClickListener {
+            val nameString = binding.name.text.toString().trim { it <= ' ' }
             if (TextUtils.isEmpty(nameString)) {
                 Toast.makeText(this, "Umm you're name can't be empty!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -86,23 +90,24 @@ class UserInfoActivity : AbsBaseActivity() {
 
         val textColor =
             MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(accentColor()))
-        next.backgroundTintList = ColorStateList.valueOf(accentColor())
-        next.iconTint = ColorStateList.valueOf(textColor)
-        next.setTextColor(textColor)
+        binding.next.backgroundTintList = ColorStateList.valueOf(accentColor())
+        binding.next.iconTint = ColorStateList.valueOf(textColor)
+        binding.next.setTextColor(textColor)
         loadProfile()
     }
 
     private fun loadProfile() {
-        bannerImage?.let {
-            ProfileBannerGlideRequest.Builder.from(
-                Glide.with(this),
-                ProfileBannerGlideRequest.getBannerModel()
-            ).build().into(it)
+        binding.bannerImage.let {
+            GlideApp.with(this)
+                .asBitmap()
+                .load(RetroGlideExtension.getBannerModel())
+                .profileBannerOptions(RetroGlideExtension.getBannerModel())
+                .into(it)
         }
-        UserProfileGlideRequest.Builder.from(
-            Glide.with(this),
-            UserProfileGlideRequest.getUserModel()
-        ).build().into(userImage)
+        GlideApp.with(this).asBitmap()
+            .load(RetroGlideExtension.getUserModel())
+            .userProfileOptions(RetroGlideExtension.getUserModel())
+            .into(binding.userImage)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -145,31 +150,31 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun setAndSaveBannerImage(fileUri: Uri) {
         Glide.with(this)
-            .load(fileUri)
             .asBitmap()
+            .load(fileUri)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .listener(object : RequestListener<Any, Bitmap> {
-                override fun onException(
-                    e: java.lang.Exception?,
-                    model: Any?,
-                    target: Target<Bitmap>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    return false
-                }
-
+            .listener(object : RequestListener<Bitmap> {
                 override fun onResourceReady(
                     resource: Bitmap?,
                     model: Any?,
                     target: Target<Bitmap>?,
-                    isFromMemoryCache: Boolean,
+                    dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
                     resource?.let { saveImage(it, USER_BANNER) }
                     return false
                 }
+
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Bitmap>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
             })
-            .into(bannerImage)
+            .into(binding.bannerImage)
     }
 
     private fun saveImage(bitmap: Bitmap, fileName: String) {
@@ -195,31 +200,31 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun setAndSaveUserImage(fileUri: Uri) {
         Glide.with(this)
-            .load(fileUri)
             .asBitmap()
+            .load(fileUri)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .listener(object : RequestListener<Any, Bitmap> {
-                override fun onException(
-                    e: java.lang.Exception?,
-                    model: Any?,
-                    target: Target<Bitmap>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    return false
-                }
-
+            .listener(object : RequestListener<Bitmap> {
                 override fun onResourceReady(
                     resource: Bitmap?,
                     model: Any?,
                     target: Target<Bitmap>?,
-                    isFromMemoryCache: Boolean,
+                    dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
                     resource?.let { saveImage(it, USER_PROFILE) }
                     return false
                 }
+
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Bitmap>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
             })
-            .into(userImage)
+            .into(binding.userImage)
     }
 
     companion object {

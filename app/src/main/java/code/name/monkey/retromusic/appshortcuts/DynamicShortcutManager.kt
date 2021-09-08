@@ -24,7 +24,6 @@ import android.os.Build
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.LastAddedShortcutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.ShuffleAllShortcutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.TopTracksShortcutType
-import java.util.*
 
 @TargetApi(Build.VERSION_CODES.N_MR1)
 class DynamicShortcutManager(private val context: Context) {

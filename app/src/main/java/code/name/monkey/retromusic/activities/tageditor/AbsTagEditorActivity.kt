@@ -22,10 +22,12 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
 import android.view.animation.OvershootInterpolator
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import androidx.viewbinding.ViewBinding
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -41,7 +43,6 @@ import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.SAFUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
@@ -49,7 +50,8 @@ import org.koin.android.ext.android.inject
 import java.io.File
 import java.util.*
 
-abstract class AbsTagEditorActivity : AbsBaseActivity() {
+abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
+    abstract val editorImage: ImageView?
     val repository by inject<Repository>()
 
     lateinit var saveFab: MaterialButton
@@ -62,7 +64,11 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private val currentSongPath: String? = null
     private var savedTags: Map<FieldKey, String>? = null
     private var savedArtworkInfo: ArtworkInfo? = null
-    protected abstract val contentViewLayout: Int
+    private var _binding: VB? = null
+    protected val binding: VB get() = _binding!!
+
+    abstract val bindingInflater: (LayoutInflater) -> VB
+
     protected abstract fun loadImageFromFile(selectedFile: Uri?)
 
     protected val show: AlertDialog
@@ -187,7 +193,8 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(contentViewLayout)
+        _binding = bindingInflater.invoke(layoutInflater)
+        setContentView(binding.root)
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
@@ -284,10 +291,6 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     protected fun setNoImageMode() {
         isInNoImageMode = true
-        imageContainer?.visibility = View.GONE
-        editorImage?.visibility = View.GONE
-        editorImage?.isEnabled = false
-
         setColors(
             intent.getIntExtra(
                 EXTRA_PALETTE,
@@ -295,6 +298,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
             )
         )
     }
+
 
     protected fun dataChanged() {
         showFab()
@@ -314,9 +318,9 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     protected fun setImageBitmap(bitmap: Bitmap?, bgColor: Int) {
         if (bitmap == null) {
-            editorImage.setImageResource(drawable.default_audio_art)
+            editorImage?.setImageResource(drawable.default_audio_art)
         } else {
-            editorImage.setImageBitmap(bitmap)
+            editorImage?.setImageBitmap(bitmap)
         }
         setColors(bgColor)
     }

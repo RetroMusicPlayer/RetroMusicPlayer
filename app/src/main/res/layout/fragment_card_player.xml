@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="?attr/colorSurface" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         app:cardCornerRadius="8dp"
         app:cardUseCompatPadding="true">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playbackControlsFragment"
             android:name="code.name.monkey.retromusic.fragments.player.card.CardPlaybackControlsFragment"
             android:layout_width="match_parent"

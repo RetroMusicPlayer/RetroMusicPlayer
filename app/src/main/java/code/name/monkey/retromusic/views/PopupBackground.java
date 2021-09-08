@@ -27,9 +27,11 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
+
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 

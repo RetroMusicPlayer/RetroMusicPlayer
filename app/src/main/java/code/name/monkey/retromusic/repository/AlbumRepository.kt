@@ -19,8 +19,6 @@ import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 /**
@@ -71,11 +69,16 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
         return album
     }
 
+    // We don't need sorted list of songs (with sortAlbumSongs())
+    // cuz we are just displaying Albums(Cover Arts) anyway and not songs
     fun splitIntoAlbums(
         songs: List<Song>
     ): List<Album> {
-        return songs.groupBy { it.albumId }
-            .map { sortAlbumSongs(Album(it.key, it.value)) }
+        return if (PreferenceUtil.albumSortOrder != SortOrder.AlbumSortOrder.ALBUM_NUMBER_OF_SONGS) songs.groupBy { it.albumId }
+            .map { Album(it.key, it.value) }
+        // We can't sort Album with the help of MediaStore so a hack
+        else songs.groupBy { it.albumId }.map { Album(it.key, it.value) }
+            .sortedByDescending { it.songCount }
     }
 
     private fun sortAlbumSongs(album: Album): Album {
@@ -98,9 +101,10 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
     }
 
     private fun getSongLoaderSortOrder(): String {
-        return PreferenceUtil.albumSortOrder + ", " +
+        var albumSortOrder = PreferenceUtil.albumSortOrder
+        if (albumSortOrder == SortOrder.AlbumSortOrder.ALBUM_NUMBER_OF_SONGS)
+            albumSortOrder = SortOrder.AlbumSortOrder.ALBUM_A_Z
+        return albumSortOrder + ", " +
                 PreferenceUtil.albumSongSortOrder
     }
-
-
 }

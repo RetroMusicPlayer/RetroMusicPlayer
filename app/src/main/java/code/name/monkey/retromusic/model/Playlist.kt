@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Parcelable
 import code.name.monkey.retromusic.repository.RealPlaylistRepository
 import code.name.monkey.retromusic.util.MusicUtil
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.koin.core.KoinComponent
 import org.koin.core.get
 

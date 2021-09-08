@@ -24,19 +24,20 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.signature.MediaStoreSignature
+import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.io.File
 import java.text.DecimalFormat
 import kotlin.math.log10
 import kotlin.math.pow
-import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class SongFileAdapter(
     private val activity: AppCompatActivity,
@@ -111,14 +112,14 @@ class SongFileAdapter(
             val error = RetroUtil.getTintedVectorDrawable(
                 activity, R.drawable.ic_file_music, iconColor
             )
-            Glide.with(activity)
+            GlideApp.with(activity)
                 .load(AudioFileCover(file.path))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(error)
                 .placeholder(error)
-                .animate(android.R.anim.fade_in)
+                .transition(RetroGlideExtension.getDefaultTransition())
                 .signature(MediaStoreSignature("", file.lastModified(), 0))
-                .into(holder.image)
+                .into(holder.image!!)
         }
     }
 
@@ -126,7 +127,7 @@ class SongFileAdapter(
         return dataSet.size
     }
 
-    override fun getIdentifier(position: Int): File? {
+    override fun getIdentifier(position: Int): File {
         return dataSet[position]
     }
 

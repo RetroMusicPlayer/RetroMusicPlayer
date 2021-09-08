@@ -23,6 +23,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keepnames class **
+-keepnames class ** { *; }
+-keepattributes SourceFile,LineNumberTable
 
 -dontwarn java.lang.invoke.*
 -dontwarn **$$Lambda$*
@@ -34,9 +37,10 @@
 
 # Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
-    **[] $VALUES;
-    public *;
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
 }
 
 # OkHttp
@@ -47,8 +51,6 @@
 
 #-dontwarn
 #-ignorewarnings
--dontshrink
--dontobfuscate
 
 -dontwarn org.jaudiotagger.**
 -keep class org.jaudiotagger.** { *; }
@@ -60,3 +62,7 @@
 -keep class * extends androidx.fragment.app.Fragment{}
 -keepnames class * extends android.os.Parcelable
 -keepnames class * extends java.io.Serializable
+-keep class code.name.monkey.retromusic.network.model.** { *; }
+-keep class code.name.monkey.retromusic.model.CategoryInfo { *; }
+-keep class com.google.android.material.bottomsheet.** { *; }
+-keep class code.name.monkey.retromusic.Constants { *; }

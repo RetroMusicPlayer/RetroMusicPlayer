@@ -25,6 +25,7 @@ import android.widget.SeekBar
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentCardBlurPlayerPlaybackControlsBinding
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
@@ -37,8 +38,6 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_card_blur_player_playback_controls.*
-import kotlinx.android.synthetic.main.media_button.*
 
 class CardBlurPlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_card_blur_player_playback_controls) {
@@ -47,6 +46,10 @@ class CardBlurPlaybackControlsFragment :
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
+    private var _binding: FragmentCardBlurPlayerPlaybackControlsBinding? = null
+    private val binding get() = _binding!!
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
@@ -54,6 +57,7 @@ class CardBlurPlaybackControlsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentCardBlurPlayerPlaybackControlsBinding.bind(view)
         setUpMusicControllers()
     }
 
@@ -70,7 +74,7 @@ class CardBlurPlaybackControlsFragment :
     }
 
     private fun setUpPlayPauseFab() {
-        playPauseButton.apply {
+        binding.mediaButton.playPauseButton.apply {
             TintHelper.setTintAuto(this, Color.WHITE, true)
             TintHelper.setTintAuto(this, Color.BLACK, false)
             setOnClickListener(PlayPauseButtonOnClickHandler())
@@ -79,16 +83,16 @@ class CardBlurPlaybackControlsFragment :
 
     private fun updatePlayPauseDrawableState() {
         when {
-            MusicPlayerRemote.isPlaying -> playPauseButton.setImageResource(R.drawable.ic_pause)
-            else -> playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
+            MusicPlayerRemote.isPlaying -> binding.mediaButton.playPauseButton.setImageResource(R.drawable.ic_pause)
+            else -> binding.mediaButton.playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
         }
     }
 
     private fun updateProgressTextColor() {
         val color = Color.WHITE
-        songTotalTime.setTextColor(color)
-        songCurrentProgress.setTextColor(color)
-        songInfo.setTextColor(color)
+        binding.songTotalTime.setTextColor(color)
+        binding.songCurrentProgress.setTextColor(color)
+        binding.songInfo.setTextColor(color)
     }
 
     override fun onResume() {
@@ -115,10 +119,10 @@ class CardBlurPlaybackControlsFragment :
 
     private fun updateSong() {
         if (PreferenceUtil.isSongInfo) {
-            songInfo.text = getSongInfo(MusicPlayerRemote.currentSong)
-            songInfo.show()
+            binding.songInfo.text = getSongInfo(MusicPlayerRemote.currentSong)
+            binding.songInfo.show()
         } else {
-            songInfo.hide()
+            binding.songInfo.hide()
         }
     }
 
@@ -144,26 +148,32 @@ class CardBlurPlaybackControlsFragment :
 
     private fun setUpPrevNext() {
         updatePrevNextColor()
-        nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
-        previousButton.setOnClickListener { MusicPlayerRemote.back() }
+        binding.mediaButton.nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
+        binding.mediaButton.previousButton.setOnClickListener { MusicPlayerRemote.back() }
     }
 
     private fun updatePrevNextColor() {
-        nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-        previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        binding.mediaButton.nextButton.setColorFilter(
+            lastPlaybackControlsColor,
+            PorterDuff.Mode.SRC_IN
+        )
+        binding.mediaButton.previousButton.setColorFilter(
+            lastPlaybackControlsColor,
+            PorterDuff.Mode.SRC_IN
+        )
     }
 
     private fun setUpShuffleButton() {
-        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
+        binding.mediaButton.shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
     }
 
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
+            MusicService.SHUFFLE_MODE_SHUFFLE -> binding.mediaButton.shuffleButton.setColorFilter(
                 lastPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
-            else -> shuffleButton.setColorFilter(
+            else -> binding.mediaButton.shuffleButton.setColorFilter(
                 lastDisabledPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
@@ -171,31 +181,37 @@ class CardBlurPlaybackControlsFragment :
     }
 
     private fun setUpRepeatButton() {
-        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
+        binding.mediaButton.repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
     }
 
     override fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat)
-                repeatButton.setColorFilter(
+                binding.mediaButton.repeatButton.setImageResource(R.drawable.ic_repeat)
+                binding.mediaButton.repeatButton.setColorFilter(
                     lastDisabledPlaybackControlsColor,
                     PorterDuff.Mode.SRC_IN
                 )
             }
             MusicService.REPEAT_MODE_ALL -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat)
-                repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                binding.mediaButton.repeatButton.setImageResource(R.drawable.ic_repeat)
+                binding.mediaButton.repeatButton.setColorFilter(
+                    lastPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
             MusicService.REPEAT_MODE_THIS -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_one)
-                repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                binding.mediaButton.repeatButton.setImageResource(R.drawable.ic_repeat_one)
+                binding.mediaButton.repeatButton.setColorFilter(
+                    lastPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
         }
     }
 
     public override fun show() {
-        playPauseButton!!.animate()
+        binding.mediaButton.playPauseButton.animate()
             .scaleX(1f)
             .scaleY(1f)
             .rotation(360f)
@@ -204,18 +220,16 @@ class CardBlurPlaybackControlsFragment :
     }
 
     public override fun hide() {
-        if (playPauseButton != null) {
-            playPauseButton!!.apply {
-                scaleX = 0f
-                scaleY = 0f
-                rotation = 0f
-            }
+        binding.mediaButton.playPauseButton.apply {
+            scaleX = 0f
+            scaleY = 0f
+            rotation = 0f
         }
     }
 
     override fun setUpProgressSlider() {
-        progressSlider.applyColor(Color.WHITE)
-        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
+        binding.progressSlider.applyColor(Color.WHITE)
+        binding.progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     MusicPlayerRemote.seekTo(progress)
@@ -229,14 +243,19 @@ class CardBlurPlaybackControlsFragment :
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
+        binding.progressSlider.max = total
 
-        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
+        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
         animator.duration = SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
 
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+        binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
+        binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

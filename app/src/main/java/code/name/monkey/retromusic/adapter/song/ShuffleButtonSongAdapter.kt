@@ -23,6 +23,8 @@ import code.name.monkey.retromusic.extensions.applyOutlineColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.button.MaterialButton
 
 class ShuffleButtonSongAdapter(
@@ -32,8 +34,13 @@ class ShuffleButtonSongAdapter(
     ICabHolder: ICabHolder?
 ) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, ICabHolder) {
 
+
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {
         return ViewHolder(view)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) OFFSET_ITEM else SONG
     }
 
     override fun onBindViewHolder(holder: SongAdapter.ViewHolder, position: Int) {
@@ -54,6 +61,10 @@ class ShuffleButtonSongAdapter(
             }
         } else {
             super.onBindViewHolder(holder, position - 1)
+            val landscape = RetroUtil.isLandscape()
+            if ((PreferenceUtil.songGridSize > 2 && !landscape) || (PreferenceUtil.songGridSizeLand > 5 && landscape)) {
+                holder.menu?.visibility = View.GONE
+            }
         }
     }
 
@@ -69,4 +80,5 @@ class ShuffleButtonSongAdapter(
             super.onClick(v)
         }
     }
+
 }

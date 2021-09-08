@@ -15,17 +15,11 @@
 package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.SubMenu
-import android.view.View
+import android.view.*
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuCompat
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
@@ -35,12 +29,13 @@ import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeF
 import code.name.monkey.retromusic.helper.SortOrder.PlaylistSortOrder
 import code.name.monkey.retromusic.interfaces.IPlaylistClickListener
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.google.android.material.transition.MaterialElevationScale
-import kotlinx.android.synthetic.main.fragment_library.*
+import com.google.android.gms.cast.framework.CastButtonFactory
+import com.google.android.material.transition.MaterialSharedAxis
 
 class PlaylistsFragment :
     AbsRecyclerViewCustomGridSizeFragment<PlaylistAdapter, GridLayoutManager>(),
     IPlaylistClickListener {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.getPlaylists().observe(viewLifecycleOwner, {
@@ -51,6 +46,8 @@ class PlaylistsFragment :
         })
     }
 
+    override val titleRes: Int
+        get() = R.string.playlists
     override val emptyMessage: Int
         get() = R.string.no_playlists
 
@@ -68,11 +65,6 @@ class PlaylistsFragment :
         )
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.removeItem(R.id.action_grid_size)
@@ -81,7 +73,9 @@ class PlaylistsFragment :
         menu.add(0, R.id.action_import_playlist, 0, R.string.import_playlist)
         menu.findItem(R.id.action_settings).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
         setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
-        MenuCompat.setGroupDividerEnabled(menu, true);
+        MenuCompat.setGroupDividerEnabled(menu, true)
+        //Setting up cast button
+        CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -160,7 +154,7 @@ class PlaylistsFragment :
     }
 
     override fun loadGridSize(): Int {
-        return 1
+        return 2
     }
 
     override fun saveGridSize(gridColumns: Int) {
@@ -168,7 +162,7 @@ class PlaylistsFragment :
     }
 
     override fun loadGridSizeLand(): Int {
-        return 2
+        return 4
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
@@ -176,7 +170,7 @@ class PlaylistsFragment :
     }
 
     override fun loadLayoutRes(): Int {
-        return R.layout.item_list
+        return R.layout.item_card
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
@@ -184,17 +178,13 @@ class PlaylistsFragment :
     }
 
     override fun onPlaylistClick(playlistWithSongs: PlaylistWithSongs, view: View) {
-        exitTransition = MaterialElevationScale(false).apply {
-            duration = 300L
-        }
-        reenterTransition = MaterialElevationScale(true).apply {
-            duration = 300L
-        }
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(requireView())
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         findNavController().navigate(
             R.id.playlistDetailsFragment,
             bundleOf(EXTRA_PLAYLIST to playlistWithSongs),
             null,
-            FragmentNavigatorExtras(view to "playlist")
+            null
         )
     }
 }

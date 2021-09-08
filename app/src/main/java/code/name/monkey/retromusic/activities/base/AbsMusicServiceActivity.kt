@@ -15,12 +15,7 @@
 package code.name.monkey.retromusic.activities.base
 
 import android.Manifest
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.ServiceConnection
+import android.content.*
 import android.os.Bundle
 import android.os.IBinder
 import androidx.lifecycle.lifecycleScope
@@ -30,11 +25,11 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService.*
-import java.lang.ref.WeakReference
-import java.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import java.lang.ref.WeakReference
+import java.util.*
 
 abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventListener {
 
@@ -166,6 +161,12 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
         }
     }
 
+    override fun onFavoriteStateChanged() {
+        for (listener in mMusicServiceEventListeners) {
+            listener.onFavoriteStateChanged()
+        }
+    }
+
     override fun onHasPermissionsChanged(hasPermissions: Boolean) {
         super.onHasPermissionsChanged(hasPermissions)
         val intent = Intent(MEDIA_STORE_CHANGED)
@@ -194,7 +195,8 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             val activity = reference.get()
             if (activity != null && action != null) {
                 when (action) {
-                    FAVORITE_STATE_CHANGED, META_CHANGED -> activity.onPlayingMetaChanged()
+                    FAVORITE_STATE_CHANGED -> activity.onFavoriteStateChanged()
+                    META_CHANGED -> activity.onPlayingMetaChanged()
                     QUEUE_CHANGED -> activity.onQueueChanged()
                     PLAY_STATE_CHANGED -> activity.onPlayStateChanged()
                     REPEAT_MODE_CHANGED -> activity.onRepeatModeChanged()

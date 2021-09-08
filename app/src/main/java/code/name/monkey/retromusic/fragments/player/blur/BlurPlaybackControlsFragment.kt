@@ -28,9 +28,12 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentBlurPlayerPlaybackControlsBinding
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
+import code.name.monkey.retromusic.fragments.base.goToAlbum
+import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
@@ -39,11 +42,11 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_blur_player_playback_controls.*
 
 class BlurPlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_blur_player_playback_controls) {
-
+    private var _binding: FragmentBlurPlayerPlaybackControlsBinding? = null
+    private val binding get() = _binding!!
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
@@ -55,30 +58,37 @@ class BlurPlaybackControlsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentBlurPlayerPlaybackControlsBinding.bind(view)
         setUpMusicControllers()
 
-        playPauseButton.setOnClickListener {
+        binding.playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
                 MusicPlayerRemote.pauseSong()
             } else {
                 MusicPlayerRemote.resumePlaying()
             }
-            showBonceAnimation()
+            showBounceAnimation()
         }
-        title.isSelected = true
-        text.isSelected = true
+        binding.title.isSelected = true
+        binding.text.isSelected = true
+        binding.title.setOnClickListener {
+            goToAlbum(requireActivity())
+        }
+        binding.text.setOnClickListener {
+            goToArtist(requireActivity())
+        }
     }
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        title.text = song.title
-        text.text = String.format("%s • %s", song.artistName, song.albumName)
+        binding.title.text = song.title
+        binding.text.text = String.format("%s • %s", song.artistName, song.albumName)
 
         if (PreferenceUtil.isSongInfo) {
-            songInfo.show()
-            songInfo?.text = getSongInfo(song)
+            binding.songInfo.show()
+            binding.songInfo.text = getSongInfo(song)
         } else {
-            songInfo?.hide()
+            binding.songInfo.hide()
         }
     }
 
@@ -121,41 +131,41 @@ class BlurPlaybackControlsFragment :
         lastDisabledPlaybackControlsColor =
             ContextCompat.getColor(requireContext(), R.color.md_grey_500)
 
-        title.setTextColor(lastPlaybackControlsColor)
+        binding.title.setTextColor(lastPlaybackControlsColor)
 
-        songCurrentProgress.setTextColor(lastPlaybackControlsColor)
-        songTotalTime.setTextColor(lastPlaybackControlsColor)
+        binding.songCurrentProgress.setTextColor(lastPlaybackControlsColor)
+        binding.songTotalTime.setTextColor(lastPlaybackControlsColor)
 
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
 
-        text.setTextColor(lastDisabledPlaybackControlsColor)
-        songInfo.setTextColor(lastDisabledPlaybackControlsColor)
+        binding.text.setTextColor(lastPlaybackControlsColor)
+        binding.songInfo.setTextColor(lastDisabledPlaybackControlsColor)
 
-        TintHelper.setTintAuto(progressSlider, lastPlaybackControlsColor, false)
+        TintHelper.setTintAuto(binding.progressSlider, lastPlaybackControlsColor, false)
         volumeFragment?.setTintableColor(lastPlaybackControlsColor)
         setFabColor(lastPlaybackControlsColor)
     }
 
     private fun setFabColor(i: Int) {
         TintHelper.setTintAuto(
-            playPauseButton,
+            binding.playPauseButton,
             MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(i)),
             false
         )
-        TintHelper.setTintAuto(playPauseButton, i, true)
+        TintHelper.setTintAuto(binding.playPauseButton, i, true)
     }
 
     private fun setUpPlayPauseFab() {
-        playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
+        binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
     }
 
     private fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause)
+            binding.playPauseButton.setImageResource(R.drawable.ic_pause)
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
+            binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
         }
     }
 
@@ -169,26 +179,26 @@ class BlurPlaybackControlsFragment :
 
     private fun setUpPrevNext() {
         updatePrevNextColor()
-        nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
-        previousButton.setOnClickListener { MusicPlayerRemote.back() }
+        binding.nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
+        binding.previousButton.setOnClickListener { MusicPlayerRemote.back() }
     }
 
     private fun updatePrevNextColor() {
-        nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-        previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        binding.nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        binding.previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpShuffleButton() {
-        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
+        binding.shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
     }
 
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
+            MusicService.SHUFFLE_MODE_SHUFFLE -> binding.shuffleButton.setColorFilter(
                 lastPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
-            else -> shuffleButton.setColorFilter(
+            else -> binding.shuffleButton.setColorFilter(
                 lastDisabledPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
@@ -196,31 +206,37 @@ class BlurPlaybackControlsFragment :
     }
 
     private fun setUpRepeatButton() {
-        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
+        binding.repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
     }
 
     override fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat)
-                repeatButton.setColorFilter(
+                binding.repeatButton.setImageResource(R.drawable.ic_repeat)
+                binding.repeatButton.setColorFilter(
                     lastDisabledPlaybackControlsColor,
                     PorterDuff.Mode.SRC_IN
                 )
             }
             MusicService.REPEAT_MODE_ALL -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat)
-                repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                binding.repeatButton.setImageResource(R.drawable.ic_repeat)
+                binding.repeatButton.setColorFilter(
+                    lastPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
             MusicService.REPEAT_MODE_THIS -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_one)
-                repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                binding.repeatButton.setImageResource(R.drawable.ic_repeat_one)
+                binding.repeatButton.setColorFilter(
+                    lastPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
         }
     }
 
     public override fun show() {
-        playPauseButton!!.animate()
+        binding.playPauseButton.animate()
             .scaleX(1f)
             .scaleY(1f)
             .rotation(360f)
@@ -229,17 +245,15 @@ class BlurPlaybackControlsFragment :
     }
 
     public override fun hide() {
-        if (playPauseButton != null) {
-            playPauseButton!!.apply {
-                scaleX = 0f
-                scaleY = 0f
-                rotation = 0f
-            }
+        binding.playPauseButton.apply {
+            scaleX = 0f
+            scaleY = 0f
+            rotation = 0f
         }
     }
 
-    private fun showBonceAnimation() {
-        playPauseButton.apply {
+    private fun showBounceAnimation() {
+        binding.playPauseButton.apply {
             clearAnimation()
             scaleX = 0.9f
             scaleY = 0.9f
@@ -262,7 +276,7 @@ class BlurPlaybackControlsFragment :
     }
 
     override fun setUpProgressSlider() {
-        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
+        binding.progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     MusicPlayerRemote.seekTo(progress)
@@ -276,14 +290,19 @@ class BlurPlaybackControlsFragment :
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
+        binding.progressSlider.max = total
 
-        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
+        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
         animator.duration = SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
 
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+        binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
+        binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

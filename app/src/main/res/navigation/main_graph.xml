@@ -45,6 +45,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/albumArtistDetailsFragment"
+        android:name="code.name.monkey.retromusic.fragments.artists.AlbumArtistDetailsFragment"
+        android:label="AlbumArtistDetailsFragment"
+        tools:layout="@layout/fragment_artist_details">
+        <argument
+            android:name="extra_artist_name"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
         android:id="@+id/libraryFragment"
         android:name="code.name.monkey.retromusic.fragments.library.LibraryFragment"
         android:label=""

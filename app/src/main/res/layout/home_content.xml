@@ -22,7 +22,9 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <include layout="@layout/abs_playlists" />
+    <include
+        android:id="@+id/abs_playlists"
+        layout="@layout/abs_playlists" />
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -38,8 +38,9 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.ACTION_PENDING_QUIT
 import code.name.monkey.retromusic.service.MusicService.ACTION_QUIT
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.WhichButton
+import com.afollestad.materialdialogs.actions.getActionButton
 
 class SleepTimerDialog : DialogFragment() {
 
@@ -150,14 +151,14 @@ class SleepTimerDialog : DialogFragment() {
     private fun updateCancelButton() {
         val musicService = MusicPlayerRemote.musicService
         if (musicService != null && musicService.pendingQuit) {
-            dialog.getActionButton(DialogAction.NEUTRAL).text =
+            dialog.getActionButton(WhichButton.NEUTRAL).text =
                 dialog.context.getString(R.string.cancel_current_timer)
         } else {
-            dialog.getActionButton(DialogAction.NEUTRAL).text = null
+            dialog.getActionButton(WhichButton.NEUTRAL).text = null
         }
     }
 
-    private inner class TimerUpdater() :
+    private inner class TimerUpdater :
         CountDownTimer(
             PreferenceUtil.nextSleepTimerElapsedRealTime - SystemClock.elapsedRealtime(),
             1000

@@ -80,6 +80,10 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextViewNormalCompress" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="TextViewHeadline4.Compress" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="android:textSize">32sp</item>
     </style>
@@ -178,7 +182,8 @@
 
 
     <style name="Widget.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
-
+        <item name="gestureInsetBottomIgnored">true</item>
+        <item name="enableEdgeToEdge">true</item>
     </style>
 
     <style name="MaterialCardViewStroke">
@@ -197,5 +202,17 @@
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">5%</item>
+    </style>
+    <!--Bottom Sheet Dialog Style-->
+    <style name="BottomSheetDialogStyle" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
+    </style>
+
+    <style name="CarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/md_deep_purple_700</item>
+        <item name="colorAccent">@color/md_deep_purple_A400</item>
+        <item name="colorPrimary">@color/md_deep_purple_500</item>
     </style>
 </resources>

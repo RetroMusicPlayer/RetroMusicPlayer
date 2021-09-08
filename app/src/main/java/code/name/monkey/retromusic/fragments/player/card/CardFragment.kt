@@ -20,17 +20,17 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentCardPlayerBinding
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_card_player.*
 
 class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private var lastColor: Int = 0
@@ -38,6 +38,9 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
         get() = lastColor
 
     private lateinit var playbackControlsFragment: CardPlaybackControlsFragment
+    private var _binding: FragmentCardPlayerBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onShow() {
         playbackControlsFragment.show()
@@ -60,7 +63,7 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
         playbackControlsFragment.setColor(color)
         lastColor = color.primaryTextColor
         libraryViewModel.updateColor(color.primaryTextColor)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
+        ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
     }
 
     override fun toggleFavorite(song: Song) {
@@ -76,6 +79,7 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentCardPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
     }
@@ -90,11 +94,11 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        playerToolbar.setOnMenuItemClickListener(this)
+        binding.playerToolbar.inflateMenu(R.menu.menu_player)
+        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.playerToolbar.setOnMenuItemClickListener(this)
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
+        ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
     }
 
     override fun onServiceConnected() {
@@ -103,6 +107,11 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
 
     override fun onPlayingMetaChanged() {
         updateIsFavorite()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

@@ -20,16 +20,19 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentFitBinding
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_fit.*
 
 class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
+    private var _binding: FragmentFitBinding? = null
+    private val binding get() = _binding!!
+
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private var lastColor: Int = 0
@@ -60,7 +63,7 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
         lastColor = color.primaryTextColor
         libraryViewModel.updateColor(color.primaryTextColor)
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
+            binding.playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
@@ -79,6 +82,7 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentFitBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
     }
@@ -92,7 +96,7 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@FitFragment)
@@ -110,6 +114,11 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
 
     override fun onPlayingMetaChanged() {
         updateIsFavorite()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

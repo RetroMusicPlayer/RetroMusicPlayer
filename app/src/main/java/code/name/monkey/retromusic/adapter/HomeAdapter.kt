@@ -22,6 +22,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,14 +35,15 @@ import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.fragments.home.HomeFragment
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.interfaces.IArtistClickListener
 import code.name.monkey.retromusic.interfaces.IGenreClickListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
 
 class HomeAdapter(
@@ -82,6 +84,7 @@ class HomeAdapter(
                 val viewHolder = holder as AlbumViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to RECENT_ALBUMS)
@@ -92,6 +95,7 @@ class HomeAdapter(
                 val viewHolder = holder as AlbumViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to TOP_ALBUMS)
@@ -102,6 +106,7 @@ class HomeAdapter(
                 val viewHolder = holder as ArtistViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to RECENT_ARTISTS)
@@ -112,6 +117,7 @@ class HomeAdapter(
                 val viewHolder = holder as ArtistViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to TOP_ARTISTS)
@@ -126,6 +132,7 @@ class HomeAdapter(
                 val viewHolder = holder as PlaylistViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to FAVOURITES)
@@ -184,17 +191,29 @@ class HomeAdapter(
 
         fun bindView(home: Home) {
             val color = ThemeStore.accentColor(activity)
-            itemView.findViewById<TextView>(R.id.message).setTextColor(color)
+            itemView.findViewById<TextView>(R.id.message).apply {
+                setTextColor(color)
+                setOnClickListener {
+                    MusicPlayerRemote.playNext((home.arrayList as List<Song>).subList(0, 8))
+                    if (!MusicPlayerRemote.isPlaying) {
+                        MusicPlayerRemote.playNextSong()
+                    }
+                }
+            }
             itemView.findViewById<MaterialCardView>(R.id.card6).apply {
                 setCardBackgroundColor(ColorUtil.withAlpha(color, 0.12f))
             }
             images.forEachIndexed { index, id ->
                 itemView.findViewById<View>(id).setOnClickListener {
                     MusicPlayerRemote.playNext(home.arrayList[index] as Song)
+                    if (!MusicPlayerRemote.isPlaying) {
+                        MusicPlayerRemote.playNextSong()
+                    }
                 }
-                SongGlideRequest.Builder.from(Glide.with(activity), home.arrayList[index] as Song)
+                GlideApp.with(activity)
                     .asBitmap()
-                    .build()
+                    .songCoverOptions(home.arrayList[index] as Song)
+                    .load(RetroGlideExtension.getSongModel(home.arrayList[index] as Song))
                     .into(itemView.findViewById(id))
             }
         }
@@ -207,7 +226,7 @@ class HomeAdapter(
                 val songAdapter = SongAdapter(
                     activity,
                     home.arrayList as MutableList<Song>,
-                    R.layout.item_album_card, null
+                    R.layout.item_favourite_card, null
                 )
                 layoutManager = linearLayoutManager()
                 adapter = songAdapter
@@ -257,7 +276,7 @@ class HomeAdapter(
             bundleOf(EXTRA_ARTIST_ID to artistId),
             null,
             FragmentNavigatorExtras(
-                view to "artist"
+                view to artistId.toString()
             )
         )
     }
@@ -268,7 +287,7 @@ class HomeAdapter(
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to "album"
+                view to albumId.toString()
             )
         )
     }

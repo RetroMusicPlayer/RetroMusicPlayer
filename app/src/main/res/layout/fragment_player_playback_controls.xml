@@ -49,24 +49,17 @@
         tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
-
-    <LinearLayout
-        android:id="@+id/titleContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressSlider">
-
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressSlider"
             android:layout_gravity="center"
             android:ellipsize="marquee"
             android:focusable="true"
-            android:focusableInTouchMode="true"
             android:freezesText="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
@@ -77,7 +70,6 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold"
             tools:text="@tools:sample/lorem/random" />
-    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
@@ -85,7 +77,6 @@
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:focusable="true"
-        android:focusableInTouchMode="true"
         android:freezesText="true"
         android:gravity="center"
         android:marqueeRepeatLimit="marquee_forever"
@@ -99,7 +90,7 @@
         app:layout_constraintBottom_toTopOf="@+id/songInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.textview.MaterialTextView

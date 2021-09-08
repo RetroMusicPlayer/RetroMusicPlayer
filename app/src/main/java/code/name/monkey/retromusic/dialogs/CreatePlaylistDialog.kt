@@ -17,29 +17,23 @@ package code.name.monkey.retromusic.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.toSongEntity
+import code.name.monkey.retromusic.databinding.DialogPlaylistBinding
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.model.Song
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.dialog_playlist.view.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CreatePlaylistDialog : DialogFragment() {
+    private var _binding: DialogPlaylistBinding? = null
+    private val binding get() = _binding!!
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     companion object {
@@ -56,13 +50,15 @@ class CreatePlaylistDialog : DialogFragment() {
         }
     }
 
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_playlist, null)
+        _binding = DialogPlaylistBinding.inflate(layoutInflater)
+
         val songs: List<Song> = extra<List<Song>>(EXTRA_SONG).value ?: emptyList()
-        val playlistView: TextInputEditText = view.actionNewPlaylist
-        val playlistContainer: TextInputLayout = view.actionNewPlaylistContainer
+        val playlistView: TextInputEditText = binding.actionNewPlaylist
+        val playlistContainer: TextInputLayout = binding.actionNewPlaylistContainer
         return materialDialog(R.string.new_playlist_title)
-            .setView(view)
+            .setView(binding.root)
             .setPositiveButton(
                 R.string.create_action
             ) { _, _ ->
@@ -76,5 +72,10 @@ class CreatePlaylistDialog : DialogFragment() {
             }
             .create()
             .colorButtons()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

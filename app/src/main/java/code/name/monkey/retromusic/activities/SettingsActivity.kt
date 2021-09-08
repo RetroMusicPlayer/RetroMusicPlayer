@@ -23,16 +23,19 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
+import code.name.monkey.retromusic.databinding.ActivitySettingsBinding
 import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.extensions.findNavController
-import com.afollestad.materialdialogs.color.ColorChooserDialog
-import kotlinx.android.synthetic.main.activity_settings.*
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.color.ColorCallback
 
-class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
+class SettingsActivity : AbsBaseActivity(), ColorCallback {
+    private lateinit var binding: ActivitySettingsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
@@ -41,10 +44,11 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
 
     private fun setupToolbar() {
         setTitle(R.string.action_settings)
-        applyToolbar(toolbar)
+        applyToolbar(binding.toolbar)
         val navController: NavController = findNavController(R.id.contentFrame)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            toolbar.title = navController.currentDestination?.let { getStringFromDestination(it) }
+            binding.toolbar.title =
+                navController.currentDestination?.let { getStringFromDestination(it) }
         }
     }
 
@@ -68,24 +72,18 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
         return findNavController(R.id.contentFrame).navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun onColorSelection(dialog: ColorChooserDialog, selectedColor: Int) {
-        when (dialog.title) {
-            R.string.accent_color -> {
-                ThemeStore.editTheme(this).accentColor(selectedColor).commit()
-                if (VersionUtils.hasNougatMR())
-                    DynamicShortcutManager(this).updateDynamicShortcuts()
-            }
-        }
-        recreate()
-    }
-
-    override fun onColorChooserDismissed(dialog: ColorChooserDialog) {
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun invoke(dialog: MaterialDialog, color: Int) {
+        ThemeStore.editTheme(this).accentColor(color).commit()
+        if (VersionUtils.hasNougatMR())
+            DynamicShortcutManager(this).updateDynamicShortcuts()
+
+        recreate()
     }
 }

@@ -97,6 +97,7 @@
                 tools:text="@tools:sample/full_names" />
 
             <include
+                android:id="@+id/fragment_artist_content"
                 layout="@layout/fragment_artist_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

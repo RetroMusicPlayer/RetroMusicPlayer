@@ -37,6 +37,7 @@
             android:gravity="center"
             android:paddingTop="8dp"
             android:text="@string/history"
+            android:textAppearance="@style/TextViewNormalCompress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/v1" />
@@ -72,6 +73,7 @@
             android:gravity="center"
             android:paddingTop="8dp"
             android:text="@string/last_added"
+            android:textAppearance="@style/TextViewNormalCompress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/v2" />
@@ -144,6 +146,7 @@
             android:gravity="center"
             android:paddingTop="8dp"
             android:text="@string/shuffle"
+            android:textAppearance="@style/TextViewNormalCompress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/v4" />

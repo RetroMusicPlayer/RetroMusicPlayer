@@ -25,9 +25,7 @@ import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LibraryViewModel(
     private val repository: RealRepository
@@ -129,16 +127,16 @@ class LibraryViewModel(
         }
     }
 
-    private fun fetchHomeSections() {
+    fun fetchHomeSections() {
         viewModelScope.launch(IO) {
             home.postValue(repository.homeSections())
         }
     }
 
-    fun search(query: String?) {
+    fun search(query: String?, filters: List<Boolean>) {
         viewModelScope.launch(IO) {
-            val result = repository.search(query)
-            withContext(Main) { searchResults.postValue(result) }
+            val result = repository.search(query, filters)
+            searchResults.postValue(result)
         }
     }
 
@@ -188,6 +186,10 @@ class LibraryViewModel(
 
     override fun onShuffleModeChanged() {
         println("onShuffleModeChanged")
+    }
+
+    override fun onFavoriteStateChanged() {
+        println("onFavoriteStateChanged")
     }
 
     fun shuffleSongs() = viewModelScope.launch(IO) {

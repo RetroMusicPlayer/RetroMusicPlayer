@@ -17,8 +17,10 @@ package code.name.monkey.retromusic.misc;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import java.lang.ref.WeakReference;
 
 public abstract class DialogAsyncTask<Params, Progress, Result>

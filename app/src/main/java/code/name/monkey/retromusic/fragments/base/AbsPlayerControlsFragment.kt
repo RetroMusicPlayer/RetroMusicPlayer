@@ -44,7 +44,7 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
 
     abstract fun setColor(color: MediaNotificationProcessor)
 
-    fun showBonceAnimation(view: View) {
+    fun showBounceAnimation(view: View) {
         view.apply {
             clearAnimation()
             scaleX = 0.9f
