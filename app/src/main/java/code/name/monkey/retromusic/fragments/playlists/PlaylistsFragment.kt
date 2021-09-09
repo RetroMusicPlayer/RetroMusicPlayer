@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuCompat
 import androidx.navigation.fragment.findNavController
@@ -24,17 +25,21 @@ import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
 import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.helper.SortOrder.PlaylistSortOrder
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.interfaces.IPlaylistClickListener
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroColorUtil
+import com.afollestad.materialcab.MaterialCab
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.transition.MaterialSharedAxis
 
 class PlaylistsFragment :
     AbsRecyclerViewCustomGridSizeFragment<PlaylistAdapter, GridLayoutManager>(),
-    IPlaylistClickListener {
+    IPlaylistClickListener, ICabHolder {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +49,12 @@ class PlaylistsFragment :
             else
                 adapter?.swapDataSet(listOf())
         })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (!handleBackPress()) {
+                remove()
+                requireActivity().onBackPressed()
+            }
+        }
     }
 
     override val titleRes: Int
@@ -60,7 +71,7 @@ class PlaylistsFragment :
             requireActivity(),
             ArrayList(),
             itemLayoutRes(),
-            null,
+            this,
             this
         )
     }
@@ -170,7 +181,7 @@ class PlaylistsFragment :
     }
 
     override fun loadLayoutRes(): Int {
-        return R.layout.item_card
+        return R.layout.item_grid
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
@@ -186,5 +197,32 @@ class PlaylistsFragment :
             null,
             null
         )
+    }
+
+    private fun handleBackPress(): Boolean {
+        cab?.let {
+            if (it.isActive) {
+                it.finish()
+                return true
+            }
+        }
+        return false
+    }
+
+    private var cab: MaterialCab? = null
+
+    override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
+        cab?.let {
+            println("Cab")
+            if (it.isActive) {
+                it.finish()
+            }
+        }
+        cab = MaterialCab(mainActivity, R.id.cab_stub)
+            .setMenu(menuRes)
+            .setCloseDrawableRes(R.drawable.ic_close)
+            .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(surfaceColor()))
+            .start(callback)
+        return cab as MaterialCab
     }
 }
