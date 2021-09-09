@@ -169,7 +169,7 @@
     <string name="genre">流派</string>
     <string name="genres">流派</string>
     <string name="git_hub_summary">在 GitHub 上克隆项目</string>
-    <string name="gradient">渐变色</string>
+    <string name="gradient">渐变</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -201,7 +201,7 @@
     <string name="label_more_from">来自 %s 的更多信息</string>
     <string name="label_sampling_rate">采样率</string>
     <string name="label_track_length">长度</string>
-    <string name="labeled">已标记</string>
+    <string name="labeled">有标签</string>
     <string name="last_added">最近添加</string>
     <string name="last_song">最后一首</string>
     <string name="library_categories">媒体库分类</string>
@@ -293,11 +293,9 @@
     <string name="pref_summary_audio_fade">当歌曲暂停或播放时淡入淡出音频</string>
     <string name="pref_summary_blacklist">在媒体库中隐藏列入黑名单的文件夹内容。</string>
     <string name="pref_summary_bluetooth_playback">连接到蓝牙设备后立即开始播放</string>
-    <string name="pref_summary_blurred_album_art">在锁屏中显示模糊化的专辑封面
-（可能会影响第三方应用或小部件正常运行）</string>
-    <string name="pref_summary_carousel_effect">在「正在播放」界面中使用轮播效果
-（在使用卡片和模糊卡片主题时无效 ）</string>
-    <string name="pref_summary_classic_notification">使用经典通知设计</string>
+    <string name="pref_summary_blurred_album_art">模糊化显示锁屏上的专辑封面。可能与第三方应用或微件产生冲突。</string>
+    <string name="pref_summary_carousel_effect">在正在播放界面中使用轮播效果。在使用卡片和模糊卡片主题时无效 。</string>
+    <string name="pref_summary_classic_notification">使用经典通知样式</string>
     <string name="pref_summary_colored_app">背景色以及控件色跟随正在播放界面的专辑封面变化</string>
     <string name="pref_summary_colored_app_shortcuts">将快捷方式颜色更改为强调色，每次颜色更改后需要切换一下该设置才能生效</string>
     <string name="pref_summary_colored_notification">"将通知颜色设为专辑封面的强调色"</string>
@@ -308,8 +306,7 @@
     <string name="pref_summary_extra_song_info">显示额外的歌曲信息，例如文件格式、比特率和频率</string>
     <string name="pref_summary_gapless_playback">"在一些设备上可能会播放异常"</string>
     <string name="pref_summary_home_banner">是否显示主页横幅</string>
-    <string name="pref_summary_ignore_media_store_artwork">可以提高封面质量，但加载时间较慢
-（建议只在图片分辨率过低时开启）</string>
+    <string name="pref_summary_ignore_media_store_artwork">可以提高封面质量，但加载时间较慢。请仅在图片分辨率过低时开启。</string>
     <string name="pref_summary_library_categories">配置媒体库的可见性和顺序</string>
     <string name="pref_summary_lock_screen">使用 Retro Music 的自定义锁屏</string>
     <string name="pref_summary_open_source_licences">开源许可详情</string>
@@ -332,11 +329,11 @@
     <string name="pref_title_blacklist">黑名单</string>
     <string name="pref_title_bluetooth_playback">蓝牙播放</string>
     <string name="pref_title_blurred_album_art">模糊专辑封面</string>
-    <string name="pref_title_classic_notification">经典通知栏设计</string>
+    <string name="pref_title_classic_notification">经典通知样式</string>
     <string name="pref_title_colored_app">自适应颜色</string>
-    <string name="pref_title_colored_notification">着色通知栏</string>
+    <string name="pref_title_colored_notification">着色通知</string>
     <string name="pref_title_cross_fade">淡入淡出（测试）</string>
-    <string name="pref_title_desaturated_color">不饱和色</string>
+    <string name="pref_title_desaturated_color">低饱和颜色</string>
     <string name="pref_title_expand_now_playing_panel">显示正在播放界面</string>
     <string name="pref_title_extra_controls">额外控件</string>
     <string name="pref_title_extra_song_info">歌曲信息</string>
@@ -346,14 +343,14 @@
     <string name="pref_title_home_artist_grid_style">主页艺术家网格</string>
     <string name="pref_title_home_banner">主页横幅</string>
     <string name="pref_title_ignore_media_store_artwork">忽略媒体存储封面</string>
-    <string name="pref_title_last_added_interval">上次添加播放列表到现在的间隔</string>
+    <string name="pref_title_last_added_interval">最近播放列表时间间隔</string>
     <string name="pref_title_lock_screen">全屏控件</string>
     <string name="pref_title_now_playing_screen_appearance">正在播放主题</string>
     <string name="pref_title_open_source_licences">开源许可</string>
     <string name="pref_title_remember_tab">记住最后打开页面</string>
     <string name="pref_title_show_lyrics">显示歌词</string>
     <string name="pref_title_suggestions">显示建议</string>
-    <string name="pref_title_tab_text_mode">标签标题模式</string>
+    <string name="pref_title_tab_text_mode">标签页标题模式</string>
     <string name="pref_title_toggle_carousel_effect">轮播效果</string>
     <string name="pref_title_toggle_full_screen">全屏应用</string>
     <string name="pref_title_toggle_toggle_headset">自动播放</string>
@@ -412,7 +409,7 @@
     <string name="scanned_files">已扫描 %1$d 个，共计 %2$d 个文件。</string>
     <string name="scrobbles_label">音乐记录</string>
     <string name="select_all">全选</string>
-    <string name="selected">已选中</string>
+    <string name="selected">仅选中</string>
     <string name="set">设置</string>
     <string name="set_artist_image">设置艺术家图片</string>
     <string name="share_app">分享应用</string>
@@ -453,7 +450,7 @@
     <string name="the_audio_file">音频文件</string>
     <string name="this_month">本月</string>
     <string name="this_week">本周</string>
-    <string name="this_year">本年</string>
+    <string name="this_year">今年</string>
     <string name="tiny">细小</string>
     <string name="tiny_card_style">小卡片</string>
     <string name="title">标题</string>
@@ -467,7 +464,7 @@
     <string name="try_retro_music_premium">试试 Retro Music 高级版</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">与 Retro Music 分享您的设计</string>
-    <string name="unlabeled">未标记</string>
+    <string name="unlabeled">无标签</string>
     <string name="unplayable_file">无法播放这首歌曲。</string>
     <string name="up_next">下一首</string>
     <string name="update_image">更新图片</string>
