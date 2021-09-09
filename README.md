@@ -73,16 +73,15 @@ favorite songs. No other music player has this feature.
 We are trying our best to bring you the best user experience. The app is regularly being updated for bug fixes and new features.
 
 ### ❓ FAQ
-Please read the FAQ [here](https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/FAQ.md)
+Please read the FAQ [here](https://retromusic.app/faq.html)
 
-In any case, you find or notice any bugs please report them by
-sending us an [e-mail](mailto:retromusicapp@gmail.com). We will fix bugs as soon as
-possible.
+In any case, you find or notice any bugs please report them by creating an issue or by contacting us in the [Telegram group](https://t.me/retromusicapp).
 If you have any feature suggestions, please create an issue with detailed information.
 
 ### 🔗 Social links
 **Telegram:** https://t.me/retromusicapp  
 **Instagram:** https://instagram.com/retromusicapp  
+**Crowdin**: https://crowdin.com/project/retromusicplayer/
 **Pinterest:** https://pinterest.com/retromusicapp/  
 **Twitter:** https://twitter.com/retromusicapp/
 
