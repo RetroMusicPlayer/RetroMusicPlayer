@@ -125,7 +125,7 @@
     <string name="created_playlist_x">已创建播放列表 %1$s。</string>
     <string name="credit_title">开发团队和贡献者</string>
     <string name="currently_listening_to_x_by_x">正在收听 %2$s 的 %1$s。</string>
-    <string name="dark_theme_name">略暗</string>
+    <string name="dark_theme_name">深色</string>
     <string name="delete_playlist_title">删除播放列表</string>
     <string name="delete_playlist_x"><![CDATA[确定删除播放列表 <b>%1$s</b> 吗？]]></string>
     <string name="delete_playlists_title">删除播放列表</string>
@@ -206,7 +206,7 @@
     <string name="last_song">最后一首</string>
     <string name="library_categories">媒体库分类</string>
     <string name="licenses">许可</string>
-    <string name="light_theme_name">纯白</string>
+    <string name="light_theme_name">浅色</string>
     <string name="listeners_label">听众</string>
     <string name="listing_files">正在列出文件</string>
     <string name="loading_products">正在加载产品...</string>
