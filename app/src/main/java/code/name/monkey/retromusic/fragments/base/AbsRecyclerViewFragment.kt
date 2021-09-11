@@ -18,6 +18,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.updatePadding
@@ -48,8 +49,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainRecyclerBinding.bind(view)
-        enterTransition = MaterialFadeThrough()
-        exitTransition = MaterialFadeThrough()
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
 
@@ -59,6 +58,10 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         initAdapter()
         setUpRecyclerView()
         setupToolbar()
+    }
+
+    fun toolbar(): Toolbar {
+        return binding.toolbar
     }
 
     private fun setupToolbar() {

@@ -53,8 +53,6 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = getBinding(PreferenceUtil.isHomeBanner, view)
-        enterTransition = MaterialFadeThrough()
-        exitTransition = MaterialFadeThrough()
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         setStatusBarColorAuto(view)
