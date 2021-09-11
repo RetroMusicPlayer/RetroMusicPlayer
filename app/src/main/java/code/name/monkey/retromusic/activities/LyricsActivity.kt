@@ -94,7 +94,6 @@ class LyricsActivity : AbsMusicServiceActivity() {
         ViewCompat.setTransitionName(binding.container, "lyrics")
         setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
-        setNavigationbarColorAuto()
 
         setupWakelock()
 

@@ -14,7 +14,7 @@
 
 <resources>
 
-    <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="windowActionBarOverlay">true</item>
@@ -24,12 +24,14 @@
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
-        <item name="android:windowLightNavigationBar">true</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
+        <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <item name="bottomSheetTint">@color/darkColorSurface</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="Theme.RetroMusic.Base" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="md_background_color">@color/darkColorPrimary</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
@@ -43,13 +45,15 @@
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-        <item name="android:windowLightNavigationBar">false</item>
         <!--Manual setting colors-->
         <item name="colorSurface">@color/darkColorSurface</item>
+        <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
         <item name="android:windowBackground">@color/window_color_dark</item>
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <item name="bottomSheetTint">@color/darkColorSurface</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.RetroMusic.Base.Light" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="roundSelector">@drawable/round_selector</item>
@@ -62,6 +66,8 @@
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-        <item name="android:windowLightNavigationBar">false</item>
+        <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <item name="bottomSheetTint">@color/window_color_light</item>
     </style>
 </resources>

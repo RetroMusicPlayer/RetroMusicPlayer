@@ -33,7 +33,9 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import org.koin.android.ext.android.bind
 
 class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     SharedPreferences.OnSharedPreferenceChangeListener {
@@ -92,6 +94,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         _binding = FragmentCardBlurPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        RetroUtil.drawAboveNavBar(binding.cardContainer)
     }
 
     private fun setUpSubFragments() {

@@ -196,7 +196,6 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         _binding = bindingInflater.invoke(layoutInflater)
         setContentView(binding.root)
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
 
         saveFab = findViewById(R.id.saveTags)

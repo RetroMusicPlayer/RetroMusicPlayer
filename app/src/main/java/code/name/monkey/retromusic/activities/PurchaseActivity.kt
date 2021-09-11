@@ -47,8 +47,6 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         setContentView(binding.root)
         setStatusbarColor(Color.TRANSPARENT)
         setLightStatusbar(false)
-        setNavigationbarColor(Color.BLACK)
-        setLightNavigationBar(false)
         binding.toolbar.navigationIcon?.setTint(Color.WHITE)
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
 

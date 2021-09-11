@@ -74,12 +74,10 @@ open class BugReportActivity : AbsThemeActivity() {
     private var deviceInfo: DeviceInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         binding = ActivityBugReportBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
 
         initViews()

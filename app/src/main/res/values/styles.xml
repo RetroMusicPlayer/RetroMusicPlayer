@@ -7,6 +7,7 @@
         <item name="android:scrollbars">none</item>
         <item name="dialogCornerRadius">16dp</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="bottomSheetTint">@color/window_color_light</item>
     </style>
 
     <style name="Theme.RetroMusic.Black" parent="Theme.RetroMusic.Base.Black">
@@ -14,6 +15,7 @@
         <item name="android:scrollbars">none</item>
         <item name="dialogCornerRadius">16dp</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="bottomSheetTint">@color/window_color_dark</item>
     </style>
 
     <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive">
@@ -21,6 +23,7 @@
         <item name="android:scrollbars">none</item>
         <item name="dialogCornerRadius">16dp</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="bottomSheetTint">?colorSurface</item>
     </style>
 
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />
@@ -41,7 +44,7 @@
         <item name="android:thumbOffset">0dp</item>
     </style>
 
-    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
+    <style name="Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="popupTheme">?toolbarPopupTheme</item>
@@ -50,7 +53,6 @@
         <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="contentInsetStart">0dp</item>
         <item name="titleMarginStart">16dp</item>
-
     </style>
 
 
@@ -181,9 +183,9 @@
     </style>
 
 
-    <style name="Widget.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
-        <item name="gestureInsetBottomIgnored">true</item>
-        <item name="enableEdgeToEdge">true</item>
+    <style name="BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="android:maxWidth">@empty</item>
+        <item name="backgroundTint">?bottomSheetTint</item>
     </style>
 
     <style name="MaterialCardViewStroke">

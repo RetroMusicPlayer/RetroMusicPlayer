@@ -39,6 +39,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlin.math.abs
@@ -147,6 +148,7 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
         }
+        RetroUtil.drawAboveNavBar(playerToolbar())
     }
 
     private fun setUpSubFragments() {

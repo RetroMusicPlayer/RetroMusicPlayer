@@ -62,7 +62,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/playerQueueSheet"
-        style="@style/Widget.BottomSheet"
+        style="@style/BottomSheetStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:behavior_hideable="false"

@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 /**
@@ -51,6 +52,7 @@ class SimplePlayerFragment : AbsPlayerFragment(R.layout.fragment_simple_player) 
         _binding = FragmentSimplePlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        RetroUtil.drawAboveNavBar(playerToolbar())
     }
 
     private fun setUpSubFragments() {

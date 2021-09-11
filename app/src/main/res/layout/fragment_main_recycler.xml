@@ -39,7 +39,7 @@
             <ViewStub
                 android:id="@+id/cab_stub"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height" />
+                android:layout_height="@dimen/toolbar_height"/>
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

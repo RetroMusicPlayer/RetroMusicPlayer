@@ -61,7 +61,6 @@ class ShareInstagramStory : AbsBaseActivity() {
         binding = ActivityShareInstagramBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setStatusbarColor(Color.TRANSPARENT)
-        setNavigationbarColor(Color.BLACK)
 
         binding.toolbar.setBackgroundColor(Color.TRANSPARENT)
         setSupportActionBar(binding.toolbar)

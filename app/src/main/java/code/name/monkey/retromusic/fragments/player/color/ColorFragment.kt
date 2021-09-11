@@ -29,6 +29,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
@@ -61,7 +62,6 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
             _binding?.root?.setBackgroundColor(color.backgroundColor)
         }
         animator.start()
-        serviceActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
         Handler().post {
             ToolbarContentTintHelper.colorizeToolbar(
                 binding.playerToolbar,
@@ -116,6 +116,7 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
         val playerAlbumCoverFragment =
             childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
+        RetroUtil.drawAboveNavBar(playerToolbar())
     }
 
     private fun setUpSubFragments() {

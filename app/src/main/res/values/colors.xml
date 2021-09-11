@@ -15,6 +15,9 @@
     <color name="darkColorPrimary">#202124</color>
     <color name="darkColorSurface">#202124</color>
 
+    <color name="darkerColorSurface">#353535</color>
+    <color name="lighterColorSurface">#dddddd</color>
+
     <color name="blackColorSurface">#000000</color>
 
     <color name="transparent">#00000000</color>

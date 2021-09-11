@@ -48,9 +48,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
         setContentView(binding.root)
         hideStatusBar()
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
-        setLightNavigationBar(true)
 
         val config = SlidrConfig.Builder().listener(object : SlidrListener {
             override fun onSlideStateChanged(state: Int) {

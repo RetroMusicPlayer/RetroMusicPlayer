@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
@@ -26,7 +27,6 @@ import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.ActivityPlayingQueueBinding
 import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller
@@ -59,10 +59,8 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayingQueueBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        setLightStatusbarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
         setTaskDescriptionColorAuto()
-        setLightNavigationBar(true)
 
         setupToolbar()
         setUpRecyclerView()
@@ -191,7 +189,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
 
     private fun setupToolbar() {
         binding.toolbar.subtitle = getUpNextAndQueueTime()
-        binding.toolbar.setBackgroundColor(surfaceColor())
+        //binding.toolbar.setBackgroundColor(surfaceColor())
         setSupportActionBar(binding.toolbar)
         binding.clearQueue.backgroundTintList = ColorStateList.valueOf(accentColor())
         ColorStateList.valueOf(

@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
@@ -46,6 +47,7 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
         _binding = FragmentAdaptivePlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        RetroUtil.drawAboveNavBar(binding.root)
     }
 
     private fun setUpSubFragments() {

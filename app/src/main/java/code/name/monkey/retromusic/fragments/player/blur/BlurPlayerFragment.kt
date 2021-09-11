@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
@@ -54,6 +55,7 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         _binding = FragmentBlurBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        RetroUtil.drawAboveNavBar(binding.playerToolbar)
     }
 
     private fun setUpSubFragments() {

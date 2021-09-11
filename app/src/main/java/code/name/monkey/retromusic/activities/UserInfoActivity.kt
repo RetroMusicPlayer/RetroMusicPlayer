@@ -61,9 +61,7 @@ class UserInfoActivity : AbsBaseActivity() {
         binding = ActivityUserInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
-        setLightNavigationBar(true)
         applyToolbar(binding.toolbar)
 
         binding.nameContainer.accentColor()

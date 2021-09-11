@@ -49,6 +49,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         setImmersiveFullscreen()
         registerSystemUiVisibility()
         toggleScreenOn()
+        setDrawUnderNavigationBar()
         //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
     }
 
@@ -91,7 +92,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         RetroUtil.setAllowDrawUnderStatusBar(window)
     }
 
-    fun setDrawUnderNavigationBar() {
+    private fun setDrawUnderNavigationBar() {
         RetroUtil.setAllowDrawUnderNavigationBar(window)
     }
 

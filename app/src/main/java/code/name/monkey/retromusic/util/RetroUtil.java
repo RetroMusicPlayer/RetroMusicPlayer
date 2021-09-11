@@ -32,6 +32,7 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -40,6 +41,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import java.net.InetAddress;
@@ -66,10 +69,10 @@ public class RetroUtil {
   @NonNull
   public static Bitmap createBitmap(@NonNull Drawable drawable, float sizeMultiplier) {
     Bitmap bitmap =
-        Bitmap.createBitmap(
-            (int) (drawable.getIntrinsicWidth() * sizeMultiplier),
-            (int) (drawable.getIntrinsicHeight() * sizeMultiplier),
-            Bitmap.Config.ARGB_8888);
+            Bitmap.createBitmap(
+                    (int) (drawable.getIntrinsicWidth() * sizeMultiplier),
+                    (int) (drawable.getIntrinsicHeight() * sizeMultiplier),
+                    Bitmap.Config.ARGB_8888);
     Canvas c = new Canvas(bitmap);
     drawable.setBounds(0, 0, c.getWidth(), c.getHeight());
     drawable.draw(c);
@@ -106,9 +109,21 @@ public class RetroUtil {
   public static int getStatusBarHeight() {
     int result = 0;
     int resourceId =
-        App.Companion.getContext()
-            .getResources()
-            .getIdentifier("status_bar_height", "dimen", "android");
+            App.Companion.getContext()
+                    .getResources()
+                    .getIdentifier("status_bar_height", "dimen", "android");
+    if (resourceId > 0) {
+      result = App.Companion.getContext().getResources().getDimensionPixelSize(resourceId);
+    }
+    return result;
+  }
+
+  public static int getNavigationBarHeight() {
+    int result = 0;
+    int resourceId =
+            App.Companion.getContext()
+                    .getResources()
+                    .getIdentifier("navigation_bar_height", "dimen", "android");
     if (resourceId > 0) {
       result = App.Companion.getContext().getResources().getDimensionPixelSize(resourceId);
     }
@@ -117,23 +132,23 @@ public class RetroUtil {
 
   @Nullable
   public static Drawable getTintedVectorDrawable(
-      @NonNull Context context, @DrawableRes int id, @ColorInt int color) {
+          @NonNull Context context, @DrawableRes int id, @ColorInt int color) {
     return TintHelper.createTintedDrawable(
-        getVectorDrawable(context.getResources(), id, context.getTheme()), color);
+            getVectorDrawable(context.getResources(), id, context.getTheme()), color);
   }
 
   @Nullable
   public static Drawable getTintedVectorDrawable(
-      @NonNull Resources res,
-      @DrawableRes int resId,
-      @Nullable Resources.Theme theme,
-      @ColorInt int color) {
+          @NonNull Resources res,
+          @DrawableRes int resId,
+          @Nullable Resources.Theme theme,
+          @ColorInt int color) {
     return TintHelper.createTintedDrawable(getVectorDrawable(res, resId, theme), color);
   }
 
   @Nullable
   public static Drawable getVectorDrawable(
-      @NonNull Resources res, @DrawableRes int resId, @Nullable Resources.Theme theme) {
+          @NonNull Resources res, @DrawableRes int resId, @Nullable Resources.Theme theme) {
     if (Build.VERSION.SDK_INT >= 21) {
       return res.getDrawable(resId, theme);
     }
@@ -145,7 +160,7 @@ public class RetroUtil {
       View currentFocus = activity.getCurrentFocus();
       if (currentFocus != null) {
         InputMethodManager inputMethodManager =
-            (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (inputMethodManager != null) {
           inputMethodManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
         }
@@ -159,11 +174,11 @@ public class RetroUtil {
         return true;
       case "only_wifi":
         final ConnectivityManager connectivityManager =
-            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
         return netInfo != null
-            && netInfo.getType() == ConnectivityManager.TYPE_WIFI
-            && netInfo.isConnectedOrConnecting();
+                && netInfo.getType() == ConnectivityManager.TYPE_WIFI
+                && netInfo.isConnectedOrConnecting();
       case "never":
       default:
         return false;
@@ -172,7 +187,7 @@ public class RetroUtil {
 
   public static boolean isLandscape() {
     return App.Companion.getContext().getResources().getConfiguration().orientation
-        == Configuration.ORIENTATION_LANDSCAPE;
+            == Configuration.ORIENTATION_LANDSCAPE;
   }
 
   @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -183,7 +198,7 @@ public class RetroUtil {
 
   public static boolean isTablet() {
     return App.Companion.getContext().getResources().getConfiguration().smallestScreenWidthDp
-        >= 600;
+            >= 600;
   }
 
   public static void openUrl(@NonNull Activity context, @NonNull String str) {
@@ -196,16 +211,16 @@ public class RetroUtil {
   public static void setAllowDrawUnderNavigationBar(Window window) {
     window.setNavigationBarColor(Color.TRANSPARENT);
     window
-        .getDecorView()
-        .setSystemUiVisibility(
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-                ? View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                : View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+            .getDecorView()
+            .setSystemUiVisibility(
+                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+                            ? View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            : View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
   }
 
   public static void setAllowDrawUnderStatusBar(@NonNull Window window) {
@@ -213,6 +228,32 @@ public class RetroUtil {
             .getDecorView()
             .setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+    window.setStatusBarColor(Color.TRANSPARENT);
+  }
+
+  /**
+   * This will draw our view above the navigation bar instead of behind it by adding margins.
+   *
+   * @param view view to draw above Navigation Bar
+   */
+  public static void drawAboveNavBar(View view) {
+    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+      ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+      params.bottomMargin = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+      return WindowInsetsCompat.CONSUMED;
+    });
+  }
+
+  /**
+   * This will draw our view above the navigation bar instead of behind it by adding padding.
+   *
+   * @param view view to draw above Navigation Bar
+   */
+  public static void drawAboveNavBarWithPadding(View view) {
+    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+      v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom);
+      return WindowInsetsCompat.CONSUMED;
+    });
   }
 
   public static String getIpAddress(boolean useIPv4) {

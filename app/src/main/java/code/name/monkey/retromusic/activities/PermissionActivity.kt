@@ -41,8 +41,6 @@ class PermissionActivity : AbsMusicServiceActivity() {
         binding = ActivityPermissionBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
-        setLightNavigationBar(true)
         setTaskDescriptionColorAuto()
         setupTitle()
 
