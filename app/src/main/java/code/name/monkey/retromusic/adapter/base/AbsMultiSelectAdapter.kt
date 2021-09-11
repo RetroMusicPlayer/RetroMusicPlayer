@@ -63,7 +63,7 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
     protected val isInQuickSelectMode: Boolean
         get() = cab != null && cab!!.isActive
 
-    protected abstract fun onMultipleItemAction(menuItem: MenuItem?, selection: List<I>?)
+    protected abstract fun onMultipleItemAction(menuItem: MenuItem, selection: List<I>)
     protected fun setMultiSelectMenuRes(@MenuRes menuRes: Int) {
         this.menuRes = menuRes
     }
