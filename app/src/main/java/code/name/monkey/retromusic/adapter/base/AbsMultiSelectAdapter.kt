@@ -1,28 +1,44 @@
 package code.name.monkey.retromusic.adapter.base
 
-import android.content.Context
+import android.graphics.Color
 import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.MenuRes
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.interfaces.ICabHolder
+import code.name.monkey.retromusic.util.ColorAnimUtil
+import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.MaterialCab
 import java.util.*
 
 abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
-    context: Context, private val ICabHolder: ICabHolder?, @MenuRes menuRes: Int
+    open val activity: FragmentActivity, private val ICabHolder: ICabHolder?, @MenuRes menuRes: Int
 ) : RecyclerView.Adapter<V>(), MaterialCab.Callback {
-    private val context: Context
     private var cab: MaterialCab? = null
     private val checked: MutableList<I>
     private var menuRes: Int
     override fun onCabCreated(materialCab: MaterialCab, menu: Menu): Boolean {
+        // Animate the color change
+        ColorAnimUtil.createColorAnimator(
+            activity.surfaceColor(),
+            RetroColorUtil.shiftBackgroundColor(activity.surfaceColor())
+        ).apply {
+            addUpdateListener {
+                // Change color of status bar too
+                activity.window.statusBarColor = animatedValue as Int
+                materialCab.setBackgroundColor(animatedValue as Int)
+            }
+            start()
+        }
         return true
     }
 
     override fun onCabFinished(materialCab: MaterialCab): Boolean {
         clearChecked()
+        activity.window.statusBarColor = Color.TRANSPARENT
         return true
     }
 
@@ -31,7 +47,7 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
             checkAll()
         } else {
             onMultipleItemAction(menuItem, ArrayList(checked))
-            cab!!.finish()
+            cab?.finish()
             clearChecked()
         }
         return true
@@ -94,13 +110,13 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
             val size = checked.size
             when {
                 size <= 0 -> {
-                    cab!!.finish()
+                    cab?.finish()
                 }
                 size == 1 -> {
-                    cab!!.setTitle(getName(checked[0]))
+                    cab?.setTitle(getName(checked[0]))
                 }
                 else -> {
-                    cab!!.setTitle(context.getString(R.string.x_selected, size))
+                    cab?.setTitle(activity.getString(R.string.x_selected, size))
                 }
             }
         }
@@ -109,6 +125,5 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
     init {
         checked = ArrayList()
         this.menuRes = menuRes
-        this.context = context
     }
 }

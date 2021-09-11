@@ -39,7 +39,7 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 open class AlbumAdapter(
-    val activity: FragmentActivity,
+    override val activity: FragmentActivity,
     var dataSet: List<Album>,
     var itemLayoutRes: Int,
     iCabHolder: ICabHolder?,

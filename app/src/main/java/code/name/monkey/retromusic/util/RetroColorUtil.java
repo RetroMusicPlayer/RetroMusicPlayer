@@ -205,6 +205,17 @@ public class RetroColorUtil {
     return color;
   }
 
+  @ColorInt
+  public static int shiftBackgroundColor(@ColorInt int backgroundColor) {
+    int color = backgroundColor;
+    if (ColorUtil.INSTANCE.isColorLight(color)) {
+      color = ColorUtil.INSTANCE.shiftColor(color, 0.5F);
+    } else {
+      color = ColorUtil.INSTANCE.shiftColor(color, 1.5F);
+    }
+    return color;
+  }
+
   private static class SwatchComparator implements Comparator<Palette.Swatch> {
 
     private static SwatchComparator sInstance;

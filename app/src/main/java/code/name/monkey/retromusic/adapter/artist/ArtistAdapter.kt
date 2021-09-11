@@ -42,7 +42,7 @@ import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.util.*
 
 class ArtistAdapter(
-    val activity: FragmentActivity,
+    override val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
     val ICabHolder: ICabHolder?,

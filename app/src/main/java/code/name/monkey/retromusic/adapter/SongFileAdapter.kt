@@ -40,7 +40,7 @@ import kotlin.math.log10
 import kotlin.math.pow
 
 class SongFileAdapter(
-    private val activity: AppCompatActivity,
+    override val activity: AppCompatActivity,
     private var dataSet: List<File>,
     private val itemLayoutRes: Int,
     private val iCallbacks: ICallbacks?,

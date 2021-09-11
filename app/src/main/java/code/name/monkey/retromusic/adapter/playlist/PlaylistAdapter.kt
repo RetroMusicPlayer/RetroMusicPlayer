@@ -41,7 +41,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 
 class PlaylistAdapter(
-    private val activity: FragmentActivity,
+    override val activity: FragmentActivity,
     private var dataSet: List<PlaylistWithSongs>,
     private var itemLayoutRes: Int,
     ICabHolder: ICabHolder?,

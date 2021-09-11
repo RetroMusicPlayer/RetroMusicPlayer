@@ -50,7 +50,7 @@ import me.zhanghai.android.fastscroll.PopupTextProvider
  */
 
 open class SongAdapter(
-    protected val activity: FragmentActivity,
+    override val activity: FragmentActivity,
     var dataSet: MutableList<Song>,
     protected var itemLayoutRes: Int,
     ICabHolder: ICabHolder?,
