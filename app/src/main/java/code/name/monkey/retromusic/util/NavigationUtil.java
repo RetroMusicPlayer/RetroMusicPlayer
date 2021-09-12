@@ -34,7 +34,7 @@ import code.name.monkey.retromusic.activities.LyricsActivity;
 import code.name.monkey.retromusic.activities.PlayingQueueActivity;
 import code.name.monkey.retromusic.activities.PurchaseActivity;
 import code.name.monkey.retromusic.activities.SupportDevelopmentActivity;
-import code.name.monkey.retromusic.activities.UserInfoActivity;
+import code.name.monkey.retromusic.fragments.UserInfoFragment;
 import code.name.monkey.retromusic.activities.WhatsNewActivity;
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -70,8 +70,8 @@ public class NavigationUtil {
 
   public static void goToUserInfo(
       @NonNull Activity activity, @NonNull ActivityOptions activityOptions) {
-    ActivityCompat.startActivity(
-        activity, new Intent(activity, UserInfoActivity.class), activityOptions.toBundle());
+      ActivityCompat.startActivity(
+              activity, new Intent(activity, UserInfoFragment.class), activityOptions.toBundle());
   }
 
   public static void gotoDriveMode(@NotNull final Activity activity) {

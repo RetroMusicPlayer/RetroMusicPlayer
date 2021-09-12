@@ -12,25 +12,33 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.activities
+package code.name.monkey.retromusic.fragments
 
 import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.doOnPreDraw
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
-import code.name.monkey.retromusic.activities.base.AbsBaseActivity
-import code.name.monkey.retromusic.databinding.ActivityUserInfoBinding
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentUserInfoBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.resolveColor
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.util.ImageUtil
@@ -43,6 +51,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.constant.ImageProvider
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,16 +61,28 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-class UserInfoActivity : AbsBaseActivity() {
+class UserInfoFragment : Fragment() {
 
-    private lateinit var binding: ActivityUserInfoBinding
+    private var _binding: FragmentUserInfoBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityUserInfoBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setStatusbarColorAuto()
-        setTaskDescriptionColorAuto()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.fragment_container
+            duration = 300L
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+        }
+        _binding = FragmentUserInfoBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         applyToolbar(binding.toolbar)
 
         binding.nameContainer.accentColor()
@@ -78,20 +99,30 @@ class UserInfoActivity : AbsBaseActivity() {
         binding.next.setOnClickListener {
             val nameString = binding.name.text.toString().trim { it <= ' ' }
             if (TextUtils.isEmpty(nameString)) {
-                Toast.makeText(this, "Umm you're name can't be empty!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Umm you're name can't be empty!",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
             PreferenceUtil.userName = nameString
-            setResult(Activity.RESULT_OK)
-            finish()
+            findNavController().navigateUp()
         }
 
         val textColor =
-            MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(accentColor()))
+            MaterialValueHelper.getPrimaryTextColor(
+                requireContext(),
+                ColorUtil.isColorLight(accentColor())
+            )
         binding.next.backgroundTintList = ColorStateList.valueOf(accentColor())
         binding.next.iconTint = ColorStateList.valueOf(textColor)
         binding.next.setTextColor(textColor)
         loadProfile()
+        postponeEnterTransition()
+        view.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
     }
 
     private fun loadProfile() {
@@ -110,7 +141,7 @@ class UserInfoActivity : AbsBaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            onBackPressed()
+            findNavController().navigateUp()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -131,7 +162,7 @@ class UserInfoActivity : AbsBaseActivity() {
             .start(PICK_IMAGE_REQUEST)
     }
 
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
             val fileUri = data?.data
@@ -140,9 +171,9 @@ class UserInfoActivity : AbsBaseActivity() {
             val fileUri = data?.data
             fileUri?.let { setAndSaveBannerImage(it) }
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Task Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -177,7 +208,7 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun saveImage(bitmap: Bitmap, fileName: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val appDir = applicationContext.filesDir
+            val appDir = requireContext().filesDir
             val file = File(appDir, fileName)
             var successful = false
             try {
@@ -190,7 +221,7 @@ class UserInfoActivity : AbsBaseActivity() {
             }
             if (successful) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@UserInfoActivity, "Updated", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Updated", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -223,6 +254,11 @@ class UserInfoActivity : AbsBaseActivity() {
                 }
             })
             .into(binding.userImage)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

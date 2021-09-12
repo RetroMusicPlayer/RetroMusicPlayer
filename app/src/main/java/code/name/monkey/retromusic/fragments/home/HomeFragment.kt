@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.fragments.home
 
-import android.app.ActivityOptions
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -24,6 +23,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.core.view.doOnPreDraw
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
@@ -38,10 +38,9 @@ import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.gms.cast.framework.CastButtonFactory
-import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialSharedAxis
 
 class HomeFragment :
@@ -55,14 +54,35 @@ class HomeFragment :
         _binding = getBinding(PreferenceUtil.isHomeBanner, view)
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
-        setStatusBarColorAuto(view)
+        setupListeners()
+        binding.titleWelcome.text = String.format("%s", PreferenceUtil.userName)
+
+        val homeAdapter = HomeAdapter(mainActivity)
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(mainActivity)
+            adapter = homeAdapter
+        }
+        libraryViewModel.getHome().observe(viewLifecycleOwner, {
+            homeAdapter.swapData(it)
+        })
+
+        loadProfile()
+        setupTitle()
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
+    }
+
+    private fun setupListeners() {
         binding.bannerImage?.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(
-                mainActivity,
-                binding.userImage,
-                getString(R.string.transition_user_image)
+            binding.userImage.transitionName = "userImage"
+            findNavController().navigate(
+                R.id.user_info_fragment, null, null, FragmentNavigatorExtras(
+                    binding.userImage to "userImage"
+                )
             )
-            NavigationUtil.goToUserInfo(requireActivity(), options)
+            reenterTransition = null
         }
 
         binding.lastAdded.setOnClickListener {
@@ -94,28 +114,12 @@ class HomeFragment :
         }
 
         binding.userImage.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(
-                mainActivity,
-                binding.userImage,
-                getString(R.string.transition_user_image)
+            findNavController().navigate(
+                R.id.user_info_fragment, null, null, FragmentNavigatorExtras(
+                    binding.userImage to "user_image"
+                )
             )
-            NavigationUtil.goToUserInfo(requireActivity(), options)
         }
-        binding.titleWelcome.text = String.format("%s", PreferenceUtil.userName)
-
-        val homeAdapter = HomeAdapter(mainActivity)
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(mainActivity)
-            adapter = homeAdapter
-        }
-        libraryViewModel.getHome().observe(viewLifecycleOwner, {
-            homeAdapter.swapData(it)
-        })
-
-        loadProfile()
-        setupTitle()
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     private fun getBinding(homeBanner: Boolean, view: View): HomeBindingAdapter {
