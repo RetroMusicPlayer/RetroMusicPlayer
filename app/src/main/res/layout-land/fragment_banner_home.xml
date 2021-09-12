@@ -16,13 +16,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:transitionGroup="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:liftOnScroll="true">
+        app:liftOnScroll="true"
+        android:fitsSystemWindows="true">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -33,7 +35,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorSurface"
                 app:navigationIcon="@drawable/ic_search"
                 app:popupTheme="?attr/toolbarPopupTheme"
                 app:title="@null"
@@ -113,7 +114,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:retroCornerSize="21dp"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:transitionName="user_image"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text"

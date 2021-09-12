@@ -33,7 +33,7 @@ import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
-import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialSharedAxis
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
@@ -58,6 +58,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         initAdapter()
         setUpRecyclerView()
         setupToolbar()
+        binding.appBarLayout.statusBarForeground = MaterialShapeDrawable.createWithElevationOverlay(requireContext());
     }
 
     fun toolbar(): Toolbar {

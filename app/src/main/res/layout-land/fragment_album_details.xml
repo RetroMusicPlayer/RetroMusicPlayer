@@ -7,7 +7,8 @@
     android:background="?attr/colorSurface"
     android:orientation="vertical"
     android:transitionName="@string/transition_album_art"
-    tools:ignore="UnusedAttribute">
+    tools:ignore="UnusedAttribute"
+    android:fitsSystemWindows="true">
 
     <FrameLayout
         android:id="@+id/toolbarContainer"

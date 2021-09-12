@@ -3,4 +3,5 @@
 
     <color name="window_color">@android:color/black</color>
 
+    <color name="bottomSheetColor">#202020</color>
 </resources>

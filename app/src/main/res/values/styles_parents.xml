@@ -16,6 +16,7 @@
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="popupWindowStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <item name="bottomSheetTint">@color/bottomSheetColor</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.Material3.DayNight.NoActionBar">
@@ -36,7 +37,7 @@
         <item name="android:windowBackground">@color/window_color_dark</item>
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/darkColorSurface</item>
+        <item name="bottomSheetTint">@color/bottomSheetColorDark</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="Theme.Material3.DayNight.NoActionBar">
@@ -55,7 +56,7 @@
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/blackColorSurface</item>
+        <item name="bottomSheetTint">@color/bottomSheetColorBlack</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.Material3.Light.NoActionBar">
@@ -73,7 +74,7 @@
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/window_color_light</item>
+        <item name="bottomSheetTint">@color/bottomSheetColorLight</item>
     </style>
 
 

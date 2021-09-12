@@ -33,6 +33,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.LanguageContextWrapper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.theme.ThemeManager

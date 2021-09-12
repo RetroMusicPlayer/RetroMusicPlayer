@@ -30,5 +30,10 @@
     <color name="progress_gray">#FFD8D8D8</color>
     <color name="default_blue_light">#ff33b5e5</color>
 
+    <color name="bottomSheetColorLight">#FFFFFF</color>
+    <color name="bottomSheetColorDark">#202020</color>
+    <color name="bottomSheetColorBlack">#111111</color>
+
+    <color name="bottomSheetColor">#FFFFFF</color>
 
 </resources>

@@ -30,6 +30,6 @@
         <item name="android:windowLightNavigationBar">false</item>
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="materialCardViewStyle">@style/Widget.MaterialComponents.CardView</item>
-        <item name="bottomSheetTint">@color/darkColorSurface</item>
+        <item name="bottomSheetTint">@color/bottomSheetColor</item>
     </style>
 </resources>

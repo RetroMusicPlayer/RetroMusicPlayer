@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.google.android.material.appbar.MaterialToolbar
 
 fun Fragment.getIntRes(@IntegerRes int: Int): Int {
     return resources.getInteger(int)
@@ -96,4 +97,8 @@ fun Context.getDrawableCompat(@DrawableRes drawableRes: Int): Drawable {
 
 fun Fragment.getDrawableCompat(@DrawableRes drawableRes: Int): Drawable {
     return AppCompatResources.getDrawable(requireContext(), drawableRes)!!
+}
+
+fun Fragment.applyToolbar(toolbar: MaterialToolbar) {
+    (requireActivity() as AppCompatActivity).applyToolbar(toolbar)
 }

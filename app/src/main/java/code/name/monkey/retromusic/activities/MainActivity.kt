@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
 import code.name.monkey.retromusic.fragments.home.HomeFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -55,7 +56,6 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
         hideStatusBar()
         updateTabs()

@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.activities.base
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -26,10 +27,10 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
-import code.name.monkey.retromusic.databinding.ActivityMainContentBinding
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.LibraryViewModel
@@ -109,6 +110,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     println("Do something")
                 }
             }
+            println(bottomSheetBehavior.peekHeight)
         }
     }
 
@@ -158,12 +160,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     protected fun wrapSlidingMusicPanel(): SlidingMusicPanelLayoutBinding {
-        val slidingMusicPanelLayoutBinding =
-            SlidingMusicPanelLayoutBinding.inflate(layoutInflater)
-        val contentContainer: ViewGroup =
-            slidingMusicPanelLayoutBinding.mainContentFrame
-        ActivityMainContentBinding.inflate(layoutInflater, contentContainer, true)
-        return slidingMusicPanelLayoutBinding
+        return SlidingMusicPanelLayoutBinding.inflate(layoutInflater)
     }
 
     fun collapsePanel() {
@@ -187,11 +184,16 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     open fun onPanelCollapsed() {
         // restore values
-        super.setLightStatusbar(lightStatusBar)
+        super.setLightStatusbarAuto(surfaceColor())
         super.setTaskDescriptionColor(taskColor)
     }
 
     open fun onPanelExpanded() {
+        if (nowPlayingScreen == Blur ) {
+            super.setLightStatusbar(false)
+        } else {
+            super.setLightStatusbarAuto(surfaceColor())
+        }
     }
 
     private fun setupSlidingUpPanel() {
@@ -286,7 +288,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     private fun hideBottomBar(hide: Boolean) {
-        val heightOfBar = RetroUtil.getNavigationBarHeight() +
+        val heightOfBar =
                 if (MusicPlayerRemote.isCasting) dip(R.dimen.cast_mini_player_height) else dip(R.dimen.mini_player_height)
         val heightOfBarWithTabs = RetroUtil.getNavigationBarHeight() +
                 if (MusicPlayerRemote.isCasting) dip(R.dimen.mini_cast_player_height_expanded) else dip(
