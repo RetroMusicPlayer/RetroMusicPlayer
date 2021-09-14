@@ -43,7 +43,7 @@
     <string name="action_settings">"Paramètres"</string>
     <string name="action_share">Partager</string>
     <string name="action_shuffle_all">Tout en aléatoire</string>
-    <string name="action_shuffle_playlist">Playlist en lecture aléatoire</string>
+    <string name="action_shuffle_playlist">Lecture aléatoire des titres de la liste de lecture</string>
     <string name="action_sleep_timer">Minuteur de sommeil</string>
     <string name="action_sort_order">Ordre de tri</string>
     <string name="action_tag_editor">Éditeur de tag</string>
