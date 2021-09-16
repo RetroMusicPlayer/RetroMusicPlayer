@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.activities.base
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -27,7 +26,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
@@ -174,6 +172,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     private fun setMiniPlayerAlphaProgress(progress: Float) {
+        if (progress < 0) return
         val alpha = 1 - progress
         miniPlayerFragment?.view?.alpha = alpha
         miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
@@ -288,7 +287,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     private fun hideBottomBar(hide: Boolean) {
-        val heightOfBar =
+        val heightOfBar = RetroUtil.getNavigationBarHeight() +
                 if (MusicPlayerRemote.isCasting) dip(R.dimen.cast_mini_player_height) else dip(R.dimen.mini_player_height)
         val heightOfBarWithTabs = RetroUtil.getNavigationBarHeight() +
                 if (MusicPlayerRemote.isCasting) dip(R.dimen.mini_cast_player_height_expanded) else dip(
