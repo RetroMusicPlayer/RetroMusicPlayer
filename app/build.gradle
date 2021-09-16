@@ -104,7 +104,7 @@ dependencies {
     //WebServer by NanoHttpd
     implementation "org.nanohttpd:nanohttpd:2.3.1"
 
-    def nav_version = "2.4.0-alpha07"
+    def nav_version = '2.4.0-alpha09'
     implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
@@ -137,7 +137,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    def kotlin_coroutines_version = "1.5.1"
+    def kotlin_coroutines_version = '1.5.2-native-mt'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
