@@ -19,7 +19,6 @@ import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
@@ -37,7 +36,6 @@ class SettingsActivity : AbsBaseActivity(), ColorCallback {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setLightStatusbarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
         setupToolbar()
     }
 
