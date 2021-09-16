@@ -51,6 +51,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         registerSystemUiVisibility()
         toggleScreenOn()
         setDrawUnderNavigationBar()
+        setLightNavigationAuto()
         //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
     }
 
@@ -148,6 +149,10 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
     fun setNavigationbarColorAuto() {
         setNavigationbarColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+    }
+
+    fun setLightNavigationAuto() {
+        ATH.setLightNavigationbarAuto(this, surfaceColor())
     }
 
     open fun setLightStatusbar(enabled: Boolean) {

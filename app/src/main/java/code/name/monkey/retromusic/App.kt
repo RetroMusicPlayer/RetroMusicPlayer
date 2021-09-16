@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
+import com.google.android.material.color.DynamicColors
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -45,11 +46,14 @@ class App : Application() {
                 .commit()
         }
 
+        DynamicColors.applyToActivitiesIfAvailable(this)
+
         if (VersionUtils.hasNougatMR())
             DynamicShortcutManager(this).initDynamicShortcuts()
 
         // automatically restores purchases
-        billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY,
+        billingProcessor = BillingProcessor(
+            this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY,
             object : BillingProcessor.IBillingHandler {
                 override fun onProductPurchased(productId: String, details: TransactionDetails?) {}
 
