@@ -100,13 +100,13 @@
         android:id="@+id/titleContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="false"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/playerMediaControllerContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text"
-        android:clickable="false">
+        app:layout_constraintTop_toBottomOf="@+id/text">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
@@ -115,9 +115,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="@color/md_red_500"
+            android:clickable="true"
             android:ellipsize="marquee"
             android:focusable="true"
-            android:clickable="true"
             android:fontFeatureSettings="smcp"
             android:freezesText="true"
             android:gravity="center"

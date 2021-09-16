@@ -53,20 +53,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingStart="16dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="16dp"
-                    android:clickable="false"
                     android:paddingBottom="16dp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
                         android:ellipsize="marquee"
                         android:focusable="true"
-                        android:clickable="true"
                         android:freezesText="true"
                         android:marqueeRepeatLimit="marquee_forever"
                         android:scrollHorizontally="true"
@@ -80,11 +80,11 @@
                         android:id="@+id/text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
                         android:ellipsize="end"
+                        android:focusable="true"
                         android:maxLines="1"
                         android:paddingTop="8dp"
-                        android:clickable="true"
-                        android:focusable="true"
                         tools:text="Text" />
                 </LinearLayout>
 

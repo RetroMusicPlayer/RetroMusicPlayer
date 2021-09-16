@@ -23,9 +23,9 @@
             android:id="@+id/tgFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:text="@string/view_on_telegram"
             app:icon="@drawable/ic_telegram_white" />

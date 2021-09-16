@@ -47,7 +47,7 @@
         </FrameLayout>
 
 
-         <androidx.fragment.app.FragmentContainerView
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerAlbumCoverFragment"
             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
             android:layout_width="72dp"
@@ -57,24 +57,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbarContainer" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/playerAlbumCoverFragment"
-                app:layout_constraintTop_toBottomOf="@+id/toolbarContainer"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:ellipsize="marquee"
-                android:focusable="true"
-                android:freezesText="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textAppearance="@style/TextViewSubtitle1"
-                tools:text="@tools:sample/lorem/random" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:freezesText="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textAppearance="@style/TextViewSubtitle1"
+            app:layout_constraintBottom_toTopOf="@+id/text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/playerAlbumCoverFragment"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarContainer"
+            tools:text="@tools:sample/lorem/random" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
@@ -107,7 +107,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text"
             tools:text="@tools:sample/lorem/random" />
 
-         <androidx.fragment.app.FragmentContainerView
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playbackControlsFragment"
             android:name="code.name.monkey.retromusic.fragments.player.peak.PeakPlayerControlFragment"
             android:layout_width="match_parent"

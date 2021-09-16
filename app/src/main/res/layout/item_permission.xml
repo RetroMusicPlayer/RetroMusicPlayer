@@ -15,16 +15,16 @@
         android:id="@+id/number"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="4dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/color_circle_gradient"
         android:gravity="center"
         android:maxLines="3"
-        tools:text="1"
         android:textAppearance="@style/TextViewButton"
         app:layout_constraintBottom_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/title" />
+        app:layout_constraintTop_toTopOf="@id/title"
+        tools:text="1" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
@@ -56,10 +56,10 @@
         android:id="@+id/button"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
-        app:cornerRadius="8dp"
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
         android:textAppearance="@style/TextViewButton"
+        app:cornerRadius="8dp"
         app:icon="@drawable/ic_history"
         app:iconGravity="start"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:transitionName="@string/transition_album_art"
-    tools:ignore="UnusedAttribute"
-    android:fitsSystemWindows="true">
+    tools:ignore="UnusedAttribute">
 
     <FrameLayout
         android:id="@+id/toolbarContainer"

@@ -25,9 +25,9 @@
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:maxHeight="2dp"
         android:progressDrawable="@drawable/color_progress_seek"
-        android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent" />

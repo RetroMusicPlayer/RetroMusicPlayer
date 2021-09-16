@@ -23,8 +23,8 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:liftOnScroll="true"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -111,11 +111,11 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginBottom="8dp"
                         android:scaleType="centerCrop"
+                        android:transitionName="user_image"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:retroCornerSize="21dp"
-                        tools:srcCompat="@tools:sample/avatars"
-                        android:transitionName="user_image"/>
+                        tools:srcCompat="@tools:sample/avatars" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text"

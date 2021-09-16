@@ -48,7 +48,7 @@
             android:id="@+id/cast_stub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/cast_controller_layout"/>
+            android:layout="@layout/cast_controller_layout" />
 
     </FrameLayout>
 

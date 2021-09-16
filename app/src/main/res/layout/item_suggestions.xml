@@ -144,8 +144,8 @@
             android:padding="8dp"
             android:text="New music mix"
             android:textAppearance="@style/TextViewNormal"
-            android:textStyle="bold"
             android:textSize="32sp"
+            android:textStyle="bold"
             app:autoSizeMaxTextSize="32sp"
             app:autoSizeMinTextSize="24sp"
             app:autoSizeStepGranularity="1sp" />

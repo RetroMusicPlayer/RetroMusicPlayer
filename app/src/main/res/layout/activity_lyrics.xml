@@ -62,12 +62,12 @@
             android:id="@+id/tabLyrics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="@dimen/toolbar_elevation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabIndicator="@drawable/tab_lyrics_indicator"
             app:tabIndicatorAnimationMode="elastic"
-            android:elevation="@dimen/toolbar_elevation"
             app:tabIndicatorFullWidth="false"
             app:tabIndicatorHeight="5dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>

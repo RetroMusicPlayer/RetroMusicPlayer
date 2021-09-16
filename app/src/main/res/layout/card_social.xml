@@ -38,8 +38,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sb3"
             app:listItemIcon="@drawable/ic_baseline"
-            app:listItemTitle="@string/website"
-            app:listItemSummary="@string/website_summary"/>
+            app:listItemSummary="@string/website_summary"
+            app:listItemTitle="@string/website" />
 
         <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/pinterestLink"
