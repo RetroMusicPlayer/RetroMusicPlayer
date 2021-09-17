@@ -174,7 +174,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     private fun setMiniPlayerAlphaProgress(progress: Float) {
         if (progress < 0) return
         val alpha = 1 - progress
-        miniPlayerFragment?.view?.alpha = alpha
+        miniPlayerFragment?.view?.alpha = 1 - (progress / 0.2F)
         miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
         binding.bottomNavigationView.translationY = progress * 500
         binding.bottomNavigationView.alpha = alpha

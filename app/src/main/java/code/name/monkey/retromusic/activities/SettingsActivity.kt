@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.ActivitySettingsBinding
 import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.extensions.findNavController
+import code.name.monkey.retromusic.extensions.surfaceColor
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorCallback
 
@@ -34,6 +35,7 @@ class SettingsActivity : AbsBaseActivity(), ColorCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
+        setLightStatusbarAuto(surfaceColor())
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
