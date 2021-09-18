@@ -14,6 +14,7 @@
 
 package io.github.muntashirakon.music.util;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -30,6 +31,7 @@ import androidx.annotation.Nullable;
 import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.Fragment;
 import io.github.muntashirakon.music.R;
+import io.github.muntashirakon.music.activities.saf.SAFRequestActivity;
 import io.github.muntashirakon.music.model.Song;
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,7 +52,7 @@ public class SAFUtil {
   public static final int REQUEST_SAF_PICK_TREE = 43;
 
   public static boolean isSAFRequired(File file) {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && !file.canWrite();
+    return !file.canWrite();
   }
 
   public static boolean isSAFRequired(String path) {
@@ -114,21 +116,21 @@ public class SAFUtil {
   @TargetApi(Build.VERSION_CODES.KITKAT)
   public static void saveTreeUri(Context context, Intent data) {
     Uri uri = data.getData();
-    context
-        .getContentResolver()
-        .takePersistableUriPermission(
-            uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-    PreferenceUtil.INSTANCE.setSafSdCardUri(uri.toString());
+    if (uri != null) {
+      context.getContentResolver().takePersistableUriPermission(
+              uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+      PreferenceUtil.INSTANCE.setSafSdCardUri(uri.toString());
+    }
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public static boolean isTreeUriSaved(Context context) {
+  public static boolean isTreeUriSaved() {
     return !TextUtils.isEmpty(PreferenceUtil.INSTANCE.getSafSdCardUri());
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public static boolean isSDCardAccessGranted(Context context) {
-    if (!isTreeUriSaved(context)) return false;
+    if (!isTreeUriSaved()) return false;
 
     String sdcardUri = PreferenceUtil.INSTANCE.getSafSdCardUri();
 
@@ -152,6 +154,10 @@ public class SAFUtil {
    */
   @Nullable
   public static Uri findDocument(DocumentFile dir, List<String> segments) {
+    if (dir == null) {
+      return null;
+    }
+
     for (DocumentFile file : dir.listFiles()) {
       int index = segments.indexOf(file.getName());
       if (index == -1) {
@@ -196,7 +202,7 @@ public class SAFUtil {
       return;
     }
 
-    if (isTreeUriSaved(context)) {
+    if (isTreeUriSaved()) {
       List<String> pathSegments =
           new ArrayList<>(Arrays.asList(audio.getFile().getAbsolutePath().split("/")));
       Uri sdcard = Uri.parse(PreferenceUtil.INSTANCE.getSafSdCardUri());
@@ -235,6 +241,7 @@ public class SAFUtil {
       fos.write(audioContent);
       fos.close();
 
+      //noinspection ResultOfMethodCallIgnored
       temp.delete();
     } catch (final Exception e) {
       Log.e(TAG, "writeSAF: Failed to write to file descriptor provided by SAF", e);
@@ -245,58 +252,57 @@ public class SAFUtil {
     }
   }
 
-  public static void delete(Context context, String path, Uri safUri) {
+  public static boolean delete(Context context, String path, Uri safUri) {
     if (isSAFRequired(path)) {
-      deleteSAF(context, path, safUri);
+      return deleteUsingSAF(context, path, safUri);
     } else {
       try {
-        deleteFile(path);
+        return new File(path).delete();
       } catch (NullPointerException e) {
         Log.e("MusicUtils", "Failed to find file " + path);
       } catch (Exception e) {
         e.printStackTrace();
       }
     }
+    return false;
   }
 
-  public static void deleteFile(String path) {
-    new File(path).delete();
-  }
-
+  @SuppressLint("StringFormatInvalid")
   @TargetApi(Build.VERSION_CODES.KITKAT)
-  public static void deleteSAF(Context context, String path, Uri safUri) {
-    Uri uri = null;
-
+  private static boolean deleteUsingSAF(Context context, String path, Uri safUri) {
     if (context == null) {
       Log.e(TAG, "deleteSAF: context == null");
-      return;
+      return false;
     }
 
-    if (isTreeUriSaved(context)) {
+    if (safUri == null && isTreeUriSaved()) {
       List<String> pathSegments = new ArrayList<>(Arrays.asList(path.split("/")));
       Uri sdcard = Uri.parse(PreferenceUtil.INSTANCE.getSafSdCardUri());
-      uri = findDocument(DocumentFile.fromTreeUri(context, sdcard), pathSegments);
+      safUri = findDocument(DocumentFile.fromTreeUri(context, sdcard), pathSegments);
     }
 
-    if (uri == null) {
-      uri = safUri;
-    }
-
-    if (uri == null) {
-      Log.e(TAG, "deleteSAF: Can't get SAF URI");
+    if (safUri == null) {
+      requestSAF(context);
       toast(context, context.getString(R.string.saf_error_uri));
-      return;
+      return false;
     }
 
     try {
-      DocumentsContract.deleteDocument(context.getContentResolver(), uri);
+      DocumentsContract.deleteDocument(context.getContentResolver(), safUri);
     } catch (final Exception e) {
       Log.e(TAG, "deleteSAF: Failed to delete a file descriptor provided by SAF", e);
 
       toast(
           context,
           String.format(context.getString(R.string.saf_delete_failed), e.getLocalizedMessage()));
+      return false;
     }
+    return true;
+  }
+
+  private static void requestSAF(Context context) {
+    Intent intent = new Intent(context, SAFRequestActivity.class);
+    context.startActivity(intent);
   }
 
   private static void toast(final Context context, final String message) {
