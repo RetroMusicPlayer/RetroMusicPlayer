@@ -51,5 +51,7 @@ interface Playback {
         fun onTrackWentToNext()
 
         fun onTrackEnded()
+
+        fun onTrackEndedWithCrossfade()
     }
 }

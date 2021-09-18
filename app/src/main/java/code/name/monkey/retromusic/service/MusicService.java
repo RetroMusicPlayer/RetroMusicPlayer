@@ -21,6 +21,7 @@ import static code.name.monkey.retromusic.ConstantsKt.CLASSIC_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.CROSS_FADE_DURATION;
 import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
+import static code.name.monkey.retromusic.service.AudioFader.startFadeAnimator;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -97,12 +98,14 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PackageValidator;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import code.name.monkey.retromusic.volume.AudioVolumeObserver;
+import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener;
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal
  */
 public class MusicService extends MediaBrowserServiceCompat
-        implements SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
+        implements SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks, OnAudioVolumeChangedListener {
 
     public static final String TAG = MusicService.class.getSimpleName();
     public static final String RETRO_MUSIC_PACKAGE_NAME = "code.name.monkey.retromusic";
@@ -238,6 +241,7 @@ public class MusicService extends MediaBrowserServiceCompat
     private List<Song> originalPlayingQueue = new ArrayList<>();
     private List<Song> playingQueue = new ArrayList<>();
     private boolean pausedByTransientLossOfFocus;
+    private AudioVolumeObserver audioVolumeObserver = null;
 
     private final BroadcastReceiver becomingNoisyReceiver =
             new BroadcastReceiver() {
@@ -348,7 +352,6 @@ public class MusicService extends MediaBrowserServiceCompat
     private ThrottledSeekHandler throttledSeekHandler;
     private Handler uiThreadHandler;
     private PowerManager.WakeLock wakeLock;
-    private AudioFader fader;
 
     private static Bitmap copy(Bitmap bitmap) {
         Bitmap.Config config = bitmap.getConfig();
@@ -446,6 +449,9 @@ public class MusicService extends MediaBrowserServiceCompat
                 .registerContentObserver(
                         MediaStore.Audio.Playlists.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
 
+        audioVolumeObserver = new AudioVolumeObserver(this);
+        audioVolumeObserver.register(AudioManager.STREAM_MUSIC, this);
+
         PreferenceUtil.INSTANCE.registerOnSharedPreferenceChangedListener(this);
 
         restoreState();
@@ -489,6 +495,23 @@ public class MusicService extends MediaBrowserServiceCompat
 
     public void acquireWakeLock(long milli) {
         wakeLock.acquire(milli);
+    }
+
+    boolean pausedByZeroVolume;
+
+    @Override
+    public void onAudioVolumeChanged(int currentVolume, int maxVolume) {
+        if (PreferenceUtil.INSTANCE.isPauseOnZeroVolume()) {
+            if (isPlaying() && currentVolume < 1) {
+                pause();
+                System.out.println("Paused");
+                pausedByZeroVolume = true;
+            } else if (pausedByZeroVolume && currentVolume >= 1) {
+                System.out.println("Played");
+                play();
+                pausedByZeroVolume = false;
+            }
+        }
     }
 
     public void addSong(int position, Song song) {
@@ -558,10 +581,10 @@ public class MusicService extends MediaBrowserServiceCompat
     }
 
     public Song getNextSong() {
-        if (!isLastTrack() || getRepeatMode() == REPEAT_MODE_THIS) {
-            return getSongAt(getNextPosition(false));
-        } else {
+        if (isLastTrack() && getRepeatMode() == REPEAT_MODE_NONE) {
             return null;
+        } else {
+            return getSongAt(getNextPosition(false));
         }
     }
 
@@ -927,6 +950,13 @@ public class MusicService extends MediaBrowserServiceCompat
     }
 
     @Override
+    public void onTrackEndedWithCrossfade() {
+        trackEndedByCrossfade = true;
+        acquireWakeLock(30000);
+        playerHandler.sendEmptyMessage(TRACK_ENDED);
+    }
+
+    @Override
     public void onTrackWentToNext() {
         playerHandler.sendEmptyMessage(TRACK_WENT_TO_NEXT);
     }
@@ -981,16 +1011,11 @@ public class MusicService extends MediaBrowserServiceCompat
     public void pause() {
         pausedByTransientLossOfFocus = false;
         if (playback != null && playback.isPlaying()) {
-            if (fader != null) {
-                fader.stop();
-            }
-            fader = new AudioFader(playback, PreferenceUtil.INSTANCE.getAudioFadeDuration(), false, () -> {
-                if (playback != null && playback.isPlaying()) {
-                    playback.pause();
-                    notifyChange(PLAY_STATE_CHANGED);
-                }
+            startFadeAnimator(playback, false, () -> {
+                //Code to run when Animator Ends
+                playback.pause();
+                notifyChange(PLAY_STATE_CHANGED);
             });
-            fader.start();
         }
     }
 
@@ -1013,10 +1038,8 @@ public class MusicService extends MediaBrowserServiceCompat
                         if (MusicPlayerRemote.INSTANCE.isCasting()) {
                             return;
                         }
-                        if (fader != null) {
-                            fader.stop();
-                        }
-                        fader = new AudioFader(playback, PreferenceUtil.INSTANCE.getAudioFadeDuration(), false, () -> {
+                        startFadeAnimator(playback, true, () -> {
+                            // Code when Animator Ends
                             if (!becomingNoisyReceiverRegistered) {
                                 registerReceiver(becomingNoisyReceiver, becomingNoisyReceiverIntentFilter);
                                 becomingNoisyReceiverRegistered = true;
@@ -1031,9 +1054,9 @@ public class MusicService extends MediaBrowserServiceCompat
                             playerHandler.removeMessages(DUCK);
                             playerHandler.sendEmptyMessage(UNDUCK);
                         });
+                        //Start Playback with Animator
                         playback.start();
                         notifyChange(PLAY_STATE_CHANGED);
-                        fader.start();
                     }
                 }
             } else {

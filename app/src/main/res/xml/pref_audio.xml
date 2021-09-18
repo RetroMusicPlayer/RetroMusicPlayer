@@ -21,6 +21,7 @@
         android:defaultValue="0"
         android:key="cross_fade_duration"
         android:layout="@layout/list_item_view_seekbar"
+        app:ateKey_pref_unit="s"
         android:max="12"
         android:summary="@string/pref_summary_cross_fade"
         android:title="@string/pref_title_cross_fade"

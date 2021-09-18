@@ -28,13 +28,22 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.StringTokenizer;
+
+import code.name.monkey.retromusic.adapter.Storage;
+import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.repository.RealSongRepository;
+import code.name.monkey.retromusic.repository.SortedCursor;
 
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.repository.RealSongRepository;
@@ -257,5 +266,77 @@ public final class FileUtil {
       e.printStackTrace();
       return file.getAbsoluteFile();
     }
+  }
+
+  // https://github.com/DrKLO/Telegram/blob/ab221dafadbc17459d78d9ea3e643ae18e934b16/TMessagesProj/src/main/java/org/telegram/ui/Components/ChatAttachAlertDocumentLayout.java#L939
+  public static ArrayList<Storage> listRoots() {
+    ArrayList<Storage> storageItems = new ArrayList<>();
+    HashSet<String> paths = new HashSet<>();
+    String defaultPath = Environment.getExternalStorageDirectory().getPath();
+    String defaultPathState = Environment.getExternalStorageState();
+    if (defaultPathState.equals(Environment.MEDIA_MOUNTED) || defaultPathState.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
+      Storage ext = new Storage();
+      if (Environment.isExternalStorageRemovable()) {
+        ext.title = "SD Card";
+      } else {
+        ext.title = "Internal Storage";
+      }
+      ext.file = Environment.getExternalStorageDirectory();
+      storageItems.add(ext);
+      paths.add(defaultPath);
+    }
+
+    BufferedReader bufferedReader = null;
+    try {
+      bufferedReader = new BufferedReader(new FileReader("/proc/mounts"));
+      String line;
+      while ((line = bufferedReader.readLine()) != null) {
+        if (line.contains("vfat") || line.contains("/mnt")) {
+          StringTokenizer tokens = new StringTokenizer(line, " ");
+          tokens.nextToken();
+          String path = tokens.nextToken();
+          if (paths.contains(path)) {
+            continue;
+          }
+          if (line.contains("/dev/block/vold")) {
+            if (!line.contains("/mnt/secure") && !line.contains("/mnt/asec") && !line.contains("/mnt/obb") && !line.contains("/dev/mapper") && !line.contains("tmpfs")) {
+              if (!new File(path).isDirectory()) {
+                int index = path.lastIndexOf('/');
+                if (index != -1) {
+                  String newPath = "/storage/" + path.substring(index + 1);
+                  if (new File(newPath).isDirectory()) {
+                    path = newPath;
+                  }
+                }
+              }
+              paths.add(path);
+              try {
+                Storage item = new Storage();
+                if (path.toLowerCase().contains("sd")) {
+                  item.title = "SD Card";
+                } else {
+                  item.title = "External Storage";
+                }
+                item.file = new File(path);
+                storageItems.add(item);
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            }
+          }
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (bufferedReader != null) {
+        try {
+          bufferedReader.close();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return storageItems;
   }
 }

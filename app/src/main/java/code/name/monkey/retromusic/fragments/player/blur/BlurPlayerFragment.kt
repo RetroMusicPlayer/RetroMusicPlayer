@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
@@ -110,8 +111,6 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         get() = lastColor
 
     private fun updateBlur() {
-        val blurAmount = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            .getInt(NEW_BLUR_AMOUNT, 25)
         binding.colorBackground.clearColorFilter()
         GlideApp.with(requireActivity()).asBitmapPalette()
             .songCoverOptions(MusicPlayerRemote.currentSong)

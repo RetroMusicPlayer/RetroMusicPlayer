@@ -6,7 +6,6 @@ apply plugin: 'kotlin-parcelize'
 
 android {
     compileSdkVersion 31
-    buildToolsVersion = '29.0.3'
 
     defaultConfig {
         minSdkVersion 21
@@ -33,6 +32,8 @@ android {
     buildTypes {
         release {
             //debuggable true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
         debug {
@@ -104,7 +105,7 @@ dependencies {
     //WebServer by NanoHttpd
     implementation "org.nanohttpd:nanohttpd:2.3.1"
 
-    def nav_version = '2.4.0-alpha09'
+    def nav_version = "2.4.0-alpha09"
     implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
@@ -158,6 +159,7 @@ dependencies {
     implementation 'com.heinrichreimersoftware:material-intro:2.0.0'
     implementation 'com.github.dhaval2404:imagepicker:1.7.1'
     implementation 'me.zhanghai.android.fastscroll:library:1.1.7'
+    implementation 'cat.ereza:customactivityoncrash:2.3.0'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }
 

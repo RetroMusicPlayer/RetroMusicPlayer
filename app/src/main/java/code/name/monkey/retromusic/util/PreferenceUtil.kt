@@ -269,6 +269,8 @@ object PreferenceUtil {
             BLURRED_ALBUM_ART, false
         )
 
+    val blurAmount get() = sharedPreferences.getInt(NEW_BLUR_AMOUNT, 25)
+
     val isCarouselEffect
         get() = sharedPreferences.getBoolean(
             CAROUSEL_EFFECT, false
@@ -608,8 +610,7 @@ object PreferenceUtil {
     val isWhiteList: Boolean
         get() = sharedPreferences.getBoolean(WHITELIST_MUSIC, false)
 
-    var crossFadeDuration
+    val crossFadeDuration
         get() = sharedPreferences
             .getInt(CROSS_FADE_DURATION, 0)
-        set(value) = sharedPreferences.edit { putInt(CROSS_FADE_DURATION, value) }
 }

@@ -86,6 +86,7 @@
             android:summary="@string/pref_blur_amount_summary"
             android:title="@string/pref_blur_amount_title"
             app:icon="@drawable/ic_blur_on"
+            app:ateKey_pref_unit="px"
             app:showSeekBarValue="true" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
