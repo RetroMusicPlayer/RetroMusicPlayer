@@ -544,7 +544,7 @@ object PreferenceUtil {
 
     var startDirectory: File
         get() {
-            val folderPath = FoldersFragment.getDefaultStartDirectory().path
+            val folderPath = FoldersFragment.defaultStartDirectory.path
             val filePath: String = sharedPreferences.getStringOrDefault(START_DIRECTORY, folderPath)
             return File(filePath)
         }

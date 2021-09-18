@@ -33,6 +33,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
+import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
@@ -42,7 +43,10 @@ import code.name.monkey.retromusic.util.CustomArtistImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.afollestad.materialcab.MaterialCab
+import com.afollestad.materialcab.attached.AttachedCab
+import com.afollestad.materialcab.attached.destroy
+import com.afollestad.materialcab.attached.isActive
+import com.afollestad.materialcab.createCab
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -306,28 +310,34 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
     private fun handleBackPress(): Boolean {
         cab?.let {
-            if (it.isActive) {
-                it.finish()
+            if (it.isActive()) {
+                it.destroy()
                 return true
             }
         }
         return false
     }
 
-    private var cab: MaterialCab? = null
+    private var cab: AttachedCab? = null
 
-    override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
+    override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
         cab?.let {
-            if (it.isActive) {
-                it.finish()
+            if (it.isActive()) {
+                it.destroy()
             }
         }
-        cab = MaterialCab(mainActivity, R.id.cab_stub)
-            .setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close)
-            .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(surfaceColor()))
-            .start(callback)
-        return cab as MaterialCab
+        cab = createCab(R.id.cab_stub) {
+            menu(menuRes)
+            closeDrawable(R.drawable.ic_close)
+            backgroundColor(literal = RetroColorUtil.shiftBackgroundColorForLightText(surfaceColor()))
+            slideDown()
+            onCreate { cab, menu -> callback.onCabCreated(cab, menu) }
+            onSelection {
+                callback.onCabItemClicked(it)
+            }
+            onDestroy { callback.onCabFinished(it) }
+        }
+        return cab as AttachedCab
     }
 
 

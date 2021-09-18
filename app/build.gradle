@@ -133,8 +133,8 @@ dependencies {
     implementation "com.afollestad.material-dialogs:input:$material_dialog_version"
     implementation "com.afollestad.material-dialogs:color:$material_dialog_version"
     implementation "com.afollestad.material-dialogs:bottomsheets:$material_dialog_version"
-    //noinspection GradleDependency
-    implementation 'com.afollestad:material-cab:0.1.12'
+
+    implementation 'com.afollestad:material-cab:2.0.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
@@ -159,6 +159,7 @@ dependencies {
     implementation 'com.heinrichreimersoftware:material-intro:2.0.0'
     implementation 'com.github.dhaval2404:imagepicker:1.7.1'
     implementation 'me.zhanghai.android.fastscroll:library:1.1.7'
+    implementation "com.github.YvesCheung.RollingText:RollingText:1.2.10"
     implementation 'cat.ereza:customactivityoncrash:2.3.0'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }

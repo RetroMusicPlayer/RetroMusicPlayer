@@ -14,9 +14,14 @@
  */
 package code.name.monkey.retromusic.interfaces
 
+import android.view.Menu
+import android.view.MenuItem
 import com.afollestad.materialcab.attached.AttachedCab
 
-interface ICabHolder {
+interface ICabCallback {
+    fun onCabCreated(cab: AttachedCab, menu: Menu): Boolean
 
-    fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab
+    fun onCabItemClicked(item: MenuItem): Boolean
+
+    fun onCabFinished(cab: AttachedCab): Boolean
 }
