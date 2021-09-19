@@ -6,9 +6,11 @@ import android.graphics.Color
 import androidx.annotation.*
 import androidx.annotation.IntRange
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import code.name.monkey.appthemehelper.util.ATHUtil.isWindowBackgroundDark
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.VersionUtils
 
 
 /**
@@ -204,6 +206,9 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         @CheckResult
         @ColorInt
         fun accentColor(context: Context): Int {
+            if (VersionUtils.hasS()) {
+                return ContextCompat.getColor(context, android.R.color.system_accent1_600)
+            }
             val desaturatedColor = prefs(context).getBoolean("desaturated_color", false)
             val color = prefs(context).getInt(
                 ThemeStorePrefKeys.KEY_ACCENT_COLOR,
