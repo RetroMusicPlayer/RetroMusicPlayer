@@ -16,6 +16,7 @@
         <item name="popupWindowStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="bottomSheetTint">@color/bottomSheetColor</item>
+        <item name="elevationOverlayColor">@color/elevationOverlay</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.Material3.DayNight.NoActionBar">
@@ -36,6 +37,7 @@
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="bottomSheetTint">@color/bottomSheetColorDark</item>
+        <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="Theme.Material3.DayNight.NoActionBar">
@@ -54,6 +56,7 @@
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="bottomSheetTint">@color/bottomSheetColorBlack</item>
+        <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.Material3.Light.NoActionBar">
@@ -72,7 +75,7 @@
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="bottomSheetTint">@color/bottomSheetColorLight</item>
-        <item name="elevationOverlayColor">@color/md_grey_400</item>
+        <item name="elevationOverlayColor">@color/elevationOverlayLight</item>
     </style>
 
     <style name="MusicProgressSliderParent">

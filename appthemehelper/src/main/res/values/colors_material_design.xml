@@ -30,6 +30,8 @@
     <color name="md_grey_200">#EEEEEE</color>
     <color name="md_grey_400">#BDBDBD</color>
     <color name="md_grey_500">#9E9E9E</color>
+    <color name="md_grey_600">#757575</color>
+    <color name="md_grey_700">#616161</color>
     <color name="md_grey_800">#424242</color>
 
     <color name="md_black_1000">#000000</color>

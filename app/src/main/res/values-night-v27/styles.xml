@@ -30,5 +30,6 @@
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="materialCardViewStyle">@style/Widget.MaterialComponents.CardView</item>
         <item name="bottomSheetTint">@color/bottomSheetColor</item>
+        <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
     </style>
 </resources>
