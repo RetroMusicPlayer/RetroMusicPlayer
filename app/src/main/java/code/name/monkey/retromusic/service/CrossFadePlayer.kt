@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.service
 
 import android.animation.Animator
-import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
@@ -9,17 +8,16 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.audiofx.AudioEffect
 import android.net.Uri
-import android.os.Handler
-import android.os.Message
 import android.os.PowerManager
 import android.widget.Toast
-import androidx.core.animation.doOnEnd
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimator
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import kotlinx.coroutines.*
 
 /** @author Prathamesh M */
 
@@ -37,7 +35,6 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     private var player1 = MediaPlayer()
     private var player2 = MediaPlayer()
     private var durationListener = DurationListener()
-    private var trackEndHandledByCrossFade = false
     private var mIsInitialized = false
     private var hasDataSource: Boolean = false /* Whether first player has DataSource */
     private var fadeInAnimator: Animator? = null
@@ -231,17 +228,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     }
 
     override fun onCompletion(mp: MediaPlayer?) {
-        if (mp == getNextPlayer()) {
-            if (trackEndHandledByCrossFade) {
-                trackEndHandledByCrossFade = false
-            } else {
-                notifyTrackEnded()
-            }
-        }
-    }
-
-    private fun notifyTrackEnded(){
-        if (callbacks != null) {
+        if (mp == getCurrentPlayer()) {
             callbacks?.onTrackEnded()
         }
     }
@@ -276,53 +263,23 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
 
     private fun fadeIn(mediaPlayer: MediaPlayer) {
         fadeInAnimator = createFadeAnimator(true, mediaPlayer) {
-            println("Fade In Completed")
             fadeInAnimator = null
+            durationListener.start()
         }
         fadeInAnimator?.start()
     }
 
     private fun fadeOut(mediaPlayer: MediaPlayer) {
         fadeOutAnimator = createFadeAnimator(false, mediaPlayer) {
-            println("Fade Out Completed")
             fadeOutAnimator = null
+            mediaPlayer.stop()
         }
         fadeOutAnimator?.start()
     }
 
     private fun cancelFade() {
-        fadeInAnimator?.cancel()
-        fadeOutAnimator?.cancel()
         fadeInAnimator = null
         fadeOutAnimator = null
-        getCurrentPlayer()?.setVolume(1f, 1f)
-        getNextPlayer()?.setVolume(0f, 0f)
-    }
-
-    private fun createFadeAnimator(
-        fadeIn: Boolean /* fadeIn -> true  fadeOut -> false*/,
-        mediaPlayer: MediaPlayer,
-        callback: Runnable /* Code to run when Animator Ends*/
-    ): Animator? {
-        val duration = PreferenceUtil.crossFadeDuration * 1000
-        if (duration == 0) {
-            return null
-        }
-        val startValue = if (fadeIn) 0f else 1.0f
-        val endValue = if (fadeIn) 1.0f else 0f
-        val animator = ValueAnimator.ofFloat(startValue, endValue)
-        animator.duration = duration.toLong()
-        animator.addUpdateListener { animation: ValueAnimator ->
-            mediaPlayer.setVolume(
-                animation.animatedValue as Float, animation.animatedValue as Float
-            )
-        }
-        animator.doOnEnd {
-            callback.run()
-            // Set end values
-            mediaPlayer.setVolume(endValue, endValue)
-        }
-        return animator
     }
 
     override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
@@ -347,28 +304,22 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
         NOT_SET
     }
 
-    inner class DurationListener : Handler() {
+    inner class DurationListener : CoroutineScope by CrossFadeScope() {
+
+        private var job: Job? = null
 
         fun start() {
-            nextRefresh()
-        }
-
-        fun stop() {
-            removeMessages(DURATION_CHANGED)
-        }
-
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            if (msg.what == DURATION_CHANGED) {
-                nextRefresh()
-                onDurationUpdated(position(), duration())
+            job?.cancel()
+            job = launch {
+                while (true) {
+                    delay(250)
+                    onDurationUpdated(position(), duration())
+                }
             }
         }
 
-        private fun nextRefresh() {
-            val message = obtainMessage(DURATION_CHANGED)
-            removeMessages(DURATION_CHANGED)
-            sendMessageDelayed(message, 100)
+        fun stop() {
+            job?.cancel()
         }
     }
 
@@ -376,6 +327,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     fun onDurationUpdated(progress: Int, total: Int) {
         if (total > 0 && (total - progress).div(1000) == PreferenceUtil.crossFadeDuration) {
             getNextPlayer()?.let { player ->
+                durationListener.stop()
                 val nextSong = MusicPlayerRemote.nextSong
                 if (nextSong != null) {
                     setDataSourceImpl(player, MusicUtil.getSongFileUri(nextSong.id).toString())
@@ -396,11 +348,8 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
             } else {
                 CurrentPlayer.PLAYER_ONE
             }
-        notifyTrackEnded()
-        trackEndHandledByCrossFade = true
-    }
-
-    companion object {
-        private const val DURATION_CHANGED = 1
+        callbacks?.onTrackEndedWithCrossfade()
     }
 }
+
+internal fun CrossFadeScope(): CoroutineScope = CoroutineScope(Job() + Dispatchers.Main)

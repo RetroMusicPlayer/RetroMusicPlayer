@@ -80,7 +80,7 @@ class PlaybackHandler extends Handler {
 
       case TRACK_WENT_TO_NEXT:
         if (service.pendingQuit
-            || service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
+                || service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
           service.pause();
           service.seek(0);
           if (service.pendingQuit) {
@@ -96,10 +96,9 @@ class PlaybackHandler extends Handler {
         break;
 
       case TRACK_ENDED:
-        service.trackEndedByCrossfade = true;
         // if there is a timer finished, don't continue
         if (service.pendingQuit
-            || service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
+                || service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
           service.notifyChange(PLAY_STATE_CHANGED);
           service.seek(0);
           if (service.pendingQuit) {
