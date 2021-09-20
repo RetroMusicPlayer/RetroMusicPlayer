@@ -13,6 +13,7 @@
         android:fitsSystemWindows="true">
 
         <FrameLayout
+            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways">
@@ -34,11 +35,6 @@
                     android:textAppearance="@style/TextViewHeadline6"
                     android:textStyle="bold" />
             </androidx.appcompat.widget.Toolbar>
-
-            <ViewStub
-                android:id="@+id/cab_stub"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height" />
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

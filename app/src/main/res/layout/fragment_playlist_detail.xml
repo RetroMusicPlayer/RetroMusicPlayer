@@ -15,6 +15,7 @@
         app:liftOnScroll="true">
 
         <FrameLayout
+            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways">
@@ -26,12 +27,6 @@
                 android:background="?attr/colorSurface"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black"
                 app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
-
-            <ViewStub
-                android:id="@+id/cab_stub"
-                android:layout_width="match_parent"
-                android:layout_height="48dp" />
-
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

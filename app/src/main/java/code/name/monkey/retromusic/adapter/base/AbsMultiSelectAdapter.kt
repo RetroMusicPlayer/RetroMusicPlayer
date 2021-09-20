@@ -7,11 +7,8 @@ import androidx.annotation.MenuRes
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
-import code.name.monkey.retromusic.util.ColorAnimUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -24,7 +21,6 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
     private val checked: MutableList<I>
     private var menuRes: Int
     override fun onCabCreated(cab: AttachedCab, menu: Menu): Boolean {
-
         return true
     }
 

@@ -43,7 +43,7 @@
 
     <style name="Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="popupTheme">?toolbarPopupTheme</item>
         <item name="android:transitionName" tools:ignore="NewApi">toolbar</item>
         <item name="layout_collapseMode">pin</item>
