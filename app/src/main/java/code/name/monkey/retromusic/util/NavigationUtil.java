@@ -34,9 +34,9 @@ import code.name.monkey.retromusic.activities.LyricsActivity;
 import code.name.monkey.retromusic.activities.PlayingQueueActivity;
 import code.name.monkey.retromusic.activities.PurchaseActivity;
 import code.name.monkey.retromusic.activities.SupportDevelopmentActivity;
-import code.name.monkey.retromusic.fragments.UserInfoFragment;
 import code.name.monkey.retromusic.activities.WhatsNewActivity;
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity;
+import code.name.monkey.retromusic.fragments.UserInfoFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 
 public class NavigationUtil {

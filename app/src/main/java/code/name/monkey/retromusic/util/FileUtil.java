@@ -45,10 +45,6 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.repository.RealSongRepository;
 import code.name.monkey.retromusic.repository.SortedCursor;
 
-import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.repository.RealSongRepository;
-import code.name.monkey.retromusic.repository.SortedCursor;
-
 public final class FileUtil {
 
   private FileUtil() {}

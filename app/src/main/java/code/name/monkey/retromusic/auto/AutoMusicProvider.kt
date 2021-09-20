@@ -15,7 +15,6 @@ package code.name.monkey.retromusic.auto
 
 import android.content.Context
 import android.content.res.Resources
-import android.net.Uri
 import android.support.v4.media.MediaBrowserCompat
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
