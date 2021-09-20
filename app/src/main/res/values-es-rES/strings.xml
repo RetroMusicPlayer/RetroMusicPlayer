@@ -135,7 +135,7 @@
     <string name="delete_song_x"><![CDATA[¿Eliminar la canción <b>%1$s</b>?]]></string>
     <string name="delete_songs_title">Eliminar canciones</string>
     <string name="delete_x_playlists"><![CDATA[¿Eliminar las <b>%1$d</b> listas de reproducción?]]></string>
-    <string name="delete_x_songs"><![CDATA[¿Eliminar las  canciones?]]></string>
+    <string name="delete_x_songs"><![CDATA[¿Eliminar las <b>%1$d</b> canciones?]]></string>
     <string name="deleted_x_songs">%1$d canciones eliminadas.</string>
     <string name="deleting_songs">Eliminando canciones</string>
     <string name="depth">Profundidad</string>
