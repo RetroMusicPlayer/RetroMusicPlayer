@@ -82,7 +82,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
             playlist.playlistEntity,
             requireActivity(),
             ArrayList(),
-            R.layout.item_list,
+            R.layout.item_queue,
             this
         )
 
