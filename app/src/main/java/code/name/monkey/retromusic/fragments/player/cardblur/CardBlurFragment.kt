@@ -36,7 +36,6 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import org.koin.android.ext.android.bind
 
 class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     SharedPreferences.OnSharedPreferenceChangeListener {
