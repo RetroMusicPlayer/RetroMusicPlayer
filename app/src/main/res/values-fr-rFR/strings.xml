@@ -11,7 +11,7 @@
     <string name="action_add_to_playlist">Ajouter à la liste de lecture</string>
     <string name="action_cast">Diffuser</string>
     <string name="action_clear_playing_queue">Vider la file d\'attente</string>
-    <string name="action_cycle_repeat">Mode de répétition du cycle</string>
+    <string name="action_cycle_repeat">Mode de répétition</string>
     <string name="action_delete">Supprimer</string>
     <string name="action_delete_from_device">Supprimer de l\'appareil</string>
     <string name="action_details">Détails</string>
@@ -143,11 +143,11 @@
     <string name="device_info">Informations sur l\'appareil</string>
     <string name="dialog_message_set_ringtone">Autoriser Retro Music à modifier les paramètres audios</string>
     <string name="dialog_title_set_ringtone">Définir comme sonnerie</string>
-    <string name="do_you_want_to_clear_the_blacklist">Voulez vous vraiment vider la liste noire ?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Voulez vous vraiment retirer <b>%1$s</b> de la liste noire ?]]></string>
+    <string name="do_you_want_to_clear_the_blacklist">Voulez-vous vraiment vider la liste noire ?</string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Voulez-vous vraiment retirer <b>%1$s</b> de la liste noire ?]]></string>
     <string name="donate">Faire un don</string>
     <string name="donate_summary">Si vous pensez que je mérite d\'être payé pour mon travail, vous pouvez me donner quelques dollars ici</string>
-    <string name="donation_header">Achetez moi :</string>
+    <string name="donation_header">Offrez-moi :</string>
     <string name="done">Terminé</string>
     <string name="drive_mode">Mode conduite</string>
     <string name="edit_fab">Modifier le bouton</string>
@@ -254,7 +254,7 @@
     <string name="past_three_months">3 derniers mois</string>
     <string name="paste_lyrics_here">Copiez les paroles ici</string>
     <string name="paste_timeframe_lyrics_here">Collez les paroles de la période ici</string>
-    <string name="peak">Pic</string>
+    <string name="peak">Aperçu</string>
     <string name="permission_external_storage_denied">La permission pour accéder au stockage externe a été refusée.</string>
     <string name="permission_summary">L\'application a besoin d\'accéder au stockage de votre appareil pour lire votre musique</string>
     <string name="permission_title">Accès au stockage</string>
