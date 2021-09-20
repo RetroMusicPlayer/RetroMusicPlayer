@@ -30,8 +30,8 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.*
 import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.MusicUtil
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
 /**

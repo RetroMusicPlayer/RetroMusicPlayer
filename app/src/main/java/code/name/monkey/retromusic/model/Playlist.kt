@@ -5,8 +5,8 @@ import android.os.Parcelable
 import code.name.monkey.retromusic.repository.RealPlaylistRepository
 import code.name.monkey.retromusic.util.MusicUtil
 import kotlinx.parcelize.Parcelize
-import org.koin.core.KoinComponent
-import org.koin.core.get
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
 @Parcelize
 open class Playlist(

@@ -142,9 +142,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
-    def koin_version = "2.1.5"
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    def koin_version = '3.1.2'
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
@@ -152,7 +152,7 @@ dependencies {
 
     implementation 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0'
 
-    implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:3.4.0.201406110918-r'
+    implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
     implementation 'org.bitbucket.ijabz:jaudiotagger:2.2.5'
     implementation 'com.anjlab.android.iab.v3:library:1.1.0'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
@@ -161,7 +161,7 @@ dependencies {
     implementation 'me.zhanghai.android.fastscroll:library:1.1.7'
     implementation "com.github.YvesCheung.RollingText:RollingText:1.2.10"
     implementation 'cat.ereza:customactivityoncrash:2.3.0'
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+    debugImplementation 'com.github.amitshekhariitbhu:Android-Debug-Database:1.0.6'
 }
 
 apply from: '../spotless.gradle'
