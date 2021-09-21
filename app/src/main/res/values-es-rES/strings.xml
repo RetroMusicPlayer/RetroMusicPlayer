@@ -106,14 +106,14 @@
     <string name="card_square">Tarjeta Cuadrada</string>
     <string name="card_style">Tarjeta</string>
     <string name="carousal_effect_on_now_playing_screen">Efecto carrusel en la pantalla de reproducción</string>
-    <string name="cascading">Cascada</string>
+    <string name="cascading">Cascading</string>
     <string name="changelog">Registro de cambios</string>
     <string name="changelog_summary">Consulta las Novedades</string>
     <string name="circle">Círculo</string>
     <string name="circular">Circular</string>
     <string name="classic">Clásico</string>
     <string name="clear_action">Limpiar</string>
-    <string name="clear_blacklist">Limpiar lista negra</string>
+    <string name="clear_blacklist">Eliminar lista negra</string>
     <string name="clear_playing_queue">Limpiar cola</string>
     <string name="color">Color</string>
     <string name="colors">Colores</string>

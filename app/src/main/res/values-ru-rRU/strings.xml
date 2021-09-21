@@ -123,7 +123,7 @@
     <string name="colors">Цвета</string>
     <string name="composer">Композитор</string>
     <string name="copied_device_info_to_clipboard">Скопировать информацию об устройстве в буфер обмена.</string>
-    <string name="could_not_create_playlist">Не удалось создать плейлист</string>
+    <string name="could_not_create_playlist">Не удалось создать плейлист.</string>
     <string name="could_not_download_album_cover">"Не удалось загрузить подходящую обложку для альбома."</string>
     <string name="could_not_restore_purchase">Не удалось восстановить покупку.</string>
     <string name="could_not_scan_files">Не удалось просканировать %d файлов.</string>
