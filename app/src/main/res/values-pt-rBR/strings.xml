@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_album_label">Sobre %s</string>
-    <string name="about_settings_summary">Time, links sociais</string>
+    <string name="about_settings_summary">Equipe, links sociais</string>
     <string name="accent_color">Cor de destaque</string>
-    <string name="accent_color_desc">A cor de destaque do tema, o padrão é verde</string>
+    <string name="accent_color_desc">A cor de destaque do tema, o padrão é roxo</string>
     <string name="action_about">Sobre</string>
     <string name="action_add_to_blacklist">Adicionar à lista negra</string>
     <string name="action_add_to_favorites">Adicionar aos favoritos</string>
-    <string name="action_add_to_playing_queue">Adicionar à lista de reprodução</string>
-    <string name="action_add_to_playlist">Adicionar à lista</string>
+    <string name="action_add_to_playing_queue">Adicionar à fila de reprodução</string>
+    <string name="action_add_to_playlist">Adicionar à lista de reprodução</string>
     <string name="action_cast">Transmitir</string>
     <string name="action_clear_playing_queue">Limpar a atual fila de reprodução</string>
     <string name="action_cycle_repeat">Alternar modo de repetição</string>
@@ -312,14 +312,14 @@
     <string name="pref_summary_library_categories">Configurar visibilidade e ordem de categorias da biblioteca.</string>
     <string name="pref_summary_lock_screen">Usar controles personalizados do Retro Music na tela de bloqueio</string>
     <string name="pref_summary_open_source_licences">Detalhes da licença para software de código aberto</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_remember_tab">Navegar para a última aba usada ao iniciar</string>
     <string name="pref_summary_show_lyrics">Mostrar letras sincronizadas sobre a capa do álbum</string>
     <string name="pref_summary_suggestions">Mostrar novo Mix na tela inicial</string>
     <string name="pref_summary_toggle_full_screen">Modo imersivo</string>
     <string name="pref_summary_toggle_headset">Comecar a reproduzir imediatamente quando os fones de ouvido forem conectados</string>
     <string name="pref_summary_toggle_shuffle">O modo aleatório será desativado ao reproduzir uma nova lista de músicas</string>
     <string name="pref_summary_toggle_volume">Se houver espaço suficiente, mostre os controles de volume na tela que está sendo reproduzida</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_whitelist">Somente mostrar músicas da pasta /Music</string>
     <string name="pref_title_album_art_on_lockscreen">Exibir a capa do álbum</string>
     <string name="pref_title_album_artists_only">Navegar pelo artista do álbum</string>
     <string name="pref_title_album_cover_style">Tema da capa do álbum</string>
@@ -349,7 +349,7 @@
     <string name="pref_title_lock_screen">Controles em tela cheia</string>
     <string name="pref_title_now_playing_screen_appearance">Tema da tela \"Reproduzindo agora\"</string>
     <string name="pref_title_open_source_licences">Licenças de código aberto</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
+    <string name="pref_title_remember_tab">Lembrar Última Aba</string>
     <string name="pref_title_show_lyrics">Mostrar letras</string>
     <string name="pref_title_suggestions">Exibir Sugestões</string>
     <string name="pref_title_tab_text_mode">Modo de títulos nas abas</string>
@@ -358,7 +358,7 @@
     <string name="pref_title_toggle_toggle_headset">Execuções automática</string>
     <string name="pref_title_toggle_toggle_shuffle">Modo aleatório</string>
     <string name="pref_title_toggle_volume">Controles do volume</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
+    <string name="pref_title_whitelist">Lista Branca de Músicas</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Temas do reproduzindo agora, Efeito carrossel, Tema de cor e mais...</string>
     <string name="profile">Perfil</string>
