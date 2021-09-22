@@ -39,7 +39,7 @@ class OtherSettingsFragment : AbsSettingsFragment() {
         val languagePreference: ATEListPreference? = findPreference(LANGUAGE_NAME)
         languagePreference?.setOnPreferenceChangeListener { _, _ ->
             println("Invalidated")
-            requireActivity().recreate()
+            restartActivity()
             return@setOnPreferenceChangeListener true
         }
     }
@@ -69,7 +69,7 @@ class OtherSettingsFragment : AbsSettingsFragment() {
                 manager.startInstall(request)
                     // Recreate the activity on download complete
                     .addOnCompleteListener {
-                        activity?.recreate()
+                        restartActivity()
                     }
             } else {
                 requireActivity().recreate()

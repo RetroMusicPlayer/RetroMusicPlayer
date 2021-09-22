@@ -49,7 +49,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue(theme))
                     DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
-                requireActivity().recreate()
+                restartActivity()
                 true
             }
         }
@@ -68,7 +68,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     ThemeStore.editTheme(requireContext()).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
-                    requireActivity().recreate()
+                    restartActivity()
                 }
             }
             return@setOnPreferenceClickListener true
@@ -84,7 +84,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue("black"))
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
             }
-            requireActivity().recreate()
+            restartActivity()
             true
         }
 
@@ -96,7 +96,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 .putBoolean("desaturated_color", desaturated)
                 .apply()
             PreferenceUtil.isDesaturatedColor = desaturated
-            requireActivity().recreate()
+            restartActivity()
             true
         }
 

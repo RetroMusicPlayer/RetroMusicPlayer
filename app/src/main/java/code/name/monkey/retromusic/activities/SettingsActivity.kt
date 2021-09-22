@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.navigation.NavController
@@ -25,16 +26,18 @@ import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.ActivitySettingsBinding
 import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.extensions.surfaceColor
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorCallback
 
-class SettingsActivity : AbsBaseActivity(), ColorCallback {
+class SettingsActivity : AbsBaseActivity(), ColorCallback, OnThemeChangedListener {
     private lateinit var binding: ActivitySettingsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
-        super.onCreate(savedInstanceState)
+        val mSavedInstanceState = extra<Bundle>(TAG).value ?: savedInstanceState
+        super.onCreate(mSavedInstanceState)
         setLightStatusbarAuto(surfaceColor())
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -83,6 +86,28 @@ class SettingsActivity : AbsBaseActivity(), ColorCallback {
         if (VersionUtils.hasNougatMR())
             DynamicShortcutManager(this).updateDynamicShortcuts()
 
-        recreate()
+        restart()
     }
+
+    override fun onThemeValuesChanged() {
+        restart()
+    }
+
+    private fun restart() {
+        val savedInstanceState = Bundle().apply {
+            onSaveInstanceState(this)
+        }
+        finish()
+        val intent = Intent(this, this::class.java).putExtra(TAG, savedInstanceState)
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
+
+    companion object {
+        val TAG: String = SettingsActivity::class.java.simpleName
+    }
+}
+
+interface OnThemeChangedListener {
+    fun onThemeValuesChanged()
 }
