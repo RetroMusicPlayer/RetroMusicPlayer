@@ -128,10 +128,8 @@ fun ExtendedFloatingActionButton.accentColor() {
 fun FloatingActionButton.accentColor() {
     val color = ThemeStore.accentColor(context)
     val textColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color))
-    val colorStateList = ColorStateList.valueOf(color)
-    val textColorStateList = ColorStateList.valueOf(textColor)
-    backgroundTintList = colorStateList
-    imageTintList = textColorStateList
+    backgroundTintList = ColorStateList.valueOf(color)
+    imageTintList = ColorStateList.valueOf(textColor)
 }
 
 fun MaterialButton.applyColor(color: Int) {

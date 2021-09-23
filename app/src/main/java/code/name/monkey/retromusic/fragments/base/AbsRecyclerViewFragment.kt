@@ -21,6 +21,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMainRecyclerBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
@@ -45,6 +47,8 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     private val binding get() = _binding!!
     protected var adapter: A? = null
     protected var layoutManager: LM? = null
+    val shuffleButton get() = binding.shuffleButton
+    abstract val isShuffleVisible: Boolean
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,6 +64,30 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         setupToolbar()
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
+
+        // Add listeners when shuffle is visible
+        if (isShuffleVisible) {
+            binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (dy > 0) {
+                        binding.shuffleButton.hide()
+                    } else if (dy < 0) {
+                        binding.shuffleButton.show()
+                    }
+
+                }
+            })
+            binding.shuffleButton.setOnClickListener {
+                onShuffleClicked()
+            }
+            binding.shuffleButton.accentColor()
+        } else {
+            binding.shuffleButton.isVisible = false
+        }
+    }
+
+    open fun onShuffleClicked() {
     }
 
     fun toolbar(): Toolbar {

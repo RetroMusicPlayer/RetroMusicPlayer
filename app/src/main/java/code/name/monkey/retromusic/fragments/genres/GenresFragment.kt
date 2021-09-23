@@ -82,6 +82,9 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     override val emptyMessage: Int
         get() = R.string.no_genres
 
+    override val isShuffleVisible: Boolean
+        get() = false
+
     companion object {
         @JvmField
         val TAG: String = GenresFragment::class.java.simpleName

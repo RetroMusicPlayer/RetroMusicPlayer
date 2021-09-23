@@ -301,7 +301,7 @@ object MusicPlayerRemote : KoinComponent {
         return false
     }
 
-    private fun setShuffleMode(shuffleMode: Int): Boolean {
+    fun setShuffleMode(shuffleMode: Int): Boolean {
         if (musicService != null) {
             musicService!!.shuffleMode = shuffleMode
             return true

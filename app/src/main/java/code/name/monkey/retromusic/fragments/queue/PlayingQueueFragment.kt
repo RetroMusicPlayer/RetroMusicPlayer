@@ -40,6 +40,8 @@ class PlayingQueueFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Linear
     private var recyclerViewTouchActionGuardManager: RecyclerViewTouchActionGuardManager? = null
     override val titleRes: Int
         get() = R.string.now_playing_queue
+    override val isShuffleVisible: Boolean
+        get() = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

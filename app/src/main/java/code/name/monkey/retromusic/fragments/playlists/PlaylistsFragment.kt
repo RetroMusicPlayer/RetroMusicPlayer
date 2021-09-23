@@ -48,8 +48,12 @@ class PlaylistsFragment :
 
     override val titleRes: Int
         get() = R.string.playlists
+
     override val emptyMessage: Int
         get() = R.string.no_playlists
+
+    override val isShuffleVisible: Boolean
+        get() = false
 
     override fun createLayoutManager(): GridLayoutManager {
         return GridLayoutManager(requireContext(), getGridSize())
