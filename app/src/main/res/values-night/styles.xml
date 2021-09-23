@@ -30,7 +30,5 @@
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/bottomSheetColor</item>
-        <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
     </style>
 </resources>

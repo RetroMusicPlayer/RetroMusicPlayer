@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.RetroMusic.Base.MD3.DayNight">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="windowActionBarOverlay">true</item>
@@ -15,11 +15,9 @@
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="popupWindowStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/bottomSheetColor</item>
-        <item name="elevationOverlayColor">@color/elevationOverlay</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RetroMusic.Base" parent="Theme.RetroMusic.Base.MD3.Dark">
         <item name="md_background_color">@color/darkColorSurface</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
@@ -36,11 +34,9 @@
         <item name="android:windowBackground">@color/window_color_dark</item>
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/bottomSheetColorDark</item>
-        <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base.Black" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RetroMusic.Base.Black" parent="Theme.RetroMusic.Base.MD3.Black">
         <item name="md_background_color">@color/blackColorSurface</item>
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
@@ -55,11 +51,9 @@
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/bottomSheetColorBlack</item>
-        <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base.Light" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.RetroMusic.Base.Light" parent="Theme.RetroMusic.Base.MD3.Light">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="roundSelector">@drawable/round_selector</item>
@@ -74,9 +68,31 @@
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+    </style>
+
+    <!-- Base Themes -->
+    <style name="Theme.RetroMusic.Base.MD3" parent="Theme.RetroMusic.Base" />
+
+    <style name="Theme.RetroMusic.Base.MD3.Light" parent="Theme.Material3.Light.NoActionBar">
         <item name="bottomSheetTint">@color/bottomSheetColorLight</item>
         <item name="elevationOverlayColor">@color/elevationOverlayLight</item>
     </style>
+
+    <style name="Theme.RetroMusic.Base.MD3.DayNight" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="bottomSheetTint">@color/bottomSheetColor</item>
+        <item name="elevationOverlayColor">@color/elevationOverlay</item>
+    </style>
+
+    <style name="Theme.RetroMusic.Base.MD3.Dark" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="bottomSheetTint">@color/bottomSheetColor</item>
+        <item name="elevationOverlayColor">@color/elevationOverlay</item>
+    </style>
+
+    <style name="Theme.RetroMusic.Base.MD3.Black" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="bottomSheetTint">@color/bottomSheetColorDark</item>
+        <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
+    </style>
+
 
     <style name="MusicProgressSliderParent">
         <item name="android:progressDrawable">@android:color/transparent</item>
