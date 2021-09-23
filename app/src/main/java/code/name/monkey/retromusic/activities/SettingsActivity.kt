@@ -45,11 +45,10 @@ class SettingsActivity : AbsBaseActivity(), ColorCallback, OnThemeChangedListene
     }
 
     private fun setupToolbar() {
-        setTitle(R.string.action_settings)
         applyToolbar(binding.toolbar)
         val navController: NavController = findNavController(R.id.contentFrame)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            binding.toolbar.title =
+            binding.collapsingToolbarLayout.title =
                 navController.currentDestination?.let { getStringFromDestination(it) }
         }
     }
