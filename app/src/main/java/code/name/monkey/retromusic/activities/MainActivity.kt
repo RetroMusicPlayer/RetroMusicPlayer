@@ -27,7 +27,6 @@ import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
-import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
 import code.name.monkey.retromusic.fragments.home.HomeFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -38,7 +37,6 @@ import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
@@ -90,7 +88,9 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         getBottomNavigationView().setupWithNavController(navController)
         // Scroll Fragment to top
         getBottomNavigationView().setOnItemReselectedListener {
-            supportFragmentManager.findFragmentById(R.id.fragment_container)?.childFragmentManager?.fragments?.get(0)
+            supportFragmentManager.findFragmentById(R.id.fragment_container)?.childFragmentManager?.fragments?.get(
+                0
+            )
                 .also {
                     if (it is AbsRecyclerViewFragment<*, *>) {
                         it.scrollToTop()
@@ -109,6 +109,10 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                     }
                     // Show Bottom Navigation Bar
                     setBottomBarVisibility(true)
+                }
+                R.id.playing_queue_fragment -> {
+                    setBottomBarVisibility(false)
+                    hideBottomBar(true)
                 }
                 else -> setBottomBarVisibility(false) // Hide Bottom Navigation Bar
             }

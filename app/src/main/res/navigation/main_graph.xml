@@ -86,7 +86,6 @@
         android:label="PermissionFragment"
         tools:layout="@layout/activity_permission" />
 
-
     <fragment
         android:id="@+id/action_album"
         android:name="code.name.monkey.retromusic.fragments.albums.AlbumsFragment"
@@ -126,4 +125,8 @@
     <fragment
         android:id="@+id/user_info_fragment"
         android:name="code.name.monkey.retromusic.fragments.UserInfoFragment" />
+
+    <fragment
+        android:id="@+id/playing_queue_fragment"
+        android:name="code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment" />
 </navigation>

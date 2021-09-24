@@ -286,7 +286,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
     }
 
-    private fun hideBottomBar(hide: Boolean) {
+    fun hideBottomBar(hide: Boolean) {
         val heightOfBar = RetroUtil.getNavigationBarHeight() +
                 if (MusicPlayerRemote.isCasting) dip(R.dimen.cast_mini_player_height) else dip(R.dimen.mini_player_height)
         val heightOfBarWithTabs = RetroUtil.getNavigationBarHeight() +

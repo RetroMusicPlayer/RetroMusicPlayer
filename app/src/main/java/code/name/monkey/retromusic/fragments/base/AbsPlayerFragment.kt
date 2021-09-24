@@ -144,7 +144,10 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.now_playing -> {
-                NavigationUtil.goToPlayingQueue(requireActivity())
+                requireActivity().findNavController(R.id.fragment_container).navigate(
+                    R.id.playing_queue_fragment,
+                    null
+                )
                 return true
             }
             R.id.action_show_lyrics -> {

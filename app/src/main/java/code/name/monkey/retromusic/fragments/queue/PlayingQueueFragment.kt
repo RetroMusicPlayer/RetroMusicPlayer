@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.fragments.queue
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
@@ -46,6 +47,16 @@ class PlayingQueueFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Linear
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        toolbar().apply {
+            setOnClickListener {
+                findNavController().navigateUp()
+            }
+            setNavigationIcon(R.drawable.ic_keyboard_backspace_black)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -90,10 +101,12 @@ class PlayingQueueFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Linear
     override fun onQueueChanged() {
         super.onQueueChanged()
         updateQueue()
+        mainActivity.hideBottomBar(true)
     }
 
     override fun onPlayingMetaChanged() {
         updateQueuePosition()
+        mainActivity.hideBottomBar(true)
     }
 
     private fun updateQueuePosition() {
