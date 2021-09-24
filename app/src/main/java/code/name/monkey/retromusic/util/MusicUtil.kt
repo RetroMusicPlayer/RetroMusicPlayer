@@ -183,6 +183,7 @@ object MusicUtil : KoinComponent {
         return lyrics
     }
 
+    @JvmStatic
     fun getMediaStoreAlbumCoverUri(albumId: Long): Uri {
         val sArtworkUri = Uri.parse("content://media/external/audio/albumart")
         return ContentUris.withAppendedId(sArtworkUri, albumId)

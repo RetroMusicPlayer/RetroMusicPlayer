@@ -14,6 +14,8 @@
 
 package code.name.monkey.retromusic.service;
 
+import static android.support.v4.media.MediaBrowserCompat.MediaItem.FLAG_PLAYABLE;
+import static androidx.media.MediaBrowserServiceCompat.BrowserRoot.EXTRA_RECENT;
 import static org.koin.java.KoinJavaComponent.get;
 import static code.name.monkey.retromusic.ConstantsKt.ALBUM_ART_ON_LOCK_SCREEN;
 import static code.name.monkey.retromusic.ConstantsKt.BLURRED_ALBUM_ART;
@@ -50,6 +52,7 @@ import android.os.PowerManager;
 import android.os.Process;
 import android.provider.MediaStore;
 import android.support.v4.media.MediaBrowserCompat;
+import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -67,6 +70,7 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -827,18 +831,46 @@ public class MusicService extends MediaBrowserServiceCompat
     @Override
     public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
 
+
         // Check origin to ensure we're not allowing any arbitrary app to browse app contents
         if (!mPackageValidator.isKnownCaller(clientPackageName, clientUid)) {
             // Request from an untrusted package: return an empty browser root
             return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT, null);
+        } else {
+            /**
+             * By default return the browsable root. Treat the EXTRA_RECENT flag as a special case
+             * and return the recent root instead.
+             */
+            boolean isRecentRequest = false;
+            if (rootHints != null) {
+                isRecentRequest = rootHints.getBoolean(EXTRA_RECENT);
+            }
+            String browserRootPath;
+            if (isRecentRequest) {
+                browserRootPath = AutoMediaIDHelper.RECENT_ROOT;
+            } else {
+                browserRootPath = AutoMediaIDHelper.MEDIA_ID_ROOT;
+            }
+            return new BrowserRoot(browserRootPath, null);
         }
-
-        return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_ROOT, null);
     }
 
     @Override
     public void onLoadChildren(@NonNull String parentId, @NonNull MediaBrowserServiceCompat.Result<List<MediaBrowserCompat.MediaItem>> result) {
-        result.sendResult(mMusicProvider.getChildren(parentId, getResources()));
+        if (parentId.equals(AutoMediaIDHelper.RECENT_ROOT)) {
+            Song song = getCurrentSong();
+            MediaBrowserCompat.MediaItem mediaItem = new MediaBrowserCompat.MediaItem(
+                    new MediaDescriptionCompat.Builder()
+                            .setMediaId(String.valueOf(song.getId()))
+                            .setTitle(song.getTitle())
+                            .setSubtitle(song.getArtistName())
+                            .setIconUri(MusicUtil.getMediaStoreAlbumCoverUri(song.getAlbumId()))
+                            .build(), FLAG_PLAYABLE
+            );
+            result.sendResult(Collections.singletonList(mediaItem));
+        } else {
+            result.sendResult(mMusicProvider.getChildren(parentId, getResources()));
+        }
     }
 
     @Override
