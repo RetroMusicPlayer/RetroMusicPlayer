@@ -52,7 +52,7 @@ class PlayingQueueFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Linear
 
     private fun setupToolbar() {
         toolbar().apply {
-            setOnClickListener {
+            setNavigationOnClickListener {
                 findNavController().navigateUp()
             }
             setNavigationIcon(R.drawable.ic_keyboard_backspace_black)

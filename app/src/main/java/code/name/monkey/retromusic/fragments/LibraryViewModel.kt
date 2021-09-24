@@ -23,6 +23,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
+import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -40,6 +41,7 @@ class LibraryViewModel(
     private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
+    private val fabMargin = MutableLiveData(0)
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -83,6 +85,10 @@ class LibraryViewModel(
 
     fun getHome(): LiveData<List<Home>> {
         return home
+    }
+
+    fun getFabMargin(): LiveData<Int> {
+        return fabMargin
     }
 
     private fun fetchSongs() {
@@ -327,6 +333,14 @@ class LibraryViewModel(
                 ).show()
             }
         }
+    }
+
+    fun setFabMargin(bottomMargin: Int) {
+        fabMargin.postValue(
+            // Normal Margin
+            DensityUtil.dip2px(App.getContext(), 16F) +
+                    bottomMargin
+        )
     }
 }
 

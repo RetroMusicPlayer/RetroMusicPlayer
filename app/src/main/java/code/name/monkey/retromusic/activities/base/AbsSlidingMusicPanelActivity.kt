@@ -132,7 +132,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             val navbarHeight = RetroUtil.getNavigationBarHeight()
             updatePadding(bottom = navbarHeight)
             binding.bottomNavigationView.updateLayoutParams {
-                height = dip(R.dimen.mini_player_height) + navbarHeight
+                height = dip(R.dimen.bottom_nav_height) + navbarHeight
             }
         }
     }
@@ -188,7 +188,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     open fun onPanelExpanded() {
-        if (nowPlayingScreen == Blur ) {
+        if (nowPlayingScreen == Blur) {
             super.setLightStatusbar(false)
         } else {
             super.setLightStatusbarAuto(surfaceColor())
@@ -289,14 +289,12 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     fun hideBottomBar(hide: Boolean) {
         val heightOfBar = RetroUtil.getNavigationBarHeight() +
                 if (MusicPlayerRemote.isCasting) dip(R.dimen.cast_mini_player_height) else dip(R.dimen.mini_player_height)
-        val heightOfBarWithTabs = RetroUtil.getNavigationBarHeight() +
-                if (MusicPlayerRemote.isCasting) dip(R.dimen.mini_cast_player_height_expanded) else dip(
-                    R.dimen.mini_player_height_expanded
-                )
+        val heightOfBarWithTabs = heightOfBar + dip(R.dimen.bottom_nav_height)
         val isVisible = binding.bottomNavigationView.isVisible
         if (hide) {
             bottomSheetBehavior.isHideable = true
             bottomSheetBehavior.peekHeight = 0
+            libraryViewModel.setFabMargin(if (isVisible) dip(R.dimen.bottom_nav_height) else 0)
             ViewCompat.setElevation(binding.slidingPanel, 0f)
             ViewCompat.setElevation(binding.bottomNavigationView, 10f)
             collapsePanel()
@@ -310,9 +308,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     if (bottomSheetBehavior.state != STATE_EXPANDED)
                         getBottomNavigationView().translateYAnimate(0F)
                     bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
+                    libraryViewModel.setFabMargin(heightOfBarWithTabs - RetroUtil.getNavigationBarHeight())
                 } else {
                     println("Details")
                     bottomSheetBehavior.peekHeight = heightOfBar
+                    libraryViewModel.setFabMargin(heightOfBar - RetroUtil.getNavigationBarHeight())
                 }
             }
         }

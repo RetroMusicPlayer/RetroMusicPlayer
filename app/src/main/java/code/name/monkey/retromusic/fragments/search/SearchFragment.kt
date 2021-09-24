@@ -23,12 +23,10 @@ import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.CompoundButton
-import androidx.core.view.children
-import androidx.core.view.doOnPreDraw
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
+import androidx.core.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
@@ -89,6 +87,11 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner, {
+            binding.keyboardPopup.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = it
+            }
+        })
     }
 
     private fun setupChips() {

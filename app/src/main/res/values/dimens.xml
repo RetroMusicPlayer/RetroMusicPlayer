@@ -53,4 +53,5 @@
     <dimen name="indicator_radius">10dp</dimen>
     <dimen name="lyrics_dialog_radius">20dp</dimen>
     <dimen name="cast_mini_player_height">64dp</dimen>
+    <dimen name="bottom_nav_height">56dp</dimen>
 </resources>

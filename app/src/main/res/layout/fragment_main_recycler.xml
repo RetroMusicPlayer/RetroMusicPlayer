@@ -85,6 +85,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         app:srcCompat="@drawable/ic_shuffle"
-        android:layout_marginBottom="116dp"
         android:layout_marginHorizontal="16dp"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
