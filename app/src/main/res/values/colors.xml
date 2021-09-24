@@ -32,7 +32,7 @@
 
     <color name="bottomSheetColorLight">#FFFFFF</color>
     <color name="bottomSheetColorDark">#202020</color>
-    <color name="bottomSheetColorBlack">#111111</color>
+    <color name="bottomSheetColorBlack">#000000</color>
 
     <color name="bottomSheetColor">#FFFFFF</color>
 

@@ -89,8 +89,8 @@
     </style>
 
     <style name="Theme.RetroMusic.Base.MD3.Black" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="bottomSheetTint">@color/bottomSheetColorDark</item>
-        <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
+        <item name="bottomSheetTint">@color/bottomSheetColorBlack</item>
+        <item name="elevationOverlayColor">@color/elevationOverlayBlack</item>
     </style>
 
 
