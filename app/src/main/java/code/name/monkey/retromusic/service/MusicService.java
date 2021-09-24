@@ -1045,7 +1045,9 @@ public class MusicService extends MediaBrowserServiceCompat
         if (playback != null && playback.isPlaying()) {
             startFadeAnimator(playback, false, () -> {
                 //Code to run when Animator Ends
-                playback.pause();
+                if (playback != null) {
+                    playback.pause();
+                }
                 notifyChange(PLAY_STATE_CHANGED);
             });
         }
