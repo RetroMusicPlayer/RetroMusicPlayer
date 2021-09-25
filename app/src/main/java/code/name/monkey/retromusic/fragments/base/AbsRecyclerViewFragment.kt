@@ -79,10 +79,13 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
                 }
             })
-            binding.shuffleButton.setOnClickListener {
-                onShuffleClicked()
+            binding.shuffleButton.apply {
+                setOnClickListener {
+                    onShuffleClicked()
+                }
+                accentColor()
+                hide()
             }
-            binding.shuffleButton.accentColor()
         } else {
             binding.shuffleButton.isVisible = false
         }
