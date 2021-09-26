@@ -127,8 +127,8 @@ class SearchAdapter(
                 val artist = dataSet[position] as Artist
                 holder.title?.text = artist.name
                 holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
-                GlideApp.with(activity).asDrawable().artistImageOptions(artist).load(artist)
-                    .into(holder.image!!)
+                GlideApp.with(activity).asDrawable().artistImageOptions(artist).load(
+                    RetroGlideExtension.getArtistModel(artist)).into(holder.image!!)
             }
             else -> {
                 holder.title?.text = dataSet[position].toString()
