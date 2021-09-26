@@ -19,6 +19,7 @@ import androidx.lifecycle.*
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.fragments.ReloadType.*
+import code.name.monkey.retromusic.fragments.search.Filter
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.*
@@ -139,9 +140,9 @@ class LibraryViewModel(
         }
     }
 
-    fun search(query: String?, filters: List<Boolean>) {
+    fun search(query: String?, filter: Filter) {
         viewModelScope.launch(IO) {
-            val result = repository.search(query, filters)
+            val result = repository.search(query, filter)
             searchResults.postValue(result)
         }
     }

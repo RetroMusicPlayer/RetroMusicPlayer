@@ -212,6 +212,16 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">5%</item>
     </style>
+
+    <style name="SearchChipStyle" parent="Widget.Material3.Chip.Filter">
+        <item name="android:checked">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="checkedIconEnabled">true</item>
+        <item name="chipEndPadding">10dp</item>
+        <item name="chipIconEnabled">true</item>
+        <item name="chipMinHeight">40dp</item>
+        <item name="chipStartPadding">10dp</item>
+    </style>
     <!--Bottom Sheet Dialog Style-->
     <style name="BottomSheetDialogStyle" parent="Theme.Design.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
