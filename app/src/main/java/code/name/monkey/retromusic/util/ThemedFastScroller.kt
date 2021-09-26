@@ -18,6 +18,7 @@ import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.ColorUtil.isColorLight
 import code.name.monkey.appthemehelper.util.MaterialValueHelper.getPrimaryTextColor
 import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.views.PopupBackground
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
@@ -27,13 +28,17 @@ import me.zhanghai.android.fastscroll.R
 object ThemedFastScroller {
     fun create(view: ViewGroup): FastScroller {
         val context = view.context
-        val color = accentColor(context)
+        val color = if (PreferenceUtil.materialYou && VersionUtils.hasS()) {
+            context.getColor(code.name.monkey.retromusic.R.color.m3_accent_color)
+        } else {
+            accentColor(context)
+        }
         val textColor = getPrimaryTextColor(context, isColorLight(color))
         val fastScrollerBuilder = FastScrollerBuilder(view)
         fastScrollerBuilder.useMd2Style()
         fastScrollerBuilder.setPopupStyle { popupText ->
             PopupStyles.MD2.accept(popupText)
-            popupText.background = PopupBackground(context)
+            popupText.background = PopupBackground(context, color)
             popupText.setTextColor(textColor)
         }
 

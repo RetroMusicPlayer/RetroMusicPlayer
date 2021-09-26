@@ -18,16 +18,16 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="10dp">
+    android:paddingHorizontal="16dp">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playAction"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginEnd="4dp"
         android:layout_weight="1"
+        android:paddingVertical="10dp"
         android:text="@string/action_play_all"
         android:textAppearance="@style/TextViewButton"
         android:textColor="?android:attr/textColorPrimary"
@@ -38,12 +38,12 @@
         android:id="@+id/shuffleAction"
         style="@style/Widget.Material3.Button.Icon"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="4dp"
         android:layout_weight="1"
+        android:paddingVertical="10dp"
         android:text="@string/shuffle"
         android:textAppearance="@style/TextViewButton"
-        android:textColor="?android:attr/textColorPrimary"
         app:icon="@drawable/ic_shuffle" />
 
 </LinearLayout>

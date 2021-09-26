@@ -21,6 +21,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
@@ -30,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
@@ -190,7 +192,11 @@ class HomeAdapter(
         )
 
         fun bindView(home: Home) {
-            val color = ThemeStore.accentColor(activity)
+            val color = if (PreferenceUtil.materialYou && VersionUtils.hasS()) {
+                ContextCompat.getColor(App.getContext(), R.color.m3_accent_color)
+            } else {
+                ThemeStore.accentColor(activity)
+            }
             itemView.findViewById<TextView>(R.id.message).apply {
                 setTextColor(color)
                 setOnClickListener {

@@ -111,6 +111,12 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 true
             }
         }
+
+        val materialYou: ATESwitchPreference? = findPreference(MATERIAL_YOU)
+        materialYou?.setOnPreferenceChangeListener { _, _ ->
+            restartActivity()
+            true
+        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

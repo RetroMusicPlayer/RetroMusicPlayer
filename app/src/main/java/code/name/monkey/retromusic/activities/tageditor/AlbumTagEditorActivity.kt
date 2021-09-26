@@ -33,6 +33,7 @@ import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityAlbumTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.ArtworkInfo
@@ -62,8 +63,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     }
 
     override fun loadImageFromFile(selectedFile: Uri?) {
-
-
         GlideApp.with(this@AlbumTagEditorActivity).asBitmapPalette().load(selectedFile)
             .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
             .into(object : ImageViewTarget<BitmapPaletteWrapper>(binding.editorImage) {
@@ -119,10 +118,10 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     private fun setUpViews() {
         fillViewsWithFileTags()
 
-        MaterialUtil.setTint(binding.yearContainer, false)
-        MaterialUtil.setTint(binding.genreContainer, false)
-        MaterialUtil.setTint(binding.albumTitleContainer, false)
-        MaterialUtil.setTint(binding.albumArtistContainer, false)
+        binding.yearContainer.setTint(false)
+        binding.genreContainer.setTint(false)
+        binding.albumTitleContainer.setTint(false)
+        binding.albumArtistContainer.setTint(false)
 
         binding.albumText.appHandleColor().addTextChangedListener(this)
         binding.albumArtistText.appHandleColor().addTextChangedListener(this)

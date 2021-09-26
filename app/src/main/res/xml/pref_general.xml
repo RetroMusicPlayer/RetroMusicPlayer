@@ -17,9 +17,18 @@
             app:icon="@drawable/ic_color_lens" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:dependency="material_you"
             android:key="black_theme"
             android:layout="@layout/list_item_view_switch_no_title"
             android:title="@string/black_theme_name" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:key="material_you"
+            android:layout="@layout/list_item_view_switch_no_title"
+            android:title="@string/pref_title_md3"
+            app:isPreferenceVisible="@bool/md3_available" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
@@ -29,6 +38,7 @@
         android:title="@string/colors">
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
+            android:dependency="material_you"
             android:key="accent_color"
             android:layout="@layout/list_item_color_view"
             android:persistent="false"
@@ -38,6 +48,7 @@
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
+            android:dependency="material_you"
             android:key="desaturated_color"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_desaturated_color"
@@ -52,6 +63,7 @@
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
+            android:dependency="material_you"
             android:key="should_color_app_shortcuts"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_colored_app_shortcuts"

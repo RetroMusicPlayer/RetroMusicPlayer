@@ -27,6 +27,7 @@ import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -51,6 +52,7 @@ fun View.hidden() {
 fun View.showOrHide(show: Boolean) = if (show) show() else hide()
 
 fun EditText.appHandleColor(): EditText {
+    if (PreferenceUtil.materialYou) return this
     TintHelper.colorHandles(this, ThemeStore.accentColor(context))
     return this
 }

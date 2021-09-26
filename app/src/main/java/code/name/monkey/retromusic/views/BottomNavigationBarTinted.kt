@@ -35,23 +35,26 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
     init {
         labelVisibilityMode = PreferenceUtil.tabTitleMode
 
-        val iconColor = ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
-        val accentColor = ThemeStore.accentColor(context)
-        NavigationViewUtil.setItemIconColors(
-            this,
-            ColorUtil.withAlpha(iconColor, 0.5f),
-            accentColor
-        )
-        NavigationViewUtil.setItemTextColors(
-            this,
-            ColorUtil.withAlpha(iconColor, 0.5f),
-            accentColor
-        )
-        itemRippleColor = ColorStateList.valueOf(accentColor.addAlpha())
-        background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.colorSurface))
+        if (!PreferenceUtil.materialYou) {
+            val iconColor = ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
+            val accentColor = ThemeStore.accentColor(context)
+            NavigationViewUtil.setItemIconColors(
+                this,
+                ColorUtil.withAlpha(iconColor, 0.5f),
+                accentColor
+            )
+            NavigationViewUtil.setItemTextColors(
+                this,
+                ColorUtil.withAlpha(iconColor, 0.5f),
+                accentColor
+            )
+            itemRippleColor = ColorStateList.valueOf(accentColor.addAlpha(0.08F))
+            background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.colorSurface))
+            itemActiveIndicatorColor = ColorStateList.valueOf(accentColor.addAlpha(0.12F))
+        }
     }
 }
 
-fun Int.addAlpha(): Int {
-    return ColorUtil.withAlpha(this, 0.12f)
+fun Int.addAlpha(alpha: Float): Int {
+    return ColorUtil.withAlpha(this, alpha)
 }

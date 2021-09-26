@@ -22,10 +22,10 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.widget.ImageView
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.repository.SongRepository
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
@@ -50,15 +50,15 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
     @SuppressLint("ClickableViewAccessibility")
     private fun setUpViews() {
         fillViewsWithFileTags()
-        MaterialUtil.setTint(binding.songTextContainer, false)
-        MaterialUtil.setTint(binding.composerContainer, false)
-        MaterialUtil.setTint(binding.albumTextContainer, false)
-        MaterialUtil.setTint(binding.artistContainer, false)
-        MaterialUtil.setTint(binding.albumArtistContainer, false)
-        MaterialUtil.setTint(binding.yearContainer, false)
-        MaterialUtil.setTint(binding.genreContainer, false)
-        MaterialUtil.setTint(binding.trackNumberContainer, false)
-        MaterialUtil.setTint(binding.lyricsContainer, false)
+        binding.songTextContainer.setTint(false)
+        binding.composerContainer.setTint(false)
+        binding.albumTextContainer.setTint(false)
+        binding.artistContainer.setTint(false)
+        binding.albumArtistContainer.setTint(false)
+        binding.yearContainer.setTint(false)
+        binding.genreContainer.setTint(false)
+        binding.trackNumberContainer.setTint(false)
+        binding.lyricsContainer.setTint(false)
 
         binding.songText.appHandleColor().addTextChangedListener(this)
         binding.albumText.appHandleColor().addTextChangedListener(this)

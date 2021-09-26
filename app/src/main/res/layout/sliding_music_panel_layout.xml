@@ -55,17 +55,12 @@
 
     <code.name.monkey.retromusic.views.BottomNavigationBarTinted
         android:id="@+id/bottomNavigationView"
+        style="@style/Widget.Material3.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_nav_height"
         android:layout_gravity="bottom"
-        android:background="?attr/colorSurface"
         android:elevation="0dp"
         app:itemHorizontalTranslationEnabled="false"
-        app:itemIconTint="@drawable/bottom_navigation_item_colors"
-        app:itemTextAppearanceActive="@style/BottomSheetItemTextAppearance"
-        app:itemTextAppearanceInactive="@style/BottomSheetItemTextAppearance"
-        app:itemTextColor="@drawable/bottom_navigation_item_colors"
-        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_main"
-        tools:layout_height="56dp" />
+        tools:layout_height="wrap_content" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

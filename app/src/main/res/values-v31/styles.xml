@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.RetroMusic.MD3" parent="@style/Theme.Material3.DayNight.NoActionBar" >
+        <item name="rectSelector">@drawable/rect_selector</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="android:maxWidth">@empty</item>
+    </style>
+</resources>

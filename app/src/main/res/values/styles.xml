@@ -23,6 +23,16 @@
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
+    <style name="Theme.RetroMusic.MD3" parent="@style/Theme.Material3.DayNight.NoActionBar">
+        <item name="roundSelector">@drawable/round_selector</item>
+        <item name="rectSelector">@drawable/rect_selector</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.DayNight</item>
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+        <item name="popupWindowStyle">@style/MaterialPopupMenuStyle</item>
+        <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
+    </style>
+
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />
 
     <style name="Theme.RetroMusic.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title" />

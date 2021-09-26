@@ -613,4 +613,7 @@ object PreferenceUtil {
     val crossFadeDuration
         get() = sharedPreferences
             .getInt(CROSS_FADE_DURATION, 0)
+
+    val materialYou
+        get() = sharedPreferences.getBoolean(MATERIAL_YOU, false)
 }
