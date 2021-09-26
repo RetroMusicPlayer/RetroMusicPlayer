@@ -42,13 +42,13 @@
     <string name="action_set_as_start_directory">Definir como diretoria inicial</string>
     <string name="action_settings">"Definições"</string>
     <string name="action_share">Partilhar</string>
-    <string name="action_shuffle_all">Shuffle all</string>
-    <string name="action_shuffle_playlist">Shuffle playlist</string>
+    <string name="action_shuffle_all">Misturar tudo</string>
+    <string name="action_shuffle_playlist">Misturar lista</string>
     <string name="action_sleep_timer">Sleep timer</string>
     <string name="action_sort_order">Ordenação</string>
     <string name="action_tag_editor">Tag editor</string>
     <string name="action_toggle_favorite">Toggle favorite</string>
-    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
+    <string name="action_toggle_shuffle">Ligar/desligar aleatório</string>
     <string name="adaptive">Adaptive</string>
     <string name="add_action">Adicionar</string>
     <string name="add_playlist_title">"Adicionar à lista"</string>
@@ -68,7 +68,7 @@
     </plurals>
     <string name="always">Sempre</string>
     <string name="app_share">Hey check out this cool music player at: https://play.google.com/store/apps/details?id=%s</string>
-    <string name="app_shortcut_shuffle_all_short">Shuffle</string>
+    <string name="app_shortcut_shuffle_all_short">Aleatório</string>
     <string name="app_shortcut_top_tracks_short">Top músicas</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Card</string>
@@ -317,7 +317,7 @@
     <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
     <string name="pref_summary_toggle_full_screen">Modo imersivo</string>
     <string name="pref_summary_toggle_headset">Tocar imediatamente após ligar os auriculares</string>
-    <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
+    <string name="pref_summary_toggle_shuffle">O modo aleatório vai ser desligado ao reproduzir uma nova lista</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_summary_whitelist">Mostrar apenas músicas de /Music</string>
     <string name="pref_title_album_art_on_lockscreen">Mostrar capa do álbum</string>
@@ -341,15 +341,15 @@
     <string name="pref_title_extra_song_info">Info. da música</string>
     <string name="pref_title_gapless_playback">Gapless playback</string>
     <string name="pref_title_general_theme">Tema da aplicação</string>
-    <string name="pref_title_home_album_grid_style">Album grid</string>
-    <string name="pref_title_home_artist_grid_style">Artist grid</string>
+    <string name="pref_title_home_album_grid_style">Álbuns em grelha</string>
+    <string name="pref_title_home_artist_grid_style">Artistas em grelha</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
     <string name="pref_title_last_added_interval">Last added playlist interval</string>
     <string name="pref_title_lock_screen">Controlos de ecrã inteiro</string>
     <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
     <string name="pref_title_open_source_licences">Licenças open source</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
+    <string name="pref_title_remember_tab">Memorizar separador</string>
     <string name="pref_title_show_lyrics">Mostrar letras</string>
     <string name="pref_title_suggestions">Mostrar sugestões</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
