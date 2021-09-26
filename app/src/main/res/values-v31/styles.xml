@@ -1,8 +1,15 @@
 <resources>
-    <style name="Theme.RetroMusic.MD3" parent="@style/Theme.Material3.DayNight.NoActionBar" >
+    <style name="Theme.RetroMusic.MD3" parent="@style/Theme.Material3.DayNight.NoActionBar">
+        <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.DayNight</item>
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+        <item name="popupWindowStyle">@style/MaterialPopupMenuStyle</item>
+        <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
     </style>
-
     <style name="BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet">
         <item name="android:maxWidth">@empty</item>
     </style>
