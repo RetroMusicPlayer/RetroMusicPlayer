@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.fragments
+package code.name.monkey.retromusic.fragments.other
 
 import android.content.Context
 import android.graphics.Color

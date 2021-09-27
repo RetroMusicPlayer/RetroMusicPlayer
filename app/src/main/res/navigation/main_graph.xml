@@ -62,7 +62,7 @@
 
     <fragment
         android:id="@+id/detailListFragment"
-        android:name="code.name.monkey.retromusic.fragments.DetailListFragment"
+        android:name="code.name.monkey.retromusic.fragments.other.DetailListFragment"
         android:label="DetailListFragment">
         <argument
             android:name="type"
@@ -124,7 +124,7 @@
 
     <fragment
         android:id="@+id/user_info_fragment"
-        android:name="code.name.monkey.retromusic.fragments.UserInfoFragment" />
+        android:name="code.name.monkey.retromusic.fragments.other.UserInfoFragment" />
 
     <fragment
         android:id="@+id/playing_queue_fragment"
@@ -132,5 +132,5 @@
 
     <fragment
         android:id="@+id/lyrics_fragment"
-        android:name="code.name.monkey.retromusic.fragments.LyricsFragment" />
+        android:name="code.name.monkey.retromusic.fragments.other.LyricsFragment" />
 </navigation>

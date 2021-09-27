@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.fragments
+package code.name.monkey.retromusic.fragments.other
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint

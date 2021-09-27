@@ -21,7 +21,6 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.animation.doOnEnd
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentColorPlayerBinding
