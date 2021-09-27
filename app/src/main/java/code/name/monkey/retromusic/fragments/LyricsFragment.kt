@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.activities
+package code.name.monkey.retromusic.fragments
 
 import android.os.Bundle
 import android.text.InputType
@@ -20,13 +20,13 @@ import android.view.*
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.activities.tageditor.WriteTagsAsyncTask
-import code.name.monkey.retromusic.databinding.ActivityLyricsBinding
+import code.name.monkey.retromusic.databinding.FragmentLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentNormalLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentSyncedLyricsBinding
 import code.name.monkey.retromusic.extensions.accentColor
@@ -53,12 +53,13 @@ import org.jaudiotagger.tag.FieldKey
 import java.io.File
 import java.util.*
 
-class LyricsActivity : AbsMusicServiceActivity() {
+class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
-    private lateinit var binding: ActivityLyricsBinding
+    private var _binding: FragmentLyricsBinding? = null
+    private val binding get() = _binding!!
     private lateinit var song: Song
 
-    private val lyricsSectionsAdapter = LyricsSectionsAdapter(this)
+    private lateinit var lyricsSectionsAdapter: LyricsSectionsAdapter
 
     private val googleSearchLrcUrl: String
         get() {
@@ -80,20 +81,18 @@ class LyricsActivity : AbsMusicServiceActivity() {
     private fun buildContainerTransform(): MaterialContainerTransform {
         val transform = MaterialContainerTransform()
         transform.setAllContainerColors(
-            MaterialColors.getColor(findViewById(R.id.container), R.attr.colorSurface)
+            MaterialColors.getColor(requireView().findViewById(R.id.container), R.attr.colorSurface)
         )
         transform.addTarget(R.id.container)
         transform.duration = 300
         return transform
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLyricsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lyricsSectionsAdapter = LyricsSectionsAdapter(requireActivity())
+        _binding = FragmentLyricsBinding.bind(view)
         ViewCompat.setTransitionName(binding.container, "lyrics")
-        setStatusbarColorAuto()
-        setTaskDescriptionColorAuto()
 
         setupWakelock()
 
@@ -101,11 +100,9 @@ class LyricsActivity : AbsMusicServiceActivity() {
         binding.tabLyrics.setBackgroundColor(surfaceColor())
         binding.container.setBackgroundColor(surfaceColor())
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
-        setSupportActionBar(binding.toolbar)
         setupViews()
-
+        updateTitleSong()
     }
-
 
     private fun setupViews() {
         binding.lyricsPager.adapter = lyricsSectionsAdapter
@@ -118,7 +115,7 @@ class LyricsActivity : AbsMusicServiceActivity() {
         }.attach()
 //        lyricsPager.isUserInputEnabled = false
 
-        binding.tabLyrics.setSelectedTabIndicatorColor(ThemeStore.accentColor(this))
+        binding.tabLyrics.setSelectedTabIndicatorColor(ThemeStore.accentColor(requireContext()))
         binding.tabLyrics.setTabTextColors(textColorSecondary(), accentColor())
     }
 
@@ -140,22 +137,22 @@ class LyricsActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupWakelock() {
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_search, menu)
-        return super.onCreateOptionsMenu(menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            finish()
+            findNavController().navigateUp()
             return true
         }
         if (item.itemId == R.id.action_search) {
             RetroUtil.openUrl(
-                this, when (binding.lyricsPager.currentItem) {
+                requireActivity(), when (binding.lyricsPager.currentItem) {
                     0 -> syairSearchLrcUrl
                     1 -> googleSearchLrcUrl
                     else -> googleSearchLrcUrl
@@ -184,7 +181,7 @@ class LyricsActivity : AbsMusicServiceActivity() {
             e.printStackTrace()
         }
 
-        MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(res = R.string.edit_normal_lyrics)
             input(
                 hintRes = R.string.paste_lyrics_here,
@@ -193,7 +190,7 @@ class LyricsActivity : AbsMusicServiceActivity() {
             ) { _, input ->
                 val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
                 fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
-                WriteTagsAsyncTask(this@LyricsActivity).execute(
+                WriteTagsAsyncTask(requireActivity()).execute(
                     LoadingInfo(
                         listOf(song.data), fieldKeyValueMap, null
                     )
@@ -216,7 +213,7 @@ class LyricsActivity : AbsMusicServiceActivity() {
         }
         val content: String = LyricUtil.getStringFromLrc(lrcFile)
 
-        MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(res = R.string.edit_synced_lyrics)
             input(
                 hintRes = R.string.paste_timeframe_lyrics_here,
