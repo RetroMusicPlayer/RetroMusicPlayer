@@ -21,6 +21,7 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
+import androidx.transition.Fade
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -90,6 +91,8 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        enterTransition = Fade()
+        exitTransition = Fade()
         lyricsSectionsAdapter = LyricsSectionsAdapter(requireActivity())
         _binding = FragmentLyricsBinding.bind(view)
         ViewCompat.setTransitionName(binding.container, "lyrics")

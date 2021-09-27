@@ -163,12 +163,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     fun collapsePanel() {
         bottomSheetBehavior.state = STATE_COLLAPSED
-        setMiniPlayerAlphaProgress(0f)
     }
 
     fun expandPanel() {
         bottomSheetBehavior.state = STATE_EXPANDED
-        setMiniPlayerAlphaProgress(1f)
     }
 
     private fun setMiniPlayerAlphaProgress(progress: Float) {
@@ -315,6 +313,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     libraryViewModel.setFabMargin(heightOfBar - RetroUtil.getNavigationBarHeight())
                 }
             }
+            bottomSheetBehavior.setAllowDragging(true)
         }
     }
 

@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.*
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.audioSessionId
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 object NavigationUtil {
     fun bugReport(activity: Activity) {
@@ -40,10 +41,18 @@ object NavigationUtil {
     }
 
     fun goToLyrics(activity: Activity) {
-        if (activity is MainActivity) {
-            activity.collapsePanel()
+        if (activity !is MainActivity) return
+        activity.apply {
+            //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
+            setBottomBarVisibility(false)
+            if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
+                collapsePanel()
+            }
+
+            findNavController(R.id.fragment_container).navigate(
+                R.id.lyrics_fragment
+            )
         }
-        activity.findNavController(R.id.fragment_container).navigate(R.id.lyrics_fragment)
     }
 
     fun goToProVersion(context: Context) {
@@ -69,10 +78,10 @@ object NavigationUtil {
     }
 
     fun openEqualizer(activity: Activity) {
-        stockEqalizer(activity)
+        stockEqualizer(activity)
     }
 
-    private fun stockEqalizer(activity: Activity) {
+    private fun stockEqualizer(activity: Activity) {
         val sessionId = audioSessionId
         if (sessionId == AudioEffect.ERROR_BAD_VALUE) {
             Toast.makeText(
