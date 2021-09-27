@@ -99,11 +99,10 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
         setupWakelock()
 
-        binding.toolbar.setBackgroundColor(surfaceColor())
         binding.tabLyrics.setBackgroundColor(surfaceColor())
         binding.container.setBackgroundColor(surfaceColor())
-        ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         setupViews()
+        setupToolbar()
         updateTitleSong()
     }
 
@@ -122,6 +121,13 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         binding.tabLyrics.setTabTextColors(textColorSecondary(), accentColor())
     }
 
+    private fun setupToolbar() {
+        binding.toolbar.setBackgroundColor(surfaceColor())
+        ToolbarContentTintHelper.colorBackButton(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
 
     override fun onPlayingMetaChanged() {
         super.onPlayingMetaChanged()
