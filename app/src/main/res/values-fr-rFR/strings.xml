@@ -180,7 +180,7 @@
     <string name="grid_size_6">6</string>
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
-    <string name="grid_style_label">Les Grilles &amp; Le Style</string>
+    <string name="grid_style_label">Style de la grille</string>
     <string name="help_summary">Encore besoin d\'aide ?</string>
     <string name="hinge">Charnière</string>
     <string name="history">Historique</string>
@@ -192,14 +192,14 @@
     <string name="import_label">Importer</string>
     <string name="import_playlist">Importer la liste de lecture</string>
     <string name="import_playlist_message">Il importe toutes les listes de lecture listées dans l\'Android Media Store avec des morceaux, si les listes de lecture existent déjà, les morceaux seront fusionnés.</string>
-    <string name="inserted_x_songs_into_playlist_x">%1$d morceaux ont été inséré dans la liste %2$s.</string>
+    <string name="inserted_x_songs_into_playlist_x">%1$d morceaux ont été insérés dans la liste %2$s.</string>
     <string name="instagram_page_summary">Partager votre configuration de Retro Music pour la montrer sur Instagram</string>
     <string name="keyboard">Clavier</string>
-    <string name="label_bit_rate">Débit</string>
+    <string name="label_bit_rate">Débit audio</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Nom du fichier</string>
-    <string name="label_file_path">Chemin de fichier</string>
-    <string name="label_file_size">Taille</string>
+    <string name="label_file_path">Chemin du fichier</string>
+    <string name="label_file_size">Taille du fichier</string>
     <string name="label_more_from">Plus de %s</string>
     <string name="label_sampling_rate">Taux d’échantillonnage</string>
     <string name="label_track_length">Longueur</string>
@@ -280,7 +280,7 @@
     <string name="pref_header_blacklist">Liste noir</string>
     <string name="pref_header_controls">Contrôle</string>
     <string name="pref_header_general">Thème</string>
-    <string name="pref_header_images">Illusration</string>
+    <string name="pref_header_images">Illustration</string>
     <string name="pref_header_library">Bibliothèque</string>
     <string name="pref_header_lockscreen">Écran de verrouillage</string>
     <string name="pref_header_playlists">Listes de lecture</string>

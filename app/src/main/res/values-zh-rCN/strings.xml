@@ -69,9 +69,9 @@
     <string name="app_shortcut_shuffle_all_short">随机播放</string>
     <string name="app_shortcut_top_tracks_short">热门曲目</string>
     <string name="app_widget_big_name">完整图像</string>
-    <string name="app_widget_card_name">卡片模式</string>
-    <string name="app_widget_classic_name">经典模式</string>
-    <string name="app_widget_small_name">小</string>
+    <string name="app_widget_card_name">卡片</string>
+    <string name="app_widget_classic_name">经典</string>
+    <string name="app_widget_small_name">小巧</string>
     <string name="app_widget_text_name">极简文字</string>
     <string name="artist">艺术家</string>
     <string name="artists">艺术家</string>
@@ -106,7 +106,7 @@
     <string name="carousal_effect_on_now_playing_screen">在「正在播放」界面使用轮播效果</string>
     <string name="cascading">层叠</string>
     <string name="changelog">更新日志</string>
-    <string name="changelog_summary">查看新内容</string>
+    <string name="changelog_summary">看看新变化</string>
     <string name="circle">环形</string>
     <string name="circular">圆形</string>
     <string name="classic">经典</string>
@@ -300,7 +300,7 @@
     <string name="pref_summary_colored_app_shortcuts">将快捷方式颜色更改为强调色，每次颜色更改后需要切换一下该设置才能生效</string>
     <string name="pref_summary_colored_notification">"将通知颜色设为专辑封面的强调色"</string>
     <string name="pref_summary_cross_fade">曲目间淡入淡出的时间</string>
-    <string name="pref_summary_desaturated_color">根据质感设计规范，暗色模式时颜色应该降低饱和度</string>
+    <string name="pref_summary_desaturated_color">根据质感设计规范，深色模式下应使用低饱和度颜色</string>
     <string name="pref_summary_expand_now_playing_panel">点击通知将显示正在播放页，而不是主页</string>
     <string name="pref_summary_extra_controls">给迷你播放器添加额外控件</string>
     <string name="pref_summary_extra_song_info">显示额外的歌曲信息，例如文件格式、比特率和频率</string>
@@ -363,7 +363,7 @@
     <string name="purchase">购买</string>
     <string name="queue">播放队列</string>
     <string name="rate_app">评价应用</string>
-    <string name="rate_on_google_play_summary">喜欢这个应用？去 Google Play Store 中告诉我们怎样才能让它更好</string>
+    <string name="rate_on_google_play_summary">喜欢这个应用？去 Google Play 商店告诉我们怎样才能让它更好</string>
     <string name="recent_albums">最近专辑</string>
     <string name="recent_artists">最近艺术家</string>
     <string name="remove_action">移除</string>

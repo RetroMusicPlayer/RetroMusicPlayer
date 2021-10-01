@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
-    <string name="about_settings_summary">Team, social links</string>
+    <string name="about_album_label">Despre %s</string>
+    <string name="about_settings_summary">Echipă și legături sociale</string>
     <string name="accent_color">Culoare ton</string>
     <string name="accent_color_desc">Culoarea de accent, implicit, se face verde.</string>
     <string name="action_about">Despre</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="action_add_to_blacklist">Adăugare la lista neagră</string>
     <string name="action_add_to_favorites">Adaugă la favorite</string>
     <string name="action_add_to_playing_queue">Adaugă la coada de redare</string>
     <string name="action_add_to_playlist">Adaugă la un playlist</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">Transmite</string>
     <string name="action_clear_playing_queue">Curăță coada de redare</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_cycle_repeat">Mod repetare ciclu</string>
     <string name="action_delete">Șterge</string>
     <string name="action_delete_from_device">Șterge de pe dispozitiv</string>
     <string name="action_details">Detalii</string>
-    <string name="action_edit">Edit</string>
+    <string name="action_edit">Editare</string>
     <string name="action_go_to_album">Pagină album</string>
     <string name="action_go_to_artist">Pagină artist</string>
     <string name="action_go_to_genre">Go to genre</string>
