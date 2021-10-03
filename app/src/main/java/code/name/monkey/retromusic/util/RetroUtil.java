@@ -231,31 +231,6 @@ public class RetroUtil {
     window.setStatusBarColor(Color.TRANSPARENT);
   }
 
-  /**
-   * This will draw our view above the navigation bar instead of behind it by adding margins.
-   *
-   * @param view view to draw above Navigation Bar
-   */
-  public static void drawAboveNavBar(View view) {
-    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
-      ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-      params.bottomMargin = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
-      return WindowInsetsCompat.CONSUMED;
-    });
-  }
-
-  /**
-   * This will draw our view above the navigation bar instead of behind it by adding padding.
-   *
-   * @param view view to draw above Navigation Bar
-   */
-  public static void drawAboveNavBarWithPadding(View view) {
-    ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
-      v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom);
-      return WindowInsetsCompat.CONSUMED;
-    });
-  }
-
   public static String getIpAddress(boolean useIPv4) {
     try {
       List<NetworkInterface> interfaces =

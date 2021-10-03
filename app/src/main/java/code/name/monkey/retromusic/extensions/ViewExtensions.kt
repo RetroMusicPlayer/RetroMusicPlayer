@@ -19,15 +19,20 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.utils.MDUtil.updatePadding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -123,5 +128,53 @@ fun ShapeableImageView.setCircleShape(boolean: Boolean) {
     addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
         val radius = width / 2f
         shapeAppearanceModel = ShapeAppearanceModel().withCornerSize(radius)
+    }
+}
+
+
+/**
+ * This will draw our view above the navigation bar instead of behind it by adding margins.
+ */
+fun View.drawAboveNavBar() {
+    ViewCompat.setOnApplyWindowInsetsListener(
+        (this)
+    ) { v: View, insets: WindowInsetsCompat ->
+        v.updateLayoutParams<MarginLayoutParams> {
+            bottomMargin =
+                insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+        }
+        insets
+    }
+}
+
+/**
+ * This will draw our view above the navigation bar instead of behind it by adding padding.
+ */
+fun View.drawAboveNavBarWithPadding() {
+    ViewCompat.setOnApplyWindowInsetsListener(
+        (this)
+    ) { v: View, insets: WindowInsetsCompat ->
+        val navBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+        v.updatePadding(bottom = navBarHeight)
+        insets
+    }
+    requestApplyInsetsWhenAttached()
+}
+
+fun View.requestApplyInsetsWhenAttached() {
+    if (isAttachedToWindow) {
+        // We're already attached, just request as normal
+        requestApplyInsets()
+    } else {
+        // We're not attached to the hierarchy, add a listener to
+        // request when we are
+        addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View) {
+                v.removeOnAttachStateChangeListener(this)
+                v.requestApplyInsets()
+            }
+
+            override fun onViewDetachedFromWindow(v: View) = Unit
+        })
     }
 }

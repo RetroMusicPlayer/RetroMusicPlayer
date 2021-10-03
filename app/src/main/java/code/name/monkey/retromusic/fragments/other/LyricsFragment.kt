@@ -26,6 +26,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.WriteTagsAsyncTask
 import code.name.monkey.retromusic.databinding.FragmentLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentNormalLyricsBinding
@@ -361,5 +362,8 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         }
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (requireActivity() as MainActivity).expandPanel()
+    }
 }

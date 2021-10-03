@@ -21,6 +21,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPlainPlayerBinding
+import code.name.monkey.retromusic.extensions.drawAboveNavBar
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -85,7 +86,7 @@ class PlainPlayerFragment : AbsPlayerFragment(R.layout.fragment_plain_player) {
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
         }
-        RetroUtil.drawAboveNavBar(playerToolbar())
+        playerToolbar().drawAboveNavBar()
     }
 
     private fun setUpSubFragments() {

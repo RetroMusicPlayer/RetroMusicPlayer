@@ -8,6 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
+        tools:layout="@layout/fragment_home"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,10 +58,13 @@
         android:id="@+id/bottomNavigationView"
         style="@style/Widget.Material3.BottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_nav_height"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:elevation="0dp"
+        android:minHeight="@dimen/bottom_nav_height"
         app:itemHorizontalTranslationEnabled="false"
+        app:itemPaddingBottom="0dp"
+        app:itemPaddingTop="8dp"
         app:menu="@menu/bottom_navigation_main"
         tools:layout_height="wrap_content" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

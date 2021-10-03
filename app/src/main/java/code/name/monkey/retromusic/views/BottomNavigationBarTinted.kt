@@ -49,7 +49,7 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
                 accentColor
             )
             itemRippleColor = ColorStateList.valueOf(accentColor.addAlpha(0.08F))
-            background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.colorSurface))
+            background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.bottomSheetTint))
             itemActiveIndicatorColor = ColorStateList.valueOf(accentColor.addAlpha(0.12F))
         }
     }

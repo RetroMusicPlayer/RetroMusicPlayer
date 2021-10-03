@@ -33,8 +33,8 @@ import code.name.monkey.retromusic.databinding.FragmentMainRecyclerBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialSharedAxis
@@ -159,10 +159,10 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         val itemCount: Int = adapter?.itemCount ?: 0
 
         if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
-            val height = DensityUtil.dip2px(requireContext(), 112f)
+            val height = dip(R.dimen.mini_player_height_expanded)
             binding.recyclerView.updatePadding(0, 0, 0, height)
         } else {
-            val height = DensityUtil.dip2px(requireContext(), 56f)
+            val height = dip(R.dimen.mini_player_height)
             binding.recyclerView.updatePadding(0, 0, 0, height)
         }
     }

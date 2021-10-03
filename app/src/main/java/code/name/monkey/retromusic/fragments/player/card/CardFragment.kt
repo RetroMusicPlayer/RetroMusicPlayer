@@ -21,12 +21,12 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentCardPlayerBinding
+import code.name.monkey.retromusic.extensions.drawAboveNavBar
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
@@ -83,7 +83,7 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
         _binding = FragmentCardPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
-        RetroUtil.drawAboveNavBar(binding.playbackControlsFragment.parent as View)
+        (binding.playbackControlsFragment.parent as View).drawAboveNavBar()
     }
 
     private fun setUpSubFragments() {

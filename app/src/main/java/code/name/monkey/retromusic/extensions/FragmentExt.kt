@@ -14,15 +14,13 @@
  */
 package code.name.monkey.retromusic.extensions
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.PowerManager
 import android.widget.Toast
-import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
-import androidx.annotation.IntegerRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
@@ -101,4 +99,8 @@ fun Fragment.getDrawableCompat(@DrawableRes drawableRes: Int): Drawable {
 
 fun Fragment.applyToolbar(toolbar: MaterialToolbar) {
     (requireActivity() as AppCompatActivity).applyToolbar(toolbar)
+}
+
+fun Fragment.dip(@DimenRes id: Int): Int {
+    return resources.getDimensionPixelSize(id)
 }

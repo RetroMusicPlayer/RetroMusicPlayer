@@ -26,6 +26,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFlatPlayerBinding
+import code.name.monkey.retromusic.extensions.drawAboveNavBar
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -91,7 +92,7 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
         _binding = FragmentFlatPlayerBinding.bind(view)
         setUpPlayerToolbar()
         setUpSubFragments()
-        RetroUtil.drawAboveNavBar(binding.playbackControlsFragment)
+        binding.playbackControlsFragment.drawAboveNavBar()
     }
 
     override fun onShow() {

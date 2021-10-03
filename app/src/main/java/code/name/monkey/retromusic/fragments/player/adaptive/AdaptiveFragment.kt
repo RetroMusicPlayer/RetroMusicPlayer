@@ -21,6 +21,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentAdaptivePlayerBinding
+import code.name.monkey.retromusic.extensions.drawAboveNavBar
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
@@ -47,7 +48,7 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
         _binding = FragmentAdaptivePlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
-        RetroUtil.drawAboveNavBar(binding.root)
+        binding.root.drawAboveNavBar()
     }
 
     private fun setUpSubFragments() {

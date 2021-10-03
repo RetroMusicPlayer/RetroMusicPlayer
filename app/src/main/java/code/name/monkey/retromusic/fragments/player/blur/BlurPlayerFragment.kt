@@ -24,6 +24,7 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.NEW_BLUR_AMOUNT
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentBlurBinding
+import code.name.monkey.retromusic.extensions.drawAboveNavBar
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
@@ -56,7 +57,7 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         _binding = FragmentBlurBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
-        RetroUtil.drawAboveNavBar(binding.playerToolbar)
+        binding.playerToolbar.drawAboveNavBar()
     }
 
     private fun setUpSubFragments() {

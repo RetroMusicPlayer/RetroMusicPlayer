@@ -22,8 +22,6 @@ import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -118,6 +116,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         super.onCreate(savedInstanceState)
         binding = createContentView()
         setContentView(binding.root)
+        binding.bottomNavigationView.drawAboveNavBarWithPadding()
         chooseFragmentForTheme()
         setupSlidingUpPanel()
         setupBottomSheet()
@@ -127,13 +126,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         binding.dimBackground.setOnClickListener {
             println("dimBackground")
             collapsePanel()
-        }
-        binding.bottomNavigationView.apply {
-            val navbarHeight = RetroUtil.getNavigationBarHeight()
-            updatePadding(bottom = navbarHeight)
-            binding.bottomNavigationView.updateLayoutParams {
-                height = dip(R.dimen.bottom_nav_height) + navbarHeight
-            }
         }
     }
 
@@ -280,6 +272,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     fun setBottomBarVisibility(visible: Boolean) {
+        if (!(visible && binding.bottomNavigationView.isVisible)) {
+            if (visible) {
+                binding.bottomNavigationView.translateYAnimate(0F)
+            } else {
+                binding.bottomNavigationView.translateYAnimate(dip(R.dimen.bottom_nav_height).toFloat())
+            }
+        }
         binding.bottomNavigationView.isVisible = visible
         hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
     }
@@ -313,7 +312,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     libraryViewModel.setFabMargin(heightOfBar - RetroUtil.getNavigationBarHeight())
                 }
             }
-            bottomSheetBehavior.setAllowDragging(true)
         }
     }
 
