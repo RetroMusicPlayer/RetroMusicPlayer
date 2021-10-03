@@ -5,17 +5,17 @@
     <string name="accent_color">Vurgu rengi</string>
     <string name="accent_color_desc">Tema vurgu rengi, varsayılan olarak mor renktedir</string>
     <string name="action_about">Hakkında</string>
-    <string name="action_add_to_blacklist">Kara Listeye Ekle</string>
+    <string name="action_add_to_blacklist">Add to Blacklist</string>
     <string name="action_add_to_favorites">Favorilere ekle</string>
     <string name="action_add_to_playing_queue">Oynatma kuyruğuna ekle</string>
     <string name="action_add_to_playlist">Oynatma listesine ekle</string>
-    <string name="action_cast">Yansıt</string>
+    <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">Oynatma kuyruğunu temizle</string>
     <string name="action_cycle_repeat">Tekrarlı oynatma modu</string>
     <string name="action_delete">Sil</string>
     <string name="action_delete_from_device">Cihazdan sil</string>
     <string name="action_details">Ayrıntılar</string>
-    <string name="action_edit">Düzenle</string>
+    <string name="action_edit">Edit</string>
     <string name="action_go_to_album">Albüme git</string>
     <string name="action_go_to_artist">Sanatçıya git</string>
     <string name="action_go_to_genre">Şarkı türüne git</string>
@@ -52,7 +52,7 @@
     <string name="adaptive">Uyarlanabilir</string>
     <string name="add_action">Ekle</string>
     <string name="add_playlist_title">"Oynatma listesine ekle"</string>
-    <string name="add_time_framed_lryics">Zaman Çerçeveli Şarkı Sözü Ekle</string>
+    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
     <string name="added_title_to_playing_queue">"Kuyruğa 1 parça eklendi."</string>
     <string name="added_x_titles_to_playing_queue">%1$d şarkı kuyruğuna eklendi.</string>
     <string name="album">Albüm</string>
@@ -60,7 +60,7 @@
         <item quantity="one">Şarkı</item>
         <item quantity="other">Şarkılar</item>
     </plurals>
-    <string name="album_artist">Albüm Sanatçısı</string>
+    <string name="album_artist">Album Artist</string>
     <string name="albums">Albümler</string>
     <plurals name="albums">
         <item quantity="one">Albüm</item>
@@ -70,14 +70,14 @@
     <string name="app_share">Hey, şu havalı müzik çalara şuradan bir göz atmaya ne dersin: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Karıştır</string>
     <string name="app_shortcut_top_tracks_short">Sık oynatılan parçalar</string>
-    <string name="app_widget_big_name">Tam Görsel</string>
+    <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Retro müzik - Kart</string>
     <string name="app_widget_classic_name">Retro müzik - Klasik</string>
     <string name="app_widget_small_name">Retro müzik - Küçük</string>
-    <string name="app_widget_text_name">Minimal Metin</string>
+    <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Sanatçı</string>
     <string name="artists">Sanatçılar</string>
-    <string name="audio_fade_duration">Ses Geçiş Süresi</string>
+    <string name="audio_fade_duration">Audio Fade Duration</string>
     <string name="audio_focus_denied">Ses odaklaması reddedildi.</string>
     <string name="audio_settings_summary">Ses ayarlarını değiştirin ve ekolayzır kontrollerini ayarlayın</string>
     <string name="auto">Otomatik</string>
@@ -103,12 +103,12 @@
     <string name="cancel_current_timer">İptal et</string>
     <string name="card">Kart</string>
     <string name="card_color_style">Renkli Kart</string>
-    <string name="card_square">Kare Kart</string>
+    <string name="card_square">Square Card</string>
     <string name="card_style">Kart</string>
     <string name="carousal_effect_on_now_playing_screen">Şimdi oynatılıyor ekranında atlıkarınca efekti</string>
     <string name="cascading">Basamaklı</string>
     <string name="changelog">Değişim kayıt günlüğü</string>
-    <string name="changelog_summary">Yeniliklere Göz At</string>
+    <string name="changelog_summary">Check out What\'s New</string>
     <string name="circle">Çember</string>
     <string name="circular">Dairesel</string>
     <string name="classic">Klasik</string>
@@ -137,7 +137,7 @@
     <string name="delete_x_playlists"><![CDATA[<b>%1$d</b> çalma listeleri silinsin mi?]]></string>
     <string name="delete_x_songs"><![CDATA[<b>%1$d</b> parçaları silinsin mi?]]></string>
     <string name="deleted_x_songs">%1$d parça silindi.</string>
-    <string name="deleting_songs">Şarkılar Siliniyor</string>
+    <string name="deleting_songs">Deleting Songs</string>
     <string name="depth">Derinlik</string>
     <string name="description">Açıklama</string>
     <string name="device_info">Cihaz Bilgisi</string>
@@ -148,11 +148,11 @@
     <string name="donate">Bağış yapın</string>
     <string name="donate_summary">Çalışmalarımın karşılığı olarak para hakettiğimi düşünüyorsanız bana biraz bahşiş bırakabilirsiniz</string>
     <string name="donation_header">Bağışlayacağınız tutar:</string>
-    <string name="done">Bitti</string>
+    <string name="done">Done</string>
     <string name="drive_mode">Sürüş modu</string>
-    <string name="edit_fab">Butonu Düzenle</string>
-    <string name="edit_normal_lyrics">Şarkı Sözünü Düzenle</string>
-    <string name="edit_synced_lyrics">Senkron Şarkı Sözünü Düzenle</string>
+    <string name="edit_fab">Edit Button</string>
+    <string name="edit_normal_lyrics">Edit Lyrics</string>
+    <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Boş</string>
     <string name="equalizer">Ekolayzır</string>
     <string name="faq">SSS</string>
@@ -171,7 +171,7 @@
     <string name="genre">Janr</string>
     <string name="genres">Janrlar</string>
     <string name="git_hub_summary">Projeyi GitHub\'da çatalla</string>
-    <string name="gradient">Gradyan</string>
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
