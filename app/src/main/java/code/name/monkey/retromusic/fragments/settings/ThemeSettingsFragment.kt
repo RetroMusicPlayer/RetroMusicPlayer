@@ -30,6 +30,7 @@ import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.colorChooser
+import com.google.android.material.color.DynamicColors
 
 /**
  * @author Hemanth S (h4h13).
@@ -114,6 +115,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
         val materialYou: ATESwitchPreference? = findPreference(MATERIAL_YOU)
         materialYou?.setOnPreferenceChangeListener { _, _ ->
+            DynamicColors.applyToActivitiesIfAvailable(App.getContext())
             restartActivity()
             true
         }
