@@ -114,8 +114,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         }
 
         val materialYou: ATESwitchPreference? = findPreference(MATERIAL_YOU)
-        materialYou?.setOnPreferenceChangeListener { _, _ ->
-            DynamicColors.applyToActivitiesIfAvailable(App.getContext())
+        materialYou?.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue as Boolean) {
+                DynamicColors.applyToActivitiesIfAvailable(App.getContext())
+            }
             restartActivity()
             true
         }
