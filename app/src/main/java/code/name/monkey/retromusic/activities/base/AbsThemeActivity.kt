@@ -37,6 +37,7 @@ import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.theme.ThemeManager
+import com.google.android.material.color.DynamicColors
 import java.util.*
 
 abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
@@ -52,12 +53,16 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         toggleScreenOn()
         setDrawUnderNavigationBar()
         setLightNavigationAuto()
-        //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
     }
 
     private fun updateTheme() {
         setTheme(ThemeManager.getThemeResValue(this))
         setDefaultNightMode(ThemeManager.getNightMode(this))
+
+        // Apply dynamic colors to activity if enabled
+        if (PreferenceUtil.materialYou) {
+            DynamicColors.applyIfAvailable(this)
+        }
     }
 
     private fun toggleScreenOn() {
