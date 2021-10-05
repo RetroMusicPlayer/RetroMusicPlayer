@@ -6,9 +6,11 @@ import android.view.MenuItem
 import androidx.annotation.MenuRes
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
+import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -21,6 +23,8 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
     private val checked: MutableList<I>
     private var menuRes: Int
     override fun onCabCreated(cab: AttachedCab, menu: Menu): Boolean {
+        activity.window.statusBarColor =
+            RetroColorUtil.shiftBackgroundColor(ATHUtil.resolveColor(activity, R.attr.colorSurface))
         return true
     }
 
@@ -56,8 +60,8 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
     }
 
     protected abstract fun getIdentifier(position: Int): I?
-    protected open fun getName(`object`: I): String? {
-        return `object`.toString()
+    protected open fun getName(i: I): String? {
+        return i.toString()
     }
 
     protected fun isChecked(identifier: I): Boolean {
