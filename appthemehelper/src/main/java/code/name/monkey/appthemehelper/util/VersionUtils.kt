@@ -1,7 +1,6 @@
 package code.name.monkey.appthemehelper.util
 
 import android.os.Build
-import androidx.annotation.ChecksSdkIntAtLeast
 
 /**
  * @author Hemanth S (h4h13).
@@ -59,6 +58,7 @@ object VersionUtils {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     }
 
+    @JvmStatic
     fun hasS(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     }
