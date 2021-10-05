@@ -28,6 +28,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -39,6 +40,7 @@ import code.name.monkey.retromusic.databinding.FragmentUserInfoBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.extensions.resolveColor
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.util.ImageUtil
@@ -56,6 +58,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -65,6 +68,7 @@ class UserInfoFragment : Fragment() {
 
     private var _binding: FragmentUserInfoBinding? = null
     private val binding get() = _binding!!
+    private val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -123,6 +127,11 @@ class UserInfoFragment : Fragment() {
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner, {
+            binding.next.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = it
+            }
+        })
     }
 
     private fun loadProfile() {
