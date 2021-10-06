@@ -22,7 +22,7 @@ import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.ActivitySettingsBinding
 import code.name.monkey.retromusic.extensions.applyToolbar
@@ -32,7 +32,7 @@ import code.name.monkey.retromusic.extensions.surfaceColor
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorCallback
 
-class SettingsActivity : AbsBaseActivity(), ColorCallback, OnThemeChangedListener {
+class SettingsActivity : AbsThemeActivity(), ColorCallback, OnThemeChangedListener {
     private lateinit var binding: ActivitySettingsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
