@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.extensions
 
-import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
