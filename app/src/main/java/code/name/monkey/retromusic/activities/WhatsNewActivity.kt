@@ -14,7 +14,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper.getPrimaryTextCo
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityWhatsNewBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
@@ -24,7 +24,7 @@ import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 import java.util.*
 
-class WhatsNewActivity : AbsBaseActivity() {
+class WhatsNewActivity : AbsThemeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityWhatsNewBinding.inflate(layoutInflater)
@@ -65,15 +65,8 @@ class WhatsNewActivity : AbsBaseActivity() {
             )
             val changeLog = buf.toString()
                 .replace(
-                    "{style-placeholder}", String.format(
-                        "body { background-color: %s; color: %s; } li {color: %s;} h3 {color: %s;} .tag {color: %s;} div{background-color: %s;}",
-                        backgroundColor,
-                        contentColor,
-                        textColor,
-                        accentColorString,
-                        accentColorString,
-                        cardBackgroundColor
-                    )
+                    "{style-placeholder}",
+                    "body { background-color: $backgroundColor; color: $contentColor; } li {color: $textColor;} h3 {color: $accentColorString;} .tag {background-color: $accentColorString; color: $accentTextColor; } div{background-color: $cardBackgroundColor;}"
                 )
                 .replace("{link-color}", colorToCSS(accentColor(this)))
                 .replace(
