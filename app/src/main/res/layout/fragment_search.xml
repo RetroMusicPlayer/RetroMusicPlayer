@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -71,6 +73,7 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -81,13 +84,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:scrollbarSize="0dp">
+            android:scrollbarSize="0dp"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true">
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/searchFilterGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:singleLine="true">
+                app:singleLine="true"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:focusable="true">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_audio"
@@ -183,9 +192,12 @@
             android:overScrollMode="never"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-    </LinearLayout>
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
 
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true"/>
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@android:id/empty"

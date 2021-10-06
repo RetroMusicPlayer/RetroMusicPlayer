@@ -43,6 +43,12 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.transition.MaterialSharedAxis
 import java.util.*
 import kotlin.collections.ArrayList
+import android.content.Context.INPUT_METHOD_SERVICE
+
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
+import java.lang.Exception
+
 
 class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWatcher,
     CompoundButton.OnCheckedChangeListener {
@@ -89,6 +95,16 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
+
+        binding.searchView.setOnFocusChangeListener { view, b ->
+            if(!view.hasFocus()){
+                val view = getView()
+               hideKeyboard(view)
+            }
+        }
+
+
+
     }
 
     private fun setupChips() {

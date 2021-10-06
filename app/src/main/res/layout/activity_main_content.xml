@@ -5,15 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?colorSurface"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
-        tools:ignore="UnusedAttribute">
+        tools:ignore="UnusedAttribute"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:focusable="true">
 
-        <include layout="@layout/status_bar" />
+        <include layout="@layout/status_bar"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true"/>
 
     </FrameLayout>
 
@@ -23,5 +32,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:focusable="true"/>
+
 </LinearLayout>
