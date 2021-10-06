@@ -23,7 +23,7 @@
             android:title="@string/black_theme_name" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
+            android:defaultValue="@bool/md3_enabled"
             android:disableDependentsState="true"
             android:key="material_you"
             android:layout="@layout/list_item_view_switch_no_title"
