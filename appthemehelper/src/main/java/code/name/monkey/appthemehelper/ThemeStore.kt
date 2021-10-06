@@ -299,5 +299,9 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
             }
             return true
         }
+
+        fun isMD3Enabled(context: Context): Boolean {
+            return prefs(context).getBoolean(ThemeStorePrefKeys.KEY_MATERIAL_YOU, false)
+        }
     }
 }
