@@ -312,7 +312,7 @@
     <string name="pref_summary_colored_app">تتغير ألوان أزرار الخلفية والتحكم وفقًا لصورة الألبوم من شاشة التشغيل الآن</string>
     <string name="pref_summary_colored_app_shortcuts">تلوين اختصارات التطبيق باللون الثانوي . في كل مرة تقوم فيها بتغيير اللون ، يرجى تفعيل هذا الخيار ليتم تطبيق التغييرات</string>
     <string name="pref_summary_colored_notification">"تلوين الإشعارات في غلاف الألبوم\u2019لون نشط"</string>
-    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
+    <string name="pref_summary_cross_fade">مدة التقاطع بين الأغاني</string>
     <string name="pref_summary_desaturated_color">حسب خطوط دليل تصميم المواد بالألوان في الوضع المظلم يجب أن لاتكون مشتته</string>
     <string name="pref_summary_expand_now_playing_panel">النقر على الإشعار سيظهر الآن مايتم تشغيله بدلاً من الشاشة الرئيسية لتطبيق</string>
     <string name="pref_summary_extra_controls">اضافة المزيد من التحكم في المشغل المصغر</string>
@@ -323,7 +323,7 @@
     <string name="pref_summary_library_categories">تكوين وعرض وترتيب فئات المكتبة.</string>
     <string name="pref_summary_lock_screen">استخدم شاشة القفل المخصصة من ريترو ميوزك لتحكم بالتشغيل</string>
     <string name="pref_summary_open_source_licences">الرخصة والتفاصيل للبرمجيات مفتوحة المصدر</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_remember_tab">الانتقال إلى آخر علامة تبويب مستخدمة عند البدء</string>
     <string name="pref_summary_show_lyrics">عرض كلمات الأغاني المتزامنة عبر غلاف الألبوم</string>
     <string name="pref_summary_suggestions">إظهار خليط موسيقي جديد على الشاشة الرئيسية</string>
     <string name="pref_summary_toggle_full_screen">وضع الشاشة الكاملة</string>
