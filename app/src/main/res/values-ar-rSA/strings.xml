@@ -91,6 +91,8 @@
     <string name="audio_focus_denied">تم منع تركيز الصوت</string>
     <string name="audio_settings_summary">تغيير إعدادات الصوت وضبط عناصر التحكم في موازن الصوت</string>
     <string name="auto">تلقائي</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">سيرة ذاتية</string>
     <string name="black_theme_name">أسود لامع</string>
     <string name="blacklist">القائمة السوداء</string>
@@ -134,6 +136,7 @@
     <string name="could_not_restore_purchase">لايمكن إسترجاع المشتريات</string>
     <string name="could_not_scan_files">لايمكن فحص الملفات %d</string>
     <string name="create_action">إنشاء</string>
+    <string name="create_new_backup">إنشاء</string>
     <string name="created_playlist_x">قائمة التشغيل الموجودة %1$s.</string>
     <string name="credit_title">الافراد والمساهمين</string>
     <string name="currently_listening_to_x_by_x">يستمع حالياً إلى %1$s لـ %2$s</string>
@@ -238,6 +241,7 @@
     <string name="no_albums">لا توجد ألبومات</string>
     <string name="no_artists">لا يوجد مغنين</string>
     <string name="no_audio_ID">"قم بتشغيل أغنية أولاً ، ثم حاول مرة أخرى."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">لم يتم العثور موازن الصوت</string>
     <string name="no_genres">لا يوجد تصنيفات</string>
     <string name="no_lyrics_found">لم يتم العثور على كلمات للاغنية</string>
