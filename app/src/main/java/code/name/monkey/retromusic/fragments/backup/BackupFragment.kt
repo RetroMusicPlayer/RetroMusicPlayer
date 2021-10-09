@@ -1,36 +1,31 @@
-package code.name.monkey.retromusic.activities.backup
+package code.name.monkey.retromusic.fragments.backup
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels
+import android.view.View
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.adapter.backup.BackupAdapter
-import code.name.monkey.retromusic.databinding.ActivityBackupBinding
+import code.name.monkey.retromusic.databinding.FragmentBackupBinding
 import code.name.monkey.retromusic.helper.BackupHelper
-import com.google.android.material.shape.MaterialShapeDrawable
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.File
 
-class BackupActivity : AbsThemeActivity(), BackupAdapter.BackupClickedListener {
+class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupClickedListener {
 
     private val backupViewModel by viewModels<BackupViewModel>()
     private var backupAdapter: BackupAdapter? = null
 
-    lateinit var binding: ActivityBackupBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityBackupBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        binding.appBarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(this)
-        binding.toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black)
+    private var _binding: FragmentBackupBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentBackupBinding.bind(view)
         initAdapter()
         setupRecyclerview()
         backupViewModel.backupsLiveData.observe(this) {
@@ -46,21 +41,14 @@ class BackupActivity : AbsThemeActivity(), BackupAdapter.BackupClickedListener {
     private fun setupButtons() {
         binding.createBackup.setOnClickListener {
             lifecycleScope.launch {
-                BackupHelper.createBackup(this@BackupActivity)
+                BackupHelper.createBackup(requireContext())
                 backupViewModel.loadBackups()
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(
-                        this@BackupActivity,
-                        "Backup Completed Successfully",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
             }
         }
     }
 
     private fun initAdapter() {
-        backupAdapter = BackupAdapter(this@BackupActivity, ArrayList(), this)
+        backupAdapter = BackupAdapter(requireContext(), ArrayList(), this)
         backupAdapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
@@ -86,7 +74,7 @@ class BackupActivity : AbsThemeActivity(), BackupAdapter.BackupClickedListener {
 
     override fun onBackupClicked(file: File) {
         lifecycleScope.launch {
-            backupViewModel.restoreBackup(this@BackupActivity, file)
+            backupViewModel.restoreBackup(requireActivity(), file)
         }
     }
 }

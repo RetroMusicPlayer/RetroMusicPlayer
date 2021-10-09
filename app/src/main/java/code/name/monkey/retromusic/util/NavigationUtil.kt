@@ -23,7 +23,6 @@ import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.*
-import code.name.monkey.retromusic.activities.backup.BackupActivity
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.audioSessionId
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -76,10 +75,6 @@ object NavigationUtil {
 
     fun gotoWhatNews(activity: Activity) {
         ActivityCompat.startActivity(activity, Intent(activity, WhatsNewActivity::class.java), null)
-    }
-
-    fun gotoBackup(activity: Activity) {
-        ActivityCompat.startActivity(activity, Intent(activity, BackupActivity::class.java), null)
     }
 
     fun openEqualizer(activity: Activity) {
