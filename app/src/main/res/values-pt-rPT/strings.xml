@@ -81,6 +81,8 @@
     <string name="audio_focus_denied">Foco de áudio negado.</string>
     <string name="audio_settings_summary">Alterar as definições de som e ajustar o equalizador</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Apenas preto</string>
     <string name="blacklist">Lista negra</string>
@@ -124,6 +126,7 @@
     <string name="could_not_restore_purchase">Não foi possível restaurar a compra.</string>
     <string name="could_not_scan_files">Não é possível verificar %d ficheiros.</string>
     <string name="create_action">Criar</string>
+    <string name="create_new_backup">Criar</string>
     <string name="created_playlist_x">Lista %1$s criada.</string>
     <string name="credit_title">Membros e contribuidores </string>
     <string name="currently_listening_to_x_by_x">A ouvir %1$s de %2$s.</string>
@@ -227,6 +230,7 @@
     <string name="no_albums">Sem álbuns</string>
     <string name="no_artists">Sem artistas</string>
     <string name="no_audio_ID">"Toca uma música primeiro e tente novamente."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Sem equalizadores</string>
     <string name="no_genres">Sem géneros</string>
     <string name="no_lyrics_found">Sem letras</string>
