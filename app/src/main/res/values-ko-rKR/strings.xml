@@ -79,6 +79,8 @@
     <string name="audio_focus_denied">오디오 포커스가 거부되었습니다.</string>
     <string name="audio_settings_summary">소리 설정 및 이퀄라이저 조정</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">바이오그래피</string>
     <string name="black_theme_name">저스트 블랙</string>
     <string name="blacklist">블랙리스트</string>
@@ -122,6 +124,7 @@
     <string name="could_not_restore_purchase">구매내역을 복구할 수 없습니다.</string>
     <string name="could_not_scan_files">%d개의 파일을 스캔하지 못했습니다.</string>
     <string name="create_action">만들기</string>
+    <string name="create_new_backup">만들기</string>
     <string name="created_playlist_x">%1$s 재생목록을 만들었습니다.</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">현재 %2$s의 %1$s를 듣는 중입니다.</string>
@@ -225,6 +228,7 @@
     <string name="no_albums">앨범 없음</string>
     <string name="no_artists">아티스트 없음</string>
     <string name="no_audio_ID">"먼저 노래를 재생하고 다시 시도해 보십시오."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">이퀄라이저가 없습니다.</string>
     <string name="no_genres">장르 없음</string>
     <string name="no_lyrics_found">가사 없음</string>

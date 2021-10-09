@@ -85,6 +85,8 @@
     <string name="audio_focus_denied">В отриманні аудіофокусу відмовлено.</string>
     <string name="audio_settings_summary">Змінити налаштування звуку та налаштувати параметри еквалайзера</string>
     <string name="auto">Автоматично</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Життєпис</string>
     <string name="black_theme_name">Чорний</string>
     <string name="blacklist">Чорний список</string>
@@ -128,6 +130,7 @@
     <string name="could_not_restore_purchase">Не вдалося відновити покупку.</string>
     <string name="could_not_scan_files">Не вдалося просканувати %d файлів.</string>
     <string name="create_action">Створити</string>
+    <string name="create_new_backup">Створити</string>
     <string name="created_playlist_x">Створено список відтворення %1$s.</string>
     <string name="credit_title">Учасники та меценати </string>
     <string name="currently_listening_to_x_by_x">Зараз грає %1$s від %2$s.</string>
@@ -231,6 +234,7 @@
     <string name="no_albums">Немає жодного альбому</string>
     <string name="no_artists">Немає жодного виконавця</string>
     <string name="no_audio_ID">"Спочатку відтворіть пісню, а потім спробуйте ще раз."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Еквалайзер не знайдено</string>
     <string name="no_genres">У вас немає жанрів</string>
     <string name="no_lyrics_found">Текст не знайдено</string>

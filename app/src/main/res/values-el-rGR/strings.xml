@@ -81,6 +81,8 @@
     <string name="audio_focus_denied">Η εστίαση ήχου απορρίφθηκε.</string>
     <string name="audio_settings_summary">Αλλάξτε τις ρυθμίσεις ήχου και προσαρμόστε τα χειριστήρια του ισοσταθμιστή</string>
     <string name="auto">Αυτόματο</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Βιογραφία</string>
     <string name="black_theme_name">Απλά Μαύρο</string>
     <string name="blacklist">Μαύρη λίστα</string>
@@ -124,6 +126,7 @@
     <string name="could_not_restore_purchase">Δεν ήταν δυνατή η επαναφορά της αγοράς.</string>
     <string name="could_not_scan_files">Αδυναμία στη σάρωση %d αρχείων.</string>
     <string name="create_action">Δημιουργία</string>
+    <string name="create_new_backup">Δημιουργία</string>
     <string name="created_playlist_x">Δημιουργήθηκε η λίστα αναπαραγωγής %1$s.</string>
     <string name="credit_title">Μέλη και συνεισφέροντες </string>
     <string name="currently_listening_to_x_by_x">Παίζει το %1$s από τους %2$s.</string>
@@ -227,6 +230,7 @@
     <string name="no_albums">Κανένα άλμπουμ</string>
     <string name="no_artists">Κανένας καλλιτέχνης</string>
     <string name="no_audio_ID">"Παίξτε ενα κομμάτι πρώτα, και ξαναπροσπαθήστε."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Δεν βρέθηκε ισοσταθμιστής.</string>
     <string name="no_genres">Κανένα είδος</string>
     <string name="no_lyrics_found">Δεν βρέθηκαν στίχοι</string>

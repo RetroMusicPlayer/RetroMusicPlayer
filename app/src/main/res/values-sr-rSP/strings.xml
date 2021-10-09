@@ -83,6 +83,8 @@
     <string name="audio_focus_denied">Zvuk se vec reprodukuje</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Biografija</string>
     <string name="black_theme_name">Perfektno crna</string>
     <string name="blacklist">Ne trazi muziku u...</string>
@@ -126,6 +128,7 @@
     <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Nije moguce skenirati %d fajlove</string>
     <string name="create_action">Napravi</string>
+    <string name="create_new_backup">Napravi</string>
     <string name="created_playlist_x">Plejlista %1$s je napravljena</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Trenutno se reprodukuje %1$s izvodjaca %2$s</string>
@@ -229,6 +232,7 @@
     <string name="no_albums">Nema albuma</string>
     <string name="no_artists">Nema izvodjaca</string>
     <string name="no_audio_ID">"Prvo pusti pesmu, a onda pokusaj opet"</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Nije pronadjen ni jedan ekvilajzer</string>
     <string name="no_genres">You have no genres</string>
     <string name="no_lyrics_found">Nema pronadjenog teksta pesme</string>

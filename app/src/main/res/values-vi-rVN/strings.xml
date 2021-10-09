@@ -79,6 +79,8 @@
     <string name="audio_focus_denied">Tập trung âm thanh bị từ chối</string>
     <string name="audio_settings_summary">Thay đổi cài đặt âm thanh và điều chỉnh các điều khiển bộ chỉnh âm</string>
     <string name="auto">Tự động</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Tiểu sử</string>
     <string name="black_theme_name">Đen hoàn toàn</string>
     <string name="blacklist">Danh sách đen</string>
@@ -123,6 +125,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="could_not_restore_purchase">Không thể khôi phục mua hàng.</string>
     <string name="could_not_scan_files">Không thể quét %d tập tin.</string>
     <string name="create_action">Tạo</string>
+    <string name="create_new_backup">Tạo</string>
     <string name="created_playlist_x">Đã tạo danh sách phát %1$s.</string>
     <string name="credit_title">Thành viên và cộng tác viên </string>
     <string name="currently_listening_to_x_by_x">Đang nghe %1$s bởi %2$s.</string>
@@ -226,6 +229,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="no_albums">Không có album</string>
     <string name="no_artists">Không có nghệ sĩ</string>
     <string name="no_audio_ID">"Phát một bài hát trước, sau đó thử lại."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Không tìm thấy bộ chỉnh âm</string>
     <string name="no_genres">Không có thể loại</string>
     <string name="no_lyrics_found">Không tìm thấy lời bài hát</string>

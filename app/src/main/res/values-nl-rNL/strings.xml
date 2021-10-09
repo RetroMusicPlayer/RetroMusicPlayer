@@ -81,6 +81,8 @@
     <string name="audio_focus_denied">Geluid focus geweigerd </string>
     <string name="audio_settings_summary">Wijzig de geluidsinstellingen en pas de equalizer aan</string>
     <string name="auto">Automatisch</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Biografie</string>
     <string name="black_theme_name">Gewoon zwart</string>
     <string name="blacklist">Zwarte lijst</string>
@@ -124,6 +126,7 @@
     <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Kon %d files niet scannen.</string>
     <string name="create_action">Aanmaken</string>
+    <string name="create_new_backup">Aanmaken</string>
     <string name="created_playlist_x">Afspeellijst %1$s aangemaakt.</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Nu luisterend naar %1$s van %2$s.</string>
@@ -227,6 +230,7 @@
     <string name="no_albums">Geen albums</string>
     <string name="no_artists">Geen artiesten</string>
     <string name="no_audio_ID">"Laat eerst een liedje afspelen, probeer dan opniew."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Geen equalizer gevonden.</string>
     <string name="no_genres">Je hebt geen genres</string>
     <string name="no_lyrics_found">Geen lyrics gevonden</string>

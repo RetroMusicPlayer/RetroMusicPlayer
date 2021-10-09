@@ -81,6 +81,8 @@
     <string name="audio_focus_denied">Ses odaklaması reddedildi.</string>
     <string name="audio_settings_summary">Ses ayarlarını değiştirin ve ekolayzır kontrollerini ayarlayın</string>
     <string name="auto">Otomatik</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Yaşam öyküsü</string>
     <string name="black_theme_name">Sade Siyah</string>
     <string name="blacklist">Kara Liste</string>
@@ -124,6 +126,7 @@
     <string name="could_not_restore_purchase">Satın alma bulunamadı.</string>
     <string name="could_not_scan_files">%d dosyası taranamadı.</string>
     <string name="create_action">Oluştur</string>
+    <string name="create_new_backup">Oluştur</string>
     <string name="created_playlist_x">%1$s adında oynatma listesi oluşturuldu.</string>
     <string name="credit_title">Üyeler ve katkıda bulunanlar</string>
     <string name="currently_listening_to_x_by_x">Şu anda %2$s şarkıcısından %1$s dinleniyor.</string>
@@ -227,6 +230,7 @@
     <string name="no_albums">Hiç albümünüz bulunmuyor</string>
     <string name="no_artists">Hiç sanatçınız bulunmuyor</string>
     <string name="no_audio_ID">"Önce bir şarkı çal, sonra tekrar dene"</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Ekolayzır bulunamadı</string>
     <string name="no_genres">Hiç janrınız bulunmuyor</string>
     <string name="no_lyrics_found">Şarkı sözleri bulunamadı</string>

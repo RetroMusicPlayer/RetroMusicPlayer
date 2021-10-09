@@ -81,6 +81,8 @@
     <string name="audio_focus_denied">Az audiofókusz megtagadva.</string>
     <string name="audio_settings_summary">Módosítsa a hangbeállításokat és állítsa be a hangszínszabályzó irányítását</string>
     <string name="auto">Autó</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Életrajz</string>
     <string name="black_theme_name">Csak Fekete</string>
     <string name="blacklist">Feketelista</string>
@@ -124,6 +126,7 @@
     <string name="could_not_restore_purchase">A vásárlást nem sikerült visszaállítani.</string>
     <string name="could_not_scan_files">Nem sikerült beolvasni %d fájlt.</string>
     <string name="create_action">Létrehozás</string>
+    <string name="create_new_backup">Létrehozás</string>
     <string name="created_playlist_x">Létrehozott lejátszási lista %1$s.</string>
     <string name="credit_title">Tagok és támogatók</string>
     <string name="currently_listening_to_x_by_x">Jelenleg hallgat %1$s által %2$s</string>
@@ -227,6 +230,7 @@
     <string name="no_albums">Nincsenek albumok</string>
     <string name="no_artists">Nincs előadó</string>
     <string name="no_audio_ID">"Először játssz le egy dalt, majd próbálkozzon újra."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Nem találtunk hangszínszabályzott.</string>
     <string name="no_genres">Nincsenek műfajok</string>
     <string name="no_lyrics_found">Nem található dalszöveg</string>
