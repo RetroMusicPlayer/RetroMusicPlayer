@@ -12,6 +12,7 @@ import java.io.File
 class BackupAdapter(
     val context: Context,
     var dataSet: MutableList<File>,
+    val backupClickedListener: BackupClickedListener
 ) : RecyclerView.Adapter<BackupAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,6 +36,13 @@ class BackupAdapter(
         val title: TextView = itemView.findViewById(R.id.title)
 
         init {
+            itemView.setOnClickListener {
+                backupClickedListener.onBackupClicked(dataSet[bindingAdapterPosition])
+            }
         }
+    }
+
+    interface BackupClickedListener {
+        fun onBackupClicked(file: File)
     }
 }

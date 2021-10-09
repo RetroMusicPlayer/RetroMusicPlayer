@@ -16,8 +16,9 @@ import com.google.android.material.shape.MaterialShapeDrawable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 
-class BackupActivity : AbsThemeActivity() {
+class BackupActivity : AbsThemeActivity(), BackupAdapter.BackupClickedListener {
 
     private val backupViewModel by viewModels<BackupViewModel>()
     private var backupAdapter: BackupAdapter? = null
@@ -59,7 +60,7 @@ class BackupActivity : AbsThemeActivity() {
     }
 
     private fun initAdapter() {
-        backupAdapter = BackupAdapter(this@BackupActivity, ArrayList())
+        backupAdapter = BackupAdapter(this@BackupActivity, ArrayList(), this)
         backupAdapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
@@ -80,6 +81,12 @@ class BackupActivity : AbsThemeActivity() {
         binding.backupRecyclerview.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = backupAdapter
+        }
+    }
+
+    override fun onBackupClicked(file: File) {
+        lifecycleScope.launch {
+            backupViewModel.restoreBackup(this@BackupActivity, file)
         }
     }
 }
