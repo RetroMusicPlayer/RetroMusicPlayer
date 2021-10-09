@@ -79,6 +79,8 @@
     <string name="audio_focus_denied">音频焦点丢失。</string>
     <string name="audio_settings_summary">更改声音设置或调整均衡器</string>
     <string name="auto">自动</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">简介</string>
     <string name="black_theme_name">纯黑</string>
     <string name="blacklist">黑名单</string>
@@ -122,6 +124,7 @@
     <string name="could_not_restore_purchase">无法恢复购买。</string>
     <string name="could_not_scan_files">无法扫描 %d 个文件。</string>
     <string name="create_action">创建</string>
+    <string name="create_new_backup">创建</string>
     <string name="created_playlist_x">已创建播放列表 %1$s。</string>
     <string name="credit_title">开发团队和贡献者</string>
     <string name="currently_listening_to_x_by_x">正在收听 %2$s 的 %1$s。</string>
@@ -225,6 +228,7 @@
     <string name="no_albums">暂无专辑</string>
     <string name="no_artists">暂无艺术家</string>
     <string name="no_audio_ID">"请播放歌曲后重试"</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">找不到均衡器</string>
     <string name="no_genres">暂无流派</string>
     <string name="no_lyrics_found">找不到歌词</string>
