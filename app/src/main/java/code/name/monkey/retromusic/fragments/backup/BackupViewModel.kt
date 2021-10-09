@@ -19,8 +19,8 @@ class BackupViewModel : ViewModel() {
 
     fun loadBackups() {
         viewModelScope.launch {
-            File(BackupHelper.backupRootPath).listFiles { _, name ->
-                return@listFiles name.endsWith(BackupHelper.BACKUP_EXTENSION)
+            File(BackupHelper.backupRootPath).listFiles { file, _ ->
+                return@listFiles file.extension == BackupHelper.BACKUP_EXTENSION
             }?.toList()?.let {
                 backupsMutableLiveData.value = it
             }
