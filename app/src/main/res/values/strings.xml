@@ -81,6 +81,10 @@
     <string name="audio_focus_denied">Audio focus denied.</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_title">
+        <![CDATA[Backup & Restore]]>
+    </string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Biography</string>
     <string name="black_theme_name">Just Black</string>
     <string name="blacklist">Blacklist</string>
@@ -124,6 +128,7 @@
     <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Could not scan %d files.</string>
     <string name="create_action">Create</string>
+    <string name="create_new_backup">Create</string>
     <string name="created_playlist_x">Created playlist %1$s.</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Currently listening to %1$s by %2$s.</string>
@@ -238,6 +243,7 @@
     <string name="no_albums">You have no albums</string>
     <string name="no_artists">You have no artists</string>
     <string name="no_audio_ID">"Play a song first, then try again."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">No equalizer found</string>
     <string name="no_genres">You have no genres</string>
     <string name="no_lyrics_found">No lyrics found</string>
