@@ -70,13 +70,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
     }
 
     override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(requireActivity(), getGridSize()).apply {
-            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return if (position == 0) getGridSize() else 1
-                }
-            }
-        }
+        return GridLayoutManager(requireActivity(), getGridSize())
     }
 
     override fun createAdapter(): SongAdapter {
