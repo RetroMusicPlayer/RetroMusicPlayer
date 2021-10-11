@@ -21,6 +21,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.contains
 import androidx.navigation.ui.setupWithNavController
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
@@ -72,6 +73,8 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
 
         val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
         if (categoryInfo.visible) {
+            if (!navGraph.contains(PreferenceUtil.lastTab)) PreferenceUtil.lastTab =
+                categoryInfo.category.id
             navGraph.setStartDestination(
                 if (PreferenceUtil.rememberLastTab) {
                     PreferenceUtil.lastTab.let {
