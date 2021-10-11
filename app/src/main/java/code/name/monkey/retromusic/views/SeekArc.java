@@ -38,14 +38,16 @@ import code.name.monkey.retromusic.R;
 public class SeekArc extends View {
 
   private static final String TAG = SeekArc.class.getSimpleName();
-  private static int INVALID_PROGRESS_VALUE = -1;
+  private static final int INVALID_PROGRESS_VALUE = -1;
   // The initial rotational offset -90 means we start at 12 o'clock
   private final int mAngleOffset = -90;
   private Paint mArcPaint;
   // Internal variables
   private int mArcRadius = 0;
-  private RectF mArcRect = new RectF();
-  /** The Width of the background arc for the SeekArc */
+  private final RectF mArcRect = new RectF();
+  /**
+   * The Width of the background arc for the SeekArc
+   */
   private int mArcWidth = 2;
   /** Will the progress increase clockwise or anti-clockwise */
   private boolean mClockwise = true;

@@ -43,15 +43,17 @@ import java.util.List;
 import code.name.monkey.retromusic.BuildConfig;
 import code.name.monkey.retromusic.R;
 
-/** 歌词 Created by wcy on 2015/11/9. */
+/**
+ * 歌词 Created by wcy on 2015/11/9.
+ */
 @SuppressLint("StaticFieldLeak")
 public class LrcView extends View {
   private static final long ADJUST_DURATION = 100;
   private static final long TIMELINE_KEEP_TIME = 4 * DateUtils.SECOND_IN_MILLIS;
 
-  private List<LrcEntry> mLrcEntryList = new ArrayList<>();
-  private TextPaint mLrcPaint = new TextPaint();
-  private TextPaint mTimePaint = new TextPaint();
+  private final List<LrcEntry> mLrcEntryList = new ArrayList<>();
+  private final TextPaint mLrcPaint = new TextPaint();
+  private final TextPaint mTimePaint = new TextPaint();
   private Paint.FontMetrics mTimeFontMetrics;
   private Drawable mPlayDrawable;
   private float mDividerHeight;
@@ -78,28 +80,30 @@ public class LrcView extends View {
   private boolean isTouching;
   private boolean isFling;
   private int mTextGravity; // 歌词显示位置，靠左/居中/靠右
-  private Runnable hideTimelineRunnable =
-      new Runnable() {
-        @Override
-        public void run() {
-          if (hasLrc() && isShowTimeline) {
-            isShowTimeline = false;
-            smoothScrollTo(mCurrentLine);
-          }
-        }
-      };
-  /** 手势监听器 */
-  private GestureDetector.SimpleOnGestureListener mSimpleOnGestureListener =
-      new GestureDetector.SimpleOnGestureListener() {
-        @Override
-        public boolean onDown(MotionEvent e) {
-          if (hasLrc() && mOnPlayClickListener != null) {
-            mScroller.forceFinished(true);
-            removeCallbacks(hideTimelineRunnable);
-            isTouching = true;
-            isShowTimeline = true;
-            invalidate();
-            return true;
+  private final Runnable hideTimelineRunnable =
+          new Runnable() {
+            @Override
+            public void run() {
+              if (hasLrc() && isShowTimeline) {
+                isShowTimeline = false;
+                smoothScrollTo(mCurrentLine);
+              }
+            }
+          };
+  /**
+   * 手势监听器
+   */
+  private final GestureDetector.SimpleOnGestureListener mSimpleOnGestureListener =
+          new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent e) {
+              if (hasLrc() && mOnPlayClickListener != null) {
+                mScroller.forceFinished(true);
+                removeCallbacks(hideTimelineRunnable);
+                isTouching = true;
+                isShowTimeline = true;
+                invalidate();
+                return true;
           }
           return super.onDown(e);
         }

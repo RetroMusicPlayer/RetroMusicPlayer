@@ -19,13 +19,15 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
 
-/** 一行歌词实体 */
+/**
+ * 一行歌词实体
+ */
 class LrcEntry implements Comparable<LrcEntry> {
   public static final int GRAVITY_CENTER = 0;
   public static final int GRAVITY_LEFT = 1;
   public static final int GRAVITY_RIGHT = 2;
-  private long time;
-  private String text;
+  private final long time;
+  private final String text;
   private String secondText;
   private StaticLayout staticLayout;
   /** 歌词距离视图顶部的距离 */

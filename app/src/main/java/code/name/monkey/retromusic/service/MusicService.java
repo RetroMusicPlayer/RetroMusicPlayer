@@ -187,15 +187,15 @@ public class MusicService extends MediaBrowserServiceCompat
 
     public int position = -1;
 
-    private AppWidgetBig appWidgetBig = AppWidgetBig.Companion.getInstance();
+    private final AppWidgetBig appWidgetBig = AppWidgetBig.Companion.getInstance();
 
-    private AppWidgetCard appWidgetCard = AppWidgetCard.Companion.getInstance();
+  private final AppWidgetCard appWidgetCard = AppWidgetCard.Companion.getInstance();
 
-    private AppWidgetClassic appWidgetClassic = AppWidgetClassic.Companion.getInstance();
+  private final AppWidgetClassic appWidgetClassic = AppWidgetClassic.Companion.getInstance();
 
-    private AppWidgetSmall appWidgetSmall = AppWidgetSmall.Companion.getInstance();
+  private final AppWidgetSmall appWidgetSmall = AppWidgetSmall.Companion.getInstance();
 
-    private AppWidgetText appWidgetText = AppWidgetText.Companion.getInstance();
+  private final AppWidgetText appWidgetText = AppWidgetText.Companion.getInstance();
 
     private final BroadcastReceiver widgetIntentReceiver =
             new BroadcastReceiver() {
@@ -229,15 +229,15 @@ public class MusicService extends MediaBrowserServiceCompat
                     }
                 }
             };
-    private AudioManager audioManager;
-    private IntentFilter becomingNoisyReceiverIntentFilter =
-            new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
-    private boolean becomingNoisyReceiverRegistered;
-    private IntentFilter bluetoothConnectedIntentFilter =
-            new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
-    private boolean bluetoothConnectedRegistered = false;
-    private IntentFilter headsetReceiverIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-    private boolean headsetReceiverRegistered = false;
+  private AudioManager audioManager;
+  private final IntentFilter becomingNoisyReceiverIntentFilter =
+          new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+  private boolean becomingNoisyReceiverRegistered;
+  private final IntentFilter bluetoothConnectedIntentFilter =
+          new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
+  private boolean bluetoothConnectedRegistered = false;
+  private final IntentFilter headsetReceiverIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+  private boolean headsetReceiverRegistered = false;
     private MediaSessionCompat mediaSession;
     private ContentObserver mediaStoreObserver;
     private HandlerThread musicPlayerHandlerThread;
@@ -291,59 +291,59 @@ public class MusicService extends MediaBrowserServiceCompat
     private HandlerThread queueSaveHandlerThread;
     private boolean queuesRestored;
     private int repeatMode;
-    private int shuffleMode;
-    private SongPlayCountHelper songPlayCountHelper = new SongPlayCountHelper();
-    private final BroadcastReceiver bluetoothReceiver =
-            new BroadcastReceiver() {
-                @Override
-                public void onReceive(final Context context, final Intent intent) {
-                    String action = intent.getAction();
-                    if (action != null) {
-                        if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)
-                                && PreferenceUtil.INSTANCE.isBluetoothSpeaker()) {
-                            if (VERSION.SDK_INT >= VERSION_CODES.M) {
-                                if (getAudioManager().getDevices(AudioManager.GET_DEVICES_OUTPUTS).length > 0) {
+  private int shuffleMode;
+  private final SongPlayCountHelper songPlayCountHelper = new SongPlayCountHelper();
+  private final BroadcastReceiver bluetoothReceiver =
+          new BroadcastReceiver() {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+              String action = intent.getAction();
+              if (action != null) {
+                if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)
+                        && PreferenceUtil.INSTANCE.isBluetoothSpeaker()) {
+                  if (VERSION.SDK_INT >= VERSION_CODES.M) {
+                    if (getAudioManager().getDevices(AudioManager.GET_DEVICES_OUTPUTS).length > 0) {
                                     play();
-                                }
-                            } else {
-                                if (getAudioManager().isBluetoothA2dpOn()) {
-                                    play();
-                                }
-                            }
-                        }
                     }
-                }
-            };
-    private PhoneStateListener phoneStateListener =
-            new PhoneStateListener() {
-                @Override
-                public void onCallStateChanged(int state, String incomingNumber) {
-                    switch (state) {
-                        case TelephonyManager.CALL_STATE_IDLE:
-                            // Not in call: Play music
-                            play();
-                            break;
-                        case TelephonyManager.CALL_STATE_RINGING:
-                        case TelephonyManager.CALL_STATE_OFFHOOK:
-                            // A call is dialing, active or on hold
-                            pause();
-                            break;
-                        default:
+                  } else {
+                    if (getAudioManager().isBluetoothA2dpOn()) {
+                      play();
                     }
-                    super.onCallStateChanged(state, incomingNumber);
+                  }
                 }
-            };
-    private BroadcastReceiver headsetReceiver =
-            new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    String action = intent.getAction();
-                    if (action != null) {
-                        if (Intent.ACTION_HEADSET_PLUG.equals(action)) {
-                            int state = intent.getIntExtra("state", -1);
-                            switch (state) {
-                                case 0:
-                                    pause();
+              }
+            }
+          };
+  private final PhoneStateListener phoneStateListener =
+          new PhoneStateListener() {
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+              switch (state) {
+                case TelephonyManager.CALL_STATE_IDLE:
+                  // Not in call: Play music
+                  play();
+                  break;
+                case TelephonyManager.CALL_STATE_RINGING:
+                case TelephonyManager.CALL_STATE_OFFHOOK:
+                  // A call is dialing, active or on hold
+                  pause();
+                  break;
+                default:
+              }
+              super.onCallStateChanged(state, incomingNumber);
+            }
+          };
+  private final BroadcastReceiver headsetReceiver =
+          new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+              String action = intent.getAction();
+              if (action != null) {
+                if (Intent.ACTION_HEADSET_PLUG.equals(action)) {
+                  int state = intent.getIntExtra("state", -1);
+                  switch (state) {
+                    case 0:
+                      pause();
                                     break;
                                 case 1:
                                     play();

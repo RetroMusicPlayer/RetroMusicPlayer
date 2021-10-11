@@ -39,8 +39,9 @@ public class MultiPlayer
     private MediaPlayer mCurrentMediaPlayer = new MediaPlayer();
     private MediaPlayer mNextMediaPlayer;
 
-    private Context context;
-    @Nullable private Playback.PlaybackCallbacks callbacks;
+    private final Context context;
+  @Nullable
+  private Playback.PlaybackCallbacks callbacks;
 
     private boolean mIsInitialized = false;
 

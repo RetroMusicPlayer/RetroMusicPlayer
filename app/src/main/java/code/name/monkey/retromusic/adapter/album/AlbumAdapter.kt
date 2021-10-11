@@ -130,7 +130,7 @@ open class AlbumAdapter(
     }
 
     override fun getName(album: Album): String {
-        return album.title!!
+        return album.title
     }
 
     override fun onMultipleItemAction(

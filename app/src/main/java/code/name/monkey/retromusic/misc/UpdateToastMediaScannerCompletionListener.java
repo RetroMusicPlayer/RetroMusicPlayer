@@ -38,7 +38,7 @@ public class UpdateToastMediaScannerCompletionListener
     private final List<String> toBeScanned;
     private int failed = 0;
     private int scanned = 0;
-    private Toast toast;
+  private final Toast toast;
 
     @SuppressLint("ShowToast")
     public UpdateToastMediaScannerCompletionListener(Activity activity, List<String> toBeScanned) {
