@@ -123,7 +123,7 @@ object BackupHelper {
 
     val backupRootPath =
         Environment.getExternalStorageDirectory().toString() + "/RetroMusic/Backups/"
-    const val BACKUP_EXTENSION = "zip"
+    const val BACKUP_EXTENSION = "rmbak"
     private const val APPEND_EXTENSION = ".$BACKUP_EXTENSION"
     private const val DATABASES_PATH = "databases"
     private const val SETTINGS_PATH = "prefs"

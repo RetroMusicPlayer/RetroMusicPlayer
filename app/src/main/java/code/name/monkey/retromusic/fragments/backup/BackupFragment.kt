@@ -58,11 +58,10 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
     }
 
     private fun checkIsEmpty() {
-        binding.emptyText.setText(R.string.no_backups_found)
-        (backupAdapter!!.itemCount == 0).run {
-            binding.empty.isVisible = this
-            binding.backupTitle.isVisible = this
-        }
+        val isEmpty = backupAdapter!!.itemCount == 0
+        binding.empty.isVisible = isEmpty
+        binding.backupTitle.isVisible = !isEmpty
+        binding.backupRecyclerview.isVisible = !isEmpty
     }
 
     fun setupRecyclerview() {
