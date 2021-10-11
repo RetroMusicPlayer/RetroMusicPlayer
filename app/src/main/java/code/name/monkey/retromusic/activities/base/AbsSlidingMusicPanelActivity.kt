@@ -132,6 +132,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     private fun setupBottomSheet() {
         bottomSheetBehavior = from(binding.slidingPanel) as RetroBottomSheetBehavior
         bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
+        setMiniPlayerAlphaProgress(0F)
     }
 
     override fun onResume() {
@@ -158,6 +159,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     fun expandPanel() {
+        setMiniPlayerAlphaProgress(1.0f)
         bottomSheetBehavior.state = STATE_EXPANDED
     }
 
