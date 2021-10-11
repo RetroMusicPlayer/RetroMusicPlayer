@@ -51,6 +51,7 @@ import code.name.monkey.retromusic.fragments.player.peak.PeakPlayerFragment
 import code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment
 import code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment
+import code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -227,7 +228,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     override fun onQueueChanged() {
         super.onQueueChanged()
-        hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
+        // Mini player should be hidden in Playing Queue
+        // it may pop up if hideBottomBar is called
+        if (currentFragment(R.id.fragment_container) !is PlayingQueueFragment) {
+            hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
+        }
     }
 
     override fun onBackPressed() {
