@@ -16,14 +16,6 @@
         app:defaultNavHost="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
-    <View
-        android:id="@+id/dimBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="gone" />
-
     <FrameLayout
         android:id="@+id/slidingPanel"
         style="@style/BottomSheetStyle"
@@ -31,7 +23,6 @@
         android:layout_height="wrap_content"
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
-        app:gestureInsetBottomIgnored="true"
         app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
 
         <FrameLayout

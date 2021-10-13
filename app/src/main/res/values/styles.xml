@@ -191,6 +191,7 @@
     <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet">
         <item name="android:maxWidth">@empty</item>
         <item name="android:backgroundTint">?attr/bottomSheetTint</item>
+        <item name="enableEdgeToEdge">true</item>
     </style>
 
     <style name="MaterialCardViewStroke">

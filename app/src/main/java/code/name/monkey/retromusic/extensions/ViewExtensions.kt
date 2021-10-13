@@ -28,6 +28,7 @@ import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsCompat.Type.navigationBars
 import androidx.core.view.updateLayoutParams
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -141,7 +142,7 @@ fun View.drawAboveNavBar() {
     ) { v: View, insets: WindowInsetsCompat ->
         v.updateLayoutParams<MarginLayoutParams> {
             bottomMargin =
-                insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+                insets.getInsets(navigationBars()).bottom
         }
         insets
     }
@@ -154,7 +155,7 @@ fun View.drawAboveNavBarWithPadding() {
     ViewCompat.setOnApplyWindowInsetsListener(
         (this)
     ) { v: View, insets: WindowInsetsCompat ->
-        val navBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+        val navBarHeight = insets.getInsets(navigationBars()).bottom
         v.updatePadding(bottom = navBarHeight)
         insets
     }
