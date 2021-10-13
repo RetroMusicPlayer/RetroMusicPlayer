@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.activities.base
 
+import android.animation.Animator
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -65,6 +66,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     private var windowInsets: WindowInsetsCompat? = null
+    private var bottomNavAnimator: Animator? = null
     protected val libraryViewModel by viewModel<LibraryViewModel>()
     private lateinit var bottomSheetBehavior: RetroBottomSheetBehavior<FrameLayout>
     private var playerFragment: AbsPlayerFragment? = null
@@ -274,8 +276,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     fun setBottomBarVisibility(visible: Boolean) {
+        bottomNavAnimator?.end()
         if (!(visible && binding.bottomNavigationView.isVisible)) {
-            if (visible) {
+            bottomNavAnimator = if (visible) {
                 binding.bottomNavigationView.translateYAnimate(0F)
             } else {
                 binding.bottomNavigationView.translateYAnimate(dip(R.dimen.bottom_nav_height).toFloat())

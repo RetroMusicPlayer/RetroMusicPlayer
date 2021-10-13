@@ -26,6 +26,7 @@ import androidx.navigation.ui.setupWithNavController
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
+import code.name.monkey.retromusic.extensions.currentFragment
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
@@ -91,9 +92,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         getBottomNavigationView().setupWithNavController(navController)
         // Scroll Fragment to top
         getBottomNavigationView().setOnItemReselectedListener {
-            supportFragmentManager.findFragmentById(R.id.fragment_container)?.childFragmentManager?.fragments?.get(
-                0
-            )
+            currentFragment(R.id.fragment_container)
                 .also {
                     if (it is AbsRecyclerViewFragment<*, *>) {
                         it.scrollToTop()

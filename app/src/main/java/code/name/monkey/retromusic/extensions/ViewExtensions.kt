@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.extensions
 
+import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.LayoutInflater
@@ -63,8 +64,8 @@ fun EditText.appHandleColor(): EditText {
     return this
 }
 
-fun View.translateYAnimate(value: Float) {
-    ObjectAnimator.ofFloat(this, "translationY", value)
+fun View.translateYAnimate(value: Float): Animator {
+    return ObjectAnimator.ofFloat(this, "translationY", value)
         .apply {
             duration = 300
             doOnStart {

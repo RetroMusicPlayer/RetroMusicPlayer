@@ -327,8 +327,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun setColors(color: Int) {
-        binding.fragmentAlbumContent.shuffleAction.applyColor(color)
-        binding.fragmentAlbumContent.playAction.applyOutlineColor(color)
+        _binding?.fragmentAlbumContent?.apply {
+            shuffleAction.applyColor(color)
+            playAction.applyOutlineColor(color)
+        }
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
