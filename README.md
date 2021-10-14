@@ -35,7 +35,7 @@
 ### 🧭 Navigation never made easier 
 Self-explanatory interface without overloaded menus.
 
-### 🎨 Colorful
+### 🎨 Colorful Themes
 You can choose between three different main themes: Clearly White, Kinda
 Dark and Just Black for AMOLED displays. Select your favorite accent
 color from a color palette.
