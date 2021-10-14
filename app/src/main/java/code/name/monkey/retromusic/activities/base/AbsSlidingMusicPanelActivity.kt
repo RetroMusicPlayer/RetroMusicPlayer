@@ -280,9 +280,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (!(visible && binding.bottomNavigationView.isVisible)) {
             bottomNavAnimator = if (visible) {
                 binding.bottomNavigationView.translateYAnimate(0F)
-            } else {
-                binding.bottomNavigationView.translateYAnimate(dip(R.dimen.bottom_nav_height).toFloat())
-            }
+            } else null
         }
         binding.bottomNavigationView.isVisible = visible
         hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
@@ -309,13 +307,15 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 ViewCompat.setElevation(binding.bottomNavigationView, 10f)
                 if (isVisible) {
                     println("List")
-                    if (bottomSheetBehavior.state != STATE_EXPANDED)
-                        getBottomNavigationView().translateYAnimate(0F)
                     bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
                     libraryViewModel.setFabMargin(heightOfBarWithTabs - windowInsets.safeGetBottomInsets())
                 } else {
                     println("Details")
-                    bottomSheetBehavior.peekHeight = heightOfBar
+                    bottomSheetBehavior.peekHeightAnimate(heightOfBar)
+                    bottomNavAnimator?.end()
+                    getBottomNavigationView().isVisible = true
+                    bottomNavAnimator =
+                        getBottomNavigationView().translateYAnimate(dip(R.dimen.bottom_nav_height).toFloat())
                     libraryViewModel.setFabMargin(heightOfBar - windowInsets.safeGetBottomInsets())
                 }
             }
