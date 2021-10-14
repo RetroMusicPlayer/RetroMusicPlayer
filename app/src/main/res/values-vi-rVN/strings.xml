@@ -304,7 +304,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_colored_app">Màu nền và các nút điều khiển sẽ thay đổi theo màu sắc ảnh bìa album từ màn hình phát</string>
     <string name="pref_summary_colored_app_shortcuts">Màu sắc trong lối tắt ứng dụng dùng màu sắc chủ đạo. Mỗi khi bạn thay đổi màu chủ đạo, hãy bật/tắt lại công tắc này để thay đổi có hiệu lực</string>
     <string name="pref_summary_colored_notification">"M\u00e0u s\u1eafc th\u00f4ng b\u00e1o thay \u0111\u1ed5i theo m\u00e0u s\u1eafc chi ph\u1ed1i \u1ea3nh b\u00eca album"</string>
-    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
+    <string name="pref_summary_cross_fade">Độ dài khoảng lặng giữa các bài hát</string>
     <string name="pref_summary_desaturated_color">Để phù hợp với Thiết kế Material, màu sắc sẽ được điều chỉnh để tương thích với chế độ tối</string>
     <string name="pref_summary_expand_now_playing_panel">Nhấn vào thông báo sẽ hiển thị màn hình phát nhạc thay vì màn hình chính</string>
     <string name="pref_summary_extra_controls">Thêm điều khiển bổ sung cho trình phát mini</string>
@@ -337,7 +337,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_classic_notification">Thiết kế thông báo cổ điển</string>
     <string name="pref_title_colored_app">Màu sắc thích nghi</string>
     <string name="pref_title_colored_notification">Đổi màu thông báo</string>
-    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_cross_fade">Khoảng lặng (Beta)</string>
     <string name="pref_title_desaturated_color">Màu sắc tương thích</string>
     <string name="pref_title_expand_now_playing_panel">Hiển thị màn hình phát nhạc</string>
     <string name="pref_title_extra_controls">Điều khiển bổ sung</string>
