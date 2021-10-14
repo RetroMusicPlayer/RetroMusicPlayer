@@ -23,7 +23,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableSwipeableItemViewHolder;
@@ -41,12 +40,6 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
 
     @Nullable
     public ImageView image;
-
-    @Nullable
-    public ImageView artistImage;
-
-    @Nullable
-    public ImageView playerImage;
 
     @Nullable
     public MaterialCardView imageContainerCard;
@@ -69,10 +62,6 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
     @Nullable
     public View paletteColorContainer;
 
-
-    @Nullable
-    public RecyclerView recyclerView;
-
     @Nullable
     public TextView text;
 
@@ -92,7 +81,6 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
         text2 = itemView.findViewById(R.id.text2);
 
         image = itemView.findViewById(R.id.image);
-        playerImage = itemView.findViewById(R.id.player_image);
         time = itemView.findViewById(R.id.time);
 
         imageText = itemView.findViewById(R.id.imageText);
@@ -103,7 +91,6 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
         menu = itemView.findViewById(R.id.menu);
         dragView = itemView.findViewById(R.id.drag_view);
         paletteColorContainer = itemView.findViewById(R.id.paletteColorContainer);
-        recyclerView = itemView.findViewById(R.id.recycler_view);
         mask = itemView.findViewById(R.id.mask);
         dummyContainer = itemView.findViewById(R.id.dummy_view);
 
