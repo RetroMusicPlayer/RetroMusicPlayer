@@ -104,7 +104,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.fragment_container
             scrimColor = Color.TRANSPARENT
+            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
             setPathMotion(MaterialArcMotion())
         }
     }
@@ -229,9 +231,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         loadAlbumCover(album)
         simpleSongAdapter.swapDataSet(album.songs)
         if (albumArtistExists) {
-            detailsViewModel.getAlbumArtist(album.albumArtist.toString()).observe(viewLifecycleOwner, {
-                loadArtistImage(it)
-            })
+            detailsViewModel.getAlbumArtist(album.albumArtist.toString())
+                .observe(viewLifecycleOwner, {
+                    loadArtistImage(it)
+                })
         } else {
             detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner, {
                 loadArtistImage(it)
@@ -303,7 +306,12 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         })
         GlideApp.with(requireContext()).asBitmapPalette().artistImageOptions(artist)
             //.forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
-            .load(RetroGlideExtension.getArtistModel(artist, PreferenceUtil.isAllowedToDownloadMetadata()))
+            .load(
+                RetroGlideExtension.getArtistModel(
+                    artist,
+                    PreferenceUtil.isAllowedToDownloadMetadata()
+                )
+            )
             .dontAnimate()
             .dontTransform()
             .into(object : RetroMusicColoredTarget(binding.artistImage) {
@@ -313,7 +321,8 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun loadAlbumCover(album: Album) {
-        GlideApp.with(requireContext()).asBitmapPalette().albumCoverOptions(album.safeGetFirstSong())
+        GlideApp.with(requireContext()).asBitmapPalette()
+            .albumCoverOptions(album.safeGetFirstSong())
             //.checkIgnoreMediaStore()
             .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
             .into(object : SingleColorTarget(binding.image) {
