@@ -276,12 +276,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     fun setBottomBarVisibility(visible: Boolean) {
-        bottomNavAnimator?.end()
-        if (!(visible && binding.bottomNavigationView.isVisible)) {
-            bottomNavAnimator = if (visible) {
-                binding.bottomNavigationView.translateYAnimate(0F)
-            } else null
-        }
         binding.bottomNavigationView.isVisible = visible
         hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
     }
@@ -299,21 +293,23 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             libraryViewModel.setFabMargin(if (isVisible) dip(R.dimen.bottom_nav_height) else 0)
             ViewCompat.setElevation(binding.slidingPanel, 0f)
             ViewCompat.setElevation(binding.bottomNavigationView, 10f)
-            collapsePanel()
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 bottomSheetBehavior.isHideable = false
+                if (bottomSheetBehavior.state == STATE_HIDDEN)
+                    bottomSheetBehavior.state = STATE_EXPANDED
                 ViewCompat.setElevation(binding.slidingPanel, 10f)
                 ViewCompat.setElevation(binding.bottomNavigationView, 10f)
                 if (isVisible) {
                     println("List")
                     bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
+                    bottomNavAnimator?.end()
+                    bottomNavAnimator = binding.bottomNavigationView.translateYAnimate(0F)
                     libraryViewModel.setFabMargin(heightOfBarWithTabs - windowInsets.safeGetBottomInsets())
                 } else {
                     println("Details")
                     bottomSheetBehavior.peekHeightAnimate(heightOfBar)
                     bottomNavAnimator?.end()
-                    getBottomNavigationView().isVisible = true
                     bottomNavAnimator =
                         getBottomNavigationView().translateYAnimate(dip(R.dimen.bottom_nav_height).toFloat())
                     libraryViewModel.setFabMargin(heightOfBar - windowInsets.safeGetBottomInsets())
