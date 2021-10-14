@@ -68,7 +68,7 @@ open class AlbumAdapter(
         return ViewHolder(view)
     }
 
-    private fun getAlbumTitle(album: Album): String? {
+    private fun getAlbumTitle(album: Album): String {
         return album.title
     }
 
@@ -88,7 +88,13 @@ open class AlbumAdapter(
         holder.itemView.isActivated = isChecked
         holder.title?.text = getAlbumTitle(album)
         holder.text?.text = getAlbumText(album)
-        ViewCompat.setTransitionName(holder.image!!, album.id.toString())
+        // Check if imageContainer exists so we can have a smooth transition without
+        // CardView clipping, if it doesn't exist in current layout set transition name to image instead.
+        if (holder.imageContainer != null) {
+            ViewCompat.setTransitionName(holder.imageContainer!!, album.id.toString())
+        } else {
+            ViewCompat.setTransitionName(holder.image!!, album.id.toString())
+        }
         loadAlbumCover(album, holder)
     }
 
@@ -177,7 +183,7 @@ open class AlbumAdapter(
                 toggleChecked(layoutPosition)
             } else {
                 image?.let {
-                    listener?.onAlbumClick(dataSet[layoutPosition].id, it)
+                    listener?.onAlbumClick(dataSet[layoutPosition].id, imageContainer ?: it)
                 }
             }
         }

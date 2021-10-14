@@ -10,6 +10,7 @@
     tools:ignore="MissingPrefix">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/imageContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="4dp"

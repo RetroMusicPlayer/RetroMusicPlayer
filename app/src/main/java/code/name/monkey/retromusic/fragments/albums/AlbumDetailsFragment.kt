@@ -104,10 +104,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.fragment_container
-            duration = 300L
             scrimColor = Color.TRANSPARENT
-            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
             setPathMotion(MaterialArcMotion())
         }
     }
