@@ -12,7 +12,7 @@
     <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">Clear playing queue</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
-    <string name="action_delete">Delete</string>
+    <string name="action_delete">ବିଲୋପ କରନ୍ତୁ</string>
     <string name="action_delete_from_device">Delete from device</string>
     <string name="action_details">Details</string>
     <string name="action_edit">Edit</string>
