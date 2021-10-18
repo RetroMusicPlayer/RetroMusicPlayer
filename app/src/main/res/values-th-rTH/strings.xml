@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_album_label">เกี่ยวกับ %s</string>
     <string name="about_settings_summary">ทีมงาน, โซเชียลลิงค์</string>
@@ -40,7 +40,7 @@
     <string name="action_set">เริ่ม</string>
     <string name="action_set_as_ringtone">กำหนดเป็นริงโทน</string>
     <string name="action_set_as_start_directory">กำหนดเป็น Directory เริ่มต้น</string>
-    <string name="action_settings">การตั้งค่า</string>
+    <string name="action_settings">"การตั้งค่า"</string>
     <string name="action_share">แชร์</string>
     <string name="action_shuffle_all">สุ่มทั้งหมด</string>
     <string name="action_shuffle_playlist">สุ่มจากเพลย์ลิสต์</string>
@@ -51,19 +51,17 @@
     <string name="action_toggle_shuffle">สลับการสุ่ม</string>
     <string name="adaptive">Adaptive</string>
     <string name="add_action">เพิ่ม</string>
-    <string name="add_playlist_title">เพิ่มชื่อเพลย์ลิสต์</string>
+    <string name="add_playlist_title">"เพิ่มชื่อเพลย์ลิสต์"</string>
     <string name="add_time_framed_lryics">เพิ่มเนื้อเพลงในกรอบเวลา</string>
-    <string name="added_title_to_playing_queue">เพิ่ม 1 ชื่อเข้าคิวเพลง</string>
+    <string name="added_title_to_playing_queue">"เพิ่ม 1 ชื่อเข้าคิวเพลง"</string>
     <string name="added_x_titles_to_playing_queue">เพิ่ม %1$d ชื่อเข้าคิวเพลง</string>
     <string name="album">อัลบัม</string>
     <plurals name="albumSongs">
-        <item quantity="one">เพลง</item>
         <item quantity="other">เพลง</item>
     </plurals>
     <string name="album_artist">อัลบัมศิลปิน</string>
     <string name="albums">อัลบัม</string>
     <plurals name="albums">
-        <item quantity="one">อัลบัม</item>
         <item quantity="other">อัลบัม</item>
     </plurals>
     <string name="always">ตลอด</string>
@@ -81,9 +79,7 @@
     <string name="audio_focus_denied">การโฟกัสเสียงถูกปฏิเสธ</string>
     <string name="audio_settings_summary">การตั้งค่าเสียง และ Equalizer</string>
     <string name="auto">ออโต้</string>
-    <string name="backup_restore_title">
-        <![CDATA[Backup & Restore]]>
-    </string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">ประวัติ</string>
     <string name="black_theme_name">Just Black</string>
@@ -124,7 +120,7 @@
     <string name="composer">ผู้แต่ง</string>
     <string name="copied_device_info_to_clipboard">คัดลอกข้อมูลเครื่อง</string>
     <string name="could_not_create_playlist">ไม่สามารถสร้างเพลย์ลิสได้</string>
-    <string name="could_not_download_album_cover">ไม่สามารถดาวน์โหลดรูปปกอัลบัมได้</string>
+    <string name="could_not_download_album_cover">"ไม่สามารถดาวน์โหลดรูปปกอัลบัมได้"</string>
     <string name="could_not_restore_purchase">ไม่สามารถเรียกคืนการสั่งซื้อได้</string>
     <string name="could_not_scan_files">ไม่สามารถสแกน %d ไฟล์</string>
     <string name="create_action">สร้าง</string>
@@ -134,21 +130,13 @@
     <string name="currently_listening_to_x_by_x">กำลังฟัง %1$s ของ %2$s</string>
     <string name="dark_theme_name">Kinda Dark</string>
     <string name="delete_playlist_title">ลบเพลย์ลิสต์</string>
-    <string name="delete_playlist_x">
-        <![CDATA[ลบเพลย์ลิสต์ <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_playlist_x"><![CDATA[ลบเพลย์ลิสต์ <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">ลบเพลย์ลิสต์</string>
     <string name="delete_song_title">ลบเพลง</string>
-    <string name="delete_song_x">
-        <![CDATA[ลบเพลง <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_song_x"><![CDATA[ลบเพลง <b>%1$s</b>?]]></string>
     <string name="delete_songs_title">ลบเพลง</string>
-    <string name="delete_x_playlists">
-        <![CDATA[ลบ <b>%1$d</b> เพลย์ลิสต์?]]>
-    </string>
-    <string name="delete_x_songs">
-        <![CDATA[ลบ <b>%1$d</b> เพลง?]]>
-    </string>
+    <string name="delete_x_playlists"><![CDATA[ลบ <b>%1$d</b> เพลย์ลิสต์?]]></string>
+    <string name="delete_x_songs"><![CDATA[ลบ <b>%1$d</b> เพลง?]]></string>
     <string name="deleted_x_songs">ลบ %1$d เพลงแล้ว</string>
     <string name="deleting_songs">กำลังลบเพลง</string>
     <string name="depth">Depth</string>
@@ -157,9 +145,7 @@
     <string name="dialog_message_set_ringtone">อนุญาตให้ Retro Music สามารถแก้ไขการตั้งค่าเสียงได้</string>
     <string name="dialog_title_set_ringtone">กำหนดริงโทน</string>
     <string name="do_you_want_to_clear_the_blacklist">คุณต้องการล้างรายชื่อแบล็คลิสต์ใช่ไหม?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist">
-        <![CDATA[คุณต้องการลบ <b>%1$s</b> จากรายชื่อแบล็คลิสต์ใช่ไหม?]]>
-    </string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[คุณต้องการลบ <b>%1$s</b> จากรายชื่อแบล็คลิสต์ใช่ไหม?]]></string>
     <string name="donate">Donate</string>
     <string name="donate_summary">หากคุณพึงพอใจในการใช้งาน สามารถให้ Donate ได้ที่นี่</string>
     <string name="donation_header">สนับสนุนสิ่งเหล่านี้ให้พวกเราสิ :</string>
@@ -208,7 +194,6 @@
     <string name="import_playlist">นำเข้าเพลย์ลิสต์</string>
     <string name="import_playlist_message">นำเข้าเพลย์ลิสต์ทั้งหมดจากในเครื่อง, หากซ้ำจะทำการรวมข้อมูลให้</string>
     <string name="inserted_x_songs_into_playlist_x">เพิ่ม %1$d เพลงเข้าสู่เพลย์ลิสต์ %2$s แล้ว</string>
-    <string name="instagram_page" translatable="false">Instagram</string>
     <string name="instagram_page_summary">แชร์การตั้งค่า Retro Music บน Instagram</string>
     <string name="keyboard">คีย์บอร์ด</string>
     <string name="label_bit_rate">Bitrate</string>
@@ -242,7 +227,7 @@
     <string name="next_song">เพลงถัดไป</string>
     <string name="no_albums">คุณยังไม่มีอัลบัม</string>
     <string name="no_artists">คุณยังไม่มีศิลปิน</string>
-    <string name="no_audio_ID">เล่นเพลงก่อนแล้วลองอีกครั้ง</string>
+    <string name="no_audio_ID">"เล่นเพลงก่อนแล้วลองอีกครั้ง"</string>
     <string name="no_backups_found">ไม่พบ Backup</string>
     <string name="no_equalizer">ไม่พบ Equalizer</string>
     <string name="no_genres">คุณยังไม่มีประเภทเพลง</string>
@@ -254,9 +239,7 @@
     <string name="no_songs">คุณยังไม่มีเพลง</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">เนื้อเพลงปกติ</string>
-    <string name="not_listed_in_media_store">
-        <![CDATA[<b>%s</b> ไม่อยู่ในรายการมีเดีย]]>
-    </string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> ไม่อยู่ในรายการมีเดีย]]></string>
     <string name="not_recently_played">ไม่มีการเล่นล่าสุด</string>
     <string name="nothing_to_scan">ไม่มีอะไรให้สแกน</string>
     <string name="nothing_to_see">ไม่มีอะไรให้ดู</string>
@@ -304,7 +287,7 @@
     <string name="pref_header_lockscreen">Lockscreen</string>
     <string name="pref_header_playlists">เพลย์ลิสต์</string>
     <string name="pref_keep_pause_on_zero_volume_summary">หยุดเพลงเมื่อเสียงถูกลดเป็นศูนย์ และ เริ่มเล่นอีกครั้งเมื่อเพิ่มเสียง</string>
-    <string name="pref_keep_pause_on_zero_volume_title">"หยุดเพลงเมื่อเสียงถูกลดเป็นศูนย์ "</string>
+    <string name="pref_keep_pause_on_zero_volume_title">หยุดเพลงเมื่อเสียงถูกลดเป็นศูนย์ </string>
     <string name="pref_keep_screen_on_summary">หากเปิดการใช้งานระยะเวลาในการใช้งานของแบตเตอร์รี่จะลดลง</string>
     <string name="pref_keep_screen_on_title">เปิดจอไว้เสมอ</string>
     <string name="pref_language_name">เลือกภาษา</string>
@@ -319,13 +302,13 @@
     <string name="pref_summary_classic_notification">ใช้การแจ้งเตือนปกติ</string>
     <string name="pref_summary_colored_app">สีพื้นหลังและปุ่มการควบคุมจะขึ้นอยู่กับอัลบัมอาร์ตจากหน้าจอ Now playing</string>
     <string name="pref_summary_colored_app_shortcuts">การเน้นสีของทางลัดเข้าแอป (หากมีการเปลี่ยนแปลงค่าให้เลือกตรงนี้เพื่อเปิดใช้งาน)</string>
-    <string name="pref_summary_colored_notification">ใช้สีสดในของการแจ้งเตือน</string>
+    <string name="pref_summary_colored_notification">"ใช้สีสดในของการแจ้งเตือน"</string>
     <string name="pref_summary_cross_fade">ระยะเวลาในการลดเสียงก่อนเปลี่ยนเพลง</string>
     <string name="pref_summary_desaturated_color">สำหรับแนวทางของ Material Design บนโหมดมืดควรลดความอิ่มตัวของสีลง</string>
     <string name="pref_summary_expand_now_playing_panel">คลิกที่การแจ้งเตือนจะแสดงหน้าจอ Now Playing แทนที่จะแสดงหน้าแรก</string>
     <string name="pref_summary_extra_controls">เพิ่มปุ่มควบคุมเพิ่มเติมใน mini player</string>
     <string name="pref_summary_extra_song_info">แสดงข้อมูลเพลงเพิ่มเติม เช่น ประเภทไฟล์, ความถี่ และ Bitrate</string>
-    <string name="pref_summary_gapless_playback">สามารถทำให้เกิดข้อพลาดได้ในบางเครื่อง!</string>
+    <string name="pref_summary_gapless_playback">"สามารถทำให้เกิดข้อพลาดได้ในบางเครื่อง!"</string>
     <string name="pref_summary_home_banner">แสดงหรือซ่อนแบนเนอร์หน้าแรก</string>
     <string name="pref_summary_ignore_media_store_artwork">เพิ่มคุณภาพของรูปปกอัลบัม แต่จะส่งผลให้โหลดรูปภาพช้าขึ้น</string>
     <string name="pref_summary_library_categories">ตั้งค่าการแสดงผลและจัดเรียงของหมวดหมู่คลังเพลง</string>
@@ -391,13 +374,9 @@
     <string name="remove_cover">ลบรูปปก</string>
     <string name="remove_from_blacklist">ลบออกจากรายชื่อแบล็คลิสต์</string>
     <string name="remove_song_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
-    <string name="remove_song_x_from_playlist">
-        <![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]>
-    </string>
+    <string name="remove_song_x_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="remove_songs_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
-    <string name="remove_x_songs_from_playlist">
-        <![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]>
-    </string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="rename_playlist_title">เปลี่ยนขื่อเพลย์ลิสต์</string>
     <string name="report_an_issue">รายการปัญหา</string>
     <string name="report_bug">รายงานบัค</string>
@@ -482,7 +461,7 @@
     <string name="today">วันนี้</string>
     <string name="top_albums">Top อัลบัม</string>
     <string name="top_artists">Top ศิลปิน</string>
-    <string name="track_hint">แทร็ก (2 สำหรับแทร็ก 2 หรือ 3004 สำหรับ CD3 แทร็ก 4)</string>
+    <string name="track_hint">"แทร็ก (2 สำหรับแทร็ก 2 หรือ 3004 สำหรับ CD3 แทร็ก 4)"</string>
     <string name="track_list">หมายเลขแทร็ก</string>
     <string name="translate">แปลภาษา</string>
     <string name="translate_community">ช่วยพวกเราแปลภาษาเป็นภาษาของคุณ</string>
