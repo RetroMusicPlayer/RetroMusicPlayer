@@ -5,7 +5,7 @@
     <string name="accent_color">Kiemelő szín</string>
     <string name="accent_color_desc">Az kiemelő téma színe alapértelmezés szerint színtiszta</string>
     <string name="action_about">Rólunk</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="action_add_to_blacklist">Hozzáadás a tiltólistához</string>
     <string name="action_add_to_favorites">Hozzáadás a kedvencekhez</string>
     <string name="action_add_to_playing_queue">Hozzáadás a lejátszási sorhoz</string>
     <string name="action_add_to_playlist">Hozzáadás lejátszási listához</string>
@@ -81,8 +81,8 @@
     <string name="audio_focus_denied">Az audiofókusz megtagadva.</string>
     <string name="audio_settings_summary">Módosítsa a hangbeállításokat és állítsa be a hangszínszabályzó irányítását</string>
     <string name="auto">Autó</string>
-    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
-    <string name="backup_title">Backups</string>
+    <string name="backup_restore_title"><![CDATA[Biztonsági mentés & Visszaállítás]]></string>
+    <string name="backup_title">Biztonsági mentések</string>
     <string name="biography">Életrajz</string>
     <string name="black_theme_name">Csak Fekete</string>
     <string name="blacklist">Feketelista</string>
@@ -194,7 +194,7 @@
     <string name="image_settings_summary">A művészképek letöltésének megváltoztatása.</string>
     <string name="import_label">Importálás</string>
     <string name="import_playlist">Lejátszólista importálása</string>
-    <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
+    <string name="import_playlist_message">Importálja az Android Media Store-ban lévő összes lejátszási listát a zenékkel együtt. Ha a lejátszási lista már létezik, a zeneszámok össze lesznek vonva.</string>
     <string name="inserted_x_songs_into_playlist_x">%1$d dalt betett a %2$s lejátszási listába.</string>
     <string name="instagram_page_summary">Ossza meg Retro Music beállításait, hogy bemutassa a Instagram-on</string>
     <string name="keyboard">Billentyűzet</string>
@@ -230,7 +230,7 @@
     <string name="no_albums">Nincsenek albumok</string>
     <string name="no_artists">Nincs előadó</string>
     <string name="no_audio_ID">"Először játssz le egy dalt, majd próbálkozzon újra."</string>
-    <string name="no_backups_found">No Backups Found</string>
+    <string name="no_backups_found">Nem található biztonsági mentés</string>
     <string name="no_equalizer">Nem találtunk hangszínszabályzott.</string>
     <string name="no_genres">Nincsenek műfajok</string>
     <string name="no_lyrics_found">Nem található dalszöveg</string>
@@ -256,12 +256,12 @@
     <string name="others">Egyéb</string>
     <string name="password">Jelszó</string>
     <string name="past_three_months">3 hónapnál túl</string>
-    <string name="paste_lyrics_here">Paste Lyrics Here</string>
+    <string name="paste_lyrics_here">Dalszöveg beillesztése ide</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
     <string name="peak">Csúcs</string>
     <string name="permission_external_storage_denied">A külső tárolási hozzáférés engedélyezése tiltva.</string>
-    <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
-    <string name="permission_title">Storage Access</string>
+    <string name="permission_summary">Az alkalmazásnak engedélyre van szüksége az eszköz tárhelyéhez a zenék lejátszásához</string>
+    <string name="permission_title">Tárhely engedély</string>
     <string name="permissions_denied">Engedélyek megtagadva.</string>
     <string name="personalize">Megszemélyesít</string>
     <string name="personalize_settings_summary">Szabd személyre a jelenleg játszott felületet és a kezelőfelületet</string>
@@ -294,9 +294,9 @@
     <string name="pref_keep_screen_on_title">Tartsa bekapcsolva a képernyőt</string>
     <string name="pref_language_name">Válasszon nyelvet</string>
     <string name="pref_summary_album_art_on_lockscreen">A jelenlegi zeneszámok albumborítóját zárolt háttérképként használja.</string>
-    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
+    <string name="pref_summary_album_artists_only">Album előadók mutatása az Előadók kategóriában</string>
     <string name="pref_summary_audio_ducking">Hangerő csökkentése rendszerhang vagy értesítés érkezik</string>
-    <string name="pref_summary_audio_fade">Fade Audio when Song is Paused or Played</string>
+    <string name="pref_summary_audio_fade">A hang fokozatos elhalkítása amikor a zenét megállítod vagy elindítod</string>
     <string name="pref_summary_blacklist">A feketelistán szereplő mappák tartalma el van rejtve a könyvtárban.</string>
     <string name="pref_summary_bluetooth_playback">Amint csatlakoztatta a bluetooth készüléket, kezdje el a lejátszást</string>
     <string name="pref_summary_blurred_album_art">Elhomályosítja az album borítóját a zárolás képernyőjén. Problémákat okozhat harmadik féltől származó alkalmazásokkal és widgetekkel.</string>
@@ -345,7 +345,7 @@
     <string name="pref_title_extra_song_info">Dalinformáció</string>
     <string name="pref_title_gapless_playback">Gapless lejátszás</string>
     <string name="pref_title_general_theme">Általános téma</string>
-    <string name="pref_title_home_album_grid_style">Album grid</string>
+    <string name="pref_title_home_album_grid_style">Album rács</string>
     <string name="pref_title_home_artist_grid_style">Kezdőlapi előadó rács</string>
     <string name="pref_title_home_banner">Kezdőlap banner</string>
     <string name="pref_title_ignore_media_store_artwork">Figyelmen kívül hagyja a médiatárolók fedelét</string>
@@ -353,9 +353,9 @@
     <string name="pref_title_lock_screen">Teljes képernyős vezérlők</string>
     <string name="pref_title_now_playing_screen_appearance">Megjelenés</string>
     <string name="pref_title_open_source_licences">Nyílt forráskódú licencek</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_title_show_lyrics">Show Lyrics</string>
-    <string name="pref_title_suggestions">Show Suggestions</string>
+    <string name="pref_title_remember_tab">Legutóbbi fül megjegyzése</string>
+    <string name="pref_title_show_lyrics">Dalszöveg mutatása</string>
+    <string name="pref_title_suggestions">Javaslatok mutatása</string>
     <string name="pref_title_tab_text_mode">Lap címek módja</string>
     <string name="pref_title_toggle_carousel_effect">Carousel hatás</string>
     <string name="pref_title_toggle_full_screen">Teljes képernyős alkalmazás</string>
