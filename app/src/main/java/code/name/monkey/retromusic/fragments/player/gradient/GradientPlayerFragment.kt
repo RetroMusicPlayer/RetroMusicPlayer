@@ -40,9 +40,7 @@ import code.name.monkey.retromusic.databinding.FragmentGradientPlayerBinding
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.db.toSongEntity
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.ripAlpha
-import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
@@ -157,6 +155,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         binding.playbackControlsFragment.text.setOnClickListener {
             goToArtist(requireActivity())
         }
+        binding.container.drawAboveNavBarWithPadding()
     }
 
     @SuppressLint("ClickableViewAccessibility")

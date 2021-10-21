@@ -78,6 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
+        style="@style/BottomSheetStyle"
         android:theme="@style/TopCornerCardView"
         app:behavior_hideable="false"
         app:cardElevation="24dp"
@@ -87,7 +88,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorSurface"
             android:clickable="false"
             android:orientation="vertical">
 
