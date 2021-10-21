@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
+    <string name="about_album_label">ഏകദേശം %s</string>
     <string name="about_settings_summary">അണിയറ പ്രവർത്തകർ, സോഷ്യൽ മീഡിയ ലിങ്കുകൾ</string>
     <string name="accent_color">ആക്സന്റ് നിറം</string>
     <string name="accent_color_desc">The theme accent color, defaults to purple</string>
