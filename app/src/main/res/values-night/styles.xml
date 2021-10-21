@@ -12,7 +12,7 @@
   ~ See the GNU General Public License for more details.
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="md_background_color">?attr/colorSurface</item>
@@ -33,5 +33,6 @@
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
     </style>
 </resources>

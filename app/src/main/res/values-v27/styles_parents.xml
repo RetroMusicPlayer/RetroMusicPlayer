@@ -12,7 +12,7 @@
   ~ See the GNU General Public License for more details.
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowActionBarOverlay">true</item>
@@ -32,6 +32,7 @@
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.Material3.DayNight.NoActionBar">
@@ -57,6 +58,7 @@
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.Material3.Light.NoActionBar">
@@ -79,5 +81,6 @@
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
     </style>
 </resources>
