@@ -20,7 +20,7 @@
             android:paddingEnd="?attr/listPreferredItemPaddingEnd"
             android:paddingBottom="?attr/listPreferredItemPaddingEnd"
             android:text="@string/social"
-            android:textAppearance="@style/TextViewOverline"
+            android:textAppearance="@style/TextViewNormal"
             android:textColor="?colorAccent"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
