@@ -105,7 +105,7 @@ dependencies {
     //WebServer by NanoHttpd
     implementation "org.nanohttpd:nanohttpd:2.3.1"
 
-    def nav_version = "2.4.0-alpha09"
+    def nav_version = "2.4.0-alpha10"
     implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
@@ -121,7 +121,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     implementation 'com.google.android.play:core-ktx:1.8.1'
-    implementation 'com.google.android.material:material:1.5.0-alpha03'
+    implementation 'com.google.android.material:material:1.5.0-alpha04'
 
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
