@@ -6,6 +6,7 @@ import android.graphics.Color
 import androidx.annotation.*
 import androidx.annotation.IntRange
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ATHUtil.isWindowBackgroundDark
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -301,7 +302,7 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         }
 
         fun isMD3Enabled(context: Context): Boolean {
-            return prefs(context).getBoolean(ThemeStorePrefKeys.KEY_MATERIAL_YOU, false)
+            return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(ThemeStorePrefKeys.KEY_MATERIAL_YOU, false)
         }
     }
 }
