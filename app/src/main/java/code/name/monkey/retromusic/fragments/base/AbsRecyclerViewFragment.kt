@@ -34,6 +34,7 @@ import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dip
+import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -94,6 +95,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
                 bottomMargin = it
             }
         })
+        binding.appBarLayout.drawNextToNavbar()
     }
 
     open fun onShuffleClicked() {

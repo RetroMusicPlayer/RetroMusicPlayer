@@ -55,6 +55,7 @@ import code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -121,7 +122,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             windowInsets = insets
             insets
         }
+        //binding.fragmentContainer.drawAboveNavBar()
         binding.bottomNavigationView.drawAboveNavBarWithPadding()
+        if (RetroUtil.isLandscape()) {
+            binding.slidingPanel.drawAboveNavBarWithPadding(true)
+        }
         chooseFragmentForTheme()
         setupSlidingUpPanel()
         setupBottomSheet()

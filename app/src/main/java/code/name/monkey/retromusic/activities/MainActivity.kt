@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.currentFragment
+import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
@@ -39,6 +40,7 @@ import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.google.android.material.appbar.AppBarLayout
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get

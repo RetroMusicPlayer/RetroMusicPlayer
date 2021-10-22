@@ -45,6 +45,7 @@ import com.google.android.material.transition.MaterialSharedAxis
 import java.util.*
 import kotlin.collections.ArrayList
 
+
 class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWatcher,
     ChipGroup.OnCheckedChangeListener {
     companion object {

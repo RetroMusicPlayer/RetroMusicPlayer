@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -86,11 +87,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     private val bottomSheetCallbackList = object : BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
             mainActivity.getBottomSheetBehavior().setAllowDragging(false)
-            binding.playerQueueSheet.setPadding(
-                binding.playerQueueSheet.paddingLeft,
-                (slideOffset * binding.statusBarLayout.statusBar.height).toInt(),
-                binding.playerQueueSheet.paddingRight,
-                binding.playerQueueSheet.paddingBottom
+            binding.playerQueueSheet.updatePadding(
+                bottom = (slideOffset * binding.statusBarLayout.statusBar.height).toInt()
             )
         }
 
@@ -156,6 +154,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             goToArtist(requireActivity())
         }
         binding.container.drawAboveNavBarWithPadding()
+        binding.playbackControlsFragment.root.drawAboveNavBar()
     }
 
     @SuppressLint("ClickableViewAccessibility")

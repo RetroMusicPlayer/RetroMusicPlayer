@@ -33,6 +33,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.utils.MDUtil.updatePadding
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -140,27 +141,34 @@ fun View.drawAboveNavBar() {
     val initialMargin = recordInitialMarginForView(this)
     ViewCompat.setOnApplyWindowInsetsListener(
         (this)
-    ) { v: View, insets: WindowInsetsCompat ->
-        v.updateLayoutParams<MarginLayoutParams> {
-            bottomMargin = initialMargin.bottom +
-                insets.getInsets(navigationBars()).bottom
+    ) { _: View, windowInsets: WindowInsetsCompat ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        // Apply the insets as a margin to the view.
+        updateLayoutParams<MarginLayoutParams> {
+            leftMargin = initialMargin.left + insets.left
+            bottomMargin = initialMargin.bottom + insets.bottom
+            rightMargin = initialMargin.right + insets.right
         }
-        insets
+        windowInsets
     }
 }
 
 /**
  * This will draw our view above the navigation bar instead of behind it by adding padding.
  */
-fun View.drawAboveNavBarWithPadding() {
+fun View.drawAboveNavBarWithPadding(consume: Boolean = false) {
     val initialPadding = recordInitialPaddingForView(this)
 
     ViewCompat.setOnApplyWindowInsetsListener(
         (this)
-    ) { v: View, insets: WindowInsetsCompat ->
-        val navBarHeight = insets.getInsets(navigationBars()).bottom
-        v.updatePadding(bottom = initialPadding.bottom + navBarHeight)
-        insets
+    ) { v: View, windowInsets: WindowInsetsCompat ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        v.updatePadding(
+            left = initialPadding.left + insets.left,
+            bottom = initialPadding.bottom + insets.bottom,
+            right = initialPadding.right + insets.right
+        )
+        if (consume) WindowInsetsCompat.CONSUMED else windowInsets
     }
     requestApplyInsetsWhenAttached()
 }
@@ -183,17 +191,38 @@ fun View.requestApplyInsetsWhenAttached() {
     }
 }
 
+fun AppBarLayout.drawNextToNavbar() {
+    val initialMargin = recordInitialMarginForView(this)
 
-data class InitialMargin(val left: Int, val top: Int,
-                         val right: Int, val bottom: Int)
+    ViewCompat.setOnApplyWindowInsetsListener(
+        (this)
+    ) { v: View, windowInsets: WindowInsetsCompat ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        v.updatePadding(
+            top = initialMargin.top + insets.top,
+            left = initialMargin.left + insets.left,
+            right = initialMargin.right + insets.right
+        )
+        windowInsets
+    }
+    requestApplyInsetsWhenAttached()
+}
+
+data class InitialMargin(
+    val left: Int, val top: Int,
+    val right: Int, val bottom: Int
+)
 
 private fun recordInitialMarginForView(view: View) = InitialMargin(
-    view.marginLeft, view.marginTop, view.marginRight, view.marginBottom)
+    view.marginLeft, view.marginTop, view.marginRight, view.marginBottom
+)
 
 
+data class InitialPadding(
+    val left: Int, val top: Int,
+    val right: Int, val bottom: Int
+)
 
-data class InitialPadding(val left: Int, val top: Int,
-                         val right: Int, val bottom: Int)
-
-private fun recordInitialPaddingForView(view: View) = InitialMargin(
-    view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom)
+private fun recordInitialPaddingForView(view: View) = InitialPadding(
+    view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom
+)

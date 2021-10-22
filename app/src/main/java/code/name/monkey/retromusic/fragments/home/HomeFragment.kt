@@ -37,11 +37,13 @@ import code.name.monkey.retromusic.databinding.FragmentBannerHomeBinding
 import code.name.monkey.retromusic.databinding.FragmentHomeBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
+import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.gms.cast.framework.CastButtonFactory
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialSharedAxis
 
@@ -74,6 +76,7 @@ class HomeFragment :
         view.doOnPreDraw { startPostponedEnterTransition() }
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
+        binding.appBarLayout.drawNextToNavbar()
     }
 
     private fun setupListeners() {
