@@ -27,10 +27,8 @@ import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.*
 import androidx.core.view.WindowInsetsCompat.Type.navigationBars
-import androidx.core.view.updateLayoutParams
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -138,11 +136,13 @@ fun ShapeableImageView.setCircleShape(boolean: Boolean) {
  * This will draw our view above the navigation bar instead of behind it by adding margins.
  */
 fun View.drawAboveNavBar() {
+    // Create a snapshot of the view's margin state
+    val initialMargin = recordInitialMarginForView(this)
     ViewCompat.setOnApplyWindowInsetsListener(
         (this)
     ) { v: View, insets: WindowInsetsCompat ->
         v.updateLayoutParams<MarginLayoutParams> {
-            bottomMargin =
+            bottomMargin = initialMargin.bottom +
                 insets.getInsets(navigationBars()).bottom
         }
         insets
@@ -153,11 +153,13 @@ fun View.drawAboveNavBar() {
  * This will draw our view above the navigation bar instead of behind it by adding padding.
  */
 fun View.drawAboveNavBarWithPadding() {
+    val initialPadding = recordInitialPaddingForView(this)
+
     ViewCompat.setOnApplyWindowInsetsListener(
         (this)
     ) { v: View, insets: WindowInsetsCompat ->
         val navBarHeight = insets.getInsets(navigationBars()).bottom
-        v.updatePadding(bottom = navBarHeight)
+        v.updatePadding(bottom = initialPadding.bottom + navBarHeight)
         insets
     }
     requestApplyInsetsWhenAttached()
@@ -180,3 +182,18 @@ fun View.requestApplyInsetsWhenAttached() {
         })
     }
 }
+
+
+data class InitialMargin(val left: Int, val top: Int,
+                         val right: Int, val bottom: Int)
+
+private fun recordInitialMarginForView(view: View) = InitialMargin(
+    view.marginLeft, view.marginTop, view.marginRight, view.marginBottom)
+
+
+
+data class InitialPadding(val left: Int, val top: Int,
+                         val right: Int, val bottom: Int)
+
+private fun recordInitialPaddingForView(view: View) = InitialMargin(
+    view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom)
