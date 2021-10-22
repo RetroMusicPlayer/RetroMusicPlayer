@@ -84,5 +84,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         app:srcCompat="@drawable/ic_shuffle"
+        style="@style/Widget.Material3.FloatingActionButton.Primary"
         android:layout_marginHorizontal="16dp"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

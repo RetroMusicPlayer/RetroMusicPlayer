@@ -17,9 +17,12 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceViewHolder
+import code.name.monkey.appthemehelper.R
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.VersionUtils
 
 class ATEPreferenceCategory @JvmOverloads constructor(
     context: Context?,
@@ -31,6 +34,13 @@ class ATEPreferenceCategory @JvmOverloads constructor(
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
         val title = holder.itemView.findViewById<TextView>(android.R.id.title)
-        title.setTextColor(ThemeStore.accentColor(context))
+        title.setTextColor(
+            // Set MD3 accent if MD3 is enabled or in-app accent otherwise
+            if (ThemeStore.isMD3Enabled(context) && VersionUtils.hasS()) {
+                ContextCompat.getColor(context, R.color.m3_accent_color)
+            } else {
+                ThemeStore.accentColor(context)
+            }
+        )
     }
 }
