@@ -318,7 +318,7 @@
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
-    <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
+    <string name="pref_summary_suggestions">Ana Ekranda Yeni Müzik Karışımını Göster</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
     <string name="pref_summary_toggle_headset">Kulaklık bağlandıktan hemen sonra çalmaya başla</string>
     <string name="pref_summary_toggle_shuffle">Yeni bir şarkı listesi çalınırken karıştırma modu kapanacak</string>
