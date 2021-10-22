@@ -136,7 +136,7 @@ fun ShapeableImageView.setCircleShape(boolean: Boolean) {
 /**
  * This will draw our view above the navigation bar instead of behind it by adding margins.
  */
-fun View.drawAboveNavBar() {
+fun View.drawAboveSystemBars() {
     // Create a snapshot of the view's margin state
     val initialMargin = recordInitialMarginForView(this)
     ViewCompat.setOnApplyWindowInsetsListener(
@@ -156,7 +156,7 @@ fun View.drawAboveNavBar() {
 /**
  * This will draw our view above the navigation bar instead of behind it by adding padding.
  */
-fun View.drawAboveNavBarWithPadding(consume: Boolean = false) {
+fun View.drawAboveSystemBarsWithPadding(consume: Boolean = false) {
     val initialPadding = recordInitialPaddingForView(this)
 
     ViewCompat.setOnApplyWindowInsetsListener(
@@ -206,6 +206,21 @@ fun AppBarLayout.drawNextToNavbar() {
         windowInsets
     }
     requestApplyInsetsWhenAttached()
+}
+
+fun View.addBottomInsets() {
+    // Create a snapshot of the view's margin state
+    val initialMargin = recordInitialMarginForView(this)
+    ViewCompat.setOnApplyWindowInsetsListener(
+        (this)
+    ) { _: View, windowInsets: WindowInsetsCompat ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        // Apply the insets as a margin to the view.
+        updateLayoutParams<MarginLayoutParams> {
+            bottomMargin = initialMargin.bottom + insets.bottom
+        }
+        windowInsets
+    }
 }
 
 data class InitialMargin(

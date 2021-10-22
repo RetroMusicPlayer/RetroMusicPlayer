@@ -153,8 +153,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         binding.playbackControlsFragment.text.setOnClickListener {
             goToArtist(requireActivity())
         }
-        binding.container.drawAboveNavBarWithPadding()
-        binding.playbackControlsFragment.root.drawAboveNavBar()
+        binding.container.drawAboveSystemBarsWithPadding()
+        binding.playbackControlsFragment.root.drawAboveSystemBars()
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -93,7 +93,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
         }
-        binding.songInfo.drawAboveNavBar()
+        binding.songInfo.drawAboveSystemBars()
     }
 
     private fun setUpPlayerToolbar() {

@@ -123,10 +123,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             insets
         }
         //binding.fragmentContainer.drawAboveNavBar()
-        binding.bottomNavigationView.drawAboveNavBarWithPadding()
+        binding.bottomNavigationView.drawAboveSystemBarsWithPadding()
         if (RetroUtil.isLandscape()) {
-            binding.slidingPanel.drawAboveNavBarWithPadding(true)
+            binding.slidingPanel.drawAboveSystemBarsWithPadding(true)
         }
+        binding.fragmentContainer.addBottomInsets()
         chooseFragmentForTheme()
         setupSlidingUpPanel()
         setupBottomSheet()

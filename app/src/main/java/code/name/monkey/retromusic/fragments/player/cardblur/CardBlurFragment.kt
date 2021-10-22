@@ -24,7 +24,7 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.NEW_BLUR_AMOUNT
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentCardBlurPlayerBinding
-import code.name.monkey.retromusic.extensions.drawAboveNavBar
+import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
@@ -94,7 +94,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         _binding = FragmentCardBlurPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
-        binding.cardContainer?.drawAboveNavBar()
+        binding.cardContainer?.drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {
