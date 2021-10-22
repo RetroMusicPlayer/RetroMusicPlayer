@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
+import androidx.core.animation.doOnEnd
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -311,6 +312,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
                     bottomNavAnimator?.end()
                     bottomNavAnimator = binding.bottomNavigationView.translateYAnimate(0F)
+                    binding.bottomNavigationView.bringToFront()
                     libraryViewModel.setFabMargin(heightOfBarWithTabs - windowInsets.safeGetBottomInsets())
                 } else {
                     println("Details")
@@ -318,6 +320,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     bottomNavAnimator?.end()
                     bottomNavAnimator =
                         getBottomNavigationView().translateYAnimate(dip(R.dimen.bottom_nav_height).toFloat())
+                    bottomNavAnimator?.doOnEnd {
+                        binding.slidingPanel.bringToFront()
+                    }
                     libraryViewModel.setFabMargin(heightOfBar - windowInsets.safeGetBottomInsets())
                 }
             }
