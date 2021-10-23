@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -88,7 +89,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
             mainActivity.getBottomSheetBehavior().setAllowDragging(false)
             binding.playerQueueSheet.updatePadding(
-                bottom = (slideOffset * binding.statusBarLayout.statusBar.height).toInt()
+                top = (slideOffset * binding.statusBarLayout.statusBar.height).toInt()
             )
         }
 
@@ -153,7 +154,12 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         binding.playbackControlsFragment.text.setOnClickListener {
             goToArtist(requireActivity())
         }
-        binding.container.drawAboveSystemBarsWithPadding()
+        ViewCompat.setOnApplyWindowInsetsListener(
+            (binding.container)
+        ) { v: View, insets: WindowInsetsCompat ->
+            v.updatePadding(bottom = insets.safeGetBottomInsets())
+            insets
+        }
         binding.playbackControlsFragment.root.drawAboveSystemBars()
     }
 
