@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.helper
 import android.content.Context
 import android.os.Environment
 import android.widget.Toast
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -12,29 +13,36 @@ import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
 
 object BackupHelper {
-    suspend fun createBackup(context: Context) {
+    suspend fun createBackup(context: Context, name: String) {
         withContext(Dispatchers.IO) {
-            val finalPath =
-                backupRootPath + System.currentTimeMillis().toString() + APPEND_EXTENSION
+            val backupFile =
+                File(backupRootPath + name + APPEND_EXTENSION)
+            if (backupFile.parentFile?.exists() != true) {
+                backupFile.parentFile?.mkdirs()
+            }
             val zipItems = mutableListOf<ZipItem>()
             zipItems.addAll(getDatabaseZipItems(context))
             zipItems.addAll(getSettingsZipItems(context))
             getUserImageZipItems(context)?.let { zipItems.addAll(it) }
-            zipAll(zipItems, finalPath)
+            zipAll(zipItems, backupFile)
         }
     }
 
-    private fun zipAll(zipItems: List<ZipItem>, finalPath: String) {
-        ZipOutputStream(BufferedOutputStream(FileOutputStream(finalPath))).use { out ->
-            for (zipItem in zipItems) {
-                FileInputStream(zipItem.filePath).use { fi ->
-                    BufferedInputStream(fi).use { origin ->
-                        val entry = ZipEntry(zipItem.zipPath)
-                        out.putNextEntry(entry)
-                        origin.copyTo(out, 1024)
+    private fun zipAll(zipItems: List<ZipItem>, backupFile: File) {
+        try {
+            ZipOutputStream(BufferedOutputStream(FileOutputStream(backupFile))).use { out ->
+                for (zipItem in zipItems) {
+                    FileInputStream(zipItem.filePath).use { fi ->
+                        BufferedInputStream(fi).use { origin ->
+                            val entry = ZipEntry(zipItem.zipPath)
+                            out.putNextEntry(entry)
+                            origin.copyTo(out, 1024)
+                        }
                     }
                 }
             }
+        } catch (exception: FileNotFoundException) {
+            Toast.makeText(App.getContext(), "Couldn't create backup", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -124,7 +132,7 @@ object BackupHelper {
     val backupRootPath =
         Environment.getExternalStorageDirectory().toString() + "/RetroMusic/Backups/"
     const val BACKUP_EXTENSION = "rmbak"
-    private const val APPEND_EXTENSION = ".$BACKUP_EXTENSION"
+    const val APPEND_EXTENSION = ".$BACKUP_EXTENSION"
     private const val DATABASES_PATH = "databases"
     private const val SETTINGS_PATH = "prefs"
     private const val IMAGES_PATH = "userImages"

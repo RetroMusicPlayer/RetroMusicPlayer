@@ -132,9 +132,6 @@
                 <data android:pathPattern=".*\\.rmbak" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="code.name.monkey.retromusic.fragments.backup.BackupFragment"
-            android:exported="true" />
 
         <activity
             android:name=".appshortcuts.AppShortcutLauncherActivity"
@@ -168,7 +165,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
 
         <provider
             android:name="androidx.core.content.FileProvider"
