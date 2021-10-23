@@ -32,6 +32,7 @@ import androidx.core.view.*
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialdialogs.utils.MDUtil.updatePadding
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -136,7 +137,8 @@ fun ShapeableImageView.setCircleShape(boolean: Boolean) {
 /**
  * This will draw our view above the navigation bar instead of behind it by adding margins.
  */
-fun View.drawAboveSystemBars() {
+fun View.drawAboveSystemBars(onlyPortrait: Boolean = true) {
+    if (onlyPortrait && RetroUtil.isLandscape()) return
     // Create a snapshot of the view's margin state
     val initialMargin = recordInitialMarginForView(this)
     ViewCompat.setOnApplyWindowInsetsListener(
