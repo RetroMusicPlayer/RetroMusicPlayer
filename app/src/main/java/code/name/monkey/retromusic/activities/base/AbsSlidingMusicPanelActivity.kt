@@ -313,7 +313,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     bottomNavAnimator?.end()
                     bottomNavAnimator = binding.bottomNavigationView.translateYAnimate(0F)
                     binding.bottomNavigationView.bringToFront()
-                    libraryViewModel.setFabMargin(heightOfBarWithTabs - windowInsets.safeGetBottomInsets())
+                    libraryViewModel.setFabMargin(heightOfBarWithTabs - 2 * windowInsets.safeGetBottomInsets())
                 } else {
                     println("Details")
                     bottomSheetBehavior.peekHeightAnimate(heightOfBar)
@@ -323,7 +323,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     bottomNavAnimator?.doOnEnd {
                         binding.slidingPanel.bringToFront()
                     }
-                    libraryViewModel.setFabMargin(heightOfBar - windowInsets.safeGetBottomInsets())
+                    libraryViewModel.setFabMargin(heightOfBar - 2 * windowInsets.safeGetBottomInsets())
                 }
             }
         }

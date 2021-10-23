@@ -124,7 +124,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                     }
                 }
             })
-        binding.appBarLayout.drawNextToNavbar()
+        binding.toolbarContainer.drawNextToNavbar()
     }
 
     private fun setUpTitle() {

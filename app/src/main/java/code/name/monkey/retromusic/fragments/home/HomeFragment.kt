@@ -76,7 +76,7 @@ class HomeFragment :
         view.doOnPreDraw { startPostponedEnterTransition() }
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
-        binding.appBarLayout.drawNextToNavbar()
+        binding.toolbar.drawNextToNavbar()
     }
 
     private fun setupListeners() {

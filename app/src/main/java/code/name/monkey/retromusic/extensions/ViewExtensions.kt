@@ -24,11 +24,11 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.view.*
-import androidx.core.view.WindowInsetsCompat.Type.navigationBars
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -191,17 +191,16 @@ fun View.requestApplyInsetsWhenAttached() {
     }
 }
 
-fun AppBarLayout.drawNextToNavbar() {
-    val initialMargin = recordInitialMarginForView(this)
+fun View.drawNextToNavbar() {
+    val initialPadding = recordInitialPaddingForView(this)
 
     ViewCompat.setOnApplyWindowInsetsListener(
         (this)
     ) { v: View, windowInsets: WindowInsetsCompat ->
         val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
         v.updatePadding(
-            top = initialMargin.top + insets.top,
-            left = initialMargin.left + insets.left,
-            right = initialMargin.right + insets.right
+            left = initialPadding.left + insets.left,
+            right = initialPadding.right + insets.right
         )
         windowInsets
     }
@@ -228,7 +227,7 @@ data class InitialMargin(
     val right: Int, val bottom: Int
 )
 
-private fun recordInitialMarginForView(view: View) = InitialMargin(
+fun recordInitialMarginForView(view: View) = InitialMargin(
     view.marginLeft, view.marginTop, view.marginRight, view.marginBottom
 )
 

@@ -64,9 +64,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         initAdapter()
         setUpRecyclerView()
         setupToolbar()
-        binding.appBarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
-
         // Add listeners when shuffle is visible
         if (isShuffleVisible) {
             binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -95,7 +92,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
                 bottomMargin = it
             }
         })
-        binding.appBarLayout.drawNextToNavbar()
     }
 
     open fun onShuffleClicked() {
@@ -117,6 +113,9 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         }
         val appName = resources.getString(titleRes)
         binding.appNameText.text = appName
+        binding.toolbarContainer.drawNextToNavbar()
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     abstract val titleRes: Int
