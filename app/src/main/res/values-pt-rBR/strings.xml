@@ -20,7 +20,7 @@
     <string name="action_go_to_artist">Ir para o artista</string>
     <string name="action_go_to_genre">Ir para o gênero</string>
     <string name="action_go_to_start_directory">Ir para o diretório inicial</string>
-    <string name="action_grant">Permitir</string>
+    <string name="action_grant">Conceder</string>
     <string name="action_grid_size">Tamanho da grade</string>
     <string name="action_grid_size_land">Tamanho da grade (horizontal)</string>
     <string name="action_new_playlist">Nova playlist</string>
@@ -42,8 +42,8 @@
     <string name="action_set_as_start_directory">Definir como diretório inicial</string>
     <string name="action_settings">"Configurações"</string>
     <string name="action_share">Compartilhar</string>
-    <string name="action_shuffle_all">Aleatorizar todas</string>
-    <string name="action_shuffle_playlist">Aleatorizar playlist</string>
+    <string name="action_shuffle_all">Embaralhar todas</string>
+    <string name="action_shuffle_playlist">Embaralhar playlist</string>
     <string name="action_sleep_timer">Temporizador</string>
     <string name="action_sort_order">Ordem de classificação</string>
     <string name="action_tag_editor">Editor de tags</string>
@@ -81,7 +81,7 @@
     <string name="audio_focus_denied">Foco de áudio negado.</string>
     <string name="audio_settings_summary">Altere as configurações de som e ajuste os controles do equalizador</string>
     <string name="auto">Automático</string>
-    <string name="backup_restore_title"><![CDATA[Backup / Restaurar]]></string>
+    <string name="backup_restore_title"><![CDATA[Backup e Restauração]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Totalmente preto</string>
