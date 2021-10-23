@@ -42,6 +42,7 @@ import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
@@ -104,6 +105,10 @@ open class SongAdapter(
         holder.text?.text = getSongText(song)
         holder.text2?.text = getSongText(song)
         loadAlbumCover(song, holder)
+        val landscape = RetroUtil.isLandscape()
+        if ((PreferenceUtil.songGridSize > 2 && !landscape) || (PreferenceUtil.songGridSizeLand > 5 && landscape)) {
+            holder.menu?.isVisible = false
+        }
     }
 
     private fun setColors(color: MediaNotificationProcessor, holder: ViewHolder) {
