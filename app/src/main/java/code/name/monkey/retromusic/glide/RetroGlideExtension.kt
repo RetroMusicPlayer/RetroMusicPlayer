@@ -37,11 +37,11 @@ import java.io.File
 @GlideExtension
 object RetroGlideExtension {
 
-    private const val DEFAULT_ARTIST_IMAGE =
+    private const val DEFAULT_ERROR_ARTIST_IMAGE =
         R.drawable.default_artist_art
-    private const val DEFAULT_SONG_IMAGE: Int = R.drawable.default_audio_art
-    private const val DEFAULT_ALBUM_IMAGE = R.drawable.default_album_art
-    private const val DEFAULT_IMAGE_BANNER = R.drawable.material_design_default
+    private const val DEFAULT_ERROR_SONG_IMAGE: Int = R.drawable.default_audio_art
+    private const val DEFAULT_ERROR_ALBUM_IMAGE = R.drawable.default_album_art
+    private const val DEFAULT_ERROR_IMAGE_BANNER = R.drawable.material_design_default
 
     private val DEFAULT_DISK_CACHE_STRATEGY_ARTIST = DiskCacheStrategy.RESOURCE
     private val DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.NONE
@@ -99,9 +99,8 @@ object RetroGlideExtension {
         return baseRequestOptions
             .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY_ARTIST)
             .priority(Priority.LOW)
-            .error(DEFAULT_ARTIST_IMAGE)
+            .error(DEFAULT_ERROR_ARTIST_IMAGE)
             .override(SIZE_ORIGINAL, SIZE_ORIGINAL)
-            .placeholder(DEFAULT_ARTIST_IMAGE)
             .signature(createSignature(artist))
     }
 
@@ -112,8 +111,7 @@ object RetroGlideExtension {
         song: Song
     ): BaseRequestOptions<*> {
         return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .error(DEFAULT_SONG_IMAGE)
-            .placeholder(DEFAULT_SONG_IMAGE)
+            .error(DEFAULT_ERROR_SONG_IMAGE)
             .signature(createSignature(song))
     }
 
@@ -124,8 +122,7 @@ object RetroGlideExtension {
         song: Song
     ): BaseRequestOptions<*> {
         return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .error(DEFAULT_ALBUM_IMAGE)
-            .placeholder(DEFAULT_ALBUM_IMAGE)
+            .error(DEFAULT_ERROR_ALBUM_IMAGE)
             .signature(createSignature(song))
     }
 
@@ -147,8 +144,8 @@ object RetroGlideExtension {
         file: File
     ): BaseRequestOptions<*> {
         return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .placeholder(DEFAULT_IMAGE_BANNER)
-            .error(DEFAULT_IMAGE_BANNER)
+            .placeholder(DEFAULT_ERROR_IMAGE_BANNER)
+            .error(DEFAULT_ERROR_IMAGE_BANNER)
             .signature(createSignature(file))
     }
 
@@ -158,7 +155,7 @@ object RetroGlideExtension {
         baseRequestOptions: BaseRequestOptions<*>
     ): BaseRequestOptions<*> {
         return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .error(DEFAULT_ALBUM_IMAGE)
+            .error(DEFAULT_ERROR_ALBUM_IMAGE)
     }
 
     private fun createSignature(song: Song): Key {
