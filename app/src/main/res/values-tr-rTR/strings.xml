@@ -296,7 +296,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Çalmakta olan şarkı albüm kapağını kilit ekranı duvar kağıdı olarak kullanın</string>
     <string name="pref_summary_album_artists_only">Sanatçı kategorisinde Albüm Sanatçılarını göster</string>
     <string name="pref_summary_audio_ducking">Sistem sesi çalındığında veya bir bildirim alındığında sesi kısın</string>
-    <string name="pref_summary_audio_fade">Fade Audio when Song is Paused or Played</string>
+    <string name="pref_summary_audio_fade">Bir şarkı oynatıldığında ya da durdurulduğunda sesi soldur</string>
     <string name="pref_summary_blacklist">Kara listedeki klasörlerin içeriği kütüphanenizden gizlenir.</string>
     <string name="pref_summary_bluetooth_playback">Bluetooth cihazına bağlanır bağlanmaz çalmaya başla</string>
     <string name="pref_summary_blurred_album_art">Albüm kapağını kilit ekranında bulanıklaştır. Üçüncü taraf uygulamalar ve widget\'lar ile sorunlara neden olabilir</string>
@@ -317,7 +317,7 @@
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
+    <string name="pref_summary_show_lyrics">Albüm kapağının üstünde senkronize edilmiş sözleri göster</string>
     <string name="pref_summary_suggestions">Ana Ekranda Yeni Müzik Karışımını Göster</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
     <string name="pref_summary_toggle_headset">Kulaklık bağlandıktan hemen sonra çalmaya başla</string>
@@ -330,7 +330,7 @@
     <string name="pref_title_album_cover_transform">Albüm kapağını atla</string>
     <string name="pref_title_app_shortcuts">Renkli uygulama kısayolları</string>
     <string name="pref_title_audio_ducking">Odak kaybında ses hacmini azaltın</string>
-    <string name="pref_title_audio_fade">Fade Audio</string>
+    <string name="pref_title_audio_fade">Soluk Ses</string>
     <string name="pref_title_auto_download_artist_images">Sanatçı resimlerini otomatik indir</string>
     <string name="pref_title_blacklist">Kara Liste</string>
     <string name="pref_title_bluetooth_playback">Bluetooth ile oynatma</string>
