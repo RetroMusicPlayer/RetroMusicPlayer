@@ -81,6 +81,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     private var recyclerViewTouchActionGuardManager: RecyclerViewTouchActionGuardManager? = null
     private var playingQueueAdapter: PlayingQueueAdapter? = null
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private var bottomInsets = 0
 
     private var _binding: FragmentGradientPlayerBinding? = null
     private val binding get() = _binding!!
@@ -90,6 +91,9 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             mainActivity.getBottomSheetBehavior().setAllowDragging(false)
             binding.playerQueueSheet.updatePadding(
                 top = (slideOffset * binding.statusBarLayout.statusBar.height).toInt()
+            )
+            binding.container.updatePadding(
+                bottom = ((1 - slideOffset) * bottomInsets).toInt()
             )
         }
 
@@ -157,7 +161,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         ViewCompat.setOnApplyWindowInsetsListener(
             (binding.container)
         ) { v: View, insets: WindowInsetsCompat ->
-            v.updatePadding(bottom = insets.safeGetBottomInsets())
+            bottomInsets = insets.safeGetBottomInsets()
+            v.updatePadding(bottom = bottomInsets)
             insets
         }
         binding.playbackControlsFragment.root.drawAboveSystemBars()
