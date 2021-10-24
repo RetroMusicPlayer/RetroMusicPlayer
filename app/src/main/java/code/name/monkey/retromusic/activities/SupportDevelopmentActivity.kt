@@ -75,7 +75,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDonationBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_donation)
+        setContentView(binding.root)
 
         setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
