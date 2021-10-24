@@ -77,7 +77,7 @@
     <string name="app_widget_text_name">Minimal Metin</string>
     <string name="artist">Sanatçı</string>
     <string name="artists">Sanatçılar</string>
-    <string name="audio_fade_duration">Audio Fade Duration</string>
+    <string name="audio_fade_duration">Sesin Solma Süresi</string>
     <string name="audio_focus_denied">Ses odaklaması reddedildi.</string>
     <string name="audio_settings_summary">Ses ayarlarını değiştirin ve ekolayzır kontrollerini ayarlayın</string>
     <string name="auto">Otomatik</string>
@@ -105,7 +105,7 @@
     <string name="cancel_current_timer">İptal et</string>
     <string name="card">Kart</string>
     <string name="card_color_style">Renkli Kart</string>
-    <string name="card_square">Square Card</string>
+    <string name="card_square">Kare Kart</string>
     <string name="card_style">Kart</string>
     <string name="carousal_effect_on_now_playing_screen">Şimdi oynatılıyor ekranında atlıkarınca efekti</string>
     <string name="cascading">Basamaklı</string>
@@ -316,7 +316,7 @@
     <string name="pref_summary_library_categories">Kütüphane kategorilerinin görünürlük ve sırasını yapılandırın</string>
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_remember_tab">Başlangıçta son kullanılan sekmeye git</string>
     <string name="pref_summary_show_lyrics">Albüm kapağının üstünde senkronize edilmiş sözleri göster</string>
     <string name="pref_summary_suggestions">Ana Ekranda Yeni Müzik Karışımını Göster</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
@@ -439,7 +439,7 @@
     <string name="sort_order_date">Tarih eklendi</string>
     <string name="sort_order_date_modified">Zaman ayarlandı</string>
     <string name="sort_order_num_songs">Şarkı sayısı</string>
-    <string name="sort_order_num_songs_desc">Song count desc</string>
+    <string name="sort_order_num_songs_desc">Şarkı sayısı açıklaması</string>
     <string name="sort_order_year">Yıl</string>
     <string name="sort_order_z_a">Azalan</string>
     <string name="speech_not_supported">Üzgünüz, ancak cihazın konuşma girişini desteklemiyor.</string>
