@@ -298,7 +298,7 @@
     <string name="pref_summary_audio_ducking">Diminuir o volume quando um som do sistema for reproduzido ou uma notificação for recebida</string>
     <string name="pref_summary_audio_fade">Diminuir ou aumentar o áudio gradualmente quando a música é pausada ou reproduzida</string>
     <string name="pref_summary_blacklist">O conteúdo de pastas na lista negra é escondido da sua biblioteca.</string>
-    <string name="pref_summary_bluetooth_playback">Começae a tocar assim que se conectar ao dispositivo bluetooth</string>
+    <string name="pref_summary_bluetooth_playback">Começar a tocar assim que se conectar a um dispositivo Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Desfoque a capa do álbum na tela de bloqueio. Pode causar problemas com aplicativos e widgets de terceiros</string>
     <string name="pref_summary_carousel_effect">Efeito carrossel para a imagem do álbum na tela de reprodução. Note que os temas \"Cartão\" e \"Cartão Desfocado\" não irão funcionar</string>
     <string name="pref_summary_classic_notification">Usar o design de notificação clássico</string>
