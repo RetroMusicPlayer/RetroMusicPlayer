@@ -56,9 +56,9 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                         backupViewModel.loadBackups()
                     }
                 }
-                positiveButton(R.string.action_rename)
+                positiveButton(android.R.string.ok)
                 negativeButton(R.string.action_cancel)
-                setTitle(R.string.action_rename)
+                setTitle(R.string.title_new_backup)
             }
 
         }
@@ -140,7 +140,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                             ).show()
                         }
                     }
-                    positiveButton(R.string.action_rename)
+                    positiveButton(android.R.string.ok)
                     negativeButton(R.string.action_cancel)
                     setTitle(R.string.action_rename)
                 }

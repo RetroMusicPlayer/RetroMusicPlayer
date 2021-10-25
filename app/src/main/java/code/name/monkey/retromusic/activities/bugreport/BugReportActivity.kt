@@ -77,7 +77,6 @@ open class BugReportActivity : AbsThemeActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBugReportBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
 
         initViews()
