@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.activities.base
 
 import android.animation.Animator
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
@@ -75,7 +78,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var nowPlayingScreen: NowPlayingScreen? = null
     private var taskColor: Int = 0
-    private var lightStatusBar: Boolean = false
+    private var paletteColor: Int = Color.WHITE
     protected abstract fun createContentView(): SlidingMusicPanelLayoutBinding
     private val panelState: Int
         get() = bottomSheetBehavior.state
@@ -107,7 +110,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     println("Do something")
                 }
             }
-            println(bottomSheetBehavior.peekHeight)
         }
     }
 
@@ -131,6 +133,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         chooseFragmentForTheme()
         setupSlidingUpPanel()
         setupBottomSheet()
+        updateColor()
     }
 
     private fun setupBottomSheet() {
@@ -161,11 +164,12 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     fun collapsePanel() {
         bottomSheetBehavior.state = STATE_COLLAPSED
+        setMiniPlayerAlphaProgress(0f)
     }
 
     fun expandPanel() {
-        setMiniPlayerAlphaProgress(1.0f)
         bottomSheetBehavior.state = STATE_EXPANDED
+        setMiniPlayerAlphaProgress(1f)
     }
 
     private fun setMiniPlayerAlphaProgress(progress: Float) {
@@ -181,15 +185,12 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     open fun onPanelCollapsed() {
         // restore values
         super.setLightStatusbarAuto(surfaceColor())
+        super.setLightNavigationAuto()
         super.setTaskDescriptionColor(taskColor)
     }
 
     open fun onPanelExpanded() {
-        if (nowPlayingScreen == Blur) {
-            super.setLightStatusbar(false)
-        } else {
-            super.setLightStatusbarAuto(surfaceColor())
-        }
+        onPaletteColorChanged()
     }
 
     private fun setupSlidingUpPanel() {
@@ -253,10 +254,37 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         return false
     }
 
-    override fun setLightStatusbar(enabled: Boolean) {
-        lightStatusBar = enabled
-        if (panelState == STATE_COLLAPSED) {
-            super.setLightStatusbar(enabled)
+    private fun onPaletteColorChanged() {
+        if (panelState == STATE_EXPANDED) {
+            super.setTaskDescriptionColor(paletteColor)
+            val isColorLight = ColorUtil.isColorLight(paletteColor)
+            if (PreferenceUtil.isAdaptiveColor && (nowPlayingScreen == Normal || nowPlayingScreen == Flat)) {
+                super.setLightNavigationBar(true)
+                super.setLightStatusbar(isColorLight)
+            } else if (nowPlayingScreen == Card || nowPlayingScreen == Blur || nowPlayingScreen == BlurCard) {
+                super.setLightStatusbar(false)
+                super.setLightNavigationBar(true)
+            } else if (nowPlayingScreen == Color || nowPlayingScreen == Tiny || nowPlayingScreen == Gradient) {
+                super.setLightNavigationBar(isColorLight)
+                super.setLightStatusbar(isColorLight)
+            } else if (nowPlayingScreen == Full) {
+                super.setLightNavigationBar(isColorLight)
+                super.setLightStatusbar(false)
+            } else if (nowPlayingScreen == Classic) {
+                super.setLightStatusbar(false)
+            } else if (nowPlayingScreen == Fit) {
+                super.setLightStatusbar(false)
+            } else {
+                super.setLightStatusbar(
+                    ColorUtil.isColorLight(
+                        ATHUtil.resolveColor(
+                            this,
+                            android.R.attr.windowBackground
+                        )
+                    )
+                )
+                super.setLightNavigationBar(true)
+            }
         }
     }
 
@@ -280,6 +308,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (binding.bottomNavigationView.menu.size() == 1) {
             binding.bottomNavigationView.hide()
         }
+    }
+
+    private fun updateColor() {
+        libraryViewModel.paletteColor.observe(this, { color ->
+            this.paletteColor = color
+            onPaletteColorChanged()
+        })
     }
 
     fun setBottomNavVisibility(visible: Boolean, animate: Boolean = false) {
