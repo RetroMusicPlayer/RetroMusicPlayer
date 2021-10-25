@@ -23,6 +23,8 @@
         android:layout_height="wrap_content"
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
+        app:gestureInsetBottomIgnored="true"
+        app:enableEdgeToEdge="true"
         app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
 
         <FrameLayout

@@ -44,7 +44,7 @@ object NavigationUtil {
         if (activity !is MainActivity) return
         activity.apply {
             //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
-            setBottomBarVisibility(false)
+            setBottomNavVisibility(false)
             if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
                 collapsePanel()
             }

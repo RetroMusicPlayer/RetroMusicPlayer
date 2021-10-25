@@ -27,7 +27,6 @@ import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.currentFragment
-import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
@@ -40,7 +39,6 @@ import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.google.android.material.appbar.AppBarLayout
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
@@ -112,13 +110,13 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                         saveTab(destination.id)
                     }
                     // Show Bottom Navigation Bar
-                    setBottomBarVisibility(true)
+                    setBottomNavVisibility(visible = true, animate = true)
                 }
                 R.id.playing_queue_fragment -> {
-                    setBottomBarVisibility(false)
-                    hideBottomBar(true)
+                    setBottomNavVisibility(visible = false)
+                    hideBottomSheet(true)
                 }
-                else -> setBottomBarVisibility(false) // Hide Bottom Navigation Bar
+                else -> setBottomNavVisibility(visible = false, animate = true) // Hide Bottom Navigation Bar
             }
 
         }
@@ -136,7 +134,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
         val expand = extra<Boolean>(EXPAND_PANEL).value ?: false
         if (expand && PreferenceUtil.isExpandPanel) {
-            setBottomBarVisibility(false)
+            setBottomNavVisibility(false)
             fromNotification = true
             expandPanel()
             intent.removeExtra(EXPAND_PANEL)

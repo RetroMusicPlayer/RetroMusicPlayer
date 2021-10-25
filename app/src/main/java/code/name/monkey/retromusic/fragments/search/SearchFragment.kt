@@ -214,7 +214,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
 
     override fun onResume() {
         super.onResume()
-        mainActivity.setBottomBarVisibility(false)
+        mainActivity.setBottomNavVisibility(false)
     }
 
     private fun hideKeyboard(view: View?) {
