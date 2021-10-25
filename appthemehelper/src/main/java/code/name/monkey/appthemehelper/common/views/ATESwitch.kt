@@ -3,12 +3,9 @@ package code.name.monkey.appthemehelper.common.views
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.ATH
-import code.name.monkey.appthemehelper.R
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.VersionUtils
 
 /**
  * @author Aidan Follestad (afollestad)
@@ -32,11 +29,7 @@ class ATESwitch : SwitchCompat {
     }
 
     private fun init(context: Context) {
-        if (ThemeStore.isMD3Enabled(context) && VersionUtils.hasS()) {
-            ATH.setTint(this, ContextCompat.getColor(context, R.color.m3_accent_color))
-        } else {
-            ATH.setTint(this, ThemeStore.accentColor(context))
-        }
+        ATH.setTint(this, ThemeStore.accentColor(context))
     }
 
     override fun isShown(): Boolean {

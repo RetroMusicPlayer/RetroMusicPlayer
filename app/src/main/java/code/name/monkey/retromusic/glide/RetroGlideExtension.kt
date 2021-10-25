@@ -1,10 +1,8 @@
 package code.name.monkey.retromusic.glide
 
 import android.graphics.drawable.Drawable
-import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.App.Companion.getContext
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
@@ -19,7 +17,6 @@ import code.name.monkey.retromusic.util.CustomArtistImageUtil.Companion.getFile
 import code.name.monkey.retromusic.util.CustomArtistImageUtil.Companion.getInstance
 import code.name.monkey.retromusic.util.MusicUtil.getMediaStoreAlbumCoverUri
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.PreferenceUtil.materialYou
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestBuilder
@@ -185,11 +182,7 @@ object RetroGlideExtension {
         return TintHelper.createTintedDrawable(
             getContext(),
             R.drawable.ic_account,
-            if (materialYou && VersionUtils.hasS()) {
-                ContextCompat.getColor(getContext(), R.color.m3_accent_color)
-            } else {
-                accentColor(getContext())
-            }
+            accentColor(getContext())
         )
     }
 

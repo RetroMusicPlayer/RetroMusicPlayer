@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.transition.Fade
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
@@ -118,7 +117,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         }.attach()
 //        lyricsPager.isUserInputEnabled = false
 
-        binding.tabLyrics.setSelectedTabIndicatorColor(ThemeStore.accentColor(requireContext()))
+        binding.tabLyrics.setSelectedTabIndicatorColor(accentColor())
         binding.tabLyrics.setTabTextColors(textColorSecondary(), accentColor())
     }
 
@@ -326,10 +325,10 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
         private fun setupLyricsView() {
             binding.lyricsView.apply {
-                setCurrentColor(ThemeStore.accentColor(context))
-                setTimeTextColor(ThemeStore.accentColor(context))
-                setTimelineColor(ThemeStore.accentColor(context))
-                setTimelineTextColor(ThemeStore.accentColor(context))
+                setCurrentColor(accentColor())
+                setTimeTextColor(accentColor())
+                setTimelineColor(accentColor())
+                setTimelineTextColor(accentColor())
                 setDraggable(true, LrcView.OnPlayClickListener {
                     MusicPlayerRemote.seekTo(it.toInt())
                     return@OnPlayClickListener true

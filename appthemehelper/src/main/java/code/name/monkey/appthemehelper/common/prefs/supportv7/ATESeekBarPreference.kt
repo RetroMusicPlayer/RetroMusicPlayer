@@ -47,11 +47,7 @@ class ATESeekBarPreference @JvmOverloads constructor(
         val seekBar = view.findViewById(R.id.seekbar) as SeekBar
         TintHelper.setTintAuto(
             seekBar, // Set MD3 accent if MD3 is enabled or in-app accent otherwise
-            if (ThemeStore.isMD3Enabled(context) && VersionUtils.hasS()) {
-                ContextCompat.getColor(context, R.color.m3_accent_color)
-            } else {
-                ThemeStore.accentColor(context)
-            }, false
+            ThemeStore.accentColor(context), false
         )
         (view.findViewById(R.id.seekbar_value) as TextView).apply {
             appendUnit(editableText)
