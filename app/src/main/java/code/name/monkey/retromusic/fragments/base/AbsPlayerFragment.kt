@@ -328,6 +328,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 requireView()
             )
         )
+        playerToolbar()?.menu?.findItem(R.id.action_toggle_lyrics)?.let { showLyricsIcon(it) }
     }
 
     class SwipeDetector(val context: Context, val viewPager: ViewPager?, val view: View) :
