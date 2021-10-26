@@ -94,7 +94,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             return@Comparator lhs.name.compareTo(rhs.name, ignoreCase = true)
         }
     }
-    private val storageItems = ArrayList<Storage>()
+    private var storageItems = ArrayList<Storage>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -765,7 +765,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     private fun switchToStorageAdapter() {
-        FileUtil.listRoots()
+        storageItems = FileUtil.listRoots()
         storageAdapter = StorageAdapter(storageItems, this)
         binding.recyclerView.adapter = storageAdapter
         binding.breadCrumbs.clearCrumbs()

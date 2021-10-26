@@ -164,12 +164,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     fun collapsePanel() {
         bottomSheetBehavior.state = STATE_COLLAPSED
-        setMiniPlayerAlphaProgress(0f)
     }
 
     fun expandPanel() {
         bottomSheetBehavior.state = STATE_EXPANDED
-        setMiniPlayerAlphaProgress(1f)
     }
 
     private fun setMiniPlayerAlphaProgress(progress: Float) {
