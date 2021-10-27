@@ -181,6 +181,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     open fun onPanelCollapsed() {
+        setMiniPlayerAlphaProgress(0F)
         // restore values
         super.setLightStatusbarAuto(surfaceColor())
         super.setLightNavigationAuto()
@@ -188,6 +189,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     open fun onPanelExpanded() {
+        setMiniPlayerAlphaProgress(1F)
         onPaletteColorChanged()
     }
 
