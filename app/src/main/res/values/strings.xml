@@ -516,4 +516,5 @@
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
     <string name="restore_message">Do you want to restore backup?</string>
     <string name="title_new_backup">New Backup</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
 </resources>

@@ -166,7 +166,7 @@
             android:layout_height="wrap_content"
             app:settingListItemIcon="@drawable/ic_restore"
             app:settingListItemIconColor="@color/md_cyan_400"
-            app:settingListItemText="TODO"
+            app:settingListItemText="@string/backup_restore_settings_summary"
             app:settingListItemTitle="@string/backup_restore_title" />
 
         <code.name.monkey.retromusic.views.SettingListItemView
