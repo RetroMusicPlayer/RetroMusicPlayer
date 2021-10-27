@@ -70,8 +70,8 @@ import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
 import com.afollestad.materialcab.createCab
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import java.io.*
 import java.lang.ref.WeakReference
@@ -103,13 +103,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        enterTransition = MaterialFadeThrough()
-        exitTransition = MaterialFadeThrough()
         mainActivity.addMusicServiceEventListener(libraryViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
-        setStatusBarColorAuto(view)
-        setUpAppbarColor()
         setUpBreadCrumbs()
         setUpRecyclerView()
         setUpAdapter()
@@ -125,6 +121,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 }
             })
         binding.toolbarContainer.drawNextToNavbar()
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     private fun setUpTitle() {
@@ -308,7 +306,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                             openQueue(songs, startIndex, true)
                         } else {
                             Snackbar.make(
-                                binding.coordinatorLayout,
+                                binding.root,
                                 Html.fromHtml(
                                     String.format(
                                         getString(R.string.not_listed_in_media_store), file1.name
@@ -451,12 +449,12 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     private fun checkForPadding() {
         val count = adapter?.itemCount ?: 0
         if (_binding != null) {
-            val params = binding.coordinatorLayout.layoutParams as ViewGroup.MarginLayoutParams
+            val params = binding.root.layoutParams as ViewGroup.MarginLayoutParams
             params.bottomMargin = if (count > 0 && playingQueue.isNotEmpty()) dip2px(
                 requireContext(),
                 104f
             ) else dip2px(requireContext(), 54f)
-            binding.coordinatorLayout.layoutParams = params
+            binding.root.layoutParams = params
         }
     }
 
@@ -522,16 +520,13 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         switchToFileAdapter()
     }
 
-    private fun setUpAppbarColor() {
+    private fun setUpBreadCrumbs() {
         binding.breadCrumbs.setActivatedContentColor(
             resolveColor(requireContext(), android.R.attr.textColorPrimary)
         )
         binding.breadCrumbs.setDeactivatedContentColor(
             resolveColor(requireContext(), android.R.attr.textColorSecondary)
         )
-    }
-
-    private fun setUpBreadCrumbs() {
         binding.breadCrumbs.setCallback(this)
     }
 
