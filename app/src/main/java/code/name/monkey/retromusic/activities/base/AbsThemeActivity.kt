@@ -53,6 +53,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         toggleScreenOn()
         setDrawUnderNavigationBar()
         setLightNavigationAuto()
+        setLightStatusbarAuto(surfaceColor())
     }
 
     private fun updateTheme() {
@@ -61,7 +62,10 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
         // Apply dynamic colors to activity if enabled
         if (PreferenceUtil.materialYou) {
-            DynamicColors.applyIfAvailable(this)
+            DynamicColors.applyIfAvailable(
+                this,
+                com.google.android.material.R.style.ThemeOverlay_Material3_DynamicColors_DayNight
+            )
         }
     }
 
