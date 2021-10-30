@@ -322,4 +322,7 @@ public class MultiPlayer
             if (callbacks != null) callbacks.onTrackEnded();
         }
     }
+
+  @Override
+  public void setCrossFadeDuration(int duration) { }
 }

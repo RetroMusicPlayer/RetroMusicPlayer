@@ -882,6 +882,8 @@ public class MusicService extends MediaBrowserServiceCompat
                 boolean wasPlaying = isPlaying();
                 /* Switch to MultiPlayer if Crossfade duration is 0 and
                 Playback is not an instance of MultiPlayer */
+                if (playback != null)
+                  playback.setCrossFadeDuration(PreferenceUtil.INSTANCE.getCrossFadeDuration());
                 if (!(playback instanceof MultiPlayer) && PreferenceUtil.INSTANCE.getCrossFadeDuration() == 0) {
                     if (playback != null) {
                         playback.release();

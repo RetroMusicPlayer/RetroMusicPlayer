@@ -40,6 +40,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     private var fadeInAnimator: Animator? = null
     private var fadeOutAnimator: Animator? = null
     private var callbacks: PlaybackCallbacks? = null
+    private var crossFadeDuration = PreferenceUtil.crossFadeDuration
 
     init {
         player1.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
@@ -120,7 +121,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
 
     // This has to run when queue is changed or song is changed manually by user
     fun sourceChangedByUser() {
-        this.hasDataSource = false
+        hasDataSource = false
         cancelFade()
         getCurrentPlayer()?.apply {
             if (isPlaying) stop()
@@ -304,7 +305,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
         NOT_SET
     }
 
-    inner class DurationListener : CoroutineScope by CrossFadeScope() {
+    inner class DurationListener : CoroutineScope by crossFadeScope() {
 
         private var job: Job? = null
 
@@ -325,9 +326,8 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
 
 
     fun onDurationUpdated(progress: Int, total: Int) {
-        if (total > 0 && (total - progress).div(1000) == PreferenceUtil.crossFadeDuration) {
+        if (total > 0 && (total - progress).div(1000) == crossFadeDuration) {
             getNextPlayer()?.let { player ->
-                durationListener.stop()
                 val nextSong = MusicPlayerRemote.nextSong
                 if (nextSong != null) {
                     setDataSourceImpl(player, MusicUtil.getSongFileUri(nextSong.id).toString())
@@ -350,6 +350,10 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
             }
         callbacks?.onTrackEndedWithCrossfade()
     }
+
+    override fun setCrossFadeDuration(duration: Int) {
+        crossFadeDuration = duration
+    }
 }
 
-internal fun CrossFadeScope(): CoroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+internal fun crossFadeScope(): CoroutineScope = CoroutineScope(Job() + Dispatchers.Main)
