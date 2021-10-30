@@ -60,6 +60,9 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
     private val binding get() = _binding!!
     private lateinit var song: Song
 
+    val mainActivity: MainActivity
+        get() = activity as MainActivity
+
     private lateinit var lyricsSectionsAdapter: LyricsSectionsAdapter
 
     private val googleSearchLrcUrl: String
@@ -119,9 +122,21 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
         binding.tabLyrics.setSelectedTabIndicatorColor(accentColor())
         binding.tabLyrics.setTabTextColors(textColorSecondary(), accentColor())
+        binding.editButton.accentColor()
+        binding.editButton.setOnClickListener {
+            when (binding.lyricsPager.currentItem) {
+                0 -> {
+                    editSyncedLyrics()
+                }
+                1 -> {
+                    editNormalLyrics()
+                }
+            }
+        }
     }
 
     private fun setupToolbar() {
+        mainActivity.setSupportActionBar(binding.toolbar)
         binding.toolbar.setBackgroundColor(surfaceColor())
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener {
@@ -167,15 +182,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
                     else -> googleSearchLrcUrl
                 }
             )
-        } else if (item.itemId == R.id.action_edit) {
-            when (binding.lyricsPager.currentItem) {
-                0 -> {
-                    editSyncedLyrics()
-                }
-                1 -> {
-                    editNormalLyrics()
-                }
-            }
         }
         return super.onOptionsItemSelected(item)
     }
