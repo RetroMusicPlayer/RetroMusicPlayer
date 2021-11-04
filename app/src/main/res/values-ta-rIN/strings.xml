@@ -50,7 +50,7 @@
     <string name="action_toggle_favorite">Toggle favorite</string>
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
     <string name="adaptive">Adaptive</string>
-    <string name="add_action">Add</string>
+    <string name="add_action">சேர்</string>
     <string name="add_playlist_title">"பாடல் வரிசையில் சேர்"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
     <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
@@ -58,7 +58,7 @@
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Song</item>
-        <item quantity="other">Songs</item>
+        <item quantity="other">பாடல்கள்</item>
     </plurals>
     <string name="album_artist">Album Artist</string>
     <string name="albums">Albums</string>
