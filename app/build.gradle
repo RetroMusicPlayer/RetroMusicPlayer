@@ -154,7 +154,7 @@ dependencies {
 
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
-    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
+    implementation 'com.anjlab.android.iab.v3:library:2.0.0'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:2.0.0'
     implementation 'com.github.dhaval2404:imagepicker:1.7.1'

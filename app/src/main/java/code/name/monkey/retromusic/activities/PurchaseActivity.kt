@@ -14,10 +14,8 @@
  */
 package code.name.monkey.retromusic.activities
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -31,14 +29,12 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.databinding.ActivityProVersionBinding
 import com.anjlab.android.iab.v3.BillingProcessor
-import com.anjlab.android.iab.v3.TransactionDetails
-import java.lang.ref.WeakReference
+import com.anjlab.android.iab.v3.PurchaseInfo
 
 class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
     private lateinit var binding: ActivityProVersionBinding
     private lateinit var billingProcessor: BillingProcessor
-    private var restorePurchaseAsyncTask: AsyncTask<*, *, *>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
@@ -58,9 +54,7 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         MaterialUtil.setTint(binding.purchaseButton, true)
 
         binding.restoreButton.setOnClickListener {
-            if (restorePurchaseAsyncTask == null || restorePurchaseAsyncTask!!.status != AsyncTask.Status.RUNNING) {
-                restorePurchase()
-            }
+            restorePurchase()
         }
         binding.purchaseButton.setOnClickListener {
             billingProcessor.purchase(this@PurchaseActivity, PRO_VERSION_PRODUCT_ID)
@@ -70,13 +64,25 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
     }
 
     private fun restorePurchase() {
-        if (restorePurchaseAsyncTask != null) {
-            restorePurchaseAsyncTask!!.cancel(false)
-        }
-        restorePurchaseAsyncTask = RestorePurchaseAsyncTask(this).execute()
+        Toast.makeText(this, R.string.restoring_purchase, Toast.LENGTH_SHORT)
+            .show()
+        billingProcessor.loadOwnedPurchasesFromGoogleAsync(object :
+            BillingProcessor.IPurchasesResponseListener {
+            override fun onPurchasesSuccess() {
+                onPurchaseHistoryRestored()
+            }
+
+            override fun onPurchasesError() {
+                Toast.makeText(
+                    this@PurchaseActivity,
+                    R.string.could_not_restore_purchase,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
     }
 
-    override fun onProductPurchased(productId: String, details: TransactionDetails?) {
+    override fun onProductPurchased(productId: String, details: PurchaseInfo?) {
         Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show()
         setResult(RESULT_OK)
     }
@@ -103,12 +109,6 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         binding.purchaseButton.isEnabled = true
     }
 
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (!billingProcessor.handleActivityResult(requestCode, resultCode, data)) {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> finish()
@@ -119,52 +119,6 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
     override fun onDestroy() {
         billingProcessor.release()
         super.onDestroy()
-    }
-
-    private class RestorePurchaseAsyncTask(purchaseActivity: PurchaseActivity) :
-        AsyncTask<Void, Void, Boolean>() {
-
-        private val buyActivityWeakReference: WeakReference<PurchaseActivity> = WeakReference(
-            purchaseActivity
-        )
-
-        override fun onPreExecute() {
-            super.onPreExecute()
-            val purchaseActivity = buyActivityWeakReference.get()
-            if (purchaseActivity != null) {
-                Toast.makeText(purchaseActivity, R.string.restoring_purchase, Toast.LENGTH_SHORT)
-                    .show()
-            } else {
-                cancel(false)
-            }
-        }
-
-        override fun doInBackground(vararg params: Void): Boolean? {
-            val purchaseActivity = buyActivityWeakReference.get()
-            if (purchaseActivity != null) {
-                return purchaseActivity.billingProcessor.loadOwnedPurchasesFromGoogle()
-            }
-            cancel(false)
-            return null
-        }
-
-        override fun onPostExecute(b: Boolean?) {
-            super.onPostExecute(b)
-            val purchaseActivity = buyActivityWeakReference.get()
-            if (purchaseActivity == null || b == null) {
-                return
-            }
-
-            if (b) {
-                purchaseActivity.onPurchaseHistoryRestored()
-            } else {
-                Toast.makeText(
-                    purchaseActivity,
-                    R.string.could_not_restore_purchase,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
     }
 
     companion object {
