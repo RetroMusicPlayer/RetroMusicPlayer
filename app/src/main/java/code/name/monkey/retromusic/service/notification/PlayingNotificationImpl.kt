@@ -69,13 +69,21 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
             action.putExtra(MainActivity.EXPAND_PANEL, PreferenceUtil.isExpandPanel)
             action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             val clickIntent =
-                PendingIntent.getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    PendingIntent.getActivity(service, 0, action, PendingIntent.FLAG_IMMUTABLE)
+                } else {
+                    PendingIntent.getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
+                }
 
             val serviceName = ComponentName(service, MusicService::class.java)
             val intent = Intent(ACTION_QUIT)
             intent.component = serviceName
-            val deleteIntent = PendingIntent.getService(service, 0, intent, 0)
-
+            val deleteIntent = PendingIntent.getService(
+                service,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
             val bigNotificationImageSize = service.resources
                 .getDimensionPixelSize(R.dimen.notification_big_image_size)
             service.runOnUiThread {
@@ -191,6 +199,6 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
         val serviceName = ComponentName(service, MusicService::class.java)
         val intent = Intent(action)
         intent.component = serviceName
-        return PendingIntent.getService(service, 0, intent, 0)
+        return PendingIntent.getService(service, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
     }
 }
