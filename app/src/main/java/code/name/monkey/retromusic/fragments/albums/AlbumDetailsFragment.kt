@@ -73,6 +73,7 @@ import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
 import com.afollestad.materialcab.createCab
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.Dispatchers
@@ -179,6 +180,8 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 requireActivity().onBackPressed()
             }
         }
+        binding.appBarLayout?.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     override fun onDestroy() {

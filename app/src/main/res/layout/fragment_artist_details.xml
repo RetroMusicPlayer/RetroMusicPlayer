@@ -10,7 +10,8 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:liftOnScroll="true">
+        app:liftOnScroll="true"
+        android:fitsSystemWindows="true">
 
         <FrameLayout
             android:id="@+id/toolbar_container"
@@ -20,7 +21,6 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
-                android:background="?attr/colorSurface"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black" />
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
