@@ -19,7 +19,6 @@ import android.view.*
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -57,7 +56,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         _binding = FragmentMainRecyclerBinding.bind(view)
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
-
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         initLayoutManager()
@@ -198,16 +196,12 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         binding.recyclerView.adapter = adapter
     }
 
-    fun recyclerView(): RecyclerView {
-        return binding.recyclerView
-    }
+    val recyclerView get() = binding.recyclerView
 
-    fun getContainer(): CoordinatorLayout {
-        return binding.root
-    }
+    val container get() = binding.root
 
     fun scrollToTop() {
-        recyclerView().scrollToPosition(0)
+        recyclerView.scrollToPosition(0)
         binding.appBarLayout.setExpanded(true, true)
     }
 

@@ -60,7 +60,6 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -103,7 +102,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 }
                 STATE_SETTLING, STATE_DRAGGING -> {
                     if (fromNotification) {
-                        getBottomNavigationView().isVisible = true
+                        bottomNavigationView.isVisible = true
                     }
                 }
                 else -> {
@@ -125,7 +124,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             windowInsets = insets
             insets
         }
-        binding.bottomNavigationView.drawAboveSystemBarsWithPadding()
+        bottomNavigationView.drawAboveSystemBarsWithPadding()
         if (RetroUtil.isLandscape()) {
             binding.slidingPanel.drawAboveSystemBarsWithPadding(true)
         }
@@ -214,9 +213,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         })
     }
 
-    fun getBottomNavigationView(): BottomNavigationView {
-        return binding.bottomNavigationView
-    }
+    val bottomNavigationView get() = binding.bottomNavigationView
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -357,7 +354,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                         bottomSheetBehavior.peekHeightAnimate(heightOfBar)
                         bottomNavAnimator?.end()
                         bottomNavAnimator =
-                            getBottomNavigationView().translateYAnimate(dip(R.dimen.bottom_nav_height).toFloat())
+                            bottomNavigationView.translateYAnimate(dip(R.dimen.bottom_nav_height).toFloat())
                         bottomNavAnimator?.doOnEnd {
                             binding.slidingPanel.bringToFront()
                         }

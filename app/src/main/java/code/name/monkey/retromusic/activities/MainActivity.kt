@@ -89,9 +89,9 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
             )
         }
         navController.graph = navGraph
-        getBottomNavigationView().setupWithNavController(navController)
+        bottomNavigationView.setupWithNavController(navController)
         // Scroll Fragment to top
-        getBottomNavigationView().setOnItemReselectedListener {
+        bottomNavigationView.setOnItemReselectedListener {
             currentFragment(R.id.fragment_container)
                 .also {
                     if (it is AbsRecyclerViewFragment<*, *>) {
@@ -118,7 +118,6 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                 }
                 else -> setBottomNavVisibility(visible = false, animate = true) // Hide Bottom Navigation Bar
             }
-
         }
     }
 

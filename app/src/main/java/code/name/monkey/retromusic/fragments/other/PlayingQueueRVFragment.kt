@@ -70,12 +70,12 @@ class PlayingQueueRVFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Line
             recyclerViewDragDropManager?.createWrappedAdapter(adapter!!) as RecyclerView.Adapter<*>
         wrappedAdapter =
             recyclerViewSwipeManager?.createWrappedAdapter(wrappedAdapter) as RecyclerView.Adapter<*>
-        recyclerView().layoutManager = layoutManager
-        recyclerView().adapter = wrappedAdapter
-        recyclerView().itemAnimator = animator
-        recyclerViewTouchActionGuardManager?.attachRecyclerView(recyclerView())
-        recyclerViewDragDropManager?.attachRecyclerView(recyclerView())
-        recyclerViewSwipeManager?.attachRecyclerView(recyclerView())
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = wrappedAdapter
+        recyclerView.itemAnimator = animator
+        recyclerViewTouchActionGuardManager?.attachRecyclerView(recyclerView)
+        recyclerViewDragDropManager?.attachRecyclerView(recyclerView)
+        recyclerViewSwipeManager?.attachRecyclerView(recyclerView)
 
         layoutManager?.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
@@ -120,7 +120,7 @@ class PlayingQueueRVFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Line
     }
 
     private fun resetToCurrentPosition() {
-        recyclerView().stopScroll()
+        recyclerView.stopScroll()
         layoutManager?.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
 
