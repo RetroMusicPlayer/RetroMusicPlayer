@@ -29,6 +29,7 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
@@ -222,4 +223,9 @@ fun Drawable.tint(context: Context, @ColorRes color: Int): Drawable =
 @ColorInt
 fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
+}
+
+@ColorInt
+fun Context.darkAccentColor(): Int {
+    return ColorUtils.blendARGB(accentColor(), surfaceColor(), 0.975f)
 }

@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.activities.base
 
 import android.animation.Animator
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -60,6 +61,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -133,6 +135,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setupSlidingUpPanel()
         setupBottomSheet()
         updateColor()
+        binding.slidingPanel.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
+        bottomNavigationView.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
     }
 
     private fun setupBottomSheet() {
