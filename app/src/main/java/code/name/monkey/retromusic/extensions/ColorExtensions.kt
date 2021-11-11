@@ -227,5 +227,12 @@ fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
 
 @ColorInt
 fun Context.darkAccentColor(): Int {
-    return ColorUtils.blendARGB(accentColor(), surfaceColor(), 0.975f)
+    return ColorUtils.blendARGB(
+        accentColor(),
+        surfaceColor(),
+        if (surfaceColor().isColorLight) 0.96f else 0.975f
+    )
 }
+
+inline val @receiver:ColorInt Int.isColorLight
+    get() = ColorUtil.isColorLight(this)

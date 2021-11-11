@@ -42,6 +42,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 
 class HomeFragment :
@@ -57,6 +58,10 @@ class HomeFragment :
         mainActivity.supportActionBar?.title = null
         setupListeners()
         binding.titleWelcome.text = String.format("%s", PreferenceUtil.userName)
+
+        enterTransition = MaterialFadeThrough().apply {
+            addTarget(binding.contentContainer)
+        }
 
         val homeAdapter = HomeAdapter(mainActivity)
         binding.recyclerView.apply {

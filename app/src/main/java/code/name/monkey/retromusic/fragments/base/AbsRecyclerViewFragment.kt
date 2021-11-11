@@ -37,6 +37,7 @@ import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
@@ -56,6 +57,9 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         _binding = FragmentMainRecyclerBinding.bind(view)
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
+        enterTransition = MaterialFadeThrough().apply {
+            addTarget(binding.recyclerView)
+        }
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         initLayoutManager()

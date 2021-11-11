@@ -103,6 +103,9 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                 }
         }
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            // This is more like a work-around as for start destination of navGraph
+            // enterTransition won't work as expected
+            navGraph.setStartDestination(R.id.libraryFragment)
             when (destination.id) {
                 R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre -> {
                     // Save the last tab
@@ -127,6 +130,16 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
 
     override fun onSupportNavigateUp(): Boolean =
         findNavController(R.id.fragment_container).navigateUp()
+
+    override fun onBackPressed() {
+        val bottomTabs = listOf(R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre)
+        val currentDestinationId = findNavController(R.id.fragment_container).currentDestination?.id
+        if (bottomTabs.contains(currentDestinationId)) {
+            finish()
+        } else {
+            findNavController(R.id.fragment_container).navigateUp()
+        }
+    }
 
     override fun onResume() {
         super.onResume()

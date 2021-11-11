@@ -72,6 +72,7 @@ import com.afollestad.materialcab.createCab
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import java.io.*
 import java.lang.ref.WeakReference
@@ -106,6 +107,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         mainActivity.addMusicServiceEventListener(libraryViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
+        enterTransition = MaterialFadeThrough().apply {
+            addTarget(binding.recyclerView)
+        }
         setUpBreadCrumbs()
         setUpRecyclerView()
         setUpAdapter()
