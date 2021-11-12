@@ -53,7 +53,9 @@ object M3UWriter : M3UConstants {
         if (!dir.exists()) dir.mkdirs()
         val fileName = "${playlistWithSongs.playlistEntity.playlistName}.${M3UConstants.EXTENSION}"
         val file = File(dir, fileName)
-        val songs: List<Song> = playlistWithSongs.songs.toSongs()
+        val songs: List<Song> = playlistWithSongs.songs.sortedBy {
+            it.songPrimaryKey
+        }.toSongs()
         if (songs.isNotEmpty()) {
             val bufferedWriter = BufferedWriter(FileWriter(file))
             bufferedWriter.write(M3UConstants.HEADER)
