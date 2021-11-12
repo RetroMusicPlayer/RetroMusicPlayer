@@ -6,26 +6,13 @@
     android:background="?attr/colorSurface"
     android:fitsSystemWindows="true">
 
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/tgFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="@string/view_on_telegram"
-        app:icon="@drawable/ic_telegram_white" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
         android:elevation="0dp"
-        app:elevation="0dp"
-        app:liftOnScroll="true">
+        app:liftOnScroll="true"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -51,4 +38,15 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/tgFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:text="@string/view_on_telegram"
+        app:icon="@drawable/ic_telegram_white" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
