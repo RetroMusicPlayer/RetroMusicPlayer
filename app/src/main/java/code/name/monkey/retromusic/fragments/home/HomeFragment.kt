@@ -83,10 +83,9 @@ class HomeFragment :
 
     private fun setupListeners() {
         binding.bannerImage?.setOnClickListener {
-            binding.userImage.transitionName = "userImage"
             findNavController().navigate(
                 R.id.user_info_fragment, null, null, FragmentNavigatorExtras(
-                    binding.userImage to "userImage"
+                    binding.userImage to "user_image"
                 )
             )
             reenterTransition = null

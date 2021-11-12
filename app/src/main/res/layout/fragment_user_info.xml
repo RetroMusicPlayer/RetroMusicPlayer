@@ -35,12 +35,13 @@
             android:id="@+id/bannerImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="21:10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:transitionName="banner_image"
             app:shapeAppearanceOverlay="@style/circleImageView"
             app:srcCompat="@drawable/material_design_default" />
 
