@@ -8,7 +8,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="@dimen/m3_card_corner_radius"
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"

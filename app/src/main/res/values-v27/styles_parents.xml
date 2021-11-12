@@ -33,6 +33,7 @@
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
         <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.Material3.DayNight.NoActionBar">
@@ -59,6 +60,7 @@
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
         <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.Material3.Light.NoActionBar">
@@ -82,5 +84,6 @@
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
         <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 </resources>

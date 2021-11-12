@@ -84,7 +84,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
                     onShuffleClicked()
                 }
                 accentColor()
-                hide()
             }
         } else {
             binding.shuffleButton.isVisible = false

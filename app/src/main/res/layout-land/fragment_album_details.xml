@@ -8,7 +8,8 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:transitionName="@string/transition_album_art"
-    tools:ignore="UnusedAttribute">
+    tools:ignore="UnusedAttribute"
+    android:transitionGroup="true">
 
     <FrameLayout
         android:id="@+id/toolbar_container"
@@ -31,7 +32,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="@dimen/mini_player_height"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="@dimen/m3_card_large_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"

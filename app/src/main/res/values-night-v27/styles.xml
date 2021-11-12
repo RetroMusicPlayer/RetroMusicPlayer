@@ -35,5 +35,6 @@
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
         <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 </resources>

@@ -137,12 +137,11 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="MaterialPopupMenuStyle" parent="Widget.MaterialComponents.PopupMenu">
+    <style name="MaterialPopupMenuStyle" parent="Widget.Material3.PopupMenu">
         <item name="android:popupBackground">@drawable/popup_background</item>
     </style>
 
-    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="android:dialogCornerRadius" tools:targetApi="p">12dp</item>
+    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="materialAlertDialogBodyTextStyle">
             @style/AppTextAppearance.MaterialAlertDialog.Body
         </item>
@@ -166,17 +165,17 @@
         <item name="android:padding">0dp</item>
     </style>
 
-    <style name="AppTextAppearance.MaterialAlertDialog.Body" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+    <style name="AppTextAppearance.MaterialAlertDialog.Body" parent="MaterialAlertDialog.Material3.Body.Text">
         <item name="android:textAppearance">@style/TextViewBody1</item>
         <item name="android:paddingTop">16dp</item>
     </style>
 
-    <style name="AppTextAppearance.MaterialAlertDialog.Title" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+    <style name="AppTextAppearance.MaterialAlertDialog.Title" parent="MaterialAlertDialog.Material3.Title.Text">
         <item name="android:textAppearance">@style/TextViewHeadline6</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
+    <style name="MaterialButtonTheme" parent="Widget.Material3.Button">
         <item name="cornerRadius">6dp</item>
         <item name="iconGravity">textStart</item>
         <item name="iconTint">?attr/colorControlNormal</item>

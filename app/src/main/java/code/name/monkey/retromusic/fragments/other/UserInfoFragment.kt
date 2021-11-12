@@ -53,7 +53,6 @@ import com.bumptech.glide.request.target.Target
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.constant.ImageProvider
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

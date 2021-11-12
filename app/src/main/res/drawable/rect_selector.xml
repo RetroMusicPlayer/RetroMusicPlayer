@@ -17,7 +17,7 @@
 
     <item android:id="@android:id/mask">
         <shape>
-            <corners android:radius="8dp" />
+            <corners android:radius="@dimen/m3_card_corner_radius" />
             <solid android:color="@color/md_green_500" />
         </shape>
     </item>
@@ -25,7 +25,7 @@
         <selector>
             <item android:state_activated="true">
                 <shape>
-                    <corners android:radius="8dp" />
+                    <corners android:radius="@dimen/m3_card_corner_radius" />
                     <solid android:color="?android:attr/colorControlHighlight" />
                 </shape>
             </item>

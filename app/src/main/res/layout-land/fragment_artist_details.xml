@@ -32,7 +32,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="@dimen/mini_player_height"
         android:transitionName="@string/transition_artist_image"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="@dimen/m3_card_large_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"

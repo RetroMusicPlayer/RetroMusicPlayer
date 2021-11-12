@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.dialogs
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -42,7 +41,6 @@ import java.io.IOException
 
 class SongDetailDialog : DialogFragment() {
 
-    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context: Context = requireContext()
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_file_details, null)

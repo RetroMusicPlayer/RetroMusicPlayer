@@ -20,6 +20,7 @@
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.Material3.DayNight.NoActionBar">
@@ -44,6 +45,7 @@
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="Theme.Material3.DayNight.NoActionBar">
@@ -66,6 +68,7 @@
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.Material3.Light.NoActionBar">
@@ -88,6 +91,7 @@
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
     <style name="MusicProgressSliderParent">
