@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.adapter.base
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.Menu
 import android.view.MenuItem
@@ -94,6 +95,7 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
         notifyDataSetChanged()
     }
 
+    @SuppressLint("StringFormatInvalid", "StringFormatMatches")
     private fun updateCab() {
         if (ICabHolder != null) {
             if (cab == null || !cab!!.isActive()) {
