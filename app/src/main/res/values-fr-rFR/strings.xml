@@ -81,8 +81,8 @@
     <string name="audio_focus_denied">Focus audio refusé.</string>
     <string name="audio_settings_summary">Changer les paramètres audio et ajuster l\'égaliseur</string>
     <string name="auto">Automatique</string>
-    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
-    <string name="backup_title">Backups</string>
+    <string name="backup_restore_title"><![CDATA[Sauvegarder & Restaurer]]></string>
+    <string name="backup_title">Sauvegardes</string>
     <string name="biography">Biographie</string>
     <string name="black_theme_name">Noir Complet</string>
     <string name="blacklist">Liste noire</string>
@@ -230,7 +230,7 @@
     <string name="no_albums">Pas d\'albums</string>
     <string name="no_artists">Pas d\'artistes</string>
     <string name="no_audio_ID">"Lancez d'abord un morceau, puis réessayez."</string>
-    <string name="no_backups_found">No Backups Found</string>
+    <string name="no_backups_found">Aucune sauvegarde trouvée</string>
     <string name="no_equalizer">Aucun égaliseur trouvé</string>
     <string name="no_genres">Aucun genre</string>
     <string name="no_lyrics_found">Aucune parole trouvée</string>
@@ -488,7 +488,7 @@
     <string name="what_do_you_want_to_share">Que souhaitez-vous partager ?</string>
     <string name="whats_new">Quoi de neuf</string>
     <string name="window">Fenêtre</string>
-    <string name="window_corner_edges">Bords arrondis</string>
+    <string name="window_corner_edges">Coins arrondis</string>
     <string name="x_has_been_set_as_ringtone">Définir %1$s comme sonnerie.</string>
     <string name="x_selected">%1$d sélectionné</string>
     <string name="year">Année</string>
