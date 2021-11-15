@@ -143,7 +143,6 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
 
     private fun updateQueue() {
         playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
-        resetToCurrentPosition()
     }
 
     private fun resetToCurrentPosition() {
