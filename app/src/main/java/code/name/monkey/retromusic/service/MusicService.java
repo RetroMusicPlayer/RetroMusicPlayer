@@ -1190,7 +1190,7 @@ public class MusicService extends MediaBrowserServiceCompat
         notifyChange(QUEUE_CHANGED);
     }
 
-    public void removeSong(@NonNull Song song) {
+    public void removeSongImpl(@NonNull Song song) {
         for (int i = 0; i < playingQueue.size(); i++) {
             if (playingQueue.get(i).getId() == song.getId()) {
                 playingQueue.remove(i);
@@ -1201,6 +1201,17 @@ public class MusicService extends MediaBrowserServiceCompat
             if (originalPlayingQueue.get(i).getId() == song.getId()) {
                 originalPlayingQueue.remove(i);
             }
+        }
+    }
+
+    public void removeSong(@NonNull Song song) {
+        removeSongImpl(song);
+        notifyChange(QUEUE_CHANGED);
+    }
+
+    public void removeSongs(@NonNull List<Song> songs) {
+        for (Song song : songs) {
+            removeSongImpl(song);
         }
         notifyChange(QUEUE_CHANGED);
     }
