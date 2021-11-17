@@ -41,6 +41,7 @@ import code.name.monkey.retromusic.adapter.StorageAdapter
 import code.name.monkey.retromusic.adapter.StorageClickListener
 import code.name.monkey.retromusic.databinding.FragmentFolderBinding
 import code.name.monkey.retromusic.extensions.drawNextToNavbar
+import code.name.monkey.retromusic.extensions.navigate
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment.ListPathsAsyncTask.OnPathsListedCallback
@@ -120,7 +121,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 override fun handleOnBackPressed() {
                     if (!handleBackPress()) {
                         remove()
-                        requireActivity().onBackPressed()
+                        mainActivity.finish()
                     }
                 }
             })

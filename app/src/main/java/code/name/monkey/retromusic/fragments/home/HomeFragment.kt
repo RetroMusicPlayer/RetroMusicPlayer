@@ -20,6 +20,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
 import android.view.View
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.core.view.doOnPreDraw
@@ -79,6 +80,10 @@ class HomeFragment :
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
         binding.toolbar.drawNextToNavbar()
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            remove()
+            mainActivity.finish()
+        }
     }
 
     private fun setupListeners() {

@@ -19,6 +19,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,10 +27,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.EXTRA_GENRE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.GenreAdapter
+import code.name.monkey.retromusic.extensions.navigate
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
 import code.name.monkey.retromusic.interfaces.IGenreClickListener
 import code.name.monkey.retromusic.model.Genre
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.transition.MaterialSharedAxis
@@ -45,6 +48,10 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
             else
                 adapter?.swapDataSet(listOf())
         })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            remove()
+            mainActivity.finish()
+        }
     }
 
     override fun createLayoutManager(): LinearLayoutManager {

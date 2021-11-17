@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuCompat
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,7 @@ import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
 import code.name.monkey.retromusic.db.PlaylistWithSongs
+import code.name.monkey.retromusic.extensions.navigate
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.helper.SortOrder.PlaylistSortOrder
@@ -44,6 +46,10 @@ class PlaylistsFragment :
             else
                 adapter?.swapDataSet(listOf())
         })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            remove()
+            mainActivity.finish()
+        }
     }
 
     override val titleRes: Int
