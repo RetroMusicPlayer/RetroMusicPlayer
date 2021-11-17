@@ -133,12 +133,15 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
     private fun updateArtistImage() {
         libraryViewModel.artist(MusicPlayerRemote.currentSong.artistId)
             .observe(viewLifecycleOwner, { artist ->
-                GlideApp.with(requireActivity()).asBitmapPalette().artistImageOptions(artist)
-                    .load(RetroGlideExtension.getArtistModel(artist))
-                    .into(object : RetroMusicColoredTarget(binding.artistImage) {
-                        override fun onColorReady(colors: MediaNotificationProcessor) {
-                        }
-                    })
+                if (artist.id != -1L) {
+                    GlideApp.with(requireActivity()).asBitmapPalette().artistImageOptions(artist)
+                        .load(RetroGlideExtension.getArtistModel(artist))
+                        .into(object : RetroMusicColoredTarget(binding.artistImage) {
+                            override fun onColorReady(colors: MediaNotificationProcessor) {
+                            }
+                        })
+                }
+
             })
     }
 
