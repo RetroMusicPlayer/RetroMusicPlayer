@@ -9,17 +9,10 @@ import android.os.Build
 object VersionUtils {
 
     /**
-     * @return true if device is running API >= 21
-     */
-    fun hasLollipop(): Boolean {
-        return Build.VERSION.SDK_INT >= 21
-    }
-
-    /**
      * @return true if device is running API >= 23
      */
     fun hasMarshmallow(): Boolean {
-        return Build.VERSION.SDK_INT >= 23
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
     }
 
     /**
@@ -30,7 +23,7 @@ object VersionUtils {
     }
 
     /**
-     * @return true if device is running API >= 24
+     * @return true if device is running API >= 25
      */
     fun hasNougatMR(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1
@@ -44,20 +37,31 @@ object VersionUtils {
     }
 
     /**
-     * @return true if device is running API >= 27
+     * @return true if device is running API >= 28
      */
     fun hasP(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
     }
 
     /**
-     * @return true if device is running API >= 28
+     * @return true if device is running API >= 29
      */
     @JvmStatic
     fun hasQ(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     }
 
+    /**
+     * @return true if device is running API >= 30
+     */
+    @JvmStatic
+    fun hasR(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+    }
+
+    /**
+     * @return true if device is running API >= 31
+     */
     @JvmStatic
     fun hasS(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
