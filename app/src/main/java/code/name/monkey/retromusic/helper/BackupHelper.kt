@@ -14,16 +14,16 @@ import java.util.zip.ZipOutputStream
 
 object BackupHelper {
     suspend fun createBackup(context: Context, name: String) {
+        val backupFile =
+            File(backupRootPath + name + APPEND_EXTENSION)
+        if (backupFile.parentFile?.exists() != true) {
+            backupFile.parentFile?.mkdirs()
+        }
+        val zipItems = mutableListOf<ZipItem>()
+        zipItems.addAll(getDatabaseZipItems(context))
+        zipItems.addAll(getSettingsZipItems(context))
+        getUserImageZipItems(context)?.let { zipItems.addAll(it) }
         withContext(Dispatchers.IO) {
-            val backupFile =
-                File(backupRootPath + name + APPEND_EXTENSION)
-            if (backupFile.parentFile?.exists() != true) {
-                backupFile.parentFile?.mkdirs()
-            }
-            val zipItems = mutableListOf<ZipItem>()
-            zipItems.addAll(getDatabaseZipItems(context))
-            zipItems.addAll(getSettingsZipItems(context))
-            getUserImageZipItems(context)?.let { zipItems.addAll(it) }
             zipAll(zipItems, backupFile)
         }
     }
@@ -130,7 +130,8 @@ object BackupHelper {
     }
 
     val backupRootPath =
-        Environment.getExternalStorageDirectory().toString() + "/RetroMusic/Backups/"
+        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+            .toString() + "/RetroMusic/Backups/"
     const val BACKUP_EXTENSION = "rmbak"
     const val APPEND_EXTENSION = ".$BACKUP_EXTENSION"
     private const val DATABASES_PATH = "databases"
