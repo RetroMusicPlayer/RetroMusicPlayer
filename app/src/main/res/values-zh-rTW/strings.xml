@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_album_label">關於 %s</string>
-    <string name="about_settings_summary">Team, social links</string>
+    <string name="about_settings_summary">團隊與社群連結</string>
     <string name="accent_color">重點色調</string>
     <string name="accent_color_desc">重點色調，預設為粉紅色。</string>
     <string name="action_about">關於</string>
@@ -11,7 +11,7 @@
     <string name="action_add_to_playlist">加入播放清單...</string>
     <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">清空播放佇列</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_cycle_repeat">循環重複模式</string>
     <string name="action_delete">刪除</string>
     <string name="action_delete_from_device">刪除</string>
     <string name="action_details">詳細資訊</string>
