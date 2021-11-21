@@ -499,4 +499,7 @@
     <string name="you_have_to_select_at_least_one_category">Musíte zvolit alespoň jednu kategorii.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Budete přesměrováni na webovou stránku pro zadání problému.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vaše údaje k účtu jsou použity pouze k ověření.</string>
+    <string name="restore_message">Do you want to restore backup?</string>
+    <string name="title_new_backup">New Backup</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
 </resources>
