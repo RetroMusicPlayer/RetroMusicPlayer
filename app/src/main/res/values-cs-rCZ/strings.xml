@@ -85,6 +85,8 @@
     <string name="audio_focus_denied">Zaměření zvuku bylo zamítnuto.</string>
     <string name="audio_settings_summary">Změňte nastavení zvuku a upravte ovládání ekvalizéru</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Bio</string>
     <string name="black_theme_name">Velmi černá</string>
     <string name="blacklist">Černá listina</string>
@@ -128,6 +130,7 @@
     <string name="could_not_restore_purchase">Nepodařilo se obnovit nákup.</string>
     <string name="could_not_scan_files">Nelze skenovat %d soubory.</string>
     <string name="create_action">Vytvořit</string>
+    <string name="create_new_backup">Vytvořit</string>
     <string name="created_playlist_x">Vytvořený seznam skladeb %1$s.</string>
     <string name="credit_title">Členové a přispěvatelé </string>
     <string name="currently_listening_to_x_by_x">Aktuálně posloucháš %1$s od %2$s.</string>
@@ -231,6 +234,7 @@
     <string name="no_albums">Žádné alba</string>
     <string name="no_artists">žádní umělci</string>
     <string name="no_audio_ID">"Přehrajte nejprve píseň a zkuste to znovu."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Nebyl nalezen žádný ekvalizér.</string>
     <string name="no_genres">Nemáte žádné žánry</string>
     <string name="no_lyrics_found">Text nenalezen</string>

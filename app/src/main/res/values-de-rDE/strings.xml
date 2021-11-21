@@ -58,7 +58,7 @@
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Lied</item>
-        <item quantity="other">Songs</item>
+        <item quantity="other">Lieder</item>
     </plurals>
     <string name="album_artist">Album-Interpret</string>
     <string name="albums">Alben</string>
@@ -81,6 +81,8 @@
     <string name="audio_focus_denied">Audio Fokus verweigert.</string>
     <string name="audio_settings_summary">Sound- und Equalizer-Optionen einstellen</string>
     <string name="auto">Automatisch</string>
+    <string name="backup_restore_title"><![CDATA[Sichern & Wiederherstellen]]></string>
+    <string name="backup_title">Sicherungen</string>
     <string name="biography">Biografie</string>
     <string name="black_theme_name">Sehr schwarz</string>
     <string name="blacklist">Schwarze Liste</string>
@@ -124,6 +126,7 @@
     <string name="could_not_restore_purchase">Kauf konnte nicht wiederhergestellt werden.</string>
     <string name="could_not_scan_files">%d Dateien konnte(n) nicht gescannt werden.</string>
     <string name="create_action">Erstellen</string>
+    <string name="create_new_backup">Erstellen</string>
     <string name="created_playlist_x">Playlist %1$s erstellt.</string>
     <string name="credit_title">Helfende Hände</string>
     <string name="currently_listening_to_x_by_x">Spielt zur Zeit %1$s von %2$s.</string>
@@ -171,7 +174,7 @@
     <string name="genre">Genre</string>
     <string name="genres">Genres</string>
     <string name="git_hub_summary">Projekt von GitHub forken</string>
-    <string name="gradient">Gradient</string>
+    <string name="gradient">Farbverlauf</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -227,6 +230,7 @@
     <string name="no_albums">Keine Alben</string>
     <string name="no_artists">Keine Künstler</string>
     <string name="no_audio_ID">"Song abspielen und anschließend erneut versuchen."</string>
+    <string name="no_backups_found">Keine Sicherung gefunden</string>
     <string name="no_equalizer">Keinen Equalizer gefunden.</string>
     <string name="no_genres">Keine Genres</string>
     <string name="no_lyrics_found">Keine Lyrics gefunden</string>
@@ -301,7 +305,7 @@
     <string name="pref_summary_colored_app">Hintergrund und Bedienelemente färben sich je nach Album-Cover</string>
     <string name="pref_summary_colored_app_shortcuts">Färbt die App-Verknüpfungen in der Akzentfarbe. Bitte bei Änderung der Akzentfarbe erneut einschalten.</string>
     <string name="pref_summary_colored_notification">"F\u00e4rbt die Benachrichtigung passend zum Albumcover"</string>
-    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
+    <string name="pref_summary_cross_fade">Dauer der Überblendung zwischen Liedern</string>
     <string name="pref_summary_desaturated_color">Wie nach Material Design Leitfaden sollten Linien in dunklen Modusfarben desaturatiert werden</string>
     <string name="pref_summary_expand_now_playing_panel">Wenn Sie auf die Benachrichtigung klicken, wird das \"Now Playing\" Bildschirms statt des Startbildschirms angezeigt</string>
     <string name="pref_summary_extra_controls">Zusätzliche Schaltflächen für den Mini-Player</string>
@@ -391,7 +395,7 @@
     <string name="saf_delete_failed">Löschen der Datei fehlgeschlagen: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">SAF-URI kann nicht geladen werden</string>
-    <string name="saf_guide_slide1_description">Open navigation drawer</string>
+    <string name="saf_guide_slide1_description">Navigationsleiste öffnen</string>
     <string name="saf_guide_slide1_description_before_o">Aktiviere \'SD-Karte anzeigen\' im Überlaufmenü</string>
     <!-- SAF guide -->
     <string name="saf_guide_slide1_title">%s benötigt Zugriff auf die SD-Karte</string>

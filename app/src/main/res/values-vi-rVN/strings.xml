@@ -79,6 +79,8 @@
     <string name="audio_focus_denied">Tập trung âm thanh bị từ chối</string>
     <string name="audio_settings_summary">Thay đổi cài đặt âm thanh và điều chỉnh các điều khiển bộ chỉnh âm</string>
     <string name="auto">Tự động</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Tiểu sử</string>
     <string name="black_theme_name">Đen hoàn toàn</string>
     <string name="blacklist">Danh sách đen</string>
@@ -123,6 +125,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="could_not_restore_purchase">Không thể khôi phục mua hàng.</string>
     <string name="could_not_scan_files">Không thể quét %d tập tin.</string>
     <string name="create_action">Tạo</string>
+    <string name="create_new_backup">Tạo</string>
     <string name="created_playlist_x">Đã tạo danh sách phát %1$s.</string>
     <string name="credit_title">Thành viên và cộng tác viên </string>
     <string name="currently_listening_to_x_by_x">Đang nghe %1$s bởi %2$s.</string>
@@ -226,6 +229,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="no_albums">Không có album</string>
     <string name="no_artists">Không có nghệ sĩ</string>
     <string name="no_audio_ID">"Phát một bài hát trước, sau đó thử lại."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Không tìm thấy bộ chỉnh âm</string>
     <string name="no_genres">Không có thể loại</string>
     <string name="no_lyrics_found">Không tìm thấy lời bài hát</string>
@@ -300,7 +304,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_colored_app">Màu nền và các nút điều khiển sẽ thay đổi theo màu sắc ảnh bìa album từ màn hình phát</string>
     <string name="pref_summary_colored_app_shortcuts">Màu sắc trong lối tắt ứng dụng dùng màu sắc chủ đạo. Mỗi khi bạn thay đổi màu chủ đạo, hãy bật/tắt lại công tắc này để thay đổi có hiệu lực</string>
     <string name="pref_summary_colored_notification">"M\u00e0u s\u1eafc th\u00f4ng b\u00e1o thay \u0111\u1ed5i theo m\u00e0u s\u1eafc chi ph\u1ed1i \u1ea3nh b\u00eca album"</string>
-    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
+    <string name="pref_summary_cross_fade">Độ dài khoảng lặng giữa các bài hát</string>
     <string name="pref_summary_desaturated_color">Để phù hợp với Thiết kế Material, màu sắc sẽ được điều chỉnh để tương thích với chế độ tối</string>
     <string name="pref_summary_expand_now_playing_panel">Nhấn vào thông báo sẽ hiển thị màn hình phát nhạc thay vì màn hình chính</string>
     <string name="pref_summary_extra_controls">Thêm điều khiển bổ sung cho trình phát mini</string>
@@ -333,7 +337,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_classic_notification">Thiết kế thông báo cổ điển</string>
     <string name="pref_title_colored_app">Màu sắc thích nghi</string>
     <string name="pref_title_colored_notification">Đổi màu thông báo</string>
-    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_cross_fade">Khoảng lặng (Beta)</string>
     <string name="pref_title_desaturated_color">Màu sắc tương thích</string>
     <string name="pref_title_expand_now_playing_panel">Hiển thị màn hình phát nhạc</string>
     <string name="pref_title_extra_controls">Điều khiển bổ sung</string>

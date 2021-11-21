@@ -85,6 +85,8 @@
     <string name="audio_focus_denied">Odrzucono fokus dźwiękowy.</string>
     <string name="audio_settings_summary">Dostosuj ustawienia dźwięku i equalizera</string>
     <string name="auto">Automatyczny</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Po prostu czarny</string>
     <string name="blacklist">Czarna lista</string>
@@ -128,6 +130,7 @@
     <string name="could_not_restore_purchase">Nie udało się przywrócić zakupu.</string>
     <string name="could_not_scan_files">Nie udało się przeskanować %d plików.</string>
     <string name="create_action">Utwórz</string>
+    <string name="create_new_backup">Utwórz</string>
     <string name="created_playlist_x">Stworzono playlistę %1$s.</string>
     <string name="credit_title">Twórcy</string>
     <string name="currently_listening_to_x_by_x">Aktualnie odtwarzane %1$s wykonawcy %2$s.</string>
@@ -231,6 +234,7 @@
     <string name="no_albums">Brak albumów</string>
     <string name="no_artists">Brak wykonawców</string>
     <string name="no_audio_ID">"Odtwórz jakiś utwór i spróbuj ponownie."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Nie znaleziono korektora dźwięku</string>
     <string name="no_genres">Brak gatunków</string>
     <string name="no_lyrics_found">Nie znaleziono tekstu utworu</string>
@@ -353,9 +357,9 @@
     <string name="pref_title_lock_screen">Sterowanie pełnoekranowe</string>
     <string name="pref_title_now_playing_screen_appearance">Wyglądodtwarzacza</string>
     <string name="pref_title_open_source_licences">Licencje typu Open Source</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
+    <string name="pref_title_remember_tab">Zapamiętaj ostatnią kartę</string>
     <string name="pref_title_show_lyrics">Show Lyrics</string>
-    <string name="pref_title_suggestions">Show Suggestions</string>
+    <string name="pref_title_suggestions">Pokaż sugestie</string>
     <string name="pref_title_tab_text_mode">Wygląd tytułów kart</string>
     <string name="pref_title_toggle_carousel_effect">Efekt karuzeli</string>
     <string name="pref_title_toggle_full_screen">Aplikacja pełnoekranowa</string>
@@ -475,7 +479,7 @@
     <string name="up_next">Następne</string>
     <string name="update_image">Zaktualizuj grafikę</string>
     <string name="updating">Aktualizowanie…</string>
-    <string name="user_name">User Name</string>
+    <string name="user_name">Nazwa użytkownika</string>
     <string name="username">Nazwa użytkownika</string>
     <string name="version">Wersja</string>
     <string name="vertical_flip">Obrót pionowy</string>

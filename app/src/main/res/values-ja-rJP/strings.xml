@@ -79,6 +79,8 @@
     <string name="audio_focus_denied">オーディオのフォーカスが拒否されました。</string>
     <string name="audio_settings_summary">サウンド設定を変更し、イコライザーコントロールを調整する</string>
     <string name="auto">自動</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">バイオグラフィー</string>
     <string name="black_theme_name">ダークテーマ時に漆黒にする</string>
     <string name="blacklist">ブラックリスト</string>
@@ -123,6 +125,7 @@
     <string name="could_not_restore_purchase">購入の復元に失敗しました</string>
     <string name="could_not_scan_files">%d のファイルをスキャンできませんでした</string>
     <string name="create_action">作成</string>
+    <string name="create_new_backup">作成</string>
     <string name="created_playlist_x">プレイリストを作成しました %1$s</string>
     <string name="credit_title">メンバーと貢献者</string>
     <string name="currently_listening_to_x_by_x">現在、 %1$s によって %2$s で聴いています。</string>
@@ -226,6 +229,7 @@
     <string name="no_albums">アルバムがありません</string>
     <string name="no_artists">アーティストがありません</string>
     <string name="no_audio_ID">"音楽再生してから、再度お試しください"</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">イコライザが見つかりませんでした</string>
     <string name="no_genres">ジャンルがありません</string>
     <string name="no_lyrics_found">歌詞が見つかりませんでした</string>

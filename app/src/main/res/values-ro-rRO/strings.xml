@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
-    <string name="about_settings_summary">Team, social links</string>
+    <string name="about_album_label">Despre %s</string>
+    <string name="about_settings_summary">Echipă și legături sociale</string>
     <string name="accent_color">Culoare ton</string>
     <string name="accent_color_desc">Culoarea de accent, implicit, se face verde.</string>
     <string name="action_about">Despre</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="action_add_to_blacklist">Adăugare la lista neagră</string>
     <string name="action_add_to_favorites">Adaugă la favorite</string>
     <string name="action_add_to_playing_queue">Adaugă la coada de redare</string>
     <string name="action_add_to_playlist">Adaugă la un playlist</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">Transmite</string>
     <string name="action_clear_playing_queue">Curăță coada de redare</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_cycle_repeat">Mod repetare ciclu</string>
     <string name="action_delete">Șterge</string>
     <string name="action_delete_from_device">Șterge de pe dispozitiv</string>
     <string name="action_details">Detalii</string>
-    <string name="action_edit">Edit</string>
+    <string name="action_edit">Editare</string>
     <string name="action_go_to_album">Pagină album</string>
     <string name="action_go_to_artist">Pagină artist</string>
     <string name="action_go_to_genre">Go to genre</string>
@@ -83,6 +83,8 @@
     <string name="audio_focus_denied">Folcalizarea audio a fost respinsă.</string>
     <string name="audio_settings_summary">Ajustați setările de sunet și comenzile egalizatorului</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Biografie</string>
     <string name="black_theme_name">Negru</string>
     <string name="blacklist">Lista neagră</string>
@@ -126,6 +128,7 @@
     <string name="could_not_restore_purchase">Nu a putut fi restabilită achiziția.</string>
     <string name="could_not_scan_files">Nu s-au putut scana %d fișiere</string>
     <string name="create_action">Crează</string>
+    <string name="create_new_backup">Crează</string>
     <string name="created_playlist_x">S-a creat playlist-ul %1$s.</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Acum ascultați %1$s de %2$s.</string>
@@ -229,6 +232,7 @@
     <string name="no_albums">Niciun album</string>
     <string name="no_artists">Niciun artist</string>
     <string name="no_audio_ID">"Mai întâi redă un cântec, apoi incearcă din nou."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Nu a fost găsit nici un equalizer.</string>
     <string name="no_genres">Niciun gen</string>
     <string name="no_lyrics_found">Nu a fost găsite versuri.</string>

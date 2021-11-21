@@ -17,14 +17,19 @@ package code.name.monkey.retromusic.activities.base
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.core.app.ActivityCompat
+import androidx.core.content.getSystemService
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import com.google.android.material.snackbar.Snackbar
@@ -157,5 +162,20 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
 
     companion object {
         const val PERMISSION_REQUEST = 100
+    }
+    // this  lets keyboard close when clicked in backgroud
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm = getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(v.windowToken, 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
     }
 }

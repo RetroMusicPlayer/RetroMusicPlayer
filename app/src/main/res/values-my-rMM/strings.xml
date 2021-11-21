@@ -79,6 +79,8 @@
     <string name="audio_focus_denied">အသံအာရုံစိုက်ခြင်းအား ပယ်ဖျက်ခဲ့သည်</string>
     <string name="audio_settings_summary">အသံ Settings များပြောင်းလဲရန်နှင့် Equalizer ချိန်ညှိရန်</string>
     <string name="auto">အလိုအလျောက်</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">အတ္ထုပတ္တိ</string>
     <string name="black_theme_name">အနက်ရောင်သာ</string>
     <string name="blacklist">လစ်လျူရှုမည့်စာရင်း</string>
@@ -122,6 +124,7 @@
     <string name="could_not_restore_purchase">ဝယ်ယူမှုကိုပြန်မရယူနိုင်ပါ</string>
     <string name="could_not_scan_files">ဖိုင် %d ခုကိုစကန်မဖတ်နိုင်ပါ</string>
     <string name="create_action">ဖန်တီးမည်</string>
+    <string name="create_new_backup">ဖန်တီးမည်</string>
     <string name="created_playlist_x">ဖန်တီးထားသော Playlist %1$s ခု</string>
     <string name="credit_title">အဖွဲ့ဝင်များနှင့် ကူညီသူများ</string>
     <string name="currently_listening_to_x_by_x">%2$s သီဆိုထားသော %1$s ကိုယခုနားထောင်နေသည်</string>
@@ -225,6 +228,7 @@
     <string name="no_albums">Album တစ်ခုမှမရှိပါ</string>
     <string name="no_artists">အဆိုတော်တစ်ယောက်မှမရှိပါ</string>
     <string name="no_audio_ID">"သီချင်းတစ်ပုဒ်အရင် play ကြည့်ပြီးမှ ပြန်ကြိုးစားပါ"</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Equalizer တစ်ခုမှရှာမတွေ့ပါ</string>
     <string name="no_genres">အမျိုးအစားခွဲစရာတစ်ခုမှမရှိပါ</string>
     <string name="no_lyrics_found">သီချင်းစာသားရှာမတွေ့ပါ</string>

@@ -91,6 +91,8 @@
     <string name="audio_focus_denied">تم منع تركيز الصوت</string>
     <string name="audio_settings_summary">تغيير إعدادات الصوت وضبط عناصر التحكم في موازن الصوت</string>
     <string name="auto">تلقائي</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">سيرة ذاتية</string>
     <string name="black_theme_name">أسود لامع</string>
     <string name="blacklist">القائمة السوداء</string>
@@ -134,6 +136,7 @@
     <string name="could_not_restore_purchase">لايمكن إسترجاع المشتريات</string>
     <string name="could_not_scan_files">لايمكن فحص الملفات %d</string>
     <string name="create_action">إنشاء</string>
+    <string name="create_new_backup">إنشاء</string>
     <string name="created_playlist_x">قائمة التشغيل الموجودة %1$s.</string>
     <string name="credit_title">الافراد والمساهمين</string>
     <string name="currently_listening_to_x_by_x">يستمع حالياً إلى %1$s لـ %2$s</string>
@@ -238,6 +241,7 @@
     <string name="no_albums">لا توجد ألبومات</string>
     <string name="no_artists">لا يوجد مغنين</string>
     <string name="no_audio_ID">"قم بتشغيل أغنية أولاً ، ثم حاول مرة أخرى."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">لم يتم العثور موازن الصوت</string>
     <string name="no_genres">لا يوجد تصنيفات</string>
     <string name="no_lyrics_found">لم يتم العثور على كلمات للاغنية</string>
@@ -312,7 +316,7 @@
     <string name="pref_summary_colored_app">تتغير ألوان أزرار الخلفية والتحكم وفقًا لصورة الألبوم من شاشة التشغيل الآن</string>
     <string name="pref_summary_colored_app_shortcuts">تلوين اختصارات التطبيق باللون الثانوي . في كل مرة تقوم فيها بتغيير اللون ، يرجى تفعيل هذا الخيار ليتم تطبيق التغييرات</string>
     <string name="pref_summary_colored_notification">"تلوين الإشعارات في غلاف الألبوم\u2019لون نشط"</string>
-    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
+    <string name="pref_summary_cross_fade">مدة التقاطع بين الأغاني</string>
     <string name="pref_summary_desaturated_color">حسب خطوط دليل تصميم المواد بالألوان في الوضع المظلم يجب أن لاتكون مشتته</string>
     <string name="pref_summary_expand_now_playing_panel">النقر على الإشعار سيظهر الآن مايتم تشغيله بدلاً من الشاشة الرئيسية لتطبيق</string>
     <string name="pref_summary_extra_controls">اضافة المزيد من التحكم في المشغل المصغر</string>
@@ -323,7 +327,7 @@
     <string name="pref_summary_library_categories">تكوين وعرض وترتيب فئات المكتبة.</string>
     <string name="pref_summary_lock_screen">استخدم شاشة القفل المخصصة من ريترو ميوزك لتحكم بالتشغيل</string>
     <string name="pref_summary_open_source_licences">الرخصة والتفاصيل للبرمجيات مفتوحة المصدر</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_remember_tab">الانتقال إلى آخر علامة تبويب مستخدمة عند البدء</string>
     <string name="pref_summary_show_lyrics">عرض كلمات الأغاني المتزامنة عبر غلاف الألبوم</string>
     <string name="pref_summary_suggestions">إظهار خليط موسيقي جديد على الشاشة الرئيسية</string>
     <string name="pref_summary_toggle_full_screen">وضع الشاشة الكاملة</string>

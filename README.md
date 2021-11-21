@@ -46,6 +46,7 @@ favorite songs. No other music player has this feature.
 
 ### 📦 Included Features
 -  Base 3 themes (Clearly White, Kinda Dark and Just Black)
+-  Chromecast support
 -  Choose from 10+ now playing themes
 -  Driving Mode
 -  Headset/Bluetooth support
@@ -73,18 +74,17 @@ favorite songs. No other music player has this feature.
 We are trying our best to bring you the best user experience. The app is regularly being updated for bug fixes and new features.
 
 ### ❓ FAQ
-Please read the FAQ [here](https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/FAQ.md)
+Please read the FAQ [here](https://retromusic.app/faq.html)
 
-In any case, you find or notice any bugs please report them by
-sending us an [e-mail](mailto:retromusicapp@gmail.com). We will fix bugs as soon as
-possible.
-If you have any feature suggestions, please create an issue with detailed information.
+In any case, you find or notice any bugs please report them by creating an issue or by contacting us in the [Telegram group](https://t.me/retromusicapp).
+If you have any feature suggestions, please create an issue with detailed information or by contacting us in the [Telegram group](https://t.me/retro_music_suggestion).
 
 ### 🔗 Social links
-**Telegram:** https://t.me/retromusicapp  
-**Instagram:** https://instagram.com/retromusicapp  
-**Pinterest:** https://pinterest.com/retromusicapp/  
-**Twitter:** https://twitter.com/retromusicapp/
+**Telegram:** https://t.me/retromusicapp <br>
+**Instagram:** https://instagram.com/retromusicapp <br>
+**Crowdin**: https://crowdin.com/project/retromusicplayer <br>
+**Pinterest:** https://pinterest.com/retromusicapp <br>
+**Twitter:** https://twitter.com/retromusicapp <br>
 
 ### 🗂️ License
 

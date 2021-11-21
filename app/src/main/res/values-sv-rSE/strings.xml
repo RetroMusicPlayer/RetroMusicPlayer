@@ -81,6 +81,8 @@
     <string name="audio_focus_denied">Ljudfokus nekas.</string>
     <string name="audio_settings_summary">Ändra ljudinställningarna och justera equalizer-kontrollerna</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Biografi</string>
     <string name="black_theme_name">Helt svart</string>
     <string name="blacklist">Svartlista</string>
@@ -124,6 +126,7 @@
     <string name="could_not_restore_purchase">Det gick inte att återställa köpet.</string>
     <string name="could_not_scan_files">Det gick inte att skanna %d filer.</string>
     <string name="create_action">Skapa</string>
+    <string name="create_new_backup">Skapa</string>
     <string name="created_playlist_x">Skapade spellistan %1$s.</string>
     <string name="credit_title">Medlemmar och bidragsgivare</string>
     <string name="currently_listening_to_x_by_x">Lyssnar just nu på %1$s av %2$s.</string>
@@ -227,6 +230,7 @@
     <string name="no_albums">Du har inga album</string>
     <string name="no_artists">Du har inga artister</string>
     <string name="no_audio_ID">"Spela en låt först och försök igen."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Ingen equalizer hittades</string>
     <string name="no_genres">Du har inga genrer</string>
     <string name="no_lyrics_found">Inga låttexter hittade</string>
