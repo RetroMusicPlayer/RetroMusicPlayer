@@ -18,7 +18,7 @@
     <string name="action_edit">編輯</string>
     <string name="action_go_to_album">開啟此專輯</string>
     <string name="action_go_to_artist">前往此演唱者頁面</string>
-    <string name="action_go_to_genre">Go to genre</string>
+    <string name="action_go_to_genre">流派</string>
     <string name="action_go_to_start_directory">前往起始目錄</string>
     <string name="action_grant">取得</string>
     <string name="action_grid_size">網格大小</string>
@@ -26,7 +26,7 @@
     <string name="action_new_playlist">新增播放清單</string>
     <string name="action_next">下一首</string>
     <string name="action_play">播放</string>
-    <string name="action_play_all">Play all</string>
+    <string name="action_play_all">播放所有</string>
     <string name="action_play_next">在下一首播放</string>
     <string name="action_play_pause">播放/暫停</string>
     <string name="action_previous">上一首</string>
@@ -45,11 +45,11 @@
     <string name="action_shuffle_all">隨機播放</string>
     <string name="action_shuffle_playlist">隨機播放清單</string>
     <string name="action_sleep_timer">睡眠定時器</string>
-    <string name="action_sort_order">Sort order</string>
+    <string name="action_sort_order">排序</string>
     <string name="action_tag_editor">編輯音樂資訊</string>
-    <string name="action_toggle_favorite">Toggle favorite</string>
-    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
-    <string name="adaptive">Adaptive</string>
+    <string name="action_toggle_favorite">加入/移除我的最愛</string>
+    <string name="action_toggle_shuffle">切換隨機播放模式</string>
+    <string name="adaptive">自動調整</string>
     <string name="add_action">添加</string>
     <string name="add_playlist_title">"加入播放清單"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
