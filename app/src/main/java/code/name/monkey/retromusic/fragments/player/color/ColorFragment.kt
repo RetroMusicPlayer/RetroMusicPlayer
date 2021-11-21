@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments.player.color
 
 import android.animation.ValueAnimator
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.animation.doOnEnd
@@ -61,13 +60,11 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
             _binding?.root?.setBackgroundColor(color.backgroundColor)
         }
         animator.start()
-        Handler().post {
-            ToolbarContentTintHelper.colorizeToolbar(
-                binding.playerToolbar,
-                color.secondaryTextColor,
-                requireActivity()
-            )
-        }
+        ToolbarContentTintHelper.colorizeToolbar(
+            binding.playerToolbar,
+            color.secondaryTextColor,
+            requireActivity()
+        )
     }
 
     override fun onFavoriteToggled() {
