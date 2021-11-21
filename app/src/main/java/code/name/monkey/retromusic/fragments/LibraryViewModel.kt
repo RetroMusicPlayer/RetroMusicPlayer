@@ -19,10 +19,12 @@ import androidx.lifecycle.*
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.fragments.ReloadType.*
+import code.name.monkey.retromusic.fragments.search.Filter
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
+import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -40,6 +42,7 @@ class LibraryViewModel(
     private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
+    private val fabMargin = MutableLiveData(0)
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -83,6 +86,10 @@ class LibraryViewModel(
 
     fun getHome(): LiveData<List<Home>> {
         return home
+    }
+
+    fun getFabMargin(): LiveData<Int> {
+        return fabMargin
     }
 
     private fun fetchSongs() {
@@ -133,9 +140,9 @@ class LibraryViewModel(
         }
     }
 
-    fun search(query: String?, filters: List<Boolean>) {
+    fun search(query: String?, filter: Filter) {
         viewModelScope.launch(IO) {
-            val result = repository.search(query, filters)
+            val result = repository.search(query, filter)
             searchResults.postValue(result)
         }
     }
@@ -327,6 +334,14 @@ class LibraryViewModel(
                 ).show()
             }
         }
+    }
+
+    fun setFabMargin(bottomMargin: Int) {
+        fabMargin.postValue(
+            // Normal Margin
+            DensityUtil.dip2px(App.getContext(), 16F) +
+                    bottomMargin
+        )
     }
 }
 

@@ -131,7 +131,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             }
             R.id.action_go_to_album -> {
                 //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
-                mainActivity.setBottomBarVisibility(false)
+                mainActivity.setBottomNavVisibility(false)
                 mainActivity.collapsePanel()
                 requireActivity().findNavController(R.id.fragment_container).navigate(
                     R.id.albumDetailsFragment,
@@ -144,7 +144,10 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.now_playing -> {
-                NavigationUtil.goToPlayingQueue(requireActivity())
+                requireActivity().findNavController(R.id.fragment_container).navigate(
+                    R.id.playing_queue_fragment,
+                    null
+                )
                 return true
             }
             R.id.action_show_lyrics -> {
@@ -325,6 +328,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 requireView()
             )
         )
+        playerToolbar()?.menu?.findItem(R.id.action_toggle_lyrics)?.let { showLyricsIcon(it) }
     }
 
     class SwipeDetector(val context: Context, val viewPager: ViewPager?, val view: View) :
@@ -383,7 +387,7 @@ fun goToArtist(activity: Activity) {
         currentFragment(R.id.fragment_container)?.exitTransition = null
 
         //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
-        setBottomBarVisibility(false)
+        setBottomNavVisibility(false)
         if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
             collapsePanel()
         }
@@ -402,7 +406,7 @@ fun goToAlbum(activity: Activity) {
         currentFragment(R.id.fragment_container)?.exitTransition = null
 
         //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
-        setBottomBarVisibility(false)
+        setBottomNavVisibility(false)
         if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
             collapsePanel()
         }

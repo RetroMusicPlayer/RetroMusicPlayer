@@ -26,7 +26,6 @@ import com.bumptech.glide.annotation.GlideType
 import com.bumptech.glide.load.Key
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.BaseRequestOptions
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.bumptech.glide.signature.MediaStoreSignature
 import java.io.File
 
@@ -79,7 +78,11 @@ object RetroGlideExtension {
         )
     }
 
-    private fun getArtistModel(artist: Artist, hasCustomImage: Boolean, forceDownload: Boolean): Any {
+    private fun getArtistModel(
+        artist: Artist,
+        hasCustomImage: Boolean,
+        forceDownload: Boolean
+    ): Any {
         return if (!hasCustomImage) {
             ArtistImage(artist)
         } else {
@@ -97,7 +100,6 @@ object RetroGlideExtension {
             .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY_ARTIST)
             .priority(Priority.LOW)
             .error(DEFAULT_ERROR_ARTIST_IMAGE)
-            .override(SIZE_ORIGINAL, SIZE_ORIGINAL)
             .signature(createSignature(artist))
     }
 

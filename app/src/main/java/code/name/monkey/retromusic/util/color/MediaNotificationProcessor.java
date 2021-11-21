@@ -77,7 +77,7 @@ public class MediaNotificationProcessor {
 
   private static final String TAG = "ColorPicking";
   private float[] mFilteredBackgroundHsl = null;
-  private Palette.Filter mBlackWhiteFilter =
+  private final Palette.Filter mBlackWhiteFilter =
           (rgb, hsl) -> !isWhiteOrBlack(hsl);
   private boolean mIsLowPriority;
   private int backgroundColor;
@@ -85,7 +85,7 @@ public class MediaNotificationProcessor {
   private int primaryTextColor;
   private int actionBarColor;
   private Drawable drawable;
-  private Context context;
+  private final Context context;
 
   public MediaNotificationProcessor(Context context, Drawable drawable) {
     this.context = context;

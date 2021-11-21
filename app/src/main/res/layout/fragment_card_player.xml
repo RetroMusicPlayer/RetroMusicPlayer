@@ -49,8 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardUseCompatPadding="true">
+        app:cardCornerRadius="8dp">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playbackControlsFragment"

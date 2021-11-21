@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.repository.RealPlaylistRepository
-import code.name.monkey.retromusic.repository.RealSongRepository
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
@@ -35,8 +34,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
-import org.koin.core.KoinComponent
-import org.koin.core.get
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -183,6 +182,7 @@ object MusicUtil : KoinComponent {
         return lyrics
     }
 
+    @JvmStatic
     fun getMediaStoreAlbumCoverUri(albumId: Long): Uri {
         val sArtworkUri = Uri.parse("content://media/external/audio/albumart")
         return ContentUris.withAppendedId(sArtworkUri, albumId)
@@ -473,16 +473,7 @@ object MusicUtil : KoinComponent {
                 null, null
             )
             if (cursor != null) {
-                // Step 1: Remove selected tracks from the current playlist, as well
-                // as from the album art cache
-                cursor.moveToFirst()
-                while (!cursor.isAfterLast) {
-                    val id = cursor.getLong(BaseColumns._ID)
-                    val song: Song = RealSongRepository(context).song(id)
-                    removeFromQueue(song)
-                    cursor.moveToNext()
-                }
-
+                removeFromQueue(songs)
 
                 // Step 2: Remove files from card
                 cursor.moveToFirst()

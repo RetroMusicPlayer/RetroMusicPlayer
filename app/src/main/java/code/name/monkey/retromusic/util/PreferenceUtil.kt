@@ -269,6 +269,8 @@ object PreferenceUtil {
             BLURRED_ALBUM_ART, false
         )
 
+    val blurAmount get() = sharedPreferences.getInt(NEW_BLUR_AMOUNT, 25)
+
     val isCarouselEffect
         get() = sharedPreferences.getBoolean(
             CAROUSEL_EFFECT, false
@@ -542,7 +544,7 @@ object PreferenceUtil {
 
     var startDirectory: File
         get() {
-            val folderPath = FoldersFragment.getDefaultStartDirectory().path
+            val folderPath = FoldersFragment.defaultStartDirectory.path
             val filePath: String = sharedPreferences.getStringOrDefault(START_DIRECTORY, folderPath)
             return File(filePath)
         }
@@ -608,8 +610,10 @@ object PreferenceUtil {
     val isWhiteList: Boolean
         get() = sharedPreferences.getBoolean(WHITELIST_MUSIC, false)
 
-    var crossFadeDuration
+    val crossFadeDuration
         get() = sharedPreferences
             .getInt(CROSS_FADE_DURATION, 0)
-        set(value) = sharedPreferences.edit { putInt(CROSS_FADE_DURATION, value) }
+
+    val materialYou
+        get() = sharedPreferences.getBoolean(MATERIAL_YOU, false)
 }

@@ -34,10 +34,7 @@ abstract class AbsMainActivityFragment(@LayoutRes layout: Int) : AbsMusicService
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
-        mainActivity.setNavigationbarColorAuto()
-        mainActivity.setLightNavigationBar(true)
         mainActivity.setTaskDescriptionColorAuto()
-        mainActivity.hideStatusBar()
     }
 
     private fun setStatusBarColor(view: View, color: Int) {

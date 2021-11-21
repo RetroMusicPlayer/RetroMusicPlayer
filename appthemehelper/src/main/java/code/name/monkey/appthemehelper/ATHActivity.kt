@@ -1,10 +1,7 @@
 package code.name.monkey.appthemehelper
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-
-import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 
 /**

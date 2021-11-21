@@ -57,6 +57,7 @@ import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion.SONG_TRACK_LIST
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion.SONG_Z_A
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
+import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
@@ -68,7 +69,11 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.afollestad.materialcab.MaterialCab
+import com.afollestad.materialcab.attached.AttachedCab
+import com.afollestad.materialcab.attached.destroy
+import com.afollestad.materialcab.attached.isActive
+import com.afollestad.materialcab.createCab
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.Dispatchers
@@ -101,7 +106,6 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.fragment_container
-            duration = 300L
             scrimColor = Color.TRANSPARENT
             setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
             setPathMotion(MaterialArcMotion())
@@ -176,6 +180,8 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 requireActivity().onBackPressed()
             }
         }
+        binding.appBarLayout?.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     override fun onDestroy() {
@@ -228,9 +234,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         loadAlbumCover(album)
         simpleSongAdapter.swapDataSet(album.songs)
         if (albumArtistExists) {
-            detailsViewModel.getAlbumArtist(album.albumArtist.toString()).observe(viewLifecycleOwner, {
-                loadArtistImage(it)
-            })
+            detailsViewModel.getAlbumArtist(album.albumArtist.toString())
+                .observe(viewLifecycleOwner, {
+                    loadArtistImage(it)
+                })
         } else {
             detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner, {
                 loadArtistImage(it)
@@ -302,7 +309,12 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         })
         GlideApp.with(requireContext()).asBitmapPalette().artistImageOptions(artist)
             //.forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
-            .load(RetroGlideExtension.getArtistModel(artist, PreferenceUtil.isAllowedToDownloadMetadata()))
+            .load(
+                RetroGlideExtension.getArtistModel(
+                    artist,
+                    PreferenceUtil.isAllowedToDownloadMetadata()
+                )
+            )
             .dontAnimate()
             .dontTransform()
             .into(object : RetroMusicColoredTarget(binding.artistImage) {
@@ -312,7 +324,8 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun loadAlbumCover(album: Album) {
-        GlideApp.with(requireContext()).asBitmapPalette().albumCoverOptions(album.safeGetFirstSong())
+        GlideApp.with(requireContext()).asBitmapPalette()
+            .albumCoverOptions(album.safeGetFirstSong())
             //.checkIgnoreMediaStore()
             .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
             .into(object : SingleColorTarget(binding.image) {
@@ -323,8 +336,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun setColors(color: Int) {
-        binding.fragmentAlbumContent.shuffleAction.applyColor(color)
-        binding.fragmentAlbumContent.playAction.applyOutlineColor(color)
+        _binding?.fragmentAlbumContent?.apply {
+            shuffleAction.applyColor(color)
+            playAction.applyOutlineColor(color)
+        }
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
@@ -450,28 +465,34 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     private fun handleBackPress(): Boolean {
         cab?.let {
-            if (it.isActive) {
-                it.finish()
+            if (it.isActive()) {
+                it.destroy()
                 return true
             }
         }
         return false
     }
 
-    private var cab: MaterialCab? = null
+    private var cab: AttachedCab? = null
 
-    override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
+    override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
         cab?.let {
-            if (it.isActive) {
-                it.finish()
+            if (it.isActive()) {
+                it.destroy()
             }
         }
-        cab = MaterialCab(mainActivity, R.id.cab_stub)
-            .setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close)
-            .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(surfaceColor()))
-            .start(callback)
-        return cab as MaterialCab
+        cab = createCab(R.id.toolbar_container) {
+            menu(menuRes)
+            closeDrawable(R.drawable.ic_close)
+            backgroundColor(literal = RetroColorUtil.shiftBackgroundColor(surfaceColor()))
+            slideDown()
+            onCreate { cab, menu -> callback.onCabCreated(cab, menu) }
+            onSelection {
+                callback.onCabItemClicked(it)
+            }
+            onDestroy { callback.onCabFinished(it) }
+        }
+        return cab as AttachedCab
     }
 
     override fun onDestroyView() {

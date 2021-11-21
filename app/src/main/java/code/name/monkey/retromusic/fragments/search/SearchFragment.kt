@@ -23,12 +23,10 @@ import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.CompoundButton
-import androidx.core.view.children
-import androidx.core.view.doOnPreDraw
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
+import androidx.annotation.IdRes
+import androidx.core.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
@@ -38,14 +36,18 @@ import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.databinding.FragmentSearchBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.views.addAlpha
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.transition.MaterialSharedAxis
 import java.util.*
 import kotlin.collections.ArrayList
 
+
 class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWatcher,
-    CompoundButton.OnCheckedChangeListener {
+    ChipGroup.OnCheckedChangeListener {
     companion object {
         const val QUERY = "query"
         const val REQ_CODE_SPEECH_INPUT = 9001
@@ -89,31 +91,31 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner, {
+            binding.keyboardPopup.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = it
+            }
+        })
     }
 
     private fun setupChips() {
         val chips = binding.searchFilterGroup.children.map { it as Chip }
-        val states = arrayOf(
-            intArrayOf(-android.R.attr.state_checked),
-            intArrayOf(android.R.attr.state_checked)
-        )
+        if (!PreferenceUtil.materialYou) {
+            val states = arrayOf(
+                intArrayOf(-android.R.attr.state_checked),
+                intArrayOf(android.R.attr.state_checked)
+            )
 
-        val colors = intArrayOf(
-            android.R.color.transparent,
-            ThemeStore.accentColor(requireContext())
-        )
+            val colors = intArrayOf(
+                android.R.color.transparent,
+                ThemeStore.accentColor(requireContext()).addAlpha(0.5F)
+            )
 
-        chips.forEach {
-            it.chipBackgroundColor = ColorStateList(states, colors)
-            it.chipIconTint = ColorStateList.valueOf(ThemeStore.textColorPrimary(requireContext()))
-            it.chipStrokeColor =
-                ColorStateList.valueOf(ThemeStore.textColorSecondary(requireContext()))
-                    .withAlpha(30)
-            it.closeIconTint =
-                ColorStateList.valueOf(ThemeStore.textColorPrimaryInverse(requireContext()))
-            it.chipStrokeWidth = 2F
-            it.setOnCheckedChangeListener(this)
+            chips.forEach {
+                it.chipBackgroundColor = ColorStateList(states, colors)
+            }
         }
+        binding.searchFilterGroup.setOnCheckedChangeListener(this)
     }
 
     private fun showData(data: List<Any>) {
@@ -165,13 +167,18 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         TransitionManager.beginDelayedTransition(binding.appBarLayout)
         binding.voiceSearch.isGone = query.isNotEmpty()
         binding.clearText.isVisible = query.isNotEmpty()
-        val filters = getFilters()
-        libraryViewModel.search(query, filters)
+        val filter = getFilter()
+        libraryViewModel.search(query, filter)
     }
 
-    private fun getFilters(): List<Boolean> {
-        return binding.searchFilterGroup.children.toList().map {
-            (it as Chip).isChecked
+    private fun getFilter(): Filter {
+        return when (binding.searchFilterGroup.checkedChipId) {
+            R.id.chip_audio -> Filter.SONGS
+            R.id.chip_artists -> Filter.ARTISTS
+            R.id.chip_albums -> Filter.ALBUMS
+            R.id.chip_album_artists -> Filter.ALBUM_ARTISTS
+            R.id.chip_genres -> Filter.GENRES
+            else -> Filter.NO_FILTER
         }
     }
 
@@ -207,7 +214,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
 
     override fun onResume() {
         super.onResume()
-        mainActivity.setBottomBarVisibility(false)
+        mainActivity.setBottomNavVisibility(false)
     }
 
     private fun hideKeyboard(view: View?) {
@@ -218,26 +225,18 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         }
     }
 
-    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        val checkedChip = (buttonView as Chip)
-        checkedChip.isCloseIconVisible = isChecked
-        if (isChecked) {
-            val color = ThemeStore.textColorPrimaryInverse(requireContext())
-            checkedChip.apply {
-                setTextColor(color)
-                chipIconTint = ColorStateList.valueOf(color)
-                chipStrokeWidth = 0F
-            }
-        } else {
-            val color = ThemeStore.textColorPrimary(requireContext())
-            checkedChip.apply {
-                setTextColor(color)
-                chipIconTint = ColorStateList.valueOf(color)
-                chipStrokeWidth = 2F
-            }
-        }
+    override fun onCheckedChanged(group: ChipGroup?, @IdRes checkedId: Int) {
         search(binding.searchView.text.toString())
     }
+}
+
+enum class Filter {
+    SONGS,
+    ARTISTS,
+    ALBUMS,
+    ALBUM_ARTISTS,
+    GENRES,
+    NO_FILTER
 }
 
 fun TextInputEditText.clearText() {

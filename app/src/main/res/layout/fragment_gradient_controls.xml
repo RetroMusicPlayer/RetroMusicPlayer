@@ -22,18 +22,20 @@
         android:id="@+id/titleContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/progressSlider"
         app:layout_constraintEnd_toStartOf="@+id/playerMenu"
         app:layout_constraintStart_toEndOf="@+id/songFavourite"
-        android:clickable="false"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:ellipsize="marquee"
+            android:focusable="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
@@ -41,8 +43,6 @@
             android:textColor="@color/md_white_1000"
             android:textStyle="bold"
             tools:text="@tools:sample/lorem/random"
-            android:clickable="true"
-            android:focusable="true"
             tools:textColor="@color/md_black_1000" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -50,7 +50,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0.75"
+            android:clickable="true"
             android:ellipsize="end"
+            android:focusable="true"
             android:gravity="center"
             android:maxLines="1"
             android:paddingTop="6dp"
@@ -61,8 +63,6 @@
             app:layout_constraintTop_toBottomOf="@+id/title"
             tools:layout_editor_absoluteX="48dp"
             tools:text="@tools:sample/lorem/random"
-            android:clickable="true"
-            android:focusable="true"
             tools:textColor="@color/md_black_1000" />
 
     </LinearLayout>

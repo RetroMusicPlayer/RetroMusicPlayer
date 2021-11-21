@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.fragments
+package code.name.monkey.retromusic.fragments.other
 
 import android.os.Bundle
 import android.view.View
@@ -38,6 +38,7 @@ import code.name.monkey.retromusic.interfaces.IArtistClickListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.util.RetroUtil
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialSharedAxis
 
 class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
@@ -63,6 +64,8 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
                 returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
             }
         }
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
     }

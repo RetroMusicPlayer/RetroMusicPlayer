@@ -34,6 +34,8 @@ import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.*
+import kotlin.collections.LinkedHashMap
 
 /**
  * Validates that the calling package is authorized to browse a [MediaBrowserServiceCompat].
@@ -274,7 +276,8 @@ class PackageValidator(
         var eventType = parser.next()
         while (eventType != XmlResourceParser.END_TAG) {
             val isRelease = parser.getAttributeBooleanValue(null, "release", false)
-            val signature = parser.nextText().replace(WHITESPACE_REGEX, "").toLowerCase()
+            val signature = parser.nextText().replace(WHITESPACE_REGEX, "")
+                .lowercase(Locale.getDefault())
             callerSignatures += KnownSignature(signature, isRelease)
 
             eventType = parser.next()
@@ -319,14 +322,14 @@ class PackageValidator(
     }
 
     private data class KnownCallerInfo(
-            internal val name: String,
-            internal val packageName: String,
-            internal val signatures: MutableSet<KnownSignature>
+        val name: String,
+        val packageName: String,
+        val signatures: MutableSet<KnownSignature>
     )
 
     private data class KnownSignature(
-            internal val signature: String,
-            internal val release: Boolean
+        val signature: String,
+        val release: Boolean
     )
 
     /**
@@ -334,11 +337,11 @@ class PackageValidator(
      * to see if it's a known caller.
      */
     private data class CallerPackageInfo(
-            internal val name: String,
-            internal val packageName: String,
-            internal val uid: Int,
-            internal val signature: String?,
-            internal val permissions: Set<String>
+        val name: String,
+        val packageName: String,
+        val uid: Int,
+        val signature: String?,
+        val permissions: Set<String>
     )
 }
 

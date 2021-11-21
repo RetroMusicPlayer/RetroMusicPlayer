@@ -19,12 +19,15 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.updatePadding
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
+import code.name.monkey.retromusic.activities.OnThemeChangedListener
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.RetroUtil
 
 /**
  * @author Hemanth S (h4h13).
@@ -64,8 +67,12 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
         listView.overScrollMode = View.OVER_SCROLL_NEVER
-        listView.setPadding(0, 0, 0, 0)
-        listView.setPaddingRelative(0, 0, 0, 0)
+        // This is a workaround as CollapsingToolbarLayout consumes insets and
+        // insets are not passed to child views
+        // https://github.com/material-components/material-components-android/issues/1310
+        if (!RetroUtil.isLandscape()) {
+            listView.updatePadding(bottom = RetroUtil.getNavigationBarHeight())
+        }
         invalidateSettings()
     }
 
@@ -92,6 +99,14 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
                 fragment.show(childFragmentManager, preference.key)
             }
             else -> super.onDisplayPreferenceDialog(preference)
+        }
+    }
+
+    fun restartActivity() {
+        if (activity is OnThemeChangedListener) {
+            (activity as OnThemeChangedListener).onThemeValuesChanged()
+        } else {
+            activity?.recreate()
         }
     }
 }

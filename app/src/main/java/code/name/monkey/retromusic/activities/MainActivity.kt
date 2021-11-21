@@ -21,10 +21,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.contains
 import androidx.navigation.ui.setupWithNavController
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
+import code.name.monkey.retromusic.extensions.currentFragment
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
@@ -54,9 +56,6 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
-        setLightNavigationBar(true)
         setTaskDescriptionColorAuto()
         hideStatusBar()
         updateTabs()
@@ -75,6 +74,8 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
 
         val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
         if (categoryInfo.visible) {
+            if (!navGraph.contains(PreferenceUtil.lastTab)) PreferenceUtil.lastTab =
+                categoryInfo.category.id
             navGraph.setStartDestination(
                 if (PreferenceUtil.rememberLastTab) {
                     PreferenceUtil.lastTab.let {
@@ -88,10 +89,10 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
             )
         }
         navController.graph = navGraph
-        getBottomNavigationView().setupWithNavController(navController)
+        bottomNavigationView.setupWithNavController(navController)
         // Scroll Fragment to top
-        getBottomNavigationView().setOnItemReselectedListener {
-            supportFragmentManager.findFragmentById(R.id.fragment_container)?.childFragmentManager?.fragments?.get(0)
+        bottomNavigationView.setOnItemReselectedListener {
+            currentFragment(R.id.fragment_container)
                 .also {
                     if (it is AbsRecyclerViewFragment<*, *>) {
                         it.scrollToTop()
@@ -101,19 +102,25 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                     }
                 }
         }
+        // This is more like a work-around as for start destination of navGraph
+        // enterTransition won't work as expected
+        navGraph.setStartDestination(R.id.libraryFragment)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
+           when (destination.id) {
                 R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre -> {
                     // Save the last tab
                     if (PreferenceUtil.rememberLastTab) {
                         saveTab(destination.id)
                     }
                     // Show Bottom Navigation Bar
-                    setBottomBarVisibility(true)
+                    setBottomNavVisibility(visible = true, animate = true)
                 }
-                else -> setBottomBarVisibility(false) // Hide Bottom Navigation Bar
+                R.id.playing_queue_fragment -> {
+                    setBottomNavVisibility(visible = false)
+                    hideBottomSheet(true)
+                }
+                else -> setBottomNavVisibility(visible = false, animate = true) // Hide Bottom Navigation Bar
             }
-
         }
     }
 
@@ -129,7 +136,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
         val expand = extra<Boolean>(EXPAND_PANEL).value ?: false
         if (expand && PreferenceUtil.isExpandPanel) {
-            setBottomBarVisibility(false)
+            setBottomNavVisibility(false)
             fromNotification = true
             expandPanel()
             intent.removeExtra(EXPAND_PANEL)
@@ -142,7 +149,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == GENERAL_THEME || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES) {
+        if (key == GENERAL_THEME || key == MATERIAL_YOU || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES) {
             postRecreate()
         }
     }

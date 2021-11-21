@@ -6,6 +6,7 @@
     <attr name="defaultFooterColor" format="color" />
     <attr name="toolbarPopupTheme" format="reference" />
     <attr name="lineHeightHint" format="dimension" />
+    <attr name="bottomSheetTint" format="reference" />
 
     <declare-styleable name="NetworkImageView">
         <attr name="url_link" format="string" />

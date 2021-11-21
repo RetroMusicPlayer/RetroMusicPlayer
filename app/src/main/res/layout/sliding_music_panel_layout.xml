@@ -6,26 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/mainContentFrame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <View
-        android:id="@+id/dimBackground"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        tools:layout="@layout/fragment_home"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="gone" />
+        android:background="?colorSurface"
+        app:defaultNavHost="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     <FrameLayout
         android:id="@+id/slidingPanel"
-        style="@style/Widget.BottomSheet"
+        style="@style/BottomSheetStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
+        app:gestureInsetBottomIgnored="true"
+        app:enableEdgeToEdge="true"
         app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
 
         <FrameLayout
@@ -35,7 +34,7 @@
 
         <fragment
             android:id="@+id/miniPlayerFragment"
-            android:name="code.name.monkey.retromusic.fragments.MiniPlayerFragment"
+            android:name="code.name.monkey.retromusic.fragments.other.MiniPlayerFragment"
             android:layout_width="match_parent"
             android:layout_height="@dimen/mini_player_height"
             tools:layout="@layout/fragment_mini_player" />
@@ -44,23 +43,21 @@
             android:id="@+id/cast_stub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/cast_controller_layout"/>
+            android:layout="@layout/cast_controller_layout" />
 
     </FrameLayout>
 
     <code.name.monkey.retromusic.views.BottomNavigationBarTinted
         android:id="@+id/bottomNavigationView"
+        style="@style/Widget.Material3.BottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?attr/colorSurface"
         android:elevation="0dp"
+        android:minHeight="@dimen/bottom_nav_height"
         app:itemHorizontalTranslationEnabled="false"
-        app:itemIconTint="@drawable/bottom_navigation_item_colors"
-        app:itemTextAppearanceActive="@style/BottomSheetItemTextAppearance"
-        app:itemTextAppearanceInactive="@style/BottomSheetItemTextAppearance"
-        app:itemTextColor="@drawable/bottom_navigation_item_colors"
-        app:labelVisibilityMode="labeled"
+        app:itemPaddingBottom="0dp"
+        app:itemPaddingTop="8dp"
         app:menu="@menu/bottom_navigation_main"
-        tools:layout_height="56dp" />
+        tools:layout_height="wrap_content" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

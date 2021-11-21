@@ -35,6 +35,7 @@ public class AutoMediaIDHelper {
     public static final String MEDIA_ID_MUSICS_BY_GENRE = "__BY_GENRE__";
     public static final String MEDIA_ID_MUSICS_BY_SHUFFLE = "__BY_SHUFFLE__";
     public static final String MEDIA_ID_MUSICS_BY_QUEUE = "__BY_QUEUE__";
+    public static final String RECENT_ROOT = "__RECENT__";
 
     private static final String CATEGORY_SEPARATOR = "__/__";
     private static final String LEAF_SEPARATOR = "__|__";

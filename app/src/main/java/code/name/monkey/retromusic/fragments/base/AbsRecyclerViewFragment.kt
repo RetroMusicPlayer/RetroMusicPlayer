@@ -18,8 +18,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -29,9 +31,12 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMainRecyclerBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.dip
+import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import me.zhanghai.android.fastscroll.FastScroller
@@ -44,21 +49,57 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     private val binding get() = _binding!!
     protected var adapter: A? = null
     protected var layoutManager: LM? = null
+    val shuffleButton get() = binding.shuffleButton
+    abstract val isShuffleVisible: Boolean
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainRecyclerBinding.bind(view)
-        enterTransition = MaterialFadeThrough()
-        exitTransition = MaterialFadeThrough()
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
-
+        enterTransition = MaterialFadeThrough().apply {
+            addTarget(binding.recyclerView)
+        }
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         initLayoutManager()
         initAdapter()
         setUpRecyclerView()
         setupToolbar()
+        // Add listeners when shuffle is visible
+        if (isShuffleVisible) {
+            binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (dy > 0) {
+                        binding.shuffleButton.hide()
+                    } else if (dy < 0) {
+                        binding.shuffleButton.show()
+                    }
+
+                }
+            })
+            binding.shuffleButton.apply {
+                setOnClickListener {
+                    onShuffleClicked()
+                }
+                accentColor()
+            }
+        } else {
+            binding.shuffleButton.isVisible = false
+        }
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner, {
+            binding.shuffleButton.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = it
+            }
+        })
+    }
+
+    open fun onShuffleClicked() {
+    }
+
+    fun toolbar(): Toolbar {
+        return binding.toolbar
     }
 
     private fun setupToolbar() {
@@ -73,6 +114,9 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         }
         val appName = resources.getString(titleRes)
         binding.appNameText.text = appName
+        binding.toolbarContainer.drawNextToNavbar()
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     abstract val titleRes: Int
@@ -117,10 +161,10 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         val itemCount: Int = adapter?.itemCount ?: 0
 
         if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
-            val height = DensityUtil.dip2px(requireContext(), 112f)
+            val height = dip(R.dimen.mini_player_height_expanded)
             binding.recyclerView.updatePadding(0, 0, 0, height)
         } else {
-            val height = DensityUtil.dip2px(requireContext(), 56f)
+            val height = dip(R.dimen.mini_player_height)
             binding.recyclerView.updatePadding(0, 0, 0, height)
         }
     }
@@ -155,16 +199,12 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         binding.recyclerView.adapter = adapter
     }
 
-    fun recyclerView(): RecyclerView {
-        return binding.recyclerView
-    }
+    val recyclerView get() = binding.recyclerView
 
-    fun getContainer(): CoordinatorLayout {
-        return binding.root
-    }
+    val container get() = binding.root
 
     fun scrollToTop() {
-        recyclerView().scrollToPosition(0)
+        recyclerView.scrollToPosition(0)
         binding.appBarLayout.setExpanded(true, true)
     }
 

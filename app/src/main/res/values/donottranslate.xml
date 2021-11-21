@@ -21,4 +21,9 @@
     <string name="app_shortcut_top_tracks_long" translatable="false">@string/my_top_tracks</string>
 
     <string name="empty_text_emoji" translatable="false">&#128561;</string>
+
+    <!-- Material You -->
+    <string name="pref_title_md3">Material You</string>
+    <bool name="md3_available">false</bool>
+    <bool name="md3_enabled">false</bool>
 </resources>

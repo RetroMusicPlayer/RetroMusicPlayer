@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFullBinding
+import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.whichFragment
@@ -62,6 +63,7 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
         setUpPlayerToolbar()
         setupArtist()
         binding.nextSong.isSelected = true
+        binding.playbackControlsFragment.drawAboveSystemBars()
     }
 
     private fun setupArtist() {
@@ -131,12 +133,15 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
     private fun updateArtistImage() {
         libraryViewModel.artist(MusicPlayerRemote.currentSong.artistId)
             .observe(viewLifecycleOwner, { artist ->
-                GlideApp.with(requireActivity()).asBitmapPalette().artistImageOptions(artist)
-                    .load(RetroGlideExtension.getArtistModel(artist))
-                    .into(object : RetroMusicColoredTarget(binding.artistImage) {
-                        override fun onColorReady(colors: MediaNotificationProcessor) {
-                        }
-                    })
+                if (artist.id != -1L) {
+                    GlideApp.with(requireActivity()).asBitmapPalette().artistImageOptions(artist)
+                        .load(RetroGlideExtension.getArtistModel(artist))
+                        .into(object : RetroMusicColoredTarget(binding.artistImage) {
+                            override fun onColorReady(colors: MediaNotificationProcessor) {
+                            }
+                        })
+                }
+
             })
     }
 

@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/normal_lyrics_padding"
+            android:textIsSelectable="true"
             android:textSize="@dimen/lyrics_text_size" />
     </ScrollView>
 

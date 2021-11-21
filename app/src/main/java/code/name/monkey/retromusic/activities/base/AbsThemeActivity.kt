@@ -33,9 +33,11 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.LanguageContextWrapper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.theme.ThemeManager
+import com.google.android.material.color.DynamicColors
 import java.util.*
 
 abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
@@ -49,12 +51,22 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         setImmersiveFullscreen()
         registerSystemUiVisibility()
         toggleScreenOn()
-        //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
+        setDrawUnderNavigationBar()
+        setLightNavigationAuto()
+        setLightStatusbarAuto(surfaceColor())
     }
 
     private fun updateTheme() {
         setTheme(ThemeManager.getThemeResValue(this))
         setDefaultNightMode(ThemeManager.getNightMode(this))
+
+        // Apply dynamic colors to activity if enabled
+        if (PreferenceUtil.materialYou) {
+            DynamicColors.applyIfAvailable(
+                this,
+                com.google.android.material.R.style.ThemeOverlay_Material3_DynamicColors_DayNight
+            )
+        }
     }
 
     private fun toggleScreenOn() {
@@ -91,7 +103,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         RetroUtil.setAllowDrawUnderStatusBar(window)
     }
 
-    fun setDrawUnderNavigationBar() {
+    private fun setDrawUnderNavigationBar() {
         RetroUtil.setAllowDrawUnderNavigationBar(window)
     }
 
@@ -146,6 +158,10 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
     fun setNavigationbarColorAuto() {
         setNavigationbarColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+    }
+
+    fun setLightNavigationAuto() {
+        ATH.setLightNavigationbarAuto(this, surfaceColor())
     }
 
     open fun setLightStatusbar(enabled: Boolean) {

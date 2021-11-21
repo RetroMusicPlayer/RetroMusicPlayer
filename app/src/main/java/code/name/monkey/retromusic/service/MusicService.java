@@ -14,6 +14,8 @@
 
 package code.name.monkey.retromusic.service;
 
+import static android.support.v4.media.MediaBrowserCompat.MediaItem.FLAG_PLAYABLE;
+import static androidx.media.MediaBrowserServiceCompat.BrowserRoot.EXTRA_RECENT;
 import static org.koin.java.KoinJavaComponent.get;
 import static code.name.monkey.retromusic.ConstantsKt.ALBUM_ART_ON_LOCK_SCREEN;
 import static code.name.monkey.retromusic.ConstantsKt.BLURRED_ALBUM_ART;
@@ -21,6 +23,7 @@ import static code.name.monkey.retromusic.ConstantsKt.CLASSIC_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.CROSS_FADE_DURATION;
 import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
+import static code.name.monkey.retromusic.service.AudioFader.startFadeAnimator;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -49,6 +52,7 @@ import android.os.PowerManager;
 import android.os.Process;
 import android.provider.MediaStore;
 import android.support.v4.media.MediaBrowserCompat;
+import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -66,6 +70,7 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -97,12 +102,14 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PackageValidator;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import code.name.monkey.retromusic.volume.AudioVolumeObserver;
+import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener;
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal
  */
 public class MusicService extends MediaBrowserServiceCompat
-        implements SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
+        implements SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks, OnAudioVolumeChangedListener {
 
     public static final String TAG = MusicService.class.getSimpleName();
     public static final String RETRO_MUSIC_PACKAGE_NAME = "code.name.monkey.retromusic";
@@ -180,15 +187,15 @@ public class MusicService extends MediaBrowserServiceCompat
 
     public int position = -1;
 
-    private AppWidgetBig appWidgetBig = AppWidgetBig.Companion.getInstance();
+    private final AppWidgetBig appWidgetBig = AppWidgetBig.Companion.getInstance();
 
-    private AppWidgetCard appWidgetCard = AppWidgetCard.Companion.getInstance();
+  private final AppWidgetCard appWidgetCard = AppWidgetCard.Companion.getInstance();
 
-    private AppWidgetClassic appWidgetClassic = AppWidgetClassic.Companion.getInstance();
+  private final AppWidgetClassic appWidgetClassic = AppWidgetClassic.Companion.getInstance();
 
-    private AppWidgetSmall appWidgetSmall = AppWidgetSmall.Companion.getInstance();
+  private final AppWidgetSmall appWidgetSmall = AppWidgetSmall.Companion.getInstance();
 
-    private AppWidgetText appWidgetText = AppWidgetText.Companion.getInstance();
+  private final AppWidgetText appWidgetText = AppWidgetText.Companion.getInstance();
 
     private final BroadcastReceiver widgetIntentReceiver =
             new BroadcastReceiver() {
@@ -222,15 +229,15 @@ public class MusicService extends MediaBrowserServiceCompat
                     }
                 }
             };
-    private AudioManager audioManager;
-    private IntentFilter becomingNoisyReceiverIntentFilter =
-            new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
-    private boolean becomingNoisyReceiverRegistered;
-    private IntentFilter bluetoothConnectedIntentFilter =
-            new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
-    private boolean bluetoothConnectedRegistered = false;
-    private IntentFilter headsetReceiverIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-    private boolean headsetReceiverRegistered = false;
+  private AudioManager audioManager;
+  private final IntentFilter becomingNoisyReceiverIntentFilter =
+          new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+  private boolean becomingNoisyReceiverRegistered;
+  private final IntentFilter bluetoothConnectedIntentFilter =
+          new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
+  private boolean bluetoothConnectedRegistered = false;
+  private final IntentFilter headsetReceiverIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+  private boolean headsetReceiverRegistered = false;
     private MediaSessionCompat mediaSession;
     private ContentObserver mediaStoreObserver;
     private HandlerThread musicPlayerHandlerThread;
@@ -238,6 +245,7 @@ public class MusicService extends MediaBrowserServiceCompat
     private List<Song> originalPlayingQueue = new ArrayList<>();
     private List<Song> playingQueue = new ArrayList<>();
     private boolean pausedByTransientLossOfFocus;
+    private AudioVolumeObserver audioVolumeObserver = null;
 
     private final BroadcastReceiver becomingNoisyReceiver =
             new BroadcastReceiver() {
@@ -283,59 +291,59 @@ public class MusicService extends MediaBrowserServiceCompat
     private HandlerThread queueSaveHandlerThread;
     private boolean queuesRestored;
     private int repeatMode;
-    private int shuffleMode;
-    private SongPlayCountHelper songPlayCountHelper = new SongPlayCountHelper();
-    private final BroadcastReceiver bluetoothReceiver =
-            new BroadcastReceiver() {
-                @Override
-                public void onReceive(final Context context, final Intent intent) {
-                    String action = intent.getAction();
-                    if (action != null) {
-                        if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)
-                                && PreferenceUtil.INSTANCE.isBluetoothSpeaker()) {
-                            if (VERSION.SDK_INT >= VERSION_CODES.M) {
-                                if (getAudioManager().getDevices(AudioManager.GET_DEVICES_OUTPUTS).length > 0) {
+  private int shuffleMode;
+  private final SongPlayCountHelper songPlayCountHelper = new SongPlayCountHelper();
+  private final BroadcastReceiver bluetoothReceiver =
+          new BroadcastReceiver() {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+              String action = intent.getAction();
+              if (action != null) {
+                if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)
+                        && PreferenceUtil.INSTANCE.isBluetoothSpeaker()) {
+                  if (VERSION.SDK_INT >= VERSION_CODES.M) {
+                    if (getAudioManager().getDevices(AudioManager.GET_DEVICES_OUTPUTS).length > 0) {
                                     play();
-                                }
-                            } else {
-                                if (getAudioManager().isBluetoothA2dpOn()) {
-                                    play();
-                                }
-                            }
-                        }
                     }
-                }
-            };
-    private PhoneStateListener phoneStateListener =
-            new PhoneStateListener() {
-                @Override
-                public void onCallStateChanged(int state, String incomingNumber) {
-                    switch (state) {
-                        case TelephonyManager.CALL_STATE_IDLE:
-                            // Not in call: Play music
-                            play();
-                            break;
-                        case TelephonyManager.CALL_STATE_RINGING:
-                        case TelephonyManager.CALL_STATE_OFFHOOK:
-                            // A call is dialing, active or on hold
-                            pause();
-                            break;
-                        default:
+                  } else {
+                    if (getAudioManager().isBluetoothA2dpOn()) {
+                      play();
                     }
-                    super.onCallStateChanged(state, incomingNumber);
+                  }
                 }
-            };
-    private BroadcastReceiver headsetReceiver =
-            new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    String action = intent.getAction();
-                    if (action != null) {
-                        if (Intent.ACTION_HEADSET_PLUG.equals(action)) {
-                            int state = intent.getIntExtra("state", -1);
-                            switch (state) {
-                                case 0:
-                                    pause();
+              }
+            }
+          };
+  private final PhoneStateListener phoneStateListener =
+          new PhoneStateListener() {
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+              switch (state) {
+                case TelephonyManager.CALL_STATE_IDLE:
+                  // Not in call: Play music
+                  play();
+                  break;
+                case TelephonyManager.CALL_STATE_RINGING:
+                case TelephonyManager.CALL_STATE_OFFHOOK:
+                  // A call is dialing, active or on hold
+                  pause();
+                  break;
+                default:
+              }
+              super.onCallStateChanged(state, incomingNumber);
+            }
+          };
+  private final BroadcastReceiver headsetReceiver =
+          new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+              String action = intent.getAction();
+              if (action != null) {
+                if (Intent.ACTION_HEADSET_PLUG.equals(action)) {
+                  int state = intent.getIntExtra("state", -1);
+                  switch (state) {
+                    case 0:
+                      pause();
                                     break;
                                 case 1:
                                     play();
@@ -348,7 +356,6 @@ public class MusicService extends MediaBrowserServiceCompat
     private ThrottledSeekHandler throttledSeekHandler;
     private Handler uiThreadHandler;
     private PowerManager.WakeLock wakeLock;
-    private AudioFader fader;
 
     private static Bitmap copy(Bitmap bitmap) {
         Bitmap.Config config = bitmap.getConfig();
@@ -446,6 +453,9 @@ public class MusicService extends MediaBrowserServiceCompat
                 .registerContentObserver(
                         MediaStore.Audio.Playlists.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
 
+        audioVolumeObserver = new AudioVolumeObserver(this);
+        audioVolumeObserver.register(AudioManager.STREAM_MUSIC, this);
+
         PreferenceUtil.INSTANCE.registerOnSharedPreferenceChangedListener(this);
 
         restoreState();
@@ -489,6 +499,23 @@ public class MusicService extends MediaBrowserServiceCompat
 
     public void acquireWakeLock(long milli) {
         wakeLock.acquire(milli);
+    }
+
+    boolean pausedByZeroVolume;
+
+    @Override
+    public void onAudioVolumeChanged(int currentVolume, int maxVolume) {
+        if (PreferenceUtil.INSTANCE.isPauseOnZeroVolume()) {
+            if (isPlaying() && currentVolume < 1) {
+                pause();
+                System.out.println("Paused");
+                pausedByZeroVolume = true;
+            } else if (pausedByZeroVolume && currentVolume >= 1) {
+                System.out.println("Played");
+                play();
+                pausedByZeroVolume = false;
+            }
+        }
     }
 
     public void addSong(int position, Song song) {
@@ -558,10 +585,10 @@ public class MusicService extends MediaBrowserServiceCompat
     }
 
     public Song getNextSong() {
-        if (!isLastTrack() || getRepeatMode() == REPEAT_MODE_THIS) {
-            return getSongAt(getNextPosition(false));
-        } else {
+        if (isLastTrack() && getRepeatMode() == REPEAT_MODE_NONE) {
             return null;
+        } else {
+            return getSongAt(getNextPosition(false));
         }
     }
 
@@ -804,18 +831,46 @@ public class MusicService extends MediaBrowserServiceCompat
     @Override
     public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
 
+
         // Check origin to ensure we're not allowing any arbitrary app to browse app contents
         if (!mPackageValidator.isKnownCaller(clientPackageName, clientUid)) {
             // Request from an untrusted package: return an empty browser root
             return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT, null);
+        } else {
+            /**
+             * By default return the browsable root. Treat the EXTRA_RECENT flag as a special case
+             * and return the recent root instead.
+             */
+            boolean isRecentRequest = false;
+            if (rootHints != null) {
+                isRecentRequest = rootHints.getBoolean(EXTRA_RECENT);
+            }
+            String browserRootPath;
+            if (isRecentRequest) {
+                browserRootPath = AutoMediaIDHelper.RECENT_ROOT;
+            } else {
+                browserRootPath = AutoMediaIDHelper.MEDIA_ID_ROOT;
+            }
+            return new BrowserRoot(browserRootPath, null);
         }
-
-        return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_ROOT, null);
     }
 
     @Override
     public void onLoadChildren(@NonNull String parentId, @NonNull MediaBrowserServiceCompat.Result<List<MediaBrowserCompat.MediaItem>> result) {
-        result.sendResult(mMusicProvider.getChildren(parentId, getResources()));
+        if (parentId.equals(AutoMediaIDHelper.RECENT_ROOT)) {
+            Song song = getCurrentSong();
+            MediaBrowserCompat.MediaItem mediaItem = new MediaBrowserCompat.MediaItem(
+                    new MediaDescriptionCompat.Builder()
+                            .setMediaId(String.valueOf(song.getId()))
+                            .setTitle(song.getTitle())
+                            .setSubtitle(song.getArtistName())
+                            .setIconUri(MusicUtil.getMediaStoreAlbumCoverUri(song.getAlbumId()))
+                            .build(), FLAG_PLAYABLE
+            );
+            result.sendResult(Collections.singletonList(mediaItem));
+        } else {
+            result.sendResult(mMusicProvider.getChildren(parentId, getResources()));
+        }
     }
 
     @Override
@@ -827,6 +882,8 @@ public class MusicService extends MediaBrowserServiceCompat
                 boolean wasPlaying = isPlaying();
                 /* Switch to MultiPlayer if Crossfade duration is 0 and
                 Playback is not an instance of MultiPlayer */
+                if (playback != null)
+                  playback.setCrossFadeDuration(PreferenceUtil.INSTANCE.getCrossFadeDuration());
                 if (!(playback instanceof MultiPlayer) && PreferenceUtil.INSTANCE.getCrossFadeDuration() == 0) {
                     if (playback != null) {
                         playback.release();
@@ -927,6 +984,13 @@ public class MusicService extends MediaBrowserServiceCompat
     }
 
     @Override
+    public void onTrackEndedWithCrossfade() {
+        trackEndedByCrossfade = true;
+        acquireWakeLock(30000);
+        playerHandler.sendEmptyMessage(TRACK_ENDED);
+    }
+
+    @Override
     public void onTrackWentToNext() {
         playerHandler.sendEmptyMessage(TRACK_WENT_TO_NEXT);
     }
@@ -981,16 +1045,13 @@ public class MusicService extends MediaBrowserServiceCompat
     public void pause() {
         pausedByTransientLossOfFocus = false;
         if (playback != null && playback.isPlaying()) {
-            if (fader != null) {
-                fader.stop();
-            }
-            fader = new AudioFader(playback, PreferenceUtil.INSTANCE.getAudioFadeDuration(), false, () -> {
-                if (playback != null && playback.isPlaying()) {
+            startFadeAnimator(playback, false, () -> {
+                //Code to run when Animator Ends
+                if (playback != null) {
                     playback.pause();
-                    notifyChange(PLAY_STATE_CHANGED);
                 }
+                notifyChange(PLAY_STATE_CHANGED);
             });
-            fader.start();
         }
     }
 
@@ -1013,10 +1074,8 @@ public class MusicService extends MediaBrowserServiceCompat
                         if (MusicPlayerRemote.INSTANCE.isCasting()) {
                             return;
                         }
-                        if (fader != null) {
-                            fader.stop();
-                        }
-                        fader = new AudioFader(playback, PreferenceUtil.INSTANCE.getAudioFadeDuration(), false, () -> {
+                        startFadeAnimator(playback, true, () -> {
+                            // Code when Animator Ends
                             if (!becomingNoisyReceiverRegistered) {
                                 registerReceiver(becomingNoisyReceiver, becomingNoisyReceiverIntentFilter);
                                 becomingNoisyReceiverRegistered = true;
@@ -1031,9 +1090,9 @@ public class MusicService extends MediaBrowserServiceCompat
                             playerHandler.removeMessages(DUCK);
                             playerHandler.sendEmptyMessage(UNDUCK);
                         });
+                        //Start Playback with Animator
                         playback.start();
                         notifyChange(PLAY_STATE_CHANGED);
-                        fader.start();
                     }
                 }
             } else {
@@ -1131,7 +1190,7 @@ public class MusicService extends MediaBrowserServiceCompat
         notifyChange(QUEUE_CHANGED);
     }
 
-    public void removeSong(@NonNull Song song) {
+    public void removeSongImpl(@NonNull Song song) {
         for (int i = 0; i < playingQueue.size(); i++) {
             if (playingQueue.get(i).getId() == song.getId()) {
                 playingQueue.remove(i);
@@ -1142,6 +1201,17 @@ public class MusicService extends MediaBrowserServiceCompat
             if (originalPlayingQueue.get(i).getId() == song.getId()) {
                 originalPlayingQueue.remove(i);
             }
+        }
+    }
+
+    public void removeSong(@NonNull Song song) {
+        removeSongImpl(song);
+        notifyChange(QUEUE_CHANGED);
+    }
+
+    public void removeSongs(@NonNull List<Song> songs) {
+        for (Song song : songs) {
+            removeSongImpl(song);
         }
         notifyChange(QUEUE_CHANGED);
     }

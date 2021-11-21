@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transitionGroup="true">
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:liftOnScroll="true">
+        android:fitsSystemWindows="true">
 
         <FrameLayout
+            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways">
@@ -21,7 +22,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorSurface"
                 app:navigationIcon="@drawable/ic_search"
                 app:popupTheme="?attr/toolbarPopupTheme"
                 app:title="@null"
@@ -35,24 +35,18 @@
                     android:textAppearance="@style/TextViewHeadline6"
                     android:textStyle="bold" />
             </androidx.appcompat.widget.Toolbar>
-
-            <ViewStub
-                android:id="@+id/cab_stub"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height" />
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/item_list" />
-
+        tools:listitem="@layout/item_list"
+        android:transitionGroup="true"/>
 
     <LinearLayout
         android:id="@android:id/empty"
@@ -82,4 +76,14 @@
             android:textColor="?android:attr/textColorSecondary"
             tools:visibility="visible" />
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/shuffle_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:srcCompat="@drawable/ic_shuffle"
+        android:contentDescription="@string/shuffle"
+        style="@style/Widget.Material3.FloatingActionButton.Primary"
+        android:layout_marginHorizontal="16dp"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

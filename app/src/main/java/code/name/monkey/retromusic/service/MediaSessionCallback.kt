@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.service
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.media.session.MediaSessionCompat
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -29,9 +30,8 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.*
 import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.MusicUtil
-import org.koin.core.KoinComponent
-import org.koin.core.inject
-import java.util.*
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
 /**
@@ -56,8 +56,7 @@ class MediaSessionCallback(
         println(musicId)
         val itemId = musicId?.toLong() ?: -1
         val songs: ArrayList<Song> = ArrayList()
-        val category = AutoMediaIDHelper.extractCategory(mediaId)
-        when (category) {
+        when (val category = AutoMediaIDHelper.extractCategory(mediaId)) {
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM -> {
                 val album: Album = albumRepository.album(itemId)
                 songs.addAll(album.songs)
@@ -111,6 +110,43 @@ class MediaSessionCallback(
         musicService.play()
     }
 
+    override fun onPlayFromSearch(query: String?, extras: Bundle?) {
+        val songs = ArrayList<Song>()
+        if (query.isNullOrEmpty()) {
+            // The user provided generic string e.g. 'Play music'
+            // Build appropriate playlist queue
+            songs.addAll(songRepository.songs())
+        } else {
+            // Build a queue based on songs that match "query" or "extras" param
+            val mediaFocus: String? = extras?.getString(MediaStore.EXTRA_MEDIA_FOCUS)
+            if (mediaFocus == MediaStore.Audio.Artists.ENTRY_CONTENT_TYPE) {
+                val artistQuery = extras.getString(MediaStore.EXTRA_MEDIA_ARTIST)
+                if (artistQuery != null) {
+                    artistRepository.artists(artistQuery).forEach {
+                        songs.addAll(it.songs)
+                    }
+                }
+            } else if (mediaFocus == MediaStore.Audio.Albums.ENTRY_CONTENT_TYPE) {
+                val albumQuery = extras.getString(MediaStore.EXTRA_MEDIA_ALBUM)
+                if (albumQuery != null) {
+                    albumRepository.albums(albumQuery).forEach {
+                        songs.addAll(it.songs)
+                    }
+                }
+            }
+        }
+
+        if (songs.isEmpty()) {
+            // No focus found, search by query for song title
+            query?.also {
+                songs.addAll(songRepository.songs(it))
+            }
+        }
+
+        musicService.openQueue(songs, 0, true)
+
+        musicService.play()
+    }
 
     override fun onPlay() {
         super.onPlay()

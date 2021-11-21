@@ -24,6 +24,7 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.NEW_BLUR_AMOUNT
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentCardBlurPlayerBinding
+import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
@@ -33,6 +34,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
@@ -92,6 +94,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         _binding = FragmentCardBlurPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        binding.cardContainer?.drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {
@@ -133,8 +136,6 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     }
 
     private fun updateBlur() {
-        val blurAmount = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            .getInt(NEW_BLUR_AMOUNT, 25)
         binding.colorBackground.clearColorFilter()
         GlideApp.with(requireActivity()).asBitmapPalette()
             .songCoverOptions(MusicPlayerRemote.currentSong)

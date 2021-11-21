@@ -57,4 +57,9 @@ object VersionUtils {
     fun hasQ(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     }
+
+    @JvmStatic
+    fun hasS(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+    }
 }

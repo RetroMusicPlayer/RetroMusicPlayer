@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.fragments.search.Filter
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Genre
@@ -28,11 +29,11 @@ class RealSearchRepository(
     private val roomRepository: RoomRepository,
     private val genreRepository: GenreRepository,
 ) {
-    fun searchAll(context: Context, query: String?, filters: List<Boolean>): MutableList<Any> {
+    fun searchAll(context: Context, query: String?, filter: Filter): MutableList<Any> {
         val results = mutableListOf<Any>()
-        query?.let { searchString ->
-            val isAll = !filters.contains(true)
-            val songs: List<Song> = if (filters[0] || isAll) {
+        if (query.isNullOrEmpty()) return results
+        query.let { searchString ->
+            val songs: List<Song> = if (filter == Filter.SONGS || filter == Filter.NO_FILTER) {
                 songRepository.songs(searchString)
             } else {
                 emptyList()
@@ -42,16 +43,17 @@ class RealSearchRepository(
                 results.add(context.resources.getString(R.string.songs))
                 results.addAll(songs)
             }
-            val artists: List<Artist> = if (filters[1] || isAll) {
-                artistRepository.artists(searchString)
-            } else {
-                emptyList()
-            }
+            val artists: List<Artist> =
+                if (filter == Filter.ARTISTS || filter == Filter.NO_FILTER) {
+                    artistRepository.artists(searchString)
+                } else {
+                    emptyList()
+                }
             if (artists.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.artists))
                 results.addAll(artists)
             }
-            val albums: List<Album> = if (filters[2] || isAll) {
+            val albums: List<Album> = if (filter == Filter.ALBUMS || filter == Filter.NO_FILTER) {
                 albumRepository.albums(searchString)
             } else {
                 emptyList()
@@ -60,16 +62,17 @@ class RealSearchRepository(
                 results.add(context.resources.getString(R.string.albums))
                 results.addAll(albums)
             }
-            val albumArtists: List<Artist> = if (filters[3] || isAll) {
-                artistRepository.albumArtists(searchString)
-            } else {
-                emptyList()
-            }
+            val albumArtists: List<Artist> =
+                if (filter == Filter.ALBUM_ARTISTS || filter == Filter.NO_FILTER) {
+                    artistRepository.albumArtists(searchString)
+                } else {
+                    emptyList()
+                }
             if (albumArtists.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.album_artist))
                 results.addAll(albumArtists)
             }
-            val genres: List<Genre> = if (filters[4] || isAll) {
+            val genres: List<Genre> = if (filter == Filter.GENRES || filter == Filter.NO_FILTER) {
                 genreRepository.genres().filter { genre ->
                     genre.name.lowercase()
                         .contains(searchString.lowercase())
@@ -82,13 +85,13 @@ class RealSearchRepository(
                 results.addAll(genres)
             }
             /* val playlist = roomRepository.playlists().filter { playlist ->
-                 playlist.playlistName.toLowerCase(Locale.getDefault())
-                     .contains(searchString.toLowerCase(Locale.getDefault()))
-             }
-             if (playlist.isNotEmpty()) {
-                 results.add(context.getString(R.string.playlists))
-                 results.addAll(playlist)
-             }*/
+                     playlist.playlistName.toLowerCase(Locale.getDefault())
+                         .contains(searchString.toLowerCase(Locale.getDefault()))
+                 }
+                 if (playlist.isNotEmpty()) {
+                     results.add(context.getString(R.string.playlists))
+                     results.addAll(playlist)
+                 }*/
         }
         return results
     }

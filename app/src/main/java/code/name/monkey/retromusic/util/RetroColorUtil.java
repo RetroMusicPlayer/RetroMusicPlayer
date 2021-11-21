@@ -22,14 +22,20 @@ import android.graphics.Color;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.palette.graphics.Palette;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.VersionUtils;
+import code.name.monkey.retromusic.R;
 
 public class RetroColorUtil {
   public static int desaturateColor(int color, float ratio) {
@@ -203,6 +209,25 @@ public class RetroColorUtil {
       color = ColorUtil.INSTANCE.lightenColor(backgroundColor);
     }
     return color;
+  }
+
+  @ColorInt
+  public static int shiftBackgroundColor(@ColorInt int backgroundColor) {
+    int color = backgroundColor;
+    if (ColorUtil.INSTANCE.isColorLight(color)) {
+      color = ColorUtil.INSTANCE.shiftColor(color, 0.5F);
+    } else {
+      color = ColorUtil.INSTANCE.shiftColor(color, 1.5F);
+    }
+    return color;
+  }
+
+  public static int getMD3AccentColor(@NotNull Context context) {
+    if (VersionUtils.hasS()) {
+      return ContextCompat.getColor(context, R.color.m3_accent_color);
+    } else {
+      return ThemeStore.Companion.accentColor(context);
+    }
   }
 
   private static class SwatchComparator implements Comparator<Palette.Swatch> {

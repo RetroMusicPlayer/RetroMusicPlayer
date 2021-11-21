@@ -78,6 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
+        style="@style/BottomSheetStyle"
         android:theme="@style/TopCornerCardView"
         app:behavior_hideable="false"
         app:cardElevation="24dp"
@@ -87,7 +88,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorSurface"
             android:clickable="false"
             android:orientation="vertical">
 
@@ -95,9 +95,9 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:ellipsize="marquee"
                 android:focusable="true"
-                android:clickable="true"
                 android:freezesText="true"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:paddingHorizontal="16dp"
@@ -113,10 +113,10 @@
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
                 android:clickable="true"
+                android:ellipsize="end"
                 android:focusable="true"
+                android:maxLines="1"
                 android:paddingHorizontal="16dp"
                 android:textAppearance="@style/TextViewBody1"
                 android:textColor="?android:attr/textColorSecondary"
@@ -140,8 +140,7 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:overScrollMode="never"
-                tools:listitem="@layout/item_list" />
+                        tools:listitem="@layout/item_list" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

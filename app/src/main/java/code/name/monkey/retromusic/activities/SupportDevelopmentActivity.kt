@@ -14,9 +14,7 @@
  */
 package code.name.monkey.retromusic.activities
 
-import android.content.Intent
 import android.graphics.Paint
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,6 +25,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,9 +40,8 @@ import code.name.monkey.retromusic.databinding.ActivityDonationBinding
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import com.anjlab.android.iab.v3.BillingProcessor
+import com.anjlab.android.iab.v3.PurchaseInfo
 import com.anjlab.android.iab.v3.SkuDetails
-import com.anjlab.android.iab.v3.TransactionDetails
-import java.lang.ref.WeakReference
 import java.util.*
 
 class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
@@ -53,11 +51,9 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     companion object {
         val TAG: String = SupportDevelopmentActivity::class.java.simpleName
         const val DONATION_PRODUCT_IDS = R.array.donation_ids
-        private const val TEZ_REQUEST_CODE = 123
     }
 
     var billingProcessor: BillingProcessor? = null
-    private var skuDetailsLoadAsyncTask: AsyncTask<*, *, *>? = null
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -75,12 +71,10 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDonationBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_donation)
+        setContentView(binding.root)
 
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
-        setLightNavigationBar(true)
 
         setupToolbar()
 
@@ -101,13 +95,35 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     }
 
     private fun loadSkuDetails() {
-        if (skuDetailsLoadAsyncTask != null) {
-            skuDetailsLoadAsyncTask!!.cancel(false)
-        }
-        skuDetailsLoadAsyncTask = SkuDetailsLoadAsyncTask(this).execute()
+        binding.progressContainer.isVisible = true
+        binding.recyclerView.isVisible = false
+        val ids =
+            resources.getStringArray(DONATION_PRODUCT_IDS)
+        billingProcessor!!.getPurchaseListingDetailsAsync(
+            ArrayList(listOf(*ids)),
+            object : BillingProcessor.ISkuDetailsResponseListener {
+                override fun onSkuDetailsResponse(skuDetails: MutableList<SkuDetails>?) {
+                    if (skuDetails == null || skuDetails.isEmpty()) {
+                        binding.progressContainer.isVisible = false
+                        return
+                    }
+
+                    binding.progressContainer.isVisible = false
+                    binding.recyclerView.apply {
+                        itemAnimator = DefaultItemAnimator()
+                        layoutManager = GridLayoutManager(this@SupportDevelopmentActivity, 2)
+                        adapter = SkuDetailsAdapter(this@SupportDevelopmentActivity, skuDetails)
+                        isVisible = true
+                    }
+                }
+
+                override fun onSkuDetailsError(error: String?) {
+                    Log.e(TAG, error.toString())
+                }
+            })
     }
 
-    override fun onProductPurchased(productId: String, details: TransactionDetails?) {
+    override fun onProductPurchased(productId: String, details: PurchaseInfo?) {
         // loadSkuDetails();
         Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show()
     }
@@ -121,65 +137,9 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         Toast.makeText(this, R.string.restored_previous_purchases, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (!billingProcessor!!.handleActivityResult(requestCode, resultCode, data)) {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-        if (requestCode == TEZ_REQUEST_CODE) {
-            // Process based on the data in response.
-            // Log.d("result", data!!.getStringExtra("Status"))
-        }
-    }
-
     override fun onDestroy() {
         billingProcessor?.release()
-        skuDetailsLoadAsyncTask?.cancel(true)
         super.onDestroy()
-    }
-}
-
-private class SkuDetailsLoadAsyncTask(supportDevelopmentActivity: SupportDevelopmentActivity) :
-    AsyncTask<Void, Void, List<SkuDetails>>() {
-
-    private val weakReference: WeakReference<SupportDevelopmentActivity> = WeakReference(
-        supportDevelopmentActivity
-    )
-
-    override fun onPreExecute() {
-        super.onPreExecute()
-        val supportDevelopmentActivity = weakReference.get() ?: return
-
-        supportDevelopmentActivity.binding.progressContainer.visibility = View.VISIBLE
-        supportDevelopmentActivity.binding.recyclerView.visibility = View.GONE
-    }
-
-    override fun doInBackground(vararg params: Void): List<SkuDetails>? {
-        val dialog = weakReference.get()
-        if (dialog != null) {
-            val ids =
-                dialog.resources.getStringArray(SupportDevelopmentActivity.DONATION_PRODUCT_IDS)
-            return dialog.billingProcessor!!.getPurchaseListingDetails(ArrayList(Arrays.asList(*ids)))
-        }
-        cancel(false)
-        return null
-    }
-
-    override fun onPostExecute(skuDetails: List<SkuDetails>?) {
-        super.onPostExecute(skuDetails)
-        val dialog = weakReference.get() ?: return
-
-        if (skuDetails == null || skuDetails.isEmpty()) {
-            dialog.binding.progressContainer.visibility = View.GONE
-            return
-        }
-
-        dialog.binding.progressContainer.visibility = View.GONE
-        dialog.binding.recyclerView.apply {
-            itemAnimator = DefaultItemAnimator()
-            layoutManager = GridLayoutManager(dialog, 2)
-            adapter = SkuDetailsAdapter(dialog, skuDetails)
-            visibility = View.VISIBLE
-        }
     }
 }
 
@@ -223,7 +183,7 @@ class SkuDetailsAdapter(
         viewHolder.title.text = skuDetails.title.replace("Music Player - MP3 Player - Retro", "")
             .trim { it <= ' ' }
         viewHolder.text.text = skuDetails.description
-        viewHolder.text.visibility = View.GONE
+        viewHolder.text.isVisible = false
         viewHolder.price.text = skuDetails.priceText
         viewHolder.image.setImageResource(getIcon(i))
 

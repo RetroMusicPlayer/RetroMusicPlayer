@@ -14,19 +14,25 @@
  */
 package code.name.monkey.retromusic.extensions
 
+import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
+import androidx.core.view.*
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
+import com.afollestad.materialdialogs.utils.MDUtil.updatePadding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -51,12 +57,13 @@ fun View.hidden() {
 fun View.showOrHide(show: Boolean) = if (show) show() else hide()
 
 fun EditText.appHandleColor(): EditText {
+    if (PreferenceUtil.materialYou) return this
     TintHelper.colorHandles(this, ThemeStore.accentColor(context))
     return this
 }
 
-fun View.translateYAnimate(value: Float) {
-    ObjectAnimator.ofFloat(this, "translationY", value)
+fun View.translateYAnimate(value: Float): Animator {
+    return ObjectAnimator.ofFloat(this, "translationY", value)
         .apply {
             duration = 300
             doOnStart {
@@ -123,3 +130,113 @@ fun ShapeableImageView.setCircleShape(boolean: Boolean) {
         shapeAppearanceModel = ShapeAppearanceModel().withCornerSize(radius)
     }
 }
+
+
+/**
+ * This will draw our view above the navigation bar instead of behind it by adding margins.
+ */
+fun View.drawAboveSystemBars(onlyPortrait: Boolean = true) {
+    if (onlyPortrait && RetroUtil.isLandscape()) return
+    // Create a snapshot of the view's margin state
+    val initialMargin = recordInitialMarginForView(this)
+    ViewCompat.setOnApplyWindowInsetsListener(
+        (this)
+    ) { _: View, windowInsets: WindowInsetsCompat ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        // Apply the insets as a margin to the view.
+        updateLayoutParams<MarginLayoutParams> {
+            leftMargin = initialMargin.left + insets.left
+            bottomMargin = initialMargin.bottom + insets.bottom
+            rightMargin = initialMargin.right + insets.right
+        }
+        windowInsets
+    }
+}
+
+/**
+ * This will draw our view above the navigation bar instead of behind it by adding padding.
+ */
+fun View.drawAboveSystemBarsWithPadding(consume: Boolean = false) {
+    val initialPadding = recordInitialPaddingForView(this)
+
+    ViewCompat.setOnApplyWindowInsetsListener(
+        (this)
+    ) { v: View, windowInsets: WindowInsetsCompat ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        v.updatePadding(
+            left = initialPadding.left + insets.left,
+            bottom = initialPadding.bottom + insets.bottom,
+            right = initialPadding.right + insets.right
+        )
+        if (consume) WindowInsetsCompat.CONSUMED else windowInsets
+    }
+    requestApplyInsetsWhenAttached()
+}
+
+fun View.requestApplyInsetsWhenAttached() {
+    if (isAttachedToWindow) {
+        // We're already attached, just request as normal
+        requestApplyInsets()
+    } else {
+        // We're not attached to the hierarchy, add a listener to
+        // request when we are
+        addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View) {
+                v.removeOnAttachStateChangeListener(this)
+                v.requestApplyInsets()
+            }
+
+            override fun onViewDetachedFromWindow(v: View) = Unit
+        })
+    }
+}
+
+fun View.drawNextToNavbar() {
+    val initialPadding = recordInitialPaddingForView(this)
+
+    ViewCompat.setOnApplyWindowInsetsListener(
+        (this)
+    ) { v: View, windowInsets: WindowInsetsCompat ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        v.updatePadding(
+            left = initialPadding.left + insets.left,
+            right = initialPadding.right + insets.right
+        )
+        windowInsets
+    }
+    requestApplyInsetsWhenAttached()
+}
+
+fun View.addBottomInsets() {
+    // Create a snapshot of the view's margin state
+    val initialMargin = recordInitialMarginForView(this)
+    ViewCompat.setOnApplyWindowInsetsListener(
+        (this)
+    ) { _: View, windowInsets: WindowInsetsCompat ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        // Apply the insets as a margin to the view.
+        updateLayoutParams<MarginLayoutParams> {
+            bottomMargin = initialMargin.bottom + insets.bottom
+        }
+        windowInsets
+    }
+}
+
+data class InitialMargin(
+    val left: Int, val top: Int,
+    val right: Int, val bottom: Int
+)
+
+fun recordInitialMarginForView(view: View) = InitialMargin(
+    view.marginLeft, view.marginTop, view.marginRight, view.marginBottom
+)
+
+
+data class InitialPadding(
+    val left: Int, val top: Int,
+    val right: Int, val bottom: Int
+)
+
+private fun recordInitialPaddingForView(view: View) = InitialPadding(
+    view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom
+)

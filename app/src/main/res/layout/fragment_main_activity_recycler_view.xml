@@ -11,9 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:transitionGroup="true"
         android:scrollbars="none"
+        android:transitionGroup="true"
         app:layout_dodgeInsetEdges="bottom"
         tools:listitem="@layout/item_list" />
 

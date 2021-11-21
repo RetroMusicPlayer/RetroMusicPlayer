@@ -5,6 +5,7 @@ import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatDelegate
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.generalThemeValue
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.theme.ThemeMode.*
 
 object ThemeManager {
@@ -12,11 +13,16 @@ object ThemeManager {
     @StyleRes
     fun getThemeResValue(
         context: Context
-    ): Int = when (context.generalThemeValue) {
-        LIGHT -> R.style.Theme_RetroMusic_Light
-        DARK -> R.style.Theme_RetroMusic_Base
-        BLACK -> R.style.Theme_RetroMusic_Black
-        AUTO -> R.style.Theme_RetroMusic_FollowSystem
+    ): Int =
+        if (PreferenceUtil.materialYou) {
+            R.style.Theme_RetroMusic_MD3
+        } else {
+            when (context.generalThemeValue) {
+                LIGHT -> R.style.Theme_RetroMusic_Light
+                DARK -> R.style.Theme_RetroMusic_Base
+                BLACK -> R.style.Theme_RetroMusic_Black
+                AUTO -> R.style.Theme_RetroMusic_FollowSystem
+        }
     }
 
     fun getNightMode(

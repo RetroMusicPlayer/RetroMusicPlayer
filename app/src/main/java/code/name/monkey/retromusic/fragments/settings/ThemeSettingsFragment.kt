@@ -30,6 +30,7 @@ import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.colorChooser
+import com.google.android.material.color.DynamicColors
 
 /**
  * @author Hemanth S (h4h13).
@@ -49,7 +50,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue(theme))
                     DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
-                requireActivity().recreate()
+                restartActivity()
                 true
             }
         }
@@ -68,7 +69,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     ThemeStore.editTheme(requireContext()).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
-                    requireActivity().recreate()
+                    restartActivity()
                 }
             }
             return@setOnPreferenceClickListener true
@@ -84,7 +85,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue("black"))
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
             }
-            requireActivity().recreate()
+            restartActivity()
             true
         }
 
@@ -96,7 +97,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 .putBoolean("desaturated_color", desaturated)
                 .apply()
             PreferenceUtil.isDesaturatedColor = desaturated
-            requireActivity().recreate()
+            restartActivity()
             true
         }
 
@@ -110,6 +111,15 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 true
             }
+        }
+
+        val materialYou: ATESwitchPreference? = findPreference(MATERIAL_YOU)
+        materialYou?.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue as Boolean) {
+                DynamicColors.applyToActivitiesIfAvailable(App.getContext())
+            }
+            restartActivity()
+            true
         }
     }
 

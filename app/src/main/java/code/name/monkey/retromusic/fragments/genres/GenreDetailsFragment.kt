@@ -33,6 +33,7 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.menu.GenreMenuHelper
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialSharedAxis
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -67,6 +68,8 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     private fun setupRecyclerView() {

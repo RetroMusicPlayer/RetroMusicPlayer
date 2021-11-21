@@ -29,6 +29,7 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
@@ -37,6 +38,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.util.PreferenceUtil.materialYou
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -84,23 +86,32 @@ fun Fragment.resolveColor(@AttrRes attr: Int, fallBackColor: Int = 0) =
 fun Dialog.resolveColor(@AttrRes attr: Int, fallBackColor: Int = 0) =
     ATHUtil.resolveColor(context, attr, fallBackColor)
 
+// Don't apply accent colors if Material You is enabled
+// Material Components will take care of applying material you colors
 fun CheckBox.addAccentColor() {
+    if (materialYou) return
     buttonTintList = ColorStateList.valueOf(ThemeStore.accentColor(context))
 }
 
 fun SeekBar.addAccentColor() {
+    if (materialYou) return
     val colorState = ColorStateList.valueOf(ThemeStore.accentColor(context))
     progressTintList = colorState
     thumbTintList = colorState
 }
 
-fun Button.accentTextColor() = setTextColor(ThemeStore.accentColor(App.getContext()))
+fun Button.accentTextColor() {
+    if (materialYou) return
+    setTextColor(ThemeStore.accentColor(App.getContext()))
+}
 
 fun MaterialButton.accentBackgroundColor() {
+    if (materialYou) return
     backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(App.getContext()))
 }
 
 fun MaterialButton.accentOutlineColor() {
+    if (materialYou) return
     val color = ThemeStore.accentColor(context)
     val colorStateList = ColorStateList.valueOf(color)
     iconTint = colorStateList
@@ -116,6 +127,7 @@ fun SeekBar.applyColor(@ColorInt color: Int) {
 }
 
 fun ExtendedFloatingActionButton.accentColor() {
+    if (materialYou) return
     val color = ThemeStore.accentColor(context)
     val textColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color))
     val colorStateList = ColorStateList.valueOf(color)
@@ -126,12 +138,11 @@ fun ExtendedFloatingActionButton.accentColor() {
 }
 
 fun FloatingActionButton.accentColor() {
+    if (materialYou) return
     val color = ThemeStore.accentColor(context)
     val textColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color))
-    val colorStateList = ColorStateList.valueOf(color)
-    val textColorStateList = ColorStateList.valueOf(textColor)
-    backgroundTintList = colorStateList
-    imageTintList = textColorStateList
+    backgroundTintList = ColorStateList.valueOf(color)
+    imageTintList = ColorStateList.valueOf(textColor)
 }
 
 fun MaterialButton.applyColor(color: Int) {
@@ -147,15 +158,21 @@ fun MaterialButton.applyColor(color: Int) {
     iconTint = textColorColorStateList
 }
 
-fun MaterialButton.accentColor() = applyColor(ThemeStore.accentColor(context))
+fun MaterialButton.accentColor() {
+    if (materialYou) return
+    applyColor(ThemeStore.accentColor(context))
+}
 
 fun MaterialButton.applyOutlineColor(color: Int) {
-    val textColorColorStateList = ColorStateList.valueOf(color)
-    setTextColor(textColorColorStateList)
-    iconTint = textColorColorStateList
+    val colorStateList = ColorStateList.valueOf(color)
+    iconTint = colorStateList
+    strokeColor = colorStateList
+    setTextColor(colorStateList)
+    rippleColor = colorStateList
 }
 
 fun TextInputLayout.accentColor() {
+    if (materialYou) return
     val accentColor = ThemeStore.accentColor(context)
     val colorState = ColorStateList.valueOf(accentColor)
     boxStrokeColor = accentColor
@@ -164,6 +181,7 @@ fun TextInputLayout.accentColor() {
 }
 
 fun CircularProgressIndicator.accentColor() {
+    if (materialYou) return
     val color = ThemeStore.accentColor(context)
     setIndicatorColor(color)
     trackColor = ColorUtil.withAlpha(color, 0.2f)
@@ -175,6 +193,21 @@ fun CircularProgressIndicator.applyColor(color: Int) {
 }
 
 fun AppCompatImageView.accentColor(): Int = ThemeStore.accentColor(context)
+
+fun TextInputLayout.setTint(background: Boolean = true) {
+    if (materialYou) return
+    val accentColor = ThemeStore.accentColor(context)
+    val colorState = ColorStateList.valueOf(accentColor)
+
+    if (background) {
+        backgroundTintList = colorState
+        defaultHintTextColor = colorState
+    } else {
+        boxStrokeColor = accentColor
+        defaultHintTextColor = colorState
+        isHintAnimationEnabled = true
+    }
+}
 
 @CheckResult
 fun Drawable.tint(@ColorInt color: Int): Drawable {
@@ -191,3 +224,15 @@ fun Drawable.tint(context: Context, @ColorRes color: Int): Drawable =
 fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
 }
+
+@ColorInt
+fun Context.darkAccentColor(): Int {
+    return ColorUtils.blendARGB(
+        accentColor(),
+        surfaceColor(),
+        if (surfaceColor().isColorLight) 0.96f else 0.975f
+    )
+}
+
+inline val @receiver:ColorInt Int.isColorLight
+    get() = ColorUtil.isColorLight(this)

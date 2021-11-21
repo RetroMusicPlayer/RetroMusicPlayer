@@ -19,8 +19,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealSongRepository
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.util.*
 
 object SearchQueryHelper : KoinComponent {

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -87,89 +88,43 @@
                 android:id="@+id/searchFilterGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:singleLine="true">
+                app:singleLine="true"
+                app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_audio"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/SearchChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/songs"
-                    android:textSize="16sp"
-                    app:checkedIconEnabled="false"
-                    app:chipEndPadding="10dp"
-                    app:chipIcon="@drawable/ic_audiotrack"
-                    app:chipIconEnabled="true"
-                    app:chipMinHeight="40dp"
-                    app:chipStartPadding="10dp"
-                    app:iconEndPadding="5dp" />
-
+                    android:text="@string/songs" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_artists"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/SearchChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/artists"
-                    android:textSize="16sp"
-                    app:checkedIconEnabled="false"
-                    app:chipEndPadding="10dp"
-                    app:chipIcon="@drawable/ic_artist"
-                    app:chipIconEnabled="true"
-                    app:chipMinHeight="40dp"
-                    app:chipStartPadding="10dp"
-                    app:iconEndPadding="5dp" />
+                    android:text="@string/artists" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_albums"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/SearchChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/albums"
-                    android:textSize="16sp"
-                    app:checkedIconEnabled="false"
-                    app:chipEndPadding="10dp"
-                    app:chipIcon="@drawable/ic_album"
-                    app:chipIconEnabled="true"
-                    app:chipMinHeight="40dp"
-                    app:chipStartPadding="10dp"
-                    app:iconEndPadding="5dp" />
+                    android:text="@string/albums" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_album_artists"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/SearchChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/album_artist"
-                    android:textSize="16sp"
-                    app:checkedIconEnabled="false"
-                    app:chipEndPadding="10dp"
-                    app:chipIcon="@drawable/ic_album_artist"
-                    app:chipIconEnabled="true"
-                    app:chipMinHeight="40dp"
-                    app:chipStartPadding="10dp"
-                    app:iconEndPadding="5dp" />
-
+                    android:text="@string/album_artist" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_genres"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/SearchChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/genres"
-                    android:textSize="16sp"
-                    app:checkedIconEnabled="false"
-                    app:chipEndPadding="10dp"
-                    app:chipIcon="@drawable/ic_guitar"
-                    app:chipIconEnabled="true"
-                    app:chipMinHeight="40dp"
-                    app:chipStartPadding="10dp"
-                    app:iconEndPadding="5dp" />
+                    android:text="@string/genres" />
             </com.google.android.material.chip.ChipGroup>
 
         </HorizontalScrollView>
@@ -180,8 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:scrollbarStyle="outsideOverlay"
+                android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
     </LinearLayout>

@@ -20,7 +20,7 @@
             android:paddingEnd="?attr/listPreferredItemPaddingEnd"
             android:paddingBottom="?attr/listPreferredItemPaddingEnd"
             android:text="@string/social"
-            android:textAppearance="@style/TextViewOverline"
+            android:textAppearance="@style/TextViewNormal"
             android:textColor="?colorAccent"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +38,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sb3"
             app:listItemIcon="@drawable/ic_baseline"
-            app:listItemTitle="@string/website"
-            app:listItemSummary="@string/website_summary"/>
+            app:listItemSummary="@string/website_summary"
+            app:listItemTitle="@string/website" />
 
         <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/pinterestLink"

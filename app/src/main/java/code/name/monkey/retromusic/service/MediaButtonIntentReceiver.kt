@@ -63,14 +63,13 @@ class MediaButtonIntentReceiver : BroadcastReceiver() {
                 when (msg.what) {
                     MSG_HEADSET_DOUBLE_CLICK_TIMEOUT -> {
                         val clickCount = msg.arg1
-                        val command: String?
 
                         if (DEBUG) Log.v(TAG, "Handling headset click, count = $clickCount")
-                        when (clickCount) {
-                            1 -> command = ACTION_TOGGLE_PAUSE
-                            2 -> command = ACTION_SKIP
-                            3 -> command = ACTION_REWIND
-                            else -> command = null
+                        val command = when (clickCount) {
+                            1 -> ACTION_TOGGLE_PAUSE
+                            2 -> ACTION_SKIP
+                            3 -> ACTION_REWIND
+                            else -> null
                         }
 
                         if (command != null) {

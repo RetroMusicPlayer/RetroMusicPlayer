@@ -17,16 +17,13 @@ package code.name.monkey.retromusic.views
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.NavigationViewUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RippleUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BottomNavigationBarTinted @JvmOverloads constructor(
@@ -38,33 +35,26 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
     init {
         labelVisibilityMode = PreferenceUtil.tabTitleMode
 
-        val iconColor = ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
-        val accentColor = ThemeStore.accentColor(context)
-        NavigationViewUtil.setItemIconColors(
-            this,
-            ColorUtil.withAlpha(iconColor, 0.5f),
-            accentColor
-        )
-        NavigationViewUtil.setItemTextColors(
-            this,
-            ColorUtil.withAlpha(iconColor, 0.5f),
-            accentColor
-        )
-        itemBackground = RippleDrawable(
-            RippleUtils.convertToRippleDrawableColor(
-                ColorStateList.valueOf(
-                    ThemeStore.accentColor(context).addAlpha()
-                )
-            ),
-            ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background),
-            ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background_mask)
-        )
-        setOnApplyWindowInsetsListener(null)
-        //itemRippleColor = ColorStateList.valueOf(accentColor)
-        background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.colorSurface))
+        if (!PreferenceUtil.materialYou) {
+            val iconColor = ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
+            val accentColor = ThemeStore.accentColor(context)
+            NavigationViewUtil.setItemIconColors(
+                this,
+                ColorUtil.withAlpha(iconColor, 0.5f),
+                accentColor
+            )
+            NavigationViewUtil.setItemTextColors(
+                this,
+                ColorUtil.withAlpha(iconColor, 0.5f),
+                accentColor
+            )
+            itemRippleColor = ColorStateList.valueOf(accentColor.addAlpha(0.08F))
+            background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.bottomSheetTint))
+            itemActiveIndicatorColor = ColorStateList.valueOf(accentColor.addAlpha(0.12F))
+        }
     }
 }
 
-fun Int.addAlpha(): Int {
-    return ColorUtil.withAlpha(this, 0.12f)
+fun Int.addAlpha(alpha: Float): Int {
+    return ColorUtil.withAlpha(this, alpha)
 }

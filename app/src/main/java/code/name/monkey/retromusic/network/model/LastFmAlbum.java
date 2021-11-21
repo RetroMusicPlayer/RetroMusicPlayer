@@ -112,7 +112,8 @@ public class LastFmAlbum {
 
     public class Tags {
 
-      @Expose private List<Tag> tag = null;
+      @Expose
+      private final List<Tag> tag = null;
 
       public List<Tag> getTag() {
         return tag;

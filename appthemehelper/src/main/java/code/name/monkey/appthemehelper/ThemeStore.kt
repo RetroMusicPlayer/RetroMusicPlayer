@@ -6,9 +6,11 @@ import android.graphics.Color
 import androidx.annotation.*
 import androidx.annotation.IntRange
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ATHUtil.isWindowBackgroundDark
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.VersionUtils
 
 
 /**
@@ -204,6 +206,10 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         @CheckResult
         @ColorInt
         fun accentColor(context: Context): Int {
+            // Set MD3 accent if MD3 is enabled or in-app accent otherwise
+            if (isMD3Enabled(context) && VersionUtils.hasS()) {
+                return ContextCompat.getColor(context, R.color.m3_accent_color)
+            }
             val desaturatedColor = prefs(context).getBoolean("desaturated_color", false)
             val color = prefs(context).getInt(
                 ThemeStorePrefKeys.KEY_ACCENT_COLOR,
@@ -298,6 +304,10 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
                 return false
             }
             return true
+        }
+
+        private fun isMD3Enabled(context: Context): Boolean {
+            return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(ThemeStorePrefKeys.KEY_MATERIAL_YOU, false)
         }
     }
 }

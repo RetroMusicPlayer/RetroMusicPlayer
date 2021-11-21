@@ -36,7 +36,7 @@ public class BlacklistStore extends SQLiteOpenHelper {
   public static final String DATABASE_NAME = "blacklist.db";
   private static final int VERSION = 2;
   private static BlacklistStore sInstance = null;
-  private Context context;
+  private final Context context;
 
   public BlacklistStore(final Context context) {
     super(context, DATABASE_NAME, null, VERSION);

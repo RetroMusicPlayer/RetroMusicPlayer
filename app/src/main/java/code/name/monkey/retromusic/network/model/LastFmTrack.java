@@ -84,7 +84,8 @@ public class LastFmTrack {
     }
 
     public static class Toptags {
-      @Expose private List<Tag> tag = null;
+      @Expose
+      private final List<Tag> tag = null;
 
       public List<Tag> getTag() {
         return tag;

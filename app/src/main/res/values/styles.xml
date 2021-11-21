@@ -23,6 +23,14 @@
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
+    <style name="Theme.RetroMusic.MD3" parent="@style/Theme.Material3.DayNight.NoActionBar">
+        <item name="roundSelector">@drawable/round_selector</item>
+        <item name="rectSelector">@drawable/rect_selector</item>
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+        <item name="bottomSheetTint">?attr/colorSurface</item>
+    </style>
+
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />
 
     <style name="Theme.RetroMusic.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title" />
@@ -41,16 +49,15 @@
         <item name="android:thumbOffset">0dp</item>
     </style>
 
-    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
+    <style name="Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="popupTheme">?toolbarPopupTheme</item>
         <item name="android:transitionName" tools:ignore="NewApi">toolbar</item>
         <item name="layout_collapseMode">pin</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="contentInsetStart">0dp</item>
         <item name="titleMarginStart">16dp</item>
-
     </style>
 
 
@@ -130,12 +137,11 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="MaterialPopupMenuStyle" parent="Widget.MaterialComponents.PopupMenu">
+    <style name="MaterialPopupMenuStyle" parent="Widget.Material3.PopupMenu">
         <item name="android:popupBackground">@drawable/popup_background</item>
     </style>
 
-    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="android:dialogCornerRadius" tools:targetApi="p">12dp</item>
+    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="materialAlertDialogBodyTextStyle">
             @style/AppTextAppearance.MaterialAlertDialog.Body
         </item>
@@ -159,17 +165,17 @@
         <item name="android:padding">0dp</item>
     </style>
 
-    <style name="AppTextAppearance.MaterialAlertDialog.Body" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+    <style name="AppTextAppearance.MaterialAlertDialog.Body" parent="MaterialAlertDialog.Material3.Body.Text">
         <item name="android:textAppearance">@style/TextViewBody1</item>
         <item name="android:paddingTop">16dp</item>
     </style>
 
-    <style name="AppTextAppearance.MaterialAlertDialog.Title" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+    <style name="AppTextAppearance.MaterialAlertDialog.Title" parent="MaterialAlertDialog.Material3.Title.Text">
         <item name="android:textAppearance">@style/TextViewHeadline6</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
+    <style name="MaterialButtonTheme" parent="Widget.Material3.Button">
         <item name="cornerRadius">6dp</item>
         <item name="iconGravity">textStart</item>
         <item name="iconTint">?attr/colorControlNormal</item>
@@ -181,9 +187,9 @@
     </style>
 
 
-    <style name="Widget.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
-        <item name="gestureInsetBottomIgnored">true</item>
-        <item name="enableEdgeToEdge">true</item>
+    <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet">
+        <item name="android:maxWidth">@empty</item>
+        <item name="android:backgroundTint">?attr/bottomSheetTint</item>
     </style>
 
     <style name="MaterialCardViewStroke">
@@ -202,6 +208,16 @@
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">5%</item>
+    </style>
+
+    <style name="SearchChipStyle" parent="Widget.Material3.Chip.Filter">
+        <item name="android:checked">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="checkedIconEnabled">true</item>
+        <item name="chipEndPadding">10dp</item>
+        <item name="chipIconEnabled">true</item>
+        <item name="chipMinHeight">40dp</item>
+        <item name="chipStartPadding">10dp</item>
     </style>
     <!--Bottom Sheet Dialog Style-->
     <style name="BottomSheetDialogStyle" parent="Theme.Design.BottomSheetDialog">

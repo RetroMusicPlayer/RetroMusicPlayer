@@ -66,15 +66,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                android:overScrollMode="never"
-                tools:itemCount="10"
+                        tools:itemCount="10"
                 tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:listitem="@layout/item_album_card"
                 tools:spanCount="3" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="112dp" />
+                android:layout_height="@dimen/mini_player_height_expanded" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

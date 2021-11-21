@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="@dimen/m3_card_corner_radius"
         tools:ignore="MissingPrefix">
 
         <androidx.constraintlayout.widget.ConstraintLayout

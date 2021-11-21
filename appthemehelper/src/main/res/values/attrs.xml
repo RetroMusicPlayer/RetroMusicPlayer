@@ -16,6 +16,10 @@
         <attr name="ateKey_pref_color" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="ATESeekBarPreference">
+        <attr name="ateKey_pref_unit" format="string" />
+    </declare-styleable>
+
     <declare-styleable name="ATEDialogPreference">
         <attr name="ateKey_pref_dialog" format="string" />
     </declare-styleable>

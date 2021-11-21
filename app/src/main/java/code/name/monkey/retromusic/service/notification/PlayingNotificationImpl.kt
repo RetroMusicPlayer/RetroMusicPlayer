@@ -43,7 +43,7 @@ import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
+import org.koin.core.component.KoinComponent
 
 class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
     private var target: Target<BitmapPaletteWrapper>? = null

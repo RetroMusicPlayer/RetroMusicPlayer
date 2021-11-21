@@ -45,6 +45,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             R.id.otherSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_otherSettingsFragment)
             R.id.aboutSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_aboutActivity)
             R.id.nowPlayingSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_nowPlayingSettingsFragment)
+            R.id.backup_restore_settings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_backupFragment)
         }
     }
 
@@ -68,6 +69,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         binding.notificationSettings.setOnClickListener(this)
         binding.otherSettings.setOnClickListener(this)
         binding.aboutSettings.setOnClickListener(this)
+        binding.backupRestoreSettings.setOnClickListener(this)
 
         binding.buyProContainer.apply {
             if (App.isProVersion()) hide() else show()

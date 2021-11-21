@@ -86,7 +86,7 @@ abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>
         } else {
             saveGridSize(gridSize)
         }
-        recyclerView().isVisible = false
+        recyclerView.isVisible = false
         invalidateLayoutManager()
         // only recreate the adapter and layout manager if the layout currentLayoutRes has changed
         if (oldLayoutRes != itemLayoutRes()) {
@@ -95,10 +95,10 @@ abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>
             setGridSize(gridSize)
         }
         val transition = MaterialFade().apply {
-            addTarget(recyclerView())
+            addTarget(recyclerView)
         }
-        TransitionManager.beginDelayedTransition(getContainer(), transition)
-        recyclerView().isVisible = true
+        TransitionManager.beginDelayedTransition(container, transition)
+        recyclerView.isVisible = true
     }
 
     protected abstract fun setGridSize(gridSize: Int)

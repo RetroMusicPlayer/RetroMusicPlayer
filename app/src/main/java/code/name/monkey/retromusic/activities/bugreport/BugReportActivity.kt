@@ -30,7 +30,6 @@ import androidx.annotation.StringDef
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -74,12 +73,9 @@ open class BugReportActivity : AbsThemeActivity() {
     private var deviceInfo: DeviceInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         binding = ActivityBugReportBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
 
         initViews()
@@ -92,8 +88,6 @@ open class BugReportActivity : AbsThemeActivity() {
 
     private fun initViews() {
         val accentColor = ThemeStore.accentColor(this)
-        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        binding.toolbar.setBackgroundColor(primaryColor)
         setSupportActionBar(binding.toolbar)
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

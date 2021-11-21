@@ -40,7 +40,7 @@ public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapte
     implements SwipeAndDragHelper.ActionCompletionContract {
 
   private List<CategoryInfo> categoryInfos;
-  private ItemTouchHelper touchHelper;
+  private final ItemTouchHelper touchHelper;
 
   public CategoryInfoAdapter() {
     SwipeAndDragHelper swipeAndDragHelper = new SwipeAndDragHelper(this);
@@ -128,15 +128,15 @@ public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapte
   }
 
   static class ViewHolder extends RecyclerView.ViewHolder {
-    private MaterialCheckBox checkBox;
-    private View dragView;
-    private TextView title;
+    private final MaterialCheckBox checkBox;
+    private final View dragView;
+    private final TextView title;
 
     ViewHolder(View view) {
       super(view);
       checkBox = view.findViewById(R.id.checkbox);
       checkBox.setButtonTintList(
-          ColorStateList.valueOf(ThemeStore.Companion.accentColor(checkBox.getContext())));
+              ColorStateList.valueOf(ThemeStore.Companion.accentColor(checkBox.getContext())));
       title = view.findViewById(R.id.title);
       dragView = view.findViewById(R.id.drag_view);
     }

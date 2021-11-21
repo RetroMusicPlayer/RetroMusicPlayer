@@ -16,15 +16,14 @@ package code.name.monkey.retromusic.fragments.player.color
 
 import android.animation.ValueAnimator
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.animation.doOnEnd
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentColorPlayerBinding
+import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -61,14 +60,11 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
             _binding?.root?.setBackgroundColor(color.backgroundColor)
         }
         animator.start()
-        serviceActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
-        Handler().post {
-            ToolbarContentTintHelper.colorizeToolbar(
-                binding.playerToolbar,
-                color.secondaryTextColor,
-                requireActivity()
-            )
-        }
+        ToolbarContentTintHelper.colorizeToolbar(
+            binding.playerToolbar,
+            color.secondaryTextColor,
+            requireActivity()
+        )
     }
 
     override fun onFavoriteToggled() {
@@ -116,6 +112,7 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
         val playerAlbumCoverFragment =
             childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
+        playerToolbar().drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {

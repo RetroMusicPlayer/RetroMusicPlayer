@@ -42,7 +42,7 @@ import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.util.*
 
 class ArtistAdapter(
-    val activity: FragmentActivity,
+    override val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
     val ICabHolder: ICabHolder?,
@@ -85,12 +85,12 @@ class ArtistAdapter(
         holder.itemView.isActivated = isChecked
         holder.title?.text = artist.name
         holder.text?.hide()
-        holder.image?.let {
-            if (PreferenceUtil.albumArtistsOnly) {
-                ViewCompat.setTransitionName(it, artist.name)
-            } else {
-                ViewCompat.setTransitionName(it, artist.id.toString())
-            }
+        val transitionName =
+            if (PreferenceUtil.albumArtistsOnly) artist.name else artist.id.toString()
+        if (holder.imageContainer != null) {
+            ViewCompat.setTransitionName(holder.imageContainer!!, transitionName)
+        } else {
+            ViewCompat.setTransitionName(holder.image!!, transitionName)
         }
         loadArtistImage(artist, holder)
     }
@@ -169,9 +169,9 @@ class ArtistAdapter(
                 val artist = dataSet[layoutPosition]
                 image?.let {
                     if (PreferenceUtil.albumArtistsOnly && IAlbumArtistClickListener != null) {
-                        IAlbumArtistClickListener.onAlbumArtist(artist.name, it)
+                        IAlbumArtistClickListener.onAlbumArtist(artist.name, imageContainer ?: it)
                     } else {
-                        IArtistClickListener.onArtist(artist.id, it)
+                        IArtistClickListener.onArtist(artist.id, imageContainer ?: it)
                     }
                 }
             }

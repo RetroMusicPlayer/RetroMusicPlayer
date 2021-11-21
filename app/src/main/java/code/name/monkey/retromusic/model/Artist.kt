@@ -30,9 +30,6 @@ data class Artist(
     }
 
     var name: String = ""
-        set(value) {
-            field = value
-        }
         get() {
             val name = if (isAlbumArtist) getAlbumArtistName()
             else getArtistName()

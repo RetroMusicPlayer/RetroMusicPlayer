@@ -25,12 +25,13 @@ import android.os.IBinder
 import android.provider.DocumentsContract
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.io.File
 import java.util.*
 
@@ -319,7 +320,7 @@ object MusicPlayerRemote : KoinComponent {
             }
             Toast.makeText(
                 musicService,
-                musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue),
+                musicService!!.resources.getString(R.string.added_title_to_playing_queue),
                 Toast.LENGTH_SHORT
             ).show()
             return true
@@ -335,8 +336,8 @@ object MusicPlayerRemote : KoinComponent {
                 openQueue(songs, 0, false)
             }
             val toast =
-                if (songs.size == 1) musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
-                    code.name.monkey.retromusic.R.string.added_x_titles_to_playing_queue,
+                if (songs.size == 1) musicService!!.resources.getString(R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
+                    R.string.added_x_titles_to_playing_queue,
                     songs.size
                 )
             Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
@@ -356,7 +357,7 @@ object MusicPlayerRemote : KoinComponent {
             }
             Toast.makeText(
                 musicService,
-                musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue),
+                musicService!!.resources.getString(R.string.added_title_to_playing_queue),
                 Toast.LENGTH_SHORT
             ).show()
             return true
@@ -372,8 +373,8 @@ object MusicPlayerRemote : KoinComponent {
                 openQueue(songs, 0, false)
             }
             val toast =
-                if (songs.size == 1) musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
-                    code.name.monkey.retromusic.R.string.added_x_titles_to_playing_queue,
+                if (songs.size == 1) musicService!!.resources.getString(R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
+                    R.string.added_x_titles_to_playing_queue,
                     songs.size
                 )
             Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
@@ -386,6 +387,15 @@ object MusicPlayerRemote : KoinComponent {
     fun removeFromQueue(song: Song): Boolean {
         if (musicService != null) {
             musicService!!.removeSong(song)
+            return true
+        }
+        return false
+    }
+
+    @JvmStatic
+    fun removeFromQueue(songs: List<Song>): Boolean {
+        if (musicService != null) {
+            musicService!!.removeSongs(songs)
             return true
         }
         return false

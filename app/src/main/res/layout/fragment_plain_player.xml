@@ -25,18 +25,19 @@
         android:id="@+id/titleContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:clickable="false"
         app:layout_constraintTop_toBottomOf="@id/statusBarContainer">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:ellipsize="marquee"
             android:focusable="true"
             android:freezesText="true"
@@ -47,22 +48,21 @@
             android:textAppearance="@style/TextViewHeadline6"
             android:textStyle="bold"
             tools:ignore="MissingPrefix"
-            android:clickable="true"
             tools:text="Title" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:ellipsize="end"
+            android:focusable="true"
             android:maxLines="1"
             android:paddingTop="8dp"
-            android:clickable="true"
-            android:focusable="true"
             tools:text="Text" />
     </LinearLayout>
 
-     <androidx.fragment.app.FragmentContainerView
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="0dp"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleContainer" />
 
-     <androidx.fragment.app.FragmentContainerView
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"
         android:name="code.name.monkey.retromusic.fragments.player.plain.PlainPlaybackControlsFragment"
         android:layout_width="0dp"

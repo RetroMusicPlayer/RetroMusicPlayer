@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.adapter.song
 
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.GlideApp
@@ -41,7 +40,7 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAct
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class PlayingQueueAdapter(
-    activity: AppCompatActivity,
+    activity: FragmentActivity,
     dataSet: MutableList<Song>,
     private var current: Int,
     itemLayoutRes: Int

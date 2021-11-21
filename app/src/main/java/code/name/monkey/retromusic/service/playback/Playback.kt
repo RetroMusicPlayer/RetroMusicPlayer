@@ -47,9 +47,13 @@ interface Playback {
 
     fun setAudioSessionId(sessionId: Int): Boolean
 
+    fun setCrossFadeDuration(duration: Int)
+
     interface PlaybackCallbacks {
         fun onTrackWentToNext()
 
         fun onTrackEnded()
+
+        fun onTrackEndedWithCrossfade()
     }
 }

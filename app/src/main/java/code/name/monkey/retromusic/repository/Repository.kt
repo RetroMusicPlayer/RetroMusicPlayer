@@ -19,6 +19,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
+import code.name.monkey.retromusic.fragments.search.Filter
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
 import code.name.monkey.retromusic.network.LastFMService
@@ -51,7 +52,7 @@ interface Repository {
     suspend fun albumArtists(): List<Artist>
     suspend fun fetchLegacyPlaylist(): List<Playlist>
     suspend fun fetchGenres(): List<Genre>
-    suspend fun search(query: String?, filters: List<Boolean>): MutableList<Any>
+    suspend fun search(query: String?, filter: Filter): MutableList<Any>
     suspend fun getPlaylistSongs(playlist: Playlist): List<Song>
     suspend fun getGenre(genreId: Long): List<Song>
     suspend fun artistInfo(name: String, lang: String?, cache: String?): Result<LastFmArtist>
@@ -163,8 +164,8 @@ class RealRepository(
 
     override suspend fun allSongs(): List<Song> = songRepository.songs()
 
-    override suspend fun search(query: String?, filters: List<Boolean>): MutableList<Any> =
-        searchRepository.searchAll(context, query, filters)
+    override suspend fun search(query: String?, filter: Filter): MutableList<Any> =
+        searchRepository.searchAll(context, query, filter)
 
     override suspend fun getPlaylistSongs(playlist: Playlist): List<Song> =
         if (playlist is AbsCustomPlaylist) {
