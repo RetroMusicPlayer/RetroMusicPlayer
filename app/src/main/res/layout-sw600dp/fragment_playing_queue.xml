@@ -42,8 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:paddingBottom="96dp"
+                android:paddingBottom="96dp"
             android:scrollbars="none"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/item_queue" />

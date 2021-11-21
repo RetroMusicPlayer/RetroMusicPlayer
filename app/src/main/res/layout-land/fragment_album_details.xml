@@ -55,7 +55,6 @@
         android:descendantFocusability="beforeDescendants"
         android:fillViewport="true"
         android:focusableInTouchMode="true"
-        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -135,8 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:scrollbarStyle="outsideOverlay"
+                android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
     </LinearLayout>

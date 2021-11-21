@@ -63,7 +63,6 @@
         android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
-        android:overScrollMode="never"
         android:transitionGroup="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
