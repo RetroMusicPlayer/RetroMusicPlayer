@@ -201,13 +201,13 @@ class AppWidgetSmall : BaseAppWidget() {
                 MainActivity.EXPAND_PANEL,
                 PreferenceUtil.isExpandPanel
             )
-        var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)
 
         // Home
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        pendingIntent = PendingIntent.getActivity(context, 0, action, 0)
+        var pendingIntent =
+            PendingIntent.getActivity(context, 0, action, PendingIntent.FLAG_IMMUTABLE)
         views.setOnClickPendingIntent(R.id.image, pendingIntent)
         views.setOnClickPendingIntent(R.id.media_titles, pendingIntent)
 

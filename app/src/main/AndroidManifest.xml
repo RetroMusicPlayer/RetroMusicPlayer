@@ -180,7 +180,7 @@
 
         <receiver
             android:name=".service.MediaButtonIntentReceiver"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
@@ -188,7 +188,7 @@
 
         <receiver
             android:name=".appwidgets.BootReceiver"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
@@ -197,7 +197,7 @@
 
         <receiver
             android:name=".appwidgets.AppWidgetBig"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_big_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -210,7 +210,7 @@
 
         <receiver
             android:name=".appwidgets.AppWidgetClassic"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_classic_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -222,7 +222,7 @@
         </receiver>
         <receiver
             android:name=".appwidgets.AppWidgetSmall"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_small_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -234,7 +234,7 @@
         </receiver>
         <receiver
             android:name=".appwidgets.AppWidgetText"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_text_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -246,7 +246,7 @@
         </receiver>
         <receiver
             android:name=".appwidgets.AppWidgetCard"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_card_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

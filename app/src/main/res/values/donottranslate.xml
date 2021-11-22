@@ -26,4 +26,6 @@
     <string name="pref_title_md3">Material You</string>
     <bool name="md3_available">false</bool>
     <bool name="md3_enabled">false</bool>
+
+    <bool name="colored_notification_available">true</bool>
 </resources>

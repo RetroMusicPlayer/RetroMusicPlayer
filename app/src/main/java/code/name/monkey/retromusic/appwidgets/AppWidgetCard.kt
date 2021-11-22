@@ -141,11 +141,11 @@ class AppWidgetCard : BaseAppWidget() {
 
         if (imageSize == 0) {
             imageSize =
-                service.resources.getDimensionPixelSize(code.name.monkey.retromusic.R.dimen.app_widget_card_image_size)
+                service.resources.getDimensionPixelSize(R.dimen.app_widget_card_image_size)
         }
         if (cardRadius == 0f) {
             cardRadius =
-                service.resources.getDimension(code.name.monkey.retromusic.R.dimen.app_widget_card_radius)
+                service.resources.getDimension(R.dimen.app_widget_card_radius)
         }
 
         // Load the album cover async and push the update on completion
@@ -225,13 +225,13 @@ class AppWidgetCard : BaseAppWidget() {
                 MainActivity.EXPAND_PANEL,
                 PreferenceUtil.isExpandPanel
             )
-        var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)
 
         // Home
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        pendingIntent = PendingIntent.getActivity(context, 0, action, 0)
+        var pendingIntent =
+            PendingIntent.getActivity(context, 0, action, PendingIntent.FLAG_IMMUTABLE)
         views.setOnClickPendingIntent(R.id.image, pendingIntent)
         views.setOnClickPendingIntent(R.id.media_titles, pendingIntent)
 
