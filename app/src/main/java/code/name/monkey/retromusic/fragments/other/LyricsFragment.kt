@@ -14,19 +14,22 @@
  */
 package code.name.monkey.retromusic.fragments.other
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.InputType
 import android.view.*
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.transition.Fade
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
-import code.name.monkey.retromusic.activities.tageditor.WriteTagsAsyncTask
+import code.name.monkey.retromusic.activities.tageditor.TagWriter
 import code.name.monkey.retromusic.databinding.FragmentLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentNormalLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentSyncedLyricsBinding
@@ -37,7 +40,7 @@ import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.lyrics.LrcView
-import code.name.monkey.retromusic.model.LoadingInfo
+import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.RetroUtil
@@ -107,6 +110,9 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         setupViews()
         setupToolbar()
         updateTitleSong()
+        if (VersionUtils.hasR()) {
+            binding.editButton.isVisible = false
+        }
     }
 
     private fun setupViews() {
@@ -187,6 +193,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
     }
 
 
+    @SuppressLint("CheckResult")
     private fun editNormalLyrics() {
         var content = ""
         val file = File(MusicPlayerRemote.currentSong.data)
@@ -205,11 +212,13 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
             ) { _, input ->
                 val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
                 fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
-                WriteTagsAsyncTask(requireActivity()).execute(
-                    LoadingInfo(
-                        listOf(song.data), fieldKeyValueMap, null
+                GlobalScope.launch {
+                    TagWriter.writeTagsToFiles(
+                        requireContext(), AudioTagInfo(
+                            listOf(song.data), fieldKeyValueMap, null
+                        )
                     )
-                )
+                }
             }
             positiveButton(res = R.string.save) {
                 (lyricsSectionsAdapter.fragments[1].first as NormalLyrics).loadNormalLyrics()
@@ -219,6 +228,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
     }
 
 
+    @SuppressLint("CheckResult")
     private fun editSyncedLyrics() {
         var lrcFile: File? = null
         if (LyricUtil.isLrcOriginalFileExist(song.data)) {

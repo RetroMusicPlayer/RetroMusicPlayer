@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.repository.SongRepository
+import code.name.monkey.retromusic.util.MusicUtil
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
 import java.util.*
@@ -110,6 +111,8 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
     }
 
     override fun getSongPaths(): List<String> = listOf(songRepository.song(id).data)
+
+    override fun getSongUris(): List<Uri> = listOf(MusicUtil.getSongFileUri(id))
 
     override fun loadImageFromFile(selectedFile: Uri?) {
     }
