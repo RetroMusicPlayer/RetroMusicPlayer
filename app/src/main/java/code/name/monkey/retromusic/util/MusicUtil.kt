@@ -1,19 +1,23 @@
 package code.name.monkey.retromusic.util
 
+import android.app.Activity
 import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.SongEntity
@@ -72,15 +76,18 @@ object MusicUtil : KoinComponent {
         return if (string2.isNullOrEmpty()) if (string1.isNullOrEmpty()) "" else string1 else "$string1  •  $string2"
     }
 
-    fun createAlbumArtFile(): File {
+    fun createAlbumArtFile(context: Context): File {
         return File(
-            createAlbumArtDir(),
+            createAlbumArtDir(context),
             System.currentTimeMillis().toString()
         )
     }
 
-    private fun createAlbumArtDir(): File {
-        val albumArtDir = File(Environment.getExternalStorageDirectory(), "/albumthumbs/")
+    private fun createAlbumArtDir(context: Context): File {
+        val albumArtDir = File(
+            if (VersionUtils.hasR()) context.cacheDir else Environment.getExternalStorageDirectory(),
+            "/albumthumbs/"
+        )
         if (!albumArtDir.exists()) {
             albumArtDir.mkdirs()
             try {
@@ -515,6 +522,14 @@ object MusicUtil : KoinComponent {
 
         } catch (ignored: SecurityException) {
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    fun deleteTracksQ(activity: Activity, songs: List<Song>) {
+        val pendingIntent = MediaStore.createDeleteRequest(activity.contentResolver, songs.map {
+            getSongFileUri(it.id)
+        })
+        activity.startIntentSenderForResult(pendingIntent.intentSender, 45, null, 0, 0, 0, null);
     }
 
     fun songByGenre(genreId: Long): Song {

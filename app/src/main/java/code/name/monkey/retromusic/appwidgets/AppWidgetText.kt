@@ -18,6 +18,7 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
@@ -83,13 +84,12 @@ class AppWidgetText : BaseAppWidget() {
                 MainActivity.EXPAND_PANEL,
                 PreferenceUtil.isExpandPanel
             )
-        var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)
 
         // Home
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        pendingIntent = PendingIntent.getActivity(context, 0, action, 0)
+        var pendingIntent = PendingIntent.getActivity(context, 0, action, PendingIntent.FLAG_IMMUTABLE)
         views.setOnClickPendingIntent(R.id.image, pendingIntent)
         views.setOnClickPendingIntent(R.id.media_titles, pendingIntent)
 

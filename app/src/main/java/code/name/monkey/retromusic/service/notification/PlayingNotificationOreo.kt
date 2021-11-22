@@ -26,6 +26,7 @@ import androidx.core.app.NotificationCompat
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.glide.GlideApp
@@ -78,7 +79,12 @@ class PlayingNotificationOreo : PlayingNotification() {
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
 
         val clickIntent = PendingIntent
-            .getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
+            .getActivity(
+                service,
+                0,
+                action,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
         val deleteIntent = buildPendingIntent(service, ACTION_QUIT, null)
 
         val builder = NotificationCompat.Builder(service, NOTIFICATION_CHANNEL_ID)
@@ -143,10 +149,16 @@ class PlayingNotificationOreo : PlayingNotification() {
                             )
                         }
 
-                        if (!PreferenceUtil.isColoredNotification) {
-                            bgColorFinal = resolveColor(service, R.attr.colorPrimary, Color.WHITE)
+                        // Android 12 applies a standard Notification template to every notification
+                        // which will in turn have a default background so setting a different background
+                        // than that, looks weird
+                        if (!VersionUtils.hasS()) {
+                            if (!PreferenceUtil.isColoredNotification) {
+                                bgColorFinal =
+                                    resolveColor(service, R.attr.colorPrimary, Color.WHITE)
+                            }
+                            setBackgroundColor(bgColorFinal)
                         }
-                        setBackgroundColor(bgColorFinal)
                         setNotificationContent(ColorUtil.isColorLight(bgColorFinal))
 
                         if (stopped) {
@@ -250,7 +262,7 @@ class PlayingNotificationOreo : PlayingNotification() {
     ): PendingIntent {
         val intent = Intent(action)
         intent.component = serviceName
-        return PendingIntent.getService(context, 0, intent, 0)
+        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
     }
 
 

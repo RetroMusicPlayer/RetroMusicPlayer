@@ -21,6 +21,7 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
@@ -89,7 +90,11 @@ class DeleteSongsDialog : DialogFragment() {
                 if ((songs.size == 1) && MusicPlayerRemote.isPlaying(songs[0])) {
                     MusicPlayerRemote.playNextSong()
                 }
-                if (!SAFUtil.isSAFRequiredForSongs(songs)) {
+                if (VersionUtils.hasQ()) {
+                    dismiss()
+                    MusicUtil.deleteTracksQ(requireActivity(), songs)
+                    reloadTabs()
+                } else if (!SAFUtil.isSAFRequiredForSongs(songs)) {
                     CoroutineScope(Dispatchers.IO).launch {
                         dismiss()
                         MusicUtil.deleteTracks(requireContext(), songs)

@@ -38,6 +38,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.ImageUtil
+import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
 import code.name.monkey.retromusic.util.RetroColorUtil.getColor
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -192,6 +193,11 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
         return repository.albumById(id).songs
             .map(Song::data)
     }
+
+    override fun getSongUris(): List<Uri> = repository.albumById(id).songs.map {
+        MusicUtil.getSongFileUri(it.id)
+    }
+
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
     }

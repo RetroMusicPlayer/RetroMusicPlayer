@@ -21,28 +21,36 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.drawable
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.model.ArtworkInfo
-import code.name.monkey.retromusic.model.LoadingInfo
+import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.SAFUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
@@ -66,8 +74,11 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
     private var savedArtworkInfo: ArtworkInfo? = null
     private var _binding: VB? = null
     protected val binding: VB get() = _binding!!
+    private var cacheFiles = listOf<File>()
 
     abstract val bindingInflater: (LayoutInflater) -> VB
+
+    private lateinit var launcher: ActivityResultLauncher<IntentSenderRequest>
 
     protected abstract fun loadImageFromFile(selectedFile: Uri?)
 
@@ -195,7 +206,6 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         super.onCreate(savedInstanceState)
         _binding = bindingInflater.invoke(layoutInflater)
         setContentView(binding.root)
-        setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
 
         saveFab = findViewById(R.id.saveTags)
@@ -207,6 +217,11 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
             finish()
         }
         setUpViews()
+        launcher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                writeToFiles(getSongUris(), cacheFiles)
+            }
+        }
     }
 
     private fun setUpViews() {
@@ -264,6 +279,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
     }
 
     protected abstract fun getSongPaths(): List<String>
+
+    protected abstract fun getSongUris(): List<Uri>
 
     protected fun searchWebFor(vararg keys: String) {
         val stringBuilder = StringBuilder()
@@ -336,23 +353,53 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
 
         hideFab()
         println(fieldKeyValueMap)
-        WriteTagsAsyncTask(this).execute(
-            LoadingInfo(
-                songPaths,
-                fieldKeyValueMap,
-                artworkInfo
-            )
-        )
+        GlobalScope.launch {
+            if (VersionUtils.hasR()) {
+                cacheFiles = TagWriter.writeTagsToFilesR(
+                    this@AbsTagEditorActivity, AudioTagInfo(
+                        songPaths,
+                        fieldKeyValueMap,
+                        artworkInfo
+                    )
+                )
+                val pendingIntent = MediaStore.createWriteRequest(contentResolver, getSongUris())
+
+                launcher.launch(IntentSenderRequest.Builder(pendingIntent).build())
+            } else {
+                TagWriter.writeTagsToFiles(
+                    this@AbsTagEditorActivity, AudioTagInfo(
+                        songPaths,
+                        fieldKeyValueMap,
+                        artworkInfo
+                    )
+                )
+            }
+        }
     }
 
     private fun writeTags(paths: List<String>?) {
-        WriteTagsAsyncTask(this).execute(
-            LoadingInfo(
-                paths,
-                savedTags,
-                savedArtworkInfo
-            )
-        )
+        GlobalScope.launch {
+            if (VersionUtils.hasR()) {
+                cacheFiles = TagWriter.writeTagsToFilesR(
+                    this@AbsTagEditorActivity, AudioTagInfo(
+                        paths,
+                        savedTags,
+                        savedArtworkInfo
+                    )
+                )
+                val pendingIntent = MediaStore.createWriteRequest(contentResolver, getSongUris())
+
+                launcher.launch(IntentSenderRequest.Builder(pendingIntent).build())
+            } else {
+                TagWriter.writeTagsToFiles(
+                    this@AbsTagEditorActivity, AudioTagInfo(
+                        paths,
+                        savedTags,
+                        savedArtworkInfo
+                    )
+                )
+            }
+        }
     }
 
 
@@ -391,9 +438,30 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         }
     }
 
+    private fun writeToFiles(songUris: List<Uri>, cacheFiles: List<File>) {
+        if (cacheFiles.size == songUris.size) {
+            for (i in cacheFiles.indices) {
+                contentResolver.openOutputStream(songUris[i])?.use { output ->
+                    cacheFiles[i].inputStream().use { input ->
+                        input.copyTo(output)
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            TagWriter.scan(this@AbsTagEditorActivity, getSongPaths())
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Delete Cache Files
+        cacheFiles.forEach { file ->
+            file.delete()
+        }
+    }
 
     companion object {
-
         const val EXTRA_ID = "extra_id"
         const val EXTRA_PALETTE = "extra_palette"
         private val TAG = AbsTagEditorActivity::class.java.simpleName

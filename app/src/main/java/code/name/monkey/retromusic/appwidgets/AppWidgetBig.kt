@@ -74,7 +74,7 @@ class AppWidgetBig : BaseAppWidget() {
             )
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_play_pause, BaseAppWidget.Companion.createBitmap(
+            R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
                     R.drawable.ic_play_arrow_white_32dp,
@@ -202,13 +202,13 @@ class AppWidgetBig : BaseAppWidget() {
                 MainActivity.EXPAND_PANEL,
                 PreferenceUtil.isExpandPanel
             )
-        var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)
 
         // Home
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        pendingIntent = PendingIntent.getActivity(context, 0, action, 0)
+        var pendingIntent =
+            PendingIntent.getActivity(context, 0, action, PendingIntent.FLAG_IMMUTABLE)
         views.setOnClickPendingIntent(R.id.clickable_area, pendingIntent)
 
         // Previous track

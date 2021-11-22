@@ -97,9 +97,9 @@ abstract class BaseAppWidget : AppWidgetProvider() {
         val intent = Intent(action)
         intent.component = serviceName
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            PendingIntent.getForegroundService(context, 0, intent, 0)
+            PendingIntent.getForegroundService(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         } else {
-            PendingIntent.getService(context, 0, intent, 0)
+            PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         }
     }
 

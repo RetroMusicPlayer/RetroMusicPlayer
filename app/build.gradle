@@ -9,14 +9,14 @@ android {
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 31
 
         renderscriptTargetApi 29//must match target sdk and build tools
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 10519
-        versionName '5.0.0' + "_" + getDate()
+        versionCode 10537
+        versionName '5.2.1 ' + "_" + getDate()
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }

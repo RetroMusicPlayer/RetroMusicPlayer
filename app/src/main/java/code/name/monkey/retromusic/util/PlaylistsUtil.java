@@ -36,6 +36,7 @@ import java.util.List;
 
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.db.PlaylistWithSongs;
+import code.name.monkey.retromusic.helper.M3UConstants;
 import code.name.monkey.retromusic.helper.M3UWriter;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.PlaylistSong;
@@ -319,9 +320,9 @@ public class PlaylistsUtil {
   private static boolean doesPlaylistExist(
       @NonNull Context context, @NonNull final String selection, @NonNull final String[] values) {
     Cursor cursor =
-        context
-            .getContentResolver()
-            .query(EXTERNAL_CONTENT_URI, new String[] {}, selection, values, null);
+            context
+                    .getContentResolver()
+                    .query(EXTERNAL_CONTENT_URI, new String[]{}, selection, values, null);
 
     boolean exists = false;
     if (cursor != null) {
