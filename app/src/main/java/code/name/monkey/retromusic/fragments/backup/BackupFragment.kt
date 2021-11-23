@@ -1,10 +1,12 @@
 package code.name.monkey.retromusic.fragments.backup
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,9 +18,11 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.backup.BackupAdapter
 import code.name.monkey.retromusic.databinding.FragmentBackupBinding
 import code.name.monkey.retromusic.helper.BackupHelper
+import code.name.monkey.retromusic.helper.sanitize
 import code.name.monkey.retromusic.util.BackupUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -42,25 +46,16 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 backupAdapter?.swapDataset(listOf())
         }
         backupViewModel.loadBackups()
-        setupButtons()
-    }
-
-    private fun setupButtons() {
-        binding.createBackup.setOnClickListener {
-            MaterialDialog(requireContext()).show {
-                title(res = R.string.action_rename)
-                input(prefill = System.currentTimeMillis().toString()) { _, text ->
-                    // Text submitted with the action button
-                    lifecycleScope.launch {
-                        BackupHelper.createBackup(requireContext(), text.toString())
-                        backupViewModel.loadBackups()
-                    }
-                }
-                positiveButton(android.R.string.ok)
-                negativeButton(R.string.action_cancel)
-                setTitle(R.string.title_new_backup)
+        val openFilePicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
+            lifecycleScope.launch(Dispatchers.IO) {
+                backupViewModel.restoreBackup(requireActivity(), requireContext().contentResolver.openInputStream(it))
             }
-
+        }
+        binding.createBackup.setOnClickListener {
+            showCreateBackupDialog()
+        }
+        binding.restoreBackup.setOnClickListener {
+            openFilePicker.launch(arrayOf("application/octet-stream"))
         }
     }
 
@@ -76,7 +71,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
 
     private fun checkIsEmpty() {
         val isEmpty = backupAdapter!!.itemCount == 0
-        binding.empty.isVisible = isEmpty
+        binding.emptyText.isVisible = isEmpty
         binding.backupTitle.isVisible = !isEmpty
         binding.backupRecyclerview.isVisible = !isEmpty
     }
@@ -88,13 +83,31 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         }
     }
 
+    @SuppressLint("CheckResult")
+    private fun showCreateBackupDialog() {
+        MaterialDialog(requireContext()).show {
+            cornerRadius(res = R.dimen.m3_card_corner_radius)
+            title(res = R.string.action_rename)
+            input(prefill = System.currentTimeMillis().toString()) { _, text ->
+                // Text submitted with the action button
+                lifecycleScope.launch {
+                    BackupHelper.createBackup(requireContext(), text.sanitize())
+                    backupViewModel.loadBackups()
+                }
+            }
+            positiveButton(android.R.string.ok)
+            negativeButton(R.string.action_cancel)
+            setTitle(R.string.title_new_backup)
+        }
+    }
+
     override fun onBackupClicked(file: File) {
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.restore)
             .setMessage(R.string.restore_message)
             .setPositiveButton(R.string.restore) { _, _ ->
                 lifecycleScope.launch {
-                    backupViewModel.restoreBackup(requireActivity(), file)
+                    backupViewModel.restoreBackup(requireActivity(), file.inputStream())
                 }
             }
             .setNegativeButton(android.R.string.cancel, null)
@@ -102,6 +115,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
             .show()
     }
 
+    @SuppressLint("CheckResult")
     override fun onBackupMenuClicked(file: File, menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             R.id.action_delete -> {
@@ -119,7 +133,11 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
             }
             R.id.action_share -> {
                 activity?.startActivity(
-                    Intent.createChooser(BackupUtil.createShareFileIntent(file, requireContext()), null))
+                    Intent.createChooser(
+                        BackupUtil.createShareFileIntent(file, requireContext()),
+                        null
+                    )
+                )
                 return true
             }
             R.id.action_rename -> {

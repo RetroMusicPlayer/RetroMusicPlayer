@@ -15,7 +15,7 @@ import java.util.zip.ZipOutputStream
 object BackupHelper {
     suspend fun createBackup(context: Context, name: String) {
         val backupFile =
-            File(backupRootPath + name + APPEND_EXTENSION)
+            File(backupRootPath + File.separator + name + APPEND_EXTENSION)
         if (backupFile.parentFile?.exists() != true) {
             backupFile.parentFile?.mkdirs()
         }
@@ -28,7 +28,7 @@ object BackupHelper {
         }
     }
 
-    private fun zipAll(zipItems: List<ZipItem>, backupFile: File) {
+    private suspend fun zipAll(zipItems: List<ZipItem>, backupFile: File) {
         try {
             ZipOutputStream(BufferedOutputStream(FileOutputStream(backupFile))).use { out ->
                 for (zipItem in zipItems) {
@@ -36,13 +36,17 @@ object BackupHelper {
                         BufferedInputStream(fi).use { origin ->
                             val entry = ZipEntry(zipItem.zipPath)
                             out.putNextEntry(entry)
-                            origin.copyTo(out, 1024)
+                            origin.copyTo(out)
                         }
                     }
                 }
             }
         } catch (exception: FileNotFoundException) {
-            Toast.makeText(App.getContext(), "Couldn't create backup", Toast.LENGTH_SHORT).show()
+            exception.printStackTrace()
+            withContext(Dispatchers.Main) {
+                Toast.makeText(App.getContext(), "Couldn't create backup", Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
     }
 
@@ -72,9 +76,9 @@ object BackupHelper {
         }
     }
 
-    suspend fun restoreBackup(context: Context, file: File) {
+    suspend fun restoreBackup(context: Context, inputStream: InputStream?) {
         withContext(Dispatchers.IO) {
-            ZipInputStream(FileInputStream(file)).use {
+            ZipInputStream(inputStream).use {
                 var entry = it.nextEntry
                 while (entry != null) {
                     if (entry.isDatabaseEntry()) restoreDatabase(context, it, entry)
@@ -157,3 +161,16 @@ object BackupHelper {
 }
 
 data class ZipItem(val filePath: String, val zipPath: String)
+
+fun CharSequence.sanitize(): String {
+    return toString().replace("/", "_")
+        .replace(":", "_")
+        .replace("*", "_")
+        .replace("?", "_")
+        .replace("\"", "_")
+        .replace("<", "_")
+        .replace(">", "_")
+        .replace("|", "_")
+        .replace("\\", "_")
+        .replace("&", "_")
+}
