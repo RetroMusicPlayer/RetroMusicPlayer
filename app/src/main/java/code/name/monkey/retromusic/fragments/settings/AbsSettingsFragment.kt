@@ -66,7 +66,6 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
-        listView.overScrollMode = View.OVER_SCROLL_NEVER
         // This is a workaround as CollapsingToolbarLayout consumes insets and
         // insets are not passed to child views
         // https://github.com/material-components/material-components-android/issues/1310
