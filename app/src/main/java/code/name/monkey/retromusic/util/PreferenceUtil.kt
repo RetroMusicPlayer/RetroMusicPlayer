@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.extensions.getIntRes
 import code.name.monkey.retromusic.extensions.getStringOrDefault
@@ -615,5 +616,5 @@ object PreferenceUtil {
             .getInt(CROSS_FADE_DURATION, 0)
 
     val materialYou
-        get() = sharedPreferences.getBoolean(MATERIAL_YOU, false)
+        get() = sharedPreferences.getBoolean(MATERIAL_YOU, VersionUtils.hasS())
 }
