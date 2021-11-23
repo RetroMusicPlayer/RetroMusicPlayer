@@ -59,14 +59,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/finish"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/Widget.Material3.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:paddingVertical="12dp"
         android:text="Let's go"
         android:textAppearance="@style/TextViewButton"
-        app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
