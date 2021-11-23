@@ -49,7 +49,7 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
         // insets are not passed to child views
         // https://github.com/material-components/material-components-android/issues/1310
         if (!RetroUtil.isLandscape()) {
-            binding.root.updatePadding(bottom = RetroUtil.getNavigationBarHeight())
+            binding.aboutContent.root.updatePadding(bottom = RetroUtil.getNavigationBarHeight())
         }
     }
 

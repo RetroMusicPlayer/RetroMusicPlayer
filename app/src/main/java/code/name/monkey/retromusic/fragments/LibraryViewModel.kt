@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.fragments
 
+import android.animation.ValueAnimator
 import android.widget.Toast
 import androidx.lifecycle.*
 import code.name.monkey.retromusic.*
@@ -42,7 +43,7 @@ class LibraryViewModel(
     private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
-    private val fabMargin = MutableLiveData(0)
+    private val fabMargin = MutableLiveData<Int>(0)
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -337,11 +338,18 @@ class LibraryViewModel(
     }
 
     fun setFabMargin(bottomMargin: Int) {
-        fabMargin.postValue(
-            // Normal Margin
-            DensityUtil.dip2px(App.getContext(), 16F) +
-                    bottomMargin
-        )
+        val currentValue = DensityUtil.dip2px(App.getContext(), 16F) +
+                bottomMargin
+        if (currentValue != fabMargin.value) {
+            ValueAnimator.ofInt(fabMargin.value!!, currentValue).apply {
+                addUpdateListener {
+                    fabMargin.postValue(
+                        it.animatedValue as Int
+                    )
+                }
+                start()
+            }
+        }
     }
 }
 

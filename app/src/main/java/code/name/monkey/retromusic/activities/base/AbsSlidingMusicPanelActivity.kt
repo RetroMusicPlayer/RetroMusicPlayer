@@ -129,7 +129,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (RetroUtil.isLandscape()) {
             binding.slidingPanel.drawAboveSystemBarsWithPadding(true)
         }
-        binding.fragmentContainer.addBottomInsets()
         chooseFragmentForTheme()
         setupSlidingUpPanel()
         setupBottomSheet()
@@ -350,7 +349,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                         binding.bottomNavigationView.translationY = 0F
                     }
                     binding.bottomNavigationView.bringToFront()
-                    libraryViewModel.setFabMargin(heightOfBarWithTabs - 2 * windowInsets.safeGetBottomInsets())
+                    libraryViewModel.setFabMargin(dip(R.dimen.mini_player_height_expanded))
                 } else {
                     println("Details")
                     if (animate) {
@@ -367,7 +366,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                             dip(R.dimen.bottom_nav_height).toFloat()
                         binding.slidingPanel.bringToFront()
                     }
-                    libraryViewModel.setFabMargin(heightOfBar - 2 * windowInsets.safeGetBottomInsets())
+                    libraryViewModel.setFabMargin(dip(R.dimen.mini_player_height))
                 }
             }
         }

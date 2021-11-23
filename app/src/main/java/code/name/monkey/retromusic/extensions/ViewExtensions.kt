@@ -237,6 +237,6 @@ data class InitialPadding(
     val right: Int, val bottom: Int
 )
 
-private fun recordInitialPaddingForView(view: View) = InitialPadding(
+fun recordInitialPaddingForView(view: View) = InitialPadding(
     view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom
 )

@@ -22,7 +22,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
@@ -161,11 +160,9 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         val itemCount: Int = adapter?.itemCount ?: 0
 
         if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
-            val height = dip(R.dimen.mini_player_height_expanded)
-            binding.recyclerView.updatePadding(0, 0, 0, height)
+            binding.recyclerView.updatePadding(bottom = dip(R.dimen.mini_player_height_expanded))
         } else {
-            val height = dip(R.dimen.mini_player_height)
-            binding.recyclerView.updatePadding(0, 0, 0, height)
+            binding.recyclerView.updatePadding(bottom = dip(R.dimen.mini_player_height))
         }
     }
 

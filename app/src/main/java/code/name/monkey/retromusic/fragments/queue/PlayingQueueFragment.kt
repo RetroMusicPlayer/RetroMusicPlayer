@@ -23,7 +23,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.FragmentPlayingQueueBinding
 import code.name.monkey.retromusic.extensions.accentColor
@@ -172,6 +174,8 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
         }
         playingQueueAdapter = null
         super.onDestroy()
+        if (MusicPlayerRemote.playingQueue.isNotEmpty())
+            (requireActivity() as MainActivity).expandPanel()
     }
 
     private fun setupToolbar() {
@@ -191,6 +195,7 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
                 findNavController().navigateUp()
             }
             setNavigationIcon(R.drawable.ic_keyboard_backspace_black)
+            ToolbarContentTintHelper.colorBackButton(this)
         }
     }
 }
