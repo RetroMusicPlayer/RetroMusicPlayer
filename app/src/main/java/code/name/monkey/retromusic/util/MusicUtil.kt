@@ -525,7 +525,7 @@ object MusicUtil : KoinComponent {
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    fun deleteTracksQ(activity: Activity, songs: List<Song>) {
+    fun deleteTracksR(activity: Activity, songs: List<Song>) {
         val pendingIntent = MediaStore.createDeleteRequest(activity.contentResolver, songs.map {
             getSongFileUri(it.id)
         })
