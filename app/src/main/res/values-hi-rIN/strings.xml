@@ -14,7 +14,7 @@
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">हटाएं</string>
     <string name="action_delete_from_device">डिवाइस से हटाएं</string>
-    <string name="action_details">Details</string>
+    <string name="action_details">विवरण</string>
     <string name="action_edit">Edit</string>
     <string name="action_go_to_album">एल्बम पर जाएं</string>
     <string name="action_go_to_artist">कलाकार पर जाएं</string>
@@ -57,7 +57,7 @@
     <string name="added_x_titles_to_playing_queue">कतार मे %1$d शीर्षक जोड़ा गया है।</string>
     <string name="album">एल्बम</string>
     <plurals name="albumSongs">
-        <item quantity="one">Song</item>
+        <item quantity="one">गाना</item>
         <item quantity="other">Songs</item>
     </plurals>
     <string name="album_artist">एल्बम कलाकार</string>
@@ -73,7 +73,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">रेट्रो म्यूजिक - कार्ड</string>
     <string name="app_widget_classic_name">रेट्रो म्यूजिक - क्लासिक</string>
-    <string name="app_widget_small_name">Small</string>
+    <string name="app_widget_small_name">छोटा</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">कलाकार</string>
     <string name="artists">कलाकार</string>
@@ -112,12 +112,12 @@
     <string name="changelog">चेंजलाग</string>
     <string name="changelog_summary">Check out What\'s New</string>
     <string name="circle">Circle</string>
-    <string name="circular">Circular</string>
+    <string name="circular">वृताकार</string>
     <string name="classic">रेट्रो म्यूजिक - क्लासिक</string>
     <string name="clear_action">साफ़</string>
     <string name="clear_blacklist">Clear blacklist</string>
     <string name="clear_playing_queue">Clear queue</string>
-    <string name="color">Color</string>
+    <string name="color">रंग</string>
     <string name="colors">Colors</string>
     <string name="composer">Composer</string>
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
@@ -125,8 +125,8 @@
     <string name="could_not_download_album_cover">"Couldn\u2019t download a matching album cover."</string>
     <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Could not scan %d files.</string>
-    <string name="create_action">Create</string>
-    <string name="create_new_backup">Create</string>
+    <string name="create_action">बनाएं</string>
+    <string name="create_new_backup">बनाएं</string>
     <string name="created_playlist_x">Created playlist %1$s.</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Currently listening to %1$s by %2$s.</string>
