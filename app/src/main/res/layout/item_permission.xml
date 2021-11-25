@@ -54,12 +54,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
         android:textAppearance="@style/TextViewButton"
-        app:cornerRadius="8dp"
         app:icon="@drawable/ic_history"
         app:iconGravity="start"
         app:layout_constraintEnd_toEndOf="parent"

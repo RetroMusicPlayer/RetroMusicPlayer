@@ -89,7 +89,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             override fun onChanged() {
                 super.onChanged()
                 val height = dipToPix(52f)
-                binding.recyclerView.setPadding(0, 0, 0, height.toInt())
+                binding.recyclerView.updatePadding(bottom = height.toInt())
             }
         })
     }
@@ -204,7 +204,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         if (RetroUtil.isTablet()) {
             return if (RetroUtil.isLandscape()) 6 else 4
         }
-        return 2
+        return if (RetroUtil.isLandscape()) 4 else 2
     }
 
     override fun onArtist(artistId: Long, view: View) {

@@ -59,14 +59,12 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/toolbar_margin_horizontal"
-        android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
         android:transitionGroup="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <code.name.monkey.retromusic.views.insets.InsetsConstraintLayout
             android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,6 +117,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/titleWelcome" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </code.name.monkey.retromusic.views.insets.InsetsConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -90,9 +90,9 @@ class DeleteSongsDialog : DialogFragment() {
                 if ((songs.size == 1) && MusicPlayerRemote.isPlaying(songs[0])) {
                     MusicPlayerRemote.playNextSong()
                 }
-                if (VersionUtils.hasQ()) {
+                if (VersionUtils.hasR()) {
                     dismiss()
-                    MusicUtil.deleteTracksQ(requireActivity(), songs)
+                    MusicUtil.deleteTracksR(requireActivity(), songs)
                     reloadTabs()
                 } else if (!SAFUtil.isSAFRequiredForSongs(songs)) {
                     CoroutineScope(Dispatchers.IO).launch {

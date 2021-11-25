@@ -72,6 +72,7 @@ interface Repository {
     suspend fun genresHome(): Home
     suspend fun playlists(): Home
     suspend fun homeSections(): List<Home>
+    @ExperimentalCoroutinesApi
     suspend fun homeSectionsFlow(): Flow<Result<List<Home>>>
     suspend fun playlist(playlistId: Long): Playlist
     suspend fun fetchPlaylistWithSongs(): List<PlaylistWithSongs>

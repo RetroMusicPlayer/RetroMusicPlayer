@@ -21,13 +21,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.widget.ImageView
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.util.MusicUtil
+import com.google.android.material.shape.MaterialShapeDrawable
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
 import java.util.*
@@ -44,8 +43,9 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         super.onCreate(savedInstanceState)
         setUpViews()
         setNoImageMode()
-        binding.toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
         setSupportActionBar(binding.toolbar)
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(this)
     }
 
     @SuppressLint("ClickableViewAccessibility")

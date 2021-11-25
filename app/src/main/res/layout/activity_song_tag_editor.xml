@@ -1,9 +1,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
     android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true">
@@ -20,8 +18,7 @@
             style="@style/Toolbar"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/action_tag_editor"
-            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
-            tools:ignore="UnusedAttribute" />
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView

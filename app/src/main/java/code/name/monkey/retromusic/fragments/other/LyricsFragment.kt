@@ -379,6 +379,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        (requireActivity() as MainActivity).expandPanel()
+        if (MusicPlayerRemote.playingQueue.isNotEmpty())
+            (requireActivity() as MainActivity).expandPanel()
     }
 }

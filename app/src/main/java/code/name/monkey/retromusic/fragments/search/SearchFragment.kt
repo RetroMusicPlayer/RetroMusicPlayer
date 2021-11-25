@@ -40,6 +40,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.addAlpha
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.transition.MaterialSharedAxis
 import java.util.*
@@ -96,6 +97,8 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
                 bottomMargin = it
             }
         })
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     private fun setupChips() {

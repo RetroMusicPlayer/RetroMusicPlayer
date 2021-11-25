@@ -44,6 +44,7 @@ import code.name.monkey.retromusic.util.RetroColorUtil.getColor
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.shape.MaterialShapeDrawable
 import org.jaudiotagger.tag.FieldKey
 import java.util.*
 
@@ -101,8 +102,9 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     private var deleteAlbumArt: Boolean = false
 
     private fun setupToolbar() {
-        binding.toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
         setSupportActionBar(binding.toolbar)
+        binding.appBarLayout?.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

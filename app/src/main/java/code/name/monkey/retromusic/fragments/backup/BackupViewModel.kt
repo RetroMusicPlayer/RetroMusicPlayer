@@ -9,6 +9,7 @@ import code.name.monkey.retromusic.helper.BackupHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.InputStream
 import kotlin.system.exitProcess
 
 
@@ -24,8 +25,8 @@ class BackupViewModel : ViewModel() {
         }
     }
 
-    suspend fun restoreBackup(activity: Activity, file: File) {
-        BackupHelper.restoreBackup(activity, file)
+    suspend fun restoreBackup(activity: Activity, inputStream: InputStream?) {
+        BackupHelper.restoreBackup(activity, inputStream)
         withContext(Dispatchers.Main) {
             val intent = Intent(
                 activity,
