@@ -495,4 +495,7 @@
     <string name="you_have_to_select_at_least_one_category">Você precisa selecionar ao menos uma categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Você será encaminhado para o website de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">Os dados da sua conta são usados ​​apenas para autenticação.</string>
+    <string name="restore_message">Do you want to restore backup?</string>
+    <string name="title_new_backup">New Backup</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
 </resources>

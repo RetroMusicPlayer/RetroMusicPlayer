@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_album_label">關於 %s</string>
-    <string name="about_settings_summary">Team, social links</string>
+    <string name="about_settings_summary">團隊與社群連結</string>
     <string name="accent_color">重點色調</string>
     <string name="accent_color_desc">重點色調，預設為粉紅色。</string>
     <string name="action_about">關於</string>
@@ -11,14 +11,14 @@
     <string name="action_add_to_playlist">加入播放清單...</string>
     <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">清空播放佇列</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_cycle_repeat">循環重複模式</string>
     <string name="action_delete">刪除</string>
     <string name="action_delete_from_device">刪除</string>
     <string name="action_details">詳細資訊</string>
     <string name="action_edit">編輯</string>
     <string name="action_go_to_album">開啟此專輯</string>
     <string name="action_go_to_artist">前往此演唱者頁面</string>
-    <string name="action_go_to_genre">Go to genre</string>
+    <string name="action_go_to_genre">流派</string>
     <string name="action_go_to_start_directory">前往起始目錄</string>
     <string name="action_grant">取得</string>
     <string name="action_grid_size">網格大小</string>
@@ -26,7 +26,7 @@
     <string name="action_new_playlist">新增播放清單</string>
     <string name="action_next">下一首</string>
     <string name="action_play">播放</string>
-    <string name="action_play_all">Play all</string>
+    <string name="action_play_all">播放所有</string>
     <string name="action_play_next">在下一首播放</string>
     <string name="action_play_pause">播放/暫停</string>
     <string name="action_previous">上一首</string>
@@ -45,11 +45,11 @@
     <string name="action_shuffle_all">隨機播放</string>
     <string name="action_shuffle_playlist">隨機播放清單</string>
     <string name="action_sleep_timer">睡眠定時器</string>
-    <string name="action_sort_order">Sort order</string>
+    <string name="action_sort_order">排序</string>
     <string name="action_tag_editor">編輯音樂資訊</string>
-    <string name="action_toggle_favorite">Toggle favorite</string>
-    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
-    <string name="adaptive">Adaptive</string>
+    <string name="action_toggle_favorite">加入/移除我的最愛</string>
+    <string name="action_toggle_shuffle">切換隨機播放模式</string>
+    <string name="adaptive">自動調整</string>
     <string name="add_action">添加</string>
     <string name="add_playlist_title">"加入播放清單"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
@@ -493,4 +493,7 @@
     <string name="you_have_to_select_at_least_one_category">您必須選取至少一個類別。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
+    <string name="restore_message">Do you want to restore backup?</string>
+    <string name="title_new_backup">New Backup</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
 </resources>

@@ -7,7 +7,7 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/retromusicapp?style=social)](https://twitter.com/retromusicapp)
 [![Crowdin](https://badges.crowdin.net/retromusicplayer/localized.svg)](https://crowdin.com/project/retromusicplayer)
 
-## 🆕 Material Design music player for Android music lovers 
+## 🆕 Material You Design Music Player for Android music lovers 
 
 ## ⚠ Join [@retromusiclog](https://t.me/retromusiclog) on Telegram for important updates.
 
