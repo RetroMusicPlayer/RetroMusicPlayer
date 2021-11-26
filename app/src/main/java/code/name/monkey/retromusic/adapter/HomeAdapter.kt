@@ -14,6 +14,8 @@
  */
 package code.name.monkey.retromusic.adapter
 
+import android.os.Handler
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +25,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.findFragment
+import androidx.lifecycle.findViewTreeLifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
@@ -45,11 +49,14 @@ import code.name.monkey.retromusic.interfaces.IGenreClickListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.card.MaterialCardView
+import kotlinx.coroutines.delay
 
 class HomeAdapter(
     private val activity: AppCompatActivity
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), IArtistClickListener, IAlbumClickListener,
     IGenreClickListener {
+
+    private var mLastClickTime: Long = 0
 
     private var list = listOf<Home>()
 
@@ -194,6 +201,10 @@ class HomeAdapter(
             itemView.findViewById<TextView>(R.id.message).apply {
                 setTextColor(color)
                 setOnClickListener {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                        return@setOnClickListener
+                    }
+                    mLastClickTime = SystemClock.elapsedRealtime();
                     MusicPlayerRemote.playNext((home.arrayList as List<Song>).subList(0, 8))
                     if (!MusicPlayerRemote.isPlaying) {
                         MusicPlayerRemote.playNextSong()
