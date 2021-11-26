@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.ViewCompat
+import androidx.core.view.setPadding
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
@@ -29,6 +30,7 @@ import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.toSongs
+import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.glide.GlideApp
@@ -42,7 +44,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 
 class PlaylistAdapter(
     override val activity: FragmentActivity,
-    private var dataSet: List<PlaylistWithSongs>,
+    var dataSet: List<PlaylistWithSongs>,
     private var itemLayoutRes: Int,
     ICabHolder: ICabHolder?,
     private val listener: IPlaylistClickListener
@@ -94,7 +96,12 @@ class PlaylistAdapter(
             holder.menu?.show()
         }
         GlideApp.with(activity)
-            .load(PlaylistPreview(playlist))
+            .load(
+                if (itemLayoutRes == R.layout.item_list) {
+                    holder.image?.setPadding(activity.dipToPix(8F).toInt())
+                    R.drawable.ic_playlist_play
+                } else PlaylistPreview(playlist)
+            )
             .playlistOptions()
             .into(holder.image!!)
     }

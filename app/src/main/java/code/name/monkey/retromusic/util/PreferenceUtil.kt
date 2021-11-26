@@ -498,6 +498,25 @@ object PreferenceUtil {
         }
 
 
+    var playlistGridSize
+        get() = sharedPreferences.getInt(
+            PLAYLIST_GRID_SIZE,
+            App.getContext().getIntRes(R.integer.default_grid_columns)
+        )
+        set(value) = sharedPreferences.edit {
+            putInt(PLAYLIST_GRID_SIZE, value)
+        }
+
+
+    var playlistGridSizeLand
+        get() = sharedPreferences.getInt(
+            PLAYLIST_GRID_SIZE_LAND,
+            App.getContext().getIntRes(R.integer.default_grid_columns_land)
+        )
+        set(value) = sharedPreferences.edit {
+            putInt(PLAYLIST_GRID_SIZE, value)
+        }
+
     var albumCoverStyle: AlbumCoverStyle
         get() {
             val id: Int = sharedPreferences.getInt(ALBUM_COVER_STYLE, 0)

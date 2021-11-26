@@ -25,12 +25,12 @@ import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
 import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.extensions.navigate
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.helper.SortOrder.PlaylistSortOrder
 import code.name.monkey.retromusic.interfaces.IPlaylistClickListener
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.transition.MaterialSharedAxis
 
@@ -66,9 +66,10 @@ class PlaylistsFragment :
     }
 
     override fun createAdapter(): PlaylistAdapter {
+        val dataSet = if (adapter == null) mutableListOf() else adapter!!.dataSet
         return PlaylistAdapter(
             requireActivity(),
-            ArrayList(),
+            dataSet,
             itemLayoutRes(),
             null,
             this
@@ -77,7 +78,11 @@ class PlaylistsFragment :
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu.removeItem(R.id.action_grid_size)
+        val gridSizeItem: MenuItem = menu.findItem(R.id.action_grid_size)
+        if (RetroUtil.isLandscape()) {
+            gridSizeItem.setTitle(R.string.action_grid_size_land)
+        }
+        setupGridSizeMenu(gridSizeItem.subMenu)
         menu.removeItem(R.id.action_layout_type)
         menu.add(0, R.id.action_add_to_playlist, 0, R.string.new_playlist_title)
         menu.add(0, R.id.action_import_playlist, 0, R.string.import_playlist)
@@ -89,12 +94,46 @@ class PlaylistsFragment :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (handleGridSizeMenuItem(item)) {
+            return true
+        }
         if (handleSortOrderMenuItem(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun setupGridSizeMenu(gridSizeMenu: SubMenu) {
+        when (getGridSize()) {
+            1 -> gridSizeMenu.findItem(R.id.action_grid_size_1).isChecked = true
+            2 -> gridSizeMenu.findItem(R.id.action_grid_size_2).isChecked = true
+            3 -> gridSizeMenu.findItem(R.id.action_grid_size_3).isChecked = true
+            4 -> gridSizeMenu.findItem(R.id.action_grid_size_4).isChecked = true
+            5 -> gridSizeMenu.findItem(R.id.action_grid_size_5).isChecked = true
+            6 -> gridSizeMenu.findItem(R.id.action_grid_size_6).isChecked = true
+            7 -> gridSizeMenu.findItem(R.id.action_grid_size_7).isChecked = true
+            8 -> gridSizeMenu.findItem(R.id.action_grid_size_8).isChecked = true
+        }
+        val gridSize = if (RetroUtil.isLandscape()) 4 else 2
+        if (gridSize < 8) {
+            gridSizeMenu.findItem(R.id.action_grid_size_8).isVisible = false
+        }
+        if (gridSize < 7) {
+            gridSizeMenu.findItem(R.id.action_grid_size_7).isVisible = false
+        }
+        if (gridSize < 6) {
+            gridSizeMenu.findItem(R.id.action_grid_size_6).isVisible = false
+        }
+        if (gridSize < 5) {
+            gridSizeMenu.findItem(R.id.action_grid_size_5).isVisible = false
+        }
+        if (gridSize < 4) {
+            gridSizeMenu.findItem(R.id.action_grid_size_4).isVisible = false
+        }
+        if (gridSize < 3) {
+            gridSizeMenu.findItem(R.id.action_grid_size_3).isVisible = false
+        }
+    }
 
     private fun setUpSortOrderMenu(subMenu: SubMenu) {
         val order: String? = getSortOrder()
@@ -142,13 +181,32 @@ class PlaylistsFragment :
         return false
     }
 
+    private fun handleGridSizeMenuItem(item: MenuItem): Boolean {
+        val gridSize = when (item.itemId) {
+            R.id.action_grid_size_1 -> 1
+            R.id.action_grid_size_2 -> 2
+            R.id.action_grid_size_3 -> 3
+            R.id.action_grid_size_4 -> 4
+            R.id.action_grid_size_5 -> 5
+            R.id.action_grid_size_6 -> 6
+            R.id.action_grid_size_7 -> 7
+            R.id.action_grid_size_8 -> 8
+            else -> 0
+        }
+        if (gridSize > 0) {
+            item.isChecked = true
+            setAndSaveGridSize(gridSize)
+            return true
+        }
+        return false
+    }
+
     private fun createId(menu: SubMenu, id: Int, title: Int, checked: Boolean) {
         menu.add(0, id, 0, title).isChecked = checked
     }
 
-
     override fun setGridSize(gridSize: Int) {
-        TODO("Not yet implemented")
+        adapter?.notifyDataSetChanged()
     }
 
     override fun setSortOrder(sortOrder: String) {
@@ -164,23 +222,23 @@ class PlaylistsFragment :
     }
 
     override fun loadGridSize(): Int {
-        return 2
+        return PreferenceUtil.playlistGridSize
     }
 
     override fun saveGridSize(gridColumns: Int) {
-        //Add grid save
+        PreferenceUtil.playlistGridSize = gridColumns
     }
 
     override fun loadGridSizeLand(): Int {
-        return 4
+        return PreferenceUtil.playlistGridSizeLand
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
-        //Add land grid save
+        PreferenceUtil.playlistGridSizeLand = gridColumns
     }
 
     override fun loadLayoutRes(): Int {
-        return R.layout.item_card
+        return R.layout.item_grid
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
