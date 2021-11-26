@@ -56,7 +56,7 @@
         android:elevation="0dp"
         android:minHeight="@dimen/bottom_nav_height"
         app:itemHorizontalTranslationEnabled="false"
-        app:itemPaddingBottom="0dp"
+        app:itemPaddingBottom="8dp"
         app:itemPaddingTop="8dp"
         app:menu="@menu/bottom_navigation_main"
         tools:layout_height="wrap_content" />
