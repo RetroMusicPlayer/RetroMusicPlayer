@@ -26,7 +26,7 @@
             <item android:state_activated="true">
                 <shape>
                     <corners android:radius="@dimen/m3_card_corner_radius" />
-                    <solid android:color="@android:color/system_neutral1_300" />
+                    <solid android:color="@color/m3_selection_color" />
                 </shape>
             </item>
         </selector>
