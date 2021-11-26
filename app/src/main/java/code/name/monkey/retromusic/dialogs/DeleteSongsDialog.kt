@@ -60,6 +60,11 @@ class DeleteSongsDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         libraryViewModel = activity?.getViewModel() as LibraryViewModel
         val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
+        if (VersionUtils.hasR()) {
+            dismiss()
+            MusicUtil.deleteTracksR(requireActivity(), songs)
+            reloadTabs()
+        }
         val pair = if (songs.size > 1) {
             Pair(
                 R.string.delete_songs_title,
@@ -90,11 +95,7 @@ class DeleteSongsDialog : DialogFragment() {
                 if ((songs.size == 1) && MusicPlayerRemote.isPlaying(songs[0])) {
                     MusicPlayerRemote.playNextSong()
                 }
-                if (VersionUtils.hasR()) {
-                    dismiss()
-                    MusicUtil.deleteTracksR(requireActivity(), songs)
-                    reloadTabs()
-                } else if (!SAFUtil.isSAFRequiredForSongs(songs)) {
+                if (!SAFUtil.isSAFRequiredForSongs(songs)) {
                     CoroutineScope(Dispatchers.IO).launch {
                         dismiss()
                         MusicUtil.deleteTracks(requireContext(), songs)
