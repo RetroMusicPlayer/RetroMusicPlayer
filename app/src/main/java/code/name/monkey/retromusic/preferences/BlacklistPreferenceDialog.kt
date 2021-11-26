@@ -18,6 +18,7 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.core.text.HtmlCompat
@@ -26,6 +27,7 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreferenc
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.BlacklistFolderChooserDialog
+import code.name.monkey.retromusic.extensions.accentTextColor
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.materialDialog
@@ -69,11 +71,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
             .setNeutralButton(R.string.clear_action) { _, _ ->
                 materialDialog(R.string.clear_blacklist)
                     .setMessage(R.string.do_you_want_to_clear_the_blacklist)
-                    .setPositiveButton(R.string.clear_action) { _, _ ->
-                        BlacklistStore.getInstance(
-                            requireContext()
-                        ).clear()
-                    }
+                    .setPositiveButton(R.string.clear_action, null)
                     .setNegativeButton(android.R.string.cancel, null)
                     .create()
                     .colorButtons()
@@ -107,7 +105,21 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                     .colorButtons()
                     .show()
             }
-            .create().colorButtons()
+            .create().apply {
+                setOnShowListener {
+                    getButton(AlertDialog.BUTTON_POSITIVE).accentTextColor()
+                    getButton(AlertDialog.BUTTON_NEGATIVE).accentTextColor()
+                    getButton(AlertDialog.BUTTON_NEUTRAL).apply {
+                        accentTextColor()
+                        setOnClickListener {
+                            BlacklistStore.getInstance(
+                                requireContext()
+                            ).clear()
+                            dismiss()
+                        }
+                    }
+                }
+            }
     }
 
     private lateinit var paths: ArrayList<String>
