@@ -25,6 +25,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.text.HtmlCompat
 import androidx.media.app.NotificationCompat.MediaStyle
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
@@ -70,7 +71,11 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
             action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             val clickIntent =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    PendingIntent.getActivity(service, 0, action, PendingIntent.FLAG_IMMUTABLE)
+                    PendingIntent.getActivity(
+                        service, 0, action, if (VersionUtils.hasMarshmallow())
+                            PendingIntent.FLAG_IMMUTABLE
+                        else 0
+                    )
                 } else {
                     PendingIntent.getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
                 }
@@ -82,7 +87,9 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
                 service,
                 0,
                 intent,
-                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                if (VersionUtils.hasMarshmallow())
+                    PendingIntent.FLAG_IMMUTABLE
+                else 0 or PendingIntent.FLAG_UPDATE_CURRENT
             )
             val bigNotificationImageSize = service.resources
                 .getDimensionPixelSize(R.dimen.notification_big_image_size)
@@ -199,6 +206,10 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
         val serviceName = ComponentName(service, MusicService::class.java)
         val intent = Intent(action)
         intent.component = serviceName
-        return PendingIntent.getService(service, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        return PendingIntent.getService(
+            service, 0, intent,
+            if (VersionUtils.hasMarshmallow()) PendingIntent.FLAG_IMMUTABLE
+            else 0 or PendingIntent.FLAG_UPDATE_CURRENT
+        )
     }
 }

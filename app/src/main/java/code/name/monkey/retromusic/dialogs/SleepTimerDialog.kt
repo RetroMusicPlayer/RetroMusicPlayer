@@ -29,6 +29,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.addAccentColor
 import code.name.monkey.retromusic.extensions.colorButtons
@@ -138,7 +139,11 @@ class SleepTimerDialog : DialogFragment() {
     }
 
     private fun makeTimerPendingIntent(flag: Int): PendingIntent? {
-        return PendingIntent.getService(requireActivity(), 0, makeTimerIntent(), flag or PendingIntent.FLAG_IMMUTABLE)
+        return PendingIntent.getService(
+            requireActivity(), 0, makeTimerIntent(), flag or if (VersionUtils.hasMarshmallow())
+                PendingIntent.FLAG_IMMUTABLE
+            else 0
+        )
     }
 
     private fun makeTimerIntent(): Intent {

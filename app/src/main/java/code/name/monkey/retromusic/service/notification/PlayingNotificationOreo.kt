@@ -83,7 +83,9 @@ class PlayingNotificationOreo : PlayingNotification() {
                 service,
                 0,
                 action,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                PendingIntent.FLAG_UPDATE_CURRENT or if (VersionUtils.hasMarshmallow())
+                    PendingIntent.FLAG_IMMUTABLE
+                else 0
             )
         val deleteIntent = buildPendingIntent(service, ACTION_QUIT, null)
 
@@ -262,7 +264,11 @@ class PlayingNotificationOreo : PlayingNotification() {
     ): PendingIntent {
         val intent = Intent(action)
         intent.component = serviceName
-        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        return PendingIntent.getService(
+            context, 0, intent, if (VersionUtils.hasMarshmallow())
+                PendingIntent.FLAG_IMMUTABLE
+            else 0
+        )
     }
 
 
