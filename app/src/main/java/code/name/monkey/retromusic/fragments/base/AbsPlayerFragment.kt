@@ -37,6 +37,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.navOptions
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
@@ -151,7 +152,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_show_lyrics -> {
-                NavigationUtil.goToLyrics(requireActivity())
+                goToLyrics(requireActivity())
                 return true
             }
             R.id.action_equalizer -> {
@@ -193,7 +194,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
     private fun showLyricsIcon(item: MenuItem) {
         val icon =
             if (PreferenceUtil.showLyrics) R.drawable.ic_lyrics else R.drawable.ic_lyrics_outline
-        val drawable: Drawable? = RetroUtil.getTintedVectorDrawable(
+        val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
             requireContext(),
             icon,
             toolbarIconColor()
@@ -255,7 +256,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                     } else {
                         if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                     }
-                    val drawable: Drawable? = RetroUtil.getTintedVectorDrawable(
+                    val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
                         requireContext(),
                         icon,
                         toolbarIconColor()
@@ -394,7 +395,11 @@ fun goToArtist(activity: Activity) {
 
         findNavController(R.id.fragment_container).navigate(
             R.id.artistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_ID to song.artistId)
+            bundleOf(EXTRA_ARTIST_ID to song.artistId),
+            navOptions {
+                launchSingleTop = true
+            },
+            null
         )
     }
 }
@@ -413,7 +418,29 @@ fun goToAlbum(activity: Activity) {
 
         findNavController(R.id.fragment_container).navigate(
             R.id.albumDetailsFragment,
-            bundleOf(EXTRA_ALBUM_ID to song.albumId)
+            bundleOf(EXTRA_ALBUM_ID to song.albumId),
+            navOptions {
+                launchSingleTop = true
+            },
+            null
+        )
+    }
+}
+
+fun goToLyrics(activity: Activity) {
+    if (activity !is MainActivity) return
+    activity.apply {
+        //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
+        setBottomNavVisibility(false)
+        if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
+            collapsePanel()
+        }
+
+        findNavController(R.id.fragment_container).navigate(
+            R.id.lyrics_fragment,
+            null,
+            navOptions { launchSingleTop = true },
+            null
         )
     }
 }
