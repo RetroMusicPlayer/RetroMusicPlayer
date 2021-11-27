@@ -23,28 +23,32 @@ object BackupHelper {
         zipItems.addAll(getDatabaseZipItems(context))
         zipItems.addAll(getSettingsZipItems(context))
         getUserImageZipItems(context)?.let { zipItems.addAll(it) }
-        withContext(Dispatchers.IO) {
-            zipAll(zipItems, backupFile)
-        }
+        zipAll(zipItems, backupFile)
     }
 
     private suspend fun zipAll(zipItems: List<ZipItem>, backupFile: File) {
-        try {
-            ZipOutputStream(BufferedOutputStream(FileOutputStream(backupFile))).use { out ->
-                for (zipItem in zipItems) {
-                    FileInputStream(zipItem.filePath).use { fi ->
-                        BufferedInputStream(fi).use { origin ->
-                            val entry = ZipEntry(zipItem.zipPath)
-                            out.putNextEntry(entry)
-                            origin.copyTo(out)
+        withContext(Dispatchers.IO) {
+            kotlin.runCatching {
+                ZipOutputStream(BufferedOutputStream(FileOutputStream(backupFile))).use { out ->
+                    for (zipItem in zipItems) {
+                        FileInputStream(zipItem.filePath).use { fi ->
+                            BufferedInputStream(fi).use { origin ->
+                                val entry = ZipEntry(zipItem.zipPath)
+                                out.putNextEntry(entry)
+                                origin.copyTo(out)
+                            }
                         }
                     }
                 }
+            }.onFailure {
+                it.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(App.getContext(), "Couldn't create backup", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
-        } catch (exception: FileNotFoundException) {
-            exception.printStackTrace()
             withContext(Dispatchers.Main) {
-                Toast.makeText(App.getContext(), "Couldn't create backup", Toast.LENGTH_SHORT)
+                Toast.makeText(App.getContext(), "Backup created successfully", Toast.LENGTH_SHORT)
                     .show()
             }
         }
