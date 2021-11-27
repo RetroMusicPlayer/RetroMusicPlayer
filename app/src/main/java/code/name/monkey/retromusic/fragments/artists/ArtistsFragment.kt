@@ -25,8 +25,8 @@ import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
-import code.name.monkey.retromusic.extensions.navigate
 import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.fragments.GridStyle
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -132,11 +132,13 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
     }
 
     override fun loadLayoutRes(): Int {
-        return PreferenceUtil.artistGridStyle
+        return PreferenceUtil.artistGridStyle.layoutResId
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
-        PreferenceUtil.artistGridStyle = layoutRes
+        PreferenceUtil.artistGridStyle = GridStyle.values().first { gridStyle ->
+            gridStyle.layoutResId == layoutRes
+        }
     }
 
     companion object {
@@ -312,9 +314,9 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
             R.id.action_layout_circular -> R.layout.item_grid_circle
             R.id.action_layout_image -> R.layout.image
             R.id.action_layout_gradient_image -> R.layout.item_image_gradient
-            else -> PreferenceUtil.artistGridStyle
+            else -> PreferenceUtil.artistGridStyle.layoutResId
         }
-        if (layoutRes != PreferenceUtil.artistGridStyle) {
+        if (layoutRes != PreferenceUtil.artistGridStyle.layoutResId) {
             item.isChecked = true
             setAndSaveLayoutRes(layoutRes)
             return true

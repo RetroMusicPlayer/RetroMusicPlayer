@@ -21,8 +21,8 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.SongAdapter
-import code.name.monkey.retromusic.extensions.navigate
 import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.fragments.GridStyle
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -114,11 +114,13 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
 
     @LayoutRes
     override fun loadLayoutRes(): Int {
-        return PreferenceUtil.songGridStyle
+        return PreferenceUtil.songGridStyle.layoutResId
     }
 
     override fun saveLayoutRes(@LayoutRes layoutRes: Int) {
-        PreferenceUtil.songGridStyle = layoutRes
+        PreferenceUtil.songGridStyle = GridStyle.values().first { gridStyle ->
+            gridStyle.layoutResId == layoutRes
+        }
     }
 
     override fun setSortOrder(sortOrder: String) {
@@ -307,9 +309,9 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
             R.id.action_layout_circular -> R.layout.item_grid_circle
             R.id.action_layout_image -> R.layout.image
             R.id.action_layout_gradient_image -> R.layout.item_image_gradient
-            else -> PreferenceUtil.songGridStyle
+            else -> PreferenceUtil.songGridStyle.layoutResId
         }
-        if (layoutRes != PreferenceUtil.songGridStyle) {
+        if (layoutRes != PreferenceUtil.songGridStyle.layoutResId) {
             item.isChecked = true
             setAndSaveLayoutRes(layoutRes)
             return true

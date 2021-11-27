@@ -12,6 +12,7 @@ import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.extensions.getIntRes
 import code.name.monkey.retromusic.extensions.getStringOrDefault
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
+import code.name.monkey.retromusic.fragments.GridStyle
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment
 import code.name.monkey.retromusic.helper.SortOrder.*
@@ -344,22 +345,40 @@ object PreferenceUtil {
             putInt(LYRICS_OPTIONS, value)
         }
 
-    var songGridStyle
-        get() = sharedPreferences.getInt(SONG_GRID_STYLE, R.layout.item_grid)
+    var songGridStyle: GridStyle
+        get() {
+            val id: Int = sharedPreferences.getInt(SONG_GRID_STYLE, 0)
+            // We can directly use "first" kotlin extension function here but
+            // there maybe layout id stored in this so to avoid a crash we use
+            // "firstOrNull"
+            return GridStyle.values().firstOrNull { gridStyle ->
+                gridStyle.id == id
+            } ?: GridStyle.Grid
+        }
         set(value) = sharedPreferences.edit {
-            putInt(SONG_GRID_STYLE, value)
+            putInt(SONG_GRID_STYLE, value.id)
         }
 
-    var albumGridStyle
-        get() = sharedPreferences.getInt(ALBUM_GRID_STYLE, R.layout.item_grid)
+    var albumGridStyle: GridStyle
+        get() {
+            val id: Int = sharedPreferences.getInt(ALBUM_GRID_STYLE, 0)
+            return GridStyle.values().firstOrNull { gridStyle ->
+                gridStyle.id == id
+            } ?: GridStyle.Grid
+        }
         set(value) = sharedPreferences.edit {
-            putInt(ALBUM_GRID_STYLE, value)
+            putInt(ALBUM_GRID_STYLE, value.id)
         }
 
-    var artistGridStyle
-        get() = sharedPreferences.getInt(ARTIST_GRID_STYLE, R.layout.item_grid_circle)
+    var artistGridStyle: GridStyle
+        get() {
+            val id: Int = sharedPreferences.getInt(ARTIST_GRID_STYLE, 4)
+            return GridStyle.values().firstOrNull { gridStyle ->
+                gridStyle.id == id
+            } ?: GridStyle.Circular
+        }
         set(value) = sharedPreferences.edit {
-            putInt(ARTIST_GRID_STYLE, value)
+            putInt(ARTIST_GRID_STYLE, value.id)
         }
 
     val filterLength get() = sharedPreferences.getInt(FILTER_SONG, 20)
