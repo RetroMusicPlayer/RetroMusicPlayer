@@ -78,7 +78,7 @@ fun isBlack(fArr: FloatArray): Boolean {
 
 fun isNearRedLine(fArr: FloatArray): Boolean {
     val f = fArr[0]
-    return f >= 10.0f && f <= 37.0f && fArr[1] <= 0.82f
+    return f in 10.0f..37.0f && fArr[1] <= 0.82f
 }
 
 fun isDark(@ColorInt i: Int): Boolean {

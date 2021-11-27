@@ -348,7 +348,7 @@ object MusicUtil : KoinComponent {
     val repository = get<Repository>()
     fun toggleFavorite(context: Context, song: Song) {
         GlobalScope.launch {
-            val playlist: PlaylistEntity? = repository.favoritePlaylist()
+            val playlist: PlaylistEntity = repository.favoritePlaylist()
             if (playlist != null) {
                 val songEntity = song.toSongEntity(playlist.playListId)
                 val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
@@ -529,7 +529,7 @@ object MusicUtil : KoinComponent {
         val pendingIntent = MediaStore.createDeleteRequest(activity.contentResolver, songs.map {
             getSongFileUri(it.id)
         })
-        activity.startIntentSenderForResult(pendingIntent.intentSender, 45, null, 0, 0, 0, null);
+        activity.startIntentSenderForResult(pendingIntent.intentSender, 45, null, 0, 0, 0, null)
     }
 
     fun songByGenre(genreId: Long): Song {

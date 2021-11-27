@@ -54,7 +54,7 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
         stopped = false
         GlobalScope.launch {
             val song = service.currentSong
-            val playlist: PlaylistEntity? = MusicUtil.repository.favoritePlaylist()
+            val playlist: PlaylistEntity = MusicUtil.repository.favoritePlaylist()
             val isPlaying = service.isPlaying
             val isFavorite = if (playlist != null) {
                 val songEntity = song.toSongEntity(playlist.playListId)

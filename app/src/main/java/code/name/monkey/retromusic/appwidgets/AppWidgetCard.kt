@@ -60,7 +60,7 @@ class AppWidgetCard : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_next,
                     secondaryColor
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -69,7 +69,7 @@ class AppWidgetCard : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_previous,
                     secondaryColor
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -78,7 +78,7 @@ class AppWidgetCard : BaseAppWidget() {
                     context,
                     R.drawable.ic_play_arrow_white_32dp,
                     secondaryColor
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -113,7 +113,7 @@ class AppWidgetCard : BaseAppWidget() {
                     service,
                     playPauseRes,
                     MaterialValueHelper.getSecondaryTextColor(service, true)
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -124,7 +124,7 @@ class AppWidgetCard : BaseAppWidget() {
                     service,
                     R.drawable.ic_skip_next,
                     MaterialValueHelper.getSecondaryTextColor(service, true)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -133,7 +133,7 @@ class AppWidgetCard : BaseAppWidget() {
                     service,
                     R.drawable.ic_skip_previous,
                     MaterialValueHelper.getSecondaryTextColor(service, true)
-                )!!, 1f
+                ), 1f
             )
         )
 

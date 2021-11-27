@@ -74,7 +74,7 @@ object ATH {
         setActivityToolbarColor(activity, toolbar, ThemeStore.primaryColor(activity))
     }
 
-    fun setActivityToolbarColor(
+    private fun setActivityToolbarColor(
         activity: Activity, toolbar: Toolbar?,
         color: Int
     ) {

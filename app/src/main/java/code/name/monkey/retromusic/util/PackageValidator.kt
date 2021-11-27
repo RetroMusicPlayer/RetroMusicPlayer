@@ -208,11 +208,11 @@ class PackageValidator(
     private fun getSignature(packageInfo: PackageInfo): String? {
         // Security best practices dictate that an app should be signed with exactly one (1)
         // signature. Because of this, if there are multiple signatures, reject it.
-        if (packageInfo.signatures == null || packageInfo.signatures.size != 1) {
-            return null
+        return if (packageInfo.signatures == null || packageInfo.signatures.size != 1) {
+            null
         } else {
             val certificate = packageInfo.signatures[0].toByteArray()
-            return getSignatureSha256(certificate)
+            getSignatureSha256(certificate)
         }
     }
 

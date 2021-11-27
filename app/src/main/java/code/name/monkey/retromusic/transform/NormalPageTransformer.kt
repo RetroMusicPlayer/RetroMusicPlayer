@@ -16,6 +16,8 @@ package code.name.monkey.retromusic.transform
 
 import android.view.View
 import androidx.viewpager.widget.ViewPager
+import kotlin.math.abs
+import kotlin.math.max
 
 /**
  * @author Hemanth S (h4h13).
@@ -33,7 +35,7 @@ class NormalPageTransformer : ViewPager.PageTransformer {
             view.scaleY = 0.7f
         } else if (position <= 1) { // [-1,1]
             // Modify the default slide transition to shrink the page as well
-            val scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position))
+            val scaleFactor = max(MIN_SCALE, 1 - abs(position))
             val vertMargin = pageHeight * (1 - scaleFactor) / 2
             val horzMargin = pageWidth * (1 - scaleFactor) / 2
             if (position < 0) {
@@ -57,7 +59,7 @@ class NormalPageTransformer : ViewPager.PageTransformer {
     }
 
     companion object {
-        private val MIN_SCALE = 0.85f
-        private val MIN_ALPHA = 0.5f
+        private const val MIN_SCALE = 0.85f
+        private const val MIN_ALPHA = 0.5f
     }
 }

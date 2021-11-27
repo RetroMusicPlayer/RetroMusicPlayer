@@ -405,9 +405,8 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     binding.albumCoverContainer,
                     "${getString(R.string.transition_album_art)}_${album.id}"
                 )
-                startActivityForResult(
-                    intent,
-                    TAG_EDITOR_REQUEST, options.toBundle()
+                startActivity(
+                    intent, options.toBundle()
                 )
                 return true
             }
@@ -498,9 +497,5 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        const val TAG_EDITOR_REQUEST = 9002
     }
 }

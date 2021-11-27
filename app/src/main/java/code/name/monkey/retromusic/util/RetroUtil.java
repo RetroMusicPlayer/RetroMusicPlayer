@@ -40,7 +40,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -127,14 +127,14 @@ public class RetroUtil {
     return result;
   }
 
-  @Nullable
+  @NonNull
   public static Drawable getTintedVectorDrawable(
           @NonNull Context context, @DrawableRes int id, @ColorInt int color) {
     return TintHelper.createTintedDrawable(
             getVectorDrawable(context.getResources(), id, context.getTheme()), color);
   }
 
-  @Nullable
+  @NonNull
   public static Drawable getTintedVectorDrawable(
           @NonNull Resources res,
           @DrawableRes int resId,
@@ -146,10 +146,7 @@ public class RetroUtil {
   @Nullable
   public static Drawable getVectorDrawable(
           @NonNull Resources res, @DrawableRes int resId, @Nullable Resources.Theme theme) {
-    if (Build.VERSION.SDK_INT >= 21) {
-      return res.getDrawable(resId, theme);
-    }
-    return VectorDrawableCompat.create(res, resId, theme);
+    return ResourcesCompat.getDrawable(res, resId, theme);
   }
 
   public static void hideSoftKeyboard(@Nullable Activity activity) {

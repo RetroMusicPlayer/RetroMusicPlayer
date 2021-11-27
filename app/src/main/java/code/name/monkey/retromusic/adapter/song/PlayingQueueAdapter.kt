@@ -188,7 +188,7 @@ class PlayingQueueAdapter(
         private const val UP_NEXT = 2
     }
 
-    override fun onSwipeItem(holder: ViewHolder, position: Int, result: Int): SwipeResultAction? {
+    override fun onSwipeItem(holder: ViewHolder, position: Int, result: Int): SwipeResultAction {
         return if (result == SwipeableItemConstants.RESULT_CANCELED) {
             SwipeResultActionDefault()
         } else {

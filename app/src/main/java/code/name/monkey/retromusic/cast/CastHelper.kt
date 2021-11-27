@@ -11,6 +11,7 @@ import com.google.android.gms.cast.MediaInfo.STREAM_TYPE_BUFFERED
 import com.google.android.gms.cast.MediaMetadata.*
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.common.images.WebImage
+import org.json.JSONObject
 import java.net.MalformedURLException
 import java.net.URL
 
@@ -41,7 +42,7 @@ object CastHelper {
                 position,
                 MediaStatus.REPEAT_MODE_REPEAT_OFF,
                 progress,
-                null
+                JSONObject()
             )
         } catch (e: Exception) {
             e.printStackTrace()

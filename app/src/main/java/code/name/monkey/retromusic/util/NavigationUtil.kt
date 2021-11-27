@@ -20,12 +20,10 @@ import android.content.Intent
 import android.media.audiofx.AudioEffect
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.navigation.findNavController
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.*
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.audioSessionId
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 object NavigationUtil {
     fun bugReport(activity: Activity) {
@@ -38,21 +36,6 @@ object NavigationUtil {
 
     fun goToOpenSource(activity: Activity) {
         ActivityCompat.startActivity(activity, Intent(activity, LicenseActivity::class.java), null)
-    }
-
-    fun goToLyrics(activity: Activity) {
-        if (activity !is MainActivity) return
-        activity.apply {
-            //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
-            setBottomNavVisibility(false)
-            if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
-                collapsePanel()
-            }
-
-            findNavController(R.id.fragment_container).navigate(
-                R.id.lyrics_fragment
-            )
-        }
     }
 
     fun goToProVersion(context: Context) {

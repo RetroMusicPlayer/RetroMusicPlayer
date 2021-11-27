@@ -61,7 +61,7 @@ class AppWidgetClassic : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_next,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -71,7 +71,7 @@ class AppWidgetClassic : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_previous,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -81,7 +81,7 @@ class AppWidgetClassic : BaseAppWidget() {
                     context,
                     R.drawable.ic_play_arrow_white_32dp,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
+                ), 1f
             )
         )
 

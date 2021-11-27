@@ -63,7 +63,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
     private var audioVolumeObserver: AudioVolumeObserver? = null
 
-    private val audioManager: AudioManager?
+    private val audioManager: AudioManager
         get() = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
     private var _binding: FragmentCirclePlayerBinding? = null
@@ -239,7 +239,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
 
     override fun onProgressChanged(seekArc: SeekArc?, progress: Int, fromUser: Boolean) {
         val audioManager = audioManager
-        audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0)
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0)
     }
 
     override fun onStartTrackingTouch(seekArc: SeekArc?) {

@@ -26,7 +26,7 @@ object M3UWriter : M3UConstants {
     fun write(
         dir: File,
         playlist: Playlist
-    ): File? {
+    ): File {
         if (!dir.exists()) dir.mkdirs()
         val file = File(dir, playlist.name + "." + M3UConstants.EXTENSION)
         val songs = playlist.getSongs()

@@ -245,7 +245,6 @@ public class MusicService extends MediaBrowserServiceCompat
     private List<Song> originalPlayingQueue = new ArrayList<>();
     private List<Song> playingQueue = new ArrayList<>();
     private boolean pausedByTransientLossOfFocus;
-    private AudioVolumeObserver audioVolumeObserver = null;
 
     private final BroadcastReceiver becomingNoisyReceiver =
             new BroadcastReceiver() {
@@ -453,7 +452,7 @@ public class MusicService extends MediaBrowserServiceCompat
                 .registerContentObserver(
                         MediaStore.Audio.Playlists.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
 
-        audioVolumeObserver = new AudioVolumeObserver(this);
+        AudioVolumeObserver audioVolumeObserver = new AudioVolumeObserver(this);
         audioVolumeObserver.register(AudioManager.STREAM_MUSIC, this);
 
         PreferenceUtil.INSTANCE.registerOnSharedPreferenceChangedListener(this);

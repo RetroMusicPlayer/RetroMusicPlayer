@@ -153,7 +153,7 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
         return view === instance
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return context.getString(values()[position].titleRes)
     }
 }

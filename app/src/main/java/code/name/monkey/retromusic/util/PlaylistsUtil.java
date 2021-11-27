@@ -36,7 +36,6 @@ import java.util.List;
 
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.db.PlaylistWithSongs;
-import code.name.monkey.retromusic.helper.M3UConstants;
 import code.name.monkey.retromusic.helper.M3UWriter;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.PlaylistSong;

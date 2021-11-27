@@ -59,7 +59,7 @@ class AppWidgetSmall : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_next,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -69,7 +69,7 @@ class AppWidgetSmall : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_previous,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -79,7 +79,7 @@ class AppWidgetSmall : BaseAppWidget() {
                     context,
                     R.drawable.ic_play_arrow_white_32dp,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -161,7 +161,7 @@ class AppWidgetSmall : BaseAppWidget() {
                             R.id.button_toggle_play_pause, createBitmap(
                                 RetroUtil.getTintedVectorDrawable(
                                     service, playPauseRes, color
-                                )!!, 1f
+                                ), 1f
                             )
                         )
 
@@ -170,14 +170,14 @@ class AppWidgetSmall : BaseAppWidget() {
                             R.id.button_next, createBitmap(
                                 RetroUtil.getTintedVectorDrawable(
                                     service, R.drawable.ic_skip_next, color
-                                )!!, 1f
+                                ), 1f
                             )
                         )
                         appWidgetView.setImageViewBitmap(
                             R.id.button_prev, createBitmap(
                                 RetroUtil.getTintedVectorDrawable(
                                     service, R.drawable.ic_skip_previous, color
-                                )!!, 1f
+                                ), 1f
                             )
                         )
 

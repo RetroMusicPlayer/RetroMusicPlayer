@@ -247,7 +247,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         updateQueue()
     }
 
-    override fun playerToolbar(): Toolbar? {
+    override fun playerToolbar(): Toolbar {
         return binding.playerToolbar
     }
 

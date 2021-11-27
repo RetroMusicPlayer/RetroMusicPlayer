@@ -55,7 +55,7 @@ public class NotificationColorUtil {
 
   private final ImageUtils mImageUtils = new ImageUtils();
   private final WeakHashMap<Bitmap, Pair<Boolean, Integer>> mGrayscaleBitmapCache =
-      new WeakHashMap<Bitmap, Pair<Boolean, Integer>>();
+          new WeakHashMap<>();
 
   private final int mGrayscaleIconMaxSize; // @dimen/notification_large_icon_width (64dp)
 
@@ -831,11 +831,11 @@ public class NotificationColorUtil {
     }
 
     private static int constrain(int amount, int low, int high) {
-      return amount < low ? low : (amount > high ? high : amount);
+      return amount < low ? low : (Math.min(amount, high));
     }
 
     private static float constrain(float amount, float low, float high) {
-      return amount < low ? low : (amount > high ? high : amount);
+      return amount < low ? low : (Math.min(amount, high));
     }
 
     private static double pivotXyzComponent(double component) {

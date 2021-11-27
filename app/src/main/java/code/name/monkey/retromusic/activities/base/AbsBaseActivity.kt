@@ -132,7 +132,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
                             permissionDeniedMessage!!,
                             Snackbar.LENGTH_INDEFINITE
                         )
-                            .setAction(code.name.monkey.retromusic.R.string.action_grant) { requestPermissions() }
+                            .setAction(R.string.action_grant) { requestPermissions() }
                             .setActionTextColor(ThemeStore.accentColor(this)).show()
                     } else {
                         // User has deny permission and checked never show permission dialog so you can redirect to Application settings page
@@ -140,7 +140,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
                             snackBarContainer,
                             permissionDeniedMessage!!,
                             Snackbar.LENGTH_INDEFINITE
-                        ).setAction(code.name.monkey.retromusic.R.string.action_settings) {
+                        ).setAction(R.string.action_settings) {
                             val intent = Intent()
                             intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
                             val uri = Uri.fromParts(

@@ -139,7 +139,7 @@ class DeleteSongsDialog : DialogFragment() {
         }
     }
 
-    fun reloadTabs() {
+    private fun reloadTabs() {
         libraryViewModel.forceReload(ReloadType.Songs)
         libraryViewModel.forceReload(ReloadType.HomeSections)
         libraryViewModel.forceReload(ReloadType.Artists)

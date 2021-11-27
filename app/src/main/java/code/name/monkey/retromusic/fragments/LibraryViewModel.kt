@@ -43,7 +43,7 @@ class LibraryViewModel(
     private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
-    private val fabMargin = MutableLiveData<Int>(0)
+    private val fabMargin = MutableLiveData(0)
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -227,7 +227,7 @@ class LibraryViewModel(
         repository.deleteRoomPlaylist(playlists)
     }
 
-    suspend fun albumById(id: Long) = repository.albumById(id)
+    fun albumById(id: Long) = repository.albumById(id)
     suspend fun artistById(id: Long) = repository.artistById(id)
     suspend fun favoritePlaylist() = repository.favoritePlaylist()
     suspend fun isFavoriteSong(song: SongEntity) = repository.isFavoriteSong(song)

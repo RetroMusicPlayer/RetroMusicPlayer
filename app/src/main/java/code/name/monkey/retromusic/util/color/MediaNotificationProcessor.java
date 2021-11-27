@@ -75,11 +75,9 @@ public class MediaNotificationProcessor {
    */
   private static final int LIGHTNESS_TEXT_DIFFERENCE_DARK = -10;
 
-  private static final String TAG = "ColorPicking";
   private float[] mFilteredBackgroundHsl = null;
   private final Palette.Filter mBlackWhiteFilter =
           (rgb, hsl) -> !isWhiteOrBlack(hsl);
-  private boolean mIsLowPriority;
   private int backgroundColor;
   private int secondaryTextColor;
   private int primaryTextColor;
@@ -374,10 +372,6 @@ public class MediaNotificationProcessor {
   /** @return true if the color represents a color which is close to white. */
   private boolean isWhite(float[] hslColor) {
     return hslColor[2] >= WHITE_MIN_LIGHTNESS;
-  }
-
-  public void setIsLowPriority(boolean isLowPriority) {
-    mIsLowPriority = isLowPriority;
   }
 
   private void ensureColors(int backgroundColor, int mForegroundColor) {

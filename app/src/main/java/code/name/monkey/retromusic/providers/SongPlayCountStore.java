@@ -40,14 +40,11 @@ public class SongPlayCountStore extends SQLiteOpenHelper {
   @NonNull
   private static final Interpolator sInterpolator = new AccelerateInterpolator(1.5f);
   // how high to multiply the interpolation curve
-  @SuppressWarnings("FieldCanBeLocal")
   private static final int INTERPOLATOR_HEIGHT = 50;
 
   // how high the base value is. The ratio of the Height to Base is what really matters
-  @SuppressWarnings("FieldCanBeLocal")
   private static final int INTERPOLATOR_BASE = 25;
 
-  @SuppressWarnings("FieldCanBeLocal")
   private static final int ONE_WEEK_IN_MS = 1000 * 60 * 60 * 24 * 7;
 
   @NonNull
@@ -257,7 +254,7 @@ public class SongPlayCountStore extends SQLiteOpenHelper {
           for (int i = 0; i < NUM_WEEKS - weekDiff; i++) {
             playCounts[i + weekDiff] = cursor.getInt(getColumnIndexForWeek(i));
           }
-        } else if (weekDiff < 0) {
+        } else {
           // time is shifted backwards (by user) - nor typical behavior but we
           // will still handle it
 

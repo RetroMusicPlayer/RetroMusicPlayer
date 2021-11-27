@@ -42,6 +42,6 @@ class LastAddedShortcutType(context: Context) : BaseShortcutType(context) {
     companion object {
 
         val id: String
-            get() = BaseShortcutType.ID_PREFIX + "last_added"
+            get() = ID_PREFIX + "last_added"
     }
 }
