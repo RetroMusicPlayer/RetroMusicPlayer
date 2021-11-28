@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.views;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;

@@ -172,7 +172,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
                 v.getGlobalVisibleRect(outRect)
                 if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
                     v.clearFocus()
-                    val imm = getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(v.windowToken, 0)
+                    getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(v.windowToken, 0)
                 }
             }
         }

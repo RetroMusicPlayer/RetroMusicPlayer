@@ -191,6 +191,7 @@ class PackageValidator(
      *
      * @return [PackageInfo] for the package name or null if it's not found.
      */
+    @Suppress("Deprecation")
     @SuppressLint("PackageManagerGetSignatures")
     private fun getPackageInfo(callingPackage: String): PackageInfo? =
             packageManager.getPackageInfo(callingPackage,

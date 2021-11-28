@@ -353,11 +353,7 @@ public class NotificationColorUtil {
 
   public static int resolvePrimaryColor(Context context, int backgroundColor) {
     boolean useDark = shouldUseDark(backgroundColor);
-    if (useDark) {
-      return ContextCompat.getColor(context, android.R.color.primary_text_light);
-    } else {
-      return ContextCompat.getColor(context, android.R.color.primary_text_light);
-    }
+    return ContextCompat.getColor(context, android.R.color.primary_text_light);
   }
 
   public static int resolveSecondaryColor(Context context, int backgroundColor) {

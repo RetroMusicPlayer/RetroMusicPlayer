@@ -244,14 +244,14 @@ public final class ToolbarContentTintHelper {
         }
 
         @Override
-        public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
+        public void onCloseMenu(@NonNull MenuBuilder menu, boolean allMenusAreClosing) {
             if (mParentCb != null) {
                 mParentCb.onCloseMenu(menu, allMenusAreClosing);
             }
         }
 
         @Override
-        public boolean onOpenSubMenu(MenuBuilder subMenu) {
+        public boolean onOpenSubMenu(@NonNull MenuBuilder subMenu) {
             InternalToolbarContentTintUtil.applyOverflowMenuTint(mContext, mToolbar, mColor);
             return mParentCb != null && mParentCb.onOpenSubMenu(subMenu);
         }

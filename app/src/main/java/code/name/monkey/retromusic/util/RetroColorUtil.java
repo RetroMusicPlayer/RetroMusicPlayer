@@ -42,7 +42,7 @@ public class RetroColorUtil {
     float[] hsv = new float[3];
     Color.colorToHSV(color, hsv);
 
-    hsv[1] = (hsv[1] / 1 * ratio) + (0.2f * (1.0f - ratio));
+    hsv[1] = (hsv[1] * ratio) + (0.2f * (1.0f - ratio));
 
     return Color.HSVToColor(hsv);
   }

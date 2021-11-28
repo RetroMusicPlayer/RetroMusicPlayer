@@ -452,8 +452,8 @@ public class SeekArc extends View {
       return;
     }
 
-    progress = (progress > mMax) ? mMax : progress;
-    progress = (progress < 0) ? 0 : progress;
+    progress = Math.min(progress, mMax);
+    progress = Math.max(progress, 0);
     mProgress = progress;
 
     if (mOnSeekArcChangeListener != null) {

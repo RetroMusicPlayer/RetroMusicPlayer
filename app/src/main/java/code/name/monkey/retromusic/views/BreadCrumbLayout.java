@@ -399,6 +399,7 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
       return file.getPath().equals("/") ? "root" : file.getName();
     }
 
+    @NonNull
     @Override
     public String toString() {
       return "Crumb{" + "file=" + file + ", scrollPos=" + scrollPos + '}';

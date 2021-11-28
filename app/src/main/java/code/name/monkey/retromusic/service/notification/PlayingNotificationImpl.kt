@@ -70,15 +70,11 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
             action.putExtra(MainActivity.EXPAND_PANEL, PreferenceUtil.isExpandPanel)
             action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             val clickIntent =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    PendingIntent.getActivity(
+                PendingIntent.getActivity(
                         service, 0, action, if (VersionUtils.hasMarshmallow())
                             PendingIntent.FLAG_IMMUTABLE
-                        else 0
+                        else 0 or PendingIntent.FLAG_UPDATE_CURRENT
                     )
-                } else {
-                    PendingIntent.getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
-                }
 
             val serviceName = ComponentName(service, MusicService::class.java)
             val intent = Intent(ACTION_QUIT)

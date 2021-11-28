@@ -4,8 +4,6 @@ import android.content.res.ColorStateList
 import androidx.annotation.ColorInt
 import com.google.android.material.textfield.TextInputLayout
 
-import java.lang.reflect.Field
-
 /**
  * @author Aidan Follestad (afollestad)
  */
