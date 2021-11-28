@@ -61,7 +61,6 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
 
 class UserInfoFragment : Fragment() {
 
@@ -218,13 +217,13 @@ class UserInfoFragment : Fragment() {
             val appDir = requireContext().filesDir
             val file = File(appDir, fileName)
             var successful = false
-            try {
+            kotlin.runCatching {
                 val os = BufferedOutputStream(FileOutputStream(file))
                 successful = ImageUtil.resizeBitmap(bitmap, 2048)
                     .compress(Bitmap.CompressFormat.WEBP, 100, os)
                 withContext(Dispatchers.IO) { os.close() }
-            } catch (e: IOException) {
-                e.printStackTrace()
+            }.onFailure {
+                it.printStackTrace()
             }
             if (successful) {
                 withContext(Dispatchers.Main) {
