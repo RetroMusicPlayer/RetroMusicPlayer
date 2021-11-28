@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
 
         renderscriptTargetApi 29//must match target sdk and build tools
         vectorDrawables.useSupportLibrary = true
