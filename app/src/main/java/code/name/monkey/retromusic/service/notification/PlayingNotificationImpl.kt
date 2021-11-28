@@ -178,18 +178,16 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
                                 .addAction(playPauseAction)
                                 .addAction(nextAction)
 
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                builder.setStyle(
-                                    MediaStyle()
-                                        .setMediaSession(service.mediaSession.sessionToken)
-                                        .setShowActionsInCompactView(1, 2, 3)
-                                )
-                                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                                if (Build.VERSION.SDK_INT <=
-                                    Build.VERSION_CODES.O && PreferenceUtil.isColoredNotification
-                                ) {
-                                    builder.color = color
-                                }
+                            builder.setStyle(
+                                MediaStyle()
+                                    .setMediaSession(service.mediaSession.sessionToken)
+                                    .setShowActionsInCompactView(1, 2, 3)
+                            )
+                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                            if (Build.VERSION.SDK_INT <=
+                                Build.VERSION_CODES.O && PreferenceUtil.isColoredNotification
+                            ) {
+                                builder.color = color
                             }
 
                             if (stopped) {

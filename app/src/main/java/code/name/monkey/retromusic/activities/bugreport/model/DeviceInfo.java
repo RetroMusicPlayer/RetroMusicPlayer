@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -16,19 +17,16 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 public class DeviceInfo {
 
   @SuppressLint("NewApi")
-  @SuppressWarnings("deprecation")
   private final String[] abis =
-      Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-          ? Build.SUPPORTED_ABIS
-          : new String[] {Build.CPU_ABI, Build.CPU_ABI2};
+          Build.SUPPORTED_ABIS;
 
   @SuppressLint("NewApi")
   private final String[] abis32Bits =
-      Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? Build.SUPPORTED_32_BIT_ABIS : null;
+          Build.SUPPORTED_32_BIT_ABIS;
 
   @SuppressLint("NewApi")
   private final String[] abis64Bits =
-      Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? Build.SUPPORTED_64_BIT_ABIS : null;
+          Build.SUPPORTED_64_BIT_ABIS;
 
   private final String baseTheme;
 
@@ -138,6 +136,7 @@ public class DeviceInfo {
         + "</table>\n";
   }
 
+  @NonNull
   @Override
   public String toString() {
     return "App version: "

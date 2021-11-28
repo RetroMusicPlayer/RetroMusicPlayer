@@ -836,8 +836,7 @@ public class MusicService extends MediaBrowserServiceCompat
             // Request from an untrusted package: return an empty browser root
             return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT, null);
         } else {
-            /**
-             * By default return the browsable root. Treat the EXTRA_RECENT flag as a special case
+            /** By default return the browsable root. Treat the EXTRA_RECENT flag as a special case
              * and return the recent root instead.
              */
             boolean isRecentRequest = false;
@@ -1349,9 +1348,7 @@ public class MusicService extends MediaBrowserServiceCompat
                 .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.getYear())
                 .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            metaData.putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
-        }
+        metaData.putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
 
         if (PreferenceUtil.INSTANCE.isAlbumArtOnLockScreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);

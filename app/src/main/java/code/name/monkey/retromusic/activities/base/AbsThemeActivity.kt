@@ -118,12 +118,11 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         if (statusBar != null) {
             when {
                 VersionUtils.hasMarshmallow() -> statusBar.setBackgroundColor(color)
-                VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(
+                else -> statusBar.setBackgroundColor(
                     ColorUtil.darkenColor(
                         color
                     )
                 )
-                else -> statusBar.setBackgroundColor(color)
             }
         } else {
             when {

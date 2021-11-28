@@ -91,21 +91,19 @@ object ATH {
 
     fun setTaskDescriptionColor(activity: Activity, @ColorInt color: Int) {
         var colorFinal = color
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // Task description requires fully opaque color
-            colorFinal = ColorUtil.stripAlpha(colorFinal)
-            // Sets color of entry in the system recents page
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                activity.setTaskDescription(
-                    ActivityManager.TaskDescription(
-                        activity.title as String?,
-                        -1,
-                        colorFinal
-                    )
+        // Task description requires fully opaque color
+        colorFinal = ColorUtil.stripAlpha(colorFinal)
+        // Sets color of entry in the system recents page
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            activity.setTaskDescription(
+                ActivityManager.TaskDescription(
+                    activity.title as String?,
+                    -1,
+                    colorFinal
                 )
-            } else {
-                activity.setTaskDescription(ActivityManager.TaskDescription(activity.title as String?))
-            }
+            )
+        } else {
+            activity.setTaskDescription(ActivityManager.TaskDescription(activity.title as String?))
         }
     }
 

@@ -54,7 +54,7 @@ public class SAFUtil {
   public static final int REQUEST_SAF_PICK_TREE = 43;
 
   public static boolean isSAFRequired(File file) {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && !file.canWrite();
+    return !file.canWrite();
   }
 
   public static boolean isSAFRequired(String path) {
