@@ -6,9 +6,9 @@ import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
 import android.view.View
-import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.WindowInsetsControllerCompat
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -27,29 +27,20 @@ object ATH {
     }
 
     fun setLightStatusbar(activity: Activity, enabled: Boolean) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val decorView = activity.window.decorView
-            val systemUiVisibility = decorView.systemUiVisibility
-            if (enabled) {
-                decorView.systemUiVisibility =
-                    systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            } else {
-                decorView.systemUiVisibility =
-                    systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-            }
+        activity.window.apply {
+            WindowInsetsControllerCompat(
+                this,
+                decorView
+            ).isAppearanceLightStatusBars = enabled
         }
     }
 
     fun setLightNavigationbar(activity: Activity, enabled: Boolean) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val decorView = activity.window.decorView
-            var systemUiVisibility = decorView.systemUiVisibility
-            systemUiVisibility = if (enabled) {
-                systemUiVisibility or SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-            } else {
-                systemUiVisibility and SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
-            }
-            decorView.systemUiVisibility = systemUiVisibility
+        activity.window?.apply {
+            WindowInsetsControllerCompat(
+                this,
+                decorView
+            ).isAppearanceLightNavigationBars = enabled
         }
     }
 

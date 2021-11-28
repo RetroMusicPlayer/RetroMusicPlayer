@@ -25,6 +25,8 @@ import android.view.WindowManager
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
 import androidx.core.os.ConfigurationCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import code.name.monkey.appthemehelper.ATH
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
@@ -192,16 +194,20 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     }
 
     private fun setImmersiveFullscreen() {
-        val flags =
-            (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-
         if (PreferenceUtil.isFullScreenMode) {
-            window.decorView.systemUiVisibility = flags
+            WindowInsetsControllerCompat(window, window.decorView).apply {
+                systemBarsBehavior =
+                    WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                hide(WindowInsetsCompat.Type.systemBars())
+            }
         }
     }
 
     private fun exitFullscreen() {
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            show(WindowInsetsCompat.Type.systemBars())
+        }
     }
 
     override fun run() {
