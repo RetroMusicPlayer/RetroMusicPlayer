@@ -75,7 +75,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
         invalidateSettings()
     }
 
-    override fun onDisplayPreferenceDialog(preference: Preference?) {
+    override fun onDisplayPreferenceDialog(preference: Preference) {
         when (preference) {
             is LibraryPreference -> {
                 val fragment = LibraryPreferenceDialog.newInstance()
