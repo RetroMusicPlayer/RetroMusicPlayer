@@ -28,6 +28,7 @@ import android.os.Build
 import android.text.TextUtils
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
@@ -99,7 +100,11 @@ abstract class BaseAppWidget : AppWidgetProvider() {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             PendingIntent.getForegroundService(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         } else {
-            PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.getService(
+                context, 0, intent, if (VersionUtils.hasMarshmallow())
+                    PendingIntent.FLAG_IMMUTABLE
+                else 0
+            )
         }
     }
 

@@ -25,13 +25,11 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
-import android.os.Build;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -102,10 +100,7 @@ public class ImageUtil {
 
   public static Drawable getVectorDrawable(
       @NonNull Resources res, @DrawableRes int resId, @Nullable Resources.Theme theme) {
-    if (Build.VERSION.SDK_INT >= 21) {
-      return res.getDrawable(resId, theme);
-    }
-    return VectorDrawableCompat.create(res, resId, theme);
+    return res.getDrawable(resId, theme);
   }
 
   /** Makes sure that {@code mTempBuffer} has at least length {@code size}. */

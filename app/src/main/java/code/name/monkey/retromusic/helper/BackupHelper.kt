@@ -23,28 +23,33 @@ object BackupHelper {
         zipItems.addAll(getDatabaseZipItems(context))
         zipItems.addAll(getSettingsZipItems(context))
         getUserImageZipItems(context)?.let { zipItems.addAll(it) }
-        withContext(Dispatchers.IO) {
-            zipAll(zipItems, backupFile)
-        }
+        zipItems.addAll(getCustomArtistZipItems(context))
+        zipAll(zipItems, backupFile)
     }
 
     private suspend fun zipAll(zipItems: List<ZipItem>, backupFile: File) {
-        try {
-            ZipOutputStream(BufferedOutputStream(FileOutputStream(backupFile))).use { out ->
-                for (zipItem in zipItems) {
-                    FileInputStream(zipItem.filePath).use { fi ->
-                        BufferedInputStream(fi).use { origin ->
-                            val entry = ZipEntry(zipItem.zipPath)
-                            out.putNextEntry(entry)
-                            origin.copyTo(out)
+        withContext(Dispatchers.IO) {
+            kotlin.runCatching {
+                ZipOutputStream(BufferedOutputStream(FileOutputStream(backupFile))).use { out ->
+                    for (zipItem in zipItems) {
+                        FileInputStream(zipItem.filePath).use { fi ->
+                            BufferedInputStream(fi).use { origin ->
+                                val entry = ZipEntry(zipItem.zipPath)
+                                out.putNextEntry(entry)
+                                origin.copyTo(out)
+                            }
                         }
                     }
                 }
+            }.onFailure {
+                it.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(App.getContext(), "Couldn't create backup", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
-        } catch (exception: FileNotFoundException) {
-            exception.printStackTrace()
             withContext(Dispatchers.Main) {
-                Toast.makeText(App.getContext(), "Couldn't create backup", Toast.LENGTH_SHORT)
+                Toast.makeText(App.getContext(), "Backup created successfully", Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -76,6 +81,28 @@ object BackupHelper {
         }
     }
 
+    private fun getCustomArtistZipItems(context: Context): List<ZipItem> {
+        val zipItemList = mutableListOf<ZipItem>()
+        val sharedPrefPath = context.filesDir.parentFile?.absolutePath + "/shared_prefs/"
+
+        zipItemList.addAll(
+            File(context.filesDir, "custom_artist_images")
+                .listFiles()?.map {
+                    ZipItem(
+                        it.absolutePath,
+                        "$CUSTOM_ARTISTS_PATH${File.separator}custom_artist_images${File.separator}${it.name}"
+                    )
+                }?.toList() ?: listOf()
+        )
+        zipItemList.add(
+            ZipItem(
+                sharedPrefPath + File.separator + "custom_artist_image.xml",
+                "$CUSTOM_ARTISTS_PATH${File.separator}prefs${File.separator}custom_artist_image.xml"
+            )
+        )
+        return zipItemList
+    }
+
     suspend fun restoreBackup(context: Context, inputStream: InputStream?) {
         withContext(Dispatchers.IO) {
             ZipInputStream(inputStream).use {
@@ -84,6 +111,16 @@ object BackupHelper {
                     if (entry.isDatabaseEntry()) restoreDatabase(context, it, entry)
                     if (entry.isPreferenceEntry()) restorePreferences(context, it, entry)
                     if (entry.isImageEntry()) restoreImages(context, it, entry)
+                    if (entry.isCustomArtistImageEntry()) restoreCustomArtistImages(
+                        context,
+                        it,
+                        entry
+                    )
+                    if (entry.isCustomArtistPrefEntry()) restoreCustomArtistPrefs(
+                        context,
+                        it,
+                        entry
+                    )
                     entry = it.nextEntry
                 }
             }
@@ -133,6 +170,48 @@ object BackupHelper {
         }
     }
 
+    private fun restoreCustomArtistImages(
+        context: Context,
+        zipIn: ZipInputStream,
+        zipEntry: ZipEntry
+    ) {
+        val parentFolder = File(context.filesDir, "custom_artist_images")
+
+        if (!parentFolder.exists()) {
+            parentFolder.mkdirs()
+        }
+        BufferedOutputStream(
+            FileOutputStream(
+                File(
+                    parentFolder,
+                    zipEntry.getFileName()
+                )
+            )
+        ).use { bos ->
+            val bytesIn = ByteArray(DEFAULT_BUFFER_SIZE)
+            var read: Int
+            while (zipIn.read(bytesIn).also { read = it } != -1) {
+                bos.write(bytesIn, 0, read)
+            }
+        }
+    }
+
+    private fun restoreCustomArtistPrefs(
+        context: Context,
+        zipIn: ZipInputStream,
+        zipEntry: ZipEntry
+    ) {
+        val filePath =
+            context.filesDir.parentFile?.absolutePath + "/shared_prefs/" + zipEntry.getFileName()
+        BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
+            val bytesIn = ByteArray(DEFAULT_BUFFER_SIZE)
+            var read: Int
+            while (zipIn.read(bytesIn).also { read = it } != -1) {
+                bos.write(bytesIn, 0, read)
+            }
+        }
+    }
+
     val backupRootPath =
         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
             .toString() + "/RetroMusic/Backups/"
@@ -141,6 +220,7 @@ object BackupHelper {
     private const val DATABASES_PATH = "databases"
     private const val SETTINGS_PATH = "prefs"
     private const val IMAGES_PATH = "userImages"
+    private const val CUSTOM_ARTISTS_PATH = "artistImages"
     private const val THEME_PREFS_KEY_DEFAULT = "[[kabouzeid_app-theme-helper]]"
 
     private fun ZipEntry.isDatabaseEntry(): Boolean {
@@ -153,6 +233,14 @@ object BackupHelper {
 
     private fun ZipEntry.isImageEntry(): Boolean {
         return name.startsWith(IMAGES_PATH)
+    }
+
+    private fun ZipEntry.isCustomArtistImageEntry(): Boolean {
+        return name.startsWith(CUSTOM_ARTISTS_PATH) && name.contains("custom_artist_images")
+    }
+
+    private fun ZipEntry.isCustomArtistPrefEntry(): Boolean {
+        return name.startsWith(CUSTOM_ARTISTS_PATH) && name.contains("prefs")
     }
 
     private fun ZipEntry.getFileName(): String {

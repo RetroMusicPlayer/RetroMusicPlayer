@@ -281,7 +281,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
 
     private fun updateIsFavoriteIcon(animate: Boolean = false) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
+            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
             if (playlist != null) {
                 val song: SongEntity =
                     MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)

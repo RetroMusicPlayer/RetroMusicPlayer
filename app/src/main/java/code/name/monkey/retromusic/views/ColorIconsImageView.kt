@@ -20,11 +20,13 @@ import android.graphics.Color
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
+import com.google.android.material.color.MaterialColors
 
 
 class ColorIconsImageView @JvmOverloads constructor(
@@ -52,8 +54,12 @@ class ColorIconsImageView @JvmOverloads constructor(
             imageTintList =
                 ColorStateList.valueOf(ATHUtil.resolveColor(context, R.attr.colorSurface))
         } else {
-            backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(color, 0.22f))
-            imageTintList = ColorStateList.valueOf(ColorUtil.withAlpha(color, 0.75f))
+            val finalColor = MaterialColors.harmonize(
+                color,
+                ThemeStore.accentColor(context)
+            )
+            backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(finalColor, 0.22f))
+            imageTintList = ColorStateList.valueOf(ColorUtil.withAlpha(finalColor, 0.75f))
         }
         requestLayout()
         invalidate()

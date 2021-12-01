@@ -24,6 +24,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
@@ -61,7 +62,7 @@ class AppWidgetBig : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_next,
                     MaterialValueHelper.getPrimaryTextColor(context, false)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -70,16 +71,16 @@ class AppWidgetBig : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_previous,
                     MaterialValueHelper.getPrimaryTextColor(context, false)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(
+            R.id.button_toggle_play_pause, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
                     R.drawable.ic_play_arrow_white_32dp,
                     MaterialValueHelper.getPrimaryTextColor(context, false)
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -126,7 +127,7 @@ class AppWidgetBig : BaseAppWidget() {
                     service,
                     playPauseRes,
                     primaryColor
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -137,7 +138,7 @@ class AppWidgetBig : BaseAppWidget() {
                     service,
                     R.drawable.ic_skip_next,
                     primaryColor
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -146,7 +147,7 @@ class AppWidgetBig : BaseAppWidget() {
                     service,
                     R.drawable.ic_skip_previous,
                     primaryColor
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -155,7 +156,7 @@ class AppWidgetBig : BaseAppWidget() {
 
         // Load the album cover async and push the update on completion
         val p = RetroUtil.getScreenSize(service)
-        val widgetImageSize = Math.min(p.x, p.y)
+        val widgetImageSize = p.x.coerceAtMost(p.y)
         val appContext = service.applicationContext
         service.runOnUiThread {
             if (target != null) {
@@ -208,7 +209,11 @@ class AppWidgetBig : BaseAppWidget() {
         // Home
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         var pendingIntent =
-            PendingIntent.getActivity(context, 0, action, PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.getActivity(
+                context, 0, action, if (VersionUtils.hasMarshmallow())
+                    PendingIntent.FLAG_IMMUTABLE
+                else 0
+            )
         views.setOnClickPendingIntent(R.id.clickable_area, pendingIntent)
 
         // Previous track

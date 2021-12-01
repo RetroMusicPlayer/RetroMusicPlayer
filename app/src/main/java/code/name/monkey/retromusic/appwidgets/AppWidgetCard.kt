@@ -24,6 +24,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
@@ -59,7 +60,7 @@ class AppWidgetCard : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_next,
                     secondaryColor
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -68,7 +69,7 @@ class AppWidgetCard : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_previous,
                     secondaryColor
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -77,7 +78,7 @@ class AppWidgetCard : BaseAppWidget() {
                     context,
                     R.drawable.ic_play_arrow_white_32dp,
                     secondaryColor
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -112,7 +113,7 @@ class AppWidgetCard : BaseAppWidget() {
                     service,
                     playPauseRes,
                     MaterialValueHelper.getSecondaryTextColor(service, true)
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -123,7 +124,7 @@ class AppWidgetCard : BaseAppWidget() {
                     service,
                     R.drawable.ic_skip_next,
                     MaterialValueHelper.getSecondaryTextColor(service, true)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -132,7 +133,7 @@ class AppWidgetCard : BaseAppWidget() {
                     service,
                     R.drawable.ic_skip_previous,
                     MaterialValueHelper.getSecondaryTextColor(service, true)
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -231,7 +232,11 @@ class AppWidgetCard : BaseAppWidget() {
         // Home
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         var pendingIntent =
-            PendingIntent.getActivity(context, 0, action, PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.getActivity(
+                context, 0, action, if (VersionUtils.hasMarshmallow())
+                    PendingIntent.FLAG_IMMUTABLE
+                else 0
+            )
         views.setOnClickPendingIntent(R.id.image, pendingIntent)
         views.setOnClickPendingIntent(R.id.media_titles, pendingIntent)
 

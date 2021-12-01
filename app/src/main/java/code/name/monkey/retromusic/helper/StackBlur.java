@@ -76,8 +76,8 @@ public class StackBlur {
     original.getPixels(currentPixels, 0, w, 0, 0, w, h);
     int cores = EXECUTOR_THREADS;
 
-    ArrayList<BlurTask> horizontal = new ArrayList<BlurTask>(cores);
-    ArrayList<BlurTask> vertical = new ArrayList<BlurTask>(cores);
+    ArrayList<BlurTask> horizontal = new ArrayList<>(cores);
+    ArrayList<BlurTask> vertical = new ArrayList<>(cores);
     for (int i = 0; i < cores; i++) {
       horizontal.add(new BlurTask(currentPixels, w, h, (int) radius, cores, i, 1));
       vertical.add(new BlurTask(currentPixels, w, h, (int) radius, cores, i, 2));
@@ -158,7 +158,7 @@ public class StackBlur {
         for (x = 0; x < w; x++) {
           src[dst_i] =
               (int)
-                  ((src[dst_i] & 0xFFFFFFFF)
+                  ((src[dst_i])
                       | ((((sum_r * mul_sum) >>> shr_sum) & 0xff) << 16)
                       | ((((sum_g * mul_sum) >>> shr_sum) & 0xff) << 8)
                       | ((((sum_b * mul_sum) >>> shr_sum) & 0xff)));
@@ -245,7 +245,7 @@ public class StackBlur {
         for (y = 0; y < h; y++) {
           src[dst_i] =
               (int)
-                  ((src[dst_i] & 0xFFFFFFFF)
+                  ((src[dst_i])
                       | ((((sum_r * mul_sum) >>> shr_sum) & 0xff) << 16)
                       | ((((sum_g * mul_sum) >>> shr_sum) & 0xff) << 8)
                       | ((((sum_b * mul_sum) >>> shr_sum) & 0xff)));

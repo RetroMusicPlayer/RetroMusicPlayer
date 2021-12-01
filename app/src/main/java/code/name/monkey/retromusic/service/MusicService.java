@@ -75,6 +75,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
+import code.name.monkey.appthemehelper.util.VersionUtils;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.LockScreenActivity;
 import code.name.monkey.retromusic.appwidgets.AppWidgetBig;
@@ -245,7 +246,6 @@ public class MusicService extends MediaBrowserServiceCompat
     private List<Song> originalPlayingQueue = new ArrayList<>();
     private List<Song> playingQueue = new ArrayList<>();
     private boolean pausedByTransientLossOfFocus;
-    private AudioVolumeObserver audioVolumeObserver = null;
 
     private final BroadcastReceiver becomingNoisyReceiver =
             new BroadcastReceiver() {
@@ -453,7 +453,7 @@ public class MusicService extends MediaBrowserServiceCompat
                 .registerContentObserver(
                         MediaStore.Audio.Playlists.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
 
-        audioVolumeObserver = new AudioVolumeObserver(this);
+        AudioVolumeObserver audioVolumeObserver = new AudioVolumeObserver(this);
         audioVolumeObserver.register(AudioManager.STREAM_MUSIC, this);
 
         PreferenceUtil.INSTANCE.registerOnSharedPreferenceChangedListener(this);
@@ -837,8 +837,7 @@ public class MusicService extends MediaBrowserServiceCompat
             // Request from an untrusted package: return an empty browser root
             return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT, null);
         } else {
-            /**
-             * By default return the browsable root. Treat the EXTRA_RECENT flag as a special case
+            /** By default return the browsable root. Treat the EXTRA_RECENT flag as a special case
              * and return the recent root instead.
              */
             boolean isRecentRequest = false;
@@ -1157,7 +1156,7 @@ public class MusicService extends MediaBrowserServiceCompat
                     playback.setNextDataSource(getTrackUri(Objects.requireNonNull(getSongAt(nextPosition))));
                 }
                 this.nextPosition = nextPosition;
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
     }
@@ -1350,9 +1349,7 @@ public class MusicService extends MediaBrowserServiceCompat
                 .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.getYear())
                 .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            metaData.putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
-        }
+        metaData.putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
 
         if (PreferenceUtil.INSTANCE.isAlbumArtOnLockScreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
@@ -1595,11 +1592,8 @@ public class MusicService extends MediaBrowserServiceCompat
         mediaButtonIntent.setComponent(mediaButtonReceiverComponentName);
 
         PendingIntent mediaButtonReceiverPendingIntent;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent, PendingIntent.FLAG_MUTABLE);
-        } else {
-            mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent, 0);
-        }
+         mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent,
+    VersionUtils.INSTANCE.hasMarshmallow() ? PendingIntent.FLAG_IMMUTABLE : 0);
 
         mediaSession = new MediaSessionCompat(
                 this,
@@ -1608,9 +1602,6 @@ public class MusicService extends MediaBrowserServiceCompat
                 mediaButtonReceiverPendingIntent);
         MediaSessionCallback mediasessionCallback =
                 new MediaSessionCallback(getApplicationContext(), this);
-        mediaSession.setFlags(
-                MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS
-                        | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
         mediaSession.setCallback(mediasessionCallback);
         mediaSession.setActive(true);
         mediaSession.setMediaButtonReceiver(mediaButtonReceiverPendingIntent);

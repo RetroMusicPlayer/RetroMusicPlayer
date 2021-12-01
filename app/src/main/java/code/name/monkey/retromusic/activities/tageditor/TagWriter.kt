@@ -49,9 +49,9 @@ class TagWriter {
             )
         }
 
-        suspend fun writeTagsToFiles(context: Context, info: AudioTagInfo) =
+        suspend fun writeTagsToFiles(context: Context, info: AudioTagInfo) {
             withContext(Dispatchers.IO) {
-                try {
+                kotlin.runCatching {
                     var artwork: Artwork? = null
                     var albumArtFile: File? = null
                     if (info.artworkInfo?.artwork != null) {
@@ -113,18 +113,18 @@ class TagWriter {
                         deleteAlbumArt(context, info.artworkInfo!!.albumId)
                     }
                     scan(context, info.filePaths)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    scan(context, null)
+                }.onFailure {
+                    it.printStackTrace()
                 }
             }
+        }
 
 
         @RequiresApi(Build.VERSION_CODES.R)
-        suspend fun writeTagsToFilesR(context: Context, info: AudioTagInfo) =
+        suspend fun writeTagsToFilesR(context: Context, info: AudioTagInfo): List<File> =
             withContext(Dispatchers.IO) {
                 val cacheFiles = mutableListOf<File>()
-                try {
+                kotlin.runCatching {
                     var artwork: Artwork? = null
                     var albumArtFile: File? = null
                     if (info.artworkInfo?.artwork != null) {
@@ -193,11 +193,10 @@ class TagWriter {
                     } else if (deletedArtwork) {
                         deleteAlbumArt(context, info.artworkInfo!!.albumId)
                     }
-                    cacheFiles
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    listOf()
+                }.onFailure {
+                    it.printStackTrace()
                 }
+                cacheFiles
             }
     }
 }

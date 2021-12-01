@@ -316,7 +316,7 @@ class FullPlaybackControlsFragment :
 
     fun updateIsFavorite(animate: Boolean = false) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
+            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
             if (playlist != null) {
                 val song: SongEntity =
                     MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
@@ -327,7 +327,7 @@ class FullPlaybackControlsFragment :
                     } else {
                         if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                     }
-                    val drawable: Drawable? = RetroUtil.getTintedVectorDrawable(
+                    val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
                         requireContext(),
                         icon,
                         Color.WHITE
@@ -347,7 +347,7 @@ class FullPlaybackControlsFragment :
 
     private fun toggleFavorite(song: Song) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
+            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
             if (playlist != null) {
                 val songEntity = song.toSongEntity(playlist.playListId)
                 val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()

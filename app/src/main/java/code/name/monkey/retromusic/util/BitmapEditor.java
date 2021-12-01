@@ -594,7 +594,7 @@ public final class BitmapEditor {
   /**
    * getResizedBitmap method is used to Resized the Image according to custom width and height
    *
-   * @param image
+   * @param image image to be resized
    * @param newHeight (new desired height)
    * @param newWidth (new desired Width)
    * @return image (new resized image)
@@ -609,22 +609,21 @@ public final class BitmapEditor {
     // onTap the bit map
     matrix.postScale(scaleWidth, scaleHeight);
     // recreate the new Bitmap
-    Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0, width, height, matrix, false);
-    return resizedBitmap;
+    return Bitmap.createBitmap(image, 0, 0, width, height, matrix, false);
   }
 
   public static boolean TrueIfBitmapBigger(Bitmap bitmap, int size) {
     int sizeBitmap =
-        (bitmap.getHeight() > bitmap.getWidth()) ? bitmap.getHeight() : bitmap.getWidth();
+            Math.max(bitmap.getHeight(), bitmap.getWidth());
     return sizeBitmap > size;
   }
 
-  public static Bitmap GetRoundedBitmapWithBlurShadow(
+  public static Bitmap getRoundedBitmapWithBlurShadow(
       Bitmap original, int paddingTop, int paddingBottom, int paddingLeft, int paddingRight) {
     int original_width = original.getWidth();
-    int orginal_height = original.getHeight();
+    int original_height = original.getHeight();
     int bitmap_width = original_width + paddingLeft + paddingRight;
-    int bitmap_height = orginal_height + paddingTop + paddingBottom;
+    int bitmap_height = original_height + paddingTop + paddingBottom;
     Bitmap bitmap = Bitmap.createBitmap(bitmap_width, bitmap_height, Bitmap.Config.ARGB_8888);
     Canvas canvas = new Canvas(bitmap);
     Paint paint = new Paint();

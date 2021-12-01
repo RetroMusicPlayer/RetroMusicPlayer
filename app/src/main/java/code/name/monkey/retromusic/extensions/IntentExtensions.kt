@@ -3,13 +3,9 @@ package code.name.monkey.retromusic.extensions
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.os.Environment
-import android.provider.DocumentsContract
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
-import java.io.File
 import java.io.OutputStream
 
 fun Fragment.createNewFile(

@@ -18,11 +18,11 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
@@ -42,7 +42,7 @@ class AppWidgetText : BaseAppWidget() {
                     context, R.drawable.ic_skip_next, ContextCompat.getColor(
                         context, R.color.md_white_1000
                     )
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -51,7 +51,7 @@ class AppWidgetText : BaseAppWidget() {
                     context, R.drawable.ic_skip_previous, ContextCompat.getColor(
                         context, R.color.md_white_1000
                     )
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -60,7 +60,7 @@ class AppWidgetText : BaseAppWidget() {
                     context, R.drawable.ic_play_arrow_white_32dp, ContextCompat.getColor(
                         context, R.color.md_white_1000
                     )
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -89,7 +89,11 @@ class AppWidgetText : BaseAppWidget() {
 
         // Home
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        var pendingIntent = PendingIntent.getActivity(context, 0, action, PendingIntent.FLAG_IMMUTABLE)
+        var pendingIntent = PendingIntent.getActivity(
+            context, 0, action, if (VersionUtils.hasMarshmallow())
+                PendingIntent.FLAG_IMMUTABLE
+            else 0
+        )
         views.setOnClickPendingIntent(R.id.image, pendingIntent)
         views.setOnClickPendingIntent(R.id.media_titles, pendingIntent)
 
@@ -132,7 +136,7 @@ class AppWidgetText : BaseAppWidget() {
                     App.getContext(), playPauseRes, ContextCompat.getColor(
                         App.getContext(), R.color.md_white_1000
                     )
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -143,7 +147,7 @@ class AppWidgetText : BaseAppWidget() {
                     ContextCompat.getColor(
                         App.getContext(), R.color.md_white_1000
                     )
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -154,7 +158,7 @@ class AppWidgetText : BaseAppWidget() {
                     ContextCompat.getColor(
                         App.getContext(), R.color.md_white_1000
                     )
-                )!!, 1f
+                ), 1f
             )
         )
 

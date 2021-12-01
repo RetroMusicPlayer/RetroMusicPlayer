@@ -29,6 +29,7 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import java.io.File
 
 class LibraryViewModel(
     private val repository: RealRepository
@@ -43,7 +44,7 @@ class LibraryViewModel(
     private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
-    private val fabMargin = MutableLiveData<Int>(0)
+    private val fabMargin = MutableLiveData(0)
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -227,7 +228,7 @@ class LibraryViewModel(
         repository.deleteRoomPlaylist(playlists)
     }
 
-    suspend fun albumById(id: Long) = repository.albumById(id)
+    fun albumById(id: Long) = repository.albumById(id)
     suspend fun artistById(id: Long) = repository.artistById(id)
     suspend fun favoritePlaylist() = repository.favoritePlaylist()
     suspend fun isFavoriteSong(song: SongEntity) = repository.isFavoriteSong(song)
@@ -272,6 +273,16 @@ class LibraryViewModel(
     }
 
     fun playCountSongs(): LiveData<List<Song>> = liveData {
+        val songs = repository.playCountSongs().map {
+            it.toSong()
+        }
+        emit(songs)
+        // Cleaning up deleted or moved songs
+        songs.forEach { song ->
+            if (!File(song.data).exists() || song.id == -1L) {
+                repository.deleteSongInPlayCount(song.toPlayCount())
+            }
+        }
         emit(repository.playCountSongs().map {
             it.toSong()
         })
@@ -303,7 +314,21 @@ class LibraryViewModel(
         emit(repository.contributor())
     }
 
-    fun observableHistorySongs() = repository.observableHistorySongs()
+    fun observableHistorySongs(): LiveData<List<Song>> = liveData {
+        val songs = repository.historySong().map {
+            it.toSong()
+        }
+        emit(songs)
+        // Cleaning up deleted or moved songs
+        songs.forEach { song ->
+            if (!File(song.data).exists() || song.id == -1L) {
+                repository.deleteSongInHistory(song.id)
+            }
+        }
+        emit(repository.historySong().map {
+            it.toSong()
+        })
+    }
 
     fun favorites() = repository.favorites()
 

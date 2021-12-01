@@ -38,6 +38,6 @@ class ThrottledSeekHandler(
 
     companion object {
         // milliseconds to throttle before calling run() to aggregate events
-        private val THROTTLE: Long = 500
+        private const val THROTTLE: Long = 500
     }
 }

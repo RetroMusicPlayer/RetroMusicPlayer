@@ -48,7 +48,9 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         backupViewModel.loadBackups()
         val openFilePicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             lifecycleScope.launch(Dispatchers.IO) {
-                backupViewModel.restoreBackup(requireActivity(), requireContext().contentResolver.openInputStream(it))
+                it?.let {
+                    backupViewModel.restoreBackup(requireActivity(), requireContext().contentResolver.openInputStream(it))
+                }
             }
         }
         binding.createBackup.setOnClickListener {
@@ -70,7 +72,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
     }
 
     private fun checkIsEmpty() {
-        val isEmpty = backupAdapter!!.itemCount == 0
+        val isEmpty = backupAdapter?.itemCount == 0
         binding.backupTitle.isVisible = !isEmpty
         binding.backupRecyclerview.isVisible = !isEmpty
     }

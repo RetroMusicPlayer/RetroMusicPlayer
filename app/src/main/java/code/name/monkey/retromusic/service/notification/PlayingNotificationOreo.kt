@@ -83,7 +83,9 @@ class PlayingNotificationOreo : PlayingNotification() {
                 service,
                 0,
                 action,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                PendingIntent.FLAG_UPDATE_CURRENT or if (VersionUtils.hasMarshmallow())
+                    PendingIntent.FLAG_IMMUTABLE
+                else 0
             )
         val deleteIntent = buildPendingIntent(service, ACTION_QUIT, null)
 
@@ -181,21 +183,21 @@ class PlayingNotificationOreo : PlayingNotification() {
                                 service,
                                 R.drawable.ic_close,
                                 primary
-                            )!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
                         )
                         val prev = createBitmap(
                             RetroUtil.getTintedVectorDrawable(
                                 service,
                                 R.drawable.ic_skip_previous_round_white_32dp,
                                 primary
-                            )!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
                         )
                         val next = createBitmap(
                             RetroUtil.getTintedVectorDrawable(
                                 service,
                                 R.drawable.ic_skip_next_round_white_32dp,
                                 primary
-                            )!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
                         )
                         val playPause = createBitmap(
                             RetroUtil.getTintedVectorDrawable(
@@ -204,7 +206,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                                     R.drawable.ic_pause_white_48dp
                                 else
                                     R.drawable.ic_play_arrow_white_48dp, primary
-                            )!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
                         )
 
                         notificationLayout.setTextColor(R.id.title, primary)
@@ -231,7 +233,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                                     service,
                                     R.drawable.ic_notification,
                                     secondary
-                                )!!, 0.6f
+                                ), 0.6f
                             )
                         )
                         notificationLayoutBig.setImageViewBitmap(
@@ -241,7 +243,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                                     service,
                                     R.drawable.ic_notification,
                                     secondary
-                                )!!, 0.6f
+                                ), 0.6f
                             )
                         )
 
@@ -262,7 +264,11 @@ class PlayingNotificationOreo : PlayingNotification() {
     ): PendingIntent {
         val intent = Intent(action)
         intent.component = serviceName
-        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        return PendingIntent.getService(
+            context, 0, intent, if (VersionUtils.hasMarshmallow())
+                PendingIntent.FLAG_IMMUTABLE
+            else 0
+        )
     }
 
 

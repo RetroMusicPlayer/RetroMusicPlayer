@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.adapter
 
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +51,8 @@ class HomeAdapter(
     private val activity: AppCompatActivity
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), IArtistClickListener, IAlbumClickListener,
     IGenreClickListener {
+
+    private var mLastClickTime: Long = 0
 
     private var list = listOf<Home>()
 
@@ -194,6 +197,10 @@ class HomeAdapter(
             itemView.findViewById<TextView>(R.id.message).apply {
                 setTextColor(color)
                 setOnClickListener {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                        return@setOnClickListener
+                    }
+                    mLastClickTime = SystemClock.elapsedRealtime()
                     MusicPlayerRemote.playNext((home.arrayList as List<Song>).subList(0, 8))
                     if (!MusicPlayerRemote.isPlaying) {
                         MusicPlayerRemote.playNextSong()

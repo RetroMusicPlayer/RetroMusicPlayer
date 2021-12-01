@@ -76,11 +76,6 @@ object ViewUtil {
             )
     }
 
-    fun setProgressDrawable(indicator: CircularProgressIndicator, newColor: Int) {
-        indicator.setIndicatorColor(newColor)
-        indicator.trackColor = ColorUtil.withAlpha(newColor, 0.2f)
-    }
-
     fun hitTest(v: View, x: Int, y: Int): Boolean {
         val tx = (v.translationX + 0.5f).toInt()
         val ty = (v.translationY + 0.5f).toInt()

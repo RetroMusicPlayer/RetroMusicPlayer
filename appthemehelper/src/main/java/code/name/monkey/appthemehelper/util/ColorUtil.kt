@@ -3,6 +3,7 @@ package code.name.monkey.appthemehelper.util
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
+import kotlin.math.*
 
 object ColorUtil {
     fun desaturateColor(color: Int, ratio: Float): Int {
@@ -59,7 +60,7 @@ object ColorUtil {
 
     @ColorInt
     fun adjustAlpha(@ColorInt color: Int, @FloatRange(from = 0.0, to = 1.0) factor: Float): Int {
-        val alpha = Math.round(Color.alpha(color) * factor)
+        val alpha = (Color.alpha(color) * factor).roundToInt()
         val red = Color.red(color)
         val green = Color.green(color)
         val blue = Color.blue(color)
@@ -68,7 +69,7 @@ object ColorUtil {
 
     @ColorInt
     fun withAlpha(@ColorInt baseColor: Int, @FloatRange(from = 0.0, to = 1.0) alpha: Float): Int {
-        val a = Math.min(255, Math.max(0, (alpha * 255).toInt())) shl 24
+        val a = min(255, max(0, (alpha * 255).toInt())) shl 24
         val rgb = 0x00ffffff and baseColor
         return a + rgb
     }
@@ -100,15 +101,15 @@ object ColorUtil {
     }
 
     fun isColorSaturated(@ColorInt color: Int): Boolean {
-        val max = Math.max(
+        val max = max(
             0.299 * Color.red(color),
-            Math.max(0.587 * Color.green(color), 0.114 * Color.blue(color))
+            max(0.587 * Color.green(color), 0.114 * Color.blue(color))
         )
-        val min = Math.min(
+        val min = min(
             0.299 * Color.red(color),
-            Math.min(0.587 * Color.green(color), 0.114 * Color.blue(color))
+            min(0.587 * Color.green(color), 0.114 * Color.blue(color))
         )
-        val diff = Math.abs(max - min)
+        val diff = abs(max - min)
         return diff > 20
     }
 
@@ -121,10 +122,10 @@ object ColorUtil {
         )
     }
 
-    fun getDifference(@ColorInt color1: Int, @ColorInt color2: Int): Double {
-        var diff = Math.abs(0.299 * (Color.red(color1) - Color.red(color2)))
-        diff += Math.abs(0.587 * (Color.green(color1) - Color.green(color2)))
-        diff += Math.abs(0.114 * (Color.blue(color1) - Color.blue(color2)))
+    private fun getDifference(@ColorInt color1: Int, @ColorInt color2: Int): Double {
+        var diff = abs(0.299 * (Color.red(color1) - Color.red(color2)))
+        diff += abs(0.587 * (Color.green(color1) - Color.green(color2)))
+        diff += abs(0.114 * (Color.blue(color1) - Color.blue(color2)))
         return diff
     }
 

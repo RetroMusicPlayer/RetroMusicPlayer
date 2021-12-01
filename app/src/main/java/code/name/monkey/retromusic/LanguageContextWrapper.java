@@ -29,18 +29,10 @@ public class LanguageContextWrapper extends ContextWrapper {
       LocaleList localeList = new LocaleList(newLocale);
       LocaleList.setDefault(localeList);
       configuration.setLocales(localeList);
-
-      context = context.createConfigurationContext(configuration);
-
-    } else if (VersionUtils.INSTANCE.hasLollipop()) {
-      configuration.setLocale(newLocale);
-      context = context.createConfigurationContext(configuration);
-
     } else {
-      configuration.locale = newLocale;
-      res.updateConfiguration(configuration, res.getDisplayMetrics());
+      configuration.setLocale(newLocale);
     }
-
+    context = context.createConfigurationContext(configuration);
     return new LanguageContextWrapper(context);
   }
 }

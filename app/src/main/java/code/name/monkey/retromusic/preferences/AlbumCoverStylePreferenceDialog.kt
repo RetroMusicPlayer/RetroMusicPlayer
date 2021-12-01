@@ -148,7 +148,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
             return view === instace
         }
 
-        override fun getPageTitle(position: Int): CharSequence? {
+        override fun getPageTitle(position: Int): CharSequence {
             return context.getString(values()[position].titleRes)
         }
     }

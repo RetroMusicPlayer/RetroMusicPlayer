@@ -137,16 +137,6 @@ class SearchAdapter(
         }
     }
 
-    private fun getSongs(playlist: Playlist): List<Song> {
-        val songs = mutableListOf<Song>()
-        if (playlist is AbsSmartPlaylist) {
-            songs.addAll(playlist.getSongs())
-        } else {
-            songs.addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id))
-        }
-        return songs
-    }
-
     override fun getItemCount(): Int {
         return dataSet.size
     }

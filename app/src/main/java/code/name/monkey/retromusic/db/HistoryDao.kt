@@ -26,6 +26,8 @@ interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSongInHistory(historyEntity: HistoryEntity)
 
+    @Query("DELETE FROM HistoryEntity WHERE id= :songId")
+    fun deleteSongInHistory(songId: Long)
     @Query("SELECT * FROM HistoryEntity WHERE id = :songId LIMIT 1")
     suspend fun isSongPresentInHistory(songId: Long): HistoryEntity?
 

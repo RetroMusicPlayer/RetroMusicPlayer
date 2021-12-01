@@ -25,6 +25,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
@@ -60,7 +61,7 @@ class AppWidgetClassic : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_next,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -70,7 +71,7 @@ class AppWidgetClassic : BaseAppWidget() {
                     context,
                     R.drawable.ic_skip_previous,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
+                ), 1f
             )
         )
         appWidgetView.setImageViewBitmap(
@@ -80,7 +81,7 @@ class AppWidgetClassic : BaseAppWidget() {
                     context,
                     R.drawable.ic_play_arrow_white_32dp,
                     MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
+                ), 1f
             )
         )
 
@@ -221,7 +222,11 @@ class AppWidgetClassic : BaseAppWidget() {
 
         // Home
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        var pendingIntent = PendingIntent.getActivity(context, 0, action, PendingIntent.FLAG_IMMUTABLE)
+        var pendingIntent = PendingIntent.getActivity(
+            context, 0, action, if (VersionUtils.hasMarshmallow())
+                PendingIntent.FLAG_IMMUTABLE
+            else 0
+        )
         views.setOnClickPendingIntent(R.id.image, pendingIntent)
         views.setOnClickPendingIntent(R.id.media_titles, pendingIntent)
 

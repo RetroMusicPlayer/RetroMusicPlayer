@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.repository
 
 import android.provider.MediaStore.Audio.AudioColumns
+import code.name.monkey.retromusic.ALBUM_ARTIST
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
@@ -110,7 +111,8 @@ class RealArtistRepository(
             songRepository.makeSongCursor(
                 null,
                 null,
-                getSongLoaderSortOrder()
+                "lower($ALBUM_ARTIST)" +
+                        if (PreferenceUtil.artistSortOrder == SortOrder.ArtistSortOrder.ARTIST_A_Z) "" else " DESC"
             )
         )
         return splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
@@ -154,12 +156,6 @@ class RealArtistRepository(
                     }
                 } else {
                     Artist.empty
-                }
-            }.apply {
-                if (PreferenceUtil.artistSortOrder == SortOrder.ArtistSortOrder.ARTIST_A_Z) {
-                    sortedBy { it.name.lowercase() }
-                } else {
-                    sortedByDescending { it.name.lowercase() }
                 }
             }
     }

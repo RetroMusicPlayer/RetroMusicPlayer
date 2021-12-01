@@ -42,7 +42,7 @@ public class RetroColorUtil {
     float[] hsv = new float[3];
     Color.colorToHSV(color, hsv);
 
-    hsv[1] = (hsv[1] / 1 * ratio) + (0.2f * (1.0f - ratio));
+    hsv[1] = (hsv[1] * ratio) + (0.2f * (1.0f - ratio));
 
     return Color.HSVToColor(hsv);
   }
@@ -188,7 +188,7 @@ public class RetroColorUtil {
 
   public static int getDominantColor(Bitmap bitmap, int defaultFooterColor) {
     List<Palette.Swatch> swatchesTemp = Palette.from(bitmap).generate().getSwatches();
-    List<Palette.Swatch> swatches = new ArrayList<Palette.Swatch>(swatchesTemp);
+    List<Palette.Swatch> swatches = new ArrayList<>(swatchesTemp);
     Collections.sort(
         swatches, (swatch1, swatch2) -> swatch2.getPopulation() - swatch1.getPopulation());
     return swatches.size() > 0 ? swatches.get(0).getRgb() : defaultFooterColor;

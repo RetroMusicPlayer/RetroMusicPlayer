@@ -19,6 +19,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context.NOTIFICATION_SERVICE
+import android.content.pm.ServiceInfo
 import android.os.Build
 import androidx.annotation.RequiresApi
 import code.name.monkey.retromusic.R
@@ -62,7 +63,15 @@ abstract class PlayingNotification {
         }
 
         if (newNotifyMode == NOTIFY_MODE_FOREGROUND) {
-            service.startForeground(NOTIFICATION_ID, notification)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                service.startForeground(
+                    NOTIFICATION_ID,
+                    notification,
+                    ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+                )
+            } else {
+                service.startForeground(NOTIFICATION_ID,notification)
+            }
         } else if (newNotifyMode == NOTIFY_MODE_BACKGROUND) {
             notificationManager!!.notify(NOTIFICATION_ID, notification)
         }

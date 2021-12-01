@@ -36,6 +36,7 @@ interface RoomRepository {
     suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
+    suspend fun deleteSongInHistory(songId: Long)
     suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun insertBlacklistPath(blackListStoreEntities: List<BlackListStoreEntity>)
@@ -160,6 +161,10 @@ class RealRoomRepository(
 
     override suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity) =
         playCountDao.deleteSongInPlayCount(playCountEntity)
+
+    override suspend fun deleteSongInHistory(songId: Long) {
+        historyDao.deleteSongInHistory(songId)
+    }
 
     override suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity> =
         playCountDao.checkSongExistInPlayCount(songId)

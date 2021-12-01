@@ -1,26 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.RetroMusic" parent="Theme.RetroMusic.Base" />
-
-    <style name="Theme.RetroMusic.Light" parent="Theme.RetroMusic.Base.Light">
-        <item name="android:windowBackground">@color/window_color_light</item>
+    <style name="Theme.RetroMusic" parent="Theme.RetroMusic.Base">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSharedElementsUseOverlay">false</item>
+        <item name="android:textViewStyle">@style/TextViewStyleIm</item>
         <item name="android:scrollbars">none</item>
         <item name="dialogCornerRadius">16dp</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
+    <style name="Theme.RetroMusic.Light" parent="Theme.RetroMusic.Base.Light" />
+
     <style name="Theme.RetroMusic.Black" parent="Theme.RetroMusic.Base.Black">
         <item name="android:windowBackground">@color/window_color_dark</item>
-        <item name="android:scrollbars">none</item>
-        <item name="dialogCornerRadius">16dp</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
     <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive">
         <item name="android:windowBackground">@color/window_color</item>
-        <item name="android:scrollbars">none</item>
-        <item name="dialogCornerRadius">16dp</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
     <style name="Theme.RetroMusic.MD3" parent="@style/Theme.Material3.DayNight.NoActionBar">
@@ -46,7 +42,7 @@
     </style>
 
     <style name="MusicProgressSlider" parent="MusicProgressSliderParent">
-        <item name="android:thumbOffset">0dp</item>
+        <item name="android:padding">0dp</item>
     </style>
 
     <style name="Toolbar" parent="Widget.Material3.Toolbar">

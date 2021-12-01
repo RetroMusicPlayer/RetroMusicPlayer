@@ -23,7 +23,7 @@ open class ATHActivity : AppCompatActivity() {
         }
     }
 
-    fun onThemeChanged() {
+    private fun onThemeChanged() {
         postRecreate()
     }
 
