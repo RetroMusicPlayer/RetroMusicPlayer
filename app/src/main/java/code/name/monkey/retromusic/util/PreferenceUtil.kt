@@ -372,7 +372,7 @@ object PreferenceUtil {
 
     var artistGridStyle: GridStyle
         get() {
-            val id: Int = sharedPreferences.getInt(ARTIST_GRID_STYLE, 4)
+            val id: Int = sharedPreferences.getInt(ARTIST_GRID_STYLE, 3)
             return GridStyle.values().firstOrNull { gridStyle ->
                 gridStyle.id == id
             } ?: GridStyle.Circular
