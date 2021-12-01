@@ -121,7 +121,7 @@
         <activity android:name=".activities.PermissionActivity" />
         <activity android:name=".activities.LockScreenActivity" />
         <activity
-            android:name="code.name.monkey.retromusic.fragments.backup.RestoreActivity"
+            android:name=".fragments.backup.RestoreActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -256,13 +256,25 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_card_info" />
         </receiver>
+        <receiver
+            android:name=".appwidgets.AppWidgetMD3"
+            android:exported="true"
+            android:label="@string/app_widget_md3_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_md3_info" />
+        </receiver>
 
         <service
             android:name=".service.MusicService"
             android:enabled="true"
             android:exported="true"
-            android:label="@string/app_name"
             android:foregroundServiceType="mediaPlayback"
+            android:label="@string/app_name"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
@@ -284,6 +296,6 @@
         <!-- ChromeCast -->
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
-            android:value="code.name.monkey.retromusic.cast.CastOptionsProvider" />
+            android:value=".cast.CastOptionsProvider" />
     </application>
 </manifest>

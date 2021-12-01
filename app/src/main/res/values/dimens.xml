@@ -39,6 +39,9 @@
     <dimen name="app_widget_card_radius">2dp</dimen>
     <dimen name="now_playing_top_margin">12dp</dimen>
 
+    <dimen name="app_widget_md3_height">96dp</dimen>
+    <dimen name="app_widget_md3_image_size">80dp</dimen>
+
     <dimen name="icon_notification_dimen">32dp</dimen>
     <dimen name="toolbar_margin_horizontal">8dp</dimen>
     <dimen name="toolbar_height">48dp</dimen>
