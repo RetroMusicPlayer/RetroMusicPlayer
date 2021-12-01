@@ -3,6 +3,7 @@ package code.name.monkey.appthemehelper
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.view.View
 import androidx.annotation.ColorInt
@@ -34,11 +35,12 @@ object ATH {
     }
 
     fun setLightNavigationbar(activity: Activity, enabled: Boolean) {
-        activity.window?.apply {
+        activity.window.apply {
             WindowInsetsControllerCompat(
                 this,
                 decorView
             ).isAppearanceLightNavigationBars = enabled
+            navigationBarColor = Color.TRANSPARENT
         }
     }
 
