@@ -136,6 +136,7 @@ fun ShapeableImageView.setCircleShape(boolean: Boolean) {
  * This will draw our view above the navigation bar instead of behind it by adding margins.
  */
 fun View.drawAboveSystemBars(onlyPortrait: Boolean = true) {
+    if (PreferenceUtil.isFullScreenMode) return
     if (onlyPortrait && RetroUtil.isLandscape()) return
     // Create a snapshot of the view's margin state
     val initialMargin = recordInitialMarginForView(this)
@@ -157,6 +158,7 @@ fun View.drawAboveSystemBars(onlyPortrait: Boolean = true) {
  * This will draw our view above the navigation bar instead of behind it by adding padding.
  */
 fun View.drawAboveSystemBarsWithPadding(consume: Boolean = false) {
+    if (PreferenceUtil.isFullScreenMode) return
     val initialPadding = recordInitialPaddingForView(this)
 
     ViewCompat.setOnApplyWindowInsetsListener(

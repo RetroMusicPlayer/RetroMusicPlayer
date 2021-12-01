@@ -1,6 +1,5 @@
 package code.name.monkey.appthemehelper
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
@@ -18,7 +17,6 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
  */
 object ATH {
 
-    @SuppressLint("CommitPrefEdits")
     fun didThemeValuesChange(context: Context, since: Long): Boolean {
         return ThemeStore.isConfigured(context) && ThemeStore.prefs(context).getLong(
             ThemeStorePrefKeys.VALUES_CHANGED,
