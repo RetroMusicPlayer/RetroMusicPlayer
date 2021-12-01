@@ -163,7 +163,7 @@ open class AlbumAdapter(
         when (PreferenceUtil.albumSortOrder) {
             SortOrder.AlbumSortOrder.ALBUM_A_Z, SortOrder.AlbumSortOrder.ALBUM_Z_A -> sectionName =
                 dataSet[position].title
-            SortOrder.AlbumSortOrder.ALBUM_ARTIST -> sectionName = dataSet[position].artistName
+            SortOrder.AlbumSortOrder.ALBUM_ARTIST -> sectionName = dataSet[position].albumArtist
             SortOrder.AlbumSortOrder.ALBUM_YEAR -> return MusicUtil.getYearString(
                 dataSet[position].year
             )

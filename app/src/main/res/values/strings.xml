@@ -454,6 +454,7 @@
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">Album</string>
     <string name="sort_order_artist">Artist</string>
+    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>

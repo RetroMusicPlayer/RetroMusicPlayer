@@ -241,7 +241,7 @@ object MusicUtil : KoinComponent {
         var musicMediaTitle = mediaTitle
         return try {
             if (TextUtils.isEmpty(musicMediaTitle)) {
-                return ""
+                return "-"
             }
             musicMediaTitle = musicMediaTitle!!.trim { it <= ' ' }.lowercase()
             if (musicMediaTitle.startsWith("the ")) {
