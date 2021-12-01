@@ -184,9 +184,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     open fun onPanelCollapsed() {
         setMiniPlayerAlphaProgress(0F)
         // restore values
-        super.setLightStatusbarAuto(surfaceColor())
-        super.setLightNavigationAuto()
-        super.setTaskDescriptionColor(taskColor)
+        setLightStatusBarAuto(surfaceColor())
+        setLightNavigationAuto()
+        setTaskDescriptionColor(taskColor)
     }
 
     open fun onPanelExpanded() {
@@ -257,26 +257,26 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     private fun onPaletteColorChanged() {
         if (panelState == STATE_EXPANDED) {
-            super.setTaskDescriptionColor(paletteColor)
+            setTaskDescColor(paletteColor)
             val isColorLight = ColorUtil.isColorLight(paletteColor)
             if (PreferenceUtil.isAdaptiveColor && (nowPlayingScreen == Normal || nowPlayingScreen == Flat)) {
-                super.setLightNavigationBar(true)
-                super.setLightStatusbar(isColorLight)
+                setLightNavigationBar(true)
+                setLightStatusBar(isColorLight)
             } else if (nowPlayingScreen == Card || nowPlayingScreen == Blur || nowPlayingScreen == BlurCard) {
-                super.setLightStatusbar(false)
-                super.setLightNavigationBar(true)
+                setLightStatusBar(false)
+                setLightNavigationBar(true)
             } else if (nowPlayingScreen == Color || nowPlayingScreen == Tiny || nowPlayingScreen == Gradient) {
-                super.setLightNavigationBar(isColorLight)
-                super.setLightStatusbar(isColorLight)
+                setLightNavigationBar(isColorLight)
+                setLightStatusBar(isColorLight)
             } else if (nowPlayingScreen == Full) {
-                super.setLightNavigationBar(isColorLight)
-                super.setLightStatusbar(false)
+                setLightNavigationBar(isColorLight)
+                setLightStatusBar(false)
             } else if (nowPlayingScreen == Classic) {
-                super.setLightStatusbar(false)
+                setLightStatusBar(false)
             } else if (nowPlayingScreen == Fit) {
-                super.setLightStatusbar(false)
+                setLightStatusBar(false)
             } else {
-                super.setLightStatusbar(
+                setLightStatusBar(
                     ColorUtil.isColorLight(
                         ATHUtil.resolveColor(
                             this,
@@ -284,15 +284,15 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                         )
                     )
                 )
-                super.setLightNavigationBar(true)
+                setLightNavigationBar(true)
             }
         }
     }
 
-    override fun setTaskDescriptionColor(color: Int) {
+    private fun setTaskDescColor(color: Int) {
         taskColor = color
         if (panelState == STATE_COLLAPSED) {
-            super.setTaskDescriptionColor(color)
+            setTaskDescriptionColor(color)
         }
     }
 

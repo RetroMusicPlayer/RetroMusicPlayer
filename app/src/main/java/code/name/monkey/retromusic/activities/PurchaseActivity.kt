@@ -28,6 +28,9 @@ import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.databinding.ActivityProVersionBinding
+import code.name.monkey.retromusic.extensions.setDrawUnderStatusBar
+import code.name.monkey.retromusic.extensions.setLightStatusBar
+import code.name.monkey.retromusic.extensions.setStatusBarColor
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.PurchaseInfo
 
@@ -41,8 +44,8 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         super.onCreate(savedInstanceState)
         binding = ActivityProVersionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setStatusbarColor(Color.TRANSPARENT)
-        setLightStatusbar(false)
+        setStatusBarColor(Color.TRANSPARENT)
+        setLightStatusBar(false)
         binding.toolbar.navigationIcon?.setTint(Color.WHITE)
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
 

@@ -28,6 +28,10 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.databinding.ActivityShareInstagramBinding
+import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.setDrawUnderStatusBar
+import code.name.monkey.retromusic.extensions.setLightStatusBar
+import code.name.monkey.retromusic.extensions.setStatusBarColor
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -60,7 +64,7 @@ class ShareInstagramStory : AbsBaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityShareInstagramBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setStatusbarColor(Color.TRANSPARENT)
+        setStatusBarColor(Color.TRANSPARENT)
 
         binding.toolbar.setBackgroundColor(Color.TRANSPARENT)
         setSupportActionBar(binding.toolbar)
@@ -104,7 +108,7 @@ class ShareInstagramStory : AbsBaseActivity() {
     }
 
     private fun setColors(colorLight: Boolean, color: Int) {
-        setLightStatusbar(colorLight)
+        setLightStatusBar(colorLight)
         binding.toolbar.setTitleTextColor(
             MaterialValueHelper.getPrimaryTextColor(
                 this@ShareInstagramStory,

@@ -32,6 +32,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityAlbumTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.setDrawUnderStatusBar
 import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper

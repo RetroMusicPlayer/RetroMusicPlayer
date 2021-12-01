@@ -17,6 +17,8 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityWhatsNewBinding
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.setLightStatusBarAuto
+import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
 import code.name.monkey.retromusic.util.RetroUtil
 import java.io.BufferedReader
@@ -29,7 +31,7 @@ class WhatsNewActivity : AbsThemeActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityWhatsNewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setLightStatusbarAuto(resolveColor(this, R.attr.colorSurface))
+        setLightStatusBarAuto(resolveColor(this, R.attr.colorSurface))
         setTaskDescriptionColorAuto()
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)

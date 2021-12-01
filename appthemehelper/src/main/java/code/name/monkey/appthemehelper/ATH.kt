@@ -24,7 +24,7 @@ object ATH {
         ) > since
     }
 
-    fun setLightStatusbar(activity: Activity, enabled: Boolean) {
+    fun setLightStatusBar(activity: Activity, enabled: Boolean) {
         activity.window.apply {
             WindowInsetsControllerCompat(
                 this,
@@ -42,21 +42,17 @@ object ATH {
         }
     }
 
-    fun setLightNavigationbarAuto(activity: Activity, bgColor: Int) {
+    fun setLightNavigationBarAuto(activity: Activity, bgColor: Int) {
         setLightNavigationbar(activity, ColorUtil.isColorLight(bgColor))
     }
 
-    fun setNavigationbarColorAuto(activity: Activity) {
-        setNavigationbarColor(activity, ThemeStore.navigationBarColor(activity))
-    }
-
-    fun setNavigationbarColor(activity: Activity, color: Int) {
+    fun setNavigationBarColor(activity: Activity, color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             activity.window.navigationBarColor = color
         } else {
             activity.window.navigationBarColor = ColorUtil.darkenColor(color)
         }
-        setLightNavigationbarAuto(activity, color)
+        setLightNavigationBarAuto(activity, color)
     }
 
     fun setActivityToolbarColorAuto(activity: Activity, toolbar: Toolbar?) {

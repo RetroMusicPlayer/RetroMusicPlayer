@@ -30,6 +30,8 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityPermissionBinding
 import code.name.monkey.retromusic.extensions.accentBackgroundColor
+import code.name.monkey.retromusic.extensions.setStatusBarColorAuto
+import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.RingtoneManager
 
@@ -40,7 +42,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPermissionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setStatusbarColorAuto()
+        setStatusBarColorAuto()
         setTaskDescriptionColorAuto()
         setupTitle()
 

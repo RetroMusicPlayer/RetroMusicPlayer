@@ -37,6 +37,8 @@ import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.databinding.ActivityDonationBinding
+import code.name.monkey.retromusic.extensions.setStatusBarColorAuto
+import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import com.anjlab.android.iab.v3.BillingProcessor
@@ -73,7 +75,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         binding = ActivityDonationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setStatusbarColorAuto()
+        setStatusBarColorAuto()
         setTaskDescriptionColorAuto()
 
         setupToolbar()

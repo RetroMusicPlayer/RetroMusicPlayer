@@ -25,10 +25,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.ActivitySettingsBinding
-import code.name.monkey.retromusic.extensions.applyToolbar
-import code.name.monkey.retromusic.extensions.extra
-import code.name.monkey.retromusic.extensions.findNavController
-import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.*
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorCallback
 
@@ -38,7 +35,7 @@ class SettingsActivity : AbsThemeActivity(), ColorCallback, OnThemeChangedListen
         setDrawUnderStatusBar()
         val mSavedInstanceState = extra<Bundle>(TAG).value ?: savedInstanceState
         super.onCreate(mSavedInstanceState)
-        setLightStatusbarAuto(surfaceColor())
+        setLightStatusBarAuto(surfaceColor())
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
