@@ -134,8 +134,6 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
         val expand = extra<Boolean>(EXPAND_PANEL).value ?: false
         if (expand && PreferenceUtil.isExpandPanel) {
-            setBottomNavVisibility(false)
-            fromNotification = true
             expandPanel()
             intent.removeExtra(EXPAND_PANEL)
         }

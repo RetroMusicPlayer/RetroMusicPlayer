@@ -37,6 +37,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
 
+
 @Suppress("UNCHECKED_CAST")
 fun <T : View> ViewGroup.inflate(@LayoutRes layout: Int): T {
     return LayoutInflater.from(context).inflate(layout, this, false) as T
@@ -67,21 +68,21 @@ fun View.translateYAnimate(value: Float): Animator {
         .apply {
             duration = 300
             doOnStart {
-                if (value == 0f) {
-                    show()
-                }
+                show()
             }
             doOnEnd {
                 if (value != 0f) {
                     hide()
+                } else {
+                    show()
                 }
             }
             start()
         }
 }
 
-fun BottomSheetBehavior<*>.peekHeightAnimate(value: Int) {
-    ObjectAnimator.ofInt(this, "peekHeight", value)
+fun BottomSheetBehavior<*>.peekHeightAnimate(value: Int): Animator {
+    return ObjectAnimator.ofInt(this, "peekHeight", value)
         .apply {
             duration = 300
             start()

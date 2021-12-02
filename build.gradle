@@ -11,7 +11,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         def nav_version = "2.4.0-beta02"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.0.0"
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.0.1"
     }
 }
 

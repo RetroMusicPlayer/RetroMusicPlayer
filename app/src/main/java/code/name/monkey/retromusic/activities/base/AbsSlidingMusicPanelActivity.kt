@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.activities.base
 
-import android.animation.Animator
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -67,11 +66,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     companion object {
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
-        var fromNotification: Boolean = false
     }
 
     private var windowInsets: WindowInsetsCompat? = null
-    private var bottomNavAnimator: Animator? = null
     protected val libraryViewModel by viewModel<LibraryViewModel>()
     private lateinit var bottomSheetBehavior: RetroBottomSheetBehavior<FrameLayout>
     private var playerFragment: AbsPlayerFragment? = null
@@ -96,15 +93,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 }
                 STATE_COLLAPSED -> {
                     onPanelCollapsed()
-                    if (fromNotification) {
-                        hideBottomSheet(MusicPlayerRemote.playingQueue.isEmpty())
-                        fromNotification = false
-                    }
-                }
-                STATE_SETTLING, STATE_DRAGGING -> {
-                    if (fromNotification) {
-                        bottomNavigationView.isVisible = true
-                    }
                 }
                 else -> {
                     println("Do something")
@@ -319,53 +307,55 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     fun setBottomNavVisibility(visible: Boolean, animate: Boolean = false) {
-        binding.bottomNavigationView.isVisible = visible
-        hideBottomSheet(MusicPlayerRemote.playingQueue.isEmpty(), animate)
+        binding.bottomNavigationView.translateYAnimate(if (visible) 0F else dip(R.dimen.bottom_nav_height).toFloat() + windowInsets.safeGetBottomInsets())
+            .apply {
+                doOnEnd {
+                    binding.bottomNavigationView.bringToFront()
+                }
+                hideBottomSheet(
+                    hide = MusicPlayerRemote.playingQueue.isEmpty(),
+                    animate = animate,
+                    isBottomNavVisible = visible
+                )
+            }
     }
 
-    fun hideBottomSheet(hide: Boolean, animate: Boolean = false) {
+    fun hideBottomSheet(
+        hide: Boolean,
+        animate: Boolean = false,
+        isBottomNavVisible: Boolean = bottomNavigationView.isVisible
+    ) {
         val heightOfBar =
             windowInsets.safeGetBottomInsets() +
                     if (MusicPlayerRemote.isCasting) dip(R.dimen.cast_mini_player_height) else dip(R.dimen.mini_player_height)
         val heightOfBarWithTabs = heightOfBar + dip(R.dimen.bottom_nav_height)
-        val isVisible = binding.bottomNavigationView.isVisible
         if (hide) {
             bottomSheetBehavior.peekHeight = -windowInsets.safeGetBottomInsets()
             bottomSheetBehavior.state = STATE_COLLAPSED
-            libraryViewModel.setFabMargin(if (isVisible) dip(R.dimen.bottom_nav_height) else 0)
+            libraryViewModel.setFabMargin(if (isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0)
             ViewCompat.setElevation(binding.slidingPanel, 0f)
             ViewCompat.setElevation(binding.bottomNavigationView, 10f)
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-
                 ViewCompat.setElevation(binding.slidingPanel, 10f)
                 ViewCompat.setElevation(binding.bottomNavigationView, 10f)
-                if (isVisible) {
+                if (isBottomNavVisible) {
                     println("List")
                     if (animate) {
-                        bottomNavAnimator?.end()
                         bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
-                        bottomNavAnimator = binding.bottomNavigationView.translateYAnimate(0F)
                     } else {
                         bottomSheetBehavior.peekHeight = heightOfBarWithTabs
-                        binding.bottomNavigationView.translationY = 0F
                     }
                     binding.bottomNavigationView.bringToFront()
                     libraryViewModel.setFabMargin(dip(R.dimen.mini_player_height_expanded))
                 } else {
                     println("Details")
                     if (animate) {
-                        bottomSheetBehavior.peekHeightAnimate(heightOfBar)
-                        bottomNavAnimator?.end()
-                        bottomNavAnimator =
-                            bottomNavigationView.translateYAnimate(dip(R.dimen.bottom_nav_height).toFloat())
-                        bottomNavAnimator?.doOnEnd {
+                        bottomSheetBehavior.peekHeightAnimate(heightOfBar).doOnEnd {
                             binding.slidingPanel.bringToFront()
                         }
                     } else {
                         bottomSheetBehavior.peekHeight = heightOfBar
-                        binding.bottomNavigationView.translationY =
-                            dip(R.dimen.bottom_nav_height).toFloat()
                         binding.slidingPanel.bringToFront()
                     }
                     libraryViewModel.setFabMargin(dip(R.dimen.mini_player_height))
