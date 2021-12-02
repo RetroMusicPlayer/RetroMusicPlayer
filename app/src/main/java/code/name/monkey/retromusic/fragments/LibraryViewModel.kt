@@ -29,6 +29,7 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class LibraryViewModel(
@@ -278,14 +279,16 @@ class LibraryViewModel(
         }
         emit(songs)
         // Cleaning up deleted or moved songs
-        songs.forEach { song ->
-            if (!File(song.data).exists() || song.id == -1L) {
-                repository.deleteSongInPlayCount(song.toPlayCount())
+        withContext(IO) {
+            songs.forEach { song ->
+                if (!File(song.data).exists() || song.id == -1L) {
+                    repository.deleteSongInPlayCount(song.toPlayCount())
+                }
             }
+            emit(repository.playCountSongs().map {
+                it.toSong()
+            })
         }
-        emit(repository.playCountSongs().map {
-            it.toSong()
-        })
     }
 
     fun artists(type: Int): LiveData<List<Artist>> = liveData {
