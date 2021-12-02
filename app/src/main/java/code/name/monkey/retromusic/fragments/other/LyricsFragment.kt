@@ -97,6 +97,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         enterTransition = Fade()
         exitTransition = Fade()
         lyricsSectionsAdapter = LyricsSectionsAdapter(requireActivity())
