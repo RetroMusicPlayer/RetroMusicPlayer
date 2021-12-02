@@ -19,15 +19,16 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.retromusic.activities.OnThemeChangedListener
+import code.name.monkey.retromusic.extensions.safeGetBottomInsets
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.RetroUtil
 
 /**
  * @author Hemanth S (h4h13).
@@ -66,11 +67,14 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
-        // This is a workaround as CollapsingToolbarLayout consumes insets and
-        // insets are not passed to child views
+        // CollapsingToolbarLayout consumes insets and insets are not passed to child views
+        // So we get insets from root view
         // https://github.com/material-components/material-components-android/issues/1310
-        if (!RetroUtil.isLandscape()) {
-            listView.updatePadding(bottom = RetroUtil.getNavigationBarHeight())
+        ViewCompat.setOnApplyWindowInsetsListener(
+            view
+        ) { _, insets ->
+            listView.updatePadding(bottom = insets.safeGetBottomInsets())
+            insets
         }
         invalidateSettings()
     }
