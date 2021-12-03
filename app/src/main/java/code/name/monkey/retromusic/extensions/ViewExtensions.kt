@@ -69,6 +69,7 @@ fun View.translateYAnimate(value: Float): Animator {
             duration = 300
             doOnStart {
                 show()
+                bringToFront()
             }
             doOnEnd {
                 if (value != 0f) {

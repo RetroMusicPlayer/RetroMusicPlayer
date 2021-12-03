@@ -71,10 +71,13 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
             action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             val clickIntent =
                 PendingIntent.getActivity(
-                        service, 0, action, if (VersionUtils.hasMarshmallow())
-                            PendingIntent.FLAG_IMMUTABLE
-                        else 0 or PendingIntent.FLAG_UPDATE_CURRENT
-                    )
+                    service,
+                    0,
+                    action,
+                    PendingIntent.FLAG_UPDATE_CURRENT or if (VersionUtils.hasMarshmallow())
+                        PendingIntent.FLAG_IMMUTABLE
+                    else 0
+                )
 
             val serviceName = ComponentName(service, MusicService::class.java)
             val intent = Intent(ACTION_QUIT)
@@ -83,9 +86,9 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
                 service,
                 0,
                 intent,
-                if (VersionUtils.hasMarshmallow())
+                PendingIntent.FLAG_UPDATE_CURRENT or (if (VersionUtils.hasMarshmallow())
                     PendingIntent.FLAG_IMMUTABLE
-                else 0 or PendingIntent.FLAG_UPDATE_CURRENT
+                else 0)
             )
             val bigNotificationImageSize = service.resources
                 .getDimensionPixelSize(R.dimen.notification_big_image_size)
@@ -201,9 +204,9 @@ class PlayingNotificationImpl : PlayingNotification(), KoinComponent {
         val intent = Intent(action)
         intent.component = serviceName
         return PendingIntent.getService(
-            service, 0, intent,
-            if (VersionUtils.hasMarshmallow()) PendingIntent.FLAG_IMMUTABLE
-            else 0 or PendingIntent.FLAG_UPDATE_CURRENT
+            service, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or
+                    if (VersionUtils.hasMarshmallow()) PendingIntent.FLAG_IMMUTABLE
+                    else 0
         )
     }
 }
