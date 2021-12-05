@@ -433,6 +433,7 @@
     <string name="sort_order_a_z">ငယ်ရာမှကြီးရာ</string>
     <string name="sort_order_album">Album</string>
     <string name="sort_order_artist">အဆိုတော်</string>
+    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_composer">တေးရေးဆရာ</string>
     <string name="sort_order_date">ထည့်သွင်းသည့်ရက်</string>
     <string name="sort_order_date_modified">ပြင်ဆင်သည့်ရက်</string>
@@ -496,4 +497,5 @@
     <string name="restore_message">Do you want to restore backup?</string>
     <string name="title_new_backup">New Backup</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="app_widget_md3_name">MD3</string>
 </resources>
