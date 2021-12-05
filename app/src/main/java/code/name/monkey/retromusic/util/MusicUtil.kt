@@ -241,7 +241,7 @@ object MusicUtil : KoinComponent {
         var musicMediaTitle = mediaTitle
         return try {
             if (TextUtils.isEmpty(musicMediaTitle)) {
-                return ""
+                return "-"
             }
             musicMediaTitle = musicMediaTitle!!.trim { it <= ' ' }.lowercase()
             if (musicMediaTitle.startsWith("the ")) {
@@ -526,6 +526,7 @@ object MusicUtil : KoinComponent {
 
     @RequiresApi(Build.VERSION_CODES.R)
     fun deleteTracksR(activity: Activity, songs: List<Song>) {
+        removeFromQueue(songs)
         val pendingIntent = MediaStore.createDeleteRequest(activity.contentResolver, songs.map {
             getSongFileUri(it.id)
         })

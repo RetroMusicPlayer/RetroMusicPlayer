@@ -22,6 +22,8 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.extensions.setLightStatusBarAuto
+import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -42,7 +44,7 @@ abstract class AbsMainActivityFragment(@LayoutRes layout: Int) : AbsMusicService
         if (statusBar != null) {
             if (VersionUtils.hasMarshmallow()) {
                 statusBar.setBackgroundColor(color)
-                mainActivity.setLightStatusbarAuto(color)
+                mainActivity.setLightStatusBarAuto(color)
             } else {
                 statusBar.setBackgroundColor(color)
             }

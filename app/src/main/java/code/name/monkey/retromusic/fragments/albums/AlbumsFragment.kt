@@ -196,7 +196,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             0,
             R.id.action_album_sort_order_artist,
             2,
-            R.string.sort_order_artist
+            R.string.sort_order_album_artist
         ).isChecked =
             currentSortOrder.equals(AlbumSortOrder.ALBUM_ARTIST)
         sortOrderMenu.add(

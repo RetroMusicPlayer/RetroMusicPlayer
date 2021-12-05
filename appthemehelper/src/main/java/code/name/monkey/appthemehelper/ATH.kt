@@ -1,9 +1,9 @@
 package code.name.monkey.appthemehelper
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.view.View
 import androidx.annotation.ColorInt
@@ -18,7 +18,6 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
  */
 object ATH {
 
-    @SuppressLint("CommitPrefEdits")
     fun didThemeValuesChange(context: Context, since: Long): Boolean {
         return ThemeStore.isConfigured(context) && ThemeStore.prefs(context).getLong(
             ThemeStorePrefKeys.VALUES_CHANGED,
@@ -26,7 +25,7 @@ object ATH {
         ) > since
     }
 
-    fun setLightStatusbar(activity: Activity, enabled: Boolean) {
+    fun setLightStatusBar(activity: Activity, enabled: Boolean) {
         activity.window.apply {
             WindowInsetsControllerCompat(
                 this,
@@ -36,29 +35,26 @@ object ATH {
     }
 
     fun setLightNavigationbar(activity: Activity, enabled: Boolean) {
-        activity.window?.apply {
+        activity.window.apply {
             WindowInsetsControllerCompat(
                 this,
                 decorView
             ).isAppearanceLightNavigationBars = enabled
+            navigationBarColor = Color.TRANSPARENT
         }
     }
 
-    fun setLightNavigationbarAuto(activity: Activity, bgColor: Int) {
+    fun setLightNavigationBarAuto(activity: Activity, bgColor: Int) {
         setLightNavigationbar(activity, ColorUtil.isColorLight(bgColor))
     }
 
-    fun setNavigationbarColorAuto(activity: Activity) {
-        setNavigationbarColor(activity, ThemeStore.navigationBarColor(activity))
-    }
-
-    fun setNavigationbarColor(activity: Activity, color: Int) {
+    fun setNavigationBarColor(activity: Activity, color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             activity.window.navigationBarColor = color
         } else {
             activity.window.navigationBarColor = ColorUtil.darkenColor(color)
         }
-        setLightNavigationbarAuto(activity, color)
+        setLightNavigationBarAuto(activity, color)
     }
 
     fun setActivityToolbarColorAuto(activity: Activity, toolbar: Toolbar?) {

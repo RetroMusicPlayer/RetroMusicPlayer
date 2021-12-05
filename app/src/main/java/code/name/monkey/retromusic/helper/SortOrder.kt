@@ -54,11 +54,11 @@ class SortOrder {
             const val ALBUM_Z_A = "$ALBUM_A_Z DESC"
 
             /* Album sort order songs */
-            const val ALBUM_NUMBER_OF_SONGS = MediaStore.Audio.AlbumColumns.NUMBER_OF_SONGS + " DESC"
+            const val ALBUM_NUMBER_OF_SONGS =
+                MediaStore.Audio.AlbumColumns.NUMBER_OF_SONGS + " DESC"
 
-            /* Album sort order artist */
-            const val ALBUM_ARTIST = (MediaStore.Audio.Artists.DEFAULT_SORT_ORDER +
-                    ", " + MediaStore.Audio.Albums.DEFAULT_SORT_ORDER)
+            /* Album Artist sort order artist */
+            const val ALBUM_ARTIST = "case when lower(album_artist) is null then 1 else 0 end, lower(album_artist)"
 
             /* Album sort order year */
             const val ALBUM_YEAR = MediaStore.Audio.Media.YEAR + " DESC"

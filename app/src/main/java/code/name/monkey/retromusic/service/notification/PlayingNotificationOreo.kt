@@ -14,6 +14,8 @@
 
 package code.name.monkey.retromusic.service.notification
 
+import android.annotation.SuppressLint
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
@@ -21,6 +23,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
@@ -29,6 +32,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -39,224 +43,231 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.RetroUtil.createBitmap
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 
 /**
  * @author Hemanth S (h4h13).
  */
-class PlayingNotificationOreo : PlayingNotification() {
+@SuppressLint("RestrictedApi")
+class PlayingNotificationOreo(
+    val context: Context
+) : PlayingNotification(context) {
 
-    private var target: Target<BitmapPaletteWrapper>? = null
+    private var primaryColor: Int = 0
 
-    private fun getCombinedRemoteViews(collapsed: Boolean, song: Song): RemoteViews {
-        val remoteViews = RemoteViews(
-            service.packageName,
-            if (collapsed) R.layout.layout_notification_collapsed else R.layout.layout_notification_expanded
-        )
-        remoteViews.setTextViewText(
-            R.id.appName,
-            service.getString(R.string.app_name) + " • " + song.albumName
-        )
-        remoteViews.setTextViewText(R.id.title, song.title)
-        remoteViews.setTextViewText(R.id.subtitle, song.artistName)
-        linkButtons(remoteViews)
-        return remoteViews
-    }
+    init {
+        val notificationLayout = getCombinedRemoteViews(true)
+        val notificationLayoutBig = getCombinedRemoteViews(false)
 
-    override fun update() {
-        stopped = false
-        val song = service.currentSong
-        val isPlaying = service.isPlaying
-
-        val notificationLayout = getCombinedRemoteViews(true, song)
-        val notificationLayoutBig = getCombinedRemoteViews(false, song)
-
-        val action = Intent(service, MainActivity::class.java)
+        val action = Intent(context, MainActivity::class.java)
         action.putExtra(MainActivity.EXPAND_PANEL, PreferenceUtil.isExpandPanel)
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
 
         val clickIntent = PendingIntent
             .getActivity(
-                service,
+                context,
                 0,
                 action,
                 PendingIntent.FLAG_UPDATE_CURRENT or if (VersionUtils.hasMarshmallow())
                     PendingIntent.FLAG_IMMUTABLE
                 else 0
             )
-        val deleteIntent = buildPendingIntent(service, ACTION_QUIT, null)
+        val deleteIntent = buildPendingIntent(context, ACTION_QUIT, null)
 
-        val builder = NotificationCompat.Builder(service, NOTIFICATION_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setContentIntent(clickIntent)
-            .setDeleteIntent(deleteIntent)
-            .setCategory(NotificationCompat.CATEGORY_SERVICE)
-            .setPriority(NotificationCompat.PRIORITY_MAX)
-            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-            .setCustomContentView(notificationLayout)
-            .setCustomBigContentView(notificationLayoutBig)
-            .setOngoing(isPlaying)
-
-        val bigNotificationImageSize = service.resources
-            .getDimensionPixelSize(R.dimen.notification_big_image_size)
-        service.runOnUiThread {
-            if (target != null) {
-                Glide.with(service).clear(target)
-            }
-            target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
-                .load(RetroGlideExtension.getSongModel(song))
-                .centerCrop()
-                .into(object : SimpleTarget<BitmapPaletteWrapper>(
-                    bigNotificationImageSize,
-                    bigNotificationImageSize
-                ) {
-                    override fun onResourceReady(
-                        resource: BitmapPaletteWrapper,
-                        transition: Transition<in BitmapPaletteWrapper>?
-                    ) {
-                        /* val mediaNotificationProcessor = MediaNotificationProcessor(
-                             service,
-                             service
-                         ) { i, _ -> update(resource.bitmap, i) }
-                         mediaNotificationProcessor.processNotification(resource.bitmap)*/
-
-                        val colors = MediaNotificationProcessor(service, resource.bitmap)
-                        update(resource.bitmap, colors.backgroundColor)
-                    }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        update(
-                            null,
-                            resolveColor(service, R.attr.colorSurface, Color.WHITE)
-                        )
-                    }
-
-                    private fun update(bitmap: Bitmap?, bgColor: Int) {
-                        var bgColorFinal = bgColor
-                        if (bitmap != null) {
-                            notificationLayout.setImageViewBitmap(R.id.largeIcon, bitmap)
-                            notificationLayoutBig.setImageViewBitmap(R.id.largeIcon, bitmap)
-                        } else {
-                            notificationLayout.setImageViewResource(
-                                R.id.largeIcon,
-                                R.drawable.default_audio_art
-                            )
-                            notificationLayoutBig.setImageViewResource(
-                                R.id.largeIcon,
-                                R.drawable.default_audio_art
-                            )
-                        }
-
-                        // Android 12 applies a standard Notification template to every notification
-                        // which will in turn have a default background so setting a different background
-                        // than that, looks weird
-                        if (!VersionUtils.hasS()) {
-                            if (!PreferenceUtil.isColoredNotification) {
-                                bgColorFinal =
-                                    resolveColor(service, R.attr.colorPrimary, Color.WHITE)
-                            }
-                            setBackgroundColor(bgColorFinal)
-                        }
-                        setNotificationContent(ColorUtil.isColorLight(bgColorFinal))
-
-                        if (stopped) {
-                            return  // notification has been stopped before loading was finished
-                        }
-                        updateNotifyModeAndPostNotification(builder.build())
-                    }
-
-                    private fun setBackgroundColor(color: Int) {
-                        notificationLayout.setInt(R.id.image, "setBackgroundColor", color)
-                        notificationLayoutBig.setInt(R.id.image, "setBackgroundColor", color)
-                    }
-
-                    private fun setNotificationContent(dark: Boolean) {
-                        val primary = MaterialValueHelper.getPrimaryTextColor(service, dark)
-                        val secondary = MaterialValueHelper.getSecondaryTextColor(service, dark)
-
-                        val close = createBitmap(
-                            RetroUtil.getTintedVectorDrawable(
-                                service,
-                                R.drawable.ic_close,
-                                primary
-                            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
-                        )
-                        val prev = createBitmap(
-                            RetroUtil.getTintedVectorDrawable(
-                                service,
-                                R.drawable.ic_skip_previous_round_white_32dp,
-                                primary
-                            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
-                        )
-                        val next = createBitmap(
-                            RetroUtil.getTintedVectorDrawable(
-                                service,
-                                R.drawable.ic_skip_next_round_white_32dp,
-                                primary
-                            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
-                        )
-                        val playPause = createBitmap(
-                            RetroUtil.getTintedVectorDrawable(
-                                service,
-                                if (isPlaying)
-                                    R.drawable.ic_pause_white_48dp
-                                else
-                                    R.drawable.ic_play_arrow_white_48dp, primary
-                            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
-                        )
-
-                        notificationLayout.setTextColor(R.id.title, primary)
-                        notificationLayout.setTextColor(R.id.subtitle, secondary)
-                        notificationLayout.setTextColor(R.id.appName, secondary)
-
-                        notificationLayout.setImageViewBitmap(R.id.action_prev, prev)
-                        notificationLayout.setImageViewBitmap(R.id.action_next, next)
-                        notificationLayout.setImageViewBitmap(R.id.action_play_pause, playPause)
-
-                        notificationLayoutBig.setTextColor(R.id.title, primary)
-                        notificationLayoutBig.setTextColor(R.id.subtitle, secondary)
-                        notificationLayoutBig.setTextColor(R.id.appName, secondary)
-
-                        notificationLayoutBig.setImageViewBitmap(R.id.action_quit, close)
-                        notificationLayoutBig.setImageViewBitmap(R.id.action_prev, prev)
-                        notificationLayoutBig.setImageViewBitmap(R.id.action_next, next)
-                        notificationLayoutBig.setImageViewBitmap(R.id.action_play_pause, playPause)
-
-                        notificationLayout.setImageViewBitmap(
-                            R.id.smallIcon,
-                            createBitmap(
-                                RetroUtil.getTintedVectorDrawable(
-                                    service,
-                                    R.drawable.ic_notification,
-                                    secondary
-                                ), 0.6f
-                            )
-                        )
-                        notificationLayoutBig.setImageViewBitmap(
-                            R.id.smallIcon,
-                            createBitmap(
-                                RetroUtil.getTintedVectorDrawable(
-                                    service,
-                                    R.drawable.ic_notification,
-                                    secondary
-                                ), 0.6f
-                            )
-                        )
-
-                    }
-                })
-        }
-
-        if (stopped) {
-            return  // notification has been stopped before loading was finished
-        }
-        updateNotifyModeAndPostNotification(builder.build())
+        setSmallIcon(R.drawable.ic_notification)
+        setContentIntent(clickIntent)
+        setDeleteIntent(deleteIntent)
+        setCategory(NotificationCompat.CATEGORY_SERVICE)
+        priority = NotificationCompat.PRIORITY_MAX
+        setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+        setCustomContentView(notificationLayout)
+        setCustomBigContentView(notificationLayoutBig)
+        setOngoing(true)
     }
 
+    private fun getCombinedRemoteViews(collapsed: Boolean): RemoteViews {
+        val remoteViews = RemoteViews(
+            context.packageName,
+            if (collapsed) R.layout.layout_notification_collapsed else R.layout.layout_notification_expanded
+        )
+        linkButtons(remoteViews)
+        return remoteViews
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
+        val bigNotificationImageSize = context.resources
+            .getDimensionPixelSize(R.dimen.notification_big_image_size)
+        GlideApp.with(context).asBitmapPalette().songCoverOptions(song)
+            .load(RetroGlideExtension.getSongModel(song))
+            .centerCrop()
+            .into(object : CustomTarget<BitmapPaletteWrapper>(
+                bigNotificationImageSize,
+                bigNotificationImageSize
+            ) {
+                override fun onResourceReady(
+                    resource: BitmapPaletteWrapper,
+                    transition: Transition<in BitmapPaletteWrapper>?
+                ) {
+                    val colors = MediaNotificationProcessor(context, resource.bitmap)
+                    update(resource.bitmap, colors.backgroundColor)
+                }
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    update(
+                        null,
+                        resolveColor(context, R.attr.colorSurface, Color.WHITE)
+                    )
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+
+                private fun update(bitmap: Bitmap?, bgColor: Int) {
+                    var bgColorFinal = bgColor
+                    if (bitmap != null) {
+                        contentView.setImageViewBitmap(R.id.largeIcon, bitmap)
+                        bigContentView.setImageViewBitmap(R.id.largeIcon, bitmap)
+                    } else {
+                        contentView.setImageViewResource(
+                            R.id.largeIcon,
+                            R.drawable.default_audio_art
+                        )
+                        bigContentView.setImageViewResource(
+                            R.id.largeIcon,
+                            R.drawable.default_audio_art
+                        )
+                    }
+
+                    // Android 12 applies a standard Notification template to every notification
+                    // which will in turn have a default background so setting a different background
+                    // than that, looks weird
+                    if (!VersionUtils.hasS()) {
+                        if (!PreferenceUtil.isColoredNotification) {
+                            bgColorFinal =
+                                resolveColor(context, R.attr.colorSurface, Color.WHITE)
+                        }
+                        setBackgroundColor(bgColorFinal)
+                        setNotificationContent(ColorUtil.isColorLight(bgColorFinal))
+                    }else {
+                        setNotificationContent(!ColorUtil.isColorLight(context.surfaceColor()))
+                    }
+                    onUpdate()
+                }
+
+                private fun setBackgroundColor(color: Int) {
+                    contentView.setInt(R.id.image, "setBackgroundColor", color)
+                    bigContentView.setInt(R.id.image, "setBackgroundColor", color)
+                }
+
+                private fun setNotificationContent(dark: Boolean) {
+                    val primary = MaterialValueHelper.getPrimaryTextColor(context, dark)
+                    val secondary = MaterialValueHelper.getSecondaryTextColor(context, dark)
+                    primaryColor = primary
+
+                    val close = createBitmap(
+                        RetroUtil.getTintedVectorDrawable(
+                            context,
+                            R.drawable.ic_close,
+                            primary
+                        ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                    )
+                    val prev = createBitmap(
+                        RetroUtil.getTintedVectorDrawable(
+                            context,
+                            R.drawable.ic_skip_previous_round_white_32dp,
+                            primary
+                        ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                    )
+                    val next = createBitmap(
+                        RetroUtil.getTintedVectorDrawable(
+                            context,
+                            R.drawable.ic_skip_next_round_white_32dp,
+                            primary
+                        ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                    )
+                    val playPause = getPlayPauseBitmap(true)
+
+                    contentView.setTextColor(R.id.title, primary)
+                    contentView.setTextColor(R.id.subtitle, secondary)
+                    contentView.setTextColor(R.id.appName, secondary)
+
+                    contentView.setImageViewBitmap(R.id.action_prev, prev)
+                    contentView.setImageViewBitmap(R.id.action_next, next)
+                    contentView.setImageViewBitmap(R.id.action_play_pause, playPause)
+
+                    contentView.setTextViewText(
+                        R.id.appName,
+                        context.getString(R.string.app_name) + " • " + song.albumName
+                    )
+                    contentView.setTextViewText(R.id.title, song.title)
+                    contentView.setTextViewText(R.id.subtitle, song.artistName)
+
+
+                    bigContentView.setTextColor(R.id.title, primary)
+                    bigContentView.setTextColor(R.id.subtitle, secondary)
+                    bigContentView.setTextColor(R.id.appName, secondary)
+
+                    bigContentView.setImageViewBitmap(R.id.action_quit, close)
+                    bigContentView.setImageViewBitmap(R.id.action_prev, prev)
+                    bigContentView.setImageViewBitmap(R.id.action_next, next)
+                    bigContentView.setImageViewBitmap(R.id.action_play_pause, playPause)
+
+                    bigContentView.setTextViewText(
+                        R.id.appName,
+                        context.getString(R.string.app_name) + " • " + song.albumName
+                    )
+                    bigContentView.setTextViewText(R.id.title, song.title)
+                    bigContentView.setTextViewText(R.id.subtitle, song.artistName)
+
+
+                    contentView.setImageViewBitmap(
+                        R.id.smallIcon,
+                        createBitmap(
+                            RetroUtil.getTintedVectorDrawable(
+                                context,
+                                R.drawable.ic_notification,
+                                secondary
+                            ), 0.6f
+                        )
+                    )
+                    bigContentView.setImageViewBitmap(
+                        R.id.smallIcon,
+                        createBitmap(
+                            RetroUtil.getTintedVectorDrawable(
+                                context,
+                                R.drawable.ic_notification,
+                                secondary
+                            ), 0.6f
+                        )
+                    )
+                }
+            })
+    }
+
+    private fun getPlayPauseBitmap(isPlaying: Boolean): Bitmap {
+        return createBitmap(
+            RetroUtil.getTintedVectorDrawable(
+                context,
+                if (isPlaying)
+                    R.drawable.ic_pause_white_48dp
+                else
+                    R.drawable.ic_play_arrow_white_48dp, primaryColor
+            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+    }
+
+    override fun setPlaying(isPlaying: Boolean) {
+        getPlayPauseBitmap(isPlaying).also {
+            contentView.setImageViewBitmap(R.id.action_play_pause, it)
+            bigContentView.setImageViewBitmap(R.id.action_play_pause, it)
+        }
+    }
+
+    override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
+
+    }
 
     private fun buildPendingIntent(
         context: Context, action: String,
@@ -275,23 +286,34 @@ class PlayingNotificationOreo : PlayingNotification() {
     private fun linkButtons(notificationLayout: RemoteViews) {
         var pendingIntent: PendingIntent
 
-        val serviceName = ComponentName(service, MusicService::class.java)
+        val serviceName = ComponentName(context, MusicService::class.java)
 
         // Previous track
-        pendingIntent = buildPendingIntent(service, ACTION_REWIND, serviceName)
+        pendingIntent = buildPendingIntent(context, ACTION_REWIND, serviceName)
         notificationLayout.setOnClickPendingIntent(R.id.action_prev, pendingIntent)
 
         // Play and pause
-        pendingIntent = buildPendingIntent(service, ACTION_TOGGLE_PAUSE, serviceName)
+        pendingIntent = buildPendingIntent(context, ACTION_TOGGLE_PAUSE, serviceName)
         notificationLayout.setOnClickPendingIntent(R.id.action_play_pause, pendingIntent)
 
         // Next track
-        pendingIntent = buildPendingIntent(service, ACTION_SKIP, serviceName)
+        pendingIntent = buildPendingIntent(context, ACTION_SKIP, serviceName)
         notificationLayout.setOnClickPendingIntent(R.id.action_next, pendingIntent)
 
         // Close
-        pendingIntent = buildPendingIntent(service, ACTION_QUIT, serviceName)
+        pendingIntent = buildPendingIntent(context, ACTION_QUIT, serviceName)
         notificationLayout.setOnClickPendingIntent(R.id.action_quit, pendingIntent)
     }
 
+    companion object {
+        fun from(
+            context: Context,
+            notificationManager: NotificationManager
+        ): PlayingNotification {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                createNotificationChannel(context, notificationManager)
+            }
+            return PlayingNotificationOreo(context)
+        }
+    }
 }

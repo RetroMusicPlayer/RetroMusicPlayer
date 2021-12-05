@@ -26,9 +26,7 @@ import androidx.navigation.ui.setupWithNavController
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
-import code.name.monkey.retromusic.extensions.currentFragment
-import code.name.monkey.retromusic.extensions.extra
-import code.name.monkey.retromusic.extensions.findNavController
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
 import code.name.monkey.retromusic.fragments.home.HomeFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -136,8 +134,8 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
         val expand = extra<Boolean>(EXPAND_PANEL).value ?: false
         if (expand && PreferenceUtil.isExpandPanel) {
-            setBottomNavVisibility(false)
             fromNotification = true
+            slidingPanel.bringToFront()
             expandPanel()
             intent.removeExtra(EXPAND_PANEL)
         }

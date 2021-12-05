@@ -25,6 +25,7 @@ import static code.name.monkey.retromusic.ConstantsKt.CROSS_FADE_DURATION;
 import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
 import static code.name.monkey.retromusic.service.AudioFader.startFadeAnimator;
 
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.bluetooth.BluetoothDevice;
@@ -34,6 +35,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ServiceInfo;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.graphics.Point;
@@ -81,6 +83,7 @@ import code.name.monkey.retromusic.activities.LockScreenActivity;
 import code.name.monkey.retromusic.appwidgets.AppWidgetBig;
 import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
 import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
+import code.name.monkey.retromusic.appwidgets.AppWidgetMD3;
 import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
 import code.name.monkey.retromusic.appwidgets.AppWidgetText;
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper;
@@ -105,6 +108,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.volume.AudioVolumeObserver;
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener;
+import kotlin.Unit;
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal
@@ -198,6 +202,8 @@ public class MusicService extends MediaBrowserServiceCompat
 
     private final AppWidgetText appWidgetText = AppWidgetText.Companion.getInstance();
 
+    private final AppWidgetMD3 appWidgetMd3 = AppWidgetMD3.Companion.getInstance();
+
     private final BroadcastReceiver widgetIntentReceiver =
             new BroadcastReceiver() {
                 @Override
@@ -224,6 +230,10 @@ public class MusicService extends MediaBrowserServiceCompat
                             }
                             case AppWidgetText.NAME: {
                                 appWidgetText.performUpdate(MusicService.this, ids);
+                                break;
+                            }
+                            case AppWidgetMD3.NAME: {
+                                appWidgetMd3.performUpdate(MusicService.this, ids);
                                 break;
                             }
                         }
@@ -273,7 +283,8 @@ public class MusicService extends MediaBrowserServiceCompat
             new BroadcastReceiver() {
                 @Override
                 public void onReceive(final Context context, final Intent intent) {
-                    updateNotification();
+                    playingNotification.updateFavorite(getCurrentSong(), MusicService.this::startForegroundOrNotify);
+                    startForegroundOrNotify();
                 }
             };
     private final BroadcastReceiver lockScreenReceiver =
@@ -356,6 +367,8 @@ public class MusicService extends MediaBrowserServiceCompat
     private ThrottledSeekHandler throttledSeekHandler;
     private Handler uiThreadHandler;
     private PowerManager.WakeLock wakeLock;
+    private NotificationManager notificationManager;
+    private boolean isForeground = false;
 
     private static Bitmap copy(Bitmap bitmap) {
         Bitmap.Config config = bitmap.getConfig();
@@ -417,6 +430,10 @@ public class MusicService extends MediaBrowserServiceCompat
         registerReceiver(updateFavoriteReceiver, new IntentFilter(FAVORITE_STATE_CHANGED));
         registerReceiver(lockScreenReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
 
+        setSessionToken(mediaSession.getSessionToken());
+        if (VersionUtils.INSTANCE.hasMarshmallow()) {
+            notificationManager = getSystemService(NotificationManager.class);
+        }
         initNotification();
 
         mediaStoreObserver = new MediaStoreObserver(this, playerHandler);
@@ -467,7 +484,6 @@ public class MusicService extends MediaBrowserServiceCompat
 
         mPackageValidator = new PackageValidator(this, R.xml.allowed_media_browser_callers);
         mMusicProvider.setMusicService(this);
-        setSessionToken(mediaSession.getSessionToken());
     }
 
     @Override
@@ -765,11 +781,10 @@ public class MusicService extends MediaBrowserServiceCompat
     public void initNotification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
                 && !PreferenceUtil.INSTANCE.isClassicNotification()) {
-            playingNotification = new PlayingNotificationImpl();
+            playingNotification = PlayingNotificationImpl.Companion.from(this, notificationManager, mediaSession);
         } else {
-            playingNotification = new PlayingNotificationOreo();
+            playingNotification = PlayingNotificationOreo.Companion.from(this, notificationManager);
         }
-        playingNotification.init(this);
     }
 
     public boolean isLastTrack() {
@@ -837,7 +852,8 @@ public class MusicService extends MediaBrowserServiceCompat
             // Request from an untrusted package: return an empty browser root
             return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT, null);
         } else {
-            /** By default return the browsable root. Treat the EXTRA_RECENT flag as a special case
+            /**
+             * By default return the browsable root. Treat the EXTRA_RECENT flag as a special case
              * and return the recent root instead.
              */
             boolean isRecentRequest = false;
@@ -882,7 +898,7 @@ public class MusicService extends MediaBrowserServiceCompat
                 /* Switch to MultiPlayer if Crossfade duration is 0 and
                 Playback is not an instance of MultiPlayer */
                 if (playback != null)
-                  playback.setCrossFadeDuration(PreferenceUtil.INSTANCE.getCrossFadeDuration());
+                    playback.setCrossFadeDuration(PreferenceUtil.INSTANCE.getCrossFadeDuration());
                 if (!(playback instanceof MultiPlayer) && PreferenceUtil.INSTANCE.getCrossFadeDuration() == 0) {
                     if (playback != null) {
                         playback.release();
@@ -1042,6 +1058,7 @@ public class MusicService extends MediaBrowserServiceCompat
     }
 
     public void pause() {
+        Log.i(TAG, "Paused");
         pausedByTransientLossOfFocus = false;
         if (playback != null && playback.isPlaying()) {
             startFadeAnimator(playback, false, () -> {
@@ -1163,7 +1180,8 @@ public class MusicService extends MediaBrowserServiceCompat
 
     public void quit() {
         pause();
-        playingNotification.stop();
+        stopForeground(true);
+        notificationManager.cancel(PlayingNotification.NOTIFICATION_ID);
 
         closeAudioEffectSession();
         getAudioManager().abandonAudioFocus(audioFocusListener);
@@ -1326,7 +1344,8 @@ public class MusicService extends MediaBrowserServiceCompat
 
     public void updateNotification() {
         if (playingNotification != null && getCurrentSong().getId() != -1) {
-            playingNotification.update();
+            stopForegroundAndNotification();
+            initNotification();
         }
     }
 
@@ -1400,17 +1419,19 @@ public class MusicService extends MediaBrowserServiceCompat
     private void handleChangeInternal(@NonNull final String what) {
         switch (what) {
             case PLAY_STATE_CHANGED:
-                updateNotification();
                 updateMediaSessionPlaybackState();
                 final boolean isPlaying = isPlaying();
                 if (!isPlaying && getSongProgressMillis() > 0) {
                     savePositionInTrack();
                 }
                 songPlayCountHelper.notifyPlayStateChanged(isPlaying);
+                playingNotification.setPlaying(isPlaying);
+                startForegroundOrNotify();
                 break;
             case FAVORITE_STATE_CHANGED:
+                playingNotification.updateFavorite(getCurrentSong(), this::startForegroundOrNotify);
             case META_CHANGED:
-                updateNotification();
+                playingNotification.updateMetadata(getCurrentSong(), this::startForegroundOrNotify);
                 updateMediaSessionMetaData();
                 updateMediaSessionPlaybackState();
                 savePosition();
@@ -1428,10 +1449,39 @@ public class MusicService extends MediaBrowserServiceCompat
                 if (playingQueue.size() > 0) {
                     prepareNext();
                 } else {
-                    playingNotification.stop();
+                    stopForegroundAndNotification();
                 }
                 break;
         }
+    }
+
+    private Unit startForegroundOrNotify() {
+        if (!isForeground) {
+            // Specify that this is a media service, if supported.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startForeground(
+                        PlayingNotification.NOTIFICATION_ID, playingNotification.build(),
+                        ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+                );
+            } else {
+                startForeground(PlayingNotification.NOTIFICATION_ID, playingNotification.build());
+            }
+
+            isForeground = true;
+        } else {
+            // If we are already in foreground just update the notification
+            notificationManager.notify(
+                    PlayingNotification.NOTIFICATION_ID, playingNotification.build()
+            );
+        }
+        return Unit.INSTANCE;
+    }
+
+    private void stopForegroundAndNotification() {
+        stopForeground(true);
+        notificationManager.cancel(PlayingNotification.NOTIFICATION_ID);
+
+        isForeground = false;
     }
 
     private boolean openCurrent() {
@@ -1551,6 +1601,7 @@ public class MusicService extends MediaBrowserServiceCompat
         appWidgetSmall.notifyChange(this, what);
         appWidgetCard.notifyChange(this, what);
         appWidgetText.notifyChange(this, what);
+        appWidgetMd3.notifyChange(this, what);
     }
 
     private void setCustomAction(PlaybackStateCompat.Builder stateBuilder) {
@@ -1592,8 +1643,8 @@ public class MusicService extends MediaBrowserServiceCompat
         mediaButtonIntent.setComponent(mediaButtonReceiverComponentName);
 
         PendingIntent mediaButtonReceiverPendingIntent;
-         mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent,
-    VersionUtils.INSTANCE.hasMarshmallow() ? PendingIntent.FLAG_IMMUTABLE : 0);
+        mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent,
+                VersionUtils.INSTANCE.hasMarshmallow() ? PendingIntent.FLAG_IMMUTABLE : 0);
 
         mediaSession = new MediaSessionCompat(
                 this,

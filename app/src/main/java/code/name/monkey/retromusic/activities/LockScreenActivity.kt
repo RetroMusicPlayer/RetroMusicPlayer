@@ -24,7 +24,7 @@ import androidx.core.view.ViewCompat
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityLockScreenBinding
-import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenControlsFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -47,7 +47,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
         binding = ActivityLockScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         hideStatusBar()
-        setStatusbarColorAuto()
+        setStatusBarColorAuto()
         setTaskDescriptionColorAuto()
 
         val config = SlidrConfig.Builder().listener(object : SlidrListener {
