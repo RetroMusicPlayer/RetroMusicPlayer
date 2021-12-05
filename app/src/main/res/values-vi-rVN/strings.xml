@@ -434,6 +434,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="sort_order_a_z">Tăng dần</string>
     <string name="sort_order_album">Album</string>
     <string name="sort_order_artist">Nghệ sĩ</string>
+    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_composer">Tác giả</string>
     <string name="sort_order_date">Ngày</string>
     <string name="sort_order_date_modified">Ngày chỉnh sửa</string>
@@ -497,4 +498,5 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="restore_message">Do you want to restore backup?</string>
     <string name="title_new_backup">New Backup</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="app_widget_md3_name">MD3</string>
 </resources>
