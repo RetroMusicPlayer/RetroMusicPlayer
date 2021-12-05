@@ -433,6 +433,7 @@
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">앨범</string>
     <string name="sort_order_artist">아티스트</string>
+    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
@@ -496,4 +497,5 @@
     <string name="restore_message">Do you want to restore backup?</string>
     <string name="title_new_backup">New Backup</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="app_widget_md3_name">MD3</string>
 </resources>
