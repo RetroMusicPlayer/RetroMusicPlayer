@@ -34,6 +34,7 @@ import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialFadeThrough
@@ -42,7 +43,7 @@ import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 
 abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
-    AbsMainActivityFragment(R.layout.fragment_main_recycler) {
+    AbsMainActivityFragment(R.layout.fragment_main_recycler), IScrollHelper {
 
     private var _binding: FragmentMainRecyclerBinding? = null
     private val binding get() = _binding!!
@@ -200,7 +201,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     val container get() = binding.root
 
-    fun scrollToTop() {
+    override fun scrollToTop() {
         recyclerView.scrollToPosition(0)
         binding.appBarLayout.setExpanded(true, true)
     }

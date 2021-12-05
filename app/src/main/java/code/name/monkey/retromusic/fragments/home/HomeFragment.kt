@@ -40,6 +40,7 @@ import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -47,7 +48,7 @@ import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 
 class HomeFragment :
-    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home) {
+    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home), IScrollHelper {
 
     private var _binding: HomeBindingAdapter? = null
     private val binding get() = _binding!!
@@ -189,7 +190,7 @@ class HomeFragment :
         CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
     }
 
-    fun scrollToTop() {
+    override fun scrollToTop() {
         binding.container.scrollTo(0, 0)
         binding.appBarLayout.setExpanded(true)
     }
