@@ -938,8 +938,9 @@ public class MusicService extends MediaBrowserServiceCompat
                 updateNotification();
                 break;
             case CLASSIC_NOTIFICATION:
-                initNotification();
                 updateNotification();
+                playingNotification.setPlaying(isPlaying());
+                playingNotification.updateMetadata(getCurrentSong(), this::startForegroundOrNotify);
                 break;
             case TOGGLE_HEADSET:
                 registerHeadsetEvents();
