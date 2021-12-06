@@ -109,8 +109,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                     setBottomNavVisibility(visible = true, animate = true)
                 }
                 R.id.playing_queue_fragment -> {
-                    setBottomNavVisibility(visible = false)
-                    hideBottomSheet(true)
+                    setBottomNavVisibility(visible = false, hideBottomSheet = true)
                 }
                 else -> setBottomNavVisibility(
                     visible = false,

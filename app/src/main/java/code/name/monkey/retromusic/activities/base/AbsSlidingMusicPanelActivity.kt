@@ -92,7 +92,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             when (newState) {
                 STATE_EXPANDED -> {
                     onPanelExpanded()
-
                 }
                 STATE_COLLAPSED -> {
                     onPanelCollapsed()
@@ -316,10 +315,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         })
     }
 
-    fun setBottomNavVisibility(visible: Boolean, animate: Boolean = false) {
+    fun setBottomNavVisibility(visible: Boolean, animate: Boolean = false, hideBottomSheet: Boolean = MusicPlayerRemote.playingQueue.isEmpty()) {
         val translationY =
             if (visible) 0F else dip(R.dimen.bottom_nav_height).toFloat() + windowInsets.safeGetBottomInsets()
-        if (animate) {
+        val mAnimate = animate && bottomSheetBehavior.state == STATE_COLLAPSED
+        if (mAnimate) {
             binding.bottomNavigationView.translateYAnimate(translationY).doOnEnd {
                 if (visible && bottomSheetBehavior.state != STATE_EXPANDED) {
                     binding.bottomNavigationView.bringToFront()
@@ -328,12 +328,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         } else {
             binding.bottomNavigationView.translationY =
                 translationY
+            binding.bottomNavigationView.isVisible = false
             if (visible && bottomSheetBehavior.state != STATE_EXPANDED) {
                 binding.bottomNavigationView.bringToFront()
             }
         }
         hideBottomSheet(
-            hide = MusicPlayerRemote.playingQueue.isEmpty(),
+            hide = hideBottomSheet,
             animate = animate,
             isBottomNavVisible = visible
         )
