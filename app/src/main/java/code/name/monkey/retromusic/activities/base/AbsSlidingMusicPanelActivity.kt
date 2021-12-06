@@ -232,9 +232,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         super.onQueueChanged()
         // Mini player should be hidden in Playing Queue
         // it may pop up if hideBottomSheet is called
-        if (currentFragment(R.id.fragment_container) !is PlayingQueueFragment &&
-            bottomSheetBehavior.state != STATE_EXPANDED
-        ) {
+        if (currentFragment(R.id.fragment_container) !is PlayingQueueFragment) {
             hideBottomSheet(MusicPlayerRemote.playingQueue.isEmpty())
         }
     }
