@@ -107,9 +107,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         mainActivity.addMusicServiceEventListener(libraryViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
-        enterTransition = MaterialFadeThrough().apply {
-            addTarget(binding.recyclerView)
-        }
+        enterTransition = MaterialFadeThrough().addTarget(binding.recyclerView)
+        reenterTransition = MaterialFadeThrough().addTarget(binding.recyclerView)
+
         setUpBreadCrumbs()
         setUpRecyclerView()
         setUpAdapter()
