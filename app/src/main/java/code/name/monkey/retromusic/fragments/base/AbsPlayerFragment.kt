@@ -38,6 +38,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
+import androidx.transition.Fade
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID

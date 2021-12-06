@@ -48,7 +48,8 @@ import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 
 class HomeFragment :
-    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home), IScrollHelper {
+    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home),
+    IScrollHelper {
 
     private var _binding: HomeBindingAdapter? = null
     private val binding get() = _binding!!
@@ -61,9 +62,8 @@ class HomeFragment :
         setupListeners()
         binding.titleWelcome.text = String.format("%s", PreferenceUtil.userName)
 
-        enterTransition = MaterialFadeThrough().apply {
-            addTarget(binding.contentContainer)
-        }
+        enterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
+        reenterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
 
         val homeAdapter = HomeAdapter(mainActivity)
         binding.recyclerView.apply {

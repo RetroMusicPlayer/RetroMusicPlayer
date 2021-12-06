@@ -95,9 +95,6 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                 }
             }
         }
-        // This is more like a work-around as for start destination of navGraph
-        // enterTransition won't work as expected
-        navGraph.setStartDestination(R.id.libraryFragment)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre -> {

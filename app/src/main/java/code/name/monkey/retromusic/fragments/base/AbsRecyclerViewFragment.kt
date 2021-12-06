@@ -57,9 +57,8 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         _binding = FragmentMainRecyclerBinding.bind(view)
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
-        enterTransition = MaterialFadeThrough().apply {
-            addTarget(binding.recyclerView)
-        }
+        enterTransition = MaterialFadeThrough().addTarget(binding.recyclerView)
+        reenterTransition = MaterialFadeThrough().addTarget(binding.recyclerView)
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         initLayoutManager()
