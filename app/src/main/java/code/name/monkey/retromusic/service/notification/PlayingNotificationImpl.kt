@@ -163,6 +163,7 @@ class PlayingNotificationImpl(
                     onUpdate()
                 }
             })
+        updateFavorite(song, onUpdate)
     }
 
     private fun buildPlayAction(isPlaying: Boolean): NotificationCompat.Action {
