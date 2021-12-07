@@ -476,9 +476,10 @@ public class MediaNotificationProcessor {
 
   public static MediaNotificationProcessor errorColor(Context context) {
     MediaNotificationProcessor errorColors = new MediaNotificationProcessor(context);
-    errorColors.backgroundColor = 0x15724528;
-    errorColors.primaryTextColor = 0x6974059;
-    errorColors.secondaryTextColor = 0x8684677;
+    errorColors.backgroundColor = -15724528;
+    errorColors.primaryTextColor = -6974059;
+    errorColors.secondaryTextColor = -8684677;
+    errorColors.actionBarColor = -6974059;
     return errorColors;
   }
 }
