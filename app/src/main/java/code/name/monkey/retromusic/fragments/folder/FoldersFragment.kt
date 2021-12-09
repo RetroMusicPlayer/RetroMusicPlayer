@@ -21,7 +21,7 @@ import android.os.Environment
 import android.text.Html
 import android.view.*
 import android.webkit.MimeTypeMap
-import android.widget.PopupMenu
+import androidx.appcompat.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.loader.app.LoaderManager
@@ -188,7 +188,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     override fun onFileMenuClicked(file: File, view: View) {
-        val popupMenu = PopupMenu(activity, view)
+        val popupMenu = PopupMenu(requireActivity(), view)
         if (file.isDirectory) {
             popupMenu.inflate(R.menu.menu_item_directory)
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
