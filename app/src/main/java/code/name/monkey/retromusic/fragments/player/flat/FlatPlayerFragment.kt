@@ -81,7 +81,7 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(animation.animatedValue as Int, android.R.color.transparent), 0
             )
-            binding.colorGradientBackground.background = drawable
+            _binding?.colorGradientBackground?.background = drawable
         }
         valueAnimator?.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong())?.start()
     }
