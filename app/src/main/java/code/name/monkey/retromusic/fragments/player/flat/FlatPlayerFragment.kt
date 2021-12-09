@@ -91,7 +91,7 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
         _binding = FragmentFlatPlayerBinding.bind(view)
         setUpPlayerToolbar()
         setUpSubFragments()
-        binding.playbackControlsFragment.drawAboveSystemBars()
+        binding.playerToolbar.drawAboveSystemBars()
     }
 
     override fun onShow() {
