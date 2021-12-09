@@ -94,8 +94,7 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="circleImageView" parent="">
-        <item name="cornerFamily">rounded</item>
+    <style name="circleImageView" parent="ShapeAppearance.MaterialComponents">
         <item name="cornerSize">40dp</item>
     </style>
 
