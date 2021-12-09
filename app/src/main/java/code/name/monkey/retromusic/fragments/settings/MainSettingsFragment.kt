@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -26,11 +27,10 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMainSettingsBinding
-import code.name.monkey.retromusic.extensions.addBottomInsets
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.safeGetBottomInsets
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.RetroUtil
 
 class MainSettingsFragment : Fragment(), View.OnClickListener {
 
@@ -87,8 +87,12 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             binding.buyPremium.setTextColor(it)
             binding.diamondIcon.imageTintList = ColorStateList.valueOf(it)
         }
-        if (!RetroUtil.isLandscape()) {
-            binding.container.updatePadding(bottom = RetroUtil.getNavigationBarHeight())
+
+        ViewCompat.setOnApplyWindowInsetsListener(
+            requireActivity().window.decorView
+        ) { _, insets ->
+            binding.container.updatePadding(bottom = insets.safeGetBottomInsets())
+            insets
         }
     }
 

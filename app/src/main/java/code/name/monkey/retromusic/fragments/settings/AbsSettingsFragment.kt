@@ -68,10 +68,10 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
         // CollapsingToolbarLayout consumes insets and insets are not passed to child views
-        // So we get insets from root view
+        // So we get insets from decor view
         // https://github.com/material-components/material-components-android/issues/1310
         ViewCompat.setOnApplyWindowInsetsListener(
-            view
+            requireActivity().window.decorView
         ) { _, insets ->
             listView.updatePadding(bottom = insets.safeGetBottomInsets())
             insets
