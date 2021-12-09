@@ -34,18 +34,18 @@ object ATH {
         }
     }
 
-    fun setLightNavigationbar(activity: Activity, enabled: Boolean) {
+    fun setLightNavigationBar(activity: Activity, enabled: Boolean) {
         activity.window.apply {
+            navigationBarColor = Color.TRANSPARENT
             WindowInsetsControllerCompat(
                 this,
                 decorView
             ).isAppearanceLightNavigationBars = enabled
-            navigationBarColor = Color.TRANSPARENT
         }
     }
 
     fun setLightNavigationBarAuto(activity: Activity, bgColor: Int) {
-        setLightNavigationbar(activity, ColorUtil.isColorLight(bgColor))
+        setLightNavigationBar(activity, ColorUtil.isColorLight(bgColor))
     }
 
     fun setNavigationBarColor(activity: Activity, color: Int) {

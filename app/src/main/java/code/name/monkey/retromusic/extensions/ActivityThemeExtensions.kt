@@ -101,7 +101,7 @@ fun AppCompatActivity.setLightStatusBarAuto(bgColor: Int) {
 
 fun AppCompatActivity.setLightNavigationBar(enabled: Boolean) {
     if (!ATHUtil.isWindowBackgroundDark(this) and ThemeStore.coloredNavigationBar(this)) {
-        ATH.setLightNavigationbar(this, enabled)
+        ATH.setLightNavigationBar(this, enabled)
     }
 }
 
