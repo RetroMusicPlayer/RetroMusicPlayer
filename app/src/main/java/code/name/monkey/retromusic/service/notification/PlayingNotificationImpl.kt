@@ -186,8 +186,23 @@ class PlayingNotificationImpl(
         ).build()
     }
 
+    private fun buildDismissAction(): NotificationCompat.Action {
+        return NotificationCompat.Action.Builder(
+            R.drawable.ic_close,
+            context.getString(R.string.customactivityoncrash_error_activity_error_details_close),
+            retrievePlaybackAction(ACTION_QUIT)
+        ).build()
+    }
+
     override fun setPlaying(isPlaying: Boolean) {
         mActions[2] = buildPlayAction(isPlaying)
+        // Show dismiss action if we are not playing but only for A12+, as we can't call stopForeground(false)
+        // on A12 which would result in crashes when we call startForeground after that
+        if (!isPlaying) {
+            addAction(buildDismissAction())
+        } else {
+            mActions.removeAt(4)
+        }
     }
 
     override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
