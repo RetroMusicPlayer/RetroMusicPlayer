@@ -7,22 +7,14 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         def nav_version = "2.4.0-beta02"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.0.1"
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.0.4"
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-    }
-}
-
-/*task clean(type: Delete) {
+task clean(type: Delete) {
     delete rootProject.buildDir
-}*/
+}

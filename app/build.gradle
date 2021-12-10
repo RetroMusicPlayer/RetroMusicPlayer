@@ -5,18 +5,18 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion 31
+    compileSdk 31
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdk 21
+        targetSdk 31
 
         renderscriptTargetApi 29//must match target sdk and build tools
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 10545
-        versionName '5.4.2 ' + "_" + getDate()
+        versionCode 10547
+        versionName '5.4.3'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }
@@ -31,7 +31,8 @@ android {
     }
     buildTypes {
         release {
-            //debuggable true
+            versionNameSuffix "_" + getDate()
+            shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
@@ -101,7 +102,7 @@ dependencies {
 
     //Cast Dependencies
     implementation 'androidx.mediarouter:mediarouter:1.2.5'
-    implementation 'com.google.android.gms:play-services-cast-framework:20.1.0'
+    implementation 'com.google.android.gms:play-services-cast-framework:21.0.0'
     //WebServer by NanoHttpd
     implementation "org.nanohttpd:nanohttpd:2.3.1"
 
