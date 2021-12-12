@@ -120,6 +120,14 @@ fun MaterialButton.accentOutlineColor() {
     rippleColor = colorStateList
 }
 
+fun MaterialButton.elevatedAccentColor() {
+    if (materialYou) return
+    val color = ThemeStore.accentColor(context)
+    val colorStateList = ColorStateList.valueOf(color)
+    iconTint = colorStateList
+    rippleColor = colorStateList
+}
+
 fun SeekBar.applyColor(@ColorInt color: Int) {
     thumbTintList = ColorStateList.valueOf(color)
     progressTintList = ColorStateList.valueOf(color)

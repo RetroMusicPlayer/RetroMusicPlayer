@@ -37,6 +37,7 @@ import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.drawNextToNavbar
+import code.name.monkey.retromusic.extensions.elevatedAccentColor
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -76,6 +77,7 @@ class HomeFragment :
 
         loadProfile()
         setupTitle()
+        colorButtons()
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
         binding.appBarLayout.statusBarForeground =
@@ -171,6 +173,13 @@ class HomeFragment :
             .userProfileOptions(RetroGlideExtension.getUserModel())
             .load(RetroGlideExtension.getUserModel())
             .into(binding.userImage)
+    }
+
+    fun colorButtons() {
+        binding.history.elevatedAccentColor()
+        binding.lastAdded.elevatedAccentColor()
+        binding.topPlayed.elevatedAccentColor()
+        binding.actionShuffle.elevatedAccentColor()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -222,6 +222,18 @@
         <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
     </style>
 
+    <style name="HomeActionButton" parent="Widget.Material3.Button.ElevatedButton.Icon">
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.Material3.FloatingActionButton
+        </item>
+        <item name="iconPadding">16dp</item>
+        <item name="iconGravity">start</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:textAppearance">@style/TextViewBody2</item>
+    </style>
+
     <style name="CarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/md_deep_purple_700</item>
         <item name="colorAccent">@color/md_deep_purple_A400</item>

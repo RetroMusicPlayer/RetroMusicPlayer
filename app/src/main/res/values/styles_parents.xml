@@ -64,7 +64,7 @@
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="bottomSheetTint">@color/bottomSheetColorBlack</item>
-        <item name="elevationOverlayColor">@color/elevationOverlayBlack</item>
+        <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
