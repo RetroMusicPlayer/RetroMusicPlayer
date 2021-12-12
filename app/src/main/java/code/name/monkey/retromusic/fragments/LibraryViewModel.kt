@@ -233,6 +233,7 @@ class LibraryViewModel(
     suspend fun artistById(id: Long) = repository.artistById(id)
     suspend fun favoritePlaylist() = repository.favoritePlaylist()
     suspend fun isFavoriteSong(song: SongEntity) = repository.isFavoriteSong(song)
+    suspend fun isSongFavorite(songId: Long) = repository.isSongFavorite(songId)
     suspend fun insertSongs(songs: List<SongEntity>) = repository.insertSongs(songs)
     suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
         repository.removeSongFromPlaylist(songEntity)

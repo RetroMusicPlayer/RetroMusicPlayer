@@ -281,23 +281,19 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
 
     private fun updateIsFavoriteIcon(animate: Boolean = false) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
-            if (playlist != null) {
-                val song: SongEntity =
-                    MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
-                val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
-                withContext(Dispatchers.Main) {
-                    val icon = if (animate) {
-                        if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
-                    } else {
-                        if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                    }
-                    binding.playbackControlsFragment.songFavourite.apply {
-                        setImageResource(icon)
-                        drawable.also {
-                            if (it is AnimatedVectorDrawable) {
-                                it.start()
-                            }
+            val isFavorite: Boolean =
+                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
+            withContext(Dispatchers.Main) {
+                val icon = if (animate) {
+                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
+                } else {
+                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                }
+                binding.playbackControlsFragment.songFavourite.apply {
+                    setImageResource(icon)
+                    drawable.also {
+                        if (it is AnimatedVectorDrawable) {
+                            it.start()
                         }
                     }
                 }

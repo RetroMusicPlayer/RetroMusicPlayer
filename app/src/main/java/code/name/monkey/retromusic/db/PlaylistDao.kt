@@ -26,7 +26,7 @@ interface PlaylistDao {
     suspend fun renamePlaylist(playlistId: Long, name: String)
 
     @Query("SELECT * FROM PlaylistEntity WHERE playlist_name = :name")
-    fun isPlaylistExists(name: String): List<PlaylistEntity>
+    fun playlist(name: String): List<PlaylistEntity>
 
     @Query("SELECT * FROM PlaylistEntity")
     suspend fun playlists(): List<PlaylistEntity>

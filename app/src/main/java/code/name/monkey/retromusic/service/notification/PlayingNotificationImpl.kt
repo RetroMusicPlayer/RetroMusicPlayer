@@ -207,11 +207,7 @@ class PlayingNotificationImpl(
 
     override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
-            val playlist: PlaylistEntity = MusicUtil.repository.favoritePlaylist()
-            val isFavorite = if (playlist != null) {
-                val songEntity = song.toSongEntity(playlist.playListId)
-                MusicUtil.repository.isFavoriteSong(songEntity).isNotEmpty()
-            } else false
+            val isFavorite = MusicUtil.repository.isSongFavorite(song.id)
             withContext(Dispatchers.Main) {
                 mActions[0] = buildFavoriteAction(isFavorite)
                 onUpdate()

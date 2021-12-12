@@ -38,7 +38,6 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
-import androidx.transition.Fade
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
@@ -232,7 +231,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
             if (playlist != null) {
                 val songEntity = song.toSongEntity(playlist.playListId)
-                val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
+                val isFavorite = libraryViewModel.isSongFavorite(song.id)
                 if (isFavorite) {
                     libraryViewModel.removeSongFromPlaylist(songEntity)
                 } else {
@@ -246,32 +245,28 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     fun updateIsFavorite(animate: Boolean = false) {
         lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
-            if (playlist != null) {
-                val song: SongEntity =
-                    MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
-                val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
-                withContext(Main) {
-                    val icon = if (animate) {
-                        if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
-                    } else {
-                        if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                    }
-                    val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
-                        requireContext(),
-                        icon,
-                        toolbarIconColor()
-                    )
-                    if (playerToolbar() != null) {
-                        playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)?.apply {
-                            setIcon(drawable)
-                            title =
-                                if (isFavorite) getString(R.string.action_remove_from_favorites)
-                                else getString(R.string.action_add_to_favorites)
-                            getIcon().also {
-                                if (it is AnimatedVectorDrawable) {
-                                    it.start()
-                                }
+            val isFavorite: Boolean =
+                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
+            withContext(Main) {
+                val icon = if (animate) {
+                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
+                } else {
+                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                }
+                val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
+                    requireContext(),
+                    icon,
+                    toolbarIconColor()
+                )
+                if (playerToolbar() != null) {
+                    playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)?.apply {
+                        setIcon(drawable)
+                        title =
+                            if (isFavorite) getString(R.string.action_remove_from_favorites)
+                            else getString(R.string.action_add_to_favorites)
+                        getIcon().also {
+                            if (it is AnimatedVectorDrawable) {
+                                it.start()
                             }
                         }
                     }
