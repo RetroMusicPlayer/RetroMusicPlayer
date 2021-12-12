@@ -46,12 +46,12 @@ import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.currentFragment
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -325,7 +325,12 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 requireView()
             )
         )
-        playerToolbar()?.menu?.findItem(R.id.action_toggle_lyrics)?.let { showLyricsIcon(it) }
+        val nps = PreferenceUtil.nowPlayingScreen
+        if (nps == NowPlayingScreen.Circle || nps == NowPlayingScreen.Peak || nps == NowPlayingScreen.Tiny) {
+            playerToolbar()?.menu?.removeItem(R.id.action_toggle_lyrics)
+        } else {
+            playerToolbar()?.menu?.findItem(R.id.action_toggle_lyrics)?.let { showLyricsIcon(it) }
+        }
     }
 
     class SwipeDetector(val context: Context, val viewPager: ViewPager?, val view: View) :

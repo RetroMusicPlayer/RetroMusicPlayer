@@ -21,10 +21,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPeakPlayerBinding
-import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.extensions.getSongInfo
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -57,7 +54,7 @@ class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
         }
-        binding.root.drawAboveSystemBars()
+        binding.root.drawAboveSystemBarsWithPadding()
     }
 
     private fun setUpSubFragments() {

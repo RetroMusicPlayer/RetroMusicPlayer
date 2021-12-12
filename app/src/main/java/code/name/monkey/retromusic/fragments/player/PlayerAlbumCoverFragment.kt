@@ -210,6 +210,10 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
         // Don't show lyrics container for below conditions
         if (!(nps == Circle || nps == Peak || nps == Tiny || !PreferenceUtil.showLyrics)) {
+            lyricsLayout.isVisible = false
+            progressViewUpdateHelper?.stop()
+        } else {
+            lyricsLayout.isVisible = true
             progressViewUpdateHelper?.start()
         }
         // Go to lyrics activity when clicked lyrics
@@ -259,10 +263,18 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
         if (key == SHOW_LYRICS) {
             if (sharedPreferences.getBoolean(key, false)) {
-                progressViewUpdateHelper?.start()
-                lyricsLayout.animate().alpha(1f).duration =
-                    AbsPlayerFragment.VISIBILITY_ANIM_DURATION
-                binding.playerLyrics.isVisible = true
+                val nps = PreferenceUtil.nowPlayingScreen
+                // Don't show lyrics container for below conditions
+                if (!(nps == Circle || nps == Peak || nps == Tiny || !PreferenceUtil.showLyrics)) {
+                    lyricsLayout.isVisible = false
+                    progressViewUpdateHelper?.stop()
+                } else {
+                    lyricsLayout.isVisible = true
+                    progressViewUpdateHelper?.start()
+                    lyricsLayout.animate().alpha(1f).duration =
+                        AbsPlayerFragment.VISIBILITY_ANIM_DURATION
+                    binding.playerLyrics.isVisible = true
+                }
             } else {
                 progressViewUpdateHelper?.stop()
                 lyricsLayout.animate().alpha(0f)
