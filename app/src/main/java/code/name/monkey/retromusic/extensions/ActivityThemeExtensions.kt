@@ -11,13 +11,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.ATH
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 
 fun AppCompatActivity.toggleScreenOn() {
     if (PreferenceUtil.isScreenOnEnabled) {
@@ -60,9 +58,13 @@ private fun AppCompatActivity.hideStatusBar(fullscreen: Boolean) {
     }
 }
 
-fun AppCompatActivity.setDrawUnderStatusBar() {
+fun AppCompatActivity.setDrawBehindSystemBars() {
     WindowCompat.setDecorFitsSystemWindows(window, false)
     window.statusBarColor = Color.TRANSPARENT
+    window.navigationBarColor = Color.TRANSPARENT
+    if (VersionUtils.hasQ()) {
+        window.isNavigationBarContrastEnforced = false
+    }
 }
 
 fun FragmentActivity.setTaskDescriptionColor(color: Int) {
@@ -100,9 +102,7 @@ fun AppCompatActivity.setLightStatusBarAuto(bgColor: Int) {
 }
 
 fun AppCompatActivity.setLightNavigationBar(enabled: Boolean) {
-    if (!ATHUtil.isWindowBackgroundDark(this) and ThemeStore.coloredNavigationBar(this)) {
-        ATH.setLightNavigationBar(this, enabled)
-    }
+   ATH.setLightNavigationBar(this, enabled)
 }
 
 

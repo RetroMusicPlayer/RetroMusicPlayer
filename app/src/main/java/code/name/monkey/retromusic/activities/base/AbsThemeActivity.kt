@@ -35,6 +35,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setDrawBehindSystemBars()
         updateTheme()
         hideStatusBar()
         super.onCreate(savedInstanceState)

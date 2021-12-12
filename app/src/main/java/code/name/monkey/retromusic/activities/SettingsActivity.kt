@@ -32,7 +32,6 @@ import com.afollestad.materialdialogs.color.ColorCallback
 class SettingsActivity : AbsThemeActivity(), ColorCallback, OnThemeChangedListener {
     private lateinit var binding: ActivitySettingsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         val mSavedInstanceState = extra<Bundle>(TAG).value ?: savedInstanceState
         super.onCreate(mSavedInstanceState)
         setLightStatusBarAuto(surfaceColor())

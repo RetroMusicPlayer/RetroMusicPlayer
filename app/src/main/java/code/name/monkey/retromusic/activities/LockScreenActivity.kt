@@ -41,7 +41,6 @@ class LockScreenActivity : AbsMusicServiceActivity() {
     private var fragment: LockScreenControlsFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         lockScreenInit()
         binding = ActivityLockScreenBinding.inflate(layoutInflater)
