@@ -81,7 +81,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     private var recyclerViewTouchActionGuardManager: RecyclerViewTouchActionGuardManager? = null
     private var playingQueueAdapter: PlayingQueueAdapter? = null
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private var bottomInsets = 0
+    private var navBarHeight = 0
 
     private var _binding: FragmentGradientPlayerBinding? = null
     private val binding get() = _binding!!
@@ -92,8 +92,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             binding.playerQueueSheet.updatePadding(
                 top = (slideOffset * binding.statusBarLayout.statusBar.height).toInt()
             )
-            binding.container.updatePadding(
-                bottom = ((1 - slideOffset) * bottomInsets).toInt()
+            binding.recyclerView.updatePadding(
+                top = ((1 - slideOffset) * navBarHeight).toInt()
             )
         }
 
@@ -161,8 +161,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         ViewCompat.setOnApplyWindowInsetsListener(
             (binding.container)
         ) { v: View, insets: WindowInsetsCompat ->
-            bottomInsets = insets.safeGetBottomInsets()
-            v.updatePadding(bottom = bottomInsets)
+            navBarHeight = insets.safeGetBottomInsets()
+            binding.recyclerView.updatePadding(top = navBarHeight)
             insets
         }
         binding.playbackControlsFragment.root.drawAboveSystemBars()
@@ -479,7 +479,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         oldBottom: Int
     ) {
         val panel = getQueuePanel()
-        panel.peekHeight = binding.container.height
+        panel.peekHeight = binding.container.height + navBarHeight
     }
 
     private fun setupRecyclerView() {

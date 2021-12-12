@@ -201,7 +201,7 @@ class PlayingNotificationImpl(
         if (!isPlaying) {
             addAction(buildDismissAction())
         } else {
-            mActions.removeAt(4)
+            if (mActions.size == 5) mActions.removeAt(4)
         }
     }
 
