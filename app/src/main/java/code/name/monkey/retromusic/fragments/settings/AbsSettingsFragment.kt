@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -25,6 +26,7 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
+import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.activities.OnThemeChangedListener
 import code.name.monkey.retromusic.extensions.safeGetBottomInsets
 import code.name.monkey.retromusic.preferences.*
@@ -67,6 +69,10 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            listView.overScrollMode = View.OVER_SCROLL_NEVER
+        }
+
         // CollapsingToolbarLayout consumes insets and insets are not passed to child views
         // So we get insets from decor view
         // https://github.com/material-components/material-components-android/issues/1310
