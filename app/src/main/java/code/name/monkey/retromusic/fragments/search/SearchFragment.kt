@@ -70,7 +70,10 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         setupRecyclerView()
 
         binding.voiceSearch.setOnClickListener { startMicSearch() }
-        binding.clearText.setOnClickListener { binding.searchView.clearText() }
+        binding.clearText.setOnClickListener {
+            binding.searchView.clearText()
+            searchAdapter.swapDataSet(listOf())
+        }
         binding.searchView.apply {
             addTextChangedListener(this@SearchFragment)
             focusAndShowKeyboard()
