@@ -21,8 +21,8 @@ import org.jaudiotagger.audio.exceptions.CannotWriteException
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException
 import org.jaudiotagger.tag.TagException
+import org.jaudiotagger.tag.images.AndroidArtwork
 import org.jaudiotagger.tag.images.Artwork
-import org.jaudiotagger.tag.images.ArtworkFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -58,11 +58,11 @@ class TagWriter {
                         try {
                             albumArtFile = createAlbumArtFile(context).canonicalFile
                             info.artworkInfo.artwork.compress(
-                                Bitmap.CompressFormat.PNG,
-                                0,
+                                Bitmap.CompressFormat.JPEG,
+                                100,
                                 FileOutputStream(albumArtFile)
                             )
-                            artwork = ArtworkFactory.createArtworkFromFile(albumArtFile)
+                            artwork = AndroidArtwork.createArtworkFromFile(albumArtFile)
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }
@@ -131,11 +131,11 @@ class TagWriter {
                         try {
                             albumArtFile = createAlbumArtFile(context).canonicalFile
                             info.artworkInfo.artwork.compress(
-                                Bitmap.CompressFormat.PNG,
-                                0,
+                                Bitmap.CompressFormat.JPEG,
+                                100,
                                 FileOutputStream(albumArtFile)
                             )
-                            artwork = ArtworkFactory.createArtworkFromFile(albumArtFile)
+                            artwork = AndroidArtwork.createArtworkFromFile(albumArtFile)
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }

@@ -153,7 +153,7 @@ dependencies {
     implementation 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0'
 
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
-    implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
+    implementation 'com.github.Adonai:jaudiotagger:2.3.14'
     implementation 'com.anjlab.android.iab.v3:library:2.0.3'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:2.0.0'
