@@ -63,41 +63,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
         window.enterTransition = slide
     }
 
-    override fun loadImageFromFile(selectedFile: Uri?) {
-        GlideApp.with(this@AlbumTagEditorActivity).asBitmapPalette().load(selectedFile)
-            .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
-            .into(object : ImageViewTarget<BitmapPaletteWrapper>(binding.editorImage) {
-                override fun onResourceReady(
-                    resource: BitmapPaletteWrapper,
-                    transition: Transition<in BitmapPaletteWrapper>?
-                ) {
-                    getColor(resource.palette, Color.TRANSPARENT)
-                    albumArtBitmap = resource.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
-                    setImageBitmap(
-                        albumArtBitmap,
-                        getColor(
-                            resource.palette,
-                            ATHUtil.resolveColor(
-                                this@AlbumTagEditorActivity,
-                                R.attr.defaultFooterColor
-                            )
-                        )
-                    )
-                    deleteAlbumArt = false
-                    dataChanged()
-                    setResult(Activity.RESULT_OK)
-                }
-
-                override fun onLoadFailed(errorDrawable: Drawable?) {
-                    super.onLoadFailed(errorDrawable)
-                    Toast.makeText(this@AlbumTagEditorActivity, "Load Failed", Toast.LENGTH_LONG)
-                        .show()
-                }
-
-                override fun setResource(resource: BitmapPaletteWrapper?) {}
-            })
-    }
-
     private var albumArtBitmap: Bitmap? = null
     private var deleteAlbumArt: Boolean = false
 
@@ -169,6 +134,41 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
         )
         deleteAlbumArt = true
         dataChanged()
+    }
+
+    override fun loadImageFromFile(selectedFile: Uri?) {
+        GlideApp.with(this@AlbumTagEditorActivity).asBitmapPalette().load(selectedFile)
+            .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
+            .into(object : ImageViewTarget<BitmapPaletteWrapper>(binding.editorImage) {
+                override fun onResourceReady(
+                    resource: BitmapPaletteWrapper,
+                    transition: Transition<in BitmapPaletteWrapper>?
+                ) {
+                    getColor(resource.palette, Color.TRANSPARENT)
+                    albumArtBitmap = resource.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
+                    setImageBitmap(
+                        albumArtBitmap,
+                        getColor(
+                            resource.palette,
+                            ATHUtil.resolveColor(
+                                this@AlbumTagEditorActivity,
+                                R.attr.defaultFooterColor
+                            )
+                        )
+                    )
+                    deleteAlbumArt = false
+                    dataChanged()
+                    setResult(Activity.RESULT_OK)
+                }
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    Toast.makeText(this@AlbumTagEditorActivity, "Load Failed", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                override fun setResource(resource: BitmapPaletteWrapper?) {}
+            })
     }
 
     override fun save() {
