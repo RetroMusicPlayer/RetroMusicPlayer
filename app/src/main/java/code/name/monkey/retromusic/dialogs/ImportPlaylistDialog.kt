@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.lang.Exception
 
 class ImportPlaylistDialog : DialogFragment() {
     private val libraryViewModel by sharedViewModel<LibraryViewModel>()
@@ -30,7 +31,11 @@ class ImportPlaylistDialog : DialogFragment() {
         return materialDialog(R.string.import_playlist)
             .setMessage(R.string.import_playlist_message)
             .setPositiveButton(R.string.import_label) { _, _ ->
-                libraryViewModel.importPlaylists()
+                try {
+                    libraryViewModel.importPlaylists()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
             .create()
             .colorButtons()

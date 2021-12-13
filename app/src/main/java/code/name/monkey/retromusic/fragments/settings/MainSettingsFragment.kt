@@ -99,5 +99,6 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        ViewCompat.setOnApplyWindowInsetsListener(requireActivity().window.decorView, null)
     }
 }
