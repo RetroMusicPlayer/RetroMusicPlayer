@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments.player.blur
 
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -27,17 +28,17 @@ import code.name.monkey.retromusic.databinding.FragmentBlurBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
-import code.name.monkey.retromusic.glide.BlurTransformation
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
+
 class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
     SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private var lastRequest: GlideRequest<Drawable>? = null
 
     override fun playerToolbar(): Toolbar {
         return binding.playerToolbar
@@ -111,23 +112,21 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         get() = lastColor
 
     private fun updateBlur() {
-        binding.colorBackground.clearColorFilter()
-        GlideApp.with(requireActivity()).asBitmapPalette()
-            .songCoverOptions(MusicPlayerRemote.currentSong)
+        // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
+        GlideApp.with(this)
             .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
-            .dontAnimate()
-            .transform(
-                BlurTransformation.Builder(requireContext())
-                    .blurRadius(blurAmount.toFloat())
-                    .build()
-            )
-            .into(object : RetroMusicColoredTarget(binding.colorBackground) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    if (colors.backgroundColor == defaultFooterColor) {
-                        binding.colorBackground.setColorFilter(colors.backgroundColor)
-                    }
-                }
-            })
+            .songCoverOptions(MusicPlayerRemote.currentSong).apply {
+                thumbnail(lastRequest)
+                    .crossfadeListener()
+                    .transform(
+                        BlurTransformation.Builder(requireContext())
+                            .blurRadius(blurAmount.toFloat())
+                            .build()
+                    )
+                    .into(binding.colorBackground)
+                lastRequest = this
+            }
+
     }
 
     override fun onServiceConnected() {

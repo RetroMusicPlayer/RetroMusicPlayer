@@ -19,6 +19,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -37,8 +38,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
@@ -70,6 +70,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     private val binding get() = _binding!!
 
     private var rotateAnimator: ObjectAnimator? = null
+    private var lastRequest: GlideRequest<Drawable>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -241,9 +242,15 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
             binding.songInfo.hide()
         }
         GlideApp.with(this)
-            .load(RetroGlideExtension.getSongModel(song))
-            .songCoverOptions(song)
-            .into(binding.albumCover)
+            .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
+            .songCoverOptions(MusicPlayerRemote.currentSong).apply {
+                thumbnail(lastRequest)
+                    .crossfadeListener()
+                    .fitCenter()
+                    .into(binding.albumCover)
+                lastRequest = this
+            }
+
     }
 
     private fun updatePlayPauseDrawableState() {
