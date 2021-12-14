@@ -3,7 +3,7 @@
     <string name="about_album_label">Info su %s</string>
     <string name="about_settings_summary">Team e pagine social</string>
     <string name="accent_color">Colore in rilievo</string>
-    <string name="accent_color_desc">Il colore secondario del tema, il predefinito è verde</string>
+    <string name="accent_color_desc">Il colore dell\'accento del tema, il predefinito è viola</string>
     <string name="action_about">Informazioni</string>
     <string name="action_add_to_blacklist">Aggiungi alla blacklist</string>
     <string name="action_add_to_favorites">Aggiungi ai preferiti</string>
