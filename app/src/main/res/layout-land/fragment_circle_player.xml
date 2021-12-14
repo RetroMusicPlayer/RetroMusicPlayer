@@ -54,6 +54,31 @@
         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
         tools:layout_editor_absoluteY="24dp" />
 
+    <code.name.monkey.retromusic.views.RetroShapeableImageView
+        android:id="@+id/album_cover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="28dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playerToolbar"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[6]" />
+
+    <code.name.monkey.retromusic.views.RetroShapeableImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="28dp"
+        android:alpha="0.5"
+        android:background="?colorSurface"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playerToolbar" />
 
     <code.name.monkey.retromusic.views.SeekArc
         android:id="@+id/volumeSeekBar"

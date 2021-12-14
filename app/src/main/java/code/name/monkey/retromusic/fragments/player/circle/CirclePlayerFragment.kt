@@ -23,6 +23,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import androidx.appcompat.widget.Toolbar
@@ -38,6 +39,8 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
@@ -68,6 +71,8 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
 
     private var _binding: FragmentCirclePlayerBinding? = null
     private val binding get() = _binding!!
+
+    private var rotateAnimator: ObjectAnimator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -144,6 +149,17 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
     }
 
+    private fun setupRotateAnimation() {
+        rotateAnimator = ObjectAnimator.ofFloat(binding.albumCover, View.ROTATION, 360F).apply {
+            interpolator = LinearInterpolator()
+            repeatCount = Animation.INFINITE
+            duration = 10000
+            if (MusicPlayerRemote.isPlaying){
+                start()
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         progressViewUpdateHelper.start()
@@ -153,10 +169,8 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         audioVolumeObserver?.register(AudioManager.STREAM_MUSIC, this)
 
         val audioManager = audioManager
-        if (audioManager != null) {
-            binding.volumeSeekBar.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-            binding.volumeSeekBar.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-        }
+        binding.volumeSeekBar.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        binding.volumeSeekBar.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
         binding.volumeSeekBar.setOnSeekArcChangeListener(this)
     }
 
@@ -191,6 +205,11 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
 
     override fun onPlayStateChanged() {
         updatePlayPauseDrawableState()
+        if (MusicPlayerRemote.isPlaying) {
+            if (rotateAnimator?.isStarted == true) rotateAnimator?.resume() else rotateAnimator?.start()
+        } else {
+            rotateAnimator?.pause()
+        }
     }
 
     override fun onPlayingMetaChanged() {
@@ -202,6 +221,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         super.onServiceConnected()
         updateSong()
         updatePlayPauseDrawableState()
+        setupRotateAnimation()
     }
 
     private fun updateSong() {
@@ -215,6 +235,10 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         } else {
             binding.songInfo.hide()
         }
+        GlideApp.with(this)
+            .load(RetroGlideExtension.getSongModel(song))
+            .songCoverOptions(song)
+            .into(binding.albumCover)
     }
 
     private fun updatePlayPauseDrawableState() {

@@ -17,14 +17,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?colorSurface"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface" />
 
     <FrameLayout
         android:id="@+id/statusBarContainer"
@@ -85,6 +81,28 @@
         app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:text="@tools:sample/lorem/random" />
 
+    <code.name.monkey.retromusic.views.RetroShapeableImageView
+        android:id="@+id/album_cover"
+        android:layout_width="276dp"
+        android:layout_height="276dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[6]" />
+
+    <code.name.monkey.retromusic.views.RetroShapeableImageView
+        android:layout_width="276dp"
+        android:layout_height="276dp"
+        android:alpha="0.5"
+        android:background="?colorSurface"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <code.name.monkey.retromusic.views.SeekArc
         android:id="@+id/volumeSeekBar"
         android:layout_width="match_parent"
@@ -139,14 +157,15 @@
         app:tint="@color/md_green_500" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/volume"
         android:textAppearance="@style/TextViewSubtitle2"
         android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintBottom_toBottomOf="@+id/volumeSeekBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/volumeSeekBar" />
+        app:layout_constraintStart_toStartOf="@+id/volumeSeekBar"
+        app:layout_constraintTop_toBottomOf="@+id/album_cover" />
 
 
     <androidx.appcompat.widget.AppCompatSeekBar
