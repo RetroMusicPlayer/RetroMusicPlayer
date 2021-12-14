@@ -18,6 +18,7 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.media.AudioManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,10 +29,7 @@ import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentCirclePlayerBinding
 import code.name.monkey.retromusic.extensions.*
@@ -50,10 +48,9 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import code.name.monkey.retromusic.views.SeekArc
-import code.name.monkey.retromusic.views.SeekArc.OnSeekArcChangeListener
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
+import me.tankery.lib.circularseekbar.CircularSeekBar
 
 /**
  * Created by hemanths on 2020-01-06.
@@ -61,7 +58,7 @@ import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 
 class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player), Callback,
     OnAudioVolumeChangedListener,
-    OnSeekArcChangeListener {
+    CircularSeekBar.OnCircularSeekBarChangeListener {
 
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
     private var audioVolumeObserver: AudioVolumeObserver? = null
@@ -121,11 +118,17 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
             ThemeStore.accentColor(requireContext()),
             false
         )
-        binding.volumeSeekBar.progressColor = accentColor()
-        binding.volumeSeekBar.arcColor = ColorUtil.withAlpha(accentColor(), 0.25f)
+        binding.volumeSeekBar.circleProgressColor = accentColor()
+        binding.volumeSeekBar.circleColor = ColorUtil.withAlpha(accentColor(), 0.25f)
         setUpPlayPauseFab()
         setUpPrevNext()
         setUpPlayerToolbar()
+        binding.albumCoverOverlay.background = ColorDrawable(
+            MaterialValueHelper.getPrimaryTextColor(
+                requireContext(),
+                accentColor().isColorLight
+            )
+        )
     }
 
     private fun setUpPrevNext() {
@@ -154,7 +157,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
             interpolator = LinearInterpolator()
             repeatCount = Animation.INFINITE
             duration = 10000
-            if (MusicPlayerRemote.isPlaying){
+            if (MusicPlayerRemote.isPlaying) {
                 start()
             }
         }
@@ -169,9 +172,11 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         audioVolumeObserver?.register(AudioManager.STREAM_MUSIC, this)
 
         val audioManager = audioManager
-        binding.volumeSeekBar.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-        binding.volumeSeekBar.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-        binding.volumeSeekBar.setOnSeekArcChangeListener(this)
+        binding.volumeSeekBar.max =
+            audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+        binding.volumeSeekBar.progress =
+            audioManager.getStreamVolume(AudioManager.STREAM_MUSIC).toFloat()
+        binding.volumeSeekBar.setOnSeekBarChangeListener(this)
     }
 
     override fun onPause() {
@@ -249,8 +254,8 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     }
 
     override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
-        _binding?.volumeSeekBar?.max = maxVolume
-        _binding?.volumeSeekBar?.progress = currentVolume
+        _binding?.volumeSeekBar?.max = maxVolume.toFloat()
+        _binding?.volumeSeekBar?.progress = currentVolume.toFloat()
     }
 
     override fun onDestroyView() {
@@ -261,15 +266,16 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         _binding = null
     }
 
-    override fun onProgressChanged(seekArc: SeekArc?, progress: Int, fromUser: Boolean) {
+
+    override fun onProgressChanged(seekBar: CircularSeekBar?, progress: Float, fromUser: Boolean) {
         val audioManager = audioManager
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0)
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress.toInt(), 0)
     }
 
-    override fun onStartTrackingTouch(seekArc: SeekArc?) {
+    override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
     }
 
-    override fun onStopTrackingTouch(seekArc: SeekArc?) {
+    override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {
     }
 
     fun setUpProgressSlider() {

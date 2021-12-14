@@ -81,45 +81,45 @@
         app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:text="@tools:sample/lorem/random" />
 
-    <code.name.monkey.retromusic.views.RetroShapeableImageView
-        android:id="@+id/album_cover"
-        android:layout_width="276dp"
-        android:layout_height="276dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[6]" />
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/volumeSeekBar"
+        app:layout_constraintEnd_toEndOf="@id/volumeSeekBar"
+        app:layout_constraintStart_toStartOf="@id/volumeSeekBar"
+        app:layout_constraintTop_toTopOf="@id/volumeSeekBar">
 
-    <code.name.monkey.retromusic.views.RetroShapeableImageView
-        android:layout_width="276dp"
-        android:layout_height="276dp"
-        android:alpha="0.5"
-        android:background="?colorSurface"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <code.name.monkey.retromusic.views.RetroShapeableImageView
+            android:id="@+id/album_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[6]" />
 
-    <code.name.monkey.retromusic.views.SeekArc
+        <code.name.monkey.retromusic.views.RetroShapeableImageView
+            android:id="@+id/album_cover_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:scaleType="centerCrop" />
+    </FrameLayout>
+
+    <me.tankery.lib.circularseekbar.CircularSeekBar
         android:id="@+id/volumeSeekBar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:padding="28dp"
-        app:arcColor="?android:attr/colorControlHighlight"
-        app:arcWidth="4dp"
+        app:cs_circle_stroke_width="4dp"
+        app:cs_end_angle="60"
+        app:cs_move_outside_circle="true"
+        app:cs_pointer_color="@color/md_grey_200"
+        app:cs_pointer_halo_width="0dp"
+        app:cs_pointer_stroke_width="20dp"
+        app:cs_start_angle="120"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:progressWidth="4dp"
-        app:rotation="180"
-        app:roundEdges="true"
-        app:startAngle="30"
-        app:sweepAngle="300"
-        app:touchInside="false"
         tools:progress="50" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -165,7 +165,7 @@
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/volumeSeekBar"
-        app:layout_constraintTop_toBottomOf="@+id/album_cover" />
+        app:layout_constraintTop_toBottomOf="@+id/volumeSeekBar" />
 
 
     <androidx.appcompat.widget.AppCompatSeekBar
