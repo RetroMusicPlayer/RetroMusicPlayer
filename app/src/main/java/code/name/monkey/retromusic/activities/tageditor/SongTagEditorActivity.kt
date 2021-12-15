@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.activities.tageditor
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -28,9 +29,11 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -88,11 +91,6 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.trackNumberText.appHandleColor().addTextChangedListener(this)
         binding.lyricsText.appHandleColor().addTextChangedListener(this)
         binding.songComposerText.appHandleColor().addTextChangedListener(this)
-
-        binding.lyricsText.setOnTouchListener { view, _ ->
-            view.parent.requestDisallowInterceptTouchEvent(true)
-            return@setOnTouchListener false
-        }
     }
 
     private fun fillViewsWithFileTags() {
@@ -131,6 +129,17 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         )
         deleteAlbumArt = true
         dataChanged()
+    }
+
+    override fun setColors(color: Int) {
+        super.setColors(color)
+        saveFab.backgroundTintList = ColorStateList.valueOf(color)
+        saveFab.iconTint = ColorStateList.valueOf(
+            MaterialValueHelper.getPrimaryTextColor(
+                this,
+                color.isColorLight
+            )
+        )
     }
 
     override fun save() {

@@ -29,9 +29,11 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityAlbumTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -213,6 +215,12 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     override fun setColors(color: Int) {
         super.setColors(color)
         saveFab.backgroundTintList = ColorStateList.valueOf(color)
+        saveFab.iconTint = ColorStateList.valueOf(
+            MaterialValueHelper.getPrimaryTextColor(
+                this,
+                color.isColorLight
+            )
+        )
     }
 
 
