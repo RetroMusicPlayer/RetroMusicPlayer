@@ -153,7 +153,6 @@
             android:layout_height="52dp"
             android:layout_centerVertical="true"
             android:background="?colorAccent"
-            android:foreground="?attr/rectSelector"
             android:padding="12dp"
             android:scaleType="fitCenter"
             tools:ignore="MissingPrefix"

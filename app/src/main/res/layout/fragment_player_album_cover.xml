@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,50 +8,24 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:overScrollMode="@integer/overScrollMode"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:overScrollMode="@integer/overScrollMode">
 
-    <FrameLayout
-        android:id="@+id/playerLyrics"
+    </androidx.viewpager.widget.ViewPager>
+
+    <code.name.monkey.retromusic.lyrics.CoverLrcView
+        android:id="@+id/lyricsView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:alpha="0"
-        android:clipToPadding="false"
-        android:elevation="20dp"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
         android:visibility="gone"
-        tools:visibility="visible">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:lrcLabel="@string/no_lyrics_found"
+        app:lrcNormalTextSize="28sp"
+        app:lrcPadding="24dp"
+        app:lrcTextGravity="center"
+        app:lrcTextSize="32sp"
+        app:lrcTimelineColor="@color/transparent"
+        tools:visibility="visible" />
 
-        <View
-            android:id="@+id/mask_lyrics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/lyrics_mask" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/player_lyrics_line1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="16dp"
-            android:gravity="center"
-            android:shadowColor="@color/md_black_1000"
-            android:shadowRadius="4"
-            android:textAppearance="@style/TextViewHeadline5"
-            android:textColor="@color/md_white_1000"
-            android:visibility="gone" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/player_lyrics_line2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="16dp"
-            android:gravity="center"
-            android:shadowColor="@color/md_black_1000"
-            android:shadowRadius="4"
-            android:textAppearance="@style/TextViewHeadline5"
-            android:textColor="@color/md_white_1000" />
-
-    </FrameLayout>
 </FrameLayout>

@@ -134,12 +134,11 @@ class UserInfoFragment : Fragment() {
     private fun loadProfile() {
         binding.bannerImage.let {
             GlideApp.with(this)
-                .asBitmap()
                 .load(RetroGlideExtension.getBannerModel())
                 .profileBannerOptions(RetroGlideExtension.getBannerModel())
                 .into(it)
         }
-        GlideApp.with(this).asBitmap()
+        GlideApp.with(this)
             .load(RetroGlideExtension.getUserModel())
             .userProfileOptions(RetroGlideExtension.getUserModel())
             .into(binding.userImage)
