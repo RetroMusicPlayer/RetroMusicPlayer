@@ -223,7 +223,8 @@
     </style>
 
     <style name="HomeActionButton" parent="Widget.Material3.Button.ElevatedButton.Icon">
-        <item name="android:padding">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="shapeAppearanceOverlay">
             @style/ShapeAppearanceOverlay.Material3.FloatingActionButton
