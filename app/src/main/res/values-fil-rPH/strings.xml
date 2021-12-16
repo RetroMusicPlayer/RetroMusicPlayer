@@ -123,7 +123,7 @@
     <string name="copied_device_info_to_clipboard">Kinopya ang impormasyon ng device sa clipboard.</string>
     <string name="could_not_create_playlist">Hindi makagawa ng playlist.</string>
     <string name="could_not_download_album_cover">"Hindi makapag-download ng katugmang cover ng album."</string>
-    <string name="could_not_restore_purchase">Hindi maibalik ang binili.</string>
+    <string name="could_not_restore_purchase">Hindi naibalik ang binili.</string>
     <string name="could_not_scan_files">Hindi ma-scan ang %d files.</string>
     <string name="create_action">Lumikha</string>
     <string name="create_new_backup">Lumikha</string>
