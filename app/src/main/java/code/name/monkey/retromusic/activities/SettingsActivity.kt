@@ -81,7 +81,6 @@ class SettingsActivity : AbsThemeActivity(), ColorCallback, OnThemeChangedListen
         ThemeStore.editTheme(this).accentColor(color).commit()
         if (VersionUtils.hasNougatMR())
             DynamicShortcutManager(this).updateDynamicShortcuts()
-
         restart()
     }
 

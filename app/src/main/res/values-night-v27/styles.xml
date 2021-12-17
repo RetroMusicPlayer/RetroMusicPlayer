@@ -29,7 +29,6 @@
         <item name="android:windowLightNavigationBar">false</item>
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="materialCardViewStyle">@style/Widget.MaterialComponents.CardView</item>
-        <item name="bottomSheetTint">@color/bottomSheetColor</item>
         <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
