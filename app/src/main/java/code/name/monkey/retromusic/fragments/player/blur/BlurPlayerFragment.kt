@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments.player.blur
 
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
@@ -115,18 +116,17 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
         GlideApp.with(this)
             .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
-            .songCoverOptions(MusicPlayerRemote.currentSong).apply {
-                thumbnail(lastRequest)
-                    .crossfadeListener()
-                    .transform(
-                        BlurTransformation.Builder(requireContext())
-                            .blurRadius(blurAmount.toFloat())
-                            .build()
-                    )
+            .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
+            .transform(
+                BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
+                    .build()
+            ).thumbnail(lastRequest)
+            .error(GlideApp.with(this).load(ColorDrawable(Color.DKGRAY)).fitCenter())
+            .also {
+                lastRequest = it.clone()
+                it.crossfadeListener()
                     .into(binding.colorBackground)
-                lastRequest = this
             }
-
     }
 
     override fun onServiceConnected() {

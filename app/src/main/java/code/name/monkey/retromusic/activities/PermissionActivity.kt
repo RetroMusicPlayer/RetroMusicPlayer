@@ -22,9 +22,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.text.HtmlCompat
+import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
@@ -84,12 +84,12 @@ class PermissionActivity : AbsMusicServiceActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
         if (hasStoragePermission()) {
-            binding.storagePermission.checkImage.visibility = View.VISIBLE
+            binding.storagePermission.checkImage.isVisible = true
             binding.storagePermission.checkImage.imageTintList =
                 ColorStateList.valueOf(ThemeStore.accentColor(this))
         }
         if (hasAudioPermission()) {
-            binding.audioPermission.checkImage.visibility = View.VISIBLE
+            binding.audioPermission.checkImage.isVisible = true
             binding.audioPermission.checkImage.imageTintList =
                 ColorStateList.valueOf(ThemeStore.accentColor(this))
         }

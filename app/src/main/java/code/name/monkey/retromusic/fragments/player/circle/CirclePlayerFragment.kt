@@ -243,14 +243,14 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         }
         GlideApp.with(this)
             .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
-            .songCoverOptions(MusicPlayerRemote.currentSong).apply {
-                thumbnail(lastRequest)
-                    .crossfadeListener()
-                    .fitCenter()
+            .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
+            .thumbnail(lastRequest)
+            .error(GlideApp.with(this).load(R.drawable.default_audio_art).fitCenter())
+            .fitCenter().also {
+                lastRequest = it.clone()
+                it.crossfadeListener()
                     .into(binding.albumCover)
-                lastRequest = this
             }
-
     }
 
     private fun updatePlayPauseDrawableState() {

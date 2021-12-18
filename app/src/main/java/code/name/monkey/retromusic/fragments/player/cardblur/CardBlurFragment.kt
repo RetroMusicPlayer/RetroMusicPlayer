@@ -138,16 +138,15 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
         GlideApp.with(this)
             .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
-            .songCoverOptions(MusicPlayerRemote.currentSong).apply {
-                thumbnail(lastRequest)
-                    .crossfadeListener()
-                    .transform(
-                        BlurTransformation.Builder(requireContext())
-                            .blurRadius(blurAmount.toFloat())
-                            .build()
-                    )
+            .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
+            .transform(
+                BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
+                    .build()
+            )
+            .thumbnail(lastRequest).also {
+                lastRequest = it.clone()
+                it.crossfadeListener()
                     .into(binding.colorBackground)
-                lastRequest = this
             }
     }
 

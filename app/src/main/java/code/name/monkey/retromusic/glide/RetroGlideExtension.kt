@@ -1,5 +1,7 @@
 package code.name.monkey.retromusic.glide
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import androidx.core.graphics.drawable.toDrawable
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
@@ -121,6 +123,16 @@ object RetroGlideExtension {
         return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
             .error(DEFAULT_SONG_IMAGE)
             .placeholder(DEFAULT_SONG_IMAGE)
+            .signature(createSignature(song))
+    }
+
+    @JvmStatic
+    @GlideOption
+    fun simpleSongCoverOptions(
+        baseRequestOptions: BaseRequestOptions<*>,
+        song: Song
+    ): BaseRequestOptions<*> {
+        return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
             .signature(createSignature(song))
     }
 
