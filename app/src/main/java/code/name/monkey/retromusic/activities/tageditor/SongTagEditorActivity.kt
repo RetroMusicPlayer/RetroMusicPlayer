@@ -137,12 +137,15 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
     override fun setColors(color: Int) {
         super.setColors(color)
         saveFab.backgroundTintList = ColorStateList.valueOf(color)
-        saveFab.iconTint = ColorStateList.valueOf(
+        ColorStateList.valueOf(
             MaterialValueHelper.getPrimaryTextColor(
                 this,
                 color.isColorLight
             )
-        )
+        ).also {
+            saveFab.iconTint = it
+            saveFab.setTextColor(it)
+        }
     }
 
     override fun save() {

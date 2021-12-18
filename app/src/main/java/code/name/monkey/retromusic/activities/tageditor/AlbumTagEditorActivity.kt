@@ -215,12 +215,16 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     override fun setColors(color: Int) {
         super.setColors(color)
         saveFab.backgroundTintList = ColorStateList.valueOf(color)
-        saveFab.iconTint = ColorStateList.valueOf(
+        saveFab.backgroundTintList = ColorStateList.valueOf(color)
+        ColorStateList.valueOf(
             MaterialValueHelper.getPrimaryTextColor(
                 this,
                 color.isColorLight
             )
-        )
+        ).also {
+            saveFab.iconTint = it
+            saveFab.setTextColor(it)
+        }
     }
 
 
