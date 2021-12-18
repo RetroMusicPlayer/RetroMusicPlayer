@@ -26,14 +26,13 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
-import androidx.appcompat.widget.PopupMenu
 import android.widget.SeekBar
+import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFullPlayerControlsBinding
 import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.getSongInfo

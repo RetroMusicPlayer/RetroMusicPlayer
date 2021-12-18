@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityLicenseBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.extensions.drawAboveSystemBarsWithPadding
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets

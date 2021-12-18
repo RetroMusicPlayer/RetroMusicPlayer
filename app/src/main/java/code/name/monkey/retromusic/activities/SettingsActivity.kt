@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.core.view.ViewCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
@@ -38,6 +37,11 @@ class SettingsActivity : AbsThemeActivity(), ColorCallback, OnThemeChangedListen
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setNavigationBarColorPreOreo(surfaceColor())
     }
 
     private fun setupToolbar() {

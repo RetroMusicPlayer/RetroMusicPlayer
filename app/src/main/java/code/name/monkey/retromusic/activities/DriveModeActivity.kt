@@ -21,7 +21,6 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
-import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
@@ -29,8 +28,6 @@ import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityDriveModeBinding
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
@@ -50,7 +47,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 /**
