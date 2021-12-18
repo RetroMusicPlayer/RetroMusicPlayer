@@ -6,9 +6,7 @@ import android.os.Build
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.*
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.ATH
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -46,7 +44,6 @@ fun AppCompatActivity.exitFullscreen() {
     }
 }
 
-
 fun AppCompatActivity.hideStatusBar() {
     hideStatusBar(PreferenceUtil.isFullScreenMode)
 }
@@ -54,16 +51,25 @@ fun AppCompatActivity.hideStatusBar() {
 private fun AppCompatActivity.hideStatusBar(fullscreen: Boolean) {
     val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
     if (statusBar != null) {
-        statusBar.visibility = if (fullscreen) View.GONE else View.VISIBLE
+        statusBar.isGone = fullscreen
     }
 }
 
 fun AppCompatActivity.setDrawBehindSystemBars() {
     WindowCompat.setDecorFitsSystemWindows(window, false)
-    window.statusBarColor = Color.TRANSPARENT
-    window.navigationBarColor = Color.TRANSPARENT
-    if (VersionUtils.hasQ()) {
-        window.isNavigationBarContrastEnforced = false
+    if (VersionUtils.hasOreo()) {
+        if (VersionUtils.hasQ()) {
+            window.isNavigationBarContrastEnforced = false
+        }
+        setNavigationBarColor(Color.TRANSPARENT)
+        setStatusBarColor(Color.TRANSPARENT)
+    } else {
+        setNavigationBarColorPreOreo(surfaceColor())
+        if (VersionUtils.hasMarshmallow()) {
+            setStatusBarColor(Color.TRANSPARENT)
+        } else {
+            setStatusBarColor(surfaceColor())
+        }
     }
 }
 
@@ -102,7 +108,11 @@ fun AppCompatActivity.setLightStatusBarAuto(bgColor: Int) {
 }
 
 fun AppCompatActivity.setLightNavigationBar(enabled: Boolean) {
-   ATH.setLightNavigationBar(this, enabled)
+    ATH.setLightNavigationBar(this, enabled)
+}
+
+fun AppCompatActivity.setLightNavigationBarAuto(bgColor: Int) {
+    setLightNavigationBar(ColorUtil.isColorLight(bgColor))
 }
 
 
@@ -136,4 +146,32 @@ fun AppCompatActivity.setStatusBarColorAuto() {
     // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
     setStatusBarColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
     setLightStatusBarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
+}
+
+fun AppCompatActivity.setNavigationBarColor(color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        window.navigationBarColor = color
+    } else {
+        window.navigationBarColor = ColorUtil.darkenColor(color)
+    }
+    setLightNavigationBarAuto(color)
+}
+
+fun AppCompatActivity.setNavigationBarColorPreOreo(color: Int) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        window.navigationBarColor = ColorUtil.darkenColor(color)
+    }
+}
+
+fun AppCompatActivity.setStatusBarColorPreMarshmallow(color: Int) {
+    val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
+    if (statusBar != null) {
+        statusBar.setBackgroundColor(
+            ColorUtil.darkenColor(
+                color
+            )
+        )
+    } else {
+        window.statusBarColor = ColorUtil.darkenColor(color)
+    }
 }

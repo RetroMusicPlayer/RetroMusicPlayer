@@ -13,33 +13,31 @@
  */
 package code.name.monkey.retromusic.lyrics
 
-import android.annotation.SuppressLint
-import kotlin.jvm.JvmOverloads
-import android.text.TextPaint
-import android.graphics.drawable.Drawable
 import android.animation.ValueAnimator
-import android.view.GestureDetector
-import android.widget.Scroller
-import android.view.GestureDetector.SimpleOnGestureListener
-import android.view.MotionEvent
-import code.name.monkey.retromusic.R
-import android.text.TextUtils
-import android.os.AsyncTask
-import android.text.StaticLayout
-import android.view.animation.LinearInterpolator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.drawable.Drawable
+import android.os.AsyncTask
 import android.os.Looper
 import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
+import android.text.TextUtils
 import android.text.format.DateUtils
 import android.util.AttributeSet
+import android.view.GestureDetector
+import android.view.GestureDetector.SimpleOnGestureListener
+import android.view.MotionEvent
 import android.view.View
+import android.view.animation.LinearInterpolator
+import android.widget.Scroller
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import code.name.monkey.retromusic.BuildConfig
+import code.name.monkey.retromusic.R
 import java.io.File
-import java.lang.StringBuilder
 import java.util.*
 import kotlin.math.abs
 

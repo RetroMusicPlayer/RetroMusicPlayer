@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.fragments.settings
 
 import android.content.res.ColorStateList
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +28,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMainSettingsBinding
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.rootView
 import code.name.monkey.retromusic.extensions.safeGetBottomInsets
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -90,7 +90,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(
-            requireActivity().window.decorView
+            requireActivity().rootView
         ) { _, insets ->
             binding.container.updatePadding(bottom = insets.safeGetBottomInsets())
             insets
@@ -100,6 +100,5 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        ViewCompat.setOnApplyWindowInsetsListener(requireActivity().window.decorView, null)
     }
 }

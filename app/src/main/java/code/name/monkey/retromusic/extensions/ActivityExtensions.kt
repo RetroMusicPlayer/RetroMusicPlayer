@@ -14,14 +14,16 @@
  */
 package code.name.monkey.retromusic.extensions
 
+import android.R
 import android.app.Activity
+import android.view.View
 import androidx.annotation.DimenRes
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import com.google.android.material.appbar.MaterialToolbar
+import android.view.ViewGroup
 
 fun AppCompatActivity.applyToolbar(toolbar: MaterialToolbar) {
-    //toolbar.setBackgroundColor(surfaceColor())
     ToolbarContentTintHelper.colorBackButton(toolbar)
     setSupportActionBar(toolbar)
 }
@@ -39,3 +41,5 @@ inline fun <reified T : Any> Activity.extraNotNull(key: String, default: T? = nu
 fun Activity.dip(@DimenRes id: Int): Int {
     return resources.getDimensionPixelSize(id)
 }
+
+inline val Activity.rootView: View get() = findViewById<ViewGroup>(R.id.content).getChildAt(0)
