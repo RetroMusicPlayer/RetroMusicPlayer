@@ -519,4 +519,5 @@
     <string name="title_new_backup">New Backup</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="app_widget_md3_name">MD3</string>
+    <string name="disc_hint">Disc Number</string>
 </resources>

@@ -211,26 +211,56 @@
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/trackNumberContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        app:hintEnabled="true">
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
 
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/trackNumberText"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/trackNumberContainer"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center_vertical"
-                            android:hint="@string/track_hint"
-                            android:inputType="text|number"
-                            android:maxLines="1" />
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            app:hintEnabled="true">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/trackNumberText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center_vertical"
+                                android:hint="@string/track_hint"
+                                android:inputType="text|number"
+                                android:maxLines="1" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/discNumberContainer"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            app:hintEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/discNumberText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center_vertical"
+                                android:hint="@string/disc_hint"
+                                android:inputType="text|number"
+                                android:maxLines="1" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/lyricsContainer"

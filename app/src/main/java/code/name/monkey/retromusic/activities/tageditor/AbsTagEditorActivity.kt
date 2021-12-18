@@ -174,6 +174,15 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
             }
         }
 
+    protected val discNumber: String?
+        get() {
+            return try {
+                getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.DISC_NO)
+            } catch (ignored: Exception) {
+                null
+            }
+        }
+
     protected val lyrics: String?
         get() {
             return try {

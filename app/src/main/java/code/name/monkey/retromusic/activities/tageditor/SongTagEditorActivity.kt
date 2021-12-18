@@ -80,6 +80,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.yearContainer.setTint(false)
         binding.genreContainer.setTint(false)
         binding.trackNumberContainer.setTint(false)
+        binding.discNumberContainer.setTint(false)
         binding.lyricsContainer.setTint(false)
 
         binding.songText.appHandleColor().addTextChangedListener(this)
@@ -89,6 +90,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.genreText.appHandleColor().addTextChangedListener(this)
         binding.yearText.appHandleColor().addTextChangedListener(this)
         binding.trackNumberText.appHandleColor().addTextChangedListener(this)
+        binding.discNumberText.appHandleColor().addTextChangedListener(this)
         binding.lyricsText.appHandleColor().addTextChangedListener(this)
         binding.songComposerText.appHandleColor().addTextChangedListener(this)
     }
@@ -101,6 +103,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.genreText.setText(genreName)
         binding.yearText.setText(songYear)
         binding.trackNumberText.setText(trackNumber)
+        binding.discNumberText.setText(discNumber)
         binding.lyricsText.setText(lyrics)
         binding.songComposerText.setText(composer)
         println(songTitle + songYear)
@@ -150,6 +153,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         fieldKeyValueMap[FieldKey.GENRE] = binding.genreText.text.toString()
         fieldKeyValueMap[FieldKey.YEAR] = binding.yearText.text.toString()
         fieldKeyValueMap[FieldKey.TRACK] = binding.trackNumberText.text.toString()
+        fieldKeyValueMap[FieldKey.DISC_NO] = binding.discNumberText.text.toString()
         fieldKeyValueMap[FieldKey.LYRICS] = binding.lyricsText.text.toString()
         fieldKeyValueMap[FieldKey.ALBUM_ARTIST] = binding.albumArtistText.text.toString()
         fieldKeyValueMap[FieldKey.COMPOSER] = binding.songComposerText.text.toString()
