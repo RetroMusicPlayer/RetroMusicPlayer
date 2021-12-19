@@ -236,4 +236,13 @@
         <item name="colorAccent">@color/md_deep_purple_A400</item>
         <item name="colorPrimary">@color/md_deep_purple_500</item>
     </style>
+
+    <style name="Theme.RetroMusic.Dialog" parent="Theme.Material3.DayNight.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@drawable/rounded_drawable</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="background">@color/transparent</item>
+    </style>
 </resources>
