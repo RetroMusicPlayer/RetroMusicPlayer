@@ -28,6 +28,7 @@ object ThemeManager {
     fun getNightMode(
         context: Context
     ): Int = when (context.generalThemeValue) {
+        LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
         DARK -> AppCompatDelegate.MODE_NIGHT_YES
         BLACK -> {
             if (PreferenceUtil.baseTheme == "dark") {

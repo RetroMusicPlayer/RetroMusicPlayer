@@ -92,7 +92,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         ViewCompat.setOnApplyWindowInsetsListener(
             requireActivity().rootView
         ) { _, insets ->
-            binding.container.updatePadding(bottom = insets.safeGetBottomInsets())
+            _binding?.container?.updatePadding(bottom = insets.safeGetBottomInsets())
             insets
         }
     }
