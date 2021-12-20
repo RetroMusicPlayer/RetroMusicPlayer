@@ -34,7 +34,6 @@ import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.fragments.base.goToLyrics
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.lyrics.CoverLrcView
@@ -74,18 +73,16 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     private fun updateLyrics() {
-        binding.lyricsView.setLabel("Empty")
+        binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
         val song = MusicPlayerRemote.currentSong
-        when {
-            LyricUtil.isLrcOriginalFileExist(song.data) -> {
-                LyricUtil.getLocalLyricOriginalFile(song.data)
-                    ?.let { binding.lyricsView.loadLrc(it) }
-            }
-            LyricUtil.isLrcFileExist(song.title, song.artistName) -> {
-                LyricUtil.getLocalLyricFile(song.title, song.artistName)
-                    ?.let { binding.lyricsView.loadLrc(it) }
-            }
-            else -> {
+        val lrcFile = LyricUtil.getSyncedLyricsFile(song)
+        if (lrcFile != null) {
+            binding.lyricsView.loadLrc(lrcFile)
+        } else {
+            val embeddedLyrics = LyricUtil.getEmbeddedSyncedLyrics(song.data)
+            if (embeddedLyrics != null) {
+                binding.lyricsView.loadLrc(embeddedLyrics)
+            } else {
                 binding.lyricsView.reset()
             }
         }
@@ -126,16 +123,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             )
         }
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
-        // Don't show lyrics container for below conditions
-        if (!(nps == Circle || nps == Peak || nps == Tiny || !PreferenceUtil.showLyrics)) {
-            lrcView.isVisible = false
-            viewPager.isInvisible = false
-            progressViewUpdateHelper?.stop()
-        } else {
-            lrcView.isVisible = true
-            viewPager.isInvisible = true
-            progressViewUpdateHelper?.start()
-        }
+        maybeInitLyrics()
         lrcView.apply {
             setDraggable(true, object : CoverLrcView.OnPlayClickListener {
                 override fun onPlayClick(time: Long): Boolean {
@@ -145,25 +133,11 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 }
             })
         }
-        // Go to lyrics activity when clicked lyrics
-        lrcView.setOnClickListener {
-            goToLyrics(requireActivity())
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        val nps = PreferenceUtil.nowPlayingScreen
-        // Don't show lyrics container for below conditions
-        if (nps == Circle || nps == Peak || nps == Tiny || !PreferenceUtil.showLyrics) {
-            lrcView.isVisible = false
-            viewPager.isInvisible = false
-            progressViewUpdateHelper?.stop()
-        } else {
-            lrcView.isVisible = true
-            viewPager.isInvisible = true
-            progressViewUpdateHelper?.start()
-        }
+        maybeInitLyrics()
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .registerOnSharedPreferenceChangeListener(this)
     }
@@ -194,22 +168,9 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
         if (key == SHOW_LYRICS) {
             if (sharedPreferences.getBoolean(key, false)) {
-                val nps = PreferenceUtil.nowPlayingScreen
-                // Don't show lyrics container for below conditions
-                if (!(nps == Circle || nps == Peak || nps == Tiny || !PreferenceUtil.showLyrics)) {
-                    lrcView.isVisible = true
-                    viewPager.isInvisible = true
-                    progressViewUpdateHelper?.start()
-                    lrcView.animate().alpha(1f).duration =
-                        AbsPlayerFragment.VISIBILITY_ANIM_DURATION
-                } else {
-                    lrcView.isVisible = false
-                    viewPager.isInvisible = false
-                    progressViewUpdateHelper?.stop()
-                }
+                maybeInitLyrics()
             } else {
-                lrcView.isVisible = false
-                viewPager.isInvisible = false
+                showLyrics(false)
                 progressViewUpdateHelper?.stop()
             }
         }
@@ -230,6 +191,25 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             setTimelineColor(primaryColor)
             setNormalColor(secondaryColor)
             setTimelineTextColor(primaryColor)
+        }
+    }
+
+    private fun showLyrics(visible: Boolean) {
+        lrcView.isVisible = visible
+        viewPager.isInvisible = visible
+    }
+
+    private fun maybeInitLyrics() {
+        val nps = PreferenceUtil.nowPlayingScreen
+        // Don't show lyrics container for below conditions
+        if (nps != Circle && nps != Peak && nps != Tiny && PreferenceUtil.showLyrics) {
+            showLyrics(true)
+            progressViewUpdateHelper?.start()
+            lrcView.animate().alpha(1f).duration =
+                AbsPlayerFragment.VISIBILITY_ANIM_DURATION
+        } else {
+            showLyrics(false)
+            progressViewUpdateHelper?.stop()
         }
     }
 
@@ -266,15 +246,17 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         callbacks?.onColorChanged(color)
         setLRCViewColors(
             when (PreferenceUtil.nowPlayingScreen) {
+                Adaptive, Fit, Plain, Simple -> surfaceColor()
                 Flat, Normal -> if (PreferenceUtil.isAdaptiveColor) {
                     color.backgroundColor
                 } else {
                     surfaceColor()
                 }
-                Color, Gradient, Full ->color.backgroundColor
+                Color -> color.backgroundColor
                 Blur -> Color.BLACK
-                else -> surfaceColor()
-            })
+                else -> color.backgroundColor
+            }
+        )
     }
 
     fun setCallbacks(listener: Callbacks) {

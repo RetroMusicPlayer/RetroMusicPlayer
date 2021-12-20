@@ -231,13 +231,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
     @SuppressLint("CheckResult")
     private fun editSyncedLyrics() {
-        var lrcFile: File? = null
-        if (LyricUtil.isLrcOriginalFileExist(song.data)) {
-            lrcFile = LyricUtil.getLocalLyricOriginalFile(song.data)
-        } else if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
-            lrcFile = LyricUtil.getLocalLyricFile(song.title, song.artistName)
-        }
-        val content: String = LyricUtil.getStringFromLrc(lrcFile)
+        val content: String = LyricUtil.getStringFromLrc(LyricUtil.getSyncedLyricsFile(song))
 
         MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(res = R.string.edit_synced_lyrics)
@@ -332,11 +326,8 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
         fun loadLRCLyrics() {
             binding.lyricsView.setLabel("Empty")
-            val song = MusicPlayerRemote.currentSong
-            if (LyricUtil.isLrcOriginalFileExist(song.data)) {
-                binding.lyricsView.loadLrc(LyricUtil.getLocalLyricOriginalFile(song.data))
-            } else if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
-                binding.lyricsView.loadLrc(LyricUtil.getLocalLyricFile(song.title, song.artistName))
+            LyricUtil.getSyncedLyricsFile(MusicPlayerRemote.currentSong)?.let {
+                binding.lyricsView.loadLrc(it)
             }
         }
 

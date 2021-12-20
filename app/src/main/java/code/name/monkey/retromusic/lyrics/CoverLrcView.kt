@@ -91,10 +91,10 @@ class CoverLrcView @JvmOverloads constructor(
     private val mSimpleOnGestureListener: SimpleOnGestureListener =
         object : SimpleOnGestureListener() {
             override fun onDown(e: MotionEvent): Boolean {
-                if (mOffset != getOffset(0)) {
-                    parent.requestDisallowInterceptTouchEvent(true)
-                }
                 if (hasLrc() && mOnPlayClickListener != null) {
+                    if (mOffset != getOffset(0)) {
+                        parent.requestDisallowInterceptTouchEvent(true)
+                    }
                     mScroller!!.forceFinished(true)
                     removeCallbacks(hideTimelineRunnable)
                     isTouching = true
@@ -336,7 +336,7 @@ class CoverLrcView @JvmOverloads constructor(
      * @param mainLrcFile 第一种语言歌词文件
      * @param secondLrcFile 第二种语言歌词文件
      */
-    fun loadLrc(mainLrcFile: File, secondLrcFile: File?) {
+    private fun loadLrc(mainLrcFile: File, secondLrcFile: File?) {
         runOnUi {
             reset()
             val sb = StringBuilder("file://")
@@ -352,7 +352,7 @@ class CoverLrcView @JvmOverloads constructor(
                 }
 
                 override fun onPostExecute(lrcEntries: List<LrcEntry>) {
-                    if (flag === flag) {
+                    if (flag == flag) {
                         onLrcLoaded(lrcEntries)
                         this@CoverLrcView.flag = null
                     }
@@ -376,7 +376,7 @@ class CoverLrcView @JvmOverloads constructor(
      * @param mainLrcText 第一种语言歌词文本
      * @param secondLrcText 第二种语言歌词文本
      */
-    fun loadLrc(mainLrcText: String?, secondLrcText: String?) {
+    private fun loadLrc(mainLrcText: String?, secondLrcText: String?) {
         runOnUi {
             reset()
             val sb = StringBuilder("file://")
@@ -392,7 +392,7 @@ class CoverLrcView @JvmOverloads constructor(
                 }
 
                 override fun onPostExecute(lrcEntries: List<LrcEntry>) {
-                    if (flag === flag) {
+                    if (flag == flag) {
                         onLrcLoaded(lrcEntries)
                         this@CoverLrcView.flag = null
                     }
@@ -400,12 +400,7 @@ class CoverLrcView @JvmOverloads constructor(
             }.execute(mainLrcText, secondLrcText)
         }
     }
-    /**
-     * 加载在线歌词
-     *
-     * @param lrcUrl 歌词文件的网络地址
-     * @param charset 编码格式
-     */
+
     /**
      * 加载在线歌词，默认使用 utf-8 编码
      *
@@ -421,7 +416,7 @@ class CoverLrcView @JvmOverloads constructor(
             }
 
             override fun onPostExecute(lrcText: String) {
-                if (flag === flag) {
+                if (flag == flag) {
                     loadLrc(lrcText)
                 }
             }

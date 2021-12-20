@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Go to album</string>
     <string name="action_go_to_artist">Go to artist</string>
     <string name="action_go_to_genre">Go to genre</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Go to start directory</string>
     <string name="action_grant">Grant</string>
     <string name="action_grid_size">Grid size</string>
