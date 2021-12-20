@@ -266,15 +266,14 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         callbacks?.onColorChanged(color)
         setLRCViewColors(
             when (PreferenceUtil.nowPlayingScreen) {
-                Adaptive, Fit, Plain, Simple -> surfaceColor()
                 Flat, Normal -> if (PreferenceUtil.isAdaptiveColor) {
                     color.backgroundColor
                 } else {
                     surfaceColor()
                 }
-                Color ->color.backgroundColor
+                Color, Gradient, Full ->color.backgroundColor
                 Blur -> Color.BLACK
-                else -> color.backgroundColor
+                else -> surfaceColor()
             })
     }
 

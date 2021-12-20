@@ -197,9 +197,8 @@
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
-    <style name="circleImageView" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">5%</item>
+    <style name="circleImageView" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerSize">40dp</item>
     </style>
 
     <style name="SearchChipStyle" parent="Widget.Material3.Chip.Filter">
