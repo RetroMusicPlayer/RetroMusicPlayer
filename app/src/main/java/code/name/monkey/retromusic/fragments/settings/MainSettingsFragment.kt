@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMainSettingsBinding
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.rootView
 import code.name.monkey.retromusic.extensions.safeGetBottomInsets
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -89,9 +90,9 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(
-            requireActivity().window.decorView
+            requireActivity().rootView
         ) { _, insets ->
-            binding.container.updatePadding(bottom = insets.safeGetBottomInsets())
+            _binding?.container?.updatePadding(bottom = insets.safeGetBottomInsets())
             insets
         }
     }

@@ -15,12 +15,7 @@
 package code.name.monkey.retromusic.util
 
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
-import code.name.monkey.retromusic.R
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.play.core.review.ReviewManagerFactory
 
 object AppRater {

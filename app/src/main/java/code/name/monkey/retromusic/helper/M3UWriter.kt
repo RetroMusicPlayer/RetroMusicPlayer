@@ -31,15 +31,15 @@ object M3UWriter : M3UConstants {
         val file = File(dir, playlist.name + "." + M3UConstants.EXTENSION)
         val songs = playlist.getSongs()
         if (songs.isNotEmpty()) {
-            val bw = BufferedWriter(FileWriter(file))
-            bw.write(M3UConstants.HEADER)
-            for (song in songs) {
-                bw.newLine()
-                bw.write(M3UConstants.ENTRY + song.duration + M3UConstants.DURATION_SEPARATOR + song.artistName + " - " + song.title)
-                bw.newLine()
-                bw.write(song.data)
+            BufferedWriter(FileWriter(file)).use { bw ->
+                bw.write(M3UConstants.HEADER)
+                for (song in songs) {
+                    bw.newLine()
+                    bw.write(M3UConstants.ENTRY + song.duration + M3UConstants.DURATION_SEPARATOR + song.artistName + " - " + song.title)
+                    bw.newLine()
+                    bw.write(song.data)
+                }
             }
-            bw.close()
         }
         return file
     }
@@ -54,15 +54,15 @@ object M3UWriter : M3UConstants {
             it.songPrimaryKey
         }.toSongs()
         if (songs.isNotEmpty()) {
-            val bufferedWriter = BufferedWriter(FileWriter(file))
-            bufferedWriter.write(M3UConstants.HEADER)
-            songs.forEach {
-                bufferedWriter.newLine()
-                bufferedWriter.write(M3UConstants.ENTRY + it.duration + M3UConstants.DURATION_SEPARATOR + it.artistName + " - " + it.title)
-                bufferedWriter.newLine()
-                bufferedWriter.write(it.data)
+            BufferedWriter(FileWriter(file)).use { bw->
+                bw.write(M3UConstants.HEADER)
+                songs.forEach {
+                    bw.newLine()
+                    bw.write(M3UConstants.ENTRY + it.duration + M3UConstants.DURATION_SEPARATOR + it.artistName + " - " + it.title)
+                    bw.newLine()
+                    bw.write(it.data)
+                }
             }
-            bufferedWriter.close()
         }
         return file
     }
@@ -72,15 +72,15 @@ object M3UWriter : M3UConstants {
             it.songPrimaryKey
         }.toSongs()
         if (songs.isNotEmpty()) {
-            val bufferedWriter = outputStream.bufferedWriter()
-            bufferedWriter.write(M3UConstants.HEADER)
-            songs.forEach {
-                bufferedWriter.newLine()
-                bufferedWriter.write(M3UConstants.ENTRY + it.duration + M3UConstants.DURATION_SEPARATOR + it.artistName + " - " + it.title)
-                bufferedWriter.newLine()
-                bufferedWriter.write(it.data)
+            outputStream.bufferedWriter().use{ bw->
+                bw.write(M3UConstants.HEADER)
+                songs.forEach {
+                    bw.newLine()
+                    bw.write(M3UConstants.ENTRY + it.duration + M3UConstants.DURATION_SEPARATOR + it.artistName + " - " + it.title)
+                    bw.newLine()
+                    bw.write(it.data)
+                }
             }
-            bufferedWriter.close()
         }
         outputStream.flush()
         outputStream.close()

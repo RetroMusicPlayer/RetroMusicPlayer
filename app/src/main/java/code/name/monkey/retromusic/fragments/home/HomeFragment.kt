@@ -23,6 +23,7 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
+import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -87,6 +88,21 @@ class HomeFragment :
             remove()
             mainActivity.finish()
         }
+        view.doOnLayout {
+            adjustPlaylistButtons()
+        }
+    }
+
+    private fun adjustPlaylistButtons() {
+        val buttons =
+            listOf(binding.history, binding.lastAdded, binding.topPlayed, binding.actionShuffle)
+        buttons.maxOf { it.lineCount }.let { maxLineCount->
+            buttons.forEach { button ->
+                // Set the highest line count to every button for consistency
+                button.setLines(maxLineCount)
+            }
+        }
+
     }
 
     private fun setupListeners() {

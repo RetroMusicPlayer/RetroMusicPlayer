@@ -73,7 +73,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:scrollbarSize="0dp">
+            android:scrollbars="none"
+            android:overScrollMode="@integer/overScrollMode">
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/searchFilterGroup"
@@ -126,6 +127,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:overScrollMode="@integer/overScrollMode"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />

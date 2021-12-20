@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.util
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -32,14 +31,6 @@ class RingtoneManager(val context: Context) {
     fun setRingtone(song: Song) {
         val resolver = context.contentResolver
         val uri = getSongFileUri(song.id)
-        try {
-            val values = ContentValues(2)
-            values.put(MediaStore.Audio.AudioColumns.IS_RINGTONE, "1")
-            values.put(MediaStore.Audio.AudioColumns.IS_ALARM, "1")
-            resolver.update(uri, values, null, null)
-        } catch (ignored: UnsupportedOperationException) {
-            return
-        }
 
         try {
             val cursor = resolver.query(

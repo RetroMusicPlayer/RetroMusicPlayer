@@ -14,42 +14,36 @@
  */
 package code.name.monkey.retromusic.fragments.player
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SHOW_LYRICS
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter.AlbumCoverFragment
 import code.name.monkey.retromusic.databinding.FragmentPlayerAlbumCoverBinding
+import code.name.monkey.retromusic.extensions.isColorLight
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToLyrics
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
-import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
+import code.name.monkey.retromusic.lyrics.CoverLrcView
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.jaudiotagger.audio.AudioFileIO
-import org.jaudiotagger.audio.exceptions.CannotReadException
-import org.jaudiotagger.tag.FieldKey
-import java.io.File
-import java.io.FileNotFoundException
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_player_album_cover),
     ViewPager.OnPageChangeListener, MusicProgressViewUpdateHelper.Callback,
@@ -70,9 +64,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
     private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
 
-    private val lyricsLayout: FrameLayout get() = binding.playerLyrics
-    private val lyricsLine1: TextView get() = binding.playerLyricsLine1
-    private val lyricsLine2: TextView get() = binding.playerLyricsLine2
+    private val lrcView: CoverLrcView get() = binding.lyricsView
 
     var lyrics: Lyrics? = null
 
@@ -82,102 +74,28 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     private fun updateLyrics() {
-        lyrics = null
-        lifecycleScope.launch(Dispatchers.IO) {
-            val song = MusicPlayerRemote.currentSong
-            val lyrics = try {
-                var lrcFile: File? = null
-                if (LyricUtil.isLrcOriginalFileExist(song.data)) {
-                    lrcFile = LyricUtil.getLocalLyricOriginalFile(song.data)
-                } else if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
-                    lrcFile = LyricUtil.getLocalLyricFile(song.title, song.artistName)
-                }
-                val data: String = LyricUtil.getStringFromLrc(lrcFile)
-                if (!TextUtils.isEmpty(data)) {
-                    Lyrics.parse(song, data)
-                } else {
-                    // Get Embedded Lyrics and check if they are Synchronized
-                    val embeddedLyrics = try{
-                        AudioFileIO.read(File(song.data)).tagOrCreateDefault.getFirst(FieldKey.LYRICS)
-                    } catch(e: Exception){
-                        null
-                    }
-                    if (AbsSynchronizedLyrics.isSynchronized(embeddedLyrics)) {
-                        Lyrics.parse(song, embeddedLyrics)
-                    } else {
-                        null
-                    }
-                }
-            } catch (err: FileNotFoundException) {
-                null
-            } catch (e: CannotReadException){
-                null
+        binding.lyricsView.setLabel("Empty")
+        val song = MusicPlayerRemote.currentSong
+        when {
+            LyricUtil.isLrcOriginalFileExist(song.data) -> {
+                LyricUtil.getLocalLyricOriginalFile(song.data)
+                    ?.let { binding.lyricsView.loadLrc(it) }
             }
-            withContext(Dispatchers.Main) {
-                this@PlayerAlbumCoverFragment.lyrics = lyrics
+            LyricUtil.isLrcFileExist(song.title, song.artistName) -> {
+                LyricUtil.getLocalLyricFile(song.title, song.artistName)
+                    ?.let { binding.lyricsView.loadLrc(it) }
+            }
+            else -> {
+                binding.lyricsView.reset()
             }
         }
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        if (_binding == null) return
-
-        if (!isLyricsLayoutVisible()) {
-            hideLyricsLayout()
-            return
-        }
-
-        if (lyrics !is AbsSynchronizedLyrics) return
-        val synchronizedLyrics = lyrics as AbsSynchronizedLyrics
-
-        lyricsLayout.visibility = View.VISIBLE
-        lyricsLayout.alpha = 1f
-
-        val oldLine = lyricsLine2.text.toString()
-        val line = synchronizedLyrics.getLine(progress)
-
-        if (oldLine != line || oldLine.isEmpty()) {
-            lyricsLine1.text = oldLine
-            lyricsLine2.text = line
-
-            lyricsLine1.visibility = View.VISIBLE
-            lyricsLine2.visibility = View.VISIBLE
-
-            lyricsLine2.measure(
-                View.MeasureSpec.makeMeasureSpec(
-                    lyricsLine2.measuredWidth,
-                    View.MeasureSpec.EXACTLY
-                ),
-                View.MeasureSpec.UNSPECIFIED
-            )
-            val h: Float = lyricsLine2.measuredHeight.toFloat()
-
-            lyricsLine1.alpha = 1f
-            lyricsLine1.translationY = 0f
-            lyricsLine1.animate().alpha(0f).translationY(-h).duration =
-                AbsPlayerFragment.VISIBILITY_ANIM_DURATION
-
-            lyricsLine2.alpha = 0f
-            lyricsLine2.translationY = h
-            lyricsLine2.animate().alpha(1f).translationY(0f).duration =
-                AbsPlayerFragment.VISIBILITY_ANIM_DURATION
-        }
+        binding.lyricsView.updateTime(progress.toLong())
     }
 
-    private fun isLyricsLayoutVisible(): Boolean {
-        return lyrics != null && lyrics!!.isSynchronized && lyrics!!.isValid
-    }
-
-    private fun hideLyricsLayout() {
-        lyricsLayout.animate().alpha(0f).setDuration(AbsPlayerFragment.VISIBILITY_ANIM_DURATION)
-            .withEndAction {
-                if (_binding == null) return@withEndAction
-                lyricsLayout.visibility = View.GONE
-                lyricsLine1.text = null
-                lyricsLine2.text = null
-            }
-    }
-
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPlayerAlbumCoverBinding.bind(view)
@@ -210,14 +128,25 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
         // Don't show lyrics container for below conditions
         if (!(nps == Circle || nps == Peak || nps == Tiny || !PreferenceUtil.showLyrics)) {
-            lyricsLayout.isVisible = false
+            lrcView.isVisible = false
+            viewPager.isInvisible = false
             progressViewUpdateHelper?.stop()
         } else {
-            lyricsLayout.isVisible = true
+            lrcView.isVisible = true
+            viewPager.isInvisible = true
             progressViewUpdateHelper?.start()
         }
+        lrcView.apply {
+            setDraggable(true, object : CoverLrcView.OnPlayClickListener {
+                override fun onPlayClick(time: Long): Boolean {
+                    MusicPlayerRemote.seekTo(time.toInt())
+                    MusicPlayerRemote.resumePlaying()
+                    return true
+                }
+            })
+        }
         // Go to lyrics activity when clicked lyrics
-        binding.playerLyricsLine2.setOnClickListener {
+        lrcView.setOnClickListener {
             goToLyrics(requireActivity())
         }
     }
@@ -227,10 +156,12 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         val nps = PreferenceUtil.nowPlayingScreen
         // Don't show lyrics container for below conditions
         if (nps == Circle || nps == Peak || nps == Tiny || !PreferenceUtil.showLyrics) {
-            lyricsLayout.isVisible = false
+            lrcView.isVisible = false
+            viewPager.isInvisible = false
             progressViewUpdateHelper?.stop()
         } else {
-            lyricsLayout.isVisible = true
+            lrcView.isVisible = true
+            viewPager.isInvisible = true
             progressViewUpdateHelper?.start()
         }
         PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -266,27 +197,39 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 val nps = PreferenceUtil.nowPlayingScreen
                 // Don't show lyrics container for below conditions
                 if (!(nps == Circle || nps == Peak || nps == Tiny || !PreferenceUtil.showLyrics)) {
-                    lyricsLayout.isVisible = false
-                    progressViewUpdateHelper?.stop()
-                } else {
-                    lyricsLayout.isVisible = true
+                    lrcView.isVisible = true
+                    viewPager.isInvisible = true
                     progressViewUpdateHelper?.start()
-                    lyricsLayout.animate().alpha(1f).duration =
+                    lrcView.animate().alpha(1f).duration =
                         AbsPlayerFragment.VISIBILITY_ANIM_DURATION
-                    binding.playerLyrics.isVisible = true
+                } else {
+                    lrcView.isVisible = false
+                    viewPager.isInvisible = false
+                    progressViewUpdateHelper?.stop()
                 }
             } else {
+                lrcView.isVisible = false
+                viewPager.isInvisible = false
                 progressViewUpdateHelper?.stop()
-                lyricsLayout.animate().alpha(0f)
-                    .setDuration(AbsPlayerFragment.VISIBILITY_ANIM_DURATION)
-                    .withEndAction {
-                        if (_binding != null) {
-                            binding.playerLyrics.isVisible = false
-                            lyricsLine1.text = null
-                            lyricsLine2.text = null
-                        }
-                    }
             }
+        }
+    }
+
+    private fun setLRCViewColors(backgroundColor: Int) {
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(
+            requireContext(),
+            backgroundColor.isColorLight
+        )
+        val secondaryColor = MaterialValueHelper.getSecondaryDisabledTextColor(
+            requireContext(),
+            backgroundColor.isColorLight
+        )
+        lrcView.apply {
+            setCurrentColor(primaryColor)
+            setTimeTextColor(primaryColor)
+            setTimelineColor(primaryColor)
+            setNormalColor(secondaryColor)
+            setTimelineTextColor(primaryColor)
         }
     }
 
@@ -321,6 +264,18 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     private fun notifyColorChange(color: MediaNotificationProcessor) {
         callbacks?.onColorChanged(color)
+        setLRCViewColors(
+            when (PreferenceUtil.nowPlayingScreen) {
+                Adaptive, Fit, Plain, Simple -> surfaceColor()
+                Flat, Normal -> if (PreferenceUtil.isAdaptiveColor) {
+                    color.backgroundColor
+                } else {
+                    surfaceColor()
+                }
+                Color ->color.backgroundColor
+                Blur -> Color.BLACK
+                else -> color.backgroundColor
+            })
     }
 
     fun setCallbacks(listener: Callbacks) {

@@ -2,9 +2,13 @@ package code.name.monkey.retromusic.helper
 
 import android.content.Context
 import android.os.Environment
+import android.util.Log
 import android.widget.Toast
+import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
+import code.name.monkey.retromusic.helper.BackupContent.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.*
@@ -24,10 +28,11 @@ object BackupHelper {
         zipItems.addAll(getSettingsZipItems(context))
         getUserImageZipItems(context)?.let { zipItems.addAll(it) }
         zipItems.addAll(getCustomArtistZipItems(context))
+        zipItems.addAll(getQueueZipItems(context))
         zipAll(zipItems, backupFile)
     }
 
-    private suspend fun zipAll(zipItems: List<ZipItem>, backupFile: File) {
+    private suspend fun zipAll(zipItems: List<ZipItem>, backupFile: File) =
         withContext(Dispatchers.IO) {
             kotlin.runCatching {
                 ZipOutputStream(BufferedOutputStream(FileOutputStream(backupFile))).use { out ->
@@ -42,25 +47,40 @@ object BackupHelper {
                     }
                 }
             }.onFailure {
-                it.printStackTrace()
                 withContext(Dispatchers.Main) {
                     Toast.makeText(App.getContext(), "Couldn't create backup", Toast.LENGTH_SHORT)
                         .show()
                 }
+                throw Exception(it)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        App.getContext(),
+                        "Backup created successfully",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
             }
-            withContext(Dispatchers.Main) {
-                Toast.makeText(App.getContext(), "Backup created successfully", Toast.LENGTH_SHORT)
-                    .show()
-            }
+
         }
-    }
 
     private fun getDatabaseZipItems(context: Context): List<ZipItem> {
         return context.databaseList().filter {
-            it.endsWith(".db")
+            it.endsWith(".db") && it != queueDatabase
         }.map {
             ZipItem(context.getDatabasePath(it).absolutePath, "$DATABASES_PATH${File.separator}$it")
         }
+    }
+
+    private fun getQueueZipItems(context: Context): List<ZipItem> {
+        Log.d("RetroMusic", context.getDatabasePath(queueDatabase).absolutePath)
+        return listOf(
+            ZipItem(
+                context.getDatabasePath(queueDatabase).absolutePath,
+                "$QUEUE_PATH${File.separator}$queueDatabase"
+            )
+        )
     }
 
     private fun getSettingsZipItems(context: Context): List<ZipItem> {
@@ -94,33 +114,47 @@ object BackupHelper {
                     )
                 }?.toList() ?: listOf()
         )
-        zipItemList.add(
-            ZipItem(
-                sharedPrefPath + File.separator + "custom_artist_image.xml",
-                "$CUSTOM_ARTISTS_PATH${File.separator}prefs${File.separator}custom_artist_image.xml"
-            )
-        )
+        File(sharedPrefPath + File.separator + "custom_artist_image.xml").let {
+            if (it.exists()) {
+                zipItemList.add(
+                    ZipItem(
+                        it.absolutePath,
+                        "$CUSTOM_ARTISTS_PATH${File.separator}prefs${File.separator}custom_artist_image.xml"
+                    )
+                )
+            }
+        }
+
+
         return zipItemList
     }
 
-    suspend fun restoreBackup(context: Context, inputStream: InputStream?) {
+    suspend fun restoreBackup(
+        context: Context,
+        inputStream: InputStream?,
+        contents: List<BackupContent>
+    ) {
         withContext(Dispatchers.IO) {
             ZipInputStream(inputStream).use {
                 var entry = it.nextEntry
                 while (entry != null) {
-                    if (entry.isDatabaseEntry()) restoreDatabase(context, it, entry)
-                    if (entry.isPreferenceEntry()) restorePreferences(context, it, entry)
-                    if (entry.isImageEntry()) restoreImages(context, it, entry)
-                    if (entry.isCustomArtistImageEntry()) restoreCustomArtistImages(
-                        context,
-                        it,
-                        entry
-                    )
-                    if (entry.isCustomArtistPrefEntry()) restoreCustomArtistPrefs(
-                        context,
-                        it,
-                        entry
-                    )
+                    if (entry.isDatabaseEntry() && contents.contains(PLAYLISTS)) {
+                        restoreDatabase(context, it, entry)
+                    } else if (entry.isPreferenceEntry() && contents.contains(SETTINGS)) {
+                        restorePreferences(context, it, entry)
+                    } else if (entry.isImageEntry() && contents.contains(USER_IMAGES)) {
+                        restoreImages(context, it, entry)
+
+                    } else if (entry.isCustomArtistImageEntry() && contents.contains(
+                            CUSTOM_ARTIST_IMAGES
+                        )
+                    ) {
+                        restoreCustomArtistImages(context, it, entry)
+                        restoreCustomArtistPrefs(context, it, entry)
+                    } else if (entry.isQueueEntry() && contents.contains(QUEUE)) {
+                        restoreQueueDatabase(context, it, entry)
+                    }
+
                     entry = it.nextEntry
                 }
             }
@@ -159,6 +193,21 @@ object BackupHelper {
     }
 
     private fun restoreDatabase(context: Context, zipIn: ZipInputStream, zipEntry: ZipEntry) {
+        val filePath =
+            context.filesDir.parent!! + File.separator + DATABASES_PATH + File.separator + zipEntry.getFileName()
+        BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
+            val bytesIn = ByteArray(DEFAULT_BUFFER_SIZE)
+            var read: Int
+            while (zipIn.read(bytesIn).also { read = it } != -1) {
+                bos.write(bytesIn, 0, read)
+            }
+        }
+    }
+
+    private fun restoreQueueDatabase(context: Context, zipIn: ZipInputStream, zipEntry: ZipEntry) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
+            putInt("POSITION", 0)
+        }
         val filePath =
             context.filesDir.parent!! + File.separator + DATABASES_PATH + File.separator + zipEntry.getFileName()
         BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
@@ -218,10 +267,12 @@ object BackupHelper {
     const val BACKUP_EXTENSION = "rmbak"
     const val APPEND_EXTENSION = ".$BACKUP_EXTENSION"
     private const val DATABASES_PATH = "databases"
+    private const val QUEUE_PATH = "queue"
     private const val SETTINGS_PATH = "prefs"
     private const val IMAGES_PATH = "userImages"
     private const val CUSTOM_ARTISTS_PATH = "artistImages"
     private const val THEME_PREFS_KEY_DEFAULT = "[[kabouzeid_app-theme-helper]]"
+    private const val queueDatabase = "music_playback_state.db"
 
     private fun ZipEntry.isDatabaseEntry(): Boolean {
         return name.startsWith(DATABASES_PATH)
@@ -243,6 +294,10 @@ object BackupHelper {
         return name.startsWith(CUSTOM_ARTISTS_PATH) && name.contains("prefs")
     }
 
+    private fun ZipEntry.isQueueEntry(): Boolean {
+        return name.startsWith(QUEUE_PATH)
+    }
+
     private fun ZipEntry.getFileName(): String {
         return name.substring(name.lastIndexOf(File.separator))
     }
@@ -261,4 +316,12 @@ fun CharSequence.sanitize(): String {
         .replace("|", "_")
         .replace("\\", "_")
         .replace("&", "_")
+}
+
+enum class BackupContent {
+    SETTINGS,
+    USER_IMAGES,
+    CUSTOM_ARTIST_IMAGES,
+    PLAYLISTS,
+    QUEUE
 }

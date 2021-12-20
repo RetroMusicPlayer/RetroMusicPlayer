@@ -3,7 +3,6 @@ package code.name.monkey.appthemehelper
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import android.view.View
 import androidx.annotation.ColorInt

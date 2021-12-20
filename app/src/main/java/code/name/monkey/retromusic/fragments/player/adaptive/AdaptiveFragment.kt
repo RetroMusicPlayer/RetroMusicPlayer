@@ -47,7 +47,7 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
         _binding = FragmentAdaptivePlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
-        binding.root.drawAboveSystemBars()
+        binding.playbackControlsFragment.drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {

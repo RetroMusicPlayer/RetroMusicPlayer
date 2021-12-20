@@ -30,8 +30,6 @@ import androidx.media.app.NotificationCompat.MediaStyle
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
-import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper

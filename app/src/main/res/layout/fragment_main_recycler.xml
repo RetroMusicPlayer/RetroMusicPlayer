@@ -46,7 +46,8 @@
         android:scrollbars="none"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/item_list"
-        android:transitionGroup="true"/>
+        android:overScrollMode="@integer/overScrollMode"
+        android:transitionGroup="true" />
 
     <LinearLayout
         android:id="@android:id/empty"

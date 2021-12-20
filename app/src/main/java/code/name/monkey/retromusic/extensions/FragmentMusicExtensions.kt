@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.extensions
 
 import android.net.Uri
 import android.webkit.MimeTypeMap
-import androidx.fragment.app.Fragment
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.RetroUtil
 import org.jaudiotagger.audio.AudioFileIO

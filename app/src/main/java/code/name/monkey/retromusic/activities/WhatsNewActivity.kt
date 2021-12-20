@@ -17,6 +17,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityWhatsNewBinding
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.extensions.setLightStatusBarAuto
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
@@ -38,12 +39,12 @@ class WhatsNewActivity : AbsThemeActivity() {
         try {
             val buf = StringBuilder()
             val json = assets.open("retro-changelog.html")
-            val br = BufferedReader(InputStreamReader(json, StandardCharsets.UTF_8))
-            var str: String?
-            while (br.readLine().also { str = it } != null) {
-                buf.append(str)
+            BufferedReader(InputStreamReader(json, StandardCharsets.UTF_8)).use { br ->
+                var str: String?
+                while (br.readLine().also { str = it } != null) {
+                    buf.append(str)
+                }
             }
-            br.close()
 
             // Inject color values for WebView body background and links
             val isDark = isWindowBackgroundDark(this)
@@ -100,6 +101,7 @@ class WhatsNewActivity : AbsThemeActivity() {
                 binding.tgFab.extend()
             }
         }
+        binding.webView.drawAboveSystemBars()
     }
 
     companion object {

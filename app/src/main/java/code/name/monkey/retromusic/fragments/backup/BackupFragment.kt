@@ -7,7 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -49,7 +49,9 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         val openFilePicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             lifecycleScope.launch(Dispatchers.IO) {
                 it?.let {
-                    backupViewModel.restoreBackup(requireActivity(), requireContext().contentResolver.openInputStream(it))
+                    startActivity(Intent(context, RestoreActivity::class.java).apply {
+                        data = it
+                    })
                 }
             }
         }
@@ -103,17 +105,11 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
     }
 
     override fun onBackupClicked(file: File) {
-        AlertDialog.Builder(requireContext())
-            .setTitle(R.string.restore)
-            .setMessage(R.string.restore_message)
-            .setPositiveButton(R.string.restore) { _, _ ->
-                lifecycleScope.launch {
-                    backupViewModel.restoreBackup(requireActivity(), file.inputStream())
-                }
-            }
-            .setNegativeButton(android.R.string.cancel, null)
-            .create()
-            .show()
+        lifecycleScope.launch {
+            startActivity(Intent(context, RestoreActivity::class.java).apply {
+                data = file.toUri()
+            })
+        }
     }
 
     @SuppressLint("CheckResult")

@@ -27,7 +27,6 @@
         <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/bottomSheetColor</item>
         <item name="elevationOverlayColor">@color/elevationOverlay</item>
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
@@ -54,7 +53,6 @@
         <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
         <item name="android:windowBackground">@color/window_color_dark</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/bottomSheetColor</item>
         <item name="elevationOverlayColor">@color/elevationOverlay</item>
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
@@ -78,7 +76,6 @@
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="bottomNavigationStyle">@style/Widget.Material3.BottomNavigationView</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
-        <item name="bottomSheetTint">@color/bottomSheetColorLight</item>
         <item name="elevationOverlayColor">@color/elevationOverlayLight</item>
         <item name="floatingActionButtonStyle">
             @style/Widget.MaterialComponents.FloatingActionButton
