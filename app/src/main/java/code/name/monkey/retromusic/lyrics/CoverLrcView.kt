@@ -34,8 +34,6 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Scroller
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import java.io.File
 import java.util.*
@@ -506,9 +504,6 @@ class CoverLrcView @JvmOverloads constructor(
             if (i > 0) {
                 y += ((mLrcEntryList[i - 1].height + mLrcEntryList[i].height shr 1)
                         + mDividerHeight)
-            }
-            if (BuildConfig.DEBUG) {
-                mLrcPaint.typeface = ResourcesCompat.getFont(context, R.font.sans)
             }
             if (i == mCurrentLine) {
                 mLrcPaint.textSize = mCurrentTextSize

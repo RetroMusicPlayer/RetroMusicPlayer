@@ -31,7 +31,6 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
@@ -83,6 +82,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     private var nowPlayingScreen: NowPlayingScreen? = null
     private var taskColor: Int = 0
     private var paletteColor: Int = Color.WHITE
+    private var navigationBarColor = 0
     protected abstract fun createContentView(): SlidingMusicPanelLayoutBinding
     private val panelState: Int
         get() = bottomSheetBehavior.state
@@ -100,7 +100,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 argbEvaluator.evaluate(
                     slideOffset,
                     surfaceColor(),
-                    playerFragment!!.paletteColor
+                    navigationBarColor
                 ) as Int
             )
         }
@@ -148,6 +148,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         updateColor()
         binding.slidingPanel.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
         bottomNavigationView.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
+        navigationBarColor = surfaceColor()
     }
 
     private fun setupBottomSheet() {
@@ -285,6 +286,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
 
     private fun onPaletteColorChanged() {
         if (panelState == STATE_EXPANDED) {
+            navigationBarColor = surfaceColor()
             setTaskDescColor(paletteColor)
             val isColorLight = ColorUtil.isColorLight(paletteColor)
             if (PreferenceUtil.isAdaptiveColor && (nowPlayingScreen == Normal || nowPlayingScreen == Flat)) {
@@ -292,14 +294,17 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 setLightStatusBar(isColorLight)
             } else if (nowPlayingScreen == Card || nowPlayingScreen == Blur || nowPlayingScreen == BlurCard) {
                 animateNavigationBarColor(Color.BLACK)
+                navigationBarColor = Color.BLACK
                 setLightStatusBar(false)
                 setLightNavigationBar(true)
             } else if (nowPlayingScreen == Color || nowPlayingScreen == Tiny || nowPlayingScreen == Gradient) {
                 animateNavigationBarColor(paletteColor)
+                navigationBarColor = paletteColor
                 setLightNavigationBar(isColorLight)
                 setLightStatusBar(isColorLight)
             } else if (nowPlayingScreen == Full) {
                 animateNavigationBarColor(paletteColor)
+                navigationBarColor = paletteColor
                 setLightNavigationBar(isColorLight)
                 setLightStatusBar(false)
             } else if (nowPlayingScreen == Classic) {
@@ -309,10 +314,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             } else {
                 setLightStatusBar(
                     ColorUtil.isColorLight(
-                        ATHUtil.resolveColor(
-                            this,
-                            android.R.attr.windowBackground
-                        )
+                        surfaceColor()
                     )
                 )
                 setLightNavigationBar(true)
