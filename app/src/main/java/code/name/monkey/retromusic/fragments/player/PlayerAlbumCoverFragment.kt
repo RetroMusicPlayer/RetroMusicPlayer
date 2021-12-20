@@ -202,7 +202,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     private fun maybeInitLyrics() {
         val nps = PreferenceUtil.nowPlayingScreen
         // Don't show lyrics container for below conditions
-        if (nps != Circle && nps != Peak && nps != Tiny && PreferenceUtil.showLyrics) {
+        if (lyricViewNpsList.contains(nps) && PreferenceUtil.showLyrics) {
             showLyrics(true)
             progressViewUpdateHelper?.start()
             lrcView.animate().alpha(1f).duration =
@@ -272,5 +272,9 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     companion object {
         val TAG: String = PlayerAlbumCoverFragment::class.java.simpleName
+
     }
+
+    private val lyricViewNpsList =
+        listOf(Blur, Classic, Color, Flat, Material, Normal, Plain, Simple)
 }

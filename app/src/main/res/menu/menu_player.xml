@@ -4,16 +4,16 @@
     <item
         android:id="@+id/action_toggle_lyrics"
         android:checkable="true"
-        android:icon="@drawable/ic_lyrics_outline"
+        android:icon="@drawable/sld_lyrics"
         android:orderInCategory="1"
         android:title="@string/lyrics"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_toggle_favorite"
+        android:checkable="true"
         android:icon="@drawable/ic_favorite"
         android:orderInCategory="2"
         android:title="@string/favorites"
-        android:checkable="true"
         app:showAsAction="always" />
     <item
         android:id="@+id/now_playing"
