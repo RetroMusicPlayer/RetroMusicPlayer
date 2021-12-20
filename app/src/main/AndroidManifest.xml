@@ -321,4 +321,12 @@
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
             android:value="code.name.monkey.retromusic.cast.CastOptionsProvider" />
     </application>
+
+    <!--
+    This is not that important, it's just here so that we can query equalizer package
+    and check if it's present on A11+ because of Package visibility restrictions.
+    -->
+    <queries>
+        <package android:name="com.android.musicfx" />
+    </queries>
 </manifest>
