@@ -136,13 +136,26 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
         maybeInitLyrics()
         lrcView.apply {
-            setDraggable(true, object : CoverLrcView.OnPlayClickListener {
-                override fun onPlayClick(time: Long): Boolean {
-                    MusicPlayerRemote.seekTo(time.toInt())
-                    MusicPlayerRemote.resumePlaying()
-                    return true
+            setDraggable(true) { time ->
+                MusicPlayerRemote.seekTo(time.toInt())
+                MusicPlayerRemote.resumePlaying()
+                true
+            }
+            setOnFlingXListener { velocityX ->
+                when {
+                    velocityX < 0 -> {
+                        MusicPlayerRemote.playNextSong()
+                        true
+                    }
+                    velocityX > 0 -> {
+                        MusicPlayerRemote.playPreviousSong()
+                        true
+                    }
+                    else -> {
+                        false
+                    }
                 }
-            })
+            }
         }
     }
 

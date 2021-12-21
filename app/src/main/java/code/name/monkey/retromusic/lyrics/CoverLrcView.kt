@@ -35,6 +35,7 @@ import android.view.animation.LinearInterpolator
 import android.widget.Scroller
 import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import java.io.File
 import java.util.*
 import kotlin.math.abs
@@ -67,6 +68,7 @@ class CoverLrcView @JvmOverloads constructor(
     private var mDefaultLabel: String? = null
     private var mLrcPadding = 0f
     private var mOnPlayClickListener: OnPlayClickListener? = null
+    private var mOnFlingXListener: OnFlingXListener? = null
     private var mAnimator: ValueAnimator? = null
     private var mGestureDetector: GestureDetector? = null
     private var mScroller: Scroller? = null
@@ -131,6 +133,9 @@ class CoverLrcView @JvmOverloads constructor(
                 velocityX: Float,
                 velocityY: Float
             ): Boolean {
+                if (mOnFlingXListener != null && abs(velocityX) > abs(velocityY)) {
+                    return mOnFlingXListener!!.onFlingX(velocityX)
+                }
                 if (hasLrc()) {
                     mScroller!!.fling(
                         0,
@@ -311,6 +316,10 @@ class CoverLrcView @JvmOverloads constructor(
     @Deprecated("use {@link #setDraggable(boolean, OnPlayClickListener)} instead")
     fun setOnPlayClickListener(onPlayClickListener: OnPlayClickListener?) {
         mOnPlayClickListener = onPlayClickListener
+    }
+
+    fun setOnFlingXListener(onFlingXListener: OnFlingXListener) {
+        mOnFlingXListener = onFlingXListener
     }
 
     /** 设置歌词为空时屏幕中央显示的文字，如“暂无歌词”  */
@@ -661,6 +670,7 @@ class CoverLrcView @JvmOverloads constructor(
 
     /** 获取歌词距离视图顶部的距离 采用懒加载方式  */
     private fun getOffset(line: Int): Float {
+        if (mLrcEntryList.isEmpty()) return 0F
         if (mLrcEntryList[line].offset == Float.MIN_VALUE) {
             var offset = (height / 2).toFloat()
             for (i in 1..line) {
@@ -686,13 +696,17 @@ class CoverLrcView @JvmOverloads constructor(
     }
 
     /** 播放按钮点击监听器，点击后应该跳转到指定播放位置  */
-    interface OnPlayClickListener {
+    fun interface OnPlayClickListener {
         /**
          * 播放按钮被点击，应该跳转到指定播放位置
          *
          * @return 是否成功消费该事件，如果成功消费，则会更新UI
          */
         fun onPlayClick(time: Long): Boolean
+    }
+
+    fun interface OnFlingXListener {
+        fun onFlingX(velocityX: Float): Boolean
     }
 
     companion object {
