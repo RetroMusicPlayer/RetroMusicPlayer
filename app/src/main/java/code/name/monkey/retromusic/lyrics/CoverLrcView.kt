@@ -35,7 +35,6 @@ import android.view.animation.LinearInterpolator
 import android.widget.Scroller
 import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import java.io.File
 import java.util.*
 import kotlin.math.abs
