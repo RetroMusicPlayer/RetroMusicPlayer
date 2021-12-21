@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -43,6 +44,9 @@ import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_player_album_cover),
     ViewPager.OnPageChangeListener, MusicProgressViewUpdateHelper.Callback,
@@ -75,17 +79,24 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     private fun updateLyrics() {
         binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
         val song = MusicPlayerRemote.currentSong
-        val lrcFile = LyricUtil.getSyncedLyricsFile(song)
-        if (lrcFile != null) {
-            binding.lyricsView.loadLrc(lrcFile)
-        } else {
-            val embeddedLyrics = LyricUtil.getEmbeddedSyncedLyrics(song.data)
-            if (embeddedLyrics != null) {
-                binding.lyricsView.loadLrc(embeddedLyrics)
+        lifecycleScope.launch(Dispatchers.IO) {
+            val lrcFile = LyricUtil.getSyncedLyricsFile(song)
+            if (lrcFile != null) {
+                withContext(Dispatchers.Main) {
+                    binding.lyricsView.loadLrc(lrcFile)
+                }
             } else {
-                binding.lyricsView.reset()
+                val embeddedLyrics = LyricUtil.getEmbeddedSyncedLyrics(song.data)
+                withContext(Dispatchers.Main) {
+                    if (embeddedLyrics != null) {
+                        binding.lyricsView.loadLrc(embeddedLyrics)
+                    } else {
+                        binding.lyricsView.reset()
+                    }
+                }
             }
         }
+
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
@@ -272,7 +283,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     companion object {
         val TAG: String = PlayerAlbumCoverFragment::class.java.simpleName
-
     }
 
     private val lyricViewNpsList =
