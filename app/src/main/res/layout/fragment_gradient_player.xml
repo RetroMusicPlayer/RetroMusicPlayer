@@ -58,6 +58,17 @@
                 layout="@layout/status_bar" />
         </FrameLayout>
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/cover_lyrics"
+            android:name="code.name.monkey.retromusic.fragments.other.CoverLyricsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/playerAlbumCoverFragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusBarContainer" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
