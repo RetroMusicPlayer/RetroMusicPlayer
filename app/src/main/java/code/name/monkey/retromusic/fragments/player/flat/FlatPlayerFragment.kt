@@ -119,14 +119,9 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
         lastColor = color.backgroundColor
         controlsFragment.setColor(color)
         libraryViewModel.updateColor(color.backgroundColor)
-        val isLight = ColorUtil.isColorLight(color.backgroundColor)
-        val iconColor = if (PreferenceUtil.isAdaptiveColor)
-            MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
-        else
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            iconColor,
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
         if (PreferenceUtil.isAdaptiveColor) {
