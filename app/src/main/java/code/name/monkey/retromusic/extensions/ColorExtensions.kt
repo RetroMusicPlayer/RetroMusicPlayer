@@ -130,10 +130,11 @@ fun MaterialButton.accentOutlineColor() {
 
 fun MaterialButton.elevatedAccentColor() {
     if (materialYou) return
-    val color = ThemeStore.accentColor(context)
-    val colorStateList = ColorStateList.valueOf(color)
-    iconTint = colorStateList
-    rippleColor = colorStateList
+    val color = context.darkAccentColorVariant()
+    rippleColor = ColorStateList.valueOf(color)
+    setBackgroundColor(color)
+    setTextColor(MaterialValueHelper.getPrimaryTextColor(context, color.isColorLight))
+    iconTint = ColorStateList.valueOf(context.accentColor())
 }
 
 fun SeekBar.applyColor(@ColorInt color: Int) {
@@ -247,6 +248,15 @@ fun Context.darkAccentColor(): Int {
         accentColor(),
         surfaceColor(),
         if (surfaceColor().isColorLight) 0.96f else 0.975f
+    )
+}
+
+@ColorInt
+fun Context.darkAccentColorVariant(): Int {
+    return ColorUtils.blendARGB(
+        accentColor(),
+        surfaceColor(),
+        if (surfaceColor().isColorLight) 0.9f else 0.95f
     )
 }
 
