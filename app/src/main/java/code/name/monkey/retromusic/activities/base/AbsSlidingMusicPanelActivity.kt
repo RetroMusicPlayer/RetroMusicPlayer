@@ -87,6 +87,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     private val panelState: Int
         get() = bottomSheetBehavior.state
     private lateinit var binding: SlidingMusicPanelLayoutBinding
+    private var isInOneTabMode = false
 
     private var navigationBarColorAnimator: ValueAnimator? = null
     private val argbEvaluator: ArgbEvaluator = ArgbEvaluator()
@@ -340,6 +341,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             }
         }
         if (binding.bottomNavigationView.menu.size() == 1) {
+            isInOneTabMode = true
             binding.bottomNavigationView.hide()
         }
     }
@@ -352,6 +354,14 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     fun setBottomNavVisibility(visible: Boolean, animate: Boolean = false, hideBottomSheet: Boolean = MusicPlayerRemote.playingQueue.isEmpty()) {
+        if (isInOneTabMode) {
+            hideBottomSheet(
+                hide = hideBottomSheet,
+                animate = animate,
+                isBottomNavVisible = false
+            )
+            return
+        }
         val translationY =
             if (visible) 0F else dip(R.dimen.bottom_nav_height).toFloat() + windowInsets.safeGetBottomInsets()
         val mAnimate = animate && bottomSheetBehavior.state == STATE_COLLAPSED
