@@ -65,6 +65,10 @@ fun Context.surfaceColor() = resolveColor(R.attr.colorSurface, Color.WHITE)
 
 fun Fragment.surfaceColor() = resolveColor(R.attr.colorSurface, Color.WHITE)
 
+fun Context.surfaceColor(fallBackColor: Int) = resolveColor(R.attr.colorSurface, fallBackColor)
+
+fun Fragment.surfaceColor(fallBackColor: Int) = resolveColor(R.attr.colorSurface, fallBackColor)
+
 fun Context.textColorSecondary() = resolveColor(android.R.attr.textColorSecondary)
 
 fun Fragment.textColorSecondary() = resolveColor(android.R.attr.textColorSecondary)
@@ -76,6 +80,10 @@ fun Fragment.colorControlNormal() = resolveColor(android.R.attr.colorControlNorm
 fun Context.textColorPrimary() = resolveColor(android.R.attr.textColorPrimary)
 
 fun Fragment.textColorPrimary() = resolveColor(android.R.attr.textColorPrimary)
+
+fun Context.defaultFooterColor() = resolveColor(R.attr.defaultFooterColor)
+
+fun Fragment.defaultFooterColor() = resolveColor(R.attr.defaultFooterColor)
 
 fun Context.resolveColor(@AttrRes attr: Int, fallBackColor: Int = 0) =
     ATHUtil.resolveColor(this, attr, fallBackColor)

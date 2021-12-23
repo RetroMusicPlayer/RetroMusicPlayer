@@ -24,7 +24,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.goToLyrics
@@ -90,7 +89,6 @@ class AlbumCoverPagerAdapter(
         private lateinit var song: Song
         private var colorReceiver: ColorReceiver? = null
         private var request: Int = 0
-        private val mainActivity get() = activity as MainActivity
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)

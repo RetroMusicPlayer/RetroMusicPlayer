@@ -20,11 +20,12 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPlayerBinding
+import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -54,7 +55,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
         valueAnimator = ValueAnimator.ofObject(
             ArgbEvaluator(),
-            ATHUtil.resolveColor(requireContext(), R.attr.colorSurface),
+            surfaceColor(),
             i
         )
         valueAnimator?.addUpdateListener { animation ->
@@ -63,7 +64,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     intArrayOf(
                         animation.animatedValue as Int,
-                        ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)
+                        surfaceColor()
                     ), 0
                 )
                 binding.colorGradientBackground.background = drawable
@@ -85,9 +86,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
         return false
     }
 
-    override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
-    }
+    override fun toolbarIconColor() = colorControlNormal()
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         controlsFragment.setColor(color)
@@ -96,7 +95,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            colorControlNormal(),
             requireActivity()
         )
 
@@ -145,7 +144,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            colorControlNormal(),
             requireActivity()
         )
     }

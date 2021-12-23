@@ -12,7 +12,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isGone
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.ATH
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -142,13 +141,13 @@ fun AppCompatActivity.setStatusBarColor(color: Int) {
             else -> window.statusBarColor = ColorUtil.darkenColor(color)
         }
     }
-    setLightStatusBarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
+    setLightStatusBarAuto(surfaceColor())
 }
 
 fun AppCompatActivity.setStatusBarColorAuto() {
     // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
-    setStatusBarColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
-    setLightStatusBarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
+    setStatusBarColor(surfaceColor())
+    setLightStatusBarAuto(surfaceColor())
 }
 
 fun AppCompatActivity.setNavigationBarColor(color: Int) {

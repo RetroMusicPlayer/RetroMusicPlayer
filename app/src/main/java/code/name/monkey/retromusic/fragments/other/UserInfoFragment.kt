@@ -216,7 +216,7 @@ class UserInfoFragment : Fragment() {
             val appDir = requireContext().filesDir
             val file = File(appDir, fileName)
             var successful = false
-            kotlin.runCatching {
+            runCatching {
                 val os = BufferedOutputStream(FileOutputStream(file))
                 successful = ImageUtil.resizeBitmap(bitmap, 2048)
                     .compress(Bitmap.CompressFormat.WEBP, 100, os)

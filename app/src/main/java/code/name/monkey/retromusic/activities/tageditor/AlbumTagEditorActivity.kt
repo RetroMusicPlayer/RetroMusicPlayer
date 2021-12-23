@@ -28,11 +28,11 @@ import android.transition.Slide
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityAlbumTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.defaultFooterColor
 import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.glide.GlideApp
@@ -111,7 +111,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
             bitmap,
             getColor(
                 generatePalette(bitmap),
-                ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
+                defaultFooterColor()
             )
         )
         deleteAlbumArt = false
@@ -132,7 +132,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     override fun deleteImage() {
         setImageBitmap(
             BitmapFactory.decodeResource(resources, R.drawable.default_audio_art),
-            ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
+            defaultFooterColor()
         )
         deleteAlbumArt = true
         dataChanged()
@@ -152,10 +152,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
                         albumArtBitmap,
                         getColor(
                             resource.palette,
-                            ATHUtil.resolveColor(
-                                this@AlbumTagEditorActivity,
-                                R.attr.defaultFooterColor
-                            )
+                            defaultFooterColor()
                         )
                     )
                     deleteAlbumArt = false

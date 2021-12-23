@@ -106,7 +106,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
             setOnMenuItemClickListener(this@CirclePlayerFragment)
             ToolbarContentTintHelper.colorizeToolbar(
                 this,
-                ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+                colorControlNormal(),
                 requireActivity()
             )
         }
@@ -198,7 +198,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     override fun onBackPressed(): Boolean = false
 
     override fun toolbarIconColor(): Int =
-        ATHUtil.resolveColor(requireContext(), android.R.attr.colorControlNormal)
+        colorControlNormal()
 
     override val paletteColor: Int
         get() = Color.BLACK

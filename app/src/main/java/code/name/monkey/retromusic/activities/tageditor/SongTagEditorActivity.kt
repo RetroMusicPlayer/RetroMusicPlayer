@@ -28,11 +28,11 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.defaultFooterColor
 import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.glide.GlideApp
@@ -115,7 +115,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
             bitmap,
             RetroColorUtil.getColor(
                 RetroColorUtil.generatePalette(bitmap),
-                ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
+                defaultFooterColor()
             )
         )
         deleteAlbumArt = false
@@ -128,7 +128,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
     override fun deleteImage() {
         setImageBitmap(
             BitmapFactory.decodeResource(resources, R.drawable.default_audio_art),
-            ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
+            defaultFooterColor()
         )
         deleteAlbumArt = true
         dataChanged()
@@ -160,7 +160,8 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         fieldKeyValueMap[FieldKey.LYRICS] = binding.lyricsText.text.toString()
         fieldKeyValueMap[FieldKey.ALBUM_ARTIST] = binding.albumArtistText.text.toString()
         fieldKeyValueMap[FieldKey.COMPOSER] = binding.songComposerText.text.toString()
-        writeValuesToFiles(fieldKeyValueMap,  when {
+        writeValuesToFiles(
+            fieldKeyValueMap, when {
                 deleteAlbumArt -> ArtworkInfo(id, null)
                 albumArtBitmap == null -> null
                 else -> ArtworkInfo(id, albumArtBitmap!!)
@@ -186,10 +187,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
                         albumArtBitmap,
                         RetroColorUtil.getColor(
                             resource.palette,
-                            ATHUtil.resolveColor(
-                                this@SongTagEditorActivity,
-                                R.attr.defaultFooterColor
-                            )
+                            defaultFooterColor()
                         )
                     )
                     deleteAlbumArt = false

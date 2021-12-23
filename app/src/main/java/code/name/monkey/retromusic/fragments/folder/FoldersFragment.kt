@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
-import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -42,6 +41,8 @@ import code.name.monkey.retromusic.adapter.StorageClickListener
 import code.name.monkey.retromusic.databinding.FragmentFolderBinding
 import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.textColorPrimary
+import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment.ListPathsAsyncTask.OnPathsListedCallback
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment.ListSongsAsyncTask.OnSongsListedCallback
@@ -526,10 +527,11 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     private fun setUpBreadCrumbs() {
         binding.breadCrumbs.setActivatedContentColor(
-            resolveColor(requireContext(), android.R.attr.textColorPrimary)
+            textColorPrimary()
         )
         binding.breadCrumbs.setDeactivatedContentColor(
-            resolveColor(requireContext(), android.R.attr.textColorSecondary)
+            textColorSecondary()
+
         )
         binding.breadCrumbs.setCallback(this)
     }

@@ -17,10 +17,10 @@ package code.name.monkey.retromusic.fragments.player.fit
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFitBinding
+import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
@@ -56,7 +56,7 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
+        return colorControlNormal()
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
@@ -65,7 +65,7 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
         libraryViewModel.updateColor(color.primaryTextColor)
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            colorControlNormal(),
             requireActivity()
         )
     }
@@ -104,7 +104,7 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
             setOnMenuItemClickListener(this@FitFragment)
             ToolbarContentTintHelper.colorizeToolbar(
                 this,
-                ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+                colorControlNormal(),
                 requireActivity()
             )
         }

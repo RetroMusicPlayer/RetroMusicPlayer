@@ -17,13 +17,13 @@ package code.name.monkey.retromusic.fragments.base
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.extensions.setLightStatusBarAuto
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -52,7 +52,7 @@ abstract class AbsMainActivityFragment(@LayoutRes layout: Int) : AbsMusicService
     }
 
     fun setStatusBarColorAuto(view: View) {
-        val colorPrimary = ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)
+        val colorPrimary = surfaceColor()
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
         if (VersionUtils.hasMarshmallow()) {
             setStatusBarColor(view, colorPrimary)
