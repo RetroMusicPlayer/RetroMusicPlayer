@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments.other
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
@@ -31,8 +30,6 @@ import androidx.core.view.doOnPreDraw
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
@@ -87,6 +84,7 @@ class UserInfoFragment : Fragment() {
         applyToolbar(binding.toolbar)
 
         binding.nameContainer.accentColor()
+        binding.next.accentColor()
         binding.name.setText(PreferenceUtil.userName)
 
         binding.userImage.setOnClickListener {
@@ -111,14 +109,6 @@ class UserInfoFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        val textColor =
-            MaterialValueHelper.getPrimaryTextColor(
-                requireContext(),
-                ColorUtil.isColorLight(accentColor())
-            )
-        binding.next.backgroundTintList = ColorStateList.valueOf(accentColor())
-        binding.next.iconTint = ColorStateList.valueOf(textColor)
-        binding.next.setTextColor(textColor)
         loadProfile()
         postponeEnterTransition()
         view.doOnPreDraw {

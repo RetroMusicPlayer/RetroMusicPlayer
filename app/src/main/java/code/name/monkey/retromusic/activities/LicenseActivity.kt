@@ -39,7 +39,7 @@ class LicenseActivity : AbsThemeActivity() {
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         try {
             val buf = StringBuilder()
-            val json = assets.open("oldindex.html")
+            val json = assets.open("license.html")
             BufferedReader(InputStreamReader(json, StandardCharsets.UTF_8)).use { br ->
                 var str: String?
                 while (br.readLine().also { str = it } != null) {
