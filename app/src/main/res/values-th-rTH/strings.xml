@@ -19,6 +19,7 @@
     <string name="action_go_to_album">ไปยังอัลบัม</string>
     <string name="action_go_to_artist">ไปยังศิลปิน</string>
     <string name="action_go_to_genre">ไปยังประเภทเพลง</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">ไปที่ Directory เริ่มต้น</string>
     <string name="action_grant">อนุมัติ</string>
     <string name="action_grid_size">ขนาดกริด (แนวตั้ง)</string>
@@ -71,6 +72,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Card</string>
     <string name="app_widget_classic_name">คลาสสิก</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Small</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">ศิลปิน</string>
@@ -79,6 +81,7 @@
     <string name="audio_focus_denied">การโฟกัสเสียงถูกปฏิเสธ</string>
     <string name="audio_settings_summary">การตั้งค่าเสียง และ Equalizer</string>
     <string name="auto">ออโต้</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[สำรอง / การคืนค่า]]></string>
     <string name="backup_title">การสำรองข้อมูล</string>
     <string name="biography">ประวัติ</string>
@@ -109,6 +112,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">การอัพเดท</string>
     <string name="changelog_summary">ดูว่ามีอะไรใหม่!</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">คลาสสิก</string>
@@ -128,7 +132,9 @@
     <string name="created_playlist_x">สร้างเพลย์ลิสต์</string>
     <string name="credit_title">สมาชิกและผู้มีส่วนร่วม</string>
     <string name="currently_listening_to_x_by_x">กำลังฟัง %1$s ของ %2$s</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Kinda Dark</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">ลบเพลย์ลิสต์</string>
     <string name="delete_playlist_x"><![CDATA[ลบเพลย์ลิสต์ <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">ลบเพลย์ลิสต์</string>
@@ -144,6 +150,7 @@
     <string name="device_info">ข้อมูลเครื่อง</string>
     <string name="dialog_message_set_ringtone">อนุญาตให้ Retro Music สามารถแก้ไขการตั้งค่าเสียงได้</string>
     <string name="dialog_title_set_ringtone">กำหนดริงโทน</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">คุณต้องการล้างรายชื่อแบล็คลิสต์ใช่ไหม?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[คุณต้องการลบ <b>%1$s</b> จากรายชื่อแบล็คลิสต์ใช่ไหม?]]></string>
     <string name="donate">Donate</string>
@@ -383,6 +390,7 @@
     <string name="reset_action">รีเซ็ท</string>
     <string name="reset_artist_image">รีเซ็ทรูปศิลปิน</string>
     <string name="restore">กู้คืนการสั่งซื้อ</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">กู้คืนการสั่งซื้อสำเร็จ (กรุณารีสตาร์ทแอปเพื่อใช้งานฟีเจอร์ทั้งหมด)</string>
     <string name="restored_previous_purchases">กู้คืนการสั่งซื้อสำเร็จ</string>
     <string name="restoring_purchase">กำลังดำเนินการกู้คืนการสั่งซื้อ</string>
@@ -432,8 +440,8 @@
     <string name="sort_order">การจัดเรียง</string>
     <string name="sort_order_a_z">A-Z</string>
     <string name="sort_order_album">อัลบัม</string>
-    <string name="sort_order_artist">ศิลปิน</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">ศิลปิน</string>
     <string name="sort_order_composer">ผู้แต่ง</string>
     <string name="sort_order_date">วันที่เพิ่ม</string>
     <string name="sort_order_date_modified">วันที่แก้ไข</string>
@@ -459,6 +467,7 @@
     <string name="tiny">Tiny</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">หัวข้อ</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">วันนี้</string>
     <string name="top_albums">Top อัลบัม</string>
     <string name="top_artists">Top ศิลปิน</string>
@@ -474,6 +483,7 @@
     <string name="up_next">เพลงต่อไป</string>
     <string name="update_image">เปลี่ยนรูป</string>
     <string name="updating">กำลังดำเนินการ</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">ชื่อผู้ใช้งาน</string>
     <string name="username">ชื่อผู้ใช้งาน</string>
     <string name="version">เวอร์ชัน</string>
@@ -494,8 +504,4 @@
     <string name="you_have_to_select_at_least_one_category">คุณต้องเลือกอย่างน้อยหนึ่งหมวดหมู่</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">ท่านจะติดตามการรายงานปัญหาจากเว็บไซต์</string>
     <string name="your_account_data_is_only_used_for_authentication">ข้อมูลบัญชีของท่านจะใช้สำหรับการเข้าสู่ระบบเท่านั้น</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
