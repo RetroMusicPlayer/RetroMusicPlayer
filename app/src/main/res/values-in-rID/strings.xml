@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Pergi ke album</string>
     <string name="action_go_to_artist">Pergi ke artis</string>
     <string name="action_go_to_genre">Pergi ke genre</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Ke direktori awal</string>
     <string name="action_grant">Izinkan</string>
     <string name="action_grid_size">Ukuran kisi</string>
@@ -71,6 +72,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Card</string>
     <string name="app_widget_classic_name">Classic</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Small</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artist</string>
@@ -79,6 +81,7 @@
     <string name="audio_focus_denied">Audio focus denied.</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biography</string>
@@ -109,6 +112,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Changelog</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">Classic</string>
@@ -128,7 +132,9 @@
     <string name="created_playlist_x">Created playlist %1$s.</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Currently listening to %1$s by %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Kinda Dark</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Delete playlist</string>
     <string name="delete_playlist_x"><![CDATA[Delete the playlist <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Delete playlists</string>
@@ -144,6 +150,7 @@
     <string name="device_info">Device info</string>
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
     <string name="dialog_title_set_ringtone">Set ringtone</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Do you want to clear the blacklist?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]></string>
     <string name="donate">Donate</string>
@@ -383,6 +390,7 @@
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">Reset artist image</string>
     <string name="restore">Restore</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
     <string name="restored_previous_purchases">Restored previous purchases.</string>
     <string name="restoring_purchase">Restoring purchase…</string>
@@ -432,8 +440,8 @@
     <string name="sort_order">Urut berdasarkan</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Artist</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Artist</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
@@ -459,6 +467,7 @@
     <string name="tiny">Tiny</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">Title</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Today</string>
     <string name="top_albums">Top albums</string>
     <string name="top_artists">Top artists</string>
@@ -474,6 +483,7 @@
     <string name="up_next">Up next</string>
     <string name="update_image">Update image</string>
     <string name="updating">Updating…</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Version</string>
@@ -494,8 +504,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
