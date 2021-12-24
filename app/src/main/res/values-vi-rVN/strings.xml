@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Đi đến album</string>
     <string name="action_go_to_artist">Đi đến nghệ sĩ</string>
     <string name="action_go_to_genre">Chuyển đến thể loại</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Đến trang bắt đầu</string>
     <string name="action_grant">Cho phép</string>
     <string name="action_grid_size">Kích thước lưới</string>
@@ -71,6 +72,7 @@
     <string name="app_widget_big_name">Hình ảnh đầy đủ</string>
     <string name="app_widget_card_name">Thẻ</string>
     <string name="app_widget_classic_name">Cổ điển</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Nhỏ</string>
     <string name="app_widget_text_name">Văn bản nhỏ nhất</string>
     <string name="artist">Nghệ sĩ</string>
@@ -79,6 +81,7 @@
     <string name="audio_focus_denied">Tập trung âm thanh bị từ chối</string>
     <string name="audio_settings_summary">Thay đổi cài đặt âm thanh và điều chỉnh các điều khiển bộ chỉnh âm</string>
     <string name="auto">Tự động</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Tiểu sử</string>
@@ -110,6 +113,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="cascading">Xếp tầng</string>
     <string name="changelog">Thay đổi</string>
     <string name="changelog_summary">Xem có gì mới</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Vòng tròn</string>
     <string name="circular">Dạng tròn</string>
     <string name="classic">Cổ điển</string>
@@ -129,7 +133,9 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="created_playlist_x">Đã tạo danh sách phát %1$s.</string>
     <string name="credit_title">Thành viên và cộng tác viên </string>
     <string name="currently_listening_to_x_by_x">Đang nghe %1$s bởi %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Xám đen</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Xoá danh sách phát</string>
     <string name="delete_playlist_x"><![CDATA[Xoá danh sách phát <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Xoá danh sách phát</string>
@@ -145,6 +151,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="device_info">Thông tin thiết bị</string>
     <string name="dialog_message_set_ringtone">Cho phép Retro Music cấu hình cài đặt âm thanh</string>
     <string name="dialog_title_set_ringtone">Cài làm nhạc chuông</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Bạn có muốn xóa danh sách đen?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Bạn có muốn gỡ <b>%1$s</b> khỏi danh sách đen?]]></string>
     <string name="donate">Ủng hộ</string>
@@ -384,6 +391,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="reset_action">Cài lại</string>
     <string name="reset_artist_image">Đặt lại ảnh nghệ sĩ</string>
     <string name="restore">Khôi phục</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Khôi phục mua trước đó. Vui lòng khởi động lại ứng dụng để sử dụng tất cả các tính năng.</string>
     <string name="restored_previous_purchases">Đã khôi phục lần mua trước.</string>
     <string name="restoring_purchase">Đang khôi phục mua hàng...</string>
@@ -433,8 +441,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="sort_order">Thứ tự sắp xếp</string>
     <string name="sort_order_a_z">Tăng dần</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Nghệ sĩ</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Nghệ sĩ</string>
     <string name="sort_order_composer">Tác giả</string>
     <string name="sort_order_date">Ngày</string>
     <string name="sort_order_date_modified">Ngày chỉnh sửa</string>
@@ -460,6 +468,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="tiny">Nhỏ</string>
     <string name="tiny_card_style">Thẻ nhỏ</string>
     <string name="title">Tiêu đề</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Hôm nay</string>
     <string name="top_albums">Album hàng đầu</string>
     <string name="top_artists">Nghệ sĩ hàng đầu</string>
@@ -475,6 +484,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="up_next">Tiếp theo</string>
     <string name="update_image">Cập nhật hình ảnh</string>
     <string name="updating">Đang cập nhật...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">Người dùng</string>
     <string name="username">Tên người dùng</string>
     <string name="version">Phiên bản</string>
@@ -495,8 +505,4 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="you_have_to_select_at_least_one_category">Bạn phải chọn ít nhất một danh mục.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Bạn sẽ được chuyển tiếp đến trang web theo dõi vấn đề.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
