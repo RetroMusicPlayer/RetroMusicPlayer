@@ -19,6 +19,7 @@
     <string name="action_go_to_album">開啟此專輯</string>
     <string name="action_go_to_artist">前往此演唱者頁面</string>
     <string name="action_go_to_genre">流派</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">前往起始目錄</string>
     <string name="action_grant">取得</string>
     <string name="action_grid_size">網格大小</string>
@@ -71,6 +72,7 @@
     <string name="app_widget_big_name">完整圖片</string>
     <string name="app_widget_card_name">卡片</string>
     <string name="app_widget_classic_name">經典</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">小型</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">演唱者</string>
@@ -79,6 +81,7 @@
     <string name="audio_focus_denied">無法控制音訊焦點。</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
     <string name="auto">自動</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">簡介</string>
@@ -109,6 +112,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">新功能</string>
     <string name="changelog_summary">查看新內容</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">經典</string>
@@ -128,7 +132,9 @@
     <string name="created_playlist_x">已新增播放清單 %1$s。</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">我正在聽 %2$s 的 %1$s</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">暗沉</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">刪除播放清單</string>
     <string name="delete_playlist_x"><![CDATA[確定要刪除播放清單 <b>%1$s</b> 嗎？]]></string>
     <string name="delete_playlists_title">刪除多個播放清單</string>
@@ -144,6 +150,7 @@
     <string name="device_info">裝置資訊</string>
     <string name="dialog_message_set_ringtone">允許 Retro Music 修改音訊設定</string>
     <string name="dialog_title_set_ringtone">設定鈴聲</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">您是否想要清除黑名單？</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[您是否想把 <b>%1$s</b> 移出黑名單？]]></string>
     <string name="donate">捐助</string>
@@ -383,6 +390,7 @@
     <string name="reset_action">重置</string>
     <string name="reset_artist_image">重置演出者圖片</string>
     <string name="restore">恢復</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">恢復購買成功。請重啓應用以使用完整功能。</string>
     <string name="restored_previous_purchases">回復購買</string>
     <string name="restoring_purchase">正在恢復購買…</string>
@@ -432,8 +440,8 @@
     <string name="sort_order">排序</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">專輯</string>
-    <string name="sort_order_artist">演唱者</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">演唱者</string>
     <string name="sort_order_composer">作曲者</string>
     <string name="sort_order_date">加入日期</string>
     <string name="sort_order_date_modified">修改日期</string>
@@ -459,6 +467,7 @@
     <string name="tiny">Tiny</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">Title</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">今日</string>
     <string name="top_albums">熱門專輯</string>
     <string name="top_artists">熱門演出者</string>
@@ -474,6 +483,7 @@
     <string name="up_next">即將播放</string>
     <string name="update_image">更新圖片</string>
     <string name="updating">正在更新…</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">使用者名稱</string>
     <string name="username">使用者名稱</string>
     <string name="version">版本</string>
@@ -494,8 +504,4 @@
     <string name="you_have_to_select_at_least_one_category">您必須選取至少一個類別。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
