@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Album သို့သွားမည်</string>
     <string name="action_go_to_artist">အဆိုတော်သို့သွားမည်</string>
     <string name="action_go_to_genre">အမျိုးအစားသို့သွားမည်</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Directory အစသို့သွားမည်</string>
     <string name="action_grant">ခွင့်ပြုမည်</string>
     <string name="action_grid_size">အကွက်အရွယ်အစား</string>
@@ -71,6 +72,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">ကတ်</string>
     <string name="app_widget_classic_name">ရိုးရိုး</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">အသေး</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">အဆိုတော်</string>
@@ -79,6 +81,7 @@
     <string name="audio_focus_denied">အသံအာရုံစိုက်ခြင်းအား ပယ်ဖျက်ခဲ့သည်</string>
     <string name="audio_settings_summary">အသံ Settings များပြောင်းလဲရန်နှင့် Equalizer ချိန်ညှိရန်</string>
     <string name="auto">အလိုအလျောက်</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">အတ္ထုပတ္တိ</string>
@@ -109,6 +112,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">ပြောင်းလဲမှုမှတ်တမ်း</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">အဝိုင်း</string>
     <string name="circular">အဝိုင်း</string>
     <string name="classic">ရိုးရိုး</string>
@@ -128,7 +132,9 @@
     <string name="created_playlist_x">ဖန်တီးထားသော Playlist %1$s ခု</string>
     <string name="credit_title">အဖွဲ့ဝင်များနှင့် ကူညီသူများ</string>
     <string name="currently_listening_to_x_by_x">%2$s သီဆိုထားသော %1$s ကိုယခုနားထောင်နေသည်</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">အနက်ရောင်ဆန်ဆန်</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Playlist ဖျက်ခြင်း</string>
     <string name="delete_playlist_x"><![CDATA[<b>%1$s</b> Playlist ကိုဖျက်မှာလား]]></string>
     <string name="delete_playlists_title">Playlist များဖျက်ခြင်း</string>
@@ -144,6 +150,7 @@
     <string name="device_info">Device အချက်အလက်</string>
     <string name="dialog_message_set_ringtone">အသံ Settings ပြုပြင်ရန် Retro Music ကိုခွင့်ပြုချက်ပေးပါ</string>
     <string name="dialog_title_set_ringtone">Ringtone ထားခြင်း</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Blacklist ကိုရှင်းလင်းလိုပါသလား</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Blacklist မှ <b>%1$s</b> ကိုဖယ်ရှားလိုပါသလား]]></string>
     <string name="donate">လှူဒါန်းမည်</string>
@@ -383,6 +390,7 @@
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">Reset artist image</string>
     <string name="restore">ပြန်လည်ရယူမည်</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">ယခင်ဝယ်ယူမှုကို ပြန်လည်ရယူပြီးပါပြီ။ Feature အားလုံးအလုပ်လုပ်ရန် app မှထွက်ပြီးပြန်ဝင်ပါ။</string>
     <string name="restored_previous_purchases">ယခင်ဝယ်ယူမှုအား ပြန်လည်ရယူပြီးပါပြီ</string>
     <string name="restoring_purchase">ယခင်ဝယ်ယူမှုအား ပြန်လည်ရယူနေသည်...</string>
@@ -432,8 +440,8 @@
     <string name="sort_order">အထားအသိုပြင်မည်</string>
     <string name="sort_order_a_z">ငယ်ရာမှကြီးရာ</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">အဆိုတော်</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">အဆိုတော်</string>
     <string name="sort_order_composer">တေးရေးဆရာ</string>
     <string name="sort_order_date">ထည့်သွင်းသည့်ရက်</string>
     <string name="sort_order_date_modified">ပြင်ဆင်သည့်ရက်</string>
@@ -459,6 +467,7 @@
     <string name="tiny">Tiny</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">နာမည်</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">ယနေ့</string>
     <string name="top_albums">ထိပ်ဆုံး Album များ</string>
     <string name="top_artists">ထိပ်ဆုံးအဆိုတော်များ</string>
@@ -474,6 +483,7 @@
     <string name="up_next">လာမည့်အပုဒ်</string>
     <string name="update_image">Update image</string>
     <string name="updating">အပ်ဒိတ်လုပ်နေသည်…</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">သုံးစွဲသူ</string>
     <string name="username">သုံးစွဲသူအမည်</string>
     <string name="version">Version</string>
@@ -494,8 +504,4 @@
     <string name="you_have_to_select_at_least_one_category">အနည်းဆုံး category တစ်ခုရွေးချယ်ရန်လိုအပ်သည်</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Issue tracker website သို့ခေါ်ဆောင်သွားပါမည်</string>
     <string name="your_account_data_is_only_used_for_authentication">သင့်အကောင့်အချက်အလက်ကို အတည်ပြုရန်အတွက်သာအသုံးပြုပါသည်။</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
