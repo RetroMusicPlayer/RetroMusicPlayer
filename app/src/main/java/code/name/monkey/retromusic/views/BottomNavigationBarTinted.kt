@@ -23,6 +23,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.NavigationViewUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.lang.RuntimeException
 
 class BottomNavigationBarTinted @JvmOverloads constructor(
     context: Context,
@@ -31,6 +32,15 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
 ) : BottomNavigationView(context, attrs, defStyleAttr) {
 
     init {
+        // If we are in Immersive mode we have to just set empty OnApplyWindowInsetsListener as
+        // bottom, start, and end padding is always applied (with the help of OnApplyWindowInsetsListener) to
+        // BottomNavigationView to dodge the system navigation bar (so we basically clear that listener).
+        if (PreferenceUtil.isFullScreenMode) {
+            setOnApplyWindowInsetsListener { _, insets ->
+                insets
+            }
+        }
+
         labelVisibilityMode = PreferenceUtil.tabTitleMode
 
         if (!PreferenceUtil.materialYou) {

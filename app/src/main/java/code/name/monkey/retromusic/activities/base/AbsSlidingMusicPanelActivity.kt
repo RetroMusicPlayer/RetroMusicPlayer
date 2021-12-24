@@ -25,10 +25,7 @@ import android.view.ViewTreeObserver
 import android.view.animation.PathInterpolator
 import android.widget.FrameLayout
 import androidx.core.animation.doOnEnd
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
+import androidx.core.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -139,7 +136,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             windowInsets = insets
             insets
         }
-        bottomNavigationView.drawAboveSystemBarsWithPadding()
         if (RetroUtil.isLandscape()) {
             binding.slidingPanel.drawAboveSystemBarsWithPadding(true)
         }

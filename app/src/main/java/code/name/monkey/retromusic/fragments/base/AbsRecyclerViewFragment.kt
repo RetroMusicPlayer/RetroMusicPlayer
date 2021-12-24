@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
@@ -35,6 +36,7 @@ import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialFadeThrough
@@ -65,6 +67,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         initAdapter()
         setUpRecyclerView()
         setupToolbar()
+        binding.shuffleButton.fitsSystemWindows = PreferenceUtil.isFullScreenMode
         // Add listeners when shuffle is visible
         if (isShuffleVisible) {
             binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
