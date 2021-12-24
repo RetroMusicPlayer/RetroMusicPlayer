@@ -446,6 +446,7 @@
     <string name="sort_order_a_z">تصاعدي</string>
     <string name="sort_order_album">الالبوم</string>
     <string name="sort_order_artist">الفنان</string>
+    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_composer">المؤلف</string>
     <string name="sort_order_date">التاريخ</string>
     <string name="sort_order_date_modified">تاريخ التعديل</string>
@@ -509,4 +510,5 @@
     <string name="restore_message">Do you want to restore backup?</string>
     <string name="title_new_backup">New Backup</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="app_widget_md3_name">MD3</string>
 </resources>

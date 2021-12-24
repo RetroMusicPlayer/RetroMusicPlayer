@@ -433,6 +433,7 @@
     <string name="sort_order_a_z">升序</string>
     <string name="sort_order_album">专辑</string>
     <string name="sort_order_artist">艺术家</string>
+    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_composer">作曲家</string>
     <string name="sort_order_date">日期</string>
     <string name="sort_order_date_modified">修改日期</string>
@@ -494,6 +495,7 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
     <string name="restore_message">您想要恢复备份吗？</string>
-    <string name="title_new_backup">New Backup</string>
+    <string name="title_new_backup">新建备份</string>
     <string name="backup_restore_settings_summary">备份、恢复您的设置和播放列表</string>
+    <string name="app_widget_md3_name">MD3</string>
 </resources>

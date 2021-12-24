@@ -3,7 +3,7 @@
     <string name="about_album_label">Info su %s</string>
     <string name="about_settings_summary">Team e pagine social</string>
     <string name="accent_color">Colore in rilievo</string>
-    <string name="accent_color_desc">Il colore secondario del tema, il predefinito è verde</string>
+    <string name="accent_color_desc">Il colore dell\'accento del tema, il predefinito è viola</string>
     <string name="action_about">Informazioni</string>
     <string name="action_add_to_blacklist">Aggiungi alla blacklist</string>
     <string name="action_add_to_favorites">Aggiungi ai preferiti</string>
@@ -436,6 +436,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="sort_order_a_z">Crescente</string>
     <string name="sort_order_album">Album</string>
     <string name="sort_order_artist">Artista</string>
+    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_composer">Compositore</string>
     <string name="sort_order_date">Data</string>
     <string name="sort_order_date_modified">Ultima modifica</string>
@@ -499,4 +500,5 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="restore_message">Vuoi ripristinare il backup?</string>
     <string name="title_new_backup">Nuovo backup</string>
     <string name="backup_restore_settings_summary">Backup e ripristino impostazioni e playlist</string>
+    <string name="app_widget_md3_name">MD3</string>
 </resources>
