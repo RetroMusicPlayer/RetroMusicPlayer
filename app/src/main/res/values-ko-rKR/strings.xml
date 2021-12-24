@@ -19,6 +19,7 @@
     <string name="action_go_to_album">해당 앨범으로 이동</string>
     <string name="action_go_to_artist">해당 아티스트로 이동</string>
     <string name="action_go_to_genre">Go to genre</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">초기 디렉터리로 이동</string>
     <string name="action_grant">허용</string>
     <string name="action_grid_size">격자 크기</string>
@@ -71,6 +72,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">카드</string>
     <string name="app_widget_classic_name">클래식</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">소형</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">아티스트</string>
@@ -79,6 +81,7 @@
     <string name="audio_focus_denied">오디오 포커스가 거부되었습니다.</string>
     <string name="audio_settings_summary">소리 설정 및 이퀄라이저 조정</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">바이오그래피</string>
@@ -109,6 +112,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">변경 사항</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">클래식</string>
@@ -128,7 +132,9 @@
     <string name="created_playlist_x">%1$s 재생목록을 만들었습니다.</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">현재 %2$s의 %1$s를 듣는 중입니다.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">카인다 다크</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">재생목록 삭제</string>
     <string name="delete_playlist_x"><![CDATA[<b>%1$s</b> 재생목록을 삭제하시겠습니까?]]></string>
     <string name="delete_playlists_title">재생목록 삭제</string>
@@ -144,6 +150,7 @@
     <string name="device_info">Device info</string>
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
     <string name="dialog_title_set_ringtone">Set ringtone</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">블랙리스트를 비우시겠습니까?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[블랙리스트에서 <b>%1$s</b> 항목을 제거하시겠습니까?]]></string>
     <string name="donate">기부하기</string>
@@ -383,6 +390,7 @@
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">아티스트 이미지 초기화</string>
     <string name="restore">복원</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">지난 구매를 복원했습니다. 모든 기능을 사용하기 위해선 앱을 재시작해 주세요.</string>
     <string name="restored_previous_purchases">이전 구매 내역을 복원했습니다.</string>
     <string name="restoring_purchase">구매 복원 중...</string>
@@ -432,8 +440,8 @@
     <string name="sort_order">정렬 순서</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">앨범</string>
-    <string name="sort_order_artist">아티스트</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">아티스트</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
@@ -459,6 +467,7 @@
     <string name="tiny">작음</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">Title</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">오늘</string>
     <string name="top_albums">인기 앨범</string>
     <string name="top_artists">인기 아티스트</string>
@@ -474,6 +483,7 @@
     <string name="up_next">다음 곡으로 재생</string>
     <string name="update_image">이미지 갱신</string>
     <string name="updating">갱신 중...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">버전</string>
@@ -494,8 +504,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">계정 정보는 오로지 인증 목적으로만 사용됩니다.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
