@@ -26,7 +26,6 @@ import androidx.core.graphics.BlendModeCompat.SRC_IN
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import com.google.android.material.progressindicator.CircularProgressIndicator
 
 object ViewUtil {
 

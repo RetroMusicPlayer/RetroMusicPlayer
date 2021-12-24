@@ -14,6 +14,7 @@
 
 package code.name.monkey.retromusic.glide.audiocover;
 
+import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.audio.mp3.MP3File;
@@ -45,7 +46,7 @@ public class AudioFileCoverUtils {
         }
       }
       // If there are any exceptions, we ignore them and continue to the other fallback method
-    } catch (ReadOnlyFileException | InvalidAudioFrameException | TagException | IOException ignored) {
+    } catch (ReadOnlyFileException | InvalidAudioFrameException | TagException | IOException | CannotReadException ignored) {
     }
 
     // Method 2: look for album art in external files

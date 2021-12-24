@@ -58,6 +58,5 @@
         app:itemHorizontalTranslationEnabled="false"
         app:itemPaddingBottom="8dp"
         app:itemPaddingTop="8dp"
-        app:menu="@menu/bottom_navigation_main"
-        tools:layout_height="wrap_content" />
+        app:menu="@menu/bottom_navigation_main" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

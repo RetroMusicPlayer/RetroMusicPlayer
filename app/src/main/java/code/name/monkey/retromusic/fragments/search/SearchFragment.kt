@@ -43,6 +43,7 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.transition.MaterialSharedAxis
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -70,7 +71,10 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         setupRecyclerView()
 
         binding.voiceSearch.setOnClickListener { startMicSearch() }
-        binding.clearText.setOnClickListener { binding.searchView.clearText() }
+        binding.clearText.setOnClickListener {
+            binding.searchView.clearText()
+            searchAdapter.swapDataSet(listOf())
+        }
         binding.searchView.apply {
             addTextChangedListener(this@SearchFragment)
             focusAndShowKeyboard()
@@ -97,6 +101,13 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
                 bottomMargin = it
             }
         })
+        KeyboardVisibilityEvent.setEventListener(requireActivity(), viewLifecycleOwner) {
+            if (it) {
+                binding.keyboardPopup.isGone = true
+            } else {
+                binding.keyboardPopup.show()
+            }
+        }
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }

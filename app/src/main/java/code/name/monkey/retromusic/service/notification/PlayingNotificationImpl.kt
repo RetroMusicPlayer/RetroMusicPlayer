@@ -30,8 +30,6 @@ import androidx.media.app.NotificationCompat.MediaStyle
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
-import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -163,6 +161,7 @@ class PlayingNotificationImpl(
                     onUpdate()
                 }
             })
+        updateFavorite(song, onUpdate)
     }
 
     private fun buildPlayAction(isPlaying: Boolean): NotificationCompat.Action {
@@ -185,17 +184,28 @@ class PlayingNotificationImpl(
         ).build()
     }
 
+    private fun buildDismissAction(): NotificationCompat.Action {
+        return NotificationCompat.Action.Builder(
+            R.drawable.ic_close,
+            context.getString(R.string.customactivityoncrash_error_activity_error_details_close),
+            retrievePlaybackAction(ACTION_QUIT)
+        ).build()
+    }
+
     override fun setPlaying(isPlaying: Boolean) {
         mActions[2] = buildPlayAction(isPlaying)
+        // Show dismiss action if we are not playing but only for A12+, as we can't call stopForeground(false)
+        // on A12 which would result in crashes when we call startForeground after that
+        if (!isPlaying) {
+            addAction(buildDismissAction())
+        } else {
+            if (mActions.size == 5) mActions.removeAt(4)
+        }
     }
 
     override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
-            val playlist: PlaylistEntity = MusicUtil.repository.favoritePlaylist()
-            val isFavorite = if (playlist != null) {
-                val songEntity = song.toSongEntity(playlist.playListId)
-                MusicUtil.repository.isFavoriteSong(songEntity).isNotEmpty()
-            } else false
+            val isFavorite = MusicUtil.repository.isSongFavorite(song.id)
             withContext(Dispatchers.Main) {
                 mActions[0] = buildFavoriteAction(isFavorite)
                 onUpdate()

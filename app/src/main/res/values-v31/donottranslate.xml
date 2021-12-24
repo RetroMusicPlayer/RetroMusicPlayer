@@ -4,4 +4,5 @@
     <bool name="md3_enabled">true</bool>
 
     <bool name="colored_notification_available">false</bool>
+    <integer name="overScrollMode">0</integer>
 </resources>

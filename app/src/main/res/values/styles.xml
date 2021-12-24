@@ -1,19 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.RetroMusic" parent="Theme.RetroMusic.Base">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowSharedElementsUseOverlay">false</item>
-        <item name="android:textViewStyle">@style/TextViewStyleIm</item>
-        <item name="android:scrollbars">none</item>
-        <item name="dialogCornerRadius">16dp</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
-    </style>
+    <style name="Theme.RetroMusic" parent="Theme.RetroMusic.Base" />
 
     <style name="Theme.RetroMusic.Light" parent="Theme.RetroMusic.Base.Light" />
 
-    <style name="Theme.RetroMusic.Black" parent="Theme.RetroMusic.Base.Black">
-        <item name="android:windowBackground">@color/window_color_dark</item>
-    </style>
+    <style name="Theme.RetroMusic.Black" parent="Theme.RetroMusic.Base.Black" />
 
     <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive">
         <item name="android:windowBackground">@color/window_color</item>
@@ -24,7 +15,6 @@
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-        <item name="bottomSheetTint">?attr/colorSurface</item>
     </style>
 
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />
@@ -56,6 +46,13 @@
         <item name="titleMarginStart">16dp</item>
     </style>
 
+    <style name="mcab_theme" parent="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+    </style>
+
+    <style name="mcab_overflow_style">
+        <item name="srcCompat">@drawable/ic_more_vert</item>
+    </style>
 
     <style name="ToolbarTextAppearanceNormal">
         <item name="android:textStyle">bold</item>
@@ -185,7 +182,6 @@
 
     <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet">
         <item name="android:maxWidth">@empty</item>
-        <item name="android:backgroundTint">?attr/bottomSheetTint</item>
     </style>
 
     <style name="MaterialCardViewStroke">
@@ -201,9 +197,8 @@
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
-    <style name="circleImageView" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">5%</item>
+    <style name="circleImageView" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerSize">40dp</item>
     </style>
 
     <style name="SearchChipStyle" parent="Widget.Material3.Chip.Filter">
@@ -222,9 +217,31 @@
         <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
     </style>
 
+    <style name="HomeActionButton" parent="Widget.Material3.Button.ElevatedButton.Icon">
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.Material3.FloatingActionButton
+        </item>
+        <item name="iconPadding">16dp</item>
+        <item name="iconGravity">start</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:textAppearance">@style/TextViewBody2</item>
+    </style>
+
     <style name="CarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/md_deep_purple_700</item>
         <item name="colorAccent">@color/md_deep_purple_A400</item>
         <item name="colorPrimary">@color/md_deep_purple_500</item>
+    </style>
+
+    <style name="Theme.RetroMusic.Dialog" parent="Theme.Material3.DayNight.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@drawable/rounded_drawable</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="background">@color/transparent</item>
     </style>
 </resources>

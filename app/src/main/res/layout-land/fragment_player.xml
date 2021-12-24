@@ -8,15 +8,17 @@
     android:focusable="true">
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface" />
-
-    <View
         android:id="@+id/colorGradientBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:id="@+id/snowfall_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:snowflakeSpeedMax="6"
+        app:snowflakeSpeedMin="2"
+        app:snowflakesNum="75" />
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 

@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -233,6 +234,7 @@ class LibraryViewModel(
     suspend fun artistById(id: Long) = repository.artistById(id)
     suspend fun favoritePlaylist() = repository.favoritePlaylist()
     suspend fun isFavoriteSong(song: SongEntity) = repository.isFavoriteSong(song)
+    suspend fun isSongFavorite(songId: Long) = repository.isSongFavorite(songId)
     suspend fun insertSongs(songs: List<SongEntity>) = repository.insertSongs(songs)
     suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
         repository.removeSongFromPlaylist(songEntity)
@@ -356,11 +358,21 @@ class LibraryViewModel(
                         it.toSongEntity(playListId = playlist.playListId)
                     })
                 }
-                Toast.makeText(
-                    App.getContext(),
-                    "Adding songs to $playlistName",
-                    Toast.LENGTH_SHORT
-                ).show()
+                withContext(Main) {
+                    Toast.makeText(
+                        App.getContext(),
+                        "Playlist already exists",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    if (songs.isNotEmpty()) {
+                       Toast.makeText(
+                            App.getContext(),
+                            "Adding songs to $playlistName",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
             }
         }
     }

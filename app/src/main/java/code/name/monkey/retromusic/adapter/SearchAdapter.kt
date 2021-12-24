@@ -33,9 +33,10 @@ import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
-import code.name.monkey.retromusic.model.*
-import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
-import code.name.monkey.retromusic.repository.PlaylistSongsLoader
+import code.name.monkey.retromusic.model.Album
+import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Genre
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import java.util.*
 

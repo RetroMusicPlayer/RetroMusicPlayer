@@ -10,7 +10,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songCurrentProgress"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:gravity="center"
@@ -28,6 +28,7 @@
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:maxHeight="2dp"
         android:progressDrawable="@drawable/color_progress_seek"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
@@ -40,7 +41,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTotalTime"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:gravity="center"

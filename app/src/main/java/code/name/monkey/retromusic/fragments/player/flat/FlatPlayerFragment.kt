@@ -20,12 +20,12 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFlatPlayerBinding
+import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
@@ -65,7 +65,7 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
         binding.playerToolbar.setOnMenuItemClickListener(this)
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            colorControlNormal(),
             requireActivity()
         )
     }
@@ -81,7 +81,7 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(animation.animatedValue as Int, android.R.color.transparent), 0
             )
-            binding.colorGradientBackground.background = drawable
+            _binding?.colorGradientBackground?.background = drawable
         }
         valueAnimator?.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong())?.start()
     }
@@ -91,7 +91,7 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
         _binding = FragmentFlatPlayerBinding.bind(view)
         setUpPlayerToolbar()
         setUpSubFragments()
-        binding.playbackControlsFragment.drawAboveSystemBars()
+        binding.playerToolbar.drawAboveSystemBars()
     }
 
     override fun onShow() {
@@ -112,21 +112,16 @@ class FlatPlayerFragment : AbsPlayerFragment(R.layout.fragment_flat_player) {
         return if (PreferenceUtil.isAdaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
+            colorControlNormal()
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
         controlsFragment.setColor(color)
         libraryViewModel.updateColor(color.backgroundColor)
-        val isLight = ColorUtil.isColorLight(color.backgroundColor)
-        val iconColor = if (PreferenceUtil.isAdaptiveColor)
-            MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
-        else
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            iconColor,
+            colorControlNormal(),
             requireActivity()
         )
         if (PreferenceUtil.isAdaptiveColor) {

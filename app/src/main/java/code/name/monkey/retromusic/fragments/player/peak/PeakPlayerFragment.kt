@@ -17,14 +17,10 @@ package code.name.monkey.retromusic.fragments.player.peak
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPeakPlayerBinding
-import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.extensions.getSongInfo
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -57,7 +53,7 @@ class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
         }
-        binding.root.drawAboveSystemBars()
+        binding.root.drawAboveSystemBarsWithPadding()
     }
 
     private fun setUpSubFragments() {
@@ -76,7 +72,7 @@ class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
             setOnMenuItemClickListener(this@PeakPlayerFragment)
             ToolbarContentTintHelper.colorizeToolbar(
                 this,
-                ATHUtil.resolveColor(context, R.attr.colorControlNormal),
+                colorControlNormal(),
                 requireActivity()
             )
         }
@@ -96,9 +92,7 @@ class PeakPlayerFragment : AbsPlayerFragment(R.layout.fragment_peak_player) {
         return false
     }
 
-    override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
-    }
+    override fun toolbarIconColor() = colorControlNormal()
 
     override val paletteColor: Int
         get() = lastColor

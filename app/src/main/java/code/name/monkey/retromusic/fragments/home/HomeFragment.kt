@@ -23,6 +23,7 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
+import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -37,9 +38,11 @@ import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.drawNextToNavbar
+import code.name.monkey.retromusic.extensions.elevatedAccentColor
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -47,7 +50,8 @@ import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 
 class HomeFragment :
-    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home) {
+    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home),
+    IScrollHelper {
 
     private var _binding: HomeBindingAdapter? = null
     private val binding get() = _binding!!
@@ -60,9 +64,8 @@ class HomeFragment :
         setupListeners()
         binding.titleWelcome.text = String.format("%s", PreferenceUtil.userName)
 
-        enterTransition = MaterialFadeThrough().apply {
-            addTarget(binding.contentContainer)
-        }
+        enterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
+        reenterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
 
         val homeAdapter = HomeAdapter(mainActivity)
         binding.recyclerView.apply {
@@ -75,6 +78,7 @@ class HomeFragment :
 
         loadProfile()
         setupTitle()
+        colorButtons()
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
         binding.appBarLayout.statusBarForeground =
@@ -84,6 +88,21 @@ class HomeFragment :
             remove()
             mainActivity.finish()
         }
+        view.doOnLayout {
+            adjustPlaylistButtons()
+        }
+    }
+
+    private fun adjustPlaylistButtons() {
+        val buttons =
+            listOf(binding.history, binding.lastAdded, binding.topPlayed, binding.actionShuffle)
+        buttons.maxOf { it.lineCount }.let { maxLineCount->
+            buttons.forEach { button ->
+                // Set the highest line count to every button for consistency
+                button.setLines(maxLineCount)
+            }
+        }
+
     }
 
     private fun setupListeners() {
@@ -172,6 +191,13 @@ class HomeFragment :
             .into(binding.userImage)
     }
 
+    fun colorButtons() {
+        binding.history.elevatedAccentColor()
+        binding.lastAdded.elevatedAccentColor()
+        binding.topPlayed.elevatedAccentColor()
+        binding.actionShuffle.elevatedAccentColor()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_main, menu)
@@ -189,7 +215,7 @@ class HomeFragment :
         CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
     }
 
-    fun scrollToTop() {
+    override fun scrollToTop() {
         binding.container.scrollTo(0, 0)
         binding.appBarLayout.setExpanded(true)
     }

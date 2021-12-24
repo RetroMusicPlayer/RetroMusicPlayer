@@ -28,11 +28,12 @@ import android.transition.Slide
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
-import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityAlbumTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.extensions.setDrawUnderStatusBar
+import code.name.monkey.retromusic.extensions.defaultFooterColor
+import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.setTint
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -64,41 +65,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
         window.enterTransition = slide
     }
 
-    override fun loadImageFromFile(selectedFile: Uri?) {
-        GlideApp.with(this@AlbumTagEditorActivity).asBitmapPalette().load(selectedFile)
-            .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
-            .into(object : ImageViewTarget<BitmapPaletteWrapper>(binding.editorImage) {
-                override fun onResourceReady(
-                    resource: BitmapPaletteWrapper,
-                    transition: Transition<in BitmapPaletteWrapper>?
-                ) {
-                    getColor(resource.palette, Color.TRANSPARENT)
-                    albumArtBitmap = resource.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
-                    setImageBitmap(
-                        albumArtBitmap,
-                        getColor(
-                            resource.palette,
-                            ATHUtil.resolveColor(
-                                this@AlbumTagEditorActivity,
-                                R.attr.defaultFooterColor
-                            )
-                        )
-                    )
-                    deleteAlbumArt = false
-                    dataChanged()
-                    setResult(Activity.RESULT_OK)
-                }
-
-                override fun onLoadFailed(errorDrawable: Drawable?) {
-                    super.onLoadFailed(errorDrawable)
-                    Toast.makeText(this@AlbumTagEditorActivity, "Load Failed", Toast.LENGTH_LONG)
-                        .show()
-                }
-
-                override fun setResource(resource: BitmapPaletteWrapper?) {}
-            })
-    }
-
     private var albumArtBitmap: Bitmap? = null
     private var deleteAlbumArt: Boolean = false
 
@@ -109,7 +75,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         window.sharedElementsUseOverlay = true
         binding.imageContainer.transitionName = getString(R.string.transition_album_art)
@@ -146,7 +111,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
             bitmap,
             getColor(
                 generatePalette(bitmap),
-                ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
+                defaultFooterColor()
             )
         )
         deleteAlbumArt = false
@@ -167,10 +132,42 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     override fun deleteImage() {
         setImageBitmap(
             BitmapFactory.decodeResource(resources, R.drawable.default_audio_art),
-            ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
+            defaultFooterColor()
         )
         deleteAlbumArt = true
         dataChanged()
+    }
+
+    override fun loadImageFromFile(selectedFile: Uri?) {
+        GlideApp.with(this@AlbumTagEditorActivity).asBitmapPalette().load(selectedFile)
+            .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
+            .into(object : ImageViewTarget<BitmapPaletteWrapper>(binding.editorImage) {
+                override fun onResourceReady(
+                    resource: BitmapPaletteWrapper,
+                    transition: Transition<in BitmapPaletteWrapper>?
+                ) {
+                    getColor(resource.palette, Color.TRANSPARENT)
+                    albumArtBitmap = resource.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
+                    setImageBitmap(
+                        albumArtBitmap,
+                        getColor(
+                            resource.palette,
+                            defaultFooterColor()
+                        )
+                    )
+                    deleteAlbumArt = false
+                    dataChanged()
+                    setResult(Activity.RESULT_OK)
+                }
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    Toast.makeText(this@AlbumTagEditorActivity, "Load Failed", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                override fun setResource(resource: BitmapPaletteWrapper?) {}
+            })
     }
 
     override fun save() {
@@ -215,6 +212,16 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     override fun setColors(color: Int) {
         super.setColors(color)
         saveFab.backgroundTintList = ColorStateList.valueOf(color)
+        saveFab.backgroundTintList = ColorStateList.valueOf(color)
+        ColorStateList.valueOf(
+            MaterialValueHelper.getPrimaryTextColor(
+                this,
+                color.isColorLight
+            )
+        ).also {
+            saveFab.iconTint = it
+            saveFab.setTextColor(it)
+        }
     }
 
 

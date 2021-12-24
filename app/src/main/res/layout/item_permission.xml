@@ -57,7 +57,8 @@
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
+        android:paddingVertical="12dp"
+        android:layout_marginTop="8dp"
         android:textAppearance="@style/TextViewButton"
         app:icon="@drawable/ic_history"
         app:iconGravity="start"
@@ -66,11 +67,11 @@
         app:layout_constraintTop_toBottomOf="@id/summary"
         tools:text="@tools:sample/full_names" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/checkImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="16dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="@+id/button"

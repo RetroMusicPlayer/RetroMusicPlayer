@@ -49,8 +49,11 @@
 #-dontwarn
 #-ignorewarnings
 
+#Jaudiotagger
 -dontwarn org.jaudiotagger.**
+-dontwarn org.jcodec.**
 -keep class org.jaudiotagger.** { *; }
+-keep class org.jcodec.** { *; }
 
 -keepclassmembers enum * { *; }
 -keepattributes *Annotation*, Signature, Exception

@@ -7,18 +7,14 @@ import android.os.Bundle
 import androidx.core.widget.NestedScrollView
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.ATHUtil.isWindowBackgroundDark
-import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil.isColorLight
 import code.name.monkey.appthemehelper.util.ColorUtil.lightenColor
 import code.name.monkey.appthemehelper.util.MaterialValueHelper.getPrimaryTextColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityWhatsNewBinding
-import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.setLightStatusBarAuto
-import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
 import code.name.monkey.retromusic.util.RetroUtil
 import java.io.BufferedReader
@@ -31,29 +27,25 @@ class WhatsNewActivity : AbsThemeActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityWhatsNewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setLightStatusBarAuto(resolveColor(this, R.attr.colorSurface))
+        setLightStatusBarAuto(surfaceColor())
         setTaskDescriptionColorAuto()
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         try {
             val buf = StringBuilder()
             val json = assets.open("retro-changelog.html")
-            val br = BufferedReader(InputStreamReader(json, StandardCharsets.UTF_8))
-            var str: String?
-            while (br.readLine().also { str = it } != null) {
-                buf.append(str)
+            BufferedReader(InputStreamReader(json, StandardCharsets.UTF_8)).use { br ->
+                var str: String?
+                while (br.readLine().also { str = it } != null) {
+                    buf.append(str)
+                }
             }
-            br.close()
 
             // Inject color values for WebView body background and links
             val isDark = isWindowBackgroundDark(this)
             val accentColor = accentColor(this)
             val backgroundColor = colorToCSS(
-                resolveColor(
-                    this,
-                    R.attr.colorSurface,
-                    Color.parseColor(if (isDark) "#424242" else "#ffffff")
-                )
+                surfaceColor(Color.parseColor(if (isDark) "#424242" else "#ffffff"))
             )
             val contentColor = colorToCSS(Color.parseColor(if (isDark) "#ffffff" else "#000000"))
             val textColor = colorToCSS(Color.parseColor(if (isDark) "#60FFFFFF" else "#80000000"))
@@ -100,6 +92,7 @@ class WhatsNewActivity : AbsThemeActivity() {
                 binding.tgFab.extend()
             }
         }
+        binding.webView.drawAboveSystemBars()
     }
 
     companion object {

@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.helper.BackupContent
 import code.name.monkey.retromusic.helper.BackupHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -25,12 +27,12 @@ class BackupViewModel : ViewModel() {
         }
     }
 
-    suspend fun restoreBackup(activity: Activity, inputStream: InputStream?) {
-        BackupHelper.restoreBackup(activity, inputStream)
+    suspend fun restoreBackup(activity: Activity, inputStream: InputStream?, contents: List<BackupContent>) {
+        BackupHelper.restoreBackup(activity, inputStream, contents)
         withContext(Dispatchers.Main) {
             val intent = Intent(
                 activity,
-                activity::class.java
+                MainActivity::class.java
             )
             activity.startActivity(intent)
             exitProcess(0)

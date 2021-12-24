@@ -15,17 +15,36 @@
 package code.name.monkey.retromusic.activities.tageditor
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.widget.ImageView
+import android.widget.Toast
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
 import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.defaultFooterColor
+import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.setTint
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
+import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.repository.SongRepository
+import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.RetroColorUtil
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.ImageViewTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.shape.MaterialShapeDrawable
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
@@ -39,12 +58,14 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
 
     private val songRepository by inject<SongRepository>()
 
+    private var albumArtBitmap: Bitmap? = null
+    private var deleteAlbumArt: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpViews()
-        setNoImageMode()
         setSupportActionBar(binding.toolbar)
-        binding.appBarLayout.statusBarForeground =
+        binding.appBarLayout?.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(this)
     }
 
@@ -59,6 +80,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.yearContainer.setTint(false)
         binding.genreContainer.setTint(false)
         binding.trackNumberContainer.setTint(false)
+        binding.discNumberContainer.setTint(false)
         binding.lyricsContainer.setTint(false)
 
         binding.songText.appHandleColor().addTextChangedListener(this)
@@ -68,13 +90,9 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.genreText.appHandleColor().addTextChangedListener(this)
         binding.yearText.appHandleColor().addTextChangedListener(this)
         binding.trackNumberText.appHandleColor().addTextChangedListener(this)
+        binding.discNumberText.appHandleColor().addTextChangedListener(this)
         binding.lyricsText.appHandleColor().addTextChangedListener(this)
         binding.songComposerText.appHandleColor().addTextChangedListener(this)
-
-        binding.lyricsText.setOnTouchListener { view, _ ->
-            view.parent.requestDisallowInterceptTouchEvent(true)
-            return@setOnTouchListener false
-        }
     }
 
     private fun fillViewsWithFileTags() {
@@ -85,16 +103,50 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.genreText.setText(genreName)
         binding.yearText.setText(songYear)
         binding.trackNumberText.setText(trackNumber)
+        binding.discNumberText.setText(discNumber)
         binding.lyricsText.setText(lyrics)
         binding.songComposerText.setText(composer)
         println(songTitle + songYear)
     }
 
-    override fun loadCurrentImage() {}
+    override fun loadCurrentImage() {
+        val bitmap = albumArt
+        setImageBitmap(
+            bitmap,
+            RetroColorUtil.getColor(
+                RetroColorUtil.generatePalette(bitmap),
+                defaultFooterColor()
+            )
+        )
+        deleteAlbumArt = false
+    }
 
-    override fun searchImageOnWeb() {}
+    override fun searchImageOnWeb() {
+        searchWebFor(binding.songText.text.toString(), binding.artistText.text.toString())
+    }
 
-    override fun deleteImage() {}
+    override fun deleteImage() {
+        setImageBitmap(
+            BitmapFactory.decodeResource(resources, R.drawable.default_audio_art),
+            defaultFooterColor()
+        )
+        deleteAlbumArt = true
+        dataChanged()
+    }
+
+    override fun setColors(color: Int) {
+        super.setColors(color)
+        saveFab.backgroundTintList = ColorStateList.valueOf(color)
+        ColorStateList.valueOf(
+            MaterialValueHelper.getPrimaryTextColor(
+                this,
+                color.isColorLight
+            )
+        ).also {
+            saveFab.iconTint = it
+            saveFab.setTextColor(it)
+        }
+    }
 
     override fun save() {
         val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
@@ -104,10 +156,17 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         fieldKeyValueMap[FieldKey.GENRE] = binding.genreText.text.toString()
         fieldKeyValueMap[FieldKey.YEAR] = binding.yearText.text.toString()
         fieldKeyValueMap[FieldKey.TRACK] = binding.trackNumberText.text.toString()
+        fieldKeyValueMap[FieldKey.DISC_NO] = binding.discNumberText.text.toString()
         fieldKeyValueMap[FieldKey.LYRICS] = binding.lyricsText.text.toString()
         fieldKeyValueMap[FieldKey.ALBUM_ARTIST] = binding.albumArtistText.text.toString()
         fieldKeyValueMap[FieldKey.COMPOSER] = binding.songComposerText.text.toString()
-        writeValuesToFiles(fieldKeyValueMap, null)
+        writeValuesToFiles(
+            fieldKeyValueMap, when {
+                deleteAlbumArt -> ArtworkInfo(id, null)
+                albumArtBitmap == null -> null
+                else -> ArtworkInfo(id, albumArtBitmap!!)
+            }
+        )
     }
 
     override fun getSongPaths(): List<String> = listOf(songRepository.song(id).data)
@@ -115,6 +174,35 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
     override fun getSongUris(): List<Uri> = listOf(MusicUtil.getSongFileUri(id))
 
     override fun loadImageFromFile(selectedFile: Uri?) {
+        GlideApp.with(this@SongTagEditorActivity).asBitmapPalette().load(selectedFile)
+            .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
+            .into(object : ImageViewTarget<BitmapPaletteWrapper>(binding.editorImage) {
+                override fun onResourceReady(
+                    resource: BitmapPaletteWrapper,
+                    transition: Transition<in BitmapPaletteWrapper>?
+                ) {
+                    RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
+                    albumArtBitmap = resource.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
+                    setImageBitmap(
+                        albumArtBitmap,
+                        RetroColorUtil.getColor(
+                            resource.palette,
+                            defaultFooterColor()
+                        )
+                    )
+                    deleteAlbumArt = false
+                    dataChanged()
+                    setResult(Activity.RESULT_OK)
+                }
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    Toast.makeText(this@SongTagEditorActivity, "Load Failed", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                override fun setResource(resource: BitmapPaletteWrapper?) {}
+            })
     }
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
@@ -131,6 +219,6 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         val TAG: String = SongTagEditorActivity::class.java.simpleName
     }
 
-    override val editorImage: ImageView?
-        get() = null
+    override val editorImage: ImageView
+        get() = binding.editorImage
 }

@@ -16,15 +16,14 @@ package code.name.monkey.retromusic.views
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.NavigationViewUtil
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.lang.RuntimeException
 
 class BottomNavigationBarTinted @JvmOverloads constructor(
     context: Context,
@@ -33,6 +32,15 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
 ) : BottomNavigationView(context, attrs, defStyleAttr) {
 
     init {
+        // If we are in Immersive mode we have to just set empty OnApplyWindowInsetsListener as
+        // bottom, start, and end padding is always applied (with the help of OnApplyWindowInsetsListener) to
+        // BottomNavigationView to dodge the system navigation bar (so we basically clear that listener).
+        if (PreferenceUtil.isFullScreenMode) {
+            setOnApplyWindowInsetsListener { _, insets ->
+                insets
+            }
+        }
+
         labelVisibilityMode = PreferenceUtil.tabTitleMode
 
         if (!PreferenceUtil.materialYou) {
@@ -49,7 +57,6 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
                 accentColor
             )
             itemRippleColor = ColorStateList.valueOf(accentColor.addAlpha(0.08F))
-            background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.bottomSheetTint))
             itemActiveIndicatorColor = ColorStateList.valueOf(accentColor.addAlpha(0.12F))
         }
     }

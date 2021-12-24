@@ -65,6 +65,10 @@ fun Context.surfaceColor() = resolveColor(R.attr.colorSurface, Color.WHITE)
 
 fun Fragment.surfaceColor() = resolveColor(R.attr.colorSurface, Color.WHITE)
 
+fun Context.surfaceColor(fallBackColor: Int) = resolveColor(R.attr.colorSurface, fallBackColor)
+
+fun Fragment.surfaceColor(fallBackColor: Int) = resolveColor(R.attr.colorSurface, fallBackColor)
+
 fun Context.textColorSecondary() = resolveColor(android.R.attr.textColorSecondary)
 
 fun Fragment.textColorSecondary() = resolveColor(android.R.attr.textColorSecondary)
@@ -76,6 +80,10 @@ fun Fragment.colorControlNormal() = resolveColor(android.R.attr.colorControlNorm
 fun Context.textColorPrimary() = resolveColor(android.R.attr.textColorPrimary)
 
 fun Fragment.textColorPrimary() = resolveColor(android.R.attr.textColorPrimary)
+
+fun Context.defaultFooterColor() = resolveColor(R.attr.defaultFooterColor)
+
+fun Fragment.defaultFooterColor() = resolveColor(R.attr.defaultFooterColor)
 
 fun Context.resolveColor(@AttrRes attr: Int, fallBackColor: Int = 0) =
     ATHUtil.resolveColor(this, attr, fallBackColor)
@@ -118,6 +126,15 @@ fun MaterialButton.accentOutlineColor() {
     strokeColor = colorStateList
     setTextColor(colorStateList)
     rippleColor = colorStateList
+}
+
+fun MaterialButton.elevatedAccentColor() {
+    if (materialYou) return
+    val color = context.darkAccentColorVariant()
+    rippleColor = ColorStateList.valueOf(color)
+    setBackgroundColor(color)
+    setTextColor(MaterialValueHelper.getPrimaryTextColor(context, color.isColorLight))
+    iconTint = ColorStateList.valueOf(context.accentColor())
 }
 
 fun SeekBar.applyColor(@ColorInt color: Int) {
@@ -231,6 +248,15 @@ fun Context.darkAccentColor(): Int {
         accentColor(),
         surfaceColor(),
         if (surfaceColor().isColorLight) 0.96f else 0.975f
+    )
+}
+
+@ColorInt
+fun Context.darkAccentColorVariant(): Int {
+    return ColorUtils.blendARGB(
+        accentColor(),
+        surfaceColor(),
+        if (surfaceColor().isColorLight) 0.9f else 0.95f
     )
 }
 

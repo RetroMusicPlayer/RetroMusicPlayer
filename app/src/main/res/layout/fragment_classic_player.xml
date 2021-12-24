@@ -140,7 +140,8 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                        tools:listitem="@layout/item_list" />
+                android:overScrollMode="@integer/overScrollMode"
+                tools:listitem="@layout/item_list" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

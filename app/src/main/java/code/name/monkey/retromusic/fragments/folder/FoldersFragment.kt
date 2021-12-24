@@ -21,9 +21,9 @@ import android.os.Environment
 import android.text.Html
 import android.view.*
 import android.webkit.MimeTypeMap
-import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.PopupMenu
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import androidx.navigation.Navigation.findNavController
@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
-import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -40,8 +39,7 @@ import code.name.monkey.retromusic.adapter.Storage
 import code.name.monkey.retromusic.adapter.StorageAdapter
 import code.name.monkey.retromusic.adapter.StorageClickListener
 import code.name.monkey.retromusic.databinding.FragmentFolderBinding
-import code.name.monkey.retromusic.extensions.drawNextToNavbar
-import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment.ListPathsAsyncTask.OnPathsListedCallback
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment.ListSongsAsyncTask.OnSongsListedCallback
@@ -107,9 +105,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         mainActivity.addMusicServiceEventListener(libraryViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
-        enterTransition = MaterialFadeThrough().apply {
-            addTarget(binding.recyclerView)
-        }
+        enterTransition = MaterialFadeThrough()
+        reenterTransition = MaterialFadeThrough()
+
         setUpBreadCrumbs()
         setUpRecyclerView()
         setUpAdapter()
@@ -188,7 +186,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     override fun onFileMenuClicked(file: File, view: View) {
-        val popupMenu = PopupMenu(activity, view)
+        val popupMenu = PopupMenu(requireActivity(), view)
         if (file.isDirectory) {
             popupMenu.inflate(R.menu.menu_item_directory)
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
@@ -453,12 +451,10 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     private fun checkForPadding() {
         val count = adapter?.itemCount ?: 0
         if (_binding != null) {
-            val params = binding.root.layoutParams as ViewGroup.MarginLayoutParams
-            params.bottomMargin = if (count > 0 && playingQueue.isNotEmpty()) dip2px(
-                requireContext(),
-                104f
-            ) else dip2px(requireContext(), 54f)
-            binding.root.layoutParams = params
+            binding.recyclerView.updatePadding(
+                bottom = if (count > 0 && playingQueue.isNotEmpty()) dip(R.dimen.mini_player_height_expanded)
+                else dip(R.dimen.mini_player_height_expanded)
+            )
         }
     }
 
@@ -526,23 +522,19 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     private fun setUpBreadCrumbs() {
         binding.breadCrumbs.setActivatedContentColor(
-            resolveColor(requireContext(), android.R.attr.textColorPrimary)
+            textColorPrimary()
         )
         binding.breadCrumbs.setDeactivatedContentColor(
-            resolveColor(requireContext(), android.R.attr.textColorSecondary)
+            textColorSecondary()
+
         )
         binding.breadCrumbs.setCallback(this)
     }
 
     private fun setUpRecyclerView() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(
-            activity
-        )
-        val fastScroller = create(
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        create(
             binding.recyclerView
-        )
-        binding.recyclerView.setOnApplyWindowInsetsListener(
-            ScrollingViewOnApplyWindowInsetsListener(binding.recyclerView, fastScroller)
         )
     }
 

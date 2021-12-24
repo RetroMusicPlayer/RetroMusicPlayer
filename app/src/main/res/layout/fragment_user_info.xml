@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -12,8 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:liftOnScroll="true">
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -25,7 +23,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <code.name.monkey.retromusic.views.insets.InsetsConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -85,7 +83,7 @@
                 tools:text="@tools:sample/full_names" />
         </com.google.android.material.textfield.TextInputLayout>
 
-    </code.name.monkey.retromusic.views.insets.InsetsConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -94,7 +92,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="70dp"
         android:fitsSystemWindows="false"
         android:gravity="center"
         android:text="@string/save"

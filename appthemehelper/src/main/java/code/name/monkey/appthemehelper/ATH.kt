@@ -3,15 +3,15 @@ package code.name.monkey.appthemehelper
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import android.view.View
+import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.WindowInsetsControllerCompat
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -25,27 +25,38 @@ object ATH {
         ) > since
     }
 
+    @Suppress("Deprecation")
     fun setLightStatusBar(activity: Activity, enabled: Boolean) {
-        activity.window.apply {
-            WindowInsetsControllerCompat(
-                this,
-                decorView
-            ).isAppearanceLightStatusBars = enabled
+        if (VersionUtils.hasMarshmallow()) {
+            val decorView = activity.window.decorView
+            val systemUiVisibility = decorView.systemUiVisibility
+            if (enabled) {
+                decorView.systemUiVisibility =
+                    systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            } else {
+                decorView.systemUiVisibility =
+                    systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+            }
         }
     }
 
-    fun setLightNavigationbar(activity: Activity, enabled: Boolean) {
-        activity.window.apply {
-            WindowInsetsControllerCompat(
-                this,
-                decorView
-            ).isAppearanceLightNavigationBars = enabled
-            navigationBarColor = Color.TRANSPARENT
+    @Suppress("Deprecation")
+    fun setLightNavigationBar(activity: Activity, enabled: Boolean) {
+        if (VersionUtils.hasOreo()) {
+            val decorView = activity.window.decorView
+            var systemUiVisibility = decorView.systemUiVisibility
+            systemUiVisibility = if (enabled) {
+                systemUiVisibility or SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            } else {
+                systemUiVisibility and SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
+            }
+            decorView.systemUiVisibility = systemUiVisibility
+
         }
     }
 
     fun setLightNavigationBarAuto(activity: Activity, bgColor: Int) {
-        setLightNavigationbar(activity, ColorUtil.isColorLight(bgColor))
+        setLightNavigationBar(activity, ColorUtil.isColorLight(bgColor))
     }
 
     fun setNavigationBarColor(activity: Activity, color: Int) {
@@ -69,7 +80,11 @@ object ATH {
             return
         }
         toolbar.setBackgroundColor(color)
-        ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(activity, toolbar, color)
+        ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(
+            activity,
+            toolbar,
+            color
+        )
     }
 
     fun setTaskDescriptionColorAuto(activity: Activity) {

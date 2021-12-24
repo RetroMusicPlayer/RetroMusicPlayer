@@ -65,9 +65,8 @@ class CreatePlaylistDialog : DialogFragment() {
                 val playlistName = playlistView.text.toString()
                 if (!TextUtils.isEmpty(playlistName)) {
                     libraryViewModel.addToPlaylist(playlistName, songs)
-
                 } else {
-                    playlistContainer.error = "Playlist is can't be empty"
+                    playlistContainer.error = "Playlist name can't be empty"
                 }
             }
             .create()

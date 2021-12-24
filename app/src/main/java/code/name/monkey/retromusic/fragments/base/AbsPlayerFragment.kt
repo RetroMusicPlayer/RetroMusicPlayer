@@ -25,7 +25,6 @@ import android.media.MediaMetadataRetriever
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.TextUtils
 import android.view.GestureDetector
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -33,6 +32,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.appcompat.graphics.drawable.DrawableWrapper
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
@@ -46,18 +46,17 @@ import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.currentFragment
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IPaletteColorHolder
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.*
@@ -67,7 +66,6 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
-import java.io.FileNotFoundException
 import kotlin.math.abs
 
 abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
@@ -81,8 +79,12 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         val song = MusicPlayerRemote.currentSong
         when (item.itemId) {
             R.id.action_toggle_lyrics -> {
-                PreferenceUtil.showLyrics = !PreferenceUtil.showLyrics
-                showLyricsIcon(item)
+                PreferenceUtil.showLyrics = !item.isChecked
+                item.isChecked = !item.isChecked
+                return true
+            }
+            R.id.action_go_to_lyrics -> {
+                goToLyrics(requireActivity())
                 return true
             }
             R.id.action_toggle_favorite -> {
@@ -191,18 +193,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         return false
     }
 
-    private fun showLyricsIcon(item: MenuItem) {
-        val icon =
-            if (PreferenceUtil.showLyrics) R.drawable.ic_lyrics else R.drawable.ic_lyrics_outline
-        val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
-            requireContext(),
-            icon,
-            toolbarIconColor()
-        )
-        item.isChecked = PreferenceUtil.showLyrics
-        item.icon = drawable
-    }
-
     abstract fun playerToolbar(): Toolbar?
 
     abstract fun onShow()
@@ -219,7 +209,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     override fun onPlayingMetaChanged() {
         updateIsFavorite()
-        updateLyrics()
     }
 
     override fun onFavoriteStateChanged() {
@@ -231,7 +220,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
             if (playlist != null) {
                 val songEntity = song.toSongEntity(playlist.playListId)
-                val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
+                val isFavorite = libraryViewModel.isSongFavorite(song.id)
                 if (isFavorite) {
                     libraryViewModel.removeSongFromPlaylist(songEntity)
                 } else {
@@ -245,64 +234,34 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
 
     fun updateIsFavorite(animate: Boolean = false) {
         lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
-            if (playlist != null) {
-                val song: SongEntity =
-                    MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
-                val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
-                withContext(Main) {
-                    val icon = if (animate) {
-                        if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
-                    } else {
-                        if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                    }
-                    val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
-                        requireContext(),
-                        icon,
-                        toolbarIconColor()
-                    )
-                    if (playerToolbar() != null) {
-                        playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)?.apply {
-                            setIcon(drawable)
-                            title =
-                                if (isFavorite) getString(R.string.action_remove_from_favorites)
-                                else getString(R.string.action_add_to_favorites)
-                            getIcon().also {
-                                if (it is AnimatedVectorDrawable) {
-                                    it.start()
-                                }
+            val isFavorite: Boolean =
+                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
+            withContext(Main) {
+                val icon = if (animate) {
+                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
+                } else {
+                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                }
+                val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
+                    requireContext(),
+                    icon,
+                    toolbarIconColor()
+                )
+                if (playerToolbar() != null) {
+                    playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)?.apply {
+                        setIcon(drawable)
+                        title =
+                            if (isFavorite) getString(R.string.action_remove_from_favorites)
+                            else getString(R.string.action_add_to_favorites)
+                        getIcon().also {
+                            if (it is AnimatedVectorDrawable) {
+                                it.start()
                             }
                         }
                     }
                 }
             }
         }
-    }
-
-    private fun updateLyrics() {
-        setLyrics(null)
-        lifecycleScope.launch(IO) {
-            val song = MusicPlayerRemote.currentSong
-            val lyrics = try {
-                var data: String? = LyricUtil.getStringFromFile(song.title, song.artistName)
-                if (TextUtils.isEmpty(data)) {
-                    data = MusicUtil.getLyrics(song)
-                    if (TextUtils.isEmpty(data)) {
-                        null
-                    } else {
-                        Lyrics.parse(song, data)
-                    }
-                } else Lyrics.parse(song, data!!)
-            } catch (err: FileNotFoundException) {
-                null
-            }
-            withContext(Main) {
-                setLyrics(lyrics)
-            }
-        }
-    }
-
-    open fun setLyrics(l: Lyrics?) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -320,8 +279,19 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+        val nps = PreferenceUtil.nowPlayingScreen
+
+        if (nps == NowPlayingScreen.Circle || nps == NowPlayingScreen.Peak || nps == NowPlayingScreen.Tiny) {
+            playerToolbar()?.menu?.removeItem(R.id.action_toggle_lyrics)
+        } else {
+            playerToolbar()?.menu?.findItem(R.id.action_toggle_lyrics)?.apply {
+                fixCheckStateOnIcon()
+                isCheckable = true
+                isChecked = PreferenceUtil.showLyrics
+            }
+        }
         requireView().setOnTouchListener(
             SwipeDetector(
                 requireContext(),
@@ -329,7 +299,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 requireView()
             )
         )
-        playerToolbar()?.menu?.findItem(R.id.action_toggle_lyrics)?.let { showLyricsIcon(it) }
     }
 
     class SwipeDetector(val context: Context, val viewPager: ViewPager?, val view: View) :
@@ -444,3 +413,14 @@ fun goToLyrics(activity: Activity) {
         )
     }
 }
+/** Fixes checked state being ignored by injecting checked state directly into drawable */
+@SuppressLint("RestrictedApi")
+class CheckDrawableWrapper(val menuItem: MenuItem) : DrawableWrapper(menuItem.icon) {
+    // inject checked state into drawable state set
+    override fun setState(stateSet: IntArray) = super.setState(
+        if (menuItem.isChecked) stateSet + android.R.attr.state_checked else stateSet
+    )
+}
+
+/** Wrap icon drawable with [CheckDrawableWrapper]. */
+fun MenuItem.fixCheckStateOnIcon() = apply { icon = CheckDrawableWrapper(this) }

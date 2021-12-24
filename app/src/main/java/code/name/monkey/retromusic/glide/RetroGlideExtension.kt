@@ -23,9 +23,15 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.annotation.GlideExtension
 import com.bumptech.glide.annotation.GlideOption
 import com.bumptech.glide.annotation.GlideType
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.Key
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.BaseRequestOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
+import com.bumptech.glide.request.transition.Transition
 import com.bumptech.glide.signature.MediaStoreSignature
 import java.io.File
 
@@ -118,6 +124,16 @@ object RetroGlideExtension {
 
     @JvmStatic
     @GlideOption
+    fun simpleSongCoverOptions(
+        baseRequestOptions: BaseRequestOptions<*>,
+        song: Song
+    ): BaseRequestOptions<*> {
+        return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
+            .signature(createSignature(song))
+    }
+
+    @JvmStatic
+    @GlideOption
     fun albumCoverOptions(
         baseRequestOptions: BaseRequestOptions<*>,
         song: Song
@@ -194,4 +210,33 @@ object RetroGlideExtension {
     fun <TranscodeType> getDefaultTransition(): GenericTransitionOptions<TranscodeType> {
         return GenericTransitionOptions<TranscodeType>().transition(DEFAULT_ANIMATION)
     }
+}
+
+// https://github.com/bumptech/glide/issues/527#issuecomment-148840717
+fun GlideRequest<Drawable>.crossfadeListener(): GlideRequest<Drawable> {
+    return listener(object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            return if (isFirstResource) {
+                false // thumbnail was not shown, do as usual
+            } else DrawableCrossFadeFactory.Builder()
+                .setCrossFadeEnabled(true).build()
+                .build(dataSource, isFirstResource)
+                .transition(resource, target as Transition.ViewAdapter)
+        }
+    })
 }

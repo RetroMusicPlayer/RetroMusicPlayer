@@ -9,15 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.isGone
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.ATH
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 
 fun AppCompatActivity.toggleScreenOn() {
     if (PreferenceUtil.isScreenOnEnabled) {
@@ -43,11 +41,9 @@ fun AppCompatActivity.setImmersiveFullscreen() {
 
 fun AppCompatActivity.exitFullscreen() {
     WindowInsetsControllerCompat(window, window.decorView).apply {
-        systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         show(WindowInsetsCompat.Type.systemBars())
     }
 }
-
 
 fun AppCompatActivity.hideStatusBar() {
     hideStatusBar(PreferenceUtil.isFullScreenMode)
@@ -56,13 +52,26 @@ fun AppCompatActivity.hideStatusBar() {
 private fun AppCompatActivity.hideStatusBar(fullscreen: Boolean) {
     val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
     if (statusBar != null) {
-        statusBar.visibility = if (fullscreen) View.GONE else View.VISIBLE
+        statusBar.isGone = fullscreen
     }
 }
 
-fun AppCompatActivity.setDrawUnderStatusBar() {
+fun AppCompatActivity.setDrawBehindSystemBars() {
     WindowCompat.setDecorFitsSystemWindows(window, false)
-    window.statusBarColor = Color.TRANSPARENT
+    if (VersionUtils.hasOreo()) {
+        if (VersionUtils.hasQ()) {
+            window.isNavigationBarContrastEnforced = false
+        }
+        window.navigationBarColor = Color.TRANSPARENT
+        window.statusBarColor = Color.TRANSPARENT
+    } else {
+        setNavigationBarColorPreOreo(surfaceColor())
+        if (VersionUtils.hasMarshmallow()) {
+            setStatusBarColor(Color.TRANSPARENT)
+        } else {
+            setStatusBarColor(surfaceColor())
+        }
+    }
 }
 
 fun FragmentActivity.setTaskDescriptionColor(color: Int) {
@@ -100,9 +109,11 @@ fun AppCompatActivity.setLightStatusBarAuto(bgColor: Int) {
 }
 
 fun AppCompatActivity.setLightNavigationBar(enabled: Boolean) {
-    if (!ATHUtil.isWindowBackgroundDark(this) and ThemeStore.coloredNavigationBar(this)) {
-        ATH.setLightNavigationbar(this, enabled)
-    }
+    ATH.setLightNavigationBar(this, enabled)
+}
+
+fun AppCompatActivity.setLightNavigationBarAuto(bgColor: Int) {
+    setLightNavigationBar(ColorUtil.isColorLight(bgColor))
 }
 
 
@@ -129,11 +140,39 @@ fun AppCompatActivity.setStatusBarColor(color: Int) {
             else -> window.statusBarColor = ColorUtil.darkenColor(color)
         }
     }
-    setLightStatusBarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
+    setLightStatusBarAuto(surfaceColor())
 }
 
 fun AppCompatActivity.setStatusBarColorAuto() {
     // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
-    setStatusBarColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
-    setLightStatusBarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
+    setStatusBarColor(surfaceColor())
+    setLightStatusBarAuto(surfaceColor())
+}
+
+fun AppCompatActivity.setNavigationBarColor(color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        window.navigationBarColor = color
+    } else {
+        window.navigationBarColor = ColorUtil.darkenColor(color)
+    }
+    setLightNavigationBarAuto(color)
+}
+
+fun AppCompatActivity.setNavigationBarColorPreOreo(color: Int) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        window.navigationBarColor = ColorUtil.darkenColor(color)
+    }
+}
+
+fun AppCompatActivity.setStatusBarColorPreMarshmallow(color: Int) {
+    val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
+    if (statusBar != null) {
+        statusBar.setBackgroundColor(
+            ColorUtil.darkenColor(
+                color
+            )
+        )
+    } else {
+        window.statusBarColor = ColorUtil.darkenColor(color)
+    }
 }

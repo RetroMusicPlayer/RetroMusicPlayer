@@ -43,10 +43,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:overScrollMode="@integer/overScrollMode"
         android:scrollbars="none"
+        android:transitionGroup="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/item_list"
-        android:transitionGroup="true"/>
+        tools:listitem="@layout/item_list" />
 
     <LinearLayout
         android:id="@android:id/empty"
@@ -79,11 +80,11 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/shuffle_button"
+        style="@style/Widget.Material3.FloatingActionButton.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:srcCompat="@drawable/ic_shuffle"
+        android:layout_marginHorizontal="16dp"
         android:contentDescription="@string/shuffle"
-        style="@style/Widget.Material3.FloatingActionButton.Primary"
-        android:layout_marginHorizontal="16dp"/>
+        app:srcCompat="@drawable/ic_shuffle" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

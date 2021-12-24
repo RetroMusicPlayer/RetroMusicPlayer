@@ -34,7 +34,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -60,14 +59,13 @@ import java.io.File
 import java.util.*
 
 abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
-    abstract val editorImage: ImageView?
+    abstract val editorImage: ImageView
     val repository by inject<Repository>()
 
     lateinit var saveFab: MaterialButton
     protected var id: Long = 0
         private set
     private var paletteColorPrimary: Int = 0
-    private var isInNoImageMode: Boolean = false
     private var songPaths: List<String>? = null
     private var savedSongPaths: List<String>? = null
     private val currentSongPath: String? = null
@@ -176,6 +174,15 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
             }
         }
 
+    protected val discNumber: String?
+        get() {
+            return try {
+                getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.DISC_NO)
+            } catch (ignored: Exception) {
+                null
+            }
+        }
+
     protected val lyrics: String?
         get() {
             return try {
@@ -239,7 +246,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
             getString(R.string.web_search),
             getString(R.string.remove_cover)
         )
-        editorImage?.setOnClickListener { show }
+        editorImage.setOnClickListener { show }
     }
 
     private fun startImagePicker() {
@@ -306,17 +313,6 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    protected fun setNoImageMode() {
-        isInNoImageMode = true
-        setColors(
-            intent.getIntExtra(
-                EXTRA_PALETTE,
-                ATHUtil.resolveColor(this, R.attr.colorPrimary)
-            )
-        )
-    }
-
-
     protected fun dataChanged() {
         showFab()
     }
@@ -335,9 +331,9 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
 
     protected fun setImageBitmap(bitmap: Bitmap?, bgColor: Int) {
         if (bitmap == null) {
-            editorImage?.setImageResource(drawable.default_audio_art)
+            editorImage.setImageResource(drawable.default_audio_art)
         } else {
-            editorImage?.setImageBitmap(bitmap)
+            editorImage.setImageBitmap(bitmap)
         }
         setColors(bgColor)
     }

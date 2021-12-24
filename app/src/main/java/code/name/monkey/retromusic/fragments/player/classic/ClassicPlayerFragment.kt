@@ -28,7 +28,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -39,6 +38,7 @@ import code.name.monkey.retromusic.databinding.FragmentClassicPlayerBinding
 import code.name.monkey.retromusic.extensions.getSongInfo
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
@@ -144,7 +144,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
             ).build()
         )
         shapeDrawable.fillColor =
-            ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+            ColorStateList.valueOf(surfaceColor())
         binding.playerQueueSheet.background = shapeDrawable
 
         binding.playerQueueSheet.setOnTouchListener { _, _ ->

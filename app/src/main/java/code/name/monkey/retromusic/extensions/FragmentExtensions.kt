@@ -66,8 +66,7 @@ val FragmentManager.currentNavigationFragment: Fragment?
 fun AppCompatActivity.currentFragment(navHostId: Int): Fragment? {
     val navHostFragment: NavHostFragment =
         supportFragmentManager.findFragmentById(navHostId) as NavHostFragment
-    navHostFragment.targetFragment
-    return navHostFragment.childFragmentManager.fragments.first()
+    return navHostFragment.childFragmentManager.fragments.firstOrNull()
 }
 
 @Suppress("UNCHECKED_CAST")

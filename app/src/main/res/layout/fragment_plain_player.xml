@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface">
-
+    android:background="?attr/colorSurface"
+    android:clickable="true"
+    android:focusable="true">
 
     <include layout="@layout/shadow_statusbar_toolbar" />
-
 
     <FrameLayout
         android:id="@+id/statusBarContainer"

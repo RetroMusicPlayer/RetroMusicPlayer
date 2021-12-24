@@ -4,16 +4,16 @@
     <item
         android:id="@+id/action_toggle_lyrics"
         android:checkable="true"
-        android:icon="@drawable/ic_lyrics_outline"
+        android:icon="@drawable/sld_lyrics"
         android:orderInCategory="1"
         android:title="@string/lyrics"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_toggle_favorite"
+        android:checkable="true"
         android:icon="@drawable/ic_favorite"
         android:orderInCategory="2"
         android:title="@string/favorites"
-        android:checkable="true"
         app:showAsAction="always" />
     <item
         android:id="@+id/now_playing"
@@ -66,17 +66,21 @@
         android:orderInCategory="10"
         android:title="@string/action_details" />
     <item
-        android:id="@+id/action_sleep_timer"
+        android:id="@+id/action_go_to_lyrics"
         android:orderInCategory="11"
+        android:title="@string/action_go_to_lyrics" />
+    <item
+        android:id="@+id/action_sleep_timer"
+        android:orderInCategory="12"
         android:title="@string/action_sleep_timer"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_equalizer"
-        android:orderInCategory="12"
+        android:orderInCategory="13"
         android:title="@string/equalizer"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_delete_from_device"
-        android:orderInCategory="13"
+        android:orderInCategory="14"
         android:title="@string/action_delete_from_device" />
 </menu>

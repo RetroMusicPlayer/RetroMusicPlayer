@@ -29,9 +29,14 @@ object ThemeManager {
         context: Context
     ): Int = when (context.generalThemeValue) {
         LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
-        DARK,
-        BLACK -> AppCompatDelegate.MODE_NIGHT_YES
-        AUTO -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        DARK -> AppCompatDelegate.MODE_NIGHT_YES
+        BLACK -> {
+            if (PreferenceUtil.baseTheme == "dark") {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            }
+        }
+        else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
     }
 }
-

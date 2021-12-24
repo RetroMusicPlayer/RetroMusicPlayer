@@ -72,6 +72,7 @@ interface Repository {
     suspend fun genresHome(): Home
     suspend fun playlists(): Home
     suspend fun homeSections(): List<Home>
+
     @ExperimentalCoroutinesApi
     suspend fun homeSectionsFlow(): Flow<Result<List<Home>>>
     suspend fun playlist(playlistId: Long): Playlist
@@ -106,6 +107,7 @@ interface Repository {
     suspend fun searchArtists(query: String): List<Artist>
     suspend fun searchSongs(query: String): List<Song>
     suspend fun searchAlbums(query: String): List<Album>
+    suspend fun isSongFavorite(songId: Long): Boolean
     fun getSongByGenre(genreId: Long): Song
 }
 
@@ -133,6 +135,9 @@ class RealRepository(
 
     override suspend fun searchAlbums(query: String): List<Album> = albumRepository.albums(query)
 
+    override suspend fun isSongFavorite(songId: Long): Boolean =
+        roomRepository.isSongFavorite(context, songId)
+
     override fun getSongByGenre(genreId: Long): Song = genreRepository.song(genreId)
 
     override suspend fun searchArtists(query: String): List<Artist> =
@@ -150,7 +155,8 @@ class RealRepository(
 
     override suspend fun artistById(artistId: Long): Artist = artistRepository.artist(artistId)
 
-    override suspend fun albumArtistByName(name: String): Artist = artistRepository.albumArtist(name)
+    override suspend fun albumArtistByName(name: String): Artist =
+        artistRepository.albumArtist(name)
 
     override suspend fun recentArtists(): List<Artist> = lastAddedRepository.recentArtists()
 

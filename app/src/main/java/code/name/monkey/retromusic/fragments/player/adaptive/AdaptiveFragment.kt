@@ -17,14 +17,10 @@ package code.name.monkey.retromusic.fragments.player.adaptive
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentAdaptivePlayerBinding
-import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.extensions.surfaceColor
-import code.name.monkey.retromusic.extensions.textColorPrimary
-import code.name.monkey.retromusic.extensions.textColorSecondary
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -47,7 +43,7 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
         _binding = FragmentAdaptivePlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
-        binding.root.drawAboveSystemBars()
+        binding.playbackControlsFragment.drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {
@@ -108,7 +104,7 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
         libraryViewModel.updateColor(color.primaryTextColor)
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            colorControlNormal(),
             requireActivity()
         )
     }
@@ -130,7 +126,7 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
+        return colorControlNormal()
     }
 
     override val paletteColor: Int

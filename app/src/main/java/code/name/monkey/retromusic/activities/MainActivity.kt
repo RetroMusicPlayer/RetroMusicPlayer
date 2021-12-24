@@ -27,15 +27,15 @@ import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.*
-import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewFragment
-import code.name.monkey.retromusic.fragments.home.HomeFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SearchQueryHelper.getSongs
+import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
+import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -52,7 +52,6 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setTaskDescriptionColorAuto()
         hideStatusBar()
@@ -62,6 +61,9 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         setupNavigationController()
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
+        }
+        if (BuildConfig.VERSION_CODE > PreferenceUtil.lastVersion){
+            NavigationUtil.gotoWhatNews(this)
         }
     }
 
@@ -90,21 +92,17 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         bottomNavigationView.setupWithNavController(navController)
         // Scroll Fragment to top
         bottomNavigationView.setOnItemReselectedListener {
-            currentFragment(R.id.fragment_container)
-                .also {
-                    if (it is AbsRecyclerViewFragment<*, *>) {
-                        it.scrollToTop()
-                    }
-                    if (it is HomeFragment) {
-                        it.scrollToTop()
-                    }
+            currentFragment(R.id.fragment_container).apply {
+                if (this is IScrollHelper) {
+                    scrollToTop()
                 }
+            }
         }
-        // This is more like a work-around as for start destination of navGraph
-        // enterTransition won't work as expected
-        navGraph.setStartDestination(R.id.libraryFragment)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-           when (destination.id) {
+            if (destination.id == navGraph.startDestinationId) {
+                currentFragment(R.id.fragment_container)?.enterTransition = null
+            }
+            when (destination.id) {
                 R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre -> {
                     // Save the last tab
                     if (PreferenceUtil.rememberLastTab) {
@@ -114,10 +112,12 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                     setBottomNavVisibility(visible = true, animate = true)
                 }
                 R.id.playing_queue_fragment -> {
-                    setBottomNavVisibility(visible = false)
-                    hideBottomSheet(true)
+                    setBottomNavVisibility(visible = false, hideBottomSheet = true)
                 }
-                else -> setBottomNavVisibility(visible = false, animate = true) // Hide Bottom Navigation Bar
+                else -> setBottomNavVisibility(
+                    visible = false,
+                    animate = true
+                ) // Hide Bottom Navigation Bar
             }
         }
     }

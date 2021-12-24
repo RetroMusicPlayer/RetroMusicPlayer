@@ -28,8 +28,6 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.databinding.ActivityShareInstagramBinding
-import code.name.monkey.retromusic.extensions.applyToolbar
-import code.name.monkey.retromusic.extensions.setDrawUnderStatusBar
 import code.name.monkey.retromusic.extensions.setLightStatusBar
 import code.name.monkey.retromusic.extensions.setStatusBarColor
 import code.name.monkey.retromusic.glide.GlideApp
@@ -60,7 +58,6 @@ class ShareInstagramStory : AbsBaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         binding = ActivityShareInstagramBinding.inflate(layoutInflater)
         setContentView(binding.root)

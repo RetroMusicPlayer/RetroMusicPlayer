@@ -26,14 +26,13 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
-import android.widget.PopupMenu
 import android.widget.SeekBar
+import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFullPlayerControlsBinding
 import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.getSongInfo
@@ -205,6 +204,7 @@ class FullPlaybackControlsFragment :
             popupMenu.setOnMenuItemClickListener(this)
             popupMenu.inflate(R.menu.menu_player)
             popupMenu.menu.findItem(R.id.action_toggle_favorite).isVisible = false
+            popupMenu.menu.findItem(R.id.action_toggle_lyrics).isChecked = PreferenceUtil.showLyrics
             popupMenu.show()
         }
     }
@@ -317,28 +317,24 @@ class FullPlaybackControlsFragment :
 
     fun updateIsFavorite(animate: Boolean = false) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
-            if (playlist != null) {
-                val song: SongEntity =
-                    MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
-                val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
-                withContext(Dispatchers.Main) {
-                    val icon = if (animate) {
-                        if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
-                    } else {
-                        if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                    }
-                    val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
-                        requireContext(),
-                        icon,
-                        Color.WHITE
-                    )
-                    binding.songFavourite.apply {
-                        setImageDrawable(drawable)
-                        getDrawable().also {
-                            if (it is AnimatedVectorDrawable) {
-                                it.start()
-                            }
+            val isFavorite: Boolean =
+                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
+            withContext(Dispatchers.Main) {
+                val icon = if (animate) {
+                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
+                } else {
+                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                }
+                val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
+                    requireContext(),
+                    icon,
+                    Color.WHITE
+                )
+                binding.songFavourite.apply {
+                    setImageDrawable(drawable)
+                    getDrawable().also {
+                        if (it is AnimatedVectorDrawable) {
+                            it.start()
                         }
                     }
                 }

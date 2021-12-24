@@ -30,6 +30,15 @@
                 tools:layout="@layout/fragment_album_full_cover" />
 
             <include layout="@layout/shadow_statusbar_toolbar" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/cover_lyrics"
+                android:name="code.name.monkey.retromusic.fragments.other.CoverLyricsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20dp"
+                android:elevation="20dp" />
         </FrameLayout>
 
         <FrameLayout
@@ -43,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_gradient_controls" />
+
         </FrameLayout>
 
         <FrameLayout

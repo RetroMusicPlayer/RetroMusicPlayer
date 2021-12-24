@@ -42,7 +42,7 @@ class PlaylistsFragment :
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.getPlaylists().observe(viewLifecycleOwner, {
             if (it.isNotEmpty())
-                adapter?.swapDataSet(it.filter { playlistWithSongs-> playlistWithSongs.songs.isNotEmpty() })
+                adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
         })

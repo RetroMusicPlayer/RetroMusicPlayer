@@ -64,14 +64,6 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
                 returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
             }
         }
-        binding.appBarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.progressIndicator.hide()
         when (args.type) {
@@ -92,6 +84,10 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
                 binding.recyclerView.updatePadding(bottom = height.toInt())
             }
         })
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     private fun lastAddedSongs() {
@@ -104,6 +100,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         binding.recyclerView.apply {
             adapter = songAdapter
             layoutManager = linearLayoutManager()
+            scheduleLayoutAnimation()
         }
         libraryViewModel.recentSongs().observe(viewLifecycleOwner, { songs ->
             songAdapter.swapDataSet(songs)

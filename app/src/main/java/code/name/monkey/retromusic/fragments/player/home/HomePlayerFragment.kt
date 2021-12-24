@@ -18,10 +18,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentHomePlayerBinding
+import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -128,7 +128,7 @@ class HomePlayerFragment : AbsPlayerFragment(R.layout.fragment_home_player),
 
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            colorControlNormal(),
             requireActivity()
         )
     }

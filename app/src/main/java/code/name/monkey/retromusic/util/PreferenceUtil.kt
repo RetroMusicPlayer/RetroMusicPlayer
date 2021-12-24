@@ -561,6 +561,8 @@ object PreferenceUtil {
         }
         set(value) = sharedPreferences.edit {
             putInt(NOW_PLAYING_SCREEN_ID, value.id)
+            // Also set a cover theme for that now playing
+            value.defaultCoverTheme?.let { coverTheme -> albumCoverStyle = coverTheme }
         }
 
     val albumCoverTransform: ViewPager.PageTransformer
@@ -655,4 +657,7 @@ object PreferenceUtil {
 
     val materialYou
         get() = sharedPreferences.getBoolean(MATERIAL_YOU, VersionUtils.hasS())
+
+    val isSnowFalling
+        get() = sharedPreferences.getBoolean(SNOWFALL, false)
 }
