@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Ga naar album </string>
     <string name="action_go_to_artist">Ga naar artiest</string>
     <string name="action_go_to_genre">Ga naar genre</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Ga naar begin directory</string>
     <string name="action_grant">Geef toestemming</string>
     <string name="action_grid_size">Raster grootte</string>
@@ -73,6 +74,7 @@
     <string name="app_widget_big_name">Volledige Afbeelding</string>
     <string name="app_widget_card_name">Kaart</string>
     <string name="app_widget_classic_name">Klassiek</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Klein</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artiest</string>
@@ -81,6 +83,7 @@
     <string name="audio_focus_denied">Geluid focus geweigerd </string>
     <string name="audio_settings_summary">Wijzig de geluidsinstellingen en pas de equalizer aan</string>
     <string name="auto">Automatisch</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biografie</string>
@@ -111,6 +114,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Logboek</string>
     <string name="changelog_summary">Bekijk wat er nieuw is</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Cirkel</string>
     <string name="circular">Rond</string>
     <string name="classic">Klassiek</string>
@@ -130,7 +134,9 @@
     <string name="created_playlist_x">Afspeellijst %1$s aangemaakt.</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Nu luisterend naar %1$s van %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Soort van donker</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Afspeellijst verwijderen</string>
     <string name="delete_playlist_x"><![CDATA[Afspellijst <b>%1$s</b> verwijderen?]]></string>
     <string name="delete_playlists_title">Afspeellijsten verwijderen</string>
@@ -146,6 +152,7 @@
     <string name="device_info">Apparaatinfo</string>
     <string name="dialog_message_set_ringtone">Sta Retro Music toe om audioinstellingen te wijzigen</string>
     <string name="dialog_title_set_ringtone">Stel in als beltoon</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Wil je de zwarte lijst leegmaken?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Wil je <b>%1$s</b> verwijderen van de zwarte lijst?]]></string>
     <string name="donate">Doneren</string>
@@ -385,6 +392,7 @@
     <string name="reset_action">Resetten</string>
     <string name="reset_artist_image">Reset artiest afbeelding</string>
     <string name="restore">Herstellen</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
     <string name="restored_previous_purchases">Teruggezette aankopen</string>
     <string name="restoring_purchase">Aankoop herstellen…</string>
@@ -434,8 +442,8 @@
     <string name="sort_order">Volgorde </string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Artiest</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Artiest</string>
     <string name="sort_order_composer">Componist</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
@@ -461,6 +469,7 @@
     <string name="tiny">Tiny</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">Title</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Vandaag</string>
     <string name="top_albums">Top albums</string>
     <string name="top_artists">Top artists</string>
@@ -476,6 +485,7 @@
     <string name="up_next">Volgende</string>
     <string name="update_image">Update afbeelding</string>
     <string name="updating">Bijwerken...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Versie</string>
@@ -496,8 +506,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
