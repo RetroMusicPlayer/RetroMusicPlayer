@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Přejít na album</string>
     <string name="action_go_to_artist">Přejít na interpreta</string>
     <string name="action_go_to_genre">Přejít na žánr</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Přejít do začáteční složky</string>
     <string name="action_grant">Udělit</string>
     <string name="action_grid_size">Velikost mřížky</string>
@@ -77,6 +78,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Karta</string>
     <string name="app_widget_classic_name">Klasický</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Malý</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Umělec</string>
@@ -85,6 +87,7 @@
     <string name="audio_focus_denied">Zaměření zvuku bylo zamítnuto.</string>
     <string name="audio_settings_summary">Změňte nastavení zvuku a upravte ovládání ekvalizéru</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Bio</string>
@@ -115,6 +118,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Přehled změn</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Kruh</string>
     <string name="circular">Kruhový</string>
     <string name="classic">Klasický</string>
@@ -134,7 +138,9 @@
     <string name="created_playlist_x">Vytvořený seznam skladeb %1$s.</string>
     <string name="credit_title">Členové a přispěvatelé </string>
     <string name="currently_listening_to_x_by_x">Aktuálně posloucháš %1$s od %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Tmavá</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Smazat seznam skladeb</string>
     <string name="delete_playlist_x"><![CDATA[Smazat seznam skladeb <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Smazat seznamy skladeb</string>
@@ -150,6 +156,7 @@
     <string name="device_info">Informace o zařízení</string>
     <string name="dialog_message_set_ringtone">Povolit aplikaci Retro Music upravovat nastavení zvuku</string>
     <string name="dialog_title_set_ringtone">Nastavit vyzvánění</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Chcete vyčistit černou listinu?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Chcete odstranit <b>%1$s</b> z černé listiny?]]></string>
     <string name="donate">Darovat</string>
@@ -389,6 +396,7 @@
     <string name="reset_action">Resetovat</string>
     <string name="reset_artist_image">Obnovit obrázek interpreta</string>
     <string name="restore">Obnovit</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Předchozí nákup byl obnoven. Restartujte aplikaci pro využití všech funkcí.</string>
     <string name="restored_previous_purchases">Předchozí nákupy byly obnoveny.</string>
     <string name="restoring_purchase">Obnovuji nákup…</string>
@@ -438,8 +446,8 @@
     <string name="sort_order">Řazení </string>
     <string name="sort_order_a_z">Vzestupně</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Umělec</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Umělec</string>
     <string name="sort_order_composer">Skladatel</string>
     <string name="sort_order_date">Datum přidání</string>
     <string name="sort_order_date_modified">Datum změny</string>
@@ -465,6 +473,7 @@
     <string name="tiny">Tiny</string>
     <string name="tiny_card_style">Malá karta</string>
     <string name="title">Název</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Dnes</string>
     <string name="top_albums">Nejlepší alba</string>
     <string name="top_artists">Top umělci</string>
@@ -480,6 +489,7 @@
     <string name="up_next">Další</string>
     <string name="update_image">Aktualizovat obrázek</string>
     <string name="updating">Aktualizace...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">Uživatelské Jméno</string>
     <string name="username">Uživatelské jméno</string>
     <string name="version">Verze</string>
@@ -500,8 +510,4 @@
     <string name="you_have_to_select_at_least_one_category">Musíte zvolit alespoň jednu kategorii.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Budete přesměrováni na webovou stránku pro zadání problému.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vaše údaje k účtu jsou použity pouze k ověření.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
