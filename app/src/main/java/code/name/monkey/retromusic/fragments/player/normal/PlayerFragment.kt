@@ -16,12 +16,17 @@ package code.name.monkey.retromusic.fragments.player.normal
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
+import android.content.SharedPreferences
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.SNOWFALL
 import code.name.monkey.retromusic.databinding.FragmentPlayerBinding
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
@@ -35,7 +40,8 @@ import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.DrawableGradient
 
-class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
+class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     private var lastColor: Int = 0
     override val paletteColor: Int
@@ -120,11 +126,23 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
         _binding = FragmentPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        if (PreferenceUtil.isSnowFalling) {
+            binding.snowfallView.isVisible = true
+            binding.snowfallView.restartFalling()
+        } else {
+            binding.snowfallView.isVisible = false
+            binding.snowfallView.stopFalling()
+        }
+
+        PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .registerOnSharedPreferenceChangeListener(this)
         playerToolbar().drawAboveSystemBars()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .unregisterOnSharedPreferenceChangeListener(this)
         _binding = null
     }
 
@@ -147,6 +165,16 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
             colorControlNormal(),
             requireActivity()
         )
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key == SNOWFALL && PreferenceUtil.isSnowFalling) {
+            binding.snowfallView.isVisible = true
+            binding.snowfallView.restartFalling()
+        } else {
+            binding.snowfallView.isVisible = false
+            binding.snowfallView.stopFalling()
+        }
     }
 
     override fun onServiceConnected() {

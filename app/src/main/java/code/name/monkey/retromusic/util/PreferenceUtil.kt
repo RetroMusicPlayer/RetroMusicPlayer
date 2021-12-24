@@ -657,4 +657,7 @@ object PreferenceUtil {
 
     val materialYou
         get() = sharedPreferences.getBoolean(MATERIAL_YOU, VersionUtils.hasS())
+
+    val isSnowFalling
+        get() = sharedPreferences.getBoolean(SNOWFALL, false)
 }

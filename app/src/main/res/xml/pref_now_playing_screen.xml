@@ -15,6 +15,12 @@
         android:summary="@string/pref_summary_extra_song_info"
         android:title="@string/pref_title_extra_song_info" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="snowfall"
+        android:layout="@layout/list_item_view_switch_no_title"
+        android:title="Snow Fall Effect (Only on Normal theme)" />
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_album">
@@ -77,8 +83,8 @@
             android:max="25"
             android:summary="@string/pref_blur_amount_summary"
             android:title="@string/pref_blur_amount_title"
-            app:icon="@drawable/ic_blur_on"
             app:ateKey_pref_unit="px"
+            app:icon="@drawable/ic_blur_on"
             app:showSeekBarValue="true" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
