@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -78,9 +79,14 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
         // https://github.com/material-components/material-components-android/issues/1310
         ViewCompat.setOnApplyWindowInsetsListener(
             requireActivity().rootView
-        ) { _, insets ->
-            listView.updatePadding(bottom = insets.safeGetBottomInsets())
-            insets
+        ) { _, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            listView.updatePadding(
+                left = insets.left,
+                bottom = insets.bottom,
+                right = insets.right,
+            )
+            windowInsets
         }
         invalidateSettings()
     }
