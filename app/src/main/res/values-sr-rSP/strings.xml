@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Vidi album</string>
     <string name="action_go_to_artist">Vidi izvodjaca</string>
     <string name="action_go_to_genre">Go to genre</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Idi u pocetni direktorijum</string>
     <string name="action_grant">.</string>
     <string name="action_grid_size">Velicina kartica</string>
@@ -75,6 +76,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Card</string>
     <string name="app_widget_classic_name">Classic</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Small</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Izvodjac</string>
@@ -83,6 +85,7 @@
     <string name="audio_focus_denied">Zvuk se vec reprodukuje</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biografija</string>
@@ -113,6 +116,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Izmene</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">Classic</string>
@@ -132,7 +136,9 @@
     <string name="created_playlist_x">Plejlista %1$s je napravljena</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Trenutno se reprodukuje %1$s izvodjaca %2$s</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Kao tamno</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Izbrisi plejlistu</string>
     <string name="delete_playlist_x"><![CDATA[Izbrisi <b>%1$s</b> plejlistu?]]></string>
     <string name="delete_playlists_title">Izbrisi plejlistu</string>
@@ -148,6 +154,7 @@
     <string name="device_info">Device info</string>
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
     <string name="dialog_title_set_ringtone">Set ringtone</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Da li zelite da ispraznite listu za ignorisanje foldera?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Da li zelite da izbrisete <b>%1$s</b> sa liste za ignorisanje foldera?]]></string>
     <string name="donate">Doniraj</string>
@@ -387,6 +394,7 @@
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">Resetuj sliku izvodjaca</string>
     <string name="restore">Restore</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
     <string name="restored_previous_purchases">Obnovljene su prethodne kupovine</string>
     <string name="restoring_purchase">Restoring purchase…</string>
@@ -436,8 +444,8 @@
     <string name="sort_order">Nacin sortiranja</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Izvodjac</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Izvodjac</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
@@ -463,6 +471,7 @@
     <string name="tiny">Sitno</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">Title</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Danas</string>
     <string name="top_albums">Top albums</string>
     <string name="top_artists">Top artists</string>
@@ -478,6 +487,7 @@
     <string name="up_next">Sledece</string>
     <string name="update_image">Azuriraj sliku</string>
     <string name="updating">Azurira se...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Verzija</string>
@@ -498,8 +508,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
