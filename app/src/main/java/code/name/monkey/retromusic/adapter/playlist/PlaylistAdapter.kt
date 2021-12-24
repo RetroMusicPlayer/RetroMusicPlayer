@@ -35,12 +35,15 @@ import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.playlistPreview.PlaylistPreview
+import code.name.monkey.retromusic.helper.SortOrder.PlaylistSortOrder
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.interfaces.IPlaylistClickListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class PlaylistAdapter(
     override val activity: FragmentActivity,
@@ -52,7 +55,7 @@ class PlaylistAdapter(
     activity,
     ICabHolder,
     R.menu.menu_playlists_selection
-) {
+), PopupTextProvider {
 
     init {
         setHasStableIds(true)
@@ -82,6 +85,17 @@ class PlaylistAdapter(
 
     private fun getPlaylistText(playlist: PlaylistWithSongs): String {
         return MusicUtil.getPlaylistInfoString(activity, playlist.songs.toSongs())
+    }
+
+    override fun getPopupText(position: Int): String {
+        val sectionName: String = when (PreferenceUtil.playlistSortOrder) {
+            PlaylistSortOrder.PLAYLIST_A_Z, PlaylistSortOrder.PLAYLIST_Z_A -> dataSet[position].playlistEntity.playlistName
+            PlaylistSortOrder.PLAYLIST_SONG_COUNT, PlaylistSortOrder.PLAYLIST_SONG_COUNT_DESC -> dataSet[position].songs.size.toString()
+            else -> {
+                return ""
+            }
+        }
+        return MusicUtil.getSectionName(sectionName)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
