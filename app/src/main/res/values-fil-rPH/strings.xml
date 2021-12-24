@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Pumunta sa album</string>
     <string name="action_go_to_artist">Pumunta sa artista</string>
     <string name="action_go_to_genre">Pumunta sa genre</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Pumunta sa start directory</string>
     <string name="action_grant">Payagan</string>
     <string name="action_grid_size">Sukat ng grid</string>
@@ -73,6 +74,7 @@
     <string name="app_widget_big_name">Buong Larawan</string>
     <string name="app_widget_card_name">Kard</string>
     <string name="app_widget_classic_name">Klasiko</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Maliit</string>
     <string name="app_widget_text_name">Minimal na Teksto</string>
     <string name="artist">Artista</string>
@@ -81,6 +83,7 @@
     <string name="audio_focus_denied">Hindi naka-focus ang audio.</string>
     <string name="audio_settings_summary">I-change ang sound settings at i-adjust ang equalizer controls</string>
     <string name="auto">I-auto</string>
+    <string name="backup_restore_settings_summary">I-backup at i-restore ang iyong mga setting, mga playlist</string>
     <string name="backup_restore_title"><![CDATA[Mag-Backup & Mag-Restore]]></string>
     <string name="backup_title">Mga Backup</string>
     <string name="biography">Talambuhay</string>
@@ -111,6 +114,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Mga Pagbabago</string>
     <string name="changelog_summary">Tingnan kung Ano\'ng Bago</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Bilog</string>
     <string name="circular">Pabilog</string>
     <string name="classic">Klasiko</string>
@@ -130,7 +134,9 @@
     <string name="created_playlist_x">Nilikhang playlist %1$s.</string>
     <string name="credit_title">Mga Miyembro at Kontribyutor </string>
     <string name="currently_listening_to_x_by_x">Kasalukuyang nakikinig sa %1$s ni %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Medyo Madilim</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Tanggalin ang playlist</string>
     <string name="delete_playlist_x"><![CDATA[Tanggalin ang playlist na <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Tanggalin ang mga playlist</string>
@@ -146,6 +152,7 @@
     <string name="device_info">Impormasyon ng device</string>
     <string name="dialog_message_set_ringtone">Payagan ang Retro Music na baguhin ang mga setting ng audio</string>
     <string name="dialog_title_set_ringtone">Itakda ang ringtone</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Gusto mo bang burahin ang blacklist?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Gusto mo bang alisin ang <b>%1$s</b> sa blacklist?]]></string>
     <string name="donate">Mag-donate</string>
@@ -385,6 +392,7 @@
     <string name="reset_action">I-reset</string>
     <string name="reset_artist_image">I-reset ang larawan ng artista</string>
     <string name="restore">I-restore</string>
+    <string name="restore_message">Gusto mo bang ibalik ang backup?</string>
     <string name="restored_previous_purchase_please_restart">Ibinalik ang nakaraang pagbili. Mangyaring i-restart ang app upang magamit ang lahat ng mga tampok.</string>
     <string name="restored_previous_purchases">Ibinalik ang mga nakaraang pagbili.</string>
     <string name="restoring_purchase">Ibinabalik ang pagbili…</string>
@@ -434,8 +442,8 @@
     <string name="sort_order">Iayos ang order</string>
     <string name="sort_order_a_z">Paakyat</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Artista</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Artista</string>
     <string name="sort_order_composer">Kompositor</string>
     <string name="sort_order_date">Idinagdag ang petsa</string>
     <string name="sort_order_date_modified">Binagong Petsa</string>
@@ -461,6 +469,7 @@
     <string name="tiny">Maliit</string>
     <string name="tiny_card_style">Maliit na card</string>
     <string name="title">Pamagat</string>
+    <string name="title_new_backup">Bagong Backup</string>
     <string name="today">Ngayon</string>
     <string name="top_albums">Nangungunang mga album</string>
     <string name="top_artists">Nangungunang mga artista</string>
@@ -476,6 +485,7 @@
     <string name="up_next">Susunod</string>
     <string name="update_image">I-update ang larawan</string>
     <string name="updating">Ina-update…</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Bersyon</string>
@@ -496,8 +506,4 @@
     <string name="you_have_to_select_at_least_one_category">Kailangan mong pumili ng kahit isang kategorya.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Ipapasa ka sa website ng tagasubaybay ng isyu.</string>
     <string name="your_account_data_is_only_used_for_authentication">Ginagamit lang ang data ng iyong account para sa pagpapatunay.</string>
-    <string name="restore_message">Gusto mo bang ibalik ang backup?</string>
-    <string name="title_new_backup">Bagong Backup</string>
-    <string name="backup_restore_settings_summary">I-backup at i-restore ang iyong mga setting, mga playlist</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
