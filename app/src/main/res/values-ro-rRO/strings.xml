@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Pagină album</string>
     <string name="action_go_to_artist">Pagină artist</string>
     <string name="action_go_to_genre">Go to genre</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Registrul principal</string>
     <string name="action_grant">Acord</string>
     <string name="action_grid_size">Mărimea grilei</string>
@@ -75,6 +76,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Card</string>
     <string name="app_widget_classic_name">Classic</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Mic</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artist</string>
@@ -83,6 +85,7 @@
     <string name="audio_focus_denied">Folcalizarea audio a fost respinsă.</string>
     <string name="audio_settings_summary">Ajustați setările de sunet și comenzile egalizatorului</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biografie</string>
@@ -113,6 +116,7 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Modificări</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">Classic</string>
@@ -132,7 +136,9 @@
     <string name="created_playlist_x">S-a creat playlist-ul %1$s.</string>
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Acum ascultați %1$s de %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Suriu</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Șterge playlist</string>
     <string name="delete_playlist_x"><![CDATA[Doriți să ștergeți playlist-ul <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Șterge playlist-uri</string>
@@ -148,6 +154,7 @@
     <string name="device_info">Device info</string>
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
     <string name="dialog_title_set_ringtone">Set ringtone</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Doriți să ștergeți lista neagră?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Doriți să ștergeți <b>%1$s</b> din lista neagră?]]></string>
     <string name="donate">Donează</string>
@@ -387,6 +394,7 @@
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">Reseteţi imaginea artistului</string>
     <string name="restore">Restabilire</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">A fost restaurată achiziția anterioară. Reporniți aplicația pentru a utiliza toate funcțiile.</string>
     <string name="restored_previous_purchases">Au fost restabilite achizițiile anterioare.</string>
     <string name="restoring_purchase">Se restabilește achiziția...</string>
@@ -436,8 +444,8 @@
     <string name="sort_order">ordinea de sortare</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Artist</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Artist</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
@@ -463,6 +471,7 @@
     <string name="tiny">Mic</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">Title</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Astăzi</string>
     <string name="top_albums">Albume de top</string>
     <string name="top_artists">Artişti de top</string>
@@ -478,6 +487,7 @@
     <string name="up_next">Urmează</string>
     <string name="update_image">Actualizare imagine</string>
     <string name="updating">Se actualizează...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Versiune</string>
@@ -498,8 +508,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
