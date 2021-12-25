@@ -128,7 +128,7 @@ class FitPlaybackControlsFragment :
     }
 
     override fun setColor(color: MediaNotificationProcessor) {
-        if (ColorUtil.isColorLight(colorControlNormal())) {
+        if (ColorUtil.isColorLight(colorBackground())) {
             lastPlaybackControlsColor =
                 MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
             lastDisabledPlaybackControlsColor =

@@ -77,6 +77,10 @@ fun Context.colorControlNormal() = resolveColor(android.R.attr.colorControlNorma
 
 fun Fragment.colorControlNormal() = resolveColor(android.R.attr.colorControlNormal)
 
+fun Context.colorBackground() = resolveColor(android.R.attr.colorBackground)
+
+fun Fragment.colorBackground() = resolveColor(android.R.attr.colorBackground)
+
 fun Context.textColorPrimary() = resolveColor(android.R.attr.textColorPrimary)
 
 fun Fragment.textColorPrimary() = resolveColor(android.R.attr.textColorPrimary)
