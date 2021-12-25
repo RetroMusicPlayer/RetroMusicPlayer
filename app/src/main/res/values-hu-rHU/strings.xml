@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Ugrás az albumhoz</string>
     <string name="action_go_to_artist">Ugrás az előadóhoz</string>
     <string name="action_go_to_genre">Ugrás a műfajhoz</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Ugrás a kiindulási könyvtárhoz</string>
     <string name="action_grant">Engedélyezés</string>
     <string name="action_grid_size">Rácsméret</string>
@@ -73,6 +74,7 @@
     <string name="app_widget_big_name">Teljes kép</string>
     <string name="app_widget_card_name">Kártya</string>
     <string name="app_widget_classic_name">Klasszikus</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Kicsi</string>
     <string name="app_widget_text_name">Minimális szöveg</string>
     <string name="artist">Előadó</string>
@@ -81,6 +83,7 @@
     <string name="audio_focus_denied">Az audiofókusz megtagadva.</string>
     <string name="audio_settings_summary">Módosítsd a hangbeállításokat és állítsd be a hangszínszabályzó vezérlőit</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_settings_summary">Beállításaid, lejátszási listáid biztonsági mentése és visszaállítása</string>
     <string name="backup_restore_title"><![CDATA[Biztonsági mentés & Visszaállítás]]></string>
     <string name="backup_title">Biztonsági mentések</string>
     <string name="biography">Életrajz</string>
@@ -111,6 +114,7 @@
     <string name="cascading">Növelés</string>
     <string name="changelog">Változtatási napló</string>
     <string name="changelog_summary">Nézd meg az újdonságokat</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Kör</string>
     <string name="circular">Kör alakú</string>
     <string name="classic">Klasszikus</string>
@@ -130,7 +134,9 @@
     <string name="created_playlist_x">Létrehozott lejátszási lista %1$s.</string>
     <string name="credit_title">Tagok és támogatók</string>
     <string name="currently_listening_to_x_by_x">Jelenleg %1$s hallgatása %2$s által.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Kissé sötét</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Lejátszási lista törlése</string>
     <string name="delete_playlist_x"><![CDATA[Törli a <b>%1$s</b> lejátszási listát?]]></string>
     <string name="delete_playlists_title">Lejátszási listák törlése</string>
@@ -146,6 +152,7 @@
     <string name="device_info">Eszköz információ</string>
     <string name="dialog_message_set_ringtone">Engedélyezed, hogy a Retro Music módosítsa az audiobeállításokat</string>
     <string name="dialog_title_set_ringtone">Csengőhang beállítás</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Szeretné kiüríteni a feketelistát?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Szeretné eltávolítani a <b>%1$s</b> elemet a feketelistáról?]]></string>
     <string name="donate">Támogatás</string>
@@ -385,6 +392,7 @@
     <string name="reset_action">Visszaállítás</string>
     <string name="reset_artist_image">Az előadó képének visszaállítása</string>
     <string name="restore">Visszaállítás</string>
+    <string name="restore_message">Vissza szeretnéd állítani a biztonsági mentést?</string>
     <string name="restored_previous_purchase_please_restart">Az előző vásárlás helyreállítása. Kérjük, indítsa újra az alkalmazást az összes funkció használatához.</string>
     <string name="restored_previous_purchases">Korábbi vásárlások visszaállítása.</string>
     <string name="restoring_purchase">A vásárlás visszaállítása ...</string>
@@ -434,8 +442,8 @@
     <string name="sort_order">Sorrend</string>
     <string name="sort_order_a_z">Növekvő</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Előadó</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Előadó</string>
     <string name="sort_order_composer">Zeneszerző</string>
     <string name="sort_order_date">Hozzáadás dátuma</string>
     <string name="sort_order_date_modified">Módosítás dátuma</string>
@@ -461,6 +469,7 @@
     <string name="tiny">Apró</string>
     <string name="tiny_card_style">Apró kártya</string>
     <string name="title">Cím</string>
+    <string name="title_new_backup">Új biztonsági mentés</string>
     <string name="today">Ma</string>
     <string name="top_albums">Legjobb albumok</string>
     <string name="top_artists">Legjobb előadok</string>
@@ -476,6 +485,7 @@
     <string name="up_next">A következő</string>
     <string name="update_image">Kép frissítése</string>
     <string name="updating">Frissítés...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">Felhasználónév</string>
     <string name="username">Felhasználónév</string>
     <string name="version">Verzió</string>
@@ -496,8 +506,4 @@
     <string name="you_have_to_select_at_least_one_category">Legalább egy kategóriát kell kiválasztania</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Továbbítani fogjuk a problémakezelő weboldalra.</string>
     <string name="your_account_data_is_only_used_for_authentication">Fiókja adatait kizárólag a hitelesítéshez fogjuk használni.</string>
-    <string name="restore_message">Vissza szeretnéd állítani a biztonsági mentést?</string>
-    <string name="title_new_backup">Új biztonsági mentés</string>
-    <string name="backup_restore_settings_summary">Beállításaid, lejátszási listáid biztonsági mentése és visszaállítása</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>

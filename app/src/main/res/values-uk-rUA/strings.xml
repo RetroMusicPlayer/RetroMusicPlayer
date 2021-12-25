@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Перейти до альбому</string>
     <string name="action_go_to_artist">Перейти до виконавця</string>
     <string name="action_go_to_genre">Перейти до жанру</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Перейти до початкової директорії</string>
     <string name="action_grant">Надати</string>
     <string name="action_grid_size">Розмір сітки</string>
@@ -77,6 +78,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Ретро музика - Картка</string>
     <string name="app_widget_classic_name">Ретро-музика - Класичний</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Ретро-музика - Малий</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Виконавець</string>
@@ -85,6 +87,7 @@
     <string name="audio_focus_denied">В отриманні аудіофокусу відмовлено.</string>
     <string name="audio_settings_summary">Змінити налаштування звуку та налаштувати параметри еквалайзера</string>
     <string name="auto">Автоматично</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Життєпис</string>
@@ -115,6 +118,7 @@
     <string name="cascading">Каскад</string>
     <string name="changelog">Історія змін</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Коло</string>
     <string name="circular">Круглий</string>
     <string name="classic">Класичний</string>
@@ -134,7 +138,9 @@
     <string name="created_playlist_x">Створено список відтворення %1$s.</string>
     <string name="credit_title">Учасники та меценати </string>
     <string name="currently_listening_to_x_by_x">Зараз грає %1$s від %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Майже темна</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Видалити список відтворення</string>
     <string name="delete_playlist_x"><![CDATA[Видалити список відтворення <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Видалити списки відтворення</string>
@@ -150,6 +156,7 @@
     <string name="device_info">Інформація про пристрій</string>
     <string name="dialog_message_set_ringtone">Дозволити Retro Music змінювати налаштування звуку</string>
     <string name="dialog_title_set_ringtone">Встановити як мелодію дзвінка</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Ви хочете очистити чорний список?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Вилучити <b>%1$s</b> з чорного списку?]]></string>
     <string name="donate">Підтримати</string>
@@ -389,6 +396,7 @@
     <string name="reset_action">Скинути</string>
     <string name="reset_artist_image">Скинути зображення виконавця</string>
     <string name="restore">Відновити</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Відновлено попередню покупку. Перезапустіть додаток, щоб скористатися всіма функціями.</string>
     <string name="restored_previous_purchases">Відновлені попередні покупки.</string>
     <string name="restoring_purchase">Відновлення покупки…</string>
@@ -438,8 +446,8 @@
     <string name="sort_order">Порядок сортування</string>
     <string name="sort_order_a_z">За зростанням</string>
     <string name="sort_order_album">Альбом</string>
-    <string name="sort_order_artist">Виконавець</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Виконавець</string>
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата додавання</string>
     <string name="sort_order_date_modified">Дата змінення</string>
@@ -465,6 +473,7 @@
     <string name="tiny">Дрібний</string>
     <string name="tiny_card_style">Крихітна картка</string>
     <string name="title">Назва</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Сьогодні</string>
     <string name="top_albums">Топ альбомів</string>
     <string name="top_artists">Топ виконавців</string>
@@ -480,6 +489,7 @@
     <string name="up_next">Наступне</string>
     <string name="update_image">Оновити зображення</string>
     <string name="updating">Оновлення…</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">Ім\'я користувача</string>
     <string name="version">Версія додатку</string>
@@ -500,8 +510,4 @@
     <string name="you_have_to_select_at_least_one_category">Виберіть принаймні одну категорію.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вас буде перенаправлено на сайт відстеження проблем.</string>
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>

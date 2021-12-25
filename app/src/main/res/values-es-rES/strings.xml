@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Ir al álbum</string>
     <string name="action_go_to_artist">Ir al artista</string>
     <string name="action_go_to_genre">Ir al género</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Ir al directorio de inicio</string>
     <string name="action_grant">Permitir</string>
     <string name="action_grid_size">Tamaño de la cuadricula</string>
@@ -73,6 +74,7 @@
     <string name="app_widget_big_name">Imagen completa</string>
     <string name="app_widget_card_name">Tarjeta</string>
     <string name="app_widget_classic_name">Clásico</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Pequeño</string>
     <string name="app_widget_text_name">Texto mínimo</string>
     <string name="artist">Artista</string>
@@ -81,6 +83,7 @@
     <string name="audio_focus_denied">Enfoque de audio denegado.</string>
     <string name="audio_settings_summary">Cambia los ajustes de sonido y ajusta los controles del ecualizador</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Copia de seguridad / Restauración]]></string>
     <string name="backup_title">Guardar</string>
     <string name="biography">Biografías.</string>
@@ -111,6 +114,7 @@
     <string name="cascading">Cascadita</string>
     <string name="changelog">Cambios</string>
     <string name="changelog_summary">Consulte las novedades</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Círculo</string>
     <string name="circular">Circulares</string>
     <string name="classic">Clásicos</string>
@@ -130,7 +134,9 @@
     <string name="created_playlist_x">Lista de reproducción %1$s creada.</string>
     <string name="credit_title">Miembros y colaboradores </string>
     <string name="currently_listening_to_x_by_x">Actualmente estás escuchando %1$s de %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Un poco Oscuro</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Eliminar lista de reproducción</string>
     <string name="delete_playlist_x"><![CDATA[¿Eliminar la lista de reproducción <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Eliminar listas de reproducción</string>
@@ -146,6 +152,7 @@
     <string name="device_info">Información del dispositivo</string>
     <string name="dialog_message_set_ringtone">Permitir a Retro Music modificar los ajustes de audio</string>
     <string name="dialog_title_set_ringtone">Establecer tono de llamada</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">¿Quieres limpiar la lista negra?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[¿Quiere eliminar <b>%1$s</b> de la lista negra?]]></string>
     <string name="donate">Donar</string>
@@ -385,6 +392,7 @@
     <string name="reset_action">Restablecer</string>
     <string name="reset_artist_image">Reiniciar imagen del artista</string>
     <string name="restore">Restaurar</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Compra anterior restaurada. Por favor, reinicie la aplicación para hacer uso de todas las funciones.</string>
     <string name="restored_previous_purchases">Compras anteriores restauradas.</string>
     <string name="restoring_purchase">Restaurando compra…</string>
@@ -434,8 +442,8 @@
     <string name="sort_order">Ordenar por</string>
     <string name="sort_order_a_z">Ascendente</string>
     <string name="sort_order_album">Álbum</string>
-    <string name="sort_order_artist">Artista</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Artista</string>
     <string name="sort_order_composer">Compositor</string>
     <string name="sort_order_date">Fecha agregada</string>
     <string name="sort_order_date_modified">Fecha de modificación</string>
@@ -461,6 +469,7 @@
     <string name="tiny">Diminuto</string>
     <string name="tiny_card_style">Tarjeta diminuta</string>
     <string name="title">Titulo</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Hoy</string>
     <string name="top_albums">Álbumes más reproducidos</string>
     <string name="top_artists">Artistas más reproducidos</string>
@@ -476,6 +485,7 @@
     <string name="up_next">A continuación</string>
     <string name="update_image">Actualizar imagen</string>
     <string name="updating">Actualizando…</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">Nombre de Usuario</string>
     <string name="username">Usuario</string>
     <string name="version">Versión</string>
@@ -496,8 +506,4 @@
     <string name="you_have_to_select_at_least_one_category">Tienes que seleccionar al menos una categoría.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Serás redirigido al sitio web para reportar incidencias.</string>
     <string name="your_account_data_is_only_used_for_authentication">Los datos de tu cuenta sólo se utilizan para la autenticación.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>

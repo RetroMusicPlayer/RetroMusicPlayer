@@ -19,6 +19,7 @@
     <string name="action_go_to_album">رفتن به آلبوم</string>
     <string name="action_go_to_artist">رفتن به صفحه هنرمند</string>
     <string name="action_go_to_genre">رفتن به ژانر موسیقی</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">رفتن به منوی شروع و آغاز</string>
     <string name="action_grant">اعطا کردن</string>
     <string name="action_grid_size">اندازه ی شبکه</string>
@@ -73,6 +74,7 @@
     <string name="app_widget_big_name">تصویر کامل</string>
     <string name="app_widget_card_name">کارت</string>
     <string name="app_widget_classic_name">کلاسیک</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">كوچك</string>
     <string name="app_widget_text_name">متن حداقلی</string>
     <string name="artist">هنرمند</string>
@@ -81,6 +83,7 @@
     <string name="audio_focus_denied">حالت تمرکز بر صدا قطع شد‌.</string>
     <string name="audio_settings_summary">تنظیمات صدا را تغییر دهید</string>
     <string name="auto">خودکار</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[پشتیبان‌گیری و بازیابی]]></string>
     <string name="backup_title">پشتیبان گیری ها</string>
     <string name="biography">زندگینامه</string>
@@ -111,6 +114,7 @@
     <string name="cascading">کاسکاد</string>
     <string name="changelog">لیست تغییرات</string>
     <string name="changelog_summary">ببینید چه چیزی جدید و نو است</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">دایره</string>
     <string name="circular">دایره ای</string>
     <string name="classic">کلاسیک</string>
@@ -130,7 +134,9 @@
     <string name="created_playlist_x">پلی لیست %1$s ساخته شد.</string>
     <string name="credit_title">اعضا و دست اندرکاران </string>
     <string name="currently_listening_to_x_by_x">در حال حاضر شما به s$1% از s$2% گوش می‌دهید.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">تقریبا مشکی</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">حذف کردن پلی لیست</string>
     <string name="delete_playlist_x"><![CDATA[حذف پلی لیست <b>%1$s</b>?<b>?]]></string>
     <string name="delete_playlists_title">حذف کردن پلی لیست ها</string>
@@ -146,6 +152,7 @@
     <string name="device_info">اطلاعات دستگاه</string>
     <string name="dialog_message_set_ringtone">به رترو موزیک دسترسی به قسمت صوت ها بدهید</string>
     <string name="dialog_title_set_ringtone">تنظیم آهنگ زنگ</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">ایا می‌خواهید بلک لیست را پاک کنید؟</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[آیا شما میخواهید آهنگ X را از لیست سیاه حذف کنید؟]]></string>
     <string name="donate">کمک مالی</string>
@@ -385,6 +392,7 @@
     <string name="reset_action">بازنشانی</string>
     <string name="reset_artist_image">تنظیم مجدد تصویر هنرمند</string>
     <string name="restore">بازیابی</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">خرید قبلی را بازیابی کرد، لطفا برای استفاده از تمام ویژگی ها ، برنامه را دوباره راه اندازی کنید.</string>
     <string name="restored_previous_purchases">نسخه‌ قبلی بازگردانده شد.</string>
     <string name="restoring_purchase">در حال برگرداندن پول…</string>
@@ -434,8 +442,8 @@
     <string name="sort_order">مرتب سازی</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">آلبوم</string>
-    <string name="sort_order_artist">هنرمند</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">هنرمند</string>
     <string name="sort_order_composer">آهنگساز</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
@@ -461,6 +469,7 @@
     <string name="tiny">Tiny</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">Title</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Today</string>
     <string name="top_albums">Top albums</string>
     <string name="top_artists">Top artists</string>
@@ -476,6 +485,7 @@
     <string name="up_next">Up next</string>
     <string name="update_image">Update image</string>
     <string name="updating">Updating…</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">Username</string>
     <string name="version">Version</string>
@@ -496,8 +506,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>

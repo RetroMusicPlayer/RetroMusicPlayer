@@ -19,6 +19,7 @@
     <string name="action_go_to_album">إنتقل إلى الالبوم</string>
     <string name="action_go_to_artist">إنتقل إلى الفنان</string>
     <string name="action_go_to_genre">إنتقل إلى النوع</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">إنتقل إلى الدليل</string>
     <string name="action_grant">امنح</string>
     <string name="action_grid_size">حجم الشبكة</string>
@@ -83,6 +84,7 @@
     <string name="app_widget_big_name">صورة كاملة</string>
     <string name="app_widget_card_name">ريترو ميوزك - بطاقة</string>
     <string name="app_widget_classic_name">ريترو ميوزك - تقليدي</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">ريترو ميوزك - صغير</string>
     <string name="app_widget_text_name">الحد الأدنى للنص</string>
     <string name="artist">فنان</string>
@@ -91,6 +93,7 @@
     <string name="audio_focus_denied">تم منع تركيز الصوت</string>
     <string name="audio_settings_summary">تغيير إعدادات الصوت وضبط عناصر التحكم في موازن الصوت</string>
     <string name="auto">تلقائي</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">سيرة ذاتية</string>
@@ -121,6 +124,7 @@
     <string name="cascading">المتتالية</string>
     <string name="changelog">سجل التغيرات</string>
     <string name="changelog_summary">تحقق من الجديد</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">دائرية</string>
     <string name="circular">دائري</string>
     <string name="classic">كلاسيكي</string>
@@ -140,7 +144,9 @@
     <string name="created_playlist_x">قائمة التشغيل الموجودة %1$s.</string>
     <string name="credit_title">الافراد والمساهمين</string>
     <string name="currently_listening_to_x_by_x">يستمع حالياً إلى %1$s لـ %2$s</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">أسود قليلاً</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">حذف قائمة التشغيل</string>
     <string name="delete_playlist_x"><![CDATA[حذف قائمة التشغيل <b>%1$s</b>؟]]></string>
     <string name="delete_playlists_title">حذف قوائم التشغيل</string>
@@ -156,6 +162,7 @@
     <string name="device_info">معلومات الجهاز</string>
     <string name="dialog_message_set_ringtone">السمات لتطبيق ريترو ميوزك بتعديل اعدادات الصوت</string>
     <string name="dialog_title_set_ringtone">ك نغمة رنين</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">هل تريد إزالة القائمة السوداء؟</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[هل تريد إزالة <b>%1$s</b> من القائمة السوداء]]></string>
     <string name="donate">تبرع</string>
@@ -396,6 +403,7 @@
     <string name="reset_action">استرداد</string>
     <string name="reset_artist_image">اعادة ضبط صور الالبومات</string>
     <string name="restore">استرجاع</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">تم استرداد عملية الشراء السابقة. الرجاء اعادة تشغيل التطبيق الاستمتاع بكافة المميزات.</string>
     <string name="restored_previous_purchases">تم </string>
     <string name="restoring_purchase">استرداد عملية الشراء...</string>
@@ -445,8 +453,8 @@
     <string name="sort_order">ترتيب الفرز</string>
     <string name="sort_order_a_z">تصاعدي</string>
     <string name="sort_order_album">الالبوم</string>
-    <string name="sort_order_artist">الفنان</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">الفنان</string>
     <string name="sort_order_composer">المؤلف</string>
     <string name="sort_order_date">التاريخ</string>
     <string name="sort_order_date_modified">تاريخ التعديل</string>
@@ -472,6 +480,7 @@
     <string name="tiny">صغير</string>
     <string name="tiny_card_style">بطاقة صغيرة</string>
     <string name="title">عنوان</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">اليوم</string>
     <string name="top_albums">افضل الالبومات</string>
     <string name="top_artists">افضل الفنانين</string>
@@ -487,6 +496,7 @@
     <string name="up_next">التالي</string>
     <string name="update_image">تحديث الصورة</string>
     <string name="updating">تحديث...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">إسم المستخدم</string>
     <string name="username">أسم المستخدم</string>
     <string name="version">الإصدار</string>
@@ -507,8 +517,4 @@
     <string name="you_have_to_select_at_least_one_category">عليك اختيار فئة واحدة على الأقل.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">سيتم تحويلك الى صفحة سجل الاخطاء</string>
     <string name="your_account_data_is_only_used_for_authentication">بيانات حسابك تستخدم لتوثيق فقط.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>

@@ -19,6 +19,7 @@
     <string name="action_go_to_album">アルバムに移動</string>
     <string name="action_go_to_artist">アーティストに移動</string>
     <string name="action_go_to_genre">ジャンルに移動</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">最初のディレクトリに移動</string>
     <string name="action_grant">承諾</string>
     <string name="action_grid_size">グリッドサイズ</string>
@@ -71,6 +72,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">レトロミュージック - カード</string>
     <string name="app_widget_classic_name">レトロミュージック - クラシック</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">レトロミュージック - 小</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">アーティスト</string>
@@ -79,6 +81,7 @@
     <string name="audio_focus_denied">オーディオのフォーカスが拒否されました。</string>
     <string name="audio_settings_summary">サウンド設定を変更し、イコライザーコントロールを調整する</string>
     <string name="auto">自動</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">バイオグラフィー</string>
@@ -110,6 +113,7 @@
     <string name="cascading">重ねて表示</string>
     <string name="changelog">パッチノート</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">サークル</string>
     <string name="circular">円</string>
     <string name="classic">クラシック</string>
@@ -129,7 +133,9 @@
     <string name="created_playlist_x">プレイリストを作成しました %1$s</string>
     <string name="credit_title">メンバーと貢献者</string>
     <string name="currently_listening_to_x_by_x">現在、 %1$s によって %2$s で聴いています。</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">ダーク</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">プレイリストを削除</string>
     <string name="delete_playlist_x"><![CDATA[プレイリスト <b>%1$s</b> を削除しますか?]]></string>
     <string name="delete_playlists_title">プレイリストを削除</string>
@@ -145,6 +151,7 @@
     <string name="device_info">端末の情報</string>
     <string name="dialog_message_set_ringtone">Retro Musicにオーディオ設定の変更を許可する</string>
     <string name="dialog_title_set_ringtone">着信音に設定</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">ブラックリストを削除しますか?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[<b>%1$s</b> をブラックリストから削除しますか?]]></string>
     <string name="donate">寄付する</string>
@@ -384,6 +391,7 @@
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">アーティスト画像をリセット</string>
     <string name="restore">復元</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">購入を復元しました。アプリを再起動してフルバージョンをご堪能ください！</string>
     <string name="restored_previous_purchases">購入を復元しました</string>
     <string name="restoring_purchase">購入を復元しています...</string>
@@ -433,8 +441,8 @@
     <string name="sort_order">順番をソート</string>
     <string name="sort_order_a_z">昇順</string>
     <string name="sort_order_album">アルバム</string>
-    <string name="sort_order_artist">アーティスト</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">アーティスト</string>
     <string name="sort_order_composer">作曲家</string>
     <string name="sort_order_date">日付</string>
     <string name="sort_order_date_modified">最後の編集日</string>
@@ -460,6 +468,7 @@
     <string name="tiny">ティニー</string>
     <string name="tiny_card_style">Tiny card</string>
     <string name="title">主題</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">今日</string>
     <string name="top_albums">トップアルバム</string>
     <string name="top_artists">トップアーティスト</string>
@@ -475,6 +484,7 @@
     <string name="up_next">次</string>
     <string name="update_image">画像を更新</string>
     <string name="updating">更新中...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">ユーザー名</string>
     <string name="version">バージョン</string>
@@ -495,8 +505,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>

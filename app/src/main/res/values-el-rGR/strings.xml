@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Μετάβαση στο άλμπουμ</string>
     <string name="action_go_to_artist">Μετάβαση στον καλλιτέχνη</string>
     <string name="action_go_to_genre">Μετάβαση στο είδος</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Μετάβαση σε κατάλογο εκκίνησης</string>
     <string name="action_grant">Παραχώρηση</string>
     <string name="action_grid_size">Μέγεθος Πλέγματος</string>
@@ -73,6 +74,7 @@
     <string name="app_widget_big_name">Πλήρης εικόνα</string>
     <string name="app_widget_card_name">Κάρτα</string>
     <string name="app_widget_classic_name">Κλασσικό</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Μικρό</string>
     <string name="app_widget_text_name">Ελάχιστο Κείμενο</string>
     <string name="artist">Καλλιτέχνης</string>
@@ -81,6 +83,7 @@
     <string name="audio_focus_denied">Η εστίαση ήχου απορρίφθηκε.</string>
     <string name="audio_settings_summary">Αλλάξτε τις ρυθμίσεις ήχου και προσαρμόστε τα χειριστήρια του ισοσταθμιστή</string>
     <string name="auto">Αυτόματο</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Αντίγραφο Ασφαλείας & Επαναφορά]]></string>
     <string name="backup_title">Αντίγραφα Ασφαλείας</string>
     <string name="biography">Βιογραφία</string>
@@ -111,6 +114,7 @@
     <string name="cascading">Με υπερχείλιση</string>
     <string name="changelog">Λίστα Αλλαγών</string>
     <string name="changelog_summary">Δείτε τι νέο υπάρχει</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Κύκλος</string>
     <string name="circular">&gt;Κυκλικό</string>
     <string name="classic">Κλασσικό</string>
@@ -130,7 +134,9 @@
     <string name="created_playlist_x">Δημιουργήθηκε η λίστα αναπαραγωγής %1$s.</string>
     <string name="credit_title">Μέλη και συνεισφέροντες </string>
     <string name="currently_listening_to_x_by_x">Παίζει το %1$s από τους %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Κάπως Σκούρο</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Διαγραφή playlist</string>
     <string name="delete_playlist_x"><![CDATA[Διαγραφή της λίστα αναπαραγωγής <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Διαγραφή αυτών των λιστών αναπαραγωγής</string>
@@ -146,6 +152,7 @@
     <string name="device_info">Πληροφορίες συσκευής</string>
     <string name="dialog_message_set_ringtone">Επιτρέψτε στο Retro Music να τροποποιεί τις ρυθμίσεις ήχου</string>
     <string name="dialog_title_set_ringtone">Ορισμός ήχου κλήσης</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Εκκαθάριση της blacklist?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Αφαίρεση <b>%1$s</b> από τη blacklist?]]></string>
     <string name="donate">Δώρισε</string>
@@ -385,6 +392,7 @@
     <string name="reset_action">Επαναφορά</string>
     <string name="reset_artist_image">Επαναφορά εικόνας καλλιτέχνη</string>
     <string name="restore">Επαναφορά</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Επαναφορά προηγούμενης αγοράς. Επανεκκινήστε την εφαρμογή για να χρησιμοποιήσετε όλες τις δυνατότητες.</string>
     <string name="restored_previous_purchases">Επαναφορά προηγούμενων αγορών επιτυχής.</string>
     <string name="restoring_purchase">Επαναφορά αγοράς…</string>
@@ -434,8 +442,8 @@
     <string name="sort_order">Σειρά Διάταξης</string>
     <string name="sort_order_a_z">Αύξουσα</string>
     <string name="sort_order_album">Άλμπουμ</string>
-    <string name="sort_order_artist">Καλλιτέχνης</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Καλλιτέχνης</string>
     <string name="sort_order_composer">Συνθέτης</string>
     <string name="sort_order_date">Ημερομηνία προσθήκης</string>
     <string name="sort_order_date_modified">Ημερομηνία τροποποιήσης</string>
@@ -461,6 +469,7 @@
     <string name="tiny">Μικροσκοπική</string>
     <string name="tiny_card_style">Μικρή κάρτα</string>
     <string name="title">Τίτλος</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Σήμερα</string>
     <string name="top_albums">Κορυφαία άλμπουμ</string>
     <string name="top_artists">Κορυφαίοι καλλιτέχνες</string>
@@ -476,6 +485,7 @@
     <string name="up_next">Αμέσως επόμενο</string>
     <string name="update_image">Ενημέρωση εικόνας</string>
     <string name="updating">Ενημέρωση σε εξέλιξη...</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">Όνομα Χρήστη</string>
     <string name="username">Όνομα χρήστη</string>
     <string name="version">Έκδοση</string>
@@ -496,8 +506,4 @@
     <string name="you_have_to_select_at_least_one_category">Πρέπει να επιλέξετε τουλάχιστον μία κατηγορία.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Θα προωθηθείτε στον ιστότοπο παρακολούθησης ζητημάτων.</string>
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>

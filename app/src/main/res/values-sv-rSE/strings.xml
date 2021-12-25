@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Gå till album</string>
     <string name="action_go_to_artist">Gå till artisten</string>
     <string name="action_go_to_genre">Gå till genren</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Gå till startmapp</string>
     <string name="action_grant">Godkänn</string>
     <string name="action_grid_size">Rutnätsstorlek</string>
@@ -73,6 +74,7 @@
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Kort</string>
     <string name="app_widget_classic_name">Klassisk</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Liten</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artist</string>
@@ -81,6 +83,7 @@
     <string name="audio_focus_denied">Ljudfokus nekas.</string>
     <string name="audio_settings_summary">Ändra ljudinställningarna och justera equalizer-kontrollerna</string>
     <string name="auto">Auto</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biografi</string>
@@ -111,6 +114,7 @@
     <string name="cascading">Släng iväg</string>
     <string name="changelog">Ändringslogg</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Cirkel</string>
     <string name="circular">Cirkulär</string>
     <string name="classic">Klassisk</string>
@@ -130,7 +134,9 @@
     <string name="created_playlist_x">Skapade spellistan %1$s.</string>
     <string name="credit_title">Medlemmar och bidragsgivare</string>
     <string name="currently_listening_to_x_by_x">Lyssnar just nu på %1$s av %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Ganska mörkt</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Radera spellista</string>
     <string name="delete_playlist_x"><![CDATA[Radera spellistan <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Radera spellistor</string>
@@ -146,6 +152,7 @@
     <string name="device_info">Enhetsinformation</string>
     <string name="dialog_message_set_ringtone">Låt Retro Music ändra ljudinställningar</string>
     <string name="dialog_title_set_ringtone">Ställ in ringsignal</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Vill du rensa svartlistan?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Vill du ta bort <b>%1$s</b> från svartlistan?]]></string>
     <string name="donate">Donera</string>
@@ -385,6 +392,7 @@
     <string name="reset_action">Återställ</string>
     <string name="reset_artist_image">Återställ artistbild</string>
     <string name="restore">Restore</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Återställde tidigare köp. Starta om appen för att använda alla funktioner.</string>
     <string name="restored_previous_purchases">Återställde tidigare köp.</string>
     <string name="restoring_purchase">Återställer köp…</string>
@@ -434,8 +442,8 @@
     <string name="sort_order">Sorteras efter</string>
     <string name="sort_order_a_z">Stigande</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Artist</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Artist</string>
     <string name="sort_order_composer">Kompositör</string>
     <string name="sort_order_date">Tilläggningsdatum</string>
     <string name="sort_order_date_modified">Ändringsdatum</string>
@@ -461,6 +469,7 @@
     <string name="tiny">Minimal</string>
     <string name="tiny_card_style">Litet kort</string>
     <string name="title">Titel</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">I dag</string>
     <string name="top_albums">Toppalbum</string>
     <string name="top_artists">Toppartister</string>
@@ -476,6 +485,7 @@
     <string name="up_next">Spelas härnäst</string>
     <string name="update_image">Uppdatera bilden</string>
     <string name="updating">Uppdaterar…</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">User Name</string>
     <string name="username">Användarnamn</string>
     <string name="version">Version</string>
@@ -496,8 +506,4 @@
     <string name="you_have_to_select_at_least_one_category">Du måste välja minst en kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dina kontodata används endast för verifiering.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>

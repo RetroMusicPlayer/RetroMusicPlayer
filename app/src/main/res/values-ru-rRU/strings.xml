@@ -19,6 +19,7 @@
     <string name="action_go_to_album">Перейти к альбому</string>
     <string name="action_go_to_artist">Перейти к исполнителю</string>
     <string name="action_go_to_genre">Перейти к жанру</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">В начало</string>
     <string name="action_grant">Разрешить</string>
     <string name="action_grid_size">Размер сетки</string>
@@ -77,6 +78,7 @@
     <string name="app_widget_big_name">Полное Изображение</string>
     <string name="app_widget_card_name">Компактный</string>
     <string name="app_widget_classic_name">Классический</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Маленькое изображение</string>
     <string name="app_widget_text_name">Минималистичный текст</string>
     <string name="artist">Исполнитель</string>
@@ -85,6 +87,7 @@
     <string name="audio_focus_denied">Фокус на аудио отключен.</string>
     <string name="audio_settings_summary">Измените настройки звука и отрегулируйте настройки эквалайзера</string>
     <string name="auto">Авто</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Биография</string>
@@ -115,6 +118,7 @@
     <string name="cascading">Каскадный</string>
     <string name="changelog">Список изменений</string>
     <string name="changelog_summary">Узнайте, что нового</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Круг</string>
     <string name="circular">Круговая</string>
     <string name="classic">Классическая</string>
@@ -134,7 +138,9 @@
     <string name="created_playlist_x">Создан плейлист %1$s.</string>
     <string name="credit_title">Участники и помощники</string>
     <string name="currently_listening_to_x_by_x">Сейчас играет %1$s от %2$s.</string>
+    <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Тёмная</string>
+    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Удалить плейлист</string>
     <string name="delete_playlist_x"><![CDATA[Удалить плейлист <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Удалить плейлисты</string>
@@ -150,6 +156,7 @@
     <string name="device_info">Информация об устройстве</string>
     <string name="dialog_message_set_ringtone">Разрешить Retro Music изменять настройки звука</string>
     <string name="dialog_title_set_ringtone">Выбрать рингтон</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Вы хотите очистить черный список?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Вы хотите удалить <b>%1$s</b> из черного списка?]]></string>
     <string name="donate">Пожертвовать</string>
@@ -389,6 +396,7 @@
     <string name="reset_action">Сбросить</string>
     <string name="reset_artist_image">Сбросить изображение исполнителя</string>
     <string name="restore">Восстановить</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Предыдущая покупка восстановлена. Перезагрузите приложение, чтобы использовать все функции.</string>
     <string name="restored_previous_purchases">Восстановленные предыдущие покупки.</string>
     <string name="restoring_purchase">Восстановление покупки ...</string>
@@ -438,8 +446,8 @@
     <string name="sort_order">Порядок сортировки</string>
     <string name="sort_order_a_z">По возрастанию</string>
     <string name="sort_order_album">Альбом</string>
-    <string name="sort_order_artist">Исполнитель</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_artist">Исполнитель</string>
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата</string>
     <string name="sort_order_date_modified">Дата изменения</string>
@@ -465,6 +473,7 @@
     <string name="tiny">Маленькая</string>
     <string name="tiny_card_style">Крошечная карточка</string>
     <string name="title">Название</string>
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Сегодня</string>
     <string name="top_albums">Топ альбомов</string>
     <string name="top_artists">Топ исполнителей</string>
@@ -480,6 +489,7 @@
     <string name="up_next">Следующие песни</string>
     <string name="update_image">Обновить изображение</string>
     <string name="updating">Обновляется…</string>
+    <string name="user_images_description">User Images</string>
     <string name="user_name">Имя Пользователя</string>
     <string name="username">Имя пользователя</string>
     <string name="version">Версия</string>
@@ -500,8 +510,4 @@
     <string name="you_have_to_select_at_least_one_category">Выберите хотя бы одну категорию.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
     <string name="your_account_data_is_only_used_for_authentication">Данные вашей учетной записи используются только для аутентификации.</string>
-    <string name="restore_message">Do you want to restore backup?</string>
-    <string name="title_new_backup">New Backup</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="app_widget_md3_name">MD3</string>
 </resources>
