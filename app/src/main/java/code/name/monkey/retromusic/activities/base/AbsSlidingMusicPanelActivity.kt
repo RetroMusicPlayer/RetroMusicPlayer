@@ -400,12 +400,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (hide) {
             bottomSheetBehavior.peekHeight = -windowInsets.safeGetBottomInsets()
             bottomSheetBehavior.state = STATE_COLLAPSED
-            ViewCompat.setElevation(binding.slidingPanel, 0f)
-            ViewCompat.setElevation(binding.bottomNavigationView, 10f)
+            libraryViewModel.setFabMargin(if (isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0)
+            binding.slidingPanel.elevation = 0F
+            binding.bottomNavigationView.elevation = 10F
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-                ViewCompat.setElevation(binding.slidingPanel, 10f)
-                ViewCompat.setElevation(binding.bottomNavigationView, 10f)
+                binding.slidingPanel.elevation = 0F
+                binding.bottomNavigationView.elevation = 10F
                 if (isBottomNavVisible) {
                     println("List")
                     if (animate) {
@@ -413,6 +414,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     } else {
                         bottomSheetBehavior.peekHeight = heightOfBarWithTabs
                     }
+                    libraryViewModel.setFabMargin(dip(R.dimen.mini_player_height_expanded))
                 } else {
                     println("Details")
                     if (animate) {
@@ -423,6 +425,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                         bottomSheetBehavior.peekHeight = heightOfBar
                         binding.slidingPanel.bringToFront()
                     }
+                    libraryViewModel.setFabMargin(dip(R.dimen.mini_player_height))
                 }
             }
         }
