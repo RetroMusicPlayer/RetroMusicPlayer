@@ -21,7 +21,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -126,13 +125,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
         _binding = FragmentPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
-        if (PreferenceUtil.isSnowFalling) {
-            binding.snowfallView.isVisible = true
-            binding.snowfallView.restartFalling()
-        } else {
-            binding.snowfallView.isVisible = false
-            binding.snowfallView.stopFalling()
-        }
+        startOrStopSnow(PreferenceUtil.isSnowFalling)
 
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .registerOnSharedPreferenceChangeListener(this)
@@ -168,7 +161,13 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == SNOWFALL && PreferenceUtil.isSnowFalling) {
+        if (key == SNOWFALL) {
+            startOrStopSnow(PreferenceUtil.isSnowFalling)
+        }
+    }
+
+    private fun startOrStopSnow(isSnowFalling: Boolean) {
+        if (isSnowFalling) {
             binding.snowfallView.isVisible = true
             binding.snowfallView.restartFalling()
         } else {
