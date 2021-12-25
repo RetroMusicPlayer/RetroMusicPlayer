@@ -24,8 +24,6 @@ import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.CROSS_FADE_DURATION;
 import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
 import static code.name.monkey.retromusic.service.AudioFader.startFadeAnimator;
-import static code.name.monkey.retromusic.service.notification.PlayingNotification.NOTIFY_MODE_BACKGROUND;
-import static code.name.monkey.retromusic.service.notification.PlayingNotification.NOTIFY_MODE_FOREGROUND;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -371,7 +369,6 @@ public class MusicService extends MediaBrowserServiceCompat
     private PowerManager.WakeLock wakeLock;
     private NotificationManager notificationManager;
     private boolean isForeground = false;
-    private int notifyMode = NOTIFY_MODE_BACKGROUND;
 
     private static Bitmap copy(Bitmap bitmap) {
         Bitmap.Config config = bitmap.getConfig();
@@ -1460,34 +1457,38 @@ public class MusicService extends MediaBrowserServiceCompat
     }
 
     private Unit startForegroundOrNotify() {
-        int newNotifyMode = isPlaying() ? NOTIFY_MODE_FOREGROUND : NOTIFY_MODE_BACKGROUND;
+        if (playingNotification != null && getCurrentSong().getId() != -1) {
+            boolean isPlaying = isPlaying();
 
-        if (notifyMode != newNotifyMode && newNotifyMode == NOTIFY_MODE_BACKGROUND) {
-            // This makes the notification dismissible
-            // We can't call stopForeground(false) on A12 though, which may result in crashes
-            // when we call startForeground after that e.g. when Alarm goes off, 
-            if (Build.VERSION.SDK_INT < VERSION_CODES.S) stopForeground(false);
-        }
-
-        if (newNotifyMode == NOTIFY_MODE_FOREGROUND) {
-            // Specify that this is a media service, if supported.
-            if (VersionUtils.hasQ()) {
-                startForeground(
-                        PlayingNotification.NOTIFICATION_ID, playingNotification.build(),
-                        ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
-                );
-            } else {
-                startForeground(PlayingNotification.NOTIFICATION_ID, playingNotification.build());
+            if ((isForeground != isPlaying) && !isPlaying) {
+                // This makes the notification dismissible
+                // We can't call stopForeground(false) on A12 though, which may result in crashes
+                // when we call startForeground after that e.g. when Alarm goes off,
+                if (Build.VERSION.SDK_INT < VERSION_CODES.S) {
+                    stopForeground(false);
+                    isForeground = false;
+                }
             }
 
-            isForeground = true;
-        } else {
-            // If we are already in foreground just update the notification
-            notificationManager.notify(
-                    PlayingNotification.NOTIFICATION_ID, playingNotification.build()
-            );
+            if (!isForeground && isPlaying) {
+                // Specify that this is a media service, if supported.
+                if (VersionUtils.hasQ()) {
+                    startForeground(
+                            PlayingNotification.NOTIFICATION_ID, playingNotification.build(),
+                            ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+                    );
+                } else {
+                    startForeground(PlayingNotification.NOTIFICATION_ID, playingNotification.build());
+                }
+
+                isForeground = true;
+            } else {
+                // If we are already in foreground just update the notification
+                notificationManager.notify(
+                        PlayingNotification.NOTIFICATION_ID, playingNotification.build()
+                );
+            }
         }
-        notifyMode = newNotifyMode;
         return Unit.INSTANCE;
     }
 
