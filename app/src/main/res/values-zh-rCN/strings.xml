@@ -19,7 +19,7 @@
     <string name="action_go_to_album">查看专辑</string>
     <string name="action_go_to_artist">查看艺术家</string>
     <string name="action_go_to_genre">查看流派</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">转到歌词</string>
     <string name="action_go_to_start_directory">返回起始目录</string>
     <string name="action_grant">授权</string>
     <string name="action_grid_size">网格大小</string>
@@ -112,7 +112,7 @@
     <string name="cascading">层叠</string>
     <string name="changelog">更新日志</string>
     <string name="changelog_summary">看看新变化</string>
-    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="choose_restore_title">选择要还原的内容</string>
     <string name="circle">环形</string>
     <string name="circular">圆形</string>
     <string name="classic">经典</string>
@@ -132,9 +132,9 @@
     <string name="created_playlist_x">已创建播放列表 %1$s。</string>
     <string name="credit_title">开发团队和贡献者</string>
     <string name="currently_listening_to_x_by_x">正在收听 %2$s 的 %1$s。</string>
-    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="custom_artist_images">自定义艺术家图像</string>
     <string name="dark_theme_name">深色</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
+    <string name="databases_description">数据库（播放列表、播放历史、最多播放等）</string>
     <string name="delete_playlist_title">删除播放列表</string>
     <string name="delete_playlist_x"><![CDATA[确定删除播放列表 <b>%1$s</b> 吗？]]></string>
     <string name="delete_playlists_title">删除播放列表</string>
@@ -150,7 +150,7 @@
     <string name="device_info">设备信息</string>
     <string name="dialog_message_set_ringtone">允许 Retro Music 修改声音设置</string>
     <string name="dialog_title_set_ringtone">设为铃声</string>
-    <string name="disc_hint">Disc Number</string>
+    <string name="disc_hint">盘片编号</string>
     <string name="do_you_want_to_clear_the_blacklist">您想清空黑名单吗？</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[确定从黑名单中移除 <b>%1$s</b> 吗？]]></string>
     <string name="donate">捐赠</string>
@@ -483,7 +483,7 @@
     <string name="up_next">下一首</string>
     <string name="update_image">更新图片</string>
     <string name="updating">正在更新…</string>
-    <string name="user_images_description">User Images</string>
+    <string name="user_images_description">用户图像</string>
     <string name="user_name">用户名</string>
     <string name="username">用户名</string>
     <string name="version">版本</string>
