@@ -91,7 +91,7 @@ class PlayingNotificationImpl(
         )
         val dismissAction = NotificationCompat.Action(
             R.drawable.ic_close,
-            context.getString(R.string.customactivityoncrash_error_activity_error_details_close),
+            context.getString(R.string.action_cancel),
             retrievePlaybackAction(ACTION_QUIT)
         )
         setSmallIcon(R.drawable.ic_notification)
@@ -102,7 +102,9 @@ class PlayingNotificationImpl(
         addAction(previousAction)
         addAction(playPauseAction)
         addAction(nextAction)
-        addAction(dismissAction)
+        if (VersionUtils.hasS()) {
+            addAction(dismissAction)
+        }
 
         setStyle(
             MediaStyle()
