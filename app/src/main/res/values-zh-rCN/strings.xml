@@ -108,7 +108,7 @@
     <string name="card_color_style">彩色卡片</string>
     <string name="card_square">方形卡片</string>
     <string name="card_style">卡片</string>
-    <string name="carousal_effect_on_now_playing_screen">在「正在播放」界面使用轮播效果</string>
+    <string name="carousal_effect_on_now_playing_screen">在播放页使用轮播效果</string>
     <string name="cascading">层叠</string>
     <string name="changelog">更新日志</string>
     <string name="changelog_summary">看看新变化</string>
@@ -190,7 +190,7 @@
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">网格样式</string>
     <string name="help_summary">需要更多帮助？</string>
-    <string name="hinge">关键</string>
+    <string name="hinge">旋转</string>
     <string name="history">历史记录</string>
     <string name="home">主页</string>
     <string name="horizontal_flip">水平翻转</string>
@@ -208,7 +208,7 @@
     <string name="label_file_name">文件名</string>
     <string name="label_file_path">文件路径</string>
     <string name="label_file_size">文件大小</string>
-    <string name="label_more_from">来自 %s 的更多信息</string>
+    <string name="label_more_from">来自 %s 的更多歌曲</string>
     <string name="label_sampling_rate">采样率</string>
     <string name="label_track_length">长度</string>
     <string name="labeled">有标签</string>
@@ -241,7 +241,7 @@
     <string name="no_lyrics_found">找不到歌词</string>
     <string name="no_playing_queue">没有播放的歌曲</string>
     <string name="no_playlists">暂无播放列表</string>
-    <string name="no_purchase_found">找不到支付记录</string>
+    <string name="no_purchase_found">没有找到购买记录</string>
     <string name="no_results">暂无结果</string>
     <string name="no_songs">暂无歌曲</string>
     <string name="normal">正常</string>
@@ -280,7 +280,7 @@
     <string name="playlist_name_empty">播放列表名</string>
     <string name="playlists">播放列表</string>
     <string name="pref_blur_amount_summary">应用于模糊主题，数值越低加载越快</string>
-    <string name="pref_blur_amount_title">模糊度</string>
+    <string name="pref_blur_amount_title">模糊程度</string>
     <string name="pref_filter_song_summary">按长度筛选歌曲</string>
     <string name="pref_filter_song_title">筛选歌曲时长</string>
     <string name="pref_header_advanced">高级</string>
@@ -305,12 +305,12 @@
     <string name="pref_summary_blacklist">在媒体库中隐藏列入黑名单的文件夹内容。</string>
     <string name="pref_summary_bluetooth_playback">连接到蓝牙设备后立即开始播放</string>
     <string name="pref_summary_blurred_album_art">模糊化显示锁屏上的专辑封面。可能与第三方应用或微件产生冲突。</string>
-    <string name="pref_summary_carousel_effect">在正在播放界面中使用轮播效果。在使用卡片和模糊卡片主题时无效 。</string>
+    <string name="pref_summary_carousel_effect">在播放页使用轮播效果。在使用卡片和模糊卡片主题时无效 。</string>
     <string name="pref_summary_classic_notification">使用经典通知样式</string>
-    <string name="pref_summary_colored_app">背景色以及控件色跟随正在播放界面的专辑封面变化</string>
+    <string name="pref_summary_colored_app">背景及控件颜色跟随专辑封面变化</string>
     <string name="pref_summary_colored_app_shortcuts">将快捷方式颜色更改为强调色，每次颜色更改后需要切换一下该设置才能生效</string>
     <string name="pref_summary_colored_notification">"将通知颜色设为专辑封面的强调色"</string>
-    <string name="pref_summary_cross_fade">曲目间淡入淡出的时间</string>
+    <string name="pref_summary_cross_fade">曲目间淡入淡出的时长</string>
     <string name="pref_summary_desaturated_color">根据质感设计规范，深色模式下应使用低饱和度颜色</string>
     <string name="pref_summary_expand_now_playing_panel">点击通知将显示正在播放页，而不是主页</string>
     <string name="pref_summary_extra_controls">给迷你播放器添加额外控件</string>
@@ -327,12 +327,12 @@
     <string name="pref_summary_toggle_full_screen">沉浸模式</string>
     <string name="pref_summary_toggle_headset">连接耳机后立即开始播放</string>
     <string name="pref_summary_toggle_shuffle">播放新列表时关闭随机播放</string>
-    <string name="pref_summary_toggle_volume">空间充足时，在播放界面显示音量控制</string>
+    <string name="pref_summary_toggle_volume">空间充足时，在播放页显示音量控制</string>
     <string name="pref_summary_whitelist">仅显示 /Music 目录的音乐</string>
     <string name="pref_title_album_art_on_lockscreen">显示专辑封面</string>
     <string name="pref_title_album_artists_only">按专辑艺术家排序</string>
     <string name="pref_title_album_cover_style">专辑封面主题</string>
-    <string name="pref_title_album_cover_transform">专辑封面跳过</string>
+    <string name="pref_title_album_cover_transform">专辑封面切换</string>
     <string name="pref_title_app_shortcuts">着色应用快捷方式</string>
     <string name="pref_title_audio_ducking">焦点丢失时降低音量</string>
     <string name="pref_title_audio_fade">音频淡入淡出</string>
@@ -451,7 +451,7 @@
     <string name="sort_order_z_a">降序</string>
     <string name="speech_not_supported">抱歉！您的设备不支持语音输入</string>
     <string name="speech_prompt">搜索媒体库</string>
-    <string name="stack">堆栈</string>
+    <string name="stack">堆叠</string>
     <string name="start_play_music">开始播放音乐。</string>
     <string name="suggestion_songs">建议</string>
     <string name="support_development">支持开发者</string>
@@ -471,7 +471,7 @@
     <string name="today">今日</string>
     <string name="top_albums">热门专辑</string>
     <string name="top_artists">热门艺术家</string>
-    <string name="track_hint">"音轨（2 代表第二条音轨，3004 代表第三张盘的第四条音轨）"</string>
+    <string name="track_hint">"音轨（2 代表第 2 条音轨，3004 代表第 3 张盘的第 4 条音轨）"</string>
     <string name="track_list">音轨编号</string>
     <string name="translate">翻译</string>
     <string name="translate_community">帮助我们将应用翻译成您的语言</string>
@@ -499,7 +499,7 @@
     <string name="window">窗口</string>
     <string name="window_corner_edges">圆角</string>
     <string name="x_has_been_set_as_ringtone">将 %1$s 设置为铃声。</string>
-    <string name="x_selected">已选择 %1$d 首</string>
+    <string name="x_selected">已选择 %1$d 项</string>
     <string name="year">年份</string>
     <string name="you_have_to_select_at_least_one_category">请至少选择一个分类。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
