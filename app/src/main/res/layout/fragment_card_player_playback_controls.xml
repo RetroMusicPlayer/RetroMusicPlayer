@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/progress_container_height"
         android:background="@color/twenty_percent_black_overlay">
@@ -18,21 +18,26 @@
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical|left|end"
-            android:paddingLeft="8dp"
+            android:gravity="center_vertical|start"
+            android:paddingStart="8dp"
+            android:paddingEnd="0dp"
             android:singleLine="true"
             android:textColor="?colorOnSecondary"
             android:textSize="12sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="@tools:sample/date/hhmmss" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/progressSlider"
+            android:layout_width="0dp"
+            style="@style/MusicProgressSlider"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center_vertical|right|end"
+            android:gravity="center_vertical|end"
             android:paddingRight="8dp"
             android:singleLine="true"
             android:textColor="?colorOnSecondary"
@@ -40,15 +45,7 @@
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="@tools:sample/date/hhmmss" />
 
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/progressSlider"
-            style="@style/MusicProgressSlider"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/songTotalTime"
-            android:layout_toRightOf="@id/songCurrentProgress"
-            tools:ignore="RtlHardcoded,UnusedAttribute" />
-
-    </RelativeLayout>
+    </LinearLayout>
 
     <include
         android:id="@+id/media_button"
@@ -70,7 +67,6 @@
         android:minHeight="72dp"
         android:orientation="horizontal"
         tools:ignore="UnusedAttribute">
-
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
