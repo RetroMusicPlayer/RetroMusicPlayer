@@ -1,6 +1,7 @@
 # Retro Music Player 🎵
 
 [![Generic badge](https://img.shields.io/badge/Platform-Android-green.svg)](https://github.com/RetroMusicPlayer/RetroMusicPlayer)
+[![Build Status](https://github.com/RetroMusicPlayer/RetroMusicPlayer/actions/workflows/android.yml/badge.svg)](https://github.com/RetroMusicPlayer/RetroMusicPlayer/actions/workflows/android.yml)
 [![Generic badge](https://img.shields.io/badge/minSdkVersion-21-green.svg)](https://github.com/RetroMusicPlayer/RetroMusicPlayer)
 [![Generic badge](https://img.shields.io/badge/Download-Google_Play-green.svg)](https://play.google.com/store/apps/details?id=code.name.monkey.retromusic&hl=en_IN)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/LICENSE.md)
