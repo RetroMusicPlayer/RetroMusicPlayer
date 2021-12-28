@@ -90,11 +90,19 @@ class ArtistImageFetcher(
     }
 
     private fun getFallbackAlbumImage(): InputStream? {
-        val imageUri = MusicUtil.getMediaStoreAlbumCoverUri(model.artist.safeGetFirstAlbum().id)
-        return try {
-            context.contentResolver.openInputStream(imageUri)
-        } catch (e: FileNotFoundException){
-            null
+        model.artist.safeGetFirstAlbum().id.let { id->
+            return if (id != -1L) {
+                val imageUri = MusicUtil.getMediaStoreAlbumCoverUri(model.artist.safeGetFirstAlbum().id)
+                try {
+                    context.contentResolver.openInputStream(imageUri)
+                } catch (e: FileNotFoundException){
+                    null
+                } catch (e: UnsupportedOperationException) {
+                    null
+                }
+            } else {
+                null
+            }
         }
     }
 
