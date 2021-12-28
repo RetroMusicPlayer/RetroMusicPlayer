@@ -35,4 +35,6 @@
         </item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
+
+    <style name="mcab_theme" parent="@style/ThemeOverlay.MaterialComponents.Dark" />
 </resources>

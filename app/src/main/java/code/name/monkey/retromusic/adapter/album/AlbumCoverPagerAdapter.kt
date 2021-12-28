@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.goToLyrics
@@ -35,6 +36,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -89,6 +91,7 @@ class AlbumCoverPagerAdapter(
         private lateinit var song: Song
         private var colorReceiver: ColorReceiver? = null
         private var request: Int = 0
+        private val mainActivity get() = activity as MainActivity
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -105,6 +108,11 @@ class AlbumCoverPagerAdapter(
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
             ViewCompat.setTransitionName(view, "lyrics")
             albumCover = view.findViewById(R.id.player_image)
+            view.setOnClickListener {
+                if (mainActivity.getBottomSheetBehavior().state == STATE_EXPANDED) {
+                    showLyricsDialog()
+                }
+            }
             return view
         }
 
@@ -140,7 +148,6 @@ class AlbumCoverPagerAdapter(
                             AlbumCoverStyle.Flat -> R.layout.fragment_album_flat_cover
                             AlbumCoverStyle.Circle -> R.layout.fragment_album_circle_cover
                             AlbumCoverStyle.Card -> R.layout.fragment_album_card_cover
-                            AlbumCoverStyle.Material -> R.layout.fragment_album_material_cover
                             AlbumCoverStyle.Full -> R.layout.fragment_album_full_cover
                             AlbumCoverStyle.FullCard -> R.layout.fragment_album_full_card_cover
                         }

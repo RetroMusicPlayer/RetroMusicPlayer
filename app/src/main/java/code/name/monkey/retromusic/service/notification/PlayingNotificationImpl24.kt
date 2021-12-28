@@ -20,6 +20,7 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -47,7 +48,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @SuppressLint("RestrictedApi")
-class PlayingNotificationImpl(
+class PlayingNotificationImpl24(
     val context: Context,
     mediaSessionToken: MediaSessionCompat.Token
 ) : PlayingNotification(context) {
@@ -91,7 +92,7 @@ class PlayingNotificationImpl(
         )
         val dismissAction = NotificationCompat.Action(
             R.drawable.ic_close,
-            context.getString(R.string.customactivityoncrash_error_activity_error_details_close),
+            context.getString(R.string.action_cancel),
             retrievePlaybackAction(ACTION_QUIT)
         )
         setSmallIcon(R.drawable.ic_notification)
@@ -102,7 +103,9 @@ class PlayingNotificationImpl(
         addAction(previousAction)
         addAction(playPauseAction)
         addAction(nextAction)
-        addAction(dismissAction)
+        if (VersionUtils.hasS()) {
+            addAction(dismissAction)
+        }
 
         setStyle(
             MediaStyle()
@@ -152,12 +155,20 @@ class PlayingNotificationImpl(
 
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
-                    setLargeIcon(null)
+                    setLargeIcon(
+                        BitmapFactory.decodeResource(
+                            context.resources,
+                            R.drawable.default_audio_art
+                        )
+                    )
                     onUpdate()
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
-                    setLargeIcon(null)
+                    setLargeIcon(BitmapFactory.decodeResource(
+                        context.resources,
+                        R.drawable.default_audio_art
+                    ))
                     onUpdate()
                 }
             })
@@ -184,23 +195,8 @@ class PlayingNotificationImpl(
         ).build()
     }
 
-    private fun buildDismissAction(): NotificationCompat.Action {
-        return NotificationCompat.Action.Builder(
-            R.drawable.ic_close,
-            context.getString(R.string.customactivityoncrash_error_activity_error_details_close),
-            retrievePlaybackAction(ACTION_QUIT)
-        ).build()
-    }
-
     override fun setPlaying(isPlaying: Boolean) {
         mActions[2] = buildPlayAction(isPlaying)
-        // Show dismiss action if we are not playing but only for A12+, as we can't call stopForeground(false)
-        // on A12 which would result in crashes when we call startForeground after that
-        if (!isPlaying) {
-            addAction(buildDismissAction())
-        } else {
-            if (mActions.size == 5) mActions.removeAt(4)
-        }
     }
 
     override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
@@ -234,7 +230,7 @@ class PlayingNotificationImpl(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 createNotificationChannel(context, notificationManager)
             }
-            return PlayingNotificationImpl(context, mediaSession.sessionToken)
+            return PlayingNotificationImpl24(context, mediaSession.sessionToken)
         }
     }
 }

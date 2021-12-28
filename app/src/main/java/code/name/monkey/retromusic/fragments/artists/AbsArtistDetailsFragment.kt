@@ -141,6 +141,10 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     }
 
     private fun showArtist(artist: Artist) {
+        if (artist.songCount == 0) {
+            findNavController().navigateUp()
+            return
+        }
         this.artist = artist
         loadArtistImage(artist)
         if (RetroUtil.isAllowedToDownloadMetadata(requireContext())) {
