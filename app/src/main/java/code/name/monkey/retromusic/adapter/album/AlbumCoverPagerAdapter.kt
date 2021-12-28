@@ -148,7 +148,6 @@ class AlbumCoverPagerAdapter(
                             AlbumCoverStyle.Flat -> R.layout.fragment_album_flat_cover
                             AlbumCoverStyle.Circle -> R.layout.fragment_album_circle_cover
                             AlbumCoverStyle.Card -> R.layout.fragment_album_card_cover
-                            AlbumCoverStyle.Material -> R.layout.fragment_album_material_cover
                             AlbumCoverStyle.Full -> R.layout.fragment_album_full_cover
                             AlbumCoverStyle.FullCard -> R.layout.fragment_album_full_card_cover
                         }
