@@ -20,6 +20,7 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -47,7 +48,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @SuppressLint("RestrictedApi")
-class PlayingNotificationImpl(
+class PlayingNotificationImpl24(
     val context: Context,
     mediaSessionToken: MediaSessionCompat.Token
 ) : PlayingNotification(context) {
@@ -154,12 +155,20 @@ class PlayingNotificationImpl(
 
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
-                    setLargeIcon(null)
+                    setLargeIcon(
+                        BitmapFactory.decodeResource(
+                            context.resources,
+                            R.drawable.default_audio_art
+                        )
+                    )
                     onUpdate()
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
-                    setLargeIcon(null)
+                    setLargeIcon(BitmapFactory.decodeResource(
+                        context.resources,
+                        R.drawable.default_audio_art
+                    ))
                     onUpdate()
                 }
             })
@@ -221,7 +230,7 @@ class PlayingNotificationImpl(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 createNotificationChannel(context, notificationManager)
             }
-            return PlayingNotificationImpl(context, mediaSession.sessionToken)
+            return PlayingNotificationImpl24(context, mediaSession.sessionToken)
         }
     }
 }

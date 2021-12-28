@@ -99,8 +99,8 @@ import code.name.monkey.retromusic.providers.HistoryStore;
 import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore;
 import code.name.monkey.retromusic.providers.SongPlayCountStore;
 import code.name.monkey.retromusic.service.notification.PlayingNotification;
-import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl;
-import code.name.monkey.retromusic.service.notification.PlayingNotificationOreo;
+import code.name.monkey.retromusic.service.notification.PlayingNotificationClassic;
+import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl24;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PackageValidator;
@@ -781,9 +781,9 @@ public class MusicService extends MediaBrowserServiceCompat
     public void initNotification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
                 && !PreferenceUtil.INSTANCE.isClassicNotification()) {
-            playingNotification = PlayingNotificationImpl.Companion.from(this, notificationManager, mediaSession);
+            playingNotification = PlayingNotificationImpl24.Companion.from(this, notificationManager, mediaSession);
         } else {
-            playingNotification = PlayingNotificationOreo.Companion.from(this, notificationManager);
+            playingNotification = PlayingNotificationClassic.Companion.from(this, notificationManager);
         }
     }
 
