@@ -49,6 +49,4 @@ open class Playlist(
         result = 31 * result + name.hashCode()
         return result
     }
-
-
 }
