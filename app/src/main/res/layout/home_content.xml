@@ -22,6 +22,15 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/downloadMusic"
+        style="@style/HomeActionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Download Music"
+        app:icon="@drawable/ic_download_music"/>
+
     <include
         android:id="@+id/abs_playlists"
         layout="@layout/abs_playlists" />

@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
@@ -33,7 +34,8 @@
         android:theme="@style/Theme.RetroMusic.FollowSystem"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
-        tools:targetApi="m">
+        tools:targetApi="m"
+        android:extractNativeLibs="true">
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"

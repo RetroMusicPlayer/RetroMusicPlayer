@@ -18,6 +18,10 @@ android {
         versionName '5.5.0'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
+
+        ndk {
+            abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
+        }
     }
     signingConfigs {
         release {
@@ -60,6 +64,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
+            universalApk true
+        }
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -89,6 +103,10 @@ static def getDate() {
 
 dependencies {
     implementation project(':appthemehelper')
+
+    implementation 'com.github.yausername.youtubedl-android:library:0.13.+'
+    implementation 'com.github.yausername.youtubedl-android:ffmpeg:0.13.+'
+
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.appcompat:appcompat:1.4.0'

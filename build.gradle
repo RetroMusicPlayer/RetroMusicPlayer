@@ -16,10 +16,19 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
     }
+
+
 }
 plugins {
     id "com.github.ben-manes.versions" version "0.39.0"
 }
+
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

@@ -20,6 +20,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
 import android.view.View
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
@@ -106,6 +107,19 @@ class HomeFragment :
     }
 
     private fun setupListeners() {
+
+        binding.downloadButton?.setOnClickListener {
+            val toast = Toast.makeText(
+                activity?.applicationContext,
+                "Test",
+                Toast.LENGTH_SHORT
+            )
+            toast.show()
+            findNavController().navigate(
+                R.id.download_fragment
+            )
+        }
+
         binding.bannerImage?.setOnClickListener {
             findNavController().navigate(
                 R.id.user_info_fragment, null, null, FragmentNavigatorExtras(

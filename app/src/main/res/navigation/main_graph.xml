@@ -125,7 +125,6 @@
     <fragment
         android:id="@+id/user_info_fragment"
         android:name="code.name.monkey.retromusic.fragments.other.UserInfoFragment" />
-
     <fragment
         android:id="@+id/playing_queue_fragment"
         android:name="code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment" />
@@ -133,4 +132,8 @@
     <fragment
         android:id="@+id/lyrics_fragment"
         android:name="code.name.monkey.retromusic.fragments.other.LyricsFragment" />
+
+    <fragment
+        android:id="@+id/download_fragment"
+        android:name="code.name.monkey.retromusic.fragments.downloader.DownloaderFragment"/>
 </navigation>

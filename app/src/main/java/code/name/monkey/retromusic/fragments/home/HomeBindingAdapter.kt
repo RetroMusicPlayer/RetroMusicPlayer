@@ -28,4 +28,5 @@ class HomeBindingAdapter(
         ?: bannerHomeBinding?.homeContent?.recyclerView!!
     val titleWelcome = homeBinding?.titleWelcome ?: bannerHomeBinding?.titleWelcome!!
     val appNameText = homeBinding?.appNameText ?: bannerHomeBinding?.appNameText!!
+    val downloadButton = homeBinding?.homeContent?.downloadMusic
 }
