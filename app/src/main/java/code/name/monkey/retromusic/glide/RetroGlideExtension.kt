@@ -30,6 +30,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.BaseRequestOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.bumptech.glide.request.transition.Transition
 import com.bumptech.glide.signature.MediaStoreSignature
@@ -107,6 +108,7 @@ object RetroGlideExtension {
             .priority(Priority.LOW)
             .error(DEFAULT_ARTIST_IMAGE)
             .placeholder(DEFAULT_ARTIST_IMAGE)
+            .override(SIZE_ORIGINAL, SIZE_ORIGINAL)
             .signature(createSignature(artist))
     }
 

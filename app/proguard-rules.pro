@@ -34,10 +34,15 @@
 
 # Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
--keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule {
+ <init>(...);
+}
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
   **[] $VALUES;
   public *;
+}
+-keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
+  *** rewind();
 }
 
 # OkHttp
@@ -62,5 +67,5 @@
 -keepnames class * extends android.os.Parcelable
 -keepnames class * extends java.io.Serializable
 -keep class code.name.monkey.retromusic.network.model.** { *; }
--keep class code.name.monkey.retromusic.model.CategoryInfo { *; }
+-keep class code.name.monkey.retromusic.model.** { *; }
 -keep class com.google.android.material.bottomsheet.** { *; }

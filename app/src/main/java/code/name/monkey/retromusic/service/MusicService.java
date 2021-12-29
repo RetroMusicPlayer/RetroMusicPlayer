@@ -24,8 +24,6 @@ import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.CROSS_FADE_DURATION;
 import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
 import static code.name.monkey.retromusic.service.AudioFader.startFadeAnimator;
-import static code.name.monkey.retromusic.service.notification.PlayingNotification.NOTIFY_MODE_BACKGROUND;
-import static code.name.monkey.retromusic.service.notification.PlayingNotification.NOTIFY_MODE_FOREGROUND;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -101,8 +99,8 @@ import code.name.monkey.retromusic.providers.HistoryStore;
 import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore;
 import code.name.monkey.retromusic.providers.SongPlayCountStore;
 import code.name.monkey.retromusic.service.notification.PlayingNotification;
-import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl;
-import code.name.monkey.retromusic.service.notification.PlayingNotificationOreo;
+import code.name.monkey.retromusic.service.notification.PlayingNotificationClassic;
+import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl24;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PackageValidator;
@@ -371,7 +369,6 @@ public class MusicService extends MediaBrowserServiceCompat
     private PowerManager.WakeLock wakeLock;
     private NotificationManager notificationManager;
     private boolean isForeground = false;
-    private int notifyMode = NOTIFY_MODE_BACKGROUND;
 
     private static Bitmap copy(Bitmap bitmap) {
         Bitmap.Config config = bitmap.getConfig();
@@ -784,9 +781,9 @@ public class MusicService extends MediaBrowserServiceCompat
     public void initNotification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
                 && !PreferenceUtil.INSTANCE.isClassicNotification()) {
-            playingNotification = PlayingNotificationImpl.Companion.from(this, notificationManager, mediaSession);
+            playingNotification = PlayingNotificationImpl24.Companion.from(this, notificationManager, mediaSession);
         } else {
-            playingNotification = PlayingNotificationOreo.Companion.from(this, notificationManager);
+            playingNotification = PlayingNotificationClassic.Companion.from(this, notificationManager);
         }
     }
 
@@ -1460,34 +1457,38 @@ public class MusicService extends MediaBrowserServiceCompat
     }
 
     private Unit startForegroundOrNotify() {
-        int newNotifyMode = isPlaying() ? NOTIFY_MODE_FOREGROUND : NOTIFY_MODE_BACKGROUND;
+        if (playingNotification != null && getCurrentSong().getId() != -1) {
+            boolean isPlaying = isPlaying();
 
-        if (notifyMode != newNotifyMode && newNotifyMode == NOTIFY_MODE_BACKGROUND) {
-            // This makes the notification dismissible
-            // We can't call stopForeground(false) on A12 though, which may result in crashes
-            // when we call startForeground after that e.g. when Alarm goes off, 
-            if (Build.VERSION.SDK_INT < VERSION_CODES.S) stopForeground(false);
-        }
-
-        if (newNotifyMode == NOTIFY_MODE_FOREGROUND) {
-            // Specify that this is a media service, if supported.
-            if (VersionUtils.hasQ()) {
-                startForeground(
-                        PlayingNotification.NOTIFICATION_ID, playingNotification.build(),
-                        ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
-                );
-            } else {
-                startForeground(PlayingNotification.NOTIFICATION_ID, playingNotification.build());
+            if ((isForeground != isPlaying) && !isPlaying) {
+                // This makes the notification dismissible
+                // We can't call stopForeground(false) on A12 though, which may result in crashes
+                // when we call startForeground after that e.g. when Alarm goes off,
+                if (Build.VERSION.SDK_INT < VERSION_CODES.S) {
+                    stopForeground(false);
+                    isForeground = false;
+                }
             }
 
-            isForeground = true;
-        } else {
-            // If we are already in foreground just update the notification
-            notificationManager.notify(
-                    PlayingNotification.NOTIFICATION_ID, playingNotification.build()
-            );
+            if (!isForeground && isPlaying) {
+                // Specify that this is a media service, if supported.
+                if (VersionUtils.hasQ()) {
+                    startForeground(
+                            PlayingNotification.NOTIFICATION_ID, playingNotification.build(),
+                            ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+                    );
+                } else {
+                    startForeground(PlayingNotification.NOTIFICATION_ID, playingNotification.build());
+                }
+
+                isForeground = true;
+            } else {
+                // If we are already in foreground just update the notification
+                notificationManager.notify(
+                        PlayingNotification.NOTIFICATION_ID, playingNotification.build()
+                );
+            }
         }
-        notifyMode = newNotifyMode;
         return Unit.INSTANCE;
     }
 

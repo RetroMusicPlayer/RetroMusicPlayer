@@ -25,7 +25,10 @@ import android.view.ViewTreeObserver
 import android.view.animation.PathInterpolator
 import android.widget.FrameLayout
 import androidx.core.animation.doOnEnd
-import androidx.core.view.*
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -143,8 +146,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setupSlidingUpPanel()
         setupBottomSheet()
         updateColor()
-        binding.slidingPanel.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
-        bottomNavigationView.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
+        if (!PreferenceUtil.materialYou) {
+            binding.slidingPanel.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
+            bottomNavigationView.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
+        }
+
         navigationBarColor = surfaceColor()
     }
 
@@ -395,12 +401,12 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             bottomSheetBehavior.peekHeight = -windowInsets.safeGetBottomInsets()
             bottomSheetBehavior.state = STATE_COLLAPSED
             libraryViewModel.setFabMargin(if (isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0)
-            ViewCompat.setElevation(binding.slidingPanel, 0f)
-            ViewCompat.setElevation(binding.bottomNavigationView, 10f)
+            binding.slidingPanel.elevation = 0F
+            binding.bottomNavigationView.elevation = 10F
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-                ViewCompat.setElevation(binding.slidingPanel, 10f)
-                ViewCompat.setElevation(binding.bottomNavigationView, 10f)
+                binding.slidingPanel.elevation = 0F
+                binding.bottomNavigationView.elevation = 10F
                 if (isBottomNavVisible) {
                     println("List")
                     if (animate) {

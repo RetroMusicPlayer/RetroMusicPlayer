@@ -50,7 +50,7 @@ import com.bumptech.glide.request.transition.Transition
  * @author Hemanth S (h4h13).
  */
 @SuppressLint("RestrictedApi")
-class PlayingNotificationOreo(
+class PlayingNotificationClassic(
     val context: Context
 ) : PlayingNotification(context) {
 
@@ -313,7 +313,7 @@ class PlayingNotificationOreo(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 createNotificationChannel(context, notificationManager)
             }
-            return PlayingNotificationOreo(context)
+            return PlayingNotificationClassic(context)
         }
     }
 }

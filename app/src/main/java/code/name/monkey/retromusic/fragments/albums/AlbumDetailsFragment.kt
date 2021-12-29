@@ -206,6 +206,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     private fun showAlbum(album: Album) {
         if (album.songs.isEmpty()) {
+            findNavController().navigateUp()
             return
         }
         this.album = album

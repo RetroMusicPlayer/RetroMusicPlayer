@@ -22,7 +22,8 @@
             app:expandedTitleMarginBottom="24dp"
             app:expandedTitleMarginEnd="24dp"
             app:expandedTitleMarginStart="24dp"
-            app:expandedTitleTextAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+            app:expandedTitleTextAppearance="@style/TextViewHeadline4"
+            app:collapsedTitleTextAppearance="@style/TextViewHeadline6"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap|enterAlwaysCollapsed">
 
             <com.google.android.material.appbar.MaterialToolbar

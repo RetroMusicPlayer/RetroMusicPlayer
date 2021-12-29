@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.helper
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.*
@@ -328,6 +329,7 @@ object MusicPlayerRemote : KoinComponent {
         return false
     }
 
+    @SuppressLint("StringFormatInvalid")
     fun playNext(songs: List<Song>): Boolean {
         if (musicService != null) {
             if (playingQueue.isNotEmpty()) {

@@ -8,7 +8,7 @@
     android:layoutDirection="ltr"
     android:paddingStart="4dp"
     android:paddingEnd="4dp"
-    tools:ignore="ContentDescription,UnusedAttribute">
+    android:clipToPadding="false">
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/repeatButton"

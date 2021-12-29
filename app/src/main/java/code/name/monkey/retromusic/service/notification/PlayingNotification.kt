@@ -37,8 +37,6 @@ abstract class PlayingNotification(context: Context) :
         const val NOTIFICATION_CONTROLS_SIZE_MULTIPLIER = 1.0f
         internal const val NOTIFICATION_CHANNEL_ID = "playing_notification"
         const val NOTIFICATION_ID = 1
-        const val NOTIFY_MODE_FOREGROUND = 1
-        const val NOTIFY_MODE_BACKGROUND = 0
 
 
         @RequiresApi(26)
