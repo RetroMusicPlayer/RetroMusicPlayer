@@ -11,134 +11,111 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
+package code.name.monkey.retromusic.adapter
 
-package code.name.monkey.retromusic.adapter;
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.PreferenceDialogLibraryCategoriesListitemBinding
+import code.name.monkey.retromusic.model.CategoryInfo
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.SwipeAndDragHelper
+import code.name.monkey.retromusic.util.SwipeAndDragHelper.ActionCompletionContract
 
-import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.checkbox.MaterialCheckBox;
-
-import java.util.List;
-
-import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.model.CategoryInfo;
-import code.name.monkey.retromusic.util.SwipeAndDragHelper;
-
-public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapter.ViewHolder>
-    implements SwipeAndDragHelper.ActionCompletionContract {
-
-  private List<CategoryInfo> categoryInfos;
-  private final ItemTouchHelper touchHelper;
-
-  public CategoryInfoAdapter() {
-    SwipeAndDragHelper swipeAndDragHelper = new SwipeAndDragHelper(this);
-    touchHelper = new ItemTouchHelper(swipeAndDragHelper);
-  }
-
-  public void attachToRecyclerView(RecyclerView recyclerView) {
-    touchHelper.attachToRecyclerView(recyclerView);
-  }
-
-  @NonNull
-  public List<CategoryInfo> getCategoryInfos() {
-    return categoryInfos;
-  }
-
-  public void setCategoryInfos(@NonNull List<CategoryInfo> categoryInfos) {
-    this.categoryInfos = categoryInfos;
-    notifyDataSetChanged();
-  }
-
-  @Override
-  public int getItemCount() {
-    return categoryInfos.size();
-  }
-
-  @SuppressLint("ClickableViewAccessibility")
-  @Override
-  public void onBindViewHolder(@NonNull CategoryInfoAdapter.ViewHolder holder, int position) {
-    CategoryInfo categoryInfo = categoryInfos.get(position);
-
-    holder.checkBox.setChecked(categoryInfo.isVisible());
-    holder.title.setText(
-        holder.title.getResources().getString(categoryInfo.getCategory().getStringRes()));
-
-    holder.itemView.setOnClickListener(
-        v -> {
-          if (!(categoryInfo.isVisible() && isLastCheckedCategory(categoryInfo))) {
-            categoryInfo.setVisible(!categoryInfo.isVisible());
-            holder.checkBox.setChecked(categoryInfo.isVisible());
-          } else {
-            Toast.makeText(
-                    holder.itemView.getContext(),
-                    R.string.you_have_to_select_at_least_one_category,
-                    Toast.LENGTH_SHORT)
-                .show();
-          }
-        });
-
-    holder.dragView.setOnTouchListener(
-        (view, event) -> {
-          if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-            touchHelper.startDrag(holder);
-          }
-          return false;
-        });
-  }
-
-  @Override
-  @NonNull
-  public CategoryInfoAdapter.ViewHolder onCreateViewHolder(
-      @NonNull ViewGroup parent, int viewType) {
-    View view =
-        LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.preference_dialog_library_categories_listitem, parent, false);
-    return new ViewHolder(view);
-  }
-
-  @Override
-  public void onViewMoved(int oldPosition, int newPosition) {
-    CategoryInfo categoryInfo = categoryInfos.get(oldPosition);
-    categoryInfos.remove(oldPosition);
-    categoryInfos.add(newPosition, categoryInfo);
-    notifyItemMoved(oldPosition, newPosition);
-  }
-
-  private boolean isLastCheckedCategory(CategoryInfo categoryInfo) {
-    if (categoryInfo.isVisible()) {
-      for (CategoryInfo c : categoryInfos) {
-        if (c != categoryInfo && c.isVisible()) {
-          return false;
+class CategoryInfoAdapter : RecyclerView.Adapter<CategoryInfoAdapter.ViewHolder>(),
+    ActionCompletionContract {
+    var categoryInfos: MutableList<CategoryInfo> =
+        PreferenceUtil.libraryCategory.toMutableList()
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
         }
-      }
+    private val touchHelper: ItemTouchHelper
+    fun attachToRecyclerView(recyclerView: RecyclerView?) {
+        touchHelper.attachToRecyclerView(recyclerView)
     }
-    return true;
-  }
 
-  static class ViewHolder extends RecyclerView.ViewHolder {
-    private final MaterialCheckBox checkBox;
-    private final View dragView;
-    private final TextView title;
-
-    ViewHolder(View view) {
-      super(view);
-      checkBox = view.findViewById(R.id.checkbox);
-      checkBox.setButtonTintList(
-              ColorStateList.valueOf(ThemeStore.Companion.accentColor(checkBox.getContext())));
-      title = view.findViewById(R.id.title);
-      dragView = view.findViewById(R.id.drag_view);
+    override fun getItemCount(): Int {
+        return categoryInfos.size
     }
-  }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val categoryInfo = categoryInfos[position]
+        holder.binding.checkbox.isChecked = categoryInfo.visible
+        holder.binding.title.text =
+            holder.binding.title.resources.getString(categoryInfo.category.stringRes)
+        holder.itemView.setOnClickListener {
+            if (!(categoryInfo.visible && isLastCheckedCategory(categoryInfo))) {
+                categoryInfo.visible = !categoryInfo.visible
+                holder.binding.checkbox.isChecked = categoryInfo.visible
+            } else {
+                Toast.makeText(
+                    holder.itemView.context,
+                    R.string.you_have_to_select_at_least_one_category,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
+        }
+        holder.binding.dragView.setOnTouchListener { _: View?, event: MotionEvent ->
+            if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+                touchHelper.startDrag(holder)
+            }
+            false
+        }
+    }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup, viewType: Int
+    ): ViewHolder {
+        return ViewHolder(
+            PreferenceDialogLibraryCategoriesListitemBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                ), parent, false
+            )
+        )
+    }
+
+    override fun onViewMoved(oldPosition: Int, newPosition: Int) {
+        val categoryInfo = categoryInfos[oldPosition]
+        categoryInfos.removeAt(oldPosition)
+        categoryInfos.add(newPosition, categoryInfo)
+        notifyItemMoved(oldPosition, newPosition)
+    }
+
+    private fun isLastCheckedCategory(categoryInfo: CategoryInfo): Boolean {
+        if (categoryInfo.visible) {
+            for (c in categoryInfos) {
+                if (c !== categoryInfo && c.visible) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    class ViewHolder(val binding: PreferenceDialogLibraryCategoriesListitemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.checkbox.buttonTintList =
+                ColorStateList.valueOf(accentColor(binding.checkbox.context))
+        }
+    }
+
+    init {
+        val swipeAndDragHelper = SwipeAndDragHelper(this)
+        touchHelper = ItemTouchHelper(swipeAndDragHelper)
+    }
 }

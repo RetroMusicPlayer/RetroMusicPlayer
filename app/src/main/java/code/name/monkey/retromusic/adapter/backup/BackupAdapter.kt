@@ -1,15 +1,14 @@
 package code.name.monkey.retromusic.adapter.backup
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.ItemListBackupBinding
 import java.io.File
 
 
@@ -21,27 +20,27 @@ class BackupAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(activity).inflate(R.layout.item_list_backup, parent, false)
+            ItemListBackupBinding.inflate(LayoutInflater.from(activity), parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.text = dataSet[position].nameWithoutExtension
+        holder.binding.title.text = dataSet[position].nameWithoutExtension
     }
 
     override fun getItemCount(): Int = dataSet.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun swapDataset(dataSet: List<File>) {
         this.dataSet = ArrayList(dataSet)
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title: TextView = itemView.findViewById(R.id.title)
-        val menu: AppCompatImageView = itemView.findViewById(R.id.menu)
+    inner class ViewHolder(val binding: ItemListBackupBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
-            menu.setOnClickListener { view ->
+            binding.menu.setOnClickListener { view ->
                 val popupMenu = PopupMenu(activity, view)
                 popupMenu.inflate(R.menu.menu_backup)
                 popupMenu.setOnMenuItemClickListener { menuItem ->

@@ -62,7 +62,7 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
 
     override fun createAdapter(): GenreAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return GenreAdapter(requireActivity(), dataSet, R.layout.item_genre, this)
+        return GenreAdapter(requireActivity(), dataSet, this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

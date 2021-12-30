@@ -248,7 +248,6 @@ class HomeAdapter(
             val genreAdapter = GenreAdapter(
                 activity,
                 home.arrayList as List<Genre>,
-                R.layout.item_grid_genre,
                 this@HomeAdapter
             )
             recyclerView.apply {
