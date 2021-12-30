@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.backup.BackupAdapter
 import code.name.monkey.retromusic.databinding.FragmentBackupBinding
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.accentOutlineColor
 import code.name.monkey.retromusic.helper.BackupHelper
 import code.name.monkey.retromusic.helper.sanitize
 import code.name.monkey.retromusic.util.BackupUtil
@@ -55,6 +57,8 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 }
             }
         }
+        binding.createBackup.accentOutlineColor()
+        binding.restoreBackup.accentColor()
         binding.createBackup.setOnClickListener {
             showCreateBackupDialog()
         }
