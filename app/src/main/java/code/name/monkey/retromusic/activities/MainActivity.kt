@@ -62,7 +62,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
         }
-        if (BuildConfig.VERSION_CODE > PreferenceUtil.lastVersion){
+        if (BuildConfig.VERSION_CODE > PreferenceUtil.lastVersion && !BuildConfig.DEBUG){
             NavigationUtil.gotoWhatNews(this)
         }
     }

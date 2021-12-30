@@ -146,7 +146,6 @@
     <string name="currently_listening_to_x_by_x">يستمع حالياً إلى %1$s لـ %2$s</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">أسود قليلاً</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">حذف قائمة التشغيل</string>
     <string name="delete_playlist_x"><![CDATA[حذف قائمة التشغيل <b>%1$s</b>؟]]></string>
     <string name="delete_playlists_title">حذف قوائم التشغيل</string>

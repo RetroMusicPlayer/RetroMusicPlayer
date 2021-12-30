@@ -3,9 +3,11 @@ package code.name.monkey.retromusic.fragments.backup
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.databinding.ActivityRestoreBinding
 import code.name.monkey.retromusic.helper.BackupContent
@@ -27,6 +29,7 @@ class RestoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRestoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setWidth()
         val backupUri = intent?.data
         binding.backupName.setText(getFileName(backupUri))
         binding.cancelButton.setOnClickListener {
@@ -35,7 +38,6 @@ class RestoreActivity : AppCompatActivity() {
         binding.restoreButton.setOnClickListener {
             val backupContents = mutableListOf<BackupContent>()
             if (binding.checkSettings.isChecked) backupContents.add(SETTINGS)
-            if (binding.checkQueue.isChecked) backupContents.add(QUEUE)
             if (binding.checkDatabases.isChecked) backupContents.add(PLAYLISTS)
             if (binding.checkArtistImages.isChecked) backupContents.add(CUSTOM_ARTIST_IMAGES)
             if (binding.checkUserImages.isChecked) backupContents.add(USER_IMAGES)
@@ -81,5 +83,10 @@ class RestoreActivity : AppCompatActivity() {
             }
         }
         return "Backup"
+    }
+
+    private fun setWidth() {
+        val width = resources.displayMetrics.widthPixels * 0.8
+        binding.root.updateLayoutParams<ViewGroup.LayoutParams> { this.width = width.toInt() }
     }
 }

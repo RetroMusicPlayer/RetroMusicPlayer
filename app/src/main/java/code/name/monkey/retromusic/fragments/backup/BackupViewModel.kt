@@ -29,7 +29,8 @@ class BackupViewModel : ViewModel() {
 
     suspend fun restoreBackup(activity: Activity, inputStream: InputStream?, contents: List<BackupContent>) {
         BackupHelper.restoreBackup(activity, inputStream, contents)
-        if (contents.contains(BackupContent.SETTINGS)) {
+        if (contents.contains(BackupContent.SETTINGS) or contents.contains(BackupContent.CUSTOM_ARTIST_IMAGES)) {
+            // We have to restart App when Preferences i.e. Settings or Artist Images are to be restored
             withContext(Dispatchers.Main) {
                 val intent = Intent(
                     activity,

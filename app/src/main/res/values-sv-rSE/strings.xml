@@ -136,7 +136,6 @@
     <string name="currently_listening_to_x_by_x">Lyssnar just nu på %1$s av %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Ganska mörkt</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Radera spellista</string>
     <string name="delete_playlist_x"><![CDATA[Radera spellistan <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Radera spellistor</string>

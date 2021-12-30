@@ -136,7 +136,6 @@
     <string name="currently_listening_to_x_by_x">Actualmente estás escuchando %1$s de %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Un poco Oscuro</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Eliminar lista de reproducción</string>
     <string name="delete_playlist_x"><![CDATA[¿Eliminar la lista de reproducción <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Eliminar listas de reproducción</string>

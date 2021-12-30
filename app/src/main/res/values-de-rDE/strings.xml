@@ -136,7 +136,6 @@
     <string name="currently_listening_to_x_by_x">Spielt zur Zeit %1$s von %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Dunkel</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Playlist löschen</string>
     <string name="delete_playlist_x"><![CDATA[Playlist <b>%1$s</b> löschen?]]></string>
     <string name="delete_playlists_title">Playlisten löschen</string>
