@@ -67,17 +67,13 @@ class RestoreActivity : AppCompatActivity() {
                 return uri.lastPathSegment
             }
             "content" -> {
-                val proj = arrayOf(MediaStore.Images.Media.TITLE)
+                val proj = arrayOf(MediaStore.Files.FileColumns.DISPLAY_NAME)
                 contentResolver.query(
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                        MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
-                    } else {
-                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-                    }, proj, null, null, null
+                    uri, proj, null, null, null
                 )?.use { cursor ->
                     if (cursor.count != 0) {
                         val columnIndex: Int =
-                            cursor.getColumnIndexOrThrow(MediaStore.Images.Media.TITLE)
+                            cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)
                         cursor.moveToFirst()
                         return cursor.getString(columnIndex)
                     }
