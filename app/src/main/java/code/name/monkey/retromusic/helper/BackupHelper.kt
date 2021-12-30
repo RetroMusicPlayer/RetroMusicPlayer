@@ -144,7 +144,6 @@ object BackupHelper {
                         restorePreferences(context, it, entry)
                     } else if (entry.isImageEntry() && contents.contains(USER_IMAGES)) {
                         restoreImages(context, it, entry)
-
                     } else if (entry.isCustomArtistImageEntry() && contents.contains(
                             CUSTOM_ARTIST_IMAGES
                         )
@@ -168,11 +167,7 @@ object BackupHelper {
         val filePath =
             context.filesDir.path + File.separator + zipEntry.getFileName()
         BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
-            val bytesIn = ByteArray(DEFAULT_BUFFER_SIZE)
-            var read: Int
-            while (zipIn.read(bytesIn).also { read = it } != -1) {
-                bos.write(bytesIn, 0, read)
-            }
+            zipIn.copyTo(bos)
         }
     }
 
@@ -184,11 +179,7 @@ object BackupHelper {
             file.delete()
         }
         BufferedOutputStream(FileOutputStream(file)).use { bos ->
-            val bytesIn = ByteArray(DEFAULT_BUFFER_SIZE)
-            var read: Int
-            while (zipIn.read(bytesIn).also { read = it } != -1) {
-                bos.write(bytesIn, 0, read)
-            }
+            zipIn.copyTo(bos)
         }
     }
 
@@ -196,11 +187,7 @@ object BackupHelper {
         val filePath =
             context.filesDir.parent!! + File.separator + DATABASES_PATH + File.separator + zipEntry.getFileName()
         BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
-            val bytesIn = ByteArray(DEFAULT_BUFFER_SIZE)
-            var read: Int
-            while (zipIn.read(bytesIn).also { read = it } != -1) {
-                bos.write(bytesIn, 0, read)
-            }
+            zipIn.copyTo(bos)
         }
     }
 
@@ -211,11 +198,7 @@ object BackupHelper {
         val filePath =
             context.filesDir.parent!! + File.separator + DATABASES_PATH + File.separator + zipEntry.getFileName()
         BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
-            val bytesIn = ByteArray(DEFAULT_BUFFER_SIZE)
-            var read: Int
-            while (zipIn.read(bytesIn).also { read = it } != -1) {
-                bos.write(bytesIn, 0, read)
-            }
+            zipIn.copyTo(bos)
         }
     }
 
@@ -237,11 +220,7 @@ object BackupHelper {
                 )
             )
         ).use { bos ->
-            val bytesIn = ByteArray(DEFAULT_BUFFER_SIZE)
-            var read: Int
-            while (zipIn.read(bytesIn).also { read = it } != -1) {
-                bos.write(bytesIn, 0, read)
-            }
+            zipIn.copyTo(bos)
         }
     }
 
@@ -253,11 +232,7 @@ object BackupHelper {
         val filePath =
             context.filesDir.parentFile?.absolutePath + "/shared_prefs/" + zipEntry.getFileName()
         BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
-            val bytesIn = ByteArray(DEFAULT_BUFFER_SIZE)
-            var read: Int
-            while (zipIn.read(bytesIn).also { read = it } != -1) {
-                bos.write(bytesIn, 0, read)
-            }
+            zipIn.copyTo(bos)
         }
     }
 

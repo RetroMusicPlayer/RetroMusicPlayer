@@ -29,13 +29,15 @@ class BackupViewModel : ViewModel() {
 
     suspend fun restoreBackup(activity: Activity, inputStream: InputStream?, contents: List<BackupContent>) {
         BackupHelper.restoreBackup(activity, inputStream, contents)
-        withContext(Dispatchers.Main) {
-            val intent = Intent(
-                activity,
-                MainActivity::class.java
-            )
-            activity.startActivity(intent)
-            exitProcess(0)
+        if (contents.contains(BackupContent.SETTINGS)) {
+            withContext(Dispatchers.Main) {
+                val intent = Intent(
+                    activity,
+                    MainActivity::class.java
+                )
+                activity.startActivity(intent)
+                exitProcess(0)
+            }
         }
     }
 }

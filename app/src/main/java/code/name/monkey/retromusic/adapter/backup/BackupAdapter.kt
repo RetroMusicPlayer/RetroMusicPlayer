@@ -21,7 +21,7 @@ class BackupAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(activity).inflate(R.layout.item_list_card, parent, false)
+            LayoutInflater.from(activity).inflate(R.layout.item_list_backup, parent, false)
         )
     }
 

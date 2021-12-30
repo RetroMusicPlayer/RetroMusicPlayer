@@ -24,8 +24,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/title"
             app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_restore"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
