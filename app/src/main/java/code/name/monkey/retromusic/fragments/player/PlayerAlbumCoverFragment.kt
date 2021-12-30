@@ -14,12 +14,13 @@
  */
 package code.name.monkey.retromusic.fragments.player
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isInvisible
+import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -34,7 +35,6 @@ import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
-import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToLyrics
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -223,8 +223,13 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     private fun showLyrics(visible: Boolean) {
-        lrcView.isVisible = visible
-        viewPager.isInvisible = visible
+        ObjectAnimator.ofFloat(lrcView, View.ALPHA, if (visible) 1F else 0F).apply {
+            doOnEnd {
+                lrcView.isVisible = visible
+            }
+            start()
+        }
+        ObjectAnimator.ofFloat(viewPager, View.ALPHA, if (visible) 0F else 1F).start()
     }
 
     private fun maybeInitLyrics() {
@@ -233,8 +238,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         if (lyricViewNpsList.contains(nps) && PreferenceUtil.showLyrics) {
             showLyrics(true)
             progressViewUpdateHelper?.start()
-            lrcView.animate().alpha(1f).duration =
-                AbsPlayerFragment.VISIBILITY_ANIM_DURATION
         } else {
             showLyrics(false)
             progressViewUpdateHelper?.stop()
