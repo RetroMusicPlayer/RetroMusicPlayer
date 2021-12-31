@@ -134,7 +134,6 @@
     <string name="currently_listening_to_x_by_x">현재 %2$s의 %1$s를 듣는 중입니다.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">카인다 다크</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">재생목록 삭제</string>
     <string name="delete_playlist_x"><![CDATA[<b>%1$s</b> 재생목록을 삭제하시겠습니까?]]></string>
     <string name="delete_playlists_title">재생목록 삭제</string>
