@@ -16,6 +16,8 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.*
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
@@ -26,7 +28,7 @@ object BackupHelper : KoinComponent {
 
     suspend fun createBackup(context: Context, name: String) {
         val backupFile =
-            File(backupRootPath.child(name) + APPEND_EXTENSION)
+            File(getBackupRoot(context), name + APPEND_EXTENSION)
         if (backupFile.parentFile?.exists() != true) {
             backupFile.parentFile?.mkdirs()
         }
@@ -255,9 +257,13 @@ object BackupHelper : KoinComponent {
         }
     }
 
-    val backupRootPath =
-        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-            .toString() + "/RetroMusic/Backups/"
+    fun getBackupRoot(context: Context): File {
+        return File(
+            context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
+            "RetroMusic/Backups"
+        )
+    }
+
     const val BACKUP_EXTENSION = "rmbak"
     const val APPEND_EXTENSION = ".$BACKUP_EXTENSION"
     private const val PLAYLISTS_PATH = "Playlists"
@@ -292,6 +298,10 @@ object BackupHelper : KoinComponent {
 
     private fun ZipEntry.getFileName(): String {
         return name.substring(name.lastIndexOf(File.separator) + 1)
+    }
+
+    fun getTimeStamp(): String {
+        return SimpleDateFormat("dd-MMM yyyy HHmmss", Locale.getDefault()).format(Date())
     }
 }
 

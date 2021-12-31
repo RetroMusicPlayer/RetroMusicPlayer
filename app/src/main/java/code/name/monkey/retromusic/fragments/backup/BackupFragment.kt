@@ -47,7 +47,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
             else
                 backupAdapter?.swapDataset(listOf())
         }
-        backupViewModel.loadBackups()
+        backupViewModel.loadBackups(requireContext())
         val openFilePicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             lifecycleScope.launch(Dispatchers.IO) {
                 it?.let {
@@ -95,11 +95,11 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         MaterialDialog(requireContext()).show {
             cornerRadius(res = R.dimen.m3_card_corner_radius)
             title(res = R.string.action_rename)
-            input(prefill = System.currentTimeMillis().toString()) { _, text ->
+            input(prefill = BackupHelper.getTimeStamp()) { _, text ->
                 // Text submitted with the action button
                 lifecycleScope.launch {
                     BackupHelper.createBackup(requireContext(), text.sanitize())
-                    backupViewModel.loadBackups()
+                    backupViewModel.loadBackups(requireContext())
                 }
             }
             positiveButton(android.R.string.ok)
@@ -129,7 +129,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                backupViewModel.loadBackups()
+                backupViewModel.loadBackups(requireContext())
                 return true
             }
             R.id.action_share -> {
@@ -147,10 +147,10 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                     input(prefill = file.nameWithoutExtension) { _, text ->
                         // Text submitted with the action button
                         val renamedFile =
-                            File(file.parent + File.separator + text + BackupHelper.APPEND_EXTENSION)
+                            File(file.parent, "$text${BackupHelper.APPEND_EXTENSION}")
                         if (!renamedFile.exists()) {
                             file.renameTo(renamedFile)
-                            backupViewModel.loadBackups()
+                            backupViewModel.loadBackups(requireContext())
                         } else {
                             Toast.makeText(
                                 requireContext(),
