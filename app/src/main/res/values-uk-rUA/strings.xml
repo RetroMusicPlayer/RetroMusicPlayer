@@ -140,7 +140,6 @@
     <string name="currently_listening_to_x_by_x">Зараз грає %1$s від %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Майже темна</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Видалити список відтворення</string>
     <string name="delete_playlist_x"><![CDATA[Видалити список відтворення <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Видалити списки відтворення</string>
