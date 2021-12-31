@@ -140,7 +140,6 @@
     <string name="currently_listening_to_x_by_x">Сейчас играет %1$s от %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Тёмная</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Удалить плейлист</string>
     <string name="delete_playlist_x"><![CDATA[Удалить плейлист <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Удалить плейлисты</string>

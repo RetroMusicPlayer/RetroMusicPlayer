@@ -55,7 +55,6 @@ class LibraryPreferenceDialog : DialogFragment() {
             .inflate(R.layout.preference_dialog_library_categories, null)
 
         val categoryAdapter = CategoryInfoAdapter()
-        categoryAdapter.categoryInfos = PreferenceUtil.libraryCategory
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = categoryAdapter

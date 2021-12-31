@@ -130,6 +130,13 @@ object PreferenceUtil {
         )
         set(value) = sharedPreferences.edit { putString(ALBUM_DETAIL_SONG_SORT_ORDER, value) }
 
+    var artistDetailSongSortOrder
+        get() = sharedPreferences.getStringOrDefault(
+           ARTIST_DETAIL_SONG_SORT_ORDER,
+            ArtistSongSortOrder.SONG_A_Z
+        )
+        set(value) = sharedPreferences.edit { putString(ARTIST_DETAIL_SONG_SORT_ORDER, value) }
+
     var songSortOrder
         get() = sharedPreferences.getStringOrDefault(
             SONG_SORT_ORDER,

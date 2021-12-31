@@ -134,7 +134,6 @@
     <string name="currently_listening_to_x_by_x">我正在聽 %2$s 的 %1$s</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">暗沉</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">刪除播放清單</string>
     <string name="delete_playlist_x"><![CDATA[確定要刪除播放清單 <b>%1$s</b> 嗎？]]></string>
     <string name="delete_playlists_title">刪除多個播放清單</string>

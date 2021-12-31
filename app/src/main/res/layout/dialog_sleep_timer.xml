@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxHeight="3dp"
+        android:paddingVertical="@dimen/seekbar_padding"
         android:splitTrack="false"
         tools:progress="20" />
 

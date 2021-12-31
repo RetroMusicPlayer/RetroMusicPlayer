@@ -38,14 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:text="@string/databases_description" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/check_queue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="@string/now_playing_queue" />
+        android:text="@string/playlists" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/check_user_images"

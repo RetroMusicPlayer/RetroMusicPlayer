@@ -134,7 +134,6 @@
     <string name="currently_listening_to_x_by_x">%2$s သီဆိုထားသော %1$s ကိုယခုနားထောင်နေသည်</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">အနက်ရောင်ဆန်ဆန်</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Playlist ဖျက်ခြင်း</string>
     <string name="delete_playlist_x"><![CDATA[<b>%1$s</b> Playlist ကိုဖျက်မှာလား]]></string>
     <string name="delete_playlists_title">Playlist များဖျက်ခြင်း</string>

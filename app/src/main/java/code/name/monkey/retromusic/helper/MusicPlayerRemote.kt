@@ -459,7 +459,7 @@ object MusicPlayerRemote : KoinComponent {
                         songFile = File(path)
                 }
                 if (songFile == null && uri.path != null) {
-                    songFile = File(uri.path)
+                    songFile = File(uri.path!!)
                 }
                 if (songFile != null) {
                     songs = songRepository.songsByFilePath(songFile.absolutePath)

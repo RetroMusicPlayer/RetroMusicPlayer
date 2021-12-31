@@ -181,6 +181,7 @@
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/seekbar_padding"
         app:layout_constraintBottom_toTopOf="@id/songInfo"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"

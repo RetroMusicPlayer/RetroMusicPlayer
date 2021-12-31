@@ -188,6 +188,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="8"
         android:maxHeight="3dp"
+        android:paddingVertical="@dimen/seekbar_padding"
         android:progressDrawable="@drawable/color_progress_seek"
         android:progressTint="@color/md_white_1000"
         android:splitTrack="false"
