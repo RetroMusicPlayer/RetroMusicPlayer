@@ -134,7 +134,6 @@
     <string name="currently_listening_to_x_by_x">Saat ini mendengarkan %1$s oleh %2$s.</string>
     <string name="custom_artist_images">Gambar Artis Kustom</string>
     <string name="dark_theme_name">Agak Gelap</string>
-    <string name="databases_description">Database (Daftar Putar, Riwayat, Paling Banyak Diputar, dll.)</string>
     <string name="delete_playlist_title">Hapus daftar putar</string>
     <string name="delete_playlist_x"><![CDATA[Hapus daftar putar <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Hapus daftar putar</string>
