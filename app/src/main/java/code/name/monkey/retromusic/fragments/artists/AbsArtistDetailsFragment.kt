@@ -5,11 +5,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spanned
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import androidx.activity.addCallback
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
@@ -32,6 +30,7 @@ import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
@@ -39,10 +38,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.repository.RealRepository
-import code.name.monkey.retromusic.util.CustomArtistImageUtil
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.*
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -70,6 +66,9 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     private var forceDownload: Boolean = false
     private var lang: String? = null
     private var biography: Spanned? = null
+
+    private val savedSongSortOrder: String
+        get() = PreferenceUtil.artistDetailSongSortOrder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,7 +100,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         setupRecyclerView()
 
         binding.fragmentArtistContent.playAction.apply {
-            setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
+            setOnClickListener { MusicPlayerRemote.openQueue(artist.sortedSongs, 0, true) }
         }
         binding.fragmentArtistContent.shuffleAction.apply {
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(artist.songs, true) }
@@ -121,6 +120,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                 requireActivity().onBackPressed()
             }
         }
+        setupSongSortButton()
         binding.appBarLayout?.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
@@ -168,7 +168,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         )
         binding.fragmentArtistContent.songTitle.text = songText
         binding.fragmentArtistContent.albumTitle.text = albumText
-        songAdapter.swapDataSet(artist.songs.sortedBy { it.trackNumber })
+        songAdapter.swapDataSet(artist.sortedSongs)
         albumAdapter.swapDataSet(artist.albums)
     }
 
@@ -288,6 +288,53 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         }
         return true
     }
+
+    private fun setupSongSortButton() {
+        binding.fragmentArtistContent.songSortOrder.setOnClickListener {
+            PopupMenu(requireContext(), binding.fragmentArtistContent.songSortOrder).apply {
+                inflate(R.menu.menu_artist_song_sort_order)
+                setUpSortOrderMenu(menu)
+                setOnMenuItemClickListener { menuItem ->
+                    val sortOrder = when (menuItem.itemId) {
+                        R.id.action_sort_order_title -> SortOrder.ArtistSongSortOrder.SONG_A_Z
+                        R.id.action_sort_order_title_desc -> SortOrder.ArtistSongSortOrder.SONG_Z_A
+                        R.id.action_sort_order_album -> SortOrder.ArtistSongSortOrder.SONG_ALBUM
+                        R.id.action_sort_order_year -> SortOrder.ArtistSongSortOrder.SONG_YEAR
+                        R.id.action_sort_order_song_duration -> SortOrder.ArtistSongSortOrder.SONG_DURATION
+                        else -> {
+                            throw IllegalArgumentException("invalid ${menuItem.title}")
+                        }
+                    }
+                    menuItem.isChecked = true
+                    setSaveSortOrder(sortOrder)
+                    return@setOnMenuItemClickListener true
+                }
+                show()
+            }
+        }
+    }
+
+    private fun setSaveSortOrder(sortOrder: String) {
+        PreferenceUtil.artistDetailSongSortOrder = sortOrder
+        songAdapter.swapDataSet(artist.sortedSongs)
+    }
+
+    private fun setUpSortOrderMenu(sortOrder: Menu) {
+        when (savedSongSortOrder) {
+            SortOrder.ArtistSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title).isChecked = true
+            SortOrder.ArtistSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked = true
+            SortOrder.ArtistSongSortOrder.SONG_ALBUM ->
+                sortOrder.findItem(R.id.action_sort_order_album).isChecked = true
+            SortOrder.ArtistSongSortOrder.SONG_YEAR ->
+                sortOrder.findItem(R.id.action_sort_order_year).isChecked = true
+            SortOrder.ArtistSongSortOrder.SONG_DURATION ->
+                sortOrder.findItem(R.id.action_sort_order_song_duration).isChecked = true
+            else-> {
+                throw IllegalArgumentException("invalid $savedSongSortOrder")
+            }
+        }
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
