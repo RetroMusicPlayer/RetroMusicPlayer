@@ -64,4 +64,6 @@
     <dimen name="m3_card_medium_radius">24dp</dimen>
     <dimen name="m3_card_large_radius">40dp</dimen>
     <dimen name="padding_album_cover">16dp</dimen>
+
+    <dimen name="seekbar_padding">16dp</dimen>
 </resources>

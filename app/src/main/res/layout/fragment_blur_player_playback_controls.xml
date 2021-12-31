@@ -41,6 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxHeight="2dp"
+        android:paddingVertical="@dimen/seekbar_padding"
         android:progressDrawable="@drawable/color_progress_seek"
         android:splitTrack="false"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
