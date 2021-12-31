@@ -26,7 +26,7 @@ object BackupHelper : KoinComponent {
 
     suspend fun createBackup(context: Context, name: String) {
         val backupFile =
-            File(backupRootPath + File.separator + name + APPEND_EXTENSION)
+            File(backupRootPath.child(name) + APPEND_EXTENSION)
         if (backupFile.parentFile?.exists() != true) {
             backupFile.parentFile?.mkdirs()
         }
@@ -86,7 +86,7 @@ object BackupHelper : KoinComponent {
                     playlistZipItems.add(
                         ZipItem(
                             playlistFile.absolutePath,
-                            PLAYLISTS_PATH + File.separator + playlistFile.name
+                            PLAYLISTS_PATH.child(playlistFile.name)
                         )
                     )
                 }
@@ -96,12 +96,12 @@ object BackupHelper : KoinComponent {
     }
 
     private fun getSettingsZipItems(context: Context): List<ZipItem> {
-        val sharedPrefPath = context.filesDir.parentFile?.absolutePath + "/shared_prefs/"
+        val sharedPrefPath = File(context.filesDir.parentFile, "shared_prefs")
         return listOf(
             "${BuildConfig.APPLICATION_ID}_preferences.xml", // App settings pref path
             "$THEME_PREFS_KEY_DEFAULT.xml"  // appthemehelper pref path
         ).map {
-            ZipItem(sharedPrefPath + it, "$SETTINGS_PATH${File.separator}$it")
+            ZipItem(File(sharedPrefPath, it).absolutePath, SETTINGS_PATH.child(it))
         }
     }
 
@@ -109,29 +109,29 @@ object BackupHelper : KoinComponent {
         return context.filesDir.listFiles { _, name ->
             name.endsWith(".jpg")
         }?.map {
-            ZipItem(it.absolutePath, "$IMAGES_PATH${File.separator}${it.name}")
+            ZipItem(it.absolutePath, IMAGES_PATH.child(it.name))
         }
     }
 
     private fun getCustomArtistZipItems(context: Context): List<ZipItem> {
         val zipItemList = mutableListOf<ZipItem>()
-        val sharedPrefPath = context.filesDir.parentFile?.absolutePath + "/shared_prefs/"
+        val sharedPrefPath = File(context.filesDir.parentFile, "shared_prefs")
 
         zipItemList.addAll(
             File(context.filesDir, "custom_artist_images")
                 .listFiles()?.map {
                     ZipItem(
                         it.absolutePath,
-                        "$CUSTOM_ARTISTS_PATH${File.separator}custom_artist_images${File.separator}${it.name}"
+                        CUSTOM_ARTISTS_PATH.child("custom_artist_images").child(it.name)
                     )
                 }?.toList() ?: listOf()
         )
-        File(sharedPrefPath + File.separator + "custom_artist_image.xml").let {
+        File(sharedPrefPath, "custom_artist_image.xml").let {
             if (it.exists()) {
                 zipItemList.add(
                     ZipItem(
                         it.absolutePath,
-                        "$CUSTOM_ARTISTS_PATH${File.separator}prefs${File.separator}custom_artist_image.xml"
+                        CUSTOM_ARTISTS_PATH.child("prefs").child("custom_artist_image.xml")
                     )
                 )
             }
@@ -171,9 +171,10 @@ object BackupHelper : KoinComponent {
     }
 
     private fun restoreImages(context: Context, zipIn: ZipInputStream, zipEntry: ZipEntry) {
-        val filePath =
-            context.filesDir.path + File.separator + zipEntry.getFileName()
-        BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
+        val file = File(
+            context.filesDir.path, zipEntry.getFileName()
+        )
+        BufferedOutputStream(FileOutputStream(file)).use { bos ->
             zipIn.copyTo(bos)
         }
     }
@@ -247,9 +248,9 @@ object BackupHelper : KoinComponent {
         zipIn: ZipInputStream,
         zipEntry: ZipEntry
     ) {
-        val filePath =
-            context.filesDir.parentFile?.absolutePath + "/shared_prefs/" + zipEntry.getFileName()
-        BufferedOutputStream(FileOutputStream(filePath)).use { bos ->
+        val file =
+            File(context.filesDir.parentFile, "shared_prefs".child(zipEntry.getFileName()))
+        BufferedOutputStream(FileOutputStream(file)).use { bos ->
             zipIn.copyTo(bos)
         }
     }
@@ -307,6 +308,10 @@ fun CharSequence.sanitize(): String {
         .replace("|", "_")
         .replace("\\", "_")
         .replace("&", "_")
+}
+
+fun String.child(child: String): String {
+    return this + File.separator + child
 }
 
 enum class BackupContent {
