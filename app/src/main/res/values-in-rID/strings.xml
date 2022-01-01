@@ -19,7 +19,7 @@
     <string name="action_go_to_album">Pergi ke album</string>
     <string name="action_go_to_artist">Pergi ke artis</string>
     <string name="action_go_to_genre">Pergi ke genre</string>
-    <string name="action_go_to_lyrics">Pergi ke lirik</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Ke direktori awal</string>
     <string name="action_grant">Izinkan</string>
     <string name="action_grid_size">Ukuran kisi</string>
@@ -134,7 +134,6 @@
     <string name="currently_listening_to_x_by_x">Saat ini mendengarkan %1$s oleh %2$s.</string>
     <string name="custom_artist_images">Gambar Artis Kustom</string>
     <string name="dark_theme_name">Agak Gelap</string>
-    <string name="databases_description">Database (Daftar Putar, Riwayat, Paling Banyak Diputar, dll.)</string>
     <string name="delete_playlist_title">Hapus daftar putar</string>
     <string name="delete_playlist_x"><![CDATA[Hapus daftar putar <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Hapus daftar putar</string>
