@@ -169,10 +169,10 @@ class CoverLrcView @JvmOverloads constructor(
                         mCurrentLine = centerLine
                         invalidate()
                         return true
-                    } else {
-                        callOnClick()
-                        return true
                     }
+                } else {
+                    callOnClick()
+                    return true
                 }
                 return super.onSingleTapConfirmed(e)
             }

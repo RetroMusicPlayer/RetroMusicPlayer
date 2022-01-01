@@ -28,9 +28,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
+import androidx.core.view.*
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -65,8 +63,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_player),
-    MusicProgressViewUpdateHelper.Callback,
-    View.OnLayoutChangeListener, PopupMenu.OnMenuItemClickListener {
+    MusicProgressViewUpdateHelper.Callback, PopupMenu.OnMenuItemClickListener {
     private var lastColor: Int = 0
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -89,8 +86,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             binding.playerQueueSheet.updatePadding(
                 top = (slideOffset * binding.statusBarLayout.statusBar.height).toInt()
             )
-            binding.recyclerView.updatePadding(
-                top = ((1 - slideOffset) * navBarHeight).toInt()
+            binding.container.updatePadding(
+                bottom = ((1 - slideOffset) * navBarHeight).toInt()
             )
         }
 
@@ -129,9 +126,9 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     private fun setupPanel() {
-        if (!ViewCompat.isLaidOut(binding.colorBackground) || binding.colorBackground.isLayoutRequested) {
-            binding.colorBackground.addOnLayoutChangeListener(this)
-            return
+        binding.colorBackground.doOnLayout {
+            val panel = getQueuePanel()
+            panel.peekHeight = binding.container.height
         }
     }
 
@@ -158,9 +155,9 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         }
         ViewCompat.setOnApplyWindowInsetsListener(
             (binding.container)
-        ) { _: View, insets: WindowInsetsCompat ->
+        ) { v: View, insets: WindowInsetsCompat ->
             navBarHeight = insets.safeGetBottomInsets()
-            binding.recyclerView.updatePadding(top = navBarHeight)
+            v.updatePadding(bottom = navBarHeight)
             insets
         }
         binding.playbackControlsFragment.root.drawAboveSystemBars()
@@ -459,21 +456,6 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
                 binding.nextSong.text = title
             }
         }
-    }
-
-    override fun onLayoutChange(
-        v: View?,
-        left: Int,
-        top: Int,
-        right: Int,
-        bottom: Int,
-        oldLeft: Int,
-        oldTop: Int,
-        oldRight: Int,
-        oldBottom: Int
-    ) {
-        val panel = getQueuePanel()
-        panel.peekHeight = binding.container.height + navBarHeight
     }
 
     private fun setupRecyclerView() {

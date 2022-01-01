@@ -29,6 +29,7 @@ import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
@@ -50,7 +51,6 @@ import com.bumptech.glide.request.target.Target
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.constant.ImageProvider
 import com.google.android.material.transition.MaterialContainerTransform
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -202,15 +202,15 @@ class UserInfoFragment : Fragment() {
     }
 
     private fun saveImage(bitmap: Bitmap, fileName: String) {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             val appDir = requireContext().filesDir
             val file = File(appDir, fileName)
             var successful = false
             runCatching {
-                val os = BufferedOutputStream(FileOutputStream(file))
-                successful = ImageUtil.resizeBitmap(bitmap, 2048)
-                    .compress(Bitmap.CompressFormat.WEBP, 100, os)
-                withContext(Dispatchers.IO) { os.close() }
+                BufferedOutputStream(FileOutputStream(file)).use {
+                    successful = ImageUtil.resizeBitmap(bitmap, 2048)
+                        .compress(Bitmap.CompressFormat.WEBP, 100, it)
+                }
             }.onFailure {
                 it.printStackTrace()
             }

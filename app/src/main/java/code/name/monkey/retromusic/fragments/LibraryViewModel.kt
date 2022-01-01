@@ -255,11 +255,13 @@ class LibraryViewModel(
                 }
                 repository.insertSongs(songEntities)
             } else {
-                val playListId = createPlaylist(PlaylistEntity(playlistName = playlist.name))
-                val songEntities = playlist.getSongs().map {
-                    it.toSongEntity(playListId)
+                if (playlist != Playlist.empty){
+                    val playListId = createPlaylist(PlaylistEntity(playlistName = playlist.name))
+                    val songEntities = playlist.getSongs().map {
+                        it.toSongEntity(playListId)
+                    }
+                    repository.insertSongs(songEntities)
                 }
-                repository.insertSongs(songEntities)
             }
             forceReload(Playlists)
         }

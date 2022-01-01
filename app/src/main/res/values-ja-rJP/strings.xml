@@ -135,7 +135,6 @@
     <string name="currently_listening_to_x_by_x">現在、 %1$s によって %2$s で聴いています。</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">ダーク</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">プレイリストを削除</string>
     <string name="delete_playlist_x"><![CDATA[プレイリスト <b>%1$s</b> を削除しますか?]]></string>
     <string name="delete_playlists_title">プレイリストを削除</string>

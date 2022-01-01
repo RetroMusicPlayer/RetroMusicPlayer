@@ -136,7 +136,6 @@
     <string name="currently_listening_to_x_by_x">Şu anda %2$s şarkıcısından %1$s dinleniyor.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Koyu</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Çalma listesini sil</string>
     <string name="delete_playlist_x"><![CDATA[Oynatma listesi <b>%1$s</b> silinsin mi?]]></string>
     <string name="delete_playlists_title">Çalma listelerini sil</string>

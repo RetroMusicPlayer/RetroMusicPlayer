@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.repository
 import android.content.ContentResolver
 import android.database.Cursor
 import android.provider.BaseColumns
-import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
 import android.provider.MediaStore.Audio.Playlists.*
 import android.provider.MediaStore.Audio.PlaylistsColumns
@@ -120,13 +119,18 @@ class RealPlaylistRepository(
     private fun getPlaylistFromCursorImpl(
         cursor: Cursor
     ): Playlist {
-        val id = cursor.getLong(MediaStore.MediaColumns._ID)
-        val name = cursor.getString(NAME)
-        return Playlist(id, name)
+        val id = cursor.getLong(0)
+        val name = cursor.getString(1)
+        return if (name != null) {
+            Playlist(id, name)
+        } else {
+            Playlist.empty
+        }
     }
 
     override fun playlistSongs(playlistId: Long): List<Song> {
         val songs = arrayListOf<Song>()
+        if (playlistId == -1L) return songs
         val cursor = makePlaylistSongCursor(playlistId)
 
         if (cursor != null && cursor.moveToFirst()) {

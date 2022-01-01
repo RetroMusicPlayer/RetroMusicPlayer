@@ -140,7 +140,6 @@
     <string name="currently_listening_to_x_by_x">Aktualnie odtwarzane %1$s wykonawcy %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Dość ciemny</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Usuń playlistę</string>
     <string name="delete_playlist_x"><![CDATA[Usunąć playlistę <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Usuń playlisty</string>

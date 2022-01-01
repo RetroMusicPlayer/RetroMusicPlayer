@@ -136,7 +136,6 @@
     <string name="currently_listening_to_x_by_x">Παίζει το %1$s από τους %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Κάπως Σκούρο</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Διαγραφή playlist</string>
     <string name="delete_playlist_x"><![CDATA[Διαγραφή της λίστα αναπαραγωγής <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Διαγραφή αυτών των λιστών αναπαραγωγής</string>

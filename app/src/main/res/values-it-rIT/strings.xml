@@ -137,7 +137,6 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="currently_listening_to_x_by_x">Ascoltando attualmente %1$s di %2$s.</string>
     <string name="custom_artist_images">Immagini dell\'Artista Personalizzate</string>
     <string name="dark_theme_name">Scuro</string>
-    <string name="databases_description">Database (Playlist, Cronologia, Più riprodotti, ecc.)</string>
     <string name="delete_playlist_title">Elimina playlist</string>
     <string name="delete_playlist_x"><![CDATA[Elimina la playlist <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Elimina playlist</string>

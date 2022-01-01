@@ -140,7 +140,6 @@
     <string name="currently_listening_to_x_by_x">Aktuálně posloucháš %1$s od %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Tmavá</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Smazat seznam skladeb</string>
     <string name="delete_playlist_x"><![CDATA[Smazat seznam skladeb <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Smazat seznamy skladeb</string>
