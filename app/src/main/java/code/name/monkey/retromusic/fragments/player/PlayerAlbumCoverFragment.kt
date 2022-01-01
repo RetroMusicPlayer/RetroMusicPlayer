@@ -225,7 +225,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     private fun showLyrics(visible: Boolean) {
         ObjectAnimator.ofFloat(lrcView, View.ALPHA, if (visible) 1F else 0F).apply {
             doOnEnd {
-                lrcView.isVisible = visible
+                _binding?.lyricsView?.isVisible = visible
             }
             start()
         }
