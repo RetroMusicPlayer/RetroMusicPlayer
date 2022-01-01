@@ -31,7 +31,9 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
-/** @author Andrew Neal, Karim Abou Zeid (kabouzeid) */
+/**
+ * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
+ */
 public class MultiPlayer
         implements Playback, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
     public static final String TAG = MultiPlayer.class.getSimpleName();
@@ -40,12 +42,14 @@ public class MultiPlayer
     private MediaPlayer mNextMediaPlayer;
 
     private final Context context;
-  @Nullable
-  private Playback.PlaybackCallbacks callbacks;
+    @Nullable
+    private Playback.PlaybackCallbacks callbacks;
 
     private boolean mIsInitialized = false;
 
-    /** Constructor of <code>MultiPlayer</code> */
+    /**
+     * Constructor of <code>MultiPlayer</code>
+     */
     MultiPlayer(final Context context) {
         this.context = context;
         mCurrentMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
@@ -67,7 +71,7 @@ public class MultiPlayer
 
     /**
      * @param player The {@link MediaPlayer} to use
-     * @param path The path of the file, or the http/rtsp URL of the stream you want to play
+     * @param path   The path of the file, or the http/rtsp URL of the stream you want to play
      * @return True if the <code>player</code> has been prepared and is ready to play, false otherwise
      */
     private boolean setDataSourceImpl(@NonNull final MediaPlayer player, @NonNull final String path) {
@@ -155,13 +159,17 @@ public class MultiPlayer
         this.callbacks = callbacks;
     }
 
-    /** @return True if the player is ready to go, false otherwise */
+    /**
+     * @return True if the player is ready to go, false otherwise
+     */
     @Override
     public boolean isInitialized() {
         return mIsInitialized;
     }
 
-    /** Starts or resumes playback. */
+    /**
+     * Starts or resumes playback.
+     */
     @Override
     public boolean start() {
         try {
@@ -172,14 +180,18 @@ public class MultiPlayer
         }
     }
 
-    /** Resets the MediaPlayer to its uninitialized state. */
+    /**
+     * Resets the MediaPlayer to its uninitialized state.
+     */
     @Override
     public void stop() {
         mCurrentMediaPlayer.reset();
         mIsInitialized = false;
     }
 
-    /** Releases resources associated with this MediaPlayer object. */
+    /**
+     * Releases resources associated with this MediaPlayer object.
+     */
     @Override
     public void release() {
         stop();
@@ -189,7 +201,9 @@ public class MultiPlayer
         }
     }
 
-    /** Pauses playback. Call start() to resume. */
+    /**
+     * Pauses playback. Call start() to resume.
+     */
     @Override
     public boolean pause() {
         try {
@@ -200,7 +214,9 @@ public class MultiPlayer
         }
     }
 
-    /** Checks whether the MultiPlayer is playing. */
+    /**
+     * Checks whether the MultiPlayer is playing.
+     */
     @Override
     public boolean isPlaying() {
         return mIsInitialized && mCurrentMediaPlayer.isPlaying();
@@ -291,7 +307,9 @@ public class MultiPlayer
         return mCurrentMediaPlayer.getAudioSessionId();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean onError(final MediaPlayer mp, final int what, final int extra) {
         mIsInitialized = false;
@@ -308,7 +326,9 @@ public class MultiPlayer
         return false;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onCompletion(final MediaPlayer mp) {
         if (mp.equals(mCurrentMediaPlayer) && mNextMediaPlayer != null) {
@@ -323,6 +343,7 @@ public class MultiPlayer
         }
     }
 
-  @Override
-  public void setCrossFadeDuration(int duration) { }
+    @Override
+    public void setCrossFadeDuration(int duration) {
+    }
 }
