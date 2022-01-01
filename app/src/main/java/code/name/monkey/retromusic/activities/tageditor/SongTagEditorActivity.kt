@@ -71,7 +71,18 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setUpViews() {
+
+        val title = intent.extras?.getString(TITLE_ID)
+        val author = intent.extras?.getString(AUTHOR_ID)
+
         fillViewsWithFileTags()
+
+        if (title != null && author != null) {
+            binding.songText.setText(title)
+            binding.albumArtistText.setText(author)
+            binding.artistText.setText(author)
+        }
+
         binding.songTextContainer.setTint(false)
         binding.composerContainer.setTint(false)
         binding.albumTextContainer.setTint(false)
@@ -93,6 +104,20 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.discNumberText.appHandleColor().addTextChangedListener(this)
         binding.lyricsText.appHandleColor().addTextChangedListener(this)
         binding.songComposerText.appHandleColor().addTextChangedListener(this)
+    }
+
+    private fun fillViewsWithArrayTags(tags: Array<String>) {
+        binding.songText.setText(tags[0])
+        binding.albumArtistText.setText(tags[1])
+        binding.albumText.setText(tags[2])
+        binding.artistText.setText(tags[3])
+        binding.genreText.setText(tags[4])
+        binding.yearText.setText(tags[5])
+        binding.trackNumberText.setText(tags[6])
+        binding.discNumberText.setText(tags[7])
+        binding.lyricsText.setText(tags[8])
+        binding.songComposerText.setText(tags[9])
+        println(songTitle + songYear)
     }
 
     private fun fillViewsWithFileTags() {
@@ -171,7 +196,14 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
 
     override fun getSongPaths(): List<String> = listOf(songRepository.song(id).data)
 
-    override fun getSongUris(): List<Uri> = listOf(MusicUtil.getSongFileUri(id))
+    override fun getSongUris(): List<Uri> {
+        val path = intent.extras?.getString(PATH_ID)
+        return if (path != null) {
+            listOf(Uri.parse(path))
+        } else {
+            listOf(MusicUtil.getSongFileUri(id))
+        }
+    }
 
     override fun loadImageFromFile(selectedFile: Uri?) {
         GlideApp.with(this@SongTagEditorActivity).asBitmapPalette().load(selectedFile)

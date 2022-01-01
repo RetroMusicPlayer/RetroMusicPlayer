@@ -47,6 +47,7 @@ import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.SAFUtil
+import com.afollestad.materialdialogs.utils.MDUtil.getStringArray
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.GlobalScope
@@ -460,6 +461,10 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
 
     companion object {
         const val EXTRA_ID = "extra_id"
+        const val TAGS_ID = "tags_id"
+        const val TITLE_ID = "title_id"
+        const val AUTHOR_ID = "author_id"
+        const val PATH_ID = "path_id"
         const val EXTRA_PALETTE = "extra_palette"
         private val TAG = AbsTagEditorActivity::class.java.simpleName
         private const val REQUEST_CODE_SELECT_IMAGE = 1000

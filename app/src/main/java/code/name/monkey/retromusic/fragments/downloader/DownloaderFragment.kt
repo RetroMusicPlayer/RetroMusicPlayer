@@ -2,10 +2,10 @@ package code.name.monkey.retromusic.fragments.downloader
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
+import android.content.ContentValues
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,18 +13,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
+import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
+import code.name.monkey.retromusic.adapter.YTSearchAdapter
 import code.name.monkey.retromusic.databinding.FragmentDownloaderBinding
-import code.name.monkey.retromusic.databinding.FragmentUserInfoBinding
 import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.util.MediaStoreUtil
 import com.yausername.ffmpeg.FFmpeg
 import com.yausername.youtubedl_android.YoutubeDL
 import com.yausername.youtubedl_android.YoutubeDLException
-import com.yausername.youtubedl_android.YoutubeDLRequest
 import java.io.File
 
 class DownloaderFragment : Fragment() {
@@ -44,31 +43,27 @@ class DownloaderFragment : Fragment() {
     }
 
     fun onClick() {
-        /*val dir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "youtube_dl")
-        val request = YoutubeDLRequest(binding.editText.text.toString())
-        request.addOption("-o", dir.absolutePath + "/%(title)s.%(ext)s")
-        request.addOption("-f", "bestaudio")
-        request.addOption("--extract-audio")
-        request.addOption("--audio-format", "mp3")
+        model.searchVideos(binding.searchView.text.toString())
+    }
 
-        YoutubeDL.getInstance().execute(request)*/
-
-        //val notifyManager: NotificationManager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    fun download(link: String): Unit {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel("Ytdl", "Retro Music", NotificationManager.IMPORTANCE_LOW).apply {
+            val channel = NotificationChannel(
+                NOTIFICATION_CHANNEL_ID,
+                "Retro Music",
+                NotificationManager.IMPORTANCE_LOW
+            ).apply {
                 description = "Downloading"
             }
         }
-        val builder = NotificationCompat.Builder(activity!!.applicationContext, "ytdl")
+        val builder = NotificationCompat.Builder(activity!!.applicationContext, NOTIFICATION_CHANNEL_ID)
         builder
             .setContentTitle("Downloading")
             .setSmallIcon(R.drawable.ic_download_music)
 
-        NotificationManagerCompat.from(activity!!.applicationContext).apply {
-            builder.setProgress(100, 0, false)
-            notify(1, builder.build())
-            model.downloadVideo(link = binding.editText.text.toString(), builder = builder)
-        }
+        Log.d("Downloader", MediaStore.Audio.Media.getContentUri("external").path!!)
+
+        model.downloadVideo(link = link, builder = builder, context = context!!, id = id)
     }
 
 
@@ -85,8 +80,47 @@ class DownloaderFragment : Fragment() {
         applyToolbar(binding.toolbar)
 
         binding.downloadButton.setOnClickListener {
-            onClick()
+            binding.downloadButton.isEnabled = false
+            download(binding.searchView.text.toString())
         }
+
+        binding.searchResults.adapter =
+            model.results?.let { YTSearchAdapter(data = it, onClick = {download(it)}) }
+        model.songInfo.observeForever {
+            val tagEditorIntent = Intent(activity, SongTagEditorActivity::class.java)
+            tagEditorIntent.putExtra(AbsTagEditorActivity.TITLE_ID, it.title)
+            tagEditorIntent.putExtra(AbsTagEditorActivity.AUTHOR_ID, it.author)
+            tagEditorIntent.putExtra(AbsTagEditorActivity.EXTRA_ID, getSongId(it.path))
+            activity?.startActivity(tagEditorIntent)
+            MediaStoreUtil.addToMediaStore(File(it.path), context!!)
+            binding.downloadButton.isEnabled = true
+        }
+    }
+
+
+
+    private fun getSongId(path: String): Long {
+        val cr = context!!.contentResolver
+        val uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+        val selection: String = MediaStore.Audio.Media.DATA
+        val selArgs = arrayOf(path)
+        val projection = arrayOf(MediaStore.Audio.Media._ID)
+        val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
+
+        val values = ContentValues()
+        values.put(MediaStore.Audio.Media.DATA, path)
+
+        val cursor = cr.query(uri, projection, "$selection=?", selArgs, null)
+        var songId: Long = 0
+        if (cursor != null && cursor.moveToFirst()) {
+            val idIndex = cursor.getColumnIndex(MediaStore.Audio.Media._ID)
+            songId = cursor.getString(idIndex).toLong()
+        }
+        return songId
+    }
+
+    companion object {
+        const val NOTIFICATION_CHANNEL_ID: String = "yt_downloader"
     }
 
 }

@@ -96,7 +96,7 @@ class HomeFragment :
 
     private fun adjustPlaylistButtons() {
         val buttons =
-            listOf(binding.history, binding.lastAdded, binding.topPlayed, binding.actionShuffle)
+            listOf(binding.history, binding.lastAdded, binding.topPlayed, binding.actionShuffle, binding.downloadButton!!)
         buttons.maxOf { it.lineCount }.let { maxLineCount->
             buttons.forEach { button ->
                 // Set the highest line count to every button for consistency
@@ -210,6 +210,7 @@ class HomeFragment :
         binding.lastAdded.elevatedAccentColor()
         binding.topPlayed.elevatedAccentColor()
         binding.actionShuffle.elevatedAccentColor()
+        binding.downloadButton?.elevatedAccentColor()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
