@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.ContentValues
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -19,7 +20,9 @@ import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.adapter.YTSearchAdapter
 import code.name.monkey.retromusic.databinding.FragmentDownloaderBinding
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.elevatedAccentColor
 import code.name.monkey.retromusic.util.MediaStoreUtil
 import com.yausername.ffmpeg.FFmpeg
 import com.yausername.youtubedl_android.YoutubeDL
@@ -72,6 +75,7 @@ class DownloaderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDownloaderBinding.inflate(layoutInflater)
+        binding.progressBar.elevatedAccentColor()
         return binding.root
     }
 
@@ -83,9 +87,11 @@ class DownloaderFragment : Fragment() {
             binding.downloadButton.isEnabled = false
             download(binding.searchView.text.toString())
         }
-
-        binding.searchResults.adapter =
-            model.results?.let { YTSearchAdapter(data = it, onClick = {download(it)}) }
+        model.progress.observeForever {
+            binding.progressBar.progress = it
+        }
+        //binding.searchResults.adapter =
+        //    model.results?.let { YTSearchAdapter(data = it, onClick = {download(it)}) }
         model.songInfo.observeForever {
             val tagEditorIntent = Intent(activity, SongTagEditorActivity::class.java)
             tagEditorIntent.putExtra(AbsTagEditorActivity.TITLE_ID, it.title)

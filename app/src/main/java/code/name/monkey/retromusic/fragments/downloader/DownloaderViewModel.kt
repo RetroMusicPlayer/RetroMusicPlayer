@@ -36,6 +36,10 @@ class DownloaderViewModel : ViewModel() {
         MutableLiveData<SongInfo>()
     }
 
+    val progress: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
+    }
+
 
     fun downloadVideo(link: String, builder: NotificationCompat.Builder, context: Context, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -70,11 +74,13 @@ class DownloaderViewModel : ViewModel() {
                 .setOnlyAlertOnce(true)
                 .setProgress(100, 0, false)
             notificationManager.notify(id, notification.build())
-            YoutubeDL.getInstance().execute(request) { progress: Float, _ ->
+            YoutubeDL.getInstance().execute(request) { dProgress: Float, _ ->
                 //showProgress(id, "Downloading", progress.toInt(), 100, notificationManager, context, builder)
-                notification.setProgress(100, progress.toInt(), false)
+                progress.postValue(dProgress.toInt())
+                notification.setProgress(100, dProgress.toInt(), false)
                 notificationManager.notify(id, notification.build())
             }
+            progress.postValue(100)
             notificationManager.cancel(id)
             showProgress(id, "Finished", 0, 0, notificationManager, context, builder)
             val info = YoutubeDL.getInstance().getInfo(request)
@@ -87,7 +93,7 @@ class DownloaderViewModel : ViewModel() {
             )
         }
     }
-
+    // TODO: remove this method
     private fun showProgress(
         id: Int,
         name: String,

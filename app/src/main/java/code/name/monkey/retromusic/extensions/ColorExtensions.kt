@@ -18,6 +18,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.drawable.Drawable
 import android.widget.Button
 import android.widget.CheckBox
@@ -43,6 +44,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.textfield.TextInputLayout
 
 fun Int.ripAlpha(): Int {
@@ -139,6 +141,11 @@ fun MaterialButton.elevatedAccentColor() {
     setBackgroundColor(color)
     setTextColor(MaterialValueHelper.getPrimaryTextColor(context, color.isColorLight))
     iconTint = ColorStateList.valueOf(context.accentColor())
+}
+
+fun LinearProgressIndicator.elevatedAccentColor() {
+    progressDrawable?.setColorFilter(context.accentColor(), android.graphics.PorterDuff.Mode.MULTIPLY)
+    //progressDrawable.setColorFilter(context.accentColor(), android.graphics.PorterDuff.Mode.MULTIPLY)
 }
 
 fun SeekBar.applyColor(@ColorInt color: Int) {
