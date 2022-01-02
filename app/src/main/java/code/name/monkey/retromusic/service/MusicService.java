@@ -431,9 +431,7 @@ public class MusicService extends MediaBrowserServiceCompat
         registerReceiver(lockScreenReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
 
         setSessionToken(mediaSession.getSessionToken());
-        if (VersionUtils.INSTANCE.hasMarshmallow()) {
-            notificationManager = getSystemService(NotificationManager.class);
-        }
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         initNotification();
 
         mediaStoreObserver = new MediaStoreObserver(this, playerHandler);
