@@ -134,7 +134,7 @@
     <string name="created_playlist_x">Lista de reproducción %1$s creada.</string>
     <string name="credit_title">Miembros y colaboradores </string>
     <string name="currently_listening_to_x_by_x">Actualmente estás escuchando %1$s de %2$s.</string>
-    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="custom_artist_images">自定义艺术家图像</string>
     <string name="dark_theme_name">Un poco Oscuro</string>
     <string name="delete_playlist_title">Eliminar lista de reproducción</string>
     <string name="delete_playlist_x"><![CDATA[¿Eliminar la lista de reproducción <b>%1$s</b>?]]></string>
@@ -151,7 +151,7 @@
     <string name="device_info">Información del dispositivo</string>
     <string name="dialog_message_set_ringtone">Permitir a Retro Music modificar los ajustes de audio</string>
     <string name="dialog_title_set_ringtone">Establecer tono de llamada</string>
-    <string name="disc_hint">Disc Number</string>
+    <string name="disc_hint">Disco numero</string>
     <string name="do_you_want_to_clear_the_blacklist">¿Quieres limpiar la lista negra?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[¿Quiere eliminar <b>%1$s</b> de la lista negra?]]></string>
     <string name="donate">Donar</string>
@@ -484,7 +484,7 @@
     <string name="up_next">A continuación</string>
     <string name="update_image">Actualizar imagen</string>
     <string name="updating">Actualizando…</string>
-    <string name="user_images_description">User Images</string>
+    <string name="user_images_description">Imágenes del Usuario</string>
     <string name="user_name">Nombre de Usuario</string>
     <string name="username">Usuario</string>
     <string name="version">Versión</string>
