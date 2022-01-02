@@ -39,6 +39,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.viewpager.widget.ViewPager
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
@@ -237,7 +238,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             val isFavorite: Boolean =
                 libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
             withContext(Main) {
-                val icon = if (animate) {
+                val icon = if (animate && VersionUtils.hasMarshmallow()) {
                     if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
                 } else {
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border

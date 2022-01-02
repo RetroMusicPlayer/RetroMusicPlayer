@@ -30,6 +30,7 @@ import android.widget.SeekBar
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFullPlayerControlsBinding
 import code.name.monkey.retromusic.db.PlaylistEntity
@@ -320,7 +321,7 @@ class FullPlaybackControlsFragment :
             val isFavorite: Boolean =
                 libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
             withContext(Dispatchers.Main) {
-                val icon = if (animate) {
+                val icon = if (animate && VersionUtils.hasMarshmallow()) {
                     if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
                 } else {
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
