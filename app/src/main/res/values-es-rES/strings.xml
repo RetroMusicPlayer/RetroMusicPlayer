@@ -19,7 +19,7 @@
     <string name="action_go_to_album">Ir al álbum</string>
     <string name="action_go_to_artist">Ir al artista</string>
     <string name="action_go_to_genre">Ir al género</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">Welcome,</string>
     <string name="action_go_to_start_directory">Ir al directorio de inicio</string>
     <string name="action_grant">Permitir</string>
     <string name="action_grid_size">Tamaño de la cuadricula</string>
@@ -114,7 +114,7 @@
     <string name="cascading">Cascadita</string>
     <string name="changelog">Cambios</string>
     <string name="changelog_summary">Consulte las novedades</string>
-    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="choose_restore_title">Welcome,</string>
     <string name="circle">Círculo</string>
     <string name="circular">Circulares</string>
     <string name="classic">Clásicos</string>
