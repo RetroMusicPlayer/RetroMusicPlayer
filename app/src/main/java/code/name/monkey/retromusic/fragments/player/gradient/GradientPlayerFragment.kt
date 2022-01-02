@@ -28,7 +28,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.*
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -63,7 +65,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_player),
-    MusicProgressViewUpdateHelper.Callback, PopupMenu.OnMenuItemClickListener {
+    MusicProgressViewUpdateHelper.Callback,
+    View.OnLayoutChangeListener, PopupMenu.OnMenuItemClickListener {
     private var lastColor: Int = 0
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -126,9 +129,9 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     private fun setupPanel() {
-        binding.colorBackground.doOnLayout {
-            val panel = getQueuePanel()
-            panel.peekHeight = binding.container.height
+        if (!ViewCompat.isLaidOut(binding.colorBackground) || binding.colorBackground.isLayoutRequested) {
+            binding.colorBackground.addOnLayoutChangeListener(this)
+            return
         }
     }
 
@@ -450,11 +453,30 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     private fun updateLabel() {
         (MusicPlayerRemote.playingQueue.size - 1).apply {
             if (this == (MusicPlayerRemote.position)) {
-                binding.nextSong.text = "Last song"
+                binding.nextSong.text = context?.resources?.getString(R.string.last_song)
             } else {
                 val title = MusicPlayerRemote.playingQueue[MusicPlayerRemote.position + 1].title
                 binding.nextSong.text = title
             }
+        }
+    }
+
+    override fun onLayoutChange(
+        v: View?,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+        oldLeft: Int,
+        oldTop: Int,
+        oldRight: Int,
+        oldBottom: Int
+    ) {
+        val panel = getQueuePanel()
+        if (panel.state == STATE_COLLAPSED) {
+            panel.peekHeight = binding.container.height
+        } else if (panel.state == STATE_EXPANDED) {
+            panel.peekHeight = binding.container.height + navBarHeight
         }
     }
 
