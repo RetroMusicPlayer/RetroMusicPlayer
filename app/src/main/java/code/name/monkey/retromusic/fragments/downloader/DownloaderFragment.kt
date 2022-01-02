@@ -105,7 +105,6 @@ class DownloaderFragment : Fragment() {
         val selection: String = MediaStore.Audio.Media.DATA
         val selArgs = arrayOf(path)
         val projection = arrayOf(MediaStore.Audio.Media._ID)
-        val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
 
         val values = ContentValues()
         values.put(MediaStore.Audio.Media.DATA, path)

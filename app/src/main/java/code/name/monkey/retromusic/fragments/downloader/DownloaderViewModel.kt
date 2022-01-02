@@ -48,7 +48,8 @@ class DownloaderViewModel : ViewModel() {
             request.addOption("--audio-format", "mp3")
             request.addOption("--audio-quality", 0)
 
-            var notificationManager: NotificationManager? = null
+            val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as
+                    NotificationManager
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val name = "Downloading"
@@ -58,14 +59,24 @@ class DownloaderViewModel : ViewModel() {
                     DownloaderFragment.NOTIFICATION_CHANNEL_ID, name, importance).apply {
                     description = descriptionText
                 }
-                notificationManager =
-                    context.getSystemService(Context.NOTIFICATION_SERVICE) as
-                            NotificationManager?
-                notificationManager?.createNotificationChannel(channel)
             }
+            val notification = NotificationCompat.Builder(
+                context,
+                DownloaderFragment.NOTIFICATION_CHANNEL_ID
+            )
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setSmallIcon(R.drawable.ic_download_music)
+                .setContentTitle("Downloading")
+                .setOnlyAlertOnce(true)
+                .setProgress(100, 0, false)
+            notificationManager.notify(id, notification.build())
             YoutubeDL.getInstance().execute(request) { progress: Float, _ ->
-                showProgress(id, "Downloading", progress.toInt(), notificationManager, context, builder)
+                //showProgress(id, "Downloading", progress.toInt(), 100, notificationManager, context, builder)
+                notification.setProgress(100, progress.toInt(), false)
+                notificationManager.notify(id, notification.build())
             }
+            notificationManager.cancel(id)
+            showProgress(id, "Finished", 0, 0, notificationManager, context, builder)
             val info = YoutubeDL.getInstance().getInfo(request)
             songInfo.postValue(
                 SongInfo(
@@ -81,6 +92,7 @@ class DownloaderViewModel : ViewModel() {
         id: Int,
         name: String,
         progress: Int,
+        progressMax: Int,
         notificationManager: NotificationManager?,
         context: Context,
         builder: NotificationCompat.Builder
@@ -89,16 +101,13 @@ class DownloaderViewModel : ViewModel() {
             context,
             DownloaderFragment.NOTIFICATION_CHANNEL_ID
         )
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setSmallIcon(R.drawable.ic_download_music)
             .setContentTitle(name)
-            .setProgress(100, progress, false)
+            .setProgress(progressMax, progress, false)
             .build()
         notificationManager?.notify(id, notification)
-        with(NotificationManagerCompat.from(context)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(id, builder.build())
-        }
+        //notificationManager.notify(id, builder.build())
 
     }
 
