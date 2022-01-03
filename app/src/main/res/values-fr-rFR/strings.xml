@@ -19,7 +19,7 @@
     <string name="action_go_to_album">Aller à l\'album</string>
     <string name="action_go_to_artist">Aller à l\'artiste</string>
     <string name="action_go_to_genre">Aller au genre</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">Voir les paroles</string>
     <string name="action_go_to_start_directory">Aller au dossier de départ</string>
     <string name="action_grant">Accorder</string>
     <string name="action_grid_size">Taille de l\'affichage</string>
@@ -83,7 +83,7 @@
     <string name="audio_focus_denied">Focus audio refusé.</string>
     <string name="audio_settings_summary">Changer les paramètres audio et ajuster l\'égaliseur</string>
     <string name="auto">Automatique</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="backup_restore_settings_summary">Sauvegarder et restaurer vos paramètres, vos listes de lecture</string>
     <string name="backup_restore_title"><![CDATA[Sauvegarder & Restaurer]]></string>
     <string name="backup_title">Sauvegardes</string>
     <string name="biography">Biographie</string>
@@ -114,7 +114,7 @@
     <string name="cascading">En cascade</string>
     <string name="changelog">Liste des changements</string>
     <string name="changelog_summary">Découvrez les nouveautés</string>
-    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="choose_restore_title">Choisir les éléments à restaurer</string>
     <string name="circle">Cercle</string>
     <string name="circular">Circulaire</string>
     <string name="classic">Classique</string>
@@ -151,7 +151,7 @@
     <string name="device_info">Informations sur l\'appareil</string>
     <string name="dialog_message_set_ringtone">Autoriser Retro Music à modifier les paramètres audios</string>
     <string name="dialog_title_set_ringtone">Définir comme sonnerie</string>
-    <string name="disc_hint">Disc Number</string>
+    <string name="disc_hint">Numéro de disque</string>
     <string name="do_you_want_to_clear_the_blacklist">Voulez-vous vraiment vider la liste noire ?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Voulez-vous vraiment retirer <b>%1$s</b> de la liste noire ?]]></string>
     <string name="donate">Faire un don</string>
@@ -391,7 +391,7 @@
     <string name="reset_action">Réinitialiser</string>
     <string name="reset_artist_image">Réinitialiser la photo de l\'artiste</string>
     <string name="restore">Restaurer</string>
-    <string name="restore_message">Do you want to restore backup?</string>
+    <string name="restore_message">Voulez-vous restaurer cette sauvegarde ?</string>
     <string name="restored_previous_purchase_please_restart">Achat précédent restauré. Veuillez redémarrer l\'application pour utiliser toutes les fonctionnalités.</string>
     <string name="restored_previous_purchases">Achats précédents restaurés.</string>
     <string name="restoring_purchase">Restauration de l\'achat…</string>
@@ -468,7 +468,7 @@
     <string name="tiny">Petit</string>
     <string name="tiny_card_style">Petite carte</string>
     <string name="title">Titre</string>
-    <string name="title_new_backup">New Backup</string>
+    <string name="title_new_backup">Nouvelle sauvegarde</string>
     <string name="today">Aujourd\'hui</string>
     <string name="top_albums">Meilleurs albums</string>
     <string name="top_artists">Top artistes</string>
