@@ -31,6 +31,8 @@ class DownloaderViewModel : ViewModel() {
     data class DownloadResult(val successful: Boolean, val songInfo: SongInfo)
     data class DownloaderSearchResult(val successful: Boolean, val results: List<SearchResult>?)
 
+    var downloading: Boolean = false
+
     val results: MutableLiveData<DownloaderSearchResult> by lazy {
         MutableLiveData<DownloaderSearchResult>(DownloaderSearchResult(false, listOf()))
     }
@@ -53,7 +55,7 @@ class DownloaderViewModel : ViewModel() {
 
     fun downloadVideo(link: String, builder: NotificationCompat.Builder, context: Context, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.d("Downloader", " Uri: ${PreferenceUtil.safSdCardUri}")
+            downloading = true
             val dir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "music")
             val request = YoutubeDLRequest(link)
             request.addOption("-o", "${dir.absolutePath}/%(title)s.%(ext)s")
@@ -113,6 +115,8 @@ class DownloaderViewModel : ViewModel() {
                 downloadResult.postValue(
                     DownloadResult(successful = false, songInfo = SongInfo("", "", ""))
                 )
+            } finally {
+                downloading = false
             }
         }
     }

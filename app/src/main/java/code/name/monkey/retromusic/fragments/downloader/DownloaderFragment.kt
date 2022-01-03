@@ -96,7 +96,11 @@ class DownloaderFragment : Fragment() {
         if (data != null) {
             resultData = data
         }
-        binding.searchResults.adapter = YTSearchAdapter(resultData) {download(it)}
+        binding.searchResults.adapter = YTSearchAdapter(resultData) {
+            if (!model.downloading) {
+                download(it)
+            }
+        }
         binding.searchResults.layoutManager = LinearLayoutManager(context)
         binding.toolbarContainer.drawNextToNavbar()
         binding.appBarLayout.statusBarForeground =

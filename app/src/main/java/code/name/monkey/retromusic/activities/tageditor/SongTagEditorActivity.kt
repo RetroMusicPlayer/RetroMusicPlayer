@@ -81,6 +81,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
             binding.songText.setText(title)
             binding.albumArtistText.setText(author)
             binding.artistText.setText(author)
+            dataChanged()
         }
 
         binding.songTextContainer.setTint(false)
@@ -104,20 +105,6 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.discNumberText.appHandleColor().addTextChangedListener(this)
         binding.lyricsText.appHandleColor().addTextChangedListener(this)
         binding.songComposerText.appHandleColor().addTextChangedListener(this)
-    }
-
-    private fun fillViewsWithArrayTags(tags: Array<String>) {
-        binding.songText.setText(tags[0])
-        binding.albumArtistText.setText(tags[1])
-        binding.albumText.setText(tags[2])
-        binding.artistText.setText(tags[3])
-        binding.genreText.setText(tags[4])
-        binding.yearText.setText(tags[5])
-        binding.trackNumberText.setText(tags[6])
-        binding.discNumberText.setText(tags[7])
-        binding.lyricsText.setText(tags[8])
-        binding.songComposerText.setText(tags[9])
-        println(songTitle + songYear)
     }
 
     private fun fillViewsWithFileTags() {
