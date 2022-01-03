@@ -109,12 +109,6 @@ class HomeFragment :
     private fun setupListeners() {
 
         binding.downloadButton?.setOnClickListener {
-            val toast = Toast.makeText(
-                activity?.applicationContext,
-                "Test",
-                Toast.LENGTH_SHORT
-            )
-            toast.show()
             findNavController().navigate(
                 R.id.download_fragment
             )

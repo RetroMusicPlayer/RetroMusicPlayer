@@ -3,41 +3,51 @@ package code.name.monkey.retromusic.fragments.downloader
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
-import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
-import code.name.monkey.retromusic.adapter.YTSearchResult
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.PreferenceUtil.safSdCardUri
+import com.google.api.client.extensions.android.http.AndroidHttp
+import com.google.api.client.json.jackson2.JacksonFactory
+import com.google.api.services.youtube.YouTube
+import com.google.api.services.youtube.model.SearchResult
+import com.google.api.services.youtube.model.Video
 import com.yausername.youtubedl_android.YoutubeDL
+import com.yausername.youtubedl_android.YoutubeDLException
 import com.yausername.youtubedl_android.YoutubeDLRequest
-import com.yausername.youtubedl_android.YoutubeDLResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
+import java.lang.Exception
 
 class DownloaderViewModel : ViewModel() {
 
     data class SongInfo(val title: String, val author: String, val path: String)
+    data class DownloadResult(val successful: Boolean, val songInfo: SongInfo)
+    data class DownloaderSearchResult(val successful: Boolean, val results: List<SearchResult>?)
 
-    var results: Array<YTSearchResult>? = null
+    val results: MutableLiveData<DownloaderSearchResult> by lazy {
+        MutableLiveData<DownloaderSearchResult>(DownloaderSearchResult(false, listOf()))
+    }
 
-    val songInfo: MutableLiveData<SongInfo> by lazy {
-        MutableLiveData<SongInfo>()
+    val downloadResult: MutableLiveData<DownloadResult> by lazy {
+        MutableLiveData<DownloadResult>()
     }
 
     val progress: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>()
+    }
+
+    private var service: com.google.api.services.youtube.YouTube? = null
+
+    companion object {
+        const val DEBUG_TAG = "Downloader ViewModel"
+        private const val DESTINATION_TERM = "Destination:"
     }
 
 
@@ -74,23 +84,36 @@ class DownloaderViewModel : ViewModel() {
                 .setOnlyAlertOnce(true)
                 .setProgress(100, 0, false)
             notificationManager.notify(id, notification.build())
-            YoutubeDL.getInstance().execute(request) { dProgress: Float, _ ->
-                //showProgress(id, "Downloading", progress.toInt(), 100, notificationManager, context, builder)
-                progress.postValue(dProgress.toInt())
-                notification.setProgress(100, dProgress.toInt(), false)
-                notificationManager.notify(id, notification.build())
-            }
-            progress.postValue(100)
-            notificationManager.cancel(id)
-            showProgress(id, "Finished", 0, 0, notificationManager, context, builder)
-            val info = YoutubeDL.getInstance().getInfo(request)
-            songInfo.postValue(
-                SongInfo(
-                    title = info.title,
-                    author = info.uploader,
-                    path = "${dir.absolutePath}/${info.title}.mp3"
+            try {
+                val response = YoutubeDL.getInstance().execute(request) { dProgress: Float, _ ->
+                    //showProgress(id, "Downloading", progress.toInt(), 100, notificationManager, context, builder)
+                    progress.postValue(dProgress.toInt())
+                    notification.setProgress(100, dProgress.toInt(), false)
+                    notificationManager.notify(id, notification.build())
+                }
+                progress.postValue(100)
+                notificationManager.cancel(id)
+                showProgress(id, "Finished", 0, 0, notificationManager, context, builder)
+                val info = YoutubeDL.getInstance().getInfo(request)
+                val index = response.out.lastIndexOf(DESTINATION_TERM) + DESTINATION_TERM.length + 1
+                val path = response.out.substring(startIndex = index).takeWhile { it != '\n' }
+                Log.d(DEBUG_TAG, path)
+                downloadResult.postValue(
+                    DownloadResult(
+                        songInfo = SongInfo(
+                            title = info.title,
+                            author = info.uploader,
+                            path = path
+                        ),
+                        successful = true
+                    )
                 )
-            )
+            } catch (e: YoutubeDLException) {
+                Log.e(DEBUG_TAG, e.stackTrace.toString())
+                downloadResult.postValue(
+                    DownloadResult(successful = false, songInfo = SongInfo("", "", ""))
+                )
+            }
         }
     }
     // TODO: remove this method
@@ -130,15 +153,32 @@ class DownloaderViewModel : ViewModel() {
         return null
     }
 
-    fun searchVideos(search: String) {
+    fun searchVideos(search: String): Unit {
         viewModelScope.launch(Dispatchers.IO) {
+            if (service == null) {
+                val transport = AndroidHttp.newCompatibleTransport()
+                val jsonFactory = JacksonFactory.getDefaultInstance()
+                service = YouTube.Builder(
+                    transport, jsonFactory, null
+                )   .setApplicationName("Retro-Music-DSearch")
+                    .build()
+            }
+            val maxResults: Long = 20
+            val request = service!!.search().list("snippet")
+                .set("q", search)
+                .set("maxResults", maxResults)
+                .set("key", "AIzaSyAGlKtNFklueU9mUVWVb6p8T58o4TZF8dc")
 
-            val ytRequest = YoutubeDLRequest("ytsearch:$search")
-            val ytdl = YoutubeDL.getInstance()
-            val info = ytdl.getInfo(ytRequest)
-            print("finished")
-            print(info.title)
-
+            try {
+                val result = request.execute()
+                val videos = result.items
+                if (videos != null) {
+                    results.postValue(DownloaderSearchResult(true, videos))
+                }
+            } catch (e: Exception) {
+                Log.e(DEBUG_TAG, e.toString())
+                results.postValue(DownloaderSearchResult(false, null))
+            }
         }
     }
 }

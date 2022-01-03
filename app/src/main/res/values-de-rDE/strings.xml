@@ -505,4 +505,8 @@
     <string name="you_have_to_select_at_least_one_category">Du musst mindestens eine Kategorie auswählen</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Du wirst auf die Issue Tracker-Seite weitergeleitet.</string>
     <string name="your_account_data_is_only_used_for_authentication">Deine Accountdaten werden ausschließlich zur Authentifizierung genutzt</string>
+    <string name="error_while_downloading">Ein Fehler ist aufgetreten</string>
+    <string name="download_fragment_name">Musik herunterladen</string>
+    <string name="notification_downloading">Downloading</string>
+    <string name="notification_finished">Download abgeschlossen</string>
 </resources>

@@ -11,50 +11,69 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            style="@style/Toolbar"
+        <FrameLayout
+            android:id="@+id/toolbarContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black"
-            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal">
-
-            <LinearLayout
+            app:layout_scrollFlags="scroll|enterAlways">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                app:popupTheme="?attr/toolbarPopupTheme"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black"
+                app:titleTextAppearance="@style/ToolbarTextAppearanceNormal">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/searchView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="@string/action_search"
-                    android:inputType="text|textAutoComplete"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textAppearance="@style/TextViewSubtitle1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
 
-                    <requestFocus />
-                </com.google.android.material.textfield.TextInputEditText>
-            </LinearLayout>
-        </com.google.android.material.appbar.MaterialToolbar>
-        <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/searchView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/action_search"
+                        android:inputType="text|textAutoComplete"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:imeOptions="actionSearch"
+                        android:textAppearance="@style/TextViewSubtitle1">
+
+                        <requestFocus />
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/clearText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?roundSelector"
+                        android:padding="12dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_close"
+                        app:tint="?attr/colorControlNormal"
+                        tools:visibility="visible" />
+                </LinearLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </FrameLayout>
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progress_bar"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:progressTint="@color/black_color"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:progressTint="@color/black_color"/>
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <!--<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/downloadButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,12 +86,21 @@
                 app:icon="@drawable/ic_download_music"
                 app:iconGravity="textStart"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="-7dp" />
+                tools:layout_editor_absoluteX="-7dp" />!-->
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
-
-
-
+    <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
+        android:id="@+id/search_results"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="@integer/overScrollMode"
+        android:scrollbars="none"
+        android:transitionGroup="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/item_list" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
