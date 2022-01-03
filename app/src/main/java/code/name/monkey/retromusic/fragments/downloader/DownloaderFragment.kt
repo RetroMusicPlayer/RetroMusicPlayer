@@ -41,6 +41,8 @@ import com.yausername.youtubedl_android.YoutubeDLException
 import java.io.File
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
+import code.name.monkey.retromusic.extensions.dip
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 
 
 class DownloaderFragment : Fragment() {
@@ -48,6 +50,11 @@ class DownloaderFragment : Fragment() {
     private val binding get() = _binding!!
 
     var resultData: List<SearchResult> = listOf()
+    private val adapter = YTSearchAdapter(resultData) {
+        if (!model.downloading) {
+            download(it)
+        }
+    }
 
     private val model: DownloaderViewModel by viewModels()
 
@@ -62,6 +69,7 @@ class DownloaderFragment : Fragment() {
     }
 
     fun search() {
+        binding.loadingIndicator.visibility = View.VISIBLE
         model.searchVideos(binding.searchView.text.toString())
     }
 
@@ -92,15 +100,13 @@ class DownloaderFragment : Fragment() {
     ): View {
         _binding = FragmentDownloaderBinding.inflate(layoutInflater)
         binding.progressBar.elevatedAccentColor()
+        binding.loadingIndicator.elevatedAccentColor()
         val data = model.results.value!!.results
         if (data != null) {
             resultData = data
         }
-        binding.searchResults.adapter = YTSearchAdapter(resultData) {
-            if (!model.downloading) {
-                download(it)
-            }
-        }
+        binding.searchResults.adapter = adapter
+        checkForPadding()
         binding.searchResults.layoutManager = LinearLayoutManager(context)
         binding.toolbarContainer.drawNextToNavbar()
         binding.appBarLayout.statusBarForeground =
@@ -115,10 +121,6 @@ class DownloaderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         applyToolbar(binding.toolbar)
 
-        /*binding.downloadButton.setOnClickListener {
-            binding.downloadButton.isEnabled = false
-            download(binding.searchView.text.toString())
-        }*/
         model.progress.observeForever {
             binding.progressBar.progress = it
         }
@@ -142,6 +144,7 @@ class DownloaderFragment : Fragment() {
         model.results.observeForever {
             if (it.successful) {
                 Log.d("Downloader", it.results.toString())
+                binding.loadingIndicator.visibility = View.GONE
                 val adapter: YTSearchAdapter = binding.searchResults.adapter as YTSearchAdapter
                 if (it.results != null) {
                     adapter.update(it.results)
@@ -188,6 +191,16 @@ class DownloaderFragment : Fragment() {
 
     companion object {
         const val NOTIFICATION_CHANNEL_ID: String = "yt_downloader"
+    }
+
+    private fun checkForPadding() {
+        val itemCount: Int = adapter.itemCount
+
+        if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
+            binding.searchResults.updatePadding(bottom = dip(R.dimen.mini_player_height_expanded))
+        } else {
+            binding.searchResults.updatePadding(bottom = dip(R.dimen.bottom_nav_height))
+        }
     }
 
 }

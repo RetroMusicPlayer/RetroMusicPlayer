@@ -99,8 +99,20 @@
         android:clipToPadding="false"
         android:overScrollMode="@integer/overScrollMode"
         android:scrollbars="none"
+        android:paddingTop="10dp"
         android:transitionGroup="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/item_list" />
+
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        android:layout_width="@dimen/adaptive_icon_size"
+        android:layout_height="@dimen/adaptive_icon_size"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:indeterminateTint="@color/black_color"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

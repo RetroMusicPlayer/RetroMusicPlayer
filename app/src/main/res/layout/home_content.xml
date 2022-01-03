@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:text="Download Music"
+        android:text="@string/download_fragment_name"
         app:icon="@drawable/ic_download_music"/>
 
     <include

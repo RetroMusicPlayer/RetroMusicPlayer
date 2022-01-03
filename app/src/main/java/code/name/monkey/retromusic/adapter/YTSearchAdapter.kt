@@ -11,15 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import com.google.android.material.button.MaterialButton
 import com.google.api.services.youtube.model.SearchResult
-import com.google.api.services.youtube.model.Video
 import com.squareup.picasso.Picasso
-
-data class YTSearchResult(
-    val title: String,
-    val author: String,
-    val thumbnail: String,
-    val link: String
-    )
 
 class YTSearchAdapter(
     private var data: List<SearchResult>,

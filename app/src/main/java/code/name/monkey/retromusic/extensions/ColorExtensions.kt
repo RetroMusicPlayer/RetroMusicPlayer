@@ -22,6 +22,7 @@ import android.graphics.ColorFilter
 import android.graphics.drawable.Drawable
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
@@ -146,6 +147,11 @@ fun MaterialButton.elevatedAccentColor() {
 fun LinearProgressIndicator.elevatedAccentColor() {
     progressDrawable?.setColorFilter(context.accentColor(), android.graphics.PorterDuff.Mode.MULTIPLY)
     //progressDrawable.setColorFilter(context.accentColor(), android.graphics.PorterDuff.Mode.MULTIPLY)
+}
+
+fun ProgressBar.elevatedAccentColor() {
+    progressDrawable?.setColorFilter(context.accentColor(), android.graphics.PorterDuff.Mode.MULTIPLY)
+    indeterminateTintList = ColorStateList.valueOf(context.accentColor())
 }
 
 fun SeekBar.applyColor(@ColorInt color: Int) {
