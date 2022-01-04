@@ -88,7 +88,6 @@ static def getDate() {
     new Date().format('MMddyyyyss')
 }
 
-
 dependencies {
     implementation project(':appthemehelper')
     implementation "androidx.gridlayout:gridlayout:1.0.0"

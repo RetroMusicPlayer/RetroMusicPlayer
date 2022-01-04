@@ -25,8 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:fel_edge="top|bottom"
-        app:fel_size_bottom="80dp"
-        app:fel_size_top="80dp">
+        app:fel_size_bottom="100dp"
+        app:fel_size_top="100dp">
 
         <code.name.monkey.retromusic.lyrics.CoverLrcView
             android:id="@+id/lyricsView"

@@ -167,7 +167,7 @@ class CoverLrcView @JvmOverloads constructor(
                         isShowTimeline = false
                         removeCallbacks(hideTimelineRunnable)
                         mCurrentLine = centerLine
-                        invalidate()
+                        animateCurrentTextSize()
                         return true
                     }
                 } else {
@@ -458,6 +458,7 @@ class CoverLrcView @JvmOverloads constructor(
                 mCurrentLine = line
                 if (!isShowTimeline) {
                     smoothScrollTo(line)
+                    animateCurrentTextSize()
                 } else {
                     invalidate()
                 }
@@ -534,6 +535,18 @@ class CoverLrcView @JvmOverloads constructor(
         canvas.translate(mLrcPadding, y - (staticLayout.height shr 1))
         staticLayout.draw(canvas)
         canvas.restore()
+    }
+
+    fun animateCurrentTextSize() {
+        val currentTextSize = mCurrentTextSize
+        ValueAnimator.ofFloat(mNormalTextSize, currentTextSize).apply {
+            addUpdateListener {
+                mCurrentTextSize = it.animatedValue as Float
+                invalidate()
+            }
+            duration = 300L
+            start()
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -613,7 +626,7 @@ class CoverLrcView @JvmOverloads constructor(
     private fun adjustCenter() {
         smoothScrollTo(centerLine, ADJUST_DURATION)
     }
-    /** 滚动到某一行  */
+
     /** 滚动到某一行  */
     private fun smoothScrollTo(line: Int, duration: Long = mAnimationDuration) {
         val offset = getOffset(line)
