@@ -667,4 +667,14 @@ object PreferenceUtil {
 
     val isSnowFalling
         get() = sharedPreferences.getBoolean(SNOWFALL, false)
+
+    val lyricsType: LyricsType
+        get() = if (sharedPreferences.getString(LYRICS_TYPE, "0") == "0") {
+            LyricsType.REPLACE_LYRICS
+        } else {
+            LyricsType.OVER_LYRICS
+        }
+}
+enum class LyricsType {
+    REPLACE_LYRICS, OVER_LYRICS
 }

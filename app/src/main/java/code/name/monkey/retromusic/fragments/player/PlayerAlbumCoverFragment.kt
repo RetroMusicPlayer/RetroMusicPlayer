@@ -26,6 +26,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.LYRICS_TYPE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SHOW_LYRICS
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter
@@ -43,6 +44,7 @@ import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
 import code.name.monkey.retromusic.util.LyricUtil
+import code.name.monkey.retromusic.util.LyricsType
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.coroutines.Dispatchers
@@ -201,6 +203,8 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 showLyrics(false)
                 progressViewUpdateHelper?.stop()
             }
+        } else if (key == LYRICS_TYPE) {
+            maybeInitLyrics()
         }
     }
 
@@ -223,13 +227,21 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     private fun showLyrics(visible: Boolean) {
-        ObjectAnimator.ofFloat(lrcView, View.ALPHA, if (visible) 1F else 0F).apply {
+        binding.coverLyrics.isVisible = false
+        binding.lyricsView.isVisible = false
+        binding.viewPager.isVisible = true
+        val lyrics: View = if (PreferenceUtil.lyricsType == LyricsType.REPLACE_LYRICS) {
+            ObjectAnimator.ofFloat(viewPager, View.ALPHA, if (visible) 0F else 1F).start()
+            lrcView
+        } else {
+            binding.coverLyrics
+        }
+        ObjectAnimator.ofFloat(lyrics, View.ALPHA, if (visible) 1F else 0F).apply {
             doOnEnd {
-                _binding?.lyricsView?.isVisible = visible
+                lyrics.isVisible = visible
             }
             start()
         }
-        ObjectAnimator.ofFloat(viewPager, View.ALPHA, if (visible) 0F else 1F).start()
     }
 
     private fun maybeInitLyrics() {
@@ -237,7 +249,9 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         // Don't show lyrics container for below conditions
         if (lyricViewNpsList.contains(nps) && PreferenceUtil.showLyrics) {
             showLyrics(true)
-            progressViewUpdateHelper?.start()
+            if (PreferenceUtil.lyricsType == LyricsType.REPLACE_LYRICS) {
+                progressViewUpdateHelper?.start()
+            }
         } else {
             showLyrics(false)
             progressViewUpdateHelper?.stop()
