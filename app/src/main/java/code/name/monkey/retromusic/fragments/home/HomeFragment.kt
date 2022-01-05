@@ -39,6 +39,7 @@ import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.extensions.elevatedAccentColor
+import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -270,7 +271,7 @@ class HomeFragment :
 
     override fun onResume() {
         super.onResume()
-        libraryViewModel.fetchHomeSections()
+        libraryViewModel.forceReload(ReloadType.HomeSections)
     }
 
     override fun onDestroyView() {
