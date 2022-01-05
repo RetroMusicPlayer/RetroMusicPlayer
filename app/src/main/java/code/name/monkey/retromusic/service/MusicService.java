@@ -22,6 +22,7 @@ import static code.name.monkey.retromusic.ConstantsKt.BLURRED_ALBUM_ART;
 import static code.name.monkey.retromusic.ConstantsKt.CLASSIC_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.CROSS_FADE_DURATION;
+import static code.name.monkey.retromusic.ConstantsKt.PLAYBACK_SPEED;
 import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
 import static code.name.monkey.retromusic.service.AudioFader.startFadeAnimator;
 
@@ -940,6 +941,9 @@ public class MusicService extends MediaBrowserServiceCompat
                 playingNotification.setPlaying(isPlaying());
                 playingNotification.updateMetadata(getCurrentSong(), this::startForegroundOrNotify);
                 break;
+            case PLAYBACK_SPEED:
+                updateMediaSessionPlaybackState();
+                break;
             case TOGGLE_HEADSET:
                 registerHeadsetEvents();
                 break;
@@ -1334,7 +1338,7 @@ public class MusicService extends MediaBrowserServiceCompat
                         .setState(
                                 isPlaying() ? PlaybackStateCompat.STATE_PLAYING : PlaybackStateCompat.STATE_PAUSED,
                                 getSongProgressMillis(),
-                                1);
+                                PreferenceUtil.INSTANCE.getPlaybackSpeed());
 
         setCustomAction(stateBuilder);
 

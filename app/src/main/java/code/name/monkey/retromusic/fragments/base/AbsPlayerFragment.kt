@@ -42,6 +42,7 @@ import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
+import code.name.monkey.retromusic.PLAYBACK_SPEED
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
@@ -79,6 +80,10 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
     ): Boolean {
         val song = MusicPlayerRemote.currentSong
         when (item.itemId) {
+            R.id.action_playback_speed -> {
+                PlaybackSpeedDialog.newInstance().show(childFragmentManager, "PLAYBACK_SETTINGS")
+                return true
+            }
             R.id.action_toggle_lyrics -> {
                 PreferenceUtil.showLyrics = !item.isChecked
                 item.isChecked = !item.isChecked

@@ -43,6 +43,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.slider.Slider
 import com.google.android.material.textfield.TextInputLayout
 
 fun Int.ripAlpha(): Int {
@@ -110,6 +111,12 @@ fun SeekBar.addAccentColor() {
     val colorState = ColorStateList.valueOf(ThemeStore.accentColor(context))
     progressTintList = colorState
     thumbTintList = colorState
+}
+
+fun Slider.accent() {
+    if (materialYou) return
+    trackActiveTintList = context.accentColor().colorStateList
+    trackInactiveTintList = context.accentColorVariant().colorStateList
 }
 
 fun Button.accentTextColor() {
@@ -269,6 +276,15 @@ fun Context.darkAccentColorVariant(): Int {
     )
 }
 
+@ColorInt
+fun Context.accentColorVariant(): Int {
+    return if (surfaceColor().isColorLight) {
+        accentColor().darkerColor
+    } else {
+        accentColor().lighterColor
+    }
+}
+
 inline val @receiver:ColorInt Int.isColorLight
     get() = ColorUtil.isColorLight(this)
 
@@ -277,3 +293,6 @@ inline val @receiver:ColorInt Int.lighterColor
 
 inline val @receiver:ColorInt Int.darkerColor
     get() = ColorUtil.darkenColor(this)
+
+inline val Int.colorStateList : ColorStateList
+    get() = ColorStateList.valueOf(this)

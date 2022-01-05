@@ -16,8 +16,10 @@ package code.name.monkey.retromusic.service;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.PlaybackParams;
 import android.media.audiofx.AudioEffect;
 import android.net.Uri;
 import android.os.PowerManager;
@@ -26,7 +28,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
+import code.name.monkey.appthemehelper.util.VersionUtils;
+import code.name.monkey.retromusic.ConstantsKt;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -35,7 +40,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
  * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
  */
 public class MultiPlayer
-        implements Playback, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
+        implements Playback, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener, SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String TAG = MultiPlayer.class.getSimpleName();
 
     private MediaPlayer mCurrentMediaPlayer = new MediaPlayer();
@@ -53,6 +58,7 @@ public class MultiPlayer
     MultiPlayer(final Context context) {
         this.context = context;
         mCurrentMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
+        PreferenceManager.getDefaultSharedPreferences(context).registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -86,6 +92,7 @@ public class MultiPlayer
             } else {
                 player.setDataSource(path);
             }
+            setPlaybackSpeedPitch(player);
             player.setAudioStreamType(AudioManager.STREAM_MUSIC);
             player.prepare();
         } catch (Exception e) {
@@ -199,6 +206,7 @@ public class MultiPlayer
         if (mNextMediaPlayer != null) {
             mNextMediaPlayer.release();
         }
+        PreferenceManager.getDefaultSharedPreferences(context).unregisterOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -345,5 +353,24 @@ public class MultiPlayer
 
     @Override
     public void setCrossFadeDuration(int duration) {
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(ConstantsKt.PLAYBACK_SPEED) || key.equals(ConstantsKt.PLAYBACK_PITCH)) {
+            setPlaybackSpeedPitch(mCurrentMediaPlayer);
+        }
+    }
+
+    public void setPlaybackSpeedPitch(MediaPlayer mp) {
+        if (VersionUtils.INSTANCE.hasMarshmallow()) {
+            boolean wasPlaying = mp.isPlaying();
+            mp.setPlaybackParams(new PlaybackParams()
+                    .setSpeed(PreferenceUtil.INSTANCE.getPlaybackSpeed())
+                    .setPitch(PreferenceUtil.INSTANCE.getPlaybackPitch()));
+            if (!wasPlaying) {
+                if (mp.isPlaying()) mp.pause();
+            }
+        }
     }
 }

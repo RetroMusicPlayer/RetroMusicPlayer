@@ -674,6 +674,16 @@ object PreferenceUtil {
         } else {
             LyricsType.OVER_LYRICS
         }
+
+    var playbackSpeed
+        get() = sharedPreferences
+            .getFloat(PLAYBACK_SPEED, 1F)
+        set(value) = sharedPreferences.edit { putFloat(PLAYBACK_SPEED, value) }
+
+    var playbackPitch
+        get() = sharedPreferences
+            .getFloat(PLAYBACK_PITCH, 1F)
+        set(value) = sharedPreferences.edit { putFloat(PLAYBACK_PITCH, value) }
 }
 enum class LyricsType {
     REPLACE_LYRICS, OVER_LYRICS
