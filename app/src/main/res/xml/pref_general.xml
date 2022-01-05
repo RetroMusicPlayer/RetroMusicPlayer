@@ -30,12 +30,6 @@
             android:title="@string/pref_title_md3"
             app:isPreferenceVisible="@bool/md3_available" />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="custom_font"
-            android:layout="@layout/list_item_view_switch_no_title"
-            android:title="@string/pref_title_custom_font" />
-
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory

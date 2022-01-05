@@ -115,10 +115,8 @@ fun SeekBar.addAccentColor() {
 
 fun Slider.accent() {
     if (materialYou) return
-    val accentColor = context.accentColor()
-    thumbTintList = accentColor.colorStateList
-    trackActiveTintList = accentColor.colorStateList
-    trackInactiveTintList = ColorUtil.withAlpha(accentColor, 0.1F).colorStateList
+    trackActiveTintList = context.accentColor().colorStateList
+    trackInactiveTintList = context.accentColorVariant().colorStateList
 }
 
 fun Button.accentTextColor() {

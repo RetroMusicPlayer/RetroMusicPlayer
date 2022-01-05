@@ -121,11 +121,6 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             restartActivity()
             true
         }
-        val customFont: ATESwitchPreference? = findPreference(CUSTOM_FONT)
-        customFont?.setOnPreferenceChangeListener { _, _ ->
-            restartActivity()
-            true
-        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

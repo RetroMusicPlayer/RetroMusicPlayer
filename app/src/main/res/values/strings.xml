@@ -529,5 +529,4 @@
     <string name="playback_speed">Playback Speed</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
-    <string name="pref_title_custom_font">Use Custom font</string>
 </resources>
