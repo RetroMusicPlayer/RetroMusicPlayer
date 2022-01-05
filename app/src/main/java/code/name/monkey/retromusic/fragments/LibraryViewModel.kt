@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments
 
 import android.animation.ValueAnimator
 import android.widget.Toast
+import androidx.core.animation.doOnEnd
 import androidx.lifecycle.*
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
@@ -255,11 +256,13 @@ class LibraryViewModel(
                 }
                 repository.insertSongs(songEntities)
             } else {
-                val playListId = createPlaylist(PlaylistEntity(playlistName = playlist.name))
-                val songEntities = playlist.getSongs().map {
-                    it.toSongEntity(playListId)
+                if (playlist != Playlist.empty){
+                    val playListId = createPlaylist(PlaylistEntity(playlistName = playlist.name))
+                    val songEntities = playlist.getSongs().map {
+                        it.toSongEntity(playListId)
+                    }
+                    repository.insertSongs(songEntities)
                 }
-                repository.insertSongs(songEntities)
             }
             forceReload(Playlists)
         }
@@ -365,7 +368,7 @@ class LibraryViewModel(
                         Toast.LENGTH_SHORT
                     ).show()
                     if (songs.isNotEmpty()) {
-                       Toast.makeText(
+                        Toast.makeText(
                             App.getContext(),
                             "Adding songs to $playlistName",
                             Toast.LENGTH_SHORT
@@ -378,17 +381,21 @@ class LibraryViewModel(
     }
 
     fun setFabMargin(bottomMargin: Int) {
+        println("Bottom Margin $bottomMargin")
         val currentValue = DensityUtil.dip2px(App.getContext(), 16F) +
                 bottomMargin
-        if (currentValue != fabMargin.value) {
-            ValueAnimator.ofInt(fabMargin.value!!, currentValue).apply {
-                addUpdateListener {
-                    fabMargin.postValue(
-                        it.animatedValue as Int
-                    )
-                }
-                start()
+        ValueAnimator.ofInt(fabMargin.value!!, currentValue).apply {
+            addUpdateListener {
+                fabMargin.postValue(
+                    (it.animatedValue as Int).also { bottomMarginAnimated ->
+                        println("Bottom Margin Animated $bottomMarginAnimated")
+                    }
+                )
             }
+            doOnEnd {
+                fabMargin.postValue(currentValue)
+            }
+            start()
         }
     }
 }

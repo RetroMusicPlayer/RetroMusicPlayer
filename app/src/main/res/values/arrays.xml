@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="pref_album_cover_transform_entities">
+    <array name="pref_album_cover_transform_entries">
         <item>@string/normal</item>
         <item>@string/cascading</item>
         <item>@string/depth</item>
@@ -19,6 +19,16 @@
         <item>5</item>
         <item>6</item>
     </string-array>
+
+    <string-array name="pref_lyrics_type_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <array name="pref_lyrics_type_entries">
+        <item>@string/replace_cover</item>
+        <item>@string/over_cover</item>
+    </array>
 
     <string-array name="pref_tab_text_mode_values">
         <item>0</item>

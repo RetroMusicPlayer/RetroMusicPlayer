@@ -130,6 +130,13 @@ object PreferenceUtil {
         )
         set(value) = sharedPreferences.edit { putString(ALBUM_DETAIL_SONG_SORT_ORDER, value) }
 
+    var artistDetailSongSortOrder
+        get() = sharedPreferences.getStringOrDefault(
+           ARTIST_DETAIL_SONG_SORT_ORDER,
+            ArtistSongSortOrder.SONG_A_Z
+        )
+        set(value) = sharedPreferences.edit { putString(ARTIST_DETAIL_SONG_SORT_ORDER, value) }
+
     var songSortOrder
         get() = sharedPreferences.getStringOrDefault(
             SONG_SORT_ORDER,
@@ -660,4 +667,14 @@ object PreferenceUtil {
 
     val isSnowFalling
         get() = sharedPreferences.getBoolean(SNOWFALL, false)
+
+    val lyricsType: LyricsType
+        get() = if (sharedPreferences.getString(LYRICS_TYPE, "0") == "0") {
+            LyricsType.REPLACE_LYRICS
+        } else {
+            LyricsType.OVER_LYRICS
+        }
+}
+enum class LyricsType {
+    REPLACE_LYRICS, OVER_LYRICS
 }

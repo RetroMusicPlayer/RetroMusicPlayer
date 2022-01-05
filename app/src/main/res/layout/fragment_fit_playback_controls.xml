@@ -37,6 +37,7 @@
             style="@style/MusicProgressSlider"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:paddingVertical="@dimen/seekbar_padding"
             app:layout_constraintEnd_toStartOf="@id/songTotalTime"
             app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
             tools:ignore="RtlHardcoded,UnusedAttribute" />

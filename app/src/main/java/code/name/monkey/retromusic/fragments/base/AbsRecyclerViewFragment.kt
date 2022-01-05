@@ -164,7 +164,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
             binding.recyclerView.updatePadding(bottom = dip(R.dimen.mini_player_height_expanded))
         } else {
-            binding.recyclerView.updatePadding(bottom = dip(R.dimen.mini_player_height))
+            binding.recyclerView.updatePadding(bottom = dip(R.dimen.bottom_nav_height))
         }
     }
 

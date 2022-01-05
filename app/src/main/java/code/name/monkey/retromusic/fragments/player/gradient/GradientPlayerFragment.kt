@@ -35,6 +35,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
@@ -89,8 +90,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             binding.playerQueueSheet.updatePadding(
                 top = (slideOffset * binding.statusBarLayout.statusBar.height).toInt()
             )
-            binding.recyclerView.updatePadding(
-                top = ((1 - slideOffset) * navBarHeight).toInt()
+            binding.container.updatePadding(
+                bottom = ((1 - slideOffset) * navBarHeight).toInt()
             )
         }
 
@@ -158,9 +159,9 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         }
         ViewCompat.setOnApplyWindowInsetsListener(
             (binding.container)
-        ) { _: View, insets: WindowInsetsCompat ->
+        ) { v: View, insets: WindowInsetsCompat ->
             navBarHeight = insets.safeGetBottomInsets()
-            binding.recyclerView.updatePadding(top = navBarHeight)
+            v.updatePadding(bottom = navBarHeight)
             insets
         }
         binding.playbackControlsFragment.root.drawAboveSystemBars()
@@ -282,7 +283,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             val isFavorite: Boolean =
                 libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
             withContext(Dispatchers.Main) {
-                val icon = if (animate) {
+                val icon = if (animate && VersionUtils.hasMarshmallow()) {
                     if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
                 } else {
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
@@ -453,7 +454,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     private fun updateLabel() {
         (MusicPlayerRemote.playingQueue.size - 1).apply {
             if (this == (MusicPlayerRemote.position)) {
-                binding.nextSong.text = "Last song"
+                binding.nextSong.text = context?.resources?.getString(R.string.last_song)
             } else {
                 val title = MusicPlayerRemote.playingQueue[MusicPlayerRemote.position + 1].title
                 binding.nextSong.text = title
@@ -473,7 +474,11 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         oldBottom: Int
     ) {
         val panel = getQueuePanel()
-        panel.peekHeight = binding.container.height + navBarHeight
+        if (panel.state == STATE_COLLAPSED) {
+            panel.peekHeight = binding.container.height
+        } else if (panel.state == STATE_EXPANDED) {
+            panel.peekHeight = binding.container.height + navBarHeight
+        }
     }
 
     private fun setupRecyclerView() {

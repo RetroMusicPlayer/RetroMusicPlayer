@@ -21,6 +21,14 @@
         android:layout="@layout/list_item_view_switch_no_title"
         android:title="Snow Fall Effect (Only on Normal theme)" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+        android:defaultValue="0"
+        android:entries="@array/pref_lyrics_type_entries"
+        android:entryValues="@array/pref_lyrics_type_values"
+        android:key="lyrics_type"
+        android:layout="@layout/list_item_view"
+        android:title="@string/pref_title_lyrics_type" />
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_album">
@@ -33,7 +41,7 @@
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="0"
-            android:entries="@array/pref_album_cover_transform_entities"
+            android:entries="@array/pref_album_cover_transform_entries"
             android:entryValues="@array/pref_album_cover_transform_values"
             android:key="album_cover_transform"
             android:layout="@layout/list_item_view"
@@ -87,6 +95,4 @@
             app:icon="@drawable/ic_blur_on"
             app:showSeekBarValue="true" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
-
-
 </androidx.preference.PreferenceScreen>

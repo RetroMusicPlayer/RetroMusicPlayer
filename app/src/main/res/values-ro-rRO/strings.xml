@@ -138,7 +138,6 @@
     <string name="currently_listening_to_x_by_x">Acum ascultați %1$s de %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Suriu</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Șterge playlist</string>
     <string name="delete_playlist_x"><![CDATA[Doriți să ștergeți playlist-ul <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Șterge playlist-uri</string>

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="about_album_label">About %s</string>
     <string name="about_settings_summary">Team, social links</string>
@@ -138,7 +137,6 @@
     <string name="currently_listening_to_x_by_x">Currently listening to %1$s by %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Kinda Dark</string>
-    <string name="databases_description">Databases (Playlists, History, Most Played, etc.)</string>
     <string name="delete_playlist_title">Delete playlist</string>
     <string name="delete_playlist_x">
         <![CDATA[Delete the playlist <b>%1$s</b>?]]>
@@ -276,6 +274,7 @@
     <string name="only_on_wifi">Only on Wi-Fi</string>
     <string name="other_settings_summary">Advanced testing features</string>
     <string name="others">Other</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Password</string>
     <string name="past_three_months">Past 3 months</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
@@ -373,6 +372,7 @@
     <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
     <string name="pref_title_last_added_interval">Last added playlist interval</string>
     <string name="pref_title_lock_screen">Fullscreen controls</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
     <string name="pref_title_open_source_licences">Open source licences</string>
     <string name="pref_title_remember_tab">Remember Last Tab</string>
@@ -406,6 +406,7 @@
         <![CDATA[Remove <b>%1$d</b> songs from the playlist?]]>
     </string>
     <string name="rename_playlist_title">Rename playlist</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Report an issue</string>
     <string name="report_bug">Report bug</string>
     <string name="reset_action">Reset</string>

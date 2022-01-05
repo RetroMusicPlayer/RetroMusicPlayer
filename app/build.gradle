@@ -14,7 +14,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 10556
+        versionCode 10557
         versionName '5.6.1'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
@@ -57,6 +57,8 @@ android {
         abortOnError false
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
+
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -85,7 +87,6 @@ static def getProperty(Properties properties, String name) {
 static def getDate() {
     new Date().format('MMddyyyyss')
 }
-
 
 dependencies {
     implementation project(':appthemehelper')
@@ -148,6 +149,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.12.0'
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     implementation 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0'
 
