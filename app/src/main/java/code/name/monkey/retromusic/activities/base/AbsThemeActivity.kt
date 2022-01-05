@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
 import androidx.core.os.ConfigurationCompat
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.retromusic.LanguageContextWrapper
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.theme.ThemeManager
@@ -56,6 +57,9 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
                 this,
                 com.google.android.material.R.style.ThemeOverlay_Material3_DynamicColors_DayNight
             )
+        }
+        if (PreferenceUtil.isCustomFont) {
+            setTheme(R.style.CircularStdFontOverlay)
         }
     }
 

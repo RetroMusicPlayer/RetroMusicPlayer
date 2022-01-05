@@ -245,4 +245,9 @@
         <item name="android:windowFrame">@null</item>
         <item name="background">@color/transparent</item>
     </style>
+
+    <style name="CircularStdFontOverlay" parent="">
+        <item name="android:fontFamily">@font/circular</item>
+        <item name="fontFamily">@font/circular</item>
+    </style>
 </resources>
