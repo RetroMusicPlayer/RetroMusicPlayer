@@ -246,4 +246,8 @@
         <item name="android:windowFrame">@null</item>
         <item name="background">@color/transparent</item>
     </style>
+    <style name="FontThemeOverlay">
+        <item name="fontFamily">@font/manrope</item>
+        <item name="android:fontFamily">@font/manrope</item>
+    </style>
 </resources>

@@ -665,6 +665,9 @@ object PreferenceUtil {
     val materialYou
         get() = sharedPreferences.getBoolean(MATERIAL_YOU, VersionUtils.hasS())
 
+    val isCustomFont
+        get() = sharedPreferences.getBoolean(CUSTOM_FONT,  false)
+
     val isSnowFalling
         get() = sharedPreferences.getBoolean(SNOWFALL, false)
 
