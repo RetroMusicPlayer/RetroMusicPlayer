@@ -75,7 +75,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.fragment_container
             scrimColor = Color.TRANSPARENT
-            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+            setAllContainerColors(surfaceColor())
         }
     }
 

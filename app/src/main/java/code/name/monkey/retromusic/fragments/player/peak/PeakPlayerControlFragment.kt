@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.fragments.player.peak
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -28,6 +29,7 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPeakControlPlayerBinding
 import code.name.monkey.retromusic.extensions.applyColor
+import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -168,10 +170,11 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_pe
         binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setUpPrevNext() {
         updatePrevNextColor()
-        binding.nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
-        binding.previousButton.setOnClickListener { MusicPlayerRemote.back() }
+        binding.nextButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
+        binding.previousButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), false))
     }
 
     private fun updatePrevNextColor() {

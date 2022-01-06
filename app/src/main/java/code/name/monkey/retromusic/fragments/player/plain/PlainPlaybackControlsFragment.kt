@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.fragments.player.plain
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
@@ -33,6 +34,7 @@ import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.getSongInfo
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -131,10 +133,11 @@ class PlainPlaybackControlsFragment :
         setUpProgressSlider()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setUpPrevNext() {
         updatePrevNextColor()
-        binding.nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
-        binding.previousButton.setOnClickListener { MusicPlayerRemote.back() }
+        binding.nextButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
+        binding.previousButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), false))
     }
 
     private fun updatePrevNextColor() {

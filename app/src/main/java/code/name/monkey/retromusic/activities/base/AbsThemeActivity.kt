@@ -58,7 +58,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
                 com.google.android.material.R.style.ThemeOverlay_Material3_DynamicColors_DayNight
             )
         }
-        setTheme(R.style.FontThemeOverlay)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

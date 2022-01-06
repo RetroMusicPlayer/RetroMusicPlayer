@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.fragments.player.circle
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -34,6 +35,7 @@ import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentCirclePlayerBinding
 import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
@@ -132,10 +134,11 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         )
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setUpPrevNext() {
         updatePrevNextColor()
-        binding.nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
-        binding.previousButton.setOnClickListener { MusicPlayerRemote.back() }
+        binding.nextButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
+        binding.previousButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), false))
     }
 
     private fun updatePrevNextColor() {
