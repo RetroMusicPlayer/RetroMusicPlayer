@@ -124,7 +124,6 @@
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
-
     <FrameLayout
         android:id="@+id/volumeFragmentContainer"
         android:layout_width="match_parent"

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/action_playback_speed"
-        android:checkable="true"
         android:icon="@drawable/ic_playback_speed"
         android:orderInCategory="0"
         android:title="@string/playback_speed"

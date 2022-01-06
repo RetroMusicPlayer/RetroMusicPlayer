@@ -43,32 +43,27 @@
         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
         tools:layout_editor_absoluteY="24dp" />
 
-    <LinearLayout
-        android:id="@+id/titleContainer"
-        android:layout_width="0dp"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerToolbar">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLines="2"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textAppearance="@style/TextViewHeadline5"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textStyle="bold"
-            tools:text="@tools:sample/full_names" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/playerToolbar"
+        tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:maxLines="2"
@@ -78,7 +73,7 @@
         app:layout_constraintBottom_toTopOf="@+id/volumeSeekBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="@tools:sample/lorem/random" />
 
     <FrameLayout

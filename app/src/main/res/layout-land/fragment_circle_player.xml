@@ -170,6 +170,7 @@
         android:maxLines="2"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
+        android:singleLine="true"
         android:textAppearance="@style/TextViewBody1"
         app:layout_constraintBottom_toTopOf="@id/progressSlider"
         app:layout_constraintEnd_toEndOf="parent"
