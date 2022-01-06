@@ -31,7 +31,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
@@ -199,6 +199,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     private fun animateNavigationBarColor(color: Int) {
+        if (VersionUtils.hasOreo()) return
         navigationBarColorAnimator?.cancel()
         navigationBarColorAnimator = ValueAnimator
             .ofArgb(window.navigationBarColor, color).apply {
@@ -217,8 +218,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setMiniPlayerAlphaProgress(0F)
         // restore values
         animateNavigationBarColor(surfaceColor())
-        setLightStatusBarAuto(surfaceColor())
-        setLightNavigationAuto()
+        setLightStatusBarAuto()
+        setLightNavigationBarAuto()
         setTaskDescriptionColor(taskColor)
     }
 
@@ -291,7 +292,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (panelState == STATE_EXPANDED) {
             navigationBarColor = surfaceColor()
             setTaskDescColor(paletteColor)
-            val isColorLight = ColorUtil.isColorLight(paletteColor)
+            val isColorLight = paletteColor.isColorLight
             if (PreferenceUtil.isAdaptiveColor && (nowPlayingScreen == Normal || nowPlayingScreen == Flat)) {
                 setLightNavigationBar(true)
                 setLightStatusBar(isColorLight)
@@ -314,13 +315,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 setLightStatusBar(false)
             } else if (nowPlayingScreen == Fit) {
                 setLightStatusBar(false)
-            } else {
-                setLightStatusBar(
-                    ColorUtil.isColorLight(
-                        surfaceColor()
-                    )
-                )
-                setLightNavigationBar(true)
             }
         }
     }

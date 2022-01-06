@@ -27,7 +27,6 @@ class WhatsNewActivity : AbsThemeActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityWhatsNewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setLightStatusBarAuto(surfaceColor())
         setTaskDescriptionColorAuto()
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
