@@ -102,7 +102,7 @@ dependencies {
 
     //Cast Dependencies
     implementation 'androidx.mediarouter:mediarouter:1.2.5'
-    implementation 'com.google.android.gms:play-services-cast-framework:21.0.0'
+    implementation 'com.google.android.gms:play-services-cast-framework:21.0.1'
     //WebServer by NanoHttpd
     implementation "org.nanohttpd:nanohttpd:2.3.1"
 

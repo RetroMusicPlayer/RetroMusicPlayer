@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.adapter
 
+import android.annotation.SuppressLint
 import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +36,6 @@ import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
-import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.home.HomeFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -65,7 +65,6 @@ class HomeAdapter(
             LayoutInflater.from(activity).inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
-            GENRES -> GenreViewHolder(layout)
             FAVOURITES -> PlaylistViewHolder(layout)
             TOP_ALBUMS, RECENT_ALBUMS -> AlbumViewHolder(layout)
             else -> {
@@ -142,12 +141,6 @@ class HomeAdapter(
                     )
                 }
             }
-            GENRES -> {
-                val viewHolder = holder as GenreViewHolder
-                viewHolder.bind(home)
-            }
-            PLAYLISTS -> {
-            }
         }
     }
 
@@ -155,6 +148,7 @@ class HomeAdapter(
         return list.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun swapData(sections: List<Home>) {
         list = sections
         notifyDataSetChanged()
@@ -237,22 +231,6 @@ class HomeAdapter(
                 )
                 layoutManager = linearLayoutManager()
                 adapter = songAdapter
-            }
-        }
-    }
-
-    private inner class GenreViewHolder(itemView: View) : AbsHomeViewItem(itemView) {
-        fun bind(home: Home) {
-            arrow.hide()
-            title.setText(home.titleRes)
-            val genreAdapter = GenreAdapter(
-                activity,
-                home.arrayList as List<Genre>,
-                this@HomeAdapter
-            )
-            recyclerView.apply {
-                layoutManager = GridLayoutManager(activity, 3, GridLayoutManager.HORIZONTAL, false)
-                adapter = genreAdapter
             }
         }
     }
