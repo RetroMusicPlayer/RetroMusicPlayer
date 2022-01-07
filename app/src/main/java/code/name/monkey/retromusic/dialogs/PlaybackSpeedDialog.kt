@@ -34,6 +34,12 @@ class PlaybackSpeedDialog : DialogFragment() {
                     binding.playbackPitchSlider.value
                 )
             }
+            .setNeutralButton(R.string.reset_action) {_, _ ->
+                updatePlaybackAndPitch(
+                    1F,
+                    1F
+                )
+            }
             .setView(binding.root)
             .create()
             .colorButtons()
