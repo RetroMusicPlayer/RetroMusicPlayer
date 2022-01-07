@@ -28,7 +28,7 @@ object BackupHelper : KoinComponent {
 
     suspend fun createBackup(context: Context, name: String) {
         val backupFile =
-            File(getBackupRoot(context), name + APPEND_EXTENSION)
+            File(getBackupRoot(), name + APPEND_EXTENSION)
         if (backupFile.parentFile?.exists() != true) {
             backupFile.parentFile?.mkdirs()
         }
@@ -257,9 +257,9 @@ object BackupHelper : KoinComponent {
         }
     }
 
-    fun getBackupRoot(context: Context): File {
+    fun getBackupRoot(): File {
         return File(
-            context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
             "RetroMusic/Backups"
         )
     }

@@ -21,7 +21,7 @@ class BackupViewModel : ViewModel() {
     val backupsLiveData: LiveData<List<File>> = backupsMutableLiveData
 
     fun loadBackups(context: Context) {
-        BackupHelper.getBackupRoot(context).listFiles { _, name ->
+        BackupHelper.getBackupRoot().listFiles { _, name ->
             return@listFiles name.endsWith(BackupHelper.BACKUP_EXTENSION)
         }?.toList()?.let {
             backupsMutableLiveData.value = it

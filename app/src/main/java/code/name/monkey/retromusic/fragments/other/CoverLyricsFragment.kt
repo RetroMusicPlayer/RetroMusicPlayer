@@ -12,8 +12,10 @@ import androidx.preference.PreferenceManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SHOW_LYRICS
 import code.name.monkey.retromusic.databinding.FragmentCoverLyricsBinding
+import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.base.goToLyrics
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
@@ -44,6 +46,14 @@ class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyri
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
         if (PreferenceUtil.showLyrics) {
             progressViewUpdateHelper?.start()
+        }
+        // Remove background on Fit theme
+        val nps = PreferenceUtil.nowPlayingScreen
+        if (nps == NowPlayingScreen.Fit || nps == NowPlayingScreen.Full) {
+            binding.root.background = null
+        }
+        binding.playerLyricsLine2.setOnClickListener {
+            goToLyrics(requireActivity())
         }
     }
 
