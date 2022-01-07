@@ -28,7 +28,9 @@ import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.HomeAdapter
@@ -43,7 +45,9 @@ import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -75,6 +79,9 @@ class HomeFragment :
         }
         libraryViewModel.getHome().observe(viewLifecycleOwner, {
             homeAdapter.swapData(it)
+        })
+        libraryViewModel.getSuggestions().observe(viewLifecycleOwner, {
+            loadSuggestions(it)
         })
 
         loadProfile()
@@ -151,6 +158,8 @@ class HomeFragment :
                 )
             )
         }
+        // Reload suggestions
+        binding.suggestions.refreshButton.setOnClickListener { libraryViewModel.forceReload(ReloadType.Suggestions) }
     }
 
     private fun getBinding(homeBanner: Boolean, view: View): HomeBindingAdapter {
@@ -233,6 +242,47 @@ class HomeFragment :
             addTarget(binding.root)
         }
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
+    }
+
+    private fun loadSuggestions(songs: List<Song>) {
+        val images = listOf(
+            binding.suggestions.image1,
+            binding.suggestions.image2,
+            binding.suggestions.image3,
+            binding.suggestions.image4,
+            binding.suggestions.image5,
+            binding.suggestions.image6,
+            binding.suggestions.image7,
+            binding.suggestions.image8
+        )
+        val color = ThemeStore.accentColor(requireContext())
+        binding.suggestions.message.apply {
+            setTextColor(color)
+            setOnClickListener {
+                it.isClickable = false
+                it.postDelayed({ it.isClickable = true }, 500)
+                MusicPlayerRemote.playNext(songs.subList(0, 8))
+                if (!MusicPlayerRemote.isPlaying) {
+                    MusicPlayerRemote.playNextSong()
+                }
+            }
+        }
+        binding.suggestions.card6.setCardBackgroundColor(ColorUtil.withAlpha(color, 0.12f))
+        images.forEachIndexed { index, imageView ->
+            imageView.setOnClickListener {
+                it.isClickable = false
+                it.postDelayed({ it.isClickable = true }, 500)
+                MusicPlayerRemote.playNext(songs)
+                if (!MusicPlayerRemote.isPlaying) {
+                    MusicPlayerRemote.playNextSong()
+                }
+            }
+            GlideApp.with(this)
+                .asBitmap()
+                .songCoverOptions(songs[index])
+                .load(RetroGlideExtension.getSongModel(songs[index]))
+                .into(imageView)
+        }
     }
 
     companion object {

@@ -40,6 +40,7 @@ class LibraryViewModel(
 
     private val _paletteColor = MutableLiveData<Int>()
     private val home = MutableLiveData<List<Home>>()
+    private val suggestions = MutableLiveData<List<Song>>()
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
@@ -56,6 +57,7 @@ class LibraryViewModel(
 
     private fun loadLibraryContent() = viewModelScope.launch(IO) {
         fetchHomeSections()
+        fetchSuggestions()
         fetchSongs()
         fetchAlbums()
         fetchArtists()
@@ -91,6 +93,10 @@ class LibraryViewModel(
 
     fun getHome(): LiveData<List<Home>> {
         return home
+    }
+
+    fun getSuggestions(): LiveData<List<Song>> {
+        return suggestions
     }
 
     fun getFabMargin(): LiveData<Int> {
@@ -132,6 +138,10 @@ class LibraryViewModel(
         home.postValue(repository.homeSections())
     }
 
+    private suspend fun fetchSuggestions() {
+        suggestions.postValue(repository.suggestions())
+    }
+
     fun search(query: String?, filter: Filter) {
         viewModelScope.launch(IO) {
             val result = repository.search(query, filter)
@@ -147,6 +157,7 @@ class LibraryViewModel(
             HomeSections -> fetchHomeSections()
             Playlists -> fetchPlaylists()
             Genres -> fetchGenres()
+            Suggestions -> fetchSuggestions()
         }
     }
 
@@ -391,4 +402,5 @@ enum class ReloadType {
     HomeSections,
     Playlists,
     Genres,
+    Suggestions
 }

@@ -15,12 +15,10 @@
 package code.name.monkey.retromusic.adapter
 
 import android.annotation.SuppressLint
-import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.bundleOf
@@ -30,29 +28,21 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.fragments.home.HomeFragment
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.interfaces.IArtistClickListener
 import code.name.monkey.retromusic.interfaces.IGenreClickListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.google.android.material.card.MaterialCardView
 
 class HomeAdapter(
     private val activity: AppCompatActivity
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), IArtistClickListener, IAlbumClickListener,
     IGenreClickListener {
-
-    private var mLastClickTime: Long = 0
 
     private var list = listOf<Home>()
 
@@ -68,13 +58,7 @@ class HomeAdapter(
             FAVOURITES -> PlaylistViewHolder(layout)
             TOP_ALBUMS, RECENT_ALBUMS -> AlbumViewHolder(layout)
             else -> {
-                SuggestionsViewHolder(
-                    LayoutInflater.from(activity).inflate(
-                        R.layout.item_suggestions,
-                        parent,
-                        false
-                    )
-                )
+                ArtistViewHolder(layout)
             }
         }
     }
@@ -126,10 +110,6 @@ class HomeAdapter(
                     )
                 }
             }
-            SUGGESTIONS -> {
-                val viewHolder = holder as SuggestionsViewHolder
-                viewHolder.bindView(home)
-            }
             FAVOURITES -> {
                 val viewHolder = holder as PlaylistViewHolder
                 viewHolder.bindView(home)
@@ -170,52 +150,6 @@ class HomeAdapter(
             recyclerView.apply {
                 layoutManager = linearLayoutManager()
                 adapter = artistsAdapter(home.arrayList as List<Artist>)
-            }
-        }
-    }
-
-    private inner class SuggestionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val images = listOf(
-            R.id.image1,
-            R.id.image2,
-            R.id.image3,
-            R.id.image4,
-            R.id.image5,
-            R.id.image6,
-            R.id.image7,
-            R.id.image8
-        )
-
-        fun bindView(home: Home) {
-            val color = ThemeStore.accentColor(activity)
-            itemView.findViewById<TextView>(R.id.message).apply {
-                setTextColor(color)
-                setOnClickListener {
-                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                        return@setOnClickListener
-                    }
-                    mLastClickTime = SystemClock.elapsedRealtime()
-                    MusicPlayerRemote.playNext((home.arrayList as List<Song>).subList(0, 8))
-                    if (!MusicPlayerRemote.isPlaying) {
-                        MusicPlayerRemote.playNextSong()
-                    }
-                }
-            }
-            itemView.findViewById<MaterialCardView>(R.id.card6).apply {
-                setCardBackgroundColor(ColorUtil.withAlpha(color, 0.12f))
-            }
-            images.forEachIndexed { index, id ->
-                itemView.findViewById<View>(id).setOnClickListener {
-                    MusicPlayerRemote.playNext(home.arrayList[index] as Song)
-                    if (!MusicPlayerRemote.isPlaying) {
-                        MusicPlayerRemote.playNextSong()
-                    }
-                }
-                GlideApp.with(activity)
-                    .asBitmap()
-                    .songCoverOptions(home.arrayList[index] as Song)
-                    .load(RetroGlideExtension.getSongModel(home.arrayList[index] as Song))
-                    .into(itemView.findViewById(id))
             }
         }
     }
