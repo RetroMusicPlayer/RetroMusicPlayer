@@ -168,7 +168,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_sleep_timer -> {
-                SleepTimerDialog().show(parentFragmentManager, TAG)
+                SleepTimerDialog().show(parentFragmentManager, "SLEEP_TIMER")
                 return true
             }
             R.id.action_set_as_ringtone -> {

@@ -113,6 +113,14 @@ fun SeekBar.addAccentColor() {
     thumbTintList = colorState
 }
 
+fun Slider.addAccentColor() {
+    if (materialYou) return
+    val accentColor = ThemeStore.accentColor(context)
+    trackActiveTintList = accentColor.colorStateList
+    trackInactiveTintList = ColorUtil.withAlpha(accentColor, 0.5F).colorStateList
+    thumbTintList = accentColor.colorStateList
+}
+
 fun Slider.accent() {
     if (materialYou) return
     val accentColor = context.accentColor()

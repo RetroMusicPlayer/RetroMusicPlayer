@@ -21,8 +21,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
@@ -32,6 +30,7 @@ import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.PreferenceNowPlayingScreenItemBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
@@ -116,25 +115,17 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
         val nowPlayingScreen = values()[position]
 
         val inflater = LayoutInflater.from(context)
-        val layout = inflater.inflate(
-            R.layout.preference_now_playing_screen_item,
-            collection,
-            false
-        ) as ViewGroup
-        collection.addView(layout)
-
-        val image = layout.findViewById<ImageView>(R.id.image)
-        val title = layout.findViewById<TextView>(R.id.title)
-        val proText = layout.findViewById<TextView>(R.id.proText)
-        Glide.with(context).load(nowPlayingScreen.drawableResId).into(image)
-        title.setText(nowPlayingScreen.titleRes)
+        val binding = PreferenceNowPlayingScreenItemBinding.inflate(inflater, collection, false )
+        collection.addView(binding.root)
+        Glide.with(context).load(nowPlayingScreen.drawableResId).into(binding.image)
+        binding.title.setText(nowPlayingScreen.titleRes)
         if (isNowPlayingThemes(nowPlayingScreen)) {
-            proText.show()
-            proText.setText(R.string.pro)
+            binding.proText.show()
+            binding.proText.setText(R.string.pro)
         }else{
-            proText.hide()
+            binding.proText.hide()
         }
-        return layout
+        return binding.root
     }
 
     override fun destroyItem(
