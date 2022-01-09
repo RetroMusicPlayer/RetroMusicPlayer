@@ -162,7 +162,7 @@ class DownloaderViewModel : ViewModel() {
             val request = service!!.search().list("snippet")
                 .set("q", search)
                 .set("maxResults", maxResults)
-                .set("key", "AIzaSyAGlKtNFklueU9mUVWVb6p8T58o4TZF8dc")
+                .set("key", "")
 
             try {
                 val result = request.execute()
