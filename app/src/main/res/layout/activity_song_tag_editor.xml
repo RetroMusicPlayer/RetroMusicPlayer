@@ -34,7 +34,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_gravity="end"
                 app:cornerRadius="25dp"
-                app:icon="@drawable/ic_save"
+                app:icon="@drawable/ic_magic"
                 app:iconGravity="textStart" />
 
         </com.google.android.material.appbar.MaterialToolbar>

@@ -82,23 +82,25 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
                     ).track
                     binding.albumText.setText(song.album?.title ?: "")
                     binding.yearText.setText(song.wiki?.published ?: "")
-                    binding.albumArtistText.setText(song.album?.artist ?: "")
-                    Picasso.get().load(song.album.image[2].text).into(object: Target {
-                        override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                            albumArtBitmap = bitmap
-                            binding.editorImage.setImageBitmap(bitmap)
-                            dataChanged()
-                        }
+                    if (song.album != null) {
+                        binding.albumArtistText.setText(song.album?.artist ?: "")
+                        Picasso.get().load(song.album.image[2].text).into(object: Target {
+                            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                                albumArtBitmap = bitmap
+                                binding.editorImage.setImageBitmap(bitmap)
+                                dataChanged()
+                            }
 
-                        override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-                            Log.e(TAG, "Failed to load bitmap")
-                        }
+                            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                                Log.e(TAG, "Failed to load bitmap")
+                            }
 
-                        override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-                            Log.d(TAG, "Loading image")
-                        }
+                            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                                Log.d(TAG, "Loading image")
+                            }
 
-                    })
+                        })
+                    }
                 } catch (e: Exception) {
                     Log.e(TAG, e.stackTraceToString())
                     val toast = Toast.makeText(this@SongTagEditorActivity, "Error", Toast.LENGTH_SHORT)
@@ -137,6 +139,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.discNumberContainer.setTint(false)
         binding.lyricsContainer.setTint(false)
 
+        binding.autoFillButton?.elevatedAccentColor()
         binding.songText.appHandleColor().addTextChangedListener(this)
         binding.albumText.appHandleColor().addTextChangedListener(this)
         binding.albumArtistText.appHandleColor().addTextChangedListener(this)
