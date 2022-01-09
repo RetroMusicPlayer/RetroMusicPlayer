@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.network
 
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
+import code.name.monkey.retromusic.network.model.LastFmTrack
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -42,4 +43,10 @@ interface LastFMService {
         @Query("artist") artistName: String,
         @Query("album") albumName: String
     ): LastFmAlbum
+
+    @GET("$BASE_QUERY_PARAMETERS&method=track.getInfo")
+    suspend fun trackInfo(
+        @Query("track") trackName: String,
+        @Query("artist") artistName: String
+    ): LastFmTrack
 }

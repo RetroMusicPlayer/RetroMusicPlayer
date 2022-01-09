@@ -20,24 +20,25 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.view.drawToBitmap
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
-import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.extensions.defaultFooterColor
-import code.name.monkey.retromusic.extensions.isColorLight
-import code.name.monkey.retromusic.extensions.setTint
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.ArtworkInfo
+import code.name.monkey.retromusic.network.LastFMService
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
@@ -46,8 +47,15 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
+import java.lang.Exception
 import java.util.*
 
 class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>(), TextWatcher {
@@ -57,6 +65,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
 
 
     private val songRepository by inject<SongRepository>()
+    private val service: LastFMService by inject()
 
     private var albumArtBitmap: Bitmap? = null
     private var deleteAlbumArt: Boolean = false
@@ -64,6 +73,39 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpViews()
+        binding.autoFillButton?.setOnClickListener {
+            runBlocking {
+                try {
+                    val song = service.trackInfo(
+                        binding.songText.text.toString(),
+                        binding.artistText.text.toString()
+                    ).track
+                    binding.albumText.setText(song.album?.title ?: "")
+                    binding.yearText.setText(song.wiki?.published ?: "")
+                    binding.albumArtistText.setText(song.album?.artist ?: "")
+                    Picasso.get().load(song.album.image[2].text).into(object: Target {
+                        override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                            albumArtBitmap = bitmap
+                            binding.editorImage.setImageBitmap(bitmap)
+                            dataChanged()
+                        }
+
+                        override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                            Log.e(TAG, "Failed to load bitmap")
+                        }
+
+                        override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                            Log.d(TAG, "Loading image")
+                        }
+
+                    })
+                } catch (e: Exception) {
+                    Log.e(TAG, e.stackTraceToString())
+                    val toast = Toast.makeText(this@SongTagEditorActivity, "Error", Toast.LENGTH_SHORT)
+                    toast.show()
+                }
+            }
+        }
         setSupportActionBar(binding.toolbar)
         binding.appBarLayout?.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(this)

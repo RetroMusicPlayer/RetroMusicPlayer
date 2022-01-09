@@ -74,4 +74,15 @@
         android:positiveButtonText="@null"
         android:title="@string/pref_language_name"
         app:icon="@drawable/ic_language" />
+
+    <EditTextPreference
+        android:defaultValue=""
+        android:text="test"
+        android:key="google_api_key"
+        android:layout="@layout/list_item_view"
+        android:title="@string/pref_title_api_key"
+        android:summary="@string/pref_summary_api_key"
+        app:icon="@drawable/ic_outline_lock_24"
+        android:negativeButtonText="Cancel"
+        android:positiveButtonText="Ok"/>
 </androidx.preference.PreferenceScreen>

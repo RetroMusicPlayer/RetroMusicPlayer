@@ -41,8 +41,11 @@ import com.yausername.youtubedl_android.YoutubeDLException
 import java.io.File
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
+import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.network.LastFMService
+import org.koin.android.ext.android.inject
 
 
 class DownloaderFragment : Fragment() {

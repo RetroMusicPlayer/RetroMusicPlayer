@@ -18,7 +18,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.drawable.Drawable
 import android.widget.Button
 import android.widget.CheckBox

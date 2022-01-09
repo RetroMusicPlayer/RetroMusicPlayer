@@ -19,7 +19,25 @@
             style="@style/Toolbar"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/action_tag_editor"
-            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/autoFillButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingStart="25dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="25dp"
+                android:paddingBottom="8dp"
+                android:text="Autofill"
+                android:layout_marginEnd="40dp"
+                android:layout_gravity="end"
+                app:cornerRadius="25dp"
+                app:icon="@drawable/ic_save"
+                app:iconGravity="textStart" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView

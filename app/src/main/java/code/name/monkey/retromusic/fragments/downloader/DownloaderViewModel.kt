@@ -11,17 +11,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.networkModule
+import code.name.monkey.retromusic.repository.RealRepository
 import com.google.api.client.extensions.android.http.AndroidHttp
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.services.youtube.YouTube
 import com.google.api.services.youtube.model.SearchResult
-import com.google.api.services.youtube.model.Video
 import com.yausername.youtubedl_android.YoutubeDL
 import com.yausername.youtubedl_android.YoutubeDLException
 import com.yausername.youtubedl_android.YoutubeDLRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.java.KoinJavaComponent.inject
 import java.io.File
 import java.lang.Exception
 
@@ -45,7 +46,7 @@ class DownloaderViewModel : ViewModel() {
         MutableLiveData<Int>()
     }
 
-    private var service: com.google.api.services.youtube.YouTube? = null
+    private var service: YouTube? = null
 
     companion object {
         const val DEBUG_TAG = "Downloader ViewModel"
@@ -82,7 +83,7 @@ class DownloaderViewModel : ViewModel() {
             )
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.ic_download_music)
-                .setContentTitle("Downloading")
+                .setContentTitle(context.getString(R.string.notification_downloading))
                 .setOnlyAlertOnce(true)
                 .setProgress(100, 0, false)
             notificationManager.notify(id, notification.build())
@@ -95,6 +96,9 @@ class DownloaderViewModel : ViewModel() {
                 }
                 progress.postValue(100)
                 notificationManager.cancel(id)
+                notification
+                    .setProgress(0, 0, false)
+                    .setContentTitle(context.getString(R.string.notification_finished))
                 showProgress(id, "Finished", 0, 0, notificationManager, context, builder)
                 val info = YoutubeDL.getInstance().getInfo(request)
                 val index = response.out.lastIndexOf(DESTINATION_TERM) + DESTINATION_TERM.length + 1
@@ -142,19 +146,6 @@ class DownloaderViewModel : ViewModel() {
         notificationManager?.notify(id, notification)
         //notificationManager.notify(id, builder.build())
 
-    }
-
-    private fun createNotificationChannel(): NotificationChannel? {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Downloading"
-            val descriptionText = "Downloading a music track"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            return NotificationChannel(
-                DownloaderFragment.NOTIFICATION_CHANNEL_ID, name, importance).apply {
-                description = descriptionText
-            }
-        }
-        return null
     }
 
     fun searchVideos(search: String): Unit {
