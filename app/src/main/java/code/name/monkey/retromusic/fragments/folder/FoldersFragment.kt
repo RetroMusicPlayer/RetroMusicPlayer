@@ -118,7 +118,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 override fun handleOnBackPressed() {
                     if (!handleBackPress()) {
                         remove()
-                        mainActivity.finish()
+                        requireActivity().onBackPressed()
                     }
                 }
             })

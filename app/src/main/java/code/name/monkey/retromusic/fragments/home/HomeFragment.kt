@@ -94,7 +94,7 @@ class HomeFragment :
         binding.toolbar.drawNextToNavbar()
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             remove()
-            mainActivity.finish()
+            requireActivity().onBackPressed()
         }
         view.doOnLayout {
             adjustPlaylistButtons()
