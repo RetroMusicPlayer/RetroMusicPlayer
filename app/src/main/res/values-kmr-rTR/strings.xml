@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
-    <string name="about_settings_summary">Team, social links</string>
-    <string name="accent_color">Accent color</string>
-    <string name="accent_color_desc">The theme accent color, defaults to purple</string>
-    <string name="action_about">About</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
-    <string name="action_add_to_favorites">Add to favorites</string>
-    <string name="action_add_to_playing_queue">Add to playing queue</string>
-    <string name="action_add_to_playlist">Add to playlist</string>
-    <string name="action_cast">Cast</string>
-    <string name="action_clear_playing_queue">Clear playing queue</string>
+    <string name="about_album_label">Derbarê %s</string>
+    <string name="about_settings_summary">Kom, girêdanên civakî</string>
+    <string name="accent_color">Rengê çarçoveyê</string>
+    <string name="accent_color_desc">Rengê çarçoveyê ya rûkarê, bi rengê binefşî berdest dibe</string>
+    <string name="action_about">Derbar</string>
+    <string name="action_add_to_blacklist">Tevlî rêzoka reş bike</string>
+    <string name="action_add_to_favorites">Tevlî bijarteyan bike</string>
+    <string name="action_add_to_playing_queue">Tevlî rêzê stranên têne lêdan bike</string>
+    <string name="action_add_to_playlist">Tevlî rêzoka lêdanê bike</string>
+    <string name="action_cast">Biweşîne</string>
+    <string name="action_clear_playing_queue">Rêzê stranên têne lêdan pak bike</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">Delete</string>
     <string name="action_delete_from_device">Delete from device</string>
@@ -52,7 +52,7 @@
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
     <string name="adaptive">Adaptive</string>
     <string name="add_action">Add</string>
-    <string name="add_playlist_title">"Add to playlist"</string>
+    <string name="add_playlist_title">"Tevlî rêzoka lêdanê bike"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
     <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
     <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
