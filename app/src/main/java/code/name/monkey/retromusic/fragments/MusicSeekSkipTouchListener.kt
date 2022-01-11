@@ -18,6 +18,7 @@ class MusicSeekSkipTouchListener(val activity: FragmentActivity, val next: Boole
 
     var job: Job? = null
     var counter = 0
+    var wasSeeking = false
 
     private val gestureDetector = GestureDetector(activity, object :
         GestureDetector.SimpleOnGestureListener() {
@@ -26,6 +27,7 @@ class MusicSeekSkipTouchListener(val activity: FragmentActivity, val next: Boole
                 counter = 0
                 while (isActive) {
                     delay(500)
+                    wasSeeking = true
                     var seekingDuration = MusicPlayerRemote.songProgressMillis
                     if (next) {
                         seekingDuration += 5000 * (counter.floorDiv(2) + 1)
@@ -38,15 +40,6 @@ class MusicSeekSkipTouchListener(val activity: FragmentActivity, val next: Boole
             }
             return super.onDown(e)
         }
-
-        override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-            if (next) {
-                MusicPlayerRemote.playNextSong()
-            } else {
-                MusicPlayerRemote.back()
-            }
-            return super.onSingleTapConfirmed(e)
-        }
     })
 
     @SuppressLint("ClickableViewAccessibility")
@@ -54,6 +47,14 @@ class MusicSeekSkipTouchListener(val activity: FragmentActivity, val next: Boole
         val action = event?.actionMasked
         if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
             job?.cancel()
+            if (!wasSeeking) {
+                if (next) {
+                    MusicPlayerRemote.playNextSong()
+                } else {
+                    MusicPlayerRemote.back()
+                }
+            }
+            wasSeeking = false
         }
         return gestureDetector.onTouchEvent(event)
     }

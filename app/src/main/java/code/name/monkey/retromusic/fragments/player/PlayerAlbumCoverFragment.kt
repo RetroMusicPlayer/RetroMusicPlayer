@@ -147,21 +147,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             setOnClickListener {
                 goToLyrics(requireActivity())
             }
-            setOnFlingXListener { velocityX ->
-                when {
-                    velocityX < 0 -> {
-                        MusicPlayerRemote.playNextSong()
-                        true
-                    }
-                    velocityX > 0 -> {
-                        MusicPlayerRemote.playPreviousSong()
-                        true
-                    }
-                    else -> {
-                        false
-                    }
-                }
-            }
         }
     }
 

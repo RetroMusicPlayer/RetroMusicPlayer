@@ -245,6 +245,7 @@ class HomeFragment :
     }
 
     private fun loadSuggestions(songs: List<Song>) {
+        if (songs.isEmpty()) return
         val images = listOf(
             binding.suggestions.image1,
             binding.suggestions.image2,
