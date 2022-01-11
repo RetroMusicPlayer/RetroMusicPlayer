@@ -19,7 +19,7 @@
     <string name="action_go_to_album">Albüme git</string>
     <string name="action_go_to_artist">Sanatçıya git</string>
     <string name="action_go_to_genre">Şarkı türüne git</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">Şarkı Sözlerine git</string>
     <string name="action_go_to_start_directory">Başlangıç dizinine git</string>
     <string name="action_grant">Onayla</string>
     <string name="action_grid_size">Izgara boyutu</string>
@@ -83,7 +83,7 @@
     <string name="audio_focus_denied">Ses odaklaması reddedildi.</string>
     <string name="audio_settings_summary">Ses ayarlarını değiştirin ve ekolayzır kontrollerini ayarlayın</string>
     <string name="auto">Otomatik</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="backup_restore_settings_summary">Ayarlarınızı, çalma listelerinizi yedekleyin ve geri yükleyin</string>
     <string name="backup_restore_title"><![CDATA[Yedekleme & Geri yükleme]]></string>
     <string name="backup_title">Yedeklemeler</string>
     <string name="biography">Yaşam öyküsü</string>
@@ -114,7 +114,7 @@
     <string name="cascading">Basamaklı</string>
     <string name="changelog">Değişim kayıt günlüğü</string>
     <string name="changelog_summary">Yeniliklere göz at</string>
-    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="choose_restore_title">Neyi geri yükleyeceğinizi seçin</string>
     <string name="circle">Çember</string>
     <string name="circular">Dairesel</string>
     <string name="classic">Klasik</string>
@@ -134,7 +134,7 @@
     <string name="created_playlist_x">%1$s adında oynatma listesi oluşturuldu.</string>
     <string name="credit_title">Üyeler ve katkıda bulunanlar</string>
     <string name="currently_listening_to_x_by_x">Şu anda %2$s şarkıcısından %1$s dinleniyor.</string>
-    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="custom_artist_images">Özel Sanatçı Resimleri</string>
     <string name="dark_theme_name">Koyu</string>
     <string name="delete_playlist_title">Çalma listesini sil</string>
     <string name="delete_playlist_x"><![CDATA[Oynatma listesi <b>%1$s</b> silinsin mi?]]></string>
@@ -151,7 +151,7 @@
     <string name="device_info">Cihaz Bilgisi</string>
     <string name="dialog_message_set_ringtone">Retro Müzik\'in ses ayarlarını değiştirmesine izin verin</string>
     <string name="dialog_title_set_ringtone">Zil sesini ayarla</string>
-    <string name="disc_hint">Disc Number</string>
+    <string name="disc_hint">Disk numarası</string>
     <string name="do_you_want_to_clear_the_blacklist">Kara listeyi temizlemek istiyor musunuz?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Kara listeden <b>%1$s</b>\'i kaldırmak istiyor musunuz?]]></string>
     <string name="donate">Bağış yapın</string>
@@ -391,7 +391,7 @@
     <string name="reset_action">Sıfırla</string>
     <string name="reset_artist_image">Sanatçı resmini sıfırla</string>
     <string name="restore">Geri yükle</string>
-    <string name="restore_message">Do you want to restore backup?</string>
+    <string name="restore_message">Yedeklemeyi geri yüklemek istiyor musunuz?</string>
     <string name="restored_previous_purchase_please_restart">Önceki satın alma işlemi geri yüklendi. Tüm özelliklerden yararlanmak için lütfen uygulamayı yeniden başlatın.</string>
     <string name="restored_previous_purchases">Önceki satın almalar geri yüklendi.</string>
     <string name="restoring_purchase">Satın alım geri yükleniyor ...</string>
@@ -441,7 +441,7 @@
     <string name="sort_order">Sıralama Ölçütü</string>
     <string name="sort_order_a_z">Yükselen</string>
     <string name="sort_order_album">Albüm</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="sort_order_album_artist">\@sıra/albüm_sanatçısı</string>
     <string name="sort_order_artist">Sanatçı</string>
     <string name="sort_order_composer">Besteci</string>
     <string name="sort_order_date">Tarih eklendi</string>
@@ -468,7 +468,7 @@
     <string name="tiny">Küçük</string>
     <string name="tiny_card_style">Ufak kart</string>
     <string name="title">Şarkı adı</string>
-    <string name="title_new_backup">New Backup</string>
+    <string name="title_new_backup">Yeni yedekleme</string>
     <string name="today">Bugün</string>
     <string name="top_albums">En iyi albümler</string>
     <string name="top_artists">En iyi sanatçılar</string>
@@ -484,7 +484,7 @@
     <string name="up_next">Bir sonraki</string>
     <string name="update_image">Resmi güncelle</string>
     <string name="updating">Güncelleniyor ...</string>
-    <string name="user_images_description">User Images</string>
+    <string name="user_images_description">Kullanıcı Resimleri</string>
     <string name="user_name">Kullanıcı Adı</string>
     <string name="username">Kullanıcı Adı</string>
     <string name="version">Sürüm</string>
