@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.fragments.backup
 
+import android.content.ContentResolver
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -65,10 +66,10 @@ class RestoreActivity : AppCompatActivity() {
 
     private fun getFileName(uri: Uri?): String? {
         when (uri?.scheme) {
-            "file" -> {
+            ContentResolver.SCHEME_FILE -> {
                 return uri.lastPathSegment
             }
-            "content" -> {
+            ContentResolver.SCHEME_CONTENT -> {
                 val proj = arrayOf(MediaStore.Files.FileColumns.DISPLAY_NAME)
                 contentResolver.query(
                     uri, proj, null, null, null

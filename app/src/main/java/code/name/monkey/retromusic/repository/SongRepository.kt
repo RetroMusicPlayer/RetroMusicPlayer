@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import android.database.Cursor
+import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
@@ -42,11 +43,13 @@ interface SongRepository {
 
     fun songs(query: String): List<Song>
 
-    fun songsByFilePath(filePath: String): List<Song>
+    fun songsByFilePath(filePath: String, ignoreBlacklist: Boolean = false): List<Song>
 
     fun song(cursor: Cursor?): Song
 
     fun song(songId: Long): Song
+
+    fun songsIgnoreBlacklist(uri: Uri): List<Song>
 }
 
 class RealSongRepository(private val context: Context) : SongRepository {
@@ -84,12 +87,35 @@ class RealSongRepository(private val context: Context) : SongRepository {
         return song(makeSongCursor(AudioColumns._ID + "=?", arrayOf(songId.toString())))
     }
 
-    override fun songsByFilePath(filePath: String): List<Song> {
+    override fun songsByFilePath(filePath: String, ignoreBlacklist: Boolean): List<Song> {
         return songs(
             makeSongCursor(
                 AudioColumns.DATA + "=?",
-                arrayOf(filePath)
+                arrayOf(filePath),
+                ignoreBlacklist = ignoreBlacklist
             )
+        )
+    }
+
+    override fun songsIgnoreBlacklist(uri: Uri): List<Song> {
+        var filePath = ""
+        context.contentResolver.query(
+            uri,
+            arrayOf(AudioColumns.DATA),
+            null,
+            null,
+            null
+        ).use { cursor ->
+            if (cursor != null) {
+                if (cursor.count != 0) {
+                    cursor.moveToFirst()
+                    filePath = cursor.getString(AudioColumns.DATA)
+                    println("File Path: $filePath")
+                }
+            }
+        }
+        return songsByFilePath(
+            filePath, true
         )
     }
 
@@ -128,40 +154,41 @@ class RealSongRepository(private val context: Context) : SongRepository {
 
     @JvmOverloads
     fun makeSongCursor(
-
         selection: String?,
         selectionValues: Array<String>?,
-        sortOrder: String = PreferenceUtil.songSortOrder
+        sortOrder: String = PreferenceUtil.songSortOrder,
+        ignoreBlacklist: Boolean = false
     ): Cursor? {
         var selectionFinal = selection
         var selectionValuesFinal = selectionValues
-        selectionFinal = if (selection != null && selection.trim { it <= ' ' } != "") {
-            "$IS_MUSIC AND $selectionFinal"
-        } else {
-            IS_MUSIC
-        }
-
-        // Whitelist
-        if (PreferenceUtil.isWhiteList) {
-            selectionFinal =
-                selectionFinal + " AND " + AudioColumns.DATA + " LIKE ?"
-            selectionValuesFinal = addSelectionValues(
-                selectionValuesFinal, arrayListOf(
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).canonicalPath
-                )
-            )
-        } else {
-            // Blacklist
-            val paths = BlacklistStore.getInstance(context).paths
-            if (paths.isNotEmpty()) {
-                selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
-                selectionValuesFinal = addSelectionValues(selectionValuesFinal, paths)
+        if (!ignoreBlacklist) {
+            selectionFinal = if (selection != null && selection.trim { it <= ' ' } != "") {
+                "$IS_MUSIC AND $selectionFinal"
+            } else {
+                IS_MUSIC
             }
+
+            // Whitelist
+            if (PreferenceUtil.isWhiteList) {
+                selectionFinal =
+                    selectionFinal + " AND " + AudioColumns.DATA + " LIKE ?"
+                selectionValuesFinal = addSelectionValues(
+                    selectionValuesFinal, arrayListOf(
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).canonicalPath
+                    )
+                )
+            } else {
+                // Blacklist
+                val paths = BlacklistStore.getInstance(context).paths
+                if (paths.isNotEmpty()) {
+                    selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
+                    selectionValuesFinal = addSelectionValues(selectionValuesFinal, paths)
+                }
+            }
+
+            selectionFinal =
+                selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
         }
-
-        selectionFinal =
-            selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
-
         val uri = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
             Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
         } else {

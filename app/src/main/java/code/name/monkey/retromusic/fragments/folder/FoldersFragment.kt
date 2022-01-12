@@ -308,7 +308,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                             openQueue(songs, startIndex, true)
                         } else {
                             Snackbar.make(
-                                binding.root,
+                                mainActivity.slidingPanel,
                                 Html.fromHtml(
                                     String.format(
                                         getString(R.string.not_listed_in_media_store), file1.name

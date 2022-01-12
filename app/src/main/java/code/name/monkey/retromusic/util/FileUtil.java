@@ -92,7 +92,7 @@ public final class FileUtil {
     }
 
     Cursor songCursor =
-        new RealSongRepository(context).makeSongCursor(selection, selection == null ? null : paths);
+        new RealSongRepository(context).makeSongCursor(selection, selection == null ? null : paths, PreferenceUtil.INSTANCE.getSongSortOrder(), true);
 
     return songCursor == null
         ? null
