@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$mdc_version"
     implementation "androidx.preference:preference-ktx:$preference_version"
     implementation 'androidx.cardview:cardview:1.0.0'
