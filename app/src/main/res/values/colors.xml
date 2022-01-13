@@ -35,4 +35,5 @@
     <color name="bottomSheetColorBlack">#000000</color>
 
     <color name="bottomSheetColor">#FFFFFF</color>
+    <color name="widget_md3_bg_color">@color/lighterColorSurface</color>
 </resources>
