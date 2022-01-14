@@ -25,6 +25,7 @@ import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -245,7 +246,10 @@ class HomeFragment :
     }
 
     private fun loadSuggestions(songs: List<Song>) {
-        if (songs.isEmpty()) return
+        if (songs.isEmpty()){
+            binding.suggestions.root.isVisible = false
+            return
+        }
         val images = listOf(
             binding.suggestions.image1,
             binding.suggestions.image2,
