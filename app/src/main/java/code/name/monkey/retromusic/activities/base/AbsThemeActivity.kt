@@ -28,7 +28,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.theme.ThemeManager
-import com.google.android.material.color.DynamicColors
 import java.util.*
 
 abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
@@ -51,13 +50,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         setTheme(ThemeManager.getThemeResValue(this))
         setDefaultNightMode(ThemeManager.getNightMode(this))
 
-        // Apply dynamic colors to activity if enabled
-        if (PreferenceUtil.materialYou) {
-            DynamicColors.applyIfAvailable(
-                this,
-                com.google.android.material.R.style.ThemeOverlay_Material3_DynamicColors_DayNight
-            )
-        }
         if (PreferenceUtil.isCustomFont) {
             setTheme(R.style.FontThemeOverlay)
         }
