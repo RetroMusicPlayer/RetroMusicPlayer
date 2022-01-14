@@ -35,6 +35,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.graphics.drawable.DrawableWrapper
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
@@ -275,7 +276,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         if (PreferenceUtil.isFullScreenMode &&
             view.findViewById<View>(R.id.status_bar) != null
         ) {
-            view.findViewById<View>(R.id.status_bar).visibility = View.GONE
+            view.findViewById<View>(R.id.status_bar).isVisible = false
         }
         playerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment?.setCallbacks(this)

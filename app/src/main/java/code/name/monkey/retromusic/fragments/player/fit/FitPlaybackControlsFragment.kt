@@ -23,6 +23,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
+import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -265,7 +266,7 @@ class FitPlaybackControlsFragment :
             clearAnimation()
             scaleX = 0.9f
             scaleY = 0.9f
-            visibility = View.VISIBLE
+            isVisible = true
             pivotX = (width / 2).toFloat()
             pivotY = (height / 2).toFloat()
 

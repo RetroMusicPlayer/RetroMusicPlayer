@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.transform
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.viewpager.widget.ViewPager
 import kotlin.math.abs
 
@@ -33,22 +34,22 @@ class HingeTransformation : ViewPager.PageTransformer {
                 // The Page is off-screen but it may still interfere with
                 // click events of current page if
                 // it's visibility is not set to Gone
-                page.visibility = View.GONE
+                page.isVisible = false
             }
             position <= 0 -> {    // [-1,0]
                 page.rotation = 90 * abs(position)
                 page.alpha = 1 - abs(position)
-                page.visibility = View.VISIBLE
+                page.isVisible = true
             }
             position <= 1 -> {    // (0,1]
                 page.rotation = 0f
                 page.alpha = 1f
-                page.visibility = View.VISIBLE
+                page.isVisible = true
             }
             else -> {    // (1,+Infinity]
                 // This page is way off-screen to the right.
                 page.alpha = 0f
-                page.visibility = View.GONE
+                page.isVisible = false
             }
         }
     }

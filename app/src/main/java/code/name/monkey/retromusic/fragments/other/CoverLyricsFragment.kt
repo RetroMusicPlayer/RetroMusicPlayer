@@ -120,7 +120,7 @@ class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyri
         if (lyrics !is AbsSynchronizedLyrics) return
         val synchronizedLyrics = lyrics as AbsSynchronizedLyrics
 
-        lyricsLayout.visibility = View.VISIBLE
+        lyricsLayout.isVisible = true
         lyricsLayout.alpha = 1f
 
         val oldLine = lyricsLine2.text.toString()

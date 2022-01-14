@@ -35,11 +35,10 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawBehindSystemBars()
+        setEdgeToEdgeOrImmersive()
         updateTheme()
         hideStatusBar()
         super.onCreate(savedInstanceState)
-        setImmersiveFullscreen()
         registerSystemUiVisibility()
         toggleScreenOn()
         setLightNavigationBarAuto()

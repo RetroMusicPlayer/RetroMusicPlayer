@@ -150,13 +150,13 @@ class SearchAdapter(
             imageTextContainer?.isInvisible = true
             if (itemViewType == SONG) {
                 imageTextContainer?.isGone = true
-                menu?.visibility = View.VISIBLE
+                menu?.isVisible = true
                 menu?.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
                     override val song: Song
                         get() = dataSet[layoutPosition] as Song
                 })
             } else {
-                menu?.visibility = View.GONE
+                menu?.isVisible = false
             }
 
             when (itemViewType) {
@@ -164,7 +164,7 @@ class SearchAdapter(
                 ARTIST -> setImageTransitionName(activity.getString(R.string.transition_artist_image))
                 else -> {
                     val container = itemView.findViewById<View>(R.id.imageContainer)
-                    container?.visibility = View.GONE
+                    container?.isVisible = false
                 }
             }
         }

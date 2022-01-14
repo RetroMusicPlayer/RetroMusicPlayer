@@ -12,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -192,19 +193,21 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         if (lastFmArtist != null && lastFmArtist.artist != null && lastFmArtist.artist.bio != null) {
             val bioContent = lastFmArtist.artist.bio.content
             if (bioContent != null && bioContent.trim { it <= ' ' }.isNotEmpty()) {
-                binding.fragmentArtistContent.biographyText.visibility = View.VISIBLE
-                binding.fragmentArtistContent.biographyTitle.visibility = View.VISIBLE
-                biography = HtmlCompat.fromHtml(bioContent, HtmlCompat.FROM_HTML_MODE_LEGACY)
-                binding.fragmentArtistContent.biographyText.text = biography
-                if (lastFmArtist.artist.stats.listeners.isNotEmpty()) {
-                    binding.fragmentArtistContent.listeners.show()
-                    binding.fragmentArtistContent.listenersLabel.show()
-                    binding.fragmentArtistContent.scrobbles.show()
-                    binding.fragmentArtistContent.scrobblesLabel.show()
-                    binding.fragmentArtistContent.listeners.text =
-                        RetroUtil.formatValue(lastFmArtist.artist.stats.listeners.toFloat())
-                    binding.fragmentArtistContent.scrobbles.text =
-                        RetroUtil.formatValue(lastFmArtist.artist.stats.playcount.toFloat())
+                binding.fragmentArtistContent.run {
+                    biographyText.isVisible = true
+                    biographyTitle.isVisible = true
+                    biography = HtmlCompat.fromHtml(bioContent, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    biographyText.text = biography
+                    if (lastFmArtist.artist.stats.listeners.isNotEmpty()) {
+                        listeners.show()
+                        listenersLabel.show()
+                        scrobbles.show()
+                        scrobblesLabel.show()
+                        listeners.text =
+                            RetroUtil.formatValue(lastFmArtist.artist.stats.listeners.toFloat())
+                        scrobbles.text =
+                            RetroUtil.formatValue(lastFmArtist.artist.stats.playcount.toFloat())
+                    }
                 }
             }
         }

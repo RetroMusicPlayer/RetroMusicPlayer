@@ -23,7 +23,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.NavigationViewUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.lang.RuntimeException
+import dev.chrisbanes.insetter.applyInsetter
 
 class BottomNavigationBarTinted @JvmOverloads constructor(
     context: Context,
@@ -38,6 +38,12 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
         if (PreferenceUtil.isFullScreenMode) {
             setOnApplyWindowInsetsListener { _, insets ->
                 insets
+            }
+        } else {
+            applyInsetter {
+                type(navigationBars = true) {
+                    padding()
+                }
             }
         }
 

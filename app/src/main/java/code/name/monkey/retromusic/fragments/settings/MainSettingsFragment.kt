@@ -37,17 +37,20 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
 
 
     override fun onClick(view: View) {
-        when (view.id) {
-            R.id.generalSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_themeSettingsFragment)
-            R.id.audioSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_audioSettings)
-            R.id.personalizeSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_personalizeSettingsFragment)
-            R.id.imageSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_imageSettingFragment)
-            R.id.notificationSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_notificationSettingsFragment)
-            R.id.otherSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_otherSettingsFragment)
-            R.id.aboutSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_aboutActivity)
-            R.id.nowPlayingSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_nowPlayingSettingsFragment)
-            R.id.backup_restore_settings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_backupFragment)
-        }
+        findNavController().navigate(
+            when (view.id) {
+                R.id.generalSettings -> R.id.action_mainSettingsFragment_to_themeSettingsFragment
+                R.id.audioSettings -> R.id.action_mainSettingsFragment_to_audioSettings
+                R.id.personalizeSettings -> R.id.action_mainSettingsFragment_to_personalizeSettingsFragment
+                R.id.imageSettings -> R.id.action_mainSettingsFragment_to_imageSettingFragment
+                R.id.notificationSettings -> R.id.action_mainSettingsFragment_to_notificationSettingsFragment
+                R.id.otherSettings -> R.id.action_mainSettingsFragment_to_otherSettingsFragment
+                R.id.aboutSettings -> R.id.action_mainSettingsFragment_to_aboutActivity
+                R.id.nowPlayingSettings -> R.id.action_mainSettingsFragment_to_nowPlayingSettingsFragment
+                R.id.backup_restore_settings -> R.id.action_mainSettingsFragment_to_backupFragment
+                else -> R.id.action_mainSettingsFragment_to_themeSettingsFragment
+            }
+        )
     }
 
     override fun onCreateView(

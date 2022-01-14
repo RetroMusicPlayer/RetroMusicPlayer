@@ -285,11 +285,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            if (lyrics.isNullOrEmpty()) {
-                binding.noLyricsFound.visibility = View.VISIBLE
-            } else {
-                binding.noLyricsFound.visibility = View.GONE
-            }
+            binding.noLyricsFound.isVisible = lyrics.isNullOrEmpty()
             binding.normalLyrics.text = lyrics
         }
 

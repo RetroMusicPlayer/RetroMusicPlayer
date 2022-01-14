@@ -155,17 +155,19 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     private fun checkIsEmpty() {
         binding.emptyText.setText(emptyMessage)
-        binding.empty.visibility = if (adapter!!.itemCount == 0) View.VISIBLE else View.GONE
+        binding.empty.isVisible = adapter!!.itemCount == 0
     }
 
     private fun checkForPadding() {
         val itemCount: Int = adapter?.itemCount ?: 0
 
-        if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
-            binding.recyclerView.updatePadding(bottom = dip(R.dimen.mini_player_height_expanded))
-        } else {
-            binding.recyclerView.updatePadding(bottom = dip(R.dimen.bottom_nav_height))
-        }
+        binding.recyclerView.updatePadding(
+            bottom = if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
+                dip(R.dimen.mini_player_height_expanded)
+            } else {
+                dip(R.dimen.bottom_nav_height)
+            }
+        )
     }
 
     private fun initLayoutManager() {

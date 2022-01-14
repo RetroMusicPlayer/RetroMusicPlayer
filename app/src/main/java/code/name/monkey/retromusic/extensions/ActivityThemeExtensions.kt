@@ -22,6 +22,14 @@ fun AppCompatActivity.toggleScreenOn() {
     }
 }
 
+fun AppCompatActivity.setEdgeToEdgeOrImmersive() {
+    if (PreferenceUtil.isFullScreenMode) {
+        setImmersiveFullscreen()
+    } else {
+        setDrawBehindSystemBars()
+    }
+}
+
 fun AppCompatActivity.setImmersiveFullscreen() {
     if (PreferenceUtil.isFullScreenMode) {
         WindowInsetsControllerCompat(window, window.decorView).apply {

@@ -140,7 +140,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             insets
         }
         if (RetroUtil.isLandscape()) {
-            binding.slidingPanel.drawAboveSystemBarsWithPadding(true)
+            binding.slidingPanel.drawAboveSystemBarsWithPadding()
         }
         chooseFragmentForTheme()
         setupSlidingUpPanel()

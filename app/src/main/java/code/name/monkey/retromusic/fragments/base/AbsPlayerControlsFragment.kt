@@ -19,6 +19,7 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.annotation.LayoutRes
+import androidx.core.view.isVisible
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.other.VolumeFragment
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -49,7 +50,7 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
             clearAnimation()
             scaleX = 0.9f
             scaleY = 0.9f
-            visibility = View.VISIBLE
+            isVisible = true
             pivotX = (view.width / 2).toFloat()
             pivotY = (view.height / 2).toFloat()
 
