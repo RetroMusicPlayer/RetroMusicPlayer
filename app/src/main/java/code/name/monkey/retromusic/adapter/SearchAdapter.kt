@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,7 @@ class SearchAdapter(
     private var dataSet: List<Any>
 ) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
+    @SuppressLint("NotifyDataSetChanged")
     fun swapDataSet(dataSet: List<Any>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
@@ -201,9 +203,8 @@ class SearchAdapter(
                     )
                 }
                 SONG -> {
-                    val playList = mutableListOf<Song>()
-                    playList.add(item as Song)
-                    MusicPlayerRemote.openQueue(playList, 0, true)
+                    MusicPlayerRemote.playNext(item as Song)
+                    MusicPlayerRemote.playNextSong()
                 }
             }
         }
