@@ -159,6 +159,8 @@ dependencies {
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC3'
     implementation 'com.github.jetradarmobile:android-snowfall:1.2.1'
 
+    implementation "dev.chrisbanes.insetter:insetter:0.6.1"
+
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
     implementation 'com.github.Adonai:jaudiotagger:2.3.15'
     implementation 'com.anjlab.android.iab.v3:library:2.0.3'

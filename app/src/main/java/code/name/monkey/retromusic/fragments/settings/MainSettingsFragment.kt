@@ -19,17 +19,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMainSettingsBinding
+import code.name.monkey.retromusic.extensions.drawAboveSystemBarsWithPadding
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.rootView
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
 
@@ -89,17 +86,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             binding.diamondIcon.imageTintList = ColorStateList.valueOf(it)
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(
-            requireActivity().rootView
-        ) { _, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            _binding?.container?.updatePadding(
-                left = insets.left,
-                bottom = insets.bottom,
-                right = insets.right,
-            )
-            windowInsets
-        }
+        binding.container.drawAboveSystemBarsWithPadding()
     }
 
     override fun onDestroyView() {
