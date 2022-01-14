@@ -39,7 +39,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialFadeThrough
-import com.google.android.material.transition.MaterialSharedAxis
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 
@@ -105,10 +104,8 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     private fun setupToolbar() {
         binding.toolbar.setNavigationOnClickListener {
-            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(requireView())
-            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
             findNavController().navigate(
-                R.id.searchFragment,
+                R.id.action_search,
                 null,
                 navOptions
             )

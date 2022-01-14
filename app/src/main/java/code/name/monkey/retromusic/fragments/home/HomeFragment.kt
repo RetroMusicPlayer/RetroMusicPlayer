@@ -175,10 +175,7 @@ class HomeFragment :
 
     private fun setupTitle() {
         binding.toolbar.setNavigationOnClickListener {
-            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(binding.root)
-            reenterTransition =
-                MaterialSharedAxis(MaterialSharedAxis.Z, false)
-            findNavController().navigate(R.id.searchFragment, null, navOptions)
+            findNavController().navigate(R.id.action_search, null, navOptions)
         }
         val hexColor = String.format("#%06X", 0xFFFFFF and accentColor())
         val appName = HtmlCompat.fromHtml(

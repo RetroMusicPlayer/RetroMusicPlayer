@@ -42,7 +42,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.transition.MaterialSharedAxis
+import com.google.android.material.transition.MaterialFadeThrough
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import java.util.*
 import kotlin.collections.ArrayList
@@ -63,8 +63,8 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(view)
-        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+        enterTransition = MaterialFadeThrough().addTarget(view)
+        reenterTransition = MaterialFadeThrough().addTarget(view)
         _binding = FragmentSearchBinding.bind(view)
         mainActivity.setSupportActionBar(binding.toolbar)
         libraryViewModel.clearSearchResult()
@@ -147,7 +147,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
                 super.onChanged()
                 binding.empty.isVisible = searchAdapter.itemCount < 1
                 val height = dipToPix(52f)
-                binding.recyclerView.setPadding(0, 0, 0, height.toInt())
+                binding.recyclerView.updatePadding(bottom = height.toInt())
             }
         })
         binding.recyclerView.apply {
@@ -224,11 +224,6 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
     override fun onPause() {
         super.onPause()
         hideKeyboard(view)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mainActivity.setBottomNavVisibility(false)
     }
 
     private fun hideKeyboard(view: View?) {

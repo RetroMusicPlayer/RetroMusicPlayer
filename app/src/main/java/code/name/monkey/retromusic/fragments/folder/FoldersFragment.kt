@@ -24,9 +24,10 @@ import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
@@ -57,12 +58,10 @@ import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.*
-import code.name.monkey.retromusic.util.DensityUtil.dip2px
 import code.name.monkey.retromusic.util.PreferenceUtil.startDirectory
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import code.name.monkey.retromusic.views.BreadCrumbLayout.Crumb
 import code.name.monkey.retromusic.views.BreadCrumbLayout.SelectionCallback
-import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -128,10 +127,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     private fun setUpTitle() {
-        binding.toolbar.setNavigationOnClickListener { v: View? ->
-            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).setDuration(300)
-            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).setDuration(300)
-            findNavController(v!!).navigate(R.id.searchFragment, null, navOptions)
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_search, null, navOptions)
         }
         binding.appNameText.text = resources.getString(R.string.folders)
     }
@@ -461,8 +458,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     private fun checkIsEmpty() {
         if (_binding != null) {
             binding.emptyEmoji.text = getEmojiByUnicode(0x1F631)
-            binding.empty.visibility =
-                if (adapter == null || adapter!!.itemCount == 0) View.VISIBLE else View.GONE
+            binding.empty.isVisible = adapter?.itemCount == 0
         }
     }
 
