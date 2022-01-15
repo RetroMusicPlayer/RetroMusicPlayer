@@ -346,9 +346,9 @@
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
-    <string name="pref_title_extra_song_info">Song info</string>
-    <string name="pref_title_gapless_playback">Gapless playback</string>
-    <string name="pref_title_general_theme">App theme</string>
+    <string name="pref_title_extra_song_info">Info lagu</string>
+    <string name="pref_title_gapless_playback">Pemutaran tanpa jeda</string>
+    <string name="pref_title_general_theme">Tema aplikasi</string>
     <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
