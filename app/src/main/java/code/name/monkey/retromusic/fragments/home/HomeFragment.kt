@@ -35,7 +35,6 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.HomeAdapter
-import code.name.monkey.retromusic.databinding.FragmentBannerHomeBinding
 import code.name.monkey.retromusic.databinding.FragmentHomeBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
@@ -56,15 +55,15 @@ import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 
 class HomeFragment :
-    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home),
-    IScrollHelper {
+    AbsMainActivityFragment(R.layout.fragment_home), IScrollHelper {
 
-    private var _binding: HomeBindingAdapter? = null
+    private var _binding: HomeBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = getBinding(PreferenceUtil.isHomeBanner, view)
+        val homeBinding = FragmentHomeBinding.bind(view)
+        _binding = HomeBinding(homeBinding)
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         setupListeners()
@@ -105,7 +104,7 @@ class HomeFragment :
     private fun adjustPlaylistButtons() {
         val buttons =
             listOf(binding.history, binding.lastAdded, binding.topPlayed, binding.actionShuffle)
-        buttons.maxOf { it.lineCount }.let { maxLineCount->
+        buttons.maxOf { it.lineCount }.let { maxLineCount ->
             buttons.forEach { button ->
                 // Set the highest line count to every button for consistency
                 button.setLines(maxLineCount)
@@ -160,16 +159,10 @@ class HomeFragment :
             )
         }
         // Reload suggestions
-        binding.suggestions.refreshButton.setOnClickListener { libraryViewModel.forceReload(ReloadType.Suggestions) }
-    }
-
-    private fun getBinding(homeBanner: Boolean, view: View): HomeBindingAdapter {
-        return if (homeBanner) {
-            val homeBannerBinding = FragmentBannerHomeBinding.bind(view)
-            HomeBindingAdapter(null, homeBannerBinding)
-        } else {
-            val homeBinding = FragmentHomeBinding.bind(view)
-            HomeBindingAdapter(homeBinding, null)
+        binding.suggestions.refreshButton.setOnClickListener {
+            libraryViewModel.forceReload(
+                ReloadType.Suggestions
+            )
         }
     }
 
@@ -243,7 +236,7 @@ class HomeFragment :
     }
 
     private fun loadSuggestions(songs: List<Song>) {
-        if (songs.isEmpty()){
+        if (songs.isEmpty()) {
             binding.suggestions.root.isVisible = false
             return
         }
