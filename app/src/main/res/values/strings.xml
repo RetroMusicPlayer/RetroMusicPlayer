@@ -76,6 +76,7 @@
     <string name="app_widget_classic_name">Classic</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Small</string>
+    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artist</string>
     <string name="artists">Artists</string>

@@ -42,6 +42,11 @@
     <dimen name="app_widget_md3_height">90dp</dimen>
     <dimen name="app_widget_md3_image_size">70dp</dimen>
 
+    <dimen name="app_widget_circle_min_width">180dp</dimen>
+    <dimen name="app_widget_circle_min_height">100dp</dimen>
+    <dimen name="app_widget_circle_max_width">250dp</dimen>
+    <dimen name="app_widget_circle_max_height">250dp</dimen>
+
     <dimen name="icon_notification_dimen">32dp</dimen>
     <dimen name="toolbar_margin_horizontal">8dp</dimen>
     <dimen name="toolbar_height">48dp</dimen>

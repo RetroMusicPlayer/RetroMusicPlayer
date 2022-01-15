@@ -26,7 +26,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$mdc_version"
     implementation "androidx.preference:preference-ktx:$preference_version"
-    implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

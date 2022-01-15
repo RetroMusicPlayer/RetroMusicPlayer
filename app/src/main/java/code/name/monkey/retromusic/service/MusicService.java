@@ -83,6 +83,7 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.LockScreenActivity;
 import code.name.monkey.retromusic.appwidgets.AppWidgetBig;
 import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
+import code.name.monkey.retromusic.appwidgets.AppWidgetCircle;
 import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
 import code.name.monkey.retromusic.appwidgets.AppWidgetMD3;
 import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
@@ -205,6 +206,8 @@ public class MusicService extends MediaBrowserServiceCompat
 
     private final AppWidgetMD3 appWidgetMd3 = AppWidgetMD3.Companion.getInstance();
 
+    private final AppWidgetCircle appWidgetCircle = AppWidgetCircle.Companion.getInstance();
+
     private final BroadcastReceiver widgetIntentReceiver =
             new BroadcastReceiver() {
                 @Override
@@ -235,6 +238,10 @@ public class MusicService extends MediaBrowserServiceCompat
                             }
                             case AppWidgetMD3.NAME: {
                                 appWidgetMd3.performUpdate(MusicService.this, ids);
+                                break;
+                            }
+                            case AppWidgetCircle.NAME: {
+                                appWidgetCircle.performUpdate(MusicService.this, ids);
                                 break;
                             }
                         }
@@ -1619,6 +1626,7 @@ public class MusicService extends MediaBrowserServiceCompat
         appWidgetCard.notifyChange(this, what);
         appWidgetText.notifyChange(this, what);
         appWidgetMd3.notifyChange(this, what);
+        appWidgetCircle.notifyChange(this, what);
     }
 
     private void setCustomAction(PlaybackStateCompat.Builder stateBuilder) {
