@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.helper.SortOrder.*
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.transform.*
 import code.name.monkey.retromusic.util.theme.ThemeMode
+import code.name.monkey.retromusic.views.TopAppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -133,7 +134,7 @@ object PreferenceUtil {
 
     var artistDetailSongSortOrder
         get() = sharedPreferences.getStringOrDefault(
-           ARTIST_DETAIL_SONG_SORT_ORDER,
+            ARTIST_DETAIL_SONG_SORT_ORDER,
             ArtistSongSortOrder.SONG_A_Z
         )
         set(value) = sharedPreferences.edit { putString(ARTIST_DETAIL_SONG_SORT_ORDER, value) }
@@ -667,7 +668,7 @@ object PreferenceUtil {
         get() = sharedPreferences.getBoolean(MATERIAL_YOU, VersionUtils.hasS())
 
     val isCustomFont
-        get() = sharedPreferences.getBoolean(CUSTOM_FONT,  false)
+        get() = sharedPreferences.getBoolean(CUSTOM_FONT, false)
 
     val isSnowFalling
         get() = sharedPreferences.getBoolean(SNOWFALL, false)
@@ -688,6 +689,13 @@ object PreferenceUtil {
         get() = sharedPreferences
             .getFloat(PLAYBACK_PITCH, 1F)
         set(value) = sharedPreferences.edit { putFloat(PLAYBACK_PITCH, value) }
+
+    val appBarMode: TopAppBarLayout.AppBarMode
+        get() = if (sharedPreferences.getString(APPBAR_MODE, "0") == "0") {
+            TopAppBarLayout.AppBarMode.COLLAPSING
+        } else {
+            TopAppBarLayout.AppBarMode.SIMPLE
+        }
 }
 enum class LyricsType {
     REPLACE_LYRICS, OVER_LYRICS

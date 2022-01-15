@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.CollapsingToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/collapsingToolbarLayout"
+    style="?attr/collapsingToolbarLayoutLargeStyle"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+    app:collapsedTitleTextAppearance="@style/TextViewHeadline6"
+    app:expandedTitleMarginBottom="24dp"
+    app:expandedTitleMarginEnd="24dp"
+    app:expandedTitleMarginStart="24dp"
+    app:expandedTitleTextAppearance="@style/TextViewHeadline4"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap|enterAlwaysCollapsed">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
+        android:layout_height="?actionBarSize"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="@drawable/ic_search"
+        app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
+        tools:title="@string/songs" />
+
+    <FrameLayout
+        android:id="@+id/toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</com.google.android.material.appbar.CollapsingToolbarLayout>
