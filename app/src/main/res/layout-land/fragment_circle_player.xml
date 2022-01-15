@@ -106,7 +106,7 @@
         app:layout_constraintStart_toStartOf="@id/volumeSeekBar"
         app:layout_constraintTop_toTopOf="@id/volumeSeekBar" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageButton
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
         app:srcCompat="@drawable/ic_skip_next_round_white_32dp"
         app:tint="@color/md_green_500" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageButton
         android:id="@+id/previousButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
