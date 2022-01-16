@@ -20,7 +20,7 @@
     <string name="action_go_to_artist">Biçe bo hunermend</string>
     <string name="action_go_to_genre">Biçe bo cureyê</string>
     <string name="action_go_to_lyrics">Biçe bo peyvên stranê</string>
-    <string name="action_go_to_start_directory">Go to start directory</string>
+    <string name="action_go_to_start_directory">Biçe rêberiya destpêkê</string>
     <string name="action_grant">Piştgirî bike</string>
     <string name="action_grid_size">Mezinahiya torê</string>
     <string name="action_grid_size_land">Mezinahiya torê (erd)</string>
@@ -40,7 +40,7 @@
     <string name="action_search">Bigere</string>
     <string name="action_set">Dest pê bike</string>
     <string name="action_set_as_ringtone">Wekî dengê zengilê saz bike</string>
-    <string name="action_set_as_start_directory">Set as start directory</string>
+    <string name="action_set_as_start_directory">Wek rêberiya destpêkê saz bike</string>
     <string name="action_settings">"Sazkarî"</string>
     <string name="action_share">Parve bike</string>
     <string name="action_shuffle_all">Hemûyan tevlihev bike</string>
@@ -54,8 +54,8 @@
     <string name="add_action">Tevlî bike</string>
     <string name="add_playlist_title">"Tevlî rêzoka lêdanê bike"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
-    <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
+    <string name="added_title_to_playing_queue">"1 sernav li rêzeya lêdanê hate tevlîkirin."</string>
+    <string name="added_x_titles_to_playing_queue">%1$d sernav li rêzeya lêdanê hate tevlîkirin.</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Stran</item>
@@ -71,7 +71,7 @@
     <string name="app_share">Silav ev lêdera muzîkê ya xweşik li vir binêre:
 https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Tevlihev bike</string>
-    <string name="app_shortcut_top_tracks_short">Top Tracks</string>
+    <string name="app_shortcut_top_tracks_short">Stranên ku pir caran têne lêdan</string>
     <string name="app_widget_big_name">Wêneya tijî</string>
     <string name="app_widget_card_name">Kart</string>
     <string name="app_widget_classic_name">Klasîk</string>
