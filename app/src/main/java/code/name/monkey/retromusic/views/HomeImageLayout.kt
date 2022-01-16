@@ -21,11 +21,9 @@ class HomeImageLayout @JvmOverloads constructor(
 
     init {
         if (PreferenceUtil.isHomeBanner) {
-            bannerImageBinding = BannerImageLayoutBinding.inflate(LayoutInflater.from(context))
-            addView(bannerImageBinding!!.root)
+            bannerImageBinding = BannerImageLayoutBinding.inflate(LayoutInflater.from(context), this, true)
         } else {
-            userImageBinding = UserImageLayoutBinding.inflate(LayoutInflater.from(context))
-            addView(userImageBinding!!.root)
+            userImageBinding = UserImageLayoutBinding.inflate(LayoutInflater.from(context), this, true)
         }
     }
 

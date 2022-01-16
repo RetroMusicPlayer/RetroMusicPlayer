@@ -115,14 +115,13 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
         val nowPlayingScreen = values()[position]
 
         val inflater = LayoutInflater.from(context)
-        val binding = PreferenceNowPlayingScreenItemBinding.inflate(inflater, collection, false )
-        collection.addView(binding.root)
+        val binding = PreferenceNowPlayingScreenItemBinding.inflate(inflater, collection, true)
         Glide.with(context).load(nowPlayingScreen.drawableResId).into(binding.image)
         binding.title.setText(nowPlayingScreen.titleRes)
         if (isNowPlayingThemes(nowPlayingScreen)) {
             binding.proText.show()
             binding.proText.setText(R.string.pro)
-        }else{
+        } else {
             binding.proText.hide()
         }
         return binding.root

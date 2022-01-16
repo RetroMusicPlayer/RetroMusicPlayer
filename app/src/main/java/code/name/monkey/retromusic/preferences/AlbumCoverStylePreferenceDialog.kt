@@ -109,8 +109,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
             val albumCoverStyle = values()[position]
 
             val inflater = LayoutInflater.from(context)
-            val binding = PreferenceNowPlayingScreenItemBinding.inflate(inflater, collection, false)
-            collection.addView(binding.root)
+            val binding = PreferenceNowPlayingScreenItemBinding.inflate(inflater, collection, true)
 
             Glide.with(context).load(albumCoverStyle.drawableResId).into(binding.image)
             binding.title.setText(albumCoverStyle.titleRes)
