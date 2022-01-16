@@ -163,3 +163,46 @@ fun View.updateMargin(
 ) {
     (layoutParams as ViewGroup.MarginLayoutParams).updateMargins(left, top, right, bottom)
 }
+
+fun View.applyBottomInsets() {
+    if (PreferenceUtil.isFullScreenMode) return
+    val initialPadding = recordInitialPaddingForView(this)
+
+    ViewCompat.setOnApplyWindowInsetsListener(
+        (this)
+    ) { v: View, windowInsets: WindowInsetsCompat ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        v.updatePadding(
+            bottom = initialPadding.bottom + insets.bottom
+        )
+        windowInsets
+    }
+    requestApplyInsetsWhenAttached()
+}
+
+fun View.requestApplyInsetsWhenAttached() {
+    if (isAttachedToWindow) {
+        // We're already attached, just request as normal
+        requestApplyInsets()
+    } else {
+        // We're not attached to the hierarchy, add a listener to
+        // request when we are
+        addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View) {
+                v.removeOnAttachStateChangeListener(this)
+                v.requestApplyInsets()
+            }
+
+            override fun onViewDetachedFromWindow(v: View) = Unit
+        })
+    }
+}
+
+data class InitialPadding(
+    val left: Int, val top: Int,
+    val right: Int, val bottom: Int
+)
+
+fun recordInitialPaddingForView(view: View) = InitialPadding(
+    view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom
+)

@@ -108,7 +108,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         }
         val appName = resources.getString(titleRes)
         binding.appBarLayout.title = appName
-        //toolbarContainer.drawNextToNavbar()
     }
 
     abstract val titleRes: Int

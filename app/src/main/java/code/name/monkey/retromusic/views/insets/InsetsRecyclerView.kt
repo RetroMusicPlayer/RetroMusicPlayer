@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.Px
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.drawAboveSystemBarsWithPadding
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.extensions.applyBottomInsets
 
 class InsetsRecyclerView @JvmOverloads constructor(
     context: Context,
@@ -14,8 +12,7 @@ class InsetsRecyclerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
     init {
-        if (!RetroUtil.isLandscape())
-            drawAboveSystemBarsWithPadding()
+        applyBottomInsets()
     }
 
     fun updatePadding(
@@ -25,10 +22,6 @@ class InsetsRecyclerView @JvmOverloads constructor(
         @Px bottom: Int = paddingBottom
     ) {
         setPadding(left, top, right, bottom)
-        // Insetter saves initial state i.e. initial padding/margin of the view,
-        // we just clear it for now
-        setTag(R.id.insetter_initial_state, null)
-        if (!RetroUtil.isLandscape())
-            drawAboveSystemBarsWithPadding()
+        applyBottomInsets()
     }
 }
