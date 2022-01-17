@@ -696,6 +696,9 @@ object PreferenceUtil {
         } else {
             TopAppBarLayout.AppBarMode.SIMPLE
         }
+
+    val wallpaperAccent
+        get() = sharedPreferences.getBoolean(WALLPAPER_ACCENT, VersionUtils.hasOreoMR1() && !VersionUtils.hasS())
 }
 enum class LyricsType {
     REPLACE_LYRICS, OVER_LYRICS

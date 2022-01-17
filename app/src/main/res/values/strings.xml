@@ -534,4 +534,6 @@
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
     <string name="new_music_mix">New Music Mix</string>
     <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
 </resources>

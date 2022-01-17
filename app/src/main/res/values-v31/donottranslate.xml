@@ -5,4 +5,6 @@
 
     <bool name="colored_notification_available">false</bool>
     <integer name="overScrollMode">0</integer>
+    <bool name="wallpaper_accent_enabled">false</bool>
+    <bool name="wallpaper_accent_visible">false</bool>
 </resources>
