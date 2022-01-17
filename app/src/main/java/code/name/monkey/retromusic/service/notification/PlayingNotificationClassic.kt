@@ -55,6 +55,7 @@ class PlayingNotificationClassic(
 ) : PlayingNotification(context) {
 
     private var primaryColor: Int = 0
+    private var isInitialized = false
 
     init {
         val notificationLayout = getCombinedRemoteViews(true)
@@ -95,8 +96,8 @@ class PlayingNotificationClassic(
         return remoteViews
     }
 
-    @SuppressLint("RestrictedApi")
     override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
+        isInitialized = true
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
         GlideApp.with(context).asBitmapPalette().songCoverOptions(song)
@@ -258,7 +259,7 @@ class PlayingNotificationClassic(
             ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
     }
 
-    override fun setPlaying(isPlaying: Boolean) {
+    override fun setPlaying(isPlaying: Boolean, onUpdate: () -> Unit) {
         getPlayPauseBitmap(isPlaying).also {
             contentView.setImageViewBitmap(R.id.action_play_pause, it)
             bigContentView.setImageViewBitmap(R.id.action_play_pause, it)
@@ -266,7 +267,9 @@ class PlayingNotificationClassic(
     }
 
     override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
-
+        if (!isInitialized) {
+            updateMetadata(song, onUpdate)
+        }
     }
 
     private fun buildPendingIntent(

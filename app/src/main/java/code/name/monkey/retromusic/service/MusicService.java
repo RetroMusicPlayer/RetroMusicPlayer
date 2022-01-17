@@ -945,8 +945,8 @@ public class MusicService extends MediaBrowserServiceCompat
                 break;
             case CLASSIC_NOTIFICATION:
                 updateNotification();
-                playingNotification.setPlaying(isPlaying());
                 playingNotification.updateMetadata(getCurrentSong(), this::startForegroundOrNotify);
+                playingNotification.setPlaying(isPlaying(),this::startForegroundOrNotify);
                 break;
             case PLAYBACK_SPEED:
                 updateMediaSessionPlaybackState();
@@ -1435,7 +1435,7 @@ public class MusicService extends MediaBrowserServiceCompat
                     savePositionInTrack();
                 }
                 songPlayCountHelper.notifyPlayStateChanged(isPlaying);
-                playingNotification.setPlaying(isPlaying);
+                playingNotification.setPlaying(isPlaying, this::startForegroundOrNotify);
                 startForegroundOrNotify();
                 break;
             case FAVORITE_STATE_CHANGED:
