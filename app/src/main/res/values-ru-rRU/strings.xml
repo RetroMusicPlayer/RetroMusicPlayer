@@ -155,7 +155,7 @@
     <string name="device_info">Информация об устройстве</string>
     <string name="dialog_message_set_ringtone">Разрешить Retro Music изменять настройки звука</string>
     <string name="dialog_title_set_ringtone">Выбрать рингтон</string>
-    <string name="disc_hint">Disc Number</string>
+    <string name="disc_hint">Номер диска</string>
     <string name="do_you_want_to_clear_the_blacklist">Вы хотите очистить черный список?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Вы хотите удалить <b>%1$s</b> из черного списка?]]></string>
     <string name="donate">Пожертвовать</string>
