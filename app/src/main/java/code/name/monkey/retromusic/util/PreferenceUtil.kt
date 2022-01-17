@@ -79,7 +79,7 @@ object PreferenceUtil {
     fun getGeneralThemeValue(isSystemDark: Boolean): ThemeMode {
         val themeMode: String =
             sharedPreferences.getStringOrDefault(GENERAL_THEME, "auto")
-        return if (isBlackMode && isSystemDark) {
+        return if (isBlackMode && isSystemDark && themeMode != "light") {
             ThemeMode.BLACK
         } else {
             if (isBlackMode && themeMode == "dark") {

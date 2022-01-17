@@ -53,7 +53,7 @@ class RestoreActivity : AppCompatActivity() {
     }
 
     private fun updateTheme() {
-        AppCompatDelegate.setDefaultNightMode(ThemeManager.getNightMode(this))
+        AppCompatDelegate.setDefaultNightMode(ThemeManager.getNightMode())
 
         // Apply dynamic colors to activity if enabled
         if (PreferenceUtil.materialYou) {
