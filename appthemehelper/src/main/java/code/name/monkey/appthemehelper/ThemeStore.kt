@@ -216,7 +216,6 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
                 return ContextCompat.getColor(context, R.color.m3_accent_color)
             }
             val desaturatedColor = prefs(context).getBoolean("desaturated_color", false)
-            println(isWallpaperAccentEnabled(context))
             val color = if (isWallpaperAccentEnabled(context)) {
                 wallpaperColor(context)
             } else {

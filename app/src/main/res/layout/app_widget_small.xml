@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/card"
+    android:backgroundTint="?attr/colorSurface"
     android:columnCount="2"
     android:gravity="top"
-    android:rowCount="3">
+    android:rowCount="3"
+    android:theme="@style/Theme.AppWidget">
 
     <ImageView
         android:id="@+id/image"
@@ -81,7 +83,7 @@
             android:gravity="center_vertical"
             android:singleLine="true"
             android:textAppearance="@style/TextViewBody2"
-            android:textColor="@color/ate_primary_text_light"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Title" />
 
         <TextView
@@ -93,7 +95,7 @@
             android:paddingRight="4dp"
             android:singleLine="true"
             android:textAppearance="@style/TextViewBody1"
-            android:textColor="@color/ate_secondary_text_light"
+            android:textColor="?android:attr/textColorPrimary"
             tools:ignore="HardcodedText"
             tools:text="•" />
 
@@ -104,7 +106,7 @@
             android:gravity="center_vertical"
             android:singleLine="true"
             android:textAppearance="@style/TextViewBody1"
-            android:textColor="@color/ate_secondary_text_light"
+            android:textColor="?android:attr/textColorSecondary"
             tools:text="Text" />
 
     </LinearLayout>

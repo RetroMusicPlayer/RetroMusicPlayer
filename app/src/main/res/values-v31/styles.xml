@@ -15,4 +15,8 @@
         </item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
+
+    <style name="Theme.AppWidget" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="colorSurface">@android:color/system_accent1_50</item>
+    </style>
 </resources>

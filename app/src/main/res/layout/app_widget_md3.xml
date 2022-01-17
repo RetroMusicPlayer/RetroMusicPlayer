@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/app_widget_md3_height"
     android:background="@drawable/app_widget_background"
-    android:backgroundTint="@color/widget_md3_bg_color"
+    android:backgroundTint="?attr/colorSurface"
     android:orientation="horizontal"
-    tools:ignore="ContentDescription"
-    android:theme="@style/Theme.Material3.DynamicColors.DayNight">
+    android:theme="@style/Theme.AppWidget"
+    tools:ignore="ContentDescription">
 
     <ImageView
         android:id="@+id/image"

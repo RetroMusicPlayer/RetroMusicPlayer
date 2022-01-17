@@ -249,4 +249,6 @@
         <item name="fontFamily">@font/manrope</item>
         <item name="android:fontFamily">@font/manrope</item>
     </style>
+
+    <style name="Theme.AppWidget" parent="Theme.RetroMusic.FollowSystem" />
 </resources>
