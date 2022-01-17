@@ -7,7 +7,6 @@
         android:icon="@drawable/ic_playback_speed"
         android:orderInCategory="0"
         android:title="@string/playback_speed"
-        app:showAsAction="always"
         tools:targetApi="23" />
     <item
         android:id="@+id/action_toggle_lyrics"
