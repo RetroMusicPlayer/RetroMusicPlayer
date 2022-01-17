@@ -22,6 +22,14 @@ fun AppCompatActivity.toggleScreenOn() {
     }
 }
 
+fun AppCompatActivity.keepScreenOn(keepScreenOn: Boolean) {
+    if (keepScreenOn) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    } else {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    }
+}
+
 fun AppCompatActivity.setEdgeToEdgeOrImmersive() {
     if (PreferenceUtil.isFullScreenMode) {
         setImmersiveFullscreen()

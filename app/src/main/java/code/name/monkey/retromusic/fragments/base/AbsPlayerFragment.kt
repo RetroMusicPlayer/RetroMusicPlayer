@@ -43,7 +43,6 @@ import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
-import code.name.monkey.retromusic.PLAYBACK_SPEED
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
@@ -53,6 +52,7 @@ import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.currentFragment
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.keepScreenOn
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.ReloadType
@@ -88,6 +88,11 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             R.id.action_toggle_lyrics -> {
                 PreferenceUtil.showLyrics = !item.isChecked
                 item.isChecked = !item.isChecked
+                if (PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics) {
+                    mainActivity.keepScreenOn(true)
+                } else if (!PreferenceUtil.isScreenOnEnabled && !PreferenceUtil.showLyrics) {
+                    mainActivity.keepScreenOn(false)
+                }
                 return true
             }
             R.id.action_go_to_lyrics -> {
@@ -420,6 +425,7 @@ fun goToLyrics(activity: Activity) {
         )
     }
 }
+
 /** Fixes checked state being ignored by injecting checked state directly into drawable */
 @SuppressLint("RestrictedApi")
 class CheckDrawableWrapper(val menuItem: MenuItem) : DrawableWrapper(menuItem.icon) {

@@ -698,7 +698,13 @@ object PreferenceUtil {
         }
 
     val wallpaperAccent
-        get() = sharedPreferences.getBoolean(WALLPAPER_ACCENT, VersionUtils.hasOreoMR1() && !VersionUtils.hasS())
+        get() = sharedPreferences.getBoolean(
+            WALLPAPER_ACCENT,
+            VersionUtils.hasOreoMR1() && !VersionUtils.hasS()
+        )
+
+    val lyricsScreenOn
+        get() = sharedPreferences.getBoolean(SCREEN_ON_LYRICS, false)
 }
 enum class LyricsType {
     REPLACE_LYRICS, OVER_LYRICS

@@ -110,9 +110,15 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             when (newState) {
                 STATE_EXPANDED -> {
                     onPanelExpanded()
+                    if (PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics) {
+                        keepScreenOn(true)
+                    }
                 }
                 STATE_COLLAPSED -> {
                     onPanelCollapsed()
+                    if ((PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics) || !PreferenceUtil.isScreenOnEnabled) {
+                        keepScreenOn(false)
+                    }
                 }
                 STATE_SETTLING, STATE_DRAGGING -> {
                     if (fromNotification) {
