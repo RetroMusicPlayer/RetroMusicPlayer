@@ -41,7 +41,6 @@ import code.name.monkey.retromusic.databinding.FragmentLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentNormalLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentSyncedLyricsBinding
 import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
@@ -150,9 +149,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         ViewCompat.setTransitionName(binding.container, "lyrics")
 
         setupWakelock()
-
-        binding.tabLyrics.setBackgroundColor(surfaceColor())
-        binding.container.setBackgroundColor(surfaceColor())
         setupViews()
         setupToolbar()
         updateTitleSong()
@@ -186,7 +182,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
     private fun setupToolbar() {
         mainActivity.setSupportActionBar(binding.toolbar)
-        binding.toolbar.setBackgroundColor(surfaceColor())
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()

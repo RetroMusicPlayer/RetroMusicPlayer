@@ -53,7 +53,7 @@ class DurationPreferenceDialog : DialogFragment() {
         return materialDialog(R.string.audio_fade_duration)
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.save) { _, _ -> updateDuration(binding.slider.value.toInt()) }
-            .setView(view)
+            .setView(binding.root)
             .create()
             .colorButtons()
     }
