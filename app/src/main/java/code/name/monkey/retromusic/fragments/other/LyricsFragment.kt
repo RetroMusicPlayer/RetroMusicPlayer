@@ -15,9 +15,16 @@
 package code.name.monkey.retromusic.fragments.other
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.InputType
 import android.view.*
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -36,14 +43,14 @@ import code.name.monkey.retromusic.databinding.FragmentSyncedLyricsBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.extensions.textColorSecondary
+import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.lyrics.LrcView
 import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.LyricUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.*
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -55,6 +62,7 @@ import kotlinx.coroutines.*
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
 import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 
 class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
@@ -95,6 +103,43 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         return transform
     }
 
+    private lateinit var normalLyricsLauncher: ActivityResultLauncher<IntentSenderRequest>
+    private lateinit var newSyncedLyricsLauncher: ActivityResultLauncher<Intent>
+    private lateinit var editSyncedLyricsLauncher: ActivityResultLauncher<IntentSenderRequest>
+
+    private lateinit var cacheFile: File
+    private var syncedLyrics: String = ""
+    private lateinit var syncedFileUri: Uri
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Normal lyrics launcher
+        normalLyricsLauncher =
+            registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    FileUtils.copyFileToUri(requireContext(), cacheFile, song.uri)
+                }
+            }
+        newSyncedLyricsLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    context?.contentResolver?.openOutputStream(result.data?.data!!)?.use {
+                        it.write(syncedLyrics.toByteArray())
+                    }
+                }
+            }
+        editSyncedLyricsLauncher =
+            registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    requireContext().contentResolver.openOutputStream(syncedFileUri)?.use { os ->
+                        (os as FileOutputStream).channel.truncate(0)
+                        os.write(syncedLyrics.toByteArray())
+                        os.flush()
+                    }
+                }
+            }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -111,9 +156,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         setupViews()
         setupToolbar()
         updateTitleSong()
-        if (VersionUtils.hasR()) {
-            binding.editButton.isVisible = false
-        }
     }
 
     private fun setupViews() {
@@ -213,12 +255,30 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
             ) { _, input ->
                 val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
                 fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
+                syncedLyrics = input.toString()
                 GlobalScope.launch {
-                    TagWriter.writeTagsToFiles(
-                        requireContext(), AudioTagInfo(
-                            listOf(song.data), fieldKeyValueMap, null
+                    if (VersionUtils.hasR()) {
+                        cacheFile = TagWriter.writeTagsToFilesR(
+                            requireContext(), AudioTagInfo(
+                                listOf(song.data), fieldKeyValueMap, null
+                            )
+                        )[0]
+                        val pendingIntent =
+                            MediaStore.createWriteRequest(
+                                requireContext().contentResolver,
+                                listOf(song.uri)
+                            )
+
+                        normalLyricsLauncher.launch(
+                            IntentSenderRequest.Builder(pendingIntent).build()
                         )
-                    )
+                    } else {
+                        TagWriter.writeTagsToFiles(
+                            requireContext(), AudioTagInfo(
+                                listOf(song.data), fieldKeyValueMap, null
+                            )
+                        )
+                    }
                 }
             }
             positiveButton(res = R.string.save) {
@@ -240,7 +300,33 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
                 prefill = content,
                 inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_CLASS_TEXT
             ) { _, input ->
-                LyricUtil.writeLrc(song, input.toString())
+                if (VersionUtils.hasR()) {
+                    syncedLyrics = input.toString()
+                    val lrcFile = LyricUtil.getSyncedLyricsFile(song)
+                    if (lrcFile?.exists() == true) {
+                        syncedFileUri =
+                            UriUtil.getUriFromPath(requireContext(), lrcFile.absolutePath)
+                        val pendingIntent =
+                            MediaStore.createWriteRequest(
+                                requireContext().contentResolver,
+                                listOf(syncedFileUri)
+                            )
+                        editSyncedLyricsLauncher.launch(
+                            IntentSenderRequest.Builder(pendingIntent).build()
+                        )
+                    } else {
+                        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
+                        intent.addCategory(Intent.CATEGORY_OPENABLE)
+                        intent.type = "*/*"
+                        intent.putExtra(
+                            Intent.EXTRA_TITLE,
+                            LyricUtil.getLrcOriginalPath(File(song.data).name)
+                        )
+                        newSyncedLyricsLauncher.launch(intent)
+                    }
+                } else {
+                    LyricUtil.writeLrc(song, input.toString())
+                }
             }
             positiveButton(res = R.string.save) {
                 (lyricsSectionsAdapter.fragments[0].first as SyncedLyrics).loadLRCLyrics()
