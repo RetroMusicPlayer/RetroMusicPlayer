@@ -353,7 +353,7 @@ tê guhertin</string>
     <string name="pref_title_extra_song_info">Zanyariyên stranê</string>
     <string name="pref_title_gapless_playback">Gapless playback</string>
     <string name="pref_title_general_theme">Rûkara sepanê</string>
-    <string name="pref_title_home_album_grid_style">Album grid</string>
+    <string name="pref_title_home_album_grid_style">Berga albumê</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
@@ -411,7 +411,7 @@ tê guhertin</string>
     <string name="saf_guide_slide2_description">You need to select your SD card root directory</string>
     <string name="saf_guide_slide2_title">Select your SD card in navigation drawer</string>
     <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
-    <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
+    <string name="saf_guide_slide3_title">Bişkoka \'hilbijêre\' li binê dîmenderê bitikîne</string>
     <string name="saf_write_failed">Nivîsandina pelê têk çû: %s</string>
     <string name="save">Tomar bike</string>
     <!-- SAF -->
@@ -446,8 +446,8 @@ tê guhertin</string>
     <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Hunermend</string>
     <string name="sort_order_composer">Awazvan</string>
-    <string name="sort_order_date">Date added</string>
-    <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_date">Dem</string>
+    <string name="sort_order_date_modified">Dîroka guhertinê</string>
     <string name="sort_order_num_songs">Jimara stranan</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Sal</string>
@@ -478,12 +478,12 @@ tê guhertin</string>
     <string name="track_list">Track number</string>
     <string name="translate">Wergerandin</string>
     <string name="translate_community">Alîkariya me bike ku em sepanê wergerînin zimanê te</string>
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
+    <string name="try_retro_music_premium">Retro Music Premium biceribîne</string>
     <string name="twitter_page">Twitter</string>
-    <string name="twitter_page_summary">Share your design with Retro Music</string>
+    <string name="twitter_page_summary">Dîzayna xwe bi Retro Music re parve bike</string>
     <string name="unlabeled">Nenîşankirî</string>
-    <string name="unplayable_file">Couldn\u2019t play this song.</string>
-    <string name="up_next">Up next</string>
+    <string name="unplayable_file">Nikare vê stranê\u2019 lêdê.</string>
+    <string name="up_next">Pêş</string>
     <string name="update_image">Wêneyê rojane bike</string>
     <string name="updating">Tê rojanekirin…</string>
     <string name="user_images_description">Wêneyên bikarhêner</string>
