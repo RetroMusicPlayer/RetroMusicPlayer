@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.activities.base
 
 import android.content.Context
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.KeyEvent
@@ -23,6 +24,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
 import androidx.core.os.ConfigurationCompat
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.LanguageContextWrapper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.*
@@ -43,6 +45,9 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         toggleScreenOn()
         setLightNavigationBarAuto()
         setLightStatusBarAuto(surfaceColor())
+        if (VersionUtils.hasQ()) {
+            window.decorView.isForceDarkAllowed = false
+        }
     }
 
     private fun updateTheme() {

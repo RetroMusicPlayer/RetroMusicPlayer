@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-
+<resources>
     <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="windowActionBarOverlay">true</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
@@ -22,17 +17,11 @@
         <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="md_background_color">@color/darkColorSurface</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="windowActionBarOverlay">true</item>
+    <style name="Theme.RetroMusic.Base" parent="Theme.Material3.Dark.NoActionBar">
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="colorSurface">@color/darkColorSurface</item>
@@ -47,13 +36,8 @@
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="md_background_color">@color/blackColorSurface</item>
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="windowActionBarOverlay">true</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="colorSurface">@color/blackColorSurface</item>
@@ -66,20 +50,14 @@
             @style/Widget.MaterialComponents.FloatingActionButton
         </item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
-        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="windowActionBarOverlay">true</item>
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="android:windowBackground">@color/md_white_1000</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="popupMenuStyle">@style/MaterialPopupMenuStyle</item>
