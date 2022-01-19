@@ -29,6 +29,7 @@ import code.name.monkey.retromusic.SNOWFALL
 import code.name.monkey.retromusic.databinding.FragmentPlayerBinding
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
+import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
@@ -167,7 +168,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
     }
 
     private fun startOrStopSnow(isSnowFalling: Boolean) {
-        if (isSnowFalling) {
+        if (isSnowFalling && !surfaceColor().isColorLight) {
             binding.snowfallView.isVisible = true
             binding.snowfallView.restartFalling()
         } else {

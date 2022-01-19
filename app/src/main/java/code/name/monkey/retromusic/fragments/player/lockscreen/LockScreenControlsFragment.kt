@@ -15,12 +15,11 @@
 package code.name.monkey.retromusic.fragments.player.lockscreen
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
+import android.widget.ImageButton
 import android.widget.SeekBar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -31,13 +30,9 @@ import code.name.monkey.retromusic.databinding.FragmentLockScreenPlaybackControl
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.textColorSecondary
-import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
-import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
@@ -48,23 +43,28 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 class LockScreenControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_lock_screen_playback_controls) {
 
-    private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
-    private var lastPlaybackControlsColor: Int = 0
-    private var lastDisabledPlaybackControlsColor: Int = 0
-
     private var _binding: FragmentLockScreenPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
+    override val seekBar: SeekBar
+        get() = binding.progressSlider
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-    }
+    override val shuffleButton: ImageButton
+        get() = binding.shuffleButton
+
+    override val repeatButton: ImageButton
+        get() = binding.repeatButton
+
+    override val nextButton: ImageButton
+        get() = binding.nextButton
+
+    override val previousButton: ImageButton
+        get() = binding.previousButton
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLockScreenPlaybackControlsBinding.bind(view)
-        setUpMusicControllers()
+        setUpPlayPauseFab()
         binding.title.isSelected = true
     }
 
@@ -72,16 +72,6 @@ class LockScreenControlsFragment :
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
         binding.text.text = String.format("%s - %s", song.artistName, song.albumName)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        progressViewUpdateHelper?.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        progressViewUpdateHelper?.stop()
     }
 
     override fun onServiceConnected() {
@@ -159,73 +149,6 @@ class LockScreenControlsFragment :
         }
     }
 
-    private fun setUpMusicControllers() {
-        setUpPlayPauseFab()
-        setUpPrevNext()
-        setUpProgressSlider()
-        setUpShuffleButton()
-        setUpRepeatButton()
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun setUpPrevNext() {
-        updatePrevNextColor()
-        binding.nextButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
-        binding.previousButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), false))
-    }
-
-    private fun updatePrevNextColor() {
-        binding.nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-        binding.previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-    }
-
-    private fun setUpShuffleButton() {
-        binding.shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
-    }
-
-    override fun updateShuffleState() {
-        when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> binding.shuffleButton.setColorFilter(
-                lastPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-            else -> binding.shuffleButton.setColorFilter(
-                lastDisabledPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-        }
-    }
-
-    private fun setUpRepeatButton() {
-        binding.repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
-    }
-
-    override fun updateRepeatState() {
-        when (MusicPlayerRemote.repeatMode) {
-            MusicService.REPEAT_MODE_NONE -> {
-                binding.repeatButton.setImageResource(R.drawable.ic_repeat)
-                binding.repeatButton.setColorFilter(
-                    lastDisabledPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-            MusicService.REPEAT_MODE_ALL -> {
-                binding.repeatButton.setImageResource(R.drawable.ic_repeat)
-                binding.repeatButton.setColorFilter(
-                    lastPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-            MusicService.REPEAT_MODE_THIS -> {
-                binding.repeatButton.setImageResource(R.drawable.ic_repeat_one)
-                binding.repeatButton.setColorFilter(
-                    lastPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-        }
-    }
-
     public override fun show() {
         binding.playPauseButton.animate()
             .scaleX(1f)
@@ -241,20 +164,6 @@ class LockScreenControlsFragment :
             scaleY = 0f
             rotation = 0f
         }
-    }
-
-    override fun setUpProgressSlider() {
-        binding.progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(
-                        MusicPlayerRemote.songProgressMillis,
-                        MusicPlayerRemote.songDurationMillis
-                    )
-                }
-            }
-        })
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {

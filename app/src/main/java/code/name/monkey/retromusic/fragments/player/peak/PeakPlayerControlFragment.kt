@@ -15,12 +15,12 @@
 package code.name.monkey.retromusic.fragments.player.peak
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
+import android.widget.ImageButton
 import android.widget.SeekBar
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -29,13 +29,9 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPeakControlPlayerBinding
 import code.name.monkey.retromusic.extensions.applyColor
-import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
-import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
@@ -46,26 +42,23 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class PeakPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_peak_control_player) {
 
-    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
-    private var lastPlaybackControlsColor: Int = 0
-    private var lastDisabledPlaybackControlsColor: Int = 0
     private var _binding: FragmentPeakControlPlayerBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-    }
+    override val seekBar: SeekBar
+        get() = binding.progressSlider
 
-    override fun onResume() {
-        super.onResume()
-        progressViewUpdateHelper.start()
-    }
+    override val shuffleButton: ImageButton
+        get() = binding.shuffleButton
 
-    override fun onPause() {
-        super.onPause()
-        progressViewUpdateHelper.stop()
-    }
+    override val repeatButton: ImageButton
+        get() = binding.repeatButton
+
+    override val nextButton: ImageButton
+        get() = binding.nextButton
+
+    override val previousButton: ImageButton
+        get() = binding.previousButton
 
     override fun onViewCreated(
         view: View,
@@ -73,14 +66,12 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_pe
     ) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPeakControlPlayerBinding.bind(view)
-        setUpMusicControllers()
+        setUpPlayPauseFab()
     }
 
-    override fun show() {
-    }
+    override fun show() {}
 
-    override fun hide() {
-    }
+    override fun hide() {}
 
     override fun setColor(color: MediaNotificationProcessor) {
         val controlsColor =
@@ -118,40 +109,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_pe
         }
     }
 
-    private fun setUpMusicControllers() {
-        setUpPlayPauseFab()
-        setUpPrevNext()
-        setUpRepeatButton()
-        setUpShuffleButton()
-        setUpProgressSlider()
-    }
-
-    private fun setUpShuffleButton() {
-        binding.shuffleButton.setOnClickListener {
-            MusicPlayerRemote.toggleShuffleMode()
-        }
-    }
-
-    private fun setUpRepeatButton() {
-        binding.repeatButton.setOnClickListener {
-            MusicPlayerRemote.cycleRepeatMode()
-        }
-    }
-
-    override fun setUpProgressSlider() {
-        binding.progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(
-                        MusicPlayerRemote.songProgressMillis,
-                        MusicPlayerRemote.songDurationMillis
-                    )
-                }
-            }
-        })
-    }
-
     override fun onUpdateProgressViews(progress: Int, total: Int) {
         binding.progressSlider.max = total
 
@@ -168,57 +125,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_pe
         TintHelper.setTintAuto(binding.playPauseButton, Color.WHITE, true)
         TintHelper.setTintAuto(binding.playPauseButton, Color.BLACK, false)
         binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun setUpPrevNext() {
-        updatePrevNextColor()
-        binding.nextButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
-        binding.previousButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), false))
-    }
-
-    private fun updatePrevNextColor() {
-        binding.nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-        binding.previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-    }
-
-    override fun updateShuffleState() {
-        when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> binding.shuffleButton.setColorFilter(
-                lastPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-            else -> binding.shuffleButton.setColorFilter(
-                lastDisabledPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-        }
-    }
-
-    override fun updateRepeatState() {
-        when (MusicPlayerRemote.repeatMode) {
-            MusicService.REPEAT_MODE_NONE -> {
-                binding.repeatButton.setImageResource(R.drawable.ic_repeat)
-                binding.repeatButton.setColorFilter(
-                    lastDisabledPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-            MusicService.REPEAT_MODE_ALL -> {
-                binding.repeatButton.setImageResource(R.drawable.ic_repeat)
-                binding.repeatButton.setColorFilter(
-                    lastPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-            MusicService.REPEAT_MODE_THIS -> {
-                binding.repeatButton.setImageResource(R.drawable.ic_repeat_one)
-                binding.repeatButton.setColorFilter(
-                    lastPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-        }
     }
 
     override fun onPlayStateChanged() {

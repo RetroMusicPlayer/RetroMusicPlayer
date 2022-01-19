@@ -15,11 +15,11 @@
 package code.name.monkey.retromusic.fragments.player.card
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
+import android.widget.ImageButton
 import android.widget.SeekBar
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -32,15 +32,10 @@ import code.name.monkey.retromusic.extensions.getSongInfo
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
-import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
-import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
@@ -48,31 +43,29 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 class CardPlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_card_player_playback_controls) {
 
-    private var lastPlaybackControlsColor: Int = 0
-    private var lastDisabledPlaybackControlsColor: Int = 0
-    private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
+
     private var _binding: FragmentCardPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
+    override val seekBar: SeekBar
+        get() = binding.progressSlider
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-    }
+    override val shuffleButton: ImageButton
+        get() = binding.mediaButton.shuffleButton
+
+    override val repeatButton: ImageButton
+        get() = binding.mediaButton.repeatButton
+
+    override val nextButton: ImageButton
+        get() = binding.mediaButton.nextButton
+
+    override val previousButton: ImageButton
+        get() = binding.mediaButton.previousButton
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentCardPlayerPlaybackControlsBinding.bind(view)
-        setUpMusicControllers()
-
-        binding.mediaButton.playPauseButton.setOnClickListener {
-            if (MusicPlayerRemote.isPlaying) {
-                MusicPlayerRemote.pauseSong()
-            } else {
-                MusicPlayerRemote.resumePlaying()
-            }
-            showBounceAnimation(binding.mediaButton.playPauseButton)
-        }
+        setUpPlayPauseFab()
         binding.title.isSelected = true
         binding.text.isSelected = true
         binding.title.setOnClickListener {
@@ -94,16 +87,6 @@ class CardPlaybackControlsFragment :
         } else {
             binding.songInfo.hide()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        progressViewUpdateHelper!!.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        progressViewUpdateHelper!!.stop()
     }
 
     override fun onServiceConnected() {
@@ -169,7 +152,14 @@ class CardPlaybackControlsFragment :
     }
 
     private fun setUpPlayPauseFab() {
-        binding.mediaButton.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
+        binding.mediaButton.playPauseButton.setOnClickListener {
+            if (MusicPlayerRemote.isPlaying) {
+                MusicPlayerRemote.pauseSong()
+            } else {
+                MusicPlayerRemote.resumePlaying()
+            }
+            it.showBounceAnimation()
+        }
     }
 
     private fun updatePlayPauseDrawableState() {
@@ -177,79 +167,6 @@ class CardPlaybackControlsFragment :
             binding.mediaButton.playPauseButton.setImageResource(R.drawable.ic_pause)
         } else {
             binding.mediaButton.playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
-        }
-    }
-
-    private fun setUpMusicControllers() {
-        setUpPlayPauseFab()
-        setUpPrevNext()
-        setUpRepeatButton()
-        setUpShuffleButton()
-        setUpProgressSlider()
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun setUpPrevNext() {
-        updatePrevNextColor()
-        binding.mediaButton.nextButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
-        binding.mediaButton.previousButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), false))
-    }
-
-    private fun updatePrevNextColor() {
-        binding.mediaButton.nextButton.setColorFilter(
-            lastPlaybackControlsColor,
-            PorterDuff.Mode.SRC_IN
-        )
-        binding.mediaButton.previousButton.setColorFilter(
-            lastPlaybackControlsColor,
-            PorterDuff.Mode.SRC_IN
-        )
-    }
-
-    private fun setUpShuffleButton() {
-        binding.mediaButton.shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
-    }
-
-    override fun updateShuffleState() {
-        when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> binding.mediaButton.shuffleButton.setColorFilter(
-                lastPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-            else -> binding.mediaButton.shuffleButton.setColorFilter(
-                lastDisabledPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-        }
-    }
-
-    private fun setUpRepeatButton() {
-        binding.mediaButton.repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
-    }
-
-    override fun updateRepeatState() {
-        when (MusicPlayerRemote.repeatMode) {
-            MusicService.REPEAT_MODE_NONE -> {
-                binding.mediaButton.repeatButton.setImageResource(R.drawable.ic_repeat)
-                binding.mediaButton.repeatButton.setColorFilter(
-                    lastDisabledPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-            MusicService.REPEAT_MODE_ALL -> {
-                binding.mediaButton.repeatButton.setImageResource(R.drawable.ic_repeat)
-                binding.mediaButton.repeatButton.setColorFilter(
-                    lastPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-            MusicService.REPEAT_MODE_THIS -> {
-                binding.mediaButton.repeatButton.setImageResource(R.drawable.ic_repeat_one)
-                binding.mediaButton.repeatButton.setColorFilter(
-                    lastPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
         }
     }
 
@@ -271,28 +188,9 @@ class CardPlaybackControlsFragment :
         binding.songCurrentProgress.setTextColor(color)
     }
 
-    public override fun show() {
-        // Ignore
-    }
+    public override fun show() {}
 
-    public override fun hide() {
-        // Ignore
-    }
-
-    override fun setUpProgressSlider() {
-        binding.progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(
-                        MusicPlayerRemote.songProgressMillis,
-                        MusicPlayerRemote.songDurationMillis
-                    )
-                }
-            }
-        })
-    }
-
+    public override fun hide() {}
 
     override fun onDestroyView() {
         super.onDestroyView()
