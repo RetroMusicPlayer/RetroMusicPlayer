@@ -43,7 +43,7 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlin.math.sqrt
 
 class ColorPlaybackControlsFragment :
-    AbsPlayerControlsFragment(R.layout.fragment_adaptive_player_playback_controls) {
+    AbsPlayerControlsFragment(R.layout.fragment_color_player_playback_controls) {
 
     private var _binding: FragmentColorPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!

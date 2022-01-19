@@ -227,11 +227,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setLightStatusBarAuto()
         setLightNavigationBarAuto()
         setTaskDescriptionColor(taskColor)
+        playerFragment?.onHide()
     }
 
     open fun onPanelExpanded() {
         setMiniPlayerAlphaProgress(1F)
         onPaletteColorChanged()
+        playerFragment?.onShow()
     }
 
     private fun setupSlidingUpPanel() {
