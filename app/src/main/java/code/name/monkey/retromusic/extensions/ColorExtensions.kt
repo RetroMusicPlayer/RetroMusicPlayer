@@ -265,15 +265,10 @@ fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
 
 @ColorInt
 fun Context.darkAccentColor(): Int {
-    val colorSurfaceVariant = if (surfaceColor().isColorLight) {
-        surfaceColor()
-    } else {
-        surfaceColor().lighterColor
-    }
     return ColorUtils.blendARGB(
         accentColor(),
-        colorSurfaceVariant,
-        if (surfaceColor().isColorLight) 0.96f else 0.975f
+        surfaceColor(),
+        if (surfaceColor().isColorLight) 0.9f else 0.92f
     )
 }
 

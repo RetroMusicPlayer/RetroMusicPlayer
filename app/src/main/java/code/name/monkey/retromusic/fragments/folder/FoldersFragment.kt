@@ -40,7 +40,6 @@ import code.name.monkey.retromusic.adapter.Storage
 import code.name.monkey.retromusic.adapter.StorageAdapter
 import code.name.monkey.retromusic.adapter.StorageClickListener
 import code.name.monkey.retromusic.databinding.FragmentFolderBinding
-import code.name.monkey.retromusic.databinding.FragmentPlayerPlaybackControlsBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment.ListPathsAsyncTask.OnPathsListedCallback
@@ -71,7 +70,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
-import com.google.android.material.transition.MaterialSharedAxis
 import java.io.*
 import java.lang.ref.WeakReference
 import java.util.*
@@ -375,6 +373,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
         menu.add(0, R.id.action_go_to_start_directory, 1, R.string.action_go_to_start_directory)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
+        menu.add(0, R.id.action_settings, 2, R.string.action_settings)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
         menu.removeItem(R.id.action_grid_size)
         menu.removeItem(R.id.action_layout_type)
         menu.removeItem(R.id.action_sort_order)
@@ -408,6 +408,14 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         })
                         .execute(ListPathsAsyncTask.LoadingInfo(crumb.file, AUDIO_FILE_FILTER))
                 }
+                return true
+            }
+            R.id.action_settings -> {
+                findNavController().navigate(
+                    R.id.settingsActivity,
+                    null,
+                    navOptions
+                )
                 return true
             }
         }
