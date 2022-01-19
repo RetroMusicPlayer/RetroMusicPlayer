@@ -32,7 +32,8 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
-import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.isColorLight
+import code.name.monkey.retromusic.extensions.isSystemDarkModeEnabled
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -80,6 +81,7 @@ class PlayingNotificationClassic(
         setContentIntent(clickIntent)
         setDeleteIntent(deleteIntent)
         setCategory(NotificationCompat.CATEGORY_SERVICE)
+        setColorized(true)
         priority = NotificationCompat.PRIORITY_MAX
         setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         setCustomContentView(notificationLayout)
@@ -152,8 +154,13 @@ class PlayingNotificationClassic(
                         }
                         setBackgroundColor(bgColorFinal)
                         setNotificationContent(ColorUtil.isColorLight(bgColorFinal))
-                    }else {
-                        setNotificationContent(!ColorUtil.isColorLight(context.surfaceColor()))
+                    } else {
+                        if (PreferenceUtil.isColoredNotification) {
+                            color = bgColor
+                            setNotificationContent(color.isColorLight)
+                        } else {
+                            setNotificationContent(!context.isSystemDarkModeEnabled())
+                        }
                     }
                     onUpdate()
                 }
@@ -256,7 +263,8 @@ class PlayingNotificationClassic(
                     R.drawable.ic_pause_white_48dp
                 else
                     R.drawable.ic_play_arrow_white_48dp, primaryColor
-            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+        )
     }
 
     override fun setPlaying(isPlaying: Boolean, onUpdate: () -> Unit) {
