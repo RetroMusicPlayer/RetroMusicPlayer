@@ -226,7 +226,7 @@
     <string name="md_error_label">错误</string>
     <string name="md_storage_perm_error">权限错误</string>
     <string name="my_name">我的名字</string>
-    <string name="my_top_tracks">播放最多</string>
+    <string name="my_top_tracks">最常播放</string>
     <string name="never">从不</string>
     <string name="new_playlist_title">新建播放列表</string>
     <string name="new_start_directory">%s 是新的起始目录。</string>
