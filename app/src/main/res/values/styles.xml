@@ -251,5 +251,11 @@
         <item name="android:fontFamily">@font/manrope</item>
     </style>
 
+    <style name="CircleFABOverlay">
+        <item name="floatingActionButtonStyle">
+            @style/Widget.MaterialComponents.FloatingActionButton
+        </item>
+    </style>
+
     <style name="Theme.AppWidget" parent="Theme.RetroMusic.FollowSystem" />
 </resources>

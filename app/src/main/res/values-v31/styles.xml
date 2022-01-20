@@ -7,9 +7,6 @@
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-        <item name="floatingActionButtonStyle">
-            @style/Widget.MaterialComponents.FloatingActionButton
-        </item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 

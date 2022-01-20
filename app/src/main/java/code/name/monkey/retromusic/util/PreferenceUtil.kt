@@ -705,6 +705,9 @@ object PreferenceUtil {
 
     val lyricsScreenOn
         get() = sharedPreferences.getBoolean(SCREEN_ON_LYRICS, false)
+
+    val circlePlayButton
+        get() = sharedPreferences.getBoolean(CIRCLE_PLAY_BUTTON, false)
 }
 enum class LyricsType {
     REPLACE_LYRICS, OVER_LYRICS

@@ -23,9 +23,6 @@
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="elevationOverlayColor">@color/elevationOverlay</item>
-        <item name="floatingActionButtonStyle">
-            @style/Widget.MaterialComponents.FloatingActionButton
-        </item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
@@ -41,9 +38,6 @@
         <item name="android:windowBackground">@color/window_color_dark</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="elevationOverlayColor">@color/elevationOverlay</item>
-        <item name="floatingActionButtonStyle">
-            @style/Widget.MaterialComponents.FloatingActionButton
-        </item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
@@ -57,9 +51,6 @@
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="elevationOverlayColor">@color/elevationOverlayLight</item>
-        <item name="floatingActionButtonStyle">
-            @style/Widget.MaterialComponents.FloatingActionButton
-        </item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 </resources>

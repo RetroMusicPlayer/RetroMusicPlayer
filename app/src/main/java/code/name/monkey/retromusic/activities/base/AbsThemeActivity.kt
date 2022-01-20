@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.activities.base
 
 import android.content.Context
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.KeyEvent
@@ -56,6 +55,9 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
         if (PreferenceUtil.isCustomFont) {
             setTheme(R.style.FontThemeOverlay)
+        }
+        if (PreferenceUtil.circlePlayButton) {
+            setTheme(R.style.CircleFABOverlay)
         }
     }
 

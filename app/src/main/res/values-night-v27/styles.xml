@@ -24,9 +24,6 @@
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="materialCardViewStyle">@style/Widget.MaterialComponents.CardView</item>
         <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
-        <item name="floatingActionButtonStyle">
-            @style/Widget.MaterialComponents.FloatingActionButton
-        </item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 </resources>
