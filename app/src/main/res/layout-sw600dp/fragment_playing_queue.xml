@@ -19,23 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <code.name.monkey.retromusic.views.TopAppBarLayout
             android:id="@+id/appBarLayout"
+            style="?appBarLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:liftOnScroll="true">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_keyboard_backspace_black"
-                app:title="@string/queue"
-                app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
-                tools:ignore="UnusedAttribute" />
-
-        </com.google.android.material.appbar.AppBarLayout>
+            android:fitsSystemWindows="true" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

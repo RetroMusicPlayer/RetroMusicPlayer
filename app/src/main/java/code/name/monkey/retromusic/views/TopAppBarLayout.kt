@@ -5,10 +5,12 @@ import android.content.res.Configuration
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.updateLayoutParams
 import code.name.monkey.retromusic.databinding.CollapsingAppbarLayoutBinding
 import code.name.monkey.retromusic.databinding.SimpleAppbarLayoutBinding
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
 import com.google.android.material.shape.MaterialShapeDrawable
 import dev.chrisbanes.insetter.applyInsetter
 
@@ -41,6 +43,12 @@ class TopAppBarLayout @JvmOverloads constructor(
                 }
             }
             statusBarForeground = MaterialShapeDrawable.createWithElevationOverlay(context)
+        }
+    }
+
+    fun pinWhenScrolled() {
+        simpleAppbarBinding?.root?.updateLayoutParams<LayoutParams> {
+            scrollFlags = SCROLL_FLAG_NO_SCROLL
         }
     }
 
