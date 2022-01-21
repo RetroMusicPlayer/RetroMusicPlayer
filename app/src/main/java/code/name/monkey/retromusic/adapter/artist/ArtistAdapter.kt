@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.adapter.artist
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.view.LayoutInflater
@@ -53,13 +54,17 @@ class ArtistAdapter(
     activity, ICabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
 
+    var albumArtistsOnly = false
+
     init {
         this.setHasStableIds(true)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun swapDataSet(dataSet: List<Artist>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
+        albumArtistsOnly = PreferenceUtil.albumArtistsOnly
     }
 
     override fun getItemId(position: Int): Long {
@@ -87,7 +92,7 @@ class ArtistAdapter(
         holder.title?.text = artist.name
         holder.text?.hide()
         val transitionName =
-            if (PreferenceUtil.albumArtistsOnly) artist.name else artist.id.toString()
+            if (albumArtistsOnly) artist.name else artist.id.toString()
         if (holder.imageContainer != null) {
             ViewCompat.setTransitionName(holder.imageContainer!!, transitionName)
         } else {
@@ -169,7 +174,7 @@ class ArtistAdapter(
             } else {
                 val artist = dataSet[layoutPosition]
                 image?.let {
-                    if (PreferenceUtil.albumArtistsOnly && IAlbumArtistClickListener != null) {
+                    if (albumArtistsOnly && IAlbumArtistClickListener != null) {
                         IAlbumArtistClickListener.onAlbumArtist(artist.name, imageContainer ?: it)
                     } else {
                         IArtistClickListener.onArtist(artist.id, imageContainer ?: it)
