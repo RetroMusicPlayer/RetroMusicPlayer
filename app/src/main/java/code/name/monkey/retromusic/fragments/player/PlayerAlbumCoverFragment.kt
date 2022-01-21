@@ -215,10 +215,11 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         binding.coverLyrics.isVisible = false
         binding.lyricsView.isVisible = false
         binding.viewPager.isVisible = true
-        val lyrics: View = if (PreferenceUtil.lyricsType == LyricsType.REPLACE_LYRICS) {
+        val lyrics: View = if (PreferenceUtil.lyricsType == LyricsType.REPLACE_COVER) {
             ObjectAnimator.ofFloat(viewPager, View.ALPHA, if (visible) 0F else 1F).start()
             lrcView
         } else {
+            ObjectAnimator.ofFloat(viewPager, View.ALPHA, 1F).start()
             binding.coverLyrics
         }
         ObjectAnimator.ofFloat(lyrics, View.ALPHA, if (visible) 1F else 0F).apply {
@@ -234,7 +235,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         // Don't show lyrics container for below conditions
         if (lyricViewNpsList.contains(nps) && PreferenceUtil.showLyrics) {
             showLyrics(true)
-            if (PreferenceUtil.lyricsType == LyricsType.REPLACE_LYRICS) {
+            if (PreferenceUtil.lyricsType == LyricsType.REPLACE_COVER) {
                 progressViewUpdateHelper?.start()
             }
         } else {

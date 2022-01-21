@@ -675,9 +675,9 @@ object PreferenceUtil {
 
     val lyricsType: LyricsType
         get() = if (sharedPreferences.getString(LYRICS_TYPE, "0") == "0") {
-            LyricsType.REPLACE_LYRICS
+            LyricsType.REPLACE_COVER
         } else {
-            LyricsType.OVER_LYRICS
+            LyricsType.OVER_COVER
         }
 
     var playbackSpeed
@@ -710,5 +710,5 @@ object PreferenceUtil {
         get() = sharedPreferences.getBoolean(CIRCLE_PLAY_BUTTON, false)
 }
 enum class LyricsType {
-    REPLACE_LYRICS, OVER_LYRICS
+    REPLACE_COVER, OVER_COVER
 }

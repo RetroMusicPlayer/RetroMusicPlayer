@@ -310,8 +310,8 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             playerToolbar()?.menu?.removeItem(R.id.action_toggle_lyrics)
         } else {
             playerToolbar()?.menu?.findItem(R.id.action_toggle_lyrics)?.apply {
-                isCheckable = true
                 isChecked = PreferenceUtil.showLyrics
+                showLyricsIcon(this)
             }
         }
         requireView().setOnTouchListener(
