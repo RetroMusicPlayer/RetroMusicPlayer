@@ -32,7 +32,6 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.appcompat.graphics.drawable.DrawableWrapper
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -86,8 +85,8 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_toggle_lyrics -> {
-                PreferenceUtil.showLyrics = !item.isChecked
-                item.isChecked = !item.isChecked
+                PreferenceUtil.showLyrics = !PreferenceUtil.showLyrics
+                showLyricsIcon(item)
                 if (PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics) {
                     mainActivity.keepScreenOn(true)
                 } else if (!PreferenceUtil.isScreenOnEnabled && !PreferenceUtil.showLyrics) {
@@ -205,6 +204,18 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         return false
     }
 
+    private fun showLyricsIcon(item: MenuItem) {
+        val icon =
+            if (PreferenceUtil.showLyrics) R.drawable.ic_lyrics else R.drawable.ic_lyrics_outline
+        val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
+            requireContext(),
+            icon,
+            toolbarIconColor()
+        )
+        item.isChecked = PreferenceUtil.showLyrics
+        item.icon = drawable
+    }
+
     abstract fun playerToolbar(): Toolbar?
 
     abstract fun onShow()
@@ -299,7 +310,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             playerToolbar()?.menu?.removeItem(R.id.action_toggle_lyrics)
         } else {
             playerToolbar()?.menu?.findItem(R.id.action_toggle_lyrics)?.apply {
-                fixCheckStateOnIcon()
                 isCheckable = true
                 isChecked = PreferenceUtil.showLyrics
             }
@@ -425,15 +435,3 @@ fun goToLyrics(activity: Activity) {
         )
     }
 }
-
-/** Fixes checked state being ignored by injecting checked state directly into drawable */
-@SuppressLint("RestrictedApi")
-class CheckDrawableWrapper(val menuItem: MenuItem) : DrawableWrapper(menuItem.icon) {
-    // inject checked state into drawable state set
-    override fun setState(stateSet: IntArray) = super.setState(
-        if (menuItem.isChecked) stateSet + android.R.attr.state_checked else stateSet
-    )
-}
-
-/** Wrap icon drawable with [CheckDrawableWrapper]. */
-fun MenuItem.fixCheckStateOnIcon() = apply { icon = CheckDrawableWrapper(this) }
