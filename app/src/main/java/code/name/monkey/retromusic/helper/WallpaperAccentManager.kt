@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.helper
 
-import android.app.WallpaperColors
 import android.app.WallpaperManager
 import android.content.Context
 import android.os.Handler
@@ -12,18 +11,21 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 class WallpaperAccentManager(val context: Context) {
 
     private val onColorsChangedListener by lazy {
-        WallpaperManager.OnColorsChangedListener { colors, which ->
-            updateColors(colors, which)
+        WallpaperManager.OnColorsChangedListener { _, _ ->
+            updateColors()
         }
     }
 
     fun init() {
-        if (VersionUtils.hasOreoMR1() && PreferenceUtil.wallpaperAccent) {
-            WallpaperManager.getInstance(context).apply {
-                addOnColorsChangedListener(onColorsChangedListener, Handler(Looper.getMainLooper()))
-                ThemeStore.editTheme(context).wallpaperColor(
-                    getWallpaperColors(WallpaperManager.FLAG_SYSTEM)?.primaryColor?.toArgb() ?: 0
-                ).commit()
+        if (VersionUtils.hasOreoMR1()) {
+            with(WallpaperManager.getInstance(context)) {
+                updateColors()
+                if (PreferenceUtil.wallpaperAccent) {
+                    addOnColorsChangedListener(
+                        onColorsChangedListener,
+                        Handler(Looper.getMainLooper())
+                    )
+                }
             }
         }
     }
@@ -35,11 +37,15 @@ class WallpaperAccentManager(val context: Context) {
         }
     }
 
-    private fun updateColors(colors: WallpaperColors?, which: Int) {
+    private fun updateColors() {
         if (VersionUtils.hasOreoMR1()) {
-            if (which == WallpaperManager.FLAG_SYSTEM && colors != null) {
-                ThemeStore.editTheme(context).wallpaperColor(colors.primaryColor.toArgb())
-                    .commit()
+            val colors = WallpaperManager.getInstance(context)
+                .getWallpaperColors(WallpaperManager.FLAG_SYSTEM)
+            if (colors != null) {
+                val primaryColor = colors.primaryColor.toArgb()
+                if (primaryColor != ThemeStore.wallpaperColor(context)) {
+                    ThemeStore.editTheme(context).wallpaperColor(primaryColor).commit()
+                }
             }
         }
     }
