@@ -382,4 +382,11 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         super.onResume()
         libraryViewModel.forceReload(ReloadType.Artists)
     }
+
+    override fun onPause() {
+        super.onPause()
+        if (cab.isActive()) {
+            cab.destroy()
+        }
+    }
 }

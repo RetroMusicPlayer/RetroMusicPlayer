@@ -346,6 +346,13 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         libraryViewModel.forceReload(ReloadType.Albums)
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (cab.isActive()) {
+            cab.destroy()
+        }
+    }
+
     private fun handleBackPress(): Boolean {
         cab?.let {
             if (it.isActive()) {
