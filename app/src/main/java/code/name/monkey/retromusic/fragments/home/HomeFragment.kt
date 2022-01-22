@@ -267,7 +267,7 @@ class HomeFragment :
             imageView.setOnClickListener {
                 it.isClickable = false
                 it.postDelayed({ it.isClickable = true }, 500)
-                MusicPlayerRemote.playNext(songs)
+                MusicPlayerRemote.playNext(songs[index])
                 if (!MusicPlayerRemote.isPlaying) {
                     MusicPlayerRemote.playNextSong()
                 }

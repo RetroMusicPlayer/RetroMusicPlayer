@@ -65,22 +65,12 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
         seekBar?.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    progressViewUpdateHelper.stop()
+                    MusicPlayerRemote.seekTo(progress)
                     onUpdateProgressViews(
                         MusicPlayerRemote.songProgressMillis,
                         MusicPlayerRemote.songDurationMillis
                     )
                 }
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-                super.onStopTrackingTouch(seekBar)
-                MusicPlayerRemote.seekTo(seekBar.progress)
-                onUpdateProgressViews(
-                    MusicPlayerRemote.songProgressMillis,
-                    MusicPlayerRemote.songDurationMillis
-                )
-                progressViewUpdateHelper.start()
             }
         })
     }

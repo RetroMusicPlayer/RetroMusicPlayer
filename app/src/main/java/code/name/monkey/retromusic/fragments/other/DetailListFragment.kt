@@ -117,9 +117,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             layoutManager = linearLayoutManager()
             scheduleLayoutAnimation()
         }
-        libraryViewModel.recentSongs().observe(viewLifecycleOwner, { songs ->
+        libraryViewModel.recentSongs().observe(viewLifecycleOwner) { songs ->
             songAdapter.swapDataSet(songs)
-        })
+        }
     }
 
     private fun topPlayed() {
@@ -133,9 +133,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        libraryViewModel.playCountSongs().observe(viewLifecycleOwner, { songs ->
+        libraryViewModel.playCountSongs().observe(viewLifecycleOwner) { songs ->
             songAdapter.swapDataSet(songs)
-        })
+        }
     }
 
     private fun loadHistory() {
@@ -150,9 +150,9 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        libraryViewModel.observableHistorySongs().observe(viewLifecycleOwner, {
+        libraryViewModel.observableHistorySongs().observe(viewLifecycleOwner) {
             songAdapter.swapDataSet(it)
-        })
+        }
     }
 
     private fun loadFavorite() {
@@ -166,30 +166,35 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        libraryViewModel.favorites().observe(viewLifecycleOwner, { songEntities ->
+        libraryViewModel.favorites().observe(viewLifecycleOwner) { songEntities ->
             val songs = songEntities.map { songEntity -> songEntity.toSong() }
             songAdapter.swapDataSet(songs)
-        })
+        }
     }
+
 
     private fun loadArtists(title: Int, type: Int) {
         binding.toolbar.setTitle(title)
-        libraryViewModel.artists(type).observe(viewLifecycleOwner, { artists ->
-            binding.recyclerView.apply {
-                adapter = artistAdapter(artists)
-                layoutManager = gridLayoutManager()
-            }
-        })
+        val artistAdapter = artistAdapter(listOf())
+        binding.recyclerView.apply {
+            adapter = artistAdapter
+            layoutManager = gridLayoutManager()
+        }
+        libraryViewModel.artists(type).observe(viewLifecycleOwner) { artists ->
+            artistAdapter.swapDataSet(artists)
+        }
     }
 
     private fun loadAlbums(title: Int, type: Int) {
         binding.toolbar.setTitle(title)
-        libraryViewModel.albums(type).observe(viewLifecycleOwner, { albums ->
-            binding.recyclerView.apply {
-                adapter = albumAdapter(albums)
-                layoutManager = gridLayoutManager()
-            }
-        })
+        val albumAdapter = albumAdapter(listOf())
+        binding.recyclerView.apply {
+            adapter = albumAdapter
+            layoutManager = gridLayoutManager()
+        }
+        libraryViewModel.albums(type).observe(viewLifecycleOwner) { albums ->
+            albumAdapter.swapDataSet(albums)
+        }
     }
 
     private fun artistAdapter(artists: List<Artist>): ArtistAdapter = ArtistAdapter(
