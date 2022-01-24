@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/action_playback_speed"
+        android:icon="@drawable/ic_playback_speed"
+        android:orderInCategory="0"
+        android:title="@string/playback_speed"
+        tools:targetApi="23" />
     <item
         android:id="@+id/action_toggle_lyrics"
         android:checkable="true"

@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.adapter.song
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.accentColor
@@ -61,7 +62,7 @@ class ShuffleButtonSongAdapter(
             super.onBindViewHolder(holder, position - 1)
             val landscape = RetroUtil.isLandscape()
             if ((PreferenceUtil.songGridSize > 2 && !landscape) || (PreferenceUtil.songGridSizeLand > 5 && landscape)) {
-                holder.menu?.visibility = View.GONE
+                holder.menu?.isVisible = false
             }
         }
     }

@@ -48,7 +48,7 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
         })
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             remove()
-            mainActivity.finish()
+            requireActivity().onBackPressed()
         }
     }
 

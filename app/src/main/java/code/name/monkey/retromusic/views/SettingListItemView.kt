@@ -30,11 +30,9 @@ class SettingListItemView @JvmOverloads constructor(
     defStyleAttr: Int = -1,
     defStyleRes: Int = -1
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
-    private var binding: ListSettingItemViewBinding =
-        ListSettingItemViewBinding.inflate(LayoutInflater.from(context))
-
     init {
-        addView(binding.root)
+        val binding: ListSettingItemViewBinding =
+            ListSettingItemViewBinding.inflate(LayoutInflater.from(context), this, true)
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.SettingListItemView)
         binding.icon

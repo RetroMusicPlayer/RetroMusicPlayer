@@ -336,7 +336,7 @@
     <string name="pref_title_album_cover_transform">انیمیشن کاور البوم</string>
     <string name="pref_title_app_shortcuts">میان بُرهای رنگی برنامه</string>
     <string name="pref_title_audio_ducking">کاهش حجم از دست دادن فوکوس</string>
-    <string name="pref_title_audio_fade">Fade Audio</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">دانلود خودکار عکس هنرمندان</string>
     <string name="pref_title_blacklist">لیست سیاه</string>
     <string name="pref_title_bluetooth_playback">پلی بک بلوتوث</string>

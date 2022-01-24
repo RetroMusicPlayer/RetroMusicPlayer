@@ -195,8 +195,9 @@ class PlayingNotificationImpl24(
         ).build()
     }
 
-    override fun setPlaying(isPlaying: Boolean) {
+    override fun setPlaying(isPlaying: Boolean, onUpdate: () -> Unit) {
         mActions[2] = buildPlayAction(isPlaying)
+        onUpdate()
     }
 
     override fun updateFavorite(song: Song, onUpdate: () -> Unit) {

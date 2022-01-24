@@ -79,7 +79,7 @@
     <string name="app_widget_text_name">Minimal na Teksto</string>
     <string name="artist">Artista</string>
     <string name="artists">Mga Artista</string>
-    <string name="audio_fade_duration">Audio Fade Duration</string>
+    <string name="audio_fade_duration">Audio fade duration</string>
     <string name="audio_focus_denied">Hindi naka-focus ang audio.</string>
     <string name="audio_settings_summary">I-change ang sound settings at i-adjust ang equalizer controls</string>
     <string name="auto">I-auto</string>
@@ -302,7 +302,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Gamitin ang kasalukuyang nagpe-play ng album cover ng kanta bilang lockscreen na wallpaper</string>
     <string name="pref_summary_album_artists_only">Ipakita ang Mga Album Artista sa kategorya ng Artista</string>
     <string name="pref_summary_audio_ducking">Hinaan ang volume kapag nag-play ng system sound o natanggap ang notification</string>
-    <string name="pref_summary_audio_fade">Fade Audio kapag Naka-pause o Nagpe-play ang Kanta</string>
+    <string name="pref_summary_audio_fade">Fade audio kapag Naka-pause o Nagpe-play ang Kanta</string>
     <string name="pref_summary_blacklist">Nakatago sa iyong librerya ang nilalaman ng mga naka-blacklist na folder.</string>
     <string name="pref_summary_bluetooth_playback">Simulan ang pagplay sa sandaling nakakonekta sa bluetooth device</string>
     <string name="pref_summary_blurred_album_art">I-blur ang album cover sa lockscreen. Maaaring magdulot ng mga problema sa mga third party na app at widget</string>
@@ -336,7 +336,7 @@
     <string name="pref_title_album_cover_transform">Laktawan ang album cover</string>
     <string name="pref_title_app_shortcuts">May kulay na mga shortcut app</string>
     <string name="pref_title_audio_ducking">Bawasan ang volume sa focus loss</string>
-    <string name="pref_title_audio_fade">Fade Audio</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Auto-download mga larawan ng artista</string>
     <string name="pref_title_blacklist">Blacklist</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
@@ -368,7 +368,7 @@
     <string name="pref_title_toggle_toggle_headset">Awto-play</string>
     <string name="pref_title_toggle_toggle_shuffle">I-Shuffle mode</string>
     <string name="pref_title_toggle_volume">Mga kontrol sa volume</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
+    <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Itim na tema, Mga tema ng nagpe-play ngayon, Carousel effect at higit pa..</string>
     <string name="profile">Profile</string>

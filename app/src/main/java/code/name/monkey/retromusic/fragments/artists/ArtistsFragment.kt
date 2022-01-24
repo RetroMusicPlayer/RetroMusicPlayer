@@ -58,7 +58,7 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (!handleBackPress()) {
                 remove()
-                mainActivity.finish()
+                requireActivity().onBackPressed()
             }
         }
     }
@@ -381,5 +381,12 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
     override fun onResume() {
         super.onResume()
         libraryViewModel.forceReload(ReloadType.Artists)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (cab.isActive()) {
+            cab.destroy()
+        }
     }
 }

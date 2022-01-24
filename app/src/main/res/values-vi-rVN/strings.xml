@@ -82,7 +82,9 @@
     <string name="audio_settings_summary">Thay đổi cài đặt âm thanh và điều chỉnh các điều khiển bộ chỉnh âm</string>
     <string name="auto">Tự động</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_restore_title">
+        <![CDATA[Backup & Restore]]>
+    </string>
     <string name="backup_title">Backups</string>
     <string name="biography">Tiểu sử</string>
     <string name="black_theme_name">Đen hoàn toàn</string>
@@ -136,13 +138,21 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Xám đen</string>
     <string name="delete_playlist_title">Xoá danh sách phát</string>
-    <string name="delete_playlist_x"><![CDATA[Xoá danh sách phát <b>%1$s</b>?]]></string>
+    <string name="delete_playlist_x">
+        <![CDATA[Xoá danh sách phát <b>%1$s</b>?]]>
+    </string>
     <string name="delete_playlists_title">Xoá danh sách phát</string>
     <string name="delete_song_title">Xoá bài hát</string>
-    <string name="delete_song_x"><![CDATA[Xoá bài hát <b>%1$s</b>?]]></string>
+    <string name="delete_song_x">
+        <![CDATA[Xoá bài hát <b>%1$s</b>?]]>
+    </string>
     <string name="delete_songs_title">Xoá bài hát</string>
-    <string name="delete_x_playlists"><![CDATA[Xoá <b>%1$d</b> danh sách phát?]]></string>
-    <string name="delete_x_songs"><![CDATA[Xoá <b>%1$d</b> bài hát?]]></string>
+    <string name="delete_x_playlists">
+        <![CDATA[Xoá <b>%1$d</b> danh sách phát?]]>
+    </string>
+    <string name="delete_x_songs">
+        <![CDATA[Xoá <b>%1$d</b> bài hát?]]>
+    </string>
     <string name="deleted_x_songs">Đã xoá %1$d bài hát.</string>
     <string name="deleting_songs">Xóa Các bài hát</string>
     <string name="depth">Độ sâu</string>
@@ -152,7 +162,9 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="dialog_title_set_ringtone">Cài làm nhạc chuông</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Bạn có muốn xóa danh sách đen?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Bạn có muốn gỡ <b>%1$s</b> khỏi danh sách đen?]]></string>
+    <string name="do_you_want_to_remove_from_the_blacklist">
+        <![CDATA[Bạn có muốn gỡ <b>%1$s</b> khỏi danh sách đen?]]>
+    </string>
     <string name="donate">Ủng hộ</string>
     <string name="donate_summary">Nếu bạn nghĩ rằng tôi xứng đáng được thưởng cho công việc này, bạn có thể để lại một số tiền ở đây. Cảm ơn bạn! :D</string>
     <string name="donation_header">Mua cho tôi một:</string>
@@ -246,7 +258,9 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="no_songs">Không có bài hát</string>
     <string name="normal">Tiêu chuẩn</string>
     <string name="normal_lyrics">Lời chuẩn</string>
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> không được liệt kê trong thư mục nhạc.]]></string>
+    <string name="not_listed_in_media_store">
+        <![CDATA[<b>%s</b> không được liệt kê trong thư mục nhạc.]]>
+    </string>
     <string name="not_recently_played">Không phát gần đây</string>
     <string name="nothing_to_scan">Không có gì để quét.</string>
     <string name="nothing_to_see">Không có gì để hiển thị</string>
@@ -298,6 +312,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_keep_screen_on_summary">Lưu ý rằng việc bật tính năng này có thể ảnh hưởng đến tuổi thọ pin</string>
     <string name="pref_keep_screen_on_title">Giữ màn hình luôn bật</string>
     <string name="pref_language_name">Chọn ngôn ngữ</string>
+    <string name="pref_snow_fall_title">Hiệu ứng tuyết rơi</string>
     <string name="pref_summary_album_art_on_lockscreen">Sử dụng ảnh bìa album bài hát đang phát làm ảnh nền màn hình khóa.</string>
     <string name="pref_summary_album_artists_only">Hiển thị Album Nghệ sĩ trong danh mục Nghệ sĩ</string>
     <string name="pref_summary_audio_ducking">Giảm âm lượng khi có âm báo hệ thống hoặc khi bạn có thông báo</string>
@@ -381,9 +396,13 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="remove_cover">Xoá ảnh bìa</string>
     <string name="remove_from_blacklist">Xóa khỏi danh sách đen</string>
     <string name="remove_song_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
-    <string name="remove_song_x_from_playlist"><![CDATA[Xoá bài hát <b>%1$s</b> khỏi danh sách phát?]]></string>
+    <string name="remove_song_x_from_playlist">
+        <![CDATA[Xoá bài hát <b>%1$s</b> khỏi danh sách phát?]]>
+    </string>
     <string name="remove_songs_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[Xóa <b>%1$d</b> bài hát khỏi danh sách phát?]]></string>
+    <string name="remove_x_songs_from_playlist">
+        <![CDATA[Xóa <b>%1$d</b> bài hát khỏi danh sách phát?]]>
+    </string>
     <string name="rename_playlist_title">Đổi tên danh sách phát</string>
     <string name="report_an_issue">Báo cáo vấn đề</string>
     <string name="report_bug">Báo cáo lỗi</string>

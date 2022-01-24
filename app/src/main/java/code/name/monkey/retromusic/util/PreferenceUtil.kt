@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.helper.SortOrder.*
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.transform.*
 import code.name.monkey.retromusic.util.theme.ThemeMode
+import code.name.monkey.retromusic.views.TopAppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -36,7 +37,8 @@ object PreferenceUtil {
         CategoryInfo(CategoryInfo.Category.Artists, true),
         CategoryInfo(CategoryInfo.Category.Playlists, true),
         CategoryInfo(CategoryInfo.Category.Genres, false),
-        CategoryInfo(CategoryInfo.Category.Folder, false)
+        CategoryInfo(CategoryInfo.Category.Folder, false),
+        CategoryInfo(CategoryInfo.Category.Search, false)
     )
 
     var libraryCategory: List<CategoryInfo>
@@ -77,7 +79,7 @@ object PreferenceUtil {
     fun getGeneralThemeValue(isSystemDark: Boolean): ThemeMode {
         val themeMode: String =
             sharedPreferences.getStringOrDefault(GENERAL_THEME, "auto")
-        return if (isBlackMode && isSystemDark) {
+        return if (isBlackMode && isSystemDark && themeMode != "light") {
             ThemeMode.BLACK
         } else {
             if (isBlackMode && themeMode == "dark") {
@@ -132,7 +134,7 @@ object PreferenceUtil {
 
     var artistDetailSongSortOrder
         get() = sharedPreferences.getStringOrDefault(
-           ARTIST_DETAIL_SONG_SORT_ORDER,
+            ARTIST_DETAIL_SONG_SORT_ORDER,
             ArtistSongSortOrder.SONG_A_Z
         )
         set(value) = sharedPreferences.edit { putString(ARTIST_DETAIL_SONG_SORT_ORDER, value) }
@@ -665,6 +667,48 @@ object PreferenceUtil {
     val materialYou
         get() = sharedPreferences.getBoolean(MATERIAL_YOU, VersionUtils.hasS())
 
+    val isCustomFont
+        get() = sharedPreferences.getBoolean(CUSTOM_FONT, false)
+
     val isSnowFalling
         get() = sharedPreferences.getBoolean(SNOWFALL, false)
+
+    val lyricsType: LyricsType
+        get() = if (sharedPreferences.getString(LYRICS_TYPE, "0") == "0") {
+            LyricsType.REPLACE_COVER
+        } else {
+            LyricsType.OVER_COVER
+        }
+
+    var playbackSpeed
+        get() = sharedPreferences
+            .getFloat(PLAYBACK_SPEED, 1F)
+        set(value) = sharedPreferences.edit { putFloat(PLAYBACK_SPEED, value) }
+
+    var playbackPitch
+        get() = sharedPreferences
+            .getFloat(PLAYBACK_PITCH, 1F)
+        set(value) = sharedPreferences.edit { putFloat(PLAYBACK_PITCH, value) }
+
+    val appBarMode: TopAppBarLayout.AppBarMode
+        get() = if (sharedPreferences.getString(APPBAR_MODE, "0") == "0") {
+            TopAppBarLayout.AppBarMode.COLLAPSING
+        } else {
+            TopAppBarLayout.AppBarMode.SIMPLE
+        }
+
+    val wallpaperAccent
+        get() = sharedPreferences.getBoolean(
+            WALLPAPER_ACCENT,
+            VersionUtils.hasOreoMR1() && !VersionUtils.hasS()
+        )
+
+    val lyricsScreenOn
+        get() = sharedPreferences.getBoolean(SCREEN_ON_LYRICS, false)
+
+    val circlePlayButton
+        get() = sharedPreferences.getBoolean(CIRCLE_PLAY_BUTTON, false)
+}
+enum class LyricsType {
+    REPLACE_COVER, OVER_COVER
 }

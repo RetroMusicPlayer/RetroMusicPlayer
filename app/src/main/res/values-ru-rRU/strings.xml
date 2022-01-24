@@ -88,7 +88,9 @@
     <string name="audio_settings_summary">Измените настройки звука и отрегулируйте настройки эквалайзера</string>
     <string name="auto">Авто</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_restore_title">
+        <![CDATA[Backup & Restore]]>
+    </string>
     <string name="backup_title">Backups</string>
     <string name="biography">Биография</string>
     <string name="black_theme_name">Чёрная</string>
@@ -141,13 +143,21 @@
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Тёмная</string>
     <string name="delete_playlist_title">Удалить плейлист</string>
-    <string name="delete_playlist_x"><![CDATA[Удалить плейлист <b>%1$s</b>?]]></string>
+    <string name="delete_playlist_x">
+        <![CDATA[Удалить плейлист <b>%1$s</b>?]]>
+    </string>
     <string name="delete_playlists_title">Удалить плейлисты</string>
     <string name="delete_song_title">Удалить песню</string>
-    <string name="delete_song_x"><![CDATA[Удалить песню <b>%1$s</b>?]]></string>
+    <string name="delete_song_x">
+        <![CDATA[Удалить песню <b>%1$s</b>?]]>
+    </string>
     <string name="delete_songs_title">Удалить песни</string>
-    <string name="delete_x_playlists"><![CDATA[Удалить <b>%1$d</b> плейлистов?]]></string>
-    <string name="delete_x_songs"><![CDATA[Удалить <b>%1$d</b> песен?]]></string>
+    <string name="delete_x_playlists">
+        <![CDATA[Удалить <b>%1$d</b> плейлистов?]]>
+    </string>
+    <string name="delete_x_songs">
+        <![CDATA[Удалить <b>%1$d</b> песен?]]>
+    </string>
     <string name="deleted_x_songs">Удалено %1$d песен.</string>
     <string name="deleting_songs">Удаление песен</string>
     <string name="depth">Глубина</string>
@@ -157,7 +167,9 @@
     <string name="dialog_title_set_ringtone">Выбрать рингтон</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Вы хотите очистить черный список?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Вы хотите удалить <b>%1$s</b> из черного списка?]]></string>
+    <string name="do_you_want_to_remove_from_the_blacklist">
+        <![CDATA[Вы хотите удалить <b>%1$s</b> из черного списка?]]>
+    </string>
     <string name="donate">Пожертвовать</string>
     <string name="donate_summary">Если вы считаете, что я заслуживаю награды за свой труд, можете отправить мне несколько рублей здесь</string>
     <string name="donation_header">Купить мне:</string>
@@ -251,7 +263,9 @@
     <string name="no_songs">Нет песен</string>
     <string name="normal">Обычная</string>
     <string name="normal_lyrics">Обычный текст</string>
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> не найден в хранилище медиа.]]></string>
+    <string name="not_listed_in_media_store">
+        <![CDATA[<b>%s</b> не найден в хранилище медиа.]]>
+    </string>
     <string name="not_recently_played">Сейчас не проигрывается</string>
     <string name="nothing_to_scan">Нет файлов для сканирования.</string>
     <string name="nothing_to_see">Нет файлов для сканирования</string>
@@ -303,6 +317,7 @@
     <string name="pref_keep_screen_on_summary">Имейте в виду, что включение этой функции может повлиять на заряд батареи</string>
     <string name="pref_keep_screen_on_title">Оставить экран включенным</string>
     <string name="pref_language_name">Выберите язык</string>
+    <string name="pref_snow_fall_title">Эффект снегопада</string>
     <string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущей песни в качестве обоев на экране блокировки.</string>
     <string name="pref_summary_album_artists_only">Только альбомы исполнителей</string>
     <string name="pref_summary_audio_ducking">Снизить громкость воспроизведения когда приходит звуковое уведомление</string>
@@ -386,9 +401,13 @@
     <string name="remove_cover">Удалить обложку</string>
     <string name="remove_from_blacklist">Удалить из черного списка</string>
     <string name="remove_song_from_playlist_title">Удалить песню из плейлиста</string>
-    <string name="remove_song_x_from_playlist"><![CDATA[Удалить песню <b>%1$s</b> из плейлиста?]]></string>
+    <string name="remove_song_x_from_playlist">
+        <![CDATA[Удалить песню <b>%1$s</b> из плейлиста?]]>
+    </string>
     <string name="remove_songs_from_playlist_title">Удалить песни из плейлиста</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[Удалить %1$d песни(ю) из плейлиста?]]></string>
+    <string name="remove_x_songs_from_playlist">
+        <![CDATA[Удалить %1$d песни(ю) из плейлиста?]]>
+    </string>
     <string name="rename_playlist_title">Переименовать плейлист</string>
     <string name="report_an_issue">Сообщить об ошибке</string>
     <string name="report_bug">Сообщить об ошибке</string>

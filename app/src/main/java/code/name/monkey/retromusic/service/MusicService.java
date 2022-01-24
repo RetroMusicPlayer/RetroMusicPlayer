@@ -22,6 +22,7 @@ import static code.name.monkey.retromusic.ConstantsKt.BLURRED_ALBUM_ART;
 import static code.name.monkey.retromusic.ConstantsKt.CLASSIC_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
 import static code.name.monkey.retromusic.ConstantsKt.CROSS_FADE_DURATION;
+import static code.name.monkey.retromusic.ConstantsKt.PLAYBACK_SPEED;
 import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
 import static code.name.monkey.retromusic.service.AudioFader.startFadeAnimator;
 
@@ -82,6 +83,7 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.LockScreenActivity;
 import code.name.monkey.retromusic.appwidgets.AppWidgetBig;
 import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
+import code.name.monkey.retromusic.appwidgets.AppWidgetCircle;
 import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
 import code.name.monkey.retromusic.appwidgets.AppWidgetMD3;
 import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
@@ -139,6 +141,7 @@ public class MusicService extends MediaBrowserServiceCompat
     public static final String META_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".metachanged";
     public static final String QUEUE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".queuechanged";
     public static final String PLAY_STATE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".playstatechanged";
+
     public static final String FAVORITE_STATE_CHANGED =
             RETRO_MUSIC_PACKAGE_NAME + "favoritestatechanged";
     public static final String REPEAT_MODE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".repeatmodechanged";
@@ -204,6 +207,8 @@ public class MusicService extends MediaBrowserServiceCompat
 
     private final AppWidgetMD3 appWidgetMd3 = AppWidgetMD3.Companion.getInstance();
 
+    private final AppWidgetCircle appWidgetCircle = AppWidgetCircle.Companion.getInstance();
+
     private final BroadcastReceiver widgetIntentReceiver =
             new BroadcastReceiver() {
                 @Override
@@ -234,6 +239,10 @@ public class MusicService extends MediaBrowserServiceCompat
                             }
                             case AppWidgetMD3.NAME: {
                                 appWidgetMd3.performUpdate(MusicService.this, ids);
+                                break;
+                            }
+                            case AppWidgetCircle.NAME: {
+                                appWidgetCircle.performUpdate(MusicService.this, ids);
                                 break;
                             }
                         }
@@ -285,6 +294,7 @@ public class MusicService extends MediaBrowserServiceCompat
                 public void onReceive(final Context context, final Intent intent) {
                     playingNotification.updateFavorite(getCurrentSong(), MusicService.this::startForegroundOrNotify);
                     startForegroundOrNotify();
+                    appWidgetCircle.notifyChange(MusicService.this, FAVORITE_STATE_CHANGED);
                 }
             };
     private final BroadcastReceiver lockScreenReceiver =
@@ -431,9 +441,7 @@ public class MusicService extends MediaBrowserServiceCompat
         registerReceiver(lockScreenReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
 
         setSessionToken(mediaSession.getSessionToken());
-        if (VersionUtils.INSTANCE.hasMarshmallow()) {
-            notificationManager = getSystemService(NotificationManager.class);
-        }
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         initNotification();
 
         mediaStoreObserver = new MediaStoreObserver(this, playerHandler);
@@ -939,8 +947,11 @@ public class MusicService extends MediaBrowserServiceCompat
                 break;
             case CLASSIC_NOTIFICATION:
                 updateNotification();
-                playingNotification.setPlaying(isPlaying());
                 playingNotification.updateMetadata(getCurrentSong(), this::startForegroundOrNotify);
+                playingNotification.setPlaying(isPlaying(),this::startForegroundOrNotify);
+                break;
+            case PLAYBACK_SPEED:
+                updateMediaSessionPlaybackState();
                 break;
             case TOGGLE_HEADSET:
                 registerHeadsetEvents();
@@ -1336,7 +1347,7 @@ public class MusicService extends MediaBrowserServiceCompat
                         .setState(
                                 isPlaying() ? PlaybackStateCompat.STATE_PLAYING : PlaybackStateCompat.STATE_PAUSED,
                                 getSongProgressMillis(),
-                                1);
+                                PreferenceUtil.INSTANCE.getPlaybackSpeed());
 
         setCustomAction(stateBuilder);
 
@@ -1426,7 +1437,7 @@ public class MusicService extends MediaBrowserServiceCompat
                     savePositionInTrack();
                 }
                 songPlayCountHelper.notifyPlayStateChanged(isPlaying);
-                playingNotification.setPlaying(isPlaying);
+                playingNotification.setPlaying(isPlaying, this::startForegroundOrNotify);
                 startForegroundOrNotify();
                 break;
             case FAVORITE_STATE_CHANGED:
@@ -1617,6 +1628,7 @@ public class MusicService extends MediaBrowserServiceCompat
         appWidgetCard.notifyChange(this, what);
         appWidgetText.notifyChange(this, what);
         appWidgetMd3.notifyChange(this, what);
+        appWidgetCircle.notifyChange(this, what);
     }
 
     private void setCustomAction(PlaybackStateCompat.Builder stateBuilder) {

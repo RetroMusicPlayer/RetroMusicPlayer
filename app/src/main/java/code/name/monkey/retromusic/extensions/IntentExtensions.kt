@@ -21,9 +21,9 @@ fun Fragment.createNewFile(
         registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val outputStream: OutputStream? =
-                    context?.contentResolver?.openOutputStream(result.data?.data!!)
-                write(outputStream, result.data?.data)
+                context?.contentResolver?.openOutputStream(result.data?.data!!)?.use { os->
+                    write(os, result.data?.data)
+                }
             }
 
         }

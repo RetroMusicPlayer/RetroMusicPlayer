@@ -69,6 +69,7 @@ interface Repository {
     suspend fun recentAlbumsHome(): Home
     suspend fun favoritePlaylistHome(): Home
     suspend fun suggestionsHome(): Home
+    suspend fun suggestions(): List<Song>
     suspend fun genresHome(): Home
     suspend fun playlists(): Home
     suspend fun homeSections(): List<Home>
@@ -240,19 +241,15 @@ class RealRepository(
     override suspend fun homeSections(): List<Home> {
         val homeSections = mutableListOf<Home>()
         val sections: List<Home> = listOf(
-            suggestionsHome(),
             topArtistsHome(),
             topAlbumsHome(),
             recentArtistsHome(),
             recentAlbumsHome(),
             favoritePlaylistHome()
-            // genresHome()
         )
         for (section in sections) {
             if (section.arrayList.isNotEmpty()) {
-                if (section.homeSection != SUGGESTIONS || PreferenceUtil.homeSuggestions) {
-                    homeSections.add(section)
-                }
+                homeSections.add(section)
             }
         }
         return homeSections
@@ -372,6 +369,13 @@ class RealRepository(
             suggestions = Home(songs, SUGGESTIONS, R.string.suggestion_songs)
         }
         return suggestions
+    }
+
+    override suspend fun suggestions(): List<Song> {
+        if (!PreferenceUtil.homeSuggestions) return listOf<Song>()
+        return NotPlayedPlaylist().songs().shuffled().takeIf {
+            it.size > 9
+        } ?: emptyList()
     }
 
     override suspend fun genresHome(): Home {

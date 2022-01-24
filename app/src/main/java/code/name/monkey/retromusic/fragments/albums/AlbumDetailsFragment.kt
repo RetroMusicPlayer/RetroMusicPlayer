@@ -107,7 +107,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.fragment_container
             scrimColor = Color.TRANSPARENT
-            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+            setAllContainerColors(surfaceColor())
             setPathMotion(MaterialArcMotion())
         }
     }

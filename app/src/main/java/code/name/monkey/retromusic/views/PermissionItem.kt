@@ -22,8 +22,7 @@ class PermissionItem @JvmOverloads constructor(
 
     init {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.PermissionItem, 0, 0)
-        binding = ItemPermissionBinding.inflate(LayoutInflater.from(context))
-        addView(binding.root)
+        binding = ItemPermissionBinding.inflate(LayoutInflater.from(context), this, true)
 
         binding.title.text = attributes.getText(R.styleable.PermissionItem_permissionTitle)
         binding.summary.text =

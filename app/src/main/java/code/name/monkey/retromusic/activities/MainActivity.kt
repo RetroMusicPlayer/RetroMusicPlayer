@@ -62,7 +62,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
         }
-        if (BuildConfig.VERSION_CODE > PreferenceUtil.lastVersion && !BuildConfig.DEBUG){
+        if (BuildConfig.VERSION_CODE > PreferenceUtil.lastVersion && !BuildConfig.DEBUG) {
             NavigationUtil.gotoWhatNews(this)
         }
     }
@@ -103,7 +103,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                 currentFragment(R.id.fragment_container)?.enterTransition = null
             }
             when (destination.id) {
-                R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre -> {
+                R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre, R.id.action_search -> {
                     // Save the last tab
                     if (PreferenceUtil.rememberLastTab) {
                         saveTab(destination.id)
@@ -147,7 +147,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == GENERAL_THEME || key == MATERIAL_YOU || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES) {
+        if (key == GENERAL_THEME || key == MATERIAL_YOU || key == WALLPAPER_ACCENT || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES || key == CUSTOM_FONT || key == APPBAR_MODE || key == CIRCLE_PLAY_BUTTON) {
             postRecreate()
         }
     }

@@ -67,7 +67,6 @@ class CoverLrcView @JvmOverloads constructor(
     private var mDefaultLabel: String? = null
     private var mLrcPadding = 0f
     private var mOnPlayClickListener: OnPlayClickListener? = null
-    private var mOnFlingXListener: OnFlingXListener? = null
     private var mAnimator: ValueAnimator? = null
     private var mGestureDetector: GestureDetector? = null
     private var mScroller: Scroller? = null
@@ -132,9 +131,6 @@ class CoverLrcView @JvmOverloads constructor(
                 velocityX: Float,
                 velocityY: Float
             ): Boolean {
-                if (mOnFlingXListener != null && abs(velocityX) > abs(velocityY)) {
-                    return mOnFlingXListener!!.onFlingX(velocityX)
-                }
                 if (hasLrc()) {
                     mScroller!!.fling(
                         0,
@@ -167,7 +163,7 @@ class CoverLrcView @JvmOverloads constructor(
                         isShowTimeline = false
                         removeCallbacks(hideTimelineRunnable)
                         mCurrentLine = centerLine
-                        invalidate()
+                        animateCurrentTextSize()
                         return true
                     }
                 } else {
@@ -320,10 +316,6 @@ class CoverLrcView @JvmOverloads constructor(
         mOnPlayClickListener = onPlayClickListener
     }
 
-    fun setOnFlingXListener(onFlingXListener: OnFlingXListener) {
-        mOnFlingXListener = onFlingXListener
-    }
-
     /** 设置歌词为空时屏幕中央显示的文字，如“暂无歌词”  */
     fun setLabel(label: String?) {
         runOnUi {
@@ -458,6 +450,7 @@ class CoverLrcView @JvmOverloads constructor(
                 mCurrentLine = line
                 if (!isShowTimeline) {
                     smoothScrollTo(line)
+                    animateCurrentTextSize()
                 } else {
                     invalidate()
                 }
@@ -534,6 +527,18 @@ class CoverLrcView @JvmOverloads constructor(
         canvas.translate(mLrcPadding, y - (staticLayout.height shr 1))
         staticLayout.draw(canvas)
         canvas.restore()
+    }
+
+    fun animateCurrentTextSize() {
+        val currentTextSize = mCurrentTextSize
+        ValueAnimator.ofFloat(mNormalTextSize, currentTextSize).apply {
+            addUpdateListener {
+                mCurrentTextSize = it.animatedValue as Float
+                invalidate()
+            }
+            duration = 300L
+            start()
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -613,7 +618,7 @@ class CoverLrcView @JvmOverloads constructor(
     private fun adjustCenter() {
         smoothScrollTo(centerLine, ADJUST_DURATION)
     }
-    /** 滚动到某一行  */
+
     /** 滚动到某一行  */
     private fun smoothScrollTo(line: Int, duration: Long = mAnimationDuration) {
         val offset = getOffset(line)

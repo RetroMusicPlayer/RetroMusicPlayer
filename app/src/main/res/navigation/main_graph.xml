@@ -70,7 +70,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/searchFragment"
+        android:id="@+id/action_search"
         android:name="code.name.monkey.retromusic.fragments.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />

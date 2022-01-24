@@ -116,7 +116,7 @@ open class SongAdapter(
             holder.title?.setTextColor(color.primaryTextColor)
             holder.text?.setTextColor(color.secondaryTextColor)
             holder.paletteColorContainer?.setBackgroundColor(color.backgroundColor)
-            holder.menu?.imageTintList= ColorStateList.valueOf(color.primaryTextColor)
+            holder.menu?.imageTintList = ColorStateList.valueOf(color.primaryTextColor)
         }
         holder.mask?.backgroundTintList = ColorStateList.valueOf(color.primaryTextColor)
     }

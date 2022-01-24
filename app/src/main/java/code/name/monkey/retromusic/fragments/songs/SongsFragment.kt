@@ -51,11 +51,10 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (!handleBackPress()) {
                 remove()
-                mainActivity.finish()
+                requireActivity().onBackPressed()
             }
         }
     }
-
 
     override val titleRes: Int
         get() = R.string.songs
@@ -344,6 +343,13 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
     override fun onResume() {
         super.onResume()
         libraryViewModel.forceReload(ReloadType.Songs)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (cab.isActive()) {
+            cab.destroy()
+        }
     }
 
     companion object {

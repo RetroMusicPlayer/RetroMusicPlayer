@@ -14,14 +14,27 @@
  */
 package code.name.monkey.retromusic.fragments.base
 
+import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
+import android.widget.ImageButton
+import android.widget.SeekBar
+import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.core.view.isVisible
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.other.VolumeFragment
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
+import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
+import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
@@ -36,42 +49,168 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
 
     protected abstract fun hide()
 
-    protected abstract fun updateShuffleState()
-
-    protected abstract fun updateRepeatState()
-
-    protected abstract fun setUpProgressSlider()
-
     abstract fun setColor(color: MediaNotificationProcessor)
 
-    fun showBounceAnimation(view: View) {
-        view.apply {
-            clearAnimation()
-            scaleX = 0.9f
-            scaleY = 0.9f
-            visibility = View.VISIBLE
-            pivotX = (view.width / 2).toFloat()
-            pivotY = (view.height / 2).toFloat()
+    var lastPlaybackControlsColor: Int = 0
 
-            animate().setDuration(200)
-                .setInterpolator(DecelerateInterpolator())
-                .scaleX(1.1f)
-                .scaleY(1.1f)
-                .withEndAction {
-                    animate().setDuration(200)
-                        .setInterpolator(AccelerateInterpolator())
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .alpha(1f)
-                        .start()
-                }
-                .start()
+    var lastDisabledPlaybackControlsColor: Int = 0
+
+    var isSeeking = false
+        private set
+
+    open val progressSlider: SeekBar? = null
+
+    abstract val shuffleButton: ImageButton
+
+    abstract val repeatButton: ImageButton
+
+    open val nextButton: ImageButton? = null
+
+    open val previousButton: ImageButton? = null
+
+    open val songTotalTime: TextView? = null
+
+    open val songCurrentProgress: TextView? = null
+
+    private var progressAnimator: ObjectAnimator? = null
+
+    override fun onUpdateProgressViews(progress: Int, total: Int) {
+        progressSlider?.max = total
+
+        if (isSeeking) {
+            progressSlider?.progress = progress
+        } else {
+            progressAnimator = ObjectAnimator.ofInt(progressSlider, "progress", progress).apply {
+                duration = SLIDER_ANIMATION_TIME
+                interpolator = LinearInterpolator()
+                start()
+            }
+
         }
+        songTotalTime?.text = MusicUtil.getReadableDurationString(total.toLong())
+        songCurrentProgress?.text = MusicUtil.getReadableDurationString(progress.toLong())
+    }
+
+    private fun setUpProgressSlider() {
+        progressSlider?.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    onUpdateProgressViews(
+                        progress,
+                        MusicPlayerRemote.songDurationMillis
+                    )
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                isSeeking = true
+                progressViewUpdateHelper.stop()
+                progressAnimator?.cancel()
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                isSeeking = false
+                MusicPlayerRemote.seekTo(seekBar.progress)
+                progressViewUpdateHelper.start()
+            }
+        })
+    }
+
+    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
+    }
+
+    fun View.showBounceAnimation() {
+        clearAnimation()
+        scaleX = 0.9f
+        scaleY = 0.9f
+        isVisible = true
+        pivotX = (width / 2).toFloat()
+        pivotY = (height / 2).toFloat()
+
+        animate().setDuration(200)
+            .setInterpolator(DecelerateInterpolator())
+            .scaleX(1.1f)
+            .scaleY(1.1f)
+            .withEndAction {
+                animate().setDuration(200)
+                    .setInterpolator(AccelerateInterpolator())
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .alpha(1f)
+                    .start()
+            }
+            .start()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideVolumeIfAvailable()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setUpProgressSlider()
+        setUpPrevNext()
+        setUpShuffleButton()
+        setUpRepeatButton()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setUpPrevNext() {
+        nextButton?.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
+        previousButton?.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), false))
+    }
+
+    private fun setUpShuffleButton() {
+        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
+    }
+
+    private fun setUpRepeatButton() {
+        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
+    }
+
+    fun updatePrevNextColor() {
+        nextButton?.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        previousButton?.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+    }
+
+    fun updateShuffleState() {
+        shuffleButton.setColorFilter(
+            when (MusicPlayerRemote.shuffleMode) {
+                MusicService.SHUFFLE_MODE_SHUFFLE -> lastPlaybackControlsColor
+                else -> lastDisabledPlaybackControlsColor
+            }, PorterDuff.Mode.SRC_IN
+        )
+    }
+
+    fun updateRepeatState() {
+        when (MusicPlayerRemote.repeatMode) {
+            MusicService.REPEAT_MODE_NONE -> {
+                repeatButton.setImageResource(R.drawable.ic_repeat)
+                repeatButton.setColorFilter(
+                    lastDisabledPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
+            }
+            MusicService.REPEAT_MODE_ALL -> {
+                repeatButton.setImageResource(R.drawable.ic_repeat)
+                repeatButton.setColorFilter(
+                    lastPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
+            }
+            MusicService.REPEAT_MODE_THIS -> {
+                repeatButton.setImageResource(R.drawable.ic_repeat_one)
+                repeatButton.setColorFilter(
+                    lastPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
+            }
+        }
     }
 
     protected var volumeFragment: VolumeFragment? = null
@@ -82,8 +221,18 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
                 .replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
             childFragmentManager.executePendingTransactions()
             volumeFragment =
-                childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
+                childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as? VolumeFragment
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        progressViewUpdateHelper.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        progressViewUpdateHelper.stop()
     }
 
     companion object {

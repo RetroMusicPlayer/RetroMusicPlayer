@@ -334,7 +334,7 @@
     <string name="pref_title_album_cover_transform">ข้ามรูปปกอัลบัม</string>
     <string name="pref_title_app_shortcuts">สีของทางลัดเข้าแอป</string>
     <string name="pref_title_audio_ducking">ลบเสียงเมื่อหลุดโฟกัส</string>
-    <string name="pref_title_audio_fade">Fade Audio</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">ดาวน์โหลดรูปศิลปินอัตโนมัติ</string>
     <string name="pref_title_blacklist">รายชื่อแบล็คลิสต์</string>
     <string name="pref_title_bluetooth_playback">การเล่นด้วยอุปกรณ์ Bluetooth</string>

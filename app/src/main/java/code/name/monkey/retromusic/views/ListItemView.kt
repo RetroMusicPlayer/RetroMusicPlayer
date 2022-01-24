@@ -47,8 +47,7 @@ class ListItemView : FrameLayout {
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
-        binding = ListItemViewNoCardBinding.inflate(LayoutInflater.from(context))
-        addView(binding.root)
+        binding = ListItemViewNoCardBinding.inflate(LayoutInflater.from(context), this, true)
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ListItemView)
         if (typedArray.hasValue(R.styleable.ListItemView_listItemIcon)) {

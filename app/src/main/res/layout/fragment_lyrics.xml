@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:fitsSystemWindows="true"
     android:paddingBottom="@dimen/mini_player_height">
 
@@ -35,6 +36,7 @@
             app:subtitleTextAppearance="@style/TextViewCaption"
             app:titleMargin="0dp"
             app:titleMarginStart="0dp"
+            android:background="?attr/colorSurface"
             app:titleTextAppearance="@style/TextViewSubtitle1"
             tools:subtitle="@tools:sample/full_names"
             tools:title="@tools:sample/full_names" />
@@ -62,7 +64,7 @@
             android:id="@+id/tabLyrics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="@dimen/toolbar_elevation"
+            android:background="?attr/colorSurface"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

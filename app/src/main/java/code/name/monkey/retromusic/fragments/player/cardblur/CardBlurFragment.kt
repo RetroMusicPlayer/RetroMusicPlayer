@@ -111,7 +111,8 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
             setTitleTextColor(Color.WHITE)
             setSubtitleTextColor(Color.WHITE)
             ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
-        }.setOnMenuItemClickListener(this)
+            setOnMenuItemClickListener(this@CardBlurFragment)
+        }
     }
 
     override fun onServiceConnected() {

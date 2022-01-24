@@ -34,6 +34,8 @@ internal interface ThemeStoreInterface {
 
     fun accentColor(@ColorInt color: Int): ThemeStore
 
+    fun wallpaperColor(@ColorInt color: Int): ThemeStore
+
     fun accentColorRes(@ColorRes colorRes: Int): ThemeStore
 
     fun accentColorAttr(@AttrRes colorAttr: Int): ThemeStore
