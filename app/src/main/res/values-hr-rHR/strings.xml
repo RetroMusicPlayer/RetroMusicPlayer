@@ -81,12 +81,14 @@
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artist</string>
     <string name="artists">Artists</string>
-    <string name="audio_fade_duration">Audio Fade Duration</string>
+    <string name="audio_fade_duration">Audio fade duration</string>
     <string name="audio_focus_denied">Audio focus denied.</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
     <string name="auto">Auto</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_restore_title">
+        <![CDATA[Backup & Restore]]>
+    </string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biography</string>
     <string name="black_theme_name">Just Black</string>
@@ -139,13 +141,21 @@
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Kinda Dark</string>
     <string name="delete_playlist_title">Delete playlist</string>
-    <string name="delete_playlist_x"><![CDATA[Delete the playlist <b>%1$s</b>?]]></string>
+    <string name="delete_playlist_x">
+        <![CDATA[Delete the playlist <b>%1$s</b>?]]>
+    </string>
     <string name="delete_playlists_title">Delete playlists</string>
     <string name="delete_song_title">Delete song</string>
-    <string name="delete_song_x"><![CDATA[Delete the song <b>%1$s</b>?]]></string>
+    <string name="delete_song_x">
+        <![CDATA[Delete the song <b>%1$s</b>?]]>
+    </string>
     <string name="delete_songs_title">Delete songs</string>
-    <string name="delete_x_playlists"><![CDATA[Delete <b>%1$d</b> playlists?]]></string>
-    <string name="delete_x_songs"><![CDATA[Delete <b>%1$d</b> songs?]]></string>
+    <string name="delete_x_playlists">
+        <![CDATA[Delete <b>%1$d</b> playlists?]]>
+    </string>
+    <string name="delete_x_songs">
+        <![CDATA[Delete <b>%1$d</b> songs?]]>
+    </string>
     <string name="deleted_x_songs">Deleted %1$d songs.</string>
     <string name="deleting_songs">Deleting Songs</string>
     <string name="depth">Depth</string>
@@ -155,7 +165,9 @@
     <string name="dialog_title_set_ringtone">Postavi zvuk zvona</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Do you want to clear the blacklist?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]></string>
+    <string name="do_you_want_to_remove_from_the_blacklist">
+        <![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]>
+    </string>
     <string name="donate">Donate</string>
     <string name="donate_summary">If you think I deserve to get paid for my work, you can leave some money here</string>
     <string name="donation_header">Buy me a:</string>
@@ -249,7 +261,9 @@
     <string name="no_songs">You have no songs</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normal lyrics</string>
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> is not listed in the media store.]]></string>
+    <string name="not_listed_in_media_store">
+        <![CDATA[<b>%s</b> is not listed in the media store.]]>
+    </string>
     <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Nothing to scan.</string>
     <string name="nothing_to_see">Nothing to see</string>
@@ -301,10 +315,11 @@
     <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
+    <string name="pref_snow_fall_title">Efekt padanja snijega</string>
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
-    <string name="pref_summary_audio_fade">Fade Audio when Song is Paused or Played</string>
+    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
     <string name="pref_summary_blurred_album_art">Blur the album cover on the lockscreen. Can cause problems with third party apps and widgets</string>
@@ -325,8 +340,8 @@
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
-    <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
+    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
@@ -338,7 +353,7 @@
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
-    <string name="pref_title_audio_fade">Fade Audio</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
     <string name="pref_title_blacklist">Blacklist</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
@@ -361,16 +376,16 @@
     <string name="pref_title_lock_screen">Fullscreen controls</string>
     <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
     <string name="pref_title_open_source_licences">Open source licences</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_title_show_lyrics">Show Lyrics</string>
-    <string name="pref_title_suggestions">Show Suggestions</string>
+    <string name="pref_title_remember_tab">Remember last tab</string>
+    <string name="pref_title_show_lyrics">Show lyrics</string>
+    <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">Fullscreen app</string>
     <string name="pref_title_toggle_toggle_headset">Auto-play</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Volume controls</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
+    <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
@@ -384,9 +399,13 @@
     <string name="remove_cover">Remove cover</string>
     <string name="remove_from_blacklist">Remove from blacklist</string>
     <string name="remove_song_from_playlist_title">Remove song from playlist</string>
-    <string name="remove_song_x_from_playlist"><![CDATA[Remove the song <b>%1$s</b> from the playlist?]]></string>
+    <string name="remove_song_x_from_playlist">
+        <![CDATA[Remove the song <b>%1$s</b> from the playlist?]]>
+    </string>
     <string name="remove_songs_from_playlist_title">Remove songs from playlist</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[Remove <b>%1$d</b> songs from the playlist?]]></string>
+    <string name="remove_x_songs_from_playlist">
+        <![CDATA[Remove <b>%1$d</b> songs from the playlist?]]>
+    </string>
     <string name="rename_playlist_title">Rename playlist</string>
     <string name="report_an_issue">Report an issue</string>
     <string name="report_bug">Report bug</string>

@@ -50,9 +50,7 @@ import code.name.monkey.retromusic.lyrics.LrcView
 import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.*
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.input.input
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.tabs.TabLayoutMediator
@@ -241,7 +239,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
             e.printStackTrace()
         }
 
-        MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        MaterialDialog(requireContext()).show {
             title(res = R.string.edit_normal_lyrics)
             input(
                 hintRes = R.string.paste_lyrics_here,
@@ -288,7 +286,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
     private fun editSyncedLyrics() {
         val content: String = LyricUtil.getStringFromLrc(LyricUtil.getSyncedLyricsFile(song))
 
-        MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        MaterialDialog(requireContext()).show {
             title(res = R.string.edit_synced_lyrics)
             input(
                 hintRes = R.string.paste_timeframe_lyrics_here,

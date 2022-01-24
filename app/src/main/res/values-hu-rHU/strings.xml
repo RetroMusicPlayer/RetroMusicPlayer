@@ -84,7 +84,9 @@
     <string name="audio_settings_summary">Módosítsd a hangbeállításokat és állítsd be a hangszínszabályzó vezérlőit</string>
     <string name="auto">Auto</string>
     <string name="backup_restore_settings_summary">Beállításaid, lejátszási listáid biztonsági mentése és visszaállítása</string>
-    <string name="backup_restore_title"><![CDATA[Biztonsági mentés & Visszaállítás]]></string>
+    <string name="backup_restore_title">
+        <![CDATA[Biztonsági mentés & Visszaállítás]]>
+    </string>
     <string name="backup_title">Biztonsági mentések</string>
     <string name="biography">Életrajz</string>
     <string name="black_theme_name">Csak Fekete</string>
@@ -137,13 +139,21 @@
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Kissé sötét</string>
     <string name="delete_playlist_title">Lejátszási lista törlése</string>
-    <string name="delete_playlist_x"><![CDATA[Törli a <b>%1$s</b> lejátszási listát?]]></string>
+    <string name="delete_playlist_x">
+        <![CDATA[Törli a <b>%1$s</b> lejátszási listát?]]>
+    </string>
     <string name="delete_playlists_title">Lejátszási listák törlése</string>
     <string name="delete_song_title">Zeneszám törlése</string>
-    <string name="delete_song_x"><![CDATA[Törli a <b>%1$s</b> dalt?]]></string>
+    <string name="delete_song_x">
+        <![CDATA[Törli a <b>%1$s</b> dalt?]]>
+    </string>
     <string name="delete_songs_title">Dalok törlése</string>
-    <string name="delete_x_playlists"><![CDATA[Törli a <b>%1$d</b> lejátszási listát?]]></string>
-    <string name="delete_x_songs"><![CDATA[Törli a <b>%1$d</b> zenéket?]]></string>
+    <string name="delete_x_playlists">
+        <![CDATA[Törli a <b>%1$d</b> lejátszási listát?]]>
+    </string>
+    <string name="delete_x_songs">
+        <![CDATA[Törli a <b>%1$d</b> zenéket?]]>
+    </string>
     <string name="deleted_x_songs">Törölte a %1$d zenét.</string>
     <string name="deleting_songs">Zenék törlése</string>
     <string name="depth">Mélység</string>
@@ -153,7 +163,9 @@
     <string name="dialog_title_set_ringtone">Csengőhang beállítás</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Szeretné kiüríteni a feketelistát?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Szeretné eltávolítani a <b>%1$s</b> elemet a feketelistáról?]]></string>
+    <string name="do_you_want_to_remove_from_the_blacklist">
+        <![CDATA[Szeretné eltávolítani a <b>%1$s</b> elemet a feketelistáról?]]>
+    </string>
     <string name="donate">Támogatás</string>
     <string name="donate_summary">Ha úgy gondolod, hogy megérdemlem, hogy fizess a munkámért, hagyhatsz egy kis pénzt itt</string>
     <string name="donation_header">Vegyél nekem egy:</string>
@@ -247,7 +259,9 @@
     <string name="no_songs">Nincs dal</string>
     <string name="normal">Normál</string>
     <string name="normal_lyrics">Normál dalszövegek</string>
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> nem szerepel a média tárban.]]></string>
+    <string name="not_listed_in_media_store">
+        <![CDATA[<b>%s</b> nem szerepel a média tárban.]]>
+    </string>
     <string name="not_recently_played">Nem mostanában játszott</string>
     <string name="nothing_to_scan">Nincs mit beolvasni.</string>
     <string name="nothing_to_see">Nincs mit látni</string>
@@ -299,6 +313,7 @@
     <string name="pref_keep_screen_on_summary">Vedd figyelembe, hogy ezen funkció engedélyezése hatással lehet az akkuidőre</string>
     <string name="pref_keep_screen_on_title">Tartsa bekapcsolva a képernyőt</string>
     <string name="pref_language_name">Válasszon nyelvet</string>
+    <string name="pref_snow_fall_title">Hóesés hatás</string>
     <string name="pref_summary_album_art_on_lockscreen">A jelenlegi zeneszám albumborítóját zárolt háttérképként használja.</string>
     <string name="pref_summary_album_artists_only">Album előadók mutatása az Előadók kategóriában</string>
     <string name="pref_summary_audio_ducking">Hangerő csökkentése rendszerhang vagy értesítés érkezik</string>
@@ -382,9 +397,13 @@
     <string name="remove_cover">Borító eltávolítása</string>
     <string name="remove_from_blacklist">Eltávolítás a feketelistáról</string>
     <string name="remove_song_from_playlist_title">Távolítsa el a dalt a lejátszási listáról</string>
-    <string name="remove_song_x_from_playlist"><![CDATA[Eltávolítja a <b>%1$s</b> dalt a lejátszási listából?]]></string>
+    <string name="remove_song_x_from_playlist">
+        <![CDATA[Eltávolítja a <b>%1$s</b> dalt a lejátszási listából?]]>
+    </string>
     <string name="remove_songs_from_playlist_title">A dalok eltávolítása a lejátszási listáról</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[Eltávolítja a <b>%1$d</b> dalokat a lejátszási listából?]]></string>
+    <string name="remove_x_songs_from_playlist">
+        <![CDATA[Eltávolítja a <b>%1$d</b> dalokat a lejátszási listából?]]>
+    </string>
     <string name="rename_playlist_title">Lejátszási lista átnevezése</string>
     <string name="report_an_issue">Hibajelentés</string>
     <string name="report_bug">Hibajelentés</string>

@@ -84,7 +84,9 @@
     <string name="audio_settings_summary">Altere as configurações de som e ajuste os controles do equalizador</string>
     <string name="auto">Automático</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title"><![CDATA[Backup e Restauração]]></string>
+    <string name="backup_restore_title">
+        <![CDATA[Backup e Restauração]]>
+    </string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Totalmente preto</string>
@@ -137,13 +139,21 @@
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Meio escuro</string>
     <string name="delete_playlist_title">Excluir playlist</string>
-    <string name="delete_playlist_x"><![CDATA[Excluir a playlist <b>%1$s</b>?]]></string>
+    <string name="delete_playlist_x">
+        <![CDATA[Excluir a playlist <b>%1$s</b>?]]>
+    </string>
     <string name="delete_playlists_title">Excluir playlists</string>
     <string name="delete_song_title">Excluir música</string>
-    <string name="delete_song_x"><![CDATA[Excluir a música <b>%1$s</b>?]]></string>
+    <string name="delete_song_x">
+        <![CDATA[Excluir a música <b>%1$s</b>?]]>
+    </string>
     <string name="delete_songs_title">Excluir músicas</string>
-    <string name="delete_x_playlists"><![CDATA[Excluir <b>%1$d</b> playlists?]]></string>
-    <string name="delete_x_songs"><![CDATA[Excluir <b>%1$d</b> músicas?]]></string>
+    <string name="delete_x_playlists">
+        <![CDATA[Excluir <b>%1$d</b> playlists?]]>
+    </string>
+    <string name="delete_x_songs">
+        <![CDATA[Excluir <b>%1$d</b> músicas?]]>
+    </string>
     <string name="deleted_x_songs">%1$d músicas foram excluídas.</string>
     <string name="deleting_songs">Apagando músicas</string>
     <string name="depth">Profundidade</string>
@@ -153,7 +163,9 @@
     <string name="dialog_title_set_ringtone">Definir como toque</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Você quer limpar a lista negra?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Você quer remover <b>%1$s</b> da lista negra?]]></string>
+    <string name="do_you_want_to_remove_from_the_blacklist">
+        <![CDATA[Você quer remover <b>%1$s</b> da lista negra?]]>
+    </string>
     <string name="donate">Doar</string>
     <string name="donate_summary">Se você acha que eu mereço ser recompensado pelo meu trabalho, você pode me deixar algum dinheiro aqui</string>
     <string name="donation_header">Me pague um:</string>
@@ -247,7 +259,9 @@
     <string name="no_songs">Você não tem músicas</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Letras normais</string>
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> não está listado no armazenamento de mídia.]]></string>
+    <string name="not_listed_in_media_store">
+        <![CDATA[<b>%s</b> não está listado no armazenamento de mídia.]]>
+    </string>
     <string name="not_recently_played">Não reproduzido recentemente</string>
     <string name="nothing_to_scan">Nada para escanear.</string>
     <string name="nothing_to_see">Nada para ver</string>
@@ -299,6 +313,7 @@
     <string name="pref_keep_screen_on_summary">Tenha em mente que ativar este recurso pode afetar a duração da bateria</string>
     <string name="pref_keep_screen_on_title">Manter a tela ligada</string>
     <string name="pref_language_name">Selecione o idioma</string>
+    <string name="pref_snow_fall_title">Efeito de neve caindo</string>
     <string name="pref_summary_album_art_on_lockscreen">Usar a capa do álbum da música em reprodução como papel de parede na tela de bloqueio</string>
     <string name="pref_summary_album_artists_only">Mostrar Artistas do Álbum na categoria de Artistas</string>
     <string name="pref_summary_audio_ducking">Diminuir o volume quando um som do sistema for reproduzido ou uma notificação for recebida</string>
@@ -382,9 +397,13 @@
     <string name="remove_cover">Remover capa</string>
     <string name="remove_from_blacklist">Remover da lista negra</string>
     <string name="remove_song_from_playlist_title">Remover música da playlist</string>
-    <string name="remove_song_x_from_playlist"><![CDATA[Remover a música <b>%1$s</b> da playlist?]]></string>
+    <string name="remove_song_x_from_playlist">
+        <![CDATA[Remover a música <b>%1$s</b> da playlist?]]>
+    </string>
     <string name="remove_songs_from_playlist_title">Remover músicas da playlist</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[Remover <b>%1$d</b> músicas da playlist?]]></string>
+    <string name="remove_x_songs_from_playlist">
+        <![CDATA[Remover <b>%1$d</b> músicas da playlist?]]>
+    </string>
     <string name="rename_playlist_title">Renomear playlist</string>
     <string name="report_an_issue">Reportar um problema</string>
     <string name="report_bug">Reportar erro</string>

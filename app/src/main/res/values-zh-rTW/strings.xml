@@ -300,7 +300,7 @@
     <string name="pref_summary_album_art_on_lockscreen">將播放中歌曲的專輯封面設為鎖定螢幕背景。</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">通知鈴聲、導航語音等。</string>
-    <string name="pref_summary_audio_fade">Fade Audio when Song is Paused or Played</string>
+    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
     <string name="pref_summary_blurred_album_art">在鎖定畫面上模糊化專輯圖片。第三方程式和小工具可能不正常運作。</string>
@@ -321,8 +321,8 @@
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
     <string name="pref_summary_open_source_licences">開放原始碼軟體的授權詳細資料</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
-    <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
+    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_toggle_full_screen">沉浸模式</string>
     <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
     <string name="pref_summary_toggle_shuffle">選擇新樂曲清單時，關閉隨機模式</string>
@@ -334,7 +334,7 @@
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">彩色的應用快捷方式</string>
     <string name="pref_title_audio_ducking">在焦點音訊響起時降低音量</string>
-    <string name="pref_title_audio_fade">Fade Audio</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">自動下載演唱者圖片</string>
     <string name="pref_title_blacklist">黑名單</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>

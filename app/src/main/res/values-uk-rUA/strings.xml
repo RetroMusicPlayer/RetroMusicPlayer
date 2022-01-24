@@ -83,12 +83,14 @@
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Виконавець</string>
     <string name="artists">Виконавці</string>
-    <string name="audio_fade_duration">Audio Fade Duration</string>
+    <string name="audio_fade_duration">Audio fade duration</string>
     <string name="audio_focus_denied">В отриманні аудіофокусу відмовлено.</string>
     <string name="audio_settings_summary">Змінити налаштування звуку та налаштувати параметри еквалайзера</string>
     <string name="auto">Автоматично</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_restore_title">
+        <![CDATA[Backup & Restore]]>
+    </string>
     <string name="backup_title">Backups</string>
     <string name="biography">Життєпис</string>
     <string name="black_theme_name">Чорний</string>
@@ -141,13 +143,21 @@
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Майже темна</string>
     <string name="delete_playlist_title">Видалити список відтворення</string>
-    <string name="delete_playlist_x"><![CDATA[Видалити список відтворення <b>%1$s</b>?]]></string>
+    <string name="delete_playlist_x">
+        <![CDATA[Видалити список відтворення <b>%1$s</b>?]]>
+    </string>
     <string name="delete_playlists_title">Видалити списки відтворення</string>
     <string name="delete_song_title">Видалити пісню</string>
-    <string name="delete_song_x"><![CDATA[Видалити пісню <b>%1$s</b>?]]></string>
+    <string name="delete_song_x">
+        <![CDATA[Видалити пісню <b>%1$s</b>?]]>
+    </string>
     <string name="delete_songs_title">Видалити пісні</string>
-    <string name="delete_x_playlists"><![CDATA[Видалити <b>%1$d</b> списки відтворення?]]></string>
-    <string name="delete_x_songs"><![CDATA[Видалити <b>%1$d</b> пісень?]]></string>
+    <string name="delete_x_playlists">
+        <![CDATA[Видалити <b>%1$d</b> списки відтворення?]]>
+    </string>
+    <string name="delete_x_songs">
+        <![CDATA[Видалити <b>%1$d</b> пісень?]]>
+    </string>
     <string name="deleted_x_songs">Видалено %1$d пісень.</string>
     <string name="deleting_songs">Deleting Songs</string>
     <string name="depth">Глибина</string>
@@ -157,7 +167,9 @@
     <string name="dialog_title_set_ringtone">Встановити як мелодію дзвінка</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Ви хочете очистити чорний список?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Вилучити <b>%1$s</b> з чорного списку?]]></string>
+    <string name="do_you_want_to_remove_from_the_blacklist">
+        <![CDATA[Вилучити <b>%1$s</b> з чорного списку?]]>
+    </string>
     <string name="donate">Підтримати</string>
     <string name="donate_summary">Якщо ви вважаєте, що я заслуговую на оплату своєї праці, ви можете залишити гроші тут</string>
     <string name="donation_header">Купіть мені:</string>
@@ -251,7 +263,9 @@
     <string name="no_songs">У вас немає пісень</string>
     <string name="normal">Нормальний</string>
     <string name="normal_lyrics">Стандартний текст</string>
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> не вказано в медіа сховищі.]]></string>
+    <string name="not_listed_in_media_store">
+        <![CDATA[<b>%s</b> не вказано в медіа сховищі.]]>
+    </string>
     <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Нічого сканувати.</string>
     <string name="nothing_to_see">Порожньо</string>
@@ -303,10 +317,11 @@
     <string name="pref_keep_screen_on_summary">Майте на увазі, що увімкнення цієї функції може вплинути на заряд акумулятора</string>
     <string name="pref_keep_screen_on_title">Не вимикати екран</string>
     <string name="pref_language_name">Обрати мову</string>
+    <string name="pref_snow_fall_title">Ефект снігопаду</string>
     <string name="pref_summary_album_art_on_lockscreen">Використовувати обкладинку альбому пісні як шпалери екрана блокування</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Зменшення гучності при відтворенні системного звуку або сповіщення</string>
-    <string name="pref_summary_audio_fade">Fade Audio when Song is Paused or Played</string>
+    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
     <string name="pref_summary_blacklist">Вміст тек чорного списку приховано з вашої бібліотеки.</string>
     <string name="pref_summary_bluetooth_playback">Почати відтворення відразу при під\'єднанні до Bluetooth пристрою</string>
     <string name="pref_summary_blurred_album_art">Розмивати обкладинку альбому на екрані блокування. Можуть виникнути проблеми з сторонніми додатками та віджетами</string>
@@ -327,8 +342,8 @@
     <string name="pref_summary_lock_screen">Використовувати керування музикою на екрані блокування від Retro Music</string>
     <string name="pref_summary_open_source_licences">Деталі ліцензії для програмного забезпечення з відкритим кодом</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
-    <string name="pref_summary_show_lyrics">Display Synced Lyrics over Album Cover</string>
-    <string name="pref_summary_suggestions">Show New Music Mix on Homescreen</string>
+    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_toggle_full_screen">Режим занурення</string>
     <string name="pref_summary_toggle_headset">Почати відтворення відразу після підключення навушників</string>
     <string name="pref_summary_toggle_shuffle">Випадковий режим вимкнеться при відтворенні нового списку пісень</string>
@@ -340,7 +355,7 @@
     <string name="pref_title_album_cover_transform">Пропустити обкладинку альбому</string>
     <string name="pref_title_app_shortcuts">Кольорові ярлики додатків</string>
     <string name="pref_title_audio_ducking">Зменшити гучність при сторонніх звуках</string>
-    <string name="pref_title_audio_fade">Fade Audio</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Автоматично завантажувати зображення виконавців</string>
     <string name="pref_title_blacklist">Чорний список</string>
     <string name="pref_title_bluetooth_playback">Відтворення Bluetooth</string>
@@ -363,16 +378,16 @@
     <string name="pref_title_lock_screen">Повноекранне керування</string>
     <string name="pref_title_now_playing_screen_appearance">Тема відтворення</string>
     <string name="pref_title_open_source_licences">Ліцензії з відкритим кодом</string>
-    <string name="pref_title_remember_tab">Remember Last Tab</string>
-    <string name="pref_title_show_lyrics">Show Lyrics</string>
-    <string name="pref_title_suggestions">Show Suggestions</string>
+    <string name="pref_title_remember_tab">Remember last tab</string>
+    <string name="pref_title_show_lyrics">Show lyrics</string>
+    <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_tab_text_mode">Режим назв вкладок</string>
     <string name="pref_title_toggle_carousel_effect">Ефект Каруселі</string>
     <string name="pref_title_toggle_full_screen">На весь екран</string>
     <string name="pref_title_toggle_toggle_headset">Автоматичне відтворення</string>
     <string name="pref_title_toggle_toggle_shuffle">Режим перемішування</string>
     <string name="pref_title_toggle_volume">Регулювання гучності</string>
-    <string name="pref_title_whitelist">Whitelist Music</string>
+    <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Чорна тема, теми відтворення, ефект каруселі та інше..</string>
     <string name="profile">Профіль</string>
@@ -386,9 +401,13 @@
     <string name="remove_cover">Видалити обкладинку</string>
     <string name="remove_from_blacklist">Видалити з чорного списку</string>
     <string name="remove_song_from_playlist_title">Видалити пісню зі списку відтворення</string>
-    <string name="remove_song_x_from_playlist"><![CDATA[Видалити пісню <b>%1$s</b> зі списку відтворення?]]></string>
+    <string name="remove_song_x_from_playlist">
+        <![CDATA[Видалити пісню <b>%1$s</b> зі списку відтворення?]]>
+    </string>
     <string name="remove_songs_from_playlist_title">Видалити пісні зі списку відтворення</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[Видалити <b>%1$d</b> пісень зі списку відтворення?]]></string>
+    <string name="remove_x_songs_from_playlist">
+        <![CDATA[Видалити <b>%1$d</b> пісень зі списку відтворення?]]>
+    </string>
     <string name="rename_playlist_title">Перейменувати список відтворення</string>
     <string name="report_an_issue">Повідомити про помилку</string>
     <string name="report_bug">Повідомити про помилку</string>

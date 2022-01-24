@@ -19,7 +19,7 @@
         android:defaultValue="false"
         android:key="snowfall"
         android:layout="@layout/list_item_view_switch_no_title"
-        android:title="Snow Fall Effect (Only on Normal theme)" />
+        android:title="@string/pref_snow_fall_title" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
         android:defaultValue="0"
