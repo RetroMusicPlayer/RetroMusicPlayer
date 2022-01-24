@@ -27,6 +27,7 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.ImageButton
 import android.widget.SeekBar
+import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -46,7 +47,6 @@ import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
@@ -70,7 +70,7 @@ class FullPlaybackControlsFragment :
     private var _binding: FragmentFullPlayerControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val seekBar: SeekBar
+    override val progressSlider: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -84,6 +84,12 @@ class FullPlaybackControlsFragment :
 
     override val previousButton: ImageButton
         get() = binding.previousButton
+
+    override val songTotalTime: TextView
+        get() = binding.songTotalTime
+
+    override val songCurrentProgress: TextView
+        get() = binding.songCurrentProgress
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -204,18 +210,6 @@ class FullPlaybackControlsFragment :
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return (parentFragment as FullPlayerFragment).onMenuItemClick(item!!)
-    }
-
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 
     override fun onRepeatModeChanged() {

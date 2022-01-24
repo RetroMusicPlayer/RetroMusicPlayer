@@ -43,7 +43,7 @@ class CardBlurPlaybackControlsFragment :
     private var _binding: FragmentCardBlurPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val seekBar: SeekBar
+    override val progressSlider: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -147,18 +147,6 @@ class CardBlurPlaybackControlsFragment :
             scaleY = 0f
             rotation = 0f
         }
-    }
-
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 
     override fun onDestroyView() {

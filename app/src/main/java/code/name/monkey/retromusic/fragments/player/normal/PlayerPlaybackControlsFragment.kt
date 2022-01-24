@@ -14,13 +14,12 @@
  */
 package code.name.monkey.retromusic.fragments.player.normal
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.view.animation.LinearInterpolator
 import android.widget.ImageButton
 import android.widget.SeekBar
+import android.widget.TextView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -33,7 +32,6 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
@@ -43,7 +41,7 @@ class PlayerPlaybackControlsFragment :
     private var _binding: FragmentPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val seekBar: SeekBar
+    override val progressSlider: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -57,6 +55,12 @@ class PlayerPlaybackControlsFragment :
 
     override val previousButton: ImageButton
         get() = binding.previousButton
+
+    override val songTotalTime: TextView
+        get() = binding.songTotalTime
+
+    override val songCurrentProgress: TextView
+        get() = binding.songCurrentProgress
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -181,18 +185,6 @@ class PlayerPlaybackControlsFragment :
             scaleY = 0f
             rotation = 0f
         }
-    }
-
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 
     override fun onDestroyView() {

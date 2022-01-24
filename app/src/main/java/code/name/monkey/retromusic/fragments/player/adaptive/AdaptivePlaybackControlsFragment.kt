@@ -20,6 +20,7 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.ImageButton
 import android.widget.SeekBar
+import android.widget.TextView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -40,7 +41,7 @@ class AdaptivePlaybackControlsFragment :
     private var _binding: FragmentAdaptivePlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val seekBar: SeekBar
+    override val progressSlider: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -54,6 +55,12 @@ class AdaptivePlaybackControlsFragment :
 
     override val previousButton: ImageButton
         get() = binding.previousButton
+
+    override val songTotalTime: TextView
+        get() = binding.songTotalTime
+
+    override val songCurrentProgress: TextView
+        get() = binding.songCurrentProgress
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -159,18 +166,6 @@ class AdaptivePlaybackControlsFragment :
     override fun show() {}
 
     override fun hide() {}
-
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -47,7 +47,7 @@ class CardPlaybackControlsFragment :
     private var _binding: FragmentCardPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val seekBar: SeekBar
+    override val progressSlider: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -168,18 +168,6 @@ class CardPlaybackControlsFragment :
         } else {
             binding.mediaButton.playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
         }
-    }
-
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 
     private fun updateProgressTextColor() {
