@@ -33,6 +33,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.service.MusicService.TOGGLE_FAVORITE
 import code.name.monkey.retromusic.util.ImageUtil
+import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
@@ -41,6 +42,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 class AppWidgetCircle : BaseAppWidget() {
     private var target: Target<BitmapPaletteWrapper>? = null // for cancellation
@@ -89,7 +92,9 @@ class AppWidgetCircle : BaseAppWidget() {
                 ), 1f
             )
         )
-        val isFavorite = true
+        val isFavorite = runBlocking(Dispatchers.IO) {
+            return@runBlocking MusicUtil.repository.isSongFavorite(song.id)
+        }
         val favoriteRes =
             if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
         appWidgetView.setImageViewBitmap(

@@ -141,6 +141,7 @@ public class MusicService extends MediaBrowserServiceCompat
     public static final String META_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".metachanged";
     public static final String QUEUE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".queuechanged";
     public static final String PLAY_STATE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".playstatechanged";
+
     public static final String FAVORITE_STATE_CHANGED =
             RETRO_MUSIC_PACKAGE_NAME + "favoritestatechanged";
     public static final String REPEAT_MODE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".repeatmodechanged";
@@ -293,6 +294,7 @@ public class MusicService extends MediaBrowserServiceCompat
                 public void onReceive(final Context context, final Intent intent) {
                     playingNotification.updateFavorite(getCurrentSong(), MusicService.this::startForegroundOrNotify);
                     startForegroundOrNotify();
+                    appWidgetCircle.notifyChange(MusicService.this, FAVORITE_STATE_CHANGED);
                 }
             };
     private final BroadcastReceiver lockScreenReceiver =
