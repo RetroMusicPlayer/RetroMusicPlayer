@@ -149,7 +149,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         setupWakelock()
         setupViews()
         setupToolbar()
-        updateTitleSong()
     }
 
     private fun setupViews() {
@@ -184,22 +183,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-    }
-
-    override fun onPlayingMetaChanged() {
-        super.onPlayingMetaChanged()
-        updateTitleSong()
-    }
-
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        updateTitleSong()
-    }
-
-    private fun updateTitleSong() {
-        song = MusicPlayerRemote.currentSong
-        binding.toolbar.title = song.title
-        binding.toolbar.subtitle = song.artistName
     }
 
     private fun setupWakelock() {
