@@ -28,8 +28,8 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.colorChooser
 import com.google.android.material.color.DynamicColors
 
@@ -61,7 +61,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         val accentColor = ThemeStore.accentColor(requireContext())
         accentColorPref?.setColor(accentColor, ColorUtil.darkenColor(accentColor))
         accentColorPref?.setOnPreferenceClickListener {
-            MaterialDialog(requireContext()).show {
+            materialDialog().show {
                 colorChooser(
                     initialSelection = accentColor,
                     showAlphaSelector = false,

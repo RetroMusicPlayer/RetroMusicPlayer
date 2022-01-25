@@ -26,13 +26,13 @@ import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.extensions.extraNotNull
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.SAFUtil
-import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,11 +83,10 @@ class DeleteSongsDialog : DialogFragment() {
             )
         }
 
-        return MaterialDialog(requireContext())
+        return materialDialog()
             .title(pair.first)
             .message(text = pair.second)
             .noAutoDismiss()
-            .cornerRadius(16F)
             .negativeButton(android.R.string.cancel) {
                 dismiss()
             }
