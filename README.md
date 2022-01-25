@@ -14,22 +14,28 @@
 
 ## Screenshots
 ### App Themes
-| <img src="screenshots/home.jpeg" width="200"/> | <img src="screenshots/home_dark.jpeg" width="200"/> | <img src="screenshots/home_black.jpeg" width="200"/> |
+| <img src="screenshots/home_light.png" width="200"/> | <img src="screenshots/home_dark.png" width="200"/> | <img src="screenshots/home_black.jpg" width="200"/> |
 |:---:|:---:|:---:|
 |Clearly white| Kinda dark | Just black|
 
 ### Player screen
-| <img src="screenshots/home.jpeg" width="200"/>| <img src="screenshots/list.jpeg" width="200"/>| <img src="screenshots/albums.jpeg" width="200"/>| <img src="screenshots/settings.jpeg" width="200"/>|
-|:---:|:---:|:---:|:---:|
-| Home | Songs | Albums | Settings |
+| <img src="screenshots/home_light.png" width="200"/>| <img src="screenshots/songs_light.png" width="200"/>| <img src="screenshots/albums_light.png" width="200"/>| <img src="screenshots/artists_light.png" width="200"/>| <img src="screenshots/settings_light.png" width="200"/>|
+|:---:|:---:|:---:|:---:|:---:|
+| Home | Songs | Albums | Artists | Settings |
+
+### Synced lyrics screen
+| <img src="screenshots/synced_light.png" width="200"/>| <img src="screenshots/synced_dark.png" width="200"/>| <img src="screenshots/synced_black.jpg" width="200"/>|
+|:---:|:---:|:---:|
+| Synced light | Synced dark | Synced black |
+
 
 ### 9+ Now playing themes
  
-| <img src="screenshots/np_normal.jpeg" width="200"/>	|<img src="screenshots/np_fit.jpeg" width="200"/>|   <img src="screenshots/np_flat.jpeg" width="200"/>  	|    <img src="screenshots/np_color.jpeg" width="200"/> 	|     <img src="screenshots/np_material.jpeg" width="200"/>	|
+| <img src="screenshots/normal.png" width="200"/>	|<img src="screenshots/fit.png" width="200"/>|   <img src="screenshots/flat.png" width="200"/>  	|    <img src="screenshots/color.png" width="200"/> 	|     <img src="screenshots/material.png" width="200"/>	|
 |:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
 | Normal 	| Fit 	| Flat 	| Color 	| Material 	|
 
-| <img src="screenshots/no_classic.jpeg" width="200"/>	|<img src="screenshots/np_adaptive.jpeg" width="200"/>|   <img src="screenshots/np_blur.jpeg" width="200"/>  	|    <img src="screenshots/np_tiny.jpeg" width="200"/> 	|     <img src="screenshots/np_peak.jpeg" width="200"/>	|
+| <img src="screenshots/classic.png" width="200"/>	|<img src="screenshots/adaptive.png" width="200"/>|   <img src="screenshots/blur.png" width="200"/>  	|    <img src="screenshots/tiny.png" width="200"/> 	|     <img src="screenshots/peak.png" width="200"/>	|
 |:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
 | Classic 	| Adaptive 	| Blur 	| Tiny 	| Peak 	|
 
