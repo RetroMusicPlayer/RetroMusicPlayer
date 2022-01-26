@@ -135,7 +135,7 @@
     <string name="created_playlist_x">Lista de reproducción %1$s creada.</string>
     <string name="credit_title">Miembros y colaboradores </string>
     <string name="currently_listening_to_x_by_x">Actualmente estás escuchando %1$s de %2$s.</string>
-    <string name="custom_artist_images">自定义艺术家图像</string>
+    <string name="custom_artist_images">Imágenes de artista personalizadas</string>
     <string name="dark_theme_name">Un poco Oscuro</string>
     <string name="delete_playlist_title">Eliminar lista de reproducción</string>
     <string name="delete_playlist_x"><![CDATA[¿Eliminar la lista de reproducción <b>%1$s</b>?]]></string>
