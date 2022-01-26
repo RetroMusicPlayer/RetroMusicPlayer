@@ -19,7 +19,7 @@
     <string name="action_go_to_album">Ir al álbum</string>
     <string name="action_go_to_artist">Ir al artista</string>
     <string name="action_go_to_genre">Ir al género</string>
-    <string name="action_go_to_lyrics">Welcome,</string>
+    <string name="action_go_to_lyrics">Ir a la letra</string>
     <string name="action_go_to_start_directory">Ir al directorio de inicio</string>
     <string name="action_grant">Permitir</string>
     <string name="action_grid_size">Tamaño de la cuadricula</string>
