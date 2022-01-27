@@ -33,7 +33,11 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.service.MusicService.Companion.APP_WIDGET_UPDATE
+import code.name.monkey.retromusic.service.MusicService.Companion.EXTRA_APP_WIDGET_NAME
+import code.name.monkey.retromusic.service.MusicService.Companion.FAVORITE_STATE_CHANGED
+import code.name.monkey.retromusic.service.MusicService.Companion.META_CHANGED
+import code.name.monkey.retromusic.service.MusicService.Companion.PLAY_STATE_CHANGED
 
 abstract class BaseAppWidget : AppWidgetProvider() {
 

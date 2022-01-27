@@ -39,7 +39,10 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_QUIT
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.RetroUtil.createBitmap
