@@ -9,7 +9,7 @@
     <string name="action_add_to_favorites">加到最愛</string>
     <string name="action_add_to_playing_queue">加入播放佇列</string>
     <string name="action_add_to_playlist">加入播放清單...</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">投放</string>
     <string name="action_clear_playing_queue">清空播放佇列</string>
     <string name="action_cycle_repeat">循環重複模式</string>
     <string name="action_delete">刪除</string>
