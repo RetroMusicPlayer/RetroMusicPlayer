@@ -19,7 +19,7 @@
     <string name="action_go_to_album">Albüme git</string>
     <string name="action_go_to_artist">Sanatçıya git</string>
     <string name="action_go_to_genre">Şarkı türüne git</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">Şarkı Sözlerine git</string>
     <string name="action_go_to_start_directory">Başlangıç dizinine git</string>
     <string name="action_grant">Onayla</string>
     <string name="action_grid_size">Izgara boyutu</string>
@@ -73,6 +73,7 @@
     <string name="app_shortcut_top_tracks_short">Sık oynatılan parçalar</string>
     <string name="app_widget_big_name">Tüm Resim</string>
     <string name="app_widget_card_name">Retro müzik - Kart</string>
+    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Retro müzik - Klasik</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Retro müzik - Küçük</string>
@@ -83,10 +84,8 @@
     <string name="audio_focus_denied">Ses odaklaması reddedildi.</string>
     <string name="audio_settings_summary">Ses ayarlarını değiştirin ve ekolayzır kontrollerini ayarlayın</string>
     <string name="auto">Otomatik</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title">
-        <![CDATA[Yedekleme & Geri yükleme]]>
-    </string>
+    <string name="backup_restore_settings_summary">Ayarlarınızı, çalma listelerinizi yedekleyin ve geri yükleyin</string>
+    <string name="backup_restore_title"><![CDATA[Yedekleme & Geri yükleme]]></string>
     <string name="backup_title">Yedeklemeler</string>
     <string name="biography">Yaşam öyküsü</string>
     <string name="black_theme_name">Sade Siyah</string>
@@ -116,7 +115,7 @@
     <string name="cascading">Basamaklı</string>
     <string name="changelog">Değişim kayıt günlüğü</string>
     <string name="changelog_summary">Yeniliklere göz at</string>
-    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="choose_restore_title">Neyi geri yükleyeceğinizi seçin</string>
     <string name="circle">Çember</string>
     <string name="circular">Dairesel</string>
     <string name="classic">Klasik</string>
@@ -136,24 +135,16 @@
     <string name="created_playlist_x">%1$s adında oynatma listesi oluşturuldu.</string>
     <string name="credit_title">Üyeler ve katkıda bulunanlar</string>
     <string name="currently_listening_to_x_by_x">Şu anda %2$s şarkıcısından %1$s dinleniyor.</string>
-    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="custom_artist_images">Özel Sanatçı Resimleri</string>
     <string name="dark_theme_name">Koyu</string>
     <string name="delete_playlist_title">Çalma listesini sil</string>
-    <string name="delete_playlist_x">
-        <![CDATA[Oynatma listesi <b>%1$s</b> silinsin mi?]]>
-    </string>
+    <string name="delete_playlist_x"><![CDATA[Oynatma listesi <b>%1$s</b> silinsin mi?]]></string>
     <string name="delete_playlists_title">Çalma listelerini sil</string>
     <string name="delete_song_title">Şarkıyı sil</string>
-    <string name="delete_song_x">
-        <![CDATA[<b>%1$s</b> adlı şarkı silinsin mi?]]>
-    </string>
+    <string name="delete_song_x"><![CDATA[<b>%1$s</b> adlı şarkı silinsin mi?]]></string>
     <string name="delete_songs_title">Şarkıları sil</string>
-    <string name="delete_x_playlists">
-        <![CDATA[<b>%1$d</b> çalma listeleri silinsin mi?]]>
-    </string>
-    <string name="delete_x_songs">
-        <![CDATA[<b>%1$d</b> parçaları silinsin mi?]]>
-    </string>
+    <string name="delete_x_playlists"><![CDATA[<b>%1$d</b> çalma listeleri silinsin mi?]]></string>
+    <string name="delete_x_songs"><![CDATA[<b>%1$d</b> parçaları silinsin mi?]]></string>
     <string name="deleted_x_songs">%1$d parça silindi.</string>
     <string name="deleting_songs">Şarkıları silme</string>
     <string name="depth">Derinlik</string>
@@ -161,11 +152,9 @@
     <string name="device_info">Cihaz Bilgisi</string>
     <string name="dialog_message_set_ringtone">Retro Müzik\'in ses ayarlarını değiştirmesine izin verin</string>
     <string name="dialog_title_set_ringtone">Zil sesini ayarla</string>
-    <string name="disc_hint">Disc Number</string>
+    <string name="disc_hint">Disk numarası</string>
     <string name="do_you_want_to_clear_the_blacklist">Kara listeyi temizlemek istiyor musunuz?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist">
-        <![CDATA[Kara listeden <b>%1$s</b>\'i kaldırmak istiyor musunuz?]]>
-    </string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Kara listeden <b>%1$s</b>\'i kaldırmak istiyor musunuz?]]></string>
     <string name="donate">Bağış yapın</string>
     <string name="donate_summary">Çalışmalarımın karşılığı olarak para hakettiğimi düşünüyorsanız bana biraz bahşiş bırakabilirsiniz</string>
     <string name="donation_header">Bağışlayacağınız tutar:</string>
@@ -242,6 +231,7 @@
     <string name="my_name">İsim</string>
     <string name="my_top_tracks">Sık oynatılanlar</string>
     <string name="never">Asla</string>
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">Yeni şarkı listesi</string>
     <string name="new_start_directory">%s yeni başlangıç dizini.</string>
     <string name="next_song">Sonraki Şarkı</string>
@@ -259,9 +249,7 @@
     <string name="no_songs">Hiç şarkınız bulunmuyor</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normal şarkı sözleri</string>
-    <string name="not_listed_in_media_store">
-        <![CDATA[<b>%s</b> medya deposunda listelenmiyor.]]>
-    </string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> medya deposunda listelenmiyor.]]></string>
     <string name="not_recently_played">Yakın zamanda oynatılmadı</string>
     <string name="nothing_to_scan">Aranacak herhangi bir şey yok.</string>
     <string name="nothing_to_see">Hiçbir şey yok</string>
@@ -274,6 +262,7 @@
     <string name="only_on_wifi">Sadece Wi-Fi\'da</string>
     <string name="other_settings_summary">Gelişmiş test özellikleri</string>
     <string name="others">Diğer</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Şifre</string>
     <string name="past_three_months">Son 3 ay</string>
     <string name="paste_lyrics_here">Sözleri buraya yapıştır</string>
@@ -289,6 +278,9 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Retro Müzik tasarım ilhamı almak için Pinterest sayfasını takip edin</string>
     <string name="plain">Sade</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Oynatılıyor bildirimi, oynatma/duraklatma vb. için eylemler sağlar.</string>
     <string name="playing_notification_name">Oynatılıyor bildirimi</string>
     <string name="playlist_is_empty">Oynatma listesi boş</string>
@@ -344,22 +336,26 @@
     <string name="pref_summary_toggle_headset">Kulaklık bağlandıktan hemen sonra çalmaya başla</string>
     <string name="pref_summary_toggle_shuffle">Yeni bir şarkı listesi çalınırken karıştırma modu kapanacak</string>
     <string name="pref_summary_toggle_volume">Eğer yeterli alan varsa ses kontrollerini şimdi oynatılıyor ekranında göster</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Sadece /Music dosyasından müzik göster</string>
     <string name="pref_title_album_art_on_lockscreen">Albüm kapağını göster</string>
     <string name="pref_title_album_artists_only">Albüm Sanatçısına göre belirle</string>
     <string name="pref_title_album_cover_style">Albüm kapağı teması</string>
     <string name="pref_title_album_cover_transform">Albüm kapağını atla</string>
     <string name="pref_title_app_shortcuts">Renkli uygulama kısayolları</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Odak kaybında ses hacmini azaltın</string>
     <string name="pref_title_audio_fade">Soluk Ses</string>
     <string name="pref_title_auto_download_artist_images">Sanatçı resimlerini otomatik indir</string>
     <string name="pref_title_blacklist">Kara Liste</string>
     <string name="pref_title_bluetooth_playback">Bluetooth ile oynatma</string>
     <string name="pref_title_blurred_album_art">Albüm kapağını bulanıklaştır</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Klasik bildirim tasarımı</string>
     <string name="pref_title_colored_app">Adaptif renk</string>
     <string name="pref_title_colored_notification">Renkli bildirim</string>
     <string name="pref_title_cross_fade">Çapraz geçiş (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Doymamış renk</string>
     <string name="pref_title_expand_now_playing_panel">Şimdi oynatılıyor ekranını göster</string>
     <string name="pref_title_extra_controls">Ekstra kontroller</string>
@@ -372,6 +368,8 @@
     <string name="pref_title_ignore_media_store_artwork">Media Store kapaklarını yoksay</string>
     <string name="pref_title_last_added_interval">Son eklenen çalma listesi aralığı</string>
     <string name="pref_title_lock_screen">Tam ekran kontrolleri</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Şimdi oynatılıyor teması</string>
     <string name="pref_title_open_source_licences">Açık kaynak lisansları</string>
     <string name="pref_title_remember_tab">Son Sekmeyi Hatırla</string>
@@ -383,6 +381,7 @@
     <string name="pref_title_toggle_toggle_headset">Otomatik oynatma</string>
     <string name="pref_title_toggle_toggle_shuffle">Karıştır modu</string>
     <string name="pref_title_toggle_volume">Ses kontrolleri</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Beyaz Listedeki Müzik</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Şimdi Oynatılıyor temaları, Atlıkarınca efekti, Renkli tema ve daha fazlası..</string>
@@ -397,20 +396,17 @@
     <string name="remove_cover">Kapağı kaldır</string>
     <string name="remove_from_blacklist">Kara listeden kaldır</string>
     <string name="remove_song_from_playlist_title">Şarkıyı oynatma listesinden kaldır</string>
-    <string name="remove_song_x_from_playlist">
-        <![CDATA[<b>%1$s</b> adlı şarkı oynatma listesinden kaldırılsın mı?]]>
-    </string>
+    <string name="remove_song_x_from_playlist"><![CDATA[<b>%1$s</b> adlı şarkı oynatma listesinden kaldırılsın mı?]]></string>
     <string name="remove_songs_from_playlist_title">Şarkıları oynatma listesinden kaldır</string>
-    <string name="remove_x_songs_from_playlist">
-        <![CDATA[<b>%1$d</b> adlı şarkılar oynatma listesinden kaldırılsın mı?]]>
-    </string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[<b>%1$d</b> adlı şarkılar oynatma listesinden kaldırılsın mı?]]></string>
     <string name="rename_playlist_title">Oynatma listesini yeniden adlandır</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Sorun Bildir</string>
     <string name="report_bug">Hata bildir</string>
     <string name="reset_action">Sıfırla</string>
     <string name="reset_artist_image">Sanatçı resmini sıfırla</string>
     <string name="restore">Geri yükle</string>
-    <string name="restore_message">Do you want to restore backup?</string>
+    <string name="restore_message">Yedeklemeyi geri yüklemek istiyor musunuz?</string>
     <string name="restored_previous_purchase_please_restart">Önceki satın alma işlemi geri yüklendi. Tüm özelliklerden yararlanmak için lütfen uygulamayı yeniden başlatın.</string>
     <string name="restored_previous_purchases">Önceki satın almalar geri yüklendi.</string>
     <string name="restoring_purchase">Satın alım geri yükleniyor ...</string>
@@ -487,7 +483,7 @@
     <string name="tiny">Küçük</string>
     <string name="tiny_card_style">Ufak kart</string>
     <string name="title">Şarkı adı</string>
-    <string name="title_new_backup">New Backup</string>
+    <string name="title_new_backup">Yeni yedekleme</string>
     <string name="today">Bugün</string>
     <string name="top_albums">En iyi albümler</string>
     <string name="top_artists">En iyi sanatçılar</string>
@@ -503,7 +499,7 @@
     <string name="up_next">Bir sonraki</string>
     <string name="update_image">Resmi güncelle</string>
     <string name="updating">Güncelleniyor ...</string>
-    <string name="user_images_description">User Images</string>
+    <string name="user_images_description">Kullanıcı Resimleri</string>
     <string name="user_name">Kullanıcı Adı</string>
     <string name="username">Kullanıcı Adı</string>
     <string name="version">Sürüm</string>

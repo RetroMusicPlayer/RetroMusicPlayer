@@ -19,7 +19,7 @@
     <string name="action_go_to_album">Перейти к альбому</string>
     <string name="action_go_to_artist">Перейти к исполнителю</string>
     <string name="action_go_to_genre">Перейти к жанру</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">К тексту песни</string>
     <string name="action_go_to_start_directory">В начало</string>
     <string name="action_grant">Разрешить</string>
     <string name="action_grid_size">Размер сетки</string>
@@ -87,11 +87,9 @@
     <string name="audio_focus_denied">Фокус на аудио отключен.</string>
     <string name="audio_settings_summary">Измените настройки звука и отрегулируйте настройки эквалайзера</string>
     <string name="auto">Авто</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title">
-        <![CDATA[Backup & Restore]]>
-    </string>
-    <string name="backup_title">Backups</string>
+    <string name="backup_restore_settings_summary">Резервное копирование, восстановление ваших настроек и плейлистов</string>
+    <string name="backup_restore_title"><![CDATA[Резервное копирование и восстановление]]></string>
+    <string name="backup_title">Резервные копии</string>
     <string name="biography">Биография</string>
     <string name="black_theme_name">Чёрная</string>
     <string name="blacklist">Черный список</string>
@@ -120,7 +118,7 @@
     <string name="cascading">Каскадный</string>
     <string name="changelog">Список изменений</string>
     <string name="changelog_summary">Узнайте, что нового</string>
-    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="choose_restore_title">Выберете резервную копию для восстановления</string>
     <string name="circle">Круг</string>
     <string name="circular">Круговая</string>
     <string name="classic">Классическая</string>
@@ -140,24 +138,16 @@
     <string name="created_playlist_x">Создан плейлист %1$s.</string>
     <string name="credit_title">Участники и помощники</string>
     <string name="currently_listening_to_x_by_x">Сейчас играет %1$s от %2$s.</string>
-    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="custom_artist_images">Пользовательские изображения</string>
     <string name="dark_theme_name">Тёмная</string>
     <string name="delete_playlist_title">Удалить плейлист</string>
-    <string name="delete_playlist_x">
-        <![CDATA[Удалить плейлист <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_playlist_x"><![CDATA[Удалить плейлист <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Удалить плейлисты</string>
     <string name="delete_song_title">Удалить песню</string>
-    <string name="delete_song_x">
-        <![CDATA[Удалить песню <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_song_x"><![CDATA[Удалить песню <b>%1$s</b>?]]></string>
     <string name="delete_songs_title">Удалить песни</string>
-    <string name="delete_x_playlists">
-        <![CDATA[Удалить <b>%1$d</b> плейлистов?]]>
-    </string>
-    <string name="delete_x_songs">
-        <![CDATA[Удалить <b>%1$d</b> песен?]]>
-    </string>
+    <string name="delete_x_playlists"><![CDATA[Удалить <b>%1$d</b> плейлистов?]]></string>
+    <string name="delete_x_songs"><![CDATA[Удалить <b>%1$d</b> песен?]]></string>
     <string name="deleted_x_songs">Удалено %1$d песен.</string>
     <string name="deleting_songs">Удаление песен</string>
     <string name="depth">Глубина</string>
@@ -165,11 +155,9 @@
     <string name="device_info">Информация об устройстве</string>
     <string name="dialog_message_set_ringtone">Разрешить Retro Music изменять настройки звука</string>
     <string name="dialog_title_set_ringtone">Выбрать рингтон</string>
-    <string name="disc_hint">Disc Number</string>
+    <string name="disc_hint">Номер диска</string>
     <string name="do_you_want_to_clear_the_blacklist">Вы хотите очистить черный список?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist">
-        <![CDATA[Вы хотите удалить <b>%1$s</b> из черного списка?]]>
-    </string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Вы хотите удалить <b>%1$s</b> из черного списка?]]></string>
     <string name="donate">Пожертвовать</string>
     <string name="donate_summary">Если вы считаете, что я заслуживаю награды за свой труд, можете отправить мне несколько рублей здесь</string>
     <string name="donation_header">Купить мне:</string>
@@ -246,13 +234,14 @@
     <string name="my_name">Моё имя</string>
     <string name="my_top_tracks">Любимые треки</string>
     <string name="never">Никогда</string>
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">Новый плейлист</string>
     <string name="new_start_directory">%s новая стартовая директория.</string>
     <string name="next_song">Следующая песня</string>
     <string name="no_albums">Альбомы отсутствуют</string>
     <string name="no_artists">Исполнители отсутствуют</string>
     <string name="no_audio_ID">"Сначала проиграйте песню, затем попробуйте заново."</string>
-    <string name="no_backups_found">No Backups Found</string>
+    <string name="no_backups_found">Резервные копии не найдены</string>
     <string name="no_equalizer">Эквалайзер не найден</string>
     <string name="no_genres">Жанры отсутствуют</string>
     <string name="no_lyrics_found">Текст отсутствует</string>
@@ -263,9 +252,7 @@
     <string name="no_songs">Нет песен</string>
     <string name="normal">Обычная</string>
     <string name="normal_lyrics">Обычный текст</string>
-    <string name="not_listed_in_media_store">
-        <![CDATA[<b>%s</b> не найден в хранилище медиа.]]>
-    </string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> не найден в хранилище медиа.]]></string>
     <string name="not_recently_played">Сейчас не проигрывается</string>
     <string name="nothing_to_scan">Нет файлов для сканирования.</string>
     <string name="nothing_to_see">Нет файлов для сканирования</string>
@@ -278,6 +265,7 @@
     <string name="only_on_wifi">Только по Wi-Fi</string>
     <string name="other_settings_summary">Эксперементальные возможности</string>
     <string name="others">Другое</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Пароль</string>
     <string name="past_three_months">Последние 3 месяца</string>
     <string name="paste_lyrics_here">Вставьте текст песни</string>
@@ -293,6 +281,9 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Подпишитесь на страницу Retro Music в Pinterest</string>
     <string name="plain">Гладкая</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Уведомление о песне предоставляет действия для воспроизведения/паузы и т.д.</string>
     <string name="playing_notification_name">Уведомления воспроизведения</string>
     <string name="playlist_is_empty">Плейлист пуст</string>
@@ -348,22 +339,26 @@
     <string name="pref_summary_toggle_headset">Начать воспроизведение музыки сразу после подключения наушников</string>
     <string name="pref_summary_toggle_shuffle">Режим перемешивания выключится при проигрывании нового списка песен</string>
     <string name="pref_summary_toggle_volume">Если доступно достаточно места, показывать регулировку громкости на экране воспроизведения</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Показывать музыку только из папки /Music</string>
     <string name="pref_title_album_art_on_lockscreen">Показать обложку альбома</string>
     <string name="pref_title_album_artists_only">Показывать обложку альбома в разделе исполнители</string>
     <string name="pref_title_album_cover_style">Тема обложки альбома</string>
     <string name="pref_title_album_cover_transform">Стиль смены обложки альбома</string>
     <string name="pref_title_app_shortcuts">Цветные ярлыки</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Уменьшить громкость при получении уведомлении</string>
     <string name="pref_title_audio_fade">Затухание аудио</string>
     <string name="pref_title_auto_download_artist_images">Автозагрузка изображений исполнителя</string>
     <string name="pref_title_blacklist">Черный список</string>
     <string name="pref_title_bluetooth_playback">Воспроизведение при подключении Bluetooth</string>
     <string name="pref_title_blurred_album_art">Размытие обложки альбома</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Классический дизайн уведомлений</string>
     <string name="pref_title_colored_app">Адаптированный цвет</string>
     <string name="pref_title_colored_notification">Цветное уведомление</string>
     <string name="pref_title_cross_fade">Crossfade (бета)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Немного обесцвеченный цвет </string>
     <string name="pref_title_expand_now_playing_panel">Показать экран воспроизведения</string>
     <string name="pref_title_extra_controls">Дополнительные элементы управления</string>
@@ -376,6 +371,8 @@
     <string name="pref_title_ignore_media_store_artwork">Игнорировать обложки из хранилища</string>
     <string name="pref_title_last_added_interval">Дата последнего добавления плейлиста</string>
     <string name="pref_title_lock_screen">Полноэкранное управление</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Тема экрана воспроизведения</string>
     <string name="pref_title_open_source_licences">Лицензии с открытым кодом</string>
     <string name="pref_title_remember_tab">Запомнить последнюю вкладку</string>
@@ -387,6 +384,7 @@
     <string name="pref_title_toggle_toggle_headset">Автовоспроизведение</string>
     <string name="pref_title_toggle_toggle_shuffle">Режим перемешивания</string>
     <string name="pref_title_toggle_volume">Регулировка громкости</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Музыка в белом списке</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Черная тема, Темы экрана воспроизведения, Эффект карусели и многое другое..</string>
@@ -401,20 +399,17 @@
     <string name="remove_cover">Удалить обложку</string>
     <string name="remove_from_blacklist">Удалить из черного списка</string>
     <string name="remove_song_from_playlist_title">Удалить песню из плейлиста</string>
-    <string name="remove_song_x_from_playlist">
-        <![CDATA[Удалить песню <b>%1$s</b> из плейлиста?]]>
-    </string>
+    <string name="remove_song_x_from_playlist"><![CDATA[Удалить песню <b>%1$s</b> из плейлиста?]]></string>
     <string name="remove_songs_from_playlist_title">Удалить песни из плейлиста</string>
-    <string name="remove_x_songs_from_playlist">
-        <![CDATA[Удалить %1$d песни(ю) из плейлиста?]]>
-    </string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[Удалить %1$d песни(ю) из плейлиста?]]></string>
     <string name="rename_playlist_title">Переименовать плейлист</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Сообщить об ошибке</string>
     <string name="report_bug">Сообщить об ошибке</string>
     <string name="reset_action">Сбросить</string>
     <string name="reset_artist_image">Сбросить изображение исполнителя</string>
     <string name="restore">Восстановить</string>
-    <string name="restore_message">Do you want to restore backup?</string>
+    <string name="restore_message">Вы уверены, что хотите восстановить резервную копию?</string>
     <string name="restored_previous_purchase_please_restart">Предыдущая покупка восстановлена. Перезагрузите приложение, чтобы использовать все функции.</string>
     <string name="restored_previous_purchases">Восстановленные предыдущие покупки.</string>
     <string name="restoring_purchase">Восстановление покупки ...</string>
@@ -491,7 +486,7 @@
     <string name="tiny">Маленькая</string>
     <string name="tiny_card_style">Крошечная карточка</string>
     <string name="title">Название</string>
-    <string name="title_new_backup">New Backup</string>
+    <string name="title_new_backup">Новая резервная копия</string>
     <string name="today">Сегодня</string>
     <string name="top_albums">Топ альбомов</string>
     <string name="top_artists">Топ исполнителей</string>
@@ -507,7 +502,7 @@
     <string name="up_next">Следующие песни</string>
     <string name="update_image">Обновить изображение</string>
     <string name="updating">Обновляется…</string>
-    <string name="user_images_description">User Images</string>
+    <string name="user_images_description">Пользовательские изображения</string>
     <string name="user_name">Имя Пользователя</string>
     <string name="username">Имя пользователя</string>
     <string name="version">Версия</string>

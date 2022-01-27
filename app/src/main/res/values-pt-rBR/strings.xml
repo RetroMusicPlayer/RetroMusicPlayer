@@ -19,7 +19,7 @@
     <string name="action_go_to_album">Ir para o álbum</string>
     <string name="action_go_to_artist">Ir para o artista</string>
     <string name="action_go_to_genre">Ir para o gênero</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">Ir para Letras</string>
     <string name="action_go_to_start_directory">Ir para o diretório inicial</string>
     <string name="action_grant">Conceder</string>
     <string name="action_grid_size">Tamanho da grade</string>
@@ -83,10 +83,8 @@
     <string name="audio_focus_denied">Foco de áudio negado.</string>
     <string name="audio_settings_summary">Altere as configurações de som e ajuste os controles do equalizador</string>
     <string name="auto">Automático</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title">
-        <![CDATA[Backup e Restauração]]>
-    </string>
+    <string name="backup_restore_settings_summary">Backup e restauração agora são compatíveis com listas de reprodução</string>
+    <string name="backup_restore_title"><![CDATA[Backup e Restauração]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Totalmente preto</string>
@@ -116,7 +114,7 @@
     <string name="cascading">Cascata</string>
     <string name="changelog">Lista de mudanças</string>
     <string name="changelog_summary">Veja o que há de novo</string>
-    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="choose_restore_title">Selecionar itens para restaurar</string>
     <string name="circle">Círculo</string>
     <string name="circular">Circular</string>
     <string name="classic">Clássico</string>
@@ -136,24 +134,16 @@
     <string name="created_playlist_x">A playlist %1$s foi criada.</string>
     <string name="credit_title">Membros e contribuidores</string>
     <string name="currently_listening_to_x_by_x">Atualmente ouvindo %1$s por %2$s.</string>
-    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="custom_artist_images">Imagens de Artista Personalizadas</string>
     <string name="dark_theme_name">Meio escuro</string>
     <string name="delete_playlist_title">Excluir playlist</string>
-    <string name="delete_playlist_x">
-        <![CDATA[Excluir a playlist <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_playlist_x"><![CDATA[Excluir a playlist <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Excluir playlists</string>
     <string name="delete_song_title">Excluir música</string>
-    <string name="delete_song_x">
-        <![CDATA[Excluir a música <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_song_x"><![CDATA[Excluir a música <b>%1$s</b>?]]></string>
     <string name="delete_songs_title">Excluir músicas</string>
-    <string name="delete_x_playlists">
-        <![CDATA[Excluir <b>%1$d</b> playlists?]]>
-    </string>
-    <string name="delete_x_songs">
-        <![CDATA[Excluir <b>%1$d</b> músicas?]]>
-    </string>
+    <string name="delete_x_playlists"><![CDATA[Excluir <b>%1$d</b> playlists?]]></string>
+    <string name="delete_x_songs"><![CDATA[Excluir <b>%1$d</b> músicas?]]></string>
     <string name="deleted_x_songs">%1$d músicas foram excluídas.</string>
     <string name="deleting_songs">Apagando músicas</string>
     <string name="depth">Profundidade</string>
@@ -161,11 +151,9 @@
     <string name="device_info">Informações do dispositivo</string>
     <string name="dialog_message_set_ringtone">Permite que o Retro Music modifique as configurações de áudio</string>
     <string name="dialog_title_set_ringtone">Definir como toque</string>
-    <string name="disc_hint">Disc Number</string>
+    <string name="disc_hint">Número do disco</string>
     <string name="do_you_want_to_clear_the_blacklist">Você quer limpar a lista negra?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist">
-        <![CDATA[Você quer remover <b>%1$s</b> da lista negra?]]>
-    </string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Você quer remover <b>%1$s</b> da lista negra?]]></string>
     <string name="donate">Doar</string>
     <string name="donate_summary">Se você acha que eu mereço ser recompensado pelo meu trabalho, você pode me deixar algum dinheiro aqui</string>
     <string name="donation_header">Me pague um:</string>
@@ -242,6 +230,7 @@
     <string name="my_name">Nome</string>
     <string name="my_top_tracks">Mais tocadas</string>
     <string name="never">Nunca</string>
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">Nova playlist</string>
     <string name="new_start_directory">%s é o novo diretório inicial.</string>
     <string name="next_song">Próxima música</string>
@@ -259,9 +248,7 @@
     <string name="no_songs">Você não tem músicas</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Letras normais</string>
-    <string name="not_listed_in_media_store">
-        <![CDATA[<b>%s</b> não está listado no armazenamento de mídia.]]>
-    </string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> não está listado no armazenamento de mídia.]]></string>
     <string name="not_recently_played">Não reproduzido recentemente</string>
     <string name="nothing_to_scan">Nada para escanear.</string>
     <string name="nothing_to_see">Nada para ver</string>
@@ -274,6 +261,7 @@
     <string name="only_on_wifi">Apenas em Wi-Fi</string>
     <string name="other_settings_summary">Recursos avançados em teste</string>
     <string name="others">Outro</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Senha</string>
     <string name="past_three_months">Últimos 3 meses</string>
     <string name="paste_lyrics_here">Colar Letras Aqui</string>
@@ -289,6 +277,9 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Siga a página no Pinterest para se inspirar no design do Retro Music</string>
     <string name="plain">Plano</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">A notificação de reprodução fornece ações para reproduzir/pausar, etc.</string>
     <string name="playing_notification_name">Notificação de reprodução</string>
     <string name="playlist_is_empty">A playlist está vazia</string>
@@ -344,22 +335,26 @@
     <string name="pref_summary_toggle_headset">Começar a reproduzir imediatamente após os fones de ouvido forem conectados</string>
     <string name="pref_summary_toggle_shuffle">O modo aleatório será desativado ao reproduzir uma nova lista de músicas</string>
     <string name="pref_summary_toggle_volume">Se houver espaço suficiente, mostrar os controles de volume na tela de reprodução</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Somente mostrar músicas da pasta /Music</string>
     <string name="pref_title_album_art_on_lockscreen">Exibir a capa do álbum</string>
     <string name="pref_title_album_artists_only">Navegar pelo Artista do Álbum</string>
     <string name="pref_title_album_cover_style">Tema da capa do álbum</string>
     <string name="pref_title_album_cover_transform">Pular a capa do álbum</string>
     <string name="pref_title_app_shortcuts">Colorir os atalhos do aplicativo</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Reduzir o volume durante perda de foco</string>
     <string name="pref_title_audio_fade">Transição de Áudio</string>
     <string name="pref_title_auto_download_artist_images">Baixar automaticamente as imagens dos artistas</string>
     <string name="pref_title_blacklist">Lista negra</string>
     <string name="pref_title_bluetooth_playback">Reprodução bluetooth</string>
     <string name="pref_title_blurred_album_art">Desfocar a capa do álbum</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Design de notificação clássico</string>
     <string name="pref_title_colored_app">Cor adaptável</string>
     <string name="pref_title_colored_notification">Notificações coloridas</string>
     <string name="pref_title_cross_fade">Transição (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Cor dessaturada</string>
     <string name="pref_title_expand_now_playing_panel">Mostrar tela de reprodução</string>
     <string name="pref_title_extra_controls">Controles extras</string>
@@ -372,6 +367,8 @@
     <string name="pref_title_ignore_media_store_artwork">Ignorar capas do Armazenamento de Mídia</string>
     <string name="pref_title_last_added_interval">Intervalo da playlist \"Mais recentes\"</string>
     <string name="pref_title_lock_screen">Controles em tela cheia</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Tema da tela de reprodução</string>
     <string name="pref_title_open_source_licences">Licenças de código aberto</string>
     <string name="pref_title_remember_tab">Lembrar Última Aba</string>
@@ -383,6 +380,7 @@
     <string name="pref_title_toggle_toggle_headset">Reprodução automática</string>
     <string name="pref_title_toggle_toggle_shuffle">Modo aleatório</string>
     <string name="pref_title_toggle_volume">Controles do volume</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Lista branca</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema escuro, temas da tela de reprodução, efeito carrossel e mais..</string>
@@ -397,20 +395,17 @@
     <string name="remove_cover">Remover capa</string>
     <string name="remove_from_blacklist">Remover da lista negra</string>
     <string name="remove_song_from_playlist_title">Remover música da playlist</string>
-    <string name="remove_song_x_from_playlist">
-        <![CDATA[Remover a música <b>%1$s</b> da playlist?]]>
-    </string>
+    <string name="remove_song_x_from_playlist"><![CDATA[Remover a música <b>%1$s</b> da playlist?]]></string>
     <string name="remove_songs_from_playlist_title">Remover músicas da playlist</string>
-    <string name="remove_x_songs_from_playlist">
-        <![CDATA[Remover <b>%1$d</b> músicas da playlist?]]>
-    </string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[Remover <b>%1$d</b> músicas da playlist?]]></string>
     <string name="rename_playlist_title">Renomear playlist</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Reportar um problema</string>
     <string name="report_bug">Reportar erro</string>
     <string name="reset_action">Resetar</string>
     <string name="reset_artist_image">Restaurar imagem do artista</string>
     <string name="restore">Restaurar</string>
-    <string name="restore_message">Do you want to restore backup?</string>
+    <string name="restore_message">Você deseja restaurar o ‘backup’?</string>
     <string name="restored_previous_purchase_please_restart">Compra anterior restaurada. Por favor, reinicie o aplicativo para fazer uso de todos os recursos.</string>
     <string name="restored_previous_purchases">Compras anteriores restauradas.</string>
     <string name="restoring_purchase">Restaurando compra...</string>
@@ -487,7 +482,7 @@
     <string name="tiny">Pequeno</string>
     <string name="tiny_card_style">Cartão pequeno</string>
     <string name="title">Título</string>
-    <string name="title_new_backup">New Backup</string>
+    <string name="title_new_backup">Novo Backup</string>
     <string name="today">Hoje</string>
     <string name="top_albums">Melhores álbuns</string>
     <string name="top_artists">Melhores artistas</string>
@@ -503,7 +498,7 @@
     <string name="up_next">A seguir</string>
     <string name="update_image">Atualizar imagem</string>
     <string name="updating">Atualizando...</string>
-    <string name="user_images_description">User Images</string>
+    <string name="user_images_description">Imagens do usuário</string>
     <string name="user_name">Nome do Usuário</string>
     <string name="username">Nome de Usuário</string>
     <string name="version">Versão</string>

@@ -77,6 +77,7 @@
     <string name="app_shortcut_top_tracks_short">Najczęściej odtwarzane utwory</string>
     <string name="app_widget_big_name">Duży</string>
     <string name="app_widget_card_name">Karta</string>
+    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Klasyczny</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Mały</string>
@@ -88,9 +89,7 @@
     <string name="audio_settings_summary">Dostosuj ustawienia dźwięku i equalizera</string>
     <string name="auto">Automatyczny</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title">
-        <![CDATA[Backup & Restore]]>
-    </string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Po prostu czarny</string>
@@ -143,21 +142,13 @@
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Dość ciemny</string>
     <string name="delete_playlist_title">Usuń playlistę</string>
-    <string name="delete_playlist_x">
-        <![CDATA[Usunąć playlistę <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_playlist_x"><![CDATA[Usunąć playlistę <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Usuń playlisty</string>
     <string name="delete_song_title">Usuń utwór</string>
-    <string name="delete_song_x">
-        <![CDATA[Usunąć utwór <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_song_x"><![CDATA[Usunąć utwór <b>%1$s</b>?]]></string>
     <string name="delete_songs_title">Usuń utwory</string>
-    <string name="delete_x_playlists">
-        <![CDATA[Usunąć <b>%1$d</b> playlisty?]]>
-    </string>
-    <string name="delete_x_songs">
-        <![CDATA[Usunąć <b>%1$d</b> utwory?]]>
-    </string>
+    <string name="delete_x_playlists"><![CDATA[Usunąć <b>%1$d</b> playlisty?]]></string>
+    <string name="delete_x_songs"><![CDATA[Usunąć <b>%1$d</b> utwory?]]></string>
     <string name="deleted_x_songs">Usunięto %1$d utworów.</string>
     <string name="deleting_songs">Usuwanie utworów</string>
     <string name="depth">Głębia</string>
@@ -167,9 +158,7 @@
     <string name="dialog_title_set_ringtone">Ustaw jako dzwonek</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Czy chcesz wyczyścić czarną listę?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist">
-        <![CDATA[Czy chcesz usunąć <b>%1$s</b> z czarnej listy?]]>
-    </string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Czy chcesz usunąć <b>%1$s</b> z czarnej listy?]]></string>
     <string name="donate">Wesprzyj nas</string>
     <string name="donate_summary">Jeżeli uważasz, że zasługuje na zapłatę za moją pracę możesz zostawić tu drobną sumę</string>
     <string name="donation_header">Kup mi:</string>
@@ -246,6 +235,7 @@
     <string name="my_name">Imię</string>
     <string name="my_top_tracks">Najczęściej odtwarzane</string>
     <string name="never">Nigdy</string>
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">Nowa playlista</string>
     <string name="new_start_directory">%s jest nowym folderem startowym.</string>
     <string name="next_song">Następny utwór</string>
@@ -263,9 +253,7 @@
     <string name="no_songs">Brak utworów</string>
     <string name="normal">Normalne</string>
     <string name="normal_lyrics">Normalny tekst utworu</string>
-    <string name="not_listed_in_media_store">
-        <![CDATA[<b>%s</b> nie znajduje się w magazynie multimediów.]]>
-    </string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> nie znajduje się w magazynie multimediów.]]></string>
     <string name="not_recently_played">Ostatnio nieodtwarzane</string>
     <string name="nothing_to_scan">Brak elementów do przeskanowania.</string>
     <string name="nothing_to_see">Pusto</string>
@@ -278,6 +266,7 @@
     <string name="only_on_wifi">Tylko przez Wi-Fi</string>
     <string name="other_settings_summary">Zaawansowane funkcje eksperymentalne</string>
     <string name="others">Inne ustawienia</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Hasło</string>
     <string name="past_three_months">Ostatnie 3 miesiące</string>
     <string name="paste_lyrics_here">Wklej tekst tutaj</string>
@@ -293,6 +282,9 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Śledź stronę Retro Music na Pintrescie po więcej inspiracji</string>
     <string name="plain">Wyraźny</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Powiadomienie odtwarzania pokazuje przyciski odtwórz/zatrzymaj itp.</string>
     <string name="playing_notification_name">Powiadomienie odtwarzania</string>
     <string name="playlist_is_empty">Playlista jest pusta</string>
@@ -348,22 +340,26 @@
     <string name="pref_summary_toggle_headset">Rozpocznij odtwarzanie po podłączeniu zestawu słuchawkowego</string>
     <string name="pref_summary_toggle_shuffle">Odtwarzanie losowe zostanie wyłączone podczas odtwarzania nowej listy utworów</string>
     <string name="pref_summary_toggle_volume">Pokaż sterowanie głośnością w odtwarzaczu, gdy jest wystarczająco wolnego miejsca</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Pokaż okładkę albumu</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Wygląd okładki albumu</string>
     <string name="pref_title_album_cover_transform">Przesuwanie okładki albumu</string>
     <string name="pref_title_app_shortcuts">Kolorowe skróty aplikacji</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Zmniejsz głośność przy braku skupienia</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Automatycznie pobierz grafiki wykonawców</string>
     <string name="pref_title_blacklist">Czarna lista</string>
     <string name="pref_title_bluetooth_playback">Odtwarzanie przez Bluetooth</string>
     <string name="pref_title_blurred_album_art">Rozmyj okładkę albumu</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Klasyczny wygląd powiadomień</string>
     <string name="pref_title_colored_app">Kolor adaptacyjny</string>
     <string name="pref_title_colored_notification">Kolorowe powiadomienia</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Mniej nasycony kolor</string>
     <string name="pref_title_expand_now_playing_panel">Wyświetl teraz odtwarzane</string>
     <string name="pref_title_extra_controls">Dodatkowe przyciski kontroli</string>
@@ -376,6 +372,8 @@
     <string name="pref_title_ignore_media_store_artwork">Ignoruj okładki z Media Store</string>
     <string name="pref_title_last_added_interval">Interwał ostatnio dodanych playlist</string>
     <string name="pref_title_lock_screen">Sterowanie pełnoekranowe</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Wyglądodtwarzacza</string>
     <string name="pref_title_open_source_licences">Licencje typu Open Source</string>
     <string name="pref_title_remember_tab">Zapamiętaj ostatnią kartę</string>
@@ -387,6 +385,7 @@
     <string name="pref_title_toggle_toggle_headset">Autoodtwarzanie</string>
     <string name="pref_title_toggle_toggle_shuffle">Tryb losowy</string>
     <string name="pref_title_toggle_volume">Sterowanie głośnością</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Efekt karuzeli, tryb czarny i wiele więcej...</string>
@@ -401,14 +400,11 @@
     <string name="remove_cover">Usuń okładkę</string>
     <string name="remove_from_blacklist">Usuń z czarnej listy</string>
     <string name="remove_song_from_playlist_title">Usuń utwór z playlisty</string>
-    <string name="remove_song_x_from_playlist">
-        <![CDATA[Usunąć utwór <b>%1$s</b> z playlisty?]]>
-    </string>
+    <string name="remove_song_x_from_playlist"><![CDATA[Usunąć utwór <b>%1$s</b> z playlisty?]]></string>
     <string name="remove_songs_from_playlist_title">Usuń utwory z playlisty</string>
-    <string name="remove_x_songs_from_playlist">
-        <![CDATA[Usunąć te utwory <b>%1$d</b> z playlisty?]]>
-    </string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[Usunąć te utwory <b>%1$d</b> z playlisty?]]></string>
     <string name="rename_playlist_title">Zmień nazwę playlisty</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Zgłoś problem</string>
     <string name="report_bug">Zgłoś błąd</string>
     <string name="reset_action">Zresetuj</string>

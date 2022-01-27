@@ -75,6 +75,7 @@
     <string name="app_shortcut_top_tracks_short">Top cântece</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Card</string>
+    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Classic</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Mic</string>
@@ -232,6 +233,7 @@
     <string name="my_name">Numele Meu</string>
     <string name="my_top_tracks">Top cântece redate</string>
     <string name="never">Niciodată</string>
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">Playlist nou</string>
     <string name="new_start_directory">%s a fost setat ca noul registru principal.</string>
     <string name="next_song">Next Song</string>
@@ -262,6 +264,7 @@
     <string name="only_on_wifi">Doar pe Wi-Fi</string>
     <string name="other_settings_summary">Advanced testing features</string>
     <string name="others">Altele</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Password</string>
     <string name="past_three_months">Ultimele 3 luni</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
@@ -277,6 +280,9 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
     <string name="plain">Simplu</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Notificarea de redare oferă acțiuni de redare / pauză etc.</string>
     <string name="playing_notification_name">Notificarea de redare</string>
     <string name="playlist_is_empty">Playlist-ul este gol</string>
@@ -301,6 +307,7 @@
     <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
+    <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">Folosește coperta de album curentă ca imagine de fundal pe ecranul de blocare.</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Notificațiile, navigarea etc.</string>
@@ -331,22 +338,26 @@
     <string name="pref_summary_toggle_headset">Începe redarea imediat ce sunt conectate căștile.</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">Dacă aveți spațiu pe ecranul de redare, activați controalele de volum</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Afișați coperta albumului</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Comenzi rapide colorate</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Reduce volumul la pierderea focalizării</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Descărcați automat imagini ale artistului</string>
     <string name="pref_title_blacklist">Lista neagră</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Spălăcește coperta albumului</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Design classic de notificare</string>
     <string name="pref_title_colored_app">Culoare adaptivă</string>
     <string name="pref_title_colored_notification">Notificare colorată</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
@@ -359,6 +370,8 @@
     <string name="pref_title_ignore_media_store_artwork">Ignoră copertele de pe Magazinul Media</string>
     <string name="pref_title_last_added_interval">Ultimul interval de playlist adăugat</string>
     <string name="pref_title_lock_screen">Comenzi ecran complet</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Aspect</string>
     <string name="pref_title_open_source_licences">Licențe open source</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
@@ -370,6 +383,7 @@
     <string name="pref_title_toggle_toggle_headset">Redare automată</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Controale volum</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
@@ -388,6 +402,7 @@
     <string name="remove_songs_from_playlist_title">Eliminare melodii din lista de redare</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[Eliminaţi <b>%1$d</b> melodii din lista de redare?]]></string>
     <string name="rename_playlist_title">Redenumiţi lista de redare</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Report an issue</string>
     <string name="report_bug">Report bug</string>
     <string name="reset_action">Reset</string>
