@@ -73,6 +73,7 @@
     <string name="app_shortcut_top_tracks_short">टॉप गीत</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">रेट्रो म्यूजिक - कार्ड</string>
+    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">रेट्रो म्यूजिक - क्लासिक</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">छोटा</string>
@@ -230,6 +231,7 @@
     <string name="my_name">Name</string>
     <string name="my_top_tracks">Most played</string>
     <string name="never">Never</string>
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">नई प्लेलिस्ट</string>
     <string name="new_start_directory">%s is the new start directory.</string>
     <string name="next_song">Next Song</string>
@@ -260,6 +262,7 @@
     <string name="only_on_wifi">Only on Wi-Fi</string>
     <string name="other_settings_summary">Advanced testing features</string>
     <string name="others">Other</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Password</string>
     <string name="past_three_months">Past 3 months</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
@@ -275,6 +278,9 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
     <string name="plain">Plain</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">The playing notification provides actions for play/pause etc.</string>
     <string name="playing_notification_name">Playing notification</string>
     <string name="playlist_is_empty">Playlist is empty</string>
@@ -299,6 +305,7 @@
     <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
+    <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
@@ -329,22 +336,26 @@
     <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
     <string name="pref_title_blacklist">ब्लैकलिस्ट</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Blur album cover</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Classic notification design</string>
     <string name="pref_title_colored_app">Adaptive color</string>
     <string name="pref_title_colored_notification">Colored notification</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
@@ -357,6 +368,8 @@
     <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
     <string name="pref_title_last_added_interval">Last added playlist interval</string>
     <string name="pref_title_lock_screen">Fullscreen controls</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
     <string name="pref_title_open_source_licences">Open source licences</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
@@ -368,6 +381,7 @@
     <string name="pref_title_toggle_toggle_headset">Auto-play</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Volume controls</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
@@ -386,6 +400,7 @@
     <string name="remove_songs_from_playlist_title">Remove songs from playlist</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[Remove <b>%1$d</b> songs from the playlist?]]></string>
     <string name="rename_playlist_title">Rename playlist</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Report an issue</string>
     <string name="report_bug">Report bug</string>
     <string name="reset_action">Reset</string>

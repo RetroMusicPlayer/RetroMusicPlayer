@@ -71,6 +71,7 @@
     <string name="app_shortcut_top_tracks_short">자주 재생한 음악</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">카드</string>
+    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">클래식</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">소형</string>
@@ -228,6 +229,7 @@
     <string name="my_name">내 이름</string>
     <string name="my_top_tracks">자주 재생한 음악</string>
     <string name="never">아니오</string>
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">새 재생목록</string>
     <string name="new_start_directory">이제 %s 디렉터리가 새 초기 디렉터리입니다.</string>
     <string name="next_song">Next Song</string>
@@ -258,6 +260,7 @@
     <string name="only_on_wifi">Wi-Fi에서만</string>
     <string name="other_settings_summary">Advanced testing features</string>
     <string name="others">기타</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Password</string>
     <string name="past_three_months">이전 3개월</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
@@ -273,6 +276,9 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
     <string name="plain">단색</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">재생 알림은 재생/일시 정지 등에 대한 작업을 제공합니다.</string>
     <string name="playing_notification_name">재생 중 알림</string>
     <string name="playlist_is_empty">재생목록이 비어 있음</string>
@@ -297,6 +303,7 @@
     <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
+    <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">현재 재생 중인 노래의 앨범 커버를 잠금 화면 배경화면으로 사용합니다.</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">알림, 탐색 등</string>
@@ -327,22 +334,26 @@
     <string name="pref_summary_toggle_headset">이어폰이 연결되면 바로 음악을 재생합니다.</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">음악 재생 화면에서 공간이 있을 시 볼륨 컨트롤을 보입니다</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">앨범 커버 표시</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">앱 바로가기 색상 틴트</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">알림이 올 때 볼륨 감소</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">아티스트 이미지 자동 다운로드</string>
     <string name="pref_title_blacklist">블랙리스트</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">앨범 커버 블러</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">클래식 알림 디자인</string>
     <string name="pref_title_colored_app">반응형 색상 지정</string>
     <string name="pref_title_colored_notification">알림 색상 틴트</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
@@ -355,6 +366,8 @@
     <string name="pref_title_ignore_media_store_artwork">미디어 저장소 커버 무시</string>
     <string name="pref_title_last_added_interval">최근 추가된 음악 간격 지정</string>
     <string name="pref_title_lock_screen">전체 화면 컨트롤</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">테마</string>
     <string name="pref_title_open_source_licences">오픈소스 라이선스</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
@@ -366,6 +379,7 @@
     <string name="pref_title_toggle_toggle_headset">자동 재생</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">볼륨 조절</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
@@ -384,6 +398,7 @@
     <string name="remove_songs_from_playlist_title">노래를 재생목록에서 삭제</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[<b>%1$d</b>개의 노래를 재생목록에서 삭제하시겠습니까?]]></string>
     <string name="rename_playlist_title">재생목록 이름 바꾸기</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Report an issue</string>
     <string name="report_bug">Report bug</string>
     <string name="reset_action">Reset</string>

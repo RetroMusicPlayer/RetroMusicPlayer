@@ -71,6 +71,7 @@
     <string name="app_shortcut_top_tracks_short">Bản nhạc hàng đầu</string>
     <string name="app_widget_big_name">Hình ảnh đầy đủ</string>
     <string name="app_widget_card_name">Thẻ</string>
+    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Cổ điển</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Nhỏ</string>
@@ -82,9 +83,7 @@
     <string name="audio_settings_summary">Thay đổi cài đặt âm thanh và điều chỉnh các điều khiển bộ chỉnh âm</string>
     <string name="auto">Tự động</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title">
-        <![CDATA[Backup & Restore]]>
-    </string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Tiểu sử</string>
     <string name="black_theme_name">Đen hoàn toàn</string>
@@ -138,21 +137,13 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">Xám đen</string>
     <string name="delete_playlist_title">Xoá danh sách phát</string>
-    <string name="delete_playlist_x">
-        <![CDATA[Xoá danh sách phát <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_playlist_x"><![CDATA[Xoá danh sách phát <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Xoá danh sách phát</string>
     <string name="delete_song_title">Xoá bài hát</string>
-    <string name="delete_song_x">
-        <![CDATA[Xoá bài hát <b>%1$s</b>?]]>
-    </string>
+    <string name="delete_song_x"><![CDATA[Xoá bài hát <b>%1$s</b>?]]></string>
     <string name="delete_songs_title">Xoá bài hát</string>
-    <string name="delete_x_playlists">
-        <![CDATA[Xoá <b>%1$d</b> danh sách phát?]]>
-    </string>
-    <string name="delete_x_songs">
-        <![CDATA[Xoá <b>%1$d</b> bài hát?]]>
-    </string>
+    <string name="delete_x_playlists"><![CDATA[Xoá <b>%1$d</b> danh sách phát?]]></string>
+    <string name="delete_x_songs"><![CDATA[Xoá <b>%1$d</b> bài hát?]]></string>
     <string name="deleted_x_songs">Đã xoá %1$d bài hát.</string>
     <string name="deleting_songs">Xóa Các bài hát</string>
     <string name="depth">Độ sâu</string>
@@ -162,9 +153,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="dialog_title_set_ringtone">Cài làm nhạc chuông</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Bạn có muốn xóa danh sách đen?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist">
-        <![CDATA[Bạn có muốn gỡ <b>%1$s</b> khỏi danh sách đen?]]>
-    </string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Bạn có muốn gỡ <b>%1$s</b> khỏi danh sách đen?]]></string>
     <string name="donate">Ủng hộ</string>
     <string name="donate_summary">Nếu bạn nghĩ rằng tôi xứng đáng được thưởng cho công việc này, bạn có thể để lại một số tiền ở đây. Cảm ơn bạn! :D</string>
     <string name="donation_header">Mua cho tôi một:</string>
@@ -241,6 +230,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="my_name">Tên</string>
     <string name="my_top_tracks">Phát nhiều nhất</string>
     <string name="never">Không bao giờ</string>
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">Danh sách phát mới</string>
     <string name="new_start_directory">%s là trang bắt đầu mới.</string>
     <string name="next_song">Bài tiếp theo</string>
@@ -258,9 +248,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="no_songs">Không có bài hát</string>
     <string name="normal">Tiêu chuẩn</string>
     <string name="normal_lyrics">Lời chuẩn</string>
-    <string name="not_listed_in_media_store">
-        <![CDATA[<b>%s</b> không được liệt kê trong thư mục nhạc.]]>
-    </string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> không được liệt kê trong thư mục nhạc.]]></string>
     <string name="not_recently_played">Không phát gần đây</string>
     <string name="nothing_to_scan">Không có gì để quét.</string>
     <string name="nothing_to_see">Không có gì để hiển thị</string>
@@ -273,6 +261,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="only_on_wifi">Chỉ khi dùng Wi-Fi</string>
     <string name="other_settings_summary">Tính năng nâng cao đang kiểm tra</string>
     <string name="others">Khác</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Mật khẩu</string>
     <string name="past_three_months">Mỗi tháng</string>
     <string name="paste_lyrics_here">Dán lời ở đây</string>
@@ -288,6 +277,9 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Theo dõi trang Pinterest để lấy cảm hứng thiết kế Retro Music</string>
     <string name="plain">Giản dị</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Thanh thông báo đang phát sẽ cho phép bạn phát/tạm dừng, chuyển bài, v.v.</string>
     <string name="playing_notification_name">Thông báo đang phát</string>
     <string name="playlist_is_empty">Danh sách phát trống</string>
@@ -343,22 +335,26 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_toggle_headset">Tự động phát nhạc khi kết nối tai nghe</string>
     <string name="pref_summary_toggle_shuffle">Chế độ phát ngẫu nhiên sẽ tắt khi phát danh sách bài hát mới</string>
     <string name="pref_summary_toggle_volume">Hiện thanh điều chỉnh âm lượng nếu có không gian trống trong màn hình phát</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Chỉ hiện thị nhạc từ /Thư mục Nhạc</string>
     <string name="pref_title_album_art_on_lockscreen">Hiện ảnh bìa album</string>
     <string name="pref_title_album_artists_only">Điều hướng theo Album Nghệ sĩ</string>
     <string name="pref_title_album_cover_style">Chủ đề bìa album</string>
     <string name="pref_title_album_cover_transform">Kiểu bìa album đang phát</string>
     <string name="pref_title_app_shortcuts">Đổi màu lối tắt ứng dụng</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Giảm âm lượng khi có âm báo</string>
     <string name="pref_title_audio_fade">Làm mượt âm thanh</string>
     <string name="pref_title_auto_download_artist_images">Tự động tải xuống hình ảnh nghệ sĩ</string>
     <string name="pref_title_blacklist">Danh sách đen</string>
     <string name="pref_title_bluetooth_playback">Tự động phát Bluetooth</string>
     <string name="pref_title_blurred_album_art">Làm mờ bìa album</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Thiết kế thông báo cổ điển</string>
     <string name="pref_title_colored_app">Màu sắc thích nghi</string>
     <string name="pref_title_colored_notification">Đổi màu thông báo</string>
     <string name="pref_title_cross_fade">Khoảng lặng (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Màu sắc tương thích</string>
     <string name="pref_title_expand_now_playing_panel">Hiển thị màn hình phát nhạc</string>
     <string name="pref_title_extra_controls">Điều khiển bổ sung</string>
@@ -371,6 +367,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_ignore_media_store_artwork">Ảnh bìa chất lượng cao</string>
     <string name="pref_title_last_added_interval">Làm mới danh sách thêm gần đây sau</string>
     <string name="pref_title_lock_screen">Điều khiển toàn màn hình.</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Giao diện màn hình phát</string>
     <string name="pref_title_open_source_licences">Giấy phép nguồn mở</string>
     <string name="pref_title_remember_tab">Ghi nhớ tab cuối cùng</string>
@@ -382,6 +380,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_toggle_toggle_headset">Tự động phát</string>
     <string name="pref_title_toggle_toggle_shuffle">Chế độ ngẫu nhiên</string>
     <string name="pref_title_toggle_volume">Điều khiển âm lượng</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Danh sách trắng</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Chủ đề đen, Chủ đề màn hình phát, Hiệu ứng băng chuyền, v.v.</string>
@@ -396,14 +395,11 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="remove_cover">Xoá ảnh bìa</string>
     <string name="remove_from_blacklist">Xóa khỏi danh sách đen</string>
     <string name="remove_song_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
-    <string name="remove_song_x_from_playlist">
-        <![CDATA[Xoá bài hát <b>%1$s</b> khỏi danh sách phát?]]>
-    </string>
+    <string name="remove_song_x_from_playlist"><![CDATA[Xoá bài hát <b>%1$s</b> khỏi danh sách phát?]]></string>
     <string name="remove_songs_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
-    <string name="remove_x_songs_from_playlist">
-        <![CDATA[Xóa <b>%1$d</b> bài hát khỏi danh sách phát?]]>
-    </string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[Xóa <b>%1$d</b> bài hát khỏi danh sách phát?]]></string>
     <string name="rename_playlist_title">Đổi tên danh sách phát</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Báo cáo vấn đề</string>
     <string name="report_bug">Báo cáo lỗi</string>
     <string name="reset_action">Cài lại</string>
