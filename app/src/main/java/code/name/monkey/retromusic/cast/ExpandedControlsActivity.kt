@@ -10,10 +10,10 @@ import com.google.android.gms.cast.framework.media.widget.ExpandedControllerActi
 
 
 class ExpandedControlsActivity : ExpandedControllerActivity() {
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.menu_cast, menu)
-        CastButtonFactory.setUpMediaRouteButton(this, menu!!, R.id.action_cast)
+        CastButtonFactory.setUpMediaRouteButton(this, menu, R.id.action_cast)
         return true
     }
 }
