@@ -15,12 +15,10 @@
 package code.name.monkey.retromusic.helper
 
 import android.annotation.SuppressLint
-import android.annotation.TargetApi
 import android.app.Activity
 import android.content.*
 import android.database.Cursor
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.os.IBinder
 import android.provider.DocumentsContract
@@ -440,12 +438,14 @@ object MusicPlayerRemote : KoinComponent {
                     } else if (uri.authority == "media") {
                         songId = uri.lastPathSegment
                     }
-                    if (songId != null) {
-                        songs = songRepository.songs(songId)
+                    songs = if (songId != null) {
+                        songRepository.songs(songId)
+                    } else {
+                        songRepository.songsIgnoreBlacklist(uri)
                     }
                 }
             }
-            if (songs == null) {
+            if (songs == null || songs.isEmpty()) {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
                     songFile = File(
@@ -459,10 +459,10 @@ object MusicPlayerRemote : KoinComponent {
                         songFile = File(path)
                 }
                 if (songFile == null && uri.path != null) {
-                    songFile = File(uri.path)
+                    songFile = File(uri.path!!)
                 }
                 if (songFile != null) {
-                    songs = songRepository.songsByFilePath(songFile.absolutePath)
+                    songs = songRepository.songsByFilePath(songFile.absolutePath, true)
                 }
             }
             if (songs != null && songs.isNotEmpty()) {
@@ -474,7 +474,6 @@ object MusicPlayerRemote : KoinComponent {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     private fun getSongIdFromMediaProvider(uri: Uri): String {
         return DocumentsContract.getDocumentId(uri).split(":".toRegex())
             .dropLastWhile { it.isEmpty() }.toTypedArray()[1]

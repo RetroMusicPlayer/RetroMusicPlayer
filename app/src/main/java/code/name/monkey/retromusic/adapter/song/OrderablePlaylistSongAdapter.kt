@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.adapter.song
 
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.ThemeStore
@@ -129,7 +130,7 @@ class OrderablePlaylistSongAdapter(
         }
 
         init {
-            dragView?.visibility = View.VISIBLE
+            dragView?.isVisible = true
         }
 
         override fun onClick(v: View?) {

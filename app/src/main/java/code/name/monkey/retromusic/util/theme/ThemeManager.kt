@@ -1,8 +1,8 @@
 package code.name.monkey.retromusic.util.theme
 
-import android.content.Context
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatDelegate
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.generalThemeValue
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -11,23 +11,19 @@ import code.name.monkey.retromusic.util.theme.ThemeMode.*
 object ThemeManager {
 
     @StyleRes
-    fun getThemeResValue(
-        context: Context
-    ): Int =
+    fun getThemeResValue(): Int =
         if (PreferenceUtil.materialYou) {
             R.style.Theme_RetroMusic_MD3
         } else {
-            when (context.generalThemeValue) {
+            when (App.getContext().generalThemeValue) {
                 LIGHT -> R.style.Theme_RetroMusic_Light
                 DARK -> R.style.Theme_RetroMusic_Base
                 BLACK -> R.style.Theme_RetroMusic_Black
                 AUTO -> R.style.Theme_RetroMusic_FollowSystem
+            }
         }
-    }
 
-    fun getNightMode(
-        context: Context
-    ): Int = when (context.generalThemeValue) {
+    fun getNightMode(): Int = when (App.getContext().generalThemeValue) {
         LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
         DARK -> AppCompatDelegate.MODE_NIGHT_YES
         BLACK -> {

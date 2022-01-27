@@ -15,6 +15,8 @@
 package code.name.monkey.retromusic.transform
 
 import android.view.View
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.viewpager.widget.ViewPager
 import kotlin.math.abs
 
@@ -25,9 +27,9 @@ class VerticalFlipTransformation : ViewPager.PageTransformer {
         page.cameraDistance = 100000f
 
         if (position < 0.5 && position > -0.5) {
-            page.visibility = View.VISIBLE
+            page.isVisible = true
         } else {
-            page.visibility = View.INVISIBLE
+            page.isInvisible = true
         }
 
 

@@ -60,11 +60,13 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
             _binding?.root?.setBackgroundColor(color.backgroundColor)
         }
         animator.start()
-        ToolbarContentTintHelper.colorizeToolbar(
-            binding.playerToolbar,
-            color.secondaryTextColor,
-            requireActivity()
-        )
+        binding.playerToolbar.post {
+            ToolbarContentTintHelper.colorizeToolbar(
+                binding.playerToolbar,
+                color.secondaryTextColor,
+                requireActivity()
+            )
+        }
     }
 
     override fun onFavoriteToggled() {

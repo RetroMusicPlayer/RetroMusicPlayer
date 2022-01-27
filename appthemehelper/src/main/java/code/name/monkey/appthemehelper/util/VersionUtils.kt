@@ -36,6 +36,13 @@ object VersionUtils {
     }
 
     /**
+     * @return true if device is running API >= 27
+     */
+    fun hasOreoMR1(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1
+    }
+
+    /**
      * @return true if device is running API >= 28
      */
     fun hasP(): Boolean {

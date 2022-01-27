@@ -84,7 +84,7 @@
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Wykonawca</string>
     <string name="artists">Wykonawcy</string>
-    <string name="audio_fade_duration">Audio fade duration</string>
+    <string name="audio_fade_duration">Czas zanikania dźwięku</string>
     <string name="audio_focus_denied">Odrzucono fokus dźwiękowy.</string>
     <string name="audio_settings_summary">Dostosuj ustawienia dźwięku i equalizera</string>
     <string name="auto">Automatyczny</string>
@@ -309,7 +309,7 @@
     <string name="pref_keep_screen_on_summary">Ta opcja może mieć wpływ na zużycie baterii</string>
     <string name="pref_keep_screen_on_title">Pozostaw ekran włączony</string>
     <string name="pref_language_name">Wybierz język</string>
-    <string name="pref_snow_fall_title">Snow fall effect</string>
+    <string name="pref_snow_fall_title">Efekt spadającego śniegu</string>
     <string name="pref_summary_album_art_on_lockscreen">Używaj okładki aktualnie odtwarzanego albumu jako tła ekranu blokady</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Zmniejsz głośność kiedy dostajesz powiadomienia</string>
@@ -376,9 +376,9 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Wyglądodtwarzacza</string>
     <string name="pref_title_open_source_licences">Licencje typu Open Source</string>
-    <string name="pref_title_remember_tab">Remember last tab</string>
+    <string name="pref_title_remember_tab">Zapamiętaj ostatnią kartę</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
-    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_suggestions">Pokaż sugestie</string>
     <string name="pref_title_tab_text_mode">Wygląd tytułów kart</string>
     <string name="pref_title_toggle_carousel_effect">Efekt karuzeli</string>
     <string name="pref_title_toggle_full_screen">Aplikacja pełnoekranowa</string>

@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.extensions
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 fun DialogFragment.materialDialog(title: Int): MaterialAlertDialogBuilder {

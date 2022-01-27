@@ -118,7 +118,7 @@ object LyricUtil {
         return "$lrcRootPath$title - $artist.lrc"
     }
 
-    private fun getLrcOriginalPath(filePath: String): String {
+     fun getLrcOriginalPath(filePath: String): String {
         return filePath.replace(filePath.substring(filePath.lastIndexOf(".") + 1), "lrc")
     }
 

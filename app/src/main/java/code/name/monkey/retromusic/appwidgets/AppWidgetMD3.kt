@@ -208,7 +208,13 @@ class AppWidgetMD3 : BaseAppWidget() {
 
                         val image = getAlbumArtDrawable(service.resources, bitmap)
                         val roundedBitmap = createRoundedBitmap(
-                            image, imageSize, imageSize, cardRadius, cardRadius, cardRadius, cardRadius
+                            image,
+                            imageSize,
+                            imageSize,
+                            cardRadius,
+                            cardRadius,
+                            cardRadius,
+                            cardRadius
                         )
                         appWidgetView.setImageViewBitmap(R.id.image, roundedBitmap)
 

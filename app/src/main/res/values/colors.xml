@@ -35,4 +35,7 @@
     <color name="bottomSheetColorBlack">#000000</color>
 
     <color name="bottomSheetColor">#FFFFFF</color>
+    <color name="widget_md3_bg_color">@color/lighterColorSurface</color>
+    <color name="widget_circle_button_color">@color/md_indigo_A400</color>
+    <color name="widget_md3_button_bg_color">@color/lighterColorSurface</color>
 </resources>

@@ -16,8 +16,10 @@ package code.name.monkey.retromusic.service;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.PlaybackParams;
 import android.media.audiofx.AudioEffect;
 import android.net.Uri;
 import android.os.PowerManager;
@@ -26,29 +28,37 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
+import code.name.monkey.appthemehelper.util.VersionUtils;
+import code.name.monkey.retromusic.ConstantsKt;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
-/** @author Andrew Neal, Karim Abou Zeid (kabouzeid) */
+/**
+ * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
+ */
 public class MultiPlayer
-        implements Playback, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
+        implements Playback, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener, SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String TAG = MultiPlayer.class.getSimpleName();
 
     private MediaPlayer mCurrentMediaPlayer = new MediaPlayer();
     private MediaPlayer mNextMediaPlayer;
 
     private final Context context;
-  @Nullable
-  private Playback.PlaybackCallbacks callbacks;
+    @Nullable
+    private Playback.PlaybackCallbacks callbacks;
 
     private boolean mIsInitialized = false;
 
-    /** Constructor of <code>MultiPlayer</code> */
+    /**
+     * Constructor of <code>MultiPlayer</code>
+     */
     MultiPlayer(final Context context) {
         this.context = context;
         mCurrentMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
+        PreferenceManager.getDefaultSharedPreferences(context).registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -67,7 +77,7 @@ public class MultiPlayer
 
     /**
      * @param player The {@link MediaPlayer} to use
-     * @param path The path of the file, or the http/rtsp URL of the stream you want to play
+     * @param path   The path of the file, or the http/rtsp URL of the stream you want to play
      * @return True if the <code>player</code> has been prepared and is ready to play, false otherwise
      */
     private boolean setDataSourceImpl(@NonNull final MediaPlayer player, @NonNull final String path) {
@@ -82,6 +92,7 @@ public class MultiPlayer
             } else {
                 player.setDataSource(path);
             }
+            setPlaybackSpeedPitch(player);
             player.setAudioStreamType(AudioManager.STREAM_MUSIC);
             player.prepare();
         } catch (Exception e) {
@@ -155,13 +166,17 @@ public class MultiPlayer
         this.callbacks = callbacks;
     }
 
-    /** @return True if the player is ready to go, false otherwise */
+    /**
+     * @return True if the player is ready to go, false otherwise
+     */
     @Override
     public boolean isInitialized() {
         return mIsInitialized;
     }
 
-    /** Starts or resumes playback. */
+    /**
+     * Starts or resumes playback.
+     */
     @Override
     public boolean start() {
         try {
@@ -172,14 +187,18 @@ public class MultiPlayer
         }
     }
 
-    /** Resets the MediaPlayer to its uninitialized state. */
+    /**
+     * Resets the MediaPlayer to its uninitialized state.
+     */
     @Override
     public void stop() {
         mCurrentMediaPlayer.reset();
         mIsInitialized = false;
     }
 
-    /** Releases resources associated with this MediaPlayer object. */
+    /**
+     * Releases resources associated with this MediaPlayer object.
+     */
     @Override
     public void release() {
         stop();
@@ -187,9 +206,12 @@ public class MultiPlayer
         if (mNextMediaPlayer != null) {
             mNextMediaPlayer.release();
         }
+        PreferenceManager.getDefaultSharedPreferences(context).unregisterOnSharedPreferenceChangeListener(this);
     }
 
-    /** Pauses playback. Call start() to resume. */
+    /**
+     * Pauses playback. Call start() to resume.
+     */
     @Override
     public boolean pause() {
         try {
@@ -200,7 +222,9 @@ public class MultiPlayer
         }
     }
 
-    /** Checks whether the MultiPlayer is playing. */
+    /**
+     * Checks whether the MultiPlayer is playing.
+     */
     @Override
     public boolean isPlaying() {
         return mIsInitialized && mCurrentMediaPlayer.isPlaying();
@@ -291,7 +315,9 @@ public class MultiPlayer
         return mCurrentMediaPlayer.getAudioSessionId();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean onError(final MediaPlayer mp, final int what, final int extra) {
         mIsInitialized = false;
@@ -308,7 +334,9 @@ public class MultiPlayer
         return false;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onCompletion(final MediaPlayer mp) {
         if (mp.equals(mCurrentMediaPlayer) && mNextMediaPlayer != null) {
@@ -323,6 +351,26 @@ public class MultiPlayer
         }
     }
 
-  @Override
-  public void setCrossFadeDuration(int duration) { }
+    @Override
+    public void setCrossFadeDuration(int duration) {
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(ConstantsKt.PLAYBACK_SPEED) || key.equals(ConstantsKt.PLAYBACK_PITCH)) {
+            setPlaybackSpeedPitch(mCurrentMediaPlayer);
+        }
+    }
+
+    public void setPlaybackSpeedPitch(MediaPlayer mp) {
+        if (VersionUtils.INSTANCE.hasMarshmallow()) {
+            boolean wasPlaying = mp.isPlaying();
+            mp.setPlaybackParams(new PlaybackParams()
+                    .setSpeed(PreferenceUtil.INSTANCE.getPlaybackSpeed())
+                    .setPitch(PreferenceUtil.INSTANCE.getPlaybackPitch()));
+            if (!wasPlaying) {
+                if (mp.isPlaying()) mp.pause();
+            }
+        }
+    }
 }

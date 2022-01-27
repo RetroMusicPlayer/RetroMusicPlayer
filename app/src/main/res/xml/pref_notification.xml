@@ -13,7 +13,6 @@
         android:defaultValue="true"
         android:key="colored_notification"
         android:layout="@layout/list_item_view_switch"
-        app:isPreferenceVisible="@bool/colored_notification_available"
         android:summary="@string/pref_summary_colored_notification"
         android:title="@string/pref_title_colored_notification" />
 

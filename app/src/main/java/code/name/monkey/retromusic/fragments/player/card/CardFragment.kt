@@ -96,11 +96,13 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
     }
 
     private fun setUpPlayerToolbar() {
-        binding.playerToolbar.inflateMenu(R.menu.menu_player)
-        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        binding.playerToolbar.setOnMenuItemClickListener(this)
+        binding.playerToolbar.apply {
+            inflateMenu(R.menu.menu_player)
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
+            setOnMenuItemClickListener(this@CardFragment)
 
-        ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
+            ToolbarContentTintHelper.colorizeToolbar(this, Color.WHITE, activity)
+        }
     }
 
     override fun onServiceConnected() {

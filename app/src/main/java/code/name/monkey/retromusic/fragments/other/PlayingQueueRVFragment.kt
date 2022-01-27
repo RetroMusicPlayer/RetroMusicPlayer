@@ -51,7 +51,7 @@ class PlayingQueueRVFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Line
     }
 
     private fun setupToolbar() {
-        toolbar().apply {
+        toolbar.apply {
             setNavigationOnClickListener {
                 findNavController().navigateUp()
             }

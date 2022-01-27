@@ -32,14 +32,11 @@ import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dip
-import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialFadeThrough
-import com.google.android.material.transition.MaterialSharedAxis
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 
@@ -60,7 +57,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         view.doOnPreDraw { startPostponedEnterTransition() }
         enterTransition = MaterialFadeThrough().addTarget(binding.recyclerView)
         reenterTransition = MaterialFadeThrough().addTarget(binding.recyclerView)
-        mainActivity.setSupportActionBar(binding.toolbar)
+        mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         initLayoutManager()
         initAdapter()
@@ -99,25 +96,18 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     open fun onShuffleClicked() {
     }
 
-    fun toolbar(): Toolbar {
-        return binding.toolbar
-    }
+    val toolbar: Toolbar get() = binding.appBarLayout.toolbar
 
     private fun setupToolbar() {
-        binding.toolbar.setNavigationOnClickListener {
-            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(requireView())
-            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+        toolbar.setNavigationOnClickListener {
             findNavController().navigate(
-                R.id.searchFragment,
+                R.id.action_search,
                 null,
                 navOptions
             )
         }
         val appName = resources.getString(titleRes)
-        binding.appNameText.text = appName
-        binding.toolbarContainer.drawNextToNavbar()
-        binding.appBarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
+        binding.appBarLayout.title = appName
     }
 
     abstract val titleRes: Int
@@ -155,17 +145,19 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     private fun checkIsEmpty() {
         binding.emptyText.setText(emptyMessage)
-        binding.empty.visibility = if (adapter!!.itemCount == 0) View.VISIBLE else View.GONE
+        binding.empty.isVisible = adapter!!.itemCount == 0
     }
 
     private fun checkForPadding() {
         val itemCount: Int = adapter?.itemCount ?: 0
 
-        if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
-            binding.recyclerView.updatePadding(bottom = dip(R.dimen.mini_player_height_expanded))
-        } else {
-            binding.recyclerView.updatePadding(bottom = dip(R.dimen.mini_player_height))
-        }
+        binding.recyclerView.updatePadding(
+            bottom = if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
+                dip(R.dimen.mini_player_height_expanded)
+            } else {
+                dip(R.dimen.bottom_nav_height)
+            }
+        )
     }
 
     private fun initLayoutManager() {
@@ -209,7 +201,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -217,9 +209,9 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         inflater.inflate(R.menu.menu_main, menu)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
-            binding.toolbar,
+            toolbar,
             menu,
-            ATHToolbarActivity.getToolbarBackgroundColor(binding.toolbar)
+            ATHToolbarActivity.getToolbarBackgroundColor(toolbar)
         )
     }
 

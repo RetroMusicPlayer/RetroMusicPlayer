@@ -106,7 +106,7 @@
         app:layout_constraintStart_toStartOf="@id/volumeSeekBar"
         app:layout_constraintTop_toTopOf="@id/volumeSeekBar" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageButton
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
         app:srcCompat="@drawable/ic_skip_next_round_white_32dp"
         app:tint="@color/md_green_500" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageButton
         android:id="@+id/previousButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -170,6 +170,7 @@
         android:maxLines="2"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
+        android:singleLine="true"
         android:textAppearance="@style/TextViewBody1"
         app:layout_constraintBottom_toTopOf="@id/progressSlider"
         app:layout_constraintEnd_toEndOf="parent"
@@ -181,6 +182,7 @@
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/seekbar_padding"
         app:layout_constraintBottom_toTopOf="@id/songInfo"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"

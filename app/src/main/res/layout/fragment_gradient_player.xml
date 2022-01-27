@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface">
+    android:background="?attr/colorSurface"
+    android:clickable="true"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/colorBackground"
@@ -62,7 +64,7 @@
             android:id="@+id/cover_lyrics"
             android:name="code.name.monkey.retromusic.fragments.other.CoverLyricsFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:elevation="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/playerAlbumCoverFragment"
             app:layout_constraintEnd_toEndOf="parent"

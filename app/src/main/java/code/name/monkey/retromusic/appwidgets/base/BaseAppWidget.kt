@@ -58,7 +58,7 @@ abstract class BaseAppWidget : AppWidgetProvider() {
      */
     fun notifyChange(service: MusicService, what: String) {
         if (hasInstances(service)) {
-            if (META_CHANGED == what || PLAY_STATE_CHANGED == what) {
+            if (META_CHANGED == what || PLAY_STATE_CHANGED == what || FAVORITE_STATE_CHANGED == what) {
                 performUpdate(service, null)
             }
         }

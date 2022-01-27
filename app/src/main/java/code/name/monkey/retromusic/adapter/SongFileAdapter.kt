@@ -20,6 +20,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
@@ -78,7 +79,7 @@ class SongFileAdapter(
             if (holder.itemViewType == FILE) {
                 holder.text?.text = getFileText(file)
             } else {
-                holder.text?.visibility = View.GONE
+                holder.text?.isVisible = false
             }
         }
 

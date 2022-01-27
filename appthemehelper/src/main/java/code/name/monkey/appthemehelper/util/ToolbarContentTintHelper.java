@@ -341,7 +341,7 @@ public final class ToolbarContentTintHelper {
                     .setSubtitleTextColor(ATHUtil.INSTANCE.resolveColor(activity, android.R.attr.textColorSecondary));
 
             //Step 4: Changing the color of the Overflow Menu icon.
-            setOverflowButtonColor(activity, toolbarView, toolbarIconsColor);
+            setOverflowButtonColor(toolbarView, toolbarIconsColor);
         }
     }
 
@@ -528,6 +528,16 @@ public final class ToolbarContentTintHelper {
     private static void removeOnGlobalLayoutListener(View v,
             ViewTreeObserver.OnGlobalLayoutListener listener) {
         v.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
+    }
+
+    private static void setOverflowButtonColor(final Toolbar toolbar, final int color) {
+            Drawable drawable = toolbar.getOverflowIcon();
+            if (drawable != null) {
+                // If we don't mutate the drawable, then all drawables with this id will have the ColorFilter
+                drawable.mutate();
+                drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        }
+
     }
 
     private static void setOverflowButtonColor(final Activity activity, final Toolbar toolbar,

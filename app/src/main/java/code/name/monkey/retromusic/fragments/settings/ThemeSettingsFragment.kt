@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.fragments.settings
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.preference.Preference
@@ -37,6 +38,7 @@ import com.google.android.material.color.DynamicColors
  */
 
 class ThemeSettingsFragment : AbsSettingsFragment() {
+    @SuppressLint("CheckResult")
     override fun invalidateSettings() {
         val generalTheme: Preference? = findPreference(GENERAL_THEME)
         generalTheme?.let {
@@ -118,6 +120,16 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             if (newValue as Boolean) {
                 DynamicColors.applyToActivitiesIfAvailable(App.getContext())
             }
+            restartActivity()
+            true
+        }
+        val wallpaperAccent: ATESwitchPreference? = findPreference(WALLPAPER_ACCENT)
+        wallpaperAccent?.setOnPreferenceChangeListener { _, _ ->
+            restartActivity()
+            true
+        }
+        val customFont: ATESwitchPreference? = findPreference(CUSTOM_FONT)
+        customFont?.setOnPreferenceChangeListener { _, _ ->
             restartActivity()
             true
         }

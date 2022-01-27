@@ -57,7 +57,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (!handleBackPress()) {
                 remove()
-                mainActivity.finish()
+                requireActivity().onBackPressed()
             }
         }
     }
@@ -344,6 +344,13 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     override fun onResume() {
         super.onResume()
         libraryViewModel.forceReload(ReloadType.Albums)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (cab.isActive()) {
+            cab.destroy()
+        }
     }
 
     private fun handleBackPress(): Boolean {

@@ -20,6 +20,7 @@ import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.updateMargin
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
@@ -149,8 +150,8 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     }
 
     private fun showEmptyView() {
-        binding.empty.visibility = View.VISIBLE
-        binding.emptyText.visibility = View.VISIBLE
+        binding.empty.isVisible = true
+        binding.emptyText.isVisible = true
     }
 
     fun songs(songs: List<Song>) {

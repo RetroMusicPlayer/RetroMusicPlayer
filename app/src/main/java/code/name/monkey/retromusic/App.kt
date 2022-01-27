@@ -20,6 +20,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
+import code.name.monkey.retromusic.helper.WallpaperAccentManager
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.PurchaseInfo
 import org.koin.android.ext.koin.androidContext
@@ -28,6 +29,7 @@ import org.koin.core.context.startKoin
 class App : Application() {
 
     lateinit var billingProcessor: BillingProcessor
+    private val wallpaperAccentManager = WallpaperAccentManager(this)
 
     override fun onCreate() {
         super.onCreate()
@@ -44,6 +46,7 @@ class App : Application() {
                 .coloredNavigationBar(true)
                 .commit()
         }
+        wallpaperAccentManager.init()
 
         if (VersionUtils.hasNougatMR())
             DynamicShortcutManager(this).initDynamicShortcuts()
@@ -71,6 +74,7 @@ class App : Application() {
     override fun onTerminate() {
         super.onTerminate()
         billingProcessor.release()
+        wallpaperAccentManager.release()
     }
 
     companion object {

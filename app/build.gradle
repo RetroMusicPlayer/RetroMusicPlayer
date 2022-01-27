@@ -14,8 +14,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 10556
-        versionName '5.6.1'
+        versionCode 10563
+        versionName '5.7.0'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }
@@ -57,6 +57,8 @@ android {
         abortOnError false
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
+
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -86,14 +88,13 @@ static def getDate() {
     new Date().format('MMddyyyyss')
 }
 
-
 dependencies {
     implementation project(':appthemehelper')
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation 'androidx.annotation:annotation:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.3.0-alpha01'
     implementation "androidx.preference:preference-ktx:$preference_version"
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -101,7 +102,7 @@ dependencies {
 
     //Cast Dependencies
     implementation 'androidx.mediarouter:mediarouter:1.2.5'
-    implementation 'com.google.android.gms:play-services-cast-framework:21.0.0'
+    implementation 'com.google.android.gms:play-services-cast-framework:21.0.1'
     //WebServer by NanoHttpd
     implementation "org.nanohttpd:nanohttpd:2.3.1"
 
@@ -109,7 +110,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
-    def room_version = '2.4.0'
+    def room_version = '2.4.1'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
@@ -141,7 +142,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
-    def koin_version = '3.1.4'
+    def koin_version = '3.1.5'
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
 
@@ -149,12 +150,16 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.12.0'
 
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
     implementation 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0'
 
     implementation 'com.github.bosphere.android-fadingedgelayout:fadingedgelayout:1.0.0'
 
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC3'
     implementation 'com.github.jetradarmobile:android-snowfall:1.2.1'
+
+    implementation "dev.chrisbanes.insetter:insetter:0.6.1"
 
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
     implementation 'com.github.Adonai:jaudiotagger:2.3.15'

@@ -32,13 +32,14 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.appcompat.graphics.drawable.DrawableWrapper
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.viewpager.widget.ViewPager
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
@@ -50,6 +51,7 @@ import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.currentFragment
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.keepScreenOn
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.ReloadType
@@ -78,9 +80,18 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
     ): Boolean {
         val song = MusicPlayerRemote.currentSong
         when (item.itemId) {
+            R.id.action_playback_speed -> {
+                PlaybackSpeedDialog.newInstance().show(childFragmentManager, "PLAYBACK_SETTINGS")
+                return true
+            }
             R.id.action_toggle_lyrics -> {
-                PreferenceUtil.showLyrics = !item.isChecked
-                item.isChecked = !item.isChecked
+                PreferenceUtil.showLyrics = !PreferenceUtil.showLyrics
+                showLyricsIcon(item)
+                if (PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics) {
+                    mainActivity.keepScreenOn(true)
+                } else if (!PreferenceUtil.isScreenOnEnabled && !PreferenceUtil.showLyrics) {
+                    mainActivity.keepScreenOn(false)
+                }
                 return true
             }
             R.id.action_go_to_lyrics -> {
@@ -162,7 +173,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 return true
             }
             R.id.action_sleep_timer -> {
-                SleepTimerDialog().show(parentFragmentManager, TAG)
+                SleepTimerDialog().show(parentFragmentManager, "SLEEP_TIMER")
                 return true
             }
             R.id.action_set_as_ringtone -> {
@@ -191,6 +202,18 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             }
         }
         return false
+    }
+
+    private fun showLyricsIcon(item: MenuItem) {
+        val icon =
+            if (PreferenceUtil.showLyrics) R.drawable.ic_lyrics else R.drawable.ic_lyrics_outline
+        val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
+            requireContext(),
+            icon,
+            toolbarIconColor()
+        )
+        item.isChecked = PreferenceUtil.showLyrics
+        item.icon = drawable
     }
 
     abstract fun playerToolbar(): Toolbar?
@@ -237,7 +260,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             val isFavorite: Boolean =
                 libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
             withContext(Main) {
-                val icon = if (animate) {
+                val icon = if (animate && VersionUtils.hasMarshmallow()) {
                     if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
                 } else {
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
@@ -269,7 +292,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         if (PreferenceUtil.isFullScreenMode &&
             view.findViewById<View>(R.id.status_bar) != null
         ) {
-            view.findViewById<View>(R.id.status_bar).visibility = View.GONE
+            view.findViewById<View>(R.id.status_bar).isVisible = false
         }
         playerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment?.setCallbacks(this)
@@ -287,9 +310,8 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             playerToolbar()?.menu?.removeItem(R.id.action_toggle_lyrics)
         } else {
             playerToolbar()?.menu?.findItem(R.id.action_toggle_lyrics)?.apply {
-                fixCheckStateOnIcon()
-                isCheckable = true
                 isChecked = PreferenceUtil.showLyrics
+                showLyricsIcon(this)
             }
         }
         requireView().setOnTouchListener(
@@ -413,14 +435,3 @@ fun goToLyrics(activity: Activity) {
         )
     }
 }
-/** Fixes checked state being ignored by injecting checked state directly into drawable */
-@SuppressLint("RestrictedApi")
-class CheckDrawableWrapper(val menuItem: MenuItem) : DrawableWrapper(menuItem.icon) {
-    // inject checked state into drawable state set
-    override fun setState(stateSet: IntArray) = super.setState(
-        if (menuItem.isChecked) stateSet + android.R.attr.state_checked else stateSet
-    )
-}
-
-/** Wrap icon drawable with [CheckDrawableWrapper]. */
-fun MenuItem.fixCheckStateOnIcon() = apply { icon = CheckDrawableWrapper(this) }

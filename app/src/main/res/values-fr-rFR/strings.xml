@@ -73,7 +73,6 @@
     <string name="app_shortcut_top_tracks_short">Pistes préférées</string>
     <string name="app_widget_big_name">Image complète</string>
     <string name="app_widget_card_name">Retro Music – Carte</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Retro Music – Classique</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Retro Music – Petit</string>
@@ -249,7 +248,7 @@
     <string name="no_songs">Aucun morceau</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Paroles normales</string>
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> N'est pas répertorié dans le stockage des médias.]]></string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> N\'est pas répertorié dans le stockage des médias.]]></string>
     <string name="not_recently_played">Non jouée récemment</string>
     <string name="nothing_to_scan">Rien à scanner.</string>
     <string name="nothing_to_see">Rien à afficher</string>
@@ -305,7 +304,7 @@
     <string name="pref_keep_screen_on_summary">Veuillez garder en tête que l\'activation de cette fonctionnalité peut réduire la durée de vie de la batterie</string>
     <string name="pref_keep_screen_on_title">Garder l\'écran allumé</string>
     <string name="pref_language_name">Choisir la langue</string>
-    <string name="pref_snow_fall_title">Snow fall effect</string>
+    <string name="pref_snow_fall_title">Effet chute de neige</string>
     <string name="pref_summary_album_art_on_lockscreen">Utiliser la couverture d\'album du morceau en cours de lecture comme fond sur l\'écran de verrouillage</string>
     <string name="pref_summary_album_artists_only">Afficher les artistes de l\'album dans la catégorie Artiste</string>
     <string name="pref_summary_audio_ducking">Baisser le volume quand un son système ou une notification est reçue</string>

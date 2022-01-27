@@ -24,9 +24,10 @@ import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
@@ -57,12 +58,10 @@ import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.*
-import code.name.monkey.retromusic.util.DensityUtil.dip2px
 import code.name.monkey.retromusic.util.PreferenceUtil.startDirectory
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import code.name.monkey.retromusic.views.BreadCrumbLayout.Crumb
 import code.name.monkey.retromusic.views.BreadCrumbLayout.SelectionCallback
-import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -71,7 +70,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
-import com.google.android.material.transition.MaterialSharedAxis
 import java.io.*
 import java.lang.ref.WeakReference
 import java.util.*
@@ -94,14 +92,10 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         }
     }
     private var storageItems = ArrayList<Storage>()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFolderBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentFolderBinding.bind(view)
+
         mainActivity.addMusicServiceEventListener(libraryViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
@@ -118,7 +112,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 override fun handleOnBackPressed() {
                     if (!handleBackPress()) {
                         remove()
-                        mainActivity.finish()
+                        requireActivity().onBackPressed()
                     }
                 }
             })
@@ -128,10 +122,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     private fun setUpTitle() {
-        binding.toolbar.setNavigationOnClickListener { v: View? ->
-            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).setDuration(300)
-            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).setDuration(300)
-            findNavController(v!!).navigate(R.id.searchFragment, null, navOptions)
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_search, null, navOptions)
         }
         binding.appNameText.text = resources.getString(R.string.folders)
     }
@@ -156,12 +148,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     override fun onPause() {
         super.onPause()
         saveScrollPosition()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        if (_binding != null) {
-            outState.putParcelable(CRUMBS, binding.breadCrumbs.stateWrapper)
+        if (cab.isActive()) {
+            cab.destroy()
         }
     }
 
@@ -308,7 +296,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                             openQueue(songs, startIndex, true)
                         } else {
                             Snackbar.make(
-                                binding.root,
+                                mainActivity.slidingPanel,
                                 Html.fromHtml(
                                     String.format(
                                         getString(R.string.not_listed_in_media_store), file1.name
@@ -381,6 +369,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
         menu.add(0, R.id.action_go_to_start_directory, 1, R.string.action_go_to_start_directory)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
+        menu.add(0, R.id.action_settings, 2, R.string.action_settings)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
         menu.removeItem(R.id.action_grid_size)
         menu.removeItem(R.id.action_layout_type)
         menu.removeItem(R.id.action_sort_order)
@@ -414,6 +404,14 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         })
                         .execute(ListPathsAsyncTask.LoadingInfo(crumb.file, AUDIO_FILE_FILTER))
                 }
+                return true
+            }
+            R.id.action_settings -> {
+                findNavController().navigate(
+                    R.id.settingsActivity,
+                    null,
+                    navOptions
+                )
                 return true
             }
         }
@@ -461,8 +459,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     private fun checkIsEmpty() {
         if (_binding != null) {
             binding.emptyEmoji.text = getEmojiByUnicode(0x1F631)
-            binding.empty.visibility =
-                if (adapter == null || adapter!!.itemCount == 0) View.VISIBLE else View.GONE
+            binding.empty.isVisible = adapter?.itemCount == 0
         }
     }
 

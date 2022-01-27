@@ -37,6 +37,7 @@
             style="@style/MusicProgressSlider"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:paddingVertical="@dimen/seekbar_padding"
             app:layout_constraintEnd_toStartOf="@id/songTotalTime"
             app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
             tools:ignore="RtlHardcoded,UnusedAttribute" />
@@ -71,7 +72,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:clickable="true"
@@ -91,7 +92,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"

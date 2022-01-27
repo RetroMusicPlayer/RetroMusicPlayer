@@ -130,7 +130,7 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
     }
 
     private fun updateCurrentSong() {
-        binding.toolbar.subtitle = getUpNextAndQueueTime()
+        binding.appBarLayout.toolbar.subtitle = getUpNextAndQueueTime()
     }
 
     override fun onPlayingMetaChanged() {
@@ -140,7 +140,7 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
     private fun updateQueuePosition() {
         playingQueueAdapter?.setCurrent(MusicPlayerRemote.position)
         resetToCurrentPosition()
-        binding.toolbar.subtitle = getUpNextAndQueueTime()
+        binding.appBarLayout.toolbar.subtitle = getUpNextAndQueueTime()
     }
 
     private fun updateQueue() {
@@ -179,7 +179,7 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
     }
 
     private fun setupToolbar() {
-        binding.toolbar.subtitle = getUpNextAndQueueTime()
+        binding.appBarLayout.toolbar.subtitle = getUpNextAndQueueTime()
         binding.clearQueue.backgroundTintList = ColorStateList.valueOf(accentColor())
         ColorStateList.valueOf(
             MaterialValueHelper.getPrimaryTextColor(
@@ -190,10 +190,13 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
             binding.clearQueue.setTextColor(this)
             binding.clearQueue.iconTint = this
         }
-        binding.toolbar.apply {
+        binding.appBarLayout.pinWhenScrolled()
+        binding.appBarLayout.toolbar.apply {
             setNavigationOnClickListener {
                 findNavController().navigateUp()
             }
+            setTitle(R.string.now_playing_queue)
+            setTitleTextAppearance(context, R.style.ToolbarTextAppearanceNormal)
             setNavigationIcon(R.drawable.ic_keyboard_backspace_black)
             ToolbarContentTintHelper.colorBackButton(this)
         }

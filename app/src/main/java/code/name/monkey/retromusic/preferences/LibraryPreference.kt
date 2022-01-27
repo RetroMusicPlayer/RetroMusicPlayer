@@ -23,10 +23,10 @@ import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.CategoryInfoAdapter
+import code.name.monkey.retromusic.databinding.PreferenceDialogLibraryCategoriesBinding
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.materialDialog
@@ -51,16 +51,14 @@ class LibraryPreference @JvmOverloads constructor(
 class LibraryPreferenceDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = layoutInflater
-            .inflate(R.layout.preference_dialog_library_categories, null)
+        val binding = PreferenceDialogLibraryCategoriesBinding.inflate(layoutInflater)
 
         val categoryAdapter = CategoryInfoAdapter()
-        categoryAdapter.categoryInfos = PreferenceUtil.libraryCategory
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = categoryAdapter
-        categoryAdapter.attachToRecyclerView(recyclerView)
-
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = categoryAdapter
+            categoryAdapter.attachToRecyclerView(this)
+        }
 
         return materialDialog(R.string.library_categories)
             .setNeutralButton(
@@ -69,8 +67,8 @@ class LibraryPreferenceDialog : DialogFragment() {
                 updateCategories(PreferenceUtil.defaultCategories)
             }
             .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton( R.string.done) { _, _ -> updateCategories(categoryAdapter.categoryInfos) }
-            .setView(view)
+            .setPositiveButton(R.string.done) { _, _ -> updateCategories(categoryAdapter.categoryInfos) }
+            .setView(binding.root)
             .create()
             .colorButtons()
     }

@@ -80,7 +80,7 @@
     <string name="app_widget_text_name">Minimal Metin</string>
     <string name="artist">Sanatçı</string>
     <string name="artists">Sanatçılar</string>
-    <string name="audio_fade_duration">Audio fade duration</string>
+    <string name="audio_fade_duration">Sesin Solma Süresi</string>
     <string name="audio_focus_denied">Ses odaklaması reddedildi.</string>
     <string name="audio_settings_summary">Ses ayarlarını değiştirin ve ekolayzır kontrollerini ayarlayın</string>
     <string name="auto">Otomatik</string>
@@ -305,11 +305,11 @@
     <string name="pref_keep_screen_on_summary">Bu özelliği etkinleştirmenin pil ömrünü etkileyebileceğini unutmayın.</string>
     <string name="pref_keep_screen_on_title">Ekranı açık tut</string>
     <string name="pref_language_name">Dil seçiniz</string>
-    <string name="pref_snow_fall_title">Snow fall effect</string>
+    <string name="pref_snow_fall_title">Kar yağışı efekti</string>
     <string name="pref_summary_album_art_on_lockscreen">Çalmakta olan şarkı albüm kapağını kilit ekranı duvar kağıdı olarak kullanın</string>
     <string name="pref_summary_album_artists_only">Sanatçı kategorisinde Albüm Sanatçılarını göster</string>
     <string name="pref_summary_audio_ducking">Sistem sesi çalındığında veya bir bildirim alındığında sesi kısın</string>
-    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
+    <string name="pref_summary_audio_fade">Bir şarkı oynatıldığında ya da durdurulduğunda sesi soldur</string>
     <string name="pref_summary_blacklist">Kara listedeki klasörlerin içeriği kütüphanenizden gizlenir.</string>
     <string name="pref_summary_bluetooth_playback">Bluetooth cihazına bağlanır bağlanmaz çalmaya başla</string>
     <string name="pref_summary_blurred_album_art">Albüm kapağını kilit ekranında bulanıklaştır. Üçüncü taraf uygulamalar ve widget\'lar ile sorunlara neden olabilir</string>
@@ -330,8 +330,8 @@
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
     <string name="pref_summary_remember_tab">Başlangıçta son kullanılan sekmeye git</string>
-    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
-    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_show_lyrics">Albüm kapağının üstünde senkronize edilmiş sözleri göster</string>
+    <string name="pref_summary_suggestions">Ana Ekranda Yeni Müzik Karışımını Göster</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
     <string name="pref_summary_toggle_headset">Kulaklık bağlandıktan hemen sonra çalmaya başla</string>
     <string name="pref_summary_toggle_shuffle">Yeni bir şarkı listesi çalınırken karıştırma modu kapanacak</string>
@@ -345,7 +345,7 @@
     <string name="pref_title_app_shortcuts">Renkli uygulama kısayolları</string>
     <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Odak kaybında ses hacmini azaltın</string>
-    <string name="pref_title_audio_fade">Fade audio</string>
+    <string name="pref_title_audio_fade">Soluk Ses</string>
     <string name="pref_title_auto_download_artist_images">Sanatçı resimlerini otomatik indir</string>
     <string name="pref_title_blacklist">Kara Liste</string>
     <string name="pref_title_bluetooth_playback">Bluetooth ile oynatma</string>
@@ -372,9 +372,9 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Şimdi oynatılıyor teması</string>
     <string name="pref_title_open_source_licences">Açık kaynak lisansları</string>
-    <string name="pref_title_remember_tab">Remember last tab</string>
-    <string name="pref_title_show_lyrics">Show lyrics</string>
-    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_remember_tab">Son Sekmeyi Hatırla</string>
+    <string name="pref_title_show_lyrics">Sözleri göster</string>
+    <string name="pref_title_suggestions">Önerileri göster</string>
     <string name="pref_title_tab_text_mode">Sekme başlıkları modu</string>
     <string name="pref_title_toggle_carousel_effect">Atlıkarınca efekti</string>
     <string name="pref_title_toggle_full_screen">Uygulamayı tam ekran yapın</string>
@@ -382,7 +382,7 @@
     <string name="pref_title_toggle_toggle_shuffle">Karıştır modu</string>
     <string name="pref_title_toggle_volume">Ses kontrolleri</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
-    <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_whitelist">Beyaz Listedeki Müzik</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Şimdi Oynatılıyor temaları, Atlıkarınca efekti, Renkli tema ve daha fazlası..</string>
     <string name="profile">Profil</string>
@@ -456,7 +456,7 @@
     <string name="sort_order">Sıralama Ölçütü</string>
     <string name="sort_order_a_z">Yükselen</string>
     <string name="sort_order_album">Albüm</string>
-    <string name="sort_order_album_artist">\@sıra/albüm_sanatçısı</string>
+    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Sanatçı</string>
     <string name="sort_order_composer">Besteci</string>
     <string name="sort_order_date">Tarih eklendi</string>

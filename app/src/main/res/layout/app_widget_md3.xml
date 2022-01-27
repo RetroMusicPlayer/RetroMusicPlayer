@@ -5,18 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/app_widget_md3_height"
     android:background="@drawable/app_widget_background"
-    android:backgroundTint="?android:attr/colorBackground"
+    android:backgroundTint="?attr/colorSurface"
     android:orientation="horizontal"
+    android:theme="@style/Theme.AppWidget"
     tools:ignore="ContentDescription">
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="@dimen/app_widget_md3_image_size"
         android:layout_height="@dimen/app_widget_md3_image_size"
-        android:background="@drawable/app_widget_background"
-        android:layout_margin="8dp"
         android:layout_gravity="center_vertical"
-        android:scaleType="centerCrop" />
+        android:layout_margin="10dp"
+        android:background="@drawable/app_widget_background"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/backgrounds/scenic[6]" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -94,7 +96,6 @@
                 android:textAppearance="@style/TextViewNormal"
                 android:textColor="?android:attr/textColorSecondary"
                 tools:text="Text" />
-
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
