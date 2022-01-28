@@ -40,12 +40,12 @@ class PlaylistsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getPlaylists().observe(viewLifecycleOwner, {
+        libraryViewModel.getPlaylists().observe(viewLifecycleOwner) {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
-        })
+        }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             remove()
             requireActivity().onBackPressed()
