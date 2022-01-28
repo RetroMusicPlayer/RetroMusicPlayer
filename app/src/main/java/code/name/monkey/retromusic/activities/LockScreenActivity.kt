@@ -24,7 +24,9 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityLockScreenBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.hideStatusBar
+import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenControlsFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension

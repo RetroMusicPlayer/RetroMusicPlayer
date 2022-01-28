@@ -39,7 +39,6 @@ import code.name.monkey.retromusic.extensions.*
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.PurchaseInfo
 import com.anjlab.android.iab.v3.SkuDetails
-import java.util.*
 
 class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 

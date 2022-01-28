@@ -36,7 +36,6 @@ import android.widget.Scroller
 import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.R
 import java.io.File
-import java.util.*
 import kotlin.math.abs
 
 /**

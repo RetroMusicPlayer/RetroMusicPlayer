@@ -16,7 +16,6 @@ import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
-import java.util.*
 
 abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
     open val activity: FragmentActivity, private val ICabHolder: ICabHolder?, @MenuRes menuRes: Int

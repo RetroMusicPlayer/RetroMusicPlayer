@@ -14,12 +14,10 @@
  */
 package code.name.monkey.retromusic.fragments.player.blur
 
-import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.view.animation.LinearInterpolator
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
@@ -29,6 +27,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentBlurPlayerPlaybackControlsBinding
+import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.getSongInfo
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
@@ -36,7 +35,6 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
@@ -134,7 +132,7 @@ class BlurPlaybackControlsFragment :
         binding.text.setTextColor(lastPlaybackControlsColor)
         binding.songInfo.setTextColor(lastDisabledPlaybackControlsColor)
 
-        TintHelper.setTintAuto(binding.progressSlider, lastPlaybackControlsColor, false)
+        binding.progressSlider.applyColor(lastPlaybackControlsColor)
         volumeFragment?.setTintableColor(lastPlaybackControlsColor)
         setFabColor(lastPlaybackControlsColor)
     }
