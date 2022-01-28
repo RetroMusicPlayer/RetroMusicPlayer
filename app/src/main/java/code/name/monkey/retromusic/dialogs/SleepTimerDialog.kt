@@ -35,8 +35,8 @@ import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.service.MusicService.ACTION_PENDING_QUIT
-import code.name.monkey.retromusic.service.MusicService.ACTION_QUIT
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_PENDING_QUIT
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_QUIT
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.WhichButton

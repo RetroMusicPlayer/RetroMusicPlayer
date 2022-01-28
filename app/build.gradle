@@ -14,7 +14,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 10563
+        versionCode 10564
         versionName '5.7.0'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
@@ -45,16 +45,14 @@ android {
     buildFeatures{
         viewBinding true
     }
-
     packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/java.properties'
+        resources {
+            excludes += ['META-INF/LICENSE', 'META-INF/NOTICE', 'META-INF/java.properties']
+        }
     }
-    lintOptions {
-        disable 'MissingTranslation'
-        disable 'InvalidPackage'
+    lint {
         abortOnError false
+        disable 'MissingTranslation', 'InvalidPackage'
     }
     compileOptions {
         coreLibraryDesugaringEnabled true
@@ -101,7 +99,7 @@ dependencies {
     implementation 'androidx.palette:palette-ktx:1.0.0'
 
     //Cast Dependencies
-    implementation 'androidx.mediarouter:mediarouter:1.2.5'
+    implementation 'androidx.mediarouter:mediarouter:1.2.6'
     implementation 'com.google.android.gms:play-services-cast-framework:21.0.1'
     //WebServer by NanoHttpd
     implementation "org.nanohttpd:nanohttpd:2.3.1"
@@ -115,7 +113,7 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    def lifecycle_version = "2.4.0"
+    def lifecycle_version = "2.5.0-alpha01"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"

@@ -41,6 +41,7 @@ import code.name.monkey.retromusic.databinding.FragmentLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentNormalLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentSyncedLyricsBinding
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
@@ -50,7 +51,6 @@ import code.name.monkey.retromusic.lyrics.LrcView
 import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.*
-import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.tabs.TabLayoutMediator
@@ -149,7 +149,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         setupWakelock()
         setupViews()
         setupToolbar()
-        updateTitleSong()
     }
 
     private fun setupViews() {
@@ -184,22 +183,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-    }
-
-    override fun onPlayingMetaChanged() {
-        super.onPlayingMetaChanged()
-        updateTitleSong()
-    }
-
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        updateTitleSong()
-    }
-
-    private fun updateTitleSong() {
-        song = MusicPlayerRemote.currentSong
-        binding.toolbar.title = song.title
-        binding.toolbar.subtitle = song.artistName
     }
 
     private fun setupWakelock() {
@@ -239,7 +222,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
             e.printStackTrace()
         }
 
-        MaterialDialog(requireContext()).show {
+        materialDialog().show {
             title(res = R.string.edit_normal_lyrics)
             input(
                 hintRes = R.string.paste_lyrics_here,
@@ -286,7 +269,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
     private fun editSyncedLyrics() {
         val content: String = LyricUtil.getStringFromLrc(LyricUtil.getSyncedLyricsFile(song))
 
-        MaterialDialog(requireContext()).show {
+        materialDialog().show {
             title(res = R.string.edit_synced_lyrics)
             input(
                 hintRes = R.string.paste_timeframe_lyrics_here,

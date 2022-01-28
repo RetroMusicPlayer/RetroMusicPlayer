@@ -9,6 +9,7 @@ import android.os.Environment
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.materialDialog
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
 import com.afollestad.materialdialogs.list.updateListItems
@@ -61,7 +62,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
             )
             != PackageManager.PERMISSION_GRANTED
         ) {
-            return MaterialDialog(requireActivity()).show {
+            return materialDialog().show {
                 title(res = R.string.md_error_label)
                 message(res = R.string.md_storage_perm_error)
                 positiveButton(res = android.R.string.ok)
@@ -76,7 +77,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         parentFolder = File(mSavedInstanceState.getString("current_path", File.pathSeparator))
         checkIfCanGoUp()
         parentContents = listFiles()
-        return MaterialDialog(requireContext())
+        return materialDialog()
             .title(text = parentFolder!!.absolutePath)
             .listItems(
                 items = contentsArray.toCharSequence(),
@@ -85,7 +86,6 @@ class BlacklistFolderChooserDialog : DialogFragment() {
                 onSelection(i)
             }
             .noAutoDismiss()
-            .cornerRadius(literalDp = 20F)
             .positiveButton(res = R.string.add_action) {
                 callback!!.onFolderSelection(this@BlacklistFolderChooserDialog, parentFolder!!)
                 dismiss()

@@ -308,7 +308,7 @@
         <service
             android:name=".service.MusicService"
             android:enabled="true"
-            android:exported="false"
+            android:exported="true"
             android:foregroundServiceType="mediaPlayback"
             android:label="@string/app_name">
             <intent-filter>
@@ -327,6 +327,17 @@
         <meta-data
             android:name="com.android.vending.splits.required"
             android:value="true" />
+
+        <!-- Android Auto -->
+        <meta-data
+            android:name="com.google.android.gms.car.application"
+            android:resource="@xml/automotive_app_desc" />
+        <meta-data
+            android:name="com.google.android.gms.car.application.theme"
+            android:resource="@style/CarTheme" />
+        <meta-data
+            android:name="com.google.android.gms.car.notification.SmallIcon"
+            android:resource="@drawable/ic_notification" />
 
         <!-- ChromeCast -->
         <meta-data

@@ -545,7 +545,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
 
-    fun setUpProgressSlider() {
+    private fun setUpProgressSlider() {
         binding.playbackControlsFragment.progressSlider.setOnSeekBarChangeListener(object :
             SimpleOnSeekbarChangeListener() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {

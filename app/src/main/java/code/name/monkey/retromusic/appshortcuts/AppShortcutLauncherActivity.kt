@@ -26,7 +26,11 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.ShuffleAllPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.TopTracksPlaylist
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_PLAY_PLAYLIST
+import code.name.monkey.retromusic.service.MusicService.Companion.INTENT_EXTRA_PLAYLIST
+import code.name.monkey.retromusic.service.MusicService.Companion.INTENT_EXTRA_SHUFFLE_MODE
+import code.name.monkey.retromusic.service.MusicService.Companion.SHUFFLE_MODE_NONE
+import code.name.monkey.retromusic.service.MusicService.Companion.SHUFFLE_MODE_SHUFFLE
 
 class AppShortcutLauncherActivity : Activity() {
 
