@@ -132,7 +132,7 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
 
     private fun updateArtistImage() {
         libraryViewModel.artist(MusicPlayerRemote.currentSong.artistId)
-            .observe(viewLifecycleOwner, { artist ->
+            .observe(viewLifecycleOwner) { artist ->
                 if (artist.id != -1L) {
                     GlideApp.with(requireActivity()).asBitmapPalette().artistImageOptions(artist)
                         .load(RetroGlideExtension.getArtistModel(artist))
@@ -142,7 +142,7 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
                         })
                 }
 
-            })
+            }
     }
 
     override fun onQueueChanged() {

@@ -25,6 +25,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import code.name.monkey.retromusic.R;
 
 /**
@@ -222,7 +224,7 @@ public class SeekArc extends View {
    * provides notifications of when the user starts and stops a touch gesture within the SeekArc.
    *
    * @param l The seek bar notification listener
-   * @see SeekArc.OnSeekBarChangeListener
+   * @see SeekArc.OnSeekArcChangeListener
    */
   public void setOnSeekArcChangeListener(OnSeekArcChangeListener l) {
     mOnSeekArcChangeListener = l;

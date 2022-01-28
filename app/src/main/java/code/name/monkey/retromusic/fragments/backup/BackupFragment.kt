@@ -41,7 +41,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         _binding = FragmentBackupBinding.bind(view)
         initAdapter()
         setupRecyclerview()
-        backupViewModel.backupsLiveData.observe(this) {
+        backupViewModel.backupsLiveData.observe(viewLifecycleOwner) {
             if (it.isNotEmpty())
                 backupAdapter?.swapDataset(it)
             else

@@ -88,9 +88,9 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         if (savedInstanceState != null) {
             query = savedInstanceState.getString(QUERY)
         }
-        libraryViewModel.getSearchResult().observe(viewLifecycleOwner, {
+        libraryViewModel.getSearchResult().observe(viewLifecycleOwner) {
             showData(it)
-        })
+        }
         setupChips()
         postponeEnterTransition()
         view.doOnPreDraw {

@@ -92,12 +92,12 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             (artistId ?: artistName).toString()
         )
         postponeEnterTransition()
-        detailsViewModel.getArtist().observe(viewLifecycleOwner, {
+        detailsViewModel.getArtist().observe(viewLifecycleOwner) {
             requireView().doOnPreDraw {
                 startPostponedEnterTransition()
             }
             showArtist(it)
-        })
+        }
         setupRecyclerView()
 
         binding.fragmentArtistContent.playAction.apply {
@@ -180,13 +180,13 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         biography = null
         this.lang = lang
         detailsViewModel.getArtistInfo(name, lang, null)
-            .observe(viewLifecycleOwner, { result ->
+            .observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Result.Loading -> println("Loading")
                     is Result.Error -> println("Error")
                     is Result.Success -> artistInfo(result.data)
                 }
-            })
+            }
     }
 
     private fun artistInfo(lastFmArtist: LastFmArtist?) {

@@ -77,12 +77,12 @@ class HomeFragment :
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
-        libraryViewModel.getHome().observe(viewLifecycleOwner, {
+        libraryViewModel.getHome().observe(viewLifecycleOwner) {
             homeAdapter.swapData(it)
-        })
-        libraryViewModel.getSuggestions().observe(viewLifecycleOwner, {
+        }
+        libraryViewModel.getSuggestions().observe(viewLifecycleOwner) {
             loadSuggestions(it)
-        })
+        }
 
         loadProfile()
         setupTitle()
