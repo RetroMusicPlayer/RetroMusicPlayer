@@ -96,11 +96,11 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
-        libraryViewModel.getFabMargin().observe(viewLifecycleOwner, {
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner) {
             binding.keyboardPopup.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = it
             }
-        })
+        }
         KeyboardVisibilityEvent.setEventListener(requireActivity(), viewLifecycleOwner) {
             if (it) {
                 binding.keyboardPopup.isGone = true
@@ -192,6 +192,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
             R.id.chip_albums -> Filter.ALBUMS
             R.id.chip_album_artists -> Filter.ALBUM_ARTISTS
             R.id.chip_genres -> Filter.GENRES
+            R.id.chip_playlists -> Filter.PLAYLISTS
             else -> Filter.NO_FILTER
         }
     }
@@ -245,6 +246,7 @@ enum class Filter {
     ALBUMS,
     ALBUM_ARTISTS,
     GENRES,
+    PLAYLISTS,
     NO_FILTER
 }
 
