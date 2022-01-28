@@ -26,14 +26,12 @@
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
         android:paddingVertical="@dimen/seekbar_padding"
         android:splitTrack="false"
         android:thumb="@drawable/switch_square"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlHardcoded,UnusedAttribute"
         tools:progress="20" />
 
     <com.google.android.material.textview.MaterialTextView
