@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.transition.Fade
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -50,12 +51,16 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.lyrics.LrcView
 import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.FileUtils
+import code.name.monkey.retromusic.util.LyricUtil
+import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.UriUtil
 import com.afollestad.materialdialogs.input.input
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.transition.platform.MaterialContainerTransform
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
 import java.io.File
@@ -177,6 +182,20 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         }
     }
 
+    override fun onPlayingMetaChanged() {
+        super.onPlayingMetaChanged()
+        updateTitleSong()
+    }
+
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        updateTitleSong()
+    }
+
+    private fun updateTitleSong() {
+        song = MusicPlayerRemote.currentSong
+    }
+
     private fun setupToolbar() {
         mainActivity.setSupportActionBar(binding.toolbar)
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
@@ -191,6 +210,12 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_search, menu)
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(
+            requireContext(),
+            binding.toolbar,
+            menu,
+            ATHToolbarActivity.getToolbarBackgroundColor(binding.toolbar)
+        )
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
