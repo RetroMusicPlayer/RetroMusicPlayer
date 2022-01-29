@@ -51,7 +51,9 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
     private fun updateTheme() {
         setTheme(ThemeManager.getThemeResValue())
-        setDefaultNightMode(ThemeManager.getNightMode())
+        if (PreferenceUtil.materialYou) {
+            setDefaultNightMode(ThemeManager.getNightMode())
+        }
 
         if (PreferenceUtil.isCustomFont) {
             setTheme(R.style.FontThemeOverlay)
