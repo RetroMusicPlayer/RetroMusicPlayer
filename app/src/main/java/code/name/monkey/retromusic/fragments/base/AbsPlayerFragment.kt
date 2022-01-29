@@ -315,11 +315,13 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
             }
         }
         requireView().setOnTouchListener(
-            SwipeDetector(
-                requireContext(),
-                playerAlbumCoverFragment?.viewPager,
-                requireView()
-            )
+            if (PreferenceUtil.swipeAnywhereToChangeSong) {
+                SwipeDetector(
+                    requireContext(),
+                    playerAlbumCoverFragment?.viewPager,
+                    requireView()
+                )
+            } else null
         )
     }
 
