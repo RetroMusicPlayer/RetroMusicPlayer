@@ -81,12 +81,12 @@
     <string name="artist">Artista</string>
     <string name="artists">Artistas</string>
     <string name="audio_fade_duration">Duración del desvanecimiento de audio</string>
-    <string name="audio_focus_denied">Enfoque de audio denegado.</string>
+    <string name="audio_focus_denied">Enfoque de audio negado.</string>
     <string name="audio_settings_summary">Cambia los ajustes de sonido y ajusta los controles del ecualizador</string>
     <string name="auto">Auto</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="backup_restore_settings_summary">Respalda y recupera las configuraciones de tus playlist</string>
     <string name="backup_restore_title"><![CDATA[Copia de seguridad / Restauración]]></string>
-    <string name="backup_title">Guardar</string>
+    <string name="backup_title">Respaldos</string>
     <string name="biography">Biografías.</string>
     <string name="black_theme_name">Sólo Negro</string>
     <string name="blacklist">Suspendidos</string>
