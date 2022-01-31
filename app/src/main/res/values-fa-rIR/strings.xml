@@ -332,6 +332,7 @@
     <string name="pref_summary_remember_tab">هدایت شود به اخرین tab استفاده شده در آغاز</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">حالت همه جانبه</string>
     <string name="pref_summary_toggle_headset">پس از وصل شدن هدفون موزیک بلافاصله پخش شود</string>
     <string name="pref_summary_toggle_shuffle">حالت پخش مخلوط اهنگ ها زمانی که لیست جدید اهنگ را پلی می‌کنید، خاموش می‌شود</string>
@@ -375,6 +376,7 @@
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">حالت عنوان برگه ها</string>
     <string name="pref_title_toggle_carousel_effect">جلوه چرخ فلک</string>
     <string name="pref_title_toggle_full_screen">برنامه تمام‌صفحه</string>
