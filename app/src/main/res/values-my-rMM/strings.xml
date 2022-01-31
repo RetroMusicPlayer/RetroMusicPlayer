@@ -330,6 +330,7 @@
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">နားကြပ်နှင့်ချိတ်ဆက်ပြီးသည့်နှင့် စတင် play မည်</string>
     <string name="pref_summary_toggle_shuffle">သီချင်းဖွင့်မည့်စာရင်း\'အသစ်\'ကို play သည့်အခါ Shuffle Mode ပိတ်သွားပါမည်</string>
@@ -373,6 +374,7 @@
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Tab ခေါင်းစဉ်ပြသခြင်း</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">App ကို screen အပြည့်ထားမည်</string>
