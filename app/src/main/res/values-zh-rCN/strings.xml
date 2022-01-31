@@ -9,7 +9,7 @@
     <string name="action_add_to_favorites">加入收藏夹</string>
     <string name="action_add_to_playing_queue">加入播放队列</string>
     <string name="action_add_to_playlist">加入播放列表</string>
-    <string name="action_cast">投放</string>
+    <string name="action_cast">投射</string>
     <string name="action_clear_playing_queue">清空播放队列</string>
     <string name="action_cycle_repeat">循环重复模式</string>
     <string name="action_delete">删除</string>
@@ -19,7 +19,7 @@
     <string name="action_go_to_album">查看专辑</string>
     <string name="action_go_to_artist">查看艺术家</string>
     <string name="action_go_to_genre">查看流派</string>
-    <string name="action_go_to_lyrics">转到歌词</string>
+    <string name="action_go_to_lyrics">查看歌词</string>
     <string name="action_go_to_start_directory">返回起始目录</string>
     <string name="action_grant">授权</string>
     <string name="action_grid_size">网格大小</string>
@@ -92,7 +92,7 @@
     <string name="blur_card">模糊卡片</string>
     <string name="bug_report_failed">无法提交报告</string>
     <string name="bug_report_failed_invalid_token">无效的访问令牌，请联系应用开发者。</string>
-    <string name="bug_report_failed_issues_not_available">所选仓库未启用 issues，请联系应用开发者。</string>
+    <string name="bug_report_failed_issues_not_available">所选仓库未启用议题。请联系应用开发者。</string>
     <string name="bug_report_failed_unknown">发生未知错误，请联系应用开发者。</string>
     <string name="bug_report_failed_wrong_credentials">错误的用户名或密码</string>
     <string name="bug_report_issue">问题</string>
@@ -114,7 +114,7 @@
     <string name="changelog">更新日志</string>
     <string name="changelog_summary">看看新变化</string>
     <string name="choose_restore_title">选择要还原的内容</string>
-    <string name="circle">环形</string>
+    <string name="circle">唱盘</string>
     <string name="circular">圆形</string>
     <string name="classic">经典</string>
     <string name="clear_action">清空</string>
@@ -229,7 +229,7 @@
     <string name="my_name">我的名字</string>
     <string name="my_top_tracks">最常播放</string>
     <string name="never">从不</string>
-    <string name="new_music_mix">新建歌单</string>
+    <string name="new_music_mix">新歌混烧</string>
     <string name="new_playlist_title">新建播放列表</string>
     <string name="new_start_directory">%s 是新的起始目录。</string>
     <string name="next_song">下一曲</string>
@@ -260,7 +260,7 @@
     <string name="only_on_wifi">仅限 Wi-Fi 网络</string>
     <string name="other_settings_summary">高级测试功能</string>
     <string name="others">其他</string>
-    <string name="over_cover">专辑封面之上</string>
+    <string name="over_cover">覆盖封面</string>
     <string name="password">密码</string>
     <string name="past_three_months">最近三个月</string>
     <string name="paste_lyrics_here">在此粘贴歌词</string>
@@ -329,8 +329,8 @@
     <string name="pref_summary_open_source_licences">开源许可详情</string>
     <string name="pref_summary_remember_tab">启动时打开上次使用的页面</string>
     <string name="pref_summary_show_lyrics">在专辑封面上显示同步歌词</string>
-    <string name="pref_summary_suggestions">在主屏幕上显示新歌单</string>
-    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_suggestions">在主屏上显示新歌混烧</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">在正在播放界面中启用任意位置滑动切歌</string>
     <string name="pref_summary_toggle_full_screen">沉浸模式</string>
     <string name="pref_summary_toggle_headset">连接耳机后立即开始播放</string>
     <string name="pref_summary_toggle_shuffle">播放新列表时关闭随机播放</string>
@@ -374,7 +374,7 @@
     <string name="pref_title_remember_tab">记住最后打开页面</string>
     <string name="pref_title_show_lyrics">显示歌词</string>
     <string name="pref_title_suggestions">显示建议</string>
-    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_anywhere_now_playing">任意位置滑动切歌</string>
     <string name="pref_title_tab_text_mode">标签页标题模式</string>
     <string name="pref_title_toggle_carousel_effect">轮播效果</string>
     <string name="pref_title_toggle_full_screen">全屏应用</string>
