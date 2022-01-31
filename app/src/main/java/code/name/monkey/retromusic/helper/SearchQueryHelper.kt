@@ -21,7 +21,6 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealSongRepository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.util.*
 
 object SearchQueryHelper : KoinComponent {
     private const val TITLE_SELECTION = "lower(" + MediaStore.Audio.AudioColumns.TITLE + ") = ?"

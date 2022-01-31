@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import java.lang.ref.WeakReference
-import java.util.*
 
 
 /**

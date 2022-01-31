@@ -351,10 +351,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     private fun updateColor() {
-        libraryViewModel.paletteColor.observe(this, { color ->
+        libraryViewModel.paletteColor.observe(this) { color ->
             this.paletteColor = color
             onPaletteColorChanged()
-        })
+        }
     }
 
     fun setBottomNavVisibility(visible: Boolean, animate: Boolean = false, hideBottomSheet: Boolean = MusicPlayerRemote.playingQueue.isEmpty()) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<code.name.monkey.retromusic.views.insets.InsetsConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -83,14 +83,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/albumRecyclerView"/>
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/song_sort_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="@null"
-        android:padding="8dp"
-        android:src="@drawable/ic_sort"
+        style="@style/Widget.Material3.Button.IconButton"
+        app:iconTint="?colorControlNormal"
+        app:iconSize="24dp"
+        android:background="?roundSelector"
+        app:icon="@drawable/ic_sort"
         app:layout_constraintBottom_toBottomOf="@+id/songTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/songTitle"
@@ -206,4 +208,4 @@
         android:layout_height="72dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/listeners" />
-</code.name.monkey.retromusic.views.insets.InsetsConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

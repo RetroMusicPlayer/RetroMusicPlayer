@@ -72,17 +72,17 @@ object M3UWriter : M3UConstants {
             it.songPrimaryKey
         }.toSongs()
         if (songs.isNotEmpty()) {
-            outputStream.bufferedWriter().use{ bw->
-                bw.write(M3UConstants.HEADER)
-                songs.forEach {
-                    bw.newLine()
-                    bw.write(M3UConstants.ENTRY + it.duration + M3UConstants.DURATION_SEPARATOR + it.artistName + " - " + it.title)
-                    bw.newLine()
-                    bw.write(it.data)
+            outputStream.use { os ->
+                os.bufferedWriter().use { bw->
+                    bw.write(M3UConstants.HEADER)
+                    songs.forEach {
+                        bw.newLine()
+                        bw.write(M3UConstants.ENTRY + it.duration + M3UConstants.DURATION_SEPARATOR + it.artistName + " - " + it.title)
+                        bw.newLine()
+                        bw.write(it.data)
+                    }
                 }
             }
         }
-        outputStream.flush()
-        outputStream.close()
     }
 }

@@ -114,11 +114,11 @@ class UserInfoFragment : Fragment() {
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
-        libraryViewModel.getFabMargin().observe(viewLifecycleOwner, {
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner) {
             binding.next.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = it
             }
-        })
+        }
     }
 
     private fun loadProfile() {

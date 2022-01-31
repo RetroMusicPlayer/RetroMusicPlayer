@@ -62,9 +62,9 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
         genre = arguments.extraGenre
         binding.toolbar.title = arguments.extraGenre.name
         setupRecyclerView()
-        detailsViewModel.getSongs().observe(viewLifecycleOwner, {
+        detailsViewModel.getSongs().observe(viewLifecycleOwner) {
             songs(it)
-        })
+        }
         postponeEnterTransition()
         view.doOnPreDraw {
             startPostponedEnterTransition()

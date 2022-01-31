@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.fragments.search.Filter
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
@@ -29,20 +30,23 @@ class RealSearchRepository(
     private val roomRepository: RoomRepository,
     private val genreRepository: GenreRepository,
 ) {
-    fun searchAll(context: Context, query: String?, filter: Filter): MutableList<Any> {
+    suspend fun searchAll(context: Context, query: String?, filter: Filter): MutableList<Any> {
         val results = mutableListOf<Any>()
         if (query.isNullOrEmpty()) return results
         query.let { searchString ->
+
+            /** Songs **/
             val songs: List<Song> = if (filter == Filter.SONGS || filter == Filter.NO_FILTER) {
                 songRepository.songs(searchString)
             } else {
                 emptyList()
             }
-
             if (songs.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.songs))
                 results.addAll(songs)
             }
+
+            /** Artists **/
             val artists: List<Artist> =
                 if (filter == Filter.ARTISTS || filter == Filter.NO_FILTER) {
                     artistRepository.artists(searchString)
@@ -53,6 +57,8 @@ class RealSearchRepository(
                 results.add(context.resources.getString(R.string.artists))
                 results.addAll(artists)
             }
+
+            /** Albums **/
             val albums: List<Album> = if (filter == Filter.ALBUMS || filter == Filter.NO_FILTER) {
                 albumRepository.albums(searchString)
             } else {
@@ -62,6 +68,8 @@ class RealSearchRepository(
                 results.add(context.resources.getString(R.string.albums))
                 results.addAll(albums)
             }
+
+            /** Album-Artists **/
             val albumArtists: List<Artist> =
                 if (filter == Filter.ALBUM_ARTISTS || filter == Filter.NO_FILTER) {
                     artistRepository.albumArtists(searchString)
@@ -72,11 +80,10 @@ class RealSearchRepository(
                 results.add(context.resources.getString(R.string.album_artist))
                 results.addAll(albumArtists)
             }
+
+            /** Genres **/
             val genres: List<Genre> = if (filter == Filter.GENRES || filter == Filter.NO_FILTER) {
-                genreRepository.genres().filter { genre ->
-                    genre.name.lowercase()
-                        .contains(searchString.lowercase())
-                }
+                genreRepository.genres(query)
             } else {
                 emptyList()
             }
@@ -84,14 +91,21 @@ class RealSearchRepository(
                 results.add(context.resources.getString(R.string.genres))
                 results.addAll(genres)
             }
-            /* val playlist = roomRepository.playlists().filter { playlist ->
-                     playlist.playlistName.toLowerCase(Locale.getDefault())
-                         .contains(searchString.toLowerCase(Locale.getDefault()))
-                 }
-                 if (playlist.isNotEmpty()) {
-                     results.add(context.getString(R.string.playlists))
-                     results.addAll(playlist)
-                 }*/
+
+            /** Playlists **/
+            val playlist: List<PlaylistEntity> =
+                if (filter == Filter.PLAYLISTS || filter == Filter.NO_FILTER) {
+                    roomRepository.playlists().filter { playlist ->
+                        playlist.playlistName.lowercase().contains(searchString.lowercase())
+                    }
+                } else {
+                    emptyList()
+                }
+
+            if (playlist.isNotEmpty()) {
+                results.add(context.getString(R.string.playlists))
+                results.addAll(playlist)
+            }
         }
         return results
     }

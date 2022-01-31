@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -20,7 +19,6 @@ import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.surfaceColor
-import code.name.monkey.retromusic.extensions.updateMargin
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
@@ -51,7 +49,6 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     private var _binding: FragmentPlaylistDetailBinding? = null
     private val binding get() = _binding!!
 
-
     private lateinit var playlist: PlaylistWithSongs
     private lateinit var playlistSongAdapter: OrderablePlaylistSongAdapter
 
@@ -67,9 +64,9 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         playlist = arguments.extraPlaylist
         binding.toolbar.title = playlist.playlistEntity.playlistName
         setUpRecyclerView()
-        viewModel.getSongs().observe(viewLifecycleOwner, {
+        viewModel.getSongs().observe(viewLifecycleOwner) {
             songs(it.toSongs())
-        })
+        }
         postponeEnterTransition()
         requireView().doOnPreDraw { startPostponedEnterTransition() }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -157,7 +154,6 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     fun songs(songs: List<Song>) {
         binding.progressIndicator.hide()
         if (songs.isNotEmpty()) {
-            Log.i("Updated", songs[0].title)
             playlistSongAdapter.swapDataSet(songs)
         } else {
             showEmptyView()

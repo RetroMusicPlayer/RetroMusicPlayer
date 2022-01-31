@@ -86,11 +86,11 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         } else {
             binding.shuffleButton.isVisible = false
         }
-        libraryViewModel.getFabMargin().observe(viewLifecycleOwner, {
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner) {
             binding.shuffleButton.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = it
             }
-        })
+        }
     }
 
     open fun onShuffleClicked() {

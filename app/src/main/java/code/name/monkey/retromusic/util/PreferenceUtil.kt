@@ -708,6 +708,9 @@ object PreferenceUtil {
 
     val circlePlayButton
         get() = sharedPreferences.getBoolean(CIRCLE_PLAY_BUTTON, false)
+
+    val swipeAnywhereToChangeSong
+        get() = sharedPreferences.getBoolean(SWIPE_ANYWHERE_NOW_PLAYING, true)
 }
 enum class LyricsType {
     REPLACE_COVER, OVER_COVER

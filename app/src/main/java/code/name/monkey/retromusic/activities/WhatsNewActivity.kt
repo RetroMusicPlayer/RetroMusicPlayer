@@ -14,7 +14,10 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityWhatsNewBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.drawAboveSystemBars
+import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
 import code.name.monkey.retromusic.util.RetroUtil
 import java.io.BufferedReader

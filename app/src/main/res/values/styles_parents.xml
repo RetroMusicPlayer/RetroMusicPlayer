@@ -29,7 +29,7 @@
         <item name="popupMenuBackground">@drawable/popup_background</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base.Black" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RetroMusic.Base.Black" parent="Theme.Material3.Dark.NoActionBar">
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>

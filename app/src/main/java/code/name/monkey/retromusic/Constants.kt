@@ -55,6 +55,7 @@ object Constants {
     )
     const val NUMBER_OF_TOP_TRACKS = 99
 }
+
 const val EXTRA_PLAYLIST_TYPE = "type"
 const val EXTRA_GENRE = "extra_genre"
 const val EXTRA_PLAYLIST = "extra_playlist"
@@ -162,3 +163,4 @@ const val APPBAR_MODE = "appbar_mode"
 const val WALLPAPER_ACCENT = "wallpaper_accent"
 const val SCREEN_ON_LYRICS = "screen_on_lyrics"
 const val CIRCLE_PLAY_BUTTON = "circle_play_button"
+const val SWIPE_ANYWHERE_NOW_PLAYING = "swipe_anywhere_now_playing"
