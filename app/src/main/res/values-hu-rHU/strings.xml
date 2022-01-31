@@ -80,7 +80,7 @@
     <string name="app_widget_text_name">Minimális szöveg</string>
     <string name="artist">Előadó</string>
     <string name="artists">Előadók</string>
-    <string name="audio_fade_duration">Hangáttünés hossza</string>
+    <string name="audio_fade_duration">Audio fade duration</string>
     <string name="audio_focus_denied">Az audiofókusz megtagadva.</string>
     <string name="audio_settings_summary">Módosítsd a hangbeállításokat és állítsd be a hangszínszabályzó vezérlőit</string>
     <string name="auto">Auto</string>
@@ -305,7 +305,7 @@
     <string name="pref_keep_screen_on_summary">Vedd figyelembe, hogy ezen funkció engedélyezése hatással lehet az akkuidőre</string>
     <string name="pref_keep_screen_on_title">Tartsa bekapcsolva a képernyőt</string>
     <string name="pref_language_name">Válasszon nyelvet</string>
-    <string name="pref_snow_fall_title">Hóesés hatás</string>
+    <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">A jelenlegi zeneszám albumborítóját zárolt háttérképként használja.</string>
     <string name="pref_summary_album_artists_only">Album előadók mutatása az Előadók kategóriában</string>
     <string name="pref_summary_audio_ducking">Hangerő csökkentése rendszerhang vagy értesítés érkezik</string>
@@ -330,8 +330,9 @@
     <string name="pref_summary_lock_screen">Retro Music egyéni vezérlőinek a használata zárolási képernyőn.</string>
     <string name="pref_summary_open_source_licences">A nyílt forráskódú szoftverek licence részletei</string>
     <string name="pref_summary_remember_tab">Lépjen az utoljára használt fülre az alkalmazás indításakor</string>
-    <string name="pref_summary_show_lyrics">Szinkronizált dalszövegek megjelenítése albumborító helyett</string>
-    <string name="pref_summary_suggestions">Új zene mix mutatása kezdőoldalon</string>
+    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Kiterjesztett üzemmód</string>
     <string name="pref_summary_toggle_headset">Indítsa el a lejátszást azonnal, amikor a fejhallgató csatlakoztatva van.</string>
     <string name="pref_summary_toggle_shuffle">A véletlen sorrendű mód kikapcsol, ha új számlistát játszik le</string>
@@ -345,7 +346,7 @@
     <string name="pref_title_app_shortcuts">Színes alkalmazás parancsikonok</string>
     <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Hangerőcsökkentés fókusz vesztés esetén</string>
-    <string name="pref_title_audio_fade">Hang elhalkítása/felerősítése</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Automatikusan letölti az előadók képeit</string>
     <string name="pref_title_blacklist">Feketelista</string>
     <string name="pref_title_bluetooth_playback">Bluetooth lejátszás</string>
@@ -372,9 +373,10 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Most játszott felület megjelenése</string>
     <string name="pref_title_open_source_licences">Nyílt forráskódú licencek</string>
-    <string name="pref_title_remember_tab">Legutóbbi fül megjegyzése</string>
-    <string name="pref_title_show_lyrics">Dalszöveg mutatása</string>
-    <string name="pref_title_suggestions">Javaslatok mutatása</string>
+    <string name="pref_title_remember_tab">Remember last tab</string>
+    <string name="pref_title_show_lyrics">Show lyrics</string>
+    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Lap címek módja</string>
     <string name="pref_title_toggle_carousel_effect">Carousel hatás</string>
     <string name="pref_title_toggle_full_screen">Teljes képernyős alkalmazás</string>
@@ -382,7 +384,7 @@
     <string name="pref_title_toggle_toggle_shuffle">Kevert mód</string>
     <string name="pref_title_toggle_volume">Hangerőszabályzók</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
-    <string name="pref_title_whitelist">Zene engedélyezési lista</string>
+    <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Sötét téma, Most játszott felület témái, Carousel hatás és még sok más ..</string>
     <string name="profile">Profil</string>
