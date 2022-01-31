@@ -80,7 +80,7 @@
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artiest</string>
     <string name="artists">Artiesten</string>
-    <string name="audio_fade_duration">Audio Fade Duur</string>
+    <string name="audio_fade_duration">Audio fade duration</string>
     <string name="audio_focus_denied">Geluid focus geweigerd </string>
     <string name="audio_settings_summary">Wijzig de geluidsinstellingen en pas de equalizer aan</string>
     <string name="auto">Automatisch</string>
@@ -332,6 +332,7 @@
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Zet dit aan voor immersive mode</string>
     <string name="pref_summary_toggle_headset">Wanneer headphones ingeplugd zijn, afspelen start automatisch</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
@@ -375,6 +376,7 @@
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">Carrousel-effect</string>
     <string name="pref_title_toggle_full_screen">Volledig scherm app</string>
