@@ -332,6 +332,7 @@
     <string name="pref_summary_remember_tab">Μεταβείτε στην τελευταία χρησιμοποιημένη καρτέλα κατά την έναρξη</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Ενεργοποίηση της επιλογής για χρήση πλήρους οθόνης</string>
     <string name="pref_summary_toggle_headset">Όταν συνδεθούν ηχεία/ακουστικά , αρχίζει η αναπαραγωγή</string>
     <string name="pref_summary_toggle_shuffle">Η λειτουργία ανακατέματος θα απενεργοποιείται όταν αναπαράγεται μια νέα λίστα τραγουδιών</string>
@@ -375,6 +376,7 @@
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Λειτουργία τίτλων καρτελών</string>
     <string name="pref_title_toggle_carousel_effect">Εφέ καρουσέλ</string>
     <string name="pref_title_toggle_full_screen">Full screen εφαρμογή</string>
