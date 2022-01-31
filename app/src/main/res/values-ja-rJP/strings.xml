@@ -71,6 +71,7 @@
     <string name="app_shortcut_top_tracks_short">トップ曲</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">レトロミュージック - カード</string>
+    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">レトロミュージック - クラシック</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">レトロミュージック - 小</string>
@@ -303,7 +304,7 @@
     <string name="pref_keep_screen_on_summary">この機能をオンにすると、バッテリー寿命に影響する可能性があります</string>
     <string name="pref_keep_screen_on_title">画面をオンのままにする</string>
     <string name="pref_language_name">言語を選択</string>
-    <string name="pref_snow_fall_title">スノーフォールエフェクト</string>
+    <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">再生中のジャケットをロック画面の壁紙に適用する</string>
     <string name="pref_summary_album_artists_only">アーティストカテゴリ内にアルバムのアーティストを表示する</string>
     <string name="pref_summary_audio_ducking">システムでサウンドが再生されたとき、または通知が受信されたときに一時的に音量を下げる</string>
@@ -330,6 +331,7 @@
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">アプリをフルスクリーン表示にする</string>
     <string name="pref_summary_toggle_headset">ヘッドフォンが接続されたら自動で再生を開始する</string>
     <string name="pref_summary_toggle_shuffle">新しいリストの楽曲を再生する時にシャッフルは自動的にオフになります</string>
@@ -373,6 +375,7 @@
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">タブのラベル</string>
     <string name="pref_title_toggle_carousel_effect">カルーセルエフェクト</string>
     <string name="pref_title_toggle_full_screen">フルスクリーン表示</string>
