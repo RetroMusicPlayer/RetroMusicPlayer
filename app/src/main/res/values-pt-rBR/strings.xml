@@ -332,6 +332,7 @@
     <string name="pref_summary_remember_tab">Navegar para a última aba usada ao iniciar</string>
     <string name="pref_summary_show_lyrics">Exibir letras sincronizadas sobre a capa do álbum</string>
     <string name="pref_summary_suggestions">Mostrar Nova Mistura de Música na tela inicial</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Modo imersivo</string>
     <string name="pref_summary_toggle_headset">Começar a reproduzir imediatamente após os fones de ouvido forem conectados</string>
     <string name="pref_summary_toggle_shuffle">O modo aleatório será desativado ao reproduzir uma nova lista de músicas</string>
@@ -375,6 +376,7 @@
     <string name="pref_title_remember_tab">Lembrar a última guia</string>
     <string name="pref_title_show_lyrics">Mostrar letras</string>
     <string name="pref_title_suggestions">Mostrar sugestões</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Modo de títulos nas abas</string>
     <string name="pref_title_toggle_carousel_effect">Efeito carrossel</string>
     <string name="pref_title_toggle_full_screen">Aplicativo em tela cheia</string>
