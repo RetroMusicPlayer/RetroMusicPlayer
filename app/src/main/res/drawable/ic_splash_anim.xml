@@ -139,7 +139,7 @@
                 android:valueFrom="M 156.605 331.163 C 138.737 341.479 116.396 328.587 116.396 307.948 L 116.34 207.484 C 135.5 199 148 198 163.889 201.361 C 188.089 206.481 223 244 259.611 233.069 C 312.484 217.284 323 221.5 334.299 228.582 L 156.605 331.163 Z"
                 android:valueTo="M 156.605 331.163 C 138.737 341.479 116.396 328.587 116.396 307.948 L 116.34 218.484 C 137.051 202.766 178.295 198.479 206.889 201.361 C 257.967 206.515 265.938 234.257 308.611 233.069 C 317.35 232.868 326.009 231.355 334.299 228.582 L 156.605 331.163 Z"
                 android:valueType="pathType"
-                android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                android:interpolator="@android:anim/decelerate_interpolator"/>
         </aapt:attr>
     </target>
     <target android:name="path_2">
