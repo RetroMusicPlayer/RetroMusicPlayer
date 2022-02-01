@@ -334,7 +334,7 @@ tê guhertin</string>
     <string name="pref_summary_remember_tab">Dema ku dest pê dike, biçe rûgera herî dawî ya ku hatiye bikaranîn</string>
     <string name="pref_summary_show_lyrics">Peyvê stranên hevdemkirî li ser berga albumê nîşan bide</string>
     <string name="pref_summary_suggestions">Bişkoka tevlihevkirina Muzîka nû li ser dîmenera sereke nîşan bide</string>
-    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Bi kişandina li her derê li ser dîmendera lêdanê stranan biguherîne</string>
     <string name="pref_summary_toggle_full_screen">Awaya dîmendera tije çalak bike</string>
     <string name="pref_summary_toggle_headset">Piştî ku guhik hate girêdan tavilê dest bi lêdanê bike</string>
     <string name="pref_summary_toggle_shuffle">Dema ku ji rêzeyeke stran were lêdan wê awaya tevlihevkirinê were neçalakkirin</string>
@@ -378,7 +378,7 @@ tê guhertin</string>
     <string name="pref_title_remember_tab">Rûgera dawî bi bîr bîne</string>
     <string name="pref_title_show_lyrics">Peyvên stranê nîşan bide</string>
     <string name="pref_title_suggestions">Pêşniyaran nîşan bide</string>
-    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Ji bo guhertina stranê li her derê kaş bike</string>
     <string name="pref_title_tab_text_mode">Awaya sernavê rûgeran</string>
     <string name="pref_title_toggle_carousel_effect">Bandora gilover</string>
     <string name="pref_title_toggle_full_screen">Sepanê di dîmendera tije bide xebitandin</string>
