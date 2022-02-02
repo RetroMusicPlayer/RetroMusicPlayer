@@ -142,7 +142,7 @@ class SongFileAdapter(
     }
 
     override fun getPopupText(position: Int): String {
-        return getSectionName(position)
+        return if (position >= dataSet.lastIndex) "" else getSectionName(position)
     }
 
     private fun getSectionName(position: Int): String {
