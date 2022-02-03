@@ -5,21 +5,21 @@
     <string name="accent_color">Акцентний колір</string>
     <string name="accent_color_desc">Акцентний колір, за замовчуванням фіолетовий</string>
     <string name="action_about">Про додаток</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="action_add_to_blacklist">Додати до чорного списку</string>
     <string name="action_add_to_favorites">Додати в обране</string>
     <string name="action_add_to_playing_queue">Додати до черги відтворення</string>
     <string name="action_add_to_playlist">Додати до списку відтворення</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">Трансляція на іншому дисплеї</string>
     <string name="action_clear_playing_queue">Очистити чергу відтворення</string>
     <string name="action_cycle_repeat">Циклічне повторення</string>
     <string name="action_delete">Видалити</string>
     <string name="action_delete_from_device">Видалити з пристрою</string>
     <string name="action_details">Деталі</string>
-    <string name="action_edit">Edit</string>
+    <string name="action_edit">Редагувати</string>
     <string name="action_go_to_album">Перейти до альбому</string>
     <string name="action_go_to_artist">Перейти до виконавця</string>
     <string name="action_go_to_genre">Перейти до жанру</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">Перейти до тексту пісень</string>
     <string name="action_go_to_start_directory">Перейти до початкової директорії</string>
     <string name="action_grant">Надати</string>
     <string name="action_grid_size">Розмір сітки</string>
@@ -53,7 +53,7 @@
     <string name="adaptive">Адаптивний</string>
     <string name="add_action">Додати</string>
     <string name="add_playlist_title">"Додати до списку відтворення"</string>
-    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="add_time_framed_lryics">Додати часові розмежування тексту</string>
     <string name="added_title_to_playing_queue">"Додано 1 композицію до черги відтворення."</string>
     <string name="added_x_titles_to_playing_queue">Додано %1$d композицій до черги відтворення.</string>
     <string name="album">Альбом</string>
@@ -63,7 +63,7 @@
         <item quantity="many">Пісні</item>
         <item quantity="other">Пісні</item>
     </plurals>
-    <string name="album_artist">Album Artist</string>
+    <string name="album_artist">Виконавець альбому</string>
     <string name="albums">Альбоми</string>
     <plurals name="albums">
         <item quantity="one">Альбом</item>
