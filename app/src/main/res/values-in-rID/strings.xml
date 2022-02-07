@@ -330,7 +330,7 @@
     <string name="pref_summary_remember_tab">Arahkan ke tab yang terakhir digunakan saat memulai</string>
     <string name="pref_summary_show_lyrics">Tampilkan lirik yang disinkronkan di atas sampul album</string>
     <string name="pref_summary_suggestions">Tampilkan Campuran Musik Baru di layar beranda</string>
-    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Memungkinkan mengubah lagu dengan menggeser di mana saja di layar yang sedang diputar</string>
     <string name="pref_summary_toggle_full_screen">Mode Layar Penuh</string>
     <string name="pref_summary_toggle_headset">Mulai bermain segera setelah headphone terhubung</string>
     <string name="pref_summary_toggle_shuffle">Mode acak akan mati saat memutar daftar lagu baru</string>
@@ -374,7 +374,7 @@
     <string name="pref_title_remember_tab">Ingat tab terakhir</string>
     <string name="pref_title_show_lyrics">Tampilkan lirik</string>
     <string name="pref_title_suggestions">Tampilkan Saran</string>
-    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Geser ke mana saja untuk mengubah lagu</string>
     <string name="pref_title_tab_text_mode">Mode judul tab</string>
     <string name="pref_title_toggle_carousel_effect">Efek korsel</string>
     <string name="pref_title_toggle_full_screen">Aplikasi layar penuh</string>
