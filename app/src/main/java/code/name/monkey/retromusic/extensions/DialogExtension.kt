@@ -39,5 +39,5 @@ fun AlertDialog.colorButtons(): AlertDialog {
 
 fun Fragment.materialDialog(): MaterialDialog {
     return MaterialDialog(requireContext())
-        .cornerRadius(res = R.dimen.m3_alert_dialog_corner_size)
+        .cornerRadius(res = R.dimen.m3_dialog_corner_size)
 }
