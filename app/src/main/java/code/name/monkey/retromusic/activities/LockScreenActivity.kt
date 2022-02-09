@@ -15,10 +15,10 @@
 package code.name.monkey.retromusic.activities
 
 import android.app.KeyguardManager
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.core.content.getSystemService
 import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -63,8 +63,8 @@ class LockScreenActivity : AbsMusicServiceActivity() {
             override fun onSlideClosed(): Boolean {
                 if (VersionUtils.hasOreo()) {
                     val keyguardManager =
-                        getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-                    keyguardManager.requestDismissKeyguard(this@LockScreenActivity, null)
+                        getSystemService<KeyguardManager>()
+                    keyguardManager?.requestDismissKeyguard(this@LockScreenActivity, null)
                 }
                 finish()
                 return true
@@ -86,8 +86,8 @@ class LockScreenActivity : AbsMusicServiceActivity() {
     private fun lockScreenInit() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true)
-            val keyguardManager: KeyguardManager = getSystemService(KeyguardManager::class.java)
-            keyguardManager.requestDismissKeyguard(this, null)
+            val keyguardManager = getSystemService<KeyguardManager>()
+            keyguardManager?.requestDismissKeyguard(this, null)
         } else {
             this.window.addFlags(
                 WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or

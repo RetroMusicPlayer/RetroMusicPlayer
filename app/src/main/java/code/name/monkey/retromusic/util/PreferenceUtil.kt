@@ -3,8 +3,8 @@ package code.name.monkey.retromusic.util
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import androidx.core.content.getSystemService
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -332,10 +332,7 @@ object PreferenceUtil {
         return when (autoDownloadImagesPolicy) {
             "always" -> true
             "only_wifi" -> {
-                val connectivityManager = ContextCompat.getSystemService(
-                    App.getContext(),
-                    ConnectivityManager::class.java
-                )
+                val connectivityManager = App.getContext().getSystemService<ConnectivityManager>()
                 var netInfo: NetworkInfo? = null
                 if (connectivityManager != null) {
                     netInfo = connectivityManager.activeNetworkInfo

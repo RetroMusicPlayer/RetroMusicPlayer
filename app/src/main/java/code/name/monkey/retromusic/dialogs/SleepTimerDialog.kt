@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.dialogs
 import android.app.AlarmManager
 import android.app.Dialog
 import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -26,6 +25,7 @@ import android.widget.CheckBox
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.getSystemService
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -93,8 +93,8 @@ class SleepTimerDialog : DialogFragment() {
                 val pi = makeTimerPendingIntent(PendingIntent.FLAG_CANCEL_CURRENT)
                 val nextSleepTimerElapsedTime = SystemClock.elapsedRealtime() + minutes * 60 * 1000
                 PreferenceUtil.nextSleepTimerElapsedRealTime = nextSleepTimerElapsedTime.toInt()
-                val am = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, nextSleepTimerElapsedTime, pi)
+                val am = requireContext().getSystemService<AlarmManager>()
+                am?.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, nextSleepTimerElapsedTime, pi)
 
                 Toast.makeText(
                     requireContext(),
@@ -105,9 +105,8 @@ class SleepTimerDialog : DialogFragment() {
             .setNegativeButton(android.R.string.cancel) { _, _ ->
                 val previous = makeTimerPendingIntent(PendingIntent.FLAG_NO_CREATE)
                 if (previous != null) {
-                    val am =
-                        requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                    am.cancel(previous)
+                    val am = requireContext().getSystemService<AlarmManager>()
+                    am?.cancel(previous)
                     previous.cancel()
                     Toast.makeText(
                         requireContext(),

@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.fragments.other
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.media.AudioManager
@@ -23,6 +22,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
@@ -42,7 +42,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     private var audioVolumeObserver: AudioVolumeObserver? = null
 
     private val audioManager: AudioManager
-        get() = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        get() = requireContext().getSystemService()!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
