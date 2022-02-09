@@ -691,7 +691,7 @@ object PreferenceUtil {
         set(value) = sharedPreferences.edit { putFloat(PLAYBACK_PITCH, value) }
 
     val appBarMode: TopAppBarLayout.AppBarMode
-        get() = if (sharedPreferences.getString(APPBAR_MODE, "0") == "0") {
+        get() = if (sharedPreferences.getString(APPBAR_MODE, "1") == "0") {
             TopAppBarLayout.AppBarMode.COLLAPSING
         } else {
             TopAppBarLayout.AppBarMode.SIMPLE
@@ -712,6 +712,7 @@ object PreferenceUtil {
     val swipeAnywhereToChangeSong
         get() = sharedPreferences.getBoolean(SWIPE_ANYWHERE_NOW_PLAYING, true)
 }
+
 enum class LyricsType {
     REPLACE_COVER, OVER_COVER
 }

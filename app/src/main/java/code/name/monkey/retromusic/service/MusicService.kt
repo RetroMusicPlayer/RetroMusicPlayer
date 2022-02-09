@@ -153,11 +153,11 @@ class MusicService : MediaBrowserServiceCompat(),
     }
     private var audioManager: AudioManager? = null
         get() {
-        if (field == null) {
-            field = getSystemService()
+            if (field == null) {
+                field = getSystemService()
+            }
+            return field
         }
-        return field
-    }
 
     private val becomingNoisyReceiverIntentFilter =
         IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
@@ -192,7 +192,7 @@ class MusicService : MediaBrowserServiceCompat(),
     private var playingNotification: PlayingNotification? = null
     private val updateFavoriteReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            playingNotification!!.updateFavorite(currentSong) { startForegroundOrNotify() }
+            playingNotification?.updateFavorite(currentSong) { startForegroundOrNotify() }
             startForegroundOrNotify()
         }
     }
@@ -364,12 +364,12 @@ class MusicService : MediaBrowserServiceCompat(),
             unregisterReceiver(bluetoothReceiver)
             bluetoothConnectedRegistered = false
         }
-        mediaSession!!.isActive = false
+        mediaSession?.isActive = false
         quit()
         releaseResources()
         contentResolver.unregisterContentObserver(mediaStoreObserver)
         unregisterOnSharedPreferenceChangedListener(this)
-        wakeLock!!.release()
+        wakeLock?.release()
         sendBroadcast(Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_DESTROYED"))
     }
 
@@ -524,7 +524,7 @@ class MusicService : MediaBrowserServiceCompat(),
         return repeatMode
     }
 
-    fun setRepeatMode(repeatMode: Int) {
+    private fun setRepeatMode(repeatMode: Int) {
         when (repeatMode) {
             REPEAT_MODE_NONE, REPEAT_MODE_ALL, REPEAT_MODE_THIS -> {
                 this.repeatMode = repeatMode
@@ -737,7 +737,7 @@ class MusicService : MediaBrowserServiceCompat(),
             COLORED_NOTIFICATION -> updateNotification()
             CLASSIC_NOTIFICATION -> {
                 updateNotification()
-                playingNotification?.setPlaying(isPlaying){ startForegroundOrNotify()}
+                playingNotification?.setPlaying(isPlaying) { startForegroundOrNotify() }
                 playingNotification?.updateMetadata(currentSong) { startForegroundOrNotify() }
             }
             PLAYBACK_SPEED -> updateMediaSessionPlaybackState()
@@ -980,17 +980,13 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun removeSongImpl(song: Song) {
-        for (i in playingQueue.indices) {
-            if (playingQueue[i].id == song.id) {
-                playingQueue.removeAt(i)
-                rePosition(i)
-            }
-        }
-        for (i in originalPlayingQueue.indices) {
-            if (originalPlayingQueue[i].id == song.id) {
-                originalPlayingQueue.removeAt(i)
-            }
-        }
+        val deletePosition = playingQueue.indexOf(song)
+        playingQueue.removeAt(deletePosition)
+        rePosition(deletePosition)
+
+        val originalDeletePosition = originalPlayingQueue.indexOf(song)
+        playingQueue.removeAt(originalDeletePosition)
+        rePosition(originalDeletePosition)
     }
 
     fun removeSong(song: Song) {
@@ -1003,6 +999,19 @@ class MusicService : MediaBrowserServiceCompat(),
             removeSongImpl(song)
         }
         notifyChange(QUEUE_CHANGED)
+    }
+
+    private fun rePosition(deletedPosition: Int) {
+        val currentPosition = getPosition()
+        if (deletedPosition < currentPosition) {
+            position = currentPosition - 1
+        } else if (deletedPosition == currentPosition) {
+            if (playingQueue.size > deletedPosition) {
+                setPosition(position)
+            } else {
+                setPosition(position - 1)
+            }
+        }
     }
 
     @Synchronized
@@ -1184,7 +1193,7 @@ class MusicService : MediaBrowserServiceCompat(),
                     savePositionInTrack()
                 }
                 songPlayCountHelper.notifyPlayStateChanged(isPlaying)
-                playingNotification?.setPlaying(isPlaying){ startForegroundOrNotify()}
+                playingNotification?.setPlaying(isPlaying) { startForegroundOrNotify() }
                 startForegroundOrNotify()
             }
             FAVORITE_STATE_CHANGED -> {
@@ -1313,19 +1322,6 @@ class MusicService : MediaBrowserServiceCompat(),
     private fun prepareNext() {
         playerHandler?.removeMessages(PREPARE_NEXT)
         playerHandler?.obtainMessage(PREPARE_NEXT)?.sendToTarget()
-    }
-
-    private fun rePosition(deletedPosition: Int) {
-        val currentPosition = getPosition()
-        if (deletedPosition < currentPosition) {
-            position = currentPosition - 1
-        } else if (deletedPosition == currentPosition) {
-            if (playingQueue.size > deletedPosition) {
-                setPosition(position)
-            } else {
-                setPosition(position - 1)
-            }
-        }
     }
 
     private fun registerBluetoothConnected() {
