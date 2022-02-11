@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -50,7 +49,6 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     private var _binding: FragmentPlaylistDetailBinding? = null
     private val binding get() = _binding!!
 
-
     private lateinit var playlist: PlaylistWithSongs
     private lateinit var playlistSongAdapter: OrderablePlaylistSongAdapter
 
@@ -66,9 +64,9 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         playlist = arguments.extraPlaylist
         binding.toolbar.title = playlist.playlistEntity.playlistName
         setUpRecyclerView()
-        viewModel.getSongs().observe(viewLifecycleOwner, {
+        viewModel.getSongs().observe(viewLifecycleOwner) {
             songs(it.toSongs())
-        })
+        }
         postponeEnterTransition()
         requireView().doOnPreDraw { startPostponedEnterTransition() }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -149,14 +147,13 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     }
 
     private fun showEmptyView() {
-        binding.empty.visibility = View.VISIBLE
-        binding.emptyText.visibility = View.VISIBLE
+        binding.empty.isVisible = true
+        binding.emptyText.isVisible = true
     }
 
     fun songs(songs: List<Song>) {
         binding.progressIndicator.hide()
         if (songs.isNotEmpty()) {
-            Log.i("Updated", songs[0].title)
             playlistSongAdapter.swapDataSet(songs)
         } else {
             showEmptyView()

@@ -31,7 +31,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
@@ -110,9 +110,15 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             when (newState) {
                 STATE_EXPANDED -> {
                     onPanelExpanded()
+                    if (PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics) {
+                        keepScreenOn(true)
+                    }
                 }
                 STATE_COLLAPSED -> {
                     onPanelCollapsed()
+                    if ((PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics) || !PreferenceUtil.isScreenOnEnabled) {
+                        keepScreenOn(false)
+                    }
                 }
                 STATE_SETTLING, STATE_DRAGGING -> {
                     if (fromNotification) {
@@ -140,7 +146,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             insets
         }
         if (RetroUtil.isLandscape()) {
-            binding.slidingPanel.drawAboveSystemBarsWithPadding(true)
+            binding.slidingPanel.drawAboveSystemBarsWithPadding()
         }
         chooseFragmentForTheme()
         setupSlidingUpPanel()
@@ -199,6 +205,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     private fun animateNavigationBarColor(color: Int) {
+        if (VersionUtils.hasOreo()) return
         navigationBarColorAnimator?.cancel()
         navigationBarColorAnimator = ValueAnimator
             .ofArgb(window.navigationBarColor, color).apply {
@@ -217,14 +224,16 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         setMiniPlayerAlphaProgress(0F)
         // restore values
         animateNavigationBarColor(surfaceColor())
-        setLightStatusBarAuto(surfaceColor())
-        setLightNavigationAuto()
+        setLightStatusBarAuto()
+        setLightNavigationBarAuto()
         setTaskDescriptionColor(taskColor)
+        playerFragment?.onHide()
     }
 
     open fun onPanelExpanded() {
         setMiniPlayerAlphaProgress(1F)
         onPaletteColorChanged()
+        playerFragment?.onShow()
     }
 
     private fun setupSlidingUpPanel() {
@@ -291,7 +300,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (panelState == STATE_EXPANDED) {
             navigationBarColor = surfaceColor()
             setTaskDescColor(paletteColor)
-            val isColorLight = ColorUtil.isColorLight(paletteColor)
+            val isColorLight = paletteColor.isColorLight
             if (PreferenceUtil.isAdaptiveColor && (nowPlayingScreen == Normal || nowPlayingScreen == Flat)) {
                 setLightNavigationBar(true)
                 setLightStatusBar(isColorLight)
@@ -314,13 +323,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                 setLightStatusBar(false)
             } else if (nowPlayingScreen == Fit) {
                 setLightStatusBar(false)
-            } else {
-                setLightStatusBar(
-                    ColorUtil.isColorLight(
-                        surfaceColor()
-                    )
-                )
-                setLightNavigationBar(true)
             }
         }
     }
@@ -349,10 +351,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     private fun updateColor() {
-        libraryViewModel.paletteColor.observe(this, { color ->
+        libraryViewModel.paletteColor.observe(this) { color ->
             this.paletteColor = color
             onPaletteColorChanged()
-        })
+        }
     }
 
     fun setBottomNavVisibility(visible: Boolean, animate: Boolean = false, hideBottomSheet: Boolean = MusicPlayerRemote.playingQueue.isEmpty()) {
@@ -401,12 +403,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             bottomSheetBehavior.peekHeight = -windowInsets.safeGetBottomInsets()
             bottomSheetBehavior.state = STATE_COLLAPSED
             libraryViewModel.setFabMargin(if (isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0)
-            binding.slidingPanel.elevation = 0F
-            binding.bottomNavigationView.elevation = 10F
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 binding.slidingPanel.elevation = 0F
-                binding.bottomNavigationView.elevation = 10F
+                binding.bottomNavigationView.elevation = 5F
                 if (isBottomNavVisible) {
                     println("List")
                     if (animate) {

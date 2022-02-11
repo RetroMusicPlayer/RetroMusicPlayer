@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments
 
 import android.animation.ValueAnimator
 import android.widget.Toast
+import androidx.core.animation.doOnEnd
 import androidx.lifecycle.*
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
@@ -39,6 +40,7 @@ class LibraryViewModel(
 
     private val _paletteColor = MutableLiveData<Int>()
     private val home = MutableLiveData<List<Home>>()
+    private val suggestions = MutableLiveData<List<Song>>()
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
@@ -55,6 +57,7 @@ class LibraryViewModel(
 
     private fun loadLibraryContent() = viewModelScope.launch(IO) {
         fetchHomeSections()
+        fetchSuggestions()
         fetchSongs()
         fetchAlbums()
         fetchArtists()
@@ -92,38 +95,33 @@ class LibraryViewModel(
         return home
     }
 
+    fun getSuggestions(): LiveData<List<Song>> {
+        return suggestions
+    }
+
     fun getFabMargin(): LiveData<Int> {
         return fabMargin
     }
 
-    private fun fetchSongs() {
-        viewModelScope.launch(IO) {
-            songs.postValue(repository.allSongs())
-        }
+    private suspend fun fetchSongs() {
+        songs.postValue(repository.allSongs())
     }
 
-    private fun fetchAlbums() {
-        viewModelScope.launch(IO) {
-            albums.postValue(repository.fetchAlbums())
-        }
+    private suspend fun fetchAlbums() {
+        albums.postValue(repository.fetchAlbums())
+
     }
 
-    private fun fetchArtists() {
+    private suspend fun fetchArtists() {
         if (PreferenceUtil.albumArtistsOnly) {
-            viewModelScope.launch(IO) {
-                artists.postValue(repository.albumArtists())
-            }
+            artists.postValue(repository.albumArtists())
         } else {
-            viewModelScope.launch(IO) {
-                artists.postValue(repository.fetchArtists())
-            }
+            artists.postValue(repository.fetchArtists())
         }
     }
 
-    private fun fetchPlaylists() {
-        viewModelScope.launch(IO) {
-            playlists.postValue(repository.fetchPlaylistWithSongs())
-        }
+    private suspend fun fetchPlaylists() {
+        playlists.postValue(repository.fetchPlaylistWithSongs())
     }
 
     private fun fetchLegacyPlaylist() {
@@ -132,16 +130,16 @@ class LibraryViewModel(
         }
     }
 
-    private fun fetchGenres() {
-        viewModelScope.launch(IO) {
-            genres.postValue(repository.fetchGenres())
-        }
+    private suspend fun fetchGenres() {
+        genres.postValue(repository.fetchGenres())
     }
 
-    fun fetchHomeSections() {
-        viewModelScope.launch(IO) {
-            home.postValue(repository.homeSections())
-        }
+    private suspend fun fetchHomeSections() {
+        home.postValue(repository.homeSections())
+    }
+
+    private suspend fun fetchSuggestions() {
+        suggestions.postValue(repository.suggestions())
     }
 
     fun search(query: String?, filter: Filter) {
@@ -151,7 +149,7 @@ class LibraryViewModel(
         }
     }
 
-    fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
+    fun forceReload(reloadType: ReloadType) = viewModelScope.launch(IO) {
         when (reloadType) {
             Songs -> fetchSongs()
             Albums -> fetchAlbums()
@@ -159,6 +157,7 @@ class LibraryViewModel(
             HomeSections -> fetchHomeSections()
             Playlists -> fetchPlaylists()
             Genres -> fetchGenres()
+            Suggestions -> fetchSuggestions()
         }
     }
 
@@ -255,7 +254,7 @@ class LibraryViewModel(
                 }
                 repository.insertSongs(songEntities)
             } else {
-                if (playlist != Playlist.empty){
+                if (playlist != Playlist.empty) {
                     val playListId = createPlaylist(PlaylistEntity(playlistName = playlist.name))
                     val songEntities = playlist.getSongs().map {
                         it.toSongEntity(playListId)
@@ -367,7 +366,7 @@ class LibraryViewModel(
                         Toast.LENGTH_SHORT
                     ).show()
                     if (songs.isNotEmpty()) {
-                       Toast.makeText(
+                        Toast.makeText(
                             App.getContext(),
                             "Adding songs to $playlistName",
                             Toast.LENGTH_SHORT
@@ -382,15 +381,16 @@ class LibraryViewModel(
     fun setFabMargin(bottomMargin: Int) {
         val currentValue = DensityUtil.dip2px(App.getContext(), 16F) +
                 bottomMargin
-        if (currentValue != fabMargin.value) {
-            ValueAnimator.ofInt(fabMargin.value!!, currentValue).apply {
-                addUpdateListener {
-                    fabMargin.postValue(
-                        it.animatedValue as Int
-                    )
-                }
-                start()
+        ValueAnimator.ofInt(fabMargin.value!!, currentValue).apply {
+            addUpdateListener {
+                fabMargin.postValue(
+                    (it.animatedValue as Int)
+                )
             }
+            doOnEnd {
+                fabMargin.postValue(currentValue)
+            }
+            start()
         }
     }
 }
@@ -402,4 +402,5 @@ enum class ReloadType {
     HomeSections,
     Playlists,
     Genres,
+    Suggestions
 }

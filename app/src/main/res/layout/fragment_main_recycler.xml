@@ -6,37 +6,12 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <code.name.monkey.retromusic.views.TopAppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <FrameLayout
-            android:id="@+id/toolbar_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:navigationIcon="@drawable/ic_search"
-                app:popupTheme="?attr/toolbarPopupTheme"
-                app:title="@null"
-                tools:ignore="UnusedAttribute">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/appNameText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textAppearance="@style/TextViewHeadline6"
-                    android:textStyle="bold" />
-            </androidx.appcompat.widget.Toolbar>
-        </FrameLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+        style="?appBarLayoutStyle"
+        android:fitsSystemWindows="true" />
 
     <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
         android:id="@+id/recycler_view"

@@ -42,20 +42,19 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
     ICabHolder {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getSongs().observe(viewLifecycleOwner, {
+        libraryViewModel.getSongs().observe(viewLifecycleOwner) {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
-        })
+        }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (!handleBackPress()) {
                 remove()
-                mainActivity.finish()
+                requireActivity().onBackPressed()
             }
         }
     }
-
 
     override val titleRes: Int
         get() = R.string.songs
@@ -344,6 +343,13 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
     override fun onResume() {
         super.onResume()
         libraryViewModel.forceReload(ReloadType.Songs)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (cab.isActive()) {
+            cab.destroy()
+        }
     }
 
     companion object {

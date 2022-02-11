@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.adapter.artist
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
@@ -39,7 +41,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import me.zhanghai.android.fastscroll.PopupTextProvider
-import java.util.*
 
 class ArtistAdapter(
     override val activity: FragmentActivity,
@@ -52,13 +53,17 @@ class ArtistAdapter(
     activity, ICabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
 
+    var albumArtistsOnly = false
+
     init {
         this.setHasStableIds(true)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun swapDataSet(dataSet: List<Artist>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
+        albumArtistsOnly = PreferenceUtil.albumArtistsOnly
     }
 
     override fun getItemId(position: Int): Long {
@@ -86,7 +91,7 @@ class ArtistAdapter(
         holder.title?.text = artist.name
         holder.text?.hide()
         val transitionName =
-            if (PreferenceUtil.albumArtistsOnly) artist.name else artist.id.toString()
+            if (albumArtistsOnly) artist.name else artist.id.toString()
         if (holder.imageContainer != null) {
             ViewCompat.setTransitionName(holder.imageContainer!!, transitionName)
         } else {
@@ -158,7 +163,7 @@ class ArtistAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            menu?.visibility = View.GONE
+            menu?.isVisible = false
         }
 
         override fun onClick(v: View?) {
@@ -168,7 +173,7 @@ class ArtistAdapter(
             } else {
                 val artist = dataSet[layoutPosition]
                 image?.let {
-                    if (PreferenceUtil.albumArtistsOnly && IAlbumArtistClickListener != null) {
+                    if (albumArtistsOnly && IAlbumArtistClickListener != null) {
                         IAlbumArtistClickListener.onAlbumArtist(artist.name, imageContainer ?: it)
                     } else {
                         IArtistClickListener.onArtist(artist.id, imageContainer ?: it)

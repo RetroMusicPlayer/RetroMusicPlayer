@@ -35,7 +35,6 @@ import java.io.IOException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.*
-import kotlin.collections.LinkedHashMap
 
 /**
  * Validates that the calling package is authorized to browse a [MediaBrowserServiceCompat].

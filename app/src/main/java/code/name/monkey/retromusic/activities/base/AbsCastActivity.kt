@@ -11,7 +11,6 @@ import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import java.util.*
 
 
 abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {

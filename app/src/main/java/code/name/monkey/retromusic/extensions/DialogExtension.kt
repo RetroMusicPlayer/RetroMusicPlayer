@@ -16,7 +16,9 @@ package code.name.monkey.retromusic.extensions
 
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import code.name.monkey.retromusic.R
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 fun DialogFragment.materialDialog(title: Int): MaterialAlertDialogBuilder {
@@ -33,4 +35,9 @@ fun AlertDialog.colorButtons(): AlertDialog {
         getButton(AlertDialog.BUTTON_NEUTRAL).accentTextColor()
     }
     return this
+}
+
+fun Fragment.materialDialog(): MaterialDialog {
+    return MaterialDialog(requireContext())
+        .cornerRadius(res = R.dimen.m3_alert_dialog_corner_size)
 }

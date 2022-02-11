@@ -59,11 +59,9 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
         return binding.playerToolbar
     }
 
-    override fun onShow() {
-    }
+    override fun onShow() {}
 
-    override fun onHide() {
-    }
+    override fun onHide() {}
 
     override fun onBackPressed(): Boolean {
         return false

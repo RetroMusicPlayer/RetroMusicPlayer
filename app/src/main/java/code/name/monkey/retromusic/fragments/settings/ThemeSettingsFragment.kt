@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.fragments.settings
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.preference.Preference
@@ -27,8 +28,8 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.colorChooser
 import com.google.android.material.color.DynamicColors
 
@@ -37,6 +38,7 @@ import com.google.android.material.color.DynamicColors
  */
 
 class ThemeSettingsFragment : AbsSettingsFragment() {
+    @SuppressLint("CheckResult")
     override fun invalidateSettings() {
         val generalTheme: Preference? = findPreference(GENERAL_THEME)
         generalTheme?.let {
@@ -59,7 +61,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         val accentColor = ThemeStore.accentColor(requireContext())
         accentColorPref?.setColor(accentColor, ColorUtil.darkenColor(accentColor))
         accentColorPref?.setOnPreferenceClickListener {
-            MaterialDialog(requireContext()).show {
+            materialDialog().show {
                 colorChooser(
                     initialSelection = accentColor,
                     showAlphaSelector = false,
@@ -118,6 +120,16 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             if (newValue as Boolean) {
                 DynamicColors.applyToActivitiesIfAvailable(App.getContext())
             }
+            restartActivity()
+            true
+        }
+        val wallpaperAccent: ATESwitchPreference? = findPreference(WALLPAPER_ACCENT)
+        wallpaperAccent?.setOnPreferenceChangeListener { _, _ ->
+            restartActivity()
+            true
+        }
+        val customFont: ATESwitchPreference? = findPreference(CUSTOM_FONT)
+        customFont?.setOnPreferenceChangeListener { _, _ ->
             restartActivity()
             true
         }

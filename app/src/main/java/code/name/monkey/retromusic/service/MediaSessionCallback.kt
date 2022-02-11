@@ -28,11 +28,12 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.*
-import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.service.MusicService.Companion.CYCLE_REPEAT
+import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
+import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_SHUFFLE
 import code.name.monkey.retromusic.util.MusicUtil
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-
 
 /**
  * Created by hemanths on 2019-08-01.
@@ -95,7 +96,7 @@ class MediaSessionCallback(
                     AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY -> topPlayedRepository.recentlyPlayedTracks()
                     AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SUGGESTIONS -> topPlayedRepository.recentlyPlayedTracks()
                     AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS -> topPlayedRepository.recentlyPlayedTracks()
-                    else -> musicService.playingQueue as List<Song>
+                    else -> musicService.playingQueue
                 }
                 songs.addAll(tracks)
                 var songIndex = MusicUtil.indexOfSongInList(tracks, itemId)

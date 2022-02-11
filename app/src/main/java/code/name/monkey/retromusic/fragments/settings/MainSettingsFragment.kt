@@ -19,17 +19,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMainSettingsBinding
+import code.name.monkey.retromusic.extensions.drawAboveSystemBarsWithPadding
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.rootView
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
 
@@ -40,17 +37,20 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
 
 
     override fun onClick(view: View) {
-        when (view.id) {
-            R.id.generalSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_themeSettingsFragment)
-            R.id.audioSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_audioSettings)
-            R.id.personalizeSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_personalizeSettingsFragment)
-            R.id.imageSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_imageSettingFragment)
-            R.id.notificationSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_notificationSettingsFragment)
-            R.id.otherSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_otherSettingsFragment)
-            R.id.aboutSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_aboutActivity)
-            R.id.nowPlayingSettings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_nowPlayingSettingsFragment)
-            R.id.backup_restore_settings -> findNavController().navigate(R.id.action_mainSettingsFragment_to_backupFragment)
-        }
+        findNavController().navigate(
+            when (view.id) {
+                R.id.generalSettings -> R.id.action_mainSettingsFragment_to_themeSettingsFragment
+                R.id.audioSettings -> R.id.action_mainSettingsFragment_to_audioSettings
+                R.id.personalizeSettings -> R.id.action_mainSettingsFragment_to_personalizeSettingsFragment
+                R.id.imageSettings -> R.id.action_mainSettingsFragment_to_imageSettingFragment
+                R.id.notificationSettings -> R.id.action_mainSettingsFragment_to_notificationSettingsFragment
+                R.id.otherSettings -> R.id.action_mainSettingsFragment_to_otherSettingsFragment
+                R.id.aboutSettings -> R.id.action_mainSettingsFragment_to_aboutActivity
+                R.id.nowPlayingSettings -> R.id.action_mainSettingsFragment_to_nowPlayingSettingsFragment
+                R.id.backup_restore_settings -> R.id.action_mainSettingsFragment_to_backupFragment
+                else -> R.id.action_mainSettingsFragment_to_themeSettingsFragment
+            }
+        )
     }
 
     override fun onCreateView(
@@ -89,17 +89,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             binding.diamondIcon.imageTintList = ColorStateList.valueOf(it)
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(
-            requireActivity().rootView
-        ) { _, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            _binding?.container?.updatePadding(
-                left = insets.left,
-                bottom = insets.bottom,
-                right = insets.right,
-            )
-            windowInsets
-        }
+        binding.container.drawAboveSystemBarsWithPadding()
     }
 
     override fun onDestroyView() {

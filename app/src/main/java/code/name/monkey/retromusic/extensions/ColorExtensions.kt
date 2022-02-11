@@ -46,6 +46,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.slider.Slider
 
 fun Int.ripAlpha(): Int {
     return ColorUtil.stripAlpha(this)
@@ -112,6 +113,22 @@ fun SeekBar.addAccentColor() {
     val colorState = ColorStateList.valueOf(ThemeStore.accentColor(context))
     progressTintList = colorState
     thumbTintList = colorState
+}
+
+fun Slider.addAccentColor() {
+    if (materialYou) return
+    val accentColor = ThemeStore.accentColor(context)
+    trackActiveTintList = accentColor.colorStateList
+    trackInactiveTintList = ColorUtil.withAlpha(accentColor, 0.5F).colorStateList
+    thumbTintList = accentColor.colorStateList
+}
+
+fun Slider.accent() {
+    if (materialYou) return
+    val accentColor = context.accentColor()
+    thumbTintList = accentColor.colorStateList
+    trackActiveTintList = accentColor.colorStateList
+    trackInactiveTintList = ColorUtil.withAlpha(accentColor, 0.1F).colorStateList
 }
 
 fun Button.accentTextColor() {
@@ -260,15 +277,10 @@ fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
 
 @ColorInt
 fun Context.darkAccentColor(): Int {
-    val colorSurfaceVariant = if (surfaceColor().isColorLight) {
-        surfaceColor()
-    } else {
-        surfaceColor().lighterColor
-    }
     return ColorUtils.blendARGB(
         accentColor(),
-        colorSurfaceVariant,
-        if (surfaceColor().isColorLight) 0.96f else 0.975f
+        surfaceColor(),
+        if (surfaceColor().isColorLight) 0.9f else 0.92f
     )
 }
 
@@ -281,6 +293,15 @@ fun Context.darkAccentColorVariant(): Int {
     )
 }
 
+@ColorInt
+fun Context.accentColorVariant(): Int {
+    return if (surfaceColor().isColorLight) {
+        accentColor().darkerColor
+    } else {
+        accentColor().lighterColor
+    }
+}
+
 inline val @receiver:ColorInt Int.isColorLight
     get() = ColorUtil.isColorLight(this)
 
@@ -289,3 +310,6 @@ inline val @receiver:ColorInt Int.lighterColor
 
 inline val @receiver:ColorInt Int.darkerColor
     get() = ColorUtil.darkenColor(this)
+
+inline val Int.colorStateList : ColorStateList
+    get() = ColorStateList.valueOf(this)

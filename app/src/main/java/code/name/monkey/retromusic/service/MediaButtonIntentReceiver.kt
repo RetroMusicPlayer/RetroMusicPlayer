@@ -27,7 +27,12 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.BuildConfig
-import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_PAUSE
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_PLAY
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_STOP
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 
 
 /**

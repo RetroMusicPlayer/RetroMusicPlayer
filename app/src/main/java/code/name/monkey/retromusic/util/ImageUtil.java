@@ -30,6 +30,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -100,7 +101,7 @@ public class ImageUtil {
 
   public static Drawable getVectorDrawable(
       @NonNull Resources res, @DrawableRes int resId, @Nullable Resources.Theme theme) {
-    return res.getDrawable(resId, theme);
+    return ResourcesCompat.getDrawable(res,resId, theme);
   }
 
   /** Makes sure that {@code mTempBuffer} has at least length {@code size}. */

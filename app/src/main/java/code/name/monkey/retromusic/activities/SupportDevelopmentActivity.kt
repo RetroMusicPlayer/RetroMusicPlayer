@@ -19,12 +19,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.LayoutRes
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -37,11 +34,11 @@ import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.databinding.ActivityDonationBinding
+import code.name.monkey.retromusic.databinding.ItemDonationOptionBinding
 import code.name.monkey.retromusic.extensions.*
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.PurchaseInfo
 import com.anjlab.android.iab.v3.SkuDetails
-import java.util.*
 
 class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
@@ -169,8 +166,8 @@ class SkuDetailsAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(donationsDialog).inflate(
-                LAYOUT_RES_ID,
+            ItemDonationOptionBinding.inflate(
+                LayoutInflater.from(donationsDialog),
                 viewGroup,
                 false
             )
@@ -179,12 +176,14 @@ class SkuDetailsAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val skuDetails = skuDetailsList[i]
-        viewHolder.title.text = skuDetails.title.replace("Music Player - MP3 Player - Retro", "")
-            .trim { it <= ' ' }
-        viewHolder.text.text = skuDetails.description
-        viewHolder.text.isVisible = false
-        viewHolder.price.text = skuDetails.priceText
-        viewHolder.image.setImageResource(getIcon(i))
+        with(viewHolder.binding) {
+            itemTitle.text = skuDetails.title.replace("Music Player - MP3 Player - Retro", "")
+                .trim { it <= ' ' }
+            itemText.text = skuDetails.description
+            itemText.isVisible = false
+            itemPrice.text = skuDetails.priceText
+            itemImage.setImageResource(getIcon(i))
+        }
 
         val purchased = donationsDialog.billingProcessor!!.isPurchased(skuDetails.productId)
         val titleTextColor = if (purchased) ATHUtil.resolveColor(
@@ -194,13 +193,14 @@ class SkuDetailsAdapter(
         val contentTextColor =
             if (purchased) titleTextColor else donationsDialog.textColorSecondary()
 
-        viewHolder.title.setTextColor(titleTextColor)
-        viewHolder.text.setTextColor(contentTextColor)
-        viewHolder.price.setTextColor(titleTextColor)
-
-        strikeThrough(viewHolder.title, purchased)
-        strikeThrough(viewHolder.text, purchased)
-        strikeThrough(viewHolder.price, purchased)
+        with(viewHolder.binding) {
+            itemTitle.setTextColor(titleTextColor)
+            itemText.setTextColor(contentTextColor)
+            itemPrice.setTextColor(titleTextColor)
+            strikeThrough(itemTitle, purchased)
+            strikeThrough(itemText, purchased)
+            strikeThrough(itemPrice, purchased)
+        }
 
         viewHolder.itemView.setOnTouchListener { _, _ -> purchased }
         viewHolder.itemView.setOnClickListener { donationsDialog.donate(i) }
@@ -210,17 +210,9 @@ class SkuDetailsAdapter(
         return skuDetailsList.size
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var title: TextView = view.findViewById(R.id.itemTitle)
-        var text: TextView = view.findViewById(R.id.itemText)
-        var price: TextView = view.findViewById(R.id.itemPrice)
-        var image: AppCompatImageView = view.findViewById(R.id.itemImage)
-    }
+    class ViewHolder(val binding: ItemDonationOptionBinding) : RecyclerView.ViewHolder(binding.root)
 
     companion object {
-        @LayoutRes
-        private val LAYOUT_RES_ID = R.layout.item_donation_option
-
         private fun strikeThrough(textView: TextView, strikeThrough: Boolean) {
             textView.paintFlags =
                 if (strikeThrough) textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG

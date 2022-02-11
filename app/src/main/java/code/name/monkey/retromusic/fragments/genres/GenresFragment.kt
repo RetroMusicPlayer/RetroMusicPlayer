@@ -40,15 +40,15 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     IGenreClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getGenre().observe(viewLifecycleOwner, {
+        libraryViewModel.getGenre().observe(viewLifecycleOwner) {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
-        })
+        }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             remove()
-            mainActivity.finish()
+            requireActivity().onBackPressed()
         }
     }
 

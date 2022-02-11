@@ -20,18 +20,14 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.retromusic.activities.OnThemeChangedListener
-import code.name.monkey.retromusic.extensions.rootView
-import code.name.monkey.retromusic.extensions.safeGetBottomInsets
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
+import dev.chrisbanes.insetter.applyInsetter
 
 /**
  * @author Hemanth S (h4h13).
@@ -74,19 +70,10 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
             listView.overScrollMode = View.OVER_SCROLL_NEVER
         }
 
-        // CollapsingToolbarLayout consumes insets and insets are not passed to child views
-        // So we get insets from decor view
-        // https://github.com/material-components/material-components-android/issues/1310
-        ViewCompat.setOnApplyWindowInsetsListener(
-            requireActivity().rootView
-        ) { _, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            listView.updatePadding(
-                left = insets.left,
-                bottom = insets.bottom,
-                right = insets.right,
-            )
-            windowInsets
+        listView.applyInsetter {
+            type(navigationBars = true) {
+                padding()
+            }
         }
         invalidateSettings()
     }

@@ -37,7 +37,6 @@ class HomePlayerFragment : AbsPlayerFragment(R.layout.fragment_home_player),
     private var _binding: FragmentHomePlayerBinding? = null
     private val binding get() = _binding!!
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)

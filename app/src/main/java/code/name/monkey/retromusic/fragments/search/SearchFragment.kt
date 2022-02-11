@@ -42,7 +42,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.transition.MaterialSharedAxis
+import com.google.android.material.transition.MaterialFadeThrough
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import java.util.*
 import kotlin.collections.ArrayList
@@ -63,8 +63,8 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(view)
-        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+        enterTransition = MaterialFadeThrough().addTarget(view)
+        reenterTransition = MaterialFadeThrough().addTarget(view)
         _binding = FragmentSearchBinding.bind(view)
         mainActivity.setSupportActionBar(binding.toolbar)
         libraryViewModel.clearSearchResult()
@@ -88,19 +88,19 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         if (savedInstanceState != null) {
             query = savedInstanceState.getString(QUERY)
         }
-        libraryViewModel.getSearchResult().observe(viewLifecycleOwner, {
+        libraryViewModel.getSearchResult().observe(viewLifecycleOwner) {
             showData(it)
-        })
+        }
         setupChips()
         postponeEnterTransition()
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
-        libraryViewModel.getFabMargin().observe(viewLifecycleOwner, {
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner) {
             binding.keyboardPopup.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = it
             }
-        })
+        }
         KeyboardVisibilityEvent.setEventListener(requireActivity(), viewLifecycleOwner) {
             if (it) {
                 binding.keyboardPopup.isGone = true
@@ -147,7 +147,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
                 super.onChanged()
                 binding.empty.isVisible = searchAdapter.itemCount < 1
                 val height = dipToPix(52f)
-                binding.recyclerView.setPadding(0, 0, 0, height.toInt())
+                binding.recyclerView.updatePadding(bottom = height.toInt())
             }
         })
         binding.recyclerView.apply {
@@ -192,6 +192,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
             R.id.chip_albums -> Filter.ALBUMS
             R.id.chip_album_artists -> Filter.ALBUM_ARTISTS
             R.id.chip_genres -> Filter.GENRES
+            R.id.chip_playlists -> Filter.PLAYLISTS
             else -> Filter.NO_FILTER
         }
     }
@@ -226,11 +227,6 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         hideKeyboard(view)
     }
 
-    override fun onResume() {
-        super.onResume()
-        mainActivity.setBottomNavVisibility(false)
-    }
-
     private fun hideKeyboard(view: View?) {
         if (view != null) {
             val imm: InputMethodManager =
@@ -250,6 +246,7 @@ enum class Filter {
     ALBUMS,
     ALBUM_ARTISTS,
     GENRES,
+    PLAYLISTS,
     NO_FILTER
 }
 

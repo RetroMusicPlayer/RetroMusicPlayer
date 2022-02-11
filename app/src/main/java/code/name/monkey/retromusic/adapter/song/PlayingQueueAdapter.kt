@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.adapter.song
 
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.GlideApp
@@ -154,7 +155,7 @@ class PlayingQueueAdapter(
             }
 
         init {
-            dragView?.visibility = View.VISIBLE
+            dragView?.isVisible = true
         }
 
         override fun onSongMenuItemClick(item: MenuItem): Boolean {

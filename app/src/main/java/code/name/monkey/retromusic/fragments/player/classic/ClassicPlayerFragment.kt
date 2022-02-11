@@ -39,6 +39,7 @@ import code.name.monkey.retromusic.extensions.getSongInfo
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
@@ -455,10 +456,21 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         setUpProgressSlider()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setUpPrevNext() {
         updatePrevNextColor()
-        binding.playerControlsContainer.nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
-        binding.playerControlsContainer.previousButton.setOnClickListener { MusicPlayerRemote.back() }
+        binding.playerControlsContainer.nextButton.setOnTouchListener(
+            MusicSeekSkipTouchListener(
+                requireActivity(),
+                true
+            )
+        )
+        binding.playerControlsContainer.previousButton.setOnTouchListener(
+            MusicSeekSkipTouchListener(
+                requireActivity(),
+                false
+            )
+        )
     }
 
     private fun updatePrevNextColor() {

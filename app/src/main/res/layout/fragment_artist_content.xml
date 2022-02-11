@@ -83,14 +83,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/albumRecyclerView"/>
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/song_sort_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="@null"
-        android:padding="8dp"
-        android:src="@drawable/ic_sort"
+        style="@style/Widget.Material3.Button.IconButton"
+        app:iconTint="?colorControlNormal"
+        app:iconSize="24dp"
+        android:background="?roundSelector"
+        app:icon="@drawable/ic_sort"
         app:layout_constraintBottom_toBottomOf="@+id/songTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/songTitle"

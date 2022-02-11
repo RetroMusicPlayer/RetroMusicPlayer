@@ -107,7 +107,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.fragment_container
             scrimColor = Color.TRANSPARENT
-            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+            setAllContainerColors(surfaceColor())
             setPathMotion(MaterialArcMotion())
         }
     }
@@ -122,7 +122,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         binding.toolbar.title = " "
         ViewCompat.setTransitionName(binding.albumCoverContainer, arguments.extraAlbumId.toString())
         postponeEnterTransition()
-        detailsViewModel.getAlbum().observe(viewLifecycleOwner, {
+        detailsViewModel.getAlbum().observe(viewLifecycleOwner) {
             requireView().doOnPreDraw {
                 startPostponedEnterTransition()
             }
@@ -133,7 +133,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             } else {
                 ViewCompat.setTransitionName(binding.artistImage, album.artistId.toString())
             }
-        })
+        }
 
         setupRecyclerView()
         binding.artistImage.setOnClickListener { artistView ->
@@ -236,17 +236,17 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         simpleSongAdapter.swapDataSet(album.songs)
         if (albumArtistExists) {
             detailsViewModel.getAlbumArtist(album.albumArtist.toString())
-                .observe(viewLifecycleOwner, {
+                .observe(viewLifecycleOwner) {
                     loadArtistImage(it)
-                })
+                }
         } else {
-            detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner, {
+            detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner) {
                 loadArtistImage(it)
-            })
+            }
         }
 
 
-        detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner, { result ->
+        detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
                     println("Loading")
@@ -258,7 +258,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     aboutAlbum(result.data)
                 }
             }
-        })
+        }
     }
 
     private fun moreAlbums(albums: List<Album>) {
@@ -305,9 +305,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun loadArtistImage(artist: Artist) {
-        detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner, {
+        detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner) {
             moreAlbums(it)
-        })
+        }
         GlideApp.with(requireContext()).asBitmapPalette().artistImageOptions(artist)
             //.forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
             .load(

@@ -23,11 +23,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
 import androidx.core.os.ConfigurationCompat
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.LanguageContextWrapper
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.theme.ThemeManager
-import com.google.android.material.color.DynamicColors
 import java.util.*
 
 abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
@@ -35,27 +36,30 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawBehindSystemBars()
         updateTheme()
         hideStatusBar()
         super.onCreate(savedInstanceState)
-        setImmersiveFullscreen()
+        setEdgeToEdgeOrImmersive()
         registerSystemUiVisibility()
         toggleScreenOn()
-        setLightNavigationAuto()
+        setLightNavigationBarAuto()
         setLightStatusBarAuto(surfaceColor())
+        if (VersionUtils.hasQ()) {
+            window.decorView.isForceDarkAllowed = false
+        }
     }
 
     private fun updateTheme() {
-        setTheme(ThemeManager.getThemeResValue(this))
-        setDefaultNightMode(ThemeManager.getNightMode(this))
-
-        // Apply dynamic colors to activity if enabled
+        setTheme(ThemeManager.getThemeResValue())
         if (PreferenceUtil.materialYou) {
-            DynamicColors.applyIfAvailable(
-                this,
-                com.google.android.material.R.style.ThemeOverlay_Material3_DynamicColors_DayNight
-            )
+            setDefaultNightMode(ThemeManager.getNightMode())
+        }
+
+        if (PreferenceUtil.isCustomFont) {
+            setTheme(R.style.FontThemeOverlay)
+        }
+        if (PreferenceUtil.circlePlayButton) {
+            setTheme(R.style.CircleFABOverlay)
         }
     }
 

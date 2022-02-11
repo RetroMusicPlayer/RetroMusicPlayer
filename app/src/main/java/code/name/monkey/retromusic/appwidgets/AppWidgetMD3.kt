@@ -32,7 +32,9 @@ import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -208,7 +210,13 @@ class AppWidgetMD3 : BaseAppWidget() {
 
                         val image = getAlbumArtDrawable(service.resources, bitmap)
                         val roundedBitmap = createRoundedBitmap(
-                            image, imageSize, imageSize, cardRadius, cardRadius, cardRadius, cardRadius
+                            image,
+                            imageSize,
+                            imageSize,
+                            cardRadius,
+                            cardRadius,
+                            cardRadius,
+                            cardRadius
                         )
                         appWidgetView.setImageViewBitmap(R.id.image, roundedBitmap)
 

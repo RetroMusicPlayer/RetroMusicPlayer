@@ -9,11 +9,11 @@ import android.os.Environment
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.materialDialog
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
 import com.afollestad.materialdialogs.list.updateListItems
 import java.io.File
-import java.util.*
 
 class BlacklistFolderChooserDialog : DialogFragment() {
     private var initialPath: String = Environment.getExternalStorageDirectory().absolutePath
@@ -33,22 +33,16 @@ class BlacklistFolderChooserDialog : DialogFragment() {
                 results[0] = ".."
             }
             for (i in parentContents!!.indices) {
-                results[if (canGoUp) i + 1 else i] = parentContents!![i].name
+                results[if (canGoUp) i + 1 else i] = parentContents?.getOrNull(i)?.name
             }
             return results
         }
 
     private fun listFiles(): Array<File>? {
-        val contents = parentFolder!!.listFiles()
-        val results: MutableList<File> = ArrayList()
-        if (contents != null) {
-            for (fi in contents) {
-                if (fi.isDirectory) {
-                    results.add(fi)
-                }
-            }
-            Collections.sort(results, FolderSorter())
-            return results.toTypedArray()
+        val results = mutableListOf<File>()
+        parentFolder?.listFiles()?.let { files ->
+            files.forEach { file -> if (file.isDirectory) results.add(file) }
+            return results.sortedBy { it.name }.toTypedArray()
         }
         return null
     }
@@ -61,7 +55,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
             )
             != PackageManager.PERMISSION_GRANTED
         ) {
-            return MaterialDialog(requireActivity()).show {
+            return materialDialog().show {
                 title(res = R.string.md_error_label)
                 message(res = R.string.md_storage_perm_error)
                 positiveButton(res = android.R.string.ok)
@@ -76,8 +70,8 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         parentFolder = File(mSavedInstanceState.getString("current_path", File.pathSeparator))
         checkIfCanGoUp()
         parentContents = listFiles()
-        return MaterialDialog(requireContext())
-            .title(text = parentFolder!!.absolutePath)
+        return materialDialog()
+            .title(text = parentFolder?.absolutePath)
             .listItems(
                 items = contentsArray.toCharSequence(),
                 waitForPositiveButton = false
@@ -85,9 +79,8 @@ class BlacklistFolderChooserDialog : DialogFragment() {
                 onSelection(i)
             }
             .noAutoDismiss()
-            .cornerRadius(literalDp = 20F)
             .positiveButton(res = R.string.add_action) {
-                callback!!.onFolderSelection(this@BlacklistFolderChooserDialog, parentFolder!!)
+                callback?.onFolderSelection(this@BlacklistFolderChooserDialog, parentFolder!!)
                 dismiss()
             }
             .negativeButton(res = android.R.string.cancel) { dismiss() }
@@ -95,15 +88,15 @@ class BlacklistFolderChooserDialog : DialogFragment() {
 
     private fun onSelection(i: Int) {
         if (canGoUp && i == 0) {
-            parentFolder = parentFolder!!.parentFile
-            if (parentFolder!!.absolutePath == "/storage/emulated") {
-                parentFolder = parentFolder!!.parentFile
+            parentFolder = parentFolder?.parentFile
+            if (parentFolder?.absolutePath == "/storage/emulated") {
+                parentFolder = parentFolder?.parentFile
             }
             checkIfCanGoUp()
         } else {
-            parentFolder = parentContents!![if (canGoUp) i - 1 else i]
+            parentFolder = parentContents?.getOrNull(if (canGoUp) i - 1 else i)
             canGoUp = true
-            if (parentFolder!!.absolutePath == "/storage/emulated") {
+            if (parentFolder?.absolutePath == "/storage/emulated") {
                 parentFolder = Environment.getExternalStorageDirectory()
             }
         }
@@ -111,14 +104,14 @@ class BlacklistFolderChooserDialog : DialogFragment() {
     }
 
     private fun checkIfCanGoUp() {
-        canGoUp = parentFolder!!.parent != null
+        canGoUp = parentFolder?.parent != null
     }
 
     private fun reload() {
         parentContents = listFiles()
         val dialog = dialog as MaterialDialog?
-        dialog!!.setTitle(parentFolder!!.absolutePath)
-        dialog.updateListItems(items = contentsArray.toCharSequence())
+        dialog?.setTitle(parentFolder?.absolutePath)
+        dialog?.updateListItems(items = contentsArray.toCharSequence())
     }
 
     private fun Array<String?>.toCharSequence(): List<CharSequence> {
@@ -127,7 +120,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("current_path", parentFolder!!.absolutePath)
+        outState.putString("current_path", parentFolder?.absolutePath)
     }
 
     fun setCallback(callback: FolderCallback?) {
@@ -136,12 +129,6 @@ class BlacklistFolderChooserDialog : DialogFragment() {
 
     interface FolderCallback {
         fun onFolderSelection(dialog: BlacklistFolderChooserDialog, folder: File)
-    }
-
-    private class FolderSorter : Comparator<File> {
-        override fun compare(lhs: File, rhs: File): Int {
-            return lhs.name.compareTo(rhs.name)
-        }
     }
 
     companion object {

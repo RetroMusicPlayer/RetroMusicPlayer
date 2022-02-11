@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:initialLayout="@layout/app_widget_circle"
+    android:minResizeWidth="@dimen/app_widget_circle_min_width"
+    android:minResizeHeight="@dimen/app_widget_circle_min_height"
+    android:minWidth="@dimen/app_widget_circle_min_width"
+    android:minHeight="@dimen/app_widget_circle_min_height"
+    android:maxResizeHeight="@dimen/app_widget_circle_max_height"
+    android:maxResizeWidth="@dimen/app_widget_circle_max_width"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="keyguard|home_screen"
+    tools:ignore="UnusedAttribute" />

@@ -21,6 +21,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,9 +62,9 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
         genre = arguments.extraGenre
         binding.toolbar.title = arguments.extraGenre.name
         setupRecyclerView()
-        detailsViewModel.getSongs().observe(viewLifecycleOwner, {
+        detailsViewModel.getSongs().observe(viewLifecycleOwner) {
             songs(it)
-        })
+        }
         postponeEnterTransition()
         view.doOnPreDraw {
             startPostponedEnterTransition()
@@ -100,7 +101,7 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
     private fun checkIsEmpty() {
         checkForPadding()
         binding.emptyEmoji.text = getEmojiByUnicode(0x1F631)
-        binding.empty.visibility = if (songAdapter.itemCount == 0) View.VISIBLE else View.GONE
+        binding.empty.isVisible = songAdapter.itemCount == 0
     }
 
     private fun checkForPadding() {

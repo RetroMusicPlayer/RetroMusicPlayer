@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:fitsSystemWindows="true"
     android:paddingBottom="@dimen/mini_player_height">
 
@@ -26,6 +27,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="?attr/colorSurface"
             android:gravity="start"
             android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
             app:contentInsetLeft="0dp"
@@ -35,42 +37,31 @@
             app:subtitleTextAppearance="@style/TextViewCaption"
             app:titleMargin="0dp"
             app:titleMarginStart="0dp"
-            app:titleTextAppearance="@style/TextViewSubtitle1"
-            tools:subtitle="@tools:sample/full_names"
-            tools:title="@tools:sample/full_names" />
+            app:titleTextAppearance="@style/TextViewSubtitle1">
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLyrics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabIndicator="@drawable/tab_lyrics_indicator"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="5dp" />
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/lyricsPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/lyricsPager"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLyrics">
-
-        </androidx.viewpager2.widget.ViewPager2>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLyrics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="@dimen/toolbar_elevation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tabIndicator="@drawable/tab_lyrics_indicator"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="5dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/edit_button"

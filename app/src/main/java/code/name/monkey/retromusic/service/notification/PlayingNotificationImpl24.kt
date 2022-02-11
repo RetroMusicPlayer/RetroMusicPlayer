@@ -36,7 +36,11 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_QUIT
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
+import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
@@ -195,8 +199,9 @@ class PlayingNotificationImpl24(
         ).build()
     }
 
-    override fun setPlaying(isPlaying: Boolean) {
+    override fun setPlaying(isPlaying: Boolean, onUpdate: () -> Unit) {
         mActions[2] = buildPlayAction(isPlaying)
+        onUpdate()
     }
 
     override fun updateFavorite(song: Song, onUpdate: () -> Unit) {

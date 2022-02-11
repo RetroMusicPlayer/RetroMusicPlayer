@@ -24,12 +24,17 @@ import code.name.monkey.retromusic.db.toPlayCount
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.repository.RealRepository
-import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.service.MusicService.Companion.FAVORITE_STATE_CHANGED
+import code.name.monkey.retromusic.service.MusicService.Companion.MEDIA_STORE_CHANGED
+import code.name.monkey.retromusic.service.MusicService.Companion.META_CHANGED
+import code.name.monkey.retromusic.service.MusicService.Companion.PLAY_STATE_CHANGED
+import code.name.monkey.retromusic.service.MusicService.Companion.QUEUE_CHANGED
+import code.name.monkey.retromusic.service.MusicService.Companion.REPEAT_MODE_CHANGED
+import code.name.monkey.retromusic.service.MusicService.Companion.SHUFFLE_MODE_CHANGED
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import java.lang.ref.WeakReference
-import java.util.*
 
 abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventListener {
 

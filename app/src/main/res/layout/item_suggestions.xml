@@ -8,17 +8,27 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="?rectSelector"
         android:padding="16dp"
         android:text="@string/suggestion_songs"
         android:textAppearance="@style/TextViewHeadline6"
         android:textStyle="bold"
         app:layout_constrainedWidth="true"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <code.name.monkey.retromusic.views.AccentIcon
+        android:id="@+id/refresh_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/card7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/round_selector"
+        app:srcCompat="@drawable/ic_refresh" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card1"
@@ -142,7 +152,7 @@
             android:layout_height="match_parent"
             android:autoSizeTextType="uniform"
             android:padding="8dp"
-            android:text="New music mix"
+            android:text="@string/new_music_mix"
             android:textAppearance="@style/TextViewNormal"
             android:textSize="32sp"
             android:textStyle="bold"

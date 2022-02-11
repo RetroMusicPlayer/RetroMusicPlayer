@@ -122,9 +122,9 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
             itemAnimator = DefaultItemAnimator()
             adapter = contributorAdapter
         }
-        libraryViewModel.fetchContributors().observe(viewLifecycleOwner, { contributors ->
+        libraryViewModel.fetchContributors().observe(viewLifecycleOwner) { contributors ->
             contributorAdapter.swapData(contributors)
-        })
+        }
     }
 
     override fun onDestroyView() {

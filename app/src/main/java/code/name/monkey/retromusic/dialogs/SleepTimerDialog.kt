@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.dialogs
 
-import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.Dialog
 import android.app.PendingIntent
@@ -23,7 +22,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.SystemClock
-import android.view.LayoutInflater
 import android.widget.CheckBox
 import android.widget.SeekBar
 import android.widget.TextView
@@ -31,13 +29,14 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.DialogSleepTimerBinding
 import code.name.monkey.retromusic.extensions.addAccentColor
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.service.MusicService.ACTION_PENDING_QUIT
-import code.name.monkey.retromusic.service.MusicService.ACTION_QUIT
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_PENDING_QUIT
+import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_QUIT
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.WhichButton
@@ -49,31 +48,27 @@ class SleepTimerDialog : DialogFragment() {
     private lateinit var timerUpdater: TimerUpdater
     private lateinit var dialog: MaterialDialog
     private lateinit var shouldFinishLastSong: CheckBox
-    private lateinit var seekBar: SeekBar
     private lateinit var timerDisplay: TextView
 
-    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         timerUpdater = TimerUpdater()
-        val layout =
-            LayoutInflater.from(requireContext()).inflate(R.layout.dialog_sleep_timer, null)
-        shouldFinishLastSong = layout.findViewById(R.id.shouldFinishLastSong)
-        seekBar = layout.findViewById(R.id.seekBar)
-        timerDisplay = layout.findViewById(R.id.timerDisplay)
+        val binding = DialogSleepTimerBinding.inflate(layoutInflater)
+        shouldFinishLastSong = binding.shouldFinishLastSong
+        timerDisplay = binding.timerDisplay
 
         val finishMusic = PreferenceUtil.isSleepTimerFinishMusic
         shouldFinishLastSong.apply {
             addAccentColor()
             isChecked = finishMusic
         }
-        seekBar.apply {
+        binding.seekBar.apply {
             addAccentColor()
             seekArcProgress = PreferenceUtil.lastSleepTimerValue
             updateTimeDisplayTime()
-            seekBar.progress = seekArcProgress
+            progress = seekArcProgress
         }
 
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 if (i < 1) {
                     seekBar.progress = 1
@@ -91,7 +86,7 @@ class SleepTimerDialog : DialogFragment() {
             }
         })
         return materialDialog(R.string.action_sleep_timer)
-            .setView(layout)
+            .setView(binding.root)
             .setPositiveButton(R.string.action_set) { _, _ ->
                 PreferenceUtil.isSleepTimerFinishMusic = shouldFinishLastSong.isChecked
                 val minutes = seekArcProgress
@@ -170,7 +165,6 @@ class SleepTimerDialog : DialogFragment() {
         ) {
 
         override fun onTick(millisUntilFinished: Long) {
-            seekBar.progress = millisUntilFinished.toInt()
         }
 
         override fun onFinish() {

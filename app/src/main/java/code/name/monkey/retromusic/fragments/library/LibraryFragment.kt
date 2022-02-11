@@ -54,7 +54,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
         mainActivity.supportActionBar?.title = null
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigate(
-                R.id.searchFragment,
+                R.id.action_search,
                 null,
                 navOptions
             )

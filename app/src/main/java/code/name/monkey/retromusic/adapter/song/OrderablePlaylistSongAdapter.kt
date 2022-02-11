@@ -16,16 +16,16 @@ package code.name.monkey.retromusic.adapter.song
 
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.db.toSongsEntity
 import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
-import code.name.monkey.retromusic.extensions.applyColor
-import code.name.monkey.retromusic.extensions.applyOutlineColor
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.accentOutlineColor
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.ICabHolder
@@ -47,7 +47,6 @@ class OrderablePlaylistSongAdapter(
     DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
 
     val libraryViewModel: LibraryViewModel by activity.viewModel()
-    val tempDataSet = dataSet
 
     init {
         this.setHasStableIds(true)
@@ -62,8 +61,6 @@ class OrderablePlaylistSongAdapter(
         } else {
             -1
         }
-
-
     }
 
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {
@@ -76,19 +73,18 @@ class OrderablePlaylistSongAdapter(
 
     override fun onBindViewHolder(holder: SongAdapter.ViewHolder, position: Int) {
         if (holder.itemViewType == OFFSET_ITEM) {
-            val color = ThemeStore.accentColor(activity)
             val viewHolder = holder as ViewHolder
             viewHolder.playAction?.let {
                 it.setOnClickListener {
                     MusicPlayerRemote.openQueue(dataSet, 0, true)
                 }
-                it.applyOutlineColor(color)
+                it.accentOutlineColor()
             }
             viewHolder.shuffleAction?.let {
                 it.setOnClickListener {
                     MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
                 }
-                it.applyColor(color)
+                it.accentColor()
             }
         } else {
             super.onBindViewHolder(holder, position - 1)
@@ -129,20 +125,12 @@ class OrderablePlaylistSongAdapter(
         }
 
         init {
-            dragView?.visibility = View.VISIBLE
-        }
-
-        override fun onClick(v: View?) {
-            if (itemViewType == OFFSET_ITEM) {
-                MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
-                return
-            }
-            super.onClick(v)
+            dragView?.isVisible = true
         }
     }
 
     override fun onCheckCanStartDrag(holder: ViewHolder, position: Int, x: Int, y: Int): Boolean {
-        if (dataSet.size == 0 or 1) {
+        if (dataSet.size == 0 or 1 || isInQuickSelectMode) {
             return false
         }
         val dragHandle = holder.dragView ?: return false
@@ -159,7 +147,6 @@ class OrderablePlaylistSongAdapter(
     override fun onMoveItem(fromPosition: Int, toPosition: Int) {
         dataSet.add(toPosition - 1, dataSet.removeAt(fromPosition - 1))
     }
-
 
     override fun onGetItemDraggableRange(holder: ViewHolder, position: Int): ItemDraggableRange {
         return ItemDraggableRange(1, itemCount - 1)

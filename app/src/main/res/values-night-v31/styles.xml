@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.AppWidget" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="colorSurface">@android:color/system_accent2_800</item>
+    </style>
+</resources>

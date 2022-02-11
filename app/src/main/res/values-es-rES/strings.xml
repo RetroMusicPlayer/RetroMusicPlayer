@@ -19,7 +19,7 @@
     <string name="action_go_to_album">Ir al álbum</string>
     <string name="action_go_to_artist">Ir al artista</string>
     <string name="action_go_to_genre">Ir al género</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">Ir a la letra</string>
     <string name="action_go_to_start_directory">Ir al directorio de inicio</string>
     <string name="action_grant">Permitir</string>
     <string name="action_grid_size">Tamaño de la cuadricula</string>
@@ -114,7 +114,7 @@
     <string name="cascading">Cascadita</string>
     <string name="changelog">Cambios</string>
     <string name="changelog_summary">Consulte las novedades</string>
-    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="choose_restore_title">Elige qué restaurar</string>
     <string name="circle">Círculo</string>
     <string name="circular">Circulares</string>
     <string name="classic">Clásicos</string>
@@ -134,7 +134,7 @@
     <string name="created_playlist_x">Lista de reproducción %1$s creada.</string>
     <string name="credit_title">Miembros y colaboradores </string>
     <string name="currently_listening_to_x_by_x">Actualmente estás escuchando %1$s de %2$s.</string>
-    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="custom_artist_images">Imágenes de artista personalizadas</string>
     <string name="dark_theme_name">Un poco Oscuro</string>
     <string name="delete_playlist_title">Eliminar lista de reproducción</string>
     <string name="delete_playlist_x"><![CDATA[¿Eliminar la lista de reproducción <b>%1$s</b>?]]></string>
@@ -151,7 +151,7 @@
     <string name="device_info">Información del dispositivo</string>
     <string name="dialog_message_set_ringtone">Permitir a Retro Music modificar los ajustes de audio</string>
     <string name="dialog_title_set_ringtone">Establecer tono de llamada</string>
-    <string name="disc_hint">Disc Number</string>
+    <string name="disc_hint">Disco numero</string>
     <string name="do_you_want_to_clear_the_blacklist">¿Quieres limpiar la lista negra?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[¿Quiere eliminar <b>%1$s</b> de la lista negra?]]></string>
     <string name="donate">Donar</string>
@@ -230,6 +230,7 @@
     <string name="my_name">Nombre</string>
     <string name="my_top_tracks">Más reproducidas</string>
     <string name="never">Nunca</string>
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">Nueva lista de reproducción</string>
     <string name="new_start_directory">%s es el nuevo directorio de inicio.</string>
     <string name="next_song">Próxima Canción</string>
@@ -260,6 +261,7 @@
     <string name="only_on_wifi">Solo con Wi-Fi</string>
     <string name="other_settings_summary">Funciones avanzadas experimentales</string>
     <string name="others">Otro</string>
+    <string name="over_cover">Over Cover</string>
     <string name="password">Contraseña</string>
     <string name="past_three_months">Más de 3 meses</string>
     <string name="paste_lyrics_here">Pega las Letras Aquí</string>
@@ -275,6 +277,9 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Síguenos en Pinterest para inspirarte en el diseño de Retro Music</string>
     <string name="plain">Plano</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">La notificación de reproducción proporciona acciones para reproducir/pausar, etc.</string>
     <string name="playing_notification_name">Notificación de reproducción</string>
     <string name="playlist_is_empty">La lista de reproducción está vacía</string>
@@ -299,6 +304,7 @@
     <string name="pref_keep_screen_on_summary">Tenga en cuenta que habilitar esta función puede afectar la duración de la batería</string>
     <string name="pref_keep_screen_on_title">Mantener la pantalla encendida</string>
     <string name="pref_language_name">Seleccionar idioma</string>
+    <string name="pref_snow_fall_title">Efecto de nevada</string>
     <string name="pref_summary_album_art_on_lockscreen">Usar la portada del álbum de la canción en reproducción como fondo de la pantalla de bloqueo</string>
     <string name="pref_summary_album_artists_only">Mostrar Artistas de Álbum en la categoría Artista</string>
     <string name="pref_summary_audio_ducking">Bajar el volumen cuando se reproduzca un sonido del sistema o se reciba una notificación</string>
@@ -329,22 +335,26 @@
     <string name="pref_summary_toggle_headset">Comenzar a reproducir inmediatamente cuando se conecten audífonos</string>
     <string name="pref_summary_toggle_shuffle">El modo aleatorio se desactivará cuando se reproduzca una nueva lista de canciones</string>
     <string name="pref_summary_toggle_volume">Mostrar controles de volumen si hay suficiente espacio disponible</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Mostrar solo música de la carpeta /Music</string>
     <string name="pref_title_album_art_on_lockscreen">Mostrar la portada del álbum</string>
     <string name="pref_title_album_artists_only">Navegar por Artista del Álbum</string>
     <string name="pref_title_album_cover_style">Tema de la portada del álbum</string>
     <string name="pref_title_album_cover_transform">Saltar portada de álbum</string>
     <string name="pref_title_app_shortcuts">Accesos directos de la aplicación coloreados</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Reducir el volumen cuando se pierda el enfoque</string>
     <string name="pref_title_audio_fade">Atenuar Audio</string>
     <string name="pref_title_auto_download_artist_images">Descarga automática de imágenes de artistas</string>
     <string name="pref_title_blacklist">Lista negra</string>
     <string name="pref_title_bluetooth_playback">Reproducción por Bluetooth</string>
     <string name="pref_title_blurred_album_art">Desenfocar portada del álbum</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Diseño de notificación clásico</string>
     <string name="pref_title_colored_app">Color adaptable</string>
     <string name="pref_title_colored_notification">Notificación coloreada</string>
     <string name="pref_title_cross_fade">Transición (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Color desaturado</string>
     <string name="pref_title_expand_now_playing_panel">Mostrar en pantalla de reproducción actual</string>
     <string name="pref_title_extra_controls">Controles extras</string>
@@ -357,6 +367,8 @@
     <string name="pref_title_ignore_media_store_artwork">Ignorar las portadas del Almacén de Medios</string>
     <string name="pref_title_last_added_interval">Intervalo de la lista \"Añadidos Recientemente\"</string>
     <string name="pref_title_lock_screen">Controles en pantalla completa</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Tema de la ventana de reproducción actual</string>
     <string name="pref_title_open_source_licences">Licencias de código abierto</string>
     <string name="pref_title_remember_tab">Recordar última pestaña</string>
@@ -368,6 +380,7 @@
     <string name="pref_title_toggle_toggle_headset">Reproducir automáticamente</string>
     <string name="pref_title_toggle_toggle_shuffle">Modo aleatorio</string>
     <string name="pref_title_toggle_volume">Controles de volumen</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Música de Lista Blanca</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema Negro, temas para la ventana de reproducción actual, Efecto Carrusel y mucho más..</string>
@@ -386,6 +399,7 @@
     <string name="remove_songs_from_playlist_title">Eliminar canciones de la lista de reproducción</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[¿Eliminar <b>%1$d</b> canciones de la lista de reproducción?]]></string>
     <string name="rename_playlist_title">Renombrar lista de reproducción</string>
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Reportar una incidencia</string>
     <string name="report_bug">Reportar fallo</string>
     <string name="reset_action">Restablecer</string>
@@ -484,7 +498,7 @@
     <string name="up_next">A continuación</string>
     <string name="update_image">Actualizar imagen</string>
     <string name="updating">Actualizando…</string>
-    <string name="user_images_description">User Images</string>
+    <string name="user_images_description">Imágenes del Usuario</string>
     <string name="user_name">Nombre de Usuario</string>
     <string name="username">Usuario</string>
     <string name="version">Versión</string>

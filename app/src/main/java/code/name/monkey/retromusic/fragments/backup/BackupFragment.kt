@@ -19,10 +19,10 @@ import code.name.monkey.retromusic.adapter.backup.BackupAdapter
 import code.name.monkey.retromusic.databinding.FragmentBackupBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.accentOutlineColor
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.helper.BackupHelper
 import code.name.monkey.retromusic.helper.sanitize
 import code.name.monkey.retromusic.util.BackupUtil
-import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,7 +41,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         _binding = FragmentBackupBinding.bind(view)
         initAdapter()
         setupRecyclerview()
-        backupViewModel.backupsLiveData.observe(this) {
+        backupViewModel.backupsLiveData.observe(viewLifecycleOwner) {
             if (it.isNotEmpty())
                 backupAdapter?.swapDataset(it)
             else
@@ -92,8 +92,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
 
     @SuppressLint("CheckResult")
     private fun showCreateBackupDialog() {
-        MaterialDialog(requireContext()).show {
-            cornerRadius(res = R.dimen.m3_card_corner_radius)
+        materialDialog().show {
             title(res = R.string.action_rename)
             input(prefill = BackupHelper.getTimeStamp()) { _, text ->
                 // Text submitted with the action button
@@ -142,7 +141,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 return true
             }
             R.id.action_rename -> {
-                MaterialDialog(requireContext()).show {
+                materialDialog().show {
                     title(res = R.string.action_rename)
                     input(prefill = file.nameWithoutExtension) { _, text ->
                         // Text submitted with the action button
