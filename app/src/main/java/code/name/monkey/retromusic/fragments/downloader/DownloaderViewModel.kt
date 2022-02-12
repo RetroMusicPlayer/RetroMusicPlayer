@@ -88,7 +88,7 @@ class DownloaderViewModel : ViewModel() {
                 .setProgress(100, 0, false)
             notificationManager.notify(id, notification.build())
             try {
-                val response = YoutubeDL.getInstance().execute(request) { dProgress: Float, _ ->
+                val response = YoutubeDL.getInstance().execute(request) { dProgress: Float, _, _ ->
                     //showProgress(id, "Downloading", progress.toInt(), 100, notificationManager, context, builder)
                     progress.postValue(dProgress.toInt())
                     notification.setProgress(100, dProgress.toInt(), false)

@@ -20,4 +20,5 @@ class HomeBinding(
     val titleWelcome = homeBinding.imageLayout.titleWelcome
     val appNameText = homeBinding.appNameText
     val suggestions = homeBinding.homeContent.suggestions
+    val downloadButton = homeBinding.homeContent.downloadMusic
 }

@@ -134,7 +134,7 @@
     <string name="create_new_backup">ایجاد کردن</string>
     <string name="created_playlist_x">پلی لیست %1$s ساخته شد.</string>
     <string name="credit_title">اعضا و دست اندرکاران </string>
-    <string name="currently_listening_to_x_by_x">در حال حاضر شما به s$1% از s$2% گوش می‌دهید.</string>
+    <string name="currently_listening_to_x_by_x" formatted="false">در حال حاضر شما به s$1% از s$2% گوش می‌دهید.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
     <string name="dark_theme_name">تقریبا مشکی</string>
     <string name="delete_playlist_title">حذف کردن پلی لیست</string>
