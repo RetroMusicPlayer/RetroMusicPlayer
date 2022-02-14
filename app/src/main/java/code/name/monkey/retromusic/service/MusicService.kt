@@ -975,12 +975,16 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private fun removeSongImpl(song: Song) {
         val deletePosition = playingQueue.indexOf(song)
-        playingQueue.removeAt(deletePosition)
-        rePosition(deletePosition)
+        if (deletePosition != -1) {
+            playingQueue.removeAt(deletePosition)
+            rePosition(deletePosition)
+        }
 
         val originalDeletePosition = originalPlayingQueue.indexOf(song)
-        playingQueue.removeAt(originalDeletePosition)
-        rePosition(originalDeletePosition)
+        if (originalDeletePosition != -1) {
+            playingQueue.removeAt(originalDeletePosition)
+            rePosition(originalDeletePosition)
+        }
     }
 
     fun removeSong(song: Song) {
