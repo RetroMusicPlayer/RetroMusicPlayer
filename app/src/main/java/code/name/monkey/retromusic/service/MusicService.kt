@@ -40,6 +40,7 @@ import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.media.AudioAttributesCompat
 import androidx.media.AudioAttributesCompat.CONTENT_TYPE_MUSIC
@@ -209,8 +210,19 @@ class MusicService : MediaBrowserServiceCompat(),
     private var queueSaveHandlerThread: HandlerThread? = null
     private var queuesRestored = false
 
-    @JvmField
     var repeatMode = 0
+        private set(value) {
+            when (value) {
+                REPEAT_MODE_NONE, REPEAT_MODE_ALL, REPEAT_MODE_THIS -> {
+                    field = value
+                    PreferenceManager.getDefaultSharedPreferences(this).edit {
+                        putInt(SAVED_REPEAT_MODE, value)
+                    }
+                    prepareNext()
+                    handleAndSendChangeInternal(REPEAT_MODE_CHANGED)
+                }
+            }
+        }
 
     @JvmField
     var shuffleMode = 0
@@ -222,7 +234,7 @@ class MusicService : MediaBrowserServiceCompat(),
             if (action != null) {
                 if (BluetoothDevice.ACTION_ACL_CONNECTED == action && isBluetoothSpeaker) {
                     if (audioManager!!.isBluetoothA2dpOn) {
-                            play()
+                        play()
                     }
                 }
             }
@@ -432,10 +444,10 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun cycleRepeatMode() {
-        when (getRepeatMode()) {
-            REPEAT_MODE_NONE -> setRepeatMode(REPEAT_MODE_ALL)
-            REPEAT_MODE_ALL -> setRepeatMode(REPEAT_MODE_THIS)
-            else -> setRepeatMode(REPEAT_MODE_NONE)
+        repeatMode = when (repeatMode) {
+            REPEAT_MODE_NONE -> REPEAT_MODE_ALL
+            REPEAT_MODE_ALL -> REPEAT_MODE_THIS
+            else -> REPEAT_MODE_NONE
         }
     }
 
@@ -454,7 +466,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private fun getNextPosition(force: Boolean): Int {
         var position = getPosition() + 1
-        when (getRepeatMode()) {
+        when (repeatMode) {
             REPEAT_MODE_ALL -> if (isLastTrack) {
                 position = 0
             }
@@ -520,24 +532,6 @@ class MusicService : MediaBrowserServiceCompat(),
         return duration
     }
 
-    fun getRepeatMode(): Int {
-        return repeatMode
-    }
-
-    private fun setRepeatMode(repeatMode: Int) {
-        when (repeatMode) {
-            REPEAT_MODE_NONE, REPEAT_MODE_ALL, REPEAT_MODE_THIS -> {
-                this.repeatMode = repeatMode
-                PreferenceManager.getDefaultSharedPreferences(this)
-                    .edit()
-                    .putInt(SAVED_REPEAT_MODE, repeatMode)
-                    .apply()
-                prepareNext()
-                handleAndSendChangeInternal(REPEAT_MODE_CHANGED)
-            }
-        }
-    }
-
     private fun getShuffleMode(): Int {
         return shuffleMode
     }
@@ -550,7 +544,7 @@ class MusicService : MediaBrowserServiceCompat(),
         when (shuffleMode) {
             SHUFFLE_MODE_SHUFFLE -> {
                 this.shuffleMode = shuffleMode
-                makeShuffleList(getPlayingQueue().toMutableList(), getPosition())
+                makeShuffleList(playingQueue, getPosition())
                 position = 0
             }
             SHUFFLE_MODE_NONE -> {
@@ -1049,10 +1043,9 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun savePositionInTrack() {
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .edit()
-            .putInt(SAVED_POSITION_IN_TRACK, songProgressMillis)
-            .apply()
+        PreferenceManager.getDefaultSharedPreferences(this).edit {
+            putInt(SAVED_POSITION_IN_TRACK, songProgressMillis)
+        }
     }
 
     fun saveQueuesImpl() {
@@ -1376,10 +1369,9 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun savePosition() {
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .edit()
-            .putInt(SAVED_POSITION, getPosition())
-            .apply()
+        PreferenceManager.getDefaultSharedPreferences(this).edit {
+            putInt(SAVED_POSITION, getPosition())
+        }
     }
 
     private fun saveQueues() {
@@ -1399,9 +1391,9 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private fun setCustomAction(stateBuilder: PlaybackStateCompat.Builder) {
         var repeatIcon = R.drawable.ic_repeat // REPEAT_MODE_NONE
-        if (getRepeatMode() == REPEAT_MODE_THIS) {
+        if (repeatMode == REPEAT_MODE_THIS) {
             repeatIcon = R.drawable.ic_repeat_one
-        } else if (getRepeatMode() == REPEAT_MODE_ALL) {
+        } else if (repeatMode == REPEAT_MODE_ALL) {
             repeatIcon = R.drawable.ic_repeat_white_circle
         }
         stateBuilder.addCustomAction(
