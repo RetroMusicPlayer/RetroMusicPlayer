@@ -18,6 +18,9 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
@@ -61,56 +64,75 @@ class DeleteSongsDialog : DialogFragment() {
         libraryViewModel = activity?.getViewModel() as LibraryViewModel
         val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
         if (VersionUtils.hasR()) {
-            dismiss()
-            MusicUtil.deleteTracksR(requireActivity(), songs)
-            reloadTabs()
-        }
-        val pair = if (songs.size > 1) {
-            Pair(
-                R.string.delete_songs_title,
-                HtmlCompat.fromHtml(
-                    String.format(getString(R.string.delete_x_songs), songs.size),
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                )
-            )
-        } else {
-            Pair(
-                R.string.delete_song_title,
-                HtmlCompat.fromHtml(
-                    String.format(getString(R.string.delete_song_x), songs[0].title),
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                )
-            )
-        }
-
-        return materialDialog()
-            .title(pair.first)
-            .message(text = pair.second)
-            .noAutoDismiss()
-            .negativeButton(android.R.string.cancel) {
-                dismiss()
-            }
-            .positiveButton(R.string.action_delete) {
-                if ((songs.size == 1) && MusicPlayerRemote.isPlaying(songs[0])) {
-                    MusicPlayerRemote.playNextSong()
-                }
-                if (!SAFUtil.isSAFRequiredForSongs(songs)) {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        dismiss()
-                        MusicUtil.deleteTracks(requireContext(), songs)
+            val deleteResultLauncher =
+                registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+                    if (result.resultCode == Activity.RESULT_OK) {
+                        if ((songs.size == 1) && MusicPlayerRemote.isPlaying(songs[0])) {
+                            MusicPlayerRemote.playNextSong()
+                        }
+                        MusicPlayerRemote.removeFromQueue(songs)
                         reloadTabs()
                     }
-                } else {
-                    if (SAFUtil.isSDCardAccessGranted(requireActivity())) {
-                        deleteSongs(songs)
+                    dismiss()
+                }
+            val pendingIntent =
+                MediaStore.createDeleteRequest(requireActivity().contentResolver, songs.map {
+                    MusicUtil.getSongFileUri(it.id)
+                })
+            deleteResultLauncher.launch(
+                IntentSenderRequest.Builder(pendingIntent.intentSender).build()
+            )
+            return super.onCreateDialog(savedInstanceState)
+        } else {
+            val pair = if (songs.size > 1) {
+                Pair(
+                    R.string.delete_songs_title,
+                    HtmlCompat.fromHtml(
+                        String.format(getString(R.string.delete_x_songs), songs.size),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                )
+            } else {
+                Pair(
+                    R.string.delete_song_title,
+                    HtmlCompat.fromHtml(
+                        String.format(getString(R.string.delete_song_x), songs[0].title),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                )
+            }
+
+            return materialDialog()
+                .title(pair.first)
+                .message(text = pair.second)
+                .noAutoDismiss()
+                .negativeButton(android.R.string.cancel)
+                {
+                    dismiss()
+                }
+                .positiveButton(R.string.action_delete)
+                {
+                    if ((songs.size == 1) && MusicPlayerRemote.isPlaying(songs[0])) {
+                        MusicPlayerRemote.playNextSong()
+                    }
+                    if (!SAFUtil.isSAFRequiredForSongs(songs)) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            dismiss()
+                            MusicUtil.deleteTracks(requireContext(), songs)
+                            reloadTabs()
+                        }
                     } else {
-                        startActivityForResult(
-                            Intent(requireActivity(), SAFGuideActivity::class.java),
-                            SAFGuideActivity.REQUEST_CODE_SAF_GUIDE
-                        )
+                        if (SAFUtil.isSDCardAccessGranted(requireActivity())) {
+                            deleteSongs(songs)
+                        } else {
+                            startActivityForResult(
+                                Intent(requireActivity(), SAFGuideActivity::class.java),
+                                SAFGuideActivity.REQUEST_CODE_SAF_GUIDE
+                            )
+                        }
                     }
                 }
-            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

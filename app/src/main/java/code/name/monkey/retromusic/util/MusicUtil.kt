@@ -524,15 +524,6 @@ object MusicUtil : KoinComponent {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
-    fun deleteTracksR(activity: Activity, songs: List<Song>) {
-        removeFromQueue(songs)
-        val pendingIntent = MediaStore.createDeleteRequest(activity.contentResolver, songs.map {
-            getSongFileUri(it.id)
-        })
-        activity.startIntentSenderForResult(pendingIntent.intentSender, 45, null, 0, 0, 0, null)
-    }
-
     fun songByGenre(genreId: Long): Song {
         return repository.getSongByGenre(genreId)
     }

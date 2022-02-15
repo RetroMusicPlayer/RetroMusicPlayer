@@ -982,7 +982,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
         val originalDeletePosition = originalPlayingQueue.indexOf(song)
         if (originalDeletePosition != -1) {
-            playingQueue.removeAt(originalDeletePosition)
+            originalPlayingQueue.removeAt(originalDeletePosition)
             rePosition(originalDeletePosition)
         }
     }
