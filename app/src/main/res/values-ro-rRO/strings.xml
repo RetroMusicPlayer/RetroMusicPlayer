@@ -269,7 +269,7 @@
     <string name="past_three_months">Ultimele 3 luni</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
-    <string name="peak">Peak</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Accesul la stocarea externă este respinsă.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>

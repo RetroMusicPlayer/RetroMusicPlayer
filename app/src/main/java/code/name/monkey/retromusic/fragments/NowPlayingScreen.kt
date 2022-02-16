@@ -40,7 +40,7 @@ enum class NowPlayingScreen constructor(
     Gradient(R.string.gradient, R.drawable.np_gradient, 17, AlbumCoverStyle.Full),
     Material(R.string.material, R.drawable.np_material, 11, AlbumCoverStyle.Normal),
     Normal(R.string.normal, R.drawable.np_normal, 0, AlbumCoverStyle.Normal),
-    Peak(R.string.peak, R.drawable.np_peak, 14, AlbumCoverStyle.Normal),
+    Peek(R.string.peek, R.drawable.np_peek, 14, AlbumCoverStyle.Normal),
     Plain(R.string.plain, R.drawable.np_plain, 3, AlbumCoverStyle.Normal),
     Simple(R.string.simple, R.drawable.np_simple, 8, AlbumCoverStyle.Normal),
     Tiny(R.string.tiny, R.drawable.np_tiny, 7, null),

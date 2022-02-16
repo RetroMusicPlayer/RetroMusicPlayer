@@ -229,7 +229,7 @@
     <string name="password">密碼</string>
     <string name="past_three_months">在3個月內</string>
     <string name="paste_lyrics_here">在此貼上歌詞</string>
-    <string name="peak">波紋</string>
+    <string name="peek">波紋</string>
     <string name="permission_external_storage_denied">存取外置儲存空間權限被拒。</string>
     <string name="permissions_denied">存取權限被拒。</string>
     <string name="personalize">個人化</string>
