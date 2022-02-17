@@ -271,7 +271,7 @@
     <string name="past_three_months">Past 3 months</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
-    <string name="peak">Peak</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Povolení přístupu k externímu úložišti bylo zamítnuto.</string>
     <string name="permission_summary">Aplikace potřebuje přístup k úložišti vašeho zařízení, aby mohla přehráváat hudbu</string>
     <string name="permission_title">Přístup k úložišti</string>
