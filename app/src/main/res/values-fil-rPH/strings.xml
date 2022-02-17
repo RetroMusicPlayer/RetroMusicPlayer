@@ -267,7 +267,7 @@
     <string name="past_three_months">Nakalipas na 3 buwan</string>
     <string name="paste_lyrics_here">Idikit ang Lyrics Dito</string>
     <string name="paste_timeframe_lyrics_here">Idikit ang timeframe lyrics dito</string>
-    <string name="peak">Tuktok</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Tinanggihan ang pahintulot na ma-access ang panlabas na storage.</string>
     <string name="permission_summary">Ang app ay nangangailangan ng permiso upang ma-access ang storage ng iyong device para ma-play ang musika</string>
     <string name="permission_title">Access sa Storage</string>
