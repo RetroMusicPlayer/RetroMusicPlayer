@@ -266,7 +266,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="past_three_months">Mỗi tháng</string>
     <string name="paste_lyrics_here">Dán lời ở đây</string>
     <string name="paste_timeframe_lyrics_here">Dán lời theo thời gian ở đây</string>
-    <string name="peak">Thu nhỏ</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Quyền truy cập bộ nhớ ngoài bị từ chối.</string>
     <string name="permission_summary">Ứng dụng cần quyền truy cập bộ nhớ thiết bị của bạn để phát nhạc</string>
     <string name="permission_title">Truy cập bộ nhớ</string>
