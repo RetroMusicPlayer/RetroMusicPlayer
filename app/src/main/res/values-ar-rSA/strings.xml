@@ -278,7 +278,7 @@
     <string name="past_three_months">أخر 3 أشهر</string>
     <string name="paste_lyrics_here">لصق كلمات الاغنية هنا</string>
     <string name="paste_timeframe_lyrics_here">لصق كلمات الإطار الزمني هنا</string>
-    <string name="peak">الذروة</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">تم رفض إذن الوصول إلى وحدة التخزين الخارجي.</string>
     <string name="permission_summary">يحتاج التطبيق إلى إذن للوصول إلى وحدة تخزين جهازك لتشغيل الموسيقى</string>
     <string name="permission_title">الوصول إلى التخزين</string>
