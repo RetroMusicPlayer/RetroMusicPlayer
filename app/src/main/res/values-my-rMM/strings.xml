@@ -265,7 +265,7 @@
     <string name="past_three_months">လွန်ခဲ့သော (၃)လ</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
-    <string name="peak">Peak ပုံစံ</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">External Storage ကြည့်ရှုခွင့်အားငြင်းပယ်ခဲ့သည်။</string>
     <string name="permission_summary">သီချင်းဖွင့်ရန်အတွက် ယခု App အား Storage ကြည့်ရှုခွင့်ပေးရန်လိုသည်။</string>
     <string name="permission_title">Storage ကြည့်ရှုခွင့်</string>
