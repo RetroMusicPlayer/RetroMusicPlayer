@@ -267,7 +267,7 @@
     <string name="past_three_months">Τους περασμένους 3 μήνες</string>
     <string name="paste_lyrics_here">Επικολλήστε τους στίχους εδω</string>
     <string name="paste_timeframe_lyrics_here">Επικόλληση στίχων χρονικού πλαισίου εδώ</string>
-    <string name="peak">Κορυφή</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Η άδεια για προσπέλαση του external storage δεν παραχωρήθηκε.</string>
     <string name="permission_summary">Η εφαρμογή χρειάζεται άδεια για πρόσβαση στον αποθηκευτικό χώρο της συσκευής σας για την αναπαραγωγή μουσικής</string>
     <string name="permission_title">Πρόσβαση Χώρου Αποθήκευσης</string>
