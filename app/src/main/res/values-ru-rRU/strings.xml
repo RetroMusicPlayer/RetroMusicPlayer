@@ -271,7 +271,7 @@
     <string name="past_three_months">Последние 3 месяца</string>
     <string name="paste_lyrics_here">Вставьте текст песни</string>
     <string name="paste_timeframe_lyrics_here">Вставьте синхронизированный текст песни</string>
-    <string name="peak">Панель снизу</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Разрешение для доступа у внешнему хранилищу не получено.</string>
     <string name="permission_summary">Приложению требуется разрешение на доступ к внутренней памяти вашего устройства для воспроизведения музыки.</string>
     <string name="permission_title">Доступ к внутренней памяти</string>
