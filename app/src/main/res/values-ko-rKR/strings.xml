@@ -265,7 +265,7 @@
     <string name="past_three_months">이전 3개월</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
-    <string name="peak">Peak</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">외부 저장소 접근 권한이 거부되었습니다.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>
