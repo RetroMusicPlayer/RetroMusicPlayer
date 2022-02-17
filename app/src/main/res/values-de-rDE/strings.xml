@@ -267,7 +267,7 @@
     <string name="past_three_months">Letzte 3 Monate</string>
     <string name="paste_lyrics_here">Songtext hier einfügen</string>
     <string name="paste_timeframe_lyrics_here">Songtexte mit Zeitfenster hier einfügen</string>
-    <string name="peak">Spitze</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Berechtigung für den Zugriff auf externen Speicher verweigert.</string>
     <string name="permission_summary">Die App benötigt die Berechtigung für den Zugriff auf den Gerätespeicher, um Musik abspielen zu können</string>
     <string name="permission_title">Speicherzugriff</string>
