@@ -19,7 +19,10 @@ import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
 import android.text.Html
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -57,8 +60,9 @@ import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListene
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.FileUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.startDirectory
+import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import code.name.monkey.retromusic.views.BreadCrumbLayout.Crumb
 import code.name.monkey.retromusic.views.BreadCrumbLayout.SelectionCallback
@@ -70,7 +74,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
-import java.io.*
+import java.io.File
+import java.io.FileFilter
+import java.io.IOException
 import java.lang.ref.WeakReference
 import java.util.*
 

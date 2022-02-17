@@ -5,7 +5,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spanned
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.activity.addCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
@@ -51,7 +54,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
 import java.util.*
-import kotlin.collections.ArrayList
 
 abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_details),
     IAlbumClickListener, ICabHolder {

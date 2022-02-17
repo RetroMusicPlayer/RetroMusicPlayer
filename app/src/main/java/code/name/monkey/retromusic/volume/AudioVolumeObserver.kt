@@ -17,10 +17,11 @@ import android.content.Context
 import android.media.AudioManager
 import android.os.Handler
 import android.provider.Settings
+import androidx.core.content.getSystemService
 
 class AudioVolumeObserver(private val context: Context) {
     private val mAudioManager: AudioManager =
-        context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        context.getSystemService()!!
     private var contentObserver: AudioVolumeContentObserver? = null
 
     fun register(audioStreamType: Int, listener: OnAudioVolumeChangedListener) {

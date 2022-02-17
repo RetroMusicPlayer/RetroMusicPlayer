@@ -129,15 +129,15 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
     override fun onSupportNavigateUp(): Boolean =
         findNavController(R.id.fragment_container).navigateUp()
 
-    override fun onResume() {
-        super.onResume()
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
         PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
-        val expand = extra<Boolean>(EXPAND_PANEL).value ?: false
+        val expand = intent?.extra<Boolean>(EXPAND_PANEL)?.value ?: false
         if (expand && PreferenceUtil.isExpandPanel) {
             fromNotification = true
             slidingPanel.bringToFront()
             expandPanel()
-            intent.removeExtra(EXPAND_PANEL)
+            intent?.removeExtra(EXPAND_PANEL)
         }
     }
 

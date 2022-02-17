@@ -265,7 +265,7 @@
     <string name="past_three_months">過去 3 個月</string>
     <string name="paste_lyrics_here">在這裡貼上歌詞</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
-    <string name="peak">Peak</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">無法取得存取外部儲存空間的權限。</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>

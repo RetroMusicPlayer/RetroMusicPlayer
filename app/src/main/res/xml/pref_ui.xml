@@ -71,7 +71,7 @@
             android:title="@string/pref_title_tab_text_mode" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
-            android:defaultValue="0"
+            android:defaultValue="1"
             android:entries="@array/pref_appbar_mode_titles"
             android:entryValues="@array/pref_appbar_mode_values"
             android:key="appbar_mode"

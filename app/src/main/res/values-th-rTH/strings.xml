@@ -265,7 +265,7 @@
     <string name="past_three_months">3 เดือนผ่านไป</string>
     <string name="paste_lyrics_here">วางเนื้อเพลงที่นี่</string>
     <string name="paste_timeframe_lyrics_here">วางเนื้อเพลงในกรอบเวลาที่นี่</string>
-    <string name="peak">Peak</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">สิทธิ์ในการเข้าถึงถูกปฏิเสธ</string>
     <string name="permission_summary">ต้องการสิทธิ์ในการเข้าถึงข้อมูลในเครื่องเพื่อเล่นเพลง</string>
     <string name="permission_title">เข้าถึงการจัดเก็บข้อมูล</string>

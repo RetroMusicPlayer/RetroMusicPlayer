@@ -22,6 +22,7 @@ import android.widget.Toast
 import androidx.annotation.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
@@ -41,7 +42,7 @@ val Context.generalThemeValue
 
 fun Context.isSystemDarkModeEnabled(): Boolean {
     val isBatterySaverEnabled =
-        (getSystemService(Context.POWER_SERVICE) as PowerManager?)?.isPowerSaveMode ?: false
+        (getSystemService<PowerManager>())?.isPowerSaveMode ?: false
     val isDarkModeEnabled =
         (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     return isBatterySaverEnabled or isDarkModeEnabled

@@ -101,12 +101,12 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.peak.PeakPlayerControlFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.peek.PeekPlayerControlFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerAlbumCoverFragment"
-        tools:layout="@layout/fragment_peak_control_player" />
+        tools:layout="@layout/fragment_peek_control_player" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
