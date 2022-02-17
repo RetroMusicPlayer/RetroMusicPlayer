@@ -267,7 +267,7 @@
     <string name="past_three_months">Últimos 3 meses</string>
     <string name="paste_lyrics_here">Colar letras aqui</string>
     <string name="paste_timeframe_lyrics_here">Colar letras do cronograma aqui</string>
-    <string name="peak">Espreitar</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Permissão para aceder ao armazenamento externo negada.</string>
     <string name="permission_summary">Esta aplicação necessita de permissão para aceder ao armazenamento para tocar músicas</string>
     <string name="permission_title">Acesso ao armazenamento</string>
