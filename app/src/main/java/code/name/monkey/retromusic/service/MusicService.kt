@@ -124,6 +124,7 @@ class MusicService : MediaBrowserServiceCompat(),
     private val appWidgetSmall = AppWidgetSmall.instance
     private val appWidgetText = AppWidgetText.instance
     private val appWidgetMd3 = AppWidgetMD3.instance
+    private val appWidgetCircle = AppWidgetCircle.instance
     private val widgetIntentReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val command = intent.getStringExtra(EXTRA_APP_WIDGET_NAME)
@@ -147,6 +148,9 @@ class MusicService : MediaBrowserServiceCompat(),
                     }
                     AppWidgetMD3.NAME -> {
                         appWidgetMd3.performUpdate(this@MusicService, ids)
+                    }
+                    AppWidgetCircle.NAME -> {
+                        appWidgetCircle.performUpdate(this@MusicService, ids)
                     }
                 }
             }
@@ -186,15 +190,15 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
     private var playerHandler: PlaybackHandler? = null
-    private val audioFocusListener: OnAudioFocusChangeListener =
-        OnAudioFocusChangeListener { focusChange ->
-            playerHandler?.obtainMessage(FOCUS_CHANGE, focusChange, 0)?.sendToTarget()
-        }
+    private val audioFocusListener = OnAudioFocusChangeListener { focusChange ->
+        playerHandler?.obtainMessage(FOCUS_CHANGE, focusChange, 0)?.sendToTarget()
+    }
     private var playingNotification: PlayingNotification? = null
     private val updateFavoriteReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             playingNotification?.updateFavorite(currentSong) { startForegroundOrNotify() }
             startForegroundOrNotify()
+            appWidgetCircle.notifyChange(this@MusicService, FAVORITE_STATE_CHANGED)
         }
     }
     private val lockScreenReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -505,11 +509,11 @@ class MusicService : MediaBrowserServiceCompat(),
         var newPosition = getPosition() - 1
         when (repeatMode) {
             REPEAT_MODE_ALL -> if (newPosition < 0) {
-                newPosition = getPlayingQueue().size - 1
+                newPosition = playingQueue.size - 1
             }
             REPEAT_MODE_THIS -> if (force) {
                 if (newPosition < 0) {
-                    newPosition = getPlayingQueue().size - 1
+                    newPosition = playingQueue.size - 1
                 }
             } else {
                 newPosition = getPosition()
@@ -552,9 +556,9 @@ class MusicService : MediaBrowserServiceCompat(),
                 val currentSongId = Objects.requireNonNull(currentSong).id
                 playingQueue = ArrayList(originalPlayingQueue)
                 var newPosition = 0
-                for (song in getPlayingQueue()) {
+                for (song in playingQueue) {
                     if (song.id == currentSongId) {
-                        newPosition = getPlayingQueue().indexOf(song)
+                        newPosition = playingQueue.indexOf(song)
                     }
                 }
                 position = newPosition
@@ -565,8 +569,8 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun getSongAt(position: Int): Song {
-        return if ((position >= 0) && (position < getPlayingQueue().size)) {
-            getPlayingQueue()[position]
+        return if ((position >= 0) && (position < playingQueue.size)) {
+            playingQueue[position]
         } else {
             emptySong
         }
@@ -1137,7 +1141,7 @@ class MusicService : MediaBrowserServiceCompat(),
             .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
         metaData.putLong(
             MediaMetadataCompat.METADATA_KEY_NUM_TRACKS,
-            getPlayingQueue().size.toLong()
+            playingQueue.size.toLong()
         )
         if (isAlbumArtOnLockScreen) {
             val screenSize = RetroUtil.getScreenSize(this@MusicService)
@@ -1391,6 +1395,7 @@ class MusicService : MediaBrowserServiceCompat(),
         appWidgetCard.notifyChange(this, what)
         appWidgetText.notifyChange(this, what)
         appWidgetMd3.notifyChange(this, what)
+        appWidgetCircle.notifyChange(this, what)
     }
 
     private fun setCustomAction(stateBuilder: PlaybackStateCompat.Builder) {
