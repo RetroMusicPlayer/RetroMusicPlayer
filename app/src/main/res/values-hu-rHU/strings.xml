@@ -267,7 +267,7 @@
     <string name="past_three_months">Elmúlt 3 hónap</string>
     <string name="paste_lyrics_here">Dalszöveg beillesztése ide</string>
     <string name="paste_timeframe_lyrics_here">Időzített dalszöveg beillesztése ide</string>
-    <string name="peak">Csúcs</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">A külső tárolási hozzáférés engedélyezése tiltva.</string>
     <string name="permission_summary">Az alkalmazásnak engedélyre van szüksége az eszköz tárhelyéhez a zenék lejátszásához</string>
     <string name="permission_title">Tárhely engedély</string>
