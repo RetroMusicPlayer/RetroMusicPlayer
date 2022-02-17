@@ -267,7 +267,7 @@
     <string name="past_three_months">De senaste 3 månaderna</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
-    <string name="peak">Peak</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Behörighet att få tillgång till extern lagring nekas.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>
