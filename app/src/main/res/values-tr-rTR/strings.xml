@@ -267,7 +267,7 @@
     <string name="past_three_months">Son 3 ay</string>
     <string name="paste_lyrics_here">Sözleri buraya yapıştır</string>
     <string name="paste_timeframe_lyrics_here">Zaman dilimli şarkı sözlerini buraya yapıştır</string>
-    <string name="peak">Zirve</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Harici depolama izni reddedildi.</string>
     <string name="permission_summary">Uygulamanın müzik çalması için cihazınızın depolama erişimine ihtiyacı var</string>
     <string name="permission_title">Depolama Erişimi</string>
