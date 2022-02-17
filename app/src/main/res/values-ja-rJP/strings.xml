@@ -265,7 +265,7 @@
     <string name="past_three_months">過去3ヶ月</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
-    <string name="peak">ピーク</string>
+    <string name="peek">ピーク</string>
     <string name="permission_external_storage_denied">外部ストレージへのアクセスが拒否されました</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>

@@ -24,6 +24,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.getSystemService
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentTinyPlayerBinding
@@ -281,7 +282,7 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
 
         @Suppress("Deprecation")
         private fun vibrate() {
-            val v = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
+            val v = requireContext().getSystemService<Vibrator>()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 v?.vibrate(VibrationEffect.createOneShot(10, VibrationEffect.DEFAULT_AMPLITUDE))
             } else {

@@ -54,7 +54,7 @@ import code.name.monkey.retromusic.fragments.player.full.FullPlayerFragment
 import code.name.monkey.retromusic.fragments.player.gradient.GradientPlayerFragment
 import code.name.monkey.retromusic.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
-import code.name.monkey.retromusic.fragments.player.peak.PeakPlayerFragment
+import code.name.monkey.retromusic.fragments.player.peek.PeekPlayerFragment
 import code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment
 import code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment
@@ -241,7 +241,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 binding.slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                if (nowPlayingScreen != Peak) {
+                if (nowPlayingScreen != Peek) {
                     val params = binding.slidingPanel.layoutParams as ViewGroup.LayoutParams
                     params.height = ViewGroup.LayoutParams.MATCH_PARENT
                     binding.slidingPanel.layoutParams = params
@@ -454,7 +454,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             Color -> ColorFragment()
             Gradient -> GradientPlayerFragment()
             Tiny -> TinyPlayerFragment()
-            Peak -> PeakPlayerFragment()
+            Peek -> PeekPlayerFragment()
             Circle -> CirclePlayerFragment()
             Classic -> ClassicPlayerFragment()
             else -> PlayerFragment()

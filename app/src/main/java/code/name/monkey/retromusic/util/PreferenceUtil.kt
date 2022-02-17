@@ -3,8 +3,8 @@ package code.name.monkey.retromusic.util
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import androidx.core.content.getSystemService
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -332,10 +332,7 @@ object PreferenceUtil {
         return when (autoDownloadImagesPolicy) {
             "always" -> true
             "only_wifi" -> {
-                val connectivityManager = ContextCompat.getSystemService(
-                    App.getContext(),
-                    ConnectivityManager::class.java
-                )
+                val connectivityManager = App.getContext().getSystemService<ConnectivityManager>()
                 var netInfo: NetworkInfo? = null
                 if (connectivityManager != null) {
                     netInfo = connectivityManager.activeNetworkInfo
@@ -691,7 +688,7 @@ object PreferenceUtil {
         set(value) = sharedPreferences.edit { putFloat(PLAYBACK_PITCH, value) }
 
     val appBarMode: TopAppBarLayout.AppBarMode
-        get() = if (sharedPreferences.getString(APPBAR_MODE, "0") == "0") {
+        get() = if (sharedPreferences.getString(APPBAR_MODE, "1") == "0") {
             TopAppBarLayout.AppBarMode.COLLAPSING
         } else {
             TopAppBarLayout.AppBarMode.SIMPLE
@@ -712,6 +709,7 @@ object PreferenceUtil {
     val swipeAnywhereToChangeSong
         get() = sharedPreferences.getBoolean(SWIPE_ANYWHERE_NOW_PLAYING, true)
 }
+
 enum class LyricsType {
     REPLACE_COVER, OVER_COVER
 }
