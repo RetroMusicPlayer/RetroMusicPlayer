@@ -235,7 +235,7 @@
     <string name="my_name">Imię</string>
     <string name="my_top_tracks">Najczęściej odtwarzane</string>
     <string name="never">Nigdy</string>
-    <string name="new_music_mix">New Music Mix</string>
+    <string name="new_music_mix">Nowy muzyczny miks</string>
     <string name="new_playlist_title">Nowa playlista</string>
     <string name="new_start_directory">%s jest nowym folderem startowym.</string>
     <string name="next_song">Następny utwór</string>
@@ -335,7 +335,7 @@
     <string name="pref_summary_open_source_licences">Szczegóły licencji oprogramowania typu open source</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
-    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_suggestions">Pokaż Nowy muzyczny miks na ekranie głównym</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Tryb imersji</string>
     <string name="pref_summary_toggle_headset">Rozpocznij odtwarzanie po podłączeniu zestawu słuchawkowego</string>
@@ -379,7 +379,7 @@
     <string name="pref_title_open_source_licences">Licencje typu Open Source</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
-    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_suggestions">Pokaż sugestie</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Wygląd tytułów kart</string>
     <string name="pref_title_toggle_carousel_effect">Efekt karuzeli</string>
@@ -510,7 +510,7 @@
     <string name="username">Nazwa użytkownika</string>
     <string name="version">Wersja</string>
     <string name="vertical_flip">Obrót pionowy</string>
-    <string name="view_on_telegram">View on Telegram</string>
+    <string name="view_on_telegram">Zobacz na Telegramie</string>
     <string name="volume">Głośność</string>
     <string name="web_search">Przeszukaj sieć</string>
     <string name="website">Strona internetowa</string>
