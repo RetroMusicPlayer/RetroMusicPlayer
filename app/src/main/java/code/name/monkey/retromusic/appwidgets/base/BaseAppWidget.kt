@@ -24,7 +24,6 @@ import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.text.TextUtils
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
@@ -101,7 +100,7 @@ abstract class BaseAppWidget : AppWidgetProvider() {
     ): PendingIntent {
         val intent = Intent(action)
         intent.component = serviceName
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        return if (VersionUtils.hasOreo()) {
             PendingIntent.getForegroundService(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         } else {
             PendingIntent.getService(
