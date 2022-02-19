@@ -1146,9 +1146,10 @@ class MusicService : MediaBrowserServiceCompat(),
         if (isAlbumArtOnLockScreen) {
             val screenSize = RetroUtil.getScreenSize(this@MusicService)
             val request: RequestBuilder<Bitmap> =
-                GlideApp.with(this@MusicService).asBitmap().songCoverOptions(song).load(
-                    getSongModel(song)
-                )
+                GlideApp.with(this@MusicService)
+                    .asBitmap()
+                    .songCoverOptions(song)
+                    .load(getSongModel(song))
             if (isBlurredAlbumArt) {
                 request.transform(BlurTransformation.Builder(this@MusicService).build())
             }

@@ -32,7 +32,6 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
@@ -42,7 +41,6 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -247,14 +245,9 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
         binding.songText.text = song.artistName
 
         GlideApp.with(this)
-            .asBitmapPalette()
-            .songCoverOptions(song)
             .load(RetroGlideExtension.getSongModel(song))
-            .transform(BlurTransformation.Builder(this).build())
-            .into(object : RetroMusicColoredTarget(binding.image) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                }
-            })
+            .songCoverOptions(song).transform(BlurTransformation.Builder(this).build())
+            .into(binding.image)
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {

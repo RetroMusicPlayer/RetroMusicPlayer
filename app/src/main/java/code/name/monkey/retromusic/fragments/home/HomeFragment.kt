@@ -181,14 +181,13 @@ class HomeFragment :
     private fun loadProfile() {
         binding.bannerImage?.let {
             GlideApp.with(requireContext())
-                .asBitmap()
-                .profileBannerOptions(RetroGlideExtension.getBannerModel())
                 .load(RetroGlideExtension.getBannerModel())
+                .profileBannerOptions(RetroGlideExtension.getBannerModel())
                 .into(it)
         }
-        GlideApp.with(requireActivity()).asBitmap()
-            .userProfileOptions(RetroGlideExtension.getUserModel())
+        GlideApp.with(requireActivity())
             .load(RetroGlideExtension.getUserModel())
+            .userProfileOptions(RetroGlideExtension.getUserModel())
             .into(binding.userImage)
     }
 
@@ -273,9 +272,8 @@ class HomeFragment :
                 }
             }
             GlideApp.with(this)
-                .asBitmap()
-                .songCoverOptions(songs[index])
                 .load(RetroGlideExtension.getSongModel(songs[index]))
+                .songCoverOptions(songs[index])
                 .into(imageView)
         }
     }

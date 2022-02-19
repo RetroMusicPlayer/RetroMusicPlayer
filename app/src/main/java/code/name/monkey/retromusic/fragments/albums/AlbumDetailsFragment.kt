@@ -49,7 +49,6 @@ import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion.SONG_A_Z
@@ -68,7 +67,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -307,7 +305,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner) {
             moreAlbums(it)
         }
-        GlideApp.with(requireContext()).asBitmapPalette().artistImageOptions(artist)
+        GlideApp.with(requireContext())
             //.forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
             .load(
                 RetroGlideExtension.getArtistModel(
@@ -315,12 +313,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     PreferenceUtil.isAllowedToDownloadMetadata()
                 )
             )
+            .artistImageOptions(artist)
             .dontAnimate()
             .dontTransform()
-            .into(object : RetroMusicColoredTarget(binding.artistImage) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                }
-            })
+            .into(binding.artistImage)
     }
 
     private fun loadAlbumCover(album: Album) {
