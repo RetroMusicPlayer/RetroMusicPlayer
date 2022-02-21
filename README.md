@@ -34,7 +34,6 @@ ___
 ## 🆕 Material You Design Music Player for Android music lovers 
 
 ## ⚠ Join [@retromusiclog](https://telegram.me/retromusiclog) on Telegram for important updates.
-
 ___
 
 ## 📱 Screenshots
