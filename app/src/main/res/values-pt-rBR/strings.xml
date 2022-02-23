@@ -5,13 +5,13 @@
     <string name="accent_color">Cor de destaque</string>
     <string name="accent_color_desc">A cor de destaque do tema, o padrão é roxo</string>
     <string name="action_about">Sobre</string>
-    <string name="action_add_to_blacklist">Adicionar à lista negra</string>
+    <string name="action_add_to_blacklist">Adicionar à Lista Negra</string>
     <string name="action_add_to_favorites">Adicionar aos favoritos</string>
     <string name="action_add_to_playing_queue">Adicionar à fila</string>
     <string name="action_add_to_playlist">Adicionar à playlist</string>
     <string name="action_cast">Transmitir</string>
     <string name="action_clear_playing_queue">Limpar a fila</string>
-    <string name="action_cycle_repeat">Ativar/desativar modo de repetição</string>
+    <string name="action_cycle_repeat">Alternar entre modos de repetição</string>
     <string name="action_delete">Excluir</string>
     <string name="action_delete_from_device">Excluir do dispositivo</string>
     <string name="action_details">Detalhes</string>
@@ -27,7 +27,7 @@
     <string name="action_new_playlist">Nova playlist</string>
     <string name="action_next">Próxima</string>
     <string name="action_play">Reproduzir</string>
-    <string name="action_play_all">Reproduzir tudo</string>
+    <string name="action_play_all">Reproduzir todas</string>
     <string name="action_play_next">Tocar em seguida</string>
     <string name="action_play_pause">Reproduzir/Pausar</string>
     <string name="action_previous">Anterior</string>
@@ -53,7 +53,7 @@
     <string name="adaptive">Adaptável</string>
     <string name="add_action">Adicionar</string>
     <string name="add_playlist_title">"Adicionar à playlist"</string>
-    <string name="add_time_framed_lryics">Adicione Letras Sincronizadas</string>
+    <string name="add_time_framed_lryics">Adicionar Letras Sincronizadas</string>
     <string name="added_title_to_playing_queue">"1 música foi adicionada à fila."</string>
     <string name="added_x_titles_to_playing_queue">%1$d músicas foram adicionadas à fila.</string>
     <string name="album">Álbum</string>
@@ -71,7 +71,7 @@
     <string name="app_share">Ei, confira este reprodutor de música em: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Embaralhar</string>
     <string name="app_shortcut_top_tracks_short">Melhores Músicas</string>
-    <string name="app_widget_big_name">Imagem inteira</string>
+    <string name="app_widget_big_name">Imagem Inteira</string>
     <string name="app_widget_card_name">Cartão</string>
     <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Clássico</string>
@@ -84,7 +84,7 @@
     <string name="audio_focus_denied">Foco de áudio negado.</string>
     <string name="audio_settings_summary">Altere as configurações de som e ajuste os controles do equalizador</string>
     <string name="auto">Automático</string>
-    <string name="backup_restore_settings_summary">Cópia de Segurança e restauração agora são compatíveis, com listas de reprodução</string>
+    <string name="backup_restore_settings_summary">Fazer backup e restauração das suas configurações, playlists, etc.</string>
     <string name="backup_restore_title"><![CDATA[Backup e Restauração]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biografia</string>
@@ -115,7 +115,7 @@
     <string name="cascading">Cascata</string>
     <string name="changelog">Lista de mudanças</string>
     <string name="changelog_summary">Veja o que há de novo</string>
-    <string name="choose_restore_title">Selecione o que irá restaurar</string>
+    <string name="choose_restore_title">Selecione o que será restaurado</string>
     <string name="circle">Círculo</string>
     <string name="circular">Circular</string>
     <string name="classic">Clássico</string>
@@ -175,7 +175,7 @@
     <string name="for_you">Para você</string>
     <string name="free">Grátis</string>
     <string name="full">Completo</string>
-    <string name="full_card">Cartão cheio</string>
+    <string name="full_card">Cartão completo</string>
     <string name="general_settings_summary">Alterar o tema e as cores do aplicativo</string>
     <string name="general_settings_title">Aparência</string>
     <string name="genre">Gênero</string>
@@ -231,7 +231,7 @@
     <string name="my_name">Nome</string>
     <string name="my_top_tracks">Mais tocadas</string>
     <string name="never">Nunca</string>
-    <string name="new_music_mix">Nova Mistura de Música</string>
+    <string name="new_music_mix">Novo Mix de Músicas</string>
     <string name="new_playlist_title">Nova playlist</string>
     <string name="new_start_directory">%s é o novo diretório inicial.</string>
     <string name="next_song">Próxima música</string>
@@ -301,7 +301,7 @@
     <string name="pref_header_lockscreen">Tela de bloqueio</string>
     <string name="pref_header_playlists">Playlists</string>
     <string name="pref_keep_pause_on_zero_volume_summary">Pausa a reprodução quando o volume é zerado e reproduz novamente quando o volume aumentar. Também funciona fora do aplicativo</string>
-    <string name="pref_keep_pause_on_zero_volume_title">Pausar quando o volume for zerado</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Pausar em zero</string>
     <string name="pref_keep_screen_on_summary">Tenha em mente que ativar este recurso pode afetar a duração da bateria</string>
     <string name="pref_keep_screen_on_title">Manter a tela ligada</string>
     <string name="pref_language_name">Selecione o idioma</string>
@@ -329,9 +329,9 @@
     <string name="pref_summary_library_categories">Configurar visibilidade e ordem das categorias da biblioteca.</string>
     <string name="pref_summary_lock_screen">Usar controles personalizados do Retro Music na tela de bloqueio</string>
     <string name="pref_summary_open_source_licences">Detalhes da licença para software de código aberto</string>
-    <string name="pref_summary_remember_tab">Navegar para a última aba usada ao iniciar</string>
+    <string name="pref_summary_remember_tab">Navegar para a última guia usada ao iniciar</string>
     <string name="pref_summary_show_lyrics">Exibir letras sincronizadas sobre a capa do álbum</string>
-    <string name="pref_summary_suggestions">Mostrar Nova Mistura de Música na tela inicial</string>
+    <string name="pref_summary_suggestions">Mostrar \"Mix de Novas Músicas\" na tela inicial</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Permite mudar a música deslizando em qualquer lugar na tela em reprodução</string>
     <string name="pref_summary_toggle_full_screen">Modo imersivo</string>
     <string name="pref_summary_toggle_headset">Começar a reproduzir imediatamente após os fones de ouvido forem conectados</string>
@@ -346,7 +346,7 @@
     <string name="pref_title_app_shortcuts">Colorir os atalhos do aplicativo</string>
     <string name="pref_title_appbar_mode">Modo de barra de aplicativos</string>
     <string name="pref_title_audio_ducking">Reduzir o volume durante perda de foco</string>
-    <string name="pref_title_audio_fade">Desaparecer áudio</string>
+    <string name="pref_title_audio_fade">Desvanecer áudio</string>
     <string name="pref_title_auto_download_artist_images">Baixar automaticamente as imagens dos artistas</string>
     <string name="pref_title_blacklist">Lista negra</string>
     <string name="pref_title_bluetooth_playback">Reprodução bluetooth</string>
@@ -355,8 +355,8 @@
     <string name="pref_title_classic_notification">Design de notificação clássico</string>
     <string name="pref_title_colored_app">Cor adaptável</string>
     <string name="pref_title_colored_notification">Notificações coloridas</string>
-    <string name="pref_title_cross_fade">Transição (Beta)</string>
-    <string name="pref_title_custom_font">Use a fonte Manrope</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_custom_font">Usar a fonte Manrope</string>
     <string name="pref_title_desaturated_color">Cor dessaturada</string>
     <string name="pref_title_expand_now_playing_panel">Mostrar tela de reprodução</string>
     <string name="pref_title_extra_controls">Controles extras</string>
@@ -369,7 +369,7 @@
     <string name="pref_title_ignore_media_store_artwork">Ignorar capas do Armazenamento de Mídia</string>
     <string name="pref_title_last_added_interval">Intervalo da playlist \"Mais recentes\"</string>
     <string name="pref_title_lock_screen">Controles em tela cheia</string>
-    <string name="pref_title_lyrics_screen_on">Mantenha a tela ligada ao mostrar as letras</string>
+    <string name="pref_title_lyrics_screen_on">Manter a tela ligada ao mostrar as letras</string>
     <string name="pref_title_lyrics_type">Tipo de letra</string>
     <string name="pref_title_now_playing_screen_appearance">Tema da tela de reprodução</string>
     <string name="pref_title_open_source_licences">Licenças de código aberto</string>
@@ -377,14 +377,14 @@
     <string name="pref_title_show_lyrics">Mostrar letras</string>
     <string name="pref_title_suggestions">Mostrar sugestões</string>
     <string name="pref_title_swipe_anywhere_now_playing">Deslize em qualquer lugar para mudar a música</string>
-    <string name="pref_title_tab_text_mode">Modo de títulos nas abas</string>
+    <string name="pref_title_tab_text_mode">Modo de títulos nas guias</string>
     <string name="pref_title_toggle_carousel_effect">Efeito carrossel</string>
     <string name="pref_title_toggle_full_screen">Aplicativo em tela cheia</string>
     <string name="pref_title_toggle_toggle_headset">Reprodução automática</string>
     <string name="pref_title_toggle_toggle_shuffle">Modo aleatório</string>
     <string name="pref_title_toggle_volume">Controles do volume</string>
     <string name="pref_title_wallpaper_accent">Cor de destaque do papel de parede</string>
-    <string name="pref_title_whitelist">Música na lista de permissões</string>
+    <string name="pref_title_whitelist">Lista branca</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema escuro, temas da tela de reprodução, efeito carrossel e mais..</string>
     <string name="profile">Perfil</string>
@@ -408,7 +408,7 @@
     <string name="reset_action">Resetar</string>
     <string name="reset_artist_image">Restaurar imagem do artista</string>
     <string name="restore">Restaurar</string>
-    <string name="restore_message">Você deseja restaurar a cópia de segurança?</string>
+    <string name="restore_message">Confirma a restauração do backup?</string>
     <string name="restored_previous_purchase_please_restart">Compra anterior restaurada. Por favor, reinicie o aplicativo para fazer uso de todos os recursos.</string>
     <string name="restored_previous_purchases">Compras anteriores restauradas.</string>
     <string name="restoring_purchase">Restaurando compra...</string>
@@ -436,7 +436,7 @@
     <string name="saved_playlist_to">Playlist salva como %s.</string>
     <string name="saving_changes">Salvando alterações</string>
     <string name="scan_media">Escanear mídia</string>
-    <string name="scanned_files">Escaneados %1$d dos %2$d arquivos.</string>
+    <string name="scanned_files">Escaneados %1$d de %2$d arquivos.</string>
     <string name="scrobbles_label">Scrobbles</string>
     <string name="select_all">Selecionar tudo</string>
     <string name="selected">Selecionado</string>
@@ -458,13 +458,13 @@
     <string name="sort_order">Ordem de classificação</string>
     <string name="sort_order_a_z">Nome (crescente)</string>
     <string name="sort_order_album">Álbum</string>
-    <string name="sort_order_album_artist">@string/artista_do_album</string>
+    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Artista</string>
     <string name="sort_order_composer">Compositor</string>
     <string name="sort_order_date">Data adicionada</string>
     <string name="sort_order_date_modified">Data de alteração</string>
-    <string name="sort_order_num_songs">Contagem de músicas (crescente)</string>
-    <string name="sort_order_num_songs_desc">Contagem de músicas (decrescente)</string>
+    <string name="sort_order_num_songs">Quantidade de músicas (crescente)</string>
+    <string name="sort_order_num_songs_desc">Quantidade de músicas (decrescente)</string>
     <string name="sort_order_year">Ano</string>
     <string name="sort_order_z_a">Nome (decrescente)</string>
     <string name="speech_not_supported">Desculpe! O seu dispositivo não suporta entrada de voz</string>
@@ -485,7 +485,7 @@
     <string name="tiny">Pequeno</string>
     <string name="tiny_card_style">Cartão pequeno</string>
     <string name="title">Título</string>
-    <string name="title_new_backup">Nova Cópia de Segurança</string>
+    <string name="title_new_backup">Novo Backup</string>
     <string name="today">Hoje</string>
     <string name="top_albums">Melhores álbuns</string>
     <string name="top_artists">Melhores artistas</string>
