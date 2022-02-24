@@ -344,7 +344,7 @@
     <string name="pref_title_album_cover_style">Θέμα εξώφυλλου άλμπουμ</string>
     <string name="pref_title_album_cover_transform">Παράλειψη εξώφυλλου άλμπουμ</string>
     <string name="pref_title_app_shortcuts">Χρωματιστά app shortcuts</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Λειτουργία μπάρας εφαρμογής</string>
     <string name="pref_title_audio_ducking">Μείωση έντασης όταν υπάρχουν εισερχόμενες ειδοποιήσεις</string>
     <string name="pref_title_audio_fade">Εξασθένηση Ήχου</string>
     <string name="pref_title_auto_download_artist_images">Αυτόματη λήψη εικόνων καλλιτεχνών</string>
