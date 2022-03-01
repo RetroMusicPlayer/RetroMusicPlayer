@@ -108,7 +108,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
-    def room_version = '2.4.1'
+    def room_version = '2.4.2'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
@@ -126,7 +126,7 @@ dependencies {
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.4'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.5'
 
     def material_dialog_version = "3.3.0"
     implementation "com.afollestad.material-dialogs:core:$material_dialog_version"
@@ -146,7 +146,7 @@ dependencies {
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
 
-    def glide_version = '4.13.0'
+    def glide_version = '4.13.1'
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
     implementation "com.github.bumptech.glide:okhttp3-integration:$glide_version"

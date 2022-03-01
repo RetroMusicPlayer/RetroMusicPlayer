@@ -49,14 +49,17 @@ class PermissionActivity : AbsMusicServiceActivity() {
         binding.storagePermission.setButtonClick {
             requestPermissions()
         }
-        if (VersionUtils.hasMarshmallow()) binding.audioPermission.show()
-        binding.audioPermission.setButtonClick {
-            if (RingtoneManager.requiresDialog(this@PermissionActivity)) {
-                val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                intent.data = Uri.parse("package:" + applicationContext.packageName)
-                startActivity(intent)
+        if (VersionUtils.hasMarshmallow()) {
+            binding.audioPermission.show()
+            binding.audioPermission.setButtonClick {
+                if (RingtoneManager.requiresDialog(this@PermissionActivity)) {
+                    val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                    intent.data = Uri.parse("package:" + applicationContext.packageName)
+                    startActivity(intent)
+                }
             }
         }
+
         binding.finish.accentBackgroundColor()
         binding.finish.setOnClickListener {
             if (hasPermissions()) {

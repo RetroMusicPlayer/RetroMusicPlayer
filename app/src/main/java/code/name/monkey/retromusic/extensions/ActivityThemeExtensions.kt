@@ -45,7 +45,7 @@ fun AppCompatActivity.setImmersiveFullscreen() {
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             hide(WindowInsetsCompat.Type.systemBars())
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        if (VersionUtils.hasP()) {
             window.attributes.layoutInDisplayCutoutMode =
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         }
@@ -100,7 +100,7 @@ fun FragmentActivity.setTaskDescriptionColor(color: Int) {
     // Task description requires fully opaque color
     colorFinal = ColorUtil.stripAlpha(colorFinal)
     // Sets color of entry in the system recents page
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+    if (VersionUtils.hasP()) {
         setTaskDescription(
             ActivityManager.TaskDescription(
                 title as String?,
@@ -196,7 +196,7 @@ fun AppCompatActivity.setStatusBarColorAuto() {
 }
 
 fun AppCompatActivity.setNavigationBarColor(color: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    if (VersionUtils.hasOreo()) {
         window.navigationBarColor = color
     } else {
         window.navigationBarColor = ColorUtil.darkenColor(color)

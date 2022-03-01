@@ -232,7 +232,7 @@ class PlayingNotificationImpl24(
             notificationManager: NotificationManager,
             mediaSession: MediaSessionCompat
         ): PlayingNotification {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (VersionUtils.hasOreo()) {
                 createNotificationChannel(context, notificationManager)
             }
             return PlayingNotificationImpl24(context, mediaSession.sessionToken)

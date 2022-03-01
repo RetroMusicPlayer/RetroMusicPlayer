@@ -22,6 +22,8 @@ import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.provider.Settings
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil.getSongFileUri
@@ -55,7 +57,7 @@ class RingtoneManager(val context: Context) {
     companion object {
 
         fun requiresDialog(context: Context): Boolean {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (VersionUtils.hasMarshmallow()) {
                 if (!Settings.System.canWrite(context)) {
                     return true
                 }
