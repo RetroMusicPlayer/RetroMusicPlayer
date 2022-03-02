@@ -29,33 +29,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appNameText" />
 
-    <code.name.monkey.retromusic.views.PermissionItem
-        android:id="@+id/storagePermission"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/finish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        app:permissionButtonTitle="Grant access"
-        app:permissionIcon="@drawable/ic_sd_storage"
-        app:permissionTitle="@string/permission_title"
-        app:permissionTitleNumber="1"
-        app:permissionTitleSubTitle="@string/permission_summary" />
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@+id/divider">
 
-    <code.name.monkey.retromusic.views.PermissionItem
-        android:id="@+id/audioPermission"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/storagePermission"
-        app:permissionButtonTitle="Grant access"
-        app:permissionIcon="@drawable/ic_phonelink_ring"
-        app:permissionTitle="@string/ringtone_title"
-        app:permissionTitleNumber="2"
-        app:permissionTitleSubTitle="@string/ringtone_summary"
-        tools:visibility="visible" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+           <code.name.monkey.retromusic.views.PermissionItem
+               android:id="@+id/storagePermission"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/divider"
+               app:permissionButtonTitle="Grant access"
+               app:permissionIcon="@drawable/ic_sd_storage"
+               app:permissionTitle="@string/permission_title"
+               app:permissionTitleNumber="1"
+               app:permissionTitleSubTitle="@string/permission_summary" />
+
+           <code.name.monkey.retromusic.views.PermissionItem
+               android:id="@+id/audioPermission"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:visibility="gone"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/storagePermission"
+               app:permissionButtonTitle="Grant access"
+               app:permissionIcon="@drawable/ic_phonelink_ring"
+               app:permissionTitle="@string/ringtone_title"
+               app:permissionTitleNumber="2"
+               app:permissionTitleSubTitle="@string/ringtone_summary"
+               tools:visibility="visible" />
+       </LinearLayout>
+    </ScrollView>
+
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/finish"
