@@ -208,6 +208,7 @@
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Filnamn</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Sökväg</string>
     <string name="label_file_size">Storlek</string>
     <string name="label_more_from">Mer från %s</string>
