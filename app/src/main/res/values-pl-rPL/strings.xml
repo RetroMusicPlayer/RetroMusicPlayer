@@ -214,6 +214,7 @@
     <string name="label_file_name">Nazwa pliku</string>
     <string name="label_file_path">Ścieżka pliku</string>
     <string name="label_file_size">Rozmiar</string>
+    <string name="label_last_modified">Ostatnia zmiana</string>
     <string name="label_more_from">Więcej z %s</string>
     <string name="label_sampling_rate">Częstotliwość próbkowania</string>
     <string name="label_track_length">Długość</string>

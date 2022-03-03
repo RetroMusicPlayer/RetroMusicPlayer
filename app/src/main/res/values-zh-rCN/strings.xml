@@ -220,6 +220,7 @@
     <string name="label_file_name">文件名</string>
     <string name="label_file_path">文件路径</string>
     <string name="label_file_size">文件大小</string>
+    <string name="label_last_modified">最后修改</string>
     <string name="label_more_from">来自 %s 的更多歌曲</string>
     <string name="label_sampling_rate">采样率</string>
     <string name="label_track_length">长度</string>

@@ -39,6 +39,18 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp" />
 
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dateModified"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewNormal"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/fileFormat"
         android:layout_width="wrap_content"

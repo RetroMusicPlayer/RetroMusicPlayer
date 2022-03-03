@@ -49,6 +49,7 @@ class SongDetailDialog : DialogFragment() {
         val fileName: TextView = dialogView.findViewById(R.id.fileName)
         val filePath: TextView = dialogView.findViewById(R.id.filePath)
         val fileSize: TextView = dialogView.findViewById(R.id.fileSize)
+        val dateModified: TextView = dialogView.findViewById(R.id.dateModified)
         val fileFormat: TextView = dialogView.findViewById(R.id.fileFormat)
         val trackLength: TextView = dialogView.findViewById(R.id.trackLength)
         val bitRate: TextView = dialogView.findViewById(R.id.bitrate)
@@ -67,6 +68,10 @@ class SongDetailDialog : DialogFragment() {
                 fileName.text = makeTextWithTitle(context, R.string.label_file_name, songFile.name)
                 filePath.text =
                     makeTextWithTitle(context, R.string.label_file_path, songFile.absolutePath)
+
+                dateModified.text = makeTextWithTitle(context, R.string.label_last_modified,
+                    MusicUtil.getDateModifiedString(songFile.lastModified()))
+
                 fileSize.text =
                     makeTextWithTitle(
                         context,

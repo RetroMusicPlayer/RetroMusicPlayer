@@ -209,6 +209,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="label_file_name">Tên tệp</string>
     <string name="label_file_path">Đường dẫn tệp</string>
     <string name="label_file_size">Kích thước</string>
+    <string name="label_last_modified">Sửa đổi lần cuối</string>
     <string name="label_more_from">Thêm thông tin từ %s</string>
     <string name="label_sampling_rate">Tần số lấy mẫu</string>
     <string name="label_track_length">Độ dài</string>

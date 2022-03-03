@@ -208,6 +208,7 @@
     <string name="label_file_name">ファイルの名前</string>
     <string name="label_file_path">ファイルパス</string>
     <string name="label_file_size">サイズ</string>
+    <string name="label_last_modified">最終更新日</string>
     <string name="label_more_from">More from %s</string>
     <string name="label_sampling_rate">サンプリングレート</string>
     <string name="label_track_length">長さ</string>

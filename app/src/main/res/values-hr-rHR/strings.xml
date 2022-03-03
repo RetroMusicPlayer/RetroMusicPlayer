@@ -212,6 +212,7 @@
     <string name="label_file_name">Naziv datoteke</string>
     <string name="label_file_path">Putanja datoteke</string>
     <string name="label_file_size">Veličina</string>
+    <string name="label_last_modified">Zadnja promjena</string>
     <string name="label_more_from">More from %s</string>
     <string name="label_sampling_rate">Sampling rate</string>
     <string name="label_track_length">Trajanje</string>
