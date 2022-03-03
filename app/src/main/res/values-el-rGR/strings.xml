@@ -208,6 +208,7 @@
     <string name="label_bit_rate">Ρυθμός μετάδοσης bit</string>
     <string name="label_file_format">Μορφή</string>
     <string name="label_file_name">Όνομα Αρχείου</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Διαδρομή Αρχείου</string>
     <string name="label_file_size">Μέγεθος</string>
     <string name="label_more_from">Περισσότερα από %s</string>
