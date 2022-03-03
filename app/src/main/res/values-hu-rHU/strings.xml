@@ -208,6 +208,7 @@
     <string name="label_bit_rate">Bitráta</string>
     <string name="label_file_format">Formátum</string>
     <string name="label_file_name">Fájl név</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Fájl elérési út</string>
     <string name="label_file_size">Méret</string>
     <string name="label_more_from">Több a következőtől: %s</string>
