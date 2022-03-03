@@ -208,6 +208,7 @@
     <string name="label_bit_rate">Tasa de bits</string>
     <string name="label_file_format">Formato</string>
     <string name="label_file_name">Nombre del archivo</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Ruta del archivo</string>
     <string name="label_file_size">Tamaño</string>
     <string name="label_more_from">Más de %s</string>
