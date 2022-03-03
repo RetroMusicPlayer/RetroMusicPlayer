@@ -209,6 +209,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Formato</string>
     <string name="label_file_name">Nome del file</string>
+    <string name="label_last_modified">Ultima Modifica</string>
     <string name="label_file_path">Percorso del file</string>
     <string name="label_file_size">Dimensione</string>
     <string name="label_more_from">Altro da %s</string>
@@ -523,5 +524,5 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="you_have_to_select_at_least_one_category">Seleziona almeno una categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Verrai reindirizzato al sito web dei problemi.</string>
     <string name="your_account_data_is_only_used_for_authentication">I dati del tuo account vengono utilizzati solo per l\'autenticazione.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Condividi il rapporto sull\'arresto anomalo</string>
 </resources>
