@@ -207,6 +207,7 @@
     <string name="label_bit_rate">ビットレート</string>
     <string name="label_file_format">フォーマット</string>
     <string name="label_file_name">ファイルの名前</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">ファイルパス</string>
     <string name="label_file_size">サイズ</string>
     <string name="label_more_from">More from %s</string>
