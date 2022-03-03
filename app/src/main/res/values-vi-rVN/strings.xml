@@ -207,6 +207,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="label_bit_rate">Tốc độ bit</string>
     <string name="label_file_format">Định dạng</string>
     <string name="label_file_name">Tên tệp</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Đường dẫn tệp</string>
     <string name="label_file_size">Kích thước</string>
     <string name="label_more_from">Thêm thông tin từ %s</string>
