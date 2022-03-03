@@ -206,6 +206,7 @@
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">အမျိုးအစား</string>
     <string name="label_file_name">ဖိုင်နာမည်</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">ဖိုင်နေရာ</string>
     <string name="label_file_size">အရွယ်အစား</string>
     <string name="label_more_from">%s ၏နောက်ထပ် Album များ</string>
