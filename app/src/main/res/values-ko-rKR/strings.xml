@@ -520,4 +520,5 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">계정 정보는 오로지 인증 목적으로만 사용됩니다.</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
 </resources>
