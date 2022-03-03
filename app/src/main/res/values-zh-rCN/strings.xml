@@ -520,4 +520,5 @@
     <string name="you_have_to_select_at_least_one_category">请至少选择一个分类。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
 </resources>
