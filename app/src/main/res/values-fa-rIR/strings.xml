@@ -522,4 +522,5 @@
     <string name="you_have_to_select_at_least_one_category">شما باید حداقل یک دسته را انتخاب کنید.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">شما به وب سایت ردیاب مشکل هدایت می شوید.</string>
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
 </resources>
