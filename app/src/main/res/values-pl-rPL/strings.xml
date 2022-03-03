@@ -212,6 +212,7 @@
     <string name="label_bit_rate">Jakość</string>
     <string name="label_file_format">Typ</string>
     <string name="label_file_name">Nazwa pliku</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Ścieżka pliku</string>
     <string name="label_file_size">Rozmiar</string>
     <string name="label_more_from">Więcej z %s</string>
