@@ -206,6 +206,7 @@
     <string name="label_bit_rate">비트레이트</string>
     <string name="label_file_format">형식</string>
     <string name="label_file_name">파일 이름</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">파일 경로</string>
     <string name="label_file_size">크기</string>
     <string name="label_more_from">More from %s</string>
