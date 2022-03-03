@@ -39,6 +39,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import java.io.File
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 
@@ -292,6 +293,14 @@ object MusicUtil : KoinComponent {
 
     fun indexOfSongInList(songs: List<Song>, songId: Long): Int {
         return songs.indexOfFirst { it.id == songId }
+    }
+
+    fun getDateModifiedString(date: Long): String {
+        val calendar: Calendar = Calendar.getInstance()
+        val pattern = "dd/MM/yyyy hh:mm:ss"
+        calendar.timeInMillis = date
+        val formatter = SimpleDateFormat(pattern, Locale.ENGLISH)
+        return formatter.format(calendar.time)
     }
 
     fun insertAlbumArt(
