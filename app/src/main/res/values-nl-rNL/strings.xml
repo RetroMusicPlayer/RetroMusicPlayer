@@ -208,6 +208,7 @@
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Formaat</string>
     <string name="label_file_name">Bestandsnaam</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Bestandslocatie</string>
     <string name="label_file_size">Grootte</string>
     <string name="label_more_from">Meer van %s</string>
