@@ -206,6 +206,7 @@
     <string name="label_bit_rate">比特率</string>
     <string name="label_file_format">格式</string>
     <string name="label_file_name">文件名</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">文件路径</string>
     <string name="label_file_size">文件大小</string>
     <string name="label_more_from">来自 %s 的更多歌曲</string>
