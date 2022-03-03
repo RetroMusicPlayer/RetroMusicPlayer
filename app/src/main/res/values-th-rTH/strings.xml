@@ -520,4 +520,5 @@
     <string name="you_have_to_select_at_least_one_category">คุณต้องเลือกอย่างน้อยหนึ่งหมวดหมู่</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">ท่านจะติดตามการรายงานปัญหาจากเว็บไซต์</string>
     <string name="your_account_data_is_only_used_for_authentication">ข้อมูลบัญชีของท่านจะใช้สำหรับการเข้าสู่ระบบเท่านั้น</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
 </resources>
