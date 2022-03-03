@@ -219,6 +219,7 @@
     <string name="label_bit_rate">معدل البت</string>
     <string name="label_file_format">الصيغة</string>
     <string name="label_file_name">اسم الملف</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">مسار الملف</string>
     <string name="label_file_size">الحجم</string>
     <string name="label_more_from">المزيد من %s</string>
