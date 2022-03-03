@@ -221,6 +221,7 @@
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">File name</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">File path</string>
     <string name="label_file_size">Size</string>
     <string name="label_more_from">More from %s</string>

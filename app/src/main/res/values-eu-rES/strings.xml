@@ -194,6 +194,7 @@
     <string name="label_file_name">Fitxategiaren izena</string>
     <string name="label_file_path">Fitxategiaren kokalekua</string>
     <string name="label_file_size">Tamaina</string>
+    <string name="label_last_modified">Ultima modificacion</string>
     <string name="label_more_from">More from %s</string>
     <string name="label_sampling_rate">Laginketa tasa</string>
     <string name="label_track_length">Luzera</string>

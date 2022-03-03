@@ -210,6 +210,7 @@
     <string name="label_file_name">Όνομα Αρχείου</string>
     <string name="label_file_path">Διαδρομή Αρχείου</string>
     <string name="label_file_size">Μέγεθος</string>
+    <string name="label_last_modified">Τελευταία τροποποίηση</string>
     <string name="label_more_from">Περισσότερα από %s</string>
     <string name="label_sampling_rate">Ρυθμός δειγματοληψίας</string>
     <string name="label_track_length">Μήκος</string>

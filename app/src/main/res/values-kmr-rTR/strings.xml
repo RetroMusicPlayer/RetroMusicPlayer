@@ -211,6 +211,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="label_file_name">Navê pelê</string>
     <string name="label_file_path">Rêgeha pelê</string>
     <string name="label_file_size">Mezinahî</string>
+    <string name="label_last_modified">Guhertina Dawîn</string>
     <string name="label_more_from">Bêtir ji %s</string>
     <string name="label_sampling_rate">Rêjeya mînakî</string>
     <string name="label_track_length">Dirêjî</string>

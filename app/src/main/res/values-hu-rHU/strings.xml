@@ -210,6 +210,7 @@
     <string name="label_file_name">Fájl név</string>
     <string name="label_file_path">Fájl elérési út</string>
     <string name="label_file_size">Méret</string>
+    <string name="label_last_modified">Utoljára módosítva</string>
     <string name="label_more_from">Több a következőtől: %s</string>
     <string name="label_sampling_rate">Mintavételi arány</string>
     <string name="label_track_length">Hossz</string>

@@ -177,6 +177,7 @@
     <string name="label_file_name">檔案名</string>
     <string name="label_file_path">檔案位址</string>
     <string name="label_file_size">大小</string>
+    <string name="label_last_modified">最后修改</string>
     <string name="label_more_from">來自%s的更多資訊</string>
     <string name="label_sampling_rate">取樣頻率</string>
     <string name="label_track_length">長度</string>

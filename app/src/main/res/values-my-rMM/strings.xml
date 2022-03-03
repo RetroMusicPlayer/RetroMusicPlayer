@@ -208,6 +208,7 @@
     <string name="label_file_name">ဖိုင်နာမည်</string>
     <string name="label_file_path">ဖိုင်နေရာ</string>
     <string name="label_file_size">အရွယ်အစား</string>
+    <string name="label_last_modified">နောက်ဆုံးပြောင်းလဲမှု</string>
     <string name="label_more_from">%s ၏နောက်ထပ် Album များ</string>
     <string name="label_sampling_rate">Sampling rate</string>
     <string name="label_track_length">ကြာချိန်</string>
