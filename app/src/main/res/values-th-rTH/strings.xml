@@ -206,6 +206,7 @@
     <string name="label_bit_rate">บิตเรท</string>
     <string name="label_file_format">รูปแบบไฟล์</string>
     <string name="label_file_name">ชื่อไฟล์</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">ที่อยู่ไฟล์</string>
     <string name="label_file_size">ขนาด</string>
     <string name="label_more_from">เพิ่มเติมจาก %s</string>
