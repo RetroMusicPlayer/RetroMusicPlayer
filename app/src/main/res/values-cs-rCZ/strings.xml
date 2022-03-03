@@ -212,6 +212,7 @@
     <string name="label_bit_rate">Datový tok</string>
     <string name="label_file_format">Formát</string>
     <string name="label_file_name">Název souboru</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Umístění souboru</string>
     <string name="label_file_size">Velikost</string>
     <string name="label_more_from">Více od %s</string>
