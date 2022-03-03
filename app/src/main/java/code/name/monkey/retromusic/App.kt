@@ -16,9 +16,11 @@ package code.name.monkey.retromusic
 
 import android.app.Application
 import android.widget.Toast
+import cat.ereza.customactivityoncrash.config.CaocConfig
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
+import code.name.monkey.retromusic.activities.ErrorActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.helper.WallpaperAccentManager
 import com.anjlab.android.iab.v3.BillingProcessor
@@ -69,6 +71,9 @@ class App : Application() {
 
                 override fun onBillingInitialized() {}
             })
+
+        // setting Error activity
+        CaocConfig.Builder.create().errorActivity(ErrorActivity::class.java).apply()
     }
 
     override fun onTerminate() {
