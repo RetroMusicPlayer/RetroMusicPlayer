@@ -208,6 +208,7 @@
     <string name="label_bit_rate">Bit Hızı</string>
     <string name="label_file_format">Biçim</string>
     <string name="label_file_name">Dosya adı</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Dosya yolu</string>
     <string name="label_file_size">Boyut</string>
     <string name="label_more_from">%s\'dan daha fazla</string>
