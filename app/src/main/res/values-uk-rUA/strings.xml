@@ -212,6 +212,7 @@
     <string name="label_bit_rate">Бітрейт</string>
     <string name="label_file_format">Формат</string>
     <string name="label_file_name">Назва файлу</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Шлях до файлу</string>
     <string name="label_file_size">Розмір</string>
     <string name="label_more_from">Більше від %s</string>
