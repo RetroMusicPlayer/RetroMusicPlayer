@@ -8,4 +8,6 @@
 
     <integer name="max_columns">6</integer>
     <integer name="max_columns_land">8</integer>
+    <integer name="permission_orientation">1</integer>
+    <integer name="permission_layout_weight">1</integer>
 </resources>
