@@ -198,6 +198,7 @@
     <string name="help_summary">Нужна ещё помощь?</string>
     <string name="hinge">Пластинки</string>
     <string name="history">История</string>
+    <string name="clear_history">Clear History</string>
     <string name="home">Главная</string>
     <string name="horizontal_flip">Горизонтальный поворот</string>
     <string name="image">Изображение</string>
