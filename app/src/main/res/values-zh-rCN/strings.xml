@@ -192,6 +192,7 @@
     <string name="help_summary">需要更多帮助？</string>
     <string name="hinge">旋转</string>
     <string name="history">历史记录</string>
+    <string name="clear_history">Clear History</string>
     <string name="home">主页</string>
     <string name="horizontal_flip">水平翻转</string>
     <string name="image">图片</string>
