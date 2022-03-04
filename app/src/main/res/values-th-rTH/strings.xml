@@ -192,6 +192,7 @@
     <string name="help_summary">ต้องการความช่วยเหลือเพิ่มเพิม?</string>
     <string name="hinge">Hinge</string>
     <string name="history">ประวัติ</string>
+    <string name="clear_history">Clear History</string>
     <string name="home">หน้าแรก</string>
     <string name="horizontal_flip">Horizontal flip</string>
     <string name="image">รูปภาพ</string>
