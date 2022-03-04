@@ -194,6 +194,7 @@
     <string name="help_summary">Benötigst du weitere Hilfe?</string>
     <string name="hinge">Scharnier</string>
     <string name="history">Verlauf</string>
+    <string name="clear_history">Clear History</string>
     <string name="home">Zuhause</string>
     <string name="horizontal_flip">Horizontale Drehung</string>
     <string name="image">Bild</string>
