@@ -15,6 +15,9 @@
 package code.name.monkey.retromusic.fragments.other
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
@@ -55,6 +58,12 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     private val args by navArgs<DetailListFragmentArgs>()
     private var _binding: FragmentPlaylistDetailBinding? = null
     private val binding get() = _binding!!
+    private var showClearHistoryOption = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -81,7 +90,10 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             TOP_ALBUMS -> loadAlbums(R.string.top_albums, TOP_ALBUMS)
             RECENT_ALBUMS -> loadAlbums(R.string.recent_albums, RECENT_ALBUMS)
             FAVOURITES -> loadFavorite()
-            HISTORY_PLAYLIST -> loadHistory()
+            HISTORY_PLAYLIST -> {
+                loadHistory()
+                showClearHistoryOption = true // Reference to onCreateOptionsMenu
+            }
             LAST_ADDED_PLAYLIST -> lastAddedSongs()
             TOP_PLAYED_PLAYLIST -> topPlayed()
         }
@@ -280,5 +292,25 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             onDestroy { callback.onCabFinished(it) }
         }
         return cab as AttachedCab
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_clear_history, menu)
+        if (showClearHistoryOption) {
+            menu.findItem(R.id.action_clear_history).isVisible = true // Show Clear History option
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.action_clear_history -> libraryViewModel.clearHistory()
+            /*
+            TODO("Show a snackbar showing that history has been successfully
+              cleared and that will have an undo button")
+             */
+        }
+        return false
     }
 }

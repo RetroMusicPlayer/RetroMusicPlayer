@@ -49,6 +49,7 @@ class LibraryViewModel(
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
     private val fabMargin = MutableLiveData(0)
+    private val songHistory = MutableLiveData<List<Song>>()
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -320,20 +321,30 @@ class LibraryViewModel(
         emit(repository.contributor())
     }
 
-    fun observableHistorySongs(): LiveData<List<Song>> = liveData {
+    fun observableHistorySongs(): LiveData<List<Song>> {
         val songs = repository.historySong().map {
             it.toSong()
         }
-        emit(songs)
+        songHistory.value = songs
         // Cleaning up deleted or moved songs
-        songs.forEach { song ->
-            if (!File(song.data).exists() || song.id == -1L) {
-                repository.deleteSongInHistory(song.id)
+        viewModelScope.launch {
+            songs.forEach { song ->
+                if (!File(song.data).exists() || song.id == -1L) {
+                    repository.deleteSongInHistory(song.id)
+                }
             }
         }
-        emit(repository.historySong().map {
+        songHistory.value = repository.historySong().map {
             it.toSong()
-        })
+        }
+        return songHistory
+    }
+
+    fun clearHistory() {
+        viewModelScope.launch(IO) {
+            repository.clearSongHistory()
+        }
+        songHistory.value = emptyList()
     }
 
     fun favorites() = repository.favorites()
