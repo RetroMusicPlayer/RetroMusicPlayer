@@ -206,7 +206,7 @@
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Nama file</string>
-    <string name="label_last_modified">Last Modified</string>
+    <string name="label_last_modified">Terakhir Diubah</string>
     <string name="label_file_path">Lokasi File</string>
     <string name="label_file_size">Ukuran</string>
     <string name="label_more_from">Lainnya dari %s</string>
@@ -521,5 +521,5 @@
     <string name="you_have_to_select_at_least_one_category">Anda harus memilih setidaknya satu kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan ditersukan ke situs web pelacak masalah.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Bagikan Laporan Kerusakan</string>
 </resources>
