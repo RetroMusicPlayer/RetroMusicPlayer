@@ -194,6 +194,7 @@
     <string name="help_summary">Daha fazla yardıma mı ihtiyacınız var?</string>
     <string name="hinge">Menteşe</string>
     <string name="history">Geçmiş</string>
+    <string name="clear_history">Clear History</string>
     <string name="home">Ana sayfa</string>
     <string name="horizontal_flip">Yatay çevir</string>
     <string name="image">Görüntü</string>
