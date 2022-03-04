@@ -195,6 +195,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="help_summary">Serve altro aiuto?</string>
     <string name="hinge">Cerniera</string>
     <string name="history">Cronologia</string>
+    <string name="clear_history">Clear History</string>
     <string name="home">Homepage</string>
     <string name="horizontal_flip">Flip orizzontale</string>
     <string name="image">Immagine</string>
