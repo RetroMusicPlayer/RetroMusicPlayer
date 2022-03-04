@@ -109,4 +109,9 @@ class PermissionActivity : AbsMusicServiceActivity() {
     private fun hasAudioPermission(): Boolean {
         return Settings.System.canWrite(this)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 }

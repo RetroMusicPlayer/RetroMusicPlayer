@@ -182,6 +182,15 @@
                 android:value=".activities.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".activities.ErrorActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cat.ereza.customactivityoncrash.RESTART" />
+            </intent-filter>
+        </activity>
+
+
         <provider
             android:name=".misc.GenericFileProvider"
             android:authorities="${applicationId}.provider"
