@@ -193,6 +193,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="help_summary">Bạn cần hỗ trợ thêm?</string>
     <string name="hinge">Bản lề</string>
     <string name="history">Lịch sử</string>
+    <string name="clear_history">Clear History</string>
     <string name="home">Trang chủ</string>
     <string name="horizontal_flip">Lật ngang</string>
     <string name="image">Hình ảnh</string>
