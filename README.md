@@ -68,7 +68,7 @@ ___
 
 ___
 
-## 🧭 Navigation never made easier 
+## 🧭 Navigation made easier 
 Self-explanatory interface without overloaded menus.
 
 ## 🎨 Colorful
@@ -118,7 +118,7 @@ ___
 ## ❓ FAQ
 Please read the FAQ [here](https://retromusic.app/faq.html)
 
-In any case, you find or notice any bugs please report them by creating an issue or by contacting us in the [Telegram help & feedback group](https://t.me/retromusicapp).
+In any case, if you find or notice any bugs please report them by creating an issue or by contacting us in the [Telegram help & feedback group](https://t.me/retromusicapp).
 If you have any feature suggestions, please create an issue with detailed information or by contacting us in the [Telegram suggestions group](https://t.me/retro_music_suggestion).
 
 ## 🔗 Social links
