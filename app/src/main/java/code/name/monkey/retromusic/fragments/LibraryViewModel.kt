@@ -50,6 +50,7 @@ class LibraryViewModel(
     private val searchResults = MutableLiveData<List<Any>>()
     private val fabMargin = MutableLiveData(0)
     private val songHistory = MutableLiveData<List<Song>>()
+    private var previousSongHistory = ArrayList<HistoryEntity>()
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -342,9 +343,25 @@ class LibraryViewModel(
 
     fun clearHistory() {
         viewModelScope.launch(IO) {
+            previousSongHistory = repository.historySong() as ArrayList<HistoryEntity>
+
             repository.clearSongHistory()
         }
         songHistory.value = emptyList()
+    }
+
+
+    fun restoreHistory() {
+        viewModelScope.launch(IO) {
+            if (previousSongHistory.isNotEmpty()) {
+                val history = ArrayList<Song>()
+                for (song in previousSongHistory) {
+                    repository.addSongToHistory(song.toSong())
+                    history.add(song.toSong())
+                }
+                songHistory.postValue(history)
+            }
+        }
     }
 
     fun favorites() = repository.favorites()

@@ -62,11 +62,21 @@
             android:id="@+id/emptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_gravity="center"
             android:text="@string/no_songs"
             android:textAppearance="@style/TextViewHeadline5"
             android:textColor="?android:attr/textColorSecondary"
             tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/emptyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/settings_button"
+            android:background="@drawable/widget_button_background"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator

@@ -637,6 +637,12 @@ object PreferenceUtil {
             true
         )
 
+    val homeHistory: Boolean
+        get() = sharedPreferences.getBoolean(
+            KEEP_HISTORY,
+            true
+        )
+
     var audioFadeDuration
         get() = sharedPreferences
             .getInt(AUDIO_FADE_DURATION, 0)

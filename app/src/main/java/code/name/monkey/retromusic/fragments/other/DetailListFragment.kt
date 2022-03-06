@@ -14,14 +14,13 @@
  */
 package code.name.monkey.retromusic.fragments.other
 
+import android.graphics.Color
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -44,6 +43,7 @@ import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.attached.AttachedCab
@@ -51,7 +51,9 @@ import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
 import com.afollestad.materialcab.createCab
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
+
 
 class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
     IArtistClickListener, IAlbumClickListener, ICabHolder {
@@ -162,8 +164,23 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        libraryViewModel.observableHistorySongs().observe(viewLifecycleOwner) {
-            songAdapter.swapDataSet(it)
+        if (PreferenceUtil.homeHistory) { // Observe only if keep history is enabled
+            libraryViewModel.observableHistorySongs().observe(viewLifecycleOwner) {
+                songAdapter.swapDataSet(it)
+                binding.empty.isVisible = it.isEmpty()
+            }
+        }
+        else {
+            historyDisabled() // Update Ui
+            binding.emptyButton.setOnClickListener {
+                findNavController().navigate(
+                    R.id.settingsActivity,
+                    null,
+                    navOptions
+                )
+                findNavController().popBackStack()
+
+            }
         }
     }
 
@@ -236,6 +253,12 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         return if (RetroUtil.isLandscape()) 4 else 2
     }
 
+    private fun historyDisabled() {
+        binding.empty.isVisible = true
+        binding.emptyText.text = getString(R.string.history_disabled)
+        binding.emptyButton.isVisible = true
+    }
+
     override fun onArtist(artistId: Long, view: View) {
         findNavController().navigate(
             R.id.artistDetailsFragment,
@@ -305,11 +328,24 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.action_clear_history -> libraryViewModel.clearHistory()
-            /*
-            TODO("Show a snackbar showing that history has been successfully
-              cleared and that will have an undo button")
-             */
+            R.id.action_clear_history -> {
+                if (binding.recyclerView.adapter?.itemCount!! > 0) {
+                    libraryViewModel.clearHistory()
+
+                    val snackBar =
+                        Snackbar.make(binding.container,
+                            getString(R.string.history_cleared),
+                            Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.history_undo_button)) {
+                                libraryViewModel.restoreHistory()
+                            }
+                            .setActionTextColor(Color.YELLOW)
+                    val snackBarView = snackBar.view
+                    snackBarView.translationY =
+                        -(resources.getDimension(R.dimen.mini_player_height))
+                    snackBar.show()
+                }
+            }
         }
         return false
     }

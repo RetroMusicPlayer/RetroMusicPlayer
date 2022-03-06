@@ -40,6 +40,13 @@
             android:summary="@string/pref_summary_suggestions"
             android:title="@string/pref_title_suggestions" />
 
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="true"
+            android:key="keep_history"
+            android:layout="@layout/list_item_view_switch"
+            android:summary="@string/pref_summary_keep_history"
+            android:title="@string/pref_title_keep_history" />
+
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
