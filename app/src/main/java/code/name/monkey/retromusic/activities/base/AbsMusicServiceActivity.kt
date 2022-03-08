@@ -124,8 +124,8 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             if (entity != null) {
                 repository.updateHistorySong(MusicPlayerRemote.currentSong)
             } else {
-                // Check whether keep history option is ON or OFF
-                if (PreferenceUtil.homeHistory) {
+                // Check whether pause history option is ON or OFF
+                if (!PreferenceUtil.pauseHistory) {
                     repository.addSongToHistory(MusicPlayerRemote.currentSong)
                 }
             }

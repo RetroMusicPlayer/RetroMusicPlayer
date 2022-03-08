@@ -164,7 +164,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        if (PreferenceUtil.homeHistory) { // Observe only if keep history is enabled
+        if (!PreferenceUtil.pauseHistory) { // Observe only if keep history is not paused
             libraryViewModel.observableHistorySongs().observe(viewLifecycleOwner) {
                 songAdapter.swapDataSet(it)
                 binding.empty.isVisible = it.isEmpty()
@@ -255,7 +255,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     private fun historyDisabled() {
         binding.empty.isVisible = true
-        binding.emptyText.text = getString(R.string.history_disabled)
+        binding.emptyText.text = getString(R.string.history_paused)
         binding.emptyButton.isVisible = true
     }
 
