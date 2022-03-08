@@ -164,24 +164,12 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             adapter = songAdapter
             layoutManager = linearLayoutManager()
         }
-        if (!PreferenceUtil.pauseHistory) { // Observe only if keep history is not paused
-            libraryViewModel.observableHistorySongs().observe(viewLifecycleOwner) {
-                songAdapter.swapDataSet(it)
-                binding.empty.isVisible = it.isEmpty()
-            }
-        }
-        else {
-            historyDisabled() // Update Ui
-            binding.emptyButton.setOnClickListener {
-                findNavController().navigate(
-                    R.id.settingsActivity,
-                    null,
-                    navOptions
-                )
-                findNavController().popBackStack()
 
-            }
+        libraryViewModel.observableHistorySongs().observe(viewLifecycleOwner) {
+            songAdapter.swapDataSet(it)
+            binding.empty.isVisible = it.isEmpty()
         }
+
     }
 
     private fun loadFavorite() {
@@ -253,11 +241,6 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         return if (RetroUtil.isLandscape()) 4 else 2
     }
 
-    private fun historyDisabled() {
-        binding.empty.isVisible = true
-        binding.emptyText.text = getString(R.string.history_paused)
-        binding.emptyButton.isVisible = true
-    }
 
     override fun onArtist(artistId: Long, view: View) {
         findNavController().navigate(

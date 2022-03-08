@@ -262,8 +262,6 @@
     <string name="no_purchase_found">No purchase found.</string>
     <string name="no_results">No results</string>
     <string name="no_songs">You have no songs</string>
-    <string name="history_paused">You have paused history.</string>
-    <string name="settings_button">Settings</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Normal lyrics</string>
     <string name="not_listed_in_media_store">
