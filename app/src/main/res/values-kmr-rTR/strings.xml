@@ -195,7 +195,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="help_summary">Bêtir alîkarî dixwazî?</string>
     <string name="hinge">Mofirk</string>
     <string name="history">Dîrok</string>
-    <string name="clear_history">Clear History</string>
+    <string name="clear_history">Dîrokê pak bike</string>
     <string name="home">Serrûpel</string>
     <string name="horizontal_flip">Asoyî bizivirîne</string>
     <string name="image">Wêne</string>
@@ -210,7 +210,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="label_bit_rate">Leza bit</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Navê pelê</string>
-    <string name="label_last_modified">Last Modified</string>
+    <string name="label_last_modified">Guhertina herî dawî</string>
     <string name="label_file_path">Rêgeha pelê</string>
     <string name="label_file_size">Mezinahî</string>
     <string name="label_more_from">Bêtir ji %s</string>
@@ -526,5 +526,5 @@ tê guhertin</string>
     <string name="you_have_to_select_at_least_one_category">Divê tu herî kêm yek beş hilbijêrî.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Tu yê ji bo malpera şopandina pirsgirêkê werî beralîkirin.</string>
     <string name="your_account_data_is_only_used_for_authentication">Daneyên ajimêra te tenê ji bo pejirandinê têne bikaranîn.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Ragihandina têkçûna sepanê parve bike</string>
 </resources>
