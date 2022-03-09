@@ -345,6 +345,7 @@
     <string name="pref_summary_toggle_volume">Pokaż sterowanie głośnością w odtwarzaczu, gdy jest wystarczająco wolnego miejsca</string>
     <string name="pref_summary_wallpaper_accent">Wyodrębnij kolor akcentu z tapety</string>
     <string name="pref_summary_whitelist">Pokazuj muzykę tylko z folderu /Music</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Pokaż okładkę albumu</string>
     <string name="pref_title_album_artists_only">Nawiguj przez wykonawcę albumu</string>
     <string name="pref_title_album_cover_style">Wygląd okładki albumu</string>
@@ -391,6 +392,7 @@
     <string name="pref_title_toggle_volume">Sterowanie głośnością</string>
     <string name="pref_title_wallpaper_accent">Kolor akcentu z tapety</string>
     <string name="pref_title_whitelist">Muzyka z listy dozwolonych</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Czarny motyw, motywy teraz odtwarzanych, efekt karuzeli i wiele więcej..</string>
     <string name="profile">Profil</string>
@@ -529,4 +531,6 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Zostaniesz przekierowany do strony ze zgłoszeniami.</string>
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
 </resources>
