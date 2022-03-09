@@ -363,13 +363,6 @@ class LibraryViewModel(
                     createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
                 forceReload(Playlists)
-                withContext(Main) {
-                    Toast.makeText(
-                        App.getContext(),
-                        "Added ${songs.size} song(s) to $playlistName",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
             } else {
                 val playlist = playlists.firstOrNull()
                 if (playlist != null) {
@@ -377,21 +370,31 @@ class LibraryViewModel(
                         it.toSongEntity(playListId = playlist.playListId)
                     })
                 }
-                withContext(Main) {
-                    Toast.makeText(
-                        App.getContext(),
-                        "Playlist already exists",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    if (songs.isNotEmpty()) {
+            }
+            withContext(Main) {
+                when {
+                    playlists.isEmpty() -> {
                         Toast.makeText(
                             App.getContext(),
-                            "Adding songs to $playlistName",
+                            "$playlistName created successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    checkPlaylistExists(playlistName).isNotEmpty() -> {
+                        Toast.makeText(
+                            App.getContext(),
+                            "Playlist already exists",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    playlists.isNotEmpty() -> {
+                        Toast.makeText(
+                            App.getContext(),
+                            "Added ${songs.size} song(s) to $playlistName",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
-
             }
         }
     }
