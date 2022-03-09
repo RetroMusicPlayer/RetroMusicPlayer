@@ -339,6 +339,7 @@
     <string name="pref_summary_toggle_volume">空间充足时，在播放页显示音量控制</string>
     <string name="pref_summary_wallpaper_accent">从壁纸中提取主题色</string>
     <string name="pref_summary_whitelist">仅显示 /Music 目录的音乐</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">显示专辑封面</string>
     <string name="pref_title_album_artists_only">按专辑艺术家排序</string>
     <string name="pref_title_album_cover_style">专辑封面主题</string>
@@ -385,6 +386,7 @@
     <string name="pref_title_toggle_volume">音量控件</string>
     <string name="pref_title_wallpaper_accent">壁纸主题色</string>
     <string name="pref_title_whitelist">白名单音乐</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">高级版</string>
     <string name="pro_summary">黑色主题，正在播放主题，轮播效果和更多...</string>
     <string name="profile">个人信息</string>
@@ -523,4 +525,6 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
 </resources>
