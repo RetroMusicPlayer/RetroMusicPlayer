@@ -376,21 +376,26 @@ class LibraryViewModel(
                     playlists.isEmpty() -> {
                         Toast.makeText(
                             App.getContext(),
-                            "$playlistName created successfully",
+                            App.getContext()
+                                .getString(R.string.playlist_created_sucessfully, playlistName),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                     checkPlaylistExists(playlistName).isNotEmpty() -> {
                         Toast.makeText(
                             App.getContext(),
-                            "Playlist already exists",
+                            App.getContext().getString(R.string.playList_already_exits),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                     playlists.isNotEmpty() -> {
                         Toast.makeText(
                             App.getContext(),
-                            "Added ${songs.size} song(s) to $playlistName",
+                            App.getContext().getString(
+                                R.string.added_song_count_to_playlist,
+                                songs.size,
+                                playlistName
+                            ),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
