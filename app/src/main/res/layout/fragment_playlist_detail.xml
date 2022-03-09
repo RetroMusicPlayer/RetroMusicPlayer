@@ -67,6 +67,7 @@
             android:textAppearance="@style/TextViewHeadline5"
             android:textColor="?android:attr/textColorSecondary"
             tools:visibility="visible" />
+
     </LinearLayout>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
