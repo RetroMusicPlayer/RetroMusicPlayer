@@ -343,6 +343,7 @@ tê guhertin</string>
     <string name="pref_summary_toggle_volume">Ku şûn hebe, di dîmendera ku niha tê lêdan de kontrolên dengê nîşan bide</string>
     <string name="pref_summary_wallpaper_accent">Renga çarçoveyê ji paşrûyê derxîne</string>
     <string name="pref_summary_whitelist">Muzîkê tenê ji /Peldanka muzîkê nîşan bide</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Bergê albumê nîşan bide</string>
     <string name="pref_title_album_artists_only">Geran bi riya albuma hunermend</string>
     <string name="pref_title_album_cover_style">Rûkara bergê albumê</string>
@@ -389,6 +390,7 @@ tê guhertin</string>
     <string name="pref_title_toggle_volume">Kontrola dengê</string>
     <string name="pref_title_wallpaper_accent">Rengê çarçoveyê paşrûyê</string>
     <string name="pref_title_whitelist">Rêzoka stranên spî</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Rûkara reş, rûkara stranên niha têne lêdan, bandora gilover û bêtir..</string>
     <string name="profile">Profîl</string>
@@ -527,4 +529,6 @@ tê guhertin</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Tu yê ji bo malpera şopandina pirsgirêkê werî beralîkirin.</string>
     <string name="your_account_data_is_only_used_for_authentication">Daneyên ajimêra te tenê ji bo pejirandinê têne bikaranîn.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Ragihandina têkçûna sepanê parve bike</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
 </resources>
