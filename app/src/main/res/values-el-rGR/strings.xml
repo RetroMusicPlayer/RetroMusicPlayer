@@ -341,6 +341,7 @@
     <string name="pref_summary_toggle_volume">Εαν υπάρχει χώρος στην οθόνη αναπαραγωγής, ενεργοποιήστε τον πίνακα ελέγχου έντασης.</string>
     <string name="pref_summary_wallpaper_accent">Εξαγωγή απόχρωσης από την ταπετσαρία</string>
     <string name="pref_summary_whitelist">Εμφάνιση μουσικής μόνο από το φάκελο /Μουσική</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Εμφάνιση εξωφύλλου άλμπουμ.</string>
     <string name="pref_title_album_artists_only">Πλοήγηση κατά Καλλιτέχνη Άλμπουμ</string>
     <string name="pref_title_album_cover_style">Θέμα εξώφυλλου άλμπουμ</string>
@@ -387,6 +388,7 @@
     <string name="pref_title_toggle_volume">Πίνακας Ελέγχου Έντασης</string>
     <string name="pref_title_wallpaper_accent">Απόχρωση ταπετσαρίας</string>
     <string name="pref_title_whitelist">Λίστα επιτρεπόμενων κομματιών</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Μαύρο θέμα, Θέματα στο Τώρα παίζει, εφέ Καρουσέλ και πολλά άλλα..</string>
     <string name="profile">Προφίλ</string>
@@ -525,4 +527,6 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Θα προωθηθείτε στον ιστότοπο παρακολούθησης ζητημάτων.</string>
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
 </resources>
