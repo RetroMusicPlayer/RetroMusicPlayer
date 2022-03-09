@@ -341,6 +341,7 @@
     <string name="pref_summary_toggle_volume">Se tiver espaço suficiente, mostrar os controlos de volume no ecrã A reproduzir</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Mostrar apenas músicas de /Music</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Mostrar capa do álbum</string>
     <string name="pref_title_album_artists_only">Navegar pelos artistas</string>
     <string name="pref_title_album_cover_style">Tema da capa do álbum</string>
@@ -387,6 +388,7 @@
     <string name="pref_title_toggle_volume">Controlos de volume</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema escuro, temas A reproduzir, efeito carrossel e muito mais..</string>
     <string name="profile">Perfil</string>
@@ -525,4 +527,6 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vai ser reencaminhado para o site de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">As informações da sua conta são utilizadas apenas autenticação.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
 </resources>
