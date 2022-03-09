@@ -339,6 +339,7 @@
     <string name="pref_summary_toggle_volume">နေရာလုံလုံလောက်လောက်ရှိပါက Now Playing screen တွင် အသံအတိုးအကျယ်ခလုတ်များပြသမည်</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Album cover ပြသခြင်း</string>
     <string name="pref_title_album_artists_only">Album သီဆိုသူဖြင့် ရှာဖွေခြင်း</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -385,6 +386,7 @@
     <string name="pref_title_toggle_volume">အသံထိန်းချုပ်မှု</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme ၊ Now playing themes နှင့် Carousel effect စသည်များ...</string>
     <string name="profile">Profile</string>
@@ -523,4 +525,6 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Issue tracker website သို့ခေါ်ဆောင်သွားပါမည်</string>
     <string name="your_account_data_is_only_used_for_authentication">သင့်အကောင့်အချက်အလက်ကို အတည်ပြုရန်အတွက်သာအသုံးပြုပါသည်။</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
 </resources>
