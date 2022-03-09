@@ -363,6 +363,13 @@ class LibraryViewModel(
                     createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
                 forceReload(Playlists)
+                withContext(Main){
+                    Toast.makeText(
+                        App.getContext(),
+                        "Added ${songs.size} song(s) to $playlistName",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             } else {
                 val playlist = playlists.firstOrNull()
                 if (playlist != null) {
