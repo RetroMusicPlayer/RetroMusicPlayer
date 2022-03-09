@@ -341,6 +341,7 @@
     <string name="pref_summary_toggle_volume">Als er ruimte is in het nu afspelen scherm, zet volume knoppen aan</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Laat album cover zien</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -387,6 +388,7 @@
     <string name="pref_title_toggle_volume">Volume knoppen</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Donker thema, \"speelt nu\" thema\'s, Carrousel-effect en nog veel meer..</string>
     <string name="profile">Profiel</string>
@@ -525,4 +527,6 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
 </resources>
