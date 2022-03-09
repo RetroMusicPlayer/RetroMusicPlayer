@@ -341,6 +341,7 @@
     <string name="pref_summary_toggle_volume">اگر فضای کافی موجود بود، نوار صدا را نشان دهید در صفحه پخش موزیک</string>
     <string name="pref_summary_wallpaper_accent">رنگ تاکیدی را از کاغذ دیواری استخراج کنید</string>
     <string name="pref_summary_whitelist">فقط از پوشه ی موزیک، موزیک ها نمایش داده شود</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">نمایش جلد آلبوم</string>
     <string name="pref_title_album_artists_only">هدایت توسط آلبوم هنرمند</string>
     <string name="pref_title_album_cover_style">تم کاور آلبوم</string>
@@ -387,6 +388,7 @@
     <string name="pref_title_toggle_volume">کنترل صدا</string>
     <string name="pref_title_wallpaper_accent">رنگ تاکیدی کاغذ دیواری</string>
     <string name="pref_title_whitelist">لیست سفید موسیقی</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">حرفه‌ای</string>
     <string name="pro_summary">تم سیاه، تم های در حال پخش، جلوه چرخ فلک و موارد دیگر..</string>
     <string name="profile">نمایه</string>
@@ -525,4 +527,6 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">شما به وب سایت ردیاب مشکل هدایت می شوید.</string>
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
 </resources>
