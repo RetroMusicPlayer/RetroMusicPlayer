@@ -53,7 +53,7 @@
     <string name="adaptive">Guncav</string>
     <string name="add_action">Tevlî bike</string>
     <string name="add_playlist_title">"Tevlî rêzoka lêdanê bike"</string>
-    <string name="add_time_framed_lryics">Demê peyvê stranan têxe</string>
+    <string name="add_time_framed_lryics">Dema peyvên stranê têxe</string>
     <string name="added_title_to_playing_queue">"1 sernav li rêzeya lêdanê hate tevlîkirin."</string>
     <string name="added_x_titles_to_playing_queue">%1$d sernav li rêzeya lêdanê hate tevlîkirin.</string>
     <string name="album">Album</string>
@@ -269,7 +269,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="password">Borînpeyv</string>
     <string name="past_three_months">3 mehên borî</string>
     <string name="paste_lyrics_here">Peyvên stranê Li vir pêve bike</string>
-    <string name="paste_timeframe_lyrics_here">Peyvê stranên demsazkirî li vir binivisîne</string>
+    <string name="paste_timeframe_lyrics_here">Peyvên stranê demsazkirî li vir binivisîne</string>
     <string name="peek">Serî</string>
     <string name="permission_external_storage_denied">Mafa gihiştînê bo bîrgeha derveyî hate têkbirin.</string>
     <string name="permission_summary">Pêdiviya sepanê bi gihiştîna bîrgeha derveyî ya amûra te heye ji bo lêdana muzîkê</string>
@@ -334,7 +334,7 @@ tê guhertin</string>
     <string name="pref_summary_lock_screen">Kontrolên dîmendera kilîtkirinê yên kesanekirî yên Retro Music bi kar bîne</string>
     <string name="pref_summary_open_source_licences">Hûrguliyên Lîsansê ji bo nermalava çavkaniya vekirî</string>
     <string name="pref_summary_remember_tab">Dema ku dest pê dike, biçe rûgera herî dawî ya ku hatiye bikaranîn</string>
-    <string name="pref_summary_show_lyrics">Peyvê stranên hevdemkirî li ser berga albumê nîşan bide</string>
+    <string name="pref_summary_show_lyrics">Peyvên stranê hevdemkirî li ser berga albumê nîşan bide</string>
     <string name="pref_summary_suggestions">Bişkoka tevlihevkirina Muzîka nû li ser dîmenera sereke nîşan bide</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Bi kişandina li her derê li ser dîmendera lêdanê stranan biguherîne</string>
     <string name="pref_summary_toggle_full_screen">Awaya dîmendera tije çalak bike</string>
