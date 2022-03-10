@@ -32,7 +32,7 @@
     <string name="action_play_pause">Putar/Berhenti</string>
     <string name="action_previous">Sebelumnya</string>
     <string name="action_remove_from_favorites">Hapus dari favorit</string>
-    <string name="action_remove_from_playing_queue">Hapus dari antrian putaran</string>
+    <string name="action_remove_from_playing_queue">Hapus dari antrean putaran</string>
     <string name="action_remove_from_playlist">Hapus dari daftar putar</string>
     <string name="action_rename">Ganti nama</string>
     <string name="action_save_playing_queue">Simpan daftar putar</string>
@@ -386,7 +386,7 @@
     <string name="pref_title_toggle_volume">Kontrol volume</string>
     <string name="pref_title_wallpaper_accent">Warna aksen wallpaper</string>
     <string name="pref_title_whitelist">Musik daftar putih</string>
-    <string name="pref_title_pause_history">Riwayat jeda</string>
+    <string name="pref_title_pause_history">Jeda riwayat</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema hitam, Tema yang sedang diputar, efek korsel, dan lainnya...</string>
     <string name="profile">Profil</string>
