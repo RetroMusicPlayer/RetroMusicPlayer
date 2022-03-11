@@ -529,9 +529,9 @@ tê guhertin</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Tu yê ji bo malpera şopandina pirsgirêkê werî beralîkirin.</string>
     <string name="your_account_data_is_only_used_for_authentication">Daneyên ajimêra te tenê ji bo pejirandinê têne bikaranîn.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Ragihandina têkçûna sepanê parve bike</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="playlist_created_sucessfully">%s bi serkeftî hate çêkirin</string>
+    <string name="playList_already_exits">Rêzoka lêdanê jixwe heye</string>
+    <string name="added_song_count_to_playlist">%d stran tevlî %s bû</string>
     <string name="history_cleared">Dîrok hate pakkirin</string>
     <string name="history_undo_button">Vegerîne</string>
 </resources>
