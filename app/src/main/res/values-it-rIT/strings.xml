@@ -528,6 +528,9 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Verrai reindirizzato al sito web dei problemi.</string>
     <string name="your_account_data_is_only_used_for_authentication">I dati del tuo account vengono utilizzati solo per l\'autenticazione.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Condividi il rapporto sull\'arresto anomalo</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
+    <string name="playList_already_exits">Playlist already exists</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="history_cleared">Cronologia cancellata</string>
     <string name="history_undo_button">Annulla</string>
 </resources>
