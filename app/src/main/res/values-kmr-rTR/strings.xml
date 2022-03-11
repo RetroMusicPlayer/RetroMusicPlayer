@@ -2,8 +2,8 @@
 <resources>
     <string name="about_album_label">Derbarê %s</string>
     <string name="about_settings_summary">Kom, girêdanên civakî</string>
-    <string name="accent_color">Rengê çarçoveyê</string>
-    <string name="accent_color_desc">Rengê çarçoveyê ya rûkarê, bi rengê binefşî berdest dibe</string>
+    <string name="accent_color">Rengê devokê</string>
+    <string name="accent_color_desc">Rengê devokê ya rûkarê, bi rengê binefşî berdest dibe</string>
     <string name="action_about">Derbar</string>
     <string name="action_add_to_blacklist">Tevlî rêzoka reş bike</string>
     <string name="action_add_to_favorites">Tevlî bijarteyan bike</string>
@@ -319,8 +319,8 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="pref_summary_carousel_effect">Bandora carousel ji bo berga albumê di dîmendera ku niha tê lêdan. Bizanibe ku rûkarên kert û kertên mijbar wê nexebitin</string>
     <string name="pref_summary_classic_notification">Dîzayna agahiyên klasîk bi kar bîne</string>
     <string name="pref_summary_colored_app">Rengên paşrûyê û bişkoka kontrolê li gorî wêneya albumê ya ji dîmendera niha tê lêdan 
-tê guhertin</string>
-    <string name="pref_summary_colored_app_shortcuts">Kurteyên sepanê bi rengê çarçoveyê reng dike. Her dema ku tu rengê diguherînî, ji kerema xwe vê yekê biguherîne da ku bandor bike</string>
+têne guhertin</string>
+    <string name="pref_summary_colored_app_shortcuts">Kurteyên sepanê bi rengê devokê reng dike. Her dema ku tu rengê diguherînî, ji kerema xwe vê yekê biguherîne da ku bandor bike</string>
     <string name="pref_summary_colored_notification">"Rengê agahiyan di berga albumê de bi \u2019 rengê jîndar reng bide"</string>
     <string name="pref_summary_cross_fade">Dema rawestandinê di navbera stranan de</string>
     <string name="pref_summary_desaturated_color">Li gorî rêzikên rêbernameya materyalê, divê reng di awaya tarî de têrkirî bin</string>
@@ -388,7 +388,7 @@ tê guhertin</string>
     <string name="pref_title_toggle_toggle_headset">Lêdana xweber</string>
     <string name="pref_title_toggle_toggle_shuffle">Awaya tevlihevkirinê</string>
     <string name="pref_title_toggle_volume">Kontrola dengê</string>
-    <string name="pref_title_wallpaper_accent">Rengê çarçoveyê paşrûyê</string>
+    <string name="pref_title_wallpaper_accent">Rengê devokê paşrûyê</string>
     <string name="pref_title_whitelist">Rêzoka stranên spî</string>
     <string name="pref_title_pause_history">Dîrokê rawestîne</string>
     <string name="pro">Pro</string>
