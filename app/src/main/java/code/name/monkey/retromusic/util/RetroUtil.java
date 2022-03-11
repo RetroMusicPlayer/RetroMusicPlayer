@@ -49,7 +49,6 @@ import java.util.Collections;
 import java.util.List;
 
 import code.name.monkey.appthemehelper.util.TintHelper;
-import code.name.monkey.appthemehelper.util.VersionUtils;
 import code.name.monkey.retromusic.App;
 
 public class RetroUtil {

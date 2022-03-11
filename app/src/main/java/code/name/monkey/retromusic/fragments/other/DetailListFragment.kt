@@ -16,7 +16,10 @@ package code.name.monkey.retromusic.fragments.other
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
@@ -43,7 +46,6 @@ import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.attached.AttachedCab
