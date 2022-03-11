@@ -525,6 +525,9 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Issue tracker website သို့ခေါ်ဆောင်သွားပါမည်</string>
     <string name="your_account_data_is_only_used_for_authentication">သင့်အကောင့်အချက်အလက်ကို အတည်ပြုရန်အတွက်သာအသုံးပြုပါသည်။</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
+    <string name="playList_already_exits">Playlist already exists</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="history_cleared">History cleared</string>
     <string name="history_undo_button">Undo</string>
 </resources>
