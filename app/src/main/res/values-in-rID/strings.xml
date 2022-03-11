@@ -525,6 +525,9 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan ditersukan ke situs web pelacak masalah.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Bagikan Laporan Kerusakan</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
+    <string name="playList_already_exits">Playlist already exists</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="history_cleared">Riwayat dibersihkan</string>
     <string name="history_undo_button">Batalkan pilihan</string>
 </resources>
