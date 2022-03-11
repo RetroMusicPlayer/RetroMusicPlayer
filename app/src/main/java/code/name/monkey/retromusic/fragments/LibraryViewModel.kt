@@ -387,21 +387,36 @@ class LibraryViewModel(
                         it.toSongEntity(playListId = playlist.playListId)
                     })
                 }
-                withContext(Main) {
-                    Toast.makeText(
-                        App.getContext(),
-                        "Playlist already exists",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    if (songs.isNotEmpty()) {
+            }
+            withContext(Main) {
+                when {
+                    playlists.isEmpty() -> {
                         Toast.makeText(
                             App.getContext(),
-                            "Adding songs to $playlistName",
+                            App.getContext()
+                                .getString(R.string.playlist_created_sucessfully, playlistName),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    checkPlaylistExists(playlistName).isNotEmpty() -> {
+                        Toast.makeText(
+                            App.getContext(),
+                            App.getContext().getString(R.string.playList_already_exits),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    playlists.isNotEmpty() -> {
+                        Toast.makeText(
+                            App.getContext(),
+                            App.getContext().getString(
+                                R.string.added_song_count_to_playlist,
+                                songs.size,
+                                playlistName
+                            ),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
-
             }
         }
     }
