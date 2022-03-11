@@ -35,7 +35,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 
 class LibraryViewModel(
-    private val repository: RealRepository
+    private val repository: RealRepository,
 ) : ViewModel(), IMusicServiceEventListener {
 
     private val _paletteColor = MutableLiveData<Int>()
@@ -144,12 +144,11 @@ class LibraryViewModel(
         suggestions.postValue(repository.suggestions())
     }
 
-    fun search(query: String?, filter: Filter) {
+    fun search(query: String?, filter: Filter) =
         viewModelScope.launch(IO) {
-            val result = repository.search(query, filter)
+            val result =repository.search(query, filter)
             searchResults.postValue(result)
         }
-    }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch(IO) {
         when (reloadType) {
@@ -380,6 +379,14 @@ class LibraryViewModel(
                     createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
                 forceReload(Playlists)
+                withContext(Main) {
+                    Toast.makeText(
+                        App.getContext(),
+                        App.getContext()
+                            .getString(R.string.playlist_created_sucessfully, playlistName),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             } else {
                 val playlist = playlists.firstOrNull()
                 if (playlist != null) {
@@ -389,34 +396,11 @@ class LibraryViewModel(
                 }
             }
             withContext(Main) {
-                when {
-                    playlists.isEmpty() -> {
-                        Toast.makeText(
-                            App.getContext(),
-                            App.getContext()
-                                .getString(R.string.playlist_created_sucessfully, playlistName),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                    checkPlaylistExists(playlistName).isNotEmpty() -> {
-                        Toast.makeText(
-                            App.getContext(),
-                            App.getContext().getString(R.string.playList_already_exits),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                    playlists.isNotEmpty() -> {
-                        Toast.makeText(
-                            App.getContext(),
-                            App.getContext().getString(
-                                R.string.added_song_count_to_playlist,
-                                songs.size,
-                                playlistName
-                            ),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+                Toast.makeText(App.getContext(), App.getContext().getString(
+                    R.string.added_song_count_to_playlist,
+                    songs.size,
+                    playlistName
+                ), Toast.LENGTH_SHORT).show()
             }
         }
     }
