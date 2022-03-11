@@ -144,12 +144,11 @@ class LibraryViewModel(
         suggestions.postValue(repository.suggestions())
     }
 
-    fun search(query: String?, filter: Filter) {
+    fun search(query: String?, filter: Filter) =
         viewModelScope.launch(IO) {
-            val result = repository.search(query, filter)
+            val result =repository.search(query, filter)
             searchResults.postValue(result)
         }
-    }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch(IO) {
         when (reloadType) {
