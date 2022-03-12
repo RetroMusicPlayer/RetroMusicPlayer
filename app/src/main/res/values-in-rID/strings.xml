@@ -6,11 +6,11 @@
     <string name="accent_color_desc">Warna aksen tema, default ke ungu</string>
     <string name="action_about">Tentang</string>
     <string name="action_add_to_blacklist">Tambahkan ke Daftar Hitam</string>
-    <string name="action_add_to_favorites">Tambahkan ke Favorit</string>
+    <string name="action_add_to_favorites">Tambah ke Favorit</string>
     <string name="action_add_to_playing_queue">Tambahkan ke antrean putar</string>
-    <string name="action_add_to_playlist">Tambahkan ke daftar putar</string>
+    <string name="action_add_to_playlist">Tambah ke daftar putar</string>
     <string name="action_cast">Transmisi</string>
-    <string name="action_clear_playing_queue">Kosongkan antrean yang sedang diputar</string>
+    <string name="action_clear_playing_queue">Kosongkan antrean pemutaran</string>
     <string name="action_cycle_repeat">Mode pengulangan siklus</string>
     <string name="action_delete">Hapus</string>
     <string name="action_delete_from_device">Hapus dari perangkat</string>
@@ -51,16 +51,16 @@
     <string name="action_toggle_favorite">Aktifkan/nonaktifkan favorit</string>
     <string name="action_toggle_shuffle">Aktifkan/nonaktifkan mode acak</string>
     <string name="adaptive">Adaptif</string>
-    <string name="add_action">Tambahkan</string>
-    <string name="add_playlist_title">"Tambahkan ke daftar putar"</string>
-    <string name="add_time_framed_lryics">Tambahkan kerangka waktu pada lirik</string>
-    <string name="added_title_to_playing_queue">"1 lagu ditambahkan ke antrean."</string>
-    <string name="added_x_titles_to_playing_queue">%1$d lagu telah ditambahkan ke antrean.</string>
+    <string name="add_action">Tambah</string>
+    <string name="add_playlist_title">"Tambah ke daftar putar"</string>
+    <string name="add_time_framed_lryics">Tambah kerangka waktu pada lirik</string>
+    <string name="added_title_to_playing_queue">"1 lagu ditambah ke antrean."</string>
+    <string name="added_x_titles_to_playing_queue">%1$d lagu telah ditambah ke antrean.</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="other">Lagu</item>
     </plurals>
-    <string name="album_artist">Album Artis</string>
+    <string name="album_artist">Artis Album</string>
     <string name="albums">Album</string>
     <plurals name="albums">
         <item quantity="other">Album</item>
@@ -93,7 +93,7 @@
     <string name="bug_report_failed">Tidak dapat mengirim laporan</string>
     <string name="bug_report_failed_invalid_token">Token akses tidak valid. Silakan hubungi pengembang aplikasi.</string>
     <string name="bug_report_failed_issues_not_available">Masalah tidak diaktifkan untuk repositori yang dipilih. Silakan hubungi pengembang aplikasi.</string>
-    <string name="bug_report_failed_unknown">Terjadi kesalahan yang tak terduga. Silakan hubungi pengembang aplikasi.</string>
+    <string name="bug_report_failed_unknown">Terjadi kesalahan tak terduga. Silakan hubungi pengembang aplikasi.</string>
     <string name="bug_report_failed_wrong_credentials">Nama pengguna atau kata sandi salah</string>
     <string name="bug_report_issue">Masalah</string>
     <string name="bug_report_manual">Kirim secara manual</string>
@@ -109,7 +109,7 @@
     <string name="card_color_style">Kartu Berwarna</string>
     <string name="card_square">Kartu Persegi</string>
     <string name="card_style">Kartu</string>
-    <string name="carousal_effect_on_now_playing_screen">Efek korsel pada layar yang sedang diputar</string>
+    <string name="carousal_effect_on_now_playing_screen">Efek korsel pada layar pemutaran</string>
     <string name="cascading">Bergerak</string>
     <string name="changelog">Log Pembaruan</string>
     <string name="changelog_summary">Lihat Apa Yang Baru</string>
@@ -214,7 +214,7 @@
     <string name="label_sampling_rate">Tingkat Sampling</string>
     <string name="label_track_length">Durasi</string>
     <string name="labeled">Berlabel</string>
-    <string name="last_added">Terakhir ditambahkan</string>
+    <string name="last_added">Terakhir ditambah</string>
     <string name="last_song">Lagu terakhir</string>
     <string name="library_categories">Kategori perpustakaan</string>
     <string name="licenses">Lisensi</string>
@@ -336,9 +336,9 @@
     <string name="pref_summary_toggle_full_screen">Mode Layar Penuh</string>
     <string name="pref_summary_toggle_headset">Mulai memutar segera setelah headphone terhubung</string>
     <string name="pref_summary_toggle_shuffle">Mode acak akan mati saat memutar daftar lagu baru</string>
-    <string name="pref_summary_toggle_volume">Jika tersedia cukup ruang, tampilkan kontrol volume di layar yang sedang diputar</string>
+    <string name="pref_summary_toggle_volume">Jika tersedia cukup ruang, tampilkan kontrol volume di layar pemutaran</string>
     <string name="pref_summary_wallpaper_accent">Ambil warna aksen dari wallpaper</string>
-    <string name="pref_summary_whitelist">Tampilkan musik hanya dari folder /Musik</string>
+    <string name="pref_summary_whitelist">Tampilkan musik hanya dari folder /Music</string>
     <string name="pref_summary_pause_history">Saat diaktifkan, lagu yang baru diputar tidak akan muncul di riwayat</string>
     <string name="pref_title_album_art_on_lockscreen">Tampilkan sampul album</string>
     <string name="pref_title_album_artists_only">Navigasi berdasarkan Album Artis</string>
@@ -359,7 +359,7 @@
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_custom_font">Gunakan fon Manrope</string>
     <string name="pref_title_desaturated_color">Desaturasi warna</string>
-    <string name="pref_title_expand_now_playing_panel">Tampilkan layar yang sedang diputar</string>
+    <string name="pref_title_expand_now_playing_panel">Tampilkan layar pemutaran</string>
     <string name="pref_title_extra_controls">Kontrol tambahan</string>
     <string name="pref_title_extra_song_info">Info lagu</string>
     <string name="pref_title_gapless_playback">Pemutaran tanpa jeda</string>
@@ -525,9 +525,9 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan ditersukan ke situs web pelacak masalah.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Bagikan Laporan Kerusakan</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="playlist_created_sucessfully">%s berhasil dibuat</string>
+    <string name="playList_already_exits">Daftar putar sudah ada</string>
+    <string name="added_song_count_to_playlist">Menambah %d lagu ke %s</string>
     <string name="history_cleared">Riwayat dibersihkan</string>
     <string name="history_undo_button">Batalkan pilihan</string>
 </resources>
