@@ -192,7 +192,7 @@
     <string name="help_summary">需要更多帮助？</string>
     <string name="hinge">旋转</string>
     <string name="history">历史记录</string>
-    <string name="clear_history">Clear History</string>
+    <string name="clear_history">清除历史记录</string>
     <string name="home">主页</string>
     <string name="horizontal_flip">水平翻转</string>
     <string name="image">图片</string>
@@ -207,7 +207,7 @@
     <string name="label_bit_rate">比特率</string>
     <string name="label_file_format">格式</string>
     <string name="label_file_name">文件名</string>
-    <string name="label_last_modified">Last Modified</string>
+    <string name="label_last_modified">最后修改</string>
     <string name="label_file_path">文件路径</string>
     <string name="label_file_size">文件大小</string>
     <string name="label_more_from">来自 %s 的更多歌曲</string>
@@ -339,7 +339,7 @@
     <string name="pref_summary_toggle_volume">空间充足时，在播放页显示音量控制</string>
     <string name="pref_summary_wallpaper_accent">从壁纸中提取主题色</string>
     <string name="pref_summary_whitelist">仅显示 /Music 目录的音乐</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
+    <string name="pref_summary_pause_history">启用后，新播放的歌曲不会显示在历史记录中</string>
     <string name="pref_title_album_art_on_lockscreen">显示专辑封面</string>
     <string name="pref_title_album_artists_only">按专辑艺术家排序</string>
     <string name="pref_title_album_cover_style">专辑封面主题</string>
@@ -386,7 +386,7 @@
     <string name="pref_title_toggle_volume">音量控件</string>
     <string name="pref_title_wallpaper_accent">壁纸主题色</string>
     <string name="pref_title_whitelist">白名单音乐</string>
-    <string name="pref_title_pause_history">Pause history</string>
+    <string name="pref_title_pause_history">暂停历史记录</string>
     <string name="pro">高级版</string>
     <string name="pro_summary">黑色主题，正在播放主题，轮播效果和更多...</string>
     <string name="profile">个人信息</string>
@@ -524,10 +524,10 @@
     <string name="you_have_to_select_at_least_one_category">请至少选择一个分类。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">分享崩溃报告</string>
+    <string name="playlist_created_sucessfully">%s 创建成功</string>
+    <string name="playList_already_exits">播放列表已存在</string>
+    <string name="added_song_count_to_playlist">已将 %d 首歌添加到 %s</string>
+    <string name="history_cleared">已清除历史记录</string>
+    <string name="history_undo_button">撤销</string>
 </resources>
