@@ -3,7 +3,11 @@ package code.name.monkey.appthemehelper.util
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
-import kotlin.math.*
+import androidx.core.graphics.ColorUtils
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 object ColorUtil {
     fun desaturateColor(color: Int, ratio: Float): Int {
@@ -42,6 +46,50 @@ object ColorUtil {
     @ColorInt
     fun lightenColor(@ColorInt color: Int): Int {
         return shiftColor(color, 1.1f)
+    }
+
+    @ColorInt
+    fun lightenColor(
+        @ColorInt color: Int,
+        value: Float
+    ): Int {
+        val hsl = FloatArray(3)
+        ColorUtils.colorToHSL(color, hsl)
+        hsl[2] += value
+        hsl[2] = hsl[2].coerceIn(0f, 1f)
+        return ColorUtils.HSLToColor(hsl)
+    }
+
+    @ColorInt
+    fun darkenColor(
+        @ColorInt color: Int,
+        value: Float
+    ): Int {
+        val hsl = FloatArray(3)
+        ColorUtils.colorToHSL(color, hsl)
+        hsl[2] -= value
+        hsl[2] = hsl[2].coerceIn(0f, 1f)
+        return ColorUtils.HSLToColor(hsl)
+    }
+
+    @ColorInt
+    fun getReadableColorLight(@ColorInt color: Int, @ColorInt bgColor: Int): Int {
+        var foregroundColor = color
+        while (ColorUtils.calculateContrast(foregroundColor, bgColor) <= 3.0
+        ) {
+            foregroundColor = darkenColor(foregroundColor, 0.1F)
+        }
+        return foregroundColor
+    }
+
+    @ColorInt
+    fun getReadableColorDark(@ColorInt color: Int, @ColorInt bgColor: Int): Int {
+        var foregroundColor = color
+        while (ColorUtils.calculateContrast(foregroundColor, bgColor) <= 3.0
+        ) {
+            foregroundColor = lightenColor(foregroundColor, 0.1F)
+        }
+        return foregroundColor
     }
 
     fun isColorLight(@ColorInt color: Int): Boolean {
