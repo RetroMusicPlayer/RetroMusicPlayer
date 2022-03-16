@@ -59,8 +59,26 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         return this
     }
 
-    override fun wallpaperColor(color: Int): ThemeStore {
-        mEditor.putInt(ThemeStorePrefKeys.KEY_WALLPAPER_COLOR, color)
+    override fun wallpaperColor(context: Context, color: Int): ThemeStore {
+        if (ColorUtil.isColorLight(color)) {
+            mEditor.putInt(ThemeStorePrefKeys.KEY_WALLPAPER_COLOR_DARK, color)
+            mEditor.putInt(
+                ThemeStorePrefKeys.KEY_WALLPAPER_COLOR_LIGHT,
+                ColorUtil.getReadableColorLight(
+                    color,
+                    Color.WHITE
+                )
+            )
+        } else {
+            mEditor.putInt(ThemeStorePrefKeys.KEY_WALLPAPER_COLOR_LIGHT, color)
+            mEditor.putInt(
+                ThemeStorePrefKeys.KEY_WALLPAPER_COLOR_DARK,
+                ColorUtil.getReadableColorDark(
+                    color,
+                    Color.parseColor("#202124")
+                )
+            )
+        }
         return this
     }
 
@@ -217,7 +235,7 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
             }
             val desaturatedColor = prefs(context).getBoolean("desaturated_color", false)
             val color = if (isWallpaperAccentEnabled(context)) {
-                wallpaperColor(context)
+                wallpaperColor(context, isWindowBackgroundDark(context))
             } else {
                 prefs(context).getInt(
                     ThemeStorePrefKeys.KEY_ACCENT_COLOR,
@@ -232,9 +250,9 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
 
         @CheckResult
         @ColorInt
-        fun wallpaperColor(context: Context): Int {
+        fun wallpaperColor(context: Context, isDarkMode: Boolean): Int {
             return prefs(context).getInt(
-                ThemeStorePrefKeys.KEY_WALLPAPER_COLOR,
+                if (isDarkMode) ThemeStorePrefKeys.KEY_WALLPAPER_COLOR_DARK else ThemeStorePrefKeys.KEY_WALLPAPER_COLOR_LIGHT,
                 resolveColor(context, R.attr.colorAccent, Color.parseColor("#263238"))
             )
         }

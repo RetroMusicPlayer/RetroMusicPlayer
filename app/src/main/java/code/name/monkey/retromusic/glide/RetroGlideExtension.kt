@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.glide
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -150,10 +151,11 @@ object RetroGlideExtension {
     @GlideOption
     fun userProfileOptions(
         baseRequestOptions: BaseRequestOptions<*>,
-        file: File
+        file: File,
+        context: Context
     ): BaseRequestOptions<*> {
         return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .error(getErrorUserProfile())
+            .error(getErrorUserProfile(context))
             .signature(createSignature(file))
     }
 
@@ -201,11 +203,11 @@ object RetroGlideExtension {
         return File(dir, USER_BANNER)
     }
 
-    private fun getErrorUserProfile(): Drawable {
+    private fun getErrorUserProfile(context: Context): Drawable {
         return TintHelper.createTintedDrawable(
             getContext(),
             R.drawable.ic_account,
-            accentColor(getContext())
+            accentColor(context)
         )
     }
 
