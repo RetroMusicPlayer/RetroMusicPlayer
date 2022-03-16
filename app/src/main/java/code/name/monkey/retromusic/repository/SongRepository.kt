@@ -28,9 +28,11 @@ import code.name.monkey.retromusic.extensions.getInt
 import code.name.monkey.retromusic.extensions.getLong
 import code.name.monkey.retromusic.extensions.getString
 import code.name.monkey.retromusic.extensions.getStringOrNull
+import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
+import java.text.Collator
 
 /**
  * Created by hemanths on 10/08/17.
@@ -66,7 +68,33 @@ class RealSongRepository(private val context: Context) : SongRepository {
             } while (cursor.moveToNext())
         }
         cursor?.close()
-        return songs
+        return when (PreferenceUtil.songSortOrder) {
+            SortOrder.SongSortOrder.SONG_A_Z -> {
+                val collator = Collator.getInstance()
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.title, s2.title) }
+            }
+            SortOrder.SongSortOrder.SONG_Z_A -> {
+                val collator = Collator.getInstance()
+                songs.sortedWith{ s1, s2 -> collator.compare(s2.title, s1.title) }
+            }
+            SortOrder.SongSortOrder.SONG_ALBUM -> {
+                val collator = Collator.getInstance()
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.albumName, s2.albumName) }
+            }
+            SortOrder.SongSortOrder.SONG_ALBUM_ARTIST -> {
+                val collator = Collator.getInstance()
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.albumArtist, s2.albumArtist) }
+            }
+            SortOrder.SongSortOrder.SONG_ARTIST -> {
+                val collator = Collator.getInstance()
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.artistName, s2.artistName) }
+            }
+            SortOrder.SongSortOrder.COMPOSER -> {
+                val collator = Collator.getInstance()
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.composer, s2.composer) }
+            }
+            else -> songs
+        }
     }
 
     override fun song(cursor: Cursor?): Song {
