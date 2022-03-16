@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.model
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import java.text.Collator
 
 data class Artist(
     val id: Long,
@@ -60,37 +61,34 @@ data class Artist(
         get() = albums.flatMap { it.songs }
 
     val sortedSongs: List<Song>
-        get() = songs.sortedWith(
-            when (PreferenceUtil.artistDetailSongSortOrder) {
-                SortOrder.ArtistSongSortOrder.SONG_A_Z -> { o1, o2 ->
-                    o1.title.compareTo(
-                        o2.title
-                    )
-                }
-                SortOrder.ArtistSongSortOrder.SONG_Z_A -> { o1, o2 ->
-                    o2.title.compareTo(
-                        o1.title
-                    )
-                }
-                SortOrder.ArtistSongSortOrder.SONG_ALBUM -> { o1, o2 ->
-                    o1.albumName.compareTo(
-                        o2.albumName
-                    )
-                }
-                SortOrder.ArtistSongSortOrder.SONG_YEAR -> { o1, o2 ->
-                    o2.year.compareTo(
-                        o1.year
-                    )
-                }
-                SortOrder.ArtistSongSortOrder.SONG_DURATION -> { o1, o2 ->
-                    o1.duration.compareTo(
-                        o2.duration
-                    )
-                }
-                else -> {
-                    throw IllegalArgumentException("invalid ${PreferenceUtil.artistDetailSongSortOrder}")
-                }
-            })
+        get() {
+            val collator = Collator.getInstance()
+            return songs.sortedWith(
+                when (PreferenceUtil.artistDetailSongSortOrder) {
+                    SortOrder.ArtistSongSortOrder.SONG_A_Z -> { o1, o2 ->
+                        collator.compare(o1.title, o2.title)
+                    }
+                    SortOrder.ArtistSongSortOrder.SONG_Z_A -> { o1, o2 ->
+                        collator.compare(o2.title, o1.title)
+                    }
+                    SortOrder.ArtistSongSortOrder.SONG_ALBUM -> { o1, o2 ->
+                        collator.compare(o1.albumName, o2.albumName)
+                    }
+                    SortOrder.ArtistSongSortOrder.SONG_YEAR -> { o1, o2 ->
+                        o2.year.compareTo(
+                            o1.year
+                        )
+                    }
+                    SortOrder.ArtistSongSortOrder.SONG_DURATION -> { o1, o2 ->
+                        o1.duration.compareTo(
+                            o2.duration
+                        )
+                    }
+                    else -> {
+                        throw IllegalArgumentException("invalid ${PreferenceUtil.artistDetailSongSortOrder}")
+                    }
+                })
+        }
 
     fun safeGetFirstAlbum(): Album {
         return albums.firstOrNull() ?: Album.empty
