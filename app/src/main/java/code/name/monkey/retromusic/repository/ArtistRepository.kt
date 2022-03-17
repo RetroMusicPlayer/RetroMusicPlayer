@@ -172,14 +172,13 @@ class RealArtistRepository(
     }
 
     private fun sortArtists(artists: List<Artist>): List<Artist> {
+        val collator = Collator.getInstance()
         return when (PreferenceUtil.artistSortOrder) {
             SortOrder.ArtistSortOrder.ARTIST_A_Z -> {
-                val collator = Collator.getInstance()
-                artists.sortedWith{ a1, a2 -> collator.compare(a1.name, a2.name) }
+                artists.sortedWith { a1, a2 -> collator.compare(a1.name, a2.name) }
             }
             SortOrder.ArtistSortOrder.ARTIST_Z_A -> {
-                val collator = Collator.getInstance()
-                artists.sortedWith{ a1, a2 -> collator.compare(a2.name, a1.name) }
+                artists.sortedWith { a1, a2 -> collator.compare(a2.name, a1.name) }
             }
             else -> artists
         }
