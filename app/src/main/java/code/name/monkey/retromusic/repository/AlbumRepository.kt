@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
+import java.text.Collator
 
 
 /**
@@ -65,8 +66,7 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
         )
         val songs = songRepository.songs(cursor)
         val album = Album(albumId, songs)
-        sortAlbumSongs(album)
-        return album
+        return sortAlbumSongs(album)
     }
 
     // We don't need sorted list of songs (with sortAlbumSongs())
@@ -74,23 +74,36 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
     fun splitIntoAlbums(
         songs: List<Song>
     ): List<Album> {
-        return if (PreferenceUtil.albumSortOrder != SortOrder.AlbumSortOrder.ALBUM_NUMBER_OF_SONGS) songs.groupBy { it.albumId }
-            .map { Album(it.key, it.value) }
-        // We can't sort Album with the help of MediaStore so a hack
-        else songs.groupBy { it.albumId }.map { Album(it.key, it.value) }
-            .sortedByDescending { it.songCount }
+        val grouped = songs.groupBy { it.albumId }.map { Album(it.key, it.value) }
+        val collator = Collator.getInstance()
+        return when (PreferenceUtil.albumSortOrder) {
+            SortOrder.AlbumSortOrder.ALBUM_A_Z -> {
+                grouped.sortedWith { a1, a2 -> collator.compare(a1.title, a2.title) }
+            }
+            SortOrder.AlbumSortOrder.ALBUM_Z_A -> {
+                grouped.sortedWith { a1, a2 -> collator.compare(a2.title, a1.title) }
+            }
+            SortOrder.AlbumSortOrder.ALBUM_ARTIST -> {
+                grouped.sortedWith { a1, a2 -> collator.compare(a1.albumArtist, a2.albumArtist) }
+            }
+            SortOrder.AlbumSortOrder.ALBUM_NUMBER_OF_SONGS -> {
+                grouped.sortedByDescending { it.songCount }
+            }
+            else -> grouped
+        }
     }
 
     private fun sortAlbumSongs(album: Album): Album {
+        val collator = Collator.getInstance()
         val songs = when (PreferenceUtil.albumDetailSongSortOrder) {
             SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs.sortedWith { o1, o2 ->
                 o1.trackNumber.compareTo(o2.trackNumber)
             }
-            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs.sortedWith { o1, o2 ->
-                o1.title.compareTo(o2.title)
+            SortOrder.AlbumSongSortOrder.SONG_A_Z -> {
+                album.songs.sortedWith { o1, o2 -> collator.compare(o1.title, o2.title) }
             }
-            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs.sortedWith { o1, o2 ->
-                o2.title.compareTo(o1.title)
+            SortOrder.AlbumSongSortOrder.SONG_Z_A -> {
+                album.songs.sortedWith { o1, o2 -> collator.compare(o2.title, o1.title) }
             }
             SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
                 o1.duration.compareTo(o2.duration)

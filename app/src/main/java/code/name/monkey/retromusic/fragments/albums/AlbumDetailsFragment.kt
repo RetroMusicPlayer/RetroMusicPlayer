@@ -80,6 +80,7 @@ import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.text.Collator
 
 class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_details),
     IAlbumClickListener, ICabHolder {
@@ -437,15 +438,13 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     o2.trackNumber
                 )
             }
-            SONG_A_Z -> album.songs.sortedWith { o1, o2 ->
-                o1.title.compareTo(
-                    o2.title
-                )
+            SONG_A_Z -> {
+                val collator = Collator.getInstance()
+                album.songs.sortedWith { o1, o2 -> collator.compare(o1.title, o2.title) }
             }
-            SONG_Z_A -> album.songs.sortedWith { o1, o2 ->
-                o2.title.compareTo(
-                    o1.title
-                )
+            SONG_Z_A -> {
+                val collator = Collator.getInstance()
+                album.songs.sortedWith { o1, o2 -> collator.compare(o2.title, o1.title) }
             }
             SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
                 o1.duration.compareTo(
