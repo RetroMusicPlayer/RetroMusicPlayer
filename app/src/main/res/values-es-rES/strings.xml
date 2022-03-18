@@ -209,6 +209,7 @@
     <string name="label_file_name">Nombre del archivo</string>
     <string name="label_file_path">Ruta del archivo</string>
     <string name="label_file_size">Tamaño</string>
+    <string name="label_last_modified">Última modificación</string>
     <string name="label_more_from">Más de %s</string>
     <string name="label_sampling_rate">Tasa de muestreo</string>
     <string name="label_track_length">Duración</string>

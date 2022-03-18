@@ -210,6 +210,7 @@
     <string name="label_file_name">Bestandsnaam</string>
     <string name="label_file_path">Bestandslocatie</string>
     <string name="label_file_size">Grootte</string>
+    <string name="label_last_modified">Laatst gewijzigd</string>
     <string name="label_more_from">Meer van %s</string>
     <string name="label_sampling_rate">Samplingfrequentie</string>
     <string name="label_track_length">Duur</string>

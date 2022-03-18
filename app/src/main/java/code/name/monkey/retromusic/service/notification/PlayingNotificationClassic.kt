@@ -23,7 +23,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
@@ -324,7 +323,7 @@ class PlayingNotificationClassic(
             context: Context,
             notificationManager: NotificationManager
         ): PlayingNotification {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (VersionUtils.hasOreo()) {
                 createNotificationChannel(context, notificationManager)
             }
             return PlayingNotificationClassic(context)

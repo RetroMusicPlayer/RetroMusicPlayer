@@ -49,7 +49,6 @@ import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion.SONG_A_Z
@@ -68,7 +67,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -82,6 +80,7 @@ import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.text.Collator
 
 class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_details),
     IAlbumClickListener, ICabHolder {
@@ -307,7 +306,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner) {
             moreAlbums(it)
         }
-        GlideApp.with(requireContext()).asBitmapPalette().artistImageOptions(artist)
+        GlideApp.with(requireContext())
             //.forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
             .load(
                 RetroGlideExtension.getArtistModel(
@@ -315,12 +314,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     PreferenceUtil.isAllowedToDownloadMetadata()
                 )
             )
+            .artistImageOptions(artist)
             .dontAnimate()
             .dontTransform()
-            .into(object : RetroMusicColoredTarget(binding.artistImage) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                }
-            })
+            .into(binding.artistImage)
     }
 
     private fun loadAlbumCover(album: Album) {
@@ -441,15 +438,13 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     o2.trackNumber
                 )
             }
-            SONG_A_Z -> album.songs.sortedWith { o1, o2 ->
-                o1.title.compareTo(
-                    o2.title
-                )
+            SONG_A_Z -> {
+                val collator = Collator.getInstance()
+                album.songs.sortedWith { o1, o2 -> collator.compare(o1.title, o2.title) }
             }
-            SONG_Z_A -> album.songs.sortedWith { o1, o2 ->
-                o2.title.compareTo(
-                    o1.title
-                )
+            SONG_Z_A -> {
+                val collator = Collator.getInstance()
+                album.songs.sortedWith { o1, o2 -> collator.compare(o2.title, o1.title) }
             }
             SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
                 o1.duration.compareTo(

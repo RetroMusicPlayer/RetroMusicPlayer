@@ -210,6 +210,7 @@
     <string name="label_file_name">Pangalan ng payl</string>
     <string name="label_file_path">Daan ng payl</string>
     <string name="label_file_size">Sukat</string>
+    <string name="label_last_modified">Huling binago</string>
     <string name="label_more_from">Higit pa mula sa %s</string>
     <string name="label_sampling_rate">Halimbawa ng rate</string>
     <string name="label_track_length">Haba</string>

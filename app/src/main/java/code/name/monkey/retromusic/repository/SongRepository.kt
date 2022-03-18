@@ -21,15 +21,18 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
 import android.provider.MediaStore.Audio.Media
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.extensions.getInt
 import code.name.monkey.retromusic.extensions.getLong
 import code.name.monkey.retromusic.extensions.getString
 import code.name.monkey.retromusic.extensions.getStringOrNull
+import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
+import java.text.Collator
 
 /**
  * Created by hemanths on 10/08/17.
@@ -65,7 +68,28 @@ class RealSongRepository(private val context: Context) : SongRepository {
             } while (cursor.moveToNext())
         }
         cursor?.close()
-        return songs
+        val collator = Collator.getInstance()
+        return when (PreferenceUtil.songSortOrder) {
+            SortOrder.SongSortOrder.SONG_A_Z -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.title, s2.title) }
+            }
+            SortOrder.SongSortOrder.SONG_Z_A -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s2.title, s1.title) }
+            }
+            SortOrder.SongSortOrder.SONG_ALBUM -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.albumName, s2.albumName) }
+            }
+            SortOrder.SongSortOrder.SONG_ALBUM_ARTIST -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.albumArtist, s2.albumArtist) }
+            }
+            SortOrder.SongSortOrder.SONG_ARTIST -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.artistName, s2.artistName) }
+            }
+            SortOrder.SongSortOrder.COMPOSER -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.composer, s2.composer) }
+            }
+            else -> songs
+        }
     }
 
     override fun song(cursor: Cursor?): Song {
@@ -188,7 +212,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
             selectionFinal =
                 selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
         }
-        val uri = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+        val uri = if (VersionUtils.hasQ()) {
             Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
         } else {
             Media.EXTERNAL_CONTENT_URI

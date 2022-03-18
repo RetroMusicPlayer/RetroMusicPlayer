@@ -179,6 +179,7 @@
     <string name="label_file_name">ఫైల్ పేరు</string>
     <string name="label_file_path">ఫైల్ మార్గం</string>
     <string name="label_file_size">పరిమాణం</string>
+    <string name="label_last_modified">చివరి సవరణ</string>
     <string name="label_more_from">%s నుండి ఎక్కువ</string>
     <string name="label_sampling_rate">మాదిరి రేటు</string>
     <string name="label_track_length">పొడవు</string>

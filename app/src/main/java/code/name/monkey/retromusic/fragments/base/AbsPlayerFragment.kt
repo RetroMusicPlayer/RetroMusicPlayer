@@ -22,7 +22,6 @@ import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.media.MediaMetadataRetriever
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.GestureDetector
@@ -297,7 +296,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         playerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment?.setCallbacks(this)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        if (VersionUtils.hasMarshmallow())
             view.findViewById<RelativeLayout>(R.id.statusBarShadow)?.hide()
     }
 

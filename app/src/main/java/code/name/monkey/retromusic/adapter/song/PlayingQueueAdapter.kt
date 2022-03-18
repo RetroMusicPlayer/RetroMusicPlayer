@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.isPlaying
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.playNextSong
@@ -29,7 +28,6 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote.removeFromQueue
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
 import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
@@ -79,13 +77,10 @@ class PlayingQueueAdapter(
         if (holder.image == null) {
             return
         }
-        GlideApp.with(activity).asBitmapPalette().songCoverOptions(song)
+        GlideApp.with(activity)
             .load(RetroGlideExtension.getSongModel(song))
-            .into(object : RetroMusicColoredTarget(holder.image!!) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    //setColors(colors, holder)
-                }
-            })
+            .songCoverOptions(song)
+            .into(holder.image!!)
     }
 
     fun swapDataSet(dataSet: List<Song>, position: Int) {

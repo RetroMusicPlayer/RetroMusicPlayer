@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -40,7 +41,6 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/SplashTheme"
             android:launchMode="singleTop">
             <intent-filter>
@@ -174,7 +174,6 @@
         <activity
             android:name=".cast.ExpandedControlsActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -185,6 +184,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".activities.ErrorActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cat.ereza.customactivityoncrash.RESTART" />
+            </intent-filter>
+        </activity>
+
 
         <provider
             android:name=".misc.GenericFileProvider"

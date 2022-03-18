@@ -20,7 +20,6 @@ import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.media.AudioManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.KeyEvent
@@ -31,6 +30,7 @@ import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.getSystemService
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import com.google.android.material.snackbar.Snackbar
 
@@ -62,19 +62,12 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
         permissionDeniedMessage = null
     }
 
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-        if (!hasPermissions()) {
-            // requestPermissions()
-        }
-    }
-
     override fun onResume() {
         super.onResume()
         val hasPermissions = hasPermissions()
         if (hasPermissions != hadPermissions) {
             hadPermissions = hasPermissions
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (VersionUtils.hasMarshmallow()) {
                 onHasPermissionsChanged(hasPermissions)
             }
         }
@@ -97,13 +90,13 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
     }
 
     protected open fun requestPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (VersionUtils.hasMarshmallow()) {
             requestPermissions(permissions, PERMISSION_REQUEST)
         }
     }
 
     protected fun hasPermissions(): Boolean {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (VersionUtils.hasMarshmallow()) {
             for (permission in permissions) {
                 if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                     return false

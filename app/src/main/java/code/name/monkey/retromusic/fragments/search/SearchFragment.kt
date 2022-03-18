@@ -46,6 +46,7 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.transition.MaterialFadeThrough
+import kotlinx.coroutines.Job
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import java.util.*
 
@@ -62,6 +63,8 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
 
     private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
+
+    private var job: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -184,7 +187,8 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         binding.voiceSearch.isGone = query.isNotEmpty()
         binding.clearText.isVisible = query.isNotEmpty()
         val filter = getFilter()
-        libraryViewModel.search(query, filter)
+        job?.cancel()
+        job = libraryViewModel.search(query, filter)
     }
 
     private fun getFilter(): Filter {

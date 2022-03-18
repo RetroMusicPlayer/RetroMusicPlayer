@@ -125,8 +125,14 @@ class PlayingNotificationImpl24(
     }
 
     override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
-        setContentTitle(song.title)
-        setContentText(
+        setContentTitle(
+            HtmlCompat.fromHtml(
+                "<b>" + song.title + "</b>",
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
+        )
+        setContentText(song.artistName)
+        setSubText(
             HtmlCompat.fromHtml(
                 "<b>" + song.albumName + "</b>",
                 HtmlCompat.FROM_HTML_MODE_LEGACY
@@ -169,10 +175,12 @@ class PlayingNotificationImpl24(
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
-                    setLargeIcon(BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.default_audio_art
-                    ))
+                    setLargeIcon(
+                        BitmapFactory.decodeResource(
+                            context.resources,
+                            R.drawable.default_audio_art
+                        )
+                    )
                     onUpdate()
                 }
             })
@@ -232,7 +240,7 @@ class PlayingNotificationImpl24(
             notificationManager: NotificationManager,
             mediaSession: MediaSessionCompat
         ): PlayingNotification {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (VersionUtils.hasOreo()) {
                 createNotificationChannel(context, notificationManager)
             }
             return PlayingNotificationImpl24(context, mediaSession.sessionToken)

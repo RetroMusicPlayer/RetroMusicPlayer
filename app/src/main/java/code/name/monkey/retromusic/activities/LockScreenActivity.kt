@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.activities
 
 import android.app.KeyguardManager
-import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.core.content.getSystemService
@@ -84,7 +83,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
     @Suppress("Deprecation")
     private fun lockScreenInit() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+        if (VersionUtils.hasOreoMR1()) {
             setShowWhenLocked(true)
             val keyguardManager = getSystemService<KeyguardManager>()
             keyguardManager?.requestDismissKeyguard(this, null)

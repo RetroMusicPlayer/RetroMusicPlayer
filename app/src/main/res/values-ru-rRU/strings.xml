@@ -213,6 +213,7 @@
     <string name="label_file_name">Имя файла</string>
     <string name="label_file_path">Расположение файла</string>
     <string name="label_file_size">Размер</string>
+    <string name="label_last_modified">Последнее изменение</string>
     <string name="label_more_from">Больше от %s</string>
     <string name="label_sampling_rate">Частота дискретизации</string>
     <string name="label_track_length">Длина</string>

@@ -3,11 +3,11 @@ package code.name.monkey.retromusic.dialogs
 import android.Manifest
 import android.app.Dialog
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.materialDialog
 import com.afollestad.materialdialogs.MaterialDialog
@@ -49,7 +49,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         var mSavedInstanceState = savedInstanceState
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+        if (VersionUtils.hasMarshmallow()
             && ActivityCompat.checkSelfPermission(
                 requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE
             )

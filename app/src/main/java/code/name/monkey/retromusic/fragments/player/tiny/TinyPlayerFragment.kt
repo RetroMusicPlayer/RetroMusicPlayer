@@ -26,6 +26,7 @@ import android.view.animation.LinearInterpolator
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.getSystemService
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentTinyPlayerBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
@@ -283,7 +284,7 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
         @Suppress("Deprecation")
         private fun vibrate() {
             val v = requireContext().getSystemService<Vibrator>()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (VersionUtils.hasOreo()) {
                 v?.vibrate(VibrationEffect.createOneShot(10, VibrationEffect.DEFAULT_AMPLITUDE))
             } else {
                 v?.vibrate(10)

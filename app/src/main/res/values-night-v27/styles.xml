@@ -12,7 +12,7 @@
   ~ See the GNU General Public License for more details.
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>

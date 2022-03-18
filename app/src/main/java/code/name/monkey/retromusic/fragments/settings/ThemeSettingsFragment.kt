@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.fragments.settings
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
@@ -48,7 +47,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 setSummary(it, newValue)
                 ThemeStore.markChanged(requireContext())
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+                if (VersionUtils.hasNougatMR()) {
                     requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue(theme))
                     DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
@@ -83,7 +82,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 return@setOnPreferenceChangeListener false
             }
             ThemeStore.markChanged(requireContext())
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            if (VersionUtils.hasNougatMR()) {
                 requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue("black"))
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
             }

@@ -114,10 +114,9 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
     private fun updateSongCover() {
         val song = MusicPlayerRemote.currentSong
         GlideApp.with(requireContext())
-            .asBitmap()
-            .songCoverOptions(song)
-            .transition(RetroGlideExtension.getDefaultTransition())
             .load(RetroGlideExtension.getSongModel(song))
+            .transition(RetroGlideExtension.getDefaultTransition())
+            .songCoverOptions(song)
             .into(binding.image)
     }
 

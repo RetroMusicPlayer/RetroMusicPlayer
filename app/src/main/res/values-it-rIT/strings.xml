@@ -223,6 +223,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="label_file_name">Nome del file</string>
     <string name="label_file_path">Percorso del file</string>
     <string name="label_file_size">Dimensione</string>
+    <string name="label_last_modified">Ultima modifica</string>
     <string name="label_more_from">Altro da %s</string>
     <string name="label_sampling_rate">Frequenza di campionamento</string>
     <string name="label_track_length">Lunghezza</string>

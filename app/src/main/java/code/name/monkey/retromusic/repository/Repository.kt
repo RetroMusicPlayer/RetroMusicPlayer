@@ -100,6 +100,7 @@ interface Repository {
     suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInHistory(songId: Long)
+    suspend fun clearSongHistory()
     suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun blackListPaths(): List<BlackListStoreEntity>
@@ -329,6 +330,10 @@ class RealRepository(
 
     override suspend fun deleteSongInHistory(songId: Long) =
         roomRepository.deleteSongInHistory(songId)
+
+    override suspend fun clearSongHistory() {
+        roomRepository.clearSongHistory()
+    }
 
     override suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity> =
         roomRepository.checkSongExistInPlayCount(songId)

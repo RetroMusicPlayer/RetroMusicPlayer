@@ -125,7 +125,6 @@
         <item name="cornerSize">0dp</item>
     </style>
 
-
     <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -133,6 +132,14 @@
 
     <style name="MaterialPopupMenuStyle" parent="Widget.Material3.PopupMenu">
         <item name="android:popupBackground">@drawable/popup_background</item>
+    </style>
+    
+    <style name="CenteredCheckBoxTheme">
+        <item name="checkboxStyle">@style/CheckBoxStyle</item>
+    </style>
+
+    <style name="CheckBoxStyle" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:gravity">center_vertical|end</item>
     </style>
 
     <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
@@ -180,7 +187,6 @@
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
     </style>
 
-
     <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet">
         <item name="android:maxWidth">@empty</item>
     </style>
@@ -205,7 +211,7 @@
     <style name="SearchChipStyle" parent="Widget.Material3.Chip.Filter">
         <item name="android:checked">false</item>
         <item name="android:textSize">16sp</item>
-        <item name="checkedIconEnabled">true</item>
+        <item name="checkedIconVisible">false</item>
         <item name="chipEndPadding">10dp</item>
         <item name="chipMinHeight">40dp</item>
         <item name="chipStartPadding">10dp</item>
