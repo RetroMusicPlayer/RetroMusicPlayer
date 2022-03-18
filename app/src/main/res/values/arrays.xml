@@ -213,5 +213,9 @@
         <item>ur</item>
         <item>vi</item>
     </string-array>
+    <string-array name="image_settings_options">
+        <item>@string/choose_image</item>
+        <item>@string/remove_image</item>
+    </string-array>
     <string name="collapsing">Collapsing</string>
 </resources>

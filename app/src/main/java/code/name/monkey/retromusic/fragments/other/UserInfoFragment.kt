@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.fragments.other
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -88,11 +89,11 @@ class UserInfoFragment : Fragment() {
         binding.name.setText(PreferenceUtil.userName)
 
         binding.userImage.setOnClickListener {
-            pickNewPhoto()
+            showUserImageOptions()
         }
 
         binding.bannerImage.setOnClickListener {
-            selectBannerImage()
+            showBannerImageOptions()
         }
 
         binding.next.setOnClickListener {
@@ -119,6 +120,42 @@ class UserInfoFragment : Fragment() {
                 bottomMargin = it
             }
         }
+    }
+
+    private fun showBannerImageOptions() {
+        val list = requireContext().resources.getStringArray(R.array.image_settings_options)
+        val alertDialogBuilder = AlertDialog.Builder(context)
+        alertDialogBuilder.setTitle("Banner Image")
+            .setItems(list) { _, which ->
+                when (which) {
+                    0 -> selectBannerImage()
+                    1 -> {
+                        val appDir = requireContext().filesDir
+                        val file = File(appDir, USER_BANNER)
+                        file.delete()
+                        loadProfile()
+                    }
+                }
+            }
+        alertDialogBuilder.create().show()
+    }
+
+    private fun showUserImageOptions() {
+        val list = requireContext().resources.getStringArray(R.array.image_settings_options)
+        val alertDialogBuilder = AlertDialog.Builder(context)
+        alertDialogBuilder.setTitle("Profile Image")
+            .setItems(list) { _, which ->
+                when (which) {
+                    0 -> pickNewPhoto()
+                    1 -> {
+                        val appDir = requireContext().filesDir
+                        val file = File(appDir, USER_PROFILE)
+                        file.delete()
+                        loadProfile()
+                    }
+                }
+            }
+        alertDialogBuilder.create().show()
     }
 
     private fun loadProfile() {
