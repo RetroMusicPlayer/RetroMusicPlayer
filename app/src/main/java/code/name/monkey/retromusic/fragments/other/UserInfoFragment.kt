@@ -167,7 +167,7 @@ class UserInfoFragment : Fragment() {
         }
         GlideApp.with(this)
             .load(RetroGlideExtension.getUserModel())
-            .userProfileOptions(RetroGlideExtension.getUserModel())
+            .userProfileOptions(RetroGlideExtension.getUserModel(), requireContext())
             .into(binding.userImage)
     }
 

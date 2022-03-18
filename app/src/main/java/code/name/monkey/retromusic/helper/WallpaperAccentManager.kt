@@ -43,9 +43,7 @@ class WallpaperAccentManager(val context: Context) {
                 .getWallpaperColors(WallpaperManager.FLAG_SYSTEM)
             if (colors != null) {
                 val primaryColor = colors.primaryColor.toArgb()
-                if (primaryColor != ThemeStore.wallpaperColor(context)) {
-                    ThemeStore.editTheme(context).wallpaperColor(primaryColor).commit()
-                }
+                    ThemeStore.editTheme(context).wallpaperColor(context, primaryColor).commit()
             }
         }
     }

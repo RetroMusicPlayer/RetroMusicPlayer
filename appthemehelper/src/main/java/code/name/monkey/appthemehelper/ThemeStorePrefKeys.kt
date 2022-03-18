@@ -29,6 +29,7 @@ internal interface ThemeStorePrefKeys {
         const val KEY_AUTO_GENERATE_PRIMARYDARK = "auto_generate_primarydark"
 
         const val KEY_MATERIAL_YOU = "material_you"
-        const val KEY_WALLPAPER_COLOR = "wallpaper_color"
+        const val KEY_WALLPAPER_COLOR_LIGHT = "wallpaper_color_light"
+        const val KEY_WALLPAPER_COLOR_DARK = "wallpaper_color_dark"
     }
 }

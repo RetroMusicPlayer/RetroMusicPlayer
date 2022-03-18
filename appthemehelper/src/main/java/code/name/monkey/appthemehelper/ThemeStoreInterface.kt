@@ -1,5 +1,6 @@
 package code.name.monkey.appthemehelper
 
+import android.content.Context
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -34,7 +35,7 @@ internal interface ThemeStoreInterface {
 
     fun accentColor(@ColorInt color: Int): ThemeStore
 
-    fun wallpaperColor(@ColorInt color: Int): ThemeStore
+    fun wallpaperColor(context: Context, color: Int): ThemeStore
 
     fun accentColorRes(@ColorRes colorRes: Int): ThemeStore
 

@@ -187,7 +187,7 @@ class HomeFragment :
         }
         GlideApp.with(requireActivity())
             .load(RetroGlideExtension.getUserModel())
-            .userProfileOptions(RetroGlideExtension.getUserModel())
+            .userProfileOptions(RetroGlideExtension.getUserModel(), requireContext())
             .into(binding.userImage)
     }
 

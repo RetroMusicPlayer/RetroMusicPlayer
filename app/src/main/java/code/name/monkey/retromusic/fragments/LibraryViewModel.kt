@@ -35,7 +35,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 
 class LibraryViewModel(
-    private val repository: RealRepository
+    private val repository: RealRepository,
 ) : ViewModel(), IMusicServiceEventListener {
 
     private val _paletteColor = MutableLiveData<Int>()
@@ -50,6 +50,7 @@ class LibraryViewModel(
     private val searchResults = MutableLiveData<List<Any>>()
     private val fabMargin = MutableLiveData(0)
     private val songHistory = MutableLiveData<List<Song>>()
+    private var previousSongHistory = ArrayList<HistoryEntity>()
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -143,12 +144,11 @@ class LibraryViewModel(
         suggestions.postValue(repository.suggestions())
     }
 
-    fun search(query: String?, filter: Filter) {
+    fun search(query: String?, filter: Filter) =
         viewModelScope.launch(IO) {
-            val result = repository.search(query, filter)
+            val result =repository.search(query, filter)
             searchResults.postValue(result)
         }
-    }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch(IO) {
         when (reloadType) {
@@ -342,9 +342,25 @@ class LibraryViewModel(
 
     fun clearHistory() {
         viewModelScope.launch(IO) {
+            previousSongHistory = repository.historySong() as ArrayList<HistoryEntity>
+
             repository.clearSongHistory()
         }
         songHistory.value = emptyList()
+    }
+
+
+    fun restoreHistory() {
+        viewModelScope.launch(IO) {
+            if (previousSongHistory.isNotEmpty()) {
+                val history = ArrayList<Song>()
+                for (song in previousSongHistory) {
+                    repository.addSongToHistory(song.toSong())
+                    history.add(song.toSong())
+                }
+                songHistory.postValue(history)
+            }
+        }
     }
 
     fun favorites() = repository.favorites()
@@ -363,6 +379,14 @@ class LibraryViewModel(
                     createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
                 forceReload(Playlists)
+                withContext(Main) {
+                    Toast.makeText(
+                        App.getContext(),
+                        App.getContext()
+                            .getString(R.string.playlist_created_sucessfully, playlistName),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             } else {
                 val playlist = playlists.firstOrNull()
                 if (playlist != null) {
@@ -370,21 +394,13 @@ class LibraryViewModel(
                         it.toSongEntity(playListId = playlist.playListId)
                     })
                 }
-                withContext(Main) {
-                    Toast.makeText(
-                        App.getContext(),
-                        "Playlist already exists",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    if (songs.isNotEmpty()) {
-                        Toast.makeText(
-                            App.getContext(),
-                            "Adding songs to $playlistName",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-
+            }
+            withContext(Main) {
+                Toast.makeText(App.getContext(), App.getContext().getString(
+                    R.string.added_song_count_to_playlist,
+                    songs.size,
+                    playlistName
+                ), Toast.LENGTH_SHORT).show()
             }
         }
     }

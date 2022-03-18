@@ -20,6 +20,7 @@ import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.util.PreferenceUtil
+import java.text.Collator
 
 interface ArtistRepository {
     fun artists(): List<Artist>
@@ -103,7 +104,8 @@ class RealArtistRepository(
                 getSongLoaderSortOrder()
             )
         )
-        return splitIntoArtists(albumRepository.splitIntoAlbums(songs))
+        val artists = splitIntoArtists(albumRepository.splitIntoAlbums(songs))
+        return sortArtists(artists)
     }
 
     override fun albumArtists(): List<Artist> {
@@ -115,7 +117,8 @@ class RealArtistRepository(
                         if (PreferenceUtil.artistSortOrder == SortOrder.ArtistSortOrder.ARTIST_A_Z) "" else " DESC"
             )
         )
-        return splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
+        val artists = splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
+        return sortArtists(artists)
     }
 
     override fun albumArtists(query: String): List<Artist> {
@@ -126,7 +129,8 @@ class RealArtistRepository(
                 getSongLoaderSortOrder()
             )
         )
-        return splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
+        val artists = splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
+        return sortArtists(artists)
     }
 
     override fun artists(query: String): List<Artist> {
@@ -137,7 +141,8 @@ class RealArtistRepository(
                 getSongLoaderSortOrder()
             )
         )
-        return splitIntoArtists(albumRepository.splitIntoAlbums(songs))
+        val artists = splitIntoArtists(albumRepository.splitIntoAlbums(songs))
+        return sortArtists(artists)
     }
 
 
@@ -164,5 +169,18 @@ class RealArtistRepository(
     fun splitIntoArtists(albums: List<Album>): List<Artist> {
         return albums.groupBy { it.artistId }
             .map { Artist(it.key, it.value) }
+    }
+
+    private fun sortArtists(artists: List<Artist>): List<Artist> {
+        val collator = Collator.getInstance()
+        return when (PreferenceUtil.artistSortOrder) {
+            SortOrder.ArtistSortOrder.ARTIST_A_Z -> {
+                artists.sortedWith { a1, a2 -> collator.compare(a1.name, a2.name) }
+            }
+            SortOrder.ArtistSortOrder.ARTIST_Z_A -> {
+                artists.sortedWith { a1, a2 -> collator.compare(a2.name, a1.name) }
+            }
+            else -> artists
+        }
     }
 }
