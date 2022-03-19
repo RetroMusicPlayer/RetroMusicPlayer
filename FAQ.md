@@ -45,6 +45,10 @@ Find the time-stamped lyrics for your songs that don't have lyrics already. You 
 Find your song to edit and paste the synced lyrics. 
 > These apps add those synced lyrics in the music file itself instead of creating a ".lrc file for it."
 
+**Lyrics Website Links:**
+- https://www.lyricsify.com/
+- https://www.syair.info
+
 **Some Important Notes:**
 - If you want to skip to a particular timestamp, simply scroll to the time stamp from where you want to start and a 'Play' icon will appear left to the particular stamp. Tap on the play button to play from there.
 - When you save lyrics by pasting lyrics in lyrics editor, close the lyrics and open again for lyrics to show.
