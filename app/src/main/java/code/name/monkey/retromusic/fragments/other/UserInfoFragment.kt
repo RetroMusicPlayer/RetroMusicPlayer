@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.fragments.other
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -51,6 +50,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.constant.ImageProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -124,8 +124,7 @@ class UserInfoFragment : Fragment() {
 
     private fun showBannerImageOptions() {
         val list = requireContext().resources.getStringArray(R.array.image_settings_options)
-        val alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.setTitle("Banner Image")
+        MaterialAlertDialogBuilder(requireContext()).setTitle("Banner Image")
             .setItems(list) { _, which ->
                 when (which) {
                     0 -> selectBannerImage()
@@ -137,13 +136,14 @@ class UserInfoFragment : Fragment() {
                     }
                 }
             }
-        alertDialogBuilder.create().show()
+            .setNegativeButton(R.string.action_cancel, null)
+            .create()
+            .show()
     }
 
     private fun showUserImageOptions() {
         val list = requireContext().resources.getStringArray(R.array.image_settings_options)
-        val alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.setTitle("Profile Image")
+        MaterialAlertDialogBuilder(requireContext()).setTitle("Profile Image")
             .setItems(list) { _, which ->
                 when (which) {
                     0 -> pickNewPhoto()
@@ -155,7 +155,9 @@ class UserInfoFragment : Fragment() {
                     }
                 }
             }
-        alertDialogBuilder.create().show()
+            .setNegativeButton(R.string.action_cancel, null)
+            .create()
+            .show()
     }
 
     private fun loadProfile() {

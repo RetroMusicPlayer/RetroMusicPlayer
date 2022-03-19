@@ -123,21 +123,13 @@
     <string name="currently_listening_to_x_by_x">%2$s-(r)en %1$s entzuten ari zara</string>
     <string name="dark_theme_name">Nahiko iluna</string>
     <string name="delete_playlist_title">Erreprodukzio zerrenda ezabatu</string>
-    <string name="delete_playlist_x">
-        <![CDATA[<b>%1$s</b> erreprodukzio zerrenda ezabatu?]]>
-    </string>
+    <string name="delete_playlist_x"><![CDATA[<b>%1$s</b> erreprodukzio zerrenda ezabatu?]]></string>
     <string name="delete_playlists_title">Erreprodukzio zerrendak ezabatu</string>
     <string name="delete_song_title">Delete song</string>
-    <string name="delete_song_x">
-        <![CDATA[<b>%1$s</b> abestia ezabatu?]]>
-    </string>
+    <string name="delete_song_x"><![CDATA[<b>%1$s</b> abestia ezabatu?]]></string>
     <string name="delete_songs_title">Delete songs</string>
-    <string name="delete_x_playlists">
-        <![CDATA[<b>%1$d</b> erreprodukzio zerrenda ezabatu?]]>
-    </string>
-    <string name="delete_x_songs">
-        <![CDATA[<b>%1$d</b> abesti ezabatu?]]>
-    </string>
+    <string name="delete_x_playlists"><![CDATA[<b>%1$d</b> erreprodukzio zerrenda ezabatu?]]></string>
+    <string name="delete_x_songs"><![CDATA[<b>%1$d</b> abesti ezabatu?]]></string>
     <string name="deleted_x_songs">%1$d abesti ezabatu dira</string>
     <string name="depth">Sakonera</string>
     <string name="description">Azalpena</string>
@@ -145,9 +137,7 @@
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
     <string name="dialog_title_set_ringtone">Set ringtone</string>
     <string name="do_you_want_to_clear_the_blacklist">Zerrenda beltza garbitu nahi duzu?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist">
-        <![CDATA[<b>%1$s</b> zerrenda beltzetik ezabatu nahi duzu?]]>
-    </string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[<b>%1$s</b> zerrenda beltzetik ezabatu nahi duzu?]]></string>
     <string name="donate">Lagundu diruz</string>
     <string name="donate_summary">Nire lanagatik ordaindua izan behar dudala pentsatzen baduzu, diru apur bat utzi dezakezu hemen</string>
     <string name="donation_header">Erosidazu:</string>
@@ -232,9 +222,7 @@
     <string name="no_songs">Abestirik ez</string>
     <string name="normal">Normala</string>
     <string name="normal_lyrics">Letra normalak</string>
-    <string name="not_listed_in_media_store">
-        <![CDATA[<b>%s</b> ez dator dendan zerrendatua]]>
-    </string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> ez dator dendan zerrendatua]]></string>
     <string name="nothing_to_scan">Eskaneatzekorik ez</string>
     <string name="nothing_to_see">Nothing to see</string>
     <string name="notification">Jakinarazpena</string>
@@ -350,13 +338,9 @@
     <string name="remove_cover">Azala kendu</string>
     <string name="remove_from_blacklist">Zerrenda beltzetik kendu</string>
     <string name="remove_song_from_playlist_title">Abestia erreprodukzio zerrendatik kendu</string>
-    <string name="remove_song_x_from_playlist">
-        <![CDATA[<b>%1$s</b> abestia erreprodukzio zerrendatik kendu?]]>
-    </string>
+    <string name="remove_song_x_from_playlist"><![CDATA[<b>%1$s</b> abestia erreprodukzio zerrendatik kendu?]]></string>
     <string name="remove_songs_from_playlist_title">Abestiak erreprodukzio zerrendatik kendu</string>
-    <string name="remove_x_songs_from_playlist">
-        <![CDATA[<b>%1$d</b> abesti erreprodukzio zerrendatik kendu?]]>
-    </string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[<b>%1$d</b> abesti erreprodukzio zerrendatik kendu?]]></string>
     <string name="rename_playlist_title">Erreprodukzio zerrenda berrizendatu</string>
     <string name="report_an_issue">Arazo baten berri eman</string>
     <string name="report_bug">Eman akatsen berri</string>
