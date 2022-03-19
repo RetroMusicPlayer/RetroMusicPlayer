@@ -54,6 +54,7 @@
     <string name="add_action">Adaugă</string>
     <string name="add_playlist_title">"Adaugă la playlist"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"Adăugat 1 titlu la coada de redare."</string>
     <string name="added_x_titles_to_playing_queue">Adăugate %1$d titluri la coada de redare</string>
     <string name="album">Album</string>
@@ -117,12 +118,14 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Modificări</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">Classic</string>
     <string name="clear_action">Șterge</string>
     <string name="clear_blacklist">Șterge \"Lista neagră\"</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Clear queue</string>
     <string name="color">Culoare</string>
     <string name="colors">Culori</string>
@@ -138,6 +141,7 @@
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Acum ascultați %1$s de %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Suriu</string>
     <string name="delete_playlist_title">Șterge playlist</string>
     <string name="delete_playlist_x"><![CDATA[Doriți să ștergeți playlist-ul <b>%1$s</b>?]]></string>
@@ -196,7 +200,8 @@
     <string name="help_summary">Need more help?</string>
     <string name="hinge">Hinge</string>
     <string name="history">Istoric</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Acasă</string>
     <string name="horizontal_flip">Horizontal flip</string>
     <string name="image">Image</string>
@@ -211,9 +216,9 @@
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Numele fișierului</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Dosarul fișierului</string>
     <string name="label_file_size">Mărime</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">More from %s</string>
     <string name="label_sampling_rate">Rata de eșantionare</string>
     <string name="label_track_length">Lungime</string>
@@ -282,11 +287,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
     <string name="plain">Simplu</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Notificarea de redare oferă acțiuni de redare / pauză etc.</string>
     <string name="playing_notification_name">Notificarea de redare</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Playlist-ul este gol</string>
     <string name="playlist_name_empty">Numele playlist-ului</string>
     <string name="playlists">Playlist-uri</string>
@@ -333,6 +340,7 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Comenzi pe ecranul de blocare pentru Retro music.</string>
     <string name="pref_summary_open_source_licences">Detalii privind licența pentru software open source</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -343,7 +351,6 @@
     <string name="pref_summary_toggle_volume">Dacă aveți spațiu pe ecranul de redare, activați controalele de volum</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Afișați coperta albumului</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -378,6 +385,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Aspect</string>
     <string name="pref_title_open_source_licences">Licențe open source</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -390,7 +398,6 @@
     <string name="pref_title_toggle_volume">Controale volum</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
@@ -403,6 +410,7 @@
     <string name="remove_action">Eliminare</string>
     <string name="remove_cover">Eliminare copertă</string>
     <string name="remove_from_blacklist">Eliminare din lista neagră</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Eliminați melodia din lista de redare</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Eliminaţi melodia <b>%1$s</b> din lista de redare?]]></string>
     <string name="remove_songs_from_playlist_title">Eliminare melodii din lista de redare</string>
@@ -528,10 +536,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
