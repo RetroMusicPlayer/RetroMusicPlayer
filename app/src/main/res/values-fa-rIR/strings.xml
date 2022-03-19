@@ -54,6 +54,7 @@
     <string name="add_action">ﺍﻓﺰﻭﺩﻥ</string>
     <string name="add_playlist_title">"افزودن به لیست پخش"</string>
     <string name="add_time_framed_lryics">اضافه کردن متون دارای زمان</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"یک‌ مورد به لیست پخش اهنگ ها اضافه شد."</string>
     <string name="added_x_titles_to_playing_queue">مورد خاص به لیست پخش اهنگ اضافه شد.</string>
     <string name="album">آلبوم</string>
@@ -115,12 +116,14 @@
     <string name="cascading">کاسکاد</string>
     <string name="changelog">لیست تغییرات</string>
     <string name="changelog_summary">ببینید چه چیزی جدید و نو است</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">انتخاب کنید چه چیزی را بازیابی کنید</string>
     <string name="circle">دایره</string>
     <string name="circular">دایره ای</string>
     <string name="classic">کلاسیک</string>
     <string name="clear_action">پاک‌کردن</string>
     <string name="clear_blacklist">پاک کردن لیست سیاه</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">پاکسازی صف</string>
     <string name="color">رنگ</string>
     <string name="colors">رنگ ها</string>
@@ -136,6 +139,7 @@
     <string name="credit_title">اعضا و دست اندرکاران </string>
     <string name="currently_listening_to_x_by_x">در حال حاضر شما به s$1% از s$2% گوش می‌دهید.</string>
     <string name="custom_artist_images">تصاویر هنرمند سفارشی</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">تقریبا مشکی</string>
     <string name="delete_playlist_title">حذف کردن پلی لیست</string>
     <string name="delete_playlist_x"><![CDATA[حذف پلی لیست <b>%1$s</b>?<b>?]]></string>
@@ -194,7 +198,8 @@
     <string name="help_summary">به کمک بیشتری نیاز دارید؟</string>
     <string name="hinge">لولا</string>
     <string name="history">تاریخچه پخش اهنگ</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">صفحه اصلی</string>
     <string name="horizontal_flip">پرش از لبه خارجی به صورت افقی</string>
     <string name="image">تصویر</string>
@@ -209,9 +214,9 @@
     <string name="label_bit_rate">بیت ریت</string>
     <string name="label_file_format">فرمت</string>
     <string name="label_file_name">نام فایل</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">مسیر فایل</string>
     <string name="label_file_size">سایز</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">بیشتر از s%</string>
     <string name="label_sampling_rate">نرخ سمپل</string>
     <string name="label_track_length">مدت</string>
@@ -280,11 +285,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">صفحه پینترست رترو را دنبال کنید</string>
     <string name="plain">ساده</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">گام صدا</string>
     <string name="playback_settings">تنظیمات پخش</string>
     <string name="playback_speed">سرعت پخش</string>
     <string name="playing_notification_description">اعلان موزیک به شما امکان قطع کردن موزیک، پخش موزیک و... می‌دهد.</string>
     <string name="playing_notification_name">اعلان در حال پخش</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">صفحه پخش خالی است</string>
     <string name="playlist_name_empty">نام لیست پخش آهنگ</string>
     <string name="playlists">لیست پخش آهنگ ها</string>
@@ -331,6 +338,7 @@
     <string name="pref_summary_library_categories">Library نمایش داده شود یا خیر.</string>
     <string name="pref_summary_lock_screen">از کنترل های رترو موزیک برای صفحه قفل استفاده شود</string>
     <string name="pref_summary_open_source_licences">جزئیات مجوز برای نرم افزار منبع باز</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">هدایت شود به اخرین tab استفاده شده در آغاز</string>
     <string name="pref_summary_show_lyrics">نمایش متن آهنگ همگام‌سازی شده روی جلد آلبوم</string>
     <string name="pref_summary_suggestions">نمایش ترکیب موسیقی جدید در صفحه اصلی</string>
@@ -341,7 +349,6 @@
     <string name="pref_summary_toggle_volume">اگر فضای کافی موجود بود، نوار صدا را نشان دهید در صفحه پخش موزیک</string>
     <string name="pref_summary_wallpaper_accent">رنگ تاکیدی را از کاغذ دیواری استخراج کنید</string>
     <string name="pref_summary_whitelist">فقط از پوشه ی موزیک، موزیک ها نمایش داده شود</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">نمایش جلد آلبوم</string>
     <string name="pref_title_album_artists_only">هدایت توسط آلبوم هنرمند</string>
     <string name="pref_title_album_cover_style">تم کاور آلبوم</string>
@@ -376,6 +383,7 @@
     <string name="pref_title_lyrics_type">نوع متن ترانه</string>
     <string name="pref_title_now_playing_screen_appearance">تمی که اکنون در حال پخش است</string>
     <string name="pref_title_open_source_licences">مجوزهای منبع باز</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">به خاطر سپردن آخرین زبانه</string>
     <string name="pref_title_show_lyrics">نمایش متن ترانه</string>
     <string name="pref_title_suggestions">نمایش پیشنهادات</string>
@@ -388,7 +396,6 @@
     <string name="pref_title_toggle_volume">کنترل صدا</string>
     <string name="pref_title_wallpaper_accent">رنگ تاکیدی کاغذ دیواری</string>
     <string name="pref_title_whitelist">لیست سفید موسیقی</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">حرفه‌ای</string>
     <string name="pro_summary">تم سیاه، تم های در حال پخش، جلوه چرخ فلک و موارد دیگر..</string>
     <string name="profile">نمایه</string>
@@ -401,6 +408,7 @@
     <string name="remove_action">حذف</string>
     <string name="remove_cover">حذف پوشش</string>
     <string name="remove_from_blacklist">حذف از لیست سیاه</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">حذف آهنگ از لیست پخش</string>
     <string name="remove_song_x_from_playlist"><![CDATA[آهنگ <b>%1$s</b> از لیست پخش حذف شود?]]></string>
     <string name="remove_songs_from_playlist_title">حذف آهنگ‌ها از لیست پخش</string>
@@ -526,10 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">شما باید حداقل یک دسته را انتخاب کنید.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">شما به وب سایت ردیاب مشکل هدایت می شوید.</string>
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
