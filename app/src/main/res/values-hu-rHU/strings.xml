@@ -54,6 +54,7 @@
     <string name="add_action">Hozzáad</string>
     <string name="add_playlist_title">"Hozzáadás lejátszási listához"</string>
     <string name="add_time_framed_lryics">Időzített dalszöveg hozzáadása</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"1 cím lett hozzáadva a lejátszási sorhoz."</string>
     <string name="added_x_titles_to_playing_queue">%1$d cím hozzáadva a lejátszási sorhoz.</string>
     <string name="album">Album</string>
@@ -115,12 +116,14 @@
     <string name="cascading">Növelés</string>
     <string name="changelog">Változtatási napló</string>
     <string name="changelog_summary">Nézd meg az újdonságokat</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Kör</string>
     <string name="circular">Kör alakú</string>
     <string name="classic">Klasszikus</string>
     <string name="clear_action">Kiürítés</string>
     <string name="clear_blacklist">Feketelista kiürítése</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Lejátszási sor törlése</string>
     <string name="color">Szín</string>
     <string name="colors">Színek</string>
@@ -136,6 +139,7 @@
     <string name="credit_title">Tagok és támogatók</string>
     <string name="currently_listening_to_x_by_x">Jelenleg %1$s hallgatása %2$s által.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Kissé sötét</string>
     <string name="delete_playlist_title">Lejátszási lista törlése</string>
     <string name="delete_playlist_x"><![CDATA[Törli a <b>%1$s</b> lejátszási listát?]]></string>
@@ -194,7 +198,8 @@
     <string name="help_summary">További segítségre van szüksége?</string>
     <string name="hinge">Zsanér</string>
     <string name="history">Előzmény</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Kezdőlap</string>
     <string name="horizontal_flip">Vízszintes forgatás</string>
     <string name="image">Kép</string>
@@ -209,9 +214,9 @@
     <string name="label_bit_rate">Bitráta</string>
     <string name="label_file_format">Formátum</string>
     <string name="label_file_name">Fájl név</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Fájl elérési út</string>
     <string name="label_file_size">Méret</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Több a következőtől: %s</string>
     <string name="label_sampling_rate">Mintavételi arány</string>
     <string name="label_track_length">Hossz</string>
@@ -280,11 +285,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Kövesse a Pinterest oldalt a Retro Music design ötletekért</string>
     <string name="plain">Letisztult</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">A lejátszási értesítés lejátszási/szüneteltetési akciógombokat tartalmazzon.</string>
     <string name="playing_notification_name">Lejátszási értesítés</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">A lejátszási lista üres</string>
     <string name="playlist_name_empty">Lejátszási lista neve</string>
     <string name="playlists">Lejátszási listák</string>
@@ -331,6 +338,7 @@
     <string name="pref_summary_library_categories">A könyvtári kategóriák sorrendjének és láthatóságának beállítása.</string>
     <string name="pref_summary_lock_screen">Retro Music egyéni vezérlőinek a használata zárolási képernyőn.</string>
     <string name="pref_summary_open_source_licences">A nyílt forráskódú szoftverek licence részletei</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Lépjen az utoljára használt fülre az alkalmazás indításakor</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -341,7 +349,6 @@
     <string name="pref_summary_toggle_volume">Ha van elég szabad hely, mutassa a hangerőszabályzókat a most játszott képernyőn</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Csak a /Music mappában lévő zenék mutatása</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Az album borítójának megjelenítése</string>
     <string name="pref_title_album_artists_only">Album előadók szerinti navigálás</string>
     <string name="pref_title_album_cover_style">Album borító téma</string>
@@ -376,6 +383,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Most játszott felület megjelenése</string>
     <string name="pref_title_open_source_licences">Nyílt forráskódú licencek</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -388,7 +396,6 @@
     <string name="pref_title_toggle_volume">Hangerőszabályzók</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Sötét téma, Most játszott felület témái, Carousel hatás és még sok más ..</string>
     <string name="profile">Profil</string>
@@ -401,6 +408,7 @@
     <string name="remove_action">Eltávolítás</string>
     <string name="remove_cover">Borító eltávolítása</string>
     <string name="remove_from_blacklist">Eltávolítás a feketelistáról</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Távolítsa el a dalt a lejátszási listáról</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Eltávolítja a <b>%1$s</b> dalt a lejátszási listából?]]></string>
     <string name="remove_songs_from_playlist_title">A dalok eltávolítása a lejátszási listáról</string>
@@ -526,10 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">Legalább egy kategóriát kell kiválasztania</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Továbbítani fogjuk a problémakezelő weboldalra.</string>
     <string name="your_account_data_is_only_used_for_authentication">Fiókja adatait kizárólag a hitelesítéshez fogjuk használni.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
