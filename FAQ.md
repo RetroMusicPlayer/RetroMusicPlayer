@@ -11,7 +11,7 @@ If you've already installed the app, remove all other accounts except the one fr
 ___
 
 ## Q: **How do I use offline synced lyrics?**
-There are four methods for adding offline synced lyrics in Retro Music.
+There are three methods for adding offline synced lyrics in Retro Music.
 
 ### ***Method 1:-***
 #### STEP 1: 
