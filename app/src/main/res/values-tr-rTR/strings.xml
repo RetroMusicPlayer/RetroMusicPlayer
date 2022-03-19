@@ -347,7 +347,7 @@
     <string name="pref_summary_toggle_headset">Kulaklık bağlandıktan hemen sonra çalmaya başla</string>
     <string name="pref_summary_toggle_shuffle">Yeni bir şarkı listesi çalınırken karıştırma modu kapanacak</string>
     <string name="pref_summary_toggle_volume">Eğer yeterli alan varsa ses kontrollerini şimdi oynatılıyor ekranında göster</string>
-    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
+    <string name="pref_summary_wallpaper_accent">Vurgu rengini duvar kağıdından al</string>
     <string name="pref_summary_whitelist">Sadece /Music dosyasından müzik göster</string>
     <string name="pref_title_album_art_on_lockscreen">Albüm kapağını göster</string>
     <string name="pref_title_album_artists_only">Albüm Sanatçısına göre belirle</string>
@@ -408,7 +408,7 @@
     <string name="remove_action">Kaldır</string>
     <string name="remove_cover">Kapağı kaldır</string>
     <string name="remove_from_blacklist">Kara listeden kaldır</string>
-    <string name="remove_image">Remove Image</string>
+    <string name="remove_image">Resmi Kaldır</string>
     <string name="remove_song_from_playlist_title">Şarkıyı oynatma listesinden kaldır</string>
     <string name="remove_song_x_from_playlist"><![CDATA[<b>%1$s</b> adlı şarkı oynatma listesinden kaldırılsın mı?]]></string>
     <string name="remove_songs_from_playlist_title">Şarkıları oynatma listesinden kaldır</string>
