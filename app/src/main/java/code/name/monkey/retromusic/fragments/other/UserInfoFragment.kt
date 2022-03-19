@@ -50,6 +50,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.constant.ImageProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,11 +89,11 @@ class UserInfoFragment : Fragment() {
         binding.name.setText(PreferenceUtil.userName)
 
         binding.userImage.setOnClickListener {
-            pickNewPhoto()
+            showUserImageOptions()
         }
 
         binding.bannerImage.setOnClickListener {
-            selectBannerImage()
+            showBannerImageOptions()
         }
 
         binding.next.setOnClickListener {
@@ -119,6 +120,44 @@ class UserInfoFragment : Fragment() {
                 bottomMargin = it
             }
         }
+    }
+
+    private fun showBannerImageOptions() {
+        val list = requireContext().resources.getStringArray(R.array.image_settings_options)
+        MaterialAlertDialogBuilder(requireContext()).setTitle("Banner Image")
+            .setItems(list) { _, which ->
+                when (which) {
+                    0 -> selectBannerImage()
+                    1 -> {
+                        val appDir = requireContext().filesDir
+                        val file = File(appDir, USER_BANNER)
+                        file.delete()
+                        loadProfile()
+                    }
+                }
+            }
+            .setNegativeButton(R.string.action_cancel, null)
+            .create()
+            .show()
+    }
+
+    private fun showUserImageOptions() {
+        val list = requireContext().resources.getStringArray(R.array.image_settings_options)
+        MaterialAlertDialogBuilder(requireContext()).setTitle("Profile Image")
+            .setItems(list) { _, which ->
+                when (which) {
+                    0 -> pickNewPhoto()
+                    1 -> {
+                        val appDir = requireContext().filesDir
+                        val file = File(appDir, USER_PROFILE)
+                        file.delete()
+                        loadProfile()
+                    }
+                }
+            }
+            .setNegativeButton(R.string.action_cancel, null)
+            .create()
+            .show()
     }
 
     private fun loadProfile() {
