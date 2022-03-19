@@ -54,6 +54,7 @@
     <string name="add_action">添加</string>
     <string name="add_playlist_title">"加入播放列表"</string>
     <string name="add_time_framed_lryics">添加同步歌词</string>
+    <string name="added_song_count_to_playlist">已将 %d 首歌添加到 %s</string>
     <string name="added_title_to_playing_queue">"已添加 1 首歌到播放队列。"</string>
     <string name="added_x_titles_to_playing_queue">已添加 %1$d 首歌到播放队列。</string>
     <string name="album">专辑</string>
@@ -113,12 +114,14 @@
     <string name="cascading">层叠</string>
     <string name="changelog">更新日志</string>
     <string name="changelog_summary">看看新变化</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">选择要还原的内容</string>
     <string name="circle">唱盘</string>
     <string name="circular">圆形</string>
     <string name="classic">经典</string>
     <string name="clear_action">清空</string>
     <string name="clear_blacklist">清空黑名单</string>
+    <string name="clear_history">清除历史记录</string>
     <string name="clear_playing_queue">清空队列</string>
     <string name="color">颜色</string>
     <string name="colors">更多颜色</string>
@@ -134,6 +137,7 @@
     <string name="credit_title">开发团队和贡献者</string>
     <string name="currently_listening_to_x_by_x">正在收听 %2$s 的 %1$s。</string>
     <string name="custom_artist_images">自定义艺术家图像</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">分享崩溃报告</string>
     <string name="dark_theme_name">深色</string>
     <string name="delete_playlist_title">删除播放列表</string>
     <string name="delete_playlist_x"><![CDATA[确定删除播放列表 <b>%1$s</b> 吗？]]></string>
@@ -192,7 +196,8 @@
     <string name="help_summary">需要更多帮助？</string>
     <string name="hinge">旋转</string>
     <string name="history">历史记录</string>
-    <string name="clear_history">清除历史记录</string>
+    <string name="history_cleared">已清除历史记录</string>
+    <string name="history_undo_button">撤销</string>
     <string name="home">主页</string>
     <string name="horizontal_flip">水平翻转</string>
     <string name="image">图片</string>
@@ -207,9 +212,9 @@
     <string name="label_bit_rate">比特率</string>
     <string name="label_file_format">格式</string>
     <string name="label_file_name">文件名</string>
-    <string name="label_last_modified">最后修改</string>
     <string name="label_file_path">文件路径</string>
     <string name="label_file_size">文件大小</string>
+    <string name="label_last_modified">最后修改</string>
     <string name="label_more_from">来自 %s 的更多歌曲</string>
     <string name="label_sampling_rate">采样率</string>
     <string name="label_track_length">长度</string>
@@ -278,11 +283,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">在 Pintrest 页面关注 Retro Music 的设计灵感</string>
     <string name="plain">简洁</string>
+    <string name="playList_already_exits">播放列表已存在</string>
     <string name="playback_pitch">音高</string>
     <string name="playback_settings">播放设置</string>
     <string name="playback_speed">播放速度</string>
     <string name="playing_notification_description">播放通知提供播放暂停等操作。</string>
     <string name="playing_notification_name">播放通知</string>
+    <string name="playlist_created_sucessfully">%s 创建成功</string>
     <string name="playlist_is_empty">播放列表为空</string>
     <string name="playlist_name_empty">播放列表名</string>
     <string name="playlists">播放列表</string>
@@ -329,6 +336,7 @@
     <string name="pref_summary_library_categories">配置媒体库的可见性和顺序</string>
     <string name="pref_summary_lock_screen">使用 Retro Music 的自定义锁屏</string>
     <string name="pref_summary_open_source_licences">开源许可详情</string>
+    <string name="pref_summary_pause_history">启用后，新播放的歌曲不会显示在历史记录中</string>
     <string name="pref_summary_remember_tab">启动时打开上次使用的页面</string>
     <string name="pref_summary_show_lyrics">在专辑封面上显示同步歌词</string>
     <string name="pref_summary_suggestions">在主屏上显示新歌混烧</string>
@@ -339,7 +347,6 @@
     <string name="pref_summary_toggle_volume">空间充足时，在播放页显示音量控制</string>
     <string name="pref_summary_wallpaper_accent">从壁纸中提取主题色</string>
     <string name="pref_summary_whitelist">仅显示 /Music 目录的音乐</string>
-    <string name="pref_summary_pause_history">启用后，新播放的歌曲不会显示在历史记录中</string>
     <string name="pref_title_album_art_on_lockscreen">显示专辑封面</string>
     <string name="pref_title_album_artists_only">按专辑艺术家排序</string>
     <string name="pref_title_album_cover_style">专辑封面主题</string>
@@ -374,6 +381,7 @@
     <string name="pref_title_lyrics_type">歌词类型</string>
     <string name="pref_title_now_playing_screen_appearance">正在播放主题</string>
     <string name="pref_title_open_source_licences">开源许可</string>
+    <string name="pref_title_pause_history">暂停历史记录</string>
     <string name="pref_title_remember_tab">记住最后打开页面</string>
     <string name="pref_title_show_lyrics">显示歌词</string>
     <string name="pref_title_suggestions">显示建议</string>
@@ -386,7 +394,6 @@
     <string name="pref_title_toggle_volume">音量控件</string>
     <string name="pref_title_wallpaper_accent">壁纸主题色</string>
     <string name="pref_title_whitelist">白名单音乐</string>
-    <string name="pref_title_pause_history">暂停历史记录</string>
     <string name="pro">高级版</string>
     <string name="pro_summary">黑色主题，正在播放主题，轮播效果和更多...</string>
     <string name="profile">个人信息</string>
@@ -399,6 +406,7 @@
     <string name="remove_action">移除</string>
     <string name="remove_cover">移除封面</string>
     <string name="remove_from_blacklist">从黑名单中移除</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">从播放列表中删除歌曲</string>
     <string name="remove_song_x_from_playlist"><![CDATA[是否从播放列表中删除歌曲 <b>%1$s</b>？]]></string>
     <string name="remove_songs_from_playlist_title">从播放列表中删除歌曲</string>
@@ -524,10 +532,4 @@
     <string name="you_have_to_select_at_least_one_category">请至少选择一个分类。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">分享崩溃报告</string>
-    <string name="playlist_created_sucessfully">%s 创建成功</string>
-    <string name="playList_already_exits">播放列表已存在</string>
-    <string name="added_song_count_to_playlist">已将 %d 首歌添加到 %s</string>
-    <string name="history_cleared">已清除历史记录</string>
-    <string name="history_undo_button">撤销</string>
 </resources>
