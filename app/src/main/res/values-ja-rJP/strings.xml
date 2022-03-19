@@ -54,6 +54,7 @@
     <string name="add_action">追加</string>
     <string name="add_playlist_title">"プレイリストに追加"</string>
     <string name="add_time_framed_lryics">時間指定の歌詞を追加</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"1曲が再生キューに追加されました"</string>
     <string name="added_x_titles_to_playing_queue">%1$d 曲が再生キューに追加されました</string>
     <string name="album">アルバム</string>
@@ -114,12 +115,14 @@
     <string name="cascading">重ねて表示</string>
     <string name="changelog">パッチノート</string>
     <string name="changelog_summary">新機能をチェック</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">復元するアイテムを選択</string>
     <string name="circle">サークル</string>
     <string name="circular">円</string>
     <string name="classic">クラシック</string>
     <string name="clear_action">削除</string>
     <string name="clear_blacklist">ブラックリストを削除</string>
+    <string name="clear_history">履歴を消去</string>
     <string name="clear_playing_queue">キューを削除</string>
     <string name="color">カラフル</string>
     <string name="colors">色</string>
@@ -135,6 +138,7 @@
     <string name="credit_title">メンバーと貢献者</string>
     <string name="currently_listening_to_x_by_x">現在、 %1$s によって %2$s で聴いています。</string>
     <string name="custom_artist_images">カスタムアーティスト画像</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">ダーク</string>
     <string name="delete_playlist_title">プレイリストを削除</string>
     <string name="delete_playlist_x"><![CDATA[プレイリスト <b>%1$s</b> を削除しますか?]]></string>
@@ -193,7 +197,8 @@
     <string name="help_summary">さらにヘルプが必要ですか？</string>
     <string name="hinge">ヒンジ</string>
     <string name="history">履歴</string>
-    <string name="clear_history">履歴を消去</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">ホーム</string>
     <string name="horizontal_flip">水平方向に反転</string>
     <string name="image">画像</string>
@@ -208,9 +213,9 @@
     <string name="label_bit_rate">ビットレート</string>
     <string name="label_file_format">フォーマット</string>
     <string name="label_file_name">ファイルの名前</string>
-    <string name="label_last_modified">更新日時</string>
     <string name="label_file_path">ファイルパス</string>
     <string name="label_file_size">サイズ</string>
+    <string name="label_last_modified">更新日時</string>
     <string name="label_more_from">%s の詳細</string>
     <string name="label_sampling_rate">サンプリングレート</string>
     <string name="label_track_length">長さ</string>
@@ -279,11 +284,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">PintrestでRetro Musicのデザインのインスピレーションを感じましょう！</string>
     <string name="plain">プレーン</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">再生中の通知は再生/停止の操作が利用できます</string>
     <string name="playing_notification_name">再生中の通知</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">プレイリストが空です</string>
     <string name="playlist_name_empty">プレイリストの名前</string>
     <string name="playlists">プレイリスト</string>
@@ -330,6 +337,7 @@
     <string name="pref_summary_library_categories">ライブラリに表示される項目と、順番を変更する</string>
     <string name="pref_summary_lock_screen">Retro Musicのカスタムされたロック画面を使用する</string>
     <string name="pref_summary_open_source_licences">オープンソースライセンスの詳細</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -340,7 +348,6 @@
     <string name="pref_summary_toggle_volume">再生画面に十分なスペースがある場合に音量コントロールを追加する</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">アルバムジャケットを表示</string>
     <string name="pref_title_album_artists_only">アルバムのアーティストを表示</string>
     <string name="pref_title_album_cover_style">アルバムカバーのテーマ</string>
@@ -375,6 +382,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">再生中のテーマ</string>
     <string name="pref_title_open_source_licences">オープンソースライセンス</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -387,7 +395,6 @@
     <string name="pref_title_toggle_volume">ボリュームコントロール</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">プロフィール</string>
@@ -400,6 +407,7 @@
     <string name="remove_action">削除</string>
     <string name="remove_cover">ジャケットを削除</string>
     <string name="remove_from_blacklist">ブラックリストから削除</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">プレイリストから曲を削除</string>
     <string name="remove_song_x_from_playlist"><![CDATA[ <b>%1$s</b> をプレイリストから削除しますか？]]></string>
     <string name="remove_songs_from_playlist_title">プレイリストから曲を削除する</string>
@@ -525,10 +533,4 @@
     <string name="you_have_to_select_at_least_one_category">少なくとも 1 つのカテゴリを選択する必要があります。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
