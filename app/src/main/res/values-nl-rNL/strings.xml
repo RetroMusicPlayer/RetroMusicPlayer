@@ -54,6 +54,7 @@
     <string name="add_action">Toevoegen</string>
     <string name="add_playlist_title">"Toevogen aan afspeellijst"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"1 titel aan afspeel wachtrij toegevoegd."</string>
     <string name="added_x_titles_to_playing_queue">%1$d titels toegevoegd aan afspeel wachtrij</string>
     <string name="album">Album</string>
@@ -115,12 +116,14 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Logboek</string>
     <string name="changelog_summary">Bekijk wat er nieuw is</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Cirkel</string>
     <string name="circular">Rond</string>
     <string name="classic">Klassiek</string>
     <string name="clear_action">Legen</string>
     <string name="clear_blacklist">Leeg zwarte lijst</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Maak wachtrij leeg</string>
     <string name="color">Kleur</string>
     <string name="colors">Kleuren</string>
@@ -136,6 +139,7 @@
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Nu luisterend naar %1$s van %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Soort van donker</string>
     <string name="delete_playlist_title">Afspeellijst verwijderen</string>
     <string name="delete_playlist_x"><![CDATA[Afspellijst <b>%1$s</b> verwijderen?]]></string>
@@ -194,7 +198,8 @@
     <string name="help_summary">Meer hulp nodig?</string>
     <string name="hinge">Hinge</string>
     <string name="history">Geschiedenis</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Start</string>
     <string name="horizontal_flip">Flip horizontaal</string>
     <string name="image">Afbeelding</string>
@@ -209,9 +214,9 @@
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Formaat</string>
     <string name="label_file_name">Bestandsnaam</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Bestandslocatie</string>
     <string name="label_file_size">Grootte</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Meer van %s</string>
     <string name="label_sampling_rate">Samplingfrequentie</string>
     <string name="label_track_length">Duur</string>
@@ -280,11 +285,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
     <string name="plain">Vlak</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">De afspeel notificatie bied acties om af te spelen/pauzeren etc.</string>
     <string name="playing_notification_name">Afspeel notificatie</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Afspeellijst is leeg</string>
     <string name="playlist_name_empty">Naam afspeellijst</string>
     <string name="playlists">Afspeellijsten</string>
@@ -331,6 +338,7 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Zet besturing knoppen aan op vergrendelscherm</string>
     <string name="pref_summary_open_source_licences">Licentie details voor open source software</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -341,7 +349,6 @@
     <string name="pref_summary_toggle_volume">Als er ruimte is in het nu afspelen scherm, zet volume knoppen aan</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Laat album cover zien</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -376,6 +383,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Uiterlijk</string>
     <string name="pref_title_open_source_licences">Open source licenties</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -388,7 +396,6 @@
     <string name="pref_title_toggle_volume">Volume knoppen</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Donker thema, \"speelt nu\" thema\'s, Carrousel-effect en nog veel meer..</string>
     <string name="profile">Profiel</string>
@@ -401,6 +408,7 @@
     <string name="remove_action">Verwijderen</string>
     <string name="remove_cover">Verwijder cover</string>
     <string name="remove_from_blacklist">Verwijder van zwarte lijst</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Verwijder liedje van afspeellijst</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Verwijder liedje <b>%1$s</b> van de afspeellijst?]]></string>
     <string name="remove_songs_from_playlist_title">Verwijder liedjes van afspeellijst</string>
@@ -526,10 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
