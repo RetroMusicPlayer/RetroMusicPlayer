@@ -54,6 +54,7 @@
     <string name="add_action">Tambah</string>
     <string name="add_playlist_title">"Tambah ke daftar putar"</string>
     <string name="add_time_framed_lryics">Tambah kerangka waktu pada lirik</string>
+    <string name="added_song_count_to_playlist">Menambah %d lagu ke %s</string>
     <string name="added_title_to_playing_queue">"1 lagu ditambah ke antrean."</string>
     <string name="added_x_titles_to_playing_queue">%1$d lagu telah ditambah ke antrean.</string>
     <string name="album">Album</string>
@@ -113,12 +114,14 @@
     <string name="cascading">Bergerak</string>
     <string name="changelog">Log Pembaruan</string>
     <string name="changelog_summary">Lihat Apa Yang Baru</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Pilih apa yang akan dipulihkan</string>
     <string name="circle">Bulat</string>
     <string name="circular">Melingkar</string>
     <string name="classic">Klasik</string>
     <string name="clear_action">Bersihkan</string>
     <string name="clear_blacklist">Bersihkan daftar hitam</string>
+    <string name="clear_history">Bersihkan Riwayat</string>
     <string name="clear_playing_queue">Bersihkan antrean</string>
     <string name="color">Warna</string>
     <string name="colors">Warna</string>
@@ -134,6 +137,7 @@
     <string name="credit_title">Member dan kontributor </string>
     <string name="currently_listening_to_x_by_x">Saat ini mendengarkan %1$s oleh %2$s.</string>
     <string name="custom_artist_images">Gambar Artis Kustom</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Bagikan Laporan Kerusakan</string>
     <string name="dark_theme_name">Agak Gelap</string>
     <string name="delete_playlist_title">Hapus daftar putar</string>
     <string name="delete_playlist_x"><![CDATA[Hapus daftar putar <b>%1$s</b>?]]></string>
@@ -192,7 +196,8 @@
     <string name="help_summary">Butuh bantuan lebih?</string>
     <string name="hinge">Engsel</string>
     <string name="history">Riwayat</string>
-    <string name="clear_history">Bersihkan Riwayat</string>
+    <string name="history_cleared">Riwayat dibersihkan</string>
+    <string name="history_undo_button">Batalkan pilihan</string>
     <string name="home">Beranda</string>
     <string name="horizontal_flip">Balik horisontal</string>
     <string name="image">Gambar</string>
@@ -207,9 +212,9 @@
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Nama berkas</string>
-    <string name="label_last_modified">Terakhir Diubah</string>
     <string name="label_file_path">Lokasi File</string>
     <string name="label_file_size">Ukuran</string>
+    <string name="label_last_modified">Terakhir Diubah</string>
     <string name="label_more_from">Lainnya dari %s</string>
     <string name="label_sampling_rate">Tingkat Sampling</string>
     <string name="label_track_length">Durasi</string>
@@ -278,11 +283,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Ikuti halaman Pinterest untuk inspirasi desain Retro Music</string>
     <string name="plain">Polos</string>
+    <string name="playList_already_exits">Daftar putar sudah ada</string>
     <string name="playback_pitch">Nada</string>
     <string name="playback_settings">Setelan Pemutaran</string>
     <string name="playback_speed">Kecepatan Pemutaran</string>
     <string name="playing_notification_description">Notifikasi pemutaran memberikan tindakan untuk putar/jeda dll.</string>
     <string name="playing_notification_name">Memutar notifikasi</string>
+    <string name="playlist_created_sucessfully">%s berhasil dibuat</string>
     <string name="playlist_is_empty">Daftar putar kosong</string>
     <string name="playlist_name_empty">Nama daftar putar</string>
     <string name="playlists">Daftar Putar</string>
@@ -329,6 +336,7 @@
     <string name="pref_summary_library_categories">Mengkonfigurasi visibilitas dan susunan kategori perpustakaan.</string>
     <string name="pref_summary_lock_screen">Gunakan kontrol layar kunci khusus Musik Retro</string>
     <string name="pref_summary_open_source_licences">Detail lisensi untuk perangkat lunak sumber terbuka</string>
+    <string name="pref_summary_pause_history">Saat diaktifkan, lagu yang baru diputar tidak akan muncul di riwayat</string>
     <string name="pref_summary_remember_tab">Arahkan ke tab yang terakhir digunakan saat memulai</string>
     <string name="pref_summary_show_lyrics">Tampilkan lirik yang disinkronkan di atas sampul album</string>
     <string name="pref_summary_suggestions">Tampilkan Campuran Musik Baru di layar beranda</string>
@@ -339,7 +347,6 @@
     <string name="pref_summary_toggle_volume">Jika tersedia cukup ruang, tampilkan kontrol volume di layar pemutaran</string>
     <string name="pref_summary_wallpaper_accent">Ambil warna aksen dari wallpaper</string>
     <string name="pref_summary_whitelist">Tampilkan musik hanya dari folder /Music</string>
-    <string name="pref_summary_pause_history">Saat diaktifkan, lagu yang baru diputar tidak akan muncul di riwayat</string>
     <string name="pref_title_album_art_on_lockscreen">Tampilkan sampul album</string>
     <string name="pref_title_album_artists_only">Navigasi berdasarkan Album Artis</string>
     <string name="pref_title_album_cover_style">Tema sampul album</string>
@@ -374,6 +381,7 @@
     <string name="pref_title_lyrics_type">Tipe lirik</string>
     <string name="pref_title_now_playing_screen_appearance">Tema Pemutaran</string>
     <string name="pref_title_open_source_licences">Lisensi sumber terbuka</string>
+    <string name="pref_title_pause_history">Jeda riwayat</string>
     <string name="pref_title_remember_tab">Ingat tab terakhir</string>
     <string name="pref_title_show_lyrics">Tampilkan lirik</string>
     <string name="pref_title_suggestions">Tampilkan Saran</string>
@@ -386,7 +394,6 @@
     <string name="pref_title_toggle_volume">Kontrol volume</string>
     <string name="pref_title_wallpaper_accent">Warna aksen wallpaper</string>
     <string name="pref_title_whitelist">Musik daftar putih</string>
-    <string name="pref_title_pause_history">Jeda riwayat</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema hitam, Tema yang sedang diputar, efek korsel, dan lainnya...</string>
     <string name="profile">Profil</string>
@@ -399,6 +406,7 @@
     <string name="remove_action">Hapus</string>
     <string name="remove_cover">Hapus sampul</string>
     <string name="remove_from_blacklist">Hapus dari daftar hitam</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Hapus lagu dari daftar putar</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Hapus lagu <b>%1$s</b> dari daftar putar?]]></string>
     <string name="remove_songs_from_playlist_title">Hapus lagu-lagu dari daftar putar</string>
@@ -524,10 +532,4 @@
     <string name="you_have_to_select_at_least_one_category">Anda harus memilih setidaknya satu kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan ditersukan ke situs web pelacak masalah.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Bagikan Laporan Kerusakan</string>
-    <string name="playlist_created_sucessfully">%s berhasil dibuat</string>
-    <string name="playList_already_exits">Daftar putar sudah ada</string>
-    <string name="added_song_count_to_playlist">Menambah %d lagu ke %s</string>
-    <string name="history_cleared">Riwayat dibersihkan</string>
-    <string name="history_undo_button">Batalkan pilihan</string>
 </resources>
