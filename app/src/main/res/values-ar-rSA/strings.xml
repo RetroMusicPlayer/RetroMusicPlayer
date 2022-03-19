@@ -54,6 +54,7 @@
     <string name="add_action">إضافة</string>
     <string name="add_playlist_title">"إضافة الى قائمة التشغيل"</string>
     <string name="add_time_framed_lryics">أضف وقت كلمات الأغاني</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"إضافة ١ من العناوين الى قائمة التشغيل الحالية"</string>
     <string name="added_x_titles_to_playing_queue">إضافة %1$d من العناوين الى قائمة التشغيل الحالية</string>
     <string name="album">البوم</string>
@@ -125,12 +126,14 @@
     <string name="cascading">المتتالية</string>
     <string name="changelog">سجل التغيرات</string>
     <string name="changelog_summary">تحقق من الجديد</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">دائرية</string>
     <string name="circular">دائري</string>
     <string name="classic">كلاسيكي</string>
     <string name="clear_action">إزالة</string>
     <string name="clear_blacklist">إزالة القائمة السوداء</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">مسح التسلسل</string>
     <string name="color">لون</string>
     <string name="colors">الوان</string>
@@ -146,6 +149,7 @@
     <string name="credit_title">الافراد والمساهمين</string>
     <string name="currently_listening_to_x_by_x">يستمع حالياً إلى %1$s لـ %2$s</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">أسود قليلاً</string>
     <string name="delete_playlist_title">حذف قائمة التشغيل</string>
     <string name="delete_playlist_x"><![CDATA[حذف قائمة التشغيل <b>%1$s</b>؟]]></string>
@@ -205,7 +209,8 @@
     <string name="help_summary">بحاجة للمزيد من المساعدة؟</string>
     <string name="hinge">مفصل</string>
     <string name="history">السجل</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">الشاشة الرئيسية</string>
     <string name="horizontal_flip">تدوير عمودي</string>
     <string name="image">صورة</string>
@@ -220,9 +225,9 @@
     <string name="label_bit_rate">معدل البت</string>
     <string name="label_file_format">الصيغة</string>
     <string name="label_file_name">اسم الملف</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">مسار الملف</string>
     <string name="label_file_size">الحجم</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">المزيد من %s</string>
     <string name="label_sampling_rate">معدل العينات</string>
     <string name="label_track_length">الامتداد</string>
@@ -291,11 +296,13 @@
     <string name="pinterest_page">بينتريست</string>
     <string name="pinterest_page_summary">متابعة صفحة البينتريست لمشاهدة الهامات التصميم</string>
     <string name="plain">عادي</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">اشعارات التشغيل توفر إجراءات للتشغيل / الإيقاف المؤقت إلخ.</string>
     <string name="playing_notification_name">تنبيهات التشغيل</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">قائمة التشغيل فارغة</string>
     <string name="playlist_name_empty">اسم قائمة التشغيل</string>
     <string name="playlists">قوائم التشغيل</string>
@@ -342,6 +349,7 @@
     <string name="pref_summary_library_categories">تكوين وعرض وترتيب فئات المكتبة.</string>
     <string name="pref_summary_lock_screen">استخدم شاشة القفل المخصصة من ريترو ميوزك لتحكم بالتشغيل</string>
     <string name="pref_summary_open_source_licences">الرخصة والتفاصيل للبرمجيات مفتوحة المصدر</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">الانتقال إلى آخر علامة تبويب مستخدمة عند البدء</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -352,7 +360,6 @@
     <string name="pref_summary_toggle_volume">في حال توفر مساحة كافية قم بعرض شريط التحكم بالصوت في شاشة التشغيل الآن</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">عرض غطاء الالبوم</string>
     <string name="pref_title_album_artists_only">التنقل بواسطة ألبوم الفنان</string>
     <string name="pref_title_album_cover_style">ثيم غطاء الالبوم</string>
@@ -387,6 +394,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">ثيم التشغيل الان</string>
     <string name="pref_title_open_source_licences">التراخيص مفتوحة المصدر</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -399,7 +407,6 @@
     <string name="pref_title_toggle_volume">التحكم بالصوت</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">الكامل</string>
     <string name="pro_summary">تشغيل الآن السمات ، وتأثير التكدس ، وموضوع اللون وأكثر من ذلك ..</string>
     <string name="profile">الملف الشخصي</string>
@@ -412,6 +419,7 @@
     <string name="remove_action">حذف</string>
     <string name="remove_cover">حذف الغطاء</string>
     <string name="remove_from_blacklist">حذف من القائمة السوداء</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">حذف الأغنية من قائمة التشغيل</string>
     <string name="remove_song_x_from_playlist"><![CDATA[حذف الاغنية <b>%1$s</b> من قائمة التشغيل ?]]></string>
     <string name="remove_songs_from_playlist_title">حذف الاغاني من قائمة التشغيل</string>
@@ -537,10 +545,4 @@
     <string name="you_have_to_select_at_least_one_category">عليك اختيار فئة واحدة على الأقل.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">سيتم تحويلك الى صفحة سجل الاخطاء</string>
     <string name="your_account_data_is_only_used_for_authentication">بيانات حسابك تستخدم لتوثيق فقط.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
