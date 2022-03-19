@@ -17,24 +17,19 @@ package code.name.monkey.retromusic.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.EXTRA_PLAYLISTS
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.db.toSongsEntity
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.fragments.ReloadType.Playlists
 import code.name.monkey.retromusic.model.Song
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AddToPlaylistDialog : DialogFragment() {
@@ -78,21 +73,9 @@ class AddToPlaylistDialog : DialogFragment() {
                 if (which == 0) {
                     showCreateDialog(songs)
                 } else {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val songEntities = songs.toSongsEntity(playlistEntities[which - 1])
-                        if (songEntities.isNotEmpty()) {
-                            libraryViewModel.insertSongs(songEntities)
-                            libraryViewModel.forceReload(Playlists)
-
-                            withContext(Dispatchers.Main) {
-                            Toast.makeText(
-                                requireContext(), getString(R.string.added_song_count_to_playlist,
-                                songEntities.size,
-                                playlistEntities[which - 1].playlistName
-                            ), Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
+                    val playlistName = playlistEntities[which - 1].playlistName
+                    val songEntities = songs.toSongsEntity(playlistEntities[which - 1])
+                    libraryViewModel.addToPlaylist(playlistName, songEntities.toSongs())
                 }
                 dialog.dismiss()
             }
