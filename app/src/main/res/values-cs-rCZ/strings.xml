@@ -54,6 +54,7 @@
     <string name="add_action">Přidat</string>
     <string name="add_playlist_title">"Přidat do seznamu skladeb"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"Přidán 1 titul do fronty přehrávání."</string>
     <string name="added_x_titles_to_playing_queue">Přidány %1$d tituly do fronty přehrávání.</string>
     <string name="album">Album</string>
@@ -119,12 +120,14 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Přehled změn</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Kruh</string>
     <string name="circular">Kruhový</string>
     <string name="classic">Klasický</string>
     <string name="clear_action">Vyčistit</string>
     <string name="clear_blacklist">Vyčistit černou listinu</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Vymazat frontu</string>
     <string name="color">Barva</string>
     <string name="colors">Barvy</string>
@@ -140,6 +143,7 @@
     <string name="credit_title">Členové a přispěvatelé </string>
     <string name="currently_listening_to_x_by_x">Aktuálně posloucháš %1$s od %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Tmavá</string>
     <string name="delete_playlist_title">Smazat seznam skladeb</string>
     <string name="delete_playlist_x"><![CDATA[Smazat seznam skladeb <b>%1$s</b>?]]></string>
@@ -198,7 +202,8 @@
     <string name="help_summary">Potřebujete další pomoc?</string>
     <string name="hinge">Hinge</string>
     <string name="history">Historie</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Domov</string>
     <string name="horizontal_flip">Horizontální otočení</string>
     <string name="image">Obrázek</string>
@@ -213,9 +218,9 @@
     <string name="label_bit_rate">Datový tok</string>
     <string name="label_file_format">Formát</string>
     <string name="label_file_name">Název souboru</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Umístění souboru</string>
     <string name="label_file_size">Velikost</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Více od %s</string>
     <string name="label_sampling_rate">Vzorkovací frekvence</string>
     <string name="label_track_length">Délka</string>
@@ -284,11 +289,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Sledujte stránku Pinterest pro inspiraci designu Retro Music</string>
     <string name="plain">Klasické</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Oznámení o přehrávání poskytuje akce pro přehrávání/pauzu atd.</string>
     <string name="playing_notification_name">Oznámení o přehrávání</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Seznam skladeb je prázdný</string>
     <string name="playlist_name_empty">Název playlistu</string>
     <string name="playlists">Seznamy skladeb</string>
@@ -335,6 +342,7 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -345,7 +353,6 @@
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Zobrazit obal alba</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Motiv obalu alba</string>
@@ -380,6 +387,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Vzhled</string>
     <string name="pref_title_open_source_licences">Licence Open source</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -392,7 +400,6 @@
     <string name="pref_title_toggle_volume">Ovládání hlasitosti</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Černý motiv, motivy stránky přehrávání, kolotočový efekt a další..</string>
     <string name="profile">Profil</string>
@@ -405,6 +412,7 @@
     <string name="remove_action">Odstranit</string>
     <string name="remove_cover">Odstranit obal</string>
     <string name="remove_from_blacklist">Odstranit z černé listiny</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Smazat skladbu ze seznamu skladeb</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Odstranit skladbu <b>%1$s</b> ze seznamu skladeb?]]></string>
     <string name="remove_songs_from_playlist_title">Smazat skladby ze seznamu skladeb</string>
@@ -530,10 +538,4 @@
     <string name="you_have_to_select_at_least_one_category">Musíte zvolit alespoň jednu kategorii.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Budete přesměrováni na webovou stránku pro zadání problému.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vaše údaje k účtu jsou použity pouze k ověření.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
