@@ -54,6 +54,7 @@
     <string name="add_action">Ajouter</string>
     <string name="add_playlist_title">"Ajouter à la liste de lecture"</string>
     <string name="add_time_framed_lryics">Ajouter des paroles synchronisées</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"1 titre a été ajouté à la file d'attente."</string>
     <string name="added_x_titles_to_playing_queue">%1$d titres ont été ajoutés à la file d\'attente.</string>
     <string name="album">Album</string>
@@ -115,12 +116,14 @@
     <string name="cascading">En cascade</string>
     <string name="changelog">Liste des changements</string>
     <string name="changelog_summary">Découvrez les nouveautés</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choisir les éléments à restaurer</string>
     <string name="circle">Cercle</string>
     <string name="circular">Circulaire</string>
     <string name="classic">Classique</string>
     <string name="clear_action">Effacer</string>
     <string name="clear_blacklist">Effacer la liste noire</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Vider la file d\'attente</string>
     <string name="color">Couleur</string>
     <string name="colors">Couleurs</string>
@@ -136,6 +139,7 @@
     <string name="credit_title">Membres et contributeurs </string>
     <string name="currently_listening_to_x_by_x">Vous écoutez actuellement %1$s par %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Plutôt Sombre</string>
     <string name="delete_playlist_title">Supprimer la liste de lecture</string>
     <string name="delete_playlist_x"><![CDATA[Supprimer la liste <b>%1$s</b> ?]]></string>
@@ -194,7 +198,8 @@
     <string name="help_summary">Encore besoin d\'aide ?</string>
     <string name="hinge">Charnière</string>
     <string name="history">Historique</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Accueil</string>
     <string name="horizontal_flip">Balayage horizontal</string>
     <string name="image">Image</string>
@@ -209,9 +214,9 @@
     <string name="label_bit_rate">Débit audio</string>
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Nom du fichier</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Chemin du fichier</string>
     <string name="label_file_size">Taille du fichier</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Plus de %s</string>
     <string name="label_sampling_rate">Taux d’échantillonnage</string>
     <string name="label_track_length">Durée</string>
@@ -280,11 +285,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Suivez la page Pinterest pour des inspirations de design</string>
     <string name="plain">Simple</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">La notification de lecture fournit des actions pour la lecture / pause etc.</string>
     <string name="playing_notification_name">Notification de lecture</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Cette liste de lecture est vide</string>
     <string name="playlist_name_empty">Nom de la liste de lecture</string>
     <string name="playlists">Listes de lecture</string>
@@ -331,6 +338,7 @@
     <string name="pref_summary_library_categories">Configurer la visibilité et l\'ordre des catégories de la librairie.</string>
     <string name="pref_summary_lock_screen">Utiliser les contrôles personnalisés de Retro Music sur l\'écran de verrouillage</string>
     <string name="pref_summary_open_source_licences">Détails des licences pour les logiciels open source</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Afficher le dernier onglet au démarrage</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -341,7 +349,6 @@
     <string name="pref_summary_toggle_volume">Si vous avez assez de place, affiche les contrôle du volume sur l\'écran de lecture</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Afficher uniquement les morceaux du dossier /Musique</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Afficher la couverture de l\'album</string>
     <string name="pref_title_album_artists_only">Naviguer par artiste de l\'album</string>
     <string name="pref_title_album_cover_style">Thème de la couverture d\'album</string>
@@ -376,6 +383,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Thème d\'écran de lecture</string>
     <string name="pref_title_open_source_licences">Licences open source</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -388,7 +396,6 @@
     <string name="pref_title_toggle_volume">Contrôles de volume</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Maintenant les thèmes de jeu, L\'effet de carrousel, thème de couleur et plus..</string>
     <string name="profile">Profil</string>
@@ -401,6 +408,7 @@
     <string name="remove_action">Supprimer</string>
     <string name="remove_cover">Supprimer la couverture</string>
     <string name="remove_from_blacklist">Retirer de la liste noire</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Supprimer le morceau de la liste de lecture</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Retirer le morceau <b>%1$s</b> de la liste de lecture ?]]></string>
     <string name="remove_songs_from_playlist_title">Retirer le morceau de la liste de lecture</string>
@@ -526,10 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">Vous devez sélectionner au moins une catégorie.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
