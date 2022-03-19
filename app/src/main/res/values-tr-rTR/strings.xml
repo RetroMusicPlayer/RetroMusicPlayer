@@ -54,6 +54,7 @@
     <string name="add_action">Ekle</string>
     <string name="add_playlist_title">"Oynatma listesine ekle"</string>
     <string name="add_time_framed_lryics">Zaman Dilimli Sözleri Ekle</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"Kuyruğa 1 parça eklendi."</string>
     <string name="added_x_titles_to_playing_queue">%1$d şarkı kuyruğuna eklendi.</string>
     <string name="album">Albüm</string>
@@ -115,12 +116,14 @@
     <string name="cascading">Basamaklı</string>
     <string name="changelog">Değişim kayıt günlüğü</string>
     <string name="changelog_summary">Yeniliklere göz at</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Neyi geri yükleyeceğinizi seçin</string>
     <string name="circle">Çember</string>
     <string name="circular">Dairesel</string>
     <string name="classic">Klasik</string>
     <string name="clear_action">Temizle</string>
     <string name="clear_blacklist">Kara listeyi temizle</string>
+    <string name="clear_history">Geçmişi Temizle</string>
     <string name="clear_playing_queue">Kuyruğu temizle</string>
     <string name="color">Renk</string>
     <string name="colors">Renkler</string>
@@ -136,6 +139,7 @@
     <string name="credit_title">Üyeler ve katkıda bulunanlar</string>
     <string name="currently_listening_to_x_by_x">Şu anda %2$s şarkıcısından %1$s dinleniyor.</string>
     <string name="custom_artist_images">Özel Sanatçı Resimleri</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Çökme raporunu paylaş</string>
     <string name="dark_theme_name">Koyu</string>
     <string name="delete_playlist_title">Çalma listesini sil</string>
     <string name="delete_playlist_x"><![CDATA[Oynatma listesi <b>%1$s</b> silinsin mi?]]></string>
@@ -194,7 +198,8 @@
     <string name="help_summary">Daha fazla yardıma mı ihtiyacınız var?</string>
     <string name="hinge">Menteşe</string>
     <string name="history">Geçmiş</string>
-    <string name="clear_history">Geçmişi Temizle</string>
+    <string name="history_cleared">Geçmiş temizlendi</string>
+    <string name="history_undo_button">Geri al</string>
     <string name="home">Ana sayfa</string>
     <string name="horizontal_flip">Yatay çevir</string>
     <string name="image">Görüntü</string>
@@ -209,9 +214,9 @@
     <string name="label_bit_rate">Bit Hızı</string>
     <string name="label_file_format">Biçim</string>
     <string name="label_file_name">Dosya adı</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Dosya yolu</string>
     <string name="label_file_size">Boyut</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">%s\'dan daha fazla</string>
     <string name="label_sampling_rate">Örnekleme oranı</string>
     <string name="label_track_length">Uzunluk</string>
@@ -280,11 +285,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Retro Müzik tasarım ilhamı almak için Pinterest sayfasını takip edin</string>
     <string name="plain">Sade</string>
+    <string name="playList_already_exits">Oynatma listesi zaten var</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Oynatma Ayarları</string>
     <string name="playback_speed">Oynatma Hızı</string>
     <string name="playing_notification_description">Oynatılıyor bildirimi, oynatma/duraklatma vb. için eylemler sağlar.</string>
     <string name="playing_notification_name">Oynatılıyor bildirimi</string>
+    <string name="playlist_created_sucessfully">%s başarıyla oluşturuldu</string>
     <string name="playlist_is_empty">Oynatma listesi boş</string>
     <string name="playlist_name_empty">Oynatma listesi ismi</string>
     <string name="playlists">Oynatma listeleri</string>
@@ -331,6 +338,7 @@
     <string name="pref_summary_library_categories">Kütüphane kategorilerinin görünürlük ve sırasını yapılandırın</string>
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Başlangıçta son kullanılan sekmeye git</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -341,7 +349,6 @@
     <string name="pref_summary_toggle_volume">Eğer yeterli alan varsa ses kontrollerini şimdi oynatılıyor ekranında göster</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Sadece /Music dosyasından müzik göster</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Albüm kapağını göster</string>
     <string name="pref_title_album_artists_only">Albüm Sanatçısına göre belirle</string>
     <string name="pref_title_album_cover_style">Albüm kapağı teması</string>
@@ -376,6 +383,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Şimdi oynatılıyor teması</string>
     <string name="pref_title_open_source_licences">Açık kaynak lisansları</string>
+    <string name="pref_title_pause_history">Geçmişi duraklat</string>
     <string name="pref_title_remember_tab">Son sekmeyi hatırla</string>
     <string name="pref_title_show_lyrics">Şarkı sözlerini göster</string>
     <string name="pref_title_suggestions">Önerileri göster</string>
@@ -388,7 +396,6 @@
     <string name="pref_title_toggle_volume">Ses kontrolleri</string>
     <string name="pref_title_wallpaper_accent">Duvar kağıdı vurgu rengi</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Geçmişi duraklat</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Şimdi Oynatılıyor temaları, Atlıkarınca efekti, Renkli tema ve daha fazlası..</string>
     <string name="profile">Profil</string>
@@ -401,6 +408,7 @@
     <string name="remove_action">Kaldır</string>
     <string name="remove_cover">Kapağı kaldır</string>
     <string name="remove_from_blacklist">Kara listeden kaldır</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Şarkıyı oynatma listesinden kaldır</string>
     <string name="remove_song_x_from_playlist"><![CDATA[<b>%1$s</b> adlı şarkı oynatma listesinden kaldırılsın mı?]]></string>
     <string name="remove_songs_from_playlist_title">Şarkıları oynatma listesinden kaldır</string>
@@ -526,10 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Çökme raporunu paylaş</string>
-    <string name="playlist_created_sucessfully">%s başarıyla oluşturuldu</string>
-    <string name="playList_already_exits">Oynatma listesi zaten var</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">Geçmiş temizlendi</string>
-    <string name="history_undo_button">Geri al</string>
 </resources>
