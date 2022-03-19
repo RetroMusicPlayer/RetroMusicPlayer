@@ -54,6 +54,7 @@
     <string name="add_action">添加</string>
     <string name="add_playlist_title">"加入播放清單"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"已將 1 首歌加到播放佇列"</string>
     <string name="added_x_titles_to_playing_queue">已將 %1$d 首歌加到播放佇列。</string>
     <string name="album">專輯</string>
@@ -113,12 +114,14 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">新功能</string>
     <string name="changelog_summary">查看新內容</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">經典</string>
     <string name="clear_action">清空</string>
     <string name="clear_blacklist">清除黑名單</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">清除佇列</string>
     <string name="color">Color</string>
     <string name="colors">主題顏色</string>
@@ -134,6 +137,7 @@
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">我正在聽 %2$s 的 %1$s</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">暗沉</string>
     <string name="delete_playlist_title">刪除播放清單</string>
     <string name="delete_playlist_x"><![CDATA[確定要刪除播放清單 <b>%1$s</b> 嗎？]]></string>
@@ -192,7 +196,8 @@
     <string name="help_summary">需要更多幫助？</string>
     <string name="hinge">Hinge</string>
     <string name="history">記錄</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">首頁</string>
     <string name="horizontal_flip">水平翻轉</string>
     <string name="image">圖像</string>
@@ -207,9 +212,9 @@
     <string name="label_bit_rate">位元率</string>
     <string name="label_file_format">格式</string>
     <string name="label_file_name">檔案名稱</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">檔案路徑</string>
     <string name="label_file_size">檔案大小</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">來自 %s 的更多內容</string>
     <string name="label_sampling_rate">取樣率</string>
     <string name="label_track_length">長度</string>
@@ -278,11 +283,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
     <string name="plain">Plain</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">The playing notification provides actions for play/pause etc.</string>
     <string name="playing_notification_name">播放通知</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">播放列表爲空</string>
     <string name="playlist_name_empty">播放清單名稱</string>
     <string name="playlists">播放清單</string>
@@ -329,6 +336,7 @@
     <string name="pref_summary_library_categories">調整音樂庫類別的顯示與排序</string>
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
     <string name="pref_summary_open_source_licences">開放原始碼軟體的授權詳細資料</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -339,7 +347,6 @@
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯封面</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -374,6 +381,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">外觀</string>
     <string name="pref_title_open_source_licences">開源授權協議</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -386,7 +394,6 @@
     <string name="pref_title_toggle_volume">音量控制</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">專業版</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">個人資料</string>
@@ -399,6 +406,7 @@
     <string name="remove_action">移除</string>
     <string name="remove_cover">移除封面</string>
     <string name="remove_from_blacklist">移出黑名單</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">將歌曲從播放清單中移除</string>
     <string name="remove_song_x_from_playlist"><![CDATA[確定要將歌曲 <b>%1$s</b> 從播放清單中移除嗎？]]></string>
     <string name="remove_songs_from_playlist_title">將多首歌曲從播放清單中移除</string>
@@ -524,10 +532,4 @@
     <string name="you_have_to_select_at_least_one_category">您必須選取至少一個類別。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
