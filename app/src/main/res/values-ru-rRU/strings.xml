@@ -54,6 +54,7 @@
     <string name="add_action">Добавить</string>
     <string name="add_playlist_title">"Добавить в плейлист"</string>
     <string name="add_time_framed_lryics">Добавить синхронизированный текст</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"В очередь добавлен 1 трек"</string>
     <string name="added_x_titles_to_playing_queue">В очередь добавлено  %1$d треков.</string>
     <string name="album">Альбом</string>
@@ -119,12 +120,14 @@
     <string name="cascading">Каскадный</string>
     <string name="changelog">Список изменений</string>
     <string name="changelog_summary">Узнайте, что нового</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Выберете резервную копию для восстановления</string>
     <string name="circle">Круг</string>
     <string name="circular">Круговая</string>
     <string name="classic">Классическая</string>
     <string name="clear_action">Очистить</string>
     <string name="clear_blacklist">Очистить черный список</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Очистить очередь</string>
     <string name="color">Цветная</string>
     <string name="colors">Цвета</string>
@@ -140,6 +143,7 @@
     <string name="credit_title">Участники и помощники</string>
     <string name="currently_listening_to_x_by_x">Сейчас играет %1$s от %2$s.</string>
     <string name="custom_artist_images">Пользовательские изображения</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Тёмная</string>
     <string name="delete_playlist_title">Удалить плейлист</string>
     <string name="delete_playlist_x"><![CDATA[Удалить плейлист <b>%1$s</b>?]]></string>
@@ -198,7 +202,8 @@
     <string name="help_summary">Нужна ещё помощь?</string>
     <string name="hinge">Пластинки</string>
     <string name="history">История</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Главная</string>
     <string name="horizontal_flip">Горизонтальный поворот</string>
     <string name="image">Изображение</string>
@@ -213,9 +218,9 @@
     <string name="label_bit_rate">Битрейт</string>
     <string name="label_file_format">Формат</string>
     <string name="label_file_name">Имя файла</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Расположение файла</string>
     <string name="label_file_size">Размер</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Больше от %s</string>
     <string name="label_sampling_rate">Частота дискретизации</string>
     <string name="label_track_length">Длина</string>
@@ -284,11 +289,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Подпишитесь на страницу Retro Music в Pinterest</string>
     <string name="plain">Гладкая</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Уведомление о песне предоставляет действия для воспроизведения/паузы и т.д.</string>
     <string name="playing_notification_name">Уведомления воспроизведения</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Плейлист пуст</string>
     <string name="playlist_name_empty">Название плейлиста</string>
     <string name="playlists">Плейлисты</string>
@@ -335,6 +342,7 @@
     <string name="pref_summary_library_categories">Настроить вид и порядок категорий в библиотеке.</string>
     <string name="pref_summary_lock_screen">Используйте собственный экран блокировки Retro Music</string>
     <string name="pref_summary_open_source_licences">Сведения о лицензии для программного обеспечения с открытым исходным кодом</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Перейдите к последней использованной вкладке при запуске</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -345,7 +353,6 @@
     <string name="pref_summary_toggle_volume">Если доступно достаточно места, показывать регулировку громкости на экране воспроизведения</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Показывать музыку только из папки /Music</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Показать обложку альбома</string>
     <string name="pref_title_album_artists_only">Показывать обложку альбома в разделе исполнители</string>
     <string name="pref_title_album_cover_style">Тема обложки альбома</string>
@@ -380,6 +387,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Тема экрана воспроизведения</string>
     <string name="pref_title_open_source_licences">Лицензии с открытым кодом</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -392,7 +400,6 @@
     <string name="pref_title_toggle_volume">Регулировка громкости</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Черная тема, Темы экрана воспроизведения, Эффект карусели и многое другое..</string>
     <string name="profile">Профиль</string>
@@ -405,6 +412,7 @@
     <string name="remove_action">Удалить</string>
     <string name="remove_cover">Удалить обложку</string>
     <string name="remove_from_blacklist">Удалить из черного списка</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Удалить песню из плейлиста</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Удалить песню <b>%1$s</b> из плейлиста?]]></string>
     <string name="remove_songs_from_playlist_title">Удалить песни из плейлиста</string>
@@ -530,10 +538,4 @@
     <string name="you_have_to_select_at_least_one_category">Выберите хотя бы одну категорию.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
     <string name="your_account_data_is_only_used_for_authentication">Данные вашей учетной записи используются только для аутентификации.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
