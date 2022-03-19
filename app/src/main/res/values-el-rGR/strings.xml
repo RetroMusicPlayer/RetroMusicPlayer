@@ -54,6 +54,7 @@
     <string name="add_action">Προσθήκη</string>
     <string name="add_playlist_title">"Προσθήκη στη λίστα αναπαραγωγής"</string>
     <string name="add_time_framed_lryics">Προσθήκη Στίχων Με Χρονικό Πλαίσιο</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"Προστέθηκε 1 κομμάτι στην ουρά αναπαραγωγής."</string>
     <string name="added_x_titles_to_playing_queue">Προστέθηκαν %1$d κομμάτια στην ουρά αναπαραγωγής.</string>
     <string name="album">Άλμπουμ</string>
@@ -115,12 +116,14 @@
     <string name="cascading">Με υπερχείλιση</string>
     <string name="changelog">Λίστα Αλλαγών</string>
     <string name="changelog_summary">Δείτε τι νέο υπάρχει</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Επιλέξτε τι να επαναφέρετε</string>
     <string name="circle">Κύκλος</string>
     <string name="circular">&gt;Κυκλικό</string>
     <string name="classic">Κλασσικό</string>
     <string name="clear_action">Εκκαθάριση</string>
     <string name="clear_blacklist">Εκκαθάριση blacklist</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Εκκαθάριση ουράς</string>
     <string name="color">Χρώμα</string>
     <string name="colors">Χρώματα</string>
@@ -136,6 +139,7 @@
     <string name="credit_title">Μέλη και συνεισφέροντες </string>
     <string name="currently_listening_to_x_by_x">Παίζει το %1$s από τους %2$s.</string>
     <string name="custom_artist_images">Προσαρμοσμένες Εικόνες Καλλιτέχνη</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Κάπως Σκούρο</string>
     <string name="delete_playlist_title">Διαγραφή playlist</string>
     <string name="delete_playlist_x"><![CDATA[Διαγραφή της λίστα αναπαραγωγής <b>%1$s</b>?]]></string>
@@ -194,7 +198,8 @@
     <string name="help_summary">Χρειάζεστε περισσότερη βοήθεια;</string>
     <string name="hinge">Ρολάρισμα</string>
     <string name="history">Ιστορικό</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Αρχική</string>
     <string name="horizontal_flip">Οριζόντια αναστροφή</string>
     <string name="image">Εικόνα</string>
@@ -209,9 +214,9 @@
     <string name="label_bit_rate">Ρυθμός μετάδοσης bit</string>
     <string name="label_file_format">Μορφή</string>
     <string name="label_file_name">Όνομα Αρχείου</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Διαδρομή Αρχείου</string>
     <string name="label_file_size">Μέγεθος</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Περισσότερα από %s</string>
     <string name="label_sampling_rate">Ρυθμός δειγματοληψίας</string>
     <string name="label_track_length">Μήκος</string>
@@ -280,11 +285,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Ακολουθήστε τη σελίδα Pinterest για έμπνευση σχεδιασμού του Retro Music</string>
     <string name="plain">Απλό</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Τόνος</string>
     <string name="playback_settings">Ρυθμίσεις Αναπαραγωγής</string>
     <string name="playback_speed">Ταχύτητα Αναπαραγωγής</string>
     <string name="playing_notification_description">Η ειδοποίηση αναπαραγωγής προσφέρει κουμπιά για αναπαραγωγή/παύση, κλπ.</string>
     <string name="playing_notification_name">Ειδοποίηση Αναπαραγωγής</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">H Λίστα αναπαραγωγής είναι κενή</string>
     <string name="playlist_name_empty">Όνομα Λίστα αναπαραγωγής</string>
     <string name="playlists">Λίστες αναπαραγωγής</string>
@@ -331,6 +338,7 @@
     <string name="pref_summary_library_categories">Ρυθμίστε την ορατότητα και τη σειρά των κατηγοριών βιβλιοθήκης.</string>
     <string name="pref_summary_lock_screen">Ενεργοποίηση διακοπτών ρύθμισης στην οθόνη κλειδώματος.</string>
     <string name="pref_summary_open_source_licences">Λεπτομέρειες άδειας για τη χρήση open source λογισμικού</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Μεταβείτε στην τελευταία χρησιμοποιημένη καρτέλα κατά την έναρξη</string>
     <string name="pref_summary_show_lyrics">Εμφάνιση συγχρονισμένων στίχων πάνω από το εξώφυλλο άλμπουμ</string>
     <string name="pref_summary_suggestions">Εμφάνιση Νέου Μείγματος Μουσικής στην Αρχική οθόνη</string>
@@ -341,7 +349,6 @@
     <string name="pref_summary_toggle_volume">Εαν υπάρχει χώρος στην οθόνη αναπαραγωγής, ενεργοποιήστε τον πίνακα ελέγχου έντασης.</string>
     <string name="pref_summary_wallpaper_accent">Εξαγωγή απόχρωσης από την ταπετσαρία</string>
     <string name="pref_summary_whitelist">Εμφάνιση μουσικής μόνο από το φάκελο /Μουσική</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Εμφάνιση εξωφύλλου άλμπουμ.</string>
     <string name="pref_title_album_artists_only">Πλοήγηση κατά Καλλιτέχνη Άλμπουμ</string>
     <string name="pref_title_album_cover_style">Θέμα εξώφυλλου άλμπουμ</string>
@@ -376,6 +383,7 @@
     <string name="pref_title_lyrics_type">Τύπος στίχων</string>
     <string name="pref_title_now_playing_screen_appearance">Εμφάνιση</string>
     <string name="pref_title_open_source_licences">Άδειες λογισμικού open source</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Απομνημόνευση τελευταίας καρτέλας</string>
     <string name="pref_title_show_lyrics">Εμφάνιση στίχων</string>
     <string name="pref_title_suggestions">Εμφάνιση προτάσεων</string>
@@ -388,7 +396,6 @@
     <string name="pref_title_toggle_volume">Πίνακας Ελέγχου Έντασης</string>
     <string name="pref_title_wallpaper_accent">Απόχρωση ταπετσαρίας</string>
     <string name="pref_title_whitelist">Λίστα επιτρεπόμενων κομματιών</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Μαύρο θέμα, Θέματα στο Τώρα παίζει, εφέ Καρουσέλ και πολλά άλλα..</string>
     <string name="profile">Προφίλ</string>
@@ -401,6 +408,7 @@
     <string name="remove_action">Αφαίρεση</string>
     <string name="remove_cover">Αφαίρεση Εξώφυλλου</string>
     <string name="remove_from_blacklist">Αφαίρεση από τη blacklist</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Αφαίρεσε το κομμάτι από τη λίστα αναπαραγωγής</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Αφαίρεση του κομματιού <b>%1$s</b> από τη λίστα αναπαραγωγής?]]></string>
     <string name="remove_songs_from_playlist_title">Αφαίρεσε τα κομμάτια από τη λίστα αναπαραγωγής</string>
@@ -526,10 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">Πρέπει να επιλέξετε τουλάχιστον μία κατηγορία.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Θα προωθηθείτε στον ιστότοπο παρακολούθησης ζητημάτων.</string>
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
