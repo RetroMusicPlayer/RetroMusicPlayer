@@ -133,7 +133,7 @@ ___
 ## **Q: After updating the app to the latest version, the font got removed. Why?**
 - Retro Music's font has now been replaced with system font, which means the default font your system uses will be used by Retro Music too. It fixes all font-related issues you used to face/are facing in the app. 
 
-- With the recent Retro Music v3 release, we have a built-in optional font "Manrope font" which you can toggle from Settings > Look & Feel > Toggle "Use manrope font".
+- With the recent Retro Music v5 release, we have a built-in optional font "Manrope font" which you can toggle from Settings > Look & Feel > Toggle "Use manrope font".
 
 - If you think the font looks ugly, then you just need to change the default font from your Android settings (or use any Magisk module). If you can't, there's nothing we can do about it.
 ___
