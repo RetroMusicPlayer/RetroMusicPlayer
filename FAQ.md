@@ -15,7 +15,7 @@ There are four methods for adding offline synced lyrics in Retro Music.
 
 ### ***Method 1:-***
 #### STEP 1: 
-Find the time-stamped lyrics for your songs that don't have lyrics already. You can find ".lrc" files for popular songs at either of the websites given below. A time-stamped lyric looks like this, "[00:04:02] Some lyrics text" for example.
+Find the time-stamped lyrics for your songs that don't have lyrics already. A time-stamped lyric looks like this, "[00:04:02] Some lyrics text" for example.
 #### STEP 2: 
 Copy these time-stamped lyrics.
 #### STEP 3: 
@@ -27,12 +27,12 @@ Open lyrics and you should see your time-stamped lyrics there.
 
 ### ***Method 2:-***
 #### STEP 1: 
-Find the time-stamped lyrics for your songs that don't have lyrics already. You can find ".lrc" files for popular songs at either of the websites given below. A time-stamped lyric looks like this, "[00:04:02] Some lyrics text" for example.
+Download the time-stamped lyrics for your songs that don't have lyrics already. You can find ".lrc" files for popular songs at either of the websites given below. A time-stamped lyric looks like this, "[00:04:02] Some lyrics text" for example.
 #### STEP 2: 
-A ".lrc" is like a text file that contains the time-stamped lyrics for example, "[00:04:02] Some lyrics text"
+A ".lrc" is like a text file that contains the time-stamped lyrics for example, "[00:04:02] Some lyrics text". Save your time-stamped lyrics are ".lrc" file.
 #### STEP 3: 
 Now you have to rename the file you created in this way: <song_name> - <artist_name>.lrc or for better matching copy the <song_name> and the <artist_name> from the tag editor and then rename the file.
-###** STEP 4: 
+### STEP 4: 
 Now paste the LRC files to the following path: /sdcard/Retromusic/lyrics/
 Here sdcard is your internal storage.
 
