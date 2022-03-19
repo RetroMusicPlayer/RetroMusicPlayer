@@ -54,6 +54,7 @@
     <string name="add_action">추가</string>
     <string name="add_playlist_title">"재생목록에 추가"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"재생 대기열에 1곡이 추가되었습니다."</string>
     <string name="added_x_titles_to_playing_queue">재생 대기열에 %1$d곡이 추가되었습니다.</string>
     <string name="album">앨범</string>
@@ -113,12 +114,14 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">변경 사항</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">클래식</string>
     <string name="clear_action">비우기</string>
     <string name="clear_blacklist">블랙리스트 비우기</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Clear queue</string>
     <string name="color">색상</string>
     <string name="colors">색상</string>
@@ -134,6 +137,7 @@
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">현재 %2$s의 %1$s를 듣는 중입니다.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">카인다 다크</string>
     <string name="delete_playlist_title">재생목록 삭제</string>
     <string name="delete_playlist_x"><![CDATA[<b>%1$s</b> 재생목록을 삭제하시겠습니까?]]></string>
@@ -192,7 +196,8 @@
     <string name="help_summary">Need more help?</string>
     <string name="hinge">Hinge</string>
     <string name="history">기록</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">홈</string>
     <string name="horizontal_flip">Horizontal flip</string>
     <string name="image">Image</string>
@@ -207,9 +212,9 @@
     <string name="label_bit_rate">비트레이트</string>
     <string name="label_file_format">형식</string>
     <string name="label_file_name">파일 이름</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">파일 경로</string>
     <string name="label_file_size">크기</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">More from %s</string>
     <string name="label_sampling_rate">샘플링 레이트</string>
     <string name="label_track_length">길이</string>
@@ -278,11 +283,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
     <string name="plain">단색</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">재생 알림은 재생/일시 정지 등에 대한 작업을 제공합니다.</string>
     <string name="playing_notification_name">재생 중 알림</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">재생목록이 비어 있음</string>
     <string name="playlist_name_empty">재생목록 이름</string>
     <string name="playlists">재생목록</string>
@@ -329,6 +336,7 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Retro music에서 제공하는 자체 잠금 화면 사용</string>
     <string name="pref_summary_open_source_licences">오픈소스 소프트웨어의 상세 라이센스 정보</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -339,7 +347,6 @@
     <string name="pref_summary_toggle_volume">음악 재생 화면에서 공간이 있을 시 볼륨 컨트롤을 보입니다</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">앨범 커버 표시</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -374,6 +381,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">테마</string>
     <string name="pref_title_open_source_licences">오픈소스 라이선스</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -386,7 +394,6 @@
     <string name="pref_title_toggle_volume">볼륨 조절</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
@@ -399,6 +406,7 @@
     <string name="remove_action">제거</string>
     <string name="remove_cover">커버 제거</string>
     <string name="remove_from_blacklist">블랙리스트에서 제거</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">노래를 재생목록에서 제거</string>
     <string name="remove_song_x_from_playlist"><![CDATA[<b>%1$s</b> 노래를 재생목록에서 제거하시겠습니까?]]></string>
     <string name="remove_songs_from_playlist_title">노래를 재생목록에서 삭제</string>
@@ -524,10 +532,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">계정 정보는 오로지 인증 목적으로만 사용됩니다.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
