@@ -17,7 +17,7 @@ There are four methods for adding offline synced lyrics in Retro Music.
 #### STEP 1: 
 Find the time-stamped lyrics for your songs that don't have lyrics already. You can find ".lrc" files for popular songs at either of the websites given below. A time-stamped lyric looks like this, "[00:04:02] Some lyrics text" for example.
 #### STEP 2: 
-Copy these time stamped lyrics.
+Copy these time-stamped lyrics.
 #### STEP 3: 
 Open retro music and head to the song synced lyrics editor.
 #### STEP 4: 
