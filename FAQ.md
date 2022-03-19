@@ -52,6 +52,7 @@ Find your song to edit and paste the synced lyrics.
 **Some Important Notes:**
 - If you want to skip to a particular timestamp, simply scroll to the time stamp from where you want to start and a 'Play' icon will appear left to the particular stamp. Tap on the play button to play from there.
 - When you save lyrics by pasting lyrics in lyrics editor, close the lyrics and open again for lyrics to show.
+- For those who are having difficulty in making the synced lyrics work, we have a short tutorial video on it. Hope this helps you. {[Link in the note or here](https://youtu.be/1oIOTGWhNMY)}
 
 ___
 
