@@ -54,6 +54,7 @@
     <string name="add_action">Додати</string>
     <string name="add_playlist_title">"Додати до списку відтворення"</string>
     <string name="add_time_framed_lryics">Додати часові розмежування тексту</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"Додано 1 композицію до черги відтворення."</string>
     <string name="added_x_titles_to_playing_queue">Додано %1$d композицій до черги відтворення.</string>
     <string name="album">Альбом</string>
@@ -119,12 +120,14 @@
     <string name="cascading">Каскад</string>
     <string name="changelog">Історія змін</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Коло</string>
     <string name="circular">Круглий</string>
     <string name="classic">Класичний</string>
     <string name="clear_action">Очистити</string>
     <string name="clear_blacklist">Очистити чорний список</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Очистити чергу</string>
     <string name="color">Колір</string>
     <string name="colors">Кольори</string>
@@ -140,6 +143,7 @@
     <string name="credit_title">Учасники та меценати </string>
     <string name="currently_listening_to_x_by_x">Зараз грає %1$s від %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Майже темна</string>
     <string name="delete_playlist_title">Видалити список відтворення</string>
     <string name="delete_playlist_x"><![CDATA[Видалити список відтворення <b>%1$s</b>?]]></string>
@@ -198,7 +202,8 @@
     <string name="help_summary">Need more help?</string>
     <string name="hinge">Завіса</string>
     <string name="history">Історія</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Домашня сторінка</string>
     <string name="horizontal_flip">Горизонтальне перевернення</string>
     <string name="image">Зображення</string>
@@ -213,9 +218,9 @@
     <string name="label_bit_rate">Бітрейт</string>
     <string name="label_file_format">Формат</string>
     <string name="label_file_name">Назва файлу</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Шлях до файлу</string>
     <string name="label_file_size">Розмір</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Більше від %s</string>
     <string name="label_sampling_rate">Частота дискретизації</string>
     <string name="label_track_length">Довжина</string>
@@ -284,11 +289,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Слідкуйте за сторінкою Pinterest від Retro Music для натхнення дизайну</string>
     <string name="plain">Звичайний</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Сповіщення про відтворення надає дії для відтворення/паузи тощо.</string>
     <string name="playing_notification_name">Сповіщення про відтворення</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Список відтворення порожній</string>
     <string name="playlist_name_empty">Назва списку відтворення</string>
     <string name="playlists">Списки відтворення</string>
@@ -335,6 +342,7 @@
     <string name="pref_summary_library_categories">Налаштувати видимість та порядок категорій бібліотеки.</string>
     <string name="pref_summary_lock_screen">Використовувати керування музикою на екрані блокування від Retro Music</string>
     <string name="pref_summary_open_source_licences">Деталі ліцензії для програмного забезпечення з відкритим кодом</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -345,7 +353,6 @@
     <string name="pref_summary_toggle_volume">Якщо вистачає місця, показувати панель гучності на екрані відтворення</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Показати обкладинку альбому</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Тема обкладинки альбому</string>
@@ -380,6 +387,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Тема відтворення</string>
     <string name="pref_title_open_source_licences">Ліцензії з відкритим кодом</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -392,7 +400,6 @@
     <string name="pref_title_toggle_volume">Регулювання гучності</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Чорна тема, теми відтворення, ефект каруселі та інше..</string>
     <string name="profile">Профіль</string>
@@ -405,6 +412,7 @@
     <string name="remove_action">Вилучити</string>
     <string name="remove_cover">Видалити обкладинку</string>
     <string name="remove_from_blacklist">Видалити з чорного списку</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Видалити пісню зі списку відтворення</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Видалити пісню <b>%1$s</b> зі списку відтворення?]]></string>
     <string name="remove_songs_from_playlist_title">Видалити пісні зі списку відтворення</string>
@@ -530,10 +538,4 @@
     <string name="you_have_to_select_at_least_one_category">Виберіть принаймні одну категорію.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вас буде перенаправлено на сайт відстеження проблем.</string>
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
