@@ -54,6 +54,7 @@
     <string name="add_action">ထည့်မည်</string>
     <string name="add_playlist_title">"အောက်ပါ Playlist သို့ထည့်မည်"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"နားထောင်နေသည့်စာရင်းထဲသို့ ၁ ပုဒ်ပေါင်းထည့်ခဲ့သည်"</string>
     <string name="added_x_titles_to_playing_queue">နားထောင်နေသည့်စာရင်းထဲသို့ %1$d ပုဒ်ပေါင်းထည့်ခဲ့သည်</string>
     <string name="album">Album</string>
@@ -113,12 +114,14 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">ပြောင်းလဲမှုမှတ်တမ်း</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">အဝိုင်း</string>
     <string name="circular">အဝိုင်း</string>
     <string name="classic">ရိုးရိုး</string>
     <string name="clear_action">ရှင်းမည်</string>
     <string name="clear_blacklist">Blacklist အားရှင်းမည်</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">နားထောင်နေသည့်စာရင်းအားရှင်းမည်</string>
     <string name="color">အရောင်</string>
     <string name="colors">အရောင်များ</string>
@@ -134,6 +137,7 @@
     <string name="credit_title">အဖွဲ့ဝင်များနှင့် ကူညီသူများ</string>
     <string name="currently_listening_to_x_by_x">%2$s သီဆိုထားသော %1$s ကိုယခုနားထောင်နေသည်</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">အနက်ရောင်ဆန်ဆန်</string>
     <string name="delete_playlist_title">Playlist ဖျက်ခြင်း</string>
     <string name="delete_playlist_x"><![CDATA[<b>%1$s</b> Playlist ကိုဖျက်မှာလား]]></string>
@@ -192,7 +196,8 @@
     <string name="help_summary">အကူအညီထပ်လိုပါသေးလား</string>
     <string name="hinge">Hinge</string>
     <string name="history">မှတ်တမ်း</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">မူလ</string>
     <string name="horizontal_flip">ရေပြင်ညီအတိုင်းဟိုဘက်ဒီဘက်လှန်ခြင်း</string>
     <string name="image">ဓာတ်ပုံ</string>
@@ -207,9 +212,9 @@
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">အမျိုးအစား</string>
     <string name="label_file_name">ဖိုင်နာမည်</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">ဖိုင်နေရာ</string>
     <string name="label_file_size">အရွယ်အစား</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">%s ၏နောက်ထပ် Album များ</string>
     <string name="label_sampling_rate">Sampling rate</string>
     <string name="label_track_length">ကြာချိန်</string>
@@ -278,11 +283,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Retro Music ဒီဇိုင်းအကြံဉာဏ်ကောင်းများအတွက် Pinterest page ကို follow ပါ</string>
     <string name="plain">ရှင်းရှင်းလင်းလင်းပုံစံ</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Playing notification သည် play/pause ခလုတ် စသည့်တို့ကိုဖော်ပြပေးသည်</string>
     <string name="playing_notification_name">Playing notification</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Playlist တွင်ဘာမှမရှိပါ</string>
     <string name="playlist_name_empty">Playlist နာမည်</string>
     <string name="playlists">Playlists</string>
@@ -329,6 +336,7 @@
     <string name="pref_summary_library_categories">Library category များ ဖော်ခြင်း၊ ဖျောက်ခြင်းနှင့် အထားအသိုများ ချိန်ညှိမည်</string>
     <string name="pref_summary_lock_screen">Retro Music ၏ ပြင်ဆင်ထားသော Lockscreen controls များကိုသုံးမည်</string>
     <string name="pref_summary_open_source_licences">Open Source software အတွက် လိုင်စင်အချက်အလက်များ</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -339,7 +347,6 @@
     <string name="pref_summary_toggle_volume">နေရာလုံလုံလောက်လောက်ရှိပါက Now Playing screen တွင် အသံအတိုးအကျယ်ခလုတ်များပြသမည်</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Album cover ပြသခြင်း</string>
     <string name="pref_title_album_artists_only">Album သီဆိုသူဖြင့် ရှာဖွေခြင်း</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -374,6 +381,7 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
     <string name="pref_title_open_source_licences">Open source licences</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -386,7 +394,6 @@
     <string name="pref_title_toggle_volume">အသံထိန်းချုပ်မှု</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme ၊ Now playing themes နှင့် Carousel effect စသည်များ...</string>
     <string name="profile">Profile</string>
@@ -399,6 +406,7 @@
     <string name="remove_action">ပယ်ဖျက်မည်</string>
     <string name="remove_cover">Cover ကိုဖျက်မည်</string>
     <string name="remove_from_blacklist">Blacklist မှဖျက်မည်</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Playlist မှဖျက်မည်</string>
     <string name="remove_song_x_from_playlist"><![CDATA[<b>%1$s</b> ကို Playlist ကဖျက်မှာလား]]></string>
     <string name="remove_songs_from_playlist_title">Playlist မှသီချင်းများဖျက်ခြင်း</string>
@@ -524,10 +532,4 @@
     <string name="you_have_to_select_at_least_one_category">အနည်းဆုံး category တစ်ခုရွေးချယ်ရန်လိုအပ်သည်</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Issue tracker website သို့ခေါ်ဆောင်သွားပါမည်</string>
     <string name="your_account_data_is_only_used_for_authentication">သင့်အကောင့်အချက်အလက်ကို အတည်ပြုရန်အတွက်သာအသုံးပြုပါသည်။</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
