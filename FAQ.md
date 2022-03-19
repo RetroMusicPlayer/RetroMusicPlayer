@@ -77,7 +77,7 @@ ___
 Settings -> Personalize -> Fullscreen controls -> Enable (this will only be visible when songs are playing from Retro Music).
 ___
 
-## **Q: Why is my gallery or random pictures showing up as album art?**
+## **Q: Why are my gallery or random pictures showing up as album art?**
 Settings -> Images -> Ignore media store covers -> Enable
 ___
 
