@@ -54,6 +54,7 @@
     <string name="add_action">Thêm</string>
     <string name="add_playlist_title">"Thêm vào danh sách phát"</string>
     <string name="add_time_framed_lryics">Thêm lời theo thời gian</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"Đã thêm 1 bài vào danh sách chờ phát."</string>
     <string name="added_x_titles_to_playing_queue">Đã thêm %1$d bài vào danh sách chờ phát.</string>
     <string name="album">Album</string>
@@ -114,12 +115,14 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="cascading">Xếp tầng</string>
     <string name="changelog">Thay đổi</string>
     <string name="changelog_summary">Xem có gì mới</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Vòng tròn</string>
     <string name="circular">Dạng tròn</string>
     <string name="classic">Cổ điển</string>
     <string name="clear_action">Xóa</string>
     <string name="clear_blacklist">Xóa danh sách đen</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Xoá danh sách</string>
     <string name="color">Màu sắc</string>
     <string name="colors">Màu sắc</string>
@@ -135,6 +138,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="credit_title">Thành viên và cộng tác viên </string>
     <string name="currently_listening_to_x_by_x">Đang nghe %1$s bởi %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Xám đen</string>
     <string name="delete_playlist_title">Xoá danh sách phát</string>
     <string name="delete_playlist_x"><![CDATA[Xoá danh sách phát <b>%1$s</b>?]]></string>
@@ -193,7 +197,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="help_summary">Bạn cần hỗ trợ thêm?</string>
     <string name="hinge">Bản lề</string>
     <string name="history">Lịch sử</string>
-    <string name="clear_history">Clear History</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Trang chủ</string>
     <string name="horizontal_flip">Lật ngang</string>
     <string name="image">Hình ảnh</string>
@@ -208,9 +213,9 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="label_bit_rate">Tốc độ bit</string>
     <string name="label_file_format">Định dạng</string>
     <string name="label_file_name">Tên tệp</string>
-    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_path">Đường dẫn tệp</string>
     <string name="label_file_size">Kích thước</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Thêm thông tin từ %s</string>
     <string name="label_sampling_rate">Tần số lấy mẫu</string>
     <string name="label_track_length">Độ dài</string>
@@ -279,11 +284,13 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Theo dõi trang Pinterest để lấy cảm hứng thiết kế Retro Music</string>
     <string name="plain">Giản dị</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Thanh thông báo đang phát sẽ cho phép bạn phát/tạm dừng, chuyển bài, v.v.</string>
     <string name="playing_notification_name">Thông báo đang phát</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Danh sách phát trống</string>
     <string name="playlist_name_empty">Tên danh sách phát</string>
     <string name="playlists">Danh sách phát</string>
@@ -330,6 +337,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_library_categories">Khả năng hiển thị và thứ tự của các danh mục trong thư viện.</string>
     <string name="pref_summary_lock_screen">Sử dụng các điều khiển màn hình khóa tùy chỉnh của Retro Music</string>
     <string name="pref_summary_open_source_licences">Chi tiết giấy phép của phần mềm mã nguồn mở</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Điều hướng đến tab được sử dụng gần nhất lúc bắt đầu</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
@@ -340,7 +348,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_toggle_volume">Hiện thanh điều chỉnh âm lượng nếu có không gian trống trong màn hình phát</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Chỉ hiện thị nhạc từ /Thư mục Nhạc</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_title_album_art_on_lockscreen">Hiện ảnh bìa album</string>
     <string name="pref_title_album_artists_only">Điều hướng theo Album Nghệ sĩ</string>
     <string name="pref_title_album_cover_style">Chủ đề bìa album</string>
@@ -375,6 +382,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Giao diện màn hình phát</string>
     <string name="pref_title_open_source_licences">Giấy phép nguồn mở</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
@@ -387,7 +395,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_toggle_volume">Điều khiển âm lượng</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_pause_history">Pause history</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Chủ đề đen, Chủ đề màn hình phát, Hiệu ứng băng chuyền, v.v.</string>
     <string name="profile">Hồ sơ</string>
@@ -400,6 +407,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="remove_action">Loại bỏ</string>
     <string name="remove_cover">Xoá ảnh bìa</string>
     <string name="remove_from_blacklist">Xóa khỏi danh sách đen</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Xoá bài hát <b>%1$s</b> khỏi danh sách phát?]]></string>
     <string name="remove_songs_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
@@ -525,10 +533,4 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="you_have_to_select_at_least_one_category">Bạn phải chọn ít nhất một danh mục.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Bạn sẽ được chuyển tiếp đến trang web theo dõi vấn đề.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
-    <string name="playlist_created_sucessfully">%s created successfully</string>
-    <string name="playList_already_exits">Playlist already exists</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
-    <string name="history_cleared">History cleared</string>
-    <string name="history_undo_button">Undo</string>
 </resources>
