@@ -23,8 +23,6 @@ import code.name.monkey.retromusic.EXTRA_PLAYLISTS
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.toSongs
-import code.name.monkey.retromusic.db.toSongsEntity
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
@@ -73,12 +71,11 @@ class AddToPlaylistDialog : DialogFragment() {
                 if (which == 0) {
                     showCreateDialog(songs)
                 } else {
-                    val playlistName = playlistEntities[which - 1].playlistName
-                    val songEntities = songs.toSongsEntity(playlistEntities[which - 1])
-                    libraryViewModel.addToPlaylist(playlistName, songEntities.toSongs())
+                    libraryViewModel.addToPlaylist(playlistNames[which], songs)
                 }
                 dialog.dismiss()
             }
+            .setNegativeButton(R.string.action_cancel, null)
             .create().colorButtons()
     }
 
