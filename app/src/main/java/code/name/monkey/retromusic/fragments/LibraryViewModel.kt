@@ -378,7 +378,6 @@ class LibraryViewModel(
                 val playlistId: Long =
                     createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
-                forceReload(Playlists)
                 withContext(Main) {
                     Toast.makeText(
                         App.getContext(),
@@ -395,6 +394,7 @@ class LibraryViewModel(
                     })
                 }
             }
+            forceReload(Playlists)
             withContext(Main) {
                 Toast.makeText(App.getContext(), App.getContext().getString(
                     R.string.added_song_count_to_playlist,
