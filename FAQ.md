@@ -11,7 +11,7 @@ If you've already installed the app, remove all other accounts except the one fr
 ___
 
 ## Q: **How do I use offline synced lyrics?**
-There are four methods for adding offline synced lyrics in Retro Music.
+There are three methods for adding offline synced lyrics in Retro Music.
 
 ### ***Method 1:-***
 #### STEP 1: 
@@ -77,7 +77,7 @@ ___
 Settings -> Personalize -> Fullscreen controls -> Enable (this will only be visible when songs are playing from Retro Music).
 ___
 
-## **Q: Why is my gallery or random pictures showing up as album art?**
+## **Q: Why are my gallery or random pictures showing up as album art?**
 Settings -> Images -> Ignore media store covers -> Enable
 ___
 
