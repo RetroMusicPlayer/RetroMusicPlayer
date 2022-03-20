@@ -114,7 +114,7 @@
     <string name="cascading">Bergerak</string>
     <string name="changelog">Log Pembaruan</string>
     <string name="changelog_summary">Lihat Apa Yang Baru</string>
-    <string name="choose_image">Choose Image</string>
+    <string name="choose_image">Pilih Gambar</string>
     <string name="choose_restore_title">Pilih apa yang akan dipulihkan</string>
     <string name="circle">Bulat</string>
     <string name="circular">Melingkar</string>
@@ -406,7 +406,7 @@
     <string name="remove_action">Hapus</string>
     <string name="remove_cover">Hapus sampul</string>
     <string name="remove_from_blacklist">Hapus dari daftar hitam</string>
-    <string name="remove_image">Remove Image</string>
+    <string name="remove_image">Hapus Gambar</string>
     <string name="remove_song_from_playlist_title">Hapus lagu dari daftar putar</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Hapus lagu <b>%1$s</b> dari daftar putar?]]></string>
     <string name="remove_songs_from_playlist_title">Hapus lagu-lagu dari daftar putar</string>
