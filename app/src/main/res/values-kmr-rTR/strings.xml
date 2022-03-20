@@ -117,7 +117,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="cascading">Pêlik</string>
     <string name="changelog">Rêzoka guhertinan</string>
     <string name="changelog_summary">Binêre ka çi nû ye</string>
-    <string name="choose_image">Choose Image</string>
+    <string name="choose_image">Wêneyê hilbijêre</string>
     <string name="choose_restore_title">Hilbijêre ka bila çi werê vegerandin</string>
     <string name="circle">Gilover</string>
     <string name="circular">Gilover</string>
@@ -410,7 +410,7 @@ têne guhertin</string>
     <string name="remove_action">Rake</string>
     <string name="remove_cover">Bergê rake</string>
     <string name="remove_from_blacklist">Ji rêzoka reş rake</string>
-    <string name="remove_image">Remove Image</string>
+    <string name="remove_image">Wêneyê rake</string>
     <string name="remove_song_from_playlist_title">Stranê ji rêzoka lêdanê rake</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Stranê <b>%1$s</b> ji rêzoka lêdanê rake?]]></string>
     <string name="remove_songs_from_playlist_title">Stranan ji rêzoka lêdanê rake</string>
