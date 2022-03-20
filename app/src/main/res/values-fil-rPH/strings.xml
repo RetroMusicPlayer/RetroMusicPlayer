@@ -45,7 +45,7 @@
     <string name="action_share">Ibahagi</string>
     <string name="action_shuffle_all">I-shuffle lahat</string>
     <string name="action_shuffle_playlist">I-shuffle ang playlist</string>
-    <string name="action_sleep_timer">Timer ng pagtulog</string>
+    <string name="action_sleep_timer">Orasan ng pagtulog</string>
     <string name="action_sort_order">Iayos ang order</string>
     <string name="action_tag_editor">I-edit ang tag</string>
     <string name="action_toggle_favorite">I-toggle sa paborito</string>
@@ -54,6 +54,7 @@
     <string name="add_action">Mag-Add</string>
     <string name="add_playlist_title">"Idagdag sa playlist"</string>
     <string name="add_time_framed_lryics">Mag-Add ng Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"Nadagdag ang 1 title sa playing queue."</string>
     <string name="added_x_titles_to_playing_queue">Nadagdag ang %1$d titles sa playing queue.</string>
     <string name="album">Album</string>
@@ -115,12 +116,14 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Mga Pagbabago</string>
     <string name="changelog_summary">Tingnan kung Ano\'ng Bago</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Bilog</string>
     <string name="circular">Pabilog</string>
     <string name="classic">Klasiko</string>
     <string name="clear_action">Linisin</string>
     <string name="clear_blacklist">Linisin ang blacklist</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Linisin ang queue</string>
     <string name="color">Kulay</string>
     <string name="colors">Mga kulay</string>
@@ -136,6 +139,7 @@
     <string name="credit_title">Mga Miyembro at Kontribyutor </string>
     <string name="currently_listening_to_x_by_x">Kasalukuyang nakikinig sa %1$s ni %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Medyo Madilim</string>
     <string name="delete_playlist_title">Tanggalin ang playlist</string>
     <string name="delete_playlist_x"><![CDATA[Tanggalin ang playlist na <b>%1$s</b>?]]></string>
@@ -147,7 +151,7 @@
     <string name="delete_x_songs"><![CDATA[Tanggalin ang <b>%1$d</b> na mga kanta?]]></string>
     <string name="deleted_x_songs">Tinanggal ang %1$d na mga kanta.</string>
     <string name="deleting_songs">Pagtanggal ng mga Kanta</string>
-    <string name="depth">Lalim</string>
+    <string name="depth">Malalim</string>
     <string name="description">Paglalarawan</string>
     <string name="device_info">Impormasyon ng device</string>
     <string name="dialog_message_set_ringtone">Payagan ang Retro Music na baguhin ang mga setting ng audio</string>
@@ -155,7 +159,7 @@
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Gusto mo bang burahin ang blacklist?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Gusto mo bang alisin ang <b>%1$s</b> sa blacklist?]]></string>
-    <string name="donate">Mag-donate</string>
+    <string name="donate">Mag Donate</string>
     <string name="donate_summary">Kung sa tingin mo ay karapat-dapat akong mabayaran para sa aking trabaho, maaari kang mag-iwan ng pera dito</string>
     <string name="donation_header">Bilhan mo ako ng:</string>
     <string name="done">Tapos na</string>
@@ -194,6 +198,8 @@
     <string name="help_summary">Karagdagang tulong?</string>
     <string name="hinge">Bisagra</string>
     <string name="history">Kasaysayan</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Asilo</string>
     <string name="horizontal_flip">Pahalang na pini-flip</string>
     <string name="image">Larawan</string>
@@ -214,7 +220,7 @@
     <string name="label_more_from">Higit pa mula sa %s</string>
     <string name="label_sampling_rate">Halimbawa ng rate</string>
     <string name="label_track_length">Haba</string>
-    <string name="labeled">Labelado</string>
+    <string name="labeled">Lebelado</string>
     <string name="last_added">Huling idinagdag</string>
     <string name="last_song">Huling kanta</string>
     <string name="library_categories">Mga kategorya ng librerya</string>
@@ -279,11 +285,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Sundin ang pahina ng Pinterest para sa inspirasyon sa disenyo ng Retro Music</string>
     <string name="plain">Payak</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Ang notification sa pag-play ay nagbibigay ng mga aksyon para sa pag-play/pause atbp.</string>
     <string name="playing_notification_name">Nagpe-play ng notification</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Ang Playlist ay walang laman</string>
     <string name="playlist_name_empty">Pangalan ng playlist</string>
     <string name="playlists">Mga Playlist</string>
@@ -310,7 +318,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Gamitin ang kasalukuyang nagpe-play ng album cover ng kanta bilang lockscreen na wallpaper</string>
     <string name="pref_summary_album_artists_only">Ipakita ang Mga Album Artista sa kategorya ng Artista</string>
     <string name="pref_summary_audio_ducking">Hinaan ang volume kapag nag-play ng system sound o natanggap ang notification</string>
-    <string name="pref_summary_audio_fade">Fade audio kapag Naka-pause o Nagpe-play ang Kanta</string>
+    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
     <string name="pref_summary_blacklist">Nakatago sa iyong librerya ang nilalaman ng mga naka-blacklist na folder.</string>
     <string name="pref_summary_bluetooth_playback">Simulan ang pagplay sa sandaling nakakonekta sa bluetooth device</string>
     <string name="pref_summary_blurred_album_art">I-blur ang album cover sa lockscreen. Maaaring magdulot ng mga problema sa mga third party na app at widget</string>
@@ -330,9 +338,11 @@
     <string name="pref_summary_library_categories">I-configure ang visibility at pagkakasunud-sunod ng mga kategorya ng librerya.</string>
     <string name="pref_summary_lock_screen">Gamitin ang mga custom na kontrol sa lockscreen ng Retro Music</string>
     <string name="pref_summary_open_source_licences">Mga detalye ng lisensya para sa open source software</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Mag-navigate sa huling ginamit na tab sa simula</string>
-    <string name="pref_summary_show_lyrics">Ipakita ang Naka-sync na Lyrics sa Album Cover</string>
-    <string name="pref_summary_suggestions">Ipakita ang Bagong Music Mix sa Homescreen</string>
+    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">Simulan ang pag-play kaagad pagkatapos maikonekta ang mga headphone</string>
     <string name="pref_summary_toggle_shuffle">Mag-o-off ang shuffle mode kapag nagpe-play ng bagong listahan ng mga kanta</string>
@@ -373,9 +383,11 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Tema ng nagpe-play ngayon</string>
     <string name="pref_title_open_source_licences">Mga lisensyang open source</string>
-    <string name="pref_title_remember_tab">Tandaan ang Huling Tab</string>
-    <string name="pref_title_show_lyrics">Ipakita ang Mga Lyrics</string>
-    <string name="pref_title_suggestions">Ipakita ang Mga Mungkahi</string>
+    <string name="pref_title_pause_history">Pause history</string>
+    <string name="pref_title_remember_tab">Remember last tab</string>
+    <string name="pref_title_show_lyrics">Show lyrics</string>
+    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Mode ng mga pamagat ng tab</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">I-Fullscreen ang app</string>
@@ -396,6 +408,7 @@
     <string name="remove_action">Alisin</string>
     <string name="remove_cover">Alisin ang cover</string>
     <string name="remove_from_blacklist">Alisin sa blacklist</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Alisin ang kanta sa playlist</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Alisin ang kantang <b>%1$s</b> mula sa playlist?]]></string>
     <string name="remove_songs_from_playlist_title">Alisin ang mga kanta sa playlist</string>

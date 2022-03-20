@@ -54,6 +54,7 @@
     <string name="add_action">Dodaj</string>
     <string name="add_playlist_title">"Dodaj na plejlistu"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"Dodata je 1 pesma na plejlistu"</string>
     <string name="added_x_titles_to_playing_queue">Dodato %1$d pesama na plejlistu</string>
     <string name="album">Album</string>
@@ -117,12 +118,14 @@
     <string name="cascading">Cascading</string>
     <string name="changelog">Izmene</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
     <string name="classic">Classic</string>
     <string name="clear_action">Ocisti</string>
     <string name="clear_blacklist">Ocisti listu za ignorisanje foldera</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Clear queue</string>
     <string name="color">Color</string>
     <string name="colors">Boje</string>
@@ -138,6 +141,7 @@
     <string name="credit_title">Members and contributors </string>
     <string name="currently_listening_to_x_by_x">Trenutno se reprodukuje %1$s izvodjaca %2$s</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Kao tamno</string>
     <string name="delete_playlist_title">Izbrisi plejlistu</string>
     <string name="delete_playlist_x"><![CDATA[Izbrisi <b>%1$s</b> plejlistu?]]></string>
@@ -196,6 +200,8 @@
     <string name="help_summary">Need more help?</string>
     <string name="hinge">Hinge</string>
     <string name="history">Istorija reprodukovanja</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Pocetak</string>
     <string name="horizontal_flip">Horizontal flip</string>
     <string name="image">Image</string>
@@ -281,11 +287,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
     <string name="plain">Jednostavan</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Obavestenja obezbedjuju komande za pustanje/pauziranje itd.</string>
     <string name="playing_notification_name">Obavestenja o reprodukciji</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Plejlista je prazna</string>
     <string name="playlist_name_empty">Ime plejliste</string>
     <string name="playlists">Plejliste</string>
@@ -332,9 +340,11 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Prikazuj kontrole na zakljucanom ekranu</string>
     <string name="pref_summary_open_source_licences">Detalji o licencama za softver otvorenog izvora</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Omoguci ovo za impresivan mod.</string>
     <string name="pref_summary_toggle_headset">Kada se prikljuce slusalice automatki pusti pesme</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
@@ -375,9 +385,11 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Izgled</string>
     <string name="pref_title_open_source_licences">Otvoren izvor licenca</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">Aplikacija preko celog ekrana</string>
@@ -398,6 +410,7 @@
     <string name="remove_action">Izbrisi</string>
     <string name="remove_cover">Izbrisi omot albuma</string>
     <string name="remove_from_blacklist">Izbrisi sa liste za ignorisanje foldera</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Izbrisi pesmu sa plejliste</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Obrisi <b>%1$s</b> sa plejliste?]]></string>
     <string name="remove_songs_from_playlist_title">Izbrisi pesme sa plejliste</string>

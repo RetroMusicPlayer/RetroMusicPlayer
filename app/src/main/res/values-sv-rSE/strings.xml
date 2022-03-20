@@ -54,6 +54,7 @@
     <string name="add_action">Lägg till</string>
     <string name="add_playlist_title">"Lägg till i spellista"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
     <string name="added_title_to_playing_queue">"Lade till en titel i spelkön."</string>
     <string name="added_x_titles_to_playing_queue">Lade till %1$d titlar i spelkön.</string>
     <string name="album">Album</string>
@@ -115,12 +116,14 @@
     <string name="cascading">Släng iväg</string>
     <string name="changelog">Ändringslogg</string>
     <string name="changelog_summary">Check out What\'s New</string>
+    <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Cirkel</string>
     <string name="circular">Cirkulär</string>
     <string name="classic">Klassisk</string>
     <string name="clear_action">Rensa</string>
     <string name="clear_blacklist">Rensa svartlista</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">Rensa spelkö</string>
     <string name="color">Färg</string>
     <string name="colors">Färger</string>
@@ -136,6 +139,7 @@
     <string name="credit_title">Medlemmar och bidragsgivare</string>
     <string name="currently_listening_to_x_by_x">Lyssnar just nu på %1$s av %2$s.</string>
     <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Ganska mörkt</string>
     <string name="delete_playlist_title">Radera spellista</string>
     <string name="delete_playlist_x"><![CDATA[Radera spellistan <b>%1$s</b>?]]></string>
@@ -194,6 +198,8 @@
     <string name="help_summary">Need more help?</string>
     <string name="hinge">Gångjärn</string>
     <string name="history">Historik</string>
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Hem</string>
     <string name="horizontal_flip">Vänd horisontellt</string>
     <string name="image">Bild</string>
@@ -279,11 +285,13 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Följ vår Pinterestsida för lite designinspiration till Retro Music</string>
     <string name="plain">Enkel</string>
+    <string name="playList_already_exits">Playlist already exists</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
     <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">Notisen har knappar för play/pause etc.</string>
     <string name="playing_notification_name">Notis</string>
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Spellistan är tom</string>
     <string name="playlist_name_empty">Namn på spellista</string>
     <string name="playlists">Spellistor</string>
@@ -330,9 +338,11 @@
     <string name="pref_summary_library_categories">Konfigurera synlighet och ordning för bibliotekskategorier.</string>
     <string name="pref_summary_lock_screen">Använd Retro Music:s anpassade låsskärmskontroller</string>
     <string name="pref_summary_open_source_licences">Licensinformation för programvara med öppen källkod</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Uppslukande läge</string>
     <string name="pref_summary_toggle_headset">Börja spela direkt då hörlurar ansluts</string>
     <string name="pref_summary_toggle_shuffle">Shuffleläget stängs av när du spelar en ny lista med låtar</string>
@@ -373,9 +383,11 @@
     <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Spelartema</string>
     <string name="pref_title_open_source_licences">Licenser för öppen källkod</string>
+    <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Fliktitlar</string>
     <string name="pref_title_toggle_carousel_effect">Karuselleffekt</string>
     <string name="pref_title_toggle_full_screen">Helskärmsapp</string>
@@ -396,6 +408,7 @@
     <string name="remove_action">Ta bort</string>
     <string name="remove_cover">Ta bort omslag</string>
     <string name="remove_from_blacklist">Ta bort från svartlistan</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Ta bort låten från spellistan</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Ta bort låten <b>%1$s</b> från spellistan?]]></string>
     <string name="remove_songs_from_playlist_title">Ta bort låtar från spellistan</string>
