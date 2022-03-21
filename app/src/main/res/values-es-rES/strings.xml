@@ -216,7 +216,7 @@
     <string name="label_file_name">Nombre del archivo</string>
     <string name="label_file_path">Ruta del archivo</string>
     <string name="label_file_size">Tamaño</string>
-    <string name="label_last_modified">Última modificación</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Más de %s</string>
     <string name="label_sampling_rate">Tasa de muestreo</string>
     <string name="label_track_length">Duración</string>
@@ -274,7 +274,7 @@
     <string name="past_three_months">Más de 3 meses</string>
     <string name="paste_lyrics_here">Pega las Letras Aquí</string>
     <string name="paste_timeframe_lyrics_here">Pegar las letras con marcas de tiempo aquí</string>
-    <string name="peek">Pico</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Permiso para acceder al almacenamiento externo denegado.</string>
     <string name="permission_summary">La aplicación necesita permiso para acceder al almacenamiento de tu dispositivo y reproducir música</string>
     <string name="permission_title">Acceso al Almacenamiento</string>
