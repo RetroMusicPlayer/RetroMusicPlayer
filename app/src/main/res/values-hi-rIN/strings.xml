@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
+    <string name="about_album_label">%s के बारे में</string>
     <string name="about_settings_summary">टीम, सामाजिक लिंक</string>
     <string name="accent_color">एक्सेंट रंग</string>
     <string name="accent_color_desc">The theme accent color, defaults to purple</string>
