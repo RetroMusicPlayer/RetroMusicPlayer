@@ -220,7 +220,7 @@
     <string name="label_file_name">Název souboru</string>
     <string name="label_file_path">Umístění souboru</string>
     <string name="label_file_size">Velikost</string>
-    <string name="label_last_modified">Naposledy změněno</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Více od %s</string>
     <string name="label_sampling_rate">Vzorkovací frekvence</string>
     <string name="label_track_length">Délka</string>

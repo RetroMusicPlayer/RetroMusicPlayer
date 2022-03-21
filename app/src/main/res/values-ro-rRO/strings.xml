@@ -218,7 +218,7 @@
     <string name="label_file_name">Numele fișierului</string>
     <string name="label_file_path">Dosarul fișierului</string>
     <string name="label_file_size">Mărime</string>
-    <string name="label_last_modified">Ultima modificare</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">More from %s</string>
     <string name="label_sampling_rate">Rata de eșantionare</string>
     <string name="label_track_length">Lungime</string>

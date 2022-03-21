@@ -216,7 +216,7 @@
     <string name="label_file_name">Fájl név</string>
     <string name="label_file_path">Fájl elérési út</string>
     <string name="label_file_size">Méret</string>
-    <string name="label_last_modified">Utoljára módosítva</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Több a következőtől: %s</string>
     <string name="label_sampling_rate">Mintavételi arány</string>
     <string name="label_track_length">Hossz</string>
@@ -274,7 +274,7 @@
     <string name="past_three_months">Elmúlt 3 hónap</string>
     <string name="paste_lyrics_here">Dalszöveg beillesztése ide</string>
     <string name="paste_timeframe_lyrics_here">Időzített dalszöveg beillesztése ide</string>
-    <string name="peek">Csúcs</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">A külső tárolási hozzáférés engedélyezése tiltva.</string>
     <string name="permission_summary">Az alkalmazásnak engedélyre van szüksége az eszköz tárhelyéhez a zenék lejátszásához</string>
     <string name="permission_title">Tárhely engedély</string>
