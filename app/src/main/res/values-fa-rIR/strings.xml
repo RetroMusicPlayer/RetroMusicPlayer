@@ -216,7 +216,7 @@
     <string name="label_file_name">نام فایل</string>
     <string name="label_file_path">مسیر فایل</string>
     <string name="label_file_size">سایز</string>
-    <string name="label_last_modified">آخرین اصلاح</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">بیشتر از s%</string>
     <string name="label_sampling_rate">نرخ سمپل</string>
     <string name="label_track_length">مدت</string>
