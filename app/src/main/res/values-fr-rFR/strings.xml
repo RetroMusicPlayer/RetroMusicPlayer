@@ -255,7 +255,7 @@
     <string name="no_songs">Aucun morceau</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Paroles normales</string>
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> N\'est pas répertorié dans le stockage des médias.]]></string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> N'est pas répertorié dans le stockage des médias.]]></string>
     <string name="not_recently_played">Non jouée récemment</string>
     <string name="nothing_to_scan">Rien à scanner.</string>
     <string name="nothing_to_see">Rien à afficher</string>
