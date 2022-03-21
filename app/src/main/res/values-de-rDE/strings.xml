@@ -216,7 +216,7 @@
     <string name="label_file_name">Dateiname</string>
     <string name="label_file_path">Dateipfad</string>
     <string name="label_file_size">Größe</string>
-    <string name="label_last_modified">Zuletzt geändert</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Mehr von %s</string>
     <string name="label_sampling_rate">Sampling Rate</string>
     <string name="label_track_length">Länge</string>
@@ -274,7 +274,7 @@
     <string name="past_three_months">Letzte 3 Monate</string>
     <string name="paste_lyrics_here">Songtext hier einfügen</string>
     <string name="paste_timeframe_lyrics_here">Songtexte mit Zeitfenster hier einfügen</string>
-    <string name="peek">Spitze</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Berechtigung für den Zugriff auf externen Speicher verweigert.</string>
     <string name="permission_summary">Die App benötigt die Berechtigung für den Zugriff auf den Gerätespeicher, um Musik abspielen zu können</string>
     <string name="permission_title">Speicherzugriff</string>
