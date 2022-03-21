@@ -469,7 +469,6 @@
     <string name="sort_order">Sıralama Ölçütü</string>
     <string name="sort_order_a_z">Yükselen</string>
     <string name="sort_order_album">Albüm</string>
-    <string name="sort_order_album_artist">\@sıra/albüm_sanatçısı</string>
     <string name="sort_order_artist">Sanatçı</string>
     <string name="sort_order_composer">Besteci</string>
     <string name="sort_order_date">Tarih eklendi</string>
