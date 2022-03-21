@@ -220,7 +220,7 @@
     <string name="label_file_name">Назва файлу</string>
     <string name="label_file_path">Шлях до файлу</string>
     <string name="label_file_size">Розмір</string>
-    <string name="label_last_modified">Остання зміна</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Більше від %s</string>
     <string name="label_sampling_rate">Частота дискретизації</string>
     <string name="label_track_length">Довжина</string>
@@ -278,7 +278,7 @@
     <string name="past_three_months">Останні 3 місяці</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
-    <string name="peek">Пік</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Відмовлено у доступі до зовнішнього сховища.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>
