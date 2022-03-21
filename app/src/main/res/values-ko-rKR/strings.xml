@@ -72,7 +72,6 @@
     <string name="app_shortcut_top_tracks_short">자주 재생한 음악</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">카드</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">클래식</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">소형</string>
@@ -468,7 +467,6 @@
     <string name="sort_order">정렬 순서</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">앨범</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">아티스트</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>

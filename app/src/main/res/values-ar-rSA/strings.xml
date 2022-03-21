@@ -84,7 +84,6 @@
     <string name="app_shortcut_top_tracks_short">المسارات الاكثر شعبية</string>
     <string name="app_widget_big_name">صورة كاملة</string>
     <string name="app_widget_card_name">ريترو ميوزك - بطاقة</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">ريترو ميوزك - تقليدي</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">ريترو ميوزك - صغير</string>
@@ -481,7 +480,6 @@
     <string name="sort_order">ترتيب الفرز</string>
     <string name="sort_order_a_z">تصاعدي</string>
     <string name="sort_order_album">الالبوم</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">الفنان</string>
     <string name="sort_order_composer">المؤلف</string>
     <string name="sort_order_date">التاريخ</string>

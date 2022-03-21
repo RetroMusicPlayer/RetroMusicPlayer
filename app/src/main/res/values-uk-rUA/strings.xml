@@ -78,7 +78,6 @@
     <string name="app_shortcut_top_tracks_short">Кращі треки</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Ретро музика - Картка</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Ретро-музика - Класичний</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Ретро-музика - Малий</string>
@@ -474,7 +473,6 @@
     <string name="sort_order">Порядок сортування</string>
     <string name="sort_order_a_z">За зростанням</string>
     <string name="sort_order_album">Альбом</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Виконавець</string>
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата додавання</string>

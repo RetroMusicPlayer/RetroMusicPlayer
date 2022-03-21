@@ -72,7 +72,6 @@
     <string name="app_shortcut_top_tracks_short">ထိပ်ဆုံးသီချင်းများ</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">ကတ်</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">ရိုးရိုး</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">အသေး</string>
@@ -468,7 +467,6 @@
     <string name="sort_order">အထားအသိုပြင်မည်</string>
     <string name="sort_order_a_z">ငယ်ရာမှကြီးရာ</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">အဆိုတော်</string>
     <string name="sort_order_composer">တေးရေးဆရာ</string>
     <string name="sort_order_date">ထည့်သွင်းသည့်ရက်</string>

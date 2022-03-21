@@ -74,7 +74,6 @@
     <string name="app_shortcut_top_tracks_short">Top Songs</string>
     <string name="app_widget_big_name">Vollständiges Bild</string>
     <string name="app_widget_card_name">Retro Musik - Karte</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Klassik</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Klein</string>
@@ -470,7 +469,6 @@
     <string name="sort_order">Sortierreihenfolge</string>
     <string name="sort_order_a_z">Aufsteigend</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Künstler</string>
     <string name="sort_order_composer">Komponist</string>
     <string name="sort_order_date">Datum</string>
