@@ -470,7 +470,6 @@
     <string name="sort_order">مرتب سازی</string>
     <string name="sort_order_a_z">صعودی</string>
     <string name="sort_order_album">آلبوم</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">هنرمند</string>
     <string name="sort_order_composer">آهنگساز</string>
     <string name="sort_order_date">تاریخ اضافه شدن</string>

@@ -74,7 +74,6 @@
     <string name="app_shortcut_top_tracks_short">टॉप गीत</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">रेट्रो म्यूजिक - कार्ड</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">रेट्रो म्यूजिक - क्लासिक</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">छोटा</string>
@@ -470,7 +469,6 @@
     <string name="sort_order">क्रमबद्ध आदेश</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">एल्बम</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">कलाकार</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>

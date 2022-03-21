@@ -470,7 +470,6 @@
     <string name="sort_order">Ordenar por</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">Álbum</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Artista</string>
     <string name="sort_order_composer">Compositores</string>
     <string name="sort_order_date">Date added</string>

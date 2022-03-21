@@ -32,4 +32,7 @@
 
     <bool name="wallpaper_accent_enabled">false</bool>
     <bool name="wallpaper_accent_visible">false</bool>
+
+    <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="app_widget_circle_name">@string/circle</string>
 </resources>

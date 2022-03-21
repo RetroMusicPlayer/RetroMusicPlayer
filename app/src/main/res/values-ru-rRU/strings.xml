@@ -78,7 +78,6 @@
     <string name="app_shortcut_top_tracks_short">Лучшие треки</string>
     <string name="app_widget_big_name">Полное Изображение</string>
     <string name="app_widget_card_name">Компактный</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Классический</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Маленькое изображение</string>
@@ -474,7 +473,6 @@
     <string name="sort_order">Порядок сортировки</string>
     <string name="sort_order_a_z">По возрастанию</string>
     <string name="sort_order_album">Альбом</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Исполнитель</string>
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата</string>

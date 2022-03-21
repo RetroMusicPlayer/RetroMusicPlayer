@@ -78,7 +78,6 @@
     <string name="app_shortcut_top_tracks_short">Nejlepší skladby</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Karta</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Klasický</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Malý</string>
@@ -474,7 +473,6 @@
     <string name="sort_order">Řazení </string>
     <string name="sort_order_a_z">Vzestupně</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Umělec</string>
     <string name="sort_order_composer">Skladatel</string>
     <string name="sort_order_date">Datum přidání</string>

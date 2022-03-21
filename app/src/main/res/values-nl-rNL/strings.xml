@@ -74,7 +74,6 @@
     <string name="app_shortcut_top_tracks_short">Top tracks</string>
     <string name="app_widget_big_name">Volledige Afbeelding</string>
     <string name="app_widget_card_name">Kaart</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Klassiek</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Klein</string>
@@ -470,7 +469,6 @@
     <string name="sort_order">Volgorde </string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Artiest</string>
     <string name="sort_order_composer">Componist</string>
     <string name="sort_order_date">Date added</string>

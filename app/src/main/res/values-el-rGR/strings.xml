@@ -74,7 +74,6 @@
     <string name="app_shortcut_top_tracks_short">Κορυφαία Κομμάτια</string>
     <string name="app_widget_big_name">Πλήρης εικόνα</string>
     <string name="app_widget_card_name">Κάρτα</string>
-    <string name="app_widget_circle_name">@string/κύκλος</string>
     <string name="app_widget_classic_name">Κλασσικό</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Μικρό</string>
@@ -470,7 +469,6 @@
     <string name="sort_order">Σειρά Διάταξης</string>
     <string name="sort_order_a_z">Αύξουσα</string>
     <string name="sort_order_album">Άλμπουμ</string>
-    <string name="sort_order_album_artist">@string/άλμπουμ_καλλιτέχνης</string>
     <string name="sort_order_artist">Καλλιτέχνης</string>
     <string name="sort_order_composer">Συνθέτης</string>
     <string name="sort_order_date">Ημερομηνία προσθήκης</string>

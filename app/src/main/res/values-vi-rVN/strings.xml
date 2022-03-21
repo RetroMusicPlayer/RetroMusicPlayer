@@ -72,7 +72,6 @@
     <string name="app_shortcut_top_tracks_short">Bản nhạc hàng đầu</string>
     <string name="app_widget_big_name">Hình ảnh đầy đủ</string>
     <string name="app_widget_card_name">Thẻ</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Cổ điển</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Nhỏ</string>
@@ -469,7 +468,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="sort_order">Thứ tự sắp xếp</string>
     <string name="sort_order_a_z">Tăng dần</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Nghệ sĩ</string>
     <string name="sort_order_composer">Tác giả</string>
     <string name="sort_order_date">Ngày</string>

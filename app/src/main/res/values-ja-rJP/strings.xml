@@ -72,7 +72,6 @@
     <string name="app_shortcut_top_tracks_short">トップ曲</string>
     <string name="app_widget_big_name">元画像</string>
     <string name="app_widget_card_name">レトロミュージック - カード</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">レトロミュージック - クラシック</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">レトロミュージック - 小</string>
@@ -469,7 +468,6 @@
     <string name="sort_order">順番をソート</string>
     <string name="sort_order_a_z">昇順</string>
     <string name="sort_order_album">アルバム</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">アーティスト</string>
     <string name="sort_order_composer">作曲家</string>
     <string name="sort_order_date">日付</string>

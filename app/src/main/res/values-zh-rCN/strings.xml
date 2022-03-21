@@ -72,7 +72,6 @@
     <string name="app_shortcut_top_tracks_short">热门曲目</string>
     <string name="app_widget_big_name">完整图像</string>
     <string name="app_widget_card_name">卡片</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">经典</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">小巧</string>
@@ -468,7 +467,6 @@
     <string name="sort_order">排序</string>
     <string name="sort_order_a_z">升序</string>
     <string name="sort_order_album">专辑</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">艺术家</string>
     <string name="sort_order_composer">作曲家</string>
     <string name="sort_order_date">日期</string>

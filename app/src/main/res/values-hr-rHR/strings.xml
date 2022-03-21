@@ -76,7 +76,6 @@
     <string name="app_shortcut_top_tracks_short">Top Tracks</string>
     <string name="app_widget_big_name">Full Image</string>
     <string name="app_widget_card_name">Card</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Classic</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Small</string>
@@ -472,7 +471,6 @@
     <string name="sort_order">Redoslijed sortiranja</string>
     <string name="sort_order_a_z">Uzlazno</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Izvođač</string>
     <string name="sort_order_composer">Skladatelj</string>
     <string name="sort_order_date">Datum dodavanja</string>

@@ -72,7 +72,6 @@
     <string name="app_shortcut_top_tracks_short">Lagu Teratas</string>
     <string name="app_widget_big_name">Gambar penuh</string>
     <string name="app_widget_card_name">Kartu</string>
-    <string name="app_widget_circle_name">@string/circle</string>
     <string name="app_widget_classic_name">Klasik</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Kecil</string>
@@ -468,7 +467,6 @@
     <string name="sort_order">Urut berdasarkan</string>
     <string name="sort_order_a_z">Sortir naik</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="sort_order_artist">Artis</string>
     <string name="sort_order_composer">Komposer</string>
     <string name="sort_order_date">Tanggal ditambahkan</string>
