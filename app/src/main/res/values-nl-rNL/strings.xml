@@ -216,7 +216,7 @@
     <string name="label_file_name">Bestandsnaam</string>
     <string name="label_file_path">Bestandslocatie</string>
     <string name="label_file_size">Grootte</string>
-    <string name="label_last_modified">Laatst gewijzigd</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">Meer van %s</string>
     <string name="label_sampling_rate">Samplingfrequentie</string>
     <string name="label_track_length">Duur</string>
@@ -274,7 +274,7 @@
     <string name="past_three_months">Laatste 3 maanden</string>
     <string name="paste_lyrics_here">Plak tekst/lyrics hier</string>
     <string name="paste_timeframe_lyrics_here">Plak timeframe tekst/lyrics hier</string>
-    <string name="peek">Piek</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Permissie voor toegang tot extern opslag is afgewezen</string>
     <string name="permission_summary">De app heeft toestemming nodig tot je apparaat\'s opslag om muziek af te kunnen spelen</string>
     <string name="permission_title">Toegang tot opslag</string>
