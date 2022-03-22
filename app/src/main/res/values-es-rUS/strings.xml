@@ -54,7 +54,7 @@
     <string name="add_action">Agregar</string>
     <string name="add_playlist_title">"Agregar a playlist"</string>
     <string name="add_time_framed_lryics">Agregar letras de marcos de tiempo</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">%d Cancion(es) añadidas a %s</string>
     <string name="added_title_to_playing_queue">"Se agregó 1 canción a la cola de reproducción."</string>
     <string name="added_x_titles_to_playing_queue">Se agregó %1$d canción a la cola de reproducción.</string>
     <string name="album">Álbum</string>
@@ -115,14 +115,14 @@
     <string name="cascading">En cascada</string>
     <string name="changelog">Registro de cambios</string>
     <string name="changelog_summary">Ver las novedades</string>
-    <string name="choose_image">Choose Image</string>
+    <string name="choose_image">Elegir imágen</string>
     <string name="choose_restore_title">Elige qué restaurar</string>
     <string name="circle">Circular</string>
     <string name="circular">Circular</string>
     <string name="classic">Clásico</string>
     <string name="clear_action">Borrar</string>
     <string name="clear_blacklist">Borrar lista negra</string>
-    <string name="clear_history">Clear History</string>
+    <string name="clear_history">Limpiar historial</string>
     <string name="clear_playing_queue">Borrar cola</string>
     <string name="color">Color</string>
     <string name="colors">Colores</string>
@@ -138,7 +138,7 @@
     <string name="credit_title">Miembros y colaboradores </string>
     <string name="currently_listening_to_x_by_x">Actualmente escuchando %1$s de %2$s.</string>
     <string name="custom_artist_images">Imágenes personalizadas de artistas</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Compartir reporte de fallo</string>
     <string name="dark_theme_name">Un poco oscuro</string>
     <string name="delete_playlist_title">Eliminar playlist</string>
     <string name="delete_playlist_x"><![CDATA[Eliminar la playlist <b>%1$s</b>?]]></string>
@@ -197,7 +197,7 @@
     <string name="help_summary">¿Necesitas más ayuda?</string>
     <string name="hinge">Giro</string>
     <string name="history">Historial</string>
-    <string name="history_cleared">History cleared</string>
+    <string name="history_cleared">Historial limpio</string>
     <string name="history_undo_button">Undo</string>
     <string name="home">Inicio</string>
     <string name="horizontal_flip">Giro horizontal</string>
