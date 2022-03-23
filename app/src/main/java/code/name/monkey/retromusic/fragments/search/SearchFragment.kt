@@ -24,7 +24,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.annotation.IdRes
 import androidx.core.content.getSystemService
 import androidx.core.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,7 +51,7 @@ import java.util.*
 
 
 class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWatcher,
-    ChipGroup.OnCheckedChangeListener {
+    ChipGroup.OnCheckedStateChangeListener {
     companion object {
         const val QUERY = "query"
         const val REQ_CODE_SPEECH_INPUT = 9001
@@ -134,7 +133,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
                 it.chipBackgroundColor = ColorStateList(states, colors)
             }
         }
-        binding.searchFilterGroup.setOnCheckedChangeListener(this)
+        binding.searchFilterGroup.setOnCheckedStateChangeListener(this)
     }
 
     private fun showData(data: List<Any>) {
@@ -241,7 +240,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         }
     }
 
-    override fun onCheckedChanged(group: ChipGroup?, @IdRes checkedId: Int) {
+    override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
         search(binding.searchView.text.toString())
     }
 }
