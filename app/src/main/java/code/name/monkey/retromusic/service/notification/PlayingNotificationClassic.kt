@@ -56,13 +56,28 @@ import com.bumptech.glide.request.transition.Transition
 class PlayingNotificationClassic(
     val context: Context
 ) : PlayingNotification(context) {
-
     private var primaryColor: Int = 0
     private var isInitialized = false
 
-    init {
-        val notificationLayout = getCombinedRemoteViews(true)
-        val notificationLayoutBig = getCombinedRemoteViews(false)
+    private fun getCombinedRemoteViews(collapsed: Boolean, song: Song): RemoteViews {
+        val remoteViews = RemoteViews(
+            context.packageName,
+            if (collapsed) R.layout.layout_notification_collapsed else R.layout.layout_notification_expanded
+        )
+        remoteViews.setTextViewText(
+            R.id.appName,
+            context.getString(R.string.app_name) + " • " + song.albumName
+        )
+        remoteViews.setTextViewText(R.id.title, song.title)
+        remoteViews.setTextViewText(R.id.subtitle, song.artistName)
+        linkButtons(remoteViews)
+        return remoteViews
+    }
+
+    override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
+        isInitialized = true
+        val notificationLayout = getCombinedRemoteViews(true, song)
+        val notificationLayoutBig = getCombinedRemoteViews(false, song)
 
         val action = Intent(context, MainActivity::class.java)
         action.putExtra(MainActivity.EXPAND_PANEL, PreferenceUtil.isExpandPanel)
@@ -83,25 +98,12 @@ class PlayingNotificationClassic(
         setContentIntent(clickIntent)
         setDeleteIntent(deleteIntent)
         setCategory(NotificationCompat.CATEGORY_SERVICE)
-        setColorized(true)
+        setColorized(PreferenceUtil.isColoredNotification)
         priority = NotificationCompat.PRIORITY_MAX
         setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         setCustomContentView(notificationLayout)
         setCustomBigContentView(notificationLayoutBig)
         setOngoing(true)
-    }
-
-    private fun getCombinedRemoteViews(collapsed: Boolean): RemoteViews {
-        val remoteViews = RemoteViews(
-            context.packageName,
-            if (collapsed) R.layout.layout_notification_collapsed else R.layout.layout_notification_expanded
-        )
-        linkButtons(remoteViews)
-        return remoteViews
-    }
-
-    override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
-        isInitialized = true
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
         GlideApp.with(context).asBitmapPalette().songCoverOptions(song)
@@ -128,6 +130,10 @@ class PlayingNotificationClassic(
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
+                    update(
+                        null,
+                        resolveColor(context, R.attr.colorSurface, Color.WHITE)
+                    )
                 }
 
                 private fun update(bitmap: Bitmap?, bgColor: Int) {
@@ -208,14 +214,6 @@ class PlayingNotificationClassic(
                     contentView.setImageViewBitmap(R.id.action_next, next)
                     contentView.setImageViewBitmap(R.id.action_play_pause, playPause)
 
-                    contentView.setTextViewText(
-                        R.id.appName,
-                        context.getString(R.string.app_name) + " • " + song.albumName
-                    )
-                    contentView.setTextViewText(R.id.title, song.title)
-                    contentView.setTextViewText(R.id.subtitle, song.artistName)
-
-
                     bigContentView.setTextColor(R.id.title, primary)
                     bigContentView.setTextColor(R.id.subtitle, secondary)
                     bigContentView.setTextColor(R.id.appName, secondary)
@@ -224,14 +222,6 @@ class PlayingNotificationClassic(
                     bigContentView.setImageViewBitmap(R.id.action_prev, prev)
                     bigContentView.setImageViewBitmap(R.id.action_next, next)
                     bigContentView.setImageViewBitmap(R.id.action_play_pause, playPause)
-
-                    bigContentView.setTextViewText(
-                        R.id.appName,
-                        context.getString(R.string.app_name) + " • " + song.albumName
-                    )
-                    bigContentView.setTextViewText(R.id.title, song.title)
-                    bigContentView.setTextViewText(R.id.subtitle, song.artistName)
-
 
                     contentView.setImageViewBitmap(
                         R.id.smallIcon,
@@ -269,7 +259,7 @@ class PlayingNotificationClassic(
         )
     }
 
-    override fun setPlaying(isPlaying: Boolean, onUpdate: () -> Unit) {
+    override fun setPlaying(isPlaying: Boolean) {
         getPlayPauseBitmap(isPlaying).also {
             contentView.setImageViewBitmap(R.id.action_play_pause, it)
             bigContentView.setImageViewBitmap(R.id.action_play_pause, it)
@@ -277,9 +267,6 @@ class PlayingNotificationClassic(
     }
 
     override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
-        if (!isInitialized) {
-            updateMetadata(song, onUpdate)
-        }
     }
 
     private fun buildPendingIntent(

@@ -68,8 +68,8 @@ import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore
 import code.name.monkey.retromusic.providers.SongPlayCountStore
 import code.name.monkey.retromusic.service.AudioFader.Companion.startFadeAnimator
 import code.name.monkey.retromusic.service.notification.PlayingNotification
-import code.name.monkey.retromusic.service.notification.PlayingNotificationClassic.Companion.from
-import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl24.Companion.from
+import code.name.monkey.retromusic.service.notification.PlayingNotificationClassic
+import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl24
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.MusicUtil.getMediaStoreAlbumCoverUri
@@ -194,10 +194,10 @@ class MusicService : MediaBrowserServiceCompat(),
         playerHandler?.obtainMessage(FOCUS_CHANGE, focusChange, 0)?.sendToTarget()
     }
     private var playingNotification: PlayingNotification? = null
+
     private val updateFavoriteReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             playingNotification?.updateFavorite(currentSong) { startForegroundOrNotify() }
-            startForegroundOrNotify()
             appWidgetCircle.notifyChange(this@MusicService, FAVORITE_STATE_CHANGED)
         }
     }
@@ -594,9 +594,9 @@ class MusicService : MediaBrowserServiceCompat(),
         playingNotification = if (VERSION.SDK_INT >= VERSION_CODES.N
             && !isClassicNotification
         ) {
-            from(this, notificationManager!!, mediaSession!!)
+            PlayingNotificationImpl24.from(this, notificationManager!!, mediaSession!!)
         } else {
-            from(this, notificationManager!!)
+            PlayingNotificationClassic.from(this, notificationManager!!)
         }
     }
 
@@ -732,11 +732,18 @@ class MusicService : MediaBrowserServiceCompat(),
                 }
             }
             ALBUM_ART_ON_LOCK_SCREEN, BLURRED_ALBUM_ART -> updateMediaSessionMetaData()
-            COLORED_NOTIFICATION -> updateNotification()
+            COLORED_NOTIFICATION -> {
+                playingNotification?.updateMetadata(currentSong) {
+                    playingNotification?.setPlaying(isPlaying)
+                    startForegroundOrNotify()
+                }
+            }
             CLASSIC_NOTIFICATION -> {
                 updateNotification()
-                playingNotification?.setPlaying(isPlaying) { startForegroundOrNotify() }
-                playingNotification?.updateMetadata(currentSong) { startForegroundOrNotify() }
+                playingNotification?.updateMetadata(currentSong) {
+                    playingNotification?.setPlaying(isPlaying)
+                    startForegroundOrNotify()
+                }
             }
             PLAYBACK_SPEED -> updateMediaSessionPlaybackState()
             TOGGLE_HEADSET -> registerHeadsetEvents()
@@ -1195,12 +1202,14 @@ class MusicService : MediaBrowserServiceCompat(),
                     savePositionInTrack()
                 }
                 songPlayCountHelper.notifyPlayStateChanged(isPlaying)
-                playingNotification?.setPlaying(isPlaying) { startForegroundOrNotify() }
+                playingNotification?.setPlaying(isPlaying)
                 startForegroundOrNotify()
             }
             FAVORITE_STATE_CHANGED -> {
-                playingNotification?.updateFavorite(currentSong) { startForegroundOrNotify() }
-                playingNotification?.updateMetadata(currentSong) { startForegroundOrNotify() }
+                playingNotification?.updateFavorite(currentSong) {
+                    startForegroundOrNotify()
+                }
+
                 updateMediaSessionMetaData()
                 updateMediaSessionPlaybackState()
                 savePosition()

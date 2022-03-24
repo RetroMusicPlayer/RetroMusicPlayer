@@ -46,10 +46,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 @SuppressLint("RestrictedApi")
 class PlayingNotificationImpl24(
@@ -207,9 +204,8 @@ class PlayingNotificationImpl24(
         ).build()
     }
 
-    override fun setPlaying(isPlaying: Boolean, onUpdate: () -> Unit) {
+    override fun setPlaying(isPlaying: Boolean) {
         mActions[2] = buildPlayAction(isPlaying)
-        onUpdate()
     }
 
     override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
