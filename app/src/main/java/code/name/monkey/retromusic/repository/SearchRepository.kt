@@ -16,7 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.fragments.search.Filter
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
@@ -93,10 +93,10 @@ class RealSearchRepository(
             }
 
             /** Playlists **/
-            val playlist: List<PlaylistEntity> =
+            val playlist: List<PlaylistWithSongs> =
                 if (filter == Filter.PLAYLISTS || filter == Filter.NO_FILTER) {
-                    roomRepository.playlists().filter { playlist ->
-                        playlist.playlistName.lowercase().contains(searchString.lowercase())
+                    roomRepository.playlistWithSongs().filter { playlist ->
+                        playlist.playlistEntity.playlistName.lowercase().contains(searchString.lowercase())
                     }
                 } else {
                     emptyList()
