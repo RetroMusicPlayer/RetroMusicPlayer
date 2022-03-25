@@ -96,6 +96,7 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal. Modified by Prathamesh More
@@ -175,10 +176,10 @@ class MusicService : MediaBrowserServiceCompat(),
     private lateinit var mediaStoreObserver: ContentObserver
     private var musicPlayerHandlerThread: HandlerThread? = null
     private var notHandledMetaChangedForCurrentTrack = false
-    private var originalPlayingQueue = mutableListOf<Song>()
+    private var originalPlayingQueue = ArrayList<Song>()
 
     @JvmField
-    var playingQueue = mutableListOf<Song>()
+    var playingQueue = ArrayList<Song>()
     var isPausedByTransientLossOfFocus = false
     private val becomingNoisyReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -1037,8 +1038,8 @@ class MusicService : MediaBrowserServiceCompat(),
                     SAVED_POSITION_IN_TRACK, -1
                 )
             if (restoredQueue.size > 0 && restoredQueue.size == restoredOriginalQueue.size && restoredPosition != -1) {
-                originalPlayingQueue = restoredOriginalQueue
-                playingQueue = restoredQueue
+                originalPlayingQueue = ArrayList(restoredOriginalQueue)
+                playingQueue = ArrayList(restoredQueue)
                 position = restoredPosition
                 openCurrent()
                 prepareNext()
