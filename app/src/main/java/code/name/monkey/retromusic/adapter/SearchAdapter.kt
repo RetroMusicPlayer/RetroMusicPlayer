@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -56,7 +55,7 @@ class SearchAdapter(
         if (dataSet[position] is Album) return ALBUM
         if (dataSet[position] is Artist) return if ((dataSet[position] as Artist).isAlbumArtist) ALBUM_ARTIST else ARTIST
         if (dataSet[position] is Genre) return GENRE
-        if (dataSet[position] is PlaylistEntity) return PLAYLIST
+        if (dataSet[position] is PlaylistWithSongs) return PLAYLIST
         return if (dataSet[position] is Song) SONG else HEADER
     }
 
@@ -121,8 +120,8 @@ class SearchAdapter(
                 )
             }
             PLAYLIST -> {
-                val playlist = dataSet[position] as PlaylistEntity
-                holder.title?.text = playlist.playlistName
+                val playlist = dataSet[position] as PlaylistWithSongs
+                holder.title?.text = playlist.playlistEntity.playlistName
                 //holder.text?.text = MusicUtil.playlistInfoString(activity, playlist.songs)
             }
             ALBUM_ARTIST -> {

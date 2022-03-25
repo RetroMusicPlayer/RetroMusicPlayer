@@ -188,6 +188,7 @@
     </style>
 
     <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet">
+        <item name="paddingBottomSystemWindowInsets">false</item>
         <item name="android:maxWidth">@empty</item>
     </style>
 

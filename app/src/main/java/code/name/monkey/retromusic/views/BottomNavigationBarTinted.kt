@@ -42,7 +42,8 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
         } else {
             applyInsetter {
                 type(navigationBars = true) {
-                    padding()
+                    padding(vertical = true)
+                    margin(horizontal = true)
                 }
             }
         }
