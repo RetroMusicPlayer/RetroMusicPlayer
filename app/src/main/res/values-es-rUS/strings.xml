@@ -217,9 +217,9 @@
     <string name="label_file_size">Tamaño</string>
     <string name="label_last_modified">Última modificación</string>
     <string name="label_more_from">Más de %s</string>
-    <string name="label_sampling_rate">Sampling rate</string>
-    <string name="label_track_length">Length</string>
-    <string name="labeled">Labeled</string>
+    <string name="label_sampling_rate">Tasa de muestreo</string>
+    <string name="label_track_length">Duración</string>
+    <string name="labeled">Etiquetado</string>
     <string name="last_added">Last added</string>
     <string name="last_song">Last song</string>
     <string name="library_categories">Library categories</string>
