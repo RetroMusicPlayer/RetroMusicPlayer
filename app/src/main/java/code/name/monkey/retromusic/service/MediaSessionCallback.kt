@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.service
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.media.session.MediaSessionCompat
@@ -177,10 +176,6 @@ class MediaSessionCallback(
     override fun onSeekTo(pos: Long) {
         super.onSeekTo(pos)
         musicService.seek(pos.toInt())
-    }
-
-    override fun onMediaButtonEvent(mediaButtonIntent: Intent): Boolean {
-        return MediaButtonIntentReceiver.handleIntent(context, mediaButtonIntent)
     }
 
     override fun onCustomAction(action: String, extras: Bundle?) {

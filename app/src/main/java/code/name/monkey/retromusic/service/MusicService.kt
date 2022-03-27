@@ -14,7 +14,6 @@
 package code.name.monkey.retromusic.service
 
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothDevice
 import android.content.*
@@ -47,8 +46,8 @@ import androidx.media.AudioAttributesCompat.CONTENT_TYPE_MUSIC
 import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
 import androidx.media.MediaBrowserServiceCompat
+import androidx.media.session.MediaButtonReceiver.handleIntent
 import androidx.preference.PreferenceManager
-import code.name.monkey.appthemehelper.util.VersionUtils.hasMarshmallow
 import code.name.monkey.appthemehelper.util.VersionUtils.hasQ
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.LockScreenActivity
@@ -94,6 +93,7 @@ import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.gms.cast.framework.media.MediaIntentReceiver
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
 import kotlin.collections.ArrayList
@@ -753,6 +753,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null && intent.action != null) {
+            handleIntent(mediaSession, intent)
             restoreQueuesAndPositionIfNecessary()
             when (intent.action) {
                 ACTION_TOGGLE_PAUSE -> if (isPlaying) {
@@ -1445,24 +1446,13 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun setupMediaSession() {
-        val mediaButtonReceiverComponentName =
-            ComponentName(applicationContext, MediaButtonIntentReceiver::class.java)
-        val mediaButtonIntent = Intent(Intent.ACTION_MEDIA_BUTTON)
-        mediaButtonIntent.component = mediaButtonReceiverComponentName
-        val mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(
-            applicationContext, 0, mediaButtonIntent,
-            if (hasMarshmallow()) PendingIntent.FLAG_IMMUTABLE else 0
-        )
         mediaSession = MediaSessionCompat(
             this,
-            "RetroMusicPlayer",
-            mediaButtonReceiverComponentName,
-            mediaButtonReceiverPendingIntent
+            "RetroMusicPlayer"
         )
         val mediasessionCallback = MediaSessionCallback(applicationContext, this)
         mediaSession?.setCallback(mediasessionCallback)
         mediaSession?.isActive = true
-        mediaSession?.setMediaButtonReceiver(mediaButtonReceiverPendingIntent)
     }
 
     inner class MusicBinder : Binder() {
