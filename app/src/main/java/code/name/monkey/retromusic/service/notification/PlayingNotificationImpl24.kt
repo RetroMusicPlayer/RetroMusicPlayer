@@ -114,11 +114,6 @@ class PlayingNotificationImpl24(
                 .setShowActionsInCompactView(1, 2, 3)
         )
         setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-        if (Build.VERSION.SDK_INT <=
-            Build.VERSION_CODES.O && PreferenceUtil.isColoredNotification
-        ) {
-            this.color = color
-        }
     }
 
     override fun updateMetadata(song: Song, onUpdate: () -> Unit) {

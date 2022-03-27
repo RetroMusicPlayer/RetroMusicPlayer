@@ -25,6 +25,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import androidx.media.app.NotificationCompat.DecoratedMediaCustomViewStyle
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -57,7 +58,6 @@ class PlayingNotificationClassic(
     val context: Context
 ) : PlayingNotification(context) {
     private var primaryColor: Int = 0
-    private var isInitialized = false
 
     private fun getCombinedRemoteViews(collapsed: Boolean, song: Song): RemoteViews {
         val remoteViews = RemoteViews(
@@ -75,7 +75,6 @@ class PlayingNotificationClassic(
     }
 
     override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
-        isInitialized = true
         val notificationLayout = getCombinedRemoteViews(true, song)
         val notificationLayoutBig = getCombinedRemoteViews(false, song)
 
@@ -98,11 +97,11 @@ class PlayingNotificationClassic(
         setContentIntent(clickIntent)
         setDeleteIntent(deleteIntent)
         setCategory(NotificationCompat.CATEGORY_SERVICE)
-        setColorized(PreferenceUtil.isColoredNotification)
         priority = NotificationCompat.PRIORITY_MAX
         setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         setCustomContentView(notificationLayout)
         setCustomBigContentView(notificationLayoutBig)
+        setStyle(DecoratedMediaCustomViewStyle())
         setOngoing(true)
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
@@ -164,6 +163,7 @@ class PlayingNotificationClassic(
                         setNotificationContent(ColorUtil.isColorLight(bgColorFinal))
                     } else {
                         if (PreferenceUtil.isColoredNotification) {
+                            setColorized(true)
                             color = bgColor
                             setNotificationContent(color.isColorLight)
                         } else {
