@@ -541,7 +541,7 @@ class MusicService : MediaBrowserServiceCompat(),
         return shuffleMode
     }
 
-    private fun setShuffleMode(shuffleMode: Int) {
+    fun setShuffleMode(shuffleMode: Int) {
         PreferenceManager.getDefaultSharedPreferences(this)
             .edit()
             .putInt(SAVED_SHUFFLE_MODE, shuffleMode)
@@ -1224,6 +1224,7 @@ class MusicService : MediaBrowserServiceCompat(),
             }
             META_CHANGED -> {
                 playingNotification?.updateMetadata(currentSong) { startForegroundOrNotify() }
+                playingNotification?.updateFavorite(currentSong) { startForegroundOrNotify() }
                 updateMediaSessionMetaData()
                 updateMediaSessionPlaybackState()
                 savePosition()
