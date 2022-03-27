@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.GridStyle
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.SongSortOrder
 import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
@@ -66,7 +65,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         get() = true
 
     override fun onShuffleClicked() {
-        libraryViewModel.getSongs().value?.let { MusicPlayerRemote.openAndShuffleQueue(it, true) }
+        libraryViewModel.shuffleSongs()
     }
 
     override fun createLayoutManager(): GridLayoutManager {

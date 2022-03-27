@@ -43,6 +43,8 @@ interface SongRepository {
 
     fun songs(cursor: Cursor?): List<Song>
 
+    fun sortedSongs(cursor: Cursor?): List<Song>
+
     fun songs(query: String): List<Song>
 
     fun songsByFilePath(filePath: String, ignoreBlacklist: Boolean = false): List<Song>
@@ -57,7 +59,7 @@ interface SongRepository {
 class RealSongRepository(private val context: Context) : SongRepository {
 
     override fun songs(): List<Song> {
-        return songs(makeSongCursor(null, null))
+        return sortedSongs(makeSongCursor(null, null))
     }
 
     override fun songs(cursor: Cursor?): List<Song> {
@@ -68,7 +70,12 @@ class RealSongRepository(private val context: Context) : SongRepository {
             } while (cursor.moveToNext())
         }
         cursor?.close()
+        return songs
+    }
+
+    override fun sortedSongs(cursor: Cursor?): List<Song> {
         val collator = Collator.getInstance()
+        val songs = songs(cursor)
         return when (PreferenceUtil.songSortOrder) {
             SortOrder.SongSortOrder.SONG_A_Z -> {
                 songs.sortedWith{ s1, s2 -> collator.compare(s1.title, s2.title) }
