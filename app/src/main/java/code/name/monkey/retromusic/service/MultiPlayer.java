@@ -330,6 +330,7 @@ public class MultiPlayer
                     context.getResources().getString(R.string.unplayable_file),
                     Toast.LENGTH_SHORT)
                     .show();
+            Log.e(TAG, String.valueOf(what) + extra);
         }
         return false;
     }

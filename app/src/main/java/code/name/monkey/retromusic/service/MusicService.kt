@@ -48,7 +48,7 @@ import androidx.media.AudioManagerCompat
 import androidx.media.MediaBrowserServiceCompat
 import androidx.media.session.MediaButtonReceiver.handleIntent
 import androidx.preference.PreferenceManager
-import code.name.monkey.appthemehelper.util.VersionUtils.hasQ
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.LockScreenActivity
 import code.name.monkey.retromusic.appwidgets.*
@@ -93,10 +93,8 @@ import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.gms.cast.framework.media.MediaIntentReceiver
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal. Modified by Prathamesh More
@@ -824,17 +822,16 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    @Synchronized
     fun openTrackAndPrepareNextAt(position: Int): Boolean {
-        synchronized(this) {
-            this.position = position
-            val prepared = openCurrent()
-            if (prepared) {
-                prepareNextImpl()
-            }
-            notifyChange(META_CHANGED)
-            notHandledMetaChangedForCurrentTrack = false
-            return prepared
+        this.position = position
+        val prepared = openCurrent()
+        if (prepared) {
+            prepareNextImpl()
         }
+        notifyChange(META_CHANGED)
+        notHandledMetaChangedForCurrentTrack = false
+        return prepared
     }
 
     fun pause() {
@@ -858,48 +855,47 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    @Synchronized
     fun play() {
-        synchronized(this) {
-            if (requestFocus()) {
-                if (playback != null && !playback!!.isPlaying) {
-                    if (!playback!!.isInitialized) {
-                        playSongAt(getPosition())
-                    } else {
-                        //Don't Start playing when it's casting
-                        if (isCasting) {
-                            return
-                        }
-                        startFadeAnimator(playback!!, true) {
-
-                            // Code when Animator Ends
-                            if (!becomingNoisyReceiverRegistered) {
-                                registerReceiver(
-                                    becomingNoisyReceiver,
-                                    becomingNoisyReceiverIntentFilter
-                                )
-                                becomingNoisyReceiverRegistered = true
-                            }
-                            if (notHandledMetaChangedForCurrentTrack) {
-                                handleChangeInternal(META_CHANGED)
-                                notHandledMetaChangedForCurrentTrack = false
-                            }
-
-                            // fixes a bug where the volume would stay ducked because the
-                            // AudioManager.AUDIOFOCUS_GAIN event is not sent
-                            playerHandler?.removeMessages(DUCK)
-                            playerHandler?.sendEmptyMessage(UNDUCK)
-                        }
-                        //Start Playback with Animator
-                        playback?.start()
-                        notifyChange(PLAY_STATE_CHANGED)
+        if (requestFocus()) {
+            if (playback != null && !playback!!.isPlaying) {
+                if (!playback!!.isInitialized) {
+                    playSongAt(getPosition())
+                } else {
+                    //Don't Start playing when it's casting
+                    if (isCasting) {
+                        return
                     }
+                    startFadeAnimator(playback!!, true) {
+
+                        // Code when Animator Ends
+                        if (!becomingNoisyReceiverRegistered) {
+                            registerReceiver(
+                                becomingNoisyReceiver,
+                                becomingNoisyReceiverIntentFilter
+                            )
+                            becomingNoisyReceiverRegistered = true
+                        }
+                        if (notHandledMetaChangedForCurrentTrack) {
+                            handleChangeInternal(META_CHANGED)
+                            notHandledMetaChangedForCurrentTrack = false
+                        }
+
+                        // fixes a bug where the volume would stay ducked because the
+                        // AudioManager.AUDIOFOCUS_GAIN event is not sent
+                        playerHandler?.removeMessages(DUCK)
+                        playerHandler?.sendEmptyMessage(UNDUCK)
+                    }
+                    //Start Playback with Animator
+                    playback?.start()
+                    notifyChange(PLAY_STATE_CHANGED)
                 }
-            } else {
-                Toast.makeText(
-                    this, resources.getString(R.string.audio_focus_denied), Toast.LENGTH_SHORT
-                )
-                    .show()
             }
+        } else {
+            Toast.makeText(
+                this, resources.getString(R.string.audio_focus_denied), Toast.LENGTH_SHORT
+            )
+                .show()
         }
     }
 
@@ -949,14 +945,13 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    @Synchronized
     fun prepareNextImpl() {
-        synchronized(this) {
-            try {
-                val nextPosition = getNextPosition(false)
-                playback?.setNextDataSource(getTrackUri(getSongAt(nextPosition)))
-                this.nextPosition = nextPosition
-            } catch (ignored: Exception) {
-            }
+        try {
+            val nextPosition = getNextPosition(false)
+            playback?.setNextDataSource(getTrackUri(getSongAt(nextPosition)))
+            this.nextPosition = nextPosition
+        } catch (ignored: Exception) {
         }
     }
 
@@ -1075,18 +1070,17 @@ class MusicService : MediaBrowserServiceCompat(),
         savePositionInTrack()
     }
 
+    @Synchronized
     fun seek(millis: Int): Int {
-        synchronized(this) {
-            return try {
-                var newPosition = 0
-                if (playback != null) {
-                    newPosition = playback!!.seek(millis)
-                }
-                throttledSeekHandler?.notifySeek()
-                newPosition
-            } catch (e: Exception) {
-                -1
+        return try {
+            var newPosition = 0
+            if (playback != null) {
+                newPosition = playback!!.seek(millis)
             }
+            throttledSeekHandler?.notifySeek()
+            newPosition
+        } catch (e: Exception) {
+            -1
         }
     }
 
@@ -1251,19 +1245,19 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private fun startForegroundOrNotify() {
         if (playingNotification != null && currentSong.id != -1L) {
-            val isPlaying = isPlaying
-            if (isForeground != isPlaying && !isPlaying) {
-                // This makes the notification dismissible
-                // We can't call stopForeground(false) on A12 though, which may result in crashes
-                // when we call startForeground after that e.g. when Alarm goes off,
-                if (VERSION.SDK_INT < VERSION_CODES.S) {
+            if (!VersionUtils.hasS()) {
+                if (isForeground && !isPlaying) {
+                    // This makes the notification dismissible
+                    // We can't call stopForeground(false) on A12 though, which may result in crashes
+                    // when we call startForeground after that e.g. when Alarm goes off
+
                     stopForeground(false)
                     isForeground = false
                 }
             }
-            if (!isForeground && isPlaying) {
+            if (!isForeground) {
                 // Specify that this is a media service, if supported.
-                if (hasQ()) {
+                if (VersionUtils.hasQ()) {
                     startForeground(
                         PlayingNotification.NOTIFICATION_ID, playingNotification!!.build(),
                         ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
@@ -1282,7 +1276,6 @@ class MusicService : MediaBrowserServiceCompat(),
                 )
             }
         }
-        return
     }
 
     private fun stopForegroundAndNotification() {
@@ -1291,24 +1284,22 @@ class MusicService : MediaBrowserServiceCompat(),
         isForeground = false
     }
 
+    @Synchronized
     private fun openCurrent(): Boolean {
-        synchronized(this) {
-            try {
-                if (playback != null) {
-                    return playback!!.setDataSource(
-                        getTrackUri(
-                            Objects.requireNonNull(
-                                currentSong
-                            )
+        return try {
+            if (playback != null) {
+                return playback!!.setDataSource(
+                    getTrackUri(
+                        Objects.requireNonNull(
+                            currentSong
                         )
                     )
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                return false
-            }
+                )
+            } else false
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
         }
-        return false
     }
 
     private fun playFromPlaylist(intent: Intent) {
