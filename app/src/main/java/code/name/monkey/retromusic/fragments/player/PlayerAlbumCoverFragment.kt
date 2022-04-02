@@ -77,7 +77,10 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     fun removeSlideEffect() {
         val transformer = ParallaxPagerTransformer(R.id.player_image)
         transformer.setSpeed(0.3f)
-    }
+        lifecycleScope.launchWhenStarted {
+            viewPager.setPageTransformer(false, transformer)
+        }
+}
 
     private fun updateLyrics() {
         binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))

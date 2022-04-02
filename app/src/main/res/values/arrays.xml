@@ -8,6 +8,7 @@
         <item>@string/horizontal_flip</item>
         <item>@string/hinge</item>
         <item>@string/stack</item>
+        <item>@string/classic</item>
     </array>
 
     <string-array name="pref_album_cover_transform_values">
@@ -18,6 +19,7 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
+        <item>7</item>
     </string-array>
 
     <string-array name="pref_lyrics_type_values">

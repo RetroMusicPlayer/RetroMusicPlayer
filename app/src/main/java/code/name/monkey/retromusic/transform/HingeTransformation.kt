@@ -21,35 +21,35 @@ import kotlin.math.abs
 
 class HingeTransformation : ViewPager.PageTransformer {
     override fun transformPage(page: View, position: Float) {
+        page.apply {
+            translationX = -position * width
+            pivotX = 0f
+            pivotY = 0f
 
-        page.translationX = -position * page.width
-        page.pivotX = 0f
-        page.pivotY = 0f
-
-
-        when {
-            position < -1 -> {    // [-Infinity,-1)
-                // This page is way off-screen to the left.
-                page.alpha = 0f
-                // The Page is off-screen but it may still interfere with
-                // click events of current page if
-                // it's visibility is not set to Gone
-                page.isVisible = false
-            }
-            position <= 0 -> {    // [-1,0]
-                page.rotation = 90 * abs(position)
-                page.alpha = 1 - abs(position)
-                page.isVisible = true
-            }
-            position <= 1 -> {    // (0,1]
-                page.rotation = 0f
-                page.alpha = 1f
-                page.isVisible = true
-            }
-            else -> {    // (1,+Infinity]
-                // This page is way off-screen to the right.
-                page.alpha = 0f
-                page.isVisible = false
+            when {
+                position < -1 -> {    // [-Infinity,-1)
+                    // This page is way off-screen to the left.
+                    alpha = 0f
+                    // The Page is off-screen but it may still interfere with
+                    // click events of current page if
+                    // it's visibility is not set to Gone
+                    isVisible = false
+                }
+                position <= 0 -> {    // [-1,0]
+                    rotation = 90 * abs(position)
+                    alpha = 1 - abs(position)
+                    isVisible = true
+                }
+                position <= 1 -> {    // (0,1]
+                    rotation = 0f
+                    alpha = 1f
+                    isVisible = true
+                }
+                else -> {    // (1,+Infinity]
+                    // This page is way off-screen to the right.
+                    alpha = 0f
+                    isVisible = false
+                }
             }
         }
     }
