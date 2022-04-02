@@ -51,7 +51,7 @@ class TagWriter {
 
         suspend fun writeTagsToFiles(context: Context, info: AudioTagInfo) {
             withContext(Dispatchers.IO) {
-                kotlin.runCatching {
+                runCatching {
                     var artwork: Artwork? = null
                     var albumArtFile: File? = null
                     if (info.artworkInfo?.artwork != null) {
@@ -124,7 +124,7 @@ class TagWriter {
         suspend fun writeTagsToFilesR(context: Context, info: AudioTagInfo): List<File> =
             withContext(Dispatchers.IO) {
                 val cacheFiles = mutableListOf<File>()
-                kotlin.runCatching {
+                runCatching {
                     var artwork: Artwork? = null
                     var albumArtFile: File? = null
                     if (info.artworkInfo?.artwork != null) {

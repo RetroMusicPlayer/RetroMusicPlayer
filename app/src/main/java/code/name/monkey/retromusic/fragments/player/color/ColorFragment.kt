@@ -39,7 +39,6 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
     private var _binding: FragmentColorPlayerBinding? = null
     private val binding get() = _binding!!
 
-
     override fun playerToolbar(): Toolbar {
         return binding.playerToolbar
     }
