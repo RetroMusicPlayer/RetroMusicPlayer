@@ -127,6 +127,7 @@
         <item>Arabic</item>
         <item>Basque</item>
         <item>Bengali</item>
+        <item>Burmese</item>
         <item>Catalan</item>
         <item>Simplified Chinese</item>
         <item>Traditional Chinese(Hong Kong)</item>
@@ -137,6 +138,7 @@
         <item>Dutch</item>
         <item>English</item>
         <item>Finnish</item>
+        <item>Filipino</item>
         <item>French</item>
         <item>German</item>
         <item>Greek</item>
@@ -154,15 +156,18 @@
         <item>Oriya</item>
         <item>Persian</item>
         <item>Polish</item>
-        <item>Portuguese</item>
+        <item>Portuguese(Brazil)</item>
+        <item>Portuguese(Portugal)</item>
         <item>Romanian</item>
         <item>Russian</item>
         <item>Serbian</item>
         <item>Slovak</item>
-        <item>Spain</item>
+        <item>Spanish</item>
+        <item>Spanish(Latin America)</item>
         <item>Swedish</item>
         <item>Tamil</item>
         <item>Telugu</item>
+        <item>Thai</item>
         <item>Turkish</item>
         <item>Ukrainian</item>
         <item>Urdu</item>
@@ -174,6 +179,7 @@
         <item>ar-SA</item>
         <item>eu-ES</item>
         <item>bn-IN</item>
+        <item>my-MM</item>
         <item>ca-ES</item>
         <item>zh-CN</item>
         <item>zh-HK</item>
@@ -184,6 +190,7 @@
         <item>nl-NL</item>
         <item>en</item>
         <item>fi-FI</item>
+        <item>fil-PH</item>
         <item>fr</item>
         <item>de</item>
         <item>el</item>
@@ -201,16 +208,19 @@
         <item>or</item>
         <item>fa</item>
         <item>pl</item>
-        <item>pt</item>
+        <item>pt-BR</item>
+        <item>pt-PT</item>
         <item>ro</item>
         <item>ru</item>
         <item>sr</item>
         <item>sk</item>
         <item>es</item>
+        <item>es-419</item>
         <item>sv</item>
         <item>ta</item>
         <item>te</item>
         <item>tr</item>
+        <item>th-TH</item>
         <item>uk</item>
         <item>ur</item>
         <item>vi</item>
