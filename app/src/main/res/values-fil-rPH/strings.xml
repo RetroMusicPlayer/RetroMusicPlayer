@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">Tungkol %s</string>
+    <string name="about_album_label">Tungkol sa %s</string>
     <string name="about_settings_summary">Koponan, mga social link</string>
     <string name="accent_color">Kulay ng accent</string>
     <string name="accent_color_desc">Ang kulay ng theme accent ay, naka-default sa purple</string>
-    <string name="action_about">Tungkol</string>
+    <string name="action_about">Tungkol sa</string>
     <string name="action_add_to_blacklist">Idagdag sa Blacklist</string>
     <string name="action_add_to_favorites">Idagdag sa mga paborito</string>
     <string name="action_add_to_playing_queue">Idagdag sa playing queue</string>
     <string name="action_add_to_playlist">Idagdag sa playlist</string>
-    <string name="action_cast">Cast</string>
+    <string name="action_cast">Kast</string>
     <string name="action_clear_playing_queue">Burahin ang playing queue</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">Tanggalin</string>
