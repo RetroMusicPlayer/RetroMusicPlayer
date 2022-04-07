@@ -23,11 +23,10 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
@@ -50,7 +49,7 @@ import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
 import java.util.*
 
-class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>(), TextWatcher {
+class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>() {
 
     override val bindingInflater: (LayoutInflater) -> ActivitySongTagEditorBinding =
         ActivitySongTagEditorBinding::inflate
@@ -83,16 +82,16 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.discNumberContainer.setTint(false)
         binding.lyricsContainer.setTint(false)
 
-        binding.songText.appHandleColor().addTextChangedListener(this)
-        binding.albumText.appHandleColor().addTextChangedListener(this)
-        binding.albumArtistText.appHandleColor().addTextChangedListener(this)
-        binding.artistText.appHandleColor().addTextChangedListener(this)
-        binding.genreText.appHandleColor().addTextChangedListener(this)
-        binding.yearText.appHandleColor().addTextChangedListener(this)
-        binding.trackNumberText.appHandleColor().addTextChangedListener(this)
-        binding.discNumberText.appHandleColor().addTextChangedListener(this)
-        binding.lyricsText.appHandleColor().addTextChangedListener(this)
-        binding.songComposerText.appHandleColor().addTextChangedListener(this)
+        binding.songText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.albumText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.albumArtistText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.artistText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.genreText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.yearText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.trackNumberText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.discNumberText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.lyricsText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.songComposerText.appHandleColor().doAfterTextChanged { dataChanged() }
     }
 
     private fun fillViewsWithFileTags() {
@@ -203,16 +202,6 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
 
                 override fun setResource(resource: BitmapPaletteWrapper?) {}
             })
-    }
-
-    override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-    }
-
-    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-    }
-
-    override fun afterTextChanged(s: Editable) {
-        dataChanged()
     }
 
     companion object {

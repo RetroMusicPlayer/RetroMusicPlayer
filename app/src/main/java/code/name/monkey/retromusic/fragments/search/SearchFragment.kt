@@ -20,13 +20,12 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
 import androidx.core.view.*
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
@@ -51,7 +50,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import java.util.*
 
 
-class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWatcher,
+class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
     ChipGroup.OnCheckedStateChangeListener {
     companion object {
         const val QUERY = "query"
@@ -81,7 +80,10 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
             searchAdapter.swapDataSet(listOf())
         }
         binding.searchView.apply {
-            addTextChangedListener(this@SearchFragment)
+            doAfterTextChanged {
+                if (!it.isNullOrEmpty())
+                    search(it.toString())
+            }
             focusAndShowKeyboard()
         }
         binding.keyboardPopup.apply {
@@ -169,16 +171,6 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
                 }
             })
         }
-    }
-
-    override fun afterTextChanged(newText: Editable?) {
-        if (!newText.isNullOrEmpty()) search(newText.toString())
-    }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-    }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
     }
 
     private fun search(query: String) {
