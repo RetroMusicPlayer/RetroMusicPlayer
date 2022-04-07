@@ -18,6 +18,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.core.content.withStyledAttributes
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ListItemViewNoCardBinding
 import code.name.monkey.retromusic.extensions.hide
@@ -49,20 +50,20 @@ class ListItemView : FrameLayout {
     private fun init(context: Context, attrs: AttributeSet?) {
         binding = ListItemViewNoCardBinding.inflate(LayoutInflater.from(context), this, true)
 
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ListItemView)
-        if (typedArray.hasValue(R.styleable.ListItemView_listItemIcon)) {
-            binding.icon.setImageDrawable(typedArray.getDrawable(R.styleable.ListItemView_listItemIcon))
-        } else {
-            binding.icon.hide()
-        }
+        context.withStyledAttributes(attrs, R.styleable.ListItemView) {
+            if (hasValue(R.styleable.ListItemView_listItemIcon)) {
+                binding.icon.setImageDrawable(getDrawable(R.styleable.ListItemView_listItemIcon))
+            } else {
+                binding.icon.hide()
+            }
 
-        binding.title.text = typedArray.getText(R.styleable.ListItemView_listItemTitle)
-        if (typedArray.hasValue(R.styleable.ListItemView_listItemSummary)) {
-            binding.summary.text = typedArray.getText(R.styleable.ListItemView_listItemSummary)
-        } else {
-            binding.summary.hide()
+            binding.title.text = getText(R.styleable.ListItemView_listItemTitle)
+            if (hasValue(R.styleable.ListItemView_listItemSummary)) {
+                binding.summary.text = getText(R.styleable.ListItemView_listItemSummary)
+            } else {
+                binding.summary.hide()
+            }
         }
-        typedArray.recycle()
     }
 
     fun setSummary(appVersion: String) {
