@@ -33,6 +33,7 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Scroller
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.withSave
 import code.name.monkey.retromusic.R
 import java.io.File
 import kotlin.math.abs
@@ -521,10 +522,10 @@ class CoverLrcView @JvmOverloads constructor(
      * @param y 歌词中心 Y 坐标
      */
     private fun drawText(canvas: Canvas, staticLayout: StaticLayout, y: Float) {
-        canvas.save()
-        canvas.translate(mLrcPadding, y - (staticLayout.height shr 1))
-        staticLayout.draw(canvas)
-        canvas.restore()
+        canvas.withSave {
+            translate(mLrcPadding, y - (staticLayout.height shr 1))
+            staticLayout.draw(this)
+        }
     }
 
     fun animateCurrentTextSize() {
