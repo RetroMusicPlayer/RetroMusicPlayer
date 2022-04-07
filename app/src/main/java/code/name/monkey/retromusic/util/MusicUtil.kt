@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.util
 
 import android.content.ContentUris
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -12,6 +11,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.core.content.contentValuesOf
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -311,9 +311,10 @@ object MusicUtil : KoinComponent {
         val contentResolver = context.contentResolver
         val artworkUri = "content://media/external/audio/albumart".toUri()
         contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId), null, null)
-        val values = ContentValues()
-        values.put("album_id", albumId)
-        values.put("_data", path)
+        val values = contentValuesOf(
+            "album_id" to albumId,
+            "_data" to path
+        )
         contentResolver.insert(artworkUri, values)
         contentResolver.notifyChange(artworkUri, null)
     }
