@@ -132,27 +132,14 @@ object LyricUtil {
     }
 
     @Throws(Exception::class)
-    private fun convertStreamToString(`is`: InputStream): String {
-        val reader = BufferedReader(InputStreamReader(`is`))
-        val sb = StringBuilder()
-        var line: String?
-        while (reader.readLine().also { line = it } != null) {
-            sb.append(line).append("\n")
-        }
-        reader.close()
-        return sb.toString()
+    private fun convertStreamToString(inputStream: InputStream): String {
+        return inputStream.bufferedReader().readLines().joinToString(separator = "\n")
     }
 
     fun getStringFromLrc(file: File?): String {
         try {
             val reader = BufferedReader(FileReader(file))
-            val sb = StringBuilder()
-            var line: String?
-            while (reader.readLine().also { line = it } != null) {
-                sb.append(line).append("\n")
-            }
-            reader.close()
-            return sb.toString()
+            return reader.readLines().joinToString(separator = "\n")
         } catch (e: Exception) {
             Log.i("Error", "Error Occurred")
         }
