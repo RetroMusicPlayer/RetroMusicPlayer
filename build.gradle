@@ -3,7 +3,7 @@
 buildscript {
     ext {
         kotlin_version = '1.6.20'
-        navigation_version = '2.4.1'
+        navigation_version = '2.4.2'
         mdc_version = '1.6.0-beta01'
         preference_version = '1.2.0'
         appcompat_version = '1.4.1'
