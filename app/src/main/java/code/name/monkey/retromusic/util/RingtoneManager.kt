@@ -16,11 +16,11 @@ package code.name.monkey.retromusic.util
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.provider.Settings
 import android.widget.Toast
+import androidx.core.net.toUri
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
@@ -69,7 +69,7 @@ class RingtoneManager(val context: Context) {
                 .setMessage(R.string.dialog_message_set_ringtone)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
                     val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                    intent.data = Uri.parse("package:" + context.applicationContext.packageName)
+                    intent.data = ("package:" + context.applicationContext.packageName).toUri()
                     context.startActivity(intent)
                 }
                 .setNegativeButton(android.R.string.cancel, null)

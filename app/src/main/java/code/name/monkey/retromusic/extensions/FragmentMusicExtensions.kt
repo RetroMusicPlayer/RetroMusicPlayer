@@ -1,7 +1,7 @@
 package code.name.monkey.retromusic.extensions
 
-import android.net.Uri
 import android.webkit.MimeTypeMap
+import androidx.core.net.toUri
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.RetroUtil
 import org.jaudiotagger.audio.AudioFileIO
@@ -14,7 +14,7 @@ fun getSongInfo(song: Song): String {
         return try {
             val audioHeader = AudioFileIO.read(File(song.data)).audioHeader
             val string: StringBuilder = StringBuilder()
-            val uriFile = Uri.fromFile(file)
+            val uriFile = file.toUri()
             string.append(getMimeType(uriFile.toString())).append(" • ")
             string.append(audioHeader.bitRate).append(" kb/s").append(" • ")
             string.append(RetroUtil.frequencyCount(audioHeader.sampleRate.toInt()))

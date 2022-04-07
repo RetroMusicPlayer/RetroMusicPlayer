@@ -13,6 +13,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -99,7 +100,7 @@ object MusicUtil : KoinComponent {
 
     fun deleteAlbumArt(context: Context, albumId: Long) {
         val contentResolver = context.contentResolver
-        val localUri = Uri.parse("content://media/external/audio/albumart")
+        val localUri = "content://media/external/audio/albumart".toUri()
         contentResolver.delete(ContentUris.withAppendedId(localUri, albumId), null, null)
         contentResolver.notifyChange(localUri, null)
     }
@@ -189,7 +190,7 @@ object MusicUtil : KoinComponent {
 
     @JvmStatic
     fun getMediaStoreAlbumCoverUri(albumId: Long): Uri {
-        val sArtworkUri = Uri.parse("content://media/external/audio/albumart")
+        val sArtworkUri = "content://media/external/audio/albumart".toUri()
         return ContentUris.withAppendedId(sArtworkUri, albumId)
     }
 
@@ -309,7 +310,7 @@ object MusicUtil : KoinComponent {
         path: String?
     ) {
         val contentResolver = context.contentResolver
-        val artworkUri = Uri.parse("content://media/external/audio/albumart")
+        val artworkUri = "content://media/external/audio/albumart".toUri()
         contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId), null, null)
         val values = ContentValues()
         values.put("album_id", albumId)
@@ -454,7 +455,7 @@ object MusicUtil : KoinComponent {
             } catch (ignored: SecurityException) {
 
             }
-            activity.contentResolver.notifyChange(Uri.parse("content://media"), null)
+            activity.contentResolver.notifyChange("content://media".toUri(), null)
             activity.runOnUiThread {
                 Toast.makeText(
                     activity,

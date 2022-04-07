@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.activities.bugreport
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
@@ -26,6 +25,7 @@ import android.widget.Toast
 import androidx.annotation.StringDef
 import androidx.annotation.StringRes
 import androidx.core.content.getSystemService
+import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
@@ -154,7 +154,7 @@ open class BugReportActivity : AbsThemeActivity() {
             copyDeviceInfoToClipBoard()
 
             val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(ISSUE_TRACKER_LINK)
+            i.data = ISSUE_TRACKER_LINK.toUri()
             i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(i)
         }

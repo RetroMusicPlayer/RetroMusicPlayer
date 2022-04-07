@@ -18,10 +18,10 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore.Images.Media
 import android.view.MenuItem
+import androidx.core.net.toUri
 import androidx.core.view.drawToBitmap
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -87,10 +87,9 @@ class ShareInstagramStory : AbsBaseActivity() {
                     binding.mainContent.drawToBitmap(Bitmap.Config.ARGB_8888),
                     "Design", null
                 )
-                val uri = Uri.parse(path)
                 Share.shareStoryToSocial(
                     this@ShareInstagramStory,
-                    uri
+                    path.toUri()
                 )
             }
         }

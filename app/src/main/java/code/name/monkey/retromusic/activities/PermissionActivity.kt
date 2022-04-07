@@ -18,11 +18,11 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.ThemeStore
@@ -54,7 +54,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
             binding.audioPermission.setButtonClick {
                 if (RingtoneManager.requiresDialog(this@PermissionActivity)) {
                     val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                    intent.data = Uri.parse("package:" + applicationContext.packageName)
+                    intent.data = ("package:" + applicationContext.packageName).toUri()
                     startActivity(intent)
                 }
             }
