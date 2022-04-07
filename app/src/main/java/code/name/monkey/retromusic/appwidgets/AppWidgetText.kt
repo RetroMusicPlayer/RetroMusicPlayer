@@ -18,7 +18,6 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
@@ -119,7 +118,7 @@ class AppWidgetText : BaseAppWidget() {
         val song = service.currentSong
 
         // Set the titles and artwork
-        if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName)) {
+        if (song.title.isEmpty() && song.artistName.isEmpty()) {
             appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
         } else {
             appWidgetView.setViewVisibility(R.id.media_titles, View.VISIBLE)

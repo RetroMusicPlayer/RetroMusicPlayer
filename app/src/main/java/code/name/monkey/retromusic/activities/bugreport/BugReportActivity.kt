@@ -18,7 +18,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -81,7 +80,7 @@ open class BugReportActivity : AbsThemeActivity() {
 
         initViews()
 
-        if (TextUtils.isEmpty(title)) setTitle(R.string.report_an_issue)
+        if (title.isNullOrEmpty()) setTitle(R.string.report_an_issue)
 
         deviceInfo = DeviceInfo(this)
         binding.cardDeviceInfo.airTextDeviceInfo.text = deviceInfo.toString()
@@ -175,14 +174,14 @@ open class BugReportActivity : AbsThemeActivity() {
         var hasErrors = false
 
         if (binding.cardReport.optionUseAccount.isChecked) {
-            if (TextUtils.isEmpty(binding.cardReport.inputUsername.text)) {
+            if (binding.cardReport.inputUsername.text.isNullOrEmpty()) {
                 setError(binding.cardReport.inputLayoutUsername, R.string.bug_report_no_username)
                 hasErrors = true
             } else {
                 removeError(binding.cardReport.inputLayoutUsername)
             }
 
-            if (TextUtils.isEmpty(binding.cardReport.inputPassword.text)) {
+            if (binding.cardReport.inputPassword.text.isNullOrEmpty()) {
                 setError(binding.cardReport.inputLayoutPassword, R.string.bug_report_no_password)
                 hasErrors = true
             } else {
@@ -190,14 +189,14 @@ open class BugReportActivity : AbsThemeActivity() {
             }
         }
 
-        if (TextUtils.isEmpty(binding.cardReport.inputTitle.text)) {
+        if (binding.cardReport.inputTitle.text.isNullOrEmpty()) {
             setError(binding.cardReport.inputLayoutTitle, R.string.bug_report_no_title)
             hasErrors = true
         } else {
             removeError(binding.cardReport.inputLayoutTitle)
         }
 
-        if (TextUtils.isEmpty(binding.cardReport.inputDescription.text)) {
+        if (binding.cardReport.inputDescription.text.isNullOrEmpty()) {
             setError(binding.cardReport.inputLayoutDescription, R.string.bug_report_no_description)
             hasErrors = true
         } else {

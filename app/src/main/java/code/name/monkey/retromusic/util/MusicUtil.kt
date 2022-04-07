@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.BaseColumns
 import android.provider.MediaStore
-import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.FileProvider
@@ -239,10 +238,10 @@ object MusicUtil : KoinComponent {
     fun getSectionName(mediaTitle: String?): String {
         var musicMediaTitle = mediaTitle
         return try {
-            if (TextUtils.isEmpty(musicMediaTitle)) {
+            if (musicMediaTitle.isNullOrEmpty()) {
                 return "-"
             }
-            musicMediaTitle = musicMediaTitle!!.trim { it <= ' ' }.lowercase()
+            musicMediaTitle = musicMediaTitle.trim { it <= ' ' }.lowercase()
             if (musicMediaTitle.startsWith("the ")) {
                 musicMediaTitle = musicMediaTitle.substring(4)
             } else if (musicMediaTitle.startsWith("a ")) {
@@ -320,18 +319,18 @@ object MusicUtil : KoinComponent {
     }
 
     fun isArtistNameUnknown(artistName: String?): Boolean {
-        if (TextUtils.isEmpty(artistName)) {
+        if (artistName.isNullOrEmpty()) {
             return false
         }
         if (artistName == Artist.UNKNOWN_ARTIST_DISPLAY_NAME) {
             return true
         }
-        val tempName = artistName!!.trim { it <= ' ' }.lowercase()
+        val tempName = artistName.trim { it <= ' ' }.lowercase()
         return tempName == "unknown" || tempName == "<unknown>"
     }
 
     fun isVariousArtists(artistName: String?): Boolean {
-        if (TextUtils.isEmpty(artistName)) {
+        if (artistName.isNullOrEmpty()) {
             return false
         }
         if (artistName == Artist.VARIOUS_ARTISTS_DISPLAY_NAME) {

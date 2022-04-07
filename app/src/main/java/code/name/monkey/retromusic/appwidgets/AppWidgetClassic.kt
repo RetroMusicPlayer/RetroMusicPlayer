@@ -21,7 +21,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -101,7 +100,7 @@ class AppWidgetClassic : BaseAppWidget() {
         val song = service.currentSong
 
         // Set the titles and artwork
-        if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName)) {
+        if (song.title.isEmpty() && song.artistName.isEmpty()) {
             appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
         } else {
             appWidgetView.setViewVisibility(R.id.media_titles, View.VISIBLE)

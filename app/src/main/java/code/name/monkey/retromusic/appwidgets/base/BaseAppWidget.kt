@@ -24,7 +24,6 @@ import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.text.TextUtils
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -126,7 +125,7 @@ abstract class BaseAppWidget : AppWidgetProvider() {
     protected fun getSongArtistAndAlbum(song: Song): String {
         val builder = StringBuilder()
         builder.append(song.artistName)
-        if (!TextUtils.isEmpty(song.artistName) && !TextUtils.isEmpty(song.albumName)) {
+        if (song.artistName.isNotEmpty() && song.albumName.isNotEmpty()) {
             builder.append(" • ")
         }
         builder.append(song.albumName)

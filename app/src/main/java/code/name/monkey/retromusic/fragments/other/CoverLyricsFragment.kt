@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.fragments.other
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -92,9 +91,7 @@ class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyri
                 val lrcFile: File? = LyricUtil.getSyncedLyricsFile(song)
                 val data: String = LyricUtil.getStringFromLrc(lrcFile)
                 Lyrics.parse(song,
-                    if (!TextUtils.isEmpty(data)) {
-                        data
-                    } else {
+                    data.ifEmpty {
                         // Get Embedded Lyrics
                         LyricUtil.getEmbeddedSyncedLyrics(song.data)
                     }

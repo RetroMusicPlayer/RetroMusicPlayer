@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.adapter.playlist
 
 import android.graphics.Color
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -80,7 +79,7 @@ class PlaylistAdapter(
     }
 
     private fun getPlaylistTitle(playlist: PlaylistEntity): String {
-        return if (TextUtils.isEmpty(playlist.playlistName)) "-" else playlist.playlistName
+        return playlist.playlistName.ifEmpty { "-" }
     }
 
     private fun getPlaylistText(playlist: PlaylistWithSongs): String {

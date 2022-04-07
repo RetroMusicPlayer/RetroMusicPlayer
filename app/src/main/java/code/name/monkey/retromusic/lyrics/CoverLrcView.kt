@@ -24,7 +24,6 @@ import android.os.Looper
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
-import android.text.TextUtils
 import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.GestureDetector
@@ -208,7 +207,7 @@ class CoverLrcView @JvmOverloads constructor(
         )
         mDefaultLabel = ta.getString(R.styleable.LrcView_lrcLabel)
         mDefaultLabel =
-            if (TextUtils.isEmpty(mDefaultLabel)) context.getString(R.string.empty) else mDefaultLabel
+            if (mDefaultLabel.isNullOrEmpty()) context.getString(R.string.empty) else mDefaultLabel
         mLrcPadding = ta.getDimension(R.styleable.LrcView_lrcPadding, 0f)
         mTimelineColor = ta.getColor(
             R.styleable.LrcView_lrcTimelineColor,
