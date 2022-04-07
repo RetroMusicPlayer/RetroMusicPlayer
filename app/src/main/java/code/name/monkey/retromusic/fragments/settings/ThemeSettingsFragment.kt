@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.core.content.edit
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.ACCENT_COLORS
@@ -93,10 +94,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         val desaturatedColor: ATESwitchPreference? = findPreference(DESATURATED_COLOR)
         desaturatedColor?.setOnPreferenceChangeListener { _, value ->
             val desaturated = value as Boolean
-            ThemeStore.prefs(requireContext())
-                .edit()
-                .putBoolean("desaturated_color", desaturated)
-                .apply()
+            ThemeStore.prefs(requireContext()).edit {
+                putBoolean("desaturated_color", desaturated)
+            }
             PreferenceUtil.isDesaturatedColor = desaturated
             restartActivity()
             true
