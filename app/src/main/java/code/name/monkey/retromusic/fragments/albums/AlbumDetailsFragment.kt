@@ -23,7 +23,6 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
-import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -118,7 +117,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         mainActivity.setSupportActionBar(binding.toolbar)
 
         binding.toolbar.title = " "
-        ViewCompat.setTransitionName(binding.albumCoverContainer, arguments.extraAlbumId.toString())
+        binding.albumCoverContainer.setTransitionName(arguments.extraAlbumId.toString())
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner) {
             requireView().doOnPreDraw {
@@ -127,9 +126,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             albumArtistExists = !it.albumArtist.isNullOrEmpty()
             showAlbum(it)
             if (albumArtistExists) {
-                ViewCompat.setTransitionName(binding.artistImage, album.albumArtist)
+                binding.artistImage.setTransitionName(album.albumArtist)
             } else {
-                ViewCompat.setTransitionName(binding.artistImage, album.artistId.toString())
+                binding.artistImage.setTransitionName(album.artistId.toString())
             }
         }
 

@@ -18,7 +18,6 @@ import android.app.KeyguardManager
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.core.content.getSystemService
-import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
@@ -77,7 +76,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
         binding.slide.apply {
             translationY = 100f
             alpha = 0f
-            ViewCompat.animate(this).translationY(0f).alpha(1f).setDuration(1500).start()
+            animate().translationY(0f).alpha(1f).setDuration(1500).start()
         }
     }
 

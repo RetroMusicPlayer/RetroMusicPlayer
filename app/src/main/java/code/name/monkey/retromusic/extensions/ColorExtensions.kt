@@ -250,7 +250,7 @@ fun TextInputLayout.setTint(background: Boolean = true) {
 @CheckResult
 fun Drawable.tint(@ColorInt color: Int): Drawable {
     val tintedDrawable = DrawableCompat.wrap(this).mutate()
-    DrawableCompat.setTint(this, color)
+    setTint(color)
     return tintedDrawable
 }
 

@@ -25,7 +25,6 @@ import android.view.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -150,7 +149,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         exitTransition = Fade()
         lyricsSectionsAdapter = LyricsSectionsAdapter(requireActivity())
         _binding = FragmentLyricsBinding.bind(view)
-        ViewCompat.setTransitionName(binding.container, "lyrics")
+        binding.container.setTransitionName("lyrics")
 
         setupWakelock()
         setupViews()

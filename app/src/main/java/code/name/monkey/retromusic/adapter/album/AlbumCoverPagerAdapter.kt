@@ -19,7 +19,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
@@ -106,7 +105,7 @@ class AlbumCoverPagerAdapter(
             savedInstanceState: Bundle?
         ): View? {
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
-            ViewCompat.setTransitionName(view, "lyrics")
+            view.setTransitionName("lyrics")
             albumCover = view.findViewById(R.id.player_image)
             view.setOnClickListener {
                 if (mainActivity.getBottomSheetBehavior().state == STATE_EXPANDED) {

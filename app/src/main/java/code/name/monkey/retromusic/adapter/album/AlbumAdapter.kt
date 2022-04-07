@@ -19,7 +19,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
@@ -92,9 +91,9 @@ open class AlbumAdapter(
         // Check if imageContainer exists so we can have a smooth transition without
         // CardView clipping, if it doesn't exist in current layout set transition name to image instead.
         if (holder.imageContainer != null) {
-            ViewCompat.setTransitionName(holder.imageContainer!!, album.id.toString())
+            holder.imageContainer!!.setTransitionName(album.id.toString())
         } else {
-            ViewCompat.setTransitionName(holder.image!!, album.id.toString())
+            holder.image!!.setTransitionName(album.id.toString())
         }
         loadAlbumCover(album, holder)
     }
