@@ -23,7 +23,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.RequiresApi
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -77,10 +77,8 @@ class PermissionActivity : AbsMusicServiceActivity() {
     private fun setupTitle() {
         val color = ThemeStore.accentColor(this)
         val hexColor = String.format("#%06X", 0xFFFFFF and color)
-        val appName = HtmlCompat.fromHtml(
-            "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>",
-            HtmlCompat.FROM_HTML_MODE_COMPACT
-        )
+        val appName = "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>"
+            .parseAsHtml()
         binding.appNameText.text = appName
     }
 

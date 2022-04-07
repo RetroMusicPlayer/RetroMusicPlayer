@@ -22,7 +22,7 @@ import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
 import android.view.View
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
@@ -171,10 +171,7 @@ class HomeFragment :
             findNavController().navigate(R.id.action_search, null, navOptions)
         }
         val hexColor = String.format("#%06X", 0xFFFFFF and accentColor())
-        val appName = HtmlCompat.fromHtml(
-            "Retro <span  style='color:$hexColor';>Music</span>",
-            HtmlCompat.FROM_HTML_MODE_COMPACT
-        )
+        val appName = "Retro <span  style='color:$hexColor';>Music</span>".parseAsHtml()
         binding.appNameText.text = appName
     }
 

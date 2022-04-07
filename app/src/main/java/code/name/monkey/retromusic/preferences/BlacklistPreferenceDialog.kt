@@ -21,7 +21,7 @@ import android.util.AttributeSet
 import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.App
@@ -84,15 +84,10 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
             .setItems(paths.toTypedArray()) { _, which ->
                 materialDialog(R.string.remove_from_blacklist)
                     .setMessage(
-                        HtmlCompat.fromHtml(
-                            String.format(
-                                getString(
-                                    R.string.do_you_want_to_remove_from_the_blacklist
-                                ),
-                                paths[which]
-                            ),
-                            HtmlCompat.FROM_HTML_MODE_LEGACY
-                        )
+                        String.format(
+                            getString(R.string.do_you_want_to_remove_from_the_blacklist),
+                            paths[which]
+                        ).parseAsHtml()
                     )
                     .setPositiveButton(R.string.remove_action) { _, _ ->
                         BlacklistStore.getInstance(App.getContext())
