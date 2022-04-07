@@ -220,9 +220,9 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
             childFragmentManager.beginTransaction()
                 .replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
             childFragmentManager.executePendingTransactions()
-            volumeFragment =
-                childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as? VolumeFragment
         }
+        volumeFragment =
+            childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as? VolumeFragment
     }
 
     override fun onResume() {

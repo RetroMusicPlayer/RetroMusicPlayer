@@ -22,37 +22,35 @@ import kotlin.math.abs
 
 class VerticalFlipTransformation : ViewPager.PageTransformer {
     override fun transformPage(page: View, position: Float) {
+        page.apply {
+            translationX = -position * width
+            cameraDistance = 100000f
 
-        page.translationX = -position * page.width
-        page.cameraDistance = 100000f
+            if (position < 0.5 && position > -0.5) {
+                isVisible = true
+            } else {
+                isInvisible = true
+            }
 
-        if (position < 0.5 && position > -0.5) {
-            page.isVisible = true
-        } else {
-            page.isInvisible = true
+            when {
+                position < -1 -> {     // [-Infinity,-1)
+                    // This page is way off-screen to the left.
+                    alpha = 0f
+                }
+                position <= 0 -> {    // [-1,0]
+                    alpha = 1f
+                    rotationY = 180 * (1 - abs(position) + 1)
+                }
+                position <= 1 -> {    // (0,1]
+                    alpha = 1f
+                    rotationY = -180 * (1 - abs(position) + 1)
+                }
+                else -> {    // (1,+Infinity]
+                    // This page is way off-screen to the right.
+                    alpha = 0f
+                }
+            }
         }
-
-
-        when {
-            position < -1 -> {     // [-Infinity,-1)
-                // This page is way off-screen to the left.
-                page.alpha = 0f
-            }
-            position <= 0 -> {    // [-1,0]
-                page.alpha = 1f
-                page.rotationY = 180 * (1 - abs(position) + 1)
-            }
-            position <= 1 -> {    // (0,1]
-                page.alpha = 1f
-                page.rotationY = -180 * (1 - abs(position) + 1)
-            }
-            else -> {    // (1,+Infinity]
-                // This page is way off-screen to the right.
-                page.alpha = 0f
-
-            }
-        }
-
 
     }
 }

@@ -137,7 +137,6 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     companion object {
-
         fun newInstance(): VolumeFragment {
             return VolumeFragment()
         }

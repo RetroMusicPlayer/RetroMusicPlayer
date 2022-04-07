@@ -38,8 +38,8 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.MUSIC_PLAYER" />
@@ -212,7 +212,7 @@
         </provider>
 
         <receiver
-            android:name=".service.MediaButtonIntentReceiver"
+            android:name="androidx.media.session.MediaButtonReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
@@ -322,6 +322,9 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </service>
 

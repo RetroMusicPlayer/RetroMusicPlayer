@@ -14,7 +14,6 @@
 package code.name.monkey.retromusic.service
 
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothDevice
 import android.content.*
@@ -47,9 +46,9 @@ import androidx.media.AudioAttributesCompat.CONTENT_TYPE_MUSIC
 import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
 import androidx.media.MediaBrowserServiceCompat
+import androidx.media.session.MediaButtonReceiver.handleIntent
 import androidx.preference.PreferenceManager
-import code.name.monkey.appthemehelper.util.VersionUtils.hasMarshmallow
-import code.name.monkey.appthemehelper.util.VersionUtils.hasQ
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.LockScreenActivity
 import code.name.monkey.retromusic.appwidgets.*
@@ -175,10 +174,10 @@ class MusicService : MediaBrowserServiceCompat(),
     private lateinit var mediaStoreObserver: ContentObserver
     private var musicPlayerHandlerThread: HandlerThread? = null
     private var notHandledMetaChangedForCurrentTrack = false
-    private var originalPlayingQueue = mutableListOf<Song>()
+    private var originalPlayingQueue = ArrayList<Song>()
 
     @JvmField
-    var playingQueue = mutableListOf<Song>()
+    var playingQueue = ArrayList<Song>()
     var isPausedByTransientLossOfFocus = false
     private val becomingNoisyReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -540,7 +539,7 @@ class MusicService : MediaBrowserServiceCompat(),
         return shuffleMode
     }
 
-    private fun setShuffleMode(shuffleMode: Int) {
+    fun setShuffleMode(shuffleMode: Int) {
         PreferenceManager.getDefaultSharedPreferences(this)
             .edit()
             .putInt(SAVED_SHUFFLE_MODE, shuffleMode)
@@ -752,6 +751,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null && intent.action != null) {
+            handleIntent(mediaSession, intent)
             restoreQueuesAndPositionIfNecessary()
             when (intent.action) {
                 ACTION_TOGGLE_PAUSE -> if (isPlaying) {
@@ -822,17 +822,16 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    @Synchronized
     fun openTrackAndPrepareNextAt(position: Int): Boolean {
-        synchronized(this) {
-            this.position = position
-            val prepared = openCurrent()
-            if (prepared) {
-                prepareNextImpl()
-            }
-            notifyChange(META_CHANGED)
-            notHandledMetaChangedForCurrentTrack = false
-            return prepared
+        this.position = position
+        val prepared = openCurrent()
+        if (prepared) {
+            prepareNextImpl()
         }
+        notifyChange(META_CHANGED)
+        notHandledMetaChangedForCurrentTrack = false
+        return prepared
     }
 
     fun pause() {
@@ -856,48 +855,47 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    @Synchronized
     fun play() {
-        synchronized(this) {
-            if (requestFocus()) {
-                if (playback != null && !playback!!.isPlaying) {
-                    if (!playback!!.isInitialized) {
-                        playSongAt(getPosition())
-                    } else {
-                        //Don't Start playing when it's casting
-                        if (isCasting) {
-                            return
-                        }
-                        startFadeAnimator(playback!!, true) {
-
-                            // Code when Animator Ends
-                            if (!becomingNoisyReceiverRegistered) {
-                                registerReceiver(
-                                    becomingNoisyReceiver,
-                                    becomingNoisyReceiverIntentFilter
-                                )
-                                becomingNoisyReceiverRegistered = true
-                            }
-                            if (notHandledMetaChangedForCurrentTrack) {
-                                handleChangeInternal(META_CHANGED)
-                                notHandledMetaChangedForCurrentTrack = false
-                            }
-
-                            // fixes a bug where the volume would stay ducked because the
-                            // AudioManager.AUDIOFOCUS_GAIN event is not sent
-                            playerHandler?.removeMessages(DUCK)
-                            playerHandler?.sendEmptyMessage(UNDUCK)
-                        }
-                        //Start Playback with Animator
-                        playback?.start()
-                        notifyChange(PLAY_STATE_CHANGED)
+        if (requestFocus()) {
+            if (playback != null && !playback!!.isPlaying) {
+                if (!playback!!.isInitialized) {
+                    playSongAt(getPosition())
+                } else {
+                    //Don't Start playing when it's casting
+                    if (isCasting) {
+                        return
                     }
+                    startFadeAnimator(playback!!, true) {
+
+                        // Code when Animator Ends
+                        if (!becomingNoisyReceiverRegistered) {
+                            registerReceiver(
+                                becomingNoisyReceiver,
+                                becomingNoisyReceiverIntentFilter
+                            )
+                            becomingNoisyReceiverRegistered = true
+                        }
+                        if (notHandledMetaChangedForCurrentTrack) {
+                            handleChangeInternal(META_CHANGED)
+                            notHandledMetaChangedForCurrentTrack = false
+                        }
+
+                        // fixes a bug where the volume would stay ducked because the
+                        // AudioManager.AUDIOFOCUS_GAIN event is not sent
+                        playerHandler?.removeMessages(DUCK)
+                        playerHandler?.sendEmptyMessage(UNDUCK)
+                    }
+                    //Start Playback with Animator
+                    playback?.start()
+                    notifyChange(PLAY_STATE_CHANGED)
                 }
-            } else {
-                Toast.makeText(
-                    this, resources.getString(R.string.audio_focus_denied), Toast.LENGTH_SHORT
-                )
-                    .show()
             }
+        } else {
+            Toast.makeText(
+                this, resources.getString(R.string.audio_focus_denied), Toast.LENGTH_SHORT
+            )
+                .show()
         }
     }
 
@@ -947,14 +945,13 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    @Synchronized
     fun prepareNextImpl() {
-        synchronized(this) {
-            try {
-                val nextPosition = getNextPosition(false)
-                playback?.setNextDataSource(getTrackUri(getSongAt(nextPosition)))
-                this.nextPosition = nextPosition
-            } catch (ignored: Exception) {
-            }
+        try {
+            val nextPosition = getNextPosition(false)
+            playback?.setNextDataSource(getTrackUri(getSongAt(nextPosition)))
+            this.nextPosition = nextPosition
+        } catch (ignored: Exception) {
         }
     }
 
@@ -1037,8 +1034,8 @@ class MusicService : MediaBrowserServiceCompat(),
                     SAVED_POSITION_IN_TRACK, -1
                 )
             if (restoredQueue.size > 0 && restoredQueue.size == restoredOriginalQueue.size && restoredPosition != -1) {
-                originalPlayingQueue = restoredOriginalQueue
-                playingQueue = restoredQueue
+                originalPlayingQueue = ArrayList(restoredOriginalQueue)
+                playingQueue = ArrayList(restoredQueue)
                 position = restoredPosition
                 openCurrent()
                 prepareNext()
@@ -1073,18 +1070,17 @@ class MusicService : MediaBrowserServiceCompat(),
         savePositionInTrack()
     }
 
+    @Synchronized
     fun seek(millis: Int): Int {
-        synchronized(this) {
-            return try {
-                var newPosition = 0
-                if (playback != null) {
-                    newPosition = playback!!.seek(millis)
-                }
-                throttledSeekHandler?.notifySeek()
-                newPosition
-            } catch (e: Exception) {
-                -1
+        return try {
+            var newPosition = 0
+            if (playback != null) {
+                newPosition = playback!!.seek(millis)
             }
+            throttledSeekHandler?.notifySeek()
+            newPosition
+        } catch (e: Exception) {
+            -1
         }
     }
 
@@ -1223,6 +1219,7 @@ class MusicService : MediaBrowserServiceCompat(),
             }
             META_CHANGED -> {
                 playingNotification?.updateMetadata(currentSong) { startForegroundOrNotify() }
+                playingNotification?.updateFavorite(currentSong) { startForegroundOrNotify() }
                 updateMediaSessionMetaData()
                 updateMediaSessionPlaybackState()
                 savePosition()
@@ -1248,19 +1245,19 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private fun startForegroundOrNotify() {
         if (playingNotification != null && currentSong.id != -1L) {
-            val isPlaying = isPlaying
-            if (isForeground != isPlaying && !isPlaying) {
-                // This makes the notification dismissible
-                // We can't call stopForeground(false) on A12 though, which may result in crashes
-                // when we call startForeground after that e.g. when Alarm goes off,
-                if (VERSION.SDK_INT < VERSION_CODES.S) {
+            if (!VersionUtils.hasS()) {
+                if (isForeground && !isPlaying) {
+                    // This makes the notification dismissible
+                    // We can't call stopForeground(false) on A12 though, which may result in crashes
+                    // when we call startForeground after that e.g. when Alarm goes off
+
                     stopForeground(false)
                     isForeground = false
                 }
             }
-            if (!isForeground && isPlaying) {
+            if (!isForeground) {
                 // Specify that this is a media service, if supported.
-                if (hasQ()) {
+                if (VersionUtils.hasQ()) {
                     startForeground(
                         PlayingNotification.NOTIFICATION_ID, playingNotification!!.build(),
                         ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
@@ -1279,7 +1276,6 @@ class MusicService : MediaBrowserServiceCompat(),
                 )
             }
         }
-        return
     }
 
     private fun stopForegroundAndNotification() {
@@ -1288,24 +1284,22 @@ class MusicService : MediaBrowserServiceCompat(),
         isForeground = false
     }
 
+    @Synchronized
     private fun openCurrent(): Boolean {
-        synchronized(this) {
-            try {
-                if (playback != null) {
-                    return playback!!.setDataSource(
-                        getTrackUri(
-                            Objects.requireNonNull(
-                                currentSong
-                            )
+        return try {
+            if (playback != null) {
+                return playback!!.setDataSource(
+                    getTrackUri(
+                        Objects.requireNonNull(
+                            currentSong
                         )
                     )
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                return false
-            }
+                )
+            } else false
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
         }
-        return false
     }
 
     private fun playFromPlaylist(intent: Intent) {
@@ -1443,24 +1437,13 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun setupMediaSession() {
-        val mediaButtonReceiverComponentName =
-            ComponentName(applicationContext, MediaButtonIntentReceiver::class.java)
-        val mediaButtonIntent = Intent(Intent.ACTION_MEDIA_BUTTON)
-        mediaButtonIntent.component = mediaButtonReceiverComponentName
-        val mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(
-            applicationContext, 0, mediaButtonIntent,
-            if (hasMarshmallow()) PendingIntent.FLAG_IMMUTABLE else 0
-        )
         mediaSession = MediaSessionCompat(
             this,
-            "RetroMusicPlayer",
-            mediaButtonReceiverComponentName,
-            mediaButtonReceiverPendingIntent
+            "RetroMusicPlayer"
         )
         val mediasessionCallback = MediaSessionCallback(applicationContext, this)
         mediaSession?.setCallback(mediasessionCallback)
         mediaSession?.isActive = true
-        mediaSession?.setMediaButtonReceiver(mediaButtonReceiverPendingIntent)
     }
 
     inner class MusicBinder : Binder() {

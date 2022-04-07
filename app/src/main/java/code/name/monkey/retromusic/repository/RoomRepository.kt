@@ -49,6 +49,7 @@ interface RoomRepository {
     suspend fun blackListPaths(): List<BlackListStoreEntity>
     suspend fun deleteSongs(songs: List<Song>)
     suspend fun isSongFavorite(context: Context, songId: Long): Boolean
+    fun checkPlaylistExists(playListId: Long): LiveData<Boolean>
 }
 
 class RealRoomRepository(
@@ -96,6 +97,9 @@ class RealRoomRepository(
 
     override fun getSongs(playListId: Long): LiveData<List<SongEntity>> =
         playlistDao.songsFromPlaylist(playListId)
+
+    override fun checkPlaylistExists(playListId: Long): LiveData<Boolean> =
+        playlistDao.checkPlaylistExists(playListId)
 
     override suspend fun deletePlaylistEntities(playlistEntities: List<PlaylistEntity>) =
         playlistDao.deletePlaylists(playlistEntities)

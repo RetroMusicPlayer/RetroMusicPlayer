@@ -64,4 +64,7 @@ interface PlaylistDao {
 
     @Query("SELECT * FROM SongEntity WHERE playlist_creator_id= :playlistId")
     fun favoritesSongs(playlistId: Long): List<SongEntity>
+
+    @Query("SELECT EXISTS(SELECT * FROM PlaylistEntity WHERE playlist_id = :playlistId)")
+    fun checkPlaylistExists(playlistId: Long): LiveData<Boolean>
 }

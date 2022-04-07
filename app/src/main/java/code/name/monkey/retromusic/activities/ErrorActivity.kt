@@ -53,7 +53,7 @@ class ErrorActivity : AppCompatActivity() {
                 )
                 .setNeutralButton(
                     R.string.customactivityoncrash_error_activity_error_details_share
-                ) { dialog, which ->
+                ) { _, _ ->
 
                     val bugReport = createFile(
                         context = this,

@@ -131,7 +131,6 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
         val expand = intent?.extra<Boolean>(EXPAND_PANEL)?.value ?: false
         if (expand && PreferenceUtil.isExpandPanel) {
             fromNotification = true
@@ -139,6 +138,11 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
             expandPanel()
             intent?.removeExtra(EXPAND_PANEL)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
     }
 
     override fun onDestroy() {

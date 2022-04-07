@@ -111,6 +111,7 @@ interface Repository {
     suspend fun searchAlbums(query: String): List<Album>
     suspend fun isSongFavorite(songId: Long): Boolean
     fun getSongByGenre(genreId: Long): Song
+    fun checkPlaylistExists(playListId: Long): LiveData<Boolean>
 }
 
 class RealRepository(
@@ -277,6 +278,9 @@ class RealRepository(
     override suspend fun checkPlaylistExists(playlistName: String): List<PlaylistEntity> =
         roomRepository.checkPlaylistExists(playlistName)
 
+    override fun checkPlaylistExists(playListId: Long): LiveData<Boolean> =
+        roomRepository.checkPlaylistExists(playListId)
+
     override suspend fun createPlaylist(playlistEntity: PlaylistEntity): Long =
         roomRepository.createPlaylist(playlistEntity)
 
@@ -377,7 +381,7 @@ class RealRepository(
     }
 
     override suspend fun suggestions(): List<Song> {
-        if (!PreferenceUtil.homeSuggestions) return listOf<Song>()
+        if (!PreferenceUtil.homeSuggestions) return listOf()
         return NotPlayedPlaylist().songs().shuffled().takeIf {
             it.size > 9
         } ?: emptyList()

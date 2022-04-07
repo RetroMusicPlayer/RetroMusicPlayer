@@ -9,6 +9,7 @@ import code.name.monkey.retromusic.cast.RetroWebServer
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastSession
+import com.google.android.gms.cast.framework.SessionManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 
@@ -16,7 +17,7 @@ import com.google.android.gms.common.GoogleApiAvailability
 abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
 
     private var mCastSession: CastSession? = null
-    private lateinit var castContext: CastContext
+    private lateinit var sessionManager: SessionManager
     private var webServer: RetroWebServer? = null
     private var playServicesAvailable: Boolean = false
 
@@ -87,17 +88,17 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
     }
 
     private fun setupCast() {
-        castContext = CastContext.getSharedInstance(this)
+        sessionManager = CastContext.getSharedInstance(applicationContext).sessionManager
     }
 
     override fun onResume() {
         if (playServicesAvailable) {
-            castContext.sessionManager.addSessionManagerListener(
+            sessionManager.addSessionManagerListener(
                 sessionManagerListener,
                 CastSession::class.java
             )
             if (mCastSession == null) {
-                mCastSession = castContext.sessionManager.currentCastSession
+                mCastSession = sessionManager.currentCastSession
             }
         }
         super.onResume()

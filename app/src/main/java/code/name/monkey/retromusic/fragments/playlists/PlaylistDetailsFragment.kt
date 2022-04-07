@@ -9,6 +9,7 @@ import androidx.activity.addCallback
 import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,7 +59,6 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(view)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         setHasOptionsMenu(true)
-        mainActivity.addMusicServiceEventListener(viewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         ViewCompat.setTransitionName(binding.container, "playlist")
         playlist = arguments.extraPlaylist
@@ -66,6 +66,11 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         setUpRecyclerView()
         viewModel.getSongs().observe(viewLifecycleOwner) {
             songs(it.toSongs())
+        }
+        viewModel.playlistExists().observe(viewLifecycleOwner) {
+            if (!it) {
+                findNavController().navigateUp()
+            }
         }
         postponeEnterTransition()
         requireView().doOnPreDraw { startPostponedEnterTransition() }

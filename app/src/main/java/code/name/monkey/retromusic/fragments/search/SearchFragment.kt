@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.fragments.search
 
+import android.app.Activity.RESULT_OK
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -218,6 +219,16 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             showToast(getString(R.string.speech_not_supported))
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            val spokenText: String? =
+                data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    .let { text -> text?.get(0) }
+            binding.searchView.setText(spokenText)
         }
     }
 
