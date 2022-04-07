@@ -25,6 +25,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
+import androidx.core.view.isVisible
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMiniPlayerBinding
 import code.name.monkey.retromusic.extensions.accentColor
@@ -70,10 +71,8 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
             binding.actionNext.show()
             binding.actionPrevious.show()
         } else {
-            binding.actionNext.visibility =
-                if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
-            binding.actionPrevious.visibility =
-                if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
+            binding.actionNext.isVisible = PreferenceUtil.isExtraControls
+            binding.actionPrevious.isVisible = PreferenceUtil.isExtraControls
         }
         binding.actionNext.setOnClickListener(this)
         binding.actionPrevious.setOnClickListener(this)
