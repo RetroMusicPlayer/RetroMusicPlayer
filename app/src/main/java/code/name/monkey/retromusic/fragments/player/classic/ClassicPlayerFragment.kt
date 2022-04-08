@@ -25,6 +25,7 @@ import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -168,9 +169,9 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
 
     private fun hideVolumeIfAvailable() {
         if (PreferenceUtil.isVolumeVisibilityMode) {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.volumeFragmentContainer, VolumeFragment.newInstance())
-                .commit()
+            childFragmentManager.commit {
+                replace(R.id.volumeFragmentContainer, VolumeFragment.newInstance())
+            }
             childFragmentManager.executePendingTransactions()
             volumeFragment =
                 childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?

@@ -18,13 +18,14 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
+import androidx.core.text.toSpannable
+import androidx.core.view.isVisible
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMiniPlayerBinding
 import code.name.monkey.retromusic.extensions.accentColor
@@ -70,10 +71,8 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
             binding.actionNext.show()
             binding.actionPrevious.show()
         } else {
-            binding.actionNext.visibility =
-                if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
-            binding.actionPrevious.visibility =
-                if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
+            binding.actionNext.isVisible = PreferenceUtil.isExtraControls
+            binding.actionPrevious.isVisible = PreferenceUtil.isExtraControls
         }
         binding.actionNext.setOnClickListener(this)
         binding.actionPrevious.setOnClickListener(this)
@@ -94,10 +93,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
 
         val builder = SpannableStringBuilder()
 
-        val title = SpannableString(song.title)
+        val title = song.title.toSpannable()
         title.setSpan(ForegroundColorSpan(textColorPrimary()), 0, title.length, 0)
 
-        val text = SpannableString(song.artistName)
+        val text = song.artistName.toSpannable()
         text.setSpan(ForegroundColorSpan(textColorSecondary()), 0, text.length, 0)
 
         builder.append(title).append(" • ").append(text)

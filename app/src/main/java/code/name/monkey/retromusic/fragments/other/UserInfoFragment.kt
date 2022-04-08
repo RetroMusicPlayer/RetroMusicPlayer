@@ -20,7 +20,6 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -98,10 +97,10 @@ class UserInfoFragment : Fragment() {
 
         binding.next.setOnClickListener {
             val nameString = binding.name.text.toString().trim { it <= ' ' }
-            if (TextUtils.isEmpty(nameString)) {
+            if (nameString.isEmpty()) {
                 Toast.makeText(
                     requireContext(),
-                    "Umm you're name can't be empty!",
+                    "Your name can't be empty!",
                     Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener

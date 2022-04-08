@@ -17,15 +17,14 @@ package code.name.monkey.retromusic.activities.bugreport
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.annotation.StringDef
 import androidx.annotation.StringRes
 import androidx.core.content.getSystemService
+import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
@@ -81,7 +80,7 @@ open class BugReportActivity : AbsThemeActivity() {
 
         initViews()
 
-        if (TextUtils.isEmpty(title)) setTitle(R.string.report_an_issue)
+        if (title.isNullOrEmpty()) setTitle(R.string.report_an_issue)
 
         deviceInfo = DeviceInfo(this)
         binding.cardDeviceInfo.airTextDeviceInfo.text = deviceInfo.toString()
@@ -154,7 +153,7 @@ open class BugReportActivity : AbsThemeActivity() {
             copyDeviceInfoToClipBoard()
 
             val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(ISSUE_TRACKER_LINK)
+            i.data = ISSUE_TRACKER_LINK.toUri()
             i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(i)
         }
@@ -175,14 +174,14 @@ open class BugReportActivity : AbsThemeActivity() {
         var hasErrors = false
 
         if (binding.cardReport.optionUseAccount.isChecked) {
-            if (TextUtils.isEmpty(binding.cardReport.inputUsername.text)) {
+            if (binding.cardReport.inputUsername.text.isNullOrEmpty()) {
                 setError(binding.cardReport.inputLayoutUsername, R.string.bug_report_no_username)
                 hasErrors = true
             } else {
                 removeError(binding.cardReport.inputLayoutUsername)
             }
 
-            if (TextUtils.isEmpty(binding.cardReport.inputPassword.text)) {
+            if (binding.cardReport.inputPassword.text.isNullOrEmpty()) {
                 setError(binding.cardReport.inputLayoutPassword, R.string.bug_report_no_password)
                 hasErrors = true
             } else {
@@ -190,14 +189,14 @@ open class BugReportActivity : AbsThemeActivity() {
             }
         }
 
-        if (TextUtils.isEmpty(binding.cardReport.inputTitle.text)) {
+        if (binding.cardReport.inputTitle.text.isNullOrEmpty()) {
             setError(binding.cardReport.inputLayoutTitle, R.string.bug_report_no_title)
             hasErrors = true
         } else {
             removeError(binding.cardReport.inputLayoutTitle)
         }
 
-        if (TextUtils.isEmpty(binding.cardReport.inputDescription.text)) {
+        if (binding.cardReport.inputDescription.text.isNullOrEmpty()) {
             setError(binding.cardReport.inputLayoutDescription, R.string.bug_report_no_description)
             hasErrors = true
         } else {
@@ -225,7 +224,7 @@ open class BugReportActivity : AbsThemeActivity() {
         onSaveExtraInfo()
 
         val report = Report(bugTitle, bugDescription, deviceInfo, extraInfo)
-        val target = GithubTarget("prathameshmm02", "RetroMusicPlayer")
+        val target = GithubTarget("RetroMusicPlayer", "RetroMusicPlayer")
 
         reportIssue(report, target, login)
     }
@@ -315,6 +314,6 @@ open class BugReportActivity : AbsThemeActivity() {
 
         private const val STATUS_BAD_CREDENTIALS = 401
         private const val STATUS_ISSUES_NOT_ENABLED = 410
-        private const val ISSUE_TRACKER_LINK = "https://github.com/prathameshmm02/RetroMusicPlayer"
+        private const val ISSUE_TRACKER_LINK = "https://github.com/RetroMusicPlayer/RetroMusicPlayer"
     }
 }

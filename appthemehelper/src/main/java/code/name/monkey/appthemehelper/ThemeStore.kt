@@ -6,6 +6,7 @@ import android.graphics.Color
 import androidx.annotation.*
 import androidx.annotation.IntRange
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ATHUtil.isWindowBackgroundDark
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
@@ -336,7 +337,7 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
             val prefs = prefs(context)
             val lastVersion = prefs.getInt(ThemeStorePrefKeys.IS_CONFIGURED_VERSION_KEY, -1)
             if (version > lastVersion) {
-                prefs.edit().putInt(ThemeStorePrefKeys.IS_CONFIGURED_VERSION_KEY, version).apply()
+                prefs.edit { putInt(ThemeStorePrefKeys.IS_CONFIGURED_VERSION_KEY, version) }
                 return false
             }
             return true

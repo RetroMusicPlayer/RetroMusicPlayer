@@ -15,12 +15,12 @@
 package code.name.monkey.retromusic.adapter.playlist
 
 import android.graphics.Color
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.isGone
 import androidx.core.view.setPadding
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
@@ -30,8 +30,6 @@ import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.playlistPreview.PlaylistPreview
 import code.name.monkey.retromusic.helper.SortOrder.PlaylistSortOrder
@@ -79,7 +77,7 @@ class PlaylistAdapter(
     }
 
     private fun getPlaylistTitle(playlist: PlaylistEntity): String {
-        return if (TextUtils.isEmpty(playlist.playlistName)) "-" else playlist.playlistName
+        return playlist.playlistName.ifEmpty { "-" }
     }
 
     private fun getPlaylistText(playlist: PlaylistWithSongs): String {
@@ -102,12 +100,7 @@ class PlaylistAdapter(
         holder.itemView.isActivated = isChecked(playlist)
         holder.title?.text = getPlaylistTitle(playlist.playlistEntity)
         holder.text?.text = getPlaylistText(playlist)
-        val isChecked = isChecked(playlist)
-        if (isChecked) {
-            holder.menu?.hide()
-        } else {
-            holder.menu?.show()
-        }
+        holder.menu?.isGone = isChecked(playlist)
         GlideApp.with(activity)
             .load(
                 if (itemLayoutRes == R.layout.item_list) {

@@ -24,7 +24,6 @@ import android.os.Looper
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
-import android.text.TextUtils
 import android.text.format.DateUtils
 import android.util.AttributeSet
 import android.view.GestureDetector
@@ -34,6 +33,7 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Scroller
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.withSave
 import code.name.monkey.retromusic.R
 import java.io.File
 import kotlin.math.abs
@@ -208,7 +208,7 @@ class CoverLrcView @JvmOverloads constructor(
         )
         mDefaultLabel = ta.getString(R.styleable.LrcView_lrcLabel)
         mDefaultLabel =
-            if (TextUtils.isEmpty(mDefaultLabel)) context.getString(R.string.empty) else mDefaultLabel
+            if (mDefaultLabel.isNullOrEmpty()) context.getString(R.string.empty) else mDefaultLabel
         mLrcPadding = ta.getDimension(R.styleable.LrcView_lrcPadding, 0f)
         mTimelineColor = ta.getColor(
             R.styleable.LrcView_lrcTimelineColor,
@@ -522,10 +522,10 @@ class CoverLrcView @JvmOverloads constructor(
      * @param y 歌词中心 Y 坐标
      */
     private fun drawText(canvas: Canvas, staticLayout: StaticLayout, y: Float) {
-        canvas.save()
-        canvas.translate(mLrcPadding, y - (staticLayout.height shr 1))
-        staticLayout.draw(canvas)
-        canvas.restore()
+        canvas.withSave {
+            translate(mLrcPadding, y - (staticLayout.height shr 1))
+            staticLayout.draw(this)
+        }
     }
 
     fun animateCurrentTextSize() {

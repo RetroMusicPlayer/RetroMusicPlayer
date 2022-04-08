@@ -23,6 +23,7 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.core.content.edit
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.model.Artist
 import com.bumptech.glide.Glide
@@ -79,7 +80,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
                             }
 
                             if (succesful) {
-                                mPreferences.edit().putBoolean(getFileName(artist), true).apply()
+                                mPreferences.edit { putBoolean(getFileName(artist), true) }
                                 ArtistSignatureUtil.getInstance(App.getContext())
                                     .updateArtistSignature(artist.name)
                                 App.getContext().contentResolver.notifyChange(
@@ -99,7 +100,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
         object : AsyncTask<Void, Void, Void>() {
             @SuppressLint("ApplySharedPref")
             override fun doInBackground(vararg params: Void): Void? {
-                mPreferences.edit().putBoolean(getFileName(artist), false).commit()
+                mPreferences.edit(commit = true) { putBoolean(getFileName(artist), false) }
                 ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
                 App.getContext().contentResolver.notifyChange(
                     MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,

@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.util
 
 import android.content.ContentUris
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -9,10 +8,11 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.BaseColumns
 import android.provider.MediaStore
-import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.core.content.contentValuesOf
+import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -99,7 +99,7 @@ object MusicUtil : KoinComponent {
 
     fun deleteAlbumArt(context: Context, albumId: Long) {
         val contentResolver = context.contentResolver
-        val localUri = Uri.parse("content://media/external/audio/albumart")
+        val localUri = "content://media/external/audio/albumart".toUri()
         contentResolver.delete(ContentUris.withAppendedId(localUri, albumId), null, null)
         contentResolver.notifyChange(localUri, null)
     }
@@ -189,7 +189,7 @@ object MusicUtil : KoinComponent {
 
     @JvmStatic
     fun getMediaStoreAlbumCoverUri(albumId: Long): Uri {
-        val sArtworkUri = Uri.parse("content://media/external/audio/albumart")
+        val sArtworkUri = "content://media/external/audio/albumart".toUri()
         return ContentUris.withAppendedId(sArtworkUri, albumId)
     }
 
@@ -238,10 +238,10 @@ object MusicUtil : KoinComponent {
     fun getSectionName(mediaTitle: String?): String {
         var musicMediaTitle = mediaTitle
         return try {
-            if (TextUtils.isEmpty(musicMediaTitle)) {
+            if (musicMediaTitle.isNullOrEmpty()) {
                 return "-"
             }
-            musicMediaTitle = musicMediaTitle!!.trim { it <= ' ' }.lowercase()
+            musicMediaTitle = musicMediaTitle.trim { it <= ' ' }.lowercase()
             if (musicMediaTitle.startsWith("the ")) {
                 musicMediaTitle = musicMediaTitle.substring(4)
             } else if (musicMediaTitle.startsWith("a ")) {
@@ -309,28 +309,29 @@ object MusicUtil : KoinComponent {
         path: String?
     ) {
         val contentResolver = context.contentResolver
-        val artworkUri = Uri.parse("content://media/external/audio/albumart")
+        val artworkUri = "content://media/external/audio/albumart".toUri()
         contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId), null, null)
-        val values = ContentValues()
-        values.put("album_id", albumId)
-        values.put("_data", path)
+        val values = contentValuesOf(
+            "album_id" to albumId,
+            "_data" to path
+        )
         contentResolver.insert(artworkUri, values)
         contentResolver.notifyChange(artworkUri, null)
     }
 
     fun isArtistNameUnknown(artistName: String?): Boolean {
-        if (TextUtils.isEmpty(artistName)) {
+        if (artistName.isNullOrEmpty()) {
             return false
         }
         if (artistName == Artist.UNKNOWN_ARTIST_DISPLAY_NAME) {
             return true
         }
-        val tempName = artistName!!.trim { it <= ' ' }.lowercase()
+        val tempName = artistName.trim { it <= ' ' }.lowercase()
         return tempName == "unknown" || tempName == "<unknown>"
     }
 
     fun isVariousArtists(artistName: String?): Boolean {
-        if (TextUtils.isEmpty(artistName)) {
+        if (artistName.isNullOrEmpty()) {
             return false
         }
         if (artistName == Artist.VARIOUS_ARTISTS_DISPLAY_NAME) {
@@ -454,7 +455,7 @@ object MusicUtil : KoinComponent {
             } catch (ignored: SecurityException) {
 
             }
-            activity.contentResolver.notifyChange(Uri.parse("content://media"), null)
+            activity.contentResolver.notifyChange("content://media".toUri(), null)
             activity.runOnUiThread {
                 Toast.makeText(
                     activity,

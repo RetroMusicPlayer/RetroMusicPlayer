@@ -12,7 +12,7 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -194,7 +194,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                 binding.fragmentArtistContent.run {
                     biographyText.isVisible = true
                     biographyTitle.isVisible = true
-                    biography = HtmlCompat.fromHtml(bioContent, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    biography = bioContent.parseAsHtml()
                     biographyText.text = biography
                     if (lastFmArtist.artist.stats.listeners.isNotEmpty()) {
                         listeners.show()

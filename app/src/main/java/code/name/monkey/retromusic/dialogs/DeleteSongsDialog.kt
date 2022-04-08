@@ -22,7 +22,7 @@ import android.provider.MediaStore
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.EXTRA_SONG
@@ -87,18 +87,12 @@ class DeleteSongsDialog : DialogFragment() {
             val pair = if (songs.size > 1) {
                 Pair(
                     R.string.delete_songs_title,
-                    HtmlCompat.fromHtml(
-                        String.format(getString(R.string.delete_x_songs), songs.size),
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    )
+                    String.format(getString(R.string.delete_x_songs), songs.size).parseAsHtml()
                 )
             } else {
                 Pair(
                     R.string.delete_song_title,
-                    HtmlCompat.fromHtml(
-                        String.format(getString(R.string.delete_song_x), songs[0].title),
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    )
+                    String.format(getString(R.string.delete_song_x), songs[0].title).parseAsHtml()
                 )
             }
 

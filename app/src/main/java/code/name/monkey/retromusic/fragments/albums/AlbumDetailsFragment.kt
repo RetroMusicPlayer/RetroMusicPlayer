@@ -22,7 +22,7 @@ import android.view.*
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -282,10 +282,8 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 binding.fragmentAlbumContent.aboutAlbumTitle.show()
                 binding.fragmentAlbumContent.aboutAlbumTitle.text =
                     String.format(getString(R.string.about_album_label), lastFmAlbum.album.name)
-                binding.fragmentAlbumContent.aboutAlbumText.text = HtmlCompat.fromHtml(
-                    lastFmAlbum.album.wiki.content,
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                )
+                binding.fragmentAlbumContent.aboutAlbumText.text =
+                    lastFmAlbum.album.wiki.content.parseAsHtml()
             }
             if (lastFmAlbum.album.listeners.isNotEmpty()) {
                 binding.fragmentAlbumContent.listeners.show()

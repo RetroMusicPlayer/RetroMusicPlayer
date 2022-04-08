@@ -540,10 +540,9 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun setShuffleMode(shuffleMode: Int) {
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .edit()
-            .putInt(SAVED_SHUFFLE_MODE, shuffleMode)
-            .apply()
+        PreferenceManager.getDefaultSharedPreferences(this).edit {
+            putInt(SAVED_SHUFFLE_MODE, shuffleMode)
+        }
         when (shuffleMode) {
             SHUFFLE_MODE_SHUFFLE -> {
                 this.shuffleMode = shuffleMode

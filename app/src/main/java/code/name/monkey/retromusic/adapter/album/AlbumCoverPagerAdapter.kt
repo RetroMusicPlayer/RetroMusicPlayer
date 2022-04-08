@@ -19,6 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
@@ -205,9 +206,7 @@ class AlbumCoverPagerAdapter(
 
             fun newInstance(song: Song): AlbumCoverFragment {
                 val frag = AlbumCoverFragment()
-                val args = Bundle()
-                args.putParcelable(SONG_ARG, song)
-                frag.arguments = args
+                frag.arguments = bundleOf(SONG_ARG to song)
                 return frag
             }
         }

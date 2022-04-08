@@ -18,12 +18,12 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.RequiresApi
-import androidx.core.text.HtmlCompat
+import androidx.core.net.toUri
+import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -54,7 +54,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
             binding.audioPermission.setButtonClick {
                 if (RingtoneManager.requiresDialog(this@PermissionActivity)) {
                     val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                    intent.data = Uri.parse("package:" + applicationContext.packageName)
+                    intent.data = ("package:" + applicationContext.packageName).toUri()
                     startActivity(intent)
                 }
             }
@@ -77,10 +77,8 @@ class PermissionActivity : AbsMusicServiceActivity() {
     private fun setupTitle() {
         val color = ThemeStore.accentColor(this)
         val hexColor = String.format("#%06X", 0xFFFFFF and color)
-        val appName = HtmlCompat.fromHtml(
-            "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>",
-            HtmlCompat.FROM_HTML_MODE_COMPACT
-        )
+        val appName = "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>"
+            .parseAsHtml()
         binding.appNameText.text = appName
     }
 

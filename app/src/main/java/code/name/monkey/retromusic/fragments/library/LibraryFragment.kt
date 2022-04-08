@@ -19,7 +19,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -66,10 +66,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     private fun setupTitle() {
         val color = ThemeStore.accentColor(requireContext())
         val hexColor = String.format("#%06X", 0xFFFFFF and color)
-        val appName = HtmlCompat.fromHtml(
-            "Retro <span  style='color:$hexColor';>Music</span>",
-            HtmlCompat.FROM_HTML_MODE_COMPACT
-        )
+        val appName = "Retro <span  style='color:$hexColor';>Music</span>".parseAsHtml()
         binding.appNameText.text = appName
     }
 

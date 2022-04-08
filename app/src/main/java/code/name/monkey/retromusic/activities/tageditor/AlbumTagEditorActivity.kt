@@ -22,12 +22,11 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.transition.Slide
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityAlbumTagEditorBinding
@@ -50,7 +49,7 @@ import com.google.android.material.shape.MaterialShapeDrawable
 import org.jaudiotagger.tag.FieldKey
 import java.util.*
 
-class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBinding>(), TextWatcher {
+class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBinding>() {
 
     override val bindingInflater: (LayoutInflater) -> ActivityAlbumTagEditorBinding =
         ActivityAlbumTagEditorBinding::inflate
@@ -91,10 +90,10 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
         binding.albumTitleContainer.setTint(false)
         binding.albumArtistContainer.setTint(false)
 
-        binding.albumText.appHandleColor().addTextChangedListener(this)
-        binding.albumArtistText.appHandleColor().addTextChangedListener(this)
-        binding.genreTitle.appHandleColor().addTextChangedListener(this)
-        binding.yearTitle.appHandleColor().addTextChangedListener(this)
+        binding.albumText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.albumArtistText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.genreTitle.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.yearTitle.appHandleColor().doAfterTextChanged { dataChanged() }
     }
 
     private fun fillViewsWithFileTags() {
@@ -196,17 +195,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
 
     override fun getSongUris(): List<Uri> = repository.albumById(id).songs.map {
         MusicUtil.getSongFileUri(it.id)
-    }
-
-
-    override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-    }
-
-    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-    }
-
-    override fun afterTextChanged(s: Editable) {
-        dataChanged()
     }
 
     override fun setColors(color: Int) {

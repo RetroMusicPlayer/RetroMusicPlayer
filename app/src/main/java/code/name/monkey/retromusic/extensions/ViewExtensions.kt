@@ -67,11 +67,7 @@ fun View.translateYAnimate(value: Float): Animator {
                 bringToFront()
             }
             doOnEnd {
-                if (value != 0f) {
-                    hide()
-                } else {
-                    show()
-                }
+                isGone = (value != 0f)
             }
             start()
         }

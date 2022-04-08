@@ -5,6 +5,7 @@ import android.text.Editable
 import android.util.AttributeSet
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.core.widget.doAfterTextChanged
@@ -26,13 +27,11 @@ class ATESeekBarPreference @JvmOverloads constructor(
     var unit: String = ""
 
     init {
-        val attributes =
-            context.obtainStyledAttributes(attrs, R.styleable.ATESeekBarPreference, 0, 0)
-
-        attributes.getString(R.styleable.ATESeekBarPreference_ateKey_pref_unit)?.let {
-            unit = it
+        context.withStyledAttributes(attrs, R.styleable.ATESeekBarPreference, 0, 0) {
+            getString(R.styleable.ATESeekBarPreference_ateKey_pref_unit)?.let {
+                unit = it
+            }
         }
-        attributes.recycle()
         icon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
             ATHUtil.resolveColor(
                 context,

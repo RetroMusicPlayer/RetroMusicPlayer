@@ -16,10 +16,10 @@ package code.name.monkey.retromusic.fragments.about
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.app.ShareCompat
+import androidx.core.net.toUri
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -55,7 +55,7 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
 
     private fun openUrl(url: String) {
         val i = Intent(Intent.ACTION_VIEW)
-        i.data = Uri.parse(url)
+        i.data = url.toUri()
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(i)
     }

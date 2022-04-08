@@ -7,10 +7,10 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.audiofx.AudioEffect
-import android.net.Uri
 import android.os.PowerManager
 import android.util.Log
 import android.widget.Toast
+import androidx.core.net.toUri
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimator
@@ -160,7 +160,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
         player.setOnPreparedListener(null)
         try {
             if (path.startsWith("content://")) {
-                player.setDataSource(context, Uri.parse(path))
+                player.setDataSource(context, path.toUri())
             } else {
                 player.setDataSource(path)
             }

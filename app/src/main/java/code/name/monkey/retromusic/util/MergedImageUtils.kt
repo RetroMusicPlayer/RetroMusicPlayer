@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
+import androidx.core.graphics.scale
 import com.bumptech.glide.util.Util.assertBackgroundThread
 
 
@@ -75,7 +76,7 @@ internal object MergedImageUtils {
         val onePartSize = imageSize / parts
 
         images.forEachIndexed { i, bitmap ->
-            val bit = Bitmap.createScaledBitmap(bitmap, onePartSize, onePartSize, true)
+            val bit = bitmap.scale(onePartSize, onePartSize)
             canvas.drawBitmap(
                 bit,
                 (onePartSize * (i % parts)).toFloat() + (i % 3) * 50,
