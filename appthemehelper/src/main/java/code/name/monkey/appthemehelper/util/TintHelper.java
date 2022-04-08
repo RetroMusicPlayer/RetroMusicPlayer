@@ -96,8 +96,8 @@ public final class TintHelper {
             return null;
         }
         drawable = DrawableCompat.wrap(drawable.mutate());
-        DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_IN);
-        DrawableCompat.setTint(drawable, color);
+        drawable.setTintMode(PorterDuff.Mode.SRC_IN);
+        drawable.setTint(color);
         return drawable;
     }
 
@@ -109,7 +109,7 @@ public final class TintHelper {
             return null;
         }
         Drawable temp = DrawableCompat.wrap(drawable.mutate());
-        DrawableCompat.setTintList(temp, sl);
+        temp.setTintList(sl);
         return temp;
     }
 

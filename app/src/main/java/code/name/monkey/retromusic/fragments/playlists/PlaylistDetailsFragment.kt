@@ -6,7 +6,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.addCallback
-import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -60,7 +59,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         setHasOptionsMenu(true)
         mainActivity.setSupportActionBar(binding.toolbar)
-        ViewCompat.setTransitionName(binding.container, "playlist")
+        binding.container.setTransitionName("playlist")
         playlist = arguments.extraPlaylist
         binding.toolbar.title = playlist.playlistEntity.playlistName
         setUpRecyclerView()

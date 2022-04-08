@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.util
 
 import android.content.Context
 import android.content.Intent
-import androidx.core.app.ActivityCompat
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.activities.PurchaseActivity
 
@@ -27,11 +26,7 @@ object PremiumShow {
             prefEditor.putLong(DATE_FIRST_LAUNCH, dateLaunched)
         }
         if (System.currentTimeMillis() >= dateLaunched + 2 * 24 * 60 * 60 * 1000) {
-            ActivityCompat.startActivity(
-                context,
-                Intent(context, PurchaseActivity::class.java),
-                null
-            )
+            context.startActivity(Intent(context, PurchaseActivity::class.java), null)
         }
         prefEditor.apply()
     }

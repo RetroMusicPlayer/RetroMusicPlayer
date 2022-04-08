@@ -550,7 +550,7 @@ public final class ToolbarContentTintHelper {
 
                 if (toolbar != null && toolbar.getOverflowIcon() != null) {
                     Drawable bg = DrawableCompat.wrap(toolbar.getOverflowIcon());
-                    DrawableCompat.setTint(bg, toolbarIconsColor);
+                    bg.setTint(toolbarIconsColor);
                 }
                 removeOnGlobalLayoutListener(decorView, this);
             }
@@ -588,7 +588,7 @@ public final class ToolbarContentTintHelper {
         if (drawable != null) {
             final Drawable wrapped = DrawableCompat.wrap(drawable);
             drawable.mutate();
-            DrawableCompat.setTint(wrapped, color);
+            wrapped.setTint(color);
             item.setIcon(drawable);
         }
     }
@@ -603,7 +603,7 @@ public final class ToolbarContentTintHelper {
                     final Drawable drawable = image.getDrawable();
                     final Drawable wrapped = DrawableCompat.wrap(drawable);
                     drawable.mutate();
-                    DrawableCompat.setTint(wrapped, color);
+                    wrapped.setTint(color);
                     image.setImageDrawable(drawable);
                 }
             }

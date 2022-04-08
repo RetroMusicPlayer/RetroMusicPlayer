@@ -25,7 +25,6 @@ import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -369,7 +368,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     }
 
     private fun setupPanel() {
-        if (!ViewCompat.isLaidOut(binding.playerContainer) || binding.playerContainer.isLayoutRequested) {
+        if (!binding.playerContainer.isLaidOut() || binding.playerContainer.isLayoutRequested) {
             binding.playerContainer.addOnLayoutChangeListener(this)
             return
         }

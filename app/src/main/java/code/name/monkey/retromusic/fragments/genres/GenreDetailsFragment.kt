@@ -19,7 +19,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
@@ -57,7 +56,7 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
         setHasOptionsMenu(true)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
-        ViewCompat.setTransitionName(binding.container, "genre")
+        binding.container.setTransitionName("genre")
         genre = arguments.extraGenre
         binding.toolbar.title = arguments.extraGenre.name
         setupRecyclerView()

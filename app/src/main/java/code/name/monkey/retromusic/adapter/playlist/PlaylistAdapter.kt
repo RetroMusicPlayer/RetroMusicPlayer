@@ -20,7 +20,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.view.ViewCompat
 import androidx.core.view.isGone
 import androidx.core.view.setPadding
 import androidx.fragment.app.FragmentActivity
@@ -164,7 +163,7 @@ class PlaylistAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                ViewCompat.setTransitionName(itemView, "playlist")
+                itemView.setTransitionName("playlist")
                 listener.onPlaylistClick(dataSet[layoutPosition], itemView)
             }
         }
