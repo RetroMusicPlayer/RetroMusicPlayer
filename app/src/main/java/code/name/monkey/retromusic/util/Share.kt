@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.util
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import java.io.File
 
@@ -30,7 +29,7 @@ object Share {
         val feedIntent = Intent(Intent.ACTION_SEND)
         feedIntent.type = "image/*"
         feedIntent.putExtra(Intent.EXTRA_STREAM, uri)
-        ActivityCompat.startActivity(context, feedIntent, null)
+        context.startActivity(feedIntent, null)
     }
 
     fun shareFile(context: Context, file: File) {

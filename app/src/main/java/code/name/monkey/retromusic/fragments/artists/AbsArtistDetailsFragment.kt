@@ -13,7 +13,6 @@ import androidx.activity.addCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
-import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -89,10 +88,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.toolbar.title = null
-        ViewCompat.setTransitionName(
-            binding.artistCoverContainer,
-            (artistId ?: artistName).toString()
-        )
+        binding.artistCoverContainer.setTransitionName((artistId ?: artistName).toString())
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner) {
             requireView().doOnPreDraw {

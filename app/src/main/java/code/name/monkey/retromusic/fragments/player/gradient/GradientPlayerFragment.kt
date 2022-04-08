@@ -131,7 +131,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     private fun setupPanel() {
-        if (!ViewCompat.isLaidOut(binding.colorBackground) || binding.colorBackground.isLayoutRequested) {
+        if (!binding.colorBackground.isLaidOut() || binding.colorBackground.isLayoutRequested) {
             binding.colorBackground.addOnLayoutChangeListener(this)
             return
         }

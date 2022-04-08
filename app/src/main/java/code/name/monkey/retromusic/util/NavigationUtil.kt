@@ -19,7 +19,6 @@ import android.content.Context
 import android.content.Intent
 import android.media.audiofx.AudioEffect
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.*
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
@@ -27,37 +26,39 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote.audioSessionId
 
 object NavigationUtil {
     fun bugReport(activity: Activity) {
-        ActivityCompat.startActivity(
-            activity,
-            Intent(activity, BugReportActivity::class.java),
-            null
+        activity.startActivity(
+            Intent(activity, BugReportActivity::class.java), null
         )
     }
 
     fun goToOpenSource(activity: Activity) {
-        ActivityCompat.startActivity(activity, Intent(activity, LicenseActivity::class.java), null)
+        activity.startActivity(
+            Intent(activity, LicenseActivity::class.java), null
+        )
     }
 
     fun goToProVersion(context: Context) {
-        ActivityCompat.startActivity(context, Intent(context, PurchaseActivity::class.java), null)
+        context.startActivity(
+            Intent(context, PurchaseActivity::class.java), null
+        )
     }
 
     fun goToSupportDevelopment(activity: Activity) {
-        ActivityCompat.startActivity(
-            activity, Intent(activity, SupportDevelopmentActivity::class.java), null
+        activity.startActivity(
+            Intent(activity, SupportDevelopmentActivity::class.java), null
         )
     }
 
     fun gotoDriveMode(activity: Activity) {
-        ActivityCompat.startActivity(
-            activity,
-            Intent(activity, DriveModeActivity::class.java),
-            null
+        activity.startActivity(
+            Intent(activity, DriveModeActivity::class.java), null
         )
     }
 
     fun gotoWhatNews(activity: Activity) {
-        ActivityCompat.startActivity(activity, Intent(activity, WhatsNewActivity::class.java), null)
+        activity.startActivity(
+            Intent(activity, WhatsNewActivity::class.java), null
+        )
     }
 
     fun openEqualizer(activity: Activity) {
