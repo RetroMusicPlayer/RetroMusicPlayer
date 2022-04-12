@@ -47,7 +47,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
             else
                 backupAdapter?.swapDataset(listOf())
         }
-        backupViewModel.loadBackups(requireContext())
+        backupViewModel.loadBackups()
         val openFilePicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             lifecycleScope.launch(Dispatchers.IO) {
                 it?.let {
@@ -98,7 +98,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 // Text submitted with the action button
                 lifecycleScope.launch {
                     BackupHelper.createBackup(requireContext(), text.sanitize())
-                    backupViewModel.loadBackups(requireContext())
+                    backupViewModel.loadBackups()
                 }
             }
             positiveButton(android.R.string.ok)
@@ -128,7 +128,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                backupViewModel.loadBackups(requireContext())
+                backupViewModel.loadBackups()
                 return true
             }
             R.id.action_share -> {
@@ -149,7 +149,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                             File(file.parent, "$text${BackupHelper.APPEND_EXTENSION}")
                         if (!renamedFile.exists()) {
                             file.renameTo(renamedFile)
-                            backupViewModel.loadBackups(requireContext())
+                            backupViewModel.loadBackups()
                         } else {
                             Toast.makeText(
                                 requireContext(),

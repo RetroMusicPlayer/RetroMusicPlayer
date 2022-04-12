@@ -21,6 +21,7 @@ import android.view.MenuItem
 import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
 import android.view.View
 import androidx.activity.addCallback
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.view.doOnLayout
@@ -29,7 +30,6 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -77,11 +77,11 @@ class HomeFragment :
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
-        libraryViewModel.getHome().observe(viewLifecycleOwner) {
-            homeAdapter.swapData(it)
-        }
         libraryViewModel.getSuggestions().observe(viewLifecycleOwner) {
             loadSuggestions(it)
+        }
+        libraryViewModel.getHome().observe(viewLifecycleOwner) {
+            homeAdapter.swapData(it)
         }
 
         loadProfile()
@@ -110,7 +110,6 @@ class HomeFragment :
                 button.setLines(maxLineCount)
             }
         }
-
     }
 
     private fun setupListeners() {
@@ -218,16 +217,12 @@ class HomeFragment :
     }
 
     fun setSharedAxisXTransitions() {
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).apply {
-            addTarget(binding.root)
-        }
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).addTarget(CoordinatorLayout::class.java)
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
     }
 
     private fun setSharedAxisYTransitions() {
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true).apply {
-            addTarget(binding.root)
-        }
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true).addTarget(CoordinatorLayout::class.java)
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
     }
 
@@ -246,7 +241,7 @@ class HomeFragment :
             binding.suggestions.image7,
             binding.suggestions.image8
         )
-        val color = ThemeStore.accentColor(requireContext())
+        val color = accentColor()
         binding.suggestions.message.apply {
             setTextColor(color)
             setOnClickListener {

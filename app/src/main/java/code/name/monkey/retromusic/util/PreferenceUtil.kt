@@ -585,7 +585,7 @@ object PreferenceUtil {
                 4 -> VerticalFlipTransformation()
                 5 -> HingeTransformation()
                 6 -> VerticalStackTransformer()
-                else -> NormalPageTransformer()
+                else -> ViewPager.PageTransformer { _, _ ->  }
             }
         }
 

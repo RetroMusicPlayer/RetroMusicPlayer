@@ -69,41 +69,23 @@ class LibraryViewModel(
 
     fun getSearchResult(): LiveData<List<Any>> = searchResults
 
-    fun getSongs(): LiveData<List<Song>> {
-        return songs
-    }
+    fun getSongs(): LiveData<List<Song>> = songs
 
-    fun getAlbums(): LiveData<List<Album>> {
-        return albums
-    }
+    fun getAlbums(): LiveData<List<Album>> = albums
 
-    fun getArtists(): LiveData<List<Artist>> {
-        return artists
-    }
+    fun getArtists(): LiveData<List<Artist>> = artists
 
-    fun getPlaylists(): LiveData<List<PlaylistWithSongs>> {
-        return playlists
-    }
+    fun getPlaylists(): LiveData<List<PlaylistWithSongs>> = playlists
 
-    fun getLegacyPlaylist(): LiveData<List<Playlist>> {
-        return legacyPlaylists
-    }
+    fun getLegacyPlaylist(): LiveData<List<Playlist>> = legacyPlaylists
 
-    fun getGenre(): LiveData<List<Genre>> {
-        return genres
-    }
+    fun getGenre(): LiveData<List<Genre>> = genres
 
-    fun getHome(): LiveData<List<Home>> {
-        return home
-    }
+    fun getHome(): LiveData<List<Home>> = home
 
-    fun getSuggestions(): LiveData<List<Song>> {
-        return suggestions
-    }
+    fun getSuggestions(): LiveData<List<Song>> = suggestions
 
-    fun getFabMargin(): LiveData<Int> {
-        return fabMargin
-    }
+    fun getFabMargin(): LiveData<Int> = fabMargin
 
     private suspend fun fetchSongs() {
         songs.postValue(repository.allSongs())
@@ -111,7 +93,6 @@ class LibraryViewModel(
 
     private suspend fun fetchAlbums() {
         albums.postValue(repository.fetchAlbums())
-
     }
 
     private suspend fun fetchArtists() {
@@ -146,7 +127,7 @@ class LibraryViewModel(
 
     fun search(query: String?, filter: Filter) =
         viewModelScope.launch(IO) {
-            val result =repository.search(query, filter)
+            val result = repository.search(query, filter)
             searchResults.postValue(result)
         }
 
@@ -273,29 +254,22 @@ class LibraryViewModel(
         loadLibraryContent()
     }
 
-    fun recentSongs(): LiveData<List<Song>> = liveData {
+    fun recentSongs(): LiveData<List<Song>> = liveData(IO) {
         emit(repository.recentSongs())
     }
 
-    fun playCountSongs(): LiveData<List<Song>> = liveData {
-        val songs = repository.playCountSongs().map {
-            it.toSong()
-        }
-        emit(songs)
-        // Cleaning up deleted or moved songs
-        withContext(IO) {
-            songs.forEach { song ->
-                if (!File(song.data).exists() || song.id == -1L) {
-                    repository.deleteSongInPlayCount(song.toPlayCount())
-                }
+    fun playCountSongs(): LiveData<List<Song>> = liveData(IO) {
+        repository.playCountSongs().forEach { song ->
+            if (!File(song.data).exists() || song.id == -1L) {
+                repository.deleteSongInPlayCount(song)
             }
-            emit(repository.playCountSongs().map {
-                it.toSong()
-            })
         }
+        emit(repository.playCountSongs().map {
+            it.toSong()
+        })
     }
 
-    fun artists(type: Int): LiveData<List<Artist>> = liveData {
+    fun artists(type: Int): LiveData<List<Artist>> = liveData(IO) {
         when (type) {
             TOP_ARTISTS -> emit(repository.topArtists())
             RECENT_ARTISTS -> {
@@ -304,7 +278,7 @@ class LibraryViewModel(
         }
     }
 
-    fun albums(type: Int): LiveData<List<Album>> = liveData {
+    fun albums(type: Int): LiveData<List<Album>> = liveData(IO) {
         when (type) {
             TOP_ALBUMS -> emit(repository.topAlbums())
             RECENT_ALBUMS -> {
@@ -313,29 +287,25 @@ class LibraryViewModel(
         }
     }
 
-    fun artist(artistId: Long): LiveData<Artist> = liveData {
+    fun artist(artistId: Long): LiveData<Artist> = liveData(IO) {
         emit(repository.artistById(artistId))
     }
 
-    fun fetchContributors(): LiveData<List<Contributor>> = liveData {
+    fun fetchContributors(): LiveData<List<Contributor>> = liveData(IO) {
         emit(repository.contributor())
     }
 
     fun observableHistorySongs(): LiveData<List<Song>> {
-        val songs = repository.historySong().map {
-            it.toSong()
-        }
-        songHistory.value = songs
-        // Cleaning up deleted or moved songs
-        viewModelScope.launch {
-            songs.forEach { song ->
+        viewModelScope.launch(IO) {
+            repository.historySong().forEach { song ->
                 if (!File(song.data).exists() || song.id == -1L) {
                     repository.deleteSongInHistory(song.id)
                 }
             }
-        }
-        songHistory.value = repository.historySong().map {
-            it.toSong()
+
+            songHistory.postValue(repository.historySong().map {
+                it.toSong()
+            })
         }
         return songHistory
     }
@@ -366,9 +336,7 @@ class LibraryViewModel(
     fun favorites() = repository.favorites()
 
     fun clearSearchResult() {
-        viewModelScope.launch {
-            searchResults.postValue(emptyList())
-        }
+        searchResults.value = emptyList()
     }
 
     fun addToPlaylist(playlistName: String, songs: List<Song>) {
@@ -396,11 +364,13 @@ class LibraryViewModel(
             }
             forceReload(Playlists)
             withContext(Main) {
-                Toast.makeText(App.getContext(), App.getContext().getString(
-                    R.string.added_song_count_to_playlist,
-                    songs.size,
-                    playlistName
-                ), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    App.getContext(), App.getContext().getString(
+                        R.string.added_song_count_to_playlist,
+                        songs.size,
+                        playlistName
+                    ), Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

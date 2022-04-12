@@ -80,7 +80,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         lifecycleScope.launchWhenStarted {
             viewPager.setPageTransformer(false, transformer)
         }
-}
+    }
 
     private fun updateLyrics() {
         binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
@@ -286,7 +286,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 } else {
                     surfaceColor()
                 }
-                Color ,Classic -> color.backgroundColor
+                Color, Classic -> color.backgroundColor
                 Blur -> Color.BLACK
                 else -> surfaceColor()
             }

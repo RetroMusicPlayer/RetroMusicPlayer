@@ -8,7 +8,7 @@
         <item>@string/horizontal_flip</item>
         <item>@string/hinge</item>
         <item>@string/stack</item>
-        <item>@string/classic</item>
+        <item>@string/simple</item>
     </array>
 
     <string-array name="pref_album_cover_transform_values">
