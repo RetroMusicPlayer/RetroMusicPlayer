@@ -88,13 +88,14 @@ private val roomModule = module {
 }
 private val autoModule = module {
     single {
-        AutoMusicProvider(androidContext(),
-        get(),
-        get(),
-        get(),
-        get(),
-        get(),
-        get()
+        AutoMusicProvider(
+            androidContext(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
         )
     }
 }
