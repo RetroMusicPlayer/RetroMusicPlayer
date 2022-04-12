@@ -3,7 +3,7 @@ package code.name.monkey.retromusic.cast
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.cast.framework.SessionManagerListener
 
-interface RetroSessionManager : SessionManagerListener<CastSession> {
+interface RetroSessionManagerListener : SessionManagerListener<CastSession> {
     override fun onSessionResuming(p0: CastSession, p1: String) {
 
     }

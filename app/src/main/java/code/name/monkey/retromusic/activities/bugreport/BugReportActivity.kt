@@ -26,7 +26,6 @@ import androidx.annotation.StringRes
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -38,6 +37,7 @@ import code.name.monkey.retromusic.activities.bugreport.model.github.ExtraInfo
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubLogin
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubTarget
 import code.name.monkey.retromusic.databinding.ActivityBugReportBinding
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -87,7 +87,7 @@ open class BugReportActivity : AbsThemeActivity() {
     }
 
     private fun initViews() {
-        val accentColor = ThemeStore.accentColor(this)
+        val accentColor = accentColor()
         setSupportActionBar(binding.toolbar)
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -314,6 +314,7 @@ open class BugReportActivity : AbsThemeActivity() {
 
         private const val STATUS_BAD_CREDENTIALS = 401
         private const val STATUS_ISSUES_NOT_ENABLED = 410
-        private const val ISSUE_TRACKER_LINK = "https://github.com/RetroMusicPlayer/RetroMusicPlayer"
+        private const val ISSUE_TRACKER_LINK =
+            "https://github.com/RetroMusicPlayer/RetroMusicPlayer"
     }
 }

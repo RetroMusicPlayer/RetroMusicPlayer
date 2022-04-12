@@ -163,7 +163,7 @@ class PlaylistAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                itemView.setTransitionName("playlist")
+                itemView.transitionName = "playlist"
                 listener.onPlaylistClick(dataSet[layoutPosition], itemView)
             }
         }

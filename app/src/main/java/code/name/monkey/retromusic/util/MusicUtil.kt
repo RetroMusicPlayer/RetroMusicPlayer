@@ -268,15 +268,14 @@ object MusicUtil : KoinComponent {
         )
     }
 
-    fun getSongFilePath(context: Context, uri: Uri): String? {
+    fun getSongFilePath(context: Context, uri: Uri): String {
         val projection = arrayOf(MediaStore.MediaColumns.DATA)
-        return context.contentResolver.query(uri, projection, null, null, null)?.use {
+        context.contentResolver.query(uri, projection, null, null, null)?.use {
             if (it.moveToFirst()) {
-                it.getString(0)
-            } else {
-                ""
+                return it.getString(0)
             }
         }
+        return ""
     }
 
     fun getTotalDuration(songs: List<Song>): Long {

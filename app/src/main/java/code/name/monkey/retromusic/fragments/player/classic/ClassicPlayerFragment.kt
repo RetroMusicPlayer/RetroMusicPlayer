@@ -35,10 +35,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.FragmentClassicPlayerBinding
-import code.name.monkey.retromusic.extensions.getSongInfo
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
@@ -131,8 +128,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         hideVolumeIfAvailable()
         setupRecyclerView()
 
-        val coverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        val coverFragment: PlayerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
         coverFragment.setCallbacks(this)
 
         getQueuePanel().addBottomSheetCallback(bottomSheetCallbackList)
@@ -174,7 +170,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
             }
             childFragmentManager.executePendingTransactions()
             volumeFragment =
-                childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
+                whichFragment(R.id.volumeFragmentContainer) as VolumeFragment?
         }
     }
 
@@ -368,7 +364,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     }
 
     private fun setupPanel() {
-        if (!binding.playerContainer.isLaidOut() || binding.playerContainer.isLayoutRequested) {
+        if (!binding.playerContainer.isLaidOut || binding.playerContainer.isLayoutRequested) {
             binding.playerContainer.addOnLayoutChangeListener(this)
             return
         }
@@ -419,7 +415,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
 
-    fun setUpProgressSlider() {
+    private fun setUpProgressSlider() {
         binding.playerControlsContainer.progressSlider.setOnSeekBarChangeListener(object :
             SimpleOnSeekbarChangeListener() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {

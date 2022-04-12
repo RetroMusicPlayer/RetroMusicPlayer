@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.databinding.FragmentMaterialBinding
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
@@ -134,10 +135,9 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as MaterialControlsFragment
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+            whichFragment(R.id.playbackControlsFragment)
         playerAlbumCoverFragment.setCallbacks(this)
     }
 

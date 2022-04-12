@@ -30,6 +30,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.other.VolumeFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -224,8 +225,7 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
             }
             childFragmentManager.executePendingTransactions()
         }
-        volumeFragment =
-            childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as? VolumeFragment
+        volumeFragment = whichFragment(R.id.volumeFragmentContainer)
     }
 
     override fun onResume() {

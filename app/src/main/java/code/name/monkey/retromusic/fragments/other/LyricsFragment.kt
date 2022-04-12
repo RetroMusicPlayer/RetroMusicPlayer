@@ -40,10 +40,7 @@ import code.name.monkey.retromusic.activities.tageditor.TagWriter
 import code.name.monkey.retromusic.databinding.FragmentLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentNormalLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentSyncedLyricsBinding
-import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.materialDialog
-import code.name.monkey.retromusic.extensions.textColorSecondary
-import code.name.monkey.retromusic.extensions.uri
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -52,7 +49,6 @@ import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.FileUtils
 import code.name.monkey.retromusic.util.LyricUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.UriUtil
 import com.afollestad.materialdialogs.input.input
 import com.google.android.material.color.MaterialColors
@@ -149,7 +145,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         exitTransition = Fade()
         lyricsSectionsAdapter = LyricsSectionsAdapter(requireActivity())
         _binding = FragmentLyricsBinding.bind(view)
-        binding.container.setTransitionName("lyrics")
+        binding.container.transitionName = "lyrics"
 
         setupWakelock()
         setupViews()
@@ -225,8 +221,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
             return true
         }
         if (item.itemId == R.id.action_search) {
-            RetroUtil.openUrl(
-                requireActivity(), when (binding.lyricsPager.currentItem) {
+            openUrl(when (binding.lyricsPager.currentItem) {
                     0 -> syairSearchLrcUrl
                     1 -> googleSearchLrcUrl
                     else -> googleSearchLrcUrl

@@ -132,7 +132,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     private fun setupPanel() {
-        if (!binding.colorBackground.isLaidOut() || binding.colorBackground.isLayoutRequested) {
+        if (!binding.colorBackground.isLaidOut || binding.colorBackground.isLayoutRequested) {
             binding.colorBackground.addOnLayoutChangeListener(this)
             return
         }
@@ -309,7 +309,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             }
             childFragmentManager.executePendingTransactions()
             volumeFragment =
-                childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
+                whichFragment(R.id.volumeFragmentContainer) as VolumeFragment?
         }
     }
 

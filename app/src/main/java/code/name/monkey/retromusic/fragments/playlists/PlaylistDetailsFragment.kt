@@ -59,7 +59,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         setHasOptionsMenu(true)
         mainActivity.setSupportActionBar(binding.toolbar)
-        binding.container.setTransitionName("playlist")
+        binding.container.transitionName = "playlist"
         playlist = arguments.extraPlaylist
         binding.toolbar.title = playlist.playlistEntity.playlistName
         setUpRecyclerView()

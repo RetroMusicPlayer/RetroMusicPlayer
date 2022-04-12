@@ -48,9 +48,9 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
 
     private fun setUpSubFragments() {
         playbackControlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as AdaptivePlaybackControlsFragment
+            whichFragment(R.id.playbackControlsFragment) as AdaptivePlaybackControlsFragment
         val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+            whichFragment(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.apply {
             removeSlideEffect()
             setCallbacks(this@AdaptiveFragment)

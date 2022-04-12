@@ -88,7 +88,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.toolbar.title = null
-        binding.artistCoverContainer.setTransitionName((artistId ?: artistName).toString())
+        binding.artistCoverContainer.transitionName = (artistId ?: artistName).toString()
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner) {
             requireView().doOnPreDraw {
@@ -146,7 +146,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         }
         this.artist = artist
         loadArtistImage(artist)
-        if (RetroUtil.isAllowedToDownloadMetadata(requireContext())) {
+        if (PreferenceUtil.isAllowedToDownloadMetadata(requireContext())) {
             loadBiography(artist.name)
         }
         binding.artistTitle.text = artist.name

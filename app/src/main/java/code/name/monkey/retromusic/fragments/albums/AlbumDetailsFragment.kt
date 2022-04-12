@@ -117,7 +117,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         mainActivity.setSupportActionBar(binding.toolbar)
 
         binding.toolbar.title = " "
-        binding.albumCoverContainer.setTransitionName(arguments.extraAlbumId.toString())
+        binding.albumCoverContainer.transitionName = arguments.extraAlbumId.toString()
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner) {
             requireView().doOnPreDraw {
@@ -125,10 +125,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             }
             albumArtistExists = !it.albumArtist.isNullOrEmpty()
             showAlbum(it)
-            if (albumArtistExists) {
-                binding.artistImage.setTransitionName(album.albumArtist)
+            binding.artistImage.transitionName = if (albumArtistExists) {
+                album.albumArtist
             } else {
-                binding.artistImage.setTransitionName(album.artistId.toString())
+                album.artistId.toString()
             }
         }
 
@@ -308,7 +308,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             .load(
                 RetroGlideExtension.getArtistModel(
                     artist,
-                    PreferenceUtil.isAllowedToDownloadMetadata()
+                    PreferenceUtil.isAllowedToDownloadMetadata(requireContext())
                 )
             )
             .artistImageOptions(artist)

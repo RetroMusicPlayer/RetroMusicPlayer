@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.EXTRA_PLAYLIST_ID
@@ -48,7 +47,7 @@ class RenamePlaylistDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val playlistEntity = extraNotNull<PlaylistEntity>(EXTRA_PLAYLIST_ID).value
-        val layout = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_playlist, null)
+        val layout = layoutInflater.inflate(R.layout.dialog_playlist, null)
         val inputEditText: TextInputEditText = layout.findViewById(R.id.actionNewPlaylist)
         val nameContainer: TextInputLayout = layout.findViewById(R.id.actionNewPlaylistContainer)
         nameContainer.accentColor()

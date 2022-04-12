@@ -1,8 +1,8 @@
 package code.name.monkey.retromusic.util
 
+import android.content.Context
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.preference.PreferenceManager
@@ -328,15 +328,12 @@ object PreferenceUtil {
 
     val isLockScreen get() = sharedPreferences.getBoolean(LOCK_SCREEN, false)
 
-    fun isAllowedToDownloadMetadata(): Boolean {
+    fun isAllowedToDownloadMetadata(context: Context): Boolean {
         return when (autoDownloadImagesPolicy) {
             "always" -> true
             "only_wifi" -> {
-                val connectivityManager = App.getContext().getSystemService<ConnectivityManager>()
-                var netInfo: NetworkInfo? = null
-                if (connectivityManager != null) {
-                    netInfo = connectivityManager.activeNetworkInfo
-                }
+                val connectivityManager = context.getSystemService<ConnectivityManager>()
+                val netInfo = connectivityManager?.activeNetworkInfo
                 netInfo != null && netInfo.type == ConnectivityManager.TYPE_WIFI && netInfo.isConnectedOrConnecting
             }
             "never" -> false

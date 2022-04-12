@@ -41,6 +41,7 @@ import code.name.monkey.retromusic.R.drawable
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.hideSoftKeyboard
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.model.AudioTagInfo
@@ -346,7 +347,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         fieldKeyValueMap: Map<FieldKey, String>,
         artworkInfo: ArtworkInfo?
     ) {
-        RetroUtil.hideSoftKeyboard(this)
+        hideSoftKeyboard()
 
         hideFab()
         println(fieldKeyValueMap)

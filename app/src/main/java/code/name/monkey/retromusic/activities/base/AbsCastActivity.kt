@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.ViewStub
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.cast.CastHelper
-import code.name.monkey.retromusic.cast.RetroSessionManager
+import code.name.monkey.retromusic.cast.RetroSessionManagerListener
 import code.name.monkey.retromusic.cast.RetroWebServer
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import com.google.android.gms.cast.framework.CastContext
@@ -22,7 +22,7 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
     private var playServicesAvailable: Boolean = false
 
     private val sessionManagerListener by lazy {
-        object : RetroSessionManager {
+        object : RetroSessionManagerListener {
             override fun onSessionStarting(castSession: CastSession) {
                 invalidateOptionsMenu()
                 webServer = RetroWebServer.getInstance(this@AbsCastActivity)
@@ -88,7 +88,7 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
     }
 
     private fun setupCast() {
-        sessionManager = CastContext.getSharedInstance(applicationContext).sessionManager
+        sessionManager = CastContext.getSharedInstance(this).sessionManager
     }
 
     override fun onResume() {
@@ -104,9 +104,15 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
         super.onResume()
     }
 
-    override fun onStop() {
-        super.onStop()
-        mCastSession = null
+    override fun onPause() {
+        super.onPause()
+        if (playServicesAvailable) {
+            sessionManager.removeSessionManagerListener(
+                sessionManagerListener,
+                CastSession::class.java
+            )
+            mCastSession = null
+        }
     }
 
     private fun songChanged(position: Int) {

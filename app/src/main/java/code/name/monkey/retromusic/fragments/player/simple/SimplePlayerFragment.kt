@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentSimplePlayerBinding
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -56,11 +57,10 @@ class SimplePlayerFragment : AbsPlayerFragment(R.layout.fragment_simple_player) 
     }
 
     private fun setUpSubFragments() {
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
-        controlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as SimplePlaybackControlsFragment
+        controlsFragment = whichFragment(R.id.playbackControlsFragment)
     }
 
     override fun onShow() {

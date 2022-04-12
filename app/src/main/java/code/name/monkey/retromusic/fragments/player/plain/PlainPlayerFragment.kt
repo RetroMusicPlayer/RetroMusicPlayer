@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPlainPlayerBinding
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -89,10 +90,9 @@ class PlainPlayerFragment : AbsPlayerFragment(R.layout.fragment_plain_player) {
     }
 
     private fun setUpSubFragments() {
-        plainPlaybackControlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PlainPlaybackControlsFragment
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        plainPlaybackControlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
     }
 

@@ -392,7 +392,7 @@ class MusicService : MediaBrowserServiceCompat(),
         wakeLock?.acquire(milli)
     }
 
-    var pausedByZeroVolume = false
+    private var pausedByZeroVolume = false
     override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
         if (isPauseOnZeroVolume) {
             if (isPlaying && currentVolume < 1) {

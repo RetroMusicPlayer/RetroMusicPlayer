@@ -131,12 +131,12 @@ fun Slider.accent() {
 
 fun Button.accentTextColor() {
     if (materialYou) return
-    setTextColor(ThemeStore.accentColor(App.getContext()))
+    setTextColor(context.accentColor())
 }
 
 fun MaterialButton.accentBackgroundColor() {
     if (materialYou) return
-    backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(App.getContext()))
+    backgroundTintList = ColorStateList.valueOf(context.accentColor())
 }
 
 fun MaterialButton.accentOutlineColor() {

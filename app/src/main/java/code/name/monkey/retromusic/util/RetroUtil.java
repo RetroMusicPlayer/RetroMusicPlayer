@@ -195,13 +195,6 @@ public class RetroUtil {
             >= 600;
   }
 
-  public static void openUrl(@NonNull Activity context, @NonNull String str) {
-    Intent intent = new Intent("android.intent.action.VIEW");
-    intent.setData(Uri.parse(str));
-    intent.setFlags(268435456);
-    context.startActivity(intent);
-  }
-
   public static void setAllowDrawUnderNavigationBar(Window window) {
     window.setNavigationBarColor(Color.TRANSPARENT);
     window

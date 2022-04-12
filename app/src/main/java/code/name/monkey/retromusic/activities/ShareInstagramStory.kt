@@ -28,6 +28,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.databinding.ActivityShareInstagramBinding
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.setLightStatusBar
 import code.name.monkey.retromusic.extensions.setStatusBarColor
 import code.name.monkey.retromusic.glide.GlideApp
@@ -96,11 +97,11 @@ class ShareInstagramStory : AbsBaseActivity() {
         binding.shareButton.setTextColor(
             MaterialValueHelper.getPrimaryTextColor(
                 this,
-                ColorUtil.isColorLight(ThemeStore.accentColor(this))
+                ColorUtil.isColorLight(accentColor())
             )
         )
         binding.shareButton.backgroundTintList =
-            ColorStateList.valueOf(ThemeStore.accentColor(this))
+            ColorStateList.valueOf(accentColor())
     }
 
     private fun setColors(colorLight: Boolean, color: Int) {

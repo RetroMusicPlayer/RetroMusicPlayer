@@ -359,15 +359,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
         val TAG: String = AbsPlayerFragment::class.java.simpleName
         const val VISIBILITY_ANIM_DURATION: Long = 300
     }
-
-    protected fun getUpNextAndQueueTime(): String {
-        val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
-
-        return MusicUtil.buildInfoString(
-            resources.getString(R.string.up_next),
-            MusicUtil.getReadableDurationString(duration)
-        )
-    }
 }
 
 fun goToArtist(activity: Activity) {

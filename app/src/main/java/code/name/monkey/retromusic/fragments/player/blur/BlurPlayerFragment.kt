@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.NEW_BLUR_AMOUNT
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentBlurBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.glide.*
@@ -62,10 +63,9 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as BlurPlaybackControlsFragment
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
     }
 

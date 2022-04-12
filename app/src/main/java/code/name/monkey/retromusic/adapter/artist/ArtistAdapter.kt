@@ -92,9 +92,9 @@ class ArtistAdapter(
         val transitionName =
             if (albumArtistsOnly) artist.name else artist.id.toString()
         if (holder.imageContainer != null) {
-            holder.imageContainer!!.setTransitionName(transitionName)
+            holder.imageContainer?.transitionName = transitionName
         } else {
-            holder.image!!.setTransitionName(transitionName)
+            holder.image?.transitionName = transitionName
         }
         loadArtistImage(artist, holder)
     }

@@ -75,8 +75,8 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         setupToolbar()
 
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
-        TintHelper.setTint(binding.progress, ThemeStore.accentColor(this))
-        binding.donation.setTextColor(ThemeStore.accentColor(this))
+        TintHelper.setTint(binding.progress, accentColor())
+        binding.donation.setTextColor(accentColor())
     }
 
     private fun setupToolbar() {

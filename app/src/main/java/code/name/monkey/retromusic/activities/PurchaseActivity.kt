@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.databinding.ActivityProVersionBinding
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.setLightStatusBar
 import code.name.monkey.retromusic.extensions.setStatusBarColor
 import com.anjlab.android.iab.v3.BillingProcessor
@@ -61,7 +62,7 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
             billingProcessor.purchase(this@PurchaseActivity, PRO_VERSION_PRODUCT_ID)
         }
         binding.bannerContainer.backgroundTintList =
-            ColorStateList.valueOf(ThemeStore.accentColor(this))
+            ColorStateList.valueOf(accentColor())
     }
 
     private fun restorePurchase() {

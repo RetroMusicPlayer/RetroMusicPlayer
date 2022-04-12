@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import androidx.core.widget.NestedScrollView
-import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.ATHUtil.isWindowBackgroundDark
 import code.name.monkey.appthemehelper.util.ColorUtil.isColorLight
 import code.name.monkey.appthemehelper.util.ColorUtil.lightenColor
@@ -14,12 +13,8 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityWhatsNewBinding
-import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
-import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
-import code.name.monkey.retromusic.util.RetroUtil
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
@@ -45,13 +40,13 @@ class WhatsNewActivity : AbsThemeActivity() {
 
             // Inject color values for WebView body background and links
             val isDark = isWindowBackgroundDark(this)
-            val accentColor = accentColor(this)
+            val accentColor = accentColor()
             val backgroundColor = colorToCSS(
                 surfaceColor(Color.parseColor(if (isDark) "#424242" else "#ffffff"))
             )
             val contentColor = colorToCSS(Color.parseColor(if (isDark) "#ffffff" else "#000000"))
             val textColor = colorToCSS(Color.parseColor(if (isDark) "#60FFFFFF" else "#80000000"))
-            val accentColorString = colorToCSS(accentColor(this))
+            val accentColorString = colorToCSS(accentColor())
             val cardBackgroundColor =
                 colorToCSS(Color.parseColor(if (isDark) "#353535" else "#ffffff"))
             val accentTextColor = colorToCSS(
@@ -64,11 +59,11 @@ class WhatsNewActivity : AbsThemeActivity() {
                     "{style-placeholder}",
                     "body { background-color: $backgroundColor; color: $contentColor; } li {color: $textColor;} h3 {color: $accentColorString;} .tag {background-color: $accentColorString; color: $accentTextColor; } div{background-color: $cardBackgroundColor;}"
                 )
-                .replace("{link-color}", colorToCSS(accentColor(this)))
+                .replace("{link-color}", colorToCSS(accentColor()))
                 .replace(
                     "{link-color-active}",
                     colorToCSS(
-                        lightenColor(accentColor(this))
+                        lightenColor(accentColor())
                     )
                 )
             binding.webView.loadData(changeLog, "text/html", "UTF-8")
@@ -79,10 +74,7 @@ class WhatsNewActivity : AbsThemeActivity() {
         }
         setChangelogRead(this)
         binding.tgFab.setOnClickListener {
-            RetroUtil.openUrl(
-                this,
-                Constants.TELEGRAM_CHANGE_LOG
-            )
+            openUrl(Constants.TELEGRAM_CHANGE_LOG)
         }
         binding.tgFab.accentColor()
         binding.tgFab.shrink()

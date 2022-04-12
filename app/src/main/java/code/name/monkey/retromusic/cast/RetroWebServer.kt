@@ -26,15 +26,9 @@ class RetroWebServer(val context: Context) : NanoHTTPD(SERVER_PORT) {
         }
     }
 
-    override fun serve(
-        uri: String?,
-        method: Method?,
-        headers: MutableMap<String, String>?,
-        parms: MutableMap<String, String>?,
-        files: MutableMap<String, String>?
-    ): Response {
-        if (uri?.contains(PART_COVER_ART) == true) {
-            val albumId = parms?.get(PARAM_ID) ?: return errorResponse()
+    override fun serve(session: IHTTPSession?): Response {
+        if (session?.uri?.contains(PART_COVER_ART) == true) {
+            val albumId = session.parameters?.get(PARAM_ID)?.get(0) ?: return errorResponse()
             val albumArtUri = MusicUtil.getMediaStoreAlbumCoverUri(albumId.toLong())
             val fis: InputStream?
             try {
@@ -43,12 +37,12 @@ class RetroWebServer(val context: Context) : NanoHTTPD(SERVER_PORT) {
                 return errorResponse()
             }
             return newChunkedResponse(Status.OK, MIME_TYPE_IMAGE, fis)
-        } else if (uri?.contains(PART_SONG) == true) {
-            val songId = parms?.get(PARAM_ID) ?: return errorResponse()
+        } else if (session?.uri?.contains(PART_SONG) == true) {
+            val songId = session.parameters?.get(PARAM_ID)?.get(0) ?: return errorResponse()
             val songUri = MusicUtil.getSongFileUri(songId.toLong())
             val songPath = MusicUtil.getSongFilePath(context, songUri)
             val song = File(songPath)
-            return serveFile(headers!!, song, MIME_TYPE_AUDIO)
+            return serveFile(session.headers!!, song, MIME_TYPE_AUDIO)
         }
         return newFixedLengthResponse(Status.NOT_FOUND, MIME_PLAINTEXT, "Not Found")
     }

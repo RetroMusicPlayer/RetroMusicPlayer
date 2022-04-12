@@ -25,14 +25,10 @@ import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityPermissionBinding
-import code.name.monkey.retromusic.extensions.accentBackgroundColor
-import code.name.monkey.retromusic.extensions.setStatusBarColorAuto
-import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
-import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.util.RingtoneManager
 
 class PermissionActivity : AbsMusicServiceActivity() {
@@ -75,10 +71,11 @@ class PermissionActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupTitle() {
-        val color = ThemeStore.accentColor(this)
+        val color = accentColor()
         val hexColor = String.format("#%06X", 0xFFFFFF and color)
-        val appName = "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>"
-            .parseAsHtml()
+        val appName =
+            "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>"
+                .parseAsHtml()
         binding.appNameText.text = appName
     }
 
@@ -87,14 +84,13 @@ class PermissionActivity : AbsMusicServiceActivity() {
         if (hasStoragePermission()) {
             binding.storagePermission.checkImage.isVisible = true
             binding.storagePermission.checkImage.imageTintList =
-                ColorStateList.valueOf(ThemeStore.accentColor(this))
+                ColorStateList.valueOf(accentColor())
         }
         if (hasAudioPermission()) {
             binding.audioPermission.checkImage.isVisible = true
             binding.audioPermission.checkImage.imageTintList =
-                ColorStateList.valueOf(ThemeStore.accentColor(this))
+                ColorStateList.valueOf(accentColor())
         }
-
         super.onResume()
     }
 
