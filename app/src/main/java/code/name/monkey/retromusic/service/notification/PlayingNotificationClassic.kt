@@ -261,8 +261,8 @@ class PlayingNotificationClassic(
 
     override fun setPlaying(isPlaying: Boolean) {
         getPlayPauseBitmap(isPlaying).also {
-            contentView.setImageViewBitmap(R.id.action_play_pause, it)
-            bigContentView.setImageViewBitmap(R.id.action_play_pause, it)
+            contentView?.setImageViewBitmap(R.id.action_play_pause, it)
+            bigContentView?.setImageViewBitmap(R.id.action_play_pause, it)
         }
     }
 
