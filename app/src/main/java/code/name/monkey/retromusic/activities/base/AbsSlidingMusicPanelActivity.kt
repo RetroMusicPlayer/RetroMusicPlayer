@@ -399,7 +399,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (hide) {
             bottomSheetBehavior.peekHeight = -windowInsets.safeGetBottomInsets()
             bottomSheetBehavior.state = STATE_COLLAPSED
-            libraryViewModel.setFabMargin(if (isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0)
+            libraryViewModel.setFabMargin(this, if (isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0)
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 binding.slidingPanel.elevation = 0F
@@ -411,7 +411,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                     } else {
                         bottomSheetBehavior.peekHeight = heightOfBarWithTabs
                     }
-                    libraryViewModel.setFabMargin(dip(R.dimen.mini_player_height_expanded))
+                    libraryViewModel.setFabMargin(this, dip(R.dimen.mini_player_height_expanded))
                 } else {
                     println("Details")
                     if (animate) {
@@ -422,7 +422,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                         bottomSheetBehavior.peekHeight = heightOfBar
                         binding.slidingPanel.bringToFront()
                     }
-                    libraryViewModel.setFabMargin(dip(R.dimen.mini_player_height))
+                    libraryViewModel.setFabMargin(this, dip(R.dimen.mini_player_height))
                 }
             }
         }

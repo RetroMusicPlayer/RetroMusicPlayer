@@ -71,7 +71,7 @@ class AddToPlaylistDialog : DialogFragment() {
                 if (which == 0) {
                     showCreateDialog(songs)
                 } else {
-                    libraryViewModel.addToPlaylist(playlistNames[which], songs)
+                    libraryViewModel.addToPlaylist(requireContext(), playlistNames[which], songs)
                 }
                 dialog.dismiss()
             }

@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.fragments
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.*
@@ -339,7 +340,7 @@ class LibraryViewModel(
         searchResults.value = emptyList()
     }
 
-    fun addToPlaylist(playlistName: String, songs: List<Song>) {
+    fun addToPlaylist(context: Context, playlistName: String, songs: List<Song>) {
         viewModelScope.launch(IO) {
             val playlists = checkPlaylistExists(playlistName)
             if (playlists.isEmpty()) {
@@ -348,8 +349,8 @@ class LibraryViewModel(
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
                 withContext(Main) {
                     Toast.makeText(
-                        App.getContext(),
-                        App.getContext()
+                        context ,
+                        context
                             .getString(R.string.playlist_created_sucessfully, playlistName),
                         Toast.LENGTH_SHORT
                     ).show()
@@ -365,7 +366,7 @@ class LibraryViewModel(
             forceReload(Playlists)
             withContext(Main) {
                 Toast.makeText(
-                    App.getContext(), App.getContext().getString(
+                    context, context.getString(
                         R.string.added_song_count_to_playlist,
                         songs.size,
                         playlistName
@@ -375,8 +376,8 @@ class LibraryViewModel(
         }
     }
 
-    fun setFabMargin(bottomMargin: Int) {
-        val currentValue = DensityUtil.dip2px(App.getContext(), 16F) +
+    fun setFabMargin(context: Context, bottomMargin: Int) {
+        val currentValue = DensityUtil.dip2px(context, 16F) +
                 bottomMargin
         ValueAnimator.ofInt(fabMargin.value!!, currentValue).apply {
             addUpdateListener {
