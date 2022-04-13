@@ -111,7 +111,9 @@ class BlurTransformation : BitmapTransformation {
             script.forEach(output)
 
             output.copyTo(out)
-
+            output.destroy()
+            script.destroy()
+            input.destroy()
             rs.destroy()
 
             return out
