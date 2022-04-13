@@ -399,7 +399,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         if (hide) {
             bottomSheetBehavior.peekHeight = -windowInsets.safeGetBottomInsets()
             bottomSheetBehavior.state = STATE_COLLAPSED
-            libraryViewModel.setFabMargin(this, if (isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0)
+            libraryViewModel.setFabMargin(
+                this,
+                if (isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0
+            )
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 binding.slidingPanel.elevation = 0F

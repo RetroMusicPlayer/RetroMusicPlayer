@@ -357,7 +357,7 @@
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>

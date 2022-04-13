@@ -8,13 +8,12 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
-        tools:layout="@layout/fragment_home"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?colorSurface"
         app:defaultNavHost="true"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:layout="@layout/fragment_home" />
 
     <FrameLayout
         android:id="@+id/slidingPanel"
@@ -23,8 +22,8 @@
         android:layout_height="wrap_content"
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
-        app:gestureInsetBottomIgnored="true"
         app:enableEdgeToEdge="true"
+        app:gestureInsetBottomIgnored="true"
         app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
 
         <FrameLayout

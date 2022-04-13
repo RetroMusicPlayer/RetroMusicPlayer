@@ -5,6 +5,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.ConnectivityManager
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
+import androidx.core.content.res.use
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.VersionUtils
