@@ -24,7 +24,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.webkit.MimeTypeMap
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isVisible
@@ -211,12 +210,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                     }
                     R.id.action_set_as_start_directory -> {
                         startDirectory = file
-                        Toast.makeText(
-                            activity,
-                            String.format(getString(R.string.new_start_directory), file.path),
-                            Toast.LENGTH_SHORT
+                        showToast(
+                            String.format(getString(R.string.new_start_directory), file.path)
                         )
-                            .show()
                         return@setOnMenuItemClickListener true
                     }
                     R.id.action_scan -> {
@@ -491,7 +487,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             return
         }
         if (toBeScanned.isEmpty()) {
-            Toast.makeText(activity, R.string.nothing_to_scan, Toast.LENGTH_SHORT).show()
+            showToast(R.string.nothing_to_scan)
         } else {
             MediaScannerConnection.scanFile(
                 requireContext(),

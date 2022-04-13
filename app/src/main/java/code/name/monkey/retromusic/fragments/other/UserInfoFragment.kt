@@ -24,7 +24,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
@@ -36,6 +35,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentUserInfoBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -55,9 +55,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.io.BufferedOutputStream
 import java.io.File
-import java.io.FileOutputStream
 
 class UserInfoFragment : Fragment() {
 
@@ -98,11 +96,7 @@ class UserInfoFragment : Fragment() {
         binding.next.setOnClickListener {
             val nameString = binding.name.text.toString().trim { it <= ' ' }
             if (nameString.isEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    "Your name can't be empty!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showToast("Your name can't be empty!")
                 return@setOnClickListener
             }
             PreferenceUtil.userName = nameString
@@ -204,9 +198,9 @@ class UserInfoFragment : Fragment() {
             val fileUri = data?.data
             fileUri?.let { setAndSaveBannerImage(it) }
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            showToast(ImagePicker.getError(data))
         } else {
-            Toast.makeText(requireContext(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+            showToast("Task Cancelled")
         }
     }
 
@@ -245,7 +239,7 @@ class UserInfoFragment : Fragment() {
             val file = File(appDir, fileName)
             var successful = false
             runCatching {
-                BufferedOutputStream(FileOutputStream(file)).use {
+                file.outputStream().buffered().use {
                     successful = ImageUtil.resizeBitmap(bitmap, 2048)
                         .compress(Bitmap.CompressFormat.WEBP, 100, it)
                 }
@@ -254,7 +248,7 @@ class UserInfoFragment : Fragment() {
             }
             if (successful) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Updated", Toast.LENGTH_SHORT).show()
+                    showToast("Updated")
                 }
             }
         }

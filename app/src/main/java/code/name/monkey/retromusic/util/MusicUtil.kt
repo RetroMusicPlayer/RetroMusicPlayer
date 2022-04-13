@@ -9,7 +9,6 @@ import android.os.Environment
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.content.contentValuesOf
 import androidx.core.net.toUri
@@ -20,6 +19,7 @@ import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.getLong
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.removeFromQueue
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Playlist
@@ -58,11 +58,7 @@ object MusicUtil : KoinComponent {
         } catch (e: IllegalArgumentException) {
             // TODO the path is most likely not like /storage/emulated/0/... but something like /storage/28C7-75B0/...
             e.printStackTrace()
-            Toast.makeText(
-                context,
-                "Could not share this file, I'm aware of the issue.",
-                Toast.LENGTH_SHORT
-            ).show()
+            context.showToast("Could not share this file, I'm aware of the issue.")
             Intent()
         }
     }
@@ -456,12 +452,7 @@ object MusicUtil : KoinComponent {
             }
             activity.contentResolver.notifyChange("content://media".toUri(), null)
             activity.runOnUiThread {
-                Toast.makeText(
-                    activity,
-                    activity.getString(R.string.deleted_x_songs, songCount),
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                activity.showToast(activity.getString(R.string.deleted_x_songs, songCount))
                 callback?.run()
             }
 
@@ -519,11 +510,7 @@ object MusicUtil : KoinComponent {
                 cursor.close()
             }
             withContext(Dispatchers.Main) {
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.deleted_x_songs, deletedCount),
-                    Toast.LENGTH_SHORT
-                ).show()
+                context.showToast(context.getString(R.string.deleted_x_songs, deletedCount))
             }
 
         } catch (ignored: SecurityException) {

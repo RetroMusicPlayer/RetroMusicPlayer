@@ -16,11 +16,11 @@ package code.name.monkey.retromusic.fragments
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.*
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.fragments.search.Filter
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -348,12 +348,7 @@ class LibraryViewModel(
                     createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
                 withContext(Main) {
-                    Toast.makeText(
-                        context ,
-                        context
-                            .getString(R.string.playlist_created_sucessfully, playlistName),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    context.showToast(R.string.playlist_created_sucessfully)
                 }
             } else {
                 val playlist = playlists.firstOrNull()
@@ -365,13 +360,7 @@ class LibraryViewModel(
             }
             forceReload(Playlists)
             withContext(Main) {
-                Toast.makeText(
-                    context, context.getString(
-                        R.string.added_song_count_to_playlist,
-                        songs.size,
-                        playlistName
-                    ), Toast.LENGTH_SHORT
-                ).show()
+                context.showToast(R.string.added_song_count_to_playlist)
             }
         }
     }

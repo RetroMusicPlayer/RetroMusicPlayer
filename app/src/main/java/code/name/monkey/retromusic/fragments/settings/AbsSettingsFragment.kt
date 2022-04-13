@@ -19,12 +19,12 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.retromusic.activities.OnThemeChangedListener
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
 import dev.chrisbanes.insetter.applyInsetter
@@ -36,8 +36,7 @@ import dev.chrisbanes.insetter.applyInsetter
 abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
     internal fun showProToastAndNavigate(message: String) {
-        Toast.makeText(requireContext(), "$message is Pro version feature.", Toast.LENGTH_SHORT)
-            .show()
+        showToast("$message is Pro version feature.")
         NavigationUtil.goToProVersion(requireActivity())
     }
 

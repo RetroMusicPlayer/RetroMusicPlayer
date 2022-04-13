@@ -114,7 +114,7 @@ class RetroWebServer(val context: Context) : NanoHTTPD(SERVER_PORT) {
             } else {
                 res = newFixedLengthResponse(
                     Status.OK, mime,
-                    FileInputStream(file), file.length()
+                    file.inputStream(), file.length()
                 )
                 res.addHeader("Accept-Ranges", "bytes")
                 res.addHeader("Content-Length", "" + fileLen)

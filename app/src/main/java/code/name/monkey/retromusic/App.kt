@@ -15,13 +15,13 @@
 package code.name.monkey.retromusic
 
 import android.app.Application
-import android.widget.Toast
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.activities.ErrorActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.WallpaperAccentManager
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.PurchaseInfo
@@ -60,11 +60,7 @@ class App : Application() {
                 override fun onProductPurchased(productId: String, details: PurchaseInfo?) {}
 
                 override fun onPurchaseHistoryRestored() {
-                    Toast.makeText(
-                        this@App,
-                        R.string.restored_previous_purchase_please_restart,
-                        Toast.LENGTH_LONG
-                    ).show()
+                    showToast(R.string.restored_previous_purchase_please_restart)
                 }
 
                 override fun onBillingError(errorCode: Int, error: Throwable?) {}

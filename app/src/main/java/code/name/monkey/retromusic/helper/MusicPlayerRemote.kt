@@ -25,6 +25,7 @@ import android.provider.DocumentsContract
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
@@ -317,11 +318,7 @@ object MusicPlayerRemote : KoinComponent {
                 queue.add(song)
                 openQueue(queue, 0, false)
             }
-            Toast.makeText(
-                musicService,
-                musicService!!.resources.getString(R.string.added_title_to_playing_queue),
-                Toast.LENGTH_SHORT
-            ).show()
+            musicService?.showToast(R.string.added_title_to_playing_queue)
             return true
         }
         return false
@@ -340,7 +337,7 @@ object MusicPlayerRemote : KoinComponent {
                     R.string.added_x_titles_to_playing_queue,
                     songs.size
                 )
-            Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
+            musicService?.showToast(toast, Toast.LENGTH_SHORT)
             return true
         }
         return false
@@ -355,11 +352,7 @@ object MusicPlayerRemote : KoinComponent {
                 queue.add(song)
                 openQueue(queue, 0, false)
             }
-            Toast.makeText(
-                musicService,
-                musicService!!.resources.getString(R.string.added_title_to_playing_queue),
-                Toast.LENGTH_SHORT
-            ).show()
+            musicService?.showToast(R.string.added_title_to_playing_queue)
             return true
         }
         return false
@@ -377,7 +370,7 @@ object MusicPlayerRemote : KoinComponent {
                     R.string.added_x_titles_to_playing_queue,
                     songs.size
                 )
-            Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
+            musicService?.showToast(toast)
             return true
         }
         return false

@@ -25,14 +25,13 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.core.content.edit
 import code.name.monkey.retromusic.App
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.Artist
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
-import java.io.BufferedOutputStream
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
@@ -53,7 +52,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
             .into(object : SimpleTarget<Bitmap>() {
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
-                    Toast.makeText(App.getContext(), "Load Failed", Toast.LENGTH_LONG).show()
+                    App.getContext().showToast("Load Failed")
                 }
 
                 @SuppressLint("StaticFieldLeak")
@@ -70,13 +69,12 @@ class CustomArtistImageUtil private constructor(context: Context) {
 
                             var succesful = false
                             try {
-                                val os = BufferedOutputStream(FileOutputStream(file))
-                                succesful = ImageUtil.resizeBitmap(resource, 2048)
-                                    .compress(Bitmap.CompressFormat.JPEG, 100, os)
-                                os.close()
+                                file.outputStream().buffered().use { bos ->
+                                    succesful = ImageUtil.resizeBitmap(resource, 2048)
+                                        .compress(Bitmap.CompressFormat.JPEG, 100, bos)
+                                }
                             } catch (e: IOException) {
-                                Toast.makeText(App.getContext(), e.toString(), Toast.LENGTH_LONG)
-                                    .show()
+                                App.getContext().showToast(e.toString(), Toast.LENGTH_LONG)
                             }
 
                             if (succesful) {

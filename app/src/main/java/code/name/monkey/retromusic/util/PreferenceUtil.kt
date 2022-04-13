@@ -424,10 +424,11 @@ object PreferenceUtil {
             val position = sharedPreferences.getStringOrDefault(
                 HOME_ARTIST_GRID_STYLE, "0"
             ).toInt()
-            val typedArray = App.getContext()
-                .resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
-            val layoutRes = typedArray.getResourceId(position, 0)
-            typedArray.recycle()
+            val layoutRes =
+                App.getContext().resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
+                    .use {
+                        it.getResourceId(position, 0)
+                    }
             return if (layoutRes == 0) {
                 R.layout.item_artist
             } else layoutRes
@@ -438,10 +439,10 @@ object PreferenceUtil {
             val position = sharedPreferences.getStringOrDefault(
                 HOME_ALBUM_GRID_STYLE, "4"
             ).toInt()
-            val typedArray = App.getContext()
-                .resources.obtainTypedArray(R.array.pref_home_grid_style_layout)
-            val layoutRes = typedArray.getResourceId(position, 0)
-            typedArray.recycle()
+            val layoutRes = App.getContext()
+                .resources.obtainTypedArray(R.array.pref_home_grid_style_layout).use {
+                    it.getResourceId(position, 0)
+                }
             return if (layoutRes == 0) {
                 R.layout.item_image
             } else layoutRes
@@ -582,7 +583,7 @@ object PreferenceUtil {
                 4 -> VerticalFlipTransformation()
                 5 -> HingeTransformation()
                 6 -> VerticalStackTransformer()
-                else -> ViewPager.PageTransformer { _, _ ->  }
+                else -> ViewPager.PageTransformer { _, _ -> }
             }
         }
 

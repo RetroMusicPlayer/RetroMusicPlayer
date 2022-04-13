@@ -38,7 +38,6 @@ import android.support.v4.media.session.PlaybackStateCompat
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import android.util.Log
-import android.widget.Toast
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.media.AudioAttributesCompat
@@ -54,6 +53,7 @@ import code.name.monkey.retromusic.activities.LockScreenActivity
 import code.name.monkey.retromusic.appwidgets.*
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.auto.AutoMusicProvider
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension.getSongModel
@@ -891,10 +891,7 @@ class MusicService : MediaBrowserServiceCompat(),
                 }
             }
         } else {
-            Toast.makeText(
-                this, resources.getString(R.string.audio_focus_denied), Toast.LENGTH_SHORT
-            )
-                .show()
+            showToast(R.string.audio_focus_denied)
         }
     }
 
@@ -924,8 +921,7 @@ class MusicService : MediaBrowserServiceCompat(),
         if (openTrackAndPrepareNextAt(position)) {
             play()
         } else {
-            Toast.makeText(this, resources.getString(R.string.unplayable_file), Toast.LENGTH_SHORT)
-                .show()
+            showToast(resources.getString(R.string.unplayable_file))
         }
     }
 
@@ -940,7 +936,7 @@ class MusicService : MediaBrowserServiceCompat(),
             }
             play()
         } else {
-            Toast.makeText(applicationContext, R.string.playlist_is_empty, Toast.LENGTH_LONG).show()
+            showToast(R.string.playlist_is_empty)
         }
     }
 
@@ -1315,11 +1311,10 @@ class MusicService : MediaBrowserServiceCompat(),
                     openQueue(playlistSongs, 0, true)
                 }
             } else {
-                Toast.makeText(applicationContext, R.string.playlist_is_empty, Toast.LENGTH_LONG)
-                    .show()
+                showToast( R.string.playlist_is_empty)
             }
         } else {
-            Toast.makeText(applicationContext, R.string.playlist_is_empty, Toast.LENGTH_LONG).show()
+            showToast(R.string.playlist_is_empty)
         }
     }
 

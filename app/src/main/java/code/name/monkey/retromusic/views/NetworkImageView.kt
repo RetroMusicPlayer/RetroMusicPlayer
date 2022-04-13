@@ -15,24 +15,24 @@ package code.name.monkey.retromusic.views
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.core.content.withStyledAttributes
 import code.name.monkey.retromusic.R
 import com.bumptech.glide.Glide
 
 /** @author Hemanth S (h4h13).
  */
-class NetworkImageView : CircularImageView {
-    constructor(context: Context) : super(context) {
-        init(context, null)
-    }
+class NetworkImageView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) :
+    CircularImageView(context, attrs, defStyleAttr) {
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        init(context, attrs)
-    }
-
-    constructor(
-        context: Context, attrs: AttributeSet?, defStyleAttr: Int
-    ) : super(context, attrs, defStyleAttr) {
-        init(context, attrs)
+    init {
+        context.withStyledAttributes(attrs, R.styleable.NetworkImageView, 0, 0) {
+            val url = getString(R.styleable.NetworkImageView_url_link)
+            setImageUrl(context, url!!)
+        }
     }
 
     fun setImageUrl(imageUrl: String) {
@@ -45,13 +45,5 @@ class NetworkImageView : CircularImageView {
             .error(R.drawable.ic_account)
             .placeholder(R.drawable.ic_account)
             .into(this)
-    }
-
-    private fun init(context: Context, attributeSet: AttributeSet?) {
-        val attributes =
-            context.obtainStyledAttributes(attributeSet, R.styleable.NetworkImageView, 0, 0)
-        val url = attributes.getString(R.styleable.NetworkImageView_url_link)
-        setImageUrl(context, url!!)
-        attributes.recycle()
     }
 }

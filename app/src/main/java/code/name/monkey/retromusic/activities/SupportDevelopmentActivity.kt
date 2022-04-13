@@ -21,12 +21,10 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -121,7 +119,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 
     override fun onProductPurchased(productId: String, details: PurchaseInfo?) {
         // loadSkuDetails();
-        Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show()
+        showToast(R.string.thank_you)
     }
 
     override fun onBillingError(errorCode: Int, error: Throwable?) {
@@ -130,7 +128,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 
     override fun onPurchaseHistoryRestored() {
         // loadSkuDetails();
-        Toast.makeText(this, R.string.restored_previous_purchases, Toast.LENGTH_SHORT).show()
+        showToast(R.string.restored_previous_purchases)
     }
 
     override fun onDestroy() {

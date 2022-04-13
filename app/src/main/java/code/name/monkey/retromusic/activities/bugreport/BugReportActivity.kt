@@ -20,7 +20,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.annotation.StringDef
 import androidx.annotation.StringRes
 import androidx.core.content.getSystemService
@@ -39,6 +38,7 @@ import code.name.monkey.retromusic.activities.bugreport.model.github.GithubTarge
 import code.name.monkey.retromusic.databinding.ActivityBugReportBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
+import code.name.monkey.retromusic.extensions.showToast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
@@ -163,11 +163,7 @@ open class BugReportActivity : AbsThemeActivity() {
         val clipboard = getSystemService<ClipboardManager>()
         val clip = ClipData.newPlainText(getString(R.string.device_info), deviceInfo?.toMarkdown())
         clipboard?.setPrimaryClip(clip)
-        Toast.makeText(
-            this@BugReportActivity,
-            R.string.copied_device_info_to_clipboard,
-            Toast.LENGTH_LONG
-        ).show()
+        showToast(R.string.copied_device_info_to_clipboard)
     }
 
     private fun validateInput(): Boolean {

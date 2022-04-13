@@ -9,9 +9,9 @@ import android.media.MediaPlayer
 import android.media.audiofx.AudioEffect
 import android.os.PowerManager
 import android.util.Log
-import android.widget.Toast
 import androidx.core.net.toUri
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimator
 import code.name.monkey.retromusic.service.playback.Playback
@@ -291,12 +291,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
         player2 = MediaPlayer()
         mIsInitialized = true
         mp?.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
-        Toast.makeText(
-            context,
-            context.resources.getString(R.string.unplayable_file),
-            Toast.LENGTH_SHORT
-        )
-            .show()
+        context.showToast(R.string.unplayable_file)
         Log.e(TAG, what.toString() + extra)
         return false
     }

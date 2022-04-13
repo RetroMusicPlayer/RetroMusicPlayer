@@ -53,8 +53,8 @@
     </array>
 
     <array name="pref_appbar_mode_titles">
-        <item>@string/collapsing</item>
-        <item>@string/simple</item>
+        <item>@string/expanded</item>
+        <item>@string/compact</item>
     </array>
 
     <string-array name="pref_appbar_mode_values">
@@ -229,5 +229,4 @@
         <item>@string/choose_image</item>
         <item>@string/remove_image</item>
     </string-array>
-    <string name="collapsing">Collapsing</string>
 </resources>

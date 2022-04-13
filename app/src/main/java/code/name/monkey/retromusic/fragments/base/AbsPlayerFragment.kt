@@ -29,7 +29,6 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
@@ -48,10 +47,7 @@ import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
-import code.name.monkey.retromusic.extensions.currentFragment
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.keepScreenOn
-import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
@@ -60,7 +56,10 @@ import code.name.monkey.retromusic.interfaces.IPaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.RingtoneManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -196,7 +195,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 if (genre == null) {
                     genre = "Not Specified"
                 }
-                Toast.makeText(context, genre, Toast.LENGTH_SHORT).show()
+                showToast(genre)
                 return true
             }
         }

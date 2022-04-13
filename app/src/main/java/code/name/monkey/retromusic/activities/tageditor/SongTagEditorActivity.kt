@@ -30,10 +30,7 @@ import androidx.core.widget.doAfterTextChanged
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivitySongTagEditorBinding
-import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.extensions.defaultFooterColor
-import code.name.monkey.retromusic.extensions.isColorLight
-import code.name.monkey.retromusic.extensions.setTint
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.ArtworkInfo
@@ -196,8 +193,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
 
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
-                    Toast.makeText(this@SongTagEditorActivity, "Load Failed", Toast.LENGTH_LONG)
-                        .show()
+                    showToast("Load Failed", Toast.LENGTH_LONG)
                 }
 
                 override fun setResource(resource: BitmapPaletteWrapper?) {}

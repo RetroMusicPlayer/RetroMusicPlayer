@@ -80,12 +80,12 @@ fun <T> Fragment.whichFragment(@IdRes id: Int): T {
     return childFragmentManager.findFragmentById(id) as T
 }
 
-fun Fragment.showToast(@StringRes stringRes: Int) {
-    showToast(getString(stringRes))
+fun Fragment.showToast(@StringRes stringRes: Int, duration: Int = Toast.LENGTH_SHORT) {
+    showToast(getString(stringRes), duration)
 }
 
-fun Fragment.showToast(message: String) {
-    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(requireContext(), message, duration).show()
 }
 
 fun Context.getDrawableCompat(@DrawableRes drawableRes: Int): Drawable {
