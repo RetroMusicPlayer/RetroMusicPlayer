@@ -56,10 +56,10 @@ object MusicUtil : KoinComponent {
                 )
             ).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).setType("audio/*")
         } catch (e: IllegalArgumentException) {
-            // TODO the path is most likely not like /storage/emulated/0/... but something like /storage/28C7-75B0/...
-            e.printStackTrace()
-            context.showToast("Could not share this file, I'm aware of the issue.")
-            Intent()
+            Intent().setAction(Intent.ACTION_SEND).putExtra(
+                Intent.EXTRA_STREAM,
+                getSongFileUri(song.id)
+            ).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).setType("audio/*")
         }
     }
 
