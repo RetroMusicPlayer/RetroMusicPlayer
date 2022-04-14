@@ -37,9 +37,8 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import kotlinx.coroutines.Dispatchers
@@ -122,10 +121,8 @@ class AppWidgetCircle : BaseAppWidget() {
             }
             target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
                 .load(RetroGlideExtension.getSongModel(song))
-                .apply(
-                    RequestOptions().transform(RoundedCorners(imageSize / 2))
-                )
-                .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+                .apply(RequestOptions.circleCropTransform())
+                .into(object : CustomTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
                     override fun onResourceReady(
                         resource: BitmapPaletteWrapper,
                         transition: Transition<in BitmapPaletteWrapper>?
@@ -165,10 +162,14 @@ class AppWidgetCircle : BaseAppWidget() {
                                 )
                             )
                         )
-                        appWidgetView.setImageViewBitmap(R.id.image, bitmap)
+                        if (bitmap != null) {
+                            appWidgetView.setImageViewBitmap(R.id.image, bitmap)
+                        }
 
                         pushUpdate(service, appWidgetIds, appWidgetView)
                     }
+
+                    override fun onLoadCleared(placeholder: Drawable?) { }
                 })
         }
     }
