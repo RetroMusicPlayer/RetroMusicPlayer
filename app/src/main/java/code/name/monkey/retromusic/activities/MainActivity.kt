@@ -179,7 +179,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                 handled = true
             }
             if (uri != null && uri.toString().isNotEmpty()) {
-                MusicPlayerRemote.playFromUri(uri)
+                MusicPlayerRemote.playFromUri(this@MainActivity, uri)
                 handled = true
             } else if (MediaStore.Audio.Playlists.CONTENT_TYPE == mimeType) {
                 val id = parseLongFromIntent(intent, "playlistId", "playlist")

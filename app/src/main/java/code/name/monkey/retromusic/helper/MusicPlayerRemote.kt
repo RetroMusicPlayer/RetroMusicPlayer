@@ -172,7 +172,7 @@ object MusicPlayerRemote : KoinComponent {
                 return cursor.getString(columnIndex)
             }
         } catch (e: Exception) {
-            println(e.message)
+            e.printStackTrace()
         } finally {
             cursor?.close()
         }
@@ -419,7 +419,7 @@ object MusicPlayerRemote : KoinComponent {
     }
 
     @JvmStatic
-    fun playFromUri(uri: Uri) {
+    fun playFromUri(context: Context, uri: Uri) {
         if (musicService != null) {
 
             var songs: List<Song>? = null
@@ -431,10 +431,8 @@ object MusicPlayerRemote : KoinComponent {
                     } else if (uri.authority == "media") {
                         songId = uri.lastPathSegment
                     }
-                    songs = if (songId != null) {
-                        songRepository.songs(songId)
-                    } else {
-                        songRepository.songsIgnoreBlacklist(uri)
+                    if (songId != null) {
+                        songs = songRepository.songs(songId)
                     }
                 }
             }
@@ -447,7 +445,7 @@ object MusicPlayerRemote : KoinComponent {
                     )
                 }
                 if (songFile == null) {
-                    val path = getFilePathFromUri(musicService!!, uri)
+                    val path = getFilePathFromUri(context, uri)
                     if (path != null)
                         songFile = File(path)
                 }
@@ -462,6 +460,7 @@ object MusicPlayerRemote : KoinComponent {
                 openQueue(songs, 0, true)
             } else {
                 // TODO the file is not listed in the media store
+                context.showToast(R.string.unplayable_file)
                 println("The file is not listed in the media store")
             }
         }

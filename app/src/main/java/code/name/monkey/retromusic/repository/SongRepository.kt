@@ -52,8 +52,6 @@ interface SongRepository {
     fun song(cursor: Cursor?): Song
 
     fun song(songId: Long): Song
-
-    fun songsIgnoreBlacklist(uri: Uri): List<Song>
 }
 
 class RealSongRepository(private val context: Context) : SongRepository {
@@ -124,28 +122,6 @@ class RealSongRepository(private val context: Context) : SongRepository {
                 arrayOf(filePath),
                 ignoreBlacklist = ignoreBlacklist
             )
-        )
-    }
-
-    override fun songsIgnoreBlacklist(uri: Uri): List<Song> {
-        var filePath = ""
-        context.contentResolver.query(
-            uri,
-            arrayOf(AudioColumns.DATA),
-            null,
-            null,
-            null
-        ).use { cursor ->
-            if (cursor != null) {
-                if (cursor.count != 0) {
-                    cursor.moveToFirst()
-                    filePath = cursor.getString(AudioColumns.DATA)
-                    println("File Path: $filePath")
-                }
-            }
-        }
-        return songsByFilePath(
-            filePath, true
         )
     }
 
