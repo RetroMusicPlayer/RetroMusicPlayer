@@ -122,6 +122,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
                         fromNotification = false
                     }
                 }
+                STATE_HIDDEN -> {
+                    MusicPlayerRemote.clearQueue()
+                }
                 else -> {
                     println("Do a flip")
                 }
@@ -156,7 +159,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     private fun setupBottomSheet() {
         bottomSheetBehavior = from(binding.slidingPanel) as RetroBottomSheetBehavior
         bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
-        bottomSheetBehavior.isHideable = false
+        bottomSheetBehavior.isHideable = true
         setMiniPlayerAlphaProgress(0F)
     }
 
