@@ -8,6 +8,7 @@ import code.name.monkey.retromusic.App.Companion.getContext
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -205,9 +206,9 @@ object RetroGlideExtension {
 
     private fun getErrorUserProfile(context: Context): Drawable {
         return TintHelper.createTintedDrawable(
-            getContext(),
+            context,
             R.drawable.ic_account,
-            accentColor(context)
+            context.accentColor()
         )
     }
 

@@ -137,7 +137,7 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
     private fun setUpSubFragments() {
         playbackControlsFragment = whichFragment(R.id.playbackControlsFragment)
         val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
-            whichFragment(R.id.playbackControlsFragment)
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
     }
 

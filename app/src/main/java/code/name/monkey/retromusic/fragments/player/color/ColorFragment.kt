@@ -112,7 +112,7 @@ class ColorFragment : AbsPlayerFragment(R.layout.fragment_color_player) {
         setUpSubFragments()
         setUpPlayerToolbar()
         val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
-            whichFragment(R.id.playbackControlsFragment)
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
         playerToolbar().drawAboveSystemBars()
     }
