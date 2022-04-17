@@ -207,7 +207,7 @@ class AppWidgetMD3 : BaseAppWidget() {
                             )
                         )
 
-                        val image = getAlbumArtDrawable(service.resources, bitmap)
+                        val image = getAlbumArtDrawable(service, bitmap)
                         val roundedBitmap = createRoundedBitmap(
                             image,
                             imageSize,

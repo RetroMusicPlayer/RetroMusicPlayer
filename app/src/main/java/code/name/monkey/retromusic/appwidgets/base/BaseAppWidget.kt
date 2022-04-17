@@ -20,7 +20,6 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -116,11 +115,11 @@ abstract class BaseAppWidget : AppWidgetProvider() {
 
     abstract fun performUpdate(service: MusicService, appWidgetIds: IntArray?)
 
-    protected fun getAlbumArtDrawable(resources: Resources, bitmap: Bitmap?): Drawable {
+    protected fun getAlbumArtDrawable(context: Context, bitmap: Bitmap?): Drawable {
         return if (bitmap == null) {
-            ContextCompat.getDrawable(App.getContext(), R.drawable.default_audio_art)!!
+            ContextCompat.getDrawable(context, R.drawable.default_audio_art)!!
         } else {
-            BitmapDrawable(resources, bitmap)
+            BitmapDrawable(context.resources, bitmap)
         }
     }
 

@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.fragments.other
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
@@ -24,6 +23,8 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
@@ -40,7 +41,7 @@ import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.util.ImageUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtil.userName
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -83,7 +84,7 @@ class UserInfoFragment : Fragment() {
 
         binding.nameContainer.accentColor()
         binding.next.accentColor()
-        binding.name.setText(PreferenceUtil.userName)
+        binding.name.setText(userName)
 
         binding.userImage.setOnClickListener {
             showUserImageOptions()
@@ -99,7 +100,7 @@ class UserInfoFragment : Fragment() {
                 showToast("Your name can't be empty!")
                 return@setOnClickListener
             }
-            PreferenceUtil.userName = nameString
+            userName = nameString
             findNavController().navigateUp()
         }
 
@@ -178,7 +179,9 @@ class UserInfoFragment : Fragment() {
             .compress(1440)
             .provider(ImageProvider.GALLERY)
             .crop(16f, 9f)
-            .start(PICK_BANNER_REQUEST)
+            .createIntent {
+                startForBannerImageResult.launch(it)
+            }
     }
 
     private fun pickNewPhoto() {
@@ -186,21 +189,40 @@ class UserInfoFragment : Fragment() {
             .provider(ImageProvider.GALLERY)
             .cropSquare()
             .compress(1440)
-            .start(PICK_IMAGE_REQUEST)
+            .createIntent {
+                startForProfileImageResult.launch(it)
+            }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
-            val fileUri = data?.data
-            fileUri?.let { setAndSaveUserImage(it) }
-        } else if (resultCode == Activity.RESULT_OK && requestCode == PICK_BANNER_REQUEST) {
-            val fileUri = data?.data
-            fileUri?.let { setAndSaveBannerImage(it) }
-        } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            showToast(ImagePicker.getError(data))
-        } else {
-            showToast("Task Cancelled")
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            saveImage(result) { fileUri ->
+                setAndSaveUserImage(fileUri)
+            }
+        }
+
+    private val startForBannerImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            saveImage(result) { fileUri ->
+                setAndSaveBannerImage(fileUri)
+            }
+        }
+
+    private fun saveImage(result: ActivityResult, doIfResultOk: (uri: Uri) -> Unit) {
+        val resultCode = result.resultCode
+        val data = result.data
+        when (resultCode) {
+            Activity.RESULT_OK -> {
+                data?.data?.let { uri ->
+                    doIfResultOk(uri)
+                }
+            }
+            ImagePicker.RESULT_ERROR -> {
+                showToast(ImagePicker.getError(data))
+            }
+            else -> {
+                showToast("Task Cancelled")
+            }
         }
     }
 
@@ -287,6 +309,7 @@ class UserInfoFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
     companion object {
         private const val PICK_IMAGE_REQUEST = 9002

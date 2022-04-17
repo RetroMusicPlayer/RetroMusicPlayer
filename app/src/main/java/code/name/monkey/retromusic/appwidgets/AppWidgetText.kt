@@ -22,7 +22,6 @@ import android.view.View
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
@@ -134,8 +133,8 @@ class AppWidgetText : BaseAppWidget() {
         appWidgetView.setImageViewBitmap(
             R.id.button_toggle_play_pause, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
-                    App.getContext(), playPauseRes, ContextCompat.getColor(
-                        App.getContext(), R.color.md_white_1000
+                    service, playPauseRes, ContextCompat.getColor(
+                        service, R.color.md_white_1000
                     )
                 ), 1f
             )
@@ -143,10 +142,11 @@ class AppWidgetText : BaseAppWidget() {
         appWidgetView.setImageViewBitmap(
             R.id.button_next, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
-                    App.getContext(),
+                    service,
                     R.drawable.ic_skip_next,
                     ContextCompat.getColor(
-                        App.getContext(), R.color.md_white_1000
+                        service,
+                        R.color.md_white_1000
                     )
                 ), 1f
             )
@@ -154,10 +154,10 @@ class AppWidgetText : BaseAppWidget() {
         appWidgetView.setImageViewBitmap(
             R.id.button_prev, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
-                    App.getContext(),
+                    service,
                     R.drawable.ic_skip_previous,
                     ContextCompat.getColor(
-                        App.getContext(), R.color.md_white_1000
+                        service, R.color.md_white_1000
                     )
                 ), 1f
             )

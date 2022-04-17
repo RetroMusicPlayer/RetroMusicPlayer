@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.core.content.res.use
+import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -98,10 +99,10 @@ object PreferenceUtil {
 
     val languageCode: String get() = sharedPreferences.getString(LANGUAGE_NAME, "auto") ?: "auto"
 
-    var userName
+    var Fragment.userName
         get() = sharedPreferences.getString(
             USER_NAME,
-            App.getContext().getString(R.string.user_name)
+            getString(R.string.user_name)
         )
         set(value) = sharedPreferences.edit {
             putString(USER_NAME, value)

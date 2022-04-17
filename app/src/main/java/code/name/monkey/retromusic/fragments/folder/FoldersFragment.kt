@@ -205,7 +205,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         return@setOnMenuItemClickListener true
                     }
                     R.id.action_add_to_blacklist -> {
-                        BlacklistStore.getInstance(App.getContext()).addPath(file)
+                        BlacklistStore.getInstance(requireContext()).addPath(file)
                         return@setOnMenuItemClickListener true
                     }
                     R.id.action_set_as_start_directory -> {

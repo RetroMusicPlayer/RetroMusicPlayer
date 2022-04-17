@@ -10,12 +10,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.lifecycleScope
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityRestoreBinding
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.accentOutlineColor
+import code.name.monkey.retromusic.extensions.addAccentColor
 import code.name.monkey.retromusic.helper.BackupContent
 import code.name.monkey.retromusic.helper.BackupContent.*
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.theme.ThemeManager
+import code.name.monkey.retromusic.util.theme.getNightMode
 import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.DynamicColorsOptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -33,15 +38,21 @@ class RestoreActivity : AppCompatActivity() {
         setWidth()
         val backupUri = intent?.data
         binding.backupName.setText(getFileName(backupUri))
+        binding.cancelButton.accentOutlineColor()
         binding.cancelButton.setOnClickListener {
             finish()
         }
+        binding.restoreButton.accentColor()
+        binding.checkArtistImages.addAccentColor()
+        binding.checkDatabases.addAccentColor()
+        binding.checkSettings.addAccentColor()
+        binding.checkUserImages.addAccentColor()
         binding.restoreButton.setOnClickListener {
             val backupContents = mutableListOf<BackupContent>()
-            if (binding.checkSettings.isChecked) backupContents.add(SETTINGS)
             if (binding.checkDatabases.isChecked) backupContents.add(PLAYLISTS)
             if (binding.checkArtistImages.isChecked) backupContents.add(CUSTOM_ARTIST_IMAGES)
-            if (binding.checkUserImages.isChecked) backupContents.add(USER_IMAGES)
+            if (binding.checkSettings.isChecked) backupContents.add(SETTINGS)
+            if (binding.checkUserImages.isChecked) backupContents.add(SETTINGS)
             lifecycleScope.launch(Dispatchers.IO) {
                 if (backupUri != null) {
                     contentResolver.openInputStream(backupUri)?.use {
@@ -53,13 +64,15 @@ class RestoreActivity : AppCompatActivity() {
     }
 
     private fun updateTheme() {
-        AppCompatDelegate.setDefaultNightMode(ThemeManager.getNightMode())
+        AppCompatDelegate.setDefaultNightMode(getNightMode())
 
         // Apply dynamic colors to activity if enabled
         if (PreferenceUtil.materialYou) {
-            DynamicColors.applyIfAvailable(
+            DynamicColors.applyToActivityIfAvailable(
                 this,
-                com.google.android.material.R.style.ThemeOverlay_Material3_DynamicColors_DayNight
+                DynamicColorsOptions.Builder()
+                    .setThemeOverlay(R.style.ThemeOverlay_Material3_DynamicColors_DayNight)
+                    .build()
             )
         }
     }

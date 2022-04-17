@@ -124,7 +124,7 @@ object SongMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_add_to_blacklist -> {
-                BlacklistStore.getInstance(App.getContext()).addPath(File(song.data))
+                BlacklistStore.getInstance(activity).addPath(File(song.data))
                 libraryViewModel.forceReload(ReloadType.Songs)
                 return true
             }

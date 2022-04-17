@@ -49,6 +49,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtil.userName
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialFadeThrough
@@ -67,7 +68,7 @@ class HomeFragment :
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         setupListeners()
-        binding.titleWelcome.text = String.format("%s", PreferenceUtil.userName)
+        binding.titleWelcome.text = String.format("%s", userName)
 
         enterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
         reenterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
