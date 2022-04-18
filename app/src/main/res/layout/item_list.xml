@@ -61,14 +61,6 @@
             android:visibility="gone"
             tools:text="100"
             tools:visibility="visible" />
-
-        <code.name.monkey.retromusic.views.PlayingIndicatorView
-            android:id="@+id/playing_indicator"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:padding="5dp"
-            android:visibility="gone"
-            tools:visibility="visible"/>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.textview.MaterialTextView

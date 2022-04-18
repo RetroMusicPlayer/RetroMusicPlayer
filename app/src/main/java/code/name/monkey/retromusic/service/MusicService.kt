@@ -58,6 +58,7 @@ import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension.getSongModel
+import code.name.monkey.retromusic.helper.MusicPlayerRemote.isCasting
 import code.name.monkey.retromusic.helper.ShuffleHelper.makeShuffleList
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.Song.Companion.emptySong
