@@ -16,6 +16,8 @@ package code.name.monkey.retromusic.util;
 
 import static android.provider.MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
 
+import static code.name.monkey.retromusic.util.FileUtilsKt.getExternalStorageDirectory;
+
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -295,12 +297,12 @@ public class PlaylistsUtil {
 
   public static File savePlaylist(Context context, Playlist playlist) throws IOException {
     return M3UWriter.write(
-        new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
+        new File(getExternalStorageDirectory(), "Playlists"), playlist);
   }
 
   public static File savePlaylistWithSongs(PlaylistWithSongs playlist) throws IOException {
     return M3UWriter.writeIO(
-        new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
+        new File(getExternalStorageDirectory(), "Playlists"), playlist);
   }
 
   public static boolean doesPlaylistExist(@NonNull final Context context, final int playlistId) {

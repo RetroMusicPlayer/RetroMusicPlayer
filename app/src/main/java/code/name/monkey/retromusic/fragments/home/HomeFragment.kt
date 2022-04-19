@@ -93,10 +93,6 @@ class HomeFragment :
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
         binding.toolbar.drawNextToNavbar()
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            remove()
-            requireActivity().onBackPressed()
-        }
         view.doOnLayout {
             adjustPlaylistButtons()
         }

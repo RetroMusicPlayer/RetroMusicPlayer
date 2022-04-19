@@ -11,6 +11,7 @@ import code.name.monkey.retromusic.helper.BackupContent.*
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
+import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -249,7 +250,7 @@ object BackupHelper : KoinComponent {
 
     fun getBackupRoot(): File {
         return File(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
             "RetroMusic/Backups"
         )
     }

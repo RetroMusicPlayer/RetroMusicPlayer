@@ -26,7 +26,7 @@ import java.io.*
  */
 object LyricUtil {
     private val lrcRootPath =
-        Environment.getExternalStorageDirectory().toString() + "/RetroMusic/lyrics/"
+        getExternalStorageDirectory().toString() + "/RetroMusic/lyrics/"
     private const val TAG = "LyricUtil"
     fun writeLrcToLoc(
         title: String, artist: String, lrcContext: String

@@ -10,13 +10,14 @@ import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.util.getExternalStorageDirectory
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
 import com.afollestad.materialdialogs.list.updateListItems
 import java.io.File
 
 class BlacklistFolderChooserDialog : DialogFragment() {
-    private var initialPath: String = Environment.getExternalStorageDirectory().absolutePath
+    private var initialPath: String = getExternalStorageDirectory().absolutePath
     private var parentFolder: File? = null
     private var parentContents: Array<File>? = null
     private var canGoUp = false
@@ -97,7 +98,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
             parentFolder = parentContents?.getOrNull(if (canGoUp) i - 1 else i)
             canGoUp = true
             if (parentFolder?.absolutePath == "/storage/emulated") {
-                parentFolder = Environment.getExternalStorageDirectory()
+                parentFolder = getExternalStorageDirectory()
             }
         }
         reload()

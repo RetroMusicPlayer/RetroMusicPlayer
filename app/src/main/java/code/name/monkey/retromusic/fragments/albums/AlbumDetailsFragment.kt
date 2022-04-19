@@ -120,7 +120,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         binding.albumCoverContainer.transitionName = arguments.extraAlbumId.toString()
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner) {
-            requireView().doOnPreDraw {
+            view.doOnPreDraw {
                 startPostponedEnterTransition()
             }
             albumArtistExists = !it.albumArtist.isNullOrEmpty()

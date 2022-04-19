@@ -19,7 +19,6 @@ import android.app.Activity
 import android.content.*
 import android.database.Cursor
 import android.net.Uri
-import android.os.Environment
 import android.os.IBinder
 import android.provider.DocumentsContract
 import android.widget.Toast
@@ -30,6 +29,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.getExternalStorageDirectory
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -440,7 +440,7 @@ object MusicPlayerRemote : KoinComponent {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
                     songFile = File(
-                        Environment.getExternalStorageDirectory(),
+                        getExternalStorageDirectory(),
                         uri.path?.split(":".toRegex(), 2)?.get(1)
                     )
                 }

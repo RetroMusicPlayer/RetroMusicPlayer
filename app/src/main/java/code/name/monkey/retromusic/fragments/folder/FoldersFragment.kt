@@ -58,6 +58,8 @@ import code.name.monkey.retromusic.util.FileUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.startDirectory
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
+import code.name.monkey.retromusic.util.getExternalStorageDirectory
+import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import code.name.monkey.retromusic.views.BreadCrumbLayout.Crumb
 import code.name.monkey.retromusic.views.BreadCrumbLayout.SelectionCallback
 import com.afollestad.materialcab.attached.AttachedCab
@@ -420,7 +422,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         if (_binding != null) {
             binding.recyclerView.updatePadding(
                 bottom = if (count > 0 && playingQueue.isNotEmpty()) dip(R.dimen.mini_player_height_expanded)
-                else dip(R.dimen.mini_player_height_expanded)
+                else dip(R.dimen.mini_player_height)
             )
         }
     }
@@ -654,11 +656,11 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         val defaultStartDirectory: File
             get() {
                 val musicDir =
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
+                    getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
                 val startFolder = if (musicDir.exists() && musicDir.isDirectory) {
                     musicDir
                 } else {
-                    val externalStorage = Environment.getExternalStorageDirectory()
+                    val externalStorage = getExternalStorageDirectory()
                     if (externalStorage.exists() && externalStorage.isDirectory) {
                         externalStorage
                     } else {

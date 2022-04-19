@@ -19,7 +19,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -45,10 +44,6 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
                 adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            remove()
-            requireActivity().onBackPressed()
         }
     }
 

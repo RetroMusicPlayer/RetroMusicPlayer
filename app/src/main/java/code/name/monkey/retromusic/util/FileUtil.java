@@ -14,6 +14,8 @@
 
 package code.name.monkey.retromusic.util;
 
+import static code.name.monkey.retromusic.util.FileUtilsKt.getExternalStorageDirectory;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Environment;
@@ -22,6 +24,7 @@ import android.webkit.MimeTypeMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.os.EnvironmentCompat;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -40,6 +43,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.adapter.Storage;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.repository.RealSongRepository;
@@ -87,7 +91,7 @@ public final class FileUtil {
       if (files.size() > 0
           && files.size() < 999) { // 999 is the max amount Androids SQL implementation can handle.
         selection =
-            MediaStore.Audio.AudioColumns.DATA + " IN (" + makePlaceholders(files.size()) + ")";
+            Constants.DATA + " IN (" + makePlaceholders(files.size()) + ")";
       }
     }
 
@@ -96,7 +100,7 @@ public final class FileUtil {
 
     return songCursor == null
         ? null
-        : new SortedCursor(songCursor, paths, MediaStore.Audio.AudioColumns.DATA);
+        : new SortedCursor(songCursor, paths, Constants.DATA);
   }
 
   private static String makePlaceholders(int len) {
@@ -268,7 +272,7 @@ public final class FileUtil {
   public static ArrayList<Storage> listRoots() {
     ArrayList<Storage> storageItems = new ArrayList<>();
     HashSet<String> paths = new HashSet<>();
-    String defaultPath = Environment.getExternalStorageDirectory().getPath();
+    String defaultPath = getExternalStorageDirectory().getPath();
     String defaultPathState = Environment.getExternalStorageState();
     if (defaultPathState.equals(Environment.MEDIA_MOUNTED) || defaultPathState.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
       Storage ext = new Storage();
@@ -277,7 +281,7 @@ public final class FileUtil {
       } else {
         ext.title = "Internal Storage";
       }
-      ext.file = Environment.getExternalStorageDirectory();
+      ext.file = getExternalStorageDirectory();
       storageItems.add(ext);
       paths.add(defaultPath);
     }

@@ -91,7 +91,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         binding.artistCoverContainer.transitionName = (artistId ?: artistName).toString()
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner) {
-            requireView().doOnPreDraw {
+            view.doOnPreDraw {
                 startPostponedEnterTransition()
             }
             showArtist(it)

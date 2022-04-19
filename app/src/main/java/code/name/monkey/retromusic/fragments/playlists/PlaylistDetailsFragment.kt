@@ -1,11 +1,11 @@
 package code.name.monkey.retromusic.fragments.playlists
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.addCallback
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -31,6 +31,8 @@ import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
 import com.afollestad.materialcab.createCab
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.transition.MaterialArcMotion
+import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialSharedAxis
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator
@@ -52,6 +54,16 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     private lateinit var playlist: PlaylistWithSongs
     private lateinit var playlistSongAdapter: OrderablePlaylistSongAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform(requireContext(), true).apply {
+            drawingViewId = R.id.fragment_container
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(surfaceColor())
+            setPathMotion(MaterialArcMotion())
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPlaylistDetailBinding.bind(view)
@@ -72,13 +84,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
             }
         }
         postponeEnterTransition()
-        requireView().doOnPreDraw { startPostponedEnterTransition() }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            if (!handleBackPress()) {
-                remove()
-                requireActivity().onBackPressed()
-            }
-        }
+        view.doOnPreDraw { startPostponedEnterTransition() }
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
@@ -201,5 +207,4 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         }
         return cab as AttachedCab
     }
-
 }

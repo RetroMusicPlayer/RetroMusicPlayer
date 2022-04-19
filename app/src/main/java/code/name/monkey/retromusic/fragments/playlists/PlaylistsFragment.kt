@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
 import android.view.*
-import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuCompat
 import androidx.navigation.fragment.findNavController
@@ -45,10 +44,6 @@ class PlaylistsFragment :
                 adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            remove()
-            requireActivity().onBackPressed()
         }
     }
 

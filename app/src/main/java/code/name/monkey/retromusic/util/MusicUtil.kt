@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
-import android.os.Environment
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.util.Log
@@ -14,6 +13,7 @@ import androidx.core.content.contentValuesOf
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.SongEntity
@@ -79,7 +79,7 @@ object MusicUtil : KoinComponent {
 
     private fun createAlbumArtDir(context: Context): File {
         val albumArtDir = File(
-            if (VersionUtils.hasR()) context.cacheDir else Environment.getExternalStorageDirectory(),
+            if (VersionUtils.hasR()) context.cacheDir else getExternalStorageDirectory(),
             "/albumthumbs/"
         )
         if (!albumArtDir.exists()) {
@@ -385,7 +385,7 @@ object MusicUtil : KoinComponent {
     ) {
         val songRepository: SongRepository = get()
         val projection = arrayOf(
-            BaseColumns._ID, MediaStore.MediaColumns.DATA
+            BaseColumns._ID, Constants.DATA
         )
         // Split the query into multiple batches, and merge the resulting cursors
         var batchStart: Int
