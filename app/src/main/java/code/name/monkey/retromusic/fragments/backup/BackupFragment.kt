@@ -147,9 +147,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                             file.renameTo(renamedFile)
                             backupViewModel.loadBackups()
                         } else {
-                            showToast(
-                                "File already exists"
-                            )
+                            showToast("File already exists")
                         }
                     }
                     positiveButton(android.R.string.ok)

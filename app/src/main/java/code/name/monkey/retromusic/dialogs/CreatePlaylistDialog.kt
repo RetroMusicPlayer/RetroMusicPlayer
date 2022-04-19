@@ -69,6 +69,7 @@ class CreatePlaylistDialog : DialogFragment() {
                     playlistContainer.error = "Playlist name can't be empty"
                 }
             }
+            .setNegativeButton(R.string.action_cancel, null)
             .create()
             .colorButtons()
     }

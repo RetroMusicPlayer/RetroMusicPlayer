@@ -41,12 +41,12 @@ import code.name.monkey.retromusic.R.drawable
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.hideSoftKeyboard
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.repository.Repository
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.SAFUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -93,7 +93,9 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
                         2 -> deleteImage()
                     }
                 }
+                .setNegativeButton(R.string.action_cancel, null)
                 .show()
+                .colorButtons()
 
     internal val albumArtist: String?
         get() {

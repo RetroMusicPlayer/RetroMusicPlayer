@@ -28,6 +28,13 @@ fun DialogFragment.materialDialog(title: Int): MaterialAlertDialogBuilder {
     ).setTitle(title)
 }
 
+fun Fragment.materialDialog(title: Int): MaterialAlertDialogBuilder {
+    return MaterialAlertDialogBuilder(
+        requireContext(),
+        R.style.MaterialAlertDialogTheme
+    ).setTitle(title)
+}
+
 fun AlertDialog.colorButtons(): AlertDialog {
     setOnShowListener {
         getButton(AlertDialog.BUTTON_POSITIVE).accentTextColor()
