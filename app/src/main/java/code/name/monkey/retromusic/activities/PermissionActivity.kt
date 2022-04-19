@@ -22,6 +22,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
@@ -79,24 +80,24 @@ class PermissionActivity : AbsMusicServiceActivity() {
         binding.appNameText.text = appName
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
+        super.onResume()
         if (hasStoragePermission()) {
             binding.storagePermission.checkImage.isVisible = true
             binding.storagePermission.checkImage.imageTintList =
                 ColorStateList.valueOf(accentColor())
         }
-        if (hasAudioPermission()) {
-            binding.audioPermission.checkImage.isVisible = true
-            binding.audioPermission.checkImage.imageTintList =
-                ColorStateList.valueOf(accentColor())
+        if (VersionUtils.hasMarshmallow()) {
+            if (hasAudioPermission()) {
+                binding.audioPermission.checkImage.isVisible = true
+                binding.audioPermission.checkImage.imageTintList =
+                    ColorStateList.valueOf(accentColor())
+            }
         }
-        super.onResume()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun hasStoragePermission(): Boolean {
-        return checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        return ActivityCompat.checkSelfPermission(this , Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

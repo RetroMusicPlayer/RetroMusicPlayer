@@ -90,17 +90,13 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
     }
 
     protected open fun requestPermissions() {
-        if (VersionUtils.hasMarshmallow()) {
-            requestPermissions(permissions, PERMISSION_REQUEST)
-        }
+        ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST)
     }
 
     protected fun hasPermissions(): Boolean {
-        if (VersionUtils.hasMarshmallow()) {
-            for (permission in permissions) {
-                if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false
-                }
+        for (permission in permissions) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false
             }
         }
         return true
