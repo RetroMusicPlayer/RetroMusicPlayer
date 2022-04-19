@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,8 +19,7 @@
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/support_development"
-            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
-            tools:ignore="UnusedAttribute" />
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
