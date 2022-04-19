@@ -13,6 +13,7 @@
  */
 package code.name.monkey.retromusic.service
 
+import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothDevice
@@ -88,10 +89,10 @@ import code.name.monkey.retromusic.util.PreferenceUtil.isPauseOnZeroVolume
 import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 import code.name.monkey.retromusic.util.PreferenceUtil.registerOnSharedPreferenceChangedListener
 import code.name.monkey.retromusic.util.PreferenceUtil.unregisterOnSharedPreferenceChangedListener
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
@@ -251,7 +252,6 @@ class MusicService : MediaBrowserServiceCompat(),
                     play()
                 TelephonyManager.CALL_STATE_RINGING, TelephonyManager.CALL_STATE_OFFHOOK ->                             // A call is dialing, active or on hold
                     pause()
-                else -> {}
             }
             super.onCallStateChanged(state, incomingNumber)
         }
@@ -1122,6 +1122,7 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    @SuppressLint("CheckResult")
     fun updateMediaSessionMetaData() {
         Log.i(TAG, "onResourceReady: ")
         val song = currentSong
@@ -1141,7 +1142,6 @@ class MusicService : MediaBrowserServiceCompat(),
             .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, playingQueue.size.toLong())
 
         if (isAlbumArtOnLockScreen) {
-            val screenSize = RetroUtil.getScreenSize(this@MusicService)
             val request = GlideApp.with(this@MusicService)
                 .asBitmap()
                 .songCoverOptions(song)
@@ -1150,7 +1150,8 @@ class MusicService : MediaBrowserServiceCompat(),
                 request.transform(BlurTransformation.Builder(this@MusicService).build())
             }
             runOnUiThread {
-                request.into(object : SimpleTarget<Bitmap?>(screenSize.x, screenSize.y) {
+                request.into(object :
+                    CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
                     override fun onLoadFailed(errorDrawable: Drawable?) {
                         super.onLoadFailed(errorDrawable)
                         mediaSession?.setMetadata(metaData.build())
@@ -1164,6 +1165,10 @@ class MusicService : MediaBrowserServiceCompat(),
                             MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
                             copy(resource)
                         )
+                        mediaSession?.setMetadata(metaData.build())
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
                         mediaSession?.setMetadata(metaData.build())
                     }
                 })
@@ -1280,13 +1285,7 @@ class MusicService : MediaBrowserServiceCompat(),
     private fun openCurrent(): Boolean {
         return try {
             if (playback != null) {
-                return playback!!.setDataSource(
-                    getTrackUri(
-                        Objects.requireNonNull(
-                            currentSong
-                        )
-                    )
-                )
+                return playback!!.setDataSource(getTrackUri(currentSong))
             } else false
         } catch (e: Exception) {
             e.printStackTrace()
