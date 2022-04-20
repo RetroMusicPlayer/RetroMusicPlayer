@@ -75,7 +75,6 @@ import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.MusicUtil.getMediaStoreAlbumCoverUri
 import code.name.monkey.retromusic.util.MusicUtil.getSongFileUri
-import code.name.monkey.retromusic.util.MusicUtil.isFavorite
 import code.name.monkey.retromusic.util.MusicUtil.toggleFavorite
 import code.name.monkey.retromusic.util.PackageValidator
 import code.name.monkey.retromusic.util.PreferenceUtil.crossFadeDuration
@@ -1410,17 +1409,6 @@ class MusicService : MediaBrowserServiceCompat(),
         stateBuilder.addCustomAction(
             PlaybackStateCompat.CustomAction.Builder(
                 TOGGLE_SHUFFLE, getString(R.string.action_toggle_shuffle), shuffleIcon
-            )
-                .build()
-        )
-        val favoriteIcon = if (isFavorite(
-                applicationContext,
-                currentSong
-            )
-        ) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-        stateBuilder.addCustomAction(
-            PlaybackStateCompat.CustomAction.Builder(
-                TOGGLE_FAVORITE, getString(R.string.action_toggle_favorite), favoriteIcon
             )
                 .build()
         )

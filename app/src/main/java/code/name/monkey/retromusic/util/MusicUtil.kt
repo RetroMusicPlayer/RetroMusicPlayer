@@ -22,10 +22,8 @@ import code.name.monkey.retromusic.extensions.getLong
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.removeFromQueue
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
-import code.name.monkey.retromusic.repository.RealPlaylistRepository
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
@@ -265,7 +263,7 @@ object MusicUtil : KoinComponent {
     }
 
     fun getSongFilePath(context: Context, uri: Uri): String {
-        val projection = arrayOf(MediaStore.MediaColumns.DATA)
+        val projection = arrayOf(Constants.DATA)
         context.contentResolver.query(uri, projection, null, null, null)?.use {
             if (it.moveToFirst()) {
                 return it.getString(0)
@@ -335,46 +333,19 @@ object MusicUtil : KoinComponent {
         return false
     }
 
-    fun isFavorite(context: Context, song: Song): Boolean {
-        return PlaylistsUtil
-            .doPlaylistContains(context, getFavoritesPlaylist(context).id, song.id)
-    }
-
-    fun isFavoritePlaylist(
-        context: Context,
-        playlist: Playlist
-    ): Boolean {
-        return playlist.name == context.getString(R.string.favorites)
-    }
-
     val repository = get<Repository>()
     fun toggleFavorite(context: Context, song: Song) {
         GlobalScope.launch {
             val playlist: PlaylistEntity = repository.favoritePlaylist()
-            if (playlist != null) {
-                val songEntity = song.toSongEntity(playlist.playListId)
-                val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
-                if (isFavorite) {
-                    repository.removeSongFromPlaylist(songEntity)
-                } else {
-                    repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-                }
+            val songEntity = song.toSongEntity(playlist.playListId)
+            val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
+            if (isFavorite) {
+                repository.removeSongFromPlaylist(songEntity)
+            } else {
+                repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
             context.sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
-    }
-
-    private fun getFavoritesPlaylist(context: Context): Playlist {
-        return RealPlaylistRepository(context.contentResolver).playlist(context.getString(R.string.favorites))
-    }
-
-    private fun getOrCreateFavoritesPlaylist(context: Context): Playlist {
-        return RealPlaylistRepository(context.contentResolver).playlist(
-            PlaylistsUtil.createPlaylist(
-                context,
-                context.getString(R.string.favorites)
-            )
-        )
     }
 
     fun deleteTracks(
@@ -455,12 +426,11 @@ object MusicUtil : KoinComponent {
                 activity.showToast(activity.getString(R.string.deleted_x_songs, songCount))
                 callback?.run()
             }
-
         }
     }
 
     suspend fun deleteTracks(context: Context, songs: List<Song>) {
-        val projection = arrayOf(BaseColumns._ID, MediaStore.MediaColumns.DATA)
+        val projection = arrayOf(BaseColumns._ID, Constants.DATA)
         val selection = StringBuilder()
         selection.append(BaseColumns._ID + " IN (")
         for (i in songs.indices) {

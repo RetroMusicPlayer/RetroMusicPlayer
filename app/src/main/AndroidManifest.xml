@@ -190,7 +190,6 @@
             </intent-filter>
         </activity>
 
-
         <provider
             android:name=".misc.GenericFileProvider"
             android:authorities="${applicationId}.provider"
