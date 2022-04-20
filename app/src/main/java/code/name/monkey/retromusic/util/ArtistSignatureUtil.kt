@@ -11,44 +11,40 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
+package code.name.monkey.retromusic.util
 
-package code.name.monkey.retromusic.util;
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.core.content.edit
+import com.bumptech.glide.signature.ObjectKey
 
-import android.content.Context;
-import android.content.SharedPreferences;
+/** @author Karim Abou Zeid (kabouzeid)
+ */
+class ArtistSignatureUtil private constructor(context: Context) {
+    private val mPreferences: SharedPreferences =
+        context.getSharedPreferences(ARTIST_SIGNATURE_PREFS, Context.MODE_PRIVATE)
 
-import androidx.annotation.NonNull;
-
-import com.bumptech.glide.signature.ObjectKey;
-
-/** @author Karim Abou Zeid (kabouzeid) */
-public class ArtistSignatureUtil {
-  private static final String ARTIST_SIGNATURE_PREFS = "artist_signatures";
-
-  private static ArtistSignatureUtil sInstance;
-
-  private final SharedPreferences mPreferences;
-
-  private ArtistSignatureUtil(@NonNull final Context context) {
-    mPreferences = context.getSharedPreferences(ARTIST_SIGNATURE_PREFS, Context.MODE_PRIVATE);
-  }
-
-  public static ArtistSignatureUtil getInstance(@NonNull final Context context) {
-    if (sInstance == null) {
-      sInstance = new ArtistSignatureUtil(context.getApplicationContext());
+    fun updateArtistSignature(artistName: String?) {
+        mPreferences.edit { putLong(artistName, System.currentTimeMillis()) }
     }
-    return sInstance;
-  }
 
-  public void updateArtistSignature(String artistName) {
-    mPreferences.edit().putLong(artistName, System.currentTimeMillis()).apply();
-  }
+    private fun getArtistSignatureRaw(artistName: String?): Long {
+        return mPreferences.getLong(artistName, 0)
+    }
 
-  public long getArtistSignatureRaw(String artistName) {
-    return mPreferences.getLong(artistName, 0);
-  }
+    fun getArtistSignature(artistName: String?): ObjectKey {
+        return ObjectKey(getArtistSignatureRaw(artistName).toString())
+    }
 
-  public ObjectKey getArtistSignature(String artistName) {
-    return new ObjectKey(String.valueOf(getArtistSignatureRaw(artistName)));
-  }
+    companion object {
+        private const val ARTIST_SIGNATURE_PREFS = "artist_signatures"
+        private var INSTANCE: ArtistSignatureUtil? = null
+        fun getInstance(context: Context): ArtistSignatureUtil {
+            if (INSTANCE == null) {
+                INSTANCE = ArtistSignatureUtil(context.applicationContext)
+            }
+            return INSTANCE!!
+        }
+    }
+
 }

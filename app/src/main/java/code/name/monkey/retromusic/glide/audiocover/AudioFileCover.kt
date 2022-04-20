@@ -11,29 +11,18 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
+package code.name.monkey.retromusic.glide.audiocover
 
-package code.name.monkey.retromusic.glide.audiocover;
-
-import androidx.annotation.Nullable;
-
-/** @author Karim Abou Zeid (kabouzeid) */
-public class AudioFileCover {
-  public final String filePath;
-
-  public AudioFileCover(String filePath) {
-    this.filePath = filePath;
-  }
-
-  @Override
-  public int hashCode() {
-    return filePath.hashCode();
-  }
-
-  @Override
-  public boolean equals(@Nullable Object object) {
-    if (object instanceof AudioFileCover){
-      return ((AudioFileCover) object).filePath.equals(filePath);
+/** @author Karim Abou Zeid (kabouzeid)
+ */
+class AudioFileCover(val filePath: String) {
+    override fun hashCode(): Int {
+        return filePath.hashCode()
     }
-    return false;
-  }
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is AudioFileCover) {
+            other.filePath == filePath
+        } else false
+    }
 }

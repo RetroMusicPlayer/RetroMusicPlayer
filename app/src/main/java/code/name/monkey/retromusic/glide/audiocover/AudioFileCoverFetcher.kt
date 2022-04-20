@@ -11,76 +11,57 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
+package code.name.monkey.retromusic.glide.audiocover
 
-package code.name.monkey.retromusic.glide.audiocover;
+import android.media.MediaMetadataRetriever
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.data.DataFetcher
+import java.io.ByteArrayInputStream
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.InputStream
 
-import android.media.MediaMetadataRetriever;
-
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.data.DataFetcher;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-
-public class AudioFileCoverFetcher implements DataFetcher<InputStream> {
-  private final AudioFileCover model;
-
-  private InputStream stream;
-
-  public AudioFileCoverFetcher(AudioFileCover model) {
-    this.model = model;
-  }
-
-  @Override
-  public void loadData(@NotNull Priority priority, @NotNull DataCallback<? super InputStream> callback) {
-    final MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-    try {
-      retriever.setDataSource(model.filePath);
-      byte[] picture = retriever.getEmbeddedPicture();
-      if (picture != null) {
-        stream = new ByteArrayInputStream(picture);
-      } else {
-        stream = AudioFileCoverUtils.fallback(model.filePath);
-      }
-      callback.onDataReady(stream);
-    } catch (FileNotFoundException e) {
-      callback.onLoadFailed(e);
-    } finally {
-      retriever.release();
+class AudioFileCoverFetcher(private val model: AudioFileCover) : DataFetcher<InputStream> {
+    private var stream: InputStream? = null
+    override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in InputStream>) {
+        val retriever = MediaMetadataRetriever()
+        try {
+            retriever.setDataSource(model.filePath)
+            val picture = retriever.embeddedPicture
+            stream = if (picture != null) {
+                ByteArrayInputStream(picture)
+            } else {
+                AudioFileCoverUtils.fallback(model.filePath)
+            }
+            callback.onDataReady(stream)
+        } catch (e: FileNotFoundException) {
+            callback.onLoadFailed(e)
+        } finally {
+            retriever.release()
+        }
     }
-  }
 
-  @Override
-  public void cleanup() {
-    // already cleaned up in loadData and ByteArrayInputStream will be GC'd
-    if (stream != null) {
-      try {
-        stream.close();
-      } catch (IOException ignore) {
-        // can't do much about it
-      }
+    override fun cleanup() {
+        // already cleaned up in loadData and ByteArrayInputStream will be GC'd
+        if (stream != null) {
+            try {
+                stream?.close()
+            } catch (ignore: IOException) {
+                // can't do much about it
+            }
+        }
     }
-  }
 
-  @Override
-  public void cancel() {
-    // cannot cancel
-  }
+    override fun cancel() {
+        // cannot cancel
+    }
 
-  @NotNull
-  @Override
-  public Class<InputStream> getDataClass() {
-    return InputStream.class;
-  }
+    override fun getDataClass(): Class<InputStream> {
+        return InputStream::class.java
+    }
 
-  @NotNull
-  @Override
-  public DataSource getDataSource() {
-    return DataSource.LOCAL;
-  }
+    override fun getDataSource(): DataSource {
+        return DataSource.LOCAL
+    }
 }

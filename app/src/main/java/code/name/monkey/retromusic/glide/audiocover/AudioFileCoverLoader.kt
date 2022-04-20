@@ -11,43 +11,35 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
+package code.name.monkey.retromusic.glide.audiocover
 
-package code.name.monkey.retromusic.glide.audiocover;
+import com.bumptech.glide.load.Options
+import com.bumptech.glide.load.model.ModelLoader
+import com.bumptech.glide.load.model.ModelLoader.LoadData
+import com.bumptech.glide.load.model.ModelLoaderFactory
+import com.bumptech.glide.load.model.MultiModelLoaderFactory
+import com.bumptech.glide.signature.ObjectKey
+import java.io.InputStream
 
-import androidx.annotation.NonNull;
-
-import com.bumptech.glide.load.Options;
-import com.bumptech.glide.load.model.ModelLoader;
-import com.bumptech.glide.load.model.ModelLoaderFactory;
-import com.bumptech.glide.load.model.MultiModelLoaderFactory;
-import com.bumptech.glide.signature.ObjectKey;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.io.InputStream;
-
-public class AudioFileCoverLoader implements ModelLoader<AudioFileCover, InputStream> {
-
-  @Override
-  public LoadData<InputStream> buildLoadData(@NonNull @NotNull AudioFileCover audioFileCover, int width, int height, @NonNull @NotNull Options options) {
-    return new LoadData<>(new ObjectKey(audioFileCover.filePath), new AudioFileCoverFetcher(audioFileCover));
-  }
-
-  @Override
-  public boolean handles(@NonNull @NotNull AudioFileCover audioFileCover) {
-    return audioFileCover.filePath != null;
-  }
-
-  public static class Factory implements ModelLoaderFactory<AudioFileCover, InputStream> {
-
-    @NotNull
-    @Override
-    public ModelLoader<AudioFileCover, InputStream> build(@NonNull @NotNull MultiModelLoaderFactory multiFactory) {
-      return new AudioFileCoverLoader();
+class AudioFileCoverLoader : ModelLoader<AudioFileCover, InputStream> {
+    override fun buildLoadData(
+        audioFileCover: AudioFileCover,
+        width: Int,
+        height: Int,
+        options: Options
+    ): LoadData<InputStream> {
+        return LoadData(ObjectKey(audioFileCover.filePath), AudioFileCoverFetcher(audioFileCover))
     }
 
-    @Override
-    public void teardown() {
+    override fun handles(audioFileCover: AudioFileCover): Boolean {
+        return true
     }
-  }
+
+    class Factory : ModelLoaderFactory<AudioFileCover, InputStream> {
+        override fun build(multiFactory: MultiModelLoaderFactory): ModelLoader<AudioFileCover, InputStream> {
+            return AudioFileCoverLoader()
+        }
+
+        override fun teardown() {}
+    }
 }
