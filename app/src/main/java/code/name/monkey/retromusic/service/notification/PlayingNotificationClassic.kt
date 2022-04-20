@@ -25,6 +25,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.media.app.NotificationCompat.DecoratedMediaCustomViewStyle
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -34,6 +35,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.isSystemDarkModeEnabled
+import code.name.monkey.retromusic.extensions.toBitmap
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -45,7 +47,6 @@ import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import code.name.monkey.retromusic.util.RetroUtil.createBitmap
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -183,27 +184,23 @@ class PlayingNotificationClassic(
                     val secondary = MaterialValueHelper.getSecondaryTextColor(context, dark)
                     primaryColor = primary
 
-                    val close = createBitmap(
-                        RetroUtil.getTintedVectorDrawable(
-                            context,
-                            R.drawable.ic_close,
-                            primary
-                        ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
-                    )
-                    val prev = createBitmap(
+                    val close = RetroUtil.getTintedVectorDrawable(
+                        context,
+                        R.drawable.ic_close,
+                        primary
+                    ).toBitmap()
+                    val prev =
                         RetroUtil.getTintedVectorDrawable(
                             context,
                             R.drawable.ic_skip_previous_round_white_32dp,
                             primary
-                        ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
-                    )
-                    val next = createBitmap(
+                        ).toBitmap()
+                    val next =
                         RetroUtil.getTintedVectorDrawable(
                             context,
                             R.drawable.ic_skip_next_round_white_32dp,
                             primary
-                        ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
-                    )
+                        ).toBitmap()
                     val playPause = getPlayPauseBitmap(true)
 
                     contentView.setTextColor(R.id.title, primary)
@@ -225,38 +222,32 @@ class PlayingNotificationClassic(
 
                     contentView.setImageViewBitmap(
                         R.id.smallIcon,
-                        createBitmap(
-                            RetroUtil.getTintedVectorDrawable(
-                                context,
-                                R.drawable.ic_notification,
-                                secondary
-                            ), 0.6f
-                        )
+                        RetroUtil.getTintedVectorDrawable(
+                            context,
+                            R.drawable.ic_notification,
+                            secondary
+                        ).toBitmap(0.6f)
                     )
                     bigContentView.setImageViewBitmap(
                         R.id.smallIcon,
-                        createBitmap(
-                            RetroUtil.getTintedVectorDrawable(
-                                context,
-                                R.drawable.ic_notification,
-                                secondary
-                            ), 0.6f
-                        )
+                        RetroUtil.getTintedVectorDrawable(
+                            context,
+                            R.drawable.ic_notification,
+                            secondary
+                        ).toBitmap(0.6f)
                     )
                 }
             })
     }
 
     private fun getPlayPauseBitmap(isPlaying: Boolean): Bitmap {
-        return createBitmap(
-            RetroUtil.getTintedVectorDrawable(
-                context,
-                if (isPlaying)
-                    R.drawable.ic_pause_white_48dp
-                else
-                    R.drawable.ic_play_arrow_white_48dp, primaryColor
-            ), NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
-        )
+        return RetroUtil.getTintedVectorDrawable(
+            context,
+            if (isPlaying)
+                R.drawable.ic_pause_white_48dp
+            else
+                R.drawable.ic_play_arrow_white_48dp, primaryColor
+        ).toBitmap()
     }
 
     override fun setPlaying(isPlaying: Boolean) {
