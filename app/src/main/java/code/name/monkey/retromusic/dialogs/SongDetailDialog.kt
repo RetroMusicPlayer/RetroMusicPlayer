@@ -30,7 +30,6 @@ import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import org.jaudiotagger.audio.AudioFileIO
-import org.jaudiotagger.audio.exceptions.CannotReadException
 import java.io.File
 
 class SongDetailDialog : DialogFragment() {

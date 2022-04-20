@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.util
 
 import android.os.Environment
-import java.io.File
 
 object FilePathUtil {
     fun blacklistFilePaths(): List<String> {

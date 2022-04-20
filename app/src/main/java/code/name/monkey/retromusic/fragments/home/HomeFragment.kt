@@ -20,7 +20,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
 import android.view.View
-import androidx.activity.addCallback
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
@@ -48,7 +47,6 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.userName
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.shape.MaterialShapeDrawable

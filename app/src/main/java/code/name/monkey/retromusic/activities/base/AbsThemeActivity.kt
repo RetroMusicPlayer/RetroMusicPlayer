@@ -22,7 +22,6 @@ import android.os.Looper
 import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
-import androidx.core.graphics.ColorUtils
 import androidx.core.os.ConfigurationCompat
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.VersionUtils

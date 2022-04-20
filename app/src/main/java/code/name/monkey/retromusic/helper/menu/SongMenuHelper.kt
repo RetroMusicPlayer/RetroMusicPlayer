@@ -21,7 +21,6 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R

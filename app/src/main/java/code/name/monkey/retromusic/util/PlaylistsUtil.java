@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.util;
 
 import static android.provider.MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
-
 import static code.name.monkey.retromusic.util.FileUtilsKt.getExternalStorageDirectory;
 
 import android.content.ContentResolver;
@@ -23,7 +22,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.widget.Toast;

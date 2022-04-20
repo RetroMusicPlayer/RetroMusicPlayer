@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.glide
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.App.Companion.getContext
 import code.name.monkey.retromusic.Constants.USER_BANNER

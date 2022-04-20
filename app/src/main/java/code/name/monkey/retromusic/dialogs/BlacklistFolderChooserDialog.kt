@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Dialog
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Environment
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.VersionUtils

@@ -19,12 +19,10 @@ import static code.name.monkey.retromusic.util.FileUtilsKt.getExternalStorageDir
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.os.EnvironmentCompat;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -117,12 +115,6 @@ public final class FileUtil {
     if (files != null) {
       String[] paths = new String[files.size()];
       for (int i = 0; i < files.size(); i++) {
-        /*try {
-            paths[i] = files.get(i).getCanonicalPath(); // canonical path is important here because we want to compare the path with the media store entry later
-        } catch (IOException e) {
-            e.printStackTrace();
-            paths[i] = files.get(i).getPath();
-        }*/
         paths[i] = safeGetCanonicalPath(files.get(i));
       }
       return paths;

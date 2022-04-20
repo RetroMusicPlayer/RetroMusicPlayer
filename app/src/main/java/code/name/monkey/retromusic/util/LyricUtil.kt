@@ -13,7 +13,6 @@
  */
 package code.name.monkey.retromusic.util
 
-import android.os.Environment
 import android.util.Log
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics

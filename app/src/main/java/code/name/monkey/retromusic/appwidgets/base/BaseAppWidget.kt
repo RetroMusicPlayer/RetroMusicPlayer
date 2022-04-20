@@ -28,7 +28,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
