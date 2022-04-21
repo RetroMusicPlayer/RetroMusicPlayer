@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import java.security.MessageDigest
 
 
+@Suppress("Deprecation")
 class BlurTransformation : BitmapTransformation {
 
     private var context: Context? = null

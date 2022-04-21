@@ -35,7 +35,6 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -62,9 +61,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
         }
-        if (BuildConfig.VERSION_CODE > PreferenceUtil.lastVersion && !BuildConfig.DEBUG) {
-            NavigationUtil.gotoWhatNews(this)
-        }
+        WhatsNewFragment.showChangeLog(this )
     }
 
     private fun setupNavigationController() {

@@ -4,34 +4,46 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.ATHUtil.isWindowBackgroundDark
 import code.name.monkey.appthemehelper.util.ColorUtil.isColorLight
 import code.name.monkey.appthemehelper.util.ColorUtil.lightenColor
 import code.name.monkey.appthemehelper.util.MaterialValueHelper.getPrimaryTextColor
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.Constants
-import code.name.monkey.retromusic.activities.base.AbsThemeActivity
-import code.name.monkey.retromusic.databinding.ActivityWhatsNewBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.databinding.FragmentWhatsNewBinding
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.openUrl
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.nio.charset.StandardCharsets
 import java.util.*
 
-class WhatsNewActivity : AbsThemeActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityWhatsNewBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setTaskDescriptionColorAuto()
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
-        ToolbarContentTintHelper.colorBackButton(binding.toolbar)
+class WhatsNewFragment : BottomSheetDialogFragment() {
+    private var _binding: FragmentWhatsNewBinding? = null
+    val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentWhatsNewBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         try {
             val buf = StringBuilder()
-            val json = assets.open("retro-changelog.html")
-            BufferedReader(InputStreamReader(json, StandardCharsets.UTF_8)).use { br ->
+            val stream= requireContext().assets.open("retro-changelog.html")
+            stream.reader(StandardCharsets.UTF_8).buffered().use { br ->
                 var str: String?
                 while (br.readLine().also { str = it } != null) {
                     buf.append(str)
@@ -39,7 +51,7 @@ class WhatsNewActivity : AbsThemeActivity() {
             }
 
             // Inject color values for WebView body background and links
-            val isDark = isWindowBackgroundDark(this)
+            val isDark = isWindowBackgroundDark(requireContext())
             val accentColor = accentColor()
             val backgroundColor = colorToCSS(
                 surfaceColor(Color.parseColor(if (isDark) "#424242" else "#ffffff"))
@@ -51,7 +63,7 @@ class WhatsNewActivity : AbsThemeActivity() {
                 colorToCSS(Color.parseColor(if (isDark) "#353535" else "#ffffff"))
             val accentTextColor = colorToCSS(
                 getPrimaryTextColor(
-                    this, isColorLight(accentColor)
+                    requireContext(), isColorLight(accentColor)
                 )
             )
             val changeLog = buf.toString()
@@ -72,7 +84,7 @@ class WhatsNewActivity : AbsThemeActivity() {
                 "<h1>Unable to load</h1><p>" + e.localizedMessage + "</p>", "text/html", "UTF-8"
             )
         }
-        setChangelogRead(this)
+        setChangelogRead(requireContext())
         binding.tgFab.setOnClickListener {
             openUrl(Constants.TELEGRAM_CHANGE_LOG)
         }
@@ -86,10 +98,16 @@ class WhatsNewActivity : AbsThemeActivity() {
                 binding.tgFab.extend()
             }
         }
-        binding.webView.drawAboveSystemBars()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {
+
+        const val TAG = "WhatsNewFragment"
         private fun colorToCSS(color: Int): String {
             return String.format(
                 Locale.getDefault(),
@@ -104,10 +122,19 @@ class WhatsNewActivity : AbsThemeActivity() {
         private fun setChangelogRead(context: Context) {
             try {
                 val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-                val currentVersion = pInfo.versionCode
+                val currentVersion = PackageInfoCompat.getLongVersionCode(pInfo)
                 lastVersion = currentVersion
             } catch (e: PackageManager.NameNotFoundException) {
                 e.printStackTrace()
+            }
+        }
+
+        fun showChangeLog(activity: FragmentActivity) {
+            val pInfo = activity.packageManager.getPackageInfo(activity.packageName, 0)
+            val currentVersion = PackageInfoCompat.getLongVersionCode(pInfo)
+            if (currentVersion > lastVersion && BuildConfig.DEBUG) {
+                val changelogBottomSheet = WhatsNewFragment()
+                changelogBottomSheet.show(activity.supportFragmentManager, TAG)
             }
         }
     }

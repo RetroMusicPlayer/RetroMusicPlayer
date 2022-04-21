@@ -389,9 +389,15 @@ object PreferenceUtil {
     val filterLength get() = sharedPreferences.getInt(FILTER_SONG, 20)
 
     var lastVersion
-        get() = sharedPreferences.getInt(LAST_CHANGELOG_VERSION, 0)
+    // This was stored as an integer before now it's a long, so avoid a ClassCastException
+        get() = try {
+            sharedPreferences.getLong(LAST_CHANGELOG_VERSION, 0)
+        } catch (e: ClassCastException) {
+            sharedPreferences.edit { remove(LAST_CHANGELOG_VERSION) }
+            0
+        }
         set(value) = sharedPreferences.edit {
-            putInt(LAST_CHANGELOG_VERSION, value)
+            putLong(LAST_CHANGELOG_VERSION, value)
         }
 
     var lastSleepTimerValue
