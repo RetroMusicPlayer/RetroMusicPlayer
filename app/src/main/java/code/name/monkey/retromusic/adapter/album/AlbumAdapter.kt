@@ -135,8 +135,8 @@ open class AlbumAdapter(
         return dataSet[position]
     }
 
-    override fun getName(album: Album): String {
-        return album.title
+    override fun getName(model: Album): String {
+        return model.title
     }
 
     override fun onMultipleItemAction(

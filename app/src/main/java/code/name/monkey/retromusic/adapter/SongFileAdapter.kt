@@ -132,8 +132,8 @@ class SongFileAdapter(
         return dataSet[position]
     }
 
-    override fun getName(`object`: File): String {
-        return getFileTitle(`object`)
+    override fun getName(model: File): String {
+        return getFileTitle(model)
     }
 
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<File>) {

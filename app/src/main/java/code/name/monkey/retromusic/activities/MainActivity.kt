@@ -96,7 +96,6 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
             }
         }
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            val start = System.currentTimeMillis()
             if (destination.id == navGraph.startDestinationId) {
                 currentFragment(R.id.fragment_container)?.enterTransition = null
             }
@@ -117,7 +116,6 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                     animate = true
                 ) // Hide Bottom Navigation Bar
             }
-            showToast("Time : ${System.currentTimeMillis() - start}")
         }
     }
 

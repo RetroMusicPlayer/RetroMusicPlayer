@@ -11,149 +11,144 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
+package code.name.monkey.retromusic.util
 
-package code.name.monkey.retromusic.util;
+import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
+import code.name.monkey.retromusic.App.Companion.getContext
+import android.view.WindowManager
+import androidx.annotation.DrawableRes
+import androidx.annotation.ColorInt
+import android.graphics.drawable.Drawable
+import code.name.monkey.appthemehelper.util.TintHelper
+import android.content.res.Resources.Theme
+import android.graphics.Point
+import android.view.Display
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.DisplayCompat
+import java.lang.Exception
+import java.net.InetAddress
+import java.net.NetworkInterface
+import java.text.DecimalFormat
+import java.util.*
 
-import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.view.Display;
-import android.view.WindowManager;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
-
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.text.DecimalFormat;
-import java.util.Collections;
-import java.util.List;
-
-import code.name.monkey.appthemehelper.util.TintHelper;
-import code.name.monkey.retromusic.App;
-
-public class RetroUtil {
-
-  public static String formatValue(float value) {
-    String[] arr = {"", "K", "M", "B", "T", "P", "E"};
-    int index = 0;
-    while ((value / 1000) >= 1) {
-      value = value / 1000;
-      index++;
+object RetroUtil {
+    fun formatValue(value: Float): String {
+        var value = value
+        val arr = arrayOf("", "K", "M", "B", "T", "P", "E")
+        var index = 0
+        while (value / 1000 >= 1) {
+            value /= 1000
+            index++
+        }
+        val decimalFormat = DecimalFormat("#.##")
+        return String.format("%s %s", decimalFormat.format(value.toDouble()), arr[index])
     }
-    DecimalFormat decimalFormat = new DecimalFormat("#.##");
-    return String.format("%s %s", decimalFormat.format(value), arr[index]);
-  }
 
-  public static float frequencyCount(int frequency) {
-    return (float) (frequency / 1000.0);
-  }
-
-  public static Point getScreenSize(@NonNull Context c) {
-    Display display = null;
-    if (c.getSystemService(Context.WINDOW_SERVICE) != null) {
-      display = ((WindowManager) c.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+    fun frequencyCount(frequency: Int): Float {
+        return (frequency / 1000.0).toFloat()
     }
-    Point size = new Point();
-    if (display != null) {
-      display.getSize(size);
+
+    fun getScreenSize(c: Context): Point {
+        var display: Display? = null
+        if (c.getSystemService(Context.WINDOW_SERVICE) != null) {
+            display = (c.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+        }
+        val size = Point()
+        display?.getSize(size)
+        return size
     }
-    return size;
-  }
 
-  public static int getStatusBarHeight() {
-    int result = 0;
-    int resourceId =
-            App.Companion.getContext()
-                    .getResources()
-                    .getIdentifier("status_bar_height", "dimen", "android");
-    if (resourceId > 0) {
-      result = App.Companion.getContext().getResources().getDimensionPixelSize(resourceId);
-    }
-    return result;
-  }
-
-  public static int getNavigationBarHeight() {
-    int result = 0;
-    int resourceId =
-            App.Companion.getContext()
-                    .getResources()
-                    .getIdentifier("navigation_bar_height", "dimen", "android");
-    if (resourceId > 0) {
-      result = App.Companion.getContext().getResources().getDimensionPixelSize(resourceId);
-    }
-    return result;
-  }
-
-  @NonNull
-  public static Drawable getTintedVectorDrawable(
-          @NonNull Context context, @DrawableRes int id, @ColorInt int color) {
-    return TintHelper.createTintedDrawable(
-            getVectorDrawable(context.getResources(), id, context.getTheme()), color);
-  }
-
-  @NonNull
-  public static Drawable getTintedVectorDrawable(
-          @NonNull Resources res,
-          @DrawableRes int resId,
-          @Nullable Resources.Theme theme,
-          @ColorInt int color) {
-    return TintHelper.createTintedDrawable(getVectorDrawable(res, resId, theme), color);
-  }
-
-  @Nullable
-  public static Drawable getVectorDrawable(
-          @NonNull Resources res, @DrawableRes int resId, @Nullable Resources.Theme theme) {
-    return ResourcesCompat.getDrawable(res, resId, theme);
-  }
-
-  public static boolean isLandscape() {
-    return App.Companion.getContext().getResources().getConfiguration().orientation
-            == Configuration.ORIENTATION_LANDSCAPE;
-  }
-
-  public static boolean isTablet() {
-    return App.Companion.getContext().getResources().getConfiguration().smallestScreenWidthDp
-            >= 600;
-  }
-
-  public static String getIpAddress(boolean useIPv4) {
-    try {
-      List<NetworkInterface> interfaces =
-              Collections.list(NetworkInterface.getNetworkInterfaces());
-      for (NetworkInterface intf : interfaces) {
-        List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
-        for (InetAddress addr : addrs) {
-          if (!addr.isLoopbackAddress()) {
-            String sAddr = addr.getHostAddress();
-            //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
-            boolean isIPv4 = sAddr.indexOf(':') < 0;
-            if (useIPv4) {
-              if (isIPv4) return sAddr;
-            } else {
-              if (!isIPv4) {
-                int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
-                if (delim < 0) {
-                  return sAddr.toUpperCase();
-                } else {
-                  return sAddr.substring(
-                          0,
-                          delim
-                  ).toUpperCase();
-                }
-              }
+    val statusBarHeight: Int
+        get() {
+            var result = 0
+            val resourceId = getContext()
+                .resources
+                .getIdentifier("status_bar_height", "dimen", "android")
+            if (resourceId > 0) {
+                result = getContext().resources.getDimensionPixelSize(resourceId)
             }
-          }
+            return result
         }
 
-      }
-    } catch (Exception ignored) {
+    val navigationBarHeight: Int
+        get() {
+            var result = 0
+            val resourceId = getContext()
+                .resources
+                .getIdentifier("navigation_bar_height", "dimen", "android")
+            if (resourceId > 0) {
+                result = getContext().resources.getDimensionPixelSize(resourceId)
+            }
+            return result
+        }
+
+    fun getTintedVectorDrawable(
+        context: Context, @DrawableRes id: Int, @ColorInt color: Int
+    ): Drawable {
+        return TintHelper.createTintedDrawable(
+            getVectorDrawable(context.resources, id, context.theme), color)
     }
-    return "";
-  }
+
+    fun getTintedVectorDrawable(
+        res: Resources,
+        @DrawableRes resId: Int,
+        theme: Theme?,
+        @ColorInt color: Int
+    ): Drawable {
+        return TintHelper.createTintedDrawable(getVectorDrawable(res, resId, theme), color)
+    }
+
+    private fun getVectorDrawable(
+        res: Resources, @DrawableRes resId: Int, theme: Theme?
+    ): Drawable? {
+        return ResourcesCompat.getDrawable(res, resId, theme)
+    }
+
+    val isLandscape: Boolean
+        get() = (getContext().resources.configuration.orientation
+                == Configuration.ORIENTATION_LANDSCAPE)
+    val isTablet: Boolean
+        get() = (getContext().resources.configuration.smallestScreenWidthDp
+                >= 600)
+
+    fun getIpAddress(useIPv4: Boolean): String? {
+        try {
+            val interfaces: List<NetworkInterface> =
+                Collections.list(NetworkInterface.getNetworkInterfaces())
+            for (intf in interfaces) {
+                val addrs: List<InetAddress> = Collections.list(intf.inetAddresses)
+                for (addr in addrs) {
+                    if (!addr.isLoopbackAddress) {
+                        val sAddr = addr.hostAddress
+
+                        if (sAddr != null) {
+                            val isIPv4 = sAddr.indexOf(':') < 0
+                            if (useIPv4) {
+                                if (isIPv4) return sAddr
+                            } else {
+                                if (!isIPv4) {
+                                    val delim = sAddr.indexOf('%') // drop ip6 zone suffix
+                                    return if (delim < 0) {
+                                        sAddr.uppercase()
+                                    } else {
+                                        sAddr.substring(
+                                            0,
+                                            delim
+                                        ).uppercase()
+                                    }
+                                }
+                            }
+                        } else {
+                            return null
+                        }
+
+                    }
+                }
+            }
+        } catch (ignored: Exception) {
+        }
+        return ""
+    }
 }

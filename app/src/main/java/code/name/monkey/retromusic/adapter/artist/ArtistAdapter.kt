@@ -132,8 +132,8 @@ class ArtistAdapter(
         return dataSet[position]
     }
 
-    override fun getName(artist: Artist): String {
-        return artist.name
+    override fun getName(model: Artist): String {
+        return model.name
     }
 
     override fun onMultipleItemAction(

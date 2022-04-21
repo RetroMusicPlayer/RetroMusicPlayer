@@ -67,7 +67,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
         view.setOnTouchListener(FlingPlayBackController(requireContext()))
         setUpMiniPlayer()
 
-        if (RetroUtil.isTablet()) {
+        if (RetroUtil.isTablet) {
             binding.actionNext.show()
             binding.actionPrevious.show()
         } else {

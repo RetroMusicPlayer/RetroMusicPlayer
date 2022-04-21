@@ -12,7 +12,7 @@ class InsetsLinearLayout @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
     init {
-        if (!RetroUtil.isLandscape())
+        if (!RetroUtil.isLandscape)
             drawAboveSystemBarsWithPadding()
     }
 }

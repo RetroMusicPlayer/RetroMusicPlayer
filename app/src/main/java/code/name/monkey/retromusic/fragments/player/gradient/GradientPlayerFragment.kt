@@ -205,7 +205,6 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     override fun onBackPressed(): Boolean {
-        println("OK")
         var wasExpanded = false
         if (getQueuePanel().state == STATE_EXPANDED) {
             wasExpanded = getQueuePanel().state == STATE_EXPANDED

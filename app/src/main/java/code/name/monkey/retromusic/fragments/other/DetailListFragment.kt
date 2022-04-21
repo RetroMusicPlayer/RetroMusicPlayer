@@ -64,9 +64,8 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     private val binding get() = _binding!!
     private var showClearHistoryOption = false
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentPlaylistDetailBinding.bind(view)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         when (args.type) {
             TOP_ARTISTS,
             RECENT_ARTISTS,
@@ -81,6 +80,13 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
                 returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
             }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentPlaylistDetailBinding.bind(view)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.progressIndicator.hide()
         when (args.type) {
@@ -106,8 +112,6 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         })
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (!handleBackPress()) {
                 remove()
@@ -232,10 +236,10 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         GridLayoutManager(requireContext(), gridCount(), GridLayoutManager.VERTICAL, false)
 
     private fun gridCount(): Int {
-        if (RetroUtil.isTablet()) {
-            return if (RetroUtil.isLandscape()) 6 else 4
+        if (RetroUtil.isTablet) {
+            return if (RetroUtil.isLandscape) 6 else 4
         }
-        return if (RetroUtil.isLandscape()) 4 else 2
+        return if (RetroUtil.isLandscape) 4 else 2
     }
 
 

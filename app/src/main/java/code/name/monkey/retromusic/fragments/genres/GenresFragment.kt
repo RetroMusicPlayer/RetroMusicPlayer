@@ -48,7 +48,7 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
-        return if (RetroUtil.isLandscape()) {
+        return if (RetroUtil.isLandscape) {
             GridLayoutManager(activity, 4)
         } else {
             GridLayoutManager(activity, 2)
