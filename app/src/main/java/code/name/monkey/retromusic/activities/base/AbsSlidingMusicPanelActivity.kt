@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.LibraryViewModel
@@ -60,6 +59,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -72,7 +72,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     var fromNotification = false
     private var windowInsets: WindowInsetsCompat? = null
     protected val libraryViewModel by viewModel<LibraryViewModel>()
-    private lateinit var bottomSheetBehavior: RetroBottomSheetBehavior<FrameLayout>
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private var playerFragment: AbsPlayerFragment? = null
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var nowPlayingScreen: NowPlayingScreen? = null
@@ -157,7 +157,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupBottomSheet() {
-        bottomSheetBehavior = from(binding.slidingPanel) as RetroBottomSheetBehavior
+        bottomSheetBehavior = from(binding.slidingPanel)
         bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
         bottomSheetBehavior.isHideable = true
         setMiniPlayerAlphaProgress(0F)
@@ -435,7 +435,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     }
 
     fun setAllowDragging(allowDragging: Boolean) {
-        bottomSheetBehavior.setAllowDragging(allowDragging)
+        bottomSheetBehavior.isDraggable = allowDragging
         hideBottomSheet(false)
     }
 

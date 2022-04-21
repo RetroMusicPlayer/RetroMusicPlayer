@@ -25,7 +25,7 @@
         app:behavior_peekHeight="0dp"
         app:enableEdgeToEdge="true"
         app:gestureInsetBottomIgnored="true"
-        app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <FrameLayout
             android:id="@+id/playerFragmentContainer"

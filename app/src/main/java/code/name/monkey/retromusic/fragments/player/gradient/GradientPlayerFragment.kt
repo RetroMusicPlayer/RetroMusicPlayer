@@ -38,7 +38,6 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.FragmentGradientPlayerBinding
 import code.name.monkey.retromusic.extensions.*
@@ -57,6 +56,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
@@ -88,7 +88,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
 
     private val bottomSheetCallbackList = object : BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            mainActivity.getBottomSheetBehavior().setAllowDragging(false)
+            mainActivity.getBottomSheetBehavior().isDraggable = false
             binding.playerQueueSheet.updatePadding(
                 top = (slideOffset * binding.statusBarLayout.statusBar.height).toInt()
             )
@@ -101,14 +101,14 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             when (newState) {
                 STATE_EXPANDED,
                 STATE_DRAGGING -> {
-                    mainActivity.getBottomSheetBehavior().setAllowDragging(false)
+                    mainActivity.getBottomSheetBehavior().isDraggable = false
                 }
                 STATE_COLLAPSED -> {
                     resetToCurrentPosition()
-                    mainActivity.getBottomSheetBehavior().setAllowDragging(true)
+                    mainActivity.getBottomSheetBehavior().isDraggable = true
                 }
                 else -> {
-                    mainActivity.getBottomSheetBehavior().setAllowDragging(true)
+                    mainActivity.getBottomSheetBehavior().isDraggable = true
                 }
             }
         }
@@ -173,14 +173,14 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     private fun setupSheet() {
         getQueuePanel().addBottomSheetCallback(bottomSheetCallbackList)
         binding.playerQueueSheet.setOnTouchListener { _, _ ->
-            mainActivity.getBottomSheetBehavior().setAllowDragging(false)
-            getQueuePanel().setAllowDragging(true)
+            mainActivity.getBottomSheetBehavior().isDraggable = false
+            getQueuePanel().isDraggable = true
             return@setOnTouchListener false
         }
     }
 
-    private fun getQueuePanel(): RetroBottomSheetBehavior<ConstraintLayout> {
-        return RetroBottomSheetBehavior.from(binding.playerQueueSheet) as RetroBottomSheetBehavior<ConstraintLayout>
+    private fun getQueuePanel(): BottomSheetBehavior<ConstraintLayout> {
+        return from(binding.playerQueueSheet)
     }
 
     override fun onResume() {
