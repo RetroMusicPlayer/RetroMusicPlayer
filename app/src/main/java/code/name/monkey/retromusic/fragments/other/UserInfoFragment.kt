@@ -20,7 +20,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
@@ -167,13 +166,6 @@ class UserInfoFragment : Fragment() {
             .into(binding.userImage)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            findNavController().navigateUp()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun selectBannerImage() {
         ImagePicker.with(this)
             .compress(1440)
@@ -308,11 +300,5 @@ class UserInfoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-    companion object {
-        private const val PICK_IMAGE_REQUEST = 9002
-        private const val PICK_BANNER_REQUEST = 9004
     }
 }

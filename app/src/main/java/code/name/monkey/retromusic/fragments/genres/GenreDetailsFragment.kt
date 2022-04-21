@@ -53,7 +53,6 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(view)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         _binding = FragmentPlaylistDetailBinding.bind(view)
-        setHasOptionsMenu(true)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.container.transitionName = "genre"
@@ -107,12 +106,11 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
         binding.recyclerView.setPadding(0, 0, 0, height)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_genre_detail, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         return GenreMenuHelper.handleMenuClick(requireActivity(), genre, item)
     }
 

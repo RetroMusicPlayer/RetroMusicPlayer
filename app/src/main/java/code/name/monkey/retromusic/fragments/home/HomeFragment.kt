@@ -189,8 +189,7 @@ class HomeFragment :
         binding.actionShuffle.elevatedAccentColor()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         menu.removeItem(R.id.action_grid_size)
         menu.removeItem(R.id.action_layout_type)
@@ -275,7 +274,7 @@ class HomeFragment :
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> findNavController().navigate(
                 R.id.settingsActivity,
@@ -291,11 +290,11 @@ class HomeFragment :
                 "ShowCreatePlaylistDialog"
             )
         }
-        return super.onOptionsItemSelected(item)
+        return false
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
+    override fun onPrepareMenu(menu: Menu) {
+        super.onPrepareMenu(menu)
         ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
     }
 

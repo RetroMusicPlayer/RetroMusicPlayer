@@ -84,7 +84,6 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentArtistDetailsBinding.bind(view)
-        setHasOptionsMenu(true)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.toolbar.title = null
@@ -245,7 +244,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         return handleSortOrderMenuItem(item)
     }
 
@@ -295,18 +294,18 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             PopupMenu(requireContext(), binding.fragmentArtistContent.songSortOrder).apply {
                 inflate(R.menu.menu_artist_song_sort_order)
                 setUpSortOrderMenu(menu)
-                setOnMenuItemClickListener { menuItem ->
-                    val sortOrder = when (menuItem.itemId) {
+                setOnMenuItemClickListener { item ->
+                    val sortOrder = when (item.itemId) {
                         R.id.action_sort_order_title -> SortOrder.ArtistSongSortOrder.SONG_A_Z
                         R.id.action_sort_order_title_desc -> SortOrder.ArtistSongSortOrder.SONG_Z_A
                         R.id.action_sort_order_album -> SortOrder.ArtistSongSortOrder.SONG_ALBUM
                         R.id.action_sort_order_year -> SortOrder.ArtistSongSortOrder.SONG_YEAR
                         R.id.action_sort_order_song_duration -> SortOrder.ArtistSongSortOrder.SONG_DURATION
                         else -> {
-                            throw IllegalArgumentException("invalid ${menuItem.title}")
+                            throw IllegalArgumentException("invalid ${item.title}")
                         }
                     }
-                    menuItem.isChecked = true
+                    item.isChecked = true
                     setSaveSortOrder(sortOrder)
                     return@setOnMenuItemClickListener true
                 }
@@ -322,15 +321,17 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
     private fun setUpSortOrderMenu(sortOrder: Menu) {
         when (savedSongSortOrder) {
-            SortOrder.ArtistSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title).isChecked = true
-            SortOrder.ArtistSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked = true
+            SortOrder.ArtistSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title).isChecked =
+                true
+            SortOrder.ArtistSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked =
+                true
             SortOrder.ArtistSongSortOrder.SONG_ALBUM ->
                 sortOrder.findItem(R.id.action_sort_order_album).isChecked = true
             SortOrder.ArtistSongSortOrder.SONG_YEAR ->
                 sortOrder.findItem(R.id.action_sort_order_year).isChecked = true
             SortOrder.ArtistSongSortOrder.SONG_DURATION ->
                 sortOrder.findItem(R.id.action_sort_order_song_duration).isChecked = true
-            else-> {
+            else -> {
                 throw IllegalArgumentException("invalid $savedSongSortOrder")
             }
         }
@@ -352,8 +353,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_artist_detail, menu)
     }
 

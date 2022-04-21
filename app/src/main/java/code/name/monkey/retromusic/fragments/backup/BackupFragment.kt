@@ -116,8 +116,8 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
     }
 
     @SuppressLint("CheckResult")
-    override fun onBackupMenuClicked(file: File, menuItem: MenuItem): Boolean {
-        when (menuItem.itemId) {
+    override fun onBackupMenuClicked(file: File, item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.action_delete -> {
                 try {
                     file.delete()

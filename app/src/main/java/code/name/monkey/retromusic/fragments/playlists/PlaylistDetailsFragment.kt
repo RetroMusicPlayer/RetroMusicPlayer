@@ -69,7 +69,6 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         _binding = FragmentPlaylistDetailBinding.bind(view)
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(view)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
-        setHasOptionsMenu(true)
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.container.transitionName = "playlist"
         playlist = arguments.extraPlaylist
@@ -122,12 +121,11 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_playlist_detail, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         return PlaylistMenuHelper.handleMenuClick(requireActivity(), playlist, item)
     }
 
@@ -173,16 +171,6 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun handleBackPress(): Boolean {
-        cab?.let {
-            if (it.isActive()) {
-                it.destroy()
-                return true
-            }
-        }
-        return false
     }
 
     private var cab: AttachedCab? = null

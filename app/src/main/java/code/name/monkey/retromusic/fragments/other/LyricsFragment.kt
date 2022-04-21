@@ -41,6 +41,7 @@ import code.name.monkey.retromusic.databinding.FragmentLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentNormalLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentSyncedLyricsBinding
 import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -51,9 +52,7 @@ import code.name.monkey.retromusic.util.FileUtils
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.UriUtil
 import com.afollestad.materialdialogs.input.input
-import com.google.android.material.color.MaterialColors
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.transition.platform.MaterialContainerTransform
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jaudiotagger.audio.AudioFileIO
@@ -62,14 +61,11 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 
-class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
+class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
 
     private var _binding: FragmentLyricsBinding? = null
     private val binding get() = _binding!!
     private lateinit var song: Song
-
-    val mainActivity: MainActivity
-        get() = activity as MainActivity
 
     private lateinit var lyricsSectionsAdapter: LyricsSectionsAdapter
 
@@ -89,16 +85,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
             baseUrl += query
             return baseUrl
         }
-
-    private fun buildContainerTransform(): MaterialContainerTransform {
-        val transform = MaterialContainerTransform()
-        transform.setAllContainerColors(
-            MaterialColors.getColor(requireView().findViewById(R.id.container), R.attr.colorSurface)
-        )
-        transform.addTarget(R.id.container)
-        transform.duration = 300
-        return transform
-    }
 
     private lateinit var normalLyricsLauncher: ActivityResultLauncher<IntentSenderRequest>
     private lateinit var newSyncedLyricsLauncher: ActivityResultLauncher<Intent>
@@ -139,7 +125,6 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
         updateTitleSong()
         enterTransition = Fade()
         exitTransition = Fade()
@@ -204,7 +189,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
         requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_search, menu)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
@@ -212,14 +197,9 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
             menu,
             ATHToolbarActivity.getToolbarBackgroundColor(binding.toolbar)
         )
-        return super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            findNavController().navigateUp()
-            return true
-        }
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
             openUrl(when (binding.lyricsPager.currentItem) {
                     0 -> syairSearchLrcUrl
@@ -228,7 +208,7 @@ class LyricsFragment : AbsMusicServiceFragment(R.layout.fragment_lyrics) {
                 }
             )
         }
-        return super.onOptionsItemSelected(item)
+        return false
     }
 
 

@@ -64,11 +64,6 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
     private val binding get() = _binding!!
     private var showClearHistoryOption = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPlaylistDetailBinding.bind(view)
@@ -302,16 +297,14 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         return cab as AttachedCab
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_clear_history, menu)
         if (showClearHistoryOption) {
             menu.findItem(R.id.action_clear_history).isVisible = true // Show Clear History option
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_clear_history -> {
                 if (binding.recyclerView.adapter?.itemCount!! > 0) {

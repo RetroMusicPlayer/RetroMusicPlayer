@@ -20,8 +20,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
 import androidx.core.view.*
@@ -246,6 +245,10 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
     override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
         search(binding.searchView.text.toString())
     }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {}
+
+    override fun onMenuItemSelected(menuItem: MenuItem) = false
 }
 
 enum class Filter {
