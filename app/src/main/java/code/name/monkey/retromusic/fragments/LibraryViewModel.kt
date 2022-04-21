@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.*
 import code.name.monkey.retromusic.*
@@ -46,7 +47,6 @@ class LibraryViewModel(
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
     private val playlists = MutableLiveData<List<PlaylistWithSongs>>()
-    private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
     private val fabMargin = MutableLiveData(0)
@@ -78,8 +78,6 @@ class LibraryViewModel(
 
     fun getPlaylists(): LiveData<List<PlaylistWithSongs>> = playlists
 
-    fun getLegacyPlaylist(): LiveData<List<Playlist>> = legacyPlaylists
-
     fun getGenre(): LiveData<List<Genre>> = genres
 
     fun getHome(): LiveData<List<Home>> = home
@@ -106,12 +104,6 @@ class LibraryViewModel(
 
     private suspend fun fetchPlaylists() {
         playlists.postValue(repository.fetchPlaylistWithSongs())
-    }
-
-    private fun fetchLegacyPlaylist() {
-        viewModelScope.launch(IO) {
-            legacyPlaylists.postValue(repository.fetchLegacyPlaylist())
-        }
     }
 
     private suspend fun fetchGenres() {
@@ -249,12 +241,6 @@ class LibraryViewModel(
         }
     }
 
-    fun deleteTracks(songs: List<Song>) = viewModelScope.launch(IO) {
-        repository.deleteSongs(songs)
-        fetchPlaylists()
-        loadLibraryContent()
-    }
-
     fun recentSongs(): LiveData<List<Song>> = liveData(IO) {
         emit(repository.recentSongs())
     }
@@ -348,7 +334,8 @@ class LibraryViewModel(
                     createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
                 withContext(Main) {
-                    context.showToast(R.string.playlist_created_sucessfully)
+                    context.showToast(context.getString(R.string.playlist_created_sucessfully,
+                        playlistName))
                 }
             } else {
                 val playlist = playlists.firstOrNull()
@@ -360,7 +347,12 @@ class LibraryViewModel(
             }
             forceReload(Playlists)
             withContext(Main) {
-                context.showToast(R.string.added_song_count_to_playlist)
+                context.showToast(
+                    context.getString(
+                        R.string.added_song_count_to_playlist,
+                        songs.size,
+                        playlistName),
+                    Toast.LENGTH_SHORT)
             }
         }
     }
