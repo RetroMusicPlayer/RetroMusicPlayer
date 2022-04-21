@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 android {
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         minSdk 21
-        targetSdk 31
+        targetSdk 32
     }
     buildTypes {
         release {
