@@ -10,6 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
@@ -273,10 +274,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             R.id.action_set_artist_image -> {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = "image/*"
-                startActivityForResult(
-                    Intent.createChooser(intent, getString(R.string.pick_from_local_storage)),
-                    REQUEST_CODE_SELECT_IMAGE
-                )
+                selectImageLauncher.launch(Intent.createChooser(intent, getString(R.string.pick_from_local_storage)))
                 return true
             }
             R.id.action_reset_artist_image -> {
@@ -337,18 +335,11 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            REQUEST_CODE_SELECT_IMAGE -> if (resultCode == Activity.RESULT_OK) {
-                data?.data?.let {
-                    CustomArtistImageUtil.getInstance(requireContext())
-                        .setCustomArtistImage(artist, it)
-                }
-            }
-            else -> if (resultCode == Activity.RESULT_OK) {
-                println("OK")
+    private val selectImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {result->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let {
+                CustomArtistImageUtil.getInstance(requireContext())
+                    .setCustomArtistImage(artist, it)
             }
         }
     }
@@ -394,9 +385,5 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        const val REQUEST_CODE_SELECT_IMAGE = 9002
     }
 }

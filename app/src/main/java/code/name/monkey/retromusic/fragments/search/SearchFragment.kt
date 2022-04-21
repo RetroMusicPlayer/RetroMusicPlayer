@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.getSystemService
 import androidx.core.view.*
 import androidx.core.widget.doAfterTextChanged
@@ -53,7 +54,6 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
     ChipGroup.OnCheckedStateChangeListener {
     companion object {
         const val QUERY = "query"
-        const val REQ_CODE_SPEECH_INPUT = 9001
     }
 
     private var _binding: FragmentSearchBinding? = null
@@ -203,22 +203,17 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt))
         try {
-            startActivityForResult(
-                intent,
-                REQ_CODE_SPEECH_INPUT
-            )
+            speechInputLauncher.launch(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             showToast(getString(R.string.speech_not_supported))
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
+    private val speechInputLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result->
+        if (result.resultCode == RESULT_OK) {
             val spokenText: String? =
-                data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                    .let { text -> text?.get(0) }
+                result?.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
             binding.searchView.setText(spokenText)
         }
     }
