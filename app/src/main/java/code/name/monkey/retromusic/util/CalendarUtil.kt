@@ -88,7 +88,6 @@ class CalendarUtil {
             // Today + rest of this month + previous months until January
             var elapsed = elapsedMonth
             var month = calendar[Calendar.MONTH] - 1
-            val year = calendar[Calendar.YEAR]
             while (month > Calendar.JANUARY) {
                 elapsed += getDaysInMonth(month) * MS_PER_DAY
                 month--

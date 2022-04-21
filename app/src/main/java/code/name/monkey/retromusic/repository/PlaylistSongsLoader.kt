@@ -24,8 +24,6 @@ import code.name.monkey.retromusic.extensions.getInt
 import code.name.monkey.retromusic.extensions.getLong
 import code.name.monkey.retromusic.extensions.getString
 import code.name.monkey.retromusic.extensions.getStringOrNull
-import code.name.monkey.retromusic.model.AbsCustomPlaylist
-import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
 
@@ -34,17 +32,6 @@ import code.name.monkey.retromusic.model.Song
  */
 
 object PlaylistSongsLoader {
-
-    fun getPlaylistSongList(
-        context: Context,
-        playlist: Playlist
-    ): List<Song> {
-        return if (playlist is AbsCustomPlaylist) {
-            return playlist.songs()
-        } else {
-            getPlaylistSongList(context, playlist.id)
-        }
-    }
 
     @JvmStatic
     fun getPlaylistSongList(context: Context, playlistId: Long): List<Song> {
