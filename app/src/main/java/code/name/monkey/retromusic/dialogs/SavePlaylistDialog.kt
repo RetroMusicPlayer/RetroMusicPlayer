@@ -61,10 +61,8 @@ class SavePlaylistDialog : DialogFragment() {
                             )
                             withContext(Dispatchers.Main) {
                                 showToast(
-                                    String.format(
-                                        requireContext().getString(R.string.saved_playlist_to),
-                                        data?.lastPathSegment
-                                    ),
+                                    requireContext().getString(R.string.saved_playlist_to,
+                                        data?.lastPathSegment),
                                     Toast.LENGTH_LONG
                                 )
                                 dismiss()
@@ -88,7 +86,7 @@ class SavePlaylistDialog : DialogFragment() {
                 }
                 withContext(Dispatchers.Main) {
                     showToast(
-                        String.format(getString(R.string.saved_playlist_to), file),
+                        getString(R.string.saved_playlist_to, file),
                         Toast.LENGTH_LONG
                     )
                     dismiss()

@@ -122,7 +122,7 @@ fun View.focusAndShowKeyboard() {
  */
 fun View.drawAboveSystemBars(onlyPortrait: Boolean = true) {
     if (PreferenceUtil.isFullScreenMode) return
-    if (onlyPortrait && RetroUtil.isLandscape()) return
+    if (onlyPortrait && RetroUtil.isLandscape) return
     applyInsetter {
         type(navigationBars = true) {
             margin()

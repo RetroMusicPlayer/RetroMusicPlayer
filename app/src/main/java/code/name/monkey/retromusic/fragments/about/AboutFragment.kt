@@ -18,7 +18,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.core.app.ShareCompat
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +29,7 @@ import code.name.monkey.retromusic.databinding.FragmentAboutBinding
 import code.name.monkey.retromusic.extensions.openUrl
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import dev.chrisbanes.insetter.applyInsetter
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
@@ -44,29 +43,31 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
         binding.aboutContent.cardOther.version.setSummary(getAppVersion())
         setUpView()
         loadContributors()
-        // This is a workaround as CollapsingToolbarLayout consumes insets and
-        // insets are not passed to child views
-        // https://github.com/material-components/material-components-android/issues/1310
-        if (!RetroUtil.isLandscape()) {
-            binding.aboutContent.root.updatePadding(bottom = RetroUtil.getNavigationBarHeight())
+
+        binding.aboutContent.root.applyInsetter {
+            type(navigationBars = true) {
+                padding()
+            }
         }
     }
 
     private fun setUpView() {
         binding.aboutContent.cardRetroInfo.appGithub.setOnClickListener(this)
         binding.aboutContent.cardRetroInfo.faqLink.setOnClickListener(this)
-        binding.aboutContent.cardSocial.telegramLink.setOnClickListener(this)
         binding.aboutContent.cardRetroInfo.appRate.setOnClickListener(this)
         binding.aboutContent.cardRetroInfo.appTranslation.setOnClickListener(this)
         binding.aboutContent.cardRetroInfo.appShare.setOnClickListener(this)
         binding.aboutContent.cardRetroInfo.donateLink.setOnClickListener(this)
+        binding.aboutContent.cardRetroInfo.bugReportLink.setOnClickListener(this)
+
+        binding.aboutContent.cardSocial.telegramLink.setOnClickListener(this)
         binding.aboutContent.cardSocial.instagramLink.setOnClickListener(this)
         binding.aboutContent.cardSocial.twitterLink.setOnClickListener(this)
+        binding.aboutContent.cardSocial.pinterestLink.setOnClickListener(this)
+        binding.aboutContent.cardSocial.websiteLink.setOnClickListener(this)
+
         binding.aboutContent.cardOther.changelog.setOnClickListener(this)
         binding.aboutContent.cardOther.openSource.setOnClickListener(this)
-        binding.aboutContent.cardSocial.pinterestLink.setOnClickListener(this)
-        binding.aboutContent.cardRetroInfo.bugReportLink.setOnClickListener(this)
-        binding.aboutContent.cardSocial.websiteLink.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
