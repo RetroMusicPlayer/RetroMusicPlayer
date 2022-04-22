@@ -172,7 +172,7 @@
     <string name="fit">Paskan</string>
     <string name="flat">Datar</string>
     <string name="folders">Folder</string>
-    <string name="follow_system">Ikuti setelan sistem</string>
+    <string name="follow_system">Ikuti sistem</string>
     <string name="for_you">Untuk Anda</string>
     <string name="free">Gratis</string>
     <string name="full">Penuh</string>
@@ -530,5 +530,5 @@
     <string name="you_have_to_select_at_least_one_category">Anda harus memilih setidaknya satu kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan ditersukan ke situs web pelacak masalah.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
-    <string name="bug_report_success">Bug report successful</string>
+    <string name="bug_report_success">Lapor bug sukses</string>
 </resources>
