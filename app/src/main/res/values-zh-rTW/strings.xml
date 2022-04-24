@@ -19,7 +19,7 @@
     <string name="action_go_to_album">開啟此專輯</string>
     <string name="action_go_to_artist">前往此演唱者頁面</string>
     <string name="action_go_to_genre">流派</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">前往歌詞</string>
     <string name="action_go_to_start_directory">前往起始目錄</string>
     <string name="action_grant">取得</string>
     <string name="action_grid_size">網格大小</string>
@@ -53,8 +53,8 @@
     <string name="adaptive">自動調整</string>
     <string name="add_action">添加</string>
     <string name="add_playlist_title">"加入播放清單"</string>
-    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="add_time_framed_lryics">新增同步歌詞</string>
+    <string name="added_song_count_to_playlist">新增 %d 首歌到 %s</string>
     <string name="added_title_to_playing_queue">"已將 1 首歌加到播放佇列"</string>
     <string name="added_x_titles_to_playing_queue">已將 %1$d 首歌加到播放佇列。</string>
     <string name="album">專輯</string>
@@ -67,7 +67,7 @@
         <item quantity="other">專輯</item>
     </plurals>
     <string name="always">永遠</string>
-    <string name="app_share">Hey check out this cool music player at: https://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_share">嗨！邀請你使用這個好用的音樂播放器: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">隨機播放</string>
     <string name="app_shortcut_top_tracks_short">最佳單曲</string>
     <string name="app_widget_big_name">完整圖片</string>
@@ -237,7 +237,7 @@
     <string name="never">永不</string>
     <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">新增播放清單</string>
-    <string name="new_start_directory">%s是新的起始目錄</string>
+    <string name="new_start_directory">%s 是新的起始目錄</string>
     <string name="next_song">下一曲</string>
     <string name="no_albums">沒有專輯</string>
     <string name="no_artists">沒有演唱者</string>
@@ -314,7 +314,7 @@
     <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">將播放中歌曲的專輯封面設為鎖定螢幕背景。</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
-    <string name="pref_summary_audio_ducking">通知鈴聲、導航語音等。</string>
+    <string name="pref_summary_audio_ducking">系統音效響鈴或接收到通知時降低音量</string>
     <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
