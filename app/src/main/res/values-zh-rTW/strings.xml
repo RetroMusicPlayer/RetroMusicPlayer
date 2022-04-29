@@ -144,7 +144,7 @@
     <string name="delete_song_title">刪除歌曲</string>
     <string name="delete_song_x"><![CDATA[確定刪除歌曲 <b>%1$s</b> 嗎？]]></string>
     <string name="delete_songs_title">刪除歌曲</string>
-    <string name="delete_x_playlists"><![CDATA[確定要刪除 <b>%1$d</b> 個播放清單？]]></string>
+    <string name="delete_x_playlists"><![CDATA[確定要刪除 <b>%1$d</b> 個播放清單嗎？]]></string>
     <string name="delete_x_songs"><![CDATA[確定要刪除 <b>%1$d</b> 首歌嗎？]]></string>
     <string name="deleted_x_songs">已刪除 %1$d 首歌。</string>
     <string name="deleting_songs">正在刪除歌曲</string>
@@ -192,7 +192,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">網格樣式</string>
-    <string name="help_summary">需要更多幫助？</string>
+    <string name="help_summary">需要更多幫助嗎？</string>
     <string name="hinge">旋轉</string>
     <string name="history">記錄</string>
     <string name="history_cleared">清除歷程</string>
@@ -238,7 +238,7 @@
     <string name="new_music_mix">新歌曲快選</string>
     <string name="new_playlist_title">新增播放清單</string>
     <string name="new_start_directory">%s 為新起始目錄。</string>
-    <string name="next_song">下一曲</string>
+    <string name="next_song">下一首</string>
     <string name="no_albums">沒有專輯</string>
     <string name="no_artists">沒有演唱者</string>
     <string name="no_audio_ID">"請先播放一首歌後，然後再試一次。"</string>
@@ -480,7 +480,7 @@
     <string name="stack">堆疊</string>
     <string name="start_play_music">開始播放音樂</string>
     <string name="suggestion_songs">建議</string>
-    <string name="support_development">支援開發</string>
+    <string name="support_development">支持開發</string>
     <string name="swipe_to_unlock">滑動以解鎖</string>
     <string name="synced_lyrics">同步歌詞</string>
     <string name="telegram_group">Telegram</string>
@@ -501,7 +501,7 @@
     <string name="track_list">曲目編號</string>
     <string name="translate">翻譯</string>
     <string name="translate_community">協助我們將應用程式本地化成您的語言</string>
-    <string name="try_retro_music_premium">嘗試 Retro Music Premium</string>
+    <string name="try_retro_music_premium">試用 Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">分享您為 Retro Music 的設計</string>
     <string name="unlabeled">無標籤</string>
