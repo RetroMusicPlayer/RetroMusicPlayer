@@ -23,6 +23,7 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.activities.OnThemeChangedListener
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.preferences.*
@@ -104,7 +105,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     }
 
     fun restartActivity() {
-        if (activity is OnThemeChangedListener) {
+        if (activity is OnThemeChangedListener && !VersionUtils.hasS()) {
             (activity as OnThemeChangedListener).onThemeValuesChanged()
         } else {
             activity?.recreate()
