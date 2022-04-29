@@ -132,7 +132,9 @@ object MusicPlayerRemote : KoinComponent {
         try {
             contextWrapper.startService(intent)
         } catch (ignored: IllegalStateException) {
-            ContextCompat.startForegroundService(context, intent)
+            runCatching {
+                ContextCompat.startForegroundService(context, intent)
+            }
         }
         val binder = ServiceBinder(callback)
 
@@ -260,7 +262,7 @@ object MusicPlayerRemote : KoinComponent {
     private fun tryToHandleOpenPlayingQueue(
         queue: List<Song>,
         startPosition: Int,
-        startPlaying: Boolean
+        startPlaying: Boolean,
     ): Boolean {
         if (playingQueue === queue) {
             if (startPlaying) {
