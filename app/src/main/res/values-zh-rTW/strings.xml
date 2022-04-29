@@ -217,7 +217,7 @@
     <string name="label_more_from">來自 %s 的更多內容</string>
     <string name="label_sampling_rate">取樣率</string>
     <string name="label_track_length">長度</string>
-    <string name="labeled">已標籤</string>
+    <string name="labeled">顯示標籤</string>
     <string name="last_added">最後新增</string>
     <string name="last_song">最後一首</string>
     <string name="library_categories">音樂庫類別</string>
@@ -448,7 +448,7 @@
     <string name="scanned_files">已掃描 %2$d 個檔案夾中的 %1$d 個。</string>
     <string name="scrobbles_label">音樂記錄</string>
     <string name="select_all">選取全部</string>
-    <string name="selected">已選取</string>
+    <string name="selected">僅顯示已選取的索引標籤</string>
     <string name="set">設定</string>
     <string name="set_artist_image">設定演唱者圖片</string>
     <string name="share_app">分享應用程式</string>
@@ -504,7 +504,7 @@
     <string name="try_retro_music_premium">試用 Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">分享您為 Retro Music 的設計</string>
-    <string name="unlabeled">無標籤</string>
+    <string name="unlabeled">隱藏標籤</string>
     <string name="unplayable_file">無法播放這首歌。</string>
     <string name="up_next">即將播放</string>
     <string name="update_image">更新圖片</string>
