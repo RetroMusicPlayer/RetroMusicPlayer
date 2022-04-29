@@ -154,6 +154,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
 
     override fun onResume() {
         super.onResume()
+        lastRequest = null
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .registerOnSharedPreferenceChangeListener(this)
     }
