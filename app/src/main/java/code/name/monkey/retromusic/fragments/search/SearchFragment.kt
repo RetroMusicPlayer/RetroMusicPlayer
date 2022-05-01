@@ -82,6 +82,11 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
             doAfterTextChanged {
                 if (!it.isNullOrEmpty())
                     search(it.toString())
+                else {
+                    TransitionManager.beginDelayedTransition(binding.appBarLayout)
+                    binding.voiceSearch.isVisible = true
+                    binding.clearText.isGone = true
+                }
             }
             focusAndShowKeyboard()
         }
@@ -210,13 +215,14 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
         }
     }
 
-    private val speechInputLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result->
-        if (result.resultCode == RESULT_OK) {
-            val spokenText: String? =
-                result?.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
-            binding.searchView.setText(spokenText)
+    private val speechInputLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val spokenText: String? =
+                    result?.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
+                binding.searchView.setText(spokenText)
+            }
         }
-    }
 
     override fun onDestroyView() {
         hideKeyboard(view)

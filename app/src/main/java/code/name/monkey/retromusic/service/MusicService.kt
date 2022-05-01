@@ -58,6 +58,7 @@ import code.name.monkey.retromusic.auto.AutoMusicProvider
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension.getDefaultTransition
 import code.name.monkey.retromusic.glide.RetroGlideExtension.getSongModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.isCasting
 import code.name.monkey.retromusic.helper.ShuffleHelper.makeShuffleList
@@ -91,7 +92,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil.unregisterOnSharedPrefere
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
@@ -642,7 +642,7 @@ class MusicService : MediaBrowserServiceCompat(),
     override fun onGetRoot(
         clientPackageName: String,
         clientUid: Int,
-        rootHints: Bundle?
+        rootHints: Bundle?,
     ): BrowserRoot {
 
 
@@ -671,7 +671,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
     override fun onLoadChildren(
         parentId: String,
-        result: Result<List<MediaBrowserCompat.MediaItem>>
+        result: Result<List<MediaBrowserCompat.MediaItem>>,
     ) {
         if (parentId == AutoMediaIDHelper.RECENT_ROOT) {
             val song = currentSong
@@ -690,7 +690,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     override fun onSharedPreferenceChanged(
-        sharedPreferences: SharedPreferences, key: String
+        sharedPreferences: SharedPreferences, key: String,
     ) {
         when (key) {
             CROSS_FADE_DURATION -> {
@@ -799,7 +799,7 @@ class MusicService : MediaBrowserServiceCompat(),
     fun openQueue(
         playingQueue: List<Song>?,
         startPosition: Int,
-        startPlaying: Boolean
+        startPlaying: Boolean,
     ) {
         if (playingQueue != null && playingQueue.isNotEmpty()
             && startPosition >= 0 && startPosition < playingQueue.size
@@ -1141,10 +1141,13 @@ class MusicService : MediaBrowserServiceCompat(),
             .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, playingQueue.size.toLong())
 
         if (isAlbumArtOnLockScreen) {
-            val request = GlideApp.with(this@MusicService)
+            // val screenSize: Point = RetroUtil.getScreenSize(this)
+            val request = GlideApp.with(this)
                 .asBitmap()
                 .songCoverOptions(song)
                 .load(getSongModel(song))
+                .transition(getDefaultTransition())
+
             if (isBlurredAlbumArt) {
                 request.transform(BlurTransformation.Builder(this@MusicService).build())
             }
@@ -1158,7 +1161,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
                     override fun onResourceReady(
                         resource: Bitmap,
-                        transition: Transition<in Bitmap?>?
+                        transition: Transition<in Bitmap?>?,
                     ) {
                         metaData.putBitmap(
                             MediaMetadataCompat.METADATA_KEY_ALBUM_ART,

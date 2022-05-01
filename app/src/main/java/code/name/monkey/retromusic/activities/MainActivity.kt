@@ -61,7 +61,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
         }
-        WhatsNewFragment.showChangeLog(this )
+        WhatsNewFragment.showChangeLog(this)
     }
 
     private fun setupNavigationController() {

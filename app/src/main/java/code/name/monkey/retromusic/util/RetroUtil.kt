@@ -16,18 +16,14 @@ package code.name.monkey.retromusic.util
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
-import code.name.monkey.retromusic.App.Companion.getContext
-import android.view.WindowManager
-import androidx.annotation.DrawableRes
-import androidx.annotation.ColorInt
-import android.graphics.drawable.Drawable
-import code.name.monkey.appthemehelper.util.TintHelper
 import android.content.res.Resources.Theme
 import android.graphics.Point
-import android.view.Display
+import android.graphics.drawable.Drawable
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.DisplayCompat
-import java.lang.Exception
+import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.retromusic.App.Companion.getContext
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.text.DecimalFormat
@@ -50,14 +46,10 @@ object RetroUtil {
         return (frequency / 1000.0).toFloat()
     }
 
-    fun getScreenSize(c: Context): Point {
-        var display: Display? = null
-        if (c.getSystemService(Context.WINDOW_SERVICE) != null) {
-            display = (c.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
-        }
-        val size = Point()
-        display?.getSize(size)
-        return size
+    fun getScreenSize(context: Context): Point {
+        val x: Int = context.resources.displayMetrics.widthPixels
+        val y: Int = context.resources.displayMetrics.heightPixels
+        return Point(x, y)
     }
 
     val statusBarHeight: Int
@@ -85,7 +77,9 @@ object RetroUtil {
         }
 
     fun getTintedVectorDrawable(
-        context: Context, @DrawableRes id: Int, @ColorInt color: Int
+        context: Context,
+        @DrawableRes id: Int,
+        @ColorInt color: Int,
     ): Drawable {
         return TintHelper.createTintedDrawable(
             getVectorDrawable(context.resources, id, context.theme), color)
@@ -95,13 +89,13 @@ object RetroUtil {
         res: Resources,
         @DrawableRes resId: Int,
         theme: Theme?,
-        @ColorInt color: Int
+        @ColorInt color: Int,
     ): Drawable {
         return TintHelper.createTintedDrawable(getVectorDrawable(res, resId, theme), color)
     }
 
     private fun getVectorDrawable(
-        res: Resources, @DrawableRes resId: Int, theme: Theme?
+        res: Resources, @DrawableRes resId: Int, theme: Theme?,
     ): Drawable? {
         return ResourcesCompat.getDrawable(res, resId, theme)
     }
