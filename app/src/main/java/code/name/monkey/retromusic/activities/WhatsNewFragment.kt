@@ -19,7 +19,6 @@ import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.databinding.FragmentWhatsNewBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.openUrl
-import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.nio.charset.StandardCharsets
