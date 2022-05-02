@@ -17,7 +17,6 @@
             app:icon="@drawable/ic_color_lens" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:dependency="material_you"
             android:key="black_theme"
             android:layout="@layout/list_item_view_switch_no_title"
             android:title="@string/black_theme_name" />

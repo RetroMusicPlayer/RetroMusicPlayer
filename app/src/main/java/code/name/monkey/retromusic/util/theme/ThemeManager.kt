@@ -11,7 +11,8 @@ import code.name.monkey.retromusic.util.theme.ThemeMode.*
 @StyleRes
 fun Context.getThemeResValue(): Int =
     if (PreferenceUtil.materialYou) {
-        R.style.Theme_RetroMusic_MD3
+        if (generalThemeValue == BLACK) R.style.Theme_RetroMusic_MD3_Black
+        else R.style.Theme_RetroMusic_MD3
     } else {
         when (generalThemeValue) {
             LIGHT -> R.style.Theme_RetroMusic_Light
