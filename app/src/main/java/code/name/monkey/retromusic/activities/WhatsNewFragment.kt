@@ -53,9 +53,7 @@ class WhatsNewFragment : BottomSheetDialogFragment() {
             // Inject color values for WebView body background and links
             val isDark = isWindowBackgroundDark(requireContext())
             val accentColor = accentColor()
-            val backgroundColor = colorToCSS(
-                surfaceColor(Color.parseColor(if (isDark) "#424242" else "#ffffff"))
-            )
+            binding.webView.setBackgroundColor(0)
             val contentColor = colorToCSS(Color.parseColor(if (isDark) "#ffffff" else "#000000"))
             val textColor = colorToCSS(Color.parseColor(if (isDark) "#60FFFFFF" else "#80000000"))
             val accentColorString = colorToCSS(accentColor())
@@ -69,7 +67,7 @@ class WhatsNewFragment : BottomSheetDialogFragment() {
             val changeLog = buf.toString()
                 .replace(
                     "{style-placeholder}",
-                    "body { background-color: $backgroundColor; color: $contentColor; } li {color: $textColor;} h3 {color: $accentColorString;} .tag {background-color: $accentColorString; color: $accentTextColor; } div{background-color: $cardBackgroundColor;}"
+                    "body { color: $contentColor; } li {color: $textColor;} h3 {color: $accentColorString;} .tag {background-color: $accentColorString; color: $accentTextColor; } div{background-color: $cardBackgroundColor;}"
                 )
                 .replace("{link-color}", colorToCSS(accentColor()))
                 .replace(
