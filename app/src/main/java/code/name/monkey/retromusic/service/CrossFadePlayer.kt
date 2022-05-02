@@ -120,20 +120,9 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     override val isPlaying: Boolean
         get() = mIsInitialized && getCurrentPlayer()?.isPlaying == true
 
-    // This has to run when queue is changed or song is changed manually by user
-    fun sourceChangedByUser() {
-        hasDataSource = false
+    override fun setDataSource(path: String, force: Boolean): Boolean {
         cancelFade()
-        getCurrentPlayer()?.apply {
-            if (isPlaying) stop()
-        }
-        getNextPlayer()?.apply {
-            if (isPlaying) stop()
-        }
-    }
-
-    override fun setDataSource(path: String): Boolean {
-        cancelFade()
+        if (force) hasDataSource = false
         mIsInitialized = false
         /* We've already set DataSource if initialized is true in setNextDataSource */
         if (!hasDataSource) {
@@ -154,7 +143,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
      */
     private fun setDataSourceImpl(
         player: MediaPlayer,
-        path: String
+        path: String,
     ): Boolean {
         player.reset()
         player.setOnPreparedListener(null)

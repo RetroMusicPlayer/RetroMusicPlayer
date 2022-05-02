@@ -30,6 +30,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
+import org.jetbrains.annotations.NotNull;
+
 import code.name.monkey.appthemehelper.util.VersionUtils;
 import code.name.monkey.retromusic.ConstantsKt;
 import code.name.monkey.retromusic.R;
@@ -66,7 +68,7 @@ public class MultiPlayer
      * @return True if the <code>player</code> has been prepared and is ready to play, false otherwise
      */
     @Override
-    public boolean setDataSource(@NonNull final String path) {
+    public boolean setDataSource(@NotNull final String path, boolean force) {
         mIsInitialized = false;
         mIsInitialized = setDataSourceImpl(mCurrentMediaPlayer, path);
         if (mIsInitialized) {

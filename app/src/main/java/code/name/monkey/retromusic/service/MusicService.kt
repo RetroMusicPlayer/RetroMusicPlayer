@@ -92,6 +92,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil.unregisterOnSharedPrefere
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
@@ -910,14 +911,6 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun playSongAtImpl(position: Int) {
-        if (!trackEndedByCrossfade) {
-            // This is only imp if we are using crossfade
-            if (playback is CrossFadePlayer) {
-                (playback as CrossFadePlayer).sourceChangedByUser()
-            }
-        } else {
-            trackEndedByCrossfade = false
-        }
         if (openTrackAndPrepareNextAt(position)) {
             play()
         } else {
@@ -1285,9 +1278,15 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @Synchronized
     private fun openCurrent(): Boolean {
+        val force = if (!trackEndedByCrossfade) {
+            true
+        } else {
+            trackEndedByCrossfade = false
+            false
+        }
         return try {
             if (playback != null) {
-                return playback!!.setDataSource(getTrackUri(currentSong))
+                return playback!!.setDataSource(getTrackUri(currentSong), force)
             } else false
         } catch (e: Exception) {
             e.printStackTrace()
