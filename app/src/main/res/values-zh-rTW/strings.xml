@@ -179,8 +179,8 @@
     <string name="full_card">全景卡牌風</string>
     <string name="general_settings_summary">變更應用程式的佈景主題和色彩</string>
     <string name="general_settings_title">介面與外觀</string>
-    <string name="genre">風格類型</string>
-    <string name="genres">流派類型</string>
+    <string name="genre">流派</string>
+    <string name="genres">流派</string>
     <string name="git_hub_summary">在 GitHub 上分支這項專案</string>
     <string name="gradient">漸層風</string>
     <string name="grid_size_1">1</string>
@@ -253,7 +253,7 @@
     <string name="no_songs">沒有歌曲</string>
     <string name="normal">普通風</string>
     <string name="normal_lyrics">一般歌詞</string>
-    <string name="not_listed_in_media_store"><![CDATA[媒體商店裡找不到 <b>%s</b> 。]]></string>
+    <string name="not_listed_in_media_store"><![CDATA[媒體商店中未收錄 <b>%s</b> 。]]></string>
     <string name="not_recently_played">鮮少播放</string>
     <string name="nothing_to_scan">沒有可掃描的內容。</string>
     <string name="nothing_to_see">沒有內容</string>
@@ -312,7 +312,7 @@
     <string name="pref_keep_screen_on_title">保持螢幕開啟</string>
     <string name="pref_language_name">選取語言</string>
     <string name="pref_snow_fall_title">下雪效果</string>
-    <string name="pref_summary_album_art_on_lockscreen">以現正播放的歌曲專輯封面作為鎖定螢幕背景</string>
+    <string name="pref_summary_album_art_on_lockscreen">以現正播放的歌曲專輯封面作為鎖定螢幕桌布</string>
     <string name="pref_summary_album_artists_only">於演唱者分類中顯示專輯演唱者</string>
     <string name="pref_summary_audio_ducking">於系統音效響鈴或接收到通知時降低音量</string>
     <string name="pref_summary_audio_fade">當歌曲暫停/播放時，淡入/淡出音效</string>
@@ -327,7 +327,7 @@
     <string name="pref_summary_cross_fade">歌曲淡化/淡出的持續時間</string>
     <string name="pref_summary_desaturated_color">根據 Material Design 指引，於深色模式時，色彩應不飽和</string>
     <string name="pref_summary_expand_now_playing_panel">按兩下通知欄以顯示現正播放畫面，而非首頁</string>
-    <string name="pref_summary_extra_controls">新增更多控制於播放列</string>
+    <string name="pref_summary_extra_controls">新增更多控制鍵於播放列</string>
     <string name="pref_summary_extra_song_info">顯示更多歌曲資訊，例如檔案格式、位元速率、頻率</string>
     <string name="pref_summary_gapless_playback">"可能會在某些裝置上發生播放問題。"</string>
     <string name="pref_summary_home_banner">顯示或隱藏首頁橫幅</string>
@@ -343,7 +343,7 @@
     <string name="pref_summary_toggle_full_screen">沉浸模式</string>
     <string name="pref_summary_toggle_headset">當連接耳機後，自動播放音樂</string>
     <string name="pref_summary_toggle_shuffle">當播放新播放清單時，關閉隨機模式</string>
-    <string name="pref_summary_toggle_volume">螢幕若仍有充足空間，則在現正播放畫面，顯示音量控制欄</string>
+    <string name="pref_summary_toggle_volume">若螢幕仍有充足空間，則在現正播放畫面，顯示音量控制欄</string>
     <string name="pref_summary_wallpaper_accent">從桌布上擷取主題色彩</string>
     <string name="pref_summary_whitelist">僅顯示來自 /Music 資料夾內的歌曲</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯封面</string>
