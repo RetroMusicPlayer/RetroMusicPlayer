@@ -366,18 +366,15 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             )
             return
         }
-        val translationY =
-            if (visible) 0F else dip(R.dimen.bottom_nav_height).toFloat() + windowInsets.safeGetBottomInsets()
         val mAnimate = animate && bottomSheetBehavior.state == STATE_COLLAPSED
         if (mAnimate) {
-            binding.bottomNavigationView.translateYAnimate(translationY).doOnEnd {
-                if (visible && bottomSheetBehavior.state != STATE_EXPANDED) {
-                    binding.bottomNavigationView.bringToFront()
-                }
+            if (visible) {
+                binding.bottomNavigationView.bringToFront()
+                binding.bottomNavigationView.show()
+            } else {
+                binding.bottomNavigationView.hide()
             }
         } else {
-            binding.bottomNavigationView.translationY =
-                translationY
             binding.bottomNavigationView.isVisible = false
             if (visible && bottomSheetBehavior.state != STATE_EXPANDED) {
                 binding.bottomNavigationView.bringToFront()
