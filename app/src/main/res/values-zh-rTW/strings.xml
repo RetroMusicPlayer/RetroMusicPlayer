@@ -73,8 +73,8 @@
     <string name="app_widget_big_name">全景型</string>
     <string name="app_widget_card_name">卡牌型</string>
     <string name="app_widget_classic_name">經典型</string>
-    <string name="app_widget_md3_name">MD3 播放器</string>
-    <string name="app_widget_small_name">小型播放器</string>
+    <string name="app_widget_md3_name">MD3</string>
+    <string name="app_widget_small_name">小型</string>
     <string name="app_widget_text_name">少字型</string>
     <string name="artist">演唱者</string>
     <string name="artists">演唱者</string>
