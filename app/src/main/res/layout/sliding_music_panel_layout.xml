@@ -39,11 +39,11 @@
             android:layout_height="@dimen/mini_player_height"
             tools:layout="@layout/fragment_mini_player" />
 
-        <ViewStub
-            android:id="@+id/cast_stub"
+        <fragment
+            android:id="@+id/castMiniController"
+            class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout="@layout/cast_controller_layout" />
+            android:layout_height="wrap_content" />
 
     </FrameLayout>
 

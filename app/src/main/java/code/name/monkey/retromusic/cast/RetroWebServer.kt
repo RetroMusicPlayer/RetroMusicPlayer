@@ -17,13 +17,6 @@ class RetroWebServer(val context: Context) : NanoHTTPD(SERVER_PORT) {
         const val PART_COVER_ART = "coverart"
         const val PART_SONG = "song"
         const val PARAM_ID = "id"
-        private var mRetroWebServer: RetroWebServer? = null
-        fun getInstance(context: Context): RetroWebServer {
-            if (mRetroWebServer == null) {
-                mRetroWebServer = RetroWebServer(context)
-            }
-            return mRetroWebServer!!
-        }
     }
 
     override fun serve(session: IHTTPSession?): Response {

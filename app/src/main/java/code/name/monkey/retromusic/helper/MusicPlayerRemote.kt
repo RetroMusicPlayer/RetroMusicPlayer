@@ -49,7 +49,6 @@ object MusicPlayerRemote : KoinComponent {
             if (value) {
                 musicService?.quit()
             }
-            println(value.toString() + "" + isCasting.toString())
         }
 
     @JvmStatic
