@@ -34,7 +34,7 @@
         android:text="@string/action_settings" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/check_databases"
+        android:id="@+id/check_playlists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
