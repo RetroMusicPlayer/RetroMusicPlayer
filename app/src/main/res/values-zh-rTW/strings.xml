@@ -86,7 +86,7 @@
     <string name="backup_restore_title"><![CDATA[備份和復原]]></string>
     <string name="backup_title">備份</string>
     <string name="biography">簡介</string>
-    <string name="black_theme_name">純粹黑</string>
+    <string name="black_theme_name">純黑色</string>
     <string name="blacklist">黑名單</string>
     <string name="blur">模糊風</string>
     <string name="blur_card">模糊卡牌風</string>
@@ -137,7 +137,7 @@
     <string name="currently_listening_to_x_by_x">正在收聽 %2$s 的 %1$s。</string>
     <string name="custom_artist_images">自訂演唱者圖片</string>
     <string name="customactivityoncrash_error_activity_error_details_share">回報當機記錄</string>
-    <string name="dark_theme_name">暗沉</string>
+    <string name="dark_theme_name">深色</string>
     <string name="delete_playlist_title">刪除播放清單</string>
     <string name="delete_playlist_x"><![CDATA[確定要刪除播放清單 <b>%1$s</b> 嗎？]]></string>
     <string name="delete_playlists_title">刪除播放清單</string>
@@ -222,7 +222,7 @@
     <string name="last_song">最後一首</string>
     <string name="library_categories">音樂庫類別</string>
     <string name="licenses">原始碼授權</string>
-    <string name="light_theme_name">明亮</string>
+    <string name="light_theme_name">淺色</string>
     <string name="listeners_label">聽眾</string>
     <string name="listing_files">清單文件</string>
     <string name="loading_products">正在載入…</string>
@@ -364,7 +364,7 @@
     <string name="pref_title_colored_notification">彩色狀態列</string>
     <string name="pref_title_cross_fade">淡入/淡出 (測試中)</string>
     <string name="pref_title_custom_font">使用 Manrope 字型</string>
-    <string name="pref_title_desaturated_color">低飽和顏色</string>
+    <string name="pref_title_desaturated_color">不飽和色彩</string>
     <string name="pref_title_expand_now_playing_panel">顯示現正播放畫面</string>
     <string name="pref_title_extra_controls">更多控制選項</string>
     <string name="pref_title_extra_song_info">音樂資訊</string>
@@ -501,7 +501,7 @@
     <string name="track_list">曲目編號</string>
     <string name="translate">翻譯</string>
     <string name="translate_community">協助我們將應用程式本地化成您的語言</string>
-    <string name="try_retro_music_premium">試用 Retro Music Premium</string>
+    <string name="try_retro_music_premium">立即嘗試 Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">分享您為 Retro Music 的設計</string>
     <string name="unlabeled">隱藏標籤</string>
