@@ -18,7 +18,7 @@
     <string name="action_edit">編輯</string>
     <string name="action_go_to_album">前往專輯頁面</string>
     <string name="action_go_to_artist">前往演唱者頁面</string>
-    <string name="action_go_to_genre">前往流派頁面</string>
+    <string name="action_go_to_genre">前往風格類型</string>
     <string name="action_go_to_lyrics">前往歌詞頁面</string>
     <string name="action_go_to_start_directory">前往起始目錄</string>
     <string name="action_grant">授予</string>
@@ -155,7 +155,7 @@
     <string name="dialog_title_set_ringtone">設定鈴聲</string>
     <string name="disc_hint">光碟編號</string>
     <string name="do_you_want_to_clear_the_blacklist">確定要清除黑名單嗎？</string>
-    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[確定要將 <b>%1$s</b> 自黑名單移除嗎？]]></string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[確定要將 <b>%1$s</b> 自黑名單中移除嗎？]]></string>
     <string name="donate">捐助</string>
     <string name="donate_summary">若您認為我的努力值得回報，歡迎您以金錢鼓勵我的付出</string>
     <string name="donation_header">為我買一個:</string>
@@ -179,8 +179,8 @@
     <string name="full_card">全景卡牌風</string>
     <string name="general_settings_summary">變更應用程式的佈景主題和色彩</string>
     <string name="general_settings_title">介面與外觀</string>
-    <string name="genre">流派</string>
-    <string name="genres">流派</string>
+    <string name="genre">風格類型</string>
+    <string name="genres">風格類型</string>
     <string name="git_hub_summary">在 GitHub 上分支這項專案</string>
     <string name="gradient">漸層風</string>
     <string name="grid_size_1">1</string>
@@ -204,7 +204,7 @@
     <string name="image_settings_summary">變更下載演唱者圖片設定</string>
     <string name="import_label">匯入</string>
     <string name="import_playlist">匯入播放清單</string>
-    <string name="import_playlist_message">這將匯入於 Android 媒體商店全部的播放清單和歌曲，若播放清單已存在，相關的歌曲將會被合併。</string>
+    <string name="import_playlist_message">這將匯入於 Android 媒體商店內全部的播放清單和歌曲，若播放清單已存在，相關的歌曲將會被合併。</string>
     <string name="inserted_x_songs_into_playlist_x">已插入 %1$d 首歌到播放清單 %2$s 中。</string>
     <string name="instagram_page_summary">在 Instagram 上分享 Retro Music 的配置消息</string>
     <string name="keyboard">鍵盤</string>
@@ -214,7 +214,7 @@
     <string name="label_file_path">檔案路徑</string>
     <string name="label_file_size">檔案大小</string>
     <string name="label_last_modified">最後修改</string>
-    <string name="label_more_from">來自 %s 的更多內容</string>
+    <string name="label_more_from">來自 %s 更多內容</string>
     <string name="label_sampling_rate">取樣率</string>
     <string name="label_track_length">長度</string>
     <string name="labeled">顯示標籤</string>
@@ -244,7 +244,7 @@
     <string name="no_audio_ID">"請先播放一首歌後，然後再試一次。"</string>
     <string name="no_backups_found">找不到備份</string>
     <string name="no_equalizer">找不到等化器</string>
-    <string name="no_genres">沒有流派類型</string>
+    <string name="no_genres">沒有風格類型</string>
     <string name="no_lyrics_found">沒有歌詞</string>
     <string name="no_playing_queue">沒有播放歌曲</string>
     <string name="no_playlists">沒有播放清單</string>
@@ -387,7 +387,7 @@
     <string name="pref_title_swipe_anywhere_now_playing">隨意滑動以切換歌曲</string>
     <string name="pref_title_tab_text_mode">索引標題模式</string>
     <string name="pref_title_toggle_carousel_effect">輪播效果</string>
-    <string name="pref_title_toggle_full_screen">全螢幕應用</string>
+    <string name="pref_title_toggle_full_screen">全螢幕應用程式</string>
     <string name="pref_title_toggle_toggle_headset">自動播放</string>
     <string name="pref_title_toggle_toggle_shuffle">隨機播放模式</string>
     <string name="pref_title_toggle_volume">音量控制</string>
@@ -442,7 +442,7 @@
     <!-- SAF guide -->
     <string name="save_playlist_title">另存新檔</string>
     <string name="save_playlists_title">另存新檔</string>
-    <string name="saved_playlist_to">已儲存播放清單至 %s。</string>
+    <string name="saved_playlist_to">已儲存播放清單到 %s。</string>
     <string name="saving_changes">儲存變更</string>
     <string name="scan_media">掃描媒體</string>
     <string name="scanned_files">已掃描 %2$d 個檔案夾中的 %1$d 個。</string>
@@ -528,7 +528,7 @@
     <string name="x_selected">已選取 %1$d 個</string>
     <string name="year">年份</string>
     <string name="you_have_to_select_at_least_one_category">您必須選取至少一個類別。</string>
-    <string name="you_will_be_forwarded_to_the_issue_tracker_website">您將被重新導向至事件追蹤器網頁。</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">您將被重新導向至議題追蹤器網頁。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
     <string name="bug_report_success">臭蟲回報成功</string>
 </resources>
