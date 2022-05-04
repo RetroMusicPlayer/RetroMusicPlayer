@@ -46,11 +46,11 @@
     <string name="action_shuffle_all">Amestecă tot</string>
     <string name="action_shuffle_playlist">Amestecă playlist</string>
     <string name="action_sleep_timer">Cronometru de somn</string>
-    <string name="action_sort_order">Sort order</string>
+    <string name="action_sort_order">Ordine de sortare</string>
     <string name="action_tag_editor">Redactor info</string>
-    <string name="action_toggle_favorite">Toggle favorite</string>
+    <string name="action_toggle_favorite">Comutare favorite</string>
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
-    <string name="adaptive">Adaptive</string>
+    <string name="adaptive">Adaptiv</string>
     <string name="add_action">Adaugă</string>
     <string name="add_playlist_title">"Adaugă la playlist"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
@@ -59,33 +59,33 @@
     <string name="added_x_titles_to_playing_queue">Adăugate %1$d titluri la coada de redare</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
-        <item quantity="one">Song</item>
-        <item quantity="few">Songs</item>
-        <item quantity="other">Songs</item>
+        <item quantity="one">Melodie</item>
+        <item quantity="few">Melodii</item>
+        <item quantity="other">Melodii</item>
     </plurals>
-    <string name="album_artist">Album Artist</string>
+    <string name="album_artist">Artist album</string>
     <string name="albums">Albume</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
-        <item quantity="few">Albums</item>
-        <item quantity="other">Albums</item>
+        <item quantity="few">Albume</item>
+        <item quantity="other">Albume</item>
     </plurals>
     <string name="always">Mereu</string>
     <string name="app_share">Hey! încearcă acest music player la adresa: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Amestecă</string>
     <string name="app_shortcut_top_tracks_short">Top cântece</string>
-    <string name="app_widget_big_name">Full Image</string>
+    <string name="app_widget_big_name">Imagine completă</string>
     <string name="app_widget_card_name">Card</string>
-    <string name="app_widget_classic_name">Classic</string>
+    <string name="app_widget_classic_name">Clasic</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Mic</string>
-    <string name="app_widget_text_name">Minimal Text</string>
+    <string name="app_widget_text_name">Text minimal</string>
     <string name="artist">Artist</string>
     <string name="artists">Artiști</string>
-    <string name="audio_fade_duration">Audio fade duration</string>
+    <string name="audio_fade_duration">Durată de estompare audio</string>
     <string name="audio_focus_denied">Folcalizarea audio a fost respinsă.</string>
     <string name="audio_settings_summary">Ajustați setările de sunet și comenzile egalizatorului</string>
-    <string name="auto">Auto</string>
+    <string name="auto">Automat</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
@@ -98,10 +98,10 @@
     <string name="bug_report_failed_invalid_token">Invalid access token. Please contact the app developer.</string>
     <string name="bug_report_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
     <string name="bug_report_failed_unknown">An unexpected error occurred. Please contact the app developer.</string>
-    <string name="bug_report_failed_wrong_credentials">Wrong username or password</string>
-    <string name="bug_report_issue">Issue</string>
-    <string name="bug_report_manual">Send manually</string>
-    <string name="bug_report_no_description">Please enter an issue description</string>
+    <string name="bug_report_failed_wrong_credentials">Nume de utilizator sau parolă greșită</string>
+    <string name="bug_report_issue">Problemă</string>
+    <string name="bug_report_manual">Trimite manual</string>
+    <string name="bug_report_no_description">Introduceți o descriere a problemei</string>
     <string name="bug_report_no_password">Please enter your valid GitHub password</string>
     <string name="bug_report_no_title">Please enter an issue title</string>
     <string name="bug_report_no_username">Please enter your valid GitHub username</string>
@@ -119,12 +119,12 @@
     <string name="changelog_summary">Check out What\'s New</string>
     <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
-    <string name="circle">Circle</string>
+    <string name="circle">Cerc</string>
     <string name="circular">Circular</string>
-    <string name="classic">Classic</string>
+    <string name="classic">Clasic</string>
     <string name="clear_action">Șterge</string>
     <string name="clear_blacklist">Șterge \"Lista neagră\"</string>
-    <string name="clear_history">Clear History</string>
+    <string name="clear_history">Goliți istoricul</string>
     <string name="clear_playing_queue">Clear queue</string>
     <string name="color">Culoare</string>
     <string name="colors">Culori</string>
@@ -180,7 +180,7 @@
     <string name="for_you">Pentru dvs.</string>
     <string name="free">Free</string>
     <string name="full">Plin</string>
-    <string name="full_card">Full card</string>
+    <string name="full_card">Card complet</string>
     <string name="general_settings_summary">Schimbați culorile generale ale aplicației</string>
     <string name="general_settings_title">Aspect</string>
     <string name="genre">Gen muzical</string>
@@ -534,4 +534,5 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
+    <string name="bug_report_success">Bug report successful</string>
 </resources>

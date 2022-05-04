@@ -237,7 +237,7 @@
     <string name="my_name">İsim</string>
     <string name="my_top_tracks">Sık oynatılanlar</string>
     <string name="never">Asla</string>
-    <string name="new_music_mix">New Music Mix</string>
+    <string name="new_music_mix">Yeni Müzik Karışımı</string>
     <string name="new_playlist_title">Yeni şarkı listesi</string>
     <string name="new_start_directory">%s yeni başlangıç dizini.</string>
     <string name="next_song">Sonraki Şarkı</string>
@@ -285,7 +285,7 @@
     <string name="pinterest_page_summary">Retro Müzik tasarım ilhamı almak için Pinterest sayfasını takip edin</string>
     <string name="plain">Sade</string>
     <string name="playList_already_exits">Oynatma listesi zaten var</string>
-    <string name="playback_pitch">Pitch</string>
+    <string name="playback_pitch">Perde</string>
     <string name="playback_settings">Oynatma Ayarları</string>
     <string name="playback_speed">Oynatma Hızı</string>
     <string name="playing_notification_description">Oynatılıyor bildirimi, oynatma/duraklatma vb. için eylemler sağlar.</string>
@@ -532,4 +532,5 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
+    <string name="bug_report_success">Bug report successful</string>
 </resources>
