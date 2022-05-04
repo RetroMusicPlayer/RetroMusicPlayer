@@ -172,7 +172,7 @@
     <string name="fit">Paskan</string>
     <string name="flat">Datar</string>
     <string name="folders">Folder</string>
-    <string name="follow_system">Ikuti setelan sistem</string>
+    <string name="follow_system">Ikuti sistem</string>
     <string name="for_you">Untuk Anda</string>
     <string name="free">Gratis</string>
     <string name="full">Penuh</string>
@@ -384,7 +384,7 @@
     <string name="pref_title_remember_tab">Ingat tab terakhir</string>
     <string name="pref_title_show_lyrics">Tampilkan lirik</string>
     <string name="pref_title_suggestions">Tampilkan Saran</string>
-    <string name="pref_title_swipe_anywhere_now_playing">Geser ke mana saja untuk mengubah lagu</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Usap kemana saja untuk mengubah lagu</string>
     <string name="pref_title_tab_text_mode">Mode judul tab</string>
     <string name="pref_title_toggle_carousel_effect">Efek korsel</string>
     <string name="pref_title_toggle_full_screen">Aplikasi layar penuh</string>
@@ -530,4 +530,5 @@
     <string name="you_have_to_select_at_least_one_category">Anda harus memilih setidaknya satu kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan ditersukan ke situs web pelacak masalah.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
+    <string name="bug_report_success">Lapor bug sukses</string>
 </resources>

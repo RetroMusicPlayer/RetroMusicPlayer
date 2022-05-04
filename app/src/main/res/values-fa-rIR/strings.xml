@@ -74,7 +74,6 @@
     <string name="app_shortcut_top_tracks_short">اهنگ های برتر</string>
     <string name="app_widget_big_name">تصویر کامل</string>
     <string name="app_widget_card_name">کارت</string>
-    <string name="app_widget_circle_name">دایره ای</string>
     <string name="app_widget_classic_name">کلاسیک</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">كوچك</string>
@@ -533,4 +532,5 @@
     <string name="you_have_to_select_at_least_one_category">شما باید حداقل یک دسته را انتخاب کنید.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">شما به وب سایت ردیاب مشکل هدایت می شوید.</string>
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
+    <string name="bug_report_success">Bug report successful</string>
 </resources>

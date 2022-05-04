@@ -115,7 +115,7 @@
     <string name="cascading">Cascata</string>
     <string name="changelog">Lista de mudanças</string>
     <string name="changelog_summary">Veja o que há de novo</string>
-    <string name="choose_image">Choose Image</string>
+    <string name="choose_image">Escolha a imagem</string>
     <string name="choose_restore_title">Selecione o que será restaurado</string>
     <string name="circle">Círculo</string>
     <string name="circular">Circular</string>
@@ -407,7 +407,7 @@
     <string name="remove_action">Remover</string>
     <string name="remove_cover">Remover capa</string>
     <string name="remove_from_blacklist">Remover da lista negra</string>
-    <string name="remove_image">Remove Image</string>
+    <string name="remove_image">Remover imagem</string>
     <string name="remove_song_from_playlist_title">Remover música da playlist</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Remover a música <b>%1$s</b> da playlist?]]></string>
     <string name="remove_songs_from_playlist_title">Remover músicas da playlist</string>
@@ -532,4 +532,5 @@
     <string name="you_have_to_select_at_least_one_category">Você precisa selecionar ao menos uma categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Você será encaminhado para o website de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">Os dados da sua conta são usados ​​apenas para autenticação.</string>
+    <string name="bug_report_success">Falha reportada com sucesso</string>
 </resources>

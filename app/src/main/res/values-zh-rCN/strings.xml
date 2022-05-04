@@ -113,7 +113,7 @@
     <string name="cascading">层叠</string>
     <string name="changelog">更新日志</string>
     <string name="changelog_summary">看看新变化</string>
-    <string name="choose_image">Choose Image</string>
+    <string name="choose_image">选择图像</string>
     <string name="choose_restore_title">选择要还原的内容</string>
     <string name="circle">唱盘</string>
     <string name="circular">圆形</string>
@@ -405,7 +405,7 @@
     <string name="remove_action">移除</string>
     <string name="remove_cover">移除封面</string>
     <string name="remove_from_blacklist">从黑名单中移除</string>
-    <string name="remove_image">Remove Image</string>
+    <string name="remove_image">移除图像</string>
     <string name="remove_song_from_playlist_title">从播放列表中删除歌曲</string>
     <string name="remove_song_x_from_playlist"><![CDATA[是否从播放列表中删除歌曲 <b>%1$s</b>？]]></string>
     <string name="remove_songs_from_playlist_title">从播放列表中删除歌曲</string>
@@ -530,4 +530,5 @@
     <string name="you_have_to_select_at_least_one_category">请至少选择一个分类。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
+    <string name="bug_report_success">错误报告成功</string>
 </resources>

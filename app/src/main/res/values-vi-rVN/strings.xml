@@ -531,4 +531,5 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="you_have_to_select_at_least_one_category">Bạn phải chọn ít nhất một danh mục.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Bạn sẽ được chuyển tiếp đến trang web theo dõi vấn đề.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
+    <string name="bug_report_success">Bug report successful</string>
 </resources>
