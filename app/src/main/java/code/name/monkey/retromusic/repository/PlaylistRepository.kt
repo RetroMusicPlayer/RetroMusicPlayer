@@ -51,7 +51,7 @@ interface PlaylistRepository {
 
     fun playlistSongs(playlistId: Long): List<Song>
 }
-
+@Suppress("Deprecation")
 class RealPlaylistRepository(
     private val contentResolver: ContentResolver
 ) : PlaylistRepository {

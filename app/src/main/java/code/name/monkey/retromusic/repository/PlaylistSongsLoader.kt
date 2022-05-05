@@ -30,7 +30,7 @@ import code.name.monkey.retromusic.model.Song
 /**
  * Created by hemanths on 16/08/17.
  */
-
+@Suppress("Deprecation")
 object PlaylistSongsLoader {
 
     @JvmStatic
