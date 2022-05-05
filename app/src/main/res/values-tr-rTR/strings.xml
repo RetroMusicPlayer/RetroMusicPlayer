@@ -115,7 +115,7 @@
     <string name="cascading">Basamaklı</string>
     <string name="changelog">Değişim kayıt günlüğü</string>
     <string name="changelog_summary">Yeniliklere göz at</string>
-    <string name="choose_image">Choose Image</string>
+    <string name="choose_image">Resim Seçin</string>
     <string name="choose_restore_title">Neyi geri yükleyeceğinizi seçin</string>
     <string name="circle">Çember</string>
     <string name="circular">Dairesel</string>
@@ -268,7 +268,7 @@
     <string name="only_on_wifi">Sadece Wi-Fi\'da</string>
     <string name="other_settings_summary">Gelişmiş test özellikleri</string>
     <string name="others">Diğer</string>
-    <string name="over_cover">Over Cover</string>
+    <string name="over_cover">Kapağın Üstüne</string>
     <string name="password">Şifre</string>
     <string name="past_three_months">Son 3 ay</string>
     <string name="paste_lyrics_here">Sözleri buraya yapıştır</string>
@@ -339,7 +339,7 @@
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Başlangıçta son kullanılan sekmeye git</string>
-    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
+    <string name="pref_summary_show_lyrics">Albüm kapağının üstünde senkronize edilmiş sözleri göster</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
@@ -413,7 +413,7 @@
     <string name="remove_songs_from_playlist_title">Şarkıları oynatma listesinden kaldır</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[<b>%1$d</b> adlı şarkılar oynatma listesinden kaldırılsın mı?]]></string>
     <string name="rename_playlist_title">Oynatma listesini yeniden adlandır</string>
-    <string name="replace_cover">Replace Cover</string>
+    <string name="replace_cover">Kapağı Değiştir</string>
     <string name="report_an_issue">Sorun Bildir</string>
     <string name="report_bug">Hata bildir</string>
     <string name="reset_action">Sıfırla</string>
