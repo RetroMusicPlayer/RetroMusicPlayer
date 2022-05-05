@@ -25,13 +25,13 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.signature.MediaStoreSignature
 import me.zhanghai.android.fastscroll.PopupTextProvider
@@ -45,7 +45,7 @@ class SongFileAdapter(
     private var dataSet: List<File>,
     private val itemLayoutRes: Int,
     private val iCallbacks: ICallbacks?,
-    iCabHolder: ICabHolder?
+    iCabHolder: ICabHolder?,
 ) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(
     activity, iCabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
@@ -110,9 +110,7 @@ class SongFileAdapter(
                 )
             )
         } else {
-            val error = RetroUtil.getTintedVectorDrawable(
-                activity, R.drawable.ic_file_music, iconColor
-            )
+            val error = activity.getTintedDrawable(R.drawable.ic_file_music, iconColor)
             GlideApp.with(activity)
                 .load(AudioFileCover(file.path))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

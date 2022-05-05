@@ -25,8 +25,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.applyCanvas
-import androidx.core.graphics.createBitmap
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
@@ -167,16 +165,6 @@ abstract class BaseAppWidget : AppWidgetProvider() {
             )
 
             return rounded
-        }
-
-        fun createBitmap(drawable: Drawable, sizeMultiplier: Float): Bitmap {
-            return createBitmap(
-                (drawable.intrinsicWidth * sizeMultiplier).toInt(),
-                (drawable.intrinsicHeight * sizeMultiplier).toInt(),
-            ).applyCanvas {
-                drawable.setBounds(0, 0, this.width, this.height)
-                drawable.draw(this)
-            }
         }
 
         protected fun composeRoundedRectPath(

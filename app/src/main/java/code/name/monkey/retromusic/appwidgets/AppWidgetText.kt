@@ -21,47 +21,41 @@ import android.content.Intent
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
+import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 
 class AppWidgetText : BaseAppWidget() {
     override fun defaultAppWidget(context: Context, appWidgetIds: IntArray) {
         val appWidgetView = RemoteViews(context.packageName, R.layout.app_widget_text)
 
         appWidgetView.setImageViewBitmap(
-            R.id.button_next, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context, R.drawable.ic_skip_next, ContextCompat.getColor(
-                        context, R.color.md_white_1000
-                    )
-                ), 1f
-            )
+            R.id.button_next,
+            context.getTintedDrawable(R.drawable.ic_skip_next, ContextCompat.getColor(
+                context, R.color.md_white_1000
+            )).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_prev, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context, R.drawable.ic_skip_previous, ContextCompat.getColor(
-                        context, R.color.md_white_1000
-                    )
-                ), 1f
+            R.id.button_prev,
+            context.getTintedDrawable(R.drawable.ic_skip_previous, ContextCompat.getColor(
+                context, R.color.md_white_1000
             )
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_play_pause, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context, R.drawable.ic_play_arrow_white_32dp, ContextCompat.getColor(
-                        context, R.color.md_white_1000
-                    )
-                ), 1f
+            R.id.button_toggle_play_pause,
+            context.getTintedDrawable(R.drawable.ic_play_arrow_white_32dp, ContextCompat.getColor(
+                context, R.color.md_white_1000
             )
+            ).toBitmap()
         )
 
         appWidgetView.setTextColor(
@@ -131,36 +125,29 @@ class AppWidgetText : BaseAppWidget() {
         val playPauseRes = if (isPlaying) R.drawable.ic_pause
         else R.drawable.ic_play_arrow_white_32dp
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_play_pause, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    service, playPauseRes, ContextCompat.getColor(
-                        service, R.color.md_white_1000
-                    )
-                ), 1f
-            )
+            R.id.button_toggle_play_pause,
+            service.getTintedDrawable(playPauseRes, ContextCompat.getColor(
+                service, R.color.md_white_1000)
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_next, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
+            R.id.button_next,
+            service.getTintedDrawable(
+                R.drawable.ic_skip_next,
+                ContextCompat.getColor(
                     service,
-                    R.drawable.ic_skip_next,
-                    ContextCompat.getColor(
-                        service,
-                        R.color.md_white_1000
-                    )
-                ), 1f
-            )
+                    R.color.md_white_1000
+                )
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_prev, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    service,
-                    R.drawable.ic_skip_previous,
-                    ContextCompat.getColor(
-                        service, R.color.md_white_1000
-                    )
-                ), 1f
-            )
+            R.id.button_prev,
+            service.getTintedDrawable(
+                R.drawable.ic_skip_previous,
+                ContextCompat.getColor(
+                    service, R.color.md_white_1000
+                )
+            ).toBitmap()
         )
 
         pushUpdate(service.applicationContext, appWidgetIds, appWidgetView)

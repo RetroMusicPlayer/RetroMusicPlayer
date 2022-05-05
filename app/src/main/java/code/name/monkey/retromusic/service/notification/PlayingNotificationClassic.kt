@@ -33,6 +33,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.isSystemDarkModeEnabled
 import code.name.monkey.retromusic.extensions.toBitmap
@@ -56,7 +57,7 @@ import com.bumptech.glide.request.transition.Transition
  */
 @SuppressLint("RestrictedApi")
 class PlayingNotificationClassic(
-    val context: Context
+    val context: Context,
 ) : PlayingNotification(context) {
     private var primaryColor: Int = 0
 
@@ -115,7 +116,7 @@ class PlayingNotificationClassic(
             ) {
                 override fun onResourceReady(
                     resource: BitmapPaletteWrapper,
-                    transition: Transition<in BitmapPaletteWrapper>?
+                    transition: Transition<in BitmapPaletteWrapper>?,
                 ) {
                     val colors = MediaNotificationProcessor(context, resource.bitmap)
                     update(resource.bitmap, colors.backgroundColor)
@@ -184,20 +185,17 @@ class PlayingNotificationClassic(
                     val secondary = MaterialValueHelper.getSecondaryTextColor(context, dark)
                     primaryColor = primary
 
-                    val close = RetroUtil.getTintedVectorDrawable(
-                        context,
+                    val close = context.getTintedDrawable(
                         R.drawable.ic_close,
                         primary
                     ).toBitmap()
                     val prev =
-                        RetroUtil.getTintedVectorDrawable(
-                            context,
+                        context.getTintedDrawable(
                             R.drawable.ic_skip_previous_round_white_32dp,
                             primary
                         ).toBitmap()
                     val next =
-                        RetroUtil.getTintedVectorDrawable(
-                            context,
+                        context.getTintedDrawable(
                             R.drawable.ic_skip_next_round_white_32dp,
                             primary
                         ).toBitmap()
@@ -222,16 +220,14 @@ class PlayingNotificationClassic(
 
                     contentView.setImageViewBitmap(
                         R.id.smallIcon,
-                        RetroUtil.getTintedVectorDrawable(
-                            context,
+                        context.getTintedDrawable(
                             R.drawable.ic_notification,
                             secondary
                         ).toBitmap(0.6f)
                     )
                     bigContentView.setImageViewBitmap(
                         R.id.smallIcon,
-                        RetroUtil.getTintedVectorDrawable(
-                            context,
+                        context.getTintedDrawable(
                             R.drawable.ic_notification,
                             secondary
                         ).toBitmap(0.6f)
@@ -241,8 +237,7 @@ class PlayingNotificationClassic(
     }
 
     private fun getPlayPauseBitmap(isPlaying: Boolean): Bitmap {
-        return RetroUtil.getTintedVectorDrawable(
-            context,
+        return context.getTintedDrawable(
             if (isPlaying)
                 R.drawable.ic_pause_white_48dp
             else
@@ -262,7 +257,7 @@ class PlayingNotificationClassic(
 
     private fun buildPendingIntent(
         context: Context, action: String,
-        serviceName: ComponentName?
+        serviceName: ComponentName?,
     ): PendingIntent {
         val intent = Intent(action)
         intent.component = serviceName
@@ -299,7 +294,7 @@ class PlayingNotificationClassic(
     companion object {
         fun from(
             context: Context,
-            notificationManager: NotificationManager
+            notificationManager: NotificationManager,
         ): PlayingNotification {
             if (VersionUtils.hasOreo()) {
                 createNotificationChannel(context, notificationManager)

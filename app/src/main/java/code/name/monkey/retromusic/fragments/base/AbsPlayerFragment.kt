@@ -20,7 +20,6 @@ import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
-import android.graphics.drawable.Drawable
 import android.media.MediaMetadataRetriever
 import android.os.Bundle
 import android.provider.MediaStore
@@ -59,7 +58,6 @@ import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.RingtoneManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.Dispatchers.IO
@@ -81,7 +79,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
 
     override fun onMenuItemClick(
-        item: MenuItem
+        item: MenuItem,
     ): Boolean {
         val song = MusicPlayerRemote.currentSong
         when (item.itemId) {
@@ -212,8 +210,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
     private fun showLyricsIcon(item: MenuItem) {
         val icon =
             if (PreferenceUtil.showLyrics) R.drawable.ic_lyrics else R.drawable.ic_lyrics_outline
-        val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
-            requireContext(),
+        val drawable = requireContext().getTintedDrawable(
             icon,
             toolbarIconColor()
         )
@@ -268,8 +265,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 } else {
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                 }
-                val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
-                    requireContext(),
+                val drawable =  requireContext().getTintedDrawable(
                     icon,
                     toolbarIconColor()
                 )
@@ -337,7 +333,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                     e1: MotionEvent?,
                     e2: MotionEvent?,
                     distanceX: Float,
-                    distanceY: Float
+                    distanceY: Float,
                 ): Boolean {
                     return when {
                         abs(distanceX) > abs(distanceY) -> {
