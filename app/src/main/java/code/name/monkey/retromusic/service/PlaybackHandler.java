@@ -36,7 +36,6 @@ class PlaybackHandler extends Handler {
 
   @NonNull private final WeakReference<MusicService> mService;
   private float currentDuckVolume = 1.0f;
-  private boolean sFocusEnabled = PreferenceUtil.INSTANCE.isAudioFocusEnabled();
 
 
   PlaybackHandler(final MusicService service, @NonNull final Looper looper) {
