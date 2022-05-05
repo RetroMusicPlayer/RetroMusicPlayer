@@ -54,7 +54,7 @@
     <string name="add_action">추가</string>
     <string name="add_playlist_title">"재생목록에 추가"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"재생 대기열에 1곡이 추가되었습니다."</string>
     <string name="added_x_titles_to_playing_queue">재생 대기열에 %1$d곡이 추가되었습니다.</string>
     <string name="album">앨범</string>

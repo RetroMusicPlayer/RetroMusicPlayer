@@ -54,7 +54,7 @@
     <string name="add_action">Hinzufügen</string>
     <string name="add_playlist_title">"Zur Playlist hinzufügen"</string>
     <string name="add_time_framed_lryics">Synchronisierten Songtext hinzufügen</string>
-    <string name="added_song_count_to_playlist">%d Titel(e) zu %s hinzugefügt</string>
+    <string name="added_song_count_to_playlist">%1$d Titel(e) zu %2$s hinzugefügt</string>
     <string name="added_title_to_playing_queue">"1 Titel wurde zur Wiedergabeliste hinzugefügt."</string>
     <string name="added_x_titles_to_playing_queue">%1$d Titel wurden zur Wiedergabeliste hinzugefügt.</string>
     <string name="album">Album</string>
