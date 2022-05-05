@@ -215,7 +215,7 @@
     <string name="label_file_name">Dosya adı</string>
     <string name="label_file_path">Dosya yolu</string>
     <string name="label_file_size">Boyut</string>
-    <string name="label_last_modified">Last Modified</string>
+    <string name="label_last_modified">Son Değiştirme</string>
     <string name="label_more_from">%s\'dan daha fazla</string>
     <string name="label_sampling_rate">Örnekleme oranı</string>
     <string name="label_track_length">Uzunluk</string>
@@ -394,7 +394,7 @@
     <string name="pref_title_toggle_toggle_shuffle">Karıştır modu</string>
     <string name="pref_title_toggle_volume">Ses kontrolleri</string>
     <string name="pref_title_wallpaper_accent">Duvar kağıdı vurgu rengi</string>
-    <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_whitelist">Beyaz liste müziği</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Şimdi Oynatılıyor temaları, Atlıkarınca efekti, Renkli tema ve daha fazlası..</string>
     <string name="profile">Profil</string>
@@ -532,5 +532,5 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
-    <string name="bug_report_success">Bug report successful</string>
+    <string name="bug_report_success">Hata raporlama başarılı</string>
 </resources>
