@@ -36,6 +36,8 @@ class PlaybackHandler extends Handler {
 
   @NonNull private final WeakReference<MusicService> mService;
   private float currentDuckVolume = 1.0f;
+  private boolean sFocusEnabled = PreferenceUtil.INSTANCE.isAudioFocusEnabled();
+
 
   PlaybackHandler(final MusicService service, @NonNull final Looper looper) {
     super(looper);
@@ -146,7 +148,10 @@ class PlaybackHandler extends Handler {
 
           case AudioManager.AUDIOFOCUS_LOSS:
             // Lost focus for an unbounded amount of time: stop playback and release media playback
-            service.forcePause();
+            boolean isAudioFocusEnabled = PreferenceUtil.INSTANCE.isAudioFocusEnabled();
+            if (!isAudioFocusEnabled) {
+              service.forcePause();
+            }
             break;
 
           case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
