@@ -173,7 +173,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
     private fun loadBiography(
         name: String,
-        lang: String? = Locale.getDefault().language
+        lang: String? = Locale.getDefault().language,
     ) {
         biography = null
         this.lang = lang
@@ -274,12 +274,16 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             R.id.action_set_artist_image -> {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = "image/*"
-                selectImageLauncher.launch(Intent.createChooser(intent, getString(R.string.pick_from_local_storage)))
+                selectImageLauncher.launch(Intent.createChooser(intent,
+                    getString(R.string.pick_from_local_storage)))
                 return true
             }
             R.id.action_reset_artist_image -> {
                 showToast(resources.getString(R.string.updating))
-                CustomArtistImageUtil.getInstance(requireContext()).resetCustomArtistImage(artist)
+                lifecycleScope.launch {
+                    CustomArtistImageUtil.getInstance(requireContext())
+                        .resetCustomArtistImage(artist)
+                }
                 forceDownload = true
                 return true
             }
@@ -335,14 +339,18 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         }
     }
 
-    private val selectImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {result->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.data?.let {
-                CustomArtistImageUtil.getInstance(requireContext())
-                    .setCustomArtistImage(artist, it)
+    private val selectImageLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let {
+                    lifecycleScope.launch {
+                        CustomArtistImageUtil.getInstance(requireContext())
+                            .setCustomArtistImage(artist, it)
+                    }
+
+                }
             }
         }
-    }
 
     override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_artist_detail, menu)
