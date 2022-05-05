@@ -346,6 +346,7 @@
     <string name="pref_summary_toggle_volume">음악 재생 화면에서 공간이 있을 시 볼륨 컨트롤을 보입니다</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_manage_audio_focus">Audio will keep playing even when watching a video</string>
     <string name="pref_title_album_art_on_lockscreen">앨범 커버 표시</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -393,6 +394,7 @@
     <string name="pref_title_toggle_volume">볼륨 조절</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Manage audio focus</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>

@@ -326,6 +326,11 @@ object PreferenceUtil {
             TOGGLE_FULL_SCREEN, false
         )
 
+    val isAudioFocusEnabled
+        get() = sharedPreferences.getBoolean(
+            MANAGE_AUDIO_FOCUS, false
+        )
+
     val isLockScreen get() = sharedPreferences.getBoolean(LOCK_SCREEN, false)
 
     fun isAllowedToDownloadMetadata(): Boolean {

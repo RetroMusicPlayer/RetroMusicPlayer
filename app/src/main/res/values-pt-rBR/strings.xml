@@ -348,6 +348,7 @@
     <string name="pref_summary_toggle_volume">Se houver espaço suficiente, mostrar os controles de volume na tela de reprodução</string>
     <string name="pref_summary_wallpaper_accent">Extraia a cor de destaque do papel de parede</string>
     <string name="pref_summary_whitelist">Somente mostrar músicas da pasta /Music</string>
+    <string name="pref_summary_manage_audio_focus">Audio will keep playing even when watching a video</string>
     <string name="pref_title_album_art_on_lockscreen">Exibir a capa do álbum</string>
     <string name="pref_title_album_artists_only">Navegar pelo Artista do Álbum</string>
     <string name="pref_title_album_cover_style">Tema da capa do álbum</string>
@@ -395,6 +396,7 @@
     <string name="pref_title_toggle_volume">Controles do volume</string>
     <string name="pref_title_wallpaper_accent">Cor de destaque do papel de parede</string>
     <string name="pref_title_whitelist">Lista branca</string>
+    <string name="pref_title_manage_audio_focus">Manage audio focus</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema escuro, temas da tela de reprodução, efeito carrossel e mais..</string>
     <string name="profile">Perfil</string>

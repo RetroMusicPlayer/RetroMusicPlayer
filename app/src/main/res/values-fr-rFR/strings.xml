@@ -348,6 +348,7 @@
     <string name="pref_summary_toggle_volume">Si vous avez assez de place, affiche les contrôle du volume sur l\'écran de lecture</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Afficher uniquement les morceaux du dossier /Musique</string>
+    <string name="pref_summary_manage_audio_focus">Audio will keep playing even when watching a video</string>
     <string name="pref_title_album_art_on_lockscreen">Afficher la couverture de l\'album</string>
     <string name="pref_title_album_artists_only">Naviguer par artiste de l\'album</string>
     <string name="pref_title_album_cover_style">Thème de la couverture d\'album</string>
@@ -395,6 +396,7 @@
     <string name="pref_title_toggle_volume">Contrôles de volume</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Manage audio focus</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Maintenant les thèmes de jeu, L\'effet de carrousel, thème de couleur et plus..</string>
     <string name="profile">Profil</string>
