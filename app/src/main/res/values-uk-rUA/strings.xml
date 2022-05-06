@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Додати в обране</string>
     <string name="action_add_to_playing_queue">Додати до черги відтворення</string>
     <string name="action_add_to_playlist">Додати до списку відтворення</string>
+    <string name="action_cancel">Відмінити</string>
     <string name="action_cast">Трансляція на іншому дисплеї</string>
     <string name="action_clear_playing_queue">Очистити чергу відтворення</string>
     <string name="action_cycle_repeat">Циклічне повторення</string>
@@ -54,7 +55,7 @@
     <string name="add_action">Додати</string>
     <string name="add_playlist_title">"Додати до списку відтворення"</string>
     <string name="add_time_framed_lryics">Додати часові розмежування тексту</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Додано 1 композицію до черги відтворення."</string>
     <string name="added_x_titles_to_playing_queue">Додано %1$d композицій до черги відтворення.</string>
     <string name="album">Альбом</string>
@@ -107,6 +108,7 @@
     <string name="bug_report_no_password">Введіть свій дійсний пароль користувача GitHub</string>
     <string name="bug_report_no_title">Введіть заголовок проблеми</string>
     <string name="bug_report_no_username">Введіть своє дійсне ім’я користувача GitHub</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте \"Очистити дані додатка\" або надішліть лист на ел. пошту </string>
     <string name="bug_report_use_account">Надіслати через обліковий запис GitHub</string>
     <string name="buy_now">Придбайте вже</string>
@@ -130,6 +132,7 @@
     <string name="clear_playing_queue">Очистити чергу</string>
     <string name="color">Колір</string>
     <string name="colors">Кольори</string>
+    <string name="compact">Compact</string>
     <string name="composer">Композитор</string>
     <string name="copied_device_info_to_clipboard">Скопійовано інформацію про пристрій у буфер обміну.</string>
     <string name="could_not_create_playlist">Не вдалося створити список відтворення.</string>
@@ -172,6 +175,7 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Порожньо</string>
     <string name="equalizer">Еквалайзер</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">ЧаП</string>
     <string name="favorites">Обране</string>
     <string name="finish_last_song">Закінчити останню пісню</string>
@@ -357,7 +361,7 @@
     <string name="pref_title_album_cover_style">Тема обкладинки альбому</string>
     <string name="pref_title_album_cover_transform">Пропустити обкладинку альбому</string>
     <string name="pref_title_app_shortcuts">Кольорові ярлики додатків</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Зменшити гучність при сторонніх звуках</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Автоматично завантажувати зображення виконавців</string>
@@ -536,5 +540,4 @@
     <string name="you_have_to_select_at_least_one_category">Виберіть принаймні одну категорію.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вас буде перенаправлено на сайт відстеження проблем.</string>
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
