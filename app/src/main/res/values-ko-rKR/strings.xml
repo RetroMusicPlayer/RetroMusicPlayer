@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">즐겨찾기에 추가</string>
     <string name="action_add_to_playing_queue">재생 대기열에 추가</string>
     <string name="action_add_to_playlist">재생목록에 추가...</string>
+    <string name="action_cancel">현재 타이머 취소</string>
     <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">재생 대기열 비우기</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
@@ -54,7 +55,7 @@
     <string name="add_action">추가</string>
     <string name="add_playlist_title">"재생목록에 추가"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"재생 대기열에 1곡이 추가되었습니다."</string>
     <string name="added_x_titles_to_playing_queue">재생 대기열에 %1$d곡이 추가되었습니다.</string>
     <string name="album">앨범</string>
@@ -101,6 +102,7 @@
     <string name="bug_report_no_password">Please enter your valid GitHub password</string>
     <string name="bug_report_no_title">Please enter an issue title</string>
     <string name="bug_report_no_username">Please enter your valid GitHub username</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
     <string name="bug_report_use_account">Send using GitHub account</string>
     <string name="buy_now">Buy now</string>
@@ -124,6 +126,7 @@
     <string name="clear_playing_queue">Clear queue</string>
     <string name="color">색상</string>
     <string name="colors">색상</string>
+    <string name="compact">Compact</string>
     <string name="composer">Composer</string>
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
     <string name="could_not_create_playlist">\uc7ac\uc0dd\ubaa9\ub85d\uc744 \ub9cc\ub4e4 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.</string>
@@ -166,6 +169,7 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">비어 있음</string>
     <string name="equalizer">이퀄라이저</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">즐겨찾기</string>
     <string name="finish_last_song">Finish last song</string>
@@ -351,7 +355,7 @@
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">앱 바로가기 색상 틴트</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">알림이 올 때 볼륨 감소</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">아티스트 이미지 자동 다운로드</string>
@@ -530,5 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">계정 정보는 오로지 인증 목적으로만 사용됩니다.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
