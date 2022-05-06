@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Προσθήκη στα αγαπημένα</string>
     <string name="action_add_to_playing_queue">Προσθήκη στην ουρά αναπαραγωγής</string>
     <string name="action_add_to_playlist">Προσθήκη στη λίστα αναπαραγωγής</string>
+    <string name="action_cancel">Ακύρωση τρέχων χρονοδιακόπτη</string>
     <string name="action_cast">Μετάδοση</string>
     <string name="action_clear_playing_queue">Εκκαθάριση ουράς αναπαραγωγής</string>
     <string name="action_cycle_repeat">Λειτουργία κυκλικής επανάληψης</string>
@@ -54,7 +55,7 @@
     <string name="add_action">Προσθήκη</string>
     <string name="add_playlist_title">"Προσθήκη στη λίστα αναπαραγωγής"</string>
     <string name="add_time_framed_lryics">Προσθήκη Στίχων Με Χρονικό Πλαίσιο</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Προστέθηκε 1 κομμάτι στην ουρά αναπαραγωγής."</string>
     <string name="added_x_titles_to_playing_queue">Προστέθηκαν %1$d κομμάτια στην ουρά αναπαραγωγής.</string>
     <string name="album">Άλμπουμ</string>
@@ -103,6 +104,7 @@
     <string name="bug_report_no_password">Παρακαλώ εισαγάγετε τον έγκυρο κωδικό πρόσβασης GitHub</string>
     <string name="bug_report_no_title">Παρακαλώ εισαγάγετε έναν τίτλο ζητήματος</string>
     <string name="bug_report_no_username">Παρακαλώ εισαγάγετε το έγκυρο όνομα χρήστη GitHub</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Προέκυψε ένα μη αναμενόμενο σφάλμα. Λυπούμαστε που βρήκατε αυτό το σφάλμα, εάν εξακολουθεί να παρουσιάζεται  \"\"Διαγραφή δεδομένων εφαρμογής\" ή στείλτε ένα Email </string>
     <string name="bug_report_use_account">Αποστολή χρησιμοποιώντας λογαριασμό GitHub</string>
     <string name="buy_now">Αγορά τώρα</string>
@@ -126,6 +128,7 @@
     <string name="clear_playing_queue">Εκκαθάριση ουράς</string>
     <string name="color">Χρώμα</string>
     <string name="colors">Χρώματα</string>
+    <string name="compact">Compact</string>
     <string name="composer">Συνθέτης</string>
     <string name="copied_device_info_to_clipboard">Οι πληροφοριές συσκευής αντιγράφηκαν στο πρόχειρο.</string>
     <string name="could_not_create_playlist">\u0391\u03b4\u03c5\u03bd\u03b1\u03bc\u03af\u03b1 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1\u03c2 playlist.</string>
@@ -168,6 +171,7 @@
     <string name="edit_synced_lyrics">Επεξεργασία Συγχρονισμένων Στίχων</string>
     <string name="empty">Κενό</string>
     <string name="equalizer">Ισοσταθμιστής</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">Συχνές ερωτήσεις</string>
     <string name="favorites">Αγαπημένα</string>
     <string name="finish_last_song">Τελειώσε το τελευταίο κομμάτι</string>
@@ -353,7 +357,7 @@
     <string name="pref_title_album_cover_style">Θέμα εξώφυλλου άλμπουμ</string>
     <string name="pref_title_album_cover_transform">Παράλειψη εξώφυλλου άλμπουμ</string>
     <string name="pref_title_app_shortcuts">Χρωματιστά app shortcuts</string>
-    <string name="pref_title_appbar_mode">Λειτουργία μπάρας εφαρμογής</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Μείωση έντασης όταν υπάρχουν εισερχόμενες ειδοποιήσεις</string>
     <string name="pref_title_audio_fade">Εξασθένηση Ήχου</string>
     <string name="pref_title_auto_download_artist_images">Αυτόματη λήψη εικόνων καλλιτεχνών</string>
@@ -532,5 +536,4 @@
     <string name="you_have_to_select_at_least_one_category">Πρέπει να επιλέξετε τουλάχιστον μία κατηγορία.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Θα προωθηθείτε στον ιστότοπο παρακολούθησης ζητημάτων.</string>
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
