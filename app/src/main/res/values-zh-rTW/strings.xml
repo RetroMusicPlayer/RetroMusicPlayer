@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">新增到最愛</string>
     <string name="action_add_to_playing_queue">新增到播放佇列</string>
     <string name="action_add_to_playlist">新增到播放清單</string>
+    <string name="action_cancel">取消</string>
     <string name="action_cast">投放</string>
     <string name="action_clear_playing_queue">清除播放佇列</string>
     <string name="action_cycle_repeat">循環重複模式</string>
@@ -54,7 +55,7 @@
     <string name="add_action">新增</string>
     <string name="add_playlist_title">"新增到播放清單"</string>
     <string name="add_time_framed_lryics">新增同步歌詞</string>
-    <string name="added_song_count_to_playlist">新增 %d 首歌到 %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"已新增 1 首歌到播放佇列。"</string>
     <string name="added_x_titles_to_playing_queue">已新增 %1$d 首歌到播放佇列。</string>
     <string name="album">專輯</string>
@@ -101,6 +102,7 @@
     <string name="bug_report_no_password">請輸入有效的 GitHub 密碼</string>
     <string name="bug_report_no_title">請輸入問題標題</string>
     <string name="bug_report_no_username">請輸入有效的 GitHub 帳號</string>
+    <string name="bug_report_success">臭蟲回報成功</string>
     <string name="bug_report_summary">發生意外錯誤。很抱歉讓您遇到這項錯誤，若應用程式仍處在當機狀態，請「清除應用程式儲存空間」或透過電子郵件與我們聯繫 </string>
     <string name="bug_report_use_account">透過 GitHub 帳戶傳送</string>
     <string name="buy_now">立刻購買</string>
@@ -124,6 +126,7 @@
     <string name="clear_playing_queue">清除佇列</string>
     <string name="color">彩色風</string>
     <string name="colors">色彩</string>
+    <string name="compact">Compact</string>
     <string name="composer">作曲者</string>
     <string name="copied_device_info_to_clipboard">已複製裝置資訊到剪貼簿。</string>
     <string name="could_not_create_playlist">無法建立播放清單。</string>
@@ -166,6 +169,7 @@
     <string name="edit_synced_lyrics">編輯同步歌詞</string>
     <string name="empty">沒有內容</string>
     <string name="equalizer">等化器</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">常見問題</string>
     <string name="favorites">最愛</string>
     <string name="finish_last_song">播放完最後一首歌曲</string>
@@ -351,7 +355,7 @@
     <string name="pref_title_album_cover_style">專輯封面主題</string>
     <string name="pref_title_album_cover_transform">略過專輯封面</string>
     <string name="pref_title_app_shortcuts">彩色應用程式捷徑</string>
-    <string name="pref_title_appbar_mode">應用程式列模式</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">於焦點音訊響起時降低音量</string>
     <string name="pref_title_audio_fade">淡入/淡出音訊</string>
     <string name="pref_title_auto_download_artist_images">自動下載演唱者圖片</string>
@@ -530,5 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">您必須選取至少一個類別。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">您將被重新導向至議題追蹤器網頁。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
-    <string name="bug_report_success">臭蟲回報成功</string>
 </resources>
