@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">पसंदीदा में जोड़े</string>
     <string name="action_add_to_playing_queue">Add to playing queue</string>
     <string name="action_add_to_playlist">प्लेलिस्ट में जोड़ें</string>
+    <string name="action_cancel">वर्तमान टाइमर को रद्द करें</string>
     <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">Clear playing queue</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
@@ -54,7 +55,7 @@
     <string name="add_action">जोड़ें</string>
     <string name="add_playlist_title">"प्लेलिस्ट में जोड़ें"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"कतार मे 1 शीर्षक जोड़ा गया है।"</string>
     <string name="added_x_titles_to_playing_queue">कतार मे %1$d शीर्षक जोड़ा गया है।</string>
     <string name="album">एल्बम</string>
@@ -103,6 +104,7 @@
     <string name="bug_report_no_password">कृपया अपना वैध GitHub पासवर्ड दर्ज करें</string>
     <string name="bug_report_no_title">कृपया एक समस्या शीर्षक दर्ज करें</string>
     <string name="bug_report_no_username">कृपया अपना वैध GitHub उपयोगकर्ता नाम दर्ज करें</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">एक अप्रत्याशित त्रुटि हुई। क्षमा करें, आपको यह बग मिल गया है, अगर यह \"क्लियर ऐप डेटा\" को क्रैश करता है या ईमेल भेजता है </string>
     <string name="bug_report_use_account">GitHub खाते का उपयोग करके भेजें</string>
     <string name="buy_now">अभी खरीदें</string>
@@ -126,6 +128,7 @@
     <string name="clear_playing_queue">Clear queue</string>
     <string name="color">रंग</string>
     <string name="colors">Colors</string>
+    <string name="compact">Compact</string>
     <string name="composer">Composer</string>
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
     <string name="could_not_create_playlist">Couldn\u2019t create playlist.</string>
@@ -168,6 +171,7 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Empty</string>
     <string name="equalizer">Equalizer</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favorites</string>
     <string name="finish_last_song">Finish last song</string>
@@ -353,7 +357,7 @@
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
@@ -532,5 +536,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
