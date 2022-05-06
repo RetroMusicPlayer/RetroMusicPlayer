@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">အကြိုက်ဆုံးသို့ထည့်မည်</string>
     <string name="action_add_to_playing_queue">နားထောင်နေသည့်စာရင်းထဲသို့ထည့်မည်</string>
     <string name="action_add_to_playlist">Playlist သို့ထည့်မည်</string>
+    <string name="action_cancel">ပယ်ဖျက်မည်</string>
     <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">နားထောင်နေသည့်စာရင်းအားရှင်းမည်</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
@@ -54,7 +55,7 @@
     <string name="add_action">ထည့်မည်</string>
     <string name="add_playlist_title">"အောက်ပါ Playlist သို့ထည့်မည်"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"နားထောင်နေသည့်စာရင်းထဲသို့ ၁ ပုဒ်ပေါင်းထည့်ခဲ့သည်"</string>
     <string name="added_x_titles_to_playing_queue">နားထောင်နေသည့်စာရင်းထဲသို့ %1$d ပုဒ်ပေါင်းထည့်ခဲ့သည်</string>
     <string name="album">Album</string>
@@ -101,6 +102,7 @@
     <string name="bug_report_no_password">ကျေးဇူးပြု၍ မှန်ကန်သော Github password ကိုဖြည့်သွင်းပါ</string>
     <string name="bug_report_no_title">ကျေးဇူးပြု၍အကြောင်းအရာခေါင်းစဉ်အားဖြည့်သွင်းပါ</string>
     <string name="bug_report_no_username">ကျေးဇူးပြု၍ မှန်ကန်သော Github username ကိုဖြည့်သွင်းပါ</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">မသိထားတဲ့ Error တစ်ခုတက်ခဲ့တယ်ဆိုပါစို့။ ဆက်ပြီး Crash ဖြစ်နေတယ်ဆိုရင် \"Clear App Data\" လုပ်ပါ (ဒါမှမဟုတ်) အီးမေးလ်ပို့ပါ။</string>
     <string name="bug_report_use_account">GitHub အကောင့်ဖြင့်ပို့မည်</string>
     <string name="buy_now">ယခုဝယ်မည်</string>
@@ -124,6 +126,7 @@
     <string name="clear_playing_queue">နားထောင်နေသည့်စာရင်းအားရှင်းမည်</string>
     <string name="color">အရောင်</string>
     <string name="colors">အရောင်များ</string>
+    <string name="compact">Compact</string>
     <string name="composer">တေးရေးဆရာ</string>
     <string name="copied_device_info_to_clipboard">Device အချက်အလက်အား Clipboard သို့ ကော်ပီကူးခဲ့ပြီး</string>
     <string name="could_not_create_playlist">Playlist ဖန်တီး၍မရပါ</string>
@@ -166,6 +169,7 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">ဘာမှမရှိပါ</string>
     <string name="equalizer">Equalizer</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">မေးလေ့ရှိသောမေးခွန်းများ</string>
     <string name="favorites">အကြိုက်ဆုံး</string>
     <string name="finish_last_song">Finish last song</string>
@@ -351,7 +355,7 @@
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored App shortcuts</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">အဆိုတော်ဓာတ်ပုံများကို အလိုအလျောက်ဒေါင်းလုဒ်ဆွဲခြင်း</string>
@@ -530,5 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">အနည်းဆုံး category တစ်ခုရွေးချယ်ရန်လိုအပ်သည်</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Issue tracker website သို့ခေါ်ဆောင်သွားပါမည်</string>
     <string name="your_account_data_is_only_used_for_authentication">သင့်အကောင့်အချက်အလက်ကို အတည်ပြုရန်အတွက်သာအသုံးပြုပါသည်။</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
