@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Idagdag sa mga paborito</string>
     <string name="action_add_to_playing_queue">Idagdag sa playing queue</string>
     <string name="action_add_to_playlist">Idagdag sa playlist</string>
+    <string name="action_cancel">Kanselahin</string>
     <string name="action_cast">Kast</string>
     <string name="action_clear_playing_queue">Burahin ang playing queue</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
@@ -54,7 +55,7 @@
     <string name="add_action">Magdagdag</string>
     <string name="add_playlist_title">"Idagdag sa playlist"</string>
     <string name="add_time_framed_lryics">Mag-dagdag ng Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Nadagdag ang 1 title sa playing queue."</string>
     <string name="added_x_titles_to_playing_queue">Nadagdag ang %1$d titles sa playing queue.</string>
     <string name="album">Album</string>
@@ -103,6 +104,7 @@
     <string name="bug_report_no_password">Pakilagay ang iyong wastong password sa GitHub</string>
     <string name="bug_report_no_title">Maglagay ng pamagat sa isyu</string>
     <string name="bug_report_no_username">Pakilagay ang iyong wastong GitHub username</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">May naganap na hindi inaasahang error. Paumanhin, nakikita mo ang bug na ito, kung patuloy itong nagka-crash \"Burahin ang data ng app\" o magpadala ng Email </string>
     <string name="bug_report_use_account">Ipadala gamit ang GitHub account</string>
     <string name="buy_now">Bumili na ngayon</string>
@@ -126,6 +128,7 @@
     <string name="clear_playing_queue">Linisin ang queue</string>
     <string name="color">Kulay</string>
     <string name="colors">Mga kulay</string>
+    <string name="compact">Compact</string>
     <string name="composer">Kompositor</string>
     <string name="copied_device_info_to_clipboard">Kinopya ang impormasyon ng device sa clipboard.</string>
     <string name="could_not_create_playlist">Hindi makagawa ng playlist.</string>
@@ -168,6 +171,7 @@
     <string name="edit_synced_lyrics">I-edit ang Naka-sync na Lyrics</string>
     <string name="empty">Walang laman</string>
     <string name="equalizer">Equalizer</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Mga Paborito</string>
     <string name="finish_last_song">Tapusin ang huling kanta</string>
@@ -181,8 +185,8 @@
     <string name="full_card">Full Kard</string>
     <string name="general_settings_summary">I-change ang theme at mga kulay ng app</string>
     <string name="general_settings_title">Tanaw at diwa</string>
-    <string name="genre">Genre</string>
-    <string name="genres">Mga Genre</string>
+    <string name="genre">Dyanra</string>
+    <string name="genres">Mga Dyanra</string>
     <string name="git_hub_summary">I-fork ang proyekto sa GitHub</string>
     <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
@@ -353,7 +357,7 @@
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Laktawan ang album cover</string>
     <string name="pref_title_app_shortcuts">May kulay na mga shortcut app</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Bawasan ang volume sa focus loss</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Auto-download mga larawan ng artista</string>
@@ -497,7 +501,7 @@
     <string name="title">Pamagat</string>
     <string name="title_new_backup">Bagong Backup</string>
     <string name="today">Ngayon</string>
-    <string name="top_albums">Nangungunang mga album</string>
+    <string name="top_albums">Mga nangungunang album</string>
     <string name="top_artists">Nangungunang mga artista</string>
     <string name="track_hint">"Track (2 para sa track 2 o 3004 para sa CD3 track 4)"</string>
     <string name="track_list">Numero ng track</string>
@@ -532,5 +536,4 @@
     <string name="you_have_to_select_at_least_one_category">Kailangan mong pumili ng kahit isang kategorya.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Ipapasa ka sa website ng tagasubaybay ng isyu.</string>
     <string name="your_account_data_is_only_used_for_authentication">Ginagamit lang ang iyong account data para sa pagpapatunay.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
