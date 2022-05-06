@@ -112,23 +112,22 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAlbumDetailsBinding.bind(view)
-        setHasOptionsMenu(true)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
 
         binding.toolbar.title = " "
-        binding.albumCoverContainer.setTransitionName(arguments.extraAlbumId.toString())
+        binding.albumCoverContainer.transitionName = arguments.extraAlbumId.toString()
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner) {
-            requireView().doOnPreDraw {
+            view.doOnPreDraw {
                 startPostponedEnterTransition()
             }
             albumArtistExists = !it.albumArtist.isNullOrEmpty()
             showAlbum(it)
-            if (albumArtistExists) {
-                binding.artistImage.setTransitionName(album.albumArtist)
+            binding.artistImage.transitionName = if (albumArtistExists) {
+                album.albumArtist
             } else {
-                binding.artistImage.setTransitionName(album.artistId.toString())
+                album.artistId.toString()
             }
         }
 
@@ -308,7 +307,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             .load(
                 RetroGlideExtension.getArtistModel(
                     artist,
-                    PreferenceUtil.isAllowedToDownloadMetadata()
+                    PreferenceUtil.isAllowedToDownloadMetadata(requireContext())
                 )
             )
             .artistImageOptions(artist)
@@ -347,8 +346,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         )
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_album_detail, menu)
         val sortOrder = menu.findItem(R.id.action_sort_order)
         setUpSortOrderMenu(sortOrder.subMenu)
@@ -360,7 +358,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         return handleSortOrderMenuItem(item)
     }
 

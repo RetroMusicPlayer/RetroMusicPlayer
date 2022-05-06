@@ -18,7 +18,6 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.AnimatedVectorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -34,10 +33,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFullPlayerControlsBinding
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
-import code.name.monkey.retromusic.extensions.applyColor
-import code.name.monkey.retromusic.extensions.getSongInfo
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
@@ -48,7 +44,6 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -237,17 +232,14 @@ class FullPlaybackControlsFragment :
                 } else {
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                 }
-                val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
-                    requireContext(),
+                val drawable = requireContext().getTintedDrawable(
                     icon,
                     Color.WHITE
                 )
                 binding.songFavourite.apply {
                     setImageDrawable(drawable)
-                    getDrawable().also {
-                        if (it is AnimatedVectorDrawable) {
-                            it.start()
-                        }
+                    if (drawable is AnimatedVectorDrawable) {
+                        drawable.start()
                     }
                 }
             }
@@ -257,14 +249,12 @@ class FullPlaybackControlsFragment :
     private fun toggleFavorite(song: Song) {
         lifecycleScope.launch(Dispatchers.IO) {
             val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
-            if (playlist != null) {
-                val songEntity = song.toSongEntity(playlist.playListId)
-                val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
-                if (isFavorite) {
-                    libraryViewModel.removeSongFromPlaylist(songEntity)
-                } else {
-                    libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-                }
+            val songEntity = song.toSongEntity(playlist.playListId)
+            val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
+            if (isFavorite) {
+                libraryViewModel.removeSongFromPlaylist(songEntity)
+            } else {
+                libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
             libraryViewModel.forceReload(ReloadType.Playlists)
             requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))

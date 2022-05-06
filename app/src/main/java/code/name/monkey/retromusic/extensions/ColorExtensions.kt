@@ -36,7 +36,6 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil.materialYou
 import com.google.android.material.button.MaterialButton
@@ -131,12 +130,12 @@ fun Slider.accent() {
 
 fun Button.accentTextColor() {
     if (materialYou) return
-    setTextColor(ThemeStore.accentColor(App.getContext()))
+    setTextColor(context.accentColor())
 }
 
 fun MaterialButton.accentBackgroundColor() {
     if (materialYou) return
-    backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(App.getContext()))
+    backgroundTintList = ColorStateList.valueOf(context.accentColor())
 }
 
 fun MaterialButton.accentOutlineColor() {

@@ -79,6 +79,5 @@ object CastHelper {
             setMetadata(musicMetadata)
             setStreamDuration(song.duration)
         }.build()
-
     }
 }

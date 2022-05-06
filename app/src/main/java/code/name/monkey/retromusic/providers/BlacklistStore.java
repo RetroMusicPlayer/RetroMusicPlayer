@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.providers;
 
 import static code.name.monkey.retromusic.service.MusicService.MEDIA_STORE_CHANGED;
+import static code.name.monkey.retromusic.util.FileUtilsKt.getExternalStoragePublicDirectory;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -50,11 +51,11 @@ public class BlacklistStore extends SQLiteOpenHelper {
       if (!PreferenceUtil.INSTANCE.isInitializedBlacklist()) {
         // blacklisted by default
         sInstance.addPathImpl(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS));
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS));
         sInstance.addPathImpl(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS));
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS));
         sInstance.addPathImpl(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES));
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES));
 
         PreferenceUtil.INSTANCE.setInitializedBlacklist(true);
       }

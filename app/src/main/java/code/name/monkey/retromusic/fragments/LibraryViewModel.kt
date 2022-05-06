@@ -15,11 +15,13 @@
 package code.name.monkey.retromusic.fragments
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.*
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.fragments.search.Filter
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -45,7 +47,6 @@ class LibraryViewModel(
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
     private val playlists = MutableLiveData<List<PlaylistWithSongs>>()
-    private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
     private val fabMargin = MutableLiveData(0)
@@ -69,41 +70,21 @@ class LibraryViewModel(
 
     fun getSearchResult(): LiveData<List<Any>> = searchResults
 
-    fun getSongs(): LiveData<List<Song>> {
-        return songs
-    }
+    fun getSongs(): LiveData<List<Song>> = songs
 
-    fun getAlbums(): LiveData<List<Album>> {
-        return albums
-    }
+    fun getAlbums(): LiveData<List<Album>> = albums
 
-    fun getArtists(): LiveData<List<Artist>> {
-        return artists
-    }
+    fun getArtists(): LiveData<List<Artist>> = artists
 
-    fun getPlaylists(): LiveData<List<PlaylistWithSongs>> {
-        return playlists
-    }
+    fun getPlaylists(): LiveData<List<PlaylistWithSongs>> = playlists
 
-    fun getLegacyPlaylist(): LiveData<List<Playlist>> {
-        return legacyPlaylists
-    }
+    fun getGenre(): LiveData<List<Genre>> = genres
 
-    fun getGenre(): LiveData<List<Genre>> {
-        return genres
-    }
+    fun getHome(): LiveData<List<Home>> = home
 
-    fun getHome(): LiveData<List<Home>> {
-        return home
-    }
+    fun getSuggestions(): LiveData<List<Song>> = suggestions
 
-    fun getSuggestions(): LiveData<List<Song>> {
-        return suggestions
-    }
-
-    fun getFabMargin(): LiveData<Int> {
-        return fabMargin
-    }
+    fun getFabMargin(): LiveData<Int> = fabMargin
 
     private suspend fun fetchSongs() {
         songs.postValue(repository.allSongs())
@@ -111,7 +92,6 @@ class LibraryViewModel(
 
     private suspend fun fetchAlbums() {
         albums.postValue(repository.fetchAlbums())
-
     }
 
     private suspend fun fetchArtists() {
@@ -124,12 +104,6 @@ class LibraryViewModel(
 
     private suspend fun fetchPlaylists() {
         playlists.postValue(repository.fetchPlaylistWithSongs())
-    }
-
-    private fun fetchLegacyPlaylist() {
-        viewModelScope.launch(IO) {
-            legacyPlaylists.postValue(repository.fetchLegacyPlaylist())
-        }
     }
 
     private suspend fun fetchGenres() {
@@ -146,7 +120,7 @@ class LibraryViewModel(
 
     fun search(query: String?, filter: Filter) =
         viewModelScope.launch(IO) {
-            val result =repository.search(query, filter)
+            val result = repository.search(query, filter)
             searchResults.postValue(result)
         }
 
@@ -267,35 +241,22 @@ class LibraryViewModel(
         }
     }
 
-    fun deleteTracks(songs: List<Song>) = viewModelScope.launch(IO) {
-        repository.deleteSongs(songs)
-        fetchPlaylists()
-        loadLibraryContent()
-    }
-
-    fun recentSongs(): LiveData<List<Song>> = liveData {
+    fun recentSongs(): LiveData<List<Song>> = liveData(IO) {
         emit(repository.recentSongs())
     }
 
-    fun playCountSongs(): LiveData<List<Song>> = liveData {
-        val songs = repository.playCountSongs().map {
-            it.toSong()
-        }
-        emit(songs)
-        // Cleaning up deleted or moved songs
-        withContext(IO) {
-            songs.forEach { song ->
-                if (!File(song.data).exists() || song.id == -1L) {
-                    repository.deleteSongInPlayCount(song.toPlayCount())
-                }
+    fun playCountSongs(): LiveData<List<Song>> = liveData(IO) {
+        repository.playCountSongs().forEach { song ->
+            if (!File(song.data).exists() || song.id == -1L) {
+                repository.deleteSongInPlayCount(song)
             }
-            emit(repository.playCountSongs().map {
-                it.toSong()
-            })
         }
+        emit(repository.playCountSongs().map {
+            it.toSong()
+        })
     }
 
-    fun artists(type: Int): LiveData<List<Artist>> = liveData {
+    fun artists(type: Int): LiveData<List<Artist>> = liveData(IO) {
         when (type) {
             TOP_ARTISTS -> emit(repository.topArtists())
             RECENT_ARTISTS -> {
@@ -304,7 +265,7 @@ class LibraryViewModel(
         }
     }
 
-    fun albums(type: Int): LiveData<List<Album>> = liveData {
+    fun albums(type: Int): LiveData<List<Album>> = liveData(IO) {
         when (type) {
             TOP_ALBUMS -> emit(repository.topAlbums())
             RECENT_ALBUMS -> {
@@ -313,29 +274,25 @@ class LibraryViewModel(
         }
     }
 
-    fun artist(artistId: Long): LiveData<Artist> = liveData {
+    fun artist(artistId: Long): LiveData<Artist> = liveData(IO) {
         emit(repository.artistById(artistId))
     }
 
-    fun fetchContributors(): LiveData<List<Contributor>> = liveData {
+    fun fetchContributors(): LiveData<List<Contributor>> = liveData(IO) {
         emit(repository.contributor())
     }
 
     fun observableHistorySongs(): LiveData<List<Song>> {
-        val songs = repository.historySong().map {
-            it.toSong()
-        }
-        songHistory.value = songs
-        // Cleaning up deleted or moved songs
-        viewModelScope.launch {
-            songs.forEach { song ->
+        viewModelScope.launch(IO) {
+            repository.historySong().forEach { song ->
                 if (!File(song.data).exists() || song.id == -1L) {
                     repository.deleteSongInHistory(song.id)
                 }
             }
-        }
-        songHistory.value = repository.historySong().map {
-            it.toSong()
+
+            songHistory.postValue(repository.historySong().map {
+                it.toSong()
+            })
         }
         return songHistory
     }
@@ -366,12 +323,10 @@ class LibraryViewModel(
     fun favorites() = repository.favorites()
 
     fun clearSearchResult() {
-        viewModelScope.launch {
-            searchResults.postValue(emptyList())
-        }
+        searchResults.value = emptyList()
     }
 
-    fun addToPlaylist(playlistName: String, songs: List<Song>) {
+    fun addToPlaylist(context: Context, playlistName: String, songs: List<Song>) {
         viewModelScope.launch(IO) {
             val playlists = checkPlaylistExists(playlistName)
             if (playlists.isEmpty()) {
@@ -379,12 +334,8 @@ class LibraryViewModel(
                     createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
                 withContext(Main) {
-                    Toast.makeText(
-                        App.getContext(),
-                        App.getContext()
-                            .getString(R.string.playlist_created_sucessfully, playlistName),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    context.showToast(context.getString(R.string.playlist_created_sucessfully,
+                        playlistName))
                 }
             } else {
                 val playlist = playlists.firstOrNull()
@@ -396,17 +347,18 @@ class LibraryViewModel(
             }
             forceReload(Playlists)
             withContext(Main) {
-                Toast.makeText(App.getContext(), App.getContext().getString(
-                    R.string.added_song_count_to_playlist,
-                    songs.size,
-                    playlistName
-                ), Toast.LENGTH_SHORT).show()
+                context.showToast(
+                    context.getString(
+                        R.string.added_song_count_to_playlist,
+                        songs.size,
+                        playlistName),
+                    Toast.LENGTH_SHORT)
             }
         }
     }
 
-    fun setFabMargin(bottomMargin: Int) {
-        val currentValue = DensityUtil.dip2px(App.getContext(), 16F) +
+    fun setFabMargin(context: Context, bottomMargin: Int) {
+        val currentValue = DensityUtil.dip2px(context, 16F) +
                 bottomMargin
         ValueAnimator.ofInt(fabMargin.value!!, currentValue).apply {
             addUpdateListener {

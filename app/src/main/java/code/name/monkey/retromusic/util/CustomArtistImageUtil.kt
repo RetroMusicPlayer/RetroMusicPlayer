@@ -14,25 +14,21 @@
 
 package code.name.monkey.retromusic.util
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.AsyncTask
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.core.content.edit
 import code.name.monkey.retromusic.App
+import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.model.Artist
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
-import java.io.BufferedOutputStream
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
@@ -44,78 +40,71 @@ class CustomArtistImageUtil private constructor(context: Context) {
         Context.MODE_PRIVATE
     )
 
-    fun setCustomArtistImage(artist: Artist, uri: Uri) {
-        Glide.with(App.getContext())
-            .asBitmap()
-            .load(uri)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .skipMemoryCache(true)
-            .into(object : SimpleTarget<Bitmap>() {
-                override fun onLoadFailed(errorDrawable: Drawable?) {
-                    super.onLoadFailed(errorDrawable)
-                    Toast.makeText(App.getContext(), "Load Failed", Toast.LENGTH_LONG).show()
+    suspend fun setCustomArtistImage(artist: Artist, uri: Uri) {
+        val context = App.getContext()
+        withContext(IO) {
+            runCatching {
+                GlideApp.with(context)
+                    .asBitmap()
+                    .load(uri)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .submit()
+                    .get()
+            }
+                .onSuccess {
+                    saveImage(context, artist, it)
                 }
-
-                @SuppressLint("StaticFieldLeak")
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    object : AsyncTask<Void, Void, Void>() {
-                        override fun doInBackground(vararg params: Void): Void? {
-                            val dir = File(App.getContext().filesDir, FOLDER_NAME)
-                            if (!dir.exists()) {
-                                if (!dir.mkdirs()) { // create the folder
-                                    return null
-                                }
-                            }
-                            val file = File(dir, getFileName(artist))
-
-                            var succesful = false
-                            try {
-                                val os = BufferedOutputStream(FileOutputStream(file))
-                                succesful = ImageUtil.resizeBitmap(resource, 2048)
-                                    .compress(Bitmap.CompressFormat.JPEG, 100, os)
-                                os.close()
-                            } catch (e: IOException) {
-                                Toast.makeText(App.getContext(), e.toString(), Toast.LENGTH_LONG)
-                                    .show()
-                            }
-
-                            if (succesful) {
-                                mPreferences.edit { putBoolean(getFileName(artist), true) }
-                                ArtistSignatureUtil.getInstance(App.getContext())
-                                    .updateArtistSignature(artist.name)
-                                App.getContext().contentResolver.notifyChange(
-                                    MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
-                                    null
-                                ) // trigger media store changed to force artist image reload
-                            }
-                            return null
-                        }
-                    }.execute()
+                .onFailure {
+                    context.showToast("Load Failed")
                 }
-            })
+        }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    fun resetCustomArtistImage(artist: Artist) {
-        object : AsyncTask<Void, Void, Void>() {
-            @SuppressLint("ApplySharedPref")
-            override fun doInBackground(vararg params: Void): Void? {
-                mPreferences.edit(commit = true) { putBoolean(getFileName(artist), false) }
-                ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
-                App.getContext().contentResolver.notifyChange(
-                    MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
-                    null
-                ) // trigger media store changed to force artist image reload
-
-                val file = getFile(artist)
-                if (!file.exists()) {
-                    return null
-                } else {
-                    file.delete()
-                }
-                return null
+    private fun saveImage(context: Context, artist: Artist, bitmap: Bitmap) {
+        val dir = File(context.filesDir, FOLDER_NAME)
+        if (!dir.exists()) {
+            if (!dir.mkdirs()) { // create the folder
+                return
             }
-        }.execute()
+        }
+        val file = File(dir, getFileName(artist))
+
+        var successful = false
+        try {
+            file.outputStream().buffered().use { bos ->
+                successful = ImageUtil.resizeBitmap(bitmap, 2048)
+                    .compress(Bitmap.CompressFormat.JPEG, 100, bos)
+            }
+        } catch (e: IOException) {
+            context.showToast(e.toString(), Toast.LENGTH_LONG)
+        }
+
+        if (successful) {
+            mPreferences.edit { putBoolean(getFileName(artist), true) }
+            ArtistSignatureUtil.getInstance(context)
+                .updateArtistSignature(artist.name)
+            context.contentResolver.notifyChange(
+                MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+                null
+            ) // trigger media store changed to force artist image reload
+        }
+    }
+
+    suspend fun resetCustomArtistImage(artist: Artist) {
+        withContext(IO) {
+            mPreferences.edit { putBoolean(getFileName(artist), false) }
+            ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
+            App.getContext().contentResolver.notifyChange(
+                MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+                null
+            ) // trigger media store changed to force artist image reload
+
+            val file = getFile(artist)
+            if (file.exists()) {
+                file.delete()
+            }
+        }
     }
 
     // shared prefs saves us many IO operations

@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/actionNewPlaylistContainer"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

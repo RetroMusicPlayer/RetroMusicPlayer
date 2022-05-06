@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <code.name.monkey.retromusic.views.insets.InsetsConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/md_black_1000"
@@ -24,8 +23,7 @@
         android:background="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnusedAttribute" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -46,8 +44,7 @@
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/retro_music_pro"
             app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
-            app:titleTextColor="@color/md_white_1000"
-            tools:ignore="UnusedAttribute" />
+            app:titleTextColor="@color/md_white_1000" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

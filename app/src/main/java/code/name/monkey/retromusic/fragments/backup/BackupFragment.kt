@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
@@ -20,6 +19,7 @@ import code.name.monkey.retromusic.databinding.FragmentBackupBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.accentOutlineColor
 import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.BackupHelper
 import code.name.monkey.retromusic.helper.sanitize
 import code.name.monkey.retromusic.util.BackupUtil
@@ -47,7 +47,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
             else
                 backupAdapter?.swapDataset(listOf())
         }
-        backupViewModel.loadBackups(requireContext())
+        backupViewModel.loadBackups()
         val openFilePicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             lifecycleScope.launch(Dispatchers.IO) {
                 it?.let {
@@ -98,7 +98,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 // Text submitted with the action button
                 lifecycleScope.launch {
                     BackupHelper.createBackup(requireContext(), text.sanitize())
-                    backupViewModel.loadBackups(requireContext())
+                    backupViewModel.loadBackups()
                 }
             }
             positiveButton(android.R.string.ok)
@@ -122,13 +122,9 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 try {
                     file.delete()
                 } catch (exception: SecurityException) {
-                    Toast.makeText(
-                        activity,
-                        "Could not delete backup",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showToast("Could not delete backup")
                 }
-                backupViewModel.loadBackups(requireContext())
+                backupViewModel.loadBackups()
                 return true
             }
             R.id.action_share -> {
@@ -149,13 +145,9 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                             File(file.parent, "$text${BackupHelper.APPEND_EXTENSION}")
                         if (!renamedFile.exists()) {
                             file.renameTo(renamedFile)
-                            backupViewModel.loadBackups(requireContext())
+                            backupViewModel.loadBackups()
                         } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "File already exists",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            showToast("File already exists")
                         }
                     }
                     positiveButton(android.R.string.ok)

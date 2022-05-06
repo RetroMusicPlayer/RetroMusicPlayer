@@ -91,9 +91,9 @@ open class AlbumAdapter(
         // Check if imageContainer exists so we can have a smooth transition without
         // CardView clipping, if it doesn't exist in current layout set transition name to image instead.
         if (holder.imageContainer != null) {
-            holder.imageContainer!!.setTransitionName(album.id.toString())
+            holder.imageContainer?.transitionName = album.id.toString()
         } else {
-            holder.image!!.setTransitionName(album.id.toString())
+            holder.image?.transitionName = album.id.toString()
         }
         loadAlbumCover(album, holder)
     }
@@ -135,8 +135,8 @@ open class AlbumAdapter(
         return dataSet[position]
     }
 
-    override fun getName(album: Album): String {
-        return album.title
+    override fun getName(model: Album): String {
+        return model.title
     }
 
     override fun onMultipleItemAction(

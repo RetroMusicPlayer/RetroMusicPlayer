@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.IntRange
+import androidx.core.content.pm.PackageInfoCompat
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.isAdaptiveColor
 import code.name.monkey.retromusic.util.PreferenceUtil.languageCode
@@ -35,7 +36,7 @@ class DeviceInfo(context: Context) {
 
     @IntRange(from = 0)
     private val sdkVersion = Build.VERSION.SDK_INT
-    private var versionCode = 0
+    private var versionCode = 0L
     private var versionName: String? = null
     private val selectedLang: String
     fun toMarkdown(): String {
@@ -96,7 +97,7 @@ class DeviceInfo(context: Context) {
             null
         }
         if (packageInfo != null) {
-            versionCode = packageInfo.versionCode
+            versionCode = PackageInfoCompat.getLongVersionCode(packageInfo)
             versionName = packageInfo.versionName
         } else {
             versionCode = -1

@@ -19,7 +19,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -46,14 +45,10 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
             else
                 adapter?.swapDataSet(listOf())
         }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            remove()
-            requireActivity().onBackPressed()
-        }
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
-        return if (RetroUtil.isLandscape()) {
+        return if (RetroUtil.isLandscape) {
             GridLayoutManager(activity, 4)
         } else {
             GridLayoutManager(activity, 2)
@@ -65,8 +60,8 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
         return GenreAdapter(requireActivity(), dataSet, this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateMenu(menu, inflater)
         menu.removeItem(R.id.action_grid_size)
         menu.removeItem(R.id.action_layout_type)
         menu.removeItem(R.id.action_sort_order)

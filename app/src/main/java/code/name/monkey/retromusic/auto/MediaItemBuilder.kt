@@ -4,8 +4,9 @@ import android.content.Context
 import android.net.Uri
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
-import code.name.monkey.retromusic.util.ImageUtil
 
 
 internal object AutoMediaItem {
@@ -13,7 +14,7 @@ internal object AutoMediaItem {
         return Builder(context)
     }
 
-    internal class Builder(val mContext: Context) {
+    internal class Builder(private val mContext: Context) {
         private var mBuilder: MediaDescriptionCompat.Builder?
         private var mFlags = 0
         fun path(fullPath: String): Builder {
@@ -42,13 +43,11 @@ internal object AutoMediaItem {
 
         fun icon(iconDrawableId: Int): Builder {
             mBuilder?.setIconBitmap(
-                ImageUtil.createBitmap(
-                    ImageUtil.getVectorDrawable(
+                    ResourcesCompat.getDrawable(
                         mContext.resources,
                         iconDrawableId,
                         mContext.theme
-                    )
-                )
+                    )?.toBitmap()
             )
             return this
         }

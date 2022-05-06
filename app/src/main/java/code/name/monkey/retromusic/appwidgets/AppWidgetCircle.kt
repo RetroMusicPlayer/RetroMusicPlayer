@@ -21,25 +21,25 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.RemoteViews
+import androidx.core.graphics.drawable.toBitmap
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
+import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
-import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import kotlinx.coroutines.Dispatchers
@@ -58,13 +58,11 @@ class AppWidgetCircle : BaseAppWidget() {
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_audio_art)
         val secondaryColor = MaterialValueHelper.getSecondaryTextColor(context, true)
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_play_pause, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_play_arrow,
-                    secondaryColor
-                ), 1f
-            )
+            R.id.button_toggle_play_pause,
+            context.getTintedDrawable(
+                R.drawable.ic_play_arrow,
+                secondaryColor
+            ).toBitmap()
         )
 
         linkButtons(context, appWidgetView)
@@ -84,13 +82,11 @@ class AppWidgetCircle : BaseAppWidget() {
         val playPauseRes =
             if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play_arrow
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_play_pause, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    service,
-                    playPauseRes,
-                    MaterialValueHelper.getSecondaryTextColor(service, true)
-                ), 1f
-            )
+            R.id.button_toggle_play_pause,
+            service.getTintedDrawable(
+                playPauseRes,
+                MaterialValueHelper.getSecondaryTextColor(service, true)
+            ).toBitmap()
         )
         val isFavorite = runBlocking(Dispatchers.IO) {
             return@runBlocking MusicUtil.repository.isSongFavorite(song.id)
@@ -98,13 +94,11 @@ class AppWidgetCircle : BaseAppWidget() {
         val favoriteRes =
             if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_favorite, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    service,
-                    favoriteRes,
-                    MaterialValueHelper.getSecondaryTextColor(service, true)
-                ), 1f
-            )
+            R.id.button_toggle_favorite,
+            service.getTintedDrawable(
+                favoriteRes,
+                MaterialValueHelper.getSecondaryTextColor(service, true)
+            ).toBitmap()
         )
 
         // Link actions buttons to intents
@@ -122,13 +116,11 @@ class AppWidgetCircle : BaseAppWidget() {
             }
             target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
                 .load(RetroGlideExtension.getSongModel(song))
-                .apply(
-                    RequestOptions().transform(RoundedCorners(imageSize / 2))
-                )
-                .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+                .apply(RequestOptions.circleCropTransform())
+                .into(object : CustomTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
                     override fun onResourceReady(
                         resource: BitmapPaletteWrapper,
-                        transition: Transition<in BitmapPaletteWrapper>?
+                        transition: Transition<in BitmapPaletteWrapper>?,
                     ) {
                         val palette = resource.palette
                         update(
@@ -150,25 +142,27 @@ class AppWidgetCircle : BaseAppWidget() {
                     private fun update(bitmap: Bitmap?, color: Int) {
                         // Set correct drawable for pause state
                         appWidgetView.setImageViewBitmap(
-                            R.id.button_toggle_play_pause, ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service, playPauseRes, color
-                                )
-                            )
+                            R.id.button_toggle_play_pause,
+                            service.getTintedDrawable(
+                                playPauseRes, color
+                            ).toBitmap()
                         )
 
                         // Set favorite button drawables
                         appWidgetView.setImageViewBitmap(
-                            R.id.button_toggle_favorite, ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service, favoriteRes, color
-                                )
-                            )
+                            R.id.button_toggle_favorite,
+                            service.getTintedDrawable(
+                                favoriteRes, color
+                            ).toBitmap()
                         )
-                        appWidgetView.setImageViewBitmap(R.id.image, bitmap)
+                        if (bitmap != null) {
+                            appWidgetView.setImageViewBitmap(R.id.image, bitmap)
+                        }
 
                         pushUpdate(service, appWidgetIds, appWidgetView)
                     }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {}
                 })
         }
     }

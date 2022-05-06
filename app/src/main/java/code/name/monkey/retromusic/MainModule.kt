@@ -4,6 +4,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import code.name.monkey.retromusic.auto.AutoMusicProvider
+import code.name.monkey.retromusic.cast.RetroWebServer
 import code.name.monkey.retromusic.db.BlackListStoreDao
 import code.name.monkey.retromusic.db.BlackListStoreEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
@@ -88,19 +89,23 @@ private val roomModule = module {
 }
 private val autoModule = module {
     single {
-        AutoMusicProvider(androidContext(),
-        get(),
-        get(),
-        get(),
-        get(),
-        get(),
-        get()
+        AutoMusicProvider(
+            androidContext(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
         )
     }
 }
 private val mainModule = module {
     single {
         androidContext().contentResolver
+    }
+    single {
+        RetroWebServer(get())
     }
 }
 private val dataModule = module {

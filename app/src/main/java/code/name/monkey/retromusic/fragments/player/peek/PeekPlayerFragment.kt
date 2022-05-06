@@ -58,10 +58,10 @@ class PeekPlayerFragment : AbsPlayerFragment(R.layout.fragment_peek_player) {
 
     private fun setUpSubFragments() {
         controlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PeekPlayerControlFragment
+            whichFragment(R.id.playbackControlsFragment) as PeekPlayerControlFragment
 
         val coverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+            whichFragment(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         coverFragment.setCallbacks(this)
     }
 

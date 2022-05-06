@@ -80,7 +80,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         lifecycleScope.launchWhenStarted {
             viewPager.setPageTransformer(false, transformer)
         }
-}
+    }
 
     private fun updateLyrics() {
         binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
@@ -116,12 +116,11 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         binding.viewPager.addOnPageChangeListener(this)
         val nps = PreferenceUtil.nowPlayingScreen
 
-        val metrics = resources.displayMetrics
-        val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
-
         if (nps == Full || nps == Classic || nps == Fit || nps == Gradient) {
             binding.viewPager.offscreenPageLimit = 2
         } else if (PreferenceUtil.isCarouselEffect) {
+            val metrics = resources.displayMetrics
+            val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
             binding.viewPager.clipToPadding = false
             val padding =
                 if (ratio >= 1.777f) {
@@ -281,12 +280,12 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         setLRCViewColors(
             when (PreferenceUtil.nowPlayingScreen) {
                 Adaptive, Fit, Plain, Simple -> surfaceColor()
-                Flat, Normal -> if (PreferenceUtil.isAdaptiveColor) {
+                Flat, Normal, Material -> if (PreferenceUtil.isAdaptiveColor) {
                     color.backgroundColor
                 } else {
                     surfaceColor()
                 }
-                Color ,Classic -> color.backgroundColor
+                Color, Classic -> color.backgroundColor
                 Blur -> Color.BLACK
                 else -> surfaceColor()
             }

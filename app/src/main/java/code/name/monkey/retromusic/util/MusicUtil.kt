@@ -5,27 +5,25 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
-import android.os.Environment
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.content.contentValuesOf
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.SongEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.getLong
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.removeFromQueue
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
-import code.name.monkey.retromusic.repository.RealPlaylistRepository
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
@@ -56,14 +54,10 @@ object MusicUtil : KoinComponent {
                 )
             ).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).setType("audio/*")
         } catch (e: IllegalArgumentException) {
-            // TODO the path is most likely not like /storage/emulated/0/... but something like /storage/28C7-75B0/...
-            e.printStackTrace()
-            Toast.makeText(
-                context,
-                "Could not share this file, I'm aware of the issue.",
-                Toast.LENGTH_SHORT
-            ).show()
-            Intent()
+            Intent().setAction(Intent.ACTION_SEND).putExtra(
+                Intent.EXTRA_STREAM,
+                getSongFileUri(song.id)
+            ).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).setType("audio/*")
         }
     }
 
@@ -83,7 +77,7 @@ object MusicUtil : KoinComponent {
 
     private fun createAlbumArtDir(context: Context): File {
         val albumArtDir = File(
-            if (VersionUtils.hasR()) context.cacheDir else Environment.getExternalStorageDirectory(),
+            if (VersionUtils.hasR()) context.cacheDir else getExternalStorageDirectory(),
             "/albumthumbs/"
         )
         if (!albumArtDir.exists()) {
@@ -268,15 +262,14 @@ object MusicUtil : KoinComponent {
         )
     }
 
-    fun getSongFilePath(context: Context, uri: Uri): String? {
-        val projection = arrayOf(MediaStore.MediaColumns.DATA)
-        return context.contentResolver.query(uri, projection, null, null, null)?.use {
+    fun getSongFilePath(context: Context, uri: Uri): String {
+        val projection = arrayOf(Constants.DATA)
+        context.contentResolver.query(uri, projection, null, null, null)?.use {
             if (it.moveToFirst()) {
-                it.getString(0)
-            } else {
-                ""
+                return it.getString(0)
             }
         }
+        return ""
     }
 
     fun getTotalDuration(songs: List<Song>): Long {
@@ -340,46 +333,19 @@ object MusicUtil : KoinComponent {
         return false
     }
 
-    fun isFavorite(context: Context, song: Song): Boolean {
-        return PlaylistsUtil
-            .doPlaylistContains(context, getFavoritesPlaylist(context).id, song.id)
-    }
-
-    fun isFavoritePlaylist(
-        context: Context,
-        playlist: Playlist
-    ): Boolean {
-        return playlist.name == context.getString(R.string.favorites)
-    }
-
     val repository = get<Repository>()
     fun toggleFavorite(context: Context, song: Song) {
         GlobalScope.launch {
             val playlist: PlaylistEntity = repository.favoritePlaylist()
-            if (playlist != null) {
-                val songEntity = song.toSongEntity(playlist.playListId)
-                val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
-                if (isFavorite) {
-                    repository.removeSongFromPlaylist(songEntity)
-                } else {
-                    repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-                }
+            val songEntity = song.toSongEntity(playlist.playListId)
+            val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
+            if (isFavorite) {
+                repository.removeSongFromPlaylist(songEntity)
+            } else {
+                repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
             context.sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
-    }
-
-    private fun getFavoritesPlaylist(context: Context): Playlist {
-        return RealPlaylistRepository(context.contentResolver).playlist(context.getString(R.string.favorites))
-    }
-
-    private fun getOrCreateFavoritesPlaylist(context: Context): Playlist {
-        return RealPlaylistRepository(context.contentResolver).playlist(
-            PlaylistsUtil.createPlaylist(
-                context,
-                context.getString(R.string.favorites)
-            )
-        )
     }
 
     fun deleteTracks(
@@ -390,7 +356,7 @@ object MusicUtil : KoinComponent {
     ) {
         val songRepository: SongRepository = get()
         val projection = arrayOf(
-            BaseColumns._ID, MediaStore.MediaColumns.DATA
+            BaseColumns._ID, Constants.DATA
         )
         // Split the query into multiple batches, and merge the resulting cursors
         var batchStart: Int
@@ -457,20 +423,14 @@ object MusicUtil : KoinComponent {
             }
             activity.contentResolver.notifyChange("content://media".toUri(), null)
             activity.runOnUiThread {
-                Toast.makeText(
-                    activity,
-                    activity.getString(R.string.deleted_x_songs, songCount),
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                activity.showToast(activity.getString(R.string.deleted_x_songs, songCount))
                 callback?.run()
             }
-
         }
     }
 
     suspend fun deleteTracks(context: Context, songs: List<Song>) {
-        val projection = arrayOf(BaseColumns._ID, MediaStore.MediaColumns.DATA)
+        val projection = arrayOf(BaseColumns._ID, Constants.DATA)
         val selection = StringBuilder()
         selection.append(BaseColumns._ID + " IN (")
         for (i in songs.indices) {
@@ -520,11 +480,7 @@ object MusicUtil : KoinComponent {
                 cursor.close()
             }
             withContext(Dispatchers.Main) {
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.deleted_x_songs, deletedCount),
-                    Toast.LENGTH_SHORT
-                ).show()
+                context.showToast(context.getString(R.string.deleted_x_songs, deletedCount))
             }
 
         } catch (ignored: SecurityException) {

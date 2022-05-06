@@ -27,29 +27,16 @@ import code.name.monkey.retromusic.extensions.show
 /**
  * Created by hemanths on 2019-10-02.
  */
-class ListItemView : FrameLayout {
+class ListItemView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = -1
+) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private lateinit var binding: ListItemViewNoCardBinding
+    private var binding =
+        ListItemViewNoCardBinding.inflate(LayoutInflater.from(context), this, true)
 
-    constructor(context: Context) : super(context) {
-        init(context, null)
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context, attrs)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
-        init(context, attrs)
-    }
-
-    private fun init(context: Context, attrs: AttributeSet?) {
-        binding = ListItemViewNoCardBinding.inflate(LayoutInflater.from(context), this, true)
-
+    init {
         context.withStyledAttributes(attrs, R.styleable.ListItemView) {
             if (hasValue(R.styleable.ListItemView_listItemIcon)) {
                 binding.icon.setImageDrawable(getDrawable(R.styleable.ListItemView_listItemIcon))

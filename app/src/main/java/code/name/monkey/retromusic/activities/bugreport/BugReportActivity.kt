@@ -20,13 +20,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.annotation.StringDef
 import androidx.annotation.StringRes
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -38,7 +36,9 @@ import code.name.monkey.retromusic.activities.bugreport.model.github.ExtraInfo
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubLogin
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubTarget
 import code.name.monkey.retromusic.databinding.ActivityBugReportBinding
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
+import code.name.monkey.retromusic.extensions.showToast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
@@ -87,7 +87,7 @@ open class BugReportActivity : AbsThemeActivity() {
     }
 
     private fun initViews() {
-        val accentColor = ThemeStore.accentColor(this)
+        val accentColor = accentColor()
         setSupportActionBar(binding.toolbar)
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -163,11 +163,7 @@ open class BugReportActivity : AbsThemeActivity() {
         val clipboard = getSystemService<ClipboardManager>()
         val clip = ClipData.newPlainText(getString(R.string.device_info), deviceInfo?.toMarkdown())
         clipboard?.setPrimaryClip(clip)
-        Toast.makeText(
-            this@BugReportActivity,
-            R.string.copied_device_info_to_clipboard,
-            Toast.LENGTH_LONG
-        ).show()
+        showToast(R.string.copied_device_info_to_clipboard)
     }
 
     private fun validateInput(): Boolean {
@@ -314,6 +310,7 @@ open class BugReportActivity : AbsThemeActivity() {
 
         private const val STATUS_BAD_CREDENTIALS = 401
         private const val STATUS_ISSUES_NOT_ENABLED = 410
-        private const val ISSUE_TRACKER_LINK = "https://github.com/RetroMusicPlayer/RetroMusicPlayer"
+        private const val ISSUE_TRACKER_LINK =
+            "https://github.com/RetroMusicPlayer/RetroMusicPlayer"
     }
 }
