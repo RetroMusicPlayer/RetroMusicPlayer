@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Tevlî bijarteyan bike</string>
     <string name="action_add_to_playing_queue">Tevlî rêzê stranên têne lêdan bike</string>
     <string name="action_add_to_playlist">Tevlî rêzoka lêdanê bike</string>
+    <string name="action_cancel">Têk bibe</string>
     <string name="action_cast">Biweşîne</string>
     <string name="action_clear_playing_queue">Rêzê stranên têne lêdan pak bike</string>
     <string name="action_cycle_repeat">Awaya dubarekirinê</string>
@@ -54,7 +55,7 @@
     <string name="add_action">Tevlî bike</string>
     <string name="add_playlist_title">"Tevlî rêzoka lêdanê bike"</string>
     <string name="add_time_framed_lryics">Dema peyvên stranê têxe</string>
-    <string name="added_song_count_to_playlist">%d stran tevlî %s bû</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"1 sernav li rêzeya lêdanê hate tevlîkirin."</string>
     <string name="added_x_titles_to_playing_queue">%1$d sernav li rêzeya lêdanê hate tevlîkirin.</string>
     <string name="album">Album</string>
@@ -104,6 +105,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="bug_report_no_password">Jkx borînpeyva derbasdar a xwe ya Github binivisîne</string>
     <string name="bug_report_no_title">Jkx sernaveke pirsgirêkê binivisîne</string>
     <string name="bug_report_no_username">Jkx navê bikarhêner a derbasdar a xwe ya Github binivisîne</string>
+    <string name="bug_report_success">Ragihandina çewtiyê serkeftî bû</string>
     <string name="bug_report_summary">Çewtiyeke nehêvîkirî derket. Bibore, ku ev bidome \"Daneyên sepanê pak bike\" an jî E-nameyekê bişîne </string>
     <string name="bug_report_use_account">Bi riya karanîna ajimêra GitHub bişîne</string>
     <string name="buy_now">Niha bikire</string>
@@ -127,6 +129,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="clear_playing_queue">Rêzê pak bike</string>
     <string name="color">Reng</string>
     <string name="colors">Reng</string>
+    <string name="compact">Compact</string>
     <string name="composer">Awazvan</string>
     <string name="copied_device_info_to_clipboard">Zanyariyên amûrê ji bo tûrikê hate jêgirtin.</string>
     <string name="could_not_create_playlist">Nikare rêzoka lêdanê çê bike\u2019.</string>
@@ -169,6 +172,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="edit_synced_lyrics">Peyvên stranê yên hevdemkirî serrast bike</string>
     <string name="empty">Vala</string>
     <string name="equalizer">Yeksaneker</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">Pirsên pir têne pirsîn (PPP)</string>
     <string name="favorites">Bijarte</string>
     <string name="finish_last_song">Strana dawî biqedîne</string>
@@ -355,7 +359,7 @@ têne guhertin</string>
     <string name="pref_title_album_cover_style">Rûkara bergê albumê</string>
     <string name="pref_title_album_cover_transform">Berga albumê derbas bike</string>
     <string name="pref_title_app_shortcuts">Kurteyên sepanê yên rengîn</string>
-    <string name="pref_title_appbar_mode">Awaya darika sepanê</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Dengê kêm bike di dema hatina agahiyan de</string>
     <string name="pref_title_audio_fade">Wendabûna dengê</string>
     <string name="pref_title_auto_download_artist_images">Wêneyên hunermendan bixweber daxe</string>
@@ -534,5 +538,4 @@ têne guhertin</string>
     <string name="you_have_to_select_at_least_one_category">Divê tu herî kêm yek beş hilbijêrî.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Tu yê ji bo malpera şopandina pirsgirêkê werî beralîkirin.</string>
     <string name="your_account_data_is_only_used_for_authentication">Daneyên ajimêra te tenê ji bo pejirandinê têne bikaranîn.</string>
-    <string name="bug_report_success">Ragihandina çewtiyê serkeftî bû</string>
 </resources>
