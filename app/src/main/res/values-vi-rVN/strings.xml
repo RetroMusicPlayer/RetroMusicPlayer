@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Thêm vào yêu thích</string>
     <string name="action_add_to_playing_queue">Thêm vào danh sách chờ phát</string>
     <string name="action_add_to_playlist">Thêm vào danh sách phát</string>
+    <string name="action_cancel">Hủy</string>
     <string name="action_cast">Truyền màn hình</string>
     <string name="action_clear_playing_queue">Xoá danh sách chờ phát</string>
     <string name="action_cycle_repeat">Chế độ lặp lại chu kỳ</string>
@@ -54,7 +55,7 @@
     <string name="add_action">Thêm</string>
     <string name="add_playlist_title">"Thêm vào danh sách phát"</string>
     <string name="add_time_framed_lryics">Thêm lời theo thời gian</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Đã thêm 1 bài vào danh sách chờ phát."</string>
     <string name="added_x_titles_to_playing_queue">Đã thêm %1$d bài vào danh sách chờ phát.</string>
     <string name="album">Album</string>
@@ -101,6 +102,7 @@
     <string name="bug_report_no_password">Vui lòng nhập đúng mật khẩu dùng Github của bạn</string>
     <string name="bug_report_no_title">Vui lòng nhập tiêu đề vấn đề</string>
     <string name="bug_report_no_username">Vui lòng nhập đúng tên người dùng Github của bạn</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Đã xảy ra lỗi không mong muốn. Xin lỗi bạn vì lỗi này, nếu nó
 tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="bug_report_use_account">Gửi bằng tài khoản GitHub </string>
@@ -125,6 +127,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="clear_playing_queue">Xoá danh sách</string>
     <string name="color">Màu sắc</string>
     <string name="colors">Màu sắc</string>
+    <string name="compact">Compact</string>
     <string name="composer">Tác giả</string>
     <string name="copied_device_info_to_clipboard">Đã sao chép thông tin thiết bị vào clipboard.</string>
     <string name="could_not_create_playlist">Kh\u00f4ng th\u1ec3 t\u1ea1o danh s\u00e1ch ph\u00e1t</string>
@@ -167,6 +170,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="edit_synced_lyrics">Sửa Lời Đồng bộ</string>
     <string name="empty">Trống</string>
     <string name="equalizer">Bộ chỉnh âm</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">Câu hỏi thường gặp</string>
     <string name="favorites">Yêu thích</string>
     <string name="finish_last_song">Kết thúc bài cuối</string>
@@ -352,7 +356,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_album_cover_style">Chủ đề bìa album</string>
     <string name="pref_title_album_cover_transform">Kiểu bìa album đang phát</string>
     <string name="pref_title_app_shortcuts">Đổi màu lối tắt ứng dụng</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Giảm âm lượng khi có âm báo</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Tự động tải xuống hình ảnh nghệ sĩ</string>
@@ -531,5 +535,4 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="you_have_to_select_at_least_one_category">Bạn phải chọn ít nhất một danh mục.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Bạn sẽ được chuyển tiếp đến trang web theo dõi vấn đề.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
