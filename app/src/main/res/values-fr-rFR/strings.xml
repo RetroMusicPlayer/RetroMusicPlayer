@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Ajouter aux favoris</string>
     <string name="action_add_to_playing_queue">Ajouter à la file d\'attente</string>
     <string name="action_add_to_playlist">Ajouter à la liste de lecture</string>
+    <string name="action_cancel">Annuler</string>
     <string name="action_cast">Diffuser</string>
     <string name="action_clear_playing_queue">Vider la file d\'attente</string>
     <string name="action_cycle_repeat">Mode de répétition</string>
@@ -54,7 +55,7 @@
     <string name="add_action">Ajouter</string>
     <string name="add_playlist_title">"Ajouter à la liste de lecture"</string>
     <string name="add_time_framed_lryics">Ajouter des paroles synchronisées</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"1 titre a été ajouté à la file d'attente."</string>
     <string name="added_x_titles_to_playing_queue">%1$d titres ont été ajoutés à la file d\'attente.</string>
     <string name="album">Album</string>
@@ -103,6 +104,7 @@
     <string name="bug_report_no_password">Veuillez entrer votre mot de passe GitHub valide</string>
     <string name="bug_report_no_title">Veuillez entrer un titre pour le problème</string>
     <string name="bug_report_no_username">Veuillez entrer votre nom d\'utilisateur GitHub valide</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Une erreur inattendue s\'est produite. Nous sommes désolés que vous ayez rencontré ce bug, si l\'application continue de planter, effacez les données de l\'application </string>
     <string name="bug_report_use_account">Envoyer en utilisant un compte GitHub</string>
     <string name="buy_now">Acheter maintenant</string>
@@ -126,6 +128,7 @@
     <string name="clear_playing_queue">Vider la file d\'attente</string>
     <string name="color">Couleur</string>
     <string name="colors">Couleurs</string>
+    <string name="compact">Compact</string>
     <string name="composer">Compositeur</string>
     <string name="copied_device_info_to_clipboard">Informations sur l’appareil copiées dans le presse-papier.</string>
     <string name="could_not_create_playlist">La liste de lecture n’a pas pu être créée.</string>
@@ -168,6 +171,7 @@
     <string name="edit_synced_lyrics">Modifier les paroles synchronisées</string>
     <string name="empty">Vide</string>
     <string name="equalizer">Égaliseur</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">Foire aux questions</string>
     <string name="favorites">Favoris</string>
     <string name="finish_last_song">Finissez le dernier morceau</string>
@@ -353,7 +357,7 @@
     <string name="pref_title_album_cover_style">Thème de la couverture d\'album</string>
     <string name="pref_title_album_cover_transform">Style du balayage de l\'image d\'album</string>
     <string name="pref_title_app_shortcuts">Raccourcis d\'application colorés</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Réduire le volume à la perte de focus</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Télécharger automatiquement les photos des artistes</string>
@@ -532,5 +536,4 @@
     <string name="you_have_to_select_at_least_one_category">Vous devez sélectionner au moins une catégorie.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
