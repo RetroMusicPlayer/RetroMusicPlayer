@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Dodaj do ulubionych</string>
     <string name="action_add_to_playing_queue">Dodaj do kolejki</string>
     <string name="action_add_to_playlist">Dodaj do playlisty</string>
+    <string name="action_cancel">Anuluj</string>
     <string name="action_cast">Przesyłaj</string>
     <string name="action_clear_playing_queue">Wyczyść kolejkę</string>
     <string name="action_cycle_repeat">Przełącz tryb powtarzania</string>
@@ -54,7 +55,7 @@
     <string name="add_action">Dodaj</string>
     <string name="add_playlist_title">"Dodaj do playlisty"</string>
     <string name="add_time_framed_lryics">Dodaj tekst z ramką czasową</string>
-    <string name="added_song_count_to_playlist">Dodano %d utwór(y/ów) do %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Dodano tytuł do kolejki odtwarzania"</string>
     <string name="added_x_titles_to_playing_queue">Dodano %1$d tytułów do kolejki</string>
     <string name="album">Album</string>
@@ -107,6 +108,7 @@
     <string name="bug_report_no_password">Wpisz poprawne hasło serwisu GitHub</string>
     <string name="bug_report_no_title">Wpisz tytuł problemu</string>
     <string name="bug_report_no_username">Wpisz poprawną nazwę użytkownika serwisu GitHub</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Wystąpił nieoczekiwany błąd. Przepraszamy za wystąpienie tego problemu. Jeśli nie możesz korzystać z aplikacji – wyczyść dane aplikacji lub wyślij nam e-maila </string>
     <string name="bug_report_use_account">Wyślij używając konta serwisu GitHub</string>
     <string name="buy_now">Kup teraz</string>
@@ -130,6 +132,7 @@
     <string name="clear_playing_queue">Wyczyść kolejkę</string>
     <string name="color">Kolor</string>
     <string name="colors">Kolory</string>
+    <string name="compact">Compact</string>
     <string name="composer">Kompozytor</string>
     <string name="copied_device_info_to_clipboard">Skopiowano informacje o urządzeniu do schowka</string>
     <string name="could_not_create_playlist">Nie udało się utworzyć playlisty.</string>
@@ -172,6 +175,7 @@
     <string name="edit_synced_lyrics">Edytuj zsynchronizowany tekst</string>
     <string name="empty">Pusto</string>
     <string name="equalizer">Korektor dźwięku</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">Najczęściej zadawane pytania</string>
     <string name="favorites">Ulubione</string>
     <string name="finish_last_song">Dokończ ostatni utwór</string>
@@ -357,7 +361,7 @@
     <string name="pref_title_album_cover_style">Wygląd okładki albumu</string>
     <string name="pref_title_album_cover_transform">Przesuwanie okładki albumu</string>
     <string name="pref_title_app_shortcuts">Kolorowe skróty aplikacji</string>
-    <string name="pref_title_appbar_mode">Tryb paska aplikacji</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Zmniejsz głośność przy braku skupienia</string>
     <string name="pref_title_audio_fade">Zanikanie dźwięku</string>
     <string name="pref_title_auto_download_artist_images">Automatycznie pobierz grafiki wykonawców</string>
@@ -536,5 +540,4 @@
     <string name="you_have_to_select_at_least_one_category">Zaznacz przynajmniej jedną kategorię</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Zostaniesz przekierowany do strony ze zgłoszeniami.</string>
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
