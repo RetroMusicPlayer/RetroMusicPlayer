@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Přidat k oblíbeným</string>
     <string name="action_add_to_playing_queue">Přidat do fronty </string>
     <string name="action_add_to_playlist">Přidat do seznamu skladeb…</string>
+    <string name="action_cancel">Zrušit aktuální časovač</string>
     <string name="action_cast">Hliník</string>
     <string name="action_clear_playing_queue">Vyčistit frontu</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
@@ -54,7 +55,7 @@
     <string name="add_action">Přidat</string>
     <string name="add_playlist_title">"Přidat do seznamu skladeb"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Přidán 1 titul do fronty přehrávání."</string>
     <string name="added_x_titles_to_playing_queue">Přidány %1$d tituly do fronty přehrávání.</string>
     <string name="album">Album</string>
@@ -107,6 +108,7 @@
     <string name="bug_report_no_password">Prosím zadejte platné GitHub heslo</string>
     <string name="bug_report_no_title">Prosím zadejte název problému</string>
     <string name="bug_report_no_username">Prosím zadejte platné uživatelské jméno na GitHubu</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Došlo k neočekávané chybě. Je nám líto, že jste našli tuto chybu, pokud aplikace bude stále padat, použijte funkci \"Vymazat data aplikace\" nebo nám pošlete e-mail </string>
     <string name="bug_report_use_account">Odeslat pomocí účtu GitHub</string>
     <string name="buy_now">Zakoupit</string>
@@ -130,6 +132,7 @@
     <string name="clear_playing_queue">Vymazat frontu</string>
     <string name="color">Barva</string>
     <string name="colors">Barvy</string>
+    <string name="compact">Compact</string>
     <string name="composer">Skladatel</string>
     <string name="copied_device_info_to_clipboard">Informace o zařízení zkopírovány do schránky.</string>
     <string name="could_not_create_playlist">Nelze vytvo\u0159it playlist.</string>
@@ -172,6 +175,7 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Prázdný</string>
     <string name="equalizer">Ekvalizér</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">Často kladené otázky</string>
     <string name="favorites">Oblíbené</string>
     <string name="finish_last_song">Dokončit poslední skladbu</string>
@@ -357,7 +361,7 @@
     <string name="pref_title_album_cover_style">Motiv obalu alba</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Barevné zkratky aplikace</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Snížit hlasitost při ztrátě zaostření</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Automatické stahování obrázků interpretů</string>
@@ -536,5 +540,4 @@
     <string name="you_have_to_select_at_least_one_category">Musíte zvolit alespoň jednu kategorii.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Budete přesměrováni na webovou stránku pro zadání problému.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vaše údaje k účtu jsou použity pouze k ověření.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
