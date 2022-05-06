@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">加入收藏夹</string>
     <string name="action_add_to_playing_queue">加入播放队列</string>
     <string name="action_add_to_playlist">加入播放列表</string>
+    <string name="action_cancel">取消</string>
     <string name="action_cast">投射</string>
     <string name="action_clear_playing_queue">清空播放队列</string>
     <string name="action_cycle_repeat">循环重复模式</string>
@@ -54,7 +55,7 @@
     <string name="add_action">添加</string>
     <string name="add_playlist_title">"加入播放列表"</string>
     <string name="add_time_framed_lryics">添加同步歌词</string>
-    <string name="added_song_count_to_playlist">已将 %d 首歌添加到 %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"已添加 1 首歌到播放队列。"</string>
     <string name="added_x_titles_to_playing_queue">已添加 %1$d 首歌到播放队列。</string>
     <string name="album">专辑</string>
@@ -101,6 +102,7 @@
     <string name="bug_report_no_password">请您输入有效的 GitHub 密码</string>
     <string name="bug_report_no_title">请输入问题标题</string>
     <string name="bug_report_no_username">请您输入有效的 GitHub 用户名</string>
+    <string name="bug_report_success">错误报告成功</string>
     <string name="bug_report_summary">发生未知错误。很抱歉让您遇到此错误，如一直崩溃，请尝试“清除应用数据”或发送邮件</string>
     <string name="bug_report_use_account">使用 GitHub 帐户发送</string>
     <string name="buy_now">立即购买</string>
@@ -124,6 +126,7 @@
     <string name="clear_playing_queue">清空队列</string>
     <string name="color">颜色</string>
     <string name="colors">更多颜色</string>
+    <string name="compact">Compact</string>
     <string name="composer">作曲家</string>
     <string name="copied_device_info_to_clipboard">已复制设备信息到剪贴板。</string>
     <string name="could_not_create_playlist">无法创建播放列表。</string>
@@ -166,6 +169,7 @@
     <string name="edit_synced_lyrics">编辑同步歌词</string>
     <string name="empty">空空如也</string>
     <string name="equalizer">均衡器</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">常见问题和解答</string>
     <string name="favorites">收藏夹</string>
     <string name="finish_last_song">播放完最后一首歌曲</string>
@@ -351,7 +355,7 @@
     <string name="pref_title_album_cover_style">专辑封面主题</string>
     <string name="pref_title_album_cover_transform">专辑封面切换</string>
     <string name="pref_title_app_shortcuts">着色应用快捷方式</string>
-    <string name="pref_title_appbar_mode">顶栏样式</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">焦点丢失时降低音量</string>
     <string name="pref_title_audio_fade">音频淡入淡出</string>
     <string name="pref_title_auto_download_artist_images">自动下载艺术家图片</string>
@@ -530,5 +534,4 @@
     <string name="you_have_to_select_at_least_one_category">请至少选择一个分类。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
-    <string name="bug_report_success">错误报告成功</string>
 </resources>
