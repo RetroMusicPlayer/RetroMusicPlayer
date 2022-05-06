@@ -54,7 +54,7 @@
     <string name="add_action">添加</string>
     <string name="add_playlist_title">"加入播放列表"</string>
     <string name="add_time_framed_lryics">添加同步歌词</string>
-    <string name="added_song_count_to_playlist">已将 %d 首歌添加到 %s</string>
+    <string name="added_song_count_to_playlist">已将 %1$d 首歌添加到 %2$s</string>
     <string name="added_title_to_playing_queue">"已添加 1 首歌到播放队列。"</string>
     <string name="added_x_titles_to_playing_queue">已添加 %1$d 首歌到播放队列。</string>
     <string name="album">专辑</string>

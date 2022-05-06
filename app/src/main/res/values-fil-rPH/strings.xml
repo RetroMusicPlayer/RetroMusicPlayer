@@ -54,7 +54,7 @@
     <string name="add_action">Magdagdag</string>
     <string name="add_playlist_title">"Idagdag sa playlist"</string>
     <string name="add_time_framed_lryics">Mag-dagdag ng Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Nadagdag ang 1 title sa playing queue."</string>
     <string name="added_x_titles_to_playing_queue">Nadagdag ang %1$d titles sa playing queue.</string>
     <string name="album">Album</string>

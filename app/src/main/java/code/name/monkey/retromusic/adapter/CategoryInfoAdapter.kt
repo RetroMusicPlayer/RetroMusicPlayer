@@ -19,12 +19,12 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.PreferenceDialogLibraryCategoriesListitemBinding
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.SwipeAndDragHelper
@@ -59,12 +59,7 @@ class CategoryInfoAdapter : RecyclerView.Adapter<CategoryInfoAdapter.ViewHolder>
                 categoryInfo.visible = !categoryInfo.visible
                 holder.binding.checkbox.isChecked = categoryInfo.visible
             } else {
-                Toast.makeText(
-                    holder.itemView.context,
-                    R.string.you_have_to_select_at_least_one_category,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                holder.itemView.context.showToast(R.string.you_have_to_select_at_least_one_category)
             }
         }
         holder.binding.dragView.setOnTouchListener { _: View?, event: MotionEvent ->

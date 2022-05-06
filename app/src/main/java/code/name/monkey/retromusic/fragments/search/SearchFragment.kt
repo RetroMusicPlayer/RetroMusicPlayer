@@ -20,9 +20,9 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.getSystemService
 import androidx.core.view.*
 import androidx.core.widget.doAfterTextChanged
@@ -54,7 +54,6 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
     ChipGroup.OnCheckedStateChangeListener {
     companion object {
         const val QUERY = "query"
-        const val REQ_CODE_SPEECH_INPUT = 9001
     }
 
     private var _binding: FragmentSearchBinding? = null
@@ -83,6 +82,11 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
             doAfterTextChanged {
                 if (!it.isNullOrEmpty())
                     search(it.toString())
+                else {
+                    TransitionManager.beginDelayedTransition(binding.appBarLayout)
+                    binding.voiceSearch.isVisible = true
+                    binding.clearText.isGone = true
+                }
             }
             focusAndShowKeyboard()
         }
@@ -204,25 +208,21 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt))
         try {
-            startActivityForResult(
-                intent,
-                REQ_CODE_SPEECH_INPUT
-            )
+            speechInputLauncher.launch(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             showToast(getString(R.string.speech_not_supported))
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            val spokenText: String? =
-                data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                    .let { text -> text?.get(0) }
-            binding.searchView.setText(spokenText)
+    private val speechInputLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val spokenText: String? =
+                    result?.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
+                binding.searchView.setText(spokenText)
+            }
         }
-    }
 
     override fun onDestroyView() {
         hideKeyboard(view)
@@ -246,6 +246,10 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
     override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
         search(binding.searchView.text.toString())
     }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {}
+
+    override fun onMenuItemSelected(menuItem: MenuItem) = false
 }
 
 enum class Filter {

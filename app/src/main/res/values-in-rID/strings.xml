@@ -54,7 +54,7 @@
     <string name="add_action">Tambah</string>
     <string name="add_playlist_title">"Tambah ke daftar putar"</string>
     <string name="add_time_framed_lryics">Tambah kerangka waktu pada lirik</string>
-    <string name="added_song_count_to_playlist">Menambah %d lagu ke %s</string>
+    <string name="added_song_count_to_playlist">Menambah %1$d lagu ke %2$s</string>
     <string name="added_title_to_playing_queue">"1 lagu ditambah ke antrean."</string>
     <string name="added_x_titles_to_playing_queue">%1$d lagu telah ditambah ke antrean.</string>
     <string name="album">Album</string>

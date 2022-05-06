@@ -23,7 +23,7 @@ interface Playback {
 
     val audioSessionId: Int
 
-    fun setDataSource(path: String): Boolean
+    fun setDataSource(path: String, force: Boolean): Boolean
 
     fun setNextDataSource(path: String?)
 

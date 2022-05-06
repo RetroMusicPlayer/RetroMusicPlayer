@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.util
 
 import android.content.Context
 import android.net.Uri
+import android.os.Environment
 import android.util.Log
 import java.io.File
 import java.io.IOException
@@ -23,7 +24,13 @@ object FileUtils {
      * @return the file
      * @throws IOException
      */
-    fun createFile(context: Context, directoryName: String, fileName: String, body: String, fileType: String): File {
+    fun createFile(
+        context: Context,
+        directoryName: String,
+        fileName: String,
+        body: String,
+        fileType: String
+    ): File {
         val root = createDirectory(context, directoryName)
         val filePath = "$root/$fileName$fileType"
         val file = File(filePath)
@@ -57,4 +64,13 @@ object FileUtils {
         }
         return file
     }
+}
+@Suppress("Deprecation")
+fun getExternalStorageDirectory(): File {
+    return Environment.getExternalStorageDirectory()
+}
+
+@Suppress("Deprecation")
+fun getExternalStoragePublicDirectory(type: String): File {
+    return Environment.getExternalStoragePublicDirectory(type)
 }

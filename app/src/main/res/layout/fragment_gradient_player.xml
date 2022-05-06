@@ -80,7 +80,7 @@
         android:layout_height="match_parent"
         app:behavior_hideable="false"
         app:gestureInsetBottomIgnored="true"
-        app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <LinearLayout
             android:id="@+id/container"

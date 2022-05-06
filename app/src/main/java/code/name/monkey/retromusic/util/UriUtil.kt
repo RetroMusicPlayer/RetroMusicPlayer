@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
+import code.name.monkey.retromusic.Constants
 
 object UriUtil {
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -13,7 +14,7 @@ object UriUtil {
         val uri = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL)
         val proj = arrayOf(MediaStore.Files.FileColumns._ID)
         context.contentResolver.query(
-            uri, proj, MediaStore.Files.FileColumns.DATA + "=?", arrayOf(path), null
+            uri, proj, Constants.DATA + "=?", arrayOf(path), null
         )?.use { cursor ->
             if (cursor.count != 0) {
                 cursor.moveToFirst()

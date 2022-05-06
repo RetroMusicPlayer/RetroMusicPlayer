@@ -9,9 +9,9 @@ import android.media.MediaPlayer
 import android.media.audiofx.AudioEffect
 import android.os.PowerManager
 import android.util.Log
-import android.widget.Toast
 import androidx.core.net.toUri
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimator
 import code.name.monkey.retromusic.service.playback.Playback
@@ -120,20 +120,9 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     override val isPlaying: Boolean
         get() = mIsInitialized && getCurrentPlayer()?.isPlaying == true
 
-    // This has to run when queue is changed or song is changed manually by user
-    fun sourceChangedByUser() {
-        hasDataSource = false
+    override fun setDataSource(path: String, force: Boolean): Boolean {
         cancelFade()
-        getCurrentPlayer()?.apply {
-            if (isPlaying) stop()
-        }
-        getNextPlayer()?.apply {
-            if (isPlaying) stop()
-        }
-    }
-
-    override fun setDataSource(path: String): Boolean {
-        cancelFade()
+        if (force) hasDataSource = false
         mIsInitialized = false
         /* We've already set DataSource if initialized is true in setNextDataSource */
         if (!hasDataSource) {
@@ -154,7 +143,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
      */
     private fun setDataSourceImpl(
         player: MediaPlayer,
-        path: String
+        path: String,
     ): Boolean {
         player.reset()
         player.setOnPreparedListener(null)
@@ -291,12 +280,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
         player2 = MediaPlayer()
         mIsInitialized = true
         mp?.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
-        Toast.makeText(
-            context,
-            context.resources.getString(R.string.unplayable_file),
-            Toast.LENGTH_SHORT
-        )
-            .show()
+        context.showToast(R.string.unplayable_file)
         Log.e(TAG, what.toString() + extra)
         return false
     }

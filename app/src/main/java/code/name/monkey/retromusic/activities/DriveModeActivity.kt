@@ -22,11 +22,11 @@ import android.os.Bundle
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import androidx.lifecycle.lifecycleScope
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityDriveModeBinding
 import code.name.monkey.retromusic.db.toSongEntity
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
@@ -66,7 +66,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
         setUpMusicControllers()
 
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-        lastPlaybackControlsColor = ThemeStore.accentColor(this)
+        lastPlaybackControlsColor = accentColor()
         binding.close.setOnClickListener {
             onBackPressed()
         }
@@ -91,14 +91,12 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     private fun toggleFavorite(song: Song) {
         lifecycleScope.launch(Dispatchers.IO) {
             val playlist = repository.favoritePlaylist()
-            if (playlist != null) {
-                val songEntity = song.toSongEntity(playlist.playListId)
-                val isFavorite = repository.isSongFavorite(song.id)
-                if (isFavorite) {
-                    repository.removeSongFromPlaylist(songEntity)
-                } else {
-                    repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-                }
+            val songEntity = song.toSongEntity(playlist.playListId)
+            val isFavorite = repository.isSongFavorite(song.id)
+            if (isFavorite) {
+                repository.removeSongFromPlaylist(songEntity)
+            } else {
+                repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
             sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
@@ -139,7 +137,6 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     }
 
     private fun setUpPrevNext() {
-
         binding.nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
         binding.previousButton.setOnClickListener { MusicPlayerRemote.back() }
     }
@@ -246,7 +243,8 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
 
         GlideApp.with(this)
             .load(RetroGlideExtension.getSongModel(song))
-            .songCoverOptions(song).transform(BlurTransformation.Builder(this).build())
+            .songCoverOptions(song)
+            .transform(BlurTransformation.Builder(this).build())
             .into(binding.image)
     }
 

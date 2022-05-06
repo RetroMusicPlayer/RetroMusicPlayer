@@ -54,7 +54,7 @@
     <string name="add_action">追加</string>
     <string name="add_playlist_title">"プレイリストに追加"</string>
     <string name="add_time_framed_lryics">時間指定の歌詞を追加</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"1曲が再生キューに追加されました"</string>
     <string name="added_x_titles_to_playing_queue">%1$d 曲が再生キューに追加されました</string>
     <string name="album">アルバム</string>

@@ -20,7 +20,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
 import android.view.View
-import androidx.activity.addCallback
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.view.doOnLayout
@@ -29,7 +29,6 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -48,7 +47,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtil.userName
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialFadeThrough
@@ -67,7 +66,7 @@ class HomeFragment :
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         setupListeners()
-        binding.titleWelcome.text = String.format("%s", PreferenceUtil.userName)
+        binding.titleWelcome.text = String.format("%s", userName)
 
         enterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
         reenterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
@@ -77,11 +76,11 @@ class HomeFragment :
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
-        libraryViewModel.getHome().observe(viewLifecycleOwner) {
-            homeAdapter.swapData(it)
-        }
         libraryViewModel.getSuggestions().observe(viewLifecycleOwner) {
             loadSuggestions(it)
+        }
+        libraryViewModel.getHome().observe(viewLifecycleOwner) {
+            homeAdapter.swapData(it)
         }
 
         loadProfile()
@@ -92,10 +91,6 @@ class HomeFragment :
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
         binding.toolbar.drawNextToNavbar()
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            remove()
-            requireActivity().onBackPressed()
-        }
         view.doOnLayout {
             adjustPlaylistButtons()
         }
@@ -110,7 +105,6 @@ class HomeFragment :
                 button.setLines(maxLineCount)
             }
         }
-
     }
 
     private fun setupListeners() {
@@ -195,8 +189,7 @@ class HomeFragment :
         binding.actionShuffle.elevatedAccentColor()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         menu.removeItem(R.id.action_grid_size)
         menu.removeItem(R.id.action_layout_type)
@@ -218,16 +211,12 @@ class HomeFragment :
     }
 
     fun setSharedAxisXTransitions() {
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).apply {
-            addTarget(binding.root)
-        }
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).addTarget(CoordinatorLayout::class.java)
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
     }
 
     private fun setSharedAxisYTransitions() {
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true).apply {
-            addTarget(binding.root)
-        }
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true).addTarget(CoordinatorLayout::class.java)
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
     }
 
@@ -246,7 +235,7 @@ class HomeFragment :
             binding.suggestions.image7,
             binding.suggestions.image8
         )
-        val color = ThemeStore.accentColor(requireContext())
+        val color = accentColor()
         binding.suggestions.message.apply {
             setTextColor(color)
             setOnClickListener {
@@ -285,7 +274,7 @@ class HomeFragment :
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> findNavController().navigate(
                 R.id.settingsActivity,
@@ -301,11 +290,11 @@ class HomeFragment :
                 "ShowCreatePlaylistDialog"
             )
         }
-        return super.onOptionsItemSelected(item)
+        return false
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
+    override fun onPrepareMenu(menu: Menu) {
+        super.onPrepareMenu(menu)
         ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
     }
 

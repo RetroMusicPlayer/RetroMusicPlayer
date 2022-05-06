@@ -54,7 +54,7 @@
     <string name="add_action">Adicionar</string>
     <string name="add_playlist_title">"Adicionar à playlist"</string>
     <string name="add_time_framed_lryics">Adicionar Letras Sincronizadas</string>
-    <string name="added_song_count_to_playlist">%d música(s) adicionada(s) para %s</string>
+    <string name="added_song_count_to_playlist">%1$d música(s) adicionada(s) para %2$s</string>
     <string name="added_title_to_playing_queue">"1 música foi adicionada à fila."</string>
     <string name="added_x_titles_to_playing_queue">%1$d músicas foram adicionadas à fila.</string>
     <string name="album">Álbum</string>

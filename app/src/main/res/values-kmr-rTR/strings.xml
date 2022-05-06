@@ -54,7 +54,7 @@
     <string name="add_action">Tevlî bike</string>
     <string name="add_playlist_title">"Tevlî rêzoka lêdanê bike"</string>
     <string name="add_time_framed_lryics">Dema peyvên stranê têxe</string>
-    <string name="added_song_count_to_playlist">%d stran tevlî %s bû</string>
+    <string name="added_song_count_to_playlist">%1$d stran tevlî %2$s bû</string>
     <string name="added_title_to_playing_queue">"1 sernav li rêzeya lêdanê hate tevlîkirin."</string>
     <string name="added_x_titles_to_playing_queue">%1$d sernav li rêzeya lêdanê hate tevlîkirin.</string>
     <string name="album">Album</string>

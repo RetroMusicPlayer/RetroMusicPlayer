@@ -54,7 +54,7 @@
     <string name="add_action">Adicionar</string>
     <string name="add_playlist_title">"Adicionar à lista"</string>
     <string name="add_time_framed_lryics">Adicionar letras do cronograma</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Adicionada 1 música à fila."</string>
     <string name="added_x_titles_to_playing_queue">Adicionadas %1$d músicas à fila.</string>
     <string name="album">Álbum</string>

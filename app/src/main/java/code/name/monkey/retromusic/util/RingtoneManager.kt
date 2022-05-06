@@ -19,10 +19,10 @@ import android.content.Intent
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.provider.Settings
-import android.widget.Toast
 import androidx.core.net.toUri
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil.getSongFileUri
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -45,7 +45,7 @@ class RingtoneManager(val context: Context) {
                     Settings.System.putString(resolver, Settings.System.RINGTONE, uri.toString())
                     val message = context
                         .getString(R.string.x_has_been_set_as_ringtone, cursorSong.getString(0))
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                    context.showToast(message)
                 }
             }
         } catch (ignored: SecurityException) {

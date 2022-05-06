@@ -52,7 +52,7 @@ class AlbumDetailsViewModel(
         emit(artist)
     }
 
-    fun getAlbumInfo(album: Album): LiveData<Result<LastFmAlbum>> = liveData {
+    fun getAlbumInfo(album: Album): LiveData<Result<LastFmAlbum>> = liveData(IO) {
         emit(Result.Loading)
         emit(repository.albumInfo(album.artistName, album.title))
     }

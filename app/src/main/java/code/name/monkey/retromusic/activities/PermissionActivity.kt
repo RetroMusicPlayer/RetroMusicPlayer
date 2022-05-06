@@ -22,17 +22,14 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityPermissionBinding
-import code.name.monkey.retromusic.extensions.accentBackgroundColor
-import code.name.monkey.retromusic.extensions.setStatusBarColorAuto
-import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
-import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.util.RingtoneManager
 
 class PermissionActivity : AbsMusicServiceActivity() {
@@ -75,32 +72,32 @@ class PermissionActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupTitle() {
-        val color = ThemeStore.accentColor(this)
+        val color = accentColor()
         val hexColor = String.format("#%06X", 0xFFFFFF and color)
-        val appName = "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>"
-            .parseAsHtml()
+        val appName =
+            "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>"
+                .parseAsHtml()
         binding.appNameText.text = appName
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
+        super.onResume()
         if (hasStoragePermission()) {
             binding.storagePermission.checkImage.isVisible = true
             binding.storagePermission.checkImage.imageTintList =
-                ColorStateList.valueOf(ThemeStore.accentColor(this))
+                ColorStateList.valueOf(accentColor())
         }
-        if (hasAudioPermission()) {
-            binding.audioPermission.checkImage.isVisible = true
-            binding.audioPermission.checkImage.imageTintList =
-                ColorStateList.valueOf(ThemeStore.accentColor(this))
+        if (VersionUtils.hasMarshmallow()) {
+            if (hasAudioPermission()) {
+                binding.audioPermission.checkImage.isVisible = true
+                binding.audioPermission.checkImage.imageTintList =
+                    ColorStateList.valueOf(accentColor())
+            }
         }
-
-        super.onResume()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun hasStoragePermission(): Boolean {
-        return checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        return ActivityCompat.checkSelfPermission(this , Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

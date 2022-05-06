@@ -15,19 +15,16 @@
 package code.name.monkey.retromusic.appshortcuts
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.util.TypedValue
 import androidx.annotation.RequiresApi
-import androidx.core.graphics.applyCanvas
-import androidx.core.graphics.createBitmap
+import androidx.core.graphics.drawable.toBitmap
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 object AppShortcutIconGenerator {
@@ -64,25 +61,17 @@ object AppShortcutIconGenerator {
         context: Context,
         iconId: Int,
         foregroundColor: Int,
-        backgroundColor: Int
+        backgroundColor: Int,
     ): Icon {
         // Get and tint foreground and background drawables
-        val vectorDrawable = RetroUtil.getTintedVectorDrawable(context, iconId, foregroundColor)
-        val backgroundDrawable = RetroUtil.getTintedVectorDrawable(
-            context, R.drawable.ic_app_shortcut_background, backgroundColor
-        )
+        val vectorDrawable = context.getTintedDrawable(iconId, foregroundColor)
+        val backgroundDrawable =
+            context.getTintedDrawable(R.drawable.ic_app_shortcut_background, backgroundColor)
 
         // Squash the two drawables together
         val layerDrawable = LayerDrawable(arrayOf(backgroundDrawable, vectorDrawable))
 
         // Return as an Icon
-        return Icon.createWithBitmap(drawableToBitmap(layerDrawable))
-    }
-
-    private fun drawableToBitmap(drawable: Drawable): Bitmap {
-        return createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight).applyCanvas {
-            drawable.setBounds(0, 0, width, height)
-            drawable.draw(this)
-        }
+        return Icon.createWithBitmap(layerDrawable.toBitmap())
     }
 }

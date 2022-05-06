@@ -14,15 +14,14 @@
  */
 package code.name.monkey.retromusic.adapter
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.openUrl
 import code.name.monkey.retromusic.model.Contributor
-import code.name.monkey.retromusic.util.RetroUtil.openUrl
 import code.name.monkey.retromusic.views.RetroShapeableImageView
 import com.bumptech.glide.Glide
 
@@ -65,7 +64,7 @@ class ContributorAdapter(
         val contributor = contributors[position]
         holder.bindData(contributor)
         holder.itemView.setOnClickListener {
-            openUrl(it?.context as Activity, contributors[position].link)
+            it?.context?.openUrl(contributors[position].link)
         }
     }
 

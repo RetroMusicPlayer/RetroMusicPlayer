@@ -20,7 +20,6 @@ import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
-import android.graphics.drawable.Drawable
 import android.media.MediaMetadataRetriever
 import android.os.Bundle
 import android.provider.MediaStore
@@ -29,7 +28,6 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
@@ -48,10 +46,8 @@ import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
-import code.name.monkey.retromusic.extensions.currentFragment
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.keepScreenOn
-import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
@@ -60,22 +56,30 @@ import code.name.monkey.retromusic.interfaces.IPaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RingtoneManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.math.abs
 
-abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragment(layout),
+abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout),
     Toolbar.OnMenuItemClickListener, IPaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
+
+    val libraryViewModel: LibraryViewModel by sharedViewModel()
+
+    val mainActivity: MainActivity
+        get() = activity as MainActivity
 
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
 
     override fun onMenuItemClick(
-        item: MenuItem
+        item: MenuItem,
     ): Boolean {
         val song = MusicPlayerRemote.currentSong
         when (item.itemId) {
@@ -196,7 +200,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 if (genre == null) {
                     genre = "Not Specified"
                 }
-                Toast.makeText(context, genre, Toast.LENGTH_SHORT).show()
+                showToast(genre)
                 return true
             }
         }
@@ -206,8 +210,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
     private fun showLyricsIcon(item: MenuItem) {
         val icon =
             if (PreferenceUtil.showLyrics) R.drawable.ic_lyrics else R.drawable.ic_lyrics_outline
-        val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
-            requireContext(),
+        val drawable = requireContext().getTintedDrawable(
             icon,
             toolbarIconColor()
         )
@@ -240,14 +243,12 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
     protected open fun toggleFavorite(song: Song) {
         lifecycleScope.launch(IO) {
             val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
-            if (playlist != null) {
-                val songEntity = song.toSongEntity(playlist.playListId)
-                val isFavorite = libraryViewModel.isSongFavorite(song.id)
-                if (isFavorite) {
-                    libraryViewModel.removeSongFromPlaylist(songEntity)
-                } else {
-                    libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-                }
+            val songEntity = song.toSongEntity(playlist.playListId)
+            val isFavorite = libraryViewModel.isSongFavorite(song.id)
+            if (isFavorite) {
+                libraryViewModel.removeSongFromPlaylist(songEntity)
+            } else {
+                libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
             libraryViewModel.forceReload(ReloadType.Playlists)
             requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
@@ -264,8 +265,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                 } else {
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                 }
-                val drawable: Drawable = RetroUtil.getTintedVectorDrawable(
-                    requireContext(),
+                val drawable =  requireContext().getTintedDrawable(
                     icon,
                     toolbarIconColor()
                 )
@@ -333,7 +333,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
                     e1: MotionEvent?,
                     e2: MotionEvent?,
                     distanceX: Float,
-                    distanceY: Float
+                    distanceY: Float,
                 ): Boolean {
                     return when {
                         abs(distanceX) > abs(distanceY) -> {
@@ -358,15 +358,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMainActivityFragme
     companion object {
         val TAG: String = AbsPlayerFragment::class.java.simpleName
         const val VISIBILITY_ANIM_DURATION: Long = 300
-    }
-
-    protected fun getUpNextAndQueueTime(): String {
-        val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
-
-        return MusicUtil.buildInfoString(
-            resources.getString(R.string.up_next),
-            MusicUtil.getReadableDurationString(duration)
-        )
     }
 }
 

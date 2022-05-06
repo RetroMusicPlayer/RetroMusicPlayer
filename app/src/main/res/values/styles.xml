@@ -7,7 +7,7 @@
     <style name="Theme.RetroMusic.Black" parent="Theme.RetroMusic.Base.Black" />
 
     <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive">
-        <item name="android:windowBackground">@color/window_color</item>
+        <item name="android:windowBackground">?colorSurface</item>
     </style>
 
     <style name="Theme.RetroMusic.MD3" parent="@style/Theme.Material3.DayNight.NoActionBar">
@@ -133,7 +133,7 @@
     <style name="MaterialPopupMenuStyle" parent="Widget.Material3.PopupMenu">
         <item name="android:popupBackground">@drawable/popup_background</item>
     </style>
-    
+
     <style name="CenteredCheckBoxTheme">
         <item name="checkboxStyle">@style/CheckBoxStyle</item>
     </style>
@@ -142,23 +142,7 @@
         <item name="android:gravity">center_vertical|end</item>
     </style>
 
-    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="materialAlertDialogBodyTextStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Body
-        </item>
-        <item name="materialAlertDialogTitleTextStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Title
-        </item>
-        <item name="buttonBarPositiveButtonStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Button
-        </item>
-        <item name="buttonBarNegativeButtonStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Button
-        </item>
-        <item name="buttonBarNeutralButtonStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Button
-        </item>
-    </style>
+    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog" />
 
     <style name="AppTextAppearance.MaterialAlertDialog.Button" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textSize">16sp</item>

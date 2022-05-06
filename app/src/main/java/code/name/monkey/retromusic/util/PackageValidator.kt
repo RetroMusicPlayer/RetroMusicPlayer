@@ -71,7 +71,7 @@ class PackageValidator(
 
     /**
      * Checks whether the caller attempting to connect to a [MediaBrowserServiceCompat] is known.
-     * See [MusicService.onGetRoot] for where this is utilized.
+     * See [MediaBrowserServiceCompat.onGetRoot] for where this is utilized.
      *
      * @param callingPackage The package name of the caller.
      * @param callingUid The user id of the caller.

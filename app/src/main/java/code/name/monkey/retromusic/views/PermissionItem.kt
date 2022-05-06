@@ -44,6 +44,6 @@ class PermissionItem @JvmOverloads constructor(
     }
 
     fun setButtonClick(callBack: () -> Unit) {
-        binding.button.setOnClickListener { callBack.invoke() }
+        binding.button.setOnClickListener { callBack() }
     }
 }

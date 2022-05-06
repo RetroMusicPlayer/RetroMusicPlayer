@@ -28,7 +28,7 @@ abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>
     private var sortOrder: String? = null
     private var currentLayoutRes: Int = 0
     private val isLandscape: Boolean
-        get() = RetroUtil.isLandscape()
+        get() = RetroUtil.isLandscape
 
     val maxGridSize: Int
         get() = if (isLandscape) {

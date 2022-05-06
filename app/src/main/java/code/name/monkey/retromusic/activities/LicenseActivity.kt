@@ -16,12 +16,12 @@ package code.name.monkey.retromusic.activities
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
-import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.ATHUtil.isWindowBackgroundDark
 import code.name.monkey.appthemehelper.util.ColorUtil.lightenColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityLicenseBinding
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.extensions.surfaceColor
 import java.io.BufferedReader
@@ -59,11 +59,11 @@ class LicenseActivity : AbsThemeActivity() {
                         "body { background-color: %s; color: %s; }", backgroundColor, contentColor
                     )
                 )
-                .replace("{link-color}", colorToCSS(accentColor(this)))
+                .replace("{link-color}", colorToCSS(accentColor()))
                 .replace(
                     "{link-color-active}",
                     colorToCSS(
-                        lightenColor(accentColor(this))
+                        lightenColor(accentColor())
                     )
                 )
             binding.license.loadData(changeLog, "text/html", "UTF-8")

@@ -120,7 +120,7 @@
         android:id="@+id/action_home"
         android:name="code.name.monkey.retromusic.fragments.home.HomeFragment"
         android:label=""
-        tools:layout="@layout/fragment_banner_home" />
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/user_info_fragment"

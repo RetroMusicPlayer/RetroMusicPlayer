@@ -18,7 +18,6 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
-import android.widget.Toast
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.fragment.app.DialogFragment
@@ -30,6 +29,7 @@ import code.name.monkey.retromusic.databinding.PreferenceDialogLibraryCategories
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 
@@ -76,7 +76,7 @@ class LibraryPreferenceDialog : DialogFragment() {
     private fun updateCategories(categories: List<CategoryInfo>) {
         if (getSelected(categories) == 0) return
         if (getSelected(categories) > 5) {
-            Toast.makeText(context, "Not more than 5 items", Toast.LENGTH_SHORT).show()
+            showToast("Not more than 5 items")
             return
         }
         PreferenceUtil.libraryCategory = categories

@@ -2,12 +2,14 @@ package code.name.monkey.retromusic.glide
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.App.Companion.getContext
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -107,8 +109,8 @@ object RetroGlideExtension {
         return baseRequestOptions
             .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY_ARTIST)
             .priority(Priority.LOW)
-            .error(DEFAULT_ARTIST_IMAGE)
-            .placeholder(DEFAULT_ARTIST_IMAGE)
+            .error(getDrawable(DEFAULT_ARTIST_IMAGE))
+            .placeholder(getDrawable(DEFAULT_ARTIST_IMAGE))
             .override(SIZE_ORIGINAL, SIZE_ORIGINAL)
             .signature(createSignature(artist))
     }
@@ -120,8 +122,8 @@ object RetroGlideExtension {
         song: Song
     ): BaseRequestOptions<*> {
         return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .error(DEFAULT_SONG_IMAGE)
-            .placeholder(DEFAULT_SONG_IMAGE)
+            .error(getDrawable(DEFAULT_SONG_IMAGE))
+            .placeholder(getDrawable(DEFAULT_SONG_IMAGE))
             .signature(createSignature(song))
     }
 
@@ -142,8 +144,8 @@ object RetroGlideExtension {
         song: Song
     ): BaseRequestOptions<*> {
         return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .error(DEFAULT_ALBUM_IMAGE)
-            .placeholder(DEFAULT_ALBUM_IMAGE)
+            .error(ContextCompat.getDrawable(getContext(), DEFAULT_ALBUM_IMAGE))
+            .placeholder(ContextCompat.getDrawable(getContext(), DEFAULT_ALBUM_IMAGE))
             .signature(createSignature(song))
     }
 
@@ -177,7 +179,7 @@ object RetroGlideExtension {
         baseRequestOptions: BaseRequestOptions<*>
     ): BaseRequestOptions<*> {
         return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .error(DEFAULT_ALBUM_IMAGE)
+            .error(getDrawable(DEFAULT_ALBUM_IMAGE))
     }
 
     private fun createSignature(song: Song): Key {
@@ -205,14 +207,18 @@ object RetroGlideExtension {
 
     private fun getErrorUserProfile(context: Context): Drawable {
         return TintHelper.createTintedDrawable(
-            getContext(),
+            context,
             R.drawable.ic_account,
-            accentColor(context)
+            context.accentColor()
         )
     }
 
     fun <TranscodeType> getDefaultTransition(): GenericTransitionOptions<TranscodeType> {
         return GenericTransitionOptions<TranscodeType>().transition(DEFAULT_ANIMATION)
+    }
+
+    fun getDrawable(@DrawableRes id: Int): Drawable? {
+        return ContextCompat.getDrawable(getContext(), id)
     }
 }
 

@@ -44,12 +44,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         generalTheme?.let {
             setSummary(it)
             it.setOnPreferenceChangeListener { _, newValue ->
-                val theme = newValue as String
                 setSummary(it, newValue)
                 ThemeStore.markChanged(requireContext())
 
                 if (VersionUtils.hasNougatMR()) {
-                    requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue(theme))
                     DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
                 restartActivity()

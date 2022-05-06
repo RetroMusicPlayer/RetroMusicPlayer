@@ -102,7 +102,7 @@ class RealGenreRepository(
 
     private fun getGenresFromCursor(cursor: Cursor?): ArrayList<Genre> {
         val genres = arrayListOf<Genre>()
-        if (cursor != null) {
+        cursor?.use {
             if (cursor.moveToFirst()) {
                 do {
                     val genre = getGenreFromCursor(cursor)

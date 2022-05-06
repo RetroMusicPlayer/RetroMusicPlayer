@@ -13,6 +13,7 @@
  */
 package code.name.monkey.retromusic.service
 
+import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothDevice
@@ -54,8 +55,10 @@ import code.name.monkey.retromusic.activities.LockScreenActivity
 import code.name.monkey.retromusic.appwidgets.*
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.auto.AutoMusicProvider
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension.getDefaultTransition
 import code.name.monkey.retromusic.glide.RetroGlideExtension.getSongModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.isCasting
 import code.name.monkey.retromusic.helper.ShuffleHelper.makeShuffleList
@@ -73,7 +76,6 @@ import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.MusicUtil.getMediaStoreAlbumCoverUri
 import code.name.monkey.retromusic.util.MusicUtil.getSongFileUri
-import code.name.monkey.retromusic.util.MusicUtil.isFavorite
 import code.name.monkey.retromusic.util.MusicUtil.toggleFavorite
 import code.name.monkey.retromusic.util.PackageValidator
 import code.name.monkey.retromusic.util.PreferenceUtil.crossFadeDuration
@@ -87,11 +89,10 @@ import code.name.monkey.retromusic.util.PreferenceUtil.isPauseOnZeroVolume
 import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 import code.name.monkey.retromusic.util.PreferenceUtil.registerOnSharedPreferenceChangedListener
 import code.name.monkey.retromusic.util.PreferenceUtil.unregisterOnSharedPreferenceChangedListener
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
-import com.bumptech.glide.RequestBuilder
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
@@ -251,7 +252,6 @@ class MusicService : MediaBrowserServiceCompat(),
                     play()
                 TelephonyManager.CALL_STATE_RINGING, TelephonyManager.CALL_STATE_OFFHOOK ->                             // A call is dialing, active or on hold
                     pause()
-                else -> {}
             }
             super.onCallStateChanged(state, incomingNumber)
         }
@@ -303,7 +303,7 @@ class MusicService : MediaBrowserServiceCompat(),
             HandlerThread("QueueSaveHandler", Process.THREAD_PRIORITY_BACKGROUND)
         queueSaveHandlerThread?.start()
         queueSaveHandler = QueueSaveHandler(this, queueSaveHandlerThread!!.looper)
-        uiThreadHandler = Handler()
+        uiThreadHandler = Handler(Looper.getMainLooper())
         registerReceiver(widgetIntentReceiver, IntentFilter(APP_WIDGET_UPDATE))
         registerReceiver(updateFavoriteReceiver, IntentFilter(FAVORITE_STATE_CHANGED))
         registerReceiver(lockScreenReceiver, IntentFilter(Intent.ACTION_SCREEN_OFF))
@@ -392,7 +392,7 @@ class MusicService : MediaBrowserServiceCompat(),
         wakeLock?.acquire(milli)
     }
 
-    var pausedByZeroVolume = false
+    private var pausedByZeroVolume = false
     override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
         if (isPauseOnZeroVolume) {
             if (isPlaying && currentVolume < 1) {
@@ -643,7 +643,7 @@ class MusicService : MediaBrowserServiceCompat(),
     override fun onGetRoot(
         clientPackageName: String,
         clientUid: Int,
-        rootHints: Bundle?
+        rootHints: Bundle?,
     ): BrowserRoot {
 
 
@@ -672,7 +672,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
     override fun onLoadChildren(
         parentId: String,
-        result: Result<List<MediaBrowserCompat.MediaItem>>
+        result: Result<List<MediaBrowserCompat.MediaItem>>,
     ) {
         if (parentId == AutoMediaIDHelper.RECENT_ROOT) {
             val song = currentSong
@@ -691,16 +691,14 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     override fun onSharedPreferenceChanged(
-        sharedPreferences: SharedPreferences, key: String
+        sharedPreferences: SharedPreferences, key: String,
     ) {
         when (key) {
             CROSS_FADE_DURATION -> {
                 val progress = songProgressMillis
                 val wasPlaying = isPlaying
                 /* Switch to MultiPlayer if Crossfade duration is 0 and
-                Playback is not an instance of MultiPlayer */if (playback != null) playback?.setCrossFadeDuration(
-                    crossFadeDuration
-                )
+                Playback is not an instance of MultiPlayer */
                 if (playback !is MultiPlayer && crossFadeDuration == 0) {
                     if (playback != null) {
                         playback?.release()
@@ -728,6 +726,9 @@ class MusicService : MediaBrowserServiceCompat(),
                         }
                     }
                 }
+                if (playback != null) playback?.setCrossFadeDuration(
+                    crossFadeDuration
+                )
             }
             ALBUM_ART_ON_LOCK_SCREEN, BLURRED_ALBUM_ART -> updateMediaSessionMetaData()
             COLORED_NOTIFICATION -> {
@@ -799,7 +800,7 @@ class MusicService : MediaBrowserServiceCompat(),
     fun openQueue(
         playingQueue: List<Song>?,
         startPosition: Int,
-        startPlaying: Boolean
+        startPlaying: Boolean,
     ) {
         if (playingQueue != null && playingQueue.isNotEmpty()
             && startPosition >= 0 && startPosition < playingQueue.size
@@ -891,10 +892,7 @@ class MusicService : MediaBrowserServiceCompat(),
                 }
             }
         } else {
-            Toast.makeText(
-                this, resources.getString(R.string.audio_focus_denied), Toast.LENGTH_SHORT
-            )
-                .show()
+            showToast(R.string.audio_focus_denied)
         }
     }
 
@@ -913,19 +911,10 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun playSongAtImpl(position: Int) {
-        if (!trackEndedByCrossfade) {
-            // This is only imp if we are using crossfade
-            if (playback is CrossFadePlayer) {
-                (playback as CrossFadePlayer).sourceChangedByUser()
-            }
-        } else {
-            trackEndedByCrossfade = false
-        }
         if (openTrackAndPrepareNextAt(position)) {
             play()
         } else {
-            Toast.makeText(this, resources.getString(R.string.unplayable_file), Toast.LENGTH_SHORT)
-                .show()
+            showToast(resources.getString(R.string.unplayable_file))
         }
     }
 
@@ -940,7 +929,7 @@ class MusicService : MediaBrowserServiceCompat(),
             }
             play()
         } else {
-            Toast.makeText(applicationContext, R.string.playlist_is_empty, Toast.LENGTH_LONG).show()
+            showToast(R.string.playlist_is_empty)
         }
     }
 
@@ -1125,6 +1114,7 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    @SuppressLint("CheckResult")
     fun updateMediaSessionMetaData() {
         Log.i(TAG, "onResourceReady: ")
         val song = currentSong
@@ -1134,29 +1124,29 @@ class MusicService : MediaBrowserServiceCompat(),
         }
         val metaData = MediaMetadataCompat.Builder()
             .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, song.artistName)
-            .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, song.artistName)
+            .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, song.albumArtist)
             .putString(MediaMetadataCompat.METADATA_KEY_ALBUM, song.albumName)
             .putString(MediaMetadataCompat.METADATA_KEY_TITLE, song.title)
             .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, song.duration)
             .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, (getPosition() + 1).toLong())
             .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.year.toLong())
             .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
-        metaData.putLong(
-            MediaMetadataCompat.METADATA_KEY_NUM_TRACKS,
-            playingQueue.size.toLong()
-        )
+            .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, playingQueue.size.toLong())
+
         if (isAlbumArtOnLockScreen) {
-            val screenSize = RetroUtil.getScreenSize(this@MusicService)
-            val request: RequestBuilder<Bitmap> =
-                GlideApp.with(this@MusicService)
-                    .asBitmap()
-                    .songCoverOptions(song)
-                    .load(getSongModel(song))
+            // val screenSize: Point = RetroUtil.getScreenSize(this)
+            val request = GlideApp.with(this)
+                .asBitmap()
+                .songCoverOptions(song)
+                .load(getSongModel(song))
+                .transition(getDefaultTransition())
+
             if (isBlurredAlbumArt) {
                 request.transform(BlurTransformation.Builder(this@MusicService).build())
             }
             runOnUiThread {
-                request.into(object : SimpleTarget<Bitmap?>(screenSize.x, screenSize.y) {
+                request.into(object :
+                    CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
                     override fun onLoadFailed(errorDrawable: Drawable?) {
                         super.onLoadFailed(errorDrawable)
                         mediaSession?.setMetadata(metaData.build())
@@ -1164,12 +1154,16 @@ class MusicService : MediaBrowserServiceCompat(),
 
                     override fun onResourceReady(
                         resource: Bitmap,
-                        transition: Transition<in Bitmap?>?
+                        transition: Transition<in Bitmap?>?,
                     ) {
                         metaData.putBitmap(
                             MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
                             copy(resource)
                         )
+                        mediaSession?.setMetadata(metaData.build())
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
                         mediaSession?.setMetadata(metaData.build())
                     }
                 })
@@ -1244,17 +1238,16 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private fun startForegroundOrNotify() {
         if (playingNotification != null && currentSong.id != -1L) {
-            if (!VersionUtils.hasS()) {
-                if (isForeground && !isPlaying) {
-                    // This makes the notification dismissible
-                    // We can't call stopForeground(false) on A12 though, which may result in crashes
-                    // when we call startForeground after that e.g. when Alarm goes off
-
+            if (isForeground && !isPlaying) {
+                // This makes the notification dismissible
+                // We can't call stopForeground(false) on A12 though, which may result in crashes
+                // when we call startForeground after that e.g. when Alarm goes off,
+                if (!VersionUtils.hasS()) {
                     stopForeground(false)
                     isForeground = false
                 }
             }
-            if (!isForeground) {
+            if (!isForeground && isPlaying) {
                 // Specify that this is a media service, if supported.
                 if (VersionUtils.hasQ()) {
                     startForeground(
@@ -1285,15 +1278,15 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @Synchronized
     private fun openCurrent(): Boolean {
+        val force = if (!trackEndedByCrossfade) {
+            true
+        } else {
+            trackEndedByCrossfade = false
+            false
+        }
         return try {
             if (playback != null) {
-                return playback!!.setDataSource(
-                    getTrackUri(
-                        Objects.requireNonNull(
-                            currentSong
-                        )
-                    )
-                )
+                return playback!!.setDataSource(getTrackUri(currentSong), force)
             } else false
         } catch (e: Exception) {
             e.printStackTrace()
@@ -1315,11 +1308,10 @@ class MusicService : MediaBrowserServiceCompat(),
                     openQueue(playlistSongs, 0, true)
                 }
             } else {
-                Toast.makeText(applicationContext, R.string.playlist_is_empty, Toast.LENGTH_LONG)
-                    .show()
+                showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
             }
         } else {
-            Toast.makeText(applicationContext, R.string.playlist_is_empty, Toast.LENGTH_LONG).show()
+            showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
         }
     }
 
@@ -1419,17 +1411,6 @@ class MusicService : MediaBrowserServiceCompat(),
         stateBuilder.addCustomAction(
             PlaybackStateCompat.CustomAction.Builder(
                 TOGGLE_SHUFFLE, getString(R.string.action_toggle_shuffle), shuffleIcon
-            )
-                .build()
-        )
-        val favoriteIcon = if (isFavorite(
-                applicationContext,
-                currentSong
-            )
-        ) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-        stateBuilder.addCustomAction(
-            PlaybackStateCompat.CustomAction.Builder(
-                TOGGLE_FAVORITE, getString(R.string.action_toggle_favorite), favoriteIcon
             )
                 .build()
         )

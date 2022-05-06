@@ -21,7 +21,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.fragment.app.DialogFragment
@@ -91,7 +90,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
                 if (isNowPlayingThemes(nowPlayingScreen)) {
                     val result =
                         "${getString(nowPlayingScreen.titleRes)} theme is Pro version feature."
-                    Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+                    showToast(result)
                     NavigationUtil.goToProVersion(requireContext())
                 } else {
                     PreferenceUtil.nowPlayingScreen = nowPlayingScreen

@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import java.security.MessageDigest
 
 
+@Suppress("Deprecation")
 class BlurTransformation : BitmapTransformation {
 
     private var context: Context? = null
@@ -111,7 +112,9 @@ class BlurTransformation : BitmapTransformation {
             script.forEach(output)
 
             output.copyTo(out)
-
+            output.destroy()
+            script.destroy()
+            input.destroy()
             rs.destroy()
 
             return out

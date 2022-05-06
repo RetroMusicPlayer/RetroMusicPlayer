@@ -54,7 +54,7 @@
     <string name="add_action">Dodaj</string>
     <string name="add_playlist_title">"Dodaj do playlisty"</string>
     <string name="add_time_framed_lryics">Dodaj tekst z ramką czasową</string>
-    <string name="added_song_count_to_playlist">Dodano %d utwór(y/ów) do %s</string>
+    <string name="added_song_count_to_playlist">Dodano %1$d utwór(y/ów) do %2$s</string>
     <string name="added_title_to_playing_queue">"Dodano tytuł do kolejki odtwarzania"</string>
     <string name="added_x_titles_to_playing_queue">Dodano %1$d tytułów do kolejki</string>
     <string name="album">Album</string>

@@ -32,13 +32,9 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.FragmentClassicPlayerBinding
-import code.name.monkey.retromusic.extensions.getSongInfo
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
@@ -57,6 +53,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -88,7 +85,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
 
     private val bottomSheetCallbackList = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            mainActivity.getBottomSheetBehavior().setAllowDragging(false)
+            mainActivity.getBottomSheetBehavior().isDraggable = false   
             binding.playerQueueSheet.setContentPadding(
                 binding.playerQueueSheet.contentPaddingLeft,
                 (slideOffset * binding.statusBar.height).toInt(),
@@ -103,14 +100,14 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED,
                 BottomSheetBehavior.STATE_DRAGGING -> {
-                    mainActivity.getBottomSheetBehavior().setAllowDragging(false)
+                    mainActivity.getBottomSheetBehavior().isDraggable = false
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
                     resetToCurrentPosition()
-                    mainActivity.getBottomSheetBehavior().setAllowDragging(true)
+                    mainActivity.getBottomSheetBehavior().isDraggable = true
                 }
                 else -> {
-                    mainActivity.getBottomSheetBehavior().setAllowDragging(true)
+                    mainActivity.getBottomSheetBehavior().isDraggable = true
                 }
             }
         }
@@ -131,8 +128,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         hideVolumeIfAvailable()
         setupRecyclerView()
 
-        val coverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        val coverFragment: PlayerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
         coverFragment.setCallbacks(this)
 
         getQueuePanel().addBottomSheetCallback(bottomSheetCallbackList)
@@ -149,8 +145,8 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         binding.playerQueueSheet.background = shapeDrawable
 
         binding.playerQueueSheet.setOnTouchListener { _, _ ->
-            mainActivity.getBottomSheetBehavior().setAllowDragging(false)
-            getQueuePanel().setAllowDragging(true)
+            mainActivity.getBottomSheetBehavior().isDraggable = false
+            getQueuePanel().isDraggable = true
             return@setOnTouchListener false
         }
 
@@ -174,7 +170,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
             }
             childFragmentManager.executePendingTransactions()
             volumeFragment =
-                childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
+                whichFragment(R.id.volumeFragmentContainer) as VolumeFragment?
         }
     }
 
@@ -363,12 +359,12 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
 
-    private fun getQueuePanel(): RetroBottomSheetBehavior<MaterialCardView> {
-        return RetroBottomSheetBehavior.from(binding.playerQueueSheet) as RetroBottomSheetBehavior<MaterialCardView>
+    private fun getQueuePanel(): BottomSheetBehavior<MaterialCardView> {
+        return from(binding.playerQueueSheet)
     }
 
     private fun setupPanel() {
-        if (!binding.playerContainer.isLaidOut() || binding.playerContainer.isLayoutRequested) {
+        if (!binding.playerContainer.isLaidOut || binding.playerContainer.isLayoutRequested) {
             binding.playerContainer.addOnLayoutChangeListener(this)
             return
         }
@@ -419,7 +415,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
 
-    fun setUpProgressSlider() {
+    private fun setUpProgressSlider() {
         binding.playerControlsContainer.progressSlider.setOnSeekBarChangeListener(object :
             SimpleOnSeekbarChangeListener() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
