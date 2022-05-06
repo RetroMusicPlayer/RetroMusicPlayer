@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Adicionar aos favoritos</string>
     <string name="action_add_to_playing_queue">Adicionar à fila de reprodução</string>
     <string name="action_add_to_playlist">Adicionar à lista</string>
+    <string name="action_cancel">Cancelar</string>
     <string name="action_cast">Transmitir</string>
     <string name="action_clear_playing_queue">Limpar fila de reprodução</string>
     <string name="action_cycle_repeat">Modo de repetição</string>
@@ -54,7 +55,7 @@
     <string name="add_action">Adicionar</string>
     <string name="add_playlist_title">"Adicionar à lista"</string>
     <string name="add_time_framed_lryics">Adicionar letras do cronograma</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Adicionada 1 música à fila."</string>
     <string name="added_x_titles_to_playing_queue">Adicionadas %1$d músicas à fila.</string>
     <string name="album">Álbum</string>
@@ -103,6 +104,7 @@
     <string name="bug_report_no_password">Introduzir a sua palavra-passe do GitHub</string>
     <string name="bug_report_no_title">Introduzir título do problema</string>
     <string name="bug_report_no_username">Introduzir o seu utilizador do GitHub</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Ocorreu um erro inesperado. Se continuar a acontecer limpe os dados da aplicação ou envie um email </string>
     <string name="bug_report_use_account">Enviar utilizando a conta GitHub</string>
     <string name="buy_now">Comprar agora</string>
@@ -126,6 +128,7 @@
     <string name="clear_playing_queue">Limpar fila</string>
     <string name="color">Cor</string>
     <string name="colors">Cores</string>
+    <string name="compact">Compact</string>
     <string name="composer">Compositor</string>
     <string name="copied_device_info_to_clipboard">Informações copiadas para área de transferências.</string>
     <string name="could_not_create_playlist">Não foi possível criar a lista.</string>
@@ -168,6 +171,7 @@
     <string name="edit_synced_lyrics">Editar letras sincronizadas</string>
     <string name="empty">Vazio</string>
     <string name="equalizer">Equalizador</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favoritos</string>
     <string name="finish_last_song">Terminar a última música</string>
@@ -353,7 +357,7 @@
     <string name="pref_title_album_cover_style">Tema da capa do álbum</string>
     <string name="pref_title_album_cover_transform">Ignorar capa do álbum</string>
     <string name="pref_title_app_shortcuts">Atalhos coloridos</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Reduzir volume na perda de foco</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Transferir imagens automaticamente</string>
@@ -532,5 +536,4 @@
     <string name="you_have_to_select_at_least_one_category">Tem que seleccionar pelo menos uma categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vai ser reencaminhado para o site de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">As informações da sua conta são utilizadas apenas autenticação.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
