@@ -348,7 +348,7 @@
     <string name="pref_summary_toggle_volume">Falls Platz vorhanden ist, Lautstärkeregler auf Derzeit gespielt-Bildschirm zeigen</string>
     <string name="pref_summary_wallpaper_accent">Akzentfarbe aus Hintergrund wählen</string>
     <string name="pref_summary_whitelist">Nur Musik aus /Music Ordner anzeigen</string>
-    <string name="pref_summary_manage_audio_focus">Audio will keep playing even when watching a video</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Album Cover anzeigen</string>
     <string name="pref_title_album_artists_only">Navigiere nach Album-Interpret</string>
     <string name="pref_title_album_cover_style">Aussehen des Albumcovers</string>
@@ -396,7 +396,7 @@
     <string name="pref_title_toggle_volume">Lautstärkeregler</string>
     <string name="pref_title_wallpaper_accent">Hintergrundbild Akzentfarbe</string>
     <string name="pref_title_whitelist">Whitelist Musik</string>
-    <string name="pref_title_manage_audio_focus">Manage audio focus</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Themes für \"Now Playing\", Karussell-Effekte und mehr</string>
     <string name="profile">Profil</string>

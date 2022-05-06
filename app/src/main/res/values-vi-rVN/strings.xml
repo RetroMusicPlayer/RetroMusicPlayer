@@ -347,7 +347,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_toggle_volume">Hiện thanh điều chỉnh âm lượng nếu có không gian trống trong màn hình phát</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Chỉ hiện thị nhạc từ /Thư mục Nhạc</string>
-    <string name="pref_summary_manage_audio_focus">Audio will keep playing even when watching a video</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Hiện ảnh bìa album</string>
     <string name="pref_title_album_artists_only">Điều hướng theo Album Nghệ sĩ</string>
     <string name="pref_title_album_cover_style">Chủ đề bìa album</string>
@@ -395,7 +395,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_toggle_volume">Điều khiển âm lượng</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Manage audio focus</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Chủ đề đen, Chủ đề màn hình phát, Hiệu ứng băng chuyền, v.v.</string>
     <string name="profile">Hồ sơ</string>

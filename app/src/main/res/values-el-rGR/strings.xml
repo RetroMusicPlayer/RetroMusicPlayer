@@ -348,7 +348,7 @@
     <string name="pref_summary_toggle_volume">Εαν υπάρχει χώρος στην οθόνη αναπαραγωγής, ενεργοποιήστε τον πίνακα ελέγχου έντασης.</string>
     <string name="pref_summary_wallpaper_accent">Εξαγωγή απόχρωσης από την ταπετσαρία</string>
     <string name="pref_summary_whitelist">Εμφάνιση μουσικής μόνο από το φάκελο /Μουσική</string>
-    <string name="pref_summary_manage_audio_focus">Audio will keep playing even when watching a video</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Εμφάνιση εξωφύλλου άλμπουμ.</string>
     <string name="pref_title_album_artists_only">Πλοήγηση κατά Καλλιτέχνη Άλμπουμ</string>
     <string name="pref_title_album_cover_style">Θέμα εξώφυλλου άλμπουμ</string>
@@ -396,7 +396,7 @@
     <string name="pref_title_toggle_volume">Πίνακας Ελέγχου Έντασης</string>
     <string name="pref_title_wallpaper_accent">Απόχρωση ταπετσαρίας</string>
     <string name="pref_title_whitelist">Λίστα επιτρεπόμενων κομματιών</string>
-    <string name="pref_title_manage_audio_focus">Manage audio focus</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Μαύρο θέμα, Θέματα στο Τώρα παίζει, εφέ Καρουσέλ και πολλά άλλα..</string>
     <string name="profile">Προφίλ</string>
