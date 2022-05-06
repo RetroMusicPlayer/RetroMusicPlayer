@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">お気に入りに追加</string>
     <string name="action_add_to_playing_queue">再生キューに追加</string>
     <string name="action_add_to_playlist">プレイリストに追加…</string>
+    <string name="action_cancel">キャンセル</string>
     <string name="action_cast">キャスト</string>
     <string name="action_clear_playing_queue">再生キューをクリア</string>
     <string name="action_cycle_repeat">サイクルリピートモード</string>
@@ -54,7 +55,7 @@
     <string name="add_action">追加</string>
     <string name="add_playlist_title">"プレイリストに追加"</string>
     <string name="add_time_framed_lryics">時間指定の歌詞を追加</string>
-    <string name="added_song_count_to_playlist">Added %d song(s) to %s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"1曲が再生キューに追加されました"</string>
     <string name="added_x_titles_to_playing_queue">%1$d 曲が再生キューに追加されました</string>
     <string name="album">アルバム</string>
@@ -101,6 +102,7 @@
     <string name="bug_report_no_password">有効なGitHubのパスワードを入力してください</string>
     <string name="bug_report_no_title">問題のタイトルを入力してください</string>
     <string name="bug_report_no_username">有効なGitHubアカウントのユーザー名を入力してください</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">予期しないエラーが発生しました。申し訳ございません。
 このバグが何度も発生する場合は、端末のアプリ設定より「データを削除する(Androidバージョンによって異なります)」を実行するか、概要をメールで送信してください。</string>
     <string name="bug_report_use_account">GitHubアカウントを使って送信</string>
@@ -125,6 +127,7 @@
     <string name="clear_playing_queue">キューを削除</string>
     <string name="color">カラフル</string>
     <string name="colors">色</string>
+    <string name="compact">Compact</string>
     <string name="composer">作曲家</string>
     <string name="copied_device_info_to_clipboard">端末情報をコピー</string>
     <string name="could_not_create_playlist">\u30d7\u30ec\u30a4\u30ea\u30b9\u30c8\u306e\u4f5c\u6210\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002</string>
@@ -167,6 +170,7 @@
     <string name="edit_synced_lyrics">同期された歌詞を編集</string>
     <string name="empty">空の</string>
     <string name="equalizer">イコライザー</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">よくある質問</string>
     <string name="favorites">お気に入り</string>
     <string name="finish_last_song">最後の曲を終了する</string>
@@ -352,7 +356,7 @@
     <string name="pref_title_album_cover_style">アルバムカバーのテーマ</string>
     <string name="pref_title_album_cover_transform">アルバムジャケットをスキップ</string>
     <string name="pref_title_app_shortcuts">色のついたアプリショートカット</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">フォーカスロス時に音量を下げる</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">アーティスト画像を自動でダウンロードする</string>
@@ -531,5 +535,4 @@
     <string name="you_have_to_select_at_least_one_category">少なくとも 1 つのカテゴリを選択する必要があります。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>
