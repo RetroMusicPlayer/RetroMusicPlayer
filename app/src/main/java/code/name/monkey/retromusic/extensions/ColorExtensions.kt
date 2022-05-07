@@ -292,6 +292,9 @@ fun Context.accentColorVariant(): Int {
 inline val @receiver:ColorInt Int.isColorLight
     get() = ColorUtil.isColorLight(this)
 
+inline val @receiver:ColorInt Int.lightColor
+    get() = ColorUtil.withAlpha(this, 0.5F)
+
 inline val @receiver:ColorInt Int.lighterColor
     get() = ColorUtil.lightenColor(this)
 
