@@ -352,6 +352,7 @@
     <string name="pref_summary_toggle_volume">Ha van elég szabad hely, mutassa a hangerőszabályzókat a most játszott képernyőn</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Csak a /Music mappában lévő zenék mutatása</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Az album borítójának megjelenítése</string>
     <string name="pref_title_album_artists_only">Album előadók szerinti navigálás</string>
     <string name="pref_title_album_cover_style">Album borító téma</string>
@@ -399,6 +400,7 @@
     <string name="pref_title_toggle_volume">Hangerőszabályzók</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Sötét téma, Most játszott felület témái, Carousel hatás és még sok más ..</string>
     <string name="profile">Profil</string>
