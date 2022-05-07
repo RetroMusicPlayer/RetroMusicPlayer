@@ -239,6 +239,7 @@
     <string name="material">Material</string>
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Permission error</string>
+    <string name="md3" translatable="false">MD3</string>
     <string name="my_name">Name</string>
     <string name="my_top_tracks">Most played</string>
     <string name="never">Never</string>

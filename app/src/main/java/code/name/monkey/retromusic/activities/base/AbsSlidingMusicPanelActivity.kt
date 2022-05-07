@@ -49,6 +49,7 @@ import code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment
 import code.name.monkey.retromusic.fragments.player.full.FullPlayerFragment
 import code.name.monkey.retromusic.fragments.player.gradient.GradientPlayerFragment
 import code.name.monkey.retromusic.fragments.player.material.MaterialFragment
+import code.name.monkey.retromusic.fragments.player.md3.MD3PlayerFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.fragments.player.peek.PeekPlayerFragment
 import code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment
@@ -457,6 +458,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             Peek -> PeekPlayerFragment()
             Circle -> CirclePlayerFragment()
             Classic -> ClassicPlayerFragment()
+            MD3 -> MD3PlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.commit {

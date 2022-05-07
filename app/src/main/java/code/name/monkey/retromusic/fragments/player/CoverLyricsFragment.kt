@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.fragments.other
+package code.name.monkey.retromusic.fragments.player
 
 import android.content.SharedPreferences
 import android.os.Bundle
