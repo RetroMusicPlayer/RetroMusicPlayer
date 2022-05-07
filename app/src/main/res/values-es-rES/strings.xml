@@ -352,6 +352,7 @@
     <string name="pref_summary_toggle_volume">Mostrar controles de volumen si hay suficiente espacio disponible</string>
     <string name="pref_summary_wallpaper_accent">Extrae el color del fondo de pantalla</string>
     <string name="pref_summary_whitelist">Mostrar solo música de la carpeta /Music</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Mostrar la portada del álbum</string>
     <string name="pref_title_album_artists_only">Navegar por Artista del Álbum</string>
     <string name="pref_title_album_cover_style">Tema de la portada del álbum</string>
@@ -399,6 +400,7 @@
     <string name="pref_title_toggle_volume">Controles de volumen</string>
     <string name="pref_title_wallpaper_accent">Color de acento del fondo de pantalla</string>
     <string name="pref_title_whitelist">Música en lista blanca</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema Negro, temas para la ventana de reproducción actual, Efecto Carrusel y mucho más..</string>
     <string name="profile">Perfil</string>
