@@ -76,7 +76,7 @@
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/cover_lyrics"
-                    android:name="code.name.monkey.retromusic.fragments.other.CoverLyricsFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.CoverLyricsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"

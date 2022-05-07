@@ -285,7 +285,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 } else {
                     surfaceColor()
                 }
-                Color, Classic -> color.backgroundColor
+                Color, Classic -> color.primaryTextColor
                 Blur -> Color.BLACK
                 else -> surfaceColor()
             }
