@@ -348,6 +348,7 @@
     <string name="pref_summary_toggle_volume">Eğer yeterli alan varsa ses kontrollerini şimdi oynatılıyor ekranında göster</string>
     <string name="pref_summary_wallpaper_accent">Vurgu rengini duvar kağıdından al</string>
     <string name="pref_summary_whitelist">Sadece /Music dosyasından müzik göster</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Albüm kapağını göster</string>
     <string name="pref_title_album_artists_only">Albüm Sanatçısına göre belirle</string>
     <string name="pref_title_album_cover_style">Albüm kapağı teması</string>
@@ -395,6 +396,7 @@
     <string name="pref_title_toggle_volume">Ses kontrolleri</string>
     <string name="pref_title_wallpaper_accent">Duvar kağıdı vurgu rengi</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Şimdi Oynatılıyor temaları, Atlıkarınca efekti, Renkli tema ve daha fazlası..</string>
     <string name="profile">Profil</string>

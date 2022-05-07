@@ -17,6 +17,13 @@
         android:summary="@string/pref_summary_audio_fade"
         android:title="@string/pref_title_audio_fade" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="manage_audio_focus"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_summary_manage_audio_focus"
+        android:title="@string/pref_title_manage_audio_focus" />
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
         android:defaultValue="0"
         android:key="cross_fade_duration"

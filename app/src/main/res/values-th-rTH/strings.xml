@@ -346,6 +346,7 @@
     <string name="pref_summary_toggle_volume">หากพื้นที่ในการแสดงผลเพียงพอให้แสดงปุ่มเพิ่ม/ลดเสียงบนหน้าจอ Now playing </string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">แสดงเฉพาะเพลงจาก Music โฟลเดอร์</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">แสดงรูปปกอัลบัม</string>
     <string name="pref_title_album_artists_only">นำทางโดยอัลบัมศิลปิน</string>
     <string name="pref_title_album_cover_style">ธีมของรูปปกอัลบัม</string>
@@ -393,6 +394,7 @@
     <string name="pref_title_toggle_volume">ปุ่มควบคุมเสียง</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">โปร</string>
     <string name="pro_summary">ธีม Black, ธีม Now playing, การแสดงผลแบบ Carousel และอื่นๆ</string>
     <string name="profile">โปรไฟล์</string>
