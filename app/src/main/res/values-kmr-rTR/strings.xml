@@ -354,6 +354,7 @@ têne guhertin</string>
     <string name="pref_summary_toggle_volume">Ku şûn hebe, di dîmendera ku niha tê lêdan de kontrolên dengê nîşan bide</string>
     <string name="pref_summary_wallpaper_accent">Renga çarçoveyê ji paşrûyê derxîne</string>
     <string name="pref_summary_whitelist">Muzîkê tenê ji /Peldanka muzîkê nîşan bide</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Bergê albumê nîşan bide</string>
     <string name="pref_title_album_artists_only">Geran bi riya albuma hunermend</string>
     <string name="pref_title_album_cover_style">Rûkara bergê albumê</string>
@@ -401,6 +402,7 @@ têne guhertin</string>
     <string name="pref_title_toggle_volume">Kontrola dengê</string>
     <string name="pref_title_wallpaper_accent">Rengê devokê paşrûyê</string>
     <string name="pref_title_whitelist">Rêzoka stranên spî</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Rûkara reş, rûkara stranên niha têne lêdan, bandora gilover û bêtir..</string>
     <string name="profile">Profîl</string>
