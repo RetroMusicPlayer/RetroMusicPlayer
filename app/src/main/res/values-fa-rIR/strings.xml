@@ -352,6 +352,7 @@
     <string name="pref_summary_toggle_volume">اگر فضای کافی موجود بود، نوار صدا را نشان دهید در صفحه پخش موزیک</string>
     <string name="pref_summary_wallpaper_accent">رنگ تاکیدی را از کاغذ دیواری استخراج کنید</string>
     <string name="pref_summary_whitelist">فقط از پوشه ی موزیک، موزیک ها نمایش داده شود</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">نمایش جلد آلبوم</string>
     <string name="pref_title_album_artists_only">هدایت توسط آلبوم هنرمند</string>
     <string name="pref_title_album_cover_style">تم کاور آلبوم</string>
@@ -399,6 +400,7 @@
     <string name="pref_title_toggle_volume">کنترل صدا</string>
     <string name="pref_title_wallpaper_accent">رنگ تاکیدی کاغذ دیواری</string>
     <string name="pref_title_whitelist">لیست سفید موسیقی</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">حرفه‌ای</string>
     <string name="pro_summary">تم سیاه، تم های در حال پخش، جلوه چرخ فلک و موارد دیگر..</string>
     <string name="profile">نمایه</string>
