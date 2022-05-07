@@ -350,6 +350,7 @@
     <string name="pref_summary_toggle_volume">空间充足时，在播放页显示音量控制</string>
     <string name="pref_summary_wallpaper_accent">从壁纸中提取主题色</string>
     <string name="pref_summary_whitelist">仅显示 /Music 目录的音乐</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">显示专辑封面</string>
     <string name="pref_title_album_artists_only">按专辑艺术家排序</string>
     <string name="pref_title_album_cover_style">专辑封面主题</string>
@@ -397,6 +398,7 @@
     <string name="pref_title_toggle_volume">音量控件</string>
     <string name="pref_title_wallpaper_accent">壁纸主题色</string>
     <string name="pref_title_whitelist">白名单音乐</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">高级版</string>
     <string name="pro_summary">黑色主题，正在播放主题，轮播效果和更多...</string>
     <string name="profile">个人信息</string>
