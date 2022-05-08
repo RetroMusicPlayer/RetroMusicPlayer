@@ -55,7 +55,7 @@
     <string name="add_action">新增</string>
     <string name="add_playlist_title">"新增到播放清單"</string>
     <string name="add_time_framed_lryics">新增同步歌詞</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_song_count_to_playlist">已新增 %1$d 首歌到 %2$s</string>
     <string name="added_title_to_playing_queue">"已新增 1 首歌到播放佇列。"</string>
     <string name="added_x_titles_to_playing_queue">已新增 %1$d 首歌到播放佇列。</string>
     <string name="album">專輯</string>
@@ -169,7 +169,7 @@
     <string name="edit_synced_lyrics">編輯同步歌詞</string>
     <string name="empty">沒有內容</string>
     <string name="equalizer">等化器</string>
-    <string name="expanded">Expanded</string>
+    <string name="expanded">已展開</string>
     <string name="faq">常見問題</string>
     <string name="favorites">最愛</string>
     <string name="finish_last_song">播放完最後一首歌曲</string>
