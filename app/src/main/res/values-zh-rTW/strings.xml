@@ -102,7 +102,7 @@
     <string name="bug_report_no_password">請輸入有效的 GitHub 密碼</string>
     <string name="bug_report_no_title">請輸入問題標題</string>
     <string name="bug_report_no_username">請輸入有效的 GitHub 帳號</string>
-    <string name="bug_report_success">臭蟲回報成功</string>
+    <string name="bug_report_success">成功回報錯誤</string>
     <string name="bug_report_summary">發生意外錯誤。很抱歉讓您遇到這項錯誤，若應用程式仍處在當機狀態，請「清除應用程式儲存空間」或透過電子郵件與我們聯繫 </string>
     <string name="bug_report_use_account">透過 GitHub 帳戶傳送</string>
     <string name="buy_now">立刻購買</string>
@@ -126,7 +126,7 @@
     <string name="clear_playing_queue">清除佇列</string>
     <string name="color">彩色風</string>
     <string name="colors">色彩</string>
-    <string name="compact">Compact</string>
+    <string name="compact">壓縮</string>
     <string name="composer">作曲者</string>
     <string name="copied_device_info_to_clipboard">已複製裝置資訊到剪貼簿。</string>
     <string name="could_not_create_playlist">無法建立播放清單。</string>
@@ -169,7 +169,7 @@
     <string name="edit_synced_lyrics">編輯同步歌詞</string>
     <string name="empty">沒有內容</string>
     <string name="equalizer">等化器</string>
-    <string name="expanded">已展開</string>
+    <string name="expanded">展開</string>
     <string name="faq">常見問題</string>
     <string name="favorites">最愛</string>
     <string name="finish_last_song">播放完最後一首歌曲</string>
@@ -350,13 +350,13 @@
     <string name="pref_summary_toggle_volume">若螢幕仍有充足空間，則在現正播放畫面，顯示音量控制欄</string>
     <string name="pref_summary_wallpaper_accent">從桌布上擷取主題色彩</string>
     <string name="pref_summary_whitelist">僅顯示來自 /Music 資料夾內的歌曲</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
+    <string name="pref_summary_manage_audio_focus">無論其他應用程式正在播放為何，永遠於背景播放音訊。</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯封面</string>
     <string name="pref_title_album_artists_only">按專輯演唱者導覽</string>
     <string name="pref_title_album_cover_style">專輯封面主題</string>
     <string name="pref_title_album_cover_transform">略過專輯封面</string>
     <string name="pref_title_app_shortcuts">彩色應用程式捷徑</string>
-    <string name="pref_title_appbar_mode">Header style</string>
+    <string name="pref_title_appbar_mode">標題樣式</string>
     <string name="pref_title_audio_ducking">於焦點音訊響起時降低音量</string>
     <string name="pref_title_audio_fade">淡入/淡出音訊</string>
     <string name="pref_title_auto_download_artist_images">自動下載演唱者圖片</string>
@@ -398,7 +398,7 @@
     <string name="pref_title_toggle_volume">音量控制</string>
     <string name="pref_title_wallpaper_accent">桌布主題色彩</string>
     <string name="pref_title_whitelist">白名單音樂</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
+    <string name="pref_title_manage_audio_focus">永遠播放</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">例如深色主題、現正播放主題、輪播效果等...</string>
     <string name="profile">個人資料</string>
