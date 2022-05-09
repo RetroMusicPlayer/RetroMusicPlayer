@@ -55,7 +55,7 @@
     <string name="add_action">添加</string>
     <string name="add_playlist_title">"加入播放列表"</string>
     <string name="add_time_framed_lryics">添加同步歌词</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_song_count_to_playlist">已将 %1$d 首歌添加到 %2$s</string>
     <string name="added_title_to_playing_queue">"已添加 1 首歌到播放队列。"</string>
     <string name="added_x_titles_to_playing_queue">已添加 %1$d 首歌到播放队列。</string>
     <string name="album">专辑</string>
@@ -126,7 +126,7 @@
     <string name="clear_playing_queue">清空队列</string>
     <string name="color">颜色</string>
     <string name="colors">更多颜色</string>
-    <string name="compact">Compact</string>
+    <string name="compact">紧凑</string>
     <string name="composer">作曲家</string>
     <string name="copied_device_info_to_clipboard">已复制设备信息到剪贴板。</string>
     <string name="could_not_create_playlist">无法创建播放列表。</string>
@@ -169,7 +169,7 @@
     <string name="edit_synced_lyrics">编辑同步歌词</string>
     <string name="empty">空空如也</string>
     <string name="equalizer">均衡器</string>
-    <string name="expanded">Expanded</string>
+    <string name="expanded">展开</string>
     <string name="faq">常见问题和解答</string>
     <string name="favorites">收藏夹</string>
     <string name="finish_last_song">播放完最后一首歌曲</string>
@@ -356,7 +356,7 @@
     <string name="pref_title_album_cover_style">专辑封面主题</string>
     <string name="pref_title_album_cover_transform">专辑封面切换</string>
     <string name="pref_title_app_shortcuts">着色应用快捷方式</string>
-    <string name="pref_title_appbar_mode">Header style</string>
+    <string name="pref_title_appbar_mode">顶栏样式</string>
     <string name="pref_title_audio_ducking">焦点丢失时降低音量</string>
     <string name="pref_title_audio_fade">音频淡入淡出</string>
     <string name="pref_title_auto_download_artist_images">自动下载艺术家图片</string>
@@ -398,7 +398,7 @@
     <string name="pref_title_toggle_volume">音量控件</string>
     <string name="pref_title_wallpaper_accent">壁纸主题色</string>
     <string name="pref_title_whitelist">白名单音乐</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
+    <string name="pref_title_manage_audio_focus">始终播放</string>
     <string name="pro">高级版</string>
     <string name="pro_summary">黑色主题，正在播放主题，轮播效果和更多...</string>
     <string name="profile">个人信息</string>
