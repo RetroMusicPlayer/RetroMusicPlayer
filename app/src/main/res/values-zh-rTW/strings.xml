@@ -350,7 +350,7 @@
     <string name="pref_summary_toggle_volume">若螢幕仍有充足空間，則在現正播放畫面，顯示音量控制欄</string>
     <string name="pref_summary_wallpaper_accent">從桌布上擷取主題色彩</string>
     <string name="pref_summary_whitelist">僅顯示來自 /Music 資料夾內的歌曲</string>
-    <string name="pref_summary_manage_audio_focus">無論其他應用程式正在播放為何，永遠於背景播放音訊。</string>
+    <string name="pref_summary_manage_audio_focus">無論其他應用程式正在播放為何，永遠於背景播放音訊</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯封面</string>
     <string name="pref_title_album_artists_only">按專輯演唱者導覽</string>
     <string name="pref_title_album_cover_style">專輯封面主題</string>
