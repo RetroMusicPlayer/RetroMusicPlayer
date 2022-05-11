@@ -112,7 +112,7 @@
     <string name="card_square">方形卡牌風</string>
     <string name="card_style">卡牌風</string>
     <string name="carousal_effect_on_now_playing_screen">現正播放的輪播效果</string>
-    <string name="cascading">層疊</string>
+    <string name="cascading">層疊風</string>
     <string name="changelog">更新日誌</string>
     <string name="changelog_summary">檢視最新動向</string>
     <string name="choose_image">選擇圖片</string>
@@ -151,7 +151,7 @@
     <string name="delete_x_songs"><![CDATA[確定要刪除 <b>%1$d</b> 首歌嗎？]]></string>
     <string name="deleted_x_songs">已刪除 %1$d 首歌。</string>
     <string name="deleting_songs">正在刪除歌曲</string>
-    <string name="depth">深度</string>
+    <string name="depth">深度風</string>
     <string name="description">描述</string>
     <string name="device_info">裝置資訊</string>
     <string name="dialog_message_set_ringtone">允許 Retro Music 修改音訊設定</string>
@@ -197,14 +197,14 @@
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">網格樣式</string>
     <string name="help_summary">需要更多幫助嗎？</string>
-    <string name="hinge">旋轉</string>
+    <string name="hinge">旋轉風</string>
     <string name="history">記錄</string>
     <string name="history_cleared">清除歷程</string>
     <string name="history_undo_button">復原</string>
     <string name="home">首頁</string>
-    <string name="horizontal_flip">水平翻轉</string>
-    <string name="image">圖片</string>
-    <string name="image_gradient">漸變圖片</string>
+    <string name="horizontal_flip">水平翻轉風</string>
+    <string name="image">圖片風</string>
+    <string name="image_gradient">漸變圖片風</string>
     <string name="image_settings_summary">變更下載演唱者圖片設定</string>
     <string name="import_label">匯入</string>
     <string name="import_playlist">匯入播放清單</string>
@@ -342,7 +342,7 @@
     <string name="pref_summary_pause_history">啟用此選項後，新播放的歌曲將不再顯示於歷程</string>
     <string name="pref_summary_remember_tab">開啟應用程式後，自動顯示最後瀏覽的畫面</string>
     <string name="pref_summary_show_lyrics">於專輯封面上顯示同步歌詞</string>
-    <string name="pref_summary_suggestions">於主畫面中顯示新歌曲快選</string>
+    <string name="pref_summary_suggestions">於主畫面中顯示歌曲快選</string>
     <string name="pref_summary_swipe_anywhere_now_playing">啟用於現正播放畫面，可隨意滑動以切換歌曲</string>
     <string name="pref_summary_toggle_full_screen">沉浸模式</string>
     <string name="pref_summary_toggle_headset">當連接耳機後，自動播放音樂</string>
@@ -483,7 +483,7 @@
     <string name="sort_order_z_a">遞減</string>
     <string name="speech_not_supported">抱歉！您的裝置不支援語音輸入</string>
     <string name="speech_prompt">搜尋音樂庫</string>
-    <string name="stack">堆疊</string>
+    <string name="stack">堆疊風</string>
     <string name="start_play_music">開始播放音樂。</string>
     <string name="suggestion_songs">建議</string>
     <string name="support_development">支持開發</string>
@@ -503,7 +503,8 @@
     <string name="today">今日</string>
     <string name="top_albums">熱門專輯</string>
     <string name="top_artists">熱門演唱者</string>
-    <string name="track_hint">"曲目 (2 代表曲目 2，或以 3004 代表 CD3 曲目 4)"</string>
+    <string name="track_hint">"
+ (2 代表曲目 2，或以 3004 代表 CD3 曲目 4)"</string>
     <string name="track_list">曲目編號</string>
     <string name="translate">翻譯</string>
     <string name="translate_community">協助我們將應用程式本地化成您的語言</string>
@@ -519,7 +520,7 @@
     <string name="user_name">使用者名稱</string>
     <string name="username">使用者名稱</string>
     <string name="version">版本</string>
-    <string name="vertical_flip">垂直翻轉</string>
+    <string name="vertical_flip">垂直翻轉風</string>
     <string name="view_on_telegram">在 Telegram 上檢視</string>
     <string name="volume">音量</string>
     <string name="web_search">網頁搜尋</string>
