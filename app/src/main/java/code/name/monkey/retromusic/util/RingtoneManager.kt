@@ -27,10 +27,10 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil.getSongFileUri
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class RingtoneManager(val context: Context) {
-    fun setRingtone(song: Song) {
-        val resolver = context.contentResolver
+object RingtoneManager {
+    fun setRingtone(context: Context, song: Song) {
         val uri = getSongFileUri(song.id)
+        val resolver = context.contentResolver
 
         try {
             val cursor = resolver.query(
@@ -52,28 +52,25 @@ class RingtoneManager(val context: Context) {
         }
     }
 
-    companion object {
-
-        fun requiresDialog(context: Context): Boolean {
-            if (VersionUtils.hasMarshmallow()) {
-                if (!Settings.System.canWrite(context)) {
-                    return true
-                }
+    fun requiresDialog(context: Context): Boolean {
+        if (VersionUtils.hasMarshmallow()) {
+            if (!Settings.System.canWrite(context)) {
+                return true
             }
-            return false
         }
+        return false
+    }
 
-        fun getDialog(context: Context) {
-            return MaterialAlertDialogBuilder(context, R.style.MaterialAlertDialogTheme)
-                .setTitle(R.string.dialog_title_set_ringtone)
-                .setMessage(R.string.dialog_message_set_ringtone)
-                .setPositiveButton(android.R.string.ok) { _, _ ->
-                    val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                    intent.data = ("package:" + context.applicationContext.packageName).toUri()
-                    context.startActivity(intent)
-                }
-                .setNegativeButton(android.R.string.cancel, null)
-                .create().show()
-        }
+    fun showDialog(context: Context) {
+        return MaterialAlertDialogBuilder(context, R.style.MaterialAlertDialogTheme)
+            .setTitle(R.string.dialog_title_set_ringtone)
+            .setMessage(R.string.dialog_message_set_ringtone)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                intent.data = ("package:" + context.applicationContext.packageName).toUri()
+                context.startActivity(intent)
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .create().show()
     }
 }

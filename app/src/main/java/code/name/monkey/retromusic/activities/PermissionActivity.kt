@@ -31,7 +31,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityPermissionBinding
 import code.name.monkey.retromusic.extensions.*
-import code.name.monkey.retromusic.util.RingtoneManager
 
 class PermissionActivity : AbsMusicServiceActivity() {
     private lateinit var binding: ActivityPermissionBinding
@@ -50,7 +49,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
         if (VersionUtils.hasMarshmallow()) {
             binding.audioPermission.show()
             binding.audioPermission.setButtonClick {
-                if (RingtoneManager.requiresDialog(this@PermissionActivity)) {
+                if (hasAudioPermission()) {
                     val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
                     intent.data = ("package:" + applicationContext.packageName).toUri()
                     startActivity(intent)
@@ -99,7 +98,8 @@ class PermissionActivity : AbsMusicServiceActivity() {
     }
 
     private fun hasStoragePermission(): Boolean {
-        return ActivityCompat.checkSelfPermission(this , Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        return ActivityCompat.checkSelfPermission(this,
+            Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

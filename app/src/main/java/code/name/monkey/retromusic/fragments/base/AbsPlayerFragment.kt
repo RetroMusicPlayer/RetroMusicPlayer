@@ -180,11 +180,14 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 return true
             }
             R.id.action_set_as_ringtone -> {
-                if (RingtoneManager.requiresDialog(requireActivity())) {
-                    RingtoneManager.getDialog(requireActivity())
+                requireContext().run {
+                    if (RingtoneManager.requiresDialog(this)) {
+                        RingtoneManager.showDialog(this)
+                    } else {
+                        RingtoneManager.setRingtone(this, song)
+                    }
                 }
-                val ringtoneManager = RingtoneManager(requireActivity())
-                ringtoneManager.setRingtone(song)
+
                 return true
             }
             R.id.action_go_to_genre -> {
@@ -265,7 +268,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 } else {
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                 }
-                val drawable =  requireContext().getTintedDrawable(
+                val drawable = requireContext().getTintedDrawable(
                     icon,
                     toolbarIconColor()
                 )
@@ -379,9 +382,7 @@ fun goToArtist(activity: Activity) {
         findNavController(R.id.fragment_container).navigate(
             R.id.artistDetailsFragment,
             bundleOf(EXTRA_ARTIST_ID to song.artistId),
-            navOptions {
-                launchSingleTop = true
-            },
+            null,
             null
         )
     }
@@ -402,9 +403,7 @@ fun goToAlbum(activity: Activity) {
         findNavController(R.id.fragment_container).navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to song.albumId),
-            navOptions {
-                launchSingleTop = true
-            },
+            null,
             null
         )
     }

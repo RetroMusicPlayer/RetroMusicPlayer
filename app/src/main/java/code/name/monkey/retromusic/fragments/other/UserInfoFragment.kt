@@ -66,7 +66,7 @@ class UserInfoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.fragment_container
@@ -229,7 +229,7 @@ class UserInfoFragment : Fragment() {
                     model: Any?,
                     target: Target<Bitmap>?,
                     dataSource: DataSource?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     resource?.let { saveImage(it, USER_BANNER) }
                     return false
@@ -239,7 +239,7 @@ class UserInfoFragment : Fragment() {
                     e: GlideException?,
                     model: Any?,
                     target: Target<Bitmap>?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     return false
                 }
@@ -251,14 +251,10 @@ class UserInfoFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             val appDir = requireContext().filesDir
             val file = File(appDir, fileName)
-            var successful = false
-            runCatching {
-                file.outputStream().buffered().use {
-                    successful = ImageUtil.resizeBitmap(bitmap, 2048)
-                        .compress(Bitmap.CompressFormat.WEBP, 100, it)
-                }
-            }.onFailure {
-                it.printStackTrace()
+            var successful: Boolean
+            file.outputStream().buffered().use {
+                successful = ImageUtil.resizeBitmap(bitmap, 2048)
+                    .compress(Bitmap.CompressFormat.WEBP, 100, it)
             }
             if (successful) {
                 withContext(Dispatchers.Main) {
@@ -279,7 +275,7 @@ class UserInfoFragment : Fragment() {
                     model: Any?,
                     target: Target<Bitmap>?,
                     dataSource: DataSource?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     resource?.let { saveImage(it, USER_PROFILE) }
                     return false
@@ -289,7 +285,7 @@ class UserInfoFragment : Fragment() {
                     e: GlideException?,
                     model: Any?,
                     target: Target<Bitmap>?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     return false
                 }

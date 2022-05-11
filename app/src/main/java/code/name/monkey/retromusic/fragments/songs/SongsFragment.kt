@@ -139,9 +139,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
     }
 
-    private fun setUpSortOrderMenu(
-        sortOrderMenu: SubMenu
-    ) {
+    private fun setUpSortOrderMenu(sortOrderMenu: SubMenu) {
         val currentSortOrder: String? = getSortOrder()
         sortOrderMenu.clear()
         sortOrderMenu.add(
@@ -211,9 +209,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         sortOrderMenu.setGroupCheckable(0, true, true)
     }
 
-    private fun setupLayoutMenu(
-        subMenu: SubMenu
-    ) {
+    private fun setupLayoutMenu(subMenu: SubMenu) {
         when (itemLayoutRes()) {
             R.layout.item_card -> subMenu.findItem(R.id.action_layout_card).isChecked = true
             R.layout.item_grid -> subMenu.findItem(R.id.action_layout_normal).isChecked = true
@@ -227,9 +223,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         }
     }
 
-    private fun setUpGridSizeMenu(
-        gridSizeMenu: SubMenu
-    ) {
+    private fun setUpGridSizeMenu(gridSizeMenu: SubMenu) {
         when (getGridSize()) {
             1 -> gridSizeMenu.findItem(R.id.action_grid_size_1).isChecked = true
             2 -> gridSizeMenu.findItem(R.id.action_grid_size_2).isChecked = true
@@ -274,9 +268,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         return super.onMenuItemSelected(item)
     }
 
-    private fun handleSortOrderMenuItem(
-        item: MenuItem
-    ): Boolean {
+    private fun handleSortOrderMenuItem(item: MenuItem): Boolean {
         val sortOrder: String = when (item.itemId) {
             R.id.action_song_sort_order_asc -> SongSortOrder.SONG_A_Z
             R.id.action_song_sort_order_desc -> SongSortOrder.SONG_Z_A
@@ -297,9 +289,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         return false
     }
 
-    private fun handleLayoutResType(
-        item: MenuItem
-    ): Boolean {
+    private fun handleLayoutResType(item: MenuItem): Boolean {
         val layoutRes = when (item.itemId) {
             R.id.action_layout_normal -> R.layout.item_grid
             R.id.action_layout_card -> R.layout.item_card
@@ -317,9 +307,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         return false
     }
 
-    private fun handleGridSizeMenuItem(
-        item: MenuItem
-    ): Boolean {
+    private fun handleGridSizeMenuItem(item: MenuItem): Boolean {
         val gridSize = when (item.itemId) {
             R.id.action_grid_size_1 -> 1
             R.id.action_grid_size_2 -> 2
