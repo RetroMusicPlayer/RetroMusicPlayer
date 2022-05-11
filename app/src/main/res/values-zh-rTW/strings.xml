@@ -2,8 +2,8 @@
 <resources>
     <string name="about_album_label">關於 %s</string>
     <string name="about_settings_summary">團隊與社群連結</string>
-    <string name="accent_color">強調色彩</string>
-    <string name="accent_color_desc">強調色彩，預設為紫色</string>
+    <string name="accent_color">強調顏色</string>
+    <string name="accent_color_desc">強調顏色，預設為紫色</string>
     <string name="action_about">關於</string>
     <string name="action_add_to_blacklist">新增到黑名單</string>
     <string name="action_add_to_favorites">新增到最愛</string>
@@ -125,7 +125,7 @@
     <string name="clear_history">清除歷程</string>
     <string name="clear_playing_queue">清除佇列</string>
     <string name="color">彩色風</string>
-    <string name="colors">色彩</string>
+    <string name="colors">顏色</string>
     <string name="compact">壓縮</string>
     <string name="composer">作曲者</string>
     <string name="copied_device_info_to_clipboard">已複製裝置資訊到剪貼簿。</string>
@@ -181,7 +181,7 @@
     <string name="free">免費</string>
     <string name="full">全景風</string>
     <string name="full_card">全景卡牌風</string>
-    <string name="general_settings_summary">變更應用程式的佈景主題和色彩</string>
+    <string name="general_settings_summary">變更應用程式的佈景主題和顏色</string>
     <string name="general_settings_title">介面與外觀</string>
     <string name="genre">風格類型</string>
     <string name="genres">風格類型</string>
@@ -325,11 +325,11 @@
     <string name="pref_summary_blurred_album_art">在鎖定畫面上模糊化專輯圖片。第三方程式和小工具可能不正常運作</string>
     <string name="pref_summary_carousel_effect">現正播放畫面中的專輯封面輪播效果。請注意，卡牌風和模糊卡牌風佈景主題不會有此效果</string>
     <string name="pref_summary_classic_notification">使用經典通知樣式</string>
-    <string name="pref_summary_colored_app">於現正播放畫面中，背景和控制鍵的色彩將依專輯封面色調而變化</string>
-    <string name="pref_summary_colored_app_shortcuts">以強調色彩作為應用程式的捷徑色調。每變更強調色彩後，請重新切換此功能開關以生效</string>
-    <string name="pref_summary_colored_notification">"以鮮豔的專輯封面色調作為通知欄色彩"</string>
+    <string name="pref_summary_colored_app">於現正播放畫面中，背景和控制鍵的顏色將依專輯封面色調而變化</string>
+    <string name="pref_summary_colored_app_shortcuts">以強調顏色作為應用程式的捷徑色調。每變更強調顏色後，請重新切換此功能開關以生效</string>
+    <string name="pref_summary_colored_notification">"以鮮豔的專輯封面色調作為通知欄顏色"</string>
     <string name="pref_summary_cross_fade">歌曲淡化/淡出的持續時間</string>
-    <string name="pref_summary_desaturated_color">根據 Material Design 指引，於深色模式時，色彩應不飽和</string>
+    <string name="pref_summary_desaturated_color">根據 Material Design 指引，於深色模式時，顏色應不飽和</string>
     <string name="pref_summary_expand_now_playing_panel">按兩下通知欄以顯示現正播放畫面，而非首頁</string>
     <string name="pref_summary_extra_controls">於播放列顯示更多控制鍵</string>
     <string name="pref_summary_extra_song_info">顯示更多歌曲資訊，例如檔案格式、位元速率、頻率</string>
@@ -348,7 +348,7 @@
     <string name="pref_summary_toggle_headset">當連接耳機後，自動播放音樂</string>
     <string name="pref_summary_toggle_shuffle">當播放新播放清單時，關閉隨機模式</string>
     <string name="pref_summary_toggle_volume">若螢幕仍有充足空間，則在現正播放畫面，顯示音量控制欄</string>
-    <string name="pref_summary_wallpaper_accent">從桌布上擷取主題色彩</string>
+    <string name="pref_summary_wallpaper_accent">從桌布上擷取主題顏色</string>
     <string name="pref_summary_whitelist">僅顯示來自 /Music 資料夾內的歌曲</string>
     <string name="pref_summary_manage_audio_focus">無論其他應用程式正在播放為何，永遠於背景播放音訊</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯封面</string>
@@ -365,11 +365,11 @@
     <string name="pref_title_blurred_album_art">將專輯圖片模糊化</string>
     <string name="pref_title_circle_button">圓形播放鍵</string>
     <string name="pref_title_classic_notification">經典通知樣式</string>
-    <string name="pref_title_colored_app">自動調整色彩</string>
+    <string name="pref_title_colored_app">自動調整顏色</string>
     <string name="pref_title_colored_notification">彩色狀態列</string>
     <string name="pref_title_cross_fade">淡入/淡出 (測試中)</string>
     <string name="pref_title_custom_font">使用 Manrope 字型</string>
-    <string name="pref_title_desaturated_color">不飽和色彩</string>
+    <string name="pref_title_desaturated_color">不飽和顏色</string>
     <string name="pref_title_expand_now_playing_panel">顯示現正播放畫面</string>
     <string name="pref_title_extra_controls">更多控制選項</string>
     <string name="pref_title_extra_song_info">音樂資訊</string>
@@ -396,7 +396,7 @@
     <string name="pref_title_toggle_toggle_headset">自動播放</string>
     <string name="pref_title_toggle_toggle_shuffle">隨機播放模式</string>
     <string name="pref_title_toggle_volume">音量控制</string>
-    <string name="pref_title_wallpaper_accent">桌布主題色彩</string>
+    <string name="pref_title_wallpaper_accent">桌布主題顏色</string>
     <string name="pref_title_whitelist">白名單音樂</string>
     <string name="pref_title_manage_audio_focus">永遠播放</string>
     <string name="pro">Pro</string>
