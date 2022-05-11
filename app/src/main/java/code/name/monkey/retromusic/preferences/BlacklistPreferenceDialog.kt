@@ -38,7 +38,7 @@ class BlacklistPreference @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = -1,
-    defStyleRes: Int = -1
+    defStyleRes: Int = -1,
 ) : ATEDialogPreference(context, attrs, defStyleAttr, defStyleRes) {
 
     init {
@@ -123,8 +123,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
         dialog?.setItems(paths.toTypedArray(), null)
     }
 
-    override fun onFolderSelection(dialog: BlacklistFolderChooserDialog, folder: File) {
-        BlacklistStore.getInstance(requireContext()).addPath(folder)
-        refreshBlacklistData()
+    override fun onFolderSelection(context: Context, folder: File) {
+        BlacklistStore.getInstance(context).addPath(folder)
     }
 }

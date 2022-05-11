@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.dialogs
 
 import android.Manifest
 import android.app.Dialog
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
@@ -80,7 +81,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
             }
             .noAutoDismiss()
             .positiveButton(res = R.string.add_action) {
-                callback?.onFolderSelection(this@BlacklistFolderChooserDialog, parentFolder!!)
+                callback?.onFolderSelection(requireContext(), parentFolder!!)
                 dismiss()
             }
             .negativeButton(res = android.R.string.cancel) { dismiss() }
@@ -128,7 +129,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
     }
 
     interface FolderCallback {
-        fun onFolderSelection(dialog: BlacklistFolderChooserDialog, folder: File)
+        fun onFolderSelection(context: Context, folder: File)
     }
 
     companion object {
