@@ -141,8 +141,8 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
         binding.lyricsPager.adapter = lyricsSectionsAdapter
         TabLayoutMediator(binding.tabLyrics, binding.lyricsPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Synced Lyrics"
-                1 -> "Normal Lyrics"
+                0 -> getString(R.string.synced_lyrics)
+                1 -> getString(R.string.normal_lyrics)
                 else -> ""
             }
         }.attach()
@@ -383,7 +383,7 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
         }
 
         fun loadLRCLyrics() {
-            binding.lyricsView.setLabel("Empty")
+            binding.lyricsView.setLabel(getString(R.string.empty))
             LyricUtil.getSyncedLyricsFile(MusicPlayerRemote.currentSong)?.let {
                 binding.lyricsView.loadLrc(it)
             }

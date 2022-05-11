@@ -86,7 +86,9 @@
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
     <string name="auto">Auto</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_restore_title">
+        <![CDATA[Backup & Restore]]>
+    </string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biography</string>
     <string name="black_theme_name">Just Black</string>
@@ -171,9 +173,14 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Empty</string>
     <string name="equalizer">Equalizer</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favorites</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Finish last song</string>
     <string name="fit">Fit</string>
     <string name="flat">Flat</string>
@@ -237,9 +244,15 @@
     <string name="lyrics">Lyrics</string>
     <string name="made_with_love">Made with ❤️ in India</string>
     <string name="material">Material</string>
+    <string name="md3" translatable="false">MD3</string>
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Permission error</string>
-    <string name="md3" translatable="false">MD3</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Name</string>
     <string name="my_top_tracks">Most played</string>
     <string name="never">Never</string>
@@ -342,6 +355,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
@@ -354,7 +368,6 @@
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -387,6 +400,7 @@
     <string name="pref_title_lock_screen">Fullscreen controls</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
     <string name="pref_title_open_source_licences">Open source licences</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -402,7 +416,6 @@
     <string name="pref_title_toggle_volume">Volume controls</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>

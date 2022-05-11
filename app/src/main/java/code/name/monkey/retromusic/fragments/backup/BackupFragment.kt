@@ -122,7 +122,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 try {
                     file.delete()
                 } catch (exception: SecurityException) {
-                    showToast("Could not delete backup")
+                    showToast(R.string.error_delete_backup)
                 }
                 backupViewModel.loadBackups()
                 return true
@@ -147,7 +147,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                             file.renameTo(renamedFile)
                             backupViewModel.loadBackups()
                         } else {
-                            showToast("File already exists")
+                            showToast(R.string.file_already_exists)
                         }
                     }
                     positiveButton(android.R.string.ok)

@@ -76,7 +76,7 @@ class LibraryPreferenceDialog : DialogFragment() {
     private fun updateCategories(categories: List<CategoryInfo>) {
         if (getSelected(categories) == 0) return
         if (getSelected(categories) > 5) {
-            showToast("Not more than 5 items")
+            showToast(R.string.message_limit_tabs)
             return
         }
         PreferenceUtil.libraryCategory = categories

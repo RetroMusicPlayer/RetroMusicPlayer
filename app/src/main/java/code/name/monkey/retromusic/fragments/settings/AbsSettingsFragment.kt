@@ -24,6 +24,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.OnThemeChangedListener
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.preferences.*
@@ -37,7 +38,7 @@ import dev.chrisbanes.insetter.applyInsetter
 abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
     internal fun showProToastAndNavigate(message: String) {
-        showToast("$message is Pro version feature.")
+        showToast(getString(R.string.message_pro_feature, message))
         NavigationUtil.goToProVersion(requireActivity())
     }
 

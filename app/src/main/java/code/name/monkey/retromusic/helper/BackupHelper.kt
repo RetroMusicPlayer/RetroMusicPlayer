@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.helper
 import android.content.Context
 import android.os.Environment
 import code.name.monkey.retromusic.BuildConfig
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.showToast
@@ -57,11 +58,11 @@ object BackupHelper : KoinComponent {
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {
-                    context.showToast("Couldn't create backup")
+                    context.showToast(R.string.error_create_backup)
                 }
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    context.showToast("Backup created successfully")
+                    context.showToast(R.string.message_backup_create_success)
                 }
             }
         }
@@ -160,7 +161,7 @@ object BackupHelper : KoinComponent {
                 }
             }
             withContext(Dispatchers.Main) {
-                context.showToast("Restore Completed Successfully")
+                context.showToast(R.string.message_restore_success)
             }
         }
     }

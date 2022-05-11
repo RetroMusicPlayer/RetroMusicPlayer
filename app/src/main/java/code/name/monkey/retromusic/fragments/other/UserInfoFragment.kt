@@ -96,7 +96,7 @@ class UserInfoFragment : Fragment() {
         binding.next.setOnClickListener {
             val nameString = binding.name.text.toString().trim { it <= ' ' }
             if (nameString.isEmpty()) {
-                showToast("Your name can't be empty!")
+                showToast(R.string.error_empty_name)
                 return@setOnClickListener
             }
             userName = nameString
@@ -262,7 +262,7 @@ class UserInfoFragment : Fragment() {
             }
             if (successful) {
                 withContext(Dispatchers.Main) {
-                    showToast("Updated")
+                    showToast(R.string.message_updated)
                 }
             }
         }
