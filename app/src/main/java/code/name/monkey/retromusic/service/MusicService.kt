@@ -56,6 +56,7 @@ import code.name.monkey.retromusic.appwidgets.*
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.auto.AutoMusicProvider
 import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.extensions.toMediaSessionQueue
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension.getDefaultTransition
@@ -1225,6 +1226,8 @@ class MusicService : MediaBrowserServiceCompat(),
                 songPlayCountHelper.notifySongChanged(currentSong)
             }
             QUEUE_CHANGED -> {
+                mediaSession?.setQueueTitle(getString(R.string.now_playing_queue))
+                mediaSession?.setQueue(playingQueue.toMediaSessionQueue())
                 updateMediaSessionMetaData() // because playing queue size might have changed
                 saveState()
                 if (playingQueue.size > 0) {
