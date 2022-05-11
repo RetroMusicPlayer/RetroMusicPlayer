@@ -331,7 +331,7 @@
     <string name="pref_summary_cross_fade">歌曲淡化/淡出的持續時間</string>
     <string name="pref_summary_desaturated_color">根據 Material Design 指引，於深色模式時，色彩應不飽和</string>
     <string name="pref_summary_expand_now_playing_panel">按兩下通知欄以顯示現正播放畫面，而非首頁</string>
-    <string name="pref_summary_extra_controls">新增更多控制鍵於播放列</string>
+    <string name="pref_summary_extra_controls">於播放列顯示更多控制鍵</string>
     <string name="pref_summary_extra_song_info">顯示更多歌曲資訊，例如檔案格式、位元速率、頻率</string>
     <string name="pref_summary_gapless_playback">"可能會在某些裝置上發生播放問題。"</string>
     <string name="pref_summary_home_banner">顯示或隱藏首頁橫幅</string>
@@ -454,7 +454,7 @@
     <string name="scanned_files">已掃描 %2$d 個檔案夾中的 %1$d 個。</string>
     <string name="scrobbles_label">音樂記錄</string>
     <string name="select_all">選取全部</string>
-    <string name="selected">僅顯示已選取的索引標籤</string>
+    <string name="selected">僅顯示已選取的標籤</string>
     <string name="set">設定</string>
     <string name="set_artist_image">設定演唱者圖片</string>
     <string name="share_app">分享應用程式</string>
