@@ -46,7 +46,7 @@
     <string name="action_share">分享</string>
     <string name="action_shuffle_all">隨機播放</string>
     <string name="action_shuffle_playlist">隨機播放清單</string>
-    <string name="action_sleep_timer">睡眠定時器</string>
+    <string name="action_sleep_timer">睡眠計時器</string>
     <string name="action_sort_order">排序</string>
     <string name="action_tag_editor">編輯音樂資訊</string>
     <string name="action_toggle_favorite">新增/移除最愛</string>
@@ -227,7 +227,7 @@
     <string name="library_categories">音樂庫類別</string>
     <string name="licenses">原始碼授權</string>
     <string name="light_theme_name">淺色</string>
-    <string name="listeners_label">聽眾</string>
+    <string name="listeners_label">全球聽眾</string>
     <string name="listing_files">清單文件</string>
     <string name="loading_products">正在載入…</string>
     <string name="login">登入</string>
@@ -270,7 +270,7 @@
     <string name="only_on_wifi">只在 Wi-Fi 連線時</string>
     <string name="other_settings_summary">進階測試功能</string>
     <string name="others">其他</string>
-    <string name="over_cover">封面</string>
+    <string name="over_cover">於封面上層顯示</string>
     <string name="password">密碼</string>
     <string name="past_three_months">過去 3 個月</string>
     <string name="paste_lyrics_here">在此貼上歌詞</string>
@@ -390,7 +390,7 @@
     <string name="pref_title_show_lyrics">顯示歌詞</string>
     <string name="pref_title_suggestions">顯示建議</string>
     <string name="pref_title_swipe_anywhere_now_playing">隨意滑動以切換歌曲</string>
-    <string name="pref_title_tab_text_mode">索引標題模式</string>
+    <string name="pref_title_tab_text_mode">索引標籤模式</string>
     <string name="pref_title_toggle_carousel_effect">輪播效果</string>
     <string name="pref_title_toggle_full_screen">全螢幕應用程式</string>
     <string name="pref_title_toggle_toggle_headset">自動播放</string>
@@ -405,7 +405,7 @@
     <string name="purchase">購買</string>
     <string name="queue">播放佇列</string>
     <string name="rate_app">評分</string>
-    <string name="rate_on_google_play_summary">您還喜歡 Retro music 嗎？歡迎在 Play 商店上評論，使我們能日臻完善</string>
+    <string name="rate_on_google_play_summary">您還喜歡 Retro Music 嗎？歡迎在 Play 商店上評論，使我們能日臻完善</string>
     <string name="recent_albums">最近專輯</string>
     <string name="recent_artists">最近演唱者</string>
     <string name="remove_action">移除</string>
@@ -417,13 +417,13 @@
     <string name="remove_songs_from_playlist_title">從播放清單中移除歌曲</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[確定要將 <b>%1$d</b> 首歌從播放清單中移除嗎？]]></string>
     <string name="rename_playlist_title">重新命名播放清單</string>
-    <string name="replace_cover">取代封面</string>
+    <string name="replace_cover">隱藏封面</string>
     <string name="report_an_issue">回報問題</string>
     <string name="report_bug">報告錯誤</string>
     <string name="reset_action">重設</string>
     <string name="reset_artist_image">重設演唱者圖片</string>
     <string name="restore">復原</string>
-    <string name="restore_message">您確定要復原備份嗎？</string>
+    <string name="restore_message">確定要復原備份嗎？</string>
     <string name="restored_previous_purchase_please_restart">已復原先前的購買。請重新開啟應用程式以啟用全數功能。</string>
     <string name="restored_previous_purchases">已復原先前購買。</string>
     <string name="restoring_purchase">正在復原購買…</string>
@@ -463,8 +463,8 @@
     <string name="show_album_artists">顯示專輯演唱者</string>
     <string name="shuffle">隨機播放</string>
     <string name="simple">簡單風</string>
-    <string name="sleep_timer_canceled">已取消睡眠定時器。</string>
-    <string name="sleep_timer_set">睡眠定時器將從現在計時 %d 分鐘。</string>
+    <string name="sleep_timer_canceled">已取消睡眠計時器。</string>
+    <string name="sleep_timer_set">睡眠計時器將從現在計時 %d 分鐘。</string>
     <string name="social">社群</string>
     <string name="social_stories">分享到限時動態</string>
     <string name="song">歌曲</string>
@@ -490,7 +490,7 @@
     <string name="swipe_to_unlock">滑動以解鎖</string>
     <string name="synced_lyrics">同步歌詞</string>
     <string name="telegram_group">Telegram</string>
-    <string name="telegram_group_summary">加入 Telegram 群組以討論臭蟲、提供建議，以及探索更多</string>
+    <string name="telegram_group_summary">加入 Telegram 群組以討論臭蟲、提供建議、交流，以及探索更多</string>
     <string name="thank_you">感謝您！</string>
     <string name="the_audio_file">音訊檔案</string>
     <string name="this_month">本月</string>
