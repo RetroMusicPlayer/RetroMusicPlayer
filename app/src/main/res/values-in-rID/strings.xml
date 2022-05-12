@@ -169,9 +169,14 @@
     <string name="edit_synced_lyrics">Edit Lirik Yang Disinkronkan</string>
     <string name="empty">Kosong</string>
     <string name="equalizer">Equalizer</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">Pertanyaan Umum (FAQ)</string>
     <string name="favorites">Favorit</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Selesaikan lagu terakhir</string>
     <string name="fit">Paskan</string>
     <string name="flat">Datar</string>
@@ -236,6 +241,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">Kesalahan</string>
     <string name="md_storage_perm_error">Kesalahan izin</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Nama</string>
     <string name="my_top_tracks">Sering diputar</string>
     <string name="never">Tidak pernah</string>
@@ -338,6 +349,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Dapat meningkatkan kualitas sampul album, namun menyebabkan waktu pemuatan lebih lambat. Aktifkan jika Anda bermasalah dengan resolusi gambar album yang rendah</string>
     <string name="pref_summary_library_categories">Mengkonfigurasi visibilitas dan susunan kategori perpustakaan.</string>
     <string name="pref_summary_lock_screen">Gunakan kontrol layar kunci khusus Musik Retro</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Detail lisensi untuk perangkat lunak sumber terbuka</string>
     <string name="pref_summary_pause_history">Saat diaktifkan, lagu yang baru diputar tidak akan muncul di riwayat</string>
     <string name="pref_summary_remember_tab">Arahkan ke tab yang terakhir digunakan saat memulai</string>
@@ -350,7 +362,6 @@
     <string name="pref_summary_toggle_volume">Jika tersedia cukup ruang, tampilkan kontrol volume di layar pemutaran</string>
     <string name="pref_summary_wallpaper_accent">Ambil warna aksen dari wallpaper</string>
     <string name="pref_summary_whitelist">Tampilkan musik hanya dari folder /Music</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Tampilkan sampul album</string>
     <string name="pref_title_album_artists_only">Navigasi berdasarkan Album Artis</string>
     <string name="pref_title_album_cover_style">Tema sampul album</string>
@@ -383,6 +394,7 @@
     <string name="pref_title_lock_screen">Kontrol layar penuh</string>
     <string name="pref_title_lyrics_screen_on">Tetap aktifkan layar saat menampilkan lirik</string>
     <string name="pref_title_lyrics_type">Tipe lirik</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Tema Pemutaran</string>
     <string name="pref_title_open_source_licences">Lisensi sumber terbuka</string>
     <string name="pref_title_pause_history">Jeda riwayat</string>
@@ -398,7 +410,6 @@
     <string name="pref_title_toggle_volume">Kontrol volume</string>
     <string name="pref_title_wallpaper_accent">Warna aksen wallpaper</string>
     <string name="pref_title_whitelist">Musik daftar putih</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema hitam, Tema yang sedang diputar, efek korsel, dan lainnya...</string>
     <string name="profile">Profil</string>
@@ -536,4 +547,6 @@
     <string name="you_have_to_select_at_least_one_category">Anda harus memilih setidaknya satu kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan ditersukan ke situs web pelacak masalah.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
