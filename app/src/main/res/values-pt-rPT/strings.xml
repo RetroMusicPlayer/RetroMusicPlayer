@@ -171,9 +171,14 @@
     <string name="edit_synced_lyrics">Editar letras sincronizadas</string>
     <string name="empty">Vazio</string>
     <string name="equalizer">Equalizador</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favoritos</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Terminar a última música</string>
     <string name="fit">Ajustar</string>
     <string name="flat">Plano</string>
@@ -238,6 +243,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">Erro</string>
     <string name="md_storage_perm_error">Erro de permissões</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Nome</string>
     <string name="my_top_tracks">Mais tocadas</string>
     <string name="never">Nunca</string>
@@ -340,6 +351,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Pode aumentar a qualidade da capa do álbum, mas aumenta o tempo de carregamento. Ligue apenas se tiver problemas com capas de baixa resolução</string>
     <string name="pref_summary_library_categories">Configurar visibilidade e ordem das categorias.</string>
     <string name="pref_summary_lock_screen">Utilizar os controlos personalizados do Música Retro</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Detalhes da licença do software open source</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Ir para o último separador ao iniciar</string>
@@ -352,7 +364,6 @@
     <string name="pref_summary_toggle_volume">Se tiver espaço suficiente, mostrar os controlos de volume no ecrã A reproduzir</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Mostrar apenas músicas de /Music</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Mostrar capa do álbum</string>
     <string name="pref_title_album_artists_only">Navegar pelos artistas</string>
     <string name="pref_title_album_cover_style">Tema da capa do álbum</string>
@@ -385,6 +396,7 @@
     <string name="pref_title_lock_screen">Controlos de ecrã inteiro</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Tema A reproduzir</string>
     <string name="pref_title_open_source_licences">Licenças open source</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -400,7 +412,6 @@
     <string name="pref_title_toggle_volume">Controlos de volume</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema escuro, temas A reproduzir, efeito carrossel e muito mais..</string>
     <string name="profile">Perfil</string>
@@ -538,4 +549,6 @@
     <string name="you_have_to_select_at_least_one_category">Tem que seleccionar pelo menos uma categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vai ser reencaminhado para o site de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">As informações da sua conta são utilizadas apenas autenticação.</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
