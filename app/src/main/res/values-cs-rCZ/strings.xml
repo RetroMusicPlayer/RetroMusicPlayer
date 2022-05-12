@@ -175,9 +175,14 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Prázdný</string>
     <string name="equalizer">Ekvalizér</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">Často kladené otázky</string>
     <string name="favorites">Oblíbené</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Dokončit poslední skladbu</string>
     <string name="fit">Fit</string>
     <string name="flat">Flat</string>
@@ -242,6 +247,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">Chyba</string>
     <string name="md_storage_perm_error">Chyba oprávnění</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Název</string>
     <string name="my_top_tracks">Moje top skladby</string>
     <string name="never">Nikdy</string>
@@ -344,6 +355,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Může zvýšit kvalitu obalu alba, ale způsobí pomalejší načítání snímků. Tuto možnost povolte pouze v případě potíží s uměleckými díly s nízkým rozlišením.</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
@@ -356,7 +368,6 @@
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Zobrazit obal alba</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Motiv obalu alba</string>
@@ -389,6 +400,7 @@
     <string name="pref_title_lock_screen">Ovládání na celou obrazovku</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Vzhled</string>
     <string name="pref_title_open_source_licences">Licence Open source</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -404,7 +416,6 @@
     <string name="pref_title_toggle_volume">Ovládání hlasitosti</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Černý motiv, motivy stránky přehrávání, kolotočový efekt a další..</string>
     <string name="profile">Profil</string>
@@ -542,4 +553,6 @@
     <string name="you_have_to_select_at_least_one_category">Musíte zvolit alespoň jednu kategorii.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Budete přesměrováni na webovou stránku pro zadání problému.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vaše údaje k účtu jsou použity pouze k ověření.</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
