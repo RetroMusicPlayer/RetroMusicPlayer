@@ -175,9 +175,14 @@
     <string name="edit_synced_lyrics">Edytuj zsynchronizowany tekst</string>
     <string name="empty">Pusto</string>
     <string name="equalizer">Korektor dźwięku</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">Najczęściej zadawane pytania</string>
     <string name="favorites">Ulubione</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Dokończ ostatni utwór</string>
     <string name="fit">Dopasuj</string>
     <string name="flat">Płaski</string>
@@ -242,6 +247,12 @@
     <string name="material">Materialistyczny</string>
     <string name="md_error_label">Błąd</string>
     <string name="md_storage_perm_error">Błąd uprawnień</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Imię</string>
     <string name="my_top_tracks">Najczęściej odtwarzane</string>
     <string name="never">Nigdy</string>
@@ -344,6 +355,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Może zwiększyć jakość okładki albumu, ale powoduje spowolnienie ładowania obrazu. Włącz tę opcję tylko jeśli masz problemy z okładkami o niskiej rozdzielczości.</string>
     <string name="pref_summary_library_categories">Dostosuj widoczność i kolejność kategorii bibliotek.</string>
     <string name="pref_summary_lock_screen">Użyj niestandardowych przycisków kontroli na ekranie blokady</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Szczegóły licencji oprogramowania typu open source</string>
     <string name="pref_summary_pause_history">Gdy włączone, nowo odtworzone utwory nie będą wyświetlane w historii</string>
     <string name="pref_summary_remember_tab">Przejdź do ostatnio używanej zakładki przy starcie</string>
@@ -356,7 +368,6 @@
     <string name="pref_summary_toggle_volume">Pokaż sterowanie głośnością w odtwarzaczu, gdy jest wystarczająco wolnego miejsca</string>
     <string name="pref_summary_wallpaper_accent">Wyodrębnij kolor akcentu z tapety</string>
     <string name="pref_summary_whitelist">Pokazuj muzykę tylko z folderu /Music</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Pokaż okładkę albumu</string>
     <string name="pref_title_album_artists_only">Nawiguj przez wykonawcę albumu</string>
     <string name="pref_title_album_cover_style">Wygląd okładki albumu</string>
@@ -389,6 +400,7 @@
     <string name="pref_title_lock_screen">Sterowanie pełnoekranowe</string>
     <string name="pref_title_lyrics_screen_on">Pozostaw włączony ekran podczas wyświetlania tekstu utworu</string>
     <string name="pref_title_lyrics_type">Typ tekstu utworu</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Wyglądodtwarzacza</string>
     <string name="pref_title_open_source_licences">Licencje typu Open Source</string>
     <string name="pref_title_pause_history">Wstrzymaj historię</string>
@@ -404,7 +416,6 @@
     <string name="pref_title_toggle_volume">Sterowanie głośnością</string>
     <string name="pref_title_wallpaper_accent">Kolor akcentu z tapety</string>
     <string name="pref_title_whitelist">Muzyka z listy dozwolonych</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Czarny motyw, motywy teraz odtwarzanych, efekt karuzeli i wiele więcej..</string>
     <string name="profile">Profil</string>
@@ -542,4 +553,6 @@
     <string name="you_have_to_select_at_least_one_category">Zaznacz przynajmniej jedną kategorię</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Zostaniesz przekierowany do strony ze zgłoszeniami.</string>
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
