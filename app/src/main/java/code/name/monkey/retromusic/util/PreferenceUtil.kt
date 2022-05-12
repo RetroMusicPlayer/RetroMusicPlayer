@@ -67,12 +67,12 @@ object PreferenceUtil {
         }
 
     fun registerOnSharedPreferenceChangedListener(
-        listener: OnSharedPreferenceChangeListener
+        listener: OnSharedPreferenceChangeListener,
     ) = sharedPreferences.registerOnSharedPreferenceChangeListener(listener)
 
 
     fun unregisterOnSharedPreferenceChangedListener(
-        changeListener: OnSharedPreferenceChangeListener
+        changeListener: OnSharedPreferenceChangeListener,
     ) = sharedPreferences.unregisterOnSharedPreferenceChangeListener(changeListener)
 
 
@@ -394,7 +394,7 @@ object PreferenceUtil {
     val filterLength get() = sharedPreferences.getInt(FILTER_SONG, 20)
 
     var lastVersion
-    // This was stored as an integer before now it's a long, so avoid a ClassCastException
+        // This was stored as an integer before now it's a long, so avoid a ClassCastException
         get() = try {
             sharedPreferences.getLong(LAST_CHANGELOG_VERSION, 0)
         } catch (e: ClassCastException) {
@@ -725,6 +725,9 @@ object PreferenceUtil {
 
     val swipeAnywhereToChangeSong
         get() = sharedPreferences.getBoolean(SWIPE_ANYWHERE_NOW_PLAYING, true)
+
+    val swipeDownToDismiss
+        get() = sharedPreferences.getBoolean(SWIPE_DOWN_DISMISS, true)
 }
 
 enum class LyricsType {
