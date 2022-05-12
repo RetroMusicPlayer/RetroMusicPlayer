@@ -1,0 +1,175 @@
+package code.name.monkey.retromusic.service
+
+import android.content.Context
+import android.content.Intent
+import android.media.audiofx.AudioEffect
+import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.service.playback.Playback
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.google.android.gms.cast.framework.CastSession
+
+
+class PlaybackManager(val context: Context) {
+
+    var playback: Playback? = null
+    private var playbackLocation = PlaybackLocation.LOCAL
+
+    val audioSessionId: Int
+        get() = if (playback != null) {
+            playback!!.audioSessionId
+        } else 0
+
+    val songDurationMillis: Int
+        get() = if (playback != null) {
+            playback!!.duration()
+        } else -1
+
+    val songProgressMillis: Int
+        get() = if (playback != null) {
+            playback!!.position()
+        } else -1
+
+    val isPlaying: Boolean
+        get() = playback != null && playback!!.isPlaying
+
+    init {
+        playback = createLocalPlayback()
+    }
+
+    fun setCallbacks(callbacks: Playback.PlaybackCallbacks) {
+        playback?.setCallbacks(callbacks)
+    }
+
+    fun play(onNotInitialized: () -> Unit = {}, onPlay: () -> Unit = {}) {
+        if (playback != null && !playback!!.isPlaying) {
+            if (!playback!!.isInitialized) {
+                onNotInitialized()
+            } else {
+                openAudioEffectSession()
+                if (playbackLocation == PlaybackLocation.LOCAL) {
+                    AudioFader.startFadeAnimator(playback!!, true) {
+                        // Code when Animator Ends
+                        onPlay()
+                    }
+                }
+                playback?.start()
+            }
+        }
+    }
+
+    fun pause(force: Boolean, onPause: () -> Unit) {
+        if (playback != null && playback!!.isPlaying) {
+            if (force) {
+                playback?.pause()
+                closeAudioEffectSession()
+                onPause()
+            } else {
+                AudioFader.startFadeAnimator(playback!!, false) {
+                    //Code to run when Animator Ends
+                    playback?.pause()
+                    closeAudioEffectSession()
+                    onPause()
+                }
+            }
+        }
+    }
+
+    fun seek(millis: Int): Int = playback!!.seek(millis)
+
+    fun setDataSource(
+        song: Song,
+        force: Boolean,
+        completion: (success: Boolean) -> Unit,
+    ) {
+        playback?.setDataSource(song, force, completion)
+    }
+
+    fun setNextDataSource(trackUri: String) {
+        playback?.setNextDataSource(trackUri)
+    }
+
+    fun setCrossFadeDuration(duration: Int) {
+        playback?.setCrossFadeDuration(duration)
+    }
+
+    fun maybeSwitchToCrossFade(crossFadeDuration: Int) {
+        /* Switch to MultiPlayer if Crossfade duration is 0 and
+                Playback is not an instance of MultiPlayer */
+        if (playback !is MultiPlayer && crossFadeDuration == 0) {
+            if (playback != null) {
+                playback?.release()
+            }
+            playback = null
+            playback = MultiPlayer(context)
+        } else if (playback !is CrossFadePlayer && crossFadeDuration > 0) {
+            if (playback != null) {
+                playback?.release()
+            }
+            playback = null
+            playback = CrossFadePlayer(context)
+        }
+    }
+
+    fun release() {
+        if (playback != null) {
+            playback?.release()
+        }
+        playback = null
+        closeAudioEffectSession()
+    }
+
+    fun openAudioEffectSession() {
+        val intent = Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION)
+        intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId)
+        intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.packageName)
+        intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
+        context.sendBroadcast(intent)
+    }
+
+    fun closeAudioEffectSession() {
+        val audioEffectsIntent = Intent(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION)
+        if (playback != null) {
+            audioEffectsIntent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION,
+                playback!!.audioSessionId)
+        }
+        audioEffectsIntent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.packageName)
+        context.sendBroadcast(audioEffectsIntent)
+    }
+
+    fun switchToLocalPlayback(onChange: (wasPlaying: Boolean, progress: Int) -> Unit) {
+        playbackLocation = PlaybackLocation.LOCAL
+        switchToPlayback(createLocalPlayback(), onChange)
+    }
+
+    fun switchToRemotePlayback(castSession: CastSession, onChange: (wasPlaying: Boolean, progress: Int) -> Unit) {
+        playbackLocation = PlaybackLocation.REMOTE
+        switchToPlayback(CastPlayer(castSession), onChange)
+    }
+
+    private fun switchToPlayback(playback: Playback, onChange: (wasPlaying: Boolean, progress: Int) -> Unit) {
+        val oldPlayback = playback
+        val wasPlaying: Boolean = oldPlayback.isPlaying
+        val progress: Int = oldPlayback.position()
+
+        this.playback = playback
+
+        oldPlayback.stop()
+
+        onChange(wasPlaying, progress)
+    }
+
+    private fun createLocalPlayback(): Playback {
+        // Set MultiPlayer when crossfade duration is 0 i.e. off
+        return if (PreferenceUtil.crossFadeDuration == 0) {
+            MultiPlayer(context)
+        } else {
+            CrossFadePlayer(context)
+        }
+    }
+
+}
+
+enum class PlaybackLocation {
+    LOCAL,
+    REMOTE
+}
