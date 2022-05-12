@@ -503,8 +503,7 @@
     <string name="today">今日</string>
     <string name="top_albums">熱門專輯</string>
     <string name="top_artists">熱門演唱者</string>
-    <string name="track_hint">"
- (2 代表曲目 2，或以 3004 代表 CD3 曲目 4)"</string>
+    <string name="track_hint">"(2 代表曲目 2，或以 3004 代表 CD3 曲目 4)"</string>
     <string name="track_list">曲目編號</string>
     <string name="translate">翻譯</string>
     <string name="translate_community">協助我們將應用程式本地化成您的語言</string>
