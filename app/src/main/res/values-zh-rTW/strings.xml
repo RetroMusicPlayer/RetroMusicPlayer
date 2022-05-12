@@ -169,9 +169,14 @@
     <string name="edit_synced_lyrics">編輯同步歌詞</string>
     <string name="empty">沒有內容</string>
     <string name="equalizer">等化器</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">展開</string>
     <string name="faq">常見問題</string>
     <string name="favorites">最愛</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">播放完最後一首歌曲</string>
     <string name="fit">緊貼風</string>
     <string name="flat">方角風</string>
@@ -236,6 +241,12 @@
     <string name="material">材質風</string>
     <string name="md_error_label">錯誤</string>
     <string name="md_storage_perm_error">權限錯誤</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">名稱</string>
     <string name="my_top_tracks">最佳單曲</string>
     <string name="never">永不</string>
@@ -338,6 +349,7 @@
     <string name="pref_summary_ignore_media_store_artwork">可提升專輯封面的成像品質，但會造成較長的讀取時間。建議只有在低畫質專輯封面發生問題時再啟用此選項</string>
     <string name="pref_summary_library_categories">調整音樂庫類別的顯示與排序。</string>
     <string name="pref_summary_lock_screen">使用 Retro Music 自訂化鎖定畫面</string>
+    <string name="pref_summary_manage_audio_focus">無論其他應用程式正在播放為何，永遠於背景播放音訊</string>
     <string name="pref_summary_open_source_licences">開放原始碼軟體的授權詳細資料</string>
     <string name="pref_summary_pause_history">啟用此選項後，新播放的歌曲將不再顯示於歷程</string>
     <string name="pref_summary_remember_tab">開啟應用程式後，自動顯示最後瀏覽的畫面</string>
@@ -350,7 +362,6 @@
     <string name="pref_summary_toggle_volume">若螢幕仍有充足空間，則在現正播放畫面，顯示音量控制欄</string>
     <string name="pref_summary_wallpaper_accent">從桌布上擷取主題顏色</string>
     <string name="pref_summary_whitelist">僅顯示來自 /Music 資料夾內的歌曲</string>
-    <string name="pref_summary_manage_audio_focus">無論其他應用程式正在播放為何，永遠於背景播放音訊</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯封面</string>
     <string name="pref_title_album_artists_only">按專輯演唱者導覽</string>
     <string name="pref_title_album_cover_style">專輯封面主題</string>
@@ -383,6 +394,7 @@
     <string name="pref_title_lock_screen">全螢幕控制</string>
     <string name="pref_title_lyrics_screen_on">顯示歌詞時不關閉螢幕</string>
     <string name="pref_title_lyrics_type">歌詞類型</string>
+    <string name="pref_title_manage_audio_focus">永遠播放</string>
     <string name="pref_title_now_playing_screen_appearance">現正播放佈景主題</string>
     <string name="pref_title_open_source_licences">開源授權協議</string>
     <string name="pref_title_pause_history">暫停記錄歷程</string>
@@ -398,7 +410,6 @@
     <string name="pref_title_toggle_volume">音量控制</string>
     <string name="pref_title_wallpaper_accent">桌布主題顏色</string>
     <string name="pref_title_whitelist">白名單音樂</string>
-    <string name="pref_title_manage_audio_focus">永遠播放</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">例如深色主題、現正播放主題、輪播效果等...</string>
     <string name="profile">個人資料</string>
@@ -536,4 +547,6 @@
     <string name="you_have_to_select_at_least_one_category">您必須選取至少一個類別。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">您將被重新導向至議題追蹤器網頁。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
