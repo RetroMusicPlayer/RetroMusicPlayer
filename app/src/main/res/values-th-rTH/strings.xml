@@ -169,9 +169,14 @@
     <string name="edit_synced_lyrics">ปุ่มซิงค์เนื้อเพลง</string>
     <string name="empty">ว่างเปล่า</string>
     <string name="equalizer">Equalizer</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">คำถามที่พบบ่อย</string>
     <string name="favorites">เพลงโปรด</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">ปิดเมื่อเพลงสุดท้ายจบ</string>
     <string name="fit">Fit</string>
     <string name="flat">Flat</string>
@@ -236,6 +241,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">เกิดข้อผิดพลาด</string>
     <string name="md_storage_perm_error">ไม่มีสิทธิ์ในการเข้าถึง</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">ชื่อ</string>
     <string name="my_top_tracks">ฟังบ่อย</string>
     <string name="never">ไม่ต้อง</string>
@@ -338,6 +349,7 @@
     <string name="pref_summary_ignore_media_store_artwork">เพิ่มคุณภาพของรูปปกอัลบัม แต่จะส่งผลให้โหลดรูปภาพช้าขึ้น</string>
     <string name="pref_summary_library_categories">ตั้งค่าการแสดงผลและจัดเรียงของหมวดหมู่คลังเพลง</string>
     <string name="pref_summary_lock_screen">ใช้ Retro Music ในหน้าล็อคสกรีน</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">รายละเอียด License สำหรับ open source software</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">ไปที่แท็บที่ใช้งานล่าสุดเมื่อเริ่มใช้งาน</string>
@@ -350,7 +362,6 @@
     <string name="pref_summary_toggle_volume">หากพื้นที่ในการแสดงผลเพียงพอให้แสดงปุ่มเพิ่ม/ลดเสียงบนหน้าจอ Now playing </string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">แสดงเฉพาะเพลงจาก Music โฟลเดอร์</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">แสดงรูปปกอัลบัม</string>
     <string name="pref_title_album_artists_only">นำทางโดยอัลบัมศิลปิน</string>
     <string name="pref_title_album_cover_style">ธีมของรูปปกอัลบัม</string>
@@ -383,6 +394,7 @@
     <string name="pref_title_lock_screen">แสดงผลเต็มจอ</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">ธีมของ Now Playing</string>
     <string name="pref_title_open_source_licences">สัญญาอนุญาตสำหรับโอเพนซอร์ส</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -398,7 +410,6 @@
     <string name="pref_title_toggle_volume">ปุ่มควบคุมเสียง</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">โปร</string>
     <string name="pro_summary">ธีม Black, ธีม Now playing, การแสดงผลแบบ Carousel และอื่นๆ</string>
     <string name="profile">โปรไฟล์</string>
@@ -536,4 +547,6 @@
     <string name="you_have_to_select_at_least_one_category">คุณต้องเลือกอย่างน้อยหนึ่งหมวดหมู่</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">ท่านจะติดตามการรายงานปัญหาจากเว็บไซต์</string>
     <string name="your_account_data_is_only_used_for_authentication">ข้อมูลบัญชีของท่านจะใช้สำหรับการเข้าสู่ระบบเท่านั้น</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
