@@ -171,9 +171,14 @@
     <string name="edit_synced_lyrics">Szinkronizált dalszöveg szerkesztése</string>
     <string name="empty">Üres</string>
     <string name="equalizer">Hangszínszabályzó</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">GYIK</string>
     <string name="favorites">Kedvencek</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Fejezze be az utolsó dalt</string>
     <string name="fit">Illeszkedő</string>
     <string name="flat">Lapos</string>
@@ -238,6 +243,12 @@
     <string name="material">Materiál</string>
     <string name="md_error_label">Hiba</string>
     <string name="md_storage_perm_error">Engedély hiba</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Név</string>
     <string name="my_top_tracks">Legjobb számok</string>
     <string name="never">Soha</string>
@@ -340,6 +351,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Növelheti az albumborító minőségét, de lassabb kép betöltési időt eredményez. Csak akkor engedélyezze ezt, ha problémái vannak az alacsony felbontású borítókkal kapcsolatban.</string>
     <string name="pref_summary_library_categories">A könyvtári kategóriák sorrendjének és láthatóságának beállítása.</string>
     <string name="pref_summary_lock_screen">Retro Music egyéni vezérlőinek a használata zárolási képernyőn.</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">A nyílt forráskódú szoftverek licence részletei</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Lépjen az utoljára használt fülre az alkalmazás indításakor</string>
@@ -352,7 +364,6 @@
     <string name="pref_summary_toggle_volume">Ha van elég szabad hely, mutassa a hangerőszabályzókat a most játszott képernyőn</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Csak a /Music mappában lévő zenék mutatása</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Az album borítójának megjelenítése</string>
     <string name="pref_title_album_artists_only">Album előadók szerinti navigálás</string>
     <string name="pref_title_album_cover_style">Album borító téma</string>
@@ -385,6 +396,7 @@
     <string name="pref_title_lock_screen">Teljes képernyős vezérlők</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Most játszott felület megjelenése</string>
     <string name="pref_title_open_source_licences">Nyílt forráskódú licencek</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -400,7 +412,6 @@
     <string name="pref_title_toggle_volume">Hangerőszabályzók</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Sötét téma, Most játszott felület témái, Carousel hatás és még sok más ..</string>
     <string name="profile">Profil</string>
@@ -538,4 +549,6 @@
     <string name="you_have_to_select_at_least_one_category">Legalább egy kategóriát kell kiválasztania</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Továbbítani fogjuk a problémakezelő weboldalra.</string>
     <string name="your_account_data_is_only_used_for_authentication">Fiókja adatait kizárólag a hitelesítéshez fogjuk használni.</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
