@@ -171,9 +171,14 @@
     <string name="edit_synced_lyrics">Senkronize Edilmiş Sözleri Düzenle</string>
     <string name="empty">Boş</string>
     <string name="equalizer">Ekolayzır</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">SSS</string>
     <string name="favorites">Favoriler</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Son şarkıyı sonlandır</string>
     <string name="fit">Uydur</string>
     <string name="flat">Düz</string>
@@ -238,6 +243,12 @@
     <string name="material">Materyal</string>
     <string name="md_error_label">Hata</string>
     <string name="md_storage_perm_error">İzin hatası</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">İsim</string>
     <string name="my_top_tracks">Sık oynatılanlar</string>
     <string name="never">Asla</string>
@@ -340,6 +351,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Albüm kapağı kalitesini artırabilir, ancak fotoğrafın yavaş yüklenmesine neden olur. Bunu, yalnızca düşük çözünürlüklü resimlerle ilgili sorunlarınız varsa etkinleştirin.</string>
     <string name="pref_summary_library_categories">Kütüphane kategorilerinin görünürlük ve sırasını yapılandırın</string>
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Başlangıçta son kullanılan sekmeye git</string>
@@ -352,7 +364,6 @@
     <string name="pref_summary_toggle_volume">Eğer yeterli alan varsa ses kontrollerini şimdi oynatılıyor ekranında göster</string>
     <string name="pref_summary_wallpaper_accent">Vurgu rengini duvar kağıdından al</string>
     <string name="pref_summary_whitelist">Sadece /Music dosyasından müzik göster</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Albüm kapağını göster</string>
     <string name="pref_title_album_artists_only">Albüm Sanatçısına göre belirle</string>
     <string name="pref_title_album_cover_style">Albüm kapağı teması</string>
@@ -385,6 +396,7 @@
     <string name="pref_title_lock_screen">Tam ekran kontrolleri</string>
     <string name="pref_title_lyrics_screen_on">Şarkı sözlerini gösterirken ekranı açık tut</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Şimdi oynatılıyor teması</string>
     <string name="pref_title_open_source_licences">Açık kaynak lisansları</string>
     <string name="pref_title_pause_history">Geçmişi duraklat</string>
@@ -400,7 +412,6 @@
     <string name="pref_title_toggle_volume">Ses kontrolleri</string>
     <string name="pref_title_wallpaper_accent">Duvar kağıdı vurgu rengi</string>
     <string name="pref_title_whitelist">Beyaz liste müziği</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Şimdi Oynatılıyor temaları, Atlıkarınca efekti, Renkli tema ve daha fazlası..</string>
     <string name="profile">Profil</string>
@@ -538,4 +549,6 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
