@@ -175,9 +175,14 @@
     <string name="edit_synced_lyrics">Редактировать синхронизированный текст</string>
     <string name="empty">Пусто</string>
     <string name="equalizer">Эквалайзер</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">ЧаВО</string>
     <string name="favorites">Избранное</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Закончить вопсроизведение последней песни</string>
     <string name="fit">По размеру</string>
     <string name="flat">Плоская</string>
@@ -242,6 +247,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">Ошибка</string>
     <string name="md_storage_perm_error">Ошибка разрешения</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Моё имя</string>
     <string name="my_top_tracks">Любимые треки</string>
     <string name="never">Никогда</string>
@@ -344,6 +355,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Может повысить качество обложки альбома, но привести к более медленной загрузки изображения. Включите это только в том случае, если у вас есть картинки с низким разрешением</string>
     <string name="pref_summary_library_categories">Настроить вид и порядок категорий в библиотеке.</string>
     <string name="pref_summary_lock_screen">Используйте собственный экран блокировки Retro Music</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Сведения о лицензии для программного обеспечения с открытым исходным кодом</string>
     <string name="pref_summary_pause_history">Если включено, то новые песни не будут отображаться в истории</string>
     <string name="pref_summary_remember_tab">Перейдите к последней использованной вкладке при запуске</string>
@@ -356,7 +368,6 @@
     <string name="pref_summary_toggle_volume">Если доступно достаточно места, показывать регулировку громкости на экране воспроизведения</string>
     <string name="pref_summary_wallpaper_accent">Использовать цветовое оформление из обоев</string>
     <string name="pref_summary_whitelist">Показывать музыку только из папки /Music</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Показать обложку альбома</string>
     <string name="pref_title_album_artists_only">Показывать обложку альбома в разделе исполнители</string>
     <string name="pref_title_album_cover_style">Тема обложки альбома</string>
@@ -389,6 +400,7 @@
     <string name="pref_title_lock_screen">Полноэкранное управление</string>
     <string name="pref_title_lyrics_screen_on">Не выключать экран при показе текста</string>
     <string name="pref_title_lyrics_type">Тип текста песни</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Тема экрана воспроизведения</string>
     <string name="pref_title_open_source_licences">Лицензии с открытым кодом</string>
     <string name="pref_title_pause_history">Приостановить историю</string>
@@ -404,7 +416,6 @@
     <string name="pref_title_toggle_volume">Регулировка громкости</string>
     <string name="pref_title_wallpaper_accent">Цвет акцента обоев</string>
     <string name="pref_title_whitelist">Музыка из белого списка</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Черная тема, Темы экрана воспроизведения, Эффект карусели и многое другое..</string>
     <string name="profile">Профиль</string>
@@ -542,4 +553,6 @@
     <string name="you_have_to_select_at_least_one_category">Выберите хотя бы одну категорию.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
     <string name="your_account_data_is_only_used_for_authentication">Данные вашей учетной записи используются только для аутентификации.</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
