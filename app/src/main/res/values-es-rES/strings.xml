@@ -104,7 +104,7 @@
     <string name="bug_report_no_password">Por favor, introduzca su contraseña de GitHub válida</string>
     <string name="bug_report_no_title">Por favor, introduzca una incidencia válida</string>
     <string name="bug_report_no_username">Por favor, introduzca su nombre de usuario de GitHub válido</string>
-    <string name="bug_report_success">Bug report successful</string>
+    <string name="bug_report_success">Error reportado correctamente</string>
     <string name="bug_report_summary">Se ha producido un error inesperado. Lo sentimos, ha encontrado este error, si sigue bloqueando \"Borrar datos de la aplicación\" o enviando un correo electrónico </string>
     <string name="bug_report_use_account">Enviar usando cuenta de GitHub</string>
     <string name="buy_now">Compre ahora</string>
@@ -128,7 +128,7 @@
     <string name="clear_playing_queue">Vaciar lista</string>
     <string name="color">Color.</string>
     <string name="colors">Colores,</string>
-    <string name="compact">Compact</string>
+    <string name="compact">Compacto</string>
     <string name="composer">Compositores</string>
     <string name="copied_device_info_to_clipboard">Información de dispositivo copiada al portapapeles.</string>
     <string name="could_not_create_playlist">No se pudo\u2019no crear la lista de reproducción.</string>
@@ -171,9 +171,14 @@
     <string name="edit_synced_lyrics">Editar Letras Sincronizadas</string>
     <string name="empty">Vacío</string>
     <string name="equalizer">Ecualizador</string>
-    <string name="expanded">Expanded</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
+    <string name="expanded">Expandido</string>
     <string name="faq">Preguntas Más Frecuentes</string>
     <string name="favorites">Favoritos</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Termina la última canción</string>
     <string name="fit">Ajustado</string>
     <string name="flat">Plano</string>
@@ -238,6 +243,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Error de permisos</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Nombre</string>
     <string name="my_top_tracks">Más reproducidas</string>
     <string name="never">Nunca</string>
@@ -340,6 +351,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Puede aumentar la calidad de la portada del álbum, pero provoca tiempos de carga de imágenes más lentos. Solo habilite esto si tiene problemas con portadas de baja resolución</string>
     <string name="pref_summary_library_categories">Configure la visibilidad y el orden de las categorías de la biblioteca.</string>
     <string name="pref_summary_lock_screen">Usar los controles personalizados de Retro Music en la pantalla de bloqueo</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Detalles de licencia para software de código abierto</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navegar a la última pestaña usada al iniciar</string>
@@ -352,7 +364,6 @@
     <string name="pref_summary_toggle_volume">Mostrar controles de volumen si hay suficiente espacio disponible</string>
     <string name="pref_summary_wallpaper_accent">Extrae el color del fondo de pantalla</string>
     <string name="pref_summary_whitelist">Mostrar solo música de la carpeta /Music</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Mostrar la portada del álbum</string>
     <string name="pref_title_album_artists_only">Navegar por Artista del Álbum</string>
     <string name="pref_title_album_cover_style">Tema de la portada del álbum</string>
@@ -385,6 +396,7 @@
     <string name="pref_title_lock_screen">Controles en pantalla completa</string>
     <string name="pref_title_lyrics_screen_on">Mantener la pantalla encendida al mostrar letras</string>
     <string name="pref_title_lyrics_type">Tipos de letra</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Tema de la ventana de reproducción actual</string>
     <string name="pref_title_open_source_licences">Licencias de código abierto</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -400,7 +412,6 @@
     <string name="pref_title_toggle_volume">Controles de volumen</string>
     <string name="pref_title_wallpaper_accent">Color de acento del fondo de pantalla</string>
     <string name="pref_title_whitelist">Música en lista blanca</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema Negro, temas para la ventana de reproducción actual, Efecto Carrusel y mucho más..</string>
     <string name="profile">Perfil</string>
@@ -538,4 +549,6 @@
     <string name="you_have_to_select_at_least_one_category">Tienes que seleccionar al menos una categoría.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Serás redirigido al sitio web para reportar incidencias.</string>
     <string name="your_account_data_is_only_used_for_authentication">Los datos de tu cuenta sólo se utilizan para la autenticación.</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
