@@ -170,9 +170,14 @@
     <string name="edit_synced_lyrics">同期された歌詞を編集</string>
     <string name="empty">空の</string>
     <string name="equalizer">イコライザー</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">よくある質問</string>
     <string name="favorites">お気に入り</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">最後の曲を終了する</string>
     <string name="fit">フィット</string>
     <string name="flat">フラット</string>
@@ -237,6 +242,12 @@
     <string name="material">マテリアル</string>
     <string name="md_error_label">エラー</string>
     <string name="md_storage_perm_error">権限が付与されていません</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">名前</string>
     <string name="my_top_tracks">最も再生された</string>
     <string name="never">決して</string>
@@ -339,6 +350,7 @@
     <string name="pref_summary_ignore_media_store_artwork">アルバムジャケットのクオリティを上げますが、読み込みに時間がかかる場合があります。低解像度の画像で問題がある場合に有効です。</string>
     <string name="pref_summary_library_categories">ライブラリに表示される項目と、順番を変更する</string>
     <string name="pref_summary_lock_screen">Retro Musicのカスタムされたロック画面を使用する</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">オープンソースライセンスの詳細</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
@@ -351,7 +363,6 @@
     <string name="pref_summary_toggle_volume">再生画面に十分なスペースがある場合に音量コントロールを追加する</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">アルバムジャケットを表示</string>
     <string name="pref_title_album_artists_only">アルバムのアーティストを表示</string>
     <string name="pref_title_album_cover_style">アルバムカバーのテーマ</string>
@@ -384,6 +395,7 @@
     <string name="pref_title_lock_screen">フルスクリーンコントロール</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">再生中のテーマ</string>
     <string name="pref_title_open_source_licences">オープンソースライセンス</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -399,7 +411,6 @@
     <string name="pref_title_toggle_volume">ボリュームコントロール</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">プロフィール</string>
@@ -537,4 +548,6 @@
     <string name="you_have_to_select_at_least_one_category">少なくとも 1 つのカテゴリを選択する必要があります。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
