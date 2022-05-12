@@ -19,6 +19,7 @@ import android.content.*
 import android.os.Bundle
 import android.os.IBinder
 import androidx.lifecycle.lifecycleScope
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.toPlayCount
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -188,11 +189,15 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
     }
 
     override fun getPermissionsToRequest(): Array<String> {
-        return arrayOf(
+        return mutableListOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.BLUETOOTH
-        )
+            if (VersionUtils.hasS()) Manifest.permission.BLUETOOTH_CONNECT
+            else Manifest.permission.BLUETOOTH
+        ).apply {
+            if (!VersionUtils.hasQ()) {
+                add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }.toTypedArray()
     }
 
     private class MusicStateReceiver(activity: AbsMusicServiceActivity) : BroadcastReceiver() {

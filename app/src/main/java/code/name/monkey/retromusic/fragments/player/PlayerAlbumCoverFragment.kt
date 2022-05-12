@@ -20,11 +20,13 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.LYRICS_TYPE
 import code.name.monkey.retromusic.R
@@ -195,15 +197,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         }
     }
 
-    private fun setLRCViewColors(backgroundColor: Int) {
-        val primaryColor = MaterialValueHelper.getPrimaryTextColor(
-            requireContext(),
-            backgroundColor.isColorLight
-        )
-        val secondaryColor = MaterialValueHelper.getSecondaryDisabledTextColor(
-            requireContext(),
-            backgroundColor.isColorLight
-        )
+    private fun setLRCViewColors(@ColorInt primaryColor: Int, @ColorInt secondaryColor: Int) {
         lrcView.apply {
             setCurrentColor(primaryColor)
             setTimeTextColor(primaryColor)
@@ -277,19 +271,25 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     private fun notifyColorChange(color: MediaNotificationProcessor) {
         callbacks?.onColorChanged(color)
-        setLRCViewColors(
-            when (PreferenceUtil.nowPlayingScreen) {
-                Adaptive, Fit, Plain, Simple -> surfaceColor()
-                Flat, Normal, Material -> if (PreferenceUtil.isAdaptiveColor) {
-                    color.backgroundColor
-                } else {
-                    surfaceColor()
-                }
-                Color, Classic -> color.primaryTextColor
-                Blur -> Color.BLACK
-                else -> surfaceColor()
-            }
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(
+            requireContext(),
+            surfaceColor().isColorLight
         )
+        val secondaryColor = MaterialValueHelper.getSecondaryDisabledTextColor(
+            requireContext(),
+            surfaceColor().isColorLight
+        )
+
+        when (PreferenceUtil.nowPlayingScreen) {
+            Flat, Normal, Material -> if (PreferenceUtil.isAdaptiveColor) {
+                setLRCViewColors(color.primaryTextColor, color.secondaryTextColor)
+            } else {
+                setLRCViewColors(primaryColor, secondaryColor)
+            }
+            Color, Classic -> setLRCViewColors(color.primaryTextColor, color.secondaryTextColor)
+            Blur -> setLRCViewColors(Color.WHITE, ColorUtil.withAlpha(Color.WHITE, 0.5f))
+            else -> setLRCViewColors(primaryColor, secondaryColor)
+        }
     }
 
     fun setCallbacks(listener: Callbacks) {
@@ -308,5 +308,5 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     private val lyricViewNpsList =
-        listOf(Blur, Classic, Color, Flat, Material, Normal, Plain, Simple)
+        listOf(Blur, Classic, Color, Flat, Material, MD3, Normal, Plain, Simple)
 }

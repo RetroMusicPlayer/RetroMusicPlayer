@@ -160,7 +160,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     private fun setupBottomSheet() {
         bottomSheetBehavior = from(binding.slidingPanel)
         bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
-        bottomSheetBehavior.isHideable = true
+        if (PreferenceUtil.swipeDownToDismiss) bottomSheetBehavior.isHideable = true
         setMiniPlayerAlphaProgress(0F)
     }
 
@@ -298,7 +298,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             navigationBarColor = surfaceColor()
             setTaskDescColor(paletteColor)
             val isColorLight = paletteColor.isColorLight
-            if (PreferenceUtil.isAdaptiveColor && (nowPlayingScreen == Normal || nowPlayingScreen == Flat ||  nowPlayingScreen == Material)) {
+            if (PreferenceUtil.isAdaptiveColor && (nowPlayingScreen == Normal || nowPlayingScreen == Flat || nowPlayingScreen == Material)) {
                 setLightNavigationBar(true)
                 setLightStatusBar(isColorLight)
             } else if (nowPlayingScreen == Card || nowPlayingScreen == Blur || nowPlayingScreen == BlurCard) {
@@ -357,7 +357,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     fun setBottomNavVisibility(
         visible: Boolean,
         animate: Boolean = false,
-        hideBottomSheet: Boolean = MusicPlayerRemote.playingQueue.isEmpty()
+        hideBottomSheet: Boolean = MusicPlayerRemote.playingQueue.isEmpty(),
     ) {
         if (isInOneTabMode) {
             hideBottomSheet(
@@ -391,7 +391,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     fun hideBottomSheet(
         hide: Boolean,
         animate: Boolean = false,
-        isBottomNavVisible: Boolean = bottomNavigationView.isVisible
+        isBottomNavVisible: Boolean = bottomNavigationView.isVisible,
     ) {
         val heightOfBar =
             windowInsets.safeGetBottomInsets() +

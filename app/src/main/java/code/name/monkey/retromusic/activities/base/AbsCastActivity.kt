@@ -60,7 +60,8 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
                 mCastSession = castSession
                 webServer.start()
                 mCastSession?.remoteMediaClient?.let {
-                    loadCastQueue(it.mediaQueue.indexOfItemWithId(it.currentItem?.itemId ?: 0), it.approximateStreamPosition)
+                    loadCastQueue(it.mediaQueue.indexOfItemWithId(it.currentItem?.itemId ?: 0),
+                        it.approximateStreamPosition)
                 }
 
                 MusicPlayerRemote.isCasting = true
@@ -126,7 +127,7 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
         progress: Long = MusicPlayerRemote.songProgressMillis.toLong(),
     ) {
         mCastSession?.let {
-            if (!MusicPlayerRemote.playingQueue.isNullOrEmpty()) {
+            if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 CastHelper.castQueue(
                     it,
                     MusicPlayerRemote.playingQueue,

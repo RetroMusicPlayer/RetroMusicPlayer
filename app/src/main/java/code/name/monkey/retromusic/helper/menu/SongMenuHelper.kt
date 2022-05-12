@@ -55,10 +55,9 @@ object SongMenuHelper : KoinComponent {
         when (menuItemId) {
             R.id.action_set_as_ringtone -> {
                 if (RingtoneManager.requiresDialog(activity)) {
-                    RingtoneManager.getDialog(activity)
+                    RingtoneManager.showDialog(activity)
                 } else {
-                    val ringtoneManager = RingtoneManager(activity)
-                    ringtoneManager.setRingtone(song)
+                    RingtoneManager.setRingtone(activity, song)
                 }
                 return true
             }

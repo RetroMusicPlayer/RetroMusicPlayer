@@ -22,6 +22,7 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.core.content.edit
 import code.name.monkey.retromusic.App
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.model.Artist
@@ -56,7 +57,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
                     saveImage(context, artist, it)
                 }
                 .onFailure {
-                    context.showToast("Load Failed")
+                    context.showToast(R.string.error_load_failed)
                 }
         }
     }

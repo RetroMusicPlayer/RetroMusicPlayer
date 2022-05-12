@@ -17,12 +17,10 @@ package code.name.monkey.retromusic.fragments.player.md3
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
-import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -108,11 +106,7 @@ class MD3PlaybackControlsFragment :
                 MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
 
-        val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
-            color.primaryTextColor
-        } else {
-            ThemeStore.accentColor(requireContext())
-        }.ripAlpha()
+        val colorFinal = accentColor().ripAlpha()
 
         TintHelper.setTintAuto(
             binding.playPauseButton,
@@ -198,22 +192,9 @@ class MD3PlaybackControlsFragment :
         setUpPlayPauseFab()
     }
 
-    public override fun show() {
-        binding.playPauseButton.animate()
-            .scaleX(1f)
-            .scaleY(1f)
-            .rotation(360f)
-            .setInterpolator(DecelerateInterpolator())
-            .start()
-    }
+    public override fun show() {}
 
-    public override fun hide() {
-        binding.playPauseButton.apply {
-            scaleX = 0f
-            scaleY = 0f
-            rotation = 0f
-        }
-    }
+    public override fun hide() {}
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
         binding.progressSlider.max = total
