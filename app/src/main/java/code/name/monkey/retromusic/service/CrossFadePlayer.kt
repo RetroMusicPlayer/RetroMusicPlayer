@@ -14,7 +14,9 @@ import androidx.core.net.toUri
 import code.name.monkey.appthemehelper.util.VersionUtils.hasMarshmallow
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimator
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
@@ -124,18 +126,26 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     override val isPlaying: Boolean
         get() = mIsInitialized && getCurrentPlayer()?.isPlaying == true
 
-    override fun setDataSource(path: String, force: Boolean): Boolean {
+    override fun setDataSource(
+        song: Song,
+        force: Boolean,
+        completion: (success: Boolean) -> Unit,
+    ) {
         cancelFade()
         if (force) hasDataSource = false
         mIsInitialized = false
         /* We've already set DataSource if initialized is true in setNextDataSource */
         if (!hasDataSource) {
-            getCurrentPlayer()?.let { mIsInitialized = setDataSourceImpl(it, path) }
+            getCurrentPlayer()?.let {
+                setDataSourceImpl(it, song.uri.toString()) { success ->
+                    mIsInitialized = success
+                    completion(success)
+                }
+            }
             hasDataSource = true
         } else {
             mIsInitialized = true
         }
-        return mIsInitialized
     }
 
     override fun setNextDataSource(path: String?) {}
@@ -148,9 +158,9 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     private fun setDataSourceImpl(
         player: MediaPlayer,
         path: String,
-    ): Boolean {
+        completion: (success: Boolean) -> Unit,
+    ) {
         player.reset()
-        player.setOnPreparedListener(null)
         try {
             if (path.startsWith("content://")) {
                 player.setDataSource(context, path.toUri())
@@ -160,20 +170,18 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
             player.setAudioAttributes(
                 AudioAttributes.Builder().setLegacyStreamType(AudioManager.STREAM_MUSIC).build()
             )
-            player.prepare()
-            player.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
+            player.setPlaybackSpeedPitch(PreferenceUtil.playbackSpeed, PreferenceUtil.playbackPitch)
+            player.setOnPreparedListener {
+                player.setOnPreparedListener(null)
+                completion(true)
+            }
+            player.prepareAsync()
         } catch (e: Exception) {
+            completion(false)
             e.printStackTrace()
-            return false
         }
         player.setOnCompletionListener(this)
         player.setOnErrorListener(this)
-        val intent = Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION)
-        intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId)
-        intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.packageName)
-        intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
-        context.sendBroadcast(intent)
-        return true
     }
 
     override fun setAudioSessionId(sessionId: Int): Boolean {
@@ -321,9 +329,11 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
             getNextPlayer()?.let { player ->
                 val nextSong = MusicPlayerRemote.nextSong
                 if (nextSong != null) {
-                    setDataSourceImpl(player, MusicUtil.getSongFileUri(nextSong.id).toString())
-                    // Switch to other player / Crossfade only if next song exists
-                    switchPlayer()
+                    setDataSourceImpl(player,
+                        MusicUtil.getSongFileUri(nextSong.id).toString()) { success ->
+                        // Switch to other player (Crossfade) only if next song exists
+                        if (success) switchPlayer()
+                    }
                 }
             }
         }
