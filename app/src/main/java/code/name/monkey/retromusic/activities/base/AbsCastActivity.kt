@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.activities.base
 
 import android.os.Bundle
-import code.name.monkey.retromusic.cast.CastHelper
 import code.name.monkey.retromusic.cast.RetroSessionManagerListener
 import code.name.monkey.retromusic.cast.RetroWebServer
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -30,20 +29,7 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
             override fun onSessionStarted(castSession: CastSession, p1: String) {
                 invalidateOptionsMenu()
                 mCastSession = castSession
-                loadCastQueue()
-                MusicPlayerRemote.isCasting = true
-                setAllowDragging(false)
-                collapsePanel()
-            }
-
-            override fun onSessionEnding(castSession: CastSession) {
-                MusicPlayerRemote.isCasting = false
-                castSession.remoteMediaClient?.let {
-                    val position = it.mediaQueue.indexOfItemWithId(it.currentItem?.itemId ?: 0)
-                    val progress = it.approximateStreamPosition
-                    MusicPlayerRemote.position = position
-                    MusicPlayerRemote.seekTo(progress.toInt())
-                }
+                MusicPlayerRemote.switchToRemotePlayback(castSession)
             }
 
             override fun onSessionEnded(castSession: CastSession, p1: Int) {
@@ -51,7 +37,7 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
                 if (mCastSession == castSession) {
                     mCastSession = null
                 }
-                setAllowDragging(true)
+                MusicPlayerRemote.switchToLocalPlayback()
                 webServer.stop()
             }
 
@@ -59,14 +45,7 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
                 invalidateOptionsMenu()
                 mCastSession = castSession
                 webServer.start()
-                mCastSession?.remoteMediaClient?.let {
-                    loadCastQueue(it.mediaQueue.indexOfItemWithId(it.currentItem?.itemId ?: 0),
-                        it.approximateStreamPosition)
-                }
-
-                MusicPlayerRemote.isCasting = true
-                setAllowDragging(false)
-                collapsePanel()
+                MusicPlayerRemote.switchToRemotePlayback(castSession)
             }
 
             override fun onSessionSuspended(castSession: CastSession, p1: Int) {
@@ -74,8 +53,7 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
                 if (mCastSession == castSession) {
                     mCastSession = null
                 }
-                MusicPlayerRemote.isCasting = false
-                setAllowDragging(true)
+                MusicPlayerRemote.switchToLocalPlayback()
                 webServer.stop()
             }
         }
@@ -119,29 +97,6 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
                 CastSession::class.java
             )
             mCastSession = null
-        }
-    }
-
-    fun loadCastQueue(
-        position: Int = MusicPlayerRemote.position,
-        progress: Long = MusicPlayerRemote.songProgressMillis.toLong(),
-    ) {
-        mCastSession?.let {
-            if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-                CastHelper.castQueue(
-                    it,
-                    MusicPlayerRemote.playingQueue,
-                    position,
-                    progress
-                )
-            }
-        }
-    }
-
-    override fun onQueueChanged() {
-        super.onQueueChanged()
-        if (playServicesAvailable) {
-            loadCastQueue()
         }
     }
 }

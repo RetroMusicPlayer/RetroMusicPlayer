@@ -393,9 +393,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         animate: Boolean = false,
         isBottomNavVisible: Boolean = bottomNavigationView.isVisible,
     ) {
-        val heightOfBar =
-            windowInsets.safeGetBottomInsets() +
-                    if (MusicPlayerRemote.isCasting) dip(R.dimen.cast_mini_player_height) else dip(R.dimen.mini_player_height)
+        val heightOfBar = windowInsets.safeGetBottomInsets() + dip(R.dimen.mini_player_height)
         val heightOfBarWithTabs = heightOfBar + dip(R.dimen.bottom_nav_height)
         if (hide) {
             bottomSheetBehavior.peekHeight = -windowInsets.safeGetBottomInsets()

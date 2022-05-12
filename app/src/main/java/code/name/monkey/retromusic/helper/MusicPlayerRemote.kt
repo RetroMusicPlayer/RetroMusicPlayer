@@ -30,6 +30,7 @@ import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
+import com.google.android.gms.cast.framework.CastSession
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -42,14 +43,6 @@ object MusicPlayerRemote : KoinComponent {
     var musicService: MusicService? = null
 
     private val songRepository by inject<SongRepository>()
-
-    var isCasting: Boolean = false
-        set(value) {
-            field = value
-            if (value) {
-                musicService?.quit()
-            }
-        }
 
     @JvmStatic
     val isPlaying: Boolean
@@ -470,6 +463,14 @@ object MusicPlayerRemote : KoinComponent {
     private fun getSongIdFromMediaProvider(uri: Uri): String {
         return DocumentsContract.getDocumentId(uri).split(":".toRegex())
             .dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+    }
+
+    fun switchToRemotePlayback(castSession: CastSession) {
+        musicService?.switchToRemotePlayback(castSession)
+    }
+
+    fun switchToLocalPlayback() {
+        musicService?.switchToLocalPlayback()
     }
 
     class ServiceBinder internal constructor(private val mCallback: ServiceConnection?) :
