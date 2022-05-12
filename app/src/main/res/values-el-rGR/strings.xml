@@ -171,9 +171,14 @@
     <string name="edit_synced_lyrics">Επεξεργασία Συγχρονισμένων Στίχων</string>
     <string name="empty">Κενό</string>
     <string name="equalizer">Ισοσταθμιστής</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">Συχνές ερωτήσεις</string>
     <string name="favorites">Αγαπημένα</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Τελειώσε το τελευταίο κομμάτι</string>
     <string name="fit">Προσαρμογή</string>
     <string name="flat">Επίπεδο</string>
@@ -238,6 +243,12 @@
     <string name="material">Υλικό</string>
     <string name="md_error_label">Σφάλμα</string>
     <string name="md_storage_perm_error">Σφάλμα άδειας</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Το Όνομά μου</string>
     <string name="my_top_tracks">Τα Κορυφαία Κομμάτια μου</string>
     <string name="never">Ποτέ</string>
@@ -340,6 +351,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Μπορεί να αυξήσει την ποιότητα των εξωφύλλων άλμπουμ, αλλά προκαλεί αργή φόρτωση εικόνων. Ενεργοποιήστε αυτή την επίλογη μόνο εαν αντιμετωπίζετε προβλήματα με εξώφυλλα χαμηλής ανάλυσης.</string>
     <string name="pref_summary_library_categories">Ρυθμίστε την ορατότητα και τη σειρά των κατηγοριών βιβλιοθήκης.</string>
     <string name="pref_summary_lock_screen">Ενεργοποίηση διακοπτών ρύθμισης στην οθόνη κλειδώματος.</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Λεπτομέρειες άδειας για τη χρήση open source λογισμικού</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Μεταβείτε στην τελευταία χρησιμοποιημένη καρτέλα κατά την έναρξη</string>
@@ -352,7 +364,6 @@
     <string name="pref_summary_toggle_volume">Εαν υπάρχει χώρος στην οθόνη αναπαραγωγής, ενεργοποιήστε τον πίνακα ελέγχου έντασης.</string>
     <string name="pref_summary_wallpaper_accent">Εξαγωγή απόχρωσης από την ταπετσαρία</string>
     <string name="pref_summary_whitelist">Εμφάνιση μουσικής μόνο από το φάκελο /Μουσική</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Εμφάνιση εξωφύλλου άλμπουμ.</string>
     <string name="pref_title_album_artists_only">Πλοήγηση κατά Καλλιτέχνη Άλμπουμ</string>
     <string name="pref_title_album_cover_style">Θέμα εξώφυλλου άλμπουμ</string>
@@ -385,6 +396,7 @@
     <string name="pref_title_lock_screen">Full screen Ρυθμίσεις</string>
     <string name="pref_title_lyrics_screen_on">Να παραμένει ενεργή η οθόνη όταν εμφανίζονται οι στίχοι</string>
     <string name="pref_title_lyrics_type">Τύπος στίχων</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Εμφάνιση</string>
     <string name="pref_title_open_source_licences">Άδειες λογισμικού open source</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -400,7 +412,6 @@
     <string name="pref_title_toggle_volume">Πίνακας Ελέγχου Έντασης</string>
     <string name="pref_title_wallpaper_accent">Απόχρωση ταπετσαρίας</string>
     <string name="pref_title_whitelist">Λίστα επιτρεπόμενων κομματιών</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Μαύρο θέμα, Θέματα στο Τώρα παίζει, εφέ Καρουσέλ και πολλά άλλα..</string>
     <string name="profile">Προφίλ</string>
@@ -538,4 +549,6 @@
     <string name="you_have_to_select_at_least_one_category">Πρέπει να επιλέξετε τουλάχιστον μία κατηγορία.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Θα προωθηθείτε στον ιστότοπο παρακολούθησης ζητημάτων.</string>
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
 </resources>
