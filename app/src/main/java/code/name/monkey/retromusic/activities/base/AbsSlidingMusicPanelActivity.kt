@@ -160,7 +160,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
     private fun setupBottomSheet() {
         bottomSheetBehavior = from(binding.slidingPanel)
         bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
-        if (PreferenceUtil.swipeDownToDismiss) bottomSheetBehavior.isHideable = true
+        bottomSheetBehavior.isHideable = PreferenceUtil.swipeDownToDismiss
         setMiniPlayerAlphaProgress(0F)
     }
 
