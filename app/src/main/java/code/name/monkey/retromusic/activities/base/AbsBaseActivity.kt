@@ -95,7 +95,9 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
 
     protected fun hasPermissions(): Boolean {
         for (permission in permissions) {
-            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this,
+                    permission) != PackageManager.PERMISSION_GRANTED
+            ) {
                 return false
             }
         }
@@ -105,7 +107,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST) {
@@ -122,6 +124,22 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
                             Snackbar.LENGTH_INDEFINITE
                         )
                             .setAction(R.string.action_grant) { requestPermissions() }
+                            .setActionTextColor(accentColor()).show()
+                    } else if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            this@AbsBaseActivity, Manifest.permission.BLUETOOTH_CONNECT
+                        )
+                    ) {
+                        // User has deny from permission dialog
+                        Snackbar.make(
+                            snackBarContainer,
+                            R.string.permission_bluetooth_denied,
+                            Snackbar.LENGTH_INDEFINITE
+                        )
+                            .setAction(R.string.action_grant) {
+                                ActivityCompat.requestPermissions(this,
+                                    arrayOf(Manifest.permission.BLUETOOTH_CONNECT),
+                                    PERMISSION_REQUEST)
+                            }
                             .setActionTextColor(accentColor()).show()
                     } else {
                         // User has deny permission and checked never show permission dialog so you can redirect to Application settings page
@@ -154,7 +172,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
         const val PERMISSION_REQUEST = 100
     }
 
-    // this  lets keyboard close when clicked in backgroud
+    // this lets keyboard close when clicked in background
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
             val v = currentFocus

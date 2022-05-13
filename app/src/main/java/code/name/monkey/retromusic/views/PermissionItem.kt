@@ -39,7 +39,7 @@ class PermissionItem @JvmOverloads constructor(
             binding.number.backgroundTintList =
                 ColorStateList.valueOf(ColorUtil.withAlpha(color, 0.22f))
 
-            binding.button.accentOutlineColor()
+            if (!isInEditMode) binding.button.accentOutlineColor()
         }
     }
 

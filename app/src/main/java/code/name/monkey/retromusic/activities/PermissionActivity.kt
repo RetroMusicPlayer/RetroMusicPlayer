@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.activities
 
 import android.Manifest
+import android.Manifest.permission.BLUETOOTH_CONNECT
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
@@ -57,6 +58,15 @@ class PermissionActivity : AbsMusicServiceActivity() {
             }
         }
 
+        if (VersionUtils.hasS()) {
+            binding.bluetoothPermission.show()
+            binding.bluetoothPermission.setButtonClick {
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(BLUETOOTH_CONNECT),
+                    PERMISSION_REQUEST)
+            }
+        }
+
         binding.finish.accentBackgroundColor()
         binding.finish.setOnClickListener {
             if (hasPermissions()) {
@@ -83,6 +93,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
 
     override fun onResume() {
         super.onResume()
+        binding.finish.isEnabled = hasStoragePermission()
         if (hasStoragePermission()) {
             binding.storagePermission.checkImage.isVisible = true
             binding.storagePermission.checkImage.imageTintList =
@@ -95,11 +106,24 @@ class PermissionActivity : AbsMusicServiceActivity() {
                     ColorStateList.valueOf(accentColor())
             }
         }
+        if (VersionUtils.hasS()) {
+            if (hasBluetoothPermission()) {
+                binding.bluetoothPermission.checkImage.isVisible = true
+                binding.bluetoothPermission.checkImage.imageTintList =
+                    ColorStateList.valueOf(accentColor())
+            }
+        }
     }
 
     private fun hasStoragePermission(): Boolean {
         return ActivityCompat.checkSelfPermission(this,
             Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun hasBluetoothPermission(): Boolean {
+        return ActivityCompat.checkSelfPermission(this,
+            BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

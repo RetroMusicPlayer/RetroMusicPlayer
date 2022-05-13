@@ -54,7 +54,6 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
@@ -264,11 +263,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         binding.playbackControlsFragment.songInfo.setTextColor(lastDisabledPlaybackControlsColor)
 
         volumeFragment?.setTintableColor(lastPlaybackControlsColor.ripAlpha())
-        ViewUtil.setProgressDrawable(
-            binding.playbackControlsFragment.progressSlider,
-            lastPlaybackControlsColor.ripAlpha(),
-            true
-        )
+
+        binding.playbackControlsFragment.progressSlider.applyColor(lastPlaybackControlsColor.ripAlpha())
 
         updateRepeatState()
         updateShuffleState()
