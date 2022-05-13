@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.util
 import android.content.Context
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.core.content.res.use
@@ -340,8 +341,14 @@ object PreferenceUtil {
             "always" -> true
             "only_wifi" -> {
                 val connectivityManager = context.getSystemService<ConnectivityManager>()
-                val netInfo = connectivityManager?.activeNetworkInfo
-                netInfo != null && netInfo.type == ConnectivityManager.TYPE_WIFI && netInfo.isConnectedOrConnecting
+                if (VersionUtils.hasMarshmallow()) {
+                    val network = connectivityManager?.activeNetwork
+                    val capabilities = connectivityManager?.getNetworkCapabilities(network)
+                    capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                } else {
+                    val netInfo = connectivityManager?.activeNetworkInfo
+                    netInfo != null && netInfo.type == ConnectivityManager.TYPE_WIFI && netInfo.isConnectedOrConnecting
+                }
             }
             "never" -> false
             else -> false
@@ -677,6 +684,8 @@ object PreferenceUtil {
     val crossFadeDuration
         get() = sharedPreferences
             .getInt(CROSS_FADE_DURATION, 0)
+
+    val isCrossfadeEnabled get() = crossFadeDuration > 0
 
     val materialYou
         get() = sharedPreferences.getBoolean(MATERIAL_YOU, VersionUtils.hasS())
