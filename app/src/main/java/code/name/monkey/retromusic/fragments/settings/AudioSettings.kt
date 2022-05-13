@@ -46,7 +46,7 @@ class AudioSettings : AbsSettingsFragment() {
         }
         val bluetoothPreference: Preference? = findPreference(BLUETOOTH_PLAYBACK)
         if (VersionUtils.hasS()) {
-            bluetoothPreference?.setOnPreferenceChangeListener { preference, newValue ->
+            bluetoothPreference?.setOnPreferenceChangeListener { _, newValue ->
                 if (newValue as Boolean) {
                     if (ActivityCompat.checkSelfPermission(requireContext(),
                             BLUETOOTH_CONNECT) != PERMISSION_GRANTED

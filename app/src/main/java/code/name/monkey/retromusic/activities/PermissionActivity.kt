@@ -50,7 +50,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
         if (VersionUtils.hasMarshmallow()) {
             binding.audioPermission.show()
             binding.audioPermission.setButtonClick {
-                if (hasAudioPermission()) {
+                if (!hasAudioPermission()) {
                     val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
                     intent.data = ("package:" + applicationContext.packageName).toUri()
                     startActivity(intent)
