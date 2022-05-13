@@ -244,12 +244,12 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="material">Material</string>
     <string name="md_error_label">Çewtî</string>
     <string name="md_storage_perm_error">Çewtiya mafdayînê</string>
-    <string name="message_backup_create_success">Backup created successfully.</string>
-    <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
-    <string name="message_restore_success">Restore completed successfully.</string>
-    <string name="message_updated">Updated</string>
-    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
+    <string name="message_backup_create_success">Hîlanîn bi serkeftî hate çêkirin.</string>
+    <string name="message_limit_tabs">Ji 5 hêmanan ne bêtir e</string>
+    <string name="message_pro_feature">%s taybetmendiyeke Pro ye.</string>
+    <string name="message_restore_success">Vegerandin bi serkeftî qediya.</string>
+    <string name="message_updated">Rojanekirî ye</string>
+    <string name="message_welcome"><![CDATA[Silav! <br>Tu bi xêr hatî %s]]></string>
     <string name="my_name">Nav</string>
     <string name="my_top_tracks">Herî pir lêdayî</string>
     <string name="never">Tu car</string>
@@ -551,6 +551,6 @@ têne guhertin</string>
     <string name="you_have_to_select_at_least_one_category">Divê tu herî kêm yek beş hilbijêrî.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Tu yê ji bo malpera şopandina pirsgirêkê werî beralîkirin.</string>
     <string name="your_account_data_is_only_used_for_authentication">Daneyên ajimêra te tenê ji bo pejirandinê têne bikaranîn.</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="pref_summary_swipe_to_dismiss">Berjêr kaş bike da ku lêdera mini paşguh bikî</string>
+    <string name="pref_title_swipe_to_dismiss">Paşguh bike bi riya kaşandina berjêr</string>
 </resources>
