@@ -179,10 +179,9 @@ class LibraryViewModel(
 
     fun shuffleSongs() = viewModelScope.launch(IO) {
         val songs = repository.allSongs()
-        MusicPlayerRemote.openAndShuffleQueue(
-            songs,
-            true
-        )
+        withContext(Main) {
+            MusicPlayerRemote.openAndShuffleQueue(songs, true)
+        }
     }
 
     fun renameRoomPlaylist(playListId: Long, name: String) = viewModelScope.launch(IO) {
