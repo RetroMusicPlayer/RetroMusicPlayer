@@ -89,6 +89,7 @@
     <string name="biography">Tiểu sử</string>
     <string name="black_theme_name">Đen hoàn toàn</string>
     <string name="blacklist">Danh sách đen</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
     <string name="blur">Làm mờ</string>
     <string name="blur_card">Thẻ mờ</string>
     <string name="bug_report_failed">Không thể gửi báo cáo</string>
@@ -193,6 +194,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="genres">Thể loại</string>
     <string name="git_hub_summary">Tham gia phát triển dự án trên Github</string>
     <string name="gradient">Gradient</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -230,6 +232,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="labeled">Được dán nhãn</string>
     <string name="last_added">Đã thêm gần đây</string>
     <string name="last_song">Bài cuối</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Danh mục thư viện</string>
     <string name="licenses">Giấy phép</string>
     <string name="light_theme_name">Hoàn toàn trắng</string>
@@ -288,6 +291,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="paste_lyrics_here">Dán lời ở đây</string>
     <string name="paste_timeframe_lyrics_here">Dán lời theo thời gian ở đây</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Quyền truy cập bộ nhớ ngoài bị từ chối.</string>
     <string name="permission_summary">Ứng dụng cần quyền truy cập bộ nhớ thiết bị của bạn để phát nhạc</string>
     <string name="permission_title">Truy cập bộ nhớ</string>
@@ -357,6 +361,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Chế độ hoà nhập</string>
     <string name="pref_summary_toggle_headset">Tự động phát nhạc khi kết nối tai nghe</string>
     <string name="pref_summary_toggle_shuffle">Chế độ phát ngẫu nhiên sẽ tắt khi phát danh sách bài hát mới</string>
@@ -403,6 +408,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Chế độ tiêu đề thẻ</string>
     <string name="pref_title_toggle_carousel_effect">Hiệu ứng quay vòng</string>
     <string name="pref_title_toggle_full_screen">Toàn màn hình</string>
@@ -548,6 +554,5 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="you_have_to_select_at_least_one_category">Bạn phải chọn ít nhất một danh mục.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Bạn sẽ được chuyển tiếp đến trang web theo dõi vấn đề.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="bluetooth_title">Nearby devices</string>
 </resources>
