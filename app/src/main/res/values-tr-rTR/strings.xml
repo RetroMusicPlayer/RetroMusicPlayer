@@ -91,6 +91,7 @@
     <string name="biography">Yaşam öyküsü</string>
     <string name="black_theme_name">Sade Siyah</string>
     <string name="blacklist">Kara Liste</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
     <string name="blur">Bulanıklık</string>
     <string name="blur_card">Bulanık kart</string>
     <string name="bug_report_failed">Bildiri gönderilemiyor</string>
@@ -194,6 +195,7 @@
     <string name="genres">Janrlar</string>
     <string name="git_hub_summary">Projeyi GitHub\'da çatalla</string>
     <string name="gradient">Gradyan</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -231,6 +233,7 @@
     <string name="labeled">Etiketli</string>
     <string name="last_added">Son eklenen</string>
     <string name="last_song">Son şarkı</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Kütüphane kategorileri</string>
     <string name="licenses">Lisanslar</string>
     <string name="light_theme_name">Açık Beyaz</string>
@@ -289,6 +292,7 @@
     <string name="paste_lyrics_here">Sözleri buraya yapıştır</string>
     <string name="paste_timeframe_lyrics_here">Zaman dilimli şarkı sözlerini buraya yapıştır</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Harici depolama izni reddedildi.</string>
     <string name="permission_summary">Uygulamanın müzik çalması için cihazınızın depolama erişimine ihtiyacı var</string>
     <string name="permission_title">Depolama Erişimi</string>
@@ -358,6 +362,7 @@
     <string name="pref_summary_show_lyrics">Albüm kapağının üstünde senkronize edilmiş sözleri göster</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
     <string name="pref_summary_toggle_headset">Kulaklık bağlandıktan hemen sonra çalmaya başla</string>
     <string name="pref_summary_toggle_shuffle">Yeni bir şarkı listesi çalınırken karıştırma modu kapanacak</string>
@@ -404,6 +409,7 @@
     <string name="pref_title_show_lyrics">Şarkı sözlerini göster</string>
     <string name="pref_title_suggestions">Önerileri göster</string>
     <string name="pref_title_swipe_anywhere_now_playing">Şarkıyı değiştirmek için herhangi bir yere kaydırın</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Sekme başlıkları modu</string>
     <string name="pref_title_toggle_carousel_effect">Atlıkarınca efekti</string>
     <string name="pref_title_toggle_full_screen">Uygulamayı tam ekran yapın</string>
@@ -549,6 +555,5 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="bluetooth_title">Nearby devices</string>
 </resources>
