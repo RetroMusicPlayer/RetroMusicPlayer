@@ -91,6 +91,7 @@
     <string name="biography">Biografie</string>
     <string name="black_theme_name">Sehr schwarz</string>
     <string name="blacklist">Schwarze Liste</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
     <string name="blur">Unschärfe</string>
     <string name="blur_card">Karte (Unschärfe)</string>
     <string name="bug_report_failed">Fehler beim Melden</string>
@@ -194,6 +195,7 @@
     <string name="genres">Genres</string>
     <string name="git_hub_summary">Projekt von GitHub forken</string>
     <string name="gradient">Farbverlauf</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -231,6 +233,7 @@
     <string name="labeled">Beschriftet</string>
     <string name="last_added">Zuletzt hinzugefügt</string>
     <string name="last_song">Letzter Song</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Bibliothekkategorien</string>
     <string name="licenses">Lizenzen</string>
     <string name="light_theme_name">Sehr weiß</string>
@@ -289,6 +292,7 @@
     <string name="paste_lyrics_here">Songtext hier einfügen</string>
     <string name="paste_timeframe_lyrics_here">Songtexte mit Zeitfenster hier einfügen</string>
     <string name="peek">Vorschau</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Berechtigung für den Zugriff auf externen Speicher verweigert.</string>
     <string name="permission_summary">Die App benötigt die Berechtigung für den Zugriff auf den Gerätespeicher, um Musik abspielen zu können</string>
     <string name="permission_title">Speicherzugriff</string>
@@ -358,6 +362,7 @@
     <string name="pref_summary_show_lyrics">Synchronisierte Songtexte über Albumcover anzeigen</string>
     <string name="pref_summary_suggestions">Neue Musik-Mix auf dem Startbildschirm anzeigen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Songwechsel durch Wischen auf dem \"Spielt gerade\" Bildschirm</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Schalte den immersiven Modus ein.</string>
     <string name="pref_summary_toggle_headset">Mit Wiedergabe starten, sobald Kopfhörer verbunden sind.</string>
     <string name="pref_summary_toggle_shuffle">Shufflemodus wird ausgeschaltet, sobald neue Wiedergabe gestartet wird</string>
@@ -404,6 +409,7 @@
     <string name="pref_title_show_lyrics">Songtext anzeigen</string>
     <string name="pref_title_suggestions">Vorschläge anzeigen</string>
     <string name="pref_title_swipe_anywhere_now_playing">Wische irgendwo um Titel zu wechseln</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Beschriftung der Navigationselemente</string>
     <string name="pref_title_toggle_carousel_effect">Karussell-Effekt</string>
     <string name="pref_title_toggle_full_screen">Vollbild App</string>
@@ -549,6 +555,5 @@
     <string name="you_have_to_select_at_least_one_category">Du musst mindestens eine Kategorie auswählen</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Du wirst auf die Issue Tracker-Seite weitergeleitet.</string>
     <string name="your_account_data_is_only_used_for_authentication">Deine Accountdaten werden ausschließlich zur Authentifizierung genutzt</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="bluetooth_title">Nearby devices</string>
 </resources>
