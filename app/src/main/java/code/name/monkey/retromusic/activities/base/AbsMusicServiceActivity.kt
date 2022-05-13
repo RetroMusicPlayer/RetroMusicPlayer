@@ -189,11 +189,7 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
     }
 
     override fun getPermissionsToRequest(): Array<String> {
-        return mutableListOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            if (VersionUtils.hasS()) Manifest.permission.BLUETOOTH_CONNECT
-            else Manifest.permission.BLUETOOTH
-        ).apply {
+        return mutableListOf(Manifest.permission.READ_EXTERNAL_STORAGE).apply {
             if (!VersionUtils.hasQ()) {
                 add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }

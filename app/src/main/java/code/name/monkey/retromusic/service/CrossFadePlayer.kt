@@ -6,10 +6,12 @@ import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.PlaybackParams
 import android.media.audiofx.AudioEffect
 import android.os.PowerManager
 import android.util.Log
 import androidx.core.net.toUri
+import code.name.monkey.appthemehelper.util.VersionUtils.hasMarshmallow
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -18,6 +20,8 @@ import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
+import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 import kotlinx.coroutines.*
 
 /** @author Prathamesh M */
@@ -138,7 +142,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
 
     /**
      * @param player The {@link MediaPlayer} to use
-     * @param path   The path of the file, or the http/rtsp URL of the stream you want to play
+     * @param path The path of the file, or the http/rtsp URL of the stream you want to play
      * @return True if the <code>player</code> has been prepared and is ready to play, false otherwise
      */
     private fun setDataSourceImpl(
@@ -157,6 +161,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
                 AudioAttributes.Builder().setLegacyStreamType(AudioManager.STREAM_MUSIC).build()
             )
             player.prepare()
+            player.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
         } catch (e: Exception) {
             e.printStackTrace()
             return false
@@ -339,6 +344,20 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
 
     override fun setCrossFadeDuration(duration: Int) {
         crossFadeDuration = duration
+    }
+
+    override fun setPlaybackSpeedPitch(speed: Float, pitch: Float) {
+        getCurrentPlayer()?.setPlaybackSpeedPitch(speed, pitch)
+    }
+
+    private fun MediaPlayer.setPlaybackSpeedPitch(speed: Float, pitch: Float) {
+        if (hasMarshmallow()) {
+            val wasPlaying: Boolean = isPlaying
+            playbackParams = PlaybackParams().setSpeed(speed).setPitch(pitch)
+            if (!wasPlaying) {
+                if (isPlaying) pause()
+            }
+        }
     }
 
     companion object {

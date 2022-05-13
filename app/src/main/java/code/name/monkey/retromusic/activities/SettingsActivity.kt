@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.activities
 
+import android.Manifest.permission.BLUETOOTH_CONNECT
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -22,14 +23,14 @@ import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsThemeActivity
+import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.ActivitySettingsBinding
 import code.name.monkey.retromusic.extensions.*
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorCallback
 
-class SettingsActivity : AbsThemeActivity(), ColorCallback, OnThemeChangedListener {
+class SettingsActivity : AbsBaseActivity(), ColorCallback, OnThemeChangedListener {
     private lateinit var binding: ActivitySettingsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         val mSavedInstanceState = extra<Bundle>(TAG).value ?: savedInstanceState
@@ -37,6 +38,7 @@ class SettingsActivity : AbsThemeActivity(), ColorCallback, OnThemeChangedListen
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
+        setPermissionDeniedMessage(getString(R.string.permission_bluetooth_denied))
     }
 
     override fun onResume() {
@@ -79,6 +81,14 @@ class SettingsActivity : AbsThemeActivity(), ColorCallback, OnThemeChangedListen
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun getPermissionsToRequest(): Array<String> {
+        return if (VersionUtils.hasS()) {
+            arrayOf(BLUETOOTH_CONNECT)
+        } else {
+            arrayOf()
+        }
     }
 
     override fun invoke(dialog: MaterialDialog, color: Int) {

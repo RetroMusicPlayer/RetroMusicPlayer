@@ -49,6 +49,8 @@ interface Playback {
 
     fun setCrossFadeDuration(duration: Int)
 
+    fun setPlaybackSpeedPitch(speed: Float, pitch: Float)
+
     interface PlaybackCallbacks {
         fun onTrackWentToNext()
 

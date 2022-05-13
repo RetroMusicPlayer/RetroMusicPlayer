@@ -8,7 +8,8 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_audio_ducking"
         android:title="@string/pref_title_audio_ducking"
-        app:icon="@drawable/ic_volume_down" />
+        app:icon="@drawable/ic_volume_down"
+        app:isPreferenceVisible="@bool/isNotOreo"/>
 
     <code.name.monkey.retromusic.preferences.DurationPreference
         android:defaultValue="0"

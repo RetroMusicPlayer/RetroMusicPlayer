@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.service;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.PlaybackParams;
@@ -28,12 +27,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.PreferenceManager;
 
 import org.jetbrains.annotations.NotNull;
 
 import code.name.monkey.appthemehelper.util.VersionUtils;
-import code.name.monkey.retromusic.ConstantsKt;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -42,7 +39,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
  * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
  */
 public class MultiPlayer
-        implements Playback, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener, SharedPreferences.OnSharedPreferenceChangeListener {
+        implements Playback, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
     public static final String TAG = MultiPlayer.class.getSimpleName();
 
     private MediaPlayer mCurrentMediaPlayer = new MediaPlayer();
@@ -60,7 +57,6 @@ public class MultiPlayer
     MultiPlayer(final Context context) {
         this.context = context;
         mCurrentMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
-        PreferenceManager.getDefaultSharedPreferences(context).registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -94,7 +90,7 @@ public class MultiPlayer
             } else {
                 player.setDataSource(path);
             }
-            setPlaybackSpeedPitch(player);
+            setPlaybackSpeedPitch(PreferenceUtil.INSTANCE.getPlaybackSpeed(), PreferenceUtil.INSTANCE.getPlaybackPitch());
             player.setAudioStreamType(AudioManager.STREAM_MUSIC);
             player.prepare();
         } catch (Exception e) {
@@ -208,7 +204,6 @@ public class MultiPlayer
         if (mNextMediaPlayer != null) {
             mNextMediaPlayer.release();
         }
-        PreferenceManager.getDefaultSharedPreferences(context).unregisterOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -359,20 +354,14 @@ public class MultiPlayer
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(ConstantsKt.PLAYBACK_SPEED) || key.equals(ConstantsKt.PLAYBACK_PITCH)) {
-            setPlaybackSpeedPitch(mCurrentMediaPlayer);
-        }
-    }
-
-    public void setPlaybackSpeedPitch(MediaPlayer mp) {
+    public void setPlaybackSpeedPitch(float speed, float pitch) {
         if (VersionUtils.INSTANCE.hasMarshmallow()) {
-            boolean wasPlaying = mp.isPlaying();
-            mp.setPlaybackParams(new PlaybackParams()
+            boolean wasPlaying = mCurrentMediaPlayer.isPlaying();
+            mCurrentMediaPlayer.setPlaybackParams(new PlaybackParams()
                     .setSpeed(PreferenceUtil.INSTANCE.getPlaybackSpeed())
                     .setPitch(PreferenceUtil.INSTANCE.getPlaybackPitch()));
             if (!wasPlaying) {
-                if (mp.isPlaying()) mp.pause();
+                if (mCurrentMediaPlayer.isPlaying()) mCurrentMediaPlayer.pause();
             }
         }
     }

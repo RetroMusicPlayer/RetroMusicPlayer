@@ -87,6 +87,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil.isClassicNotification
 import code.name.monkey.retromusic.util.PreferenceUtil.isHeadsetPlugged
 import code.name.monkey.retromusic.util.PreferenceUtil.isLockScreen
 import code.name.monkey.retromusic.util.PreferenceUtil.isPauseOnZeroVolume
+import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
 import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 import code.name.monkey.retromusic.util.PreferenceUtil.registerOnSharedPreferenceChangedListener
 import code.name.monkey.retromusic.util.PreferenceUtil.unregisterOnSharedPreferenceChangedListener
@@ -695,6 +696,9 @@ class MusicService : MediaBrowserServiceCompat(),
         sharedPreferences: SharedPreferences, key: String,
     ) {
         when (key) {
+            PLAYBACK_SPEED, PLAYBACK_PITCH -> {
+                playback?.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
+            }
             CROSS_FADE_DURATION -> {
                 val progress = songProgressMillis
                 val wasPlaying = isPlaying
