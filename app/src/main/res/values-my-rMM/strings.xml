@@ -89,6 +89,7 @@
     <string name="biography">အတ္ထုပတ္တိ</string>
     <string name="black_theme_name">အနက်ရောင်သာ</string>
     <string name="blacklist">လစ်လျူရှုမည့်စာရင်း</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
     <string name="blur">Blur</string>
     <string name="blur_card">ကတ်အဝါး</string>
     <string name="bug_report_failed">သတင်းပို့၍မရနိုင်ပါ</string>
@@ -192,6 +193,7 @@
     <string name="genres">အမျိုးအစားများ</string>
     <string name="git_hub_summary">Project ကို GitHub မှာ Fork လုပ်ပါ</string>
     <string name="gradient">Gradient</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">၁</string>
     <string name="grid_size_2">၂</string>
     <string name="grid_size_3">၃</string>
@@ -229,6 +231,7 @@
     <string name="labeled">Label ထိုးထားမည်</string>
     <string name="last_added">နောက်ဆုံးသွင်းထားသော</string>
     <string name="last_song">နောက်ဆုံးအပုဒ်</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Tab အမျိုးအစားများ</string>
     <string name="licenses">လိုင်စင်များ</string>
     <string name="light_theme_name">အဖြူရောင်သက်သက်</string>
@@ -287,6 +290,7 @@
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">External Storage ကြည့်ရှုခွင့်အားငြင်းပယ်ခဲ့သည်။</string>
     <string name="permission_summary">သီချင်းဖွင့်ရန်အတွက် ယခု App အား Storage ကြည့်ရှုခွင့်ပေးရန်လိုသည်။</string>
     <string name="permission_title">Storage ကြည့်ရှုခွင့်</string>
@@ -356,6 +360,7 @@
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">နားကြပ်နှင့်ချိတ်ဆက်ပြီးသည့်နှင့် စတင် play မည်</string>
     <string name="pref_summary_toggle_shuffle">သီချင်းဖွင့်မည့်စာရင်း\'အသစ်\'ကို play သည့်အခါ Shuffle Mode ပိတ်သွားပါမည်</string>
@@ -402,6 +407,7 @@
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Tab ခေါင်းစဉ်ပြသခြင်း</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">App ကို screen အပြည့်ထားမည်</string>
@@ -547,6 +553,5 @@
     <string name="you_have_to_select_at_least_one_category">အနည်းဆုံး category တစ်ခုရွေးချယ်ရန်လိုအပ်သည်</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Issue tracker website သို့ခေါ်ဆောင်သွားပါမည်</string>
     <string name="your_account_data_is_only_used_for_authentication">သင့်အကောင့်အချက်အလက်ကို အတည်ပြုရန်အတွက်သာအသုံးပြုပါသည်။</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="bluetooth_title">Nearby devices</string>
 </resources>
