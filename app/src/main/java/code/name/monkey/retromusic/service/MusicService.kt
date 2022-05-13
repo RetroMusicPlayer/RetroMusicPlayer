@@ -893,7 +893,7 @@ class MusicService : MediaBrowserServiceCompat(),
         pause()
         stopForeground(true)
         notificationManager?.cancel(PlayingNotification.NOTIFICATION_ID)
-        playbackManager.closeAudioEffectSession()
+        playbackManager.release()
         audioManager?.abandonAudioFocus(audioFocusListener)
         stopSelf()
     }
