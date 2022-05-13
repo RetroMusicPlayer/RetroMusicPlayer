@@ -89,6 +89,7 @@
     <string name="biography">簡介</string>
     <string name="black_theme_name">純黑色</string>
     <string name="blacklist">黑名單</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
     <string name="blur">模糊風</string>
     <string name="blur_card">模糊卡牌風</string>
     <string name="bug_report_failed">無法傳送報告</string>
@@ -192,6 +193,7 @@
     <string name="genres">風格類型</string>
     <string name="git_hub_summary">在 GitHub 上分支這項專案</string>
     <string name="gradient">漸層風</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -229,6 +231,7 @@
     <string name="labeled">顯示標籤</string>
     <string name="last_added">最後新增</string>
     <string name="last_song">最後一首</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">音樂庫類別</string>
     <string name="licenses">原始碼授權</string>
     <string name="light_theme_name">淺色</string>
@@ -287,6 +290,7 @@
     <string name="paste_lyrics_here">在此貼上歌詞</string>
     <string name="paste_timeframe_lyrics_here">在此貼上同步歌詞</string>
     <string name="peek">懸浮風</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">無法取得存取外部儲存空間的權限。</string>
     <string name="permission_summary">應用程式必須取得權限以存取您的裝置和媒體</string>
     <string name="permission_title">檔案和媒體權限</string>
@@ -356,6 +360,7 @@
     <string name="pref_summary_show_lyrics">於專輯封面上顯示同步歌詞</string>
     <string name="pref_summary_suggestions">於主畫面中顯示歌曲快選</string>
     <string name="pref_summary_swipe_anywhere_now_playing">啟用於現正播放畫面，可隨意滑動以切換歌曲</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">沉浸模式</string>
     <string name="pref_summary_toggle_headset">當連接耳機後，自動播放音樂</string>
     <string name="pref_summary_toggle_shuffle">當播放新播放清單時，關閉隨機模式</string>
@@ -402,6 +407,7 @@
     <string name="pref_title_show_lyrics">顯示歌詞</string>
     <string name="pref_title_suggestions">顯示建議</string>
     <string name="pref_title_swipe_anywhere_now_playing">隨意滑動以切換歌曲</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">索引標籤模式</string>
     <string name="pref_title_toggle_carousel_effect">輪播效果</string>
     <string name="pref_title_toggle_full_screen">全螢幕應用程式</string>
@@ -547,6 +553,5 @@
     <string name="you_have_to_select_at_least_one_category">您必須選取至少一個類別。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">您將被重新導向至議題追蹤器網頁。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="bluetooth_title">Nearby devices</string>
 </resources>
