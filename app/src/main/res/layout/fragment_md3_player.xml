@@ -7,7 +7,6 @@
     android:background="?attr/colorSurface"
     android:clickable="true"
     android:focusable="true">
-    <include layout="@layout/shadow_statusbar_toolbar" />
 
     <FrameLayout
         android:id="@+id/statusBarContainer"
@@ -20,17 +19,15 @@
         <include layout="@layout/status_bar" />
     </FrameLayout>
 
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHeight_percent="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statusBarContainer" />
-
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"
