@@ -118,7 +118,7 @@ class PlaybackManager(val context: Context) {
         closeAudioEffectSession()
     }
 
-    fun openAudioEffectSession() {
+    private fun openAudioEffectSession() {
         val intent = Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION)
         intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId)
         intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.packageName)

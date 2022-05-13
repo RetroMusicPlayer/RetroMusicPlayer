@@ -14,14 +14,12 @@
 package code.name.monkey.retromusic.service
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.MediaPlayer.OnCompletionListener
 import android.media.PlaybackParams
-import android.media.audiofx.AudioEffect
 import android.net.Uri
 import android.os.PowerManager
 import android.util.Log
@@ -55,7 +53,7 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
         private set
 
     /**
-     * @param path The path of the file, or the http/rtsp URL of the stream you want to play
+     * @param song The song object you want to play
      * @return True if the `player` has been prepared and is ready to play, false otherwise
      */
     override fun setDataSource(
@@ -108,22 +106,6 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
         }
         player.setOnCompletionListener(this)
         player.setOnErrorListener(this)
-    }
-
-    fun openEqualizerSession() {
-        val intent = Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION)
-        intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId)
-        intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.packageName)
-        intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
-        context.sendBroadcast(intent)
-    }
-
-    fun closeEqualizerSession() {
-        val intent = Intent(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION)
-        intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId)
-        intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.packageName)
-        intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
-        context.sendBroadcast(intent)
     }
 
     /**
