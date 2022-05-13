@@ -91,6 +91,7 @@
     <string name="biography">Biografie</string>
     <string name="black_theme_name">Gewoon zwart</string>
     <string name="blacklist">Zwarte lijst</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
     <string name="blur">Vervagen</string>
     <string name="blur_card">Blur Card</string>
     <string name="bug_report_failed">Mislukt om het rapport te verzenden</string>
@@ -194,6 +195,7 @@
     <string name="genres">Genres</string>
     <string name="git_hub_summary">Fork the project on GitHub</string>
     <string name="gradient">Gradient</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -231,6 +233,7 @@
     <string name="labeled">Labeled</string>
     <string name="last_added">Laatst toegevoegd</string>
     <string name="last_song">Vorige nummer</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Library categories</string>
     <string name="licenses">Licenties</string>
     <string name="light_theme_name">Clearly wit</string>
@@ -289,6 +292,7 @@
     <string name="paste_lyrics_here">Plak tekst/lyrics hier</string>
     <string name="paste_timeframe_lyrics_here">Plak timeframe tekst/lyrics hier</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Permissie voor toegang tot extern opslag is afgewezen</string>
     <string name="permission_summary">De app heeft toestemming nodig tot je apparaat\'s opslag om muziek af te kunnen spelen</string>
     <string name="permission_title">Toegang tot opslag</string>
@@ -358,6 +362,7 @@
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Zet dit aan voor immersive mode</string>
     <string name="pref_summary_toggle_headset">Wanneer headphones ingeplugd zijn, afspelen start automatisch</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
@@ -404,6 +409,7 @@
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">Carrousel-effect</string>
     <string name="pref_title_toggle_full_screen">Volledig scherm app</string>
@@ -549,6 +555,5 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="bluetooth_title">Nearby devices</string>
 </resources>
