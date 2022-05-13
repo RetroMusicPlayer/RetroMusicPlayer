@@ -91,6 +91,7 @@
     <string name="biography">زندگینامه</string>
     <string name="black_theme_name">حالت فقط مِشکی</string>
     <string name="blacklist">لیست سیاه</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
     <string name="blur">حالت بلور</string>
     <string name="blur_card">حالت برگه ی بلور شده</string>
     <string name="bug_report_failed">نتوانستیم گزارش را بفرستیم</string>
@@ -194,6 +195,7 @@
     <string name="genres">ژانر ها</string>
     <string name="git_hub_summary">فورک زدن پروژه در گیتهاب</string>
     <string name="gradient">حالت شیب دار</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">۱</string>
     <string name="grid_size_2">۲</string>
     <string name="grid_size_3">۳</string>
@@ -231,6 +233,7 @@
     <string name="labeled">برچسب دار</string>
     <string name="last_added">آخرین مورد اضافه شده</string>
     <string name="last_song">اخرین آهنگ</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">دسته بندی های کتابخانه</string>
     <string name="licenses">مجوزها</string>
     <string name="light_theme_name">کاملا سفید</string>
@@ -289,6 +292,7 @@
     <string name="paste_lyrics_here">متن را در اینجا بارگزاری کنید</string>
     <string name="paste_timeframe_lyrics_here">متون زمان دار را در اینجا بارگزاری کنید</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">مجوز دسترسی به حافظه رد شد</string>
     <string name="permission_summary">برنامه نیاز به دسترسی به حافظه برای پخش آهنگ ها دارد</string>
     <string name="permission_title">دسترسی به حافظه</string>
@@ -358,6 +362,7 @@
     <string name="pref_summary_show_lyrics">نمایش متن آهنگ همگام‌سازی شده روی جلد آلبوم</string>
     <string name="pref_summary_suggestions">نمایش ترکیب موسیقی جدید در صفحه اصلی</string>
     <string name="pref_summary_swipe_anywhere_now_playing">تغییر آهنگ را با کشیدن انگشت در هر نقطه ای از صفحه در حال پخش فعال می کند</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">حالت همه جانبه</string>
     <string name="pref_summary_toggle_headset">پس از وصل شدن هدفون موزیک بلافاصله پخش شود</string>
     <string name="pref_summary_toggle_shuffle">حالت پخش مخلوط اهنگ ها زمانی که لیست جدید اهنگ را پلی می‌کنید، خاموش می‌شود</string>
@@ -404,6 +409,7 @@
     <string name="pref_title_show_lyrics">نمایش متن ترانه</string>
     <string name="pref_title_suggestions">نمایش پیشنهادات</string>
     <string name="pref_title_swipe_anywhere_now_playing">برای تغییر آهنگ، انگشت خود را به هر جایی بکشید</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">حالت عنوان برگه ها</string>
     <string name="pref_title_toggle_carousel_effect">جلوه چرخ فلک</string>
     <string name="pref_title_toggle_full_screen">برنامه تمام‌صفحه</string>
@@ -549,6 +555,5 @@
     <string name="you_have_to_select_at_least_one_category">شما باید حداقل یک دسته را انتخاب کنید.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">شما به وب سایت ردیاب مشکل هدایت می شوید.</string>
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="bluetooth_title">Nearby devices</string>
 </resources>
