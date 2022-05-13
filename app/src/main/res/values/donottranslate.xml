@@ -24,15 +24,9 @@
 
     <!-- Material You -->
     <string name="pref_title_md3">Material You</string>
-    <bool name="md3_available">false</bool>
-    <bool name="md3_enabled">false</bool>
-
-    <integer name="overScrollMode">2</integer>
-    <bool name="allowBackup">true</bool>
-
-    <bool name="wallpaper_accent_enabled">false</bool>
-    <bool name="wallpaper_accent_visible">false</bool>
 
     <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="app_widget_circle_name">@string/circle</string>
+
+
 </resources>

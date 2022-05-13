@@ -12,4 +12,6 @@
     <integer name="anim_duration_medium">200</integer>
     <integer name="permission_orientation">1</integer>
     <integer name="permission_layout_weight">0</integer>
+
+    <integer name="overScrollMode">2</integer>
 </resources>
