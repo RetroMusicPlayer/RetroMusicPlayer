@@ -91,6 +91,7 @@
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Apenas preto</string>
     <string name="blacklist">Lista negra</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
     <string name="blur">Desfocar</string>
     <string name="blur_card">Desfocar cartão</string>
     <string name="bug_report_failed">Não foi possível enviar o relatório</string>
@@ -194,6 +195,7 @@
     <string name="genres">Géneros</string>
     <string name="git_hub_summary">Fork o projeto no Github</string>
     <string name="gradient">Gradiente</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -231,6 +233,7 @@
     <string name="labeled">Etiquetada</string>
     <string name="last_added">Última adicionada</string>
     <string name="last_song">Última música</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Categorias</string>
     <string name="licenses">Licenças</string>
     <string name="light_theme_name">Claramente branco</string>
@@ -289,6 +292,7 @@
     <string name="paste_lyrics_here">Colar letras aqui</string>
     <string name="paste_timeframe_lyrics_here">Colar letras do cronograma aqui</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Permissão para aceder ao armazenamento externo negada.</string>
     <string name="permission_summary">Esta aplicação necessita de permissão para aceder ao armazenamento para tocar músicas</string>
     <string name="permission_title">Acesso ao armazenamento</string>
@@ -358,6 +362,7 @@
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Modo imersivo</string>
     <string name="pref_summary_toggle_headset">Tocar imediatamente após ligar os auriculares</string>
     <string name="pref_summary_toggle_shuffle">O modo aleatório vai ser desligado ao reproduzir uma nova lista</string>
@@ -404,6 +409,7 @@
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Títulos nos separadores</string>
     <string name="pref_title_toggle_carousel_effect">Efeito carrossel</string>
     <string name="pref_title_toggle_full_screen">Aplicação em ecrã inteiro</string>
@@ -549,6 +555,5 @@
     <string name="you_have_to_select_at_least_one_category">Tem que seleccionar pelo menos uma categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vai ser reencaminhado para o site de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">As informações da sua conta são utilizadas apenas autenticação.</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="bluetooth_title">Nearby devices</string>
 </resources>
