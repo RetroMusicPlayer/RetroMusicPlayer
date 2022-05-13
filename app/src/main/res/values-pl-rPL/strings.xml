@@ -95,6 +95,7 @@
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Czarny motyw</string>
     <string name="blacklist">Lista ignorowanych</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
     <string name="blur">Rozmycie</string>
     <string name="blur_card">Rozmyta Karta</string>
     <string name="bug_report_failed">Nie udało się wysłać raportu</string>
@@ -198,6 +199,7 @@
     <string name="genres">Gatunki</string>
     <string name="git_hub_summary">Zobacz kod na GitHubie</string>
     <string name="gradient">Gradient</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -235,6 +237,7 @@
     <string name="labeled">Podpisano</string>
     <string name="last_added">Ostatnio dodane</string>
     <string name="last_song">Ostatni utwór</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Kategorie biblioteki</string>
     <string name="licenses">Licencje</string>
     <string name="light_theme_name">Jasny</string>
@@ -293,6 +296,7 @@
     <string name="paste_lyrics_here">Wklej tekst tutaj</string>
     <string name="paste_timeframe_lyrics_here">Wklej tutaj tekst utworu z ramami czasowymi</string>
     <string name="peek">Podgląd</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Odmowa dostępu do pamięci zewnętrznej.</string>
     <string name="permission_summary">Potrzebujemy uprawnień do pamięci urządzenia, aby odtwarzać muzykę</string>
     <string name="permission_title">Dostęp do pamięci</string>
@@ -362,6 +366,7 @@
     <string name="pref_summary_show_lyrics">Wyświetla zsynchronizowane teksty piosenek nad okładką albumu</string>
     <string name="pref_summary_suggestions">Pokaż Nowy miks muzyki na ekranie głównym</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Włącza możliwość zmiany utworu przesuwając w dowolnym miejscu na ekranie odtwarzania</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Tryb imersji</string>
     <string name="pref_summary_toggle_headset">Rozpocznij odtwarzanie po podłączeniu zestawu słuchawkowego</string>
     <string name="pref_summary_toggle_shuffle">Odtwarzanie losowe zostanie wyłączone podczas odtwarzania nowej listy utworów</string>
@@ -408,6 +413,7 @@
     <string name="pref_title_show_lyrics">Pokaż teksty utworów</string>
     <string name="pref_title_suggestions">Pokaż sugestie</string>
     <string name="pref_title_swipe_anywhere_now_playing">Przesuń gdziekolwiek, aby zmienić utwór</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Wygląd tytułów kart</string>
     <string name="pref_title_toggle_carousel_effect">Efekt karuzeli</string>
     <string name="pref_title_toggle_full_screen">Aplikacja pełnoekranowa</string>
@@ -553,6 +559,5 @@
     <string name="you_have_to_select_at_least_one_category">Zaznacz przynajmniej jedną kategorię</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Zostaniesz przekierowany do strony ze zgłoszeniami.</string>
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="bluetooth_title">Nearby devices</string>
 </resources>
