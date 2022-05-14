@@ -343,7 +343,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         }
         if (binding.bottomNavigationView.menu.size() == 1) {
             isInOneTabMode = true
-            binding.bottomNavigationView.hide()
+            binding.bottomNavigationView.isVisible = false
         }
     }
 
