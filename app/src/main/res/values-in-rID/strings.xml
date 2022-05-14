@@ -127,7 +127,7 @@
     <string name="clear_playing_queue">Bersihkan antrean</string>
     <string name="color">Warna</string>
     <string name="colors">Warna</string>
-    <string name="compact">Compact</string>
+    <string name="compact">Ringkas</string>
     <string name="composer">Komposer</string>
     <string name="copied_device_info_to_clipboard">Info perangkat tersalin ke papan klip.</string>
     <string name="could_not_create_playlist">Tidak dapat membuat daftar putar.</string>
@@ -170,14 +170,14 @@
     <string name="edit_synced_lyrics">Edit Lirik Yang Disinkronkan</string>
     <string name="empty">Kosong</string>
     <string name="equalizer">Equalizer</string>
-    <string name="error_create_backup">Couldn\u2019t create backup</string>
-    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
-    <string name="error_empty_name">Your name can\'t be empty!</string>
-    <string name="error_load_failed">Load failed</string>
-    <string name="expanded">Expanded</string>
+    <string name="error_create_backup">Tidak dapat membuat cadangan</string>
+    <string name="error_delete_backup">Tidak dapat menghapus cadangan</string>
+    <string name="error_empty_name">Namamu tidak boleh kosong!</string>
+    <string name="error_load_failed">Gagal memuat</string>
+    <string name="expanded">Diperluas</string>
     <string name="faq">Pertanyaan Umum (FAQ)</string>
     <string name="favorites">Favorit</string>
-    <string name="file_already_exists">File already exists</string>
+    <string name="file_already_exists">Berkas sudah ada</string>
     <string name="finish_last_song">Selesaikan lagu terakhir</string>
     <string name="fit">Paskan</string>
     <string name="flat">Datar</string>
@@ -193,7 +193,7 @@
     <string name="genres">Genre</string>
     <string name="git_hub_summary">Beri fork pada proyek di GitHub</string>
     <string name="gradient">Gradasi</string>
-    <string name="grant_access">Grant access</string>
+    <string name="grant_access">Izinkan akses</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -231,7 +231,7 @@
     <string name="labeled">Berlabel</string>
     <string name="last_added">Terakhir ditambah</string>
     <string name="last_song">Lagu terakhir</string>
-    <string name="lets_go">Let\'s go</string>
+    <string name="lets_go">Ayo mulai</string>
     <string name="library_categories">Kategori perpustakaan</string>
     <string name="licenses">Lisensi</string>
     <string name="light_theme_name">Putih Terang</string>
@@ -244,7 +244,7 @@
     <string name="material">Material</string>
     <string name="md_error_label">Kesalahan</string>
     <string name="md_storage_perm_error">Kesalahan izin</string>
-    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_backup_create_success">Cadangan berhasil dibuat.</string>
     <string name="message_limit_tabs">Not more than 5 items</string>
     <string name="message_pro_feature">%s is a Pro feature.</string>
     <string name="message_restore_success">Restore completed successfully.</string>
@@ -399,7 +399,7 @@
     <string name="pref_title_lock_screen">Kontrol layar penuh</string>
     <string name="pref_title_lyrics_screen_on">Tetap aktifkan layar saat menampilkan lirik</string>
     <string name="pref_title_lyrics_type">Tipe lirik</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
+    <string name="pref_title_manage_audio_focus">Selalu putar</string>
     <string name="pref_title_now_playing_screen_appearance">Tema Pemutaran</string>
     <string name="pref_title_open_source_licences">Lisensi sumber terbuka</string>
     <string name="pref_title_pause_history">Jeda riwayat</string>
