@@ -64,7 +64,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/playerAlbumCoverFragment"
-                android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+                android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_album_card_cover" />
@@ -81,7 +81,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playbackControlsFragment"
-            android:name="code.name.monkey.retromusic.fragments.player.cardblur.CardBlurPlaybackControlsFragment"
+            android:name="io.github.muntashirakon.music.fragments.player.cardblur.CardBlurPlaybackControlsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_card_blur_player_playback_controls" />

@@ -56,7 +56,7 @@
                 app:layout_constraintStart_toEndOf="@id/appIcon"
                 app:layout_constraintTop_toTopOf="@id/appIcon" />
 
-            <code.name.monkey.retromusic.views.WidthFitSquareCardView
+            <io.github.muntashirakon.music.views.WidthFitSquareCardView
                 android:id="@+id/imageContainerCard"
                 android:layout_width="290dp"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     tools:src="@tools:sample/avatars" />
-            </code.name.monkey.retromusic.views.WidthFitSquareCardView>
+            </io.github.muntashirakon.music.views.WidthFitSquareCardView>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/shareTitle"

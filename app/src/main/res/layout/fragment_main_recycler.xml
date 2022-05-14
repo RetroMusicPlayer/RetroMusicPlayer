@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
+    <io.github.muntashirakon.music.views.insets.InsetsRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +17,7 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/item_list" />
 
-    <code.name.monkey.retromusic.views.TopAppBarLayout
+    <io.github.muntashirakon.music.views.TopAppBarLayout
         android:id="@+id/appBarLayout"
         style="?appBarLayoutStyle"
         android:layout_width="match_parent"

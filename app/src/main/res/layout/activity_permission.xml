@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <code.name.monkey.retromusic.views.BaselineGridTextView
+    <io.github.muntashirakon.music.views.BaselineGridTextView
         android:id="@+id/appNameText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:orientation="@integer/permission_orientation">
 
-            <code.name.monkey.retromusic.views.PermissionItem
+            <io.github.muntashirakon.music.views.PermissionItem
                 android:id="@+id/storage_permission"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 app:permissionTitleNumber="1"
                 app:permissionTitleSubTitle="@string/permission_summary" />
 
-            <code.name.monkey.retromusic.views.PermissionItem
+            <io.github.muntashirakon.music.views.PermissionItem
                 android:id="@+id/bluetooth_permission"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                 app:permissionTitleSubTitle="@string/bluetooth_summary"
                 tools:visibility="visible" />
 
-            <code.name.monkey.retromusic.views.PermissionItem
+            <io.github.muntashirakon.music.views.PermissionItem
                 android:id="@+id/audio_permission"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

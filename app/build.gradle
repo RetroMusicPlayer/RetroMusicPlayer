@@ -6,7 +6,7 @@ apply plugin: 'kotlin-parcelize'
 
 android {
     compileSdk 32
-    buildTools = '30.0.3'
+    buildToolsVersion = '30.0.3'
 
     defaultConfig {
         minSdk 21
@@ -68,6 +68,8 @@ dependencies {
     implementation "androidx.preference:preference-ktx:$preference_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.palette:palette-ktx:1.0.0'
+
+    implementation "androidx.media:media:1.6.0"
 
     implementation "androidx.navigation:navigation-runtime-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"

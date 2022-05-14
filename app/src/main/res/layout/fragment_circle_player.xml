@@ -85,14 +85,14 @@
         app:layout_constraintStart_toStartOf="@id/volumeSeekBar"
         app:layout_constraintTop_toTopOf="@id/volumeSeekBar">
 
-        <code.name.monkey.retromusic.views.RetroShapeableImageView
+        <io.github.muntashirakon.music.views.RetroShapeableImageView
             android:id="@+id/album_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/backgrounds/scenic[6]" />
 
-        <code.name.monkey.retromusic.views.RetroShapeableImageView
+        <io.github.muntashirakon.music.views.RetroShapeableImageView
             android:id="@+id/album_cover_overlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

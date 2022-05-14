@@ -91,9 +91,4 @@
         android:icon="@drawable/ic_settings"
         android:title="@string/action_settings"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_cast"
-        android:title="@string/action_cast"
-        app:actionProviderClass="androidx.mediarouter.app.MediaRouteActionProvider"
-        app:showAsAction="always" />
 </menu>

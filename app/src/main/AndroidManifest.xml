@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="code.name.monkey.retromusic"
+    package="io.github.muntashirakon.music"
     android:installLocation="auto">
 
     <uses-permission
@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 
     <application
-        android:name="io.github.muntashirakon.retromusic.App"
+        android:name=".App"
         android:allowBackup="@bool/allowBackup"
         android:configChanges="locale|layoutDirection"
         android:icon="@mipmap/ic_launcher"
@@ -39,7 +39,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="q">
         <activity
-            android:name="io.github.muntashirakon.retromusic.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/SplashTheme">
@@ -166,22 +166,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
-            android:name=".saf.SAFGuideActivity"
+            android:name=".activities.saf.SAFGuideActivity"
             android:theme="@style/Theme.Intro" />
-
-        <activity
-            android:name=".cast.ExpandedControlsActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
-        </activity>
 
         <activity
             android:name=".activities.ErrorActivity"

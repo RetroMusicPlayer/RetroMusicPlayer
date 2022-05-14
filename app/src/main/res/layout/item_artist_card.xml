@@ -26,7 +26,7 @@
         android:background="@drawable/artist_card_gradient_effect"
         tools:backgroundTint="@color/md_red_500">
 
-        <code.name.monkey.retromusic.views.RetroShapeableImageView
+        <io.github.muntashirakon.music.views.RetroShapeableImageView
             android:id="@+id/image"
             android:layout_width="42dp"
             android:layout_height="42dp"

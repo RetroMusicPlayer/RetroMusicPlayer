@@ -9,7 +9,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.full.FullPlaybackControlsFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.full.FullPlaybackControlsFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
@@ -117,7 +117,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/nextSongLabel"
                 tools:text="@tools:sample/lorem/random" />
 
-            <code.name.monkey.retromusic.views.CircularImageView
+            <io.github.muntashirakon.music.views.CircularImageView
                 android:id="@+id/artistImage"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
@@ -136,7 +136,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/cover_lyrics"
-        android:name="code.name.monkey.retromusic.fragments.player.CoverLyricsFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.CoverLyricsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

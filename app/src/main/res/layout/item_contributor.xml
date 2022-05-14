@@ -25,7 +25,7 @@
     android:paddingEnd="12dp"
     tools:ignore="PrivateResource">
 
-    <code.name.monkey.retromusic.views.RetroShapeableImageView
+    <io.github.muntashirakon.music.views.RetroShapeableImageView
         android:id="@+id/icon"
         android:layout_width="42dp"
         android:layout_height="42dp"
@@ -52,7 +52,7 @@
         app:layout_constraintStart_toEndOf="@+id/icon"
         tools:text="@tools:sample/full_names" />
 
-    <code.name.monkey.retromusic.views.BaselineGridTextView
+    <io.github.muntashirakon.music.views.BaselineGridTextView
         android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

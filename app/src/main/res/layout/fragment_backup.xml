@@ -51,7 +51,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/create_backup" />
 
-    <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
+    <io.github.muntashirakon.music.views.insets.InsetsRecyclerView
         android:id="@+id/backup_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"

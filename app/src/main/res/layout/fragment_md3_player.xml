@@ -21,7 +21,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.md3.MD3PlaybackControlsFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.md3.MD3PlaybackControlsFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/playerToolbar"

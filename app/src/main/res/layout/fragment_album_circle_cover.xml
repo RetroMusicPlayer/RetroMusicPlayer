@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_album_cover">
 
-    <code.name.monkey.retromusic.views.CircularImageView
+    <io.github.muntashirakon.music.views.CircularImageView
         android:id="@+id/player_image"
         android:layout_width="0dp"
         android:layout_height="0dp"

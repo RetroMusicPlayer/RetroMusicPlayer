@@ -34,7 +34,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <code.name.monkey.retromusic.views.WidthFitSquareCardView
+            <io.github.muntashirakon.music.views.WidthFitSquareCardView
                 android:id="@+id/imageContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                     android:scaleType="centerCrop"
                     tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
-            </code.name.monkey.retromusic.views.WidthFitSquareCardView>
+            </io.github.muntashirakon.music.views.WidthFitSquareCardView>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/songTextContainer"
