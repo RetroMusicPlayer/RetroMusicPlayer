@@ -55,7 +55,7 @@
     <string name="add_action">Tambah</string>
     <string name="add_playlist_title">"Tambah ke daftar putar"</string>
     <string name="add_time_framed_lryics">Tambah kerangka waktu pada lirik</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_song_count_to_playlist">Menambah %1$d lagu ke %2$s</string>
     <string name="added_title_to_playing_queue">"1 lagu ditambah ke antrean."</string>
     <string name="added_x_titles_to_playing_queue">%1$d lagu telah ditambah ke antrean.</string>
     <string name="album">Album</string>
@@ -89,7 +89,7 @@
     <string name="biography">Biografi</string>
     <string name="black_theme_name">Hitam Pekat</string>
     <string name="blacklist">Daftar hitam</string>
-    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_summary">Aplikasi butuh izin ke perangkat terdekat untuk memeriksa perangkat bluetooth</string>
     <string name="blur">Keburaman</string>
     <string name="blur_card">Kartu buram</string>
     <string name="bug_report_failed">Tidak dapat mengirim laporan</string>
@@ -183,7 +183,7 @@
     <string name="flat">Datar</string>
     <string name="folders">Folder</string>
     <string name="follow_system">Ikuti sistem</string>
-    <string name="for_you">Untuk Anda</string>
+    <string name="for_you">Untukmu</string>
     <string name="free">Gratis</string>
     <string name="full">Penuh</string>
     <string name="full_card">Kartu penuh</string>
@@ -245,11 +245,11 @@
     <string name="md_error_label">Kesalahan</string>
     <string name="md_storage_perm_error">Kesalahan izin</string>
     <string name="message_backup_create_success">Cadangan berhasil dibuat.</string>
-    <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
-    <string name="message_restore_success">Restore completed successfully.</string>
-    <string name="message_updated">Updated</string>
-    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
+    <string name="message_limit_tabs">Tidak lebih dari 5 item</string>
+    <string name="message_pro_feature">%s adalah fitur Pro.</string>
+    <string name="message_restore_success">Restorasi sukses.</string>
+    <string name="message_updated">Diperbarui</string>
+    <string name="message_welcome"><![CDATA[Halo! <br> Selamat datang ke %s]]></string>
     <string name="my_name">Nama</string>
     <string name="my_top_tracks">Sering diputar</string>
     <string name="never">Tidak pernah</string>
@@ -290,7 +290,7 @@
     <string name="paste_lyrics_here">Tempel Lirik Disini</string>
     <string name="paste_timeframe_lyrics_here">Tempel kerangka waktu lirik di sini</string>
     <string name="peek">Mengintip</string>
-    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
+    <string name="permission_bluetooth_denied">Izin perangkat terdekat ditolak.</string>
     <string name="permission_external_storage_denied">Izin untuk mengakses penyimpanan eksternal ditolak.</string>
     <string name="permission_summary">Aplikasi memerlukan izin untuk mengakses penyimpanan perangkat Anda untuk memutar musik</string>
     <string name="permission_title">Akses Penyimpanan</string>
@@ -353,14 +353,14 @@
     <string name="pref_summary_ignore_media_store_artwork">Dapat meningkatkan kualitas sampul album, namun menyebabkan waktu pemuatan lebih lambat. Aktifkan jika Anda bermasalah dengan resolusi gambar album yang rendah</string>
     <string name="pref_summary_library_categories">Mengkonfigurasi visibilitas dan susunan kategori perpustakaan.</string>
     <string name="pref_summary_lock_screen">Gunakan kontrol layar kunci khusus Musik Retro</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
+    <string name="pref_summary_manage_audio_focus">Selalu putar audio di latar belakang tanpa pedulikan apapun lainnya yang diputar</string>
     <string name="pref_summary_open_source_licences">Detail lisensi untuk perangkat lunak sumber terbuka</string>
     <string name="pref_summary_pause_history">Saat diaktifkan, lagu yang baru diputar tidak akan muncul di riwayat</string>
     <string name="pref_summary_remember_tab">Arahkan ke tab yang terakhir digunakan saat memulai</string>
     <string name="pref_summary_show_lyrics">Tampilkan lirik yang disinkronkan di atas sampul album</string>
     <string name="pref_summary_suggestions">Tampilkan Campuran Musik Baru di layar beranda</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Memungkinkan mengubah lagu dengan menggeser di mana saja di layar yang sedang diputar</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_summary_swipe_to_dismiss">Usap ke bawah untuk hentikan pemutar mini</string>
     <string name="pref_summary_toggle_full_screen">Mode Layar Penuh</string>
     <string name="pref_summary_toggle_headset">Mulai memutar segera setelah headphone terhubung</string>
     <string name="pref_summary_toggle_shuffle">Mode acak akan mati saat memutar daftar lagu baru</string>
@@ -372,7 +372,7 @@
     <string name="pref_title_album_cover_style">Tema sampul album</string>
     <string name="pref_title_album_cover_transform">Lewati sampul album</string>
     <string name="pref_title_app_shortcuts">Pintasan Berwarna</string>
-    <string name="pref_title_appbar_mode">Header style</string>
+    <string name="pref_title_appbar_mode">Gaya header</string>
     <string name="pref_title_audio_ducking">Kurangi volume saat ada notifikasi</string>
     <string name="pref_title_audio_fade">Suara Memudar</string>
     <string name="pref_title_auto_download_artist_images">Unduh otomatis gambar artis</string>
@@ -406,8 +406,8 @@
     <string name="pref_title_remember_tab">Ingat tab terakhir</string>
     <string name="pref_title_show_lyrics">Tampilkan lirik</string>
     <string name="pref_title_suggestions">Tampilkan Saran</string>
-    <string name="pref_title_swipe_anywhere_now_playing">Usap kemana saja untuk mengubah lagu</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Geser ke mana saja untuk mengubah lagu</string>
+    <string name="pref_title_swipe_to_dismiss">Hentikan dengan usap ke bawah</string>
     <string name="pref_title_tab_text_mode">Mode judul tab</string>
     <string name="pref_title_toggle_carousel_effect">Efek korsel</string>
     <string name="pref_title_toggle_full_screen">Aplikasi layar penuh</string>
@@ -551,7 +551,7 @@
     <string name="x_selected">%1$d dipilih</string>
     <string name="year">Tahun</string>
     <string name="you_have_to_select_at_least_one_category">Anda harus memilih setidaknya satu kategori.</string>
-    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan ditersukan ke situs web pelacak masalah.</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan diteruskan ke situs web pelacak galat.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
-    <string name="bluetooth_title">Nearby devices</string>
+    <string name="bluetooth_title">Perangkat terdekat</string>
 </resources>
