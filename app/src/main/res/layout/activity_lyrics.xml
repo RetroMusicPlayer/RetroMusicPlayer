@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:transitionName="@string/transition_lyrics">
 
-    <io.github.muntashirakon.music.lyrics.LrcView
+    <code.name.monkey.retromusic.lyrics.LrcView
         android:id="@+id/lyricsView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

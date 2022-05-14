@@ -83,7 +83,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <io.github.muntashirakon.music.views.BreadCrumbLayout
+            <code.name.monkey.retromusic.views.BreadCrumbLayout
                 android:id="@+id/breadCrumbs"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tab_height"

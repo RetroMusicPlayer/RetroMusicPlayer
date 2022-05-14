@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/pinterestLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             app:listItemSummary="@string/pinterest_page_summary"
             app:listItemTitle="@string/pinterest_page" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/instagramLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             app:listItemTitle="@string/instagram_page" />
 
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/twitterLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             app:listItemSummary="@string/twitter_page_summary"
             app:listItemTitle="@string/twitter_page" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/telegramLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

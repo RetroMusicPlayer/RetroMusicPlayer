@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <io.github.muntashirakon.music.views.WidthFitSquareCardView
+            <code.name.monkey.retromusic.views.WidthFitSquareCardView
                 android:id="@+id/imageContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                     android:scaleType="centerCrop"
                     tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
-            </io.github.muntashirakon.music.views.WidthFitSquareCardView>
+            </code.name.monkey.retromusic.views.WidthFitSquareCardView>
 
 
             <com.google.android.material.textfield.TextInputLayout

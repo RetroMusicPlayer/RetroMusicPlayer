@@ -14,7 +14,7 @@
 
         <fragment
              android:id="@+id/playerAlbumCoverFragment"
-             android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
              android:layout_width="0dp"
              android:layout_height="0dp"
              app:layout_constrainedHeight="true"
@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:behavior_hideable="false"
-        app:layout_behavior="io.github.muntashirakon.music.RetroBottomSheetBehavior">
+        app:layout_behavior="io.github.muntashirakon.retromusic.RetroBottomSheetBehavior">
 
         <LinearLayout
             android:id="@+id/container"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSurface">
 
-    <io.github.muntashirakon.music.views.BaselineGridTextView
+    <code.name.monkey.retromusic.views.BaselineGridTextView
         android:id="@+id/appNameText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appNameText" />
 
-    <io.github.muntashirakon.music.views.PermissionItem
+    <code.name.monkey.retromusic.views.PermissionItem
         android:id="@+id/storagePermission"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         app:permissionTitleNumber="1"
         app:permissionTitleSubTitle="@string/permission_summary" />
 
-    <io.github.muntashirakon.music.views.PermissionItem
+    <code.name.monkey.retromusic.views.PermissionItem
         android:id="@+id/audioPermission"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

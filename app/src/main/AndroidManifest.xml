@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="io.github.muntashirakon.music"
+    package="code.name.monkey.retromusic"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -19,7 +19,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name=".App"
+        android:name="io.github.muntashirakon.retromusic.App"
         android:allowBackup="true"
         android:configChanges="locale|layoutDirection"
         android:icon="@mipmap/ic_launcher"
@@ -32,7 +32,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="q">
         <activity
-            android:name=".activities.MainActivity"
+            android:name="io.github.muntashirakon.retromusic.activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -105,32 +105,32 @@
                 <data android:mimeType="vnd.android.cursor.dir/audio" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.PlayingQueueActivity" />
-        <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.tageditor.AlbumTagEditorActivity" />
-        <activity android:name=".activities.tageditor.SongTagEditorActivity" />
-        <activity android:name=".activities.LyricsActivity" />
-        <activity android:name=".activities.UserInfoActivity" />
-        <activity android:name=".activities.LicenseActivity" />
-        <activity android:name=".activities.WhatsNewActivity" />
-        <activity android:name=".activities.bugreport.BugReportActivity" />
-        <activity android:name=".activities.ShareInstagramStory" />
-        <activity android:name=".activities.DriveModeActivity" />
-        <activity android:name=".activities.PermissionActivity" />
-        <activity android:name=".activities.LockScreenActivity" />
-        <activity android:name=".activities.saf.SAFRequestActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.PlayingQueueActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.SettingsActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.tageditor.AlbumTagEditorActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.tageditor.SongTagEditorActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.LyricsActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.UserInfoActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.LicenseActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.WhatsNewActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.bugreport.BugReportActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.ShareInstagramStory" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.DriveModeActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.PermissionActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.LockScreenActivity" />
+        <activity android:name="io.github.muntashirakon.retromusic.activities.saf.SAFRequestActivity" />
 
         <activity
-            android:name=".appshortcuts.AppShortcutLauncherActivity"
+            android:name="io.github.muntashirakon.retromusic.appshortcuts.AppShortcutLauncherActivity"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
-            android:name=".activities.saf.SAFGuideActivity"
+            android:name="io.github.muntashirakon.retromusic.activities.saf.SAFGuideActivity"
             android:theme="@style/Theme.Intro" />
 
         <provider
-            android:name=".misc.GenericFileProvider"
+            android:name="io.github.muntashirakon.retromusic.misc.GenericFileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -150,13 +150,13 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <receiver android:name=".service.MediaButtonIntentReceiver">
+        <receiver android:name="io.github.muntashirakon.retromusic.service.MediaButtonIntentReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".appwidgets.BootReceiver">
+        <receiver android:name="io.github.muntashirakon.retromusic.appwidgets.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
@@ -164,7 +164,7 @@
         </receiver>
 
         <receiver
-            android:name=".appwidgets.AppWidgetBig"
+            android:name="io.github.muntashirakon.retromusic.appwidgets.AppWidgetBig"
             android:exported="false"
             android:label="@string/app_widget_big_name">
             <intent-filter>
@@ -177,7 +177,7 @@
         </receiver>
 
         <receiver
-            android:name=".appwidgets.AppWidgetClassic"
+            android:name="io.github.muntashirakon.retromusic.appwidgets.AppWidgetClassic"
             android:exported="false"
             android:label="@string/app_widget_classic_name">
             <intent-filter>
@@ -189,7 +189,7 @@
                 android:resource="@xml/app_widget_classic_info" />
         </receiver>
         <receiver
-            android:name=".appwidgets.AppWidgetSmall"
+            android:name="io.github.muntashirakon.retromusic.appwidgets.AppWidgetSmall"
             android:exported="false"
             android:label="@string/app_widget_small_name">
             <intent-filter>
@@ -201,7 +201,7 @@
                 android:resource="@xml/app_widget_small_info" />
         </receiver>
         <receiver
-            android:name=".appwidgets.AppWidgetText"
+            android:name="io.github.muntashirakon.retromusic.appwidgets.AppWidgetText"
             android:exported="false"
             android:label="@string/app_widget_text_name">
             <intent-filter>
@@ -213,7 +213,7 @@
                 android:resource="@xml/app_widget_text" />
         </receiver>
         <receiver
-            android:name=".appwidgets.AppWidgetCard"
+            android:name="io.github.muntashirakon.retromusic.appwidgets.AppWidgetCard"
             android:exported="false"
             android:label="@string/app_widget_card_name">
             <intent-filter>
@@ -226,7 +226,7 @@
         </receiver>
 
         <service
-            android:name=".service.MusicService"
+            android:name="io.github.muntashirakon.retromusic.service.MusicService"
             android:enabled="true"
             android:exported="true"
             android:label="@string/app_name"
@@ -245,7 +245,7 @@
             android:value="true" />
 
         <meta-data
-            android:name="io.github.muntashirakon.music.glide.RetroMusicGlideModule"
+            android:name="code.name.monkey.retromusic.glide.RetroMusicGlideModule"
             android:value="GlideModule" />
 
         <meta-data

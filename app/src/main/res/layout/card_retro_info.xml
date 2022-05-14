@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/appGithub"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             app:listItemSummary="@string/git_hub_summary"
             app:listItemTitle="@string/git_hub" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/appTranslation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             app:listItemTitle="@string/translate" />
 
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/appRate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             app:listItemSummary="@string/rate_on_google_play_summary"
             app:listItemTitle="@string/rate_app" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/donateLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
             app:listItemTitle="@string/donate" />
 
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/bugReportLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
             app:listItemSummary="@string/bug_report_summary"
             app:listItemTitle="@string/report_bug" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/appShare"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
             app:listItemSummary="@string/share_summary"
             app:listItemTitle="@string/action_share" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/faqLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

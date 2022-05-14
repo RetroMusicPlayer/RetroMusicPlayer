@@ -33,7 +33,7 @@
 
      <fragment
          android:id="@+id/playerAlbumCoverFragment"
-         android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
          android:layout_width="0dp"
          android:layout_height="0dp"
          app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/playbackControlsFragment"
-        android:name="io.github.muntashirakon.music.fragments.player.color.ColorPlaybackControlsFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.color.ColorPlaybackControlsFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/playerToolbar"

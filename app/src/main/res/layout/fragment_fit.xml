@@ -24,7 +24,7 @@
 
              <fragment
                  android:id="@+id/playerAlbumCoverFragment"
-                 android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+                 android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  tools:layout="@layout/fragment_album_full_cover" />
@@ -39,7 +39,7 @@
 
             <fragment
                 android:id="@+id/playbackControlsFragment"
-                android:name="io.github.muntashirakon.music.fragments.player.fit.FitPlaybackControlsFragment"
+                android:name="code.name.monkey.retromusic.fragments.player.fit.FitPlaybackControlsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_gradient_controls" />

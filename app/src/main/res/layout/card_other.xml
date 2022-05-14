@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/changelog"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             app:listItemSummary="@string/changelog_summary"
             app:listItemTitle="@string/changelog" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/openSource"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             app:listItemSummary="@string/pref_summary_open_source_licences"
             app:listItemTitle="@string/pref_title_open_source_licences" />
 
-        <io.github.muntashirakon.music.views.ListItemView
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/version"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

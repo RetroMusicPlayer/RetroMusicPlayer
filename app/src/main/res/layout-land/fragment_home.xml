@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <io.github.muntashirakon.music.views.RetroShapeableImageView
+            <code.name.monkey.retromusic.views.RetroShapeableImageView
                 android:id="@+id/userImage"
                 android:layout_width="42dp"
                 android:layout_height="42dp"

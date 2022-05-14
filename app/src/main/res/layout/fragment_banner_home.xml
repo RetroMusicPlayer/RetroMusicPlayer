@@ -99,7 +99,7 @@
                         android:background="@drawable/shadow_up"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
-                    <io.github.muntashirakon.music.views.RetroShapeableImageView
+                    <code.name.monkey.retromusic.views.RetroShapeableImageView
                         android:id="@+id/userImage"
                         android:layout_width="42dp"
                         android:layout_height="42dp"

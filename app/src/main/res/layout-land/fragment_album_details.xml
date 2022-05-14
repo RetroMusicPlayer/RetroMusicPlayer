@@ -76,7 +76,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <io.github.muntashirakon.music.views.RetroShapeableImageView
+                <code.name.monkey.retromusic.views.RetroShapeableImageView
                     android:id="@+id/artistImage"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
@@ -95,7 +95,7 @@
                     android:paddingEnd="12dp"
                     android:paddingBottom="8dp">
 
-                    <io.github.muntashirakon.music.views.BaselineGridTextView
+                    <code.name.monkey.retromusic.views.BaselineGridTextView
                         android:id="@+id/albumTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                         tools:ignore="MissingPrefix"
                         tools:text="Album name" />
 
-                    <io.github.muntashirakon.music.views.BaselineGridTextView
+                    <code.name.monkey.retromusic.views.BaselineGridTextView
                         android:id="@+id/albumText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
