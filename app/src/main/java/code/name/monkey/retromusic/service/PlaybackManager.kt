@@ -92,8 +92,12 @@ class PlaybackManager(val context: Context) {
         playback?.setCrossFadeDuration(duration)
     }
 
-    fun maybeSwitchToCrossFade(crossFadeDuration: Int) {
-        /* Switch to MultiPlayer if Crossfade duration is 0 and
+    /**
+     * @param crossFadeDuration CrossFade duration
+     * @return Whether switched playback
+     */
+    fun maybeSwitchToCrossFade(crossFadeDuration: Int): Boolean {
+        /* Switch to MultiPlayer if CrossFade duration is 0 and
                 Playback is not an instance of MultiPlayer */
         if (playback !is MultiPlayer && crossFadeDuration == 0) {
             if (playback != null) {
@@ -101,13 +105,16 @@ class PlaybackManager(val context: Context) {
             }
             playback = null
             playback = MultiPlayer(context)
+            return true
         } else if (playback !is CrossFadePlayer && crossFadeDuration > 0) {
             if (playback != null) {
                 playback?.release()
             }
             playback = null
             playback = CrossFadePlayer(context)
+            return true
         }
+        return false
     }
 
     fun release() {
@@ -126,7 +133,7 @@ class PlaybackManager(val context: Context) {
         context.sendBroadcast(intent)
     }
 
-    fun closeAudioEffectSession() {
+    private fun closeAudioEffectSession() {
         val audioEffectsIntent = Intent(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION)
         if (playback != null) {
             audioEffectsIntent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION,
@@ -141,12 +148,18 @@ class PlaybackManager(val context: Context) {
         switchToPlayback(createLocalPlayback(), onChange)
     }
 
-    fun switchToRemotePlayback(castSession: CastSession, onChange: (wasPlaying: Boolean, progress: Int) -> Unit) {
+    fun switchToRemotePlayback(
+        castSession: CastSession,
+        onChange: (wasPlaying: Boolean, progress: Int) -> Unit,
+    ) {
         playbackLocation = PlaybackLocation.REMOTE
         switchToPlayback(CastPlayer(castSession), onChange)
     }
 
-    private fun switchToPlayback(playback: Playback, onChange: (wasPlaying: Boolean, progress: Int) -> Unit) {
+    private fun switchToPlayback(
+        playback: Playback,
+        onChange: (wasPlaying: Boolean, progress: Int) -> Unit,
+    ) {
         val oldPlayback = playback
         val wasPlaying: Boolean = oldPlayback.isPlaying
         val progress: Int = oldPlayback.position()
@@ -167,6 +180,9 @@ class PlaybackManager(val context: Context) {
         }
     }
 
+    fun setPlaybackSpeedPitch(playbackSpeed: Float, playbackPitch: Float) {
+        playback?.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
+    }
 }
 
 enum class PlaybackLocation {

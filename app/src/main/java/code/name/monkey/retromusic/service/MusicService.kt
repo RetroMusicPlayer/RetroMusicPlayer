@@ -692,15 +692,15 @@ class MusicService : MediaBrowserServiceCompat(),
     ) {
         when (key) {
             PLAYBACK_SPEED, PLAYBACK_PITCH -> {
-                playback?.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
+                playbackManager.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
             }
             CROSS_FADE_DURATION -> {
                 val progress = songProgressMillis
                 val wasPlaying = isPlaying
 
-                playbackManager.maybeSwitchToCrossFade(crossFadeDuration)
-                restorePlaybackState(wasPlaying, progress)
-
+                if (playbackManager.maybeSwitchToCrossFade(crossFadeDuration)) {
+                    restorePlaybackState(wasPlaying, progress)
+                }
             }
             ALBUM_ART_ON_LOCK_SCREEN, BLURRED_ALBUM_ART -> updateMediaSessionMetaData()
             COLORED_NOTIFICATION -> {

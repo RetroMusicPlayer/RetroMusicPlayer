@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.service
 import code.name.monkey.retromusic.cast.CastHelper.toMediaInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
+import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 import com.google.android.gms.cast.MediaLoadOptions
 import com.google.android.gms.cast.MediaSeekOptions
 import com.google.android.gms.cast.MediaStatus
@@ -18,6 +19,7 @@ class CastPlayer(castSession: CastSession) : Playback,
 
     init {
         remoteMediaClient?.registerCallback(this)
+        remoteMediaClient?.setPlaybackRate(playbackSpeed.toDouble().coerceIn(0.5, 2.0))
     }
 
     private var isActuallyPlaying = false
@@ -92,6 +94,10 @@ class CastPlayer(castSession: CastSession) : Playback,
     override fun setAudioSessionId(sessionId: Int) = true
 
     override fun setCrossFadeDuration(duration: Int) {}
+
+    override fun setPlaybackSpeedPitch(speed: Float, pitch: Float) {
+        remoteMediaClient?.setPlaybackRate(speed.toDouble().coerceIn(0.5, 2.0))
+    }
 
     override fun onStatusUpdated() {
         when (remoteMediaClient?.playerState) {

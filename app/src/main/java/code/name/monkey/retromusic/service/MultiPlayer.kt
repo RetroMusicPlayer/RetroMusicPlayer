@@ -14,19 +14,12 @@
 package code.name.monkey.retromusic.service
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.MediaPlayer.OnCompletionListener
-import android.media.PlaybackParams
 import android.net.Uri
 import android.os.PowerManager
 import android.util.Log
-import androidx.preference.PreferenceManager
-import code.name.monkey.appthemehelper.util.VersionUtils.hasMarshmallow
-import code.name.monkey.retromusic.PLAYBACK_PITCH
-import code.name.monkey.retromusic.PLAYBACK_SPEED
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.extensions.uri
@@ -41,7 +34,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
  * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
  */
 class MultiPlayer internal constructor(private val context: Context) : Playback,
-    MediaPlayer.OnErrorListener, OnCompletionListener, OnSharedPreferenceChangeListener {
+    MediaPlayer.OnErrorListener, OnCompletionListener {
     private var mCurrentMediaPlayer = MediaPlayer()
     private var mNextMediaPlayer: MediaPlayer? = null
     private var callbacks: PlaybackCallbacks? = null
@@ -51,6 +44,10 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
      */
     override var isInitialized = false
         private set
+
+    init {
+        mCurrentMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
+    }
 
     /**
      * @param song The song object you want to play
@@ -89,12 +86,12 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
             } else {
                 player.setDataSource(path)
             }
-            setPlaybackSpeedPitch(player)
             player.setAudioAttributes(AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_MEDIA)
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .build()
             )
+            player.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
             player.setOnPreparedListener {
                 player.setOnPreparedListener(null)
                 completion(true)
@@ -198,8 +195,6 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
         if (mNextMediaPlayer != null) {
             mNextMediaPlayer?.release()
         }
-        PreferenceManager.getDefaultSharedPreferences(context)
-            .unregisterOnSharedPreferenceChangeListener(this)
     }
 
     /**
@@ -298,9 +293,6 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
     override val audioSessionId: Int
         get() = mCurrentMediaPlayer.audioSessionId
 
-    /**
-     * {@inheritDoc}
-     */
     override fun onError(mp: MediaPlayer, what: Int, extra: Int): Boolean {
         isInitialized = false
         mCurrentMediaPlayer.release()
@@ -311,9 +303,6 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
         return false
     }
 
-    /**
-     * {@inheritDoc}
-     */
     override fun onCompletion(mp: MediaPlayer) {
         if (mp == mCurrentMediaPlayer && mNextMediaPlayer != null) {
             isInitialized = false
@@ -328,34 +317,12 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
     }
 
     override fun setCrossFadeDuration(duration: Int) {}
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (key == PLAYBACK_SPEED || key == PLAYBACK_PITCH) {
-            setPlaybackSpeedPitch(mCurrentMediaPlayer)
-        }
-    }
 
-    private fun setPlaybackSpeedPitch(mp: MediaPlayer) {
-        if (hasMarshmallow()) {
-            val wasPlaying = mp.isPlaying
-            mp.playbackParams = PlaybackParams()
-                .setSpeed(playbackSpeed)
-                .setPitch(playbackPitch)
-            if (!wasPlaying) {
-                if (mp.isPlaying) mp.pause()
-            }
-        }
+    override fun setPlaybackSpeedPitch(speed: Float, pitch: Float) {
+        mCurrentMediaPlayer.setPlaybackSpeedPitch(speed, pitch)
     }
 
     companion object {
         val TAG: String = MultiPlayer::class.java.simpleName
-    }
-
-    /**
-     * Constructor of `MultiPlayer`
-     */
-    init {
-        mCurrentMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
-        PreferenceManager.getDefaultSharedPreferences(context)
-            .registerOnSharedPreferenceChangeListener(this)
     }
 }

@@ -97,7 +97,6 @@ internal class PlaybackHandler(service: MusicService, looper: Looper) : Handler(
                 }
                 AudioManager.AUDIOFOCUS_LOSS -> {
                     // Lost focus for an unbounded amount of time: stop playback and release media playback
-                    val isAudioFocusEnabled = isAudioFocusEnabled
                     if (!isAudioFocusEnabled) {
                         service.pause(true)
                     }
