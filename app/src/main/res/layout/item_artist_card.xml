@@ -17,7 +17,7 @@
     android:layout_width="128dp"
     android:layout_height="128dp"
     android:layout_margin="4dp"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="@dimen/m3_card_corner_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/paletteColorContainer"

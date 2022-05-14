@@ -6,22 +6,23 @@
             word-wrap: break-word;
         }
 
-        body {
-            padding-left: 1rem;
-            padding-right: 1rem;
+        div {
+            margin: 20px 10px;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
 
         h2 {
             margin-block-end: 0rem;
             margin-block-start: 0rem;
+            display: inline-block;
+            vertical-align: center;
         }
 
         li {
             font-size: 0.85rem;
-            padding-top: 0.5rem;
-            padding-left: 0;
-            padding-right: 0;
-            color: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 0;
         }
 
         ul {
@@ -36,7 +37,6 @@
 
         span {
             font-size: 0.7rem;
-            line-height: 0.7rem;
         }
 
         h5 {
@@ -44,39 +44,335 @@
             margin-block-end: 0.5rem;
         }
 
-        h3 span {
-            border-radius: 0.2rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-            padding-top: 0.3rem;
-            padding-bottom: 0.3rem;
+        h3 {
+            margin: 10px 0px;
             font-size: 1rem;
         }
+
+        .tag {
+            border-radius: 5px;
+            margin-left: 10px;
+            padding: 5px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
         {style-placeholder}
-
-
     </style>
 </head>
 
 <body>
-<h5>April 30, 2020</h5>
-<h2>v3.5.110</h2>
-<span class="tag"><i>Beta version</i></span>
-<h3><span class="colorHeader">What's New</span></h3>
-<ul>
-    <li>Changed profile form image to icon</li>
-    <li>New what's new screen</li>
-    <li>Added In-App language changer, where you can select language</li>
-</ul>
-<h3><span class="colorHeader">Improved</span></h3>
-<ul>
-    <li>Improved loading of Songs, Albums, Artists, Genres, Playlists</li>
-</ul>
-<!--<h3><span class="colorHeader">Bug fixes</span></h3>
-<ul>
-    <li></li>
-</ul>-->
-<p>*If you face any UI related issues you clear app data and cache, if itsnot working try to
-    uninstall and install
-    again. </p>
+<div>
+    <h5>May 13, 2022</h5>
+    <h2>v5.8.4</h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added a toggle to enable/disable swipe down to dismiss mini player</li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed Playback speed and pitch not working when CrossFade is enabled</li>
+        <li>Fixed crash when adding folders to blacklist</li>
+        <li>Fix bugs in MD3 theme</li>
+    </ul>
+</div>
+<div>
+    <h5>May 07, 2022</h5>
+    <h2>v5.8.3</h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added a new MD3 now playing theme</li>
+        <li>Swipe down to dismiss Mini player</li>
+        <li>Add support for Just Black with Material You</li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed sharing of files from SD Card</li>
+        <li>Fix ChromeCast crash and bugs</li>
+        <li>Fix Audio Crossfade</li>
+        <li>Tried to fix incorrect song data in notification</li>
+    </ul>
+</div>
+<div>
+    <h5>April 8, 2022</h5>
+    <h2>v5.8.0</h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Updated translations</li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed Classic Notification crash</li>
+        <li>Fixed crash when clicking on Playlist in the Search Tab</li>
+        <li>Fixed settings change not reflecting immediately</li>
+        <li>Fixed shuffle</li>
+        <li>Fixed Song duration not visible in Card & Blur card themes</li>
+        <li>Fixed some Album skip styles</li>
+        <li>Minor bug fixes & UI improvements</li>
+    </ul>
+</div>
+<div>
+    <h5>March 13, 2022</h5>
+    <h2>v5.7.3</h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added adaptive color in Material now playing theme</li>
+        <li>Added an option to share crash report</li>
+        <li>Added options to clear, pause history</li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Adapt Wallpaper accent for better readability</li>
+        <li>Optimized search</li>
+        <li>Made sleep timer precise</li>
+    </ul>
+</div>
+<div>
+    <h5>February 13, 2022</h5>
+    <h2>v5.7.2<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Animated splash screen on Android 12 devices</li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed crash when removing song from Playing queue</li>
+        <li>Fixed lyrics editing crash</li>
+        <li>Fixed shuffle button not working</li>
+        <li>Fixed crash on song deletion</li>
+    </ul>
+</div>
+<div>
+    <h5>February 1, 2022</h5>
+    <h2>v5.7.1<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added option to disable changing song by swiping anywhere on the now playing screen</li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed Playlist save on A11+</li>
+        <li>Fixed Just Black theme</li>
+        <li>Fixed some UI issues</li>
+    </ul>
+    <h3>Improved</h3>
+    <ul>
+        <li>Improvements to search</li>
+    </ul>
+</div>
+<div>
+    <h5>January 25, 2022</h5>
+    <h2>v5.7.0<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added Android Auto</li>
+        <li>Added accent color extraction on Android 8.1+ devices</li>
+        <li>Added new Circle widget</li>
+        <li>Added Collapsing appbar to library tabs with an option to switch back to simple appbar
+        </li>
+        <li>Added Search tab</li>
+        <li>Added option to use circular play button</li>
+        <li>Added lyrics editing on A11+ devices again</li>
+        <li>Added Long Press to forward, rewind current song</li>
+        <li>Added ability to set Playback speed and pitch</li>
+        <li>Added option to show lyrics over Cover</li>
+        <li>Added option to keep screen on when showing lyrics</li>
+        <li>Added option to switch to Manrope font</li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed Gapless Playback</li>
+        <li>Fixed Shuffle FAB going behind Mini Player</li>
+        <li>Fixed crashes on Pre-marshmallow devices</li>
+        <li>Blacklisted songs can't be played after opening from outside the app</li>
+        <li>Fixed various small bugs and some minor improvements</li>
+    </ul>
+</div>
+<div>
+    <h5>January 1, 2021</h5>
+    <h2>v5.6.1</h2>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed artist covers not updating and showing album cover images.</li>
+        <li>Fixed FAB's not visible (Shuffle, Save, etc.)</li>
+        <li>Fixed a crash when a Song is deleted in Artist Details</li>
+        <li>Fixed Snowfall effect</li>
+        <li>Fixed empty notification when queue is cleared</li>
+    </ul>
+</div>
+<div>
+    <h5>December 25, 2021</h5>
+    <h2>v5.6.0<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added Artwork editing for songs</li>
+        <li>Circle theme has album art now</li>
+        <li>Upgraded tag editor library, we should support reading tags of more formats now e.g.
+            opus.
+        </li>
+        <li>Added Snowfall effect</li>
+        <li>Crossfade effect for background when Song is changed for Blur, Blur card themes</li>
+        <li>Album art is hidden when Show lyrics is enabled</li>
+        <li>Added fastscroll in Playlists tab</li>
+        <li>Added Chooser to choose what to restore</li>
+        <li>Hide BottomNavigation when only one tab is selected in Library Categories(This was
+            already there but when changing screens it was getting visible)
+        </li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed Ringtone crash</li>
+        <li>Fixed blank album cover bug</li>
+        <li>Fixed bottom navigation visible in Playing Queue</li>
+        <li>Fixed lockscreen dragging glitch</li>
+        <li>Fixed incorrect colors when no cover art is available</li>
+        <li>Fixed favorite not updating when song is changed</li>
+        <li>Fixed playlist not getting created & playlist creation crash with same name</li>
+        <li>Fixed a bug in "Plain" Now playing theme where onClick event is consumed by the views
+            behind the bottom sheet
+        </li>
+    </ul>
+</div>
+<div>
+    <h5>December 6, 2021</h5>
+    <h2>v5.4.2<span class="tag"><i>Beta</i></span></h2>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Bug Fixes</li>
+    </ul>
+</div>
+<div>
+    <h5>December 1, 2021</h5>
+    <h2>v5.4.1<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added file selection from system file picker for restore</li>
+        <li>Added Grid size selection for Playlists</li>
+    </ul>
+    <h3>Improved</h3>
+    <ul>
+        <li>Enable Material You by default on Android 12</li>
+        <li>Reworked Grid Style saving</li>
+        <li>Improved Playlist preview images</li>
+        <li>UI improvements</li>
+    </ul>
+    <h3>Improved</h3>
+    <ul>
+        <li>Fixed File deletion on Android 10</li>
+        <li>Fixed Sleep Timer crash</li>
+        <li>Fixed Bottom Toolbar not clickable in now playing when Shuffle is clicked</li>
+        <li>Fixed Album Artist sort order</li>
+        <li>Fixed a crash when clicking the "Clear All" button in the Blacklist folder selection
+        </li>
+        <li>Fixed Continuous crashes on A12 when the song ends</li>
+        <li>Fixed New Music Mix multiple clicks crash</li>
+    </ul>
+</div>
+<div>
+    <h5>November 22, 2021</h5>
+    <h2>v5.4.0<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li><b>Material You</b></li>
+        <li>Going Edge-to-Edge</li>
+        <li>Added Backup & restore</li>
+    </ul>
+    <h3>Improved</h3>
+    <ul>
+        <li>Improved Animations</li>
+        <li>Improved Crossfade</li>
+    </ul>
+</div>
+<div>
+    <h5>September 06, 2021</h5>
+    <h2>v5.0.0</h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added ability to Remember last tab</li>
+        <li>Added Whitelisting songs</li>
+        <li>You can now browse SDCard from Folders Tab</li>
+    </ul>
+</div>
+<div>
+    <h5>August 22, 2021</h5>
+    <h2>v4.4.0<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added Crossfade</li>
+        <li>Multi-select in Album and Artist Details</li>
+        <li>Albums now show Album Artists instead of artist of first song</li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed Playlist Preview Images</li>
+    </ul>
+</div>
+<div>
+    <h5>August 11, 2021</h5>
+    <h2>v4.2.30<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Revamped Playlist Tab</li>
+        <li>Revamped Genres Tab</li>
+        <li>Added support for embedded Synced Lyrics</li>
+        <li>Added animated icons</li>
+    </ul>
+    <h3>Fixed</h3>
+    <ul>
+        <li>Fixed Language Switching</li>
+        <li>Fixed some reported bugs</li>
+    </ul>
+</div>
+<div>
+    <h5>July 18, 2021</h5>
+    <h2>v4.2.020<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Added ChromeCast Support</li>
+        <li>Added Lyrics Editor for Normal and Synced Lyrics</li>
+        <li>Added Ripple Animation for Color Theme</li>
+        <li>Added Drag to seek in Tiny Theme</li>
+        <li>Added Playlist Order</li>
+        <li>Added Search Filters</li>
+        <li>Added Audio Fade</li>
+        <li>Synced Lyrics in all Themes</li>
+        <li>Swipe anywhere to change song</li>
+    </ul>
+    <h3>Improved</h3>
+    <ul>
+        <li>Fixed Navigate by Album Artist</li>
+        <li>Changed New Music Mix Actions</li>
+        <li>Improved Animations</li>
+        <li>And some minor bug fixes and improvements</li>
+    </ul>
+</div>
+<div>
+    <h5>October 12, 2020</h5>
+    <h2>v4.0.10</h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Re-built from scratch using MVVM Architecture and JetPack Components</li>
+        <li>New Material Design icon</li>
+        <li>Implemented a custom database for playlists</li>
+        <li>Added new Material Design motions</li>
+        <li>Bug fixes & performance improvements</li>
+        <li>Revamped Home tab UI</li>
+        <li>Android 11 support</li>
+        <li>And more!</li>
+    </ul>
+</div>
+<div>
+    <h5>April 30, 2020</h5>
+    <h2>v3.5.110<span class="tag"><i>Beta</i></span></h2>
+    <h3>What's New</h3>
+    <ul>
+        <li>Changed profile form image to icon</li>
+        <li>New what's new screen</li>
+        <li>Added In-App language changer, where you can select language</li>
+    </ul>
+    <h3>Improved</h3>
+    <ul>
+        <li>Improved loading of Songs, Albums, Artists, Genres, Playlists</li>
+    </ul>
+</div>
 </body>

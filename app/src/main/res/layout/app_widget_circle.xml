@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.Material3.DynamicColors.DayNight">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/default_audio_art"
+        tools:src="@tools:sample/backgrounds/scenic[0]" />
+
+    <ImageButton
+        android:id="@+id/button_toggle_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/image"
+        android:layout_alignEnd="@+id/image"
+        android:layout_margin="4dp"
+        android:background="@drawable/circle_widget_background"
+        android:backgroundTint="?attr/colorSurface"
+        android:clickable="false"
+        android:padding="14dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_favorite_border" />
+
+    <ImageButton
+        android:id="@+id/button_toggle_play_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/image"
+        android:layout_alignBottom="@+id/image"
+        android:layout_margin="4dp"
+        android:background="@drawable/widget_button_background"
+        android:backgroundTint="?attr/colorSurface"
+        android:clickable="false"
+        android:padding="18dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_play_arrow" />
+</RelativeLayout>

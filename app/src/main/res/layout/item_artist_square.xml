@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="?attr/rectSelector"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="@dimen/m3_card_corner_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -15,7 +15,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            android:layout_width="112dp"
+            android:layout_width="156dp"
             android:layout_height="156dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"

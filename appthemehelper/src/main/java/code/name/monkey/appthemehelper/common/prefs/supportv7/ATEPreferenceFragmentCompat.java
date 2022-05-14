@@ -8,8 +8,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs.ATEListPreferenceDialogFragmentCompat;
 import code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs.ATEPreferenceDialogFragment;
 
-import static androidx.preference.PreferenceFragmentCompat.*;
-
 /**
  * @author Karim Abou Zeid (kabouzeid)
  */

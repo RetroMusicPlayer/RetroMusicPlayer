@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.network.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,7 +112,8 @@ public class LastFmAlbum {
 
     public class Tags {
 
-      @Expose private List<Tag> tag = null;
+      @Expose
+      private final List<Tag> tag = null;
 
       public List<Tag> getTag() {
         return tag;

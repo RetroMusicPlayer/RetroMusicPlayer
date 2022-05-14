@@ -20,4 +20,12 @@
     <string name="app_shortcut_top_tracks_long" translatable="false">@string/my_top_tracks</string>
 
     <string name="empty_text_emoji" translatable="false">&#128561;</string>
+
+    <!-- Material You -->
+    <string name="pref_title_md3">Material You</string>
+
+    <string name="sort_order_album_artist">@string/album_artist</string>
+    <string name="app_widget_circle_name">@string/circle</string>
+
+
 </resources>

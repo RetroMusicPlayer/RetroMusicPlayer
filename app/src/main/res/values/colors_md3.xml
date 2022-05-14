@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="elevationOverlayLight">@color/md_grey_500</color>
+    <color name="elevationOverlayDark">@color/md_grey_500</color>
+    <color name="elevationOverlayBlack">@color/md_black_1000</color>
+    <color name="elevationOverlay">@color/elevationOverlayLight</color>
+</resources>

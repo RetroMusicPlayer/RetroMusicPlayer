@@ -13,7 +13,7 @@
  */
 package code.name.monkey.retromusic.model
 
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 /**
  * Created by hemanths on 3/4/19

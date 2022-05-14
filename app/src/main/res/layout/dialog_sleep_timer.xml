@@ -9,6 +9,7 @@
         android:id="@+id/timerDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp"
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxHeight="3dp"
+        android:paddingVertical="@dimen/seekbar_padding"
         android:splitTrack="false"
         tools:progress="20" />
 

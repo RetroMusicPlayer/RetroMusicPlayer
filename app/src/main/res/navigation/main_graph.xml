@@ -45,6 +45,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/albumArtistDetailsFragment"
+        android:name="code.name.monkey.retromusic.fragments.artists.AlbumArtistDetailsFragment"
+        android:label="AlbumArtistDetailsFragment"
+        tools:layout="@layout/fragment_artist_details">
+        <argument
+            android:name="extra_artist_name"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
         android:id="@+id/libraryFragment"
         android:name="code.name.monkey.retromusic.fragments.library.LibraryFragment"
         android:label=""
@@ -52,7 +62,7 @@
 
     <fragment
         android:id="@+id/detailListFragment"
-        android:name="code.name.monkey.retromusic.fragments.DetailListFragment"
+        android:name="code.name.monkey.retromusic.fragments.other.DetailListFragment"
         android:label="DetailListFragment">
         <argument
             android:name="type"
@@ -60,7 +70,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/searchFragment"
+        android:id="@+id/action_search"
         android:name="code.name.monkey.retromusic.fragments.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
@@ -75,7 +85,6 @@
         android:name="code.name.monkey.retromusic.activities.PermissionActivity"
         android:label="PermissionFragment"
         tools:layout="@layout/activity_permission" />
-
 
     <fragment
         android:id="@+id/action_album"
@@ -111,7 +120,17 @@
         android:id="@+id/action_home"
         android:name="code.name.monkey.retromusic.fragments.home.HomeFragment"
         android:label=""
-        tools:layout="@layout/fragment_banner_home" />
+        tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/user_info_fragment"
+        android:name="code.name.monkey.retromusic.fragments.other.UserInfoFragment" />
 
+    <fragment
+        android:id="@+id/playing_queue_fragment"
+        android:name="code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment" />
+
+    <fragment
+        android:id="@+id/lyrics_fragment"
+        android:name="code.name.monkey.retromusic.fragments.other.LyricsFragment" />
 </navigation>

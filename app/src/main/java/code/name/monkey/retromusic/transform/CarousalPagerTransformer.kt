@@ -49,6 +49,4 @@ class CarousalPagerTransformer(context: Context) : ViewPager.PageTransformer {
         val m = context.resources.displayMetrics.density
         return (dipValue * m + 0.5f).toInt()
     }
-
-
 }

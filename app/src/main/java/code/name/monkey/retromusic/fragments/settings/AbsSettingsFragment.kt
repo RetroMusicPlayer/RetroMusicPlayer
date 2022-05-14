@@ -15,13 +15,20 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
+import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.OnThemeChangedListener
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.preferences.*
+import code.name.monkey.retromusic.util.NavigationUtil
+import dev.chrisbanes.insetter.applyInsetter
 
 /**
  * @author Hemanth S (h4h13).
@@ -54,13 +61,19 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
-        listView.overScrollMode = View.OVER_SCROLL_NEVER
-        listView.setPadding(0, 0, 0, 0)
-        listView.setPaddingRelative(0, 0, 0, 0)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            listView.overScrollMode = View.OVER_SCROLL_NEVER
+        }
+
+        listView.applyInsetter {
+            type(navigationBars = true) {
+                padding()
+            }
+        }
         invalidateSettings()
     }
 
-    override fun onDisplayPreferenceDialog(preference: Preference?) {
+    override fun onDisplayPreferenceDialog(preference: Preference) {
         when (preference) {
             is LibraryPreference -> {
                 val fragment = LibraryPreferenceDialog.newInstance()
@@ -78,7 +91,19 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
                 val fragment = BlacklistPreferenceDialog.newInstance()
                 fragment.show(childFragmentManager, preference.key)
             }
+            is DurationPreference -> {
+                val fragment = DurationPreferenceDialog.newInstance()
+                fragment.show(childFragmentManager, preference.key)
+            }
             else -> super.onDisplayPreferenceDialog(preference)
+        }
+    }
+
+    fun restartActivity() {
+        if (activity is OnThemeChangedListener && !VersionUtils.hasS()) {
+            (activity as OnThemeChangedListener).onThemeValuesChanged()
+        } else {
+            activity?.recreate()
         }
     }
 }

@@ -19,11 +19,11 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
-import androidx.core.view.ViewCompat
-import androidx.lifecycle.Observer
+import androidx.core.text.parseAsHtml
+import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -35,18 +35,19 @@ import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackg
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
+import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.AlbumTagEditorActivity
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
+import code.name.monkey.retromusic.databinding.FragmentAlbumDetailsBinding
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import code.name.monkey.retromusic.glide.AlbumGlideRequest
-import code.name.monkey.retromusic.glide.ArtistGlideRequest
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion.SONG_A_Z
@@ -54,6 +55,8 @@ import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion.SONG_TRACK_LIST
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion.SONG_Z_A
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
+import code.name.monkey.retromusic.interfaces.ICabCallback
+import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
@@ -61,24 +64,28 @@ import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
+import com.afollestad.materialcab.attached.AttachedCab
+import com.afollestad.materialcab.attached.destroy
+import com.afollestad.materialcab.attached.isActive
+import com.afollestad.materialcab.createCab
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialElevationScale
-import kotlinx.android.synthetic.main.fragment_album_content.*
-import kotlinx.android.synthetic.main.fragment_album_details.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.util.*
+import java.text.Collator
 
 class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_details),
-    IAlbumClickListener {
+    IAlbumClickListener, ICabHolder {
+
+    private var _binding: FragmentAlbumDetailsBinding? = null
+    private val binding get() = _binding!!
 
     private val arguments by navArgs<AlbumDetailsFragmentArgs>()
     private val detailsViewModel by viewModel<AlbumDetailsViewModel> {
@@ -87,6 +94,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     private lateinit var simpleSongAdapter: SimpleSongAdapter
     private lateinit var album: Album
+    private var albumArtistExists = false
 
     private val savedSortOrder: String
         get() = PreferenceUtil.albumDetailSongSortOrder
@@ -95,62 +103,81 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.fragment_container
-            duration = 300L
             scrimColor = Color.TRANSPARENT
-            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
+            setAllContainerColors(surfaceColor())
             setPathMotion(MaterialArcMotion())
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(false)
+        _binding = FragmentAlbumDetailsBinding.bind(view)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
-        mainActivity.setSupportActionBar(toolbar)
+        mainActivity.setSupportActionBar(binding.toolbar)
 
-        toolbar.title = " "
-        ViewCompat.setTransitionName(albumCoverContainer, "album")
+        binding.toolbar.title = " "
+        binding.albumCoverContainer.transitionName = arguments.extraAlbumId.toString()
         postponeEnterTransition()
-        detailsViewModel.getAlbum().observe(viewLifecycleOwner, Observer {
-            startPostponedEnterTransition()
+        detailsViewModel.getAlbum().observe(viewLifecycleOwner) {
+            view.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
+            albumArtistExists = !it.albumArtist.isNullOrEmpty()
             showAlbum(it)
-        })
+            binding.artistImage.transitionName = if (albumArtistExists) {
+                album.albumArtist
+            } else {
+                album.artistId.toString()
+            }
+        }
 
         setupRecyclerView()
-        artistImage.setOnClickListener { artistView ->
-            ViewCompat.setTransitionName(artistView, "artist")
-            exitTransition = MaterialElevationScale(false).apply {
-                duration = 300L
+        binding.artistImage.setOnClickListener { artistView ->
+            if (albumArtistExists) {
+                findActivityNavController(R.id.fragment_container)
+                    .navigate(
+                        R.id.albumArtistDetailsFragment,
+                        bundleOf(EXTRA_ARTIST_NAME to album.albumArtist),
+                        null,
+                        FragmentNavigatorExtras(artistView to album.albumArtist.toString())
+                    )
+            } else {
+                findActivityNavController(R.id.fragment_container)
+                    .navigate(
+                        R.id.artistDetailsFragment,
+                        bundleOf(EXTRA_ARTIST_ID to album.artistId),
+                        null,
+                        FragmentNavigatorExtras(artistView to album.artistId.toString())
+                    )
             }
-            reenterTransition = MaterialElevationScale(true).apply {
-                duration = 300L
-            }
-            findActivityNavController(R.id.fragment_container)
-                .navigate(
-                    R.id.artistDetailsFragment,
-                    bundleOf(EXTRA_ARTIST_ID to album.artistId),
-                    null,
-                    FragmentNavigatorExtras(artistView to "artist")
-                )
+
         }
-        playAction.setOnClickListener {
+        binding.fragmentAlbumContent.playAction.setOnClickListener {
             MusicPlayerRemote.openQueue(album.songs, 0, true)
         }
-        shuffleAction.setOnClickListener {
+        binding.fragmentAlbumContent.shuffleAction.setOnClickListener {
             MusicPlayerRemote.openAndShuffleQueue(
                 album.songs,
                 true
             )
         }
 
-        aboutAlbumText.setOnClickListener {
-            if (aboutAlbumText.maxLines == 4) {
-                aboutAlbumText.maxLines = Integer.MAX_VALUE
+        binding.fragmentAlbumContent.aboutAlbumText.setOnClickListener {
+            if (binding.fragmentAlbumContent.aboutAlbumText.maxLines == 4) {
+                binding.fragmentAlbumContent.aboutAlbumText.maxLines = Integer.MAX_VALUE
             } else {
-                aboutAlbumText.maxLines = 4
+                binding.fragmentAlbumContent.aboutAlbumText.maxLines = 4
             }
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (!handleBackPress()) {
+                remove()
+                requireActivity().onBackPressed()
+            }
+        }
+        binding.appBarLayout?.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     override fun onDestroy() {
@@ -163,9 +190,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             requireActivity() as AppCompatActivity,
             ArrayList(),
             R.layout.item_song,
-            null
+            this
         )
-        recyclerView.apply {
+        binding.fragmentAlbumContent.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = DefaultItemAnimator()
             isNestedScrollingEnabled = false
@@ -175,25 +202,26 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
 
     private fun showAlbum(album: Album) {
         if (album.songs.isEmpty()) {
+            findNavController().navigateUp()
             return
         }
         this.album = album
 
-        albumTitle.text = album.title
+        binding.albumTitle.text = album.title
         val songText = resources.getQuantityString(
             R.plurals.albumSongs,
             album.songCount,
             album.songCount
         )
-        songTitle.text = songText
+        binding.fragmentAlbumContent.songTitle.text = songText
         if (MusicUtil.getYearString(album.year) == "-") {
-            albumText.text = String.format(
+            binding.albumText.text = String.format(
                 "%s • %s",
-                album.artistName,
+                if (albumArtistExists) album.albumArtist else album.artistName,
                 MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(album.songs))
             )
         } else {
-            albumText.text = String.format(
+            binding.albumText.text = String.format(
                 "%s • %s • %s",
                 album.artistName,
                 MusicUtil.getYearString(album.year),
@@ -202,11 +230,19 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         }
         loadAlbumCover(album)
         simpleSongAdapter.swapDataSet(album.songs)
-        detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner, Observer {
-            loadArtistImage(it)
-        })
+        if (albumArtistExists) {
+            detailsViewModel.getAlbumArtist(album.albumArtist.toString())
+                .observe(viewLifecycleOwner) {
+                    loadArtistImage(it)
+                }
+        } else {
+            detailsViewModel.getArtist(album.artistId).observe(viewLifecycleOwner) {
+                loadArtistImage(it)
+            }
+        }
 
-        detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner, Observer { result ->
+
+        detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
                     println("Loading")
@@ -218,71 +254,74 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     aboutAlbum(result.data)
                 }
             }
-        })
+        }
     }
 
     private fun moreAlbums(albums: List<Album>) {
-        moreTitle.show()
-        moreRecyclerView.show()
-        moreTitle.text = String.format(getString(R.string.label_more_from), album.artistName)
+        binding.fragmentAlbumContent.moreTitle.show()
+        binding.fragmentAlbumContent.moreRecyclerView.show()
+        binding.fragmentAlbumContent.moreTitle.text =
+            String.format(getString(R.string.label_more_from), album.artistName)
 
         val albumAdapter =
-            HorizontalAlbumAdapter(requireActivity() as AppCompatActivity, albums, null, this)
-        moreRecyclerView.layoutManager = GridLayoutManager(
+            HorizontalAlbumAdapter(requireActivity() as AppCompatActivity, albums, this, this)
+        binding.fragmentAlbumContent.moreRecyclerView.layoutManager = GridLayoutManager(
             requireContext(),
             1,
             GridLayoutManager.HORIZONTAL,
             false
         )
-        moreRecyclerView.adapter = albumAdapter
+        binding.fragmentAlbumContent.moreRecyclerView.adapter = albumAdapter
     }
 
     private fun aboutAlbum(lastFmAlbum: LastFmAlbum) {
         if (lastFmAlbum.album != null) {
             if (lastFmAlbum.album.wiki != null) {
-                aboutAlbumText.show()
-                aboutAlbumTitle.show()
-                aboutAlbumTitle.text =
+                binding.fragmentAlbumContent.aboutAlbumText.show()
+                binding.fragmentAlbumContent.aboutAlbumTitle.show()
+                binding.fragmentAlbumContent.aboutAlbumTitle.text =
                     String.format(getString(R.string.about_album_label), lastFmAlbum.album.name)
-                aboutAlbumText.text = HtmlCompat.fromHtml(
-                    lastFmAlbum.album.wiki.content,
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                )
+                binding.fragmentAlbumContent.aboutAlbumText.text =
+                    lastFmAlbum.album.wiki.content.parseAsHtml()
             }
             if (lastFmAlbum.album.listeners.isNotEmpty()) {
-                listeners.show()
-                listenersLabel.show()
-                scrobbles.show()
-                scrobblesLabel.show()
+                binding.fragmentAlbumContent.listeners.show()
+                binding.fragmentAlbumContent.listenersLabel.show()
+                binding.fragmentAlbumContent.scrobbles.show()
+                binding.fragmentAlbumContent.scrobblesLabel.show()
 
-                listeners.text = RetroUtil.formatValue(lastFmAlbum.album.listeners.toFloat())
-                scrobbles.text = RetroUtil.formatValue(lastFmAlbum.album.playcount.toFloat())
+                binding.fragmentAlbumContent.listeners.text =
+                    RetroUtil.formatValue(lastFmAlbum.album.listeners.toFloat())
+                binding.fragmentAlbumContent.scrobbles.text =
+                    RetroUtil.formatValue(lastFmAlbum.album.playcount.toFloat())
             }
         }
     }
 
     private fun loadArtistImage(artist: Artist) {
-        detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner, {
+        detailsViewModel.getMoreAlbums(artist).observe(viewLifecycleOwner) {
             moreAlbums(it)
-        })
-        ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
-            .forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
-            .generatePalette(requireContext())
-            .build()
+        }
+        GlideApp.with(requireContext())
+            //.forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
+            .load(
+                RetroGlideExtension.getArtistModel(
+                    artist,
+                    PreferenceUtil.isAllowedToDownloadMetadata(requireContext())
+                )
+            )
+            .artistImageOptions(artist)
             .dontAnimate()
             .dontTransform()
-            .into(object : RetroMusicColoredTarget(artistImage) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                }
-            })
+            .into(binding.artistImage)
     }
 
     private fun loadAlbumCover(album: Album) {
-        AlbumGlideRequest.Builder.from(Glide.with(requireContext()), album.safeGetFirstSong())
-            .checkIgnoreMediaStore()
-            .generatePalette(requireContext())
-            .build()
-            .into(object : SingleColorTarget(image) {
+        GlideApp.with(requireContext()).asBitmapPalette()
+            .albumCoverOptions(album.safeGetFirstSong())
+            //.checkIgnoreMediaStore()
+            .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
+            .into(object : SingleColorTarget(binding.image) {
                 override fun onColorReady(color: Int) {
                     setColors(color)
                 }
@@ -290,41 +329,36 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     }
 
     private fun setColors(color: Int) {
-        shuffleAction?.applyColor(color)
-        playAction?.applyOutlineColor(color)
+        _binding?.fragmentAlbumContent?.apply {
+            shuffleAction.applyColor(color)
+            playAction.applyOutlineColor(color)
+        }
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
-        exitTransition = MaterialElevationScale(false).apply {
-            duration = 300L
-        }
-        reenterTransition = MaterialElevationScale(false).apply {
-            duration = 300L
-        }
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to "album"
+                view to albumId.toString()
             )
         )
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_album_detail, menu)
         val sortOrder = menu.findItem(R.id.action_sort_order)
         setUpSortOrderMenu(sortOrder.subMenu)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
-            toolbar,
+            binding.toolbar,
             menu,
-            getToolbarBackgroundColor(toolbar)
+            getToolbarBackgroundColor(binding.toolbar)
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         return handleSortOrderMenuItem(item)
     }
 
@@ -360,12 +394,11 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 intent.putExtra(AbsTagEditorActivity.EXTRA_ID, album.id)
                 val options = ActivityOptions.makeSceneTransitionAnimation(
                     requireActivity(),
-                    albumCoverContainer,
+                    binding.albumCoverContainer,
                     "${getString(R.string.transition_album_art)}_${album.id}"
                 )
-                startActivityForResult(
-                    intent,
-                    TAG_EDITOR_REQUEST, options.toBundle()
+                startActivity(
+                    intent, options.toBundle()
                 )
                 return true
             }
@@ -400,15 +433,13 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                     o2.trackNumber
                 )
             }
-            SONG_A_Z -> album.songs.sortedWith { o1, o2 ->
-                o1.title.compareTo(
-                    o2.title
-                )
+            SONG_A_Z -> {
+                val collator = Collator.getInstance()
+                album.songs.sortedWith { o1, o2 -> collator.compare(o1.title, o2.title) }
             }
-            SONG_Z_A -> album.songs.sortedWith { o1, o2 ->
-                o2.title.compareTo(
-                    o1.title
-                )
+            SONG_Z_A -> {
+                val collator = Collator.getInstance()
+                album.songs.sortedWith { o1, o2 -> collator.compare(o2.title, o1.title) }
             }
             SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
                 o1.duration.compareTo(
@@ -421,7 +452,40 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         simpleSongAdapter.swapDataSet(album.songs)
     }
 
-    companion object {
-        const val TAG_EDITOR_REQUEST = 9002
+    private fun handleBackPress(): Boolean {
+        cab?.let {
+            if (it.isActive()) {
+                it.destroy()
+                return true
+            }
+        }
+        return false
+    }
+
+    private var cab: AttachedCab? = null
+
+    override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
+        cab?.let {
+            if (it.isActive()) {
+                it.destroy()
+            }
+        }
+        cab = createCab(R.id.toolbar_container) {
+            menu(menuRes)
+            closeDrawable(R.drawable.ic_close)
+            backgroundColor(literal = RetroColorUtil.shiftBackgroundColor(surfaceColor()))
+            slideDown()
+            onCreate { cab, menu -> callback.onCabCreated(cab, menu) }
+            onSelection {
+                callback.onCabItemClicked(it)
+            }
+            onDestroy { callback.onCabFinished(it) }
+        }
+        return cab as AttachedCab
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -21,6 +21,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -33,24 +34,24 @@ public class SongPlayCountStore extends SQLiteOpenHelper {
   private static final int VERSION = 3;
   // how many weeks worth of playback to track
   private static final int NUM_WEEKS = 52;
-  @Nullable private static SongPlayCountStore sInstance = null;
+  @Nullable
+  private static SongPlayCountStore sInstance = null;
   // interpolator curve applied for measuring the curve
-  @NonNull private static Interpolator sInterpolator = new AccelerateInterpolator(1.5f);
+  @NonNull
+  private static final Interpolator sInterpolator = new AccelerateInterpolator(1.5f);
   // how high to multiply the interpolation curve
-  @SuppressWarnings("FieldCanBeLocal")
-  private static int INTERPOLATOR_HEIGHT = 50;
+  private static final int INTERPOLATOR_HEIGHT = 50;
 
   // how high the base value is. The ratio of the Height to Base is what really matters
-  @SuppressWarnings("FieldCanBeLocal")
-  private static int INTERPOLATOR_BASE = 25;
+  private static final int INTERPOLATOR_BASE = 25;
 
-  @SuppressWarnings("FieldCanBeLocal")
-  private static int ONE_WEEK_IN_MS = 1000 * 60 * 60 * 24 * 7;
+  private static final int ONE_WEEK_IN_MS = 1000 * 60 * 60 * 24 * 7;
 
-  @NonNull private static String WHERE_ID_EQUALS = SongPlayCountColumns.ID + "=?";
+  @NonNull
+  private static final String WHERE_ID_EQUALS = SongPlayCountColumns.ID + "=?";
 
   // number of weeks since epoch time
-  private int mNumberOfWeeksSinceEpoch;
+  private final int mNumberOfWeeksSinceEpoch;
 
   // used to track if we've walked through the db and updated all the rows
   private boolean mDatabaseUpdated;
@@ -253,7 +254,7 @@ public class SongPlayCountStore extends SQLiteOpenHelper {
           for (int i = 0; i < NUM_WEEKS - weekDiff; i++) {
             playCounts[i + weekDiff] = cursor.getInt(getColumnIndexForWeek(i));
           }
-        } else if (weekDiff < 0) {
+        } else {
           // time is shifted backwards (by user) - nor typical behavior but we
           // will still handle it
 

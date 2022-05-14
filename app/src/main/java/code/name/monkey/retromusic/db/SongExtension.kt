@@ -28,12 +28,6 @@ fun List<SongEntity>.toSongs(): List<Song> {
     }
 }
 
-fun List<Song>.toSongs(playlistId: Long): List<SongEntity> {
-    return map {
-        it.toSongEntity(playlistId)
-    }
-}
-
 fun Song.toHistoryEntity(timePlayed: Long): HistoryEntity {
     return HistoryEntity(
         id = id,

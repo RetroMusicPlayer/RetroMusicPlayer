@@ -43,9 +43,9 @@ class ATEColorPreference @JvmOverloads constructor(
         invalidateColor()
     }*/
 
-    override fun onBindViewHolder(holder: PreferenceViewHolder?) {
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
-        mView = holder?.itemView
+        mView = holder.itemView
         invalidateColor()
     }
 

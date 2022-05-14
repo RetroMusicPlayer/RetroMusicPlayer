@@ -40,9 +40,10 @@
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:splitTrack="false"
         android:maxHeight="2dp"
+        android:paddingVertical="@dimen/seekbar_padding"
         android:progressDrawable="@drawable/color_progress_seek"
+        android:splitTrack="false"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent" />
@@ -62,67 +63,52 @@
         tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
-
-    <LinearLayout
-        android:id="@+id/titleContainer"
-        android:layout_width="0dp"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textContainer"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:freezesText="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingHorizontal="16dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textAppearance="@style/TextViewHeadline6"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressSlider">
+        app:layout_constraintTop_toBottomOf="@+id/progressSlider"
+        tools:text="@tools:sample/lorem" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:freezesText="true"
-            android:gravity="center"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:paddingHorizontal="16dp"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:textAppearance="@style/TextViewHeadline6"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textStyle="bold"
-            tools:text="@tools:sample/lorem" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/textContainer"
-        android:layout_width="0dp"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:freezesText="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textAppearance="@style/TextViewBody1"
+        android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/songInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleContainer">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:freezesText="true"
-            android:gravity="center"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:textAppearance="@style/TextViewBody1"
-            android:textColor="?android:attr/textColorSecondary"
-            app:layout_constraintBottom_toTopOf="@+id/songInfo"
-            app:layout_constraintTop_toBottomOf="@+id/titleContainer"
-            tools:text="@tools:sample/lorem" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="@tools:sample/lorem" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songInfo"
@@ -137,7 +123,7 @@
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/playPauseButton"
-        app:layout_constraintTop_toBottomOf="@+id/textContainer"
+        app:layout_constraintTop_toBottomOf="@+id/text"
         tools:text="@tools:sample/lorem/random" />
 
     <androidx.appcompat.widget.AppCompatImageButton

@@ -12,67 +12,38 @@
   ~ See the GNU General Public License for more details.
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <include layout="@layout/abs_playlists" />
+    <include
+        android:id="@+id/abs_playlists"
+        layout="@layout/abs_playlists" />
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="24dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:visibility="gone"
-            tools:visibility="visible">
+        <include android:id="@+id/suggestions" layout="@layout/item_suggestions" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                app:srcCompat="@drawable/ic_play_arrow_white_64dp"
-                app:tint="?attr/colorControlNormal" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/emptyText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/start_play_music"
-                android:textAppearance="@style/TextViewNormal"
-                android:textColor="?android:attr/textColorPrimary" />
-        </LinearLayout>
-
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="@integer/overScrollMode"
+            tools:itemCount="10"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/item_album_card"
+            tools:spanCount="3" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never"
-                tools:itemCount="10"
-                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_album_card"
-                tools:spanCount="3" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="112dp" />
-        </LinearLayout>
-    </FrameLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mini_player_height_expanded" />
+    </LinearLayout>
 </LinearLayout>

@@ -23,11 +23,9 @@ import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
-import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import com.google.android.material.progressindicator.CircularProgressIndicator
 
 object ViewUtil {
 
@@ -77,14 +75,9 @@ object ViewUtil {
             )
     }
 
-    fun setProgressDrawable(indicator: CircularProgressIndicator, newColor: Int) {
-        indicator.setIndicatorColor(newColor)
-        indicator.trackColor = ColorUtil.withAlpha(newColor, 0.2f)
-    }
-
     fun hitTest(v: View, x: Int, y: Int): Boolean {
-        val tx = (ViewCompat.getTranslationX(v) + 0.5f).toInt()
-        val ty = (ViewCompat.getTranslationY(v) + 0.5f).toInt()
+        val tx = (v.translationX + 0.5f).toInt()
+        val ty = (v.translationY + 0.5f).toInt()
         val left = v.left + tx
         val right = v.right + tx
         val top = v.top + ty

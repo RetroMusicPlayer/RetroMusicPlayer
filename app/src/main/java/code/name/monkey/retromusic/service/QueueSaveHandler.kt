@@ -17,7 +17,7 @@ package code.name.monkey.retromusic.service
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import code.name.monkey.retromusic.service.MusicService.SAVE_QUEUES
+import code.name.monkey.retromusic.service.MusicService.Companion.SAVE_QUEUES
 import java.lang.ref.WeakReference
 
 internal class QueueSaveHandler(

@@ -18,21 +18,24 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentHomePlayerBinding
+import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_home_player.*
 
 class HomePlayerFragment : AbsPlayerFragment(R.layout.fragment_home_player),
     MusicProgressViewUpdateHelper.Callback {
     private var lastColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
+
+    private var _binding: FragmentHomePlayerBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,7 @@ class HomePlayerFragment : AbsPlayerFragment(R.layout.fragment_home_player),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentHomePlayerBinding.bind(view)
         setUpPlayerToolbar()
     }
 
@@ -54,8 +58,8 @@ class HomePlayerFragment : AbsPlayerFragment(R.layout.fragment_home_player),
         progressViewUpdateHelper.stop()
     }
 
-    override fun playerToolbar(): Toolbar? {
-        return playerToolbar
+    override fun playerToolbar(): Toolbar {
+        return binding.playerToolbar
     }
 
     override fun onShow() {
@@ -76,8 +80,8 @@ class HomePlayerFragment : AbsPlayerFragment(R.layout.fragment_home_player),
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        title.text = song.title
-        text.text = song.artistName
+        binding.title.text = song.title
+        binding.text.text = song.artistName
     }
 
     override fun onBackPressed(): Boolean {
@@ -95,7 +99,7 @@ class HomePlayerFragment : AbsPlayerFragment(R.layout.fragment_home_player),
         lastColor = color.backgroundColor
         libraryViewModel.updateColor(color.backgroundColor)
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
+            binding.playerToolbar,
             Color.WHITE,
             requireActivity()
         )
@@ -113,18 +117,23 @@ class HomePlayerFragment : AbsPlayerFragment(R.layout.fragment_home_player),
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        songTotalTime.text = MusicUtil.getReadableDurationString(progress.toLong())
+        binding.songTotalTime.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        playerToolbar.setOnMenuItemClickListener(this)
+        binding.playerToolbar.inflateMenu(R.menu.menu_player)
+        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.playerToolbar.setOnMenuItemClickListener(this)
 
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            binding.playerToolbar,
+            colorControlNormal(),
             requireActivity()
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

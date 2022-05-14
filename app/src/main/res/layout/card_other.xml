@@ -4,7 +4,6 @@
     style="@style/MaterialCardViewStroke"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
     app:cardCornerRadius="@dimen/about_card_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +20,7 @@
             android:paddingEnd="?attr/listPreferredItemPaddingEnd"
             android:paddingBottom="?attr/listPreferredItemPaddingEnd"
             android:text="@string/others"
-            android:textAppearance="@style/TextViewOverline"
+            android:textAppearance="@style/TextViewNormal"
             android:textColor="?colorAccent"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"

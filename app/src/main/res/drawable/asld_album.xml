@@ -1,0 +1,13 @@
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/state_on"
+        android:drawable="@drawable/ic_album"
+        android:state_checked="true" />
+    <item
+        android:id="@+id/state_off"
+        android:drawable="@drawable/ic_album" />
+    <transition
+        android:drawable="@drawable/avd_album"
+        android:fromId="@id/state_off"
+        android:toId="@id/state_on" />
+</animated-selector>

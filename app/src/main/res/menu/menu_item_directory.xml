@@ -22,6 +22,10 @@
         android:title="@string/action_scan"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_add_to_blacklist"
+        android:title="@string/action_add_to_blacklist"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_delete_from_device"
         android:title="@string/action_delete_from_device"
         app:showAsAction="never" />

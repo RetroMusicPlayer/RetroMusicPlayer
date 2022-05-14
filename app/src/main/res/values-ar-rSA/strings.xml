@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_album_label">حول %s</string>
-    <string name="about_settings_summary">الفريق, الروابط للتواصل</string>
-
+    <string name="about_settings_summary">الفريق، الروابط الاجتماعية</string>
     <string name="accent_color">اللون الأساسي</string>
     <string name="accent_color_desc">لون تمييز المظهر ، يتم تعيينه إلى اللون الأرجواني</string>
-
     <string name="action_about">حول</string>
+    <string name="action_add_to_blacklist">إضافة إلى القائمة السوداء</string>
     <string name="action_add_to_favorites">اضافة الى المفضلة</string>
     <string name="action_add_to_playing_queue">إضافة الى قائمة التشغيل الحالية</string>
     <string name="action_add_to_playlist">أضف إلى قائمة التشغيل</string>
+    <string name="action_cast">ممثلين</string>
     <string name="action_clear_playing_queue">إخلاء قائمة التشغيل الحالية</string>
     <string name="action_cycle_repeat">وضع تكرار الدورة</string>
     <string name="action_delete">حذف</string>
     <string name="action_delete_from_device">حذف من الجهاز</string>
     <string name="action_details">تفاصيل</string>
+    <string name="action_edit">تعديل</string>
     <string name="action_go_to_album">إنتقل إلى الالبوم</string>
     <string name="action_go_to_artist">إنتقل إلى الفنان</string>
     <string name="action_go_to_genre">إنتقل إلى النوع</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">إنتقل إلى الدليل</string>
     <string name="action_grant">امنح</string>
     <string name="action_grid_size">حجم الشبكة</string>
@@ -48,67 +50,58 @@
     <string name="action_tag_editor">محرر البطاقة</string>
     <string name="action_toggle_favorite">تبديل المفضلة</string>
     <string name="action_toggle_shuffle">تفعيل وضع الخلط</string>
-
     <string name="adaptive">متكيف</string>
-
     <string name="add_action">إضافة</string>
     <string name="add_playlist_title">"إضافة الى قائمة التشغيل"</string>
-
+    <string name="add_time_framed_lryics">أضف وقت كلمات الأغاني</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"إضافة ١ من العناوين الى قائمة التشغيل الحالية"</string>
     <string name="added_x_titles_to_playing_queue">إضافة %1$d من العناوين الى قائمة التشغيل الحالية</string>
-
     <string name="album">البوم</string>
-
     <plurals name="albumSongs">
-        <item quantity="zero">Songs</item>
-        <item quantity="one">Song</item>
-        <item quantity="two">Songs</item>
-        <item quantity="few">Songs</item>
-        <item quantity="many">Songs</item>
-        <item quantity="other">Songs</item>
+        <item quantity="zero">الأغاني</item>
+        <item quantity="one">الأغاني</item>
+        <item quantity="two">الأغاني</item>
+        <item quantity="few">أغنية 
+
+أغاني</item>
+        <item quantity="many">الأغاني</item>
+        <item quantity="other">الاغاني</item>
     </plurals>
-
-    <string name="album_artist">البوم الفنان</string>
-
+    <string name="album_artist">ألبوم الفنان</string>
     <string name="albums">الألبومات</string>
     <plurals name="albums">
-        <item quantity="zero">Albums</item>
-        <item quantity="one">Album</item>
-        <item quantity="two">Albums</item>
-        <item quantity="few">Albums</item>
-        <item quantity="many">Albums</item>
-        <item quantity="other">Albums</item>
+        <item quantity="zero">الألبومات</item>
+        <item quantity="one">الألبوم</item>
+        <item quantity="two">الألبومات</item>
+        <item quantity="few">الألبومات</item>
+        <item quantity="many">الألبومات</item>
+        <item quantity="other">الألبومات</item>
     </plurals>
-
     <string name="always">دائما</string>
-
     <string name="app_share">مرحبا القي نظرة على مشغل الموسيقى الرائع هذا في: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">عشوائي</string>
     <string name="app_shortcut_top_tracks_short">المسارات الاكثر شعبية</string>
-    <string name="app_widget_big_name">ريترو ميوزك - كبير</string>
+    <string name="app_widget_big_name">صورة كاملة</string>
     <string name="app_widget_card_name">ريترو ميوزك - بطاقة</string>
     <string name="app_widget_classic_name">ريترو ميوزك - تقليدي</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">ريترو ميوزك - صغير</string>
-    <string name="app_widget_text_name">ريترو ميوزك - نص</string>
-
+    <string name="app_widget_text_name">الحد الأدنى للنص</string>
     <string name="artist">فنان</string>
-
     <string name="artists">فنانين</string>
-
+    <string name="audio_fade_duration">Audio fade duration</string>
     <string name="audio_focus_denied">تم منع تركيز الصوت</string>
     <string name="audio_settings_summary">تغيير إعدادات الصوت وضبط عناصر التحكم في موازن الصوت</string>
-
     <string name="auto">تلقائي</string>
-
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">سيرة ذاتية</string>
-
     <string name="black_theme_name">أسود لامع</string>
-
     <string name="blacklist">القائمة السوداء</string>
-
     <string name="blur">ضبابي</string>
     <string name="blur_card">بطاقة ضبابية</string>
-
     <string name="bug_report_failed">لم يمكن ارسال التقرير</string>
     <string name="bug_report_failed_invalid_token">دخول غير مكتمل. الرجاء إبلاغ مطور التطبيق</string>
     <string name="bug_report_failed_issues_not_available">المشاكل غير مفعلة للمستودعات المحددة.الرجاء إبلاغ مطور التطبيق</string>
@@ -122,55 +115,41 @@
     <string name="bug_report_no_username">الرجاء ادخال أسم مستخدم صالح</string>
     <string name="bug_report_summary">حصل خطأ غير متوقع. نأسف لذالك, اذا تكرر معك الخطأ \"قم بمسح بيانات التطبيق\"او ارسل ايميل</string>
     <string name="bug_report_use_account">ارسال بأستخدام حساب چيتهب</string>
-
     <string name="buy_now">اشتري الآن</string>
-
     <string name="cancel_current_timer">إلغاء</string>
-
     <string name="card">بطاقة</string>
     <string name="card_color_style">بطاقة ملونة</string>
+    <string name="card_square">بطاقة مربعة</string>
     <string name="card_style">بطاقة</string>
-
     <string name="carousal_effect_on_now_playing_screen">التاثير الدائري على شاشة التشغيل الآن</string>
-
     <string name="cascading">المتتالية</string>
-
     <string name="changelog">سجل التغيرات</string>
-    <string name="changelog_summary">سجل التغيرات ثابت على قناة التيليجرام</string>
-
+    <string name="changelog_summary">تحقق من الجديد</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">دائرية</string>
-
     <string name="circular">دائري</string>
-
     <string name="classic">كلاسيكي</string>
-
     <string name="clear_action">إزالة</string>
     <string name="clear_blacklist">إزالة القائمة السوداء</string>
+    <string name="clear_history">Clear History</string>
     <string name="clear_playing_queue">مسح التسلسل</string>
-
     <string name="color">لون</string>
-
     <string name="colors">الوان</string>
-
     <string name="composer">المؤلف</string>
-
     <string name="copied_device_info_to_clipboard">تم نسخ معلومات الجهاز للحافظة.</string>
-
     <string name="could_not_create_playlist">تعذّر\u2019t إنشاء قائمة.</string>
     <string name="could_not_download_album_cover">"تعذّر تحميل\u2019t غلاف الألبوم المطابق."</string>
     <string name="could_not_restore_purchase">لايمكن إسترجاع المشتريات</string>
     <string name="could_not_scan_files">لايمكن فحص الملفات %d</string>
-
     <string name="create_action">إنشاء</string>
-
+    <string name="create_new_backup">إنشاء</string>
     <string name="created_playlist_x">قائمة التشغيل الموجودة %1$s.</string>
-
     <string name="credit_title">الافراد والمساهمين</string>
-
     <string name="currently_listening_to_x_by_x">يستمع حالياً إلى %1$s لـ %2$s</string>
-
+    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">أسود قليلاً</string>
-
     <string name="delete_playlist_title">حذف قائمة التشغيل</string>
     <string name="delete_playlist_x"><![CDATA[حذف قائمة التشغيل <b>%1$s</b>؟]]></string>
     <string name="delete_playlists_title">حذف قوائم التشغيل</string>
@@ -179,141 +158,104 @@
     <string name="delete_songs_title">حذف الاغاني</string>
     <string name="delete_x_playlists"><![CDATA[حذف قوائم التشغيل <b>%1$d</b>؟]]></string>
     <string name="delete_x_songs"><![CDATA[حذف الاغاني <b>%1$d</b>؟]]></string>
-
     <string name="deleted_x_songs">تم حذف %1$d الأغاني.</string>
-
+    <string name="deleting_songs">حذف الأغاني</string>
     <string name="depth">العمق</string>
-
     <string name="description">الوصف</string>
-
     <string name="device_info">معلومات الجهاز</string>
-
     <string name="dialog_message_set_ringtone">السمات لتطبيق ريترو ميوزك بتعديل اعدادات الصوت</string>
     <string name="dialog_title_set_ringtone">ك نغمة رنين</string>
-
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">هل تريد إزالة القائمة السوداء؟</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[هل تريد إزالة <b>%1$s</b> من القائمة السوداء]]></string>
-
     <string name="donate">تبرع</string>
     <string name="donate_summary">إذا كنت تعتقد أنني أستحق الحصول على المال مقابل عملي ،
 يمكنك ترك بعض المال هنا.</string>
-
     <string name="donation_header">اشتري لي:</string>
-
+    <string name="done">تم</string>
     <string name="drive_mode">وضع القيادة</string>
-
+    <string name="edit_fab">زر التعديل</string>
+    <string name="edit_normal_lyrics">تعديل كلمات الأغنية</string>
+    <string name="edit_synced_lyrics">كلمات الأغنية متزامنة</string>
     <string name="empty">فارغ</string>
-
     <string name="equalizer">موازن الصوت</string>
-
     <string name="faq">التعليمات</string>
-
     <string name="favorites">المفضلات</string>
-
     <string name="finish_last_song">إنهاء الأغنية الأخيرة</string>
-
     <string name="fit">تناسق</string>
-
     <string name="flat">مسطح</string>
-
     <string name="folders">المجلدات</string>
-
     <string name="follow_system">اتبع النظام</string>
-
     <string name="for_you">لأجلك</string>
-
     <string name="free">مجاني</string>
-
     <string name="full">كامل</string>
     <string name="full_card">بطاقة كاملة</string>
-
     <string name="general_settings_summary">تغيير سمات وألوان التطبيق</string>
     <string name="general_settings_title">المظهر و الحس</string>
-
     <string name="genre">فئة</string>
-
     <string name="genres">فئات</string>
-
     <string name="git_hub_summary">اجلب المشروع على GitHub</string>
-
-    <string name="grid_size_1">1</string>
-    <string name="grid_size_2">2</string>
-    <string name="grid_size_3">3</string>
-    <string name="grid_size_4">4</string>
-    <string name="grid_size_5">5</string>
-    <string name="grid_size_6">6</string>
-    <string name="grid_size_7">7</string>
-    <string name="grid_size_8">8</string>
+    <string name="gradient">متدرج</string>
+    <string name="grid_size_1">١</string>
+    <string name="grid_size_2">٢</string>
+    <string name="grid_size_3">٣</string>
+    <string name="grid_size_4">٤</string>
+    <string name="grid_size_5">٥</string>
+    <string name="grid_size_6">٦</string>
+    <string name="grid_size_7">٧</string>
+    <string name="grid_size_8">٨</string>
     <string name="grid_style_label">الشبكة والأسلوب</string>
-
+    <string name="help_summary">بحاجة للمزيد من المساعدة؟</string>
     <string name="hinge">مفصل</string>
-
     <string name="history">السجل</string>
-
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">الشاشة الرئيسية</string>
-
     <string name="horizontal_flip">تدوير عمودي</string>
-
     <string name="image">صورة</string>
     <string name="image_gradient">الصورة المتدرجة</string>
     <string name="image_settings_summary">تغيير إعدادات تنزيل صور الفنان</string>
-
+    <string name="import_label">إستيراد</string>
+    <string name="import_playlist">استيراد قائمة التشغيل</string>
+    <string name="import_playlist_message">يستورد جميع قوائم التشغيل المدرجة في متجر وسائط الأندرويد مع الأغاني ، إذا كانت قوائم التشغيل موجودة بالفعل ، سيتم دمج الأغاني.</string>
     <string name="inserted_x_songs_into_playlist_x">إدراج %1$d الأغاني في قائمة التشغيل %2$s.</string>
-
     <string name="instagram_page_summary">شارك إعداد Retro Music الخاص بك للعرض على إنستقرام</string>
-
     <string name="keyboard">الكيبورد</string>
-
     <string name="label_bit_rate">معدل البت</string>
     <string name="label_file_format">الصيغة</string>
     <string name="label_file_name">اسم الملف</string>
     <string name="label_file_path">مسار الملف</string>
     <string name="label_file_size">الحجم</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_more_from">المزيد من %s</string>
     <string name="label_sampling_rate">معدل العينات</string>
     <string name="label_track_length">الامتداد</string>
-
     <string name="labeled">معنون</string>
-
     <string name="last_added">المضافة مؤخرا</string>
     <string name="last_song">الاغنية الاخيرة</string>
-
     <string name="library_categories">فئات المكتبة الموسيقية</string>
-
     <string name="licenses">تراخيص</string>
-
     <string name="light_theme_name">أبيض صافي</string>
-
     <string name="listeners_label">المستمعون</string>
-
     <string name="listing_files">قائمة الملفات</string>
-
     <string name="loading_products">تحميل المنتجات...</string>
-
     <string name="login">تسجيل الدخول</string>
-
     <string name="lyrics">كلمات الاغنية</string>
-
     <string name="made_with_love">صنع ب❤️في الهند</string>
-
     <string name="material">ماتيريال</string>
-
     <string name="md_error_label">خطأ</string>
     <string name="md_storage_perm_error">خطأ في الصلاحيات</string>
-
     <string name="my_name">الأسم</string>
     <string name="my_top_tracks">الأكثر تشغيل</string>
-
     <string name="never">أبداً</string>
-
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">قائمة تشغيل جديدة</string>
     <string name="new_start_directory">%s هذا دليل البدء الجديد.</string>
-
     <string name="next_song">الاغنية التالية</string>
-
     <string name="no_albums">لا توجد ألبومات</string>
     <string name="no_artists">لا يوجد مغنين</string>
     <string name="no_audio_ID">"قم بتشغيل أغنية أولاً ، ثم حاول مرة أخرى."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">لم يتم العثور موازن الصوت</string>
     <string name="no_genres">لا يوجد تصنيفات</string>
     <string name="no_lyrics_found">لم يتم العثور على كلمات للاغنية</string>
@@ -322,57 +264,47 @@
     <string name="no_purchase_found">لم يتم العثور على عملية شراء.</string>
     <string name="no_results">لا يوجد نتائج</string>
     <string name="no_songs">لا يوجد أغاني</string>
-
     <string name="normal">الافتراضي</string>
     <string name="normal_lyrics">كلمات عادية</string>
-
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> غير مدرج في مخزن الوسائط]]></string>
-
+    <string name="not_recently_played">لم تشغّل مؤخراً</string>
     <string name="nothing_to_scan">لاشيء لفحصه.</string>
     <string name="nothing_to_see">لاشيء لفحصه</string>
-
     <string name="notification">إشعارات</string>
     <string name="notification_settings_summary">تخصيص نمط الإشعارات</string>
-
     <string name="now_playing">تشغيل الان</string>
     <string name="now_playing_queue">تسلسل التشغيل الان</string>
     <string name="now_playing_summary">تخصيص شاشة التشغيل الآن</string>
     <string name="now_playing_themes">9+ من ثيمات التشغيل الان</string>
-
     <string name="only_on_wifi">فقط على الواي فاي</string>
-
     <string name="other_settings_summary">اعدادات اختبارية متقدمة</string>
-
     <string name="others">آخر</string>
-
+    <string name="over_cover">Over Cover</string>
     <string name="password">كلمة السر</string>
-
     <string name="past_three_months">أخر 3 أشهر</string>
-
-    <string name="peak">الذروة</string>
-
+    <string name="paste_lyrics_here">لصق كلمات الاغنية هنا</string>
+    <string name="paste_timeframe_lyrics_here">لصق كلمات الإطار الزمني هنا</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">تم رفض إذن الوصول إلى وحدة التخزين الخارجي.</string>
-
+    <string name="permission_summary">يحتاج التطبيق إلى إذن للوصول إلى وحدة تخزين جهازك لتشغيل الموسيقى</string>
+    <string name="permission_title">الوصول إلى التخزين</string>
     <string name="permissions_denied">تم رفض الأذونات.</string>
-
     <string name="personalize">تخصيص</string>
     <string name="personalize_settings_summary">تخصيص المشغل و الواجهة</string>
-
     <string name="pick_from_local_storage">اختر من وحدة التخزين الداخلي</string>
-
     <string name="pinterest_page">بينتريست</string>
     <string name="pinterest_page_summary">متابعة صفحة البينتريست لمشاهدة الهامات التصميم</string>
-
     <string name="plain">عادي</string>
-
+    <string name="playList_already_exits">Playlist already exists</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">اشعارات التشغيل توفر إجراءات للتشغيل / الإيقاف المؤقت إلخ.</string>
     <string name="playing_notification_name">تنبيهات التشغيل</string>
-
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">قائمة التشغيل فارغة</string>
     <string name="playlist_name_empty">اسم قائمة التشغيل</string>
-
     <string name="playlists">قوائم التشغيل</string>
-
     <string name="pref_blur_amount_summary">مستوى ضبابية الثيم , كلما قل كلما كان افضل </string>
     <string name="pref_blur_amount_title">مستوى الضبابية</string>
     <string name="pref_filter_song_summary">تصفية الأغاني حسب الطول</string>
@@ -392,8 +324,11 @@
     <string name="pref_keep_screen_on_summary">ضع في اعتبارك أن تمكين هذه الميزة قد يؤثر على عمر البطارية</string>
     <string name="pref_keep_screen_on_title">ابقاء الشاشة تعمل</string>
     <string name="pref_language_name">حدد اللغة</string>
+    <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">استخدم غلاف ألبوم الأغنية قيد التشغيل حاليًا كخلفية لشاشة القفل</string>
+    <string name="pref_summary_album_artists_only">إظهار ألبوم الفنان في فئة الفنانين</string>
     <string name="pref_summary_audio_ducking">خفض مستوى الصوت عند تشغيل صوت نظام أو تلقي إشعارات</string>
+    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
     <string name="pref_summary_blacklist">محتويات مجلدات القائمة السوداء يتم أخفائها من مكتبتك الموسيقية.</string>
     <string name="pref_summary_bluetooth_playback">بدء التشغيل بمجرد توصيل جهاز بلوتوث</string>
     <string name="pref_summary_blurred_album_art">ظبابية غطاء الألبوم على شاشة القفل . يمكن أن يسبب مشاكل في تطبيقات وويدجت الطرف الثالث</string>
@@ -402,6 +337,7 @@
     <string name="pref_summary_colored_app">تتغير ألوان أزرار الخلفية والتحكم وفقًا لصورة الألبوم من شاشة التشغيل الآن</string>
     <string name="pref_summary_colored_app_shortcuts">تلوين اختصارات التطبيق باللون الثانوي . في كل مرة تقوم فيها بتغيير اللون ، يرجى تفعيل هذا الخيار ليتم تطبيق التغييرات</string>
     <string name="pref_summary_colored_notification">"تلوين الإشعارات في غلاف الألبوم\u2019لون نشط"</string>
+    <string name="pref_summary_cross_fade">مدة التقاطع بين الأغاني</string>
     <string name="pref_summary_desaturated_color">حسب خطوط دليل تصميم المواد بالألوان في الوضع المظلم يجب أن لاتكون مشتته</string>
     <string name="pref_summary_expand_now_playing_panel">النقر على الإشعار سيظهر الآن مايتم تشغيله بدلاً من الشاشة الرئيسية لتطبيق</string>
     <string name="pref_summary_extra_controls">اضافة المزيد من التحكم في المشغل المصغر</string>
@@ -412,83 +348,98 @@
     <string name="pref_summary_library_categories">تكوين وعرض وترتيب فئات المكتبة.</string>
     <string name="pref_summary_lock_screen">استخدم شاشة القفل المخصصة من ريترو ميوزك لتحكم بالتشغيل</string>
     <string name="pref_summary_open_source_licences">الرخصة والتفاصيل للبرمجيات مفتوحة المصدر</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
+    <string name="pref_summary_remember_tab">الانتقال إلى آخر علامة تبويب مستخدمة عند البدء</string>
+    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">وضع الشاشة الكاملة</string>
     <string name="pref_summary_toggle_headset">تشغيل تلقائيا عند توصيل السماعة</string>
     <string name="pref_summary_toggle_shuffle">سوف يتم تعطيل وضع الخلط عند التشغيل من قائمة جديدة</string>
     <string name="pref_summary_toggle_volume">في حال توفر مساحة كافية قم بعرض شريط التحكم بالصوت في شاشة التشغيل الآن</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">عرض غطاء الالبوم</string>
+    <string name="pref_title_album_artists_only">التنقل بواسطة ألبوم الفنان</string>
     <string name="pref_title_album_cover_style">ثيم غطاء الالبوم</string>
     <string name="pref_title_album_cover_transform">تخطي غطاء الالبوم</string>
     <string name="pref_title_app_shortcuts">تلوين اختصارات التطبيق</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">خفض الصوت عند فقد التركيز</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">تحميل تلقائي لصور الالبومات</string>
     <string name="pref_title_blacklist">القائمة السوداء</string>
     <string name="pref_title_bluetooth_playback">تشغيل البلوتوث</string>
     <string name="pref_title_blurred_album_art">تضبيب صورة الالبوم</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">تصميم التنبيهات الكلاسيكي</string>
     <string name="pref_title_colored_app">اللون المتكيف</string>
     <string name="pref_title_colored_notification">التنبيهات الملونة</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">لون مفصّل</string>
     <string name="pref_title_expand_now_playing_panel">إظهار شاشة التشغيل</string>
     <string name="pref_title_extra_controls">المزيد من أزرار التحكم</string>
     <string name="pref_title_extra_song_info">معلومات الأغنية</string>
     <string name="pref_title_gapless_playback">تشغيل متتابع</string>
     <string name="pref_title_general_theme">سمات التطبيق</string>
+    <string name="pref_title_home_album_grid_style">صورة الألبوم</string>
     <string name="pref_title_home_artist_grid_style">شبكة الفنان الرئيسية</string>
     <string name="pref_title_home_banner">صورة الواجهة</string>
     <string name="pref_title_ignore_media_store_artwork">تجاهل صور تخزين الميديا</string>
     <string name="pref_title_last_added_interval">آخر قائمة تشغيل تمت إضافتها</string>
     <string name="pref_title_lock_screen">ازار التحكم في كامل الشاشة</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">ثيم التشغيل الان</string>
     <string name="pref_title_open_source_licences">التراخيص مفتوحة المصدر</string>
+    <string name="pref_title_pause_history">Pause history</string>
+    <string name="pref_title_remember_tab">Remember last tab</string>
+    <string name="pref_title_show_lyrics">Show lyrics</string>
+    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">وضع عناوين التبويبات</string>
     <string name="pref_title_toggle_carousel_effect">تاثير التتالي</string>
     <string name="pref_title_toggle_full_screen">التطبيق في كامل الشاشة</string>
     <string name="pref_title_toggle_toggle_headset">التشغيل التلقائي</string>
     <string name="pref_title_toggle_toggle_shuffle">وضع الخلط</string>
     <string name="pref_title_toggle_volume">التحكم بالصوت</string>
-
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
+    <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">الكامل</string>
     <string name="pro_summary">تشغيل الآن السمات ، وتأثير التكدس ، وموضوع اللون وأكثر من ذلك ..</string>
-
     <string name="profile">الملف الشخصي</string>
-
     <string name="purchase">شراء</string>
-
     <string name="queue">تسلسل</string>
-
     <string name="rate_app">تقييم التطبيق</string>
     <string name="rate_on_google_play_summary">أحببت هذا التطبيق؟ أخبرنا في متجر Google Play كيف يمكننا تحسينه</string>
-
     <string name="recent_albums">الالبومات الحديثة</string>
     <string name="recent_artists">الفنانون الحديثون</string>
-
     <string name="remove_action">حذف</string>
     <string name="remove_cover">حذف الغطاء</string>
     <string name="remove_from_blacklist">حذف من القائمة السوداء</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">حذف الأغنية من قائمة التشغيل</string>
     <string name="remove_song_x_from_playlist"><![CDATA[حذف الاغنية <b>%1$s</b> من قائمة التشغيل ?]]></string>
     <string name="remove_songs_from_playlist_title">حذف الاغاني من قائمة التشغيل</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[حذف <b>%1$d</b> اغنية من قائمة التشغيل?]]></string>
-
     <string name="rename_playlist_title">اعادة تسمية قائمة التشغيل</string>
-
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue"> تبليغ عن مشكلة</string>
     <string name="report_bug">تقرير الأخطاء</string>
-
     <string name="reset_action">استرداد</string>
     <string name="reset_artist_image">اعادة ضبط صور الالبومات</string>
-
     <string name="restore">استرجاع</string>
-
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">تم استرداد عملية الشراء السابقة. الرجاء اعادة تشغيل التطبيق الاستمتاع بكافة المميزات.</string>
     <string name="restored_previous_purchases">تم </string>
-
     <string name="restoring_purchase">استرداد عملية الشراء...</string>
-
     <string name="retro_music_player">مشغل الموسيقى Retro</string>
     <string name="retro_music_pro">ريترو ميوزك - الكامل</string>
-
+    <string name="ringtone_summary">يحتاج التطبيق إلى إذن للوصول إلى إعدادات جهازك من أجل تعيين الموسيقى كنغمة رنين</string>
+    <string name="ringtone_title">نغمة الرنين (إختياري)</string>
     <string name="saf_delete_failed">فشل حذف الملف: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">لا يمكن الحصول على URI SAF</string>
@@ -501,48 +452,33 @@
     <string name="saf_guide_slide3_description">لا تفتح أي مجلدات فرعية</string>
     <string name="saf_guide_slide3_title">اضغط على زر \"تحديد\" في الجزء السفلي من الشاشة</string>
     <string name="saf_write_failed">فشلت كتابة الملف: %s</string>
-
     <string name="save">حفظ</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">حفظ كملف</string>
     <string name="save_playlists_title">حفظ كملف</string>
-
     <string name="saved_playlist_to">حفظ قائمة التشغيل الى %s.</string>
-
     <string name="saving_changes">حفظ التغييرات</string>
-
     <string name="scan_media">فحص الميديا</string>
-
     <string name="scanned_files">تم فحص %1$d من %2$d ملف.</string>
-
     <string name="scrobbles_label">تمريرات</string>
-
     <string name="select_all">تحديد الكل</string>
-
     <string name="selected">محدد</string>
-
     <string name="set">تعيين</string>
     <string name="set_artist_image">اختيار صورة الفنان</string>
-
     <string name="share_app">مشاركة التطبيق</string>
+    <string name="share_summary">شارك التطبيق مع أصدقائك وأسرتك</string>
     <string name="share_to_stories">شارك في القصص</string>
-
+    <string name="show_album_artists">إظهار ألبوم الفنان</string>
     <string name="shuffle">خلط</string>
-
     <string name="simple">بسيط</string>
-
     <string name="sleep_timer_canceled">تم إلغاء مؤقت النوم.</string>
     <string name="sleep_timer_set">تم ضبط مؤقت النوم الى %d دقيقة من الآن.</string>
-
     <string name="social">أجتماعي</string>
     <string name="social_stories">مشاركة القصة</string>
-
     <string name="song">الاغنية</string>
     <string name="song_duration">مدة الأغنية</string>
-
     <string name="songs">الاغاني</string>
-
     <string name="sort_order">ترتيب الفرز</string>
     <string name="sort_order_a_z">تصاعدي</string>
     <string name="sort_order_album">الالبوم</string>
@@ -550,93 +486,64 @@
     <string name="sort_order_composer">المؤلف</string>
     <string name="sort_order_date">التاريخ</string>
     <string name="sort_order_date_modified">تاريخ التعديل</string>
+    <string name="sort_order_num_songs">عدد الأغاني</string>
+    <string name="sort_order_num_songs_desc">العد التنازلي للاغنية</string>
     <string name="sort_order_year">السنة</string>
     <string name="sort_order_z_a">تنازلي</string>
-
     <string name="speech_not_supported">عذرا! جهازك لايدعم الادخال الصوتي</string>
     <string name="speech_prompt">أبحث في مكتبتك</string>
-
     <string name="stack">التكدس</string>
-
     <string name="start_play_music">أبدا بتشغيل الموسيقى.</string>
-
     <string name="suggestion_songs">اقتراحات</string>
-
     <string name="support_development">دعم التطوير</string>
-
     <string name="swipe_to_unlock">اسخب للفتح</string>
-
     <string name="synced_lyrics">مزامنة الكلمات</string>
-
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">تيليجرام</string>
     <string name="telegram_group_summary">انضم لمجموعة التيليجرام لمناقشة المشاكل, و طرح اقتراحات والمزيد</string>
-
     <string name="thank_you">شكرا</string>
-
     <string name="the_audio_file">الملف الصوتي</string>
-
     <string name="this_month">هذا الشهر</string>
     <string name="this_week">هذا الاسبوع</string>
     <string name="this_year">هذه السنة</string>
-
     <string name="tiny">صغير</string>
     <string name="tiny_card_style">بطاقة صغيرة</string>
-
     <string name="title">عنوان</string>
-
+    <string name="title_new_backup">New Backup</string>
     <string name="today">اليوم</string>
-
     <string name="top_albums">افضل الالبومات</string>
     <string name="top_artists">افضل الفنانين</string>
-
     <string name="track_hint">"المسار (2 للمسار 2 أو 3004 لمسار CD3 4)"</string>
     <string name="track_list">رقم المسار</string>
-
     <string name="translate">ترجمة</string>
     <string name="translate_community">ساعدها لترجمة التطبيق الى لغتك</string>
-
     <string name="try_retro_music_premium">جرب ريترو الموسيقى الإصدار المميز</string>
-
     <string name="twitter_page">تويتر</string>
     <string name="twitter_page_summary">شارك تصميمك مع ريترو ميوزك</string>
-
     <string name="unlabeled">غير معنون</string>
-
     <string name="unplayable_file">تعذّر تشغيل\u2019t هذه الأغنية.</string>
-
     <string name="up_next">التالي</string>
-
     <string name="update_image">تحديث الصورة</string>
-
     <string name="updating">تحديث...</string>
-
+    <string name="user_images_description">User Images</string>
+    <string name="user_name">إسم المستخدم</string>
     <string name="username">أسم المستخدم</string>
-
     <string name="version">الإصدار</string>
-
     <string name="vertical_flip">تدوير رأسي</string>
-
+    <string name="view_on_telegram">عرض على تيليجرام</string>
     <string name="volume">الصوت</string>
-
     <string name="web_search">البحث عبر الانترنت</string>
-
+    <string name="website">الموقع الإلكتروني</string>
+    <string name="website_summary">تحقق من موقعنا</string>
     <string name="welcome">مرحبا,</string>
-
     <string name="what_do_you_want_to_share">مالذي تريد مشاركته?</string>
-
     <string name="whats_new">مالجديد</string>
-
     <string name="window">نافذة</string>
     <string name="window_corner_edges">حواف دائرية</string>
-
     <string name="x_has_been_set_as_ringtone">تعيين %1$s كنغمة الرنين الخاصة بك.</string>
     <string name="x_selected">%1$d تحديد</string>
-
     <string name="year">السنة</string>
-
     <string name="you_have_to_select_at_least_one_category">عليك اختيار فئة واحدة على الأقل.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">سيتم تحويلك الى صفحة سجل الاخطاء</string>
-
     <string name="your_account_data_is_only_used_for_authentication">بيانات حسابك تستخدم لتوثيق فقط.</string>
+    <string name="bug_report_success">Bug report successful</string>
 </resources>

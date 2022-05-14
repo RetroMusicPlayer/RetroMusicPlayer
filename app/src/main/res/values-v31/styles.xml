@@ -1,0 +1,25 @@
+<resources>
+
+    <style name="Theme.RetroMusic.MD3" parent="@style/Theme.Material3.DynamicColors.DayNight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="roundSelector">@drawable/round_selector</item>
+        <item name="rectSelector">@drawable/rect_selector</item>
+        <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+    </style>
+
+    <style name="Theme.RetroMusic.MD3.Black" parent="@style/Theme.RetroMusic.MD3" />
+
+    <style name="Theme.AppWidget" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="colorSurface">@android:color/system_accent1_50</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_anim</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="permission_orientation">0</integer>
+    <integer name="permission_layout_weight">1</integer>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/synced_lyrics_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <code.name.monkey.retromusic.lyrics.LrcView
+        android:id="@+id/lyricsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:lrcLabel="@string/no_lyrics_found"
+        app:lrcNormalTextSize="24sp"
+        app:lrcPadding="24dp"
+        app:lrcTextGravity="left"
+        app:lrcTextSize="28sp" />
+</FrameLayout>

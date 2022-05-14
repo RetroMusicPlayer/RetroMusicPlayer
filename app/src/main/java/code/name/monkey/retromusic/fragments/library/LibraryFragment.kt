@@ -24,25 +24,33 @@ import androidx.navigation.ui.NavigationUI
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentLibraryBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_library.*
+import com.google.android.gms.cast.framework.CastButtonFactory
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
+    private var _binding: FragmentLibraryBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentLibraryBinding.bind(view)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(true)
-        mainActivity.setSupportActionBar(toolbar)
+        mainActivity.setBottomNavVisibility(true)
+        mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
-        toolbar.setNavigationOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             findNavController().navigate(
-                R.id.searchFragment,
+                R.id.action_search,
                 null,
                 navOptions
             )
@@ -63,32 +71,30 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
         val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
         if (categoryInfo.visible) {
-            navGraph.startDestination = categoryInfo.category.id
+            navGraph.setStartDestination(categoryInfo.category.id)
         }
         navController.graph = navGraph
-        NavigationUI.setupWithNavController(mainActivity.getBottomNavigationView(), navController)
+        NavigationUI.setupWithNavController(mainActivity.bottomNavigationView, navController)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            appBarLayout.setExpanded(true, true)
+            binding.appBarLayout.setExpanded(true, true)
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
+    override fun onPrepareMenu(menu: Menu) {
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
-            toolbar,
+            binding.toolbar,
             menu,
-            getToolbarBackgroundColor(toolbar)
+            getToolbarBackgroundColor(binding.toolbar)
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> findNavController().navigate(
                 R.id.settingsActivity,
@@ -104,6 +110,11 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
                 "ShowCreatePlaylistDialog"
             )
         }
-        return super.onOptionsItemSelected(item)
+        return false
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

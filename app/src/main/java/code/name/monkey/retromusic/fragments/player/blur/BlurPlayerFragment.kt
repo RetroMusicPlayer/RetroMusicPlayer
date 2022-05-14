@@ -16,6 +16,8 @@ package code.name.monkey.retromusic.fragments.player.blur
 
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -23,44 +25,52 @@ import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.NEW_BLUR_AMOUNT
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.databinding.FragmentBlurBinding
+import code.name.monkey.retromusic.extensions.drawAboveSystemBars
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
-import code.name.monkey.retromusic.glide.BlurTransformation
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.glide.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_blur.*
+
 
 class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private var lastRequest: GlideRequest<Drawable>? = null
+
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private lateinit var playbackControlsFragment: BlurPlaybackControlsFragment
 
     private var lastColor: Int = 0
 
+    private var _binding: FragmentBlurBinding? = null
+    private val binding get() = _binding!!
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentBlurBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        binding.playerToolbar.drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as BlurPlaybackControlsFragment
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             ToolbarContentTintHelper.colorizeToolbar(this, Color.WHITE, activity)
@@ -75,7 +85,7 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         playbackControlsFragment.setColor(color)
         lastColor = color.backgroundColor
         libraryViewModel.updateColor(color.backgroundColor)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
+        ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
     }
 
     override fun toggleFavorite(song: Song) {
@@ -103,25 +113,20 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         get() = lastColor
 
     private fun updateBlur() {
-        val blurAmount = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            .getInt(NEW_BLUR_AMOUNT, 25)
-        colorBackground.clearColorFilter()
-        SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
-            .checkIgnoreMediaStore(requireContext())
-            .generatePalette(requireContext()).build()
-            .dontAnimate()
+        // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
+        GlideApp.with(this)
+            .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
+            .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
             .transform(
-                BlurTransformation.Builder(requireContext())
-                    .blurRadius(blurAmount.toFloat())
+                BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
                     .build()
-            )
-            .into(object : RetroMusicColoredTarget(colorBackground) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    if (colors.backgroundColor == defaultFooterColor) {
-                        colorBackground.setColorFilter(colors.backgroundColor)
-                    }
-                }
-            })
+            ).thumbnail(lastRequest)
+            .error(GlideApp.with(this).load(ColorDrawable(Color.DKGRAY)).fitCenter())
+            .also {
+                lastRequest = it.clone()
+                it.crossfadeListener()
+                    .into(binding.colorBackground)
+            }
     }
 
     override fun onServiceConnected() {
@@ -136,6 +141,7 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
 
     override fun onResume() {
         super.onResume()
+        lastRequest = null
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .registerOnSharedPreferenceChangeListener(this)
     }
@@ -144,6 +150,7 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         super.onDestroyView()
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .unregisterOnSharedPreferenceChangeListener(this)
+        _binding = null
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {

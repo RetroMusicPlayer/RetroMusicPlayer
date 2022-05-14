@@ -22,7 +22,7 @@ import androidx.preference.PreferenceViewHolder
 import code.name.monkey.appthemehelper.ThemeStore
 
 class ATEPreferenceCategory @JvmOverloads constructor(
-    context: Context?,
+    context: Context,
     attrs: AttributeSet?,
     defStyleAttr: Int = -1,
     defStyleRes: Int = -1
@@ -31,6 +31,8 @@ class ATEPreferenceCategory @JvmOverloads constructor(
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
         val title = holder.itemView.findViewById<TextView>(android.R.id.title)
-        title.setTextColor(ThemeStore.accentColor(context))
+        title.setTextColor(
+           ThemeStore.accentColor(context)
+        )
     }
 }

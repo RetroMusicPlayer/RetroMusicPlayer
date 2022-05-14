@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/progress_container_height"
         android:background="@color/twenty_percent_black_overlay">
@@ -18,21 +18,27 @@
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical|left|end"
-            android:paddingLeft="8dp"
+            android:gravity="center_vertical|start"
+            android:paddingStart="8dp"
+            android:paddingEnd="0dp"
             android:singleLine="true"
             android:textColor="?colorOnSecondary"
             android:textSize="12sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="@tools:sample/date/hhmmss" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/progressSlider"
+            style="@style/MusicProgressSlider"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingVertical="@dimen/seekbar_padding" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center_vertical|right|end"
+            android:gravity="center_vertical|end"
             android:paddingRight="8dp"
             android:singleLine="true"
             android:textColor="?colorOnSecondary"
@@ -40,17 +46,11 @@
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="@tools:sample/date/hhmmss" />
 
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/progressSlider"
-            style="@style/MusicProgressSlider"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/songTotalTime"
-            android:layout_toRightOf="@id/songCurrentProgress"
-            tools:ignore="RtlHardcoded,UnusedAttribute" />
+    </LinearLayout>
 
-    </RelativeLayout>
-
-    <include layout="@layout/media_button" />
+    <include
+        android:id="@+id/media_button"
+        layout="@layout/media_button" />
 
     <FrameLayout
         android:id="@+id/volumeFragmentContainer"
@@ -69,7 +69,6 @@
         android:orientation="horizontal"
         tools:ignore="UnusedAttribute">
 
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
             android:layout_width="wrap_content"
@@ -86,17 +85,18 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:layout_weight="1.0"
+            android:clickable="false"
             android:orientation="vertical"
             android:paddingStart="0dp"
             android:paddingEnd="16dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:ellipsize="marquee"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:freezesText="true"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
@@ -109,9 +109,9 @@
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:ellipsize="marquee"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:freezesText="true"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"

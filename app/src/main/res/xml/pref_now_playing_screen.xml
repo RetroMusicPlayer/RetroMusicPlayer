@@ -15,6 +15,40 @@
         android:summary="@string/pref_summary_extra_song_info"
         android:title="@string/pref_title_extra_song_info" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="snowfall"
+        android:layout="@layout/list_item_view_switch_no_title"
+        android:title="@string/pref_snow_fall_title" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+        android:defaultValue="0"
+        android:entries="@array/pref_lyrics_type_entries"
+        android:entryValues="@array/pref_lyrics_type_values"
+        android:key="lyrics_type"
+        android:layout="@layout/list_item_view"
+        android:title="@string/pref_title_lyrics_type" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="screen_on_lyrics"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_keep_screen_on_summary"
+        android:title="@string/pref_title_lyrics_screen_on" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="circle_play_button"
+        android:layout="@layout/list_item_view_switch_no_title"
+        android:title="@string/pref_title_circle_button" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="true"
+        android:key="swipe_anywhere_now_playing"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_summary_swipe_anywhere_now_playing"
+        android:title="@string/pref_title_swipe_anywhere_now_playing" />
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_album">
@@ -27,7 +61,7 @@
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="0"
-            android:entries="@array/pref_album_cover_transform_entities"
+            android:entries="@array/pref_album_cover_transform_entries"
             android:entryValues="@array/pref_album_cover_transform_values"
             android:key="album_cover_transform"
             android:layout="@layout/list_item_view"
@@ -49,11 +83,17 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
-            app:icon="@drawable/ic_play_arrow_white_32dp"
+            app:key="swipe_to_dismiss"
+            app:summary="@string/pref_summary_swipe_to_dismiss"
+            app:title="@string/pref_title_swipe_to_dismiss" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:layout="@layout/list_item_view_switch"
+            app:defaultValue="false"
+            app:icon="@drawable/ic_play_arrow"
             app:key="toggle_add_controls"
             app:summary="@string/pref_summary_extra_controls"
             app:title="@string/pref_title_extra_controls" />
-
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:layout="@layout/list_item_view_switch"
@@ -78,9 +118,8 @@
             android:max="25"
             android:summary="@string/pref_blur_amount_summary"
             android:title="@string/pref_blur_amount_title"
+            app:ateKey_pref_unit="px"
             app:icon="@drawable/ic_blur_on"
             app:showSeekBarValue="true" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
-
-
 </androidx.preference.PreferenceScreen>

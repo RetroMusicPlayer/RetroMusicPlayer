@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/app_widget_md3_height"
+    android:background="@drawable/app_widget_background"
+    android:backgroundTint="?attr/colorSurface"
+    android:orientation="horizontal"
+    android:theme="@style/Theme.AppWidget"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/app_widget_md3_image_size"
+        android:layout_height="@dimen/app_widget_md3_image_size"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:background="@drawable/app_widget_background"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/backgrounds/scenic[6]" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/media_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layoutDirection="ltr"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp">
+
+            <ImageButton
+                android:id="@+id/button_prev"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/widget_selector"
+                tools:src="@drawable/ic_skip_previous"
+                tools:tint="@color/ate_secondary_text_dark" />
+
+            <ImageButton
+                android:id="@+id/button_toggle_play_pause"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/widget_selector"
+                tools:src="@drawable/ic_play_arrow_white_32dp"
+                tools:tint="@color/ate_secondary_text_dark" />
+
+            <ImageButton
+                android:id="@+id/button_next"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/widget_selector"
+                tools:src="@drawable/ic_skip_next"
+                tools:tint="@color/ate_secondary_text_dark" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/media_titles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/media_actions"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textColor="?android:attr/textColorPrimary"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingTop="4dp"
+                android:singleLine="true"
+                android:textAppearance="@style/TextViewNormal"
+                android:textColor="?android:attr/textColorSecondary"
+                tools:text="Text" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

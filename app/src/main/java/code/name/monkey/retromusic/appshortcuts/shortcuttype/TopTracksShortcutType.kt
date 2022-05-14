@@ -39,6 +39,6 @@ class TopTracksShortcutType(context: Context) : BaseShortcutType(context) {
     companion object {
 
         val id: String
-            get() = BaseShortcutType.ID_PREFIX + "top_tracks"
+            get() = ID_PREFIX + "top_tracks"
     }
 }

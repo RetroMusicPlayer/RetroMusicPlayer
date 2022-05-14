@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:background="?attr/colorSurface"
     android:clickable="true"
     android:focusable="true"
     tools:ignore="UnusedAttribute">
@@ -13,31 +12,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:paddingStart="0dp"
-        android:paddingEnd="8dp">
+        android:paddingStart="8dp"
+        android:paddingEnd="0dp">
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/imageTextContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="16dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_keyboard_arrow_up"
-            app:tint="?attr/colorControlNormal"
-            tools:ignore="ContentDescription" />
+            app:cardCornerRadius="6dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/drag_view"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                tools:visibility="visible" />
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/miniPlayerTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:freezesText="true"
-            android:gravity="center"
+            android:gravity="left"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
@@ -65,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                app:trackCornerRadius="16dp"
                 tools:progress="10" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -89,6 +101,5 @@
             app:srcCompat="@drawable/ic_skip_next"
             app:tint="?attr/colorControlNormal" />
     </LinearLayout>
-
 
 </FrameLayout>

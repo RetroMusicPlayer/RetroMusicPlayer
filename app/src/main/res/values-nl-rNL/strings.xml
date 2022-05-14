@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
-    <string name="about_settings_summary">Team, social links</string>
-
+    <string name="about_album_label">Over %s</string>
+    <string name="about_settings_summary">Team, sociale linkjes</string>
     <string name="accent_color">Accent kleur</string>
     <string name="accent_color_desc">De accent kleur, standaard naar groen</string>
-
     <string name="action_about">Over</string>
+    <string name="action_add_to_blacklist">Voeg toe aan zwarte lijst</string>
     <string name="action_add_to_favorites">Toevoegen aan favorieten</string>
     <string name="action_add_to_playing_queue">Voeg toe aan afspeel wachtrij</string>
     <string name="action_add_to_playlist">Voeg toe aan afspeellijst...</string>
+    <string name="action_cast">Casten</string>
     <string name="action_clear_playing_queue">Afspeel wachtrij legen</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_cycle_repeat">Wissel herhalingmodus</string>
     <string name="action_delete">Verwijder</string>
     <string name="action_delete_from_device">Verwijder van apparaat</string>
     <string name="action_details">Details</string>
+    <string name="action_edit">Bewerk</string>
     <string name="action_go_to_album">Ga naar album </string>
     <string name="action_go_to_artist">Ga naar artiest</string>
-    <string name="action_go_to_genre">Go to genre</string>
+    <string name="action_go_to_genre">Ga naar genre</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Ga naar begin directory</string>
     <string name="action_grant">Geef toestemming</string>
     <string name="action_grid_size">Raster grootte</string>
     <string name="action_grid_size_land">Raster grootte (land)</string>
-    <string name="action_new_playlist">New playlist</string>
+    <string name="action_new_playlist">Nieuwe afspeellijst</string>
     <string name="action_next">Volgende</string>
     <string name="action_play">Afspelen. </string>
-    <string name="action_play_all">Play all</string>
+    <string name="action_play_all">Speel alles</string>
     <string name="action_play_next">Volgende afspelen </string>
     <string name="action_play_pause">Afspelen/pauzeren</string>
     <string name="action_previous">Vorige</string>
@@ -34,7 +36,7 @@
     <string name="action_remove_from_playlist">Verwijder van afspeellijst</string>
     <string name="action_rename">Hernoem</string>
     <string name="action_save_playing_queue">Afspeel wachtrij opslaan</string>
-    <string name="action_scan">Scan</string>
+    <string name="action_scan">Scannen</string>
     <string name="action_search">Zoek</string>
     <string name="action_set">Instellen</string>
     <string name="action_set_as_ringtone">Stel in als ringtone</string>
@@ -44,189 +46,145 @@
     <string name="action_shuffle_all">Shuffle alles</string>
     <string name="action_shuffle_playlist">Shuffle afspeellijst</string>
     <string name="action_sleep_timer">Slaap timer</string>
-    <string name="action_sort_order">Sort order</string>
+    <string name="action_sort_order">Sorteer volgorde</string>
     <string name="action_tag_editor">Tags aanpassen</string>
-    <string name="action_toggle_favorite">Toggle favorite</string>
-    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
-
-    <string name="adaptive">Adaptive</string>
-
+    <string name="action_toggle_favorite">Favorieten in-/uitschakelen</string>
+    <string name="action_toggle_shuffle">Shuffle mode in-/uitschakelen</string>
+    <string name="adaptive">Adaptief</string>
     <string name="add_action">Toevoegen</string>
     <string name="add_playlist_title">"Toevogen aan afspeellijst"</string>
-
+    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"1 titel aan afspeel wachtrij toegevoegd."</string>
     <string name="added_x_titles_to_playing_queue">%1$d titels toegevoegd aan afspeel wachtrij</string>
-
     <string name="album">Album</string>
-
     <plurals name="albumSongs">
         <item quantity="one">Song</item>
-        <item quantity="other">Songs</item>
+        <item quantity="other">Nummers</item>
     </plurals>
-
-    <string name="album_artist">Album artiest</string>
-
+    <string name="album_artist">Albumartiest</string>
     <string name="albums">Albums</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
         <item quantity="other">Albums</item>
     </plurals>
-
     <string name="always">Altijd</string>
-
     <string name="app_share">Hey, bekijk deze coole muziekspeler op:https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">Top tracks</string>
-    <string name="app_widget_big_name">Groot</string>
+    <string name="app_widget_big_name">Volledige Afbeelding</string>
     <string name="app_widget_card_name">Kaart</string>
     <string name="app_widget_classic_name">Klassiek</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Klein</string>
-    <string name="app_widget_text_name">Text</string>
-
+    <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Artiest</string>
-
     <string name="artists">Artiesten</string>
-
+    <string name="audio_fade_duration">Audio fade duration</string>
     <string name="audio_focus_denied">Geluid focus geweigerd </string>
-    <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
-
-    <string name="auto">Auto</string>
-
+    <string name="audio_settings_summary">Wijzig de geluidsinstellingen en pas de equalizer aan</string>
+    <string name="auto">Automatisch</string>
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Biografie</string>
-
     <string name="black_theme_name">Gewoon zwart</string>
-
     <string name="blacklist">Zwarte lijst</string>
-
-    <string name="blur">Blur</string>
+    <string name="blur">Vervagen</string>
     <string name="blur_card">Blur Card</string>
-
-    <string name="bug_report_failed">Unable to send report</string>
-    <string name="bug_report_failed_invalid_token">Invalid access token. Please contact the app developer.</string>
+    <string name="bug_report_failed">Mislukt om het rapport te verzenden</string>
+    <string name="bug_report_failed_invalid_token">Ongeldige toegangstoken. Neem alsjeblieft contact op met de app-ontwikkelaar.</string>
     <string name="bug_report_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
-    <string name="bug_report_failed_unknown">An unexpected error occurred. Please contact the app developer.</string>
-    <string name="bug_report_failed_wrong_credentials">Wrong username or password</string>
-    <string name="bug_report_issue">Issue</string>
-    <string name="bug_report_manual">Send manually</string>
-    <string name="bug_report_no_description">Please enter an issue description</string>
-    <string name="bug_report_no_password">Please enter your valid GitHub password</string>
-    <string name="bug_report_no_title">Please enter an issue title</string>
-    <string name="bug_report_no_username">Please enter your valid GitHub username</string>
-    <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
-    <string name="bug_report_use_account">Send using GitHub account</string>
-
-    <string name="buy_now">Buy now</string>
-
+    <string name="bug_report_failed_unknown">Er is een onverwachte fout opgetreden. Neem alsjeblieft contact op met de app-ontwikkelaar.</string>
+    <string name="bug_report_failed_wrong_credentials">Verkeerde gebruikersnaam of wachtwoord</string>
+    <string name="bug_report_issue">Probleem</string>
+    <string name="bug_report_manual">Verstuur handmatig</string>
+    <string name="bug_report_no_description">Vul alsjeblieft een beschrijving voor het probleem in</string>
+    <string name="bug_report_no_password">Vul alsjeblieft je geldig GitHub-wachtwoord in</string>
+    <string name="bug_report_no_title">Vul alsjeblieft een titel voor het probleem in</string>
+    <string name="bug_report_no_username">Vul alsjeblieft je geldig GitHub-gebruikersnaam in</string>
+    <string name="bug_report_summary">Een onverwachte fout is opgetreden. Het spijt me dat je deze bug tegengekomen bent. Als het blijft crashen, kies dan \"Clear app data\" of verstuur een email </string>
+    <string name="bug_report_use_account">Verstuur door middel van je GitHub-account</string>
+    <string name="buy_now">Kopen</string>
     <string name="cancel_current_timer">Annuleer huidige timer</string>
-
-    <string name="card">Card</string>
+    <string name="card">Kaart</string>
     <string name="card_color_style">Colored Card</string>
-    <string name="card_style">Card</string>
-
+    <string name="card_square">Square Card</string>
+    <string name="card_style">Kaart</string>
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
-
     <string name="cascading">Cascading</string>
-
-    <string name="changelog">Changelog</string>
-    <string name="changelog_summary">Changelog onderhouden in Telegram</string>
-
-    <string name="circle">Circle</string>
-
-    <string name="circular">Circular</string>
-
-    <string name="classic">Classic</string>
-
+    <string name="changelog">Logboek</string>
+    <string name="changelog_summary">Bekijk wat er nieuw is</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="circle">Cirkel</string>
+    <string name="circular">Rond</string>
+    <string name="classic">Klassiek</string>
     <string name="clear_action">Legen</string>
     <string name="clear_blacklist">Leeg zwarte lijst</string>
-    <string name="clear_playing_queue">Clear queue</string>
-
-    <string name="color">Color</string>
-
+    <string name="clear_history">Clear History</string>
+    <string name="clear_playing_queue">Maak wachtrij leeg</string>
+    <string name="color">Kleur</string>
     <string name="colors">Kleuren</string>
-
-    <string name="composer">Composer</string>
-
-    <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
-
+    <string name="composer">Componist</string>
+    <string name="copied_device_info_to_clipboard">Apparaatinfo is naar klembord gekopiëerd.</string>
     <string name="could_not_create_playlist">Kon geen afspeellijst maken.</string>
     <string name="could_not_download_album_cover">"Kon geen matchende album cover downloaden."</string>
     <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Kon %d files niet scannen.</string>
-
     <string name="create_action">Aanmaken</string>
-
+    <string name="create_new_backup">Aanmaken</string>
     <string name="created_playlist_x">Afspeellijst %1$s aangemaakt.</string>
-
     <string name="credit_title">Members and contributors </string>
-
     <string name="currently_listening_to_x_by_x">Nu luisterend naar %1$s van %2$s.</string>
-
+    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Soort van donker</string>
-
     <string name="delete_playlist_title">Afspeellijst verwijderen</string>
     <string name="delete_playlist_x"><![CDATA[Afspellijst <b>%1$s</b> verwijderen?]]></string>
     <string name="delete_playlists_title">Afspeellijsten verwijderen</string>
-    <string name="delete_song_title">Delete song</string>
+    <string name="delete_song_title">Verwijder nummer</string>
     <string name="delete_song_x"><![CDATA[Verwijder liedje <b>%1$s</b>?]]></string>
-    <string name="delete_songs_title">Delete songs</string>
+    <string name="delete_songs_title">Verwijder nummers</string>
     <string name="delete_x_playlists"><![CDATA[Verwijder afspeellijsten <b>%1$d</b>?]]></string>
     <string name="delete_x_songs"><![CDATA[Verwijder liedjes <b>%1$d</b>?]]></string>
-
     <string name="deleted_x_songs">Liedjes %1$d verwijderd.</string>
-
-    <string name="depth">Depth</string>
-
-    <string name="description">Description</string>
-
-    <string name="device_info">Device info</string>
-
-    <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
-    <string name="dialog_title_set_ringtone">Set ringtone</string>
-
+    <string name="deleting_songs">Nummers aan het verwijderen</string>
+    <string name="depth">Diepte</string>
+    <string name="description">Beschrijving</string>
+    <string name="device_info">Apparaatinfo</string>
+    <string name="dialog_message_set_ringtone">Sta Retro Music toe om audioinstellingen te wijzigen</string>
+    <string name="dialog_title_set_ringtone">Stel in als beltoon</string>
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Wil je de zwarte lijst leegmaken?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Wil je <b>%1$s</b> verwijderen van de zwarte lijst?]]></string>
-
     <string name="donate">Doneren</string>
     <string name="donate_summary">Als je vindt dat ik het verdien om geld te krijgen voor mijn werk, dan kun je hier een paar euro\'s doneren.</string>
-
     <string name="donation_header">Koop mij een</string>
-
-    <string name="drive_mode">Drive mode</string>
-
+    <string name="done">Klaar</string>
+    <string name="drive_mode">Rijmodus</string>
+    <string name="edit_fab">Edit Button</string>
+    <string name="edit_normal_lyrics">Edit Lyrics</string>
+    <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Leeg</string>
-
     <string name="equalizer">Equalizer</string>
-
-    <string name="faq">FAQ</string>
-
+    <string name="faq">Veelgestelde vragen</string>
     <string name="favorites">Favorieten</string>
-
     <string name="finish_last_song">Finish last song</string>
-
     <string name="fit">Fit</string>
-
     <string name="flat">Plat</string>
-
     <string name="folders">Mappen</string>
-
     <string name="follow_system">Follow system</string>
-
     <string name="for_you">For you</string>
-
-    <string name="free">Free</string>
-
+    <string name="free">Gratis</string>
     <string name="full">Vol</string>
     <string name="full_card">Full card</string>
-
-    <string name="general_settings_summary">Change the theme and colors of the app</string>
+    <string name="general_settings_summary">Pas het thema en de kleuren van de app aan</string>
     <string name="general_settings_title">Look and feel</string>
-
     <string name="genre">Genre</string>
-
     <string name="genres">Genres</string>
-
     <string name="git_hub_summary">Fork the project on GitHub</string>
-
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -235,135 +193,107 @@
     <string name="grid_size_6">6</string>
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
-    <string name="grid_style_label">Grid style</string>
-
+    <string name="grid_style_label">Rasterstijl</string>
+    <string name="help_summary">Meer hulp nodig?</string>
     <string name="hinge">Hinge</string>
-
     <string name="history">Geschiedenis</string>
-
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Start</string>
-
-    <string name="horizontal_flip">Horizontal flip</string>
-
-    <string name="image">Image</string>
+    <string name="horizontal_flip">Flip horizontaal</string>
+    <string name="image">Afbeelding</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
-
+    <string name="import_label">Importeren</string>
+    <string name="import_playlist">Importeer afspeellijst</string>
+    <string name="import_playlist_message">Het importeert alle afspeellijsten binnenin de Android Media Store met nummers. Als de afspeellijst al bestaat, worden de nummers samengevoegd.</string>
     <string name="inserted_x_songs_into_playlist_x">%1$d liedjes toegevoegd aan afspeellijst %2$s.</string>
-
-    <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
-
+    <string name="instagram_page_summary">Deel jouw Retro Music setup om anderen te emotioneren op Instagram</string>
     <string name="keyboard">Keyboard</string>
-
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Formaat</string>
     <string name="label_file_name">Bestandsnaam</string>
     <string name="label_file_path">Bestandslocatie</string>
     <string name="label_file_size">Grootte</string>
-    <string name="label_more_from">More from %s</string>
-    <string name="label_sampling_rate">Sampling rate</string>
+    <string name="label_last_modified">Last Modified</string>
+    <string name="label_more_from">Meer van %s</string>
+    <string name="label_sampling_rate">Samplingfrequentie</string>
     <string name="label_track_length">Duur</string>
-
     <string name="labeled">Labeled</string>
-
     <string name="last_added">Laatst toegevoegd</string>
-    <string name="last_song">Last song</string>
-
+    <string name="last_song">Vorige nummer</string>
     <string name="library_categories">Library categories</string>
-
     <string name="licenses">Licenties</string>
-
     <string name="light_theme_name">Clearly wit</string>
-
-    <string name="listeners_label">Listeners</string>
-
+    <string name="listeners_label">Luisteraars</string>
     <string name="listing_files">Luister bestanden</string>
-
     <string name="loading_products">Podcasts laden...</string>
-
-    <string name="login">Login</string>
-
-    <string name="lyrics">Lyrics</string>
-
-    <string name="made_with_love">Made with ❤️ in India</string>
-
-    <string name="material">Material</string>
-
-    <string name="md_error_label">Error</string>
-    <string name="md_storage_perm_error">Permission error</string>
-
+    <string name="login">Inloggen</string>
+    <string name="lyrics">Tekst/Lyrics</string>
+    <string name="made_with_love">Gemaakt met ❤️ in India</string>
+    <string name="material">Materiaal</string>
+    <string name="md_error_label">Fout</string>
+    <string name="md_storage_perm_error">Toegangsfout</string>
     <string name="my_name">Mijn naam</string>
     <string name="my_top_tracks">Mijn top tracks</string>
-
     <string name="never">Nooit</string>
-
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">Nieuwe afspeellijst</string>
     <string name="new_start_directory">%s is de nieuwe start folder</string>
-
-    <string name="next_song">Next Song</string>
-
+    <string name="next_song">Volgend Nummer</string>
     <string name="no_albums">Geen albums</string>
     <string name="no_artists">Geen artiesten</string>
     <string name="no_audio_ID">"Laat eerst een liedje afspelen, probeer dan opniew."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Geen equalizer gevonden.</string>
-    <string name="no_genres">You have no genres</string>
+    <string name="no_genres">Je hebt geen genres</string>
     <string name="no_lyrics_found">Geen lyrics gevonden</string>
-    <string name="no_playing_queue">No songs playing</string>
+    <string name="no_playing_queue">Geen nummer draaiend</string>
     <string name="no_playlists">Geen afspeellijsten</string>
-    <string name="no_purchase_found">No purchase found.</string>
+    <string name="no_purchase_found">Geen aankoop gevonden.</string>
     <string name="no_results">Geen resultaten</string>
     <string name="no_songs">Geen liedjes</string>
-
     <string name="normal">Normaal</string>
-    <string name="normal_lyrics">Normal lyrics</string>
-
+    <string name="normal_lyrics">Normale tekst/lyrics</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> staat niet in de media store]]></string>
-
+    <string name="not_recently_played">Al een tijdje niet beluisterd</string>
     <string name="nothing_to_scan">Niets om te scannen</string>
-    <string name="nothing_to_see">Nothing to see</string>
-
+    <string name="nothing_to_see">Niks te zien hier, enkel leegte</string>
     <string name="notification">Notificatie</string>
-    <string name="notification_settings_summary">Customize the notification style</string>
-
-    <string name="now_playing">Now playing</string>
+    <string name="notification_settings_summary">Pas de notificatiestijl aan</string>
+    <string name="now_playing">Speelt nu</string>
     <string name="now_playing_queue">Nu afspeel wachtrij</string>
-    <string name="now_playing_summary">Customize the now playing screen</string>
-    <string name="now_playing_themes">9+ now playing themes</string>
-
+    <string name="now_playing_summary">Pas het \"speelt nu\"-scherm aan</string>
+    <string name="now_playing_themes">9+ \"speelt nu\" thema\'s</string>
     <string name="only_on_wifi">Alleen Wi-Fi</string>
-
-    <string name="other_settings_summary">Advanced testing features</string>
-
-    <string name="others">Other</string>
-
-    <string name="password">Password</string>
-
+    <string name="other_settings_summary">Geavanceerde beveiligingsfuncties</string>
+    <string name="others">Anders</string>
+    <string name="over_cover">Over Cover</string>
+    <string name="password">Wachtwoord</string>
     <string name="past_three_months">Laatste 3 maanden</string>
-
-    <string name="peak">Peak</string>
-
+    <string name="paste_lyrics_here">Plak tekst/lyrics hier</string>
+    <string name="paste_timeframe_lyrics_here">Plak timeframe tekst/lyrics hier</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Permissie voor toegang tot extern opslag is afgewezen</string>
-
+    <string name="permission_summary">De app heeft toestemming nodig tot je apparaat\'s opslag om muziek af te kunnen spelen</string>
+    <string name="permission_title">Toegang tot opslag</string>
     <string name="permissions_denied">Permissies afgewezen</string>
-
-    <string name="personalize">Personalize</string>
+    <string name="personalize">Personaliseer</string>
     <string name="personalize_settings_summary">Customize your now playing and UI controls</string>
-
     <string name="pick_from_local_storage">Kies van local storage</string>
-
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
-
     <string name="plain">Vlak</string>
-
+    <string name="playList_already_exits">Playlist already exists</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
     <string name="playing_notification_description">De afspeel notificatie bied acties om af te spelen/pauzeren etc.</string>
     <string name="playing_notification_name">Afspeel notificatie</string>
-
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Afspeellijst is leeg</string>
     <string name="playlist_name_empty">Naam afspeellijst</string>
-
     <string name="playlists">Afspeellijsten</string>
-
     <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
     <string name="pref_blur_amount_title">Blur amount</string>
     <string name="pref_filter_song_summary">Filter songs by length</string>
@@ -371,7 +301,7 @@
     <string name="pref_header_advanced">Advanced</string>
     <string name="pref_header_album">Album style</string>
     <string name="pref_header_audio">Geluid</string>
-    <string name="pref_header_blacklist">Blacklist</string>
+    <string name="pref_header_blacklist">Zwarte lijst</string>
     <string name="pref_header_controls">Controls</string>
     <string name="pref_header_general">Theme</string>
     <string name="pref_header_images">Afbeeldingen</string>
@@ -383,8 +313,11 @@
     <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
+    <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">Gebruik de huidige cover als vergrendelscherm achtergrond.</string>
+    <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Notificaties, bediening etc.</string>
+    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
     <string name="pref_summary_blurred_album_art">Vervaagt de album cover op het vergrendelscherm. Kan problemen veroorzaken met apps van derde en widgets/</string>
@@ -393,6 +326,7 @@
     <string name="pref_summary_colored_app">Achtergrond, de kleur van de besturingstoetsen verandert overeenstemmend met de album opmaak van het afspeelscherm</string>
     <string name="pref_summary_colored_app_shortcuts">Kleurt de app snelkoppelingen naar de accent kleur. Elker keer wanneer je de kleur verandert, toggle dit om de changes te zien</string>
     <string name="pref_summary_colored_notification">"Kleurt de notificatie in de kleur van de album cover"</string>
+    <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
@@ -403,231 +337,202 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Zet besturing knoppen aan op vergrendelscherm</string>
     <string name="pref_summary_open_source_licences">Licentie details voor open source software</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
+    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Zet dit aan voor immersive mode</string>
     <string name="pref_summary_toggle_headset">Wanneer headphones ingeplugd zijn, afspelen start automatisch</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">Als er ruimte is in het nu afspelen scherm, zet volume knoppen aan</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
+    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Laat album cover zien</string>
+    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Gekleurde app snelkoppelingen</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Beperk volume bij verliezen focus</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Automatisch downloaden artisten afbeeldingen</string>
-    <string name="pref_title_blacklist">Blacklist</string>
+    <string name="pref_title_blacklist">Zwarte lijst</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Vervaag album cover</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Klassiek notificatie design</string>
     <string name="pref_title_colored_app">Aangepaste kleur</string>
     <string name="pref_title_colored_notification">Gekleurde notificatie</string>
+    <string name="pref_title_cross_fade">Crossfade (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
     <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Afspelen zonder pauzes</string>
     <string name="pref_title_general_theme">Basis thema</string>
+    <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Negeer media store covers</string>
     <string name="pref_title_last_added_interval">Laatst toegevoegde afspeellijst interval</string>
     <string name="pref_title_lock_screen">Volledig scherm besturing knoppen</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
     <string name="pref_title_now_playing_screen_appearance">Uiterlijk</string>
     <string name="pref_title_open_source_licences">Open source licenties</string>
+    <string name="pref_title_pause_history">Pause history</string>
+    <string name="pref_title_remember_tab">Remember last tab</string>
+    <string name="pref_title_show_lyrics">Show lyrics</string>
+    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
-    <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
+    <string name="pref_title_toggle_carousel_effect">Carrousel-effect</string>
     <string name="pref_title_toggle_full_screen">Volledig scherm app</string>
     <string name="pref_title_toggle_toggle_headset">Automatisch afspelen</string>
-    <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
+    <string name="pref_title_toggle_toggle_shuffle">Shufflemodus</string>
     <string name="pref_title_toggle_volume">Volume knoppen</string>
-
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
+    <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
-
-    <string name="profile">Profile</string>
-
-    <string name="purchase">Purchase</string>
-
+    <string name="pro_summary">Donker thema, \"speelt nu\" thema\'s, Carrousel-effect en nog veel meer..</string>
+    <string name="profile">Profiel</string>
+    <string name="purchase">Kopen</string>
     <string name="queue">Wachtrij</string>
-
     <string name="rate_app">App beoordelen</string>
     <string name="rate_on_google_play_summary">Vind je deze app leuk? Laat het ons weten in de Google Play Store om de ervaring te verbeteren</string>
-
-    <string name="recent_albums">Recent albums</string>
-    <string name="recent_artists">Recent artists</string>
-
+    <string name="recent_albums">Recente albums</string>
+    <string name="recent_artists">Recente artiesten</string>
     <string name="remove_action">Verwijderen</string>
     <string name="remove_cover">Verwijder cover</string>
     <string name="remove_from_blacklist">Verwijder van zwarte lijst</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Verwijder liedje van afspeellijst</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Verwijder liedje <b>%1$s</b> van de afspeellijst?]]></string>
     <string name="remove_songs_from_playlist_title">Verwijder liedjes van afspeellijst</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[Verwijder liedjes <b>%1$d</b> van de afspeellijst?]]></string>
-
     <string name="rename_playlist_title">Hernoem afspeellijst</string>
-
-    <string name="report_an_issue">Report an issue</string>
-    <string name="report_bug">Report bug</string>
-
-    <string name="reset_action">Reset</string>
+    <string name="replace_cover">Replace Cover</string>
+    <string name="report_an_issue">Een probleem melden</string>
+    <string name="report_bug">Een bug rapporteren</string>
+    <string name="reset_action">Resetten</string>
     <string name="reset_artist_image">Reset artiest afbeelding</string>
-
-    <string name="restore">Restore</string>
-
+    <string name="restore">Herstellen</string>
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
     <string name="restored_previous_purchases">Teruggezette aankopen</string>
-
-    <string name="restoring_purchase">Restoring purchase…</string>
-
+    <string name="restoring_purchase">Aankoop herstellen…</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
-
-    <string name="saf_delete_failed">File delete failed: %s</string>
+    <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
+    <string name="ringtone_title">Beltoon (Optioneel)</string>
+    <string name="saf_delete_failed">Bestand verwijderen gefaald: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
     <string name="saf_guide_slide1_description">Open navigation drawer</string>
     <string name="saf_guide_slide1_description_before_o">Enable \'Show SD card\' in overflow menu</string>
     <!-- SAF guide -->
-    <string name="saf_guide_slide1_title">%s needs SD card access</string>
+    <string name="saf_guide_slide1_title">%s heeft toegang tot de SD-kaart nodig</string>
     <string name="saf_guide_slide2_description">You need to select your SD card root directory</string>
     <string name="saf_guide_slide2_title">Select your SD card in navigation drawer</string>
     <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
     <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
     <string name="saf_write_failed">File write failed: %s</string>
-
-    <string name="save">Save</string>
+    <string name="save">Opslaan</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">Opslaan als bestand</string>
-    <string name="save_playlists_title">Save as files</string>
-
+    <string name="save_playlists_title">Opslaan als bestanden</string>
     <string name="saved_playlist_to">Afspeellijst opgeslagen in %s.</string>
-
     <string name="saving_changes">Aanpassingen opslaan</string>
-
-    <string name="scan_media">Scan media</string>
-
+    <string name="scan_media">Media scannen</string>
     <string name="scanned_files">%1$d van de %2$d bestanden gescant</string>
-
     <string name="scrobbles_label">Scrobbles</string>
-
-    <string name="select_all">Select all</string>
-
-    <string name="selected">Selected</string>
-
+    <string name="select_all">Alles selecteren</string>
+    <string name="selected">Geselecteerd</string>
     <string name="set">Set</string>
     <string name="set_artist_image">Stel artiest afbeelding in</string>
-
-    <string name="share_app">Share app</string>
+    <string name="share_app">App delen</string>
+    <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
-
+    <string name="show_album_artists">Show Album Artists</string>
     <string name="shuffle">Shuffle</string>
-
     <string name="simple">Simpel</string>
-
     <string name="sleep_timer_canceled">Slaap timer geannuleerd</string>
     <string name="sleep_timer_set">Slaap timer ingesteld in %d minuten vanaf nu</string>
-
     <string name="social">Social</string>
     <string name="social_stories">Share story</string>
-
     <string name="song">Liedje</string>
     <string name="song_duration">Duur liedje</string>
-
     <string name="songs">Nummers</string>
-
     <string name="sort_order">Volgorde </string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">Album</string>
-    <string name="sort_order_artist">Artist</string>
-    <string name="sort_order_composer">Composer</string>
+    <string name="sort_order_artist">Artiest</string>
+    <string name="sort_order_composer">Componist</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_num_songs">Song count</string>
+    <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>
     <string name="sort_order_z_a">Descending</string>
-
     <string name="speech_not_supported">Sorry! Je apparaat ondersteunt geen spraak invoer</string>
     <string name="speech_prompt">Zoek door je bibliotheek</string>
-
     <string name="stack">Stack</string>
-
     <string name="start_play_music">Start playing music.</string>
-
     <string name="suggestion_songs">Suggestions</string>
-
     <string name="support_development">Ondersteun ontwikkelaars</string>
-
     <string name="swipe_to_unlock">Swipe to unlock</string>
-
     <string name="synced_lyrics">Synced lyrics</string>
-
-    <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
-
     <string name="thank_you">Bedankt!</string>
-
     <string name="the_audio_file">Het geluidsbestand</string>
-
     <string name="this_month">Deze maand</string>
     <string name="this_week">Deze week</string>
     <string name="this_year">Dit jaar</string>
-
     <string name="tiny">Tiny</string>
     <string name="tiny_card_style">Tiny card</string>
-
     <string name="title">Title</string>
-
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Vandaag</string>
-
     <string name="top_albums">Top albums</string>
     <string name="top_artists">Top artists</string>
-
     <string name="track_hint">"Nummer (2 voor nummer 2 of 3004 voor CD3 nummer 4)"</string>
     <string name="track_list">Track nummer</string>
-
     <string name="translate">Vertalen</string>
     <string name="translate_community">Help us translate the app to your language</string>
-
     <string name="try_retro_music_premium">Try Retro Music Premium</string>
-
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Share your design with Retro Music</string>
-
     <string name="unlabeled">Unlabeled</string>
-
     <string name="unplayable_file">Kon dit nummer niet afspelen </string>
-
     <string name="up_next">Volgende</string>
-
     <string name="update_image">Update afbeelding</string>
-
     <string name="updating">Bijwerken...</string>
-
+    <string name="user_images_description">User Images</string>
+    <string name="user_name">User Name</string>
     <string name="username">Username</string>
-
     <string name="version">Versie</string>
-
     <string name="vertical_flip">Vertical flip</string>
-
+    <string name="view_on_telegram">View on Telegram</string>
     <string name="volume">Volume</string>
-
     <string name="web_search">Web zoekopdracht</string>
-
+    <string name="website">Website</string>
+    <string name="website_summary">Check out our Website</string>
     <string name="welcome">Welcome,</string>
-
     <string name="what_do_you_want_to_share">Wat wil je delen?</string>
-
     <string name="whats_new">What\'s New</string>
-
     <string name="window">Window</string>
     <string name="window_corner_edges">Rounded corners</string>
-
     <string name="x_has_been_set_as_ringtone">Stel %1$s in als ringtone</string>
     <string name="x_selected">%1$d geselecteerd</string>
-
     <string name="year">Jaar</string>
-
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
-
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
+    <string name="bug_report_success">Bug report successful</string>
 </resources>

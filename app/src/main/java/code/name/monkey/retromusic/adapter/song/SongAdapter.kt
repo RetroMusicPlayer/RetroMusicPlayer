@@ -21,6 +21,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
@@ -28,21 +29,20 @@ import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
+import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.afollestad.materialcab.MaterialCab
-import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 /**
@@ -50,7 +50,7 @@ import me.zhanghai.android.fastscroll.PopupTextProvider
  */
 
 open class SongAdapter(
-    protected val activity: FragmentActivity,
+    override val activity: FragmentActivity,
     var dataSet: MutableList<Song>,
     protected var itemLayoutRes: Int,
     ICabHolder: ICabHolder?,
@@ -59,7 +59,7 @@ open class SongAdapter(
     activity,
     ICabHolder,
     R.menu.menu_media_selection
-), MaterialCab.Callback, PopupTextProvider {
+), ICabCallback, PopupTextProvider {
 
     private var showSectionName = true
 
@@ -95,15 +95,15 @@ open class SongAdapter(
         val song = dataSet[position]
         val isChecked = isChecked(song)
         holder.itemView.isActivated = isChecked
-        if (isChecked) {
-            holder.menu?.hide()
-        } else {
-            holder.menu?.show()
-        }
+        holder.menu?.isGone = isChecked
         holder.title?.text = getSongTitle(song)
         holder.text?.text = getSongText(song)
         holder.text2?.text = getSongText(song)
         loadAlbumCover(song, holder)
+        val landscape = RetroUtil.isLandscape
+        if ((PreferenceUtil.songGridSize > 2 && !landscape) || (PreferenceUtil.songGridSizeLand > 5 && landscape)) {
+            holder.menu?.isVisible = false
+        }
     }
 
     private fun setColors(color: MediaNotificationProcessor, holder: ViewHolder) {
@@ -111,7 +111,7 @@ open class SongAdapter(
             holder.title?.setTextColor(color.primaryTextColor)
             holder.text?.setTextColor(color.secondaryTextColor)
             holder.paletteColorContainer?.setBackgroundColor(color.backgroundColor)
-            holder.menu?.imageTintList= ColorStateList.valueOf(color.primaryTextColor)
+            holder.menu?.imageTintList = ColorStateList.valueOf(color.primaryTextColor)
         }
         holder.mask?.backgroundTintList = ColorStateList.valueOf(color.primaryTextColor)
     }
@@ -120,9 +120,8 @@ open class SongAdapter(
         if (holder.image == null) {
             return
         }
-        SongGlideRequest.Builder.from(Glide.with(activity), song)
-            .checkIgnoreMediaStore(activity)
-            .generatePalette(activity).build()
+        GlideApp.with(activity).asBitmapPalette().songCoverOptions(song)
+            .load(RetroGlideExtension.getSongModel(song))
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
@@ -130,15 +129,15 @@ open class SongAdapter(
             })
     }
 
-    private fun getSongTitle(song: Song): String? {
+    private fun getSongTitle(song: Song): String {
         return song.title
     }
 
-    private fun getSongText(song: Song): String? {
+    private fun getSongText(song: Song): String {
         return song.artistName
     }
 
-    private fun getSongText2(song: Song): String? {
+    private fun getSongText2(song: Song): String {
         return song.albumName
     }
 
@@ -150,8 +149,8 @@ open class SongAdapter(
         return dataSet[position]
     }
 
-    override fun getName(song: Song): String {
-        return song.title
+    override fun getName(model: Song): String {
+        return model.title
     }
 
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<Song>) {
@@ -165,6 +164,7 @@ open class SongAdapter(
             SortOrder.SongSortOrder.SONG_ARTIST -> dataSet[position].artistName
             SortOrder.SongSortOrder.SONG_YEAR -> return MusicUtil.getYearString(dataSet[position].year)
             SortOrder.SongSortOrder.COMPOSER -> dataSet[position].composer
+            SortOrder.SongSortOrder.SONG_ALBUM_ARTIST -> dataSet[position].albumArtist
             else -> {
                 return ""
             }

@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.RetroMusic.MD3.Black" parent="@style/Theme.RetroMusic.MD3">
+        <item name="colorSurface">@color/blackColorSurface</item>
+    </style>
+
+    <style name="Theme.AppWidget" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="colorSurface">@android:color/system_accent2_800</item>
+    </style>
+</resources>

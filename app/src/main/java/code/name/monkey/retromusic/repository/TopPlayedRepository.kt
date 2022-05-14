@@ -75,7 +75,7 @@ class RealTopPlayedRepository(
         val notRecentlyPlayedSongs = songRepository.songs(
             makeNotRecentTracksCursorAndClearUpDatabase()
         )
-        allSongs.removeAll(playedSongs)
+        allSongs.removeAll(playedSongs.toSet())
         allSongs.addAll(notRecentlyPlayedSongs)
         return allSongs
     }

@@ -259,6 +259,7 @@
     <string name="label_file_format">Format</string>
     <string name="label_file_name">File name</string>
     <string name="label_file_path">File path</string>
+    <string name="label_last_modified">Last Modified</string>
     <string name="label_file_size">Size</string>
     <string name="label_more_from">More from %s</string>
     <string name="label_sampling_rate">Sampling rate</string>
@@ -340,7 +341,7 @@
 
     <string name="past_three_months">Past 3 months</string>
 
-    <string name="peak">Peak</string>
+    <string name="peek">Peek</string>
 
     <string name="permission_external_storage_denied">Permission to access external storage denied.</string>
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/playerLyrics"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:alpha="0"
+    android:background="@drawable/lyrics_mask"
+    android:clipToPadding="false"
+    android:elevation="20dp"
+    android:padding="16dp"
+    android:visibility="gone"
+    tools:alpha="1"
+    tools:visibility="visible">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/player_lyrics_line1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:shadowColor="@color/md_black_1000"
+        android:shadowRadius="4"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textColor="@color/md_white_1000"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/player_lyrics_line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:shadowColor="@color/md_black_1000"
+        android:shadowRadius="4"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textColor="@color/md_white_1000"
+        tools:text="@tools:sample/full_names[5]" />
+</FrameLayout>

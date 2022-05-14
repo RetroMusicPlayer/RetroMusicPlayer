@@ -15,6 +15,9 @@
     <color name="darkColorPrimary">#202124</color>
     <color name="darkColorSurface">#202124</color>
 
+    <color name="darkerColorSurface">#353535</color>
+    <color name="lighterColorSurface">#dddddd</color>
+
     <color name="blackColorSurface">#000000</color>
 
     <color name="transparent">#00000000</color>
@@ -27,5 +30,12 @@
     <color name="progress_gray">#FFD8D8D8</color>
     <color name="default_blue_light">#ff33b5e5</color>
 
+    <color name="bottomSheetColorLight">#FFFFFF</color>
+    <color name="bottomSheetColorDark">#202020</color>
+    <color name="bottomSheetColorBlack">#000000</color>
 
+    <color name="bottomSheetColor">#FFFFFF</color>
+    <color name="widget_md3_bg_color">@color/lighterColorSurface</color>
+    <color name="widget_circle_button_color">@color/md_indigo_A400</color>
+    <color name="widget_md3_button_bg_color">@color/lighterColorSurface</color>
 </resources>

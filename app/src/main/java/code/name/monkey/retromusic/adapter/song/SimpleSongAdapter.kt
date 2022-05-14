@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import java.util.*
 
 class SimpleSongAdapter(
     context: FragmentActivity,

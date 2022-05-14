@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_backup"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="4dp"
+        android:paddingVertical="10dp"
+        android:text="@string/create_new_backup"
+        android:textAppearance="@style/TextViewButton"
+        android:textColor="?android:attr/textColorPrimary"
+        app:backgroundTint="?attr/colorSurface"
+        app:icon="@drawable/ic_backup"
+        app:iconGravity="start"
+        app:layout_constraintEnd_toStartOf="@+id/restore_backup"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/restore_backup"
+        style="@style/Widget.Material3.Button.Icon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="16dp"
+        android:paddingVertical="10dp"
+        android:text="@string/restore"
+        android:textAppearance="@style/TextViewButton"
+        app:icon="@drawable/ic_restore"
+        app:iconGravity="start"
+        app:layout_constraintBottom_toBottomOf="@+id/create_backup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/create_backup"
+        app:layout_constraintTop_toTopOf="@+id/create_backup" />
+
+    <TextView
+        android:id="@+id/backup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/backup_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create_backup" />
+
+    <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
+        android:id="@+id/backup_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backup_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

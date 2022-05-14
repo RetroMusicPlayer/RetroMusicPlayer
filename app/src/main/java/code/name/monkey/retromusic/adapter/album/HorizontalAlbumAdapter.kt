@@ -17,7 +17,8 @@ package code.name.monkey.retromusic.adapter.album
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import code.name.monkey.retromusic.glide.AlbumGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.HorizontalAdapterHelper
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
@@ -25,7 +26,6 @@ import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
 
 class HorizontalAlbumAdapter(
     activity: FragmentActivity,
@@ -49,10 +49,8 @@ class HorizontalAlbumAdapter(
 
     override fun loadAlbumCover(album: Album, holder: ViewHolder) {
         if (holder.image == null) return
-        AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-            .checkIgnoreMediaStore()
-            .generatePalette(activity)
-            .build()
+        GlideApp.with(activity).asBitmapPalette().albumCoverOptions(album.safeGetFirstSong())
+            .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
@@ -60,7 +58,7 @@ class HorizontalAlbumAdapter(
             })
     }
 
-    override fun getAlbumText(album: Album): String? {
+    override fun getAlbumText(album: Album): String {
         return MusicUtil.getYearString(album.year)
     }
 
