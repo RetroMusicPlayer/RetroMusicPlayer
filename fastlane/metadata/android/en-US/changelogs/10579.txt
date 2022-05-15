@@ -1,0 +1,4 @@
+- Migrate to Material 3
+- Support for Storage Access Framework
+- Bump SDK to 32 (Android 12L)
+- Minor fixes
