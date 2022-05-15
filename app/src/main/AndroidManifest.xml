@@ -23,7 +23,10 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="com.android.vending.BILLING" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_CONNECT"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" />
 
     <application
         android:name=".App"
@@ -123,7 +126,10 @@
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
         <activity android:name=".activities.PermissionActivity" />
-        <activity android:name=".activities.LockScreenActivity" />
+        <activity
+            android:name=".activities.LockScreenActivity"
+            android:launchMode="singleTop"
+            android:showOnLockScreen="true" />
         <activity
             android:name=".fragments.backup.RestoreActivity"
             android:excludeFromRecents="false"
@@ -169,20 +175,6 @@
         <activity
             android:name=".activities.saf.SAFGuideActivity"
             android:theme="@style/Theme.Intro" />
-
-        <activity
-            android:name=".cast.ExpandedControlsActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
-        </activity>
 
         <activity
             android:name=".activities.ErrorActivity"
