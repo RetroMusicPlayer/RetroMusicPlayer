@@ -20,40 +20,16 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.ui.NavigationUI
-import io.github.muntashirakon.music.ADAPTIVE_COLOR_APP
-import io.github.muntashirakon.music.ALBUM_COVER_STYLE
-import io.github.muntashirakon.music.ALBUM_COVER_TRANSFORM
-import io.github.muntashirakon.music.BANNER_IMAGE_PATH
-import io.github.muntashirakon.music.BLACK_THEME
-import io.github.muntashirakon.music.CAROUSEL_EFFECT
-import io.github.muntashirakon.music.CIRCULAR_ALBUM_ART
-import io.github.muntashirakon.music.DESATURATED_COLOR
-import io.github.muntashirakon.music.EXTRA_SONG_INFO
-import io.github.muntashirakon.music.GENERAL_THEME
-import io.github.muntashirakon.music.HOME_ARTIST_GRID_STYLE
-import io.github.muntashirakon.music.KEEP_SCREEN_ON
-import io.github.muntashirakon.music.LANGUAGE_NAME
-import io.github.muntashirakon.music.LIBRARY_CATEGORIES
-import io.github.muntashirakon.music.NOW_PLAYING_SCREEN_ID
-import io.github.muntashirakon.music.PROFILE_IMAGE_PATH
-import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.ROUND_CORNERS
-import io.github.muntashirakon.music.TAB_TEXT_MODE
-import io.github.muntashirakon.music.TOGGLE_ADD_CONTROLS
-import io.github.muntashirakon.music.TOGGLE_FULL_SCREEN
-import io.github.muntashirakon.music.TOGGLE_GENRE
-import io.github.muntashirakon.music.TOGGLE_HOME_BANNER
-import io.github.muntashirakon.music.TOGGLE_SEPARATE_LINE
-import io.github.muntashirakon.music.TOGGLE_VOLUME
-import io.github.muntashirakon.music.USER_NAME
+import androidx.navigation.contains
+import androidx.navigation.ui.setupWithNavController
+import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.activities.base.AbsSlidingMusicPanelActivity
-import io.github.muntashirakon.music.extensions.extra
-import io.github.muntashirakon.music.extensions.findNavController
+import io.github.muntashirakon.music.databinding.SlidingMusicPanelLayoutBinding
+import io.github.muntashirakon.music.extensions.*
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.SearchQueryHelper.getSongs
+import io.github.muntashirakon.music.interfaces.IScrollHelper
 import io.github.muntashirakon.music.model.CategoryInfo
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.repository.PlaylistSongsLoader
@@ -69,16 +45,12 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         const val EXPAND_PANEL = "expand_panel"
     }
 
-    override fun createContentView(): View {
+    override fun createContentView(): SlidingMusicPanelLayoutBinding {
         return wrapSlidingMusicPanel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
-        setLightNavigationBar(true)
         setTaskDescriptionColorAuto()
         hideStatusBar()
         updateTabs()
@@ -87,6 +59,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
         if (!hasPermissions()) {
             findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
         }
+        WhatsNewFragment.showChangeLog(this)
     }
 
     private fun setupNavigationController() {
@@ -96,23 +69,75 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
 
         val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
         if (categoryInfo.visible) {
-            navGraph.startDestination = categoryInfo.category.id
+            if (!navGraph.contains(PreferenceUtil.lastTab)) PreferenceUtil.lastTab =
+                categoryInfo.category.id
+            navGraph.setStartDestination(
+                if (PreferenceUtil.rememberLastTab) {
+                    PreferenceUtil.lastTab.let {
+                        if (it == 0) {
+                            categoryInfo.category.id
+                        } else {
+                            it
+                        }
+                    }
+                } else categoryInfo.category.id
+            )
         }
         navController.graph = navGraph
-        NavigationUI.setupWithNavController(getBottomNavigationView(), navController)
+        bottomNavigationView.setupWithNavController(navController)
+        // Scroll Fragment to top
+        bottomNavigationView.setOnItemReselectedListener {
+            currentFragment(R.id.fragment_container).apply {
+                if (this is IScrollHelper) {
+                    scrollToTop()
+                }
+            }
+        }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == navGraph.startDestinationId) {
+                currentFragment(R.id.fragment_container)?.enterTransition = null
+            }
+            when (destination.id) {
+                R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre, R.id.action_search -> {
+                    // Save the last tab
+                    if (PreferenceUtil.rememberLastTab) {
+                        saveTab(destination.id)
+                    }
+                    // Show Bottom Navigation Bar
+                    setBottomNavVisibility(visible = true, animate = true)
+                }
+                R.id.playing_queue_fragment -> {
+                    setBottomNavVisibility(visible = false, hideBottomSheet = true)
+                }
+                else -> setBottomNavVisibility(
+                    visible = false,
+                    animate = true
+                ) // Hide Bottom Navigation Bar
+            }
+        }
+    }
+
+    private fun saveTab(id: Int) {
+        PreferenceUtil.lastTab = id
     }
 
     override fun onSupportNavigateUp(): Boolean =
         findNavController(R.id.fragment_container).navigateUp()
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val expand = intent?.extra<Boolean>(EXPAND_PANEL)?.value ?: false
+        if (expand && PreferenceUtil.isExpandPanel) {
+            fromNotification = true
+            slidingPanel.bringToFront()
+            expandPanel()
+            intent?.removeExtra(EXPAND_PANEL)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
-        val expand = extra<Boolean>(EXPAND_PANEL).value ?: false
-        if (expand && PreferenceUtil.isExpandPanel) {
-            expandPanel()
-            intent.removeExtra(EXPAND_PANEL)
-        }
     }
 
     override fun onDestroy() {
@@ -121,7 +146,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == GENERAL_THEME || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES) {
+        if (key == GENERAL_THEME || key == MATERIAL_YOU || key == WALLPAPER_ACCENT || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES || key == CUSTOM_FONT || key == APPBAR_MODE || key == CIRCLE_PLAY_BUTTON || key == SWIPE_DOWN_DISMISS) {
             postRecreate()
         }
     }
@@ -149,7 +174,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), OnSharedPreferenceChangeLis
                 handled = true
             }
             if (uri != null && uri.toString().isNotEmpty()) {
-                MusicPlayerRemote.playFromUri(uri)
+                MusicPlayerRemote.playFromUri(this@MainActivity, uri)
                 handled = true
             } else if (MediaStore.Audio.Playlists.CONTENT_TYPE == mimeType) {
                 val id = parseLongFromIntent(intent, "playlistId", "playlist")

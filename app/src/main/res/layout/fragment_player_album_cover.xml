@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,5 +9,38 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never" />
+        android:overScrollMode="@integer/overScrollMode">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/cover_lyrics"
+        android:name="io.github.muntashirakon.music.fragments.player.CoverLyricsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical" />
+
+    <com.bosphere.fadingedgelayout.FadingEdgeLayout
+        android:id="@+id/fading_edge_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:fel_edge="top|bottom"
+        app:fel_size_bottom="100dp"
+        app:fel_size_top="100dp">
+
+        <io.github.muntashirakon.music.lyrics.CoverLrcView
+            android:id="@+id/lyricsView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:visibility="gone"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:lrcLabel="@string/no_lyrics_found"
+            app:lrcNormalTextSize="28sp"
+            app:lrcPadding="24dp"
+            app:lrcTextGravity="center"
+            app:lrcTextSize="32sp"
+            app:lrcTimelineColor="@color/transparent"
+            tools:visibility="visible" />
+    </com.bosphere.fadingedgelayout.FadingEdgeLayout>
 </FrameLayout>

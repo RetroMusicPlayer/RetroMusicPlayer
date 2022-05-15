@@ -8,9 +8,7 @@
     android:clickable="true"
     android:focusable="true">
 
-
     <include layout="@layout/shadow_statusbar_toolbar" />
-
 
     <FrameLayout
         android:id="@+id/statusBarContainer"
@@ -27,6 +25,7 @@
         android:id="@+id/titleContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -38,13 +37,7 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:freezesText="true"
-            android:marqueeRepeatLimit="marquee_forever"
             android:paddingTop="8dp"
-            android:scrollHorizontally="true"
             android:singleLine="true"
             android:textAppearance="@style/TextViewHeadline6"
             android:textStyle="bold"
@@ -55,23 +48,25 @@
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:ellipsize="end"
+            android:focusable="true"
             android:maxLines="1"
             android:paddingTop="8dp"
             tools:text="Text" />
     </LinearLayout>
 
-     <fragment
-         android:id="@+id/playerAlbumCoverFragment"
-         android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
-         android:layout_width="0dp"
-         android:layout_height="0dp"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHeight_percent="0.5"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@id/titleContainer" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/playerAlbumCoverFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleContainer" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"
         android:name="io.github.muntashirakon.music.fragments.player.plain.PlainPlaybackControlsFragment"
         android:layout_width="0dp"
@@ -92,5 +87,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playbackControlsFragment"
         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,11 +16,11 @@ package io.github.muntashirakon.music.adapter.song
 
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
-import io.github.muntashirakon.music.glide.SongGlideRequest
+import io.github.muntashirakon.music.glide.GlideApp
+import io.github.muntashirakon.music.glide.RetroGlideExtension
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.MusicPlayerRemote.isPlaying
 import io.github.muntashirakon.music.helper.MusicPlayerRemote.playNextSong
@@ -28,8 +28,6 @@ import io.github.muntashirakon.music.helper.MusicPlayerRemote.removeFromQueue
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.ViewUtil
-import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
 import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
@@ -41,7 +39,7 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAct
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class PlayingQueueAdapter(
-    activity: AppCompatActivity,
+    activity: FragmentActivity,
     dataSet: MutableList<Song>,
     private var current: Int,
     itemLayoutRes: Int
@@ -79,14 +77,10 @@ class PlayingQueueAdapter(
         if (holder.image == null) {
             return
         }
-        SongGlideRequest.Builder.from(Glide.with(activity), song)
-            .checkIgnoreMediaStore(activity)
-            .generatePalette(activity).build()
-            .into(object : RetroMusicColoredTarget(holder.image!!) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    //setColors(colors, holder)
-                }
-            })
+        GlideApp.with(activity)
+            .load(RetroGlideExtension.getSongModel(song))
+            .songCoverOptions(song)
+            .into(holder.image!!)
     }
 
     fun swapDataSet(dataSet: List<Song>, position: Int) {
@@ -156,7 +150,7 @@ class PlayingQueueAdapter(
             }
 
         init {
-            dragView?.visibility = View.VISIBLE
+            dragView?.isVisible = true
         }
 
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
@@ -190,7 +184,7 @@ class PlayingQueueAdapter(
         private const val UP_NEXT = 2
     }
 
-    override fun onSwipeItem(holder: ViewHolder, position: Int, result: Int): SwipeResultAction? {
+    override fun onSwipeItem(holder: ViewHolder, position: Int, result: Int): SwipeResultAction {
         return if (result == SwipeableItemConstants.RESULT_CANCELED) {
             SwipeResultActionDefault()
         } else {

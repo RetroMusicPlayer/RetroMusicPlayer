@@ -56,7 +56,7 @@ public class ATEPreferenceDialogFragment extends DialogFragment implements Dialo
         } else {
             DialogPreference.TargetFragment fragment = (DialogPreference.TargetFragment) rawFragment;
             String key = this.getArguments().getString(ARG_KEY);
-            this.mPreference = (DialogPreference) fragment.findPreference(key);
+            this.mPreference = fragment.findPreference(key);
         }
     }
 
@@ -96,7 +96,7 @@ public class ATEPreferenceDialogFragment extends DialogFragment implements Dialo
     }
 
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         Log.i(TAG, "onDismiss: " + mWhichButtonClicked);
         onDialogClosed(mWhichButtonClicked == DialogInterface.BUTTON_POSITIVE);

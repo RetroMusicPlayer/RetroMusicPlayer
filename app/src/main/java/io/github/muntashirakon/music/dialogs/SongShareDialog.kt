@@ -46,6 +46,7 @@ class SongShareDialog : DialogFragment() {
             ) { _, which ->
                 withAction(which, song, listening)
             }
+            .setNegativeButton(R.string.action_cancel, null)
             .create()
             .colorButtons()
     }

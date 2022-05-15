@@ -14,24 +14,22 @@
 
 package io.github.muntashirakon.music.preferences
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.CategoryInfoAdapter
+import io.github.muntashirakon.music.databinding.PreferenceDialogLibraryCategoriesBinding
 import io.github.muntashirakon.music.extensions.colorButtons
 import io.github.muntashirakon.music.extensions.colorControlNormal
 import io.github.muntashirakon.music.extensions.materialDialog
+import io.github.muntashirakon.music.extensions.showToast
 import io.github.muntashirakon.music.model.CategoryInfo
 import io.github.muntashirakon.music.util.PreferenceUtil
 
@@ -51,28 +49,25 @@ class LibraryPreference @JvmOverloads constructor(
 
 class LibraryPreferenceDialog : DialogFragment() {
 
-    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = LayoutInflater.from(requireContext())
-            .inflate(R.layout.preference_dialog_library_categories, null)
+        val binding = PreferenceDialogLibraryCategoriesBinding.inflate(layoutInflater)
 
         val categoryAdapter = CategoryInfoAdapter()
-        categoryAdapter.categoryInfos = PreferenceUtil.libraryCategory
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = categoryAdapter
-        categoryAdapter.attachToRecyclerView(recyclerView)
-
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = categoryAdapter
+            categoryAdapter.attachToRecyclerView(this)
+        }
 
         return materialDialog(R.string.library_categories)
             .setNeutralButton(
                 R.string.reset_action
             ) { _, _ ->
-                categoryAdapter.categoryInfos = PreferenceUtil.defaultCategories
+                updateCategories(PreferenceUtil.defaultCategories)
             }
             .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton( R.string.done) { _, _ -> updateCategories(categoryAdapter.categoryInfos) }
-            .setView(view)
+            .setPositiveButton(R.string.done) { _, _ -> updateCategories(categoryAdapter.categoryInfos) }
+            .setView(binding.root)
             .create()
             .colorButtons()
     }
@@ -80,7 +75,7 @@ class LibraryPreferenceDialog : DialogFragment() {
     private fun updateCategories(categories: List<CategoryInfo>) {
         if (getSelected(categories) == 0) return
         if (getSelected(categories) > 5) {
-            Toast.makeText(context, "Not more than 5 items", Toast.LENGTH_SHORT).show()
+            showToast(R.string.message_limit_tabs)
             return
         }
         PreferenceUtil.libraryCategory = categories

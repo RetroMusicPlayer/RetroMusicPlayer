@@ -14,12 +14,12 @@
  */
 package io.github.muntashirakon.music.fragments.base
 
-import android.os.Bundle
-import android.view.View
-import androidx.annotation.LayoutRes
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionManager
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.util.RetroUtil
+import com.google.android.material.transition.MaterialFade
 
 abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
     AbsRecyclerViewFragment<A, LM>() {
@@ -28,7 +28,7 @@ abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>
     private var sortOrder: String? = null
     private var currentLayoutRes: Int = 0
     private val isLandscape: Boolean
-        get() = RetroUtil.isLandscape()
+        get() = RetroUtil.isLandscape
 
     val maxGridSize: Int
         get() = if (isLandscape) {
@@ -86,6 +86,7 @@ abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>
         } else {
             saveGridSize(gridSize)
         }
+        recyclerView.isVisible = false
         invalidateLayoutManager()
         // only recreate the adapter and layout manager if the layout currentLayoutRes has changed
         if (oldLayoutRes != itemLayoutRes()) {
@@ -93,26 +94,11 @@ abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>
         } else {
             setGridSize(gridSize)
         }
-    }
-
-    protected fun notifyLayoutResChanged(@LayoutRes res: Int) {
-        this.currentLayoutRes = res
-        val recyclerView = recyclerView()
-        applyRecyclerViewPaddingForLayoutRes(recyclerView, currentLayoutRes)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        applyRecyclerViewPaddingForLayoutRes(recyclerView(), currentLayoutRes)
-    }
-
-    private fun applyRecyclerViewPaddingForLayoutRes(recyclerView: RecyclerView, res: Int) {
-        val padding: Int = if (res == R.layout.item_grid) {
-            (resources.displayMetrics.density * 2).toInt()
-        } else {
-            0
+        val transition = MaterialFade().apply {
+            addTarget(recyclerView)
         }
-        //recyclerView.setPadding(padding, padding, padding, padding)
+        TransitionManager.beginDelayedTransition(container, transition)
+        recyclerView.isVisible = true
     }
 
     protected abstract fun setGridSize(gridSize: Int)

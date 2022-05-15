@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:transitionName="search"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorSurface"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:titleTextAppearance="@style/ToolbarTextAppearanceNormal">
 
@@ -29,7 +30,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/searchView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="@string/action_search"
@@ -69,7 +70,75 @@
                 </FrameLayout>
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:scrollbars="none"
+            android:overScrollMode="@integer/overScrollMode">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/searchFilterGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_audio"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/songs" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_artists"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/artists" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_albums"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/albums" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_album_artists"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/album_artist" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_genres"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/genres" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_playlists"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/playlists" />
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
     </com.google.android.material.appbar.AppBarLayout>
+
+    <io.github.muntashirakon.music.views.insets.InsetsRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="@integer/overScrollMode"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@android:id/empty"
@@ -82,16 +151,6 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/keyboardPopup"
         android:layout_width="wrap_content"
@@ -102,4 +161,5 @@
         android:text="@string/keyboard"
         android:textAppearance="@style/TextViewHeadline6"
         app:icon="@drawable/ic_keyboard" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

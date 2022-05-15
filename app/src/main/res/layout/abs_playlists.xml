@@ -6,152 +6,59 @@
     android:orientation="vertical"
     android:paddingBottom="12dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/history"
+        style="@style/HomeActionButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/history"
+        app:icon="@drawable/ic_history"
         app:layout_constraintEnd_toStartOf="@+id/lastAdded"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <io.github.muntashirakon.music.views.ColorIconsImageView
-            android:id="@+id/v1"
-            android:layout_width="@dimen/adaptive_icon_size"
-            android:layout_height="@dimen/adaptive_icon_size"
-            android:layout_gravity="center"
-            android:padding="@dimen/adaptive_icon_padding"
-            app:iconBackgroundColor="@color/md_blue_500"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_history" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:paddingTop="8dp"
-            android:text="@string/history"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v1" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/lastAdded"
+        style="@style/HomeActionButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/topPlayed"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/history"
-        app:layout_constraintTop_toTopOf="@+id/history">
-
-        <io.github.muntashirakon.music.views.ColorIconsImageView
-            android:id="@+id/v2"
-            android:layout_width="@dimen/adaptive_icon_size"
-            android:layout_height="@dimen/adaptive_icon_size"
-            android:layout_gravity="center"
-            android:padding="@dimen/adaptive_icon_padding"
-            app:iconBackgroundColor="@color/md_red_500"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_library_add" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:paddingTop="8dp"
-            android:text="@string/last_added"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v2" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topPlayed"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/actionShuffle"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/lastAdded"
-        app:layout_constraintTop_toTopOf="@+id/lastAdded">
-
-        <io.github.muntashirakon.music.views.ColorIconsImageView
-            android:id="@+id/v3"
-            android:layout_width="@dimen/adaptive_icon_size"
-            android:layout_height="@dimen/adaptive_icon_size"
-            android:layout_gravity="center"
-            android:padding="@dimen/adaptive_icon_padding"
-            app:iconBackgroundColor="@color/md_deep_purple_500"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_trending_up" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:paddingTop="8dp"
-            android:text="@string/my_top_tracks"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v3" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/actionShuffle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginEnd="16dp"
+        android:text="@string/last_added"
+        app:icon="@drawable/ic_library_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/topPlayed"
-        app:layout_constraintTop_toTopOf="@+id/topPlayed">
+        app:layout_constraintStart_toEndOf="@+id/history"
+        app:layout_constraintTop_toTopOf="@+id/history" />
 
-        <io.github.muntashirakon.music.views.ColorIconsImageView
-            android:id="@+id/v4"
-            android:layout_width="@dimen/adaptive_icon_size"
-            android:layout_height="@dimen/adaptive_icon_size"
-            android:layout_gravity="center"
-            android:padding="@dimen/adaptive_icon_padding"
-            app:iconBackgroundColor="@color/md_green_500"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_shuffle" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:paddingTop="8dp"
-            android:text="@string/shuffle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v4" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Group
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/topPlayed"
+        style="@style/HomeActionButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="history,lastAdded,topPlayed,actionShuffle" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/my_top_tracks"
+        app:icon="@drawable/ic_trending_up"
+        app:layout_constraintEnd_toStartOf="@+id/actionShuffle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/history"
+        app:layout_constraintTop_toBottomOf="@+id/history" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/actionShuffle"
+        style="@style/HomeActionButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/shuffle"
+        app:icon="@drawable/ic_shuffle"
+        app:layout_constraintEnd_toEndOf="@+id/lastAdded"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/topPlayed"
+        app:layout_constraintTop_toBottomOf="@+id/lastAdded" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

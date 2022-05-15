@@ -30,7 +30,11 @@ class ImportPlaylistDialog : DialogFragment() {
         return materialDialog(R.string.import_playlist)
             .setMessage(R.string.import_playlist_message)
             .setPositiveButton(R.string.import_label) { _, _ ->
-                libraryViewModel.importPlaylists()
+                try {
+                    libraryViewModel.importPlaylists()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
             .create()
             .colorButtons()

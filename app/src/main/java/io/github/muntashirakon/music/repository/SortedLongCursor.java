@@ -15,8 +15,10 @@ package io.github.muntashirakon.music.repository;
 
 import android.database.AbstractCursor;
 import android.database.Cursor;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -32,7 +34,7 @@ public class SortedLongCursor extends AbstractCursor {
   // the map of external indices to internal indices
   private ArrayList<Integer> mOrderedPositions;
   // this contains the ids that weren't found in the underlying cursor
-  private ArrayList<Long> mMissingIds;
+  private final ArrayList<Long> mMissingIds;
   // this contains the mapped cursor positions and afterwards the extra ids that weren't found
   private HashMap<Long, Integer> mMapCursorPositions;
 

@@ -15,115 +15,39 @@
 package io.github.muntashirakon.music.glide.artistimage
 
 import android.content.Context
-import io.github.muntashirakon.music.model.Artist
-import io.github.muntashirakon.music.model.Data
 import io.github.muntashirakon.music.network.DeezerService
-import io.github.muntashirakon.music.util.MusicUtil
-import io.github.muntashirakon.music.util.PreferenceUtil
-import com.bumptech.glide.Priority
-import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
-import com.bumptech.glide.load.data.DataFetcher
-import com.bumptech.glide.load.model.GenericLoaderFactory
-import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.Options
 import com.bumptech.glide.load.model.ModelLoader
+import com.bumptech.glide.load.model.ModelLoader.LoadData
 import com.bumptech.glide.load.model.ModelLoaderFactory
-import com.bumptech.glide.load.model.stream.StreamModelLoader
-import java.io.IOException
-import java.io.InputStream
-import java.util.concurrent.TimeUnit
+import com.bumptech.glide.load.model.MultiModelLoaderFactory
+import com.bumptech.glide.signature.ObjectKey
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-
-class ArtistImage(val artist: Artist)
-
-class ArtistImageFetcher(
-    private val context: Context,
-    private val deezerService: DeezerService,
-    val model: ArtistImage,
-    val urlLoader: ModelLoader<GlideUrl, InputStream>,
-    val width: Int,
-    val height: Int
-) : DataFetcher<InputStream> {
-
-    private var urlFetcher: DataFetcher<InputStream>? = null
-    private var isCancelled: Boolean = false
-
-    override fun cleanup() {
-        urlFetcher?.cleanup()
-    }
-
-    override fun getId(): String {
-        return model.artist.name
-    }
-
-    override fun cancel() {
-        isCancelled = true
-        urlFetcher?.cancel()
-    }
-
-    override fun loadData(priority: Priority?): InputStream? {
-        if (!MusicUtil.isArtistNameUnknown(model.artist.name) &&
-            PreferenceUtil.isAllowedToDownloadMetadata()
-        ) {
-            val artists = model.artist.name.split(",")
-            val response = deezerService.getArtistImage(artists[0]).execute()
-
-            if (!response.isSuccessful) {
-                throw IOException("Request failed with code: " + response.code())
-            }
-
-            if (isCancelled) return null
-
-            return try {
-                val deezerResponse = response.body()
-                val imageUrl = deezerResponse?.data?.get(0)?.let { getHighestQuality(it) }
-                // Fragile way to detect a place holder image returned from Deezer:
-                // ex: "https://e-cdns-images.dzcdn.net/images/artist//250x250-000000-80-0-0.jpg"
-                // the double slash implies no artist identified
-                val placeHolder = imageUrl?.contains("/images/artist//") ?: false
-                if (!placeHolder) {
-                    val glideUrl = GlideUrl(imageUrl)
-                    urlFetcher = urlLoader.getResourceFetcher(glideUrl, width, height)
-                    urlFetcher?.loadData(priority)
-                } else {
-                    getFallbackAlbumImage()
-                }
-            } catch (e: Exception) {
-                getFallbackAlbumImage()
-            }
-        } else return null
-    }
-
-    private fun getFallbackAlbumImage(): InputStream? {
-        val imageUri = MusicUtil.getMediaStoreAlbumCoverUri(model.artist.safeGetFirstAlbum().id)
-        return context.contentResolver.openInputStream(imageUri)
-    }
-
-    private fun getHighestQuality(imageUrl: Data): String {
-        return when {
-            imageUrl.pictureXl.isNotEmpty() -> imageUrl.pictureXl
-            imageUrl.pictureBig.isNotEmpty() -> imageUrl.pictureBig
-            imageUrl.pictureMedium.isNotEmpty() -> imageUrl.pictureMedium
-            imageUrl.pictureSmall.isNotEmpty() -> imageUrl.pictureSmall
-            imageUrl.picture.isNotEmpty() -> imageUrl.picture
-            else -> ""
-        }
-    }
-}
+import java.io.InputStream
+import java.util.concurrent.TimeUnit
 
 class ArtistImageLoader(
     val context: Context,
     private val deezerService: DeezerService,
-    private val urlLoader: ModelLoader<GlideUrl, InputStream>
-) : StreamModelLoader<ArtistImage> {
+    private val okhttp: OkHttpClient
+) : ModelLoader<ArtistImage, InputStream> {
 
-    override fun getResourceFetcher(
+    override fun buildLoadData(
         model: ArtistImage,
         width: Int,
-        height: Int
-    ): DataFetcher<InputStream> {
-        return ArtistImageFetcher(context, deezerService, model, urlLoader, width, height)
+        height: Int,
+        options: Options
+    ): LoadData<InputStream> {
+        return LoadData(
+            ObjectKey(model.artist.name),
+            ArtistImageFetcher(context, deezerService, model, okhttp)
+        )
+    }
+
+    override fun handles(model: ArtistImage): Boolean {
+        return true
     }
 }
 
@@ -132,16 +56,15 @@ class Factory(
 ) : ModelLoaderFactory<ArtistImage, InputStream> {
 
     private var deezerService: DeezerService
-    private var okHttpFactory: OkHttpUrlLoader.Factory
+    private var okHttp: OkHttpClient
 
     init {
-        okHttpFactory = OkHttpUrlLoader.Factory(
+        okHttp =
             OkHttpClient.Builder()
                 .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .build()
-        )
         deezerService = DeezerService.invoke(
             DeezerService.createDefaultOkHttpClient(context)
                 .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
@@ -158,23 +81,18 @@ class Factory(
         return interceptor
     }
 
-    override fun build(
-        context: Context?,
-        factories: GenericLoaderFactory?
-    ): ModelLoader<ArtistImage, InputStream> {
+    override fun build(multiFactory: MultiModelLoaderFactory): ModelLoader<ArtistImage, InputStream> {
         return ArtistImageLoader(
-            context!!,
+            context,
             deezerService,
-            okHttpFactory.build(context, factories)
+            okHttp
         )
     }
 
-    override fun teardown() {
-        okHttpFactory.teardown()
-    }
+    override fun teardown() {}
 
     companion object {
         // we need these very low values to make sure our artist image loading calls doesn't block the image loading queue
-        private const val TIMEOUT: Long = 700
+        private const val TIMEOUT: Long = 500
     }
 }

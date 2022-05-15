@@ -16,6 +16,8 @@ package io.github.muntashirakon.music.transform
 
 import android.view.View
 import androidx.viewpager.widget.ViewPager
+import kotlin.math.abs
+import kotlin.math.max
 
 /**
  * @author Hemanth S (h4h13).
@@ -23,41 +25,47 @@ import androidx.viewpager.widget.ViewPager
 
 class NormalPageTransformer : ViewPager.PageTransformer {
 
-    override fun transformPage(view: View, position: Float) {
-        val pageWidth = view.width
-        val pageHeight = view.height
+    override fun transformPage(page: View, position: Float) {
+        page.apply {
+            val pageWidth = width
+            val pageHeight = height
 
-        if (position < -1) { // [-Infinity,-1)
-            // This page is way off-screen to the left.
-            view.alpha = 1f
-            view.scaleY = 0.7f
-        } else if (position <= 1) { // [-1,1]
-            // Modify the default slide transition to shrink the page as well
-            val scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position))
-            val vertMargin = pageHeight * (1 - scaleFactor) / 2
-            val horzMargin = pageWidth * (1 - scaleFactor) / 2
-            if (position < 0) {
-                view.translationX = horzMargin - vertMargin / 2
-            } else {
-                view.translationX = -horzMargin + vertMargin / 2
+            when {
+                position < -1 -> { // [-Infinity,-1)
+                    // This page is way off-screen to the left.
+                    alpha = 1f
+                    scaleY = 0.7f
+                }
+                position <= 1 -> { // [-1,1]
+                    // Modify the default slide transition to shrink the page as well
+                    val scaleFactor = max(MIN_SCALE, 1 - abs(position))
+                    val vertMargin = pageHeight * (1 - scaleFactor) / 2
+                    val horzMargin = pageWidth * (1 - scaleFactor) / 2
+                    translationX = if (position < 0) {
+                        horzMargin - vertMargin / 2
+                    } else {
+                        -horzMargin + vertMargin / 2
+                    }
+
+                    // Scale the page down (between MIN_SCALE and 1)
+                    scaleX = scaleFactor
+                    scaleY = scaleFactor
+
+                    // Fade the page relative to its size.
+                    //setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA));
+
+                }
+                else -> { // (1,+Infinity]
+                    // This page is way off-screen to the right.
+                    alpha = 1f
+                    scaleY = 0.7f
+                }
             }
-
-            // Scale the page down (between MIN_SCALE and 1)
-            view.scaleX = scaleFactor
-            view.scaleY = scaleFactor
-
-            // Fade the page relative to its size.
-            //view.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA));
-
-        } else { // (1,+Infinity]
-            // This page is way off-screen to the right.
-            view.alpha = 1f
-            view.scaleY = 0.7f
         }
     }
 
     companion object {
-        private val MIN_SCALE = 0.85f
-        private val MIN_ALPHA = 0.5f
+        private const val MIN_SCALE = 0.85f
+        private const val MIN_ALPHA = 0.5f
     }
 }

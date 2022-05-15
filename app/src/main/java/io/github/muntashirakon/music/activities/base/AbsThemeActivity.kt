@@ -15,52 +15,53 @@
 package io.github.muntashirakon.music.activities.base
 
 import android.content.Context
-import android.graphics.Color
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.KeyEvent
 import android.view.View
-import android.view.WindowManager
-import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
-import code.name.monkey.appthemehelper.ATH
-import code.name.monkey.appthemehelper.ThemeStore
+import androidx.core.os.ConfigurationCompat
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialDialogsUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.LanguageContextWrapper
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.*
 import io.github.muntashirakon.music.util.PreferenceUtil
-import io.github.muntashirakon.music.util.RetroUtil
-import io.github.muntashirakon.music.util.theme.ThemeManager
+import io.github.muntashirakon.music.util.theme.getNightMode
+import io.github.muntashirakon.music.util.theme.getThemeResValue
 import java.util.*
 
 abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
-    private val handler = Handler()
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         updateTheme()
         hideStatusBar()
         super.onCreate(savedInstanceState)
-        setImmersiveFullscreen()
+        setEdgeToEdgeOrImmersive()
         registerSystemUiVisibility()
         toggleScreenOn()
-        MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
+        setLightNavigationBarAuto()
+        setLightStatusBarAuto(surfaceColor())
+        if (VersionUtils.hasQ()) {
+            window.decorView.isForceDarkAllowed = false
+        }
     }
 
     private fun updateTheme() {
-        setTheme(ThemeManager.getThemeResValue(this))
-        setDefaultNightMode(ThemeManager.getNightMode(this))
-    }
+        setTheme(getThemeResValue())
+        if (PreferenceUtil.materialYou) {
+            setDefaultNightMode(getNightMode())
+        }
 
-    private fun toggleScreenOn() {
-        if (PreferenceUtil.isScreenOnEnabled) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        } else {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        if (PreferenceUtil.isCustomFont) {
+            setTheme(R.style.FontThemeOverlay)
+        }
+        if (PreferenceUtil.circlePlayButton) {
+            setTheme(R.style.CircleFABOverlay)
         }
     }
 
@@ -72,92 +73,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
             handler.postDelayed(this, 300)
         } else {
             handler.removeCallbacks(this)
-        }
-    }
-
-    fun hideStatusBar() {
-        hideStatusBar(PreferenceUtil.isFullScreenMode)
-    }
-
-    private fun hideStatusBar(fullscreen: Boolean) {
-        val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
-        if (statusBar != null) {
-            statusBar.visibility = if (fullscreen) View.GONE else View.VISIBLE
-        }
-    }
-
-    fun setDrawUnderStatusBar() {
-        RetroUtil.setAllowDrawUnderStatusBar(window)
-    }
-
-    fun setDrawUnderNavigationBar() {
-        RetroUtil.setAllowDrawUnderNavigationBar(window)
-    }
-
-    /**
-     * This will set the color of the view with the id "status_bar" on KitKat and Lollipop. On
-     * Lollipop if no such view is found it will set the statusbar color using the native method.
-     *
-     * @param color the new statusbar color (will be shifted down on Lollipop and above)
-     */
-    fun setStatusbarColor(color: Int) {
-        val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
-        if (statusBar != null) {
-            when {
-                VersionUtils.hasMarshmallow() -> statusBar.setBackgroundColor(color)
-                VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(
-                    ColorUtil.darkenColor(
-                        color
-                    )
-                )
-                else -> statusBar.setBackgroundColor(color)
-            }
-        } else {
-            when {
-                VersionUtils.hasMarshmallow() -> window.statusBarColor = color
-                else -> window.statusBarColor = ColorUtil.darkenColor(color)
-            }
-        }
-        setLightStatusbarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
-    }
-
-    fun setStatusbarColorAuto() {
-        // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
-        setStatusbarColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
-        setLightStatusbarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
-    }
-
-    open fun setTaskDescriptionColor(@ColorInt color: Int) {
-        ATH.setTaskDescriptionColor(this, color)
-    }
-
-    fun setTaskDescriptionColorAuto() {
-        setTaskDescriptionColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
-    }
-
-    open fun setNavigationbarColor(color: Int) {
-        if (ThemeStore.coloredNavigationBar(this)) {
-            ATH.setNavigationbarColor(this, color)
-        } else {
-            ATH.setNavigationbarColor(this, Color.BLACK)
-        }
-    }
-
-    fun setNavigationbarColorAuto() {
-        setNavigationbarColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
-    }
-
-    open fun setLightStatusbar(enabled: Boolean) {
-        ATH.setLightStatusbar(this, enabled)
-    }
-
-    fun setLightStatusbarAuto(bgColor: Int) {
-        setLightStatusbar(ColorUtil.isColorLight(bgColor))
-    }
-
-    open fun setLightNavigationBar(enabled: Boolean) {
-        if (!ATHUtil.isWindowBackgroundDark(this) and ThemeStore.coloredNavigationBar(this)) {
-            ATH.setLightNavigationbar(this, enabled)
         }
     }
 
@@ -173,19 +88,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     private fun unregisterSystemUiVisibility() {
         val decorView = window.decorView
         decorView.setOnSystemUiVisibilityChangeListener(null)
-    }
-
-    private fun setImmersiveFullscreen() {
-        val flags =
-            (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-
-        if (PreferenceUtil.isFullScreenMode) {
-            window.decorView.systemUiVisibility = flags
-        }
-    }
-
-    private fun exitFullscreen() {
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
     }
 
     override fun run() {
@@ -213,8 +115,12 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
     override fun attachBaseContext(newBase: Context?) {
         val code = PreferenceUtil.languageCode
-        if (code != "auto") {
-            super.attachBaseContext(LanguageContextWrapper.wrap(newBase, Locale(code)))
-        } else super.attachBaseContext(newBase)
+        val locale = if (code == "auto") {
+            // Get the device default locale
+            ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
+        } else {
+            Locale.forLanguageTag(code)
+        }
+        super.attachBaseContext(LanguageContextWrapper.wrap(newBase, locale))
     }
 }

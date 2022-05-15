@@ -3,8 +3,8 @@ package io.github.muntashirakon.music.model
 import io.github.muntashirakon.music.repository.LastAddedRepository
 import io.github.muntashirakon.music.repository.SongRepository
 import io.github.muntashirakon.music.repository.TopPlayedRepository
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 abstract class AbsCustomPlaylist(
     id: Long,

@@ -26,15 +26,18 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import code.name.monkey.appthemehelper.util.ATHUtil;
-import io.github.muntashirakon.music.R;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import code.name.monkey.appthemehelper.util.ATHUtil;
+import io.github.muntashirakon.music.R;
 
 /** @author Aidan Follestad (afollestad), modified for Phonograph by Karim Abou Zeid (kabouzeid) */
 public class BreadCrumbLayout extends HorizontalScrollView implements View.OnClickListener {
@@ -396,6 +399,7 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
       return file.getPath().equals("/") ? "root" : file.getName();
     }
 
+    @NonNull
     @Override
     public String toString() {
       return "Crumb{" + "file=" + file + ", scrollPos=" + scrollPos + '}';

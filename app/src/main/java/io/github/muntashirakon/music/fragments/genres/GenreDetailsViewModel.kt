@@ -22,6 +22,7 @@ import io.github.muntashirakon.music.interfaces.IMusicServiceEventListener
 import io.github.muntashirakon.music.model.Genre
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.repository.RealRepository
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -44,7 +45,7 @@ class GenreDetailsViewModel(
         loadGenreSongs(genre)
     }
 
-    private fun loadGenreSongs(genre: Genre) = viewModelScope.launch {
+    private fun loadGenreSongs(genre: Genre) = viewModelScope.launch(IO) {
         val songs = realRepository.getGenre(genre.id)
         withContext(Main) { _playListSongs.postValue(songs) }
     }
@@ -60,4 +61,5 @@ class GenreDetailsViewModel(
     override fun onPlayStateChanged() {}
     override fun onRepeatModeChanged() {}
     override fun onShuffleModeChanged() {}
+    override fun onFavoriteStateChanged() {}
 }

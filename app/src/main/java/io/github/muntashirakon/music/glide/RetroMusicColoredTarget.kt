@@ -16,36 +16,32 @@ package io.github.muntashirakon.music.glide
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
-import code.name.monkey.appthemehelper.util.ATHUtil
 import io.github.muntashirakon.music.App
-import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.colorControlNormal
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteTarget
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.transition.Transition
 
 abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(view) {
 
     protected val defaultFooterColor: Int
-        get() = ATHUtil.resolveColor(getView().context, R.attr.colorControlNormal)
+        get() = getView().context.colorControlNormal()
 
     abstract fun onColorReady(colors: MediaNotificationProcessor)
 
-    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-        super.onLoadFailed(e, errorDrawable)
-        val colors = MediaNotificationProcessor(App.getContext(), errorDrawable)
-        onColorReady(colors)
+    override fun onLoadFailed(errorDrawable: Drawable?) {
+        super.onLoadFailed(errorDrawable)
+        onColorReady(MediaNotificationProcessor.errorColor(App.getContext()))
     }
 
     override fun onResourceReady(
-        resource: BitmapPaletteWrapper?,
-        glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
+        resource: BitmapPaletteWrapper,
+        transition: Transition<in BitmapPaletteWrapper>?
     ) {
-        super.onResourceReady(resource, glideAnimation)
-        resource?.let { bitmapWrap ->
-            MediaNotificationProcessor(App.getContext()).getPaletteAsync({
-                onColorReady(it)
-            }, bitmapWrap.bitmap)
-        }
+        super.onResourceReady(resource, transition)
+        MediaNotificationProcessor(App.getContext()).getPaletteAsync({
+            onColorReady(it)
+        }, resource.bitmap)
     }
 }

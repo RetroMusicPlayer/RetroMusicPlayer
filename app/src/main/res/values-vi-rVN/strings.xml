@@ -1,104 +1,95 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
-    <string name="about_settings_summary">Đường dẫn tổ đội, mạng xã hội</string>
-
-    <string name="accent_color">Màu sắc nhấn mạnh</string>
-    <string name="accent_color_desc">Màu sắc chủ đạo của chủ đề, mặc định là xanh ngọc</string>
-
+    <string name="about_album_label">Thông tin về %s</string>
+    <string name="about_settings_summary">Liên kết đến nhóm, mạng xã hội</string>
+    <string name="accent_color">Màu sắc chủ đạo</string>
+    <string name="accent_color_desc">Màu sắc chủ đạo của chủ đề, mặc định là màu tía</string>
     <string name="action_about">Về chúng tôi</string>
+    <string name="action_add_to_blacklist">Thêm vào danh sách đen</string>
     <string name="action_add_to_favorites">Thêm vào yêu thích</string>
-    <string name="action_add_to_playing_queue">Thêm vào hàng đợi</string>
+    <string name="action_add_to_playing_queue">Thêm vào danh sách chờ phát</string>
     <string name="action_add_to_playlist">Thêm vào danh sách phát</string>
-    <string name="action_clear_playing_queue">Xoá hàng đợi</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_cast">Truyền màn hình</string>
+    <string name="action_clear_playing_queue">Xoá danh sách chờ phát</string>
+    <string name="action_cycle_repeat">Chế độ lặp lại chu kỳ</string>
     <string name="action_delete">Xoá</string>
     <string name="action_delete_from_device">Xóa khỏi thiết bị</string>
     <string name="action_details">Chi tiết</string>
+    <string name="action_edit">Sửa</string>
     <string name="action_go_to_album">Đi đến album</string>
     <string name="action_go_to_artist">Đi đến nghệ sĩ</string>
     <string name="action_go_to_genre">Chuyển đến thể loại</string>
+    <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Đến trang bắt đầu</string>
     <string name="action_grant">Cho phép</string>
     <string name="action_grid_size">Kích thước lưới</string>
     <string name="action_grid_size_land">Kích thước lưới (chiều ngang)</string>
     <string name="action_new_playlist">Danh sách phát mới</string>
-    <string name="action_next">Tiếp</string>
-    <string name="action_play">Chơi</string>
-    <string name="action_play_all">Chơi tất cả</string>
-    <string name="action_play_next">Chơi kế tiếp</string>
+    <string name="action_next">Tiếp theo</string>
+    <string name="action_play">Phát</string>
+    <string name="action_play_all">Phát tất cả</string>
+    <string name="action_play_next">Phát tiếp theo</string>
     <string name="action_play_pause">Phát/Tạm dừng</string>
-    <string name="action_previous">Trước</string>
-    <string name="action_remove_from_favorites">Loại bỏ khỏi mục yêu thích</string>
-    <string name="action_remove_from_playing_queue">Xoá khỏi hàng đợi</string>
-    <string name="action_remove_from_playlist">Xoá khỏi danh sách phát</string>
+    <string name="action_previous">Trước đó</string>
+    <string name="action_remove_from_favorites">Xóa khỏi mục yêu thích</string>
+    <string name="action_remove_from_playing_queue">Xóa khỏi danh sách chờ phát</string>
+    <string name="action_remove_from_playlist">Xóa khỏi danh sách phát</string>
     <string name="action_rename">Đổi tên</string>
-    <string name="action_save_playing_queue">Lưu hàng đợi phát</string>
+    <string name="action_save_playing_queue">Lưu danh sách chờ phát</string>
     <string name="action_scan">Quét</string>
     <string name="action_search">Tìm kiếm</string>
     <string name="action_set">Bắt đầu</string>
     <string name="action_set_as_ringtone">Đặt làm nhạc chuông</string>
-    <string name="action_set_as_start_directory">Đặt làm trang bắt đầu</string>
+    <string name="action_set_as_start_directory">Đặt làm thư mục bắt đầu</string>
     <string name="action_settings">"Cài đặt"</string>
     <string name="action_share">Chia sẻ</string>
     <string name="action_shuffle_all">Phát ngẫu nhiên tất cả</string>
     <string name="action_shuffle_playlist">Phát ngẫu nhiên theo danh sách phát</string>
-    <string name="action_sleep_timer">Hẹn giờ ngủ</string>
+    <string name="action_sleep_timer">Hẹn giờ ngừng phát</string>
     <string name="action_sort_order">Thứ tự sắp xếp</string>
-    <string name="action_tag_editor">Chỉnh sửa thẻ</string>
-    <string name="action_toggle_favorite">Toggle favorite</string>
-    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
-
+    <string name="action_tag_editor">Sửa thẻ</string>
+    <string name="action_toggle_favorite">Chuyển đổi mục yêu thích</string>
+    <string name="action_toggle_shuffle">Chuyển đổi chế độ phát ngẫu nhiên</string>
     <string name="adaptive">Thích nghi</string>
-
     <string name="add_action">Thêm</string>
     <string name="add_playlist_title">"Thêm vào danh sách phát"</string>
-
-    <string name="added_title_to_playing_queue">"Đã thêm 1 bài vào háng đợi phát."</string>
-    <string name="added_x_titles_to_playing_queue">Đã thêm %1$d bài vào hàng đợi phát.</string>
-
+    <string name="add_time_framed_lryics">Thêm lời theo thời gian</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_title_to_playing_queue">"Đã thêm 1 bài vào danh sách chờ phát."</string>
+    <string name="added_x_titles_to_playing_queue">Đã thêm %1$d bài vào danh sách chờ phát.</string>
     <string name="album">Album</string>
-
     <plurals name="albumSongs">
-        <item quantity="other">Songs</item>
+        <item quantity="other">Bài hát</item>
     </plurals>
-
-    <string name="album_artist">Album của nghệ sĩ</string>
-
-    <string name="albums">Album</string>
+    <string name="album_artist">Album nghệ sĩ</string>
+    <string name="albums">Các album</string>
     <plurals name="albums">
-        <item quantity="other">Albums</item>
+        <item quantity="other">Album</item>
     </plurals>
-
     <string name="always">Luôn luôn</string>
-
     <string name="app_share">Hãy dùng thử trình phát nhạc siêu chất này tại: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Ngẫu nhiên</string>
     <string name="app_shortcut_top_tracks_short">Bản nhạc hàng đầu</string>
-    <string name="app_widget_big_name">Lớn</string>
+    <string name="app_widget_big_name">Hình ảnh đầy đủ</string>
     <string name="app_widget_card_name">Thẻ</string>
     <string name="app_widget_classic_name">Cổ điển</string>
+    <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Nhỏ</string>
-    <string name="app_widget_text_name">Text</string>
-
+    <string name="app_widget_text_name">Văn bản nhỏ nhất</string>
     <string name="artist">Nghệ sĩ</string>
-
     <string name="artists">Nghệ sĩ</string>
-
+    <string name="audio_fade_duration">Audio fade duration</string>
     <string name="audio_focus_denied">Tập trung âm thanh bị từ chối</string>
     <string name="audio_settings_summary">Thay đổi cài đặt âm thanh và điều chỉnh các điều khiển bộ chỉnh âm</string>
-
     <string name="auto">Tự động</string>
-
+    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
+    <string name="backup_title">Backups</string>
     <string name="biography">Tiểu sử</string>
-
     <string name="black_theme_name">Đen hoàn toàn</string>
-
     <string name="blacklist">Danh sách đen</string>
-
     <string name="blur">Làm mờ</string>
     <string name="blur_card">Thẻ mờ</string>
-
     <string name="bug_report_failed">Không thể gửi báo cáo</string>
     <string name="bug_report_failed_invalid_token">Mã token không hợp lệ. Vui lòng liên hệ với nhà phát triển ứng dụng.</string>
     <string name="bug_report_failed_issues_not_available">Các vấn đề không được kích hoạt cho repository đã chọn. Vui lòng liên hệ với nhà phát triển ứng dụng.</string>
@@ -113,55 +104,41 @@
     <string name="bug_report_summary">Đã xảy ra lỗi không mong muốn. Xin lỗi bạn vì lỗi này, nếu nó
 tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="bug_report_use_account">Gửi bằng tài khoản GitHub </string>
-
-    <string name="buy_now">Buy now</string>
-
+    <string name="buy_now">Mua ngay</string>
     <string name="cancel_current_timer">Hủy</string>
-
     <string name="card">Thẻ</string>
     <string name="card_color_style">Thẻ màu</string>
+    <string name="card_square">Thẻ vuông</string>
     <string name="card_style">Thẻ</string>
-
     <string name="carousal_effect_on_now_playing_screen">Hiệu ứng băng chuyền trên màn hình đang phát</string>
-
     <string name="cascading">Xếp tầng</string>
-
     <string name="changelog">Thay đổi</string>
-    <string name="changelog_summary">Nhật ký thay đổi được cập nhật trong ứng dụng Telegram</string>
-
-    <string name="circle">Circle</string>
-
-    <string name="circular">Thông tư</string>
-
+    <string name="changelog_summary">Xem có gì mới</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="choose_restore_title">Choose what to restore</string>
+    <string name="circle">Vòng tròn</string>
+    <string name="circular">Dạng tròn</string>
     <string name="classic">Cổ điển</string>
-
     <string name="clear_action">Xóa</string>
     <string name="clear_blacklist">Xóa danh sách đen</string>
-    <string name="clear_playing_queue">Xóa hàng đợi</string>
-
+    <string name="clear_history">Clear History</string>
+    <string name="clear_playing_queue">Xoá danh sách</string>
     <string name="color">Màu sắc</string>
-
     <string name="colors">Màu sắc</string>
-
     <string name="composer">Tác giả</string>
-
     <string name="copied_device_info_to_clipboard">Đã sao chép thông tin thiết bị vào clipboard.</string>
-
     <string name="could_not_create_playlist">Kh\u00f4ng th\u1ec3 t\u1ea1o danh s\u00e1ch ph\u00e1t</string>
     <string name="could_not_download_album_cover">"Kh\u00f4ng th\u1ec3 t\u1ea3i xu\u1ed1ng \u1ea3nh b\u00eca album ph\u00f9 h\u1ee3p."</string>
     <string name="could_not_restore_purchase">Không thể khôi phục mua hàng.</string>
     <string name="could_not_scan_files">Không thể quét %d tập tin.</string>
-
     <string name="create_action">Tạo</string>
-
+    <string name="create_new_backup">Tạo</string>
     <string name="created_playlist_x">Đã tạo danh sách phát %1$s.</string>
-
-    <string name="credit_title">Thành viên và cộng tác viên</string>
-
+    <string name="credit_title">Thành viên và cộng tác viên </string>
     <string name="currently_listening_to_x_by_x">Đang nghe %1$s bởi %2$s.</string>
-
+    <string name="custom_artist_images">Custom Artist Images</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Share Crash Report</string>
     <string name="dark_theme_name">Xám đen</string>
-
     <string name="delete_playlist_title">Xoá danh sách phát</string>
     <string name="delete_playlist_x"><![CDATA[Xoá danh sách phát <b>%1$s</b>?]]></string>
     <string name="delete_playlists_title">Xoá danh sách phát</string>
@@ -170,62 +147,43 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="delete_songs_title">Xoá bài hát</string>
     <string name="delete_x_playlists"><![CDATA[Xoá <b>%1$d</b> danh sách phát?]]></string>
     <string name="delete_x_songs"><![CDATA[Xoá <b>%1$d</b> bài hát?]]></string>
-
     <string name="deleted_x_songs">Đã xoá %1$d bài hát.</string>
-
+    <string name="deleting_songs">Xóa Các bài hát</string>
     <string name="depth">Độ sâu</string>
-
     <string name="description">Mô tả</string>
-
     <string name="device_info">Thông tin thiết bị</string>
-
     <string name="dialog_message_set_ringtone">Cho phép Retro Music cấu hình cài đặt âm thanh</string>
     <string name="dialog_title_set_ringtone">Cài làm nhạc chuông</string>
-
+    <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Bạn có muốn xóa danh sách đen?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Bạn có muốn gỡ <b>%1$s</b> khỏi danh sách đen?]]></string>
-
     <string name="donate">Ủng hộ</string>
     <string name="donate_summary">Nếu bạn nghĩ rằng tôi xứng đáng được thưởng cho công việc này, bạn có thể để lại một số tiền ở đây. Cảm ơn bạn! :D</string>
-
     <string name="donation_header">Mua cho tôi một:</string>
-
-    <string name="drive_mode">Drive mode</string>
-
+    <string name="done">Xong</string>
+    <string name="drive_mode">Chế độ lái xe</string>
+    <string name="edit_fab">Sửa nút</string>
+    <string name="edit_normal_lyrics">Sửa lời</string>
+    <string name="edit_synced_lyrics">Sửa Lời Đồng bộ</string>
     <string name="empty">Trống</string>
-
     <string name="equalizer">Bộ chỉnh âm</string>
-
     <string name="faq">Câu hỏi thường gặp</string>
-
     <string name="favorites">Yêu thích</string>
-
     <string name="finish_last_song">Kết thúc bài cuối</string>
-
     <string name="fit">Phù hợp</string>
-
     <string name="flat">Phẳng</string>
-
     <string name="folders">Thư mục</string>
-
-    <string name="follow_system">Follow system</string>
-
-    <string name="for_you">Cho bạn</string>
-
-    <string name="free">Free</string>
-
+    <string name="follow_system">Theo hệ thống</string>
+    <string name="for_you">Dành cho bạn</string>
+    <string name="free">Miễn phí</string>
     <string name="full">Toàn bộ</string>
     <string name="full_card">Thẻ đầy đủ</string>
-
     <string name="general_settings_summary">Thay đổi chủ đề và màu sắc của ứng dụng</string>
     <string name="general_settings_title">Nhìn và cảm nhận</string>
-
     <string name="genre">Thể loại</string>
-
     <string name="genres">Thể loại</string>
-
     <string name="git_hub_summary">Tham gia phát triển dự án trên Github</string>
-
+    <string name="gradient">Gradient</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -235,398 +193,345 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Bố trí lưới</string>
-
+    <string name="help_summary">Bạn cần hỗ trợ thêm?</string>
     <string name="hinge">Bản lề</string>
-
     <string name="history">Lịch sử</string>
-
+    <string name="history_cleared">History cleared</string>
+    <string name="history_undo_button">Undo</string>
     <string name="home">Trang chủ</string>
-
     <string name="horizontal_flip">Lật ngang</string>
-
     <string name="image">Hình ảnh</string>
     <string name="image_gradient">Ảnh màu chuyển sắc</string>
     <string name="image_settings_summary">Thay đổi cài đặt tải xuống hình ảnh nghệ sĩ</string>
-
+    <string name="import_label">Nhập</string>
+    <string name="import_playlist">Nhập danh sách phát</string>
+    <string name="import_playlist_message">Nhập tất cả danh sách phát có trong Android Media Store cùng với các bài hát, nếu danh sách phát đã tồn tại, các bài hát sẽ được gộp lại.</string>
     <string name="inserted_x_songs_into_playlist_x">Đã chèn %1$d bài hát vào danh sách phát %2$s.</string>
-
     <string name="instagram_page_summary">Chia sẻ thiết lập Retro Music của bạn trong Instagram</string>
-
     <string name="keyboard">Bàn phím</string>
-
-    <string name="label_bit_rate">Bitrate</string>
+    <string name="label_bit_rate">Tốc độ bit</string>
     <string name="label_file_format">Định dạng</string>
     <string name="label_file_name">Tên tệp</string>
     <string name="label_file_path">Đường dẫn tệp</string>
     <string name="label_file_size">Kích thước</string>
-    <string name="label_more_from">More from %s</string>
+    <string name="label_last_modified">Last Modified</string>
+    <string name="label_more_from">Thêm thông tin từ %s</string>
     <string name="label_sampling_rate">Tần số lấy mẫu</string>
     <string name="label_track_length">Độ dài</string>
-
     <string name="labeled">Được dán nhãn</string>
-
     <string name="last_added">Đã thêm gần đây</string>
     <string name="last_song">Bài cuối</string>
-
     <string name="library_categories">Danh mục thư viện</string>
-
     <string name="licenses">Giấy phép</string>
-
     <string name="light_theme_name">Hoàn toàn trắng</string>
-
-    <string name="listeners_label">Listeners</string>
-
+    <string name="listeners_label">Người nghe</string>
     <string name="listing_files">Danh sách tập tin</string>
-
     <string name="loading_products">Đang tải sản phẩm...</string>
-
     <string name="login">Đăng nhập</string>
-
     <string name="lyrics">Lời bài hát</string>
-
     <string name="made_with_love">Được làm bằng ❤️ ở Ấn Độ</string>
-
     <string name="material">Material</string>
-
     <string name="md_error_label">Lỗi</string>
     <string name="md_storage_perm_error">Lỗi quyền truy cập</string>
-
-    <string name="my_name">Tên của bạn</string>
+    <string name="my_name">Tên</string>
     <string name="my_top_tracks">Phát nhiều nhất</string>
-
     <string name="never">Không bao giờ</string>
-
+    <string name="new_music_mix">New Music Mix</string>
     <string name="new_playlist_title">Danh sách phát mới</string>
     <string name="new_start_directory">%s là trang bắt đầu mới.</string>
-
-    <string name="next_song">Bài kế</string>
-
+    <string name="next_song">Bài tiếp theo</string>
     <string name="no_albums">Không có album</string>
     <string name="no_artists">Không có nghệ sĩ</string>
     <string name="no_audio_ID">"Phát một bài hát trước, sau đó thử lại."</string>
+    <string name="no_backups_found">No Backups Found</string>
     <string name="no_equalizer">Không tìm thấy bộ chỉnh âm</string>
     <string name="no_genres">Không có thể loại</string>
     <string name="no_lyrics_found">Không tìm thấy lời bài hát</string>
-    <string name="no_playing_queue">No songs playing</string>
+    <string name="no_playing_queue">Không có bài hát nào đang phát</string>
     <string name="no_playlists">Không có danh sách phát</string>
     <string name="no_purchase_found">Không tìm thấy giao dịch mua.</string>
     <string name="no_results">Không có kết quả</string>
     <string name="no_songs">Không có bài hát</string>
-
     <string name="normal">Tiêu chuẩn</string>
     <string name="normal_lyrics">Lời chuẩn</string>
-
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> không được liệt kê trong thư mục nhạc.]]></string>
-
+    <string name="not_recently_played">Không phát gần đây</string>
     <string name="nothing_to_scan">Không có gì để quét.</string>
-    <string name="nothing_to_see">Nothing to see</string>
-
+    <string name="nothing_to_see">Không có gì để hiển thị</string>
     <string name="notification">Thông báo</string>
     <string name="notification_settings_summary">Tùy chỉnh kiểu thông báo</string>
-
-    <string name="now_playing">Đang phát</string>
-    <string name="now_playing_queue">Đang phát hàng đợi</string>
-    <string name="now_playing_summary">Tùy chỉnh màn hình đang phát</string>
-    <string name="now_playing_themes">Hơn 9 giao diện đang phát</string>
-
+    <string name="now_playing">Màn hình phát</string>
+    <string name="now_playing_queue">Đang phát danh sách chờ</string>
+    <string name="now_playing_summary">Tùy chỉnh màn hình phát</string>
+    <string name="now_playing_themes">Hơn 9 giao diện màn hình phát</string>
     <string name="only_on_wifi">Chỉ khi dùng Wi-Fi</string>
-
-    <string name="other_settings_summary">Tính năng nâng cao đang kiểm thử</string>
-
+    <string name="other_settings_summary">Tính năng nâng cao đang kiểm tra</string>
     <string name="others">Khác</string>
-
+    <string name="over_cover">Over Cover</string>
     <string name="password">Mật khẩu</string>
-
     <string name="past_three_months">Mỗi tháng</string>
-
-    <string name="peak">Peak</string>
-
+    <string name="paste_lyrics_here">Dán lời ở đây</string>
+    <string name="paste_timeframe_lyrics_here">Dán lời theo thời gian ở đây</string>
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Quyền truy cập bộ nhớ ngoài bị từ chối.</string>
-
+    <string name="permission_summary">Ứng dụng cần quyền truy cập bộ nhớ thiết bị của bạn để phát nhạc</string>
+    <string name="permission_title">Truy cập bộ nhớ</string>
     <string name="permissions_denied">Quyền đã bị từ chối.</string>
-
     <string name="personalize">Cá nhân hoá</string>
     <string name="personalize_settings_summary">Tùy chỉnh màn hình phát và giao diện người dùng</string>
-
     <string name="pick_from_local_storage">Chọn từ bộ nhớ trong</string>
-
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
-
+    <string name="pinterest_page_summary">Theo dõi trang Pinterest để lấy cảm hứng thiết kế Retro Music</string>
     <string name="plain">Giản dị</string>
-
-    <string name="playing_notification_description">Thanh thông báo đang phát sẽ cho phép bạn phát nhạc/tạm dừng, chuyển bài,...</string>
+    <string name="playList_already_exits">Playlist already exists</string>
+    <string name="playback_pitch">Pitch</string>
+    <string name="playback_settings">Playback Settings</string>
+    <string name="playback_speed">Playback Speed</string>
+    <string name="playing_notification_description">Thanh thông báo đang phát sẽ cho phép bạn phát/tạm dừng, chuyển bài, v.v.</string>
     <string name="playing_notification_name">Thông báo đang phát</string>
-
+    <string name="playlist_created_sucessfully">%s created successfully</string>
     <string name="playlist_is_empty">Danh sách phát trống</string>
     <string name="playlist_name_empty">Tên danh sách phát</string>
-
     <string name="playlists">Danh sách phát</string>
-
     <string name="pref_blur_amount_summary">Độ mờ được áp dụng cho các chủ đề mờ, thấp hơn là nhanh hơn</string>
     <string name="pref_blur_amount_title">Độ mờ</string>
-    <string name="pref_filter_song_summary">Filter songs by length</string>
+    <string name="pref_filter_song_summary">Lọc bài hát theo độ dài</string>
     <string name="pref_filter_song_title">Lọc theo thời lượng bài hát</string>
-    <string name="pref_header_advanced">Advanced</string>
+    <string name="pref_header_advanced">Nâng cao</string>
     <string name="pref_header_album">Kiểu Album</string>
     <string name="pref_header_audio">Âm thanh</string>
-    <string name="pref_header_blacklist">Blacklist</string>
+    <string name="pref_header_blacklist">Danh sách đen</string>
     <string name="pref_header_controls">Điều khiển</string>
     <string name="pref_header_general">Chủ đề</string>
     <string name="pref_header_images">Hình ảnh</string>
     <string name="pref_header_library">Thư viện</string>
     <string name="pref_header_lockscreen">Màn hình khoá</string>
     <string name="pref_header_playlists">Danh sách phát</string>
-    <string name="pref_keep_pause_on_zero_volume_summary">Tạm dừng phát khi tắt âm lượng và phát lại sau khi tăng âm lượng. Cảnh báo: Khi bạn tăng âm lượng, nó sẽ bắt đầu phát ngay cả khi bạn ở ngoài ứng dụng</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Tạm dừng phát khi tắt âm lượng và phát lại sau khi tăng âm lượng. Cảnh báo: Khi bạn tăng âm lượng, bài hát sẽ phát kể cả khi bạn ở ngoài ứng dụng</string>
     <string name="pref_keep_pause_on_zero_volume_title">Tạm dừng phát khi tắt âm lượng</string>
     <string name="pref_keep_screen_on_summary">Lưu ý rằng việc bật tính năng này có thể ảnh hưởng đến tuổi thọ pin</string>
     <string name="pref_keep_screen_on_title">Giữ màn hình luôn bật</string>
-    <string name="pref_language_name">Select language</string>
+    <string name="pref_language_name">Chọn ngôn ngữ</string>
+    <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">Sử dụng ảnh bìa album bài hát đang phát làm ảnh nền màn hình khóa.</string>
+    <string name="pref_summary_album_artists_only">Hiển thị Album Nghệ sĩ trong danh mục Nghệ sĩ</string>
     <string name="pref_summary_audio_ducking">Giảm âm lượng khi có âm báo hệ thống hoặc khi bạn có thông báo</string>
+    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
     <string name="pref_summary_blacklist">Nội dung của các thư mục trong danh sách đen được ẩn khỏi thư viện của bạn.</string>
-    <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
+    <string name="pref_summary_bluetooth_playback">Tự động phát nhạc sau khi kết nối với thiết bị Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Làm mờ ảnh bìa album trên màn hình khóa. Có thể gây ra sự cố với các ứng dụng và tiện ích của bên thứ ba</string>
-    <string name="pref_summary_carousel_effect">Hiệu ứng băng chuyền cho ảnh bìa album trong màn hình đang phát. Lưu ý rằng nó không hoạt động với chủ đề Thẻ và Thẻ mờ</string>
-    <string name="pref_summary_classic_notification">Dùng thiết kế thông báo cổ điển</string>
-    <string name="pref_summary_colored_app">Màu nền và các nút điều khiển sẽ thay đổi theo màu sắc ảnh bìa album đang phát</string>
+    <string name="pref_summary_carousel_effect">Hiệu ứng băng chuyền cho ảnh bìa album trong màn hình phát. Lưu ý rằng nó không hoạt động với chủ đề Thẻ và Thẻ mờ</string>
+    <string name="pref_summary_classic_notification">Dùng thiết kế thông báo kiểu cổ điển</string>
+    <string name="pref_summary_colored_app">Màu nền và các nút điều khiển sẽ thay đổi theo màu sắc ảnh bìa album từ màn hình phát</string>
     <string name="pref_summary_colored_app_shortcuts">Màu sắc trong lối tắt ứng dụng dùng màu sắc chủ đạo. Mỗi khi bạn thay đổi màu chủ đạo, hãy bật/tắt lại công tắc này để thay đổi có hiệu lực</string>
     <string name="pref_summary_colored_notification">"M\u00e0u s\u1eafc th\u00f4ng b\u00e1o thay \u0111\u1ed5i theo m\u00e0u s\u1eafc chi ph\u1ed1i \u1ea3nh b\u00eca album"</string>
-    <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
-    <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
+    <string name="pref_summary_cross_fade">Độ dài khoảng lặng giữa các bài hát</string>
+    <string name="pref_summary_desaturated_color">Để phù hợp với Thiết kế Material, màu sắc sẽ được điều chỉnh để tương thích với chế độ tối</string>
+    <string name="pref_summary_expand_now_playing_panel">Nhấn vào thông báo sẽ hiển thị màn hình phát nhạc thay vì màn hình chính</string>
     <string name="pref_summary_extra_controls">Thêm điều khiển bổ sung cho trình phát mini</string>
-    <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
+    <string name="pref_summary_extra_song_info">Hiển thị thêm thông tin Bài hát, như là định dạng, tốc độ bit và tần số</string>
     <string name="pref_summary_gapless_playback">"Có thể gây ra vấn đề phát lại trên một số thiết bị."</string>
-    <string name="pref_summary_home_banner">Ẩn/hiện biểu ngữ trong trang chủ</string>
-    <string name="pref_summary_ignore_media_store_artwork">Có thể tăng chất lượng hiển thị ảnh bìa album, nhưng thời gian tải hình ảnh chậm hơn. Chỉ bật tính năng này nếu bạn không hài lòng với chất lượng ảnh hiện tại</string>
+    <string name="pref_summary_home_banner">Hiện hoặc ẩn banner màn hình chính</string>
+    <string name="pref_summary_ignore_media_store_artwork">Có thể tăng chất lượng hiển thị ảnh bìa album, nhưng sẽ làm thời gian tải hình ảnh chậm hơn. Chỉ bật tính năng này nếu bạn không thích chất lượng ảnh gốc</string>
     <string name="pref_summary_library_categories">Khả năng hiển thị và thứ tự của các danh mục trong thư viện.</string>
     <string name="pref_summary_lock_screen">Sử dụng các điều khiển màn hình khóa tùy chỉnh của Retro Music</string>
     <string name="pref_summary_open_source_licences">Chi tiết giấy phép của phần mềm mã nguồn mở</string>
+    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
+    <string name="pref_summary_remember_tab">Điều hướng đến tab được sử dụng gần nhất lúc bắt đầu</string>
+    <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
+    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_toggle_full_screen">Chế độ hoà nhập</string>
     <string name="pref_summary_toggle_headset">Tự động phát nhạc khi kết nối tai nghe</string>
     <string name="pref_summary_toggle_shuffle">Chế độ phát ngẫu nhiên sẽ tắt khi phát danh sách bài hát mới</string>
-    <string name="pref_summary_toggle_volume">Hiện thanh điều chỉnh âm lượng nếu có không gian trống trong màn hình đang phát</string>
+    <string name="pref_summary_toggle_volume">Hiện thanh điều chỉnh âm lượng nếu có không gian trống trong màn hình phát</string>
+    <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
+    <string name="pref_summary_whitelist">Chỉ hiện thị nhạc từ /Thư mục Nhạc</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Hiện ảnh bìa album</string>
+    <string name="pref_title_album_artists_only">Điều hướng theo Album Nghệ sĩ</string>
     <string name="pref_title_album_cover_style">Chủ đề bìa album</string>
     <string name="pref_title_album_cover_transform">Kiểu bìa album đang phát</string>
     <string name="pref_title_app_shortcuts">Đổi màu lối tắt ứng dụng</string>
+    <string name="pref_title_appbar_mode">App bar mode</string>
     <string name="pref_title_audio_ducking">Giảm âm lượng khi có âm báo</string>
+    <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Tự động tải xuống hình ảnh nghệ sĩ</string>
     <string name="pref_title_blacklist">Danh sách đen</string>
-    <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
+    <string name="pref_title_bluetooth_playback">Tự động phát Bluetooth</string>
     <string name="pref_title_blurred_album_art">Làm mờ bìa album</string>
+    <string name="pref_title_circle_button">Circular play button</string>
     <string name="pref_title_classic_notification">Thiết kế thông báo cổ điển</string>
     <string name="pref_title_colored_app">Màu sắc thích nghi</string>
     <string name="pref_title_colored_notification">Đổi màu thông báo</string>
-    <string name="pref_title_desaturated_color">Desaturated color</string>
-    <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
+    <string name="pref_title_cross_fade">Khoảng lặng (Beta)</string>
+    <string name="pref_title_custom_font">Use Manrope font</string>
+    <string name="pref_title_desaturated_color">Màu sắc tương thích</string>
+    <string name="pref_title_expand_now_playing_panel">Hiển thị màn hình phát nhạc</string>
     <string name="pref_title_extra_controls">Điều khiển bổ sung</string>
-    <string name="pref_title_extra_song_info">Song info</string>
+    <string name="pref_title_extra_song_info">Thông tin bài hát</string>
     <string name="pref_title_gapless_playback">Phát không gián đoạn</string>
     <string name="pref_title_general_theme">Chủ đề ứng dụng</string>
+    <string name="pref_title_home_album_grid_style">Lưới Album</string>
     <string name="pref_title_home_artist_grid_style">Lưới nghệ sĩ trang chủ</string>
-    <string name="pref_title_home_banner">Biểu ngữ trang chủ</string>
-    <string name="pref_title_ignore_media_store_artwork">Ảnh bìa chất lượng nguyên bản</string>
+    <string name="pref_title_home_banner">Banner</string>
+    <string name="pref_title_ignore_media_store_artwork">Ảnh bìa chất lượng cao</string>
     <string name="pref_title_last_added_interval">Làm mới danh sách thêm gần đây sau</string>
     <string name="pref_title_lock_screen">Điều khiển toàn màn hình.</string>
-    <string name="pref_title_now_playing_screen_appearance">Giao diện đang phát</string>
+    <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
+    <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_now_playing_screen_appearance">Giao diện màn hình phát</string>
     <string name="pref_title_open_source_licences">Giấy phép nguồn mở</string>
+    <string name="pref_title_pause_history">Pause history</string>
+    <string name="pref_title_remember_tab">Remember last tab</string>
+    <string name="pref_title_show_lyrics">Show lyrics</string>
+    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_tab_text_mode">Chế độ tiêu đề thẻ</string>
     <string name="pref_title_toggle_carousel_effect">Hiệu ứng quay vòng</string>
     <string name="pref_title_toggle_full_screen">Toàn màn hình</string>
     <string name="pref_title_toggle_toggle_headset">Tự động phát</string>
     <string name="pref_title_toggle_toggle_shuffle">Chế độ ngẫu nhiên</string>
     <string name="pref_title_toggle_volume">Điều khiển âm lượng</string>
-
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
+    <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
-
+    <string name="pro_summary">Chủ đề đen, Chủ đề màn hình phát, Hiệu ứng băng chuyền, v.v.</string>
     <string name="profile">Hồ sơ</string>
-
     <string name="purchase">Mua</string>
-
-    <string name="queue">Hàng đợi</string>
-
+    <string name="queue">Danh sách chờ phát</string>
     <string name="rate_app">Đánh giá ứng dụng</string>
-    <string name="rate_on_google_play_summary">Bạn thích ứng dụng này không? Hãy cho chúng tôi biết suy nghĩ của bạn trên Cửa hàng Play để chúng tôi có thể làm cho nó tốt hơn nữa</string>
-
+    <string name="rate_on_google_play_summary">Bạn thích ứng dụng này chứ? Hãy cho chúng tôi biết cảm nhận của bạn trên Cửa hàng Google Play để chúng tôi có thể hoàn thiện sản phẩm tốt hơn nữa nhé</string>
     <string name="recent_albums">Album mới thêm</string>
     <string name="recent_artists">Nghệ sĩ mới thêm</string>
-
     <string name="remove_action">Loại bỏ</string>
     <string name="remove_cover">Xoá ảnh bìa</string>
     <string name="remove_from_blacklist">Xóa khỏi danh sách đen</string>
+    <string name="remove_image">Remove Image</string>
     <string name="remove_song_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Xoá bài hát <b>%1$s</b> khỏi danh sách phát?]]></string>
     <string name="remove_songs_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[Xóa <b>%1$d</b> bài hát khỏi danh sách phát?]]></string>
-
     <string name="rename_playlist_title">Đổi tên danh sách phát</string>
-
+    <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">Báo cáo vấn đề</string>
     <string name="report_bug">Báo cáo lỗi</string>
-
     <string name="reset_action">Cài lại</string>
     <string name="reset_artist_image">Đặt lại ảnh nghệ sĩ</string>
-
     <string name="restore">Khôi phục</string>
-
+    <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Khôi phục mua trước đó. Vui lòng khởi động lại ứng dụng để sử dụng tất cả các tính năng.</string>
     <string name="restored_previous_purchases">Đã khôi phục lần mua trước.</string>
-
     <string name="restoring_purchase">Đang khôi phục mua hàng...</string>
-
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
-
-    <string name="saf_delete_failed">File delete failed: %s</string>
+    <string name="ringtone_summary">Ứng dụng cần quyền truy cập cài đặt thiết bị của bạn để đặt nhạc làm Nhạc chuông</string>
+    <string name="ringtone_title">Nhạc chuông (Tùy chọn)</string>
+    <string name="saf_delete_failed">Xóa tệp thất bại: %s</string>
     <!-- SAF -->
-    <string name="saf_error_uri">Can\'t get SAF URI</string>
-    <string name="saf_guide_slide1_description">Open navigation drawer</string>
-    <string name="saf_guide_slide1_description_before_o">Enable \'Show SD card\' in overflow menu</string>
+    <string name="saf_error_uri">Không thể lấy SAF URI</string>
+    <string name="saf_guide_slide1_description">Mở ngăn điều hướng</string>
+    <string name="saf_guide_slide1_description_before_o">Cho phép \"hiển thị \'thẻ nhớ\" trong menu tùy chọn</string>
     <!-- SAF guide -->
-    <string name="saf_guide_slide1_title">%s needs SD card access</string>
-    <string name="saf_guide_slide2_description">You need to select your SD card root directory</string>
-    <string name="saf_guide_slide2_title">Select your SD card in navigation drawer</string>
-    <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
-    <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
-    <string name="saf_write_failed">File write failed: %s</string>
-
+    <string name="saf_guide_slide1_title">%s cần quyền truy cập thẻ nhớ</string>
+    <string name="saf_guide_slide2_description">Bạn cần chọn thư mục thẻ nhớ gốc của mình</string>
+    <string name="saf_guide_slide2_title">Chọn thẻ nhớ của bạn trong ngăn điều hướng</string>
+    <string name="saf_guide_slide3_description">Không được mở bất kỳ thư mục con nào</string>
+    <string name="saf_guide_slide3_title">Nhấn vào nút \'chọn\' ở cuối màn hình</string>
+    <string name="saf_write_failed">Ghi tệp thất bại: %s</string>
     <string name="save">Lưu</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">Lưu thành</string>
     <string name="save_playlists_title">Lưu thành tệp</string>
-
     <string name="saved_playlist_to">Danh sách phát đã lưu đến %s.</string>
-
     <string name="saving_changes">Lưu thay đổi</string>
-
     <string name="scan_media">Quét phương tiện</string>
-
     <string name="scanned_files">Đã sửa %1$d trong %2$d tập tin.</string>
-
     <string name="scrobbles_label">Scrobbles</string>
-
     <string name="select_all">Chọn tất cả</string>
-
     <string name="selected">Đã chọn</string>
-
     <string name="set">Cấu hình</string>
     <string name="set_artist_image">Đặt ảnh nghệ sĩ thủ công</string>
-
     <string name="share_app">Chia sẽ ứng dụng</string>
-    <string name="share_to_stories">Share to Stories</string>
-
+    <string name="share_summary">Chia sẻ ứng dụng với bạn bè và gia đình của bạn</string>
+    <string name="share_to_stories">Chia sẻ đến Các story</string>
+    <string name="show_album_artists">Hiển thị Album Nghệ sĩ</string>
     <string name="shuffle">Ngẫu nhiên</string>
-
     <string name="simple">Đơn giản</string>
-
-    <string name="sleep_timer_canceled">Đã huỷ hẹn giờ ngủ.</string>
-    <string name="sleep_timer_set">Dừng phát nhạc sau %d phút kể từ bây giờ.</string>
-
+    <string name="sleep_timer_canceled">Đã huỷ hẹn giờ ngừng phát.</string>
+    <string name="sleep_timer_set">Ngừng phát nhạc sau %d phút kể từ bây giờ.</string>
     <string name="social">Xã hội</string>
-    <string name="social_stories">Share story</string>
-
+    <string name="social_stories">Chia sẻ story</string>
     <string name="song">Bài hát</string>
     <string name="song_duration">Thời lượng bài hát</string>
-
     <string name="songs">Bài hát</string>
-
     <string name="sort_order">Thứ tự sắp xếp</string>
     <string name="sort_order_a_z">Tăng dần</string>
     <string name="sort_order_album">Album</string>
     <string name="sort_order_artist">Nghệ sĩ</string>
     <string name="sort_order_composer">Tác giả</string>
     <string name="sort_order_date">Ngày</string>
-    <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_date_modified">Ngày chỉnh sửa</string>
+    <string name="sort_order_num_songs">Số bài hát</string>
+    <string name="sort_order_num_songs_desc">Số bài hát giảm</string>
     <string name="sort_order_year">Năm</string>
     <string name="sort_order_z_a">Giảm dần</string>
-
     <string name="speech_not_supported">Xin lỗi! Thiết bị không hỗ trợ nhập liệu bằng giọng nói</string>
     <string name="speech_prompt">Tìm kiếm trong thư viện của bạn</string>
-
     <string name="stack">Ngăn xếp</string>
-
     <string name="start_play_music">Bắt đầu chơi nhạc</string>
-
     <string name="suggestion_songs">Đề nghị</string>
-
     <string name="support_development">Hỗ trợ nhà phát triển</string>
-
-    <string name="swipe_to_unlock">Swipe to unlock</string>
-
-    <string name="synced_lyrics">Karaoke</string>
-
-    <!-- Message displayed when tag editing fails -->
+    <string name="swipe_to_unlock">Trượt để mở khóa</string>
+    <string name="synced_lyrics">Lời Đồng bộ</string>
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Tham gia nhóm Telegram để thảo luận về lỗi, đưa ra đề xuất, và hơn thế nữa</string>
-
-    <string name="thank_you">Cảm ơn!</string>
-
+    <string name="thank_you">Cảm ơn bạn!</string>
     <string name="the_audio_file">Tệp âm thanh</string>
-
     <string name="this_month">Mỗi tháng</string>
     <string name="this_week">Mỗi tuần</string>
     <string name="this_year">Mỗi năm</string>
-
     <string name="tiny">Nhỏ</string>
-    <string name="tiny_card_style">Tiny card</string>
-
+    <string name="tiny_card_style">Thẻ nhỏ</string>
     <string name="title">Tiêu đề</string>
-
+    <string name="title_new_backup">New Backup</string>
     <string name="today">Hôm nay</string>
-
     <string name="top_albums">Album hàng đầu</string>
     <string name="top_artists">Nghệ sĩ hàng đầu</string>
-
     <string name="track_hint">"Rãnh (2 cho bài số 2 hoặc 3004 cho CD3 bài số 4)"</string>
     <string name="track_list">Số rãnh</string>
-
     <string name="translate">Dịch</string>
-    <string name="translate_community">Giúp chúng tôi dịch ứng dụng sang ngôn ngữ của bạn</string>
-
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
-
+    <string name="translate_community">Hãy giúp chúng tôi dịch ứng dụng sang ngôn ngữ của bạn nhé</string>
+    <string name="try_retro_music_premium">Thử Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Chia sẻ thiết kế của bạn với Retro Music</string>
-
     <string name="unlabeled">Chưa gắn nhãn</string>
-
-    <string name="unplayable_file">Kh\u00f4ng th\u1ec3 ph\u00e1t b\u00e0i h\u00e1t n\u00e0y.</string>
-
+    <string name="unplayable_file">Không thể phát bài hát này.</string>
     <string name="up_next">Tiếp theo</string>
-
     <string name="update_image">Cập nhật hình ảnh</string>
-
     <string name="updating">Đang cập nhật...</string>
-
+    <string name="user_images_description">User Images</string>
+    <string name="user_name">Người dùng</string>
     <string name="username">Tên người dùng</string>
-
     <string name="version">Phiên bản</string>
-
-    <string name="vertical_flip">Vertical flip</string>
-
-    <string name="volume">Volume</string>
-
+    <string name="vertical_flip">Lật dọc</string>
+    <string name="view_on_telegram">Xem trên Telegram</string>
+    <string name="volume">Âm lượng</string>
     <string name="web_search">Tìm kiếm trên web</string>
-
+    <string name="website">Website</string>
+    <string name="website_summary">Xem Website của chúng tôi</string>
     <string name="welcome">Chào mừng,</string>
-
     <string name="what_do_you_want_to_share">Bạn muốn chia sẻ gì?</string>
-
     <string name="whats_new">Có gì mới!</string>
-
     <string name="window">Cửa sổ</string>
-    <string name="window_corner_edges">Góc tròn</string>
-
+    <string name="window_corner_edges">Bo góc</string>
     <string name="x_has_been_set_as_ringtone">Đặt %1$s làm nhạc chuông.</string>
     <string name="x_selected">%1$d đã chọn</string>
-
     <string name="year">Năm</string>
-
     <string name="you_have_to_select_at_least_one_category">Bạn phải chọn ít nhất một danh mục.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Bạn sẽ được chuyển tiếp đến trang web theo dõi vấn đề.</string>
-
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
+    <string name="bug_report_success">Bug report successful</string>
 </resources>

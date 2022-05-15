@@ -6,6 +6,11 @@
         <item name="fontFamily">@font/sans</item>
     </style>
 
+    <style name="TextViewNormalCompress" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/sans</item>
+    </style>
+
     <style name="TextViewHeadline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="fontFamily">@font/sans</item>
     </style>
@@ -89,8 +94,12 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="circleImageView" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">5%</item>
+    <style name="circleImageView" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerSize">40dp</item>
+    </style>
+
+    <style name="BottomSheetItemTextAppearance" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/sans</item>
     </style>
 </resources>

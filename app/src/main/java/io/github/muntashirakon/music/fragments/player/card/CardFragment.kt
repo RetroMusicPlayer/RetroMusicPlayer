@@ -20,17 +20,18 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.databinding.FragmentCardPlayerBinding
+import io.github.muntashirakon.music.extensions.drawAboveSystemBars
+import io.github.muntashirakon.music.extensions.whichFragment
 import io.github.muntashirakon.music.fragments.base.AbsPlayerFragment
 import io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment
-import io.github.muntashirakon.music.fragments.player.normal.PlayerFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_card_player.*
 
 class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private var lastColor: Int = 0
@@ -38,6 +39,9 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
         get() = lastColor
 
     private lateinit var playbackControlsFragment: CardPlaybackControlsFragment
+    private var _binding: FragmentCardPlayerBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onShow() {
         playbackControlsFragment.show()
@@ -60,7 +64,7 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
         playbackControlsFragment.setColor(color)
         lastColor = color.primaryTextColor
         libraryViewModel.updateColor(color.primaryTextColor)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
+        ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
     }
 
     override fun toggleFavorite(song: Song) {
@@ -76,25 +80,28 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentCardPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        (binding.playbackControlsFragment.parent as View).drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as CardPlaybackControlsFragment
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
         playerAlbumCoverFragment.removeSlideEffect()
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        playerToolbar.setOnMenuItemClickListener(this)
+        binding.playerToolbar.apply {
+            inflateMenu(R.menu.menu_player)
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
+            setOnMenuItemClickListener(this@CardFragment)
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
+            ToolbarContentTintHelper.colorizeToolbar(this, Color.WHITE, activity)
+        }
     }
 
     override fun onServiceConnected() {
@@ -105,13 +112,8 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
         updateIsFavorite()
     }
 
-    companion object {
-
-        fun newInstance(): PlayerFragment {
-            val args = Bundle()
-            val fragment = PlayerFragment()
-            fragment.arguments = args
-            return fragment
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

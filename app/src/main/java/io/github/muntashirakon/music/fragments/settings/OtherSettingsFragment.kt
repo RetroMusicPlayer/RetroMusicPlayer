@@ -35,7 +35,8 @@ class OtherSettingsFragment : AbsSettingsFragment() {
     override fun invalidateSettings() {
         val languagePreference: ATEListPreference? = findPreference(LANGUAGE_NAME)
         languagePreference?.setOnPreferenceChangeListener { _, _ ->
-            requireActivity().recreate()
+            println("Invalidated")
+            restartActivity()
             return@setOnPreferenceChangeListener true
         }
     }
@@ -55,6 +56,7 @@ class OtherSettingsFragment : AbsSettingsFragment() {
         val languagePreference: Preference? = findPreference(LANGUAGE_NAME)
         languagePreference?.setOnPreferenceChangeListener { prefs, newValue ->
             setSummary(prefs, newValue)
+            requireActivity().recreate()
             true
         }
     }

@@ -50,6 +50,7 @@
             android:layout_height="match_parent"
             android:layout_toLeftOf="@id/songTotalTime"
             android:layout_toRightOf="@id/songCurrentProgress"
+            android:paddingVertical="@dimen/seekbar_padding"
             tools:ignore="RtlHardcoded,UnusedAttribute" />
 
     </RelativeLayout>

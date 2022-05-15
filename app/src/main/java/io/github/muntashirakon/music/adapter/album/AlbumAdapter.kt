@@ -19,12 +19,13 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
-import io.github.muntashirakon.music.glide.AlbumGlideRequest
+import io.github.muntashirakon.music.glide.GlideApp
+import io.github.muntashirakon.music.glide.RetroGlideExtension
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
 import io.github.muntashirakon.music.helper.SortOrder
 import io.github.muntashirakon.music.helper.menu.SongsMenuHelper
@@ -35,11 +36,10 @@ import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 open class AlbumAdapter(
-    val activity: FragmentActivity,
+    override val activity: FragmentActivity,
     var dataSet: List<Album>,
     var itemLayoutRes: Int,
     iCabHolder: ICabHolder?,
@@ -68,12 +68,18 @@ open class AlbumAdapter(
         return ViewHolder(view)
     }
 
-    private fun getAlbumTitle(album: Album): String? {
+    private fun getAlbumTitle(album: Album): String {
         return album.title
     }
 
     protected open fun getAlbumText(album: Album): String? {
-        return album.artistName
+        return album.albumArtist.let {
+            if (it.isNullOrEmpty()) {
+                album.artistName
+            } else {
+                it
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -82,6 +88,13 @@ open class AlbumAdapter(
         holder.itemView.isActivated = isChecked
         holder.title?.text = getAlbumTitle(album)
         holder.text?.text = getAlbumText(album)
+        // Check if imageContainer exists so we can have a smooth transition without
+        // CardView clipping, if it doesn't exist in current layout set transition name to image instead.
+        if (holder.imageContainer != null) {
+            holder.imageContainer?.transitionName = album.id.toString()
+        } else {
+            holder.image?.transitionName = album.id.toString()
+        }
         loadAlbumCover(album, holder)
     }
 
@@ -92,17 +105,17 @@ open class AlbumAdapter(
             holder.paletteColorContainer?.setBackgroundColor(color.backgroundColor)
         }
         holder.mask?.backgroundTintList = ColorStateList.valueOf(color.primaryTextColor)
-        holder.imageContainerCard?.setCardBackgroundColor(color.backgroundColor) }
+        holder.imageContainerCard?.setCardBackgroundColor(color.backgroundColor)
+    }
 
     protected open fun loadAlbumCover(album: Album, holder: ViewHolder) {
         if (holder.image == null) {
             return
         }
-
-        AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-            .checkIgnoreMediaStore()
-            .generatePalette(activity)
-            .build()
+        val song = album.safeGetFirstSong()
+        GlideApp.with(activity).asBitmapPalette().albumCoverOptions(song)
+            //.checkIgnoreMediaStore()
+            .load(RetroGlideExtension.getSongModel(song))
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
@@ -122,8 +135,8 @@ open class AlbumAdapter(
         return dataSet[position]
     }
 
-    override fun getName(album: Album): String {
-        return album.title!!
+    override fun getName(model: Album): String {
+        return model.title
     }
 
     override fun onMultipleItemAction(
@@ -150,7 +163,7 @@ open class AlbumAdapter(
         when (PreferenceUtil.albumSortOrder) {
             SortOrder.AlbumSortOrder.ALBUM_A_Z, SortOrder.AlbumSortOrder.ALBUM_Z_A -> sectionName =
                 dataSet[position].title
-            SortOrder.AlbumSortOrder.ALBUM_ARTIST -> sectionName = dataSet[position].artistName
+            SortOrder.AlbumSortOrder.ALBUM_ARTIST -> sectionName = dataSet[position].albumArtist
             SortOrder.AlbumSortOrder.ALBUM_YEAR -> return MusicUtil.getYearString(
                 dataSet[position].year
             )
@@ -161,8 +174,7 @@ open class AlbumAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            setImageTransitionName("Album")
-            menu?.visibility = View.GONE
+            menu?.isVisible = false
         }
 
         override fun onClick(v: View?) {
@@ -171,16 +183,13 @@ open class AlbumAdapter(
                 toggleChecked(layoutPosition)
             } else {
                 image?.let {
-                    ViewCompat.setTransitionName(it, "album")
-                    listener?.onAlbumClick(dataSet[layoutPosition].id, it)
+                    listener?.onAlbumClick(dataSet[layoutPosition].id, imageContainer ?: it)
                 }
-
             }
         }
 
         override fun onLongClick(v: View?): Boolean {
-            toggleChecked(layoutPosition)
-            return super.onLongClick(v)
+            return toggleChecked(layoutPosition)
         }
     }
 

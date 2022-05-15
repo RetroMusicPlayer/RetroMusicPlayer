@@ -21,24 +21,27 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
+import androidx.core.graphics.drawable.toBitmap
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.MainActivity
 import io.github.muntashirakon.music.appwidgets.base.BaseAppWidget
-import io.github.muntashirakon.music.glide.SongGlideRequest
+import io.github.muntashirakon.music.extensions.getTintedDrawable
+import io.github.muntashirakon.music.glide.GlideApp
+import io.github.muntashirakon.music.glide.RetroGlideExtension
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
 import io.github.muntashirakon.music.service.MusicService
-import io.github.muntashirakon.music.service.MusicService.*
-import io.github.muntashirakon.music.util.ImageUtil
+import io.github.muntashirakon.music.service.MusicService.Companion.ACTION_REWIND
+import io.github.muntashirakon.music.service.MusicService.Companion.ACTION_SKIP
+import io.github.muntashirakon.music.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import io.github.muntashirakon.music.util.PreferenceUtil
-import io.github.muntashirakon.music.util.RetroUtil
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 
 class AppWidgetClassic : BaseAppWidget() {
     private var target: Target<BitmapPaletteWrapper>? = null // for cancellation
@@ -54,33 +57,27 @@ class AppWidgetClassic : BaseAppWidget() {
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_audio_art)
         appWidgetView.setImageViewBitmap(
             R.id.button_next,
-            createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_skip_next,
-                    MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
-            )
+
+            context.getTintedDrawable(
+                R.drawable.ic_skip_next,
+                MaterialValueHelper.getSecondaryTextColor(context, true)
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
             R.id.button_prev,
-            createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_skip_previous,
-                    MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
-            )
+
+            context.getTintedDrawable(
+                R.drawable.ic_skip_previous,
+                MaterialValueHelper.getSecondaryTextColor(context, true)
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
             R.id.button_toggle_play_pause,
-            createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_play_arrow_white_32dp,
-                    MaterialValueHelper.getSecondaryTextColor(context, true)
-                )!!, 1f
-            )
+
+            context.getTintedDrawable(
+                R.drawable.ic_play_arrow_white_32dp,
+                MaterialValueHelper.getSecondaryTextColor(context, true)
+            ).toBitmap()
         )
 
         linkButtons(context, appWidgetView)
@@ -97,7 +94,7 @@ class AppWidgetClassic : BaseAppWidget() {
         val song = service.currentSong
 
         // Set the titles and artwork
-        if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName)) {
+        if (song.title.isEmpty() && song.artistName.isEmpty()) {
             appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
         } else {
             appWidgetView.setViewVisibility(R.id.media_titles, View.VISIBLE)
@@ -120,14 +117,16 @@ class AppWidgetClassic : BaseAppWidget() {
         val appContext = service.applicationContext
         service.runOnUiThread {
             if (target != null) {
-                Glide.clear(target)
+                Glide.with(service).clear(target)
             }
-            target = SongGlideRequest.Builder.from(Glide.with(service), song)
-                .checkIgnoreMediaStore(service).generatePalette(service).build().centerCrop()
-                .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+            target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
+                .load(RetroGlideExtension.getSongModel(song))
+                //.checkIgnoreMediaStore()
+                .centerCrop()
+                .into(object : CustomTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
                     override fun onResourceReady(
                         resource: BitmapPaletteWrapper,
-                        glideAnimation: GlideAnimation<in BitmapPaletteWrapper>
+                        transition: Transition<in BitmapPaletteWrapper>?,
                     ) {
                         val palette = resource.palette
                         update(
@@ -143,10 +142,12 @@ class AppWidgetClassic : BaseAppWidget() {
                         )
                     }
 
-                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                        super.onLoadFailed(e, errorDrawable)
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
                         update(null, Color.WHITE)
                     }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {}
 
                     private fun update(bitmap: Bitmap?, color: Int) {
                         // Set correct drawable for pause state
@@ -154,38 +155,29 @@ class AppWidgetClassic : BaseAppWidget() {
                             if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play_arrow
                         appWidgetView.setImageViewBitmap(
                             R.id.button_toggle_play_pause,
-                            ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service,
-                                    playPauseRes,
-                                    color
-                                )
-                            )
+                            service.getTintedDrawable(
+                                playPauseRes,
+                                color
+                            ).toBitmap()
                         )
 
                         // Set prev/next button drawables
                         appWidgetView.setImageViewBitmap(
                             R.id.button_next,
-                            ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service,
-                                    R.drawable.ic_skip_next,
-                                    color
-                                )
-                            )
+                            service.getTintedDrawable(
+                                R.drawable.ic_skip_next,
+                                color
+                            ).toBitmap()
                         )
                         appWidgetView.setImageViewBitmap(
                             R.id.button_prev,
-                            ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service,
-                                    R.drawable.ic_skip_previous,
-                                    color
-                                )
-                            )
+                            service.getTintedDrawable(
+                                R.drawable.ic_skip_previous,
+                                color
+                            ).toBitmap()
                         )
 
-                        val image = getAlbumArtDrawable(service.resources, bitmap)
+                        val image = getAlbumArtDrawable(service, bitmap)
                         val roundedBitmap =
                             createRoundedBitmap(
                                 image,
@@ -213,13 +205,16 @@ class AppWidgetClassic : BaseAppWidget() {
                 MainActivity.EXPAND_PANEL,
                 PreferenceUtil.isExpandPanel
             )
-        var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)
 
         // Home
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        pendingIntent = PendingIntent.getActivity(context, 0, action, 0)
+        var pendingIntent = PendingIntent.getActivity(
+            context, 0, action, if (VersionUtils.hasMarshmallow())
+                PendingIntent.FLAG_IMMUTABLE
+            else 0
+        )
         views.setOnClickPendingIntent(R.id.image, pendingIntent)
         views.setOnClickPendingIntent(R.id.media_titles, pendingIntent)
 

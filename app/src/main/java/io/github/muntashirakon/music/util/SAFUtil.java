@@ -14,7 +14,6 @@
 
 package io.github.muntashirakon.music.util;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -27,21 +26,25 @@ import android.provider.DocumentsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.Fragment;
-import io.github.muntashirakon.music.R;
-import io.github.muntashirakon.music.activities.saf.SAFRequestActivity;
-import io.github.muntashirakon.music.model.Song;
+
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.exceptions.CannotWriteException;
+import org.jaudiotagger.audio.generic.Utils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.exceptions.CannotWriteException;
-import org.jaudiotagger.audio.generic.Utils;
+
+import io.github.muntashirakon.music.R;
+import io.github.muntashirakon.music.activities.saf.SAFRequestActivity;
+import io.github.muntashirakon.music.model.Song;
 
 public class SAFUtil {
 
@@ -241,7 +244,6 @@ public class SAFUtil {
       fos.write(audioContent);
       fos.close();
 
-      //noinspection ResultOfMethodCallIgnored
       temp.delete();
     } catch (final Exception e) {
       Log.e(TAG, "writeSAF: Failed to write to file descriptor provided by SAF", e);
@@ -257,7 +259,7 @@ public class SAFUtil {
       return deleteUsingSAF(context, path, safUri);
     } else {
       try {
-        return new File(path).delete();
+        deleteFile(path);
       } catch (NullPointerException e) {
         Log.e("MusicUtils", "Failed to find file " + path);
       } catch (Exception e) {
@@ -267,7 +269,10 @@ public class SAFUtil {
     return false;
   }
 
-  @SuppressLint("StringFormatInvalid")
+  public static void deleteFile(String path) {
+    new File(path).delete();
+  }
+
   @TargetApi(Build.VERSION_CODES.KITKAT)
   private static boolean deleteUsingSAF(Context context, String path, Uri safUri) {
     if (context == null) {

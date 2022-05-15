@@ -1,10 +1,8 @@
 package code.name.monkey.appthemehelper
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-
-import androidx.annotation.StyleRes
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -26,13 +24,13 @@ open class ATHActivity : AppCompatActivity() {
         }
     }
 
-    fun onThemeChanged() {
+    private fun onThemeChanged() {
         postRecreate()
     }
 
     fun postRecreate() {
         // hack to prevent java.lang.RuntimeException: Performing pause of activity that is not resumed
         // makes sure recreate() is called right after and not in onResume()
-        Handler().post { recreate() }
+        Handler(Looper.getMainLooper()).post { recreate() }
     }
 }

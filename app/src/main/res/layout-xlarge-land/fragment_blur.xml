@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
     android:clickable="true"
     android:focusable="true">
 
@@ -12,7 +11,6 @@
         android:id="@+id/colorBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorSurface"
         android:scaleType="centerCrop"
         app:srcCompat="@color/black_color" />
 
@@ -43,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statusBarContainer">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerAlbumCoverFragment"
             android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
             android:layout_width="match_parent"
@@ -61,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/albumCoverContainer">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playbackControlsFragment"
             android:name="io.github.muntashirakon.music.fragments.player.blur.BlurPlaybackControlsFragment"
             android:layout_width="match_parent"

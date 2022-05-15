@@ -51,48 +51,20 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/playerAlbumCoverFragment"
                 android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_album_full_card_cover" />
 
-            <FrameLayout
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/cover_lyrics"
+                android:name="io.github.muntashirakon.music.fragments.player.CoverLyricsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:alpha="0"
-                android:clipToPadding="false"
-                android:elevation="20dp"
-                android:padding="16dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <TextView
-                    android:id="@+id/player_lyrics_line1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:shadowColor="@color/md_black_1000"
-                    android:shadowRadius="4"
-                    android:textAlignment="center"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="22sp"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/player_lyrics_line2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:shadowColor="@color/md_black_1000"
-                    android:shadowRadius="4"
-                    android:textAlignment="center"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="22sp" />
-
-            </FrameLayout>
-
+                android:layout_gravity="center"
+                android:elevation="20dp" />
         </FrameLayout>
 
         <FrameLayout
@@ -100,12 +72,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="0">
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/playbackControlsFragment"
                 android:name="io.github.muntashirakon.music.fragments.player.adaptive.AdaptivePlaybackControlsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_adaptive_player_playback_controls" />
         </FrameLayout>
+
     </LinearLayout>
 </FrameLayout>

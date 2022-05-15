@@ -14,7 +14,6 @@
 
 package io.github.muntashirakon.music.preferences
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -22,20 +21,17 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.fragment.app.DialogFragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
-import io.github.muntashirakon.music.App
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.databinding.PreferenceDialogNowPlayingScreenBinding
+import io.github.muntashirakon.music.databinding.PreferenceNowPlayingScreenItemBinding
 import io.github.muntashirakon.music.extensions.*
-import io.github.muntashirakon.music.fragments.AlbumCoverStyle
 import io.github.muntashirakon.music.fragments.AlbumCoverStyle.*
-import io.github.muntashirakon.music.util.NavigationUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.ViewUtil
 import com.bumptech.glide.Glide
@@ -68,21 +64,20 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
     private var viewPagerPosition: Int = 0
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        @SuppressLint("InflateParams") val view =
-            LayoutInflater.from(requireContext())
-                .inflate(R.layout.preference_dialog_now_playing_screen, null)
-        val viewPager = view.findViewById<ViewPager>(R.id.now_playing_screen_view_pager)
-        viewPager.adapter = AlbumCoverStyleAdapter(requireContext())
-        viewPager.addOnPageChangeListener(this)
-        viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
-        viewPager.currentItem = PreferenceUtil.albumCoverStyle.ordinal
+        val binding = PreferenceDialogNowPlayingScreenBinding.inflate(layoutInflater)
+        binding.nowPlayingScreenViewPager.apply {
+            adapter = AlbumCoverStyleAdapter(requireContext())
+            addOnPageChangeListener(this@AlbumCoverStylePreferenceDialog)
+            pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
+            currentItem = PreferenceUtil.albumCoverStyle.ordinal
+        }
 
         return materialDialog(R.string.pref_title_album_cover_style)
             .setPositiveButton(R.string.set) { _, _ ->
                 val coverStyle = values()[viewPagerPosition]
                 PreferenceUtil.albumCoverStyle = coverStyle
             }
-            .setView(view)
+            .setView(binding.root)
             .create()
             .colorButtons()
     }
@@ -104,20 +99,11 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
             val albumCoverStyle = values()[position]
 
             val inflater = LayoutInflater.from(context)
-            val layout = inflater.inflate(
-                R.layout.preference_now_playing_screen_item,
-                collection,
-                false
-            ) as ViewGroup
-            collection.addView(layout)
+            val binding = PreferenceNowPlayingScreenItemBinding.inflate(inflater, collection, true)
 
-            val image = layout.findViewById<ImageView>(R.id.image)
-            val title = layout.findViewById<TextView>(R.id.title)
-            val proText = layout.findViewById<TextView>(R.id.proText)
-            Glide.with(context).load(albumCoverStyle.drawableResId).into(image)
-            title.setText(albumCoverStyle.titleRes)
-            proText.hide()
-            return layout
+            Glide.with(context).load(albumCoverStyle.drawableResId).into(binding.image)
+            binding.title.setText(albumCoverStyle.titleRes)
+            return binding.root
         }
 
         override fun destroyItem(
@@ -136,7 +122,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
             return view === instace
         }
 
-        override fun getPageTitle(position: Int): CharSequence? {
+        override fun getPageTitle(position: Int): CharSequence {
             return context.getString(values()[position].titleRes)
         }
     }

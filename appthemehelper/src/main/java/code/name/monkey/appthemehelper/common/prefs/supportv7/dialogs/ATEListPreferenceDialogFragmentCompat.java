@@ -57,8 +57,8 @@ public class ATEListPreferenceDialogFragmentCompat extends ATEPreferenceDialogFr
         mClickedDialogEntryIndex = preference.findIndexOfValue(preference.getValue());
         builder.setSingleChoiceItems(preference.getEntries(), mClickedDialogEntryIndex, (dialog, which) -> {
             mClickedDialogEntryIndex = which;
-            onClick(dialog, which);
             dismiss();
+            onClick(dialog, which);
         });
 
         /*

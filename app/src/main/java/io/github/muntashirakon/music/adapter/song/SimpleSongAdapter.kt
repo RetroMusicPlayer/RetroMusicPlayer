@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentActivity
 import io.github.muntashirakon.music.interfaces.ICabHolder
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
-import java.util.*
 
 class SimpleSongAdapter(
     context: FragmentActivity,

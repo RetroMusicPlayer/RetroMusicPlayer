@@ -15,40 +15,38 @@
 package io.github.muntashirakon.music.activities
 
 import android.app.KeyguardManager
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
-import androidx.core.view.ViewCompat
+import androidx.core.content.getSystemService
+import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsMusicServiceActivity
+import io.github.muntashirakon.music.databinding.ActivityLockScreenBinding
+import io.github.muntashirakon.music.extensions.hideStatusBar
+import io.github.muntashirakon.music.extensions.setTaskDescriptionColorAuto
 import io.github.muntashirakon.music.extensions.whichFragment
 import io.github.muntashirakon.music.fragments.player.lockscreen.LockScreenControlsFragment
+import io.github.muntashirakon.music.glide.GlideApp
+import io.github.muntashirakon.music.glide.RetroGlideExtension
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
-import io.github.muntashirakon.music.glide.SongGlideRequest
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrListener
 import com.r0adkll.slidr.model.SlidrPosition
-import kotlinx.android.synthetic.main.activity_lock_screen.*
 
 class LockScreenActivity : AbsMusicServiceActivity() {
+    private lateinit var binding: ActivityLockScreenBinding
     private var fragment: LockScreenControlsFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         lockScreenInit()
-        setContentView(R.layout.activity_lock_screen)
+        binding = ActivityLockScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         hideStatusBar()
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
-        setLightNavigationBar(true)
 
         val config = SlidrConfig.Builder().listener(object : SlidrListener {
             override fun onSlideStateChanged(state: Int) {
@@ -61,10 +59,10 @@ class LockScreenActivity : AbsMusicServiceActivity() {
             }
 
             override fun onSlideClosed(): Boolean {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (VersionUtils.hasOreo()) {
                     val keyguardManager =
-                        getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-                    keyguardManager.requestDismissKeyguard(this@LockScreenActivity, null)
+                        getSystemService<KeyguardManager>()
+                    keyguardManager?.requestDismissKeyguard(this@LockScreenActivity, null)
                 }
                 finish()
                 return true
@@ -75,18 +73,19 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
         fragment = whichFragment<LockScreenControlsFragment>(R.id.playback_controls_fragment)
 
-        findViewById<View>(R.id.slide).apply {
+        binding.slide.apply {
             translationY = 100f
             alpha = 0f
-            ViewCompat.animate(this).translationY(0f).alpha(1f).setDuration(1500).start()
+            animate().translationY(0f).alpha(1f).setDuration(1500).start()
         }
     }
 
+    @Suppress("Deprecation")
     private fun lockScreenInit() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+        if (VersionUtils.hasOreoMR1()) {
             setShowWhenLocked(true)
-            val keyguardManager: KeyguardManager = getSystemService(KeyguardManager::class.java)
-            keyguardManager.requestDismissKeyguard(this, null)
+            val keyguardManager = getSystemService<KeyguardManager>()
+            keyguardManager?.requestDismissKeyguard(this, null)
         } else {
             this.window.addFlags(
                 WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
@@ -107,9 +106,12 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
     private fun updateSongs() {
         val song = MusicPlayerRemote.currentSong
-        SongGlideRequest.Builder.from(Glide.with(this), song).checkIgnoreMediaStore(this)
-            .generatePalette(this).build().dontAnimate()
-            .into(object : RetroMusicColoredTarget(image) {
+        GlideApp.with(this)
+            .asBitmapPalette()
+            .songCoverOptions(song)
+            .load(RetroGlideExtension.getSongModel(song))
+            .dontAnimate()
+            .into(object : RetroMusicColoredTarget(binding.image) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     fragment?.setColor(colors)
                 }

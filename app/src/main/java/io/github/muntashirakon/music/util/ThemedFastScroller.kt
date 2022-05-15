@@ -33,7 +33,7 @@ object ThemedFastScroller {
         fastScrollerBuilder.useMd2Style()
         fastScrollerBuilder.setPopupStyle { popupText ->
             PopupStyles.MD2.accept(popupText)
-            popupText.background = PopupBackground(context)
+            popupText.background = PopupBackground(context, color)
             popupText.setTextColor(textColor)
         }
 

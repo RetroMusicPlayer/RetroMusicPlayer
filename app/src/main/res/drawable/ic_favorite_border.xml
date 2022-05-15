@@ -2,10 +2,24 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-
-    <path
-        android:fillColor="@color/md_white_1000"
-        android:pathData="M19.66 3.99c-2.64-1.8-5.9-0.96-7.66 1.1-1.76-2.06-5.02-2.91-7.66-1.1-1.4 0.96 -2.28 2.58-2.34 4.29-0.14 3.88 3.3 6.99 8.55 11.76l0.1 0.09 c0.76 0.69 1.93 0.69 2.69-0.01l0.11-0.1c5.25-4.76 8.68-7.87 8.55-11.75-0.06-1.7-0.94-3.32-2.34-4.28zM12.1 18.55l-0.1 0.1 -0.1-0.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04 0.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z" />
+    android:name="heartbreak"
+    android:viewportWidth="56"
+    android:viewportHeight="56">
+    <group
+        android:name="group"
+        android:pivotX="28"
+        android:pivotY="28"
+        android:scaleX="2"
+        android:scaleY="2">
+        <path
+            android:name="heart_stroke_left"
+            android:pathData="M 28.719 38.296 L 25.669 35.552 C 21.621 31.793 18.016 28.891 18.016 24.845 C 18.016 21.588 20.631 19.965 23.634 19.965 C 24.999 19.965 26.799 21.181 28.644 23.13"
+            android:strokeWidth="2"
+            android:strokeColor="@color/md_white_1000" />
+        <path
+            android:name="heart_stroke_right"
+            android:pathData="M 27.231 38.294 L 30.765 35.2 C 34.834 31.235 37.752 29.118 38.004 25.084 C 38.168 22.459 35.773 20.035 33.379 20.035 C 30.432 20.035 29.672 21.047 27.231 23.133"
+            android:strokeWidth="2"
+            android:strokeColor="@color/md_white_1000" />
+    </group>
 </vector>

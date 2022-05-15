@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
-import io.github.muntashirakon.music.extensions.accentColor
+import code.name.monkey.appthemehelper.ThemeStore
 
 class AccentIcon @JvmOverloads constructor(
     context: Context,
@@ -12,6 +12,6 @@ class AccentIcon @JvmOverloads constructor(
     defStyleAttr: Int = -1
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
     init {
-        imageTintList = ColorStateList.valueOf(accentColor())
+        imageTintList = ColorStateList.valueOf(ThemeStore.accentColor(context))
     }
 }

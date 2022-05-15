@@ -13,14 +13,19 @@
  */
 package io.github.muntashirakon.music
 
-import androidx.multidex.MultiDexApplication
+import android.app.Application
+import cat.ereza.customactivityoncrash.config.CaocConfig
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
+import io.github.muntashirakon.music.activities.ErrorActivity
 import io.github.muntashirakon.music.appshortcuts.DynamicShortcutManager
+import io.github.muntashirakon.music.helper.WallpaperAccentManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class App : MultiDexApplication() {
+class App : Application() {
+
+    private val wallpaperAccentManager = WallpaperAccentManager(this)
 
     override fun onCreate() {
         super.onCreate()
@@ -37,9 +42,18 @@ class App : MultiDexApplication() {
                 .coloredNavigationBar(true)
                 .commit()
         }
+        wallpaperAccentManager.init()
 
         if (VersionUtils.hasNougatMR())
             DynamicShortcutManager(this).initDynamicShortcuts()
+
+        // setting Error activity
+        CaocConfig.Builder.create().errorActivity(ErrorActivity::class.java).apply()
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        wallpaperAccentManager.release()
     }
 
     companion object {

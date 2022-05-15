@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
-        android:layout="@layout/preference_category_title"
-        android:title="@string/pref_header_blacklist">
 
-        <io.github.muntashirakon.music.preferences.BlacklistPreference
-            android:key="blacklist"
-            android:layout="@layout/list_item_view"
-            android:summary="@string/pref_summary_blacklist"
-            android:title="@string/pref_title_blacklist"
-            app:icon="@drawable/ic_music_note_off" />
+    <io.github.muntashirakon.music.preferences.BlacklistPreference
+        android:key="blacklist"
+        android:layout="@layout/list_item_view"
+        android:summary="@string/pref_summary_blacklist"
+        android:title="@string/pref_header_blacklist"
+        app:icon="@drawable/ic_music_note_off" />
 
-    </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="whitelist_music"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_summary_whitelist"
+        android:title="@string/pref_title_whitelist" />
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_playlists">

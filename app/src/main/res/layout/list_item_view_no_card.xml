@@ -55,12 +55,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:textAppearance="@style/TextViewNormal"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
         app:layout_constraintTop_toBottomOf="@android:id/title"
-        android:textAppearance="@style/TextViewNormal"
         tools:maxLines="2"
         tools:text="@tools:sample/lorem/random" />
 

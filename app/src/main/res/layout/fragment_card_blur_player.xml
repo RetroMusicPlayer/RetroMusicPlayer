@@ -26,6 +26,7 @@
 
 
     <FrameLayout
+        android:id="@+id/cardContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -66,12 +67,20 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1">
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playerAlbumCoverFragment"
                     android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:layout="@layout/fragment_album_card_cover" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/cover_lyrics"
+                    android:name="io.github.muntashirakon.music.fragments.player.CoverLyricsFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    tools:layout="@layout/fragment_cover_lyrics" />
             </FrameLayout>
 
         </LinearLayout>
@@ -81,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom">
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/playbackControlsFragment"
                 android:name="io.github.muntashirakon.music.fragments.player.cardblur.CardBlurPlaybackControlsFragment"
                 android:layout_width="match_parent"

@@ -4,8 +4,9 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="@dimen/app_widget_classic_height"
-    android:background="@color/md_black_1000"
+    android:background="?attr/colorSurface"
     android:orientation="horizontal"
+    android:theme="@style/Theme.AppWidget"
     tools:ignore="ContentDescription">
 
     <ImageView
@@ -77,7 +78,7 @@
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:textAppearance="@style/TextViewSubtitle1"
-                android:textColor="@color/ate_primary_text_dark"
+                android:textColor="?android:attr/textColorPrimary"
                 tools:text="Title" />
 
             <TextView
@@ -88,7 +89,7 @@
                 android:paddingTop="4dp"
                 android:singleLine="true"
                 android:textAppearance="@style/TextViewNormal"
-                android:textColor="@color/ate_secondary_text_dark"
+                android:textColor="?android:attr/textColorSecondary"
                 tools:text="Text" />
 
         </LinearLayout>

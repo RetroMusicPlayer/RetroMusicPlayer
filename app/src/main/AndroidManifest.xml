@@ -4,11 +4,17 @@
     package="io.github.muntashirakon.music"
     android:installLocation="auto">
 
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
@@ -17,23 +23,25 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 
     <application
         android:name=".App"
-        android:allowBackup="true"
+        android:allowBackup="@bool/allowBackup"
         android:configChanges="locale|layoutDirection"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:requestLegacyExternalStorage="true"
+        android:restoreAnyVersion="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RetroMusic.FollowSystem"
-        android:usesCleartextTraffic="false"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="q">
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/app_name"
+            android:exported="true"
+            android:launchMode="singleTop"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -105,20 +113,52 @@
                 <data android:mimeType="vnd.android.cursor.dir/audio" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.PlayingQueueActivity" />
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.tageditor.AlbumTagEditorActivity" />
         <activity android:name=".activities.tageditor.SongTagEditorActivity" />
-        <activity android:name=".activities.LyricsActivity" />
-        <activity android:name=".activities.UserInfoActivity" />
         <activity android:name=".activities.LicenseActivity" />
-        <activity android:name=".activities.WhatsNewActivity" />
         <activity android:name=".activities.bugreport.BugReportActivity" />
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
         <activity android:name=".activities.PermissionActivity" />
         <activity android:name=".activities.LockScreenActivity" />
         <activity android:name=".activities.saf.SAFRequestActivity" />
+        <activity
+            android:name=".fragments.backup.RestoreActivity"
+            android:excludeFromRecents="false"
+            android:exported="true"
+            android:label="@string/restore"
+            android:theme="@style/Theme.RetroMusic.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/x-zip-compressed" />
+                <data android:mimeType="application/zip" />
+
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:mimeType="*/*" />
+                <!--
+                    Work around Android's ugly primitive PatternMatcher
+                    implementation that can't cope with finding a . early in
+                    the path unless it's explicitly matched.
+                -->
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.rmbak" />
+                <data android:pathPattern=".*\\..*\\.rmbak" />
+                <data android:pathPattern=".*\\..*\\..*\\.rmbak" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.rmbak" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.rmbak" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.rmbak" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.rmbak" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.rmbak" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.rmbak" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".appshortcuts.AppShortcutLauncherActivity"
@@ -128,6 +168,14 @@
         <activity
             android:name=".activities.saf.SAFGuideActivity"
             android:theme="@style/Theme.Intro" />
+
+        <activity
+            android:name=".activities.ErrorActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cat.ereza.customactivityoncrash.RESTART" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name=".misc.GenericFileProvider"
@@ -139,7 +187,6 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}"
@@ -150,13 +197,17 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <receiver android:name=".service.MediaButtonIntentReceiver">
+        <receiver
+            android:name="androidx.media.session.MediaButtonReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".appwidgets.BootReceiver">
+        <receiver
+            android:name=".appwidgets.BootReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
@@ -165,7 +216,7 @@
 
         <receiver
             android:name=".appwidgets.AppWidgetBig"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_big_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -178,7 +229,7 @@
 
         <receiver
             android:name=".appwidgets.AppWidgetClassic"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_classic_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -190,7 +241,7 @@
         </receiver>
         <receiver
             android:name=".appwidgets.AppWidgetSmall"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_small_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -202,7 +253,7 @@
         </receiver>
         <receiver
             android:name=".appwidgets.AppWidgetText"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_text_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -214,7 +265,7 @@
         </receiver>
         <receiver
             android:name=".appwidgets.AppWidgetCard"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_widget_card_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -224,15 +275,42 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_card_info" />
         </receiver>
+        <receiver
+            android:name=".appwidgets.AppWidgetMD3"
+            android:exported="true"
+            android:label="@string/app_widget_md3_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_md3_info" />
+        </receiver>
+        <receiver
+            android:name=".appwidgets.AppWidgetCircle"
+            android:exported="true"
+            android:label="@string/app_widget_circle_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_circle_info" />
+        </receiver>
 
         <service
             android:name=".service.MusicService"
             android:enabled="true"
             android:exported="true"
-            android:label="@string/app_name"
-            tools:ignore="ExportedService">
+            android:foregroundServiceType="mediaPlayback"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </service>
 
@@ -244,12 +322,23 @@
             android:name="com.lge.support.SPLIT_WINDOW"
             android:value="true" />
 
+        <!-- Android Auto -->
         <meta-data
-            android:name="io.github.muntashirakon.music.glide.RetroMusicGlideModule"
-            android:value="GlideModule" />
-
+            android:name="com.google.android.gms.car.application"
+            android:resource="@xml/automotive_app_desc" />
         <meta-data
-            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
-            android:value="GlideModule" />
+            android:name="com.google.android.gms.car.application.theme"
+            android:resource="@style/CarTheme" />
+        <meta-data
+            android:name="com.google.android.gms.car.notification.SmallIcon"
+            android:resource="@drawable/ic_notification" />
     </application>
+
+    <!--
+    This is not that important, it's just here so that we can query equalizer package
+    and check if it's present on A11+ because of Package visibility restrictions.
+    -->
+    <queries>
+        <package android:name="com.android.musicfx" />
+    </queries>
 </manifest>

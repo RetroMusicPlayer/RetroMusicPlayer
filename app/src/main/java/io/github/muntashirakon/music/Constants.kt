@@ -20,7 +20,8 @@ import android.provider.MediaStore
 object Constants {
     const val RATE_ON_GOOGLE_PLAY =
         "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
-    const val TRANSLATE = "https://github.com/h4h13/RetroMusicPlayer"
+    const val TRANSLATE = "https://crowdin.com/project/retromusicplayer"
+    const val WEBSITE = "https://retromusic.app"
     const val GITHUB_PROJECT = "https://github.com/MuntashirAkon/Metro"
     const val TELEGRAM_CHANGE_LOG = "https://t.me/retromusiclog"
     const val USER_PROFILE = "profile.jpg"
@@ -28,30 +29,34 @@ object Constants {
     const val APP_INSTAGRAM_LINK = "https://www.instagram.com/retromusicapp/"
     const val APP_TELEGRAM_LINK = "https://t.me/retromusicapp/"
     const val APP_TWITTER_LINK = "https://twitter.com/retromusicapp"
-    const val FAQ_LINK = "https://github.com/h4h13/RetroMusicPlayer/blob/master/FAQ.md"
+    const val FAQ_LINK = "https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/FAQ.md"
     const val PINTEREST = "https://in.pinterest.com/retromusicapp/"
     const val AUDIO_SCROBBLER_URL = "https://ws.audioscrobbler.com/2.0/"
 
     const val IS_MUSIC =
         MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"
 
+    const val DATA = "_data"
+
+    @Suppress("Deprecation")
     val baseProjection = arrayOf(
         BaseColumns._ID, // 0
         MediaStore.Audio.AudioColumns.TITLE, // 1
         MediaStore.Audio.AudioColumns.TRACK, // 2
         MediaStore.Audio.AudioColumns.YEAR, // 3
         MediaStore.Audio.AudioColumns.DURATION, // 4
-        MediaStore.Audio.AudioColumns.DATA, // 5
+        DATA, // 5
         MediaStore.Audio.AudioColumns.DATE_MODIFIED, // 6
         MediaStore.Audio.AudioColumns.ALBUM_ID, // 7
         MediaStore.Audio.AudioColumns.ALBUM, // 8
         MediaStore.Audio.AudioColumns.ARTIST_ID, // 9
         MediaStore.Audio.AudioColumns.ARTIST, // 10
         MediaStore.Audio.AudioColumns.COMPOSER, // 11
-        "album_artist" // 12
+        ALBUM_ARTIST // 12
     )
     const val NUMBER_OF_TOP_TRACKS = 99
 }
+
 const val EXTRA_PLAYLIST_TYPE = "type"
 const val EXTRA_GENRE = "extra_genre"
 const val EXTRA_PLAYLIST = "extra_playlist"
@@ -70,7 +75,7 @@ const val NOW_PLAYING_SCREEN_ID = "now_playing_screen_id"
 const val CAROUSEL_EFFECT = "carousel_effect"
 const val COLORED_NOTIFICATION = "colored_notification"
 const val CLASSIC_NOTIFICATION = "classic_notification"
-const val GAP_LESS_PLAYBACK = "gap_less_playback"
+const val GAP_LESS_PLAYBACK = "gapless_playback"
 const val ALBUM_ART_ON_LOCK_SCREEN = "album_art_on_lock_screen"
 const val BLURRED_ALBUM_ART = "blurred_album_art"
 const val NEW_BLUR_AMOUNT = "new_blur_amount"
@@ -116,6 +121,8 @@ const val ALBUM_GRID_SIZE_LAND = "album_grid_size_land"
 const val SONG_GRID_SIZE_LAND = "song_grid_size_land"
 const val ARTIST_GRID_SIZE = "artist_grid_size"
 const val ARTIST_GRID_SIZE_LAND = "artist_grid_size_land"
+const val PLAYLIST_GRID_SIZE = "playlist_grid_size"
+const val PLAYLIST_GRID_SIZE_LAND = "playlist_grid_size_land"
 const val COLORED_APP_SHORTCUTS = "colored_app_shortcuts"
 const val AUDIO_DUCKING = "audio_ducking"
 const val LAST_ADDED_CUTOFF = "last_added_interval"
@@ -128,7 +135,9 @@ const val START_DIRECTORY = "start_directory"
 const val RECENTLY_PLAYED_CUTOFF = "recently_played_interval"
 const val LOCK_SCREEN = "lock_screen"
 const val ALBUM_ARTISTS_ONLY = "album_artists_only"
+const val ALBUM_ARTIST = "album_artist"
 const val ALBUM_DETAIL_SONG_SORT_ORDER = "album_detail_song_sort_order"
+const val ARTIST_DETAIL_SONG_SORT_ORDER = "artist_detail_song_sort_order"
 const val LYRICS_OPTIONS = "lyrics_tab_position"
 const val CHOOSE_EQUALIZER = "choose_equalizer"
 const val EQUALIZER = "equalizer"
@@ -137,3 +146,25 @@ const val SONG_GRID_STYLE = "song_grid_style"
 const val PAUSE_ON_ZERO_VOLUME = "pause_on_zero_volume"
 const val FILTER_SONG = "filter_song"
 const val EXPAND_NOW_PLAYING_PANEL = "expand_now_playing_panel"
+const val EXTRA_ARTIST_NAME = "extra_artist_name"
+const val TOGGLE_SUGGESTIONS = "toggle_suggestions"
+const val AUDIO_FADE_DURATION = "audio_fade_duration"
+const val CROSS_FADE_DURATION = "cross_fade_duration"
+const val SHOW_LYRICS = "show_lyrics"
+const val REMEMBER_LAST_TAB = "remember_last_tab"
+const val LAST_USED_TAB = "last_used_tab"
+const val WHITELIST_MUSIC = "whitelist_music"
+const val MATERIAL_YOU = "material_you"
+const val SNOWFALL = "snowfall"
+const val LYRICS_TYPE = "lyrics_type"
+const val PLAYBACK_SPEED = "playback_speed"
+const val PLAYBACK_PITCH = "playback_pitch"
+const val CUSTOM_FONT = "custom_font"
+const val APPBAR_MODE = "appbar_mode"
+const val WALLPAPER_ACCENT = "wallpaper_accent"
+const val SCREEN_ON_LYRICS = "screen_on_lyrics"
+const val CIRCLE_PLAY_BUTTON = "circle_play_button"
+const val SWIPE_ANYWHERE_NOW_PLAYING = "swipe_anywhere_now_playing"
+const val PAUSE_HISTORY = "pause_history"
+const val MANAGE_AUDIO_FOCUS = "manage_audio_focus"
+const val SWIPE_DOWN_DISMISS = "swipe_to_dismiss"

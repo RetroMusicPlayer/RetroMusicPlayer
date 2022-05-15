@@ -18,7 +18,7 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -122,32 +122,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainContent" />
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:elevation="0dp">
 
-        <io.github.muntashirakon.music.views.StatusBarView
-            android:id="@+id/status_bar"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="?attr/colorSurface"
-            tools:ignore="UnusedAttribute" />
-
-        <com.google.android.material.appbar.AppBarLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:elevation="0dp"
-            app:elevation="0dp">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:navigationIcon="@drawable/ic_keyboard_backspace_black"
-                app:title="@string/social_stories"
-                app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
-        </com.google.android.material.appbar.AppBarLayout>
-    </LinearLayout>
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black"
+            app:title="@string/social_stories"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
+    </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -17,7 +17,7 @@
         android:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/playerRepeatButton"
+        android:id="@+id/repeatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/roundSelector"
@@ -28,7 +28,7 @@
         tools:tint="@color/md_black_1000" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/playerShuffleButton"
+        android:id="@+id/shuffleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/roundSelector"

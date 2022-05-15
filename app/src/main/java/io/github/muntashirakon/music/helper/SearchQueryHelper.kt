@@ -19,9 +19,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.repository.RealSongRepository
-import java.util.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 object SearchQueryHelper : KoinComponent {
     private const val TITLE_SELECTION = "lower(" + MediaStore.Audio.AudioColumns.TITLE + ") = ?"
@@ -44,9 +43,9 @@ object SearchQueryHelper : KoinComponent {
                 songRepository.makeSongCursor(
                     ARTIST_SELECTION + AND + ALBUM_SELECTION + AND + TITLE_SELECTION,
                     arrayOf(
-                        artistName.toLowerCase(Locale.getDefault()),
-                        albumName.toLowerCase(Locale.getDefault()),
-                        titleName.toLowerCase(Locale.getDefault())
+                        artistName.lowercase(),
+                        albumName.lowercase(),
+                        titleName.lowercase()
                     )
                 )
             )
@@ -59,8 +58,8 @@ object SearchQueryHelper : KoinComponent {
                 songRepository.makeSongCursor(
                     ARTIST_SELECTION + AND + TITLE_SELECTION,
                     arrayOf(
-                        artistName.toLowerCase(Locale.getDefault()),
-                        titleName.toLowerCase(Locale.getDefault())
+                        artistName.lowercase(),
+                        titleName.lowercase()
                     )
                 )
             )
@@ -73,8 +72,8 @@ object SearchQueryHelper : KoinComponent {
                 songRepository.makeSongCursor(
                     ALBUM_SELECTION + AND + TITLE_SELECTION,
                     arrayOf(
-                        albumName.toLowerCase(Locale.getDefault()),
-                        titleName.toLowerCase(Locale.getDefault())
+                        albumName.lowercase(),
+                        titleName.lowercase()
                     )
                 )
             )
@@ -86,7 +85,7 @@ object SearchQueryHelper : KoinComponent {
             songs = songRepository.songs(
                 songRepository.makeSongCursor(
                     ARTIST_SELECTION,
-                    arrayOf(artistName.toLowerCase(Locale.getDefault()))
+                    arrayOf(artistName.lowercase())
                 )
             )
         }
@@ -97,7 +96,7 @@ object SearchQueryHelper : KoinComponent {
             songs = songRepository.songs(
                 songRepository.makeSongCursor(
                     ALBUM_SELECTION,
-                    arrayOf(albumName.toLowerCase(Locale.getDefault()))
+                    arrayOf(albumName.lowercase())
                 )
             )
         }
@@ -108,7 +107,7 @@ object SearchQueryHelper : KoinComponent {
             songs = songRepository.songs(
                 songRepository.makeSongCursor(
                     TITLE_SELECTION,
-                    arrayOf(titleName.toLowerCase(Locale.getDefault()))
+                    arrayOf(titleName.lowercase())
                 )
             )
         }
@@ -118,7 +117,7 @@ object SearchQueryHelper : KoinComponent {
         songs = songRepository.songs(
             songRepository.makeSongCursor(
                 ARTIST_SELECTION,
-                arrayOf(query.toLowerCase(Locale.getDefault()))
+                arrayOf(query.lowercase())
             )
         )
 
@@ -128,7 +127,7 @@ object SearchQueryHelper : KoinComponent {
         songs = songRepository.songs(
             songRepository.makeSongCursor(
                 ALBUM_SELECTION,
-                arrayOf(query.toLowerCase(Locale.getDefault()))
+                arrayOf(query.lowercase())
             )
         )
         if (songs.isNotEmpty()) {
@@ -137,11 +136,9 @@ object SearchQueryHelper : KoinComponent {
         songs = songRepository.songs(
             songRepository.makeSongCursor(
                 TITLE_SELECTION,
-                arrayOf(query.toLowerCase(Locale.getDefault()))
+                arrayOf(query.lowercase())
             )
         )
-        return if (songs.isNotEmpty()) {
-            songs
-        } else ArrayList()
+        return songs.ifEmpty { ArrayList() }
     }
 }

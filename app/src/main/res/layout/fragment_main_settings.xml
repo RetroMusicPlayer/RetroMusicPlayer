@@ -5,9 +5,10 @@
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:overScrollMode="never">
+    android:overScrollMode="@integer/overScrollMode">
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -76,6 +77,14 @@
             app:settingListItemText="@string/other_settings_summary"
             app:settingListItemTitle="@string/others" />
 
+        <io.github.muntashirakon.music.views.SettingListItemView
+            android:id="@+id/backup_restore_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:settingListItemIcon="@drawable/ic_restore"
+            app:settingListItemIconColor="@color/md_cyan_400"
+            app:settingListItemText="@string/backup_restore_settings_summary"
+            app:settingListItemTitle="@string/backup_restore_title" />
 
         <io.github.muntashirakon.music.views.SettingListItemView
             android:id="@+id/aboutSettings"

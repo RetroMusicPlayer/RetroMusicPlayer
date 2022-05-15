@@ -17,23 +17,22 @@ package io.github.muntashirakon.music.fragments.player.adaptive
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.extensions.surfaceColor
-import io.github.muntashirakon.music.extensions.textColorPrimary
-import io.github.muntashirakon.music.extensions.textColorSecondary
+import io.github.muntashirakon.music.databinding.FragmentAdaptivePlayerBinding
+import io.github.muntashirakon.music.extensions.*
 import io.github.muntashirakon.music.fragments.base.AbsPlayerFragment
 import io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_adaptive_player.*
 
 class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
 
+    private var _binding: FragmentAdaptivePlayerBinding? = null
+    private val binding get() = _binding!!
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private var lastColor: Int = 0
@@ -41,15 +40,17 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentAdaptivePlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        binding.playbackControlsFragment.drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {
         playbackControlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as AdaptivePlaybackControlsFragment
+            whichFragment(R.id.playbackControlsFragment) as AdaptivePlaybackControlsFragment
         val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+            whichFragment(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.apply {
             removeSlideEffect()
             setCallbacks(this@AdaptiveFragment)
@@ -57,7 +58,7 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             ToolbarContentTintHelper.colorizeToolbar(this, surfaceColor(), requireActivity())
@@ -80,7 +81,7 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             title = song.title
             subtitle = song.artistName
         }
@@ -102,8 +103,8 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
         lastColor = color.primaryTextColor
         libraryViewModel.updateColor(color.primaryTextColor)
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            binding.playerToolbar,
+            colorControlNormal(),
             requireActivity()
         )
     }
@@ -119,8 +120,13 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
         return false
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
+        return colorControlNormal()
     }
 
     override val paletteColor: Int

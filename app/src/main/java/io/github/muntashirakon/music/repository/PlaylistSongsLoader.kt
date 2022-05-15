@@ -18,32 +18,20 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore.Audio.AudioColumns
 import android.provider.MediaStore.Audio.Playlists.Members
+import io.github.muntashirakon.music.Constants
 import io.github.muntashirakon.music.Constants.IS_MUSIC
 import io.github.muntashirakon.music.extensions.getInt
 import io.github.muntashirakon.music.extensions.getLong
 import io.github.muntashirakon.music.extensions.getString
 import io.github.muntashirakon.music.extensions.getStringOrNull
-import io.github.muntashirakon.music.model.AbsCustomPlaylist
-import io.github.muntashirakon.music.model.Playlist
 import io.github.muntashirakon.music.model.PlaylistSong
 import io.github.muntashirakon.music.model.Song
 
 /**
  * Created by hemanths on 16/08/17.
  */
-
+@Suppress("Deprecation")
 object PlaylistSongsLoader {
-
-    fun getPlaylistSongList(
-        context: Context,
-        playlist: Playlist
-    ): List<Song> {
-        return if (playlist is AbsCustomPlaylist) {
-            return playlist.songs()
-        } else {
-            getPlaylistSongList(context, playlist.id)
-        }
-    }
 
     @JvmStatic
     fun getPlaylistSongList(context: Context, playlistId: Long): List<Song> {
@@ -75,7 +63,7 @@ object PlaylistSongsLoader {
         val trackNumber = cursor.getInt(AudioColumns.TRACK)
         val year = cursor.getInt(AudioColumns.YEAR)
         val duration = cursor.getLong(AudioColumns.DURATION)
-        val data = cursor.getString(AudioColumns.DATA)
+        val data = cursor.getString(Constants.DATA)
         val dateModified = cursor.getLong(AudioColumns.DATE_MODIFIED)
         val albumId = cursor.getLong(AudioColumns.ALBUM_ID)
         val albumName = cursor.getString(AudioColumns.ALBUM)
@@ -113,7 +101,7 @@ object PlaylistSongsLoader {
                     AudioColumns.TRACK, // 2
                     AudioColumns.YEAR, // 3
                     AudioColumns.DURATION, // 4
-                    AudioColumns.DATA, // 5
+                    Constants.DATA, // 5
                     AudioColumns.DATE_MODIFIED, // 6
                     AudioColumns.ALBUM_ID, // 7
                     AudioColumns.ALBUM, // 8

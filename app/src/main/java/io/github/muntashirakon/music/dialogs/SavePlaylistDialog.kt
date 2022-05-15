@@ -21,13 +21,12 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import io.github.muntashirakon.music.App
+import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.EXTRA_PLAYLIST
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.db.PlaylistWithSongs
-import io.github.muntashirakon.music.extensions.colorButtons
-import io.github.muntashirakon.music.extensions.extraNotNull
-import io.github.muntashirakon.music.extensions.materialDialog
+import io.github.muntashirakon.music.extensions.*
+import io.github.muntashirakon.music.helper.M3UWriter
 import io.github.muntashirakon.music.util.PlaylistsUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,22 +45,52 @@ class SavePlaylistDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycleScope.launch(Dispatchers.IO) {
-            val playlistWithSongs = extraNotNull<PlaylistWithSongs>(EXTRA_PLAYLIST).value
-            val file = PlaylistsUtil.savePlaylistWithSongs(playlistWithSongs)
-            MediaScannerConnection.scanFile(
-                requireActivity(),
-                arrayOf<String>(file.path),
-                null
-            ) { _, _ ->
+        val playlistWithSongs = extraNotNull<PlaylistWithSongs>(EXTRA_PLAYLIST).value
+
+        if (VersionUtils.hasR()) {
+            createNewFile(
+                "audio/mpegurl",
+                playlistWithSongs.playlistEntity.playlistName
+            ) { outputStream, data ->
+                try {
+                    if (outputStream != null) {
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            M3UWriter.writeIO(
+                                outputStream,
+                                playlistWithSongs
+                            )
+                            withContext(Dispatchers.Main) {
+                                showToast(
+                                    requireContext().getString(R.string.saved_playlist_to,
+                                        data?.lastPathSegment),
+                                    Toast.LENGTH_LONG
+                                )
+                                dismiss()
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    showToast(
+                        "Something went wrong : " + e.message
+                    )
+                }
             }
-            withContext(Dispatchers.Main) {
-                Toast.makeText(
-                    requireContext(),
-                    String.format(App.getContext().getString(R.string.saved_playlist_to), file),
-                    Toast.LENGTH_LONG
-                ).show()
-                dismiss()
+        } else {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val file = PlaylistsUtil.savePlaylistWithSongs(playlistWithSongs)
+                MediaScannerConnection.scanFile(
+                    requireActivity(),
+                    arrayOf<String>(file.path),
+                    null
+                ) { _, _ ->
+                }
+                withContext(Dispatchers.Main) {
+                    showToast(
+                        getString(R.string.saved_playlist_to, file),
+                        Toast.LENGTH_LONG
+                    )
+                    dismiss()
+                }
             }
         }
     }

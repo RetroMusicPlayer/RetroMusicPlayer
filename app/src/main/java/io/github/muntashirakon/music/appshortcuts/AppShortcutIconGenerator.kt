@@ -15,18 +15,16 @@
 package io.github.muntashirakon.music.appshortcuts
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.util.TypedValue
 import androidx.annotation.RequiresApi
+import androidx.core.graphics.drawable.toBitmap
 import code.name.monkey.appthemehelper.ThemeStore
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.getTintedDrawable
 import io.github.muntashirakon.music.util.PreferenceUtil
-import io.github.muntashirakon.music.util.RetroUtil
 
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 object AppShortcutIconGenerator {
@@ -63,28 +61,17 @@ object AppShortcutIconGenerator {
         context: Context,
         iconId: Int,
         foregroundColor: Int,
-        backgroundColor: Int
+        backgroundColor: Int,
     ): Icon {
         // Get and tint foreground and background drawables
-        val vectorDrawable = RetroUtil.getTintedVectorDrawable(context, iconId, foregroundColor)
-        val backgroundDrawable = RetroUtil.getTintedVectorDrawable(
-            context, R.drawable.ic_app_shortcut_background, backgroundColor
-        )
+        val vectorDrawable = context.getTintedDrawable(iconId, foregroundColor)
+        val backgroundDrawable =
+            context.getTintedDrawable(R.drawable.ic_app_shortcut_background, backgroundColor)
 
         // Squash the two drawables together
         val layerDrawable = LayerDrawable(arrayOf(backgroundDrawable, vectorDrawable))
 
         // Return as an Icon
-        return Icon.createWithBitmap(drawableToBitmap(layerDrawable))
-    }
-
-    private fun drawableToBitmap(drawable: Drawable): Bitmap {
-        val bitmap = Bitmap.createBitmap(
-            drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, canvas.width, canvas.height)
-        drawable.draw(canvas)
-        return bitmap
+        return Icon.createWithBitmap(layerDrawable.toBitmap())
     }
 }

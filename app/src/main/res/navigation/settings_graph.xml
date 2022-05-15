@@ -74,6 +74,15 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/retro_fragment_close_enter"
             app:popExitAnim="@anim/retro_fragment_close_exit" />
+
+        <action
+            android:id="@+id/action_mainSettingsFragment_to_backupFragment"
+            app:destination="@id/backup_fragment"
+            app:enterAnim="@anim/retro_fragment_open_enter"
+            app:exitAnim="@anim/retro_fragment_open_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/retro_fragment_close_enter"
+            app:popExitAnim="@anim/retro_fragment_close_exit" />
     </fragment>
 
     <fragment
@@ -114,6 +123,11 @@
     <fragment
         android:id="@+id/aboutActivity"
         android:name="io.github.muntashirakon.music.fragments.about.AboutFragment"
+        android:label="About" />
+
+    <fragment
+        android:id="@+id/backup_fragment"
+        android:name="io.github.muntashirakon.music.fragments.backup.BackupFragment"
         android:label="About" />
 
 </navigation>

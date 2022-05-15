@@ -14,15 +14,14 @@
  */
 package io.github.muntashirakon.music.adapter
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.extensions.openUrl
 import io.github.muntashirakon.music.model.Contributor
-import io.github.muntashirakon.music.util.RetroUtil.openUrl
 import io.github.muntashirakon.music.views.RetroShapeableImageView
 import com.bumptech.glide.Glide
 
@@ -65,7 +64,7 @@ class ContributorAdapter(
         val contributor = contributors[position]
         holder.bindData(contributor)
         holder.itemView.setOnClickListener {
-            openUrl(it?.context as Activity, contributors[position].link)
+            it?.context?.openUrl(contributors[position].link)
         }
     }
 

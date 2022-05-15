@@ -7,16 +7,16 @@
     android:clickable="true"
     android:focusable="true">
 
-     <fragment
-         android:id="@+id/playerAlbumCoverFragment"
-         android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="parent"
-         tools:layout="@layout/fragment_player_album_cover" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/playerAlbumCoverFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_player_album_cover" />
 
     <View
         android:id="@+id/masked"
@@ -105,7 +105,7 @@
         app:layout_constraintBottom_toTopOf="@id/toolbarContainer"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playbackControlsFragment"
             android:name="io.github.muntashirakon.music.fragments.player.tiny.TinyPlaybackControlsFragment"
             android:layout_width="match_parent"

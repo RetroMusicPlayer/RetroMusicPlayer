@@ -14,19 +14,28 @@
  */
 package io.github.muntashirakon.music.fragments.player.material
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.databinding.FragmentMaterialBinding
+import io.github.muntashirakon.music.extensions.colorControlNormal
+import io.github.muntashirakon.music.extensions.drawAboveSystemBars
+import io.github.muntashirakon.music.extensions.surfaceColor
+import io.github.muntashirakon.music.extensions.whichFragment
 import io.github.muntashirakon.music.fragments.base.AbsPlayerFragment
 import io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment
 import io.github.muntashirakon.music.fragments.player.normal.PlayerFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.util.PreferenceUtil
+import io.github.muntashirakon.music.util.ViewUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_material.*
+import io.github.muntashirakon.music.views.DrawableGradient
 
 /**
  * @author Hemanth S (h4h13).
@@ -34,7 +43,7 @@ import kotlinx.android.synthetic.main.fragment_material.*
 class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
 
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     private var lastColor: Int = 0
@@ -43,6 +52,37 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
         get() = lastColor
 
     private lateinit var playbackControlsFragment: MaterialControlsFragment
+
+    private var _binding: FragmentMaterialBinding? = null
+    private val binding get() = _binding!!
+
+    private var valueAnimator: ValueAnimator? = null
+
+    private fun colorize(i: Int) {
+        if (valueAnimator != null) {
+            valueAnimator?.cancel()
+        }
+
+        valueAnimator = ValueAnimator.ofObject(
+            ArgbEvaluator(),
+            surfaceColor(),
+            i
+        )
+        valueAnimator?.addUpdateListener { animation ->
+            if (isAdded) {
+                val drawable = DrawableGradient(
+                    GradientDrawable.Orientation.TOP_BOTTOM,
+                    intArrayOf(
+                        animation.animatedValue as Int,
+                        surfaceColor()
+                    ), 0
+                )
+                binding.colorGradientBackground.background = drawable
+            }
+        }
+        valueAnimator?.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong())?.start()
+    }
+
 
     override fun onShow() {
         playbackControlsFragment.show()
@@ -57,9 +97,7 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
         return false
     }
 
-    override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
-    }
+    override fun toolbarIconColor() = colorControlNormal()
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         playbackControlsFragment.setColor(color)
@@ -67,10 +105,14 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
         libraryViewModel.updateColor(color.backgroundColor)
 
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            binding.playerToolbar,
+            colorControlNormal(),
             requireActivity()
         )
+
+        if (PreferenceUtil.isAdaptiveColor) {
+            colorize(color.backgroundColor)
+        }
     }
 
     override fun toggleFavorite(song: Song) {
@@ -86,26 +128,27 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentMaterialBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        playerToolbar().drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as MaterialControlsFragment
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
+        binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@MaterialFragment)
             ToolbarContentTintHelper.colorizeToolbar(
                 this,
-                ATHUtil.resolveColor(context, R.attr.colorControlNormal),
+                colorControlNormal(),
                 requireActivity()
             )
         }
@@ -124,5 +167,10 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
         fun newInstance(): PlayerFragment {
             return PlayerFragment()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

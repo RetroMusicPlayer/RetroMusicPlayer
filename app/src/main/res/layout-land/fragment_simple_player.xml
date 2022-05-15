@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playerAlbumCoverFragment"
                     android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:orientation="vertical"
                 android:paddingTop="8dp">
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playbackControlsFragment"
                     android:name="io.github.muntashirakon.music.fragments.player.simple.SimplePlaybackControlsFragment"
                     android:layout_width="match_parent"

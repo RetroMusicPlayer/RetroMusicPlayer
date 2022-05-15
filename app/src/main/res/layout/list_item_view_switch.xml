@@ -76,9 +76,11 @@
         android:id="@android:id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
+        app:showText="false"
         android:clickable="false"
         android:focusable="false"
+        app:track="@drawable/switch_track"
+        android:thumb="@drawable/switch_thumb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

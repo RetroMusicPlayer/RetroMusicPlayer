@@ -14,128 +14,178 @@
  */
 package io.github.muntashirakon.music.fragments.home
 
-import android.app.ActivityOptions
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
-import androidx.lifecycle.Observer
+import androidx.core.view.doOnLayout
+import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.adapter.HomeAdapter
+import io.github.muntashirakon.music.databinding.FragmentHomeBinding
 import io.github.muntashirakon.music.dialogs.CreatePlaylistDialog
 import io.github.muntashirakon.music.dialogs.ImportPlaylistDialog
+import io.github.muntashirakon.music.extensions.accentColor
+import io.github.muntashirakon.music.extensions.drawNextToNavbar
+import io.github.muntashirakon.music.extensions.elevatedAccentColor
+import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
-import io.github.muntashirakon.music.glide.ProfileBannerGlideRequest
-import io.github.muntashirakon.music.glide.UserProfileGlideRequest
-import io.github.muntashirakon.music.util.NavigationUtil
-import io.github.muntashirakon.music.util.PreferenceUtil
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.abs_playlists.*
-import kotlinx.android.synthetic.main.fragment_banner_home.*
-import kotlinx.android.synthetic.main.home_content.*
+import io.github.muntashirakon.music.glide.GlideApp
+import io.github.muntashirakon.music.glide.RetroGlideExtension
+import io.github.muntashirakon.music.helper.MusicPlayerRemote
+import io.github.muntashirakon.music.interfaces.IScrollHelper
+import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.util.PreferenceUtil.userName
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.MaterialSharedAxis
 
 class HomeFragment :
-    AbsMainActivityFragment(if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home) {
+    AbsMainActivityFragment(R.layout.fragment_home), IScrollHelper {
+
+    private var _binding: HomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.setBottomBarVisibility(true)
-        mainActivity.setSupportActionBar(toolbar)
+        val homeBinding = FragmentHomeBinding.bind(view)
+        _binding = HomeBinding(homeBinding)
+        mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
-        setStatusBarColorAuto(view)
-        bannerImage?.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(
-                mainActivity,
-                userImage,
-                getString(R.string.transition_user_image)
-            )
-            NavigationUtil.goToUserInfo(requireActivity(), options)
+        setupListeners()
+        binding.titleWelcome.text = String.format("%s", userName)
+
+        enterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
+        reenterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
+
+        val homeAdapter = HomeAdapter(mainActivity)
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(mainActivity)
+            adapter = homeAdapter
+        }
+        libraryViewModel.getSuggestions().observe(viewLifecycleOwner) {
+            loadSuggestions(it)
+        }
+        libraryViewModel.getHome().observe(viewLifecycleOwner) {
+            homeAdapter.swapData(it)
         }
 
-        lastAdded.setOnClickListener {
+        loadProfile()
+        setupTitle()
+        colorButtons()
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
+        binding.toolbar.drawNextToNavbar()
+        view.doOnLayout {
+            adjustPlaylistButtons()
+        }
+    }
+
+    private fun adjustPlaylistButtons() {
+        val buttons =
+            listOf(binding.history, binding.lastAdded, binding.topPlayed, binding.actionShuffle)
+        buttons.maxOf { it.lineCount }.let { maxLineCount ->
+            buttons.forEach { button ->
+                // Set the highest line count to every button for consistency
+                button.setLines(maxLineCount)
+            }
+        }
+    }
+
+    private fun setupListeners() {
+        binding.bannerImage?.setOnClickListener {
+            findNavController().navigate(
+                R.id.user_info_fragment, null, null, FragmentNavigatorExtras(
+                    binding.userImage to "user_image"
+                )
+            )
+            reenterTransition = null
+        }
+
+        binding.lastAdded.setOnClickListener {
             findNavController().navigate(
                 R.id.detailListFragment,
                 bundleOf(EXTRA_PLAYLIST_TYPE to LAST_ADDED_PLAYLIST)
             )
+            setSharedAxisYTransitions()
         }
 
-        topPlayed.setOnClickListener {
+        binding.topPlayed.setOnClickListener {
             findNavController().navigate(
                 R.id.detailListFragment,
                 bundleOf(EXTRA_PLAYLIST_TYPE to TOP_PLAYED_PLAYLIST)
             )
+            setSharedAxisYTransitions()
         }
 
-        actionShuffle.setOnClickListener {
+        binding.actionShuffle.setOnClickListener {
             libraryViewModel.shuffleSongs()
         }
 
-        history.setOnClickListener {
+        binding.history.setOnClickListener {
             findNavController().navigate(
                 R.id.detailListFragment,
                 bundleOf(EXTRA_PLAYLIST_TYPE to HISTORY_PLAYLIST)
             )
+            setSharedAxisYTransitions()
         }
 
-        userImage.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(
-                mainActivity,
-                userImage,
-                getString(R.string.transition_user_image)
+        binding.userImage.setOnClickListener {
+            findNavController().navigate(
+                R.id.user_info_fragment, null, null, FragmentNavigatorExtras(
+                    binding.userImage to "user_image"
+                )
             )
-            NavigationUtil.goToUserInfo(requireActivity(), options)
         }
-        titleWelcome?.text = String.format("%s", PreferenceUtil.userName)
-
-        val homeAdapter = HomeAdapter(mainActivity)
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(mainActivity)
-            adapter = homeAdapter
+        // Reload suggestions
+        binding.suggestions.refreshButton.setOnClickListener {
+            libraryViewModel.forceReload(
+                ReloadType.Suggestions
+            )
         }
-
-        libraryViewModel.getHome().observe(viewLifecycleOwner, Observer {
-            homeAdapter.swapData(it)
-        })
-
-        loadProfile()
-        setupTitle()
     }
 
     private fun setupTitle() {
-        toolbar.setNavigationOnClickListener {
-            findNavController().navigate(
-                R.id.searchFragment,
-                null,
-                navOptions
-            )
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_search, null, navOptions)
         }
-        appNameText.text = getString(R.string.app_name)
+        binding.appNameText.text = getString(R.string.app_name)
     }
 
     private fun loadProfile() {
-        bannerImage?.let {
-            ProfileBannerGlideRequest.Builder.from(
-                Glide.with(requireContext()),
-                ProfileBannerGlideRequest.getBannerModel()
-            ).build().into(it)
+        binding.bannerImage?.let {
+            GlideApp.with(requireContext())
+                .load(RetroGlideExtension.getBannerModel())
+                .profileBannerOptions(RetroGlideExtension.getBannerModel())
+                .into(it)
         }
-        UserProfileGlideRequest.Builder.from(
-            Glide.with(requireActivity()),
-            UserProfileGlideRequest.getUserModel()
-        ).build().into(userImage)
+        GlideApp.with(requireActivity())
+            .load(RetroGlideExtension.getUserModel())
+            .userProfileOptions(RetroGlideExtension.getUserModel(), requireContext())
+            .into(binding.userImage)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    fun colorButtons() {
+        binding.history.elevatedAccentColor()
+        binding.lastAdded.elevatedAccentColor()
+        binding.topPlayed.elevatedAccentColor()
+        binding.actionShuffle.elevatedAccentColor()
+    }
+
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         menu.removeItem(R.id.action_grid_size)
         menu.removeItem(R.id.action_layout_type)
@@ -143,10 +193,69 @@ class HomeFragment :
         menu.findItem(R.id.action_settings).setShowAsAction(SHOW_AS_ACTION_IF_ROOM)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
-            toolbar,
+            binding.toolbar,
             menu,
-            ATHToolbarActivity.getToolbarBackgroundColor(toolbar)
+            ATHToolbarActivity.getToolbarBackgroundColor(binding.toolbar)
         )
+    }
+
+    override fun scrollToTop() {
+        binding.container.scrollTo(0, 0)
+        binding.appBarLayout.setExpanded(true)
+    }
+
+    fun setSharedAxisXTransitions() {
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).addTarget(CoordinatorLayout::class.java)
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
+    }
+
+    private fun setSharedAxisYTransitions() {
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true).addTarget(CoordinatorLayout::class.java)
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
+    }
+
+    private fun loadSuggestions(songs: List<Song>) {
+        if (songs.isEmpty()) {
+            binding.suggestions.root.isVisible = false
+            return
+        }
+        val images = listOf(
+            binding.suggestions.image1,
+            binding.suggestions.image2,
+            binding.suggestions.image3,
+            binding.suggestions.image4,
+            binding.suggestions.image5,
+            binding.suggestions.image6,
+            binding.suggestions.image7,
+            binding.suggestions.image8
+        )
+        val color = accentColor()
+        binding.suggestions.message.apply {
+            setTextColor(color)
+            setOnClickListener {
+                it.isClickable = false
+                it.postDelayed({ it.isClickable = true }, 500)
+                MusicPlayerRemote.playNext(songs.subList(0, 8))
+                if (!MusicPlayerRemote.isPlaying) {
+                    MusicPlayerRemote.playNextSong()
+                }
+            }
+        }
+        binding.suggestions.card6.setCardBackgroundColor(ColorUtil.withAlpha(color, 0.12f))
+        images.forEachIndexed { index, imageView ->
+            imageView.setOnClickListener {
+                it.isClickable = false
+                it.postDelayed({ it.isClickable = true }, 500)
+                MusicPlayerRemote.playNext(songs[index])
+                if (!MusicPlayerRemote.isPlaying) {
+                    MusicPlayerRemote.playNextSong()
+                }
+            }
+            GlideApp.with(this)
+                .load(RetroGlideExtension.getSongModel(songs[index]))
+                .songCoverOptions(songs[index])
+                .into(imageView)
+        }
     }
 
     companion object {
@@ -159,7 +268,7 @@ class HomeFragment :
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> findNavController().navigate(
                 R.id.settingsActivity,
@@ -175,11 +284,21 @@ class HomeFragment :
                 "ShowCreatePlaylistDialog"
             )
         }
-        return super.onOptionsItemSelected(item)
+        return false
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
+    override fun onPrepareMenu(menu: Menu) {
+        super.onPrepareMenu(menu)
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        libraryViewModel.forceReload(ReloadType.HomeSections)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

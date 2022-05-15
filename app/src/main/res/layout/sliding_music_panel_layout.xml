@@ -6,55 +6,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/mainContentFrame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <View
-        android:id="@+id/dimBackground"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="gone" />
+        app:defaultNavHost="true"
+        android:background="?attr/colorSurface"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:layout="@layout/fragment_home" />
 
     <FrameLayout
         android:id="@+id/slidingPanel"
-        style="@style/Widget.BottomSheet"
+        style="@style/BottomSheetStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
-        app:layout_behavior="io.github.muntashirakon.music.RetroBottomSheetBehavior">
+        app:enableEdgeToEdge="true"
+        app:gestureInsetBottomIgnored="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <FrameLayout
             android:id="@+id/playerFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/miniPlayerFragment"
-            android:name="io.github.muntashirakon.music.fragments.MiniPlayerFragment"
+            android:name="io.github.muntashirakon.music.fragments.other.MiniPlayerFragment"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/mini_player_height"
             tools:layout="@layout/fragment_mini_player" />
 
     </FrameLayout>
 
     <io.github.muntashirakon.music.views.BottomNavigationBarTinted
         android:id="@+id/bottomNavigationView"
+        style="@style/Widget.Material3.BottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?attr/colorSurface"
         android:elevation="0dp"
+        android:minHeight="@dimen/bottom_nav_height"
         app:itemHorizontalTranslationEnabled="false"
-        app:itemIconTint="@drawable/bottom_navigation_item_colors"
-        app:itemTextAppearanceActive="@style/BottomSheetItemTextAppearance"
-        app:itemTextAppearanceInactive="@style/BottomSheetItemTextAppearance"
-        app:itemTextColor="@drawable/bottom_navigation_item_colors"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_navigation_main"
-        tools:layout_height="56dp" />
+        app:itemPaddingBottom="8dp"
+        app:itemPaddingTop="8dp"
+        app:menu="@menu/bottom_navigation_main" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

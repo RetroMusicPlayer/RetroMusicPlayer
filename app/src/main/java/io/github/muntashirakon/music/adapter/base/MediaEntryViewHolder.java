@@ -16,18 +16,18 @@ package io.github.muntashirakon.music.adapter.base;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.recyclerview.widget.RecyclerView;
-
-import io.github.muntashirakon.music.R;
 
 import com.google.android.material.card.MaterialCardView;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableSwipeableItemViewHolder;
+
+import io.github.muntashirakon.music.R;
 
 public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHolder
         implements View.OnLongClickListener, View.OnClickListener {
@@ -42,13 +42,10 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
     public ImageView image;
 
     @Nullable
-    public ImageView artistImage;
-
-    @Nullable
-    public ImageView playerImage;
-
-    @Nullable
     public MaterialCardView imageContainerCard;
+
+    @Nullable
+    public FrameLayout imageContainer;
 
     @Nullable
     public TextView imageText;
@@ -64,10 +61,6 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
 
     @Nullable
     public View paletteColorContainer;
-
-
-    @Nullable
-    public RecyclerView recyclerView;
 
     @Nullable
     public TextView text;
@@ -88,18 +81,16 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
         text2 = itemView.findViewById(R.id.text2);
 
         image = itemView.findViewById(R.id.image);
-        artistImage = itemView.findViewById(R.id.artistImage);
-        playerImage = itemView.findViewById(R.id.player_image);
         time = itemView.findViewById(R.id.time);
 
         imageText = itemView.findViewById(R.id.imageText);
         imageTextContainer = itemView.findViewById(R.id.imageTextContainer);
         imageContainerCard = itemView.findViewById(R.id.imageContainerCard);
+        imageContainer = itemView.findViewById(R.id.imageContainer);
 
         menu = itemView.findViewById(R.id.menu);
         dragView = itemView.findViewById(R.id.drag_view);
         paletteColorContainer = itemView.findViewById(R.id.paletteColorContainer);
-        recyclerView = itemView.findViewById(R.id.recycler_view);
         mask = itemView.findViewById(R.id.mask);
         dummyContainer = itemView.findViewById(R.id.dummy_view);
 

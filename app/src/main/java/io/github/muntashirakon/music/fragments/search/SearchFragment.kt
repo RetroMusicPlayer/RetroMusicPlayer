@@ -14,77 +14,133 @@
  */
 package io.github.muntashirakon.music.fragments.search
 
+import android.app.Activity.RESULT_OK
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View
+import android.view.*
 import android.view.inputmethod.InputMethodManager
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.getSystemService
+import androidx.core.view.*
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
+import code.name.monkey.appthemehelper.ThemeStore
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.SearchAdapter
-import io.github.muntashirakon.music.extensions.*
+import io.github.muntashirakon.music.databinding.FragmentSearchBinding
+import io.github.muntashirakon.music.extensions.accentColor
+import io.github.muntashirakon.music.extensions.dipToPix
+import io.github.muntashirakon.music.extensions.focusAndShowKeyboard
+import io.github.muntashirakon.music.extensions.showToast
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
+import io.github.muntashirakon.music.util.PreferenceUtil
+import io.github.muntashirakon.music.views.addAlpha
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.transition.MaterialArcMotion
-import com.google.android.material.transition.MaterialContainerTransform
-import kotlinx.android.synthetic.main.fragment_search.*
+import com.google.android.material.transition.MaterialFadeThrough
+import kotlinx.coroutines.Job
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import java.util.*
-import kotlin.collections.ArrayList
 
-class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWatcher {
+
+class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
+    ChipGroup.OnCheckedStateChangeListener {
     companion object {
         const val QUERY = "query"
-        const val REQ_CODE_SPEECH_INPUT = 9001
     }
+
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var searchAdapter: SearchAdapter
     private var query: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.fragment_container
-            duration = 300L
-            scrimColor = Color.TRANSPARENT
-            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
-            setPathMotion(MaterialArcMotion())
-        }
-    }
+    private var job: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.setBottomBarVisibility(false)
-        mainActivity.setSupportActionBar(toolbar)
+        enterTransition = MaterialFadeThrough().addTarget(view)
+        reenterTransition = MaterialFadeThrough().addTarget(view)
+        _binding = FragmentSearchBinding.bind(view)
+        mainActivity.setSupportActionBar(binding.toolbar)
         libraryViewModel.clearSearchResult()
         setupRecyclerView()
 
-        voiceSearch.setOnClickListener { startMicSearch() }
-        clearText.setOnClickListener { searchView.clearText() }
-        searchView.apply {
-            addTextChangedListener(this@SearchFragment)
+        binding.voiceSearch.setOnClickListener { startMicSearch() }
+        binding.clearText.setOnClickListener {
+            binding.searchView.clearText()
+            searchAdapter.swapDataSet(listOf())
+        }
+        binding.searchView.apply {
+            doAfterTextChanged {
+                if (!it.isNullOrEmpty())
+                    search(it.toString())
+                else {
+                    TransitionManager.beginDelayedTransition(binding.appBarLayout)
+                    binding.voiceSearch.isVisible = true
+                    binding.clearText.isGone = true
+                }
+            }
             focusAndShowKeyboard()
         }
-        keyboardPopup.apply {
+        binding.keyboardPopup.apply {
             accentColor()
             setOnClickListener {
-                searchView.focusAndShowKeyboard()
+                binding.searchView.focusAndShowKeyboard()
             }
         }
         if (savedInstanceState != null) {
             query = savedInstanceState.getString(QUERY)
         }
-        libraryViewModel.getSearchResult().observe(viewLifecycleOwner, {
+        libraryViewModel.getSearchResult().observe(viewLifecycleOwner) {
             showData(it)
-        })
+        }
+        setupChips()
+        postponeEnterTransition()
+        view.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner) {
+            binding.keyboardPopup.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = it
+            }
+        }
+        KeyboardVisibilityEvent.setEventListener(requireActivity(), viewLifecycleOwner) {
+            if (it) {
+                binding.keyboardPopup.isGone = true
+            } else {
+                binding.keyboardPopup.show()
+            }
+        }
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
+    }
+
+    private fun setupChips() {
+        val chips = binding.searchFilterGroup.children.map { it as Chip }
+        if (!PreferenceUtil.materialYou) {
+            val states = arrayOf(
+                intArrayOf(-android.R.attr.state_checked),
+                intArrayOf(android.R.attr.state_checked)
+            )
+
+            val colors = intArrayOf(
+                android.R.color.transparent,
+                ThemeStore.accentColor(requireContext()).addAlpha(0.5F)
+            )
+
+            chips.forEach {
+                it.chipBackgroundColor = ColorStateList(states, colors)
+            }
+        }
+        binding.searchFilterGroup.setOnCheckedStateChangeListener(this)
     }
 
     private fun showData(data: List<Any>) {
@@ -100,43 +156,47 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         searchAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
-                empty.isVisible = searchAdapter.itemCount < 1
+                binding.empty.isVisible = searchAdapter.itemCount < 1
                 val height = dipToPix(52f)
-                recyclerView.setPadding(0, 0, 0, height.toInt())
+                binding.recyclerView.updatePadding(bottom = height.toInt())
             }
         })
-        recyclerView.apply {
+        binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = searchAdapter
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     if (dy > 0) {
-                        keyboardPopup.shrink()
+                        binding.keyboardPopup.shrink()
                     } else if (dy < 0) {
-                        keyboardPopup.extend()
+                        binding.keyboardPopup.extend()
                     }
                 }
             })
         }
     }
 
-    override fun afterTextChanged(newText: Editable?) {
-        search(newText.toString())
-    }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-    }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-    }
-
     private fun search(query: String) {
         this.query = query
-        TransitionManager.beginDelayedTransition(appBarLayout)
-        voiceSearch.isGone = query.isNotEmpty()
-        clearText.isVisible = query.isNotEmpty()
-        libraryViewModel.search(query)
+        TransitionManager.beginDelayedTransition(binding.appBarLayout)
+        binding.voiceSearch.isGone = query.isNotEmpty()
+        binding.clearText.isVisible = query.isNotEmpty()
+        val filter = getFilter()
+        job?.cancel()
+        job = libraryViewModel.search(query, filter)
+    }
+
+    private fun getFilter(): Filter {
+        return when (binding.searchFilterGroup.checkedChipId) {
+            R.id.chip_audio -> Filter.SONGS
+            R.id.chip_artists -> Filter.ARTISTS
+            R.id.chip_albums -> Filter.ALBUMS
+            R.id.chip_album_artists -> Filter.ALBUM_ARTISTS
+            R.id.chip_genres -> Filter.GENRES
+            R.id.chip_playlists -> Filter.PLAYLISTS
+            else -> Filter.NO_FILTER
+        }
     }
 
     private fun startMicSearch() {
@@ -148,28 +208,58 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search), TextWa
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt))
         try {
-            startActivityForResult(
-                intent,
-                REQ_CODE_SPEECH_INPUT
-            )
+            speechInputLauncher.launch(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             showToast(getString(R.string.speech_not_supported))
         }
     }
 
+    private val speechInputLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val spokenText: String? =
+                    result?.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
+                binding.searchView.setText(spokenText)
+            }
+        }
+
     override fun onDestroyView() {
         hideKeyboard(view)
         super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard(view)
     }
 
     private fun hideKeyboard(view: View?) {
         if (view != null) {
-            val imm: InputMethodManager =
-                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
+            val imm =
+                requireContext().getSystemService<InputMethodManager>()
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
+
+    override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
+        search(binding.searchView.text.toString())
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {}
+
+    override fun onMenuItemSelected(menuItem: MenuItem) = false
+}
+
+enum class Filter {
+    SONGS,
+    ARTISTS,
+    ALBUMS,
+    ALBUM_ARTISTS,
+    GENRES,
+    PLAYLISTS,
+    NO_FILTER
 }
 
 fun TextInputEditText.clearText() {

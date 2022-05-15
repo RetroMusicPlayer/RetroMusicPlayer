@@ -17,14 +17,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?colorSurface"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface" />
 
     <FrameLayout
         android:id="@+id/statusBarContainer"
@@ -47,32 +43,27 @@
         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
         tools:layout_editor_absoluteY="24dp" />
 
-    <LinearLayout
-        android:id="@+id/titleContainer"
-        android:layout_width="0dp"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerToolbar">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLines="2"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textAppearance="@style/TextViewHeadline5"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textStyle="bold"
-            tools:text="@tools:sample/full_names" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/playerToolbar"
+        tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:maxLines="2"
@@ -82,26 +73,48 @@
         app:layout_constraintBottom_toTopOf="@+id/volumeSeekBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="@tools:sample/lorem/random" />
 
-    <io.github.muntashirakon.music.views.SeekArc
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/volumeSeekBar"
+        app:layout_constraintEnd_toEndOf="@id/volumeSeekBar"
+        app:layout_constraintStart_toStartOf="@id/volumeSeekBar"
+        app:layout_constraintTop_toTopOf="@id/volumeSeekBar">
+
+        <io.github.muntashirakon.music.views.RetroShapeableImageView
+            android:id="@+id/album_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[6]" />
+
+        <io.github.muntashirakon.music.views.RetroShapeableImageView
+            android:id="@+id/album_cover_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:scaleType="centerCrop" />
+    </FrameLayout>
+
+    <me.tankery.lib.circularseekbar.CircularSeekBar
         android:id="@+id/volumeSeekBar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:padding="28dp"
-        app:arcColor="?android:attr/colorControlHighlight"
-        app:arcWidth="4dp"
+        app:cs_circle_stroke_width="4dp"
+        app:cs_end_angle="60"
+        app:cs_move_outside_circle="true"
+        app:cs_pointer_color="@color/md_grey_200"
+        app:cs_pointer_halo_width="0dp"
+        app:cs_pointer_stroke_width="20dp"
+        app:cs_start_angle="120"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:progressWidth="4dp"
-        app:rotation="180"
-        app:roundEdges="true"
-        app:startAngle="30"
-        app:sweepAngle="300"
-        app:touchInside="false"
         tools:progress="50" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -112,47 +125,55 @@
         app:layout_constraintBottom_toBottomOf="@id/volumeSeekBar"
         app:layout_constraintEnd_toEndOf="@id/volumeSeekBar"
         app:layout_constraintStart_toStartOf="@id/volumeSeekBar"
-        app:layout_constraintTop_toTopOf="@id/volumeSeekBar" />
+        app:layout_constraintTop_toTopOf="@id/volumeSeekBar"
+        android:src="@drawable/ic_pause"
+        tools:tint="@color/md_black_1000" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageButton
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:background="?attr/roundSelector"
         android:padding="16dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
         app:layout_constraintStart_toEndOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
         app:srcCompat="@drawable/ic_skip_next_round_white_32dp"
-        app:tint="@color/md_green_500" />
+        tools:tint="@color/md_white_1000" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageButton
         android:id="@+id/previousButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:background="?attr/roundSelector"
         android:padding="16dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
         app:layout_constraintEnd_toStartOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
         app:srcCompat="@drawable/ic_skip_previous_round_white_32dp"
-        app:tint="@color/md_green_500" />
+        tools:tint="@color/md_white_1000" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/volume"
         android:textAppearance="@style/TextViewSubtitle2"
         android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintBottom_toBottomOf="@+id/volumeSeekBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/volumeSeekBar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/volumeSeekBar" />
 
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/seekbar_padding"
         app:layout_constraintBottom_toTopOf="@+id/songInfo"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"

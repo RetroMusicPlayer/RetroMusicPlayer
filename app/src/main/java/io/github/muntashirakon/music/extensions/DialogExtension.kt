@@ -15,15 +15,23 @@
 package io.github.muntashirakon.music.extensions
 
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import io.github.muntashirakon.music.BuildConfig
 import io.github.muntashirakon.music.R
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-fun DialogFragment.materialDialog(title: Int): MaterialAlertDialogBuilder {
-    return MaterialAlertDialogBuilder(
-        requireContext(),
-        R.style.MaterialAlertDialogTheme
-    ).setTitle(title)
+fun Fragment.materialDialog(title: Int): MaterialAlertDialogBuilder {
+    return if (BuildConfig.DEBUG) {
+        MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.MaterialAlertDialogTheme
+        )
+    } else {
+        MaterialAlertDialogBuilder(
+            requireContext()
+        )
+    }.setTitle(title)
 }
 
 fun AlertDialog.colorButtons(): AlertDialog {
@@ -33,4 +41,9 @@ fun AlertDialog.colorButtons(): AlertDialog {
         getButton(AlertDialog.BUTTON_NEUTRAL).accentTextColor()
     }
     return this
+}
+
+fun Fragment.materialDialog(): MaterialDialog {
+    return MaterialDialog(requireContext())
+        .cornerRadius(res = R.dimen.m3_dialog_corner_size)
 }

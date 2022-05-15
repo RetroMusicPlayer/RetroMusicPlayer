@@ -5,18 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:focusable="true">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface" />
+    android:focusable="true"
+    android:background="?attr/colorSurface">
 
     <View
         android:id="@+id/colorGradientBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:id="@+id/snowfall_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:snowflakeSpeedMax="6"
+        app:snowflakeSpeedMin="2"
+        app:snowflakesNum="75" />
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
@@ -41,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playerAlbumCoverFragment"
                     android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
@@ -50,6 +53,7 @@
             </io.github.muntashirakon.music.views.HeightFitSquareLayout>
 
             <LinearLayout
+                android:id="@+id/controlsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -66,7 +70,7 @@
                         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
                 </FrameLayout>
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playbackControlsFragment"
                     android:name="io.github.muntashirakon.music.fragments.player.normal.PlayerPlaybackControlsFragment"
                     android:layout_width="match_parent"

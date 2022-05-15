@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="16dp">
+
+    <TextView
+        android:id="@+id/playback_speed_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/playback_speed"
+        android:textAppearance="@style/TextViewBody1" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/playback_speed_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:stepSize="0.05"
+        android:valueFrom="0.25"
+        android:valueTo="4.00"
+        app:labelBehavior="gone"
+        app:tickVisible="false" />
+
+    <TextView
+        android:id="@+id/speed_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textAppearance="@style/TextViewBody1"
+        tools:text="1.00" />
+
+    <TextView
+        android:id="@+id/playback_pitch_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="3"
+        android:text="@string/playback_pitch"
+        android:textAppearance="@style/TextViewBody1" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/playback_pitch_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:stepSize="0.05"
+        android:valueFrom="0.50"
+        android:valueTo="2.00"
+        app:labelBehavior="gone"
+        app:tickVisible="false" />
+
+    <TextView
+        android:id="@+id/pitch_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textAppearance="@style/TextViewBody1"
+        tools:text="1.00" />
+</LinearLayout>

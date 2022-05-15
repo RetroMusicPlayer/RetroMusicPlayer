@@ -25,14 +25,18 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+
 import androidx.annotation.NonNull;
-import io.github.muntashirakon.music.util.PreferenceUtil;
+
 import java.lang.ref.WeakReference;
+
+import io.github.muntashirakon.music.util.PreferenceUtil;
 
 class PlaybackHandler extends Handler {
 
   @NonNull private final WeakReference<MusicService> mService;
   private float currentDuckVolume = 1.0f;
+
 
   PlaybackHandler(final MusicService service, @NonNull final Looper looper) {
     super(looper);
@@ -77,7 +81,7 @@ class PlaybackHandler extends Handler {
 
       case TRACK_WENT_TO_NEXT:
         if (service.pendingQuit
-            || service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
+                || service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
           service.pause();
           service.seek(0);
           if (service.pendingQuit) {
@@ -95,7 +99,7 @@ class PlaybackHandler extends Handler {
       case TRACK_ENDED:
         // if there is a timer finished, don't continue
         if (service.pendingQuit
-            || service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
+                || service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
           service.notifyChange(PLAY_STATE_CHANGED);
           service.seek(0);
           if (service.pendingQuit) {
@@ -143,7 +147,10 @@ class PlaybackHandler extends Handler {
 
           case AudioManager.AUDIOFOCUS_LOSS:
             // Lost focus for an unbounded amount of time: stop playback and release media playback
-            service.pause();
+            boolean isAudioFocusEnabled = PreferenceUtil.INSTANCE.isAudioFocusEnabled();
+            if (!isAudioFocusEnabled) {
+              service.forcePause();
+            }
             break;
 
           case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
@@ -151,7 +158,7 @@ class PlaybackHandler extends Handler {
             // playback. We don't release the media playback because playback
             // is likely to resume
             boolean wasPlaying = service.isPlaying();
-            service.pause();
+            service.forcePause();
             service.setPausedByTransientLossOfFocus(wasPlaying);
             break;
 

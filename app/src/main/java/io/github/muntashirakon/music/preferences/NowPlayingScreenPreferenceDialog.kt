@@ -21,8 +21,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.fragment.app.DialogFragment
@@ -31,11 +29,9 @@ import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import com.bumptech.glide.Glide
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.extensions.colorButtons
-import io.github.muntashirakon.music.extensions.colorControlNormal
-import io.github.muntashirakon.music.extensions.hide
-import io.github.muntashirakon.music.extensions.materialDialog
-import io.github.muntashirakon.music.fragments.NowPlayingScreen.values
+import io.github.muntashirakon.music.databinding.PreferenceNowPlayingScreenItemBinding
+import io.github.muntashirakon.music.extensions.*
+import io.github.muntashirakon.music.fragments.NowPlayingScreen.*
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.ViewUtil
 
@@ -75,7 +71,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = LayoutInflater.from(requireContext())
+        val view = layoutInflater
             .inflate(R.layout.preference_dialog_now_playing_screen, null)
         val viewPager = view.findViewById<ViewPager>(R.id.now_playing_screen_view_pager)
             ?: throw  IllegalStateException("Dialog view must contain a ViewPager with id 'now_playing_screen_view_pager'")
@@ -108,20 +104,10 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
         val nowPlayingScreen = values()[position]
 
         val inflater = LayoutInflater.from(context)
-        val layout = inflater.inflate(
-            R.layout.preference_now_playing_screen_item,
-            collection,
-            false
-        ) as ViewGroup
-        collection.addView(layout)
-
-        val image = layout.findViewById<ImageView>(R.id.image)
-        val title = layout.findViewById<TextView>(R.id.title)
-        val proText = layout.findViewById<TextView>(R.id.proText)
-        Glide.with(context).load(nowPlayingScreen.drawableResId).into(image)
-        title.setText(nowPlayingScreen.titleRes)
-        proText.hide()
-        return layout
+        val binding = PreferenceNowPlayingScreenItemBinding.inflate(inflater, collection, true)
+        Glide.with(context).load(nowPlayingScreen.drawableResId).into(binding.image)
+        binding.title.setText(nowPlayingScreen.titleRes)
+        return binding.root
     }
 
     override fun destroyItem(
@@ -140,7 +126,7 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
         return view === instance
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return context.getString(values()[position].titleRes)
     }
 }

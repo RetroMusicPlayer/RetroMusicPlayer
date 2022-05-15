@@ -14,48 +14,55 @@
  */
 package io.github.muntashirakon.music.adapter.artist
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
 import io.github.muntashirakon.music.extensions.hide
-import io.github.muntashirakon.music.glide.ArtistGlideRequest
+import io.github.muntashirakon.music.glide.GlideApp
+import io.github.muntashirakon.music.glide.RetroGlideExtension
 import io.github.muntashirakon.music.glide.RetroMusicColoredTarget
 import io.github.muntashirakon.music.helper.menu.SongsMenuHelper
+import io.github.muntashirakon.music.interfaces.IAlbumArtistClickListener
 import io.github.muntashirakon.music.interfaces.IArtistClickListener
 import io.github.muntashirakon.music.interfaces.ICabHolder
 import io.github.muntashirakon.music.model.Artist
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
+import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
-import java.util.*
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class ArtistAdapter(
-    val activity: FragmentActivity,
+    override val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
     val ICabHolder: ICabHolder?,
-    val IArtistClickListener: IArtistClickListener
+    val IArtistClickListener: IArtistClickListener,
+    val IAlbumArtistClickListener: IAlbumArtistClickListener? = null
 ) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(
     activity, ICabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
+
+    var albumArtistsOnly = false
 
     init {
         this.setHasStableIds(true)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun swapDataSet(dataSet: List<Artist>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
+        albumArtistsOnly = PreferenceUtil.albumArtistsOnly
     }
 
     override fun getItemId(position: Int): Long {
@@ -82,6 +89,13 @@ class ArtistAdapter(
         holder.itemView.isActivated = isChecked
         holder.title?.text = artist.name
         holder.text?.hide()
+        val transitionName =
+            if (albumArtistsOnly) artist.name else artist.id.toString()
+        if (holder.imageContainer != null) {
+            holder.imageContainer?.transitionName = transitionName
+        } else {
+            holder.image?.transitionName = transitionName
+        }
         loadArtistImage(artist, holder)
     }
 
@@ -98,9 +112,11 @@ class ArtistAdapter(
         if (holder.image == null) {
             return
         }
-        ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
-            .generatePalette(activity)
-            .build()
+        GlideApp.with(activity)
+            .asBitmapPalette()
+            .load(RetroGlideExtension.getArtistModel(artist))
+            .artistImageOptions(artist)
+            .transition(RetroGlideExtension.getDefaultTransition())
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
@@ -112,12 +128,12 @@ class ArtistAdapter(
         return dataSet.size
     }
 
-    override fun getIdentifier(position: Int): Artist? {
+    override fun getIdentifier(position: Int): Artist {
         return dataSet[position]
     }
 
-    override fun getName(artist: Artist): String {
-        return artist.name
+    override fun getName(model: Artist): String {
+        return model.name
     }
 
     override fun onMultipleItemAction(
@@ -146,7 +162,7 @@ class ArtistAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            menu?.visibility = View.GONE
+            menu?.isVisible = false
         }
 
         override fun onClick(v: View?) {
@@ -154,16 +170,19 @@ class ArtistAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
+                val artist = dataSet[layoutPosition]
                 image?.let {
-                    ViewCompat.setTransitionName(it, "artist")
-                    IArtistClickListener.onArtist(dataSet[layoutPosition].id, it)
+                    if (albumArtistsOnly && IAlbumArtistClickListener != null) {
+                        IAlbumArtistClickListener.onAlbumArtist(artist.name, imageContainer ?: it)
+                    } else {
+                        IArtistClickListener.onArtist(artist.id, imageContainer ?: it)
+                    }
                 }
             }
         }
 
         override fun onLongClick(v: View?): Boolean {
-            toggleChecked(layoutPosition)
-            return super.onLongClick(v)
+            return toggleChecked(layoutPosition)
         }
     }
 }

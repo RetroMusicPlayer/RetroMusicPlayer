@@ -1,14 +1,13 @@
 package io.github.muntashirakon.music.util
 
 import android.os.Environment
-import java.io.File
 
 object FilePathUtil {
     fun blacklistFilePaths(): List<String> {
-        return listOf<File>(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS),
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES),
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS)
+        return listOf(
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS),
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES),
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS)
         ).map {
             FileUtil.safeGetCanonicalPath(it)
         }

@@ -15,6 +15,7 @@
 package io.github.muntashirakon.music.providers;
 
 import static io.github.muntashirakon.music.service.MusicService.MEDIA_STORE_CHANGED;
+import static io.github.muntashirakon.music.util.FileUtilsKt.getExternalStoragePublicDirectory;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -23,17 +24,20 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+
 import androidx.annotation.NonNull;
-import io.github.muntashirakon.music.util.FileUtil;
-import io.github.muntashirakon.music.util.PreferenceUtil;
+
 import java.io.File;
 import java.util.ArrayList;
+
+import io.github.muntashirakon.music.util.FileUtil;
+import io.github.muntashirakon.music.util.PreferenceUtil;
 
 public class BlacklistStore extends SQLiteOpenHelper {
   public static final String DATABASE_NAME = "blacklist.db";
   private static final int VERSION = 2;
   private static BlacklistStore sInstance = null;
-  private Context context;
+  private final Context context;
 
   public BlacklistStore(final Context context) {
     super(context, DATABASE_NAME, null, VERSION);
@@ -47,11 +51,11 @@ public class BlacklistStore extends SQLiteOpenHelper {
       if (!PreferenceUtil.INSTANCE.isInitializedBlacklist()) {
         // blacklisted by default
         sInstance.addPathImpl(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS));
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS));
         sInstance.addPathImpl(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS));
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS));
         sInstance.addPathImpl(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES));
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES));
 
         PreferenceUtil.INSTANCE.setInitializedBlacklist(true);
       }

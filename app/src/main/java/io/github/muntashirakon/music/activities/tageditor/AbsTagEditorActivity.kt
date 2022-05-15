@@ -21,27 +21,37 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
 import android.view.animation.OvershootInterpolator
+import android.widget.ImageView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
+import androidx.viewbinding.ViewBinding
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.R.drawable
 import io.github.muntashirakon.music.activities.base.AbsBaseActivity
 import io.github.muntashirakon.music.activities.saf.SAFGuideActivity
 import io.github.muntashirakon.music.extensions.accentColor
+import io.github.muntashirakon.music.extensions.colorButtons
+import io.github.muntashirakon.music.extensions.hideSoftKeyboard
+import io.github.muntashirakon.music.extensions.setTaskDescriptionColorAuto
 import io.github.muntashirakon.music.model.ArtworkInfo
-import io.github.muntashirakon.music.model.LoadingInfo
+import io.github.muntashirakon.music.model.AudioTagInfo
 import io.github.muntashirakon.music.repository.Repository
-import io.github.muntashirakon.music.util.RetroUtil
 import io.github.muntashirakon.music.util.SAFUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.activity_album_tag_editor.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
@@ -49,20 +59,27 @@ import org.koin.android.ext.android.inject
 import java.io.File
 import java.util.*
 
-abstract class AbsTagEditorActivity : AbsBaseActivity() {
+abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
+    abstract val editorImage: ImageView
     val repository by inject<Repository>()
 
     lateinit var saveFab: MaterialButton
     protected var id: Long = 0
         private set
     private var paletteColorPrimary: Int = 0
-    private var isInNoImageMode: Boolean = false
     private var songPaths: List<String>? = null
     private var savedSongPaths: List<String>? = null
     private val currentSongPath: String? = null
     private var savedTags: Map<FieldKey, String>? = null
     private var savedArtworkInfo: ArtworkInfo? = null
-    protected abstract val contentViewLayout: Int
+    private var _binding: VB? = null
+    protected val binding: VB get() = _binding!!
+    private var cacheFiles = listOf<File>()
+
+    abstract val bindingInflater: (LayoutInflater) -> VB
+
+    private lateinit var launcher: ActivityResultLauncher<IntentSenderRequest>
+
     protected abstract fun loadImageFromFile(selectedFile: Uri?)
 
     protected val show: AlertDialog
@@ -76,7 +93,9 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
                         2 -> deleteImage()
                     }
                 }
+                .setNegativeButton(R.string.action_cancel, null)
                 .show()
+                .colorButtons()
 
     internal val albumArtist: String?
         get() {
@@ -158,6 +177,15 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
             }
         }
 
+    protected val discNumber: String?
+        get() {
+            return try {
+                getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.DISC_NO)
+            } catch (ignored: Exception) {
+                null
+            }
+        }
+
     protected val lyrics: String?
         get() {
             return try {
@@ -187,9 +215,8 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(contentViewLayout)
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        _binding = bindingInflater.invoke(layoutInflater)
+        setContentView(binding.root)
         setTaskDescriptionColorAuto()
 
         saveFab = findViewById(R.id.saveTags)
@@ -201,6 +228,11 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
             finish()
         }
         setUpViews()
+        launcher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                writeToFiles(getSongUris(), cacheFiles)
+            }
+        }
     }
 
     private fun setUpViews() {
@@ -217,7 +249,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
             getString(R.string.web_search),
             getString(R.string.remove_cover)
         )
-        editorImage?.setOnClickListener { show }
+        editorImage.setOnClickListener { show }
     }
 
     private fun startImagePicker() {
@@ -259,6 +291,8 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     protected abstract fun getSongPaths(): List<String>
 
+    protected abstract fun getSongUris(): List<Uri>
+
     protected fun searchWebFor(vararg keys: String) {
         val stringBuilder = StringBuilder()
         for (key in keys) {
@@ -280,20 +314,6 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    protected fun setNoImageMode() {
-        isInNoImageMode = true
-        imageContainer?.visibility = View.GONE
-        editorImage?.visibility = View.GONE
-        editorImage?.isEnabled = false
-
-        setColors(
-            intent.getIntExtra(
-                EXTRA_PALETTE,
-                ATHUtil.resolveColor(this, R.attr.colorPrimary)
-            )
-        )
     }
 
     protected fun dataChanged() {
@@ -329,27 +349,57 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         fieldKeyValueMap: Map<FieldKey, String>,
         artworkInfo: ArtworkInfo?
     ) {
-        RetroUtil.hideSoftKeyboard(this)
+        hideSoftKeyboard()
 
         hideFab()
         println(fieldKeyValueMap)
-        WriteTagsAsyncTask(this).execute(
-            LoadingInfo(
-                songPaths,
-                fieldKeyValueMap,
-                artworkInfo
-            )
-        )
+        GlobalScope.launch {
+            if (VersionUtils.hasR()) {
+                cacheFiles = TagWriter.writeTagsToFilesR(
+                    this@AbsTagEditorActivity, AudioTagInfo(
+                        songPaths,
+                        fieldKeyValueMap,
+                        artworkInfo
+                    )
+                )
+                val pendingIntent = MediaStore.createWriteRequest(contentResolver, getSongUris())
+
+                launcher.launch(IntentSenderRequest.Builder(pendingIntent).build())
+            } else {
+                TagWriter.writeTagsToFiles(
+                    this@AbsTagEditorActivity, AudioTagInfo(
+                        songPaths,
+                        fieldKeyValueMap,
+                        artworkInfo
+                    )
+                )
+            }
+        }
     }
 
     private fun writeTags(paths: List<String>?) {
-        WriteTagsAsyncTask(this).execute(
-            LoadingInfo(
-                paths,
-                savedTags,
-                savedArtworkInfo
-            )
-        )
+        GlobalScope.launch {
+            if (VersionUtils.hasR()) {
+                cacheFiles = TagWriter.writeTagsToFilesR(
+                    this@AbsTagEditorActivity, AudioTagInfo(
+                        paths,
+                        savedTags,
+                        savedArtworkInfo
+                    )
+                )
+                val pendingIntent = MediaStore.createWriteRequest(contentResolver, getSongUris())
+
+                launcher.launch(IntentSenderRequest.Builder(pendingIntent).build())
+            } else {
+                TagWriter.writeTagsToFiles(
+                    this@AbsTagEditorActivity, AudioTagInfo(
+                        paths,
+                        savedTags,
+                        savedArtworkInfo
+                    )
+                )
+            }
+        }
     }
 
 
@@ -388,9 +438,30 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         }
     }
 
+    private fun writeToFiles(songUris: List<Uri>, cacheFiles: List<File>) {
+        if (cacheFiles.size == songUris.size) {
+            for (i in cacheFiles.indices) {
+                contentResolver.openOutputStream(songUris[i])?.use { output ->
+                    cacheFiles[i].inputStream().use { input ->
+                        input.copyTo(output)
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            TagWriter.scan(this@AbsTagEditorActivity, getSongPaths())
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Delete Cache Files
+        cacheFiles.forEach { file ->
+            file.delete()
+        }
+    }
 
     companion object {
-
         const val EXTRA_ID = "extra_id"
         const val EXTRA_PALETTE = "extra_palette"
         private val TAG = AbsTagEditorActivity::class.java.simpleName

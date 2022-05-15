@@ -22,33 +22,34 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.transition.Slide
+import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.Toast
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
+import androidx.core.widget.doAfterTextChanged
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.extensions.appHandleColor
-import io.github.muntashirakon.music.glide.palette.BitmapPaletteTranscoder
+import io.github.muntashirakon.music.databinding.ActivityAlbumTagEditorBinding
+import io.github.muntashirakon.music.extensions.*
+import io.github.muntashirakon.music.glide.GlideApp
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
 import io.github.muntashirakon.music.model.ArtworkInfo
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.ImageUtil
+import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.RetroColorUtil.generatePalette
 import io.github.muntashirakon.music.util.RetroColorUtil.getColor
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.animation.GlideAnimation
-import com.bumptech.glide.request.target.SimpleTarget
-import java.util.*
-import kotlinx.android.synthetic.main.activity_album_tag_editor.*
+import com.bumptech.glide.request.target.ImageViewTarget
+import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.shape.MaterialShapeDrawable
 import org.jaudiotagger.tag.FieldKey
+import java.util.*
 
-class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
+class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBinding>() {
 
-    override val contentViewLayout: Int
-        get() = R.layout.activity_album_tag_editor
+    override val bindingInflater: (LayoutInflater) -> ActivityAlbumTagEditorBinding =
+        ActivityAlbumTagEditorBinding::inflate
 
     private fun windowEnterTransition() {
         val slide = Slide()
@@ -60,54 +61,19 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         window.enterTransition = slide
     }
 
-    override fun loadImageFromFile(selectedFile: Uri?) {
-
-        Glide.with(this@AlbumTagEditorActivity).load(selectedFile).asBitmap()
-            .transcode(BitmapPaletteTranscoder(this), BitmapPaletteWrapper::class.java)
-            .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
-            .into(object : SimpleTarget<BitmapPaletteWrapper>() {
-                override fun onResourceReady(
-                    resource: BitmapPaletteWrapper?,
-                    glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
-                ) {
-                    getColor(resource?.palette, Color.TRANSPARENT)
-                    albumArtBitmap = resource?.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
-                    setImageBitmap(
-                        albumArtBitmap,
-                        getColor(
-                            resource?.palette,
-                            ATHUtil.resolveColor(
-                                this@AlbumTagEditorActivity,
-                                R.attr.defaultFooterColor
-                            )
-                        )
-                    )
-                    deleteAlbumArt = false
-                    dataChanged()
-                    setResult(Activity.RESULT_OK)
-                }
-
-                override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                    super.onLoadFailed(e, errorDrawable)
-                    Toast.makeText(this@AlbumTagEditorActivity, e.toString(), Toast.LENGTH_LONG)
-                        .show()
-                }
-            })
-    }
-
     private var albumArtBitmap: Bitmap? = null
     private var deleteAlbumArt: Boolean = false
 
     private fun setupToolbar() {
-        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
+        binding.appBarLayout?.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         window.sharedElementsUseOverlay = true
-        imageContainer?.transitionName = getString(R.string.transition_album_art)
+        binding.imageContainer.transitionName = getString(R.string.transition_album_art)
         windowEnterTransition()
         setUpViews()
         setupToolbar()
@@ -116,22 +82,23 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     private fun setUpViews() {
         fillViewsWithFileTags()
 
-        MaterialUtil.setTint(yearContainer, false)
-        MaterialUtil.setTint(genreContainer, false)
-        MaterialUtil.setTint(albumTitleContainer, false)
-        MaterialUtil.setTint(albumArtistContainer, false)
+        binding.yearContainer.setTint(false)
+        binding.genreContainer.setTint(false)
+        binding.albumTitleContainer.setTint(false)
+        binding.albumArtistContainer.setTint(false)
 
-        albumText.appHandleColor().addTextChangedListener(this)
-        albumArtistText.appHandleColor().addTextChangedListener(this)
-        genreTitle.appHandleColor().addTextChangedListener(this)
-        yearTitle.appHandleColor().addTextChangedListener(this)
+        binding.albumText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.albumArtistText.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.genreTitle.appHandleColor().doAfterTextChanged { dataChanged() }
+        binding.yearTitle.appHandleColor().doAfterTextChanged { dataChanged() }
     }
 
     private fun fillViewsWithFileTags() {
-        albumText.setText(albumTitle)
-        albumArtistText.setText(albumArtistName)
-        genreTitle.setText(genreName)
-        yearTitle.setText(songYear)
+        binding.albumText.setText(albumTitle)
+        binding.albumArtistText.setText(albumArtistName)
+        binding.genreTitle.setText(genreName)
+        binding.yearTitle.setText(songYear)
+        println(albumTitle + albumArtistName)
     }
 
     override fun loadCurrentImage() {
@@ -140,41 +107,68 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
             bitmap,
             getColor(
                 generatePalette(bitmap),
-                ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
+                defaultFooterColor()
             )
         )
         deleteAlbumArt = false
     }
 
     private fun toastLoadingFailed() {
-        Toast.makeText(
-            this@AlbumTagEditorActivity,
-            R.string.could_not_download_album_cover,
-            Toast.LENGTH_SHORT
-        ).show()
+        showToast(R.string.could_not_download_album_cover)
     }
 
     override fun searchImageOnWeb() {
-        searchWebFor(albumText.text.toString(), albumArtistText.text.toString())
+        searchWebFor(binding.albumText.text.toString(), binding.albumArtistText.text.toString())
     }
 
     override fun deleteImage() {
         setImageBitmap(
             BitmapFactory.decodeResource(resources, R.drawable.default_audio_art),
-            ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
+            defaultFooterColor()
         )
         deleteAlbumArt = true
         dataChanged()
     }
 
+    override fun loadImageFromFile(selectedFile: Uri?) {
+        GlideApp.with(this@AlbumTagEditorActivity).asBitmapPalette().load(selectedFile)
+            .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
+            .into(object : ImageViewTarget<BitmapPaletteWrapper>(binding.editorImage) {
+                override fun onResourceReady(
+                    resource: BitmapPaletteWrapper,
+                    transition: Transition<in BitmapPaletteWrapper>?
+                ) {
+                    getColor(resource.palette, Color.TRANSPARENT)
+                    albumArtBitmap = resource.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
+                    setImageBitmap(
+                        albumArtBitmap,
+                        getColor(
+                            resource.palette,
+                            defaultFooterColor()
+                        )
+                    )
+                    deleteAlbumArt = false
+                    dataChanged()
+                    setResult(Activity.RESULT_OK)
+                }
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    showToast(R.string.error_load_failed, Toast.LENGTH_LONG)
+                }
+
+                override fun setResource(resource: BitmapPaletteWrapper?) {}
+            })
+    }
+
     override fun save() {
         val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
-        fieldKeyValueMap[FieldKey.ALBUM] = albumText.text.toString()
+        fieldKeyValueMap[FieldKey.ALBUM] = binding.albumText.text.toString()
         // android seems not to recognize album_artist field so we additionally write the normal artist field
-        fieldKeyValueMap[FieldKey.ARTIST] = albumArtistText.text.toString()
-        fieldKeyValueMap[FieldKey.ALBUM_ARTIST] = albumArtistText.text.toString()
-        fieldKeyValueMap[FieldKey.GENRE] = genreTitle.text.toString()
-        fieldKeyValueMap[FieldKey.YEAR] = yearTitle.text.toString()
+        fieldKeyValueMap[FieldKey.ARTIST] = binding.albumArtistText.text.toString()
+        fieldKeyValueMap[FieldKey.ALBUM_ARTIST] = binding.albumArtistText.text.toString()
+        fieldKeyValueMap[FieldKey.GENRE] = binding.genreTitle.text.toString()
+        fieldKeyValueMap[FieldKey.YEAR] = binding.yearTitle.text.toString()
 
         writeValuesToFiles(
             fieldKeyValueMap,
@@ -191,20 +185,28 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
             .map(Song::data)
     }
 
-    override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-    }
-
-    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-    }
-
-    override fun afterTextChanged(s: Editable) {
-        dataChanged()
+    override fun getSongUris(): List<Uri> = repository.albumById(id).songs.map {
+        MusicUtil.getSongFileUri(it.id)
     }
 
     override fun setColors(color: Int) {
         super.setColors(color)
         saveFab.backgroundTintList = ColorStateList.valueOf(color)
+        saveFab.backgroundTintList = ColorStateList.valueOf(color)
+        ColorStateList.valueOf(
+            MaterialValueHelper.getPrimaryTextColor(
+                this,
+                color.isColorLight
+            )
+        ).also {
+            saveFab.iconTint = it
+            saveFab.setTextColor(it)
+        }
     }
+
+
+    override val editorImage: ImageView
+        get() = binding.editorImage
 
     companion object {
 

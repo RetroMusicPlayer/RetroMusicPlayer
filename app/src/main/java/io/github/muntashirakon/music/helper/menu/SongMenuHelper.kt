@@ -18,7 +18,7 @@ package io.github.muntashirakon.music.helper.menu
 import android.content.Intent
 import android.view.MenuItem
 import android.view.View
-import android.widget.PopupMenu
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
@@ -30,9 +30,12 @@ import io.github.muntashirakon.music.activities.tageditor.SongTagEditorActivity
 import io.github.muntashirakon.music.dialogs.AddToPlaylistDialog
 import io.github.muntashirakon.music.dialogs.DeleteSongsDialog
 import io.github.muntashirakon.music.dialogs.SongDetailDialog
+import io.github.muntashirakon.music.fragments.LibraryViewModel
+import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.IPaletteColorHolder
 import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.providers.BlacklistStore
 import io.github.muntashirakon.music.repository.RealRepository
 import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.RingtoneManager
@@ -40,20 +43,22 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.core.KoinComponent
-import org.koin.core.get
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
+import java.io.File
 
 object SongMenuHelper : KoinComponent {
     const val MENU_RES = R.menu.menu_item_song
 
     fun handleMenuClick(activity: FragmentActivity, song: Song, menuItemId: Int): Boolean {
+        val libraryViewModel = activity.getViewModel() as LibraryViewModel
         when (menuItemId) {
             R.id.action_set_as_ringtone -> {
                 if (RingtoneManager.requiresDialog(activity)) {
-                    RingtoneManager.getDialog(activity)
+                    RingtoneManager.showDialog(activity)
                 } else {
-                    val ringtoneManager = RingtoneManager(activity)
-                    ringtoneManager.setRingtone(song)
+                    RingtoneManager.setRingtone(activity, song)
                 }
                 return true
             }
@@ -115,6 +120,11 @@ object SongMenuHelper : KoinComponent {
                     R.id.artistDetailsFragment,
                     bundleOf(EXTRA_ARTIST_ID to song.artistId)
                 )
+                return true
+            }
+            R.id.action_add_to_blacklist -> {
+                BlacklistStore.getInstance(activity).addPath(File(song.data))
+                libraryViewModel.forceReload(ReloadType.Songs)
                 return true
             }
         }

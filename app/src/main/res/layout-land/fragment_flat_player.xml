@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playerAlbumCoverFragment"
                     android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
                 </FrameLayout>
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playbackControlsFragment"
                     android:name="io.github.muntashirakon.music.fragments.player.flat.FlatPlaybackControlsFragment"
                     android:layout_width="match_parent"

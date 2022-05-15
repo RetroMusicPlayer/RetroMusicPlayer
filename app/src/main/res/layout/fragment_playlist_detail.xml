@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:transitionGroup="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         app:liftOnScroll="true">
 
         <FrameLayout
+            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways">
@@ -21,26 +25,19 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorSurface"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black"
                 app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
-
-            <ViewStub
-                android:id="@+id/cab_stub"
-                android:layout_width="match_parent"
-                android:layout_height="48dp" />
-
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <io.github.muntashirakon.music.views.insets.InsetsRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:layoutAnimation="@anim/layout_animation_fall_down"
-        android:overScrollMode="never"
+        android:overScrollMode="@integer/overScrollMode"
         android:scrollbars="none"
+        android:layoutAnimation="@anim/layout_anim_fade"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     <LinearLayout
@@ -70,6 +67,7 @@
             android:textAppearance="@style/TextViewHeadline5"
             android:textColor="?android:attr/textColorSecondary"
             tools:visibility="visible" />
+
     </LinearLayout>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator

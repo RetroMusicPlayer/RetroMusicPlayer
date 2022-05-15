@@ -6,7 +6,6 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
-import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -97,8 +96,8 @@ public final class TintHelper {
             return null;
         }
         drawable = DrawableCompat.wrap(drawable.mutate());
-        DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_IN);
-        DrawableCompat.setTint(drawable, color);
+        drawable.setTintMode(PorterDuff.Mode.SRC_IN);
+        drawable.setTint(color);
         return drawable;
     }
 
@@ -110,7 +109,7 @@ public final class TintHelper {
             return null;
         }
         Drawable temp = DrawableCompat.wrap(drawable.mutate());
-        DrawableCompat.setTintList(temp, sl);
+        temp.setTintList(sl);
         return temp;
     }
 
@@ -149,40 +148,14 @@ public final class TintHelper {
                         useDarker ? R.color.ate_control_normal_dark : R.color.ate_control_normal_light),
                 color
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            radioButton.setButtonTintList(sl);
-        } else {
-            Drawable d = createTintedDrawable(
-                    ContextCompat.getDrawable(radioButton.getContext(), R.drawable.abc_btn_radio_material), sl);
-            radioButton.setButtonDrawable(d);
-        }
+        radioButton.setButtonTintList(sl);
     }
 
     public static void setTint(@NonNull SeekBar seekBar, @ColorInt int color, boolean useDarker) {
         final ColorStateList s1 = getDisabledColorStateList(color, ContextCompat.getColor(seekBar.getContext(),
                 useDarker ? R.color.ate_control_disabled_dark : R.color.ate_control_disabled_light));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            seekBar.setThumbTintList(s1);
-            seekBar.setProgressTintList(s1);
-        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
-            Drawable progressDrawable = createTintedDrawable(seekBar.getProgressDrawable(), s1);
-            seekBar.setProgressDrawable(progressDrawable);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                Drawable thumbDrawable = createTintedDrawable(seekBar.getThumb(), s1);
-                seekBar.setThumb(thumbDrawable);
-            }
-        } else {
-            PorterDuff.Mode mode = PorterDuff.Mode.SRC_IN;
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-                mode = PorterDuff.Mode.MULTIPLY;
-            }
-            if (seekBar.getIndeterminateDrawable() != null) {
-                seekBar.getIndeterminateDrawable().setColorFilter(color, mode);
-            }
-            if (seekBar.getProgressDrawable() != null) {
-                seekBar.getProgressDrawable().setColorFilter(color, mode);
-            }
-        }
+        seekBar.setThumbTintList(s1);
+        seekBar.setProgressTintList(s1);
     }
 
     public static void setTint(@NonNull ProgressBar progressBar, @ColorInt int color) {
@@ -191,23 +164,10 @@ public final class TintHelper {
 
     public static void setTint(@NonNull ProgressBar progressBar, @ColorInt int color, boolean skipIndeterminate) {
         ColorStateList sl = ColorStateList.valueOf(color);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            progressBar.setProgressTintList(sl);
-            progressBar.setSecondaryProgressTintList(sl);
-            if (!skipIndeterminate) {
-                progressBar.setIndeterminateTintList(sl);
-            }
-        } else {
-            PorterDuff.Mode mode = PorterDuff.Mode.SRC_IN;
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-                mode = PorterDuff.Mode.MULTIPLY;
-            }
-            if (!skipIndeterminate && progressBar.getIndeterminateDrawable() != null) {
-                progressBar.getIndeterminateDrawable().setColorFilter(color, mode);
-            }
-            if (progressBar.getProgressDrawable() != null) {
-                progressBar.getProgressDrawable().setColorFilter(color, mode);
-            }
+        progressBar.setProgressTintList(sl);
+        progressBar.setSecondaryProgressTintList(sl);
+        if (!skipIndeterminate) {
+            progressBar.setIndeterminateTintList(sl);
         }
     }
 
@@ -225,7 +185,7 @@ public final class TintHelper {
         });
         if (editText instanceof AppCompatEditText) {
             ((AppCompatEditText) editText).setSupportBackgroundTintList(editTextColorStateList);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        } else {
             editText.setBackgroundTintList(editTextColorStateList);
         }
         setCursorTint(editText, color);
@@ -243,13 +203,7 @@ public final class TintHelper {
                         useDarker ? R.color.ate_control_normal_dark : R.color.ate_control_normal_light),
                 color
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            box.setButtonTintList(sl);
-        } else {
-            Drawable drawable = createTintedDrawable(
-                    ContextCompat.getDrawable(box.getContext(), R.drawable.abc_btn_check_material), sl);
-            box.setButtonDrawable(drawable);
-        }
+        box.setButtonTintList(sl);
     }
 
     public static void setTint(@NonNull ImageView image, @ColorInt int color) {
@@ -257,9 +211,6 @@ public final class TintHelper {
     }
 
     public static void setTint(@NonNull Switch switchView, @ColorInt int color, boolean useDarker) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-            return;
-        }
         if (switchView.getTrackDrawable() != null) {
             switchView.setTrackDrawable(modifySwitchDrawable(switchView.getContext(),
                     switchView.getTrackDrawable(), color, false, false, useDarker));
@@ -286,7 +237,6 @@ public final class TintHelper {
         setTintAuto(view, color, background, ATHUtil.INSTANCE.isWindowBackgroundDark(view.getContext()));
     }
 
-    @SuppressWarnings("deprecation")
     public static void setTintAuto(final @NonNull View view, final @ColorInt int color,
                                    boolean background, final boolean isDark) {
         if (!background) {
@@ -312,8 +262,7 @@ public final class TintHelper {
                 background = true;
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                    !background && view.getBackground() instanceof RippleDrawable) {
+            if (!background && view.getBackground() instanceof RippleDrawable) {
                 // Ripples for the above views (e.g. when you tap and hold a switch or checkbox)
                 RippleDrawable rd = (RippleDrawable) view.getBackground();
                 @SuppressLint("PrivateResource") final int unchecked = ContextCompat.getColor(view.getContext(),
@@ -348,7 +297,6 @@ public final class TintHelper {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public static void setTintSelector(@NonNull View view, @ColorInt final int color, final boolean darker,
                                        final boolean useDarkTheme) {
         final boolean isColorLight = ColorUtil.INSTANCE.isColorLight(color);
@@ -363,8 +311,7 @@ public final class TintHelper {
         final ColorStateList sl;
         if (view instanceof Button) {
             sl = getDisabledColorStateList(color, disabled);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                    view.getBackground() instanceof RippleDrawable) {
+            if (view.getBackground() instanceof RippleDrawable) {
                 RippleDrawable rd = (RippleDrawable) view.getBackground();
                 rd.setColor(ColorStateList.valueOf(rippleColor));
             }

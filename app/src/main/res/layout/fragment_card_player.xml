@@ -12,13 +12,20 @@
         android:layout_height="match_parent"
         android:background="?attr/colorSurface" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
         android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_album_full_cover" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/cover_lyrics"
+        android:name="io.github.muntashirakon.music.fragments.player.CoverLyricsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:elevation="20dp" />
     <include layout="@layout/shadow_statusbar_toolbar" />
 
     <FrameLayout
@@ -49,10 +56,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardUseCompatPadding="true">
+        app:cardCornerRadius="8dp">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playbackControlsFragment"
             android:name="io.github.muntashirakon.music.fragments.player.card.CardPlaybackControlsFragment"
             android:layout_width="match_parent"

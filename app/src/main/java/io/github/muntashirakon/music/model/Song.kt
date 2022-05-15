@@ -14,7 +14,7 @@
 package io.github.muntashirakon.music.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 // update equals and hashcode if fields changes
 @Parcelize

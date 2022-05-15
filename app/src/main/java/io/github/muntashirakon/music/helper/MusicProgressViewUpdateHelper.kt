@@ -16,6 +16,7 @@ package io.github.muntashirakon.music.helper
 
 import android.os.Handler
 import android.os.Message
+import kotlin.math.max
 
 class MusicProgressViewUpdateHelper : Handler {
 
@@ -62,7 +63,7 @@ class MusicProgressViewUpdateHelper : Handler {
 
         val remainingMillis = intervalPlaying - progressMillis % intervalPlaying
 
-        return Math.max(MIN_INTERVAL, remainingMillis)
+        return max(MIN_INTERVAL, remainingMillis)
     }
 
     private fun queueNextRefresh(delay: Long) {

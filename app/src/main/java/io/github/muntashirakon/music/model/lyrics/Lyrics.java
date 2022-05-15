@@ -14,8 +14,9 @@
 
 package io.github.muntashirakon.music.model.lyrics;
 
-import io.github.muntashirakon.music.model.Song;
 import java.util.ArrayList;
+
+import io.github.muntashirakon.music.model.Song;
 
 public class Lyrics {
 

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="m3_accent_color">@android:color/system_accent1_200</color>
+    <color name="m3_selection_color">@android:color/system_accent1_500</color>
+</resources>

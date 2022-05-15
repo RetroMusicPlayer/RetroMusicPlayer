@@ -16,8 +16,7 @@ package io.github.muntashirakon.music.service
 
 
 import android.os.Handler
-
-import io.github.muntashirakon.music.service.MusicService.PLAY_STATE_CHANGED
+import io.github.muntashirakon.music.service.MusicService.Companion.PLAY_STATE_CHANGED
 
 class ThrottledSeekHandler(
     private val musicService: MusicService,
@@ -38,6 +37,6 @@ class ThrottledSeekHandler(
 
     companion object {
         // milliseconds to throttle before calling run() to aggregate events
-        private val THROTTLE: Long = 500
+        private const val THROTTLE: Long = 500
     }
 }

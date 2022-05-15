@@ -17,6 +17,7 @@ package io.github.muntashirakon.music.lyrics;
 import android.animation.ValueAnimator;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -14,17 +14,19 @@
 
 package io.github.muntashirakon.music.glide.audiocover;
 
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
+import org.jaudiotagger.audio.mp3.MP3File;
+import org.jaudiotagger.tag.TagException;
+import org.jaudiotagger.tag.images.Artwork;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
-import org.jaudiotagger.audio.mp3.MP3File;
-import org.jaudiotagger.tag.TagException;
-import org.jaudiotagger.tag.images.Artwork;
 
 public class AudioFileCoverUtils {
 
@@ -44,10 +46,7 @@ public class AudioFileCoverUtils {
         }
       }
       // If there are any exceptions, we ignore them and continue to the other fallback method
-    } catch (ReadOnlyFileException ignored) {
-    } catch (InvalidAudioFrameException ignored) {
-    } catch (TagException ignored) {
-    } catch (IOException ignored) {
+    } catch (ReadOnlyFileException | InvalidAudioFrameException | TagException | IOException | CannotReadException ignored) {
     }
 
     // Method 2: look for album art in external files

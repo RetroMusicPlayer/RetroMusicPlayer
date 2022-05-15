@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -11,6 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         app:liftOnScroll="true">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -18,13 +19,13 @@
             style="@style/Toolbar"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/action_tag_editor"
-            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
-            tools:ignore="UnusedAttribute" />
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="@integer/overScrollMode"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
@@ -32,6 +33,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <io.github.muntashirakon.music.views.WidthFitSquareCardView
+                android:id="@+id/imageContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:transitionName="@string/transition_album_art"
+                app:cardCornerRadius="@dimen/m3_card_large_radius"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/editorImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+
+            </io.github.muntashirakon.music.views.WidthFitSquareCardView>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/songTextContainer"
@@ -131,6 +154,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -141,7 +165,6 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     app:hintEnabled="true">
-
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/genreText"
@@ -165,7 +188,6 @@
                     android:layout_weight="1"
                     app:hintEnabled="true">
 
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/yearText"
                         android:layout_width="match_parent"
@@ -179,26 +201,56 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/trackNumberContainer"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:hintEnabled="true">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/trackNumberText"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/trackNumberContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:hint="@string/track_hint"
-                    android:inputType="text|number"
-                    android:maxLines="1" />
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    app:hintEnabled="true">
 
-            </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/trackNumberText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:hint="@string/track_hint"
+                        android:inputType="text|number"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/discNumberContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/discNumberText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:hint="@string/disc_hint"
+                        android:inputType="text|number"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/lyricsContainer"
@@ -216,7 +268,8 @@
                     android:layout_gravity="center"
                     android:gravity="center_vertical"
                     android:hint="@string/lyrics"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:maxLines="15" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

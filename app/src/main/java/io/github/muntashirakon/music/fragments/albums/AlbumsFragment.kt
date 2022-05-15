@@ -16,6 +16,7 @@ package io.github.muntashirakon.music.fragments.albums
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -24,32 +25,61 @@ import io.github.muntashirakon.music.EXTRA_ALBUM_ID
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.album.AlbumAdapter
 import io.github.muntashirakon.music.extensions.surfaceColor
+import io.github.muntashirakon.music.fragments.GridStyle
 import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewCustomGridSizeFragment
+import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.SortOrder.AlbumSortOrder
 import io.github.muntashirakon.music.interfaces.IAlbumClickListener
+import io.github.muntashirakon.music.interfaces.ICabCallback
 import io.github.muntashirakon.music.interfaces.ICabHolder
+import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.RetroColorUtil
 import io.github.muntashirakon.music.util.RetroUtil
-import com.afollestad.materialcab.MaterialCab
-import com.google.android.material.transition.MaterialElevationScale
+import com.afollestad.materialcab.attached.AttachedCab
+import com.afollestad.materialcab.attached.destroy
+import com.afollestad.materialcab.attached.isActive
+import com.afollestad.materialcab.createCab
 
 class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     IAlbumClickListener, ICabHolder {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getAlbums().observe(viewLifecycleOwner, {
+        libraryViewModel.getAlbums().observe(viewLifecycleOwner) {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
-        })
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (!handleBackPress()) {
+                remove()
+                requireActivity().onBackPressed()
+            }
+        }
     }
+
+    override val titleRes: Int
+        get() = R.string.albums
 
     override val emptyMessage: Int
         get() = R.string.no_albums
+
+    override val isShuffleVisible: Boolean
+        get() = true
+
+    override fun onShuffleClicked() {
+        libraryViewModel.getAlbums().value?.let {
+            MusicPlayerRemote.setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
+            MusicPlayerRemote.openQueue(
+                queue = it.shuffled().flatMap { album -> album.songs },
+                startPosition = 0,
+                startPlaying = true
+            )
+        }
+    }
 
     override fun createLayoutManager(): GridLayoutManager {
         return GridLayoutManager(requireActivity(), getGridSize())
@@ -100,11 +130,13 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     }
 
     override fun loadLayoutRes(): Int {
-        return PreferenceUtil.albumGridStyle
+        return PreferenceUtil.albumGridStyle.layoutResId
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
-        PreferenceUtil.albumGridStyle = layoutRes
+        PreferenceUtil.albumGridStyle = GridStyle.values().first { gridStyle ->
+            gridStyle.layoutResId == layoutRes
+        }
     }
 
     companion object {
@@ -114,26 +146,21 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
     }
 
     override fun onAlbumClick(albumId: Long, view: View) {
-        exitTransition = MaterialElevationScale(false).apply {
-            duration = 300L
-        }
-        reenterTransition = MaterialElevationScale(true).apply {
-            duration = 300L
-        }
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to "album"
+                view to albumId.toString()
             )
         )
+        reenterTransition = null
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateMenu(menu, inflater)
         val gridSizeItem: MenuItem = menu.findItem(R.id.action_grid_size)
-        if (RetroUtil.isLandscape()) {
+        if (RetroUtil.isLandscape) {
             gridSizeItem.setTitle(R.string.action_grid_size_land)
         }
         setUpGridSizeMenu(gridSizeItem.subMenu)
@@ -165,7 +192,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             0,
             R.id.action_album_sort_order_artist,
             2,
-            R.string.sort_order_artist
+            R.string.sort_order_album_artist
         ).isChecked =
             currentSortOrder.equals(AlbumSortOrder.ALBUM_ARTIST)
         sortOrderMenu.add(
@@ -175,6 +202,13 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             R.string.sort_order_year
         ).isChecked =
             currentSortOrder.equals(AlbumSortOrder.ALBUM_YEAR)
+        sortOrderMenu.add(
+            0,
+            R.id.action_album_sort_order_num_songs,
+            4,
+            R.string.sort_order_num_songs
+        ).isChecked =
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_NUMBER_OF_SONGS)
 
         sortOrderMenu.setGroupCheckable(0, true, true)
     }
@@ -230,7 +264,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         if (handleGridSizeMenuItem(item)) {
             return true
         }
@@ -240,7 +274,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         if (handleSortOrderMenuItem(item)) {
             return true
         }
-        return super.onOptionsItemSelected(item)
+        return super.onMenuItemSelected(item)
     }
 
     private fun handleSortOrderMenuItem(
@@ -251,6 +285,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             R.id.action_album_sort_order_desc -> AlbumSortOrder.ALBUM_Z_A
             R.id.action_album_sort_order_artist -> AlbumSortOrder.ALBUM_ARTIST
             R.id.action_album_sort_order_year -> AlbumSortOrder.ALBUM_YEAR
+            R.id.action_album_sort_order_num_songs -> AlbumSortOrder.ALBUM_NUMBER_OF_SONGS
             else -> PreferenceUtil.albumSortOrder
         }
         if (sortOrder != PreferenceUtil.albumSortOrder) {
@@ -271,9 +306,9 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             R.id.action_layout_circular -> R.layout.item_grid_circle
             R.id.action_layout_image -> R.layout.image
             R.id.action_layout_gradient_image -> R.layout.item_image_gradient
-            else -> PreferenceUtil.albumGridStyle
+            else -> PreferenceUtil.albumGridStyle.layoutResId
         }
-        if (layoutRes != PreferenceUtil.albumGridStyle) {
+        if (layoutRes != PreferenceUtil.albumGridStyle.layoutResId) {
             item.isChecked = true
             setAndSaveLayoutRes(layoutRes)
             return true
@@ -303,20 +338,48 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
         return false
     }
 
-    private var cab: MaterialCab? = null
+    override fun onResume() {
+        super.onResume()
+        libraryViewModel.forceReload(ReloadType.Albums)
+    }
 
-    override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
+    override fun onPause() {
+        super.onPause()
+        if (cab.isActive()) {
+            cab.destroy()
+        }
+    }
+
+    private fun handleBackPress(): Boolean {
         cab?.let {
-            println("Cab")
-            if (it.isActive) {
-                it.finish()
+            if (it.isActive()) {
+                it.destroy()
+                return true
             }
         }
-        cab = MaterialCab(mainActivity, R.id.cab_stub)
-            .setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close)
-            .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(surfaceColor()))
-            .start(callback)
-        return cab as MaterialCab
+        return false
+    }
+
+    private var cab: AttachedCab? = null
+
+    override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
+        cab?.let {
+            println("Cab")
+            if (it.isActive()) {
+                it.destroy()
+            }
+        }
+        cab = createCab(R.id.toolbar_container) {
+            menu(menuRes)
+            closeDrawable(R.drawable.ic_close)
+            backgroundColor(literal = RetroColorUtil.shiftBackgroundColor(surfaceColor()))
+            slideDown()
+            onCreate { cab, menu -> callback.onCabCreated(cab, menu) }
+            onSelection {
+                callback.onCabItemClicked(it)
+            }
+            onDestroy { callback.onCabFinished(it) }
+        }
+        return cab as AttachedCab
     }
 }

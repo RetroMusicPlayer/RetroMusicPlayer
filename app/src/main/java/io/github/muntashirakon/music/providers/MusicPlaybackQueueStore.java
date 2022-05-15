@@ -20,18 +20,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.Audio.AudioColumns;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
 
 import io.github.muntashirakon.music.App;
+import io.github.muntashirakon.music.Constants;
 import io.github.muntashirakon.music.model.Song;
 import io.github.muntashirakon.music.repository.RealSongRepository;
-import io.github.muntashirakon.music.App;
-import io.github.muntashirakon.music.model.Song;
-import io.github.muntashirakon.music.repository.RealSongRepository;
-import java.util.List;
 
 /**
  * @author Andrew Neal, modified for Phonograph by Karim Abou Zeid
@@ -131,7 +129,7 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     builder.append(AudioColumns.DURATION);
     builder.append(" LONG NOT NULL,");
 
-    builder.append(AudioColumns.DATA);
+    builder.append(Constants.DATA);
     builder.append(" STRING NOT NULL,");
 
     builder.append(AudioColumns.DATE_MODIFIED);
@@ -195,7 +193,7 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
           values.put(AudioColumns.TRACK, song.getTrackNumber());
           values.put(AudioColumns.YEAR, song.getYear());
           values.put(AudioColumns.DURATION, song.getDuration());
-          values.put(AudioColumns.DATA, song.getData());
+          values.put(Constants.DATA, song.getData());
           values.put(AudioColumns.DATE_MODIFIED, song.getDateModified());
           values.put(AudioColumns.ALBUM_ID, song.getAlbumId());
           values.put(AudioColumns.ALBUM, song.getAlbumName());

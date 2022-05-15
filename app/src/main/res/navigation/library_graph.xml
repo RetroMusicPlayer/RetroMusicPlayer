@@ -38,6 +38,6 @@
         android:id="@+id/action_home"
         android:name="io.github.muntashirakon.music.fragments.home.HomeFragment"
         android:label=""
-        tools:layout="@layout/fragment_banner_home" />
+        tools:layout="@layout/fragment_home" />
 
 </navigation>

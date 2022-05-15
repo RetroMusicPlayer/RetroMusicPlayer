@@ -15,12 +15,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         app:liftOnScroll="true">
 
         <FrameLayout
@@ -32,7 +34,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorSurface"
                 app:navigationIcon="@drawable/ic_search"
                 app:popupTheme="?attr/toolbarPopupTheme"
                 app:title="@null"
@@ -60,59 +61,32 @@
         android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
-        android:overScrollMode="never"
+        android:overScrollMode="@integer/overScrollMode"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <io.github.muntashirakon.music.views.insets.InsetsConstraintLayout
+            android:id="@+id/contentContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:transitionGroup="true">
 
-            <io.github.muntashirakon.music.views.RetroShapeableImageView
-                android:id="@+id/userImage"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:scaleType="centerCrop"
+            <io.github.muntashirakon.music.views.HomeImageLayout
+                android:id="@+id/imageLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:retroCornerSize="21dp"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:ellipsize="end"
-                android:text="@string/welcome"
-                app:layout_constraintStart_toEndOf="@+id/userImage"
-                app:layout_constraintTop_toTopOf="@+id/userImage"
-                tools:text="@tools:sample/lorem" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/titleWelcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="0dp"
-                android:textAppearance="@style/TextViewHeadline6"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/userImage"
-                app:layout_constraintStart_toEndOf="@+id/userImage"
-                app:layout_constraintTop_toBottomOf="@+id/text"
-                tools:text="@tools:sample/lorem" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <include
+                android:id="@+id/home_content"
                 layout="@layout/home_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleWelcome" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@id/imageLayout" />
+        </io.github.muntashirakon.music.views.insets.InsetsConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

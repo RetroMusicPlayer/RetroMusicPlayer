@@ -40,8 +40,6 @@ abstract class WrappedAsyncTaskLoader<D>
         if (!isReset) {
             this.mData = data
             super.deliverResult(data)
-        } else {
-            // An asynchronous query came in while the loader is stopped
         }
     }
 

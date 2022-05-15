@@ -17,7 +17,7 @@ package io.github.muntashirakon.music.service
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import io.github.muntashirakon.music.service.MusicService.SAVE_QUEUES
+import io.github.muntashirakon.music.service.MusicService.Companion.SAVE_QUEUES
 import java.lang.ref.WeakReference
 
 internal class QueueSaveHandler(

@@ -2,19 +2,6 @@
 
 Material Design music player for Android music lovers
 
-## Table of contents
-- [Downloads](#downloads)
-- [Differences between Metro and RetroMusicPlayer](#differences-between-metro-and-retromusicplayer)
-- [Screenshots](#screenshots)
-    - [App Themes](#app-themes)
-    - [Player screen](#player-screen)
-    - [9+ Now playing themes](#9-now-playing-themes)
-- [Navigation never made easier](#-navigation-never-made-easier)
-- [Colorful](#-colorful)
-- [Home](#-home)
-- [Included Features](#-included-features)
-- [License](#%EF%B8%8F-license)
-
 ## Downloads
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
@@ -31,26 +18,35 @@ Material Design music player for Android music lovers
 - Bug fixes
 - Minor differences in UI
 
-## Screenshots
+## 📱 Screenshots
 ### App Themes
-| <img src="screenshots/home.jpeg" width="200"/> | <img src="screenshots/home_dark.jpeg" width="200"/> | <img src="screenshots/home_black.jpeg" width="200"/> |
+| <img src="screenshots/home_light.jpg" width="200"/> | <img src="screenshots/home_dark.jpg" width="200"/> | <img src="screenshots/home_black.jpg" width="200"/> |
 |:---:|:---:|:---:|
 |Clearly white| Kinda dark | Just black|
 
 ### Player screen
-| <img src="screenshots/home.jpeg" width="200"/>| <img src="screenshots/list.jpeg" width="200"/>| <img src="screenshots/albums.jpeg" width="200"/>| <img src="screenshots/settings.jpeg" width="200"/>|
-|:---:|:---:|:---:|:---:|
-| Home | Songs | Albums | Settings |
+| <img src="screenshots/home_light.jpg" width="200"/>| <img src="screenshots/songs.jpg" width="200"/>| <img src="screenshots/albums.jpg" width="200"/>| <img src="screenshots/artists.jpg" width="200"/>| <img src="screenshots/settings.jpg" width="200"/>|
+|:---:|:---:|:---:|:---:|:---:|
+| Home | Songs | Albums | Artists | Settings |
 
-### 9+ Now playing themes
- 
-| <img src="screenshots/np_normal.jpeg" width="200"/>	|<img src="screenshots/np_fit.jpeg" width="200"/>|   <img src="screenshots/np_flat.jpeg" width="200"/>  	|    <img src="screenshots/np_color.jpeg" width="200"/> 	|     <img src="screenshots/np_material.jpeg" width="200"/>	|
+### Synced lyrics screen (Over Cover)
+| <img src="screenshots/synced_over_light.jpg" width="200"/>| <img src="screenshots/synced_over_dark.jpg" width="200"/>| <img src="screenshots/synced_over_black.jpg" width="200"/>|
+|:---:|:---:|:---:|
+| Synced Over Cover light | Synced Over Cover dark | Synced Over Cover black |
+
+### Synced lyrics screen (Replace Cover)
+| <img src="screenshots/synced_replace_light.jpg" width="200"/>| <img src="screenshots/synced_replace_dark.jpg" width="200"/>| <img src="screenshots/synced_replace_black.jpg" width="200"/>|
+|:---:|:---:|:---:|
+| Synced Replace Cover light | Synced Replace Cover dark | Synced Replace Cover black |
+
+### 10+ Now playing themes
+| <img src="screenshots/normal.jpg" width="200"/>	|<img src="screenshots/fit.jpg" width="200"/>|   <img src="screenshots/flat.jpg" width="200"/>  	|    <img src="screenshots/color.jpg" width="200"/> 	|     <img src="screenshots/material.jpg" width="200"/>	|
 |:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
 | Normal 	| Fit 	| Flat 	| Color 	| Material 	|
 
-| <img src="screenshots/no_classic.jpeg" width="200"/>	|<img src="screenshots/np_adaptive.jpeg" width="200"/>|   <img src="screenshots/np_blur.jpeg" width="200"/>  	|    <img src="screenshots/np_tiny.jpeg" width="200"/> 	|     <img src="screenshots/np_peak.jpeg" width="200"/>	|
+| <img src="screenshots/classic.jpg" width="200"/>	|<img src="screenshots/adaptive.jpg" width="200"/>|   <img src="screenshots/blur.jpg" width="200"/>  	|    <img src="screenshots/tiny.jpg" width="200"/> 	|     <img src="screenshots/peek.jpg" width="200"/>	|
 |:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
-| Classic 	| Adaptive 	| Blur 	| Tiny 	| Peak 	|
+| Classic 	| Adaptive 	| Blur 	| Tiny 	| Peek 	|
 
 ## 🧭 Navigation never made easier 
 Self-explanatory interface without overloaded menus.
@@ -70,6 +66,10 @@ favorite songs. No other music player has this feature.
 -  Driving Mode
 -  Headset/Bluetooth support
 -  Music duration filter
+-  Android auto support
+-  Wallpaper accent picker on Android 8.1+
+-  Material You support on Android 12+
+-  Monet themed icon support on Android 13+
 -  Folder support - Play songs by folder
 -  Gapless playback
 -  Volume controls
@@ -88,7 +88,6 @@ favorite songs. No other music player has this feature.
   genre
 -  Smart Auto Playlists - Recently played, most played and history
 -  Build your playlist on the go
-
 
 We are trying our best to bring you the best user experience. The app is regularly being updated for bug fixes and new features.
 

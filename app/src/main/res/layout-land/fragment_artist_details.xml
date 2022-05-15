@@ -2,15 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:ignore="UnusedAttribute">
 
     <FrameLayout
-        android:id="@+id/toolbarContainer"
+        android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,11 +20,6 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black" />
-
-        <ViewStub
-            android:id="@+id/cab_stub"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
     </FrameLayout>
 
 
@@ -35,13 +29,13 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="@dimen/mini_player_height"
         android:transitionName="@string/transition_artist_image"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="@dimen/m3_card_large_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
+        app:layout_constraintTop_toBottomOf="@id/toolbar_container">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
@@ -56,15 +50,16 @@
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
         android:layout_weight="1"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
-        android:overScrollMode="never"
+        android:overScrollMode="@integer/overScrollMode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/artistCoverContainer"
-        app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
+        app:layout_constraintTop_toBottomOf="@id/toolbar_container">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,7 +96,9 @@
 
             </LinearLayout>
 
-            <include layout="@layout/fragment_artist_content" />
+            <include
+                android:id="@+id/fragment_artist_content"
+                layout="@layout/fragment_artist_content" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

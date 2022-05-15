@@ -13,9 +13,7 @@
  */
 package io.github.muntashirakon.music.util
 
-import android.app.Activity
 import android.content.Context
-import android.util.DisplayMetrics
 import android.util.TypedValue
 
 /**
@@ -23,14 +21,12 @@ import android.util.TypedValue
  */
 object DensityUtil {
     fun getScreenHeight(context: Context): Int {
-        val displayMetrics = DisplayMetrics()
-        (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val displayMetrics = context.resources.displayMetrics
         return displayMetrics.heightPixels
     }
 
     fun getScreenWidth(context: Context): Int {
-        val displayMetrics = DisplayMetrics()
-        (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val displayMetrics = context.resources.displayMetrics
         return displayMetrics.widthPixels
     }
 

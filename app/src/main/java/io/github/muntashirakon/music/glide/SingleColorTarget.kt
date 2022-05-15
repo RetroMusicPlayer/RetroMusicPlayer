@@ -21,7 +21,7 @@ import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteTarget
 import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
 import io.github.muntashirakon.music.util.ColorUtil
-import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.transition.Transition
 
 abstract class SingleColorTarget(view: ImageView) : BitmapPaletteTarget(view) {
 
@@ -30,23 +30,21 @@ abstract class SingleColorTarget(view: ImageView) : BitmapPaletteTarget(view) {
 
     abstract fun onColorReady(color: Int)
 
-    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-        super.onLoadFailed(e, errorDrawable)
+    override fun onLoadFailed(errorDrawable: Drawable?) {
+        super.onLoadFailed(errorDrawable)
         onColorReady(defaultFooterColor)
     }
 
     override fun onResourceReady(
-        resource: BitmapPaletteWrapper?,
-        glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
+        resource: BitmapPaletteWrapper,
+        transition: Transition<in BitmapPaletteWrapper>?
     ) {
-        super.onResourceReady(resource, glideAnimation)
-        resource?.let {
-            onColorReady(
-                ColorUtil.getColor(
-                    it.palette,
-                    ATHUtil.resolveColor(view.context, R.attr.colorPrimary)
-                )
+        super.onResourceReady(resource, transition)
+        onColorReady(
+            ColorUtil.getColor(
+                resource.palette,
+                ATHUtil.resolveColor(view.context, R.attr.colorPrimary)
             )
-        }
+        )
     }
 }

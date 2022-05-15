@@ -16,19 +16,24 @@ package io.github.muntashirakon.music.repository
 
 import android.content.Context
 import android.database.Cursor
+import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
 import android.provider.MediaStore.Audio.Media
+import code.name.monkey.appthemehelper.util.VersionUtils
+import io.github.muntashirakon.music.Constants
 import io.github.muntashirakon.music.Constants.IS_MUSIC
 import io.github.muntashirakon.music.Constants.baseProjection
 import io.github.muntashirakon.music.extensions.getInt
 import io.github.muntashirakon.music.extensions.getLong
 import io.github.muntashirakon.music.extensions.getString
 import io.github.muntashirakon.music.extensions.getStringOrNull
+import io.github.muntashirakon.music.helper.SortOrder
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.providers.BlacklistStore
 import io.github.muntashirakon.music.util.PreferenceUtil
-import java.util.*
+import io.github.muntashirakon.music.util.getExternalStoragePublicDirectory
+import java.text.Collator
 
 /**
  * Created by hemanths on 10/08/17.
@@ -39,9 +44,11 @@ interface SongRepository {
 
     fun songs(cursor: Cursor?): List<Song>
 
+    fun sortedSongs(cursor: Cursor?): List<Song>
+
     fun songs(query: String): List<Song>
 
-    fun songsByFilePath(filePath: String): List<Song>
+    fun songsByFilePath(filePath: String, ignoreBlacklist: Boolean = false): List<Song>
 
     fun song(cursor: Cursor?): Song
 
@@ -51,7 +58,7 @@ interface SongRepository {
 class RealSongRepository(private val context: Context) : SongRepository {
 
     override fun songs(): List<Song> {
-        return songs(makeSongCursor(null, null))
+        return sortedSongs(makeSongCursor(null, null))
     }
 
     override fun songs(cursor: Cursor?): List<Song> {
@@ -63,6 +70,32 @@ class RealSongRepository(private val context: Context) : SongRepository {
         }
         cursor?.close()
         return songs
+    }
+
+    override fun sortedSongs(cursor: Cursor?): List<Song> {
+        val collator = Collator.getInstance()
+        val songs = songs(cursor)
+        return when (PreferenceUtil.songSortOrder) {
+            SortOrder.SongSortOrder.SONG_A_Z -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.title, s2.title) }
+            }
+            SortOrder.SongSortOrder.SONG_Z_A -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s2.title, s1.title) }
+            }
+            SortOrder.SongSortOrder.SONG_ALBUM -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.albumName, s2.albumName) }
+            }
+            SortOrder.SongSortOrder.SONG_ALBUM_ARTIST -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.albumArtist, s2.albumArtist) }
+            }
+            SortOrder.SongSortOrder.SONG_ARTIST -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.artistName, s2.artistName) }
+            }
+            SortOrder.SongSortOrder.COMPOSER -> {
+                songs.sortedWith{ s1, s2 -> collator.compare(s1.composer, s2.composer) }
+            }
+            else -> songs
+        }
     }
 
     override fun song(cursor: Cursor?): Song {
@@ -83,11 +116,12 @@ class RealSongRepository(private val context: Context) : SongRepository {
         return song(makeSongCursor(AudioColumns._ID + "=?", arrayOf(songId.toString())))
     }
 
-    override fun songsByFilePath(filePath: String): List<Song> {
+    override fun songsByFilePath(filePath: String, ignoreBlacklist: Boolean): List<Song> {
         return songs(
             makeSongCursor(
-                AudioColumns.DATA + "=?",
-                arrayOf(filePath)
+                Constants.DATA + "=?",
+                arrayOf(filePath),
+                ignoreBlacklist = ignoreBlacklist
             )
         )
     }
@@ -100,7 +134,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
         val trackNumber = cursor.getInt(AudioColumns.TRACK)
         val year = cursor.getInt(AudioColumns.YEAR)
         val duration = cursor.getLong(AudioColumns.DURATION)
-        val data = cursor.getString(AudioColumns.DATA)
+        val data = cursor.getString(Constants.DATA)
         val dateModified = cursor.getLong(AudioColumns.DATE_MODIFIED)
         val albumId = cursor.getLong(AudioColumns.ALBUM_ID)
         val albumName = cursor.getStringOrNull(AudioColumns.ALBUM)
@@ -127,29 +161,42 @@ class RealSongRepository(private val context: Context) : SongRepository {
 
     @JvmOverloads
     fun makeSongCursor(
-
         selection: String?,
         selectionValues: Array<String>?,
-        sortOrder: String = PreferenceUtil.songSortOrder
+        sortOrder: String = PreferenceUtil.songSortOrder,
+        ignoreBlacklist: Boolean = false
     ): Cursor? {
         var selectionFinal = selection
         var selectionValuesFinal = selectionValues
-        selectionFinal = if (selection != null && selection.trim { it <= ' ' } != "") {
-            "$IS_MUSIC AND $selectionFinal"
-        } else {
-            IS_MUSIC
-        }
+        if (!ignoreBlacklist) {
+            selectionFinal = if (selection != null && selection.trim { it <= ' ' } != "") {
+                "$IS_MUSIC AND $selectionFinal"
+            } else {
+                IS_MUSIC
+            }
 
-        // Blacklist
-        val paths = BlacklistStore.getInstance(context).paths
-        if (paths.isNotEmpty()) {
-            selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
-            selectionValuesFinal = addBlacklistSelectionValues(selectionValuesFinal, paths)
-        }
-        selectionFinal =
-            selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
+            // Whitelist
+            if (PreferenceUtil.isWhiteList) {
+                selectionFinal =
+                    selectionFinal + " AND " + Constants.DATA + " LIKE ?"
+                selectionValuesFinal = addSelectionValues(
+                    selectionValuesFinal, arrayListOf(
+                        getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).canonicalPath
+                    )
+                )
+            } else {
+                // Blacklist
+                val paths = BlacklistStore.getInstance(context).paths
+                if (paths.isNotEmpty()) {
+                    selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
+                    selectionValuesFinal = addSelectionValues(selectionValuesFinal, paths)
+                }
+            }
 
-        val uri = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            selectionFinal =
+                selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
+        }
+        val uri = if (VersionUtils.hasQ()) {
             Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
         } else {
             Media.EXTERNAL_CONTENT_URI
@@ -173,17 +220,17 @@ class RealSongRepository(private val context: Context) : SongRepository {
     ): String {
         val newSelection = StringBuilder(
             if (selection != null && selection.trim { it <= ' ' } != "") "$selection AND " else "")
-        newSelection.append(AudioColumns.DATA + " NOT LIKE ?")
+        newSelection.append(Constants.DATA + " NOT LIKE ?")
         for (i in 0 until pathCount - 1) {
-            newSelection.append(" AND " + AudioColumns.DATA + " NOT LIKE ?")
+            newSelection.append(" AND " + Constants.DATA + " NOT LIKE ?")
         }
         return newSelection.toString()
     }
 
-    private fun addBlacklistSelectionValues(
+    private fun addSelectionValues(
         selectionValues: Array<String>?,
         paths: ArrayList<String>
-    ): Array<String>? {
+    ): Array<String> {
         var selectionValuesFinal = selectionValues
         if (selectionValuesFinal == null) {
             selectionValuesFinal = emptyArray()

@@ -14,28 +14,38 @@
 
 package io.github.muntashirakon.music.util;
 
+import static io.github.muntashirakon.music.util.FileUtilsKt.getExternalStorageDirectory;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import io.github.muntashirakon.music.model.Song;
-import io.github.muntashirakon.music.repository.RealSongRepository;
-import io.github.muntashirakon.music.repository.SortedCursor;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.StringTokenizer;
+
+import io.github.muntashirakon.music.Constants;
+import io.github.muntashirakon.music.adapter.Storage;
+import io.github.muntashirakon.music.model.Song;
+import io.github.muntashirakon.music.repository.RealSongRepository;
+import io.github.muntashirakon.music.repository.SortedCursor;
 
 public final class FileUtil {
 
@@ -79,16 +89,16 @@ public final class FileUtil {
       if (files.size() > 0
           && files.size() < 999) { // 999 is the max amount Androids SQL implementation can handle.
         selection =
-            MediaStore.Audio.AudioColumns.DATA + " IN (" + makePlaceholders(files.size()) + ")";
+            Constants.DATA + " IN (" + makePlaceholders(files.size()) + ")";
       }
     }
 
     Cursor songCursor =
-        new RealSongRepository(context).makeSongCursor(selection, selection == null ? null : paths);
+        new RealSongRepository(context).makeSongCursor(selection, selection == null ? null : paths, PreferenceUtil.INSTANCE.getSongSortOrder(), true);
 
     return songCursor == null
         ? null
-        : new SortedCursor(songCursor, paths, MediaStore.Audio.AudioColumns.DATA);
+        : new SortedCursor(songCursor, paths, Constants.DATA);
   }
 
   private static String makePlaceholders(int len) {
@@ -105,12 +115,6 @@ public final class FileUtil {
     if (files != null) {
       String[] paths = new String[files.size()];
       for (int i = 0; i < files.size(); i++) {
-        /*try {
-            paths[i] = files.get(i).getCanonicalPath(); // canonical path is important here because we want to compare the path with the media store entry later
-        } catch (IOException e) {
-            e.printStackTrace();
-            paths[i] = files.get(i).getPath();
-        }*/
         paths[i] = safeGetCanonicalPath(files.get(i));
       }
       return paths;
@@ -254,5 +258,77 @@ public final class FileUtil {
       e.printStackTrace();
       return file.getAbsoluteFile();
     }
+  }
+
+  // https://github.com/DrKLO/Telegram/blob/ab221dafadbc17459d78d9ea3e643ae18e934b16/TMessagesProj/src/main/java/org/telegram/ui/Components/ChatAttachAlertDocumentLayout.java#L939
+  public static ArrayList<Storage> listRoots() {
+    ArrayList<Storage> storageItems = new ArrayList<>();
+    HashSet<String> paths = new HashSet<>();
+    String defaultPath = getExternalStorageDirectory().getPath();
+    String defaultPathState = Environment.getExternalStorageState();
+    if (defaultPathState.equals(Environment.MEDIA_MOUNTED) || defaultPathState.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
+      Storage ext = new Storage();
+      if (Environment.isExternalStorageRemovable()) {
+        ext.title = "SD Card";
+      } else {
+        ext.title = "Internal Storage";
+      }
+      ext.file = getExternalStorageDirectory();
+      storageItems.add(ext);
+      paths.add(defaultPath);
+    }
+
+    BufferedReader bufferedReader = null;
+    try {
+      bufferedReader = new BufferedReader(new FileReader("/proc/mounts"));
+      String line;
+      while ((line = bufferedReader.readLine()) != null) {
+        if (line.contains("vfat") || line.contains("/mnt")) {
+          StringTokenizer tokens = new StringTokenizer(line, " ");
+          tokens.nextToken();
+          String path = tokens.nextToken();
+          if (paths.contains(path)) {
+            continue;
+          }
+          if (line.contains("/dev/block/vold")) {
+            if (!line.contains("/mnt/secure") && !line.contains("/mnt/asec") && !line.contains("/mnt/obb") && !line.contains("/dev/mapper") && !line.contains("tmpfs")) {
+              if (!new File(path).isDirectory()) {
+                int index = path.lastIndexOf('/');
+                if (index != -1) {
+                  String newPath = "/storage/" + path.substring(index + 1);
+                  if (new File(newPath).isDirectory()) {
+                    path = newPath;
+                  }
+                }
+              }
+              paths.add(path);
+              try {
+                Storage item = new Storage();
+                if (path.toLowerCase().contains("sd")) {
+                  item.title = "SD Card";
+                } else {
+                  item.title = "External Storage";
+                }
+                item.file = new File(path);
+                storageItems.add(item);
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            }
+          }
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (bufferedReader != null) {
+        try {
+          bufferedReader.close();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return storageItems;
   }
 }

@@ -2,10 +2,8 @@
 <resources>
     <string name="about_album_label">About %s</string>
     <string name="about_settings_summary">Team, social links</string>
-
     <string name="accent_color">Azentu kolorea</string>
     <string name="accent_color_desc">Gaiaren azentu kolorea. Lehenetsia: teal</string>
-
     <string name="action_about">Honi buruz</string>
     <string name="action_add_to_favorites">Gogokoetara gehitu</string>
     <string name="action_add_to_playing_queue">Ilaran gehitu</string>
@@ -48,32 +46,23 @@
     <string name="action_tag_editor">Etiketa editorea</string>
     <string name="action_toggle_favorite">Toggle favorite</string>
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
-
     <string name="adaptive">Moldagarria</string>
-
     <string name="add_action">Gehitu</string>
     <string name="add_playlist_title">"Erreprodukzio zerrendan gehitu"</string>
-
     <string name="added_title_to_playing_queue">"Abestia erreprodukzio ilaran gehitu da"</string>
     <string name="added_x_titles_to_playing_queue">%1$d abesti erreproduzkio ilaran gehitu dira</string>
-
     <string name="album">Albuma</string>
-
     <plurals name="albumSongs">
         <item quantity="one">Song</item>
         <item quantity="other">Songs</item>
     </plurals>
-
     <string name="album_artist">Albumeko artista</string>
-
     <string name="albums">Albumak</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
         <item quantity="other">Albums</item>
     </plurals>
-
     <string name="always">Beti</string>
-
     <string name="app_share">Begiratu musika erreproduzitzaile hau: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Nahastu</string>
     <string name="app_shortcut_top_tracks_short">Pista onenak</string>
@@ -82,25 +71,16 @@
     <string name="app_widget_classic_name">Klasikoa</string>
     <string name="app_widget_small_name">Txikia</string>
     <string name="app_widget_text_name">Testua</string>
-
     <string name="artist">Artista</string>
-
     <string name="artists">Artistak</string>
-
     <string name="audio_focus_denied">Audio fokatzea ukatua</string>
     <string name="audio_settings_summary">Aldatu soinu ezarpenak eta doitu nahasgailuaren kontrolak</string>
-
     <string name="auto">Automatikoa</string>
-
     <string name="biography">Biografia</string>
-
     <string name="black_theme_name">Beltza bakarrik</string>
-
     <string name="blacklist">Zerrenda beltza</string>
-
     <string name="blur">Lausotzea</string>
     <string name="blur_card">Txartel lausotua</string>
-
     <string name="bug_report_failed">Ezin izan da txostena bidali</string>
     <string name="bug_report_failed_invalid_token">Okerreko sarrera fitxa. Mesedez aplikazioaren garatzailearekin harremanetan jarri</string>
     <string name="bug_report_failed_issues_not_available">Arazoak ez daude gaituta aukeratutako biltegian. Mesedez aplikazioaren garatzailearekin harremanetan jarri</string>
@@ -114,55 +94,34 @@
     <string name="bug_report_no_username">Mesedez sartu zure baliozko GitHub-eko erabiltzaile izena</string>
     <string name="bug_report_summary">Ustekabeko akats bat gertatu da. Sentitzen dugu akats hau aurkitu izana, huts egiten jarraitzen batu \"Garbitu aplikazioaren datuak\"</string>
     <string name="bug_report_use_account">GitHub kontua erabiliz bidali</string>
-
     <string name="buy_now">Buy now</string>
-
     <string name="cancel_current_timer">Ezeztatu</string>
-
     <string name="card">Txartela</string>
     <string name="card_color_style">Txartel koloreztatua</string>
     <string name="card_style">Txartela</string>
-
     <string name="carousal_effect_on_now_playing_screen">Karrusel efektua orain erreproduzitzen pantailan</string>
-
     <string name="cascading">Ur jauzi moduan</string>
-
     <string name="changelog">Aldaketa zerrenda</string>
     <string name="changelog_summary">Aldaketa zerrenda Telegrameko kanalean mantentzen da</string>
-
     <string name="circle">Circle</string>
-
     <string name="circular">Zirkularra</string>
-
     <string name="classic">Classic</string>
-
     <string name="clear_action">Garbitu</string>
     <string name="clear_blacklist">Zerrenda beltza garbitu</string>
     <string name="clear_playing_queue">Ilara garbitu</string>
-
     <string name="color">Kolorea</string>
-
     <string name="colors">Koloreak</string>
-
     <string name="composer">Composer</string>
-
     <string name="copied_device_info_to_clipboard">Gailuaren informazioa arbelean kopiatuta</string>
-
     <string name="could_not_create_playlist">Ezin izan da erreprodukzio zerrenda sortu</string>
     <string name="could_not_download_album_cover">"Ezin izan da bat datorren albumaren azalik deskargatu"</string>
     <string name="could_not_restore_purchase">Ezin izan da erosketa leheneratu</string>
     <string name="could_not_scan_files">Ezin izan dira %d fitxategiak eskaneatu</string>
-
     <string name="create_action">Sortu</string>
-
     <string name="created_playlist_x">%1$s erreprodukzio zerrenda sortua</string>
-
     <string name="credit_title">Kideak eta laguntzaileak</string>
-
     <string name="currently_listening_to_x_by_x">%2$s-(r)en %1$s entzuten ari zara</string>
-
     <string name="dark_theme_name">Nahiko iluna</string>
-
     <string name="delete_playlist_title">Erreprodukzio zerrenda ezabatu</string>
     <string name="delete_playlist_x"><![CDATA[<b>%1$s</b> erreprodukzio zerrenda ezabatu?]]></string>
     <string name="delete_playlists_title">Erreprodukzio zerrendak ezabatu</string>
@@ -171,62 +130,36 @@
     <string name="delete_songs_title">Delete songs</string>
     <string name="delete_x_playlists"><![CDATA[<b>%1$d</b> erreprodukzio zerrenda ezabatu?]]></string>
     <string name="delete_x_songs"><![CDATA[<b>%1$d</b> abesti ezabatu?]]></string>
-
     <string name="deleted_x_songs">%1$d abesti ezabatu dira</string>
-
     <string name="depth">Sakonera</string>
-
     <string name="description">Azalpena</string>
-
     <string name="device_info">Gailuaren informazioa</string>
-
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
     <string name="dialog_title_set_ringtone">Set ringtone</string>
-
     <string name="do_you_want_to_clear_the_blacklist">Zerrenda beltza garbitu nahi duzu?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[<b>%1$s</b> zerrenda beltzetik ezabatu nahi duzu?]]></string>
-
     <string name="donate">Lagundu diruz</string>
     <string name="donate_summary">Nire lanagatik ordaindua izan behar dudala pentsatzen baduzu, diru apur bat utzi dezakezu hemen</string>
-
     <string name="donation_header">Erosidazu:</string>
-
     <string name="drive_mode">Drive mode</string>
-
     <string name="empty">Hutsik</string>
-
     <string name="equalizer">Nahasgailua</string>
-
     <string name="faq">Ohiko galderak</string>
-
     <string name="favorites">Gogokoak</string>
-
     <string name="finish_last_song">Finish last song</string>
-
     <string name="fit">Egokitu</string>
-
     <string name="flat">Laua</string>
-
     <string name="folders">Karpetak</string>
-
     <string name="follow_system">Follow system</string>
-
     <string name="for_you">Zuretzako</string>
-
     <string name="free">Free</string>
-
     <string name="full">Beteta</string>
     <string name="full_card">Txartel betea</string>
-
     <string name="general_settings_summary">Aldatu applikazioaren gai eta koloreak</string>
     <string name="general_settings_title">Itxura</string>
-
     <string name="genre">Generoa</string>
-
     <string name="genres">Generoak</string>
-
     <string name="git_hub_summary">GitHub-en proiektua zatitu</string>
-
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -236,72 +169,46 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">Grid style</string>
-
     <string name="hinge">Bisagra</string>
-
     <string name="history">Historiala</string>
-
     <string name="home">Hasiera</string>
-
     <string name="horizontal_flip">Iraulketa horizontala</string>
-
     <string name="image">Irudia</string>
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Aldatu artisten irudien deskarga ezarpenak</string>
-
     <string name="inserted_x_songs_into_playlist_x">%1$d abesti gehitu dira %2$s erreprodukzio zerrendan</string>
-
     <string name="instagram_page_summary">Partekatu zure Retro Music-en konfigurazioa Instagram-en</string>
-
     <string name="keyboard">Keyboard</string>
-
     <string name="label_bit_rate">Bit-tasa</string>
     <string name="label_file_format">Formatua</string>
     <string name="label_file_name">Fitxategiaren izena</string>
     <string name="label_file_path">Fitxategiaren kokalekua</string>
     <string name="label_file_size">Tamaina</string>
+    <string name="label_last_modified">Ultima modificacion</string>
     <string name="label_more_from">More from %s</string>
     <string name="label_sampling_rate">Laginketa tasa</string>
     <string name="label_track_length">Luzera</string>
-
     <string name="labeled">Etiketaduna</string>
-
     <string name="last_added">Gehitutako azkenak</string>
     <string name="last_song">Last song</string>
-
     <string name="library_categories">Library categories</string>
-
     <string name="licenses">Lizentziak</string>
-
     <string name="light_theme_name">Zuria jakina</string>
-
     <string name="listeners_label">Listeners</string>
-
     <string name="listing_files">Fitxategien zerrenda</string>
-
     <string name="loading_products">Produktuak kargatzen...</string>
-
     <string name="login">Saioa hasi</string>
-
     <string name="lyrics">Letrak</string>
-
     <string name="made_with_love">❤️-z Indian egina</string>
-
     <string name="material">Материален</string>
-
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Permission error</string>
-
     <string name="my_name">Nire izena</string>
     <string name="my_top_tracks">Gehien erreproduzituak</string>
-
     <string name="never">Inoiz ez</string>
-
     <string name="new_playlist_title">Erreprodukzio zerrenda berria</string>
     <string name="new_start_directory">%s da hasierako direktorio berria</string>
-
     <string name="next_song">Next Song</string>
-
     <string name="no_albums">Albumik ez</string>
     <string name="no_artists">Artistarik ez</string>
     <string name="no_audio_ID">"Lehenik erreproduzitu abesti bat, saiatu berriro ondoren"</string>
@@ -313,57 +220,36 @@
     <string name="no_purchase_found">Ez da erosketarik aurkitu</string>
     <string name="no_results">Emaitzarik ez</string>
     <string name="no_songs">Abestirik ez</string>
-
     <string name="normal">Normala</string>
     <string name="normal_lyrics">Letra normalak</string>
-
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> ez dator dendan zerrendatua]]></string>
-
     <string name="nothing_to_scan">Eskaneatzekorik ez</string>
     <string name="nothing_to_see">Nothing to see</string>
-
     <string name="notification">Jakinarazpena</string>
     <string name="notification_settings_summary">Jakinarazpen estiloa pertsonalizatu</string>
-
     <string name="now_playing">Orain erreproduzitzen</string>
     <string name="now_playing_queue">Erreprodukzio ilara</string>
     <string name="now_playing_summary">Pertsonalizatu orain erreproduzitzen pantaila</string>
     <string name="now_playing_themes">9+ orain erreproduzitzen gai</string>
-
     <string name="only_on_wifi">Wi-Fi-arekin bakarrik</string>
-
     <string name="other_settings_summary">Advanced testing features</string>
-
     <string name="others">Bestelako</string>
-
     <string name="password">Pasahitza</string>
-
     <string name="past_three_months">Azken 3 hilabeteak</string>
-
-    <string name="peak">Peak</string>
-
+    <string name="peek">Peek</string>
     <string name="permission_external_storage_denied">Kanpoko biltegiratzera sarbidea ukatua</string>
-
     <string name="permissions_denied">Baimenak ukatuak izan dira</string>
-
     <string name="personalize">Pertsonalizatu</string>
     <string name="personalize_settings_summary">Pertsonalizatu zure orain erreproduzitzen eta UI kontrolak</string>
-
     <string name="pick_from_local_storage">Tokiko biltegitik hautatu</string>
-
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
-
     <string name="plain">Arrunta</string>
-
     <string name="playing_notification_description">Erreproduzitzen jakinarazpenak erreproduzitu/pausatu etab. ekintzak eskaintzen ditu</string>
     <string name="playing_notification_name">Erreproduzitzen jakinarazpena</string>
-
     <string name="playlist_is_empty">Erreprodukzio zerrenda hutsik dago</string>
     <string name="playlist_name_empty">Erreprodukzio zerrendaren izena</string>
-
     <string name="playlists">Erreprodukzio zerrendak</string>
-
     <string name="pref_blur_amount_summary">Gai lausoetan ezarritako lausotze maila, baxuagoa azkarragoa da</string>
     <string name="pref_blur_amount_title">Lausotze maila</string>
     <string name="pref_filter_song_summary">Filter songs by length</string>
@@ -383,6 +269,7 @@
     <string name="pref_keep_screen_on_summary">Gogoan izan eginbide hau aktibatzeak eragina izan dezakeela bateriaren iraupenean</string>
     <string name="pref_keep_screen_on_title">Mantendu pantaila pizturik</string>
     <string name="pref_language_name">Select language</string>
+    <string name="pref_snow_fall_title">Elur efektua</string>
     <string name="pref_summary_album_art_on_lockscreen">Erabili erreproduzitzen ari den abestiaren azala blokeo-pantailako horma-paper gisa</string>
     <string name="pref_summary_audio_ducking">Jaitsi bolumena sistemaren soinuren batek jotzean edo jakinarazpen bat jasotzean</string>
     <string name="pref_summary_blacklist">Zerrenda beltzean jarritako edukiak zure liburutegitik ezkutatuko dira</string>
@@ -438,22 +325,15 @@
     <string name="pref_title_toggle_toggle_headset">Erreprodukzio automatikoa</string>
     <string name="pref_title_toggle_toggle_shuffle">Nahastu modua</string>
     <string name="pref_title_toggle_volume">Bolumen kontrolak</string>
-
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
-
     <string name="profile">Profila</string>
-
     <string name="purchase">Erosi</string>
-
     <string name="queue">Ilara</string>
-
     <string name="rate_app">Baloratu aplikazioa</string>
     <string name="rate_on_google_play_summary">Aplikazioa gustatzen zaizu? Esan iezaguzu Google Play Store-n nola hobetu dezakegun</string>
-
     <string name="recent_albums">Azken albumak</string>
     <string name="recent_artists">Azken artistak</string>
-
     <string name="remove_action">Kendu</string>
     <string name="remove_cover">Azala kendu</string>
     <string name="remove_from_blacklist">Zerrenda beltzetik kendu</string>
@@ -461,25 +341,17 @@
     <string name="remove_song_x_from_playlist"><![CDATA[<b>%1$s</b> abestia erreprodukzio zerrendatik kendu?]]></string>
     <string name="remove_songs_from_playlist_title">Abestiak erreprodukzio zerrendatik kendu</string>
     <string name="remove_x_songs_from_playlist"><![CDATA[<b>%1$d</b> abesti erreprodukzio zerrendatik kendu?]]></string>
-
     <string name="rename_playlist_title">Erreprodukzio zerrenda berrizendatu</string>
-
     <string name="report_an_issue">Arazo baten berri eman</string>
     <string name="report_bug">Eman akatsen berri</string>
-
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">Artistaren irudia berrezarri</string>
-
     <string name="restore">Leheneratu</string>
-
     <string name="restored_previous_purchase_please_restart">Aurreko erosketa leheneratua. Mesedez aplikazioa berrabiarazi ezaugarri guztiak erabiltzeko</string>
     <string name="restored_previous_purchases">Aurreko erosketa leheneratua</string>
-
     <string name="restoring_purchase">Erosketa leheneratzen...</string>
-
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
-
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
@@ -492,48 +364,31 @@
     <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
     <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
     <string name="saf_write_failed">File write failed: %s</string>
-
     <string name="save">Save</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">Gorde fitxategi gisa</string>
     <string name="save_playlists_title">Gorde fitxategi gisa</string>
-
     <string name="saved_playlist_to">Erreprodukzio zerrenda %s-n gorde da</string>
-
     <string name="saving_changes">Aldaketak gordetzen</string>
-
     <string name="scan_media">Eskaneatu media</string>
-
     <string name="scanned_files">%2$d-tik %1$d fitxategi eskaneatu dira</string>
-
     <string name="scrobbles_label">Scrobbles</string>
-
     <string name="select_all">Hautatu guztiak</string>
-
     <string name="selected">Hautatua</string>
-
     <string name="set">Set</string>
     <string name="set_artist_image">Artistaren irudia ezarri</string>
-
     <string name="share_app">Partekatu aplikazioa</string>
     <string name="share_to_stories">Share to Stories</string>
-
     <string name="shuffle">Nahastu</string>
-
     <string name="simple">Soila</string>
-
     <string name="sleep_timer_canceled">Lo tenporizadorea bertan behera utzi da</string>
     <string name="sleep_timer_set">Lo tenporizadorea %d minuturako ezarri da</string>
-
     <string name="social">Soziala</string>
     <string name="social_stories">Share story</string>
-
     <string name="song">Abestia</string>
     <string name="song_duration">Abestiaren iraupena</string>
-
     <string name="songs">Abestiak</string>
-
     <string name="sort_order">Ordenatze irizpidea</string>
     <string name="sort_order_a_z">Gorakorra</string>
     <string name="sort_order_album">Albuma</string>
@@ -543,91 +398,54 @@
     <string name="sort_order_date_modified">Date modified</string>
     <string name="sort_order_year">Urtea</string>
     <string name="sort_order_z_a">Beherakorra</string>
-
     <string name="speech_not_supported">Sentitzen dugu! Zure gailuak ez du ahots bidezko idazketa onartzen</string>
     <string name="speech_prompt">Zure liburutegian bilatu</string>
-
     <string name="stack">Stack</string>
-
     <string name="start_play_music">Start playing music.</string>
-
     <string name="suggestion_songs">Iradokizunak</string>
-
     <string name="support_development">Onartutako garapena</string>
-
     <string name="swipe_to_unlock">Swipe to unlock</string>
-
     <string name="synced_lyrics">Letra sinkronizatuak</string>
-
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Batu Telegram-eko kanala akatsak, iradokizunak etab. kontatzeko</string>
-
     <string name="thank_you">Eskerrik asko!</string>
-
     <string name="the_audio_file">Audio fitxategia</string>
-
     <string name="this_month">Hilabete hau</string>
     <string name="this_week">Aste hau</string>
     <string name="this_year">Urte hau</string>
-
     <string name="tiny">Ñimiñoa</string>
     <string name="tiny_card_style">Tiny card</string>
-
     <string name="title">Titulua</string>
-
     <string name="today">Gaur</string>
-
     <string name="top_albums">Album onenak</string>
     <string name="top_artists">Artista onenak</string>
-
     <string name="track_hint">"Pista (2, 2. pistarako edo 3004 3. CDko 4. pistarako)"</string>
     <string name="track_list">Pista zenbakia</string>
-
     <string name="translate">Itzuli</string>
     <string name="translate_community">Lagun iezaguzu aplikazioa zure hizkuntzara itzultzen</string>
-
     <string name="try_retro_music_premium">Try Retro Music Premium</string>
-
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Partekatu zure Retro Music-en diseinua</string>
-
     <string name="unlabeled">Etiketa gabe</string>
-
     <string name="unplayable_file">Ezin izan da abestia erreproduzitu</string>
-
     <string name="up_next">Jarraian</string>
-
     <string name="update_image">Irudia eguneratu</string>
-
     <string name="updating">Eguneratzen...</string>
-
     <string name="username">Erabiltzaile izena</string>
-
     <string name="version">Bertsioa</string>
-
     <string name="vertical_flip">Iraulketa bertikala</string>
-
     <string name="volume">Volume</string>
-
     <string name="web_search">Web bilaketa</string>
-
     <string name="welcome">Welcome,</string>
-
     <string name="what_do_you_want_to_share">Zer partekatu nahi duzu?</string>
-
     <string name="whats_new">Zer berri</string>
-
     <string name="window">Leihoa</string>
     <string name="window_corner_edges">Ertz biribilduak</string>
-
     <string name="x_has_been_set_as_ringtone">Ezarri %1$s dei-tonu gisa</string>
     <string name="x_selected">%1$d hautaturik</string>
-
     <string name="year">Urtea</string>
-
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Arazo bilatzaile webgunera birbidalia izango zara</string>
-
     <string name="your_account_data_is_only_used_for_authentication">Zure kontuaren datuak autentifikaziorako soilik erabiliko dira</string>
 </resources>

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="156dp"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     android:background="?attr/rectSelector"
-    android:orientation="vertical"
-    android:padding="4dp">
+    android:orientation="vertical">
 
     <io.github.muntashirakon.music.views.RetroShapeableImageView
         android:id="@+id/image"
-        android:layout_width="144dp"
-        android:layout_height="144dp"
+        android:layout_width="156dp"
+        android:layout_height="156dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +26,8 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
-        android:textAppearance="@style/TextViewBody1"
         android:paddingTop="12dp"
+        android:textAppearance="@style/TextViewBody1"
         android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

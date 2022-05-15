@@ -19,34 +19,38 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.databinding.FragmentLibraryBinding
 import io.github.muntashirakon.music.dialogs.CreatePlaylistDialog
 import io.github.muntashirakon.music.dialogs.ImportPlaylistDialog
 import io.github.muntashirakon.music.extensions.whichFragment
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.model.CategoryInfo
-import io.github.muntashirakon.music.state.NowPlayingPanelState
 import io.github.muntashirakon.music.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_library.*
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
+    private var _binding: FragmentLibraryBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentLibraryBinding.bind(view)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(true)
-        mainActivity.setSupportActionBar(toolbar)
+        mainActivity.setBottomNavVisibility(true)
+        mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
-        toolbar.setNavigationOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             findNavController().navigate(
-                R.id.searchFragment,
+                R.id.action_search,
                 null,
                 navOptions
             )
@@ -56,7 +60,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     }
 
     private fun setupTitle() {
-        appNameText.text = getText(R.string.app_name)
+        binding.appNameText.text = getText(R.string.app_name)
     }
 
     private fun setupNavigationController() {
@@ -67,32 +71,30 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
         val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
         if (categoryInfo.visible) {
-            navGraph.startDestination = categoryInfo.category.id
+            navGraph.setStartDestination(categoryInfo.category.id)
         }
         navController.graph = navGraph
-        NavigationUI.setupWithNavController(mainActivity.getBottomNavigationView(), navController)
+        NavigationUI.setupWithNavController(mainActivity.bottomNavigationView, navController)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            appBarLayout.setExpanded(true, true)
+            binding.appBarLayout.setExpanded(true, true)
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
+    override fun onPrepareMenu(menu: Menu) {
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
-            toolbar,
+            binding.toolbar,
             menu,
-            getToolbarBackgroundColor(toolbar)
+            getToolbarBackgroundColor(binding.toolbar)
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> findNavController().navigate(
                 R.id.settingsActivity,
@@ -108,6 +110,11 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
                 "ShowCreatePlaylistDialog"
             )
         }
-        return super.onOptionsItemSelected(item)
+        return false
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

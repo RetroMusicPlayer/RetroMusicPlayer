@@ -16,9 +16,9 @@
 #   public *;
 #}
 
-# Uncomment this to preserve the line number information for
+# Preserve the line number information for
 # debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
@@ -34,9 +34,15 @@
 
 # Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
-    **[] $VALUES;
-    public *;
+-keep class * extends com.bumptech.glide.module.AppGlideModule {
+ <init>(...);
+}
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
+  *** rewind();
 }
 
 # OkHttp
@@ -47,16 +53,19 @@
 
 #-dontwarn
 #-ignorewarnings
--dontshrink
--dontobfuscate
 
+#Jaudiotagger
 -dontwarn org.jaudiotagger.**
+-dontwarn org.jcodec.**
 -keep class org.jaudiotagger.** { *; }
+-keep class org.jcodec.** { *; }
 
 -keepclassmembers enum * { *; }
 -keepattributes *Annotation*, Signature, Exception
 -keepnames class androidx.navigation.fragment.NavHostFragment
--keepnames class io.github.muntashirakon.music.model.Home
 -keep class * extends androidx.fragment.app.Fragment{}
 -keepnames class * extends android.os.Parcelable
 -keepnames class * extends java.io.Serializable
+-keep class io.github.muntashirakon.music.network.model.** { *; }
+-keep class io.github.muntashirakon.music.model.** { *; }
+-keep class com.google.android.material.bottomsheet.** { *; }

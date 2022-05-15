@@ -14,45 +14,37 @@
  */
 package io.github.muntashirakon.music.fragments.player.full
 
-import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
-import android.os.AsyncTask
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.view.animation.LinearInterpolator
-import android.widget.PopupMenu
+import android.widget.ImageButton
 import android.widget.SeekBar
+import android.widget.TextView
+import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.databinding.FragmentFullPlayerControlsBinding
 import io.github.muntashirakon.music.db.PlaylistEntity
-import io.github.muntashirakon.music.db.SongEntity
 import io.github.muntashirakon.music.db.toSongEntity
-import io.github.muntashirakon.music.extensions.applyColor
-import io.github.muntashirakon.music.extensions.hide
-import io.github.muntashirakon.music.extensions.show
+import io.github.muntashirakon.music.extensions.*
 import io.github.muntashirakon.music.fragments.LibraryViewModel
 import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.base.AbsPlayerControlsFragment
+import io.github.muntashirakon.music.fragments.base.goToAlbum
+import io.github.muntashirakon.music.fragments.base.goToArtist
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
-import io.github.muntashirakon.music.helper.MusicProgressViewUpdateHelper
 import io.github.muntashirakon.music.helper.PlayPauseButtonOnClickHandler
-import io.github.muntashirakon.music.misc.SimpleOnSeekbarChangeListener
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.service.MusicService
-import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
-import io.github.muntashirakon.music.util.RetroUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_full_player_controls.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -66,37 +58,49 @@ class FullPlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_full_player_controls),
     PopupMenu.OnMenuItemClickListener {
 
-    private var lastPlaybackControlsColor: Int = 0
-    private var lastDisabledPlaybackControlsColor: Int = 0
-    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
     private val libraryViewModel: LibraryViewModel by sharedViewModel()
+    private var _binding: FragmentFullPlayerControlsBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-    }
+    override val progressSlider: SeekBar
+        get() = binding.progressSlider
+
+    override val shuffleButton: ImageButton
+        get() = binding.shuffleButton
+
+    override val repeatButton: ImageButton
+        get() = binding.repeatButton
+
+    override val nextButton: ImageButton
+        get() = binding.nextButton
+
+    override val previousButton: ImageButton
+        get() = binding.previousButton
+
+    override val songTotalTime: TextView
+        get() = binding.songTotalTime
+
+    override val songCurrentProgress: TextView
+        get() = binding.songCurrentProgress
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentFullPlayerControlsBinding.bind(view)
+
         setUpMusicControllers()
-
-        songTotalTime.setTextColor(Color.WHITE)
-        songCurrentProgress.setTextColor(Color.WHITE)
-        title.isSelected = true
-    }
-
-    override fun onResume() {
-        super.onResume()
-        progressViewUpdateHelper.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        progressViewUpdateHelper.stop()
+        binding.songTotalTime.setTextColor(Color.WHITE)
+        binding.songCurrentProgress.setTextColor(Color.WHITE)
+        binding.title.isSelected = true
+        binding.title.setOnClickListener {
+            goToAlbum(requireActivity())
+        }
+        binding.text.setOnClickListener {
+            goToArtist(requireActivity())
+        }
     }
 
     public override fun show() {
-        playPauseButton!!.animate()
+        binding.playPauseButton.animate()
             .scaleX(1f)
             .scaleY(1f)
             .setInterpolator(DecelerateInterpolator())
@@ -104,7 +108,7 @@ class FullPlaybackControlsFragment :
     }
 
     public override fun hide() {
-        playPauseButton.apply {
+        binding.playPauseButton.apply {
             scaleX = 0f
             scaleY = 0f
             rotation = 0f
@@ -116,18 +120,18 @@ class FullPlaybackControlsFragment :
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
 
         val tintList = ColorStateList.valueOf(color.primaryTextColor)
-        playerMenu.imageTintList = tintList
-        songFavourite.imageTintList = tintList
+        binding.playerMenu.imageTintList = tintList
+        binding.songFavourite.imageTintList = tintList
         volumeFragment?.setTintableColor(color.primaryTextColor)
-        progressSlider.applyColor(color.primaryTextColor)
-        title.setTextColor(color.primaryTextColor)
-        text.setTextColor(color.secondaryTextColor)
-        songInfo.setTextColor(color.secondaryTextColor)
-        songCurrentProgress.setTextColor(color.secondaryTextColor)
-        songTotalTime.setTextColor(color.secondaryTextColor)
+        binding.progressSlider.applyColor(color.primaryTextColor)
+        binding.title.setTextColor(color.primaryTextColor)
+        binding.text.setTextColor(color.secondaryTextColor)
+        binding.songInfo.setTextColor(color.secondaryTextColor)
+        binding.songCurrentProgress.setTextColor(color.secondaryTextColor)
+        binding.songTotalTime.setTextColor(color.secondaryTextColor)
 
-        playPauseButton.backgroundTintList = tintList
-        playPauseButton.imageTintList = ColorStateList.valueOf(color.backgroundColor)
+        binding.playPauseButton.backgroundTintList = tintList
+        binding.playPauseButton.imageTintList = ColorStateList.valueOf(color.backgroundColor)
 
         updateRepeatState()
         updateShuffleState()
@@ -143,14 +147,14 @@ class FullPlaybackControlsFragment :
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        title.text = song.title
-        text.text = song.artistName
+        binding.title.text = song.title
+        binding.text.text = song.artistName
         updateIsFavorite()
         if (PreferenceUtil.isSongInfo) {
-            songInfo.text = getSongInfo(song)
-            songInfo.show()
+            binding.songInfo.text = getSongInfo(song)
+            binding.songInfo.show()
         } else {
-            songInfo.hide()
+            binding.songInfo.hide()
         }
     }
 
@@ -165,80 +169,39 @@ class FullPlaybackControlsFragment :
 
     private fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause)
+            binding.playPauseButton.setImageResource(R.drawable.ic_pause)
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
+            binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
         }
     }
 
     private fun setUpPlayPauseFab() {
-        playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
-        playPauseButton.post {
-            if (playPauseButton != null) {
-                playPauseButton.pivotX = (playPauseButton.width / 2).toFloat()
-                playPauseButton.pivotY = (playPauseButton.height / 2).toFloat()
-            }
+        binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
+        binding.playPauseButton.post {
+            binding.playPauseButton.pivotX = (binding.playPauseButton.width / 2).toFloat()
+            binding.playPauseButton.pivotY = (binding.playPauseButton.height / 2).toFloat()
         }
     }
 
     private fun setUpMusicControllers() {
         setUpPlayPauseFab()
-        setUpPrevNext()
-        setUpRepeatButton()
-        setUpShuffleButton()
-        setUpProgressSlider()
         setupFavourite()
         setupMenu()
     }
 
     private fun setupMenu() {
-        playerMenu.setOnClickListener {
+        binding.playerMenu.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), it)
             popupMenu.setOnMenuItemClickListener(this)
             popupMenu.inflate(R.menu.menu_player)
+            popupMenu.menu.findItem(R.id.action_toggle_favorite).isVisible = false
+            popupMenu.menu.findItem(R.id.action_toggle_lyrics).isChecked = PreferenceUtil.showLyrics
             popupMenu.show()
         }
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return (parentFragment as FullPlayerFragment).onMenuItemClick(item!!)
-    }
-
-    private fun setUpPrevNext() {
-        updatePrevNextColor()
-        nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
-        previousButton.setOnClickListener { MusicPlayerRemote.back() }
-    }
-
-    private fun updatePrevNextColor() {
-        nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-        previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-    }
-
-    override fun setUpProgressSlider() {
-        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(
-                        MusicPlayerRemote.songProgressMillis,
-                        MusicPlayerRemote.songDurationMillis
-                    )
-                }
-            }
-        })
-    }
-
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 
     override fun onRepeatModeChanged() {
@@ -249,84 +212,49 @@ class FullPlaybackControlsFragment :
         updateShuffleState()
     }
 
-    private fun setUpShuffleButton() {
-        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
-    }
-
-    override fun updateShuffleState() {
-        when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
-                lastPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-            else -> shuffleButton.setColorFilter(
-                lastDisabledPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-        }
-    }
-
-    private fun setUpRepeatButton() {
-        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
-    }
-
-    override fun updateRepeatState() {
-        when (MusicPlayerRemote.repeatMode) {
-            MusicService.REPEAT_MODE_NONE -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat)
-                repeatButton.setColorFilter(
-                    lastDisabledPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-            MusicService.REPEAT_MODE_ALL -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat)
-                repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-            }
-            MusicService.REPEAT_MODE_THIS -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_one)
-                repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-            }
-        }
-    }
-
     private fun setupFavourite() {
-        songFavourite?.setOnClickListener {
+        binding.songFavourite.setOnClickListener {
             toggleFavorite(MusicPlayerRemote.currentSong)
         }
     }
 
-    fun updateIsFavorite() {
+    override fun onFavoriteStateChanged() {
+        updateIsFavorite(animate = true)
+    }
+
+    fun updateIsFavorite(animate: Boolean = false) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
-            if (playlist != null) {
-                val song: SongEntity =
-                    MusicPlayerRemote.currentSong.toSongEntity(playlist.playListId)
-                val isFavorite: Boolean = libraryViewModel.isFavoriteSong(song).isNotEmpty()
-                withContext(Dispatchers.Main) {
-                    val icon =
-                        if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                    val drawable = TintHelper.createTintedDrawable(activity, icon, Color.WHITE)
-                    songFavourite?.setImageDrawable(drawable)
+            val isFavorite: Boolean =
+                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
+            withContext(Dispatchers.Main) {
+                val icon = if (animate && VersionUtils.hasMarshmallow()) {
+                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
+                } else {
+                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                }
+                val drawable = requireContext().getTintedDrawable(
+                    icon,
+                    Color.WHITE
+                )
+                binding.songFavourite.apply {
+                    setImageDrawable(drawable)
+                    if (drawable is AnimatedVectorDrawable) {
+                        drawable.start()
+                    }
                 }
             }
         }
     }
 
     private fun toggleFavorite(song: Song) {
-        if (song.id == MusicPlayerRemote.currentSong.id) {
-            updateIsFavorite()
-        }
         lifecycleScope.launch(Dispatchers.IO) {
-            val playlist: PlaylistEntity? = libraryViewModel.favoritePlaylist()
-            if (playlist != null) {
-                val songEntity = song.toSongEntity(playlist.playListId)
-                val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
-                if (isFavorite) {
-                    libraryViewModel.removeSongFromPlaylist(songEntity)
-                } else {
-                    libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-                }
+            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
+            val songEntity = song.toSongEntity(playlist.playListId)
+            val isFavorite = libraryViewModel.isFavoriteSong(songEntity).isNotEmpty()
+            if (isFavorite) {
+                libraryViewModel.removeSongFromPlaylist(songEntity)
+            } else {
+                libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
             libraryViewModel.forceReload(ReloadType.Playlists)
             requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
@@ -335,5 +263,10 @@ class FullPlaybackControlsFragment :
 
     fun onFavoriteToggled() {
         toggleFavorite(MusicPlayerRemote.currentSong)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

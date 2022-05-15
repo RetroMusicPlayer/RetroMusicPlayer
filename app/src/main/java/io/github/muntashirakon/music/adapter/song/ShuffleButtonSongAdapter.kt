@@ -15,14 +15,16 @@
 package io.github.muntashirakon.music.adapter.song
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
-import code.name.monkey.appthemehelper.ThemeStore
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.extensions.applyColor
-import io.github.muntashirakon.music.extensions.applyOutlineColor
+import io.github.muntashirakon.music.extensions.accentColor
+import io.github.muntashirakon.music.extensions.accentOutlineColor
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.ICabHolder
 import io.github.muntashirakon.music.model.Song
+import io.github.muntashirakon.music.util.PreferenceUtil
+import io.github.muntashirakon.music.util.RetroUtil
 import com.google.android.material.button.MaterialButton
 
 class ShuffleButtonSongAdapter(
@@ -32,28 +34,36 @@ class ShuffleButtonSongAdapter(
     ICabHolder: ICabHolder?
 ) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, ICabHolder) {
 
+
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {
         return ViewHolder(view)
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) OFFSET_ITEM else SONG
+    }
+
     override fun onBindViewHolder(holder: SongAdapter.ViewHolder, position: Int) {
         if (holder.itemViewType == OFFSET_ITEM) {
-            val color = ThemeStore.accentColor(activity)
             val viewHolder = holder as ViewHolder
             viewHolder.playAction?.let {
                 it.setOnClickListener {
                     MusicPlayerRemote.openQueue(dataSet, 0, true)
                 }
-                it.applyOutlineColor(color)
+                it.accentOutlineColor()
             }
             viewHolder.shuffleAction?.let {
                 it.setOnClickListener {
                     MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
                 }
-                it.applyColor(color)
+                it.accentColor()
             }
         } else {
             super.onBindViewHolder(holder, position - 1)
+            val landscape = RetroUtil.isLandscape
+            if ((PreferenceUtil.songGridSize > 2 && !landscape) || (PreferenceUtil.songGridSizeLand > 5 && landscape)) {
+                holder.menu?.isVisible = false
+            }
         }
     }
 
@@ -69,4 +79,5 @@ class ShuffleButtonSongAdapter(
             super.onClick(v)
         }
     }
+
 }

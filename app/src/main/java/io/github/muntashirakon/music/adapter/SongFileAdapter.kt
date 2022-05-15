@@ -20,30 +20,32 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.util.ATHUtil
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.base.AbsMultiSelectAdapter
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
+import io.github.muntashirakon.music.extensions.getTintedDrawable
+import io.github.muntashirakon.music.glide.GlideApp
+import io.github.muntashirakon.music.glide.RetroGlideExtension
 import io.github.muntashirakon.music.glide.audiocover.AudioFileCover
 import io.github.muntashirakon.music.interfaces.ICabHolder
 import io.github.muntashirakon.music.interfaces.ICallbacks
 import io.github.muntashirakon.music.util.MusicUtil
-import io.github.muntashirakon.music.util.RetroUtil
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.signature.MediaStoreSignature
+import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.io.File
 import java.text.DecimalFormat
 import kotlin.math.log10
 import kotlin.math.pow
-import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class SongFileAdapter(
-    private val activity: AppCompatActivity,
+    override val activity: AppCompatActivity,
     private var dataSet: List<File>,
     private val itemLayoutRes: Int,
     private val iCallbacks: ICallbacks?,
-    iCabHolder: ICabHolder?
+    iCabHolder: ICabHolder?,
 ) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(
     activity, iCabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
@@ -77,7 +79,7 @@ class SongFileAdapter(
             if (holder.itemViewType == FILE) {
                 holder.text?.text = getFileText(file)
             } else {
-                holder.text?.visibility = View.GONE
+                holder.text?.isVisible = false
             }
         }
 
@@ -108,17 +110,15 @@ class SongFileAdapter(
                 )
             )
         } else {
-            val error = RetroUtil.getTintedVectorDrawable(
-                activity, R.drawable.ic_file_music, iconColor
-            )
-            Glide.with(activity)
+            val error = activity.getTintedDrawable(R.drawable.ic_file_music, iconColor)
+            GlideApp.with(activity)
                 .load(AudioFileCover(file.path))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(error)
                 .placeholder(error)
-                .animate(android.R.anim.fade_in)
+                .transition(RetroGlideExtension.getDefaultTransition())
                 .signature(MediaStoreSignature("", file.lastModified(), 0))
-                .into(holder.image)
+                .into(holder.image!!)
         }
     }
 
@@ -126,12 +126,12 @@ class SongFileAdapter(
         return dataSet.size
     }
 
-    override fun getIdentifier(position: Int): File? {
+    override fun getIdentifier(position: Int): File {
         return dataSet[position]
     }
 
-    override fun getName(`object`: File): String {
-        return getFileTitle(`object`)
+    override fun getName(model: File): String {
+        return getFileTitle(model)
     }
 
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<File>) {
@@ -140,7 +140,7 @@ class SongFileAdapter(
     }
 
     override fun getPopupText(position: Int): String {
-        return getSectionName(position)
+        return if (position >= dataSet.lastIndex) "" else getSectionName(position)
     }
 
     private fun getSectionName(position: Int): String {

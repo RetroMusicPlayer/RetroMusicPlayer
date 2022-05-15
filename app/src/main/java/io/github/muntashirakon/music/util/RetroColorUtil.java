@@ -18,22 +18,31 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.palette.graphics.Palette;
-import code.name.monkey.appthemehelper.util.ColorUtil;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.VersionUtils;
+import io.github.muntashirakon.music.R;
 
 public class RetroColorUtil {
   public static int desaturateColor(int color, float ratio) {
     float[] hsv = new float[3];
     Color.colorToHSV(color, hsv);
 
-    hsv[1] = (hsv[1] / 1 * ratio) + (0.2f * (1.0f - ratio));
+    hsv[1] = (hsv[1] * ratio) + (0.2f * (1.0f - ratio));
 
     return Color.HSVToColor(hsv);
   }
@@ -179,7 +188,7 @@ public class RetroColorUtil {
 
   public static int getDominantColor(Bitmap bitmap, int defaultFooterColor) {
     List<Palette.Swatch> swatchesTemp = Palette.from(bitmap).generate().getSwatches();
-    List<Palette.Swatch> swatches = new ArrayList<Palette.Swatch>(swatchesTemp);
+    List<Palette.Swatch> swatches = new ArrayList<>(swatchesTemp);
     Collections.sort(
         swatches, (swatch1, swatch2) -> swatch2.getPopulation() - swatch1.getPopulation());
     return swatches.size() > 0 ? swatches.get(0).getRgb() : defaultFooterColor;
@@ -200,6 +209,25 @@ public class RetroColorUtil {
       color = ColorUtil.INSTANCE.lightenColor(backgroundColor);
     }
     return color;
+  }
+
+  @ColorInt
+  public static int shiftBackgroundColor(@ColorInt int backgroundColor) {
+    int color = backgroundColor;
+    if (ColorUtil.INSTANCE.isColorLight(color)) {
+      color = ColorUtil.INSTANCE.shiftColor(color, 0.5F);
+    } else {
+      color = ColorUtil.INSTANCE.shiftColor(color, 1.5F);
+    }
+    return color;
+  }
+
+  public static int getMD3AccentColor(@NotNull Context context) {
+    if (VersionUtils.hasS()) {
+      return ContextCompat.getColor(context, R.color.m3_accent_color);
+    } else {
+      return ThemeStore.Companion.accentColor(context);
+    }
   }
 
   private static class SwatchComparator implements Comparator<Palette.Swatch> {

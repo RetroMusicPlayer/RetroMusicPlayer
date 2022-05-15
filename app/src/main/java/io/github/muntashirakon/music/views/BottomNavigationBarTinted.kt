@@ -16,18 +16,14 @@ package io.github.muntashirakon.music.views
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.NavigationViewUtil
-import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.util.PreferenceUtil
-import io.github.muntashirakon.music.util.RippleUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dev.chrisbanes.insetter.applyInsetter
 
 class BottomNavigationBarTinted @JvmOverloads constructor(
     context: Context,
@@ -36,35 +32,43 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
 ) : BottomNavigationView(context, attrs, defStyleAttr) {
 
     init {
+        // If we are in Immersive mode we have to just set empty OnApplyWindowInsetsListener as
+        // bottom, start, and end padding is always applied (with the help of OnApplyWindowInsetsListener) to
+        // BottomNavigationView to dodge the system navigation bar (so we basically clear that listener).
+        if (PreferenceUtil.isFullScreenMode) {
+            setOnApplyWindowInsetsListener { _, insets ->
+                insets
+            }
+        } else {
+            applyInsetter {
+                type(navigationBars = true) {
+                    padding(vertical = true)
+                    margin(horizontal = true)
+                }
+            }
+        }
+
         labelVisibilityMode = PreferenceUtil.tabTitleMode
 
-        val iconColor = ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
-        val accentColor = ThemeStore.accentColor(context)
-        NavigationViewUtil.setItemIconColors(
-            this,
-            ColorUtil.withAlpha(iconColor, 0.5f),
-            accentColor
-        )
-        NavigationViewUtil.setItemTextColors(
-            this,
-            ColorUtil.withAlpha(iconColor, 0.5f),
-            accentColor
-        )
-        itemBackground = RippleDrawable(
-            RippleUtils.convertToRippleDrawableColor(
-                ColorStateList.valueOf(
-                    ThemeStore.accentColor(context).addAlpha()
-                )
-            ),
-            ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background),
-            ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background_mask)
-        )
-        setOnApplyWindowInsetsListener(null)
-        //itemRippleColor = ColorStateList.valueOf(accentColor)
-        background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.colorSurface))
+        if (!PreferenceUtil.materialYou) {
+            val iconColor = ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
+            val accentColor = ThemeStore.accentColor(context)
+            NavigationViewUtil.setItemIconColors(
+                this,
+                ColorUtil.withAlpha(iconColor, 0.5f),
+                accentColor
+            )
+            NavigationViewUtil.setItemTextColors(
+                this,
+                ColorUtil.withAlpha(iconColor, 0.5f),
+                accentColor
+            )
+            itemRippleColor = ColorStateList.valueOf(accentColor.addAlpha(0.08F))
+            itemActiveIndicatorColor = ColorStateList.valueOf(accentColor.addAlpha(0.12F))
+        }
     }
 }
 
-fun Int.addAlpha(): Int {
-    return ColorUtil.withAlpha(this, 0.12f)
+fun Int.addAlpha(alpha: Float): Int {
+    return ColorUtil.withAlpha(this, alpha)
 }

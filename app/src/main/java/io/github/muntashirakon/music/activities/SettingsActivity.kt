@@ -14,37 +14,44 @@
  */
 package io.github.muntashirakon.music.activities
 
+import android.Manifest.permission.BLUETOOTH_CONNECT
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
-import com.afollestad.materialdialogs.color.ColorChooserDialog
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.activities.base.AbsBaseActivity
 import io.github.muntashirakon.music.appshortcuts.DynamicShortcutManager
-import io.github.muntashirakon.music.extensions.applyToolbar
-import io.github.muntashirakon.music.extensions.findNavController
-import kotlinx.android.synthetic.main.activity_settings.*
+import io.github.muntashirakon.music.databinding.ActivitySettingsBinding
+import io.github.muntashirakon.music.extensions.*
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.color.ColorCallback
 
-class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
+class SettingsActivity : AbsBaseActivity(), ColorCallback, OnThemeChangedListener {
+    private lateinit var binding: ActivitySettingsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        setDrawUnderStatusBar()
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
-        setLightNavigationBar(true)
+        val mSavedInstanceState = extra<Bundle>(TAG).value ?: savedInstanceState
+        super.onCreate(mSavedInstanceState)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupToolbar()
+        setPermissionDeniedMessage(getString(R.string.permission_bluetooth_denied))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setNavigationBarColorPreOreo(surfaceColor())
     }
 
     private fun setupToolbar() {
-        setTitle(R.string.action_settings)
-        applyToolbar(toolbar)
+        applyToolbar(binding.toolbar)
         val navController: NavController = findNavController(R.id.contentFrame)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            toolbar.title = navController.currentDestination?.let { getStringFromDestination(it) }
+            binding.collapsingToolbarLayout.title =
+                navController.currentDestination?.let { getStringFromDestination(it) }
         }
     }
 
@@ -59,6 +66,7 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
             R.id.personalizeSettingsFragment -> R.string.personalize
             R.id.themeSettingsFragment -> R.string.general_settings_title
             R.id.aboutActivity -> R.string.action_about
+            R.id.backup_fragment -> R.string.backup_restore_title
             else -> R.id.action_settings
         }
         return getString(idRes)
@@ -68,24 +76,47 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
         return findNavController(R.id.contentFrame).navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun onColorSelection(dialog: ColorChooserDialog, selectedColor: Int) {
-        when (dialog.title) {
-            R.string.accent_color -> {
-                ThemeStore.editTheme(this).accentColor(selectedColor).commit()
-                if (VersionUtils.hasNougatMR())
-                    DynamicShortcutManager(this).updateDynamicShortcuts()
-            }
-        }
-        recreate()
-    }
-
-    override fun onColorChooserDismissed(dialog: ColorChooserDialog) {
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun getPermissionsToRequest(): Array<String> {
+        return if (VersionUtils.hasS()) {
+            arrayOf(BLUETOOTH_CONNECT)
+        } else {
+            arrayOf()
+        }
+    }
+
+    override fun invoke(dialog: MaterialDialog, color: Int) {
+        ThemeStore.editTheme(this).accentColor(color).commit()
+        if (VersionUtils.hasNougatMR())
+            DynamicShortcutManager(this).updateDynamicShortcuts()
+        restart()
+    }
+
+    override fun onThemeValuesChanged() {
+        restart()
+    }
+
+    private fun restart() {
+        val savedInstanceState = Bundle().apply {
+            onSaveInstanceState(this)
+        }
+        finish()
+        val intent = Intent(this, this::class.java).putExtra(TAG, savedInstanceState)
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
+
+    companion object {
+        val TAG: String = SettingsActivity::class.java.simpleName
+    }
+}
+
+interface OnThemeChangedListener {
+    fun onThemeValuesChanged()
 }

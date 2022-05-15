@@ -4,12 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include layout="@layout/card_credit" />
+    <include
+        android:id="@+id/card_credit"
+        layout="@layout/card_credit" />
 
-    <include layout="@layout/card_retro_info" />
+    <include
+        android:id="@+id/card_retro_info"
+        layout="@layout/card_retro_info" />
 
-    <include layout="@layout/card_social" />
+    <include
+        android:id="@+id/card_social"
+        layout="@layout/card_social" />
 
-    <include layout="@layout/card_other" />
+    <include
+        android:id="@+id/card_other"
+        layout="@layout/card_other" />
 
 </LinearLayout>

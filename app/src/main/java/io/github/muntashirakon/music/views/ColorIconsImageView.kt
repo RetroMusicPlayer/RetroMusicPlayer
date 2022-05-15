@@ -20,11 +20,14 @@ import android.graphics.Color
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
+import androidx.core.content.withStyledAttributes
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.RetroColorUtil
+import com.google.android.material.color.MaterialColors
 
 
 class ColorIconsImageView @JvmOverloads constructor(
@@ -36,12 +39,10 @@ class ColorIconsImageView @JvmOverloads constructor(
 
     init {
         // Load the styled attributes and set their properties
-        val attributes =
-            context.obtainStyledAttributes(attrs, R.styleable.ColorIconsImageView, 0, 0)
-        val color =
-            attributes.getColor(R.styleable.ColorIconsImageView_iconBackgroundColor, Color.RED)
-        setIconBackgroundColor(color)
-        attributes.recycle()
+        context.withStyledAttributes(attrs, R.styleable.ColorIconsImageView, 0, 0) {
+            val color = getColor(R.styleable.ColorIconsImageView_iconBackgroundColor, Color.RED)
+            setIconBackgroundColor(color)
+        }
     }
 
     fun setIconBackgroundColor(color: Int) {
@@ -52,8 +53,12 @@ class ColorIconsImageView @JvmOverloads constructor(
             imageTintList =
                 ColorStateList.valueOf(ATHUtil.resolveColor(context, R.attr.colorSurface))
         } else {
-            backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(color, 0.22f))
-            imageTintList = ColorStateList.valueOf(ColorUtil.withAlpha(color, 0.75f))
+            val finalColor = MaterialColors.harmonize(
+                color,
+                ThemeStore.accentColor(context)
+            )
+            backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(finalColor, 0.22f))
+            imageTintList = ColorStateList.valueOf(ColorUtil.withAlpha(finalColor, 0.75f))
         }
         requestLayout()
         invalidate()

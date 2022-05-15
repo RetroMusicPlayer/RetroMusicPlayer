@@ -33,6 +33,7 @@
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlHardcoded,UnusedAttribute"
+        android:paddingVertical="@dimen/seekbar_padding"
         tools:progress="20" />
 
     <com.google.android.material.textview.MaterialTextView

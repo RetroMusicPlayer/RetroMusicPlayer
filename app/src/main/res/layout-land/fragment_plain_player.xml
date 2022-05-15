@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <fragment
+                <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playerAlbumCoverFragment"
                     android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
@@ -53,6 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingStart="16dp"
                     android:paddingTop="8dp"
@@ -61,11 +62,11 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/title"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
                         android:ellipsize="marquee"
                         android:focusable="true"
-                        android:focusableInTouchMode="true"
                         android:freezesText="true"
                         android:marqueeRepeatLimit="marquee_forever"
                         android:scrollHorizontally="true"
@@ -77,9 +78,11 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
                         android:ellipsize="end"
+                        android:focusable="true"
                         android:maxLines="1"
                         android:paddingTop="8dp"
                         tools:text="Text" />
@@ -90,7 +93,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <fragment
+                    <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/playbackControlsFragment"
                         android:name="io.github.muntashirakon.music.fragments.player.plain.PlainPlaybackControlsFragment"
                         android:layout_width="match_parent"

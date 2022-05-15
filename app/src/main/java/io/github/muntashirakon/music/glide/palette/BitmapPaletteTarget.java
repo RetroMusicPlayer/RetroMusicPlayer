@@ -15,6 +15,7 @@
 package io.github.muntashirakon.music.glide.palette;
 
 import android.widget.ImageView;
+
 import com.bumptech.glide.request.target.ImageViewTarget;
 
 public class BitmapPaletteTarget extends ImageViewTarget<BitmapPaletteWrapper> {
@@ -24,6 +25,8 @@ public class BitmapPaletteTarget extends ImageViewTarget<BitmapPaletteWrapper> {
 
   @Override
   protected void setResource(BitmapPaletteWrapper bitmapPaletteWrapper) {
-    view.setImageBitmap(bitmapPaletteWrapper.getBitmap());
+    if (bitmapPaletteWrapper != null) {
+      view.setImageBitmap(bitmapPaletteWrapper.getBitmap());
+    }
   }
 }

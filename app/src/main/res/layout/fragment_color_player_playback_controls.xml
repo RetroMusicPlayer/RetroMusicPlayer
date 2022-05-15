@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:maxHeight="2dp"
+        android:paddingVertical="@dimen/seekbar_padding"
         android:progressDrawable="@drawable/color_progress_seek"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
@@ -54,6 +55,7 @@
         android:id="@+id/titleContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -65,9 +67,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:clickable="true"
             android:ellipsize="marquee"
             android:focusable="true"
-            android:focusableInTouchMode="true"
             android:freezesText="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
@@ -83,7 +85,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ellipsize="end"
@@ -94,6 +96,8 @@
         android:textAppearance="@style/TextViewBody1"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toTopOf="@+id/songInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:text="@tools:sample/lorem/random" />
 

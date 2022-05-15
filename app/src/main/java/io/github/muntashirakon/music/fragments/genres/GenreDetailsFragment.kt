@@ -14,31 +14,29 @@
  */
 package io.github.muntashirakon.music.fragments.genres
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.core.view.ViewCompat
+import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.song.SongAdapter
+import io.github.muntashirakon.music.databinding.FragmentPlaylistDetailBinding
 import io.github.muntashirakon.music.extensions.dipToPix
-import io.github.muntashirakon.music.extensions.resolveColor
 import io.github.muntashirakon.music.fragments.base.AbsMainActivityFragment
 import io.github.muntashirakon.music.helper.menu.GenreMenuHelper
 import io.github.muntashirakon.music.model.Genre
 import io.github.muntashirakon.music.model.Song
-import com.google.android.material.transition.MaterialArcMotion
-import com.google.android.material.transition.MaterialContainerTransform
-import kotlinx.android.synthetic.main.fragment_playlist_detail.*
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.transition.MaterialSharedAxis
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.util.*
 
 class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail) {
     private val arguments by navArgs<GenreDetailsFragmentArgs>()
@@ -47,37 +45,34 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
     }
     private lateinit var genre: Genre
     private lateinit var songAdapter: SongAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.fragment_container
-            duration = 300L
-            scrimColor = Color.TRANSPARENT
-            setAllContainerColors(requireContext().resolveColor(R.attr.colorSurface))
-            setPathMotion(MaterialArcMotion())
-        }
-    }
+    private var _binding: FragmentPlaylistDetailBinding? = null
+    private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
-        mainActivity.setBottomBarVisibility(false)
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(view)
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+        _binding = FragmentPlaylistDetailBinding.bind(view)
         mainActivity.addMusicServiceEventListener(detailsViewModel)
-        mainActivity.setSupportActionBar(toolbar)
-        ViewCompat.setTransitionName(container, "genre")
+        mainActivity.setSupportActionBar(binding.toolbar)
+        binding.container.transitionName = "genre"
         genre = arguments.extraGenre
-        toolbar?.title = arguments.extraGenre.name
+        binding.toolbar.title = arguments.extraGenre.name
         setupRecyclerView()
-        detailsViewModel.getSongs().observe(viewLifecycleOwner, {
+        detailsViewModel.getSongs().observe(viewLifecycleOwner) {
             songs(it)
-        })
-
+        }
+        postponeEnterTransition()
+        view.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+        binding.appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     private fun setupRecyclerView() {
         songAdapter = SongAdapter(requireActivity(), ArrayList(), R.layout.item_list, null)
-        recyclerView.apply {
+        binding.recyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             layoutManager = LinearLayoutManager(requireContext())
             adapter = songAdapter
@@ -91,7 +86,7 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
     }
 
     fun songs(songs: List<Song>) {
-        progressIndicator.hide()
+        binding.progressIndicator.hide()
         if (songs.isNotEmpty()) songAdapter.swapDataSet(songs)
         else songAdapter.swapDataSet(emptyList())
     }
@@ -102,21 +97,25 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
 
     private fun checkIsEmpty() {
         checkForPadding()
-        emptyEmoji.text = getEmojiByUnicode(0x1F631)
-        empty?.visibility = if (songAdapter.itemCount == 0) View.VISIBLE else View.GONE
+        binding.emptyEmoji.text = getEmojiByUnicode(0x1F631)
+        binding.empty.isVisible = songAdapter.itemCount == 0
     }
 
     private fun checkForPadding() {
         val height = dipToPix(52f).toInt()
-        recyclerView.setPadding(0, 0, 0, height)
+        binding.recyclerView.setPadding(0, 0, 0, height)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_genre_detail, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         return GenreMenuHelper.handleMenuClick(requireActivity(), genre, item)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

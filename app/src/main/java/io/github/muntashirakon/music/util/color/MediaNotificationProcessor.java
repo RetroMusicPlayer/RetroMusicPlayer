@@ -25,14 +25,17 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.palette.graphics.Palette;
+
+import java.util.List;
+
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import io.github.muntashirakon.music.R;
-import java.util.List;
 
 /** A class the processes media notifications and extracts the right text and background colors. */
 public class MediaNotificationProcessor {
@@ -72,22 +75,15 @@ public class MediaNotificationProcessor {
    */
   private static final int LIGHTNESS_TEXT_DIFFERENCE_DARK = -10;
 
-  private static final String TAG = "ColorPicking";
   private float[] mFilteredBackgroundHsl = null;
-  private Palette.Filter mBlackWhiteFilter =
-      new Palette.Filter() {
-        @Override
-        public boolean isAllowed(int rgb, @NonNull float[] hsl) {
-          return !isWhiteOrBlack(hsl);
-        }
-      };
-  private boolean mIsLowPriority;
+  private final Palette.Filter mBlackWhiteFilter =
+          (rgb, hsl) -> !isWhiteOrBlack(hsl);
   private int backgroundColor;
   private int secondaryTextColor;
   private int primaryTextColor;
   private int actionBarColor;
   private Drawable drawable;
-  private Context context;
+  private final Context context;
 
   public MediaNotificationProcessor(Context context, Drawable drawable) {
     this.context = context;
@@ -140,18 +136,10 @@ public class MediaNotificationProcessor {
     this.drawable = drawable;
     final Handler handler = new Handler();
     new Thread(
-            new Runnable() {
-              @Override
-              public void run() {
-                getMediaPalette();
-                handler.post(
-                    new Runnable() {
-                      @Override
-                      public void run() {
-                        onPaletteLoadedListener.onPaletteLoaded(MediaNotificationProcessor.this);
-                      }
-                    });
-              }
+            () -> {
+              getMediaPalette();
+              handler.post(
+                      () -> onPaletteLoadedListener.onPaletteLoaded(MediaNotificationProcessor.this));
             })
         .start();
   }
@@ -175,44 +163,40 @@ public class MediaNotificationProcessor {
         double factor = Math.sqrt((float) RESIZE_BITMAP_AREA / area);
         width = (int) (factor * width);
         height = (int) (factor * height);
+      }
+      bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+      Canvas canvas = new Canvas(bitmap);
+      drawable.setBounds(0, 0, width, height);
+      drawable.draw(canvas);
 
-        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, width, height);
-        drawable.draw(canvas);
-
-        // for the background we only take the left side of the image to ensure
-        // a smooth transition
-        Palette.Builder paletteBuilder =
-            Palette.from(bitmap)
-                .setRegion(0, 0, bitmap.getWidth() / 2, bitmap.getHeight())
-                .clearFilters() // we want all colors, red / white / black ones too!
-                .resizeBitmapArea(RESIZE_BITMAP_AREA);
-        Palette palette = paletteBuilder.generate();
-        backgroundColor = findBackgroundColorAndFilter(drawable);
-        // we want most of the full region again, slightly shifted to the right
-        float textColorStartWidthFraction = 0.4f;
-        paletteBuilder.setRegion(
-            (int) (bitmap.getWidth() * textColorStartWidthFraction),
-            0,
-            bitmap.getWidth(),
-            bitmap.getHeight());
-        if (mFilteredBackgroundHsl != null) {
-          paletteBuilder.addFilter(
-              new Palette.Filter() {
-                @Override
-                public boolean isAllowed(int rgb, @NonNull float[] hsl) {
+      // for the background we only take the left side of the image to ensure
+      // a smooth transition
+      Palette.Builder paletteBuilder =
+              Palette.from(bitmap)
+                      .setRegion(0, 0, bitmap.getWidth() / 2, bitmap.getHeight())
+                      .clearFilters() // we want all colors, red / white / black ones too!
+                      .resizeBitmapArea(RESIZE_BITMAP_AREA);
+      Palette palette;
+      backgroundColor = findBackgroundColorAndFilter(drawable);
+      // we want most of the full region again, slightly shifted to the right
+      float textColorStartWidthFraction = 0.4f;
+      paletteBuilder.setRegion(
+              (int) (bitmap.getWidth() * textColorStartWidthFraction),
+              0,
+              bitmap.getWidth(),
+              bitmap.getHeight());
+      if (mFilteredBackgroundHsl != null) {
+        paletteBuilder.addFilter(
+                (rgb, hsl) -> {
                   // at least 10 degrees hue difference
                   float diff = Math.abs(hsl[0] - mFilteredBackgroundHsl[0]);
                   return diff > 10 && diff < 350;
-                }
-              });
-        }
-        paletteBuilder.addFilter(mBlackWhiteFilter);
-        palette = paletteBuilder.generate();
-        int foregroundColor = selectForegroundColor(backgroundColor, palette);
-        ensureColors(backgroundColor, foregroundColor);
+                });
       }
+      paletteBuilder.addFilter(mBlackWhiteFilter);
+      palette = paletteBuilder.generate();
+      int foregroundColor = selectForegroundColor(backgroundColor, palette);
+      ensureColors(backgroundColor, foregroundColor);
     }
   }
 
@@ -390,10 +374,6 @@ public class MediaNotificationProcessor {
     return hslColor[2] >= WHITE_MIN_LIGHTNESS;
   }
 
-  public void setIsLowPriority(boolean isLowPriority) {
-    mIsLowPriority = isLowPriority;
-  }
-
   private void ensureColors(int backgroundColor, int mForegroundColor) {
     {
       double backLum = NotificationColorUtil.calculateLuminance(backgroundColor);
@@ -492,5 +472,14 @@ public class MediaNotificationProcessor {
 
   public interface OnPaletteLoadedListener {
     void onPaletteLoaded(MediaNotificationProcessor mediaNotificationProcessor);
+  }
+
+  public static MediaNotificationProcessor errorColor(Context context) {
+    MediaNotificationProcessor errorColors = new MediaNotificationProcessor(context);
+    errorColors.backgroundColor = -15724528;
+    errorColors.primaryTextColor = -6974059;
+    errorColors.secondaryTextColor = -8684677;
+    errorColors.actionBarColor = -6974059;
+    return errorColors;
   }
 }

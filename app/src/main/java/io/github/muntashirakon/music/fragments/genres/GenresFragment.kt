@@ -15,43 +15,72 @@
 package io.github.muntashirakon.music.fragments.genres
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.muntashirakon.music.EXTRA_GENRE
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.GenreAdapter
+import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewFragment
 import io.github.muntashirakon.music.interfaces.IGenreClickListener
 import io.github.muntashirakon.music.model.Genre
-import com.google.android.material.transition.MaterialElevationScale
+import io.github.muntashirakon.music.util.RetroUtil
+import com.google.android.material.transition.MaterialSharedAxis
 
-class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
+class
+GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     IGenreClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getGenre().observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getGenre().observe(viewLifecycleOwner) {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
-        })
+        }
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
-        return LinearLayoutManager(activity)
+        return if (RetroUtil.isLandscape) {
+            GridLayoutManager(activity, 4)
+        } else {
+            GridLayoutManager(activity, 2)
+        }
     }
 
     override fun createAdapter(): GenreAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return GenreAdapter(requireActivity(), dataSet, R.layout.item_list_no_image, this)
+        return GenreAdapter(requireActivity(), dataSet, this)
     }
+
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateMenu(menu, inflater)
+        menu.removeItem(R.id.action_grid_size)
+        menu.removeItem(R.id.action_layout_type)
+        menu.removeItem(R.id.action_sort_order)
+        menu.findItem(R.id.action_settings).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        libraryViewModel.forceReload(ReloadType.Genres)
+    }
+
+
+    override val titleRes: Int
+        get() = R.string.genres
 
     override val emptyMessage: Int
         get() = R.string.no_genres
+
+    override val isShuffleVisible: Boolean
+        get() = false
 
     companion object {
         @JvmField
@@ -64,19 +93,13 @@ class GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager
     }
 
     override fun onClickGenre(genre: Genre, view: View) {
-        exitTransition = MaterialElevationScale(false).apply {
-            duration = 300L
-        }
-        reenterTransition = MaterialElevationScale(true).apply {
-            duration = 300L
-        }
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(requireView())
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         findNavController().navigate(
             R.id.genreDetailsFragment,
             bundleOf(EXTRA_GENRE to genre),
             null,
-            FragmentNavigatorExtras(
-                view to "genre"
-            )
+            null
         )
     }
 }

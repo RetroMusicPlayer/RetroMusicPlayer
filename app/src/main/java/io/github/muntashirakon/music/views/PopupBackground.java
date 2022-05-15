@@ -27,10 +27,11 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
-import code.name.monkey.appthemehelper.ThemeStore;
+
 import io.github.muntashirakon.music.R;
 
 public class PopupBackground extends Drawable {
@@ -45,10 +46,10 @@ public class PopupBackground extends Drawable {
 
   @NonNull private final Matrix mTempMatrix = new Matrix();
 
-  public PopupBackground(@NonNull Context context) {
+  public PopupBackground(@NonNull Context context, int color) {
     mPaint = new Paint();
     mPaint.setAntiAlias(true);
-    mPaint.setColor(ThemeStore.Companion.accentColor(context));
+    mPaint.setColor(color);
     mPaint.setStyle(Paint.Style.FILL);
     Resources resources = context.getResources();
     mPaddingStart = resources.getDimensionPixelOffset(R.dimen.afs_md2_popup_padding_start);

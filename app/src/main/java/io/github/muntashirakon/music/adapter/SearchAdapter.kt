@@ -14,6 +14,7 @@
  */
 package io.github.muntashirakon.music.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,17 +28,16 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.adapter.base.MediaEntryViewHolder
-import io.github.muntashirakon.music.db.PlaylistEntity
 import io.github.muntashirakon.music.db.PlaylistWithSongs
-import io.github.muntashirakon.music.glide.AlbumGlideRequest
-import io.github.muntashirakon.music.glide.ArtistGlideRequest
+import io.github.muntashirakon.music.glide.GlideApp
+import io.github.muntashirakon.music.glide.RetroGlideExtension
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.menu.SongMenuHelper
-import io.github.muntashirakon.music.model.*
-import io.github.muntashirakon.music.model.smartplaylist.AbsSmartPlaylist
-import io.github.muntashirakon.music.repository.PlaylistSongsLoader
+import io.github.muntashirakon.music.model.Album
+import io.github.muntashirakon.music.model.Artist
+import io.github.muntashirakon.music.model.Genre
+import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.MusicUtil
-import com.bumptech.glide.Glide
 import java.util.*
 
 class SearchAdapter(
@@ -45,6 +45,7 @@ class SearchAdapter(
     private var dataSet: List<Any>
 ) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
+    @SuppressLint("NotifyDataSetChanged")
     fun swapDataSet(dataSet: List<Any>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
@@ -52,9 +53,9 @@ class SearchAdapter(
 
     override fun getItemViewType(position: Int): Int {
         if (dataSet[position] is Album) return ALBUM
-        if (dataSet[position] is Artist) return ARTIST
+        if (dataSet[position] is Artist) return if ((dataSet[position] as Artist).isAlbumArtist) ALBUM_ARTIST else ARTIST
         if (dataSet[position] is Genre) return GENRE
-        if (dataSet[position] is PlaylistEntity) return PLAYLIST
+        if (dataSet[position] is PlaylistWithSongs) return PLAYLIST
         return if (dataSet[position] is Song) SONG else HEADER
     }
 
@@ -66,6 +67,14 @@ class SearchAdapter(
                 false
             ), viewType
         )
+        else if (viewType == ALBUM || viewType == ARTIST || viewType== ALBUM_ARTIST)
+            ViewHolder(
+                LayoutInflater.from(activity).inflate(
+                    R.layout.item_list_big,
+                    parent,
+                    false
+                ), viewType
+            )
         else
             ViewHolder(
                 LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false),
@@ -80,21 +89,23 @@ class SearchAdapter(
                 val album = dataSet[position] as Album
                 holder.title?.text = album.title
                 holder.text?.text = album.artistName
-                AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-                    .checkIgnoreMediaStore().build().into(holder.image)
+                GlideApp.with(activity).asDrawable().albumCoverOptions(album.safeGetFirstSong()).load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
+                    .into(holder.image!!)
             }
             ARTIST -> {
                 holder.imageTextContainer?.isVisible = true
                 val artist = dataSet[position] as Artist
                 holder.title?.text = artist.name
                 holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
-                ArtistGlideRequest.Builder.from(Glide.with(activity), artist).build()
-                    .into(holder.image)
+                GlideApp.with(activity).asDrawable().artistImageOptions(artist).load(
+                    RetroGlideExtension.getArtistModel(artist)).into(holder.image!!)
             }
             SONG -> {
+                holder.imageTextContainer?.isVisible = true
                 val song = dataSet[position] as Song
                 holder.title?.text = song.title
                 holder.text?.text = song.albumName
+                GlideApp.with(activity).asDrawable().songCoverOptions(song).load(RetroGlideExtension.getSongModel(song)).into(holder.image!!)
             }
             GENRE -> {
                 val genre = dataSet[position] as Genre
@@ -109,25 +120,23 @@ class SearchAdapter(
                 )
             }
             PLAYLIST -> {
-                val playlist = dataSet[position] as PlaylistEntity
-                holder.title?.text = playlist.playlistName
+                val playlist = dataSet[position] as PlaylistWithSongs
+                holder.title?.text = playlist.playlistEntity.playlistName
                 //holder.text?.text = MusicUtil.playlistInfoString(activity, playlist.songs)
+            }
+            ALBUM_ARTIST -> {
+                holder.imageTextContainer?.isVisible = true
+                val artist = dataSet[position] as Artist
+                holder.title?.text = artist.name
+                holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
+                GlideApp.with(activity).asDrawable().artistImageOptions(artist).load(
+                    RetroGlideExtension.getArtistModel(artist)).into(holder.image!!)
             }
             else -> {
                 holder.title?.text = dataSet[position].toString()
                 holder.title?.setTextColor(ThemeStore.accentColor(activity))
             }
         }
-    }
-
-    private fun getSongs(playlist: Playlist): List<Song> {
-        val songs = mutableListOf<Song>()
-        if (playlist is AbsSmartPlaylist) {
-            songs.addAll(playlist.getSongs())
-        } else {
-            songs.addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id))
-        }
-        return songs
     }
 
     override fun getItemCount(): Int {
@@ -140,13 +149,13 @@ class SearchAdapter(
             imageTextContainer?.isInvisible = true
             if (itemViewType == SONG) {
                 imageTextContainer?.isGone = true
-                menu?.visibility = View.VISIBLE
+                menu?.isVisible = true
                 menu?.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
                     override val song: Song
                         get() = dataSet[layoutPosition] as Song
                 })
             } else {
-                menu?.visibility = View.GONE
+                menu?.isVisible = false
             }
 
             when (itemViewType) {
@@ -154,7 +163,7 @@ class SearchAdapter(
                 ARTIST -> setImageTransitionName(activity.getString(R.string.transition_artist_image))
                 else -> {
                     val container = itemView.findViewById<View>(R.id.imageContainer)
-                    container?.visibility = View.GONE
+                    container?.isVisible = false
                 }
             }
         }
@@ -174,6 +183,12 @@ class SearchAdapter(
                         bundleOf(EXTRA_ARTIST_ID to (item as Artist).id)
                     )
                 }
+                ALBUM_ARTIST ->{
+                    activity.findNavController(R.id.fragment_container).navigate(
+                        R.id.albumArtistDetailsFragment,
+                        bundleOf(EXTRA_ARTIST_NAME to (item as Artist).name)
+                    )
+                }
                 GENRE -> {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.genreDetailsFragment,
@@ -187,9 +202,8 @@ class SearchAdapter(
                     )
                 }
                 SONG -> {
-                    val playList = mutableListOf<Song>()
-                    playList.add(item as Song)
-                    MusicPlayerRemote.openQueue(playList, 0, true)
+                    MusicPlayerRemote.playNext(item as Song)
+                    MusicPlayerRemote.playNextSong()
                 }
             }
         }
@@ -202,5 +216,6 @@ class SearchAdapter(
         private const val SONG = 3
         private const val GENRE = 4
         private const val PLAYLIST = 5
+        private const val ALBUM_ARTIST = 6
     }
 }

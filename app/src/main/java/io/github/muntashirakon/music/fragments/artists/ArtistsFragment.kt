@@ -16,40 +16,71 @@ package io.github.muntashirakon.music.fragments.artists
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import io.github.muntashirakon.music.EXTRA_ARTIST_ID
+import io.github.muntashirakon.music.EXTRA_ARTIST_NAME
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.adapter.artist.ArtistAdapter
 import io.github.muntashirakon.music.extensions.surfaceColor
+import io.github.muntashirakon.music.fragments.GridStyle
 import io.github.muntashirakon.music.fragments.ReloadType
 import io.github.muntashirakon.music.fragments.base.AbsRecyclerViewCustomGridSizeFragment
+import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.helper.SortOrder.ArtistSortOrder
+import io.github.muntashirakon.music.interfaces.IAlbumArtistClickListener
 import io.github.muntashirakon.music.interfaces.IArtistClickListener
+import io.github.muntashirakon.music.interfaces.ICabCallback
 import io.github.muntashirakon.music.interfaces.ICabHolder
+import io.github.muntashirakon.music.service.MusicService
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.RetroColorUtil
 import io.github.muntashirakon.music.util.RetroUtil
-import com.afollestad.materialcab.MaterialCab
-import com.google.android.material.transition.MaterialElevationScale
+import com.afollestad.materialcab.attached.AttachedCab
+import com.afollestad.materialcab.attached.destroy
+import com.afollestad.materialcab.attached.isActive
+import com.afollestad.materialcab.createCab
 
 class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
-    IArtistClickListener, ICabHolder {
+    IArtistClickListener, IAlbumArtistClickListener, ICabHolder {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getArtists().observe(viewLifecycleOwner, Observer {
+        libraryViewModel.getArtists().observe(viewLifecycleOwner) {
             if (it.isNotEmpty())
                 adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
-        })
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (!handleBackPress()) {
+                remove()
+                requireActivity().onBackPressed()
+            }
+        }
     }
+
+    override val titleRes: Int
+        get() = R.string.artists
 
     override val emptyMessage: Int
         get() = R.string.no_artists
+
+    override val isShuffleVisible: Boolean
+        get() = true
+
+    override fun onShuffleClicked() {
+        libraryViewModel.getArtists().value?.let {
+            MusicPlayerRemote.setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
+            MusicPlayerRemote.openQueue(
+                queue = it.shuffled().flatMap { artist -> artist.songs },
+                startPosition = 0,
+                startPlaying = true
+            )
+        }
+    }
 
     override fun setSortOrder(sortOrder: String) {
         libraryViewModel.forceReload(ReloadType.Artists)
@@ -66,7 +97,7 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
             dataSet,
             itemLayoutRes(),
             this,
-            this
+            this, this
         )
     }
 
@@ -100,11 +131,13 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
     }
 
     override fun loadLayoutRes(): Int {
-        return PreferenceUtil.artistGridStyle
+        return PreferenceUtil.artistGridStyle.layoutResId
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
-        PreferenceUtil.artistGridStyle = layoutRes
+        PreferenceUtil.artistGridStyle = GridStyle.values().first { gridStyle ->
+            gridStyle.layoutResId == layoutRes
+        }
     }
 
     companion object {
@@ -115,30 +148,43 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
     }
 
     override fun onArtist(artistId: Long, view: View) {
-        exitTransition = MaterialElevationScale(true).apply {
-            duration = 300L
-        }
-        reenterTransition = MaterialElevationScale(false).apply {
-            duration = 300L
-        }
         findNavController().navigate(
             R.id.artistDetailsFragment,
             bundleOf(EXTRA_ARTIST_ID to artistId),
             null,
-            FragmentNavigatorExtras(view to "artist")
+            FragmentNavigatorExtras(view to artistId.toString())
         )
+        reenterTransition = null
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onAlbumArtist(artistName: String, view: View) {
+        findNavController().navigate(
+            R.id.albumArtistDetailsFragment,
+            bundleOf(EXTRA_ARTIST_NAME to artistName),
+            null,
+            FragmentNavigatorExtras(view to artistName)
+        )
+        reenterTransition = null
+    }
+
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateMenu(menu, inflater)
         val gridSizeItem: MenuItem = menu.findItem(R.id.action_grid_size)
-        if (RetroUtil.isLandscape()) {
+        if (RetroUtil.isLandscape) {
             gridSizeItem.setTitle(R.string.action_grid_size_land)
         }
         setUpGridSizeMenu(gridSizeItem.subMenu)
         val layoutItem = menu.findItem(R.id.action_layout_type)
         setupLayoutMenu(layoutItem.subMenu)
         setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
+        setupAlbumArtistMenu(menu)
+    }
+
+    private fun setupAlbumArtistMenu(menu: Menu) {
+        menu.add(0, R.id.action_album_artist, 0, R.string.show_album_artists).apply {
+            isCheckable = true
+            isChecked = PreferenceUtil.albumArtistsOnly
+        }
     }
 
     private fun setUpSortOrderMenu(
@@ -212,7 +258,7 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         if (handleGridSizeMenuItem(item)) {
             return true
         }
@@ -222,7 +268,21 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         if (handleSortOrderMenuItem(item)) {
             return true
         }
-        return super.onOptionsItemSelected(item)
+        if (handleAlbumArtistMenu(item)) {
+            return true
+        }
+        return super.onMenuItemSelected(item)
+    }
+
+    private fun handleAlbumArtistMenu(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.action_album_artist) {
+            PreferenceUtil.albumArtistsOnly = !item.isChecked
+            item.isChecked = !item.isChecked
+            libraryViewModel.forceReload(ReloadType.Artists)
+            true
+        } else {
+            false
+        }
     }
 
     private fun handleSortOrderMenuItem(
@@ -251,9 +311,9 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
             R.id.action_layout_circular -> R.layout.item_grid_circle
             R.id.action_layout_image -> R.layout.image
             R.id.action_layout_gradient_image -> R.layout.item_image_gradient
-            else -> PreferenceUtil.artistGridStyle
+            else -> PreferenceUtil.artistGridStyle.layoutResId
         }
-        if (layoutRes != PreferenceUtil.artistGridStyle) {
+        if (layoutRes != PreferenceUtil.artistGridStyle.layoutResId) {
             item.isChecked = true
             setAndSaveLayoutRes(layoutRes)
             return true
@@ -283,19 +343,47 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         return false
     }
 
-    private var cab: MaterialCab? = null
-
-    override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
+    private fun handleBackPress(): Boolean {
         cab?.let {
-            if (it.isActive) {
-                it.finish()
+            if (it.isActive()) {
+                it.destroy()
+                return true
             }
         }
-        cab = MaterialCab(mainActivity, R.id.cab_stub)
-            .setMenu(menuRes)
-            .setCloseDrawableRes(R.drawable.ic_close)
-            .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(surfaceColor()))
-            .start(callback)
-        return cab as MaterialCab
+        return false
+    }
+
+    private var cab: AttachedCab? = null
+
+    override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
+        cab?.let {
+            if (it.isActive()) {
+                it.destroy()
+            }
+        }
+        cab = createCab(R.id.toolbar_container) {
+            menu(menuRes)
+            closeDrawable(R.drawable.ic_close)
+            backgroundColor(literal = RetroColorUtil.shiftBackgroundColor(surfaceColor()))
+            slideDown()
+            onCreate { cab, menu -> callback.onCabCreated(cab, menu) }
+            onSelection {
+                callback.onCabItemClicked(it)
+            }
+            onDestroy { callback.onCabFinished(it) }
+        }
+        return cab as AttachedCab
+    }
+
+    override fun onResume() {
+        super.onResume()
+        libraryViewModel.forceReload(ReloadType.Artists)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (cab.isActive()) {
+            cab.destroy()
+        }
     }
 }

@@ -16,29 +16,34 @@ package io.github.muntashirakon.music.repository
 
 import android.content.ContentResolver
 import android.database.Cursor
-import android.net.Uri
 import android.provider.BaseColumns
-import android.provider.MediaStore
 import android.provider.MediaStore.Audio.Genres
 import io.github.muntashirakon.music.Constants.IS_MUSIC
 import io.github.muntashirakon.music.Constants.baseProjection
 import io.github.muntashirakon.music.extensions.getLong
-import io.github.muntashirakon.music.extensions.getString
 import io.github.muntashirakon.music.extensions.getStringOrNull
 import io.github.muntashirakon.music.model.Genre
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.util.PreferenceUtil
 
 interface GenreRepository {
+    fun genres(query: String): List<Genre>
+
     fun genres(): List<Genre>
 
     fun songs(genreId: Long): List<Song>
+
+    fun song(genreId: Long): Song
 }
 
 class RealGenreRepository(
     private val contentResolver: ContentResolver,
     private val songRepository: RealSongRepository
 ) : GenreRepository {
+
+    override fun genres(query: String): List<Genre> {
+        return getGenresFromCursor(makeGenreCursor(query))
+    }
 
     override fun genres(): List<Genre> {
         return getGenresFromCursor(makeGenreCursor())
@@ -52,46 +57,33 @@ class RealGenreRepository(
         } else songRepository.songs(makeGenreSongCursor(genreId))
     }
 
+    override fun song(genreId: Long): Song {
+        return songRepository.song(makeGenreSongCursor(genreId))
+    }
+
+    private fun getSongCount(genreId: Long): Int {
+        contentResolver.query(
+            Genres.Members.getContentUri("external", genreId),
+            null,
+            null,
+            null,
+            null
+        ).use {
+            return it?.count ?: 0
+        }
+    }
+
     private fun getGenreFromCursor(cursor: Cursor): Genre {
         val id = cursor.getLong(Genres._ID)
         val name = cursor.getStringOrNull(Genres.NAME)
-        val songCount = songs(id).size
+        val songCount = getSongCount(id)
         return Genre(id, name ?: "", songCount)
-
-    }
-
-    private fun getGenreFromCursorWithOutSongs(cursor: Cursor): Genre {
-        val id = cursor.getLong(Genres._ID)
-        val name = cursor.getString(Genres.NAME)
-        return Genre(id, name, -1)
     }
 
     private fun getSongsWithNoGenre(): List<Song> {
         val selection =
             BaseColumns._ID + " NOT IN " + "(SELECT " + Genres.Members.AUDIO_ID + " FROM audio_genres_map)"
         return songRepository.songs(songRepository.makeSongCursor(selection, null))
-    }
-
-    private fun hasSongsWithNoGenre(): Boolean {
-        val allSongsCursor = songRepository.makeSongCursor(null, null)
-        val allSongsWithGenreCursor = makeAllSongsWithGenreCursor()
-
-        if (allSongsCursor == null || allSongsWithGenreCursor == null) {
-            return false
-        }
-
-        val hasSongsWithNoGenre = allSongsCursor.count > allSongsWithGenreCursor.count
-        allSongsCursor.close()
-        allSongsWithGenreCursor.close()
-        return hasSongsWithNoGenre
-    }
-
-    private fun makeAllSongsWithGenreCursor(): Cursor? {
-        println(MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI.toString())
-        return contentResolver.query(
-            Uri.parse("content://media/external/audio/genres/all/members"),
-            arrayOf(Genres.Members.AUDIO_ID), null, null, null
-        )
     }
 
     private fun makeGenreSongCursor(genreId: Long): Cursor? {
@@ -110,40 +102,16 @@ class RealGenreRepository(
 
     private fun getGenresFromCursor(cursor: Cursor?): ArrayList<Genre> {
         val genres = arrayListOf<Genre>()
-        if (cursor != null) {
+        cursor?.use {
             if (cursor.moveToFirst()) {
                 do {
                     val genre = getGenreFromCursor(cursor)
                     if (genre.songCount > 0) {
                         genres.add(genre)
-                    } else {
-                        // try to remove the empty genre from the media store
-                        try {
-                            contentResolver.delete(
-                                Genres.EXTERNAL_CONTENT_URI,
-                                Genres._ID + " == " + genre.id,
-                                null
-                            )
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-
                     }
                 } while (cursor.moveToNext())
             }
-            cursor.close()
         }
-        return genres
-    }
-
-    private fun getGenresFromCursorForSearch(cursor: Cursor?): List<Genre> {
-        val genres = mutableListOf<Genre>()
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                genres.add(getGenreFromCursorWithOutSongs(cursor))
-            } while (cursor.moveToNext())
-        }
-        cursor?.close()
         return genres
     }
 
@@ -155,6 +123,21 @@ class RealGenreRepository(
                 projection,
                 null,
                 null,
+                PreferenceUtil.genreSortOrder
+            )
+        } catch (e: SecurityException) {
+            return null
+        }
+    }
+
+    private fun makeGenreCursor(query: String): Cursor? {
+        val projection = arrayOf(Genres._ID, Genres.NAME)
+        return try {
+            contentResolver.query(
+                Genres.EXTERNAL_CONTENT_URI,
+                projection,
+                Genres.NAME + " = ?",
+                arrayOf(query),
                 PreferenceUtil.genreSortOrder
             )
         } catch (e: SecurityException) {

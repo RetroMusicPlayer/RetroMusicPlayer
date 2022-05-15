@@ -11,14 +11,12 @@
   ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   ~ See the GNU General Public License for more details.
   -->
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
 
     <io.github.muntashirakon.music.views.StatusBarView
         android:id="@+id/status_bar"
@@ -27,8 +25,7 @@
         android:background="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnusedAttribute" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image"
@@ -180,14 +177,13 @@
             tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 
-
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
-        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+        style="@style/Widget.MaterialComponents.LinearProgressIndicator"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
         android:maxHeight="3dp"
+        android:paddingVertical="@dimen/seekbar_padding"
         android:progressDrawable="@drawable/color_progress_seek"
         android:progressTint="@color/md_white_1000"
         android:splitTrack="false"
@@ -195,7 +191,6 @@
         app:layout_constraintBottom_toTopOf="@id/songCurrentProgress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="RtlHardcoded,UnusedAttribute"
         tools:progress="20" />
 
     <com.google.android.material.textview.MaterialTextView

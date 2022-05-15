@@ -21,15 +21,15 @@ import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.os.Build
+import androidx.core.content.getSystemService
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.LastAddedShortcutType
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.ShuffleAllShortcutType
 import io.github.muntashirakon.music.appshortcuts.shortcuttype.TopTracksShortcutType
-import java.util.*
 
 @TargetApi(Build.VERSION_CODES.N_MR1)
 class DynamicShortcutManager(private val context: Context) {
-    private val shortcutManager: ShortcutManager =
-        this.context.getSystemService(ShortcutManager::class.java)
+    private val shortcutManager: ShortcutManager? =
+        this.context.getSystemService()
 
     private val defaultShortcuts: List<ShortcutInfo>
         get() = listOf(
@@ -40,12 +40,12 @@ class DynamicShortcutManager(private val context: Context) {
 
     fun initDynamicShortcuts() {
         // if (shortcutManager.dynamicShortcuts.size == 0) {
-        shortcutManager.dynamicShortcuts = defaultShortcuts
+        shortcutManager?.dynamicShortcuts = defaultShortcuts
         // }
     }
 
     fun updateDynamicShortcuts() {
-        shortcutManager.updateShortcuts(defaultShortcuts)
+        shortcutManager?.updateShortcuts(defaultShortcuts)
     }
 
     companion object {
@@ -67,7 +67,7 @@ class DynamicShortcutManager(private val context: Context) {
         }
 
         fun reportShortcutUsed(context: Context, shortcutId: String) {
-            context.getSystemService(ShortcutManager::class.java).reportShortcutUsed(shortcutId)
+            context.getSystemService<ShortcutManager>()?.reportShortcutUsed(shortcutId)
         }
     }
 }

@@ -25,7 +25,7 @@ class PersonalizeSettingsFragment : AbsSettingsFragment() {
     override fun invalidateSettings() {
         val toggleFullScreen: TwoStatePreference? = findPreference(TOGGLE_FULL_SCREEN)
         toggleFullScreen?.setOnPreferenceChangeListener { _, _ ->
-            requireActivity().recreate()
+            restartActivity()
             true
         }
     }

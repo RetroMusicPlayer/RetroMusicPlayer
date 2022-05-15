@@ -17,15 +17,14 @@
             app:icon="@drawable/ic_home" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
-            android:defaultValue="0"
+            android:defaultValue="4"
             android:entries="@array/pref_home_grid_style_list_titles"
             android:entryValues="@array/pref_home_grid_style_list_values"
             android:key="home_album_grid_style"
             android:layout="@layout/list_item_view"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
-            android:title="@string/pref_title_home_album_grid_style"
-             />
+            android:title="@string/pref_title_home_album_grid_style" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
@@ -33,6 +32,20 @@
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_home_banner"
             android:title="@string/pref_title_home_banner" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="true"
+            android:key="toggle_suggestions"
+            android:layout="@layout/list_item_view_switch"
+            android:summary="@string/pref_summary_suggestions"
+            android:title="@string/pref_title_suggestions" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="pause_history"
+            android:layout="@layout/list_item_view_switch"
+            android:summary="@string/pref_summary_pause_history"
+            android:title="@string/pref_title_pause_history" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
@@ -47,6 +60,13 @@
             android:title="@string/library_categories"
             app:icon="@drawable/ic_library_music" />
 
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="true"
+            android:key="remember_last_tab"
+            android:layout="@layout/list_item_view_switch"
+            android:summary="@string/pref_summary_remember_tab"
+            android:title="@string/pref_title_remember_tab" />
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="0"
             android:entries="@array/pref_tab_text_mode_titles"
@@ -57,12 +77,15 @@
             android:positiveButtonText="@null"
             android:title="@string/pref_title_tab_text_mode" />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="album_artists_only"
-            android:layout="@layout/list_item_view_switch"
-            android:summary="@string/pref_summary_album_artists_only"
-            android:title="@string/pref_title_album_artists_only" />
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+            android:defaultValue="1"
+            android:entries="@array/pref_appbar_mode_titles"
+            android:entryValues="@array/pref_appbar_mode_values"
+            android:key="appbar_mode"
+            android:layout="@layout/list_item_view"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/pref_title_appbar_mode" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory

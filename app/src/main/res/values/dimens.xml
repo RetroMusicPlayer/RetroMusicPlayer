@@ -13,6 +13,12 @@
     <dimen name="list_item_image_icon_padding">8dp</dimen>
 
     <dimen name="mini_player_height">56dp</dimen>
+    <dimen name="cast_mini_player_height">64dp</dimen>
+
+    <dimen name="mini_player_height_expanded">128dp</dimen>
+    <dimen name="mini_cast_player_height_expanded">136dp</dimen>
+
+    <dimen name="bottom_nav_height">72dp</dimen>
 
     <dimen name="app_widget_classic_height">96dp</dimen>
     <dimen name="app_widget_classic_image_size">96dp</dimen>
@@ -33,11 +39,18 @@
     <dimen name="app_widget_card_radius">2dp</dimen>
     <dimen name="now_playing_top_margin">12dp</dimen>
 
+    <dimen name="app_widget_md3_height">90dp</dimen>
+    <dimen name="app_widget_md3_image_size">70dp</dimen>
+
+    <dimen name="app_widget_circle_min_width">180dp</dimen>
+    <dimen name="app_widget_circle_min_height">100dp</dimen>
+    <dimen name="app_widget_circle_max_width">250dp</dimen>
+    <dimen name="app_widget_circle_max_height">250dp</dimen>
+
     <dimen name="icon_notification_dimen">32dp</dimen>
-    <dimen name="mini_player_height_expanded">112dp</dimen>
     <dimen name="toolbar_margin_horizontal">8dp</dimen>
     <dimen name="toolbar_height">48dp</dimen>
-    <dimen name="item_song_height">52dp</dimen>
+    <dimen name="item_song_height">60dp</dimen>
     <dimen name="button_padding_vertical">10dp</dimen>
     <dimen name="list_pref_guideline_begin">56dp</dimen>
     <dimen name="pref_title_padding">72dp</dimen>
@@ -46,4 +59,17 @@
     <dimen name="adaptive_icon_size">46dp</dimen>
     <dimen name="adaptive_icon_padding">12dp</dimen>
     <dimen name="about_card_radius">16dp</dimen>
+
+    <dimen name="normal_lyrics_padding">20dp</dimen>
+    <dimen name="lyrics_text_size">18sp</dimen>
+    <dimen name="indicator_radius">10dp</dimen>
+    <dimen name="lyrics_dialog_radius">20dp</dimen>
+
+    <dimen name="m3_card_corner_radius">16dp</dimen>
+    <dimen name="m3_card_medium_radius">24dp</dimen>
+    <dimen name="m3_card_large_radius">40dp</dimen>
+    <dimen name="m3_dialog_corner_size">28dp</dimen>
+    <dimen name="padding_album_cover">16dp</dimen>
+
+    <dimen name="seekbar_padding">16dp</dimen>
 </resources>

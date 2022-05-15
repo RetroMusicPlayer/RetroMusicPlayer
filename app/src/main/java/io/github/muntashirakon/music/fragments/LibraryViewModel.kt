@@ -14,34 +14,44 @@
  */
 package io.github.muntashirakon.music.fragments
 
+import android.animation.ValueAnimator
+import android.content.Context
 import android.widget.Toast
+import androidx.core.animation.doOnEnd
 import androidx.lifecycle.*
 import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.db.*
+import io.github.muntashirakon.music.extensions.showToast
 import io.github.muntashirakon.music.fragments.ReloadType.*
+import io.github.muntashirakon.music.fragments.search.Filter
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.IMusicServiceEventListener
 import io.github.muntashirakon.music.model.*
 import io.github.muntashirakon.music.repository.RealRepository
+import io.github.muntashirakon.music.util.DensityUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class LibraryViewModel(
-    private val repository: RealRepository
+    private val repository: RealRepository,
 ) : ViewModel(), IMusicServiceEventListener {
 
     private val _paletteColor = MutableLiveData<Int>()
     private val home = MutableLiveData<List<Home>>()
+    private val suggestions = MutableLiveData<List<Song>>()
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
     private val playlists = MutableLiveData<List<PlaylistWithSongs>>()
-    private val legacyPlaylists = MutableLiveData<List<Playlist>>()
     private val genres = MutableLiveData<List<Genre>>()
     private val searchResults = MutableLiveData<List<Any>>()
+    private val fabMargin = MutableLiveData(0)
+    private val songHistory = MutableLiveData<List<Song>>()
+    private var previousSongHistory = ArrayList<HistoryEntity>()
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -50,6 +60,7 @@ class LibraryViewModel(
 
     private fun loadLibraryContent() = viewModelScope.launch(IO) {
         fetchHomeSections()
+        fetchSuggestions()
         fetchSongs()
         fetchAlbums()
         fetchArtists()
@@ -59,90 +70,61 @@ class LibraryViewModel(
 
     fun getSearchResult(): LiveData<List<Any>> = searchResults
 
-    fun getSongs(): LiveData<List<Song>> {
-        return songs
+    fun getSongs(): LiveData<List<Song>> = songs
+
+    fun getAlbums(): LiveData<List<Album>> = albums
+
+    fun getArtists(): LiveData<List<Artist>> = artists
+
+    fun getPlaylists(): LiveData<List<PlaylistWithSongs>> = playlists
+
+    fun getGenre(): LiveData<List<Genre>> = genres
+
+    fun getHome(): LiveData<List<Home>> = home
+
+    fun getSuggestions(): LiveData<List<Song>> = suggestions
+
+    fun getFabMargin(): LiveData<Int> = fabMargin
+
+    private suspend fun fetchSongs() {
+        songs.postValue(repository.allSongs())
     }
 
-    fun getAlbums(): LiveData<List<Album>> {
-        return albums
+    private suspend fun fetchAlbums() {
+        albums.postValue(repository.fetchAlbums())
     }
 
-    fun getArtists(): LiveData<List<Artist>> {
-        return artists
-    }
-
-    fun getPlaylists(): LiveData<List<PlaylistWithSongs>> {
-        return playlists
-    }
-
-    fun getLegacyPlaylist(): LiveData<List<Playlist>> {
-        return legacyPlaylists
-    }
-
-    fun getGenre(): LiveData<List<Genre>> {
-        return genres
-    }
-
-    fun getHome(): LiveData<List<Home>> {
-        return home
-    }
-
-    private fun fetchSongs() {
-        viewModelScope.launch(IO) {
-            songs.postValue(repository.allSongs())
-        }
-    }
-
-    private fun fetchAlbums() {
-        viewModelScope.launch(IO) {
-            albums.postValue(repository.fetchAlbums())
-        }
-    }
-
-    private fun fetchArtists() {
+    private suspend fun fetchArtists() {
         if (PreferenceUtil.albumArtistsOnly) {
-            viewModelScope.launch(IO) {
-                artists.postValue(repository.albumArtists())
-            }
+            artists.postValue(repository.albumArtists())
         } else {
-            viewModelScope.launch(IO) {
-                artists.postValue(repository.fetchArtists())
-            }
+            artists.postValue(repository.fetchArtists())
         }
     }
 
-    private fun fetchPlaylists() {
+    private suspend fun fetchPlaylists() {
+        playlists.postValue(repository.fetchPlaylistWithSongs())
+    }
+
+    private suspend fun fetchGenres() {
+        genres.postValue(repository.fetchGenres())
+    }
+
+    private suspend fun fetchHomeSections() {
+        home.postValue(repository.homeSections())
+    }
+
+    private suspend fun fetchSuggestions() {
+        suggestions.postValue(repository.suggestions())
+    }
+
+    fun search(query: String?, filter: Filter) =
         viewModelScope.launch(IO) {
-            playlists.postValue(repository.fetchPlaylistWithSongs())
+            val result = repository.search(query, filter)
+            searchResults.postValue(result)
         }
-    }
 
-    private fun fetchLegacyPlaylist() {
-        viewModelScope.launch(IO) {
-            legacyPlaylists.postValue(repository.fetchLegacyPlaylist())
-        }
-    }
-
-    private fun fetchGenres() {
-        viewModelScope.launch(IO) {
-            genres.postValue(repository.fetchGenres())
-        }
-    }
-
-    private fun fetchHomeSections() {
-        viewModelScope.launch(IO) {
-            home.postValue(repository.homeSections())
-        }
-    }
-
-    fun search(query: String?) {
-        viewModelScope.launch(IO) {
-            val result = repository.search(query)
-            withContext(Main) { searchResults.postValue(result) }
-        }
-    }
-
-    fun forceReload(reloadType: ReloadType) = viewModelScope.launch {
+    fun forceReload(reloadType: ReloadType) = viewModelScope.launch(IO) {
         when (reloadType) {
             Songs -> fetchSongs()
             Albums -> fetchAlbums()
@@ -150,6 +132,7 @@ class LibraryViewModel(
             HomeSections -> fetchHomeSections()
             Playlists -> fetchPlaylists()
             Genres -> fetchGenres()
+            Suggestions -> fetchSuggestions()
         }
     }
 
@@ -190,6 +173,10 @@ class LibraryViewModel(
         println("onShuffleModeChanged")
     }
 
+    override fun onFavoriteStateChanged() {
+        println("onFavoriteStateChanged")
+    }
+
     fun shuffleSongs() = viewModelScope.launch(IO) {
         val songs = repository.allSongs()
         MusicPlayerRemote.openAndShuffleQueue(
@@ -217,10 +204,11 @@ class LibraryViewModel(
         repository.deleteRoomPlaylist(playlists)
     }
 
-    suspend fun albumById(id: Long) = repository.albumById(id)
+    fun albumById(id: Long) = repository.albumById(id)
     suspend fun artistById(id: Long) = repository.artistById(id)
     suspend fun favoritePlaylist() = repository.favoritePlaylist()
     suspend fun isFavoriteSong(song: SongEntity) = repository.isFavoriteSong(song)
+    suspend fun isSongFavorite(songId: Long) = repository.isSongFavorite(songId)
     suspend fun insertSongs(songs: List<SongEntity>) = repository.insertSongs(songs)
     suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
         repository.removeSongFromPlaylist(songEntity)
@@ -241,33 +229,34 @@ class LibraryViewModel(
                 }
                 repository.insertSongs(songEntities)
             } else {
-                val playListId = createPlaylist(PlaylistEntity(playlistName = playlist.name))
-                val songEntities = playlist.getSongs().map {
-                    it.toSongEntity(playListId)
+                if (playlist != Playlist.empty) {
+                    val playListId = createPlaylist(PlaylistEntity(playlistName = playlist.name))
+                    val songEntities = playlist.getSongs().map {
+                        it.toSongEntity(playListId)
+                    }
+                    repository.insertSongs(songEntities)
                 }
-                repository.insertSongs(songEntities)
             }
             forceReload(Playlists)
         }
     }
 
-    fun deleteTracks(songs: List<Song>) = viewModelScope.launch(IO) {
-        repository.deleteSongs(songs)
-        fetchPlaylists()
-        loadLibraryContent()
-    }
-
-    fun recentSongs(): LiveData<List<Song>> = liveData {
+    fun recentSongs(): LiveData<List<Song>> = liveData(IO) {
         emit(repository.recentSongs())
     }
 
-    fun playCountSongs(): LiveData<List<Song>> = liveData {
+    fun playCountSongs(): LiveData<List<Song>> = liveData(IO) {
+        repository.playCountSongs().forEach { song ->
+            if (!File(song.data).exists() || song.id == -1L) {
+                repository.deleteSongInPlayCount(song)
+            }
+        }
         emit(repository.playCountSongs().map {
             it.toSong()
         })
     }
 
-    fun artists(type: Int): LiveData<List<Artist>> = liveData {
+    fun artists(type: Int): LiveData<List<Artist>> = liveData(IO) {
         when (type) {
             TOP_ARTISTS -> emit(repository.topArtists())
             RECENT_ARTISTS -> {
@@ -276,7 +265,7 @@ class LibraryViewModel(
         }
     }
 
-    fun albums(type: Int): LiveData<List<Album>> = liveData {
+    fun albums(type: Int): LiveData<List<Album>> = liveData(IO) {
         when (type) {
             TOP_ALBUMS -> emit(repository.topAlbums())
             RECENT_ALBUMS -> {
@@ -285,32 +274,69 @@ class LibraryViewModel(
         }
     }
 
-    fun artist(artistId: Long): LiveData<Artist> = liveData {
+    fun artist(artistId: Long): LiveData<Artist> = liveData(IO) {
         emit(repository.artistById(artistId))
     }
 
-    fun fetchContributors(): LiveData<List<Contributor>> = liveData {
+    fun fetchContributors(): LiveData<List<Contributor>> = liveData(IO) {
         emit(repository.contributor())
     }
 
-    fun observableHistorySongs() = repository.observableHistorySongs()
+    fun observableHistorySongs(): LiveData<List<Song>> {
+        viewModelScope.launch(IO) {
+            repository.historySong().forEach { song ->
+                if (!File(song.data).exists() || song.id == -1L) {
+                    repository.deleteSongInHistory(song.id)
+                }
+            }
+
+            songHistory.postValue(repository.historySong().map {
+                it.toSong()
+            })
+        }
+        return songHistory
+    }
+
+    fun clearHistory() {
+        viewModelScope.launch(IO) {
+            previousSongHistory = repository.historySong() as ArrayList<HistoryEntity>
+
+            repository.clearSongHistory()
+        }
+        songHistory.value = emptyList()
+    }
+
+
+    fun restoreHistory() {
+        viewModelScope.launch(IO) {
+            if (previousSongHistory.isNotEmpty()) {
+                val history = ArrayList<Song>()
+                for (song in previousSongHistory) {
+                    repository.addSongToHistory(song.toSong())
+                    history.add(song.toSong())
+                }
+                songHistory.postValue(history)
+            }
+        }
+    }
 
     fun favorites() = repository.favorites()
 
     fun clearSearchResult() {
-        viewModelScope.launch {
-            searchResults.postValue(emptyList())
-        }
+        searchResults.value = emptyList()
     }
 
-    fun addToPlaylist(playlistName: String, songs: List<Song>) {
+    fun addToPlaylist(context: Context, playlistName: String, songs: List<Song>) {
         viewModelScope.launch(IO) {
             val playlists = checkPlaylistExists(playlistName)
             if (playlists.isEmpty()) {
                 val playlistId: Long =
                     createPlaylist(PlaylistEntity(playlistName = playlistName))
                 insertSongs(songs.map { it.toSongEntity(playlistId) })
-                forceReload(Playlists)
+                withContext(Main) {
+                    context.showToast(context.getString(R.string.playlist_created_sucessfully,
+                        playlistName))
+                }
             } else {
                 val playlist = playlists.firstOrNull()
                 if (playlist != null) {
@@ -318,12 +344,32 @@ class LibraryViewModel(
                         it.toSongEntity(playListId = playlist.playListId)
                     })
                 }
-                Toast.makeText(
-                    App.getContext(),
-                    "Adding songs to $playlistName",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
+            forceReload(Playlists)
+            withContext(Main) {
+                context.showToast(
+                    context.getString(
+                        R.string.added_song_count_to_playlist,
+                        songs.size,
+                        playlistName),
+                    Toast.LENGTH_SHORT)
+            }
+        }
+    }
+
+    fun setFabMargin(context: Context, bottomMargin: Int) {
+        val currentValue = DensityUtil.dip2px(context, 16F) +
+                bottomMargin
+        ValueAnimator.ofInt(fabMargin.value!!, currentValue).apply {
+            addUpdateListener {
+                fabMargin.postValue(
+                    (it.animatedValue as Int)
+                )
+            }
+            doOnEnd {
+                fabMargin.postValue(currentValue)
+            }
+            start()
         }
     }
 }
@@ -335,4 +381,5 @@ enum class ReloadType {
     HomeSections,
     Playlists,
     Genres,
+    Suggestions
 }

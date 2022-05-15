@@ -17,7 +17,7 @@ package io.github.muntashirakon.music.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_SONG
 import io.github.muntashirakon.music.R
@@ -52,21 +52,16 @@ class RemoveSongFromPlaylistDialog : DialogFragment() {
         val pair = if (songs.size > 1) {
             Pair(
                 R.string.remove_songs_from_playlist_title,
-                HtmlCompat.fromHtml(
-                    String.format(getString(R.string.remove_x_songs_from_playlist), songs.size),
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                )
+                String.format(getString(R.string.remove_x_songs_from_playlist), songs.size)
+                    .parseAsHtml()
             )
         } else {
             Pair(
                 R.string.remove_song_from_playlist_title,
-                HtmlCompat.fromHtml(
-                    String.format(
-                        getString(R.string.remove_song_x_from_playlist),
-                        songs[0].title
-                    ),
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                )
+                String.format(
+                    getString(R.string.remove_song_x_from_playlist),
+                    songs[0].title
+                ).parseAsHtml()
             )
         }
         return materialDialog(pair.first)

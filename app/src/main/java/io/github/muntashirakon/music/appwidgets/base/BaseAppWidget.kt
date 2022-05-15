@@ -20,19 +20,20 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.text.TextUtils
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
-import io.github.muntashirakon.music.App
+import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.model.Song
 import io.github.muntashirakon.music.service.MusicService
-import io.github.muntashirakon.music.service.MusicService.*
+import io.github.muntashirakon.music.service.MusicService.Companion.APP_WIDGET_UPDATE
+import io.github.muntashirakon.music.service.MusicService.Companion.EXTRA_APP_WIDGET_NAME
+import io.github.muntashirakon.music.service.MusicService.Companion.FAVORITE_STATE_CHANGED
+import io.github.muntashirakon.music.service.MusicService.Companion.META_CHANGED
+import io.github.muntashirakon.music.service.MusicService.Companion.PLAY_STATE_CHANGED
 
 abstract class BaseAppWidget : AppWidgetProvider() {
 
@@ -57,7 +58,7 @@ abstract class BaseAppWidget : AppWidgetProvider() {
      */
     fun notifyChange(service: MusicService, what: String) {
         if (hasInstances(service)) {
-            if (META_CHANGED == what || PLAY_STATE_CHANGED == what) {
+            if (META_CHANGED == what || PLAY_STATE_CHANGED == what || FAVORITE_STATE_CHANGED == what) {
                 performUpdate(service, null)
             }
         }
@@ -96,10 +97,14 @@ abstract class BaseAppWidget : AppWidgetProvider() {
     ): PendingIntent {
         val intent = Intent(action)
         intent.component = serviceName
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            PendingIntent.getForegroundService(context, 0, intent, 0)
+        return if (VersionUtils.hasOreo()) {
+            PendingIntent.getForegroundService(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         } else {
-            PendingIntent.getService(context, 0, intent, 0)
+            PendingIntent.getService(
+                context, 0, intent, if (VersionUtils.hasMarshmallow())
+                    PendingIntent.FLAG_IMMUTABLE
+                else 0
+            )
         }
     }
 
@@ -107,18 +112,18 @@ abstract class BaseAppWidget : AppWidgetProvider() {
 
     abstract fun performUpdate(service: MusicService, appWidgetIds: IntArray?)
 
-    protected fun getAlbumArtDrawable(resources: Resources, bitmap: Bitmap?): Drawable {
+    protected fun getAlbumArtDrawable(context: Context, bitmap: Bitmap?): Drawable {
         return if (bitmap == null) {
-            ContextCompat.getDrawable(App.getContext(), R.drawable.default_audio_art)!!
+            ContextCompat.getDrawable(context, R.drawable.default_audio_art)!!
         } else {
-            BitmapDrawable(resources, bitmap)
+            BitmapDrawable(context.resources, bitmap)
         }
     }
 
     protected fun getSongArtistAndAlbum(song: Song): String {
         val builder = StringBuilder()
         builder.append(song.artistName)
-        if (!TextUtils.isEmpty(song.artistName) && !TextUtils.isEmpty(song.albumName)) {
+        if (song.artistName.isNotEmpty() && song.albumName.isNotEmpty()) {
             builder.append(" • ")
         }
         builder.append(song.albumName)
@@ -160,18 +165,6 @@ abstract class BaseAppWidget : AppWidgetProvider() {
             )
 
             return rounded
-        }
-
-        fun createBitmap(drawable: Drawable, sizeMultiplier: Float): Bitmap {
-            val bitmap = Bitmap.createBitmap(
-                (drawable.intrinsicWidth * sizeMultiplier).toInt(),
-                (drawable.intrinsicHeight * sizeMultiplier).toInt(),
-                Bitmap.Config.ARGB_8888
-            )
-            val c = Canvas(bitmap)
-            drawable.setBounds(0, 0, c.width, c.height)
-            drawable.draw(c)
-            return bitmap
         }
 
         protected fun composeRoundedRectPath(

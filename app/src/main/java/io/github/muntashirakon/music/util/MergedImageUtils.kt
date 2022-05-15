@@ -1,6 +1,10 @@
 package io.github.muntashirakon.music.util
 
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Matrix
+import android.graphics.Paint
+import androidx.core.graphics.scale
 import com.bumptech.glide.util.Util.assertBackgroundThread
 
 
@@ -13,7 +17,7 @@ internal object MergedImageUtils {
     fun joinImages(list: List<Bitmap>): Bitmap {
         assertBackgroundThread()
 
-        val arranged = arrangeBitmaps(list.shuffled())
+        val arranged = arrangeBitmaps(list)
 
         val mergedImage = create(
             arranged,
@@ -72,28 +76,15 @@ internal object MergedImageUtils {
         val onePartSize = imageSize / parts
 
         images.forEachIndexed { i, bitmap ->
-            val bit = Bitmap.createScaledBitmap(bitmap, onePartSize, onePartSize, true)
+            val bit = bitmap.scale(onePartSize, onePartSize)
             canvas.drawBitmap(
                 bit,
-                (onePartSize * (i % parts)).toFloat(),
-                (onePartSize * (i / parts)).toFloat(),
+                (onePartSize * (i % parts)).toFloat() + (i % 3) * 50,
+                (onePartSize * (i / parts)).toFloat() + (i / 3) * 50,
                 paint
             )
             bit.recycle()
         }
-
-        paint.color = Color.WHITE
-        paint.strokeWidth = 10f
-
-        val oneThirdSize = (IMAGE_SIZE / 3).toFloat()
-        val twoThirdSize = (IMAGE_SIZE / 3 * 2).toFloat()
-        // vertical lines
-        canvas.drawLine(oneThirdSize, 0f, oneThirdSize, imageSize.toFloat(), paint)
-        canvas.drawLine(twoThirdSize, 0f, twoThirdSize, imageSize.toFloat(), paint)
-        // horizontal lines
-        canvas.drawLine(0f, oneThirdSize, imageSize.toFloat(), oneThirdSize, paint)
-        canvas.drawLine(0f, twoThirdSize, imageSize.toFloat(), twoThirdSize, paint)
-
         return result
     }
 

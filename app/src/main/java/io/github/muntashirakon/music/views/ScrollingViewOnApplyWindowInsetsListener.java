@@ -17,8 +17,10 @@ package io.github.muntashirakon.music.views;
 import android.graphics.Rect;
 import android.view.View;
 import android.view.WindowInsets;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import me.zhanghai.android.fastscroll.FastScroller;
 
 public class ScrollingViewOnApplyWindowInsetsListener implements View.OnApplyWindowInsetsListener {

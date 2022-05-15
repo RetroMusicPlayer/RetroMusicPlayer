@@ -4,22 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?rectSelector"
     android:clickable="true"
-    android:focusable="true">
-
+    android:focusable="true"
+    android:background="?rectSelector"
+    android:transitionGroup="true">
     <FrameLayout
         android:id="@+id/dummy_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="1dp"
-            android:background="?rectSelector"
             android:minHeight="?attr/listPreferredItemHeight"
             android:orientation="horizontal"
             tools:ignore="MissingPrefix">
@@ -27,24 +25,24 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/drag_view"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_gravity="center_vertical|start"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_drag_vertical"
+                app:srcCompat="@drawable/ic_drag_handle"
                 app:tint="?attr/colorControlNormal"
                 tools:ignore="ContentDescription"
+                android:paddingHorizontal="8dp"
                 tools:visibility="visible" />
 
 
-            <FrameLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/imageContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="16dp"
                 app:cardCornerRadius="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/drag_view"
@@ -72,7 +70,7 @@
                     android:visibility="gone"
                     tools:text="100"
                     tools:visibility="visible" />
-            </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
 
 
             <com.google.android.material.textview.MaterialTextView

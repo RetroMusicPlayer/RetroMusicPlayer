@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface">
+    android:fitsSystemWindows="true">
 
     <io.github.muntashirakon.music.views.BaselineGridTextView
         android:id="@+id/appNameText"
@@ -28,44 +28,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appNameText" />
 
-    <io.github.muntashirakon.music.views.PermissionItem
-        android:id="@+id/storagePermission"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/finish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        app:permissionButtonTitle="Grant access"
-        app:permissionIcon="@drawable/ic_sd_storage"
-        app:permissionTitle="@string/permission_title"
-        app:permissionTitleNumber="1"
-        app:permissionTitleSubTitle="@string/permission_summary" />
+        app:layout_constraintTop_toBottomOf="@+id/divider">
 
-    <io.github.muntashirakon.music.views.PermissionItem
-        android:id="@+id/audioPermission"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/storagePermission"
-        app:permissionButtonTitle="Grant access"
-        app:permissionIcon="@drawable/ic_phonelink_ring"
-        app:permissionTitle="@string/ringtone_title"
-        app:permissionTitleNumber="2"
-        app:permissionTitleSubTitle="@string/ringtone_summary"
-        tools:visibility="visible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="@integer/permission_orientation">
+
+            <io.github.muntashirakon.music.views.PermissionItem
+                android:id="@+id/storage_permission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/permission_layout_weight"
+                app:permissionButtonTitle="@string/grant_access"
+                app:permissionIcon="@drawable/ic_sd_storage"
+                app:permissionTitle="@string/permission_title"
+                app:permissionTitleNumber="1"
+                app:permissionTitleSubTitle="@string/permission_summary" />
+
+            <io.github.muntashirakon.music.views.PermissionItem
+                android:id="@+id/bluetooth_permission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/permission_layout_weight"
+                android:visibility="gone"
+                app:permissionButtonTitle="@string/grant_access"
+                app:permissionIcon="@drawable/ic_bluetooth_connect"
+                app:permissionTitle="@string/bluetooth_title"
+                app:permissionTitleNumber="2"
+                app:permissionTitleSubTitle="@string/bluetooth_summary"
+                tools:visibility="visible" />
+
+            <io.github.muntashirakon.music.views.PermissionItem
+                android:id="@+id/audio_permission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/permission_layout_weight"
+                android:visibility="gone"
+                app:permissionButtonTitle="@string/grant_access"
+                app:permissionIcon="@drawable/ic_phonelink_ring"
+                app:permissionTitle="@string/ringtone_title"
+                app:permissionTitleNumber="3"
+                app:permissionTitleSubTitle="@string/ringtone_summary"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </ScrollView>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/finish"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/Widget.Material3.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:paddingVertical="12dp"
-        android:text="Let's go"
+        android:text="@string/lets_go"
         android:textAppearance="@style/TextViewButton"
-        app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

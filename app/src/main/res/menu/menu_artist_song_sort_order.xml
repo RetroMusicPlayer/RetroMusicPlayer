@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_sort_order_title"
+            android:title="@string/sort_order_a_z" />
+        <item
+            android:id="@+id/action_sort_order_title_desc"
+            android:title="@string/sort_order_z_a" />
+        <item
+            android:id="@+id/action_sort_order_album"
+            android:title="@string/sort_order_album" />
+        <item
+            android:id="@+id/action_sort_order_year"
+            android:title="@string/sort_order_year" />
+        <item
+            android:id="@+id/action_sort_order_song_duration"
+            android:title="@string/song_duration" />
+    </group>
+</menu>

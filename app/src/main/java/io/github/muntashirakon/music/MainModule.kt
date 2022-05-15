@@ -3,6 +3,7 @@ package io.github.muntashirakon.music
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import io.github.muntashirakon.music.auto.AutoMusicProvider
 import io.github.muntashirakon.music.db.BlackListStoreDao
 import io.github.muntashirakon.music.db.BlackListStoreEntity
 import io.github.muntashirakon.music.db.PlaylistWithSongs
@@ -84,6 +85,19 @@ private val roomModule = module {
     single {
         RealRoomRepository(get(), get(), get(), get(), get())
     } bind RoomRepository::class
+}
+private val autoModule = module {
+    single {
+        AutoMusicProvider(
+            androidContext(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
 }
 private val mainModule = module {
     single {
@@ -167,10 +181,11 @@ private val viewModules = module {
         )
     }
 
-    viewModel { (artistId: Long) ->
+    viewModel { (artistId: Long?, artistName: String?) ->
         ArtistDetailsViewModel(
             get(),
-            artistId
+            artistId,
+            artistName
         )
     }
 
@@ -189,4 +204,4 @@ private val viewModules = module {
     }
 }
 
-val appModules = listOf(mainModule, dataModule, viewModules, networkModule, roomModule)
+val appModules = listOf(mainModule, dataModule, autoModule, viewModules, networkModule, roomModule)

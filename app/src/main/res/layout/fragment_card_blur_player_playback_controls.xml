@@ -1,80 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingStart="24dp"
     android:paddingEnd="24dp"
     android:paddingBottom="32dp">
 
+    <FrameLayout
+        android:id="@+id/volumeFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp" />
+
+    <include
+        android:id="@+id/media_button"
+        layout="@layout/media_button" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
-        tools:ignore="MissingPrefix">
-
-        <FrameLayout
-            android:id="@+id/volumeFragmentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp" />
-
-        <include layout="@layout/media_button" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/songCurrentProgress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:textStyle="bold"
-                tools:text="22.00" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/songTotalTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:textStyle="bold"
-                tools:text="22.00" />
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/progressSlider"
-            android:layout_width="match_parent"
-            android:maxHeight="2dp"
-            android:progressDrawable="@drawable/color_progress_seek"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            tools:progress="20" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/songInfo"
-            android:layout_width="match_parent"
+            android:id="@+id/songCurrentProgress"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="8dp"
-            android:textSize="12sp"
-            tools:text="@tools:sample/lorem/random" />
+            android:layout_weight="1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textStyle="bold"
+            tools:text="22.00" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/songTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textStyle="bold"
+            tools:text="22.00" />
     </LinearLayout>
-</FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/progressSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="2dp"
+        android:paddingVertical="@dimen/seekbar_padding"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:progressDrawable="@drawable/color_progress_seek"
+        tools:progress="20" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/songInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:textSize="12sp"
+        tools:text="@tools:sample/lorem/random" />
+</LinearLayout>

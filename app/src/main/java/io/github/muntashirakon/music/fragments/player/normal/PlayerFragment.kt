@@ -16,13 +16,18 @@ package io.github.muntashirakon.music.fragments.player.normal
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
+import android.content.SharedPreferences
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
+import androidx.core.view.isVisible
+import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import io.github.muntashirakon.music.R
+import io.github.muntashirakon.music.SNOWFALL
+import io.github.muntashirakon.music.databinding.FragmentPlayerBinding
+import io.github.muntashirakon.music.extensions.*
 import io.github.muntashirakon.music.fragments.base.AbsPlayerFragment
 import io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
@@ -31,9 +36,9 @@ import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.ViewUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import io.github.muntashirakon.music.views.DrawableGradient
-import kotlinx.android.synthetic.main.fragment_player.*
 
-class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
+class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     private var lastColor: Int = 0
     override val paletteColor: Int
@@ -42,6 +47,10 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
     private lateinit var controlsFragment: PlayerPlaybackControlsFragment
     private var valueAnimator: ValueAnimator? = null
 
+    private var _binding: FragmentPlayerBinding? = null
+    private val binding get() = _binding!!
+
+
     private fun colorize(i: Int) {
         if (valueAnimator != null) {
             valueAnimator?.cancel()
@@ -49,7 +58,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
         valueAnimator = ValueAnimator.ofObject(
             ArgbEvaluator(),
-            ATHUtil.resolveColor(requireContext(), R.attr.colorSurface),
+            surfaceColor(),
             i
         )
         valueAnimator?.addUpdateListener { animation ->
@@ -58,10 +67,10 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     intArrayOf(
                         animation.animatedValue as Int,
-                        ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)
+                        surfaceColor()
                     ), 0
                 )
-                colorGradientBackground?.background = drawable
+                binding.colorGradientBackground.background = drawable
             }
         }
         valueAnimator?.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong())?.start()
@@ -80,9 +89,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
         return false
     }
 
-    override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
-    }
+    override fun toolbarIconColor() = colorControlNormal()
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         controlsFragment.setColor(color)
@@ -90,8 +97,8 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
         libraryViewModel.updateColor(color.backgroundColor)
 
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            binding.playerToolbar,
+            colorControlNormal(),
             requireActivity()
         )
 
@@ -113,28 +120,57 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
+        startOrStopSnow(PreferenceUtil.isSnowFalling)
+
+        PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .registerOnSharedPreferenceChangeListener(this)
+        playerToolbar().drawAboveSystemBars()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .unregisterOnSharedPreferenceChangeListener(this)
+        _binding = null
     }
 
     private fun setUpSubFragments() {
-        controlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        controlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        playerToolbar.setOnMenuItemClickListener(this)
+        binding.playerToolbar.inflateMenu(R.menu.menu_player)
+        //binding.playerToolbar.menu.setUpWithIcons()
+        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.playerToolbar.setOnMenuItemClickListener(this)
 
         ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            binding.playerToolbar,
+            colorControlNormal(),
             requireActivity()
         )
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key == SNOWFALL) {
+            startOrStopSnow(PreferenceUtil.isSnowFalling)
+        }
+    }
+
+    private fun startOrStopSnow(isSnowFalling: Boolean) {
+        if (isSnowFalling && !surfaceColor().isColorLight) {
+            binding.snowfallView.isVisible = true
+            binding.snowfallView.restartFalling()
+        } else {
+            binding.snowfallView.isVisible = false
+            binding.snowfallView.stopFalling()
+        }
     }
 
     override fun onServiceConnected() {
@@ -146,7 +182,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player) {
     }
 
     override fun playerToolbar(): Toolbar {
-        return playerToolbar
+        return binding.playerToolbar
     }
 
     companion object {

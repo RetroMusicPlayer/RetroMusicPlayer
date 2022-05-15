@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface">
+    android:background="?attr/colorSurface"
+    android:clickable="true"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/colorBackground"
@@ -12,17 +14,17 @@
         android:layout_height="match_parent"
         android:paddingBottom="48dp">
 
-        <fragment
-             android:id="@+id/playerAlbumCoverFragment"
-             android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
-             android:layout_width="0dp"
-             android:layout_height="0dp"
-             app:layout_constrainedHeight="true"
-             app:layout_constraintBottom_toTopOf="@id/playbackControlsFragment"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent"
-             tools:layout="@layout/fragment_album_full_cover" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/playerAlbumCoverFragment"
+            android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@id/playbackControlsFragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_album_full_cover" />
 
         <View
             android:id="@+id/mask"
@@ -53,17 +55,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/status_bar" />
+            <include
+                android:id="@+id/status_bar_layout"
+                layout="@layout/status_bar" />
         </FrameLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/cover_lyrics"
+            android:name="io.github.muntashirakon.music.fragments.player.CoverLyricsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/playerAlbumCoverFragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusBarContainer" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/playerQueueSheet"
+        style="@style/BottomSheetStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:behavior_hideable="false"
-        app:layout_behavior="io.github.muntashirakon.music.RetroBottomSheetBehavior">
+        app:gestureInsetBottomIgnored="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <LinearLayout
             android:id="@+id/container"
@@ -146,7 +163,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?attr/colorSurface"
-            android:overScrollMode="never"
+            android:overScrollMode="@integer/overScrollMode"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

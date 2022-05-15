@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/playerAlbumCoverFragment"
                 android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
@@ -75,52 +75,52 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/playerQueueSheet"
+        style="@style/BottomSheetStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
         android:theme="@style/TopCornerCardView"
         app:behavior_hideable="false"
         app:cardElevation="24dp"
-        app:layout_behavior="io.github.muntashirakon.music.RetroBottomSheetBehavior"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         tools:peekHeight="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorSurface"
+            android:clickable="false"
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
                 android:ellipsize="marquee"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:freezesText="true"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="16dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:textAppearance="@style/TextViewHeadline6"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textStyle="bold"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/lorem[5]" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:clickable="true"
                 android:ellipsize="end"
+                android:focusable="true"
                 android:maxLines="1"
-                android:paddingHorizontal="16dp"
                 android:textAppearance="@style/TextViewBody1"
                 android:textColor="?android:attr/textColorSecondary"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toTopOf="@+id/songInfo"
-                app:layout_constraintTop_toBottomOf="@+id/titleContainer"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/full_names[0]" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/player_queue_sub_header"
@@ -137,7 +137,7 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:overScrollMode="never"
+                android:overScrollMode="@integer/overScrollMode"
                 tools:listitem="@layout/item_list" />
         </LinearLayout>
 

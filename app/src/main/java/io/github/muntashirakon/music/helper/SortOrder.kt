@@ -15,6 +15,7 @@
 package io.github.muntashirakon.music.helper
 
 import android.provider.MediaStore
+import io.github.muntashirakon.music.ALBUM_ARTIST
 
 class SortOrder {
 
@@ -53,11 +54,11 @@ class SortOrder {
             const val ALBUM_Z_A = "$ALBUM_A_Z DESC"
 
             /* Album sort order songs */
-            const val ALBUM_NUMBER_OF_SONGS = MediaStore.Audio.Albums.NUMBER_OF_SONGS + " DESC"
+            const val ALBUM_NUMBER_OF_SONGS =
+                MediaStore.Audio.AlbumColumns.NUMBER_OF_SONGS + " DESC"
 
-            /* Album sort order artist */
-            const val ALBUM_ARTIST = (MediaStore.Audio.Artists.DEFAULT_SORT_ORDER +
-                    ", " + MediaStore.Audio.Albums.DEFAULT_SORT_ORDER)
+            /* Album Artist sort order artist */
+            const val ALBUM_ARTIST = "case when lower(album_artist) is null then 1 else 0 end, lower(album_artist)"
 
             /* Album sort order year */
             const val ALBUM_YEAR = MediaStore.Audio.Media.YEAR + " DESC"
@@ -79,6 +80,9 @@ class SortOrder {
 
             /* Song sort order artist */
             const val SONG_ARTIST = MediaStore.Audio.Artists.DEFAULT_SORT_ORDER
+
+            /* Song sort order album artist */
+            const val SONG_ALBUM_ARTIST = ALBUM_ARTIST
 
             /* Song sort order album */
             const val SONG_ALBUM = MediaStore.Audio.Albums.DEFAULT_SORT_ORDER

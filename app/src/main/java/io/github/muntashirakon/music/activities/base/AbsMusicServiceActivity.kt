@@ -15,26 +15,28 @@
 package io.github.muntashirakon.music.activities.base
 
 import android.Manifest
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.ServiceConnection
+import android.content.*
 import android.os.Bundle
 import android.os.IBinder
 import androidx.lifecycle.lifecycleScope
+import code.name.monkey.appthemehelper.util.VersionUtils
 import io.github.muntashirakon.music.R
 import io.github.muntashirakon.music.db.toPlayCount
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
 import io.github.muntashirakon.music.interfaces.IMusicServiceEventListener
 import io.github.muntashirakon.music.repository.RealRepository
-import io.github.muntashirakon.music.service.MusicService.*
-import java.lang.ref.WeakReference
-import java.util.*
+import io.github.muntashirakon.music.service.MusicService.Companion.FAVORITE_STATE_CHANGED
+import io.github.muntashirakon.music.service.MusicService.Companion.MEDIA_STORE_CHANGED
+import io.github.muntashirakon.music.service.MusicService.Companion.META_CHANGED
+import io.github.muntashirakon.music.service.MusicService.Companion.PLAY_STATE_CHANGED
+import io.github.muntashirakon.music.service.MusicService.Companion.QUEUE_CHANGED
+import io.github.muntashirakon.music.service.MusicService.Companion.REPEAT_MODE_CHANGED
+import io.github.muntashirakon.music.service.MusicService.Companion.SHUFFLE_MODE_CHANGED
+import io.github.muntashirakon.music.util.PreferenceUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import java.lang.ref.WeakReference
 
 abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventListener {
 
@@ -123,7 +125,10 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             if (entity != null) {
                 repository.updateHistorySong(MusicPlayerRemote.currentSong)
             } else {
-                repository.addSongToHistory(MusicPlayerRemote.currentSong)
+                // Check whether pause history option is ON or OFF
+                if (!PreferenceUtil.pauseHistory) {
+                    repository.addSongToHistory(MusicPlayerRemote.currentSong)
+                }
             }
             val songs = repository.checkSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
             if (songs.isNotEmpty()) {
@@ -166,6 +171,12 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
         }
     }
 
+    override fun onFavoriteStateChanged() {
+        for (listener in mMusicServiceEventListeners) {
+            listener.onFavoriteStateChanged()
+        }
+    }
+
     override fun onHasPermissionsChanged(hasPermissions: Boolean) {
         super.onHasPermissionsChanged(hasPermissions)
         val intent = Intent(MEDIA_STORE_CHANGED)
@@ -178,11 +189,11 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
     }
 
     override fun getPermissionsToRequest(): Array<String> {
-        return arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.BLUETOOTH
-        )
+        return mutableListOf(Manifest.permission.READ_EXTERNAL_STORAGE).apply {
+            if (!VersionUtils.hasQ()) {
+                add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }.toTypedArray()
     }
 
     private class MusicStateReceiver(activity: AbsMusicServiceActivity) : BroadcastReceiver() {
@@ -194,7 +205,8 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             val activity = reference.get()
             if (activity != null && action != null) {
                 when (action) {
-                    FAVORITE_STATE_CHANGED, META_CHANGED -> activity.onPlayingMetaChanged()
+                    FAVORITE_STATE_CHANGED -> activity.onFavoriteStateChanged()
+                    META_CHANGED -> activity.onPlayingMetaChanged()
                     QUEUE_CHANGED -> activity.onQueueChanged()
                     PLAY_STATE_CHANGED -> activity.onPlayStateChanged()
                     REPEAT_MODE_CHANGED -> activity.onRepeatModeChanged()

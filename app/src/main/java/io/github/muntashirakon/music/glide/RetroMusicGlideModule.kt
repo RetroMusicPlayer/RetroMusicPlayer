@@ -15,25 +15,38 @@
 package io.github.muntashirakon.music.glide
 
 import android.content.Context
+import android.graphics.Bitmap
 import io.github.muntashirakon.music.glide.artistimage.ArtistImage
 import io.github.muntashirakon.music.glide.artistimage.Factory
 import io.github.muntashirakon.music.glide.audiocover.AudioFileCover
 import io.github.muntashirakon.music.glide.audiocover.AudioFileCoverLoader
+import io.github.muntashirakon.music.glide.palette.BitmapPaletteTranscoder
+import io.github.muntashirakon.music.glide.palette.BitmapPaletteWrapper
+import io.github.muntashirakon.music.glide.playlistPreview.PlaylistPreview
+import io.github.muntashirakon.music.glide.playlistPreview.PlaylistPreviewLoader
 import com.bumptech.glide.Glide
-import com.bumptech.glide.GlideBuilder
-import com.bumptech.glide.module.GlideModule
+import com.bumptech.glide.Registry
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 import java.io.InputStream
 
-class RetroMusicGlideModule : GlideModule {
-    override fun applyOptions(context: Context, builder: GlideBuilder) {
-    }
-
-    override fun registerComponents(context: Context, glide: Glide) {
-        glide.register(
+@GlideModule
+class RetroMusicGlideModule : AppGlideModule() {
+    override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
+        registry.prepend(PlaylistPreview::class.java, Bitmap::class.java, PlaylistPreviewLoader.Factory(context))
+        registry.prepend(
             AudioFileCover::class.java,
             InputStream::class.java,
             AudioFileCoverLoader.Factory()
         )
-        glide.register(ArtistImage::class.java, InputStream::class.java, Factory(context))
+        registry.prepend(ArtistImage::class.java, InputStream::class.java, Factory(context))
+        registry.register(
+            Bitmap::class.java,
+            BitmapPaletteWrapper::class.java, BitmapPaletteTranscoder()
+        )
+    }
+
+    override fun isManifestParsingEnabled(): Boolean {
+        return false
     }
 }

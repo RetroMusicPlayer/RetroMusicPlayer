@@ -17,7 +17,7 @@ package io.github.muntashirakon.music.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.fragment.app.DialogFragment
 import io.github.muntashirakon.music.EXTRA_PLAYLIST
 import io.github.muntashirakon.music.R
@@ -55,16 +55,10 @@ class DeletePlaylistDialog : DialogFragment() {
         //noinspection ConstantConditions
         if (playlists.size > 1) {
             title = R.string.delete_playlists_title
-            message = HtmlCompat.fromHtml(
-                String.format(getString(R.string.delete_x_playlists), playlists.size),
-                HtmlCompat.FROM_HTML_MODE_LEGACY
-            )
+            message = String.format(getString(R.string.delete_x_playlists), playlists.size).parseAsHtml()
         } else {
             title = R.string.delete_playlist_title
-            message = HtmlCompat.fromHtml(
-                String.format(getString(R.string.delete_playlist_x), playlists[0].playlistName),
-                HtmlCompat.FROM_HTML_MODE_LEGACY
-            )
+            message = String.format(getString(R.string.delete_playlist_x), playlists[0].playlistName).parseAsHtml()
         }
 
         return materialDialog(title)

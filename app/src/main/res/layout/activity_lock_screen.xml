@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
     <FrameLayout
@@ -22,7 +21,7 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playback_controls_fragment"
             android:name="io.github.muntashirakon.music.fragments.player.lockscreen.LockScreenControlsFragment"
             android:layout_width="match_parent"
@@ -56,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        android:fitsSystemWindows="true"
         android:gravity="center"
         android:padding="16dp"
         android:text="@string/swipe_to_unlock"

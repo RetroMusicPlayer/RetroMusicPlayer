@@ -14,35 +14,30 @@
  */
 package io.github.muntashirakon.music.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
 import io.github.muntashirakon.music.*
 import io.github.muntashirakon.music.adapter.album.AlbumAdapter
 import io.github.muntashirakon.music.adapter.artist.ArtistAdapter
 import io.github.muntashirakon.music.adapter.song.SongAdapter
-import io.github.muntashirakon.music.extensions.hide
-import io.github.muntashirakon.music.glide.SongGlideRequest
-import io.github.muntashirakon.music.helper.MusicPlayerRemote
+import io.github.muntashirakon.music.fragments.home.HomeFragment
 import io.github.muntashirakon.music.interfaces.IAlbumClickListener
 import io.github.muntashirakon.music.interfaces.IArtistClickListener
 import io.github.muntashirakon.music.interfaces.IGenreClickListener
 import io.github.muntashirakon.music.model.*
 import io.github.muntashirakon.music.util.PreferenceUtil
-import com.bumptech.glide.Glide
-import com.google.android.material.card.MaterialCardView
 
 class HomeAdapter(
     private val activity: AppCompatActivity
@@ -60,17 +55,10 @@ class HomeAdapter(
             LayoutInflater.from(activity).inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
-            GENRES -> GenreViewHolder(layout)
             FAVOURITES -> PlaylistViewHolder(layout)
             TOP_ALBUMS, RECENT_ALBUMS -> AlbumViewHolder(layout)
             else -> {
-                SuggestionsViewHolder(
-                    LayoutInflater.from(activity).inflate(
-                        R.layout.item_suggestions,
-                        parent,
-                        false
-                    )
-                )
+                ArtistViewHolder(layout)
             }
         }
     }
@@ -82,6 +70,7 @@ class HomeAdapter(
                 val viewHolder = holder as AlbumViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to RECENT_ALBUMS)
@@ -92,6 +81,7 @@ class HomeAdapter(
                 val viewHolder = holder as AlbumViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to TOP_ALBUMS)
@@ -102,6 +92,7 @@ class HomeAdapter(
                 val viewHolder = holder as ArtistViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to RECENT_ARTISTS)
@@ -112,31 +103,23 @@ class HomeAdapter(
                 val viewHolder = holder as ArtistViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to TOP_ARTISTS)
                     )
                 }
             }
-            SUGGESTIONS -> {
-                val viewHolder = holder as SuggestionsViewHolder
-                viewHolder.bindView(home)
-            }
             FAVOURITES -> {
                 val viewHolder = holder as PlaylistViewHolder
                 viewHolder.bindView(home)
                 viewHolder.clickableArea.setOnClickListener {
+                    it.findFragment<HomeFragment>().setSharedAxisXTransitions()
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.detailListFragment,
                         bundleOf("type" to FAVOURITES)
                     )
                 }
-            }
-            GENRES -> {
-                val viewHolder = holder as GenreViewHolder
-                viewHolder.bind(home)
-            }
-            PLAYLISTS -> {
             }
         }
     }
@@ -145,6 +128,7 @@ class HomeAdapter(
         return list.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun swapData(sections: List<Home>) {
         list = sections
         notifyDataSetChanged()
@@ -170,36 +154,6 @@ class HomeAdapter(
         }
     }
 
-    private inner class SuggestionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val images = listOf(
-            R.id.image1,
-            R.id.image2,
-            R.id.image3,
-            R.id.image4,
-            R.id.image5,
-            R.id.image6,
-            R.id.image7,
-            R.id.image8
-        )
-
-        fun bindView(home: Home) {
-            val color = ThemeStore.accentColor(activity)
-            itemView.findViewById<TextView>(R.id.message).setTextColor(color)
-            itemView.findViewById<MaterialCardView>(R.id.card6).apply {
-                setCardBackgroundColor(ColorUtil.withAlpha(color, 0.12f))
-            }
-            images.forEachIndexed { index, id ->
-                itemView.findViewById<View>(id).setOnClickListener {
-                    MusicPlayerRemote.playNext(home.arrayList[index] as Song)
-                }
-                SongGlideRequest.Builder.from(Glide.with(activity), home.arrayList[index] as Song)
-                    .asBitmap()
-                    .build()
-                    .into(itemView.findViewById(id))
-            }
-        }
-    }
-
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             title.setText(home.titleRes)
@@ -207,27 +161,10 @@ class HomeAdapter(
                 val songAdapter = SongAdapter(
                     activity,
                     home.arrayList as MutableList<Song>,
-                    R.layout.item_album_card, null
+                    R.layout.item_favourite_card, null
                 )
                 layoutManager = linearLayoutManager()
                 adapter = songAdapter
-            }
-        }
-    }
-
-    private inner class GenreViewHolder(itemView: View) : AbsHomeViewItem(itemView) {
-        fun bind(home: Home) {
-            arrow.hide()
-            title.setText(home.titleRes)
-            val genreAdapter = GenreAdapter(
-                activity,
-                home.arrayList as List<Genre>,
-                R.layout.item_grid_genre,
-                this@HomeAdapter
-            )
-            recyclerView.apply {
-                layoutManager = GridLayoutManager(activity, 3, GridLayoutManager.HORIZONTAL, false)
-                adapter = genreAdapter
             }
         }
     }
@@ -257,7 +194,7 @@ class HomeAdapter(
             bundleOf(EXTRA_ARTIST_ID to artistId),
             null,
             FragmentNavigatorExtras(
-                view to "artist"
+                view to artistId.toString()
             )
         )
     }
@@ -268,7 +205,7 @@ class HomeAdapter(
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
             FragmentNavigatorExtras(
-                view to "album"
+                view to albumId.toString()
             )
         )
     }

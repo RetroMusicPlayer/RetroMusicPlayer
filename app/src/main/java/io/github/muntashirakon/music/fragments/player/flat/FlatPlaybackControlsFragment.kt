@@ -14,66 +14,72 @@
  */
 package io.github.muntashirakon.music.fragments.player.flat
 
-import android.animation.ObjectAnimator
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.view.animation.LinearInterpolator
+import android.widget.ImageButton
 import android.widget.SeekBar
+import android.widget.TextView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import io.github.muntashirakon.music.R
-import io.github.muntashirakon.music.extensions.applyColor
-import io.github.muntashirakon.music.extensions.hide
-import io.github.muntashirakon.music.extensions.ripAlpha
-import io.github.muntashirakon.music.extensions.show
+import io.github.muntashirakon.music.databinding.FragmentFlatPlayerPlaybackControlsBinding
+import io.github.muntashirakon.music.extensions.*
 import io.github.muntashirakon.music.fragments.base.AbsPlayerControlsFragment
+import io.github.muntashirakon.music.fragments.base.goToAlbum
+import io.github.muntashirakon.music.fragments.base.goToArtist
 import io.github.muntashirakon.music.helper.MusicPlayerRemote
-import io.github.muntashirakon.music.helper.MusicProgressViewUpdateHelper
 import io.github.muntashirakon.music.helper.MusicProgressViewUpdateHelper.Callback
 import io.github.muntashirakon.music.helper.PlayPauseButtonOnClickHandler
-import io.github.muntashirakon.music.misc.SimpleOnSeekbarChangeListener
-import io.github.muntashirakon.music.service.MusicService
-import io.github.muntashirakon.music.util.MusicUtil
 import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
-import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.*
 
 class FlatPlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_flat_player_playback_controls), Callback {
 
-    private var lastPlaybackControlsColor: Int = 0
-    private var lastDisabledPlaybackControlsColor: Int = 0
-    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
+    private var _binding: FragmentFlatPlayerPlaybackControlsBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-    }
+    override val progressSlider: SeekBar
+        get() = binding.progressSlider
+
+    override val shuffleButton: ImageButton
+        get() = binding.shuffleButton
+
+    override val repeatButton: ImageButton
+        get() = binding.repeatButton
+
+    override val nextButton: ImageButton?
+        get() = null
+
+    override val previousButton: ImageButton?
+        get() = null
+
+    override val songTotalTime: TextView
+        get() = binding.songTotalTime
+
+    override val songCurrentProgress: TextView
+        get() = binding.songCurrentProgress
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpMusicControllers()
-        title.isSelected = true
-        text.isSelected = true
-    }
-
-    override fun onResume() {
-        super.onResume()
-        progressViewUpdateHelper.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        progressViewUpdateHelper.stop()
+        _binding = FragmentFlatPlayerPlaybackControlsBinding.bind(view)
+        binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
+        binding.title.isSelected = true
+        binding.text.isSelected = true
+        binding.title.setOnClickListener {
+            goToAlbum(requireActivity())
+        }
+        binding.text.setOnClickListener {
+            goToArtist(requireActivity())
+        }
     }
 
     public override fun show() {
-        playPauseButton!!.animate()
+        binding.playPauseButton.animate()
             .scaleX(1f)
             .scaleY(1f)
             .setInterpolator(DecelerateInterpolator())
@@ -81,7 +87,7 @@ class FlatPlaybackControlsFragment :
     }
 
     public override fun hide() {
-        playPauseButton!!.apply {
+        binding.playPauseButton.apply {
             scaleX = 0f
             scaleY = 0f
             rotation = 0f
@@ -109,7 +115,7 @@ class FlatPlaybackControlsFragment :
 
         updateTextColors(colorFinal)
         volumeFragment?.setTintable(colorFinal)
-        progressSlider.applyColor(colorFinal)
+        binding.progressSlider.applyColor(colorFinal)
         updateRepeatState()
         updateShuffleState()
     }
@@ -121,15 +127,15 @@ class FlatPlaybackControlsFragment :
         val colorSecondary =
             MaterialValueHelper.getSecondaryTextColor(context, ColorUtil.isColorLight(darkColor))
 
-        TintHelper.setTintAuto(playPauseButton, colorPrimary, false)
-        TintHelper.setTintAuto(playPauseButton, color, true)
+        TintHelper.setTintAuto(binding.playPauseButton, colorPrimary, false)
+        TintHelper.setTintAuto(binding.playPauseButton, color, true)
 
-        title.setBackgroundColor(color)
-        title.setTextColor(colorPrimary)
-        text.setBackgroundColor(darkColor)
-        text.setTextColor(colorSecondary)
-        songInfo.setBackgroundColor(darkColor)
-        songInfo.setTextColor(colorSecondary)
+        binding.title.setBackgroundColor(color)
+        binding.title.setTextColor(colorPrimary)
+        binding.text.setBackgroundColor(darkColor)
+        binding.text.setTextColor(colorSecondary)
+        binding.songInfo.setBackgroundColor(darkColor)
+        binding.songInfo.setTextColor(colorSecondary)
     }
 
     override fun onServiceConnected() {
@@ -148,34 +154,23 @@ class FlatPlaybackControlsFragment :
         updatePlayPauseDrawableState()
     }
 
-    private fun setUpPlayPauseFab() {
-        playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
-    }
-
     private fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause)
+            binding.playPauseButton.setImageResource(R.drawable.ic_pause)
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
+            binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
         }
-    }
-
-    private fun setUpMusicControllers() {
-        setUpPlayPauseFab()
-        setUpRepeatButton()
-        setUpShuffleButton()
-        setUpProgressSlider()
     }
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        title.text = song.title
-        text.text = song.artistName
+        binding.title.text = song.title
+        binding.text.text = song.artistName
         if (PreferenceUtil.isSongInfo) {
-            songInfo.text = getSongInfo(song)
-            songInfo.show()
+            binding.songInfo.text = getSongInfo(song)
+            binding.songInfo.show()
         } else {
-            songInfo.hide()
+            binding.songInfo.hide()
         }
     }
 
@@ -187,70 +182,8 @@ class FlatPlaybackControlsFragment :
         updateShuffleState()
     }
 
-    private fun setUpRepeatButton() {
-        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
-    }
-
-    override fun updateRepeatState() {
-        when (MusicPlayerRemote.repeatMode) {
-            MusicService.REPEAT_MODE_NONE -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat)
-                repeatButton.setColorFilter(
-                    lastDisabledPlaybackControlsColor,
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-            MusicService.REPEAT_MODE_ALL -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat)
-                repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-            }
-            MusicService.REPEAT_MODE_THIS -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_one)
-                repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-            }
-        }
-    }
-
-    private fun setUpShuffleButton() {
-        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
-    }
-
-    override fun updateShuffleState() {
-        when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
-                lastPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-            else -> shuffleButton.setColorFilter(
-                lastDisabledPlaybackControlsColor,
-                PorterDuff.Mode.SRC_IN
-            )
-        }
-    }
-
-    override fun setUpProgressSlider() {
-        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(
-                        MusicPlayerRemote.songProgressMillis,
-                        MusicPlayerRemote.songDurationMillis
-                    )
-                }
-            }
-        })
-    }
-
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
