@@ -317,10 +317,6 @@ class MusicService : MediaBrowserServiceCompat(),
             )
         contentResolver
             .registerContentObserver(
-                MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
-        contentResolver
-            .registerContentObserver(
                 MediaStore.Audio.Media.INTERNAL_CONTENT_URI, true, mediaStoreObserver
             )
         contentResolver
@@ -334,10 +330,6 @@ class MusicService : MediaBrowserServiceCompat(),
         contentResolver
             .registerContentObserver(
                 MediaStore.Audio.Genres.INTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
-        contentResolver
-            .registerContentObserver(
-                MediaStore.Audio.Playlists.INTERNAL_CONTENT_URI, true, mediaStoreObserver
             )
         val audioVolumeObserver = AudioVolumeObserver(this)
         audioVolumeObserver.register(AudioManager.STREAM_MUSIC, this)
@@ -473,10 +465,6 @@ class MusicService : MediaBrowserServiceCompat(),
             }
         }
         return position
-    }
-
-    private fun getPlayingQueue(): List<Song> {
-        return playingQueue
     }
 
     private fun getPosition(): Int {
@@ -851,21 +839,6 @@ class MusicService : MediaBrowserServiceCompat(),
             } else {
                 showToast(resources.getString(R.string.unplayable_file))
             }
-        }
-    }
-
-    fun playSongs(songs: ArrayList<Song>?, shuffleMode: Int) {
-        if (songs != null && songs.isNotEmpty()) {
-            if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {
-                val startPosition = Random().nextInt(songs.size)
-                openQueue(songs, startPosition, false)
-                setShuffleMode(shuffleMode)
-            } else {
-                openQueue(songs, 0, false)
-            }
-            play()
-        } else {
-            showToast(R.string.playlist_is_empty)
         }
     }
 
