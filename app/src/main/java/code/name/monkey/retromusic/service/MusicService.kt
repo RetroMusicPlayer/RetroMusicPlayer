@@ -17,6 +17,7 @@ import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothDevice.EXTRA_DEVICE
 import android.content.*
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.ServiceInfo
@@ -35,8 +36,6 @@ import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import android.telephony.PhoneStateListener
-import android.telephony.TelephonyManager
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.edit
@@ -94,6 +93,9 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.cast.framework.CastSession
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
 
@@ -117,6 +119,7 @@ class MusicService : MediaBrowserServiceCompat(),
     private var mPackageValidator: PackageValidator? = null
     private val mMusicProvider = get<AutoMusicProvider>(AutoMusicProvider::class.java)
     private var trackEndedByCrossfade = false
+    private val serviceScope = CoroutineScope(Job() + Main)
 
     @JvmField
     var position = -1
@@ -127,7 +130,7 @@ class MusicService : MediaBrowserServiceCompat(),
     private val appWidgetText = AppWidgetText.instance
     private val appWidgetMd3 = AppWidgetMD3.instance
     private val appWidgetCircle = AppWidgetCircle.instance
-    private val widgetIntentReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    private val widgetIntentReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val command = intent.getStringExtra(EXTRA_APP_WIDGET_NAME)
             val ids = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS)
@@ -182,7 +185,7 @@ class MusicService : MediaBrowserServiceCompat(),
     @JvmField
     var playingQueue = ArrayList<Song>()
     var isPausedByTransientLossOfFocus = false
-    private val becomingNoisyReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    private val becomingNoisyReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action != null
                 && intent.action == AudioManager.ACTION_AUDIO_BECOMING_NOISY
@@ -197,13 +200,14 @@ class MusicService : MediaBrowserServiceCompat(),
     }
     private var playingNotification: PlayingNotification? = null
 
-    private val updateFavoriteReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    private val updateFavoriteReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             playingNotification?.updateFavorite(currentSong) { startForegroundOrNotify() }
             appWidgetCircle.notifyChange(this@MusicService, FAVORITE_STATE_CHANGED)
         }
     }
-    private val lockScreenReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+
+    private val lockScreenReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (isLockScreen && isPlaying) {
                 val lockIntent = Intent(context, LockScreenActivity::class.java)
@@ -234,32 +238,20 @@ class MusicService : MediaBrowserServiceCompat(),
     var shuffleMode = 0
     private val songPlayCountHelper = SongPlayCountHelper()
 
-    private val bluetoothReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    private val bluetoothReceiver = object : BroadcastReceiver() {
+        @SuppressLint("MissingPermission")
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
+            val extra = intent.getParcelableExtra<BluetoothDevice>(EXTRA_DEVICE)!!
             if (action != null) {
                 if (BluetoothDevice.ACTION_ACL_CONNECTED == action && isBluetoothSpeaker) {
-                    if (audioManager!!.isBluetoothA2dpOn) {
-                        play()
-                    }
+                    if (extra.type == BluetoothDevice.DEVICE_TYPE_CLASSIC) play()
                 }
             }
         }
     }
 
-    private val phoneStateListener: PhoneStateListener = object : PhoneStateListener() {
-        override fun onCallStateChanged(state: Int, incomingNumber: String) {
-            when (state) {
-                TelephonyManager.CALL_STATE_IDLE ->                             // Not in call: Play music
-                    play()
-                TelephonyManager.CALL_STATE_RINGING, TelephonyManager.CALL_STATE_OFFHOOK ->                             // A call is dialing, active or on hold
-                    pause()
-            }
-            super.onCallStateChanged(state, incomingNumber)
-        }
-    }
-
-    private val headsetReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    private val headsetReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (action != null) {
@@ -279,8 +271,6 @@ class MusicService : MediaBrowserServiceCompat(),
     private var isForeground = false
     override fun onCreate() {
         super.onCreate()
-        val telephonyManager = getSystemService<TelephonyManager>()
-        telephonyManager?.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
         val powerManager = getSystemService<PowerManager>()
         if (powerManager != null) {
             wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, javaClass.name)
@@ -353,7 +343,7 @@ class MusicService : MediaBrowserServiceCompat(),
         audioVolumeObserver.register(AudioManager.STREAM_MUSIC, this)
         registerOnSharedPreferenceChangedListener(this)
         restoreState()
-        sendBroadcast(Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_CREATED"))
+        sendBroadcast(Intent("$RETRO_MUSIC_PACKAGE_NAME.RETRO_MUSIC_SERVICE_CREATED"))
         registerHeadsetEvents()
         registerBluetoothConnected()
         mPackageValidator = PackageValidator(this, R.xml.allowed_media_browser_callers)
@@ -382,11 +372,11 @@ class MusicService : MediaBrowserServiceCompat(),
         contentResolver.unregisterContentObserver(mediaStoreObserver)
         unregisterOnSharedPreferenceChangedListener(this)
         wakeLock?.release()
-        sendBroadcast(Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_DESTROYED"))
+        sendBroadcast(Intent("$RETRO_MUSIC_PACKAGE_NAME.RETRO_MUSIC_SERVICE_DESTROYED"))
     }
 
-    private fun acquireWakeLock(milli: Long) {
-        wakeLock?.acquire(milli)
+    private fun acquireWakeLock() {
+        wakeLock?.acquire(30000)
     }
 
     private var pausedByZeroVolume = false
@@ -394,10 +384,8 @@ class MusicService : MediaBrowserServiceCompat(),
         if (isPauseOnZeroVolume) {
             if (isPlaying && currentVolume < 1) {
                 pause()
-                println("Paused")
                 pausedByZeroVolume = true
             } else if (pausedByZeroVolume && currentVolume >= 1) {
-                println("Played")
                 play()
                 pausedByZeroVolume = false
             }
@@ -692,6 +680,7 @@ class MusicService : MediaBrowserServiceCompat(),
     ) {
         when (key) {
             PLAYBACK_SPEED, PLAYBACK_PITCH -> {
+                updateMediaSessionPlaybackState()
                 playbackManager.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
             }
             CROSS_FADE_DURATION -> {
@@ -716,7 +705,6 @@ class MusicService : MediaBrowserServiceCompat(),
                     startForegroundOrNotify()
                 }
             }
-            PLAYBACK_SPEED -> updateMediaSessionPlaybackState()
             TOGGLE_HEADSET -> registerHeadsetEvents()
         }
     }
@@ -724,37 +712,39 @@ class MusicService : MediaBrowserServiceCompat(),
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null && intent.action != null) {
             handleIntent(mediaSession, intent)
-            restoreQueuesAndPositionIfNecessary()
-            when (intent.action) {
-                ACTION_TOGGLE_PAUSE -> if (isPlaying) {
-                    pause()
-                } else {
-                    play()
+            serviceScope.launch {
+                restoreQueuesAndPositionIfNecessary()
+                when (intent.action) {
+                    ACTION_TOGGLE_PAUSE -> if (isPlaying) {
+                        pause()
+                    } else {
+                        play()
+                    }
+                    ACTION_PAUSE -> pause()
+                    ACTION_PLAY -> play()
+                    ACTION_PLAY_PLAYLIST -> playFromPlaylist(intent)
+                    ACTION_REWIND -> back(true)
+                    ACTION_SKIP -> playNextSong(true)
+                    ACTION_STOP, ACTION_QUIT -> {
+                        pendingQuit = false
+                        quit()
+                    }
+                    ACTION_PENDING_QUIT -> pendingQuit = true
+                    TOGGLE_FAVORITE -> toggleFavorite(applicationContext, currentSong)
                 }
-                ACTION_PAUSE -> pause()
-                ACTION_PLAY -> play()
-                ACTION_PLAY_PLAYLIST -> playFromPlaylist(intent)
-                ACTION_REWIND -> back(true)
-                ACTION_SKIP -> playNextSong(true)
-                ACTION_STOP, ACTION_QUIT -> {
-                    pendingQuit = false
-                    quit()
-                }
-                ACTION_PENDING_QUIT -> pendingQuit = true
-                TOGGLE_FAVORITE -> toggleFavorite(applicationContext, currentSong)
             }
         }
         return START_NOT_STICKY
     }
 
     override fun onTrackEnded() {
-        acquireWakeLock(30000)
+        acquireWakeLock()
         playerHandler?.sendEmptyMessage(TRACK_ENDED)
     }
 
     override fun onTrackEndedWithCrossfade() {
         trackEndedByCrossfade = true
-        acquireWakeLock(30000)
+        acquireWakeLock()
         playerHandler?.sendEmptyMessage(TRACK_ENDED)
     }
 
@@ -894,7 +884,12 @@ class MusicService : MediaBrowserServiceCompat(),
         stopForeground(true)
         notificationManager?.cancel(PlayingNotification.NOTIFICATION_ID)
         playbackManager.release()
-        audioManager?.abandonAudioFocus(audioFocusListener)
+        AudioManagerCompat.abandonAudioFocusRequest(audioManager!!,
+            AudioFocusRequestCompat.Builder(AudioManagerCompat.AUDIOFOCUS_GAIN)
+            .setOnAudioFocusChangeListener(audioFocusListener)
+            .setAudioAttributes(
+                AudioAttributesCompat.Builder().setContentType(CONTENT_TYPE_MUSIC).build()
+            ).build())
         stopSelf()
     }
 
@@ -954,36 +949,42 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
-    @Synchronized
-    fun restoreQueuesAndPositionIfNecessary() {
+    private suspend fun restoreQueuesAndPositionIfNecessary() {
         if (!queuesRestored && playingQueue.isEmpty()) {
-            val restoredQueue = MusicPlaybackQueueStore.getInstance(this).savedPlayingQueue
-            val restoredOriginalQueue =
-                MusicPlaybackQueueStore.getInstance(this).savedOriginalPlayingQueue
-            val restoredPosition = PreferenceManager.getDefaultSharedPreferences(this).getInt(
-                SAVED_POSITION, -1
-            )
-            val restoredPositionInTrack =
-                PreferenceManager.getDefaultSharedPreferences(this).getInt(
-                    SAVED_POSITION_IN_TRACK, -1
-                )
-            if (restoredQueue.size > 0 && restoredQueue.size == restoredOriginalQueue.size && restoredPosition != -1) {
-                originalPlayingQueue = ArrayList(restoredOriginalQueue)
-                playingQueue = ArrayList(restoredQueue)
-                position = restoredPosition
-                openCurrent {
-                    prepareNext()
-                    if (restoredPositionInTrack > 0) {
-                        seek(restoredPositionInTrack)
+            withContext(IO) {
+                val restoredQueue =
+                    MusicPlaybackQueueStore.getInstance(this@MusicService).savedPlayingQueue
+                val restoredOriginalQueue =
+                    MusicPlaybackQueueStore.getInstance(this@MusicService).savedOriginalPlayingQueue
+                val restoredPosition =
+                    PreferenceManager.getDefaultSharedPreferences(this@MusicService).getInt(
+                        SAVED_POSITION, -1
+                    )
+                val restoredPositionInTrack =
+                    PreferenceManager.getDefaultSharedPreferences(this@MusicService).getInt(
+                        SAVED_POSITION_IN_TRACK, -1
+                    )
+                if (restoredQueue.size > 0 && restoredQueue.size == restoredOriginalQueue.size && restoredPosition != -1) {
+                    originalPlayingQueue = ArrayList(restoredOriginalQueue)
+                    playingQueue = ArrayList(restoredQueue)
+                    position = restoredPosition
+                    withContext(Main) {
+                        openCurrent {
+                            prepareNext()
+                            if (restoredPositionInTrack > 0) {
+                                seek(restoredPositionInTrack)
+                            }
+                            notHandledMetaChangedForCurrentTrack = true
+                            sendChangeInternal(META_CHANGED)
+                        }
                     }
-                    notHandledMetaChangedForCurrentTrack = true
-                    sendChangeInternal(META_CHANGED)
+
+                    sendChangeInternal(QUEUE_CHANGED)
                 }
 
-                sendChangeInternal(QUEUE_CHANGED)
             }
+            queuesRestored = true
         }
-        queuesRestored = true
     }
 
     fun runOnUiThread(runnable: Runnable?) {
@@ -1009,8 +1010,7 @@ class MusicService : MediaBrowserServiceCompat(),
     @Synchronized
     fun seek(millis: Int): Int {
         return try {
-            var newPosition = 0
-            newPosition = playbackManager.seek(millis)
+            val newPosition = playbackManager.seek(millis)
             throttledSeekHandler?.notifySeek()
             newPosition
         } catch (e: Exception) {
@@ -1271,8 +1271,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun prepareNext() {
-        playerHandler?.removeMessages(PREPARE_NEXT)
-        playerHandler?.obtainMessage(PREPARE_NEXT)?.sendToTarget()
+        prepareNextImpl()
     }
 
     private fun registerBluetoothConnected() {
@@ -1319,8 +1318,9 @@ class MusicService : MediaBrowserServiceCompat(),
         )
         handleAndSendChangeInternal(SHUFFLE_MODE_CHANGED)
         handleAndSendChangeInternal(REPEAT_MODE_CHANGED)
-        playerHandler?.removeMessages(RESTORE_QUEUES)
-        playerHandler?.sendEmptyMessage(RESTORE_QUEUES)
+        serviceScope.launch {
+            restoreQueuesAndPositionIfNecessary()
+        }
     }
 
     private fun savePosition() {
@@ -1420,13 +1420,9 @@ class MusicService : MediaBrowserServiceCompat(),
         const val RELEASE_WAKELOCK = 0
         const val TRACK_ENDED = 1
         const val TRACK_WENT_TO_NEXT = 2
-        const val PLAY_SONG = 3
-        const val PREPARE_NEXT = 4
-        const val SET_POSITION = 5
-        const val FOCUS_CHANGE = 6
-        const val DUCK = 7
-        const val UNDUCK = 8
-        const val RESTORE_QUEUES = 9
+        const val FOCUS_CHANGE = 3
+        const val DUCK = 4
+        const val UNDUCK = 5
         const val SHUFFLE_MODE_NONE = 0
         const val SHUFFLE_MODE_SHUFFLE = 1
         const val REPEAT_MODE_NONE = 0

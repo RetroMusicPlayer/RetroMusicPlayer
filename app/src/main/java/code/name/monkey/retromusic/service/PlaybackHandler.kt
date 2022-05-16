@@ -84,8 +84,6 @@ internal class PlaybackHandler(service: MusicService, looper: Looper) : Handler(
                 sendEmptyMessage(MusicService.RELEASE_WAKELOCK)
             }
             MusicService.RELEASE_WAKELOCK -> service.releaseWakeLock()
-            MusicService.PREPARE_NEXT -> service.prepareNextImpl()
-            MusicService.RESTORE_QUEUES -> service.restoreQueuesAndPositionIfNecessary()
             MusicService.FOCUS_CHANGE -> when (msg.arg1) {
                 AudioManager.AUDIOFOCUS_GAIN -> {
                     if (!service.isPlaying && service.isPausedByTransientLossOfFocus) {
