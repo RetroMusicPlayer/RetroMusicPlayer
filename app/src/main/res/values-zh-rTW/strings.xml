@@ -5,10 +5,10 @@
     <string name="accent_color">強調顏色</string>
     <string name="accent_color_desc">強調顏色，預設為紫色</string>
     <string name="action_about">關於</string>
-    <string name="action_add_to_blacklist">新增到黑名單</string>
-    <string name="action_add_to_favorites">新增到最愛</string>
-    <string name="action_add_to_playing_queue">新增到播放佇列</string>
-    <string name="action_add_to_playlist">新增到播放清單</string>
+    <string name="action_add_to_blacklist">新增至黑名單</string>
+    <string name="action_add_to_favorites">新增至最愛</string>
+    <string name="action_add_to_playing_queue">新增至播放佇列</string>
+    <string name="action_add_to_playlist">新增至播放清單</string>
     <string name="action_cancel">取消</string>
     <string name="action_cast">投放</string>
     <string name="action_clear_playing_queue">清除播放佇列</string>
@@ -53,11 +53,11 @@
     <string name="action_toggle_shuffle">開啟/關閉隨機播放模式</string>
     <string name="adaptive">適應風</string>
     <string name="add_action">新增</string>
-    <string name="add_playlist_title">"新增到播放清單"</string>
+    <string name="add_playlist_title">"新增至播放清單"</string>
     <string name="add_time_framed_lryics">新增同步歌詞</string>
-    <string name="added_song_count_to_playlist">已新增 %1$d 首歌到 %2$s</string>
-    <string name="added_title_to_playing_queue">"已新增 1 首歌到播放佇列。"</string>
-    <string name="added_x_titles_to_playing_queue">已新增 %1$d 首歌到播放佇列。</string>
+    <string name="added_song_count_to_playlist">已新增 %1$d 首歌至 %2$s</string>
+    <string name="added_title_to_playing_queue">"已新增 1 首歌至播放佇列。"</string>
+    <string name="added_x_titles_to_playing_queue">已新增 %1$d 首歌至播放佇列。</string>
     <string name="album">專輯</string>
     <plurals name="albumSongs">
         <item quantity="other">歌曲</item>
@@ -89,7 +89,7 @@
     <string name="biography">簡介</string>
     <string name="black_theme_name">純黑色</string>
     <string name="blacklist">黑名單</string>
-    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_summary">應用程式必須取得鄰近裝置權限以檢查藍芽裝置</string>
     <string name="blur">模糊風</string>
     <string name="blur_card">模糊卡牌風</string>
     <string name="bug_report_failed">無法傳送報告</string>
@@ -129,7 +129,7 @@
     <string name="colors">顏色</string>
     <string name="compact">壓縮</string>
     <string name="composer">作曲者</string>
-    <string name="copied_device_info_to_clipboard">已複製裝置資訊到剪貼簿。</string>
+    <string name="copied_device_info_to_clipboard">已複製裝置資訊至剪貼簿。</string>
     <string name="could_not_create_playlist">無法建立播放清單。</string>
     <string name="could_not_download_album_cover">"無法下載相應的專輯封面。"</string>
     <string name="could_not_restore_purchase">無法復原購買。</string>
@@ -170,14 +170,14 @@
     <string name="edit_synced_lyrics">編輯同步歌詞</string>
     <string name="empty">沒有內容</string>
     <string name="equalizer">等化器</string>
-    <string name="error_create_backup">Couldn\u2019t create backup</string>
-    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
-    <string name="error_empty_name">Your name can\'t be empty!</string>
-    <string name="error_load_failed">Load failed</string>
+    <string name="error_create_backup">無法建立備份</string>
+    <string name="error_delete_backup">無法刪除備份</string>
+    <string name="error_empty_name">名稱不得為空！</string>
+    <string name="error_load_failed">載入失敗</string>
     <string name="expanded">展開</string>
     <string name="faq">常見問題</string>
     <string name="favorites">最愛</string>
-    <string name="file_already_exists">File already exists</string>
+    <string name="file_already_exists">檔案已存在</string>
     <string name="finish_last_song">播放完最後一首歌曲</string>
     <string name="fit">緊貼風</string>
     <string name="flat">方角風</string>
@@ -193,7 +193,7 @@
     <string name="genres">風格類型</string>
     <string name="git_hub_summary">在 GitHub 上分支這項專案</string>
     <string name="gradient">漸層風</string>
-    <string name="grant_access">Grant access</string>
+    <string name="grant_access">授予權限</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -216,7 +216,7 @@
     <string name="import_label">匯入</string>
     <string name="import_playlist">匯入播放清單</string>
     <string name="import_playlist_message">這將匯入於 Android 媒體商店內全部的播放清單和歌曲，若播放清單已存在，相關的歌曲將會被合併。</string>
-    <string name="inserted_x_songs_into_playlist_x">已插入 %1$d 首歌到播放清單 %2$s 中。</string>
+    <string name="inserted_x_songs_into_playlist_x">已插入 %1$d 首歌至播放清單 %2$s 中。</string>
     <string name="instagram_page_summary">在 Instagram 上分享 Retro Music 的配置消息</string>
     <string name="keyboard">鍵盤</string>
     <string name="label_bit_rate">位元率</string>
@@ -231,7 +231,7 @@
     <string name="labeled">顯示標籤</string>
     <string name="last_added">最後新增</string>
     <string name="last_song">最後一首</string>
-    <string name="lets_go">Let\'s go</string>
+    <string name="lets_go">開始吧</string>
     <string name="library_categories">音樂庫類別</string>
     <string name="licenses">原始碼授權</string>
     <string name="light_theme_name">淺色</string>
@@ -244,12 +244,12 @@
     <string name="material">材質風</string>
     <string name="md_error_label">錯誤</string>
     <string name="md_storage_perm_error">權限錯誤</string>
-    <string name="message_backup_create_success">Backup created successfully.</string>
-    <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
-    <string name="message_restore_success">Restore completed successfully.</string>
-    <string name="message_updated">Updated</string>
-    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
+    <string name="message_backup_create_success">已成功建立備份。</string>
+    <string name="message_limit_tabs">不得多於 5 個項目</string>
+    <string name="message_pro_feature">%s 為 Pro 版功能。</string>
+    <string name="message_restore_success">已成功完成復原。</string>
+    <string name="message_updated">已更新</string>
+    <string name="message_welcome"><![CDATA[嗨！<br> 歡迎使用 %s]]></string>
     <string name="my_name">名稱</string>
     <string name="my_top_tracks">最佳單曲</string>
     <string name="never">永不</string>
@@ -290,7 +290,7 @@
     <string name="paste_lyrics_here">在此貼上歌詞</string>
     <string name="paste_timeframe_lyrics_here">在此貼上同步歌詞</string>
     <string name="peek">懸浮風</string>
-    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
+    <string name="permission_bluetooth_denied">鄰近裝置存取被拒。</string>
     <string name="permission_external_storage_denied">無法取得存取外部儲存空間的權限。</string>
     <string name="permission_summary">應用程式必須取得權限以存取您的裝置和媒體</string>
     <string name="permission_title">檔案和媒體權限</string>
@@ -360,7 +360,7 @@
     <string name="pref_summary_show_lyrics">於專輯封面上顯示同步歌詞</string>
     <string name="pref_summary_suggestions">於主畫面中顯示歌曲快選</string>
     <string name="pref_summary_swipe_anywhere_now_playing">啟用於現正播放畫面，可隨意滑動以切換歌曲</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_summary_swipe_to_dismiss">向下滑動以關閉迷你播放器</string>
     <string name="pref_summary_toggle_full_screen">沉浸模式</string>
     <string name="pref_summary_toggle_headset">當連接耳機後，自動播放音樂</string>
     <string name="pref_summary_toggle_shuffle">當播放新播放清單時，關閉隨機模式</string>
@@ -407,7 +407,7 @@
     <string name="pref_title_show_lyrics">顯示歌詞</string>
     <string name="pref_title_suggestions">顯示建議</string>
     <string name="pref_title_swipe_anywhere_now_playing">隨意滑動以切換歌曲</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="pref_title_swipe_to_dismiss">向下滑動以關閉</string>
     <string name="pref_title_tab_text_mode">索引標籤模式</string>
     <string name="pref_title_toggle_carousel_effect">輪播效果</string>
     <string name="pref_title_toggle_full_screen">全螢幕應用程式</string>
@@ -465,7 +465,7 @@
     <!-- SAF guide -->
     <string name="save_playlist_title">另存新檔</string>
     <string name="save_playlists_title">另存新檔</string>
-    <string name="saved_playlist_to">已儲存播放清單到 %s。</string>
+    <string name="saved_playlist_to">已儲存播放清單至 %s。</string>
     <string name="saving_changes">儲存變更</string>
     <string name="scan_media">掃描媒體</string>
     <string name="scanned_files">已掃描 %2$d 個檔案夾中的 %1$d 個。</string>
@@ -476,14 +476,14 @@
     <string name="set_artist_image">設定演唱者圖片</string>
     <string name="share_app">分享應用程式</string>
     <string name="share_summary">與家人和朋友分享程式</string>
-    <string name="share_to_stories">分享到限時動態</string>
+    <string name="share_to_stories">分享至限時動態</string>
     <string name="show_album_artists">顯示專輯演唱者</string>
     <string name="shuffle">隨機播放</string>
     <string name="simple">簡單風</string>
     <string name="sleep_timer_canceled">已取消睡眠計時器。</string>
     <string name="sleep_timer_set">睡眠計時器將從現在計時 %d 分鐘。</string>
     <string name="social">社群</string>
-    <string name="social_stories">分享到限時動態</string>
+    <string name="social_stories">分享至限時動態</string>
     <string name="song">歌曲</string>
     <string name="song_duration">歌曲長度</string>
     <string name="songs">歌曲</string>
@@ -553,5 +553,5 @@
     <string name="you_have_to_select_at_least_one_category">您必須選取至少一個類別。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">您將被重新導向至議題追蹤器網頁。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
-    <string name="bluetooth_title">Nearby devices</string>
+    <string name="bluetooth_title">鄰近裝置</string>
 </resources>
