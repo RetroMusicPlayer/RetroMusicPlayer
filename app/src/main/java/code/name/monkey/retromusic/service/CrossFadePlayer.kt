@@ -355,7 +355,9 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
 
     override fun setPlaybackSpeedPitch(speed: Float, pitch: Float) {
         getCurrentPlayer()?.setPlaybackSpeedPitch(speed, pitch)
-        getNextPlayer()?.setPlaybackSpeedPitch(speed, pitch)
+        if (getNextPlayer()?.isPlaying == true) {
+            getNextPlayer()?.setPlaybackSpeedPitch(speed, pitch)
+        }
     }
 
     companion object {
