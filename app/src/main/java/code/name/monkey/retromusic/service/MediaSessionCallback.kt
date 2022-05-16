@@ -190,7 +190,7 @@ class MediaSessionCallback(
                 musicService.updateMediaSessionPlaybackState()
             }
             TOGGLE_FAVORITE -> {
-                MusicUtil.toggleFavorite(context, MusicPlayerRemote.currentSong)
+                musicService.toggleFavorite()
                 musicService.updateMediaSessionPlaybackState()
             }
             else -> {

@@ -47,7 +47,6 @@ import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -252,8 +251,7 @@ class PlayingNotificationClassic(
         }
     }
 
-    override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
-    }
+    override fun updateFavorite(isFavorite: Boolean) {}
 
     private fun buildPendingIntent(
         context: Context, action: String,

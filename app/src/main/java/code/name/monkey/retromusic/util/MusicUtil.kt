@@ -28,8 +28,7 @@ import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
@@ -100,7 +99,7 @@ object MusicUtil : KoinComponent {
 
     fun getArtistInfoString(
         context: Context,
-        artist: Artist
+        artist: Artist,
     ): String {
         val albumCount = artist.albumCount
         val songCount = artist.songCount
@@ -190,7 +189,7 @@ object MusicUtil : KoinComponent {
 
     fun getPlaylistInfoString(
         context: Context,
-        songs: List<Song>
+        songs: List<Song>,
     ): String {
         val duration = getTotalDuration(songs)
         return buildInfoString(
@@ -201,7 +200,7 @@ object MusicUtil : KoinComponent {
 
     fun playlistInfoString(
         context: Context,
-        songs: List<SongEntity>
+        songs: List<SongEntity>,
     ): String {
         return getSongCountString(context, songs.size)
     }
@@ -299,7 +298,7 @@ object MusicUtil : KoinComponent {
     fun insertAlbumArt(
         context: Context,
         albumId: Long,
-        path: String?
+        path: String?,
     ) {
         val contentResolver = context.contentResolver
         val artworkUri = "content://media/external/audio/albumart".toUri()
@@ -334,8 +333,8 @@ object MusicUtil : KoinComponent {
     }
 
     val repository = get<Repository>()
-    fun toggleFavorite(context: Context, song: Song) {
-        GlobalScope.launch {
+    suspend fun toggleFavorite(context: Context, song: Song) {
+        withContext(IO) {
             val playlist: PlaylistEntity = repository.favoritePlaylist()
             val songEntity = song.toSongEntity(playlist.playListId)
             val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
@@ -348,11 +347,13 @@ object MusicUtil : KoinComponent {
         }
     }
 
+    suspend fun isFavorite(song: Song) = repository.isSongFavorite(song.id)
+
     fun deleteTracks(
         activity: FragmentActivity,
         songs: List<Song>,
         safUris: List<Uri>?,
-        callback: Runnable?
+        callback: Runnable?,
     ) {
         val songRepository: SongRepository = get()
         val projection = arrayOf(

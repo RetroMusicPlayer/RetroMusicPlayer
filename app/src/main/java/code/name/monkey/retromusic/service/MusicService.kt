@@ -72,6 +72,7 @@ import code.name.monkey.retromusic.service.notification.PlayingNotificationClass
 import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl24
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
+import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.MusicUtil.getMediaStoreAlbumCoverUri
 import code.name.monkey.retromusic.util.MusicUtil.toggleFavorite
 import code.name.monkey.retromusic.util.PackageValidator
@@ -202,8 +203,11 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private val updateFavoriteReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            playingNotification?.updateFavorite(currentSong) { startForegroundOrNotify() }
-            appWidgetCircle.notifyChange(this@MusicService, FAVORITE_STATE_CHANGED)
+            isCurrentFavorite { isFavorite ->
+                playingNotification?.updateFavorite(isFavorite)
+                startForegroundOrNotify()
+                appWidgetCircle.notifyChange(this@MusicService, FAVORITE_STATE_CHANGED)
+            }
         }
     }
 
@@ -718,7 +722,7 @@ class MusicService : MediaBrowserServiceCompat(),
                         quit()
                     }
                     ACTION_PENDING_QUIT -> pendingQuit = true
-                    TOGGLE_FAVORITE -> toggleFavorite(applicationContext, currentSong)
+                    TOGGLE_FAVORITE -> toggleFavorite()
                 }
             }
         }
@@ -852,6 +856,21 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    fun toggleFavorite() {
+        serviceScope.launch {
+            toggleFavorite(this@MusicService, currentSong)
+        }
+    }
+
+    fun isCurrentFavorite(completion: (isFavorite: Boolean) -> Unit) {
+        serviceScope.launch(IO) {
+            val isFavorite = MusicUtil.isFavorite(currentSong)
+            withContext(Main) {
+                completion(isFavorite)
+            }
+        }
+    }
+
     fun quit() {
         pause()
         stopForeground(true)
@@ -859,10 +878,10 @@ class MusicService : MediaBrowserServiceCompat(),
         playbackManager.release()
         AudioManagerCompat.abandonAudioFocusRequest(audioManager!!,
             AudioFocusRequestCompat.Builder(AudioManagerCompat.AUDIOFOCUS_GAIN)
-            .setOnAudioFocusChangeListener(audioFocusListener)
-            .setAudioAttributes(
-                AudioAttributesCompat.Builder().setContentType(CONTENT_TYPE_MUSIC).build()
-            ).build())
+                .setOnAudioFocusChangeListener(audioFocusListener)
+                .setAudioAttributes(
+                    AudioAttributesCompat.Builder().setContentType(CONTENT_TYPE_MUSIC).build()
+                ).build())
         stopSelf()
     }
 
@@ -1105,7 +1124,8 @@ class MusicService : MediaBrowserServiceCompat(),
                 startForegroundOrNotify()
             }
             FAVORITE_STATE_CHANGED -> {
-                playingNotification?.updateFavorite(currentSong) {
+                isCurrentFavorite { isFavorite ->
+                    playingNotification?.updateFavorite(isFavorite)
                     startForegroundOrNotify()
                 }
 
@@ -1122,7 +1142,11 @@ class MusicService : MediaBrowserServiceCompat(),
             }
             META_CHANGED -> {
                 playingNotification?.updateMetadata(currentSong) { startForegroundOrNotify() }
-                playingNotification?.updateFavorite(currentSong) { startForegroundOrNotify() }
+                isCurrentFavorite { isFavorite ->
+                    playingNotification?.updateFavorite(isFavorite)
+                    startForegroundOrNotify()
+                }
+
                 updateMediaSessionMetaData()
                 updateMediaSessionPlaybackState()
                 savePosition()
