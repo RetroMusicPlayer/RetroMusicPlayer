@@ -333,7 +333,7 @@
     <string name="pref_keep_screen_on_title">Mantener la pantalla encendida</string>
     <string name="pref_language_name">Seleccionar el idioma</string>
     <string name="pref_snow_fall_title">Efecto de nieve</string>
-    <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
+    <string name="pref_summary_album_art_on_lockscreen">Utiliza la portada del álbum de la canción que se está reproduciendo como fondo de pantalla de la pantalla de bloqueo</string>
     <string name="pref_summary_album_artists_only">Show Album Artists in the Artist category</string>
     <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
     <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
