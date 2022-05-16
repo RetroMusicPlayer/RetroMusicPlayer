@@ -275,7 +275,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     }
 
 
-    override fun onProgressChanged(seekBar: CircularSeekBar?, progress: Float, fromUser: Boolean) {
+    override fun onProgressChanged(circularSeekBar: CircularSeekBar?, progress: Float, fromUser: Boolean) {
         val audioManager = audioManager
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress.toInt(), 0)
     }
@@ -286,7 +286,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {
     }
 
-    fun setUpProgressSlider() {
+    private fun setUpProgressSlider() {
         binding.progressSlider.applyColor(accentColor())
         binding.progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {

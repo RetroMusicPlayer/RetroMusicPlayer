@@ -336,6 +336,7 @@ object PreferenceUtil {
 
     val isLockScreen get() = sharedPreferences.getBoolean(LOCK_SCREEN, false)
 
+    @Suppress("deprecation")
     fun isAllowedToDownloadMetadata(context: Context): Boolean {
         return when (autoDownloadImagesPolicy) {
             "always" -> true

@@ -42,6 +42,7 @@ import kotlin.math.abs
  * 歌词 Created by wcy on 2015/11/9.
  */
 @SuppressLint("StaticFieldLeak")
+@Suppress("deprecation")
 class CoverLrcView @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,
