@@ -16,7 +16,7 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-fun AppCompatActivity.toggleScreenOn() {
+fun AppCompatActivity.maybeSetScreenOn() {
     if (PreferenceUtil.isScreenOnEnabled) {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     } else {

@@ -377,7 +377,6 @@ class RealRepository(
     }
 
     override suspend fun suggestions(): List<Song> {
-        if (!PreferenceUtil.homeSuggestions) return listOf()
         return NotPlayedPlaylist().songs().shuffled().takeIf {
             it.size > 9
         } ?: emptyList()

@@ -28,9 +28,7 @@ import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.LYRICS_TYPE
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.SHOW_LYRICS
+import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter.AlbumCoverFragment
 import code.name.monkey.retromusic.databinding.FragmentPlayerAlbumCoverBinding
@@ -115,6 +113,22 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPlayerAlbumCoverBinding.bind(view)
+        setupViewPager()
+        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
+        maybeInitLyrics()
+        lrcView.apply {
+            setDraggable(true) { time ->
+                MusicPlayerRemote.seekTo(time.toInt())
+                MusicPlayerRemote.resumePlaying()
+                true
+            }
+            setOnClickListener {
+                goToLyrics(requireActivity())
+            }
+        }
+    }
+
+    private fun setupViewPager() {
         binding.viewPager.addOnPageChangeListener(this)
         val nps = PreferenceUtil.nowPlayingScreen
 
@@ -139,18 +153,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 true,
                 PreferenceUtil.albumCoverTransform
             )
-        }
-        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
-        maybeInitLyrics()
-        lrcView.apply {
-            setDraggable(true) { time ->
-                MusicPlayerRemote.seekTo(time.toInt())
-                MusicPlayerRemote.resumePlaying()
-                true
-            }
-            setOnClickListener {
-                goToLyrics(requireActivity())
-            }
         }
     }
 
@@ -185,15 +187,18 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
-        if (key == SHOW_LYRICS) {
-            if (sharedPreferences.getBoolean(key, false)) {
-                maybeInitLyrics()
-            } else {
-                showLyrics(false)
-                progressViewUpdateHelper?.stop()
+        when (key) {
+            SHOW_LYRICS -> {
+                if (PreferenceUtil.showLyrics) {
+                    maybeInitLyrics()
+                } else {
+                    showLyrics(false)
+                    progressViewUpdateHelper?.stop()
+                }
             }
-        } else if (key == LYRICS_TYPE) {
-            maybeInitLyrics()
+            LYRICS_TYPE -> {
+                maybeInitLyrics()
+            }
         }
     }
 

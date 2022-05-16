@@ -163,8 +163,10 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
             R.id.now_playing -> {
                 requireActivity().findNavController(R.id.fragment_container).navigate(
                     R.id.playing_queue_fragment,
-                    null
+                    null,
+                    navOptions { launchSingleTop = true }
                 )
+                mainActivity.collapsePanel()
                 return true
             }
             R.id.action_show_lyrics -> {
@@ -286,6 +288,15 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                     }
                 }
             }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (PreferenceUtil.circlePlayButton) {
+            requireContext().theme.applyStyle(R.style.CircleFABOverlay, true)
+        } else {
+            requireContext().theme.applyStyle(R.style.RoundedFABOverlay, true)
         }
     }
 
@@ -421,8 +432,7 @@ fun goToLyrics(activity: Activity) {
         findNavController(R.id.fragment_container).navigate(
             R.id.lyrics_fragment,
             null,
-            navOptions { launchSingleTop = true },
-            null
+            navOptions { launchSingleTop = true }
         )
     }
 }

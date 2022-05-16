@@ -22,17 +22,11 @@ import code.name.monkey.retromusic.*
 
 class PersonalizeSettingsFragment : AbsSettingsFragment() {
 
-    override fun invalidateSettings() {
-        val toggleFullScreen: TwoStatePreference? = findPreference(TOGGLE_FULL_SCREEN)
-        toggleFullScreen?.setOnPreferenceChangeListener { _, _ ->
-            restartActivity()
-            true
-        }
-    }
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_ui)
     }
+
+    override fun invalidateSettings() {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

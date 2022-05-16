@@ -374,7 +374,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             }
             R.id.action_settings -> {
                 findNavController().navigate(
-                    R.id.settingsActivity,
+                    R.id.settings_fragment,
                     null,
                     navOptions
                 )

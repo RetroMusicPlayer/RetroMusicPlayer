@@ -119,6 +119,11 @@ fun BottomNavigationView.show() {
 fun BottomNavigationView.hide() {
     if (isGone) return
 
+    if (!isLaidOut) {
+        isGone = true
+        return
+    }
+
     val drawable = BitmapDrawable(context.resources, drawToBitmap())
     val parent = parent as ViewGroup
     drawable.setBounds(left, top, right, bottom)
@@ -255,7 +260,7 @@ fun View.updateMargin(
     @Px left: Int = marginLeft,
     @Px top: Int = marginTop,
     @Px right: Int = marginRight,
-    @Px bottom: Int = marginBottom
+    @Px bottom: Int = marginBottom,
 ) {
     (layoutParams as ViewGroup.MarginLayoutParams).updateMargins(left, top, right, bottom)
 }
@@ -296,7 +301,7 @@ fun View.requestApplyInsetsWhenAttached() {
 
 data class InitialPadding(
     val left: Int, val top: Int,
-    val right: Int, val bottom: Int
+    val right: Int, val bottom: Int,
 )
 
 fun recordInitialPaddingForView(view: View) = InitialPadding(

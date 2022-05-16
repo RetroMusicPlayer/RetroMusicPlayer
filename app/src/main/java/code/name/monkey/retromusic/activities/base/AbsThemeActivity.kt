@@ -44,7 +44,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         super.onCreate(savedInstanceState)
         setEdgeToEdgeOrImmersive()
         registerSystemUiVisibility()
-        toggleScreenOn()
+        maybeSetScreenOn()
         setLightNavigationBarAuto()
         setLightStatusBarAuto(surfaceColor())
         if (VersionUtils.hasQ()) {
@@ -60,9 +60,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
         if (PreferenceUtil.isCustomFont) {
             setTheme(R.style.FontThemeOverlay)
-        }
-        if (PreferenceUtil.circlePlayButton) {
-            setTheme(R.style.CircleFABOverlay)
         }
     }
 

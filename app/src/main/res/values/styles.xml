@@ -247,5 +247,11 @@
         </item>
     </style>
 
+    <style name="RoundedFABOverlay">
+        <item name="floatingActionButtonStyle">
+            @style/Widget.Material3.FloatingActionButton.Primary
+        </item>
+    </style>
+
     <style name="Theme.AppWidget" parent="Theme.RetroMusic.FollowSystem" />
 </resources>

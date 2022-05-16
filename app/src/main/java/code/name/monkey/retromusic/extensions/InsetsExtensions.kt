@@ -4,7 +4,7 @@ import androidx.core.view.WindowInsetsCompat
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 
-fun WindowInsetsCompat?.safeGetBottomInsets(): Int {
+fun WindowInsetsCompat?.getBottomInsets(): Int {
     return if (PreferenceUtil.isFullScreenMode) {
         return 0
     } else {

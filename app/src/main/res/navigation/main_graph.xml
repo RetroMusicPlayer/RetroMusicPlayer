@@ -75,10 +75,9 @@
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
 
-    <activity
-        android:id="@+id/settingsActivity"
-        android:name="code.name.monkey.retromusic.activities.SettingsActivity"
-        android:label="SettingsActivity" />
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="code.name.monkey.retromusic.fragments.settings.SettingsFragment" />
 
     <activity
         android:id="@+id/permissionFragment"

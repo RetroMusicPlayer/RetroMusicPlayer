@@ -161,7 +161,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         ViewCompat.setOnApplyWindowInsetsListener(
             (binding.container)
         ) { v: View, insets: WindowInsetsCompat ->
-            navBarHeight = insets.safeGetBottomInsets()
+            navBarHeight = insets.getBottomInsets()
             v.updatePadding(bottom = navBarHeight)
             insets
         }
