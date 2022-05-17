@@ -434,10 +434,10 @@ object MusicPlayerRemote : KoinComponent {
             if (songs == null || songs.isEmpty()) {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
-                    songFile = File(
-                        getExternalStorageDirectory(),
-                        uri.path?.split(":".toRegex(), 2)?.get(1)
-                    )
+                    val path = uri.path?.split(":".toRegex(), 2)?.get(1)
+                    if (path != null) {
+                        songFile = File(getExternalStorageDirectory(), path)
+                    }
                 }
                 if (songFile == null) {
                     val path = getFilePathFromUri(context, uri)

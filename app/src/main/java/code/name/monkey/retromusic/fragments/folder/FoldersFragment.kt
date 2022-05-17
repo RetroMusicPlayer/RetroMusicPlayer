@@ -185,7 +185,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         lifecycleScope.launch(Dispatchers.IO) {
                             listSongs(
                                 requireContext(),
-                                toList(file),
+                                listOf(file),
                                 AUDIO_FILE_FILTER,
                                 fileComparator
                             ) { songs ->
@@ -226,7 +226,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         lifecycleScope.launch(Dispatchers.IO) {
                             listSongs(
                                 requireContext(),
-                                toList(file),
+                                listOf(file),
                                 AUDIO_FILE_FILTER,
                                 fileComparator
                             ) { songs ->
@@ -264,7 +264,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             lifecycleScope.launch(Dispatchers.IO) {
                 listSongs(
                     requireContext(),
-                    toList(mFile.parentFile),
+                    listOf(mFile.parentFile),
                     fileFilter,
                     fileComparator
                 ) { songs ->
@@ -501,12 +501,6 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         )
     }
 
-    private fun toList(file: File): ArrayList<File> {
-        val files = ArrayList<File>(1)
-        files.add(file)
-        return files
-    }
-
     private fun updateAdapter(files: List<File>) {
         adapter?.swapDataSet(files)
         val crumb = activeCrumb
@@ -578,7 +572,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     suspend fun listSongs(
         context: Context,
-        files: List<File>,
+        files: List<File?>,
         fileFilter: FileFilter,
         fileComparator: Comparator<File>,
         doOnSongsListed: (songs: List<Song>) -> Unit
