@@ -197,6 +197,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 chooseFragmentForTheme()
                 onServiceConnected()
             }
+            SWIPE_ANYWHERE_NOW_PLAYING ->{
+                playerFragment?.onResume()
+            }
             ADAPTIVE_COLOR_APP -> {
                 if (PreferenceUtil.nowPlayingScreen in listOf(Normal, Material, Flat)) {
                     chooseFragmentForTheme()
