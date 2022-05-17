@@ -89,7 +89,7 @@ class AppWidgetCircle : BaseAppWidget() {
             ).toBitmap()
         )
         val isFavorite = runBlocking(Dispatchers.IO) {
-            return@runBlocking MusicUtil.repository.isSongFavorite(song.id)
+            return@runBlocking MusicUtil.isFavorite(song)
         }
         val favoriteRes =
             if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border

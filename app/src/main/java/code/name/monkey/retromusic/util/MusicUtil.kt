@@ -332,8 +332,8 @@ object MusicUtil : KoinComponent {
         return false
     }
 
-    val repository = get<Repository>()
-    suspend fun toggleFavorite(context: Context, song: Song) {
+    private val repository = get<Repository>()
+    suspend fun toggleFavorite(song: Song) {
         withContext(IO) {
             val playlist: PlaylistEntity = repository.favoritePlaylist()
             val songEntity = song.toSongEntity(playlist.playListId)
@@ -343,7 +343,6 @@ object MusicUtil : KoinComponent {
             } else {
                 repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
-            context.sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
     }
 

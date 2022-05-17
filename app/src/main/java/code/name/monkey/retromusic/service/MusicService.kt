@@ -303,38 +303,12 @@ class MusicService : MediaBrowserServiceCompat(),
         initNotification()
         mediaStoreObserver = MediaStoreObserver(this, playerHandler!!)
         throttledSeekHandler = ThrottledSeekHandler(this, playerHandler!!)
-        contentResolver
-            .registerContentObserver(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
-        contentResolver
-            .registerContentObserver(
-                MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
-        contentResolver
-            .registerContentObserver(
-                MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
-        contentResolver
-            .registerContentObserver(
-                MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
-        contentResolver
-            .registerContentObserver(
-                MediaStore.Audio.Media.INTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
-        contentResolver
-            .registerContentObserver(
-                MediaStore.Audio.Albums.INTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
-        contentResolver
-            .registerContentObserver(
-                MediaStore.Audio.Artists.INTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
-        contentResolver
-            .registerContentObserver(
-                MediaStore.Audio.Genres.INTERNAL_CONTENT_URI, true, mediaStoreObserver
-            )
+        contentResolver.registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+            true,
+            mediaStoreObserver)
+        contentResolver.registerContentObserver(MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
+            true,
+            mediaStoreObserver)
         val audioVolumeObserver = AudioVolumeObserver(this)
         audioVolumeObserver.register(AudioManager.STREAM_MUSIC, this)
         registerOnSharedPreferenceChangedListener(this)
@@ -858,7 +832,8 @@ class MusicService : MediaBrowserServiceCompat(),
 
     fun toggleFavorite() {
         serviceScope.launch {
-            toggleFavorite(this@MusicService, currentSong)
+            toggleFavorite(currentSong)
+            sendBroadcast(Intent(FAVORITE_STATE_CHANGED))
         }
     }
 
@@ -874,6 +849,7 @@ class MusicService : MediaBrowserServiceCompat(),
     fun quit() {
         pause()
         stopForeground(true)
+        isForeground = false
         notificationManager?.cancel(PlayingNotification.NOTIFICATION_ID)
         playbackManager.release()
         AudioManagerCompat.abandonAudioFocusRequest(audioManager!!,
@@ -1066,7 +1042,8 @@ class MusicService : MediaBrowserServiceCompat(),
             .putString(MediaMetadataCompat.METADATA_KEY_ALBUM, song.albumName)
             .putString(MediaMetadataCompat.METADATA_KEY_TITLE, song.title)
             .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, song.duration)
-            .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, (getPosition() + 1).toLong())
+            .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER,
+                (getPosition() + 1).toLong())
             .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.year.toLong())
             .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
             .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, playingQueue.size.toLong())
@@ -1128,17 +1105,6 @@ class MusicService : MediaBrowserServiceCompat(),
                     playingNotification?.updateFavorite(isFavorite)
                     startForegroundOrNotify()
                 }
-
-                updateMediaSessionMetaData()
-                updateMediaSessionPlaybackState()
-                savePosition()
-                savePositionInTrack()
-                val currentSong = currentSong
-                HistoryStore.getInstance(this).addSongId(currentSong.id)
-                if (songPlayCountHelper.shouldBumpPlayCount()) {
-                    SongPlayCountStore.getInstance(this).bumpPlayCount(songPlayCountHelper.song.id)
-                }
-                songPlayCountHelper.notifySongChanged(currentSong)
             }
             META_CHANGED -> {
                 playingNotification?.updateMetadata(currentSong) { startForegroundOrNotify() }
@@ -1149,14 +1115,17 @@ class MusicService : MediaBrowserServiceCompat(),
 
                 updateMediaSessionMetaData()
                 updateMediaSessionPlaybackState()
-                savePosition()
-                savePositionInTrack()
-                val currentSong = currentSong
-                HistoryStore.getInstance(this).addSongId(currentSong.id)
-                if (songPlayCountHelper.shouldBumpPlayCount()) {
-                    SongPlayCountStore.getInstance(this).bumpPlayCount(songPlayCountHelper.song.id)
+                serviceScope.launch(IO) {
+                    savePosition()
+                    savePositionInTrack()
+                    val currentSong = currentSong
+                    HistoryStore.getInstance(this@MusicService).addSongId(currentSong.id)
+                    if (songPlayCountHelper.shouldBumpPlayCount()) {
+                        SongPlayCountStore.getInstance(this@MusicService)
+                            .bumpPlayCount(songPlayCountHelper.song.id)
+                    }
+                    songPlayCountHelper.notifySongChanged(currentSong)
                 }
-                songPlayCountHelper.notifySongChanged(currentSong)
             }
             QUEUE_CHANGED -> {
                 mediaSession?.setQueueTitle(getString(R.string.now_playing_queue))
@@ -1394,7 +1363,8 @@ class MusicService : MediaBrowserServiceCompat(),
         const val ACTION_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.quitservice"
         const val ACTION_PENDING_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.pendingquitservice"
         const val INTENT_EXTRA_PLAYLIST = RETRO_MUSIC_PACKAGE_NAME + "intentextra.playlist"
-        const val INTENT_EXTRA_SHUFFLE_MODE = "$RETRO_MUSIC_PACKAGE_NAME.intentextra.shufflemode"
+        const val INTENT_EXTRA_SHUFFLE_MODE =
+            "$RETRO_MUSIC_PACKAGE_NAME.intentextra.shufflemode"
         const val APP_WIDGET_UPDATE = "$RETRO_MUSIC_PACKAGE_NAME.appreciate"
         const val EXTRA_APP_WIDGET_NAME = RETRO_MUSIC_PACKAGE_NAME + "app_widget_name"
 
