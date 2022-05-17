@@ -102,7 +102,6 @@ class PlayingNotificationClassic(
         setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         setCustomContentView(notificationLayout)
         setCustomBigContentView(notificationLayoutBig)
-        setStyle(DecoratedMediaCustomViewStyle())
         setOngoing(true)
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
