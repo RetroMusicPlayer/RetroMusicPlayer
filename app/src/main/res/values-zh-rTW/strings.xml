@@ -326,7 +326,7 @@
     <string name="pref_header_lockscreen">鎖定螢幕</string>
     <string name="pref_header_playlists">播放清單</string>
     <string name="pref_keep_pause_on_zero_volume_summary">當音量降至靜音時自動暫停播放，音量升高時反之。支援背景播放</string>
-    <string name="pref_keep_pause_on_zero_volume_title">於靜音暫停</string>
+    <string name="pref_keep_pause_on_zero_volume_title">靜音時暫停</string>
     <string name="pref_keep_screen_on_summary">請注意，這項功能可能影響電池續航力</string>
     <string name="pref_keep_screen_on_title">保持螢幕開啟</string>
     <string name="pref_language_name">選取語言</string>
