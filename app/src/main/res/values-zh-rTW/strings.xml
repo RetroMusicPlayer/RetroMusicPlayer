@@ -14,11 +14,11 @@
     <string name="action_clear_playing_queue">清除播放佇列</string>
     <string name="action_cycle_repeat">循環重複模式</string>
     <string name="action_delete">刪除</string>
-    <string name="action_delete_from_device">從裝置中刪除</string>
+    <string name="action_delete_from_device">從裝置刪除</string>
     <string name="action_details">詳細資訊</string>
     <string name="action_edit">編輯</string>
     <string name="action_go_to_album">前往專輯頁面</string>
-    <string name="action_go_to_artist">前往演唱者頁面</string>
+    <string name="action_go_to_artist">前往藝人頁面</string>
     <string name="action_go_to_genre">前往風格類型</string>
     <string name="action_go_to_lyrics">前往歌詞頁面</string>
     <string name="action_go_to_start_directory">前往起始目錄</string>
@@ -34,7 +34,7 @@
     <string name="action_previous">上一首</string>
     <string name="action_remove_from_favorites">從最愛移除</string>
     <string name="action_remove_from_playing_queue">從播放佇列移除</string>
-    <string name="action_remove_from_playlist">從播放清單中移除</string>
+    <string name="action_remove_from_playlist">從播放清單移除</string>
     <string name="action_rename">重新命名</string>
     <string name="action_save_playing_queue">儲存播放佇列</string>
     <string name="action_scan">掃描</string>
@@ -96,7 +96,7 @@
     <string name="bug_report_failed_invalid_token">存取權杖無效。請聯絡應用程式開發人員。</string>
     <string name="bug_report_failed_issues_not_available">選取之存取庫並未啟用議題。請聯絡應用程式開發人員。</string>
     <string name="bug_report_failed_unknown">發生意外錯誤。請聯絡應用程式開發人員。</string>
-    <string name="bug_report_failed_wrong_credentials">帳號或密碼錯誤</string>
+    <string name="bug_report_failed_wrong_credentials">使用者名稱或密碼錯誤</string>
     <string name="bug_report_issue">問題</string>
     <string name="bug_report_manual">手動傳送</string>
     <string name="bug_report_no_description">請輸入問題敘述</string>
@@ -106,7 +106,7 @@
     <string name="bug_report_success">成功回報錯誤</string>
     <string name="bug_report_summary">發生意外錯誤。很抱歉讓您遇到這項錯誤，若應用程式仍處在當機狀態，請「清除應用程式儲存空間」或透過電子郵件與我們聯繫 </string>
     <string name="bug_report_use_account">透過 GitHub 帳戶傳送</string>
-    <string name="buy_now">立刻購買</string>
+    <string name="buy_now">立即購買</string>
     <string name="cancel_current_timer">取消</string>
     <string name="card">卡牌風</string>
     <string name="card_color_style">彩色卡牌風</string>
@@ -123,7 +123,7 @@
     <string name="classic">經典風</string>
     <string name="clear_action">清除</string>
     <string name="clear_blacklist">清除黑名單</string>
-    <string name="clear_history">清除歷程</string>
+    <string name="clear_history">清除記錄</string>
     <string name="clear_playing_queue">清除佇列</string>
     <string name="color">彩色風</string>
     <string name="colors">顏色</string>
@@ -136,7 +136,7 @@
     <string name="could_not_scan_files">無法掃描 %d。</string>
     <string name="create_action">建立</string>
     <string name="create_new_backup">建立</string>
-    <string name="created_playlist_x">已新增播放清單 %1$s。</string>
+    <string name="created_playlist_x">已建立播放清單 %1$s。</string>
     <string name="credit_title">成員和貢獻者 </string>
     <string name="currently_listening_to_x_by_x">正在收聽 %2$s 的 %1$s。</string>
     <string name="custom_artist_images">自訂藝人圖片</string>
@@ -166,7 +166,7 @@
     <string name="done">完成</string>
     <string name="drive_mode">駕駛模式</string>
     <string name="edit_fab">編輯按鈕</string>
-    <string name="edit_normal_lyrics">歌詞編輯</string>
+    <string name="edit_normal_lyrics">編輯歌詞</string>
     <string name="edit_synced_lyrics">編輯同步歌詞</string>
     <string name="empty">沒有內容</string>
     <string name="equalizer">等化器</string>
@@ -188,7 +188,7 @@
     <string name="full">全景風</string>
     <string name="full_card">全景卡牌風</string>
     <string name="general_settings_summary">變更應用程式的佈景主題和顏色</string>
-    <string name="general_settings_title">介面與外觀</string>
+    <string name="general_settings_title">介面和外觀</string>
     <string name="genre">風格類型</string>
     <string name="genres">風格類型</string>
     <string name="git_hub_summary">在 GitHub 上分支這項專案</string>
@@ -206,7 +206,7 @@
     <string name="help_summary">需要更多幫助嗎？</string>
     <string name="hinge">旋轉風</string>
     <string name="history">記錄</string>
-    <string name="history_cleared">清除歷程</string>
+    <string name="history_cleared">已清除記錄</string>
     <string name="history_undo_button">復原</string>
     <string name="home">首頁</string>
     <string name="horizontal_flip">水平翻轉風</string>
@@ -225,7 +225,7 @@
     <string name="label_file_path">檔案路徑</string>
     <string name="label_file_size">檔案大小</string>
     <string name="label_last_modified">最後修改</string>
-    <string name="label_more_from">來自 %s 更多內容</string>
+    <string name="label_more_from">更多來自 %s 的內容</string>
     <string name="label_sampling_rate">取樣率</string>
     <string name="label_track_length">長度</string>
     <string name="labeled">顯示標籤</string>
@@ -240,7 +240,7 @@
     <string name="loading_products">正在載入…</string>
     <string name="login">登入</string>
     <string name="lyrics">歌詞</string>
-    <string name="made_with_love">在印度用 ❤️ 開發</string>
+    <string name="made_with_love">Made with ❤️ in India</string>
     <string name="material">材質風</string>
     <string name="md_error_label">錯誤</string>
     <string name="md_storage_perm_error">權限錯誤</string>
@@ -253,7 +253,7 @@
     <string name="my_name">名稱</string>
     <string name="my_top_tracks">最佳單曲</string>
     <string name="never">永不</string>
-    <string name="new_music_mix">新歌曲快選</string>
+    <string name="new_music_mix">歌曲快選</string>
     <string name="new_playlist_title">新增播放清單</string>
     <string name="new_start_directory">%s 為新起始目錄。</string>
     <string name="next_song">下一首</string>
@@ -263,10 +263,10 @@
     <string name="no_backups_found">找不到備份</string>
     <string name="no_equalizer">找不到等化器</string>
     <string name="no_genres">沒有風格類型</string>
-    <string name="no_lyrics_found">沒有歌詞</string>
-    <string name="no_playing_queue">沒有播放歌曲</string>
+    <string name="no_lyrics_found">找不到歌詞</string>
+    <string name="no_playing_queue">沒有現正播放的歌曲</string>
     <string name="no_playlists">沒有播放清單</string>
-    <string name="no_purchase_found">沒有購買記錄。</string>
+    <string name="no_purchase_found">找不到購買記錄。</string>
     <string name="no_results">沒有搜尋結果</string>
     <string name="no_songs">沒有歌曲</string>
     <string name="normal">普通風</string>
@@ -308,7 +308,7 @@
     <string name="playing_notification_description">播放通知欄可提供您進行播放/暫停等操作。</string>
     <string name="playing_notification_name">播放通知</string>
     <string name="playlist_created_sucessfully">已成功建立 %s</string>
-    <string name="playlist_is_empty">播放列表為空</string>
+    <string name="playlist_is_empty">播放清單為空</string>
     <string name="playlist_name_empty">播放清單名稱</string>
     <string name="playlists">播放清單</string>
     <string name="pref_blur_amount_summary">模糊程度用於「模糊風」主題。數值越低，載入越快</string>
@@ -316,7 +316,7 @@
     <string name="pref_filter_song_summary">依長度篩選歌曲</string>
     <string name="pref_filter_song_title">依時長篩選歌曲</string>
     <string name="pref_header_advanced">進階</string>
-    <string name="pref_header_album">專輯標題</string>
+    <string name="pref_header_album">專輯風格</string>
     <string name="pref_header_audio">音訊</string>
     <string name="pref_header_blacklist">黑名單</string>
     <string name="pref_header_controls">控制</string>
@@ -351,11 +351,11 @@
     <string name="pref_summary_gapless_playback">"可能會在某些裝置上發生播放問題。"</string>
     <string name="pref_summary_home_banner">顯示或隱藏首頁橫幅</string>
     <string name="pref_summary_ignore_media_store_artwork">可提升專輯封面的成像品質，但會造成較長的讀取時間。建議只有在低畫質專輯封面發生問題時再啟用此選項</string>
-    <string name="pref_summary_library_categories">調整音樂庫類別的顯示與排序。</string>
+    <string name="pref_summary_library_categories">調整音樂庫類別的顯示和排序。</string>
     <string name="pref_summary_lock_screen">使用 Retro Music 自訂化鎖定畫面</string>
     <string name="pref_summary_manage_audio_focus">無論其他應用程式正在播放為何，永遠於背景播放音訊</string>
-    <string name="pref_summary_open_source_licences">開放原始碼軟體的授權詳細資料</string>
-    <string name="pref_summary_pause_history">啟用此選項後，新播放的歌曲將不再顯示於歷程</string>
+    <string name="pref_summary_open_source_licences">開源軟體授權詳細資訊</string>
+    <string name="pref_summary_pause_history">啟用此選項後，新播放的歌曲將不再顯示於記錄</string>
     <string name="pref_summary_remember_tab">開啟應用程式後，自動顯示最後瀏覽的畫面</string>
     <string name="pref_summary_show_lyrics">於專輯封面上顯示同步歌詞</string>
     <string name="pref_summary_suggestions">於主畫面顯示歌曲快選</string>
@@ -368,7 +368,7 @@
     <string name="pref_summary_wallpaper_accent">從桌布上擷取主題顏色</string>
     <string name="pref_summary_whitelist">僅顯示來自 /Music 資料夾內的歌曲</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯封面</string>
-    <string name="pref_title_album_artists_only">按專輯藝人導覽</string>
+    <string name="pref_title_album_artists_only">依專輯藝人導覽</string>
     <string name="pref_title_album_cover_style">專輯封面主題</string>
     <string name="pref_title_album_cover_transform">略過專輯封面</string>
     <string name="pref_title_app_shortcuts">彩色應用程式捷徑</string>
@@ -387,7 +387,7 @@
     <string name="pref_title_custom_font">使用 Manrope 字型</string>
     <string name="pref_title_desaturated_color">不飽和顏色</string>
     <string name="pref_title_expand_now_playing_panel">顯示現正播放畫面</string>
-    <string name="pref_title_extra_controls">更多控制選項</string>
+    <string name="pref_title_extra_controls">更多控制項</string>
     <string name="pref_title_extra_song_info">音樂資訊</string>
     <string name="pref_title_gapless_playback">無縫播放</string>
     <string name="pref_title_general_theme">佈景主題</string>
@@ -395,15 +395,15 @@
     <string name="pref_title_home_artist_grid_style">藝人網格</string>
     <string name="pref_title_home_banner">橫幅</string>
     <string name="pref_title_ignore_media_store_artwork">略過媒體商店的專輯封面</string>
-    <string name="pref_title_last_added_interval">最後新增列表的時間範圍</string>
+    <string name="pref_title_last_added_interval">最後新增播放清單的時間範圍</string>
     <string name="pref_title_lock_screen">全螢幕控制</string>
     <string name="pref_title_lyrics_screen_on">顯示歌詞時不關閉螢幕</string>
     <string name="pref_title_lyrics_type">歌詞類型</string>
     <string name="pref_title_manage_audio_focus">永遠播放</string>
     <string name="pref_title_now_playing_screen_appearance">現正播放佈景主題</string>
     <string name="pref_title_open_source_licences">開源授權協議</string>
-    <string name="pref_title_pause_history">暫停記錄歷程</string>
-    <string name="pref_title_remember_tab">記住最後一個畫面</string>
+    <string name="pref_title_pause_history">暫停記錄</string>
+    <string name="pref_title_remember_tab">記住最後一個類別畫面</string>
     <string name="pref_title_show_lyrics">顯示歌詞</string>
     <string name="pref_title_suggestions">顯示建議</string>
     <string name="pref_title_swipe_anywhere_now_playing">隨意滑動以切換歌曲</string>
@@ -414,7 +414,7 @@
     <string name="pref_title_toggle_toggle_headset">自動播放</string>
     <string name="pref_title_toggle_toggle_shuffle">隨機播放模式</string>
     <string name="pref_title_toggle_volume">音量控制</string>
-    <string name="pref_title_wallpaper_accent">桌布主題顏色</string>
+    <string name="pref_title_wallpaper_accent">桌布強調色</string>
     <string name="pref_title_whitelist">白名單音樂</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">例如深色主題、現正播放主題、輪播效果等...</string>
@@ -436,7 +436,7 @@
     <string name="rename_playlist_title">重新命名播放清單</string>
     <string name="replace_cover">隱藏封面</string>
     <string name="report_an_issue">回報問題</string>
-    <string name="report_bug">報告錯誤</string>
+    <string name="report_bug">回報錯誤</string>
     <string name="reset_action">重設</string>
     <string name="reset_artist_image">重設藝人圖片</string>
     <string name="restore">復原</string>
@@ -520,7 +520,7 @@
     <string name="today">今日</string>
     <string name="top_albums">熱門專輯</string>
     <string name="top_artists">熱門藝人</string>
-    <string name="track_hint">"(2 代表曲目 2，或以 3004 代表 CD3 曲目 4)"</string>
+    <string name="track_hint">"曲目 (2 代表曲目 2，或以 3004 代表 CD3 曲目 4)"</string>
     <string name="track_list">曲目編號</string>
     <string name="translate">翻譯</string>
     <string name="translate_community">協助我們將應用程式本地化成您的語言</string>
