@@ -471,7 +471,7 @@
     <string name="saving_changes">Guardando cambios</string>
     <string name="scan_media">Examinar medios</string>
     <string name="scanned_files">%1$d de %2$d archivos examinados.</string>
-    <string name="scrobbles_label">Scrobbles</string>
+    <string name="scrobbles_label">Enviar a</string>
     <string name="select_all">Seleccionar todo</string>
     <string name="selected">Seleccionado</string>
     <string name="set">Establecer</string>
