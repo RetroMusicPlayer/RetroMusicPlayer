@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.*
 import code.name.monkey.retromusic.*
@@ -350,8 +349,7 @@ class LibraryViewModel(
                     context.getString(
                         R.string.added_song_count_to_playlist,
                         songs.size,
-                        playlistName),
-                    Toast.LENGTH_SHORT)
+                        playlistName))
             }
         }
     }
