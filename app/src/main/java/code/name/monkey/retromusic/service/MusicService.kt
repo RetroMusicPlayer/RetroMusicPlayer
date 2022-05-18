@@ -1339,7 +1339,7 @@ class MusicService : MediaBrowserServiceCompat(),
             this,
             "RetroMusicPlayer"
         )
-        val mediasessionCallback = MediaSessionCallback(applicationContext, this)
+        val mediasessionCallback = MediaSessionCallback(this)
         mediaSession?.setCallback(mediasessionCallback)
         mediaSession?.isActive = true
     }

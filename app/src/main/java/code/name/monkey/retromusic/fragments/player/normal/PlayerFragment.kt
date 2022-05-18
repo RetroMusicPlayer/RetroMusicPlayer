@@ -164,6 +164,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
     }
 
     private fun startOrStopSnow(isSnowFalling: Boolean) {
+        if (_binding == null) return
         if (isSnowFalling && !surfaceColor().isColorLight) {
             binding.snowfallView.isVisible = true
             binding.snowfallView.restartFalling()

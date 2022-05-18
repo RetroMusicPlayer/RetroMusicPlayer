@@ -39,7 +39,6 @@ import org.koin.core.component.inject
  */
 
 class MediaSessionCallback(
-    private val context: Context,
     private val musicService: MusicService
 ) : MediaSessionCompat.Callback(), KoinComponent {
 
@@ -191,7 +190,6 @@ class MediaSessionCallback(
             }
             TOGGLE_FAVORITE -> {
                 musicService.toggleFavorite()
-                musicService.updateMediaSessionPlaybackState()
             }
             else -> {
                 println("Unsupported action: $action")

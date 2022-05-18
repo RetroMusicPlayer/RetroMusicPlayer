@@ -115,11 +115,7 @@ object MusicPlayerRemote : KoinComponent {
 
     fun bindToService(context: Context, callback: ServiceConnection): ServiceToken? {
 
-        var realActivity: Activity? = (context as Activity).parent
-        if (realActivity == null) {
-            realActivity = context
-        }
-
+        val realActivity = (context as Activity).parent ?: context
         val contextWrapper = ContextWrapper(realActivity)
         val intent = Intent(contextWrapper, MusicService::class.java)
         try {
