@@ -91,7 +91,7 @@
     <string name="biography">Yaşam öyküsü</string>
     <string name="black_theme_name">Sade Siyah</string>
     <string name="blacklist">Kara Liste</string>
-    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_summary">Uygulamanın bluetooth cihazlarını kontrol etmek için yakındaki cihazlara erişim iznine ihtiyacı var</string>
     <string name="blur">Bulanıklık</string>
     <string name="blur_card">Bulanık kart</string>
     <string name="bug_report_failed">Bildiri gönderilemiyor</string>
@@ -129,7 +129,7 @@
     <string name="clear_playing_queue">Kuyruğu temizle</string>
     <string name="color">Renk</string>
     <string name="colors">Renkler</string>
-    <string name="compact">Compact</string>
+    <string name="compact">Kompakt</string>
     <string name="composer">Besteci</string>
     <string name="copied_device_info_to_clipboard">Cihaz bilgileri panoya kopyalandı.</string>
     <string name="could_not_create_playlist">Oynatma listesi oluşturulamadı\u2019.</string>
@@ -175,11 +175,11 @@
     <string name="error_create_backup">Couldn\u2019t create backup</string>
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
     <string name="error_empty_name">Your name can\'t be empty!</string>
-    <string name="error_load_failed">Load failed</string>
-    <string name="expanded">Expanded</string>
+    <string name="error_load_failed">Yükleme başarısız</string>
+    <string name="expanded">Genişletilmiş</string>
     <string name="faq">SSS</string>
     <string name="favorites">Favoriler</string>
-    <string name="file_already_exists">File already exists</string>
+    <string name="file_already_exists">Dosya zaten mevcut</string>
     <string name="finish_last_song">Son şarkıyı sonlandır</string>
     <string name="fit">Uydur</string>
     <string name="flat">Düz</string>
@@ -195,7 +195,7 @@
     <string name="genres">Janrlar</string>
     <string name="git_hub_summary">Projeyi GitHub\'da çatalla</string>
     <string name="gradient">Gradyan</string>
-    <string name="grant_access">Grant access</string>
+    <string name="grant_access">Erişim izni ver</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -233,7 +233,7 @@
     <string name="labeled">Etiketli</string>
     <string name="last_added">Son eklenen</string>
     <string name="last_song">Son şarkı</string>
-    <string name="lets_go">Let\'s go</string>
+    <string name="lets_go">Hadi başlayalım</string>
     <string name="library_categories">Kütüphane kategorileri</string>
     <string name="licenses">Lisanslar</string>
     <string name="light_theme_name">Açık Beyaz</string>
@@ -246,11 +246,11 @@
     <string name="material">Materyal</string>
     <string name="md_error_label">Hata</string>
     <string name="md_storage_perm_error">İzin hatası</string>
-    <string name="message_backup_create_success">Backup created successfully.</string>
-    <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
-    <string name="message_restore_success">Restore completed successfully.</string>
-    <string name="message_updated">Updated</string>
+    <string name="message_backup_create_success">Yedekleme başarılı bir şekilde oluşturuldu.</string>
+    <string name="message_limit_tabs">En fazla 5 öğe</string>
+    <string name="message_pro_feature">%s bir Pro özelliğidir.</string>
+    <string name="message_restore_success">Geri yükleme başarıyla tamamlandı.</string>
+    <string name="message_updated">Güncellendi</string>
     <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">İsim</string>
     <string name="my_top_tracks">Sık oynatılanlar</string>
@@ -292,7 +292,7 @@
     <string name="paste_lyrics_here">Sözleri buraya yapıştır</string>
     <string name="paste_timeframe_lyrics_here">Zaman dilimli şarkı sözlerini buraya yapıştır</string>
     <string name="peek">Peek</string>
-    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
+    <string name="permission_bluetooth_denied">Yakındaki cihazlara erişim izni reddedildi.</string>
     <string name="permission_external_storage_denied">Harici depolama izni reddedildi.</string>
     <string name="permission_summary">Uygulamanın müzik çalması için cihazınızın depolama erişimine ihtiyacı var</string>
     <string name="permission_title">Depolama Erişimi</string>
@@ -332,7 +332,7 @@
     <string name="pref_keep_screen_on_summary">Bu özelliği etkinleştirmenin pil ömrünü etkileyebileceğini unutmayın.</string>
     <string name="pref_keep_screen_on_title">Ekranı açık tut</string>
     <string name="pref_language_name">Dil seçiniz</string>
-    <string name="pref_snow_fall_title">Snow fall effect</string>
+    <string name="pref_snow_fall_title">Kar yağışı efekti</string>
     <string name="pref_summary_album_art_on_lockscreen">Çalmakta olan şarkı albüm kapağını kilit ekranı duvar kağıdı olarak kullanın</string>
     <string name="pref_summary_album_artists_only">Sanatçı kategorisinde Albüm Sanatçılarını göster</string>
     <string name="pref_summary_audio_ducking">Sistem sesi çalındığında veya bir bildirim alındığında sesi kısın</string>
@@ -360,7 +360,7 @@
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Başlangıçta son kullanılan sekmeye git</string>
     <string name="pref_summary_show_lyrics">Albüm kapağının üstünde senkronize edilmiş sözleri göster</string>
-    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_suggestions">Ana Ekranda Yeni Müzik Karışımını Göster</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
     <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
@@ -374,14 +374,14 @@
     <string name="pref_title_album_cover_style">Albüm kapağı teması</string>
     <string name="pref_title_album_cover_transform">Albüm kapağını atla</string>
     <string name="pref_title_app_shortcuts">Renkli uygulama kısayolları</string>
-    <string name="pref_title_appbar_mode">Header style</string>
+    <string name="pref_title_appbar_mode">Başlık stili</string>
     <string name="pref_title_audio_ducking">Odak kaybında ses hacmini azaltın</string>
     <string name="pref_title_audio_fade">Soluk Ses</string>
     <string name="pref_title_auto_download_artist_images">Sanatçı resimlerini otomatik indir</string>
     <string name="pref_title_blacklist">Kara Liste</string>
     <string name="pref_title_bluetooth_playback">Bluetooth ile oynatma</string>
     <string name="pref_title_blurred_album_art">Albüm kapağını bulanıklaştır</string>
-    <string name="pref_title_circle_button">Circular play button</string>
+    <string name="pref_title_circle_button">Dairesel oynatma düğmesi</string>
     <string name="pref_title_classic_notification">Klasik bildirim tasarımı</string>
     <string name="pref_title_colored_app">Adaptif renk</string>
     <string name="pref_title_colored_notification">Renkli bildirim</string>
@@ -555,5 +555,5 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
-    <string name="bluetooth_title">Nearby devices</string>
+    <string name="bluetooth_title">Yakındaki cihazlar</string>
 </resources>
