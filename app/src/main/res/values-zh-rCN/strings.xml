@@ -289,7 +289,7 @@
     <string name="past_three_months">最近三个月</string>
     <string name="paste_lyrics_here">在此粘贴歌词</string>
     <string name="paste_timeframe_lyrics_here">在此粘贴时段歌词</string>
-    <string name="peek">Peek</string>
+    <string name="peek">预览</string>
     <string name="permission_bluetooth_denied">附近设备权限被拒绝。</string>
     <string name="permission_external_storage_denied">访问外部存储权限被拒绝。</string>
     <string name="permission_summary">应用需要设备存储访问权限来播放音乐</string>
@@ -444,7 +444,7 @@
     <string name="restored_previous_purchase_please_restart">恢复以前的购买。请重新启动应用以使用所有功能。</string>
     <string name="restored_previous_purchases">恢复之前的购买。</string>
     <string name="restoring_purchase">正在恢复购买…</string>
-    <string name="retro_music_player">Retro Music Player</string>
+    <string name="retro_music_player">Retro Music 播放器</string>
     <string name="retro_music_pro">Retro Music 高级版</string>
     <string name="ringtone_summary">应用需要系统设置访问权限，才能将音乐设置为为铃声</string>
     <string name="ringtone_title">铃声（可选）</string>
