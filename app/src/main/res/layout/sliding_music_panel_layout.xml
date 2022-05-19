@@ -25,7 +25,8 @@
         app:behavior_peekHeight="0dp"
         app:enableEdgeToEdge="true"
         app:gestureInsetBottomIgnored="true"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:visibility="invisible">
 
         <FrameLayout
             android:id="@+id/playerFragmentContainer"
@@ -47,7 +48,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:elevation="0dp"
         android:minHeight="@dimen/bottom_nav_height"
         app:itemHorizontalTranslationEnabled="false"
         app:itemPaddingBottom="8dp"

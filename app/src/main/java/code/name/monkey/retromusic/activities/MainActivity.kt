@@ -23,7 +23,6 @@ import androidx.navigation.contains
 import androidx.navigation.ui.setupWithNavController
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
-import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.settings.OnThemeChangedListener
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -45,10 +44,6 @@ class MainActivity : AbsCastActivity(), OnThemeChangedListener {
         const val EXPAND_PANEL = "expand_panel"
     }
 
-    override fun createContentView(): SlidingMusicPanelLayoutBinding {
-        return wrapSlidingMusicPanel()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTaskDescriptionColorAuto()
@@ -57,9 +52,7 @@ class MainActivity : AbsCastActivity(), OnThemeChangedListener {
         AppRater.appLaunched(this)
 
         setupNavigationController()
-        if (!hasPermissions()) {
-            findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
-        }
+
         WhatsNewFragment.showChangeLog(this)
     }
 
@@ -217,7 +210,7 @@ class MainActivity : AbsCastActivity(), OnThemeChangedListener {
     private fun parseLongFromIntent(
         intent: Intent,
         longKey: String,
-        stringKey: String
+        stringKey: String,
     ): Long {
         var id = intent.getLongExtra(longKey, -1)
         if (id < 0) {

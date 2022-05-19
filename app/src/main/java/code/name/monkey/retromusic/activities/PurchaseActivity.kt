@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityProVersionBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.setLightStatusBar
@@ -33,7 +34,7 @@ import code.name.monkey.retromusic.extensions.showToast
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.PurchaseInfo
 
-class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
+class PurchaseActivity : AbsThemeActivity(), BillingProcessor.IBillingHandler {
 
     private lateinit var binding: ActivityProVersionBinding
     private lateinit var billingProcessor: BillingProcessor

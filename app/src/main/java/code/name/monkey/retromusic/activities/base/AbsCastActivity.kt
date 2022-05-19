@@ -1,12 +1,10 @@
 package code.name.monkey.retromusic.activities.base
 
-import android.os.Bundle
 import code.name.monkey.retromusic.cast.RetroSessionManagerListener
 import code.name.monkey.retromusic.cast.RetroWebServer
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastSession
-import com.google.android.gms.cast.framework.SessionManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import org.koin.android.ext.android.inject
@@ -15,10 +13,20 @@ import org.koin.android.ext.android.inject
 abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
 
     private var mCastSession: CastSession? = null
-    private lateinit var sessionManager: SessionManager
+    private val sessionManager by lazy {
+        CastContext.getSharedInstance(this).sessionManager
+    }
+
     private val webServer: RetroWebServer by inject()
 
-    private var playServicesAvailable: Boolean = false
+    private val playServicesAvailable: Boolean by lazy {
+        try {
+            GoogleApiAvailability
+                .getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS
+        } catch (e: Exception) {
+            false
+        }
+    }
 
     private val sessionManagerListener by lazy {
         object : RetroSessionManagerListener {
@@ -57,23 +65,6 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
                 webServer.stop()
             }
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        playServicesAvailable = try {
-            GoogleApiAvailability
-                .getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS
-        } catch (e: Exception) {
-            false
-        }
-        if (playServicesAvailable) {
-            setupCast()
-        }
-    }
-
-    private fun setupCast() {
-        sessionManager = CastContext.getSharedInstance(this).sessionManager
     }
 
     override fun onResume() {
