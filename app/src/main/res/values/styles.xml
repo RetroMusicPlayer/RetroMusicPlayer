@@ -254,4 +254,8 @@
     </style>
 
     <style name="Theme.AppWidget" parent="Theme.RetroMusic.FollowSystem" />
+
+    <style name="ShapeAppearance.Material3.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
