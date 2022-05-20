@@ -60,13 +60,13 @@
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Morceau</item>
-        <item quantity="other">Morceaux</item>
+        <item quantity="many">Morceaux</item>
     </plurals>
     <string name="album_artist">Artiste de l\'album</string>
     <string name="albums">Albums</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
-        <item quantity="other">Albums</item>
+        <item quantity="many">Albums</item>
     </plurals>
     <string name="always">Toujours</string>
     <string name="app_share">Hey, jetez un coup d\'œil à ce super lecteur de musique : https://play.google.com/store/apps/details?id=%s</string>

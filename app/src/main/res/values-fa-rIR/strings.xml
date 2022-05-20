@@ -56,7 +56,7 @@
     <string name="add_time_framed_lryics">اضافه کردن متون دارای زمان</string>
     <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"یک‌ مورد به لیست پخش اهنگ ها اضافه شد."</string>
-    <string name="added_x_titles_to_playing_queue">مورد خاص به لیست پخش اهنگ اضافه شد.</string>
+    <string name="added_x_titles_to_playing_queue">%1$d آهنگ به لیست پخش اضافه شد.</string>
     <string name="album">آلبوم</string>
     <plurals name="albumSongs">
         <item quantity="one">آهنگ ها</item>
