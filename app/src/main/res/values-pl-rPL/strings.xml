@@ -122,7 +122,7 @@
     <string name="cascading">Kaskadowy</string>
     <string name="changelog">Lista zmian</string>
     <string name="changelog_summary">Sprawdź, co nowego</string>
-    <string name="choose_image">Choose Image</string>
+    <string name="choose_image">Wybierz obraz</string>
     <string name="choose_restore_title">Wybierz, co przywrócić</string>
     <string name="circle">Okrąg</string>
     <string name="circular">Okrągły</string>
@@ -178,12 +178,12 @@
     <string name="equalizer">Korektor dźwięku</string>
     <string name="error_create_backup">Couldn\u2019t create backup</string>
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
-    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_empty_name">Imię nie może być puste!</string>
     <string name="error_load_failed">Load failed</string>
     <string name="expanded">Expanded</string>
     <string name="faq">Najczęściej zadawane pytania</string>
     <string name="favorites">Ulubione</string>
-    <string name="file_already_exists">File already exists</string>
+    <string name="file_already_exists">Plik już istnieje</string>
     <string name="finish_last_song">Dokończ ostatni utwór</string>
     <string name="fit">Dopasuj</string>
     <string name="flat">Płaski</string>
@@ -237,7 +237,7 @@
     <string name="labeled">Podpisano</string>
     <string name="last_added">Ostatnio dodane</string>
     <string name="last_song">Ostatni utwór</string>
-    <string name="lets_go">Let\'s go</string>
+    <string name="lets_go">Zaczynajmy</string>
     <string name="library_categories">Kategorie biblioteki</string>
     <string name="licenses">Licencje</string>
     <string name="light_theme_name">Jasny</string>
@@ -251,11 +251,11 @@
     <string name="md_error_label">Błąd</string>
     <string name="md_storage_perm_error">Błąd uprawnień</string>
     <string name="message_backup_create_success">Backup created successfully.</string>
-    <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
-    <string name="message_restore_success">Restore completed successfully.</string>
-    <string name="message_updated">Updated</string>
-    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
+    <string name="message_limit_tabs">Nie więcej niż 5 elementów</string>
+    <string name="message_pro_feature">%s jest funkcją wersji Pro.</string>
+    <string name="message_restore_success">Przywracanie zakończone pomyślnie.</string>
+    <string name="message_updated">Zaktualizowano</string>
+    <string name="message_welcome"><![CDATA[Witaj! <br>Zapraszamy do %s]]></string>
     <string name="my_name">Imię</string>
     <string name="my_top_tracks">Najczęściej odtwarzane</string>
     <string name="never">Nigdy</string>
@@ -366,7 +366,7 @@
     <string name="pref_summary_show_lyrics">Wyświetla zsynchronizowane teksty piosenek nad okładką albumu</string>
     <string name="pref_summary_suggestions">Pokaż Nowy miks muzyki na ekranie głównym</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Włącza możliwość zmiany utworu przesuwając w dowolnym miejscu na ekranie odtwarzania</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_summary_swipe_to_dismiss">Przesuń w dół, aby zamknąć mini odtwarzacz</string>
     <string name="pref_summary_toggle_full_screen">Tryb imersji</string>
     <string name="pref_summary_toggle_headset">Rozpocznij odtwarzanie po podłączeniu zestawu słuchawkowego</string>
     <string name="pref_summary_toggle_shuffle">Odtwarzanie losowe zostanie wyłączone podczas odtwarzania nowej listy utworów</string>
@@ -378,7 +378,7 @@
     <string name="pref_title_album_cover_style">Wygląd okładki albumu</string>
     <string name="pref_title_album_cover_transform">Przesuwanie okładki albumu</string>
     <string name="pref_title_app_shortcuts">Kolorowe skróty aplikacji</string>
-    <string name="pref_title_appbar_mode">Header style</string>
+    <string name="pref_title_appbar_mode">Styl nagłówka</string>
     <string name="pref_title_audio_ducking">Zmniejsz głośność przy braku skupienia</string>
     <string name="pref_title_audio_fade">Zanikanie dźwięku</string>
     <string name="pref_title_auto_download_artist_images">Automatycznie pobierz grafiki wykonawców</string>
@@ -413,7 +413,7 @@
     <string name="pref_title_show_lyrics">Pokaż teksty utworów</string>
     <string name="pref_title_suggestions">Pokaż sugestie</string>
     <string name="pref_title_swipe_anywhere_now_playing">Przesuń gdziekolwiek, aby zmienić utwór</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="pref_title_swipe_to_dismiss">Odrzuć przesunięciem w dół</string>
     <string name="pref_title_tab_text_mode">Wygląd tytułów kart</string>
     <string name="pref_title_toggle_carousel_effect">Efekt karuzeli</string>
     <string name="pref_title_toggle_full_screen">Aplikacja pełnoekranowa</string>
@@ -434,7 +434,7 @@
     <string name="remove_action">Usuń</string>
     <string name="remove_cover">Usuń okładkę</string>
     <string name="remove_from_blacklist">Usuń z listy ignorowanych</string>
-    <string name="remove_image">Remove Image</string>
+    <string name="remove_image">Usuń obraz</string>
     <string name="remove_song_from_playlist_title">Usuń utwór z playlisty</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Usunąć utwór <b>%1$s</b> z playlisty?]]></string>
     <string name="remove_songs_from_playlist_title">Usuń utwory z playlisty</string>
@@ -559,5 +559,5 @@
     <string name="you_have_to_select_at_least_one_category">Zaznacz przynajmniej jedną kategorię</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Zostaniesz przekierowany do strony ze zgłoszeniami.</string>
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
-    <string name="bluetooth_title">Nearby devices</string>
+    <string name="bluetooth_title">Urządzenia w pobliżu</string>
 </resources>
