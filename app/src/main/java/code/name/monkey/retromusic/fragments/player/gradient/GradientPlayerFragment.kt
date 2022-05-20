@@ -99,7 +99,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             when (newState) {
                 STATE_EXPANDED,
-                STATE_DRAGGING -> {
+                STATE_DRAGGING,
+                -> {
                     mainActivity.getBottomSheetBehavior().isDraggable = false
                 }
                 STATE_COLLAPSED -> {
@@ -312,7 +313,6 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         super.onServiceConnected()
         updateSong()
         updatePlayPauseDrawableState()
-        updatePlayPauseDrawableState()
         updateQueue()
         updateIsFavoriteIcon()
     }
@@ -379,15 +379,17 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
 
     private fun setUpPlayPauseFab() {
         binding.playbackControlsFragment.playPauseButton.setOnClickListener(
-            PlayPauseButtonOnClickHandler()
-        )
+            PlayPauseButtonOnClickHandler())
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setUpPrevNext() {
         updatePrevNextColor()
-        binding.playbackControlsFragment.nextButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
-        binding.playbackControlsFragment.previousButton.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), false))
+        binding.playbackControlsFragment.nextButton.setOnTouchListener(MusicSeekSkipTouchListener(
+            requireActivity(),
+            true))
+        binding.playbackControlsFragment.previousButton.setOnTouchListener(
+            MusicSeekSkipTouchListener(requireActivity(), false))
     }
 
     private fun updatePrevNextColor() {
@@ -469,7 +471,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         oldLeft: Int,
         oldTop: Int,
         oldRight: Int,
-        oldBottom: Int
+        oldBottom: Int,
     ) {
         val panel = getQueuePanel()
         if (panel.state == STATE_COLLAPSED) {

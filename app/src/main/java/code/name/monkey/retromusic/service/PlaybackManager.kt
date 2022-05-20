@@ -118,9 +118,7 @@ class PlaybackManager(val context: Context) {
     }
 
     fun release() {
-        if (playback != null) {
-            playback?.release()
-        }
+        playback?.release()
         playback = null
         closeAudioEffectSession()
     }

@@ -851,7 +851,6 @@ class MusicService : MediaBrowserServiceCompat(),
         stopForeground(true)
         isForeground = false
         notificationManager?.cancel(PlayingNotification.NOTIFICATION_ID)
-        playbackManager.release()
         AudioManagerCompat.abandonAudioFocusRequest(audioManager!!,
             AudioFocusRequestCompat.Builder(AudioManagerCompat.AUDIOFOCUS_GAIN)
                 .setOnAudioFocusChangeListener(audioFocusListener)
