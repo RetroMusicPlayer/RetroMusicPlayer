@@ -64,7 +64,7 @@ class ErrorActivity : AppCompatActivity() {
                             intent
                         ), ".txt"
                     )
-                    shareFile(this, bugReport)
+                    shareFile(this, bugReport, "text/*")
                 }
                 .show()
         }

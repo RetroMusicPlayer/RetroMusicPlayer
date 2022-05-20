@@ -26,7 +26,6 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
-import code.name.monkey.retromusic.service.MusicService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
@@ -42,21 +41,20 @@ import java.util.regex.Pattern
 
 
 object MusicUtil : KoinComponent {
-    fun createShareSongFileIntent(song: Song, context: Context): Intent? {
-        return try {
-            Intent().setAction(Intent.ACTION_SEND).putExtra(
-                Intent.EXTRA_STREAM,
+    fun createShareSongFileIntent(song: Song, context: Context): Intent {
+        return Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_STREAM, try {
                 FileProvider.getUriForFile(
                     context,
                     context.applicationContext.packageName,
                     File(song.data)
                 )
-            ).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).setType("audio/*")
-        } catch (e: IllegalArgumentException) {
-            Intent().setAction(Intent.ACTION_SEND).putExtra(
-                Intent.EXTRA_STREAM,
+            } catch (e: IllegalArgumentException) {
                 getSongFileUri(song.id)
-            ).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).setType("audio/*")
+            })
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            type = "audio/*"
         }
     }
 
