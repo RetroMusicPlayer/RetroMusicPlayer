@@ -282,7 +282,6 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
         cab?.let {
-            println("Cab")
             if (it.isActive()) {
                 it.destroy()
             }

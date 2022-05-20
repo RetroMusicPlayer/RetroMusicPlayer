@@ -62,10 +62,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.repository.RealRepository
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.*
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -245,10 +242,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
-                    println("Loading")
+                    logD("Loading")
                 }
                 is Result.Error -> {
-                    println("Error")
+                    logE("Error")
                 }
                 is Result.Success -> {
                     aboutAlbum(result.data)

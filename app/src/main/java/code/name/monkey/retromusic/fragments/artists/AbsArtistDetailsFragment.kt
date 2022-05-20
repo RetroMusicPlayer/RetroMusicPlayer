@@ -180,8 +180,8 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         detailsViewModel.getArtistInfo(name, lang, null)
             .observe(viewLifecycleOwner) { result ->
                 when (result) {
-                    is Result.Loading -> println("Loading")
-                    is Result.Error -> println("Error")
+                    is Result.Loading -> logD("Loading")
+                    is Result.Error -> logE("Error")
                     is Result.Success -> artistInfo(result.data)
                 }
             }

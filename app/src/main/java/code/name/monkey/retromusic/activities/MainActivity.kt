@@ -34,6 +34,7 @@ import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.logE
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
@@ -219,7 +220,7 @@ class MainActivity : AbsCastActivity(), OnThemeChangedListener {
                 try {
                     id = idString.toLong()
                 } catch (e: NumberFormatException) {
-                    println(e.message)
+                    logE(e)
                 }
             }
         }

@@ -31,6 +31,8 @@ import code.name.monkey.retromusic.service.MusicService.Companion.CYCLE_REPEAT
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_SHUFFLE
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.logD
+import code.name.monkey.retromusic.util.logE
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -52,7 +54,7 @@ class MediaSessionCallback(
     override fun onPlayFromMediaId(mediaId: String?, extras: Bundle?) {
         super.onPlayFromMediaId(mediaId, extras)
         val musicId = AutoMediaIDHelper.extractMusicID(mediaId!!)
-        println(musicId)
+        logD(musicId)
         val itemId = musicId?.toLong() ?: -1
         val songs: ArrayList<Song> = ArrayList()
         when (val category = AutoMediaIDHelper.extractCategory(mediaId)) {
@@ -192,7 +194,7 @@ class MediaSessionCallback(
                 musicService.toggleFavorite()
             }
             else -> {
-                println("Unsupported action: $action")
+                logE("Unsupported action: $action")
             }
         }
     }

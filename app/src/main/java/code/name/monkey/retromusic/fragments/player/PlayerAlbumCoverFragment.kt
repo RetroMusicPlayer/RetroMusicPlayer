@@ -47,6 +47,7 @@ import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.LyricsType
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -173,16 +174,19 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     override fun onServiceConnected() {
+        logD("Service Connected")
         updatePlayingQueue()
         updateLyrics()
     }
 
     override fun onPlayingMetaChanged() {
+        logD("Playing Meta Changed")
         binding.viewPager.currentItem = MusicPlayerRemote.position
         updateLyrics()
     }
 
     override fun onQueueChanged() {
+        logD("Queue Changed")
         updatePlayingQueue()
     }
 

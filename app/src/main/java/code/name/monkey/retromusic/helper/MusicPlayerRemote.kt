@@ -30,6 +30,7 @@ import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
+import code.name.monkey.retromusic.util.logE
 import com.google.android.gms.cast.framework.CastSession
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -449,7 +450,7 @@ object MusicPlayerRemote : KoinComponent {
             } else {
                 // TODO the file is not listed in the media store
                 context.showToast(R.string.unplayable_file)
-                println("The file is not listed in the media store")
+                logE("The file is not listed in the media store")
             }
         }
     }

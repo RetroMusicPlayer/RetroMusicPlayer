@@ -115,7 +115,6 @@ class RealRoomRepository(
         return if (playlist != null) {
             playlist
         } else {
-            println("Playlist Created")
             createPlaylist(PlaylistEntity(playlistName = favorite))
             playlistDao.playlist(favorite).first()
         }

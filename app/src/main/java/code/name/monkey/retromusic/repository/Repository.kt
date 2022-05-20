@@ -28,6 +28,8 @@ import code.name.monkey.retromusic.network.Result.*
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.logD
+import code.name.monkey.retromusic.util.logE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -194,7 +196,7 @@ class RealRepository(
         return try {
             Success(lastFMService.artistInfo(name, lang, cache))
         } catch (e: Exception) {
-            println(e)
+            logE(e)
             Error(e)
         }
     }
@@ -207,7 +209,7 @@ class RealRepository(
             val lastFmAlbum = lastFMService.albumInfo(artist, album)
             Success(lastFmAlbum)
         } catch (e: Exception) {
-            println(e)
+            logE(e)
             Error(e)
         }
     }
@@ -227,7 +229,7 @@ class RealRepository(
         )
         for (section in sections) {
             if (section.arrayList.isNotEmpty()) {
-                println("${section.homeSection} -> ${section.arrayList.size}")
+                logD("${section.homeSection} -> ${section.arrayList.size}")
                 homeSections.add(section)
             }
         }

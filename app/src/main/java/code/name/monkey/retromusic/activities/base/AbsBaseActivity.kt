@@ -33,6 +33,7 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.rootView
+import code.name.monkey.retromusic.util.logD
 import com.google.android.material.snackbar.Snackbar
 
 abstract class AbsBaseActivity : AbsThemeActivity() {
@@ -76,7 +77,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
 
     protected open fun onHasPermissionsChanged(hasPermissions: Boolean) {
         // implemented by sub classes
-        println(hasPermissions)
+        logD(hasPermissions)
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {

@@ -65,6 +65,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.logD
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -134,7 +135,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                         MusicPlayerRemote.clearQueue()
                     }
                     else -> {
-                        println("Do a flip")
+                        logD("Do a flip")
                     }
                 }
             }
@@ -451,7 +452,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 binding.slidingPanel.elevation = 0F
                 binding.bottomNavigationView.elevation = 5F
                 if (isBottomNavVisible) {
-                    println("List")
+                    logD("List")
                     if (animate) {
                         bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
                     } else {
@@ -459,7 +460,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                     }
                     libraryViewModel.setFabMargin(this, dip(R.dimen.mini_player_height_expanded))
                 } else {
-                    println("Details")
+                    logD("Details")
                     if (animate) {
                         bottomSheetBehavior.peekHeightAnimate(heightOfBar).doOnEnd {
                             binding.slidingPanel.bringToFront()

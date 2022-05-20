@@ -48,6 +48,7 @@ import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.util.SAFUtil
+import code.name.monkey.retromusic.util.logD
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.GlobalScope
@@ -223,7 +224,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         getIntentExtras()
 
         songPaths = getSongPaths()
-        println(songPaths?.size)
+        logD(songPaths?.size)
         if (songPaths!!.isEmpty()) {
             finish()
         }
@@ -352,7 +353,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         hideSoftKeyboard()
 
         hideFab()
-        println(fieldKeyValueMap)
+        logD(fieldKeyValueMap)
         GlobalScope.launch {
             if (VersionUtils.hasR()) {
                 cacheFiles = TagWriter.writeTagsToFilesR(
