@@ -327,7 +327,15 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 showLyricsIcon(this)
             }
         }
-        requireView().setOnTouchListener(
+    }
+
+    override fun onStart() {
+        super.onStart()
+        addSwipeDetector()
+    }
+
+    fun addSwipeDetector() {
+        view?.setOnTouchListener(
             if (PreferenceUtil.swipeAnywhereToChangeSong) {
                 SwipeDetector(
                     requireContext(),

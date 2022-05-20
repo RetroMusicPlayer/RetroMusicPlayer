@@ -206,7 +206,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 onServiceConnected()
             }
             SWIPE_ANYWHERE_NOW_PLAYING -> {
-                playerFragment.onResume()
+                playerFragment.addSwipeDetector()
             }
             ADAPTIVE_COLOR_APP -> {
                 if (PreferenceUtil.nowPlayingScreen in listOf(Normal, Material, Flat)) {
@@ -310,15 +310,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
     override fun onServiceConnected() {
         super.onServiceConnected()
-        if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-            binding.slidingPanel.viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    binding.slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    hideBottomSheet(false)
-                }
-            })
-        } // don't call hideBottomSheet(true) here as it causes a bug with the SlidingUpPanelLayout
+        hideBottomSheet(false)
     }
 
     override fun onQueueChanged() {
@@ -514,7 +506,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         supportFragmentManager.commit {
             replace(R.id.playerFragmentContainer, fragment)
         }
-        playerFragment = fragment
+        supportFragmentManager.executePendingTransactions()
+        playerFragment = whichFragment(R.id.playerFragmentContainer)
         miniPlayerFragment = whichFragment<MiniPlayerFragment>(R.id.miniPlayerFragment)
         miniPlayerFragment?.view?.setOnClickListener { expandPanel() }
     }
