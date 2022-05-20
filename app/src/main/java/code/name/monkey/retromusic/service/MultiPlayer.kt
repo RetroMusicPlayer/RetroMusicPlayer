@@ -27,8 +27,6 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil.isGapLessPlayback
-import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
-import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 
 /**
  * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
@@ -91,7 +89,6 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .build()
             )
-            player.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
             player.setOnPreparedListener {
                 player.setOnPreparedListener(null)
                 completion(true)

@@ -6,6 +6,8 @@ import android.media.audiofx.AudioEffect
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
+import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 import com.google.android.gms.cast.framework.CastSession
 
 
@@ -32,6 +34,9 @@ class PlaybackManager(val context: Context) {
     val isPlaying: Boolean
         get() = playback != null && playback!!.isPlaying
 
+    private val shouldSetSpeed: Boolean
+        get() = !(playbackSpeed == 1f && playbackPitch == 1f)
+
     init {
         playback = createLocalPlayback()
     }
@@ -51,6 +56,9 @@ class PlaybackManager(val context: Context) {
                         // Code when Animator Ends
                         onPlay()
                     }
+                }
+                if (shouldSetSpeed) {
+                    playback?.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
                 }
                 playback?.start()
             }

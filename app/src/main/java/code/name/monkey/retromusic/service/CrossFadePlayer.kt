@@ -19,8 +19,6 @@ import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimat
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
-import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 import kotlinx.coroutines.*
 
 /** @author Prathamesh M */
@@ -168,7 +166,6 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
             player.setAudioAttributes(
                 AudioAttributes.Builder().setLegacyStreamType(AudioManager.STREAM_MUSIC).build()
             )
-            player.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
             player.setOnPreparedListener {
                 player.setOnPreparedListener(null)
                 completion(true)
@@ -321,7 +318,6 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
         }
     }
 
-
     fun onDurationUpdated(progress: Int, total: Int) {
         if (total > 0 && (total - progress).div(1000) == crossFadeDuration) {
             getNextPlayer()?.let { player ->
@@ -369,10 +365,6 @@ internal fun crossFadeScope(): CoroutineScope = CoroutineScope(Job() + Dispatche
 
 fun MediaPlayer.setPlaybackSpeedPitch(speed: Float, pitch: Float) {
     if (hasMarshmallow()) {
-        val wasPlaying: Boolean = isPlaying
         playbackParams = PlaybackParams().setSpeed(speed).setPitch(pitch)
-        if (!wasPlaying) {
-            if (isPlaying) pause()
-        }
     }
 }
