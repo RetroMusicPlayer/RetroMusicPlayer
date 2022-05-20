@@ -46,7 +46,7 @@ import kotlin.math.abs
 class CoverLrcView @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
     private val mLrcEntryList: MutableList<LrcEntry> = ArrayList()
     private val mLrcPaint = TextPaint()
@@ -109,7 +109,7 @@ class CoverLrcView @JvmOverloads constructor(
                 e1: MotionEvent,
                 e2: MotionEvent,
                 distanceX: Float,
-                distanceY: Float
+                distanceY: Float,
             ): Boolean {
                 if (mOffset == getOffset(0) && distanceY < 0F) {
                     return super.onScroll(e1, e2, distanceX, distanceY)
@@ -129,7 +129,7 @@ class CoverLrcView @JvmOverloads constructor(
                 e1: MotionEvent,
                 e2: MotionEvent,
                 velocityX: Float,
-                velocityY: Float
+                velocityY: Float,
             ): Boolean {
                 if (hasLrc()) {
                     mScroller!!.fling(
@@ -598,7 +598,6 @@ class CoverLrcView @JvmOverloads constructor(
                 mOffset = animation.animatedValue as Float
                 invalidate()
             }
-            LrcUtils.resetDurationScale()
             start()
         }
     }

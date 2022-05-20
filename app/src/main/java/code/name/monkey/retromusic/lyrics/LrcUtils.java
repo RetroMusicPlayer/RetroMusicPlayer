@@ -208,14 +208,4 @@ class LrcUtils {
     String ss = String.format(Locale.getDefault(), "%02d", s);
     return mm + ":" + ss;
   }
-
-  static void resetDurationScale() {
-    try {
-      Field mField = ValueAnimator.class.getDeclaredField("sDurationScale");
-      mField.setAccessible(true);
-      mField.setFloat(null, 1);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
 }

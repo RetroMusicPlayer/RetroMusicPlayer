@@ -40,6 +40,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import dev.chrisbanes.insetter.applyInsetter
 
+const val ANIM_DURATION = 300L
+
 @Suppress("UNCHECKED_CAST")
 fun <T : View> ViewGroup.inflate(@LayoutRes layout: Int): T {
     return LayoutInflater.from(context).inflate(layout, this, false) as T
@@ -90,10 +92,10 @@ fun BottomNavigationView.show() {
     drawable.setBounds(left, parent.height, right, parent.height + height)
     parent.overlay.add(drawable)
     ValueAnimator.ofInt(parent.height, top).apply {
-        duration = 300
+        duration = ANIM_DURATION
         interpolator = AnimationUtils.loadInterpolator(
             context,
-            android.R.interpolator.linear_out_slow_in
+            android.R.interpolator.accelerate_decelerate
         )
         addUpdateListener {
             val newTop = it.animatedValue as Int
@@ -130,10 +132,10 @@ fun BottomNavigationView.hide() {
     parent.overlay.add(drawable)
     isGone = true
     ValueAnimator.ofInt(top, parent.height).apply {
-        duration = 300L
+        duration = ANIM_DURATION
         interpolator = AnimationUtils.loadInterpolator(
             context,
-            android.R.interpolator.fast_out_linear_in
+            android.R.interpolator.accelerate_decelerate
         )
         addUpdateListener {
             val newTop = it.animatedValue as Int
@@ -164,7 +166,7 @@ fun View.translateYAnimate(value: Float): Animator {
 fun BottomSheetBehavior<*>.peekHeightAnimate(value: Int): Animator {
     return ObjectAnimator.ofInt(this, "peekHeight", value)
         .apply {
-            duration = 300
+            duration = ANIM_DURATION
             start()
         }
 }

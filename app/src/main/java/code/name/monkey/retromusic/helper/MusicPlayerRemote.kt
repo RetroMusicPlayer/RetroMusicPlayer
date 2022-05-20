@@ -65,9 +65,6 @@ object MusicPlayerRemote : KoinComponent {
             musicService?.nextSong
         } else Song.emptySong
 
-    /**
-     * Async
-     */
     var position: Int
         get() = if (musicService != null) {
             musicService!!.position

@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.util
 
 import android.app.Activity
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import com.google.android.play.core.review.ReviewManagerFactory
 
 object AppRater {
@@ -34,28 +35,27 @@ object AppRater {
             return
         }
 
-        val editor = prefs.edit()
+        prefs.edit {
 
-        // Increment launch counter
-        val launchCount = prefs.getLong(LAUNCH_COUNT, 0) + 1
-        editor.putLong(LAUNCH_COUNT, launchCount)
+            // Increment launch counter
+            val launchCount = prefs.getLong(LAUNCH_COUNT, 0) + 1
+            putLong(LAUNCH_COUNT, launchCount)
 
-        // Get date of first launch
-        var dateFirstLaunch = prefs.getLong(DATE_FIRST_LAUNCH, 0)
-        if (dateFirstLaunch == 0L) {
-            dateFirstLaunch = System.currentTimeMillis()
-            editor.putLong(DATE_FIRST_LAUNCH, dateFirstLaunch)
-        }
+            // Get date of first launch
+            var dateFirstLaunch = prefs.getLong(DATE_FIRST_LAUNCH, 0)
+            if (dateFirstLaunch == 0L) {
+                dateFirstLaunch = System.currentTimeMillis()
+                putLong(DATE_FIRST_LAUNCH, dateFirstLaunch)
+            }
 
-        // Wait at least n days before opening
-        if (launchCount >= LAUNCHES_UNTIL_PROMPT) {
-            if (System.currentTimeMillis() >= dateFirstLaunch + DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000) {
-                //showRateDialog(context, editor)
-                showPlayStoreReviewDialog(context, editor)
+            // Wait at least n days before opening
+            if (launchCount >= LAUNCHES_UNTIL_PROMPT) {
+                if (System.currentTimeMillis() >= dateFirstLaunch + DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000) {
+                    //showRateDialog(context, editor)
+                    showPlayStoreReviewDialog(context, this)
+                }
             }
         }
-
-        editor.apply()
     }
 
     private fun showPlayStoreReviewDialog(context: Activity, editor: SharedPreferences.Editor) {

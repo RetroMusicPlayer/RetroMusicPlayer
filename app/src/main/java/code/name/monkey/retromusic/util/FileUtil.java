@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import code.name.monkey.retromusic.Constants;
@@ -178,7 +179,7 @@ public final class FileUtil {
       if (dotPos == -1) {
         return false;
       }
-      String fileExtension = filename.substring(dotPos + 1).toLowerCase();
+      String fileExtension = filename.substring(dotPos + 1).toLowerCase(Locale.ROOT);
       String fileType = mimeTypeMap.getMimeTypeFromExtension(fileExtension);
       if (fileType == null) {
         return false;
@@ -304,7 +305,7 @@ public final class FileUtil {
               paths.add(path);
               try {
                 Storage item = new Storage();
-                if (path.toLowerCase().contains("sd")) {
+                if (path.toLowerCase(Locale.ROOT).contains("sd")) {
                   item.title = "SD Card";
                 } else {
                   item.title = "External Storage";

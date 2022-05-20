@@ -83,7 +83,6 @@ public class SAFUtil {
     return false;
   }
 
-  @TargetApi(Build.VERSION_CODES.KITKAT)
   public static void openFilePicker(Activity activity) {
     Intent i = new Intent(Intent.ACTION_CREATE_DOCUMENT);
     i.addCategory(Intent.CATEGORY_OPENABLE);
@@ -92,7 +91,6 @@ public class SAFUtil {
     activity.startActivityForResult(i, SAFUtil.REQUEST_SAF_PICK_FILE);
   }
 
-  @TargetApi(Build.VERSION_CODES.KITKAT)
   public static void openFilePicker(Fragment fragment) {
     Intent i = new Intent(Intent.ACTION_CREATE_DOCUMENT);
     i.addCategory(Intent.CATEGORY_OPENABLE);
@@ -101,21 +99,18 @@ public class SAFUtil {
     fragment.startActivityForResult(i, SAFUtil.REQUEST_SAF_PICK_FILE);
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public static void openTreePicker(Activity activity) {
     Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
     i.putExtra("android.content.extra.SHOW_ADVANCED", true);
     activity.startActivityForResult(i, SAFUtil.REQUEST_SAF_PICK_TREE);
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public static void openTreePicker(Fragment fragment) {
     Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
     i.putExtra("android.content.extra.SHOW_ADVANCED", true);
     fragment.startActivityForResult(i, SAFUtil.REQUEST_SAF_PICK_TREE);
   }
 
-  @TargetApi(Build.VERSION_CODES.KITKAT)
   public static void saveTreeUri(Context context, Intent data) {
     Uri uri = data.getData();
     context
@@ -125,12 +120,10 @@ public class SAFUtil {
     PreferenceUtil.INSTANCE.setSafSdCardUri(uri.toString());
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public static boolean isTreeUriSaved(Context context) {
     return !TextUtils.isEmpty(PreferenceUtil.INSTANCE.getSafSdCardUri());
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public static boolean isSDCardAccessGranted(Context context) {
     if (!isTreeUriSaved(context)) return false;
 
@@ -267,7 +260,6 @@ public class SAFUtil {
     new File(path).delete();
   }
 
-  @TargetApi(Build.VERSION_CODES.KITKAT)
   public static void deleteSAF(Context context, String path, Uri safUri) {
     Uri uri = null;
 

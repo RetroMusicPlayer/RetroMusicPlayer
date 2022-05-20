@@ -177,10 +177,9 @@ class FullPlaybackControlsFragment :
 
     private fun setUpPlayPauseFab() {
         binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
-        binding.playPauseButton.post {
-            binding.playPauseButton.pivotX = (binding.playPauseButton.width / 2).toFloat()
-            binding.playPauseButton.pivotY = (binding.playPauseButton.height / 2).toFloat()
-        }
+
+        binding.playPauseButton.pivotX = (binding.playPauseButton.width / 2).toFloat()
+        binding.playPauseButton.pivotY = (binding.playPauseButton.height / 2).toFloat()
     }
 
     private fun setUpMusicControllers() {
