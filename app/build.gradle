@@ -51,8 +51,7 @@ android {
         }
     }
     lint {
-        abortOnError false
-        disable 'MissingTranslation', 'InvalidPackage'
+        disable 'MissingTranslation', 'ImpliedQuantity'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
