@@ -7,14 +7,16 @@ import code.name.monkey.retromusic.util.MusicUtil
 
 val Song.uri get() = MusicUtil.getSongFileUri(songId = id)
 
+val Song.albumArtUri get() = MusicUtil.getMediaStoreAlbumCoverUri(albumId)
 
 fun ArrayList<Song>.toMediaSessionQueue(): List<QueueItem> {
-    return map {
+    return map { song ->
         val mediaDescription = MediaDescriptionCompat.Builder()
-            .setMediaId(it.id.toString())
-            .setTitle(it.title)
-            .setSubtitle(it.artistName)
+            .setMediaId(song.id.toString())
+            .setTitle(song.title)
+            .setSubtitle(song.artistName)
+            .setIconUri(song.albumArtUri)
             .build()
-        QueueItem(mediaDescription, it.hashCode().toLong())
+        QueueItem(mediaDescription, song.hashCode().toLong())
     }
 }

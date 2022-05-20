@@ -947,6 +947,8 @@ class MusicService : MediaBrowserServiceCompat(),
                     }
 
                     sendChangeInternal(QUEUE_CHANGED)
+                    mediaSession?.setQueueTitle(getString(R.string.now_playing_queue))
+                    mediaSession?.setQueue(playingQueue.toMediaSessionQueue())
                 }
 
             }
