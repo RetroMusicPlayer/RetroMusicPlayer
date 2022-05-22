@@ -123,7 +123,7 @@
     <string name="classic">經典風</string>
     <string name="clear_action">清除</string>
     <string name="clear_blacklist">清除黑名單</string>
-    <string name="clear_history">清除記錄</string>
+    <string name="clear_history">清除歷史記錄</string>
     <string name="clear_playing_queue">清除佇列</string>
     <string name="color">彩色風</string>
     <string name="colors">顏色</string>
@@ -205,8 +205,8 @@
     <string name="grid_style_label">網格樣式</string>
     <string name="help_summary">需要更多幫助嗎？</string>
     <string name="hinge">旋轉風</string>
-    <string name="history">記錄</string>
-    <string name="history_cleared">已清除記錄</string>
+    <string name="history">歷史記錄</string>
+    <string name="history_cleared">已清除歷史記錄</string>
     <string name="history_undo_button">復原</string>
     <string name="home">首頁</string>
     <string name="horizontal_flip">水平翻轉風</string>
@@ -355,7 +355,7 @@
     <string name="pref_summary_lock_screen">使用 Retro Music 自訂化鎖定畫面</string>
     <string name="pref_summary_manage_audio_focus">無論其他應用程式正在播放為何，永遠於背景播放音訊</string>
     <string name="pref_summary_open_source_licences">開源軟體授權詳細資訊</string>
-    <string name="pref_summary_pause_history">啟用此選項後，新播放的歌曲將不再顯示於記錄</string>
+    <string name="pref_summary_pause_history">啟用此選項後，新播放的歌曲將不再顯示於歷史記錄</string>
     <string name="pref_summary_remember_tab">開啟應用程式後，自動顯示最後瀏覽的畫面</string>
     <string name="pref_summary_show_lyrics">於專輯封面上顯示同步歌詞</string>
     <string name="pref_summary_suggestions">於主畫面顯示歌曲快選</string>
