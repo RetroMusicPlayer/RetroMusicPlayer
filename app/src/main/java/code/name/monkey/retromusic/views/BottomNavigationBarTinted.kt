@@ -21,6 +21,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.NavigationViewUtil
+import code.name.monkey.retromusic.extensions.addAlpha
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dev.chrisbanes.insetter.applyInsetter
@@ -69,8 +70,4 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
             }
         }
     }
-}
-
-fun Int.addAlpha(alpha: Float): Int {
-    return ColorUtil.withAlpha(this, alpha)
 }

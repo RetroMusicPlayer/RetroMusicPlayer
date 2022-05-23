@@ -18,7 +18,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import android.widget.SeekBar
+import com.google.android.material.slider.Slider
 import android.widget.TextView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -27,10 +27,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentCardPlayerPlaybackControlsBinding
-import code.name.monkey.retromusic.extensions.getSongInfo
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.ripAlpha
-import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -45,7 +42,7 @@ class CardPlaybackControlsFragment :
     private var _binding: FragmentCardPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val progressSlider: Slider
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -77,6 +74,9 @@ class CardPlaybackControlsFragment :
         }
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
+        }
+        binding.progressSlider.apply {
+            setCustomThumbDrawable(R.drawable.switch_square)
         }
     }
 

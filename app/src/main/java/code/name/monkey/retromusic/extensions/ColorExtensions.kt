@@ -163,6 +163,15 @@ fun SeekBar.applyColor(@ColorInt color: Int) {
     progressBackgroundTintList = ColorStateList.valueOf(color)
 }
 
+fun Slider.applyColor(@ColorInt color: Int) {
+    ColorStateList.valueOf(color).run {
+        thumbTintList = this
+        trackActiveTintList = this
+        trackInactiveTintList = ColorStateList.valueOf(color.addAlpha(0.1f))
+        haloTintList = this
+    }
+}
+
 fun ExtendedFloatingActionButton.accentColor() {
     if (materialYou) return
     val color = ThemeStore.accentColor(context)
@@ -301,5 +310,9 @@ inline val @receiver:ColorInt Int.lighterColor
 inline val @receiver:ColorInt Int.darkerColor
     get() = ColorUtil.darkenColor(this)
 
-inline val Int.colorStateList : ColorStateList
+inline val Int.colorStateList: ColorStateList
     get() = ColorStateList.valueOf(this)
+
+fun @receiver:ColorInt Int.addAlpha(alpha: Float): Int {
+    return ColorUtil.withAlpha(this, alpha)
+}

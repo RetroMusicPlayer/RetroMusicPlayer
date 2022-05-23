@@ -19,16 +19,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/progressSlider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/seekbar_padding"
-        android:splitTrack="false"
-        android:thumb="@drawable/switch_square"
+        app:thumbRadius="8dp"
+        style="@style/Widget.Retro.Slider"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
@@ -46,7 +44,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/progressSlider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
 

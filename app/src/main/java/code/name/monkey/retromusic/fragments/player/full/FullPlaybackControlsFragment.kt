@@ -23,7 +23,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
-import android.widget.SeekBar
+import com.google.android.material.slider.Slider
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
@@ -62,7 +62,7 @@ class FullPlaybackControlsFragment :
     private var _binding: FragmentFullPlayerControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val progressSlider: Slider
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton

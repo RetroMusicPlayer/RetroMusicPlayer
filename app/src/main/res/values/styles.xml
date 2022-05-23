@@ -258,4 +258,10 @@
     <style name="ShapeAppearance.Material3.Circle" parent="">
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="Widget.Retro.Slider" parent="Widget.Material3.Slider">
+        <item name="labelBehavior">gone</item>
+        <item name="thumbRadius">6dp</item>
+        <item name="haloRadius">18dp</item>
+    </style>
 </resources>

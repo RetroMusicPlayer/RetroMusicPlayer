@@ -18,7 +18,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import android.widget.SeekBar
+import com.google.android.material.slider.Slider
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -44,7 +44,7 @@ class MaterialControlsFragment :
     private var _binding: FragmentMaterialPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val progressSlider: Slider
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton

@@ -172,14 +172,12 @@
     </LinearLayout>
 
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/progressSlider"
-        style="@style/Widget.MaterialComponents.LinearProgressIndicator"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
         android:maxHeight="3dp"
-        android:paddingVertical="@dimen/seekbar_padding"
+        style="@style/Widget.Retro.Slider"
         android:progressDrawable="@drawable/color_progress_seek"
         android:progressTint="@color/md_white_1000"
         android:splitTrack="false"
@@ -199,7 +197,6 @@
         android:textColor="@color/md_white_1000"
         app:layout_constraintBottom_toTopOf="@id/playPauseButton"
         app:layout_constraintStart_toStartOf="@id/repeatButton"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -211,7 +208,6 @@
         android:textColor="@color/md_white_1000"
         app:layout_constraintBottom_toTopOf="@id/playPauseButton"
         app:layout_constraintEnd_toEndOf="@id/shuffleButton"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

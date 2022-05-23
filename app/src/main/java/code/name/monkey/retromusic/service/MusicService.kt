@@ -204,8 +204,14 @@ class MusicService : MediaBrowserServiceCompat(),
     private val updateFavoriteReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             isCurrentFavorite { isFavorite ->
-                playingNotification?.updateFavorite(isFavorite)
-                startForegroundOrNotify()
+                if (!isForeground) {
+                    playingNotification?.updateMetadata(currentSong) {
+                        playingNotification?.setPlaying(isPlaying)
+                        playingNotification?.updateFavorite(isFavorite)
+                        startForegroundOrNotify()
+                    }
+                }
+
                 appWidgetCircle.notifyChange(this@MusicService, FAVORITE_STATE_CHANGED)
             }
         }
@@ -676,6 +682,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        startForegroundOrNotify()
         if (intent != null && intent.action != null) {
             handleIntent(mediaSession, intent)
             serviceScope.launch {

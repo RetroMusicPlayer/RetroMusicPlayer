@@ -22,7 +22,6 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
-import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
@@ -45,18 +44,17 @@ import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
+import com.google.android.material.slider.Slider
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
@@ -83,9 +81,12 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     private var playingQueueAdapter: PlayingQueueAdapter? = null
     private lateinit var linearLayoutManager: LinearLayoutManager
 
+    private var progressAnimator: ObjectAnimator? = null
+    var isSeeking = false
+
     private val bottomSheetCallbackList = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            mainActivity.getBottomSheetBehavior().isDraggable = false   
+            mainActivity.getBottomSheetBehavior().isDraggable = false
             binding.playerQueueSheet.setContentPadding(
                 binding.playerQueueSheet.contentPaddingLeft,
                 (slideOffset * binding.statusBar.height).toInt(),
@@ -99,7 +100,8 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED,
-                BottomSheetBehavior.STATE_DRAGGING -> {
+                BottomSheetBehavior.STATE_DRAGGING,
+                -> {
                     mainActivity.getBottomSheetBehavior().isDraggable = false
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
@@ -160,6 +162,10 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         }
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
+        }
+
+        binding.playerControlsContainer.progressSlider.apply {
+            setCustomThumbDrawable(R.drawable.switch_square)
         }
     }
 
@@ -286,11 +292,8 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         binding.playerControlsContainer.songCurrentProgress.setTextColor(lastPlaybackControlsColor)
         binding.playerControlsContainer.songTotalTime.setTextColor(lastPlaybackControlsColor)
 
-        ViewUtil.setProgressDrawable(
-            binding.playerControlsContainer.progressSlider,
-            color.primaryTextColor,
-            true
-        )
+        binding.playerControlsContainer.progressSlider.applyColor(color.primaryTextColor)
+
         volumeFragment?.setTintableColor(color.primaryTextColor)
 
         TintHelper.setTintAuto(
@@ -327,16 +330,20 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.playerControlsContainer.progressSlider.max = total
+        val progressSlider = binding.playerControlsContainer.progressSlider
+        progressSlider.valueTo = total.toFloat()
 
-        val animator = ObjectAnimator.ofInt(
-            binding.playerControlsContainer.progressSlider,
-            "progress",
-            progress
-        )
-        animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
+        if (isSeeking) {
+            progressSlider.value = progress.toFloat()
+        } else {
+            progressAnimator =
+                ObjectAnimator.ofFloat(progressSlider, "value", progress.toFloat()).apply {
+                    duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
+                    interpolator = LinearInterpolator()
+                    start()
+                }
+
+        }
 
         binding.playerControlsContainer.songTotalTime.text =
             MusicUtil.getReadableDurationString(total.toLong())
@@ -416,16 +423,25 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     }
 
     private fun setUpProgressSlider() {
-        binding.playerControlsContainer.progressSlider.setOnSeekBarChangeListener(object :
-            SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(
-                        MusicPlayerRemote.songProgressMillis,
-                        MusicPlayerRemote.songDurationMillis
-                    )
-                }
+        val progressSlider = binding.playerControlsContainer.progressSlider
+        progressSlider.addOnChangeListener(Slider.OnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                onUpdateProgressViews(
+                    value.toInt(),
+                    MusicPlayerRemote.songDurationMillis
+                )
+            }
+        })
+        progressSlider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+            override fun onStartTrackingTouch(slider: Slider) {
+                isSeeking = true
+                progressViewUpdateHelper.stop()
+            }
+
+            override fun onStopTrackingTouch(slider: Slider) {
+                isSeeking = false
+                MusicPlayerRemote.seekTo(slider.value.toInt())
+                progressViewUpdateHelper.start()
             }
         })
     }
@@ -537,7 +553,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         oldLeft: Int,
         oldTop: Int,
         oldRight: Int,
-        oldBottom: Int
+        oldBottom: Int,
     ) {
         val height = binding.playerContainer.height
         val width = binding.playerContainer.width
