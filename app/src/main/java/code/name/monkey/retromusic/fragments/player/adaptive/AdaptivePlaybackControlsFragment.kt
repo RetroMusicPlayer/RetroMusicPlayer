@@ -17,9 +17,7 @@ package code.name.monkey.retromusic.fragments.player.adaptive
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import com.google.android.material.slider.Slider
 import android.widget.TextView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -31,6 +29,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.slider.Slider
 
 class AdaptivePlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_adaptive_player_playback_controls) {

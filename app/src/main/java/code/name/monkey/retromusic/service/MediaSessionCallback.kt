@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.service
 
-import android.content.Context
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.media.session.MediaSessionCompat

@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.lyrics;
 
-import android.animation.ValueAnimator;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
@@ -25,7 +24,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;

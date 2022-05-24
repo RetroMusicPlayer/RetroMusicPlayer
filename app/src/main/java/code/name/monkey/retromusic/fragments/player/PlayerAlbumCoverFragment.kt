@@ -28,7 +28,9 @@ import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.LYRICS_TYPE
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.SHOW_LYRICS
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter.AlbumCoverFragment
 import code.name.monkey.retromusic.databinding.FragmentPlayerAlbumCoverBinding

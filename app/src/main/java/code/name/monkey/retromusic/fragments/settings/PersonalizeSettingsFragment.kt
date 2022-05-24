@@ -16,9 +16,11 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.os.Bundle
 import android.view.View
-import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.HOME_ALBUM_GRID_STYLE
+import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.TAB_TEXT_MODE
 
 class PersonalizeSettingsFragment : AbsSettingsFragment() {
 

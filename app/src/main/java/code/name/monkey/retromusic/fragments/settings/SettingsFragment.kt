@@ -24,7 +24,10 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.FragmentSettingsBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.dip
+import code.name.monkey.retromusic.extensions.extra
+import code.name.monkey.retromusic.extensions.findNavController
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import com.afollestad.materialdialogs.MaterialDialog

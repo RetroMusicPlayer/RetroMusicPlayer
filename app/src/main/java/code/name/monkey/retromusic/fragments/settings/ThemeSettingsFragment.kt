@@ -29,9 +29,7 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.extensions.materialDialog
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Normal
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Material
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Flat
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.color.colorChooser
 import com.google.android.material.color.DynamicColors
