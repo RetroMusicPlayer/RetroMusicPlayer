@@ -18,6 +18,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
+import android.widget.SeekBar
 import android.widget.TextView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -32,8 +33,6 @@ import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.google.android.material.slider.Slider
-import java.lang.reflect.Field
 
 class FitPlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_fit_playback_controls) {
@@ -41,7 +40,7 @@ class FitPlaybackControlsFragment :
     private var _binding: FragmentFitPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: Slider
+    override val seekBar: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -76,18 +75,6 @@ class FitPlaybackControlsFragment :
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
         }
-        binding.progressSlider.apply {
-            setCustomThumbDrawable(R.drawable.switch_square)
-        }
-        val field: Field = Slider::class.java.superclass.getDeclaredField("trackSidePadding")
-
-        field.isAccessible = true
-
-        field.set(binding.progressSlider, 0)
-
-        binding.progressSlider.invalidate()
-
-
     }
 
     private fun updateSong() {
@@ -141,7 +128,7 @@ class FitPlaybackControlsFragment :
         val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
             color.primaryTextColor
         } else {
-            ThemeStore.accentColor(requireContext()).ripAlpha()
+            accentColor().ripAlpha()
         }
 
         volumeFragment?.setTintable(colorFinal)

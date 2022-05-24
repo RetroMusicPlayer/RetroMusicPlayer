@@ -27,6 +27,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPeekControlPlayerBinding
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -82,7 +83,7 @@ class PeekPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_pe
             if (PreferenceUtil.isAdaptiveColor) {
                 color.primaryTextColor
             } else {
-                ThemeStore.accentColor(requireContext())
+                accentColor()
             }
         binding.progressSlider.applyColor(controlsColor)
         volumeFragment?.setTintableColor(controlsColor)

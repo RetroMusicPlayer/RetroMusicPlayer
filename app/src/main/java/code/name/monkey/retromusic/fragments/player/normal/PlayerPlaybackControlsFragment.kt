@@ -94,7 +94,7 @@ class PlayerPlaybackControlsFragment :
         val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
             color.primaryTextColor
         } else {
-            ThemeStore.accentColor(requireContext())
+            accentColor()
         }.ripAlpha()
 
         TintHelper.setTintAuto(

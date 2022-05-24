@@ -18,7 +18,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import com.google.android.material.slider.Slider
+import android.widget.SeekBar
 import android.widget.TextView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -42,7 +42,7 @@ class CardPlaybackControlsFragment :
     private var _binding: FragmentCardPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: Slider
+    override val seekBar: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -74,9 +74,6 @@ class CardPlaybackControlsFragment :
         }
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
-        }
-        binding.progressSlider.apply {
-            setCustomThumbDrawable(R.drawable.switch_square)
         }
     }
 
@@ -138,7 +135,7 @@ class CardPlaybackControlsFragment :
         val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
             color.primaryTextColor
         } else {
-            ThemeStore.accentColor(requireContext()).ripAlpha()
+            accentColor().ripAlpha()
         }
         binding.image.setColorFilter(colorFinal, PorterDuff.Mode.SRC_IN)
         TintHelper.setTintAuto(

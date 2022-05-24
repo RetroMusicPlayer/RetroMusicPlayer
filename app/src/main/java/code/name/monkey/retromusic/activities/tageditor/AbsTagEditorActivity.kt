@@ -277,7 +277,6 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
             scaleY = 0f
             isEnabled = false
             setOnClickListener { save() }
-            TintHelper.setTintAuto(this, ThemeStore.accentColor(this@AbsTagEditorActivity), true)
         }
     }
 

@@ -137,7 +137,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     }
 
     private fun updatePrevNextColor() {
-        val accentColor = ThemeStore.accentColor(requireContext())
+        val accentColor = accentColor()
         binding.nextButton.setColorFilter(accentColor, PorterDuff.Mode.SRC_IN)
         binding.previousButton.setColorFilter(accentColor, PorterDuff.Mode.SRC_IN)
     }
@@ -145,7 +145,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     private fun setUpPlayPauseFab() {
         TintHelper.setTintAuto(
             binding.playPauseButton,
-            ThemeStore.accentColor(requireContext()),
+            accentColor(),
             false
         )
         binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())

@@ -26,25 +26,23 @@
             android:textSize="12sp"
             tools:text="@tools:sample/date/hhmmss" />
 
-        <com.google.android.material.slider.Slider
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
-            style="@style/Widget.Retro.Slider"
+            style="@style/MusicProgressSlider"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:haloRadius="0dp"
-            app:trackHeight="20dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical|end"
-            android:paddingEnd="8dp"
-            android:paddingStart="0dp"
+            android:paddingRight="8dp"
             android:singleLine="true"
             android:textColor="?colorOnSecondary"
             android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="@tools:sample/date/hhmmss" />
 
     </LinearLayout>
