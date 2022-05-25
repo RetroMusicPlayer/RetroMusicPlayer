@@ -359,6 +359,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
         animate: Boolean = false,
         hideBottomSheet: Boolean = MusicPlayerRemote.playingQueue.isEmpty(),
     ) {
+        if (!ViewCompat.isLaidOut(bottomNavigationView)) {
+            return
+        }
         if (isInOneTabMode) {
             hideBottomSheet(
                 hide = hideBottomSheet,
