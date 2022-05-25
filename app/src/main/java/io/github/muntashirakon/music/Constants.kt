@@ -18,20 +18,12 @@ import android.provider.BaseColumns
 import android.provider.MediaStore
 
 object Constants {
-    const val RATE_ON_GOOGLE_PLAY =
-        "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
     const val TRANSLATE = "https://crowdin.com/project/retromusicplayer"
-    const val WEBSITE = "https://retromusic.app"
     const val GITHUB_PROJECT = "https://github.com/MuntashirAkon/Metro"
     const val TELEGRAM_CHANGE_LOG = "https://t.me/AppManagerChannel"
     const val USER_PROFILE = "profile.jpg"
     const val USER_BANNER = "banner.jpg"
-    const val APP_INSTAGRAM_LINK = "https://www.instagram.com/retromusicapp/"
-    const val APP_TELEGRAM_LINK = "https://t.me/retromusicapp/"
-    const val APP_TWITTER_LINK = "https://twitter.com/retromusicapp"
     const val FAQ_LINK = "https://github.com/MuntashirAkon/Metro/blob/master/FAQ.md"
-    const val PINTEREST = "https://in.pinterest.com/retromusicapp/"
-    const val AUDIO_SCROBBLER_URL = "https://ws.audioscrobbler.com/2.0/"
 
     const val IS_MUSIC =
         MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"
@@ -130,7 +122,6 @@ const val LAST_SLEEP_TIMER_VALUE = "last_sleep_timer_value"
 const val NEXT_SLEEP_TIMER_ELAPSED_REALTIME = "next_sleep_timer_elapsed_real_time"
 const val IGNORE_MEDIA_STORE_ARTWORK = "ignore_media_store_artwork"
 const val LAST_CHANGELOG_VERSION = "last_changelog_version"
-const val AUTO_DOWNLOAD_IMAGES_POLICY = "auto_download_images_policy"
 const val START_DIRECTORY = "start_directory"
 const val RECENTLY_PLAYED_CUTOFF = "recently_played_interval"
 const val LOCK_SCREEN = "lock_screen"

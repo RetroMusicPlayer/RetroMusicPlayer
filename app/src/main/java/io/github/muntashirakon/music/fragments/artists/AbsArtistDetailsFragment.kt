@@ -13,9 +13,7 @@ import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
-import androidx.core.text.parseAsHtml
 import androidx.core.view.doOnPreDraw
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -39,8 +37,6 @@ import io.github.muntashirakon.music.interfaces.IAlbumClickListener
 import io.github.muntashirakon.music.interfaces.ICabCallback
 import io.github.muntashirakon.music.interfaces.ICabHolder
 import io.github.muntashirakon.music.model.Artist
-import io.github.muntashirakon.music.network.Result
-import io.github.muntashirakon.music.network.model.LastFmArtist
 import io.github.muntashirakon.music.repository.RealRepository
 import io.github.muntashirakon.music.util.*
 import com.afollestad.materialcab.attached.AttachedCab
@@ -67,8 +63,6 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: HorizontalAlbumAdapter
     private var forceDownload: Boolean = false
-    private var lang: String? = null
-    private var biography: Spanned? = null
 
     private val savedSongSortOrder: String
         get() = PreferenceUtil.artistDetailSongSortOrder
@@ -105,14 +99,6 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(artist.songs, true) }
         }
 
-        binding.fragmentArtistContent.biographyText.setOnClickListener {
-            if (binding.fragmentArtistContent.biographyText.maxLines == 4) {
-                binding.fragmentArtistContent.biographyText.maxLines = Integer.MAX_VALUE
-            } else {
-                binding.fragmentArtistContent.biographyText.maxLines = 4
-            }
-        }
-
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (!handleBackPress()) {
                 remove()
@@ -146,9 +132,6 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         }
         this.artist = artist
         loadArtistImage(artist)
-        if (PreferenceUtil.isAllowedToDownloadMetadata(requireContext())) {
-            loadBiography(artist.name)
-        }
         binding.artistTitle.text = artist.name
         binding.text.text = String.format(
             "%s • %s",
@@ -169,51 +152,6 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         binding.fragmentArtistContent.albumTitle.text = albumText
         songAdapter.swapDataSet(artist.sortedSongs)
         albumAdapter.swapDataSet(artist.albums)
-    }
-
-    private fun loadBiography(
-        name: String,
-        lang: String? = Locale.getDefault().language,
-    ) {
-        biography = null
-        this.lang = lang
-        detailsViewModel.getArtistInfo(name, lang, null)
-            .observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Result.Loading -> println("Loading")
-                    is Result.Error -> println("Error")
-                    is Result.Success -> artistInfo(result.data)
-                }
-            }
-    }
-
-    private fun artistInfo(lastFmArtist: LastFmArtist?) {
-        if (lastFmArtist != null && lastFmArtist.artist != null && lastFmArtist.artist.bio != null) {
-            val bioContent = lastFmArtist.artist.bio.content
-            if (bioContent != null && bioContent.trim { it <= ' ' }.isNotEmpty()) {
-                binding.fragmentArtistContent.run {
-                    biographyText.isVisible = true
-                    biographyTitle.isVisible = true
-                    biography = bioContent.parseAsHtml()
-                    biographyText.text = biography
-                    if (lastFmArtist.artist.stats.listeners.isNotEmpty()) {
-                        listeners.show()
-                        listenersLabel.show()
-                        scrobbles.show()
-                        scrobblesLabel.show()
-                        listeners.text =
-                            RetroUtil.formatValue(lastFmArtist.artist.stats.listeners.toFloat())
-                        scrobbles.text =
-                            RetroUtil.formatValue(lastFmArtist.artist.stats.playcount.toFloat())
-                    }
-                }
-            }
-        }
-
-        // If the "lang" parameter is set and no biography is given, retry with default language
-        if (biography == null && lang != null) {
-            loadBiography(artist.name, null)
-        }
     }
 
     private fun loadArtistImage(artist: Artist) {

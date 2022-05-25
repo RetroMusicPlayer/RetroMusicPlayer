@@ -88,11 +88,7 @@ dependencies {
     implementation "androidx.core:core-splashscreen:1.0.0-beta02"
 
     implementation "com.google.android.material:material:$mdc_version"
-
-    def retrofit_version = '2.9.0'
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7'
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     def material_dialog_version = "3.3.0"
     implementation "com.afollestad.material-dialogs:core:$material_dialog_version"
@@ -114,7 +110,6 @@ dependencies {
     def glide_version = '4.13.2'
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
-    implementation "com.github.bumptech.glide:okhttp3-integration:$glide_version"
 
     implementation 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0'
 
@@ -125,7 +120,6 @@ dependencies {
 
     implementation "dev.chrisbanes.insetter:insetter:0.6.1"
 
-    implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
     implementation 'com.github.Adonai:jaudiotagger:2.3.15'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:2.0.0'

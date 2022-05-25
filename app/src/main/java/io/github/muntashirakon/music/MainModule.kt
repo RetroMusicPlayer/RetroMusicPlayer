@@ -14,10 +14,6 @@ import io.github.muntashirakon.music.fragments.artists.ArtistDetailsViewModel
 import io.github.muntashirakon.music.fragments.genres.GenreDetailsViewModel
 import io.github.muntashirakon.music.fragments.playlists.PlaylistDetailsViewModel
 import io.github.muntashirakon.music.model.Genre
-import io.github.muntashirakon.music.network.provideDefaultCache
-import io.github.muntashirakon.music.network.provideLastFmRest
-import io.github.muntashirakon.music.network.provideLastFmRetrofit
-import io.github.muntashirakon.music.network.provideOkHttp
 import io.github.muntashirakon.music.repository.*
 import io.github.muntashirakon.music.util.FilePathUtil
 import kotlinx.coroutines.Dispatchers.IO
@@ -27,22 +23,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
-
-val networkModule = module {
-
-    factory {
-        provideDefaultCache()
-    }
-    factory {
-        provideOkHttp(get(), get())
-    }
-    single {
-        provideLastFmRetrofit(get())
-    }
-    single {
-        provideLastFmRest(get())
-    }
-}
 
 private val roomModule = module {
 
@@ -107,7 +87,6 @@ private val mainModule = module {
 private val dataModule = module {
     single {
         RealRepository(
-            get(),
             get(),
             get(),
             get(),
@@ -200,4 +179,4 @@ private val viewModules = module {
     }
 }
 
-val appModules = listOf(mainModule, dataModule, autoModule, viewModules, networkModule, roomModule)
+val appModules = listOf(mainModule, dataModule, autoModule, viewModules, roomModule)

@@ -1,11 +1,7 @@
 package io.github.muntashirakon.music.util
 
-import android.content.Context
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import androidx.core.content.edit
-import androidx.core.content.getSystemService
 import androidx.core.content.res.use
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
@@ -114,12 +110,6 @@ object PreferenceUtil {
         set(value) = sharedPreferences.edit {
             putString(SAF_SDCARD_URI, value)
         }
-
-    val autoDownloadImagesPolicy
-        get() = sharedPreferences.getStringOrDefault(
-            AUTO_DOWNLOAD_IMAGES_POLICY,
-            "only_wifi"
-        )
 
     var albumArtistsOnly
         get() = sharedPreferences.getBoolean(
@@ -335,26 +325,6 @@ object PreferenceUtil {
         )
 
     val isLockScreen get() = sharedPreferences.getBoolean(LOCK_SCREEN, false)
-
-    fun isAllowedToDownloadMetadata(context: Context): Boolean {
-        return when (autoDownloadImagesPolicy) {
-            "always" -> true
-            "only_wifi" -> {
-                val connectivityManager = context.getSystemService<ConnectivityManager>()
-                if (VersionUtils.hasMarshmallow()) {
-                    val network = connectivityManager?.activeNetwork
-                    val capabilities = connectivityManager?.getNetworkCapabilities(network)
-                    capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-                } else {
-                    val netInfo = connectivityManager?.activeNetworkInfo
-                    netInfo != null && netInfo.type == ConnectivityManager.TYPE_WIFI && netInfo.isConnectedOrConnecting
-                }
-            }
-            "never" -> false
-            else -> false
-        }
-    }
-
 
     var lyricsOption
         get() = sharedPreferences.getInt(LYRICS_OPTIONS, 1)

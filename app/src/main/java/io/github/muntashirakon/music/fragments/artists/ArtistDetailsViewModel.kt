@@ -17,8 +17,6 @@ package io.github.muntashirakon.music.fragments.artists
 import androidx.lifecycle.*
 import io.github.muntashirakon.music.interfaces.IMusicServiceEventListener
 import io.github.muntashirakon.music.model.Artist
-import io.github.muntashirakon.music.network.Result
-import io.github.muntashirakon.music.network.model.LastFmArtist
 import io.github.muntashirakon.music.repository.RealRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -43,16 +41,6 @@ class ArtistDetailsViewModel(
     }
 
     fun getArtist(): LiveData<Artist> = artistDetails
-
-    fun getArtistInfo(
-        name: String,
-        lang: String?,
-        cache: String?
-    ): LiveData<Result<LastFmArtist>> = liveData(IO) {
-        emit(Result.Loading)
-        val info = realRepository.artistInfo(name, lang, cache)
-        emit(info)
-    }
 
     override fun onMediaStoreChanged() {
         fetchArtist()

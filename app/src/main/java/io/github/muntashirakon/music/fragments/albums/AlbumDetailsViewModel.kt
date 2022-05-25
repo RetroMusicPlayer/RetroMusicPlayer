@@ -18,8 +18,6 @@ import androidx.lifecycle.*
 import io.github.muntashirakon.music.interfaces.IMusicServiceEventListener
 import io.github.muntashirakon.music.model.Album
 import io.github.muntashirakon.music.model.Artist
-import io.github.muntashirakon.music.network.Result
-import io.github.muntashirakon.music.network.model.LastFmAlbum
 import io.github.muntashirakon.music.repository.RealRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -50,11 +48,6 @@ class AlbumDetailsViewModel(
     fun getAlbumArtist(artistName: String): LiveData<Artist> = liveData(IO) {
         val artist = repository.albumArtistByName(artistName)
         emit(artist)
-    }
-
-    fun getAlbumInfo(album: Album): LiveData<Result<LastFmAlbum>> = liveData(IO) {
-        emit(Result.Loading)
-        emit(repository.albumInfo(album.artistName, album.title))
     }
 
     fun getMoreAlbums(artist: Artist): LiveData<List<Album>> = liveData(IO) {

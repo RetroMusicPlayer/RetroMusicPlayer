@@ -10,11 +10,4 @@
         android:title="@string/pref_title_ignore_media_store_artwork"
         app:icon="@drawable/ic_image" />
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
-        android:defaultValue="always"
-        android:entries="@array/pref_auto_download_images_titles"
-        android:entryValues="@array/pref_auto_download_images_values"
-        android:key="auto_download_images_policy"
-        android:layout="@layout/list_item_view"
-        android:title="@string/pref_title_auto_download_artist_images" />
 </androidx.preference.PreferenceScreen>
