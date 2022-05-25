@@ -44,7 +44,6 @@ class SimpleSongAdapter(
         val trackAndTime = (if (fixedTrackNumber > 0) "$fixedTrackNumber | " else "") +
                 MusicUtil.getReadableDurationString(dataSet[position].duration)
 
-        holder.imageText?.visibility = View.GONE
         holder.time?.text = trackAndTime
         holder.text2?.text = dataSet[position].artistName
     }

@@ -4,44 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_song_height"
-    android:layout_marginStart="2dp"
-    android:layout_marginEnd="2dp"
+    android:layout_marginVertical="2dp"
+    android:layout_marginHorizontal="2dp"
     android:background="?rectSelector"
     android:clickable="true"
     android:focusable="true"
     android:orientation="horizontal">
 
-    <FrameLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/imageContainer"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="0"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:scaleType="centerCrop"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/imageText"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:maxLines="1"
-            android:minHeight="40dp"
-            android:textAppearance="@style/TextViewNormal"
-            android:textColor="?android:attr/textColorSecondary"
-            tools:text="@tools:sample/us_zipcodes" />
-    </FrameLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="8dp"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:paddingTop="8dp"
         android:textAppearance="@style/TextViewBody2"
         app:layout_constraintEnd_toStartOf="@+id/menu"
         app:layout_constraintStart_toEndOf="@+id/imageContainer"
@@ -53,6 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="8dp"
         android:maxLines="1"
         android:textAppearance="@style/TextViewCaption"
         app:layout_constraintStart_toEndOf="@id/imageContainer"
@@ -64,6 +68,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="8dp"
         android:maxLines="1"
         android:textAppearance="@style/TextViewCaption"
         app:layout_constraintEnd_toStartOf="@id/menu"
