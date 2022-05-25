@@ -1,0 +1,3 @@
+- Display song images along in the artist and album details pages
+- Removed the Internet permissions and all the associated features
+- Fixed crashing occurs during changing screen orientation
