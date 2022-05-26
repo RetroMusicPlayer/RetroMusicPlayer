@@ -119,6 +119,11 @@ fun BottomNavigationView.show() {
 fun BottomNavigationView.hide() {
     if (isGone) return
 
+    if (!isLaidOut) {
+        isGone = true
+        return
+    }
+
     val drawable = BitmapDrawable(context.resources, drawToBitmap())
     val parent = parent as ViewGroup
     drawable.setBounds(left, top, right, bottom)
