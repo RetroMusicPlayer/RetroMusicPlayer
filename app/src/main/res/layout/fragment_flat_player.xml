@@ -18,20 +18,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/shadow_statusbar_toolbar" />
+    <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <FrameLayout
-        android:id="@+id/statusBarContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include layout="@layout/status_bar" />
-    </FrameLayout>
+    <include layout="@layout/status_bar" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
@@ -41,9 +30,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusBarContainer"
+        app:layout_constraintTop_toBottomOf="@+id/status_bar"
         tools:layout="@layout/fragment_album_flat_cover" />
-
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"
@@ -60,7 +48,8 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/playerToolbar"
         style="@style/Toolbar"
-        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

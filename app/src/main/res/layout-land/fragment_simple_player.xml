@@ -4,21 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
@@ -27,12 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/status_bar" />
-        </FrameLayout>
+        <include layout="@layout/status_bar" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,17 +50,13 @@
                     android:layout_weight="1"
                     tools:layout="@layout/fragment_simple_controls_fragment" />
 
-                <FrameLayout
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/playerToolbar"
+                    style="@style/Toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0">
-
-                    <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/playerToolbar"
-                        style="@style/Toolbar"
-                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
-                </FrameLayout>
+                    android:layout_weight="0"
+                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

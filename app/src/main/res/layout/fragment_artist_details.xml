@@ -11,8 +11,8 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:liftOnScroll="true"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true">
 
         <FrameLayout
             android:id="@+id/toolbar_container"
@@ -22,6 +22,8 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black" />
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -101,7 +103,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

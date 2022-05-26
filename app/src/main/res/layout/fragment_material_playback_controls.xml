@@ -50,7 +50,6 @@
         app:layout_constraintTop_toTopOf="@id/progressSlider"
         tools:text="@tools:sample/date/hhmmss" />
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -184,7 +183,6 @@
         app:srcCompat="@drawable/ic_shuffle_sharp"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
-
 
     <FrameLayout
         android:id="@+id/volumeFragmentContainer"

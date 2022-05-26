@@ -16,6 +16,7 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
+        android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         app:layout_collapseMode="pin"
         app:navigationIcon="@drawable/ic_search"
@@ -25,5 +26,5 @@
     <FrameLayout
         android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 </com.google.android.material.appbar.CollapsingToolbarLayout>

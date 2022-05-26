@@ -15,7 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTotalTime"
         android:layout_width="wrap_content"
@@ -94,7 +93,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/playerToolbar"
             style="@style/Toolbar"
-            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

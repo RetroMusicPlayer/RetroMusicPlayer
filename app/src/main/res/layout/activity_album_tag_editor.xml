@@ -17,6 +17,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/action_tag_editor" />
 
@@ -26,8 +28,8 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:overScrollMode="@integer/overScrollMode">
+        android:overScrollMode="@integer/overScrollMode"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"

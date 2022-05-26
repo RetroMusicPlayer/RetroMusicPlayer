@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:transitionGroup="true"
     android:transitionName="@string/transition_album_art"
-    tools:ignore="UnusedAttribute"
-    android:transitionGroup="true">
+    tools:ignore="UnusedAttribute">
 
     <FrameLayout
         android:id="@+id/toolbar_container"
@@ -21,6 +21,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black" />
     </FrameLayout>
 

@@ -15,13 +15,6 @@
         app:srcCompat="@color/black_color" />
 
     <View
-        android:id="@+id/mask"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/md_black_1000"
-        android:visibility="gone" />
-
-    <View
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shadow_up_edited" />
@@ -70,18 +63,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <FrameLayout
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/playerToolbar"
+                    style="@style/Toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0">
-
-                    <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/playerToolbar"
-                        style="@style/Toolbar"
-                        android:layout_height="48dp"
-                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
-                </FrameLayout>
+                    android:layout_height="48dp"
+                    android:layout_weight="0"
+                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

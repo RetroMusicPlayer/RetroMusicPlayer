@@ -7,6 +7,8 @@
     android:clickable="true"
     android:focusable="true">
 
+    <include layout="@layout/status_bar" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
@@ -29,7 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"
         android:name="code.name.monkey.retromusic.fragments.player.full.FullPlaybackControlsFragment"
@@ -49,31 +50,19 @@
         app:layout_constraintBottom_toBottomOf="@id/playerToolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/statusBarContainer" />
-
-    <FrameLayout
-        android:id="@+id/statusBarContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include layout="@layout/status_bar" />
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="@id/status_bar" />
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/playerToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
         android:paddingBottom="24dp"
         app:contentInsetEndWithActions="0dp"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/statusBarContainer"
+        app:layout_constraintTop_toBottomOf="@id/status_bar"
         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
         app:titleMargin="0dp"
         app:titleMargins="0dp">

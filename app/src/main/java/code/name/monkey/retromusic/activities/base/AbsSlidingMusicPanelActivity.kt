@@ -200,7 +200,18 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             TOGGLE_ADD_CONTROLS -> {
                 miniPlayerFragment?.setUpButtons()
             }
-            NOW_PLAYING_SCREEN_ID, ALBUM_COVER_TRANSFORM, CAROUSEL_EFFECT,
+            NOW_PLAYING_SCREEN_ID -> {
+                binding.slidingPanel.updateLayoutParams<ViewGroup.LayoutParams> {
+                    height = if (nowPlayingScreen != Peek) {
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                    } else {
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    }
+                    chooseFragmentForTheme()
+                    onServiceConnected()
+                }
+            }
+            ALBUM_COVER_TRANSFORM, CAROUSEL_EFFECT,
             ALBUM_COVER_STYLE, TOGGLE_VOLUME, EXTRA_SONG_INFO, CIRCLE_PLAY_BUTTON,
             -> {
                 chooseFragmentForTheme()
@@ -458,7 +469,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                     } else {
                         bottomSheetBehavior.peekHeight = heightOfBarWithTabs
                     }
-                    libraryViewModel.setFabMargin(this, dip(R.dimen.mini_player_height_expanded))
+                    libraryViewModel.setFabMargin(this,
+                        dip(R.dimen.mini_player_height_expanded))
                 } else {
                     logD("Details")
                     if (animate) {
