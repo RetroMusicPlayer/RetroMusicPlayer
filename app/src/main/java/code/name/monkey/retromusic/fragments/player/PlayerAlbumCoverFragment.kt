@@ -183,7 +183,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     override fun onPlayingMetaChanged() {
         logD("Playing Meta Changed")
-        binding.viewPager.currentItem = MusicPlayerRemote.position
+        viewPager.setCurrentItem(MusicPlayerRemote.position, true)
         updateLyrics()
     }
 
@@ -255,7 +255,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         binding.viewPager.apply {
             adapter = AlbumCoverPagerAdapter(childFragmentManager, MusicPlayerRemote.playingQueue)
             adapter?.notifyDataSetChanged()
-            currentItem = MusicPlayerRemote.position
+            setCurrentItem(MusicPlayerRemote.position, true)
             onPageSelected(MusicPlayerRemote.position)
         }
     }
