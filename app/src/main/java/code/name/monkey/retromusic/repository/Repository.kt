@@ -28,6 +28,8 @@ import code.name.monkey.retromusic.network.Result.*
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.logD
+import code.name.monkey.retromusic.util.logE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -103,7 +105,6 @@ interface Repository {
     suspend fun clearSongHistory()
     suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
-    suspend fun blackListPaths(): List<BlackListStoreEntity>
     suspend fun deleteSongs(songs: List<Song>)
     suspend fun contributor(): List<Contributor>
     suspend fun searchArtists(query: String): List<Artist>
@@ -195,7 +196,7 @@ class RealRepository(
         return try {
             Success(lastFMService.artistInfo(name, lang, cache))
         } catch (e: Exception) {
-            println(e)
+            logE(e)
             Error(e)
         }
     }
@@ -208,7 +209,7 @@ class RealRepository(
             val lastFmAlbum = lastFMService.albumInfo(artist, album)
             Success(lastFmAlbum)
         } catch (e: Exception) {
-            println(e)
+            logE(e)
             Error(e)
         }
     }
@@ -228,7 +229,7 @@ class RealRepository(
         )
         for (section in sections) {
             if (section.arrayList.isNotEmpty()) {
-                println("${section.homeSection} -> ${section.arrayList.size}")
+                logD("${section.homeSection} -> ${section.arrayList.size}")
                 homeSections.add(section)
             }
         }
@@ -345,9 +346,6 @@ class RealRepository(
     override suspend fun playCountSongs(): List<PlayCountEntity> =
         roomRepository.playCountSongs()
 
-    override suspend fun blackListPaths(): List<BlackListStoreEntity> =
-        roomRepository.blackListPaths()
-
     override fun observableHistorySongs(): LiveData<List<Song>> =
         Transformations.map(roomRepository.observableHistorySongs()) {
             it.fromHistoryToSongs()
@@ -381,7 +379,6 @@ class RealRepository(
     }
 
     override suspend fun suggestions(): List<Song> {
-        if (!PreferenceUtil.homeSuggestions) return listOf()
         return NotPlayedPlaylist().songs().shuffled().takeIf {
             it.size > 9
         } ?: emptyList()

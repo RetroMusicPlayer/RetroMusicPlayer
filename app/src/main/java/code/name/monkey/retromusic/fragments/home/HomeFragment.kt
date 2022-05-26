@@ -47,6 +47,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.userName
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -221,7 +222,7 @@ class HomeFragment :
     }
 
     private fun loadSuggestions(songs: List<Song>) {
-        if (songs.isEmpty()) {
+        if (!PreferenceUtil.homeSuggestions || songs.isEmpty()) {
             binding.suggestions.root.isVisible = false
             return
         }
@@ -277,7 +278,7 @@ class HomeFragment :
     override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> findNavController().navigate(
-                R.id.settingsActivity,
+                R.id.settings_fragment,
                 null,
                 navOptions
             )

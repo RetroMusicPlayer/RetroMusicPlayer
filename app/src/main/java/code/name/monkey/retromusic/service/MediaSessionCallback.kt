@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.service
 
-import android.content.Context
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.media.session.MediaSessionCompat
@@ -31,6 +30,8 @@ import code.name.monkey.retromusic.service.MusicService.Companion.CYCLE_REPEAT
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_SHUFFLE
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.logD
+import code.name.monkey.retromusic.util.logE
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -39,7 +40,6 @@ import org.koin.core.component.inject
  */
 
 class MediaSessionCallback(
-    private val context: Context,
     private val musicService: MusicService
 ) : MediaSessionCompat.Callback(), KoinComponent {
 
@@ -53,7 +53,7 @@ class MediaSessionCallback(
     override fun onPlayFromMediaId(mediaId: String?, extras: Bundle?) {
         super.onPlayFromMediaId(mediaId, extras)
         val musicId = AutoMediaIDHelper.extractMusicID(mediaId!!)
-        println(musicId)
+        logD(musicId)
         val itemId = musicId?.toLong() ?: -1
         val songs: ArrayList<Song> = ArrayList()
         when (val category = AutoMediaIDHelper.extractCategory(mediaId)) {
@@ -165,7 +165,7 @@ class MediaSessionCallback(
 
     override fun onSkipToPrevious() {
         super.onSkipToPrevious()
-        musicService.back(true)
+        musicService.playPreviousSong(true)
     }
 
     override fun onStop() {
@@ -190,11 +190,10 @@ class MediaSessionCallback(
                 musicService.updateMediaSessionPlaybackState()
             }
             TOGGLE_FAVORITE -> {
-                MusicUtil.toggleFavorite(context, MusicPlayerRemote.currentSong)
-                musicService.updateMediaSessionPlaybackState()
+                musicService.toggleFavorite()
             }
             else -> {
-                println("Unsupported action: $action")
+                logE("Unsupported action: $action")
             }
         }
     }

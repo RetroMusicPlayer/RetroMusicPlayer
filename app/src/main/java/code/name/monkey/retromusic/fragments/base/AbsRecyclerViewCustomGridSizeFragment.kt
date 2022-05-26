@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.logD
 import com.google.android.material.transition.MaterialFade
 
 abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
@@ -73,7 +74,7 @@ abstract class AbsRecyclerViewCustomGridSizeFragment<A : RecyclerView.Adapter<*>
 
     fun setAndSaveSortOrder(sortOrder: String) {
         this.sortOrder = sortOrder
-        println(sortOrder)
+        logD(sortOrder)
         saveSortOrder(sortOrder)
         setSortOrder(sortOrder)
     }

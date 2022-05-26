@@ -45,9 +45,9 @@ class MusicSeekSkipTouchListener(val activity: FragmentActivity, val next: Boole
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         val action = event?.actionMasked
-        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+        if (action == MotionEvent.ACTION_UP) {
             job?.cancel()
-            if (!wasSeeking) {
+            if (v?.isPressed == true && !wasSeeking) {
                 if (next) {
                     MusicPlayerRemote.playNextSong()
                 } else {
@@ -55,6 +55,8 @@ class MusicSeekSkipTouchListener(val activity: FragmentActivity, val next: Boole
                 }
             }
             wasSeeking = false
+        } else if (action == MotionEvent.ACTION_CANCEL) {
+            job?.cancel()
         }
         return gestureDetector.onTouchEvent(event)
     }

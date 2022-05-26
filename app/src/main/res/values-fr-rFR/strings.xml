@@ -54,19 +54,19 @@
     <string name="add_action">Ajouter</string>
     <string name="add_playlist_title">"Ajouter à la liste de lecture"</string>
     <string name="add_time_framed_lryics">Ajouter des paroles synchronisées</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$d</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"1 titre a été ajouté à la file d'attente."</string>
     <string name="added_x_titles_to_playing_queue">%1$d titres ont été ajoutés à la file d\'attente.</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Morceau</item>
-        <item quantity="other">Morceaux</item>
+        <item quantity="many">Morceaux</item>
     </plurals>
     <string name="album_artist">Artiste de l\'album</string>
     <string name="albums">Albums</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
-        <item quantity="other">Albums</item>
+        <item quantity="many">Albums</item>
     </plurals>
     <string name="always">Toujours</string>
     <string name="app_share">Hey, jetez un coup d\'œil à ce super lecteur de musique : https://play.google.com/store/apps/details?id=%s</string>

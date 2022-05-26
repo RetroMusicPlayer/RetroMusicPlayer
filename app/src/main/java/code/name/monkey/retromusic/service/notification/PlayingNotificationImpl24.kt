@@ -18,7 +18,6 @@ import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -39,19 +38,14 @@ import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
-import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @SuppressLint("RestrictedApi")
 class PlayingNotificationImpl24(
-    val context: Context,
-    mediaSessionToken: MediaSessionCompat.Token
+    val context: MusicService,
+    mediaSessionToken: MediaSessionCompat.Token,
 ) : PlayingNotification(context) {
 
     init {
@@ -184,14 +178,8 @@ class PlayingNotificationImpl24(
         mActions[2] = buildPlayAction(isPlaying)
     }
 
-    override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
-        GlobalScope.launch(Dispatchers.IO) {
-            val isFavorite = MusicUtil.repository.isSongFavorite(song.id)
-            withContext(Dispatchers.Main) {
-                mActions[0] = buildFavoriteAction(isFavorite)
-                onUpdate()
-            }
-        }
+    override fun updateFavorite(isFavorite: Boolean) {
+        mActions[0] = buildFavoriteAction(isFavorite)
     }
 
     private fun retrievePlaybackAction(action: String): PendingIntent {
@@ -208,9 +196,9 @@ class PlayingNotificationImpl24(
     companion object {
 
         fun from(
-            context: Context,
+            context: MusicService,
             notificationManager: NotificationManager,
-            mediaSession: MediaSessionCompat
+            mediaSession: MediaSessionCompat,
         ): PlayingNotification {
             if (VersionUtils.hasOreo()) {
                 createNotificationChannel(context, notificationManager)

@@ -55,25 +55,20 @@ class Factory(
     val context: Context
 ) : ModelLoaderFactory<ArtistImage, InputStream> {
 
-    private var deezerService: DeezerService
-    private var okHttp: OkHttpClient
+    private var deezerService = DeezerService.invoke(
+        DeezerService.createDefaultOkHttpClient(context)
+            .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+            .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+            .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+            .addInterceptor(createLogInterceptor())
+            .build()
+    )
 
-    init {
-        okHttp =
-            OkHttpClient.Builder()
-                .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .build()
-        deezerService = DeezerService.invoke(
-            DeezerService.createDefaultOkHttpClient(context)
-                .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(createLogInterceptor())
-                .build()
-        )
-    }
+    private var okHttp = OkHttpClient.Builder()
+        .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+        .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+        .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+        .build()
 
     private fun createLogInterceptor(): Interceptor {
         val interceptor = HttpLoggingInterceptor()

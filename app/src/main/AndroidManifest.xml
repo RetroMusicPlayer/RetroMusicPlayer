@@ -23,7 +23,10 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="com.android.vending.BILLING" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_CONNECT"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" />
 
     <application
         android:name=".App"
@@ -113,7 +116,6 @@
                 <data android:mimeType="vnd.android.cursor.dir/audio" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.tageditor.AlbumTagEditorActivity" />
         <activity android:name=".activities.tageditor.SongTagEditorActivity" />
         <activity android:name=".activities.SupportDevelopmentActivity" />
@@ -123,7 +125,10 @@
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
         <activity android:name=".activities.PermissionActivity" />
-        <activity android:name=".activities.LockScreenActivity" />
+        <activity
+            android:name=".activities.LockScreenActivity"
+            android:launchMode="singleTop"
+            android:showOnLockScreen="true" />
         <activity
             android:name=".fragments.backup.RestoreActivity"
             android:excludeFromRecents="false"
@@ -171,36 +176,12 @@
             android:theme="@style/Theme.Intro" />
 
         <activity
-            android:name=".cast.ExpandedControlsActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
-        </activity>
-
-        <activity
             android:name=".activities.ErrorActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="cat.ereza.customactivityoncrash.RESTART" />
             </intent-filter>
         </activity>
-
-        <provider
-            android:name=".misc.GenericFileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
 
         <provider
             android:name="androidx.core.content.FileProvider"

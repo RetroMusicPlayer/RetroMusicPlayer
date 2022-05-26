@@ -24,6 +24,7 @@ import android.view.View
 import android.webkit.MimeTypeMap
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.widget.Toolbar
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -66,7 +67,6 @@ import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
 import com.afollestad.materialcab.createCab
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.Dispatchers
@@ -83,6 +83,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     LoaderManager.LoaderCallbacks<List<File>>, StorageClickListener {
     private var _binding: FragmentFolderBinding? = null
     private val binding get() = _binding!!
+
+    val toolbar: Toolbar get() = binding.appBarLayout.toolbar
+
     private var adapter: SongFileAdapter? = null
     private var storageAdapter: StorageAdapter? = null
     private var cab: AttachedCab? = null
@@ -100,7 +103,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentFolderBinding.bind(view)
         mainActivity.addMusicServiceEventListener(libraryViewModel)
-        mainActivity.setSupportActionBar(binding.toolbar)
+        mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         enterTransition = MaterialFadeThrough()
         reenterTransition = MaterialFadeThrough()
@@ -119,16 +122,13 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                     }
                 }
             })
-        binding.toolbarContainer.drawNextToNavbar()
-        binding.appBarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     private fun setUpTitle() {
-        binding.toolbar.setNavigationOnClickListener {
+        toolbar.setNavigationOnClickListener {
             findNavController().navigate(R.id.action_search, null, navOptions)
         }
-        binding.appNameText.text = resources.getString(R.string.folders)
+        binding.appBarLayout.title = resources.getString(R.string.folders)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -185,7 +185,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         lifecycleScope.launch(Dispatchers.IO) {
                             listSongs(
                                 requireContext(),
-                                toList(file),
+                                listOf(file),
                                 AUDIO_FILE_FILTER,
                                 fileComparator
                             ) { songs ->
@@ -226,7 +226,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         lifecycleScope.launch(Dispatchers.IO) {
                             listSongs(
                                 requireContext(),
-                                toList(file),
+                                listOf(file),
                                 AUDIO_FILE_FILTER,
                                 fileComparator
                             ) { songs ->
@@ -264,7 +264,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             lifecycleScope.launch(Dispatchers.IO) {
                 listSongs(
                     requireContext(),
-                    toList(mFile.parentFile),
+                    listOf(mFile.parentFile),
                     fileFilter,
                     fileComparator
                 ) { songs ->
@@ -332,7 +332,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     override fun onPrepareMenu(menu: Menu) {
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
     }
 
     override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
@@ -346,8 +346,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         menu.removeItem(R.id.action_layout_type)
         menu.removeItem(R.id.action_sort_order)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
-            requireContext(), binding.toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(
-                binding.toolbar
+            requireContext(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(
+                toolbar
             )
         )
     }
@@ -374,7 +374,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             }
             R.id.action_settings -> {
                 findNavController().navigate(
-                    R.id.settingsActivity,
+                    R.id.settings_fragment,
                     null,
                     navOptions
                 )
@@ -501,12 +501,6 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         )
     }
 
-    private fun toList(file: File): ArrayList<File> {
-        val files = ArrayList<File>(1)
-        files.add(file)
-        return files
-    }
-
     private fun updateAdapter(files: List<File>) {
         adapter?.swapDataSet(files)
         val crumb = activeCrumb
@@ -578,7 +572,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     suspend fun listSongs(
         context: Context,
-        files: List<File>,
+        files: List<File?>,
         fileFilter: FileFilter,
         fileComparator: Comparator<File>,
         doOnSongsListed: (songs: List<Song>) -> Unit

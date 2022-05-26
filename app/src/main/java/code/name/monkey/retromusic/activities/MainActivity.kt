@@ -15,18 +15,16 @@
 package code.name.monkey.retromusic.activities
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.contains
 import androidx.navigation.ui.setupWithNavController
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
-import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
 import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.fragments.settings.OnThemeChangedListener
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SearchQueryHelper.getSongs
 import code.name.monkey.retromusic.interfaces.IScrollHelper
@@ -36,18 +34,15 @@ import code.name.monkey.retromusic.repository.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.logE
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
-class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
+class MainActivity : AbsCastActivity(), OnThemeChangedListener {
     companion object {
         const val TAG = "MainActivity"
         const val EXPAND_PANEL = "expand_panel"
-    }
-
-    override fun createContentView(): SlidingMusicPanelLayoutBinding {
-        return wrapSlidingMusicPanel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,9 +53,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         AppRater.appLaunched(this)
 
         setupNavigationController()
-        if (!hasPermissions()) {
-            findNavController(R.id.fragment_container).navigate(R.id.permissionFragment)
-        }
+
         WhatsNewFragment.showChangeLog(this)
     }
 
@@ -137,20 +130,18 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
+    override fun onThemeValuesChanged() {
+        restart()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        PreferenceUtil.unregisterOnSharedPreferenceChangedListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == GENERAL_THEME || key == MATERIAL_YOU || key == WALLPAPER_ACCENT || key == BLACK_THEME || key == ADAPTIVE_COLOR_APP || key == USER_NAME || key == TOGGLE_FULL_SCREEN || key == TOGGLE_VOLUME || key == ROUND_CORNERS || key == CAROUSEL_EFFECT || key == NOW_PLAYING_SCREEN_ID || key == TOGGLE_GENRE || key == BANNER_IMAGE_PATH || key == PROFILE_IMAGE_PATH || key == CIRCULAR_ALBUM_ART || key == KEEP_SCREEN_ON || key == TOGGLE_SEPARATE_LINE || key == TOGGLE_HOME_BANNER || key == TOGGLE_ADD_CONTROLS || key == ALBUM_COVER_STYLE || key == HOME_ARTIST_GRID_STYLE || key == ALBUM_COVER_TRANSFORM || key == DESATURATED_COLOR || key == EXTRA_SONG_INFO || key == TAB_TEXT_MODE || key == LANGUAGE_NAME || key == LIBRARY_CATEGORIES || key == CUSTOM_FONT || key == APPBAR_MODE || key == CIRCLE_PLAY_BUTTON || key == SWIPE_DOWN_DISMISS) {
-            postRecreate()
+    private fun restart() {
+        val savedInstanceState = Bundle().apply {
+            onSaveInstanceState(this)
         }
+        finish()
+        val intent = Intent(this, this::class.java).putExtra(TAG, savedInstanceState)
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
     override fun onServiceConnected() {
@@ -220,7 +211,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
     private fun parseLongFromIntent(
         intent: Intent,
         longKey: String,
-        stringKey: String
+        stringKey: String,
     ): Long {
         var id = intent.getLongExtra(longKey, -1)
         if (id < 0) {
@@ -229,7 +220,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                 try {
                     id = idString.toLong()
                 } catch (e: NumberFormatException) {
-                    println(e.message)
+                    logE(e)
                 }
             }
         }

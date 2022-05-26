@@ -20,7 +20,7 @@ class HomeImageLayout @JvmOverloads constructor(
     private var bannerImageBinding: BannerImageLayoutBinding? = null
 
     init {
-        if (PreferenceUtil.isHomeBanner) {
+        if (isInEditMode || PreferenceUtil.isHomeBanner) {
             bannerImageBinding = BannerImageLayoutBinding.inflate(LayoutInflater.from(context), this, true)
         } else {
             userImageBinding = UserImageLayoutBinding.inflate(LayoutInflater.from(context), this, true)

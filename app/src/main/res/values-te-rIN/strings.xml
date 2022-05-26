@@ -114,7 +114,7 @@
     <string name="create_action">సృష్టించు</string>
     <string name="created_playlist_x">ప్లేజాబితా%1$sసృష్టించబడింది.</string>
     <string name="credit_title">సభ్యులు మరియు సహాయకులు</string>
-    <string name="currently_listening_to_x_by_x">ప్రస్తుతం %2$s ద్వారా %1$d వింటున్నారు.</string>
+    <string name="currently_listening_to_x_by_x">ప్రస్తుతం %2$s ద్వారా %1$s వింటున్నారు.</string>
     <string name="dark_theme_name">కైండా డార్క్</string>
     <string name="delete_playlist_title">ప్లేజాబితాను తొలగించండి</string>
     <string name="delete_playlist_x"><![CDATA[<b>%1$s</b> ప్లేజాబితాను తొలగించాలా?]]></string>

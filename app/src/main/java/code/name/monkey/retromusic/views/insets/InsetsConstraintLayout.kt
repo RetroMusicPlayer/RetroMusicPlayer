@@ -12,7 +12,7 @@ class InsetsConstraintLayout @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
-        if (!RetroUtil.isLandscape)
+        if (!isInEditMode && !RetroUtil.isLandscape)
             drawAboveSystemBarsWithPadding()
     }
 }

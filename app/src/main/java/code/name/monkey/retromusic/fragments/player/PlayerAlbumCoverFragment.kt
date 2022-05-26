@@ -49,6 +49,7 @@ import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.LyricsType
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -115,6 +116,22 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPlayerAlbumCoverBinding.bind(view)
+        setupViewPager()
+        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
+        maybeInitLyrics()
+        lrcView.apply {
+            setDraggable(true) { time ->
+                MusicPlayerRemote.seekTo(time.toInt())
+                MusicPlayerRemote.resumePlaying()
+                true
+            }
+            setOnClickListener {
+                goToLyrics(requireActivity())
+            }
+        }
+    }
+
+    private fun setupViewPager() {
         binding.viewPager.addOnPageChangeListener(this)
         val nps = PreferenceUtil.nowPlayingScreen
 
@@ -140,18 +157,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 PreferenceUtil.albumCoverTransform
             )
         }
-        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
-        maybeInitLyrics()
-        lrcView.apply {
-            setDraggable(true) { time ->
-                MusicPlayerRemote.seekTo(time.toInt())
-                MusicPlayerRemote.resumePlaying()
-                true
-            }
-            setOnClickListener {
-                goToLyrics(requireActivity())
-            }
-        }
     }
 
     override fun onResume() {
@@ -171,29 +176,35 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     override fun onServiceConnected() {
+        logD("Service Connected")
         updatePlayingQueue()
         updateLyrics()
     }
 
     override fun onPlayingMetaChanged() {
-        binding.viewPager.currentItem = MusicPlayerRemote.position
+        logD("Playing Meta Changed")
+        viewPager.setCurrentItem(MusicPlayerRemote.position, true)
         updateLyrics()
     }
 
     override fun onQueueChanged() {
+        logD("Queue Changed")
         updatePlayingQueue()
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
-        if (key == SHOW_LYRICS) {
-            if (sharedPreferences.getBoolean(key, false)) {
-                maybeInitLyrics()
-            } else {
-                showLyrics(false)
-                progressViewUpdateHelper?.stop()
+        when (key) {
+            SHOW_LYRICS -> {
+                if (PreferenceUtil.showLyrics) {
+                    maybeInitLyrics()
+                } else {
+                    showLyrics(false)
+                    progressViewUpdateHelper?.stop()
+                }
             }
-        } else if (key == LYRICS_TYPE) {
-            maybeInitLyrics()
+            LYRICS_TYPE -> {
+                maybeInitLyrics()
+            }
         }
     }
 
@@ -244,7 +255,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         binding.viewPager.apply {
             adapter = AlbumCoverPagerAdapter(childFragmentManager, MusicPlayerRemote.playingQueue)
             adapter?.notifyDataSetChanged()
-            currentItem = MusicPlayerRemote.position
+            setCurrentItem(MusicPlayerRemote.position, true)
             onPageSelected(MusicPlayerRemote.position)
         }
     }

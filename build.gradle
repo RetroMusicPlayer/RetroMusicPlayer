@@ -4,7 +4,7 @@ buildscript {
     ext {
         kotlin_version = '1.6.21'
         navigation_version = '2.5.0-rc01'
-        mdc_version = '1.6.0'
+        mdc_version = '1.7.0-alpha02'
         preference_version = '1.2.0'
         appcompat_version = '1.4.1'
     }
@@ -14,10 +14,13 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.0'
+        classpath 'com.android.tools.build:gradle:7.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
     }
+}
+plugins {
+    id "com.github.ben-manes.versions" version "0.42.0"
 }
 task clean(type: Delete) {
     delete rootProject.buildDir

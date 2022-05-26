@@ -178,6 +178,7 @@
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
     <string name="error_empty_name">Your name can\'t be empty!</string>
     <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favorites</string>

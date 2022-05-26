@@ -20,6 +20,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.activities.ErrorActivity
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.WallpaperAccentManager
@@ -69,7 +70,7 @@ class App : Application() {
             })
 
         // setting Error activity
-        CaocConfig.Builder.create().errorActivity(ErrorActivity::class.java).apply()
+        CaocConfig.Builder.create().errorActivity(ErrorActivity::class.java).restartActivity(MainActivity::class.java).apply()
     }
 
     override fun onTerminate() {

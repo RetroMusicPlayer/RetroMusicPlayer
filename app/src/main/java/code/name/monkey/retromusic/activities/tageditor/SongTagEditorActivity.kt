@@ -38,6 +38,7 @@ import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
+import code.name.monkey.retromusic.util.logD
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.transition.Transition
@@ -102,7 +103,7 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.discNumberText.setText(discNumber)
         binding.lyricsText.setText(lyrics)
         binding.songComposerText.setText(composer)
-        println(songTitle + songYear)
+        logD(songTitle + songYear)
     }
 
     override fun loadCurrentImage() {

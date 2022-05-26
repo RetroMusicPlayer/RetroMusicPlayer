@@ -102,8 +102,6 @@ class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyri
                 null
             }
         }
-
-
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {

@@ -12,9 +12,9 @@ class AudioFader {
 
         @JvmStatic
         inline fun createFadeAnimator(
-            fadeIn: Boolean /* fadeIn -> true  fadeOut -> false*/,
+            fadeIn: Boolean, /* fadeIn -> true  fadeOut -> false*/
             mediaPlayer: MediaPlayer,
-            crossinline endAction: (animator: Animator) -> Unit /* Code to run when Animator Ends*/
+            crossinline endAction: (animator: Animator) -> Unit, /* Code to run when Animator Ends*/
         ): Animator? {
             val duration = PreferenceUtil.crossFadeDuration * 1000
             if (duration == 0) {
@@ -40,8 +40,8 @@ class AudioFader {
         @JvmStatic
         fun startFadeAnimator(
             playback: Playback,
-            fadeIn: Boolean /* fadeIn -> true  fadeOut -> false*/,
-            callback: Runnable /* Code to run when Animator Ends*/
+            fadeIn: Boolean, /* fadeIn -> true  fadeOut -> false*/
+            callback: Runnable, /* Code to run when Animator Ends*/
         ) {
             val duration = PreferenceUtil.audioFadeDuration.toLong()
             if (duration == 0L) {

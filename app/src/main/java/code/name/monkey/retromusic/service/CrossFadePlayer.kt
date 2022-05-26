@@ -2,26 +2,23 @@ package code.name.monkey.retromusic.service
 
 import android.animation.Animator
 import android.content.Context
-import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.PlaybackParams
-import android.media.audiofx.AudioEffect
 import android.os.PowerManager
 import android.util.Log
 import androidx.core.net.toUri
 import code.name.monkey.appthemehelper.util.VersionUtils.hasMarshmallow
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimator
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
-import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
-import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 import kotlinx.coroutines.*
 
 /** @author Prathamesh M */
@@ -124,18 +121,27 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     override val isPlaying: Boolean
         get() = mIsInitialized && getCurrentPlayer()?.isPlaying == true
 
-    override fun setDataSource(path: String, force: Boolean): Boolean {
+    override fun setDataSource(
+        song: Song,
+        force: Boolean,
+        completion: (success: Boolean) -> Unit,
+    ) {
         cancelFade()
         if (force) hasDataSource = false
         mIsInitialized = false
         /* We've already set DataSource if initialized is true in setNextDataSource */
         if (!hasDataSource) {
-            getCurrentPlayer()?.let { mIsInitialized = setDataSourceImpl(it, path) }
+            getCurrentPlayer()?.let {
+                setDataSourceImpl(it, song.uri.toString()) { success ->
+                    mIsInitialized = success
+                    completion(success)
+                }
+            }
             hasDataSource = true
         } else {
+            completion(true)
             mIsInitialized = true
         }
-        return mIsInitialized
     }
 
     override fun setNextDataSource(path: String?) {}
@@ -148,9 +154,9 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     private fun setDataSourceImpl(
         player: MediaPlayer,
         path: String,
-    ): Boolean {
+        completion: (success: Boolean) -> Unit,
+    ) {
         player.reset()
-        player.setOnPreparedListener(null)
         try {
             if (path.startsWith("content://")) {
                 player.setDataSource(context, path.toUri())
@@ -160,20 +166,17 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
             player.setAudioAttributes(
                 AudioAttributes.Builder().setLegacyStreamType(AudioManager.STREAM_MUSIC).build()
             )
-            player.prepare()
-            player.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
+            player.setOnPreparedListener {
+                player.setOnPreparedListener(null)
+                completion(true)
+            }
+            player.prepareAsync()
         } catch (e: Exception) {
+            completion(false)
             e.printStackTrace()
-            return false
         }
         player.setOnCompletionListener(this)
         player.setOnErrorListener(this)
-        val intent = Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION)
-        intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId)
-        intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.packageName)
-        intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
-        context.sendBroadcast(intent)
-        return true
     }
 
     override fun setAudioSessionId(sessionId: Int): Boolean {
@@ -315,15 +318,15 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
         }
     }
 
-
     fun onDurationUpdated(progress: Int, total: Int) {
         if (total > 0 && (total - progress).div(1000) == crossFadeDuration) {
             getNextPlayer()?.let { player ->
                 val nextSong = MusicPlayerRemote.nextSong
                 if (nextSong != null) {
-                    setDataSourceImpl(player, MusicUtil.getSongFileUri(nextSong.id).toString())
-                    // Switch to other player / Crossfade only if next song exists
-                    switchPlayer()
+                    setDataSourceImpl(player, nextSong.uri.toString()) { success ->
+                        // Switch to other player (Crossfade) only if next song exists
+                        if (success) switchPlayer()
+                    }
                 }
             }
         }
@@ -348,15 +351,8 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
 
     override fun setPlaybackSpeedPitch(speed: Float, pitch: Float) {
         getCurrentPlayer()?.setPlaybackSpeedPitch(speed, pitch)
-    }
-
-    private fun MediaPlayer.setPlaybackSpeedPitch(speed: Float, pitch: Float) {
-        if (hasMarshmallow()) {
-            val wasPlaying: Boolean = isPlaying
-            playbackParams = PlaybackParams().setSpeed(speed).setPitch(pitch)
-            if (!wasPlaying) {
-                if (isPlaying) pause()
-            }
+        if (getNextPlayer()?.isPlaying == true) {
+            getNextPlayer()?.setPlaybackSpeedPitch(speed, pitch)
         }
     }
 
@@ -366,3 +362,9 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
 }
 
 internal fun crossFadeScope(): CoroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+
+fun MediaPlayer.setPlaybackSpeedPitch(speed: Float, pitch: Float) {
+    if (hasMarshmallow()) {
+        playbackParams = PlaybackParams().setSpeed(speed).setPitch(pitch)
+    }
+}

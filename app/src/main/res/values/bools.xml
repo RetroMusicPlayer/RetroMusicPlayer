@@ -9,4 +9,5 @@
     <bool name="wallpaper_accent_visible">false</bool>
 
     <bool name="isNotOreo">true</bool>
+    <bool name="isMarshmallow">false</bool>
 </resources>
