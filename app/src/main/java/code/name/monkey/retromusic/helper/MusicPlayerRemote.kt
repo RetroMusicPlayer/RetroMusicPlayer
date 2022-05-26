@@ -28,7 +28,6 @@ import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
 import code.name.monkey.retromusic.util.logE
 import com.google.android.gms.cast.framework.CastSession
@@ -220,14 +219,9 @@ object MusicPlayerRemote : KoinComponent {
             ) && musicService != null
         ) {
             musicService?.openQueue(queue, startPosition, startPlaying)
-            if (PreferenceUtil.isShuffleModeOn)
-                setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
         }
     }
 
-    /**
-     * Async
-     */
     @JvmStatic
     fun openAndShuffleQueue(queue: List<Song>, startPlaying: Boolean) {
         var startPosition = 0
@@ -448,9 +442,11 @@ object MusicPlayerRemote : KoinComponent {
             if (songs != null && songs.isNotEmpty()) {
                 openQueue(songs, 0, true)
             } else {
-                // TODO the file is not listed in the media store
-                context.showToast(R.string.unplayable_file)
-                logE("The file is not listed in the media store")
+                try {
+                    context.showToast(R.string.unplayable_file)
+                } catch (e: Exception) {
+                    logE("The file is not listed in the media store")
+                }
             }
         }
     }

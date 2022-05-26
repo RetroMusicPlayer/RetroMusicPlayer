@@ -765,12 +765,12 @@ class MusicService : MediaBrowserServiceCompat(),
     fun openTrackAndPrepareNextAt(position: Int, completion: (success: Boolean) -> Unit) {
         this.position = position
         openCurrent { success ->
+            completion(success)
+            notifyChange(META_CHANGED)
+            notHandledMetaChangedForCurrentTrack = false
             if (success) {
                 prepareNextImpl()
             }
-            notifyChange(META_CHANGED)
-            notHandledMetaChangedForCurrentTrack = false
-            completion(success)
         }
     }
 
@@ -829,12 +829,14 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @Synchronized
     fun prepareNextImpl() {
+        val start = System.currentTimeMillis()
         try {
             val nextPosition = getNextPosition(false)
             playbackManager.setNextDataSource(getSongAt(nextPosition).uri.toString())
             this.nextPosition = nextPosition
         } catch (ignored: Exception) {
         }
+        println("Time Prepare Next: ${System.currentTimeMillis() - start}")
     }
 
     fun toggleFavorite() {
@@ -957,7 +959,6 @@ class MusicService : MediaBrowserServiceCompat(),
                     mediaSession?.setQueueTitle(getString(R.string.now_playing_queue))
                     mediaSession?.setQueue(playingQueue.toMediaSessionQueue())
                 }
-
             }
             queuesRestored = true
         }
