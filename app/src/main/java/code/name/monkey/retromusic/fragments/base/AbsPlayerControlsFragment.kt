@@ -82,17 +82,9 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
         if (seekBar == null) {
             progressSlider?.valueTo = total.toFloat()
 
-            if (isSeeking) {
-                progressSlider?.value = progress.toFloat()
-            } else {
-                progressAnimator =
-                    ObjectAnimator.ofFloat(progressSlider, "value", progress.toFloat()).apply {
-                        duration = SLIDER_ANIMATION_TIME
-                        interpolator = LinearInterpolator()
-                        start()
-                    }
+            if (progress > total) return
+            progressSlider?.value = progress.toFloat()
 
-            }
         } else {
             seekBar?.max = total
 
