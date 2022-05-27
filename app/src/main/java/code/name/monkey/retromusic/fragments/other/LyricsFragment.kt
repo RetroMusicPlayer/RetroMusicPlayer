@@ -425,11 +425,17 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
             super.onPause()
             updateHelper.stop()
         }
+
+        override fun onDestroyView() {
+            super.onDestroyView()
+            _binding = null
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         if (MusicPlayerRemote.playingQueue.isNotEmpty())
             (requireActivity() as MainActivity).expandPanel()
+        _binding = null
     }
 }

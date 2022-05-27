@@ -76,6 +76,7 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     }
 
 
+
     override val titleRes: Int
         get() = R.string.genres
 

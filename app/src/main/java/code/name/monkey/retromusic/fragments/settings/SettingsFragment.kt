@@ -101,6 +101,11 @@ class SettingsFragment : AbsMusicServiceFragment(R.layout.fragment_settings), Co
             bottom = if (MusicPlayerRemote.playingQueue.isEmpty()) 0 else dip(R.dimen.mini_player_height))
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     companion object {
         val TAG: String = SettingsFragment::class.java.simpleName
     }

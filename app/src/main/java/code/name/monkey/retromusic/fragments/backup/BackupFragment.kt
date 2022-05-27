@@ -154,4 +154,9 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         }
         return false
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
