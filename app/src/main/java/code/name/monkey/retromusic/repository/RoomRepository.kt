@@ -144,9 +144,7 @@ class RealRoomRepository(
     override fun historySongs(): List<HistoryEntity> = historyDao.historySongs()
 
     override fun favoritePlaylistLiveData(favorite: String): LiveData<List<SongEntity>> =
-        playlistDao.favoritesSongsLiveData(
-            playlistDao.playlist(favorite).first().playListId
-        )
+        playlistDao.favoritesSongsLiveData(favorite)
 
     override suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity> =
         if (playlistDao.playlist(favorite).isNotEmpty()) playlistDao.favoritesSongs(
