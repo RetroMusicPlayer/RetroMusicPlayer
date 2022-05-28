@@ -31,7 +31,7 @@ class CastPlayer(castSession: CastSession) : Playback,
 
     override val audioSessionId: Int = 0
 
-    private var callbacks: Playback.PlaybackCallbacks? = null
+    override var callbacks: Playback.PlaybackCallbacks? = null
 
     override fun setDataSource(
         song: Song,
@@ -50,10 +50,6 @@ class CastPlayer(castSession: CastSession) : Playback,
     }
 
     override fun setNextDataSource(path: String?) {}
-
-    override fun setCallbacks(callbacks: Playback.PlaybackCallbacks) {
-        this.callbacks = callbacks
-    }
 
     override fun start(): Boolean {
         isActuallyPlaying = true

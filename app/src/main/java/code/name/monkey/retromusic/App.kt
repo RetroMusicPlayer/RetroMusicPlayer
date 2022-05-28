@@ -70,7 +70,8 @@ class App : Application() {
             })
 
         // setting Error activity
-        CaocConfig.Builder.create().errorActivity(ErrorActivity::class.java).restartActivity(MainActivity::class.java).apply()
+        CaocConfig.Builder.create().errorActivity(ErrorActivity::class.java)
+            .restartActivity(MainActivity::class.java).apply()
     }
 
     override fun onTerminate() {

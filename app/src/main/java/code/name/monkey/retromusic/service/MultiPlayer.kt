@@ -24,18 +24,17 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil.isGapLessPlayback
 
 /**
  * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
  */
-class MultiPlayer internal constructor(private val context: Context) : Playback,
+class MultiPlayer(context: Context) : LocalPlayback(context),
     MediaPlayer.OnErrorListener, OnCompletionListener {
     private var mCurrentMediaPlayer = MediaPlayer()
     private var mNextMediaPlayer: MediaPlayer? = null
-    private var callbacks: PlaybackCallbacks? = null
+    override var callbacks: PlaybackCallbacks? = null
 
     /**
      * @return True if the player is ready to go, false otherwise
@@ -155,18 +154,10 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
     }
 
     /**
-     * Sets the callbacks
-     *
-     * @param callbacks The callbacks to use
-     */
-    override fun setCallbacks(callbacks: PlaybackCallbacks) {
-        this.callbacks = callbacks
-    }
-
-    /**
      * Starts or resumes playback.
      */
     override fun start(): Boolean {
+        super.start()
         return try {
             mCurrentMediaPlayer.start()
             true
@@ -179,6 +170,7 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
      * Resets the MediaPlayer to its uninitialized state.
      */
     override fun stop() {
+        super.stop()
         mCurrentMediaPlayer.reset()
         isInitialized = false
     }
@@ -198,6 +190,7 @@ class MultiPlayer internal constructor(private val context: Context) : Playback,
      * Pauses playback. Call start() to resume.
      */
     override fun pause(): Boolean {
+        super.pause()
         return try {
             mCurrentMediaPlayer.pause()
             true

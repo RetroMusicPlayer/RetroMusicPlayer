@@ -25,7 +25,6 @@ import android.database.ContentObserver
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
-import android.media.AudioManager.OnAudioFocusChangeListener
 import android.os.*
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
@@ -40,10 +39,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
-import androidx.media.AudioAttributesCompat
-import androidx.media.AudioAttributesCompat.CONTENT_TYPE_MUSIC
-import androidx.media.AudioFocusRequestCompat
-import androidx.media.AudioManagerCompat
 import androidx.media.MediaBrowserServiceCompat
 import androidx.media.session.MediaButtonReceiver.handleIntent
 import androidx.preference.PreferenceManager
@@ -162,17 +157,7 @@ class MusicService : MediaBrowserServiceCompat(),
             }
         }
     }
-    private var audioManager: AudioManager? = null
-        get() {
-            if (field == null) {
-                field = getSystemService()
-            }
-            return field
-        }
 
-    private val becomingNoisyReceiverIntentFilter =
-        IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
-    private var becomingNoisyReceiverRegistered = false
     private val bluetoothConnectedIntentFilter = IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED)
     private var bluetoothConnectedRegistered = false
     private val headsetReceiverIntentFilter = IntentFilter(Intent.ACTION_HEADSET_PLUG)
@@ -185,20 +170,9 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @JvmField
     var playingQueue = ArrayList<Song>()
-    var isPausedByTransientLossOfFocus = false
-    private val becomingNoisyReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action != null
-                && intent.action == AudioManager.ACTION_AUDIO_BECOMING_NOISY
-            ) {
-                pause()
-            }
-        }
-    }
-    private var playerHandler: PlaybackHandler? = null
-    private val audioFocusListener = OnAudioFocusChangeListener { focusChange ->
-        playerHandler?.obtainMessage(FOCUS_CHANGE, focusChange, 0)?.sendToTarget()
-    }
+
+     private var playerHandler: Handler? = null
+
     private var playingNotification: PlayingNotification? = null
 
     private val updateFavoriteReceiver = object : BroadcastReceiver() {
@@ -288,7 +262,7 @@ class MusicService : MediaBrowserServiceCompat(),
         wakeLock?.setReferenceCounted(false)
         musicPlayerHandlerThread = HandlerThread("PlaybackHandler")
         musicPlayerHandlerThread?.start()
-        playerHandler = PlaybackHandler(this, mainLooper)
+        playerHandler = Handler(musicPlayerHandlerThread!!.looper)
 
         playbackManager = PlaybackManager(this)
         playbackManager.setCallbacks(this)
@@ -330,10 +304,6 @@ class MusicService : MediaBrowserServiceCompat(),
         unregisterReceiver(widgetIntentReceiver)
         unregisterReceiver(updateFavoriteReceiver)
         unregisterReceiver(lockScreenReceiver)
-        if (becomingNoisyReceiverRegistered) {
-            unregisterReceiver(becomingNoisyReceiver)
-            becomingNoisyReceiverRegistered = false
-        }
         if (headsetReceiverRegistered) {
             unregisterReceiver(headsetReceiver)
             headsetReceiverRegistered = false
@@ -554,7 +524,7 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
-    val isLastTrack: Boolean
+    private val isLastTrack: Boolean
         get() = getPosition() == playingQueue.size - 1
 
     val isPlaying: Boolean
@@ -585,7 +555,7 @@ class MusicService : MediaBrowserServiceCompat(),
         notifyChange(QUEUE_CHANGED)
     }
 
-    fun notifyChange(what: String) {
+    private fun notifyChange(what: String) {
         handleAndSendChangeInternal(what)
         sendPublicIntent(what)
     }
@@ -712,17 +682,40 @@ class MusicService : MediaBrowserServiceCompat(),
 
     override fun onTrackEnded() {
         acquireWakeLock()
-        playerHandler?.sendEmptyMessage(TRACK_ENDED)
+        // if there is a timer finished, don't continue
+        if (pendingQuit
+            || repeatMode == REPEAT_MODE_NONE && isLastTrack
+        ) {
+            notifyChange(PLAY_STATE_CHANGED)
+            seek(0)
+            if (pendingQuit) {
+                pendingQuit = false
+                quit()
+            }
+        } else {
+            playNextSong(false)
+        }
+        releaseWakeLock()
     }
 
     override fun onTrackEndedWithCrossfade() {
         trackEndedByCrossfade = true
-        acquireWakeLock()
-        playerHandler?.sendEmptyMessage(TRACK_ENDED)
+        onTrackEnded()
     }
 
     override fun onTrackWentToNext() {
-        playerHandler?.sendEmptyMessage(TRACK_WENT_TO_NEXT)
+        if (pendingQuit || repeatMode == REPEAT_MODE_NONE && isLastTrack) {
+            pause(false)
+            seek(0)
+            if (pendingQuit) {
+                pendingQuit = false
+                quit()
+            }
+        } else {
+            position = nextPosition
+            prepareNextImpl()
+            notifyChange(META_CHANGED)
+        }
     }
 
     override fun onPlayStateChanged() {
@@ -775,7 +768,6 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun pause(force: Boolean = false) {
-        isPausedByTransientLossOfFocus = false
         playbackManager.pause(force) {
             notifyChange(PLAY_STATE_CHANGED)
         }
@@ -783,31 +775,14 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @Synchronized
     fun play() {
-        if (requestFocus()) {
             playbackManager.play(onNotInitialized = { playSongAt(getPosition()) }) {
-
-                if (!becomingNoisyReceiverRegistered) {
-                    registerReceiver(
-                        becomingNoisyReceiver,
-                        becomingNoisyReceiverIntentFilter
-                    )
-                    becomingNoisyReceiverRegistered = true
-                }
                 if (notHandledMetaChangedForCurrentTrack) {
                     handleChangeInternal(META_CHANGED)
                     notHandledMetaChangedForCurrentTrack = false
                 }
-
-                // fixes a bug where the volume would stay ducked because the
-                // AudioManager.AUDIOFOCUS_GAIN event is not sent
-                playerHandler?.removeMessages(DUCK)
-                playerHandler?.sendEmptyMessage(UNDUCK)
             }
             notifyChange(PLAY_STATE_CHANGED)
-        } else {
-            showToast(R.string.audio_focus_denied)
         }
-    }
 
     fun playNextSong(force: Boolean) {
         playSongAt(getNextPosition(force))
@@ -829,14 +804,12 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @Synchronized
     fun prepareNextImpl() {
-        val start = System.currentTimeMillis()
         try {
             val nextPosition = getNextPosition(false)
             playbackManager.setNextDataSource(getSongAt(nextPosition).uri.toString())
             this.nextPosition = nextPosition
         } catch (ignored: Exception) {
         }
-        println("Time Prepare Next: ${System.currentTimeMillis() - start}")
     }
 
     fun toggleFavorite() {
@@ -860,16 +833,11 @@ class MusicService : MediaBrowserServiceCompat(),
         stopForeground(true)
         isForeground = false
         notificationManager?.cancel(PlayingNotification.NOTIFICATION_ID)
-        AudioManagerCompat.abandonAudioFocusRequest(audioManager!!,
-            AudioFocusRequestCompat.Builder(AudioManagerCompat.AUDIOFOCUS_GAIN)
-                .setOnAudioFocusChangeListener(audioFocusListener)
-                .setAudioAttributes(
-                    AudioAttributesCompat.Builder().setContentType(CONTENT_TYPE_MUSIC).build()
-                ).build())
+
         stopSelf()
     }
 
-    fun releaseWakeLock() {
+    private fun releaseWakeLock() {
         if (wakeLock!!.isHeld) {
             wakeLock?.release()
         }
@@ -1273,17 +1241,6 @@ class MusicService : MediaBrowserServiceCompat(),
         mediaSession?.release()
     }
 
-    private fun requestFocus(): Boolean {
-        return AudioManagerCompat.requestAudioFocus(
-            audioManager!!,
-            AudioFocusRequestCompat.Builder(AudioManagerCompat.AUDIOFOCUS_GAIN)
-                .setOnAudioFocusChangeListener(audioFocusListener)
-                .setAudioAttributes(
-                    AudioAttributesCompat.Builder().setContentType(CONTENT_TYPE_MUSIC).build()
-                ).build()
-        ) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED
-    }
-
     private fun restoreState() {
         shuffleMode = PreferenceManager.getDefaultSharedPreferences(this).getInt(
             SAVED_SHUFFLE_MODE, 0
@@ -1393,12 +1350,6 @@ class MusicService : MediaBrowserServiceCompat(),
         const val SAVED_POSITION_IN_TRACK = "POSITION_IN_TRACK"
         const val SAVED_SHUFFLE_MODE = "SHUFFLE_MODE"
         const val SAVED_REPEAT_MODE = "REPEAT_MODE"
-        const val RELEASE_WAKELOCK = 0
-        const val TRACK_ENDED = 1
-        const val TRACK_WENT_TO_NEXT = 2
-        const val FOCUS_CHANGE = 3
-        const val DUCK = 4
-        const val UNDUCK = 5
         const val SHUFFLE_MODE_NONE = 0
         const val SHUFFLE_MODE_SHUFFLE = 1
         const val REPEAT_MODE_NONE = 0

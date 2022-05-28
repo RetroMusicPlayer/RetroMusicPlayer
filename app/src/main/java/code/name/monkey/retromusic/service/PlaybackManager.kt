@@ -42,7 +42,7 @@ class PlaybackManager(val context: Context) {
     }
 
     fun setCallbacks(callbacks: Playback.PlaybackCallbacks) {
-        playback?.setCallbacks(callbacks)
+        playback?.callbacks = callbacks
     }
 
     fun play(onNotInitialized: () -> Unit = {}, onPlay: () -> Unit = {}) {

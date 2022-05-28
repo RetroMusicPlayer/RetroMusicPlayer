@@ -31,7 +31,7 @@ interface Playback {
 
     fun setNextDataSource(path: String?)
 
-    fun setCallbacks(callbacks: PlaybackCallbacks)
+    var callbacks: PlaybackCallbacks?
 
     fun start(): Boolean
 

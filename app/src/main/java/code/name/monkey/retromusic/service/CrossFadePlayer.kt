@@ -16,7 +16,6 @@ import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimator
-import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.*
@@ -30,7 +29,7 @@ import kotlinx.coroutines.*
 * play but with decreasing volume and start the player with the next song with increasing volume
 * and vice versa for upcoming song and so on.
 */
-class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletionListener,
+class CrossFadePlayer(context: Context) : LocalPlayback(context), MediaPlayer.OnCompletionListener,
     MediaPlayer.OnErrorListener {
 
     private var currentPlayer: CurrentPlayer = CurrentPlayer.NOT_SET
@@ -41,7 +40,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     private var hasDataSource: Boolean = false /* Whether first player has DataSource */
     private var fadeInAnimator: Animator? = null
     private var fadeOutAnimator: Animator? = null
-    private var callbacks: PlaybackCallbacks? = null
+    override var callbacks: PlaybackCallbacks? = null
     private var crossFadeDuration = PreferenceUtil.crossFadeDuration
 
     init {
@@ -51,6 +50,7 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
     }
 
     override fun start(): Boolean {
+        super.start()
         durationListener.start()
         return try {
             getCurrentPlayer()?.start()
@@ -67,16 +67,14 @@ class CrossFadePlayer(val context: Context) : Playback, MediaPlayer.OnCompletion
         durationListener.stop()
     }
 
-    override fun setCallbacks(callbacks: PlaybackCallbacks) {
-        this.callbacks = callbacks
-    }
-
     override fun stop() {
+        super.stop()
         getCurrentPlayer()?.reset()
         mIsInitialized = false
     }
 
     override fun pause(): Boolean {
+        super.pause()
         durationListener.stop()
         cancelFade()
         getCurrentPlayer()?.let {

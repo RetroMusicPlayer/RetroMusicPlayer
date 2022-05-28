@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.fragments.base
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.navOptions
@@ -61,12 +62,14 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
         serviceActivity = null
     }
 
+    @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         serviceActivity?.addMusicServiceEventListener(this)
         maybeShowAnnoyingToasts()
     }
 
+    @CallSuper
     override fun onDestroyView() {
         super.onDestroyView()
         serviceActivity?.removeMusicServiceEventListener(this)
