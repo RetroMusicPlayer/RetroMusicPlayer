@@ -171,7 +171,7 @@ class MusicService : MediaBrowserServiceCompat(),
     @JvmField
     var playingQueue = ArrayList<Song>()
 
-     private var playerHandler: Handler? = null
+    private var playerHandler: Handler? = null
 
     private var playingNotification: PlayingNotification? = null
 
@@ -633,7 +633,7 @@ class MusicService : MediaBrowserServiceCompat(),
                     restorePlaybackState(wasPlaying, progress)
                 }
             }
-            ALBUM_ART_ON_LOCK_SCREEN, BLURRED_ALBUM_ART -> updateMediaSessionMetaData()
+            ALBUM_ART_ON_LOCK_SCREEN, BLURRED_ALBUM_ART -> updateMediaSessionMetaData(::updateMediaSessionPlaybackState)
             COLORED_NOTIFICATION -> {
                 playingNotification?.updateMetadata(currentSong) {
                     playingNotification?.setPlaying(isPlaying)
@@ -775,14 +775,14 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @Synchronized
     fun play() {
-            playbackManager.play(onNotInitialized = { playSongAt(getPosition()) }) {
-                if (notHandledMetaChangedForCurrentTrack) {
-                    handleChangeInternal(META_CHANGED)
-                    notHandledMetaChangedForCurrentTrack = false
-                }
+        playbackManager.play(onNotInitialized = { playSongAt(getPosition()) }) {
+            if (notHandledMetaChangedForCurrentTrack) {
+                handleChangeInternal(META_CHANGED)
+                notHandledMetaChangedForCurrentTrack = false
             }
-            notifyChange(PLAY_STATE_CHANGED)
         }
+        notifyChange(PLAY_STATE_CHANGED)
+    }
 
     fun playNextSong(force: Boolean) {
         playSongAt(getNextPosition(force))
@@ -1006,7 +1006,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     @SuppressLint("CheckResult")
-    fun updateMediaSessionMetaData() {
+    fun updateMediaSessionMetaData(onCompletion: () -> Unit) {
         Log.i(TAG, "onResourceReady: ")
         val song = currentSong
         if (song.id == -1L) {
@@ -1036,32 +1036,31 @@ class MusicService : MediaBrowserServiceCompat(),
             if (isBlurredAlbumArt) {
                 request.transform(BlurTransformation.Builder(this@MusicService).build())
             }
-            runOnUiThread {
-                request.into(object :
-                    CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        mediaSession?.setMetadata(metaData.build())
-                    }
+            request.into(object :
+                CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    mediaSession?.setMetadata(metaData.build())
+                    onCompletion()
+                }
 
-                    override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap?>?,
-                    ) {
-                        metaData.putBitmap(
-                            MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
-                            copy(resource)
-                        )
-                        mediaSession?.setMetadata(metaData.build())
-                    }
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap?>?,
+                ) {
+                    metaData.putBitmap(
+                        MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
+                        resource
+                    )
+                    mediaSession?.setMetadata(metaData.build())
+                    onCompletion()
+                }
 
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                        mediaSession?.setMetadata(metaData.build())
-                    }
-                })
-            }
+                override fun onLoadCleared(placeholder: Drawable?) {}
+            })
         } else {
             mediaSession?.setMetadata(metaData.build())
+            onCompletion()
         }
     }
 
@@ -1090,8 +1089,9 @@ class MusicService : MediaBrowserServiceCompat(),
                     startForegroundOrNotify()
                 }
 
-                updateMediaSessionMetaData()
-                updateMediaSessionPlaybackState()
+                // We must call updateMediaSessionPlaybackState after the load of album art is completed
+                // if we are loading it or it won't be updated in the notification
+                updateMediaSessionMetaData(::updateMediaSessionPlaybackState)
                 serviceScope.launch(IO) {
                     savePosition()
                     savePositionInTrack()
@@ -1107,7 +1107,7 @@ class MusicService : MediaBrowserServiceCompat(),
             QUEUE_CHANGED -> {
                 mediaSession?.setQueueTitle(getString(R.string.now_playing_queue))
                 mediaSession?.setQueue(playingQueue.toMediaSessionQueue())
-                updateMediaSessionMetaData() // because playing queue size might have changed
+                updateMediaSessionMetaData(::updateMediaSessionPlaybackState) // because playing queue size might have changed
                 saveState()
                 if (playingQueue.size > 0) {
                     prepareNext()

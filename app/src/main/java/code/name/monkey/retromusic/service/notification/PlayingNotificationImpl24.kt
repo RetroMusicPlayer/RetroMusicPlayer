@@ -24,7 +24,6 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.app.NotificationCompat
-import androidx.core.text.parseAsHtml
 import androidx.media.app.NotificationCompat.MediaStyle
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -111,9 +110,9 @@ class PlayingNotificationImpl24(
     }
 
     override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
-        setContentTitle(("<b>" + song.title + "</b>").parseAsHtml())
+        setContentTitle(song.title)
         setContentText(song.artistName)
-        setSubText(("<b>" + song.albumName + "</b>").parseAsHtml())
+        setSubText(song.albumName)
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
         GlideApp.with(context)
