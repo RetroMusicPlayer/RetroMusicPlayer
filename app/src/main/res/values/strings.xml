@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_album_label">About %s</string>
     <string name="about_settings_summary">Team, social links</string>
@@ -86,8 +86,7 @@
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
     <string name="auto">Auto</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
-    <string name="backup_restore_title">
-        <![CDATA[Backup & Restore]]>
+    <string name="backup_restore_title">        <![CDATA[Backup & Restore]]>
     </string>
     <string name="backup_title">Backups</string>
     <string name="biography">Biography</string>
@@ -423,7 +422,7 @@
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more...</string>
     <string name="profile">Profile</string>
     <string name="purchase">Purchase</string>
     <string name="queue">Playing Queue</string>
