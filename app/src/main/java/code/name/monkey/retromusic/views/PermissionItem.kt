@@ -46,4 +46,8 @@ class PermissionItem @JvmOverloads constructor(
     fun setButtonClick(callBack: () -> Unit) {
         binding.button.setOnClickListener { callBack() }
     }
+
+    fun setNumber(number: String) {
+        binding.number.text = number
+    }
 }

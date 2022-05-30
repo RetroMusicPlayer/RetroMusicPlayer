@@ -65,6 +65,8 @@ class PermissionActivity : AbsMusicServiceActivity() {
                     arrayOf(BLUETOOTH_CONNECT),
                     BLUETOOTH_PERMISSION_REQUEST)
             }
+        } else {
+            binding.audioPermission.setNumber("2")
         }
 
         binding.finish.accentBackgroundColor()
