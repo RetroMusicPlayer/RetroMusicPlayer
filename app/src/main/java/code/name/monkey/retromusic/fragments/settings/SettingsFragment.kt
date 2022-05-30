@@ -16,7 +16,7 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
@@ -25,15 +25,12 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.FragmentSettingsBinding
 import code.name.monkey.retromusic.extensions.applyToolbar
-import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
-import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorCallback
 
-class SettingsFragment : AbsMusicServiceFragment(R.layout.fragment_settings), ColorCallback {
+class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
@@ -45,7 +42,6 @@ class SettingsFragment : AbsMusicServiceFragment(R.layout.fragment_settings), Co
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentSettingsBinding.bind(view)
         setupToolbar()
-        updateBottomPadding()
     }
 
     private fun setupToolbar() {
@@ -90,15 +86,6 @@ class SettingsFragment : AbsMusicServiceFragment(R.layout.fragment_settings), Co
         } else {
             activity?.recreate()
         }
-    }
-
-    override fun onQueueChanged() {
-        updateBottomPadding()
-    }
-
-    private fun updateBottomPadding() {
-        binding.root.updatePadding(
-            bottom = if (MusicPlayerRemote.playingQueue.isEmpty()) 0 else dip(R.dimen.mini_player_height))
     }
 
     override fun onDestroyView() {
