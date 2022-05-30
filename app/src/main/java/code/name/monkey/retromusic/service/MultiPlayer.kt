@@ -14,10 +14,7 @@
 package code.name.monkey.retromusic.service
 
 import android.content.Context
-import android.media.AudioAttributes
 import android.media.MediaPlayer
-import android.media.MediaPlayer.OnCompletionListener
-import android.net.Uri
 import android.os.PowerManager
 import android.util.Log
 import code.name.monkey.retromusic.R
@@ -30,8 +27,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil.isGapLessPlayback
 /**
  * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
  */
-class MultiPlayer(context: Context) : LocalPlayback(context),
-    MediaPlayer.OnErrorListener, OnCompletionListener {
+class MultiPlayer(context: Context) : LocalPlayback(context) {
     private var mCurrentMediaPlayer = MediaPlayer()
     private var mNextMediaPlayer: MediaPlayer? = null
     override var callbacks: PlaybackCallbacks? = null
@@ -63,42 +59,6 @@ class MultiPlayer(context: Context) : LocalPlayback(context),
             }
             completion(isInitialized)
         }
-    }
-
-    /**
-     * @param player The [MediaPlayer] to use
-     * @param path   The path of the file, or the http/rtsp URL of the stream you want to play
-     * @return True if the `player` has been prepared and is ready to play, false otherwise
-     */
-    private fun setDataSourceImpl(
-        player: MediaPlayer,
-        path: String,
-        completion: (success: Boolean) -> Unit,
-    ) {
-        try {
-            player.reset()
-            player.setOnPreparedListener(null)
-            if (path.startsWith("content://")) {
-                player.setDataSource(context, Uri.parse(path))
-            } else {
-                player.setDataSource(path)
-            }
-            player.setAudioAttributes(AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_MEDIA)
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .build()
-            )
-            player.setOnPreparedListener {
-                player.setOnPreparedListener(null)
-                completion(true)
-            }
-            player.prepareAsync()
-        } catch (e: Exception) {
-            completion(false)
-            e.printStackTrace()
-        }
-        player.setOnCompletionListener(this)
-        player.setOnErrorListener(this)
     }
 
     /**

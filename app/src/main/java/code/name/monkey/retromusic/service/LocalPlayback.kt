@@ -4,9 +4,12 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.media.AudioAttributes
 import android.media.AudioManager
+import android.media.MediaPlayer
 import androidx.annotation.CallSuper
 import androidx.core.content.getSystemService
+import androidx.core.net.toUri
 import androidx.media.AudioAttributesCompat
 import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
@@ -15,7 +18,8 @@ import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil.isAudioFocusEnabled
 
-abstract class LocalPlayback(val context: Context) : Playback {
+abstract class LocalPlayback(val context: Context) : Playback, MediaPlayer.OnErrorListener,
+    MediaPlayer.OnCompletionListener {
 
     private val becomingNoisyReceiverIntentFilter =
         IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
@@ -98,6 +102,41 @@ abstract class LocalPlayback(val context: Context) : Playback {
     override fun pause(): Boolean {
         unregisterBecomingNoisyReceiver()
         return true
+    }
+
+    /**
+     * @param player The [MediaPlayer] to use
+     * @param path The path of the file, or the http/rtsp URL of the stream you want to play
+     * @return True if the <code>player</code> has been prepared and is ready to play, false otherwise
+     */
+    fun setDataSourceImpl(
+        player: MediaPlayer,
+        path: String,
+        completion: (success: Boolean) -> Unit,
+    ) {
+        player.reset()
+        try {
+            if (path.startsWith("content://")) {
+                player.setDataSource(context, path.toUri())
+            } else {
+                player.setDataSource(path)
+            }
+            player.setAudioAttributes(AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build()
+            )
+            player.setOnPreparedListener {
+                player.setOnPreparedListener(null)
+                completion(true)
+            }
+            player.prepareAsync()
+        } catch (e: Exception) {
+            completion(false)
+            e.printStackTrace()
+        }
+        player.setOnCompletionListener(this)
+        player.setOnErrorListener(this)
     }
 
     private fun unregisterBecomingNoisyReceiver() {

@@ -235,6 +235,7 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
+    private var receivedHeadsetConnected = false
     private val headsetReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
@@ -242,7 +243,12 @@ class MusicService : MediaBrowserServiceCompat(),
                 if (Intent.ACTION_HEADSET_PLUG == action) {
                     when (intent.getIntExtra("state", -1)) {
                         0 -> pause()
-                        1 -> play()
+                        // Check whether the current song is empty which means the playing queue hasn't restored yet
+                        1 -> if (currentSong != emptySong) {
+                            play()
+                        } else {
+                            receivedHeadsetConnected = true
+                        }
                     }
                 }
             }
@@ -921,6 +927,10 @@ class MusicService : MediaBrowserServiceCompat(),
                             notHandledMetaChangedForCurrentTrack = true
                             sendChangeInternal(META_CHANGED)
                         }
+                        if (receivedHeadsetConnected) {
+                            play()
+                            receivedHeadsetConnected = false
+                        }
                     }
 
                     sendChangeInternal(QUEUE_CHANGED)
@@ -1250,9 +1260,12 @@ class MusicService : MediaBrowserServiceCompat(),
         )
         handleAndSendChangeInternal(SHUFFLE_MODE_CHANGED)
         handleAndSendChangeInternal(REPEAT_MODE_CHANGED)
-        serviceScope.launch {
+        val start= System.currentTimeMillis()
+        serviceScope.launch(start = CoroutineStart.DEFAULT) {
             restoreQueuesAndPositionIfNecessary()
+            println("Time completion: ${System.currentTimeMillis() - start}")
         }
+        println("Time: ${System.currentTimeMillis() - start}")
     }
 
     private fun savePosition() {

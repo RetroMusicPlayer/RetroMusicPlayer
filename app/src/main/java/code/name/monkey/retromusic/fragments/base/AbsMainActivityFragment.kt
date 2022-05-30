@@ -33,7 +33,7 @@ abstract class AbsMainActivityFragment(@LayoutRes layout: Int) : AbsMusicService
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val menuHost: MenuHost = requireActivity()
+        val menuHost: MenuHost = requireActivity() as MenuHost
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.STARTED)
     }
 }

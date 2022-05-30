@@ -2,13 +2,9 @@ package code.name.monkey.retromusic.service
 
 import android.animation.Animator
 import android.content.Context
-import android.media.AudioAttributes
-import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.PlaybackParams
 import android.os.PowerManager
-import android.util.Log
-import androidx.core.net.toUri
 import code.name.monkey.appthemehelper.util.VersionUtils.hasMarshmallow
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
@@ -18,6 +14,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimator
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.logE
 import kotlinx.coroutines.*
 
 /** @author Prathamesh M */
@@ -29,8 +26,7 @@ import kotlinx.coroutines.*
 * play but with decreasing volume and start the player with the next song with increasing volume
 * and vice versa for upcoming song and so on.
 */
-class CrossFadePlayer(context: Context) : LocalPlayback(context), MediaPlayer.OnCompletionListener,
-    MediaPlayer.OnErrorListener {
+class CrossFadePlayer(context: Context) : LocalPlayback(context) {
 
     private var currentPlayer: CurrentPlayer = CurrentPlayer.NOT_SET
     private var player1 = MediaPlayer()
@@ -144,39 +140,6 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context), MediaPlayer.On
 
     override fun setNextDataSource(path: String?) {}
 
-    /**
-     * @param player The {@link MediaPlayer} to use
-     * @param path The path of the file, or the http/rtsp URL of the stream you want to play
-     * @return True if the <code>player</code> has been prepared and is ready to play, false otherwise
-     */
-    private fun setDataSourceImpl(
-        player: MediaPlayer,
-        path: String,
-        completion: (success: Boolean) -> Unit,
-    ) {
-        player.reset()
-        try {
-            if (path.startsWith("content://")) {
-                player.setDataSource(context, path.toUri())
-            } else {
-                player.setDataSource(path)
-            }
-            player.setAudioAttributes(
-                AudioAttributes.Builder().setLegacyStreamType(AudioManager.STREAM_MUSIC).build()
-            )
-            player.setOnPreparedListener {
-                player.setOnPreparedListener(null)
-                completion(true)
-            }
-            player.prepareAsync()
-        } catch (e: Exception) {
-            completion(false)
-            e.printStackTrace()
-        }
-        player.setOnCompletionListener(this)
-        player.setOnErrorListener(this)
-    }
-
     override fun setAudioSessionId(sessionId: Int): Boolean {
         return try {
             getCurrentPlayer()?.audioSessionId = sessionId
@@ -287,7 +250,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context), MediaPlayer.On
         mIsInitialized = true
         mp?.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
         context.showToast(R.string.unplayable_file)
-        Log.e(TAG, what.toString() + extra)
+        logE(what.toString() + extra)
         return false
     }
 
