@@ -101,6 +101,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     private var storageItems = ArrayList<Storage>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFolderBinding.bind(view)
         mainActivity.addMusicServiceEventListener(libraryViewModel)
         mainActivity.setSupportActionBar(toolbar)
@@ -518,7 +519,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     private suspend fun listPaths(
         file: File,
         fileFilter: FileFilter,
-        doOnPathListed: (paths: Array<String?>) -> Unit
+        doOnPathListed: (paths: Array<String?>) -> Unit,
     ) {
         val paths = try {
             val paths: Array<String?>
@@ -575,7 +576,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         files: List<File?>,
         fileFilter: FileFilter,
         fileComparator: Comparator<File>,
-        doOnSongsListed: (songs: List<Song>) -> Unit
+        doOnSongsListed: (songs: List<Song>) -> Unit,
     ) {
         val songs = try {
             val fileList = FileUtil.listFilesDeep(files, fileFilter)
