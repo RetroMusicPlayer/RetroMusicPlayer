@@ -4,7 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import code.name.monkey.retromusic.extensions.drawAboveSystemBarsWithPadding
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import dev.chrisbanes.insetter.applyInsetter
 
 class InsetsConstraintLayout @JvmOverloads constructor(
     context: Context,
@@ -12,7 +14,11 @@ class InsetsConstraintLayout @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
-        if (!isInEditMode && !RetroUtil.isLandscape)
-            drawAboveSystemBarsWithPadding()
+        if (!isInEditMode && !PreferenceUtil.isFullScreenMode)
+            applyInsetter {
+                type(navigationBars = true) {
+                    padding(vertical = true)
+                }
+            }
     }
 }

@@ -146,14 +146,20 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
         }
     }
 
+    private fun checkForMargins() {
+        if (mainActivity.bottomNavigationView.isVisible) {
+            binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = dip(R.dimen.bottom_nav_height)
+            }
+        }
+    }
+
     private fun setupRecyclerView() {
         searchAdapter = SearchAdapter(requireActivity(), emptyList())
         searchAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
                 binding.empty.isVisible = searchAdapter.itemCount < 1
-                val height = dipToPix(52f)
-                binding.recyclerView.updatePadding(bottom = height.toInt())
             }
         })
         binding.recyclerView.apply {
@@ -218,6 +224,11 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
                 binding.searchView.setText(spokenText)
             }
         }
+
+    override fun onResume() {
+        super.onResume()
+        checkForMargins()
+    }
 
     override fun onDestroyView() {
         hideKeyboard(view)

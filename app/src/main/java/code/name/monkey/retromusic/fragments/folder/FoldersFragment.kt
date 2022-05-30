@@ -17,16 +17,14 @@ import android.content.Context
 import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.webkit.MimeTypeMap
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.lifecycleScope
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
@@ -45,7 +43,6 @@ import code.name.monkey.retromusic.databinding.FragmentFolderBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openQueue
-import code.name.monkey.retromusic.helper.MusicPlayerRemote.playingQueue
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
@@ -110,6 +107,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         reenterTransition = MaterialFadeThrough()
 
         setUpBreadCrumbs()
+        checkForMargins()
         setUpRecyclerView()
         setUpAdapter()
         setUpTitle()
@@ -385,14 +383,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         return false
     }
 
-    override fun onQueueChanged() {
-        super.onQueueChanged()
-        checkForPadding()
-    }
-
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        checkForPadding()
+    override fun onResume() {
+        super.onResume()
+        checkForMargins()
     }
 
     override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
@@ -413,13 +406,11 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         return cab as AttachedCab
     }
 
-    private fun checkForPadding() {
-        val count = adapter?.itemCount ?: 0
-        if (_binding != null) {
-            binding.recyclerView.updatePadding(
-                bottom = if (count > 0 && playingQueue.isNotEmpty()) dip(R.dimen.mini_player_height_expanded)
-                else dip(R.dimen.mini_player_height)
-            )
+    private fun checkForMargins() {
+        if (mainActivity.bottomNavigationView.isVisible) {
+            binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = dip(R.dimen.bottom_nav_height)
+            }
         }
     }
 
@@ -608,7 +599,6 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 override fun onChanged() {
                     super.onChanged()
                     checkIsEmpty()
-                    checkForPadding()
                 }
             })
         binding.recyclerView.adapter = adapter

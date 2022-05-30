@@ -3,9 +3,9 @@ package code.name.monkey.retromusic.util
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.extensions.showToast
@@ -26,9 +26,9 @@ fun Activity.maybeShowAnnoyingToasts() {
             showToast("Support us by downloading the original version from Play Store.", Toast.LENGTH_LONG)
             val packageName = "code.name.monkey.retromusic"
             try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
+                startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri()))
             } catch (e: ActivityNotFoundException) {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")))
+                startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=$packageName".toUri()))
             }
         }
     }

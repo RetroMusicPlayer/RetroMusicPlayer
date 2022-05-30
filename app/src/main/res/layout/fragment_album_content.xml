@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/mini_player_height">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playAction"
@@ -168,6 +169,7 @@
         android:id="@+id/listeners"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
         android:textAppearance="@style/TextViewBody1"
         android:textColor="?android:attr/textColorTertiary"
         android:visibility="gone"
@@ -182,6 +184,7 @@
         android:id="@+id/scrobbles"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
         android:textAppearance="@style/TextViewBody1"
         android:textColor="?android:attr/textColorTertiary"
         android:visibility="gone"
@@ -191,11 +194,4 @@
         app:layout_constraintTop_toBottomOf="@id/scrobblesLabel"
         tools:text="100000"
         tools:visibility="visible" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/listeners" />
 </code.name.monkey.retromusic.views.insets.InsetsConstraintLayout>

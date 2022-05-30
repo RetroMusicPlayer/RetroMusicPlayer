@@ -398,6 +398,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         if (binding.bottomNavigationView.menu.size() == 1) {
             isInOneTabMode = true
             binding.bottomNavigationView.isVisible = false
+        } else {
+            isInOneTabMode = false
         }
     }
 
@@ -470,7 +472,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                         bottomSheetBehavior.peekHeight = heightOfBarWithTabs
                     }
                     libraryViewModel.setFabMargin(this,
-                        dip(R.dimen.mini_player_height_expanded))
+                        dip(R.dimen.bottom_nav_mini_player_height))
                 } else {
                     logD("Details")
                     if (animate) {

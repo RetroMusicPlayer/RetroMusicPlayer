@@ -17,10 +17,8 @@ import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
 import code.name.monkey.retromusic.databinding.FragmentPlaylistDetailBinding
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.toSongs
-import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
@@ -129,17 +127,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         return PlaylistMenuHelper.handleMenuClick(requireActivity(), playlist, item)
     }
 
-    private fun checkForPadding() {
-        val itemCount: Int = playlistSongAdapter.itemCount
-        if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
-            binding.recyclerView.updatePadding(bottom = dip(R.dimen.mini_player_height))
-        } else {
-            binding.recyclerView.updatePadding(bottom = 0)
-        }
-    }
-
     private fun checkIsEmpty() {
-        checkForPadding()
         binding.empty.isVisible = playlistSongAdapter.itemCount == 0
         binding.emptyText.isVisible = playlistSongAdapter.itemCount == 0
     }

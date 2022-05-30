@@ -15,17 +15,15 @@
 package code.name.monkey.retromusic.fragments.home
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.*
 import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
-import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +36,7 @@ import code.name.monkey.retromusic.databinding.FragmentHomeBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.drawNextToNavbar
 import code.name.monkey.retromusic.extensions.elevatedAccentColor
 import code.name.monkey.retromusic.fragments.ReloadType
@@ -71,6 +70,8 @@ class HomeFragment :
 
         enterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
         reenterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
+
+        checkForMargins()
 
         val homeAdapter = HomeAdapter(mainActivity)
         binding.recyclerView.apply {
@@ -190,6 +191,14 @@ class HomeFragment :
         binding.actionShuffle.elevatedAccentColor()
     }
 
+    private fun checkForMargins() {
+        if (mainActivity.bottomNavigationView.isVisible) {
+            binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = dip(R.dimen.bottom_nav_height)
+            }
+        }
+    }
+
     override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         menu.removeItem(R.id.action_grid_size)
@@ -212,12 +221,14 @@ class HomeFragment :
     }
 
     fun setSharedAxisXTransitions() {
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true).addTarget(CoordinatorLayout::class.java)
+        exitTransition =
+            MaterialSharedAxis(MaterialSharedAxis.X, true).addTarget(CoordinatorLayout::class.java)
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
     }
 
     private fun setSharedAxisYTransitions() {
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true).addTarget(CoordinatorLayout::class.java)
+        exitTransition =
+            MaterialSharedAxis(MaterialSharedAxis.Y, true).addTarget(CoordinatorLayout::class.java)
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
     }
 
@@ -301,7 +312,9 @@ class HomeFragment :
 
     override fun onResume() {
         super.onResume()
+        checkForMargins()
         libraryViewModel.forceReload(ReloadType.HomeSections)
+        exitTransition = null
     }
 
     override fun onDestroyView() {

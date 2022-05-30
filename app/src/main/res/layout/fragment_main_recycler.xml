@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:overScrollMode="@integer/overScrollMode"
+        android:paddingBottom="@dimen/mini_player_height"
         android:scrollbars="none"
         android:transitionGroup="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/mini_player_height">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playAction"
@@ -81,18 +82,18 @@
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@id/song_sort_order"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/albumRecyclerView"/>
+        app:layout_constraintTop_toBottomOf="@id/albumRecyclerView" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/song_sort_order"
+        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        style="@style/Widget.Material3.Button.IconButton"
-        app:iconTint="?colorControlNormal"
-        app:iconSize="24dp"
         android:background="?roundSelector"
         app:icon="@drawable/ic_sort"
+        app:iconSize="24dp"
+        app:iconTint="?colorControlNormal"
         app:layout_constraintBottom_toBottomOf="@+id/songTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/songTitle"
@@ -178,6 +179,7 @@
         android:id="@+id/listeners"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
         android:textAppearance="@style/TextViewBody2"
         android:textColor="?android:attr/textColorTertiary"
         android:visibility="gone"
@@ -193,6 +195,7 @@
         android:id="@+id/scrobbles"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
         android:textAppearance="@style/TextViewBody2"
         android:textColor="?android:attr/textColorTertiary"
         android:visibility="gone"
@@ -202,10 +205,4 @@
         app:layout_constraintTop_toBottomOf="@id/scrobblesLabel"
         tools:text="100000"
         tools:visibility="visible" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/listeners" />
 </code.name.monkey.retromusic.views.insets.InsetsConstraintLayout>

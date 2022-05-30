@@ -19,12 +19,14 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.updatePadding
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -70,9 +72,10 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
             listView.overScrollMode = View.OVER_SCROLL_NEVER
         }
 
+        listView.updatePadding(bottom = dip(R.dimen.mini_player_height))
         listView.applyInsetter {
             type(navigationBars = true) {
-                padding()
+                padding(vertical = true)
             }
         }
         invalidateSettings()
