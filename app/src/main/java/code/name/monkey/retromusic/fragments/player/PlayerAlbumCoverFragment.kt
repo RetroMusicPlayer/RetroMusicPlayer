@@ -183,7 +183,9 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     override fun onPlayingMetaChanged() {
         logD("Playing Meta Changed")
-        viewPager.setCurrentItem(MusicPlayerRemote.position, true)
+        if (viewPager.currentItem != MusicPlayerRemote.position) {
+            viewPager.setCurrentItem(MusicPlayerRemote.position, true)
+        }
         updateLyrics()
     }
 
@@ -260,8 +262,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         }
     }
 
-    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-    }
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
     override fun onPageSelected(position: Int) {
         currentPosition = position

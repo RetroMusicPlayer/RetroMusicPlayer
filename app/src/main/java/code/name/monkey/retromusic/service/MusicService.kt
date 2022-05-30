@@ -1376,18 +1376,5 @@ class MusicService : MediaBrowserServiceCompat(),
                 or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
                 or PlaybackStateCompat.ACTION_STOP
                 or PlaybackStateCompat.ACTION_SEEK_TO)
-
-        private fun copy(bitmap: Bitmap): Bitmap? {
-            var config = bitmap.config
-            if (config == null) {
-                config = Bitmap.Config.RGB_565
-            }
-            return try {
-                bitmap.copy(config, false)
-            } catch (e: OutOfMemoryError) {
-                e.printStackTrace()
-                null
-            }
-        }
     }
 }
