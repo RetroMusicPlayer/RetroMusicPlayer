@@ -46,7 +46,7 @@ class MainActivity : AbsCastActivity(), OnThemeChangedListener {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(extra<Bundle>(TAG).value ?: savedInstanceState)
         setTaskDescriptionColorAuto()
         hideStatusBar()
         updateTabs()
@@ -135,9 +135,8 @@ class MainActivity : AbsCastActivity(), OnThemeChangedListener {
     }
 
     private fun restart() {
-        val savedInstanceState = Bundle().apply {
-            onSaveInstanceState(this)
-        }
+        val savedInstanceState = Bundle()
+        onSaveInstanceState(savedInstanceState)
         finish()
         val intent = Intent(this, this::class.java).putExtra(TAG, savedInstanceState)
         startActivity(intent)
