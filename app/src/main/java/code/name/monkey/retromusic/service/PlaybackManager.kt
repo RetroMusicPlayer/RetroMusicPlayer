@@ -16,6 +16,8 @@ class PlaybackManager(val context: Context) {
     var playback: Playback? = null
     private var playbackLocation = PlaybackLocation.LOCAL
 
+    val isLocalPlayback get() = playbackLocation== PlaybackLocation.LOCAL
+
     val audioSessionId: Int
         get() = if (playback != null) {
             playback!!.audioSessionId

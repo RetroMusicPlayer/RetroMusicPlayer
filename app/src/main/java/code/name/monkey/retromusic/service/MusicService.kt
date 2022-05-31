@@ -88,6 +88,7 @@ import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.cast.framework.CastSession
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import org.koin.java.KoinJavaComponent.get
@@ -792,11 +793,16 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun playSongAt(position: Int) {
-        openTrackAndPrepareNextAt(position) { success ->
-            if (success) {
-                play()
-            } else {
-                showToast(resources.getString(R.string.unplayable_file))
+        // Every chromecast method needs to run on main thread or you are greeted with IllegalStateException
+        // So it will use Main dispatcher
+        // And by using Default dispatcher for local playback we are reduce the burden of main thread
+        serviceScope.launch(if(playbackManager.isLocalPlayback) Default else Main) {
+            openTrackAndPrepareNextAt(position) { success ->
+                if (success) {
+                    play()
+                } else {
+                    showToast(resources.getString(R.string.unplayable_file))
+                }
             }
         }
     }
