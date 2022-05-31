@@ -405,7 +405,7 @@
     <string name="pref_title_lock_screen">Sterowanie pełnoekranowe</string>
     <string name="pref_title_lyrics_screen_on">Pozostaw włączony ekran podczas wyświetlania tekstu utworu</string>
     <string name="pref_title_lyrics_type">Typ tekstu utworu</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
+    <string name="pref_title_manage_audio_focus">Zawsze odtwarzaj</string>
     <string name="pref_title_now_playing_screen_appearance">Wyglądodtwarzacza</string>
     <string name="pref_title_open_source_licences">Licencje typu Open Source</string>
     <string name="pref_title_pause_history">Wstrzymaj historię</string>
