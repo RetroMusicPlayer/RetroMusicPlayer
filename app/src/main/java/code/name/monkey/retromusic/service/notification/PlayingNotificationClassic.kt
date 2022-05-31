@@ -75,6 +75,7 @@ class PlayingNotificationClassic(
     }
 
     override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
+        if (song == Song.emptySong) return
         val notificationLayout = getCombinedRemoteViews(true, song)
         val notificationLayoutBig = getCombinedRemoteViews(false, song)
 

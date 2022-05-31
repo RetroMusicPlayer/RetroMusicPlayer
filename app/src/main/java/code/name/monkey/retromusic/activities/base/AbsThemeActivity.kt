@@ -42,7 +42,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         updateTheme()
         hideStatusBar()
         super.onCreate(savedInstanceState)
-        println("OnCreate")
         setEdgeToEdgeOrImmersive()
         maybeSetScreenOn()
         setLightNavigationBarAuto()

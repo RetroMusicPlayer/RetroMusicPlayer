@@ -110,6 +110,7 @@ class PlayingNotificationImpl24(
     }
 
     override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
+        if (song == Song.emptySong) return
         setContentTitle(song.title)
         setContentText(song.artistName)
         setSubText(song.albumName)
