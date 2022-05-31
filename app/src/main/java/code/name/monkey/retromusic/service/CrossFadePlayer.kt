@@ -34,10 +34,10 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     private var durationListener = DurationListener()
     private var mIsInitialized = false
     private var hasDataSource: Boolean = false /* Whether first player has DataSource */
-    private var fadeInAnimator: Animator? = null
-    private var fadeOutAnimator: Animator? = null
+    private var crossFadeAnimator: Animator? = null
     override var callbacks: PlaybackCallbacks? = null
     private var crossFadeDuration = PreferenceUtil.crossFadeDuration
+    private var isCrossFading = false
 
     init {
         player1.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
@@ -48,8 +48,12 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     override fun start(): Boolean {
         super.start()
         durationListener.start()
+        resumeFade()
         return try {
             getCurrentPlayer()?.start()
+            if (isCrossFading) {
+                getNextPlayer()?.start()
+            }
             true
         } catch (e: IllegalStateException) {
             e.printStackTrace()
@@ -58,9 +62,11 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     }
 
     override fun release() {
+        stop()
+        cancelFade()
         getCurrentPlayer()?.release()
         getNextPlayer()?.release()
-        durationListener.stop()
+        durationListener.cancel()
     }
 
     override fun stop() {
@@ -72,7 +78,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     override fun pause(): Boolean {
         super.pause()
         durationListener.stop()
-        cancelFade()
+        pauseFade()
         getCurrentPlayer()?.let {
             if (it.isPlaying) {
                 it.pause()
@@ -87,7 +93,6 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     }
 
     override fun seek(whereto: Int): Int {
-        cancelFade()
         getNextPlayer()?.stop()
         return try {
             getCurrentPlayer()?.seekTo(whereto)
@@ -120,7 +125,6 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
         force: Boolean,
         completion: (success: Boolean) -> Unit,
     ) {
-        cancelFade()
         if (force) hasDataSource = false
         mIsInitialized = false
         /* We've already set DataSource if initialized is true in setNextDataSource */
@@ -221,25 +225,29 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
         }
     }
 
-    private fun fadeIn(mediaPlayer: MediaPlayer) {
-        fadeInAnimator = createFadeAnimator(true, mediaPlayer) {
-            fadeInAnimator = null
+    private fun crossFade(fadeInMp: MediaPlayer, fadeOutMp: MediaPlayer) {
+        isCrossFading = true
+        crossFadeAnimator = createFadeAnimator(fadeInMp, fadeOutMp) {
+            crossFadeAnimator = null
             durationListener.start()
+            isCrossFading = false
         }
-        fadeInAnimator?.start()
-    }
-
-    private fun fadeOut(mediaPlayer: MediaPlayer) {
-        fadeOutAnimator = createFadeAnimator(false, mediaPlayer) {
-            fadeOutAnimator = null
-            mediaPlayer.stop()
-        }
-        fadeOutAnimator?.start()
+        crossFadeAnimator?.start()
     }
 
     private fun cancelFade() {
-        fadeInAnimator = null
-        fadeOutAnimator = null
+        crossFadeAnimator?.cancel()
+        crossFadeAnimator = null
+    }
+
+    private fun pauseFade() {
+        crossFadeAnimator?.pause()
+    }
+
+    private fun resumeFade() {
+        if (crossFadeAnimator?.isPaused == true) {
+            crossFadeAnimator?.resume()
+        }
     }
 
     override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
@@ -283,9 +291,9 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
         if (total > 0 && (total - progress).div(1000) == crossFadeDuration) {
             getNextPlayer()?.let { player ->
                 val nextSong = MusicPlayerRemote.nextSong
+                // Switch to other player (Crossfade) only if next song exists
                 if (nextSong != null) {
                     setDataSourceImpl(player, nextSong.uri.toString()) { success ->
-                        // Switch to other player (Crossfade) only if next song exists
                         if (success) switchPlayer()
                     }
                 }
@@ -295,8 +303,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
 
     private fun switchPlayer() {
         getNextPlayer()?.start()
-        getCurrentPlayer()?.let { fadeOut(it) }
-        getNextPlayer()?.let { fadeIn(it) }
+        crossFade(getCurrentPlayer()!!, getNextPlayer()!!)
         currentPlayer =
             if (currentPlayer == CurrentPlayer.PLAYER_ONE || currentPlayer == CurrentPlayer.NOT_SET) {
                 CurrentPlayer.PLAYER_TWO
