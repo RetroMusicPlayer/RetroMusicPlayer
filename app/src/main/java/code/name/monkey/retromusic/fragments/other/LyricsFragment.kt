@@ -125,9 +125,9 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateTitleSong()
         enterTransition = Fade()
         exitTransition = Fade()
+        updateTitleSong()
         lyricsSectionsAdapter = LyricsSectionsAdapter(requireActivity())
         _binding = FragmentLyricsBinding.bind(view)
         binding.container.transitionName = "lyrics"

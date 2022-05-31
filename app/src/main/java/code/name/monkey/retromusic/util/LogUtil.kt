@@ -21,4 +21,4 @@ fun Any.logE(e: Exception) {
     Log.e(name, e.message ?: "Error")
 }
 
-val Any.name: String get() = this::class.java.simpleName
+private val Any.name: String get() = this::class.java.simpleName

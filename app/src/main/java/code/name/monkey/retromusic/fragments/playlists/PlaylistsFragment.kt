@@ -245,9 +245,7 @@ class PlaylistsFragment :
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         findNavController().navigate(
             R.id.playlistDetailsFragment,
-            bundleOf(EXTRA_PLAYLIST to playlistWithSongs),
-            null,
-            null
+            bundleOf(EXTRA_PLAYLIST to playlistWithSongs)
         )
     }
 }

@@ -400,9 +400,7 @@ fun goToArtist(activity: Activity) {
 
         findNavController(R.id.fragment_container).navigate(
             R.id.artistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_ID to song.artistId),
-            null,
-            null
+            bundleOf(EXTRA_ARTIST_ID to song.artistId)
         )
     }
 }
@@ -421,9 +419,7 @@ fun goToAlbum(activity: Activity) {
 
         findNavController(R.id.fragment_container).navigate(
             R.id.albumDetailsFragment,
-            bundleOf(EXTRA_ALBUM_ID to song.albumId),
-            null,
-            null
+            bundleOf(EXTRA_ALBUM_ID to song.albumId)
         )
     }
 }
