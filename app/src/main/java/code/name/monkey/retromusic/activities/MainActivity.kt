@@ -113,7 +113,9 @@ class MainActivity : AbsCastActivity(), OnThemeChangedListener {
     }
 
     private fun saveTab(id: Int) {
-        PreferenceUtil.lastTab = id
+        if (PreferenceUtil.libraryCategory.firstOrNull { it.category.id == id }?.visible == true) {
+            PreferenceUtil.lastTab = id
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean =
