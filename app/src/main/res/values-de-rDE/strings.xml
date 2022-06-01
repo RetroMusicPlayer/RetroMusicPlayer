@@ -8,7 +8,7 @@
     <string name="action_add_to_blacklist">Ausschließen</string>
     <string name="action_add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="action_add_to_playing_queue">Zur Wiedergabeliste hinzufügen</string>
-    <string name="action_add_to_playlist">Zur Playlist hinzufügen...</string>
+    <string name="action_add_to_playlist">Zur Playlist hinzufügen</string>
     <string name="action_cancel">Timer stoppen</string>
     <string name="action_cast">Übertragen</string>
     <string name="action_clear_playing_queue">Wiedergabeliste leeren</string>
@@ -18,14 +18,14 @@
     <string name="action_details">Details</string>
     <string name="action_edit">Bearbeiten</string>
     <string name="action_go_to_album">Zum Album gehen</string>
-    <string name="action_go_to_artist">Zum Interpreten wechseln</string>
+    <string name="action_go_to_artist">Zum Interpreten gehen</string>
     <string name="action_go_to_genre">Zum Genre gehen</string>
-    <string name="action_go_to_lyrics">Zum Liedtext wechseln</string>
+    <string name="action_go_to_lyrics">Zum Liedtext gehen</string>
     <string name="action_go_to_start_directory">Zum Startverzeichnis gehen</string>
     <string name="action_grant">Gewähren</string>
     <string name="action_grid_size">Gittergröße</string>
     <string name="action_grid_size_land">Gittergröße (Querformat)</string>
-    <string name="action_new_playlist">Neue Wiedergabeliste</string>
+    <string name="action_new_playlist">Neue Playlist</string>
     <string name="action_next">Nächstes</string>
     <string name="action_play">Abspielen</string>
     <string name="action_play_all">Alles abspielen</string>
@@ -36,7 +36,7 @@
     <string name="action_remove_from_playing_queue">Von Wiedergabeliste entfernen</string>
     <string name="action_remove_from_playlist">Von Wiedergabeliste entfernen</string>
     <string name="action_rename">Umbenennen</string>
-    <string name="action_save_playing_queue">Warteschlange speichern</string>
+    <string name="action_save_playing_queue">Wiedergabeliste speichern</string>
     <string name="action_scan">Scannen</string>
     <string name="action_search">Suche</string>
     <string name="action_set">Verwenden</string>
@@ -45,7 +45,7 @@
     <string name="action_settings">"Einstellungen"</string>
     <string name="action_share">Teilen</string>
     <string name="action_shuffle_all">Alle zufällig wiedergeben</string>
-    <string name="action_shuffle_playlist">Wiedergabeliste zufällig abspielen</string>
+    <string name="action_shuffle_playlist">Playlist zufällig abspielen</string>
     <string name="action_sleep_timer">Sleep-Timer</string>
     <string name="action_sort_order">Sortierreihenfolge</string>
     <string name="action_tag_editor">Tag-Editor</string>
@@ -53,7 +53,7 @@
     <string name="action_toggle_shuffle">Zufallswiedergabe</string>
     <string name="adaptive">Adaptiv</string>
     <string name="add_action">Hinzufügen</string>
-    <string name="add_playlist_title">"Zur Wiedergabeliste hinzufügen"</string>
+    <string name="add_playlist_title">"Zur Playlist hinzufügen"</string>
     <string name="add_time_framed_lryics">Synchronisierten Liedtext hinzufügen</string>
     <string name="added_song_count_to_playlist">%1$d Titel zu %2$s hinzugefügt</string>
     <string name="added_title_to_playing_queue">"1 Titel wurde zur Wiedergabeliste hinzugefügt."</string>
