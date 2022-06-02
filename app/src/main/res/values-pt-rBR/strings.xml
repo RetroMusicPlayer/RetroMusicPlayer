@@ -55,7 +55,7 @@
     <string name="add_action">Adicionar</string>
     <string name="add_playlist_title">"Adicionar à playlist"</string>
     <string name="add_time_framed_lryics">Adicionar Letras Sincronizadas</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_song_count_to_playlist">%1$d música(s) adicionada(s) para %2$s</string>
     <string name="added_title_to_playing_queue">"1 música foi adicionada à fila."</string>
     <string name="added_x_titles_to_playing_queue">%1$d músicas foram adicionadas à fila.</string>
     <string name="album">Álbum</string>
@@ -91,7 +91,7 @@
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Totalmente preto</string>
     <string name="blacklist">Lista negra</string>
-    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_summary">O aplicativo precisa de permissão de dispositivos próximos para verificar por dispositivos bluetooth</string>
     <string name="blur">Desfoque</string>
     <string name="blur_card">Cartão Desfocado</string>
     <string name="bug_report_failed">Não é possível enviar o relatório</string>
@@ -129,7 +129,7 @@
     <string name="clear_playing_queue">Limpar fila</string>
     <string name="color">Cor</string>
     <string name="colors">Cores</string>
-    <string name="compact">Compact</string>
+    <string name="compact">Compacto</string>
     <string name="composer">Compositor</string>
     <string name="copied_device_info_to_clipboard">Informações do dispositivo copiadas para a área de transferência.</string>
     <string name="could_not_create_playlist">Não foi possível criar a playlist.</string>
@@ -172,14 +172,14 @@
     <string name="edit_synced_lyrics">Editar Letras Sincronizadas</string>
     <string name="empty">Vazio</string>
     <string name="equalizer">Equalizador</string>
-    <string name="error_create_backup">Couldn\u2019t create backup</string>
-    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
-    <string name="error_empty_name">Your name can\'t be empty!</string>
-    <string name="error_load_failed">Load failed</string>
-    <string name="expanded">Expanded</string>
+    <string name="error_create_backup">Não foi possível criar um backup</string>
+    <string name="error_delete_backup">Não foi possível excluir o backup</string>
+    <string name="error_empty_name">Seu nome não pode estar em branco!</string>
+    <string name="error_load_failed">Falha ao carregar</string>
+    <string name="expanded">Expandido</string>
     <string name="faq">Perguntas frequentes</string>
     <string name="favorites">Favoritos</string>
-    <string name="file_already_exists">File already exists</string>
+    <string name="file_already_exists">O arquivo já existe</string>
     <string name="finish_last_song">Finalizar a última música</string>
     <string name="fit">Ajustar</string>
     <string name="flat">Plano</string>
@@ -195,7 +195,7 @@
     <string name="genres">Gêneros</string>
     <string name="git_hub_summary">Bifurcação do projeto no GitHub</string>
     <string name="gradient">Degradê</string>
-    <string name="grant_access">Grant access</string>
+    <string name="grant_access">Conceder acesso</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -233,7 +233,7 @@
     <string name="labeled">Rotulado</string>
     <string name="last_added">Adições recentes</string>
     <string name="last_song">Última música</string>
-    <string name="lets_go">Let\'s go</string>
+    <string name="lets_go">Vamos lá</string>
     <string name="library_categories">Categorias da biblioteca</string>
     <string name="licenses">Licenças</string>
     <string name="light_theme_name">Claramente Branco</string>
