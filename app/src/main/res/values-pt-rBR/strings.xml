@@ -55,7 +55,7 @@
     <string name="add_action">Adicionar</string>
     <string name="add_playlist_title">"Adicionar à playlist"</string>
     <string name="add_time_framed_lryics">Adicionar Letras Sincronizadas</string>
-    <string name="added_song_count_to_playlist">%1$d música(s) adicionada(s) a %2$s</string>
+    <string name="added_song_count_to_playlist">%1$d Música(s) adicionada(s) a %2$s</string>
     <string name="added_title_to_playing_queue">"1 música foi adicionada à fila."</string>
     <string name="added_x_titles_to_playing_queue">%1$d músicas foram adicionadas à fila.</string>
     <string name="album">Álbum</string>
@@ -91,7 +91,7 @@
     <string name="biography">Biografia</string>
     <string name="black_theme_name">Totalmente preto</string>
     <string name="blacklist">Lista negra</string>
-    <string name="bluetooth_summary">O aplicativo precisa de permissão de dispositivos próximos para verificar por dispositivos bluetooth</string>
+    <string name="bluetooth_summary">O aplicativo precisa de permissão de dispositivos próximos para verificar por dispositivo “bluetooth”</string>
     <string name="blur">Desfoque</string>
     <string name="blur_card">Cartão Desfocado</string>
     <string name="bug_report_failed">Não é possível enviar o relatório</string>
@@ -118,7 +118,7 @@
     <string name="cascading">Cascata</string>
     <string name="changelog">Lista de mudanças</string>
     <string name="changelog_summary">Veja o que há de novo</string>
-    <string name="choose_image">Escolher Imagem</string>
+    <string name="choose_image">Chotos Imagem</string>
     <string name="choose_restore_title">Selecione o que será restaurado</string>
     <string name="circle">Círculo</string>
     <string name="circular">Circular</string>
