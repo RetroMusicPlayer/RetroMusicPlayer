@@ -46,19 +46,13 @@ class MultiPlayer(context: Context) : LocalPlayback(context) {
      * @param song The song object you want to play
      * @return True if the `player` has been prepared and is ready to play, false otherwise
      */
-    override fun setDataSource(
-        song: Song,
-        force: Boolean,
-        completion: (success: Boolean) -> Unit,
-    ) {
+    override fun setDataSource(song: Song, force: Boolean): Boolean {
         isInitialized = false
-        setDataSourceImpl(mCurrentMediaPlayer, song.uri.toString()) { success ->
-            isInitialized = success
-            if (isInitialized) {
-                setNextDataSource(null)
-            }
-            completion(isInitialized)
+        isInitialized = setDataSourceImpl(mCurrentMediaPlayer, song.uri.toString())
+        if (isInitialized) {
+            setNextDataSource(null)
         }
+        return isInitialized
     }
 
     /**
@@ -86,28 +80,26 @@ class MultiPlayer(context: Context) : LocalPlayback(context) {
             mNextMediaPlayer = MediaPlayer()
             mNextMediaPlayer?.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
             mNextMediaPlayer?.audioSessionId = audioSessionId
-            setDataSourceImpl(mNextMediaPlayer!!, path) { success ->
-                if (success) {
-                    try {
-                        mCurrentMediaPlayer.setNextMediaPlayer(mNextMediaPlayer)
-                    } catch (e: IllegalArgumentException) {
-                        Log.e(TAG, "setNextDataSource: setNextMediaPlayer()", e)
-                        if (mNextMediaPlayer != null) {
-                            mNextMediaPlayer?.release()
-                            mNextMediaPlayer = null
-                        }
-                    } catch (e: IllegalStateException) {
-                        Log.e(TAG, "setNextDataSource: setNextMediaPlayer()", e)
-                        if (mNextMediaPlayer != null) {
-                            mNextMediaPlayer?.release()
-                            mNextMediaPlayer = null
-                        }
-                    }
-                } else {
+            if (setDataSourceImpl(mNextMediaPlayer!!, path)) {
+                try {
+                    mCurrentMediaPlayer.setNextMediaPlayer(mNextMediaPlayer)
+                } catch (e: IllegalArgumentException) {
+                    Log.e(TAG, "setNextDataSource: setNextMediaPlayer()", e)
                     if (mNextMediaPlayer != null) {
                         mNextMediaPlayer?.release()
                         mNextMediaPlayer = null
                     }
+                } catch (e: IllegalStateException) {
+                    Log.e(TAG, "setNextDataSource: setNextMediaPlayer()", e)
+                    if (mNextMediaPlayer != null) {
+                        mNextMediaPlayer?.release()
+                        mNextMediaPlayer = null
+                    }
+                }
+            } else {
+                if (mNextMediaPlayer != null) {
+                    mNextMediaPlayer?.release()
+                    mNextMediaPlayer = null
                 }
             }
         }

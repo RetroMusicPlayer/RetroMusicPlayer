@@ -117,6 +117,11 @@ class MusicService : MediaBrowserServiceCompat(),
     private var trackEndedByCrossfade = false
     private val serviceScope = CoroutineScope(Job() + Main)
 
+    // Every chromecast method needs to run on main thread or you are greeted with IllegalStateException
+    // So it will use Main dispatcher
+    // And by using Default dispatcher for local playback we are reducing the burden from main thread
+    private val playerDispatcher get() = if (playbackManager.isLocalPlayback) Default else Main
+
     @JvmField
     var position = -1
     private val appWidgetBig = AppWidgetBig.instance
@@ -436,11 +441,8 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun setPosition(position: Int) {
-        openTrackAndPrepareNextAt(position) { success ->
-            if (success) {
-                notifyChange(PLAY_STATE_CHANGED)
-            }
-        }
+        openTrackAndPrepareNextAt(position)
+        notifyChange(PLAY_STATE_CHANGED)
     }
 
     private fun getPreviousPosition(force: Boolean): Int {
@@ -755,16 +757,15 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     @Synchronized
-    fun openTrackAndPrepareNextAt(position: Int, completion: (success: Boolean) -> Unit) {
+    fun openTrackAndPrepareNextAt(position: Int): Boolean {
         this.position = position
-        openCurrent { success ->
-            completion(success)
-            notifyChange(META_CHANGED)
-            notHandledMetaChangedForCurrentTrack = false
-            if (success) {
-                prepareNextImpl()
-            }
+        val prepared = openCurrent()
+        if (prepared) {
+            prepareNextImpl()
         }
+        notifyChange(META_CHANGED)
+        notHandledMetaChangedForCurrentTrack = false
+        return prepared
     }
 
     fun pause(force: Boolean = false) {
@@ -793,16 +794,11 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun playSongAt(position: Int) {
-        // Every chromecast method needs to run on main thread or you are greeted with IllegalStateException
-        // So it will use Main dispatcher
-        // And by using Default dispatcher for local playback we are reduce the burden of main thread
-        serviceScope.launch(if(playbackManager.isLocalPlayback) Default else Main) {
-            openTrackAndPrepareNextAt(position) { success ->
-                if (success) {
-                    play()
-                } else {
-                    showToast(resources.getString(R.string.unplayable_file))
-                }
+        serviceScope.launch(playerDispatcher) {
+            if (openTrackAndPrepareNextAt(position)) {
+                play()
+            } else {
+                showToast(R.string.unplayable_file)
             }
         }
     }
@@ -917,15 +913,14 @@ class MusicService : MediaBrowserServiceCompat(),
                     originalPlayingQueue = ArrayList(restoredOriginalQueue)
                     playingQueue = ArrayList(restoredQueue)
                     position = restoredPosition
-                    withContext(Main) {
-                        openCurrent {
-                            prepareNext()
-                            if (restoredPositionInTrack > 0) {
-                                seek(restoredPositionInTrack)
-                            }
-                            notHandledMetaChangedForCurrentTrack = true
-                            sendChangeInternal(META_CHANGED)
+                    withContext(playerDispatcher) {
+                        openCurrent()
+                        prepareNext()
+                        if (restoredPositionInTrack > 0) {
+                            seek(restoredPositionInTrack)
                         }
+                        notHandledMetaChangedForCurrentTrack = true
+                        sendChangeInternal(META_CHANGED)
                         if (receivedHeadsetConnected) {
                             play()
                             receivedHeadsetConnected = false
@@ -1169,15 +1164,18 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     @Synchronized
-    private fun openCurrent(completion: (success: Boolean) -> Unit) {
+    private fun openCurrent(): Boolean {
         val force = if (!trackEndedByCrossfade) {
             true
         } else {
             trackEndedByCrossfade = false
             false
         }
-        playbackManager.setDataSource(currentSong, force) { success ->
-            completion(success)
+        return try {
+            playbackManager.setDataSource(currentSong, force)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
         }
     }
 
@@ -1191,12 +1189,10 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private fun restorePlaybackState(wasPlaying: Boolean, progress: Int) {
         playbackManager.setCallbacks(this)
-        openTrackAndPrepareNextAt(position) { success ->
-            if (success) {
-                seek(progress)
-                if (wasPlaying) {
-                    play()
-                }
+        if (openTrackAndPrepareNextAt(position)) {
+            seek(progress)
+            if (wasPlaying) {
+                play()
             }
         }
         playbackManager.setCrossFadeDuration(crossFadeDuration)

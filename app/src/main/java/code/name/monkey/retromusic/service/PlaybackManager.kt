@@ -16,7 +16,7 @@ class PlaybackManager(val context: Context) {
     var playback: Playback? = null
     private var playbackLocation = PlaybackLocation.LOCAL
 
-    val isLocalPlayback get() = playbackLocation== PlaybackLocation.LOCAL
+    val isLocalPlayback get() = playbackLocation == PlaybackLocation.LOCAL
 
     val audioSessionId: Int
         get() = if (playback != null) {
@@ -86,12 +86,8 @@ class PlaybackManager(val context: Context) {
 
     fun seek(millis: Int): Int = playback!!.seek(millis)
 
-    fun setDataSource(
-        song: Song,
-        force: Boolean,
-        completion: (success: Boolean) -> Unit,
-    ) {
-        playback?.setDataSource(song, force, completion)
+    fun setDataSource(song: Song, force: Boolean): Boolean {
+        return playback?.setDataSource(song, force) == true
     }
 
     fun setNextDataSource(trackUri: String) {
