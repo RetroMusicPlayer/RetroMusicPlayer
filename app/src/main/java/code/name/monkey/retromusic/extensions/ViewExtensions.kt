@@ -38,6 +38,8 @@ import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigationrail.NavigationRailView
 import dev.chrisbanes.insetter.applyInsetter
 
 const val ANIM_DURATION = 300L
@@ -74,7 +76,8 @@ fun EditText.appHandleColor(): EditText {
  * Instead, take a snapshot of the view, and animate this in, only changing the visibility (and
  * thus layout) when the animation completes.
  */
-fun BottomNavigationView.show() {
+fun NavigationBarView.show() {
+    if (this is NavigationRailView) return
     if (isVisible) return
 
     val parent = parent as ViewGroup
@@ -118,7 +121,8 @@ fun BottomNavigationView.show() {
  * Instead, take a snapshot, instantly hide the view (so content lays out to fill), then animate
  * out the snapshot.
  */
-fun BottomNavigationView.hide() {
+fun NavigationBarView.hide() {
+    if (this is NavigationRailView) return
     if (isGone) return
 
     if (!isLaidOut) {

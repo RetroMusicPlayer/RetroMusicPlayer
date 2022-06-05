@@ -80,7 +80,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
             navGraph.setStartDestination(categoryInfo.category.id)
         }
         navController.graph = navGraph
-        NavigationUI.setupWithNavController(mainActivity.bottomNavigationView, navController)
+        NavigationUI.setupWithNavController(mainActivity.navigationView, navController)
         navController.addOnDestinationChangedListener { _, _, _ ->
             binding.appBarLayout.setExpanded(true, true)
         }

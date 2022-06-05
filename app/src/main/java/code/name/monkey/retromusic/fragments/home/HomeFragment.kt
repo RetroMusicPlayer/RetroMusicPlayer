@@ -192,7 +192,7 @@ class HomeFragment :
     }
 
     private fun checkForMargins() {
-        if (mainActivity.bottomNavigationView.isVisible) {
+        if (mainActivity.isBottomNavVisible) {
             binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = dip(R.dimen.bottom_nav_height)
             }

@@ -66,6 +66,7 @@ import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.logD
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -127,7 +128,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                     }
                     STATE_SETTLING, STATE_DRAGGING -> {
                         if (fromNotification) {
-                            binding.bottomNavigationView.bringToFront()
+                            binding.navigationView.bringToFront()
                             fromNotification = false
                         }
                     }
@@ -162,7 +163,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         updateColor()
         if (!PreferenceUtil.materialYou) {
             binding.slidingPanel.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
-            bottomNavigationView.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
+            navigationView.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
         }
 
         navigationBarColor = surfaceColor()
@@ -230,7 +231,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 updateTabs()
             }
             TAB_TEXT_MODE -> {
-                bottomNavigationView.labelVisibilityMode = PreferenceUtil.tabTitleMode
+                navigationView.labelVisibilityMode = PreferenceUtil.tabTitleMode
             }
             TOGGLE_FULL_SCREEN -> {
                 if (!PreferenceUtil.isFullScreenMode) exitFullscreen()
@@ -258,8 +259,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         val alpha = 1 - progress
         miniPlayerFragment?.view?.alpha = 1 - (progress / 0.2F)
         miniPlayerFragment?.view?.isGone = alpha == 0f
-        binding.bottomNavigationView.translationY = progress * 500
-        binding.bottomNavigationView.alpha = alpha
+        if (!isLandscape) {
+            binding.navigationView.translationY = progress * 500
+            binding.navigationView.alpha = alpha
+        }
         binding.playerFragmentContainer.alpha = (progress - 0.2F) / 0.2F
     }
 
@@ -316,9 +319,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         })
     }
 
-    val bottomNavigationView get() = binding.bottomNavigationView
+    val navigationView get() = binding.navigationView
 
     val slidingPanel get() = binding.slidingPanel
+
+    val isBottomNavVisible get() = navigationView.isVisible && navigationView is BottomNavigationView
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -386,18 +391,18 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     }
 
     fun updateTabs() {
-        binding.bottomNavigationView.menu.clear()
+        binding.navigationView.menu.clear()
         val currentTabs: List<CategoryInfo> = PreferenceUtil.libraryCategory
         for (tab in currentTabs) {
             if (tab.visible) {
                 val menu = tab.category
-                binding.bottomNavigationView.menu.add(0, menu.id, 0, menu.stringRes)
+                binding.navigationView.menu.add(0, menu.id, 0, menu.stringRes)
                     .setIcon(menu.icon)
             }
         }
-        if (binding.bottomNavigationView.menu.size() == 1) {
+        if (binding.navigationView.menu.size() == 1) {
             isInOneTabMode = true
-            binding.bottomNavigationView.isVisible = false
+            binding.navigationView.isVisible = false
         } else {
             isInOneTabMode = false
         }
@@ -423,33 +428,33 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             )
             return
         }
-        if (visible xor bottomNavigationView.isVisible) {
+        if (visible xor navigationView.isVisible) {
             val mAnimate = animate && bottomSheetBehavior.state == STATE_COLLAPSED
             if (mAnimate) {
                 if (visible) {
-                    binding.bottomNavigationView.bringToFront()
-                    binding.bottomNavigationView.show()
+                    binding.navigationView.bringToFront()
+                    binding.navigationView.show()
                 } else {
-                    binding.bottomNavigationView.hide()
+                    binding.navigationView.hide()
                 }
             } else {
-                binding.bottomNavigationView.isVisible = false
+                binding.navigationView.isVisible = visible
                 if (visible && bottomSheetBehavior.state != STATE_EXPANDED) {
-                    binding.bottomNavigationView.bringToFront()
+                    binding.navigationView.bringToFront()
                 }
             }
         }
         hideBottomSheet(
             hide = hideBottomSheet,
             animate = animate,
-            isBottomNavVisible = visible
+            isBottomNavVisible = visible  && navigationView is BottomNavigationView
         )
     }
 
     fun hideBottomSheet(
         hide: Boolean,
         animate: Boolean = false,
-        isBottomNavVisible: Boolean = bottomNavigationView.isVisible,
+        isBottomNavVisible: Boolean = navigationView.isVisible  && navigationView is BottomNavigationView,
     ) {
         val heightOfBar = windowInsets.getBottomInsets() + dip(R.dimen.mini_player_height)
         val heightOfBarWithTabs = heightOfBar + dip(R.dimen.bottom_nav_height)
@@ -463,7 +468,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 binding.slidingPanel.elevation = 0F
-                binding.bottomNavigationView.elevation = 5F
+                binding.navigationView.elevation = 5F
                 if (isBottomNavVisible) {
                     logD("List")
                     if (animate) {
