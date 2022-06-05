@@ -123,6 +123,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/action_last_added_playlist"
+        android:name="code.name.monkey.retromusic.fragments.other.LastAddedPlaylistFragment"
+        android:label="LastAddedPlaylistFragment">
+    </fragment>
+
+    <fragment
         android:id="@+id/user_info_fragment"
         android:name="code.name.monkey.retromusic.fragments.other.UserInfoFragment" />
 

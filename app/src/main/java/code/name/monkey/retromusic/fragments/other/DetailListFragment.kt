@@ -57,7 +57,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 
 
-class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
+class LastAddedPlaylistFragment: DetailListFragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        arguments = Bundle().apply { putInt("type", LAST_ADDED_PLAYLIST) }
+        super.onCreate(savedInstanceState)
+    }
+}
+
+open class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
     IArtistClickListener, IAlbumClickListener, ICabHolder {
     private val args by navArgs<DetailListFragmentArgs>()
     private var _binding: FragmentPlaylistDetailBinding? = null

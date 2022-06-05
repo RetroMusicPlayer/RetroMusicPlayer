@@ -100,7 +100,7 @@ class MainActivity : AbsCastActivity(), OnSharedPreferenceChangeListener {
                 currentFragment(R.id.fragment_container)?.enterTransition = null
             }
             when (destination.id) {
-                R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre, R.id.action_search -> {
+                R.id.action_home, R.id.action_song, R.id.action_album, R.id.action_artist, R.id.action_folder, R.id.action_playlist, R.id.action_genre, R.id.action_search, R.id.action_last_added_playlist -> {
                     // Save the last tab
                     if (PreferenceUtil.rememberLastTab) {
                         saveTab(destination.id)

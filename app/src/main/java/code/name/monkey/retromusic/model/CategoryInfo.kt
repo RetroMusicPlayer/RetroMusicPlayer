@@ -38,6 +38,7 @@ data class CategoryInfo(
         Playlists(R.id.action_playlist, R.string.playlists, R.drawable.asld_playlist),
         Genres(R.id.action_genre, R.string.genres, R.drawable.asld_guitar),
         Folder(R.id.action_folder, R.string.folders, R.drawable.asld_folder),
-        Search(R.id.action_search, R.string.action_search, R.drawable.ic_search);
+        Search(R.id.action_search, R.string.action_search, R.drawable.ic_search),
+        LastAdded(R.id.action_last_added_playlist, R.string.last_added, R.drawable.ic_library_add);
     }
 }
