@@ -152,6 +152,11 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
             }
     }
 
+    override fun onPause() {
+        super.onPause()
+        lastRequest = null
+    }
+
     override fun onResume() {
         super.onResume()
         lastRequest = null

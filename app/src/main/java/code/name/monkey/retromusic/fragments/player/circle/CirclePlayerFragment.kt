@@ -162,7 +162,6 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
 
     override fun onResume() {
         super.onResume()
-        lastRequest = null
         progressViewUpdateHelper.start()
         if (audioVolumeObserver == null) {
             audioVolumeObserver = AudioVolumeObserver(requireActivity())
@@ -179,6 +178,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
 
     override fun onPause() {
         super.onPause()
+        lastRequest = null
         progressViewUpdateHelper.stop()
     }
 
