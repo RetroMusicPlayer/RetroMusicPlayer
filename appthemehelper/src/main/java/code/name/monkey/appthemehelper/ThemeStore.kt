@@ -350,7 +350,7 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
 
         private fun isWallpaperAccentEnabled(context: Context): Boolean {
             return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("wallpaper_accent", VersionUtils.hasOreoMR1() && !VersionUtils.hasS())
+                .getBoolean("wallpaper_accent", false)
         }
     }
 }
