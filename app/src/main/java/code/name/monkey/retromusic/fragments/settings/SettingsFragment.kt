@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.FragmentSettingsBinding
 import code.name.monkey.retromusic.extensions.applyToolbar
-import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorCallback
@@ -33,11 +32,6 @@ import com.afollestad.materialdialogs.color.ColorCallback
 class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        val mSavedInstanceState = extra<Bundle>(TAG).value ?: savedInstanceState
-        super.onCreate(mSavedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentSettingsBinding.bind(view)
@@ -77,15 +71,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
         ThemeStore.editTheme(requireContext()).accentColor(color).commit()
         if (VersionUtils.hasNougatMR())
             DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
-        restartActivity()
-    }
-
-    fun restartActivity() {
-        if (activity is OnThemeChangedListener && !VersionUtils.hasS()) {
-            (activity as OnThemeChangedListener).onThemeValuesChanged()
-        } else {
-            activity?.recreate()
-        }
+        activity?.recreate()
     }
 
     override fun onDestroyView() {
@@ -96,8 +82,4 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
     companion object {
         val TAG: String = SettingsFragment::class.java.simpleName
     }
-}
-
-interface OnThemeChangedListener {
-    fun onThemeValuesChanged()
 }

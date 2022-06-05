@@ -108,10 +108,6 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     }
 
     fun restartActivity() {
-        if (activity is OnThemeChangedListener && !VersionUtils.hasS()) {
-            (activity as OnThemeChangedListener).onThemeValuesChanged()
-        } else {
-            activity?.recreate()
-        }
+        activity?.recreate()
     }
 }

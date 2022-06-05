@@ -24,7 +24,6 @@ import androidx.navigation.ui.setupWithNavController
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.extensions.*
-import code.name.monkey.retromusic.fragments.settings.OnThemeChangedListener
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SearchQueryHelper.getSongs
 import code.name.monkey.retromusic.interfaces.IScrollHelper
@@ -39,14 +38,14 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
-class MainActivity : AbsCastActivity(), OnThemeChangedListener {
+class MainActivity : AbsCastActivity() {
     companion object {
         const val TAG = "MainActivity"
         const val EXPAND_PANEL = "expand_panel"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(extra<Bundle>(TAG).value ?: savedInstanceState)
+        super.onCreate(savedInstanceState)
         setTaskDescriptionColorAuto()
         hideStatusBar()
         updateTabs()
@@ -130,19 +129,6 @@ class MainActivity : AbsCastActivity(), OnThemeChangedListener {
             expandPanel()
             intent?.removeExtra(EXPAND_PANEL)
         }
-    }
-
-    override fun onThemeValuesChanged() {
-        restart()
-    }
-
-    private fun restart() {
-        val savedInstanceState = Bundle()
-        onSaveInstanceState(savedInstanceState)
-        finish()
-        val intent = Intent(this, this::class.java).putExtra(TAG, savedInstanceState)
-        startActivity(intent)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
     override fun onServiceConnected() {
