@@ -3,6 +3,8 @@ package code.name.monkey.retromusic.service
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.media.MediaPlayer
+import android.os.Handler
+import android.os.Looper
 import androidx.core.animation.doOnEnd
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -57,7 +59,9 @@ class AudioFader {
             animator.doOnEnd {
                 callback.run()
             }
-            animator.start()
+            Handler(Looper.getMainLooper()).post {
+                animator.start()
+            }
         }
     }
 }
