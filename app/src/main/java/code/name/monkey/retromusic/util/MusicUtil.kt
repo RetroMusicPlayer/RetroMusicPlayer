@@ -226,18 +226,21 @@ object MusicUtil : KoinComponent {
         }
     }
 
-    fun getSectionName(mediaTitle: String?): String {
+    fun getSectionName(mediaTitle: String?, stripPrefix: Boolean = false): String {
         var musicMediaTitle = mediaTitle
         return try {
             if (musicMediaTitle.isNullOrEmpty()) {
                 return "-"
             }
             musicMediaTitle = musicMediaTitle.trim { it <= ' ' }.lowercase()
-            if (musicMediaTitle.startsWith("the ")) {
-                musicMediaTitle = musicMediaTitle.substring(4)
-            } else if (musicMediaTitle.startsWith("a ")) {
-                musicMediaTitle = musicMediaTitle.substring(2)
+            if (stripPrefix) {
+                if (musicMediaTitle.startsWith("the ")) {
+                    musicMediaTitle = musicMediaTitle.substring(4)
+                } else if (musicMediaTitle.startsWith("a ")) {
+                    musicMediaTitle = musicMediaTitle.substring(2)
+                }
             }
+
             if (musicMediaTitle.isEmpty()) {
                 ""
             } else musicMediaTitle.substring(0, 1).uppercase()

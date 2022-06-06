@@ -144,6 +144,13 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         sortOrderMenu.clear()
         sortOrderMenu.add(
             0,
+            R.id.action_song_default_sort_order,
+            0,
+            R.string.sort_order_default
+        ).isChecked =
+            currentSortOrder == SongSortOrder.SONG_DEFAULT
+        sortOrderMenu.add(
+            0,
             R.id.action_song_sort_order_asc,
             0,
             R.string.sort_order_a_z
@@ -270,6 +277,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
 
     private fun handleSortOrderMenuItem(item: MenuItem): Boolean {
         val sortOrder: String = when (item.itemId) {
+            R.id.action_song_default_sort_order -> SongSortOrder.SONG_DEFAULT
             R.id.action_song_sort_order_asc -> SongSortOrder.SONG_A_Z
             R.id.action_song_sort_order_desc -> SongSortOrder.SONG_Z_A
             R.id.action_song_sort_order_artist -> SongSortOrder.SONG_ARTIST
