@@ -202,13 +202,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 miniPlayerFragment?.setUpButtons()
             }
             NOW_PLAYING_SCREEN_ID -> {
+                chooseFragmentForTheme()
                 binding.slidingPanel.updateLayoutParams<ViewGroup.LayoutParams> {
                     height = if (nowPlayingScreen != Peek) {
                         ViewGroup.LayoutParams.MATCH_PARENT
                     } else {
                         ViewGroup.LayoutParams.WRAP_CONTENT
                     }
-                    chooseFragmentForTheme()
                     onServiceConnected()
                 }
             }
