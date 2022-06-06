@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <code.name.monkey.appthemehelper.common.views.ATESwitch xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/checkbox"
+    style="@style/Widget.Material3.CompoundButton.MaterialSwitch"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="false"

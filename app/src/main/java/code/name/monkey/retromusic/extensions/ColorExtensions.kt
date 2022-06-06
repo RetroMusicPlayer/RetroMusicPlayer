@@ -135,7 +135,9 @@ fun Button.accentTextColor() {
 
 fun MaterialButton.accentBackgroundColor() {
     if (materialYou) return
-    backgroundTintList = ColorStateList.valueOf(context.accentColor())
+    backgroundTintList = ColorStateList(
+        arrayOf(intArrayOf(android.R.attr.state_enabled), intArrayOf()),
+            intArrayOf(context.accentColor(), context.accentColor().addAlpha(0.12f)))
 }
 
 fun MaterialButton.accentOutlineColor() {

@@ -2,34 +2,24 @@ package code.name.monkey.appthemehelper.common.views
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.ATH
 import code.name.monkey.appthemehelper.ThemeStore
+import com.google.android.material.materialswitch.MaterialSwitch
 
 /**
  * @author Aidan Follestad (afollestad)
  */
-class ATESwitch : SwitchCompat {
+class ATESwitch @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = -1,
+) : MaterialSwitch(context, attrs, defStyleAttr) {
 
-    constructor(context: Context) : super(context) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
-        init(context)
-    }
-
-    private fun init(context: Context) {
-        ATH.setTint(this, ThemeStore.accentColor(context))
+    init {
+        if (!isInEditMode && !ThemeStore.isMD3Enabled(context)) {
+            ATH.setTint(this, ThemeStore.accentColor(context))
+        }
     }
 
     override fun isShown(): Boolean {

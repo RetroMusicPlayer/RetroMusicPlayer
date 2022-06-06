@@ -343,7 +343,7 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
             return true
         }
 
-        private fun isMD3Enabled(context: Context): Boolean {
+        fun isMD3Enabled(context: Context): Boolean {
             return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(ThemeStorePrefKeys.KEY_MATERIAL_YOU, VersionUtils.hasS())
         }
