@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -72,6 +73,10 @@ class App : Application() {
         // setting Error activity
         CaocConfig.Builder.create().errorActivity(ErrorActivity::class.java)
             .restartActivity(MainActivity::class.java).apply()
+
+        // Set Default values for now playing preferences
+        // This will reduce start time for now playing settings fragment as Preference listener of AbsSlidingMusicPanelActivity won't be called
+        PreferenceManager.setDefaultValues(this, R.xml.pref_now_playing_screen, false)
     }
 
     override fun onTerminate() {
