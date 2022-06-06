@@ -109,7 +109,7 @@ class PlaylistsFragment :
             7 -> gridSizeMenu.findItem(R.id.action_grid_size_7).isChecked = true
             8 -> gridSizeMenu.findItem(R.id.action_grid_size_8).isChecked = true
         }
-        val gridSize = if (RetroUtil.isLandscape) 4 else 2
+        val gridSize = if (RetroUtil.isLandscape) 4 else 3
         if (gridSize < 8) {
             gridSizeMenu.findItem(R.id.action_grid_size_8).isVisible = false
         }

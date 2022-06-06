@@ -39,6 +39,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RetroMusic.FollowSystem"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="m">
         <activity
             android:name=".activities.MainActivity"
