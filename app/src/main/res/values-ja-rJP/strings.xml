@@ -285,7 +285,7 @@
     <string name="only_on_wifi">Wi-Fi時のみ</string>
     <string name="other_settings_summary">高度な試験的機能</string>
     <string name="others">その他</string>
-    <string name="over_cover">Over Cover</string>
+    <string name="over_cover">カバーに重ねて表示</string>
     <string name="password">パスワード</string>
     <string name="past_three_months">過去3ヶ月</string>
     <string name="paste_lyrics_here">ここに歌詞を貼り付け</string>
@@ -331,7 +331,7 @@
     <string name="pref_keep_screen_on_summary">この機能をオンにすると、バッテリー寿命に影響する可能性があります</string>
     <string name="pref_keep_screen_on_title">画面をオンのままにする</string>
     <string name="pref_language_name">言語を選択</string>
-    <string name="pref_snow_fall_title">Snow fall effect</string>
+    <string name="pref_snow_fall_title">雪エフェクト</string>
     <string name="pref_summary_album_art_on_lockscreen">再生中のジャケットをロック画面の壁紙に適用する</string>
     <string name="pref_summary_album_artists_only">アーティストカテゴリ内にアルバムのアーティストを表示する</string>
     <string name="pref_summary_audio_ducking">システムでサウンドが再生されたとき、または通知が受信されたときに一時的に音量を下げる</string>
@@ -359,7 +359,7 @@
     <string name="pref_summary_pause_history">有効にすると、新たに再生された曲は履歴に表示されません</string>
     <string name="pref_summary_remember_tab">開始時に最後に表示したタブに移動します</string>
     <string name="pref_summary_show_lyrics">同期歌詞をアルバムカバーに重ねて表示します</string>
-    <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
+    <string name="pref_summary_suggestions">新しい音楽ミックスをホーム画面に表示する</string>
     <string name="pref_summary_swipe_anywhere_now_playing">再生中画面のどこかをスワイプして、楽曲の変更を行います</string>
     <string name="pref_summary_swipe_to_dismiss">下にスワイプしてミニプレイヤーを閉じます</string>
     <string name="pref_summary_toggle_full_screen">アプリをフルスクリーン表示にする</string>
@@ -385,7 +385,7 @@
     <string name="pref_title_colored_app">アダプティブカラー</string>
     <string name="pref_title_colored_notification">色付きの通知</string>
     <string name="pref_title_cross_fade">クロスフェード (ベータ版)</string>
-    <string name="pref_title_custom_font">Use Manrope font</string>
+    <string name="pref_title_custom_font">フォントに Manrope を使用する</string>
     <string name="pref_title_desaturated_color">彩度の低い色</string>
     <string name="pref_title_expand_now_playing_panel">通知から再生画面を開く</string>
     <string name="pref_title_extra_controls">追加コントロール</string>
@@ -403,7 +403,7 @@
     <string name="pref_title_manage_audio_focus">常に再生する</string>
     <string name="pref_title_now_playing_screen_appearance">再生中のテーマ</string>
     <string name="pref_title_open_source_licences">オープンソースライセンス</string>
-    <string name="pref_title_pause_history">Pause history</string>
+    <string name="pref_title_pause_history">視聴履歴を一時停止</string>
     <string name="pref_title_remember_tab">最後に開いたタブを記憶する</string>
     <string name="pref_title_show_lyrics">歌詞を表示する</string>
     <string name="pref_title_suggestions">提案を表示する</string>
@@ -416,7 +416,7 @@
     <string name="pref_title_toggle_toggle_shuffle">シャッフルモード</string>
     <string name="pref_title_toggle_volume">ボリュームコントロール</string>
     <string name="pref_title_wallpaper_accent">壁紙の色を使用する</string>
-    <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_whitelist">楽曲のホワイトリスト</string>
     <string name="pro">プロ版</string>
     <string name="pro_summary">ダークモード、「再生中」スキン、カルーセルエフェクトなど…</string>
     <string name="profile">プロフィール</string>
@@ -459,7 +459,7 @@
     <string name="saf_guide_slide2_description">SDカードのルートディレクトリを選択してください</string>
     <string name="saf_guide_slide2_title">ナビゲーションドロワーからSDカードを選択します</string>
     <string name="saf_guide_slide3_description">サブフォルダは開かないでください</string>
-    <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
+    <string name="saf_guide_slide3_title">画面下の「選択」ボタンをタップしてください</string>
     <string name="saf_write_failed">ファイルの書き込みに失敗しました: %s</string>
     <string name="save">保存</string>
     <!-- SAF -->
@@ -470,7 +470,7 @@
     <string name="saving_changes">変更を保存中</string>
     <string name="scan_media">メディアをスキャン</string>
     <string name="scanned_files">%2$d のうち、%1$d がスキャンされました</string>
-    <string name="scrobbles_label">Scrobbles</string>
+    <string name="scrobbles_label">Scrobble 機能</string>
     <string name="select_all">すべて選択</string>
     <string name="selected">選択された</string>
     <string name="set">決定</string>
