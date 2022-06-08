@@ -12,37 +12,22 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/albumCoverContainer"
-            android:layout_width="0dp"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/playerAlbumCoverFragment"
+            android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/playerAlbumCoverFragment"
-                android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout="@layout/fragment_album_cover" />
-        </FrameLayout>
-
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/shadow_down_strong"
-            app:layout_constraintBottom_toBottomOf="@id/toolbarContainer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/toolbarContainer" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_album_cover" />
 
         <LinearLayout
             android:id="@+id/toolbarContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/shadow_down_strong"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,11 +41,11 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/playerToolbar"
                 style="@style/Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
+                        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
         </LinearLayout>
-
 
         <include
             android:id="@+id/playerControlsContainer"
@@ -70,7 +55,7 @@
             android:elevation="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/albumCoverContainer" />
+            app:layout_constraintTop_toBottomOf="@id/playerAlbumCoverFragment" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -78,8 +63,7 @@
         style="@style/BottomSheetStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:theme="@style/TopCornerCardView"
+        app:shapeAppearanceOverlay="@style/TopCornerCardView"
         app:behavior_hideable="false"
         app:cardElevation="24dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"

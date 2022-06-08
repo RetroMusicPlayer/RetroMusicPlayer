@@ -20,7 +20,6 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -40,7 +39,7 @@ class FitPlaybackControlsFragment :
     private var _binding: FragmentFitPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val seekBar: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -128,7 +127,7 @@ class FitPlaybackControlsFragment :
         val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
             color.primaryTextColor
         } else {
-            ThemeStore.accentColor(requireContext()).ripAlpha()
+            accentColor().ripAlpha()
         }
 
         volumeFragment?.setTintable(colorFinal)

@@ -684,7 +684,6 @@ public class LrcView extends View {
           mOffset = (float) animation.getAnimatedValue();
           invalidate();
         });
-    LrcUtils.resetDurationScale();
     mAnimator.start();
   }
 

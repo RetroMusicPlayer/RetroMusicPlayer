@@ -14,6 +14,8 @@
 
 package code.name.monkey.retromusic.service.playback
 
+import code.name.monkey.retromusic.model.Song
+
 
 interface Playback {
 
@@ -23,11 +25,11 @@ interface Playback {
 
     val audioSessionId: Int
 
-    fun setDataSource(path: String, force: Boolean): Boolean
+    fun setDataSource(song: Song, force: Boolean):Boolean
 
     fun setNextDataSource(path: String?)
 
-    fun setCallbacks(callbacks: PlaybackCallbacks)
+    var callbacks: PlaybackCallbacks?
 
     fun start(): Boolean
 
@@ -57,5 +59,7 @@ interface Playback {
         fun onTrackEnded()
 
         fun onTrackEndedWithCrossfade()
+
+        fun onPlayStateChanged()
     }
 }

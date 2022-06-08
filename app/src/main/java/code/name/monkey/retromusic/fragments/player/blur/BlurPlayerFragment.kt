@@ -139,9 +139,13 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         updateBlur()
     }
 
+    override fun onPause() {
+        super.onPause()
+        lastRequest = null
+    }
+
     override fun onResume() {
         super.onResume()
-        lastRequest = null
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .registerOnSharedPreferenceChangeListener(this)
     }

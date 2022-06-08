@@ -3,6 +3,7 @@
 package code.name.monkey.retromusic.cast
 
 import android.content.Context
+import code.name.monkey.retromusic.activities.MainActivity
 import com.google.android.gms.cast.CastMediaControlIntent
 import com.google.android.gms.cast.framework.CastOptions
 import com.google.android.gms.cast.framework.OptionsProvider
@@ -22,12 +23,12 @@ class CastOptionsProvider : OptionsProvider {
         val compatButtonActionsIndices = intArrayOf(1, 3)
         val notificationOptions = NotificationOptions.Builder()
             .setActions(buttonActions, compatButtonActionsIndices)
-            .setTargetActivityClassName(ExpandedControlsActivity::class.java.name)
+            .setTargetActivityClassName(MainActivity::class.java.name)
             .build()
 
         val mediaOptions = CastMediaOptions.Builder()
             .setNotificationOptions(notificationOptions)
-            .setExpandedControllerActivityClassName(ExpandedControlsActivity::class.java.name)
+            .setExpandedControllerActivityClassName(MainActivity::class.java.name)
             .build()
 
         return CastOptions.Builder()

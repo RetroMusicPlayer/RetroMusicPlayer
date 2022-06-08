@@ -109,7 +109,7 @@ class PlaylistsFragment :
             7 -> gridSizeMenu.findItem(R.id.action_grid_size_7).isChecked = true
             8 -> gridSizeMenu.findItem(R.id.action_grid_size_8).isChecked = true
         }
-        val gridSize = if (RetroUtil.isLandscape) 4 else 2
+        val gridSize = if (RetroUtil.isLandscape) 4 else 3
         if (gridSize < 8) {
             gridSizeMenu.findItem(R.id.action_grid_size_8).isVisible = false
         }
@@ -245,9 +245,7 @@ class PlaylistsFragment :
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         findNavController().navigate(
             R.id.playlistDetailsFragment,
-            bundleOf(EXTRA_PLAYLIST to playlistWithSongs),
-            null,
-            null
+            bundleOf(EXTRA_PLAYLIST to playlistWithSongs)
         )
     }
 }

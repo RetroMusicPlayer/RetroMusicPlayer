@@ -46,7 +46,7 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
 
         binding.aboutContent.root.applyInsetter {
             type(navigationBars = true) {
-                padding()
+                padding(vertical = true)
             }
         }
     }

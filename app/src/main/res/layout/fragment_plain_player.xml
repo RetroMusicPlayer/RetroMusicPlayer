@@ -10,16 +10,7 @@
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <FrameLayout
-        android:id="@+id/statusBarContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include layout="@layout/status_bar" />
-    </FrameLayout>
+    <include layout="@layout/status_bar" />
 
     <LinearLayout
         android:id="@+id/titleContainer"
@@ -27,17 +18,15 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/statusBarContainer">
+        app:layout_constraintTop_toBottomOf="@id/status_bar">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
             android:singleLine="true"
             android:textAppearance="@style/TextViewHeadline6"
             android:textStyle="bold"
@@ -80,8 +69,9 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/playerToolbar"
         style="@style/Toolbar"
-        android:layout_gravity="bottom"
-        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

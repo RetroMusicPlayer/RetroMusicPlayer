@@ -16,6 +16,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/profile"
@@ -35,11 +36,11 @@
             android:layout_height="0dp"
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
+            android:transitionName="banner_image"
             app:layout_constraintDimensionRatio="21:10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:transitionName="banner_image"
             app:shapeAppearanceOverlay="@style/circleImageView"
             app:srcCompat="@drawable/material_design_default" />
 
@@ -86,15 +87,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/next"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginHorizontal="16dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
         android:fitsSystemWindows="false"
-        android:gravity="center"
-        android:text="@string/save"
-        app:icon="@drawable/ic_save"
-        app:iconGravity="textStart" />
+        android:src="@drawable/ic_save"
+        android:text="@string/save" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

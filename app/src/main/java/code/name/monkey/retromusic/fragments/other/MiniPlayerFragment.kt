@@ -66,7 +66,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
         _binding = FragmentMiniPlayerBinding.bind(view)
         view.setOnTouchListener(FlingPlayBackController(requireContext()))
         setUpMiniPlayer()
+        setUpButtons()
+    }
 
+    fun setUpButtons() {
         if (RetroUtil.isTablet) {
             binding.actionNext.show()
             binding.actionPrevious.show()

@@ -11,8 +11,8 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
         android:background="?attr/colorSurface"
+        app:defaultNavHost="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:layout="@layout/fragment_home" />
 
@@ -25,7 +25,8 @@
         app:behavior_peekHeight="0dp"
         app:enableEdgeToEdge="true"
         app:gestureInsetBottomIgnored="true"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:visibility="invisible">
 
         <FrameLayout
             android:id="@+id/playerFragmentContainer"
@@ -39,24 +40,16 @@
             android:layout_height="@dimen/mini_player_height"
             tools:layout="@layout/fragment_mini_player" />
 
-        <fragment
-            android:id="@+id/castMiniController"
-            class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </FrameLayout>
 
     <code.name.monkey.retromusic.views.BottomNavigationBarTinted
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/navigationView"
         style="@style/Widget.Material3.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:elevation="0dp"
         android:minHeight="@dimen/bottom_nav_height"
         app:itemHorizontalTranslationEnabled="false"
-        app:itemPaddingBottom="8dp"
-        app:itemPaddingTop="8dp"
-        app:menu="@menu/bottom_navigation_main" />
+        app:menu="@menu/bottom_navigation_main"
+        tools:viewBindingType="com.google.android.material.navigation.NavigationBarView"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

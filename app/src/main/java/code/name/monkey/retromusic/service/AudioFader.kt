@@ -3,6 +3,8 @@ package code.name.monkey.retromusic.service
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.media.MediaPlayer
+import android.os.Handler
+import android.os.Looper
 import androidx.core.animation.doOnEnd
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -10,29 +12,26 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 class AudioFader {
     companion object {
 
-        @JvmStatic
         inline fun createFadeAnimator(
-            fadeIn: Boolean /* fadeIn -> true  fadeOut -> false*/,
-            mediaPlayer: MediaPlayer,
-            crossinline endAction: (animator: Animator) -> Unit /* Code to run when Animator Ends*/
+            fadeInMp: MediaPlayer,
+            fadeOutMp: MediaPlayer,
+            crossinline endAction: (animator: Animator) -> Unit, /* Code to run when Animator Ends*/
         ): Animator? {
             val duration = PreferenceUtil.crossFadeDuration * 1000
             if (duration == 0) {
                 return null
             }
-            val startValue = if (fadeIn) 0f else 1.0f
-            val endValue = if (fadeIn) 1.0f else 0f
-            return ValueAnimator.ofFloat(startValue, endValue).apply {
+            return ValueAnimator.ofFloat(1f, 0f).apply {
                 this.duration = duration.toLong()
                 addUpdateListener { animation: ValueAnimator ->
-                    mediaPlayer.setVolume(
+                    fadeInMp.setVolume(
                         animation.animatedValue as Float, animation.animatedValue as Float
                     )
+                    fadeOutMp.setVolume(1 - animation.animatedValue as Float,
+                        1 - animation.animatedValue as Float)
                 }
                 doOnEnd {
                     endAction(it)
-                    // Set end values
-                    mediaPlayer.setVolume(endValue, endValue)
                 }
             }
         }
@@ -40,8 +39,8 @@ class AudioFader {
         @JvmStatic
         fun startFadeAnimator(
             playback: Playback,
-            fadeIn: Boolean /* fadeIn -> true  fadeOut -> false*/,
-            callback: Runnable /* Code to run when Animator Ends*/
+            fadeIn: Boolean, /* fadeIn -> true  fadeOut -> false*/
+            callback: Runnable, /* Code to run when Animator Ends*/
         ) {
             val duration = PreferenceUtil.audioFadeDuration.toLong()
             if (duration == 0L) {
@@ -60,7 +59,9 @@ class AudioFader {
             animator.doOnEnd {
                 callback.run()
             }
-            animator.start()
+            Handler(Looper.getMainLooper()).post {
+                animator.start()
+            }
         }
     }
 }

@@ -80,7 +80,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
             navGraph.setStartDestination(categoryInfo.category.id)
         }
         navController.graph = navGraph
-        NavigationUI.setupWithNavController(mainActivity.bottomNavigationView, navController)
+        NavigationUI.setupWithNavController(mainActivity.navigationView, navController)
         navController.addOnDestinationChangedListener { _, _, _ ->
             binding.appBarLayout.setExpanded(true, true)
         }
@@ -105,7 +105,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
     override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> findNavController().navigate(
-                R.id.settingsActivity,
+                R.id.settings_fragment,
                 null,
                 navOptions
             )

@@ -48,12 +48,12 @@
             tools:text="22.00" />
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/progressSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxHeight="2dp"
-        android:paddingVertical="@dimen/seekbar_padding"
+        style="@style/Widget.Retro.Slider"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:progressDrawable="@drawable/color_progress_seek"

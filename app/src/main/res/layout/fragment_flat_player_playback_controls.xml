@@ -19,14 +19,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/progressSlider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:maxHeight="2dp"
         android:paddingVertical="@dimen/seekbar_padding"
+        android:progressDrawable="@drawable/color_progress_seek"
         android:splitTrack="false"
         android:thumb="@drawable/switch_square"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
@@ -46,7 +47,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/progressSlider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
 

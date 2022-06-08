@@ -138,6 +138,7 @@
         android:overScrollMode="@integer/overScrollMode"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
+        android:paddingBottom="@dimen/mini_player_height"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     <com.google.android.material.textview.MaterialTextView

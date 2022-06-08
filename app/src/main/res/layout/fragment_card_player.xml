@@ -26,6 +26,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:elevation="20dp" />
+
     <include layout="@layout/shadow_statusbar_toolbar" />
 
     <FrameLayout
@@ -46,6 +47,8 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/playerToolbar"
                 style="@style/Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
         </LinearLayout>

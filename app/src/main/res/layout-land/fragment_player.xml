@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:clickable="true"
-    android:focusable="true"
-    android:background="?attr/colorSurface">
+    android:focusable="true">
 
     <View
         android:id="@+id/colorGradientBackground"
@@ -66,7 +66,8 @@
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/playerToolbar"
                         style="@style/Toolbar"
-                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
                 </FrameLayout>
 

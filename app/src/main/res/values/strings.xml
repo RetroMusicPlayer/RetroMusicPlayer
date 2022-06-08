@@ -178,6 +178,7 @@
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
     <string name="error_empty_name">Your name can\'t be empty!</string>
     <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favorites</string>
@@ -500,6 +501,7 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Song count</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>

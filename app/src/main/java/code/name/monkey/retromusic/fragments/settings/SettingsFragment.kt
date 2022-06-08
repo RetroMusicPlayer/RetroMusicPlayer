@@ -12,42 +12,37 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.activities
+package code.name.monkey.retromusic.fragments.settings
 
-import android.Manifest.permission.BLUETOOTH_CONNECT
-import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
-import code.name.monkey.retromusic.databinding.ActivitySettingsBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.databinding.FragmentSettingsBinding
+import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorCallback
 
-class SettingsActivity : AbsBaseActivity(), ColorCallback, OnThemeChangedListener {
-    private lateinit var binding: ActivitySettingsBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        val mSavedInstanceState = extra<Bundle>(TAG).value ?: savedInstanceState
-        super.onCreate(mSavedInstanceState)
-        binding = ActivitySettingsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setupToolbar()
-        setPermissionDeniedMessage(getString(R.string.permission_bluetooth_denied))
-    }
+class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onResume() {
-        super.onResume()
-        setNavigationBarColorPreOreo(surfaceColor())
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentSettingsBinding.bind(view)
+        setupToolbar()
     }
 
     private fun setupToolbar() {
         applyToolbar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
         val navController: NavController = findNavController(R.id.contentFrame)
         navController.addOnDestinationChangedListener { _, _, _ ->
             binding.collapsingToolbarLayout.title =
@@ -72,51 +67,19 @@ class SettingsActivity : AbsBaseActivity(), ColorCallback, OnThemeChangedListene
         return getString(idRes)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.contentFrame).navigateUp() || super.onSupportNavigateUp()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun getPermissionsToRequest(): Array<String> {
-        return if (VersionUtils.hasS()) {
-            arrayOf(BLUETOOTH_CONNECT)
-        } else {
-            arrayOf()
-        }
-    }
-
     override fun invoke(dialog: MaterialDialog, color: Int) {
-        ThemeStore.editTheme(this).accentColor(color).commit()
+        ThemeStore.editTheme(requireContext()).accentColor(color).commit()
         if (VersionUtils.hasNougatMR())
-            DynamicShortcutManager(this).updateDynamicShortcuts()
-        restart()
+            DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
+        activity?.recreate()
     }
 
-    override fun onThemeValuesChanged() {
-        restart()
-    }
-
-    private fun restart() {
-        val savedInstanceState = Bundle().apply {
-            onSaveInstanceState(this)
-        }
-        finish()
-        val intent = Intent(this, this::class.java).putExtra(TAG, savedInstanceState)
-        startActivity(intent)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
-        val TAG: String = SettingsActivity::class.java.simpleName
+        val TAG: String = SettingsFragment::class.java.simpleName
     }
-}
-
-interface OnThemeChangedListener {
-    fun onThemeValuesChanged()
 }

@@ -30,7 +30,7 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityDonationBinding
 import code.name.monkey.retromusic.databinding.ItemDonationOptionBinding
 import code.name.monkey.retromusic.extensions.*
@@ -38,7 +38,7 @@ import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.PurchaseInfo
 import com.anjlab.android.iab.v3.SkuDetails
 
-class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
+class SupportDevelopmentActivity : AbsThemeActivity(), BillingProcessor.IBillingHandler {
 
     lateinit var binding: ActivityDonationBinding
 
@@ -91,8 +91,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     private fun loadSkuDetails() {
         binding.progressContainer.isVisible = true
         binding.recyclerView.isVisible = false
-        val ids =
-            resources.getStringArray(DONATION_PRODUCT_IDS)
+        val ids = resources.getStringArray(DONATION_PRODUCT_IDS)
         billingProcessor!!.getPurchaseListingDetailsAsync(
             ArrayList(listOf(*ids)),
             object : BillingProcessor.ISkuDetailsResponseListener {
@@ -139,7 +138,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 
 class SkuDetailsAdapter(
     private var donationsDialog: SupportDevelopmentActivity,
-    objects: List<SkuDetails>
+    objects: List<SkuDetails>,
 ) : RecyclerView.Adapter<SkuDetailsAdapter.ViewHolder>() {
 
     private var skuDetailsList: List<SkuDetails> = ArrayList()
@@ -175,7 +174,7 @@ class SkuDetailsAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val skuDetails = skuDetailsList[i]
         with(viewHolder.binding) {
-            itemTitle.text = skuDetails.title.replace("Music Player - MP3 Player - Retro", "")
+            itemTitle.text = skuDetails.title.replace("(Retro Music Player MP3 Player)", "")
                 .trim { it <= ' ' }
             itemText.text = skuDetails.description
             itemText.isVisible = false
@@ -200,7 +199,7 @@ class SkuDetailsAdapter(
             strikeThrough(itemPrice, purchased)
         }
 
-        viewHolder.itemView.setOnTouchListener { _, _ -> purchased }
+        viewHolder.itemView.isEnabled = !purchased
         viewHolder.itemView.setOnClickListener { donationsDialog.donate(i) }
     }
 

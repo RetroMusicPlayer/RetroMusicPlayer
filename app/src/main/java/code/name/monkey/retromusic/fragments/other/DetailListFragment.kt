@@ -29,7 +29,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
@@ -37,7 +36,6 @@ import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.databinding.FragmentPlaylistDetailBinding
 import code.name.monkey.retromusic.db.toSong
-import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
@@ -71,7 +69,8 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             RECENT_ARTISTS,
             TOP_ALBUMS,
             RECENT_ALBUMS,
-            FAVOURITES -> {
+            FAVOURITES,
+            -> {
                 enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
                 returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
             }
@@ -103,13 +102,6 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             TOP_PLAYED_PLAYLIST -> topPlayed()
         }
 
-        binding.recyclerView.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
-            override fun onChanged() {
-                super.onChanged()
-                val height = dipToPix(52f)
-                binding.recyclerView.updatePadding(bottom = height.toInt())
-            }
-        })
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -282,7 +274,6 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
         cab?.let {
-            println("Cab")
             if (it.isActive()) {
                 it.destroy()
             }

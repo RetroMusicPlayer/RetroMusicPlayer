@@ -35,31 +35,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <include layout="@layout/status_bar" />
 
-                <include layout="@layout/status_bar" />
-            </FrameLayout>
-
-            <FrameLayout
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/playerToolbar"
+                style="@style/Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/playerToolbar"
-                    style="@style/Toolbar"
-                    android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                    app:contentInsetLeft="0dp"
-                    app:contentInsetStart="0dp"
-                    app:contentInsetStartWithNavigation="0dp"
-                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                    app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
-                    app:titleMargin="0dp"
-                    app:titleMarginStart="0dp"
-                    app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead" />
-            </FrameLayout>
+                android:layout_weight="0"
+                        app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
+                app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
+                app:titleMargin="0dp"
+                app:titleMarginStart="0dp"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -85,18 +76,13 @@
 
         </LinearLayout>
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/playbackControlsFragment"
+            android:name="code.name.monkey.retromusic.fragments.player.cardblur.CardBlurPlaybackControlsFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/playbackControlsFragment"
-                android:name="code.name.monkey.retromusic.fragments.player.cardblur.CardBlurPlaybackControlsFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout="@layout/fragment_card_blur_player_playback_controls" />
-        </FrameLayout>
+            android:layout_gravity="bottom"
+            tools:layout="@layout/fragment_card_blur_player_playback_controls" />
     </FrameLayout>
 
 </FrameLayout>

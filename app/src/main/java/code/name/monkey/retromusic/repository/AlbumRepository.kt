@@ -72,9 +72,11 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
     // We don't need sorted list of songs (with sortAlbumSongs())
     // cuz we are just displaying Albums(Cover Arts) anyway and not songs
     fun splitIntoAlbums(
-        songs: List<Song>
+        songs: List<Song>,
+        sorted: Boolean = true
     ): List<Album> {
         val grouped = songs.groupBy { it.albumId }.map { Album(it.key, it.value) }
+        if (!sorted) return grouped
         val collator = Collator.getInstance()
         return when (PreferenceUtil.albumSortOrder) {
             SortOrder.AlbumSortOrder.ALBUM_A_Z -> {

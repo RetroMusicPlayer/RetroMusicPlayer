@@ -26,7 +26,6 @@ import android.graphics.drawable.Drawable
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.graphics.drawable.toBitmap
-import androidx.media.app.NotificationCompat.DecoratedMediaCustomViewStyle
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -47,7 +46,6 @@ import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -77,6 +75,7 @@ class PlayingNotificationClassic(
     }
 
     override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
+        if (song == Song.emptySong) return
         val notificationLayout = getCombinedRemoteViews(true, song)
         val notificationLayoutBig = getCombinedRemoteViews(false, song)
 
@@ -103,7 +102,6 @@ class PlayingNotificationClassic(
         setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         setCustomContentView(notificationLayout)
         setCustomBigContentView(notificationLayoutBig)
-        setStyle(DecoratedMediaCustomViewStyle())
         setOngoing(true)
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
@@ -252,8 +250,7 @@ class PlayingNotificationClassic(
         }
     }
 
-    override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
-    }
+    override fun updateFavorite(isFavorite: Boolean) {}
 
     private fun buildPendingIntent(
         context: Context, action: String,

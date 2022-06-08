@@ -7,37 +7,22 @@
     android:fitsSystemWindows="true"
     android:transitionGroup="true">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="@integer/overScrollMode"
+        android:scrollbars="none"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    <code.name.monkey.retromusic.views.TopAppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:liftOnScroll="true"
+        style="?appBarLayoutStyle"
         android:fitsSystemWindows="true">
-
-        <FrameLayout
-            android:id="@+id/toolbar_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:navigationIcon="@drawable/ic_search"
-                app:popupTheme="?attr/toolbarPopupTheme"
-                app:title="@null"
-                tools:ignore="UnusedAttribute">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/appNameText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textAppearance="@style/TextViewHeadline6"
-                    android:textStyle="bold" />
-            </androidx.appcompat.widget.Toolbar>
-        </FrameLayout>
 
         <code.name.monkey.retromusic.views.BreadCrumbLayout
             android:id="@+id/breadCrumbs"
@@ -46,7 +31,7 @@
             android:paddingStart="60dp"
             android:paddingEnd="8dp"
             app:layout_collapseMode="pin" />
-    </com.google.android.material.appbar.AppBarLayout>
+    </code.name.monkey.retromusic.views.TopAppBarLayout>
 
     <LinearLayout
         android:id="@android:id/empty"
@@ -77,12 +62,4 @@
             tools:visibility="visible" />
     </LinearLayout>
 
-    <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:overScrollMode="@integer/overScrollMode"
-        android:scrollbars="none"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

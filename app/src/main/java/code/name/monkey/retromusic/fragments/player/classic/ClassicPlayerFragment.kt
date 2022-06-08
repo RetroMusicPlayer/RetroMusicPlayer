@@ -85,7 +85,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
 
     private val bottomSheetCallbackList = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            mainActivity.getBottomSheetBehavior().isDraggable = false   
+            mainActivity.getBottomSheetBehavior().isDraggable = false
             binding.playerQueueSheet.setContentPadding(
                 binding.playerQueueSheet.contentPaddingLeft,
                 (slideOffset * binding.statusBar.height).toInt(),

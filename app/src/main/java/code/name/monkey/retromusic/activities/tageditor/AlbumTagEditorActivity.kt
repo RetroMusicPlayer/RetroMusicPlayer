@@ -39,6 +39,7 @@ import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
 import code.name.monkey.retromusic.util.RetroColorUtil.getColor
+import code.name.monkey.retromusic.util.logD
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.transition.Transition
@@ -98,7 +99,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
         binding.albumArtistText.setText(albumArtistName)
         binding.genreTitle.setText(genreName)
         binding.yearTitle.setText(songYear)
-        println(albumTitle + albumArtistName)
+        logD(albumTitle + albumArtistName)
     }
 
     override fun loadCurrentImage() {

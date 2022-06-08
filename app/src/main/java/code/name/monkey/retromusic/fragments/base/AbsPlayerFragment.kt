@@ -163,8 +163,10 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
             R.id.now_playing -> {
                 requireActivity().findNavController(R.id.fragment_container).navigate(
                     R.id.playing_queue_fragment,
-                    null
+                    null,
+                    navOptions { launchSingleTop = true }
                 )
+                mainActivity.collapsePanel()
                 return true
             }
             R.id.action_show_lyrics -> {
@@ -289,6 +291,15 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (PreferenceUtil.circlePlayButton) {
+            requireContext().theme.applyStyle(R.style.CircleFABOverlay, true)
+        } else {
+            requireContext().theme.applyStyle(R.style.RoundedFABOverlay, true)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (PreferenceUtil.isFullScreenMode &&
@@ -316,7 +327,15 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 showLyricsIcon(this)
             }
         }
-        requireView().setOnTouchListener(
+    }
+
+    override fun onStart() {
+        super.onStart()
+        addSwipeDetector()
+    }
+
+    fun addSwipeDetector() {
+        view?.setOnTouchListener(
             if (PreferenceUtil.swipeAnywhereToChangeSong) {
                 SwipeDetector(
                     requireContext(),
@@ -381,9 +400,7 @@ fun goToArtist(activity: Activity) {
 
         findNavController(R.id.fragment_container).navigate(
             R.id.artistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_ID to song.artistId),
-            null,
-            null
+            bundleOf(EXTRA_ARTIST_ID to song.artistId)
         )
     }
 }
@@ -402,9 +419,7 @@ fun goToAlbum(activity: Activity) {
 
         findNavController(R.id.fragment_container).navigate(
             R.id.albumDetailsFragment,
-            bundleOf(EXTRA_ALBUM_ID to song.albumId),
-            null,
-            null
+            bundleOf(EXTRA_ALBUM_ID to song.albumId)
         )
     }
 }
@@ -421,8 +436,7 @@ fun goToLyrics(activity: Activity) {
         findNavController(R.id.fragment_container).navigate(
             R.id.lyrics_fragment,
             null,
-            navOptions { launchSingleTop = true },
-            null
+            navOptions { launchSingleTop = true }
         )
     }
 }

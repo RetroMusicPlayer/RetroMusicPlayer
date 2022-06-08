@@ -23,13 +23,13 @@
         app:srcCompat="@drawable/ic_volume_down"
         app:tint="?attr/colorControlNormal" />
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/volumeSeekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:maxHeight="2dp"
-        android:paddingVertical="@dimen/seekbar_padding"
+        style="@style/Widget.Retro.Slider"
         android:progressDrawable="@drawable/color_progress_seek"
         app:layout_constraintBottom_toBottomOf="@+id/volumeDown"
         app:layout_constraintEnd_toStartOf="@+id/volumeUp"

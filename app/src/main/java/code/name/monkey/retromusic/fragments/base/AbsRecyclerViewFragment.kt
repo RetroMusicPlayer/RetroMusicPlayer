@@ -32,7 +32,6 @@ import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dip
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
@@ -61,6 +60,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         mainActivity.supportActionBar?.title = null
         initLayoutManager()
         initAdapter()
+        checkForMargins()
         setUpRecyclerView()
         setupToolbar()
         binding.shuffleButton.fitsSystemWindows = PreferenceUtil.isFullScreenMode
@@ -118,7 +118,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
             adapter = this@AbsRecyclerViewFragment.adapter
             create(this)
         }
-        checkForPadding()
     }
 
     protected open fun createFastScroller(recyclerView: RecyclerView): FastScroller {
@@ -131,7 +130,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
             override fun onChanged() {
                 super.onChanged()
                 checkIsEmpty()
-                checkForPadding()
             }
         })
     }
@@ -148,16 +146,12 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
         binding.empty.isVisible = adapter!!.itemCount == 0
     }
 
-    private fun checkForPadding() {
-        val itemCount: Int = adapter?.itemCount ?: 0
-
-        binding.recyclerView.updatePadding(
-            bottom = if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
-                dip(R.dimen.mini_player_height_expanded)
-            } else {
-                dip(R.dimen.bottom_nav_height)
+    private fun checkForMargins() {
+        if (mainActivity.isBottomNavVisible) {
+            binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = dip(R.dimen.bottom_nav_height)
             }
-        )
+        }
     }
 
     private fun initLayoutManager() {
@@ -168,16 +162,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     @NonNull
     protected abstract fun createAdapter(): A
-
-    override fun onQueueChanged() {
-        super.onQueueChanged()
-        checkForPadding()
-    }
-
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        checkForPadding()
-    }
 
     protected fun invalidateLayoutManager() {
         initLayoutManager()
@@ -216,7 +200,7 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> findNavController().navigate(
-                R.id.settingsActivity,
+                R.id.settings_fragment,
                 null,
                 navOptions
             )
@@ -230,6 +214,11 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
             )
         }
         return false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkForMargins()
     }
 
     override fun onDestroyView() {

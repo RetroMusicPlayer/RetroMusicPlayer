@@ -25,7 +25,7 @@ import androidx.core.net.toUri
 import androidx.core.view.drawToBitmap
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityShareInstagramBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.setLightStatusBar
@@ -41,7 +41,7 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
  * Created by hemanths on 2020-02-02.
  */
 
-class ShareInstagramStory : AbsBaseActivity() {
+class ShareInstagramStory : AbsThemeActivity() {
 
     private lateinit var binding: ActivityShareInstagramBinding
 

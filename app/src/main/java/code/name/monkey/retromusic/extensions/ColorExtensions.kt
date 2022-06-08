@@ -135,7 +135,9 @@ fun Button.accentTextColor() {
 
 fun MaterialButton.accentBackgroundColor() {
     if (materialYou) return
-    backgroundTintList = ColorStateList.valueOf(context.accentColor())
+    backgroundTintList = ColorStateList(
+        arrayOf(intArrayOf(android.R.attr.state_enabled), intArrayOf()),
+            intArrayOf(context.accentColor(), context.accentColor().addAlpha(0.12f)))
 }
 
 fun MaterialButton.accentOutlineColor() {
@@ -161,6 +163,15 @@ fun SeekBar.applyColor(@ColorInt color: Int) {
     thumbTintList = ColorStateList.valueOf(color)
     progressTintList = ColorStateList.valueOf(color)
     progressBackgroundTintList = ColorStateList.valueOf(color)
+}
+
+fun Slider.applyColor(@ColorInt color: Int) {
+    ColorStateList.valueOf(color).run {
+        thumbTintList = this
+        trackActiveTintList = this
+        trackInactiveTintList = ColorStateList.valueOf(color.addAlpha(0.1f))
+        haloTintList = this
+    }
 }
 
 fun ExtendedFloatingActionButton.accentColor() {
@@ -301,5 +312,9 @@ inline val @receiver:ColorInt Int.lighterColor
 inline val @receiver:ColorInt Int.darkerColor
     get() = ColorUtil.darkenColor(this)
 
-inline val Int.colorStateList : ColorStateList
+inline val Int.colorStateList: ColorStateList
     get() = ColorStateList.valueOf(this)
+
+fun @receiver:ColorInt Int.addAlpha(alpha: Float): Int {
+    return ColorUtil.withAlpha(this, alpha)
+}

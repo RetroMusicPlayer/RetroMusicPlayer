@@ -32,6 +32,8 @@ import androidx.core.content.getSystemService
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.rootView
+import code.name.monkey.retromusic.util.logD
 import com.google.android.material.snackbar.Snackbar
 
 abstract class AbsBaseActivity : AbsThemeActivity() {
@@ -52,7 +54,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
     }
 
     private val snackBarContainer: View
-        get() = window.decorView
+        get() = rootView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +77,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
 
     protected open fun onHasPermissionsChanged(hasPermissions: Boolean) {
         // implemented by sub classes
-        println(hasPermissions)
+        logD(hasPermissions)
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
@@ -114,32 +116,18 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
             for (grantResult in grantResults) {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(
-                            this@AbsBaseActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE
+                            this@AbsBaseActivity, Manifest.permission.READ_EXTERNAL_STORAGE,
+                        ) || ActivityCompat.shouldShowRequestPermissionRationale(
+                            this@AbsBaseActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         )
                     ) {
                         // User has deny from permission dialog
                         Snackbar.make(
                             snackBarContainer,
                             permissionDeniedMessage!!,
-                            Snackbar.LENGTH_INDEFINITE
+                            Snackbar.LENGTH_SHORT
                         )
                             .setAction(R.string.action_grant) { requestPermissions() }
-                            .setActionTextColor(accentColor()).show()
-                    } else if (ActivityCompat.shouldShowRequestPermissionRationale(
-                            this@AbsBaseActivity, Manifest.permission.BLUETOOTH_CONNECT
-                        )
-                    ) {
-                        // User has deny from permission dialog
-                        Snackbar.make(
-                            snackBarContainer,
-                            R.string.permission_bluetooth_denied,
-                            Snackbar.LENGTH_INDEFINITE
-                        )
-                            .setAction(R.string.action_grant) {
-                                ActivityCompat.requestPermissions(this,
-                                    arrayOf(Manifest.permission.BLUETOOTH_CONNECT),
-                                    PERMISSION_REQUEST)
-                            }
                             .setActionTextColor(accentColor()).show()
                     } else {
                         // User has deny permission and checked never show permission dialog so you can redirect to Application settings page
@@ -165,11 +153,34 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
             }
             hadPermissions = true
             onHasPermissionsChanged(true)
+        } else if (requestCode == BLUETOOTH_PERMISSION_REQUEST) {
+            for (grantResult in grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            this@AbsBaseActivity, Manifest.permission.BLUETOOTH_CONNECT
+                        )
+                    ) {
+                        // User has deny from permission dialog
+                        Snackbar.make(
+                            snackBarContainer,
+                            R.string.permission_bluetooth_denied,
+                            Snackbar.LENGTH_SHORT
+                        )
+                            .setAction(R.string.action_grant) {
+                                ActivityCompat.requestPermissions(this,
+                                    arrayOf(Manifest.permission.BLUETOOTH_CONNECT),
+                                    BLUETOOTH_PERMISSION_REQUEST)
+                            }
+                            .setActionTextColor(accentColor()).show()
+                    }
+                }
+            }
         }
     }
 
     companion object {
         const val PERMISSION_REQUEST = 100
+        const val BLUETOOTH_PERMISSION_REQUEST = 101
     }
 
     // this lets keyboard close when clicked in background

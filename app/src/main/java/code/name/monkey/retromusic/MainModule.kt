@@ -1,12 +1,9 @@
 package code.name.monkey.retromusic
 
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import code.name.monkey.retromusic.auto.AutoMusicProvider
 import code.name.monkey.retromusic.cast.RetroWebServer
-import code.name.monkey.retromusic.db.BlackListStoreDao
-import code.name.monkey.retromusic.db.BlackListStoreEntity
+import code.name.monkey.retromusic.db.MIGRATION_23_24
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.RetroDatabase
 import code.name.monkey.retromusic.fragments.LibraryViewModel
@@ -20,10 +17,6 @@ import code.name.monkey.retromusic.network.provideLastFmRest
 import code.name.monkey.retromusic.network.provideLastFmRetrofit
 import code.name.monkey.retromusic.network.provideOkHttp
 import code.name.monkey.retromusic.repository.*
-import code.name.monkey.retromusic.util.FilePathUtil
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
@@ -49,30 +42,12 @@ private val roomModule = module {
 
     single {
         Room.databaseBuilder(androidContext(), RetroDatabase::class.java, "playlist.db")
-            .allowMainThreadQueries()
-            .addCallback(object : RoomDatabase.Callback() {
-                override fun onOpen(db: SupportSQLiteDatabase) {
-                    super.onOpen(db)
-                    GlobalScope.launch(IO) {
-                        FilePathUtil.blacklistFilePaths().map {
-                            get<BlackListStoreDao>().insertBlacklistPath(BlackListStoreEntity(it))
-                        }
-                    }
-                }
-            })
-            .fallbackToDestructiveMigration()
+            .addMigrations(MIGRATION_23_24)
             .build()
-    }
-    factory {
-        get<RetroDatabase>().lyricsDao()
     }
 
     factory {
         get<RetroDatabase>().playlistDao()
-    }
-
-    factory {
-        get<RetroDatabase>().blackListStore()
     }
 
     factory {
@@ -84,7 +59,7 @@ private val roomModule = module {
     }
 
     single {
-        RealRoomRepository(get(), get(), get(), get(), get())
+        RealRoomRepository(get(), get(), get())
     } bind RoomRepository::class
 }
 private val autoModule = module {

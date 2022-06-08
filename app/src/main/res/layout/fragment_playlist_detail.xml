@@ -38,6 +38,7 @@
         android:overScrollMode="@integer/overScrollMode"
         android:scrollbars="none"
         android:layoutAnimation="@anim/layout_anim_fade"
+        android:paddingBottom="@dimen/mini_player_height"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     <LinearLayout
