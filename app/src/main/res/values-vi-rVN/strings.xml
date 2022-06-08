@@ -175,6 +175,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
     <string name="error_empty_name">Your name can\'t be empty!</string>
     <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Expanded</string>
     <string name="faq">Câu hỏi thường gặp</string>
     <string name="favorites">Yêu thích</string>
@@ -368,7 +369,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_toggle_volume">Hiện thanh điều chỉnh âm lượng nếu có không gian trống trong màn hình phát</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Chỉ hiện thị nhạc từ /Thư mục Nhạc</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Hiện ảnh bìa album</string>
     <string name="pref_title_album_artists_only">Điều hướng theo Album Nghệ sĩ</string>
     <string name="pref_title_album_cover_style">Chủ đề bìa album</string>
@@ -418,9 +418,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_toggle_volume">Điều khiển âm lượng</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Chủ đề đen, Chủ đề màn hình phát, Hiệu ứng băng chuyền, v.v.</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Hồ sơ</string>
     <string name="purchase">Mua</string>
     <string name="queue">Danh sách chờ phát</string>
@@ -497,6 +496,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="sort_order_composer">Tác giả</string>
     <string name="sort_order_date">Ngày</string>
     <string name="sort_order_date_modified">Ngày chỉnh sửa</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Số bài hát</string>
     <string name="sort_order_num_songs_desc">Số bài hát giảm</string>
     <string name="sort_order_year">Năm</string>
