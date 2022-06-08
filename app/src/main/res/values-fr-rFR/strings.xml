@@ -61,13 +61,13 @@
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Morceau</item>
-        <item quantity="other">Morceaux</item>
+        <item quantity="many">Morceaux</item>
     </plurals>
     <string name="album_artist">Artiste de l\'album</string>
     <string name="albums">Albums</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
-        <item quantity="other">Albums</item>
+        <item quantity="many">Albums</item>
     </plurals>
     <string name="always">Toujours</string>
     <string name="app_share">Hey, jetez un coup d\'œil à ce super lecteur de musique : https://play.google.com/store/apps/details?id=%s</string>
@@ -274,7 +274,7 @@
     <string name="no_songs">Aucun morceau</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Paroles normales</string>
-    <string name="not_listed_in_media_store">%s N\'est pas répertorié dans le stockage des médias.></string>
+    <string name="not_listed_in_media_store">%s N\'est pas répertorié dans le stockage des médias.</string>
     <string name="not_recently_played">Non jouée récemment</string>
     <string name="nothing_to_scan">Rien à scanner.</string>
     <string name="nothing_to_see">Rien à afficher</string>
