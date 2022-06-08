@@ -174,6 +174,7 @@
     <string name="error_delete_backup">Tidak dapat menghapus cadangan</string>
     <string name="error_empty_name">Namamu tidak boleh kosong!</string>
     <string name="error_load_failed">Gagal memuat</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Diperluas</string>
     <string name="faq">Pertanyaan Umum (FAQ)</string>
     <string name="favorites">Favorit</string>
@@ -367,7 +368,6 @@
     <string name="pref_summary_toggle_volume">Jika tersedia cukup ruang, tampilkan kontrol volume di layar pemutaran</string>
     <string name="pref_summary_wallpaper_accent">Ambil warna aksen dari wallpaper</string>
     <string name="pref_summary_whitelist">Tampilkan musik hanya dari folder /Music</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Tampilkan sampul album</string>
     <string name="pref_title_album_artists_only">Navigasi berdasarkan Album Artis</string>
     <string name="pref_title_album_cover_style">Tema sampul album</string>
@@ -417,9 +417,8 @@
     <string name="pref_title_toggle_volume">Kontrol volume</string>
     <string name="pref_title_wallpaper_accent">Warna aksen wallpaper</string>
     <string name="pref_title_whitelist">Musik daftar putih</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Tema hitam, Tema yang sedang diputar, efek korsel, dan lainnya...</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profil</string>
     <string name="purchase">Pembelian</string>
     <string name="queue">Antrean Putar</string>
@@ -496,6 +495,7 @@
     <string name="sort_order_composer">Komposer</string>
     <string name="sort_order_date">Tanggal ditambahkan</string>
     <string name="sort_order_date_modified">Tanggal diubah</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Jumlah lagu</string>
     <string name="sort_order_num_songs_desc">Desc jumlah lagu</string>
     <string name="sort_order_year">Tahun</string>
