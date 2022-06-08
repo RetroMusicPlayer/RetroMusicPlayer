@@ -55,7 +55,7 @@
     <string name="add_action">Dodaj</string>
     <string name="add_playlist_title">"Dodaj do playlisty"</string>
     <string name="add_time_framed_lryics">Dodaj tekst z ramką czasową</string>
-    <string name="added_song_count_to_playlist">Dodano %1$d utwór(y/ów) do %2$s</string>
+    <string name="added_song_count_to_playlist">Dodano %1$d utworów do %2$s</string>
     <string name="added_title_to_playing_queue">"Dodano tytuł do kolejki odtwarzania"</string>
     <string name="added_x_titles_to_playing_queue">Dodano %1$d tytułów do kolejki</string>
     <string name="album">Album</string>
@@ -180,6 +180,7 @@
     <string name="error_delete_backup">Nie udało się usunąć kopii zapasowej</string>
     <string name="error_empty_name">Imię nie może być puste!</string>
     <string name="error_load_failed">Nie udało się załadować</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Rozszerzony</string>
     <string name="faq">Najczęściej zadawane pytania</string>
     <string name="favorites">Ulubione</string>
@@ -373,7 +374,6 @@
     <string name="pref_summary_toggle_volume">Pokaż sterowanie głośnością w odtwarzaczu, gdy jest wystarczająco wolnego miejsca</string>
     <string name="pref_summary_wallpaper_accent">Wyodrębnij kolor akcentu z tapety</string>
     <string name="pref_summary_whitelist">Pokazuj muzykę tylko z folderu /Music</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Pokaż okładkę albumu</string>
     <string name="pref_title_album_artists_only">Nawiguj przez wykonawcę albumu</string>
     <string name="pref_title_album_cover_style">Wygląd okładki albumu</string>
@@ -423,9 +423,8 @@
     <string name="pref_title_toggle_volume">Sterowanie głośnością</string>
     <string name="pref_title_wallpaper_accent">Kolor akcentu z tapety</string>
     <string name="pref_title_whitelist">Muzyka z listy dozwolonych</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Czarny motyw, motywy teraz odtwarzanych, efekt karuzeli i wiele więcej..</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profil</string>
     <string name="purchase">Kup</string>
     <string name="queue">Kolejka odtwarzania</string>
@@ -502,6 +501,7 @@
     <string name="sort_order_composer">Kompozytor</string>
     <string name="sort_order_date">Data dodania</string>
     <string name="sort_order_date_modified">Data modyfikacji</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Liczba utworów</string>
     <string name="sort_order_num_songs_desc">Liczba utworów malejąco</string>
     <string name="sort_order_year">Rok</string>
