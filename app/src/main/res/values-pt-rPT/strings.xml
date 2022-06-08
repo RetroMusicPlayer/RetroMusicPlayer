@@ -55,7 +55,7 @@
     <string name="add_action">Adicionar</string>
     <string name="add_playlist_title">"Adicionar à lista"</string>
     <string name="add_time_framed_lryics">Adicionar letras do cronograma</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_song_count_to_playlist">%1$d música(s) adicionada(s) a %2$s</string>
     <string name="added_title_to_playing_queue">"Adicionada 1 música à fila."</string>
     <string name="added_x_titles_to_playing_queue">Adicionadas %1$d músicas à fila.</string>
     <string name="album">Álbum</string>
@@ -176,6 +176,7 @@
     <string name="error_delete_backup">Não foi possível eliminar cópia</string>
     <string name="error_empty_name">O nome não pode estar vazio!</string>
     <string name="error_load_failed">O carregamento falhou</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Expandido</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favoritos</string>
@@ -369,7 +370,6 @@
     <string name="pref_summary_toggle_volume">Se tiver espaço suficiente, mostrar os controlos de volume no ecrã A reproduzir</string>
     <string name="pref_summary_wallpaper_accent">Extrair a cor através do papel de parede</string>
     <string name="pref_summary_whitelist">Mostrar apenas músicas de /Music</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Mostrar capa do álbum</string>
     <string name="pref_title_album_artists_only">Navegar pelos artistas</string>
     <string name="pref_title_album_cover_style">Tema da capa do álbum</string>
@@ -417,11 +417,10 @@
     <string name="pref_title_toggle_toggle_headset">Reprod. automática</string>
     <string name="pref_title_toggle_toggle_shuffle">Modo aleatório</string>
     <string name="pref_title_toggle_volume">Controlos de volume</string>
-    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
-    <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
+    <string name="pref_title_wallpaper_accent">Cor do papel de parede</string>
+    <string name="pref_title_whitelist">Lista segura de música</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Tema escuro, temas A reproduzir, efeito carrossel e muito mais..</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Perfil</string>
     <string name="purchase">Comprar</string>
     <string name="queue">Fila de reprodução</string>
@@ -498,6 +497,7 @@
     <string name="sort_order_composer">Compositor</string>
     <string name="sort_order_date">Data adicionado</string>
     <string name="sort_order_date_modified">Data modificado</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Contagem de músicas</string>
     <string name="sort_order_num_songs_desc">Contagem decrescente</string>
     <string name="sort_order_year">Ano</string>
