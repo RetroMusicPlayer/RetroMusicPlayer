@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="about_album_label">About %s</string>
     <string name="about_settings_summary">Team, social links</string>
@@ -424,7 +424,7 @@
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more...</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
     <string name="purchase">Purchase</string>
     <string name="queue">Playing Queue</string>
