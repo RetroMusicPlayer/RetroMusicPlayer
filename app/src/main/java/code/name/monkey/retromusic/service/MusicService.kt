@@ -632,6 +632,8 @@ class MusicService : MediaBrowserServiceCompat(),
 
                 if (playbackManager.maybeSwitchToCrossFade(crossFadeDuration)) {
                     restorePlaybackState(wasPlaying, progress)
+                } else {
+                    playbackManager.setCrossFadeDuration(crossFadeDuration)
                 }
             }
             ALBUM_ART_ON_LOCK_SCREEN, BLURRED_ALBUM_ART -> updateMediaSessionMetaData(::updateMediaSessionPlaybackState)

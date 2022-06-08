@@ -77,14 +77,6 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
             baseUrl += query
             return baseUrl
         }
-    private val syairSearchLrcUrl: String
-        get() {
-            var baseUrl = "https://www.syair.info/search?"
-            var query = song.title + "+" + song.artistName
-            query = "q=" + query.replace(" ", "+")
-            baseUrl += query
-            return baseUrl
-        }
 
     private lateinit var normalLyricsLauncher: ActivityResultLauncher<IntentSenderRequest>
     private lateinit var newSyncedLyricsLauncher: ActivityResultLauncher<Intent>
@@ -201,12 +193,7 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
 
     override fun onMenuItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            openUrl(when (binding.lyricsPager.currentItem) {
-                    0 -> syairSearchLrcUrl
-                    1 -> googleSearchLrcUrl
-                    else -> googleSearchLrcUrl
-                }
-            )
+            openUrl(googleSearchLrcUrl)
         }
         return false
     }
