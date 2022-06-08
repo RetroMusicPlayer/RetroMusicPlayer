@@ -6,7 +6,9 @@ import android.os.Build
 import android.view.View
 import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.getSystemService
 import androidx.core.view.*
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -14,7 +16,7 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-fun AppCompatActivity.toggleScreenOn() {
+fun AppCompatActivity.maybeSetScreenOn() {
     if (PreferenceUtil.isScreenOnEnabled) {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     } else {
@@ -220,5 +222,14 @@ fun AppCompatActivity.setStatusBarColorPreMarshmallow(color: Int) {
         )
     } else {
         window.statusBarColor = ColorUtil.darkenColor(color)
+    }
+}
+
+fun AppCompatActivity.hideSoftKeyboard() {
+    val currentFocus: View? = currentFocus
+    if (currentFocus != null) {
+        val inputMethodManager =
+            getSystemService<InputMethodManager>()
+        inputMethodManager?.hideSoftInputFromWindow(currentFocus.windowToken, 0)
     }
 }

@@ -23,11 +23,13 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.RemoteViews
+import androidx.core.graphics.drawable.toBitmap
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
+import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -35,11 +37,9 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
-import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 
@@ -57,33 +57,27 @@ class AppWidgetClassic : BaseAppWidget() {
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_audio_art)
         appWidgetView.setImageViewBitmap(
             R.id.button_next,
-            createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_skip_next,
-                    MaterialValueHelper.getSecondaryTextColor(context, true)
-                ), 1f
-            )
+
+            context.getTintedDrawable(
+                R.drawable.ic_skip_next,
+                MaterialValueHelper.getSecondaryTextColor(context, true)
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
             R.id.button_prev,
-            createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_skip_previous,
-                    MaterialValueHelper.getSecondaryTextColor(context, true)
-                ), 1f
-            )
+
+            context.getTintedDrawable(
+                R.drawable.ic_skip_previous,
+                MaterialValueHelper.getSecondaryTextColor(context, true)
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
             R.id.button_toggle_play_pause,
-            createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_play_arrow_white_32dp,
-                    MaterialValueHelper.getSecondaryTextColor(context, true)
-                ), 1f
-            )
+
+            context.getTintedDrawable(
+                R.drawable.ic_play_arrow_white_32dp,
+                MaterialValueHelper.getSecondaryTextColor(context, true)
+            ).toBitmap()
         )
 
         linkButtons(context, appWidgetView)
@@ -129,10 +123,10 @@ class AppWidgetClassic : BaseAppWidget() {
                 .load(RetroGlideExtension.getSongModel(song))
                 //.checkIgnoreMediaStore()
                 .centerCrop()
-                .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+                .into(object : CustomTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
                     override fun onResourceReady(
                         resource: BitmapPaletteWrapper,
-                        transition: Transition<in BitmapPaletteWrapper>?
+                        transition: Transition<in BitmapPaletteWrapper>?,
                     ) {
                         val palette = resource.palette
                         update(
@@ -153,44 +147,37 @@ class AppWidgetClassic : BaseAppWidget() {
                         update(null, Color.WHITE)
                     }
 
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+
                     private fun update(bitmap: Bitmap?, color: Int) {
                         // Set correct drawable for pause state
                         val playPauseRes =
                             if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play_arrow
                         appWidgetView.setImageViewBitmap(
                             R.id.button_toggle_play_pause,
-                            ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service,
-                                    playPauseRes,
-                                    color
-                                )
-                            )
+                            service.getTintedDrawable(
+                                playPauseRes,
+                                color
+                            ).toBitmap()
                         )
 
                         // Set prev/next button drawables
                         appWidgetView.setImageViewBitmap(
                             R.id.button_next,
-                            ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service,
-                                    R.drawable.ic_skip_next,
-                                    color
-                                )
-                            )
+                            service.getTintedDrawable(
+                                R.drawable.ic_skip_next,
+                                color
+                            ).toBitmap()
                         )
                         appWidgetView.setImageViewBitmap(
                             R.id.button_prev,
-                            ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service,
-                                    R.drawable.ic_skip_previous,
-                                    color
-                                )
-                            )
+                            service.getTintedDrawable(
+                                R.drawable.ic_skip_previous,
+                                color
+                            ).toBitmap()
                         )
 
-                        val image = getAlbumArtDrawable(service.resources, bitmap)
+                        val image = getAlbumArtDrawable(service, bitmap)
                         val roundedBitmap =
                             createRoundedBitmap(
                                 image,

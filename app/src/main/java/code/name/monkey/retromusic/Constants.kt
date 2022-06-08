@@ -37,6 +37,8 @@ object Constants {
     const val IS_MUSIC =
         MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"
 
+    const val DATA = "_data"
+
     @Suppress("Deprecation")
     val baseProjection = arrayOf(
         BaseColumns._ID, // 0
@@ -44,7 +46,7 @@ object Constants {
         MediaStore.Audio.AudioColumns.TRACK, // 2
         MediaStore.Audio.AudioColumns.YEAR, // 3
         MediaStore.Audio.AudioColumns.DURATION, // 4
-        MediaStore.Audio.AudioColumns.DATA, // 5
+        DATA, // 5
         MediaStore.Audio.AudioColumns.DATE_MODIFIED, // 6
         MediaStore.Audio.AudioColumns.ALBUM_ID, // 7
         MediaStore.Audio.AudioColumns.ALBUM, // 8
@@ -86,12 +88,7 @@ const val CIRCULAR_ALBUM_ART = "circular_album_art"
 const val USER_NAME = "user_name"
 const val TOGGLE_FULL_SCREEN = "toggle_full_screen"
 const val TOGGLE_VOLUME = "toggle_volume"
-const val ROUND_CORNERS = "corner_window"
-const val TOGGLE_GENRE = "toggle_genre"
-const val PROFILE_IMAGE_PATH = "profile_image_path"
-const val BANNER_IMAGE_PATH = "banner_image_path"
 const val ADAPTIVE_COLOR_APP = "adaptive_color_app"
-const val TOGGLE_SEPARATE_LINE = "toggle_separate_line"
 const val HOME_ARTIST_GRID_STYLE = "home_artist_grid_style"
 const val HOME_ALBUM_GRID_STYLE = "home_album_grid_style"
 const val TOGGLE_ADD_CONTROLS = "toggle_add_controls"
@@ -106,7 +103,6 @@ const val SAF_SDCARD_URI = "saf_sdcard_uri"
 const val SONG_SORT_ORDER = "song_sort_order"
 const val SONG_GRID_SIZE = "song_grid_size"
 const val GENRE_SORT_ORDER = "genre_sort_order"
-const val LAST_PAGE = "last_start_page"
 const val BLUETOOTH_PLAYBACK = "bluetooth_playback"
 const val INITIALIZED_BLACKLIST = "initialized_blacklist"
 const val ARTIST_SORT_ORDER = "artist_sort_order"
@@ -165,3 +161,5 @@ const val SCREEN_ON_LYRICS = "screen_on_lyrics"
 const val CIRCLE_PLAY_BUTTON = "circle_play_button"
 const val SWIPE_ANYWHERE_NOW_PLAYING = "swipe_anywhere_now_playing"
 const val PAUSE_HISTORY = "pause_history"
+const val MANAGE_AUDIO_FOCUS = "manage_audio_focus"
+const val SWIPE_DOWN_DISMISS = "swipe_to_dismiss"

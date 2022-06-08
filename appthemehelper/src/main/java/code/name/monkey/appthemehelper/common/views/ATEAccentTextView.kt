@@ -26,9 +26,6 @@ class ATEAccentTextView @JvmOverloads constructor(
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
     init {
-        setTextColor(
-            // Set MD3 accent if MD3 is enabled or in-app accent otherwise
-            ThemeStore.accentColor(context)
-        )
+        setTextColor(ThemeStore.accentColor(context))
     }
 }

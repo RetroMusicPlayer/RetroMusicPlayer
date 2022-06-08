@@ -12,6 +12,7 @@
     <item name="action_import_playlist" type="id" />
     <item name="action_artist_sort_order_asc" type="id" />
     <item name="action_artist_sort_order_desc" type="id" />
+    <item name="action_song_default_sort_order" type="id" />
     <item name="action_song_sort_order_asc" type="id" />
     <item name="action_song_sort_order_desc" type="id" />
     <item name="action_playlist_sort_order_desc" type="id" />

@@ -8,7 +8,8 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_audio_ducking"
         android:title="@string/pref_title_audio_ducking"
-        app:icon="@drawable/ic_volume_down" />
+        app:icon="@drawable/ic_volume_down"
+        app:isPreferenceVisible="@bool/isNotOreo"/>
 
     <code.name.monkey.retromusic.preferences.DurationPreference
         android:defaultValue="0"
@@ -16,6 +17,13 @@
         android:layout="@layout/list_item_view"
         android:summary="@string/pref_summary_audio_fade"
         android:title="@string/pref_title_audio_fade" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="manage_audio_focus"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_summary_manage_audio_focus"
+        android:title="@string/pref_title_manage_audio_focus" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
         android:defaultValue="0"

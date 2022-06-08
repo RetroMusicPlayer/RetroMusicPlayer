@@ -29,6 +29,7 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.color.colorChooser
 import com.google.android.material.color.DynamicColors
@@ -44,12 +45,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         generalTheme?.let {
             setSummary(it)
             it.setOnPreferenceChangeListener { _, newValue ->
-                val theme = newValue as String
                 setSummary(it, newValue)
                 ThemeStore.markChanged(requireContext())
 
                 if (VersionUtils.hasNougatMR()) {
-                    requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue(theme))
                     DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
                 restartActivity()
@@ -132,6 +131,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             restartActivity()
             true
         }
+
+        val adaptiveColor: ATESwitchPreference? = findPreference(ADAPTIVE_COLOR_APP)
+        adaptiveColor?.isEnabled =
+            PreferenceUtil.nowPlayingScreen in listOf(Normal, Material, Flat)
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

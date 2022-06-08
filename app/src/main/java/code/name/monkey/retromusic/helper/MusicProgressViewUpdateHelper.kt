@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.helper
 
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import kotlin.math.max
 
@@ -32,13 +33,17 @@ class MusicProgressViewUpdateHelper : Handler {
         removeMessages(CMD_REFRESH_PROGRESS_VIEWS)
     }
 
-    constructor(callback: Callback) {
+    constructor(callback: Callback) : super(Looper.getMainLooper()) {
         this.callback = callback
         this.intervalPlaying = UPDATE_INTERVAL_PLAYING
         this.intervalPaused = UPDATE_INTERVAL_PAUSED
     }
 
-    constructor(callback: Callback, intervalPlaying: Int, intervalPaused: Int) {
+    constructor(
+        callback: Callback,
+        intervalPlaying: Int,
+        intervalPaused: Int,
+    ) : super(Looper.getMainLooper()) {
         this.callback = callback
         this.intervalPlaying = intervalPlaying
         this.intervalPaused = intervalPaused

@@ -42,10 +42,11 @@ import kotlin.math.abs
  * 歌词 Created by wcy on 2015/11/9.
  */
 @SuppressLint("StaticFieldLeak")
+@Suppress("deprecation")
 class CoverLrcView @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
     private val mLrcEntryList: MutableList<LrcEntry> = ArrayList()
     private val mLrcPaint = TextPaint()
@@ -108,7 +109,7 @@ class CoverLrcView @JvmOverloads constructor(
                 e1: MotionEvent,
                 e2: MotionEvent,
                 distanceX: Float,
-                distanceY: Float
+                distanceY: Float,
             ): Boolean {
                 if (mOffset == getOffset(0) && distanceY < 0F) {
                     return super.onScroll(e1, e2, distanceX, distanceY)
@@ -128,7 +129,7 @@ class CoverLrcView @JvmOverloads constructor(
                 e1: MotionEvent,
                 e2: MotionEvent,
                 velocityX: Float,
-                velocityY: Float
+                velocityY: Float,
             ): Boolean {
                 if (hasLrc()) {
                     mScroller!!.fling(
@@ -254,16 +255,6 @@ class CoverLrcView @JvmOverloads constructor(
     fun setNormalColor(normalColor: Int) {
         mNormalTextColor = normalColor
         postInvalidate()
-    }
-
-    /** 普通歌词文本字体大小  */
-    fun setNormalTextSize(size: Float) {
-        mNormalTextSize = size
-    }
-
-    /** 当前歌词文本字体大小  */
-    fun setCurrentTextSize(size: Float) {
-        mCurrentTextSize = size
     }
 
     /** 设置当前行歌词的字体颜色  */
@@ -401,28 +392,6 @@ class CoverLrcView @JvmOverloads constructor(
                 }
             }.execute(mainLrcText, secondLrcText)
         }
-    }
-
-    /**
-     * 加载在线歌词，默认使用 utf-8 编码
-     *
-     * @param lrcUrl 歌词文件的网络地址
-     */
-    @JvmOverloads
-    fun loadLrcByUrl(lrcUrl: String, charset: String? = "utf-8") {
-        val flag = "url://$lrcUrl"
-        this.flag = flag
-        object : AsyncTask<String?, Int?, String>() {
-            override fun doInBackground(vararg params: String?): String? {
-                return LrcUtils.getContentFromNetwork(params[0], params[1])
-            }
-
-            override fun onPostExecute(lrcText: String) {
-                if (flag == flag) {
-                    loadLrc(lrcText)
-                }
-            }
-        }.execute(lrcUrl, charset)
     }
 
     /**
@@ -629,7 +598,6 @@ class CoverLrcView @JvmOverloads constructor(
                 mOffset = animation.animatedValue as Float
                 invalidate()
             }
-            LrcUtils.resetDurationScale()
             start()
         }
     }
@@ -709,10 +677,6 @@ class CoverLrcView @JvmOverloads constructor(
          * @return 是否成功消费该事件，如果成功消费，则会更新UI
          */
         fun onPlayClick(time: Long): Boolean
-    }
-
-    fun interface OnFlingXListener {
-        fun onFlingX(velocityX: Float): Boolean
     }
 
     companion object {

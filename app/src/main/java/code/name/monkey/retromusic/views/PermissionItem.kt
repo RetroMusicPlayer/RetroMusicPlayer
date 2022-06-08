@@ -39,11 +39,15 @@ class PermissionItem @JvmOverloads constructor(
             binding.number.backgroundTintList =
                 ColorStateList.valueOf(ColorUtil.withAlpha(color, 0.22f))
 
-            binding.button.accentOutlineColor()
+            if (!isInEditMode) binding.button.accentOutlineColor()
         }
     }
 
     fun setButtonClick(callBack: () -> Unit) {
-        binding.button.setOnClickListener { callBack.invoke() }
+        binding.button.setOnClickListener { callBack() }
+    }
+
+    fun setNumber(number: String) {
+        binding.number.text = number
     }
 }

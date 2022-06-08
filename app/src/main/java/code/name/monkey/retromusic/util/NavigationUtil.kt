@@ -19,9 +19,11 @@ import android.content.Context
 import android.content.Intent
 import android.media.audiofx.AudioEffect
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.*
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.audioSessionId
 
 object NavigationUtil {
@@ -55,10 +57,9 @@ object NavigationUtil {
         )
     }
 
-    fun gotoWhatNews(activity: Activity) {
-        activity.startActivity(
-            Intent(activity, WhatsNewActivity::class.java), null
-        )
+    fun gotoWhatNews(activity: FragmentActivity) {
+        val changelogBottomSheet = WhatsNewFragment()
+        changelogBottomSheet.show(activity.supportFragmentManager, WhatsNewFragment.TAG)
     }
 
     fun openEqualizer(activity: Activity) {
@@ -68,10 +69,7 @@ object NavigationUtil {
     private fun stockEqualizer(activity: Activity) {
         val sessionId = audioSessionId
         if (sessionId == AudioEffect.ERROR_BAD_VALUE) {
-            Toast.makeText(
-                activity, activity.resources.getString(R.string.no_audio_ID), Toast.LENGTH_LONG
-            )
-                .show()
+            activity.showToast(R.string.no_audio_ID, Toast.LENGTH_LONG)
         } else {
             try {
                 val effects = Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL)
@@ -79,12 +77,7 @@ object NavigationUtil {
                 effects.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
                 activity.startActivityForResult(effects, 0)
             } catch (notFound: ActivityNotFoundException) {
-                Toast.makeText(
-                    activity,
-                    activity.resources.getString(R.string.no_equalizer),
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                activity.showToast(R.string.no_equalizer)
             }
         }
     }

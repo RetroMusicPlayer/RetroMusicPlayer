@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PermissionItem">
-        <attr name="permissionTitle" format="string" />
-        <attr name="permissionTitleSubTitle" format="string" />
+        <attr name="permissionTitle" format="string" localization="suggested" />
+        <attr name="permissionTitleSubTitle" format="string" localization="suggested" />
         <attr name="permissionTitleNumber" format="string" />
-        <attr name="permissionIcon" format="integer" />
-        <attr name="permissionButtonTitle" format="string" />
+        <attr name="permissionIcon" format="reference" />
+        <attr name="permissionButtonTitle" format="string" localization="suggested" />
     </declare-styleable>
 </resources>

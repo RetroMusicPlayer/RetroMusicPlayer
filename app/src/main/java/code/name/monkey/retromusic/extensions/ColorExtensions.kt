@@ -36,7 +36,6 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil.materialYou
 import com.google.android.material.button.MaterialButton
@@ -131,12 +130,14 @@ fun Slider.accent() {
 
 fun Button.accentTextColor() {
     if (materialYou) return
-    setTextColor(ThemeStore.accentColor(App.getContext()))
+    setTextColor(context.accentColor())
 }
 
 fun MaterialButton.accentBackgroundColor() {
     if (materialYou) return
-    backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(App.getContext()))
+    backgroundTintList = ColorStateList(
+        arrayOf(intArrayOf(android.R.attr.state_enabled), intArrayOf()),
+            intArrayOf(context.accentColor(), context.accentColor().addAlpha(0.12f)))
 }
 
 fun MaterialButton.accentOutlineColor() {
@@ -162,6 +163,15 @@ fun SeekBar.applyColor(@ColorInt color: Int) {
     thumbTintList = ColorStateList.valueOf(color)
     progressTintList = ColorStateList.valueOf(color)
     progressBackgroundTintList = ColorStateList.valueOf(color)
+}
+
+fun Slider.applyColor(@ColorInt color: Int) {
+    ColorStateList.valueOf(color).run {
+        thumbTintList = this
+        trackActiveTintList = this
+        trackInactiveTintList = ColorStateList.valueOf(color.addAlpha(0.1f))
+        haloTintList = this
+    }
 }
 
 fun ExtendedFloatingActionButton.accentColor() {
@@ -293,11 +303,18 @@ fun Context.accentColorVariant(): Int {
 inline val @receiver:ColorInt Int.isColorLight
     get() = ColorUtil.isColorLight(this)
 
+inline val @receiver:ColorInt Int.lightColor
+    get() = ColorUtil.withAlpha(this, 0.5F)
+
 inline val @receiver:ColorInt Int.lighterColor
     get() = ColorUtil.lightenColor(this)
 
 inline val @receiver:ColorInt Int.darkerColor
     get() = ColorUtil.darkenColor(this)
 
-inline val Int.colorStateList : ColorStateList
+inline val Int.colorStateList: ColorStateList
     get() = ColorStateList.valueOf(this)
+
+fun @receiver:ColorInt Int.addAlpha(alpha: Float): Int {
+    return ColorUtil.withAlpha(this, alpha)
+}

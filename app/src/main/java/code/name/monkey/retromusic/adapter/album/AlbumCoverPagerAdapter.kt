@@ -85,7 +85,6 @@ class AlbumCoverPagerAdapter(
 
     class AlbumCoverFragment : Fragment() {
 
-        private lateinit var albumCover: ImageView
         private var isColorReady: Boolean = false
         private lateinit var color: MediaNotificationProcessor
         private lateinit var song: Song
@@ -106,8 +105,6 @@ class AlbumCoverPagerAdapter(
             savedInstanceState: Bundle?
         ): View? {
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
-            view.setTransitionName("lyrics")
-            albumCover = view.findViewById(R.id.player_image)
             view.setOnClickListener {
                 if (mainActivity.getBottomSheetBehavior().state == STATE_EXPANDED) {
                     showLyricsDialog()
@@ -158,7 +155,7 @@ class AlbumCoverPagerAdapter(
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
-            loadAlbumCover()
+            loadAlbumCover(albumCover = view.findViewById(R.id.player_image))
         }
 
         override fun onDestroyView() {
@@ -166,7 +163,7 @@ class AlbumCoverPagerAdapter(
             colorReceiver = null
         }
 
-        private fun loadAlbumCover() {
+        private fun loadAlbumCover(albumCover: ImageView) {
             GlideApp.with(this).asBitmapPalette().songCoverOptions(song)
                 //.checkIgnoreMediaStore()
                 .load(RetroGlideExtension.getSongModel(song))

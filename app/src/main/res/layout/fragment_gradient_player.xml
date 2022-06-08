@@ -14,6 +14,8 @@
         android:layout_height="match_parent"
         android:paddingBottom="48dp">
 
+        <include android:id="@+id/status_bar_layout" layout="@layout/status_bar" />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerAlbumCoverFragment"
             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
@@ -47,29 +49,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playerAlbumCoverFragment" />
 
-        <FrameLayout
-            android:id="@+id/statusBarContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <include
-                android:id="@+id/status_bar_layout"
-                layout="@layout/status_bar" />
-        </FrameLayout>
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/cover_lyrics"
-            android:name="code.name.monkey.retromusic.fragments.other.CoverLyricsFragment"
+            android:name="code.name.monkey.retromusic.fragments.player.CoverLyricsFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:elevation="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/playerAlbumCoverFragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/statusBarContainer" />
+            app:layout_constraintTop_toBottomOf="@+id/status_bar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -80,7 +69,7 @@
         android:layout_height="match_parent"
         app:behavior_hideable="false"
         app:gestureInsetBottomIgnored="true"
-        app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <LinearLayout
             android:id="@+id/container"

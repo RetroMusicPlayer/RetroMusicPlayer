@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
     android:fitsSystemWindows="true">
 
     <code.name.monkey.retromusic.views.BaselineGridTextView
@@ -44,26 +43,39 @@
             android:orientation="@integer/permission_orientation">
 
             <code.name.monkey.retromusic.views.PermissionItem
-                android:id="@+id/storagePermission"
+                android:id="@+id/storage_permission"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="@integer/permission_layout_weight"
-                app:permissionButtonTitle="Grant access"
+                app:permissionButtonTitle="@string/grant_access"
                 app:permissionIcon="@drawable/ic_sd_storage"
                 app:permissionTitle="@string/permission_title"
                 app:permissionTitleNumber="1"
                 app:permissionTitleSubTitle="@string/permission_summary" />
 
             <code.name.monkey.retromusic.views.PermissionItem
-                android:id="@+id/audioPermission"
+                android:id="@+id/bluetooth_permission"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_weight="@integer/permission_layout_weight"
-                app:permissionButtonTitle="Grant access"
+                android:visibility="gone"
+                app:permissionButtonTitle="@string/grant_access"
+                app:permissionIcon="@drawable/ic_bluetooth_connect"
+                app:permissionTitle="@string/bluetooth_title"
+                app:permissionTitleNumber="2"
+                app:permissionTitleSubTitle="@string/bluetooth_summary"
+                tools:visibility="visible" />
+
+            <code.name.monkey.retromusic.views.PermissionItem
+                android:id="@+id/audio_permission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/permission_layout_weight"
+                android:visibility="gone"
+                app:permissionButtonTitle="@string/grant_access"
                 app:permissionIcon="@drawable/ic_phonelink_ring"
                 app:permissionTitle="@string/ringtone_title"
-                app:permissionTitleNumber="2"
+                app:permissionTitleNumber="3"
                 app:permissionTitleSubTitle="@string/ringtone_summary"
                 tools:visibility="visible" />
         </LinearLayout>
@@ -77,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:paddingVertical="12dp"
-        android:text="Let's go"
+        android:text="@string/lets_go"
         android:textAppearance="@style/TextViewButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

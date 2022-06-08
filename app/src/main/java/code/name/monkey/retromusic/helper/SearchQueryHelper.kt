@@ -139,8 +139,6 @@ object SearchQueryHelper : KoinComponent {
                 arrayOf(query.lowercase())
             )
         )
-        return if (songs.isNotEmpty()) {
-            songs
-        } else ArrayList()
+        return songs.ifEmpty { ArrayList() }
     }
 }

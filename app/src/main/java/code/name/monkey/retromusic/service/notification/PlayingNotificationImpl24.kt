@@ -18,22 +18,18 @@ import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.app.NotificationCompat
-import androidx.core.text.parseAsHtml
 import androidx.media.app.NotificationCompat.MediaStyle
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_QUIT
@@ -41,20 +37,14 @@ import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
-import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @SuppressLint("RestrictedApi")
 class PlayingNotificationImpl24(
-    val context: Context,
-    mediaSessionToken: MediaSessionCompat.Token
+    val context: MusicService,
+    mediaSessionToken: MediaSessionCompat.Token,
 ) : PlayingNotification(context) {
 
     init {
@@ -120,31 +110,24 @@ class PlayingNotificationImpl24(
     }
 
     override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
-        setContentTitle(("<b>" + song.title + "</b>").parseAsHtml())
+        if (song == Song.emptySong) return
+        setContentTitle(song.title)
         setContentText(song.artistName)
-        setSubText(("<b>" + song.albumName + "</b>").parseAsHtml())
+        setSubText(song.albumName)
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
-        GlideApp.with(context).asBitmapPalette().songCoverOptions(song)
+        GlideApp.with(context)
+            .asBitmap()
+            .songCoverOptions(song)
             .load(RetroGlideExtension.getSongModel(song))
             //.checkIgnoreMediaStore()
             .centerCrop()
-            .into(object : CustomTarget<BitmapPaletteWrapper>(
+            .into(object : CustomTarget<Bitmap>(
                 bigNotificationImageSize,
                 bigNotificationImageSize
             ) {
-                override fun onResourceReady(
-                    resource: BitmapPaletteWrapper,
-                    transition: Transition<in BitmapPaletteWrapper>?
-                ) {
-                    setLargeIcon(
-                        resource.bitmap
-                    )
-                    if (Build.VERSION.SDK_INT <=
-                        Build.VERSION_CODES.O && PreferenceUtil.isColoredNotification
-                    ) {
-                        color = RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
-                    }
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    setLargeIcon(resource)
                     onUpdate()
                 }
 
@@ -195,14 +178,8 @@ class PlayingNotificationImpl24(
         mActions[2] = buildPlayAction(isPlaying)
     }
 
-    override fun updateFavorite(song: Song, onUpdate: () -> Unit) {
-        GlobalScope.launch(Dispatchers.IO) {
-            val isFavorite = MusicUtil.repository.isSongFavorite(song.id)
-            withContext(Dispatchers.Main) {
-                mActions[0] = buildFavoriteAction(isFavorite)
-                onUpdate()
-            }
-        }
+    override fun updateFavorite(isFavorite: Boolean) {
+        mActions[0] = buildFavoriteAction(isFavorite)
     }
 
     private fun retrievePlaybackAction(action: String): PendingIntent {
@@ -219,9 +196,9 @@ class PlayingNotificationImpl24(
     companion object {
 
         fun from(
-            context: Context,
+            context: MusicService,
             notificationManager: NotificationManager,
-            mediaSession: MediaSessionCompat
+            mediaSession: MediaSessionCompat,
         ): PlayingNotification {
             if (VersionUtils.hasOreo()) {
                 createNotificationChannel(context, notificationManager)

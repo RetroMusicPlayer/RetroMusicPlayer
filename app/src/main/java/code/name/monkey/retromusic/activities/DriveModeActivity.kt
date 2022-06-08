@@ -20,13 +20,12 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.animation.LinearInterpolator
-import android.widget.SeekBar
 import androidx.lifecycle.lifecycleScope
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityDriveModeBinding
 import code.name.monkey.retromusic.db.toSongEntity
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
@@ -36,11 +35,11 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
+import com.google.android.material.slider.Slider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -66,7 +65,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
         setUpMusicControllers()
 
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-        lastPlaybackControlsColor = ThemeStore.accentColor(this)
+        lastPlaybackControlsColor = accentColor()
         binding.close.setOnClickListener {
             onBackPressed()
         }
@@ -91,14 +90,12 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     private fun toggleFavorite(song: Song) {
         lifecycleScope.launch(Dispatchers.IO) {
             val playlist = repository.favoritePlaylist()
-            if (playlist != null) {
-                val songEntity = song.toSongEntity(playlist.playListId)
-                val isFavorite = repository.isSongFavorite(song.id)
-                if (isFavorite) {
-                    repository.removeSongFromPlaylist(songEntity)
-                } else {
-                    repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-                }
+            val songEntity = song.toSongEntity(playlist.playListId)
+            val isFavorite = repository.isSongFavorite(song.id)
+            if (isFavorite) {
+                repository.removeSongFromPlaylist(songEntity)
+            } else {
+                repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
             sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
@@ -115,17 +112,15 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     }
 
     private fun setUpProgressSlider() {
-        binding.progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(
-                        MusicPlayerRemote.songProgressMillis,
-                        MusicPlayerRemote.songDurationMillis
-                    )
-                }
+        binding.progressSlider.addOnChangeListener { _: Slider, progress: Float, fromUser: Boolean ->
+            if (fromUser) {
+                MusicPlayerRemote.seekTo(progress.toInt())
+                onUpdateProgressViews(
+                    MusicPlayerRemote.songProgressMillis,
+                    MusicPlayerRemote.songDurationMillis
+                )
             }
-        })
+        }
     }
 
     override fun onPause() {
@@ -139,7 +134,6 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     }
 
     private fun setUpPrevNext() {
-
         binding.nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
         binding.previousButton.setOnClickListener { MusicPlayerRemote.back() }
     }
@@ -246,14 +240,15 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
 
         GlideApp.with(this)
             .load(RetroGlideExtension.getSongModel(song))
-            .songCoverOptions(song).transform(BlurTransformation.Builder(this).build())
+            .songCoverOptions(song)
+            .transform(BlurTransformation.Builder(this).build())
             .into(binding.image)
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.progressSlider.max = total
+        binding.progressSlider.valueTo = total.toFloat()
 
-        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
+        val animator = ObjectAnimator.ofFloat(binding.progressSlider, "value", progress.toFloat())
         animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()

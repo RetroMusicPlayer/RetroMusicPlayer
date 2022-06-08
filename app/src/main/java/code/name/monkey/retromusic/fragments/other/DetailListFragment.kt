@@ -29,7 +29,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
@@ -37,7 +36,6 @@ import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.databinding.FragmentPlaylistDetailBinding
 import code.name.monkey.retromusic.db.toSong
-import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
@@ -66,18 +64,13 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentPlaylistDetailBinding.bind(view)
         when (args.type) {
             TOP_ARTISTS,
             RECENT_ARTISTS,
             TOP_ALBUMS,
             RECENT_ALBUMS,
-            FAVOURITES -> {
+            FAVOURITES,
+            -> {
                 enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
                 returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
             }
@@ -86,6 +79,13 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
                 returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
             }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentPlaylistDetailBinding.bind(view)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.progressIndicator.hide()
         when (args.type) {
@@ -102,17 +102,8 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
             TOP_PLAYED_PLAYLIST -> topPlayed()
         }
 
-        binding.recyclerView.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
-            override fun onChanged() {
-                super.onChanged()
-                val height = dipToPix(52f)
-                binding.recyclerView.updatePadding(bottom = height.toInt())
-            }
-        })
         binding.appBarLayout.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (!handleBackPress()) {
                 remove()
@@ -237,10 +228,10 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         GridLayoutManager(requireContext(), gridCount(), GridLayoutManager.VERTICAL, false)
 
     private fun gridCount(): Int {
-        if (RetroUtil.isTablet()) {
-            return if (RetroUtil.isLandscape()) 6 else 4
+        if (RetroUtil.isTablet) {
+            return if (RetroUtil.isLandscape) 6 else 4
         }
-        return if (RetroUtil.isLandscape()) 4 else 2
+        return if (RetroUtil.isLandscape) 4 else 2
     }
 
 
@@ -283,7 +274,6 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
         cab?.let {
-            println("Cab")
             if (it.isActive()) {
                 it.destroy()
             }
@@ -302,25 +292,25 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         return cab as AttachedCab
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_clear_history, menu)
         if (showClearHistoryOption) {
             menu.findItem(R.id.action_clear_history).isVisible = true // Show Clear History option
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_clear_history -> {
                 if (binding.recyclerView.adapter?.itemCount!! > 0) {
                     libraryViewModel.clearHistory()
 
                     val snackBar =
-                        Snackbar.make(binding.container,
+                        Snackbar.make(
+                            binding.container,
                             getString(R.string.history_cleared),
-                            Snackbar.LENGTH_LONG)
+                            Snackbar.LENGTH_LONG
+                        )
                             .setAction(getString(R.string.history_undo_button)) {
                                 libraryViewModel.restoreHistory()
                             }

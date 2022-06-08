@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="md3_available">true</bool>
+    <bool name="md3_enabled">true</bool>
+
+    <bool name="wallpaper_accent_visible">false</bool>
+</resources>

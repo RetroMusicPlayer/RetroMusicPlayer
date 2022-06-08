@@ -78,8 +78,9 @@
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/playerToolbar"
                         style="@style/Toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
                         app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
                 </FrameLayout>
             </LinearLayout>

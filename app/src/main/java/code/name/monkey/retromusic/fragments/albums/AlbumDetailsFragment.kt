@@ -31,6 +31,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.Fade
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity.getToolbarBackgroundColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
@@ -62,10 +63,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.repository.RealRepository
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.*
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -112,23 +110,24 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAlbumDetailsBinding.bind(view)
-        setHasOptionsMenu(true)
+        enterTransition = Fade()
+        exitTransition = Fade()
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
 
         binding.toolbar.title = " "
-        binding.albumCoverContainer.setTransitionName(arguments.extraAlbumId.toString())
+        binding.albumCoverContainer.transitionName = arguments.extraAlbumId.toString()
         postponeEnterTransition()
         detailsViewModel.getAlbum().observe(viewLifecycleOwner) {
-            requireView().doOnPreDraw {
+            view.doOnPreDraw {
                 startPostponedEnterTransition()
             }
             albumArtistExists = !it.albumArtist.isNullOrEmpty()
             showAlbum(it)
-            if (albumArtistExists) {
-                binding.artistImage.setTransitionName(album.albumArtist)
+            binding.artistImage.transitionName = if (albumArtistExists) {
+                album.albumArtist
             } else {
-                binding.artistImage.setTransitionName(album.artistId.toString())
+                album.artistId.toString()
             }
         }
 
@@ -246,10 +245,10 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         detailsViewModel.getAlbumInfo(album).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
-                    println("Loading")
+                    logD("Loading")
                 }
                 is Result.Error -> {
-                    println("Error")
+                    logE("Error")
                 }
                 is Result.Success -> {
                     aboutAlbum(result.data)
@@ -308,7 +307,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             .load(
                 RetroGlideExtension.getArtistModel(
                     artist,
-                    PreferenceUtil.isAllowedToDownloadMetadata()
+                    PreferenceUtil.isAllowedToDownloadMetadata(requireContext())
                 )
             )
             .artistImageOptions(artist)
@@ -347,8 +346,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         )
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_album_detail, menu)
         val sortOrder = menu.findItem(R.id.action_sort_order)
         setUpSortOrderMenu(sortOrder.subMenu)
@@ -360,7 +358,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         return handleSortOrderMenuItem(item)
     }
 

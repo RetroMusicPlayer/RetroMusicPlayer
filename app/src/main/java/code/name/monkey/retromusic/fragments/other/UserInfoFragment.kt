@@ -15,16 +15,15 @@
 package code.name.monkey.retromusic.fragments.other
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
@@ -36,11 +35,12 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentUserInfoBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.util.ImageUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtil.userName
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -55,9 +55,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.io.BufferedOutputStream
 import java.io.File
-import java.io.FileOutputStream
 
 class UserInfoFragment : Fragment() {
 
@@ -68,7 +66,7 @@ class UserInfoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.fragment_container
@@ -85,7 +83,7 @@ class UserInfoFragment : Fragment() {
 
         binding.nameContainer.accentColor()
         binding.next.accentColor()
-        binding.name.setText(PreferenceUtil.userName)
+        binding.name.setText(userName)
 
         binding.userImage.setOnClickListener {
             showUserImageOptions()
@@ -98,14 +96,10 @@ class UserInfoFragment : Fragment() {
         binding.next.setOnClickListener {
             val nameString = binding.name.text.toString().trim { it <= ' ' }
             if (nameString.isEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    "Your name can't be empty!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showToast(R.string.error_empty_name)
                 return@setOnClickListener
             }
-            PreferenceUtil.userName = nameString
+            userName = nameString
             findNavController().navigateUp()
         }
 
@@ -172,19 +166,14 @@ class UserInfoFragment : Fragment() {
             .into(binding.userImage)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            findNavController().navigateUp()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun selectBannerImage() {
         ImagePicker.with(this)
             .compress(1440)
             .provider(ImageProvider.GALLERY)
             .crop(16f, 9f)
-            .start(PICK_BANNER_REQUEST)
+            .createIntent {
+                startForBannerImageResult.launch(it)
+            }
     }
 
     private fun pickNewPhoto() {
@@ -192,21 +181,40 @@ class UserInfoFragment : Fragment() {
             .provider(ImageProvider.GALLERY)
             .cropSquare()
             .compress(1440)
-            .start(PICK_IMAGE_REQUEST)
+            .createIntent {
+                startForProfileImageResult.launch(it)
+            }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
-            val fileUri = data?.data
-            fileUri?.let { setAndSaveUserImage(it) }
-        } else if (resultCode == Activity.RESULT_OK && requestCode == PICK_BANNER_REQUEST) {
-            val fileUri = data?.data
-            fileUri?.let { setAndSaveBannerImage(it) }
-        } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(requireContext(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            saveImage(result) { fileUri ->
+                setAndSaveUserImage(fileUri)
+            }
+        }
+
+    private val startForBannerImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            saveImage(result) { fileUri ->
+                setAndSaveBannerImage(fileUri)
+            }
+        }
+
+    private fun saveImage(result: ActivityResult, doIfResultOk: (uri: Uri) -> Unit) {
+        val resultCode = result.resultCode
+        val data = result.data
+        when (resultCode) {
+            Activity.RESULT_OK -> {
+                data?.data?.let { uri ->
+                    doIfResultOk(uri)
+                }
+            }
+            ImagePicker.RESULT_ERROR -> {
+                showToast(ImagePicker.getError(data))
+            }
+            else -> {
+                showToast("Task Cancelled")
+            }
         }
     }
 
@@ -221,7 +229,7 @@ class UserInfoFragment : Fragment() {
                     model: Any?,
                     target: Target<Bitmap>?,
                     dataSource: DataSource?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     resource?.let { saveImage(it, USER_BANNER) }
                     return false
@@ -231,7 +239,7 @@ class UserInfoFragment : Fragment() {
                     e: GlideException?,
                     model: Any?,
                     target: Target<Bitmap>?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     return false
                 }
@@ -243,18 +251,14 @@ class UserInfoFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             val appDir = requireContext().filesDir
             val file = File(appDir, fileName)
-            var successful = false
-            runCatching {
-                BufferedOutputStream(FileOutputStream(file)).use {
-                    successful = ImageUtil.resizeBitmap(bitmap, 2048)
-                        .compress(Bitmap.CompressFormat.WEBP, 100, it)
-                }
-            }.onFailure {
-                it.printStackTrace()
+            var successful: Boolean
+            file.outputStream().buffered().use {
+                successful = ImageUtil.resizeBitmap(bitmap, 2048)
+                    .compress(Bitmap.CompressFormat.WEBP, 100, it)
             }
             if (successful) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Updated", Toast.LENGTH_SHORT).show()
+                    showToast(R.string.message_updated)
                 }
             }
         }
@@ -271,7 +275,7 @@ class UserInfoFragment : Fragment() {
                     model: Any?,
                     target: Target<Bitmap>?,
                     dataSource: DataSource?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     resource?.let { saveImage(it, USER_PROFILE) }
                     return false
@@ -281,7 +285,7 @@ class UserInfoFragment : Fragment() {
                     e: GlideException?,
                     model: Any?,
                     target: Target<Bitmap>?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     return false
                 }
@@ -292,10 +296,5 @@ class UserInfoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        private const val PICK_IMAGE_REQUEST = 9002
-        private const val PICK_BANNER_REQUEST = 9004
     }
 }

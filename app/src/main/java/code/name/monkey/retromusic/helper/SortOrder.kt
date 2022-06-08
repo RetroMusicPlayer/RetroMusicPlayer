@@ -72,8 +72,10 @@ class SortOrder {
 
         companion object {
 
+            const val SONG_DEFAULT = MediaStore.Audio.Media.DEFAULT_SORT_ORDER
+
             /* Song sort order A-Z */
-            const val SONG_A_Z = MediaStore.Audio.Media.DEFAULT_SORT_ORDER
+            const val SONG_A_Z = MediaStore.Audio.Media.TITLE
 
             /* Song sort order Z-A */
             const val SONG_Z_A = "$SONG_A_Z DESC"

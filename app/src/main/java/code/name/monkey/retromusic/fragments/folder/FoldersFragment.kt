@@ -13,21 +13,19 @@
  */
 package code.name.monkey.retromusic.fragments.folder
 
-import android.app.Dialog
 import android.content.Context
 import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
-import android.text.Html
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.webkit.MimeTypeMap
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.widget.Toolbar
+import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.lifecycle.lifecycleScope
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
@@ -36,7 +34,6 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.SongFileAdapter
 import code.name.monkey.retromusic.adapter.Storage
@@ -45,17 +42,12 @@ import code.name.monkey.retromusic.adapter.StorageClickListener
 import code.name.monkey.retromusic.databinding.FragmentFolderBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import code.name.monkey.retromusic.fragments.folder.FoldersFragment.ListPathsAsyncTask.OnPathsListedCallback
-import code.name.monkey.retromusic.fragments.folder.FoldersFragment.ListSongsAsyncTask.OnSongsListedCallback
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openQueue
-import code.name.monkey.retromusic.helper.MusicPlayerRemote.playingQueue
-import code.name.monkey.retromusic.helper.menu.SongMenuHelper.handleMenuClick
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.interfaces.IMainActivityFragmentCallbacks
-import code.name.monkey.retromusic.misc.DialogAsyncTask
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader
 import code.name.monkey.retromusic.model.Song
@@ -64,16 +56,19 @@ import code.name.monkey.retromusic.util.FileUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.startDirectory
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
+import code.name.monkey.retromusic.util.getExternalStorageDirectory
+import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import code.name.monkey.retromusic.views.BreadCrumbLayout.Crumb
 import code.name.monkey.retromusic.views.BreadCrumbLayout.SelectionCallback
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
 import com.afollestad.materialcab.createCab
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileFilter
 import java.io.IOException
@@ -85,6 +80,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     LoaderManager.LoaderCallbacks<List<File>>, StorageClickListener {
     private var _binding: FragmentFolderBinding? = null
     private val binding get() = _binding!!
+
+    val toolbar: Toolbar get() = binding.appBarLayout.toolbar
+
     private var adapter: SongFileAdapter? = null
     private var storageAdapter: StorageAdapter? = null
     private var cab: AttachedCab? = null
@@ -100,15 +98,16 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     private var storageItems = ArrayList<Storage>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFolderBinding.bind(view)
-
         mainActivity.addMusicServiceEventListener(libraryViewModel)
-        mainActivity.setSupportActionBar(binding.toolbar)
+        mainActivity.setSupportActionBar(toolbar)
         mainActivity.supportActionBar?.title = null
         enterTransition = MaterialFadeThrough()
         reenterTransition = MaterialFadeThrough()
 
         setUpBreadCrumbs()
+        checkForMargins()
         setUpRecyclerView()
         setUpAdapter()
         setUpTitle()
@@ -122,21 +121,17 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                     }
                 }
             })
-        binding.toolbarContainer.drawNextToNavbar()
-        binding.appBarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     private fun setUpTitle() {
-        binding.toolbar.setNavigationOnClickListener {
+        toolbar.setNavigationOnClickListener {
             findNavController().navigate(R.id.action_search, null, navOptions)
         }
-        binding.appNameText.text = resources.getString(R.string.folders)
+        binding.appBarLayout.title = resources.getString(R.string.folders)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setHasOptionsMenu(true)
         if (savedInstanceState == null) {
             switchToFileAdapter()
             setCrumb(
@@ -186,48 +181,37 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (val itemId = item.itemId) {
                     R.id.action_play_next, R.id.action_add_to_current_playing, R.id.action_add_to_playlist, R.id.action_delete_from_device -> {
-                        ListSongsAsyncTask(
-                            activity,
-                            null,
-                            object : OnSongsListedCallback {
-                                override fun onSongsListed(songs: List<Song>, extra: Any?) {
-                                    if (songs.isNotEmpty()) {
-                                        SongsMenuHelper.handleMenuClick(
-                                            requireActivity(), songs, itemId
-                                        )
-                                    }
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            listSongs(
+                                requireContext(),
+                                listOf(file),
+                                AUDIO_FILE_FILTER,
+                                fileComparator
+                            ) { songs ->
+                                if (songs.isNotEmpty()) {
+                                    SongsMenuHelper.handleMenuClick(
+                                        requireActivity(), songs, itemId
+                                    )
                                 }
-                            })
-                            .execute(
-                                ListSongsAsyncTask.LoadingInfo(
-                                    toList(file), AUDIO_FILE_FILTER, fileComparator
-                                )
-                            )
+                            }
+                        }
                         return@setOnMenuItemClickListener true
                     }
                     R.id.action_add_to_blacklist -> {
-                        BlacklistStore.getInstance(App.getContext()).addPath(file)
+                        BlacklistStore.getInstance(requireContext()).addPath(file)
                         return@setOnMenuItemClickListener true
                     }
                     R.id.action_set_as_start_directory -> {
                         startDirectory = file
-                        Toast.makeText(
-                            activity,
-                            String.format(getString(R.string.new_start_directory), file.path),
-                            Toast.LENGTH_SHORT
+                        showToast(
+                            String.format(getString(R.string.new_start_directory), file.path)
                         )
-                            .show()
                         return@setOnMenuItemClickListener true
                     }
                     R.id.action_scan -> {
-                        ListPathsAsyncTask(
-                            activity,
-                            object : OnPathsListedCallback {
-                                override fun onPathsListed(paths: Array<String?>) {
-                                    scanPaths(paths)
-                                }
-                            })
-                            .execute(ListPathsAsyncTask.LoadingInfo(file, AUDIO_FILE_FILTER))
+                        lifecycleScope.launch {
+                            listPaths(file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
+                        }
                         return@setOnMenuItemClickListener true
                     }
                 }
@@ -238,32 +222,26 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (val itemId = item.itemId) {
                     R.id.action_play_next, R.id.action_add_to_current_playing, R.id.action_add_to_playlist, R.id.action_go_to_album, R.id.action_go_to_artist, R.id.action_share, R.id.action_tag_editor, R.id.action_details, R.id.action_set_as_ringtone, R.id.action_delete_from_device -> {
-                        ListSongsAsyncTask(
-                            activity,
-                            null,
-                            object : OnSongsListedCallback {
-                                override fun onSongsListed(songs: List<Song>, extra: Any?) {
-                                    handleMenuClick(
-                                        requireActivity(), songs[0], itemId
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            listSongs(
+                                requireContext(),
+                                listOf(file),
+                                AUDIO_FILE_FILTER,
+                                fileComparator
+                            ) { songs ->
+                                if (songs.isNotEmpty()) {
+                                    SongsMenuHelper.handleMenuClick(
+                                        requireActivity(), songs, itemId
                                     )
                                 }
-                            })
-                            .execute(
-                                ListSongsAsyncTask.LoadingInfo(
-                                    toList(file), AUDIO_FILE_FILTER, fileComparator
-                                )
-                            )
+                            }
+                        }
                         return@setOnMenuItemClickListener true
                     }
                     R.id.action_scan -> {
-                        ListPathsAsyncTask(
-                            activity,
-                            object : OnPathsListedCallback {
-                                override fun onPathsListed(paths: Array<String?>) {
-                                    scanPaths(paths)
-                                }
-                            })
-                            .execute(ListPathsAsyncTask.LoadingInfo(file, AUDIO_FILE_FILTER))
+                        lifecycleScope.launch {
+                            listPaths(file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
+                        }
                         return@setOnMenuItemClickListener true
                     }
                 }
@@ -282,16 +260,17 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             val fileFilter = FileFilter { pathname: File ->
                 !pathname.isDirectory && AUDIO_FILE_FILTER.accept(pathname)
             }
-            ListSongsAsyncTask(
-                activity,
-                mFile,
-                object : OnSongsListedCallback {
-                    override fun onSongsListed(songs: List<Song>, extra: Any?) {
-                        val file1 = extra as File
+            lifecycleScope.launch(Dispatchers.IO) {
+                listSongs(
+                    requireContext(),
+                    listOf(mFile.parentFile),
+                    fileFilter,
+                    fileComparator
+                ) { songs ->
+                    if (songs.isNotEmpty()) {
                         var startIndex = -1
                         for (i in songs.indices) {
-                            if (file1
-                                    .path
+                            if (mFile.path
                                 == songs[i].data
                             ) { // path is already canonical here
                                 startIndex = i
@@ -303,39 +282,29 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         } else {
                             Snackbar.make(
                                 mainActivity.slidingPanel,
-                                Html.fromHtml(
-                                    String.format(
-                                        getString(R.string.not_listed_in_media_store), file1.name
-                                    )
-                                ),
+                                String.format(
+                                    getString(R.string.not_listed_in_media_store), mFile.name
+
+                                ).parseAsHtml(),
                                 Snackbar.LENGTH_LONG
                             )
                                 .setAction(
                                     R.string.action_scan
                                 ) {
-                                    ListPathsAsyncTask(
-                                        requireActivity(),
-                                        object : OnPathsListedCallback {
-                                            override fun onPathsListed(paths: Array<String?>) {
-                                                scanPaths(paths)
-                                            }
-                                        })
-                                        .execute(
-                                            ListPathsAsyncTask.LoadingInfo(
-                                                file1, AUDIO_FILE_FILTER
+                                    lifecycleScope.launch {
+                                        listPaths(mFile, AUDIO_FILE_FILTER) { paths ->
+                                            scanPaths(
+                                                paths
                                             )
-                                        )
+                                        }
+                                    }
                                 }
                                 .setActionTextColor(accentColor(requireActivity()))
                                 .show()
                         }
                     }
-                })
-                .execute(
-                    ListSongsAsyncTask.LoadingInfo(
-                        toList(mFile.parentFile), fileFilter, fileComparator
-                    )
-                )
+                }
+            }
         }
     }
 
@@ -349,28 +318,23 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     override fun onMultipleItemAction(item: MenuItem, files: ArrayList<File>) {
         val itemId = item.itemId
-        ListSongsAsyncTask(
-            activity,
-            null,
-            object : OnSongsListedCallback {
-                override fun onSongsListed(songs: List<Song>, extra: Any?) {
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            listSongs(requireContext(), files, AUDIO_FILE_FILTER, fileComparator) { songs ->
+                if (songs.isNotEmpty()) {
                     SongsMenuHelper.handleMenuClick(
-                        requireActivity(),
-                        songs,
-                        itemId
+                        requireActivity(), songs, itemId
                     )
                 }
-            })
-            .execute(ListSongsAsyncTask.LoadingInfo(files, AUDIO_FILE_FILTER, fileComparator))
+            }
+        }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), binding.toolbar)
+    override fun onPrepareMenu(menu: Menu) {
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         menu.add(0, R.id.action_scan, 0, R.string.scan_media)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
         menu.add(0, R.id.action_go_to_start_directory, 1, R.string.action_go_to_start_directory)
@@ -381,13 +345,13 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         menu.removeItem(R.id.action_layout_type)
         menu.removeItem(R.id.action_sort_order)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
-            requireContext(), binding.toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(
-                binding.toolbar
+            requireContext(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(
+                toolbar
             )
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_go_to_start_directory -> {
                 setCrumb(
@@ -401,37 +365,27 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             R.id.action_scan -> {
                 val crumb = activeCrumb
                 if (crumb != null) {
-                    ListPathsAsyncTask(
-                        activity,
-                        object : OnPathsListedCallback {
-                            override fun onPathsListed(paths: Array<String?>) {
-                                scanPaths(paths)
-                            }
-                        })
-                        .execute(ListPathsAsyncTask.LoadingInfo(crumb.file, AUDIO_FILE_FILTER))
+                    lifecycleScope.launch {
+                        listPaths(crumb.file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
+                    }
                 }
                 return true
             }
             R.id.action_settings -> {
                 findNavController().navigate(
-                    R.id.settingsActivity,
+                    R.id.settings_fragment,
                     null,
                     navOptions
                 )
                 return true
             }
         }
-        return super.onOptionsItemSelected(item)
+        return false
     }
 
-    override fun onQueueChanged() {
-        super.onQueueChanged()
-        checkForPadding()
-    }
-
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        checkForPadding()
+    override fun onResume() {
+        super.onResume()
+        checkForMargins()
     }
 
     override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
@@ -452,13 +406,11 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         return cab as AttachedCab
     }
 
-    private fun checkForPadding() {
-        val count = adapter?.itemCount ?: 0
-        if (_binding != null) {
-            binding.recyclerView.updatePadding(
-                bottom = if (count > 0 && playingQueue.isNotEmpty()) dip(R.dimen.mini_player_height_expanded)
-                else dip(R.dimen.mini_player_height_expanded)
-            )
+    private fun checkForMargins() {
+        if (mainActivity.isBottomNavVisible) {
+            binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = dip(R.dimen.bottom_nav_height)
+            }
         }
     }
 
@@ -491,7 +443,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             return
         }
         if (toBeScanned.isEmpty()) {
-            Toast.makeText(activity, R.string.nothing_to_scan, Toast.LENGTH_SHORT).show()
+            showToast(R.string.nothing_to_scan)
         } else {
             MediaScannerConnection.scanFile(
                 requireContext(),
@@ -541,12 +493,6 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         )
     }
 
-    private fun toList(file: File): ArrayList<File> {
-        val files = ArrayList<File>(1)
-        files.add(file)
-        return files
-    }
-
     private fun updateAdapter(files: List<File>) {
         adapter?.swapDataSet(files)
         val crumb = activeCrumb
@@ -561,69 +507,32 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         _binding = null
     }
 
-    class ListPathsAsyncTask(context: Context?, callback: OnPathsListedCallback) :
-        ListingFilesDialogAsyncTask<ListPathsAsyncTask.LoadingInfo, String?, Array<String?>>(
-            context
-        ) {
-        private val onPathsListedCallbackWeakReference: WeakReference<OnPathsListedCallback> =
-            WeakReference(callback)
-
-        override fun doInBackground(vararg params: LoadingInfo): Array<String?> {
-            return try {
-                if (isCancelled || checkCallbackReference() == null) {
-                    return arrayOf()
+    private suspend fun listPaths(
+        file: File,
+        fileFilter: FileFilter,
+        doOnPathListed: (paths: Array<String?>) -> Unit,
+    ) {
+        val paths = try {
+            val paths: Array<String?>
+            if (file.isDirectory) {
+                val files = FileUtil.listFilesDeep(file, fileFilter)
+                paths = arrayOfNulls(files.size)
+                for (i in files.indices) {
+                    val f = files[i]
+                    paths[i] = FileUtil.safeGetCanonicalPath(f)
                 }
-                val info = params[0]
-                val paths: Array<String?>
-                if (info.file.isDirectory) {
-                    val files = FileUtil.listFilesDeep(info.file, info.fileFilter)
-                    if (isCancelled || checkCallbackReference() == null) {
-                        return arrayOf()
-                    }
-                    paths = arrayOfNulls(files.size)
-                    for (i in files.indices) {
-                        val f = files[i]
-                        paths[i] = FileUtil.safeGetCanonicalPath(f)
-                        if (isCancelled || checkCallbackReference() == null) {
-                            return arrayOf()
-                        }
-                    }
-                } else {
-                    paths = arrayOfNulls(1)
-                    paths[0] = info.file.path
-                }
-                paths
-            } catch (e: Exception) {
-                e.printStackTrace()
-                cancel(false)
-                arrayOf()
+            } else {
+                paths = arrayOfNulls(1)
+                paths[0] = file.path
             }
+            paths
+        } catch (e: Exception) {
+            e.printStackTrace()
+            arrayOf()
         }
-
-        override fun onPostExecute(paths: Array<String?>) {
-            super.onPostExecute(paths)
-            checkCallbackReference()?.onPathsListed(paths)
+        withContext(Dispatchers.Main) {
+            doOnPathListed(paths)
         }
-
-        override fun onPreExecute() {
-            super.onPreExecute()
-            checkCallbackReference()
-        }
-
-        private fun checkCallbackReference(): OnPathsListedCallback? {
-            val callback = onPathsListedCallbackWeakReference.get()
-            if (callback == null) {
-                cancel(false)
-            }
-            return callback
-        }
-
-        interface OnPathsListedCallback {
-            fun onPathsListed(paths: Array<String?>)
-        }
-
-        class LoadingInfo(val file: File, val fileFilter: FileFilter)
-
     }
 
     private class AsyncFileLoader(foldersFragment: FoldersFragment) :
@@ -651,87 +560,25 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 LinkedList()
             }
         }
-
     }
 
-    private open class ListSongsAsyncTask(
-        context: Context?,
-        private val extra: Any?,
-        callback: OnSongsListedCallback
-    ) : ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, List<Song>>(context) {
-        private val callbackWeakReference = WeakReference(callback)
-        private val contextWeakReference = WeakReference(context)
-        override fun doInBackground(vararg params: LoadingInfo): List<Song> {
-            return try {
-                val info = params[0]
-                val files = FileUtil.listFilesDeep(info.files, info.fileFilter)
-                if (isCancelled || checkContextReference() == null || checkCallbackReference() == null) {
-                    return emptyList()
-                }
-                Collections.sort(files, info.fileComparator)
-                val context = checkContextReference()
-                if (isCancelled || context == null || checkCallbackReference() == null) {
-                    emptyList()
-                } else FileUtil.matchFilesWithMediaStore(context, files)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                cancel(false)
-                emptyList()
-            }
+    suspend fun listSongs(
+        context: Context,
+        files: List<File?>,
+        fileFilter: FileFilter,
+        fileComparator: Comparator<File>,
+        doOnSongsListed: (songs: List<Song>) -> Unit,
+    ) {
+        val songs = try {
+            val fileList = FileUtil.listFilesDeep(files, fileFilter)
+            Collections.sort(fileList, fileComparator)
+            FileUtil.matchFilesWithMediaStore(context, fileList)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
         }
-
-        override fun onPostExecute(songs: List<Song>) {
-            super.onPostExecute(songs)
-            checkCallbackReference()?.onSongsListed(songs, extra)
-        }
-
-        override fun onPreExecute() {
-            super.onPreExecute()
-            checkCallbackReference()
-            checkContextReference()
-        }
-
-        private fun checkCallbackReference(): OnSongsListedCallback? {
-            val callback = callbackWeakReference.get()
-            if (callback == null) {
-                cancel(false)
-            }
-            return callback
-        }
-
-        private fun checkContextReference(): Context? {
-            val context = contextWeakReference.get()
-            if (context == null) {
-                cancel(false)
-            }
-            return context
-        }
-
-        interface OnSongsListedCallback {
-            fun onSongsListed(songs: List<Song>, extra: Any?)
-        }
-
-        class LoadingInfo(
-            val files: List<File>,
-            val fileFilter: FileFilter,
-            val fileComparator: Comparator<File>
-        )
-
-    }
-
-    abstract class ListingFilesDialogAsyncTask<Params, Progress, Result> internal constructor(
-        context: Context?
-    ) :
-        DialogAsyncTask<Params, Progress, Result>(context) {
-
-        override fun createDialog(context: Context): Dialog {
-            return MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.listing_files)
-                .setCancelable(false)
-                .setView(R.layout.loading)
-                .setOnCancelListener { cancel(false) }
-                .setOnDismissListener { cancel(false) }
-                .create()
+        withContext(Dispatchers.Main) {
+            doOnSongsListed(songs)
         }
     }
 
@@ -752,7 +599,6 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 override fun onChanged() {
                     super.onChanged()
                     checkIsEmpty()
-                    checkForPadding()
                 }
             })
         binding.recyclerView.adapter = adapter
@@ -772,7 +618,11 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             (!file.isHidden
                     && (file.isDirectory
                     || FileUtil.fileIsMimeType(file, "audio/*", MimeTypeMap.getSingleton())
-                    || FileUtil.fileIsMimeType(file, "application/opus", MimeTypeMap.getSingleton())
+                    || FileUtil.fileIsMimeType(
+                file,
+                "application/opus",
+                MimeTypeMap.getSingleton()
+            )
                     || FileUtil.fileIsMimeType(
                 file,
                 "application/ogg",
@@ -786,11 +636,11 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         val defaultStartDirectory: File
             get() {
                 val musicDir =
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
+                    getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
                 val startFolder = if (musicDir.exists() && musicDir.isDirectory) {
                     musicDir
                 } else {
-                    val externalStorage = Environment.getExternalStorageDirectory()
+                    val externalStorage = getExternalStorageDirectory()
                     if (externalStorage.exists() && externalStorage.isDirectory) {
                         externalStorage
                     } else {

@@ -30,10 +30,7 @@ import androidx.core.widget.doAfterTextChanged
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityAlbumTagEditorBinding
-import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.extensions.defaultFooterColor
-import code.name.monkey.retromusic.extensions.isColorLight
-import code.name.monkey.retromusic.extensions.setTint
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.ArtworkInfo
@@ -42,6 +39,7 @@ import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
 import code.name.monkey.retromusic.util.RetroColorUtil.getColor
+import code.name.monkey.retromusic.util.logD
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.transition.Transition
@@ -101,7 +99,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
         binding.albumArtistText.setText(albumArtistName)
         binding.genreTitle.setText(genreName)
         binding.yearTitle.setText(songYear)
-        println(albumTitle + albumArtistName)
+        logD(albumTitle + albumArtistName)
     }
 
     override fun loadCurrentImage() {
@@ -117,11 +115,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
     }
 
     private fun toastLoadingFailed() {
-        Toast.makeText(
-            this@AlbumTagEditorActivity,
-            R.string.could_not_download_album_cover,
-            Toast.LENGTH_SHORT
-        ).show()
+        showToast(R.string.could_not_download_album_cover)
     }
 
     override fun searchImageOnWeb() {
@@ -161,8 +155,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBindin
 
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
-                    Toast.makeText(this@AlbumTagEditorActivity, "Load Failed", Toast.LENGTH_LONG)
-                        .show()
+                    showToast(R.string.error_load_failed, Toast.LENGTH_LONG)
                 }
 
                 override fun setResource(resource: BitmapPaletteWrapper?) {}

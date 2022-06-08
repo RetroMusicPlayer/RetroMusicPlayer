@@ -6,13 +6,12 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_album_cover">
 
-    <code.name.monkey.retromusic.views.CircularImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/player_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        app:civ_border="false"
-        app:civ_shadow="false"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"

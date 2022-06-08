@@ -20,26 +20,21 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.getSystemService
 import androidx.core.view.*
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.databinding.FragmentSearchBinding
-import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.extensions.focusAndShowKeyboard
-import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.views.addAlpha
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -54,7 +49,6 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
     ChipGroup.OnCheckedStateChangeListener {
     companion object {
         const val QUERY = "query"
-        const val REQ_CODE_SPEECH_INPUT = 9001
     }
 
     private var _binding: FragmentSearchBinding? = null
@@ -83,6 +77,11 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
             doAfterTextChanged {
                 if (!it.isNullOrEmpty())
                     search(it.toString())
+                else {
+                    TransitionManager.beginDelayedTransition(binding.appBarLayout)
+                    binding.voiceSearch.isVisible = true
+                    binding.clearText.isGone = true
+                }
             }
             focusAndShowKeyboard()
         }
@@ -129,7 +128,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
 
             val colors = intArrayOf(
                 android.R.color.transparent,
-                ThemeStore.accentColor(requireContext()).addAlpha(0.5F)
+                accentColor().addAlpha(0.5F)
             )
 
             chips.forEach {
@@ -147,14 +146,20 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
         }
     }
 
+    private fun checkForMargins() {
+        if (mainActivity.isBottomNavVisible) {
+            binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = dip(R.dimen.bottom_nav_height)
+            }
+        }
+    }
+
     private fun setupRecyclerView() {
         searchAdapter = SearchAdapter(requireActivity(), emptyList())
         searchAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
                 binding.empty.isVisible = searchAdapter.itemCount < 1
-                val height = dipToPix(52f)
-                binding.recyclerView.updatePadding(bottom = height.toInt())
             }
         })
         binding.recyclerView.apply {
@@ -204,24 +209,25 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt))
         try {
-            startActivityForResult(
-                intent,
-                REQ_CODE_SPEECH_INPUT
-            )
+            speechInputLauncher.launch(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             showToast(getString(R.string.speech_not_supported))
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            val spokenText: String? =
-                data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                    .let { text -> text?.get(0) }
-            binding.searchView.setText(spokenText)
+    private val speechInputLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val spokenText: String? =
+                    result?.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
+                binding.searchView.setText(spokenText)
+            }
         }
+
+    override fun onResume() {
+        super.onResume()
+        checkForMargins()
     }
 
     override fun onDestroyView() {
@@ -246,6 +252,10 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
     override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
         search(binding.searchView.text.toString())
     }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {}
+
+    override fun onMenuItemSelected(menuItem: MenuItem) = false
 }
 
 enum class Filter {

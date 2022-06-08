@@ -367,6 +367,7 @@
     <string name="pref_summary_toggle_volume">Jika tersedia cukup ruang, tampilkan kontrol volume di layar pemutaran</string>
     <string name="pref_summary_wallpaper_accent">Ambil warna aksen dari wallpaper</string>
     <string name="pref_summary_whitelist">Tampilkan musik hanya dari folder /Music</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Tampilkan sampul album</string>
     <string name="pref_title_album_artists_only">Navigasi berdasarkan Album Artis</string>
     <string name="pref_title_album_cover_style">Tema sampul album</string>
@@ -416,6 +417,7 @@
     <string name="pref_title_toggle_volume">Kontrol volume</string>
     <string name="pref_title_wallpaper_accent">Warna aksen wallpaper</string>
     <string name="pref_title_whitelist">Musik daftar putih</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema hitam, Tema yang sedang diputar, efek korsel, dan lainnya...</string>
     <string name="profile">Profil</string>

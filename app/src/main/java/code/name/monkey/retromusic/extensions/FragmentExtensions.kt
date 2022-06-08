@@ -24,7 +24,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.appbar.MaterialToolbar
@@ -58,12 +57,6 @@ inline fun <reified T : Any> Fragment.extraNotNull(key: String, default: T? = nu
     requireNotNull(if (value is T) value else default) { key }
 }
 
-val NavHostFragment.currentFragment: Fragment?
-    get() = targetFragment
-
-val FragmentManager.currentNavigationFragment: Fragment?
-    get() = primaryNavigationFragment?.childFragmentManager?.fragments?.first()
-
 fun AppCompatActivity.currentFragment(navHostId: Int): Fragment? {
     val navHostFragment: NavHostFragment =
         supportFragmentManager.findFragmentById(navHostId) as NavHostFragment
@@ -80,12 +73,12 @@ fun <T> Fragment.whichFragment(@IdRes id: Int): T {
     return childFragmentManager.findFragmentById(id) as T
 }
 
-fun Fragment.showToast(@StringRes stringRes: Int) {
-    showToast(getString(stringRes))
+fun Fragment.showToast(@StringRes stringRes: Int, duration: Int = Toast.LENGTH_SHORT) {
+    showToast(getString(stringRes), duration)
 }
 
-fun Fragment.showToast(message: String) {
-    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(requireContext(), message, duration).show()
 }
 
 fun Context.getDrawableCompat(@DrawableRes drawableRes: Int): Drawable {

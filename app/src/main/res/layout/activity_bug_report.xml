@@ -14,6 +14,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/report_bug"

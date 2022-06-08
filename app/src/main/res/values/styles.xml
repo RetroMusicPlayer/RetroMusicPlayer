@@ -7,7 +7,7 @@
     <style name="Theme.RetroMusic.Black" parent="Theme.RetroMusic.Base.Black" />
 
     <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive">
-        <item name="android:windowBackground">@color/window_color</item>
+        <item name="android:windowBackground">?colorSurface</item>
     </style>
 
     <style name="Theme.RetroMusic.MD3" parent="@style/Theme.Material3.DayNight.NoActionBar">
@@ -36,8 +36,6 @@
     </style>
 
     <style name="Toolbar" parent="Widget.Material3.Toolbar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="popupTheme">?toolbarPopupTheme</item>
         <item name="android:transitionName" tools:ignore="NewApi">toolbar</item>
         <item name="layout_collapseMode">pin</item>
@@ -125,7 +123,7 @@
         <item name="cornerSize">0dp</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.RetroMusic.SplashScreen" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
@@ -133,7 +131,7 @@
     <style name="MaterialPopupMenuStyle" parent="Widget.Material3.PopupMenu">
         <item name="android:popupBackground">@drawable/popup_background</item>
     </style>
-    
+
     <style name="CenteredCheckBoxTheme">
         <item name="checkboxStyle">@style/CheckBoxStyle</item>
     </style>
@@ -142,23 +140,7 @@
         <item name="android:gravity">center_vertical|end</item>
     </style>
 
-    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="materialAlertDialogBodyTextStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Body
-        </item>
-        <item name="materialAlertDialogTitleTextStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Title
-        </item>
-        <item name="buttonBarPositiveButtonStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Button
-        </item>
-        <item name="buttonBarNegativeButtonStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Button
-        </item>
-        <item name="buttonBarNeutralButtonStyle">
-            @style/AppTextAppearance.MaterialAlertDialog.Button
-        </item>
-    </style>
+    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog" />
 
     <style name="AppTextAppearance.MaterialAlertDialog.Button" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textSize">16sp</item>
@@ -190,6 +172,7 @@
     <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet">
         <item name="paddingBottomSystemWindowInsets">false</item>
         <item name="android:maxWidth">@empty</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerMedium</item>
     </style>
 
     <style name="MaterialCardViewStroke">
@@ -263,5 +246,21 @@
         </item>
     </style>
 
+    <style name="RoundedFABOverlay">
+        <item name="floatingActionButtonStyle">
+            @style/Widget.Material3.FloatingActionButton.Primary
+        </item>
+    </style>
+
     <style name="Theme.AppWidget" parent="Theme.RetroMusic.FollowSystem" />
+
+    <style name="ShapeAppearance.Material3.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Widget.Retro.Slider" parent="Widget.Material3.Slider">
+        <item name="labelBehavior">gone</item>
+        <item name="thumbRadius">6dp</item>
+        <item name="haloRadius">18dp</item>
+    </style>
 </resources>

@@ -20,11 +20,13 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.LYRICS_TYPE
 import code.name.monkey.retromusic.R
@@ -47,6 +49,7 @@ import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.LyricsType
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -80,7 +83,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         lifecycleScope.launchWhenStarted {
             viewPager.setPageTransformer(false, transformer)
         }
-}
+    }
 
     private fun updateLyrics() {
         binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
@@ -113,15 +116,30 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPlayerAlbumCoverBinding.bind(view)
+        setupViewPager()
+        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
+        maybeInitLyrics()
+        lrcView.apply {
+            setDraggable(true) { time ->
+                MusicPlayerRemote.seekTo(time.toInt())
+                MusicPlayerRemote.resumePlaying()
+                true
+            }
+            setOnClickListener {
+                goToLyrics(requireActivity())
+            }
+        }
+    }
+
+    private fun setupViewPager() {
         binding.viewPager.addOnPageChangeListener(this)
         val nps = PreferenceUtil.nowPlayingScreen
-
-        val metrics = resources.displayMetrics
-        val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
 
         if (nps == Full || nps == Classic || nps == Fit || nps == Gradient) {
             binding.viewPager.offscreenPageLimit = 2
         } else if (PreferenceUtil.isCarouselEffect) {
+            val metrics = resources.displayMetrics
+            val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
             binding.viewPager.clipToPadding = false
             val padding =
                 if (ratio >= 1.777f) {
@@ -138,18 +156,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 true,
                 PreferenceUtil.albumCoverTransform
             )
-        }
-        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
-        maybeInitLyrics()
-        lrcView.apply {
-            setDraggable(true) { time ->
-                MusicPlayerRemote.seekTo(time.toInt())
-                MusicPlayerRemote.resumePlaying()
-                true
-            }
-            setOnClickListener {
-                goToLyrics(requireActivity())
-            }
         }
     }
 
@@ -170,41 +176,41 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     override fun onServiceConnected() {
+        logD("Service Connected")
         updatePlayingQueue()
         updateLyrics()
     }
 
     override fun onPlayingMetaChanged() {
-        binding.viewPager.currentItem = MusicPlayerRemote.position
+        logD("Playing Meta Changed")
+        if (viewPager.currentItem != MusicPlayerRemote.position) {
+            viewPager.setCurrentItem(MusicPlayerRemote.position, true)
+        }
         updateLyrics()
     }
 
     override fun onQueueChanged() {
+        logD("Queue Changed")
         updatePlayingQueue()
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
-        if (key == SHOW_LYRICS) {
-            if (sharedPreferences.getBoolean(key, false)) {
-                maybeInitLyrics()
-            } else {
-                showLyrics(false)
-                progressViewUpdateHelper?.stop()
+        when (key) {
+            SHOW_LYRICS -> {
+                if (PreferenceUtil.showLyrics) {
+                    maybeInitLyrics()
+                } else {
+                    showLyrics(false)
+                    progressViewUpdateHelper?.stop()
+                }
             }
-        } else if (key == LYRICS_TYPE) {
-            maybeInitLyrics()
+            LYRICS_TYPE -> {
+                maybeInitLyrics()
+            }
         }
     }
 
-    private fun setLRCViewColors(backgroundColor: Int) {
-        val primaryColor = MaterialValueHelper.getPrimaryTextColor(
-            requireContext(),
-            backgroundColor.isColorLight
-        )
-        val secondaryColor = MaterialValueHelper.getSecondaryDisabledTextColor(
-            requireContext(),
-            backgroundColor.isColorLight
-        )
+    private fun setLRCViewColors(@ColorInt primaryColor: Int, @ColorInt secondaryColor: Int) {
         lrcView.apply {
             setCurrentColor(primaryColor)
             setTimeTextColor(primaryColor)
@@ -251,15 +257,15 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         binding.viewPager.apply {
             adapter = AlbumCoverPagerAdapter(childFragmentManager, MusicPlayerRemote.playingQueue)
             adapter?.notifyDataSetChanged()
-            currentItem = MusicPlayerRemote.position
+            setCurrentItem(MusicPlayerRemote.position, true)
             onPageSelected(MusicPlayerRemote.position)
         }
     }
 
-    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-    }
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
     override fun onPageSelected(position: Int) {
+        logD("Page Selected $position")
         currentPosition = position
         if (binding.viewPager.adapter != null) {
             (binding.viewPager.adapter as AlbumCoverPagerAdapter).receiveColor(
@@ -278,19 +284,25 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     private fun notifyColorChange(color: MediaNotificationProcessor) {
         callbacks?.onColorChanged(color)
-        setLRCViewColors(
-            when (PreferenceUtil.nowPlayingScreen) {
-                Adaptive, Fit, Plain, Simple -> surfaceColor()
-                Flat, Normal -> if (PreferenceUtil.isAdaptiveColor) {
-                    color.backgroundColor
-                } else {
-                    surfaceColor()
-                }
-                Color ,Classic -> color.backgroundColor
-                Blur -> Color.BLACK
-                else -> surfaceColor()
-            }
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(
+            requireContext(),
+            surfaceColor().isColorLight
         )
+        val secondaryColor = MaterialValueHelper.getSecondaryDisabledTextColor(
+            requireContext(),
+            surfaceColor().isColorLight
+        )
+
+        when (PreferenceUtil.nowPlayingScreen) {
+            Flat, Normal, Material -> if (PreferenceUtil.isAdaptiveColor) {
+                setLRCViewColors(color.primaryTextColor, color.secondaryTextColor)
+            } else {
+                setLRCViewColors(primaryColor, secondaryColor)
+            }
+            Color, Classic -> setLRCViewColors(color.primaryTextColor, color.secondaryTextColor)
+            Blur -> setLRCViewColors(Color.WHITE, ColorUtil.withAlpha(Color.WHITE, 0.5f))
+            else -> setLRCViewColors(primaryColor, secondaryColor)
+        }
     }
 
     fun setCallbacks(listener: Callbacks) {
@@ -309,5 +321,5 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     private val lyricViewNpsList =
-        listOf(Blur, Classic, Color, Flat, Material, Normal, Plain, Simple)
+        listOf(Blur, Classic, Color, Flat, Material, MD3, Normal, Plain, Simple)
 }

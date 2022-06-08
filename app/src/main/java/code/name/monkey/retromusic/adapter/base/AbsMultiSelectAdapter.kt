@@ -64,9 +64,8 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
     }
 
     protected abstract fun getIdentifier(position: Int): I?
-    protected open fun getName(i: I): String? {
-        return i.toString()
-    }
+
+    protected abstract fun getName(model: I): String?
 
     protected fun isChecked(identifier: I): Boolean {
         return checked.contains(identifier)

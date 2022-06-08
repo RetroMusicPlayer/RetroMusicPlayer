@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:transitionGroup="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -17,6 +17,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black"
             app:title="@string/action_tag_editor" />
 
@@ -26,8 +28,8 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:overScrollMode="@integer/overScrollMode">
+        android:overScrollMode="@integer/overScrollMode"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,7 +71,6 @@
                     android:id="@+id/albumText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
                     android:hint="@string/album"
                     android:inputType="text|textCapWords"
                     android:maxLines="1" />
@@ -89,7 +90,6 @@
                     android:id="@+id/albumArtistText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
                     android:hint="@string/album_artist"
                     android:inputType="text|textCapWords"
                     android:maxLines="1" />
@@ -109,7 +109,6 @@
                     android:id="@+id/genreTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
                     android:hint="@string/genre"
                     android:inputType="text|textCapWords"
                     android:maxLines="1" />
@@ -129,7 +128,6 @@
                     android:id="@+id/yearTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
                     android:hint="@string/year"
                     android:inputType="text|number"
                     android:maxLines="1" />

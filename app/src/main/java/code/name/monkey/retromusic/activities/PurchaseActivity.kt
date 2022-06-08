@@ -19,21 +19,21 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityProVersionBinding
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.setLightStatusBar
 import code.name.monkey.retromusic.extensions.setStatusBarColor
+import code.name.monkey.retromusic.extensions.showToast
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.PurchaseInfo
 
-class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
+class PurchaseActivity : AbsThemeActivity(), BillingProcessor.IBillingHandler {
 
     private lateinit var binding: ActivityProVersionBinding
     private lateinit var billingProcessor: BillingProcessor
@@ -61,12 +61,11 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
             billingProcessor.purchase(this@PurchaseActivity, PRO_VERSION_PRODUCT_ID)
         }
         binding.bannerContainer.backgroundTintList =
-            ColorStateList.valueOf(ThemeStore.accentColor(this))
+            ColorStateList.valueOf(accentColor())
     }
 
     private fun restorePurchase() {
-        Toast.makeText(this, R.string.restoring_purchase, Toast.LENGTH_SHORT)
-            .show()
+        showToast(R.string.restoring_purchase)
         billingProcessor.loadOwnedPurchasesFromGoogleAsync(object :
             BillingProcessor.IPurchasesResponseListener {
             override fun onPurchasesSuccess() {
@@ -74,30 +73,22 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
             }
 
             override fun onPurchasesError() {
-                Toast.makeText(
-                    this@PurchaseActivity,
-                    R.string.could_not_restore_purchase,
-                    Toast.LENGTH_SHORT
-                ).show()
+                showToast(R.string.could_not_restore_purchase)
             }
         })
     }
 
     override fun onProductPurchased(productId: String, details: PurchaseInfo?) {
-        Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show()
+        showToast(R.string.thank_you)
         setResult(RESULT_OK)
     }
 
     override fun onPurchaseHistoryRestored() {
         if (App.isProVersion()) {
-            Toast.makeText(
-                this,
-                R.string.restored_previous_purchase_please_restart,
-                Toast.LENGTH_LONG
-            ).show()
+            showToast(R.string.restored_previous_purchase_please_restart)
             setResult(RESULT_OK)
         } else {
-            Toast.makeText(this, R.string.no_purchase_found, Toast.LENGTH_SHORT).show()
+            showToast(R.string.no_purchase_found)
         }
     }
 

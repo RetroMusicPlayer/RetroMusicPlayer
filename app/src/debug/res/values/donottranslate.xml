@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">Retro Music-Debug</string>
-
-    <bool name="md3_available">true</bool>
-    <bool name="allowBackup">false</bool>
 </resources>

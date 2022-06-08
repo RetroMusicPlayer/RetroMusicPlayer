@@ -64,11 +64,12 @@ class CreatePlaylistDialog : DialogFragment() {
             ) { _, _ ->
                 val playlistName = playlistView.text.toString()
                 if (!TextUtils.isEmpty(playlistName)) {
-                    libraryViewModel.addToPlaylist(playlistName, songs)
+                    libraryViewModel.addToPlaylist(requireContext(), playlistName, songs)
                 } else {
                     playlistContainer.error = "Playlist name can't be empty"
                 }
             }
+            .setNegativeButton(R.string.action_cancel, null)
             .create()
             .colorButtons()
     }

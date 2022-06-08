@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -44,7 +45,7 @@ class GenreDetailsViewModel(
         loadGenreSongs(genre)
     }
 
-    private fun loadGenreSongs(genre: Genre) = viewModelScope.launch {
+    private fun loadGenreSongs(genre: Genre) = viewModelScope.launch(IO) {
         val songs = realRepository.getGenre(genre.id)
         withContext(Main) { _playListSongs.postValue(songs) }
     }

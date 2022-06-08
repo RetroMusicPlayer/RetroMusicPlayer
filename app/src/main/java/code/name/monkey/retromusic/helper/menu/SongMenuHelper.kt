@@ -21,7 +21,6 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
@@ -56,10 +55,9 @@ object SongMenuHelper : KoinComponent {
         when (menuItemId) {
             R.id.action_set_as_ringtone -> {
                 if (RingtoneManager.requiresDialog(activity)) {
-                    RingtoneManager.getDialog(activity)
+                    RingtoneManager.showDialog(activity)
                 } else {
-                    val ringtoneManager = RingtoneManager(activity)
-                    ringtoneManager.setRingtone(song)
+                    RingtoneManager.setRingtone(activity, song)
                 }
                 return true
             }
@@ -124,7 +122,7 @@ object SongMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_add_to_blacklist -> {
-                BlacklistStore.getInstance(App.getContext()).addPath(File(song.data))
+                BlacklistStore.getInstance(activity).addPath(File(song.data))
                 libraryViewModel.forceReload(ReloadType.Songs)
                 return true
             }

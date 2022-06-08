@@ -16,12 +16,12 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import android.database.Cursor
-import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
 import android.provider.MediaStore.Audio.Media
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.extensions.getInt
@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import java.text.Collator
 
 /**
@@ -52,8 +53,6 @@ interface SongRepository {
     fun song(cursor: Cursor?): Song
 
     fun song(songId: Long): Song
-
-    fun songsIgnoreBlacklist(uri: Uri): List<Song>
 }
 
 class RealSongRepository(private val context: Context) : SongRepository {
@@ -120,32 +119,10 @@ class RealSongRepository(private val context: Context) : SongRepository {
     override fun songsByFilePath(filePath: String, ignoreBlacklist: Boolean): List<Song> {
         return songs(
             makeSongCursor(
-                AudioColumns.DATA + "=?",
+                Constants.DATA + "=?",
                 arrayOf(filePath),
                 ignoreBlacklist = ignoreBlacklist
             )
-        )
-    }
-
-    override fun songsIgnoreBlacklist(uri: Uri): List<Song> {
-        var filePath = ""
-        context.contentResolver.query(
-            uri,
-            arrayOf(AudioColumns.DATA),
-            null,
-            null,
-            null
-        ).use { cursor ->
-            if (cursor != null) {
-                if (cursor.count != 0) {
-                    cursor.moveToFirst()
-                    filePath = cursor.getString(AudioColumns.DATA)
-                    println("File Path: $filePath")
-                }
-            }
-        }
-        return songsByFilePath(
-            filePath, true
         )
     }
 
@@ -157,7 +134,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
         val trackNumber = cursor.getInt(AudioColumns.TRACK)
         val year = cursor.getInt(AudioColumns.YEAR)
         val duration = cursor.getLong(AudioColumns.DURATION)
-        val data = cursor.getString(AudioColumns.DATA)
+        val data = cursor.getString(Constants.DATA)
         val dateModified = cursor.getLong(AudioColumns.DATE_MODIFIED)
         val albumId = cursor.getLong(AudioColumns.ALBUM_ID)
         val albumName = cursor.getStringOrNull(AudioColumns.ALBUM)
@@ -201,10 +178,10 @@ class RealSongRepository(private val context: Context) : SongRepository {
             // Whitelist
             if (PreferenceUtil.isWhiteList) {
                 selectionFinal =
-                    selectionFinal + " AND " + AudioColumns.DATA + " LIKE ?"
+                    selectionFinal + " AND " + Constants.DATA + " LIKE ?"
                 selectionValuesFinal = addSelectionValues(
                     selectionValuesFinal, arrayListOf(
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).canonicalPath
+                        getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).canonicalPath
                     )
                 )
             } else {
@@ -243,9 +220,9 @@ class RealSongRepository(private val context: Context) : SongRepository {
     ): String {
         val newSelection = StringBuilder(
             if (selection != null && selection.trim { it <= ' ' } != "") "$selection AND " else "")
-        newSelection.append(AudioColumns.DATA + " NOT LIKE ?")
+        newSelection.append(Constants.DATA + " NOT LIKE ?")
         for (i in 0 until pathCount - 1) {
-            newSelection.append(" AND " + AudioColumns.DATA + " NOT LIKE ?")
+            newSelection.append(" AND " + Constants.DATA + " NOT LIKE ?")
         }
         return newSelection.toString()
     }

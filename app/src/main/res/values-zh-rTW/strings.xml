@@ -55,9 +55,9 @@
     <string name="add_action">新增</string>
     <string name="add_playlist_title">"新增至播放清單"</string>
     <string name="add_time_framed_lryics">新增同步歌詞</string>
-    <string name="added_song_count_to_playlist">已新增 %1$d 首歌至 %2$s</string>
-    <string name="added_title_to_playing_queue">"已新增 1 首歌至播放佇列。"</string>
-    <string name="added_x_titles_to_playing_queue">已新增 %1$d 首歌至播放佇列。</string>
+    <string name="added_song_count_to_playlist">新增 %1$d 首歌到 %2$s</string>
+    <string name="added_title_to_playing_queue">"已新增 1 首歌到播放佇列。"</string>
+    <string name="added_x_titles_to_playing_queue">已新增 %1$d 首歌到播放佇列。</string>
     <string name="album">專輯</string>
     <plurals name="albumSongs">
         <item quantity="other">歌曲</item>
@@ -367,6 +367,7 @@
     <string name="pref_summary_toggle_volume">若螢幕仍有充足空間，則在現正播放畫面，顯示音量控制欄</string>
     <string name="pref_summary_wallpaper_accent">從桌布上擷取主題顏色</string>
     <string name="pref_summary_whitelist">僅顯示來自 /Music 資料夾內的歌曲</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯封面</string>
     <string name="pref_title_album_artists_only">依專輯藝人導覽</string>
     <string name="pref_title_album_cover_style">專輯封面主題</string>
@@ -416,6 +417,7 @@
     <string name="pref_title_toggle_volume">音量控制</string>
     <string name="pref_title_wallpaper_accent">桌布強調色</string>
     <string name="pref_title_whitelist">白名單音樂</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">例如深色主題、現正播放主題、輪播效果等...</string>
     <string name="profile">個人資料</string>

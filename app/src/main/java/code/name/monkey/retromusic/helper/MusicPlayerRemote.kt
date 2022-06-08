@@ -19,20 +19,23 @@ import android.app.Activity
 import android.content.*
 import android.database.Cursor
 import android.net.Uri
-import android.os.Environment
 import android.os.IBinder
 import android.provider.DocumentsContract
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.getExternalStorageDirectory
+import code.name.monkey.retromusic.util.logE
+import com.google.android.gms.cast.framework.CastSession
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
 import java.util.*
+import kotlin.collections.set
 
 
 object MusicPlayerRemote : KoinComponent {
@@ -41,15 +44,6 @@ object MusicPlayerRemote : KoinComponent {
     var musicService: MusicService? = null
 
     private val songRepository by inject<SongRepository>()
-
-    var isCasting: Boolean = false
-        set(value) {
-            field = value
-            if (value) {
-                musicService?.quit()
-            }
-            println(value.toString() + "" + isCasting.toString())
-        }
 
     @JvmStatic
     val isPlaying: Boolean
@@ -71,9 +65,6 @@ object MusicPlayerRemote : KoinComponent {
             musicService?.nextSong
         } else Song.emptySong
 
-    /**
-     * Async
-     */
     var position: Int
         get() = if (musicService != null) {
             musicService!!.position
@@ -121,17 +112,15 @@ object MusicPlayerRemote : KoinComponent {
 
     fun bindToService(context: Context, callback: ServiceConnection): ServiceToken? {
 
-        var realActivity: Activity? = (context as Activity).parent
-        if (realActivity == null) {
-            realActivity = context
-        }
-
+        val realActivity = (context as Activity).parent ?: context
         val contextWrapper = ContextWrapper(realActivity)
         val intent = Intent(contextWrapper, MusicService::class.java)
         try {
             contextWrapper.startService(intent)
         } catch (ignored: IllegalStateException) {
-            ContextCompat.startForegroundService(context, intent)
+            runCatching {
+                ContextCompat.startForegroundService(context, intent)
+            }
         }
         val binder = ServiceBinder(callback)
 
@@ -171,7 +160,7 @@ object MusicPlayerRemote : KoinComponent {
                 return cursor.getString(columnIndex)
             }
         } catch (e: Exception) {
-            println(e.message)
+            e.printStackTrace()
         } finally {
             cursor?.close()
         }
@@ -230,14 +219,9 @@ object MusicPlayerRemote : KoinComponent {
             ) && musicService != null
         ) {
             musicService?.openQueue(queue, startPosition, startPlaying)
-            if (PreferenceUtil.isShuffleModeOn)
-                setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
         }
     }
 
-    /**
-     * Async
-     */
     @JvmStatic
     fun openAndShuffleQueue(queue: List<Song>, startPlaying: Boolean) {
         var startPosition = 0
@@ -259,7 +243,7 @@ object MusicPlayerRemote : KoinComponent {
     private fun tryToHandleOpenPlayingQueue(
         queue: List<Song>,
         startPosition: Int,
-        startPlaying: Boolean
+        startPlaying: Boolean,
     ): Boolean {
         if (playingQueue === queue) {
             if (startPlaying) {
@@ -317,11 +301,7 @@ object MusicPlayerRemote : KoinComponent {
                 queue.add(song)
                 openQueue(queue, 0, false)
             }
-            Toast.makeText(
-                musicService,
-                musicService!!.resources.getString(R.string.added_title_to_playing_queue),
-                Toast.LENGTH_SHORT
-            ).show()
+            musicService?.showToast(R.string.added_title_to_playing_queue)
             return true
         }
         return false
@@ -340,7 +320,7 @@ object MusicPlayerRemote : KoinComponent {
                     R.string.added_x_titles_to_playing_queue,
                     songs.size
                 )
-            Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
+            musicService?.showToast(toast, Toast.LENGTH_SHORT)
             return true
         }
         return false
@@ -355,11 +335,7 @@ object MusicPlayerRemote : KoinComponent {
                 queue.add(song)
                 openQueue(queue, 0, false)
             }
-            Toast.makeText(
-                musicService,
-                musicService!!.resources.getString(R.string.added_title_to_playing_queue),
-                Toast.LENGTH_SHORT
-            ).show()
+            musicService?.showToast(R.string.added_title_to_playing_queue)
             return true
         }
         return false
@@ -377,7 +353,7 @@ object MusicPlayerRemote : KoinComponent {
                     R.string.added_x_titles_to_playing_queue,
                     songs.size
                 )
-            Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
+            musicService?.showToast(toast)
             return true
         }
         return false
@@ -426,7 +402,7 @@ object MusicPlayerRemote : KoinComponent {
     }
 
     @JvmStatic
-    fun playFromUri(uri: Uri) {
+    fun playFromUri(context: Context, uri: Uri) {
         if (musicService != null) {
 
             var songs: List<Song>? = null
@@ -438,23 +414,21 @@ object MusicPlayerRemote : KoinComponent {
                     } else if (uri.authority == "media") {
                         songId = uri.lastPathSegment
                     }
-                    songs = if (songId != null) {
-                        songRepository.songs(songId)
-                    } else {
-                        songRepository.songsIgnoreBlacklist(uri)
+                    if (songId != null) {
+                        songs = songRepository.songs(songId)
                     }
                 }
             }
             if (songs == null || songs.isEmpty()) {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
-                    songFile = File(
-                        Environment.getExternalStorageDirectory(),
-                        uri.path?.split(":".toRegex(), 2)?.get(1)
-                    )
+                    val path = uri.path?.split(":".toRegex(), 2)?.get(1)
+                    if (path != null) {
+                        songFile = File(getExternalStorageDirectory(), path)
+                    }
                 }
                 if (songFile == null) {
-                    val path = getFilePathFromUri(musicService!!, uri)
+                    val path = getFilePathFromUri(context, uri)
                     if (path != null)
                         songFile = File(path)
                 }
@@ -468,8 +442,11 @@ object MusicPlayerRemote : KoinComponent {
             if (songs != null && songs.isNotEmpty()) {
                 openQueue(songs, 0, true)
             } else {
-                // TODO the file is not listed in the media store
-                println("The file is not listed in the media store")
+                try {
+                    context.showToast(R.string.unplayable_file)
+                } catch (e: Exception) {
+                    logE("The file is not listed in the media store")
+                }
             }
         }
     }
@@ -477,6 +454,14 @@ object MusicPlayerRemote : KoinComponent {
     private fun getSongIdFromMediaProvider(uri: Uri): String {
         return DocumentsContract.getDocumentId(uri).split(":".toRegex())
             .dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+    }
+
+    fun switchToRemotePlayback(castSession: CastSession) {
+        musicService?.switchToRemotePlayback(castSession)
+    }
+
+    fun switchToLocalPlayback() {
+        musicService?.switchToLocalPlayback()
     }
 
     class ServiceBinder internal constructor(private val mCallback: ServiceConnection?) :

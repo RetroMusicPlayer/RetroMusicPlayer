@@ -51,7 +51,7 @@ interface PlaylistRepository {
 
     fun playlistSongs(playlistId: Long): List<Song>
 }
-
+@Suppress("Deprecation")
 class RealPlaylistRepository(
     private val contentResolver: ContentResolver
 ) : PlaylistRepository {
@@ -148,7 +148,7 @@ class RealPlaylistRepository(
         val trackNumber = cursor.getInt(AudioColumns.TRACK)
         val year = cursor.getInt(AudioColumns.YEAR)
         val duration = cursor.getLong(AudioColumns.DURATION)
-        val data = cursor.getString(AudioColumns.DATA)
+        val data = cursor.getString(Constants.DATA)
         val dateModified = cursor.getLong(AudioColumns.DATE_MODIFIED)
         val albumId = cursor.getLong(AudioColumns.ALBUM_ID)
         val albumName = cursor.getString(AudioColumns.ALBUM)
@@ -202,7 +202,7 @@ class RealPlaylistRepository(
                 AudioColumns.TRACK, // 2
                 AudioColumns.YEAR, // 3
                 AudioColumns.DURATION, // 4
-                AudioColumns.DATA, // 5
+                Constants.DATA, // 5
                 AudioColumns.DATE_MODIFIED, // 6
                 AudioColumns.ALBUM_ID, // 7
                 AudioColumns.ALBUM, // 8

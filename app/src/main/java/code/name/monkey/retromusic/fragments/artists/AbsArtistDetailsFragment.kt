@@ -10,6 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
@@ -21,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.Fade
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
@@ -84,14 +86,15 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentArtistDetailsBinding.bind(view)
-        setHasOptionsMenu(true)
+        enterTransition = Fade()
+        exitTransition = Fade()
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.toolbar.title = null
-        binding.artistCoverContainer.setTransitionName((artistId ?: artistName).toString())
+        binding.artistCoverContainer.transitionName = (artistId ?: artistName).toString()
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner) {
-            requireView().doOnPreDraw {
+            view.doOnPreDraw {
                 startPostponedEnterTransition()
             }
             showArtist(it)
@@ -146,7 +149,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         }
         this.artist = artist
         loadArtistImage(artist)
-        if (RetroUtil.isAllowedToDownloadMetadata(requireContext())) {
+        if (PreferenceUtil.isAllowedToDownloadMetadata(requireContext())) {
             loadBiography(artist.name)
         }
         binding.artistTitle.text = artist.name
@@ -173,15 +176,15 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
     private fun loadBiography(
         name: String,
-        lang: String? = Locale.getDefault().language
+        lang: String? = Locale.getDefault().language,
     ) {
         biography = null
         this.lang = lang
         detailsViewModel.getArtistInfo(name, lang, null)
             .observe(viewLifecycleOwner) { result ->
                 when (result) {
-                    is Result.Loading -> println("Loading")
-                    is Result.Error -> println("Error")
+                    is Result.Loading -> logD("Loading")
+                    is Result.Error -> logE("Error")
                     is Result.Success -> artistInfo(result.data)
                 }
             }
@@ -245,7 +248,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         return handleSortOrderMenuItem(item)
     }
 
@@ -274,15 +277,16 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             R.id.action_set_artist_image -> {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = "image/*"
-                startActivityForResult(
-                    Intent.createChooser(intent, getString(R.string.pick_from_local_storage)),
-                    REQUEST_CODE_SELECT_IMAGE
-                )
+                selectImageLauncher.launch(Intent.createChooser(intent,
+                    getString(R.string.pick_from_local_storage)))
                 return true
             }
             R.id.action_reset_artist_image -> {
                 showToast(resources.getString(R.string.updating))
-                CustomArtistImageUtil.getInstance(requireContext()).resetCustomArtistImage(artist)
+                lifecycleScope.launch {
+                    CustomArtistImageUtil.getInstance(requireContext())
+                        .resetCustomArtistImage(artist)
+                }
                 forceDownload = true
                 return true
             }
@@ -295,18 +299,18 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             PopupMenu(requireContext(), binding.fragmentArtistContent.songSortOrder).apply {
                 inflate(R.menu.menu_artist_song_sort_order)
                 setUpSortOrderMenu(menu)
-                setOnMenuItemClickListener { menuItem ->
-                    val sortOrder = when (menuItem.itemId) {
+                setOnMenuItemClickListener { item ->
+                    val sortOrder = when (item.itemId) {
                         R.id.action_sort_order_title -> SortOrder.ArtistSongSortOrder.SONG_A_Z
                         R.id.action_sort_order_title_desc -> SortOrder.ArtistSongSortOrder.SONG_Z_A
                         R.id.action_sort_order_album -> SortOrder.ArtistSongSortOrder.SONG_ALBUM
                         R.id.action_sort_order_year -> SortOrder.ArtistSongSortOrder.SONG_YEAR
                         R.id.action_sort_order_song_duration -> SortOrder.ArtistSongSortOrder.SONG_DURATION
                         else -> {
-                            throw IllegalArgumentException("invalid ${menuItem.title}")
+                            throw IllegalArgumentException("invalid ${item.title}")
                         }
                     }
-                    menuItem.isChecked = true
+                    item.isChecked = true
                     setSaveSortOrder(sortOrder)
                     return@setOnMenuItemClickListener true
                 }
@@ -322,38 +326,36 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
     private fun setUpSortOrderMenu(sortOrder: Menu) {
         when (savedSongSortOrder) {
-            SortOrder.ArtistSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title).isChecked = true
-            SortOrder.ArtistSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked = true
+            SortOrder.ArtistSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title).isChecked =
+                true
+            SortOrder.ArtistSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked =
+                true
             SortOrder.ArtistSongSortOrder.SONG_ALBUM ->
                 sortOrder.findItem(R.id.action_sort_order_album).isChecked = true
             SortOrder.ArtistSongSortOrder.SONG_YEAR ->
                 sortOrder.findItem(R.id.action_sort_order_year).isChecked = true
             SortOrder.ArtistSongSortOrder.SONG_DURATION ->
                 sortOrder.findItem(R.id.action_sort_order_song_duration).isChecked = true
-            else-> {
+            else -> {
                 throw IllegalArgumentException("invalid $savedSongSortOrder")
             }
         }
     }
 
+    private val selectImageLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let {
+                    lifecycleScope.launch {
+                        CustomArtistImageUtil.getInstance(requireContext())
+                            .setCustomArtistImage(artist, it)
+                    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            REQUEST_CODE_SELECT_IMAGE -> if (resultCode == Activity.RESULT_OK) {
-                data?.data?.let {
-                    CustomArtistImageUtil.getInstance(requireContext())
-                        .setCustomArtistImage(artist, it)
                 }
             }
-            else -> if (resultCode == Activity.RESULT_OK) {
-                println("OK")
-            }
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_artist_detail, menu)
     }
 
@@ -394,9 +396,5 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        const val REQUEST_CODE_SELECT_IMAGE = 9002
     }
 }

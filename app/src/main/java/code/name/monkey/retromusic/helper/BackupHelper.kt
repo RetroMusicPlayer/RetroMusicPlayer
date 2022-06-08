@@ -2,25 +2,27 @@ package code.name.monkey.retromusic.helper
 
 import android.content.Context
 import android.os.Environment
-import android.widget.Toast
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
+import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.extensions.zipOutputStream
 import code.name.monkey.retromusic.helper.BackupContent.*
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
+import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.io.*
+import java.io.File
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import java.util.zip.ZipOutputStream
 
 object BackupHelper : KoinComponent {
     private val repository by inject<Repository>()
@@ -37,38 +39,30 @@ object BackupHelper : KoinComponent {
         zipItems.addAll(getSettingsZipItems(context))
         getUserImageZipItems(context)?.let { zipItems.addAll(it) }
         zipItems.addAll(getCustomArtistZipItems(context))
-        zipAll(zipItems, backupFile)
+        zipAll(context, zipItems, backupFile)
         // Clean Cache Playlist Directory
         File(context.filesDir, PLAYLISTS_PATH).deleteRecursively()
     }
 
-    private suspend fun zipAll(zipItems: List<ZipItem>, backupFile: File) =
+    private suspend fun zipAll(context: Context, zipItems: List<ZipItem>, backupFile: File) =
         withContext(Dispatchers.IO) {
             runCatching {
-                ZipOutputStream(BufferedOutputStream(FileOutputStream(backupFile))).use { out ->
+                backupFile.outputStream().buffered().zipOutputStream().use { out ->
                     for (zipItem in zipItems) {
-                        FileInputStream(zipItem.filePath).use { fi ->
-                            BufferedInputStream(fi).use { origin ->
-                                val entry = ZipEntry(zipItem.zipPath)
-                                out.putNextEntry(entry)
-                                origin.copyTo(out)
-                            }
+                        File(zipItem.filePath).inputStream().buffered().use { origin ->
+                            val entry = ZipEntry(zipItem.zipPath)
+                            out.putNextEntry(entry)
+                            origin.copyTo(out)
                         }
                     }
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(App.getContext(), "Couldn't create backup", Toast.LENGTH_SHORT)
-                        .show()
+                    context.showToast(R.string.error_create_backup)
                 }
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(
-                        App.getContext(),
-                        "Backup created successfully",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    context.showToast(R.string.message_backup_create_success)
                 }
             }
         }
@@ -167,7 +161,7 @@ object BackupHelper : KoinComponent {
                 }
             }
             withContext(Dispatchers.Main) {
-                Toast.makeText(context, "Restore Completed Successfully", Toast.LENGTH_SHORT).show()
+                context.showToast(R.string.message_restore_success)
             }
         }
     }
@@ -176,7 +170,7 @@ object BackupHelper : KoinComponent {
         val file = File(
             context.filesDir.path, zipEntry.getFileName()
         )
-        BufferedOutputStream(FileOutputStream(file)).use { bos ->
+        file.outputStream().buffered().use { bos ->
             zipIn.copyTo(bos)
         }
     }
@@ -188,7 +182,7 @@ object BackupHelper : KoinComponent {
         if (file.exists()) {
             file.delete()
         }
-        BufferedOutputStream(FileOutputStream(file)).use { bos ->
+        file.outputStream().buffered().use { bos ->
             zipIn.copyTo(bos)
         }
     }
@@ -233,16 +227,14 @@ object BackupHelper : KoinComponent {
         if (!parentFolder.exists()) {
             parentFolder.mkdirs()
         }
-        BufferedOutputStream(
-            FileOutputStream(
-                File(
-                    parentFolder,
-                    zipEntry.getFileName()
-                )
-            )
-        ).use { bos ->
-            zipIn.copyTo(bos)
-        }
+        val file = File(
+            parentFolder,
+            zipEntry.getFileName()
+        )
+        file.outputStream().buffered()
+            .use { bos ->
+                zipIn.copyTo(bos)
+            }
     }
 
     private fun restoreCustomArtistPrefs(
@@ -252,14 +244,14 @@ object BackupHelper : KoinComponent {
     ) {
         val file =
             File(context.filesDir.parentFile, "shared_prefs".child(zipEntry.getFileName()))
-        BufferedOutputStream(FileOutputStream(file)).use { bos ->
+        file.outputStream().buffered().use { bos ->
             zipIn.copyTo(bos)
         }
     }
 
     fun getBackupRoot(): File {
         return File(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+            getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
             "RetroMusic/Backups"
         )
     }

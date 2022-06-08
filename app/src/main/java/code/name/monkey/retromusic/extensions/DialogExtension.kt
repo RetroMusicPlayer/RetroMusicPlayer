@@ -15,17 +15,23 @@
 package code.name.monkey.retromusic.extensions
 
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-fun DialogFragment.materialDialog(title: Int): MaterialAlertDialogBuilder {
-    return MaterialAlertDialogBuilder(
-        requireContext(),
-        R.style.MaterialAlertDialogTheme
-    ).setTitle(title)
+fun Fragment.materialDialog(title: Int): MaterialAlertDialogBuilder {
+    return if (BuildConfig.DEBUG) {
+        MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.MaterialAlertDialogTheme
+        )
+    } else {
+        MaterialAlertDialogBuilder(
+            requireContext()
+        )
+    }.setTitle(title)
 }
 
 fun AlertDialog.colorButtons(): AlertDialog {

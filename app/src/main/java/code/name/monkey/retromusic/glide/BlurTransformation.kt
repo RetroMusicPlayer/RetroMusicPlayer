@@ -14,24 +14,17 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import java.security.MessageDigest
 
 
-class BlurTransformation : BitmapTransformation {
+@Suppress("Deprecation")
+class BlurTransformation private constructor(builder: Builder) : BitmapTransformation() {
 
     private var context: Context? = null
     private var blurRadius = 0f
     private var sampling = 0
 
-    private fun init(builder: Builder) {
+    init {
         this.context = builder.context
         this.blurRadius = builder.blurRadius
         this.sampling = builder.sampling
-    }
-
-    private constructor(builder: Builder) : super() {
-        init(builder)
-    }
-
-    private constructor(builder: Builder, bitmapPool: BitmapPool) : super() {
-        init(builder)
     }
 
     class Builder(val context: Context) {
@@ -68,7 +61,7 @@ class BlurTransformation : BitmapTransformation {
 
         fun build(): BlurTransformation {
             return if (bitmapPool != null) {
-                BlurTransformation(this, bitmapPool!!)
+                BlurTransformation(this)
             } else BlurTransformation(this)
         }
     }
@@ -77,7 +70,7 @@ class BlurTransformation : BitmapTransformation {
         pool: BitmapPool,
         toTransform: Bitmap,
         outWidth: Int,
-        outHeight: Int
+        outHeight: Int,
     ): Bitmap {
         val sampling = if (this.sampling == 0) {
             ImageUtil.calculateInSampleSize(toTransform.width, toTransform.height, 100)
@@ -111,7 +104,9 @@ class BlurTransformation : BitmapTransformation {
             script.forEach(output)
 
             output.copyTo(out)
-
+            output.destroy()
+            script.destroy()
+            input.destroy()
             rs.destroy()
 
             return out

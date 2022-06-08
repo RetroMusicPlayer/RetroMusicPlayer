@@ -4,28 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:clickable="true"
     android:focusable="true">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface" />
-
     <include layout="@layout/shadow_statusbar_toolbar" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/status_bar" />
-        </FrameLayout>
+        <include layout="@layout/status_bar" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,30 +78,21 @@
                         tools:text="Text" />
                 </LinearLayout>
 
-                <FrameLayout
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/playbackControlsFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.plain.PlainPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    tools:layout="@layout/fragment_plain_controls_fragment" />
 
-                    <androidx.fragment.app.FragmentContainerView
-                        android:id="@+id/playbackControlsFragment"
-                        android:name="code.name.monkey.retromusic.fragments.player.plain.PlainPlaybackControlsFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:layout="@layout/fragment_plain_controls_fragment" />
-                </FrameLayout>
-
-                <FrameLayout
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/playerToolbar"
+                    style="@style/Toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0">
-
-                    <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/playerToolbar"
-                        style="@style/Toolbar"
-                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
-                </FrameLayout>
+                    android:layout_weight="0"
+                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
             </LinearLayout>
 
         </LinearLayout>

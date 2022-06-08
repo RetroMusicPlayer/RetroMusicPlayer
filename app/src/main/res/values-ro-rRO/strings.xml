@@ -54,8 +54,8 @@
     <string name="adaptive">Adaptiv</string>
     <string name="add_action">Adaugă</string>
     <string name="add_playlist_title">"Adaugă la playlist"</string>
-    <string name="add_time_framed_lryics">Adaugă versuri încadrate în timp</string>
-    <string name="added_song_count_to_playlist">S-au adăugat %1$d melodii la %2$s</string>
+    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Adăugat 1 titlu la coada de redare."</string>
     <string name="added_x_titles_to_playing_queue">Adăugate %1$d titluri la coada de redare</string>
     <string name="album">Album</string>
@@ -371,6 +371,7 @@
     <string name="pref_summary_toggle_volume">Dacă aveți spațiu pe ecranul de redare, activați controalele de volum</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Afișați coperta albumului</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -420,6 +421,7 @@
     <string name="pref_title_toggle_volume">Controale volum</string>
     <string name="pref_title_wallpaper_accent">Culoare de accent fundal</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more...</string>
     <string name="profile">Profile</string>

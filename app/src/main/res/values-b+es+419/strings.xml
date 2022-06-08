@@ -54,7 +54,7 @@
     <string name="add_action">Agregar</string>
     <string name="add_playlist_title">"Agregar a playlist"</string>
     <string name="add_time_framed_lryics">Agregar letras de marcos de tiempo</string>
-    <string name="added_song_count_to_playlist">%d Cancion(es) añadidas a %s</string>
+    <string name="added_song_count_to_playlist">%1$d Canción(es) añadidas a %2$s</string>
     <string name="added_title_to_playing_queue">"Se agregó 1 canción a la cola de reproducción."</string>
     <string name="added_x_titles_to_playing_queue">Se agregó %1$d canción a la cola de reproducción.</string>
     <string name="album">Álbum</string>
@@ -348,6 +348,7 @@
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
@@ -395,6 +396,7 @@
     <string name="pref_title_toggle_volume">Volume controls</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>

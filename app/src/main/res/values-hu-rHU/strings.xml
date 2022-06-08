@@ -55,7 +55,7 @@
     <string name="add_action">Hozzáad</string>
     <string name="add_playlist_title">"Hozzáadás lejátszási listához"</string>
     <string name="add_time_framed_lryics">Időzített dalszöveg hozzáadása</string>
-    <string name="added_song_count_to_playlist">%1$d zene hozzáadva a %2$s</string>
+    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"1 cím lett hozzáadva a lejátszási sorhoz."</string>
     <string name="added_x_titles_to_playing_queue">%1$d cím hozzáadva a lejátszási sorhoz.</string>
     <string name="album">Album</string>
@@ -369,6 +369,7 @@
     <string name="pref_summary_toggle_volume">Ha van elég szabad hely, mutassa a hangerőszabályzókat a most játszott képernyőn</string>
     <string name="pref_summary_wallpaper_accent">A kiemelő szín kinyerése a háttérképből</string>
     <string name="pref_summary_whitelist">Csak a /Music mappában lévő zenék mutatása</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Az album borítójának megjelenítése</string>
     <string name="pref_title_album_artists_only">Album előadók szerinti navigálás</string>
     <string name="pref_title_album_cover_style">Album borító téma</string>
@@ -416,8 +417,9 @@
     <string name="pref_title_toggle_toggle_headset">Automatikus lejátszás</string>
     <string name="pref_title_toggle_toggle_shuffle">Kevert mód</string>
     <string name="pref_title_toggle_volume">Hangerőszabályzók</string>
-    <string name="pref_title_wallpaper_accent">Háttérkép kiemelő szín</string>
-    <string name="pref_title_whitelist">Engedélyezett zenelisták</string>
+    <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
+    <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Sötét téma, Most játszott felület témái, Carousel hatás és még sok más ..</string>
     <string name="profile">Profil</string>

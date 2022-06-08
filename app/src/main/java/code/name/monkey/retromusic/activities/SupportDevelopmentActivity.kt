@@ -21,18 +21,16 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityDonationBinding
 import code.name.monkey.retromusic.databinding.ItemDonationOptionBinding
 import code.name.monkey.retromusic.extensions.*
@@ -40,7 +38,7 @@ import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.PurchaseInfo
 import com.anjlab.android.iab.v3.SkuDetails
 
-class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
+class SupportDevelopmentActivity : AbsThemeActivity(), BillingProcessor.IBillingHandler {
 
     lateinit var binding: ActivityDonationBinding
 
@@ -75,8 +73,8 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         setupToolbar()
 
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
-        TintHelper.setTint(binding.progress, ThemeStore.accentColor(this))
-        binding.donation.setTextColor(ThemeStore.accentColor(this))
+        TintHelper.setTint(binding.progress, accentColor())
+        binding.donation.setTextColor(accentColor())
     }
 
     private fun setupToolbar() {
@@ -93,8 +91,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     private fun loadSkuDetails() {
         binding.progressContainer.isVisible = true
         binding.recyclerView.isVisible = false
-        val ids =
-            resources.getStringArray(DONATION_PRODUCT_IDS)
+        val ids = resources.getStringArray(DONATION_PRODUCT_IDS)
         billingProcessor!!.getPurchaseListingDetailsAsync(
             ArrayList(listOf(*ids)),
             object : BillingProcessor.ISkuDetailsResponseListener {
@@ -121,7 +118,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 
     override fun onProductPurchased(productId: String, details: PurchaseInfo?) {
         // loadSkuDetails();
-        Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show()
+        showToast(R.string.thank_you)
     }
 
     override fun onBillingError(errorCode: Int, error: Throwable?) {
@@ -130,7 +127,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 
     override fun onPurchaseHistoryRestored() {
         // loadSkuDetails();
-        Toast.makeText(this, R.string.restored_previous_purchases, Toast.LENGTH_SHORT).show()
+        showToast(R.string.restored_previous_purchases)
     }
 
     override fun onDestroy() {
@@ -141,7 +138,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 
 class SkuDetailsAdapter(
     private var donationsDialog: SupportDevelopmentActivity,
-    objects: List<SkuDetails>
+    objects: List<SkuDetails>,
 ) : RecyclerView.Adapter<SkuDetailsAdapter.ViewHolder>() {
 
     private var skuDetailsList: List<SkuDetails> = ArrayList()
@@ -177,7 +174,7 @@ class SkuDetailsAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val skuDetails = skuDetailsList[i]
         with(viewHolder.binding) {
-            itemTitle.text = skuDetails.title.replace("Music Player - MP3 Player - Retro", "")
+            itemTitle.text = skuDetails.title.replace("(Retro Music Player MP3 Player)", "")
                 .trim { it <= ' ' }
             itemText.text = skuDetails.description
             itemText.isVisible = false
@@ -202,7 +199,7 @@ class SkuDetailsAdapter(
             strikeThrough(itemPrice, purchased)
         }
 
-        viewHolder.itemView.setOnTouchListener { _, _ -> purchased }
+        viewHolder.itemView.isEnabled = !purchased
         viewHolder.itemView.setOnClickListener { donationsDialog.donate(i) }
     }
 

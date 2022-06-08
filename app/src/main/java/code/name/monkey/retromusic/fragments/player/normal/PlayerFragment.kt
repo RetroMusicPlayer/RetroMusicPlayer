@@ -27,10 +27,7 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SNOWFALL
 import code.name.monkey.retromusic.databinding.FragmentPlayerBinding
-import code.name.monkey.retromusic.extensions.colorControlNormal
-import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.extensions.isColorLight
-import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -141,10 +138,9 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
     }
 
     private fun setUpSubFragments() {
-        controlsFragment =
-            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        controlsFragment = whichFragment(R.id.playbackControlsFragment)
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+            whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
     }
 
@@ -168,6 +164,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
     }
 
     private fun startOrStopSnow(isSnowFalling: Boolean) {
+        if (_binding == null) return
         if (isSnowFalling && !surfaceColor().isColorLight) {
             binding.snowfallView.isVisible = true
             binding.snowfallView.restartFalling()

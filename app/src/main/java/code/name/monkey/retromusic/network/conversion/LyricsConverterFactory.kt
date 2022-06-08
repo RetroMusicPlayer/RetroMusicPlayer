@@ -25,9 +25,9 @@ import java.lang.reflect.Type
 class LyricsConverterFactory : Converter.Factory() {
 
     override fun responseBodyConverter(
-        type: Type?,
-        annotations: Array<Annotation>?,
-        retrofit: Retrofit?
+        type: Type,
+        annotations: Array<out Annotation>,
+        retrofit: Retrofit
     ): Converter<ResponseBody, *>? {
         return if (String::class.java == type) {
             Converter<ResponseBody, String> { value -> value.string() }
@@ -35,10 +35,10 @@ class LyricsConverterFactory : Converter.Factory() {
     }
 
     override fun requestBodyConverter(
-        type: Type?,
-        parameterAnnotations: Array<Annotation>?,
-        methodAnnotations: Array<Annotation>?,
-        retrofit: Retrofit?
+        type: Type,
+        parameterAnnotations: Array<Annotation>,
+        methodAnnotations: Array<Annotation>,
+        retrofit: Retrofit
     ): Converter<*, RequestBody>? {
 
         return if (String::class.java == type) {

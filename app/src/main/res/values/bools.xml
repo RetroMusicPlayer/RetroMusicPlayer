@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="md3_available">false</bool>
+    <bool name="md3_enabled">false</bool>
+
+    <bool name="allowBackup">true</bool>
+
+    <bool name="wallpaper_accent_enabled">false</bool>
+    <bool name="wallpaper_accent_visible">false</bool>
+
+    <bool name="isNotOreo">true</bool>
+    <bool name="isMarshmallow">false</bool>
+</resources>

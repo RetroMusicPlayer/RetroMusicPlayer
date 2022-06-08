@@ -22,11 +22,13 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.RemoteViews
+import androidx.core.graphics.drawable.toBitmap
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
+import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -35,11 +37,9 @@ import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.DensityUtil
-import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 
@@ -57,31 +57,25 @@ class AppWidgetMD3 : BaseAppWidget() {
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_audio_art)
         val secondaryColor = MaterialValueHelper.getSecondaryTextColor(context, true)
         appWidgetView.setImageViewBitmap(
-            R.id.button_next, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_skip_next,
-                    secondaryColor
-                ), 1f
-            )
+            R.id.button_next,
+            context.getTintedDrawable(
+                R.drawable.ic_skip_next,
+                secondaryColor
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_prev, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_skip_previous,
-                    secondaryColor
-                ), 1f
-            )
+            R.id.button_prev,
+            context.getTintedDrawable(
+                R.drawable.ic_skip_previous,
+                secondaryColor
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_play_pause, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    context,
-                    R.drawable.ic_play_arrow_white_32dp,
-                    secondaryColor
-                ), 1f
-            )
+            R.id.button_toggle_play_pause,
+            context.getTintedDrawable(
+                R.drawable.ic_play_arrow_white_32dp,
+                secondaryColor
+            ).toBitmap()
         )
 
         linkButtons(context, appWidgetView)
@@ -110,33 +104,27 @@ class AppWidgetMD3 : BaseAppWidget() {
         val playPauseRes =
             if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play_arrow_white_32dp
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_play_pause, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    service,
-                    playPauseRes,
-                    MaterialValueHelper.getSecondaryTextColor(service, true)
-                ), 1f
-            )
+            R.id.button_toggle_play_pause,
+            service.getTintedDrawable(
+                playPauseRes,
+                MaterialValueHelper.getSecondaryTextColor(service, true)
+            ).toBitmap()
         )
 
         // Set prev/next button drawables
         appWidgetView.setImageViewBitmap(
-            R.id.button_next, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    service,
-                    R.drawable.ic_skip_next,
-                    MaterialValueHelper.getSecondaryTextColor(service, true)
-                ), 1f
-            )
+            R.id.button_next,
+            service.getTintedDrawable(
+                R.drawable.ic_skip_next,
+                MaterialValueHelper.getSecondaryTextColor(service, true)
+            ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_prev, createBitmap(
-                RetroUtil.getTintedVectorDrawable(
-                    service,
-                    R.drawable.ic_skip_previous,
-                    MaterialValueHelper.getSecondaryTextColor(service, true)
-                ), 1f
-            )
+            R.id.button_prev,
+            service.getTintedDrawable(
+                R.drawable.ic_skip_previous,
+                MaterialValueHelper.getSecondaryTextColor(service, true)
+            ).toBitmap()
         )
 
         // Link actions buttons to intents
@@ -159,10 +147,10 @@ class AppWidgetMD3 : BaseAppWidget() {
             target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
                 .load(RetroGlideExtension.getSongModel(song))
                 .centerCrop()
-                .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+                .into(object : CustomTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
                     override fun onResourceReady(
                         resource: BitmapPaletteWrapper,
-                        transition: Transition<in BitmapPaletteWrapper>?
+                        transition: Transition<in BitmapPaletteWrapper>?,
                     ) {
                         val palette = resource.palette
                         update(
@@ -181,33 +169,26 @@ class AppWidgetMD3 : BaseAppWidget() {
                         update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
                     }
 
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+
                     private fun update(bitmap: Bitmap?, color: Int) {
                         // Set correct drawable for pause state
                         appWidgetView.setImageViewBitmap(
-                            R.id.button_toggle_play_pause, ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service, playPauseRes, color
-                                )
-                            )
+                            R.id.button_toggle_play_pause,
+                            service.getTintedDrawable(playPauseRes, color).toBitmap()
                         )
 
                         // Set prev/next button drawables
                         appWidgetView.setImageViewBitmap(
-                            R.id.button_next, ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service, R.drawable.ic_skip_next, color
-                                )
-                            )
+                            R.id.button_next,
+                            service.getTintedDrawable(R.drawable.ic_skip_next, color).toBitmap()
                         )
                         appWidgetView.setImageViewBitmap(
-                            R.id.button_prev, ImageUtil.createBitmap(
-                                ImageUtil.getTintedVectorDrawable(
-                                    service, R.drawable.ic_skip_previous, color
-                                )
-                            )
+                            R.id.button_prev,
+                            service.getTintedDrawable(R.drawable.ic_skip_previous, color).toBitmap()
                         )
 
-                        val image = getAlbumArtDrawable(service.resources, bitmap)
+                        val image = getAlbumArtDrawable(service, bitmap)
                         val roundedBitmap = createRoundedBitmap(
                             image,
                             imageSize,

@@ -21,6 +21,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 
 fun Fragment.navigate(@IdRes id: Int) = findNavController().navigate(id)
 
@@ -37,3 +38,13 @@ fun AppCompatActivity.findNavController(@IdRes id: Int): NavController {
     val fragment = supportFragmentManager.findFragmentById(id) as NavHostFragment
     return fragment.navController
 }
+
+val fadeNavOptions
+    get() = navOptions {
+        anim {
+            enter = android.R.anim.fade_in
+            exit = android.R.anim.fade_out
+            popEnter = android.R.anim.fade_in
+            popExit = android.R.anim.fade_out
+        }
+    }

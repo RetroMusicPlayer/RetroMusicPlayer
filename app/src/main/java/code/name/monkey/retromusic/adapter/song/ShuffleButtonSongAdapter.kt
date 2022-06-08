@@ -60,7 +60,7 @@ class ShuffleButtonSongAdapter(
             }
         } else {
             super.onBindViewHolder(holder, position - 1)
-            val landscape = RetroUtil.isLandscape()
+            val landscape = RetroUtil.isLandscape
             if ((PreferenceUtil.songGridSize > 2 && !landscape) || (PreferenceUtil.songGridSizeLand > 5 && landscape)) {
                 holder.menu?.isVisible = false
             }

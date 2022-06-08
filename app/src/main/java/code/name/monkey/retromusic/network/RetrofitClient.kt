@@ -49,7 +49,7 @@ fun headerInterceptor(context: Context): Interceptor {
 fun provideOkHttp(context: Context, cache: Cache): OkHttpClient {
     return OkHttpClient.Builder()
         .addNetworkInterceptor(logInterceptor())
-        //.addInterceptor(headerInterceptor(context))
+        .addInterceptor(headerInterceptor(context))
         .connectTimeout(1, TimeUnit.SECONDS)
         .readTimeout(1, TimeUnit.SECONDS)
         .cache(cache)

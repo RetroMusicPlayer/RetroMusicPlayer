@@ -21,7 +21,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.fragment.app.DialogFragment
@@ -81,7 +80,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
                 val coverStyle = values()[viewPagerPosition]
                 if (isAlbumCoverStyle(coverStyle)) {
                     val result = getString(coverStyle.titleRes) + " theme is Pro version feature."
-                    Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+                    showToast(result)
                     NavigationUtil.goToProVersion(requireActivity())
                 } else {
                     PreferenceUtil.albumCoverStyle = coverStyle

@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
 import android.view.*
-import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuCompat
 import androidx.navigation.fragment.findNavController
@@ -46,10 +45,6 @@ class PlaylistsFragment :
             else
                 adapter?.swapDataSet(listOf())
         }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            remove()
-            requireActivity().onBackPressed()
-        }
     }
 
     override val titleRes: Int
@@ -76,10 +71,10 @@ class PlaylistsFragment :
         )
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateMenu(menu, inflater)
         val gridSizeItem: MenuItem = menu.findItem(R.id.action_grid_size)
-        if (RetroUtil.isLandscape()) {
+        if (RetroUtil.isLandscape) {
             gridSizeItem.setTitle(R.string.action_grid_size_land)
         }
         setupGridSizeMenu(gridSizeItem.subMenu)
@@ -93,14 +88,14 @@ class PlaylistsFragment :
         CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         if (handleGridSizeMenuItem(item)) {
             return true
         }
         if (handleSortOrderMenuItem(item)) {
             return true
         }
-        return super.onOptionsItemSelected(item)
+        return super.onMenuItemSelected(item)
     }
 
     private fun setupGridSizeMenu(gridSizeMenu: SubMenu) {
@@ -114,7 +109,7 @@ class PlaylistsFragment :
             7 -> gridSizeMenu.findItem(R.id.action_grid_size_7).isChecked = true
             8 -> gridSizeMenu.findItem(R.id.action_grid_size_8).isChecked = true
         }
-        val gridSize = if (RetroUtil.isLandscape()) 4 else 2
+        val gridSize = if (RetroUtil.isLandscape) 4 else 3
         if (gridSize < 8) {
             gridSizeMenu.findItem(R.id.action_grid_size_8).isVisible = false
         }
@@ -250,9 +245,7 @@ class PlaylistsFragment :
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         findNavController().navigate(
             R.id.playlistDetailsFragment,
-            bundleOf(EXTRA_PLAYLIST to playlistWithSongs),
-            null,
-            null
+            bundleOf(EXTRA_PLAYLIST to playlistWithSongs)
         )
     }
 }

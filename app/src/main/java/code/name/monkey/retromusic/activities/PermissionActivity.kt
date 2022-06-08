@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.activities
 
 import android.Manifest
+import android.Manifest.permission.BLUETOOTH_CONNECT
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
@@ -22,18 +23,15 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityPermissionBinding
-import code.name.monkey.retromusic.extensions.accentBackgroundColor
-import code.name.monkey.retromusic.extensions.setStatusBarColorAuto
-import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.util.RingtoneManager
+import code.name.monkey.retromusic.extensions.*
 
 class PermissionActivity : AbsMusicServiceActivity() {
     private lateinit var binding: ActivityPermissionBinding
@@ -52,12 +50,23 @@ class PermissionActivity : AbsMusicServiceActivity() {
         if (VersionUtils.hasMarshmallow()) {
             binding.audioPermission.show()
             binding.audioPermission.setButtonClick {
-                if (RingtoneManager.requiresDialog(this@PermissionActivity)) {
+                if (!hasAudioPermission()) {
                     val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
                     intent.data = ("package:" + applicationContext.packageName).toUri()
                     startActivity(intent)
                 }
             }
+        }
+
+        if (VersionUtils.hasS()) {
+            binding.bluetoothPermission.show()
+            binding.bluetoothPermission.setButtonClick {
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(BLUETOOTH_CONNECT),
+                    BLUETOOTH_PERMISSION_REQUEST)
+            }
+        } else {
+            binding.audioPermission.setNumber("2")
         }
 
         binding.finish.accentBackgroundColor()
@@ -75,32 +84,48 @@ class PermissionActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupTitle() {
-        val color = ThemeStore.accentColor(this)
+        val color = accentColor()
         val hexColor = String.format("#%06X", 0xFFFFFF and color)
-        val appName = "Hello there! <br>Welcome to <b>Retro <span  style='color:$hexColor';>Music</span></b>"
-            .parseAsHtml()
+        val appName =
+            getString(R.string.message_welcome,
+                "<b>Retro <span  style='color:$hexColor';>Music</span></b>")
+                .parseAsHtml()
         binding.appNameText.text = appName
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
+        super.onResume()
+        binding.finish.isEnabled = hasStoragePermission()
         if (hasStoragePermission()) {
             binding.storagePermission.checkImage.isVisible = true
             binding.storagePermission.checkImage.imageTintList =
-                ColorStateList.valueOf(ThemeStore.accentColor(this))
+                ColorStateList.valueOf(accentColor())
         }
-        if (hasAudioPermission()) {
-            binding.audioPermission.checkImage.isVisible = true
-            binding.audioPermission.checkImage.imageTintList =
-                ColorStateList.valueOf(ThemeStore.accentColor(this))
+        if (VersionUtils.hasMarshmallow()) {
+            if (hasAudioPermission()) {
+                binding.audioPermission.checkImage.isVisible = true
+                binding.audioPermission.checkImage.imageTintList =
+                    ColorStateList.valueOf(accentColor())
+            }
         }
-
-        super.onResume()
+        if (VersionUtils.hasS()) {
+            if (hasBluetoothPermission()) {
+                binding.bluetoothPermission.checkImage.isVisible = true
+                binding.bluetoothPermission.checkImage.imageTintList =
+                    ColorStateList.valueOf(accentColor())
+            }
+        }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun hasStoragePermission(): Boolean {
-        return checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        return ActivityCompat.checkSelfPermission(this,
+            Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun hasBluetoothPermission(): Boolean {
+        return ActivityCompat.checkSelfPermission(this,
+            BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
