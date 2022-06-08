@@ -176,6 +176,7 @@
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
     <string name="error_empty_name">Your name can\'t be empty!</string>
     <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Expanded</string>
     <string name="faq">Συχνές ερωτήσεις</string>
     <string name="favorites">Αγαπημένα</string>
@@ -369,7 +370,6 @@
     <string name="pref_summary_toggle_volume">Εαν υπάρχει χώρος στην οθόνη αναπαραγωγής, ενεργοποιήστε τον πίνακα ελέγχου έντασης.</string>
     <string name="pref_summary_wallpaper_accent">Εξαγωγή απόχρωσης από την ταπετσαρία</string>
     <string name="pref_summary_whitelist">Εμφάνιση μουσικής μόνο από το φάκελο /Μουσική</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Εμφάνιση εξωφύλλου άλμπουμ.</string>
     <string name="pref_title_album_artists_only">Πλοήγηση κατά Καλλιτέχνη Άλμπουμ</string>
     <string name="pref_title_album_cover_style">Θέμα εξώφυλλου άλμπουμ</string>
@@ -419,9 +419,8 @@
     <string name="pref_title_toggle_volume">Πίνακας Ελέγχου Έντασης</string>
     <string name="pref_title_wallpaper_accent">Απόχρωση ταπετσαρίας</string>
     <string name="pref_title_whitelist">Λίστα επιτρεπόμενων κομματιών</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Μαύρο θέμα, Θέματα στο Τώρα παίζει, εφέ Καρουσέλ και πολλά άλλα..</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Προφίλ</string>
     <string name="purchase">Αγορά</string>
     <string name="queue">Ουρά</string>
@@ -498,6 +497,7 @@
     <string name="sort_order_composer">Συνθέτης</string>
     <string name="sort_order_date">Ημερομηνία προσθήκης</string>
     <string name="sort_order_date_modified">Ημερομηνία τροποποιήσης</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Αριθμός τραγουδιών</string>
     <string name="sort_order_num_songs_desc">Αριθμός τραγουδιών φθίνουσα</string>
     <string name="sort_order_year">Έτος</string>
