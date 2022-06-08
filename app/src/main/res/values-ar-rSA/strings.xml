@@ -187,6 +187,7 @@
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
     <string name="error_empty_name">Your name can\'t be empty!</string>
     <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Expanded</string>
     <string name="faq">التعليمات</string>
     <string name="favorites">المفضلات</string>
@@ -380,7 +381,6 @@
     <string name="pref_summary_toggle_volume">في حال توفر مساحة كافية قم بعرض شريط التحكم بالصوت في شاشة التشغيل الآن</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">عرض غطاء الالبوم</string>
     <string name="pref_title_album_artists_only">التنقل بواسطة ألبوم الفنان</string>
     <string name="pref_title_album_cover_style">ثيم غطاء الالبوم</string>
@@ -430,9 +430,8 @@
     <string name="pref_title_toggle_volume">التحكم بالصوت</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">الكامل</string>
-    <string name="pro_summary">تشغيل الآن السمات ، وتأثير التكدس ، وموضوع اللون وأكثر من ذلك ..</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">الملف الشخصي</string>
     <string name="purchase">شراء</string>
     <string name="queue">تسلسل</string>
@@ -509,6 +508,7 @@
     <string name="sort_order_composer">المؤلف</string>
     <string name="sort_order_date">التاريخ</string>
     <string name="sort_order_date_modified">تاريخ التعديل</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">عدد الأغاني</string>
     <string name="sort_order_num_songs_desc">العد التنازلي للاغنية</string>
     <string name="sort_order_year">السنة</string>
