@@ -177,7 +177,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="error_delete_backup">Nikare hîlanîna\u2019 jê bibê</string>
     <string name="error_empty_name">Navê te nabe ku vala be!</string>
     <string name="error_load_failed">Barkirin têk çû</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Pel nayê parvekirin</string>
     <string name="expanded">Dirêjkirî</string>
     <string name="faq">Pirsên pir têne pirsîn (PPP)</string>
     <string name="favorites">Bijarte</string>
@@ -422,7 +422,7 @@ têne guhertin</string>
     <string name="pref_title_wallpaper_accent">Rengê devokê paşrûyê</string>
     <string name="pref_title_whitelist">Rêzoka stranên spî</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Rûkara reş, rûkara stranên niha têne lêdan, bandora gilover û bêtir..</string>
     <string name="profile">Profîl</string>
     <string name="purchase">Bikire</string>
     <string name="queue">Rêzkirin</string>
@@ -499,7 +499,7 @@ têne guhertin</string>
     <string name="sort_order_composer">Awazvan</string>
     <string name="sort_order_date">Dîroka tevlîkirinê</string>
     <string name="sort_order_date_modified">Dîroka guhertinê</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Berdest</string>
     <string name="sort_order_num_songs">Jimara stranan</string>
     <string name="sort_order_num_songs_desc">Jimara stranan (berjêr)</string>
     <string name="sort_order_year">Sal</string>
