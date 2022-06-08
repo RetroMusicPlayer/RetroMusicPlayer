@@ -178,6 +178,7 @@
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
     <string name="error_empty_name">Your name can\'t be empty!</string>
     <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Expanded</string>
     <string name="faq">BUJ</string>
     <string name="favorites">Izlase</string>
@@ -421,7 +422,7 @@
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more...</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
     <string name="purchase">Iegādāties</string>
     <string name="queue">Playing Queue</string>
@@ -498,6 +499,7 @@
     <string name="sort_order_composer">Komponists</string>
     <string name="sort_order_date">Pievienošanas datums</string>
     <string name="sort_order_date_modified">Labošanas datums</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Dziesmu skaits</string>
     <string name="sort_order_num_songs_desc">Dziesmu skaits dilstošā secībā</string>
     <string name="sort_order_year">Gads</string>
