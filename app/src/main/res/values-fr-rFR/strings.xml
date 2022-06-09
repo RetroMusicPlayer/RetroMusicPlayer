@@ -61,13 +61,13 @@
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Morceau</item>
-        <item quantity="many">Morceaux</item>
+        <item quantity="other">Morceaux</item>
     </plurals>
     <string name="album_artist">Artiste de l\'album</string>
     <string name="albums">Albums</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
-        <item quantity="many">Albums</item>
+        <item quantity="other">Albums</item>
     </plurals>
     <string name="always">Toujours</string>
     <string name="app_share">Hey, jetez un coup d\'œil à ce super lecteur de musique : https://play.google.com/store/apps/details?id=%s</string>
@@ -176,7 +176,7 @@
     <string name="error_delete_backup">Impossible de supprimer une sauvegarde</string>
     <string name="error_empty_name">Votre nom ne peut pas être vide !</string>
     <string name="error_load_failed">Échec du chargement</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Impossible de partager le fichier</string>
     <string name="expanded">Développé</string>
     <string name="faq">Foire aux questions</string>
     <string name="favorites">Favoris</string>
@@ -274,7 +274,7 @@
     <string name="no_songs">Aucun morceau</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Paroles normales</string>
-    <string name="not_listed_in_media_store">%s N\'est pas répertorié dans le stockage des médias.</string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> N'est pas répertorié dans le stockage des médias.]]></string>
     <string name="not_recently_played">Non jouée récemment</string>
     <string name="nothing_to_scan">Rien à scanner.</string>
     <string name="nothing_to_see">Rien à afficher</string>
@@ -420,7 +420,7 @@
     <string name="pref_title_wallpaper_accent">Couleur d\'accentuation du fond d\'écran</string>
     <string name="pref_title_whitelist">Liste blanche</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Thème noir, thèmes en cours de lecture, effet carrousel, et plus encore...</string>
     <string name="profile">Profil</string>
     <string name="purchase">Acheter</string>
     <string name="queue">File de lecture</string>
@@ -497,7 +497,7 @@
     <string name="sort_order_composer">Compositeur</string>
     <string name="sort_order_date">Date</string>
     <string name="sort_order_date_modified">Date de modification</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Par défaut</string>
     <string name="sort_order_num_songs">Nombre de morceaux</string>
     <string name="sort_order_num_songs_desc">Nombre de morceaux décroissant</string>
     <string name="sort_order_year">Année</string>
