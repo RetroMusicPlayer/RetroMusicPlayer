@@ -33,15 +33,19 @@ class CastPlayer(castSession: CastSession) : Playback,
 
     override var callbacks: Playback.PlaybackCallbacks? = null
 
-    override fun setDataSource(song: Song, force: Boolean): Boolean {
-        return try {
+    override fun setDataSource(
+        song: Song,
+        force: Boolean,
+        completion: (success: Boolean) -> Unit,
+    ) {
+        try {
             val mediaLoadOptions =
                 MediaLoadOptions.Builder().setPlayPosition(0).setAutoplay(true).build()
             remoteMediaClient?.load(song.toMediaInfo()!!, mediaLoadOptions)
-            true
+            completion(true)
         } catch (e: Exception) {
             e.printStackTrace()
-            false
+            completion(false)
         }
     }
 

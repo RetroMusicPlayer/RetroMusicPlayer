@@ -109,10 +109,13 @@ abstract class LocalPlayback(val context: Context) : Playback, MediaPlayer.OnErr
      * @param path The path of the file, or the http/rtsp URL of the stream you want to play
      * @return True if the <code>player</code> has been prepared and is ready to play, false otherwise
      */
-    fun setDataSourceImpl(player: MediaPlayer, path: String): Boolean {
+    fun setDataSourceImpl(
+        player: MediaPlayer,
+        path: String,
+        completion: (success: Boolean) -> Unit,
+    ) {
+        player.reset()
         try {
-            player.reset()
-            player.setOnPreparedListener(null)
             if (path.startsWith("content://")) {
                 player.setDataSource(context, path.toUri())
             } else {
@@ -123,14 +126,17 @@ abstract class LocalPlayback(val context: Context) : Playback, MediaPlayer.OnErr
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .build()
             )
-            player.prepare()
+            player.setOnPreparedListener {
+                player.setOnPreparedListener(null)
+                completion(true)
+            }
+            player.prepareAsync()
         } catch (e: Exception) {
+            completion(false)
             e.printStackTrace()
-            return false
         }
         player.setOnCompletionListener(this)
         player.setOnErrorListener(this)
-        return true
     }
 
     private fun unregisterBecomingNoisyReceiver() {
