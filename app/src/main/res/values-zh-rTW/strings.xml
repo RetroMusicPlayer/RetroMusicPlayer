@@ -174,7 +174,7 @@
     <string name="error_delete_backup">無法刪除備份</string>
     <string name="error_empty_name">名稱不得為空！</string>
     <string name="error_load_failed">載入失敗</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">無法分享檔案</string>
     <string name="expanded">展開</string>
     <string name="faq">常見問題</string>
     <string name="favorites">最愛</string>
@@ -418,7 +418,7 @@
     <string name="pref_title_wallpaper_accent">桌布強調色</string>
     <string name="pref_title_whitelist">白名單音樂</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">暗色主題、現正播放主題、輪播效果以及更多...</string>
     <string name="profile">個人資料</string>
     <string name="purchase">購買</string>
     <string name="queue">播放佇列</string>
@@ -495,7 +495,7 @@
     <string name="sort_order_composer">作曲者</string>
     <string name="sort_order_date">新增日期</string>
     <string name="sort_order_date_modified">修改日期</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">預設</string>
     <string name="sort_order_num_songs">歌曲數量</string>
     <string name="sort_order_num_songs_desc">歌曲數量資訊</string>
     <string name="sort_order_year">年份</string>
