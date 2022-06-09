@@ -14,7 +14,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 10590
+        versionCode 10591
         versionName '6.0.0-beta'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
@@ -125,7 +125,7 @@ dependencies {
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.8'
 
     def material_dialog_version = "3.3.0"
     implementation "com.afollestad.material-dialogs:core:$material_dialog_version"
@@ -167,5 +167,4 @@ dependencies {
     implementation 'me.zhanghai.android.fastscroll:library:1.1.8'
     implementation 'cat.ereza:customactivityoncrash:2.4.0'
     implementation 'me.tankery.lib:circularSeekBar:1.4.0'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 }
