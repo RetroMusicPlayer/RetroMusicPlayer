@@ -91,7 +91,7 @@
     <string name="biography">Biografías.</string>
     <string name="black_theme_name">Sólo Negro</string>
     <string name="blacklist">Suspendidos</string>
-    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_summary">La aplicación necesita el permiso de los dispositivos cercanos para buscar dispositivos bluetooth</string>
     <string name="blur">Difuminado</string>
     <string name="blur_card">Desenfocar tarjeta</string>
     <string name="bug_report_failed">No es posible enviar el informe</string>
@@ -174,13 +174,13 @@
     <string name="equalizer">Ecualizador</string>
     <string name="error_create_backup">Couldn\u2019t create backup</string>
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
-    <string name="error_empty_name">Your name can\'t be empty!</string>
-    <string name="error_load_failed">Load failed</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_empty_name">¡Su nombre no puede estar vacío!</string>
+    <string name="error_load_failed">Carga fallada</string>
+    <string name="error_share_file">No se pudo compartir el archivo</string>
     <string name="expanded">Expandido</string>
     <string name="faq">Preguntas Más Frecuentes</string>
     <string name="favorites">Favoritos</string>
-    <string name="file_already_exists">File already exists</string>
+    <string name="file_already_exists">El archivo ya existe</string>
     <string name="finish_last_song">Termina la última canción</string>
     <string name="fit">Ajustado</string>
     <string name="flat">Plano</string>
@@ -196,7 +196,7 @@
     <string name="genres">Géneros</string>
     <string name="git_hub_summary">Bifurca el proyecto en GitHub</string>
     <string name="gradient">Degradado</string>
-    <string name="grant_access">Grant access</string>
+    <string name="grant_access">Conceder acceso</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -210,7 +210,7 @@
     <string name="hinge">Giro</string>
     <string name="history">Historial</string>
     <string name="history_cleared">Historial borrado</string>
-    <string name="history_undo_button">Undo</string>
+    <string name="history_undo_button">Deshacer</string>
     <string name="home">Inicio</string>
     <string name="horizontal_flip">Giro horizontal</string>
     <string name="image">Imagen</string>
