@@ -55,7 +55,7 @@
     <string name="add_action">Ekle</string>
     <string name="add_playlist_title">"Oynatma listesine ekle"</string>
     <string name="add_time_framed_lryics">Zaman Dilimli Sözleri Ekle</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_song_count_to_playlist">%2$s listesine %1$d parça eklendi</string>
     <string name="added_title_to_playing_queue">"Kuyruğa 1 parça eklendi."</string>
     <string name="added_x_titles_to_playing_queue">%1$d şarkı kuyruğuna eklendi.</string>
     <string name="album">Albüm</string>
@@ -172,9 +172,9 @@
     <string name="edit_synced_lyrics">Senkronize Edilmiş Sözleri Düzenle</string>
     <string name="empty">Boş</string>
     <string name="equalizer">Ekolayzır</string>
-    <string name="error_create_backup">Couldn\u2019t create backup</string>
-    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
-    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_create_backup">Yedek oluşturulamadı</string>
+    <string name="error_delete_backup">Yedek silinemedi</string>
+    <string name="error_empty_name">İsmin boş olamaz!</string>
     <string name="error_load_failed">Yükleme başarısız</string>
     <string name="error_share_file">Dosya paylaşılamadı</string>
     <string name="expanded">Genişletilmiş</string>
