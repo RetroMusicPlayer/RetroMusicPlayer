@@ -16,7 +16,7 @@ class PlaybackManager(val context: Context) {
     var playback: Playback? = null
     private var playbackLocation = PlaybackLocation.LOCAL
 
-    val isLocalPlayback get() = playbackLocation== PlaybackLocation.LOCAL
+    val isLocalPlayback get() = playbackLocation == PlaybackLocation.LOCAL
 
     val audioSessionId: Int
         get() = if (playback != null) {
@@ -168,14 +168,11 @@ class PlaybackManager(val context: Context) {
         playback: Playback,
         onChange: (wasPlaying: Boolean, progress: Int) -> Unit,
     ) {
-        val oldPlayback = playback
-        val wasPlaying: Boolean = oldPlayback.isPlaying
-        val progress: Int = oldPlayback.position()
-
+        val oldPlayback = this.playback
+        val wasPlaying: Boolean = oldPlayback?.isPlaying == true
+        val progress: Int = oldPlayback?.position() ?: 0
         this.playback = playback
-
-        oldPlayback.stop()
-
+        oldPlayback?.stop()
         onChange(wasPlaying, progress)
     }
 
