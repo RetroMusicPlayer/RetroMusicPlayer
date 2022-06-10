@@ -174,7 +174,7 @@
     <string name="error_delete_backup">无法删除备份</string>
     <string name="error_empty_name">您的名字不能为空！</string>
     <string name="error_load_failed">加载失败</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">无法分享文件</string>
     <string name="expanded">展开</string>
     <string name="faq">常见问题和解答</string>
     <string name="favorites">收藏夹</string>
@@ -418,7 +418,7 @@
     <string name="pref_title_wallpaper_accent">壁纸主题色</string>
     <string name="pref_title_whitelist">白名单音乐</string>
     <string name="pro">高级版</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">黑色主题、播放页主题、轮播效果以及更多功能…</string>
     <string name="profile">个人信息</string>
     <string name="purchase">购买</string>
     <string name="queue">播放队列</string>
@@ -495,7 +495,7 @@
     <string name="sort_order_composer">作曲家</string>
     <string name="sort_order_date">日期</string>
     <string name="sort_order_date_modified">修改日期</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">默认</string>
     <string name="sort_order_num_songs">歌曲数量</string>
     <string name="sort_order_num_songs_desc">歌曲数量降序</string>
     <string name="sort_order_year">年份</string>
