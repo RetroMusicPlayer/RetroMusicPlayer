@@ -51,7 +51,7 @@ android {
         }
     }
     lint {
-        disable 'MissingTranslation', 'ImpliedQuantity'
+        warning 'MissingTranslation', 'ImpliedQuantity', 'Instantiatable'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

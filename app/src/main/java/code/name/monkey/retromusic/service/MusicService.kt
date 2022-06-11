@@ -754,11 +754,11 @@ class MusicService : MediaBrowserServiceCompat(),
         this.position = position
         openCurrent { success ->
             completion(success)
-            notifyChange(META_CHANGED)
-            notHandledMetaChangedForCurrentTrack = false
             if (success) {
                 prepareNextImpl()
             }
+            notifyChange(META_CHANGED)
+            notHandledMetaChangedForCurrentTrack = false
         }
     }
 
@@ -1088,11 +1088,9 @@ class MusicService : MediaBrowserServiceCompat(),
                 // We must call updateMediaSessionPlaybackState after the load of album art is completed
                 // if we are loading it or it won't be updated in the notification
                 updateMediaSessionMetaData(::updateMediaSessionPlaybackState)
+                savePosition()
+                savePositionInTrack()
                 serviceScope.launch(IO) {
-                    withContext(Main) {
-                        savePosition()
-                        savePositionInTrack()
-                    }
                     val currentSong = currentSong
                     HistoryStore.getInstance(this@MusicService).addSongId(currentSong.id)
                     if (songPlayCountHelper.shouldBumpPlayCount()) {
