@@ -796,7 +796,9 @@ class MusicService : MediaBrowserServiceCompat(),
                 if (success) {
                     play()
                 } else {
-                    showToast(resources.getString(R.string.unplayable_file))
+                    runOnUiThread {
+                        showToast(R.string.unplayable_file)
+                    }
                 }
             }
         }
@@ -1205,10 +1207,14 @@ class MusicService : MediaBrowserServiceCompat(),
                     openQueue(playlistSongs, 0, true)
                 }
             } else {
-                showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
+                runOnUiThread {
+                    showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
+                }
             }
         } else {
-            showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
+            runOnUiThread {
+                showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
+            }
         }
     }
 
@@ -1355,7 +1361,6 @@ class MusicService : MediaBrowserServiceCompat(),
         const val REPEAT_MODE_NONE = 0
         const val REPEAT_MODE_ALL = 1
         const val REPEAT_MODE_THIS = 2
-        const val SAVE_QUEUES = 0
         private const val MEDIA_SESSION_ACTIONS = (PlaybackStateCompat.ACTION_PLAY
                 or PlaybackStateCompat.ACTION_PAUSE
                 or PlaybackStateCompat.ACTION_PLAY_PAUSE
