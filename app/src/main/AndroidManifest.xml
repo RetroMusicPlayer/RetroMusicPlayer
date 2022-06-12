@@ -34,12 +34,12 @@
         android:configChanges="locale|layoutDirection"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:restoreAnyVersion="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RetroMusic.FollowSystem"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
         tools:targetApi="m">
         <activity
             android:name=".activities.MainActivity"
@@ -194,7 +194,7 @@
         </provider>
 
         <receiver
-            android:name="androidx.media.session.MediaButtonReceiver"
+            android:name=".service.MediaButtonIntentReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
@@ -304,9 +304,6 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </service>
 

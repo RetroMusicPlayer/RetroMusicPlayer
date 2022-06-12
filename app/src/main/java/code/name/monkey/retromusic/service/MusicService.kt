@@ -15,6 +15,7 @@ package code.name.monkey.retromusic.service
 
 import android.annotation.SuppressLint
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothDevice.EXTRA_DEVICE
@@ -39,7 +40,6 @@ import android.widget.Toast
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.media.MediaBrowserServiceCompat
-import androidx.media.session.MediaButtonReceiver.handleIntent
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
@@ -93,6 +93,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
+
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal. Modified by Prathamesh More
@@ -649,7 +650,6 @@ class MusicService : MediaBrowserServiceCompat(),
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null && intent.action != null) {
-            handleIntent(mediaSession, intent)
             serviceScope.launch {
                 restoreQueuesAndPositionIfNecessary()
                 when (intent.action) {
@@ -1305,13 +1305,25 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun setupMediaSession() {
+        val mediaButtonReceiverComponentName = ComponentName(applicationContext,
+            MediaButtonIntentReceiver::class.java)
+
+        val mediaButtonIntent = Intent(Intent.ACTION_MEDIA_BUTTON)
+        mediaButtonIntent.component = mediaButtonReceiverComponentName
+        val mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(
+            applicationContext, 0, mediaButtonIntent,
+            if (VersionUtils.hasMarshmallow()) PendingIntent.FLAG_IMMUTABLE else 0
+        )
         mediaSession = MediaSessionCompat(
             this,
-            "RetroMusicPlayer"
+            BuildConfig.APPLICATION_ID,
+            mediaButtonReceiverComponentName,
+            mediaButtonReceiverPendingIntent
         )
         val mediaSessionCallback = MediaSessionCallback(this)
         mediaSession?.setCallback(mediaSessionCallback)
         mediaSession?.isActive = true
+        mediaSession?.setMediaButtonReceiver(mediaButtonReceiverPendingIntent)
     }
 
     inner class MusicBinder : Binder() {
