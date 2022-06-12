@@ -47,16 +47,19 @@ class PlaybackManager(val context: Context) {
         playback?.callbacks = callbacks
     }
 
-    fun play(onNotInitialized: () -> Unit = {}, onPlay: () -> Unit = {}) {
+    fun play(onNotInitialized: () -> Unit) {
         if (playback != null && !playback!!.isPlaying) {
             if (!playback!!.isInitialized) {
                 onNotInitialized()
             } else {
                 openAudioEffectSession()
                 if (playbackLocation == PlaybackLocation.LOCAL) {
-                    AudioFader.startFadeAnimator(playback!!, true) {
-                        // Code when Animator Ends
-                        onPlay()
+                    if (playback is CrossFadePlayer) {
+                        if (!(playback as CrossFadePlayer).isCrossFading) {
+                            AudioFader.startFadeAnimator(playback!!, true)
+                        }
+                    } else {
+                        AudioFader.startFadeAnimator(playback!!, true)
                     }
                 }
                 if (shouldSetSpeed) {

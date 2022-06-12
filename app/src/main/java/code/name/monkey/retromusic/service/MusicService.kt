@@ -770,11 +770,10 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @Synchronized
     fun play() {
-        playbackManager.play(onNotInitialized = { playSongAt(getPosition()) }) {
-            if (notHandledMetaChangedForCurrentTrack) {
-                handleChangeInternal(META_CHANGED)
-                notHandledMetaChangedForCurrentTrack = false
-            }
+        playbackManager.play { playSongAt(getPosition()) }
+        if (notHandledMetaChangedForCurrentTrack) {
+            handleChangeInternal(META_CHANGED)
+            notHandledMetaChangedForCurrentTrack = false
         }
         notifyChange(PLAY_STATE_CHANGED)
     }

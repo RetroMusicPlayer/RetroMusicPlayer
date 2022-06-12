@@ -37,7 +37,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     private var crossFadeAnimator: Animator? = null
     override var callbacks: PlaybackCallbacks? = null
     private var crossFadeDuration = PreferenceUtil.crossFadeDuration
-    private var isCrossFading = false
+    var isCrossFading = false
 
     init {
         player1.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
