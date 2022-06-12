@@ -303,7 +303,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
 
     private fun switchPlayer() {
         getNextPlayer()?.start()
-        crossFade(getCurrentPlayer()!!, getNextPlayer()!!)
+        crossFade(getNextPlayer()!!, getCurrentPlayer()!!)
         currentPlayer =
             if (currentPlayer == CurrentPlayer.PLAYER_ONE || currentPlayer == CurrentPlayer.NOT_SET) {
                 CurrentPlayer.PLAYER_TWO

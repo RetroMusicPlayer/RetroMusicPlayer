@@ -22,7 +22,6 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.view.View
-import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
@@ -41,7 +40,6 @@ import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.FragmentGradientPlayerBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -573,16 +571,9 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         val progressSlider = binding.playbackControlsFragment.progressSlider
         progressSlider.valueTo = total.toFloat()
 
-        if (isSeeking) {
-            progressSlider.value = progress.toFloat()
-        } else {
-            progressAnimator =
-                ObjectAnimator.ofFloat(progressSlider, "value", progress.toFloat()).apply {
-                    duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
-                    interpolator = LinearInterpolator()
-                    start()
-                }
-        }
+        progressSlider.value =
+            progress.toFloat().coerceIn(progressSlider.valueFrom, progressSlider.valueTo)
+
         binding.playbackControlsFragment.songTotalTime.text =
             MusicUtil.getReadableDurationString(total.toLong())
         binding.playbackControlsFragment.songCurrentProgress.text =

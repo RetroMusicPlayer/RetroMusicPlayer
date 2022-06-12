@@ -82,9 +82,8 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
         if (seekBar == null) {
             progressSlider?.valueTo = total.toFloat()
 
-            if (progress > total) return
-            progressSlider?.value = progress.toFloat()
-
+            progressSlider?.value =
+                progress.toFloat().coerceIn(progressSlider?.valueFrom, progressSlider?.valueTo)
         } else {
             seekBar?.max = total
 

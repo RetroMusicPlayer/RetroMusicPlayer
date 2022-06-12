@@ -19,7 +19,7 @@ class AudioFader {
             if (duration == 0) {
                 return null
             }
-            return ValueAnimator.ofFloat(1f, 0f).apply {
+            return ValueAnimator.ofFloat(0f, 1f).apply {
                 this.duration = duration.toLong()
                 addUpdateListener { animation: ValueAnimator ->
                     fadeInMp.setVolume(
