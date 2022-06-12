@@ -52,7 +52,6 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_player_album_cover),
     ViewPager.OnPageChangeListener, MusicProgressViewUpdateHelper.Callback,
@@ -86,22 +85,18 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     private fun updateLyrics() {
-        binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
         val song = MusicPlayerRemote.currentSong
         lifecycleScope.launch(Dispatchers.IO) {
             val lrcFile = LyricUtil.getSyncedLyricsFile(song)
             if (lrcFile != null) {
-                withContext(Dispatchers.Main) {
-                    binding.lyricsView.loadLrc(lrcFile)
-                }
+                binding.lyricsView.loadLrc(lrcFile)
             } else {
                 val embeddedLyrics = LyricUtil.getEmbeddedSyncedLyrics(song.data)
-                withContext(Dispatchers.Main) {
-                    if (embeddedLyrics != null) {
-                        binding.lyricsView.loadLrc(embeddedLyrics)
-                    } else {
-                        binding.lyricsView.reset()
-                    }
+                if (embeddedLyrics != null) {
+                    binding.lyricsView.loadLrc(embeddedLyrics)
+                } else {
+                    binding.lyricsView.reset()
+                    binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
                 }
             }
         }
