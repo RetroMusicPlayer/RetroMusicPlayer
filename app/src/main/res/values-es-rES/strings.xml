@@ -21,7 +21,7 @@
     <string name="action_go_to_artist">Ir al artista</string>
     <string name="action_go_to_genre">Ir al género</string>
     <string name="action_go_to_lyrics">Ir a la letra</string>
-    <string name="action_go_to_start_directory">Ir al directorio de inicio</string>
+    <string name="action_go_to_start_directory">Ir al directorio inicial</string>
     <string name="action_grant">Permitir</string>
     <string name="action_grid_size">Tamaño de la cuadricula</string>
     <string name="action_grid_size_land">Tamaño de cuadrícula (h)</string>
@@ -33,8 +33,8 @@
     <string name="action_play_pause">Reproducir/Pausar</string>
     <string name="action_previous">Anterior</string>
     <string name="action_remove_from_favorites">Eliminar de favoritos</string>
-    <string name="action_remove_from_playing_queue">Eliminar de la cola de reproducción</string>
-    <string name="action_remove_from_playlist">Eliminar de la lista de reproducción</string>
+    <string name="action_remove_from_playing_queue">Remover de la cola de reproducción</string>
+    <string name="action_remove_from_playlist">Remover de la lista de reproducción</string>
     <string name="action_rename">Renombrar</string>
     <string name="action_save_playing_queue">Guardar cola de reproducción</string>
     <string name="action_scan">Examinar</string>
@@ -172,8 +172,8 @@
     <string name="edit_synced_lyrics">Editar Letras Sincronizadas</string>
     <string name="empty">Vacío</string>
     <string name="equalizer">Ecualizador</string>
-    <string name="error_create_backup">Couldn\u2019t create backup</string>
-    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_create_backup">No se pudo crear la copia de seguridad</string>
+    <string name="error_delete_backup">No se pudo eliminar la copia de seguridad</string>
     <string name="error_empty_name">¡Su nombre no puede estar vacío!</string>
     <string name="error_load_failed">Carga fallada</string>
     <string name="error_share_file">No se pudo compartir el archivo</string>
@@ -252,7 +252,7 @@
     <string name="message_pro_feature">%s es una característica Pro.</string>
     <string name="message_restore_success">La restauración se ha completado con éxito.</string>
     <string name="message_updated">Actualizado</string>
-    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
+    <string name="message_welcome"><![CDATA[¡Hola! <br> Bienvenido(a) a %s]]></string>
     <string name="my_name">Nombre</string>
     <string name="my_top_tracks">Más reproducidas</string>
     <string name="never">Nunca</string>
@@ -409,8 +409,8 @@
     <string name="pref_title_remember_tab">Recordar la última pestaña</string>
     <string name="pref_title_show_lyrics">Mostrar Letras</string>
     <string name="pref_title_suggestions">Mostrar sugerencias</string>
-    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Desliza hacia cualquier lugar para cambiar la canción</string>
+    <string name="pref_title_swipe_to_dismiss">Descarta deslizando hacia abajo</string>
     <string name="pref_title_tab_text_mode">Modo de los títulos de las pestañas</string>
     <string name="pref_title_toggle_carousel_effect">Efecto Carrusel</string>
     <string name="pref_title_toggle_full_screen">Aplicación en pantalla completa</string>
@@ -420,7 +420,7 @@
     <string name="pref_title_wallpaper_accent">Color de acento del fondo de pantalla</string>
     <string name="pref_title_whitelist">Música en lista blanca</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Tema Negro, Temas \"Ahora reproduciendo\", Efecto Carrusel y más...</string>
     <string name="profile">Perfil</string>
     <string name="purchase">Comprar</string>
     <string name="queue">Reproduciendo Cola</string>
@@ -431,7 +431,7 @@
     <string name="remove_action">Eliminar</string>
     <string name="remove_cover">Eliminar portada</string>
     <string name="remove_from_blacklist">Eliminar de la lista negra</string>
-    <string name="remove_image">Remove Image</string>
+    <string name="remove_image">Quitar imagen</string>
     <string name="remove_song_from_playlist_title">Eliminar canción de la lista de reproducción</string>
     <string name="remove_song_x_from_playlist"><![CDATA[¿Eliminar la canción <b>%1$s</b> de la lista de reproducción?]]></string>
     <string name="remove_songs_from_playlist_title">Eliminar canciones de la lista de reproducción</string>
