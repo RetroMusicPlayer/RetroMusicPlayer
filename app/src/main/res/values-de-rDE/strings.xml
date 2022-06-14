@@ -176,7 +176,7 @@
     <string name="error_delete_backup">Konnte Sicherung nicht löschen</string>
     <string name="error_empty_name">Dein Name kann nicht leer sein!</string>
     <string name="error_load_failed">Laden fehlgeschlagen</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Datei konnte nicht geteilt werden</string>
     <string name="expanded">Erweitert</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favoriten</string>
@@ -497,7 +497,7 @@
     <string name="sort_order_composer">Komponist</string>
     <string name="sort_order_date">Hinzufügedatum</string>
     <string name="sort_order_date_modified">Änderungsdatum</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Standard</string>
     <string name="sort_order_num_songs">Titel-Nummer</string>
     <string name="sort_order_num_songs_desc">Titel-Nummer absteigend</string>
     <string name="sort_order_year">Jahr</string>
