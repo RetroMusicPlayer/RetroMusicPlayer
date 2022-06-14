@@ -27,10 +27,10 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.SongRepository
+import code.name.monkey.retromusic.service.CastPlayer
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
 import code.name.monkey.retromusic.util.logE
-import com.google.android.gms.cast.framework.CastSession
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -456,8 +456,8 @@ object MusicPlayerRemote : KoinComponent {
             .dropLastWhile { it.isEmpty() }.toTypedArray()[1]
     }
 
-    fun switchToRemotePlayback(castSession: CastSession) {
-        musicService?.switchToRemotePlayback(castSession)
+    fun switchToRemotePlayback(castPlayer: CastPlayer) {
+        musicService?.switchToRemotePlayback(castPlayer)
     }
 
     fun switchToLocalPlayback() {

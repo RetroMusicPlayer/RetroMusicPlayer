@@ -86,7 +86,6 @@ import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.gms.cast.framework.CastSession
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
@@ -1171,8 +1170,8 @@ class MusicService : MediaBrowserServiceCompat(),
         playbackManager.switchToLocalPlayback(this::restorePlaybackState)
     }
 
-    fun switchToRemotePlayback(castSession: CastSession) {
-        playbackManager.switchToRemotePlayback(castSession, this::restorePlaybackState)
+    fun switchToRemotePlayback(castPlayer: CastPlayer) {
+        playbackManager.switchToRemotePlayback(castPlayer, this::restorePlaybackState)
     }
 
     private fun restorePlaybackState(wasPlaying: Boolean, progress: Int) {

@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.activities.base
 import code.name.monkey.retromusic.cast.RetroSessionManagerListener
 import code.name.monkey.retromusic.cast.RetroWebServer
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.service.CastPlayer
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.common.ConnectionResult
@@ -37,7 +38,7 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
             override fun onSessionStarted(castSession: CastSession, p1: String) {
                 invalidateOptionsMenu()
                 mCastSession = castSession
-                MusicPlayerRemote.switchToRemotePlayback(castSession)
+                MusicPlayerRemote.switchToRemotePlayback(CastPlayer(castSession))
             }
 
             override fun onSessionEnded(castSession: CastSession, p1: Int) {
@@ -53,7 +54,7 @@ abstract class AbsCastActivity : AbsSlidingMusicPanelActivity() {
                 invalidateOptionsMenu()
                 mCastSession = castSession
                 webServer.start()
-                MusicPlayerRemote.switchToRemotePlayback(castSession)
+                MusicPlayerRemote.switchToRemotePlayback(CastPlayer(castSession))
             }
 
             override fun onSessionSuspended(castSession: CastSession, p1: Int) {

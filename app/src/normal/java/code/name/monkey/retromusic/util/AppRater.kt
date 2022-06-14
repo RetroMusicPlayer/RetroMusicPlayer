@@ -28,7 +28,6 @@ object AppRater {
     private const val DAYS_UNTIL_PROMPT = 3//Min number of days
     private const val LAUNCHES_UNTIL_PROMPT = 5//Min number of launches
 
-    @JvmStatic
     fun appLaunched(context: Activity) {
         val prefs = context.getSharedPreferences(APP_RATING, 0)
         if (prefs.getBoolean(DO_NOT_SHOW_AGAIN, false)) {

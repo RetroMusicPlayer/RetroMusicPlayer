@@ -91,7 +91,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
                     val result =
                         "${getString(nowPlayingScreen.titleRes)} theme is Pro version feature."
                     showToast(result)
-                    NavigationUtil.goToProVersion(requireContext())
+                    requireContext().goToProVersion()
                 } else {
                     PreferenceUtil.nowPlayingScreen = nowPlayingScreen
                 }

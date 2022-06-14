@@ -31,7 +31,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.maybeShowAnnoyingToasts
 import code.name.monkey.retromusic.util.theme.getNightMode
 import code.name.monkey.retromusic.util.theme.getThemeResValue
-import com.google.android.play.core.splitcompat.SplitCompat
 import java.util.*
 
 abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
@@ -105,6 +104,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
             Locale.forLanguageTag(code)
         }
         super.attachBaseContext(LanguageContextWrapper.wrap(newBase, locale))
-        SplitCompat.install(this)
+        installSplitCompat()
     }
 }

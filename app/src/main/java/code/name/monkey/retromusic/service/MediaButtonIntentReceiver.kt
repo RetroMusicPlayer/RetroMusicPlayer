@@ -15,10 +15,10 @@
 
 package code.name.monkey.retromusic.service
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import android.os.PowerManager
 import android.os.PowerManager.WakeLock
@@ -62,8 +62,7 @@ class MediaButtonIntentReceiver : MediaButtonReceiver() {
         private var mClickCounter = 0
         private var mLastClickTime: Long = 0
 
-        @SuppressLint("HandlerLeak") // false alarm, handler is already static
-        private val mHandler = object : Handler() {
+        private val mHandler = object : Handler(Looper.getMainLooper()) {
 
             override fun handleMessage(msg: Message) {
                 when (msg.what) {

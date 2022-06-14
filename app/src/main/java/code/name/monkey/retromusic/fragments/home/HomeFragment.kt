@@ -35,10 +35,7 @@ import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.databinding.FragmentHomeBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
-import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.dip
-import code.name.monkey.retromusic.extensions.drawNextToNavbar
-import code.name.monkey.retromusic.extensions.elevatedAccentColor
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
@@ -48,7 +45,6 @@ import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.userName
-import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
@@ -212,7 +208,7 @@ class HomeFragment :
             ATHToolbarActivity.getToolbarBackgroundColor(binding.toolbar)
         )
         //Setting up cast button
-        CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
+        requireContext().setUpMediaRouteButton(menu)
     }
 
     override fun scrollToTop() {

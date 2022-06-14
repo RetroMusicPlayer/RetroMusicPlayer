@@ -120,7 +120,6 @@
         <activity android:name=".activities.tageditor.SongTagEditorActivity" />
         <activity android:name=".activities.SupportDevelopmentActivity" />
         <activity android:name=".activities.LicenseActivity" />
-        <activity android:name=".activities.PurchaseActivity" />
         <activity android:name=".activities.bugreport.BugReportActivity" />
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />

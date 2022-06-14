@@ -95,7 +95,7 @@ class SleepTimerDialog : DialogFragment() {
                 shouldFinishLastSong.isVisible = false
                 timerUpdater.start()
                 setPositiveButton(android.R.string.ok, null)
-                setNegativeButton(R.string.cast_stop) { _, _ ->
+                setNegativeButton(R.string.action_cancel) { _, _ ->
                     timerUpdater.cancel()
                     val previous = makeTimerPendingIntent(PendingIntent.FLAG_NO_CREATE)
                     if (previous != null) {
