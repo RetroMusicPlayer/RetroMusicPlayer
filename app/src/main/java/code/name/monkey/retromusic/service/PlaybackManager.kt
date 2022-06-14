@@ -16,7 +16,7 @@ class PlaybackManager(val context: Context) {
     var playback: Playback? = null
     private var playbackLocation = PlaybackLocation.LOCAL
 
-    val isLocalPlayback get() = playbackLocation== PlaybackLocation.LOCAL
+    val isLocalPlayback get() = playbackLocation == PlaybackLocation.LOCAL
 
     val audioSessionId: Int
         get() = if (playback != null) {
@@ -47,16 +47,19 @@ class PlaybackManager(val context: Context) {
         playback?.callbacks = callbacks
     }
 
-    fun play(onNotInitialized: () -> Unit = {}, onPlay: () -> Unit = {}) {
+    fun play(onNotInitialized: () -> Unit) {
         if (playback != null && !playback!!.isPlaying) {
             if (!playback!!.isInitialized) {
                 onNotInitialized()
             } else {
                 openAudioEffectSession()
                 if (playbackLocation == PlaybackLocation.LOCAL) {
-                    AudioFader.startFadeAnimator(playback!!, true) {
-                        // Code when Animator Ends
-                        onPlay()
+                    if (playback is CrossFadePlayer) {
+                        if (!(playback as CrossFadePlayer).isCrossFading) {
+                            AudioFader.startFadeAnimator(playback!!, true)
+                        }
+                    } else {
+                        AudioFader.startFadeAnimator(playback!!, true)
                     }
                 }
                 if (shouldSetSpeed) {
@@ -168,14 +171,11 @@ class PlaybackManager(val context: Context) {
         playback: Playback,
         onChange: (wasPlaying: Boolean, progress: Int) -> Unit,
     ) {
-        val oldPlayback = playback
-        val wasPlaying: Boolean = oldPlayback.isPlaying
-        val progress: Int = oldPlayback.position()
-
+        val oldPlayback = this.playback
+        val wasPlaying: Boolean = oldPlayback?.isPlaying == true
+        val progress: Int = oldPlayback?.position() ?: 0
         this.playback = playback
-
-        oldPlayback.stop()
-
+        oldPlayback?.stop()
         onChange(wasPlaying, progress)
     }
 

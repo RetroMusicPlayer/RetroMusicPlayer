@@ -10,8 +10,7 @@ import com.google.android.gms.cast.MediaStatus
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.cast.framework.media.RemoteMediaClient
 
-class CastPlayer(castSession: CastSession) : Playback,
-    RemoteMediaClient.Callback() {
+class CastPlayer(castSession: CastSession) : Playback, RemoteMediaClient.Callback() {
 
     override val isInitialized: Boolean = true
 

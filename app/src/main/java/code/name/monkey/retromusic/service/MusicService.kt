@@ -15,6 +15,7 @@ package code.name.monkey.retromusic.service
 
 import android.annotation.SuppressLint
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothDevice.EXTRA_DEVICE
@@ -39,7 +40,6 @@ import android.widget.Toast
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.media.MediaBrowserServiceCompat
-import androidx.media.session.MediaButtonReceiver.handleIntent
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.*
@@ -93,6 +93,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import org.koin.java.KoinJavaComponent.get
 import java.util.*
+
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal. Modified by Prathamesh More
@@ -203,8 +204,7 @@ class MusicService : MediaBrowserServiceCompat(),
             }
         }
     }
-    private var queueSaveHandler: QueueSaveHandler? = null
-    private var queueSaveHandlerThread: HandlerThread? = null
+
     private var queuesRestored = false
 
     var repeatMode = 0
@@ -277,12 +277,6 @@ class MusicService : MediaBrowserServiceCompat(),
         playbackManager.setCallbacks(this)
         setupMediaSession()
 
-        // queue saving needs to run on a separate thread so that it doesn't block the playback handler
-        // events
-        queueSaveHandlerThread =
-            HandlerThread("QueueSaveHandler", Process.THREAD_PRIORITY_BACKGROUND)
-        queueSaveHandlerThread?.start()
-        queueSaveHandler = QueueSaveHandler(this, queueSaveHandlerThread!!.looper)
         uiThreadHandler = Handler(Looper.getMainLooper())
         registerReceiver(widgetIntentReceiver, IntentFilter(APP_WIDGET_UPDATE))
         registerReceiver(updateFavoriteReceiver, IntentFilter(FAVORITE_STATE_CHANGED))
@@ -291,7 +285,7 @@ class MusicService : MediaBrowserServiceCompat(),
         notificationManager = getSystemService()
         initNotification()
         mediaStoreObserver = MediaStoreObserver(this, playerHandler!!)
-        throttledSeekHandler = ThrottledSeekHandler(this, playerHandler!!)
+        throttledSeekHandler = ThrottledSeekHandler(this, Handler(mainLooper))
         contentResolver.registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
             true,
             mediaStoreObserver)
@@ -656,7 +650,6 @@ class MusicService : MediaBrowserServiceCompat(),
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null && intent.action != null) {
-            handleIntent(mediaSession, intent)
             serviceScope.launch {
                 restoreQueuesAndPositionIfNecessary()
                 when (intent.action) {
@@ -761,11 +754,11 @@ class MusicService : MediaBrowserServiceCompat(),
         this.position = position
         openCurrent { success ->
             completion(success)
-            notifyChange(META_CHANGED)
-            notHandledMetaChangedForCurrentTrack = false
             if (success) {
                 prepareNextImpl()
             }
+            notifyChange(META_CHANGED)
+            notHandledMetaChangedForCurrentTrack = false
         }
     }
 
@@ -777,11 +770,10 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @Synchronized
     fun play() {
-        playbackManager.play(onNotInitialized = { playSongAt(getPosition()) }) {
-            if (notHandledMetaChangedForCurrentTrack) {
-                handleChangeInternal(META_CHANGED)
-                notHandledMetaChangedForCurrentTrack = false
-            }
+        playbackManager.play { playSongAt(getPosition()) }
+        if (notHandledMetaChangedForCurrentTrack) {
+            handleChangeInternal(META_CHANGED)
+            notHandledMetaChangedForCurrentTrack = false
         }
         notifyChange(PLAY_STATE_CHANGED)
     }
@@ -798,12 +790,14 @@ class MusicService : MediaBrowserServiceCompat(),
         // Every chromecast method needs to run on main thread or you are greeted with IllegalStateException
         // So it will use Main dispatcher
         // And by using Default dispatcher for local playback we are reduce the burden of main thread
-        serviceScope.launch(if(playbackManager.isLocalPlayback) Default else Main) {
+        serviceScope.launch(if (playbackManager.isLocalPlayback) Default else Main) {
             openTrackAndPrepareNextAt(position) { success ->
                 if (success) {
                     play()
                 } else {
-                    showToast(resources.getString(R.string.unplayable_file))
+                    runOnUiThread {
+                        showToast(R.string.unplayable_file)
+                    }
                 }
             }
         }
@@ -953,17 +947,6 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
 
-    fun saveQueuesImpl() {
-        MusicPlaybackQueueStore.getInstance(this).saveQueues(playingQueue, originalPlayingQueue)
-    }
-
-    fun saveState() {
-        saveQueues()
-        savePosition()
-        savePositionInTrack()
-        storage.saveSong(currentSong)
-    }
-
     @Synchronized
     fun seek(millis: Int): Int {
         return try {
@@ -1104,9 +1087,9 @@ class MusicService : MediaBrowserServiceCompat(),
                 // We must call updateMediaSessionPlaybackState after the load of album art is completed
                 // if we are loading it or it won't be updated in the notification
                 updateMediaSessionMetaData(::updateMediaSessionPlaybackState)
+                savePosition()
+                savePositionInTrack()
                 serviceScope.launch(IO) {
-                    savePosition()
-                    savePositionInTrack()
                     val currentSong = currentSong
                     HistoryStore.getInstance(this@MusicService).addSongId(currentSong.id)
                     if (songPlayCountHelper.shouldBumpPlayCount()) {
@@ -1114,13 +1097,14 @@ class MusicService : MediaBrowserServiceCompat(),
                             .bumpPlayCount(songPlayCountHelper.song.id)
                     }
                     songPlayCountHelper.notifySongChanged(currentSong)
+                    storage.saveSong(currentSong)
                 }
             }
             QUEUE_CHANGED -> {
                 mediaSession?.setQueueTitle(getString(R.string.now_playing_queue))
                 mediaSession?.setQueue(playingQueue.toMediaSessionQueue())
                 updateMediaSessionMetaData(::updateMediaSessionPlaybackState) // because playing queue size might have changed
-                saveState()
+                saveQueues()
                 if (playingQueue.size > 0) {
                     prepareNext()
                 } else {
@@ -1198,6 +1182,8 @@ class MusicService : MediaBrowserServiceCompat(),
                 seek(progress)
                 if (wasPlaying) {
                     play()
+                } else {
+                    pause()
                 }
             }
         }
@@ -1218,10 +1204,14 @@ class MusicService : MediaBrowserServiceCompat(),
                     openQueue(playlistSongs, 0, true)
                 }
             } else {
-                showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
+                runOnUiThread {
+                    showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
+                }
             }
         } else {
-            showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
+            runOnUiThread {
+                showToast(R.string.playlist_is_empty, Toast.LENGTH_LONG)
+            }
         }
     }
 
@@ -1247,8 +1237,6 @@ class MusicService : MediaBrowserServiceCompat(),
     private fun releaseResources() {
         playerHandler?.removeCallbacksAndMessages(null)
         musicPlayerHandlerThread?.quitSafely()
-        queueSaveHandler?.removeCallbacksAndMessages(null)
-        queueSaveHandlerThread?.quitSafely()
         playbackManager.release()
         mediaSession?.release()
     }
@@ -1275,8 +1263,10 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun saveQueues() {
-        queueSaveHandler?.removeMessages(SAVE_QUEUES)
-        queueSaveHandler?.sendEmptyMessage(SAVE_QUEUES)
+        serviceScope.launch(IO) {
+            MusicPlaybackQueueStore.getInstance(this@MusicService)
+                .saveQueues(playingQueue, originalPlayingQueue)
+        }
     }
 
     private fun sendChangeInternal(what: String) {
@@ -1314,13 +1304,25 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun setupMediaSession() {
+        val mediaButtonReceiverComponentName = ComponentName(applicationContext,
+            MediaButtonIntentReceiver::class.java)
+
+        val mediaButtonIntent = Intent(Intent.ACTION_MEDIA_BUTTON)
+        mediaButtonIntent.component = mediaButtonReceiverComponentName
+        val mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(
+            applicationContext, 0, mediaButtonIntent,
+            if (VersionUtils.hasMarshmallow()) PendingIntent.FLAG_IMMUTABLE else 0
+        )
         mediaSession = MediaSessionCompat(
             this,
-            "RetroMusicPlayer"
+            BuildConfig.APPLICATION_ID,
+            mediaButtonReceiverComponentName,
+            mediaButtonReceiverPendingIntent
         )
         val mediaSessionCallback = MediaSessionCallback(this)
         mediaSession?.setCallback(mediaSessionCallback)
         mediaSession?.isActive = true
+        mediaSession?.setMediaButtonReceiver(mediaButtonReceiverPendingIntent)
     }
 
     inner class MusicBinder : Binder() {
@@ -1368,7 +1370,6 @@ class MusicService : MediaBrowserServiceCompat(),
         const val REPEAT_MODE_NONE = 0
         const val REPEAT_MODE_ALL = 1
         const val REPEAT_MODE_THIS = 2
-        const val SAVE_QUEUES = 0
         private const val MEDIA_SESSION_ACTIONS = (PlaybackStateCompat.ACTION_PLAY
                 or PlaybackStateCompat.ACTION_PAUSE
                 or PlaybackStateCompat.ACTION_PLAY_PAUSE

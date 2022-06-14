@@ -14,12 +14,10 @@
  */
 package code.name.monkey.retromusic.activities
 
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.animation.LinearInterpolator
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
@@ -27,7 +25,6 @@ import code.name.monkey.retromusic.databinding.ActivityDriveModeBinding
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -246,12 +243,10 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.progressSlider.valueTo = total.toFloat()
-
-        val animator = ObjectAnimator.ofFloat(binding.progressSlider, "value", progress.toFloat())
-        animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
+        binding.progressSlider.run {
+            valueTo = total.toFloat()
+            value = progress.toFloat().coerceIn(valueFrom, valueTo)
+        }
 
         binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())

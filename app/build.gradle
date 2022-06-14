@@ -14,8 +14,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 10591
-        versionName '6.0.0-beta'
+        versionCode 10592
+        versionName '6.0.1-beta'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }
@@ -51,7 +51,7 @@ android {
         }
     }
     lint {
-        disable 'MissingTranslation', 'ImpliedQuantity'
+        warning 'MissingTranslation', 'ImpliedQuantity', 'Instantiatable'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -105,7 +105,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
-    def room_version = '2.4.2'
+    def room_version = '2.5.0-alpha02'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
