@@ -176,7 +176,7 @@
     <string name="error_delete_backup">Não foi possível eliminar cópia</string>
     <string name="error_empty_name">O nome não pode estar vazio!</string>
     <string name="error_load_failed">O carregamento falhou</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Não foi possível partilhar o ficheiro</string>
     <string name="expanded">Expandido</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favoritos</string>
@@ -420,7 +420,7 @@
     <string name="pref_title_wallpaper_accent">Cor do papel de parede</string>
     <string name="pref_title_whitelist">Lista segura de música</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Tema escuro, temas A reproduzir, efeito carrossel e muito mais..</string>
     <string name="profile">Perfil</string>
     <string name="purchase">Comprar</string>
     <string name="queue">Fila de reprodução</string>
@@ -497,7 +497,7 @@
     <string name="sort_order_composer">Compositor</string>
     <string name="sort_order_date">Data adicionado</string>
     <string name="sort_order_date_modified">Data modificado</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Predefinido</string>
     <string name="sort_order_num_songs">Contagem de músicas</string>
     <string name="sort_order_num_songs_desc">Contagem decrescente</string>
     <string name="sort_order_year">Ano</string>
