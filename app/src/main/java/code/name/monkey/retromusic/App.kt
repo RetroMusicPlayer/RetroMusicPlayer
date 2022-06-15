@@ -52,6 +52,8 @@ class App : Application() {
         if (VersionUtils.hasNougatMR())
             DynamicShortcutManager(this).initDynamicShortcuts()
 
+        billingManager = BillingManager(this)
+
         // setting Error activity
         CaocConfig.Builder.create().errorActivity(ErrorActivity::class.java)
             .restartActivity(MainActivity::class.java).apply()
