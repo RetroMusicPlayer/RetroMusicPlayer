@@ -35,7 +35,6 @@ import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.TagWriter
 import code.name.monkey.retromusic.databinding.FragmentLyricsBinding
 import code.name.monkey.retromusic.databinding.FragmentNormalLyricsBinding
@@ -422,7 +421,7 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
     override fun onDestroyView() {
         super.onDestroyView()
         if (MusicPlayerRemote.playingQueue.isNotEmpty())
-            (requireActivity() as MainActivity).expandPanel()
+            mainActivity.expandPanel()
         _binding = null
     }
 }
