@@ -22,7 +22,6 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission
         android:name="android.permission.BLUETOOTH_CONNECT"
         android:usesPermissionFlags="neverForLocation"
@@ -314,10 +313,6 @@
             android:name="com.lge.support.SPLIT_WINDOW"
             android:value="true" />
 
-        <meta-data
-            android:name="com.android.vending.splits.required"
-            android:value="true" />
-
         <!-- Android Auto -->
         <meta-data
             android:name="com.google.android.gms.car.application"
@@ -328,11 +323,6 @@
         <meta-data
             android:name="com.google.android.gms.car.notification.SmallIcon"
             android:resource="@drawable/ic_notification" />
-
-        <!-- ChromeCast -->
-        <meta-data
-            android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
-            android:value="code.name.monkey.retromusic.cast.CastOptionsProvider" />
     </application>
 
     <!--
