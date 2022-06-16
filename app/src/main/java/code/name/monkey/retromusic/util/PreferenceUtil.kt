@@ -472,10 +472,10 @@ object PreferenceUtil {
     val tabTitleMode: Int
         get() {
             return when (sharedPreferences.getStringOrDefault(
-                TAB_TEXT_MODE, "1"
+                TAB_TEXT_MODE, "0"
             ).toInt()) {
-                1 -> BottomNavigationView.LABEL_VISIBILITY_LABELED
                 0 -> BottomNavigationView.LABEL_VISIBILITY_AUTO
+                1 -> BottomNavigationView.LABEL_VISIBILITY_LABELED
                 2 -> BottomNavigationView.LABEL_VISIBILITY_SELECTED
                 3 -> BottomNavigationView.LABEL_VISIBILITY_UNLABELED
                 else -> BottomNavigationView.LABEL_VISIBILITY_LABELED

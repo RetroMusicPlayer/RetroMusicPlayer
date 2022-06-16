@@ -1,6 +1,9 @@
 package code.name.monkey.retromusic.billing
 
-class BillingManager {
+import android.content.Context
+
+@Suppress("UNUSED_PARAMETER")
+class BillingManager(context: Context) {
 
     fun release() {}
 
