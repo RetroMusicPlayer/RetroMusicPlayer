@@ -42,7 +42,7 @@ class PlayingQueueAdapter(
     activity: FragmentActivity,
     dataSet: MutableList<Song>,
     private var current: Int,
-    itemLayoutRes: Int
+    itemLayoutRes: Int,
 ) : SongAdapter(
     activity, dataSet, itemLayoutRes, null
 ), DraggableItemAdapter<PlayingQueueAdapter.ViewHolder>,
@@ -153,6 +153,14 @@ class PlayingQueueAdapter(
             dragView?.isVisible = true
         }
 
+        override fun onClick(v: View?) {
+            if (isInQuickSelectMode) {
+                toggleChecked(layoutPosition)
+            } else {
+                MusicPlayerRemote.playSongAt(layoutPosition)
+            }
+        }
+
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.action_remove_from_playing_queue -> {
@@ -209,7 +217,7 @@ class PlayingQueueAdapter(
     internal class SwipedResultActionRemoveItem(
         private val adapter: PlayingQueueAdapter,
         private val position: Int,
-        private val activity: FragmentActivity
+        private val activity: FragmentActivity,
     ) : SwipeResultActionRemoveItem() {
 
         private var songToRemove: Song? = null

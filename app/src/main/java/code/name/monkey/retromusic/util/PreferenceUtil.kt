@@ -115,7 +115,7 @@ object PreferenceUtil {
             putString(SAF_SDCARD_URI, value)
         }
 
-    val autoDownloadImagesPolicy
+    private val autoDownloadImagesPolicy
         get() = sharedPreferences.getStringOrDefault(
             AUTO_DOWNLOAD_IMAGES_POLICY,
             "only_wifi"
@@ -241,8 +241,6 @@ object PreferenceUtil {
         set(value) = sharedPreferences.edit { putBoolean(CLASSIC_NOTIFICATION, value) }
 
     val isScreenOnEnabled get() = sharedPreferences.getBoolean(KEEP_SCREEN_ON, false)
-
-    val isShuffleModeOn get() = sharedPreferences.getBoolean(TOGGLE_SHUFFLE, false)
 
     val isSongInfo get() = sharedPreferences.getBoolean(EXTRA_SONG_INFO, false)
 

@@ -171,9 +171,6 @@ object MusicPlayerRemote : KoinComponent {
         return musicService?.playingQueue?.size ?: -1
     }
 
-    /**
-     * Async
-     */
     fun playSongAt(position: Int) {
         musicService?.playSongAt(position)
     }
