@@ -52,6 +52,7 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_player_album_cover),
     ViewPager.OnPageChangeListener, MusicProgressViewUpdateHelper.Callback,
@@ -95,8 +96,10 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 if (embeddedLyrics != null) {
                     binding.lyricsView.loadLrc(embeddedLyrics)
                 } else {
-                    binding.lyricsView.reset()
-                    binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
+                    withContext(Dispatchers.Main) {
+                        binding.lyricsView.reset()
+                        binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
+                    }
                 }
             }
         }
