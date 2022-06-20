@@ -117,7 +117,7 @@ object LyricUtil {
         return "$lrcRootPath$title - $artist.lrc"
     }
 
-     fun getLrcOriginalPath(filePath: String): String {
+    private fun getLrcOriginalPath(filePath: String): String {
         return filePath.replace(filePath.substring(filePath.lastIndexOf(".") + 1), "lrc")
     }
 
@@ -160,9 +160,9 @@ object LyricUtil {
     }
 
     fun getEmbeddedSyncedLyrics(data: String): String? {
-        val embeddedLyrics = try{
-           AudioFileIO.read(File(data)).tagOrCreateDefault.getFirst(FieldKey.LYRICS)
-        } catch(e: Exception){
+        val embeddedLyrics = try {
+            AudioFileIO.read(File(data)).tagOrCreateDefault.getFirst(FieldKey.LYRICS)
+        } catch (e: Exception) {
             return null
         }
         return if (AbsSynchronizedLyrics.isSynchronized(embeddedLyrics)) {
