@@ -695,11 +695,11 @@ object PreferenceUtil {
     val isSnowFalling
         get() = sharedPreferences.getBoolean(SNOWFALL, false)
 
-    val lyricsType: LyricsType
+    val lyricsType: CoverLyricsType
         get() = if (sharedPreferences.getString(LYRICS_TYPE, "0") == "0") {
-            LyricsType.REPLACE_COVER
+            CoverLyricsType.REPLACE_COVER
         } else {
-            LyricsType.OVER_COVER
+            CoverLyricsType.OVER_COVER
         }
 
     var playbackSpeed
@@ -738,6 +738,6 @@ object PreferenceUtil {
         get() = sharedPreferences.getBoolean(SWIPE_DOWN_DISMISS, true)
 }
 
-enum class LyricsType {
+enum class CoverLyricsType {
     REPLACE_COVER, OVER_COVER
 }

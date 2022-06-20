@@ -94,6 +94,7 @@
     <string name="black_theme_name">Just Black</string>
     <string name="blacklist">Blacklist</string>
     <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Blur</string>
     <string name="blur_card">Blur Card</string>
     <string name="bug_report_failed">Unable to send report</string>
@@ -561,5 +562,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="bluetooth_title">Nearby devices</string>
 </resources>
