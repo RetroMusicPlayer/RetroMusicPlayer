@@ -90,6 +90,7 @@
     <string name="black_theme_name">ダークテーマ時に漆黒にする</string>
     <string name="blacklist">ブラックリスト</string>
     <string name="bluetooth_summary">付近の Bluetooth デバイスを確認するために Nearby デバイス権限が必要です</string>
+    <string name="bluetooth_title">付近のデバイス</string>
     <string name="blur">ぼかし</string>
     <string name="blur_card">ブラーカード</string>
     <string name="bug_report_failed">レポートを送信できませんでした</string>
@@ -556,5 +557,4 @@
     <string name="you_have_to_select_at_least_one_category">少なくとも 1 つのカテゴリを選択する必要があります。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
-    <string name="bluetooth_title">付近のデバイス</string>
 </resources>
