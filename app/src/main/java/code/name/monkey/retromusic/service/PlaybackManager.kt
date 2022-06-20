@@ -8,7 +8,6 @@ import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
 import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
-import com.google.android.gms.cast.framework.CastSession
 
 
 class PlaybackManager(val context: Context) {
@@ -160,11 +159,11 @@ class PlaybackManager(val context: Context) {
     }
 
     fun switchToRemotePlayback(
-        castSession: CastSession,
+        castPlayer: CastPlayer,
         onChange: (wasPlaying: Boolean, progress: Int) -> Unit,
     ) {
         playbackLocation = PlaybackLocation.REMOTE
-        switchToPlayback(CastPlayer(castSession), onChange)
+        switchToPlayback(castPlayer, onChange)
     }
 
     private fun switchToPlayback(

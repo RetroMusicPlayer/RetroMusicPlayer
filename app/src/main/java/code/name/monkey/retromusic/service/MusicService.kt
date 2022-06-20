@@ -86,7 +86,6 @@ import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.gms.cast.framework.CastSession
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
@@ -286,12 +285,16 @@ class MusicService : MediaBrowserServiceCompat(),
         initNotification()
         mediaStoreObserver = MediaStoreObserver(this, playerHandler!!)
         throttledSeekHandler = ThrottledSeekHandler(this, Handler(mainLooper))
-        contentResolver.registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+        contentResolver.registerContentObserver(
+            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
             true,
-            mediaStoreObserver)
-        contentResolver.registerContentObserver(MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
+            mediaStoreObserver
+        )
+        contentResolver.registerContentObserver(
+            MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
             true,
-            mediaStoreObserver)
+            mediaStoreObserver
+        )
         val audioVolumeObserver = AudioVolumeObserver(this)
         audioVolumeObserver.register(AudioManager.STREAM_MUSIC, this)
         registerOnSharedPreferenceChangedListener(this)
@@ -319,6 +322,7 @@ class MusicService : MediaBrowserServiceCompat(),
         mediaSession?.isActive = false
         quit()
         releaseResources()
+        serviceScope.cancel()
         contentResolver.unregisterContentObserver(mediaStoreObserver)
         unregisterOnSharedPreferenceChangedListener(this)
         wakeLock?.release()
@@ -1014,8 +1018,10 @@ class MusicService : MediaBrowserServiceCompat(),
             .putString(MediaMetadataCompat.METADATA_KEY_ALBUM, song.albumName)
             .putString(MediaMetadataCompat.METADATA_KEY_TITLE, song.title)
             .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, song.duration)
-            .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER,
-                (getPosition() + 1).toLong())
+            .putLong(
+                MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER,
+                (getPosition() + 1).toLong()
+            )
             .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.year.toLong())
             .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
             .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, playingQueue.size.toLong())
@@ -1171,8 +1177,8 @@ class MusicService : MediaBrowserServiceCompat(),
         playbackManager.switchToLocalPlayback(this::restorePlaybackState)
     }
 
-    fun switchToRemotePlayback(castSession: CastSession) {
-        playbackManager.switchToRemotePlayback(castSession, this::restorePlaybackState)
+    fun switchToRemotePlayback(castPlayer: CastPlayer) {
+        playbackManager.switchToRemotePlayback(castPlayer, this::restorePlaybackState)
     }
 
     private fun restorePlaybackState(wasPlaying: Boolean, progress: Int) {
@@ -1304,8 +1310,10 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun setupMediaSession() {
-        val mediaButtonReceiverComponentName = ComponentName(applicationContext,
-            MediaButtonIntentReceiver::class.java)
+        val mediaButtonReceiverComponentName = ComponentName(
+            applicationContext,
+            MediaButtonIntentReceiver::class.java
+        )
 
         val mediaButtonIntent = Intent(Intent.ACTION_MEDIA_BUTTON)
         mediaButtonIntent.component = mediaButtonReceiverComponentName

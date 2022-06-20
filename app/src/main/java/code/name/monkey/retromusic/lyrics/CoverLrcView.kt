@@ -19,7 +19,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
-import android.os.AsyncTask
 import android.os.Looper
 import android.text.Layout
 import android.text.StaticLayout
@@ -35,14 +34,15 @@ import android.widget.Scroller
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.withSave
 import code.name.monkey.retromusic.R
+import kotlinx.coroutines.*
 import java.io.File
+import java.lang.Runnable
 import kotlin.math.abs
 
 /**
  * 歌词 Created by wcy on 2015/11/9.
  */
 @SuppressLint("StaticFieldLeak")
-@Suppress("deprecation")
 class CoverLrcView @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,
@@ -72,7 +72,6 @@ class CoverLrcView @JvmOverloads constructor(
     private var mScroller: Scroller? = null
     private var mOffset = 0f
     private var mCurrentLine = 0
-    private var flag: Any? = null
     private var isShowTimeline = false
     private var isTouching = false
     private var isFling = false
@@ -85,9 +84,8 @@ class CoverLrcView @JvmOverloads constructor(
         }
     }
 
-    /**
-     * 手势监听器
-     */
+    private val viewScope = CoroutineScope(Dispatchers.Main + Job())
+
     private val mSimpleOnGestureListener: SimpleOnGestureListener =
         object : SimpleOnGestureListener() {
             override fun onDown(e: MotionEvent): Boolean {
@@ -251,42 +249,31 @@ class CoverLrcView @JvmOverloads constructor(
         mScroller = Scroller(context)
     }
 
-    /** 设置非当前行歌词字体颜色  */
     fun setNormalColor(normalColor: Int) {
         mNormalTextColor = normalColor
         postInvalidate()
     }
 
-    /** 设置当前行歌词的字体颜色  */
     fun setCurrentColor(currentColor: Int) {
         mCurrentTextColor = currentColor
         postInvalidate()
     }
 
-    /** 设置拖动歌词时选中歌词的字体颜色  */
     fun setTimelineTextColor(timelineTextColor: Int) {
         mTimelineTextColor = timelineTextColor
         postInvalidate()
     }
 
-    /** 设置拖动歌词时时间线的颜色  */
     fun setTimelineColor(timelineColor: Int) {
         mTimelineColor = timelineColor
         postInvalidate()
     }
 
-    /** 设置拖动歌词时右侧时间字体颜色  */
     fun setTimeTextColor(timeTextColor: Int) {
         mTimeTextColor = timeTextColor
         postInvalidate()
     }
 
-    /**
-     * 设置歌词是否允许拖动
-     *
-     * @param draggable 是否允许拖动
-     * @param onPlayClickListener 设置歌词拖动后播放按钮点击监听器，如果允许拖动，则不能为 null
-     */
     fun setDraggable(draggable: Boolean, onPlayClickListener: OnPlayClickListener?) {
         mOnPlayClickListener = if (draggable) {
             requireNotNull(onPlayClickListener) { "if draggable == true, onPlayClickListener must not be null" }
@@ -296,17 +283,6 @@ class CoverLrcView @JvmOverloads constructor(
         }
     }
 
-    /**
-     * 设置播放按钮点击监听器
-     *
-     * @param onPlayClickListener 如果为非 null ，则激活歌词拖动功能，否则将将禁用歌词拖动功能
-     */
-    @Deprecated("use {@link #setDraggable(boolean, OnPlayClickListener)} instead")
-    fun setOnPlayClickListener(onPlayClickListener: OnPlayClickListener?) {
-        mOnPlayClickListener = onPlayClickListener
-    }
-
-    /** 设置歌词为空时屏幕中央显示的文字，如“暂无歌词”  */
     fun setLabel(label: String?) {
         runOnUi {
             mDefaultLabel = label
@@ -314,106 +290,40 @@ class CoverLrcView @JvmOverloads constructor(
         }
     }
 
-    /**
-     * 加载歌词文件
-     *
-     * @param lrcFile 歌词文件
-     */
     fun loadLrc(lrcFile: File) {
-        loadLrc(lrcFile, null)
-    }
-
-    /**
-     * 加载双语歌词文件，两种语言的歌词时间戳需要一致
-     *
-     * @param mainLrcFile 第一种语言歌词文件
-     * @param secondLrcFile 第二种语言歌词文件
-     */
-    private fun loadLrc(mainLrcFile: File, secondLrcFile: File?) {
         runOnUi {
             reset()
-            val sb = StringBuilder("file://")
-            sb.append(mainLrcFile.path)
-            if (secondLrcFile != null) {
-                sb.append("#").append(secondLrcFile.path)
+            viewScope.launch(Dispatchers.IO) {
+                val lrcEntries = LrcUtils.parseLrc(arrayOf(lrcFile, null))
+                withContext(Dispatchers.Main) {
+                    onLrcLoaded(lrcEntries)
+                }
             }
-            val flag = sb.toString()
-            this.flag = flag
-            object : AsyncTask<File?, Int?, List<LrcEntry>>() {
-                override fun doInBackground(vararg params: File?): List<LrcEntry>? {
-                    return LrcUtils.parseLrc(params)
-                }
-
-                override fun onPostExecute(lrcEntries: List<LrcEntry>) {
-                    if (flag == flag) {
-                        onLrcLoaded(lrcEntries)
-                        this@CoverLrcView.flag = null
-                    }
-                }
-            }.execute(mainLrcFile, secondLrcFile)
         }
     }
 
-    /**
-     * 加载歌词文本
-     *
-     * @param lrcText 歌词文本
-     */
     fun loadLrc(lrcText: String?) {
-        loadLrc(lrcText, null)
-    }
-
-    /**
-     * 加载双语歌词文本，两种语言的歌词时间戳需要一致
-     *
-     * @param mainLrcText 第一种语言歌词文本
-     * @param secondLrcText 第二种语言歌词文本
-     */
-    private fun loadLrc(mainLrcText: String?, secondLrcText: String?) {
         runOnUi {
             reset()
-            val sb = StringBuilder("file://")
-            sb.append(mainLrcText)
-            if (secondLrcText != null) {
-                sb.append("#").append(secondLrcText)
+            viewScope.launch(Dispatchers.IO) {
+                val lrcEntries = LrcUtils.parseLrc(arrayOf(lrcText, null))
+                withContext(Dispatchers.Main) {
+                    onLrcLoaded(lrcEntries)
+                }
             }
-            val flag = sb.toString()
-            this.flag = flag
-            object : AsyncTask<String?, Int?, List<LrcEntry>>() {
-                override fun doInBackground(vararg params: String?): List<LrcEntry>? {
-                    return LrcUtils.parseLrc(params)
-                }
-
-                override fun onPostExecute(lrcEntries: List<LrcEntry>) {
-                    if (flag == flag) {
-                        onLrcLoaded(lrcEntries)
-                        this@CoverLrcView.flag = null
-                    }
-                }
-            }.execute(mainLrcText, secondLrcText)
         }
     }
 
-    /**
-     * 歌词是否有效
-     *
-     * @return true，如果歌词有效，否则false
-     */
     fun hasLrc(): Boolean {
         return mLrcEntryList.isNotEmpty()
     }
 
-    /**
-     * 刷新歌词
-     *
-     * @param time 当前播放时间
-     */
     fun updateTime(time: Long) {
         runOnUi {
             if (!hasLrc()) {
                 return@runOnUi
             }
-            val line = findShowLine(time)
+            val line = findShowLine(time + 300L)
             if (line != mCurrentLine) {
                 mCurrentLine = line
                 if (!isShowTimeline) {
@@ -441,9 +351,9 @@ class CoverLrcView @JvmOverloads constructor(
         super.onDraw(canvas)
         val centerY = height / 2
 
-        // 无歌词文件
         if (!hasLrc()) {
             mLrcPaint.color = mCurrentTextColor
+            @Suppress("Deprecation")
             @SuppressLint("DrawAllocation") val staticLayout = StaticLayout(
                 mDefaultLabel,
                 mLrcPaint,
@@ -485,11 +395,6 @@ class CoverLrcView @JvmOverloads constructor(
         }
     }
 
-    /**
-     * 画一行歌词
-     *
-     * @param y 歌词中心 Y 坐标
-     */
     private fun drawText(canvas: Canvas, staticLayout: StaticLayout, y: Float) {
         canvas.withSave {
             translate(mLrcPadding, y - (staticLayout.height shr 1))
@@ -539,6 +444,7 @@ class CoverLrcView @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         removeCallbacks(hideTimelineRunnable)
+        viewScope.cancel()
         super.onDetachedFromWindow()
     }
 
@@ -582,12 +488,10 @@ class CoverLrcView @JvmOverloads constructor(
         invalidate()
     }
 
-    /** 将中心行微调至正中心  */
     private fun adjustCenter() {
         smoothScrollTo(centerLine, ADJUST_DURATION)
     }
 
-    /** 滚动到某一行  */
     private fun smoothScrollTo(line: Int, duration: Long = mAnimationDuration) {
         val offset = getOffset(line)
         endAnimation()
@@ -602,14 +506,12 @@ class CoverLrcView @JvmOverloads constructor(
         }
     }
 
-    /** 结束滚动动画  */
     private fun endAnimation() {
         if (mAnimator != null && mAnimator!!.isRunning) {
             mAnimator!!.end()
         }
     }
 
-    /** 二分法查找当前时间应该显示的行数（最后一个 <= time 的行数）  */
     private fun findShowLine(time: Long): Int {
         var left = 0
         var right = mLrcEntryList.size
@@ -628,7 +530,6 @@ class CoverLrcView @JvmOverloads constructor(
         return 0
     }
 
-    /** 获取当前在视图中央的行数  */
     private val centerLine: Int
         get() {
             var centerLine = 0
@@ -642,7 +543,6 @@ class CoverLrcView @JvmOverloads constructor(
             return centerLine
         }
 
-    /** 获取歌词距离视图顶部的距离 采用懒加载方式  */
     private fun getOffset(line: Int): Float {
         if (mLrcEntryList.isEmpty()) return 0F
         if (mLrcEntryList[line].offset == Float.MIN_VALUE) {
@@ -656,11 +556,9 @@ class CoverLrcView @JvmOverloads constructor(
         return mLrcEntryList[line].offset
     }
 
-    /** 获取歌词宽度  */
     private val lrcWidth: Float
         get() = width - mLrcPadding * 2
 
-    /** 在主线程中运行  */
     private fun runOnUi(r: Runnable) {
         if (Looper.myLooper() == Looper.getMainLooper()) {
             r.run()
@@ -669,13 +567,7 @@ class CoverLrcView @JvmOverloads constructor(
         }
     }
 
-    /** 播放按钮点击监听器，点击后应该跳转到指定播放位置  */
     fun interface OnPlayClickListener {
-        /**
-         * 播放按钮被点击，应该跳转到指定播放位置
-         *
-         * @return 是否成功消费该事件，如果成功消费，则会更新UI
-         */
         fun onPlayClick(time: Long): Boolean
     }
 

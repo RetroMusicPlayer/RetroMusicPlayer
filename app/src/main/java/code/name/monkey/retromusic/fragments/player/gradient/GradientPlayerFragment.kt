@@ -44,6 +44,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.fragments.other.VolumeFragment
+import code.name.monkey.retromusic.fragments.player.CoverLyricsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
@@ -270,6 +271,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
+        binding.coverLyrics.getFragment<CoverLyricsFragment>().setColors(color)
     }
 
     override fun onFavoriteToggled() {
@@ -379,17 +381,22 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
 
     private fun setUpPlayPauseFab() {
         binding.playbackControlsFragment.playPauseButton.setOnClickListener(
-            PlayPauseButtonOnClickHandler())
+            PlayPauseButtonOnClickHandler()
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setUpPrevNext() {
         updatePrevNextColor()
-        binding.playbackControlsFragment.nextButton.setOnTouchListener(MusicSeekSkipTouchListener(
-            requireActivity(),
-            true))
+        binding.playbackControlsFragment.nextButton.setOnTouchListener(
+            MusicSeekSkipTouchListener(
+                requireActivity(),
+                true
+            )
+        )
         binding.playbackControlsFragment.previousButton.setOnTouchListener(
-            MusicSeekSkipTouchListener(requireActivity(), false))
+            MusicSeekSkipTouchListener(requireActivity(), false)
+        )
     }
 
     private fun updatePrevNextColor() {

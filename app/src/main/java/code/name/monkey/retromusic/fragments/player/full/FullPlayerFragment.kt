@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToArtist
+import code.name.monkey.retromusic.fragments.player.CoverLyricsFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -98,6 +99,7 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
         controlsFragment.setColor(color)
         libraryViewModel.updateColor(color.backgroundColor)
         ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
+        binding.coverLyrics.getFragment<CoverLyricsFragment>().setColors(color)
     }
 
     override fun onFavoriteToggled() {

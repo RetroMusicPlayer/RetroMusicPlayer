@@ -125,5 +125,5 @@
 
     <fragment
         android:id="@+id/lyrics_fragment"
-        android:name="code.name.monkey.retromusic.fragments.other.LyricsFragment" />
+        android:name="code.name.monkey.retromusic.fragments.lyrics.LyricsFragment" />
 </navigation>

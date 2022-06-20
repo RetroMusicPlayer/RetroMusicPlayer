@@ -30,11 +30,11 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentLibraryBinding
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
 import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
+import code.name.monkey.retromusic.extensions.setUpMediaRouteButton
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.google.android.gms.cast.framework.CastButtonFactory
 
 class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
 
@@ -99,7 +99,7 @@ class LibraryFragment : AbsMainActivityFragment(R.layout.fragment_library) {
             getToolbarBackgroundColor(binding.toolbar)
         )
         //Setting up cast button
-        CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.action_cast)
+        requireContext().setUpMediaRouteButton(menu)
     }
 
     override fun onMenuItemSelected(item: MenuItem): Boolean {

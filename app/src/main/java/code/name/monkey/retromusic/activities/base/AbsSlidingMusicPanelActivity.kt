@@ -234,8 +234,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 navigationView.labelVisibilityMode = PreferenceUtil.tabTitleMode
             }
             TOGGLE_FULL_SCREEN -> {
-                if (!PreferenceUtil.isFullScreenMode) exitFullscreen()
-                setEdgeToEdgeOrImmersive()
+                recreate()
             }
             SCREEN_ON_LYRICS -> {
                 keepScreenOn(bottomSheetBehavior.state == STATE_EXPANDED && PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics || PreferenceUtil.isScreenOnEnabled)

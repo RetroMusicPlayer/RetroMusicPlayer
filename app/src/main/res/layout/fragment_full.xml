@@ -127,8 +127,9 @@
         android:name="code.name.monkey.retromusic.fragments.player.CoverLyricsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:elevation="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/playbackControlsFragment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/playerToolbar" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorSurface">
+    android:background="?colorSurface"
+    android:clickable="true"
+    android:focusable="true">
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
