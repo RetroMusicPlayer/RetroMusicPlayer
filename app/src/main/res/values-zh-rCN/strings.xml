@@ -90,6 +90,7 @@
     <string name="black_theme_name">纯黑</string>
     <string name="blacklist">黑名单</string>
     <string name="bluetooth_summary">应用需要附近设备权限才能检查蓝牙设备</string>
+    <string name="bluetooth_title">附近设备</string>
     <string name="blur">模糊</string>
     <string name="blur_card">模糊卡片</string>
     <string name="bug_report_failed">无法提交报告</string>
@@ -555,5 +556,4 @@
     <string name="you_have_to_select_at_least_one_category">请至少选择一个分类。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
-    <string name="bluetooth_title">附近设备</string>
 </resources>
