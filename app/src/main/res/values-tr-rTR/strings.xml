@@ -92,6 +92,7 @@
     <string name="black_theme_name">Sade Siyah</string>
     <string name="blacklist">Kara Liste</string>
     <string name="bluetooth_summary">Uygulamanın bluetooth cihazlarını kontrol etmek için yakındaki cihazlara erişim iznine ihtiyacı var</string>
+    <string name="bluetooth_title">Yakındaki cihazlar</string>
     <string name="blur">Bulanıklık</string>
     <string name="blur_card">Bulanık kart</string>
     <string name="bug_report_failed">Bildiri gönderilemiyor</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
-    <string name="bluetooth_title">Yakındaki cihazlar</string>
 </resources>
