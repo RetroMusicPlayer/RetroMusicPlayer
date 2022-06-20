@@ -323,7 +323,7 @@ class CoverLrcView @JvmOverloads constructor(
             if (!hasLrc()) {
                 return@runOnUi
             }
-            val line = findShowLine(time - 300L)
+            val line = findShowLine(time + 300L)
             if (line != mCurrentLine) {
                 mCurrentLine = line
                 if (!isShowTimeline) {

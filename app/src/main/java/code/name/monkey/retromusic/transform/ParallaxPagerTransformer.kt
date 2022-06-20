@@ -22,7 +22,6 @@ import androidx.viewpager.widget.ViewPager
  */
 
 class ParallaxPagerTransformer(private val id: Int) : ViewPager.PageTransformer {
-    private var border = 0
     private var speed = 0.2f
 
     override fun transformPage(page: View, position: Float) {
@@ -32,21 +31,11 @@ class ParallaxPagerTransformer(private val id: Int) : ViewPager.PageTransformer 
                 if (position > -1 && position < 1) {
                     val width = parallaxView.width.toFloat()
                     parallaxView.translationX = -(position * width * speed)
-                    val sc = (width - border) / width
-                    if (position == 0f) {
-                        scaleX = 1f
-                        scaleY = 1f
-                    } else {
-                        scaleX = sc
-                        scaleY = sc
-                    }
+                    scaleX = 1f
+                    scaleY = 1f
                 }
             }
         }
-    }
-
-    fun setBorder(px: Int) {
-        border = px
     }
 
     fun setSpeed(speed: Float) {
