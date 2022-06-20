@@ -92,6 +92,7 @@
     <string name="black_theme_name">Απλά Μαύρο</string>
     <string name="blacklist">Μαύρη λίστα</string>
     <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Θολούρα</string>
     <string name="blur_card">Κάρτα θαμπώματος</string>
     <string name="bug_report_failed">Δεν είναι δυνατή η αποστολή αναφοράς</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Πρέπει να επιλέξετε τουλάχιστον μία κατηγορία.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Θα προωθηθείτε στον ιστότοπο παρακολούθησης ζητημάτων.</string>
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
-    <string name="bluetooth_title">Nearby devices</string>
 </resources>
