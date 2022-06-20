@@ -94,6 +94,7 @@
     <string name="black_theme_name">Negru</string>
     <string name="blacklist">Lista neagră</string>
     <string name="bluetooth_summary">Aplicația are nevoie de permisiunea dispozitive din apropiere pentru a verifica dacă există dispozitive bluetooth</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Estompare</string>
     <string name="blur_card">Estompare card</string>
     <string name="bug_report_failed">Imposibil de trimis raportul</string>
@@ -559,5 +560,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="bluetooth_title">Nearby devices</string>
 </resources>
