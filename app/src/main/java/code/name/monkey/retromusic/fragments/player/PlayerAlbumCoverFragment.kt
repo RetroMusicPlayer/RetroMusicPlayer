@@ -49,7 +49,6 @@ import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.CoverLyricsType
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -250,8 +249,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     private fun updatePlayingQueue() {
         binding.viewPager.apply {
-            adapter = AlbumCoverPagerAdapter(childFragmentManager, MusicPlayerRemote.playingQueue)
-            adapter?.notifyDataSetChanged()
+            adapter = AlbumCoverPagerAdapter(parentFragmentManager, MusicPlayerRemote.playingQueue)
             setCurrentItem(MusicPlayerRemote.position, true)
             onPageSelected(MusicPlayerRemote.position)
         }
@@ -260,7 +258,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
     override fun onPageSelected(position: Int) {
-        logD("Page Selected $position")
         currentPosition = position
         if (binding.viewPager.adapter != null) {
             (binding.viewPager.adapter as AlbumCoverPagerAdapter).receiveColor(
