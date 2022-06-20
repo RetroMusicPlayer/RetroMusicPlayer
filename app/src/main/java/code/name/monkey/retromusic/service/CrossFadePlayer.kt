@@ -333,6 +333,10 @@ internal fun crossFadeScope(): CoroutineScope = CoroutineScope(Job() + Dispatche
 
 fun MediaPlayer.setPlaybackSpeedPitch(speed: Float, pitch: Float) {
     if (hasMarshmallow()) {
+        val wasPlaying = isPlaying
         playbackParams = PlaybackParams().setSpeed(speed).setPitch(pitch)
+        if (!wasPlaying) {
+            pause()
+        }
     }
 }
