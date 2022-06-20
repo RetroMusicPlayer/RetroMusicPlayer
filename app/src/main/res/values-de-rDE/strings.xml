@@ -92,6 +92,7 @@
     <string name="black_theme_name">Einfach Schwarz</string>
     <string name="blacklist">Ausschlussliste</string>
     <string name="bluetooth_summary">Die App benötigt in der Nähe befindliche Geräte, um nach Bluetooth-Geräten zu suchen</string>
+    <string name="bluetooth_title">Geräte in der Nähe</string>
     <string name="blur">Weichzeichner</string>
     <string name="blur_card">Weichgezeichnete Karte</string>
     <string name="bug_report_failed">Fehler beim Melden</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Du musst mindestens eine Kategorie auswählen.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Du wirst auf die Problembehandlungs-Seite weitergeleitet.</string>
     <string name="your_account_data_is_only_used_for_authentication">Deine Accountdaten werden ausschließlich zur Authentifizierung genutzt.</string>
-    <string name="bluetooth_title">Geräte in der Nähe</string>
 </resources>
