@@ -90,6 +90,7 @@
     <string name="black_theme_name">Đen hoàn toàn</string>
     <string name="blacklist">Danh sách đen</string>
     <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Làm mờ</string>
     <string name="blur_card">Thẻ mờ</string>
     <string name="bug_report_failed">Không thể gửi báo cáo</string>
@@ -556,5 +557,4 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="you_have_to_select_at_least_one_category">Bạn phải chọn ít nhất một danh mục.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Bạn sẽ được chuyển tiếp đến trang web theo dõi vấn đề.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
-    <string name="bluetooth_title">Nearby devices</string>
 </resources>
