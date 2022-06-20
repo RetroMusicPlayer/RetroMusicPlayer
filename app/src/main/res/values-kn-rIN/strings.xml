@@ -92,6 +92,7 @@
     <string name="black_theme_name">ಜಸ್ಟ್ ಬ್ಲಾಕ್</string>
     <string name="blacklist">ಕಪ್ಪುಪಟ್ಟಿ</string>
     <string name="bluetooth_summary">ಬ್ಲೂಟೂತ್ ಸಾಧನಗಳನ್ನು ಪರಿಶೀಲಿಸಲು ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಹತ್ತಿರದ ಸಾಧನಗಳ ಅನುಮತಿಗಳ ಅಗತ್ಯವಿದೆ</string>
+    <string name="bluetooth_title">ಹತ್ತಿರದ ಸಾಧನಗಳು</string>
     <string name="blur">ಬ್ಲರ್</string>
     <string name="blur_card">ಬ್ಲರ್ ಕಾರ್ಡ್</string>
     <string name="bug_report_failed">ವರದಿ ಕಳುಹಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ</string>
@@ -558,5 +559,4 @@
     <string name="you_have_to_select_at_least_one_category">ನೀವು ಕನಿಷ್ಠ ಒಂದು ವರ್ಗವನ್ನು ಆಯ್ಕೆ ಮಾಡಬೇಕು.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">ನಿಮ್ಮನ್ನು ಸಮಸ್ಯೆ ಟ್ರ್ಯಾಕರ್ ಜಾಲತಾಣಕ್ಕೆ ರವಾನಿಸಲಾಗುತ್ತದೆ.</string>
     <string name="your_account_data_is_only_used_for_authentication">ನಿಮ್ಮ ಖಾತೆಯ ಡೇಟಾವನ್ನು ದೃಢೀಕರಣಕ್ಕಾಗಿ ಮಾತ್ರ ಬಳಸಲಾಗುತ್ತದೆ.</string>
-    <string name="bluetooth_title">ಹತ್ತಿರದ ಸಾಧನಗಳು</string>
 </resources>
