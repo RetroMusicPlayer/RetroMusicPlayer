@@ -92,6 +92,7 @@
     <string name="black_theme_name">Noir Complet</string>
     <string name="blacklist">Liste noire</string>
     <string name="bluetooth_summary">L\'application nécessite la permission des appareils à proximité pour vérifier la disponibilité d\'appareils Bluetooth</string>
+    <string name="bluetooth_title">Appareils à proximité</string>
     <string name="blur">Flou</string>
     <string name="blur_card">Carte floue</string>
     <string name="bug_report_failed">Impossible d\'envoyer le rapport de bug</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Vous devez sélectionner au moins une catégorie.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
-    <string name="bluetooth_title">Appareils à proximité</string>
 </resources>
