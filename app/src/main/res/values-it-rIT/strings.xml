@@ -93,6 +93,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="black_theme_name">Solo nero</string>
     <string name="blacklist">Blacklist</string>
     <string name="bluetooth_summary">L\'app richiede l\'autorizzazione dei dispositivi nelle vicinanze per verificare la presenza di dispositivi Bluetooth</string>
+    <string name="bluetooth_title">Dispositivi nelle vicinanze</string>
     <string name="blur">Sfocatura</string>
     <string name="blur_card">Card sfocata</string>
     <string name="bug_report_failed">Impossibile inviare il rapporto</string>
@@ -558,5 +559,4 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="you_have_to_select_at_least_one_category">Seleziona almeno una categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Verrai reindirizzato al sito web dei problemi.</string>
     <string name="your_account_data_is_only_used_for_authentication">I dati del tuo account vengono utilizzati solo per l\'autenticazione.</string>
-    <string name="bluetooth_title">Dispositivi nelle vicinanze</string>
 </resources>
