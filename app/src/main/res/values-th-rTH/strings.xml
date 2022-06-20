@@ -90,6 +90,7 @@
     <string name="black_theme_name">Just Black</string>
     <string name="blacklist">แบล็คลิสต์</string>
     <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Blur</string>
     <string name="blur_card">Blur Card</string>
     <string name="bug_report_failed">ไม่สามารถส่งรายการได้</string>
@@ -433,7 +434,7 @@
     <string name="remove_song_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
     <string name="remove_song_x_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="remove_songs_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$d</b> ออกจากเพลย์ลิสต์?]]></string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="rename_playlist_title">เปลี่ยนขื่อเพลย์ลิสต์</string>
     <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">รายการปัญหา</string>
@@ -555,5 +556,4 @@
     <string name="you_have_to_select_at_least_one_category">คุณต้องเลือกอย่างน้อยหนึ่งหมวดหมู่</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">ท่านจะติดตามการรายงานปัญหาจากเว็บไซต์</string>
     <string name="your_account_data_is_only_used_for_authentication">ข้อมูลบัญชีของท่านจะใช้สำหรับการเข้าสู่ระบบเท่านั้น</string>
-    <string name="bluetooth_title">Nearby devices</string>
 </resources>
