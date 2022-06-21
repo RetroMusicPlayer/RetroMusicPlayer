@@ -60,8 +60,7 @@ class SongShareDialog : DialogFragment() {
             0 -> {
                 startActivity(Intent.createChooser(song?.let {
                     MusicUtil.createShareSongFileIntent(
-                        it,
-                        requireContext()
+                        requireContext(), it
                     )
                 }, null))
             }

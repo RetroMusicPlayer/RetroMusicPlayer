@@ -41,20 +41,46 @@ import java.util.regex.Pattern
 
 
 object MusicUtil : KoinComponent {
-    fun createShareSongFileIntent(song: Song, context: Context): Intent {
+    fun createShareSongFileIntent(context: Context, song: Song): Intent {
         return Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_STREAM, try {
-                FileProvider.getUriForFile(
-                    context,
-                    context.applicationContext.packageName,
-                    File(song.data)
-                )
-            } catch (e: IllegalArgumentException) {
-                getSongFileUri(song.id)
-            })
+            putExtra(
+                Intent.EXTRA_STREAM, try {
+                    FileProvider.getUriForFile(
+                        context,
+                        context.applicationContext.packageName,
+                        File(song.data)
+                    )
+                } catch (e: IllegalArgumentException) {
+                    getSongFileUri(song.id)
+                }
+            )
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             type = "audio/*"
+        }
+    }
+
+    fun createShareMultipleSongIntent(context: Context, songs: List<Song>): Intent {
+        return Intent().apply {
+            action = Intent.ACTION_SEND_MULTIPLE
+            type = "audio/*"
+
+            val files = ArrayList<Uri>()
+
+            for (song in songs) {
+                files.add(
+                    try {
+                        FileProvider.getUriForFile(
+                            context,
+                            context.applicationContext.packageName,
+                            File(song.data)
+                        )
+                    } catch (e: IllegalArgumentException) {
+                        getSongFileUri(song.id)
+                    }
+                )
+            }
+            putParcelableArrayListExtra(Intent.EXTRA_STREAM, files)
         }
     }
 

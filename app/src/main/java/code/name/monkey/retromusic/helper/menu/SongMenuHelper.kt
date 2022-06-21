@@ -64,7 +64,7 @@ object SongMenuHelper : KoinComponent {
             R.id.action_share -> {
                 activity.startActivity(
                     Intent.createChooser(
-                        MusicUtil.createShareSongFileIntent(song, activity),
+                        MusicUtil.createShareSongFileIntent(activity, song),
                         null
                     )
                 )
