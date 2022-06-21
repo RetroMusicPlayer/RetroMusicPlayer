@@ -30,7 +30,6 @@ android {
     }
     buildTypes {
         release {
-            versionNameSuffix "_" + getDate()
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -86,10 +85,6 @@ def getProperties(String fileName) {
 
 static def getProperty(Properties properties, String name) {
     return properties.getProperty(name) ?: "$name missing"
-}
-
-static def getDate() {
-    new Date().format('MMddyyyyss')
 }
 
 dependencies {
