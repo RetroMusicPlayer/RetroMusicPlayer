@@ -1,17 +1,3 @@
-/*
- * Copyright (c) 2020 Hemanth Savarla.
- *
- * Licensed under the GNU General Public License v3
- *
- * This is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- *
- */
 package code.name.monkey.retromusic.activities
 
 import android.content.res.ColorStateList
@@ -22,7 +8,7 @@ import android.view.MenuItem
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
-import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
+import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityProVersionBinding
@@ -58,7 +44,7 @@ class PurchaseActivity : AbsThemeActivity(), BillingProcessor.IBillingHandler {
             restorePurchase()
         }
         binding.purchaseButton.setOnClickListener {
-            billingProcessor.purchase(this@PurchaseActivity, PRO_VERSION_PRODUCT_ID)
+            billingProcessor.purchase(this@PurchaseActivity, Constants.PRO_VERSION_PRODUCT_ID)
         }
         binding.bannerContainer.backgroundTintList =
             ColorStateList.valueOf(accentColor())

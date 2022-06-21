@@ -1,0 +1,20 @@
+Retro Music Player 🎵
+
+<b>📦 Included Features</b>
+<ul>
+    <li>Base 3 themes (Clearly White, Kinda Dark and Just Black)</li>
+    <li>Material You support on Android 12+</li>
+    <li>Gapless playback</li>
+    <li>Crossfade playback</li>
+    <li>Choose from 10+ now playing themes</li>
+    <li>Android auto support</li>
+    <li>Wallpaper accent picker on Android 8.1+</li>
+    <li>Home screen widgets</li>
+    <li>Lock screen playback controls</li>
+    <li>Sleep timer</li>
+    <li>Easy drag to sort playlist & play queue</li>
+    <li>Tag editor</li>
+    <li>Create, edit and import playlists</li>
+    <li>Browse and play your music by songs, albums, artists, playlists and genre</li>
+    <li>Smart Auto Playlists - Recently played, most played and history</li>
+</ul>

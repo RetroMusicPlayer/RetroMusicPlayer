@@ -12,11 +12,10 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.fragments.other
+package code.name.monkey.retromusic.fragments.lyrics
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -26,23 +25,19 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.transition.Fade
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.TagWriter
 import code.name.monkey.retromusic.databinding.FragmentLyricsBinding
-import code.name.monkey.retromusic.databinding.FragmentNormalLyricsBinding
-import code.name.monkey.retromusic.databinding.FragmentSyncedLyricsBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.materialDialog
+import code.name.monkey.retromusic.extensions.openUrl
+import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.lyrics.LrcView
@@ -52,7 +47,6 @@ import code.name.monkey.retromusic.util.FileUtils
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.UriUtil
 import com.afollestad.materialdialogs.input.input
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jaudiotagger.audio.AudioFileIO
@@ -60,14 +54,23 @@ import org.jaudiotagger.tag.FieldKey
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
+import kotlin.collections.set
 
-class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
+class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics),
+    MusicProgressViewUpdateHelper.Callback {
 
     private var _binding: FragmentLyricsBinding? = null
     private val binding get() = _binding!!
     private lateinit var song: Song
 
-    private lateinit var lyricsSectionsAdapter: LyricsSectionsAdapter
+    private lateinit var normalLyricsLauncher: ActivityResultLauncher<IntentSenderRequest>
+    private lateinit var editSyncedLyricsLauncher: ActivityResultLauncher<IntentSenderRequest>
+
+    private lateinit var cacheFile: File
+    private var syncedLyrics: String = ""
+    private lateinit var syncedFileUri: Uri
+
+    private var lyricsType: LyricsType = LyricsType.NORMAL_LYRICS
 
     private val googleSearchLrcUrl: String
         get() {
@@ -77,22 +80,8 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
             baseUrl += query
             return baseUrl
         }
-    private val syairSearchLrcUrl: String
-        get() {
-            var baseUrl = "https://www.syair.info/search?"
-            var query = song.title + "+" + song.artistName
-            query = "q=" + query.replace(" ", "+")
-            baseUrl += query
-            return baseUrl
-        }
 
-    private lateinit var normalLyricsLauncher: ActivityResultLauncher<IntentSenderRequest>
-    private lateinit var newSyncedLyricsLauncher: ActivityResultLauncher<Intent>
-    private lateinit var editSyncedLyricsLauncher: ActivityResultLauncher<IntentSenderRequest>
-
-    private lateinit var cacheFile: File
-    private var syncedLyrics: String = ""
-    private lateinit var syncedFileUri: Uri
+    private lateinit var updateHelper: MusicProgressViewUpdateHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,14 +90,6 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
             registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
                 if (it.resultCode == Activity.RESULT_OK) {
                     FileUtils.copyFileToUri(requireContext(), cacheFile, song.uri)
-                }
-            }
-        newSyncedLyricsLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    context?.contentResolver?.openOutputStream(result.data?.data!!)?.use {
-                        it.write(syncedLyrics.toByteArray())
-                    }
                 }
             }
         editSyncedLyricsLauncher =
@@ -127,36 +108,42 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
         super.onViewCreated(view, savedInstanceState)
         enterTransition = Fade()
         exitTransition = Fade()
-        updateTitleSong()
-        lyricsSectionsAdapter = LyricsSectionsAdapter(requireActivity())
         _binding = FragmentLyricsBinding.bind(view)
-        binding.container.transitionName = "lyrics"
+        updateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
+        updateTitleSong()
+        setupLyricsView()
+        loadLyrics()
 
         setupWakelock()
         setupViews()
         setupToolbar()
     }
 
-    private fun setupViews() {
-        binding.lyricsPager.adapter = lyricsSectionsAdapter
-        TabLayoutMediator(binding.tabLyrics, binding.lyricsPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> getString(R.string.synced_lyrics)
-                1 -> getString(R.string.normal_lyrics)
-                else -> ""
-            }
-        }.attach()
-//        lyricsPager.isUserInputEnabled = false
+    private fun setupLyricsView() {
+        binding.lyricsView.apply {
+            setCurrentColor(accentColor())
+            setTimeTextColor(accentColor())
+            setTimelineColor(accentColor())
+            setTimelineTextColor(accentColor())
+            setDraggable(true, LrcView.OnPlayClickListener {
+                MusicPlayerRemote.seekTo(it.toInt())
+                return@OnPlayClickListener true
+            })
+        }
+    }
 
-        binding.tabLyrics.setSelectedTabIndicatorColor(accentColor())
-        binding.tabLyrics.setTabTextColors(textColorSecondary(), accentColor())
+    override fun onUpdateProgressViews(progress: Int, total: Int) {
+        binding.lyricsView.updateTime(progress.toLong())
+    }
+
+    private fun setupViews() {
         binding.editButton.accentColor()
         binding.editButton.setOnClickListener {
-            when (binding.lyricsPager.currentItem) {
-                0 -> {
+            when (lyricsType) {
+                LyricsType.SYNCED_LYRICS -> {
                     editSyncedLyrics()
                 }
-                1 -> {
+                LyricsType.NORMAL_LYRICS -> {
                     editNormalLyrics()
                 }
             }
@@ -166,11 +153,13 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
     override fun onPlayingMetaChanged() {
         super.onPlayingMetaChanged()
         updateTitleSong()
+        loadLyrics()
     }
 
     override fun onServiceConnected() {
         super.onServiceConnected()
         updateTitleSong()
+        loadLyrics()
     }
 
     private fun updateTitleSong() {
@@ -190,7 +179,7 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
     }
 
     override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_search, menu)
+        inflater.inflate(R.menu.menu_lyrics, menu)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
             binding.toolbar,
@@ -201,26 +190,22 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
 
     override fun onMenuItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            openUrl(when (binding.lyricsPager.currentItem) {
-                    0 -> syairSearchLrcUrl
-                    1 -> googleSearchLrcUrl
-                    else -> googleSearchLrcUrl
-                }
-            )
+            openUrl(googleSearchLrcUrl)
         }
         return false
     }
 
-
     @SuppressLint("CheckResult")
-    private fun editNormalLyrics() {
-        var content = ""
-        val file = File(MusicPlayerRemote.currentSong.data)
-        try {
-            content = AudioFileIO.read(file).tagOrCreateDefault.getFirst(FieldKey.LYRICS)
+    private fun editNormalLyrics(lyrics: String? = null) {
+        val file = File(song.data)
+        val content = lyrics ?: try {
+            AudioFileIO.read(file).tagOrCreateDefault.getFirst(FieldKey.LYRICS)
         } catch (e: Exception) {
             e.printStackTrace()
+            ""
         }
+
+        val song = song
 
         materialDialog().show {
             title(res = R.string.edit_normal_lyrics)
@@ -231,7 +216,6 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
             ) { _, input ->
                 val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
                 fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
-                syncedLyrics = input.toString()
                 GlobalScope.launch {
                     if (VersionUtils.hasR()) {
                         cacheFile = TagWriter.writeTagsToFilesR(
@@ -258,7 +242,7 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
                 }
             }
             positiveButton(res = R.string.save) {
-                (lyricsSectionsAdapter.fragments[1].first as NormalLyrics).loadNormalLyrics()
+                loadNormalLyrics()
             }
             negativeButton(res = android.R.string.cancel)
         }
@@ -266,9 +250,10 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
 
 
     @SuppressLint("CheckResult")
-    private fun editSyncedLyrics() {
-        val content: String = LyricUtil.getStringFromLrc(LyricUtil.getSyncedLyricsFile(song))
+    private fun editSyncedLyrics(lyrics: String? = null) {
+        val content = lyrics ?: LyricUtil.getStringFromLrc(LyricUtil.getSyncedLyricsFile(song))
 
+        val song = song
         materialDialog().show {
             title(res = R.string.edit_synced_lyrics)
             input(
@@ -291,151 +276,97 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics) {
                             IntentSenderRequest.Builder(pendingIntent).build()
                         )
                     } else {
-                        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
-                        intent.addCategory(Intent.CATEGORY_OPENABLE)
-                        intent.type = "*/*"
-                        intent.putExtra(
-                            Intent.EXTRA_TITLE,
-                            LyricUtil.getLrcOriginalPath(File(song.data).name)
-                        )
-                        newSyncedLyricsLauncher.launch(intent)
+                        val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
+                        fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
+                        GlobalScope.launch {
+                            cacheFile = TagWriter.writeTagsToFilesR(
+                                requireContext(),
+                                AudioTagInfo(listOf(song.data), fieldKeyValueMap, null)
+                            )[0]
+                            val pendingIntent = MediaStore.createWriteRequest(
+                                requireContext().contentResolver,
+                                listOf(song.uri)
+                            )
+
+                            normalLyricsLauncher.launch(
+                                IntentSenderRequest.Builder(pendingIntent).build()
+                            )
+                        }
                     }
                 } else {
                     LyricUtil.writeLrc(song, input.toString())
                 }
             }
             positiveButton(res = R.string.save) {
-                (lyricsSectionsAdapter.fragments[0].first as SyncedLyrics).loadLRCLyrics()
+                loadLRCLyrics()
             }
             negativeButton(res = android.R.string.cancel)
         }
     }
 
-    class LyricsSectionsAdapter(fragmentActivity: FragmentActivity) :
-        FragmentStateAdapter(fragmentActivity) {
-        val fragments = listOf(
-            Pair(SyncedLyrics(), R.string.synced_lyrics),
-            Pair(NormalLyrics(), R.string.normal_lyrics)
-        )
-
-
-        override fun getItemCount(): Int {
-            return fragments.size
+    private fun loadNormalLyrics() {
+        var lyrics: String? = null
+        val file = File(song.data)
+        try {
+            lyrics = AudioFileIO.read(file).tagOrCreateDefault.getFirst(FieldKey.LYRICS)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+        binding.noLyricsFound.isVisible = lyrics.isNullOrEmpty()
+        binding.normalLyrics.text = lyrics
+    }
 
-        override fun createFragment(position: Int): Fragment {
-            return fragments[position].first
+    /**
+     * @return success
+     */
+    private fun loadLRCLyrics(): Boolean {
+        binding.lyricsView.setLabel(getString(R.string.empty))
+        val lrcFile = LyricUtil.getSyncedLyricsFile(song)
+        if (lrcFile != null) {
+            binding.lyricsView.loadLrc(lrcFile)
+            println("File: ${lrcFile.absolutePath}")
+        } else {
+            val embeddedLyrics = LyricUtil.getEmbeddedSyncedLyrics(song.data)
+            if (embeddedLyrics != null) {
+                binding.lyricsView.loadLrc(embeddedLyrics)
+                println("Lyrics: ${embeddedLyrics.substring(0..50)}")
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun loadLyrics() {
+        lyricsType = if (!loadLRCLyrics()) {
+            loadNormalLyrics()
+            LyricsType.SYNCED_LYRICS
+        } else {
+            binding.noLyricsFound.isVisible = false
+            binding.normalLyrics.text = ""
+            LyricsType.NORMAL_LYRICS
         }
     }
 
-    class NormalLyrics : AbsMusicServiceFragment(R.layout.fragment_normal_lyrics) {
-
-        private var _binding: FragmentNormalLyricsBinding? = null
-        private val binding get() = _binding!!
-
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            _binding = FragmentNormalLyricsBinding.bind(view)
-            loadNormalLyrics()
-            super.onViewCreated(view, savedInstanceState)
-        }
-
-        fun loadNormalLyrics() {
-            var lyrics: String? = null
-            val file = File(MusicPlayerRemote.currentSong.data)
-            try {
-                lyrics = AudioFileIO.read(file).tagOrCreateDefault.getFirst(FieldKey.LYRICS)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            binding.noLyricsFound.isVisible = lyrics.isNullOrEmpty()
-            binding.normalLyrics.text = lyrics
-        }
-
-        override fun onPlayingMetaChanged() {
-            super.onPlayingMetaChanged()
-            loadNormalLyrics()
-        }
-
-        override fun onServiceConnected() {
-            super.onServiceConnected()
-            loadNormalLyrics()
-        }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }
+    override fun onResume() {
+        super.onResume()
+        updateHelper.start()
     }
 
-    class SyncedLyrics : AbsMusicServiceFragment(R.layout.fragment_synced_lyrics),
-        MusicProgressViewUpdateHelper.Callback {
-
-        private var _binding: FragmentSyncedLyricsBinding? = null
-        private val binding get() = _binding!!
-        private lateinit var updateHelper: MusicProgressViewUpdateHelper
-
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            updateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
-            _binding = FragmentSyncedLyricsBinding.bind(view)
-            setupLyricsView()
-            loadLRCLyrics()
-            super.onViewCreated(view, savedInstanceState)
-        }
-
-        fun loadLRCLyrics() {
-            binding.lyricsView.setLabel(getString(R.string.empty))
-            LyricUtil.getSyncedLyricsFile(MusicPlayerRemote.currentSong)?.let {
-                binding.lyricsView.loadLrc(it)
-            }
-        }
-
-        private fun setupLyricsView() {
-            binding.lyricsView.apply {
-                setCurrentColor(accentColor())
-                setTimeTextColor(accentColor())
-                setTimelineColor(accentColor())
-                setTimelineTextColor(accentColor())
-                setDraggable(true, LrcView.OnPlayClickListener {
-                    MusicPlayerRemote.seekTo(it.toInt())
-                    return@OnPlayClickListener true
-                })
-            }
-        }
-
-        override fun onUpdateProgressViews(progress: Int, total: Int) {
-            binding.lyricsView.updateTime(progress.toLong())
-        }
-
-        override fun onPlayingMetaChanged() {
-            super.onPlayingMetaChanged()
-            loadLRCLyrics()
-        }
-
-        override fun onServiceConnected() {
-            super.onServiceConnected()
-            loadLRCLyrics()
-        }
-
-        override fun onResume() {
-            super.onResume()
-            updateHelper.start()
-        }
-
-        override fun onPause() {
-            super.onPause()
-            updateHelper.stop()
-        }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }
+    override fun onPause() {
+        super.onPause()
+        updateHelper.stop()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         if (MusicPlayerRemote.playingQueue.isNotEmpty())
-            (requireActivity() as MainActivity).expandPanel()
+            mainActivity.expandPanel()
         _binding = null
+    }
+
+    enum class LyricsType {
+        NORMAL_LYRICS,
+        SYNCED_LYRICS
     }
 }

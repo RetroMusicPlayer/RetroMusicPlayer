@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.navigationrail.NavigationRailView
+        <code.name.monkey.retromusic.views.TintedNavigationRailView
             android:id="@+id/navigationView"
             style="@style/Widget.Material3.NavigationRailView"
             android:layout_width="wrap_content"

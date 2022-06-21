@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMainSettingsBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBarsWithPadding
+import code.name.monkey.retromusic.extensions.goToProVersion
 import code.name.monkey.retromusic.util.NavigationUtil
 
 class MainSettingsFragment : Fragment(), View.OnClickListener {
@@ -77,11 +78,11 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         binding.buyProContainer.apply {
             isGone = App.isProVersion()
             setOnClickListener {
-                NavigationUtil.goToProVersion(requireContext())
+                requireContext().goToProVersion()
             }
         }
         binding.buyPremium.setOnClickListener {
-            NavigationUtil.goToProVersion(requireContext())
+            requireContext().goToProVersion()
         }
         ThemeStore.accentColor(requireContext()).let {
             binding.buyPremium.setTextColor(it)

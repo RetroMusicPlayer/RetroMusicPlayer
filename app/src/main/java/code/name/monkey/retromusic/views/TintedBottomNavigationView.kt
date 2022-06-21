@@ -19,14 +19,13 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.NavigationViewUtil
 import code.name.monkey.retromusic.extensions.addAlpha
+import code.name.monkey.retromusic.extensions.setItemColors
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dev.chrisbanes.insetter.applyInsetter
 
-class BottomNavigationBarTinted @JvmOverloads constructor(
+class TintedBottomNavigationView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -55,16 +54,7 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
             if (!PreferenceUtil.materialYou) {
                 val iconColor = ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
                 val accentColor = ThemeStore.accentColor(context)
-                NavigationViewUtil.setItemIconColors(
-                    this,
-                    ColorUtil.withAlpha(iconColor, 0.5f),
-                    accentColor
-                )
-                NavigationViewUtil.setItemTextColors(
-                    this,
-                    ColorUtil.withAlpha(iconColor, 0.5f),
-                    accentColor
-                )
+                setItemColors(iconColor, accentColor)
                 itemRippleColor = ColorStateList.valueOf(accentColor.addAlpha(0.08F))
                 itemActiveIndicatorColor = ColorStateList.valueOf(accentColor.addAlpha(0.12F))
             }

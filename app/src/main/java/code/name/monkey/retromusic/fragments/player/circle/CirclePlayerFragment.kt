@@ -35,7 +35,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentCirclePlayerBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -315,16 +314,10 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         val progressSlider = binding.progressSlider
         progressSlider.valueTo = total.toFloat()
 
-        if (isSeeking) {
-            progressSlider.value = progress.toFloat()
-        } else {
-            progressAnimator =
-                ObjectAnimator.ofFloat(progressSlider, "value", progress.toFloat()).apply {
-                    duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
-                    interpolator = LinearInterpolator()
-                    start()
-                }
-        }
+        progressSlider.valueTo = total.toFloat()
+
+        progressSlider.value =
+            progress.toFloat().coerceIn(progressSlider.valueFrom, progressSlider.valueTo)
 
         binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())

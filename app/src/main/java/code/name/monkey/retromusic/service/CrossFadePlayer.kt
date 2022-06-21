@@ -37,7 +37,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     private var crossFadeAnimator: Animator? = null
     override var callbacks: PlaybackCallbacks? = null
     private var crossFadeDuration = PreferenceUtil.crossFadeDuration
-    private var isCrossFading = false
+    var isCrossFading = false
 
     init {
         player1.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
@@ -120,17 +120,25 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     override val isPlaying: Boolean
         get() = mIsInitialized && getCurrentPlayer()?.isPlaying == true
 
-    override fun setDataSource(song: Song, force: Boolean): Boolean {
+    override fun setDataSource(
+        song: Song,
+        force: Boolean,
+        completion: (success: Boolean) -> Unit,
+    ) {
         if (force) hasDataSource = false
         mIsInitialized = false
         /* We've already set DataSource if initialized is true in setNextDataSource */
-        return if (!hasDataSource) {
-            mIsInitialized = setDataSourceImpl(getCurrentPlayer()!!, song.uri.toString())
+        if (!hasDataSource) {
+            getCurrentPlayer()?.let {
+                setDataSourceImpl(it, song.uri.toString()) { success ->
+                    mIsInitialized = success
+                    completion(success)
+                }
+            }
             hasDataSource = true
-            mIsInitialized
         } else {
+            completion(true)
             mIsInitialized = true
-            true
         }
     }
 
@@ -285,8 +293,8 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
                 val nextSong = MusicPlayerRemote.nextSong
                 // Switch to other player (Crossfade) only if next song exists
                 if (nextSong != null) {
-                    if (setDataSourceImpl(player, nextSong.uri.toString())) {
-                        switchPlayer()
+                    setDataSourceImpl(player, nextSong.uri.toString()) { success ->
+                        if (success) switchPlayer()
                     }
                 }
             }
@@ -295,7 +303,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
 
     private fun switchPlayer() {
         getNextPlayer()?.start()
-        crossFade(getCurrentPlayer()!!, getNextPlayer()!!)
+        crossFade(getNextPlayer()!!, getCurrentPlayer()!!)
         currentPlayer =
             if (currentPlayer == CurrentPlayer.PLAYER_ONE || currentPlayer == CurrentPlayer.NOT_SET) {
                 CurrentPlayer.PLAYER_TWO
@@ -325,6 +333,10 @@ internal fun crossFadeScope(): CoroutineScope = CoroutineScope(Job() + Dispatche
 
 fun MediaPlayer.setPlaybackSpeedPitch(speed: Float, pitch: Float) {
     if (hasMarshmallow()) {
+        val wasPlaying = isPlaying
         playbackParams = PlaybackParams().setSpeed(speed).setPitch(pitch)
+        if (!wasPlaying) {
+            pause()
+        }
     }
 }

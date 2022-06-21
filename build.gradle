@@ -2,11 +2,13 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.6.21'
-        navigation_version = '2.5.0-rc01'
+        kotlin_version = '1.7.0'
+        lifecycle_version='2.5.0-rc02'
+        navigation_version = '2.5.0-rc02'
         mdc_version = '1.7.0-alpha02'
         preference_version = '1.2.0'
         appcompat_version = '1.4.2'
+        core_version='1.8.0'
     }
 
     repositories {

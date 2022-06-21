@@ -115,7 +115,7 @@ object PreferenceUtil {
             putString(SAF_SDCARD_URI, value)
         }
 
-    val autoDownloadImagesPolicy
+    private val autoDownloadImagesPolicy
         get() = sharedPreferences.getStringOrDefault(
             AUTO_DOWNLOAD_IMAGES_POLICY,
             "only_wifi"
@@ -241,8 +241,6 @@ object PreferenceUtil {
         set(value) = sharedPreferences.edit { putBoolean(CLASSIC_NOTIFICATION, value) }
 
     val isScreenOnEnabled get() = sharedPreferences.getBoolean(KEEP_SCREEN_ON, false)
-
-    val isShuffleModeOn get() = sharedPreferences.getBoolean(TOGGLE_SHUFFLE, false)
 
     val isSongInfo get() = sharedPreferences.getBoolean(EXTRA_SONG_INFO, false)
 
@@ -472,10 +470,10 @@ object PreferenceUtil {
     val tabTitleMode: Int
         get() {
             return when (sharedPreferences.getStringOrDefault(
-                TAB_TEXT_MODE, "1"
+                TAB_TEXT_MODE, "0"
             ).toInt()) {
-                1 -> BottomNavigationView.LABEL_VISIBILITY_LABELED
                 0 -> BottomNavigationView.LABEL_VISIBILITY_AUTO
+                1 -> BottomNavigationView.LABEL_VISIBILITY_LABELED
                 2 -> BottomNavigationView.LABEL_VISIBILITY_SELECTED
                 3 -> BottomNavigationView.LABEL_VISIBILITY_UNLABELED
                 else -> BottomNavigationView.LABEL_VISIBILITY_LABELED
@@ -697,11 +695,11 @@ object PreferenceUtil {
     val isSnowFalling
         get() = sharedPreferences.getBoolean(SNOWFALL, false)
 
-    val lyricsType: LyricsType
+    val lyricsType: CoverLyricsType
         get() = if (sharedPreferences.getString(LYRICS_TYPE, "0") == "0") {
-            LyricsType.REPLACE_COVER
+            CoverLyricsType.REPLACE_COVER
         } else {
-            LyricsType.OVER_COVER
+            CoverLyricsType.OVER_COVER
         }
 
     var playbackSpeed
@@ -740,6 +738,6 @@ object PreferenceUtil {
         get() = sharedPreferences.getBoolean(SWIPE_DOWN_DISMISS, true)
 }
 
-enum class LyricsType {
+enum class CoverLyricsType {
     REPLACE_COVER, OVER_COVER
 }

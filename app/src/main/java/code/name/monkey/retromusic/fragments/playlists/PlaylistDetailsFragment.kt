@@ -23,7 +23,9 @@ import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.interfaces.ICabCallback
 import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
+import code.name.monkey.retromusic.util.ThemedFastScroller
 import com.afollestad.materialcab.attached.AttachedCab
 import com.afollestad.materialcab.attached.destroy
 import com.afollestad.materialcab.attached.isActive
@@ -71,6 +73,8 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         binding.container.transitionName = "playlist"
         playlist = arguments.extraPlaylist
         binding.toolbar.title = playlist.playlistEntity.playlistName
+        binding.toolbar.subtitle =
+            MusicUtil.getPlaylistInfoString(requireContext(), playlist.songs.toSongs())
         setUpRecyclerView()
         viewModel.getSongs().observe(viewLifecycleOwner) {
             songs(it.toSongs())
@@ -109,6 +113,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             binding.recyclerView.adapter = wrappedAdapter
+            ThemedFastScroller.create(this)
         }
         playlistSongAdapter.registerAdapterDataObserver(object :
             RecyclerView.AdapterDataObserver() {

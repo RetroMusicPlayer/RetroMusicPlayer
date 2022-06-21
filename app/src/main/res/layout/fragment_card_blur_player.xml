@@ -25,64 +25,83 @@
     <include layout="@layout/shadow_statusbar_toolbar" />
 
 
-    <FrameLayout
-        android:id="@+id/cardContainer"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <include layout="@layout/status_bar" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:ellipsize="end"
+            android:focusable="true"
+            android:freezesText="true"
+            android:paddingHorizontal="24dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textAppearance="@style/TextViewHeadline6"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem" />
 
-            <include layout="@layout/status_bar" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:ellipsize="end"
+            android:focusable="true"
+            android:freezesText="true"
+            android:paddingHorizontal="24dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textAppearance="@style/TextViewBody1"
+            android:textColor="?android:attr/textColorPrimary"
+            tools:text="@tools:sample/lorem" />
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/playerToolbar"
-                style="@style/Toolbar"
+        <FrameLayout
+            android:id="@+id/cardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/playerAlbumCoverFragment"
+                android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_album_full_card_cover" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/cover_lyrics"
+                android:name="code.name.monkey.retromusic.fragments.player.CoverLyricsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                tools:layout="@layout/fragment_cover_lyrics" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/playbackControlsFragment"
+                android:name="code.name.monkey.retromusic.fragments.player.cardblur.CardBlurPlaybackControlsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                        app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                app:contentInsetStartWithNavigation="0dp"
-                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
-                app:titleMargin="0dp"
-                app:titleMarginStart="0dp"
-                app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                android:layout_gravity="bottom"
+                tools:layout="@layout/fragment_card_blur_player_playback_controls" />
+        </FrameLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1">
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/playerAlbumCoverFragment"
-                    android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:layout="@layout/fragment_album_card_cover" />
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/cover_lyrics"
-                    android:name="code.name.monkey.retromusic.fragments.player.CoverLyricsFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    tools:layout="@layout/fragment_cover_lyrics" />
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/playbackControlsFragment"
-            android:name="code.name.monkey.retromusic.fragments.player.cardblur.CardBlurPlaybackControlsFragment"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/playerToolbar"
+            style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            tools:layout="@layout/fragment_card_blur_player_playback_controls" />
-    </FrameLayout>
+            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
+    </LinearLayout>
 
 </FrameLayout>

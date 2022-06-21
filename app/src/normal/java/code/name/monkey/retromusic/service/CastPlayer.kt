@@ -10,8 +10,7 @@ import com.google.android.gms.cast.MediaStatus
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.cast.framework.media.RemoteMediaClient
 
-class CastPlayer(castSession: CastSession) : Playback,
-    RemoteMediaClient.Callback() {
+class CastPlayer(castSession: CastSession) : Playback, RemoteMediaClient.Callback() {
 
     override val isInitialized: Boolean = true
 
@@ -33,15 +32,19 @@ class CastPlayer(castSession: CastSession) : Playback,
 
     override var callbacks: Playback.PlaybackCallbacks? = null
 
-    override fun setDataSource(song: Song, force: Boolean): Boolean {
-        return try {
+    override fun setDataSource(
+        song: Song,
+        force: Boolean,
+        completion: (success: Boolean) -> Unit,
+    ) {
+        try {
             val mediaLoadOptions =
                 MediaLoadOptions.Builder().setPlayPosition(0).setAutoplay(true).build()
             remoteMediaClient?.load(song.toMediaInfo()!!, mediaLoadOptions)
-            true
+            completion(true)
         } catch (e: Exception) {
             e.printStackTrace()
-            false
+            completion(false)
         }
     }
 

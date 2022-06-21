@@ -26,6 +26,7 @@ import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.dip
+import code.name.monkey.retromusic.extensions.goToProVersion
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -39,7 +40,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
     internal fun showProToastAndNavigate(message: String) {
         showToast(getString(R.string.message_pro_feature, message))
-        NavigationUtil.goToProVersion(requireActivity())
+        requireContext().goToProVersion()
     }
 
     internal fun setSummary(preference: Preference, value: Any?) {

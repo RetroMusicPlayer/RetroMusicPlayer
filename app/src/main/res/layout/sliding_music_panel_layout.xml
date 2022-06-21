@@ -42,7 +42,7 @@
 
     </FrameLayout>
 
-    <code.name.monkey.retromusic.views.BottomNavigationBarTinted
+    <code.name.monkey.retromusic.views.TintedBottomNavigationView
         android:id="@+id/navigationView"
         style="@style/Widget.Material3.BottomNavigationView"
         android:layout_width="match_parent"

@@ -24,9 +24,10 @@ class MusicProgressViewUpdateHelper : Handler {
     private var callback: Callback? = null
     private var intervalPlaying: Int = 0
     private var intervalPaused: Int = 0
+    private var firstUpdate = true
 
     fun start() {
-        queueNextRefresh(1)
+        queueNextRefresh(refreshProgressViews().toLong())
     }
 
     fun stop() {
@@ -59,10 +60,11 @@ class MusicProgressViewUpdateHelper : Handler {
     private fun refreshProgressViews(): Int {
         val progressMillis = MusicPlayerRemote.songProgressMillis
         val totalMillis = MusicPlayerRemote.songDurationMillis
-        if (totalMillis > 0)
+        if (totalMillis > 0) {
+            firstUpdate = false
             callback?.onUpdateProgressViews(progressMillis, totalMillis)
-
-        if (!MusicPlayerRemote.isPlaying) {
+        }
+        if (!MusicPlayerRemote.isPlaying && !firstUpdate) {
             return intervalPaused
         }
 
@@ -84,7 +86,7 @@ class MusicProgressViewUpdateHelper : Handler {
     companion object {
         private const val CMD_REFRESH_PROGRESS_VIEWS = 1
         private const val MIN_INTERVAL = 20
-        private const val UPDATE_INTERVAL_PLAYING = 1000
+        private const val UPDATE_INTERVAL_PLAYING = 500
         private const val UPDATE_INTERVAL_PAUSED = 500
     }
 }

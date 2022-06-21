@@ -14,9 +14,11 @@
  */
 package code.name.monkey.retromusic.extensions
 
+import android.R
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.res.ColorStateList
 import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +27,7 @@ import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import androidx.annotation.Px
 import androidx.core.animation.doOnEnd
@@ -65,6 +68,15 @@ fun EditText.appHandleColor(): EditText {
     if (PreferenceUtil.materialYou) return this
     TintHelper.colorHandles(this, ThemeStore.accentColor(context))
     return this
+}
+
+fun NavigationBarView.setItemColors(@ColorInt normalColor: Int, @ColorInt selectedColor: Int) {
+    val csl = ColorStateList(
+        arrayOf(intArrayOf(-R.attr.state_checked), intArrayOf(R.attr.state_checked)),
+        intArrayOf(normalColor, selectedColor)
+    )
+    itemIconTintList = csl
+    itemTextColor = csl
 }
 
 /**
