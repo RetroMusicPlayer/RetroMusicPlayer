@@ -591,16 +591,9 @@ class MusicService : MediaBrowserServiceCompat(),
              * By default return the browsable root. Treat the EXTRA_RECENT flag as a special case
              * and return the recent root instead.
              */
-            var isRecentRequest = false
-            if (rootHints != null) {
-                isRecentRequest =
-                    rootHints.getBoolean(BrowserRoot.EXTRA_RECENT)
-            }
-            val browserRootPath = if (isRecentRequest) {
-                AutoMediaIDHelper.RECENT_ROOT
-            } else {
-                AutoMediaIDHelper.MEDIA_ID_ROOT
-            }
+            val isRecentRequest = rootHints?.getBoolean(BrowserRoot.EXTRA_RECENT) ?: false
+            val browserRootPath =
+                if (isRecentRequest) AutoMediaIDHelper.RECENT_ROOT else AutoMediaIDHelper.MEDIA_ID_ROOT
             BrowserRoot(browserRootPath, null)
         }
     }

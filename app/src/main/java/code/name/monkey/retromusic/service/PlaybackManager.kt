@@ -6,8 +6,6 @@ import android.media.audiofx.AudioEffect
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
-import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 
 
 class PlaybackManager(val context: Context) {
@@ -35,9 +33,6 @@ class PlaybackManager(val context: Context) {
     val isPlaying: Boolean
         get() = playback != null && playback!!.isPlaying
 
-    private val shouldSetSpeed: Boolean
-        get() = !(playbackSpeed == 1f && playbackPitch == 1f)
-
     init {
         playback = createLocalPlayback()
     }
@@ -60,9 +55,6 @@ class PlaybackManager(val context: Context) {
                     } else {
                         AudioFader.startFadeAnimator(playback!!, true)
                     }
-                }
-                if (shouldSetSpeed) {
-                    playback?.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
                 }
                 playback?.start()
             }

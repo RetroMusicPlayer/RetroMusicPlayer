@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.PlaybackParams
 import androidx.annotation.CallSuper
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
@@ -17,6 +18,8 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil.isAudioFocusEnabled
+import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
+import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 
 abstract class LocalPlayback(val context: Context) : Playback, MediaPlayer.OnErrorListener,
     MediaPlayer.OnCompletionListener {
@@ -121,11 +124,14 @@ abstract class LocalPlayback(val context: Context) : Playback, MediaPlayer.OnErr
             } else {
                 player.setDataSource(path)
             }
-            player.setAudioAttributes(AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_MEDIA)
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .build()
+            player.setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build()
             )
+            player.playbackParams = PlaybackParams().setSpeed(playbackSpeed).setPitch(playbackPitch)
+
             player.setOnPreparedListener {
                 player.setOnPreparedListener(null)
                 completion(true)
