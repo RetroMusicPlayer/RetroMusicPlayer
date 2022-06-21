@@ -18,7 +18,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothDevice.EXTRA_DEVICE
 import android.content.*
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.ServiceInfo
@@ -224,14 +223,15 @@ class MusicService : MediaBrowserServiceCompat(),
     var shuffleMode = 0
     private val songPlayCountHelper = SongPlayCountHelper()
 
-    private val bluetoothReceiver = object : BroadcastReceiver() {
-        @SuppressLint("MissingPermission")
+    private val bluetoothReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
-            val extra = intent.getParcelableExtra<BluetoothDevice>(EXTRA_DEVICE)!!
             if (action != null) {
                 if (BluetoothDevice.ACTION_ACL_CONNECTED == action && isBluetoothSpeaker) {
-                    if (extra.type == BluetoothDevice.DEVICE_TYPE_CLASSIC) play()
+                    @Suppress("Deprecation")
+                    if (getSystemService<AudioManager>()!!.isBluetoothA2dpOn) {
+                        play()
+                    }
                 }
             }
         }
@@ -967,6 +967,7 @@ class MusicService : MediaBrowserServiceCompat(),
         intent.putExtra("position", songProgressMillis.toLong())
         intent.putExtra("playing", isPlaying)
         intent.putExtra("scrobbling_source", RETRO_MUSIC_PACKAGE_NAME)
+        @Suppress("Deprecation")
         sendStickyBroadcast(intent)
     }
 
