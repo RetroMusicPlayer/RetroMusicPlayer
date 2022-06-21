@@ -8,12 +8,14 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.PlaybackParams
+import android.os.StrictMode
 import androidx.annotation.CallSuper
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.media.AudioAttributesCompat
 import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.service.playback.Playback
@@ -130,7 +132,9 @@ abstract class LocalPlayback(val context: Context) : Playback, MediaPlayer.OnErr
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build()
             )
-            player.playbackParams = PlaybackParams().setSpeed(playbackSpeed).setPitch(playbackPitch)
+            if (VersionUtils.hasMarshmallow())
+                player.playbackParams =
+                    PlaybackParams().setSpeed(playbackSpeed).setPitch(playbackPitch)
 
             player.setOnPreparedListener {
                 player.setOnPreparedListener(null)
