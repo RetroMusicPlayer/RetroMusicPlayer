@@ -93,6 +93,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="black_theme_name">Tenê reş</string>
     <string name="blacklist">Rêzoka reş</string>
     <string name="bluetooth_summary">Sepanê mafê gihîştinê ji bo amûrên bluetooth nêzîk daxwaz dike</string>
+    <string name="bluetooth_title">Amûrên nêzîk</string>
     <string name="blur">Mijbarî</string>
     <string name="blur_card">Kerta mijbarî</string>
     <string name="bug_report_failed">Nikare ragihandinê bişîne</string>
@@ -177,7 +178,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="error_delete_backup">Nikare hîlanîna\u2019 jê bibê</string>
     <string name="error_empty_name">Navê te nabe ku vala be!</string>
     <string name="error_load_failed">Barkirin têk çû</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Pel nayê parvekirin</string>
     <string name="expanded">Dirêjkirî</string>
     <string name="faq">Pirsên pir têne pirsîn (PPP)</string>
     <string name="favorites">Bijarte</string>
@@ -422,7 +423,7 @@ têne guhertin</string>
     <string name="pref_title_wallpaper_accent">Rengê devokê paşrûyê</string>
     <string name="pref_title_whitelist">Rêzoka stranên spî</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Rûkara reş, rûkara stranên niha têne lêdan, bandora gilover û bêtir..</string>
     <string name="profile">Profîl</string>
     <string name="purchase">Bikire</string>
     <string name="queue">Rêzkirin</string>
@@ -499,7 +500,7 @@ têne guhertin</string>
     <string name="sort_order_composer">Awazvan</string>
     <string name="sort_order_date">Dîroka tevlîkirinê</string>
     <string name="sort_order_date_modified">Dîroka guhertinê</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Berdest</string>
     <string name="sort_order_num_songs">Jimara stranan</string>
     <string name="sort_order_num_songs_desc">Jimara stranan (berjêr)</string>
     <string name="sort_order_year">Sal</string>
@@ -559,5 +560,4 @@ têne guhertin</string>
     <string name="you_have_to_select_at_least_one_category">Divê tu herî kêm yek beş hilbijêrî.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Tu yê ji bo malpera şopandina pirsgirêkê werî beralîkirin.</string>
     <string name="your_account_data_is_only_used_for_authentication">Daneyên ajimêra te tenê ji bo pejirandinê têne bikaranîn.</string>
-    <string name="bluetooth_title">Amûrên nêzîk</string>
 </resources>

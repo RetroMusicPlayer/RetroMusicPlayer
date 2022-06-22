@@ -94,6 +94,7 @@
     <string name="black_theme_name">Vienkārši melns</string>
     <string name="blacklist">Blacklist</string>
     <string name="bluetooth_summary">Šai lietotnei nepieciešama pieeja tuvumā esošām ierīcēm, lai atrastu bluetooth ierīces</string>
+    <string name="bluetooth_title">Tuvumā esošās ierīces</string>
     <string name="blur">Izpludināt</string>
     <string name="blur_card">Blur Card</string>
     <string name="bug_report_failed">Unable to send report</string>
@@ -559,5 +560,4 @@
     <string name="you_have_to_select_at_least_one_category">Ir jāizvēlas vismaz viena sadaļa.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="bluetooth_title">Tuvumā esošās ierīces</string>
 </resources>

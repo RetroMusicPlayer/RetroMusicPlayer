@@ -92,6 +92,7 @@
     <string name="black_theme_name">Csak Fekete</string>
     <string name="blacklist">Feketelista</string>
     <string name="bluetooth_summary">Az alkalmazásnak szüksége van a \'Közeli eszközök\' engedélyre, hogy Bluetooth eszközöket kereshessen</string>
+    <string name="bluetooth_title">Közeli eszközök</string>
     <string name="blur">Homályosítás</string>
     <string name="blur_card">Homályosított kártya</string>
     <string name="bug_report_failed">Nem sikerült elküldeni a jelentést</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Legalább egy kategóriát kell kiválasztania</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Továbbítani fogjuk a problémakezelő weboldalra.</string>
     <string name="your_account_data_is_only_used_for_authentication">Fiókja adatait kizárólag a hitelesítéshez fogjuk használni.</string>
-    <string name="bluetooth_title">Közeli eszközök</string>
 </resources>

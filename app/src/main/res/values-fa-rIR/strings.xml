@@ -57,7 +57,7 @@
     <string name="add_time_framed_lryics">اضافه کردن متون دارای زمان</string>
     <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"یک‌ مورد به لیست پخش اهنگ ها اضافه شد."</string>
-    <string name="added_x_titles_to_playing_queue">%1$d مورد خاص به لیست پخش اهنگ اضافه شد.</string>
+    <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
     <string name="album">آلبوم</string>
     <plurals name="albumSongs">
         <item quantity="one">آهنگ ها</item>
@@ -92,6 +92,7 @@
     <string name="black_theme_name">حالت فقط مِشکی</string>
     <string name="blacklist">لیست سیاه</string>
     <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">حالت بلور</string>
     <string name="blur_card">حالت برگه ی بلور شده</string>
     <string name="bug_report_failed">نتوانستیم گزارش را بفرستیم</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">شما باید حداقل یک دسته را انتخاب کنید.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">شما به وب سایت ردیاب مشکل هدایت می شوید.</string>
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
-    <string name="bluetooth_title">Nearby devices</string>
 </resources>

@@ -96,6 +96,7 @@
     <string name="black_theme_name">Czarny motyw</string>
     <string name="blacklist">Lista ignorowanych</string>
     <string name="bluetooth_summary">Aplikacja potrzebuje uprawnień urządzeń w pobliżu do sprawdzania urządzeń Bluetooth</string>
+    <string name="bluetooth_title">Urządzenia w pobliżu</string>
     <string name="blur">Rozmycie</string>
     <string name="blur_card">Rozmyta Karta</string>
     <string name="bug_report_failed">Nie udało się wysłać raportu</string>
@@ -180,7 +181,7 @@
     <string name="error_delete_backup">Nie udało się usunąć kopii zapasowej</string>
     <string name="error_empty_name">Imię nie może być puste!</string>
     <string name="error_load_failed">Nie udało się załadować</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Nie udało się udostępnić pliku</string>
     <string name="expanded">Rozszerzony</string>
     <string name="faq">Najczęściej zadawane pytania</string>
     <string name="favorites">Ulubione</string>
@@ -258,7 +259,7 @@
     <string name="message_updated">Zaktualizowano</string>
     <string name="message_welcome"><![CDATA[Witaj! <br>Zapraszamy do %s]]></string>
     <string name="my_name">Imię</string>
-    <string name="my_top_tracks">Najczęściej odtwarzane</string>
+    <string name="my_top_tracks">Najczęściej odtw.</string>
     <string name="never">Nigdy</string>
     <string name="new_music_mix">Nowy miks muzyki</string>
     <string name="new_playlist_title">Nowa playlista</string>
@@ -424,7 +425,7 @@
     <string name="pref_title_wallpaper_accent">Kolor akcentu z tapety</string>
     <string name="pref_title_whitelist">Muzyka z listy dozwolonych</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Czarny motyw, motywy teraz odtwarzanych, efekt karuzeli i wiele więcej..</string>
     <string name="profile">Profil</string>
     <string name="purchase">Kup</string>
     <string name="queue">Kolejka odtwarzania</string>
@@ -501,7 +502,7 @@
     <string name="sort_order_composer">Kompozytor</string>
     <string name="sort_order_date">Data dodania</string>
     <string name="sort_order_date_modified">Data modyfikacji</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Domyślnie</string>
     <string name="sort_order_num_songs">Liczba utworów</string>
     <string name="sort_order_num_songs_desc">Liczba utworów malejąco</string>
     <string name="sort_order_year">Rok</string>
@@ -561,5 +562,4 @@
     <string name="you_have_to_select_at_least_one_category">Zaznacz przynajmniej jedną kategorię</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Zostaniesz przekierowany do strony ze zgłoszeniami.</string>
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
-    <string name="bluetooth_title">Urządzenia w pobliżu</string>
 </resources>

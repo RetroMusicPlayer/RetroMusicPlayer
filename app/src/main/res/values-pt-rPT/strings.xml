@@ -92,6 +92,7 @@
     <string name="black_theme_name">Apenas preto</string>
     <string name="blacklist">Lista negra</string>
     <string name="bluetooth_summary">Esta aplicação necessita de permissão de dispositivos próximos para encontrar dispositivos Bluetooth</string>
+    <string name="bluetooth_title">Dispositivos próximos</string>
     <string name="blur">Desfocar</string>
     <string name="blur_card">Desfocar cartão</string>
     <string name="bug_report_failed">Não foi possível enviar o relatório</string>
@@ -176,7 +177,7 @@
     <string name="error_delete_backup">Não foi possível eliminar cópia</string>
     <string name="error_empty_name">O nome não pode estar vazio!</string>
     <string name="error_load_failed">O carregamento falhou</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Não foi possível partilhar o ficheiro</string>
     <string name="expanded">Expandido</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favoritos</string>
@@ -420,7 +421,7 @@
     <string name="pref_title_wallpaper_accent">Cor do papel de parede</string>
     <string name="pref_title_whitelist">Lista segura de música</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Tema escuro, temas A reproduzir, efeito carrossel e muito mais..</string>
     <string name="profile">Perfil</string>
     <string name="purchase">Comprar</string>
     <string name="queue">Fila de reprodução</string>
@@ -497,7 +498,7 @@
     <string name="sort_order_composer">Compositor</string>
     <string name="sort_order_date">Data adicionado</string>
     <string name="sort_order_date_modified">Data modificado</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Predefinido</string>
     <string name="sort_order_num_songs">Contagem de músicas</string>
     <string name="sort_order_num_songs_desc">Contagem decrescente</string>
     <string name="sort_order_year">Ano</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Tem que seleccionar pelo menos uma categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vai ser reencaminhado para o site de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">As informações da sua conta são utilizadas apenas autenticação.</string>
-    <string name="bluetooth_title">Dispositivos próximos</string>
 </resources>

@@ -90,6 +90,7 @@
     <string name="black_theme_name">ダークテーマ時に漆黒にする</string>
     <string name="blacklist">ブラックリスト</string>
     <string name="bluetooth_summary">付近の Bluetooth デバイスを確認するために Nearby デバイス権限が必要です</string>
+    <string name="bluetooth_title">付近のデバイス</string>
     <string name="blur">ぼかし</string>
     <string name="blur_card">ブラーカード</string>
     <string name="bug_report_failed">レポートを送信できませんでした</string>
@@ -175,7 +176,7 @@
     <string name="error_delete_backup">バックアップを削除できませんでした</string>
     <string name="error_empty_name">名前を空欄にはできません。</string>
     <string name="error_load_failed">読み込み失敗</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">ファイルを共有できませんでした</string>
     <string name="expanded">展開</string>
     <string name="faq">よくある質問</string>
     <string name="favorites">お気に入り</string>
@@ -419,7 +420,7 @@
     <string name="pref_title_wallpaper_accent">壁紙の色を使用する</string>
     <string name="pref_title_whitelist">楽曲のホワイトリスト</string>
     <string name="pro">プロ版</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">ダークモード、「再生中」スキン、カルーセルエフェクトなど…</string>
     <string name="profile">プロフィール</string>
     <string name="purchase">購入</string>
     <string name="queue">キュー</string>
@@ -496,7 +497,7 @@
     <string name="sort_order_composer">作曲家</string>
     <string name="sort_order_date">日付</string>
     <string name="sort_order_date_modified">最後の編集日</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">デフォルト</string>
     <string name="sort_order_num_songs">曲数順（昇順）</string>
     <string name="sort_order_num_songs_desc">曲数順（降順）</string>
     <string name="sort_order_year">年</string>
@@ -556,5 +557,4 @@
     <string name="you_have_to_select_at_least_one_category">少なくとも 1 つのカテゴリを選択する必要があります。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
-    <string name="bluetooth_title">付近のデバイス</string>
 </resources>

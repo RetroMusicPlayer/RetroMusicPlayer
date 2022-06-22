@@ -92,6 +92,7 @@
     <string name="black_theme_name">Einfach Schwarz</string>
     <string name="blacklist">Ausschlussliste</string>
     <string name="bluetooth_summary">Die App benötigt in der Nähe befindliche Geräte, um nach Bluetooth-Geräten zu suchen</string>
+    <string name="bluetooth_title">Geräte in der Nähe</string>
     <string name="blur">Weichzeichner</string>
     <string name="blur_card">Weichgezeichnete Karte</string>
     <string name="bug_report_failed">Fehler beim Melden</string>
@@ -176,7 +177,7 @@
     <string name="error_delete_backup">Konnte Sicherung nicht löschen</string>
     <string name="error_empty_name">Dein Name kann nicht leer sein!</string>
     <string name="error_load_failed">Laden fehlgeschlagen</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Datei konnte nicht geteilt werden</string>
     <string name="expanded">Erweitert</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favoriten</string>
@@ -497,7 +498,7 @@
     <string name="sort_order_composer">Komponist</string>
     <string name="sort_order_date">Hinzufügedatum</string>
     <string name="sort_order_date_modified">Änderungsdatum</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Standard</string>
     <string name="sort_order_num_songs">Titel-Nummer</string>
     <string name="sort_order_num_songs_desc">Titel-Nummer absteigend</string>
     <string name="sort_order_year">Jahr</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Du musst mindestens eine Kategorie auswählen.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Du wirst auf die Problembehandlungs-Seite weitergeleitet.</string>
     <string name="your_account_data_is_only_used_for_authentication">Deine Accountdaten werden ausschließlich zur Authentifizierung genutzt.</string>
-    <string name="bluetooth_title">Geräte in der Nähe</string>
 </resources>

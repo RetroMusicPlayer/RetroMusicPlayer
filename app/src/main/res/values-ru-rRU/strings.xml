@@ -96,6 +96,7 @@
     <string name="black_theme_name">Чёрная</string>
     <string name="blacklist">Черный список</string>
     <string name="bluetooth_summary">Приложению требуется разрешение на проверку Bluetooth устройств рядом</string>
+    <string name="bluetooth_title">Ближайшие устройства</string>
     <string name="blur">Размытие</string>
     <string name="blur_card">Карточка с размытием</string>
     <string name="bug_report_failed">Невозможно отправить отчет</string>
@@ -561,5 +562,4 @@
     <string name="you_have_to_select_at_least_one_category">Выберите хотя бы одну категорию.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
     <string name="your_account_data_is_only_used_for_authentication">Данные вашей учетной записи используются только для аутентификации.</string>
-    <string name="bluetooth_title">Ближайшие устройства</string>
 </resources>

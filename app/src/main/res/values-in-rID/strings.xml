@@ -90,6 +90,7 @@
     <string name="black_theme_name">Hitam Pekat</string>
     <string name="blacklist">Daftar hitam</string>
     <string name="bluetooth_summary">Aplikasi butuh izin ke perangkat terdekat untuk memeriksa perangkat bluetooth</string>
+    <string name="bluetooth_title">Perangkat terdekat</string>
     <string name="blur">Keburaman</string>
     <string name="blur_card">Kartu buram</string>
     <string name="bug_report_failed">Tidak dapat mengirim laporan</string>
@@ -174,7 +175,7 @@
     <string name="error_delete_backup">Tidak dapat menghapus cadangan</string>
     <string name="error_empty_name">Namamu tidak boleh kosong!</string>
     <string name="error_load_failed">Gagal memuat</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Tidak dapat berbagi berkas</string>
     <string name="expanded">Diperluas</string>
     <string name="faq">Pertanyaan Umum (FAQ)</string>
     <string name="favorites">Favorit</string>
@@ -418,7 +419,7 @@
     <string name="pref_title_wallpaper_accent">Warna aksen wallpaper</string>
     <string name="pref_title_whitelist">Musik daftar putih</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Tema hitam, tema yang sedang diputar, efek korsel, dan lainnya...</string>
     <string name="profile">Profil</string>
     <string name="purchase">Pembelian</string>
     <string name="queue">Antrean Putar</string>
@@ -495,7 +496,7 @@
     <string name="sort_order_composer">Komposer</string>
     <string name="sort_order_date">Tanggal ditambahkan</string>
     <string name="sort_order_date_modified">Tanggal diubah</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Bawaan</string>
     <string name="sort_order_num_songs">Jumlah lagu</string>
     <string name="sort_order_num_songs_desc">Desc jumlah lagu</string>
     <string name="sort_order_year">Tahun</string>
@@ -555,5 +556,4 @@
     <string name="you_have_to_select_at_least_one_category">Anda harus memilih setidaknya satu kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan diteruskan ke situs web pelacak galat.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
-    <string name="bluetooth_title">Perangkat terdekat</string>
 </resources>

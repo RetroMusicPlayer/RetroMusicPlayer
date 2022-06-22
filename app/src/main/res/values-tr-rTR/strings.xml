@@ -55,7 +55,7 @@
     <string name="add_action">Ekle</string>
     <string name="add_playlist_title">"Oynatma listesine ekle"</string>
     <string name="add_time_framed_lryics">Zaman Dilimli Sözleri Ekle</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_song_count_to_playlist">%2$s listesine %1$d parça eklendi</string>
     <string name="added_title_to_playing_queue">"Kuyruğa 1 parça eklendi."</string>
     <string name="added_x_titles_to_playing_queue">%1$d şarkı kuyruğuna eklendi.</string>
     <string name="album">Albüm</string>
@@ -92,6 +92,7 @@
     <string name="black_theme_name">Sade Siyah</string>
     <string name="blacklist">Kara Liste</string>
     <string name="bluetooth_summary">Uygulamanın bluetooth cihazlarını kontrol etmek için yakındaki cihazlara erişim iznine ihtiyacı var</string>
+    <string name="bluetooth_title">Yakındaki cihazlar</string>
     <string name="blur">Bulanıklık</string>
     <string name="blur_card">Bulanık kart</string>
     <string name="bug_report_failed">Bildiri gönderilemiyor</string>
@@ -172,11 +173,11 @@
     <string name="edit_synced_lyrics">Senkronize Edilmiş Sözleri Düzenle</string>
     <string name="empty">Boş</string>
     <string name="equalizer">Ekolayzır</string>
-    <string name="error_create_backup">Couldn\u2019t create backup</string>
-    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
-    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_create_backup">Yedek oluşturulamadı</string>
+    <string name="error_delete_backup">Yedek silinemedi</string>
+    <string name="error_empty_name">İsmin boş olamaz!</string>
     <string name="error_load_failed">Yükleme başarısız</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Dosya paylaşılamadı</string>
     <string name="expanded">Genişletilmiş</string>
     <string name="faq">SSS</string>
     <string name="favorites">Favoriler</string>
@@ -358,12 +359,12 @@
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
     <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
-    <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
+    <string name="pref_summary_pause_history">Etkinleştirildiğinde, yeni çalınan şarkılar geçmişte gösterilmez</string>
     <string name="pref_summary_remember_tab">Başlangıçta son kullanılan sekmeye git</string>
     <string name="pref_summary_show_lyrics">Albüm kapağının üstünde senkronize edilmiş sözleri göster</string>
     <string name="pref_summary_suggestions">Ana Ekranda Yeni Müzik Karışımını Göster</string>
-    <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
-    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
+    <string name="pref_summary_swipe_anywhere_now_playing">Şu anda oynatılan ekranda herhangi bir yere kaydırarak şarkı değiştirmeyi sağlar</string>
+    <string name="pref_summary_swipe_to_dismiss">Mini oynatıcıyı kapatmak için aşağı kaydırın</string>
     <string name="pref_summary_toggle_full_screen">Sürükleyici modu</string>
     <string name="pref_summary_toggle_headset">Kulaklık bağlandıktan hemen sonra çalmaya başla</string>
     <string name="pref_summary_toggle_shuffle">Yeni bir şarkı listesi çalınırken karıştırma modu kapanacak</string>
@@ -402,7 +403,7 @@
     <string name="pref_title_lock_screen">Tam ekran kontrolleri</string>
     <string name="pref_title_lyrics_screen_on">Şarkı sözlerini gösterirken ekranı açık tut</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
+    <string name="pref_title_manage_audio_focus">Her zaman oynat</string>
     <string name="pref_title_now_playing_screen_appearance">Şimdi oynatılıyor teması</string>
     <string name="pref_title_open_source_licences">Açık kaynak lisansları</string>
     <string name="pref_title_pause_history">Geçmişi duraklat</string>
@@ -410,7 +411,7 @@
     <string name="pref_title_show_lyrics">Şarkı sözlerini göster</string>
     <string name="pref_title_suggestions">Önerileri göster</string>
     <string name="pref_title_swipe_anywhere_now_playing">Şarkıyı değiştirmek için herhangi bir yere kaydırın</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="pref_title_swipe_to_dismiss">Aşağı kaydırarak kapatın</string>
     <string name="pref_title_tab_text_mode">Sekme başlıkları modu</string>
     <string name="pref_title_toggle_carousel_effect">Atlıkarınca efekti</string>
     <string name="pref_title_toggle_full_screen">Uygulamayı tam ekran yapın</string>
@@ -497,7 +498,7 @@
     <string name="sort_order_composer">Besteci</string>
     <string name="sort_order_date">Tarih eklendi</string>
     <string name="sort_order_date_modified">Zaman ayarlandı</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Varsayılan</string>
     <string name="sort_order_num_songs">Şarkı sayısı</string>
     <string name="sort_order_num_songs_desc">Şarkı sayısı açıklaması</string>
     <string name="sort_order_year">Yıl</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
-    <string name="bluetooth_title">Yakındaki cihazlar</string>
 </resources>

@@ -92,6 +92,7 @@
     <string name="black_theme_name">Totalmente preto</string>
     <string name="blacklist">Lista negra</string>
     <string name="bluetooth_summary">O aplicativo precisa de permissão de dispositivos próximos para verificar por dispositivo “bluetooth”</string>
+    <string name="bluetooth_title">Dispositivos próximos</string>
     <string name="blur">Desfoque</string>
     <string name="blur_card">Cartão Desfocado</string>
     <string name="bug_report_failed">Não é possível enviar o relatório</string>
@@ -557,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Você precisa selecionar ao menos uma categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Você será encaminhado para o website de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">Os dados da sua conta são usados ​​apenas para autenticação.</string>
-    <string name="bluetooth_title">Dispositivos próximos</string>
 </resources>
