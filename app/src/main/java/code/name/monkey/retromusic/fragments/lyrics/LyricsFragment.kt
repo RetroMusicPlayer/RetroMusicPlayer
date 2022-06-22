@@ -305,13 +305,14 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics),
     }
 
     private fun loadNormalLyrics() {
-        var lyrics: String? = null
         val file = File(song.data)
-        try {
-            lyrics = AudioFileIO.read(file).tagOrCreateDefault.getFirst(FieldKey.LYRICS)
+        val lyrics = try {
+            AudioFileIO.read(file).tagOrCreateDefault.getFirst(FieldKey.LYRICS)
         } catch (e: Exception) {
             e.printStackTrace()
+            ""
         }
+        binding.normalLyrics.isVisible = !lyrics.isNullOrEmpty()
         binding.noLyricsFound.isVisible = lyrics.isNullOrEmpty()
         binding.normalLyrics.text = lyrics
     }
@@ -320,17 +321,15 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics),
      * @return success
      */
     private fun loadLRCLyrics(): Boolean {
-        binding.lyricsView.setLabel(getString(R.string.empty))
         val lrcFile = LyricUtil.getSyncedLyricsFile(song)
         if (lrcFile != null) {
             binding.lyricsView.loadLrc(lrcFile)
-            println("File: ${lrcFile.absolutePath}")
         } else {
             val embeddedLyrics = LyricUtil.getEmbeddedSyncedLyrics(song.data)
             if (embeddedLyrics != null) {
                 binding.lyricsView.loadLrc(embeddedLyrics)
-                println("Lyrics: ${embeddedLyrics.substring(0..50)}")
             } else {
+                binding.lyricsView.setLabel(getString(R.string.empty))
                 return false
             }
         }
@@ -339,11 +338,13 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics),
 
     private fun loadLyrics() {
         lyricsType = if (!loadLRCLyrics()) {
+            binding.lyricsView.isVisible = false
             loadNormalLyrics()
             LyricsType.SYNCED_LYRICS
         } else {
+            binding.normalLyrics.isVisible = false
             binding.noLyricsFound.isVisible = false
-            binding.normalLyrics.text = ""
+            binding.lyricsView.isVisible = true
             LyricsType.NORMAL_LYRICS
         }
     }

@@ -544,7 +544,7 @@ public class LrcView extends View {
         mLrcEntryList.clear();
         mOffset = 0;
         mCurrentLine = 0;
-        invalidate();
+        //invalidate();
     }
 
     private void adjustCenter() {
