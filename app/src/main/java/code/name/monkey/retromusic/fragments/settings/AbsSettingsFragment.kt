@@ -29,7 +29,6 @@ import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.goToProVersion
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.preferences.*
-import code.name.monkey.retromusic.util.NavigationUtil
 import dev.chrisbanes.insetter.applyInsetter
 
 /**

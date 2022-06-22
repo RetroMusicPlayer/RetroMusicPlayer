@@ -45,8 +45,8 @@ import code.name.monkey.retromusic.lyrics.CoverLrcView
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
-import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.CoverLyricsType
+import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.coroutines.Dispatchers

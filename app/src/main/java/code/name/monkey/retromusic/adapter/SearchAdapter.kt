@@ -60,26 +60,26 @@ class SearchAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if (viewType == HEADER) ViewHolder(
-            LayoutInflater.from(activity).inflate(
-                R.layout.sub_header,
-                parent,
-                false
-            ), viewType
-        )
-        else if (viewType == ALBUM || viewType == ARTIST || viewType== ALBUM_ARTIST)
-            ViewHolder(
+        return when (viewType) {
+            HEADER -> ViewHolder(
+                LayoutInflater.from(activity).inflate(
+                    R.layout.sub_header,
+                    parent,
+                    false
+                ), viewType
+            )
+            ALBUM, ARTIST, ALBUM_ARTIST -> ViewHolder(
                 LayoutInflater.from(activity).inflate(
                     R.layout.item_list_big,
                     parent,
                     false
                 ), viewType
             )
-        else
-            ViewHolder(
+            else -> ViewHolder(
                 LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false),
                 viewType
             )
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

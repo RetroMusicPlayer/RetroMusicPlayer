@@ -28,7 +28,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentMainSettingsBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBarsWithPadding
 import code.name.monkey.retromusic.extensions.goToProVersion
-import code.name.monkey.retromusic.util.NavigationUtil
 
 class MainSettingsFragment : Fragment(), View.OnClickListener {
 
