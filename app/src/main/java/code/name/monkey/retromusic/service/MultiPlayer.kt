@@ -23,6 +23,7 @@ import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil.isGapLessPlayback
+import code.name.monkey.retromusic.util.logE
 
 /**
  * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
@@ -141,9 +142,7 @@ class MultiPlayer(context: Context) : LocalPlayback(context) {
     override fun release() {
         stop()
         mCurrentMediaPlayer.release()
-        if (mNextMediaPlayer != null) {
-            mNextMediaPlayer?.release()
-        }
+        mNextMediaPlayer?.release()
     }
 
     /**
@@ -249,7 +248,7 @@ class MultiPlayer(context: Context) : LocalPlayback(context) {
         mCurrentMediaPlayer = MediaPlayer()
         mCurrentMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
         context.showToast(R.string.unplayable_file)
-        Log.e(TAG, what.toString() + extra)
+        logE(what.toString() + extra)
         return false
     }
 
@@ -260,9 +259,9 @@ class MultiPlayer(context: Context) : LocalPlayback(context) {
             mCurrentMediaPlayer = mNextMediaPlayer!!
             isInitialized = true
             mNextMediaPlayer = null
-            if (callbacks != null) callbacks?.onTrackWentToNext()
+            callbacks?.onTrackWentToNext()
         } else {
-            if (callbacks != null) callbacks?.onTrackEnded()
+            callbacks?.onTrackEnded()
         }
     }
 
@@ -270,6 +269,7 @@ class MultiPlayer(context: Context) : LocalPlayback(context) {
 
     override fun setPlaybackSpeedPitch(speed: Float, pitch: Float) {
         mCurrentMediaPlayer.setPlaybackSpeedPitch(speed, pitch)
+        mNextMediaPlayer?.setPlaybackSpeedPitch(speed, pitch)
     }
 
     companion object {

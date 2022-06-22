@@ -31,7 +31,7 @@ import java.lang.ref.WeakReference
  * Created by Beesham Sarendranauth (Beesham)
  */
 class AutoMusicProvider(
-    val mContext: Context,
+    private val mContext: Context,
     private val songsRepository: SongRepository,
     private val albumsRepository: AlbumRepository,
     private val artistsRepository: ArtistRepository,
@@ -138,7 +138,7 @@ class AutoMusicProvider(
                 topPlayedRepository.notRecentlyPlayedTracks().take(8)
             }
             else -> {
-                    emptyList()
+                emptyList()
             }
         }
         songs.forEach { song ->
