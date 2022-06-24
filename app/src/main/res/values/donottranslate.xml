@@ -14,7 +14,6 @@
     <string name="app_name" translatable="false">Retro Music</string>
     <string name="git_hub" translatable="false">GitHub</string>
 
-
     <string name="app_shortcut_last_added_long" translatable="false">@string/last_added</string>
     <string name="app_shortcut_last_added_short" translatable="false">@string/last_added</string>
     <string name="app_shortcut_shuffle_all_long" translatable="false">@string/action_shuffle_all</string>
@@ -28,5 +27,5 @@
     <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="app_widget_circle_name">@string/circle</string>
 
-
+    <string name="download_policy">always</string>
 </resources>

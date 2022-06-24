@@ -90,7 +90,6 @@ class ContributorAdapter(
                 .load("file:///android_asset/images/${contributor.image}".toUri())
                 .error(R.drawable.ic_account)
                 .placeholder(R.drawable.ic_account)
-                .dontAnimate()
                 .into(image)
         }
     }
