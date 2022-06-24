@@ -252,7 +252,9 @@
         </item>
     </style>
 
-    <style name="Theme.AppWidget" parent="Theme.RetroMusic.FollowSystem" />
+    <style name="Theme.AppWidget" parent="" >
+        <item name="colorSurface">@color/md_black_1000</item>
+    </style>
 
     <style name="ShapeAppearance.Material3.Circle" parent="">
         <item name="cornerSize">50%</item>
