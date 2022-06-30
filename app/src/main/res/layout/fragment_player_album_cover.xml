@@ -36,10 +36,8 @@
             android:visibility="gone"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:lrcLabel="@string/no_lyrics_found"
-            app:lrcNormalTextSize="28sp"
             app:lrcPadding="24dp"
             app:lrcTextGravity="center"
-            app:lrcTextSize="32sp"
             app:lrcTimelineColor="@color/transparent"
             tools:visibility="visible" />
     </com.bosphere.fadingedgelayout.FadingEdgeLayout>

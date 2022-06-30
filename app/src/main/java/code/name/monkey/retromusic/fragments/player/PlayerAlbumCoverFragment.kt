@@ -28,6 +28,7 @@ import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.LYRICS_SIZE
 import code.name.monkey.retromusic.LYRICS_TYPE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SHOW_LYRICS
@@ -200,6 +201,10 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             }
             LYRICS_TYPE -> {
                 maybeInitLyrics()
+            }
+
+            LYRICS_SIZE -> {
+                lrcView.updateLyricsSize()
             }
         }
     }

@@ -64,10 +64,8 @@
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:lrcLabel="@string/no_lyrics_found"
-            app:lrcNormalTextSize="24sp"
             app:lrcPadding="24dp"
-            app:lrcTextGravity="left"
-            app:lrcTextSize="28sp" />
+            app:lrcTextGravity="left"/>
 
         <TextView
             android:id="@+id/noLyricsFound"

@@ -121,6 +121,18 @@
     </string-array>
 
 
+    <string-array name="lyrics_font_sizes">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+    <string-array name="lyrics_font_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
     <string-array name="pref_language_names">
         <item>System default</item>
         <item>Arabic</item>

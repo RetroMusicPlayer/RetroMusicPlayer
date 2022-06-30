@@ -34,6 +34,7 @@ import android.widget.Scroller
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.withSave
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.coroutines.*
 import java.io.File
 import java.lang.Runnable
@@ -174,16 +175,8 @@ class CoverLrcView @JvmOverloads constructor(
 
     private fun init(attrs: AttributeSet?) {
         val ta = context.obtainStyledAttributes(attrs, R.styleable.LrcView)
-        mCurrentTextSize = ta.getDimension(
-            R.styleable.LrcView_lrcTextSize, resources.getDimension(R.dimen.lrc_text_size)
-        )
-        mNormalTextSize = ta.getDimension(
-            R.styleable.LrcView_lrcNormalTextSize,
-            resources.getDimension(R.dimen.lrc_text_size)
-        )
-        if (mNormalTextSize == 0f) {
-            mNormalTextSize = mCurrentTextSize
-        }
+
+        updateLyricsSize()
         mDividerHeight = ta.getDimension(
             R.styleable.LrcView_lrcDividerHeight,
             resources.getDimension(R.dimen.lrc_divider_height)
@@ -490,6 +483,23 @@ class CoverLrcView @JvmOverloads constructor(
 
     private fun adjustCenter() {
         smoothScrollTo(centerLine, ADJUST_DURATION)
+    }
+
+    fun updateLyricsSize() {
+        when (PreferenceUtil.lyricsFontSize) {
+            0 -> {
+                mNormalTextSize = resources.getDimension(R.dimen.lrc_text_size_small)
+                mCurrentTextSize = resources.getDimension(R.dimen.current_lrc_text_size_small)
+            }
+            2 -> {
+                mNormalTextSize = resources.getDimension(R.dimen.lrc_text_size_large)
+                mCurrentTextSize = resources.getDimension(R.dimen.current_lrc_text_size_large)
+            }
+            else -> {
+                mNormalTextSize = resources.getDimension(R.dimen.lrc_text_size_medium)
+                mCurrentTextSize = resources.getDimension(R.dimen.current_lrc_text_size_medium)
+            }
+        }
     }
 
     private fun smoothScrollTo(line: Int, duration: Long = mAnimationDuration) {
