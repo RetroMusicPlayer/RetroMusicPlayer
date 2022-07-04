@@ -118,12 +118,12 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         binding.toolbar.title = " "
         binding.albumCoverContainer.transitionName = arguments.extraAlbumId.toString()
         postponeEnterTransition()
-        detailsViewModel.getAlbum().observe(viewLifecycleOwner) {
+        detailsViewModel.getAlbum().observe(viewLifecycleOwner) { album ->
             view.doOnPreDraw {
                 startPostponedEnterTransition()
             }
-            albumArtistExists = !it.albumArtist.isNullOrEmpty()
-            showAlbum(it)
+            albumArtistExists = !album.albumArtist.isNullOrEmpty()
+            showAlbum(album)
             binding.artistImage.transitionName = if (albumArtistExists) {
                 album.albumArtist
             } else {
