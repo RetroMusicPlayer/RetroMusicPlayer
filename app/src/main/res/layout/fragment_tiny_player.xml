@@ -80,7 +80,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"

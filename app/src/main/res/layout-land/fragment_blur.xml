@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_weight="0"
-                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
+                    app:navigationIcon="@drawable/ic_keyboard_arrow_down" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -60,7 +60,7 @@
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_keep_screen_on_summary"
             android:title="@string/pref_keep_screen_on_title"
-            app:icon="@drawable/ic_settings_brigntness" />
+            app:icon="@drawable/ic_settings_brightness" />
 
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>

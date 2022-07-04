@@ -35,7 +35,7 @@
         android:visible="@bool/isMarshmallow"/>
     <item
         android:id="@+id/action_go_to_drive_mode"
-        android:icon="@drawable/ic_drive_eta"
+        android:icon="@drawable/ic_car"
         android:orderInCategory="4"
         android:title="@string/drive_mode" />
     <item

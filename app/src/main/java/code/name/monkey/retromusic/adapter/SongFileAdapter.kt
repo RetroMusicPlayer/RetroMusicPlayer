@@ -110,7 +110,7 @@ class SongFileAdapter(
                 )
             )
         } else {
-            val error = activity.getTintedDrawable(R.drawable.ic_file_music, iconColor)
+            val error = activity.getTintedDrawable(R.drawable.ic_audio_file, iconColor)
             GlideApp.with(activity)
                 .load(AudioFileCover(file.path))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

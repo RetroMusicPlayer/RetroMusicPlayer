@@ -180,7 +180,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nextButton"
         app:layout_constraintTop_toTopOf="@+id/nextButton"
-        app:srcCompat="@drawable/ic_shuffle_sharp"
+        app:srcCompat="@drawable/ic_shuffle"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 

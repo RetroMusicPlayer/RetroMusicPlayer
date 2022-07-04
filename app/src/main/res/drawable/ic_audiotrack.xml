@@ -1,24 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2020 Hemanth Savarala.
-  ~
-  ~ Licensed under the GNU General Public License v3
-  ~
-  ~ This is free software: you can redistribute it and/or modify it under
-  ~ the terms of the GNU General Public License as published by
-  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
-  ~
-  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  ~ See the GNU General Public License for more details.
-  -->
-
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
-    android:viewportHeight="24">
-
-    <path
-        android:fillColor="@color/md_white_1000"
-        android:pathData="M12 5v8.55c-0.94-0.54-2.1-0.75-3.33-0.32-1.34 0.48 -2.37 1.67-2.61 3.07-0.46 2.74 1.86 5.08 4.59 4.65 1.96-0.31 3.35-2.11 3.35-4.1V7h2c1.1 0 2-0.9 2-2s-0.9-2-2-2h-2c-1.1 0-2 0.9-2 2z" />
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M10,21Q8.35,21 7.175,19.825Q6,18.65 6,17Q6,15.35 7.175,14.175Q8.35,13 10,13Q10.575,13 11.062,13.137Q11.55,13.275 12,13.55V5Q12,4.175 12.588,3.587Q13.175,3 14,3H16Q16.825,3 17.413,3.587Q18,4.175 18,5Q18,5.825 17.413,6.412Q16.825,7 16,7H14V17Q14,18.65 12.825,19.825Q11.65,21 10,21Z"/>
 </vector>
