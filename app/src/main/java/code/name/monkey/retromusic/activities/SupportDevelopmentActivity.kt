@@ -19,18 +19,15 @@ import android.view.MenuItem
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityDonationBinding
+import code.name.monkey.retromusic.extensions.openUrl
 import code.name.monkey.retromusic.extensions.setStatusBarColorAuto
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.extensions.surfaceColor
 
+
 class SupportDevelopmentActivity : AbsThemeActivity() {
 
     lateinit var binding: ActivityDonationBinding
-
-    companion object {
-        val TAG: String = SupportDevelopmentActivity::class.java.simpleName
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
@@ -49,11 +46,22 @@ class SupportDevelopmentActivity : AbsThemeActivity() {
 
         setupToolbar()
 
+        binding.paypal.setOnClickListener {
+            openUrl(PAYPAL_URL)
+        }
+        binding.kofi.setOnClickListener {
+            openUrl(KOFI_URL)
+        }
     }
 
     private fun setupToolbar() {
         binding.toolbar.setBackgroundColor(surfaceColor())
         ToolbarContentTintHelper.colorBackButton(binding.toolbar)
         setSupportActionBar(binding.toolbar)
+    }
+
+    companion object {
+        const val PAYPAL_URL = "https://paypal.me/quickersilver"
+        const val KOFI_URL = "https://ko-fi.com/quickersilver"
     }
 }
