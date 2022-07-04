@@ -449,12 +449,12 @@
     <string name="restore_message">Vai vēlaties atjaunot no rezerves kopijas?</string>
     <string name="restored_previous_purchase_please_restart">Iepriekšējais pirkums atjaunots. Lūdzu, restartējiet lietotni, lai varētu lietot visas funkcijas.</string>
     <string name="restored_previous_purchases">Iepriekšējais pirkums atjaunots veiksmīgi.</string>
-    <string name="restoring_purchase">Restoring purchase…</string>
+    <string name="restoring_purchase">Pirkums tiek atjaunots…</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
     <string name="ringtone_title">Ringtone (Optional)</string>
-    <string name="saf_delete_failed">File delete failed: %s</string>
+    <string name="saf_delete_failed">Faila dzēšana neizdevās: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Can\'t get SAF URI</string>
     <string name="saf_guide_slide1_description">Open navigation drawer</string>
