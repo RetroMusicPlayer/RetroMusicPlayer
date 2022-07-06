@@ -46,9 +46,10 @@
                 app:cardUseCompatPadding="true">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center|top"
+                    android:layout_marginVertical="16dp"
                     android:padding="8dp"
                     android:src="@drawable/ic_paypal" />
 
@@ -56,8 +57,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|bottom"
-                    android:layout_marginTop="50dp"
-                    android:paddingBottom="8dp"
+                    android:layout_marginTop="96dp"
+                    android:paddingBottom="16dp"
                     android:text="Paypal"
                     android:textAppearance="?textAppearanceLabelMedium" />
 
@@ -75,9 +76,10 @@
                 app:cardUseCompatPadding="true">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center|top"
+                    android:layout_marginVertical="16dp"
                     android:padding="8dp"
                     android:src="@drawable/ic_kofi" />
 
@@ -85,9 +87,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="50dp"
-                    android:paddingBottom="8dp"
+                    android:layout_marginTop="96dp"
                     android:text="Ko-fi"
+                    android:paddingBottom="16dp"
                     android:textAppearance="?textAppearanceLabelMedium" />
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

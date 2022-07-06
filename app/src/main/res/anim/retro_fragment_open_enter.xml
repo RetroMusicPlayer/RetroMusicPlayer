@@ -14,7 +14,6 @@
   limitations under the License.
   -->
 <set xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:shareInterpolator="false">
     <alpha
         android:duration="50"
@@ -36,6 +35,5 @@
         android:pivotX="50%"
         android:pivotY="50%"
         android:toXScale="1"
-        android:toYScale="1"
-        tools:targetApi="lollipop" />
+        android:toYScale="1" />
 </set>
