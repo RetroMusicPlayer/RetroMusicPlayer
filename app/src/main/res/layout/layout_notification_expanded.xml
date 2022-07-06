@@ -98,7 +98,7 @@
                 android:layout_height="42dp"
                 android:background="@drawable/notification_selector"
                 android:scaleType="centerInside"
-                tools:src="@drawable/ic_skip_previous_round_white_32dp"
+                tools:src="@drawable/ic_skip_previous"
                 tools:tint="?colorOnPrimary" />
 
             <ImageButton
@@ -116,7 +116,7 @@
                 android:layout_height="42dp"
                 android:background="@drawable/notification_selector"
                 android:scaleType="centerInside"
-                tools:src="@drawable/ic_skip_next_round_white_32dp"
+                tools:src="@drawable/ic_skip_next"
                 tools:tint="?colorOnPrimary" />
 
             <ImageButton

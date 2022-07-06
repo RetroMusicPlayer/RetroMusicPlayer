@@ -189,12 +189,12 @@ class PlayingNotificationClassic(
                     ).toBitmap()
                     val prev =
                         context.getTintedDrawable(
-                            R.drawable.ic_skip_previous_round_white_32dp,
+                            R.drawable.ic_skip_previous,
                             primary
                         ).toBitmap()
                     val next =
                         context.getTintedDrawable(
-                            R.drawable.ic_skip_next_round_white_32dp,
+                            R.drawable.ic_skip_next,
                             primary
                         ).toBitmap()
                     val playPause = getPlayPauseBitmap(true)

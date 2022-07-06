@@ -118,7 +118,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
         app:layout_constraintStart_toEndOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_next_round_white_32dp"
+        app:srcCompat="@drawable/ic_skip_next"
         app:tint="@color/md_green_500" />
 
     <ImageButton
@@ -132,7 +132,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
         app:layout_constraintEnd_toStartOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_previous_round_white_32dp"
+        app:srcCompat="@drawable/ic_skip_previous"
         app:tint="@color/md_green_500" />
 
     <com.google.android.material.textview.MaterialTextView
