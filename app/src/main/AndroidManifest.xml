@@ -22,6 +22,7 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <uses-permission
         android:name="android.permission.BLUETOOTH_CONNECT"
         android:usesPermissionFlags="neverForLocation"
@@ -125,7 +126,8 @@
         <activity android:name=".activities.PermissionActivity" />
         <activity
             android:name=".activities.LockScreenActivity"
-            android:launchMode="singleTop"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
             android:showOnLockScreen="true" />
         <activity
             android:name=".fragments.backup.RestoreActivity"

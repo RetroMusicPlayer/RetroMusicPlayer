@@ -197,7 +197,7 @@ class MusicService : MediaBrowserServiceCompat(),
         override fun onReceive(context: Context, intent: Intent) {
             if (isLockScreen && isPlaying) {
                 val lockIntent = Intent(context, LockScreenActivity::class.java)
-                lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(lockIntent)
             }
         }
@@ -279,7 +279,7 @@ class MusicService : MediaBrowserServiceCompat(),
         uiThreadHandler = Handler(Looper.getMainLooper())
         registerReceiver(widgetIntentReceiver, IntentFilter(APP_WIDGET_UPDATE))
         registerReceiver(updateFavoriteReceiver, IntentFilter(FAVORITE_STATE_CHANGED))
-        registerReceiver(lockScreenReceiver, IntentFilter(Intent.ACTION_SCREEN_OFF))
+        registerReceiver(lockScreenReceiver, IntentFilter(Intent.ACTION_SCREEN_ON))
         sessionToken = mediaSession?.sessionToken
         notificationManager = getSystemService()
         initNotification()
