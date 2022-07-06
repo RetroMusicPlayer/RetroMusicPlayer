@@ -106,7 +106,7 @@
     <string name="bug_report_no_password">Por favor, digite sua senha válida do GitHub</string>
     <string name="bug_report_no_title">Por favor, insira um título do problema</string>
     <string name="bug_report_no_username">Por favor, digite seu nome de usuário válido do GitHub</string>
-    <string name="bug_report_success">Bug reportado com sucesso</string>
+    <string name="bug_report_success">Erro reportado com sucesso</string>
     <string name="bug_report_summary">Um erro inesperado ocorreu. Se você tentar novamente e o erro persistir, use a opção \"Limpar dados do aplicativo\" ou envie-nos um e-mail</string>
     <string name="bug_report_use_account">Enviar usando uma conta do GitHub</string>
     <string name="buy_now">Comprar agora</string>
@@ -177,7 +177,7 @@
     <string name="error_delete_backup">Não foi possível excluir o backup</string>
     <string name="error_empty_name">Seu nome não pode estar em branco!</string>
     <string name="error_load_failed">Falha ao carregar</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Não foi possível salvar o arquivo</string>
     <string name="expanded">Expandido</string>
     <string name="faq">Perguntas frequentes</string>
     <string name="favorites">Favoritos</string>
@@ -421,7 +421,7 @@
     <string name="pref_title_wallpaper_accent">Cor de destaque do papel de parede</string>
     <string name="pref_title_whitelist">Lista branca</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Tema escuro, Temas na tela de reprodução, Efeito carrossel e mais..</string>
     <string name="profile">Perfil</string>
     <string name="purchase">Comprar</string>
     <string name="queue">Fila</string>
@@ -498,7 +498,7 @@
     <string name="sort_order_composer">Compositor</string>
     <string name="sort_order_date">Data adicionada</string>
     <string name="sort_order_date_modified">Data de alteração</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Padrão</string>
     <string name="sort_order_num_songs">Quantidade de músicas (crescente)</string>
     <string name="sort_order_num_songs_desc">Quantidade de músicas (decrescente)</string>
     <string name="sort_order_year">Ano</string>
