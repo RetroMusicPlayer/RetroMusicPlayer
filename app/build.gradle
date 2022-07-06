@@ -135,8 +135,6 @@ dependencies {
     implementation "com.afollestad.material-dialogs:input:$material_dialog_version"
     implementation "com.afollestad.material-dialogs:color:$material_dialog_version"
 
-    implementation 'com.afollestad:material-cab:2.0.1'
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     def kotlin_coroutines_version = '1.6.3'

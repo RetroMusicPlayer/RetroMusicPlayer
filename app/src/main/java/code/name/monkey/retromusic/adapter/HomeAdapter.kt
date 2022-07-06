@@ -163,7 +163,7 @@ class HomeAdapter(private val activity: AppCompatActivity) :
                 val songAdapter = SongAdapter(
                     activity,
                     home.arrayList as MutableList<Song>,
-                    R.layout.item_favourite_card, null
+                    R.layout.item_favourite_card
                 )
                 layoutManager = linearLayoutManager()
                 adapter = songAdapter
@@ -178,10 +178,10 @@ class HomeAdapter(private val activity: AppCompatActivity) :
     }
 
     private fun artistsAdapter(artists: List<Artist>) =
-        ArtistAdapter(activity, artists, PreferenceUtil.homeArtistGridStyle, null, this)
+        ArtistAdapter(activity, artists, PreferenceUtil.homeArtistGridStyle, this)
 
     private fun albumAdapter(albums: List<Album>) =
-        AlbumAdapter(activity, albums, PreferenceUtil.homeAlbumGridStyle, null, this)
+        AlbumAdapter(activity, albums, PreferenceUtil.homeAlbumGridStyle, this)
 
     private fun gridLayoutManager() =
         GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)

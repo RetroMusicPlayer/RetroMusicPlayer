@@ -24,6 +24,7 @@
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="elevationOverlayColor">@color/elevationOverlay</item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.Material3.Dark.NoActionBar">
@@ -39,6 +40,7 @@
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="elevationOverlayColor">@color/elevationOverlay</item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.Material3.Light.NoActionBar">
@@ -52,5 +54,6 @@
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="elevationOverlayColor">@color/elevationOverlayLight</item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 </resources>

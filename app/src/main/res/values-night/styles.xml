@@ -25,7 +25,6 @@
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Elevated</item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
-
-    <style name="mcab_theme" parent="@style/ThemeOverlay.MaterialComponents.Dark" />
 </resources>

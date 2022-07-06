@@ -28,7 +28,6 @@ import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.accentOutlineColor
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 import com.google.android.material.button.MaterialButton
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
@@ -42,8 +41,7 @@ class OrderablePlaylistSongAdapter(
     activity: FragmentActivity,
     dataSet: MutableList<Song>,
     itemLayoutRes: Int,
-    ICabHolder: ICabHolder?,
-) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, ICabHolder),
+) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes),
     DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
 
     val libraryViewModel: LibraryViewModel by activity.viewModel()

@@ -30,7 +30,6 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
@@ -42,11 +41,9 @@ open class AlbumAdapter(
     override val activity: FragmentActivity,
     var dataSet: List<Album>,
     var itemLayoutRes: Int,
-    iCabHolder: ICabHolder?,
     val listener: IAlbumClickListener?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
     activity,
-    iCabHolder,
     R.menu.menu_media_selection
 ), PopupTextProvider {
 

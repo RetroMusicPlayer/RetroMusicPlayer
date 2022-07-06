@@ -29,7 +29,6 @@ import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.util.MusicUtil
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -44,10 +43,9 @@ class SongFileAdapter(
     override val activity: AppCompatActivity,
     private var dataSet: List<File>,
     private val itemLayoutRes: Int,
-    private val iCallbacks: ICallbacks?,
-    iCabHolder: ICabHolder?,
+    private val iCallbacks: ICallbacks?
 ) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(
-    activity, iCabHolder, R.menu.menu_media_selection
+    activity, R.menu.menu_media_selection
 ), PopupTextProvider {
 
     init {

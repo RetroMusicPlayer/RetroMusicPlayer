@@ -44,10 +44,6 @@
         <item name="titleMarginStart">16dp</item>
     </style>
 
-    <style name="mcab_theme" parent="@style/ThemeOverlay.MaterialComponents.Light">
-        <item name="android:actionOverflowButtonStyle">@style/mcab_overflow_style</item>
-    </style>
-
     <style name="mcab_overflow_style" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="srcCompat">@drawable/ic_more_vert</item>
         <item name="android:tint">?colorSurface</item>
@@ -252,7 +248,7 @@
         </item>
     </style>
 
-    <style name="Theme.AppWidget" parent="" >
+    <style name="Theme.AppWidget" parent="">
         <item name="colorSurface">@color/md_black_1000</item>
     </style>
 

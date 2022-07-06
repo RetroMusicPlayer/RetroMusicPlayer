@@ -33,7 +33,6 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.IAlbumArtistClickListener
 import code.name.monkey.retromusic.interfaces.IArtistClickListener
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
@@ -45,12 +44,10 @@ class ArtistAdapter(
     override val activity: FragmentActivity,
     var dataSet: List<Artist>,
     var itemLayoutRes: Int,
-    val ICabHolder: ICabHolder?,
     val IArtistClickListener: IArtistClickListener,
     val IAlbumArtistClickListener: IAlbumArtistClickListener? = null
-) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(
-    activity, ICabHolder, R.menu.menu_media_selection
-), PopupTextProvider {
+) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(activity, R.menu.menu_media_selection),
+    PopupTextProvider {
 
     var albumArtistsOnly = false
 
