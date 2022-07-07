@@ -255,7 +255,7 @@
     <string name="my_name">名稱</string>
     <string name="my_top_tracks">最佳單曲</string>
     <string name="never">永不</string>
-    <string name="new_music_mix">歌曲快選</string>
+    <string name="new_music_mix">新歌快選</string>
     <string name="new_playlist_title">新增播放清單</string>
     <string name="new_start_directory">%s 為新起始目錄。</string>
     <string name="next_song">下一首</string>
@@ -360,7 +360,7 @@
     <string name="pref_summary_pause_history">啟用此選項後，新播放的歌曲將不再顯示於歷史記錄</string>
     <string name="pref_summary_remember_tab">開啟應用程式後，自動顯示最後瀏覽的畫面</string>
     <string name="pref_summary_show_lyrics">於專輯封面上顯示同步歌詞</string>
-    <string name="pref_summary_suggestions">於主畫面顯示歌曲快選</string>
+    <string name="pref_summary_suggestions">於主畫面顯示新歌快選</string>
     <string name="pref_summary_swipe_anywhere_now_playing">啟用於現正播放畫面，可隨意滑動以切換歌曲</string>
     <string name="pref_summary_swipe_to_dismiss">向下滑動以關閉迷你播放器</string>
     <string name="pref_summary_toggle_full_screen">沉浸模式</string>
