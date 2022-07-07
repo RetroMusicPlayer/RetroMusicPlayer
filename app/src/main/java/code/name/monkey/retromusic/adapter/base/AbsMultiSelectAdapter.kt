@@ -4,16 +4,13 @@ import android.graphics.Color
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.MenuRes
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.NumberRollViewBinding
-import code.name.monkey.retromusic.extensions.rootView
 import code.name.monkey.retromusic.views.NumberRollView
 
 abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
