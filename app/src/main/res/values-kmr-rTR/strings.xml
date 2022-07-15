@@ -44,13 +44,13 @@
     <string name="action_set_as_start_directory">Wek rêberiya destpêkê saz bike</string>
     <string name="action_settings">"Sazkarî"</string>
     <string name="action_share">Parve bike</string>
-    <string name="action_shuffle_all">Hemûyan tevlihev bike</string>
-    <string name="action_shuffle_playlist">Rêzoka lêdanê tevlihev bike</string>
+    <string name="action_shuffle_all">Hemûyan tevlîhev bike</string>
+    <string name="action_shuffle_playlist">Rêzoka lêdanê tevlîhev bike</string>
     <string name="action_sleep_timer">Demkera xewê</string>
     <string name="action_sort_order">Rêzkirin bi</string>
     <string name="action_tag_editor">Zanyariyên stranê serrast bike</string>
     <string name="action_toggle_favorite">Bijarteyan biguherîne</string>
-    <string name="action_toggle_shuffle">Awaya tevlihevkirinê çalak bike</string>
+    <string name="action_toggle_shuffle">Awaya tevlîhevkirinê çalak bike</string>
     <string name="adaptive">Guncav</string>
     <string name="add_action">Tevlî bike</string>
     <string name="add_playlist_title">"Tevlî rêzoka lêdanê bike"</string>
@@ -72,7 +72,7 @@
     <string name="always">Her dem</string>
     <string name="app_share">Silav ev lêdera muzîkê ya xweşik li vir binêre:
 https://play.google.com/store/apps/details?id=%s</string>
-    <string name="app_shortcut_shuffle_all_short">Tevlihev bike</string>
+    <string name="app_shortcut_shuffle_all_short">Tevlîhev bike</string>
     <string name="app_shortcut_top_tracks_short">Xweştirîn stran</string>
     <string name="app_widget_big_name">Wêneya tijî</string>
     <string name="app_widget_card_name">Kert</string>
@@ -258,7 +258,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="my_name">Nav</string>
     <string name="my_top_tracks">Herî pir lêdayî</string>
     <string name="never">Tu car</string>
-    <string name="new_music_mix">Muzîka nû tevlihev bike</string>
+    <string name="new_music_mix">Muzîka nû tevlîhev bike</string>
     <string name="new_playlist_title">Rêzoka lêdanê ya nû</string>
     <string name="new_start_directory">%s reberiya destpêkê ya nû ye.</string>
     <string name="next_song">Strana pêş</string>
@@ -364,12 +364,12 @@ têne guhertin</string>
     <string name="pref_summary_pause_history">Dema ku çalak be, stranên ku nû hatine lêdan wê di dîrokê de neyên xuyakirin</string>
     <string name="pref_summary_remember_tab">Dema ku dest pê dike, biçe rûgera herî dawî ya ku hatiye bikaranîn</string>
     <string name="pref_summary_show_lyrics">Peyvên stranê hevdemkirî li ser berga albumê nîşan bide</string>
-    <string name="pref_summary_suggestions">Bişkoka tevlihevkirina Muzîka nû li ser dîmenera sereke nîşan bide</string>
+    <string name="pref_summary_suggestions">Bişkoka tevlîhevkirina Muzîka nû li ser dîmenera sereke nîşan bide</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Bi kişandina li her derê li ser dîmendera lêdanê stranan biguherîne</string>
     <string name="pref_summary_swipe_to_dismiss">Berjêr kaş bike da ku lêdera mini paşguh bikî</string>
     <string name="pref_summary_toggle_full_screen">Awaya dîmendera tije çalak bike</string>
     <string name="pref_summary_toggle_headset">Piştî ku guhik hate girêdan tavilê dest bi lêdanê bike</string>
-    <string name="pref_summary_toggle_shuffle">Dema ku ji rêzeyeke stran were lêdan wê awaya tevlihevkirinê were neçalakkirin</string>
+    <string name="pref_summary_toggle_shuffle">Dema ku ji rêzeyeke stran were lêdan wê awaya tevlîhevkirinê were neçalakkirin</string>
     <string name="pref_summary_toggle_volume">Ku şûn hebe, di dîmendera ku niha tê lêdan de kontrolên dengê nîşan bide</string>
     <string name="pref_summary_wallpaper_accent">Renga çarçoveyê ji paşrûyê derxîne</string>
     <string name="pref_summary_whitelist">Muzîkê tenê ji /Peldanka muzîkê nîşan bide</string>
@@ -418,7 +418,7 @@ têne guhertin</string>
     <string name="pref_title_toggle_carousel_effect">Bandora gilover</string>
     <string name="pref_title_toggle_full_screen">Sepanê di dîmendera tije bide xebitandin</string>
     <string name="pref_title_toggle_toggle_headset">Lêdana xweber</string>
-    <string name="pref_title_toggle_toggle_shuffle">Awaya tevlihevkirinê</string>
+    <string name="pref_title_toggle_toggle_shuffle">Awaya tevlîhevkirinê</string>
     <string name="pref_title_toggle_volume">Kontrola dengê</string>
     <string name="pref_title_wallpaper_accent">Rengê devokê paşrûyê</string>
     <string name="pref_title_whitelist">Rêzoka stranên spî</string>
@@ -458,7 +458,7 @@ têne guhertin</string>
     <!-- SAF -->
     <string name="saf_error_uri">Nikare girêdana SAF bi dest bixe</string>
     <string name="saf_guide_slide1_description">Menuya geranê veke</string>
-    <string name="saf_guide_slide1_description_before_o">Di menuya tevlihev de \'Kerta SD nîşan bide\' çalak bike</string>
+    <string name="saf_guide_slide1_description_before_o">Di menuya tevlîhev de \'Kerta SD nîşan bide\' çalak bike</string>
     <!-- SAF guide -->
     <string name="saf_guide_slide1_title">%s pêdivî bi gihiştina karta SD heye</string>
     <string name="saf_guide_slide2_description">Pêdivî ye ku tu rêberiya rehê kerta SD hilbijêrî</string>
@@ -484,7 +484,7 @@ têne guhertin</string>
     <string name="share_summary">Sepanê bi heval û malbata xwe re parve bike</string>
     <string name="share_to_stories">Di çîrokan de parve bike</string>
     <string name="show_album_artists">Hunermendê albumê nîşan bide</string>
-    <string name="shuffle">Tevlihev bike</string>
+    <string name="shuffle">Tevlîhev bike</string>
     <string name="simple">Hêsan</string>
     <string name="sleep_timer_canceled">Demkera xewê hate têkbirin.</string>
     <string name="sleep_timer_set">Demkera xewê ji bo %d xulek hate sazkirin.</string>
