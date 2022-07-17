@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.adapter.playlist
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -23,6 +24,8 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isGone
 import androidx.core.view.setPadding
 import androidx.fragment.app.FragmentActivity
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
@@ -69,7 +72,7 @@ class PlaylistAdapter(
         return createViewHolder(view)
     }
 
-    fun createViewHolder(view: View): ViewHolder {
+    private fun createViewHolder(view: View): ViewHolder {
         return ViewHolder(view)
     }
 
@@ -98,16 +101,24 @@ class PlaylistAdapter(
         holder.title?.text = getPlaylistTitle(playlist.playlistEntity)
         holder.text?.text = getPlaylistText(playlist)
         holder.menu?.isGone = isChecked(playlist)
-        GlideApp.with(activity)
-            .load(
-                if (itemLayoutRes == R.layout.item_list) {
-                    holder.image?.setPadding(activity.dipToPix(8F).toInt())
-                    R.drawable.ic_playlist_play
-                } else PlaylistPreview(playlist)
-            )
-            .playlistOptions()
-            .into(holder.image!!)
+        if (itemLayoutRes == R.layout.item_list) {
+            holder.image?.setPadding(activity.dipToPix(8F).toInt())
+            holder.image?.setImageDrawable(getIconRes())
+        } else {
+            GlideApp.with(activity)
+                .load(
+                    PlaylistPreview(playlist)
+                )
+                .playlistOptions()
+                .into(holder.image!!)
+        }
     }
+
+    private fun getIconRes(): Drawable = TintHelper.createTintedDrawable(
+        activity,
+        R.drawable.ic_playlist_play,
+        ATHUtil.resolveColor(activity, R.attr.colorControlNormal)
+    )
 
     override fun getItemCount(): Int {
         return dataSet.size
