@@ -6,6 +6,7 @@ apply plugin: 'kotlin-parcelize'
 
 android {
     compileSdk 32
+    namespace "code.name.monkey.retromusic"
 
     defaultConfig {
         minSdk 21
@@ -13,7 +14,7 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
-        applicationId "code.name.monkey.retromusic"
+        applicationId namespace
         versionCode 10597
         versionName '6.0.2-beta'
 
