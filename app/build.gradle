@@ -20,23 +20,27 @@ android {
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }
-    signingConfigs {
-        release {
-            Properties properties = getProperties('retro.properties')
-            storeFile file(getProperty(properties, 'storeFile'))
-            keyAlias getProperty(properties, 'keyAlias')
-            storePassword getProperty(properties, 'storePassword')
-            keyPassword getProperty(properties, 'keyPassword')
+    def signingProperties = getProperties('retro.properties')
+    def releaseSigning
+    if (signingProperties != null) {
+        releaseSigning = signingConfigs.create("release") {
+            storeFile file(getProperty(signingProperties, 'storeFile'))
+            keyAlias getProperty(signingProperties, 'keyAlias')
+            storePassword getProperty(signingProperties, 'storePassword')
+            keyPassword getProperty(signingProperties, 'keyPassword')
         }
+    } else {
+        releaseSigning = signingConfigs.debug
     }
     buildTypes {
         release {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig releaseSigning
         }
         debug {
+            signingConfig releaseSigning
             applicationIdSuffix '.debug'
             versionNameSuffix ' DEBUG'
         }
@@ -51,7 +55,7 @@ android {
         }
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
     packagingOptions {
@@ -76,16 +80,18 @@ android {
 }
 
 def getProperties(String fileName) {
-    final Properties properties = new Properties()
+    Properties properties = new Properties()
     def file = rootProject.file(fileName)
     if (file.exists()) {
         file.withInputStream { stream -> properties.load(stream) }
+    } else {
+        properties = null
     }
     return properties
 }
 
 static def getProperty(Properties properties, String name) {
-    return properties.getProperty(name) ?: "$name missing"
+    return properties?.getProperty(name) ?: "$name missing"
 }
 
 dependencies {

@@ -19,16 +19,5 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - uses: gradle/gradle-build-action@v2
-
-    - name: Generate temporary keystore
-      run: keytool -genkey -v -storetype pkcs12 -keystore store.p12 -storepass android -alias android -keyalg RSA -keysize 2048 -validity 10000 -dname CN=CI
-    - name: Write retro.properties
-      run: |
-        cat >retro.properties <<EOF
-        storeFile=$PWD/store.p12
-        keyAlias=android
-        storePassword=android
-        keyPassword=android
-        EOF
     - name: Build with Gradle
       run: ./gradlew build
