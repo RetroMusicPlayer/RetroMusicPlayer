@@ -137,9 +137,7 @@ dependencies {
 
     implementation 'com.afollestad:material-cab:2.0.1'
 
-    def kotlin_coroutines_version = '1.6.3'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     def koin_version = '3.2.0'
     implementation "io.insert-koin:koin-core:$koin_version"

@@ -2,8 +2,8 @@
 
 buildscript {
     ext {
-        lifecycle_version='2.5.0-rc02'
-        navigation_version = '2.5.0-rc02'
+        lifecycle_version='2.5.0'
+        navigation_version = '2.5.0'
         mdc_version = '1.7.0-alpha02'
         preference_version = '1.2.0'
         appcompat_version = '1.4.2'
