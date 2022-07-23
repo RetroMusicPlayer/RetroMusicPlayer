@@ -6,6 +6,7 @@ apply plugin: 'kotlin-parcelize'
 
 android {
     compileSdk 32
+    namespace "code.name.monkey.retromusic"
 
     defaultConfig {
         minSdk 21
@@ -13,29 +14,33 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
-        applicationId "code.name.monkey.retromusic"
+        applicationId namespace
         versionCode 10597
         versionName '6.0.2-beta'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }
-    signingConfigs {
-        release {
-            Properties properties = getProperties('retro.properties')
-            storeFile file(getProperty(properties, 'storeFile'))
-            keyAlias getProperty(properties, 'keyAlias')
-            storePassword getProperty(properties, 'storePassword')
-            keyPassword getProperty(properties, 'keyPassword')
+    def signingProperties = getProperties('retro.properties')
+    def releaseSigning
+    if (signingProperties != null) {
+        releaseSigning = signingConfigs.create("release") {
+            storeFile file(getProperty(signingProperties, 'storeFile'))
+            keyAlias getProperty(signingProperties, 'keyAlias')
+            storePassword getProperty(signingProperties, 'storePassword')
+            keyPassword getProperty(signingProperties, 'keyPassword')
         }
+    } else {
+        releaseSigning = signingConfigs.debug
     }
     buildTypes {
         release {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig releaseSigning
         }
         debug {
+            signingConfig releaseSigning
             applicationIdSuffix '.debug'
             versionNameSuffix ' DEBUG'
         }
@@ -50,7 +55,7 @@ android {
         }
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
     packagingOptions {
@@ -75,16 +80,18 @@ android {
 }
 
 def getProperties(String fileName) {
-    final Properties properties = new Properties()
+    Properties properties = new Properties()
     def file = rootProject.file(fileName)
     if (file.exists()) {
         file.withInputStream { stream -> properties.load(stream) }
+    } else {
+        properties = null
     }
     return properties
 }
 
 static def getProperty(Properties properties, String name) {
-    return properties.getProperty(name) ?: "$name missing"
+    return properties?.getProperty(name) ?: "$name missing"
 }
 
 dependencies {
@@ -137,11 +144,7 @@ dependencies {
 
     implementation 'com.afollestad:material-cab:2.0.1'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-
-    def kotlin_coroutines_version = '1.6.3'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     def koin_version = '3.2.0'
     implementation "io.insert-koin:koin-core:$koin_version"

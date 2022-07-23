@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 android {
     compileSdk 32
+    namespace "code.name.monkey.appthemehelper"
 
     defaultConfig {
         minSdk 21
@@ -26,6 +27,4 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$mdc_version"
     implementation "androidx.preference:preference-ktx:$preference_version"
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
