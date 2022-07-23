@@ -253,7 +253,7 @@
     <string name="message_pro_feature">%s bir Pro özelliğidir.</string>
     <string name="message_restore_success">Geri yükleme başarıyla tamamlandı.</string>
     <string name="message_updated">Güncellendi</string>
-    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
+    <string name="message_welcome"><![CDATA[Merhaba! <br>%s'e<br> hoşgeldin]]></string>
     <string name="my_name">İsim</string>
     <string name="my_top_tracks">Sık oynatılanlar</string>
     <string name="never">Asla</string>
