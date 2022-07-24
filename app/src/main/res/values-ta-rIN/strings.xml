@@ -5,11 +5,11 @@
     <string name="accent_color">பொத்தான் நிறம்</string>
     <string name="accent_color_desc">பொத்தான்_நிறம்_பற்றி</string>
     <string name="action_about">எங்களை பற்றி</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="action_add_to_blacklist">பிடிக்காதவையில் சேர்</string>
     <string name="action_add_to_favorites">பிடித்தவையில் சேமி</string>
     <string name="action_add_to_playing_queue">பாடல் வரிசையில் சேர்</string>
     <string name="action_add_to_playlist">பாடல் வரிசையில் சேர்</string>
-    <string name="action_cancel">Cancel</string>
+    <string name="action_cancel">நிராகரி</string>
     <string name="action_cast">ஒப்பனை</string>
     <string name="action_clear_playing_queue">பாடல் வரிசையை நீக்கு</string>
     <string name="action_cycle_repeat">திரும்பச் செய்</string>
@@ -20,7 +20,7 @@
     <string name="action_go_to_album">பாடல் படப்பட்டியல் செல்</string>
     <string name="action_go_to_artist">கலைஞரை காணவும்</string>
     <string name="action_go_to_genre">தொகுப்பு செல்</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">பாடல் வரிகள்</string>
     <string name="action_go_to_start_directory">துவக்கப் பட்டியல் செல்</string>
     <string name="action_grant">அனுமதி</string>
     <string name="action_grid_size">பகுதி அளவு</string>
@@ -49,24 +49,24 @@
     <string name="action_sleep_timer">உறக்க கடிகாரம்</string>
     <string name="action_sort_order">வரிசை பட்டியல்</string>
     <string name="action_tag_editor">பாடல் அமைப்பை மாற்று</string>
-    <string name="action_toggle_favorite">Toggle favorite</string>
+    <string name="action_toggle_favorite">பிடித்தவை</string>
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
-    <string name="adaptive">Adaptive</string>
+    <string name="adaptive">தகவமை</string>
     <string name="add_action">சேர்</string>
     <string name="add_playlist_title">"பாடல் வரிசையில் சேர்"</string>
-    <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
-    <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
-    <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
-    <string name="album">Album</string>
+    <string name="add_time_framed_lryics">இன்றைக்கும் பட்ட பாடல் வரிகளைச் சேர்</string>
+    <string name="added_song_count_to_playlist">%1$d பாடல்கள் %2$sயில் சேர்க்கப்பட்டுள்ளது</string>
+    <string name="added_title_to_playing_queue">"ஒரு பாடல் வரிசையில் சேர்க்கப்பட்டது."</string>
+    <string name="added_x_titles_to_playing_queue">%1$d பாடல்கள் வரிசையில் சேர்க்கப்பட்டுள்ளது.</string>
+    <string name="album">தொகுப்பு</string>
     <plurals name="albumSongs">
         <item quantity="one">Song</item>
         <item quantity="other">பாடல்கள்</item>
     </plurals>
-    <string name="album_artist">Album Artist</string>
-    <string name="albums">Albums</string>
+    <string name="album_artist">பாடல் ஆசிரியர்</string>
+    <string name="albums">தொகுப்புகள்</string>
     <plurals name="albums">
-        <item quantity="one">Album</item>
+        <item quantity="one">தொகுப்பு</item>
         <item quantity="other">Albums</item>
     </plurals>
     <string name="always">Always</string>
@@ -493,7 +493,7 @@
     <string name="songs">Songs</string>
     <string name="sort_order">வரிசை பட்டியல்</string>
     <string name="sort_order_a_z">Ascending</string>
-    <string name="sort_order_album">Album</string>
+    <string name="sort_order_album">தொகுப்பு</string>
     <string name="sort_order_artist">Artist</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
