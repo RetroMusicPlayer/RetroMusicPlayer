@@ -65,6 +65,7 @@ android {
         }
     }
     lint {
+        abortOnError true
         warning 'ImpliedQuantity', 'Instantiatable', 'MissingQuantity', 'MissingTranslation'
     }
     compileOptions {
