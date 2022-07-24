@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.devtools.ksp'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-parcelize'
 
@@ -122,7 +123,7 @@ dependencies {
     def room_version = '2.5.0-alpha02'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
