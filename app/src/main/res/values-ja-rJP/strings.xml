@@ -3,12 +3,12 @@
     <string name="about_album_label">%s について</string>
     <string name="about_settings_summary">我々のチームとソーシャルリンク</string>
     <string name="accent_color">アクセントカラー</string>
-    <string name="accent_color_desc">テーマのアクセントカラー、既定は青緑色です。</string>
+    <string name="accent_color_desc">テーマのアクセントカラー、既定は紫色です。</string>
     <string name="action_about">このアプリについて</string>
     <string name="action_add_to_blacklist">ブラックリストに追加</string>
     <string name="action_add_to_favorites">お気に入りに追加</string>
     <string name="action_add_to_playing_queue">再生キューに追加</string>
-    <string name="action_add_to_playlist">プレイリストに追加…</string>
+    <string name="action_add_to_playlist">プレイリストに追加</string>
     <string name="action_cancel">キャンセル</string>
     <string name="action_cast">キャスト</string>
     <string name="action_clear_playing_queue">再生キューをクリア</string>
@@ -140,7 +140,7 @@
     <string name="create_new_backup">作成</string>
     <string name="created_playlist_x">プレイリストを作成しました %1$s</string>
     <string name="credit_title">メンバーと貢献者</string>
-    <string name="currently_listening_to_x_by_x">現在、 %1$s によって %2$s で聴いています。</string>
+    <string name="currently_listening_to_x_by_x">現在、 %2$s で %1$s を聴いています。</string>
     <string name="custom_artist_images">カスタムアーティスト画像</string>
     <string name="customactivityoncrash_error_activity_error_details_share">クラッシュレポートを共有</string>
     <string name="dark_theme_name">ダーク</string>
