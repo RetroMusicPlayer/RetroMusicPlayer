@@ -35,7 +35,6 @@ import java.util.List;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.VersionUtils;
-import code.name.monkey.retromusic.R;
 
 public class RetroColorUtil {
   public static int desaturateColor(int color, float ratio) {
@@ -224,7 +223,7 @@ public class RetroColorUtil {
 
   public static int getMD3AccentColor(@NotNull Context context) {
     if (VersionUtils.hasS()) {
-      return ContextCompat.getColor(context, R.color.m3_accent_color);
+      return ContextCompat.getColor(context, code.name.monkey.appthemehelper.R.color.m3_accent_color);
     } else {
       return ThemeStore.Companion.accentColor(context);
     }

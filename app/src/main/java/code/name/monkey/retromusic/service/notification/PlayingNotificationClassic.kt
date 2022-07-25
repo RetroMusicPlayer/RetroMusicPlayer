@@ -124,14 +124,14 @@ class PlayingNotificationClassic(
                     super.onLoadFailed(errorDrawable)
                     update(
                         null,
-                        resolveColor(context, R.attr.colorSurface, Color.WHITE)
+                        resolveColor(context, com.google.android.material.R.attr.colorSurface, Color.WHITE)
                     )
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
                     update(
                         null,
-                        resolveColor(context, R.attr.colorSurface, Color.WHITE)
+                        resolveColor(context, com.google.android.material.R.attr.colorSurface, Color.WHITE)
                     )
                 }
 
@@ -157,7 +157,7 @@ class PlayingNotificationClassic(
                     if (!VersionUtils.hasS()) {
                         if (!PreferenceUtil.isColoredNotification) {
                             bgColorFinal =
-                                resolveColor(context, R.attr.colorSurface, Color.WHITE)
+                                resolveColor(context, com.google.android.material.R.attr.colorSurface, Color.WHITE)
                         }
                         setBackgroundColor(bgColorFinal)
                         setNotificationContent(ColorUtil.isColorLight(bgColorFinal))

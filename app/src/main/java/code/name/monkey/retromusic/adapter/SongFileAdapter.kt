@@ -97,7 +97,7 @@ class SongFileAdapter(
     }
 
     private fun loadFileImage(file: File, holder: ViewHolder) {
-        val iconColor = ATHUtil.resolveColor(activity, R.attr.colorControlNormal)
+        val iconColor = ATHUtil.resolveColor(activity, androidx.appcompat.R.attr.colorControlNormal)
         if (file.isDirectory) {
             holder.image?.let {
                 it.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
@@ -106,7 +106,7 @@ class SongFileAdapter(
             holder.imageTextContainer?.setCardBackgroundColor(
                 ATHUtil.resolveColor(
                     activity,
-                    R.attr.colorSurface
+                    com.google.android.material.R.attr.colorSurface
                 )
             )
         } else {

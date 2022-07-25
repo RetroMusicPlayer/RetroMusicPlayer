@@ -39,7 +39,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import code.name.monkey.appthemehelper.R;
 import code.name.monkey.appthemehelper.ThemeStore;
 
 public final class ToolbarContentTintHelper {
@@ -122,7 +121,7 @@ public final class ToolbarContentTintHelper {
         public static void setOverflowButtonColor(@NonNull Activity activity,
                 final @ColorInt int color) {
             final String overflowDescription = activity
-                    .getString(R.string.abc_action_menu_overflow_description);
+                    .getString(androidx.appcompat.R.string.abc_action_menu_overflow_description);
             final ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
             final ViewTreeObserver viewTreeObserver = decorView.getViewTreeObserver();
             viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -283,7 +282,7 @@ public final class ToolbarContentTintHelper {
     }
 
     public static void colorBackButton(@NonNull Toolbar toolbar) {
-        int color = ATHUtil.INSTANCE.resolveColor(toolbar.getContext(), R.attr.colorControlNormal);
+        int color = ATHUtil.INSTANCE.resolveColor(toolbar.getContext(), androidx.appcompat.R.attr.colorControlNormal);
         final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY);
         for (int i = 0; i < toolbar.getChildCount(); i++) {
             final View backButton = toolbar.getChildAt(i);
@@ -564,7 +563,7 @@ public final class ToolbarContentTintHelper {
     private static void setOverflowButtonColor(final Activity activity,
             final PorterDuffColorFilter colorFilter) {
         final String overflowDescription = activity
-                .getString(R.string.abc_action_menu_overflow_description);
+                .getString(androidx.appcompat.R.string.abc_action_menu_overflow_description);
         final ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         final ViewTreeObserver viewTreeObserver = decorView.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -596,9 +595,9 @@ public final class ToolbarContentTintHelper {
     private static void tintShareIconIfPresent(int color, MenuItem item) {
         if (item.getActionView() != null) {
             final View actionView = item.getActionView();
-            final View expandActivitiesButton = actionView.findViewById(R.id.expand_activities_button);
+            final View expandActivitiesButton = actionView.findViewById(com.google.android.material.R.id.expand_activities_button);
             if (expandActivitiesButton != null) {
-                final ImageView image = expandActivitiesButton.findViewById(R.id.image);
+                final ImageView image = expandActivitiesButton.findViewById(com.google.android.material.R.id.image);
                 if (image != null) {
                     final Drawable drawable = image.getDrawable();
                     final Drawable wrapped = DrawableCompat.wrap(drawable);

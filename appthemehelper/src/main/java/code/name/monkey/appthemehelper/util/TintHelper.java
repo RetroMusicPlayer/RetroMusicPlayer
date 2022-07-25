@@ -265,7 +265,7 @@ public final class TintHelper {
                 // Ripples for the above views (e.g. when you tap and hold a switch or checkbox)
                 RippleDrawable rd = (RippleDrawable) view.getBackground();
                 @SuppressLint("PrivateResource") final int unchecked = ContextCompat.getColor(view.getContext(),
-                        isDark ? R.color.ripple_material_dark : R.color.ripple_material_light);
+                        isDark ? androidx.appcompat.R.color.ripple_material_dark : androidx.appcompat.R.color.ripple_material_light);
                 final int checked = ColorUtil.INSTANCE.adjustAlpha(color, 0.4f);
                 final ColorStateList sl = new ColorStateList(
                         new int[][]{
@@ -373,7 +373,7 @@ public final class TintHelper {
     private static int getDefaultRippleColor(@NonNull Context context, boolean useDarkRipple) {
         // Light ripple is actually translucent black, and vice versa
         return ContextCompat.getColor(context, useDarkRipple ?
-                R.color.ripple_material_light : R.color.ripple_material_dark);
+                androidx.appcompat.R.color.ripple_material_light : androidx.appcompat.R.color.ripple_material_dark);
     }
 
     @NonNull

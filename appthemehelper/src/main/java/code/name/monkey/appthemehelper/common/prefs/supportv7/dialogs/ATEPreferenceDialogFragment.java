@@ -29,8 +29,6 @@ import androidx.preference.DialogPreference;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import code.name.monkey.appthemehelper.R;
-
 /**
  * @author Karim Abou Zeid (kabouzeid)
  */
@@ -64,7 +62,7 @@ public class ATEPreferenceDialogFragment extends DialogFragment implements Dialo
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         FragmentActivity context = this.getActivity();
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context,
-                R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+                com.google.android.material.R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle(this.mPreference.getDialogTitle())
                 .setIcon(this.mPreference.getDialogIcon())
                 .setMessage(this.mPreference.getDialogMessage())

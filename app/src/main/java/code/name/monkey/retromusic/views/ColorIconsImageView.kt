@@ -51,7 +51,7 @@ class ColorIconsImageView @JvmOverloads constructor(
             val desaturatedColor = RetroColorUtil.desaturateColor(color, 0.4f)
             backgroundTintList = ColorStateList.valueOf(desaturatedColor)
             imageTintList =
-                ColorStateList.valueOf(ATHUtil.resolveColor(context, R.attr.colorSurface))
+                ColorStateList.valueOf(ATHUtil.resolveColor(context, com.google.android.material.R.attr.colorSurface))
         } else {
             val finalColor = MaterialColors.harmonize(
                 color,

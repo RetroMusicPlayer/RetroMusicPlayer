@@ -35,7 +35,6 @@ import java.util.List;
 
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.retromusic.R;
 
 /** A class the processes media notifications and extracts the right text and background colors. */
 public class MediaNotificationProcessor {
@@ -454,7 +453,7 @@ public class MediaNotificationProcessor {
   public int getMightyColor() {
     boolean isDarkBg =
         ColorUtil.INSTANCE.isColorLight(
-            ATHUtil.INSTANCE.resolveColor(context, R.attr.colorSurface));
+            ATHUtil.INSTANCE.resolveColor(context, com.google.android.material.R.attr.colorSurface));
     if (isDarkBg) {
       if (isColorLight(backgroundColor)) {
         return primaryTextColor;

@@ -53,7 +53,7 @@ class MD3PlayerFragment : AbsPlayerFragment(R.layout.fragment_md3_player) {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
+        return ATHUtil.resolveColor(requireContext(), androidx.appcompat.R.attr.colorControlNormal)
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
@@ -63,7 +63,7 @@ class MD3PlayerFragment : AbsPlayerFragment(R.layout.fragment_md3_player) {
 
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            ATHUtil.resolveColor(requireContext(), androidx.appcompat.R.attr.colorControlNormal),
             requireActivity()
         )
     }
@@ -108,7 +108,7 @@ class MD3PlayerFragment : AbsPlayerFragment(R.layout.fragment_md3_player) {
 
         ToolbarContentTintHelper.colorizeToolbar(
             binding.playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            ATHUtil.resolveColor(requireContext(), androidx.appcompat.R.attr.colorControlNormal),
             requireActivity()
         )
     }
