@@ -67,24 +67,24 @@
     <string name="albums">தொகுப்புகள்</string>
     <plurals name="albums">
         <item quantity="one">தொகுப்பு</item>
-        <item quantity="other">Albums</item>
+        <item quantity="other">தொகுப்புகள்</item>
     </plurals>
-    <string name="always">Always</string>
-    <string name="app_share">Hey check out this cool music player at: https://play.google.com/store/apps/details?id=%s</string>
-    <string name="app_shortcut_shuffle_all_short">Shuffle</string>
+    <string name="always">எப்பொழுதும்</string>
+    <string name="app_share">இந்தச் செயலியைக் காண: https://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_shortcut_shuffle_all_short">குழப்பு</string>
     <string name="app_shortcut_top_tracks_short">Top Tracks</string>
-    <string name="app_widget_big_name">Full Image</string>
-    <string name="app_widget_card_name">Card</string>
-    <string name="app_widget_classic_name">Classic</string>
+    <string name="app_widget_big_name">முழு படம்</string>
+    <string name="app_widget_card_name">அட்டை</string>
+    <string name="app_widget_classic_name">பழமையான</string>
     <string name="app_widget_md3_name">MD3</string>
-    <string name="app_widget_small_name">Small</string>
+    <string name="app_widget_small_name">சிறிய</string>
     <string name="app_widget_text_name">Minimal Text</string>
-    <string name="artist">Artist</string>
-    <string name="artists">Artists</string>
+    <string name="artist">பாடகர்</string>
+    <string name="artists">பாடகர்கள்</string>
     <string name="audio_fade_duration">Audio fade duration</string>
     <string name="audio_focus_denied">Audio focus denied.</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
-    <string name="auto">Auto</string>
+    <string name="auto">தானியங்கி</string>
     <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
@@ -111,10 +111,10 @@
     <string name="bug_report_use_account">Send using GitHub account</string>
     <string name="buy_now">Buy now</string>
     <string name="cancel_current_timer">Cancel</string>
-    <string name="card">Card</string>
+    <string name="card">அட்டை</string>
     <string name="card_color_style">Colored Card</string>
     <string name="card_square">Square Card</string>
-    <string name="card_style">Card</string>
+    <string name="card_style">அட்டை</string>
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
     <string name="cascading">Cascading</string>
     <string name="changelog">Changelog</string>
@@ -123,7 +123,7 @@
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
     <string name="circular">Circular</string>
-    <string name="classic">Classic</string>
+    <string name="classic">பழமையான</string>
     <string name="clear_action">Clear</string>
     <string name="clear_blacklist">Clear blacklist</string>
     <string name="clear_history">Clear History</string>
@@ -482,7 +482,7 @@
     <string name="share_summary">Share the app with your friends and family</string>
     <string name="share_to_stories">Share to Stories</string>
     <string name="show_album_artists">Show Album Artists</string>
-    <string name="shuffle">Shuffle</string>
+    <string name="shuffle">குழப்பு</string>
     <string name="simple">Simple</string>
     <string name="sleep_timer_canceled">Sleep timer canceled.</string>
     <string name="sleep_timer_set">Sleep timer set for %d minutes from now.</string>
@@ -494,7 +494,7 @@
     <string name="sort_order">வரிசை பட்டியல்</string>
     <string name="sort_order_a_z">Ascending</string>
     <string name="sort_order_album">தொகுப்பு</string>
-    <string name="sort_order_artist">Artist</string>
+    <string name="sort_order_artist">பாடகர்</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
