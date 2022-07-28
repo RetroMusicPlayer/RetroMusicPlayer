@@ -50,7 +50,7 @@
     <string name="action_sort_order">வரிசை பட்டியல்</string>
     <string name="action_tag_editor">பாடல் அமைப்பை மாற்று</string>
     <string name="action_toggle_favorite">பிடித்தவை</string>
-    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
+    <string name="action_toggle_shuffle">குழப்பி இயக்கு</string>
     <string name="adaptive">தகவமை</string>
     <string name="add_action">சேர்</string>
     <string name="add_playlist_title">"பாடல் வரிசையில் சேர்"</string>
