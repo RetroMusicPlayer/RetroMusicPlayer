@@ -119,7 +119,7 @@ class AlbumCoverPagerAdapter(
                 withContext(Dispatchers.Main) {
                     MaterialAlertDialogBuilder(
                         requireContext(),
-                        R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+                        com.google.android.material.R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
                     ).apply {
                         setTitle(song.title)
                         setMessage(if (data.isNullOrEmpty()) "No lyrics found" else data)

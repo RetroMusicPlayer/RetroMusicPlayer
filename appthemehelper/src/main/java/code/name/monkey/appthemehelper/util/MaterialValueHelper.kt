@@ -14,8 +14,8 @@ object MaterialValueHelper {
     @ColorInt
     fun getPrimaryTextColor(context: Context?, dark: Boolean): Int {
         return if (dark) {
-            ContextCompat.getColor(context!!, R.color.primary_text_default_material_light)
-        } else ContextCompat.getColor(context!!, R.color.primary_text_default_material_dark)
+            ContextCompat.getColor(context!!, androidx.appcompat.R.color.primary_text_default_material_light)
+        } else ContextCompat.getColor(context!!, androidx.appcompat.R.color.primary_text_default_material_dark)
     }
 
     @SuppressLint("PrivateResource")
@@ -23,8 +23,8 @@ object MaterialValueHelper {
     @ColorInt
     fun getSecondaryTextColor(context: Context?, dark: Boolean): Int {
         return if (dark) {
-            ContextCompat.getColor(context!!, R.color.secondary_text_default_material_light)
-        } else ContextCompat.getColor(context!!, R.color.secondary_text_default_material_dark)
+            ContextCompat.getColor(context!!, androidx.appcompat.R.color.secondary_text_default_material_light)
+        } else ContextCompat.getColor(context!!, androidx.appcompat.R.color.secondary_text_default_material_dark)
     }
 
     @SuppressLint("PrivateResource")
@@ -32,8 +32,8 @@ object MaterialValueHelper {
     @ColorInt
     fun getPrimaryDisabledTextColor(context: Context?, dark: Boolean): Int {
         return if (dark) {
-            ContextCompat.getColor(context!!, R.color.primary_text_disabled_material_light)
-        } else ContextCompat.getColor(context!!, R.color.primary_text_disabled_material_dark)
+            ContextCompat.getColor(context!!, androidx.appcompat.R.color.primary_text_disabled_material_light)
+        } else ContextCompat.getColor(context!!, androidx.appcompat.R.color.primary_text_disabled_material_dark)
     }
 
     @SuppressLint("PrivateResource")
@@ -41,7 +41,7 @@ object MaterialValueHelper {
     @ColorInt
     fun getSecondaryDisabledTextColor(context: Context?, dark: Boolean): Int {
         return if (dark) {
-            ContextCompat.getColor(context!!, R.color.secondary_text_disabled_material_light)
-        } else ContextCompat.getColor(context!!, R.color.secondary_text_disabled_material_dark)
+            ContextCompat.getColor(context!!, androidx.appcompat.R.color.secondary_text_disabled_material_light)
+        } else ContextCompat.getColor(context!!, androidx.appcompat.R.color.secondary_text_disabled_material_dark)
     }
 }
