@@ -52,7 +52,7 @@ fun Int.ripAlpha(): Int {
 fun Dialog.colorControlNormal() = resolveColor(android.R.attr.colorControlNormal)
 
 fun Toolbar.backgroundTintList() {
-    val surfaceColor = ATHUtil.resolveColor(context, R.attr.colorSurface, Color.BLACK)
+    val surfaceColor = ATHUtil.resolveColor(context, com.google.android.material.R.attr.colorSurface, Color.BLACK)
     val colorStateList = ColorStateList.valueOf(surfaceColor)
     backgroundTintList = colorStateList
 }
@@ -61,13 +61,13 @@ fun Context.accentColor() = ThemeStore.accentColor(this)
 
 fun Fragment.accentColor() = ThemeStore.accentColor(requireContext())
 
-fun Context.surfaceColor() = resolveColor(R.attr.colorSurface, Color.WHITE)
+fun Context.surfaceColor() = resolveColor(com.google.android.material.R.attr.colorSurface, Color.WHITE)
 
-fun Fragment.surfaceColor() = resolveColor(R.attr.colorSurface, Color.WHITE)
+fun Fragment.surfaceColor() = resolveColor(com.google.android.material.R.attr.colorSurface, Color.WHITE)
 
-fun Context.surfaceColor(fallBackColor: Int) = resolveColor(R.attr.colorSurface, fallBackColor)
+fun Context.surfaceColor(fallBackColor: Int) = resolveColor(com.google.android.material.R.attr.colorSurface, fallBackColor)
 
-fun Fragment.surfaceColor(fallBackColor: Int) = resolveColor(R.attr.colorSurface, fallBackColor)
+fun Fragment.surfaceColor(fallBackColor: Int) = resolveColor(com.google.android.material.R.attr.colorSurface, fallBackColor)
 
 fun Context.textColorSecondary() = resolveColor(android.R.attr.textColorSecondary)
 

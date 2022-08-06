@@ -1,3 +1,15 @@
+// https://docs.gradle.com/enterprise/gradle-plugin/
+plugins {
+    id "com.gradle.enterprise" version "3.10.3"
+}
+
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+    }
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -6,4 +18,5 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
+
 include ':app', ':appthemehelper'

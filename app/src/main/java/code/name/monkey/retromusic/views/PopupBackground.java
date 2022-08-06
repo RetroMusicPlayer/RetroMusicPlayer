@@ -32,8 +32,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import code.name.monkey.retromusic.R;
-
 public class PopupBackground extends Drawable {
 
   private final int mPaddingEnd;
@@ -52,8 +50,8 @@ public class PopupBackground extends Drawable {
     mPaint.setColor(color);
     mPaint.setStyle(Paint.Style.FILL);
     Resources resources = context.getResources();
-    mPaddingStart = resources.getDimensionPixelOffset(R.dimen.afs_md2_popup_padding_start);
-    mPaddingEnd = resources.getDimensionPixelOffset(R.dimen.afs_md2_popup_padding_end);
+    mPaddingStart = resources.getDimensionPixelOffset(me.zhanghai.android.fastscroll.R.dimen.afs_md2_popup_padding_start);
+    mPaddingEnd = resources.getDimensionPixelOffset(me.zhanghai.android.fastscroll.R.dimen.afs_md2_popup_padding_end);
   }
 
   private static void pathArcTo(

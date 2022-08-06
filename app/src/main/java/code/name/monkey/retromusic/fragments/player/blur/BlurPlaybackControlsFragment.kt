@@ -118,7 +118,7 @@ class BlurPlaybackControlsFragment :
     override fun setColor(color: MediaNotificationProcessor) {
         lastPlaybackControlsColor = Color.WHITE
         lastDisabledPlaybackControlsColor =
-            ContextCompat.getColor(requireContext(), R.color.md_grey_500)
+            ContextCompat.getColor(requireContext(), code.name.monkey.appthemehelper.R.color.md_grey_500)
 
         binding.title.setTextColor(lastPlaybackControlsColor)
 

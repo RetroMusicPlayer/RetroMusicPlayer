@@ -38,8 +38,6 @@ import androidx.core.content.ContextCompat;
 import java.util.Locale;
 import java.util.WeakHashMap;
 
-import code.name.monkey.retromusic.R;
-
 /**
  * Helper class to process legacy (Holo) notifications to make them look like material
  * notifications.
@@ -62,7 +60,7 @@ public class NotificationColorUtil {
 
   private NotificationColorUtil(Context context) {
     mGrayscaleIconMaxSize =
-        context.getResources().getDimensionPixelSize(R.dimen.notification_large_icon_width);
+        context.getResources().getDimensionPixelSize(androidx.core.R.dimen.notification_large_icon_width);
   }
 
   public static NotificationColorUtil getInstance(Context context) {

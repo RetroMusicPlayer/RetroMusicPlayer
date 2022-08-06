@@ -71,7 +71,7 @@ class RestoreActivity : AppCompatActivity() {
             DynamicColors.applyToActivityIfAvailable(
                 this,
                 DynamicColorsOptions.Builder()
-                    .setThemeOverlay(R.style.ThemeOverlay_Material3_DynamicColors_DayNight)
+                    .setThemeOverlay(com.google.android.material.R.style.ThemeOverlay_Material3_DynamicColors_DayNight)
                     .build()
             )
         }
