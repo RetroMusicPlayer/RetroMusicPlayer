@@ -117,7 +117,7 @@ class PlaylistAdapter(
     private fun getIconRes(): Drawable = TintHelper.createTintedDrawable(
         activity,
         R.drawable.ic_playlist_play,
-        ATHUtil.resolveColor(activity, R.attr.colorControlNormal)
+        ATHUtil.resolveColor(activity, android.R.attr.colorControlNormal)
     )
 
     override fun getItemCount(): Int {
