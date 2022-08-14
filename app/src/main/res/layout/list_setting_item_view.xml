@@ -33,7 +33,7 @@
         app:iconBackgroundColor="@color/md_blue_A400"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/title"
-        app:srcCompat="@drawable/ic_theme_palette" />
+        app:srcCompat="@drawable/ic_palette" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"

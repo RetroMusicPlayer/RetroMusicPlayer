@@ -431,7 +431,7 @@ public class LrcView extends View {
 
             mTimePaint.setColor(mTimeTextColor);
             String timeText = LrcUtils.formatTime(mLrcEntryList.get(centerLine).getTime());
-            float timeX = getWidth() - mTimeTextWidth / 2;
+            float timeX = getWidth() - mTimeTextWidth / 2F;
             float timeY = centerY - (mTimeFontMetrics.descent + mTimeFontMetrics.ascent) / 2;
             canvas.drawText(timeText, timeX, timeY, mTimePaint);
         }
@@ -531,7 +531,7 @@ public class LrcView extends View {
             lrcEntry.init(mLrcPaint, (int) getLrcWidth(), mTextGravity);
         }
 
-        mOffset = getHeight() / 2;
+        mOffset = getHeight() / 2F;
     }
 
     private void reset() {
@@ -611,7 +611,7 @@ public class LrcView extends View {
 
     private float getOffset(int line) {
         if (mLrcEntryList.get(line).getOffset() == Float.MIN_VALUE) {
-            float offset = getHeight() / 2;
+            float offset = getHeight() / 2F;
             for (int i = 1; i <= line; i++) {
                 offset -=
                         ((mLrcEntryList.get(i - 1).getHeight() + mLrcEntryList.get(i).getHeight()) >> 1)

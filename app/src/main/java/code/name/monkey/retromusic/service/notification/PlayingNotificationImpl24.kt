@@ -75,12 +75,12 @@ class PlayingNotificationImpl24(
         val toggleFavorite = buildFavoriteAction(false)
         val playPauseAction = buildPlayAction(true)
         val previousAction = NotificationCompat.Action(
-            R.drawable.ic_skip_previous_round_white_32dp,
+            R.drawable.ic_skip_previous,
             context.getString(R.string.action_previous),
             retrievePlaybackAction(ACTION_REWIND)
         )
         val nextAction = NotificationCompat.Action(
-            R.drawable.ic_skip_next_round_white_32dp,
+            R.drawable.ic_skip_next,
             context.getString(R.string.action_next),
             retrievePlaybackAction(ACTION_SKIP)
         )

@@ -18,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.openUrl
@@ -26,7 +27,7 @@ import code.name.monkey.retromusic.views.RetroShapeableImageView
 import com.bumptech.glide.Glide
 
 class ContributorAdapter(
-    private var contributors: List<Contributor>
+    private var contributors: List<Contributor>,
 ) : RecyclerView.Adapter<ContributorAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -86,10 +87,9 @@ class ContributorAdapter(
             title.text = contributor.name
             text.text = contributor.summary
             Glide.with(image.context)
-                .load(contributor.image)
+                .load("file:///android_asset/images/${contributor.image}".toUri())
                 .error(R.drawable.ic_account)
                 .placeholder(R.drawable.ic_account)
-                .dontAnimate()
                 .into(image)
         }
     }

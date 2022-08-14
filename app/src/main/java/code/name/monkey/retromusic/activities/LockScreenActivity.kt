@@ -84,12 +84,11 @@ class LockScreenActivity : AbsMusicServiceActivity() {
     private fun lockScreenInit() {
         if (VersionUtils.hasOreoMR1()) {
             setShowWhenLocked(true)
-            val keyguardManager = getSystemService<KeyguardManager>()
-            keyguardManager?.requestDismissKeyguard(this, null)
+            //setTurnScreenOn(true)
         } else {
-            this.window.addFlags(
-                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
-                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+            window.addFlags(
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+              //          or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
             )
         }
     }

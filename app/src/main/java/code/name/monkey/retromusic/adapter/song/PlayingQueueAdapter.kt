@@ -43,9 +43,8 @@ class PlayingQueueAdapter(
     dataSet: MutableList<Song>,
     private var current: Int,
     itemLayoutRes: Int,
-) : SongAdapter(
-    activity, dataSet, itemLayoutRes, null
-), DraggableItemAdapter<PlayingQueueAdapter.ViewHolder>,
+) : SongAdapter(activity, dataSet, itemLayoutRes),
+    DraggableItemAdapter<PlayingQueueAdapter.ViewHolder>,
     SwipeableItemAdapter<PlayingQueueAdapter.ViewHolder>,
     PopupTextProvider {
 

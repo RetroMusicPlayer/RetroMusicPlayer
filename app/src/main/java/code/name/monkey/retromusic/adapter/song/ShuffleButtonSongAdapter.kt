@@ -21,7 +21,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.accentOutlineColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
@@ -30,9 +29,8 @@ import com.google.android.material.button.MaterialButton
 class ShuffleButtonSongAdapter(
     activity: FragmentActivity,
     dataSet: MutableList<Song>,
-    itemLayoutRes: Int,
-    ICabHolder: ICabHolder?
-) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, ICabHolder) {
+    itemLayoutRes: Int
+) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes) {
 
 
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {

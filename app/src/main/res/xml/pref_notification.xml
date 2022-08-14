@@ -7,7 +7,7 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_classic_notification"
         android:title="@string/pref_title_classic_notification"
-        app:icon="@drawable/ic_cellphone_lock" />
+        app:icon="@drawable/ic_notification_classic" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="true"

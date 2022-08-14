@@ -36,8 +36,6 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
-import code.name.monkey.retromusic.interfaces.ICabCallback
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -53,13 +51,11 @@ open class SongAdapter(
     override val activity: FragmentActivity,
     var dataSet: MutableList<Song>,
     protected var itemLayoutRes: Int,
-    ICabHolder: ICabHolder?,
     showSectionName: Boolean = true
 ) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(
     activity,
-    ICabHolder,
     R.menu.menu_media_selection
-), ICabCallback, PopupTextProvider {
+), PopupTextProvider {
 
     private var showSectionName = true
 
@@ -217,6 +213,7 @@ open class SongAdapter(
         }
 
         override fun onLongClick(v: View?): Boolean {
+            println("Long click")
             return toggleChecked(layoutPosition)
         }
     }

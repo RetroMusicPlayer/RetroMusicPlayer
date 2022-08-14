@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_collapseMode="pin"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:title="@string/report_bug"
             app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
@@ -35,12 +35,28 @@
             android:clipToPadding="false"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/card_report"
-                layout="@layout/bug_report_card_report"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginStart="16dp"
+                android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="8dp"
+                    android:text="@string/bug_report_manual"
+                    android:textAppearance="@style/TextViewSubtitle1" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="8dp"
+                    android:text="@string/you_will_be_forwarded_to_the_issue_tracker_website"
+                    android:textAppearance="@style/TextViewCaption" />
+            </LinearLayout>
 
             <include
                 android:id="@+id/card_device_info"

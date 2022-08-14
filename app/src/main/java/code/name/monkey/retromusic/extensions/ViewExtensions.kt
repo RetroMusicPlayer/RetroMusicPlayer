@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.extensions
 
-import android.R
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -72,7 +71,7 @@ fun EditText.appHandleColor(): EditText {
 
 fun NavigationBarView.setItemColors(@ColorInt normalColor: Int, @ColorInt selectedColor: Int) {
     val csl = ColorStateList(
-        arrayOf(intArrayOf(-R.attr.state_checked), intArrayOf(R.attr.state_checked)),
+        arrayOf(intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
         intArrayOf(normalColor, selectedColor)
     )
     itemIconTintList = csl

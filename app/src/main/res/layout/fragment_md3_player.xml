@@ -44,6 +44,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playbackControlsFragment"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

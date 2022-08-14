@@ -1,25 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2020 Hemanth Savarala.
-  ~
-  ~ Licensed under the GNU General Public License v3
-  ~
-  ~ This is free software: you can redistribute it and/or modify it under
-  ~ the terms of the GNU General Public License as published by
-  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
-  ~
-  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  ~ See the GNU General Public License for more details.
-  -->
-
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
-    android:viewportHeight="24">
-
-
-    <path
-        android:fillColor="@color/md_white_1000"
-        android:pathData="M17.59 3.59c-0.38-0.38-0.89-0.59-1.42-0.59H5c-1.11 0-2 0.9-2 2v14c0 1.1 0.9 2 2 2h14c1.1 0 2-0.9 2-2V7.83c0-0.53-0.21-1.04-0.59-1.41l-2.82-2.83zM12 19c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm1-10H7c-1.1 0-2-0.9-2-2s0.9-2 2-2h6c1.1 0 2 0.9 2 2s-0.9 2-2 2z" />
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M5,21Q4.175,21 3.587,20.413Q3,19.825 3,19V5Q3,4.175 3.587,3.587Q4.175,3 5,3H16.175Q16.575,3 16.938,3.15Q17.3,3.3 17.575,3.575L20.425,6.425Q20.7,6.7 20.85,7.062Q21,7.425 21,7.825V19Q21,19.825 20.413,20.413Q19.825,21 19,21ZM12,18Q13.25,18 14.125,17.125Q15,16.25 15,15Q15,13.75 14.125,12.875Q13.25,12 12,12Q10.75,12 9.875,12.875Q9,13.75 9,15Q9,16.25 9.875,17.125Q10.75,18 12,18ZM7,10H14Q14.425,10 14.713,9.712Q15,9.425 15,9V7Q15,6.575 14.713,6.287Q14.425,6 14,6H7Q6.575,6 6.287,6.287Q6,6.575 6,7V9Q6,9.425 6.287,9.712Q6.575,10 7,10Z"/>
 </vector>

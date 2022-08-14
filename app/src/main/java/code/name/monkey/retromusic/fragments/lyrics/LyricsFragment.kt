@@ -340,12 +340,12 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics),
         lyricsType = if (!loadLRCLyrics()) {
             binding.lyricsView.isVisible = false
             loadNormalLyrics()
-            LyricsType.SYNCED_LYRICS
+            LyricsType.NORMAL_LYRICS
         } else {
             binding.normalLyrics.isVisible = false
             binding.noLyricsFound.isVisible = false
             binding.lyricsView.isVisible = true
-            LyricsType.NORMAL_LYRICS
+            LyricsType.SYNCED_LYRICS
         }
     }
 

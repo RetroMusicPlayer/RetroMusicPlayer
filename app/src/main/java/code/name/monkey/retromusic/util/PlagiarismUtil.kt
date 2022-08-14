@@ -12,7 +12,8 @@ import code.name.monkey.retromusic.extensions.showToast
 
 fun Activity.maybeShowAnnoyingToasts() {
     if (BuildConfig.APPLICATION_ID != "code.name.monkey.retromusic" &&
-        BuildConfig.APPLICATION_ID != "code.name.monkey.retromusic.debug"
+        BuildConfig.APPLICATION_ID != "code.name.monkey.retromusic.debug"&&
+        BuildConfig.APPLICATION_ID != "code.name.monkey.retromusic.normal"
     ) {
         if (BuildConfig.DEBUG) {
             // Log these things to console, if the plagiarizer even cares to check it
@@ -32,8 +33,4 @@ fun Activity.maybeShowAnnoyingToasts() {
             }
         }
     }
-}
-
-fun Fragment.maybeShowAnnoyingToasts() {
-    requireActivity().maybeShowAnnoyingToasts()
 }

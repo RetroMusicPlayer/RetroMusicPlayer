@@ -24,7 +24,6 @@ import androidx.navigation.navOptions
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
-import code.name.monkey.retromusic.util.maybeShowAnnoyingToasts
 
 /**
  * Created by hemanths on 18/08/17.
@@ -66,7 +65,6 @@ open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         serviceActivity?.addMusicServiceEventListener(this)
-        maybeShowAnnoyingToasts()
     }
 
     @CallSuper

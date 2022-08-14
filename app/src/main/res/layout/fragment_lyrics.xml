@@ -31,7 +31,7 @@
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:title="@string/lyrics"
             app:titleMargin="0dp"
             app:titleMarginStart="0dp"

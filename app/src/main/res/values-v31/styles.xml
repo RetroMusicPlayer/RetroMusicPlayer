@@ -9,6 +9,7 @@
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
         <item name="android:windowBackground">?attr/colorSurface</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="Theme.RetroMusic.MD3.Black" parent="@style/Theme.RetroMusic.MD3" />

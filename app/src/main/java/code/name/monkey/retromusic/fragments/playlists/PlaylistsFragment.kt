@@ -66,7 +66,6 @@ class PlaylistsFragment :
             requireActivity(),
             dataSet,
             itemLayoutRes(),
-            null,
             this
         )
     }

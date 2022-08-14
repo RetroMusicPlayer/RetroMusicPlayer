@@ -25,5 +25,6 @@
         <item name="materialCardViewStyle">@style/Widget.MaterialComponents.CardView</item>
         <item name="elevationOverlayColor">@color/elevationOverlayDark</item>
         <item name="popupMenuBackground">@drawable/popup_background</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 </resources>

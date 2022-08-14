@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_keyboard_backspace_black"
+                app:navigationIcon="@drawable/ic_arrow_back"
                 app:title="@string/retro_music_pro"
                 app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                 app:titleTextColor="@color/md_white_1000" />

@@ -201,7 +201,7 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
             }
             setTitle(R.string.now_playing_queue)
             setTitleTextAppearance(context, R.style.ToolbarTextAppearanceNormal)
-            setNavigationIcon(R.drawable.ic_keyboard_backspace_black)
+            setNavigationIcon(R.drawable.ic_arrow_back)
             ToolbarContentTintHelper.colorBackButton(this)
         }
     }

@@ -22,7 +22,6 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.HorizontalAdapterHelper
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
@@ -30,10 +29,9 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 class HorizontalAlbumAdapter(
     activity: FragmentActivity,
     dataSet: List<Album>,
-    ICabHolder: ICabHolder?,
     albumClickListener: IAlbumClickListener
 ) : AlbumAdapter(
-    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, ICabHolder, albumClickListener
+    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, albumClickListener
 ) {
 
     override fun createViewHolder(view: View, viewType: Int): ViewHolder {

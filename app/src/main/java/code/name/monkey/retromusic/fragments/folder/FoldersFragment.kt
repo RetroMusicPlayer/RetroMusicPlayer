@@ -40,12 +40,13 @@ import code.name.monkey.retromusic.adapter.Storage
 import code.name.monkey.retromusic.adapter.StorageAdapter
 import code.name.monkey.retromusic.adapter.StorageClickListener
 import code.name.monkey.retromusic.databinding.FragmentFolderBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.dip
+import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.extensions.textColorPrimary
+import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openQueue
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
-import code.name.monkey.retromusic.interfaces.ICabCallback
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.interfaces.IMainActivityFragmentCallbacks
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener
@@ -54,16 +55,11 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.FileUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.startDirectory
-import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import code.name.monkey.retromusic.views.BreadCrumbLayout.Crumb
 import code.name.monkey.retromusic.views.BreadCrumbLayout.SelectionCallback
-import com.afollestad.materialcab.attached.AttachedCab
-import com.afollestad.materialcab.attached.destroy
-import com.afollestad.materialcab.attached.isActive
-import com.afollestad.materialcab.createCab
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.Dispatchers
@@ -76,7 +72,7 @@ import java.lang.ref.WeakReference
 import java.util.*
 
 class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
-    IMainActivityFragmentCallbacks, ICabHolder, SelectionCallback, ICallbacks,
+    IMainActivityFragmentCallbacks, SelectionCallback, ICallbacks,
     LoaderManager.LoaderCallbacks<List<File>>, StorageClickListener {
     private var _binding: FragmentFolderBinding? = null
     private val binding get() = _binding!!
@@ -85,7 +81,6 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     private var adapter: SongFileAdapter? = null
     private var storageAdapter: StorageAdapter? = null
-    private var cab: AttachedCab? = null
     private val fileComparator = Comparator { lhs: File, rhs: File ->
         if (lhs.isDirectory && !rhs.isDirectory) {
             return@Comparator -1
@@ -149,16 +144,10 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     override fun onPause() {
         super.onPause()
         saveScrollPosition()
-        if (cab.isActive()) {
-            cab.destroy()
-        }
+        adapter?.actionMode?.finish()
     }
 
     override fun handleBackPress(): Boolean {
-        if (cab != null && cab!!.isActive()) {
-            cab?.destroy()
-            return true
-        }
         if (binding.breadCrumbs.popHistory()) {
             setCrumb(binding.breadCrumbs.lastHistory(), false)
             return true
@@ -388,24 +377,6 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         checkForMargins()
     }
 
-    override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
-        if (cab != null && cab!!.isActive()) {
-            cab?.destroy()
-        }
-        cab = createCab(R.id.toolbar_container) {
-            menu(menuRes)
-            closeDrawable(R.drawable.ic_close)
-            backgroundColor(literal = RetroColorUtil.shiftBackgroundColor(surfaceColor()))
-            slideDown()
-            onCreate { cab, menu -> callback.onCabCreated(cab, menu) }
-            onSelection {
-                callback.onCabItemClicked(it)
-            }
-            onDestroy { callback.onCabFinished(it) }
-        }
-        return cab as AttachedCab
-    }
-
     private fun checkForMargins() {
         if (mainActivity.isBottomNavVisible) {
             binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
@@ -487,7 +458,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     private fun setUpRecyclerView() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         create(
             binding.recyclerView
         )
@@ -593,7 +564,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     private fun switchToFileAdapter() {
-        adapter = SongFileAdapter(mainActivity, LinkedList(), R.layout.item_list, this, this)
+        adapter = SongFileAdapter(mainActivity, LinkedList(), R.layout.item_list, this)
         adapter!!.registerAdapterDataObserver(
             object : RecyclerView.AdapterDataObserver() {
                 override fun onChanged() {

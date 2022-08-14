@@ -103,18 +103,19 @@ class LockScreenControlsFragment :
     }
 
     override fun setColor(color: MediaNotificationProcessor) {
+        val context = context ?: return
 
-        val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
+        val colorBg = ATHUtil.resolveColor(context, android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
             lastPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+                MaterialValueHelper.getSecondaryTextColor(context, true)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
+                MaterialValueHelper.getSecondaryDisabledTextColor(context, true)
         } else {
             lastPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+                MaterialValueHelper.getPrimaryTextColor(context, false)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
+                MaterialValueHelper.getPrimaryDisabledTextColor(context, false)
         }
 
         val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
@@ -135,7 +136,7 @@ class LockScreenControlsFragment :
 
         TintHelper.setTintAuto(
             binding.playPauseButton,
-            MaterialValueHelper.getPrimaryTextColor(requireContext(), isDark),
+            MaterialValueHelper.getPrimaryTextColor(context, isDark),
             false
         )
         TintHelper.setTintAuto(binding.playPauseButton, colorFinal, true)
