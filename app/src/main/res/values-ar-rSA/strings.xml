@@ -20,7 +20,7 @@
     <string name="action_go_to_album">إنتقل إلى الالبوم</string>
     <string name="action_go_to_artist">إنتقل إلى الفنان</string>
     <string name="action_go_to_genre">إنتقل إلى النوع</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">انتقل إلى كلمات الأغاني</string>
     <string name="action_go_to_start_directory">إنتقل إلى الدليل</string>
     <string name="action_grant">امنح</string>
     <string name="action_grid_size">حجم الشبكة</string>
