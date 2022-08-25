@@ -54,7 +54,7 @@
     <string name="adaptive">適應風</string>
     <string name="add_action">新增</string>
     <string name="add_playlist_title">"新增至播放清單"</string>
-    <string name="add_time_framed_lryics">新增同步歌詞</string>
+    <string name="add_time_framed_lryics">新增動態歌詞</string>
     <string name="added_song_count_to_playlist">已新增 %1$d 首歌至 %2$s</string>
     <string name="added_title_to_playing_queue">"已新增 1 首歌至播放佇列。"</string>
     <string name="added_x_titles_to_playing_queue">已新增 %1$d 首歌至播放佇列。</string>
@@ -168,7 +168,7 @@
     <string name="drive_mode">駕駛模式</string>
     <string name="edit_fab">編輯按鈕</string>
     <string name="edit_normal_lyrics">編輯歌詞</string>
-    <string name="edit_synced_lyrics">編輯同步歌詞</string>
+    <string name="edit_synced_lyrics">編輯動態歌詞</string>
     <string name="empty">沒有內容</string>
     <string name="equalizer">等化器</string>
     <string name="error_create_backup">無法建立備份</string>
@@ -290,7 +290,7 @@
     <string name="password">密碼</string>
     <string name="past_three_months">過去 3 個月</string>
     <string name="paste_lyrics_here">在此貼上歌詞</string>
-    <string name="paste_timeframe_lyrics_here">在此貼上同步歌詞</string>
+    <string name="paste_timeframe_lyrics_here">在此貼上動態歌詞</string>
     <string name="peek">懸浮風</string>
     <string name="permission_bluetooth_denied">鄰近裝置存取被拒。</string>
     <string name="permission_external_storage_denied">無法取得存取外部儲存空間的權限。</string>
@@ -359,7 +359,7 @@
     <string name="pref_summary_open_source_licences">開源軟體授權詳細資訊</string>
     <string name="pref_summary_pause_history">啟用此選項後，新播放的歌曲將不再顯示於歷史記錄</string>
     <string name="pref_summary_remember_tab">開啟應用程式後，自動顯示最後瀏覽的畫面</string>
-    <string name="pref_summary_show_lyrics">於專輯封面上顯示同步歌詞</string>
+    <string name="pref_summary_show_lyrics">於專輯封面上顯示動態歌詞</string>
     <string name="pref_summary_suggestions">於主畫面顯示新歌快選</string>
     <string name="pref_summary_swipe_anywhere_now_playing">啟用於現正播放畫面，可隨意滑動以切換歌曲</string>
     <string name="pref_summary_swipe_to_dismiss">向下滑動以關閉迷你播放器</string>
@@ -508,7 +508,7 @@
     <string name="suggestion_songs">建議</string>
     <string name="support_development">支持開發</string>
     <string name="swipe_to_unlock">滑動以解鎖</string>
-    <string name="synced_lyrics">同步歌詞</string>
+    <string name="synced_lyrics">動態歌詞</string>
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">加入 Telegram 群組以討論臭蟲、提供建議、交流，以及探索更多</string>
     <string name="thank_you">感謝您！</string>
