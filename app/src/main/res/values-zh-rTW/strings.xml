@@ -470,7 +470,7 @@
     <string name="saved_playlist_to">已儲存播放清單至 %s。</string>
     <string name="saving_changes">儲存變更</string>
     <string name="scan_media">掃描媒體</string>
-    <string name="scanned_files">已掃描 %2$d 個檔案夾中的 %1$d 個。</string>
+    <string name="scanned_files">已掃描 %1$d 個檔案，共 %2$d 個。</string>
     <string name="scrobbles_label">音樂記錄</string>
     <string name="select_all">選取全部</string>
     <string name="selected">僅顯示已選取的標籤</string>
