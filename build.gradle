@@ -4,7 +4,7 @@ buildscript {
     ext {
         lifecycle_version='2.5.1'
         navigation_version = '2.5.1'
-        mdc_version = '1.7.0-beta01'
+        mdc_version = '1.7.0-rc01'
         preference_version = '1.2.0'
         appcompat_version = '1.5.0'
         core_version='1.8.0'
@@ -21,20 +21,7 @@ buildscript {
     }
 }
 plugins {
-    id 'com.google.devtools.ksp' version '1.7.10-1.0.6' apply false
     id "com.github.ben-manes.versions" version "0.42.0"
-}
-
-def isNonStable = { String version ->
-    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
-    def regex = /^[0-9,.v-]+(-r)?$/
-    return !stableKeyword && !(version ==~ regex)
-}
-
-tasks.named("dependencyUpdates").configure {
-    rejectVersionIf {
-        isNonStable(it.candidate.version)
-    }
 }
 
 task clean(type: Delete) {
