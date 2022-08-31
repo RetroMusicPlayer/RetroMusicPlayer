@@ -697,6 +697,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
     override fun onTrackWentToNext() {
         if (pendingQuit || repeatMode == REPEAT_MODE_NONE && isLastTrack) {
+            playbackManager.setNextDataSource(null)
             pause(false)
             seek(0)
             if (pendingQuit) {
