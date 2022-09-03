@@ -88,7 +88,7 @@ class PlaybackManager(val context: Context) {
         playback?.setDataSource(song, force, completion)
     }
 
-    fun setNextDataSource(trackUri: String) {
+    fun setNextDataSource(trackUri: String?) {
         playback?.setNextDataSource(trackUri)
     }
 

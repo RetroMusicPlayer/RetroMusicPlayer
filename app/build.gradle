@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.devtools.ksp'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-parcelize'
 
@@ -124,7 +123,7 @@ dependencies {
     def room_version = '2.5.0-alpha02'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    ksp "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
@@ -177,5 +176,5 @@ dependencies {
     implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation 'me.zhanghai.android.fastscroll:library:1.1.8'
     implementation 'cat.ereza:customactivityoncrash:2.4.0'
-    implementation 'me.tankery.lib:circularSeekBar:1.4.0'
+    implementation 'me.tankery.lib:circularSeekBar:1.4.1'
 }
