@@ -181,7 +181,7 @@
     <string name="error_delete_backup">Не удалось удалить резервную копию</string>
     <string name="error_empty_name">Ваше имя не может быть пустым!</string>
     <string name="error_load_failed">Ошибка загрузки</string>
-    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="error_share_file">Не удалось просканировать файлы</string>
     <string name="expanded">Растянутый</string>
     <string name="faq">ЧаВО</string>
     <string name="favorites">Избранное</string>
@@ -425,7 +425,7 @@
     <string name="pref_title_wallpaper_accent">Цвет акцента обоев</string>
     <string name="pref_title_whitelist">Музыка из белого списка</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Черная тема, Темы экрана воспроизведения, Эффект карусели и многое другое..</string>
     <string name="profile">Профиль</string>
     <string name="purchase">Купить</string>
     <string name="queue">Очередь</string>
@@ -502,7 +502,7 @@
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата</string>
     <string name="sort_order_date_modified">Дата изменения</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">По умолчанию</string>
     <string name="sort_order_num_songs">Колличество песен</string>
     <string name="sort_order_num_songs_desc">Количество композиций по убыванию</string>
     <string name="sort_order_year">Год</string>
