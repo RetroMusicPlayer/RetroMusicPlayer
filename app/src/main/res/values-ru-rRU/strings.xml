@@ -2,7 +2,7 @@
 <resources>
     <string name="about_album_label">Об альбоме %s</string>
     <string name="about_settings_summary">Команда, ссылки на соц. сети</string>
-    <string name="accent_color">Основной цвет</string>
+    <string name="accent_color">Цвет акцента</string>
     <string name="accent_color_desc">Основной цвет, по умолчанию фиолетовый</string>
     <string name="action_about">О программe</string>
     <string name="action_add_to_blacklist">Добавить в чёрный список</string>
@@ -15,21 +15,21 @@
     <string name="action_cycle_repeat">Режим циклического повтора</string>
     <string name="action_delete">Удалить</string>
     <string name="action_delete_from_device">Удалить с устройства</string>
-    <string name="action_details">Подробности</string>
+    <string name="action_details">Информация о файле</string>
     <string name="action_edit">Изменить</string>
     <string name="action_go_to_album">Перейти к альбому</string>
     <string name="action_go_to_artist">Перейти к исполнителю</string>
     <string name="action_go_to_genre">Перейти к жанру</string>
-    <string name="action_go_to_lyrics">К тексту песни</string>
+    <string name="action_go_to_lyrics">Перейти к тексту песни</string>
     <string name="action_go_to_start_directory">В начало</string>
     <string name="action_grant">Разрешить</string>
     <string name="action_grid_size">Размер сетки</string>
     <string name="action_grid_size_land">Размер сетки (по горизонтали)</string>
     <string name="action_new_playlist">Новый плейлист</string>
     <string name="action_next">Далее</string>
-    <string name="action_play">Играть</string>
+    <string name="action_play">Воспроизвести</string>
     <string name="action_play_all">Воспроизвести всё</string>
-    <string name="action_play_next">Играть далее</string>
+    <string name="action_play_next">Играть следующим</string>
     <string name="action_play_pause">Воспроизведение/Пауза</string>
     <string name="action_previous">Предыдуший</string>
     <string name="action_remove_from_favorites">Удалить из избранного</string>
