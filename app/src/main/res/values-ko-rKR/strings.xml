@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
+    <string name="about_album_label">%s에 관하여</string>
     <string name="about_settings_summary">Team, social links</string>
     <string name="accent_color">강조 색상</string>
     <string name="accent_color_desc">강조 색상을 지정합니다. 기본값은 녹색입니다.</string>
     <string name="action_about">정보</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="action_add_to_blacklist">블랙 리스트에 추가</string>
     <string name="action_add_to_favorites">즐겨찾기에 추가</string>
     <string name="action_add_to_playing_queue">재생 대기열에 추가</string>
     <string name="action_add_to_playlist">재생목록에 추가...</string>
