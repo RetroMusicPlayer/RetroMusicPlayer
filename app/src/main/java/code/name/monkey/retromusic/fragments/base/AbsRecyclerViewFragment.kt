@@ -138,10 +138,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
     protected open val emptyMessage: Int
         @StringRes get() = R.string.empty
 
-    private fun getEmojiByUnicode(unicode: Int): String {
-        return String(Character.toChars(unicode))
-    }
-
     private fun checkIsEmpty() {
         binding.emptyText.setText(emptyMessage)
         binding.empty.isVisible = adapter!!.itemCount == 0

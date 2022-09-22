@@ -100,8 +100,10 @@ static def getProperty(Properties properties, String name) {
 
 dependencies {
     implementation project(':appthemehelper')
+    implementation project(':apisonic')
     implementation "androidx.gridlayout:gridlayout:1.0.0"
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation 'androidx.annotation:annotation:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

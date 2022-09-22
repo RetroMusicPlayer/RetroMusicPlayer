@@ -602,10 +602,12 @@ class MusicService : MediaBrowserServiceCompat(),
         parentId: String,
         result: Result<List<MediaBrowserCompat.MediaItem>>,
     ) {
-        if (parentId == AutoMediaIDHelper.RECENT_ROOT) {
-            result.sendResult(listOf(storage.recentSong()))
-        } else {
-            result.sendResult(mMusicProvider.getChildren(parentId, resources))
+        serviceScope.launch {
+            if (parentId == AutoMediaIDHelper.RECENT_ROOT) {
+                result.sendResult(listOf(storage.recentSong()))
+            } else {
+                result.sendResult(mMusicProvider.getChildren(parentId, resources))
+            }
         }
     }
 

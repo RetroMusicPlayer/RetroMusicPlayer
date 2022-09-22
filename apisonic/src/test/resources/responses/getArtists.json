@@ -1,0 +1,213 @@
+{
+  "subsonic-response": {
+    "status": "ok",
+    "version": "1.16.1",
+    "artists": {
+      "ignoredArticles": "The El La Los Las Le",
+      "index": [
+        {
+          "name": "A",
+          "artist": [
+            {
+              "id": "5",
+              "name": "Antígona",
+              "coverArt": "ar-5",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/da0f3b84bd72470492de2a2dc58afbe2.png",
+              "albumCount": 1
+            },
+            {
+              "id": "9",
+              "name": "Aygan",
+              "coverArt": "ar-9",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/88534cf63fe74940bb2d86805caa2890.png",
+              "albumCount": 1
+            }
+          ]
+        },
+        {
+          "name": "B",
+          "artist": [
+            {
+              "id": "11",
+              "name": "bilk",
+              "coverArt": "ar-11",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/c30c16dc8a6249628869181c2d8619e0.png",
+              "albumCount": 1
+            },
+            {
+              "id": "15",
+              "name": "Binärpilot",
+              "coverArt": "ar-15",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/a02c749fcf6c4fdfb47a2112c03c4d5a.png",
+              "albumCount": 3
+            },
+            {
+              "id": "17",
+              "name": "Brad Sucks",
+              "coverArt": "ar-17",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/0113f4cb7837456a82a20a18a443d8bb.png",
+              "albumCount": 2
+            }
+          ]
+        },
+        {
+          "name": "C",
+          "artist": [
+            {
+              "id": "21",
+              "name": "Capashen",
+              "coverArt": "ar-21",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/65d6e8b1a795419b9b3eb3478335c2ea.png",
+              "albumCount": 6
+            },
+            {
+              "id": "20",
+              "name": "Curb Jaw",
+              "coverArt": "ar-20",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/888a3bc212d841288dcde7f2ccca76b2.png",
+              "albumCount": 1
+            }
+          ]
+        },
+        {
+          "name": "D",
+          "artist": [
+            {
+              "id": "14",
+              "name": "The Dada Weatherman",
+              "coverArt": "ar-14",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/71fe26e282594c91a53aba688cd0ab54.png",
+              "albumCount": 4
+            },
+            {
+              "id": "22",
+              "name": "Deflone",
+              "coverArt": "ar-22",
+              "albumCount": 2
+            },
+            {
+              "id": "12",
+              "name": "Dereleech",
+              "coverArt": "ar-12",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/70bb4f4da32e4f96a769799cdf08b27e.png",
+              "albumCount": 2
+            }
+          ]
+        },
+        {
+          "name": "F",
+          "artist": [
+            {
+              "id": "19",
+              "name": "FUll Faya Orchestra",
+              "coverArt": "ar-19",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/52070c8a9a558d3b9039b1fd96f42fab.png",
+              "albumCount": 1
+            }
+          ]
+        },
+        {
+          "name": "J",
+          "artist": [
+            {
+              "id": "8",
+              "name": "Joe Farren",
+              "coverArt": "ar-8",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/85370451628b4aee9e60b0422ddbf22b.png",
+              "albumCount": 2
+            },
+            {
+              "id": "4",
+              "name": "Johndoe",
+              "coverArt": "ar-4",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/92f76acd6c1b4421927581afa7418bbb.png",
+              "albumCount": 1
+            }
+          ]
+        },
+        {
+          "name": "M",
+          "artist": [
+            {
+              "id": "2",
+              "name": "Maya Filipič",
+              "coverArt": "ar-2",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/ab043b4fb4e14b3c986ccface44bab31.png",
+              "albumCount": 1
+            },
+            {
+              "id": "6",
+              "name": "METISSE",
+              "coverArt": "ar-6",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/10f02d8fc33b4a5688f564b8137828bf.png",
+              "albumCount": 1
+            },
+            {
+              "id": "10",
+              "name": "Michael Ellis",
+              "coverArt": "ar-10",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/c74d7bfc534e830885da0544ace0f3f8.png",
+              "albumCount": 3
+            },
+            {
+              "id": "7",
+              "name": "Microdub",
+              "coverArt": "ar-7",
+              "albumCount": 2
+            },
+            {
+              "id": "1",
+              "name": "Misteur Valaire",
+              "coverArt": "ar-1",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/57e9f164bc54459d8f4e8a2a9eddcf18.png",
+              "albumCount": 1
+            }
+          ]
+        },
+        {
+          "name": "P",
+          "artist": [
+            {
+              "id": "16",
+              "name": "PeerGynt Lobogris",
+              "coverArt": "ar-16",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/49cd81afc39e4f9c9e4325d77b2c5ab4.png",
+              "albumCount": 4
+            }
+          ]
+        },
+        {
+          "name": "S",
+          "artist": [
+            {
+              "id": "18",
+              "name": "Shearer",
+              "coverArt": "ar-18",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/a7994c768b914543a2f2928d42559311.png",
+              "albumCount": 2
+            },
+            {
+              "id": "3",
+              "name": "Silence is Sexy",
+              "coverArt": "ar-3",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/959cdf5d084e4d42864a919281b3d58e.png",
+              "albumCount": 2
+            }
+          ]
+        },
+        {
+          "name": "U",
+          "artist": [
+            {
+              "id": "13",
+              "name": "Ugress",
+              "coverArt": "ar-13",
+              "artistImageUrl": "https://lastfm-img2.akamaized.net/i/u/6f2ce47efe15482eb5a3592e4d193ce7.png",
+              "albumCount": 4
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

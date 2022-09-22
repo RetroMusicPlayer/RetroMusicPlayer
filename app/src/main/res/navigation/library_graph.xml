@@ -6,12 +6,12 @@
 
     <fragment
         android:id="@+id/action_album"
-        android:name="code.name.monkey.retromusic.fragments.albums.AlbumsFragment"
+        android:name="code.name.monkey.retromusic.feature.library.album.presentation.LibraryAlbumFragment"
         tools:layout="@layout/fragment_main_recycler" />
 
     <fragment
         android:id="@+id/action_artist"
-        android:name="code.name.monkey.retromusic.fragments.artists.ArtistsFragment"
+        android:name="code.name.monkey.retromusic.feature.library.artist.presentation.LibraryArtistFragment"
         tools:layout="@layout/fragment_main_recycler" />
 
     <fragment

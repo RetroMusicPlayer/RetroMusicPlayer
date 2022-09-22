@@ -12,95 +12,76 @@
  * See the GNU General Public License for more details.
  *
  */
-package code.name.monkey.retromusic.fragments.artists
+package code.name.monkey.retromusic.feature.library.album.presentation
 
 import android.os.Bundle
 import android.view.*
 import androidx.core.os.bundleOf
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import code.name.monkey.retromusic.EXTRA_ARTIST_ID
-import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
+import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.extensions.setUpMediaRouteButton
 import code.name.monkey.retromusic.fragments.GridStyle
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.helper.SortOrder.ArtistSortOrder
-import code.name.monkey.retromusic.interfaces.IAlbumArtistClickListener
-import code.name.monkey.retromusic.interfaces.IArtistClickListener
-import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.helper.SortOrder.AlbumSortOrder
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
-    IArtistClickListener, IAlbumArtistClickListener {
+class LibraryAlbumFragment : AbsRecyclerViewCustomGridSizeFragment<LibraryAlbumAdapter, GridLayoutManager>(), LibraryAlbumClickListener {
+
+    private val viewModel: LibraryAlbumViewModel by viewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getArtists().observe(viewLifecycleOwner) {
-            if (it.isNotEmpty())
-                adapter?.swapDataSet(it)
-            else
-                adapter?.swapDataSet(listOf())
+        lifecycleScope.launchWhenStarted {
+            viewModel.albums.collect {
+                if (it.isNotEmpty()) {
+                    adapter?.swapDataSet(it)
+                } else {
+                    adapter?.swapDataSet(listOf())
+                }
+            }
         }
     }
 
     override val titleRes: Int
-        get() = R.string.artists
+        get() = R.string.albums
 
     override val emptyMessage: Int
-        get() = R.string.no_artists
+        get() = R.string.no_albums
 
     override val isShuffleVisible: Boolean
         get() = true
 
     override fun onShuffleClicked() {
-        libraryViewModel.getArtists().value?.let {
-            MusicPlayerRemote.setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
-            MusicPlayerRemote.openQueue(
-                queue = it.shuffled().flatMap { artist -> artist.songs },
-                startPosition = 0,
-                startPlaying = true
-            )
-        }
-    }
-
-    override fun setSortOrder(sortOrder: String) {
-        libraryViewModel.forceReload(ReloadType.Artists)
+        // TODO: Fix play
+//        libraryViewModel.getAlbums().value?.let {
+//            MusicPlayerRemote.setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
+//            MusicPlayerRemote.openQueue(
+//                queue = it.shuffled().flatMap { album -> album.songs },
+//                startPosition = 0,
+//                startPlaying = true
+//            )
+//        }
     }
 
     override fun createLayoutManager(): GridLayoutManager {
         return GridLayoutManager(requireActivity(), getGridSize())
     }
 
-    override fun createAdapter(): ArtistAdapter {
+    override fun createAdapter(): LibraryAlbumAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return ArtistAdapter(
+        return LibraryAlbumAdapter(
             requireActivity(),
             dataSet,
             itemLayoutRes(),
-            this,
             this
         )
-    }
-
-    override fun loadGridSize(): Int {
-        return PreferenceUtil.artistGridSize
-    }
-
-    override fun saveGridSize(gridColumns: Int) {
-        PreferenceUtil.artistGridSize = gridColumns
-    }
-
-    override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.artistGridSizeLand
-    }
-
-    override fun saveGridSizeLand(gridColumns: Int) {
-        PreferenceUtil.artistGridSizeLand = gridColumns
     }
 
     override fun setGridSize(gridSize: Int) {
@@ -109,46 +90,51 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
     }
 
     override fun loadSortOrder(): String {
-        return PreferenceUtil.artistSortOrder
+        return PreferenceUtil.albumSortOrder
     }
 
     override fun saveSortOrder(sortOrder: String) {
-        PreferenceUtil.artistSortOrder = sortOrder
+        PreferenceUtil.albumSortOrder = sortOrder
+    }
+
+    override fun loadGridSize(): Int {
+        return PreferenceUtil.albumGridSize
+    }
+
+    override fun saveGridSize(gridColumns: Int) {
+        PreferenceUtil.albumGridSize = gridColumns
+    }
+
+    override fun loadGridSizeLand(): Int {
+        return PreferenceUtil.albumGridSizeLand
+    }
+
+    override fun saveGridSizeLand(gridColumns: Int) {
+        PreferenceUtil.albumGridSizeLand = gridColumns
+    }
+
+    override fun setSortOrder(sortOrder: String) {
+        libraryViewModel.forceReload(ReloadType.Albums)
     }
 
     override fun loadLayoutRes(): Int {
-        return PreferenceUtil.artistGridStyle.layoutResId
+        return PreferenceUtil.albumGridStyle.layoutResId
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
-        PreferenceUtil.artistGridStyle = GridStyle.values().first { gridStyle ->
+        PreferenceUtil.albumGridStyle = GridStyle.values().first { gridStyle ->
             gridStyle.layoutResId == layoutRes
         }
     }
 
-    companion object {
-
-        fun newInstance(): ArtistsFragment {
-            return ArtistsFragment()
-        }
-    }
-
-    override fun onArtist(artistId: Long, view: View) {
+    override fun onAlbumClick(albumId: String, view: View) {
         findNavController().navigate(
-            R.id.artistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_ID to artistId),
+            R.id.albumDetailsFragment,
+            bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
-            FragmentNavigatorExtras(view to artistId.toString())
-        )
-        reenterTransition = null
-    }
-
-    override fun onAlbumArtist(artistName: String, view: View) {
-        findNavController().navigate(
-            R.id.albumArtistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_NAME to artistName),
-            null,
-            FragmentNavigatorExtras(view to artistName)
+            FragmentNavigatorExtras(
+                view to albumId
+            )
         )
         reenterTransition = null
     }
@@ -163,16 +149,8 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         val layoutItem = menu.findItem(R.id.action_layout_type)
         setupLayoutMenu(layoutItem.subMenu)
         setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
-        setupAlbumArtistMenu(menu)
         //Setting up cast button
         requireContext().setUpMediaRouteButton(menu)
-    }
-
-    private fun setupAlbumArtistMenu(menu: Menu) {
-        menu.add(0, R.id.action_album_artist, 0, R.string.show_album_artists).apply {
-            isCheckable = true
-            isChecked = PreferenceUtil.albumArtistsOnly
-        }
     }
 
     private fun setUpSortOrderMenu(
@@ -182,16 +160,40 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         sortOrderMenu.clear()
         sortOrderMenu.add(
             0,
-            R.id.action_artist_sort_order_asc,
+            R.id.action_album_sort_order_asc,
             0,
             R.string.sort_order_a_z
-        ).isChecked = currentSortOrder.equals(ArtistSortOrder.ARTIST_A_Z)
+        ).isChecked =
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_A_Z)
         sortOrderMenu.add(
             0,
-            R.id.action_artist_sort_order_desc,
+            R.id.action_album_sort_order_desc,
             1,
             R.string.sort_order_z_a
-        ).isChecked = currentSortOrder.equals(ArtistSortOrder.ARTIST_Z_A)
+        ).isChecked =
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_Z_A)
+        sortOrderMenu.add(
+            0,
+            R.id.action_album_sort_order_artist,
+            2,
+            R.string.sort_order_album_artist
+        ).isChecked =
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_ARTIST)
+        sortOrderMenu.add(
+            0,
+            R.id.action_album_sort_order_year,
+            3,
+            R.string.sort_order_year
+        ).isChecked =
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_YEAR)
+        sortOrderMenu.add(
+            0,
+            R.id.action_album_sort_order_num_songs,
+            4,
+            R.string.sort_order_num_songs
+        ).isChecked =
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_NUMBER_OF_SONGS)
+
         sortOrderMenu.setGroupCheckable(0, true, true)
     }
 
@@ -201,13 +203,13 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         when (itemLayoutRes()) {
             R.layout.item_card -> subMenu.findItem(R.id.action_layout_card).isChecked = true
             R.layout.item_grid -> subMenu.findItem(R.id.action_layout_normal).isChecked = true
-            R.layout.item_card_color -> subMenu.findItem(R.id.action_layout_colored_card).isChecked =
-                true
-            R.layout.item_grid_circle -> subMenu.findItem(R.id.action_layout_circular).isChecked =
-                true
+            R.layout.item_card_color ->
+                subMenu.findItem(R.id.action_layout_colored_card).isChecked = true
+            R.layout.item_grid_circle ->
+                subMenu.findItem(R.id.action_layout_circular).isChecked = true
             R.layout.image -> subMenu.findItem(R.id.action_layout_image).isChecked = true
-            R.layout.item_image_gradient -> subMenu.findItem(R.id.action_layout_gradient_image).isChecked =
-                true
+            R.layout.item_image_gradient ->
+                subMenu.findItem(R.id.action_layout_gradient_image).isChecked = true
         }
     }
 
@@ -256,32 +258,21 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         if (handleSortOrderMenuItem(item)) {
             return true
         }
-        if (handleAlbumArtistMenu(item)) {
-            return true
-        }
         return super.onMenuItemSelected(item)
-    }
-
-    private fun handleAlbumArtistMenu(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.action_album_artist) {
-            PreferenceUtil.albumArtistsOnly = !item.isChecked
-            item.isChecked = !item.isChecked
-            libraryViewModel.forceReload(ReloadType.Artists)
-            true
-        } else {
-            false
-        }
     }
 
     private fun handleSortOrderMenuItem(
         item: MenuItem
     ): Boolean {
         val sortOrder: String = when (item.itemId) {
-            R.id.action_artist_sort_order_asc -> ArtistSortOrder.ARTIST_A_Z
-            R.id.action_artist_sort_order_desc -> ArtistSortOrder.ARTIST_Z_A
-            else -> PreferenceUtil.artistSortOrder
+            R.id.action_album_sort_order_asc -> AlbumSortOrder.ALBUM_A_Z
+            R.id.action_album_sort_order_desc -> AlbumSortOrder.ALBUM_Z_A
+            R.id.action_album_sort_order_artist -> AlbumSortOrder.ALBUM_ARTIST
+            R.id.action_album_sort_order_year -> AlbumSortOrder.ALBUM_YEAR
+            R.id.action_album_sort_order_num_songs -> AlbumSortOrder.ALBUM_NUMBER_OF_SONGS
+            else -> PreferenceUtil.albumSortOrder
         }
-        if (sortOrder != PreferenceUtil.artistSortOrder) {
+        if (sortOrder != PreferenceUtil.albumSortOrder) {
             item.isChecked = true
             setAndSaveSortOrder(sortOrder)
             return true
@@ -299,9 +290,9 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
             R.id.action_layout_circular -> R.layout.item_grid_circle
             R.id.action_layout_image -> R.layout.image
             R.id.action_layout_gradient_image -> R.layout.item_image_gradient
-            else -> PreferenceUtil.artistGridStyle.layoutResId
+            else -> PreferenceUtil.albumGridStyle.layoutResId
         }
-        if (layoutRes != PreferenceUtil.artistGridStyle.layoutResId) {
+        if (layoutRes != PreferenceUtil.albumGridStyle.layoutResId) {
             item.isChecked = true
             setAndSaveLayoutRes(layoutRes)
             return true
@@ -333,6 +324,11 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
 
     override fun onResume() {
         super.onResume()
-        libraryViewModel.forceReload(ReloadType.Artists)
+        libraryViewModel.forceReload(ReloadType.Albums)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        adapter?.actionMode?.finish()
     }
 }

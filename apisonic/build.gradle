@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdk 32
+    namespace "code.name.monkey.apisonic"
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 32
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    lint {
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    //moshi
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
+    implementation("com.squareup.moshi:moshi:1.13.0")
+    implementation("com.squareup.moshi:moshi-adapters:1.13.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+    implementation("com.squareup.okhttp3:logging-interceptor:4.3.1")
+    implementation("com.squareup.retrofit2:retrofit:2.7.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
+
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.3.1")
+
+}

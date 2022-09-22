@@ -45,7 +45,7 @@ class AutoMusicProvider(
         mMusicService = WeakReference(service)
     }
 
-    fun getChildren(mediaId: String?, resources: Resources): List<MediaBrowserCompat.MediaItem> {
+    suspend fun getChildren(mediaId: String?, resources: Resources): List<MediaBrowserCompat.MediaItem> {
         val mediaItems: MutableList<MediaBrowserCompat.MediaItem> = ArrayList()
         when (mediaId) {
             AutoMediaIDHelper.MEDIA_ID_ROOT -> {

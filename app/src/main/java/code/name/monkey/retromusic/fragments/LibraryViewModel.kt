@@ -72,8 +72,6 @@ class LibraryViewModel(
 
     fun getSongs(): LiveData<List<Song>> = songs
 
-    fun getAlbums(): LiveData<List<Album>> = albums
-
     fun getArtists(): LiveData<List<Artist>> = artists
 
     fun getPlaylists(): LiveData<List<PlaylistWithSongs>> = playlists

@@ -14,6 +14,7 @@
 
 package code.name.monkey.retromusic.repository
 
+import ru.stersh.apisonic.ApiSonic
 import android.provider.MediaStore.Audio.AudioColumns
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
@@ -26,25 +27,42 @@ import java.text.Collator
  * Created by hemanths on 11/08/17.
  */
 interface AlbumRepository {
-    fun albums(): List<Album>
+    suspend fun albums(): List<Album>
 
     fun albums(query: String): List<Album>
 
     fun album(albumId: Long): Album
 }
 
-class RealAlbumRepository(private val songRepository: RealSongRepository) :
-    AlbumRepository {
+class RealAlbumRepository(
+    private val apiSonic: ApiSonic,
+    private val songRepository: RealSongRepository
+) : AlbumRepository {
 
-    override fun albums(): List<Album> {
-        val songs = songRepository.songs(
-            songRepository.makeSongCursor(
-                null,
-                null,
-                getSongLoaderSortOrder()
+    override suspend fun albums(): List<Album> {
+        val albums = apiSonic.getAlbumList(ApiSonic.ListType.ALPHABETICAL_BY_ARTIST, size = 500).map { alb ->
+            Album(
+                id = alb.id.toLong(),
+                songs = listOf(
+                    Song(
+                        id = alb.id.toLong(),
+                        albumName = alb.title,
+                        albumArtist = alb.artist,
+                        title = "",
+                        trackNumber = -1,
+                        year = -1,
+                        duration = -1,
+                        data = "",
+                        dateModified = -1,
+                        albumId = -1,
+                        artistId = -1,
+                        artistName = "",
+                        composer = ""
+                    )
+                )
             )
-        )
-        return splitIntoAlbums(songs)
+        }
+        return albums
     }
 
     override fun albums(query: String): List<Album> {

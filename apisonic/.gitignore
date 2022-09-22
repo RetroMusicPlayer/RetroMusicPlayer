@@ -1,0 +1,4 @@
+.kotlintest/
+.gradle/
+.idea/
+build/

@@ -19,4 +19,4 @@ dependencyResolutionManagement {
     }
 }
 
-include ':app', ':appthemehelper'
+include ':app', ':appthemehelper', ':apisonic'

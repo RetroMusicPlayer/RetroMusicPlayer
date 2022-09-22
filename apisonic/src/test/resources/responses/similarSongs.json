@@ -1,0 +1,33 @@
+{
+  "subsonic-response": {
+    "status": "ok",
+    "version": "1.16.1",
+    "similarSongs": {
+      "song": [
+        {
+          "id": "72",
+          "parent": "71",
+          "isDir": false,
+          "title": "Kjøtere",
+          "album": "Pyromantikk",
+          "artist": "Johndoe",
+          "track": 1,
+          "year": 2004,
+          "genre": "Rock",
+          "coverArt": "71",
+          "size": 3612800,
+          "contentType": "audio/mpeg",
+          "suffix": "mp3",
+          "duration": 225,
+          "bitRate": 128,
+          "path": "Johndoe/Pyromantikk/kjotere.mp3",
+          "playCount": 1483,
+          "created": "2017-03-12T11:05:14.000Z",
+          "albumId": "5",
+          "artistId": "4",
+          "type": "music"
+        }
+      ]
+    }
+  }
+}
