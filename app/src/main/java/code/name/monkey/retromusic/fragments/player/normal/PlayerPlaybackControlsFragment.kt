@@ -19,13 +19,17 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import ru.stersh.retrosonic.core.storage.domain.PlayQueueStorage
 import code.name.monkey.retromusic.databinding.FragmentPlayerPlaybackControlsBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.applyColor
+import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -33,10 +37,12 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.slider.Slider
+import kotlinx.coroutines.flow.filterNotNull
+import org.koin.android.ext.android.inject
 
-class PlayerPlaybackControlsFragment :
-    AbsPlayerControlsFragment(R.layout.fragment_player_playback_controls) {
+class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment(R.layout.fragment_player_playback_controls) {
 
+    private val playQueueStorage: PlayQueueStorage by inject()
     private var _binding: FragmentPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
@@ -73,6 +79,21 @@ class PlayerPlaybackControlsFragment :
         }
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
+        }
+        lifecycleScope.launchWhenStarted {
+            playQueueStorage.getCurrentSong()
+                .filterNotNull()
+                .collect { song ->
+                    binding.title.text = song.title
+                    binding.text.text = song.artist
+
+//                    if (PreferenceUtil.isSongInfo) {
+//                        binding.songInfo.text = getSongInfo(song)
+//                        binding.songInfo.show()
+//                    } else {
+//                        binding.songInfo.hide()
+//                    }
+                }
         }
     }
 
@@ -113,16 +134,7 @@ class PlayerPlaybackControlsFragment :
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.title.text = song.title
-        binding.text.text = song.artistName
 
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.text = getSongInfo(song)
-            binding.songInfo.show()
-        } else {
-            binding.songInfo.hide()
-        }
     }
 
 

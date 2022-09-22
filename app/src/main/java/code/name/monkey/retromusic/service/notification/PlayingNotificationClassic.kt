@@ -32,14 +32,13 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
+import ru.stersh.retrosonic.core.storage.domain.PlayableSong
 import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.isSystemDarkModeEnabled
 import code.name.monkey.retromusic.extensions.toBitmap
 import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_QUIT
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
@@ -54,28 +53,29 @@ import com.bumptech.glide.request.transition.Transition
  * @author Hemanth S (h4h13).
  */
 @SuppressLint("RestrictedApi")
-class PlayingNotificationClassic(
-    val context: Context,
-) : PlayingNotification(context) {
+class PlayingNotificationClassic(val context: Context) : PlayingNotification(context) {
     private var primaryColor: Int = 0
 
-    private fun getCombinedRemoteViews(collapsed: Boolean, song: Song): RemoteViews {
+    private fun getCombinedRemoteViews(collapsed: Boolean, song: PlayableSong): RemoteViews {
         val remoteViews = RemoteViews(
             context.packageName,
-            if (collapsed) R.layout.layout_notification_collapsed else R.layout.layout_notification_expanded
+            if (collapsed) {
+                R.layout.layout_notification_collapsed
+            } else {
+                R.layout.layout_notification_expanded
+            }
         )
         remoteViews.setTextViewText(
             R.id.appName,
-            context.getString(R.string.app_name) + " • " + song.albumName
+            context.getString(R.string.app_name) + " • " + song.album
         )
         remoteViews.setTextViewText(R.id.title, song.title)
-        remoteViews.setTextViewText(R.id.subtitle, song.artistName)
+        remoteViews.setTextViewText(R.id.subtitle, song.artist)
         linkButtons(remoteViews)
         return remoteViews
     }
 
-    override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
-        if (song == Song.emptySong) return
+    override fun updateMetadata(song: PlayableSong, onUpdate: () -> Unit) {
         val notificationLayout = getCombinedRemoteViews(true, song)
         val notificationLayoutBig = getCombinedRemoteViews(false, song)
 
@@ -105,8 +105,10 @@ class PlayingNotificationClassic(
         setOngoing(true)
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
-        GlideApp.with(context).asBitmapPalette().songCoverOptions(song)
-            .load(RetroGlideExtension.getSongModel(song))
+        GlideApp
+            .with(context)
+            .asBitmapPalette()
+            .load(song.coverArtUrl)
             .centerCrop()
             .into(object : CustomTarget<BitmapPaletteWrapper>(
                 bigNotificationImageSize,

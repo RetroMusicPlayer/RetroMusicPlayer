@@ -21,13 +21,12 @@ import android.content.Context
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.model.Song
+import ru.stersh.retrosonic.core.storage.domain.PlayableSong
 
 
-abstract class PlayingNotification(context: Context) :
-    NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID) {
+abstract class PlayingNotification(context: Context) : NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID) {
 
-    abstract fun updateMetadata(song: Song, onUpdate: () -> Unit)
+    abstract fun updateMetadata(song: PlayableSong, onUpdate: () -> Unit)
 
     abstract fun setPlaying(isPlaying: Boolean)
 

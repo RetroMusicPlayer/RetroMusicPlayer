@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.service
 
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
 
 // Empty CastPlayer implementation
@@ -13,7 +12,7 @@ class CastPlayer : Playback {
         get() = 0
 
     override fun setDataSource(
-        song: Song,
+        songId: String,
         force: Boolean,
         completion: (success: Boolean) -> Unit,
     ) {

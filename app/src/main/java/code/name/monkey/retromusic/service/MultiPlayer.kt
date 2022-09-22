@@ -19,16 +19,15 @@ import android.os.PowerManager
 import android.util.Log
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.extensions.uri
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil.isGapLessPlayback
 import code.name.monkey.retromusic.util.logE
+import ru.stersh.apisonic.ApiSonic
 
 /**
  * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
  */
-class MultiPlayer(context: Context) : LocalPlayback(context) {
+class MultiPlayer(context: Context, apiSonic: ApiSonic) : LocalPlayback(context, apiSonic) {
     private var mCurrentMediaPlayer = MediaPlayer()
     private var mNextMediaPlayer: MediaPlayer? = null
     override var callbacks: PlaybackCallbacks? = null
@@ -44,16 +43,17 @@ class MultiPlayer(context: Context) : LocalPlayback(context) {
     }
 
     /**
-     * @param song The song object you want to play
+     * @param songId The song object you want to play
      * @return True if the `player` has been prepared and is ready to play, false otherwise
      */
     override fun setDataSource(
-        song: Song,
+        songId: String,
         force: Boolean,
         completion: (success: Boolean) -> Unit,
     ) {
         isInitialized = false
-        setDataSourceImpl(mCurrentMediaPlayer, song.uri.toString()) { success ->
+
+        setDataSourceImpl(mCurrentMediaPlayer, getSongUrlFromId(songId)) { success ->
             isInitialized = success
             if (isInitialized) {
                 setNextDataSource(null)

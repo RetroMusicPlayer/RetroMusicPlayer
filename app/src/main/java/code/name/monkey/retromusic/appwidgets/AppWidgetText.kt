@@ -18,7 +18,6 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.view.View
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -108,16 +107,17 @@ class AppWidgetText : BaseAppWidget() {
         val appWidgetView = RemoteViews(service.packageName, R.layout.app_widget_text)
 
         val isPlaying = service.isPlaying
-        val song = service.currentSong
+        val song = service.currentSongId
 
         // Set the titles and artwork
-        if (song.title.isEmpty() && song.artistName.isEmpty()) {
-            appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
-        } else {
-            appWidgetView.setViewVisibility(R.id.media_titles, View.VISIBLE)
-            appWidgetView.setTextViewText(R.id.title, song.title)
-            appWidgetView.setTextViewText(R.id.text, song.artistName)
-        }
+        //        TODO: fix widget
+//        if (song.title.isEmpty() && song.artistName.isEmpty()) {
+//            appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
+//        } else {
+//            appWidgetView.setViewVisibility(R.id.media_titles, View.VISIBLE)
+//            appWidgetView.setTextViewText(R.id.title, song.title)
+//            appWidgetView.setTextViewText(R.id.text, song.artistName)
+//        }
         // Link actions buttons to intents
         linkButtons(service, appWidgetView)
 

@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments.player.blur
 
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
@@ -30,10 +29,8 @@ import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
-import code.name.monkey.retromusic.glide.*
+import code.name.monkey.retromusic.glide.GlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 
@@ -78,7 +75,7 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
     }
 
     override fun onFavoriteToggled() {
-        toggleFavorite(MusicPlayerRemote.currentSong)
+//        toggleFavorite(MusicPlayerRemote.currentSongId)
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
@@ -88,9 +85,9 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
     }
 
-    override fun toggleFavorite(song: Song) {
-        super.toggleFavorite(song)
-        if (song.id == MusicPlayerRemote.currentSong.id) {
+    override fun toggleFavorite(songId: String) {
+        super.toggleFavorite(songId)
+        if (songId == MusicPlayerRemote.currentSongId) {
             updateIsFavorite()
         }
     }
@@ -114,19 +111,19 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
 
     private fun updateBlur() {
         // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
-        GlideApp.with(this)
-            .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
-            .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
-            .transform(
-                BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
-                    .build()
-            ).thumbnail(lastRequest)
-            .error(GlideApp.with(this).load(ColorDrawable(Color.DKGRAY)).fitCenter())
-            .also {
-                lastRequest = it.clone()
-                it.crossfadeListener()
-                    .into(binding.colorBackground)
-            }
+//        GlideApp.with(this)
+//            .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSongId))
+//            .simpleSongCoverOptions(MusicPlayerRemote.currentSongId)
+//            .transform(
+//                BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
+//                    .build()
+//            ).thumbnail(lastRequest)
+//            .error(GlideApp.with(this).load(ColorDrawable(Color.DKGRAY)).fitCenter())
+//            .also {
+//                lastRequest = it.clone()
+//                it.crossfadeListener()
+//                    .into(binding.colorBackground)
+//            }
     }
 
     override fun onServiceConnected() {

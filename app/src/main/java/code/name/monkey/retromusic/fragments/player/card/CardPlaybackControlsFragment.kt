@@ -26,7 +26,8 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentCardPlayerPlaybackControlsBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -77,16 +78,16 @@ class CardPlaybackControlsFragment :
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.title.text = song.title
-        binding.text.text = song.artistName
-
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.text = getSongInfo(MusicPlayerRemote.currentSong)
-            binding.songInfo.show()
-        } else {
-            binding.songInfo.hide()
-        }
+        val song = MusicPlayerRemote.currentSongId
+//        binding.title.text = song.title
+//        binding.text.text = song.artistName
+//
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.songInfo.text = getSongInfo(MusicPlayerRemote.currentSongId)
+//            binding.songInfo.show()
+//        } else {
+//            binding.songInfo.hide()
+//        }
     }
 
     override fun onServiceConnected() {

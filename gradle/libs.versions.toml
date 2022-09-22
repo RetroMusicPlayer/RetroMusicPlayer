@@ -1,0 +1,65 @@
+[versions]
+adapterdelegates = "4.3.2"
+android-plugin = "7.2.1"
+appcompat = "1.4.2"
+constraintlayout = "2.1.4"
+detekt = "1.21.0"
+fragment = "1.5.1"
+koin = "3.2.0"
+kotlin = "1.7.10"
+kotlin-coroutines = "1.6.4"
+lifecycle = "2.5.1"
+material = "1.6.1"
+recyclerview = "1.2.1"
+room = "2.4.3"
+timber = "5.0.1"
+toml-checker = "0.42.0"
+toml-updater = "0.5.3"
+
+[libraries]
+adapterdelegates-core = { module = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl", version.ref = "adapterdelegates" }
+adapterdelegates-viewbinding = { module = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding", version.ref = "adapterdelegates" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
+kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+kotlin-std-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+recyclerview-core = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+[bundles]
+adapterdelegates = [
+    "adapterdelegates-core",
+    "adapterdelegates-viewbinding",
+]
+koin = [
+    "koin-android",
+    "koin-core",
+]
+kotlin-coroutines = [
+    "kotlin-coroutines-android",
+    "kotlin-coroutines-core",
+]
+room = [
+    "room-ktx",
+    "room-runtime",
+]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-plugin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+toml-checker = { id = "com.github.ben-manes.versions", version.ref = "toml-checker" }
+toml-updater = { id = "nl.littlerobots.version-catalog-update", version.ref = "toml-updater" }

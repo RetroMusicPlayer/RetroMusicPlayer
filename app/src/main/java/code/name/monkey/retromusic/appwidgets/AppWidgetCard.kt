@@ -18,8 +18,6 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.graphics.drawable.toBitmap
@@ -29,18 +27,13 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
 import code.name.monkey.retromusic.extensions.getTintedDrawable
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.Transition
 
 class AppWidgetCard : BaseAppWidget() {
     private var target: Target<BitmapPaletteWrapper>? = null // for cancellation
@@ -88,16 +81,17 @@ class AppWidgetCard : BaseAppWidget() {
         val appWidgetView = RemoteViews(service.packageName, R.layout.app_widget_card)
 
         val isPlaying = service.isPlaying
-        val song = service.currentSong
+        val song = service.currentSongId
 
         // Set the titles and artwork
-        if (song.title.isEmpty() && song.artistName.isEmpty()) {
-            appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
-        } else {
-            appWidgetView.setViewVisibility(R.id.media_titles, View.VISIBLE)
-            appWidgetView.setTextViewText(R.id.title, song.title)
-            appWidgetView.setTextViewText(R.id.text, getSongArtistAndAlbum(song))
-        }
+//        TODO: Fix widget update
+//        if (song.title.isEmpty() && song.artistName.isEmpty()) {
+//            appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
+//        } else {
+//            appWidgetView.setViewVisibility(R.id.media_titles, View.VISIBLE)
+//            appWidgetView.setTextViewText(R.id.title, song.title)
+//            appWidgetView.setTextViewText(R.id.text, getSongArtistAndAlbum(song))
+//        }
 
         // Set correct drawable for pause state
         val playPauseRes =
@@ -139,64 +133,65 @@ class AppWidgetCard : BaseAppWidget() {
         }
 
         // Load the album cover async and push the update on completion
-        service.runOnUiThread {
-            if (target != null) {
-                Glide.with(service).clear(target)
-            }
-            target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
-                .load(RetroGlideExtension.getSongModel(song))
-                .centerCrop()
-                .into(object : CustomTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
-                    override fun onResourceReady(
-                        resource: BitmapPaletteWrapper,
-                        transition: Transition<in BitmapPaletteWrapper>?,
-                    ) {
-                        val palette = resource.palette
-                        update(
-                            resource.bitmap, palette.getVibrantColor(
-                                palette.getMutedColor(
-                                    MaterialValueHelper.getSecondaryTextColor(
-                                        service, true
-                                    )
-                                )
-                            )
-                        )
-                    }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {}
-
-                    private fun update(bitmap: Bitmap?, color: Int) {
-                        // Set correct drawable for pause state
-                        appWidgetView.setImageViewBitmap(
-                            R.id.button_toggle_play_pause,
-                            service.getTintedDrawable(playPauseRes, color).toBitmap()
-                        )
-
-                        // Set prev/next button drawables
-                        appWidgetView.setImageViewBitmap(
-                            R.id.button_next,
-                            service.getTintedDrawable(R.drawable.ic_skip_next, color).toBitmap()
-                        )
-                        appWidgetView.setImageViewBitmap(
-                            R.id.button_prev,
-                            service.getTintedDrawable(R.drawable.ic_skip_previous, color).toBitmap()
-                        )
-
-                        val image = getAlbumArtDrawable(service, bitmap)
-                        val roundedBitmap = createRoundedBitmap(
-                            image, imageSize, imageSize, cardRadius, 0F, cardRadius, 0F
-                        )
-                        appWidgetView.setImageViewBitmap(R.id.image, roundedBitmap)
-
-                        pushUpdate(service, appWidgetIds, appWidgetView)
-                    }
-                })
-        }
+        // TODO: Fix cover art widget update
+//        service.runOnUiThread {
+//            if (target != null) {
+//                Glide.with(service).clear(target)
+//            }
+//            target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
+//                .load(RetroGlideExtension.getSongModel(song))
+//                .centerCrop()
+//                .into(object : CustomTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+//                    override fun onResourceReady(
+//                        resource: BitmapPaletteWrapper,
+//                        transition: Transition<in BitmapPaletteWrapper>?,
+//                    ) {
+//                        val palette = resource.palette
+//                        update(
+//                            resource.bitmap, palette.getVibrantColor(
+//                                palette.getMutedColor(
+//                                    MaterialValueHelper.getSecondaryTextColor(
+//                                        service, true
+//                                    )
+//                                )
+//                            )
+//                        )
+//                    }
+//
+//                    override fun onLoadFailed(errorDrawable: Drawable?) {
+//                        super.onLoadFailed(errorDrawable)
+//                        update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
+//                    }
+//
+//                    override fun onLoadCleared(placeholder: Drawable?) {}
+//
+//                    private fun update(bitmap: Bitmap?, color: Int) {
+//                        // Set correct drawable for pause state
+//                        appWidgetView.setImageViewBitmap(
+//                            R.id.button_toggle_play_pause,
+//                            service.getTintedDrawable(playPauseRes, color).toBitmap()
+//                        )
+//
+//                        // Set prev/next button drawables
+//                        appWidgetView.setImageViewBitmap(
+//                            R.id.button_next,
+//                            service.getTintedDrawable(R.drawable.ic_skip_next, color).toBitmap()
+//                        )
+//                        appWidgetView.setImageViewBitmap(
+//                            R.id.button_prev,
+//                            service.getTintedDrawable(R.drawable.ic_skip_previous, color).toBitmap()
+//                        )
+//
+//                        val image = getAlbumArtDrawable(service, bitmap)
+//                        val roundedBitmap = createRoundedBitmap(
+//                            image, imageSize, imageSize, cardRadius, 0F, cardRadius, 0F
+//                        )
+//                        appWidgetView.setImageViewBitmap(R.id.image, roundedBitmap)
+//
+//                        pushUpdate(service, appWidgetIds, appWidgetView)
+//                    }
+//                })
+//        }
     }
 
     /**

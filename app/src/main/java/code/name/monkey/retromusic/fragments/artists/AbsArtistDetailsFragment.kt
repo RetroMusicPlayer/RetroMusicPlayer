@@ -32,7 +32,6 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.SingleColorTarget
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.model.Artist
@@ -92,10 +91,14 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         setupRecyclerView()
 
         binding.fragmentArtistContent.playAction.apply {
-            setOnClickListener { MusicPlayerRemote.openQueue(artist.sortedSongs, 0, true) }
+            setOnClickListener {
+//                MusicPlayerRemote.openQueue(artist.sortedSongs, 0, true)
+            }
         }
         binding.fragmentArtistContent.shuffleAction.apply {
-            setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(artist.songs, true) }
+            setOnClickListener {
+//                MusicPlayerRemote.openAndShuffleQueue(artist.songs, true)
+            }
         }
 
         binding.fragmentArtistContent.biographyText.setOnClickListener {
@@ -240,11 +243,11 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         when (item.itemId) {
             android.R.id.home -> findNavController().navigateUp()
             R.id.action_play_next -> {
-                MusicPlayerRemote.playNext(songs)
+//                MusicPlayerRemote.playNext(songs)
                 return true
             }
             R.id.action_add_to_current_playing -> {
-                MusicPlayerRemote.enqueue(songs)
+//                MusicPlayerRemote.enqueue(songs)
                 return true
             }
             R.id.action_add_to_playlist -> {

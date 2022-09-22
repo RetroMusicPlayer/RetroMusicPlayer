@@ -21,7 +21,6 @@ import android.os.IBinder
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.toPlayCount
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.repository.RealRepository
@@ -32,7 +31,6 @@ import code.name.monkey.retromusic.service.MusicService.Companion.PLAY_STATE_CHA
 import code.name.monkey.retromusic.service.MusicService.Companion.QUEUE_CHANGED
 import code.name.monkey.retromusic.service.MusicService.Companion.REPEAT_MODE_CHANGED
 import code.name.monkey.retromusic.service.MusicService.Companion.SHUFFLE_MODE_CHANGED
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -122,23 +120,23 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             listener.onPlayingMetaChanged()
         }
         lifecycleScope.launch(Dispatchers.IO) {
-            val entity = repository.songPresentInHistory(MusicPlayerRemote.currentSong)
-            if (entity != null) {
-                repository.updateHistorySong(MusicPlayerRemote.currentSong)
-            } else {
-                // Check whether pause history option is ON or OFF
-                if (!PreferenceUtil.pauseHistory) {
-                    repository.addSongToHistory(MusicPlayerRemote.currentSong)
-                }
-            }
-            val songs = repository.checkSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
-            if (songs.isNotEmpty()) {
-                repository.updateSongInPlayCount(songs.first().apply {
-                    playCount += 1
-                })
-            } else {
-                repository.insertSongInPlayCount(MusicPlayerRemote.currentSong.toPlayCount())
-            }
+//            val entity = repository.songPresentInHistory(MusicPlayerRemote.currentSongId)
+//            if (entity != null) {
+//                repository.updateHistorySong(MusicPlayerRemote.currentSongId)
+//            } else {
+//                // Check whether pause history option is ON or OFF
+//                if (!PreferenceUtil.pauseHistory) {
+//                    repository.addSongToHistory(MusicPlayerRemote.currentSongId)
+//                }
+//            }
+//            val songs = repository.checkSongExistInPlayCount(MusicPlayerRemote.currentSongId.id)
+//            if (songs.isNotEmpty()) {
+//                repository.updateSongInPlayCount(songs.first().apply {
+//                    playCount += 1
+//                })
+//            } else {
+//                repository.insertSongInPlayCount(MusicPlayerRemote.currentSongId.toPlayCount())
+//            }
         }
     }
 

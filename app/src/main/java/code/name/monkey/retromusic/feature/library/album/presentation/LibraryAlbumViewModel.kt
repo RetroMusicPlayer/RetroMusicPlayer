@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import code.name.monkey.retromusic.feature.library.album.domain.LibraryAlbum
 import code.name.monkey.retromusic.feature.library.album.domain.LibraryAlbumRepository
-import code.name.monkey.retromusic.util.mapItems
+import ru.stersh.retrosonic.core.extensions.mapItems
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

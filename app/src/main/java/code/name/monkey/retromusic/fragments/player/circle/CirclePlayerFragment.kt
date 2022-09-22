@@ -27,11 +27,13 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.getSystemService
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import ru.stersh.retrosonic.core.storage.domain.PlayQueueStorage
 import code.name.monkey.retromusic.databinding.FragmentCirclePlayerBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
@@ -40,19 +42,19 @@ import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.GlideRequest
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.crossfadeListener
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.google.android.material.slider.Slider
+import kotlinx.coroutines.flow.filterNotNull
 import me.tankery.lib.circularseekbar.CircularSeekBar
+import org.koin.android.ext.android.inject
 
 /**
  * Created by hemanths on 2020-01-06.
@@ -62,6 +64,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     OnAudioVolumeChangedListener,
     CircularSeekBar.OnCircularSeekBarChangeListener {
 
+    private val playQueueStorage: PlayQueueStorage by inject()
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
     private var audioVolumeObserver: AudioVolumeObserver? = null
 
@@ -95,6 +98,37 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
             goToArtist(requireActivity())
         }
         binding.songInfo.drawAboveSystemBars()
+        lifecycleScope.launchWhenStarted {
+            playQueueStorage
+                .getCurrentSong()
+                .filterNotNull()
+                .collect { song ->
+                    binding.title.text = song.title
+                    binding.text.text = song.artist
+
+//                    if (PreferenceUtil.isSongInfo) {
+//                        binding.songInfo.text = getSongInfo(song)
+//                        binding.songInfo.show()
+//                    } else {
+//                        binding.songInfo.hide()
+//                    }
+                    GlideApp
+                        .with(this@CirclePlayerFragment)
+                        .load(song.coverArtUrl)
+                        .thumbnail(lastRequest)
+                        .error(
+                            GlideApp
+                                .with(this@CirclePlayerFragment)
+                                .load(R.drawable.default_audio_art)
+                                .fitCenter()
+                        )
+                        .fitCenter().also {
+                            lastRequest = it.clone()
+                            it.crossfadeListener()
+                                .into(binding.albumCover)
+                        }
+                }
+        }
     }
 
     private fun setUpPlayerToolbar() {
@@ -227,26 +261,26 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.title.text = song.title
-        binding.text.text = song.artistName
-
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.text = getSongInfo(song)
-            binding.songInfo.show()
-        } else {
-            binding.songInfo.hide()
-        }
-        GlideApp.with(this)
-            .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
-            .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
-            .thumbnail(lastRequest)
-            .error(GlideApp.with(this).load(R.drawable.default_audio_art).fitCenter())
-            .fitCenter().also {
-                lastRequest = it.clone()
-                it.crossfadeListener()
-                    .into(binding.albumCover)
-            }
+//        val song = MusicPlayerRemote.currentSongId
+//        binding.title.text = song.title
+//        binding.text.text = song.artistName
+//
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.songInfo.text = getSongInfo(song)
+//            binding.songInfo.show()
+//        } else {
+//            binding.songInfo.hide()
+//        }
+//        GlideApp.with(this)
+//            .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSongId))
+//            .simpleSongCoverOptions(MusicPlayerRemote.currentSongId)
+//            .thumbnail(lastRequest)
+//            .error(GlideApp.with(this).load(R.drawable.default_audio_art).fitCenter())
+//            .fitCenter().also {
+//                lastRequest = it.clone()
+//                it.crossfadeListener()
+//                    .into(binding.albumCover)
+//            }
     }
 
     private fun updatePlayPauseDrawableState() {

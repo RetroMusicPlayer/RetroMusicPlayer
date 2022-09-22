@@ -16,40 +16,36 @@ package code.name.monkey.retromusic.util
 
 import android.content.Context
 import android.content.Intent
-import android.provider.BaseColumns
-import android.provider.MediaStore
 import android.provider.Settings
 import androidx.core.net.toUri
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.MusicUtil.getSongFileUri
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 object RingtoneManager {
-    fun setRingtone(context: Context, song: Song) {
-        val uri = getSongFileUri(song.id)
-        val resolver = context.contentResolver
-
-        try {
-            val cursor = resolver.query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                arrayOf(MediaStore.MediaColumns.TITLE),
-                BaseColumns._ID + "=?",
-                arrayOf(song.id.toString()), null
-            )
-            cursor.use { cursorSong ->
-                if (cursorSong != null && cursorSong.count == 1) {
-                    cursorSong.moveToFirst()
-                    Settings.System.putString(resolver, Settings.System.RINGTONE, uri.toString())
-                    val message = context
-                        .getString(R.string.x_has_been_set_as_ringtone, cursorSong.getString(0))
-                    context.showToast(message)
-                }
-            }
-        } catch (ignored: SecurityException) {
-        }
+    fun setRingtone(context: Context, songId: String) {
+        // TODO: set rigtone
+//        val uri = getSongFileUri(songId)
+//        val resolver = context.contentResolver
+//
+//        try {
+//            val cursor = resolver.query(
+//                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+//                arrayOf(MediaStore.MediaColumns.TITLE),
+//                BaseColumns._ID + "=?",
+//                arrayOf(songId), null
+//            )
+//            cursor.use { cursorSong ->
+//                if (cursorSong != null && cursorSong.count == 1) {
+//                    cursorSong.moveToFirst()
+//                    Settings.System.putString(resolver, Settings.System.RINGTONE, uri.toString())
+//                    val message = context
+//                        .getString(R.string.x_has_been_set_as_ringtone, cursorSong.getString(0))
+//                    context.showToast(message)
+//                }
+//            }
+//        } catch (ignored: SecurityException) {
+//        }
     }
 
     fun requiresDialog(context: Context): Boolean {

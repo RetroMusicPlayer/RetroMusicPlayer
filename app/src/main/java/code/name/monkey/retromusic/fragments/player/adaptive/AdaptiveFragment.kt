@@ -17,18 +17,22 @@ package code.name.monkey.retromusic.fragments.player.adaptive
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import ru.stersh.retrosonic.core.storage.domain.PlayQueueStorage
 import code.name.monkey.retromusic.databinding.FragmentAdaptivePlayerBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import kotlinx.coroutines.flow.filterNotNull
+import org.koin.android.ext.android.inject
 
 class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
 
+    private val playQueueStorage: PlayQueueStorage by inject()
     private var _binding: FragmentAdaptivePlayerBinding? = null
     private val binding get() = _binding!!
     override fun playerToolbar(): Toolbar {
@@ -44,6 +48,17 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
         setUpSubFragments()
         setUpPlayerToolbar()
         binding.playbackControlsFragment.drawAboveSystemBars()
+        lifecycleScope.launchWhenStarted {
+            playQueueStorage
+                .getCurrentSong()
+                .filterNotNull()
+                .collect { song ->
+                    binding.playerToolbar.apply {
+                        title = song.title
+                        subtitle = song.artist
+                    }
+                }
+        }
     }
 
     private fun setUpSubFragments() {
@@ -80,22 +95,22 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.playerToolbar.apply {
-            title = song.title
-            subtitle = song.artistName
-        }
+        val song = MusicPlayerRemote.currentSongId
+//        binding.playerToolbar.apply {
+//            title = song.title
+//            subtitle = song.artistName
+//        }
     }
 
-    override fun toggleFavorite(song: Song) {
-        super.toggleFavorite(song)
-        if (song.id == MusicPlayerRemote.currentSong.id) {
+    override fun toggleFavorite(songId: String) {
+        super.toggleFavorite(songId)
+        if (songId == MusicPlayerRemote.currentSongId) {
             updateIsFavorite()
         }
     }
 
     override fun onFavoriteToggled() {
-        toggleFavorite(MusicPlayerRemote.currentSong)
+//        toggleFavorite(MusicPlayerRemote.currentSongId)
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {

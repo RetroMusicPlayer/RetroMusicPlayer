@@ -1,0 +1,14 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: "${project.rootDir}/buildscripts/android-library.gradle"
+
+android {
+    namespace 'ru.stersh.retrosonic.core'
+}
+
+dependencies {
+    implementation project(':apisonic')
+    implementation(libs.kotlin.coroutines.android)
+    implementation(libs.bundles.koin)
+}

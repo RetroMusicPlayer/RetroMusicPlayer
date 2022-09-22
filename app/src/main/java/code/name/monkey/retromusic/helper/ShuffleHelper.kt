@@ -14,11 +14,9 @@
  */
 package code.name.monkey.retromusic.helper
 
-import code.name.monkey.retromusic.model.Song
-
 object ShuffleHelper {
 
-    fun makeShuffleList(listToShuffle: MutableList<Song>, current: Int) {
+    fun makeShuffleList(listToShuffle: MutableList<String>, current: Int) {
         if (listToShuffle.isEmpty()) return
         if (current >= 0) {
             val song = listToShuffle.removeAt(current)

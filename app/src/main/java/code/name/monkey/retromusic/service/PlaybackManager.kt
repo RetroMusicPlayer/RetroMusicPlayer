@@ -3,12 +3,12 @@ package code.name.monkey.retromusic.service
 import android.content.Context
 import android.content.Intent
 import android.media.audiofx.AudioEffect
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil
+import ru.stersh.apisonic.ApiSonic
 
 
-class PlaybackManager(val context: Context) {
+class PlaybackManager(val context: Context, val apiSonic: ApiSonic) {
 
     var playback: Playback? = null
     private var playbackLocation = PlaybackLocation.LOCAL
@@ -81,11 +81,11 @@ class PlaybackManager(val context: Context) {
     fun seek(millis: Int): Int = playback!!.seek(millis)
 
     fun setDataSource(
-        song: Song,
+        songId: String,
         force: Boolean,
         completion: (success: Boolean) -> Unit,
     ) {
-        playback?.setDataSource(song, force, completion)
+        playback?.setDataSource(songId, force, completion)
     }
 
     fun setNextDataSource(trackUri: String?) {
@@ -108,14 +108,14 @@ class PlaybackManager(val context: Context) {
                 playback?.release()
             }
             playback = null
-            playback = MultiPlayer(context)
+            playback = MultiPlayer(context, apiSonic)
             return true
         } else if (playback !is CrossFadePlayer && crossFadeDuration > 0) {
             if (playback != null) {
                 playback?.release()
             }
             playback = null
-            playback = CrossFadePlayer(context)
+            playback = CrossFadePlayer(context, apiSonic)
             return true
         }
         return false
@@ -173,9 +173,9 @@ class PlaybackManager(val context: Context) {
     private fun createLocalPlayback(): Playback {
         // Set MultiPlayer when crossfade duration is 0 i.e. off
         return if (PreferenceUtil.crossFadeDuration == 0) {
-            MultiPlayer(context)
+            MultiPlayer(context, apiSonic)
         } else {
-            CrossFadePlayer(context)
+            CrossFadePlayer(context, apiSonic)
         }
     }
 

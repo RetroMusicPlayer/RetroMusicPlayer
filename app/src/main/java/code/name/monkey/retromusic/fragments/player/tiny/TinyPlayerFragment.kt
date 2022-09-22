@@ -25,11 +25,16 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.getSystemService
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
+import ru.stersh.retrosonic.core.storage.domain.PlayQueueStorage
 import code.name.monkey.retromusic.databinding.FragmentTinyPlayerBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.drawAboveSystemBars
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -37,15 +42,16 @@ import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import kotlinx.coroutines.flow.filterNotNull
+import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
-class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
-    MusicProgressViewUpdateHelper.Callback {
+class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player), MusicProgressViewUpdateHelper.Callback {
+    private val playQueueStorage: PlayQueueStorage by inject()
     private var _binding: FragmentTinyPlayerBinding? = null
     private val binding get() = _binding!!
 
@@ -96,7 +102,7 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
 
 
     override fun onFavoriteToggled() {
-        toggleFavorite(MusicPlayerRemote.currentSong)
+//        toggleFavorite(MusicPlayerRemote.currentSongId)
     }
 
     private lateinit var controlsFragment: TinyPlaybackControlsFragment
@@ -118,16 +124,16 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.title.text = song.title
-        binding.text.text = String.format("%s \nby - %s", song.albumName, song.artistName)
-
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.text = getSongInfo(song)
-            binding.songInfo.show()
-        } else {
-            binding.songInfo.hide()
-        }
+//        val song = MusicPlayerRemote.currentSongId
+//        binding.title.text = song.title
+//        binding.text.text = String.format("%s \nby - %s", song.albumName, song.artistName)
+//
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.songInfo.text = getSongInfo(song)
+//            binding.songInfo.show()
+//        } else {
+//            binding.songInfo.hide()
+//        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -147,12 +153,28 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
             goToArtist(requireActivity())
         }
         playerToolbar().drawAboveSystemBars()
+
+        lifecycleScope.launchWhenStarted {
+            playQueueStorage
+                .getCurrentSong()
+                .filterNotNull()
+                .collect {
+                    binding.title.text = it.title
+                    binding.text.text = String.format("%s \nby - %s", it.album, it.artist)
+
+                    if (PreferenceUtil.isSongInfo) {
+//                        binding.songInfo.text = getSongInfo(song)
+                        binding.songInfo.show()
+                    } else {
+                        binding.songInfo.hide()
+                    }
+                }
+        }
     }
 
     private fun setUpSubFragments() {
         controlsFragment = whichFragment(R.id.playbackControlsFragment)
-        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
-            whichFragment(R.id.playerAlbumCoverFragment)
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
         playerAlbumCoverFragment.setCallbacks(this)
     }
 
@@ -164,9 +186,9 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
         }
     }
 
-    override fun toggleFavorite(song: Song) {
-        super.toggleFavorite(song)
-        if (song.id == MusicPlayerRemote.currentSong.id) {
+    override fun toggleFavorite(songId: String) {
+        super.toggleFavorite(songId)
+        if (songId == MusicPlayerRemote.currentSongId) {
             updateIsFavorite()
         }
     }
@@ -210,8 +232,7 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
         private var gestureDetector: GestureDetector
 
         init {
-            gestureDetector = GestureDetector(context, object :
-                GestureDetector.SimpleOnGestureListener() {
+            gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
 
                 override fun onLongPress(e: MotionEvent?) {
                     if (abs(e!!.y - initialY) <= 2) {

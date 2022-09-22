@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SHOW_LYRICS
@@ -16,18 +15,11 @@ import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToLyrics
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.jaudiotagger.audio.exceptions.CannotReadException
-import java.io.File
-import java.io.FileNotFoundException
 
 class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyrics),
     MusicProgressViewUpdateHelper.Callback, SharedPreferences.OnSharedPreferenceChangeListener {
@@ -98,23 +90,24 @@ class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyri
 
     private fun updateLyrics() {
         lyrics = null
-        lifecycleScope.launch(Dispatchers.IO) {
-            val song = MusicPlayerRemote.currentSong
-            lyrics = try {
-                val lrcFile: File? = LyricUtil.getSyncedLyricsFile(song)
-                val data: String = LyricUtil.getStringFromLrc(lrcFile)
-                Lyrics.parse(song,
-                    data.ifEmpty {
-                        // Get Embedded Lyrics
-                        LyricUtil.getEmbeddedSyncedLyrics(song.data)
-                    }
-                )
-            } catch (err: FileNotFoundException) {
-                null
-            } catch (e: CannotReadException) {
-                null
-            }
-        }
+        // TODO: update lyrics
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            val song = MusicPlayerRemote.currentSongId
+//            lyrics = try {
+//                val lrcFile: File? = LyricUtil.getSyncedLyricsFile(song)
+//                val data: String = LyricUtil.getStringFromLrc(lrcFile)
+//                Lyrics.parse(song,
+//                    data.ifEmpty {
+//                        // Get Embedded Lyrics
+//                        LyricUtil.getEmbeddedSyncedLyrics(song.data)
+//                    }
+//                )
+//            } catch (err: FileNotFoundException) {
+//                null
+//            } catch (e: CannotReadException) {
+//                null
+//            }
+//        }
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {

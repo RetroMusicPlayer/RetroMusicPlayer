@@ -26,7 +26,6 @@ import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
@@ -71,15 +70,15 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
         )
     }
 
-    override fun toggleFavorite(song: Song) {
-        super.toggleFavorite(song)
-        if (song.id == MusicPlayerRemote.currentSong.id) {
+    override fun toggleFavorite(songId: String) {
+        super.toggleFavorite(songId)
+        if (songId == MusicPlayerRemote.currentSongId) {
             updateIsFavorite()
         }
     }
 
     override fun onFavoriteToggled() {
-        toggleFavorite(MusicPlayerRemote.currentSong)
+//        toggleFavorite(MusicPlayerRemote.currentSongId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

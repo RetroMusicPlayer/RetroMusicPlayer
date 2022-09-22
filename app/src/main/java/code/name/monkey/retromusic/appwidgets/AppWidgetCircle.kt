@@ -18,8 +18,6 @@ import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.widget.RemoteViews
 import androidx.core.graphics.drawable.toBitmap
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -28,20 +26,13 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
 import code.name.monkey.retromusic.extensions.getTintedDrawable
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
-import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.Transition
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
@@ -76,7 +67,7 @@ class AppWidgetCircle : BaseAppWidget() {
         val appWidgetView = RemoteViews(service.packageName, R.layout.app_widget_circle)
 
         val isPlaying = service.isPlaying
-        val song = service.currentSong
+        val song = service.currentSongId
 
         // Set correct drawable for pause state
         val playPauseRes =
@@ -89,7 +80,9 @@ class AppWidgetCircle : BaseAppWidget() {
             ).toBitmap()
         )
         val isFavorite = runBlocking(Dispatchers.IO) {
-            return@runBlocking MusicUtil.isFavorite(song)
+            // TODO: fix favorite
+//            return@runBlocking MusicUtil.isFavorite(song)
+            false
         }
         val favoriteRes =
             if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
@@ -108,63 +101,63 @@ class AppWidgetCircle : BaseAppWidget() {
             val p = RetroUtil.getScreenSize(service)
             imageSize = p.x.coerceAtMost(p.y)
         }
-
+ // TODO: fix widget coverart load
         // Load the album cover async and push the update on completion
-        service.runOnUiThread {
-            if (target != null) {
-                Glide.with(service).clear(target)
-            }
-            target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
-                .load(RetroGlideExtension.getSongModel(song))
-                .apply(RequestOptions.circleCropTransform())
-                .into(object : CustomTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
-                    override fun onResourceReady(
-                        resource: BitmapPaletteWrapper,
-                        transition: Transition<in BitmapPaletteWrapper>?,
-                    ) {
-                        val palette = resource.palette
-                        update(
-                            resource.bitmap, palette.getVibrantColor(
-                                palette.getMutedColor(
-                                    MaterialValueHelper.getSecondaryTextColor(
-                                        service, true
-                                    )
-                                )
-                            )
-                        )
-                    }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
-                    }
-
-                    private fun update(bitmap: Bitmap?, color: Int) {
-                        // Set correct drawable for pause state
-                        appWidgetView.setImageViewBitmap(
-                            R.id.button_toggle_play_pause,
-                            service.getTintedDrawable(
-                                playPauseRes, color
-                            ).toBitmap()
-                        )
-
-                        // Set favorite button drawables
-                        appWidgetView.setImageViewBitmap(
-                            R.id.button_toggle_favorite,
-                            service.getTintedDrawable(
-                                favoriteRes, color
-                            ).toBitmap()
-                        )
-                        if (bitmap != null) {
-                            appWidgetView.setImageViewBitmap(R.id.image, bitmap)
-                        }
-
-                        pushUpdate(service, appWidgetIds, appWidgetView)
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {}
-                })
-        }
+//        service.runOnUiThread {
+//            if (target != null) {
+//                Glide.with(service).clear(target)
+//            }
+//            target = GlideApp.with(service).asBitmapPalette().songCoverOptions(song)
+//                .load(RetroGlideExtension.getSongModel(song))
+//                .apply(RequestOptions.circleCropTransform())
+//                .into(object : CustomTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+//                    override fun onResourceReady(
+//                        resource: BitmapPaletteWrapper,
+//                        transition: Transition<in BitmapPaletteWrapper>?,
+//                    ) {
+//                        val palette = resource.palette
+//                        update(
+//                            resource.bitmap, palette.getVibrantColor(
+//                                palette.getMutedColor(
+//                                    MaterialValueHelper.getSecondaryTextColor(
+//                                        service, true
+//                                    )
+//                                )
+//                            )
+//                        )
+//                    }
+//
+//                    override fun onLoadFailed(errorDrawable: Drawable?) {
+//                        super.onLoadFailed(errorDrawable)
+//                        update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
+//                    }
+//
+//                    private fun update(bitmap: Bitmap?, color: Int) {
+//                        // Set correct drawable for pause state
+//                        appWidgetView.setImageViewBitmap(
+//                            R.id.button_toggle_play_pause,
+//                            service.getTintedDrawable(
+//                                playPauseRes, color
+//                            ).toBitmap()
+//                        )
+//
+//                        // Set favorite button drawables
+//                        appWidgetView.setImageViewBitmap(
+//                            R.id.button_toggle_favorite,
+//                            service.getTintedDrawable(
+//                                favoriteRes, color
+//                            ).toBitmap()
+//                        )
+//                        if (bitmap != null) {
+//                            appWidgetView.setImageViewBitmap(R.id.image, bitmap)
+//                        }
+//
+//                        pushUpdate(service, appWidgetIds, appWidgetView)
+//                    }
+//
+//                    override fun onLoadCleared(placeholder: Drawable?) {}
+//                })
+//        }
     }
 
     /**

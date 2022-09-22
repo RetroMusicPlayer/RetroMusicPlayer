@@ -18,7 +18,6 @@ import android.view.MenuItem
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.GenreRepository
@@ -36,11 +35,11 @@ object GenreMenuHelper : KoinComponent {
     fun handleMenuClick(activity: FragmentActivity, genre: Genre, item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_play -> {
-                MusicPlayerRemote.openQueue(getGenreSongs(genre), 0, true)
+//                MusicPlayerRemote.openQueue(getGenreSongs(genre), 0, true)
                 return true
             }
             R.id.action_play_next -> {
-                MusicPlayerRemote.playNext(getGenreSongs(genre))
+//                MusicPlayerRemote.playNext(getGenreSongs(genre))
                 return true
             }
             R.id.action_add_to_playlist -> {
@@ -54,7 +53,7 @@ object GenreMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_add_to_current_playing -> {
-                MusicPlayerRemote.enqueue(getGenreSongs(genre))
+//                MusicPlayerRemote.enqueue(getGenreSongs(genre))
                 return true
             }
         }

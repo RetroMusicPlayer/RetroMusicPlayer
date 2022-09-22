@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.activities
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -22,24 +21,18 @@ import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.databinding.ActivityDriveModeBinding
-import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.glide.BlurTransformation
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import com.google.android.material.slider.Slider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 
 
@@ -80,31 +73,33 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
 
     private fun setupFavouriteToggle() {
         binding.songFavourite.setOnClickListener {
-            toggleFavorite(MusicPlayerRemote.currentSong)
+            toggleFavorite(MusicPlayerRemote.currentSongId ?: return@setOnClickListener)
         }
     }
 
-    private fun toggleFavorite(song: Song) {
+    private fun toggleFavorite(songId: String) {
+// TODO: fix favorite
         lifecycleScope.launch(Dispatchers.IO) {
-            val playlist = repository.favoritePlaylist()
-            val songEntity = song.toSongEntity(playlist.playListId)
-            val isFavorite = repository.isSongFavorite(song.id)
-            if (isFavorite) {
-                repository.removeSongFromPlaylist(songEntity)
-            } else {
-                repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-            }
-            sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
+//            val playlist = repository.favoritePlaylist()
+//            val songEntity = songId.toSongEntity(playlist.playListId)
+//            val isFavorite = repository.isSongFavorite(songId.id)
+//            if (isFavorite) {
+//                repository.removeSongFromPlaylist(songEntity)
+//            } else {
+//                repository.insertSongs(listOf(songId.toSongEntity(playlist.playListId)))
+//            }
+//            sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
     }
 
     private fun updateFavorite() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val isFavorite: Boolean =
-                repository.isSongFavorite(MusicPlayerRemote.currentSong.id)
-            withContext(Dispatchers.Main) {
-                binding.songFavourite.setImageResource(if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border)
-            }
+            // TODO: fix favorite
+//            val isFavorite: Boolean =
+//                repository.isSongFavorite(MusicPlayerRemote.currentSongId)
+//            withContext(Dispatchers.Main) {
+//                binding.songFavourite.setImageResource(if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border)
+//            }
         }
     }
 
@@ -230,16 +225,17 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-
-        binding.songTitle.text = song.title
-        binding.songText.text = song.artistName
-
-        GlideApp.with(this)
-            .load(RetroGlideExtension.getSongModel(song))
-            .songCoverOptions(song)
-            .transform(BlurTransformation.Builder(this).build())
-            .into(binding.image)
+        // TODO: Update song
+//        val song = MusicPlayerRemote.currentSongId
+//
+//        binding.songTitle.text = song.title
+//        binding.songText.text = song.artistName
+//
+//        GlideApp.with(this)
+//            .load(RetroGlideExtension.getSongModel(song))
+//            .songCoverOptions(song)
+//            .transform(BlurTransformation.Builder(this).build())
+//            .into(binding.image)
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {

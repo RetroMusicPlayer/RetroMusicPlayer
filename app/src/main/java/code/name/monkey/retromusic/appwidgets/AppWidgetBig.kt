@@ -19,7 +19,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.graphics.drawable.toBitmap
@@ -29,18 +28,13 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
 import code.name.monkey.retromusic.extensions.getTintedDrawable
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.Transition
 
 class AppWidgetBig : BaseAppWidget() {
     private var target: Target<Bitmap>? = null // for cancellation
@@ -93,25 +87,26 @@ class AppWidgetBig : BaseAppWidget() {
         )
 
         val isPlaying = service.isPlaying
-        val song = service.currentSong
+        val song = service.currentSongId
 
         // Set the titles and artwork
-        if (song.title.isEmpty() && song.artistName.isEmpty()) {
-            appWidgetView.setViewVisibility(
-                R.id.media_titles,
-                View.INVISIBLE
-            )
-        } else {
-            appWidgetView.setViewVisibility(
-                R.id.media_titles,
-                View.VISIBLE
-            )
-            appWidgetView.setTextViewText(R.id.title, song.title)
-            appWidgetView.setTextViewText(
-                R.id.text,
-                getSongArtistAndAlbum(song)
-            )
-        }
+//        TODO: fix widget update
+//        if (song.title.isEmpty() && song.artistName.isEmpty()) {
+//            appWidgetView.setViewVisibility(
+//                R.id.media_titles,
+//                View.INVISIBLE
+//            )
+//        } else {
+//            appWidgetView.setViewVisibility(
+//                R.id.media_titles,
+//                View.VISIBLE
+//            )
+//            appWidgetView.setTextViewText(R.id.title, song.title)
+//            appWidgetView.setTextViewText(
+//                R.id.text,
+//                getSongArtistAndAlbum(song)
+//            )
+//        }
 
         val primaryColor = MaterialValueHelper.getPrimaryTextColor(service, false)
         // Set correct drawable for pause state
@@ -148,42 +143,43 @@ class AppWidgetBig : BaseAppWidget() {
         val p = RetroUtil.getScreenSize(service)
         val widgetImageSize = p.x.coerceAtMost(p.y)
         val appContext = service.applicationContext
-        service.runOnUiThread {
-            if (target != null) {
-                Glide.with(service).clear(target)
-            }
-            target = GlideApp.with(appContext)
-                .asBitmap()
-                //.checkIgnoreMediaStore()
-                .load(RetroGlideExtension.getSongModel(song))
-                .into(object : CustomTarget<Bitmap>(widgetImageSize, widgetImageSize) {
-                    override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap>?,
-                    ) {
-                        update(resource)
-                    }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        update(null)
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {}
-
-                    private fun update(bitmap: Bitmap?) {
-                        if (bitmap == null) {
-                            appWidgetView.setImageViewResource(
-                                R.id.image,
-                                R.drawable.default_audio_art
-                            )
-                        } else {
-                            appWidgetView.setImageViewBitmap(R.id.image, bitmap)
-                        }
-                        pushUpdate(appContext, appWidgetIds, appWidgetView)
-                    }
-                })
-        }
+        // TODO: fix widget cover art update
+//        service.runOnUiThread {
+//            if (target != null) {
+//                Glide.with(service).clear(target)
+//            }
+//            target = GlideApp.with(appContext)
+//                .asBitmap()
+//                //.checkIgnoreMediaStore()
+//                .load(RetroGlideExtension.getSongModel(song))
+//                .into(object : CustomTarget<Bitmap>(widgetImageSize, widgetImageSize) {
+//                    override fun onResourceReady(
+//                        resource: Bitmap,
+//                        transition: Transition<in Bitmap>?,
+//                    ) {
+//                        update(resource)
+//                    }
+//
+//                    override fun onLoadFailed(errorDrawable: Drawable?) {
+//                        super.onLoadFailed(errorDrawable)
+//                        update(null)
+//                    }
+//
+//                    override fun onLoadCleared(placeholder: Drawable?) {}
+//
+//                    private fun update(bitmap: Bitmap?) {
+//                        if (bitmap == null) {
+//                            appWidgetView.setImageViewResource(
+//                                R.id.image,
+//                                R.drawable.default_audio_art
+//                            )
+//                        } else {
+//                            appWidgetView.setImageViewBitmap(R.id.image, bitmap)
+//                        }
+//                        pushUpdate(appContext, appWidgetIds, appWidgetView)
+//                    }
+//                })
+//        }
     }
 
     /**

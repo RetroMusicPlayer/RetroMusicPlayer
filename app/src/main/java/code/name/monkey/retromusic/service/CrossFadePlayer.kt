@@ -8,14 +8,13 @@ import android.os.PowerManager
 import code.name.monkey.appthemehelper.util.VersionUtils.hasMarshmallow
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.AudioFader.Companion.createFadeAnimator
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.logE
 import kotlinx.coroutines.*
+import ru.stersh.apisonic.ApiSonic
 
 /** @author Prathamesh M */
 
@@ -26,7 +25,7 @@ import kotlinx.coroutines.*
 * play but with decreasing volume and start the player with the next song with increasing volume
 * and vice versa for upcoming song and so on.
 */
-class CrossFadePlayer(context: Context) : LocalPlayback(context) {
+class CrossFadePlayer(context: Context, apiSonic: ApiSonic) : LocalPlayback(context, apiSonic) {
 
     private var currentPlayer: CurrentPlayer = CurrentPlayer.NOT_SET
     private var player1 = MediaPlayer()
@@ -121,7 +120,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
         get() = mIsInitialized && getCurrentPlayer()?.isPlaying == true
 
     override fun setDataSource(
-        song: Song,
+        songId: String,
         force: Boolean,
         completion: (success: Boolean) -> Unit,
     ) {
@@ -130,7 +129,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
         /* We've already set DataSource if initialized is true in setNextDataSource */
         if (!hasDataSource) {
             getCurrentPlayer()?.let {
-                setDataSourceImpl(it, song.uri.toString()) { success ->
+                setDataSourceImpl(it, getSongUrlFromId(songId)) { success ->
                     mIsInitialized = success
                     completion(success)
                 }
@@ -290,10 +289,10 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     fun onDurationUpdated(progress: Int, total: Int) {
         if (total > 0 && (total - progress).div(1000) == crossFadeDuration) {
             getNextPlayer()?.let { player ->
-                val nextSong = MusicPlayerRemote.nextSong
+                val nextSong = MusicPlayerRemote.nextSongId
                 // Switch to other player (Crossfade) only if next song exists
                 if (nextSong != null) {
-                    setDataSourceImpl(player, nextSong.uri.toString()) { success ->
+                    setDataSourceImpl(player, nextSong) { success ->
                         if (success) switchPlayer()
                     }
                 }

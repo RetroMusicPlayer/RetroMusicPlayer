@@ -121,10 +121,10 @@ class SongDetailDialog : DialogFragment() {
 
         val TAG: String = SongDetailDialog::class.java.simpleName
 
-        fun create(song: Song): SongDetailDialog {
+        fun create(songId: String): SongDetailDialog {
             return SongDetailDialog().apply {
                 arguments = bundleOf(
-                    EXTRA_SONG to song
+                    EXTRA_SONG to songId
                 )
             }
         }

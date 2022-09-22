@@ -20,7 +20,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 
 abstract class AbsOffsetSongAdapter(
@@ -73,7 +72,7 @@ abstract class AbsOffsetSongAdapter(
             if (isInQuickSelectMode && itemViewType != OFFSET_ITEM) {
                 toggleChecked(layoutPosition)
             } else {
-                MusicPlayerRemote.openQueue(dataSet, layoutPosition - 1, true)
+//                MusicPlayerRemote.openQueue(dataSet, layoutPosition - 1, true)
             }
         }
 

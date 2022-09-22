@@ -93,10 +93,10 @@ class SongShareDialog : DialogFragment() {
 
     companion object {
 
-        fun create(song: Song): SongShareDialog {
+        fun create(songId: String): SongShareDialog {
             return SongShareDialog().apply {
                 arguments = bundleOf(
-                    EXTRA_SONG to song
+                    EXTRA_SONG to songId
                 )
             }
         }

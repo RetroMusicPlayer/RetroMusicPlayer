@@ -25,13 +25,9 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentCardBlurPlayerPlaybackControlsBinding
 import code.name.monkey.retromusic.extensions.applyColor
-import code.name.monkey.retromusic.extensions.getSongInfo
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.slider.Slider
 
@@ -116,12 +112,12 @@ class CardBlurPlaybackControlsFragment :
     }
 
     private fun updateSong() {
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.text = getSongInfo(MusicPlayerRemote.currentSong)
-            binding.songInfo.show()
-        } else {
-            binding.songInfo.hide()
-        }
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.songInfo.text = getSongInfo(MusicPlayerRemote.currentSongId)
+//            binding.songInfo.show()
+//        } else {
+//            binding.songInfo.hide()
+//        }
     }
 
     override fun onPlayStateChanged() {

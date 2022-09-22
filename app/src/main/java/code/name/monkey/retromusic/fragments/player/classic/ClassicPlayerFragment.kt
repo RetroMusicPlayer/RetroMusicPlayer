@@ -34,7 +34,8 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.FragmentClassicPlayerBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
@@ -46,7 +47,6 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -192,16 +192,16 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.title.text = song.title
-        binding.text.text = song.artistName
-
-        if (PreferenceUtil.isSongInfo) {
-            binding.playerControlsContainer.songInfo.text = getSongInfo(song)
-            binding.playerControlsContainer.songInfo.show()
-        } else {
-            binding.playerControlsContainer.songInfo.hide()
-        }
+//        val song = MusicPlayerRemote.currentSongId
+//        binding.title.text = song.title
+//        binding.text.text = song.artistName
+//
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.playerControlsContainer.songInfo.text = getSongInfo(song)
+//            binding.playerControlsContainer.songInfo.show()
+//        } else {
+//            binding.playerControlsContainer.songInfo.hide()
+//        }
     }
 
     override fun onResume() {
@@ -315,15 +315,15 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         )
     }
 
-    override fun toggleFavorite(song: Song) {
-        super.toggleFavorite(song)
-        if (song.id == MusicPlayerRemote.currentSong.id) {
+    override fun toggleFavorite(songId: String) {
+        super.toggleFavorite(songId)
+        if (songId == MusicPlayerRemote.currentSongId) {
             updateIsFavorite()
         }
     }
 
     override fun onFavoriteToggled() {
-        toggleFavorite(MusicPlayerRemote.currentSong)
+//        toggleFavorite(MusicPlayerRemote.currentSongId)
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
@@ -350,7 +350,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     }
 
     private fun updateQueue() {
-        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
+//        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
         resetToCurrentPosition()
     }
 
@@ -390,8 +390,10 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     private fun setupRecyclerView() {
         playingQueueAdapter = PlayingQueueAdapter(
             requireActivity() as AppCompatActivity,
-            MusicPlayerRemote.playingQueue.toMutableList(),
-            MusicPlayerRemote.position,
+//            MusicPlayerRemote.playingQueue.toMutableList(),
+//            MusicPlayerRemote.position,
+            mutableListOf(),
+            0,
             R.layout.item_queue
         )
         linearLayoutManager = LinearLayoutManager(requireContext())

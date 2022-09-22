@@ -20,13 +20,13 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPeekPlayerBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.colorControlNormal
+import code.name.monkey.retromusic.extensions.drawAboveSystemBarsWithPadding
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 /**
@@ -107,16 +107,16 @@ class PeekPlayerFragment : AbsPlayerFragment(R.layout.fragment_peek_player) {
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.title.text = song.title
-        binding.text.text = song.artistName
-
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.text = getSongInfo(song)
-            binding.songInfo.show()
-        } else {
-            binding.songInfo.hide()
-        }
+//        val song = MusicPlayerRemote.currentSongId
+//        binding.title.text = song.title
+//        binding.text.text = song.artistName
+//
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.songInfo.text = getSongInfo(song)
+//            binding.songInfo.show()
+//        } else {
+//            binding.songInfo.hide()
+//        }
     }
 
     override fun onServiceConnected() {

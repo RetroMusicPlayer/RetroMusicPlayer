@@ -249,7 +249,7 @@ class HomeFragment :
             setOnClickListener {
                 it.isClickable = false
                 it.postDelayed({ it.isClickable = true }, 500)
-                MusicPlayerRemote.playNext(songs.subList(0, 8))
+//                MusicPlayerRemote.playNext(songs.subList(0, 8))
                 if (!MusicPlayerRemote.isPlaying) {
                     MusicPlayerRemote.playNextSong()
                 }
@@ -260,7 +260,7 @@ class HomeFragment :
             imageView.setOnClickListener {
                 it.isClickable = false
                 it.postDelayed({ it.isClickable = true }, 500)
-                MusicPlayerRemote.playNext(songs[index])
+//                MusicPlayerRemote.playNext(songs[index])
                 if (!MusicPlayerRemote.isPlaying) {
                     MusicPlayerRemote.playNextSong()
                 }

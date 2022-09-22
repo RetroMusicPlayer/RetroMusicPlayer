@@ -26,11 +26,6 @@ import code.name.monkey.retromusic.extensions.hideStatusBar
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenControlsFragment
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrListener
@@ -104,16 +99,17 @@ class LockScreenActivity : AbsMusicServiceActivity() {
     }
 
     private fun updateSongs() {
-        val song = MusicPlayerRemote.currentSong
-        GlideApp.with(this)
-            .asBitmapPalette()
-            .songCoverOptions(song)
-            .load(RetroGlideExtension.getSongModel(song))
-            .dontAnimate()
-            .into(object : RetroMusicColoredTarget(binding.image) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    fragment?.setColor(colors)
-                }
-            })
+//        TODO: fix update songs
+//        val song = MusicPlayerRemote.currentSongId
+//        GlideApp.with(this)
+//            .asBitmapPalette()
+//            .songCoverOptions(song)
+//            .load(RetroGlideExtension.getSongModel(song))
+//            .dontAnimate()
+//            .into(object : RetroMusicColoredTarget(binding.image) {
+//                override fun onColorReady(colors: MediaNotificationProcessor) {
+//                    fragment?.setColor(colors)
+//                }
+//            })
     }
 }

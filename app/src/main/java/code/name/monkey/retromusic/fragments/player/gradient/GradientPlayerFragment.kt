@@ -18,7 +18,6 @@ import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +32,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.FragmentGradientPlayerBinding
@@ -61,7 +59,6 @@ import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchAct
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_player),
     MusicProgressViewUpdateHelper.Callback,
@@ -113,7 +110,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
 
     private fun setupFavourite() {
         binding.playbackControlsFragment.songFavourite.setOnClickListener {
-            toggleFavorite(MusicPlayerRemote.currentSong)
+//            toggleFavorite(MusicPlayerRemote.currentSongId)
         }
     }
 
@@ -271,28 +268,28 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     override fun onFavoriteToggled() {
-        toggleFavorite(MusicPlayerRemote.currentSong)
+//        toggleFavorite(MusicPlayerRemote.currentSongId)
     }
 
     private fun updateIsFavoriteIcon(animate: Boolean = false) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val isFavorite: Boolean =
-                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
-            withContext(Dispatchers.Main) {
-                val icon = if (animate && VersionUtils.hasMarshmallow()) {
-                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
-                } else {
-                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                }
-                binding.playbackControlsFragment.songFavourite.apply {
-                    setImageResource(icon)
-                    drawable.also {
-                        if (it is AnimatedVectorDrawable) {
-                            it.start()
-                        }
-                    }
-                }
-            }
+//            val isFavorite: Boolean =
+//                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSongId)
+//            withContext(Dispatchers.Main) {
+//                val icon = if (animate && VersionUtils.hasMarshmallow()) {
+//                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
+//                } else {
+//                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+//                }
+//                binding.playbackControlsFragment.songFavourite.apply {
+//                    setImageResource(icon)
+//                    drawable.also {
+//                        if (it is AnimatedVectorDrawable) {
+//                            it.start()
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 
@@ -341,20 +338,20 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     override fun onQueueChanged() {
         super.onQueueChanged()
         updateLabel()
-        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue)
+//        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue)
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.playbackControlsFragment.title.text = song.title
-        binding.playbackControlsFragment.text.text = song.artistName
-        updateLabel()
-        if (PreferenceUtil.isSongInfo) {
-            binding.playbackControlsFragment.songInfo.text = getSongInfo(song)
-            binding.playbackControlsFragment.songInfo.show()
-        } else {
-            binding.playbackControlsFragment.songInfo.hide()
-        }
+//        val song = MusicPlayerRemote.currentSongId
+//        binding.playbackControlsFragment.title.text = song.title
+//        binding.playbackControlsFragment.text.text = song.artistName
+//        updateLabel()
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.playbackControlsFragment.songInfo.text = getSongInfo(song)
+//            binding.playbackControlsFragment.songInfo.show()
+//        } else {
+//            binding.playbackControlsFragment.songInfo.hide()
+//        }
     }
 
     private fun setUpMusicControllers() {
@@ -459,8 +456,8 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             if (this == (MusicPlayerRemote.position)) {
                 binding.nextSong.text = context?.resources?.getString(R.string.last_song)
             } else {
-                val title = MusicPlayerRemote.playingQueue[MusicPlayerRemote.position + 1].title
-                binding.nextSong.text = title
+//                val title = MusicPlayerRemote.playingQueue[MusicPlayerRemote.position + 1].title
+//                binding.nextSong.text = title
             }
         }
     }
@@ -487,8 +484,10 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     private fun setupRecyclerView() {
         playingQueueAdapter = PlayingQueueAdapter(
             requireActivity() as AppCompatActivity,
-            MusicPlayerRemote.playingQueue.toMutableList(),
-            MusicPlayerRemote.position,
+//            MusicPlayerRemote.playingQueue.toMutableList(),
+//            MusicPlayerRemote.position,
+            mutableListOf(),
+            0,
             R.layout.item_queue
         )
         linearLayoutManager = LinearLayoutManager(requireContext())
@@ -537,7 +536,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     private fun updateQueue() {
-        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
+//        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
         resetToCurrentPosition()
     }
 

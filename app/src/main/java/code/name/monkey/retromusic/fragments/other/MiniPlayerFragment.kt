@@ -24,7 +24,9 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.text.toSpannable
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
+import ru.stersh.retrosonic.core.storage.domain.PlayQueueStorage
 import code.name.monkey.retromusic.databinding.FragmentMiniPlayerBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.show
@@ -38,10 +40,14 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import kotlinx.coroutines.flow.filterNotNull
+import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
 open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_player),
     MusicProgressViewUpdateHelper.Callback, View.OnClickListener {
+
+    private val playQueueStorage: PlayQueueStorage by inject()
 
     private var _binding: FragmentMiniPlayerBinding? = null
     private val binding get() = _binding!!
@@ -65,6 +71,36 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
         view.setOnTouchListener(FlingPlayBackController(requireContext()))
         setUpMiniPlayer()
         setUpButtons()
+        lifecycleScope.launchWhenStarted {
+            playQueueStorage
+                .getCurrentSong()
+                .filterNotNull()
+                .collect { song ->
+                    val builder = SpannableStringBuilder()
+
+                    val title = song.title.toSpannable()
+                    title.setSpan(ForegroundColorSpan(textColorPrimary()), 0, title.length, 0)
+
+                    val text = song.artist.toSpannable()
+                    text.setSpan(ForegroundColorSpan(textColorSecondary()), 0, text.length, 0)
+
+                    builder.append(title).append(" • ").append(text)
+
+                    binding.miniPlayerTitle.isSelected = true
+                    binding.miniPlayerTitle.text = builder
+
+//                    binding.title.isSelected = true
+//                    binding.title.text = song.title
+//                    binding.text.isSelected = true
+//                    binding.text.text = song.artist
+
+                    GlideApp
+                        .with(requireContext())
+                        .load(song.coverArtUrl)
+                        .transition(RetroGlideExtension.getDefaultTransition())
+                        .into(binding.image)
+                }
+        }
     }
 
     fun setUpButtons() {
@@ -89,21 +125,21 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
     }
 
     private fun updateSongTitle() {
-
-        val song = MusicPlayerRemote.currentSong
-
-        val builder = SpannableStringBuilder()
-
-        val title = song.title.toSpannable()
-        title.setSpan(ForegroundColorSpan(textColorPrimary()), 0, title.length, 0)
-
-        val text = song.artistName.toSpannable()
-        text.setSpan(ForegroundColorSpan(textColorSecondary()), 0, text.length, 0)
-
-        builder.append(title).append(" • ").append(text)
-
-        binding.miniPlayerTitle.isSelected = true
-        binding.miniPlayerTitle.text = builder
+// TODO: update song title
+//        val song = MusicPlayerRemote.currentSongId
+//
+//        val builder = SpannableStringBuilder()
+//
+//        val title = song.title.toSpannable()
+//        title.setSpan(ForegroundColorSpan(textColorPrimary()), 0, title.length, 0)
+//
+//        val text = song.artistName.toSpannable()
+//        text.setSpan(ForegroundColorSpan(textColorSecondary()), 0, text.length, 0)
+//
+//        builder.append(title).append(" • ").append(text)
+//
+//        binding.miniPlayerTitle.isSelected = true
+//        binding.miniPlayerTitle.text = builder
 
 //        binding.title.isSelected = true
 //        binding.title.text = song.title
@@ -112,12 +148,12 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
     }
 
     private fun updateSongCover() {
-        val song = MusicPlayerRemote.currentSong
-        GlideApp.with(requireContext())
-            .load(RetroGlideExtension.getSongModel(song))
-            .transition(RetroGlideExtension.getDefaultTransition())
-            .songCoverOptions(song)
-            .into(binding.image)
+        val song = MusicPlayerRemote.currentSongId
+//        GlideApp.with(requireContext())
+//            .load(RetroGlideExtension.getSongModel(song))
+//            .transition(RetroGlideExtension.getDefaultTransition())
+//            .songCoverOptions(song)
+//            .into(binding.image)
     }
 
     override fun onServiceConnected() {

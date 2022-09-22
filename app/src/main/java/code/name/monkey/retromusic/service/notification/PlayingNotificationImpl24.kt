@@ -28,9 +28,8 @@ import androidx.media.app.NotificationCompat.MediaStyle
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
+import ru.stersh.retrosonic.core.storage.domain.PlayableSong
 import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_QUIT
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
@@ -109,17 +108,15 @@ class PlayingNotificationImpl24(
         setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
     }
 
-    override fun updateMetadata(song: Song, onUpdate: () -> Unit) {
-        if (song == Song.emptySong) return
+    override fun updateMetadata(song: PlayableSong, onUpdate: () -> Unit) {
         setContentTitle(song.title)
-        setContentText(song.artistName)
-        setSubText(song.albumName)
+        setContentText(song.artist)
+        setSubText(song.album)
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
         GlideApp.with(context)
             .asBitmap()
-            .songCoverOptions(song)
-            .load(RetroGlideExtension.getSongModel(song))
+            .load(song.coverArtUrl)
             //.checkIgnoreMediaStore()
             .centerCrop()
             .into(object : CustomTarget<Bitmap>(

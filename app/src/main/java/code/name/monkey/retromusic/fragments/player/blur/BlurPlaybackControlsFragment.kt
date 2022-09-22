@@ -27,19 +27,14 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentBlurPlayerPlaybackControlsBinding
 import code.name.monkey.retromusic.extensions.applyColor
-import code.name.monkey.retromusic.extensions.getSongInfo
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.slider.Slider
 
-class BlurPlaybackControlsFragment :
-    AbsPlayerControlsFragment(R.layout.fragment_blur_player_playback_controls) {
+class BlurPlaybackControlsFragment : AbsPlayerControlsFragment(R.layout.fragment_blur_player_playback_controls) {
     private var _binding: FragmentBlurPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
@@ -79,16 +74,16 @@ class BlurPlaybackControlsFragment :
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.title.text = song.title
-        binding.text.text = String.format("%s • %s", song.artistName, song.albumName)
-
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.show()
-            binding.songInfo.text = getSongInfo(song)
-        } else {
-            binding.songInfo.hide()
-        }
+//        val song = MusicPlayerRemote.currentSongId
+//        binding.title.text = song.title
+//        binding.text.text = String.format("%s • %s", song.artistName, song.albumName)
+//
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.songInfo.show()
+//            binding.songInfo.text = getSongInfo(song)
+//        } else {
+//            binding.songInfo.hide()
+//        }
     }
 
     override fun onServiceConnected() {

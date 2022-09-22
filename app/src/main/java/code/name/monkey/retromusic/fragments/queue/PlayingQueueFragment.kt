@@ -85,8 +85,10 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
 
         playingQueueAdapter = PlayingQueueAdapter(
             requireActivity(),
-            MusicPlayerRemote.playingQueue.toMutableList(),
-            MusicPlayerRemote.position,
+//            MusicPlayerRemote.playingQueue.toMutableList(),
+//            MusicPlayerRemote.position,
+            mutableListOf(),
+            0,
             R.layout.item_queue
         )
         wrappedAdapter = recyclerViewDragDropManager?.createWrappedAdapter(playingQueueAdapter!!)
@@ -148,7 +150,7 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
     }
 
     private fun updateQueue() {
-        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
+//        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
     }
 
     private fun resetToCurrentPosition() {

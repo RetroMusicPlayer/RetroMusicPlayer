@@ -17,7 +17,6 @@ import android.content.Context
 import android.content.res.Resources
 import android.support.v4.media.MediaBrowserCompat
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.*
@@ -105,15 +104,15 @@ class AutoMusicProvider(
                 mMusicService?.get()?.playingQueue
                     ?.let {
                         for (song in it) {
-                            mediaItems.add(
-                                AutoMediaItem.with(mContext)
-                                    .asPlayable()
-                                    .path(mediaId, song.id)
-                                    .title(song.title)
-                                    .subTitle(song.artistName)
-                                    .icon(MusicUtil.getMediaStoreAlbumCoverUri(song.albumId))
-                                    .build()
-                            )
+//                            mediaItems.add(
+//                                AutoMediaItem.with(mContext)
+//                                    .asPlayable()
+//                                    .path(mediaId, song.id)
+//                                    .title(song.title)
+//                                    .subTitle(song.artistName)
+//                                    .icon(MusicUtil.getMediaStoreAlbumCoverUri(song.albumId))
+//                                    .build()
+//                            )
                         }
                     }
             else -> {
@@ -215,15 +214,15 @@ class AutoMusicProvider(
                 .subTitle(MusicUtil.getPlaylistInfoString(mContext, songsRepository.songs()))
                 .build()
         )
-        mediaItems.add(
-            AutoMediaItem.with(mContext)
-                .asBrowsable()
-                .path(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE)
-                .icon(R.drawable.ic_queue_music)
-                .title(resources.getString(R.string.queue))
-                .subTitle(MusicUtil.getPlaylistInfoString(mContext, MusicPlayerRemote.playingQueue))
-                .asBrowsable().build()
-        )
+//        mediaItems.add(
+//            AutoMediaItem.with(mContext)
+//                .asBrowsable()
+//                .path(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE)
+//                .icon(R.drawable.ic_queue_music)
+//                .title(resources.getString(R.string.queue))
+//                .subTitle(MusicUtil.getPlaylistInfoString(mContext, MusicPlayerRemote.playingQueue))
+//                .asBrowsable().build()
+//        )
         mediaItems.add(
             AutoMediaItem.with(mContext)
                 .asBrowsable()

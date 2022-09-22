@@ -3,6 +3,7 @@ package code.name.monkey.retromusic
 import androidx.room.Room
 import code.name.monkey.retromusic.auto.AutoMusicProvider
 import code.name.monkey.retromusic.cast.RetroWebServer
+import ru.stersh.retrosonic.core.storage.coreModule
 import code.name.monkey.retromusic.db.MIGRATION_23_24
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.RetroDatabase
@@ -189,4 +190,4 @@ private val viewModules = module {
     }
 }
 
-val appModules = listOf(mainModule, dataModule, autoModule, viewModules, networkModule, roomModule, libraryAlbumModule, detailsAlbumModule, libraryArtistModule)
+val appModules = listOf(mainModule, dataModule, autoModule, viewModules, networkModule, roomModule, libraryAlbumModule, detailsAlbumModule, libraryArtistModule, coreModule)

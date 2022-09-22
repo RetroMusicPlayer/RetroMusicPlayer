@@ -87,8 +87,10 @@ class PlayingQueueRVFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Line
     override fun createAdapter(): PlayingQueueAdapter {
         return PlayingQueueAdapter(
             requireActivity() as AppCompatActivity,
-            MusicPlayerRemote.playingQueue.toMutableList(),
-            MusicPlayerRemote.position,
+//            MusicPlayerRemote.playingQueue.toMutableList(),
+//            MusicPlayerRemote.position,
+            mutableListOf(),
+            0,
             R.layout.item_queue
         )
     }
@@ -115,7 +117,7 @@ class PlayingQueueRVFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Line
     }
 
     private fun updateQueue() {
-        adapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
+//        adapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
         resetToCurrentPosition()
     }
 

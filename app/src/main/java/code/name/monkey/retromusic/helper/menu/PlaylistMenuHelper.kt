@@ -23,7 +23,6 @@ import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeletePlaylistDialog
 import code.name.monkey.retromusic.dialogs.RenamePlaylistDialog
 import code.name.monkey.retromusic.dialogs.SavePlaylistDialog
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.repository.RealRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,11 +40,11 @@ object PlaylistMenuHelper : KoinComponent {
     ): Boolean {
         when (item.itemId) {
             R.id.action_play -> {
-                MusicPlayerRemote.openQueue(playlistWithSongs.songs.toSongs(), 0, true)
+//                MusicPlayerRemote.openQueue(playlistWithSongs.songs.toSongs(), 0, true)
                 return true
             }
             R.id.action_play_next -> {
-                MusicPlayerRemote.playNext(playlistWithSongs.songs.toSongs())
+//                MusicPlayerRemote.playNext(playlistWithSongs.songs.toSongs())
                 return true
             }
             R.id.action_add_to_playlist -> {
@@ -59,7 +58,7 @@ object PlaylistMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_add_to_current_playing -> {
-                MusicPlayerRemote.enqueue(playlistWithSongs.songs.toSongs())
+//                MusicPlayerRemote.enqueue(playlistWithSongs.songs.toSongs())
                 return true
             }
             R.id.action_rename_playlist -> {

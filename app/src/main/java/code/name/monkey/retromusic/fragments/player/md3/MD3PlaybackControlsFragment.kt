@@ -30,7 +30,6 @@ import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.slider.Slider
 
@@ -117,16 +116,16 @@ class MD3PlaybackControlsFragment :
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.title.text = song.title
-        binding.text.text = song.artistName
-
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.text = getSongInfo(song)
-            binding.songInfo.show()
-        } else {
-            binding.songInfo.hide()
-        }
+//        val song = MusicPlayerRemote.currentSongId
+//        binding.title.text = song.title
+//        binding.text.text = song.artistName
+//
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.songInfo.text = getSongInfo(song)
+//            binding.songInfo.show()
+//        } else {
+//            binding.songInfo.hide()
+//        }
     }
 
     override fun onServiceConnected() {

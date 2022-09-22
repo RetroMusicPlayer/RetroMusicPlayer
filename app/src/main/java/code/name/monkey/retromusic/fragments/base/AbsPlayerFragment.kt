@@ -16,13 +16,9 @@ package code.name.monkey.retromusic.fragments.base
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.AnimatedVectorDrawable
-import android.media.MediaMetadataRetriever
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.GestureDetector
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -32,39 +28,26 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
-import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
-import code.name.monkey.retromusic.db.PlaylistEntity
-import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
-import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IPaletteColorHolder
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.repository.RealRepository
-import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RingtoneManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.math.abs
 
@@ -81,7 +64,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
     override fun onMenuItemClick(
         item: MenuItem,
     ): Boolean {
-        val song = MusicPlayerRemote.currentSong
+        val songId = MusicPlayerRemote.currentSongId ?: return false
         when (item.itemId) {
             R.id.action_playback_speed -> {
                 PlaybackSpeedDialog.newInstance().show(childFragmentManager, "PLAYBACK_SETTINGS")
@@ -102,11 +85,11 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 return true
             }
             R.id.action_toggle_favorite -> {
-                toggleFavorite(song)
+                toggleFavorite(songId)
                 return true
             }
             R.id.action_share -> {
-                SongShareDialog.create(song).show(childFragmentManager, "SHARE_SONG")
+                SongShareDialog.create(songId).show(childFragmentManager, "SHARE_SONG")
                 return true
             }
             R.id.action_go_to_drive_mode -> {
@@ -114,17 +97,18 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 return true
             }
             R.id.action_delete_from_device -> {
-                DeleteSongsDialog.create(song).show(childFragmentManager, "DELETE_SONGS")
+                DeleteSongsDialog.create(songId).show(childFragmentManager, "DELETE_SONGS")
                 return true
             }
             R.id.action_add_to_playlist -> {
-                lifecycleScope.launch(IO) {
-                    val playlists = get<RealRepository>().fetchPlaylists()
-                    withContext(Main) {
-                        AddToPlaylistDialog.create(playlists, song)
-                            .show(childFragmentManager, "ADD_PLAYLIST")
-                    }
-                }
+//                TODO: add to playlist
+//                lifecycleScope.launch(IO) {
+//                    val playlists = get<RealRepository>().fetchPlaylists()
+//                    withContext(Main) {
+//                        AddToPlaylistDialog.create(playlists, songId)
+//                            .show(childFragmentManager, "ADD_PLAYLIST")
+//                    }
+//                }
                 return true
             }
             R.id.action_clear_playing_queue -> {
@@ -132,18 +116,18 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 return true
             }
             R.id.action_save_playing_queue -> {
-                CreatePlaylistDialog.create(ArrayList(MusicPlayerRemote.playingQueue))
-                    .show(childFragmentManager, "ADD_TO_PLAYLIST")
+//                CreatePlaylistDialog.create(ArrayList(MusicPlayerRemote.playingQueue))
+//                    .show(childFragmentManager, "ADD_TO_PLAYLIST")
                 return true
             }
             R.id.action_tag_editor -> {
                 val intent = Intent(activity, SongTagEditorActivity::class.java)
-                intent.putExtra(AbsTagEditorActivity.EXTRA_ID, song.id)
+                intent.putExtra(AbsTagEditorActivity.EXTRA_ID, songId)
                 startActivity(intent)
                 return true
             }
             R.id.action_details -> {
-                SongDetailDialog.create(song).show(childFragmentManager, "SONG_DETAIL")
+                SongDetailDialog.create(songId).show(childFragmentManager, "SONG_DETAIL")
                 return true
             }
             R.id.action_go_to_album -> {
@@ -152,7 +136,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 mainActivity.collapsePanel()
                 requireActivity().findNavController(R.id.fragment_container).navigate(
                     R.id.albumDetailsFragment,
-                    bundleOf(EXTRA_ALBUM_ID to song.albumId)
+                    bundleOf(EXTRA_ALBUM_ID to songId)
                 )
                 return true
             }
@@ -186,26 +170,27 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                     if (RingtoneManager.requiresDialog(this)) {
                         RingtoneManager.showDialog(this)
                     } else {
-                        RingtoneManager.setRingtone(this, song)
+                        RingtoneManager.setRingtone(this, songId)
                     }
                 }
 
                 return true
             }
             R.id.action_go_to_genre -> {
-                val retriever = MediaMetadataRetriever()
-                val trackUri =
-                    ContentUris.withAppendedId(
-                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                        song.id
-                    )
-                retriever.setDataSource(activity, trackUri)
-                var genre: String? =
-                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE)
-                if (genre == null) {
-                    genre = "Not Specified"
-                }
-                showToast(genre)
+//                TODO: go to genre
+//                val retriever = MediaMetadataRetriever()
+//                val trackUri =
+//                    ContentUris.withAppendedId(
+//                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+//                        songId
+//                    )
+//                retriever.setDataSource(activity, trackUri)
+//                var genre: String? =
+//                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE)
+//                if (genre == null) {
+//                    genre = "Not Specified"
+//                }
+//                showToast(genre)
                 return true
             }
         }
@@ -245,50 +230,52 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
         updateIsFavorite(animate = true)
     }
 
-    protected open fun toggleFavorite(song: Song) {
-        lifecycleScope.launch(IO) {
-            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
-            val songEntity = song.toSongEntity(playlist.playListId)
-            val isFavorite = libraryViewModel.isSongFavorite(song.id)
-            if (isFavorite) {
-                libraryViewModel.removeSongFromPlaylist(songEntity)
-            } else {
-                libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-            }
-            libraryViewModel.forceReload(ReloadType.Playlists)
-            requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
-        }
+    protected open fun toggleFavorite(songId: String) {
+//        TODO: fix favorite
+//        lifecycleScope.launch(IO) {
+//            val playlist: PlaylistEntity = libraryViewModel.favoritePlaylist()
+//            val songEntity = songId.toSongEntity(playlist.playListId)
+//            val isFavorite = libraryViewModel.isSongFavorite(songId.id)
+//            if (isFavorite) {
+//                libraryViewModel.removeSongFromPlaylist(songEntity)
+//            } else {
+//                libraryViewModel.insertSongs(listOf(songId.toSongEntity(playlist.playListId)))
+//            }
+//            libraryViewModel.forceReload(ReloadType.Playlists)
+//            requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
+//        }
     }
 
     fun updateIsFavorite(animate: Boolean = false) {
-        lifecycleScope.launch(IO) {
-            val isFavorite: Boolean =
-                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
-            withContext(Main) {
-                val icon = if (animate && VersionUtils.hasMarshmallow()) {
-                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
-                } else {
-                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                }
-                val drawable = requireContext().getTintedDrawable(
-                    icon,
-                    toolbarIconColor()
-                )
-                if (playerToolbar() != null) {
-                    playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)?.apply {
-                        setIcon(drawable)
-                        title =
-                            if (isFavorite) getString(R.string.action_remove_from_favorites)
-                            else getString(R.string.action_add_to_favorites)
-                        getIcon().also {
-                            if (it is AnimatedVectorDrawable) {
-                                it.start()
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        // TODO: favorite
+//        lifecycleScope.launch(IO) {
+//            val isFavorite: Boolean =
+//                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSongId)
+//            withContext(Main) {
+//                val icon = if (animate && VersionUtils.hasMarshmallow()) {
+//                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
+//                } else {
+//                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+//                }
+//                val drawable = requireContext().getTintedDrawable(
+//                    icon,
+//                    toolbarIconColor()
+//                )
+//                if (playerToolbar() != null) {
+//                    playerToolbar()?.menu?.findItem(R.id.action_toggle_favorite)?.apply {
+//                        setIcon(drawable)
+//                        title =
+//                            if (isFavorite) getString(R.string.action_remove_from_favorites)
+//                            else getString(R.string.action_add_to_favorites)
+//                        getIcon().also {
+//                            if (it is AnimatedVectorDrawable) {
+//                                it.start()
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -385,7 +372,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
 
 fun goToArtist(activity: Activity) {
     if (activity !is MainActivity) return
-    val song = MusicPlayerRemote.currentSong
+    val song = MusicPlayerRemote.currentSongId
     activity.apply {
 
         // Remove exit transition of current fragment so
@@ -397,31 +384,32 @@ fun goToArtist(activity: Activity) {
         if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
             collapsePanel()
         }
-
-        findNavController(R.id.fragment_container).navigate(
-            R.id.artistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_ID to song.artistId)
-        )
+// TODO: artist details
+//        findNavController(R.id.fragment_container).navigate(
+//            R.id.artistDetailsFragment,
+//            bundleOf(EXTRA_ARTIST_ID to song.artistId)
+//        )
     }
 }
 
 fun goToAlbum(activity: Activity) {
     if (activity !is MainActivity) return
-    val song = MusicPlayerRemote.currentSong
-    activity.apply {
-        currentFragment(R.id.fragment_container)?.exitTransition = null
-
-        //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
-        setBottomNavVisibility(false)
-        if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
-            collapsePanel()
-        }
-
-        findNavController(R.id.fragment_container).navigate(
-            R.id.albumDetailsFragment,
-            bundleOf(EXTRA_ALBUM_ID to song.albumId)
-        )
-    }
+    val song = MusicPlayerRemote.currentSongId
+    // TODO: go to album
+//    activity.apply {
+//        currentFragment(R.id.fragment_container)?.exitTransition = null
+//
+//        //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
+//        setBottomNavVisibility(false)
+//        if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
+//            collapsePanel()
+//        }
+//
+//        findNavController(R.id.fragment_container).navigate(
+//            R.id.albumDetailsFragment,
+//            bundleOf(EXTRA_ALBUM_ID to song.albumId)
+//        )
+//    }
 }
 
 fun goToLyrics(activity: Activity) {

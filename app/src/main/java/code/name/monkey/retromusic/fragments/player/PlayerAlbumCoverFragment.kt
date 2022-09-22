@@ -33,6 +33,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SHOW_LYRICS
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter.AlbumCoverFragment
+import ru.stersh.retrosonic.core.storage.domain.PlayQueueStorage
 import code.name.monkey.retromusic.databinding.FragmentPlayerAlbumCoverBinding
 import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.surfaceColor
@@ -46,17 +47,17 @@ import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
 import code.name.monkey.retromusic.util.CoverLyricsType
-import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.inject
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_player_album_cover),
     ViewPager.OnPageChangeListener, MusicProgressViewUpdateHelper.Callback,
     SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private val playQueueStorage: PlayQueueStorage by inject()
     private var _binding: FragmentPlayerAlbumCoverBinding? = null
     private val binding get() = _binding!!
     private var callbacks: Callbacks? = null
@@ -85,23 +86,24 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     private fun updateLyrics() {
-        val song = MusicPlayerRemote.currentSong
-        lifecycleScope.launch(Dispatchers.IO) {
-            val lrcFile = LyricUtil.getSyncedLyricsFile(song)
-            if (lrcFile != null) {
-                binding.lyricsView.loadLrc(lrcFile)
-            } else {
-                val embeddedLyrics = LyricUtil.getEmbeddedSyncedLyrics(song.data)
-                if (embeddedLyrics != null) {
-                    binding.lyricsView.loadLrc(embeddedLyrics)
-                } else {
-                    withContext(Dispatchers.Main) {
-                        binding.lyricsView.reset()
-                        binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
-                    }
-                }
-            }
-        }
+        val song = MusicPlayerRemote.currentSongId
+        // TODO: update lyrics
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            val lrcFile = LyricUtil.getSyncedLyricsFile(song)
+//            if (lrcFile != null) {
+//                binding.lyricsView.loadLrc(lrcFile)
+//            } else {
+//                val embeddedLyrics = LyricUtil.getEmbeddedSyncedLyrics(song.data)
+//                if (embeddedLyrics != null) {
+//                    binding.lyricsView.loadLrc(embeddedLyrics)
+//                } else {
+//                    withContext(Dispatchers.Main) {
+//                        binding.lyricsView.reset()
+//                        binding.lyricsView.setLabel(context?.getString(R.string.no_lyrics_found))
+//                    }
+//                }
+//            }
+//        }
 
     }
 
@@ -126,6 +128,18 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 goToLyrics(requireActivity())
             }
         }
+        lifecycleScope.launch {
+            playQueueStorage
+                .getCurrentSong()
+                .filterNotNull()
+                .collect { song ->
+                    binding.viewPager.apply {
+                        adapter = AlbumCoverPagerAdapter(parentFragmentManager, listOf(song.coverArtUrl))
+                        setCurrentItem(MusicPlayerRemote.position, true)
+                        onPageSelected(MusicPlayerRemote.position)
+                    }
+                }
+        }
     }
 
     private fun setupViewPager() {
@@ -138,12 +152,11 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             val metrics = resources.displayMetrics
             val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
             binding.viewPager.clipToPadding = false
-            val padding =
-                if (ratio >= 1.777f) {
-                    40
-                } else {
-                    100
-                }
+            val padding = if (ratio >= 1.777f) {
+                40
+            } else {
+                100
+            }
             binding.viewPager.setPadding(padding, 0, padding, 0)
             binding.viewPager.pageMargin = 0
             binding.viewPager.setPageTransformer(false, CarousalPagerTransformer(requireContext()))
@@ -173,7 +186,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     override fun onServiceConnected() {
-        updatePlayingQueue()
+//        updatePlayingQueue()
         updateLyrics()
     }
 
@@ -185,7 +198,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     }
 
     override fun onQueueChanged() {
-        updatePlayingQueue()
+//        updatePlayingQueue()
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {

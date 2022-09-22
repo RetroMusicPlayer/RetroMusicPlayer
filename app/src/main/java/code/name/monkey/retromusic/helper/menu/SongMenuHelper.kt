@@ -27,11 +27,8 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
-import code.name.monkey.retromusic.dialogs.SongDetailDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IPaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
@@ -57,7 +54,7 @@ object SongMenuHelper : KoinComponent {
                 if (RingtoneManager.requiresDialog(activity)) {
                     RingtoneManager.showDialog(activity)
                 } else {
-                    RingtoneManager.setRingtone(activity, song)
+//                    RingtoneManager.setRingtone(activity, song)
                 }
                 return true
             }
@@ -71,7 +68,7 @@ object SongMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_delete_from_device -> {
-                DeleteSongsDialog.create(song).show(activity.supportFragmentManager, "DELETE_SONGS")
+//                DeleteSongsDialog.create(song).show(activity.supportFragmentManager, "DELETE_SONGS")
                 return true
             }
             R.id.action_add_to_playlist -> {
@@ -85,11 +82,11 @@ object SongMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_play_next -> {
-                MusicPlayerRemote.playNext(song)
+//                MusicPlayerRemote.playNext(song)
                 return true
             }
             R.id.action_add_to_current_playing -> {
-                MusicPlayerRemote.enqueue(song)
+//                MusicPlayerRemote.enqueue(song)
                 return true
             }
             R.id.action_tag_editor -> {
@@ -104,7 +101,7 @@ object SongMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_details -> {
-                SongDetailDialog.create(song).show(activity.supportFragmentManager, "SONG_DETAILS")
+//                SongDetailDialog.create(song).show(activity.supportFragmentManager, "SONG_DETAILS")
                 return true
             }
             R.id.action_go_to_album -> {

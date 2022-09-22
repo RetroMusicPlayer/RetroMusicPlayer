@@ -18,8 +18,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
@@ -45,16 +43,16 @@ class DeleteSongsDialog : DialogFragment() {
     lateinit var libraryViewModel: LibraryViewModel
 
     companion object {
-        fun create(song: Song): DeleteSongsDialog {
-            val list = ArrayList<Song>()
-            list.add(song)
+        fun create(songId: String): DeleteSongsDialog {
+            val list = ArrayList<String>()
+            list.add(songId)
             return create(list)
         }
 
-        fun create(songs: List<Song>): DeleteSongsDialog {
+        fun create(songIds: List<String>): DeleteSongsDialog {
             return DeleteSongsDialog().apply {
                 arguments = bundleOf(
-                    EXTRA_SONG to ArrayList(songs)
+                    EXTRA_SONG to ArrayList(songIds)
                 )
             }
         }
@@ -62,7 +60,7 @@ class DeleteSongsDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         libraryViewModel = activity?.getViewModel() as LibraryViewModel
-        val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
+        val songs = extraNotNull<List<String>>(EXTRA_SONG).value
         if (VersionUtils.hasR()) {
             val deleteResultLauncher =
                 registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
@@ -75,26 +73,31 @@ class DeleteSongsDialog : DialogFragment() {
                     }
                     dismiss()
                 }
-            val pendingIntent =
-                MediaStore.createDeleteRequest(requireActivity().contentResolver, songs.map {
-                    MusicUtil.getSongFileUri(it.id)
-                })
-            deleteResultLauncher.launch(
-                IntentSenderRequest.Builder(pendingIntent.intentSender).build()
-            )
+            // TODO: Delete
+//            val pendingIntent = MediaStore.createDeleteRequest(requireActivity().contentResolver, songs.map {
+//                    MusicUtil.getSongFileUri(it)
+//                })
+//            deleteResultLauncher.launch(
+//                IntentSenderRequest.Builder(pendingIntent.intentSender).build()
+//            )
             return super.onCreateDialog(savedInstanceState)
         } else {
-            val pair = if (songs.size > 1) {
-                Pair(
-                    R.string.delete_songs_title,
-                    String.format(getString(R.string.delete_x_songs), songs.size).parseAsHtml()
-                )
-            } else {
-                Pair(
-                    R.string.delete_song_title,
-                    String.format(getString(R.string.delete_song_x), songs[0].title).parseAsHtml()
-                )
-            }
+            val pair = Pair(
+                R.string.delete_songs_title,
+                String.format(getString(R.string.delete_x_songs), songs.size).parseAsHtml()
+            )
+            // TODO: delete dialog
+//            val pair = if (songs.size > 1) {
+//                Pair(
+//                    R.string.delete_songs_title,
+//                    String.format(getString(R.string.delete_x_songs), songs.size).parseAsHtml()
+//                )
+//            } else {
+//                Pair(
+//                    R.string.delete_song_title,
+//                    String.format(getString(R.string.delete_song_x), songs[0].title).parseAsHtml()
+//                )
+//            }
 
             return materialDialog()
                 .title(pair.first)
@@ -109,22 +112,22 @@ class DeleteSongsDialog : DialogFragment() {
                     if ((songs.size == 1) && MusicPlayerRemote.isPlaying(songs[0])) {
                         MusicPlayerRemote.playNextSong()
                     }
-                    if (!SAFUtil.isSAFRequiredForSongs(songs)) {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            dismiss()
-                            MusicUtil.deleteTracks(requireContext(), songs)
-                            reloadTabs()
-                        }
-                    } else {
-                        if (SAFUtil.isSDCardAccessGranted(requireActivity())) {
-                            deleteSongs(songs)
-                        } else {
-                            startActivityForResult(
-                                Intent(requireActivity(), SAFGuideActivity::class.java),
-                                SAFGuideActivity.REQUEST_CODE_SAF_GUIDE
-                            )
-                        }
-                    }
+//                    if (!SAFUtil.isSAFRequiredForSongs(songs)) {
+//                        CoroutineScope(Dispatchers.IO).launch {
+//                            dismiss()
+//                            MusicUtil.deleteTracks(requireContext(), songs)
+//                            reloadTabs()
+//                        }
+//                    } else {
+//                        if (SAFUtil.isSDCardAccessGranted(requireActivity())) {
+//                            deleteSongs(songs)
+//                        } else {
+//                            startActivityForResult(
+//                                Intent(requireActivity(), SAFGuideActivity::class.java),
+//                                SAFGuideActivity.REQUEST_CODE_SAF_GUIDE
+//                            )
+//                        }
+//                    }
                 }
         }
     }

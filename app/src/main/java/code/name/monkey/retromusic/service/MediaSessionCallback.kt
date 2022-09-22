@@ -20,7 +20,6 @@ import android.support.v4.media.session.MediaSessionCompat
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.cycleRepeatMode
-import code.name.monkey.retromusic.helper.ShuffleHelper.makeShuffleList
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Playlist
@@ -55,55 +54,55 @@ class MediaSessionCallback(
         val musicId = AutoMediaIDHelper.extractMusicID(mediaId!!)
         logD("Music Id $musicId")
         val itemId = musicId?.toLong() ?: -1
-        val songs: ArrayList<Song> = ArrayList()
+        val songs: ArrayList<String> = ArrayList()
         when (val category = AutoMediaIDHelper.extractCategory(mediaId)) {
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM -> {
                 val album: Album = albumRepository.album(itemId)
-                songs.addAll(album.songs)
+//                songs.addAll(album.songs)
                 musicService.openQueue(songs, 0, true)
             }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ARTIST -> {
                 val artist: Artist = artistRepository.artist(itemId)
-                songs.addAll(artist.songs)
+//                songs.addAll(artist.songs)
                 musicService.openQueue(songs, 0, true)
             }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM_ARTIST -> {
                 val artist: Artist =
                     artistRepository.albumArtist(albumRepository.album(itemId).albumArtist!!)
-                songs.addAll(artist.songs)
+//                songs.addAll(artist.songs)
                 musicService.openQueue(songs, 0, true)
             }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_PLAYLIST -> {
                 val playlist: Playlist = playlistRepository.playlist(itemId)
-                songs.addAll(playlist.getSongs())
+//                songs.addAll(playlist.getSongs())
                 musicService.openQueue(songs, 0, true)
             }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE -> {
-                songs.addAll(genreRepository.songs(itemId))
+//                songs.addAll(genreRepository.songs(itemId))
                 musicService.openQueue(songs, 0, true)
             }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SHUFFLE -> {
                 val allSongs: ArrayList<Song> = songRepository.songs() as ArrayList<Song>
-                makeShuffleList(allSongs, -1)
-                musicService.openQueue(allSongs, 0, true)
+//                makeShuffleList(allSongs, -1)
+//                musicService.openQueue(allSongs, 0, true)
             }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY,
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SUGGESTIONS,
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS,
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE,
             -> {
-                val tracks: List<Song> = when (category) {
-                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY -> topPlayedRepository.recentlyPlayedTracks()
-                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SUGGESTIONS -> topPlayedRepository.recentlyPlayedTracks()
-                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS -> topPlayedRepository.recentlyPlayedTracks()
-                    else -> musicService.playingQueue
-                }
-                songs.addAll(tracks)
-                var songIndex = MusicUtil.indexOfSongInList(tracks, itemId)
-                if (songIndex == -1) {
-                    songIndex = 0
-                }
-                musicService.openQueue(songs, songIndex, true)
+//                val tracks: List<Song> = when (category) {
+//                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY -> topPlayedRepository.recentlyPlayedTracks()
+//                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SUGGESTIONS -> topPlayedRepository.recentlyPlayedTracks()
+//                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS -> topPlayedRepository.recentlyPlayedTracks()
+//                    else -> musicService.playingQueue
+//                }
+//                songs.addAll(tracks)
+//                var songIndex = MusicUtil.indexOfSongInList(tracks, itemId)
+//                if (songIndex == -1) {
+//                    songIndex = 0
+//                }
+//                musicService.openQueue(songs, songIndex, true)
             }
         }
         musicService.play()
@@ -142,20 +141,19 @@ class MediaSessionCallback(
             }
         }
 
-        musicService.openQueue(songs, 0, true)
+//        musicService.openQueue(songs, 0, true)
 
         musicService.play()
     }
 
     override fun onPrepare() {
         super.onPrepare()
-        if (musicService.currentSong != Song.emptySong)
-            musicService.restoreState(::onPlay)
+        if (musicService.currentSongId != null) musicService.restoreState(::onPlay)
     }
 
     override fun onPlay() {
         super.onPlay()
-        if (musicService.currentSong != Song.emptySong) musicService.play()
+        if (musicService.currentSongId != null) musicService.play()
     }
 
     override fun onPause() {
@@ -203,15 +201,15 @@ class MediaSessionCallback(
         }
     }
 
-    private fun checkAndStartPlaying(songs: ArrayList<Song>, itemId: Long) {
-        var songIndex = MusicUtil.indexOfSongInList(songs, itemId)
+    private fun checkAndStartPlaying(songIds: ArrayList<String>, itemId: String) {
+        var songIndex = MusicUtil.indexOfSongInList(songIds, itemId)
         if (songIndex == -1) {
             songIndex = 0
         }
-        openQueue(songs, songIndex)
+        openQueue(songIds, songIndex)
     }
 
-    private fun openQueue(songs: ArrayList<Song>, index: Int, startPlaying: Boolean = true) {
-        MusicPlayerRemote.openQueue(songs, index, startPlaying)
+    private fun openQueue(songIds: ArrayList<String>, index: Int, startPlaying: Boolean = true) {
+        MusicPlayerRemote.openQueue(songIds, index, startPlaying)
     }
 }

@@ -25,7 +25,8 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPlainControlsFragmentBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -88,12 +89,12 @@ class PlainPlaybackControlsFragment :
     }
 
     private fun updateSong() {
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.text = getSongInfo(MusicPlayerRemote.currentSong)
-            binding.songInfo.show()
-        } else {
-            binding.songInfo.hide()
-        }
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.songInfo.text = getSongInfo(MusicPlayerRemote.currentSongId)
+//            binding.songInfo.show()
+//        } else {
+//            binding.songInfo.hide()
+//        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

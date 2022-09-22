@@ -20,7 +20,6 @@ import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.accentOutlineColor
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
@@ -46,13 +45,13 @@ class ShuffleButtonSongAdapter(
             val viewHolder = holder as ViewHolder
             viewHolder.playAction?.let {
                 it.setOnClickListener {
-                    MusicPlayerRemote.openQueue(dataSet, 0, true)
+//                    MusicPlayerRemote.openQueue(dataSet, 0, true)
                 }
                 it.accentOutlineColor()
             }
             viewHolder.shuffleAction?.let {
                 it.setOnClickListener {
-                    MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
+//                    MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
                 }
                 it.accentColor()
             }
@@ -71,7 +70,7 @@ class ShuffleButtonSongAdapter(
 
         override fun onClick(v: View?) {
             if (itemViewType == OFFSET_ITEM) {
-                MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
+//                MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
                 return
             }
             super.onClick(v)

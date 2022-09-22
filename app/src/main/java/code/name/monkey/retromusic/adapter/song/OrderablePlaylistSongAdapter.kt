@@ -27,7 +27,6 @@ import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.accentOutlineColor
 import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import com.google.android.material.button.MaterialButton
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
@@ -74,13 +73,13 @@ class OrderablePlaylistSongAdapter(
             val viewHolder = holder as ViewHolder
             viewHolder.playAction?.let {
                 it.setOnClickListener {
-                    MusicPlayerRemote.openQueue(dataSet, 0, true)
+//                    MusicPlayerRemote.openQueue(dataSet, 0, true)
                 }
                 it.accentOutlineColor()
             }
             viewHolder.shuffleAction?.let {
                 it.setOnClickListener {
-                    MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
+//                    MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
                 }
                 it.accentColor()
             }

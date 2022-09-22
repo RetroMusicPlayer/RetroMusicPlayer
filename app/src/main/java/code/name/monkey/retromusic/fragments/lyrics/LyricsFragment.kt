@@ -163,7 +163,8 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics),
     }
 
     private fun updateTitleSong() {
-        song = MusicPlayerRemote.currentSong
+//        TODO: fix song title
+//        song = MusicPlayerRemote.currentSongId
     }
 
     private fun setupToolbar() {

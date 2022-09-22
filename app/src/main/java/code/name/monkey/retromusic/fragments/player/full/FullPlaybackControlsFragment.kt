@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.fragments.player.full
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -27,12 +26,11 @@ import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFullPlayerControlsBinding
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
@@ -47,7 +45,6 @@ import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.slider.Slider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
@@ -146,16 +143,16 @@ class FullPlaybackControlsFragment :
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.title.text = song.title
-        binding.text.text = song.artistName
-        updateIsFavorite()
-        if (PreferenceUtil.isSongInfo) {
-            binding.songInfo.text = getSongInfo(song)
-            binding.songInfo.show()
-        } else {
-            binding.songInfo.hide()
-        }
+//        val song = MusicPlayerRemote.currentSongId
+//        binding.title.text = song.title
+//        binding.text.text = song.artistName
+//        updateIsFavorite()
+//        if (PreferenceUtil.isSongInfo) {
+//            binding.songInfo.text = getSongInfo(song)
+//            binding.songInfo.show()
+//        } else {
+//            binding.songInfo.hide()
+//        }
     }
 
     override fun onPlayingMetaChanged() {
@@ -213,7 +210,7 @@ class FullPlaybackControlsFragment :
 
     private fun setupFavourite() {
         binding.songFavourite.setOnClickListener {
-            toggleFavorite(MusicPlayerRemote.currentSong)
+//            toggleFavorite(MusicPlayerRemote.currentSongId)
         }
     }
 
@@ -222,27 +219,27 @@ class FullPlaybackControlsFragment :
     }
 
     fun updateIsFavorite(animate: Boolean = false) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val isFavorite: Boolean =
-                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
-            withContext(Dispatchers.Main) {
-                val icon = if (animate && VersionUtils.hasMarshmallow()) {
-                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
-                } else {
-                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-                }
-                val drawable = requireContext().getTintedDrawable(
-                    icon,
-                    Color.WHITE
-                )
-                binding.songFavourite.apply {
-                    setImageDrawable(drawable)
-                    if (drawable is AnimatedVectorDrawable) {
-                        drawable.start()
-                    }
-                }
-            }
-        }
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            val isFavorite: Boolean =
+//                libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSongId)
+//            withContext(Dispatchers.Main) {
+//                val icon = if (animate && VersionUtils.hasMarshmallow()) {
+//                    if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
+//                } else {
+//                    if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+//                }
+//                val drawable = requireContext().getTintedDrawable(
+//                    icon,
+//                    Color.WHITE
+//                )
+//                binding.songFavourite.apply {
+//                    setImageDrawable(drawable)
+//                    if (drawable is AnimatedVectorDrawable) {
+//                        drawable.start()
+//                    }
+//                }
+//            }
+//        }
     }
 
     private fun toggleFavorite(song: Song) {
@@ -261,7 +258,7 @@ class FullPlaybackControlsFragment :
     }
 
     fun onFavoriteToggled() {
-        toggleFavorite(MusicPlayerRemote.currentSong)
+//        toggleFavorite(MusicPlayerRemote.currentSongId)
     }
 
     override fun onDestroyView() {

@@ -21,9 +21,12 @@ import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil.isAudioFocusEnabled
 import code.name.monkey.retromusic.util.PreferenceUtil.playbackPitch
 import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
+import ru.stersh.apisonic.ApiSonic
 
-abstract class LocalPlayback(val context: Context) : Playback, MediaPlayer.OnErrorListener,
-    MediaPlayer.OnCompletionListener {
+abstract class LocalPlayback(
+    val context: Context,
+    private val apiSonic: ApiSonic
+) : Playback, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
 
     private val becomingNoisyReceiverIntentFilter =
         IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
@@ -106,6 +109,10 @@ abstract class LocalPlayback(val context: Context) : Playback, MediaPlayer.OnErr
     override fun pause(): Boolean {
         unregisterBecomingNoisyReceiver()
         return true
+    }
+
+    fun getSongUrlFromId(songId: String): String {
+        return apiSonic.streamAudioUrl(songId)
     }
 
     /**

@@ -24,16 +24,12 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFullBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.fragments.player.CoverLyricsFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
@@ -103,13 +99,13 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
     }
 
     override fun onFavoriteToggled() {
-        toggleFavorite(MusicPlayerRemote.currentSong)
+//        toggleFavorite(MusicPlayerRemote.currentSongId)
         controlsFragment.onFavoriteToggled()
     }
 
-    override fun toggleFavorite(song: Song) {
-        super.toggleFavorite(song)
-        if (song.id == MusicPlayerRemote.currentSong.id) {
+    override fun toggleFavorite(songId: String) {
+        super.toggleFavorite(songId)
+        if (songId == MusicPlayerRemote.currentSongId) {
             updateIsFavorite()
         }
     }
@@ -132,16 +128,16 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
     }
 
     private fun updateArtistImage() {
-        libraryViewModel.artist(MusicPlayerRemote.currentSong.artistId)
-            .observe(viewLifecycleOwner) { artist ->
-                if (artist.id != -1L) {
-                    GlideApp.with(requireActivity())
-                        .load(RetroGlideExtension.getArtistModel(artist))
-                        .artistImageOptions(artist)
-                        .into(binding.artistImage)
-                }
-
-            }
+//        libraryViewModel.artist(MusicPlayerRemote.currentSongId.artistId)
+//            .observe(viewLifecycleOwner) { artist ->
+//                if (artist.id != -1L) {
+//                    GlideApp.with(requireActivity())
+//                        .load(RetroGlideExtension.getArtistModel(artist))
+//                        .artistImageOptions(artist)
+//                        .into(binding.artistImage)
+//                }
+//
+//            }
     }
 
     override fun onQueueChanged() {
@@ -154,12 +150,12 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
             binding.nextSongLabel.setText(R.string.last_song)
             binding.nextSong.hide()
         } else {
-            val title = MusicPlayerRemote.playingQueue[MusicPlayerRemote.position + 1].title
-            binding.nextSongLabel.setText(R.string.next_song)
-            binding.nextSong.apply {
-                text = title
-                show()
-            }
+//            val title = MusicPlayerRemote.playingQueue[MusicPlayerRemote.position + 1].title
+//            binding.nextSongLabel.setText(R.string.next_song)
+//            binding.nextSong.apply {
+//                text = title
+//                show()
+//            }
         }
     }
 }

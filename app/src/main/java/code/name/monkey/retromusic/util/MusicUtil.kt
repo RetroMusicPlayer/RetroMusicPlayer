@@ -3,11 +3,8 @@ package code.name.monkey.retromusic.util
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
-import android.provider.BaseColumns
 import android.provider.MediaStore
-import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.core.content.contentValuesOf
 import androidx.core.net.toUri
@@ -15,18 +12,11 @@ import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.SongEntity
-import code.name.monkey.retromusic.db.toSongEntity
-import code.name.monkey.retromusic.extensions.getLong
-import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.helper.MusicPlayerRemote.removeFromQueue
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.repository.Repository
-import code.name.monkey.retromusic.repository.SongRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import org.jaudiotagger.audio.AudioFileIO
@@ -310,8 +300,8 @@ object MusicUtil : KoinComponent {
         return if (year > 0) year.toString() else "-"
     }
 
-    fun indexOfSongInList(songs: List<Song>, songId: Long): Int {
-        return songs.indexOfFirst { it.id == songId }
+    fun indexOfSongInList(songIds: List<String>, songId: String): Int {
+        return songIds.indexOfFirst { it == songId }
     }
 
     fun getDateModifiedString(date: Long): String {
@@ -360,16 +350,17 @@ object MusicUtil : KoinComponent {
     }
 
     private val repository = get<Repository>()
-    suspend fun toggleFavorite(song: Song) {
+    suspend fun toggleFavorite(songId: String) {
         withContext(IO) {
-            val playlist: PlaylistEntity = repository.favoritePlaylist()
-            val songEntity = song.toSongEntity(playlist.playListId)
-            val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
-            if (isFavorite) {
-                repository.removeSongFromPlaylist(songEntity)
-            } else {
-                repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
-            }
+            // TODO: Fix favorite
+//            val playlist: PlaylistEntity = repository.favoritePlaylist()
+//            val songEntity = songId.toSongEntity(playlist.playListId)
+//            val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
+//            if (isFavorite) {
+//                repository.removeSongFromPlaylist(songEntity)
+//            } else {
+//                repository.insertSongs(listOf(songId.toSongEntity(playlist.playListId)))
+//            }
         }
     }
 
@@ -381,137 +372,137 @@ object MusicUtil : KoinComponent {
         safUris: List<Uri>?,
         callback: Runnable?,
     ) {
-        val songRepository: SongRepository = get()
-        val projection = arrayOf(
-            BaseColumns._ID, Constants.DATA
-        )
-        // Split the query into multiple batches, and merge the resulting cursors
-        var batchStart: Int
-        var batchEnd = 0
-        val batchSize =
-            1000000 / 10 // 10^6 being the SQLite limite on the query lenth in bytes, 10 being the max number of digits in an int, used to store the track ID
-        val songCount = songs.size
-
-        while (batchEnd < songCount) {
-            batchStart = batchEnd
-
-            val selection = StringBuilder()
-            selection.append(BaseColumns._ID + " IN (")
-
-            var i = 0
-            while (i < batchSize - 1 && batchEnd < songCount - 1) {
-                selection.append(songs[batchEnd].id)
-                selection.append(",")
-                i++
-                batchEnd++
-            }
-            // The last element of a batch
-            // The last element of a batch
-            selection.append(songs[batchEnd].id)
-            batchEnd++
-            selection.append(")")
-
-            try {
-                val cursor = activity.contentResolver.query(
-                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, projection, selection.toString(),
-                    null, null
-                )
-                if (cursor != null) {
-                    // Step 1: Remove selected tracks from the current playlist, as well
-                    // as from the album art cache
-                    cursor.moveToFirst()
-                    while (!cursor.isAfterLast) {
-                        val id = cursor.getLong(BaseColumns._ID)
-                        val song: Song = songRepository.song(id)
-                        removeFromQueue(song)
-                        cursor.moveToNext()
-                    }
-
-                    // Step 2: Remove selected tracks from the database
-                    activity.contentResolver.delete(
-                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                        selection.toString(), null
-                    )
-                    // Step 3: Remove files from card
-                    cursor.moveToFirst()
-                    var index = batchStart
-                    while (!cursor.isAfterLast) {
-                        val name = cursor.getString(1)
-                        val safUri =
-                            if (safUris == null || safUris.size <= index) null else safUris[index]
-                        SAFUtil.delete(activity, name, safUri)
-                        index++
-                        cursor.moveToNext()
-                    }
-                    cursor.close()
-                }
-            } catch (ignored: SecurityException) {
-
-            }
-            activity.contentResolver.notifyChange("content://media".toUri(), null)
-            activity.runOnUiThread {
-                activity.showToast(activity.getString(R.string.deleted_x_songs, songCount))
-                callback?.run()
-            }
-        }
-    }
-
-    suspend fun deleteTracks(context: Context, songs: List<Song>) {
-        val projection = arrayOf(BaseColumns._ID, Constants.DATA)
-        val selection = StringBuilder()
-        selection.append(BaseColumns._ID + " IN (")
-        for (i in songs.indices) {
-            selection.append(songs[i].id)
-            if (i < songs.size - 1) {
-                selection.append(",")
-            }
-        }
-        selection.append(")")
-        var deletedCount = 0
-        try {
-            val cursor: Cursor? = context.contentResolver.query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, projection, selection.toString(),
-                null, null
-            )
-            if (cursor != null) {
-                removeFromQueue(songs)
-
-                // Step 2: Remove files from card
-                cursor.moveToFirst()
-                while (!cursor.isAfterLast) {
-                    val id: Int = cursor.getInt(0)
-                    val name: String = cursor.getString(1)
-                    try { // File.delete can throw a security exception
-                        val f = File(name)
-                        if (f.delete()) {
-                            // Step 3: Remove selected track from the database
-                            context.contentResolver.delete(
-                                ContentUris.withAppendedId(
-                                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                                    id.toLong()
-                                ), null, null
-                            )
-                            deletedCount++
-                        } else {
-                            // I'm not sure if we'd ever get here (deletion would
-                            // have to fail, but no exception thrown)
-                            Log.e("MusicUtils", "Failed to delete file $name")
-                        }
-                        cursor.moveToNext()
-                    } catch (ex: SecurityException) {
-                        cursor.moveToNext()
-                    } catch (e: NullPointerException) {
-                        Log.e("MusicUtils", "Failed to find file $name")
-                    }
-                }
-                cursor.close()
-            }
-            withContext(Dispatchers.Main) {
-                context.showToast(context.getString(R.string.deleted_x_songs, deletedCount))
-            }
-
-        } catch (ignored: SecurityException) {
-        }
+//        val songRepository: SongRepository = get()
+//        val projection = arrayOf(
+//            BaseColumns._ID, Constants.DATA
+//        )
+//        // Split the query into multiple batches, and merge the resulting cursors
+//        var batchStart: Int
+//        var batchEnd = 0
+//        val batchSize =
+//            1000000 / 10 // 10^6 being the SQLite limite on the query lenth in bytes, 10 being the max number of digits in an int, used to store the track ID
+//        val songCount = songs.size
+//
+//        while (batchEnd < songCount) {
+//            batchStart = batchEnd
+//
+//            val selection = StringBuilder()
+//            selection.append(BaseColumns._ID + " IN (")
+//
+//            var i = 0
+//            while (i < batchSize - 1 && batchEnd < songCount - 1) {
+//                selection.append(songs[batchEnd].id)
+//                selection.append(",")
+//                i++
+//                batchEnd++
+//            }
+//            // The last element of a batch
+//            // The last element of a batch
+//            selection.append(songs[batchEnd].id)
+//            batchEnd++
+//            selection.append(")")
+//
+//            try {
+//                val cursor = activity.contentResolver.query(
+//                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, projection, selection.toString(),
+//                    null, null
+//                )
+//                if (cursor != null) {
+//                    // Step 1: Remove selected tracks from the current playlist, as well
+//                    // as from the album art cache
+//                    cursor.moveToFirst()
+//                    while (!cursor.isAfterLast) {
+//                        val id = cursor.getLong(BaseColumns._ID)
+//                        val song: Song = songRepository.song(id)
+//                        removeFromQueue(song)
+//                        cursor.moveToNext()
+//                    }
+//
+//                    // Step 2: Remove selected tracks from the database
+//                    activity.contentResolver.delete(
+//                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+//                        selection.toString(), null
+//                    )
+//                    // Step 3: Remove files from card
+//                    cursor.moveToFirst()
+//                    var index = batchStart
+//                    while (!cursor.isAfterLast) {
+//                        val name = cursor.getString(1)
+//                        val safUri =
+//                            if (safUris == null || safUris.size <= index) null else safUris[index]
+//                        SAFUtil.delete(activity, name, safUri)
+//                        index++
+//                        cursor.moveToNext()
+//                    }
+//                    cursor.close()
+//                }
+//            } catch (ignored: SecurityException) {
+//
+//            }
+//            activity.contentResolver.notifyChange("content://media".toUri(), null)
+//            activity.runOnUiThread {
+//                activity.showToast(activity.getString(R.string.deleted_x_songs, songCount))
+//                callback?.run()
+//            }
+//        }
+//    }
+//
+//    suspend fun deleteTracks(context: Context, songs: List<Song>) {
+//        val projection = arrayOf(BaseColumns._ID, Constants.DATA)
+//        val selection = StringBuilder()
+//        selection.append(BaseColumns._ID + " IN (")
+//        for (i in songs.indices) {
+//            selection.append(songs[i].id)
+//            if (i < songs.size - 1) {
+//                selection.append(",")
+//            }
+//        }
+//        selection.append(")")
+//        var deletedCount = 0
+//        try {
+//            val cursor: Cursor? = context.contentResolver.query(
+//                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, projection, selection.toString(),
+//                null, null
+//            )
+//            if (cursor != null) {
+//                removeFromQueue(songs)
+//
+//                // Step 2: Remove files from card
+//                cursor.moveToFirst()
+//                while (!cursor.isAfterLast) {
+//                    val id: Int = cursor.getInt(0)
+//                    val name: String = cursor.getString(1)
+//                    try { // File.delete can throw a security exception
+//                        val f = File(name)
+//                        if (f.delete()) {
+//                            // Step 3: Remove selected track from the database
+//                            context.contentResolver.delete(
+//                                ContentUris.withAppendedId(
+//                                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+//                                    id.toLong()
+//                                ), null, null
+//                            )
+//                            deletedCount++
+//                        } else {
+//                            // I'm not sure if we'd ever get here (deletion would
+//                            // have to fail, but no exception thrown)
+//                            Log.e("MusicUtils", "Failed to delete file $name")
+//                        }
+//                        cursor.moveToNext()
+//                    } catch (ex: SecurityException) {
+//                        cursor.moveToNext()
+//                    } catch (e: NullPointerException) {
+//                        Log.e("MusicUtils", "Failed to find file $name")
+//                    }
+//                }
+//                cursor.close()
+//            }
+//            withContext(Dispatchers.Main) {
+//                context.showToast(context.getString(R.string.deleted_x_songs, deletedCount))
+//            }
+//
+//        } catch (ignored: SecurityException) {
+//        }
     }
 
     fun songByGenre(genreId: Long): Song {

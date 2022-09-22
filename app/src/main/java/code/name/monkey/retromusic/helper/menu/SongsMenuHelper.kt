@@ -18,8 +18,6 @@ import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.MusicUtil
@@ -38,11 +36,11 @@ object SongsMenuHelper : KoinComponent {
     ): Boolean {
         when (menuItemId) {
             R.id.action_play_next -> {
-                MusicPlayerRemote.playNext(songs)
+//                MusicPlayerRemote.playNext(songs)
                 return true
             }
             R.id.action_add_to_current_playing -> {
-                MusicPlayerRemote.enqueue(songs)
+//                MusicPlayerRemote.enqueue(songs)
                 return true
             }
             R.id.action_add_to_playlist -> {
@@ -65,8 +63,8 @@ object SongsMenuHelper : KoinComponent {
                 return true
             }
             R.id.action_delete_from_device -> {
-                DeleteSongsDialog.create(songs)
-                    .show(activity.supportFragmentManager, "DELETE_SONGS")
+//                DeleteSongsDialog.create(songs)
+//                    .show(activity.supportFragmentManager, "DELETE_SONGS")
                 return true
             }
         }

@@ -23,8 +23,7 @@ import code.name.monkey.retromusic.databinding.FragmentTinyControlsFragmentBindi
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
-class TinyPlaybackControlsFragment :
-    AbsPlayerControlsFragment(R.layout.fragment_tiny_controls_fragment) {
+class TinyPlaybackControlsFragment : AbsPlayerControlsFragment(R.layout.fragment_tiny_controls_fragment) {
     private var _binding: FragmentTinyControlsFragmentBinding? = null
     private val binding get() = _binding!!
 

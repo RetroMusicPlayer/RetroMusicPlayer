@@ -30,6 +30,7 @@ import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.util.MusicUtil
@@ -202,8 +203,7 @@ class AlbumDetailsSongAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-// TODO: Play music
-//                MusicPlayerRemote.openQueue(dataSet, layoutPosition, true)
+                MusicPlayerRemote.openQueue(dataSet.map { it.id }, layoutPosition, true)
             }
         }
 

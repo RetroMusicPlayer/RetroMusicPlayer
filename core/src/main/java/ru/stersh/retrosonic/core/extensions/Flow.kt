@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.util
+package ru.stersh.retrosonic.core.extensions
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

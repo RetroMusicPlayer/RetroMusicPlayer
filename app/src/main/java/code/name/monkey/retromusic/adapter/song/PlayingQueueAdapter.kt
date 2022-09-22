@@ -22,8 +22,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.helper.MusicPlayerRemote.isPlaying
-import code.name.monkey.retromusic.helper.MusicPlayerRemote.playNextSong
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.removeFromQueue
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
@@ -228,14 +226,14 @@ class PlayingQueueAdapter(
 
         override fun onSlideAnimationEnd() {
             // initializeSnackBar(adapter, position, activity, isPlaying)
-            songToRemove = adapter.dataSet[position]
-            // If song removed was the playing song, then play the next song
-            if (isPlaying(songToRemove!!)) {
-                playNextSong()
-            }
-            // Swipe animation is much smoother when we do the heavy lifting after it's completed
-            adapter.setSongToRemove(songToRemove!!)
-            removeFromQueue(songToRemove!!)
+//            songToRemove = adapter.dataSet[position]
+//            // If song removed was the playing song, then play the next song
+//            if (isPlaying(songToRemove!!)) {
+//                playNextSong()
+//            }
+//            // Swipe animation is much smoother when we do the heavy lifting after it's completed
+//            adapter.setSongToRemove(songToRemove!!)
+//            removeFromQueue(songToRemove!!)
         }
     }
 }

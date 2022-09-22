@@ -30,10 +30,8 @@ import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
-import code.name.monkey.retromusic.glide.*
+import code.name.monkey.retromusic.glide.GlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
@@ -78,15 +76,15 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         binding.text.setTextColor(Color.WHITE)
     }
 
-    override fun toggleFavorite(song: Song) {
-        super.toggleFavorite(song)
-        if (song.id == MusicPlayerRemote.currentSong.id) {
+    override fun toggleFavorite(songId: String) {
+        super.toggleFavorite(songId)
+        if (songId == MusicPlayerRemote.currentSongId) {
             updateIsFavorite()
         }
     }
 
     override fun onFavoriteToggled() {
-        toggleFavorite(MusicPlayerRemote.currentSong)
+//        toggleFavorite(MusicPlayerRemote.currentSongId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -129,27 +127,27 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     }
 
     private fun updateSong() {
-        val song = MusicPlayerRemote.currentSong
-        binding.run {
-            title.text = song.title
-            text.text = song.artistName
-        }
+        val song = MusicPlayerRemote.currentSongId
+//        binding.run {
+//            title.text = song.title
+//            text.text = song.artistName
+//        }
     }
 
     private fun updateBlur() {
         // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
-        GlideApp.with(this)
-            .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
-            .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
-            .transform(
-                BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
-                    .build()
-            )
-            .thumbnail(lastRequest).also {
-                lastRequest = it.clone()
-                it.crossfadeListener()
-                    .into(binding.colorBackground)
-            }
+//        GlideApp.with(this)
+//            .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSongId))
+//            .simpleSongCoverOptions(MusicPlayerRemote.currentSongId)
+//            .transform(
+//                BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
+//                    .build()
+//            )
+//            .thumbnail(lastRequest).also {
+//                lastRequest = it.clone()
+//                it.crossfadeListener()
+//                    .into(binding.colorBackground)
+//            }
     }
 
     override fun onPause() {
