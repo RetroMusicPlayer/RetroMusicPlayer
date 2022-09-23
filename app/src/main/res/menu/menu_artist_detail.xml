@@ -15,15 +15,4 @@
         android:id="@+id/action_add_to_playlist"
         android:title="@string/action_add_to_playlist"
         app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_set_artist_image"
-        android:title="@string/set_artist_image"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_reset_artist_image"
-        android:title="@string/reset_artist_image"
-        app:showAsAction="never" />
-
 </menu>

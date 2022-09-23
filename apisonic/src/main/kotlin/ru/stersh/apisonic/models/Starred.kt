@@ -36,7 +36,7 @@ data class Starred(
 
     @JsonClass(generateAdapter = true)
     data class Artist(
-        @Json(name = "artistImageUrl") val artistImageUrl: String,
+        @Json(name = "artistImageUrl") val artistImageUrl: String?,
         @Json(name = "id") val id: String,
         @Json(name = "name") val name: String,
         @Json(name = "starred") val starred: String

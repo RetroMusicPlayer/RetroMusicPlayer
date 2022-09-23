@@ -229,14 +229,12 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         )
     }
 
-    override fun onAlbumClick(albumId: Long, view: View) {
+    override fun onAlbumClick(albumId: String, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
-            FragmentNavigatorExtras(
-                view to albumId.toString()
-            )
+            FragmentNavigatorExtras(view to albumId)
         )
     }
 

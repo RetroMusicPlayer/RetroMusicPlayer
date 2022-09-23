@@ -3,15 +3,14 @@ package code.name.monkey.retromusic
 import androidx.room.Room
 import code.name.monkey.retromusic.auto.AutoMusicProvider
 import code.name.monkey.retromusic.cast.RetroWebServer
-import ru.stersh.retrosonic.core.storage.coreModule
 import code.name.monkey.retromusic.db.MIGRATION_23_24
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.RetroDatabase
 import code.name.monkey.retromusic.feature.details.album.detailsAlbumModule
+import code.name.monkey.retromusic.feature.details.artist.detailsArtistModule
 import code.name.monkey.retromusic.feature.library.album.libraryAlbumModule
 import code.name.monkey.retromusic.feature.library.artist.libraryArtistModule
 import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.fragments.artists.ArtistDetailsViewModel
 import code.name.monkey.retromusic.fragments.genres.GenreDetailsViewModel
 import code.name.monkey.retromusic.fragments.playlists.PlaylistDetailsViewModel
 import code.name.monkey.retromusic.model.Genre
@@ -25,6 +24,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import ru.stersh.apisonic.ApiSonic
+import ru.stersh.retrosonic.core.storage.coreModule
 
 val networkModule = module {
 
@@ -167,14 +167,6 @@ private val viewModules = module {
         LibraryViewModel(get())
     }
 
-    viewModel { (artistId: Long?, artistName: String?) ->
-        ArtistDetailsViewModel(
-            get(),
-            artistId,
-            artistName
-        )
-    }
-
     viewModel { (playlist: PlaylistWithSongs) ->
         PlaylistDetailsViewModel(
             get(),
@@ -190,4 +182,16 @@ private val viewModules = module {
     }
 }
 
-val appModules = listOf(mainModule, dataModule, autoModule, viewModules, networkModule, roomModule, libraryAlbumModule, detailsAlbumModule, libraryArtistModule, coreModule)
+val appModules = listOf(
+    mainModule,
+    dataModule,
+    autoModule,
+    viewModules,
+    networkModule,
+    roomModule,
+    libraryAlbumModule,
+    detailsAlbumModule,
+    libraryArtistModule,
+    detailsArtistModule,
+    coreModule
+)

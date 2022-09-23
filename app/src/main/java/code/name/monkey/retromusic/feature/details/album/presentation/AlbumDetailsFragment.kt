@@ -290,21 +290,19 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         }
     }
 
-    override fun onAlbumClick(albumId: Long, view: View) {
+    override fun onAlbumClick(albumId: String, view: View) {
         findNavController().navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
-            FragmentNavigatorExtras(
-                view to albumId.toString()
-            )
+            FragmentNavigatorExtras(view to albumId)
         )
     }
 
     override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_album_detail, menu)
         val sortOrder = menu.findItem(R.id.action_sort_order)
-        setUpSortOrderMenu(sortOrder.subMenu)
+//        setUpSortOrderMenu(sortOrder.subMenu)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
             binding.toolbar,

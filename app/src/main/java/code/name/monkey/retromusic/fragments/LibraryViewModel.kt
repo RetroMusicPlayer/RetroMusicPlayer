@@ -23,7 +23,6 @@ import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.fragments.search.Filter
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
@@ -176,10 +175,10 @@ class LibraryViewModel(
     }
 
     fun shuffleSongs() = viewModelScope.launch(IO) {
-        val songs = repository.allSongs()
-        withContext(Main) {
-            MusicPlayerRemote.openAndShuffleQueue(songs, true)
-        }
+//        val songs = repository.allSongs()
+//        withContext(Main) {
+//            MusicPlayerRemote.openAndShuffleQueue(songs, true)
+//        }
     }
 
     fun renameRoomPlaylist(playListId: Long, name: String) = viewModelScope.launch(IO) {

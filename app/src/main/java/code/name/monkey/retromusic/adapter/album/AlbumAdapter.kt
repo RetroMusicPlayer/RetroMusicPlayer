@@ -179,9 +179,9 @@ open class AlbumAdapter(
             if (isInQuickSelectMode) {
                 toggleChecked(layoutPosition)
             } else {
-                image?.let {
-                    listener?.onAlbumClick(dataSet[layoutPosition].id, imageContainer ?: it)
-                }
+//                image?.let {
+//                    listener?.onAlbumClick(dataSet[layoutPosition].id, imageContainer ?: it)
+//                }
             }
         }
 

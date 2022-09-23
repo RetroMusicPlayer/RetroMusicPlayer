@@ -23,7 +23,7 @@ data class ArtistInfo(
     @JsonClass(generateAdapter = true)
     data class SimilarArtist(
         @Json(name = "albumCount") val albumCount: Int,
-        @Json(name = "artistImageUrl") val artistImageUrl: String,
+        @Json(name = "artistImageUrl") val artistImageUrl: String?,
         @Json(name = "coverArt") val coverArt: String,
         @Json(name = "id") val id: String,
         @Json(name = "name") val name: String

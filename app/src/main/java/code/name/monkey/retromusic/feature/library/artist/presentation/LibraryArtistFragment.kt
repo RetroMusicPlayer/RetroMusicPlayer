@@ -157,8 +157,8 @@ class LibraryArtistFragment : AbsRecyclerViewCustomGridSizeFragment<LibraryArtis
         }
         setUpGridSizeMenu(gridSizeItem.subMenu)
         val layoutItem = menu.findItem(R.id.action_layout_type)
-        setupLayoutMenu(layoutItem.subMenu)
-        setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
+        setupLayoutMenu(layoutItem.subMenu ?: return)
+        setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu ?: return)
         setupAlbumArtistMenu(menu)
         //Setting up cast button
         requireContext().setUpMediaRouteButton(menu)
@@ -191,25 +191,19 @@ class LibraryArtistFragment : AbsRecyclerViewCustomGridSizeFragment<LibraryArtis
         sortOrderMenu.setGroupCheckable(0, true, true)
     }
 
-    private fun setupLayoutMenu(
-        subMenu: SubMenu
-    ) {
+    private fun setupLayoutMenu(subMenu: SubMenu) {
         when (itemLayoutRes()) {
             R.layout.item_card -> subMenu.findItem(R.id.action_layout_card).isChecked = true
             R.layout.item_grid -> subMenu.findItem(R.id.action_layout_normal).isChecked = true
-            R.layout.item_card_color -> subMenu.findItem(R.id.action_layout_colored_card).isChecked =
-                true
-            R.layout.item_grid_circle -> subMenu.findItem(R.id.action_layout_circular).isChecked =
-                true
+            R.layout.item_card_color -> subMenu.findItem(R.id.action_layout_colored_card).isChecked = true
+            R.layout.item_grid_circle -> subMenu.findItem(R.id.action_layout_circular).isChecked = true
             R.layout.image -> subMenu.findItem(R.id.action_layout_image).isChecked = true
-            R.layout.item_image_gradient -> subMenu.findItem(R.id.action_layout_gradient_image).isChecked =
-                true
+            R.layout.item_image_gradient -> subMenu.findItem(R.id.action_layout_gradient_image).isChecked = true
         }
     }
 
-    private fun setUpGridSizeMenu(
-        gridSizeMenu: SubMenu
-    ) {
+    private fun setUpGridSizeMenu(gridSizeMenu: SubMenu?) {
+        gridSizeMenu ?: return
         when (getGridSize()) {
             1 -> gridSizeMenu.findItem(R.id.action_grid_size_1).isChecked =
                 true
@@ -285,9 +279,7 @@ class LibraryArtistFragment : AbsRecyclerViewCustomGridSizeFragment<LibraryArtis
         return false
     }
 
-    private fun handleLayoutResType(
-        item: MenuItem
-    ): Boolean {
+    private fun handleLayoutResType(item: MenuItem): Boolean {
         val layoutRes = when (item.itemId) {
             R.id.action_layout_normal -> R.layout.item_grid
             R.id.action_layout_card -> R.layout.item_card
@@ -305,9 +297,7 @@ class LibraryArtistFragment : AbsRecyclerViewCustomGridSizeFragment<LibraryArtis
         return false
     }
 
-    private fun handleGridSizeMenuItem(
-        item: MenuItem
-    ): Boolean {
+    private fun handleGridSizeMenuItem(item: MenuItem): Boolean {
         val gridSize = when (item.itemId) {
             R.id.action_grid_size_1 -> 1
             R.id.action_grid_size_2 -> 2

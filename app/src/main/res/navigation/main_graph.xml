@@ -36,21 +36,21 @@
 
     <fragment
         android:id="@+id/artistDetailsFragment"
-        android:name="code.name.monkey.retromusic.fragments.artists.ArtistDetailsFragment"
+        android:name="code.name.monkey.retromusic.feature.details.artist.presentation.ArtistDetailsFragment"
         android:label="ArtistDetailsFragment"
         tools:layout="@layout/fragment_artist_details">
         <argument
             android:name="extra_artist_id"
-            app:argType="long" />
+            app:argType="string" />
     </fragment>
 
     <fragment
         android:id="@+id/albumArtistDetailsFragment"
-        android:name="code.name.monkey.retromusic.fragments.artists.AlbumArtistDetailsFragment"
+        android:name="code.name.monkey.retromusic.feature.details.album.presentation.AlbumDetailsFragment"
         android:label="AlbumArtistDetailsFragment"
         tools:layout="@layout/fragment_artist_details">
         <argument
-            android:name="extra_artist_name"
+            android:name="extra_album_id"
             app:argType="string" />
     </fragment>
 

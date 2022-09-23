@@ -32,7 +32,7 @@ data class SearchResult3(
     @JsonClass(generateAdapter = true)
     data class Artist(
         @Json(name = "albumCount") val albumCount: Int,
-        @Json(name = "artistImageUrl") val artistImageUrl: String,
+        @Json(name = "artistImageUrl") val artistImageUrl: String?,
         @Json(name = "coverArt") val coverArt: String,
         @Json(name = "id") val id: String,
         @Json(name = "name") val name: String

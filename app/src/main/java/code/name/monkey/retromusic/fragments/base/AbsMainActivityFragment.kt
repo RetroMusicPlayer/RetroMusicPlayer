@@ -24,8 +24,7 @@ import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-abstract class AbsMainActivityFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout),
-    MenuProvider {
+abstract class AbsMainActivityFragment(@LayoutRes layout: Int) : AbsMusicServiceFragment(layout), MenuProvider {
     val libraryViewModel: LibraryViewModel by sharedViewModel()
 
     val mainActivity: MainActivity

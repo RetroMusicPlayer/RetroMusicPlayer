@@ -200,14 +200,12 @@ class HomeAdapter(private val activity: AppCompatActivity) :
         )
     }
 
-    override fun onAlbumClick(albumId: Long, view: View) {
+    override fun onAlbumClick(albumId: String, view: View) {
         activity.findNavController(R.id.fragment_container).navigate(
             R.id.albumDetailsFragment,
             bundleOf(EXTRA_ALBUM_ID to albumId),
             null,
-            FragmentNavigatorExtras(
-                view to albumId.toString()
-            )
+            FragmentNavigatorExtras(view to albumId)
         )
     }
 }

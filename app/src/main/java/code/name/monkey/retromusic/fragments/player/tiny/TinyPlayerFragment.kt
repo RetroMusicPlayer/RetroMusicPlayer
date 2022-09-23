@@ -29,7 +29,6 @@ import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import ru.stersh.retrosonic.core.storage.domain.PlayQueueStorage
 import code.name.monkey.retromusic.databinding.FragmentTinyPlayerBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.extensions.hide
@@ -48,6 +47,7 @@ import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.coroutines.flow.filterNotNull
 import org.koin.android.ext.android.inject
+import ru.stersh.retrosonic.core.storage.domain.PlayQueueStorage
 import kotlin.math.abs
 
 class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player), MusicProgressViewUpdateHelper.Callback {
@@ -234,8 +234,8 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player), Mus
         init {
             gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
 
-                override fun onLongPress(e: MotionEvent?) {
-                    if (abs(e!!.y - initialY) <= 2) {
+                override fun onLongPress(e: MotionEvent) {
+                    if (abs(e.y - initialY) <= 2) {
                         vibrate()
                         isDragEnabled = true
                         binding.progressBar.parent.requestDisallowInterceptTouchEvent(true)
