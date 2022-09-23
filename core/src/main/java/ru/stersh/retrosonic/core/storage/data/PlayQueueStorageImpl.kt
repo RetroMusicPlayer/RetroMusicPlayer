@@ -25,19 +25,15 @@ internal class PlayQueueStorageImpl(
 
     override fun playSource(source: AudioSource) {
         launch {
-            when (source) {
-                is AudioSource.Song -> {
-                    val song = getSong(source.id)
-                    mutex.withLock {
-                        queue.value = listOf(song)
-                        currentSong.value = song
-                    }
-                }
-                is AudioSource.Album -> {
-
-                }
-                is AudioSource.Artist -> {
-
+            val newQueue = when (source) {
+                is AudioSource.Song -> listOf(getSong(source))
+                is AudioSource.Album -> getSongs(source)
+                is AudioSource.Artist -> getSongs(source)
+            }
+            if (newQueue.isNotEmpty()) {
+                mutex.withLock {
+                    queue.value = newQueue
+                    currentSong.value = newQueue[0]
                 }
             }
         }
@@ -45,37 +41,77 @@ internal class PlayQueueStorageImpl(
 
     override fun addSource(source: AudioSource) {
         launch {
-            when (source) {
-                is AudioSource.Song -> {
-                    val song = getSong(source.id)
-                    mutex.withLock {
-                        val queueSongs = queue.value
-                        queue.value = queueSongs + song
+            val newSongs = when (source) {
+                is AudioSource.Song -> listOf(getSong(source))
+                is AudioSource.Album -> getSongs(source)
+                is AudioSource.Artist -> getSongs(source)
+            }
+            if (newSongs.isNotEmpty()) {
+                mutex.withLock {
+                    val queueSongs = queue.value + newSongs
+                    queue.value = queueSongs
+                    if (currentSong.value == null) {
+                        currentSong.value = queueSongs[0]
                     }
-                }
-                is AudioSource.Album -> {
-
-                }
-                is AudioSource.Artist -> {
-
                 }
             }
         }
     }
 
-    private suspend fun getSong(id: String): PlayableSong {
+    private suspend fun getSong(source: AudioSource.Song): PlayableSong {
+        val starred = getStarredSongIds()
         return apiSonic
-            .getSong(id)
-            .toDomain()
+            .getSong(source.id)
+            .toDomain(source.id in starred)
     }
 
-    private fun Song.toDomain(): PlayableSong {
+    private suspend fun getSongs(source: AudioSource.Album): List<PlayableSong> {
+        val songs = apiSonic
+            .getAlbum(source.id)
+            .song
+            ?.takeIf { it.isNotEmpty() }
+            ?: return emptyList()
+
+        val starred = getStarredSongIds()
+        return songs.map { song ->
+            song.toDomain(song.id in starred)
+        }
+    }
+
+    private suspend fun getSongs(source: AudioSource.Artist): List<PlayableSong> {
+        val albums = apiSonic
+            .getArtist(source.id)
+            .albums
+            ?.takeIf { it.isNotEmpty() }
+            ?: return emptyList()
+
+        val songs = albums.flatMap { it.song ?: emptyList() }
+
+        return if (songs.isNotEmpty()) {
+            val starred = getStarredSongIds()
+
+            songs.map { it.toDomain(it.id in starred) }
+        } else {
+            emptyList()
+        }
+    }
+
+    private suspend fun getStarredSongIds(): List<String> {
+        return apiSonic
+            .getStarred2()
+            .song
+            ?.map { it.id }
+            ?: emptyList()
+    }
+
+    private fun Song.toDomain(isFavorite: Boolean): PlayableSong {
         return PlayableSong(
             id = id,
             title = title,
             artist = artist,
             album = album,
-            coverArtUrl = apiSonic.getCoverArtUrl(coverArt)
+            coverArtUrl = apiSonic.getCoverArtUrl(coverArt),
+            isFavorite = isFavorite
         )
     }
 }

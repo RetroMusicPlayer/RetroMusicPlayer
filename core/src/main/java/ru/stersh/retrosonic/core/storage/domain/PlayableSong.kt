@@ -5,5 +5,6 @@ data class PlayableSong(
     val title: String,
     val album: String,
     val artist: String,
-    val coverArtUrl: String
+    val coverArtUrl: String,
+    val isFavorite: Boolean
 )
