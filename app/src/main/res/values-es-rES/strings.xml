@@ -418,7 +418,7 @@
     <string name="pref_title_toggle_toggle_headset">Reproducir automáticamente</string>
     <string name="pref_title_toggle_toggle_shuffle">Modo aleatorio</string>
     <string name="pref_title_toggle_volume">Controles de volumen</string>
-    <string name="pref_title_wallpaper_accent">Color de acento del fondo de pantalla</string>
+    <string name="pref_title_wallpaper_accent">Color de énfasis del fondo de pantalla</string>
     <string name="pref_title_whitelist">Música en lista blanca</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Tema Negro, Temas \"Ahora reproduciendo\", Efecto Carrusel y más...</string>
