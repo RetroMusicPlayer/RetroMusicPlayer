@@ -67,7 +67,7 @@
     <plurals name="albums">
         <item quantity="other">アルバム</item>
     </plurals>
-    <string name="always">常に</string>
+    <string name="always">常時</string>
     <string name="app_share">クールな音楽プレイヤーをチェックしよう: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">シャッフル</string>
     <string name="app_shortcut_top_tracks_short">トップ曲</string>
@@ -232,7 +232,7 @@
     <string name="label_sampling_rate">サンプリングレート</string>
     <string name="label_track_length">長さ</string>
     <string name="labeled">ラベルを表示する</string>
-    <string name="last_added">最後に追加された</string>
+    <string name="last_added">最近追加</string>
     <string name="last_song">前の曲</string>
     <string name="lets_go">はじめよう</string>
     <string name="library_categories">ライブラリの表示項目</string>
@@ -254,7 +254,7 @@
     <string name="message_updated">更新しました</string>
     <string name="message_welcome"><![CDATA[こんにちは！ <br> %s へようこそ]]></string>
     <string name="my_name">名前</string>
-    <string name="my_top_tracks">最も再生された</string>
+    <string name="my_top_tracks">最近のお気に入り</string>
     <string name="never">決して</string>
     <string name="new_music_mix">新曲ミックス</string>
     <string name="new_playlist_title">新しいプレイリスト</string>
@@ -378,7 +378,7 @@
     <string name="pref_title_appbar_mode">ヘッダーのスタイル</string>
     <string name="pref_title_audio_ducking">フォーカスロス時に音量を下げる</string>
     <string name="pref_title_audio_fade">オーディオをフェードする</string>
-    <string name="pref_title_auto_download_artist_images">アーティスト画像を自動でダウンロードする</string>
+    <string name="pref_title_auto_download_artist_images">アーティスト画像を自動でダウンロード</string>
     <string name="pref_title_blacklist">ブラックリスト</string>
     <string name="pref_title_bluetooth_playback">Bluetooth接続時に再生</string>
     <string name="pref_title_blurred_album_art">アルバムジャケットにぼかしを適用する</string>
@@ -400,7 +400,7 @@
     <string name="pref_title_ignore_media_store_artwork">Media Store のカバーを無視する</string>
     <string name="pref_title_last_added_interval">最後に追加されたプレイリストの間隔</string>
     <string name="pref_title_lock_screen">フルスクリーンコントロール</string>
-    <string name="pref_title_lyrics_screen_on">歌詞を表示するときは画面を点灯したままにします</string>
+    <string name="pref_title_lyrics_screen_on">歌詞の表示時に画面を点灯し続ける</string>
     <string name="pref_title_lyrics_type">歌詞の種類</string>
     <string name="pref_title_manage_audio_focus">常に再生する</string>
     <string name="pref_title_now_playing_screen_appearance">再生中のテーマ</string>
