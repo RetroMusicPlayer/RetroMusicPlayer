@@ -60,7 +60,7 @@
     <string name="added_x_titles_to_playing_queue">%1$d 曲が再生キューに追加されました</string>
     <string name="album">アルバム</string>
     <plurals name="albumSongs">
-        <item quantity="other">曲</item>
+        <item quantity="other">楽曲</item>
     </plurals>
     <string name="album_artist">アルバムアーティスト</string>
     <string name="albums">アルバム</string>
@@ -86,7 +86,7 @@
     <string name="backup_restore_settings_summary">設定、プレイリストのバックアップと復元</string>
     <string name="backup_restore_title"><![CDATA[バックアップと復元]]></string>
     <string name="backup_title">バックアップ</string>
-    <string name="biography">バイオグラフィー</string>
+    <string name="biography">説明</string>
     <string name="black_theme_name">ダークテーマ時に漆黒にする</string>
     <string name="blacklist">ブラックリスト</string>
     <string name="bluetooth_summary">付近の Bluetooth デバイスを確認するために Nearby デバイス権限が必要です</string>
@@ -181,12 +181,12 @@
     <string name="faq">よくある質問</string>
     <string name="favorites">お気に入り</string>
     <string name="file_already_exists">ファイルは既に存在します</string>
-    <string name="finish_last_song">最後の曲を終了する</string>
+    <string name="finish_last_song">最後の曲の終了を待つ</string>
     <string name="fit">フィット</string>
     <string name="flat">フラット</string>
     <string name="folders">フォルダ</string>
     <string name="follow_system">システムに従う</string>
-    <string name="for_you">あなたのために</string>
+    <string name="for_you">おすすめ</string>
     <string name="free">なし</string>
     <string name="full">フル</string>
     <string name="full_card">全体のカード</string>
@@ -256,7 +256,7 @@
     <string name="my_name">名前</string>
     <string name="my_top_tracks">最も再生された</string>
     <string name="never">決して</string>
-    <string name="new_music_mix">新しい曲のミックス</string>
+    <string name="new_music_mix">新曲ミックス</string>
     <string name="new_playlist_title">新しいプレイリスト</string>
     <string name="new_start_directory">%s は新しい開始ディレクトリです。</string>
     <string name="next_song">次の曲</string>
@@ -361,7 +361,7 @@
     <string name="pref_summary_pause_history">有効にすると、新たに再生された曲は履歴に表示されません</string>
     <string name="pref_summary_remember_tab">開始時に最後に表示したタブに移動します</string>
     <string name="pref_summary_show_lyrics">同期歌詞をアルバムカバーに重ねて表示します</string>
-    <string name="pref_summary_suggestions">新しい音楽ミックスをホーム画面に表示する</string>
+    <string name="pref_summary_suggestions">新曲ミックスをホーム画面に表示する</string>
     <string name="pref_summary_swipe_anywhere_now_playing">再生中画面のどこかをスワイプして、楽曲の変更を行います</string>
     <string name="pref_summary_swipe_to_dismiss">下にスワイプしてミニプレイヤーを閉じます</string>
     <string name="pref_summary_toggle_full_screen">アプリをフルスクリーン表示にする</string>
