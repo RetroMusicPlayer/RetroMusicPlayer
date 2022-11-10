@@ -30,6 +30,9 @@
 </p>
 
 ___
+# ⚠ The app has been discontinued since we no longer have the time to maintain it anymore.
+# If you'd like to be a maintainer, please DM us on [Telegram](https://telegram.me/Daksh777) or [Twitter](https://twitter.com/0xDPJ)
+___
 
 ## 🆕 Material You Design Music Player for Android music lovers 
 
