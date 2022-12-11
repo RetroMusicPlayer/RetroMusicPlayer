@@ -9,7 +9,7 @@
     <string name="action_add_to_favorites">Додати в обране</string>
     <string name="action_add_to_playing_queue">Додати до черги відтворення</string>
     <string name="action_add_to_playlist">Додати до списку відтворення</string>
-    <string name="action_cancel">Відмінити</string>
+    <string name="action_cancel">Скасовувати</string>
     <string name="action_cast">Трансляція на іншому дисплеї</string>
     <string name="action_clear_playing_queue">Очистити чергу відтворення</string>
     <string name="action_cycle_repeat">Циклічне повторення</string>
@@ -41,7 +41,7 @@
     <string name="action_search">Пошук</string>
     <string name="action_set">Розпочати</string>
     <string name="action_set_as_ringtone">Встановити як мелодію дзвінка</string>
-    <string name="action_set_as_start_directory">Встановити в якості початкової теки</string>
+    <string name="action_set_as_start_directory">Встановити як початкову теку</string>
     <string name="action_settings">"Налаштування"</string>
     <string name="action_share">Поділитися</string>
     <string name="action_shuffle_all">Перемішати всі</string>
@@ -55,7 +55,7 @@
     <string name="add_action">Додати</string>
     <string name="add_playlist_title">"Додати до списку відтворення"</string>
     <string name="add_time_framed_lryics">Додати часові розмежування тексту</string>
-    <string name="added_song_count_to_playlist">додано_кількість_пісень_до_плейлиста</string>
+    <string name="added_song_count_to_playlist">Додано %1$d пісень(ів) до %2$s</string>
     <string name="added_title_to_playing_queue">"Додано 1 композицію до черги відтворення."</string>
     <string name="added_x_titles_to_playing_queue">Додано %1$d композицій до черги відтворення.</string>
     <string name="album">Альбом</string>
@@ -70,7 +70,7 @@
     <plurals name="albums">
         <item quantity="one">Альбом</item>
         <item quantity="few">Альбоми</item>
-        <item quantity="many">Альбоми</item>
+        <item quantity="many">Альбомів</item>
         <item quantity="other">Альбоми</item>
     </plurals>
     <string name="always">Завжди</string>
