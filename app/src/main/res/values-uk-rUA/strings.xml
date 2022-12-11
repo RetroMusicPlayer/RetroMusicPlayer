@@ -310,7 +310,7 @@
     <string name="pinterest_page_summary">Слідкуйте за сторінкою Pinterest від Retro Music для натхнення дизайну</string>
     <string name="plain">Звичайний</string>
     <string name="playList_already_exits">Список відтворення вже існує</string>
-    <string name="playback_pitch">Pitch</string>
+    <string name="playback_pitch">Тон</string>
     <string name="playback_settings">Налаштування відтворення</string>
     <string name="playback_speed">Швидкість Відтворення</string>
     <string name="playing_notification_description">Сповіщення про відтворення надає дії для відтворення/паузи тощо.</string>
@@ -504,7 +504,7 @@
     <string name="sort_order_date_modified">Дата змінення</string>
     <string name="sort_order_default">За замовчуванням</string>
     <string name="sort_order_num_songs">Кількість пісень</string>
-    <string name="sort_order_num_songs_desc">Song count desc</string>
+    <string name="sort_order_num_songs_desc">Опис кількості пісень</string>
     <string name="sort_order_year">Рік</string>
     <string name="sort_order_z_a">За спаданням</string>
     <string name="speech_not_supported">Вибачте! Ваш пристрій не підтримує введення мови</string>
