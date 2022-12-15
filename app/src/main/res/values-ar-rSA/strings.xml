@@ -399,7 +399,7 @@
     <string name="pref_title_colored_app">اللون المتكيف</string>
     <string name="pref_title_colored_notification">التنبيهات الملونة</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
-    <string name="pref_title_custom_font">Use Manrope font</string>
+    <string name="pref_title_custom_font">استخدام خط مانروب</string>
     <string name="pref_title_desaturated_color">لون مفصّل</string>
     <string name="pref_title_expand_now_playing_panel">إظهار شاشة التشغيل</string>
     <string name="pref_title_extra_controls">المزيد من أزرار التحكم</string>
