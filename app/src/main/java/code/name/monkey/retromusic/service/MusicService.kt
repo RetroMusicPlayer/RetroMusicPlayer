@@ -23,6 +23,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.ServiceInfo
 import android.database.ContentObserver
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.os.*
@@ -1021,7 +1022,7 @@ class MusicService : MediaBrowserServiceCompat(),
             .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
             .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, playingQueue.size.toLong())
 
-        if (isAlbumArtOnLockScreen) {
+        if (isAlbumArtOnLockScreen || VERSION.SDK_INT == 33) {
             // val screenSize: Point = RetroUtil.getScreenSize(this)
             val request = GlideApp.with(this)
                 .asBitmap()
@@ -1036,6 +1037,13 @@ class MusicService : MediaBrowserServiceCompat(),
                 CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
+                    metaData.putBitmap(
+                        MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
+                        BitmapFactory.decodeResource(
+                            resources,
+                            R.drawable.default_audio_art
+                        )
+                    )
                     mediaSession?.setMetadata(metaData.build())
                     onCompletion()
                 }
