@@ -70,7 +70,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.MusicUtil.toggleFavorite
 import code.name.monkey.retromusic.util.PackageValidator
 import code.name.monkey.retromusic.util.PreferenceUtil.crossFadeDuration
-import code.name.monkey.retromusic.util.PreferenceUtil.isAlbumArtOnLockScreen
 import code.name.monkey.retromusic.util.PreferenceUtil.isBluetoothSpeaker
 import code.name.monkey.retromusic.util.PreferenceUtil.isBlurredAlbumArt
 import code.name.monkey.retromusic.util.PreferenceUtil.isClassicNotification
@@ -1022,19 +1021,13 @@ class MusicService : MediaBrowserServiceCompat(),
             .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
             .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, playingQueue.size.toLong())
 
-        if (isAlbumArtOnLockScreen || VERSION.SDK_INT == 33) {
-            // val screenSize: Point = RetroUtil.getScreenSize(this)
-            val request = GlideApp.with(this)
+            // there only about notification's album art, so remove "isAlbumArtOnLockScreen" and "isBlurredAlbumArt"
+            GlideApp.with(this)
                 .asBitmap()
                 .songCoverOptions(song)
                 .load(getSongModel(song))
                 .transition(getDefaultTransition())
-
-            if (isBlurredAlbumArt) {
-                request.transform(BlurTransformation.Builder(this@MusicService).build())
-            }
-            request.into(object :
-                CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+                .into(object : CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
                     metaData.putBitmap(
@@ -1062,10 +1055,6 @@ class MusicService : MediaBrowserServiceCompat(),
 
                 override fun onLoadCleared(placeholder: Drawable?) {}
             })
-        } else {
-            mediaSession?.setMetadata(metaData.build())
-            onCompletion()
-        }
     }
 
     private fun handleChangeInternal(what: String) {

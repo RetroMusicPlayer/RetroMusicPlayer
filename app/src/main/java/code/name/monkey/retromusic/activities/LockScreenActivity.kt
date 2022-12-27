@@ -26,10 +26,13 @@ import code.name.monkey.retromusic.extensions.hideStatusBar
 import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenControlsFragment
+import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtil.isAlbumArtOnLockScreen
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
@@ -88,7 +91,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
         } else {
             window.addFlags(
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-              //          or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                //          or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
             )
         }
     }
@@ -104,16 +107,31 @@ class LockScreenActivity : AbsMusicServiceActivity() {
     }
 
     private fun updateSongs() {
+        if (!isAlbumArtOnLockScreen) {
+            binding.image.setImageResource(R.drawable.default_audio_art)
+            return
+        }
+
         val song = MusicPlayerRemote.currentSong
+
         GlideApp.with(this)
             .asBitmapPalette()
             .songCoverOptions(song)
             .load(RetroGlideExtension.getSongModel(song))
-            .dontAnimate()
+            .transition(RetroGlideExtension.getDefaultTransition())
             .into(object : RetroMusicColoredTarget(binding.image) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     fragment?.setColor(colors)
                 }
             })
+
+        if (PreferenceUtil.isBlurredAlbumArt) {
+            GlideApp.with(this)
+                .load(RetroGlideExtension.getSongModel(song))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .transform(BlurTransformation.Builder(this).blurRadius(25f).build())
+                .into(binding.ivBlurredAlbumArt)
+        }
+
     }
 }
