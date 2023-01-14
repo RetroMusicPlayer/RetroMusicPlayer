@@ -3,7 +3,7 @@
     <string name="about_album_label">Acerca de %s</string>
     <string name="about_settings_summary">Equipo, enlaces sociales</string>
     <string name="accent_color">Color de énfasis</string>
-    <string name="accent_color_desc">El color de acento del tema, por defecto es morado</string>
+    <string name="accent_color_desc">El color de énfasis del tema, por defecto es morado</string>
     <string name="action_about">Acerca de</string>
     <string name="action_add_to_blacklist">Añadir a la Lista negra</string>
     <string name="action_add_to_favorites">Añadir a favoritos</string>
@@ -96,7 +96,7 @@
     <string name="blur">Desenfoque</string>
     <string name="blur_card">Tarjeta con desenfoque</string>
     <string name="bug_report_failed">No se puede enviar el informe</string>
-    <string name="bug_report_failed_invalid_token">Token de acceso inválido. Por favor, contacta al desarrollador de la aplicación.</string>
+    <string name="bug_report_failed_invalid_token">Token de acceso no válido. Por favor, contacta con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_issues_not_available">Las incidencias no están habilitadas para el repositorio seleccionado. Por favor, póngase en contacto con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_unknown">Ha ocurrido un error inesperado. Por favor, póngase en contacto con soporte técnico.</string>
     <string name="bug_report_failed_wrong_credentials">Usuario o contraseña incorrectos</string>
@@ -345,7 +345,7 @@
     <string name="pref_summary_carousel_effect">Efecto carrusel para la portada del álbum en la ventana de reproducción. En los temas \"Tarjeta\" y \"Tarjeta Desenfocada\" no funcionará</string>
     <string name="pref_summary_classic_notification">Usar el diseño de notificación clásico</string>
     <string name="pref_summary_colored_app">El color del fondo y los botones de control cambian de acuerdo a la portada del álbum para la ventana de reproducción</string>
-    <string name="pref_summary_colored_app_shortcuts">Colorea los accesos directos de la aplicación en el color de énfasis. Cada vez que cambie el color, activa esta opción para que surta efecto</string>
+    <string name="pref_summary_colored_app_shortcuts">Colorea los accesos directos de la aplicación en el color de énfasis. Cada vez que cambie el color, active esta opción</string>
     <string name="pref_summary_colored_notification">"Colorea la notificación con el color vibrante de la portada del álbum"</string>
     <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">Según las líneas de la guía Material Design en los colores del modo oscuro deben ser desaturados</string>
