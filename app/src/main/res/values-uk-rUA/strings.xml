@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">Про %s</string>
+    <string name="about_album_label">Про застосунок %s</string>
     <string name="about_settings_summary">Команда, посилання на соц. мережі</string>
     <string name="accent_color">Акцентний колір</string>
     <string name="accent_color_desc">Акцентний колір, за замовчуванням фіолетовий</string>
@@ -95,14 +95,14 @@
     <string name="biography">Життєпис</string>
     <string name="black_theme_name">Чорний</string>
     <string name="blacklist">Чорний список</string>
-    <string name="bluetooth_summary">Для перевірки наявності Bluetooth-пристроїв додатку потрібен дозвіл на роботу з пристроями, що знаходяться поруч</string>
+    <string name="bluetooth_summary">Застосунку потрібен дозвіл на пристрої поблизу, щоб перевірити наявність пристроїв Bluetooth</string>
     <string name="bluetooth_title">Пристрої поруч</string>
     <string name="blur">Розмиття</string>
     <string name="blur_card">Розмита картка</string>
     <string name="bug_report_failed">Не вдалося надіслати звіт</string>
-    <string name="bug_report_failed_invalid_token">Недійсний токен доступу. Зв’яжіться з розробником додатка.</string>
-    <string name="bug_report_failed_issues_not_available">Проблеми не включені для вибраного сховища. Зверніться до розробника програми.</string>
-    <string name="bug_report_failed_unknown">Виникла несподівана помилка. Зв\'яжіться з розробником додатку.</string>
+    <string name="bug_report_failed_invalid_token">Недійсний токен доступу. Зв’яжіться з розробником застосунку.</string>
+    <string name="bug_report_failed_issues_not_available">Проблеми не включені для вибраного сховища. Зверніться до розробника застосунку.</string>
+    <string name="bug_report_failed_unknown">Виникла несподівана помилка. Зв\'яжіться з розробником застосунку.</string>
     <string name="bug_report_failed_wrong_credentials">Неправильне ім\'я користувача або пароль</string>
     <string name="bug_report_issue">Помилка</string>
     <string name="bug_report_manual">Надіслати вручну</string>
@@ -111,7 +111,7 @@
     <string name="bug_report_no_title">Введіть заголовок проблеми</string>
     <string name="bug_report_no_username">Введіть своє дійсне ім’я користувача GitHub</string>
     <string name="bug_report_success">Повідомлення про помилку успішне</string>
-    <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте \"Очистити дані додатка\" або надішліть лист на ел. пошту </string>
+    <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте \"Очистити дані застосунку\" або надішліть лист на ел. пошту </string>
     <string name="bug_report_use_account">Надіслати через обліковий запис GitHub</string>
     <string name="buy_now">Придбайте вже</string>
     <string name="cancel_current_timer">Відмінити</string>
@@ -195,11 +195,11 @@
     <string name="free">Безкоштовно</string>
     <string name="full">Повний</string>
     <string name="full_card">Повна картка</string>
-    <string name="general_settings_summary">Змінити тему і кольори додатку</string>
+    <string name="general_settings_summary">Змінити тему і кольори застосунку</string>
     <string name="general_settings_title">Вигляд</string>
     <string name="genre">Жанр</string>
     <string name="genres">Жанри</string>
-    <string name="git_hub_summary">Розгалужити проект на GitHub</string>
+    <string name="git_hub_summary">Форк проєкту на GitHub</string>
     <string name="gradient">Градієнт</string>
     <string name="grant_access">Надати доступ</string>
     <string name="grid_size_1">1</string>
@@ -300,7 +300,7 @@
     <string name="peek">Погляд</string>
     <string name="permission_bluetooth_denied">Доступ до пристроїв поблизу заборонено.</string>
     <string name="permission_external_storage_denied">Відмовлено у доступі до зовнішнього сховища.</string>
-    <string name="permission_summary">Додатку потрібен дозвіл на доступ до пам\'яті пристрою для відтворення музики</string>
+    <string name="permission_summary">Застосунку потрібен дозвіл на доступ до пам\'яті пристрою для відтворення музики</string>
     <string name="permission_title">Доступ до сховища</string>
     <string name="permissions_denied">У доступі відмовлено.</string>
     <string name="personalize">Персоналізація</string>
@@ -333,7 +333,7 @@
     <string name="pref_header_library">Бібліотека</string>
     <string name="pref_header_lockscreen">Екран блокування</string>
     <string name="pref_header_playlists">Списки відтворення</string>
-    <string name="pref_keep_pause_on_zero_volume_summary">Призупиняє пісню, коли гучність зменшується до нуля і починає грати під час підвищення гучності. Також працює поза додатком</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Призупиняє пісню, коли гучність зменшується до нуля і починає грати під час підвищення гучності. Також працює поза застосунком</string>
     <string name="pref_keep_pause_on_zero_volume_title">Пауза при нулі</string>
     <string name="pref_keep_screen_on_summary">Майте на увазі, що увімкнення цієї функції може вплинути на заряд акумулятора</string>
     <string name="pref_keep_screen_on_title">Не вимикати екран</string>
@@ -345,11 +345,11 @@
     <string name="pref_summary_audio_fade">Приглушити звуку під час паузи або відтворення пісні</string>
     <string name="pref_summary_blacklist">Вміст тек чорного списку приховано з вашої бібліотеки.</string>
     <string name="pref_summary_bluetooth_playback">Почати відтворення відразу при під\'єднанні до Bluetooth пристрою</string>
-    <string name="pref_summary_blurred_album_art">Розмивати обкладинку альбому на екрані блокування. Можуть виникнути проблеми з сторонніми додатками та віджетами</string>
+    <string name="pref_summary_blurred_album_art">Розмивати обкладинку альбому на екрані блокування. Можуть виникнути проблеми зі сторонніми застосунками та віджетами</string>
     <string name="pref_summary_carousel_effect">Ефект каруселі для обкладинок альбомів на екрані відтворення. Теми \"Картка\" та \"Розмита картка\" не працюватимуть</string>
     <string name="pref_summary_classic_notification">Використовувати класичне оформлення сповіщення</string>
     <string name="pref_summary_colored_app">Тло і кольори кнопок керування міняються в залежності від обкладинки екрана відтворення</string>
-    <string name="pref_summary_colored_app_shortcuts">Фарбує ярлики додатків у колір акценту. Кожного разу, коли ви змінюєте колір, будь ласка, перемкніть його, щоб зміни вступили в силу</string>
+    <string name="pref_summary_colored_app_shortcuts">Фарбує ярлики застосунків у колір акценту. Кожного разу, коли ви змінюєте колір, будь ласка, перемкніть його, щоб зміни набрали чинності</string>
     <string name="pref_summary_colored_notification">"Фарбує повідомлення в обкладинці альбому яскравим кольором"</string>
     <string name="pref_summary_cross_fade">Тривалість переходу між піснями</string>
     <string name="pref_summary_desaturated_color">Для Material Design лінії в темному режимі мають бути ненасичені</string>
@@ -379,7 +379,7 @@
     <string name="pref_title_album_artists_only">Перейти за виконавцем альбому</string>
     <string name="pref_title_album_cover_style">Тема обкладинки альбому</string>
     <string name="pref_title_album_cover_transform">Пропустити обкладинку альбому</string>
-    <string name="pref_title_app_shortcuts">Кольорові ярлики додатків</string>
+    <string name="pref_title_app_shortcuts">Кольорові ярлики застосунків</string>
     <string name="pref_title_appbar_mode">Стиль заголовку</string>
     <string name="pref_title_audio_ducking">Зменшити гучність при сторонніх звуках</string>
     <string name="pref_title_audio_fade">Затухання аудіо</string>
@@ -398,7 +398,7 @@
     <string name="pref_title_extra_controls">Додаткові елементи керування</string>
     <string name="pref_title_extra_song_info">Інформація про пісню</string>
     <string name="pref_title_gapless_playback">Безперервне відтворення</string>
-    <string name="pref_title_general_theme">Тема додатку</string>
+    <string name="pref_title_general_theme">Тема застосунку</string>
     <string name="pref_title_home_album_grid_style">Сітка альбому</string>
     <string name="pref_title_home_artist_grid_style">Домашня сітка виконавця</string>
     <string name="pref_title_home_banner">Головний банер</string>
@@ -429,8 +429,8 @@
     <string name="profile">Профіль</string>
     <string name="purchase">Придбати</string>
     <string name="queue">Черга</string>
-    <string name="rate_app">Оцініть додаток</string>
-    <string name="rate_on_google_play_summary">Подобається цей додаток? Напишіть відгук нам у Google Play Store, як ми можемо зробити його ще кращим</string>
+    <string name="rate_app">Оцініть застосунок</string>
+    <string name="rate_on_google_play_summary">Подобається цей застосунок? Напишіть відгук нам у Google Play Store, як ми можемо зробити його ще кращим</string>
     <string name="recent_albums">Останні альбоми</string>
     <string name="recent_artists">Останні виконавці</string>
     <string name="remove_action">Вилучити</string>
@@ -449,12 +449,12 @@
     <string name="reset_artist_image">Скинути зображення виконавця</string>
     <string name="restore">Відновити</string>
     <string name="restore_message">Бажаєте відновити резервну копію?</string>
-    <string name="restored_previous_purchase_please_restart">Відновлено попередню покупку. Перезапустіть додаток, щоб скористатися всіма функціями.</string>
+    <string name="restored_previous_purchase_please_restart">Відновлено попередню покупку. Перезапустіть застосунок, щоб скористатися всіма функціями.</string>
     <string name="restored_previous_purchases">Відновлені попередні покупки.</string>
     <string name="restoring_purchase">Відновлення покупки…</string>
     <string name="retro_music_player">Retro Music плеєр</string>
     <string name="retro_music_pro">Retro Music Pro</string>
-    <string name="ringtone_summary">Додатку потрібен дозвіл на доступ до налаштувань вашого пристрою для того, щоб встановити музику як рінгтон</string>
+    <string name="ringtone_summary">Застосунку потрібен дозвіл на доступ до налаштувань вашого пристрою для того, щоб встановити музику як рингтон</string>
     <string name="ringtone_title">Мелодія (Необов\'язково)</string>
     <string name="saf_delete_failed">Помилка видалення файлу: %s</string>
     <!-- SAF -->
@@ -482,8 +482,8 @@
     <string name="selected">Обрано</string>
     <string name="set">Встановити</string>
     <string name="set_artist_image">Встановити зображення виконавця</string>
-    <string name="share_app">Поділитися додатком</string>
-    <string name="share_summary">Поділитися додатком із друзями та сім\'єю</string>
+    <string name="share_app">Поділитися застосунком</string>
+    <string name="share_summary">Поділитися застосунком із друзями та сім\'єю</string>
     <string name="share_to_stories">Поділитися в Історії</string>
     <string name="show_album_artists">Показати виконавців альбому</string>
     <string name="shuffle">Перемішати</string>
@@ -532,7 +532,7 @@
     <string name="track_hint">"Доріжка (2 для доріжки 2 або 3004 для CD3 доріжки 4)"</string>
     <string name="track_list">Номер пісні</string>
     <string name="translate">Перекласти</string>
-    <string name="translate_community">Допоможіть нам перекласти додаток на вашу мову</string>
+    <string name="translate_community">Допоможіть нам перекласти застосунок на вашу мову</string>
     <string name="try_retro_music_premium">Спробуйте Retro Music Преміум</string>
     <string name="twitter_page">Твіттер</string>
     <string name="twitter_page_summary">Поділіться своїм дизайном із Retro Music</string>
