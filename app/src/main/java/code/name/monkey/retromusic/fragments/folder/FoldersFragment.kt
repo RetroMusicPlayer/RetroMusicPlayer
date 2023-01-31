@@ -46,6 +46,7 @@ import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openQueue
+import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.interfaces.IMainActivityFragmentCallbacks
@@ -219,8 +220,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                                 fileComparator
                             ) { songs ->
                                 if (songs.isNotEmpty()) {
-                                    SongsMenuHelper.handleMenuClick(
-                                        requireActivity(), songs, itemId
+                                    val song = songs.first()
+                                    SongMenuHelper.handleMenuClick(
+                                        requireActivity(), song, itemId
                                     )
                                 }
                             }
