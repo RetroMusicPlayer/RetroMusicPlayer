@@ -20,7 +20,7 @@
     <string name="action_go_to_album">Ga naar album </string>
     <string name="action_go_to_artist">Ga naar artiest</string>
     <string name="action_go_to_genre">Ga naar genre</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">Ga naar Songtekst</string>
     <string name="action_go_to_start_directory">Ga naar begin directory</string>
     <string name="action_grant">Geef toestemming</string>
     <string name="action_grid_size">Raster grootte</string>
