@@ -56,7 +56,7 @@ import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
 import java.io.File
-import java.util.*
+import java.util.Collections
 
 abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
     abstract val editorImage: ImageView
@@ -307,7 +307,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                super.onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
                 return true
             }
         }
@@ -409,15 +409,18 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
                     loadImageFromFile(it)
                 }
             }
+
             SAFGuideActivity.REQUEST_CODE_SAF_GUIDE -> {
                 SAFUtil.openTreePicker(this)
             }
+
             SAFUtil.REQUEST_SAF_PICK_TREE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     SAFUtil.saveTreeUri(this, intent)
                     writeTags(savedSongPaths)
                 }
             }
+
             SAFUtil.REQUEST_SAF_PICK_FILE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     writeTags(Collections.singletonList(currentSongPath + SAFUtil.SEPARATOR + intent!!.dataString))

@@ -37,6 +37,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ServiceCompat
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.media.MediaBrowserServiceCompat
@@ -51,8 +52,9 @@ import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.extensions.toMediaSessionQueue
 import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.glide.BlurTransformation
-import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension.getDefaultTransition
 import code.name.monkey.retromusic.glide.RetroGlideExtension.getSongModel
+import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.helper.ShuffleHelper.makeShuffleList
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.Song.Companion.emptySong
@@ -82,6 +84,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil.registerOnSharedPreferenc
 import code.name.monkey.retromusic.util.PreferenceUtil.unregisterOnSharedPreferenceChangedListener
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
+import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
@@ -134,21 +137,27 @@ class MusicService : MediaBrowserServiceCompat(),
                     AppWidgetClassic.NAME -> {
                         appWidgetClassic.performUpdate(this@MusicService, ids)
                     }
+
                     AppWidgetSmall.NAME -> {
                         appWidgetSmall.performUpdate(this@MusicService, ids)
                     }
+
                     AppWidgetBig.NAME -> {
                         appWidgetBig.performUpdate(this@MusicService, ids)
                     }
+
                     AppWidgetCard.NAME -> {
                         appWidgetCard.performUpdate(this@MusicService, ids)
                     }
+
                     AppWidgetText.NAME -> {
                         appWidgetText.performUpdate(this@MusicService, ids)
                     }
+
                     AppWidgetMD3.NAME -> {
                         appWidgetMd3.performUpdate(this@MusicService, ids)
                     }
+
                     AppWidgetCircle.NAME -> {
                         appWidgetCircle.performUpdate(this@MusicService, ids)
                     }
@@ -412,6 +421,7 @@ class MusicService : MediaBrowserServiceCompat(),
             REPEAT_MODE_ALL -> if (isLastTrack) {
                 position = 0
             }
+
             REPEAT_MODE_THIS -> if (force) {
                 if (isLastTrack) {
                     position = 0
@@ -419,9 +429,11 @@ class MusicService : MediaBrowserServiceCompat(),
             } else {
                 position -= 1
             }
+
             REPEAT_MODE_NONE -> if (isLastTrack) {
                 position -= 1
             }
+
             else -> if (isLastTrack) {
                 position -= 1
             }
@@ -447,6 +459,7 @@ class MusicService : MediaBrowserServiceCompat(),
             REPEAT_MODE_ALL -> if (newPosition < 0) {
                 newPosition = playingQueue.size - 1
             }
+
             REPEAT_MODE_THIS -> if (force) {
                 if (newPosition < 0) {
                     newPosition = playingQueue.size - 1
@@ -454,9 +467,11 @@ class MusicService : MediaBrowserServiceCompat(),
             } else {
                 newPosition = getPosition()
             }
+
             REPEAT_MODE_NONE -> if (newPosition < 0) {
                 newPosition = 0
             }
+
             else -> if (newPosition < 0) {
                 newPosition = 0
             }
@@ -486,6 +501,7 @@ class MusicService : MediaBrowserServiceCompat(),
                 makeShuffleList(playingQueue, getPosition())
                 position = 0
             }
+
             SHUFFLE_MODE_NONE -> {
                 this.shuffleMode = shuffleMode
                 val currentSongId = Objects.requireNonNull(currentSong).id
@@ -553,9 +569,11 @@ class MusicService : MediaBrowserServiceCompat(),
             currentPosition in to until from -> {
                 position = currentPosition + 1
             }
+
             currentPosition in (from + 1)..to -> {
                 position = currentPosition - 1
             }
+
             from == currentPosition -> {
                 position = to
             }
@@ -617,6 +635,7 @@ class MusicService : MediaBrowserServiceCompat(),
                 updateMediaSessionPlaybackState()
                 playbackManager.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
             }
+
             CROSS_FADE_DURATION -> {
                 val progress = songProgressMillis
                 val wasPlaying = isPlaying
@@ -627,6 +646,7 @@ class MusicService : MediaBrowserServiceCompat(),
                     playbackManager.setCrossFadeDuration(crossFadeDuration)
                 }
             }
+
             ALBUM_ART_ON_LOCK_SCREEN, BLURRED_ALBUM_ART -> updateMediaSessionMetaData(::updateMediaSessionPlaybackState)
             COLORED_NOTIFICATION -> {
                 playingNotification?.updateMetadata(currentSong) {
@@ -634,6 +654,7 @@ class MusicService : MediaBrowserServiceCompat(),
                     startForegroundOrNotify()
                 }
             }
+
             CLASSIC_NOTIFICATION -> {
                 updateNotification()
                 playingNotification?.updateMetadata(currentSong) {
@@ -641,6 +662,7 @@ class MusicService : MediaBrowserServiceCompat(),
                     startForegroundOrNotify()
                 }
             }
+
             TOGGLE_HEADSET -> registerHeadsetEvents()
         }
     }
@@ -655,6 +677,7 @@ class MusicService : MediaBrowserServiceCompat(),
                     } else {
                         play()
                     }
+
                     ACTION_PAUSE -> pause()
                     ACTION_PLAY -> play()
                     ACTION_PLAY_PLAYLIST -> playFromPlaylist(intent)
@@ -664,6 +687,7 @@ class MusicService : MediaBrowserServiceCompat(),
                         pendingQuit = false
                         quit()
                     }
+
                     ACTION_PENDING_QUIT -> pendingQuit = true
                     TOGGLE_FAVORITE -> toggleFavorite()
                 }
@@ -829,7 +853,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
     fun quit() {
         pause()
-        stopForeground(true)
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         isForeground = false
         notificationManager?.cancel(PlayingNotification.NOTIFICATION_ID)
 
@@ -1023,7 +1047,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
         if (isAlbumArtOnLockScreen) {
             // val screenSize: Point = RetroUtil.getScreenSize(this)
-            val request = GlideApp.with(this)
+            val request = Glide.with(this)
                 .asBitmap()
                 .songCoverOptions(song)
                 .load(getSongModel(song))
@@ -1078,12 +1102,14 @@ class MusicService : MediaBrowserServiceCompat(),
                 playingNotification?.setPlaying(isPlaying)
                 startForegroundOrNotify()
             }
+
             FAVORITE_STATE_CHANGED -> {
                 isCurrentFavorite { isFavorite ->
                     playingNotification?.updateFavorite(isFavorite)
                     startForegroundOrNotify()
                 }
             }
+
             META_CHANGED -> {
                 playingNotification?.updateMetadata(currentSong) { startForegroundOrNotify() }
                 isCurrentFavorite { isFavorite ->
@@ -1107,6 +1133,7 @@ class MusicService : MediaBrowserServiceCompat(),
                     storage.saveSong(currentSong)
                 }
             }
+
             QUEUE_CHANGED -> {
                 mediaSession?.setQueueTitle(getString(R.string.now_playing_queue))
                 mediaSession?.setQueue(playingQueue.toMediaSessionQueue())
@@ -1128,7 +1155,7 @@ class MusicService : MediaBrowserServiceCompat(),
                 // We can't call stopForeground(false) on A12 though, which may result in crashes
                 // when we call startForeground after that e.g. when Alarm goes off,
                 if (!VersionUtils.hasS()) {
-                    stopForeground(false)
+                    ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_DETACH)
                     isForeground = false
                 }
             }
@@ -1156,7 +1183,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun stopForegroundAndNotification() {
-        stopForeground(true)
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         notificationManager?.cancel(PlayingNotification.NOTIFICATION_ID)
         isForeground = false
     }

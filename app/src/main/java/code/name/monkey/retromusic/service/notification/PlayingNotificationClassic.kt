@@ -36,8 +36,9 @@ import code.name.monkey.retromusic.extensions.getTintedDrawable
 import code.name.monkey.retromusic.extensions.isColorLight
 import code.name.monkey.retromusic.extensions.isSystemDarkModeEnabled
 import code.name.monkey.retromusic.extensions.toBitmap
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
+import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
@@ -47,6 +48,7 @@ import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 
@@ -105,7 +107,9 @@ class PlayingNotificationClassic(
         setOngoing(true)
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
-        GlideApp.with(context).asBitmapPalette().songCoverOptions(song)
+        Glide.with(context)
+            .asBitmapPalette()
+            .songCoverOptions(song)
             .load(RetroGlideExtension.getSongModel(song))
             .centerCrop()
             .into(object : CustomTarget<BitmapPaletteWrapper>(
@@ -124,14 +128,22 @@ class PlayingNotificationClassic(
                     super.onLoadFailed(errorDrawable)
                     update(
                         null,
-                        resolveColor(context, com.google.android.material.R.attr.colorSurface, Color.WHITE)
+                        resolveColor(
+                            context,
+                            com.google.android.material.R.attr.colorSurface,
+                            Color.WHITE
+                        )
                     )
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
                     update(
                         null,
-                        resolveColor(context, com.google.android.material.R.attr.colorSurface, Color.WHITE)
+                        resolveColor(
+                            context,
+                            com.google.android.material.R.attr.colorSurface,
+                            Color.WHITE
+                        )
                     )
                 }
 
@@ -157,7 +169,11 @@ class PlayingNotificationClassic(
                     if (!VersionUtils.hasS()) {
                         if (!PreferenceUtil.isColoredNotification) {
                             bgColorFinal =
-                                resolveColor(context, com.google.android.material.R.attr.colorSurface, Color.WHITE)
+                                resolveColor(
+                                    context,
+                                    com.google.android.material.R.attr.colorSurface,
+                                    Color.WHITE
+                                )
                         }
                         setBackgroundColor(bgColorFinal)
                         setNotificationContent(ColorUtil.isColorLight(bgColorFinal))

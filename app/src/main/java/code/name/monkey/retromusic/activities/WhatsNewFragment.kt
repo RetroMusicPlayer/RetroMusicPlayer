@@ -22,7 +22,7 @@ import code.name.monkey.retromusic.extensions.openUrl
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.nio.charset.StandardCharsets
-import java.util.*
+import java.util.Locale
 
 class WhatsNewFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentWhatsNewBinding? = null
@@ -41,7 +41,7 @@ class WhatsNewFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         try {
             val buf = StringBuilder()
-            val stream= requireContext().assets.open("retro-changelog.html")
+            val stream = requireContext().assets.open("retro-changelog.html")
             stream.reader(StandardCharsets.UTF_8).buffered().use { br ->
                 var str: String?
                 while (br.readLine().also { str = it } != null) {

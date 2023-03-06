@@ -17,7 +17,11 @@ import android.content.Context
 import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.webkit.MimeTypeMap
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
@@ -70,7 +74,8 @@ import java.io.File
 import java.io.FileFilter
 import java.io.IOException
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.Collections
+import java.util.LinkedList
 
 class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     IMainActivityFragmentCallbacks, SelectionCallback, ICallbacks,
@@ -113,7 +118,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 override fun handleOnBackPressed() {
                     if (!handleBackPress()) {
                         remove()
-                        requireActivity().onBackPressed()
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
                     }
                 }
             })
@@ -187,10 +192,12 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         }
                         return@setOnMenuItemClickListener true
                     }
+
                     R.id.action_add_to_blacklist -> {
                         BlacklistStore.getInstance(requireContext()).addPath(file)
                         return@setOnMenuItemClickListener true
                     }
+
                     R.id.action_set_as_start_directory -> {
                         startDirectory = file
                         showToast(
@@ -198,6 +205,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         )
                         return@setOnMenuItemClickListener true
                     }
+
                     R.id.action_scan -> {
                         lifecycleScope.launch {
                             listPaths(file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
@@ -229,6 +237,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         }
                         return@setOnMenuItemClickListener true
                     }
+
                     R.id.action_scan -> {
                         lifecycleScope.launch {
                             listPaths(file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
@@ -353,6 +362,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 )
                 return true
             }
+
             R.id.action_scan -> {
                 val crumb = activeCrumb
                 if (crumb != null) {
@@ -362,6 +372,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 }
                 return true
             }
+
             R.id.action_settings -> {
                 findNavController().navigate(
                     R.id.settings_fragment,

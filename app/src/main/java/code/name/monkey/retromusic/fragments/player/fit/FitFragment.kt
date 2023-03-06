@@ -100,7 +100,7 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
     private fun setUpPlayerToolbar() {
         binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { requireActivity().onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
             setOnMenuItemClickListener(this@FitFragment)
             ToolbarContentTintHelper.colorizeToolbar(
                 this,

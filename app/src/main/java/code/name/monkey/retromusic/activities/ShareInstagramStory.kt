@@ -30,12 +30,14 @@ import code.name.monkey.retromusic.databinding.ActivityShareInstagramBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.setLightStatusBar
 import code.name.monkey.retromusic.extensions.setStatusBarColor
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
+import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.Share
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 
 /**
  * Created by hemanths on 2020-02-02.
@@ -51,7 +53,7 @@ class ShareInstagramStory : AbsThemeActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -68,7 +70,7 @@ class ShareInstagramStory : AbsThemeActivity() {
 
         val song = intent.extras?.getParcelable<Song>(EXTRA_SONG)
         song?.let { songFinal ->
-            GlideApp.with(this)
+            Glide.with(this)
                 .asBitmapPalette()
                 .songCoverOptions(songFinal)
                 .load(RetroGlideExtension.getSongModel(songFinal))

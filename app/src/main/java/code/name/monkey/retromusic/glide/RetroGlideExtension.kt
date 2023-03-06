@@ -23,14 +23,11 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestBuilder
-import com.bumptech.glide.annotation.GlideExtension
-import com.bumptech.glide.annotation.GlideOption
-import com.bumptech.glide.annotation.GlideType
+import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.Key
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.BaseRequestOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
@@ -40,7 +37,6 @@ import com.bumptech.glide.signature.MediaStoreSignature
 import java.io.File
 
 
-@GlideExtension
 object RetroGlideExtension {
 
     private const val DEFAULT_ARTIST_IMAGE =
@@ -54,10 +50,8 @@ object RetroGlideExtension {
 
     private const val DEFAULT_ANIMATION = android.R.anim.fade_in
 
-    @JvmStatic
-    @GlideType(BitmapPaletteWrapper::class)
-    fun asBitmapPalette(requestBuilder: RequestBuilder<BitmapPaletteWrapper>): RequestBuilder<BitmapPaletteWrapper> {
-        return requestBuilder
+    fun RequestManager.asBitmapPalette(): RequestBuilder<BitmapPaletteWrapper> {
+        return this.`as`(BitmapPaletteWrapper::class.java)
     }
 
     private fun getSongModel(song: Song, ignoreMediaStore: Boolean): Any {
@@ -100,14 +94,10 @@ object RetroGlideExtension {
         }
     }
 
-    @JvmStatic
-    @GlideOption
-    fun artistImageOptions(
-        baseRequestOptions: BaseRequestOptions<*>,
+    fun <T> RequestBuilder<T>.artistImageOptions(
         artist: Artist
-    ): BaseRequestOptions<*> {
-        return baseRequestOptions
-            .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY_ARTIST)
+    ): RequestBuilder<T> {
+        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY_ARTIST)
             .priority(Priority.LOW)
             .error(getDrawable(DEFAULT_ARTIST_IMAGE))
             .placeholder(getDrawable(DEFAULT_ARTIST_IMAGE))
@@ -115,70 +105,52 @@ object RetroGlideExtension {
             .signature(createSignature(artist))
     }
 
-    @JvmStatic
-    @GlideOption
-    fun songCoverOptions(
-        baseRequestOptions: BaseRequestOptions<*>,
+    fun <T> RequestBuilder<T>.songCoverOptions(
         song: Song
-    ): BaseRequestOptions<*> {
-        return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
+    ): RequestBuilder<T> {
+        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
             .error(getDrawable(DEFAULT_SONG_IMAGE))
             .placeholder(getDrawable(DEFAULT_SONG_IMAGE))
             .signature(createSignature(song))
     }
 
-    @JvmStatic
-    @GlideOption
-    fun simpleSongCoverOptions(
-        baseRequestOptions: BaseRequestOptions<*>,
+    fun <T> RequestBuilder<T>.simpleSongCoverOptions(
         song: Song
-    ): BaseRequestOptions<*> {
-        return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
+    ): RequestBuilder<T> {
+        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
             .signature(createSignature(song))
     }
 
-    @JvmStatic
-    @GlideOption
-    fun albumCoverOptions(
-        baseRequestOptions: BaseRequestOptions<*>,
+    fun <T> RequestBuilder<T>.albumCoverOptions(
         song: Song
-    ): BaseRequestOptions<*> {
-        return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
+    ): RequestBuilder<T> {
+        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
             .error(ContextCompat.getDrawable(getContext(), DEFAULT_ALBUM_IMAGE))
             .placeholder(ContextCompat.getDrawable(getContext(), DEFAULT_ALBUM_IMAGE))
             .signature(createSignature(song))
     }
 
-    @JvmStatic
-    @GlideOption
-    fun userProfileOptions(
-        baseRequestOptions: BaseRequestOptions<*>,
+    fun <T> RequestBuilder<T>.userProfileOptions(
         file: File,
         context: Context
-    ): BaseRequestOptions<*> {
-        return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
+    ): RequestBuilder<T> {
+        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
             .error(getErrorUserProfile(context))
             .signature(createSignature(file))
     }
 
-    @JvmStatic
-    @GlideOption
-    fun profileBannerOptions(
-        baseRequestOptions: BaseRequestOptions<*>,
+    fun <T> RequestBuilder<T>.profileBannerOptions(
         file: File
-    ): BaseRequestOptions<*> {
-        return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
+    ): RequestBuilder<T> {
+        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
             .placeholder(DEFAULT_ERROR_IMAGE_BANNER)
             .error(DEFAULT_ERROR_IMAGE_BANNER)
             .signature(createSignature(file))
     }
 
-    @JvmStatic
-    @GlideOption
-    fun playlistOptions(
-        baseRequestOptions: BaseRequestOptions<*>
-    ): BaseRequestOptions<*> {
-        return baseRequestOptions.diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
+    fun <T> RequestBuilder<T>.playlistOptions(
+    ): RequestBuilder<T> {
+        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
             .error(getDrawable(DEFAULT_ALBUM_IMAGE))
     }
 
@@ -223,7 +195,7 @@ object RetroGlideExtension {
 }
 
 // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
-fun GlideRequest<Drawable>.crossfadeListener(): GlideRequest<Drawable> {
+fun RequestBuilder<Drawable>.crossfadeListener(): RequestBuilder<Drawable> {
     return listener(object : RequestListener<Drawable> {
         override fun onLoadFailed(
             e: GlideException?,

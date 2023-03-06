@@ -27,10 +27,10 @@ import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.model.Song
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class AddToPlaylistDialog : DialogFragment() {
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
+    private val libraryViewModel by activityViewModel<LibraryViewModel>()
 
     companion object {
         fun create(playlistEntities: List<PlaylistEntity>, song: Song): AddToPlaylistDialog {
@@ -58,8 +58,8 @@ class AddToPlaylistDialog : DialogFragment() {
             playlistNames.add(entity.playlistName)
         }
         return materialDialog(R.string.add_playlist_title)
-            .setItems(playlistNames.toTypedArray()) { dialog, which->
-                 if (which == 0) {
+            .setItems(playlistNames.toTypedArray()) { dialog, which ->
+                if (which == 0) {
                     showCreateDialog(songs)
                 } else {
                     libraryViewModel.addToPlaylist(requireContext(), playlistNames[which], songs)

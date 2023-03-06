@@ -33,10 +33,44 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.commit
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
+import code.name.monkey.retromusic.ALBUM_COVER_STYLE
+import code.name.monkey.retromusic.ALBUM_COVER_TRANSFORM
+import code.name.monkey.retromusic.CAROUSEL_EFFECT
+import code.name.monkey.retromusic.CIRCLE_PLAY_BUTTON
+import code.name.monkey.retromusic.EXTRA_SONG_INFO
+import code.name.monkey.retromusic.KEEP_SCREEN_ON
+import code.name.monkey.retromusic.LIBRARY_CATEGORIES
+import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.SCREEN_ON_LYRICS
+import code.name.monkey.retromusic.SWIPE_ANYWHERE_NOW_PLAYING
+import code.name.monkey.retromusic.SWIPE_DOWN_DISMISS
+import code.name.monkey.retromusic.TAB_TEXT_MODE
+import code.name.monkey.retromusic.TOGGLE_ADD_CONTROLS
+import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
+import code.name.monkey.retromusic.TOGGLE_VOLUME
 import code.name.monkey.retromusic.activities.PermissionActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.currentFragment
+import code.name.monkey.retromusic.extensions.darkAccentColor
+import code.name.monkey.retromusic.extensions.dip
+import code.name.monkey.retromusic.extensions.getBottomInsets
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.isColorLight
+import code.name.monkey.retromusic.extensions.isLandscape
+import code.name.monkey.retromusic.extensions.keepScreenOn
+import code.name.monkey.retromusic.extensions.maybeSetScreenOn
+import code.name.monkey.retromusic.extensions.peekHeightAnimate
+import code.name.monkey.retromusic.extensions.setLightNavigationBar
+import code.name.monkey.retromusic.extensions.setLightNavigationBarAuto
+import code.name.monkey.retromusic.extensions.setLightStatusBar
+import code.name.monkey.retromusic.extensions.setLightStatusBarAuto
+import code.name.monkey.retromusic.extensions.setNavigationBarColorPreOreo
+import code.name.monkey.retromusic.extensions.setTaskDescriptionColor
+import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
@@ -68,7 +102,13 @@ import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.logD
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_DRAGGING
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_SETTLING
+import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -120,21 +160,25 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                             keepScreenOn(true)
                         }
                     }
+
                     STATE_COLLAPSED -> {
                         onPanelCollapsed()
                         if ((PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics) || !PreferenceUtil.isScreenOnEnabled) {
                             keepScreenOn(false)
                         }
                     }
+
                     STATE_SETTLING, STATE_DRAGGING -> {
                         if (fromNotification) {
                             binding.navigationView.bringToFront()
                             fromNotification = false
                         }
                     }
+
                     STATE_HIDDEN -> {
                         MusicPlayerRemote.clearQueue()
                     }
+
                     else -> {
                         logD("Do a flip")
                     }
@@ -198,9 +242,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             SWIPE_DOWN_DISMISS -> {
                 bottomSheetBehavior.isHideable = PreferenceUtil.swipeDownToDismiss
             }
+
             TOGGLE_ADD_CONTROLS -> {
                 miniPlayerFragment?.setUpButtons()
             }
+
             NOW_PLAYING_SCREEN_ID -> {
                 chooseFragmentForTheme()
                 binding.slidingPanel.updateLayoutParams<ViewGroup.LayoutParams> {
@@ -212,33 +258,41 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                     onServiceConnected()
                 }
             }
+
             ALBUM_COVER_TRANSFORM, CAROUSEL_EFFECT,
             ALBUM_COVER_STYLE, TOGGLE_VOLUME, EXTRA_SONG_INFO, CIRCLE_PLAY_BUTTON,
             -> {
                 chooseFragmentForTheme()
                 onServiceConnected()
             }
+
             SWIPE_ANYWHERE_NOW_PLAYING -> {
                 playerFragment.addSwipeDetector()
             }
+
             ADAPTIVE_COLOR_APP -> {
                 if (PreferenceUtil.nowPlayingScreen in listOf(Normal, Material, Flat)) {
                     chooseFragmentForTheme()
                     onServiceConnected()
                 }
             }
+
             LIBRARY_CATEGORIES -> {
                 updateTabs()
             }
+
             TAB_TEXT_MODE -> {
                 navigationView.labelVisibilityMode = PreferenceUtil.tabTitleMode
             }
+
             TOGGLE_FULL_SCREEN -> {
                 recreate()
             }
+
             SCREEN_ON_LYRICS -> {
                 keepScreenOn(bottomSheetBehavior.state == STATE_EXPANDED && PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics || PreferenceUtil.isScreenOnEnabled)
             }
+
             KEEP_SCREEN_ON -> {
                 maybeSetScreenOn()
             }
@@ -446,14 +500,14 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         hideBottomSheet(
             hide = hideBottomSheet,
             animate = animate,
-            isBottomNavVisible = visible  && navigationView is BottomNavigationView
+            isBottomNavVisible = visible && navigationView is BottomNavigationView
         )
     }
 
     fun hideBottomSheet(
         hide: Boolean,
         animate: Boolean = false,
-        isBottomNavVisible: Boolean = navigationView.isVisible  && navigationView is BottomNavigationView,
+        isBottomNavVisible: Boolean = navigationView.isVisible && navigationView is BottomNavigationView,
     ) {
         val heightOfBar = windowInsets.getBottomInsets() + dip(R.dimen.mini_player_height)
         val heightOfBarWithTabs = heightOfBar + dip(R.dimen.bottom_nav_height)
@@ -475,8 +529,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                     } else {
                         bottomSheetBehavior.peekHeight = heightOfBarWithTabs
                     }
-                    libraryViewModel.setFabMargin(this,
-                        dip(R.dimen.bottom_nav_mini_player_height))
+                    libraryViewModel.setFabMargin(
+                        this,
+                        dip(R.dimen.bottom_nav_mini_player_height)
+                    )
                 } else {
                     logD("Details")
                     if (animate) {

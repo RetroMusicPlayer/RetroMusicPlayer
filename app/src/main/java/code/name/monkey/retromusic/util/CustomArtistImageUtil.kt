@@ -24,14 +24,14 @@ import androidx.core.content.edit
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.model.Artist
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
-import java.util.*
+import java.util.Locale
 
 
 class CustomArtistImageUtil private constructor(context: Context) {
@@ -45,7 +45,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
         val context = App.getContext()
         withContext(IO) {
             runCatching {
-                GlideApp.with(context)
+                Glide.with(context)
                     .asBitmap()
                     .load(uri)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)

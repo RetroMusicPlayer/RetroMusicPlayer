@@ -26,16 +26,24 @@ import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.Card
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.Classic
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.Fit
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.Full
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.Gradient
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.Peek
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.Tiny
 import code.name.monkey.retromusic.fragments.base.goToLyrics
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
+import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
@@ -164,7 +172,9 @@ class AlbumCoverPagerAdapter(
         }
 
         private fun loadAlbumCover(albumCover: ImageView) {
-            GlideApp.with(this).asBitmapPalette().songCoverOptions(song)
+            Glide.with(this)
+                .asBitmapPalette()
+                .songCoverOptions(song)
                 //.checkIgnoreMediaStore()
                 .load(RetroGlideExtension.getSongModel(song))
                 .dontAnimate()
