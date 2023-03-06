@@ -23,6 +23,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.ServiceInfo
 import android.database.ContentObserver
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.os.*
@@ -51,7 +52,6 @@ import code.name.monkey.retromusic.extensions.toMediaSessionQueue
 import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension.getDefaultTransition
 import code.name.monkey.retromusic.glide.RetroGlideExtension.getSongModel
 import code.name.monkey.retromusic.helper.ShuffleHelper.makeShuffleList
 import code.name.monkey.retromusic.model.Song
@@ -1027,7 +1027,6 @@ class MusicService : MediaBrowserServiceCompat(),
                 .asBitmap()
                 .songCoverOptions(song)
                 .load(getSongModel(song))
-                .transition(getDefaultTransition())
 
             if (isBlurredAlbumArt) {
                 request.transform(BlurTransformation.Builder(this@MusicService).build())
@@ -1036,6 +1035,13 @@ class MusicService : MediaBrowserServiceCompat(),
                 CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
+                    metaData.putBitmap(
+                        MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
+                        BitmapFactory.decodeResource(
+                            resources,
+                            R.drawable.default_audio_art
+                        )
+                    )
                     mediaSession?.setMetadata(metaData.build())
                     onCompletion()
                 }

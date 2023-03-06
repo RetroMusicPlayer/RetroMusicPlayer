@@ -20,7 +20,7 @@ import android.widget.FrameLayout
 class HeightFitSquareLayout  @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = -1
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr){
     private var forceSquare = true
 

@@ -263,7 +263,7 @@ object PreferenceUtil {
 
     val isAlbumArtOnLockScreen
         get() = sharedPreferences.getBoolean(
-            ALBUM_ART_ON_LOCK_SCREEN, false
+            ALBUM_ART_ON_LOCK_SCREEN, true
         )
 
     val isAudioDucking
