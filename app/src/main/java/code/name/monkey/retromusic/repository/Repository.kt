@@ -16,7 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.fragments.search.Filter
@@ -305,7 +305,7 @@ class RealRepository(
         roomRepository.playCountSongs()
 
     override fun observableHistorySongs(): LiveData<List<Song>> =
-        Transformations.map(roomRepository.observableHistorySongs()) {
+        roomRepository.observableHistorySongs().map {
             it.fromHistoryToSongs()
         }
 
