@@ -352,8 +352,8 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
             context,
             object : GestureDetector.SimpleOnGestureListener() {
                 override fun onScroll(
-                    e1: MotionEvent?,
-                    e2: MotionEvent?,
+                    e1: MotionEvent,
+                    e2: MotionEvent,
                     distanceX: Float,
                     distanceY: Float,
                 ): Boolean {
@@ -371,7 +371,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
             })
 
         @SuppressLint("ClickableViewAccessibility")
-        override fun onTouch(v: View, event: MotionEvent?): Boolean {
+        override fun onTouch(v: View, event: MotionEvent): Boolean {
             viewPager?.dispatchTouchEvent(event)
             return flingPlayBackController.onTouchEvent(event)
         }

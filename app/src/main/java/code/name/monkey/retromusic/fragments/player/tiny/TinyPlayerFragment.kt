@@ -213,8 +213,8 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
             gestureDetector = GestureDetector(context, object :
                 GestureDetector.SimpleOnGestureListener() {
 
-                override fun onLongPress(e: MotionEvent?) {
-                    if (abs(e!!.y - initialY) <= 2) {
+                override fun onLongPress(e: MotionEvent) {
+                    if (abs(e.y - initialY) <= 2) {
                         vibrate()
                         isDragEnabled = true
                         binding.progressBar.parent.requestDisallowInterceptTouchEvent(true)

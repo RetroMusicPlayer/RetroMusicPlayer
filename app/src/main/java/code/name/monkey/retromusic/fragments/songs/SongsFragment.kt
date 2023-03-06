@@ -114,10 +114,10 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         if (RetroUtil.isLandscape) {
             gridSizeItem.setTitle(R.string.action_grid_size_land)
         }
-        setUpGridSizeMenu(gridSizeItem.subMenu)
+        setUpGridSizeMenu(gridSizeItem.subMenu!!)
         val layoutItem = menu.findItem(R.id.action_layout_type)
-        setupLayoutMenu(layoutItem.subMenu)
-        setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
+        setupLayoutMenu(layoutItem.subMenu!!)
+        setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu!!)
         //Setting up cast button
         requireContext().setUpMediaRouteButton(menu)
     }
