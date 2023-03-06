@@ -19,7 +19,9 @@ import android.app.Activity
 import android.content.*
 import android.database.Cursor
 import android.net.Uri
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.provider.DocumentsContract
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -115,13 +117,10 @@ object MusicPlayerRemote : KoinComponent {
         val realActivity = (context as Activity).parent ?: context
         val contextWrapper = ContextWrapper(realActivity)
         val intent = Intent(contextWrapper, MusicService::class.java)
-        try {
-            contextWrapper.startService(intent)
-        } catch (ignored: IllegalStateException) {
-            runCatching {
-                ContextCompat.startForegroundService(context, intent)
-            }
+        Handler(Looper.getMainLooper()).post {
+            ContextCompat.startForegroundService(context, intent)
         }
+
         val binder = ServiceBinder(callback)
 
         if (contextWrapper.bindService(
@@ -416,7 +415,7 @@ object MusicPlayerRemote : KoinComponent {
                     }
                 }
             }
-            if (songs == null || songs.isEmpty()) {
+            if (songs.isNullOrEmpty()) {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
                     val path = uri.path?.split(":".toRegex(), 2)?.get(1)
@@ -436,7 +435,7 @@ object MusicPlayerRemote : KoinComponent {
                     songs = songRepository.songsByFilePath(songFile.absolutePath, true)
                 }
             }
-            if (songs != null && songs.isNotEmpty()) {
+            if (!songs.isNullOrEmpty()) {
                 openQueue(songs, 0, true)
             } else {
                 try {
