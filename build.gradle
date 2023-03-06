@@ -21,7 +21,7 @@ buildscript {
     }
 }
 plugins {
-    id "com.github.ben-manes.versions" version "0.42.0" apply false
+    id "com.github.ben-manes.versions" version "0.42.0"
     id 'com.google.devtools.ksp' version '1.8.10-1.0.9' apply false
 }
 
