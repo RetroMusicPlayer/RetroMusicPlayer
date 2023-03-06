@@ -26,6 +26,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.animation.PathInterpolator
 import android.widget.FrameLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.core.animation.doOnEnd
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
@@ -217,6 +218,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         bottomSheetBehavior = from(binding.slidingPanel)
         bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
         bottomSheetBehavior.isHideable = PreferenceUtil.swipeDownToDismiss
+        bottomSheetBehavior.significantVelocityThreshold = 300
         setMiniPlayerAlphaProgress(0F)
     }
 
@@ -229,6 +231,14 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         if (bottomSheetBehavior.state == STATE_EXPANDED) {
             setMiniPlayerAlphaProgress(1f)
         }
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (!handleBackPress()) {
+                    remove()
+                    onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        })
     }
 
     override fun onDestroy() {
@@ -390,10 +400,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         if (currentFragment(R.id.fragment_container) !is PlayingQueueFragment) {
             hideBottomSheet(MusicPlayerRemote.playingQueue.isEmpty())
         }
-    }
-
-    override fun onBackPressed() {
-        if (!handleBackPress()) super.onBackPressed()
     }
 
     private fun handleBackPress(): Boolean {
