@@ -26,6 +26,7 @@ import android.webkit.MimeTypeMap
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.BundleCompat
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -64,6 +65,7 @@ import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import code.name.monkey.retromusic.views.BreadCrumbLayout.Crumb
+import code.name.monkey.retromusic.views.BreadCrumbLayout.SavedStateWrapper
 import code.name.monkey.retromusic.views.BreadCrumbLayout.SelectionCallback
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
@@ -142,7 +144,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 true
             )
         } else {
-            binding.breadCrumbs.restoreFromStateWrapper(savedInstanceState.getParcelable(CRUMBS))
+            binding.breadCrumbs.restoreFromStateWrapper(BundleCompat.getParcelable(savedInstanceState, CRUMBS, SavedStateWrapper::class.java))
             LoaderManager.getInstance(this).initLoader(LOADER_ID, null, this)
         }
     }

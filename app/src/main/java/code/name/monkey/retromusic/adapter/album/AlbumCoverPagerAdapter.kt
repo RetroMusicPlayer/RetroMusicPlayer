@@ -19,6 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.BundleCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -103,7 +104,7 @@ class AlbumCoverPagerAdapter(
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             if (arguments != null) {
-                song = requireArguments().getParcelable(SONG_ARG)!!
+                song = BundleCompat.getParcelable(requireArguments(), SONG_ARG, Song::class.java)!!
             }
         }
 

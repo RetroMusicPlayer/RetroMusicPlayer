@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.PackageManagerCompat
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.FragmentActivity

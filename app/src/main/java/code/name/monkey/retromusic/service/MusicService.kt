@@ -40,6 +40,8 @@ import android.widget.Toast
 import androidx.core.app.ServiceCompat
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
+import androidx.core.os.BundleCompat
+import androidx.core.os.ParcelCompat
 import androidx.media.MediaBrowserServiceCompat
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -48,6 +50,7 @@ import code.name.monkey.retromusic.activities.LockScreenActivity
 import code.name.monkey.retromusic.appwidgets.*
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.auto.AutoMusicProvider
+import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.extensions.toMediaSessionQueue
 import code.name.monkey.retromusic.extensions.uri
@@ -1225,7 +1228,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun playFromPlaylist(intent: Intent) {
-        val playlist: AbsSmartPlaylist? = intent.getParcelableExtra(INTENT_EXTRA_PLAYLIST)
+        val playlist: AbsSmartPlaylist? = intent.extras?.let { BundleCompat.getParcelable(it, INTENT_EXTRA_PLAYLIST, AbsSmartPlaylist::class.java) }
         val shuffleMode = intent.getIntExtra(INTENT_EXTRA_SHUFFLE_MODE, getShuffleMode())
         if (playlist != null) {
             val playlistSongs = playlist.songs()

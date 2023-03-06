@@ -21,7 +21,9 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.provider.MediaStore.Images.Media
 import android.view.MenuItem
+import androidx.core.content.ContentResolverCompat
 import androidx.core.net.toUri
+import androidx.core.os.BundleCompat
 import androidx.core.view.drawToBitmap
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -68,7 +70,7 @@ class ShareInstagramStory : AbsThemeActivity() {
         binding.toolbar.setBackgroundColor(Color.TRANSPARENT)
         setSupportActionBar(binding.toolbar)
 
-        val song = intent.extras?.getParcelable<Song>(EXTRA_SONG)
+        val song = intent.extras?.let { BundleCompat.getParcelable(it, EXTRA_SONG, Song::class.java) }
         song?.let { songFinal ->
             Glide.with(this)
                 .asBitmapPalette()
