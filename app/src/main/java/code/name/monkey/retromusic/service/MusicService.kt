@@ -52,7 +52,6 @@ import code.name.monkey.retromusic.extensions.toMediaSessionQueue
 import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension.getDefaultTransition
 import code.name.monkey.retromusic.glide.RetroGlideExtension.getSongModel
 import code.name.monkey.retromusic.helper.ShuffleHelper.makeShuffleList
 import code.name.monkey.retromusic.model.Song
@@ -70,6 +69,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.MusicUtil.toggleFavorite
 import code.name.monkey.retromusic.util.PackageValidator
 import code.name.monkey.retromusic.util.PreferenceUtil.crossFadeDuration
+import code.name.monkey.retromusic.util.PreferenceUtil.isAlbumArtOnLockScreen
 import code.name.monkey.retromusic.util.PreferenceUtil.isBluetoothSpeaker
 import code.name.monkey.retromusic.util.PreferenceUtil.isBlurredAlbumArt
 import code.name.monkey.retromusic.util.PreferenceUtil.isClassicNotification
@@ -1021,13 +1021,18 @@ class MusicService : MediaBrowserServiceCompat(),
             .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
             .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, playingQueue.size.toLong())
 
-            // there only about notification's album art, so remove "isAlbumArtOnLockScreen" and "isBlurredAlbumArt"
-            GlideApp.with(this)
+        if (isAlbumArtOnLockScreen) {
+            // val screenSize: Point = RetroUtil.getScreenSize(this)
+            val request = GlideApp.with(this)
                 .asBitmap()
                 .songCoverOptions(song)
                 .load(getSongModel(song))
-                .transition(getDefaultTransition())
-                .into(object : CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+
+            if (isBlurredAlbumArt) {
+                request.transform(BlurTransformation.Builder(this@MusicService).build())
+            }
+            request.into(object :
+                CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
                     metaData.putBitmap(
@@ -1055,6 +1060,10 @@ class MusicService : MediaBrowserServiceCompat(),
 
                 override fun onLoadCleared(placeholder: Drawable?) {}
             })
+        } else {
+            mediaSession?.setMetadata(metaData.build())
+            onCompletion()
+        }
     }
 
     private fun handleChangeInternal(what: String) {
