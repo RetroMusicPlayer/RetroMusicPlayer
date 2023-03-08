@@ -76,7 +76,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         viewModel.getPlaylist().observe(viewLifecycleOwner) { playlistWithSongs ->
             playlist = playlistWithSongs
             Glide.with(this)
-                .load(PlaylistPreview(playlist))
+                .load(PlaylistPreview(playlistWithSongs))
                 .playlistOptions()
                 .into(binding.image)
             binding.title.text = playlist.playlistEntity.playlistName

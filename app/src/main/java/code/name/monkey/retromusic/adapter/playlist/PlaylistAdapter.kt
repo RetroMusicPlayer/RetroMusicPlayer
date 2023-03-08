@@ -107,9 +107,7 @@ class PlaylistAdapter(
             holder.image?.setImageDrawable(getIconRes())
         } else {
             Glide.with(activity)
-                .load(
-                    PlaylistPreview(playlist)
-                )
+                .load(PlaylistPreview(playlist))
                 .playlistOptions()
                 .into(holder.image!!)
         }

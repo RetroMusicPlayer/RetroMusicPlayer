@@ -148,9 +148,9 @@ object RetroGlideExtension {
             .signature(createSignature(file))
     }
 
-    fun <T> RequestBuilder<T>.playlistOptions(
-    ): RequestBuilder<T> {
-        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
+    fun <T> RequestBuilder<T>.playlistOptions(): RequestBuilder<T> {
+        return diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+            .placeholder(getDrawable(DEFAULT_ALBUM_IMAGE))
             .error(getDrawable(DEFAULT_ALBUM_IMAGE))
     }
 
