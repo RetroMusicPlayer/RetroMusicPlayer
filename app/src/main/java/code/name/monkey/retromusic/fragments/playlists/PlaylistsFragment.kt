@@ -21,6 +21,7 @@ import androidx.core.view.MenuCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.EXTRA_PLAYLIST
+import code.name.monkey.retromusic.EXTRA_PLAYLIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
 import code.name.monkey.retromusic.db.PlaylistWithSongs
@@ -244,7 +245,7 @@ class PlaylistsFragment :
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         findNavController().navigate(
             R.id.playlistDetailsFragment,
-            bundleOf(EXTRA_PLAYLIST to playlistWithSongs)
+            bundleOf(EXTRA_PLAYLIST_ID to playlistWithSongs.playlistEntity.playListId)
         )
     }
 }

@@ -99,6 +99,7 @@ interface Repository {
     suspend fun isSongFavorite(songId: Long): Boolean
     fun getSongByGenre(genreId: Long): Song
     fun checkPlaylistExists(playListId: Long): LiveData<Boolean>
+    fun getPlaylist(playlistId: Long): LiveData<PlaylistWithSongs>
 }
 
 class RealRepository(
@@ -222,6 +223,8 @@ class RealRepository(
 
     override suspend fun fetchPlaylistWithSongs(): List<PlaylistWithSongs> =
         roomRepository.playlistWithSongs()
+
+    override fun getPlaylist(playlistId: Long): LiveData<PlaylistWithSongs> = roomRepository.getPlaylist(playlistId)
 
     override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song> =
         playlistWithSongs.songs.map {
