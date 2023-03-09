@@ -754,7 +754,7 @@ class MusicService : MediaBrowserServiceCompat(),
         startPosition: Int,
         startPlaying: Boolean,
     ) {
-        if (playingQueue != null && playingQueue.isNotEmpty()
+        if (!playingQueue.isNullOrEmpty()
             && startPosition >= 0 && startPosition < playingQueue.size
         ) {
             // it is important to copy the playing queue here first as we might add/remove songs later
@@ -1385,7 +1385,7 @@ class MusicService : MediaBrowserServiceCompat(),
         const val INTENT_EXTRA_PLAYLIST = RETRO_MUSIC_PACKAGE_NAME + "intentextra.playlist"
         const val INTENT_EXTRA_SHUFFLE_MODE =
             "$RETRO_MUSIC_PACKAGE_NAME.intentextra.shufflemode"
-        const val APP_WIDGET_UPDATE = "$RETRO_MUSIC_PACKAGE_NAME.appreciate"
+        const val APP_WIDGET_UPDATE = "$RETRO_MUSIC_PACKAGE_NAME.appwidgetupdate"
         const val EXTRA_APP_WIDGET_NAME = RETRO_MUSIC_PACKAGE_NAME + "app_widget_name"
 
         // Do not change these three strings as it will break support with other apps (e.g. last.fm
