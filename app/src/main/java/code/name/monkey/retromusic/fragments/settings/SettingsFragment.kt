@@ -41,6 +41,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
     private fun setupToolbar() {
         val navController: NavController = findNavController(R.id.contentFrame)
         binding.appBarLayout.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        binding.appBarLayout.toolbar.isTitleCentered = false
         navController.addOnDestinationChangedListener { _, _, _ ->
             binding.appBarLayout.title =
                 navController.currentDestination?.let { getStringFromDestination(it) }.toString()

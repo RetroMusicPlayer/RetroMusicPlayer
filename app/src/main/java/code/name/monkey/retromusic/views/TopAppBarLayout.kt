@@ -11,6 +11,7 @@ import code.name.monkey.retromusic.databinding.SimpleAppbarLayoutBinding
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.shape.MaterialShapeDrawable
 import dev.chrisbanes.insetter.applyInsetter
 
@@ -52,7 +53,7 @@ class TopAppBarLayout @JvmOverloads constructor(
         }
     }
 
-    val toolbar: Toolbar
+    val toolbar: MaterialToolbar
         get() = if (mode == AppBarMode.COLLAPSING) {
             collapsingAppbarBinding?.toolbar!!
         } else {
@@ -63,13 +64,13 @@ class TopAppBarLayout @JvmOverloads constructor(
         get() = if (mode == AppBarMode.COLLAPSING) {
             collapsingAppbarBinding?.collapsingToolbarLayout?.title.toString()
         } else {
-            simpleAppbarBinding?.appNameText?.text.toString()
+            simpleAppbarBinding?.toolbar?.title.toString()
         }
         set(value) {
             if (mode == AppBarMode.COLLAPSING) {
                 collapsingAppbarBinding?.collapsingToolbarLayout?.title = value
             } else {
-                simpleAppbarBinding?.appNameText?.text = value
+                simpleAppbarBinding?.toolbar?.title = value
             }
         }
 

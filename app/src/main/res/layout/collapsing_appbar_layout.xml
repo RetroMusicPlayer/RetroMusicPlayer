@@ -22,9 +22,4 @@
         app:navigationIcon="@drawable/ic_search"
         app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
         tools:title="@string/songs" />
-
-    <FrameLayout
-        android:id="@+id/toolbar_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </com.google.android.material.appbar.CollapsingToolbarLayout>
