@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">درباره %s</string>
+    <string name="about_album_label">درباره %s...</string>
     <string name="about_settings_summary">تیم، پیوندهای اجتماعی</string>
     <string name="accent_color">رنگ تشدید کننده</string>
     <string name="accent_color_desc">رنگ تشدید کننده به صورت پیش فرض بنفش انتخاب شده</string>
