@@ -1228,7 +1228,13 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun playFromPlaylist(intent: Intent) {
-        val playlist: AbsSmartPlaylist? = intent.extras?.let { BundleCompat.getParcelable(it, INTENT_EXTRA_PLAYLIST, AbsSmartPlaylist::class.java) }
+        val playlist: AbsSmartPlaylist? = intent.extras?.let {
+            BundleCompat.getParcelable(
+                it,
+                INTENT_EXTRA_PLAYLIST,
+                AbsSmartPlaylist::class.java
+            )
+        }
         val shuffleMode = intent.getIntExtra(INTENT_EXTRA_SHUFFLE_MODE, getShuffleMode())
         if (playlist != null) {
             val playlistSongs = playlist.songs()

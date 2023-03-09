@@ -156,7 +156,9 @@ class MediaButtonIntentReceiver : MediaButtonReceiver() {
         private fun startService(context: Context, command: String?) {
             val intent = Intent(context, MusicService::class.java)
             intent.action = command
-            Handler(Looper.getMainLooper()).post {
+            try {
+                context.startService(intent)
+            } catch (e: Exception) {
                 ContextCompat.startForegroundService(context, intent)
             }
         }

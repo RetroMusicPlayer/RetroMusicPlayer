@@ -19,9 +19,7 @@ import android.app.Activity
 import android.content.*
 import android.database.Cursor
 import android.net.Uri
-import android.os.Handler
 import android.os.IBinder
-import android.os.Looper
 import android.provider.DocumentsContract
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -117,7 +115,12 @@ object MusicPlayerRemote : KoinComponent {
         val realActivity = (context as Activity).parent ?: context
         val contextWrapper = ContextWrapper(realActivity)
         val intent = Intent(contextWrapper, MusicService::class.java)
-        Handler(Looper.getMainLooper()).post {
+
+        // https://issuetracker.google.com/issues/76112072#comment184
+        // Workaround for ForegroundServiceDidNotStartInTimeException
+        try {
+            context.startService(intent)
+        } catch (e: Exception) {
             ContextCompat.startForegroundService(context, intent)
         }
 
