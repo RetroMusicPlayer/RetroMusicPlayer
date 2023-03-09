@@ -39,14 +39,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
     }
 
     private fun setupToolbar() {
-        applyToolbar(binding.toolbar)
-        binding.toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
         val navController: NavController = findNavController(R.id.contentFrame)
+        binding.appBarLayout.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         navController.addOnDestinationChangedListener { _, _, _ ->
-            binding.collapsingToolbarLayout.title =
-                navController.currentDestination?.let { getStringFromDestination(it) }
+            binding.appBarLayout.title =
+                navController.currentDestination?.let { getStringFromDestination(it) }.toString()
         }
     }
 

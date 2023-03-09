@@ -59,7 +59,7 @@ class TopAppBarLayout @JvmOverloads constructor(
             simpleAppbarBinding?.toolbar!!
         }
 
-    var title: String
+    var title: CharSequence
         get() = if (mode == AppBarMode.COLLAPSING) {
             collapsingAppbarBinding?.collapsingToolbarLayout?.title.toString()
         } else {

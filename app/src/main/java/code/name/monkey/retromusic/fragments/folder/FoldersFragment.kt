@@ -147,7 +147,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable(CRUMBS, binding.breadCrumbs.stateWrapper)
+        if (_binding != null) {
+            outState.putParcelable(CRUMBS, binding.breadCrumbs.stateWrapper)
+        }
     }
 
     private fun setUpTitle() {
