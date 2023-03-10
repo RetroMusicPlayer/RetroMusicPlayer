@@ -30,13 +30,11 @@ import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
-import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityPermissionBinding
 import code.name.monkey.retromusic.extensions.*
 
-class PermissionActivity : AbsBaseActivity() {
+class PermissionActivity : AbsMusicServiceActivity() {
     private lateinit var binding: ActivityPermissionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
