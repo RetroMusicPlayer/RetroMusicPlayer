@@ -2,12 +2,12 @@
 
 buildscript {
     ext {
-        lifecycle_version = '2.6.0-rc01'
+        lifecycle_version = '2.6.0'
         navigation_version = '2.5.3'
         mdc_version = '1.9.0-alpha02'
         preference_version = '1.2.0'
         appcompat_version = '1.6.1'
-        core_version = '1.10.0-beta01'
+        core_version = '1.10.0-rc01'
     }
 
     repositories {
