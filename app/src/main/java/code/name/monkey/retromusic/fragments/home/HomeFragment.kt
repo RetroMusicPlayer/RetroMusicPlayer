@@ -101,9 +101,6 @@ class HomeFragment :
         colorButtons()
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
-        binding.appBarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(requireContext())
-        binding.toolbar.drawNextToNavbar()
         view.doOnLayout {
             adjustPlaylistButtons()
         }
@@ -178,7 +175,7 @@ class HomeFragment :
             findNavController().navigate(R.id.action_search, null, navOptions)
         }
         val hexColor = String.format("#%06X", 0xFFFFFF and accentColor())
-        val appName = "Retro <span  style='color:$hexColor';>Music</span>".parseAsHtml()
+        val appName = "<font color=$hexColor>Retro Music</font>".parseAsHtml()
         binding.appBarLayout.title = appName
     }
 
