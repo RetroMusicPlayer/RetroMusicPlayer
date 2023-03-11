@@ -15,7 +15,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId namespace
-        versionCode 10599
+        versionCode 10600
         versionName '6.0.4-beta'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
