@@ -21,7 +21,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.provider.MediaStore.Images.Media
 import android.view.MenuItem
-import androidx.core.content.ContentResolverCompat
 import androidx.core.net.toUri
 import androidx.core.os.BundleCompat
 import androidx.core.view.drawToBitmap
@@ -30,7 +29,6 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityShareInstagramBinding
 import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.setLightStatusBar
 import code.name.monkey.retromusic.extensions.setStatusBarColor
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
@@ -78,8 +76,7 @@ class ShareInstagramStory : AbsThemeActivity() {
                 .load(RetroGlideExtension.getSongModel(songFinal))
                 .into(object : RetroMusicColoredTarget(binding.image) {
                     override fun onColorReady(colors: MediaNotificationProcessor) {
-                        val isColorLight = ColorUtil.isColorLight(colors.backgroundColor)
-                        setColors(isColorLight, colors.backgroundColor)
+                        setColors(colors.backgroundColor)
                     }
                 })
 
@@ -107,22 +104,7 @@ class ShareInstagramStory : AbsThemeActivity() {
             ColorStateList.valueOf(accentColor())
     }
 
-    private fun setColors(colorLight: Boolean, color: Int) {
-        setLightStatusBar(colorLight)
-        binding.toolbar.setTitleTextColor(
-            MaterialValueHelper.getPrimaryTextColor(
-                this@ShareInstagramStory,
-                colorLight
-            )
-        )
-        binding.toolbar.navigationIcon?.setTintList(
-            ColorStateList.valueOf(
-                MaterialValueHelper.getPrimaryTextColor(
-                    this@ShareInstagramStory,
-                    colorLight
-                )
-            )
-        )
+    private fun setColors(color: Int) {
         binding.mainContent.background =
             GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
