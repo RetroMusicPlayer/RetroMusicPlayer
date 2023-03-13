@@ -168,10 +168,10 @@ private val viewModules = module {
         )
     }
 
-    viewModel { (playlist: PlaylistWithSongs) ->
+    viewModel { (playlistId: Long) ->
         PlaylistDetailsViewModel(
             get(),
-            playlist
+            playlistId
         )
     }
 

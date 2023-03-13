@@ -97,7 +97,7 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
     private fun setUpPlayerToolbar() {
         binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { requireActivity().onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
             setOnMenuItemClickListener(this@CardFragment)
 
             ToolbarContentTintHelper.colorizeToolbar(this, Color.WHITE, activity)

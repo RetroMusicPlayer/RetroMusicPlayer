@@ -22,20 +22,22 @@ import android.os.Bundle
 import android.provider.MediaStore.Images.Media
 import android.view.MenuItem
 import androidx.core.net.toUri
+import androidx.core.os.BundleCompat
 import androidx.core.view.drawToBitmap
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.databinding.ActivityShareInstagramBinding
 import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.setLightStatusBar
 import code.name.monkey.retromusic.extensions.setStatusBarColor
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
+import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.Share
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 
 /**
  * Created by hemanths on 2020-02-02.
@@ -51,7 +53,7 @@ class ShareInstagramStory : AbsThemeActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -66,16 +68,15 @@ class ShareInstagramStory : AbsThemeActivity() {
         binding.toolbar.setBackgroundColor(Color.TRANSPARENT)
         setSupportActionBar(binding.toolbar)
 
-        val song = intent.extras?.getParcelable<Song>(EXTRA_SONG)
+        val song = intent.extras?.let { BundleCompat.getParcelable(it, EXTRA_SONG, Song::class.java) }
         song?.let { songFinal ->
-            GlideApp.with(this)
+            Glide.with(this)
                 .asBitmapPalette()
                 .songCoverOptions(songFinal)
                 .load(RetroGlideExtension.getSongModel(songFinal))
                 .into(object : RetroMusicColoredTarget(binding.image) {
                     override fun onColorReady(colors: MediaNotificationProcessor) {
-                        val isColorLight = ColorUtil.isColorLight(colors.backgroundColor)
-                        setColors(isColorLight, colors.backgroundColor)
+                        setColors(colors.backgroundColor)
                     }
                 })
 
@@ -103,22 +104,7 @@ class ShareInstagramStory : AbsThemeActivity() {
             ColorStateList.valueOf(accentColor())
     }
 
-    private fun setColors(colorLight: Boolean, color: Int) {
-        setLightStatusBar(colorLight)
-        binding.toolbar.setTitleTextColor(
-            MaterialValueHelper.getPrimaryTextColor(
-                this@ShareInstagramStory,
-                colorLight
-            )
-        )
-        binding.toolbar.navigationIcon?.setTintList(
-            ColorStateList.valueOf(
-                MaterialValueHelper.getPrimaryTextColor(
-                    this@ShareInstagramStory,
-                    colorLight
-                )
-            )
-        )
+    private fun setColors(color: Int) {
         binding.mainContent.background =
             GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,

@@ -17,11 +17,16 @@ import android.content.Context
 import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.webkit.MimeTypeMap
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.BundleCompat
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -50,6 +55,7 @@ import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.interfaces.IMainActivityFragmentCallbacks
+import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader
 import code.name.monkey.retromusic.model.Song
@@ -59,6 +65,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil.startDirectory
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
+import code.name.monkey.retromusic.views.BreadCrumbLayout
 import code.name.monkey.retromusic.views.BreadCrumbLayout.Crumb
 import code.name.monkey.retromusic.views.BreadCrumbLayout.SelectionCallback
 import com.google.android.material.snackbar.Snackbar
@@ -70,11 +77,12 @@ import java.io.File
 import java.io.FileFilter
 import java.io.IOException
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.Collections
+import java.util.LinkedList
 
 class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     IMainActivityFragmentCallbacks, SelectionCallback, ICallbacks,
-    LoaderManager.LoaderCallbacks<List<File>>, StorageClickListener {
+    LoaderManager.LoaderCallbacks<List<File>>, StorageClickListener, IScrollHelper {
     private var _binding: FragmentFolderBinding? = null
     private val binding get() = _binding!!
 
@@ -113,21 +121,10 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 override fun handleOnBackPressed() {
                     if (!handleBackPress()) {
                         remove()
-                        requireActivity().onBackPressed()
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
                     }
                 }
             })
-    }
-
-    private fun setUpTitle() {
-        toolbar.setNavigationOnClickListener {
-            findNavController().navigate(R.id.action_search, null, navOptions)
-        }
-        binding.appBarLayout.title = resources.getString(R.string.folders)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         if (savedInstanceState == null) {
             switchToFileAdapter()
             setCrumb(
@@ -137,9 +134,29 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 true
             )
         } else {
-            binding.breadCrumbs.restoreFromStateWrapper(savedInstanceState.getParcelable(CRUMBS))
+            binding.breadCrumbs.restoreFromStateWrapper(
+                BundleCompat.getParcelable(
+                    savedInstanceState,
+                    CRUMBS,
+                    BreadCrumbLayout.SavedStateWrapper::class.java
+                )
+            )
             LoaderManager.getInstance(this).initLoader(LOADER_ID, null, this)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (_binding != null) {
+            outState.putParcelable(CRUMBS, binding.breadCrumbs.stateWrapper)
+        }
+    }
+
+    private fun setUpTitle() {
+        toolbar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_search, null, navOptions)
+        }
+        binding.appBarLayout.title = resources.getString(R.string.folders)
     }
 
     override fun onPause() {
@@ -187,10 +204,12 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         }
                         return@setOnMenuItemClickListener true
                     }
+
                     R.id.action_add_to_blacklist -> {
                         BlacklistStore.getInstance(requireContext()).addPath(file)
                         return@setOnMenuItemClickListener true
                     }
+
                     R.id.action_set_as_start_directory -> {
                         startDirectory = file
                         showToast(
@@ -198,6 +217,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         )
                         return@setOnMenuItemClickListener true
                     }
+
                     R.id.action_scan -> {
                         lifecycleScope.launch {
                             listPaths(file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
@@ -229,6 +249,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                         }
                         return@setOnMenuItemClickListener true
                     }
+
                     R.id.action_scan -> {
                         lifecycleScope.launch {
                             listPaths(file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
@@ -353,6 +374,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 )
                 return true
             }
+
             R.id.action_scan -> {
                 val crumb = activeCrumb
                 if (crumb != null) {
@@ -362,6 +384,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 }
                 return true
             }
+
             R.id.action_settings -> {
                 findNavController().navigate(
                     R.id.settings_fragment,
@@ -404,12 +427,10 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
     private fun saveScrollPosition() {
-        val crumb = activeCrumb
-        if (crumb != null) {
-            crumb.scrollPosition =
-                (binding.recyclerView.layoutManager as LinearLayoutManager?)!!.findFirstVisibleItemPosition()
-        }
+        activeCrumb?.scrollPosition =
+            (binding.recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
     }
+
 
     private fun scanPaths(toBeScanned: Array<String?>) {
         if (activity == null) {
@@ -470,8 +491,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         adapter?.swapDataSet(files)
         val crumb = activeCrumb
         if (crumb != null) {
-            (binding.recyclerView.layoutManager as LinearLayoutManager?)
-                ?.scrollToPositionWithOffset(crumb.scrollPosition, 0)
+            (binding.recyclerView.layoutManager as LinearLayoutManager)
+                .scrollToPositionWithOffset(crumb.scrollPosition, 0)
         }
     }
 
@@ -535,7 +556,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         }
     }
 
-    suspend fun listSongs(
+    private suspend fun listSongs(
         context: Context,
         files: List<File?>,
         fileFilter: FileFilter,
@@ -563,6 +584,11 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             ),
             true
         )
+    }
+
+    override fun scrollToTop() {
+        binding.recyclerView.scrollToPosition(0)
+        binding.appBarLayout.setExpanded(true, true)
     }
 
     private fun switchToFileAdapter() {

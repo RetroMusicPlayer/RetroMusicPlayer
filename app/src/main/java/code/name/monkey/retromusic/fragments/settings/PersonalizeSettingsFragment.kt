@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.fragments.settings
 import android.os.Bundle
 import android.view.View
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+import code.name.monkey.retromusic.APPBAR_MODE
 import code.name.monkey.retromusic.HOME_ALBUM_GRID_STYLE
 import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
 import code.name.monkey.retromusic.R
@@ -45,6 +46,11 @@ class PersonalizeSettingsFragment : AbsSettingsFragment() {
         val tabTextMode: ATEListPreference? = findPreference(TAB_TEXT_MODE)
         tabTextMode?.setOnPreferenceChangeListener { prefs, newValue ->
             setSummary(prefs, newValue)
+            true
+        }
+        val appBarMode: ATEListPreference? = findPreference(APPBAR_MODE)
+        appBarMode?.setOnPreferenceChangeListener { _, _ ->
+            restartActivity()
             true
         }
     }

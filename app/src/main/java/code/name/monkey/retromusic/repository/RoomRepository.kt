@@ -44,6 +44,7 @@ interface RoomRepository {
     suspend fun deleteSongs(songs: List<Song>)
     suspend fun isSongFavorite(context: Context, songId: Long): Boolean
     fun checkPlaylistExists(playListId: Long): LiveData<Boolean>
+    fun getPlaylist(playlistId: Long): LiveData<PlaylistWithSongs>
 }
 
 class RealRoomRepository(
@@ -80,6 +81,9 @@ class RealRoomRepository(
                 it.playlistEntity.playlistName
             }
         }
+
+    @WorkerThread
+    override fun getPlaylist(playlistId: Long): LiveData<PlaylistWithSongs> = playlistDao.getPlaylist(playlistId)
 
     @WorkerThread
     override suspend fun insertSongs(songs: List<SongEntity>) {

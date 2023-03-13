@@ -24,14 +24,14 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.installLanguageAndRecreate
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.HomeSections
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 /**
  * @author Hemanth S (h4h13).
  */
 
 class OtherSettingsFragment : AbsSettingsFragment() {
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
+    private val libraryViewModel by activityViewModel<LibraryViewModel>()
 
     override fun invalidateSettings() {
         val languagePreference: ATEListPreference? = findPreference(LANGUAGE_NAME)

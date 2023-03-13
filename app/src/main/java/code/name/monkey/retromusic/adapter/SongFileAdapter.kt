@@ -26,11 +26,11 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.extensions.getTintedDrawable
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.util.MusicUtil
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.signature.MediaStoreSignature
 import me.zhanghai.android.fastscroll.PopupTextProvider
@@ -109,7 +109,7 @@ class SongFileAdapter(
             )
         } else {
             val error = activity.getTintedDrawable(R.drawable.ic_audio_file, iconColor)
-            GlideApp.with(activity)
+            Glide.with(activity)
                 .load(AudioFileCover(file.path))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(error)

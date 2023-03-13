@@ -93,6 +93,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     }
 
     override fun seek(whereto: Int): Int {
+        endFade()
         getNextPlayer()?.stop()
         return try {
             getCurrentPlayer()?.seekTo(whereto)
@@ -233,6 +234,11 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
             isCrossFading = false
         }
         crossFadeAnimator?.start()
+    }
+
+    private fun endFade() {
+        crossFadeAnimator?.end()
+        crossFadeAnimator = null
     }
 
     private fun cancelFade() {

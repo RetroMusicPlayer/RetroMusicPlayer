@@ -15,19 +15,13 @@
         android:fitsSystemWindows="true"
         app:liftOnScroll="true">
 
-        <FrameLayout
-            android:id="@+id/toolbar_container"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:navigationIcon="@drawable/ic_arrow_back"
-                app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
-        </FrameLayout>
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
@@ -35,10 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:overScrollMode="@integer/overScrollMode"
-        android:scrollbars="none"
         android:layoutAnimation="@anim/layout_anim_fade"
+        android:overScrollMode="@integer/overScrollMode"
         android:paddingBottom="@dimen/mini_player_height"
+        android:scrollbars="none"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     <LinearLayout

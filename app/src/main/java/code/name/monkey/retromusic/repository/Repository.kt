@@ -16,7 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
 import code.name.monkey.retromusic.fragments.search.Filter
@@ -99,6 +99,7 @@ interface Repository {
     suspend fun isSongFavorite(songId: Long): Boolean
     fun getSongByGenre(genreId: Long): Song
     fun checkPlaylistExists(playListId: Long): LiveData<Boolean>
+    fun getPlaylist(playlistId: Long): LiveData<PlaylistWithSongs>
 }
 
 class RealRepository(
@@ -223,6 +224,8 @@ class RealRepository(
     override suspend fun fetchPlaylistWithSongs(): List<PlaylistWithSongs> =
         roomRepository.playlistWithSongs()
 
+    override fun getPlaylist(playlistId: Long): LiveData<PlaylistWithSongs> = roomRepository.getPlaylist(playlistId)
+
     override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song> =
         playlistWithSongs.songs.map {
             it.toSong()
@@ -305,7 +308,7 @@ class RealRepository(
         roomRepository.playCountSongs()
 
     override fun observableHistorySongs(): LiveData<List<Song>> =
-        Transformations.map(roomRepository.observableHistorySongs()) {
+        roomRepository.observableHistorySongs().map {
             it.fromHistoryToSongs()
         }
 

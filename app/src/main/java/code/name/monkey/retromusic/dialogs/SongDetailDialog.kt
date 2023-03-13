@@ -19,6 +19,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Spanned
 import android.util.Log
+import androidx.core.os.BundleCompat
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.DialogFragment
@@ -38,7 +39,7 @@ class SongDetailDialog : DialogFragment() {
         val context: Context = requireContext()
         val binding = DialogFileDetailsBinding.inflate(layoutInflater)
 
-        val song = requireArguments().getParcelable<Song>(EXTRA_SONG)
+        val song = BundleCompat.getParcelable(requireArguments(), EXTRA_SONG, Song::class.java)
         with(binding) {
             fileName.text = makeTextWithTitle(context, R.string.label_file_name, "-")
             filePath.text = makeTextWithTitle(context, R.string.label_file_path, "-")

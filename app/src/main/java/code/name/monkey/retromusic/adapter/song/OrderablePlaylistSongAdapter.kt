@@ -24,12 +24,8 @@ import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.db.toSongsEntity
 import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
-import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.accentOutlineColor
 import code.name.monkey.retromusic.fragments.LibraryViewModel
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import com.google.android.material.button.MaterialButton
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
 import kotlinx.coroutines.Dispatchers
@@ -37,11 +33,11 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OrderablePlaylistSongAdapter(
-    private val playlist: PlaylistEntity,
+    private val playlistId: Long,
     activity: FragmentActivity,
     dataSet: MutableList<Song>,
     itemLayoutRes: Int,
-) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes),
+) : SongAdapter(activity, dataSet, itemLayoutRes),
     DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
 
     val libraryViewModel: LibraryViewModel by activity.viewModel()
@@ -65,45 +61,20 @@ class OrderablePlaylistSongAdapter(
         return ViewHolder(view)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position == 0) OFFSET_ITEM else SONG
-    }
-
-    override fun onBindViewHolder(holder: SongAdapter.ViewHolder, position: Int) {
-        if (holder.itemViewType == OFFSET_ITEM) {
-            val viewHolder = holder as ViewHolder
-            viewHolder.playAction?.let {
-                it.setOnClickListener {
-                    MusicPlayerRemote.openQueue(dataSet, 0, true)
-                }
-                it.accentOutlineColor()
-            }
-            viewHolder.shuffleAction?.let {
-                it.setOnClickListener {
-                    MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
-                }
-                it.accentColor()
-            }
-        } else {
-            super.onBindViewHolder(holder, position - 1)
-        }
-    }
-
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<Song>) {
         when (menuItem.itemId) {
             R.id.action_remove_from_playlist -> RemoveSongFromPlaylistDialog.create(
                 selection.toSongsEntity(
-                    playlist
+                    playlistId
                 )
             )
                 .show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
+
             else -> super.onMultipleItemAction(menuItem, selection)
         }
     }
 
-    inner class ViewHolder(itemView: View) : AbsOffsetSongAdapter.ViewHolder(itemView) {
-        val playAction: MaterialButton? = itemView.findViewById(R.id.playAction)
-        val shuffleAction: MaterialButton? = itemView.findViewById(R.id.shuffleAction)
+    inner class ViewHolder(itemView: View) : SongAdapter.ViewHolder(itemView) {
 
         override var songMenuRes: Int
             get() = R.menu.menu_item_playlist_song
@@ -114,7 +85,7 @@ class OrderablePlaylistSongAdapter(
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.action_remove_from_playlist -> {
-                    RemoveSongFromPlaylistDialog.create(song.toSongEntity(playlist.playListId))
+                    RemoveSongFromPlaylistDialog.create(song.toSongEntity(playlistId))
                         .show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
                     return true
                 }
@@ -147,7 +118,7 @@ class OrderablePlaylistSongAdapter(
     }
 
     override fun onGetItemDraggableRange(holder: ViewHolder, position: Int): ItemDraggableRange {
-        return ItemDraggableRange(1, itemCount - 1)
+        return ItemDraggableRange(0, itemCount - 1)
     }
 
     override fun onCheckCanDrop(draggingPosition: Int, dropPosition: Int): Boolean {

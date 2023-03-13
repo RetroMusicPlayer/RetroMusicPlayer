@@ -26,6 +26,7 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
+import androidx.core.os.BundleCompat
 import androidx.media.session.MediaButtonReceiver
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_PAUSE
@@ -91,7 +92,7 @@ class MediaButtonIntentReceiver : MediaButtonReceiver() {
             println("Intent Action: ${intent.action}")
             val intentAction = intent.action
             if (Intent.ACTION_MEDIA_BUTTON == intentAction) {
-                val event = intent.getParcelableExtra<KeyEvent>(Intent.EXTRA_KEY_EVENT)
+                val event = intent.extras?.let { BundleCompat.getParcelable(it, Intent.EXTRA_KEY_EVENT, KeyEvent::class.java) }
                     ?: return false
 
                 val keycode = event.keyCode
@@ -106,6 +107,7 @@ class MediaButtonIntentReceiver : MediaButtonReceiver() {
                     KeyEvent.KEYCODE_MEDIA_STOP -> command = ACTION_STOP
                     KeyEvent.KEYCODE_HEADSETHOOK, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> command =
                         ACTION_TOGGLE_PAUSE
+
                     KeyEvent.KEYCODE_MEDIA_NEXT -> command = ACTION_SKIP
                     KeyEvent.KEYCODE_MEDIA_PREVIOUS -> command = ACTION_REWIND
                     KeyEvent.KEYCODE_MEDIA_PAUSE -> command = ACTION_PAUSE
@@ -155,14 +157,8 @@ class MediaButtonIntentReceiver : MediaButtonReceiver() {
             val intent = Intent(context, MusicService::class.java)
             intent.action = command
             try {
-                // IMPORTANT NOTE: (kind of a hack)
-                // on Android O and above the following crashes when the app is not running
-                // there is no good way to check whether the app is running so we catch the exception
-                // we do not always want to use startForegroundService() because then one gets an ANR
-                // if no notification is displayed via startForeground()
-                // according to Play analytics this happens a lot, I suppose for example if command = PAUSE
                 context.startService(intent)
-            } catch (ignored: IllegalStateException) {
+            } catch (e: Exception) {
                 ContextCompat.startForegroundService(context, intent)
             }
         }
