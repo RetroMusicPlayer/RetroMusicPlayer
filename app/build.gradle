@@ -16,7 +16,7 @@ android {
 
         applicationId namespace
         versionCode 10600
-        versionName '6.0.4-beta'
+        versionName '6.0.4'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }
