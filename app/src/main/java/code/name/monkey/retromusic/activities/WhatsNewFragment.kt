@@ -1,12 +1,16 @@
 package code.name.monkey.retromusic.activities
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.core.content.PackageManagerCompat
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.widget.NestedScrollView
@@ -77,6 +81,17 @@ class WhatsNewFragment : BottomSheetDialogFragment() {
                     )
                 )
             binding.webView.loadData(changeLog, "text/html", "UTF-8")
+            binding.webView.webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    val url = request?.url ?: return false
+                    //you can do checks here e.g. url.host equals to target one
+                    startActivity(Intent(Intent.ACTION_VIEW, url))
+                    return true
+                }
+            }
         } catch (e: Throwable) {
             binding.webView.loadData(
                 "<h1>Unable to load</h1><p>" + e.localizedMessage + "</p>", "text/html", "UTF-8"
