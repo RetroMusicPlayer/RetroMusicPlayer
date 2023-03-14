@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
-    <string name="about_settings_summary">Team, social links</string>
+    <string name="about_album_label">О %s</string>
+    <string name="about_settings_summary">Тим и платформе</string>
     <string name="accent_color">Boja detalja</string>
     <string name="accent_color_desc">Boja plejera, uobičajena je zelena</string>
     <string name="action_about">О апликацији</string>
@@ -12,7 +12,7 @@
     <string name="action_cancel">Otkazi trenutni tajmer</string>
     <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">Izbrisi trenutnu plejlistu za pustanje</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_cycle_repeat">Понављај</string>
     <string name="action_delete">Obrisi</string>
     <string name="action_delete_from_device">Izbrisi sa uredjaja</string>
     <string name="action_details">Detalji</string>
@@ -25,7 +25,7 @@
     <string name="action_grant">.</string>
     <string name="action_grid_size">Velicina kartica</string>
     <string name="action_grid_size_land">.</string>
-    <string name="action_new_playlist">New playlist</string>
+    <string name="action_new_playlist">Нова Плејлиста</string>
     <string name="action_next">Sledece</string>
     <string name="action_play">Pusti</string>
     <string name="action_play_all">Пусти све</string>
