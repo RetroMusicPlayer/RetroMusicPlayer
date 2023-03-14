@@ -279,7 +279,7 @@ object PreferenceUtil {
     val isBlurredAlbumArt
         get() = sharedPreferences.getBoolean(
             BLURRED_ALBUM_ART, false
-        )
+        ) && !VersionUtils.hasR()
 
     val blurAmount get() = sharedPreferences.getInt(NEW_BLUR_AMOUNT, 25)
 

@@ -17,7 +17,10 @@ package code.name.monkey.retromusic.fragments.settings
 import android.os.Bundle
 import android.view.View
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.APPBAR_MODE
+import code.name.monkey.retromusic.BLURRED_ALBUM_ART
 import code.name.monkey.retromusic.HOME_ALBUM_GRID_STYLE
 import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
 import code.name.monkey.retromusic.R
@@ -27,12 +30,17 @@ class PersonalizeSettingsFragment : AbsSettingsFragment() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_ui)
+        // Hide Blur album art preference on Android 11+ devices as the lockscreen album art feature was removed by Google
+        // And if the feature is present in some Custom ROM's there is also an option to set blur so this preference is unnecessary on Android 11 and above
+        val blurredAlbumArt: ATESwitchPreference? = findPreference(BLURRED_ALBUM_ART)
+        blurredAlbumArt?.isVisible = !VersionUtils.hasR()
     }
 
     override fun invalidateSettings() {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val homeArtistStyle: ATEListPreference? = findPreference(HOME_ARTIST_GRID_STYLE)
         homeArtistStyle?.setOnPreferenceChangeListener { preference, newValue ->
             setSummary(preference, newValue)
