@@ -24,7 +24,7 @@ import androidx.annotation.FontRes;
 
 import com.google.android.material.textview.MaterialTextView;
 
-import io.github.muntashirakon.music.R;
+import code.name.monkey.retromusic.R;
 
 public class BaselineGridTextView extends MaterialTextView {
 

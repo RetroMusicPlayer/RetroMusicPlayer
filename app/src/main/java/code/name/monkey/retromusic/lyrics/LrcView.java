@@ -40,8 +40,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import io.github.muntashirakon.music.BuildConfig;
-import io.github.muntashirakon.music.R;
+import code.name.monkey.retromusic.BuildConfig;
+import code.name.monkey.retromusic.R;
 
 /**
  * 歌词 Created by wcy on 2015/11/9.

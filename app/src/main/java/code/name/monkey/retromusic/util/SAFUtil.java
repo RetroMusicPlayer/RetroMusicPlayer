@@ -42,8 +42,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import io.github.muntashirakon.music.R;
-import io.github.muntashirakon.music.activities.saf.SAFRequestActivity;
+import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.activities.saf.SAFRequestActivity;
 import code.name.monkey.retromusic.model.Song;
 
 public class SAFUtil {

@@ -35,7 +35,7 @@ import java.util.List;
 
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
-import io.github.muntashirakon.music.R;
+import code.name.monkey.retromusic.R;
 
 /** A class the processes media notifications and extracts the right text and background colors. */
 public class MediaNotificationProcessor {

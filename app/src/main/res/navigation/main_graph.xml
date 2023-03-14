@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_playlist_detail">
         <argument
             android:name="extra_genre"
-            app:argType="io.github.muntashirakon.music.model.Genre" />
+            app:argType="code.name.monkey.retromusic.model.Genre" />
     </fragment>
 
     <fragment
@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_playlist_detail">
         <argument
             android:name="extra_playlist"
-            app:argType="io.github.muntashirakon.music.db.PlaylistWithSongs" />
+            app:argType="code.name.monkey.retromusic.db.PlaylistWithSongs" />
     </fragment>
 
     <fragment

@@ -22,7 +22,7 @@ import androidx.annotation.Nullable;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.SimpleSlide;
 
-import io.github.muntashirakon.music.R;
+import code.name.monkey.retromusic.R;
 
 /** Created by hemanths on 2019-07-31. */
 public class SAFGuideActivity extends IntroActivity {

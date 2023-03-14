@@ -37,7 +37,7 @@ import androidx.core.content.ContextCompat;
 
 import java.util.WeakHashMap;
 
-import io.github.muntashirakon.music.R;
+import code.name.monkey.retromusic.R;
 
 /**
  * Helper class to process legacy (Holo) notifications to make them look like material

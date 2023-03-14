@@ -31,7 +31,7 @@ import androidx.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import code.name.monkey.appthemehelper.util.VersionUtils;
-import io.github.muntashirakon.music.R;
+import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
