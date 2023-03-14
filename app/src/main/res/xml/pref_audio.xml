@@ -2,15 +2,6 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-        android:defaultValue="true"
-        android:key="audio_ducking"
-        android:layout="@layout/list_item_view_switch"
-        android:summary="@string/pref_summary_audio_ducking"
-        android:title="@string/pref_title_audio_ducking"
-        app:icon="@drawable/ic_volume_down"
-        app:isPreferenceVisible="@bool/isNotOreo"/>
-
     <code.name.monkey.retromusic.preferences.DurationPreference
         android:defaultValue="0"
         android:key="audio_fade_duration"

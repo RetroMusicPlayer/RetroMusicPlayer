@@ -266,11 +266,6 @@ object PreferenceUtil {
             ALBUM_ART_ON_LOCK_SCREEN, true
         )
 
-    val isAudioDucking
-        get() = sharedPreferences.getBoolean(
-            AUDIO_DUCKING, true
-        )
-
     val isBluetoothSpeaker
         get() = sharedPreferences.getBoolean(
             BLUETOOTH_PLAYBACK, false
