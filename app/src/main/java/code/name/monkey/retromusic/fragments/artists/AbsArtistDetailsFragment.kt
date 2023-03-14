@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.fragments.artists
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
@@ -153,14 +153,10 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(artist.songs))
         )
         val songText = resources.getQuantityString(
-            R.plurals.albumSongs,
-            artist.songCount,
-            artist.songCount
+            R.plurals.albumSongs, artist.songCount, artist.songCount
         )
         val albumText = resources.getQuantityString(
-            R.plurals.albums,
-            artist.songCount,
-            artist.songCount
+            R.plurals.albums, artist.songCount, artist.songCount
         )
         binding.fragmentArtistContent.songTitle.text = songText
         binding.fragmentArtistContent.albumTitle.text = albumText
@@ -174,8 +170,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     ) {
         biography = null
         this.lang = lang
-        detailsViewModel.getArtistInfo(name, lang, null)
-            .observe(viewLifecycleOwner) { result ->
+        detailsViewModel.getArtistInfo(name, lang, null).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Result.Loading -> logD("Loading")
                     is Result.Error -> logE("Error")
@@ -214,11 +209,8 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     }
 
     private fun loadArtistImage(artist: Artist) {
-        Glide.with(requireContext())
-            .asBitmapPalette()
-            .artistImageOptions(artist)
-            .load(RetroGlideExtension.getArtistModel(artist))
-            .dontAnimate()
+        Glide.with(requireContext()).asBitmapPalette().artistImageOptions(artist)
+            .load(RetroGlideExtension.getArtistModel(artist)).dontAnimate()
             .into(object : SingleColorTarget(binding.image) {
                 override fun onColorReady(color: Int) {
                     setColors(color)
@@ -274,13 +266,8 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             }
 
             R.id.action_set_artist_image -> {
-                val intent = Intent(Intent.ACTION_GET_CONTENT)
-                intent.type = "image/*"
                 selectImageLauncher.launch(
-                    Intent.createChooser(
-                        intent,
-                        getString(R.string.pick_from_local_storage)
-                    )
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
                 )
                 return true
             }
@@ -336,14 +323,14 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             SortOrder.ArtistSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked =
                 true
 
-            SortOrder.ArtistSongSortOrder.SONG_ALBUM ->
-                sortOrder.findItem(R.id.action_sort_order_album).isChecked = true
+            SortOrder.ArtistSongSortOrder.SONG_ALBUM -> sortOrder.findItem(R.id.action_sort_order_album).isChecked =
+                true
 
-            SortOrder.ArtistSongSortOrder.SONG_YEAR ->
-                sortOrder.findItem(R.id.action_sort_order_year).isChecked = true
+            SortOrder.ArtistSongSortOrder.SONG_YEAR -> sortOrder.findItem(R.id.action_sort_order_year).isChecked =
+                true
 
-            SortOrder.ArtistSongSortOrder.SONG_DURATION ->
-                sortOrder.findItem(R.id.action_sort_order_song_duration).isChecked = true
+            SortOrder.ArtistSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_song_duration).isChecked =
+                true
 
             else -> {
                 throw IllegalArgumentException("invalid $savedSongSortOrder")
@@ -352,14 +339,11 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     }
 
     private val selectImageLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                result.data?.data?.let {
-                    lifecycleScope.launch {
-                        CustomArtistImageUtil.getInstance(requireContext())
-                            .setCustomArtistImage(artist, it)
-                    }
-
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            lifecycleScope.launch {
+                if (uri != null) {
+                    CustomArtistImageUtil.getInstance(requireContext())
+                        .setCustomArtistImage(artist, uri)
                 }
             }
         }

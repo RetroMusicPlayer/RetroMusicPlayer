@@ -29,6 +29,7 @@ import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -37,7 +38,6 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.drawable
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
-import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.hideSoftKeyboard
@@ -45,7 +45,6 @@ import code.name.monkey.retromusic.extensions.setTaskDescriptionColorAuto
 import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.repository.Repository
-import code.name.monkey.retromusic.util.SAFUtil
 import code.name.monkey.retromusic.util.logD
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -56,7 +55,6 @@ import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
 import java.io.File
-import java.util.Collections
 
 abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
     abstract val editorImage: ImageView
@@ -212,6 +210,11 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
             }
         }
 
+    private val pickArtworkImage =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            loadImageFromFile(uri)
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = bindingInflater.invoke(layoutInflater)
@@ -252,14 +255,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
     }
 
     private fun startImagePicker() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-        startActivityForResult(
-            Intent.createChooser(
-                intent,
-                getString(R.string.pick_from_local_storage)
-            ), REQUEST_CODE_SELECT_IMAGE
-        )
+        pickArtworkImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
     protected abstract fun loadCurrentImage()
@@ -399,36 +395,6 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
             }
         }
     }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intent)
-        when (requestCode) {
-            REQUEST_CODE_SELECT_IMAGE -> if (resultCode == Activity.RESULT_OK) {
-                intent?.data?.let {
-                    loadImageFromFile(it)
-                }
-            }
-
-            SAFGuideActivity.REQUEST_CODE_SAF_GUIDE -> {
-                SAFUtil.openTreePicker(this)
-            }
-
-            SAFUtil.REQUEST_SAF_PICK_TREE -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    SAFUtil.saveTreeUri(this, intent)
-                    writeTags(savedSongPaths)
-                }
-            }
-
-            SAFUtil.REQUEST_SAF_PICK_FILE -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    writeTags(Collections.singletonList(currentSongPath + SAFUtil.SEPARATOR + intent!!.dataString))
-                }
-            }
-        }
-    }
-
 
     private fun getAudioFile(path: String): AudioFile {
         return try {
