@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <io.github.muntashirakon.music.views.TopAppBarLayout
+        <code.name.monkey.retromusic.views.TopAppBarLayout
             android:id="@+id/appBarLayout"
             style="?appBarLayoutStyle"
             android:layout_width="match_parent"

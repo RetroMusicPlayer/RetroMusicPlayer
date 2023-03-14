@@ -43,7 +43,7 @@
             app:shapeAppearanceOverlay="@style/circleImageView"
             app:srcCompat="@drawable/material_design_default" />
 
-        <io.github.muntashirakon.music.views.RetroShapeableImageView
+        <code.name.monkey.retromusic.views.RetroShapeableImageView
             android:id="@+id/userImage"
             android:layout_width="72dp"
             android:layout_height="72dp"

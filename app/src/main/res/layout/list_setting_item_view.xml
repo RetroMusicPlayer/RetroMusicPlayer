@@ -23,7 +23,7 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <io.github.muntashirakon.music.views.ColorIconsImageView
+    <code.name.monkey.retromusic.views.ColorIconsImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/adaptive_icon_size"
         android:layout_height="@dimen/adaptive_icon_size"

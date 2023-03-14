@@ -15,7 +15,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/cover_lyrics"
-        android:name="io.github.muntashirakon.music.fragments.player.CoverLyricsFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.CoverLyricsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical" />
@@ -28,7 +28,7 @@
         app:fel_size_bottom="100dp"
         app:fel_size_top="100dp">
 
-        <io.github.muntashirakon.music.lyrics.CoverLrcView
+        <code.name.monkey.retromusic.lyrics.CoverLrcView
             android:id="@+id/lyricsView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

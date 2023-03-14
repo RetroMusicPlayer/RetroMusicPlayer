@@ -9,6 +9,7 @@ android {
     buildToolsVersion = '30.0.3'
 
     defaultConfig {
+        namespace 'code.name.monkey.retromusic'
         minSdk 21
         targetSdk 32
 

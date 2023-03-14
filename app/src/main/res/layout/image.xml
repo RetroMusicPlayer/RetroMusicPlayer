@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<io.github.muntashirakon.music.views.WidthFitSquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<code.name.monkey.retromusic.views.WidthFitSquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/imageContainer"
     android:layout_width="match_parent"
@@ -33,4 +33,4 @@
         android:textAppearance="@style/TextViewSubtitle1"
         android:textColor="@color/md_white_1000"
         tools:text="@tools:sample/full_names" />
-</io.github.muntashirakon.music.views.WidthFitSquareLayout>
+</code.name.monkey.retromusic.views.WidthFitSquareLayout>

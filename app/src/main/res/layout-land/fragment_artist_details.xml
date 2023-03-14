@@ -72,7 +72,7 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <io.github.muntashirakon.music.views.BaselineGridTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:id="@+id/artistTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                     tools:ignore="MissingPrefix"
                     tools:text="Title" />
 
-                <io.github.muntashirakon.music.views.BaselineGridTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:id="@+id/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

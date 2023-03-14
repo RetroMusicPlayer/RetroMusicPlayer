@@ -6,37 +6,37 @@
 
     <fragment
         android:id="@+id/action_album"
-        android:name="io.github.muntashirakon.music.fragments.albums.AlbumsFragment"
+        android:name="code.name.monkey.retromusic.fragments.albums.AlbumsFragment"
         tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_artist"
-        android:name="io.github.muntashirakon.music.fragments.artists.ArtistsFragment"
+        android:name="code.name.monkey.retromusic.fragments.artists.ArtistsFragment"
         tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_song"
-        android:name="io.github.muntashirakon.music.fragments.songs.SongsFragment"
+        android:name="code.name.monkey.retromusic.fragments.songs.SongsFragment"
         tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_genre"
-        android:name="io.github.muntashirakon.music.fragments.genres.GenresFragment"
+        android:name="code.name.monkey.retromusic.fragments.genres.GenresFragment"
         tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_playlist"
-        android:name="io.github.muntashirakon.music.fragments.playlists.PlaylistsFragment"
+        android:name="code.name.monkey.retromusic.fragments.playlists.PlaylistsFragment"
         tools:layout="@layout/fragment_main_activity_recycler_view" />
 
     <fragment
         android:id="@+id/action_folder"
-        android:name="io.github.muntashirakon.music.fragments.folder.FoldersFragment"
+        android:name="code.name.monkey.retromusic.fragments.folder.FoldersFragment"
         tools:layout="@layout/fragment_folder" />
 
     <fragment
         android:id="@+id/action_home"
-        android:name="io.github.muntashirakon.music.fragments.home.HomeFragment"
+        android:name="code.name.monkey.retromusic.fragments.home.HomeFragment"
         android:label=""
         tools:layout="@layout/fragment_home" />
 

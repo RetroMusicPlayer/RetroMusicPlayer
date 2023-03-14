@@ -130,7 +130,7 @@
         </HorizontalScrollView>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <io.github.muntashirakon.music.views.insets.InsetsRecyclerView
+    <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

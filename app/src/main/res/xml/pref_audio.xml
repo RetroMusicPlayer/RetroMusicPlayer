@@ -11,7 +11,7 @@
         app:icon="@drawable/ic_volume_down"
         app:isPreferenceVisible="@bool/isNotOreo"/>
 
-    <io.github.muntashirakon.music.preferences.DurationPreference
+    <code.name.monkey.retromusic.preferences.DurationPreference
         android:defaultValue="0"
         android:key="audio_fade_duration"
         android:layout="@layout/list_item_view"

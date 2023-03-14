@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <io.github.muntashirakon.music.lyrics.LrcView
+    <code.name.monkey.retromusic.lyrics.LrcView
         android:id="@+id/lyricsView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

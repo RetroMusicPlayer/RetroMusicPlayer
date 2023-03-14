@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <io.github.muntashirakon.music.views.LollipopFixedWebView
+        <code.name.monkey.retromusic.views.LollipopFixedWebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -5,7 +5,7 @@
    android:layout_height="wrap_content"
    android:orientation="vertical">
 
-    <io.github.muntashirakon.music.views.ListItemView
+    <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/version"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:listItemSummary="@string/pref_summary_open_source_licences"
         app:listItemTitle="@string/version"/>
 
-    <io.github.muntashirakon.music.views.ListItemView
+    <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/changelog"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         app:listItemSummary="@string/changelog_summary"
         app:listItemTitle="@string/changelog"/>
 
-    <io.github.muntashirakon.music.views.ListItemView
+    <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/appGithub"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         app:listItemSummary="@string/git_hub_summary"
         app:listItemTitle="@string/git_hub"/>
 
-    <io.github.muntashirakon.music.views.ListItemView
+    <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/appTranslation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
         app:listItemSummary="@string/translate_community"
         app:listItemTitle="@string/translate"/>
 
-    <io.github.muntashirakon.music.views.ListItemView
+    <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/bugReportLink"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
         app:listItemSummary="@string/bug_report_summary"
         app:listItemTitle="@string/report_bug"/>
 
-    <io.github.muntashirakon.music.views.ListItemView
+    <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/faqLink"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
         app:listItemSummary="@string/help_summary"
         app:listItemTitle="@string/faq"/>
 
-    <io.github.muntashirakon.music.views.ListItemView
+    <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/openSource"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
