@@ -205,6 +205,7 @@ class PackageValidator(
      * If the app is not found, or if the app does not have exactly one signature, this method
      * returns `null` as the signature.
      */
+    @Suppress("deprecation")
     private fun getSignature(packageInfo: PackageInfo): String? {
         // Security best practices dictate that an app should be signed with exactly one (1)
         // signature. Because of this, if there are multiple signatures, reject it.

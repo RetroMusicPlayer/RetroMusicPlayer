@@ -54,7 +54,7 @@ class LibraryPreferenceDialog : DialogFragment() {
 
         val categoryAdapter = CategoryInfoAdapter()
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(requireContext())
             adapter = categoryAdapter
             categoryAdapter.attachToRecyclerView(this)
         }

@@ -75,7 +75,7 @@
             android:layout_height="38dp"
             android:background="@drawable/notification_selector"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_skip_previous_round_white_32dp"
+            android:src="@drawable/ic_skip_previous"
             tools:tint="?colorOnPrimary" />
 
         <ImageButton
@@ -93,7 +93,7 @@
             android:layout_height="38dp"
             android:background="@drawable/notification_selector"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_skip_next_round_white_32dp"
+            android:src="@drawable/ic_skip_next"
             tools:tint="?colorOnPrimary" />
 
     </LinearLayout>

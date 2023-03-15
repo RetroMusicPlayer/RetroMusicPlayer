@@ -25,12 +25,11 @@ import code.name.monkey.retromusic.extensions.openUrl
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.util.NavigationUtil
 import dev.chrisbanes.insetter.applyInsetter
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
     private var _binding: FragmentAboutBinding? = null
     private val binding get() = _binding!!
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,7 +39,7 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
 
         binding.aboutContent.root.applyInsetter {
             type(navigationBars = true) {
-                padding()
+                padding(vertical = true)
             }
         }
     }

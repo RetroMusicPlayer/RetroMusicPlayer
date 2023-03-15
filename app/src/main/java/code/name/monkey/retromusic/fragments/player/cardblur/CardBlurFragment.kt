@@ -28,15 +28,18 @@ import code.name.monkey.retromusic.databinding.FragmentCardBlurPlayerBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.glide.BlurTransformation
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
-import code.name.monkey.retromusic.glide.*
+import code.name.monkey.retromusic.glide.BlurTransformation
+import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.simpleSongCoverOptions
+import code.name.monkey.retromusic.glide.crossfadeListener
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 
 class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     SharedPreferences.OnSharedPreferenceChangeListener {
@@ -51,7 +54,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
 
     private var _binding: FragmentCardBlurPlayerBinding? = null
     private val binding get() = _binding!!
-    private var lastRequest: GlideRequest<Drawable>? = null
+    private var lastRequest: RequestBuilder<Drawable>? = null
 
     override fun onShow() {
         playbackControlsFragment.show()
@@ -76,8 +79,8 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         libraryViewModel.updateColor(color.backgroundColor)
         ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
 
-        binding.playerToolbar.setTitleTextColor(Color.WHITE)
-        binding.playerToolbar.setSubtitleTextColor(Color.WHITE)
+        binding.title.setTextColor(Color.WHITE)
+        binding.text.setTextColor(Color.WHITE)
     }
 
     override fun toggleFavorite(song: Song) {
@@ -96,7 +99,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         _binding = FragmentCardBlurPlayerBinding.bind(view)
         setUpSubFragments()
         setUpPlayerToolbar()
-        binding.cardContainer?.drawAboveSystemBars()
+        binding.playerToolbar.drawAboveSystemBars()
     }
 
     private fun setUpSubFragments() {
@@ -110,7 +113,7 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     private fun setUpPlayerToolbar() {
         binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { requireActivity().onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
             setTitleTextColor(Color.WHITE)
             setSubtitleTextColor(Color.WHITE)
             ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
@@ -132,15 +135,15 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        binding.playerToolbar.apply {
-            title = song.title
-            subtitle = song.artistName
+        binding.run {
+            title.text = song.title
+            text.text = song.artistName
         }
     }
 
     private fun updateBlur() {
         // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
-        GlideApp.with(this)
+        Glide.with(this)
             .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
             .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
             .transform(
@@ -152,6 +155,11 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
                 it.crossfadeListener()
                     .into(binding.colorBackground)
             }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        lastRequest = null
     }
 
     override fun onResume() {

@@ -14,22 +14,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
-import code.name.monkey.retromusic.databinding.FragmentPlaylistDetailBinding
+import code.name.monkey.retromusic.databinding.FragmentPlaylistDetailNewBinding
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.toSongs
-import code.name.monkey.retromusic.extensions.dip
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.elevatedAccentColor
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.glide.RetroGlideExtension.playlistOptions
+import code.name.monkey.retromusic.glide.playlistPreview.PlaylistPreview
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
-import code.name.monkey.retromusic.interfaces.ICabCallback
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.RetroColorUtil
-import com.afollestad.materialcab.attached.AttachedCab
-import com.afollestad.materialcab.attached.destroy
-import com.afollestad.materialcab.attached.isActive
-import com.afollestad.materialcab.createCab
+import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.ThemedFastScroller
+import com.bumptech.glide.Glide
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
@@ -41,14 +40,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 
-class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail),
-    ICabHolder {
+class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_detail_new) {
     private val arguments by navArgs<PlaylistDetailsFragmentArgs>()
     private val viewModel by viewModel<PlaylistDetailsViewModel> {
-        parametersOf(arguments.extraPlaylist)
+        parametersOf(arguments.extraPlaylistId)
     }
 
-    private var _binding: FragmentPlaylistDetailBinding? = null
+    private var _binding: FragmentPlaylistDetailNewBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var playlist: PlaylistWithSongs
@@ -66,14 +64,26 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentPlaylistDetailBinding.bind(view)
+        _binding = FragmentPlaylistDetailNewBinding.bind(view)
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(view)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         mainActivity.setSupportActionBar(binding.toolbar)
-        binding.container.transitionName = "playlist"
-        playlist = arguments.extraPlaylist
-        binding.toolbar.title = playlist.playlistEntity.playlistName
+        binding.toolbar.title = null
+//        binding.container.transitionName = playlist.playlistEntity.playlistName
+
         setUpRecyclerView()
+        setupButtons()
+        viewModel.getPlaylist().observe(viewLifecycleOwner) { playlistWithSongs ->
+            playlist = playlistWithSongs
+            Glide.with(this)
+                .load(PlaylistPreview(playlistWithSongs))
+                .playlistOptions()
+                .into(binding.image)
+            binding.title.text = playlist.playlistEntity.playlistName
+            binding.subtitle.text =
+                MusicUtil.getPlaylistInfoString(requireContext(), playlist.songs.toSongs())
+            binding.collapsingAppBarLayout.title = playlist.playlistEntity.playlistName
+        }
         viewModel.getSongs().observe(viewLifecycleOwner) {
             songs(it.toSongs())
         }
@@ -88,13 +98,27 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
+    private fun setupButtons() {
+        binding.playButton.apply {
+            setOnClickListener {
+                MusicPlayerRemote.openQueue(playlistSongAdapter.dataSet, 0, true)
+            }
+            accentColor()
+        }
+        binding.shuffleButton.apply {
+            setOnClickListener {
+                MusicPlayerRemote.openAndShuffleQueue(playlistSongAdapter.dataSet, true)
+            }
+            elevatedAccentColor()
+        }
+    }
+
     private fun setUpRecyclerView() {
         playlistSongAdapter = OrderablePlaylistSongAdapter(
-            playlist.playlistEntity,
+            arguments.extraPlaylistId,
             requireActivity(),
             ArrayList(),
-            R.layout.item_queue,
-            this
+            R.layout.item_queue
         )
 
         val dragDropManager = RecyclerViewDragDropManager()
@@ -111,6 +135,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             binding.recyclerView.adapter = wrappedAdapter
+            ThemedFastScroller.create(this)
         }
         playlistSongAdapter.registerAdapterDataObserver(object :
             RecyclerView.AdapterDataObserver() {
@@ -129,17 +154,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         return PlaylistMenuHelper.handleMenuClick(requireActivity(), playlist, item)
     }
 
-    private fun checkForPadding() {
-        val itemCount: Int = playlistSongAdapter.itemCount
-        if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
-            binding.recyclerView.updatePadding(bottom = dip(R.dimen.mini_player_height))
-        } else {
-            binding.recyclerView.updatePadding(bottom = 0)
-        }
-    }
-
     private fun checkIsEmpty() {
-        checkForPadding()
         binding.empty.isVisible = playlistSongAdapter.itemCount == 0
         binding.emptyText.isVisible = playlistSongAdapter.itemCount == 0
     }
@@ -171,28 +186,5 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private var cab: AttachedCab? = null
-
-    override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
-        cab?.let {
-            println("Cab")
-            if (it.isActive()) {
-                it.destroy()
-            }
-        }
-        cab = createCab(R.id.toolbar_container) {
-            menu(menuRes)
-            closeDrawable(R.drawable.ic_close)
-            backgroundColor(literal = RetroColorUtil.shiftBackgroundColor(surfaceColor()))
-            slideDown()
-            onCreate { cab, menu -> callback.onCabCreated(cab, menu) }
-            onSelection {
-                callback.onCabItemClicked(it)
-            }
-            onDestroy { callback.onCabFinished(it) }
-        }
-        return cab as AttachedCab
     }
 }

@@ -20,16 +20,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/progressSlider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:maxHeight="2dp"
-        android:paddingVertical="@dimen/seekbar_padding"
+        style="@style/Widget.Retro.Slider"
         android:progressDrawable="@drawable/color_progress_seek"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
@@ -49,9 +48,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/progressSlider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
-
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
@@ -183,10 +180,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nextButton"
         app:layout_constraintTop_toTopOf="@+id/nextButton"
-        app:srcCompat="@drawable/ic_shuffle_sharp"
+        app:srcCompat="@drawable/ic_shuffle"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
-
 
     <FrameLayout
         android:id="@+id/volumeFragmentContainer"

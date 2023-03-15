@@ -3,12 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface" />
+    android:layout_height="match_parent"
+    android:background="?colorSurface"
+    android:clickable="true"
+    android:focusable="true">
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
@@ -24,27 +22,23 @@
             <include layout="@layout/status_bar" />
         </FrameLayout>
 
-        <FrameLayout
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/playerToolbar"
+            style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/playerToolbar"
-                style="@style/Toolbar"
-                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                app:contentInsetStartWithNavigation="0dp"
-                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                app:subtitleTextAppearance="@style/TextViewCaption"
-                app:titleMargin="0dp"
-                app:titleMarginStart="0dp"
-                app:titleTextAppearance="@style/TextViewSubtitle1"
-                tools:subtitle="@tools:sample/full_names"
-                tools:title="@tools:sample/full_names" />
-
-        </FrameLayout>
+            android:layout_weight="0"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/ic_keyboard_arrow_down"
+            app:subtitleTextAppearance="@style/TextViewCaption"
+            app:titleMargin="0dp"
+            app:titleMarginStart="0dp"
+            app:titleTextAppearance="@style/TextViewSubtitle1"
+            tools:subtitle="@tools:sample/full_names"
+            tools:title="@tools:sample/full_names" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -67,18 +61,13 @@
                 android:elevation="20dp" />
         </FrameLayout>
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/playbackControlsFragment"
+            android:name="code.name.monkey.retromusic.fragments.player.adaptive.AdaptivePlaybackControlsFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/playbackControlsFragment"
-                android:name="code.name.monkey.retromusic.fragments.player.adaptive.AdaptivePlaybackControlsFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout="@layout/fragment_adaptive_player_playback_controls" />
-        </FrameLayout>
+            android:layout_weight="0"
+            tools:layout="@layout/fragment_adaptive_player_playback_controls" />
 
     </LinearLayout>
 </FrameLayout>

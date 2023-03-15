@@ -28,12 +28,13 @@ import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
+import code.name.monkey.retromusic.util.logE
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
 import java.util.*
+import kotlin.collections.set
 
 
 object MusicPlayerRemote : KoinComponent {
@@ -42,14 +43,6 @@ object MusicPlayerRemote : KoinComponent {
     var musicService: MusicService? = null
 
     private val songRepository by inject<SongRepository>()
-
-    var isCasting: Boolean = false
-        set(value) {
-            field = value
-            if (value) {
-                musicService?.quit()
-            }
-        }
 
     @JvmStatic
     val isPlaying: Boolean
@@ -71,9 +64,6 @@ object MusicPlayerRemote : KoinComponent {
             musicService?.nextSong
         } else Song.emptySong
 
-    /**
-     * Async
-     */
     var position: Int
         get() = if (musicService != null) {
             musicService!!.position
@@ -121,20 +111,18 @@ object MusicPlayerRemote : KoinComponent {
 
     fun bindToService(context: Context, callback: ServiceConnection): ServiceToken? {
 
-        var realActivity: Activity? = (context as Activity).parent
-        if (realActivity == null) {
-            realActivity = context
-        }
-
+        val realActivity = (context as Activity).parent ?: context
         val contextWrapper = ContextWrapper(realActivity)
         val intent = Intent(contextWrapper, MusicService::class.java)
+
+        // https://issuetracker.google.com/issues/76112072#comment184
+        // Workaround for ForegroundServiceDidNotStartInTimeException
         try {
-            contextWrapper.startService(intent)
-        } catch (ignored: IllegalStateException) {
-            runCatching {
-                ContextCompat.startForegroundService(context, intent)
-            }
+            context.startService(intent)
+        } catch (e: Exception) {
+            ContextCompat.startForegroundService(context, intent)
         }
+
         val binder = ServiceBinder(callback)
 
         if (contextWrapper.bindService(
@@ -184,9 +172,6 @@ object MusicPlayerRemote : KoinComponent {
         return musicService?.playingQueue?.size ?: -1
     }
 
-    /**
-     * Async
-     */
     fun playSongAt(position: Int) {
         musicService?.playSongAt(position)
     }
@@ -232,14 +217,9 @@ object MusicPlayerRemote : KoinComponent {
             ) && musicService != null
         ) {
             musicService?.openQueue(queue, startPosition, startPlaying)
-            if (PreferenceUtil.isShuffleModeOn)
-                setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
         }
     }
 
-    /**
-     * Async
-     */
     @JvmStatic
     fun openAndShuffleQueue(queue: List<Song>, startPlaying: Boolean) {
         var startPosition = 0
@@ -437,13 +417,13 @@ object MusicPlayerRemote : KoinComponent {
                     }
                 }
             }
-            if (songs == null || songs.isEmpty()) {
+            if (songs.isNullOrEmpty()) {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
-                    songFile = File(
-                        getExternalStorageDirectory(),
-                        uri.path?.split(":".toRegex(), 2)?.get(1)
-                    )
+                    val path = uri.path?.split(":".toRegex(), 2)?.get(1)
+                    if (path != null) {
+                        songFile = File(getExternalStorageDirectory(), path)
+                    }
                 }
                 if (songFile == null) {
                     val path = getFilePathFromUri(context, uri)
@@ -457,12 +437,14 @@ object MusicPlayerRemote : KoinComponent {
                     songs = songRepository.songsByFilePath(songFile.absolutePath, true)
                 }
             }
-            if (songs != null && songs.isNotEmpty()) {
+            if (!songs.isNullOrEmpty()) {
                 openQueue(songs, 0, true)
             } else {
-                // TODO the file is not listed in the media store
-                context.showToast(R.string.unplayable_file)
-                println("The file is not listed in the media store")
+                try {
+                    context.showToast(R.string.unplayable_file)
+                } catch (e: Exception) {
+                    logE("The file is not listed in the media store")
+                }
             }
         }
     }

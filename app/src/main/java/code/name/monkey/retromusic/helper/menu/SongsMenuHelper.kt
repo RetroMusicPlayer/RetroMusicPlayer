@@ -14,6 +14,7 @@
  */
 package code.name.monkey.retromusic.helper.menu
 
+import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
@@ -21,6 +22,7 @@ import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
+import code.name.monkey.retromusic.util.MusicUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,6 +53,15 @@ object SongsMenuHelper : KoinComponent {
                             .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                     }
                 }
+                return true
+            }
+            R.id.action_share -> {
+                activity.startActivity(
+                    Intent.createChooser(
+                        MusicUtil.createShareMultipleSongIntent(activity, songs),
+                        null
+                    )
+                )
                 return true
             }
             R.id.action_delete_from_device -> {

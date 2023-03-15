@@ -21,15 +21,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:gravity="center_vertical|left|end"
             android:paddingStart="8dp"
+            android:paddingEnd="0dp"
             android:singleLine="true"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="@tools:sample/date/hhmmss" />
 
         <androidx.appcompat.widget.AppCompatSeekBar
@@ -37,24 +36,21 @@
             style="@style/MusicProgressSlider"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:paddingVertical="@dimen/seekbar_padding"
             app:layout_constraintEnd_toStartOf="@id/songTotalTime"
-            app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
-            tools:ignore="RtlHardcoded,UnusedAttribute" />
+            app:layout_constraintStart_toEndOf="@id/songCurrentProgress" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|right|end"
             android:paddingEnd="8dp"
+            android:paddingStart="0dp"
             android:singleLine="true"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="@tools:sample/date/hhmmss" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -165,7 +161,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="?attr/roundSelector"
         app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
         app:layout_constraintEnd_toStartOf="@+id/nextButton"
         app:layout_constraintHorizontal_bias="0.5"

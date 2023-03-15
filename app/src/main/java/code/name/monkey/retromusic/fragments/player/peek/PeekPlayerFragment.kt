@@ -18,9 +18,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
-import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPeekPlayerBinding
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
@@ -68,7 +68,7 @@ class PeekPlayerFragment : AbsPlayerFragment(R.layout.fragment_peek_player) {
     private fun setUpPlayerToolbar() {
         binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { requireActivity().onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
             setOnMenuItemClickListener(this@PeekPlayerFragment)
             ToolbarContentTintHelper.colorizeToolbar(
                 this,

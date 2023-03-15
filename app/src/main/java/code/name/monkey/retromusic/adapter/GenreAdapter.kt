@@ -23,13 +23,15 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ItemGenreBinding
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
+import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.interfaces.IGenreClickListener
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 import java.util.*
 
 /**
@@ -68,10 +70,10 @@ class GenreAdapter(
 
     private fun loadGenreImage(genre: Genre, holder: GenreAdapter.ViewHolder) {
         val genreSong = MusicUtil.songByGenre(genre.id)
-        GlideApp.with(activity)
+        Glide.with(activity)
             .asBitmapPalette()
-            .load(RetroGlideExtension.getSongModel(genreSong))
             .songCoverOptions(genreSong)
+            .load(RetroGlideExtension.getSongModel(genreSong))
             .into(object : RetroMusicColoredTarget(holder.binding.image) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(holder, colors)

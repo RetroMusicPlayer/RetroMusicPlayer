@@ -23,7 +23,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
-import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
@@ -33,7 +32,11 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentFullPlayerControlsBinding
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.applyColor
+import code.name.monkey.retromusic.extensions.getSongInfo
+import code.name.monkey.retromusic.extensions.getTintedDrawable
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
@@ -45,10 +48,11 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.slider.Slider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 /**
  * Created by hemanths on 20/09/17.
@@ -58,11 +62,11 @@ class FullPlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_full_player_controls),
     PopupMenu.OnMenuItemClickListener {
 
-    private val libraryViewModel: LibraryViewModel by sharedViewModel()
+    private val libraryViewModel: LibraryViewModel by activityViewModel()
     private var _binding: FragmentFullPlayerControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val progressSlider: Slider
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -177,10 +181,9 @@ class FullPlaybackControlsFragment :
 
     private fun setUpPlayPauseFab() {
         binding.playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
-        binding.playPauseButton.post {
-            binding.playPauseButton.pivotX = (binding.playPauseButton.width / 2).toFloat()
-            binding.playPauseButton.pivotY = (binding.playPauseButton.height / 2).toFloat()
-        }
+
+        binding.playPauseButton.pivotX = (binding.playPauseButton.width / 2).toFloat()
+        binding.playPauseButton.pivotY = (binding.playPauseButton.height / 2).toFloat()
     }
 
     private fun setUpMusicControllers() {

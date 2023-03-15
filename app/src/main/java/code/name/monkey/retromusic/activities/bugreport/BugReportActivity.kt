@@ -64,7 +64,6 @@ open class BugReportActivity : AbsThemeActivity() {
 
     private fun reportIssue() {
         copyDeviceInfoToClipBoard()
-
         val i = Intent(Intent.ACTION_VIEW)
         i.data = ISSUE_TRACKER_LINK.toUri()
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -80,15 +79,9 @@ open class BugReportActivity : AbsThemeActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun tryToFinishActivity() {
-        if (!isFinishing) {
-            finish()
-        }
     }
 
     companion object {

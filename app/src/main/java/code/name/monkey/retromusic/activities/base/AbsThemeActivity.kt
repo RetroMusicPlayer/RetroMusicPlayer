@@ -20,15 +20,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
-import android.view.View
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
 import androidx.core.os.ConfigurationCompat
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.LanguageContextWrapper
-import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.maybeShowAnnoyingToasts
 import code.name.monkey.retromusic.util.theme.getNightMode
 import code.name.monkey.retromusic.util.theme.getThemeResValue
 import java.util.*
@@ -42,13 +42,13 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         hideStatusBar()
         super.onCreate(savedInstanceState)
         setEdgeToEdgeOrImmersive()
-        registerSystemUiVisibility()
-        toggleScreenOn()
+        maybeSetScreenOn()
         setLightNavigationBarAuto()
         setLightStatusBarAuto(surfaceColor())
         if (VersionUtils.hasQ()) {
             window.decorView.isForceDarkAllowed = false
         }
+        maybeShowAnnoyingToasts()
     }
 
     private fun updateTheme() {
@@ -59,9 +59,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
         if (PreferenceUtil.isCustomFont) {
             setTheme(R.style.FontThemeOverlay)
-        }
-        if (PreferenceUtil.circlePlayButton) {
-            setTheme(R.style.CircleFABOverlay)
         }
     }
 
@@ -76,20 +73,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         }
     }
 
-    private fun registerSystemUiVisibility() {
-        val decorView = window.decorView
-        decorView.setOnSystemUiVisibilityChangeListener { visibility ->
-            if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
-                setImmersiveFullscreen()
-            }
-        }
-    }
-
-    private fun unregisterSystemUiVisibility() {
-        val decorView = window.decorView
-        decorView.setOnSystemUiVisibilityChangeListener(null)
-    }
-
     override fun run() {
         setImmersiveFullscreen()
     }
@@ -101,7 +84,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
     public override fun onDestroy() {
         super.onDestroy()
-        unregisterSystemUiVisibility()
         exitFullscreen()
     }
 

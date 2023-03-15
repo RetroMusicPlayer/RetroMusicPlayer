@@ -14,7 +14,7 @@
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="@string/pref_title_general_theme"
-            app:icon="@drawable/ic_color_lens" />
+            app:icon="@drawable/ic_palette_outline" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:key="black_theme"

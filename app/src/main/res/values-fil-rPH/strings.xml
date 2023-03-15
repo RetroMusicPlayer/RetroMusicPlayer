@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Idagdag sa mga paborito</string>
     <string name="action_add_to_playing_queue">Idagdag sa playing queue</string>
     <string name="action_add_to_playlist">Idagdag sa playlist</string>
+    <string name="action_cancel">Kanselahin</string>
     <string name="action_cast">Kast</string>
     <string name="action_clear_playing_queue">Burahin ang playing queue</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
@@ -90,6 +91,8 @@
     <string name="biography">Talambuhay</string>
     <string name="black_theme_name">Itim Lamang</string>
     <string name="blacklist">Blacklist</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Blur</string>
     <string name="blur_card">Blur Card</string>
     <string name="bug_report_failed">Hindi makapag-padala ng report</string>
@@ -103,6 +106,7 @@
     <string name="bug_report_no_password">Pakilagay ang iyong wastong password sa GitHub</string>
     <string name="bug_report_no_title">Maglagay ng pamagat sa isyu</string>
     <string name="bug_report_no_username">Pakilagay ang iyong wastong GitHub username</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">May naganap na hindi inaasahang error. Paumanhin, nakikita mo ang bug na ito, kung patuloy itong nagka-crash \"Burahin ang data ng app\" o magpadala ng Email </string>
     <string name="bug_report_use_account">Ipadala gamit ang GitHub account</string>
     <string name="buy_now">Bumili na ngayon</string>
@@ -126,6 +130,7 @@
     <string name="clear_playing_queue">Linisin ang queue</string>
     <string name="color">Kulay</string>
     <string name="colors">Mga kulay</string>
+    <string name="compact">Compact</string>
     <string name="composer">Kompositor</string>
     <string name="copied_device_info_to_clipboard">Kinopya ang impormasyon ng device sa clipboard.</string>
     <string name="could_not_create_playlist">Hindi makagawa ng playlist.</string>
@@ -168,8 +173,15 @@
     <string name="edit_synced_lyrics">I-edit ang Naka-sync na Lyrics</string>
     <string name="empty">Walang laman</string>
     <string name="equalizer">Equalizer</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Mga Paborito</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Tapusin ang huling kanta</string>
     <string name="fit">Angkop</string>
     <string name="flat">Patag</string>
@@ -181,10 +193,11 @@
     <string name="full_card">Full Kard</string>
     <string name="general_settings_summary">I-change ang theme at mga kulay ng app</string>
     <string name="general_settings_title">Tanaw at diwa</string>
-    <string name="genre">Genre</string>
-    <string name="genres">Mga Genre</string>
+    <string name="genre">Dyanra</string>
+    <string name="genres">Mga Dyanra</string>
     <string name="git_hub_summary">I-fork ang proyekto sa GitHub</string>
     <string name="gradient">Gradient</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -222,6 +235,7 @@
     <string name="labeled">Lebelado</string>
     <string name="last_added">Huling idinagdag</string>
     <string name="last_song">Huling kanta</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Mga kategorya ng librerya</string>
     <string name="licenses">Mga lisensya</string>
     <string name="light_theme_name">Malinaw na Puti</string>
@@ -234,6 +248,12 @@
     <string name="material">Materyal</string>
     <string name="md_error_label">Nagka-mali</string>
     <string name="md_storage_perm_error">Maling permiso</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Pangalan</string>
     <string name="my_top_tracks">Madalas patugtugin</string>
     <string name="never">Hindi kailanman</string>
@@ -274,6 +294,7 @@
     <string name="paste_lyrics_here">Idikit ang Lyrics Dito</string>
     <string name="paste_timeframe_lyrics_here">Idikit ang timeframe lyrics dito</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Tinanggihan ang pahintulot na ma-access ang panlabas na storage.</string>
     <string name="permission_summary">Ang app ay nangangailangan ng permiso upang ma-access ang storage ng iyong device para ma-play ang musika</string>
     <string name="permission_title">I-access ang storage</string>
@@ -336,25 +357,26 @@
     <string name="pref_summary_ignore_media_store_artwork">Maaaring pataasin ang kalidad ng album cover, ngunit nagiging sanhi ng mas mabagal na oras ng paglo-load ng larawan. Paganahin lamang ito kung mayroon kang mga problema sa mga likhang sining na may mababang resolusyon</string>
     <string name="pref_summary_library_categories">I-configure ang visibility at pagkakasunud-sunod ng mga kategorya ng librerya.</string>
     <string name="pref_summary_lock_screen">Gamitin ang Reto Music\'s custom para sa lockscreen controls</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Mga detalye ng lisensya para sa open source software</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">I-navigate sa huling ginamit na tab sa simula</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">Agad magsimula ang kanta pagkatapos maikonekta ang mga headphone</string>
     <string name="pref_summary_toggle_shuffle">Mag-o-off ang shuffle mode kapag nagpe-play ng bagong listahan ng mga kanta</string>
     <string name="pref_summary_toggle_volume">Kung may sapat na espasyo, ipakita ang mga kontrol ng volume sa screen ng now playing</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Magpakita lamang ng musika mula sa /Music Folder</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Ipakita ang album cover</string>
     <string name="pref_title_album_artists_only">I-navigate ayon sa Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Laktawan ang album cover</string>
     <string name="pref_title_app_shortcuts">May kulay na mga shortcut app</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Bawasan ang volume sa focus loss</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Auto-download mga larawan ng artista</string>
@@ -381,6 +403,7 @@
     <string name="pref_title_lock_screen">Mga kontrol sa fullscreen</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Theme para sa now playing</string>
     <string name="pref_title_open_source_licences">Mga lisensyang open source</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -388,6 +411,7 @@
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Mode sa mga pamagat ng tab</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">I-Fullscreen ang app</string>
@@ -396,9 +420,8 @@
     <string name="pref_title_toggle_volume">Mga kontrol sa volume</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Mga theme sa now playing, Carousel effect at higit pa..</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
     <string name="purchase">Bumili</string>
     <string name="queue">Playing Queue</string>
@@ -475,6 +498,7 @@
     <string name="sort_order_composer">Kompositor</string>
     <string name="sort_order_date">Ang petsa ay nadagdag</string>
     <string name="sort_order_date_modified">Ang petsa ay nabago</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Bilang ng kanta</string>
     <string name="sort_order_num_songs_desc">Bilang ng kanta pababa</string>
     <string name="sort_order_year">Taon</string>
@@ -499,7 +523,7 @@
     <string name="title">Pamagat</string>
     <string name="title_new_backup">Bagong Backup</string>
     <string name="today">Ngayon</string>
-    <string name="top_albums">Nangungunang mga album</string>
+    <string name="top_albums">Mga nangungunang album</string>
     <string name="top_artists">Nangungunang mga artista</string>
     <string name="track_hint">"Track (2 para sa track 2 o 3004 para sa CD3 track 4)"</string>
     <string name="track_list">Numero ng track</string>
@@ -534,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Kailangan mong pumili ng kahit isang kategorya.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Ipapasa ka sa website ng tagasubaybay ng isyu.</string>
     <string name="your_account_data_is_only_used_for_authentication">Ginagamit lang ang iyong account data para sa pagpapatunay.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>

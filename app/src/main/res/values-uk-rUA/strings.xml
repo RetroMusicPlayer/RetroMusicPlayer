@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Додати в обране</string>
     <string name="action_add_to_playing_queue">Додати до черги відтворення</string>
     <string name="action_add_to_playlist">Додати до списку відтворення</string>
+    <string name="action_cancel">Відмінити</string>
     <string name="action_cast">Трансляція на іншому дисплеї</string>
     <string name="action_clear_playing_queue">Очистити чергу відтворення</string>
     <string name="action_cycle_repeat">Циклічне повторення</string>
@@ -94,6 +95,8 @@
     <string name="biography">Життєпис</string>
     <string name="black_theme_name">Чорний</string>
     <string name="blacklist">Чорний список</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Розмиття</string>
     <string name="blur_card">Розмита картка</string>
     <string name="bug_report_failed">Не вдалося надіслати звіт</string>
@@ -107,6 +110,7 @@
     <string name="bug_report_no_password">Введіть свій дійсний пароль користувача GitHub</string>
     <string name="bug_report_no_title">Введіть заголовок проблеми</string>
     <string name="bug_report_no_username">Введіть своє дійсне ім’я користувача GitHub</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте \"Очистити дані додатка\" або надішліть лист на ел. пошту </string>
     <string name="bug_report_use_account">Надіслати через обліковий запис GitHub</string>
     <string name="buy_now">Придбайте вже</string>
@@ -130,6 +134,7 @@
     <string name="clear_playing_queue">Очистити чергу</string>
     <string name="color">Колір</string>
     <string name="colors">Кольори</string>
+    <string name="compact">Compact</string>
     <string name="composer">Композитор</string>
     <string name="copied_device_info_to_clipboard">Скопійовано інформацію про пристрій у буфер обміну.</string>
     <string name="could_not_create_playlist">Не вдалося створити список відтворення.</string>
@@ -172,8 +177,15 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Порожньо</string>
     <string name="equalizer">Еквалайзер</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">ЧаП</string>
     <string name="favorites">Обране</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Закінчити останню пісню</string>
     <string name="fit">Вмістити</string>
     <string name="flat">Плоский</string>
@@ -189,6 +201,7 @@
     <string name="genres">Жанри</string>
     <string name="git_hub_summary">Розгалужити проект на GitHub</string>
     <string name="gradient">Gradient</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -226,6 +239,7 @@
     <string name="labeled">З відміткою</string>
     <string name="last_added">Нещодавно додане</string>
     <string name="last_song">Остання пісня</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Категорії бібліотеки</string>
     <string name="licenses">Ліцензії</string>
     <string name="light_theme_name">Яскраво-білий</string>
@@ -238,6 +252,12 @@
     <string name="material">Матеріал</string>
     <string name="md_error_label">Помилка</string>
     <string name="md_storage_perm_error">Помилка дозволу</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Назва</string>
     <string name="my_top_tracks">Найчастіше відтворювані</string>
     <string name="never">Ніколи</string>
@@ -278,6 +298,7 @@
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Відмовлено у доступі до зовнішнього сховища.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>
@@ -340,25 +361,26 @@
     <string name="pref_summary_ignore_media_store_artwork">Може збільшити якість обкладинки альбому, але збільшує час завантаження зображення. Використовуйте тільки якщо у вас проблеми з обкладинками низької роздільної здатності</string>
     <string name="pref_summary_library_categories">Налаштувати видимість та порядок категорій бібліотеки.</string>
     <string name="pref_summary_lock_screen">Використовувати керування музикою на екрані блокування від Retro Music</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Деталі ліцензії для програмного забезпечення з відкритим кодом</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Режим занурення</string>
     <string name="pref_summary_toggle_headset">Почати відтворення відразу після підключення навушників</string>
     <string name="pref_summary_toggle_shuffle">Випадковий режим вимкнеться при відтворенні нового списку пісень</string>
     <string name="pref_summary_toggle_volume">Якщо вистачає місця, показувати панель гучності на екрані відтворення</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Показати обкладинку альбому</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Тема обкладинки альбому</string>
     <string name="pref_title_album_cover_transform">Пропустити обкладинку альбому</string>
     <string name="pref_title_app_shortcuts">Кольорові ярлики додатків</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Зменшити гучність при сторонніх звуках</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Автоматично завантажувати зображення виконавців</string>
@@ -385,6 +407,7 @@
     <string name="pref_title_lock_screen">Повноекранне керування</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Тема відтворення</string>
     <string name="pref_title_open_source_licences">Ліцензії з відкритим кодом</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -392,6 +415,7 @@
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Режим назв вкладок</string>
     <string name="pref_title_toggle_carousel_effect">Ефект Каруселі</string>
     <string name="pref_title_toggle_full_screen">На весь екран</string>
@@ -400,9 +424,8 @@
     <string name="pref_title_toggle_volume">Регулювання гучності</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Чорна тема, теми відтворення, ефект каруселі та інше..</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Профіль</string>
     <string name="purchase">Придбати</string>
     <string name="queue">Черга</string>
@@ -479,6 +502,7 @@
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата додавання</string>
     <string name="sort_order_date_modified">Дата змінення</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Song count</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Рік</string>
@@ -538,5 +562,4 @@
     <string name="you_have_to_select_at_least_one_category">Виберіть принаймні одну категорію.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вас буде перенаправлено на сайт відстеження проблем.</string>
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>

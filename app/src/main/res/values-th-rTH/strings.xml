@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">เพิ่มเข้าเพลงโปรด</string>
     <string name="action_add_to_playing_queue">เพิ่มเข้าคิวเพลง</string>
     <string name="action_add_to_playlist">เพิ่มเข้าเพลย์ลิสต์</string>
+    <string name="action_cancel">ยกเลิก</string>
     <string name="action_cast">แคสต์</string>
     <string name="action_clear_playing_queue">ล้างคิวเพลง</string>
     <string name="action_cycle_repeat">เปิดเล่นซ้ำ</string>
@@ -88,6 +89,8 @@
     <string name="biography">ประวัติ</string>
     <string name="black_theme_name">Just Black</string>
     <string name="blacklist">แบล็คลิสต์</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Blur</string>
     <string name="blur_card">Blur Card</string>
     <string name="bug_report_failed">ไม่สามารถส่งรายการได้</string>
@@ -101,6 +104,7 @@
     <string name="bug_report_no_password">กรุณากรอกรหัสผ่านที่ถูกต้องของ Github</string>
     <string name="bug_report_no_title">กรุณากรอกหัวข้อของปัญหา</string>
     <string name="bug_report_no_username">กรุณากรอกชื่อผู้ใช้งานที่ถูกต้องของ Github</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">เกิดข้อผิดพลาดบางประการ, ขออภัยในความผิดพลาด, ถ้ายังคงเกิดปัญหาอยู่กรุณา \"Clear app data\" หรือ ส่งอีเมลหาผู้พัฒนา</string>
     <string name="bug_report_use_account">ส่งโดยใช้บัญชี Github</string>
     <string name="buy_now">ซื้อทันที</string>
@@ -124,6 +128,7 @@
     <string name="clear_playing_queue">ล้างคิวเพลง</string>
     <string name="color">สี</string>
     <string name="colors">สี</string>
+    <string name="compact">Compact</string>
     <string name="composer">ผู้แต่ง</string>
     <string name="copied_device_info_to_clipboard">คัดลอกข้อมูลเครื่อง</string>
     <string name="could_not_create_playlist">ไม่สามารถสร้างเพลย์ลิสได้</string>
@@ -166,8 +171,15 @@
     <string name="edit_synced_lyrics">ปุ่มซิงค์เนื้อเพลง</string>
     <string name="empty">ว่างเปล่า</string>
     <string name="equalizer">Equalizer</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">คำถามที่พบบ่อย</string>
     <string name="favorites">เพลงโปรด</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">ปิดเมื่อเพลงสุดท้ายจบ</string>
     <string name="fit">Fit</string>
     <string name="flat">Flat</string>
@@ -183,6 +195,7 @@
     <string name="genres">ประเภทเพลง</string>
     <string name="git_hub_summary">Fork โปรเจคจาก GitHub</string>
     <string name="gradient">การไล่ระดับสี</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -220,6 +233,7 @@
     <string name="labeled">แสดงตัวหนังสือ</string>
     <string name="last_added">เพิ่มล่าสุด</string>
     <string name="last_song">เพลงล่าสุด</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">หมวดหมู่คลังเพลง</string>
     <string name="licenses">Licenses</string>
     <string name="light_theme_name">Clearly White</string>
@@ -232,6 +246,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">เกิดข้อผิดพลาด</string>
     <string name="md_storage_perm_error">ไม่มีสิทธิ์ในการเข้าถึง</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">ชื่อ</string>
     <string name="my_top_tracks">ฟังบ่อย</string>
     <string name="never">ไม่ต้อง</string>
@@ -272,6 +292,7 @@
     <string name="paste_lyrics_here">วางเนื้อเพลงที่นี่</string>
     <string name="paste_timeframe_lyrics_here">วางเนื้อเพลงในกรอบเวลาที่นี่</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">สิทธิ์ในการเข้าถึงถูกปฏิเสธ</string>
     <string name="permission_summary">ต้องการสิทธิ์ในการเข้าถึงข้อมูลในเครื่องเพื่อเล่นเพลง</string>
     <string name="permission_title">เข้าถึงการจัดเก็บข้อมูล</string>
@@ -334,25 +355,26 @@
     <string name="pref_summary_ignore_media_store_artwork">เพิ่มคุณภาพของรูปปกอัลบัม แต่จะส่งผลให้โหลดรูปภาพช้าขึ้น</string>
     <string name="pref_summary_library_categories">ตั้งค่าการแสดงผลและจัดเรียงของหมวดหมู่คลังเพลง</string>
     <string name="pref_summary_lock_screen">ใช้ Retro Music ในหน้าล็อคสกรีน</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">รายละเอียด License สำหรับ open source software</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">ไปที่แท็บที่ใช้งานล่าสุดเมื่อเริ่มใช้งาน</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">โหมด Immersive</string>
     <string name="pref_summary_toggle_headset">เล่นทันทีเมื่อเชื่อมต่อกับหูฟัง</string>
     <string name="pref_summary_toggle_shuffle">โหมดการสุ่มจะถูกปิดเมื่อเล่นรายการเพลงใหม่</string>
     <string name="pref_summary_toggle_volume">หากพื้นที่ในการแสดงผลเพียงพอให้แสดงปุ่มเพิ่ม/ลดเสียงบนหน้าจอ Now playing </string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">แสดงเฉพาะเพลงจาก Music โฟลเดอร์</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">แสดงรูปปกอัลบัม</string>
     <string name="pref_title_album_artists_only">นำทางโดยอัลบัมศิลปิน</string>
     <string name="pref_title_album_cover_style">ธีมของรูปปกอัลบัม</string>
     <string name="pref_title_album_cover_transform">ข้ามรูปปกอัลบัม</string>
     <string name="pref_title_app_shortcuts">สีของทางลัดเข้าแอป</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">ลบเสียงเมื่อหลุดโฟกัส</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">ดาวน์โหลดรูปศิลปินอัตโนมัติ</string>
@@ -379,6 +401,7 @@
     <string name="pref_title_lock_screen">แสดงผลเต็มจอ</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">ธีมของ Now Playing</string>
     <string name="pref_title_open_source_licences">สัญญาอนุญาตสำหรับโอเพนซอร์ส</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -386,6 +409,7 @@
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">โหมดการแสดงผลแท็ป</string>
     <string name="pref_title_toggle_carousel_effect">การใช้งาน Carousel</string>
     <string name="pref_title_toggle_full_screen">แสดงผลเต็มจอ</string>
@@ -394,9 +418,8 @@
     <string name="pref_title_toggle_volume">ปุ่มควบคุมเสียง</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">โปร</string>
-    <string name="pro_summary">ธีม Black, ธีม Now playing, การแสดงผลแบบ Carousel และอื่นๆ</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">โปรไฟล์</string>
     <string name="purchase">สั่งซื้อ</string>
     <string name="queue">คิวเพลง</string>
@@ -411,7 +434,7 @@
     <string name="remove_song_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
     <string name="remove_song_x_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="remove_songs_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$d</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="rename_playlist_title">เปลี่ยนขื่อเพลย์ลิสต์</string>
     <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">รายการปัญหา</string>
@@ -473,6 +496,7 @@
     <string name="sort_order_composer">ผู้แต่ง</string>
     <string name="sort_order_date">วันที่เพิ่ม</string>
     <string name="sort_order_date_modified">วันที่แก้ไข</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">จำนวนเพลง</string>
     <string name="sort_order_num_songs_desc">จำนวนเพลง (มากไปน้อย)</string>
     <string name="sort_order_year">ปี</string>
@@ -532,5 +556,4 @@
     <string name="you_have_to_select_at_least_one_category">คุณต้องเลือกอย่างน้อยหนึ่งหมวดหมู่</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">ท่านจะติดตามการรายงานปัญหาจากเว็บไซต์</string>
     <string name="your_account_data_is_only_used_for_authentication">ข้อมูลบัญชีของท่านจะใช้สำหรับการเข้าสู่ระบบเท่านั้น</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>

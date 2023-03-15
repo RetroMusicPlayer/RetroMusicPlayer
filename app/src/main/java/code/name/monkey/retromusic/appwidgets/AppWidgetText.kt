@@ -40,29 +40,29 @@ class AppWidgetText : BaseAppWidget() {
         appWidgetView.setImageViewBitmap(
             R.id.button_next,
             context.getTintedDrawable(R.drawable.ic_skip_next, ContextCompat.getColor(
-                context, R.color.md_white_1000
+                context, code.name.monkey.appthemehelper.R.color.md_white_1000
             )).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
             R.id.button_prev,
             context.getTintedDrawable(R.drawable.ic_skip_previous, ContextCompat.getColor(
-                context, R.color.md_white_1000
+                context, code.name.monkey.appthemehelper.R.color.md_white_1000
             )
             ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
             R.id.button_toggle_play_pause,
             context.getTintedDrawable(R.drawable.ic_play_arrow_white_32dp, ContextCompat.getColor(
-                context, R.color.md_white_1000
+                context, code.name.monkey.appthemehelper.R.color.md_white_1000
             )
             ).toBitmap()
         )
 
         appWidgetView.setTextColor(
-            R.id.title, ContextCompat.getColor(context, R.color.md_white_1000)
+            R.id.title, ContextCompat.getColor(context, code.name.monkey.appthemehelper.R.color.md_white_1000)
         )
         appWidgetView.setTextColor(
-            R.id.text, ContextCompat.getColor(context, R.color.md_white_1000)
+            R.id.text, ContextCompat.getColor(context, code.name.monkey.appthemehelper.R.color.md_white_1000)
         )
 
         linkButtons(context, appWidgetView)
@@ -127,7 +127,7 @@ class AppWidgetText : BaseAppWidget() {
         appWidgetView.setImageViewBitmap(
             R.id.button_toggle_play_pause,
             service.getTintedDrawable(playPauseRes, ContextCompat.getColor(
-                service, R.color.md_white_1000)
+                service, code.name.monkey.appthemehelper.R.color.md_white_1000)
             ).toBitmap()
         )
         appWidgetView.setImageViewBitmap(
@@ -136,7 +136,7 @@ class AppWidgetText : BaseAppWidget() {
                 R.drawable.ic_skip_next,
                 ContextCompat.getColor(
                     service,
-                    R.color.md_white_1000
+                    code.name.monkey.appthemehelper.R.color.md_white_1000
                 )
             ).toBitmap()
         )
@@ -145,7 +145,7 @@ class AppWidgetText : BaseAppWidget() {
             service.getTintedDrawable(
                 R.drawable.ic_skip_previous,
                 ContextCompat.getColor(
-                    service, R.color.md_white_1000
+                    service, code.name.monkey.appthemehelper.R.color.md_white_1000
                 )
             ).toBitmap()
         )

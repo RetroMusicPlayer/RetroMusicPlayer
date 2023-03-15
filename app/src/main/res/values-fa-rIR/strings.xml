@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">افزودن به موارد مورد علاقه</string>
     <string name="action_add_to_playing_queue">افزودن به لیست پخش آهنگ</string>
     <string name="action_add_to_playlist">افزودن به لیست پخش</string>
+    <string name="action_cancel">انصراف</string>
     <string name="action_cast">پخش و نمایش تصویر</string>
     <string name="action_clear_playing_queue">لیست پخش اهنگ هارا پاک کنید</string>
     <string name="action_cycle_repeat">حالت چرخش تکراری اهنگ ها</string>
@@ -56,7 +57,7 @@
     <string name="add_time_framed_lryics">اضافه کردن متون دارای زمان</string>
     <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"یک‌ مورد به لیست پخش اهنگ ها اضافه شد."</string>
-    <string name="added_x_titles_to_playing_queue">مورد خاص به لیست پخش اهنگ اضافه شد.</string>
+    <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
     <string name="album">آلبوم</string>
     <plurals name="albumSongs">
         <item quantity="one">آهنگ ها</item>
@@ -90,6 +91,8 @@
     <string name="biography">زندگینامه</string>
     <string name="black_theme_name">حالت فقط مِشکی</string>
     <string name="blacklist">لیست سیاه</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">حالت بلور</string>
     <string name="blur_card">حالت برگه ی بلور شده</string>
     <string name="bug_report_failed">نتوانستیم گزارش را بفرستیم</string>
@@ -103,6 +106,7 @@
     <string name="bug_report_no_password">لطفاً رمز گیتهاب خود را وارد کنید</string>
     <string name="bug_report_no_title">لطفاً عنوان مشکل را وارد کنید</string>
     <string name="bug_report_no_username">لطفاً نام کاربری گیتهاب خود را وارد کنید</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">یک مشکل پیش بینی نشده رخ داد. متأسفیم که شما این باگ را پیدا کردید، اگر برنامه به متوقف شدن ادامه داد لطفاً برنامه را کلیر دیتا کنید یا برای ما ایمیل بفرستید </string>
     <string name="bug_report_use_account">فرستادن به عنوان اکانت گیتهاب</string>
     <string name="buy_now">اکنون بخرید</string>
@@ -126,6 +130,7 @@
     <string name="clear_playing_queue">پاکسازی صف</string>
     <string name="color">رنگ</string>
     <string name="colors">رنگ ها</string>
+    <string name="compact">Compact</string>
     <string name="composer">آهنگساز</string>
     <string name="copied_device_info_to_clipboard">اطلاعات دستگاه در کلیپ بورد کپی شد.</string>
     <string name="could_not_create_playlist">نمیتوان پلی لیست ساخت.</string>
@@ -168,8 +173,15 @@
     <string name="edit_synced_lyrics">متن آهنگ های هماهنگ شده</string>
     <string name="empty">خالی</string>
     <string name="equalizer">اکولایزر</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">سوالات متداول</string>
     <string name="favorites">موارد مورد علاقه</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">اخرین اهنگ را تمام کردن</string>
     <string name="fit">متناسب</string>
     <string name="flat">تخت و مسطح</string>
@@ -185,6 +197,7 @@
     <string name="genres">ژانر ها</string>
     <string name="git_hub_summary">فورک زدن پروژه در گیتهاب</string>
     <string name="gradient">حالت شیب دار</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">۱</string>
     <string name="grid_size_2">۲</string>
     <string name="grid_size_3">۳</string>
@@ -222,6 +235,7 @@
     <string name="labeled">برچسب دار</string>
     <string name="last_added">آخرین مورد اضافه شده</string>
     <string name="last_song">اخرین آهنگ</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">دسته بندی های کتابخانه</string>
     <string name="licenses">مجوزها</string>
     <string name="light_theme_name">کاملا سفید</string>
@@ -234,6 +248,12 @@
     <string name="material">تم material</string>
     <string name="md_error_label">خطا</string>
     <string name="md_storage_perm_error">خطای دسترسی</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">عنوان</string>
     <string name="my_top_tracks">بیشترین پخش شده</string>
     <string name="never">هرگز</string>
@@ -274,6 +294,7 @@
     <string name="paste_lyrics_here">متن را در اینجا بارگزاری کنید</string>
     <string name="paste_timeframe_lyrics_here">متون زمان دار را در اینجا بارگزاری کنید</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">مجوز دسترسی به حافظه رد شد</string>
     <string name="permission_summary">برنامه نیاز به دسترسی به حافظه برای پخش آهنگ ها دارد</string>
     <string name="permission_title">دسترسی به حافظه</string>
@@ -336,25 +357,26 @@
     <string name="pref_summary_ignore_media_store_artwork">باعث افزایش کیفیت کاور آلبوم ها میشود اما ممکن است لود انها دیرتر باشد. فقط در صورتی که با کیفیت ضعیف کاور البوم مشکل دارید فعالش کنید</string>
     <string name="pref_summary_library_categories">Library نمایش داده شود یا خیر.</string>
     <string name="pref_summary_lock_screen">از کنترل های رترو موزیک برای صفحه قفل استفاده شود</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">جزئیات مجوز برای نرم افزار منبع باز</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">هدایت شود به اخرین tab استفاده شده در آغاز</string>
     <string name="pref_summary_show_lyrics">نمایش متن آهنگ همگام‌سازی شده روی جلد آلبوم</string>
     <string name="pref_summary_suggestions">نمایش ترکیب موسیقی جدید در صفحه اصلی</string>
     <string name="pref_summary_swipe_anywhere_now_playing">تغییر آهنگ را با کشیدن انگشت در هر نقطه ای از صفحه در حال پخش فعال می کند</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">حالت همه جانبه</string>
     <string name="pref_summary_toggle_headset">پس از وصل شدن هدفون موزیک بلافاصله پخش شود</string>
     <string name="pref_summary_toggle_shuffle">حالت پخش مخلوط اهنگ ها زمانی که لیست جدید اهنگ را پلی می‌کنید، خاموش می‌شود</string>
     <string name="pref_summary_toggle_volume">اگر فضای کافی موجود بود، نوار صدا را نشان دهید در صفحه پخش موزیک</string>
     <string name="pref_summary_wallpaper_accent">رنگ تاکیدی را از کاغذ دیواری استخراج کنید</string>
     <string name="pref_summary_whitelist">فقط از پوشه ی موزیک، موزیک ها نمایش داده شود</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">نمایش جلد آلبوم</string>
     <string name="pref_title_album_artists_only">هدایت توسط آلبوم هنرمند</string>
     <string name="pref_title_album_cover_style">تم کاور آلبوم</string>
     <string name="pref_title_album_cover_transform">انیمیشن کاور البوم</string>
     <string name="pref_title_app_shortcuts">میان بُرهای رنگی برنامه</string>
-    <string name="pref_title_appbar_mode">حالت نوار برنامه</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">کاهش حجم از دست دادن فوکوس</string>
     <string name="pref_title_audio_fade">محو کردن صدا</string>
     <string name="pref_title_auto_download_artist_images">دانلود خودکار عکس هنرمندان</string>
@@ -381,6 +403,7 @@
     <string name="pref_title_lock_screen">کنترل های تمام صفحه</string>
     <string name="pref_title_lyrics_screen_on">هنگام نمایش متن ترانه صفحه نمایش را روشن نگه دارید</string>
     <string name="pref_title_lyrics_type">نوع متن ترانه</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">تمی که اکنون در حال پخش است</string>
     <string name="pref_title_open_source_licences">مجوزهای منبع باز</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -388,6 +411,7 @@
     <string name="pref_title_show_lyrics">نمایش متن ترانه</string>
     <string name="pref_title_suggestions">نمایش پیشنهادات</string>
     <string name="pref_title_swipe_anywhere_now_playing">برای تغییر آهنگ، انگشت خود را به هر جایی بکشید</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">حالت عنوان برگه ها</string>
     <string name="pref_title_toggle_carousel_effect">جلوه چرخ فلک</string>
     <string name="pref_title_toggle_full_screen">برنامه تمام‌صفحه</string>
@@ -396,9 +420,8 @@
     <string name="pref_title_toggle_volume">کنترل صدا</string>
     <string name="pref_title_wallpaper_accent">رنگ تاکیدی کاغذ دیواری</string>
     <string name="pref_title_whitelist">لیست سفید موسیقی</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">حرفه‌ای</string>
-    <string name="pro_summary">تم سیاه، تم های در حال پخش، جلوه چرخ فلک و موارد دیگر..</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">نمایه</string>
     <string name="purchase">خرید</string>
     <string name="queue">صف پخش</string>
@@ -475,6 +498,7 @@
     <string name="sort_order_composer">آهنگساز</string>
     <string name="sort_order_date">تاریخ اضافه شدن</string>
     <string name="sort_order_date_modified">تاریخ ویرایش شده</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">تعداد آهنگ</string>
     <string name="sort_order_num_songs_desc">کاهش تعداد آهنگ</string>
     <string name="sort_order_year">سال</string>
@@ -534,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">شما باید حداقل یک دسته را انتخاب کنید.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">شما به وب سایت ردیاب مشکل هدایت می شوید.</string>
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>

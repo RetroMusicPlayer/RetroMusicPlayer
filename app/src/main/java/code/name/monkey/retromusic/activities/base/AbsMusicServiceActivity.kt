@@ -33,6 +33,7 @@ import code.name.monkey.retromusic.service.MusicService.Companion.QUEUE_CHANGED
 import code.name.monkey.retromusic.service.MusicService.Companion.REPEAT_MODE_CHANGED
 import code.name.monkey.retromusic.service.MusicService.Companion.SHUFFLE_MODE_CHANGED
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -185,12 +186,12 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             true
         ) // just in case we need to know this at some point
         sendBroadcast(intent)
-        println("sendBroadcast $hasPermissions")
+        logD("sendBroadcast $hasPermissions")
     }
 
     override fun getPermissionsToRequest(): Array<String> {
         return mutableListOf(Manifest.permission.READ_EXTERNAL_STORAGE).apply {
-            if (!VersionUtils.hasQ()) {
+            if (!VersionUtils.hasR()) {
                 add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
         }.toTypedArray()

@@ -7,28 +7,28 @@ on:
     branches: [ dev ]
 
 jobs:
-  build:
-
+  check:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v2
-    - name: set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: gradle
+      - uses: actions/checkout@v3
+      - uses: gradle/wrapper-validation-action@v1
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+      - uses: gradle/gradle-build-action@v2
+      - name: Lint Android
+        run: ./gradlew lint
 
-    - name: Generate temporary keystore
-      run: keytool -genkey -v -storetype pkcs12 -keystore store.p12 -storepass android -alias android -keyalg RSA -keysize 2048 -validity 10000 -dname CN=CI
-    - name: Write retro.properties
-      run: |
-        cat >retro.properties <<EOF
-        storeFile=$PWD/store.p12
-        keyAlias=android
-        storePassword=android
-        keyPassword=android
-        EOF
-    - name: Build with Gradle
-      run: ./gradlew build
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+      - uses: gradle/gradle-build-action@v2
+      - name: Build
+        run: ./gradlew app:assemble

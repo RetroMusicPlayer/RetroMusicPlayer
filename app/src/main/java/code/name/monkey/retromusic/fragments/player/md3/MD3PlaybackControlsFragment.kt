@@ -14,12 +14,9 @@
  */
 package code.name.monkey.retromusic.fragments.player.md3
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
-import android.view.animation.LinearInterpolator
 import android.widget.ImageButton
-import android.widget.SeekBar
 import android.widget.TextView
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -32,20 +29,18 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.slider.Slider
 
 class MD3PlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_md3_player_playback_controls) {
 
-    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
     private var _binding: FragmentMd3PlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val progressSlider: Slider
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -65,11 +60,6 @@ class MD3PlaybackControlsFragment :
 
     override val songCurrentProgress: TextView
         get() = binding.songCurrentProgress
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -139,16 +129,6 @@ class MD3PlaybackControlsFragment :
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        progressViewUpdateHelper.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        progressViewUpdateHelper.stop()
-    }
-
     override fun onServiceConnected() {
         updatePlayPauseDrawableState()
         updateRepeatState()
@@ -157,7 +137,6 @@ class MD3PlaybackControlsFragment :
     }
 
     override fun onPlayingMetaChanged() {
-        super.onPlayingMetaChanged()
         updateSong()
     }
 
@@ -195,18 +174,6 @@ class MD3PlaybackControlsFragment :
     public override fun show() {}
 
     public override fun hide() {}
-
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

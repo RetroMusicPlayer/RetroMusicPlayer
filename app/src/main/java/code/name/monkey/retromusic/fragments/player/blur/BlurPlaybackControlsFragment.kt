@@ -19,7 +19,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
-import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -37,13 +36,14 @@ import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.slider.Slider
 
 class BlurPlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_blur_player_playback_controls) {
     private var _binding: FragmentBlurPlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val progressSlider: Slider
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -118,7 +118,7 @@ class BlurPlaybackControlsFragment :
     override fun setColor(color: MediaNotificationProcessor) {
         lastPlaybackControlsColor = Color.WHITE
         lastDisabledPlaybackControlsColor =
-            ContextCompat.getColor(requireContext(), R.color.md_grey_500)
+            ContextCompat.getColor(requireContext(), code.name.monkey.appthemehelper.R.color.md_grey_500)
 
         binding.title.setTextColor(lastPlaybackControlsColor)
 

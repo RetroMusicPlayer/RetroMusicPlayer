@@ -16,28 +16,18 @@ package code.name.monkey.retromusic.fragments.songs
 
 import android.os.Bundle
 import android.view.*
-import androidx.activity.addCallback
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.SongAdapter
-import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.GridStyle
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.helper.SortOrder.SongSortOrder
-import code.name.monkey.retromusic.interfaces.ICabCallback
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.afollestad.materialcab.attached.AttachedCab
-import com.afollestad.materialcab.attached.destroy
-import com.afollestad.materialcab.attached.isActive
-import com.afollestad.materialcab.createCab
 
-class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
-    ICabHolder {
+class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.getSongs().observe(viewLifecycleOwner) {
@@ -45,12 +35,6 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
                 adapter?.swapDataSet(it)
             else
                 adapter?.swapDataSet(listOf())
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            if (!handleBackPress()) {
-                remove()
-                requireActivity().onBackPressed()
-            }
         }
     }
 
@@ -76,8 +60,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         return SongAdapter(
             requireActivity(),
             dataSet,
-            itemLayoutRes(),
-            this
+            itemLayoutRes()
         )
     }
 
@@ -130,15 +113,22 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         if (RetroUtil.isLandscape) {
             gridSizeItem.setTitle(R.string.action_grid_size_land)
         }
-        setUpGridSizeMenu(gridSizeItem.subMenu)
+        setUpGridSizeMenu(gridSizeItem.subMenu!!)
         val layoutItem = menu.findItem(R.id.action_layout_type)
-        setupLayoutMenu(layoutItem.subMenu)
-        setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu)
+        setupLayoutMenu(layoutItem.subMenu!!)
+        setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu!!)
     }
 
     private fun setUpSortOrderMenu(sortOrderMenu: SubMenu) {
         val currentSortOrder: String? = getSortOrder()
         sortOrderMenu.clear()
+        sortOrderMenu.add(
+            0,
+            R.id.action_song_default_sort_order,
+            0,
+            R.string.sort_order_default
+        ).isChecked =
+            currentSortOrder == SongSortOrder.SONG_DEFAULT
         sortOrderMenu.add(
             0,
             R.id.action_song_sort_order_asc,
@@ -267,6 +257,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
 
     private fun handleSortOrderMenuItem(item: MenuItem): Boolean {
         val sortOrder: String = when (item.itemId) {
+            R.id.action_song_default_sort_order -> SongSortOrder.SONG_DEFAULT
             R.id.action_song_sort_order_asc -> SongSortOrder.SONG_A_Z
             R.id.action_song_sort_order_desc -> SongSortOrder.SONG_Z_A
             R.id.action_song_sort_order_artist -> SongSortOrder.SONG_ARTIST
@@ -331,9 +322,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
 
     override fun onPause() {
         super.onPause()
-        if (cab.isActive()) {
-            cab.destroy()
-        }
+        adapter?.actionMode?.finish()
     }
 
     companion object {
@@ -344,38 +333,5 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
         fun newInstance(): SongsFragment {
             return SongsFragment()
         }
-    }
-
-    private var cab: AttachedCab? = null
-
-    private fun handleBackPress(): Boolean {
-        cab?.let {
-            if (it.isActive()) {
-                it.destroy()
-                return true
-            }
-        }
-        return false
-    }
-
-    override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
-        cab?.let {
-            println("Cab")
-            if (it.isActive()) {
-                it.destroy()
-            }
-        }
-        cab = createCab(R.id.toolbar_container) {
-            menu(menuRes)
-            closeDrawable(R.drawable.ic_close)
-            backgroundColor(literal = RetroColorUtil.shiftBackgroundColor(surfaceColor()))
-            slideDown()
-            onCreate { cab, menu -> callback.onCabCreated(cab, menu) }
-            onSelection {
-                callback.onCabItemClicked(it)
-            }
-            onDestroy { callback.onCabFinished(it) }
-        }
-        return cab as AttachedCab
     }
 }

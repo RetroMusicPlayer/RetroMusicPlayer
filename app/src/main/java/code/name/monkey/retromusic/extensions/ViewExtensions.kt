@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.extensions
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.res.ColorStateList
 import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import androidx.annotation.Px
 import androidx.core.animation.doOnEnd
@@ -37,7 +39,11 @@ import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigationrail.NavigationRailView
 import dev.chrisbanes.insetter.applyInsetter
+
+const val ANIM_DURATION = 300L
 
 @Suppress("UNCHECKED_CAST")
 fun <T : View> ViewGroup.inflate(@LayoutRes layout: Int): T {
@@ -62,6 +68,15 @@ fun EditText.appHandleColor(): EditText {
     return this
 }
 
+fun NavigationBarView.setItemColors(@ColorInt normalColor: Int, @ColorInt selectedColor: Int) {
+    val csl = ColorStateList(
+        arrayOf(intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
+        intArrayOf(normalColor, selectedColor)
+    )
+    itemIconTintList = csl
+    itemTextColor = csl
+}
+
 /**
  * Potentially animate showing a [BottomNavigationView].
  *
@@ -71,7 +86,8 @@ fun EditText.appHandleColor(): EditText {
  * Instead, take a snapshot of the view, and animate this in, only changing the visibility (and
  * thus layout) when the animation completes.
  */
-fun BottomNavigationView.show() {
+fun NavigationBarView.show() {
+    if (this is NavigationRailView) return
     if (isVisible) return
 
     val parent = parent as ViewGroup
@@ -89,10 +105,10 @@ fun BottomNavigationView.show() {
     drawable.setBounds(left, parent.height, right, parent.height + height)
     parent.overlay.add(drawable)
     ValueAnimator.ofInt(parent.height, top).apply {
-        duration = 300
+        duration = ANIM_DURATION
         interpolator = AnimationUtils.loadInterpolator(
             context,
-            android.R.interpolator.linear_out_slow_in
+            android.R.interpolator.accelerate_decelerate
         )
         addUpdateListener {
             val newTop = it.animatedValue as Int
@@ -115,8 +131,14 @@ fun BottomNavigationView.show() {
  * Instead, take a snapshot, instantly hide the view (so content lays out to fill), then animate
  * out the snapshot.
  */
-fun BottomNavigationView.hide() {
+fun NavigationBarView.hide() {
+    if (this is NavigationRailView) return
     if (isGone) return
+
+    if (!isLaidOut) {
+        isGone = true
+        return
+    }
 
     val drawable = BitmapDrawable(context.resources, drawToBitmap())
     val parent = parent as ViewGroup
@@ -124,10 +146,10 @@ fun BottomNavigationView.hide() {
     parent.overlay.add(drawable)
     isGone = true
     ValueAnimator.ofInt(top, parent.height).apply {
-        duration = 300L
+        duration = ANIM_DURATION
         interpolator = AnimationUtils.loadInterpolator(
             context,
-            android.R.interpolator.fast_out_linear_in
+            android.R.interpolator.accelerate_decelerate
         )
         addUpdateListener {
             val newTop = it.animatedValue as Int
@@ -158,7 +180,7 @@ fun View.translateYAnimate(value: Float): Animator {
 fun BottomSheetBehavior<*>.peekHeightAnimate(value: Int): Animator {
     return ObjectAnimator.ofInt(this, "peekHeight", value)
         .apply {
-            duration = 300
+            duration = ANIM_DURATION
             start()
         }
 }
@@ -254,7 +276,7 @@ fun View.updateMargin(
     @Px left: Int = marginLeft,
     @Px top: Int = marginTop,
     @Px right: Int = marginRight,
-    @Px bottom: Int = marginBottom
+    @Px bottom: Int = marginBottom,
 ) {
     (layoutParams as ViewGroup.MarginLayoutParams).updateMargins(left, top, right, bottom)
 }
@@ -295,7 +317,7 @@ fun View.requestApplyInsetsWhenAttached() {
 
 data class InitialPadding(
     val left: Int, val top: Int,
-    val right: Int, val bottom: Int
+    val right: Int, val bottom: Int,
 )
 
 fun recordInitialPaddingForView(view: View) = InitialPadding(

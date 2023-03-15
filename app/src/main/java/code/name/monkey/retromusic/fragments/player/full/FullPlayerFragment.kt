@@ -28,12 +28,14 @@ import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToArtist
+import code.name.monkey.retromusic.fragments.player.CoverLyricsFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.artistImageOptions
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 
 class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
     private var _binding: FragmentFullBinding? = null
@@ -50,7 +52,7 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
 
     private fun setUpPlayerToolbar() {
         binding.playerToolbar.apply {
-            setNavigationOnClickListener { requireActivity().onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
         }
     }
 
@@ -98,6 +100,7 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
         controlsFragment.setColor(color)
         libraryViewModel.updateColor(color.backgroundColor)
         ToolbarContentTintHelper.colorizeToolbar(binding.playerToolbar, Color.WHITE, activity)
+        binding.coverLyrics.getFragment<CoverLyricsFragment>().setColors(color)
     }
 
     override fun onFavoriteToggled() {
@@ -133,7 +136,7 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
         libraryViewModel.artist(MusicPlayerRemote.currentSong.artistId)
             .observe(viewLifecycleOwner) { artist ->
                 if (artist.id != -1L) {
-                    GlideApp.with(requireActivity())
+                    Glide.with(requireActivity())
                         .load(RetroGlideExtension.getArtistModel(artist))
                         .artistImageOptions(artist)
                         .into(binding.artistImage)

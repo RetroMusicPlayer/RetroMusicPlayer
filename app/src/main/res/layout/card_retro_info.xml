@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:app="http://schemas.android.com/apk/res-auto"
-   android:layout_width="match_parent"
-   android:layout_height="wrap_content"
-   android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/version"
@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:listItemIcon="@drawable/ic_info_outline"
         app:listItemSummary="@string/pref_summary_open_source_licences"
-        app:listItemTitle="@string/version"/>
+        app:listItemTitle="@string/version" />
 
     <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/changelog"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/changelog"
         app:listItemIcon="@drawable/ic_github_circle"
         app:listItemSummary="@string/git_hub_summary"
-        app:listItemTitle="@string/git_hub"/>
+        app:listItemTitle="@string/git_hub" />
 
     <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/appTranslation"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@id/appGithub"
         app:listItemIcon="@drawable/ic_flag"
         app:listItemSummary="@string/translate_community"
-        app:listItemTitle="@string/translate"/>
+        app:listItemTitle="@string/translate" />
 
     <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/bugReportLink"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@id/appTranslation"
         app:listItemIcon="@drawable/ic_bug_report"
         app:listItemSummary="@string/bug_report_summary"
-        app:listItemTitle="@string/report_bug"/>
+        app:listItemTitle="@string/report_bug" />
 
     <code.name.monkey.retromusic.views.ListItemView
         android:id="@+id/faqLink"

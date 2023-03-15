@@ -14,13 +14,10 @@
  */
 package code.name.monkey.retromusic.activities
 
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.animation.LinearInterpolator
-import android.widget.SeekBar
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
@@ -28,19 +25,19 @@ import code.name.monkey.retromusic.databinding.ActivityDriveModeBinding
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
+import com.bumptech.glide.Glide
+import com.google.android.material.slider.Slider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -68,7 +65,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
         lastPlaybackControlsColor = accentColor()
         binding.close.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
         binding.repeatButton.drawAboveSystemBars()
     }
@@ -113,17 +110,15 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     }
 
     private fun setUpProgressSlider() {
-        binding.progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(
-                        MusicPlayerRemote.songProgressMillis,
-                        MusicPlayerRemote.songDurationMillis
-                    )
-                }
+        binding.progressSlider.addOnChangeListener { _: Slider, progress: Float, fromUser: Boolean ->
+            if (fromUser) {
+                MusicPlayerRemote.seekTo(progress.toInt())
+                onUpdateProgressViews(
+                    MusicPlayerRemote.songProgressMillis,
+                    MusicPlayerRemote.songDurationMillis
+                )
             }
-        })
+        }
     }
 
     override fun onPause() {
@@ -191,6 +186,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
                 lastPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
+
             else -> binding.shuffleButton.setColorFilter(
                 lastDisabledPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
@@ -207,6 +203,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
                     PorterDuff.Mode.SRC_IN
                 )
             }
+
             MusicService.REPEAT_MODE_ALL -> {
                 binding.repeatButton.setImageResource(R.drawable.ic_repeat)
                 binding.repeatButton.setColorFilter(
@@ -214,6 +211,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
                     PorterDuff.Mode.SRC_IN
                 )
             }
+
             MusicService.REPEAT_MODE_THIS -> {
                 binding.repeatButton.setImageResource(R.drawable.ic_repeat_one)
                 binding.repeatButton.setColorFilter(
@@ -241,7 +239,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
         binding.songTitle.text = song.title
         binding.songText.text = song.artistName
 
-        GlideApp.with(this)
+        Glide.with(this)
             .load(RetroGlideExtension.getSongModel(song))
             .songCoverOptions(song)
             .transform(BlurTransformation.Builder(this).build())
@@ -249,12 +247,10 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        binding.progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(binding.progressSlider, "progress", progress)
-        animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
+        binding.progressSlider.run {
+            valueTo = total.toFloat()
+            value = progress.toFloat().coerceIn(valueFrom, valueTo)
+        }
 
         binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())

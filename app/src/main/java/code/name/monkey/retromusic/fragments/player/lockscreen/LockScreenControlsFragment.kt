@@ -18,7 +18,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
-import android.widget.SeekBar
 import android.widget.TextView
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -34,6 +33,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.slider.Slider
 
 /**
  * @author Hemanth S (h4h13).
@@ -44,7 +44,7 @@ class LockScreenControlsFragment :
     private var _binding: FragmentLockScreenPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val progressSlider: Slider
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -103,18 +103,19 @@ class LockScreenControlsFragment :
     }
 
     override fun setColor(color: MediaNotificationProcessor) {
+        val context = context ?: return
 
-        val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
+        val colorBg = ATHUtil.resolveColor(context, android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
             lastPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+                MaterialValueHelper.getSecondaryTextColor(context, true)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
+                MaterialValueHelper.getSecondaryDisabledTextColor(context, true)
         } else {
             lastPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+                MaterialValueHelper.getPrimaryTextColor(context, false)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
+                MaterialValueHelper.getPrimaryDisabledTextColor(context, false)
         }
 
         val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
@@ -135,7 +136,7 @@ class LockScreenControlsFragment :
 
         TintHelper.setTintAuto(
             binding.playPauseButton,
-            MaterialValueHelper.getPrimaryTextColor(requireContext(), isDark),
+            MaterialValueHelper.getPrimaryTextColor(context, isDark),
             false
         )
         TintHelper.setTintAuto(binding.playPauseButton, colorFinal, true)

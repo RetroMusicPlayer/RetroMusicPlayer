@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">즐겨찾기에 추가</string>
     <string name="action_add_to_playing_queue">재생 대기열에 추가</string>
     <string name="action_add_to_playlist">재생목록에 추가...</string>
+    <string name="action_cancel">현재 타이머 취소</string>
     <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">재생 대기열 비우기</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
@@ -88,6 +89,8 @@
     <string name="biography">바이오그래피</string>
     <string name="black_theme_name">저스트 블랙</string>
     <string name="blacklist">블랙리스트</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">흐림 효과</string>
     <string name="blur_card">블러 카드</string>
     <string name="bug_report_failed">Unable to send report</string>
@@ -101,6 +104,7 @@
     <string name="bug_report_no_password">Please enter your valid GitHub password</string>
     <string name="bug_report_no_title">Please enter an issue title</string>
     <string name="bug_report_no_username">Please enter your valid GitHub username</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
     <string name="bug_report_use_account">Send using GitHub account</string>
     <string name="buy_now">Buy now</string>
@@ -124,6 +128,7 @@
     <string name="clear_playing_queue">Clear queue</string>
     <string name="color">색상</string>
     <string name="colors">색상</string>
+    <string name="compact">Compact</string>
     <string name="composer">Composer</string>
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
     <string name="could_not_create_playlist">\uc7ac\uc0dd\ubaa9\ub85d\uc744 \ub9cc\ub4e4 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.</string>
@@ -166,8 +171,15 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">비어 있음</string>
     <string name="equalizer">이퀄라이저</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">즐겨찾기</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Finish last song</string>
     <string name="fit">Fit</string>
     <string name="flat">플랫</string>
@@ -183,6 +195,7 @@
     <string name="genres">장르</string>
     <string name="git_hub_summary">Fork the project on GitHub</string>
     <string name="gradient">Gradient</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -220,6 +233,7 @@
     <string name="labeled">Labeled</string>
     <string name="last_added">최근 추가된 목록</string>
     <string name="last_song">Last song</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Library categories</string>
     <string name="licenses">라이선스</string>
     <string name="light_theme_name">클리어리 화이트</string>
@@ -232,6 +246,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Permission error</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">내 이름</string>
     <string name="my_top_tracks">자주 재생한 음악</string>
     <string name="never">아니오</string>
@@ -272,6 +292,7 @@
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">외부 저장소 접근 권한이 거부되었습니다.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>
@@ -334,25 +355,26 @@
     <string name="pref_summary_ignore_media_store_artwork">앨범 커버의 품질을 향상시킬 수 있지만 이미지를 불러오는 시간이 늘어납니다. 저해상도 이미지를 불러오는 데 문제가 있는 경우에만 사용하십시오.</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Retro music에서 제공하는 자체 잠금 화면 사용</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">오픈소스 소프트웨어의 상세 라이센스 정보</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">몰입 모드</string>
     <string name="pref_summary_toggle_headset">이어폰이 연결되면 바로 음악을 재생합니다.</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">음악 재생 화면에서 공간이 있을 시 볼륨 컨트롤을 보입니다</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">앨범 커버 표시</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">앱 바로가기 색상 틴트</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">알림이 올 때 볼륨 감소</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">아티스트 이미지 자동 다운로드</string>
@@ -379,6 +401,7 @@
     <string name="pref_title_lock_screen">전체 화면 컨트롤</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">테마</string>
     <string name="pref_title_open_source_licences">오픈소스 라이선스</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -386,6 +409,7 @@
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">회전 효과</string>
     <string name="pref_title_toggle_full_screen">전체 화면</string>
@@ -394,7 +418,6 @@
     <string name="pref_title_toggle_volume">볼륨 조절</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
@@ -473,6 +496,7 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Song count</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>
@@ -532,5 +556,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">계정 정보는 오로지 인증 목적으로만 사용됩니다.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>

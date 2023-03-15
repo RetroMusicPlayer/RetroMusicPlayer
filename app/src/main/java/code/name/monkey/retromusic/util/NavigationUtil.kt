@@ -34,13 +34,13 @@ object NavigationUtil {
 
     fun goToOpenSource(activity: Activity) {
         activity.startActivity(
-            Intent(activity, code.name.monkey.retromusic.activities.LicenseActivity::class.java), null
+            Intent(activity, LicenseActivity::class.java), null
         )
     }
 
     fun gotoDriveMode(activity: Activity) {
         activity.startActivity(
-            Intent(activity, code.name.monkey.retromusic.activities.DriveModeActivity::class.java), null
+            Intent(activity, DriveModeActivity::class.java), null
         )
     }
 

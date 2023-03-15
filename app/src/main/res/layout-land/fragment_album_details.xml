@@ -6,23 +6,18 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:transitionName="@string/transition_album_art"
-    tools:ignore="UnusedAttribute"
-    android:transitionGroup="true">
+    android:transitionGroup="true"
+    android:transitionName="@string/transition_album_art">
 
-    <FrameLayout
-        android:id="@+id/toolbar_container"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            style="@style/Toolbar"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black" />
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/albumCoverContainer"
@@ -35,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_container">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
@@ -59,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/albumCoverContainer"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_container">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"

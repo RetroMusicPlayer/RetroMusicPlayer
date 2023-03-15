@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <code.name.monkey.retromusic.views.TintedNavigationRailView
+            android:id="@+id/navigationView"
+            style="@style/Widget.Material3.NavigationRailView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:itemHorizontalTranslationEnabled="false"
+            app:menu="@menu/bottom_navigation_main"
+            tools:viewBindingType="com.google.android.material.navigation.NavigationBarView" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorSurface"
+            app:defaultNavHost="true"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_home" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/slidingPanel"
+        style="@style/BottomSheetStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="@dimen/mini_player_height"
+        app:enableEdgeToEdge="true"
+        app:gestureInsetBottomIgnored="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:visibility="visible">
+
+        <FrameLayout
+            android:id="@+id/playerFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <fragment
+            android:id="@+id/miniPlayerFragment"
+            android:name="code.name.monkey.retromusic.fragments.other.MiniPlayerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mini_player_height"
+            tools:layout="@layout/fragment_mini_player" />
+
+    </FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

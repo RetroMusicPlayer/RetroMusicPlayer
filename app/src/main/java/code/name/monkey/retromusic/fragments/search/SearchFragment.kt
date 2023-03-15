@@ -29,17 +29,12 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.databinding.FragmentSearchBinding
-import code.name.monkey.retromusic.extensions.accentColor
-import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.extensions.focusAndShowKeyboard
-import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.views.addAlpha
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -133,7 +128,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
 
             val colors = intArrayOf(
                 android.R.color.transparent,
-                ThemeStore.accentColor(requireContext()).addAlpha(0.5F)
+                accentColor().addAlpha(0.5F)
             )
 
             chips.forEach {
@@ -151,14 +146,20 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
         }
     }
 
+    private fun checkForMargins() {
+        if (mainActivity.isBottomNavVisible) {
+            binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = dip(R.dimen.bottom_nav_height)
+            }
+        }
+    }
+
     private fun setupRecyclerView() {
         searchAdapter = SearchAdapter(requireActivity(), emptyList())
         searchAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
                 binding.empty.isVisible = searchAdapter.itemCount < 1
-                val height = dipToPix(52f)
-                binding.recyclerView.updatePadding(bottom = height.toInt())
             }
         })
         binding.recyclerView.apply {
@@ -223,6 +224,11 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
                 binding.searchView.setText(spokenText)
             }
         }
+
+    override fun onResume() {
+        super.onResume()
+        checkForMargins()
+    }
 
     override fun onDestroyView() {
         hideKeyboard(view)

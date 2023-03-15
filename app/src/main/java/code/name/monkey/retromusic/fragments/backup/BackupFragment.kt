@@ -22,7 +22,7 @@ import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.BackupHelper
 import code.name.monkey.retromusic.helper.sanitize
-import code.name.monkey.retromusic.util.BackupUtil
+import code.name.monkey.retromusic.util.Share
 import com.afollestad.materialdialogs.input.input
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -128,12 +128,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 return true
             }
             R.id.action_share -> {
-                activity?.startActivity(
-                    Intent.createChooser(
-                        BackupUtil.createShareFileIntent(file, requireContext()),
-                        null
-                    )
-                )
+                Share.shareFile(requireContext(), file, "*/*")
                 return true
             }
             R.id.action_rename -> {
@@ -158,5 +153,10 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
             }
         }
         return false
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

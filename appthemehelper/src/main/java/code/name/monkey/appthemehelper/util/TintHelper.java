@@ -3,6 +3,7 @@ package code.name.monkey.appthemehelper.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
@@ -14,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.CheckResult;
@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.lang.reflect.Field;
 
@@ -210,17 +211,6 @@ public final class TintHelper {
         image.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
 
-    public static void setTint(@NonNull Switch switchView, @ColorInt int color, boolean useDarker) {
-        if (switchView.getTrackDrawable() != null) {
-            switchView.setTrackDrawable(modifySwitchDrawable(switchView.getContext(),
-                    switchView.getTrackDrawable(), color, false, false, useDarker));
-        }
-        if (switchView.getThumbDrawable() != null) {
-            switchView.setThumbDrawable(modifySwitchDrawable(switchView.getContext(),
-                    switchView.getThumbDrawable(), color, true, false, useDarker));
-        }
-    }
-
     public static void setTint(@NonNull SwitchCompat switchView, @ColorInt int color, boolean useDarker) {
         if (switchView.getTrackDrawable() != null) {
             switchView.setTrackDrawable(modifySwitchDrawable(switchView.getContext(),
@@ -229,6 +219,15 @@ public final class TintHelper {
         if (switchView.getThumbDrawable() != null) {
             switchView.setThumbDrawable(modifySwitchDrawable(switchView.getContext(),
                     switchView.getThumbDrawable(), color, true, true, useDarker));
+        }
+    }
+
+    public static void setTint(@NonNull MaterialSwitch switchView, @ColorInt int color, boolean useDarker) {
+        if (switchView.getTrackDrawable() != null) {
+            switchView.setTrackTintList(createSwitchDrawableTintList(switchView.getContext(), color, false, true, useDarker));
+        }
+        if (switchView.getThumbDrawable() != null) {
+            switchView.setThumbTintList(createSwitchDrawableTintList(switchView.getContext(), color, true, true, useDarker));
         }
     }
 
@@ -254,8 +253,8 @@ public final class TintHelper {
                 setTint((CheckBox) view, color, isDark);
             } else if (view instanceof ImageView) {
                 setTint((ImageView) view, color);
-            } else if (view instanceof Switch) {
-                setTint((Switch) view, color, isDark);
+            } else if (view instanceof MaterialSwitch) {
+                setTint((MaterialSwitch) view, color, isDark);
             } else if (view instanceof SwitchCompat) {
                 setTint((SwitchCompat) view, color, isDark);
             } else {
@@ -266,7 +265,7 @@ public final class TintHelper {
                 // Ripples for the above views (e.g. when you tap and hold a switch or checkbox)
                 RippleDrawable rd = (RippleDrawable) view.getBackground();
                 @SuppressLint("PrivateResource") final int unchecked = ContextCompat.getColor(view.getContext(),
-                        isDark ? R.color.ripple_material_dark : R.color.ripple_material_light);
+                        isDark ? androidx.appcompat.R.color.ripple_material_dark : androidx.appcompat.R.color.ripple_material_light);
                 final int checked = ColorUtil.INSTANCE.adjustAlpha(color, 0.4f);
                 final ColorStateList sl = new ColorStateList(
                         new int[][]{
@@ -374,7 +373,7 @@ public final class TintHelper {
     private static int getDefaultRippleColor(@NonNull Context context, boolean useDarkRipple) {
         // Light ripple is actually translucent black, and vice versa
         return ContextCompat.getColor(context, useDarkRipple ?
-                R.color.ripple_material_light : R.color.ripple_material_dark);
+                androidx.appcompat.R.color.ripple_material_light : androidx.appcompat.R.color.ripple_material_dark);
     }
 
     @NonNull
@@ -388,12 +387,15 @@ public final class TintHelper {
         });
     }
 
-    private static Drawable modifySwitchDrawable(@NonNull Context context, @NonNull Drawable from, @ColorInt int tint,
-                                                 boolean thumb, boolean compatSwitch, boolean useDarker) {
+    private static ColorStateList createSwitchDrawableTintList(@NonNull Context context, @ColorInt int tint,
+                                                               boolean thumb, boolean compatSwitch, boolean useDarker) {
+        int lighterTint = ColorUtil.INSTANCE.blendColors(tint, Color.WHITE, 0.4f);
+        int darkerTint = ColorUtil.INSTANCE.shiftColor(tint, 0.8f);
         if (useDarker) {
-            tint = ColorUtil.INSTANCE.shiftColor(tint, 1.1f);
+            tint = (compatSwitch && !thumb) ? lighterTint : darkerTint;
+        } else {
+            tint = (compatSwitch && !thumb) ? darkerTint : Color.WHITE;
         }
-        tint = ColorUtil.INSTANCE.adjustAlpha(tint, (compatSwitch && !thumb) ? 0.5f : 1.0f);
         int disabled;
         int normal;
         if (thumb) {
@@ -413,7 +415,7 @@ public final class TintHelper {
             normal = ColorUtil.INSTANCE.stripAlpha(normal);
         }
 
-        final ColorStateList sl = new ColorStateList(
+        return new ColorStateList(
                 new int[][]{
                         new int[]{-android.R.attr.state_enabled},
                         new int[]{android.R.attr.state_enabled, -android.R.attr.state_activated,
@@ -428,6 +430,12 @@ public final class TintHelper {
                         tint
                 }
         );
+    }
+
+    private static Drawable modifySwitchDrawable(@NonNull Context context, @NonNull Drawable from, @ColorInt int tint,
+                                                 boolean thumb, boolean compatSwitch, boolean useDarker) {
+
+        ColorStateList sl = createSwitchDrawableTintList(context, tint, thumb, compatSwitch, useDarker);
         return createTintedDrawable(from, sl);
     }
 

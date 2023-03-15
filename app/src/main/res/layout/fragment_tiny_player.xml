@@ -34,16 +34,7 @@
         android:progressDrawable="@drawable/progress_drawable_vertical"
         android:secondaryProgress="100" />
 
-    <FrameLayout
-        android:id="@+id/status_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include layout="@layout/status_bar" />
-    </FrameLayout>
+    <include layout="@layout/status_bar" />
 
     <code.name.monkey.retromusic.views.VerticalTextView
         android:id="@+id/playerSongTotalTime"
@@ -74,45 +65,32 @@
         android:paddingTop="8dp"
         android:paddingEnd="16dp"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@+id/playbackControlsFragmentContainer"
+        app:layout_constraintBottom_toTopOf="@+id/playbackControlsFragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
         app:layout_constraintVertical_bias="0"
         tools:ignore="MissingPrefix"
         tools:text="@tools:sample/lorem" />
 
-    <FrameLayout
-        android:id="@+id/toolbarContainer"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/playerToolbar"
+        style="@style/Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/playerToolbar"
-            style="@style/Toolbar"
-            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
-    </FrameLayout>
-
-    <LinearLayout
-        android:id="@+id/playbackControlsFragmentContainer"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/playbackControlsFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.tiny.TinyPlaybackControlsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/toolbarContainer"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/playbackControlsFragment"
-            android:name="code.name.monkey.retromusic.fragments.player.tiny.TinyPlaybackControlsFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_tiny_controls_fragment" />
-
-    </LinearLayout>
+        app:layout_constraintBottom_toTopOf="@id/playerToolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout="@layout/fragment_tiny_controls_fragment" />
 
     <code.name.monkey.retromusic.views.VerticalTextView
         android:id="@+id/title"

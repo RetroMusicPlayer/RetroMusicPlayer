@@ -31,7 +31,7 @@ abstract class PlayingNotification(context: Context) :
 
     abstract fun setPlaying(isPlaying: Boolean)
 
-    abstract fun updateFavorite(song: Song, onUpdate: () -> Unit)
+    abstract fun updateFavorite(isFavorite: Boolean)
 
     companion object {
         const val NOTIFICATION_CONTROLS_SIZE_MULTIPLIER = 1.0f

@@ -10,6 +10,7 @@
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
 package code.name.monkey.retromusic.fragments.settings
 
@@ -18,13 +19,13 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.updatePadding
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
-import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.preferences.*
-import code.name.monkey.retromusic.activities.OnThemeChangedListener
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.preferences.*
 import dev.chrisbanes.insetter.applyInsetter
 
@@ -63,9 +64,10 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
             listView.overScrollMode = View.OVER_SCROLL_NEVER
         }
 
+        listView.updatePadding(bottom = dip(R.dimen.mini_player_height))
         listView.applyInsetter {
             type(navigationBars = true) {
-                padding()
+                padding(vertical = true)
             }
         }
         invalidateSettings()
@@ -98,10 +100,6 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     }
 
     fun restartActivity() {
-        if (activity is OnThemeChangedListener && !VersionUtils.hasS()) {
-            (activity as OnThemeChangedListener).onThemeValuesChanged()
-        } else {
-            activity?.recreate()
-        }
+        activity?.recreate()
     }
 }

@@ -33,11 +33,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.hideSoftKeyboard
@@ -46,6 +45,7 @@ import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.util.SAFUtil
+import code.name.monkey.retromusic.util.logD
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.GlobalScope
@@ -55,7 +55,7 @@ import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
 import org.koin.android.ext.android.inject
 import java.io.File
-import java.util.*
+import java.util.Collections
 
 abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
     abstract val editorImage: ImageView
@@ -221,7 +221,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         getIntentExtras()
 
         songPaths = getSongPaths()
-        println(songPaths?.size)
+        logD(songPaths?.size)
         if (songPaths!!.isEmpty()) {
             finish()
         }
@@ -274,7 +274,6 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
             scaleY = 0f
             isEnabled = false
             setOnClickListener { save() }
-            TintHelper.setTintAuto(this, ThemeStore.accentColor(this@AbsTagEditorActivity), true)
         }
     }
 
@@ -307,7 +306,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                super.onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
                 return true
             }
         }
@@ -350,7 +349,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         hideSoftKeyboard()
 
         hideFab()
-        println(fieldKeyValueMap)
+        logD(fieldKeyValueMap)
         GlobalScope.launch {
             if (VersionUtils.hasR()) {
                 cacheFiles = TagWriter.writeTagsToFilesR(
@@ -409,15 +408,18 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
                     loadImageFromFile(it)
                 }
             }
-            code.name.monkey.retromusic.activities.saf.SAFGuideActivity.REQUEST_CODE_SAF_GUIDE -> {
+
+            SAFGuideActivity.REQUEST_CODE_SAF_GUIDE -> {
                 SAFUtil.openTreePicker(this)
             }
+
             SAFUtil.REQUEST_SAF_PICK_TREE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     SAFUtil.saveTreeUri(this, intent)
                     writeTags(savedSongPaths)
                 }
             }
+
             SAFUtil.REQUEST_SAF_PICK_FILE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     writeTags(Collections.singletonList(currentSongPath + SAFUtil.SEPARATOR + intent!!.dataString))

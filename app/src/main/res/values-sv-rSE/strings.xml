@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Lägg till i favoriter</string>
     <string name="action_add_to_playing_queue">Lägg till i spelkön</string>
     <string name="action_add_to_playlist">Lägg till i spellista</string>
+    <string name="action_cancel">Avbryt</string>
     <string name="action_cast">Cast</string>
     <string name="action_clear_playing_queue">Rensa spelkön</string>
     <string name="action_cycle_repeat">Loopläge</string>
@@ -90,6 +91,8 @@
     <string name="biography">Biografi</string>
     <string name="black_theme_name">Helt svart</string>
     <string name="blacklist">Svartlista</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Oskärpa</string>
     <string name="blur_card">Kort med oskärpa</string>
     <string name="bug_report_failed">Det gick inte att skicka rapport</string>
@@ -103,6 +106,7 @@
     <string name="bug_report_no_password">Please enter your valid GitHub password</string>
     <string name="bug_report_no_title">Please enter an issue title</string>
     <string name="bug_report_no_username">Please enter your valid GitHub username</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Ett oväntat fel uppstod. Tråkigt att du hittade denna bug, om det fortsätter att krascha, testa att \"Rensa appdata\" eller skicka ett e-postmeddelande</string>
     <string name="bug_report_use_account">Send using GitHub account</string>
     <string name="buy_now">Köp nu</string>
@@ -126,6 +130,7 @@
     <string name="clear_playing_queue">Rensa spelkö</string>
     <string name="color">Färg</string>
     <string name="colors">Färger</string>
+    <string name="compact">Compact</string>
     <string name="composer">Kompositör</string>
     <string name="copied_device_info_to_clipboard">Kopierade enhetsinfo till urklipp.</string>
     <string name="could_not_create_playlist">Det gick inte att skapa spellista.</string>
@@ -168,8 +173,15 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Tom</string>
     <string name="equalizer">Equalizer</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favoriter</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Spela färdigt sista låten</string>
     <string name="fit">Passa</string>
     <string name="flat">Platt</string>
@@ -185,6 +197,7 @@
     <string name="genres">Genrer</string>
     <string name="git_hub_summary">Gör en fork av projektet på GitHub</string>
     <string name="gradient">Gradient</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -222,6 +235,7 @@
     <string name="labeled">Labeled</string>
     <string name="last_added">Senast tillagd</string>
     <string name="last_song">Sista låten</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Bibliotekskategorier</string>
     <string name="licenses">Licenser</string>
     <string name="light_theme_name">Snövitt</string>
@@ -234,6 +248,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">Fel</string>
     <string name="md_storage_perm_error">Behörighetsfel</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Namn</string>
     <string name="my_top_tracks">Mest spelade</string>
     <string name="never">Aldrig</string>
@@ -274,6 +294,7 @@
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Behörighet att få tillgång till extern lagring nekas.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>
@@ -336,25 +357,26 @@
     <string name="pref_summary_ignore_media_store_artwork">Kan öka albumomslagens kvalitet, men orsakar långsammare laddningstider för bilder. Aktivera endast om du har problem med lågupplösta bilder</string>
     <string name="pref_summary_library_categories">Konfigurera synlighet och ordning för bibliotekskategorier.</string>
     <string name="pref_summary_lock_screen">Använd Retro Music:s anpassade låsskärmskontroller</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Licensinformation för programvara med öppen källkod</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Uppslukande läge</string>
     <string name="pref_summary_toggle_headset">Börja spela direkt då hörlurar ansluts</string>
     <string name="pref_summary_toggle_shuffle">Shuffleläget stängs av när du spelar en ny lista med låtar</string>
     <string name="pref_summary_toggle_volume">Visa volymkontroller på spelarskärmen, om det finns tillräckligt med utrymme </string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Visa albumomslag</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Tema för albumomslag</string>
     <string name="pref_title_album_cover_transform">Nästa albumomslag</string>
     <string name="pref_title_app_shortcuts">Färgade appgenvägar</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Minska volymen vid fokusförlust</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Ladda ner artistbilder automatiskt</string>
@@ -381,6 +403,7 @@
     <string name="pref_title_lock_screen">Helskärmskontroller</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Spelartema</string>
     <string name="pref_title_open_source_licences">Licenser för öppen källkod</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -388,6 +411,7 @@
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Fliktitlar</string>
     <string name="pref_title_toggle_carousel_effect">Karuselleffekt</string>
     <string name="pref_title_toggle_full_screen">Helskärmsapp</string>
@@ -396,9 +420,8 @@
     <string name="pref_title_toggle_volume">Volymkontroller</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Helt svart tema, spelarteman, karuselleffekt med mera…</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profil</string>
     <string name="purchase">Köp</string>
     <string name="queue">Spelkö</string>
@@ -475,6 +498,7 @@
     <string name="sort_order_composer">Kompositör</string>
     <string name="sort_order_date">Tilläggningsdatum</string>
     <string name="sort_order_date_modified">Ändringsdatum</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Song count</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">År</string>
@@ -534,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Du måste välja minst en kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dina kontodata används endast för verifiering.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>

@@ -15,8 +15,8 @@ import code.name.monkey.retromusic.fragments.GridStyle
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment
 import code.name.monkey.retromusic.helper.SortOrder.*
-import code.name.monkey.retromusic.transform.*
 import code.name.monkey.retromusic.model.CategoryInfo
+import code.name.monkey.retromusic.transform.*
 import code.name.monkey.retromusic.util.theme.ThemeMode
 import code.name.monkey.retromusic.views.TopAppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -232,8 +232,6 @@ object PreferenceUtil {
 
     val isScreenOnEnabled get() = sharedPreferences.getBoolean(KEEP_SCREEN_ON, false)
 
-    val isShuffleModeOn get() = sharedPreferences.getBoolean(TOGGLE_SHUFFLE, false)
-
     val isSongInfo get() = sharedPreferences.getBoolean(EXTRA_SONG_INFO, false)
 
     val isPauseOnZeroVolume get() = sharedPreferences.getBoolean(PAUSE_ON_ZERO_VOLUME, false)
@@ -255,7 +253,7 @@ object PreferenceUtil {
 
     val isAlbumArtOnLockScreen
         get() = sharedPreferences.getBoolean(
-            ALBUM_ART_ON_LOCK_SCREEN, false
+            ALBUM_ART_ON_LOCK_SCREEN, true
         )
 
     val isAudioDucking
@@ -441,10 +439,10 @@ object PreferenceUtil {
     val tabTitleMode: Int
         get() {
             return when (sharedPreferences.getStringOrDefault(
-                TAB_TEXT_MODE, "1"
+                TAB_TEXT_MODE, "0"
             ).toInt()) {
-                1 -> BottomNavigationView.LABEL_VISIBILITY_LABELED
                 0 -> BottomNavigationView.LABEL_VISIBILITY_AUTO
+                1 -> BottomNavigationView.LABEL_VISIBILITY_LABELED
                 2 -> BottomNavigationView.LABEL_VISIBILITY_SELECTED
                 3 -> BottomNavigationView.LABEL_VISIBILITY_UNLABELED
                 else -> BottomNavigationView.LABEL_VISIBILITY_LABELED
@@ -666,11 +664,11 @@ object PreferenceUtil {
     val isSnowFalling
         get() = sharedPreferences.getBoolean(SNOWFALL, false)
 
-    val lyricsType: LyricsType
+    val lyricsType: CoverLyricsType
         get() = if (sharedPreferences.getString(LYRICS_TYPE, "0") == "0") {
-            LyricsType.REPLACE_COVER
+            CoverLyricsType.REPLACE_COVER
         } else {
-            LyricsType.OVER_COVER
+            CoverLyricsType.OVER_COVER
         }
 
     var playbackSpeed
@@ -709,6 +707,6 @@ object PreferenceUtil {
         get() = sharedPreferences.getBoolean(SWIPE_DOWN_DISMISS, true)
 }
 
-enum class LyricsType {
+enum class CoverLyricsType {
     REPLACE_COVER, OVER_COVER
 }

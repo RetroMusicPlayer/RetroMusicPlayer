@@ -23,29 +23,29 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
-import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.albumCoverOptions
+import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 open class AlbumAdapter(
     override val activity: FragmentActivity,
     var dataSet: List<Album>,
     var itemLayoutRes: Int,
-    iCabHolder: ICabHolder?,
     val listener: IAlbumClickListener?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
     activity,
-    iCabHolder,
     R.menu.menu_media_selection
 ), PopupTextProvider {
 
@@ -112,7 +112,9 @@ open class AlbumAdapter(
             return
         }
         val song = album.safeGetFirstSong()
-        GlideApp.with(activity).asBitmapPalette().albumCoverOptions(song)
+        Glide.with(activity)
+            .asBitmapPalette()
+            .albumCoverOptions(song)
             //.checkIgnoreMediaStore()
             .load(RetroGlideExtension.getSongModel(song))
             .into(object : RetroMusicColoredTarget(holder.image!!) {
@@ -162,6 +164,7 @@ open class AlbumAdapter(
         when (PreferenceUtil.albumSortOrder) {
             SortOrder.AlbumSortOrder.ALBUM_A_Z, SortOrder.AlbumSortOrder.ALBUM_Z_A -> sectionName =
                 dataSet[position].title
+
             SortOrder.AlbumSortOrder.ALBUM_ARTIST -> sectionName = dataSet[position].albumArtist
             SortOrder.AlbumSortOrder.ALBUM_YEAR -> return MusicUtil.getYearString(
                 dataSet[position].year
@@ -170,7 +173,7 @@ open class AlbumAdapter(
         return MusicUtil.getSectionName(sectionName)
     }
 
-    inner class ViewHolder(itemView: View) : code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
             menu?.isVisible = false

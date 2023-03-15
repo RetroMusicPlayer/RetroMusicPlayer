@@ -19,20 +19,20 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import android.widget.SeekBar
 import android.widget.TextView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentPeekControlPlayerBinding
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.slider.Slider
 
 /**
  * Created by hemanths on 2019-10-04.
@@ -43,7 +43,7 @@ class PeekPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_pe
     private var _binding: FragmentPeekControlPlayerBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val progressSlider: Slider
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -82,7 +82,7 @@ class PeekPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_pe
             if (PreferenceUtil.isAdaptiveColor) {
                 color.primaryTextColor
             } else {
-                ThemeStore.accentColor(requireContext())
+                accentColor()
             }
         binding.progressSlider.applyColor(controlsColor)
         volumeFragment?.setTintableColor(controlsColor)

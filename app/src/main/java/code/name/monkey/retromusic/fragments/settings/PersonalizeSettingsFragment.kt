@@ -16,27 +16,20 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.os.Bundle
 import android.view.View
-import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+import code.name.monkey.retromusic.APPBAR_MODE
 import code.name.monkey.retromusic.HOME_ALBUM_GRID_STYLE
 import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.TAB_TEXT_MODE
-import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
-import code.name.monkey.retromusic.*
 
 class PersonalizeSettingsFragment : AbsSettingsFragment() {
-
-    override fun invalidateSettings() {
-        val toggleFullScreen: TwoStatePreference? = findPreference(TOGGLE_FULL_SCREEN)
-        toggleFullScreen?.setOnPreferenceChangeListener { _, _ ->
-            restartActivity()
-            true
-        }
-    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_ui)
     }
+
+    override fun invalidateSettings() {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,6 +46,11 @@ class PersonalizeSettingsFragment : AbsSettingsFragment() {
         val tabTextMode: ATEListPreference? = findPreference(TAB_TEXT_MODE)
         tabTextMode?.setOnPreferenceChangeListener { prefs, newValue ->
             setSummary(prefs, newValue)
+            true
+        }
+        val appBarMode: ATEListPreference? = findPreference(APPBAR_MODE)
+        appBarMode?.setOnPreferenceChangeListener { _, _ ->
+            restartActivity()
             true
         }
     }

@@ -26,8 +26,8 @@ import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SNOWFALL
-import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.databinding.FragmentPlayerBinding
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -147,7 +147,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
     private fun setUpPlayerToolbar() {
         binding.playerToolbar.inflateMenu(R.menu.menu_player)
         //binding.playerToolbar.menu.setUpWithIcons()
-        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
         binding.playerToolbar.setOnMenuItemClickListener(this)
 
         ToolbarContentTintHelper.colorizeToolbar(
@@ -164,6 +164,7 @@ class PlayerFragment : AbsPlayerFragment(R.layout.fragment_player),
     }
 
     private fun startOrStopSnow(isSnowFalling: Boolean) {
+        if (_binding == null) return
         if (isSnowFalling && !surfaceColor().isColorLight) {
             binding.snowfallView.isVisible = true
             binding.snowfallView.restartFalling()

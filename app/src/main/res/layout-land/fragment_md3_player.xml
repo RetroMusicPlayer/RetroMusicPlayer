@@ -4,19 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:clickable="true"
     android:focusable="true">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface" />
-
-    <View
-        android:id="@+id/colorGradientBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
@@ -25,12 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/status_bar" />
-        </FrameLayout>
+        <include layout="@layout/status_bar" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,17 +40,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <FrameLayout
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/playerToolbar"
+                    style="@style/Toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0">
-
-                    <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/playerToolbar"
-                        style="@style/Toolbar"
-                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-                        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
-                </FrameLayout>
+                    android:layout_weight="0"
+                    app:navigationIcon="@drawable/ic_keyboard_arrow_down" />
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/playbackControlsFragment"

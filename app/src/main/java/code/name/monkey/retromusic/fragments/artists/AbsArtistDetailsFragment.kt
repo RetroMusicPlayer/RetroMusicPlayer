@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
@@ -20,46 +19,36 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
-import code.name.monkey.retromusic.extensions.applyColor
-import code.name.monkey.retromusic.extensions.applyOutlineColor
-import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.databinding.FragmentArtistDetailsBinding
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.artistImageOptions
+import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
-import code.name.monkey.retromusic.interfaces.ICabCallback
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.CustomArtistImageUtil
+import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.*
-import com.afollestad.materialcab.attached.AttachedCab
-import com.afollestad.materialcab.attached.destroy
-import com.afollestad.materialcab.attached.isActive
-import com.afollestad.materialcab.createCab
+import com.bumptech.glide.Glide
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
-import java.util.*
+import java.util.Locale
 
 abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_details),
-    IAlbumClickListener, ICabHolder {
+    IAlbumClickListener {
     private var _binding: FragmentArtistDetailsBinding? = null
     private val binding get() = _binding!!
 
@@ -106,25 +95,19 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(artist.songs, true) }
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            if (!handleBackPress()) {
-                remove()
-                requireActivity().onBackPressed()
-            }
-        }
         setupSongSortButton()
         binding.appBarLayout?.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(requireContext())
     }
 
     private fun setupRecyclerView() {
-        albumAdapter = HorizontalAlbumAdapter(requireActivity(), ArrayList(), this, this)
+        albumAdapter = HorizontalAlbumAdapter(requireActivity(), ArrayList(), this)
         binding.fragmentArtistContent.albumRecyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             layoutManager = GridLayoutManager(this.context, 1, GridLayoutManager.HORIZONTAL, false)
             adapter = albumAdapter
         }
-        songAdapter = SimpleSongAdapter(requireActivity(), ArrayList(), R.layout.item_song, this)
+        songAdapter = SimpleSongAdapter(requireActivity(), ArrayList(), R.layout.item_song)
         binding.fragmentArtistContent.recyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             layoutManager = LinearLayoutManager(this.context)
@@ -162,7 +145,9 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     }
 
     private fun loadArtistImage(artist: Artist) {
-        GlideApp.with(requireContext()).asBitmapPalette().artistImageOptions(artist)
+        Glide.with(requireContext())
+            .asBitmapPalette()
+            .artistImageOptions(artist)
             .load(RetroGlideExtension.getArtistModel(artist))
             .dontAnimate()
             .into(object : SingleColorTarget(binding.image) {
@@ -202,10 +187,12 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                 MusicPlayerRemote.playNext(songs)
                 return true
             }
+
             R.id.action_add_to_current_playing -> {
                 MusicPlayerRemote.enqueue(songs)
                 return true
             }
+
             R.id.action_add_to_playlist -> {
                 lifecycleScope.launch(Dispatchers.IO) {
                     val playlists = get<RealRepository>().fetchPlaylists()
@@ -216,13 +203,19 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                 }
                 return true
             }
+
             R.id.action_set_artist_image -> {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = "image/*"
-                selectImageLauncher.launch(Intent.createChooser(intent,
-                    getString(R.string.pick_from_local_storage)))
+                selectImageLauncher.launch(
+                    Intent.createChooser(
+                        intent,
+                        getString(R.string.pick_from_local_storage)
+                    )
+                )
                 return true
             }
+
             R.id.action_reset_artist_image -> {
                 showToast(resources.getString(R.string.updating))
                 lifecycleScope.launch {
@@ -270,14 +263,19 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         when (savedSongSortOrder) {
             SortOrder.ArtistSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title).isChecked =
                 true
+
             SortOrder.ArtistSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked =
                 true
+
             SortOrder.ArtistSongSortOrder.SONG_ALBUM ->
                 sortOrder.findItem(R.id.action_sort_order_album).isChecked = true
+
             SortOrder.ArtistSongSortOrder.SONG_YEAR ->
                 sortOrder.findItem(R.id.action_sort_order_year).isChecked = true
+
             SortOrder.ArtistSongSortOrder.SONG_DURATION ->
                 sortOrder.findItem(R.id.action_sort_order_song_duration).isChecked = true
+
             else -> {
                 throw IllegalArgumentException("invalid $savedSongSortOrder")
             }
@@ -300,40 +298,6 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_artist_detail, menu)
     }
-
-
-    private fun handleBackPress(): Boolean {
-        cab?.let {
-            if (it.isActive()) {
-                it.destroy()
-                return true
-            }
-        }
-        return false
-    }
-
-    private var cab: AttachedCab? = null
-
-    override fun openCab(menuRes: Int, callback: ICabCallback): AttachedCab {
-        cab?.let {
-            if (it.isActive()) {
-                it.destroy()
-            }
-        }
-        cab = createCab(R.id.toolbar_container) {
-            menu(menuRes)
-            closeDrawable(R.drawable.ic_close)
-            backgroundColor(literal = RetroColorUtil.shiftBackgroundColor(surfaceColor()))
-            slideDown()
-            onCreate { cab, menu -> callback.onCabCreated(cab, menu) }
-            onSelection {
-                callback.onCabItemClicked(it)
-            }
-            onDestroy { callback.onCabFinished(it) }
-        }
-        return cab as AttachedCab
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

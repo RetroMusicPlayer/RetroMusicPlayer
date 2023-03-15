@@ -85,7 +85,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
 
     private val bottomSheetCallbackList = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            mainActivity.getBottomSheetBehavior().isDraggable = false   
+            mainActivity.getBottomSheetBehavior().isDraggable = false
             binding.playerQueueSheet.setContentPadding(
                 binding.playerQueueSheet.contentPaddingLeft,
                 (slideOffset * binding.statusBar.height).toInt(),
@@ -102,10 +102,12 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
                 BottomSheetBehavior.STATE_DRAGGING -> {
                     mainActivity.getBottomSheetBehavior().isDraggable = false
                 }
+
                 BottomSheetBehavior.STATE_COLLAPSED -> {
                     resetToCurrentPosition()
                     mainActivity.getBottomSheetBehavior().isDraggable = true
                 }
+
                 else -> {
                     mainActivity.getBottomSheetBehavior().isDraggable = true
                 }
@@ -377,7 +379,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
 
     private fun setUpPlayerToolbar() {
         binding.playerToolbar.inflateMenu(R.menu.menu_player)
-        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
         binding.playerToolbar.setOnMenuItemClickListener(this)
 
         ToolbarContentTintHelper.colorizeToolbar(
@@ -491,6 +493,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
                     lastPlaybackControlsColor,
                     PorterDuff.Mode.SRC_IN
                 )
+
             else -> binding.playerControlsContainer.shuffleButton.setColorFilter(
                 lastDisabledPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
@@ -511,6 +514,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
                     PorterDuff.Mode.SRC_IN
                 )
             }
+
             MusicService.REPEAT_MODE_ALL -> {
                 binding.playerControlsContainer.repeatButton.setImageResource(R.drawable.ic_repeat)
                 binding.playerControlsContainer.repeatButton.setColorFilter(
@@ -518,6 +522,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
                     PorterDuff.Mode.SRC_IN
                 )
             }
+
             MusicService.REPEAT_MODE_THIS -> {
                 binding.playerControlsContainer.repeatButton.setImageResource(R.drawable.ic_repeat_one)
                 binding.playerControlsContainer.repeatButton.setColorFilter(

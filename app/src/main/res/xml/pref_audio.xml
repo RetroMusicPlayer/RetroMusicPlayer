@@ -58,14 +58,6 @@
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
-        android:key="toggle_shuffle"
-        android:layout="@layout/list_item_view_switch"
-        android:summary="@string/pref_summary_toggle_shuffle"
-        android:title="@string/pref_title_toggle_toggle_shuffle"
-        app:icon="@drawable/ic_shuffle" />
-
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-        android:defaultValue="false"
         android:key="bluetooth_playback"
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_bluetooth_playback"

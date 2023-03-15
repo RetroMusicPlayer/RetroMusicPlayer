@@ -94,6 +94,7 @@
     <string name="black_theme_name">Just Black</string>
     <string name="blacklist">Blacklist</string>
     <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Blur</string>
     <string name="blur_card">Blur Card</string>
     <string name="bug_report_failed">Unable to send report</string>
@@ -178,6 +179,7 @@
     <string name="error_delete_backup">Couldn\u2019t delete backup</string>
     <string name="error_empty_name">Your name can\'t be empty!</string>
     <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favorites</string>
@@ -500,6 +502,7 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Song count</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>
@@ -559,5 +562,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="bluetooth_title">Nearby devices</string>
 </resources>

@@ -22,7 +22,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CategoryInfo(
     val category: Category,
-    @get:JvmName("isVisible")
     var visible: Boolean
 ) : Parcelable {
 

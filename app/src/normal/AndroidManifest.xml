@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <application tools:ignore="MissingApplicationIcon">
+        <activity android:name=".activities.PurchaseActivity" />
+
+        <meta-data
+            android:name="com.android.vending.splits.required"
+            android:value="true" />
+
+        <!-- ChromeCast -->
+        <meta-data
+            android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
+            android:value="code.name.monkey.retromusic.cast.CastOptionsProvider" />
+    </application>
+</manifest>

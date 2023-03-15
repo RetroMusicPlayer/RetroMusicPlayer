@@ -42,7 +42,7 @@ class RealLastAddedRepository(
     }
 
     override fun recentAlbums(): List<Album> {
-        return albumRepository.splitIntoAlbums(recentSongs())
+        return albumRepository.splitIntoAlbums(recentSongs(), sorted = false)
     }
 
     override fun recentArtists(): List<Artist> {

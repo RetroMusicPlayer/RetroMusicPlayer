@@ -16,15 +16,18 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.db.*
-import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.fragments.search.Filter
+import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.NotPlayedPlaylist
-import code.name.monkey.retromusic.util.PreferenceUtil
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 interface Repository {
+
     fun historySong(): List<HistoryEntity>
     fun favorites(): LiveData<List<SongEntity>>
     fun observableHistorySongs(): LiveData<List<Song>>
@@ -51,7 +54,6 @@ interface Repository {
     suspend fun topAlbumsHome(): Home
     suspend fun recentAlbumsHome(): Home
     suspend fun favoritePlaylistHome(): Home
-    suspend fun suggestionsHome(): Home
     suspend fun suggestions(): List<Song>
     suspend fun genresHome(): Home
     suspend fun playlists(): Home
@@ -84,7 +86,6 @@ interface Repository {
     suspend fun clearSongHistory()
     suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
     suspend fun playCountSongs(): List<PlayCountEntity>
-    suspend fun blackListPaths(): List<BlackListStoreEntity>
     suspend fun deleteSongs(songs: List<Song>)
     suspend fun searchArtists(query: String): List<Artist>
     suspend fun searchSongs(query: String): List<Song>
@@ -92,6 +93,7 @@ interface Repository {
     suspend fun isSongFavorite(songId: Long): Boolean
     fun getSongByGenre(genreId: Long): Song
     fun checkPlaylistExists(playListId: Long): LiveData<Boolean>
+    fun getPlaylist(playlistId: Long): LiveData<PlaylistWithSongs>
 }
 
 class RealRepository(
@@ -106,7 +108,6 @@ class RealRepository(
     private val topPlayedRepository: TopPlayedRepository,
     private val roomRepository: RoomRepository,
 ) : Repository {
-
 
     override suspend fun deleteSongs(songs: List<Song>) = roomRepository.deleteSongs(songs)
 
@@ -186,6 +187,8 @@ class RealRepository(
 
     override suspend fun fetchPlaylistWithSongs(): List<PlaylistWithSongs> =
         roomRepository.playlistWithSongs()
+
+    override fun getPlaylist(playlistId: Long): LiveData<PlaylistWithSongs> = roomRepository.getPlaylist(playlistId)
 
     override suspend fun playlistSongs(playlistWithSongs: PlaylistWithSongs): List<Song> =
         playlistWithSongs.songs.map {
@@ -268,11 +271,8 @@ class RealRepository(
     override suspend fun playCountSongs(): List<PlayCountEntity> =
         roomRepository.playCountSongs()
 
-    override suspend fun blackListPaths(): List<BlackListStoreEntity> =
-        roomRepository.blackListPaths()
-
     override fun observableHistorySongs(): LiveData<List<Song>> =
-        Transformations.map(roomRepository.observableHistorySongs()) {
+        roomRepository.observableHistorySongs().map {
             it.fromHistoryToSongs()
         }
 
@@ -282,29 +282,7 @@ class RealRepository(
     override fun favorites(): LiveData<List<SongEntity>> =
         roomRepository.favoritePlaylistLiveData(context.getString(R.string.favorites))
 
-    var suggestions = Home(
-        listOf(), SUGGESTIONS,
-        R.string.suggestion_songs
-    )
-
-    override suspend fun suggestionsHome(): Home {
-        if (!PreferenceUtil.homeSuggestions) return Home(
-            listOf(),
-            SUGGESTIONS,
-            R.string.suggestion_songs
-        )
-        // Don't reload Suggestions everytime
-        if (suggestions.arrayList.isEmpty()) {
-            val songs = NotPlayedPlaylist().songs().shuffled().takeIf {
-                it.size > 9
-            } ?: emptyList()
-            suggestions = Home(songs, SUGGESTIONS, R.string.suggestion_songs)
-        }
-        return suggestions
-    }
-
     override suspend fun suggestions(): List<Song> {
-        if (!PreferenceUtil.homeSuggestions) return listOf()
         return NotPlayedPlaylist().songs().shuffled().takeIf {
             it.size > 9
         } ?: emptyList()

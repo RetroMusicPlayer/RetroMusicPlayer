@@ -36,18 +36,12 @@
     </style>
 
     <style name="Toolbar" parent="Widget.Material3.Toolbar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="popupTheme">?toolbarPopupTheme</item>
         <item name="android:transitionName" tools:ignore="NewApi">toolbar</item>
         <item name="layout_collapseMode">pin</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="contentInsetStart">0dp</item>
         <item name="titleMarginStart">16dp</item>
-    </style>
-
-    <style name="mcab_theme" parent="@style/ThemeOverlay.MaterialComponents.Light">
-        <item name="android:actionOverflowButtonStyle">@style/mcab_overflow_style</item>
     </style>
 
     <style name="mcab_overflow_style" parent="Widget.AppCompat.ActionButton.Overflow">
@@ -125,7 +119,7 @@
         <item name="cornerSize">0dp</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.RetroMusic.SplashScreen" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
@@ -174,6 +168,7 @@
     <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet">
         <item name="paddingBottomSystemWindowInsets">false</item>
         <item name="android:maxWidth">@empty</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerMedium</item>
     </style>
 
     <style name="MaterialCardViewStroke">
@@ -247,5 +242,23 @@
         </item>
     </style>
 
-    <style name="Theme.AppWidget" parent="Theme.RetroMusic.FollowSystem" />
+    <style name="RoundedFABOverlay">
+        <item name="floatingActionButtonStyle">
+            @style/Widget.Material3.FloatingActionButton.Primary
+        </item>
+    </style>
+
+    <style name="Theme.AppWidget" parent="">
+        <item name="colorSurface">@color/md_black_1000</item>
+    </style>
+
+    <style name="ShapeAppearance.Material3.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Widget.Retro.Slider" parent="Widget.Material3.Slider">
+        <item name="labelBehavior">gone</item>
+        <item name="thumbRadius">6dp</item>
+        <item name="haloRadius">18dp</item>
+    </style>
 </resources>

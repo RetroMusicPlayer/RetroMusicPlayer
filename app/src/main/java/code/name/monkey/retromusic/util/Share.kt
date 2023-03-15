@@ -32,15 +32,15 @@ object Share {
         context.startActivity(feedIntent, null)
     }
 
-    fun shareFile(context: Context, file: File) {
-        val attachmentUri = FileProvider.getUriForFile(
-            context,
-            context.applicationContext.packageName,
-            file
-        )
-        val sharingIntent = Intent(Intent.ACTION_SEND)
-        sharingIntent.type = "text/*"
-        sharingIntent.putExtra(Intent.EXTRA_STREAM, attachmentUri)
-        context.startActivity(Intent.createChooser(sharingIntent, "send bug report"))
+    fun shareFile(context: Context, file: File, mimeType: String) {
+        Intent(Intent.ACTION_SEND).apply {
+            type = mimeType
+            putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(
+                context,
+                context.applicationContext.packageName,
+                file
+            ))
+            context.startActivity(Intent.createChooser(this, null))
+        }
     }
 }

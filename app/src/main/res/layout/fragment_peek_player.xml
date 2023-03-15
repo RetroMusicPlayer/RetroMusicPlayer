@@ -21,23 +21,16 @@
     android:focusable="true"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/toolbarContainer"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/playerToolbar"
+        style="@style/Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
+        android:layout_gravity="bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/playerToolbar"
-            style="@style/Toolbar"
-            android:layout_gravity="bottom"
-            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
-            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black" />
-    </FrameLayout>
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
@@ -47,7 +40,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarContainer" />
+        app:layout_constraintTop_toBottomOf="@id/playerToolbar" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
@@ -65,7 +58,7 @@
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/playerAlbumCoverFragment"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarContainer"
+        app:layout_constraintTop_toBottomOf="@+id/playerToolbar"
         tools:text="@tools:sample/lorem/random" />
 
     <com.google.android.material.textview.MaterialTextView

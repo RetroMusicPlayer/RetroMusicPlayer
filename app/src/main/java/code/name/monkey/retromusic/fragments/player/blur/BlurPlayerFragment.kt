@@ -29,20 +29,23 @@ import code.name.monkey.retromusic.databinding.FragmentBlurBinding
 import code.name.monkey.retromusic.extensions.drawAboveSystemBars
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
 import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
-import code.name.monkey.retromusic.glide.*
+import code.name.monkey.retromusic.glide.RetroGlideExtension.simpleSongCoverOptions
+import code.name.monkey.retromusic.glide.crossfadeListener
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 
 
 class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private var lastRequest: GlideRequest<Drawable>? = null
+    private var lastRequest: RequestBuilder<Drawable>? = null
 
     override fun playerToolbar(): Toolbar {
         return binding.playerToolbar
@@ -74,7 +77,7 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
     private fun setUpPlayerToolbar() {
         binding.playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { requireActivity().onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
             ToolbarContentTintHelper.colorizeToolbar(this, Color.WHITE, activity)
         }.setOnMenuItemClickListener(this)
     }
@@ -116,14 +119,14 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
 
     private fun updateBlur() {
         // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
-        GlideApp.with(this)
+        Glide.with(this)
             .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
             .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
             .transform(
                 BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
                     .build()
             ).thumbnail(lastRequest)
-            .error(GlideApp.with(this).load(ColorDrawable(Color.DKGRAY)).fitCenter())
+            .error(Glide.with(this).load(ColorDrawable(Color.DKGRAY)).fitCenter())
             .also {
                 lastRequest = it.clone()
                 it.crossfadeListener()
@@ -141,9 +144,13 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
         updateBlur()
     }
 
+    override fun onPause() {
+        super.onPause()
+        lastRequest = null
+    }
+
     override fun onResume() {
         super.onResume()
-        lastRequest = null
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .registerOnSharedPreferenceChangeListener(this)
     }

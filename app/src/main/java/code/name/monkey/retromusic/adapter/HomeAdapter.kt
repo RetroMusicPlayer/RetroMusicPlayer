@@ -18,7 +18,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.bundleOf
@@ -35,14 +34,14 @@ import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.fragments.home.HomeFragment
 import code.name.monkey.retromusic.interfaces.IAlbumClickListener
 import code.name.monkey.retromusic.interfaces.IArtistClickListener
-import code.name.monkey.retromusic.interfaces.IGenreClickListener
-import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.model.Album
+import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Home
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-class HomeAdapter(
-    private val activity: AppCompatActivity
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), IArtistClickListener, IAlbumClickListener,
-    IGenreClickListener {
+class HomeAdapter(private val activity: AppCompatActivity) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), IArtistClickListener, IAlbumClickListener {
 
     private var list = listOf<Home>()
 
@@ -134,6 +133,7 @@ class HomeAdapter(
         notifyDataSetChanged()
     }
 
+    @Suppress("UNCHECKED_CAST")
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             title.setText(home.titleRes)
@@ -144,6 +144,7 @@ class HomeAdapter(
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             title.setText(home.titleRes)
@@ -154,6 +155,7 @@ class HomeAdapter(
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             title.setText(home.titleRes)
@@ -161,7 +163,7 @@ class HomeAdapter(
                 val songAdapter = SongAdapter(
                     activity,
                     home.arrayList as MutableList<Song>,
-                    R.layout.item_favourite_card, null
+                    R.layout.item_favourite_card
                 )
                 layoutManager = linearLayoutManager()
                 adapter = songAdapter
@@ -172,15 +174,14 @@ class HomeAdapter(
     open class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
         val title: AppCompatTextView = itemView.findViewById(R.id.title)
-        val arrow: ImageView = itemView.findViewById(R.id.arrow)
         val clickableArea: ViewGroup = itemView.findViewById(R.id.clickable_area)
     }
 
     private fun artistsAdapter(artists: List<Artist>) =
-        ArtistAdapter(activity, artists, PreferenceUtil.homeArtistGridStyle, null, this)
+        ArtistAdapter(activity, artists, PreferenceUtil.homeArtistGridStyle, this)
 
     private fun albumAdapter(albums: List<Album>) =
-        AlbumAdapter(activity, albums, PreferenceUtil.homeAlbumGridStyle, null, this)
+        AlbumAdapter(activity, albums, PreferenceUtil.homeAlbumGridStyle, this)
 
     private fun gridLayoutManager() =
         GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
@@ -209,16 +210,4 @@ class HomeAdapter(
             )
         )
     }
-
-    override fun onClickGenre(genre: Genre, view: View) {
-        activity.findNavController(R.id.fragment_container).navigate(
-            R.id.genreDetailsFragment,
-            bundleOf(EXTRA_GENRE to genre),
-            null,
-            FragmentNavigatorExtras(
-                view to "genre"
-            )
-        )
-    }
-
 }

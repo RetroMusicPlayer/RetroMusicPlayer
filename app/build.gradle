@@ -1,23 +1,22 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'com.google.devtools.ksp'
 
 android {
-    compileSdk 32
-    buildToolsVersion = '30.0.3'
+    compileSdk 33
+    namespace "code.name.monkey.retromusic"
 
     defaultConfig {
-        namespace 'code.name.monkey.retromusic'
         minSdk 21
         targetSdk 32
 
         vectorDrawables.useSupportLibrary = true
 
         applicationId 'io.github.muntashirakon.Music'
-        versionCode 10580
-        versionName '5.8.5'
+        versionCode 10600
+        versionName '6.0.4'
 
         multiDexEnabled true
     }
@@ -32,7 +31,7 @@ android {
         }
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
     packagingOptions {
@@ -41,8 +40,8 @@ android {
         }
     }
     lint {
-        abortOnError false
-        disable 'MissingTranslation', 'InvalidPackage'
+        abortOnError true
+        warning 'ImpliedQuantity', 'Instantiatable', 'MissingQuantity', 'MissingTranslation'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -51,8 +50,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    configurations.all {
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+    configurations.configureEach {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
 }
@@ -61,13 +63,13 @@ android {
 dependencies {
     implementation project(':appthemehelper')
     implementation "androidx.gridlayout:gridlayout:1.0.0"
-    implementation "androidx.cardview:cardview:1.0.0"
+
     implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation 'androidx.annotation:annotation:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.annotation:annotation:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
     implementation "androidx.preference:preference-ktx:$preference_version"
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation "androidx.core:core-ktx:$core_version"
     implementation 'androidx.palette:palette-ktx:1.0.0'
 
     implementation "androidx.media:media:1.6.0"
@@ -76,20 +78,22 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
-    def room_version = '2.4.2'
+    def room_version = '2.5.0'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
 
-    def lifecycle_version = "2.5.0-rc01"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
-    implementation "androidx.core:core-splashscreen:1.0.0-beta02"
+    implementation "androidx.core:core-splashscreen:1.0.0"
 
     implementation "com.google.android.material:material:$mdc_version"
-    implementation 'com.google.code.gson:gson:2.9.0'
+
+    def retrofit_version = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
     def material_dialog_version = "3.3.0"
     implementation "com.afollestad.material-dialogs:core:$material_dialog_version"
@@ -98,19 +102,15 @@ dependencies {
 
     implementation 'com.afollestad:material-cab:2.0.1'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
-    def kotlin_coroutines_version = '1.6.1'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
-
-    def koin_version = '3.2.0'
+    def koin_version = '3.3.3'
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
 
-    def glide_version = '4.13.2'
+    def glide_version = '4.15.0'
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    ksp "com.github.bumptech.glide:ksp:$glide_version"
 
     implementation 'com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0'
 
@@ -125,8 +125,7 @@ dependencies {
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:2.0.0'
     implementation 'com.github.dhaval2404:imagepicker:2.1'
-    implementation 'me.zhanghai.android.fastscroll:library:1.1.8'
-    implementation 'cat.ereza:customactivityoncrash:2.3.0'
-    implementation 'me.tankery.lib:circularSeekBar:1.3.2'
-//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
+    implementation 'me.zhanghai.android.fastscroll:library:1.2.0'
+    implementation 'cat.ereza:customactivityoncrash:2.4.0'
+    implementation 'me.tankery.lib:circularSeekBar:1.4.1'
 }

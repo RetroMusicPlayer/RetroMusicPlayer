@@ -223,7 +223,7 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         fun primaryColor(context: Context): Int {
             return prefs(context).getInt(
                 ThemeStorePrefKeys.KEY_PRIMARY_COLOR,
-                resolveColor(context, R.attr.colorPrimary, Color.parseColor("#455A64"))
+                resolveColor(context, androidx.appcompat.R.attr.colorPrimary, Color.parseColor("#455A64"))
             )
         }
 
@@ -240,7 +240,7 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
             } else {
                 prefs(context).getInt(
                     ThemeStorePrefKeys.KEY_ACCENT_COLOR,
-                    resolveColor(context, R.attr.colorAccent, Color.parseColor("#263238"))
+                    resolveColor(context, androidx.appcompat.R.attr.colorAccent, Color.parseColor("#263238"))
                 )
             }
             return if (isWindowBackgroundDark(context) && desaturatedColor) ColorUtil.desaturateColor(
@@ -254,7 +254,7 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         fun wallpaperColor(context: Context, isDarkMode: Boolean): Int {
             return prefs(context).getInt(
                 if (isDarkMode) ThemeStorePrefKeys.KEY_WALLPAPER_COLOR_DARK else ThemeStorePrefKeys.KEY_WALLPAPER_COLOR_LIGHT,
-                resolveColor(context, R.attr.colorAccent, Color.parseColor("#263238"))
+                resolveColor(context, androidx.appcompat.R.attr.colorAccent, Color.parseColor("#263238"))
             )
         }
 
@@ -343,14 +343,14 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
             return true
         }
 
-        private fun isMD3Enabled(context: Context): Boolean {
+        fun isMD3Enabled(context: Context): Boolean {
             return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(ThemeStorePrefKeys.KEY_MATERIAL_YOU, VersionUtils.hasS())
         }
 
         private fun isWallpaperAccentEnabled(context: Context): Boolean {
             return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("wallpaper_accent", VersionUtils.hasOreoMR1() && !VersionUtils.hasS())
+                .getBoolean("wallpaper_accent", false)
         }
     }
 }

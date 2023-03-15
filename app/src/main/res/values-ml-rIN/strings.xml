@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">പ്രിയപ്പെട്ടവയിലേയ്ക്ക് ചേർക്കുക</string>
     <string name="action_add_to_playing_queue">ക്യൂലേക് ആഡ് ചെയ്യൂ</string>
     <string name="action_add_to_playlist">പ്ലേലിസ്റ്റിലേക്ക് ആഡ് ചെയ്യുക</string>
+    <string name="action_cancel">Cancel</string>
     <string name="action_cast">കാസ്റ്റ്</string>
     <string name="action_clear_playing_queue">നിലവിൽ ഉള്ള ക്യൂ ക്ലിയർ ചെയ്യൂ</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
@@ -56,7 +57,7 @@
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
     <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
     <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
-    <string name="added_x_titles_to_playing_queue">Added %d titles to the playing queue.</string>
+    <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Song</item>
@@ -90,6 +91,8 @@
     <string name="biography">Biography</string>
     <string name="black_theme_name">Just Black</string>
     <string name="blacklist">Blacklist</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Blur</string>
     <string name="blur_card">Blur Card</string>
     <string name="bug_report_failed">Unable to send report</string>
@@ -103,6 +106,7 @@
     <string name="bug_report_no_password">Please enter your valid GitHub password</string>
     <string name="bug_report_no_title">Please enter an issue title</string>
     <string name="bug_report_no_username">Please enter your valid GitHub username</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
     <string name="bug_report_use_account">Send using GitHub account</string>
     <string name="buy_now">Buy now</string>
@@ -126,6 +130,7 @@
     <string name="clear_playing_queue">Clear queue</string>
     <string name="color">Color</string>
     <string name="colors">Colors</string>
+    <string name="compact">Compact</string>
     <string name="composer">Composer</string>
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
     <string name="could_not_create_playlist">Couldn\u2019t create playlist.</string>
@@ -168,8 +173,15 @@
     <string name="edit_synced_lyrics">Edit Synced Lyrics</string>
     <string name="empty">Empty</string>
     <string name="equalizer">Equalizer</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
     <string name="favorites">Favorites</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Finish last song</string>
     <string name="fit">Fit</string>
     <string name="flat">Flat</string>
@@ -185,6 +197,7 @@
     <string name="genres">Genres</string>
     <string name="git_hub_summary">Fork the project on GitHub</string>
     <string name="gradient">Gradient</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -222,6 +235,7 @@
     <string name="labeled">Labeled</string>
     <string name="last_added">Last added</string>
     <string name="last_song">Last song</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Library categories</string>
     <string name="licenses">Licenses</string>
     <string name="light_theme_name">Clearly White</string>
@@ -234,6 +248,12 @@
     <string name="material">Material</string>
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Permission error</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Name</string>
     <string name="my_top_tracks">Most played</string>
     <string name="never">Never</string>
@@ -274,6 +294,7 @@
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
     <string name="peek">Peek</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Permission to access external storage denied.</string>
     <string name="permission_summary">The app needs permission to access your device storage for playing music</string>
     <string name="permission_title">Storage Access</string>
@@ -336,25 +357,26 @@
     <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
-    <string name="pref_title_appbar_mode">App bar mode</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
@@ -381,6 +403,7 @@
     <string name="pref_title_lock_screen">Fullscreen controls</string>
     <string name="pref_title_lyrics_screen_on">Keep screen on when showing lyrics</string>
     <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
     <string name="pref_title_open_source_licences">Open source licences</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -388,6 +411,7 @@
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">Fullscreen app</string>
@@ -396,7 +420,6 @@
     <string name="pref_title_toggle_volume">Volume controls</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
@@ -475,6 +498,7 @@
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date added</string>
     <string name="sort_order_date_modified">Date modified</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Song count</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Year</string>
@@ -534,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>

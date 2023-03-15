@@ -98,7 +98,7 @@
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_toggle_full_screen"
             android:title="@string/pref_title_toggle_full_screen"
-            app:icon="@drawable/ic_cellphone" />
+            app:icon="@drawable/ic_fullscreen" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory

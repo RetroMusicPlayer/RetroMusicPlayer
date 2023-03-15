@@ -26,10 +26,10 @@ import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class RemoveSongFromPlaylistDialog : DialogFragment() {
-    private val libraryViewModel by sharedViewModel<LibraryViewModel>()
+    private val libraryViewModel by activityViewModel<LibraryViewModel>()
 
     companion object {
         fun create(song: SongEntity): RemoveSongFromPlaylistDialog {

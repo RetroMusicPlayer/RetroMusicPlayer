@@ -55,7 +55,7 @@ class PlayingQueueRVFragment : AbsRecyclerViewFragment<PlayingQueueAdapter, Line
             setNavigationOnClickListener {
                 findNavController().navigateUp()
             }
-            setNavigationIcon(R.drawable.ic_keyboard_backspace_black)
+            setNavigationIcon(R.drawable.ic_arrow_back)
         }
     }
 

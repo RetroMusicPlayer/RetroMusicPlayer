@@ -11,13 +11,14 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/mini_player_height">
 
         <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/generalSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:settingListItemIcon="@drawable/ic_theme_palette"
+            app:settingListItemIcon="@drawable/ic_palette"
             app:settingListItemIconColor="@color/md_blue_A400"
             app:settingListItemText="@string/general_settings_summary"
             app:settingListItemTitle="@string/general_settings_title" />

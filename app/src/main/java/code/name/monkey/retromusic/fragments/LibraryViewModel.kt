@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.*
 import code.name.monkey.retromusic.RECENT_ALBUMS
@@ -34,6 +33,7 @@ import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
@@ -145,48 +145,47 @@ class LibraryViewModel(
     }
 
     override fun onMediaStoreChanged() {
-        println("onMediaStoreChanged")
+        logD("onMediaStoreChanged")
         loadLibraryContent()
     }
 
     override fun onServiceConnected() {
-        println("onServiceConnected")
+        logD("onServiceConnected")
     }
 
     override fun onServiceDisconnected() {
-        println("onServiceDisconnected")
+        logD("onServiceDisconnected")
     }
 
     override fun onQueueChanged() {
-        println("onQueueChanged")
+        logD("onQueueChanged")
     }
 
     override fun onPlayingMetaChanged() {
-        println("onPlayingMetaChanged")
+        logD("onPlayingMetaChanged")
     }
 
     override fun onPlayStateChanged() {
-        println("onPlayStateChanged")
+        logD("onPlayStateChanged")
     }
 
     override fun onRepeatModeChanged() {
-        println("onRepeatModeChanged")
+        logD("onRepeatModeChanged")
     }
 
     override fun onShuffleModeChanged() {
-        println("onShuffleModeChanged")
+        logD("onShuffleModeChanged")
     }
 
     override fun onFavoriteStateChanged() {
-        println("onFavoriteStateChanged")
+        logD("onFavoriteStateChanged")
     }
 
     fun shuffleSongs() = viewModelScope.launch(IO) {
         val songs = repository.allSongs()
-        MusicPlayerRemote.openAndShuffleQueue(
-            songs,
-            true
-        )
+        withContext(Main) {
+            MusicPlayerRemote.openAndShuffleQueue(songs, true)
+        }
     }
 
     fun renameRoomPlaylist(playListId: Long, name: String) = viewModelScope.launch(IO) {
@@ -351,8 +350,7 @@ class LibraryViewModel(
                     context.getString(
                         R.string.added_song_count_to_playlist,
                         songs.size,
-                        playlistName),
-                    Toast.LENGTH_SHORT)
+                        playlistName))
             }
         }
     }

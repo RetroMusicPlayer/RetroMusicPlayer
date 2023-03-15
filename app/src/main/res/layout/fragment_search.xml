@@ -19,7 +19,7 @@
             style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:titleTextAppearance="@style/ToolbarTextAppearanceNormal">
 
             <LinearLayout
@@ -138,6 +138,7 @@
         android:overScrollMode="@integer/overScrollMode"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
+        android:paddingBottom="@dimen/mini_player_height"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     <com.google.android.material.textview.MaterialTextView

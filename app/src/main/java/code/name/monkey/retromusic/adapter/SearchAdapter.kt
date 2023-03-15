@@ -27,9 +27,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.db.PlaylistWithSongs
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.albumCoverOptions
+import code.name.monkey.retromusic.glide.RetroGlideExtension.artistImageOptions
+import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.model.Album
@@ -37,6 +40,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
+import com.bumptech.glide.Glide
 import java.util.*
 
 class SearchAdapter(
@@ -59,26 +63,28 @@ class SearchAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if (viewType == HEADER) ViewHolder(
-            LayoutInflater.from(activity).inflate(
-                R.layout.sub_header,
-                parent,
-                false
-            ), viewType
-        )
-        else if (viewType == ALBUM || viewType == ARTIST || viewType== ALBUM_ARTIST)
-            ViewHolder(
+        return when (viewType) {
+            HEADER -> ViewHolder(
+                LayoutInflater.from(activity).inflate(
+                    R.layout.sub_header,
+                    parent,
+                    false
+                ), viewType
+            )
+
+            ALBUM, ARTIST, ALBUM_ARTIST -> ViewHolder(
                 LayoutInflater.from(activity).inflate(
                     R.layout.item_list_big,
                     parent,
                     false
                 ), viewType
             )
-        else
-            ViewHolder(
+
+            else -> ViewHolder(
                 LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false),
                 viewType
             )
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -88,25 +94,30 @@ class SearchAdapter(
                 val album = dataSet[position] as Album
                 holder.title?.text = album.title
                 holder.text?.text = album.artistName
-                GlideApp.with(activity).asDrawable().albumCoverOptions(album.safeGetFirstSong()).load(
-                    RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
+                Glide.with(activity).asDrawable().albumCoverOptions(album.safeGetFirstSong())
+                    .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
                     .into(holder.image!!)
             }
+
             ARTIST -> {
                 holder.imageTextContainer?.isVisible = true
                 val artist = dataSet[position] as Artist
                 holder.title?.text = artist.name
                 holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
-                GlideApp.with(activity).asDrawable().artistImageOptions(artist).load(
-                    RetroGlideExtension.getArtistModel(artist)).into(holder.image!!)
+                Glide.with(activity).asDrawable().artistImageOptions(artist).load(
+                    RetroGlideExtension.getArtistModel(artist)
+                ).into(holder.image!!)
             }
+
             SONG -> {
                 holder.imageTextContainer?.isVisible = true
                 val song = dataSet[position] as Song
                 holder.title?.text = song.title
                 holder.text?.text = song.albumName
-                GlideApp.with(activity).asDrawable().songCoverOptions(song).load(RetroGlideExtension.getSongModel(song)).into(holder.image!!)
+                Glide.with(activity).asDrawable().songCoverOptions(song)
+                    .load(RetroGlideExtension.getSongModel(song)).into(holder.image!!)
             }
+
             GENRE -> {
                 val genre = dataSet[position] as Genre
                 holder.title?.text = genre.name
@@ -119,19 +130,23 @@ class SearchAdapter(
                     )
                 )
             }
+
             PLAYLIST -> {
                 val playlist = dataSet[position] as PlaylistWithSongs
                 holder.title?.text = playlist.playlistEntity.playlistName
                 //holder.text?.text = MusicUtil.playlistInfoString(activity, playlist.songs)
             }
+
             ALBUM_ARTIST -> {
                 holder.imageTextContainer?.isVisible = true
                 val artist = dataSet[position] as Artist
                 holder.title?.text = artist.name
                 holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
-                GlideApp.with(activity).asDrawable().artistImageOptions(artist).load(
-                    RetroGlideExtension.getArtistModel(artist)).into(holder.image!!)
+                Glide.with(activity).asDrawable().artistImageOptions(artist).load(
+                    RetroGlideExtension.getArtistModel(artist)
+                ).into(holder.image!!)
             }
+
             else -> {
                 holder.title?.text = dataSet[position].toString()
                 holder.title?.setTextColor(ThemeStore.accentColor(activity))
@@ -143,7 +158,7 @@ class SearchAdapter(
         return dataSet.size
     }
 
-    inner class ViewHolder(itemView: View, itemViewType: Int) : code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, itemViewType: Int) : MediaEntryViewHolder(itemView) {
         init {
             itemView.setOnLongClickListener(null)
             imageTextContainer?.isInvisible = true
@@ -177,30 +192,35 @@ class SearchAdapter(
                         bundleOf(EXTRA_ALBUM_ID to (item as Album).id)
                     )
                 }
+
                 ARTIST -> {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.artistDetailsFragment,
                         bundleOf(EXTRA_ARTIST_ID to (item as Artist).id)
                     )
                 }
-                ALBUM_ARTIST ->{
+
+                ALBUM_ARTIST -> {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.albumArtistDetailsFragment,
                         bundleOf(EXTRA_ARTIST_NAME to (item as Artist).name)
                     )
                 }
+
                 GENRE -> {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.genreDetailsFragment,
                         bundleOf(EXTRA_GENRE to (item as Genre))
                     )
                 }
+
                 PLAYLIST -> {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.playlistDetailsFragment,
-                        bundleOf(EXTRA_PLAYLIST to (item as PlaylistWithSongs))
+                        bundleOf(EXTRA_PLAYLIST_ID to (item as PlaylistWithSongs).playlistEntity.playListId)
                     )
                 }
+
                 SONG -> {
                     MusicPlayerRemote.playNext(item as Song)
                     MusicPlayerRemote.playNextSong()

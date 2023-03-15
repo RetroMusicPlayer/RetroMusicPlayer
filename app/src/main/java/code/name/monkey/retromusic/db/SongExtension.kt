@@ -145,3 +145,9 @@ fun List<Song>.toSongsEntity(playlistEntity: PlaylistEntity): List<SongEntity> {
         it.toSongEntity(playlistEntity.playListId)
     }
 }
+
+fun List<Song>.toSongsEntity(playlistId: Long): List<SongEntity> {
+    return map {
+        it.toSongEntity(playlistId)
+    }
+}

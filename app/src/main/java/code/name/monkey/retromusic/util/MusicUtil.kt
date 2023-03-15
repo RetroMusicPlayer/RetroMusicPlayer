@@ -26,10 +26,8 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
-import code.name.monkey.retromusic.service.MusicService
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
@@ -43,21 +41,46 @@ import java.util.regex.Pattern
 
 
 object MusicUtil : KoinComponent {
-    fun createShareSongFileIntent(song: Song, context: Context): Intent? {
-        return try {
-            Intent().setAction(Intent.ACTION_SEND).putExtra(
-                Intent.EXTRA_STREAM,
-                FileProvider.getUriForFile(
-                    context,
-                    context.applicationContext.packageName,
-                    File(song.data)
+    fun createShareSongFileIntent(context: Context, song: Song): Intent {
+        return Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(
+                Intent.EXTRA_STREAM, try {
+                    FileProvider.getUriForFile(
+                        context,
+                        context.applicationContext.packageName,
+                        File(song.data)
+                    )
+                } catch (e: IllegalArgumentException) {
+                    getSongFileUri(song.id)
+                }
+            )
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            type = "audio/*"
+        }
+    }
+
+    fun createShareMultipleSongIntent(context: Context, songs: List<Song>): Intent {
+        return Intent().apply {
+            action = Intent.ACTION_SEND_MULTIPLE
+            type = "audio/*"
+
+            val files = ArrayList<Uri>()
+
+            for (song in songs) {
+                files.add(
+                    try {
+                        FileProvider.getUriForFile(
+                            context,
+                            context.applicationContext.packageName,
+                            File(song.data)
+                        )
+                    } catch (e: IllegalArgumentException) {
+                        getSongFileUri(song.id)
+                    }
                 )
-            ).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).setType("audio/*")
-        } catch (e: IllegalArgumentException) {
-            Intent().setAction(Intent.ACTION_SEND).putExtra(
-                Intent.EXTRA_STREAM,
-                getSongFileUri(song.id)
-            ).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).setType("audio/*")
+            }
+            putParcelableArrayListExtra(Intent.EXTRA_STREAM, files)
         }
     }
 
@@ -100,7 +123,7 @@ object MusicUtil : KoinComponent {
 
     fun getArtistInfoString(
         context: Context,
-        artist: Artist
+        artist: Artist,
     ): String {
         val albumCount = artist.albumCount
         val songCount = artist.songCount
@@ -190,7 +213,7 @@ object MusicUtil : KoinComponent {
 
     fun getPlaylistInfoString(
         context: Context,
-        songs: List<Song>
+        songs: List<Song>,
     ): String {
         val duration = getTotalDuration(songs)
         return buildInfoString(
@@ -201,7 +224,7 @@ object MusicUtil : KoinComponent {
 
     fun playlistInfoString(
         context: Context,
-        songs: List<SongEntity>
+        songs: List<SongEntity>,
     ): String {
         return getSongCountString(context, songs.size)
     }
@@ -229,18 +252,21 @@ object MusicUtil : KoinComponent {
         }
     }
 
-    fun getSectionName(mediaTitle: String?): String {
+    fun getSectionName(mediaTitle: String?, stripPrefix: Boolean = false): String {
         var musicMediaTitle = mediaTitle
         return try {
             if (musicMediaTitle.isNullOrEmpty()) {
                 return "-"
             }
             musicMediaTitle = musicMediaTitle.trim { it <= ' ' }.lowercase()
-            if (musicMediaTitle.startsWith("the ")) {
-                musicMediaTitle = musicMediaTitle.substring(4)
-            } else if (musicMediaTitle.startsWith("a ")) {
-                musicMediaTitle = musicMediaTitle.substring(2)
+            if (stripPrefix) {
+                if (musicMediaTitle.startsWith("the ")) {
+                    musicMediaTitle = musicMediaTitle.substring(4)
+                } else if (musicMediaTitle.startsWith("a ")) {
+                    musicMediaTitle = musicMediaTitle.substring(2)
+                }
             }
+
             if (musicMediaTitle.isEmpty()) {
                 ""
             } else musicMediaTitle.substring(0, 1).uppercase()
@@ -299,7 +325,7 @@ object MusicUtil : KoinComponent {
     fun insertAlbumArt(
         context: Context,
         albumId: Long,
-        path: String?
+        path: String?,
     ) {
         val contentResolver = context.contentResolver
         val artworkUri = "content://media/external/audio/albumart".toUri()
@@ -333,9 +359,9 @@ object MusicUtil : KoinComponent {
         return false
     }
 
-    val repository = get<Repository>()
-    fun toggleFavorite(context: Context, song: Song) {
-        GlobalScope.launch {
+    private val repository = get<Repository>()
+    suspend fun toggleFavorite(song: Song) {
+        withContext(IO) {
             val playlist: PlaylistEntity = repository.favoritePlaylist()
             val songEntity = song.toSongEntity(playlist.playListId)
             val isFavorite = repository.isFavoriteSong(songEntity).isNotEmpty()
@@ -344,15 +370,16 @@ object MusicUtil : KoinComponent {
             } else {
                 repository.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
-            context.sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
     }
+
+    suspend fun isFavorite(song: Song) = repository.isSongFavorite(song.id)
 
     fun deleteTracks(
         activity: FragmentActivity,
         songs: List<Song>,
         safUris: List<Uri>?,
-        callback: Runnable?
+        callback: Runnable?,
     ) {
         val songRepository: SongRepository = get()
         val projection = arrayOf(

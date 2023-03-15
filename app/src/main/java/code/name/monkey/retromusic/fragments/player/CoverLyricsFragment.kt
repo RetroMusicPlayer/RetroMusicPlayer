@@ -11,6 +11,7 @@ import androidx.preference.PreferenceManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SHOW_LYRICS
 import code.name.monkey.retromusic.databinding.FragmentCoverLyricsBinding
+import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
@@ -21,6 +22,7 @@ import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jaudiotagger.audio.exceptions.CannotReadException
@@ -54,6 +56,17 @@ class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyri
         binding.playerLyricsLine2.setOnClickListener {
             goToLyrics(requireActivity())
         }
+    }
+
+    fun setColors(color: MediaNotificationProcessor) {
+        binding.run {
+            playerLyrics.background = null
+            playerLyricsLine1.setTextColor(color.primaryTextColor)
+            playerLyricsLine1.setShadowLayer(dipToPix(10f), 0f, 0f, color.backgroundColor)
+            playerLyricsLine2.setTextColor(color.primaryTextColor)
+            playerLyricsLine2.setShadowLayer(dipToPix(10f), 0f, 0f, color.backgroundColor)
+        }
+
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
@@ -102,8 +115,6 @@ class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyri
                 null
             }
         }
-
-
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {

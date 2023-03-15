@@ -9,6 +9,7 @@
     <string name="action_add_to_favorites">Προσθήκη στα αγαπημένα</string>
     <string name="action_add_to_playing_queue">Προσθήκη στην ουρά αναπαραγωγής</string>
     <string name="action_add_to_playlist">Προσθήκη στη λίστα αναπαραγωγής</string>
+    <string name="action_cancel">Ακύρωση τρέχων χρονοδιακόπτη</string>
     <string name="action_cast">Μετάδοση</string>
     <string name="action_clear_playing_queue">Εκκαθάριση ουράς αναπαραγωγής</string>
     <string name="action_cycle_repeat">Λειτουργία κυκλικής επανάληψης</string>
@@ -90,6 +91,8 @@
     <string name="biography">Βιογραφία</string>
     <string name="black_theme_name">Απλά Μαύρο</string>
     <string name="blacklist">Μαύρη λίστα</string>
+    <string name="bluetooth_summary">The app needs nearby devices permission to check for bluetooth devices</string>
+    <string name="bluetooth_title">Nearby devices</string>
     <string name="blur">Θολούρα</string>
     <string name="blur_card">Κάρτα θαμπώματος</string>
     <string name="bug_report_failed">Δεν είναι δυνατή η αποστολή αναφοράς</string>
@@ -103,6 +106,7 @@
     <string name="bug_report_no_password">Παρακαλώ εισαγάγετε τον έγκυρο κωδικό πρόσβασης GitHub</string>
     <string name="bug_report_no_title">Παρακαλώ εισαγάγετε έναν τίτλο ζητήματος</string>
     <string name="bug_report_no_username">Παρακαλώ εισαγάγετε το έγκυρο όνομα χρήστη GitHub</string>
+    <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">Προέκυψε ένα μη αναμενόμενο σφάλμα. Λυπούμαστε που βρήκατε αυτό το σφάλμα, εάν εξακολουθεί να παρουσιάζεται  \"\"Διαγραφή δεδομένων εφαρμογής\" ή στείλτε ένα Email </string>
     <string name="bug_report_use_account">Αποστολή χρησιμοποιώντας λογαριασμό GitHub</string>
     <string name="buy_now">Αγορά τώρα</string>
@@ -126,6 +130,7 @@
     <string name="clear_playing_queue">Εκκαθάριση ουράς</string>
     <string name="color">Χρώμα</string>
     <string name="colors">Χρώματα</string>
+    <string name="compact">Compact</string>
     <string name="composer">Συνθέτης</string>
     <string name="copied_device_info_to_clipboard">Οι πληροφοριές συσκευής αντιγράφηκαν στο πρόχειρο.</string>
     <string name="could_not_create_playlist">\u0391\u03b4\u03c5\u03bd\u03b1\u03bc\u03af\u03b1 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1\u03c2 playlist.</string>
@@ -168,8 +173,15 @@
     <string name="edit_synced_lyrics">Επεξεργασία Συγχρονισμένων Στίχων</string>
     <string name="empty">Κενό</string>
     <string name="equalizer">Ισοσταθμιστής</string>
+    <string name="error_create_backup">Couldn\u2019t create backup</string>
+    <string name="error_delete_backup">Couldn\u2019t delete backup</string>
+    <string name="error_empty_name">Your name can\'t be empty!</string>
+    <string name="error_load_failed">Load failed</string>
+    <string name="error_share_file">Couldn\'t share file</string>
+    <string name="expanded">Expanded</string>
     <string name="faq">Συχνές ερωτήσεις</string>
     <string name="favorites">Αγαπημένα</string>
+    <string name="file_already_exists">File already exists</string>
     <string name="finish_last_song">Τελειώσε το τελευταίο κομμάτι</string>
     <string name="fit">Προσαρμογή</string>
     <string name="flat">Επίπεδο</string>
@@ -185,6 +197,7 @@
     <string name="genres">Είδη</string>
     <string name="git_hub_summary">Fork το έργο στο GitHub</string>
     <string name="gradient">Διαβάθμιση</string>
+    <string name="grant_access">Grant access</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -222,6 +235,7 @@
     <string name="labeled">Με ετικέτα</string>
     <string name="last_added">Προστέθηκαν τελευταία</string>
     <string name="last_song">Τελευταίο κομμάτι</string>
+    <string name="lets_go">Let\'s go</string>
     <string name="library_categories">Κατηγορίες βιβλιοθήκης</string>
     <string name="licenses">Άδειες</string>
     <string name="light_theme_name">Ξεκάθαρα Λευκό</string>
@@ -234,6 +248,12 @@
     <string name="material">Υλικό</string>
     <string name="md_error_label">Σφάλμα</string>
     <string name="md_storage_perm_error">Σφάλμα άδειας</string>
+    <string name="message_backup_create_success">Backup created successfully.</string>
+    <string name="message_limit_tabs">Not more than 5 items</string>
+    <string name="message_pro_feature">%s is a Pro feature.</string>
+    <string name="message_restore_success">Restore completed successfully.</string>
+    <string name="message_updated">Updated</string>
+    <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Το Όνομά μου</string>
     <string name="my_top_tracks">Τα Κορυφαία Κομμάτια μου</string>
     <string name="never">Ποτέ</string>
@@ -274,6 +294,7 @@
     <string name="paste_lyrics_here">Επικολλήστε τους στίχους εδω</string>
     <string name="paste_timeframe_lyrics_here">Επικόλληση στίχων χρονικού πλαισίου εδώ</string>
     <string name="peek">Ματιά</string>
+    <string name="permission_bluetooth_denied">Nearby devices permission denied.</string>
     <string name="permission_external_storage_denied">Η άδεια για προσπέλαση του external storage δεν παραχωρήθηκε.</string>
     <string name="permission_summary">Η εφαρμογή χρειάζεται άδεια για πρόσβαση στον αποθηκευτικό χώρο της συσκευής σας για την αναπαραγωγή μουσικής</string>
     <string name="permission_title">Πρόσβαση Χώρου Αποθήκευσης</string>
@@ -336,25 +357,26 @@
     <string name="pref_summary_ignore_media_store_artwork">Μπορεί να αυξήσει την ποιότητα των εξωφύλλων άλμπουμ, αλλά προκαλεί αργή φόρτωση εικόνων. Ενεργοποιήστε αυτή την επίλογη μόνο εαν αντιμετωπίζετε προβλήματα με εξώφυλλα χαμηλής ανάλυσης.</string>
     <string name="pref_summary_library_categories">Ρυθμίστε την ορατότητα και τη σειρά των κατηγοριών βιβλιοθήκης.</string>
     <string name="pref_summary_lock_screen">Ενεργοποίηση διακοπτών ρύθμισης στην οθόνη κλειδώματος.</string>
+    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Λεπτομέρειες άδειας για τη χρήση open source λογισμικού</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Μεταβείτε στην τελευταία χρησιμοποιημένη καρτέλα κατά την έναρξη</string>
     <string name="pref_summary_show_lyrics">Εμφάνιση συγχρονισμένων στίχων πάνω από το εξώφυλλο άλμπουμ</string>
     <string name="pref_summary_suggestions">Εμφάνιση Νέου Μείγματος Μουσικής στην Αρχική οθόνη</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Επιτρέπει την αλλαγή τραγουδιού σύροντας οπουδήποτε στην οθόνη αναπαραγωγής</string>
+    <string name="pref_summary_swipe_to_dismiss">Swipe down to dismiss mini player</string>
     <string name="pref_summary_toggle_full_screen">Ενεργοποίηση της επιλογής για χρήση πλήρους οθόνης</string>
     <string name="pref_summary_toggle_headset">Όταν συνδεθούν ηχεία/ακουστικά , αρχίζει η αναπαραγωγή</string>
     <string name="pref_summary_toggle_shuffle">Η λειτουργία ανακατέματος θα απενεργοποιείται όταν αναπαράγεται μια νέα λίστα τραγουδιών</string>
     <string name="pref_summary_toggle_volume">Εαν υπάρχει χώρος στην οθόνη αναπαραγωγής, ενεργοποιήστε τον πίνακα ελέγχου έντασης.</string>
     <string name="pref_summary_wallpaper_accent">Εξαγωγή απόχρωσης από την ταπετσαρία</string>
     <string name="pref_summary_whitelist">Εμφάνιση μουσικής μόνο από το φάκελο /Μουσική</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_title_album_art_on_lockscreen">Εμφάνιση εξωφύλλου άλμπουμ.</string>
     <string name="pref_title_album_artists_only">Πλοήγηση κατά Καλλιτέχνη Άλμπουμ</string>
     <string name="pref_title_album_cover_style">Θέμα εξώφυλλου άλμπουμ</string>
     <string name="pref_title_album_cover_transform">Παράλειψη εξώφυλλου άλμπουμ</string>
     <string name="pref_title_app_shortcuts">Χρωματιστά app shortcuts</string>
-    <string name="pref_title_appbar_mode">Λειτουργία μπάρας εφαρμογής</string>
+    <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Μείωση έντασης όταν υπάρχουν εισερχόμενες ειδοποιήσεις</string>
     <string name="pref_title_audio_fade">Εξασθένηση Ήχου</string>
     <string name="pref_title_auto_download_artist_images">Αυτόματη λήψη εικόνων καλλιτεχνών</string>
@@ -381,6 +403,7 @@
     <string name="pref_title_lock_screen">Full screen Ρυθμίσεις</string>
     <string name="pref_title_lyrics_screen_on">Να παραμένει ενεργή η οθόνη όταν εμφανίζονται οι στίχοι</string>
     <string name="pref_title_lyrics_type">Τύπος στίχων</string>
+    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pref_title_now_playing_screen_appearance">Εμφάνιση</string>
     <string name="pref_title_open_source_licences">Άδειες λογισμικού open source</string>
     <string name="pref_title_pause_history">Pause history</string>
@@ -388,6 +411,7 @@
     <string name="pref_title_show_lyrics">Εμφάνιση στίχων</string>
     <string name="pref_title_suggestions">Εμφάνιση προτάσεων</string>
     <string name="pref_title_swipe_anywhere_now_playing">Σύρετε οπουδήποτε για να αλλάξετε τραγούδι</string>
+    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Λειτουργία τίτλων καρτελών</string>
     <string name="pref_title_toggle_carousel_effect">Εφέ καρουσέλ</string>
     <string name="pref_title_toggle_full_screen">Full screen εφαρμογή</string>
@@ -396,9 +420,8 @@
     <string name="pref_title_toggle_volume">Πίνακας Ελέγχου Έντασης</string>
     <string name="pref_title_wallpaper_accent">Απόχρωση ταπετσαρίας</string>
     <string name="pref_title_whitelist">Λίστα επιτρεπόμενων κομματιών</string>
-    <string name="pref_title_manage_audio_focus">Always play</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Μαύρο θέμα, Θέματα στο Τώρα παίζει, εφέ Καρουσέλ και πολλά άλλα..</string>
+    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Προφίλ</string>
     <string name="purchase">Αγορά</string>
     <string name="queue">Ουρά</string>
@@ -475,6 +498,7 @@
     <string name="sort_order_composer">Συνθέτης</string>
     <string name="sort_order_date">Ημερομηνία προσθήκης</string>
     <string name="sort_order_date_modified">Ημερομηνία τροποποιήσης</string>
+    <string name="sort_order_default">Default</string>
     <string name="sort_order_num_songs">Αριθμός τραγουδιών</string>
     <string name="sort_order_num_songs_desc">Αριθμός τραγουδιών φθίνουσα</string>
     <string name="sort_order_year">Έτος</string>
@@ -534,5 +558,4 @@
     <string name="you_have_to_select_at_least_one_category">Πρέπει να επιλέξετε τουλάχιστον μία κατηγορία.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Θα προωθηθείτε στον ιστότοπο παρακολούθησης ζητημάτων.</string>
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
-    <string name="bug_report_success">Bug report successful</string>
 </resources>

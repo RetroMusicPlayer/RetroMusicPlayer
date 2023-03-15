@@ -47,11 +47,12 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/playerToolbar"
         style="@style/Toolbar"
-        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statusBarContainer"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down"
         tools:layout_editor_absoluteY="24dp" />
 
     <FrameLayout
@@ -111,11 +112,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:background="?attr/roundSelector"
         android:padding="16dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
         app:layout_constraintStart_toEndOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_next_round_white_32dp"
+        app:srcCompat="@drawable/ic_skip_next"
         app:tint="@color/md_green_500" />
 
     <ImageButton
@@ -123,11 +126,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:background="?attr/roundSelector"
         android:padding="16dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
         app:layout_constraintEnd_toStartOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_previous_round_white_32dp"
+        app:srcCompat="@drawable/ic_skip_previous"
         app:tint="@color/md_green_500" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -178,11 +183,11 @@
         app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:text="@tools:sample/lorem/random" />
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/progressSlider"
+        style="@style/Widget.Retro.Slider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/seekbar_padding"
         app:layout_constraintBottom_toTopOf="@id/songInfo"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
@@ -194,7 +199,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:gravity="center_vertical|right|end"
+        android:gravity="center_vertical|end"
         android:singleLine="true"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
@@ -202,16 +207,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/progressSlider"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songCurrentProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:gravity="center_vertical|left|end"
-        android:paddingLeft="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical|start"
+        android:paddingStart="8dp"
+        android:paddingEnd="0dp"
         android:singleLine="true"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
@@ -219,7 +225,6 @@
         app:layout_constraintEnd_toStartOf="@id/progressSlider"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
-        tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="@tools:sample/date/hhmmss" />
 
 

@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.fragments.other
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -23,7 +22,6 @@ import android.text.style.ForegroundColorSpan
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import android.view.animation.DecelerateInterpolator
 import androidx.core.text.toSpannable
 import androidx.core.view.isVisible
 import code.name.monkey.retromusic.R
@@ -33,13 +31,14 @@ import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.bumptech.glide.Glide
 import kotlin.math.abs
 
 open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_player),
@@ -66,7 +65,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
         _binding = FragmentMiniPlayerBinding.bind(view)
         view.setOnTouchListener(FlingPlayBackController(requireContext()))
         setUpMiniPlayer()
+        setUpButtons()
+    }
 
+    fun setUpButtons() {
         if (RetroUtil.isTablet) {
             binding.actionNext.show()
             binding.actionPrevious.show()
@@ -112,7 +114,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
 
     private fun updateSongCover() {
         val song = MusicPlayerRemote.currentSong
-        GlideApp.with(requireContext())
+        Glide.with(requireContext())
             .load(RetroGlideExtension.getSongModel(song))
             .transition(RetroGlideExtension.getDefaultTransition())
             .songCoverOptions(song)
@@ -136,10 +138,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
         binding.progressBar.max = total
-        val animator = ObjectAnimator.ofInt(binding.progressBar, "progress", progress)
-        animator.duration = 1000
-        animator.interpolator = DecelerateInterpolator()
-        animator.start()
+        binding.progressBar.progress = progress
     }
 
     override fun onResume() {

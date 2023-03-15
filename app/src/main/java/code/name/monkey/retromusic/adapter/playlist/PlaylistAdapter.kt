@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.adapter.playlist
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -23,33 +24,33 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isGone
 import androidx.core.view.setPadding
 import androidx.fragment.app.FragmentActivity
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.toSongs
 import code.name.monkey.retromusic.extensions.dipToPix
-import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension.playlistOptions
 import code.name.monkey.retromusic.glide.playlistPreview.PlaylistPreview
 import code.name.monkey.retromusic.helper.SortOrder.PlaylistSortOrder
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
-import code.name.monkey.retromusic.interfaces.ICabHolder
 import code.name.monkey.retromusic.interfaces.IPlaylistClickListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 
 class PlaylistAdapter(
     override val activity: FragmentActivity,
     var dataSet: List<PlaylistWithSongs>,
     private var itemLayoutRes: Int,
-    ICabHolder: ICabHolder?,
     private val listener: IPlaylistClickListener
 ) : AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, PlaylistWithSongs>(
     activity,
-    ICabHolder,
     R.menu.menu_playlists_selection
 ), PopupTextProvider {
 
@@ -71,7 +72,7 @@ class PlaylistAdapter(
         return createViewHolder(view)
     }
 
-    fun createViewHolder(view: View): ViewHolder {
+    private fun createViewHolder(view: View): ViewHolder {
         return ViewHolder(view)
     }
 
@@ -100,16 +101,22 @@ class PlaylistAdapter(
         holder.title?.text = getPlaylistTitle(playlist.playlistEntity)
         holder.text?.text = getPlaylistText(playlist)
         holder.menu?.isGone = isChecked(playlist)
-        GlideApp.with(activity)
-            .load(
-                if (itemLayoutRes == R.layout.item_list) {
-                    holder.image?.setPadding(activity.dipToPix(8F).toInt())
-                    R.drawable.ic_playlist_play
-                } else PlaylistPreview(playlist)
-            )
-            .playlistOptions()
-            .into(holder.image!!)
+        if (itemLayoutRes == R.layout.item_list) {
+            holder.image?.setPadding(activity.dipToPix(8F).toInt())
+            holder.image?.setImageDrawable(getIconRes())
+        } else {
+            Glide.with(activity)
+                .load(PlaylistPreview(playlist))
+                .playlistOptions()
+                .into(holder.image!!)
+        }
     }
+
+    private fun getIconRes(): Drawable = TintHelper.createTintedDrawable(
+        activity,
+        R.drawable.ic_playlist_play,
+        ATHUtil.resolveColor(activity, android.R.attr.colorControlNormal)
+    )
 
     override fun getItemCount(): Int {
         return dataSet.size

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/mini_player_height">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playAction"
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/albums"
-        android:textAppearance="@style/TextViewOverline"
+        android:textAppearance="@style/TextViewHeadline6"
         android:textColor="?android:attr/textColorPrimary"
         android:textStyle="bold"
         app:layout_constrainedWidth="true"
@@ -75,24 +76,24 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/songs"
-        android:textAppearance="@style/TextViewOverline"
+        android:textAppearance="@style/TextViewHeadline6"
         android:textColor="?android:attr/textColorPrimary"
         android:textStyle="bold"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@id/song_sort_order"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/albumRecyclerView"/>
+        app:layout_constraintTop_toBottomOf="@id/albumRecyclerView" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/song_sort_order"
+        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        style="@style/Widget.Material3.Button.IconButton"
-        app:iconTint="?colorControlNormal"
-        app:iconSize="24dp"
         android:background="?roundSelector"
         app:icon="@drawable/ic_sort"
+        app:iconSize="24dp"
+        app:iconTint="?colorControlNormal"
         app:layout_constraintBottom_toBottomOf="@+id/songTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/songTitle"

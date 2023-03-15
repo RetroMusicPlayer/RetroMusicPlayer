@@ -17,7 +17,9 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:title="@string/action_tag_editor"
             app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
     </com.google.android.material.appbar.AppBarLayout>

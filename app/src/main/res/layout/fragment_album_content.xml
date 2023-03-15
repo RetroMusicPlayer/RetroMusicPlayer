@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/mini_player_height">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playAction"
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/songs"
-        android:textAppearance="@style/TextViewOverline"
+        android:textAppearance="@style/TextViewHeadline6"
         android:textColor="?android:attr/textColorPrimary"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +73,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/songs"
-        android:textAppearance="@style/TextViewOverline"
+        android:textAppearance="@style/TextViewHeadline6"
         android:textColor="?android:attr/textColorPrimary"
         android:textStyle="bold"
         android:visibility="gone"

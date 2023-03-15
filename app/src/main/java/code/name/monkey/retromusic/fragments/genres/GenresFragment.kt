@@ -73,6 +73,7 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     }
 
 
+
     override val titleRes: Int
         get() = R.string.genres
 
@@ -97,9 +98,7 @@ GenresFragment : AbsRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
         reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         findNavController().navigate(
             R.id.genreDetailsFragment,
-            bundleOf(EXTRA_GENRE to genre),
-            null,
-            null
+            bundleOf(EXTRA_GENRE to genre)
         )
     }
 }

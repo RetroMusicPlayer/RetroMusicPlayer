@@ -14,13 +14,11 @@
 
 package code.name.monkey.retromusic.util;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.UriPermission;
 import android.net.Uri;
-import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
 import android.text.TextUtils;
@@ -43,7 +41,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.activities.saf.SAFRequestActivity;
 import code.name.monkey.retromusic.model.Song;
 
 public class SAFUtil {
@@ -84,7 +81,6 @@ public class SAFUtil {
     return false;
   }
 
-  @TargetApi(Build.VERSION_CODES.KITKAT)
   public static void openFilePicker(Activity activity) {
     Intent i = new Intent(Intent.ACTION_CREATE_DOCUMENT);
     i.addCategory(Intent.CATEGORY_OPENABLE);
@@ -93,7 +89,6 @@ public class SAFUtil {
     activity.startActivityForResult(i, SAFUtil.REQUEST_SAF_PICK_FILE);
   }
 
-  @TargetApi(Build.VERSION_CODES.KITKAT)
   public static void openFilePicker(Fragment fragment) {
     Intent i = new Intent(Intent.ACTION_CREATE_DOCUMENT);
     i.addCategory(Intent.CATEGORY_OPENABLE);
@@ -102,21 +97,18 @@ public class SAFUtil {
     fragment.startActivityForResult(i, SAFUtil.REQUEST_SAF_PICK_FILE);
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public static void openTreePicker(Activity activity) {
     Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
     i.putExtra("android.content.extra.SHOW_ADVANCED", true);
     activity.startActivityForResult(i, SAFUtil.REQUEST_SAF_PICK_TREE);
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public static void openTreePicker(Fragment fragment) {
     Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
     i.putExtra("android.content.extra.SHOW_ADVANCED", true);
     fragment.startActivityForResult(i, SAFUtil.REQUEST_SAF_PICK_TREE);
   }
 
-  @TargetApi(Build.VERSION_CODES.KITKAT)
   public static void saveTreeUri(Context context, Intent data) {
     Uri uri = data.getData();
     if (uri != null) {
@@ -126,12 +118,10 @@ public class SAFUtil {
     }
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public static boolean isTreeUriSaved() {
     return !TextUtils.isEmpty(PreferenceUtil.INSTANCE.getSafSdCardUri());
   }
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public static boolean isSDCardAccessGranted(Context context) {
     if (!isTreeUriSaved()) return false;
 
@@ -256,10 +246,10 @@ public class SAFUtil {
 
   public static boolean delete(Context context, String path, Uri safUri) {
     if (isSAFRequired(path)) {
-      return deleteUsingSAF(context, path, safUri);
+      return deleteSAF(context, path, safUri);
     } else {
       try {
-        deleteFile(path);
+        return deleteFile(path);
       } catch (NullPointerException e) {
         Log.e("MusicUtils", "Failed to find file " + path);
       } catch (Exception e) {
@@ -269,12 +259,13 @@ public class SAFUtil {
     return false;
   }
 
-  public static void deleteFile(String path) {
-    new File(path).delete();
+  public static boolean deleteFile(String path) {
+    return new File(path).delete();
   }
 
-  @TargetApi(Build.VERSION_CODES.KITKAT)
-  private static boolean deleteUsingSAF(Context context, String path, Uri safUri) {
+  public static boolean deleteSAF(Context context, String path, Uri safUri) {
+    Uri uri = null;
+
     if (context == null) {
       Log.e(TAG, "deleteSAF: context == null");
       return false;
@@ -283,17 +274,21 @@ public class SAFUtil {
     if (safUri == null && isTreeUriSaved()) {
       List<String> pathSegments = new ArrayList<>(Arrays.asList(path.split("/")));
       Uri sdcard = Uri.parse(PreferenceUtil.INSTANCE.getSafSdCardUri());
-      safUri = findDocument(DocumentFile.fromTreeUri(context, sdcard), pathSegments);
+      uri = findDocument(DocumentFile.fromTreeUri(context, sdcard), pathSegments);
     }
 
-    if (safUri == null) {
-      requestSAF(context);
+    if (uri == null) {
+      uri = safUri;
+    }
+
+    if (uri == null) {
+      Log.e(TAG, "deleteSAF: Can't get SAF URI");
       toast(context, context.getString(R.string.saf_error_uri));
       return false;
     }
 
     try {
-      DocumentsContract.deleteDocument(context.getContentResolver(), safUri);
+      DocumentsContract.deleteDocument(context.getContentResolver(), uri);
     } catch (final Exception e) {
       Log.e(TAG, "deleteSAF: Failed to delete a file descriptor provided by SAF", e);
 
@@ -303,11 +298,6 @@ public class SAFUtil {
       return false;
     }
     return true;
-  }
-
-  private static void requestSAF(Context context) {
-    Intent intent = new Intent(context, SAFRequestActivity.class);
-    context.startActivity(intent);
   }
 
   private static void toast(final Context context, final String message) {

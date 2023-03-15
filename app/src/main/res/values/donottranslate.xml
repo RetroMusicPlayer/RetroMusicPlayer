@@ -27,5 +27,5 @@
     <string name="sort_order_album_artist">@string/album_artist</string>
     <string name="app_widget_circle_name">@string/circle</string>
 
-
+    <string name="download_policy">always</string>
 </resources>

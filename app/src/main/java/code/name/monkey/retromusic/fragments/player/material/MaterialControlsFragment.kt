@@ -18,7 +18,6 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -33,6 +32,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.slider.Slider
 
 /**
  * @author Hemanth S (h4h13).
@@ -44,7 +44,7 @@ class MaterialControlsFragment :
     private var _binding: FragmentMaterialPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: SeekBar
+    override val progressSlider: Slider
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton

@@ -5,7 +5,6 @@ import android.view.Menu;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import code.name.monkey.appthemehelper.ATHActivity;
-import code.name.monkey.appthemehelper.R;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 
@@ -16,7 +15,7 @@ public class ATHToolbarActivity extends ATHActivity {
 
     public static int getToolbarBackgroundColor(@Nullable Toolbar toolbar) {
         if (toolbar != null) {
-            return ATHUtil.INSTANCE.resolveColor(toolbar.getContext(), R.attr.colorSurface);
+            return ATHUtil.INSTANCE.resolveColor(toolbar.getContext(), com.google.android.material.R.attr.colorSurface);
         }
         return Color.BLACK;
     }
