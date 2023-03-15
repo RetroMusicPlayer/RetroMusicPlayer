@@ -78,10 +78,10 @@
     <string name="app_widget_classic_name">Klassiek</string>
     <string name="app_widget_md3_name">MD3</string>
     <string name="app_widget_small_name">Klein</string>
-    <string name="app_widget_text_name">Minimal Text</string>
+    <string name="app_widget_text_name">Minimale tekst</string>
     <string name="artist">Artiest</string>
     <string name="artists">Artiesten</string>
-    <string name="audio_fade_duration">Audio fade duration</string>
+    <string name="audio_fade_duration">Audio fade duur</string>
     <string name="audio_focus_denied">Geluid focus geweigerd </string>
     <string name="audio_settings_summary">Wijzig de geluidsinstellingen en pas de equalizer aan</string>
     <string name="auto">Automatisch</string>
