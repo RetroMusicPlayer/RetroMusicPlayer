@@ -46,6 +46,7 @@ import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.util.logD
+import code.name.monkey.retromusic.util.logE
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.GlobalScope
@@ -98,7 +99,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.ALBUM_ARTIST)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -107,7 +109,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.TITLE)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -115,7 +118,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.COMPOSER)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -124,7 +128,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.ALBUM)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -133,7 +138,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.ARTIST)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -142,7 +148,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.ALBUM_ARTIST)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -151,7 +158,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.GENRE)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -160,7 +168,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.YEAR)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -169,7 +178,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.TRACK)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -178,7 +188,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.DISC_NO)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -187,7 +198,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         get() {
             return try {
                 getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.LYRICS)
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 null
             }
         }
@@ -205,7 +217,8 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
                     )
                 }
                 return null
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                logE(e)
                 return null
             }
         }
@@ -356,9 +369,12 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
                         artworkInfo
                     )
                 )
-                val pendingIntent = MediaStore.createWriteRequest(contentResolver, getSongUris())
 
-                launcher.launch(IntentSenderRequest.Builder(pendingIntent).build())
+                if (cacheFiles.isNotEmpty()) {
+                    val pendingIntent =
+                        MediaStore.createWriteRequest(contentResolver, getSongUris())
+                    launcher.launch(IntentSenderRequest.Builder(pendingIntent).build())
+                }
             } else {
                 TagWriter.writeTagsToFiles(
                     this@AbsTagEditorActivity, AudioTagInfo(
@@ -396,9 +412,14 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
         }
     }
 
+    private lateinit var audioFile: AudioFile
+
     private fun getAudioFile(path: String): AudioFile {
         return try {
-            AudioFileIO.read(File(path))
+            if (!this::audioFile.isInitialized) {
+                audioFile = AudioFileIO.read(File(path))
+            }
+            audioFile
         } catch (e: Exception) {
             Log.e(TAG, "Could not read audio file $path", e)
             AudioFile()
