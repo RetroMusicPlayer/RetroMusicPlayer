@@ -129,10 +129,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
     }
 
     private fun hasStoragePermission(): Boolean {
-        return ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
+        return hasPermissions()
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
