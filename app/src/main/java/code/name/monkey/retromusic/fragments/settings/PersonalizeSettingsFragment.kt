@@ -19,6 +19,7 @@ import android.view.View
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.ALBUM_ART_ON_LOCK_SCREEN
 import code.name.monkey.retromusic.APPBAR_MODE
 import code.name.monkey.retromusic.BLURRED_ALBUM_ART
 import code.name.monkey.retromusic.HOME_ALBUM_GRID_STYLE
@@ -40,6 +41,8 @@ class PersonalizeSettingsFragment : AbsSettingsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val albumArtOnLockscreen: ATESwitchPreference? = findPreference(ALBUM_ART_ON_LOCK_SCREEN)
+        albumArtOnLockscreen?.isVisible = !VersionUtils.hasT()
 
         val homeArtistStyle: ATEListPreference? = findPreference(HOME_ARTIST_GRID_STYLE)
         homeArtistStyle?.setOnPreferenceChangeListener { preference, newValue ->
