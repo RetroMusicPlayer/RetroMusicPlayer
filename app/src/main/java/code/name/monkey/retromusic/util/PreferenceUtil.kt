@@ -98,7 +98,20 @@ object PreferenceUtil {
         }
     }
 
-    val languageCode: String get() = sharedPreferences.getString(LANGUAGE_NAME, "auto") ?: "auto"
+    var languageCode: String
+        get() = sharedPreferences.getString(LANGUAGE_NAME, "auto") ?: "auto"
+        set(value) = sharedPreferences.edit {
+            putString(LANGUAGE_NAME, value)
+        }
+
+    var isLocaleAutoStorageEnabled: Boolean
+        get() = sharedPreferences.getBoolean(
+            LOCALE_AUTO_STORE_ENABLED,
+            false
+        )
+        set(value) = sharedPreferences.edit {
+            putBoolean(LOCALE_AUTO_STORE_ENABLED, value)
+        }
 
     var Fragment.userName
         get() = sharedPreferences.getString(

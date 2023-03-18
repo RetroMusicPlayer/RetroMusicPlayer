@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.IntRange
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.pm.PackageInfoCompat
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.isAdaptiveColor
@@ -106,6 +107,6 @@ class DeviceInfo(context: Context) {
         baseTheme = PreferenceUtil.baseTheme
         nowPlayingTheme = context.getString(nowPlayingScreen.titleRes)
         isAdaptive = isAdaptiveColor
-        selectedLang = languageCode
+        selectedLang = AppCompatDelegate.getApplicationLocales().toLanguageTags()
     }
 }

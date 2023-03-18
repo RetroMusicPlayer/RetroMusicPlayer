@@ -19,7 +19,7 @@ fun Context.setUpMediaRouteButton(menu: Menu) {
     CastButtonFactory.setUpMediaRouteButton(this, menu, R.id.action_cast)
 }
 
-fun FragmentActivity.installLanguageAndRecreate(code: String) {
+fun FragmentActivity.installLanguageAndRecreate(code: String, onInstallComplete: () -> Unit) {
     var mySessionId = 0
 
     val manager = SplitInstallManagerFactory.create(this)
@@ -27,7 +27,7 @@ fun FragmentActivity.installLanguageAndRecreate(code: String) {
         override fun onStateUpdate(state: SplitInstallSessionState) {
             // Restart the activity if the language is installed (sessionId is same and status is installed)
             if (state.sessionId() == mySessionId && state.status() == SplitInstallSessionStatus.INSTALLED) {
-                recreate()
+                onInstallComplete()
                 manager.unregisterListener(this)
             }
         }
