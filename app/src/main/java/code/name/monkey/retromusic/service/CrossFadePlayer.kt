@@ -236,7 +236,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
 
     private fun crossFade(fadeInMp: MediaPlayer, fadeOutMp: MediaPlayer) {
         isCrossFading = true
-        crossFadeAnimator = createFadeAnimator(fadeInMp, fadeOutMp) {
+        crossFadeAnimator = createFadeAnimator(context, fadeInMp, fadeOutMp) {
             crossFadeAnimator = null
             durationListener.start()
             isCrossFading = false
