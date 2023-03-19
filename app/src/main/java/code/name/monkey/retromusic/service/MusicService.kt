@@ -42,7 +42,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.core.os.BundleCompat
-import androidx.core.os.ParcelCompat
 import androidx.media.MediaBrowserServiceCompat
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -51,12 +50,10 @@ import code.name.monkey.retromusic.activities.LockScreenActivity
 import code.name.monkey.retromusic.appwidgets.*
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.auto.AutoMusicProvider
-import code.name.monkey.retromusic.extensions.extra
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.extensions.toMediaSessionQueue
 import code.name.monkey.retromusic.extensions.uri
 import code.name.monkey.retromusic.glide.BlurTransformation
-import code.name.monkey.retromusic.glide.RetroGlideExtension.getDefaultTransition
 import code.name.monkey.retromusic.glide.RetroGlideExtension.getSongModel
 import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.helper.ShuffleHelper.makeShuffleList

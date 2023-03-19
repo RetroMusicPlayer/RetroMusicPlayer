@@ -19,13 +19,7 @@ import android.view.View
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.ALBUM_ART_ON_LOCK_SCREEN
-import code.name.monkey.retromusic.APPBAR_MODE
-import code.name.monkey.retromusic.BLURRED_ALBUM_ART
-import code.name.monkey.retromusic.HOME_ALBUM_GRID_STYLE
-import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.TAB_TEXT_MODE
+import code.name.monkey.retromusic.*
 
 class PersonalizeSettingsFragment : AbsSettingsFragment() {
 

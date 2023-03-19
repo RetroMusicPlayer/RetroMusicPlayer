@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.pm.PackageInfoCompat
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.isAdaptiveColor
-import code.name.monkey.retromusic.util.PreferenceUtil.languageCode
 import code.name.monkey.retromusic.util.PreferenceUtil.nowPlayingScreen
 import java.util.*
 

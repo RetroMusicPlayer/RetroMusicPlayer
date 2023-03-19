@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import androidx.core.content.edit
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference

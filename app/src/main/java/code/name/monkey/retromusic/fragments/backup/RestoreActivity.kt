@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.lifecycleScope
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityRestoreBinding
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.accentOutlineColor

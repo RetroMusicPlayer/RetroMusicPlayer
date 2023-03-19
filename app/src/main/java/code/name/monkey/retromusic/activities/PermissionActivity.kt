@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.activities
 
-import android.Manifest
 import android.Manifest.permission.BLUETOOTH_CONNECT
 import android.content.Intent
 import android.content.pm.PackageManager

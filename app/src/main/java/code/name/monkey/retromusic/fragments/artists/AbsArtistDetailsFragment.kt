@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.fragments.artists
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spanned
@@ -27,11 +26,7 @@ import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.databinding.FragmentArtistDetailsBinding
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.extensions.applyColor
-import code.name.monkey.retromusic.extensions.applyOutlineColor
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroGlideExtension.artistImageOptions
@@ -44,12 +39,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.network.Result
 import code.name.monkey.retromusic.network.model.LastFmArtist
 import code.name.monkey.retromusic.repository.RealRepository
-import code.name.monkey.retromusic.util.CustomArtistImageUtil
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
-import code.name.monkey.retromusic.util.logD
-import code.name.monkey.retromusic.util.logE
+import code.name.monkey.retromusic.util.*
 import com.bumptech.glide.Glide
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.transition.MaterialContainerTransform
@@ -57,7 +47,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
-import java.util.Locale
+import java.util.*
 
 abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_artist_details),
     IAlbumClickListener {
