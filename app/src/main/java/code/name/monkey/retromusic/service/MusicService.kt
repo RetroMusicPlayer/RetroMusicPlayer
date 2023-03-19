@@ -707,7 +707,7 @@ class MusicService : MediaBrowserServiceCompat(),
             || repeatMode == REPEAT_MODE_NONE && isLastTrack
         ) {
             notifyChange(PLAY_STATE_CHANGED)
-            seek(0)
+            seek(0, false)
             if (pendingQuit) {
                 pendingQuit = false
                 quit()
@@ -727,7 +727,7 @@ class MusicService : MediaBrowserServiceCompat(),
         if (pendingQuit || repeatMode == REPEAT_MODE_NONE && isLastTrack) {
             playbackManager.setNextDataSource(null)
             pause(false)
-            seek(0)
+            seek(0, false)
             if (pendingQuit) {
                 pendingQuit = false
                 quit()
@@ -974,9 +974,9 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     @Synchronized
-    fun seek(millis: Int): Int {
+    fun seek(millis: Int, force: Boolean = true): Int {
         return try {
-            val newPosition = playbackManager.seek(millis)
+            val newPosition = playbackManager.seek(millis, force)
             throttledSeekHandler?.notifySeek()
             newPosition
         } catch (e: Exception) {

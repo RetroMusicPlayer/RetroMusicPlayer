@@ -34,6 +34,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     private var durationListener = DurationListener()
     private var mIsInitialized = false
     private var hasDataSource: Boolean = false /* Whether first player has DataSource */
+    private var nextDataSource:String? = null
     private var crossFadeAnimator: Animator? = null
     override var callbacks: PlaybackCallbacks? = null
     private var crossFadeDuration = PreferenceUtil.crossFadeDuration
@@ -92,8 +93,10 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
         return true
     }
 
-    override fun seek(whereto: Int): Int {
-        endFade()
+    override fun seek(whereto: Int, force: Boolean): Int {
+        if (force) {
+            endFade()
+        }
         getNextPlayer()?.stop()
         return try {
             getCurrentPlayer()?.seekTo(whereto)
@@ -143,7 +146,12 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
         }
     }
 
-    override fun setNextDataSource(path: String?) {}
+    override fun setNextDataSource(path: String?) {
+        // Store the next song path in nextDataSource, we'll need this just in case
+        // if the user closes the app, then we can't get the nextSong from musicService
+        // As MusicPlayerRemote won't have access to the musicService
+        nextDataSource = path
+    }
 
     override fun setAudioSessionId(sessionId: Int): Boolean {
         return try {
@@ -281,7 +289,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
         fun start() {
             job?.cancel()
             job = launch {
-                while (true) {
+                while (isActive) {
                     delay(250)
                     onDurationUpdated(position(), duration())
                 }
@@ -298,9 +306,20 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
             getNextPlayer()?.let { player ->
                 val nextSong = MusicPlayerRemote.nextSong
                 // Switch to other player (Crossfade) only if next song exists
-                if (nextSong != null) {
+                // If we get an empty song it's can be because the app was cleared from background
+                // And MusicPlayerRemote don't have access to MusicService
+                if (nextSong != null && nextSong != Song.emptySong) {
+                    nextDataSource = null
                     setDataSourceImpl(player, nextSong.uri.toString()) { success ->
                         if (success) switchPlayer()
+                    }
+
+                }
+                // So we have to use the previously stored nextDataSource value
+                else if (!nextDataSource.isNullOrEmpty()) {
+                    setDataSourceImpl(player, nextDataSource!!) { success ->
+                        if (success) switchPlayer()
+                        nextDataSource = null
                     }
                 }
             }
@@ -335,7 +354,7 @@ class CrossFadePlayer(context: Context) : LocalPlayback(context) {
     }
 }
 
-internal fun crossFadeScope(): CoroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+internal fun crossFadeScope(): CoroutineScope = CoroutineScope(Job() + Dispatchers.Default)
 
 fun MediaPlayer.setPlaybackSpeedPitch(speed: Float, pitch: Float) {
     if (hasMarshmallow()) {
