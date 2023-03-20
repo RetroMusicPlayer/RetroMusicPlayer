@@ -34,10 +34,44 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.commit
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
+import code.name.monkey.retromusic.ALBUM_COVER_STYLE
+import code.name.monkey.retromusic.ALBUM_COVER_TRANSFORM
+import code.name.monkey.retromusic.CAROUSEL_EFFECT
+import code.name.monkey.retromusic.CIRCLE_PLAY_BUTTON
+import code.name.monkey.retromusic.EXTRA_SONG_INFO
+import code.name.monkey.retromusic.KEEP_SCREEN_ON
+import code.name.monkey.retromusic.LIBRARY_CATEGORIES
+import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.SCREEN_ON_LYRICS
+import code.name.monkey.retromusic.SWIPE_ANYWHERE_NOW_PLAYING
+import code.name.monkey.retromusic.SWIPE_DOWN_DISMISS
+import code.name.monkey.retromusic.TAB_TEXT_MODE
+import code.name.monkey.retromusic.TOGGLE_ADD_CONTROLS
+import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
+import code.name.monkey.retromusic.TOGGLE_VOLUME
 import code.name.monkey.retromusic.activities.PermissionActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
-import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.extensions.currentFragment
+import code.name.monkey.retromusic.extensions.darkAccentColor
+import code.name.monkey.retromusic.extensions.dip
+import code.name.monkey.retromusic.extensions.getBottomInsets
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.isColorLight
+import code.name.monkey.retromusic.extensions.isLandscape
+import code.name.monkey.retromusic.extensions.keepScreenOn
+import code.name.monkey.retromusic.extensions.maybeSetScreenOn
+import code.name.monkey.retromusic.extensions.peekHeightAnimate
+import code.name.monkey.retromusic.extensions.setLightNavigationBar
+import code.name.monkey.retromusic.extensions.setLightNavigationBarAuto
+import code.name.monkey.retromusic.extensions.setLightStatusBar
+import code.name.monkey.retromusic.extensions.setLightStatusBarAuto
+import code.name.monkey.retromusic.extensions.setNavigationBarColorPreOreo
+import code.name.monkey.retromusic.extensions.setTaskDescriptionColor
+import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
@@ -69,7 +103,13 @@ import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.logD
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_DRAGGING
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_SETTLING
+import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -98,6 +138,16 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     private var navigationBarColorAnimator: ValueAnimator? = null
     private val argbEvaluator: ArgbEvaluator = ArgbEvaluator()
 
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            println("Handle back press ${bottomSheetBehavior.state}")
+            if (!handleBackPress()) {
+                remove()
+                onBackPressedDispatcher.onBackPressed()
+            }
+        }
+    }
+
     private val bottomSheetCallbackList by lazy {
         object : BottomSheetCallback() {
 
@@ -114,6 +164,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
+                onBackPressedCallback.isEnabled = newState == STATE_EXPANDED
                 when (newState) {
                     STATE_EXPANDED -> {
                         onPanelExpanded()
@@ -172,6 +223,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         }
 
         navigationBarColor = surfaceColor()
+
+        onBackPressedDispatcher.addCallback(onBackPressedCallback)
     }
 
     private fun setupBottomSheet() {
@@ -191,14 +244,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         if (bottomSheetBehavior.state == STATE_EXPANDED) {
             setMiniPlayerAlphaProgress(1f)
         }
-        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (!handleBackPress()) {
-                    remove()
-                    onBackPressedDispatcher.onBackPressed()
-                }
-            }
-        })
     }
 
     override fun onDestroy() {
@@ -363,7 +408,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     }
 
     private fun handleBackPress(): Boolean {
-        if (bottomSheetBehavior.peekHeight != 0 && playerFragment.onBackPressed()) return true
         if (panelState == STATE_EXPANDED) {
             collapsePanel()
             return true

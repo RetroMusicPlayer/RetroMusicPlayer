@@ -102,11 +102,6 @@ class PlainPlayerFragment : AbsPlayerFragment(R.layout.fragment_plain_player) {
 
     override fun onHide() {
         plainPlaybackControlsFragment.hide()
-        onBackPressed()
-    }
-
-    override fun onBackPressed(): Boolean {
-        return false
     }
 
     override fun toolbarIconColor() = colorControlNormal()

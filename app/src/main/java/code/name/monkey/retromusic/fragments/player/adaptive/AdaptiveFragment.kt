@@ -113,11 +113,6 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
     }
 
     override fun onHide() {
-        onBackPressed()
-    }
-
-    override fun onBackPressed(): Boolean {
-        return false
     }
 
     override fun onDestroyView() {

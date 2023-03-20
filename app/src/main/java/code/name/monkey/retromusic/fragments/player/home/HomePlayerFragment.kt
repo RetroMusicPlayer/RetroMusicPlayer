@@ -84,10 +84,6 @@ class HomePlayerFragment : AbsPlayerFragment(R.layout.fragment_home_player),
         binding.text.text = song.artistName
     }
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
-
     override fun toolbarIconColor(): Int {
         return Color.WHITE
     }

@@ -45,11 +45,6 @@ class MD3PlayerFragment : AbsPlayerFragment(R.layout.fragment_md3_player) {
 
     override fun onHide() {
         controlsFragment.hide()
-        onBackPressed()
-    }
-
-    override fun onBackPressed(): Boolean {
-        return false
     }
 
     override fun toolbarIconColor(): Int {

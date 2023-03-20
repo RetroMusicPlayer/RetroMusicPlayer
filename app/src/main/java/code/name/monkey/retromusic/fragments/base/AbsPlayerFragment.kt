@@ -248,8 +248,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
 
     abstract fun onHide()
 
-    abstract fun onBackPressed(): Boolean
-
     abstract fun toolbarIconColor(): Int
 
     override fun onServiceConnected() {
