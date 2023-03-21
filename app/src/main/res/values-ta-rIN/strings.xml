@@ -264,7 +264,7 @@
     <string name="no_albums">உங்களிடம் ஆல்பம் இல்லை</string>
     <string name="no_artists">உங்களிடம் இசையமைப்பாளர் குறிப்புடு இல்லை</string>
     <string name="no_audio_ID">"முதலில் பாட்டைத் தொடக்கவும், அதன் பின்பு மீண்டும் முயற்சிக்கவும்."</string>
-    <string name="no_backups_found">No Backups Found</string>
+    <string name="no_backups_found">மறுபிரதி காணவில்லை</string>
     <string name="no_equalizer">No equalizer found</string>
     <string name="no_genres">You have no genres</string>
     <string name="no_lyrics_found">No lyrics found</string>
