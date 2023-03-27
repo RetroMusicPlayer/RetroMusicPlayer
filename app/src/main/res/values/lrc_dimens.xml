@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <dimen name="lrc_text_size_small">22sp</dimen>
+    <dimen name="current_lrc_text_size_small">26sp</dimen>
+
+    <dimen name="lrc_text_size_medium">36sp</dimen>
+    <dimen name="current_lrc_text_size_medium">40sp</dimen>
+
+    <dimen name="lrc_text_size_large">50sp</dimen>
+    <dimen name="current_lrc_text_size_large">54sp</dimen>
+
     <integer name="lrc_animation_duration">1000</integer>
-    <dimen name="lrc_text_size">20sp</dimen>
     <dimen name="lrc_time_text_size">16sp</dimen>
     <dimen name="lrc_divider_height">16dp</dimen>
     <dimen name="lrc_timeline_height">1dp</dimen>

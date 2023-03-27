@@ -660,6 +660,10 @@ object PreferenceUtil {
             false
         )
 
+    val lyricsFontSize: Int
+        get() = sharedPreferences
+            .getStringOrDefault(LYRICS_SIZE, "1").toInt()
+
     var audioFadeDuration
         get() = sharedPreferences
             .getInt(AUDIO_FADE_DURATION, 0)

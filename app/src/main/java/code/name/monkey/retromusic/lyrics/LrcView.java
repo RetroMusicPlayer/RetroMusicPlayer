@@ -42,8 +42,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import code.name.monkey.retromusic.BuildConfig;
+import code.name.monkey.appthemehelper.BuildConfig;
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 
 /**
  * 歌词 Created by wcy on 2015/11/9.
@@ -174,16 +175,8 @@ public class LrcView extends View {
 
     private void init(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.LrcView);
-        mCurrentTextSize =
-                ta.getDimension(
-                        R.styleable.LrcView_lrcTextSize, getResources().getDimension(R.dimen.lrc_text_size));
-        mNormalTextSize =
-                ta.getDimension(
-                        R.styleable.LrcView_lrcNormalTextSize,
-                        getResources().getDimension(R.dimen.lrc_text_size));
-        if (mNormalTextSize == 0) {
-            mNormalTextSize = mCurrentTextSize;
-        }
+
+        updateLyricsSize();
 
         mDividerHeight =
                 ta.getDimension(
@@ -625,6 +618,24 @@ public class LrcView extends View {
 
     private float getLrcWidth() {
         return getWidth() - mLrcPadding * 2;
+    }
+
+    private void updateLyricsSize() {
+        PreferenceUtil preferenceUtil = PreferenceUtil.INSTANCE;
+        switch (preferenceUtil.getLyricsFontSize()) {
+            case 0:
+                mNormalTextSize = getResources().getDimension(R.dimen.lrc_text_size_small);
+                mCurrentTextSize = getResources().getDimension(R.dimen.current_lrc_text_size_small);
+                break;
+            case 2:
+                mNormalTextSize = getResources().getDimension(R.dimen.lrc_text_size_large);
+                mCurrentTextSize = getResources().getDimension(R.dimen.current_lrc_text_size_large);
+                break;
+            default:
+                mNormalTextSize = getResources().getDimension(R.dimen.lrc_text_size_medium);
+                mCurrentTextSize = getResources().getDimension(R.dimen.current_lrc_text_size_medium);
+                break;
+        }
     }
 
     private void runOnUi(Runnable r) {
