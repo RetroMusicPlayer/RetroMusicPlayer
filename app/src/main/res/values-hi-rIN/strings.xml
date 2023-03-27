@@ -5,13 +5,13 @@
     <string name="accent_color">एक्सेंट रंग</string>
     <string name="accent_color_desc">The theme accent color, defaults to purple</string>
     <string name="action_about">जानकारी</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="action_add_to_blacklist">कालीसूची में जोड़ें</string>
     <string name="action_add_to_favorites">पसंदीदा में जोड़े</string>
-    <string name="action_add_to_playing_queue">Add to playing queue</string>
+    <string name="action_add_to_playing_queue">बजने वाली कतार में जोड़ें</string>
     <string name="action_add_to_playlist">प्लेलिस्ट में जोड़ें</string>
     <string name="action_cancel">वर्तमान टाइमर को रद्द करें</string>
-    <string name="action_cast">Cast</string>
-    <string name="action_clear_playing_queue">Clear playing queue</string>
+    <string name="action_cast">प्रसारित करें</string>
+    <string name="action_clear_playing_queue">बजने वाली कतार साफ़ करें</string>
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_delete">हटाएं</string>
     <string name="action_delete_from_device">डिवाइस से हटाएं</string>

@@ -340,7 +340,8 @@
     <string name="pref_summary_blacklist">在媒体库中隐藏列入黑名单的文件夹内容。</string>
     <string name="pref_summary_bluetooth_playback">连接到蓝牙设备后立即开始播放</string>
     <string name="pref_summary_blurred_album_art">模糊化显示锁屏上的专辑封面。可能与第三方应用或微件产生冲突。</string>
-    <string name="pref_summary_carousel_effect">在播放页使用轮播效果。在使用卡片和模糊卡片主题时无效 。</string>
+    <string name="pref_summary_carousel_effect">在播放页为专辑图片使用轮播效果。
+使用时卡片和模糊卡片主题不会生效。</string>
     <string name="pref_summary_classic_notification">使用经典通知样式</string>
     <string name="pref_summary_colored_app">背景及控件颜色跟随专辑封面变化</string>
     <string name="pref_summary_colored_app_shortcuts">将快捷方式颜色更改为强调色，每次颜色更改后需要切换一下该设置才能生效</string>
@@ -510,7 +511,7 @@
     <string name="swipe_to_unlock">滑动以解锁</string>
     <string name="synced_lyrics">滚动歌词</string>
     <string name="telegram_group">Telegram</string>
-    <string name="telegram_group_summary">加入 Telegram 群组，讨论错误，提出建议，吹水聊天等等</string>
+    <string name="telegram_group_summary">加入 Telegram 群组，讨论错误，提出建议，水群聊天等等</string>
     <string name="thank_you">谢谢您！</string>
     <string name="the_audio_file">音频文件</string>
     <string name="this_month">本月</string>
