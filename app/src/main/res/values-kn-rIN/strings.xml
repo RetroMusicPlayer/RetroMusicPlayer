@@ -559,4 +559,5 @@
     <string name="you_have_to_select_at_least_one_category">ನೀವು ಕನಿಷ್ಠ ಒಂದು ವರ್ಗವನ್ನು ಆಯ್ಕೆ ಮಾಡಬೇಕು.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">ನಿಮ್ಮನ್ನು ಸಮಸ್ಯೆ ಟ್ರ್ಯಾಕರ್ ಜಾಲತಾಣಕ್ಕೆ ರವಾನಿಸಲಾಗುತ್ತದೆ.</string>
     <string name="your_account_data_is_only_used_for_authentication">ನಿಮ್ಮ ಖಾತೆಯ ಡೇಟಾವನ್ನು ದೃಢೀಕರಣಕ್ಕಾಗಿ ಮಾತ್ರ ಬಳಸಲಾಗುತ್ತದೆ.</string>
+    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
 </resources>
