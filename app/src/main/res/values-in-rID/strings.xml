@@ -556,4 +556,5 @@
     <string name="you_have_to_select_at_least_one_category">Anda harus memilih setidaknya satu kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Anda akan diteruskan ke situs web pelacak galat.</string>
     <string name="your_account_data_is_only_used_for_authentication">Data akun Anda hanya digunakan untuk autentikasi.</string>
+    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
 </resources>
