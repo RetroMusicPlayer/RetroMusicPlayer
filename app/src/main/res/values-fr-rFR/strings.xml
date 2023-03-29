@@ -275,7 +275,7 @@
     <string name="no_songs">Aucun morceau</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Paroles normales</string>
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> N\'est pas répertorié dans le stockage des médias.]]></string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> N'est pas répertorié dans le stockage des médias.]]></string>
     <string name="not_recently_played">Non jouée récemment</string>
     <string name="nothing_to_scan">Rien à scanner.</string>
     <string name="nothing_to_see">Rien à afficher</string>
@@ -558,4 +558,5 @@
     <string name="you_have_to_select_at_least_one_category">Vous devez sélectionner au moins une catégorie.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
+    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
 </resources>
