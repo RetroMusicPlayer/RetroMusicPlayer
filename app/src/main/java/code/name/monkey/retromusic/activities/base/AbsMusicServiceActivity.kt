@@ -18,6 +18,7 @@ import android.Manifest
 import android.content.*
 import android.os.Bundle
 import android.os.IBinder
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -96,8 +97,7 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             filter.addAction(MEDIA_STORE_CHANGED)
             filter.addAction(FAVORITE_STATE_CHANGED)
 
-            registerReceiver(musicStateReceiver, filter)
-
+            ContextCompat.registerReceiver(this, musicStateReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED)
             receiverRegistered = true
         }
 
@@ -190,7 +190,13 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
     }
 
     override fun getPermissionsToRequest(): Array<String> {
-        return mutableListOf(Manifest.permission.READ_EXTERNAL_STORAGE).apply {
+        return mutableListOf<String>().apply {
+            if (VersionUtils.hasT()) {
+                add(Manifest.permission.READ_MEDIA_AUDIO)
+                add(Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                add(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
             if (!VersionUtils.hasR()) {
                 add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }

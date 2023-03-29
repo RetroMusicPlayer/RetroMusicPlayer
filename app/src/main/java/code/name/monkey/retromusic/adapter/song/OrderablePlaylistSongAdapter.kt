@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.db.toSongsEntity
 import code.name.monkey.retromusic.dialogs.RemoveSongFromPlaylistDialog
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.ViewUtil
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
 import kotlinx.coroutines.Dispatchers
@@ -50,11 +51,7 @@ class OrderablePlaylistSongAdapter(
     override fun getItemId(position: Int): Long {
         // requires static value, it means need to keep the same value
         // even if the item position has been changed.
-        return if (position != 0) {
-            dataSet[position - 1].id
-        } else {
-            -1
-        }
+        return dataSet[position].id
     }
 
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {
@@ -99,26 +96,22 @@ class OrderablePlaylistSongAdapter(
     }
 
     override fun onCheckCanStartDrag(holder: ViewHolder, position: Int, x: Int, y: Int): Boolean {
-        if (dataSet.size == 0 or 1 || isInQuickSelectMode) {
+        if (isInQuickSelectMode) {
             return false
         }
-        val dragHandle = holder.dragView ?: return false
-
-        val handleWidth = dragHandle.width
-        val handleHeight = dragHandle.height
-        val handleLeft = dragHandle.left
-        val handleTop = dragHandle.top
-
-        return (x >= handleLeft && x < handleLeft + handleWidth &&
-                y >= handleTop && y < handleTop + handleHeight) && position != 0
+        return ViewUtil.hitTest(holder.imageText!!, x, y) || ViewUtil.hitTest(
+            holder.dragView!!,
+            x,
+            y
+        )
     }
 
     override fun onMoveItem(fromPosition: Int, toPosition: Int) {
-        dataSet.add(toPosition - 1, dataSet.removeAt(fromPosition - 1))
+        dataSet.add(toPosition, dataSet.removeAt(fromPosition))
     }
 
-    override fun onGetItemDraggableRange(holder: ViewHolder, position: Int): ItemDraggableRange {
-        return ItemDraggableRange(0, itemCount - 1)
+    override fun onGetItemDraggableRange(holder: ViewHolder, position: Int): ItemDraggableRange? {
+        return null
     }
 
     override fun onCheckCanDrop(draggingPosition: Int, dropPosition: Int): Boolean {

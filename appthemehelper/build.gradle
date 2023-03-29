@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 android {
-    compileSdk 32
+    compileSdk 33
     namespace "code.name.monkey.appthemehelper"
 
     defaultConfig {
         minSdk 21
-        targetSdk 32
+        targetSdk 33
     }
     buildTypes {
         release {

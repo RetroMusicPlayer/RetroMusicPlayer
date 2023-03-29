@@ -30,11 +30,7 @@ import androidx.core.widget.doAfterTextChanged
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ActivityAlbumTagEditorBinding
-import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.extensions.defaultFooterColor
-import code.name.monkey.retromusic.extensions.isColorLight
-import code.name.monkey.retromusic.extensions.setTint
-import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.ArtworkInfo
@@ -50,7 +46,7 @@ import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.shape.MaterialShapeDrawable
 import org.jaudiotagger.tag.FieldKey
-import java.util.EnumMap
+import java.util.*
 
 class AlbumTagEditorActivity : AbsTagEditorActivity<ActivityAlbumTagEditorBinding>() {
 

@@ -49,11 +49,6 @@ class FitFragment : AbsPlayerFragment(R.layout.fragment_fit) {
 
     override fun onHide() {
         playbackControlsFragment.hide()
-        onBackPressed()
-    }
-
-    override fun onBackPressed(): Boolean {
-        return false
     }
 
     override fun toolbarIconColor(): Int {

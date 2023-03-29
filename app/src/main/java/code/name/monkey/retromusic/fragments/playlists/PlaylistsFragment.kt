@@ -20,7 +20,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.MenuCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.EXTRA_PLAYLIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter

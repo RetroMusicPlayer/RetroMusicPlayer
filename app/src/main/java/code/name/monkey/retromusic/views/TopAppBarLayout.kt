@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.Configuration
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.updateLayoutParams
 import code.name.monkey.retromusic.databinding.CollapsingAppbarLayoutBinding
 import code.name.monkey.retromusic.databinding.SimpleAppbarLayoutBinding

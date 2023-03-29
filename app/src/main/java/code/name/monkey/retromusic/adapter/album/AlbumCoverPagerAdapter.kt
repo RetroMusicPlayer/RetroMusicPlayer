@@ -27,13 +27,7 @@ import androidx.lifecycle.lifecycleScope
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Card
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Classic
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Fit
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Full
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Gradient
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Peek
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.Tiny
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.goToLyrics
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette

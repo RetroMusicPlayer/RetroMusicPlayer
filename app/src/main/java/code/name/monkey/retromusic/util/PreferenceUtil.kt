@@ -98,7 +98,20 @@ object PreferenceUtil {
         }
     }
 
-    val languageCode: String get() = sharedPreferences.getString(LANGUAGE_NAME, "auto") ?: "auto"
+    var languageCode: String
+        get() = sharedPreferences.getString(LANGUAGE_NAME, "auto") ?: "auto"
+        set(value) = sharedPreferences.edit {
+            putString(LANGUAGE_NAME, value)
+        }
+
+    var isLocaleAutoStorageEnabled: Boolean
+        get() = sharedPreferences.getBoolean(
+            LOCALE_AUTO_STORE_ENABLED,
+            false
+        )
+        set(value) = sharedPreferences.edit {
+            putBoolean(LOCALE_AUTO_STORE_ENABLED, value)
+        }
 
     var Fragment.userName
         get() = sharedPreferences.getString(
@@ -266,11 +279,6 @@ object PreferenceUtil {
             ALBUM_ART_ON_LOCK_SCREEN, true
         )
 
-    val isAudioDucking
-        get() = sharedPreferences.getBoolean(
-            AUDIO_DUCKING, true
-        )
-
     val isBluetoothSpeaker
         get() = sharedPreferences.getBoolean(
             BLUETOOTH_PLAYBACK, false
@@ -279,7 +287,7 @@ object PreferenceUtil {
     val isBlurredAlbumArt
         get() = sharedPreferences.getBoolean(
             BLURRED_ALBUM_ART, false
-        )
+        ) && !VersionUtils.hasR()
 
     val blurAmount get() = sharedPreferences.getInt(NEW_BLUR_AMOUNT, 25)
 

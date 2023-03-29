@@ -35,18 +35,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="16dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/drag_view"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
             android:scaleType="centerCrop"
+            app:shapeAppearance="?shapeAppearanceCornerSmall"
             tools:srcCompat="@tools:sample/backgrounds/scenic"
             tools:visibility="visible" />
 
@@ -87,6 +88,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:paddingHorizontal="16dp"
+        android:layout_marginTop="4dp"
         android:textAppearance="@style/TextViewBody2"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"

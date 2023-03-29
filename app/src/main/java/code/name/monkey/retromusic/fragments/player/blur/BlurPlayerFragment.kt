@@ -106,10 +106,6 @@ class BlurPlayerFragment : AbsPlayerFragment(R.layout.fragment_blur),
     override fun onHide() {
     }
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
-
     override fun toolbarIconColor(): Int {
         return Color.WHITE
     }

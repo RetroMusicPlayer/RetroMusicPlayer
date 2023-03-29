@@ -62,10 +62,6 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
 
     override fun onHide() {}
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
-
     override fun toolbarIconColor(): Int {
         return toolbarColor
     }

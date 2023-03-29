@@ -17,11 +17,7 @@ import android.content.Context
 import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.webkit.MimeTypeMap
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
@@ -77,8 +73,7 @@ import java.io.File
 import java.io.FileFilter
 import java.io.IOException
 import java.lang.ref.WeakReference
-import java.util.Collections
-import java.util.LinkedList
+import java.util.*
 
 class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     IMainActivityFragmentCallbacks, SelectionCallback, ICallbacks,

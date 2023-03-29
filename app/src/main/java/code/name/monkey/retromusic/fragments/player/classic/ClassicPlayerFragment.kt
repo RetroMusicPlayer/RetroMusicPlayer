@@ -23,6 +23,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
@@ -163,6 +164,13 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
         }
+        requireActivity().onBackPressedDispatcher.addCallback(object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
+                    getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+            }
+        })
     }
 
     private fun hideVolumeIfAvailable() {
@@ -255,16 +263,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     }
 
     override fun onHide() {
-    }
-
-    override fun onBackPressed(): Boolean {
-        var wasExpanded = false
-        if (getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
-            wasExpanded = getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED
-            getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
-            return wasExpanded
-        }
-        return wasExpanded
     }
 
     override fun toolbarIconColor(): Int {

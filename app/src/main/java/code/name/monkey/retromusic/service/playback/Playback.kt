@@ -45,7 +45,7 @@ interface Playback {
 
     fun position(): Int
 
-    fun seek(whereto: Int): Int
+    fun seek(whereto: Int, force: Boolean): Int
 
     fun setVolume(vol: Float): Boolean
 

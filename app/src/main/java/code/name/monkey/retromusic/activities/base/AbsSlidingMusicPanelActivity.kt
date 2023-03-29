@@ -138,6 +138,16 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     private var navigationBarColorAnimator: ValueAnimator? = null
     private val argbEvaluator: ArgbEvaluator = ArgbEvaluator()
 
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            println("Handle back press ${bottomSheetBehavior.state}")
+            if (!handleBackPress()) {
+                remove()
+                onBackPressedDispatcher.onBackPressed()
+            }
+        }
+    }
+
     private val bottomSheetCallbackList by lazy {
         object : BottomSheetCallback() {
 
@@ -154,6 +164,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
+                onBackPressedCallback.isEnabled = newState == STATE_EXPANDED
                 when (newState) {
                     STATE_EXPANDED -> {
                         onPanelExpanded()
@@ -212,6 +223,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         }
 
         navigationBarColor = surfaceColor()
+
+        onBackPressedDispatcher.addCallback(onBackPressedCallback)
     }
 
     private fun setupBottomSheet() {
@@ -231,14 +244,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         if (bottomSheetBehavior.state == STATE_EXPANDED) {
             setMiniPlayerAlphaProgress(1f)
         }
-        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (!handleBackPress()) {
-                    remove()
-                    onBackPressedDispatcher.onBackPressed()
-                }
-            }
-        })
     }
 
     override fun onDestroy() {
@@ -403,7 +408,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     }
 
     private fun handleBackPress(): Boolean {
-        if (bottomSheetBehavior.peekHeight != 0 && playerFragment.onBackPressed()) return true
         if (panelState == STATE_EXPANDED) {
             collapsePanel()
             return true

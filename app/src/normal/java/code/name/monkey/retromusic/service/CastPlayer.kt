@@ -79,7 +79,7 @@ class CastPlayer(castSession: CastSession) : Playback, RemoteMediaClient.Callbac
         return remoteMediaClient?.approximateStreamPosition?.toInt() ?: 0
     }
 
-    override fun seek(whereto: Int): Int {
+    override fun seek(whereto: Int, force: Boolean): Int {
         remoteMediaClient?.seek(MediaSeekOptions.Builder().setPosition(whereto.toLong()).build())
         return whereto
     }
