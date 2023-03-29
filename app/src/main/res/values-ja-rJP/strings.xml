@@ -3,12 +3,12 @@
     <string name="about_album_label">%s について</string>
     <string name="about_settings_summary">我々のチームとソーシャルリンク</string>
     <string name="accent_color">アクセントカラー</string>
-    <string name="accent_color_desc">テーマのアクセントカラー、既定は青緑色です。</string>
+    <string name="accent_color_desc">テーマのアクセントカラー、既定は紫色です。</string>
     <string name="action_about">このアプリについて</string>
     <string name="action_add_to_blacklist">ブラックリストに追加</string>
     <string name="action_add_to_favorites">お気に入りに追加</string>
     <string name="action_add_to_playing_queue">再生キューに追加</string>
-    <string name="action_add_to_playlist">プレイリストに追加…</string>
+    <string name="action_add_to_playlist">プレイリストに追加</string>
     <string name="action_cancel">キャンセル</string>
     <string name="action_cast">キャスト</string>
     <string name="action_clear_playing_queue">再生キューをクリア</string>
@@ -60,14 +60,14 @@
     <string name="added_x_titles_to_playing_queue">%1$d 曲が再生キューに追加されました</string>
     <string name="album">アルバム</string>
     <plurals name="albumSongs">
-        <item quantity="other">曲</item>
+        <item quantity="other">楽曲</item>
     </plurals>
     <string name="album_artist">アルバムアーティスト</string>
     <string name="albums">アルバム</string>
     <plurals name="albums">
         <item quantity="other">アルバム</item>
     </plurals>
-    <string name="always">常に</string>
+    <string name="always">常時</string>
     <string name="app_share">クールな音楽プレイヤーをチェックしよう: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">シャッフル</string>
     <string name="app_shortcut_top_tracks_short">トップ曲</string>
@@ -86,7 +86,7 @@
     <string name="backup_restore_settings_summary">設定、プレイリストのバックアップと復元</string>
     <string name="backup_restore_title"><![CDATA[バックアップと復元]]></string>
     <string name="backup_title">バックアップ</string>
-    <string name="biography">バイオグラフィー</string>
+    <string name="biography">説明</string>
     <string name="black_theme_name">ダークテーマ時に漆黒にする</string>
     <string name="blacklist">ブラックリスト</string>
     <string name="bluetooth_summary">付近の Bluetooth デバイスを確認するために Nearby デバイス権限が必要です</string>
@@ -140,7 +140,7 @@
     <string name="create_new_backup">作成</string>
     <string name="created_playlist_x">プレイリストを作成しました %1$s</string>
     <string name="credit_title">メンバーと貢献者</string>
-    <string name="currently_listening_to_x_by_x">現在、 %1$s によって %2$s で聴いています。</string>
+    <string name="currently_listening_to_x_by_x">現在、 %2$s で %1$s を聴いています。</string>
     <string name="custom_artist_images">カスタムアーティスト画像</string>
     <string name="customactivityoncrash_error_activity_error_details_share">クラッシュレポートを共有</string>
     <string name="dark_theme_name">ダーク</string>
@@ -181,12 +181,12 @@
     <string name="faq">よくある質問</string>
     <string name="favorites">お気に入り</string>
     <string name="file_already_exists">ファイルは既に存在します</string>
-    <string name="finish_last_song">最後の曲を終了する</string>
+    <string name="finish_last_song">最後の曲の終了を待つ</string>
     <string name="fit">フィット</string>
     <string name="flat">フラット</string>
     <string name="folders">フォルダ</string>
     <string name="follow_system">システムに従う</string>
-    <string name="for_you">あなたのために</string>
+    <string name="for_you">おすすめ</string>
     <string name="free">なし</string>
     <string name="full">フル</string>
     <string name="full_card">全体のカード</string>
@@ -232,7 +232,7 @@
     <string name="label_sampling_rate">サンプリングレート</string>
     <string name="label_track_length">長さ</string>
     <string name="labeled">ラベルを表示する</string>
-    <string name="last_added">最後に追加された</string>
+    <string name="last_added">最近追加</string>
     <string name="last_song">前の曲</string>
     <string name="lets_go">はじめよう</string>
     <string name="library_categories">ライブラリの表示項目</string>
@@ -243,7 +243,7 @@
     <string name="loading_products">商品の読み込み中...</string>
     <string name="login">ログイン</string>
     <string name="lyrics">歌詞</string>
-    <string name="made_with_love">インドの❤によって開発</string>
+    <string name="made_with_love">インドにて、❤をこめて開発</string>
     <string name="material">マテリアル</string>
     <string name="md_error_label">エラー</string>
     <string name="md_storage_perm_error">権限が付与されていません</string>
@@ -254,9 +254,9 @@
     <string name="message_updated">更新しました</string>
     <string name="message_welcome"><![CDATA[こんにちは！ <br> %s へようこそ]]></string>
     <string name="my_name">名前</string>
-    <string name="my_top_tracks">最も再生された</string>
+    <string name="my_top_tracks">最近のお気に入り</string>
     <string name="never">決して</string>
-    <string name="new_music_mix">新しい曲のミックス</string>
+    <string name="new_music_mix">新曲ミックス</string>
     <string name="new_playlist_title">新しいプレイリスト</string>
     <string name="new_start_directory">%s は新しい開始ディレクトリです。</string>
     <string name="next_song">次の曲</string>
@@ -361,7 +361,7 @@
     <string name="pref_summary_pause_history">有効にすると、新たに再生された曲は履歴に表示されません</string>
     <string name="pref_summary_remember_tab">開始時に最後に表示したタブに移動します</string>
     <string name="pref_summary_show_lyrics">同期歌詞をアルバムカバーに重ねて表示します</string>
-    <string name="pref_summary_suggestions">新しい音楽ミックスをホーム画面に表示する</string>
+    <string name="pref_summary_suggestions">新曲ミックスをホーム画面に表示する</string>
     <string name="pref_summary_swipe_anywhere_now_playing">再生中画面のどこかをスワイプして、楽曲の変更を行います</string>
     <string name="pref_summary_swipe_to_dismiss">下にスワイプしてミニプレイヤーを閉じます</string>
     <string name="pref_summary_toggle_full_screen">アプリをフルスクリーン表示にする</string>
@@ -378,7 +378,7 @@
     <string name="pref_title_appbar_mode">ヘッダーのスタイル</string>
     <string name="pref_title_audio_ducking">フォーカスロス時に音量を下げる</string>
     <string name="pref_title_audio_fade">オーディオをフェードする</string>
-    <string name="pref_title_auto_download_artist_images">アーティスト画像を自動でダウンロードする</string>
+    <string name="pref_title_auto_download_artist_images">アーティスト画像を自動でダウンロード</string>
     <string name="pref_title_blacklist">ブラックリスト</string>
     <string name="pref_title_bluetooth_playback">Bluetooth接続時に再生</string>
     <string name="pref_title_blurred_album_art">アルバムジャケットにぼかしを適用する</string>
@@ -400,7 +400,7 @@
     <string name="pref_title_ignore_media_store_artwork">Media Store のカバーを無視する</string>
     <string name="pref_title_last_added_interval">最後に追加されたプレイリストの間隔</string>
     <string name="pref_title_lock_screen">フルスクリーンコントロール</string>
-    <string name="pref_title_lyrics_screen_on">歌詞を表示するときは画面を点灯したままにします</string>
+    <string name="pref_title_lyrics_screen_on">歌詞の表示時に画面を点灯し続ける</string>
     <string name="pref_title_lyrics_type">歌詞の種類</string>
     <string name="pref_title_manage_audio_focus">常に再生する</string>
     <string name="pref_title_now_playing_screen_appearance">再生中のテーマ</string>
