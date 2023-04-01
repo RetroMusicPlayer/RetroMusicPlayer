@@ -35,7 +35,7 @@ class CastPlayer : Playback {
 
     override fun position() = 0
 
-    override fun seek(whereto: Int) = whereto
+    override fun seek(whereto: Int, force: Boolean) = whereto
 
     override fun setVolume(vol: Float) = true
 
