@@ -34,12 +34,11 @@ interface RoomRepository {
     suspend fun songPresentInHistory(song: Song): HistoryEntity?
     suspend fun updateHistorySong(song: Song)
     suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity>
-    suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity)
-    suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
+    suspend fun upsertSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInHistory(songId: Long)
     suspend fun clearSongHistory()
-    suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
+    suspend fun findSongExistInPlayCount(songId: Long): PlayCountEntity?
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun deleteSongs(songs: List<Song>)
     suspend fun isSongFavorite(context: Context, songId: Long): Boolean
@@ -155,11 +154,8 @@ class RealRoomRepository(
             playlistDao.playlist(favorite).first().playListId
         ) else emptyList()
 
-    override suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity) =
-        playCountDao.insertSongInPlayCount(playCountEntity)
-
-    override suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity) =
-        playCountDao.updateSongInPlayCount(playCountEntity)
+    override suspend fun upsertSongInPlayCount(playCountEntity: PlayCountEntity) =
+        playCountDao.upsertSongInPlayCount(playCountEntity)
 
     override suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity) =
         playCountDao.deleteSongInPlayCount(playCountEntity)
@@ -172,8 +168,8 @@ class RealRoomRepository(
         historyDao.clearHistory()
     }
 
-    override suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity> =
-        playCountDao.checkSongExistInPlayCount(songId)
+    override suspend fun findSongExistInPlayCount(songId: Long): PlayCountEntity? =
+        playCountDao.findSongExistInPlayCount(songId)
 
     override suspend fun playCountSongs(): List<PlayCountEntity> =
         playCountDao.playCountSongs()

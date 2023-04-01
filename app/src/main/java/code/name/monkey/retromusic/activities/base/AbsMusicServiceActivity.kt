@@ -131,14 +131,11 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
                     repository.addSongToHistory(MusicPlayerRemote.currentSong)
                 }
             }
-            val songs = repository.checkSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
-            if (songs.isNotEmpty()) {
-                repository.updateSongInPlayCount(songs.first().apply {
-                    playCount += 1
-                })
-            } else {
-                repository.insertSongInPlayCount(MusicPlayerRemote.currentSong.toPlayCount())
-            }
+            val song = repository.findSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
+                ?.apply { playCount += 1 }
+                ?: MusicPlayerRemote.currentSong.toPlayCount()
+
+            repository.upsertSongInPlayCount(song)
         }
     }
 
