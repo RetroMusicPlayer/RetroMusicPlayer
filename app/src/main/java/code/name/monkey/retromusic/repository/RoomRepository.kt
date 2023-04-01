@@ -30,9 +30,7 @@ interface RoomRepository {
     suspend fun favoritePlaylist(favorite: String): PlaylistEntity
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
     suspend fun removeSongFromPlaylist(songEntity: SongEntity)
-    suspend fun addSongToHistory(currentSong: Song)
-    suspend fun songPresentInHistory(song: Song): HistoryEntity?
-    suspend fun updateHistorySong(song: Song)
+    suspend fun upsertSongInHistory(currentSong: Song)
     suspend fun favoritePlaylistSongs(favorite: String): List<SongEntity>
     suspend fun upsertSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
@@ -132,14 +130,8 @@ class RealRoomRepository(
     override suspend fun removeSongFromPlaylist(songEntity: SongEntity) =
         playlistDao.deleteSongFromPlaylist(songEntity.playlistCreatorId, songEntity.id)
 
-    override suspend fun addSongToHistory(currentSong: Song) =
-        historyDao.insertSongInHistory(currentSong.toHistoryEntity(System.currentTimeMillis()))
-
-    override suspend fun songPresentInHistory(song: Song): HistoryEntity? =
-        historyDao.isSongPresentInHistory(song.id)
-
-    override suspend fun updateHistorySong(song: Song) =
-        historyDao.updateHistorySong(song.toHistoryEntity(System.currentTimeMillis()))
+    override suspend fun upsertSongInHistory(currentSong: Song) =
+        historyDao.upsertSongInHistory(currentSong.toHistoryEntity(System.currentTimeMillis()))
 
     override fun observableHistorySongs(): LiveData<List<HistoryEntity>> =
         historyDao.observableHistorySongs()

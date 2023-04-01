@@ -78,9 +78,7 @@ interface Repository {
     suspend fun deletePlaylistSongs(playlists: List<PlaylistEntity>)
     suspend fun favoritePlaylist(): PlaylistEntity
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
-    suspend fun addSongToHistory(currentSong: Song)
-    suspend fun songPresentInHistory(currentSong: Song): HistoryEntity?
-    suspend fun updateHistorySong(currentSong: Song)
+    suspend fun upsertSongInHistory(currentSong: Song)
     suspend fun favoritePlaylistSongs(): List<SongEntity>
     suspend fun recentSongs(): List<Song>
     suspend fun topPlayedSongs(): List<Song>
@@ -268,14 +266,8 @@ class RealRepository(
     override suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity> =
         roomRepository.isFavoriteSong(songEntity)
 
-    override suspend fun addSongToHistory(currentSong: Song) =
-        roomRepository.addSongToHistory(currentSong)
-
-    override suspend fun songPresentInHistory(currentSong: Song): HistoryEntity? =
-        roomRepository.songPresentInHistory(currentSong)
-
-    override suspend fun updateHistorySong(currentSong: Song) =
-        roomRepository.updateHistorySong(currentSong)
+    override suspend fun upsertSongInHistory(currentSong: Song) =
+        roomRepository.upsertSongInHistory(currentSong)
 
     override suspend fun favoritePlaylistSongs(): List<SongEntity> =
         roomRepository.favoritePlaylistSongs(context.getString(R.string.favorites))
