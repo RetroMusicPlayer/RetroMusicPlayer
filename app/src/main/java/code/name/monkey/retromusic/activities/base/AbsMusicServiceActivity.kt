@@ -122,23 +122,14 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             listener.onPlayingMetaChanged()
         }
         lifecycleScope.launch(Dispatchers.IO) {
-            val entity = repository.songPresentInHistory(MusicPlayerRemote.currentSong)
-            if (entity != null) {
-                repository.updateHistorySong(MusicPlayerRemote.currentSong)
-            } else {
-                // Check whether pause history option is ON or OFF
-                if (!PreferenceUtil.pauseHistory) {
-                    repository.addSongToHistory(MusicPlayerRemote.currentSong)
-                }
+            if (!PreferenceUtil.pauseHistory) {
+                repository.upsertSongInHistory(MusicPlayerRemote.currentSong)
             }
-            val songs = repository.checkSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
-            if (songs.isNotEmpty()) {
-                repository.updateSongInPlayCount(songs.first().apply {
-                    playCount += 1
-                })
-            } else {
-                repository.insertSongInPlayCount(MusicPlayerRemote.currentSong.toPlayCount())
-            }
+            val song = repository.findSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
+                ?.apply { playCount += 1 }
+                ?: MusicPlayerRemote.currentSong.toPlayCount()
+
+            repository.upsertSongInPlayCount(song)
         }
     }
 
