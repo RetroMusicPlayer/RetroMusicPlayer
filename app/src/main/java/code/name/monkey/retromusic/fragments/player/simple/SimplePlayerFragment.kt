@@ -71,10 +71,6 @@ class SimplePlayerFragment : AbsPlayerFragment(R.layout.fragment_simple_player) 
         controlsFragment.hide()
     }
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
-
     override fun toolbarIconColor() = colorControlNormal()
 
     override fun onColorChanged(color: MediaNotificationProcessor) {

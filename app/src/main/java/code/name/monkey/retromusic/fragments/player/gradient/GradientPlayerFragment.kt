@@ -21,6 +21,7 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
@@ -95,19 +96,33 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
+            onBackPressedCallback.isEnabled = newState == STATE_EXPANDED
             when (newState) {
                 STATE_EXPANDED,
                 STATE_DRAGGING,
                 -> {
                     mainActivity.getBottomSheetBehavior().isDraggable = false
                 }
+
                 STATE_COLLAPSED -> {
                     resetToCurrentPosition()
                     mainActivity.getBottomSheetBehavior().isDraggable = true
                 }
+
                 else -> {
                     mainActivity.getBottomSheetBehavior().isDraggable = true
                 }
+            }
+        }
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (getQueuePanel().state == STATE_EXPANDED) {
+                getQueuePanel().state = STATE_COLLAPSED
+            } else {
+                isEnabled = false
+                requireActivity().onBackPressedDispatcher.onBackPressed()
             }
         }
     }
@@ -165,6 +180,10 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
             insets
         }
         binding.playbackControlsFragment.root.drawAboveSystemBars()
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -200,16 +219,6 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     override fun onHide() {
-    }
-
-    override fun onBackPressed(): Boolean {
-        var wasExpanded = false
-        if (getQueuePanel().state == STATE_EXPANDED) {
-            wasExpanded = getQueuePanel().state == STATE_EXPANDED
-            getQueuePanel().state = STATE_COLLAPSED
-            return wasExpanded
-        }
-        return wasExpanded
     }
 
     override fun toolbarIconColor(): Int {
@@ -418,6 +427,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
                     lastPlaybackControlsColor,
                     PorterDuff.Mode.SRC_IN
                 )
+
             else -> binding.shuffleButton.setColorFilter(
                 lastDisabledPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
@@ -438,6 +448,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
                     PorterDuff.Mode.SRC_IN
                 )
             }
+
             MusicService.REPEAT_MODE_ALL -> {
                 binding.repeatButton.setImageResource(R.drawable.ic_repeat)
                 binding.repeatButton.setColorFilter(
@@ -445,6 +456,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
                     PorterDuff.Mode.SRC_IN
                 )
             }
+
             MusicService.REPEAT_MODE_THIS -> {
                 binding.repeatButton.setImageResource(R.drawable.ic_repeat_one)
                 binding.repeatButton.setColorFilter(

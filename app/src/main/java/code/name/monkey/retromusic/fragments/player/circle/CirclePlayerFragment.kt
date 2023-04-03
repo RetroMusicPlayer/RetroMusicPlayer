@@ -195,8 +195,6 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     override fun onHide() {
     }
 
-    override fun onBackPressed(): Boolean = false
-
     override fun toolbarIconColor(): Int =
         colorControlNormal()
 

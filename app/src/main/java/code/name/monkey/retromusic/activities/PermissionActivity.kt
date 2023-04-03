@@ -14,7 +14,6 @@
  */
 package code.name.monkey.retromusic.activities
 
-import android.Manifest
 import android.Manifest.permission.BLUETOOTH_CONNECT
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -127,10 +126,7 @@ class PermissionActivity : AbsMusicServiceActivity() {
     }
 
     private fun hasStoragePermission(): Boolean {
-        return ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
+        return hasPermissions()
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

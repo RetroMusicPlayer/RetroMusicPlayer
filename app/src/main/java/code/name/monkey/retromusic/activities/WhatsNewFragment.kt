@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.core.content.PackageManagerCompat
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.FragmentActivity
@@ -27,7 +26,7 @@ import code.name.monkey.retromusic.extensions.openUrl
 import code.name.monkey.retromusic.util.PreferenceUtil.lastVersion
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.nio.charset.StandardCharsets
-import java.util.Locale
+import java.util.*
 
 class WhatsNewFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentWhatsNewBinding? = null

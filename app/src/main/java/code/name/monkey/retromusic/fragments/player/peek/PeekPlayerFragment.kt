@@ -88,10 +88,6 @@ class PeekPlayerFragment : AbsPlayerFragment(R.layout.fragment_peek_player) {
     override fun onHide() {
     }
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
-
     override fun toolbarIconColor() = colorControlNormal()
 
     override val paletteColor: Int

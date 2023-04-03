@@ -34,7 +34,6 @@ import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialSharedAxis
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
-import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -126,15 +125,11 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         val wrappedAdapter: RecyclerView.Adapter<*> =
             dragDropManager.createWrappedAdapter(playlistSongAdapter)
 
-
-        val animator: GeneralItemAnimator = DraggableItemAnimator()
-        binding.recyclerView.itemAnimator = animator
-
-        dragDropManager.attachRecyclerView(binding.recyclerView)
-
         binding.recyclerView.apply {
+            adapter = wrappedAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            binding.recyclerView.adapter = wrappedAdapter
+            itemAnimator = DraggableItemAnimator()
+            dragDropManager.attachRecyclerView(this)
             ThemedFastScroller.create(this)
         }
         playlistSongAdapter.registerAdapterDataObserver(object :

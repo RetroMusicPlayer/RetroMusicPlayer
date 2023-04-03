@@ -18,6 +18,7 @@ import android.Manifest
 import android.content.*
 import android.os.Bundle
 import android.os.IBinder
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -96,8 +97,7 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             filter.addAction(MEDIA_STORE_CHANGED)
             filter.addAction(FAVORITE_STATE_CHANGED)
 
-            registerReceiver(musicStateReceiver, filter)
-
+            ContextCompat.registerReceiver(this, musicStateReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED)
             receiverRegistered = true
         }
 
@@ -122,23 +122,14 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             listener.onPlayingMetaChanged()
         }
         lifecycleScope.launch(Dispatchers.IO) {
-            val entity = repository.songPresentInHistory(MusicPlayerRemote.currentSong)
-            if (entity != null) {
-                repository.updateHistorySong(MusicPlayerRemote.currentSong)
-            } else {
-                // Check whether pause history option is ON or OFF
-                if (!PreferenceUtil.pauseHistory) {
-                    repository.addSongToHistory(MusicPlayerRemote.currentSong)
-                }
+            if (!PreferenceUtil.pauseHistory) {
+                repository.upsertSongInHistory(MusicPlayerRemote.currentSong)
             }
-            val songs = repository.checkSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
-            if (songs.isNotEmpty()) {
-                repository.updateSongInPlayCount(songs.first().apply {
-                    playCount += 1
-                })
-            } else {
-                repository.insertSongInPlayCount(MusicPlayerRemote.currentSong.toPlayCount())
-            }
+            val song = repository.findSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
+                ?.apply { playCount += 1 }
+                ?: MusicPlayerRemote.currentSong.toPlayCount()
+
+            repository.upsertSongInPlayCount(song)
         }
     }
 
@@ -190,7 +181,13 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
     }
 
     override fun getPermissionsToRequest(): Array<String> {
-        return mutableListOf(Manifest.permission.READ_EXTERNAL_STORAGE).apply {
+        return mutableListOf<String>().apply {
+            if (VersionUtils.hasT()) {
+                add(Manifest.permission.READ_MEDIA_AUDIO)
+                add(Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                add(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
             if (!VersionUtils.hasR()) {
                 add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }

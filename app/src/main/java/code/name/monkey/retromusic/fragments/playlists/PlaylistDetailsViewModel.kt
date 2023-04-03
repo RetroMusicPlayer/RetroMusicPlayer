@@ -18,7 +18,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import code.name.monkey.retromusic.db.PlaylistWithSongs
 import code.name.monkey.retromusic.db.SongEntity
-import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.repository.RealRepository
 
 class PlaylistDetailsViewModel(

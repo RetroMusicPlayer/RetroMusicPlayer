@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
     android:background="?rectSelector"
-    android:transitionGroup="true">
+    android:clickable="true"
+    android:focusable="true">
+
     <FrameLayout
         android:id="@+id/dummy_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center_vertical|start"
+                android:paddingHorizontal="8dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +36,6 @@
                 app:srcCompat="@drawable/ic_drag_handle"
                 app:tint="?attr/colorControlNormal"
                 tools:ignore="ContentDescription"
-                android:paddingHorizontal="8dp"
                 tools:visibility="visible" />
 
 
@@ -43,18 +44,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                app:cardCornerRadius="6dp"
+                android:transitionGroup="true"
+                app:cardCornerRadius="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/drag_view"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/image"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:scaleType="centerCrop"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraSmall"
                     tools:srcCompat="@tools:sample/backgrounds/scenic"
                     tools:visibility="visible" />
 
@@ -94,6 +97,7 @@
                 android:id="@+id/text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:paddingHorizontal="16dp"

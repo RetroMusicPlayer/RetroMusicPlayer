@@ -73,18 +73,15 @@ interface Repository {
     suspend fun deletePlaylistSongs(playlists: List<PlaylistEntity>)
     suspend fun favoritePlaylist(): PlaylistEntity
     suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity>
-    suspend fun addSongToHistory(currentSong: Song)
-    suspend fun songPresentInHistory(currentSong: Song): HistoryEntity?
-    suspend fun updateHistorySong(currentSong: Song)
+    suspend fun upsertSongInHistory(currentSong: Song)
     suspend fun favoritePlaylistSongs(): List<SongEntity>
     suspend fun recentSongs(): List<Song>
     suspend fun topPlayedSongs(): List<Song>
-    suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity)
-    suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity)
+    suspend fun upsertSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity)
     suspend fun deleteSongInHistory(songId: Long)
     suspend fun clearSongHistory()
-    suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity>
+    suspend fun findSongExistInPlayCount(songId: Long): PlayCountEntity?
     suspend fun playCountSongs(): List<PlayCountEntity>
     suspend fun deleteSongs(songs: List<Song>)
     suspend fun searchArtists(query: String): List<Artist>
@@ -233,14 +230,8 @@ class RealRepository(
     override suspend fun isFavoriteSong(songEntity: SongEntity): List<SongEntity> =
         roomRepository.isFavoriteSong(songEntity)
 
-    override suspend fun addSongToHistory(currentSong: Song) =
-        roomRepository.addSongToHistory(currentSong)
-
-    override suspend fun songPresentInHistory(currentSong: Song): HistoryEntity? =
-        roomRepository.songPresentInHistory(currentSong)
-
-    override suspend fun updateHistorySong(currentSong: Song) =
-        roomRepository.updateHistorySong(currentSong)
+    override suspend fun upsertSongInHistory(currentSong: Song) =
+        roomRepository.upsertSongInHistory(currentSong)
 
     override suspend fun favoritePlaylistSongs(): List<SongEntity> =
         roomRepository.favoritePlaylistSongs(context.getString(R.string.favorites))
@@ -249,11 +240,8 @@ class RealRepository(
 
     override suspend fun topPlayedSongs(): List<Song> = topPlayedRepository.topTracks()
 
-    override suspend fun insertSongInPlayCount(playCountEntity: PlayCountEntity) =
-        roomRepository.insertSongInPlayCount(playCountEntity)
-
-    override suspend fun updateSongInPlayCount(playCountEntity: PlayCountEntity) =
-        roomRepository.updateSongInPlayCount(playCountEntity)
+    override suspend fun upsertSongInPlayCount(playCountEntity: PlayCountEntity) =
+        roomRepository.upsertSongInPlayCount(playCountEntity)
 
     override suspend fun deleteSongInPlayCount(playCountEntity: PlayCountEntity) =
         roomRepository.deleteSongInPlayCount(playCountEntity)
@@ -265,8 +253,8 @@ class RealRepository(
         roomRepository.clearSongHistory()
     }
 
-    override suspend fun checkSongExistInPlayCount(songId: Long): List<PlayCountEntity> =
-        roomRepository.checkSongExistInPlayCount(songId)
+    override suspend fun findSongExistInPlayCount(songId: Long): PlayCountEntity? =
+        roomRepository.findSongExistInPlayCount(songId)
 
     override suspend fun playCountSongs(): List<PlayCountEntity> =
         roomRepository.playCountSongs()

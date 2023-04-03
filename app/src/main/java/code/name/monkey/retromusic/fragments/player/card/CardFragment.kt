@@ -49,11 +49,6 @@ class CardFragment : AbsPlayerFragment(R.layout.fragment_card_player) {
 
     override fun onHide() {
         playbackControlsFragment.hide()
-        onBackPressed()
-    }
-
-    override fun onBackPressed(): Boolean {
-        return false
     }
 
     override fun toolbarIconColor(): Int {

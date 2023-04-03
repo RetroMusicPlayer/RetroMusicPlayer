@@ -79,9 +79,6 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
         recyclerViewDragDropManager = RecyclerViewDragDropManager()
         recyclerViewSwipeManager = RecyclerViewSwipeManager()
 
-        val animator = DraggableItemAnimator()
-        animator.supportsChangeAnimations = false
-
         playingQueueAdapter = PlayingQueueAdapter(
             requireActivity(),
             MusicPlayerRemote.playingQueue.toMutableList(),
@@ -93,12 +90,15 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
 
         linearLayoutManager = LinearLayoutManager(requireContext())
 
-        binding.recyclerView.layoutManager = linearLayoutManager
-        binding.recyclerView.adapter = wrappedAdapter
-        binding.recyclerView.itemAnimator = animator
-        recyclerViewTouchActionGuardManager?.attachRecyclerView(binding.recyclerView)
-        recyclerViewDragDropManager?.attachRecyclerView(binding.recyclerView)
-        recyclerViewSwipeManager?.attachRecyclerView(binding.recyclerView)
+
+        binding.recyclerView.apply {
+            layoutManager = linearLayoutManager
+            adapter = wrappedAdapter
+            itemAnimator = DraggableItemAnimator()
+            recyclerViewTouchActionGuardManager?.attachRecyclerView(this)
+            recyclerViewDragDropManager?.attachRecyclerView(this)
+            recyclerViewSwipeManager?.attachRecyclerView(this)
+        }
         linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
 
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -183,6 +183,7 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
 
     private fun setupToolbar() {
         binding.appBarLayout.toolbar.subtitle = getUpNextAndQueueTime()
+        binding.appBarLayout.toolbar.isTitleCentered = false
         binding.clearQueue.backgroundTintList = ColorStateList.valueOf(accentColor())
         ColorStateList.valueOf(
             MaterialValueHelper.getPrimaryTextColor(

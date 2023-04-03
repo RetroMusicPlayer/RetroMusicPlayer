@@ -90,11 +90,6 @@ class MaterialFragment : AbsPlayerFragment(R.layout.fragment_material) {
 
     override fun onHide() {
         playbackControlsFragment.hide()
-        onBackPressed()
-    }
-
-    override fun onBackPressed(): Boolean {
-        return false
     }
 
     override fun toolbarIconColor() = colorControlNormal()
