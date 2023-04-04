@@ -31,7 +31,9 @@ import java.io.InputStream;
 public class AudioFileCoverUtils {
 
   public static final String[] FALLBACKS = {
-    "cover.jpg", "album.jpg", "folder.jpg", "cover.png", "album.png", "folder.png"
+    "cover.jpg", "album.jpg", "folder.jpg",
+    "cover.png", "album.png", "folder.png",
+    "cover.webp", "album.webp", "folder.webp"
   };
 
   public static InputStream fallback(String path) throws FileNotFoundException {
