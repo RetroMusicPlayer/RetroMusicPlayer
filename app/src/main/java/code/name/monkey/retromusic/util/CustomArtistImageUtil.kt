@@ -44,21 +44,18 @@ class CustomArtistImageUtil private constructor(context: Context) {
     suspend fun setCustomArtistImage(artist: Artist, uri: Uri) {
         val context = App.getContext()
         withContext(IO) {
-            runCatching {
-                Glide.with(context)
+            try {
+                val bitmap = Glide.with(context)
                     .asBitmap()
                     .load(uri)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .submit()
                     .get()
+                saveImage(context, artist, bitmap)
+            } catch (e: Exception) {
+                context.showToast(R.string.error_load_failed)
             }
-                .onSuccess {
-                    saveImage(context, artist, it)
-                }
-                .onFailure {
-                    context.showToast(R.string.error_load_failed)
-                }
         }
     }
 

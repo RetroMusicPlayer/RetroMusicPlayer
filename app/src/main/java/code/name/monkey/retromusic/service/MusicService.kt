@@ -287,8 +287,18 @@ class MusicService : MediaBrowserServiceCompat(),
         setupMediaSession()
 
         uiThreadHandler = Handler(Looper.getMainLooper())
-        ContextCompat.registerReceiver(this, widgetIntentReceiver, IntentFilter(APP_WIDGET_UPDATE), ContextCompat.RECEIVER_NOT_EXPORTED)
-        ContextCompat.registerReceiver(this, updateFavoriteReceiver, IntentFilter(FAVORITE_STATE_CHANGED), ContextCompat.RECEIVER_NOT_EXPORTED)
+        ContextCompat.registerReceiver(
+            this,
+            widgetIntentReceiver,
+            IntentFilter(APP_WIDGET_UPDATE),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+        ContextCompat.registerReceiver(
+            this,
+            updateFavoriteReceiver,
+            IntentFilter(FAVORITE_STATE_CHANGED),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
         registerReceiver(lockScreenReceiver, IntentFilter(Intent.ACTION_SCREEN_ON))
         sessionToken = mediaSession?.sessionToken
         notificationManager = getSystemService()
@@ -301,7 +311,17 @@ class MusicService : MediaBrowserServiceCompat(),
             mediaStoreObserver
         )
         contentResolver.registerContentObserver(
+            MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+            true,
+            mediaStoreObserver
+        )
+        contentResolver.registerContentObserver(
             MediaStore.Audio.Media.INTERNAL_CONTENT_URI,
+            true,
+            mediaStoreObserver
+        )
+        contentResolver.registerContentObserver(
+            MediaStore.Audio.Artists.INTERNAL_CONTENT_URI,
             true,
             mediaStoreObserver
         )
@@ -496,15 +516,14 @@ class MusicService : MediaBrowserServiceCompat(),
         PreferenceManager.getDefaultSharedPreferences(this).edit {
             putInt(SAVED_SHUFFLE_MODE, shuffleMode)
         }
+        this.shuffleMode = shuffleMode
         when (shuffleMode) {
             SHUFFLE_MODE_SHUFFLE -> {
-                this.shuffleMode = shuffleMode
                 makeShuffleList(playingQueue, getPosition())
                 position = 0
             }
 
             SHUFFLE_MODE_NONE -> {
-                this.shuffleMode = shuffleMode
                 val currentSongId = Objects.requireNonNull(currentSong).id
                 playingQueue = ArrayList(originalPlayingQueue)
                 var newPosition = 0

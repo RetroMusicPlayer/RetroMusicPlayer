@@ -15,8 +15,11 @@
 package code.name.monkey.retromusic.fragments.base
 
 import android.os.Bundle
-import android.view.*
-import androidx.annotation.NonNull
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.doOnPreDraw
@@ -161,7 +164,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     protected abstract fun createLayoutManager(): LM
 
-    @NonNull
     protected abstract fun createAdapter(): A
 
     protected fun invalidateLayoutManager() {
@@ -205,10 +207,12 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
                 null,
                 navOptions
             )
+
             R.id.action_import_playlist -> ImportPlaylistDialog().show(
                 childFragmentManager,
                 "ImportPlaylist"
             )
+
             R.id.action_add_to_playlist -> CreatePlaylistDialog.create(emptyList()).show(
                 childFragmentManager,
                 "ShowCreatePlaylistDialog"
