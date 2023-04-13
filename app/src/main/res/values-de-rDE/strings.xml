@@ -45,7 +45,7 @@
     <string name="action_settings">"Einstellungen"</string>
     <string name="action_share">Teilen</string>
     <string name="action_shuffle_all">Alle zufällig wiedergeben</string>
-    <string name="action_shuffle_playlist">Playlist zufällig abspielen</string>
+    <string name="action_shuffle_playlist">Wiedergabeliste zufällig abspielen</string>
     <string name="action_sleep_timer">Einschlafmodus</string>
     <string name="action_sort_order">Sortierreihenfolge</string>
     <string name="action_tag_editor">Tag-Editor</string>
