@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.google.android.material:material:$mdc_version"
-    implementation "androidx.preference:preference-ktx:$preference_version"
+    implementation libs.androidx.appcompat
+    implementation libs.android.material
+    implementation libs.androidx.preference.ktx
 }
