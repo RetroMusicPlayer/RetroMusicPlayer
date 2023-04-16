@@ -4,7 +4,7 @@ advrecyclerview = "1.0.0"
 androidSnowfall = "1.2.1"
 circularSeekBar = "1.4.2"
 converterGson = "2.9.0"
-core = "3.3.0"
+afollestad_dialog_version = "3.3.0"
 coreSplashscreen = "1.0.0"
 customactivityoncrash = "2.4.0"
 fadingedgelayout = "1.0.0"
@@ -77,8 +77,8 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinAndroid" }
 
 
 #material dialog
-color = { module = "com.afollestad.material-dialogs:color", version.ref = "core" }
-core = { module = "com.afollestad.material-dialogs:core", version.ref = "core" }
+afollestad-material-dialogs-color = { module = "com.afollestad.material-dialogs:color", version.ref = "core" }
+afollestad-material-dialogs-core = { module = "com.afollestad.material-dialogs:core", version.ref = "core" }
 input = { module = "com.afollestad.material-dialogs:input", version.ref = "core" }
 material-cab = { module = "com.afollestad:material-cab", version.ref = "materialCab" }
 
