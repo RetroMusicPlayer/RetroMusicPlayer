@@ -105,8 +105,8 @@ dhaval2404-imagepicker = { module = "com.github.dhaval2404:imagepicker", version
 fastscroll-library = { module = "me.zhanghai.android.fastscroll:library", version.ref = "fast_scroll_libraryVersion" }
 customactivityoncrash = { module = "cat.ereza:customactivityoncrash", version.ref = "customactivityoncrash" }
 tankery-circularSeekBar = { module = "me.tankery.lib:circularSeekBar", version.ref = "tankery_circularSeekBar_version" }
-androidx-mediarouter = { group = "androidx.mediarouter", name="mediarouter", version.ref = "mediarouter" }
-nanohttpd = { group = "org.nanohttpd", name="nanohttpd", version.ref = "nanohttpd" }
+androidx-mediarouter = { group = "androidx.mediarouter", name = "mediarouter", version.ref = "mediarouter" }
+nanohttpd = { group = "org.nanohttpd", name = "nanohttpd", version.ref = "nanohttpd" }
 
 
 #androidx
