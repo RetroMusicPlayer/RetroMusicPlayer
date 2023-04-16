@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_album_label">Acerca de %s</string>
-    <string name="about_settings_summary">Equipo, enlaces sociales</string>
+    <string name="about_settings_summary">Equipo, redes sociales</string>
     <string name="accent_color">Color de acento</string>
     <string name="accent_color_desc">El color de acento del tema, por defecto es morado</string>
     <string name="action_about">Acerca de</string>
@@ -11,8 +11,8 @@
     <string name="action_add_to_playlist">Agregar a playlist</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_cast">Emitir</string>
-    <string name="action_clear_playing_queue">Vaciar cola de reproducción</string>
-    <string name="action_cycle_repeat">Modo de repetición de ciclo</string>
+    <string name="action_clear_playing_queue">Borra la cola de reproducción</string>
+    <string name="action_cycle_repeat">Modo de repetición en ciclo</string>
     <string name="action_delete">Eliminar</string>
     <string name="action_delete_from_device">Eliminar del dispositivo</string>
     <string name="action_details">Detalles</string>
@@ -28,7 +28,7 @@
     <string name="action_new_playlist">Nueva playlist</string>
     <string name="action_next">Siguiente</string>
     <string name="action_play">Reproducir</string>
-    <string name="action_play_all">Reproducir</string>
+    <string name="action_play_all">Reproducir todo</string>
     <string name="action_play_next">Reproducir siguiente</string>
     <string name="action_play_pause">Reproducir/Pausar</string>
     <string name="action_previous">Anterior</string>
@@ -95,15 +95,15 @@
     <string name="bluetooth_title">Dispositivos cercanos</string>
     <string name="blur">Desenfocado</string>
     <string name="blur_card">Desenfocar tarjeta</string>
-    <string name="bug_report_failed">No se puede enviar el informe</string>
+    <string name="bug_report_failed">No se puedo enviar el informe</string>
     <string name="bug_report_failed_invalid_token">Token de acceso no válido. Póngase en contacto con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_issues_not_available">Los problemas no están habilitados para el repositorio seleccionado. Póngase en contacto con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_unknown">Ocurrió un error inesperado. Ponte en contacto con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_wrong_credentials">Nombre de usuario o contraseña incorrectos</string>
     <string name="bug_report_issue">Problema</string>
     <string name="bug_report_manual">Enviar manualmente</string>
-    <string name="bug_report_no_description">Por favor ingresa una descripción del problema</string>
-    <string name="bug_report_no_password">Por favor, introduce tu contraseña de GitHub válida</string>
+    <string name="bug_report_no_description">Por favor escribe una descripción del problema</string>
+    <string name="bug_report_no_password">Ingrese su contraseña válida de GitHub</string>
     <string name="bug_report_no_title">Por favor, ingresa un título del problema</string>
     <string name="bug_report_no_username">Por favor, introduce tu nombre de usuario de GitHub válido</string>
     <string name="bug_report_success">Error reportado correctamente</string>
@@ -558,5 +558,5 @@
     <string name="you_have_to_select_at_least_one_category">Tienes que seleccionar al menos una categoría.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Serás redirigido al sitio web para reportar incidencias.</string>
     <string name="your_account_data_is_only_used_for_authentication">Los datos de tu cuenta sólo se utilizan para la autenticación.</string>
-    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
+    <string name="could_not_write_tags_to_file">No se puedo añadir la etiqueta al archivo!</string>
 </resources>
