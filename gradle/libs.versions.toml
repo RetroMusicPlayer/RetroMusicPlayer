@@ -1,0 +1,29 @@
+[versions]
+#buildscripts dependencies
+gradle = "7.4.2"
+kotlinGradlePlugin = "1.8.10"
+
+lifecycle_version = "2.6.1"
+navigation_version = "2.5.3"
+mdc_version = "1.9.0-beta01"
+preference_version = "1.2.0"
+appcompat_version = "1.6.1"
+core_version = "1.10.0-rc01"
+
+#plugins
+devTools_ksp_version = "1.8.10-1.0.9"
+ben_manes_versoin = "0.46.0"
+
+
+[libraries]
+#dependencies
+gridLayout = {group = "androidx.gridlayout", name = "gridlayout", version="1.0.0"}
+
+#buildscripts dependencies
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+androidx-navigation-safeargs-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation_version" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
+
+[plugins]
+github-ben-manes = { id = "com.github.ben-manes.versions", version.ref = "ben_manes_versoin" }
+google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devTools_ksp_version" }
