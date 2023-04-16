@@ -112,7 +112,7 @@ dependencies {
 
     implementation libs.androidx.mediarouter
     //Cast Dependencies
-    //normalImplementation libs.google.play.services.cast.framework
+    normalImplementation libs.google.play.services.cast.framework
     //WebServer by NanoHttpd
     normalImplementation libs.nanohttpd
 
