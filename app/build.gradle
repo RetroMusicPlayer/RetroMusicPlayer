@@ -112,7 +112,7 @@ dependencies {
 
     implementation libs.androidx.mediarouter
     //Cast Dependencies
-    normalImplementation libs.play.services.cast.framework
+    //normalImplementation libs.google.play.services.cast.framework
     //WebServer by NanoHttpd
     normalImplementation libs.nanohttpd
 
@@ -130,30 +130,25 @@ dependencies {
 
     implementation libs.androidx.core.splashscreen
 
-    normalImplementation libs.feature.delivery
-    normalImplementation libs.review
+    normalImplementation libs.google.feature.delivery
+    normalImplementation libs.google.play.review
 
     implementation libs.android.material
 
-    def retrofit_version = '2.9.0'
     implementation libs.retrofit
-    implementation libs.converter.gson
-    implementation libs.logging.interceptor
+    implementation libs.retrofit.converter.gson
+    implementation libs.okhttp3.logging.interceptor
 
-    def material_dialog_version = "3.3.0"
-    implementation libs.core
-    implementation libs.input
-    implementation libs.color
-
-    implementation libs.material.cab
+    implementation libs.afollestad.material.dialogs.core
+    implementation libs.afollestad.material.dialogs.input
+    implementation libs.afollestad.material.dialogs.color
+    implementation libs.afollestad.material.cab
 
     implementation libs.kotlinx.coroutines.android
 
-    def koin_version = '3.4.0'
-    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation libs.koin.core
     implementation libs.koin.android
 
-    def glide_version = '4.15.1'
     implementation libs.glide
     ksp libs.glide.ksp
     implementation libs.glide.okhttp3.integration
@@ -163,17 +158,17 @@ dependencies {
     implementation libs.fadingedgelayout
 
     implementation libs.keyboardvisibilityevent
-    implementation libs.android.snowfall
+    implementation libs.jetradarmobile.android.snowfall
 
-    implementation libs.insetter
+    implementation libs.chrisbanes.insetter
 
     implementation libs.org.eclipse.egit.github.core
     implementation libs.jaudiotagger
     normalImplementation libs.android.lab.library
     implementation libs.slidableactivity
     implementation libs.material.intro
-    implementation libs.imagepicker
+    implementation libs.dhaval2404.imagepicker
     implementation libs.fastscroll.library
     implementation libs.customactivityoncrash
-    implementation libs.circularSeekBar
+    implementation libs.tankery.circularSeekBar
 }
