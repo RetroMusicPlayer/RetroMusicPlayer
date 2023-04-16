@@ -37,6 +37,13 @@ ___
 
 ## 🆕 Material You Design Music Player for Android music lovers 
 
+## Download
+| Play Store | F-Droid |
+|:-:|:-:|
+| [<img src="assets/google-play-badge.png" height="80">](https://play.google.com/store/apps/details?id=code.name.monkey.retromusic) | [<img src="https://f-droid.org/badge/get-it-on.png" height="80">](https://f-droid.org/en/packages/code.name.monkey.retromusic/) |
+
+or get it from the [GitHub Releases](https://github.com/RetroMusicPlayer/RetroMusicPlayer/releases).
+
 ## ⚠ Join [@retromusiclog](https://telegram.me/retromusiclog) on Telegram for important updates.
 ___
 
