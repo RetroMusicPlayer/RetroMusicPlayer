@@ -10,6 +10,7 @@ class HomeBinding(
     val contentContainer = homeBinding.contentContainer
     val appBarLayout = homeBinding.appBarLayout
     val toolbar = homeBinding.appBarLayout.toolbar
+    val imageLayout = homeBinding.imageLayout
     val bannerImage = homeBinding.imageLayout.bannerImage
     val userImage = homeBinding.imageLayout.userImage
     val lastAdded = homeBinding.homeContent.absPlaylists.lastAdded
