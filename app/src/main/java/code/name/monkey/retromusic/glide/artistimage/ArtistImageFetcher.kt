@@ -83,7 +83,7 @@ class ArtistImageFetcher(
                         callback.onDataReady(getFallbackAlbumImage())
                     }
                 })
-            } else callback.onDataReady(null)
+            } else callback.onDataReady(getFallbackAlbumImage())
         } catch (e: Exception) {
             callback.onLoadFailed(e)
         }
