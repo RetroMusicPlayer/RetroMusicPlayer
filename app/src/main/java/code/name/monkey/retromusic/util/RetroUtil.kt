@@ -17,6 +17,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Point
 import code.name.monkey.retromusic.App.Companion.getContext
+import code.name.monkey.retromusic.R
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.text.DecimalFormat
@@ -113,5 +114,21 @@ object RetroUtil {
         } catch (ignored: Exception) {
         }
         return ""
+    }
+
+    fun Context.getCatchyUsername(): String {
+        // This will only work for English locales, I don't want to localize this
+        return if (Locale.getDefault().toLanguageTag().contains("en")) {
+            arrayOf(
+                "The Unnamed",
+                "The Unknown",
+                "The Mysterious",
+                "The One Who Must Not Be Named",
+                "The Nameless",
+            ).random().apply { logD("Username $this") }
+        } else {
+            logD("username here")
+            getString(R.string.user_name)
+        }
     }
 }

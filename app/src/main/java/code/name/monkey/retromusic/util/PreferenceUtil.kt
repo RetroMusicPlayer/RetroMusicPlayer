@@ -21,6 +21,7 @@ import code.name.monkey.retromusic.fragments.folder.FoldersFragment
 import code.name.monkey.retromusic.helper.SortOrder.*
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.transform.*
+import code.name.monkey.retromusic.util.RetroUtil.getCatchyUsername
 import code.name.monkey.retromusic.util.theme.ThemeMode
 import code.name.monkey.retromusic.views.TopAppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -113,10 +114,16 @@ object PreferenceUtil {
             putBoolean(LOCALE_AUTO_STORE_ENABLED, value)
         }
 
+    val Fragment.userNameEmptyWhenNotSet
+        get() = sharedPreferences.getString(
+            USER_NAME,
+            ""
+        )
+
     var Fragment.userName
         get() = sharedPreferences.getString(
             USER_NAME,
-            getString(R.string.user_name)
+            requireContext().getCatchyUsername()
         )
         set(value) = sharedPreferences.edit {
             putString(USER_NAME, value)

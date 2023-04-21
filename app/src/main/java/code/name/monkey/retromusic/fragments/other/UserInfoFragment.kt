@@ -42,6 +42,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension.profileBannerOption
 import code.name.monkey.retromusic.glide.RetroGlideExtension.userProfileOptions
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.userName
+import code.name.monkey.retromusic.util.PreferenceUtil.userNameEmptyWhenNotSet
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -84,7 +85,7 @@ class UserInfoFragment : Fragment() {
 
         binding.nameContainer.accentColor()
         binding.next.accentColor()
-        binding.name.setText(userName)
+        binding.name.setText(userNameEmptyWhenNotSet)
 
         binding.userImage.setOnClickListener {
             showUserImageOptions()

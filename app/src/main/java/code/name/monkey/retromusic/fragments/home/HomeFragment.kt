@@ -50,6 +50,7 @@ import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.userName
+import code.name.monkey.retromusic.util.PreferenceUtil.userNameEmptyWhenNotSet
 import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
@@ -60,6 +61,13 @@ class HomeFragment :
     private var _binding: HomeBinding? = null
     private val binding get() = _binding!!
 
+    private var username: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.username = userName
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val homeBinding = FragmentHomeBinding.bind(view)
@@ -67,7 +75,7 @@ class HomeFragment :
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         setupListeners()
-        binding.titleWelcome.text = String.format("%s", userName)
+        binding.titleWelcome.text = String.format("%s", if (!userNameEmptyWhenNotSet.isNullOrEmpty()) userNameEmptyWhenNotSet else this.username)
 
         enterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
         reenterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
