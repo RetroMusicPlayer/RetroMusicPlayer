@@ -35,6 +35,7 @@ import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.rootView
 import code.name.monkey.retromusic.util.logD
 import com.google.android.material.snackbar.Snackbar
+import kotlin.math.abs
 
 abstract class AbsBaseActivity : AbsThemeActivity() {
     private var hadPermissions: Boolean = false
@@ -184,18 +185,38 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
     }
 
     // this lets keyboard close when clicked in background
+    private var startX = 0f
+    private var startY = 0f
+
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_DOWN) {
-            val v = currentFocus
-            if (v is EditText) {
-                val outRect = Rect()
-                v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    v.clearFocus()
-                    getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(
-                        v.windowToken,
-                        0
-                    )
+        fun isAClick(startX: Float, endX: Float, startY: Float, endY: Float): Boolean {
+            val differenceX = abs(startX - endX)
+            val differenceY = abs(startY - endY)
+            return !(differenceX > 5  || differenceY > 5)
+        }
+
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                startX = event.x
+                startY = event.y
+            }
+
+            MotionEvent.ACTION_UP -> {
+                val endX = event.x
+                val endY = event.y
+                if (isAClick(startX, endX, startY, endY)) {
+                    val v = currentFocus
+                    if (v is EditText) {
+                        val outRect = Rect()
+                        v.getGlobalVisibleRect(outRect)
+                        if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                            v.clearFocus()
+                            getSystemService<InputMethodManager>()?.hideSoftInputFromWindow(
+                                v.windowToken,
+                                0
+                            )
+                        }
+                    }
                 }
             }
         }
