@@ -100,7 +100,6 @@ static def getProperty(Properties properties, String name) {
 
 dependencies {
     implementation project(':appthemehelper')
-    implementation libs.gridLayout
 
     implementation libs.androidx.appcompat
     implementation libs.androidx.annotation

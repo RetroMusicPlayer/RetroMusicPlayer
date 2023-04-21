@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.gridlayout.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:grid="http://schemas.android.com/apk/res-auto"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="8dp"
     android:paddingTop="8dp"
     android:paddingBottom="@dimen/mini_player_height"
-    grid:alignmentMode="alignBounds">
+    android:alignmentMode="alignBounds">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:orientation="vertical"
-        grid:layout_column="0"
-        grid:layout_columnWeight="1"
-        grid:layout_row="0">
+        android:layout_column="0"
+        android:layout_columnWeight="1"
+        android:layout_row="0">
 
         <include
             android:id="@+id/card_credit"
@@ -31,9 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:orientation="vertical"
-        grid:layout_column="1"
-        grid:layout_columnWeight="1"
-        grid:layout_row="0">
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:layout_row="0">
 
         <include
             android:id="@+id/card_retro_info"
@@ -43,4 +42,4 @@
             android:id="@+id/card_other"
             layout="@layout/card_other" />
     </LinearLayout>
-</androidx.gridlayout.widget.GridLayout>
+</GridLayout>
