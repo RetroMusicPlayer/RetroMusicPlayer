@@ -33,7 +33,7 @@ import com.google.android.material.color.MaterialColors
 class ColorIconsImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = -1
+    defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
 

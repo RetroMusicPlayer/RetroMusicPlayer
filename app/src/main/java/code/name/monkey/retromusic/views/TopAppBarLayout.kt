@@ -17,7 +17,7 @@ import dev.chrisbanes.insetter.applyInsetter
 class TopAppBarLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = -1,
+    defStyleAttr: Int = 0,
 ) : AppBarLayout(context, attrs, defStyleAttr) {
     private var simpleAppbarBinding: SimpleAppbarLayoutBinding? = null
     private var collapsingAppbarBinding: CollapsingAppbarLayoutBinding? = null

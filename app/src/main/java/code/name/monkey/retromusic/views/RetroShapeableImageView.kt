@@ -25,7 +25,7 @@ import com.google.android.material.shape.ShapeAppearanceModel
 class RetroShapeableImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyle: Int = -1
+    defStyle: Int = 0
 ) : ShapeableImageView(context, attrs, defStyle) {
 
 

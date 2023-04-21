@@ -13,8 +13,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 class HomeImageLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = -1,
-    defStyleRes: Int = -1
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
     private var userImageBinding: UserImageLayoutBinding? = null
     private var bannerImageBinding: BannerImageLayoutBinding? = null

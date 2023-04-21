@@ -28,8 +28,8 @@ import code.name.monkey.retromusic.databinding.ListSettingItemViewBinding
 class SettingListItemView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = -1,
-    defStyleRes: Int = -1
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
     init {
         val binding: ListSettingItemViewBinding =

@@ -15,8 +15,8 @@ import code.name.monkey.retromusic.extensions.accentOutlineColor
 class PermissionItem @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = -1,
-    defStyleRes: Int = -1
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
     private var binding: ItemPermissionBinding
     val checkImage get() = binding.checkImage
