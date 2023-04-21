@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.extensions
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
@@ -35,6 +36,7 @@ import androidx.core.content.getSystemService
 import androidx.core.view.*
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -109,7 +111,7 @@ fun NavigationBarView.show() {
         duration = ANIM_DURATION
         interpolator = AnimationUtils.loadInterpolator(
             context,
-            android.R.interpolator.accelerate_decelerate
+            R.anim.m3_motion_easing_standard
         )
         addUpdateListener {
             val newTop = it.animatedValue as Int
@@ -150,7 +152,7 @@ fun NavigationBarView.hide() {
         duration = ANIM_DURATION
         interpolator = AnimationUtils.loadInterpolator(
             context,
-            android.R.interpolator.accelerate_decelerate
+            R.anim.m3_motion_easing_standard
         )
         addUpdateListener {
             val newTop = it.animatedValue as Int
@@ -178,10 +180,12 @@ fun View.translateYAnimate(value: Float): Animator {
         }
 }
 
-fun BottomSheetBehavior<*>.peekHeightAnimate(value: Int): Animator {
+fun BottomSheetBehavior<*>.peekHeightAnimate(context: Context, value: Int): Animator {
     return ObjectAnimator.ofInt(this, "peekHeight", value)
         .apply {
             duration = ANIM_DURATION
+            interpolator =
+                AnimationUtils.loadInterpolator(context, R.anim.m3_motion_easing_standard)
             start()
         }
 }

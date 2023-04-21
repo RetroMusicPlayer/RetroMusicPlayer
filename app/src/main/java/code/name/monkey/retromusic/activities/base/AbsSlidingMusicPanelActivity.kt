@@ -535,7 +535,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 if (isBottomNavVisible) {
                     logD("List")
                     if (animate) {
-                        bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
+                        bottomSheetBehavior.peekHeightAnimate(this, heightOfBarWithTabs)
                     } else {
                         bottomSheetBehavior.peekHeight = heightOfBarWithTabs
                     }
@@ -546,7 +546,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 } else {
                     logD("Details")
                     if (animate) {
-                        bottomSheetBehavior.peekHeightAnimate(heightOfBar).doOnEnd {
+                        bottomSheetBehavior.peekHeightAnimate(this, heightOfBar).doOnEnd {
                             binding.slidingPanel.bringToFront()
                         }
                     } else {
