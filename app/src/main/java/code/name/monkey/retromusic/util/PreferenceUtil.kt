@@ -131,7 +131,8 @@ object PreferenceUtil {
     private val autoDownloadImagesPolicy
         get() = sharedPreferences.getStringOrDefault(
             AUTO_DOWNLOAD_IMAGES_POLICY,
-            "only_wifi"
+            if (BuildConfig.FLAVOR == "fdroid") "never"
+            else "always"
         )
 
     var albumArtistsOnly
