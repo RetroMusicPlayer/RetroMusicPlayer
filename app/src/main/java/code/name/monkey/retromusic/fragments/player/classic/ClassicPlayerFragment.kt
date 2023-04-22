@@ -30,6 +30,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -178,6 +179,9 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
                 if (getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
                     getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
                 }
+                else{
+                    mainActivity.getBottomSheetBehavior().state=BottomSheetBehavior.STATE_COLLAPSED
+                }
             }
         })
     }
@@ -305,8 +309,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         binding.playerControlsContainer.songTotalTime.setTextColor(lastPlaybackControlsColor)
 
         if (isLandscapeMode()) {
-            val window = requireActivity().window
-            window?.navigationBarColor = color.backgroundColor
+            mainActivity.setNavigationBarColor(color.backgroundColor)
         }
 
         ViewUtil.setProgressDrawable(
@@ -604,7 +607,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
                     val window = requireActivity().window
                     window?.navigationBarColor.let { navBarColor ->
                         if (navBarColor == null || navBarColor != color) {
-                            window?.navigationBarColor = color
+                            mainActivity.setNavigationBarColor(color)
                         }
                     }
                 }
