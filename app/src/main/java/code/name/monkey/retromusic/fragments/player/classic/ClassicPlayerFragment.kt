@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.fragments.player.classic
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -26,6 +27,7 @@ import android.widget.SeekBar
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -131,6 +133,16 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         hideVolumeIfAvailable()
         setupRecyclerView()
 
+        val config = resources.configuration;
+
+        // Check if the device is in landscape mode
+        if (config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            val layoutParams =
+                binding.playerQueueSheet.layoutParams as CoordinatorLayout.LayoutParams
+            layoutParams.width = (resources.displayMetrics.widthPixels * 0.53).toInt()
+            binding.playerQueueSheet.layoutParams = layoutParams
+        }
+
         val coverFragment: PlayerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
         coverFragment.setCallbacks(this)
 
@@ -164,7 +176,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
         }
-        requireActivity().onBackPressedDispatcher.addCallback(object: OnBackPressedCallback(true) {
+        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
                     getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
