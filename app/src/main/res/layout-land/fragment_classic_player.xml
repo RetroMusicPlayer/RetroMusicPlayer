@@ -12,15 +12,30 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="1dp"
+            android:orientation="vertical"
+            android:id="@+id/middle_guideline"
+            app:layout_constraintGuide_percent="0.5"
+            android:layout_height="match_parent"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="1dp"
+            android:orientation="vertical"
+            android:id="@+id/start_guideline"
+            app:layout_constraintGuide_percent="0.1"
+            android:layout_height="match_parent"/>
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerAlbumCoverFragment"
             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.47"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/middle_guideline"
             app:layout_constraintTop_toBottomOf="@+id/toolbarContainer"
             tools:layout="@layout/fragment_album_cover" />
 
@@ -54,19 +69,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:elevation="24dp"
-            app:layout_constraintEnd_toEndOf="@+id/playerAlbumCoverFragment"
-            app:layout_constraintWidth_percent="0.41"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="@id/playerAlbumCoverFragment"
-            />
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"
+            app:layout_constraintStart_toStartOf="@+id/middle_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarContainer"
+             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/playerQueueSheet"
         style="@style/BottomSheetStyle"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_gravity="end"
+        app:layout_anchorGravity="end"
         android:layout_height="match_parent"
         app:shapeAppearanceOverlay="@style/TopCornerCardView"
         app:behavior_hideable="false"

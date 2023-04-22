@@ -28,6 +28,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -65,6 +66,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
+
 
 class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player),
     View.OnLayoutChangeListener,
@@ -133,14 +135,9 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         hideVolumeIfAvailable()
         setupRecyclerView()
 
-        val config = resources.configuration;
-
         // Check if the device is in landscape mode
-        if (config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            val layoutParams =
-                binding.playerQueueSheet.layoutParams as CoordinatorLayout.LayoutParams
-            layoutParams.width = (resources.displayMetrics.widthPixels * 0.53).toInt()
-            binding.playerQueueSheet.layoutParams = layoutParams
+        if (isLandscapeMode()) {
+            resizePlayingQueue()
         }
 
         val coverFragment: PlayerAlbumCoverFragment = whichFragment(R.id.playerAlbumCoverFragment)
@@ -183,6 +180,15 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
                 }
             }
         })
+    }
+
+
+    private fun resizePlayingQueue() {
+        val layoutParams =
+            binding.playerQueueSheet.layoutParams as CoordinatorLayout.LayoutParams
+        layoutParams.width = (resources.displayMetrics.widthPixels * 0.5).toInt()
+        layoutParams.height = resources.displayMetrics.heightPixels
+        binding.playerQueueSheet.layoutParams = layoutParams
     }
 
     private fun hideVolumeIfAvailable() {
@@ -298,6 +304,11 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         binding.playerControlsContainer.songCurrentProgress.setTextColor(lastPlaybackControlsColor)
         binding.playerControlsContainer.songTotalTime.setTextColor(lastPlaybackControlsColor)
 
+        if (isLandscapeMode()) {
+            val window = requireActivity().window
+            window?.navigationBarColor = color.backgroundColor
+        }
+
         ViewUtil.setProgressDrawable(
             binding.playerControlsContainer.progressSlider,
             color.primaryTextColor,
@@ -380,11 +391,36 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
             binding.playerContainer.addOnLayoutChangeListener(this)
             return
         }
-        val height = binding.playerContainer.height
-        val width = binding.playerContainer.width
-        val finalHeight = height - width
+
+        // Check if the device is in landscape mode
+        if (isLandscapeMode()) {
+            calculateLandScapePeekHeight()
+        } else {
+            val height = binding.playerContainer.height
+            val width = binding.playerContainer.width
+            val finalHeight = height - width
+            val panel = getQueuePanel()
+            panel.peekHeight = finalHeight
+        }
+    }
+
+
+    /**
+     * What am doing here is getting the controls  height, and adding the toolbar and statusbar height to itm
+     * then i subtract it from the screen height to get a peek height
+     */
+    private fun calculateLandScapePeekHeight() {
+        val height = binding.playerControlsContainer.root.height
+        val appbarHeight = binding.playerToolbar.height
+        val statusBarHeight = binding.statusBar.height
+        val screenHeight = resources.displayMetrics.heightPixels
+        val peekHeight = screenHeight - (height + appbarHeight + statusBarHeight)
         val panel = getQueuePanel()
-        panel.peekHeight = finalHeight
+        if (peekHeight > 10) {
+            panel.peekHeight = peekHeight
+        } else {
+            panel.peekHeight = 10
+        }
     }
 
     private fun setUpPlayerToolbar() {
@@ -554,10 +590,39 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         oldRight: Int,
         oldBottom: Int
     ) {
-        val height = binding.playerContainer.height
-        val width = binding.playerContainer.width
-        val finalHeight = height - (binding.playerControlsContainer.root.height + width)
-        val panel = getQueuePanel()
-        panel.peekHeight = finalHeight
+
+        // Check if the device is in landscape mode
+        if (isLandscapeMode()) {
+            calculateLandScapePeekHeight()
+
+            //get background color from viewModel
+            val backgroundColor = libraryViewModel.paletteColor.value
+
+            //check if color is already applied, if not applied then update navigationBarColor
+            backgroundColor?.let { color ->
+                if (isLandscapeMode()) {
+                    val window = requireActivity().window
+                    window?.navigationBarColor.let { navBarColor ->
+                        if (navBarColor == null || navBarColor != color) {
+                            window?.navigationBarColor = color
+                        }
+                    }
+                }
+            }
+        } else {
+
+            val height = binding.playerContainer.height
+            val width = binding.playerContainer.width
+            val finalHeight = height - (binding.playerControlsContainer.root.height + width)
+            val panel = getQueuePanel()
+            panel.peekHeight = finalHeight
+        }
+    }
+
+    private fun isLandscapeMode(): Boolean {
+        val config = resources.configuration;
+
+        // Check if the device is in landscape mode
+        return config.orientation == Configuration.ORIENTATION_LANDSCAPE
     }
 }
