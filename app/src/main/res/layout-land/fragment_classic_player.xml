@@ -20,13 +20,6 @@
             android:layout_height="match_parent"/>
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="1dp"
-            android:orientation="vertical"
-            android:id="@+id/start_guideline"
-            app:layout_constraintGuide_percent="0.1"
-            android:layout_height="match_parent"/>
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerAlbumCoverFragment"
             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
