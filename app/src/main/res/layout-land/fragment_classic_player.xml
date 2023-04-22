@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="@id/playerAlbumCoverFragment"
-            app:layout_constraintTop_toTopf="@id/playerAlbumCoverFragment" />
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.card.MaterialCardView
