@@ -79,7 +79,7 @@ ___
 
 ___
 
-## 🧭 Navigation never made easier 
+## 🧭 Navigation never been made easier 
 Self-explanatory interface without overloaded menus.
 
 ## 🎨 Colorful
@@ -98,7 +98,7 @@ favorite songs. No other music player has this feature.
 -  Driving Mode
 -  Headset/Bluetooth support
 -  Music duration filter
--  Android auto support
+-  Android Auto support
 -  Wallpaper accent picker on Android 8.1+
 -  Material You support on Android 12+
 -  Monet themed icon support on Android 13+
@@ -121,7 +121,7 @@ favorite songs. No other music player has this feature.
 -  Smart Auto Playlists - Recently played, most played and history
 -  Build your playlist on the go
 
-We are trying our best to bring you the best user experience. The app is regularly being updated for bug fixes and new features.
+We are trying our best to bring you the best user experience. The app is regularly updated for bug fixes and new features.
 
 ___
 
@@ -129,7 +129,7 @@ ___
 ## ❓ FAQ
 Please read the FAQ [here](https://retromusic.app/faq.html)
 
-In any case, you find or notice any bugs please report them by creating an issue or by contacting us in the [Telegram help & feedback group](https://t.me/retromusicapp).
+In any case, if you find or notice any bugs please report them by creating an issue or by contacting us in the [Telegram help & feedback group](https://t.me/retromusicapp).
 If you have any feature suggestions, please create an issue with detailed information or by contacting us in the [Telegram suggestions group](https://t.me/retro_music_suggestion).
 
 ## 🔗 Social links
