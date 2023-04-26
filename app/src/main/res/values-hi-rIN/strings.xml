@@ -20,7 +20,7 @@
     <string name="action_go_to_album">एल्बम पर जाएं</string>
     <string name="action_go_to_artist">कलाकार पर जाएं</string>
     <string name="action_go_to_genre">शैली पर जाएं</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">बोल पर जाओ</string>
     <string name="action_go_to_start_directory">शुरू निर्देशिका पर जाएं</string>
     <string name="action_grant">अनुदान</string>
     <string name="action_grid_size">ग्रीड आकार</string>
@@ -66,7 +66,7 @@
     <string name="album_artist">एल्बम कलाकार</string>
     <string name="albums">एल्बम</string>
     <plurals name="albums">
-        <item quantity="one">Album</item>
+        <item quantity="one">एल्बम</item>
         <item quantity="other">Albums</item>
     </plurals>
     <string name="always">हमेशा</string>
