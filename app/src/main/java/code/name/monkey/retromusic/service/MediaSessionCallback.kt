@@ -34,7 +34,6 @@ import code.name.monkey.retromusic.util.logD
 import code.name.monkey.retromusic.util.logE
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.util.Arrays
 
 /**
  * Created by hemanths on 2019-08-01.
