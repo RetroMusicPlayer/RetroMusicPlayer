@@ -34,6 +34,7 @@ import code.name.monkey.retromusic.util.logD
 import code.name.monkey.retromusic.util.logE
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.util.Arrays
 
 /**
  * Created by hemanths on 2019-08-01.
@@ -83,7 +84,7 @@ class MediaSessionCallback(
                 musicService.openQueue(songs, 0, true)
             }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SHUFFLE -> {
-                val allSongs: ArrayList<Song> = songRepository.songs() as ArrayList<Song>
+                val allSongs = songRepository.songs().toMutableList()
                 makeShuffleList(allSongs, -1)
                 musicService.openQueue(allSongs, 0, true)
             }
