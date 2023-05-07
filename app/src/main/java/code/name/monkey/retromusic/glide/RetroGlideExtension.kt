@@ -39,11 +39,11 @@ import java.io.File
 
 object RetroGlideExtension {
 
-    private const val DEFAULT_ARTIST_IMAGE =
+    private  val DEFAULT_ARTIST_IMAGE get()=
         R.drawable.default_artist_art
-    private const val DEFAULT_SONG_IMAGE: Int = R.drawable.default_audio_art
-    private const val DEFAULT_ALBUM_IMAGE = R.drawable.default_album_art
-    private const val DEFAULT_ERROR_IMAGE_BANNER = R.drawable.material_design_default
+    private  val DEFAULT_SONG_IMAGE: Int get()= R.drawable.default_audio_art
+    private  val DEFAULT_ALBUM_IMAGE get()= R.drawable.default_album_art
+    private  val DEFAULT_ERROR_IMAGE_BANNER get()= R.drawable.material_design_default
 
     private val DEFAULT_DISK_CACHE_STRATEGY_ARTIST = DiskCacheStrategy.RESOURCE
     private val DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.NONE
@@ -217,7 +217,7 @@ fun RequestBuilder<Drawable>.crossfadeListener(): RequestBuilder<Drawable> {
                 false // thumbnail was not shown, do as usual
             } else DrawableCrossFadeFactory.Builder()
                 .setCrossFadeEnabled(true).build()
-                .build(dataSource, isFirstResource)
+                .build(dataSource, false)
                 .transition(resource, target as Transition.ViewAdapter)
         }
     })

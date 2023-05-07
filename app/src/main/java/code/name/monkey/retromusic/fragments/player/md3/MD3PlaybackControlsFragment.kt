@@ -34,7 +34,6 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.SquigglyProgress
-import com.google.android.material.slider.Slider
 
 class MD3PlaybackControlsFragment :
     AbsPlayerControlsFragment(R.layout.fragment_md3_player_playback_controls) {
