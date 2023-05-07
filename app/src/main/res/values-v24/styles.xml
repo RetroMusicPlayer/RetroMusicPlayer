@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SquigglySlider" parent="Base.SquigglySlider">
+        <item name="android:progressDrawable">@drawable/media_squiggly_progress</item>
+    </style>
+</resources>

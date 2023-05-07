@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.fragments.player.md3
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.SeekBar
 import android.widget.TextView
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -32,6 +33,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import code.name.monkey.retromusic.views.SquigglyProgress
 import com.google.android.material.slider.Slider
 
 class MD3PlaybackControlsFragment :
@@ -40,7 +42,7 @@ class MD3PlaybackControlsFragment :
     private var _binding: FragmentMd3PlayerPlaybackControlsBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: Slider
+    override val seekBar: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
@@ -134,6 +136,7 @@ class MD3PlaybackControlsFragment :
         updateRepeatState()
         updateShuffleState()
         updateSong()
+        (seekBar.progressDrawable as? SquigglyProgress)?.animate = MusicPlayerRemote.isPlaying
     }
 
     override fun onPlayingMetaChanged() {
@@ -142,6 +145,7 @@ class MD3PlaybackControlsFragment :
 
     override fun onPlayStateChanged() {
         updatePlayPauseDrawableState()
+        (seekBar.progressDrawable as? SquigglyProgress)?.animate = MusicPlayerRemote.isPlaying
     }
 
     override fun onRepeatModeChanged() {
