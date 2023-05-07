@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -19,4 +21,11 @@ plugins {
 
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
+}
+subprojects {
+    tasks.withType(KotlinCompile).tap {
+        configureEach {
+            kotlinOptions.jvmTarget = "11"
+        }
+    }
 }
