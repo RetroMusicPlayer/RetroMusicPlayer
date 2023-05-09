@@ -293,7 +293,7 @@
     <string name="past_three_months">Son 3 ay</string>
     <string name="paste_lyrics_here">Sözleri buraya yapıştır</string>
     <string name="paste_timeframe_lyrics_here">Zaman dilimli şarkı sözlerini buraya yapıştır</string>
-    <string name="peek">Peek</string>
+    <string name="peek">Göz at</string>
     <string name="permission_bluetooth_denied">Yakındaki cihazlara erişim izni reddedildi.</string>
     <string name="permission_external_storage_denied">Harici depolama izni reddedildi.</string>
     <string name="permission_summary">Uygulamanın müzik çalması için cihazınızın depolama erişimine ihtiyacı var</string>
@@ -357,7 +357,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Albüm kapağı kalitesini artırabilir, ancak fotoğrafın yavaş yüklenmesine neden olur. Bunu, yalnızca düşük çözünürlüklü resimlerle ilgili sorunlarınız varsa etkinleştirin.</string>
     <string name="pref_summary_library_categories">Kütüphane kategorilerinin görünürlük ve sırasını yapılandırın</string>
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
+    <string name="pref_summary_manage_audio_focus">Çalınan herhangi birşeyden bağımsız olarak sesi arka planda çalmaya devam et</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
     <string name="pref_summary_pause_history">Etkinleştirildiğinde, yeni çalınan şarkılar geçmişte gösterilmez</string>
     <string name="pref_summary_remember_tab">Başlangıçta son kullanılan sekmeye git</string>
@@ -402,7 +402,7 @@
     <string name="pref_title_last_added_interval">Son eklenen çalma listesi aralığı</string>
     <string name="pref_title_lock_screen">Tam ekran kontrolleri</string>
     <string name="pref_title_lyrics_screen_on">Şarkı sözlerini gösterirken ekranı açık tut</string>
-    <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_lyrics_type">Şarkı sözü tipi</string>
     <string name="pref_title_manage_audio_focus">Her zaman oynat</string>
     <string name="pref_title_now_playing_screen_appearance">Şimdi oynatılıyor teması</string>
     <string name="pref_title_open_source_licences">Açık kaynak lisansları</string>
@@ -558,5 +558,5 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
-    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
+    <string name="could_not_write_tags_to_file">Etiketler müzik dosyasına yazılamadı!</string>
 </resources>
