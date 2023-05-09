@@ -560,5 +560,5 @@
     <string name="you_have_to_select_at_least_one_category">Trebuie să selectezi cel puțin o categorie.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">O să fii redirecționat spre un site pentru monitorizarea erorilor.</string>
     <string name="your_account_data_is_only_used_for_authentication">Datele contului tău sunt folosite doar pentru autentificare.</string>
-    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
+    <string name="could_not_write_tags_to_file">Nu s-au putut scrie etichetele în fișierul muzical!</string>
 </resources>
