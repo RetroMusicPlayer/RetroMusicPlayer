@@ -177,7 +177,7 @@
     <string name="error_delete_backup">Não foi possível excluir o backup</string>
     <string name="error_empty_name">Seu nome não pode estar em branco!</string>
     <string name="error_load_failed">Falha ao carregar</string>
-    <string name="error_share_file">Não foi possível salvar o arquivo</string>
+    <string name="error_share_file">Não foi possível compartilhar o arquivo</string>
     <string name="expanded">Expandido</string>
     <string name="faq">Perguntas frequentes</string>
     <string name="favorites">Favoritos</string>
@@ -197,7 +197,7 @@
     <string name="genres">Gêneros</string>
     <string name="git_hub_summary">Bifurcação do projeto no GitHub</string>
     <string name="gradient">Degradê</string>
-    <string name="grant_access">Conceder acesso</string>
+    <string name="grant_access">Permitir acesso</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
