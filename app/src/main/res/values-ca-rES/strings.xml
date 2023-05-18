@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">About %s</string>
+    <string name="about_album_label">Quant al %s</string>
     <string name="about_settings_summary">Equip, links de les xarxes socials</string>
     <string name="accent_color">Color d\'èmfasi</string>
-    <string name="accent_color_desc">The theme accent color, defaults to purple</string>
+    <string name="accent_color_desc">El color d\'accent del tema, per defecte és porpra</string>
     <string name="action_about">Quant a</string>
     <string name="action_add_to_blacklist">Afegir a llista negra</string>
     <string name="action_add_to_favorites">Afegeix als preferits</string>
