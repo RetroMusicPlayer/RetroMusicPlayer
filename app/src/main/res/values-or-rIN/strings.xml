@@ -38,7 +38,7 @@
     <string name="action_rename">Rename</string>
     <string name="action_save_playing_queue">Save playing queue</string>
     <string name="action_scan">Scan</string>
-    <string name="action_search">Search</string>
+    <string name="action_search">ସନ୍ଧାନ</string>
     <string name="action_set">Start</string>
     <string name="action_set_as_ringtone">Set as ringtone</string>
     <string name="action_set_as_start_directory">Set as start directory</string>
@@ -52,12 +52,12 @@
     <string name="action_toggle_favorite">Toggle favorite</string>
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
     <string name="adaptive">Adaptive</string>
-    <string name="add_action">Add</string>
+    <string name="add_action">ଯୋଡ଼ନ୍ତୁ</string>
     <string name="add_playlist_title">"ଚାଳନାତାଲିକାରେ ଯୋଡ଼ନ୍ତୁ"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
-    <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
-    <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
+    <string name="added_song_count_to_playlist">%2$sରେ %1$dଟି ଗୀତ ଯୋଡ଼ାଗଲା</string>
+    <string name="added_title_to_playing_queue">"ଚାଲୁଥିବା ଧାଡ଼ିରେ ୧ ଆଖ୍ୟା ଯୋଡ଼ାଗଲା।"</string>
+    <string name="added_x_titles_to_playing_queue">ଚାଲୁଥିବା ଧାଡ଼ିରେ %1$dଟି ଆଖ୍ୟା ଯୋଡ଼ାଗଲା।</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">Song</item>
