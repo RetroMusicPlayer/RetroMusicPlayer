@@ -101,12 +101,12 @@
     <string name="bug_report_issue">Issue</string>
     <string name="bug_report_manual">Send manually</string>
     <string name="bug_report_no_description">Please enter an issue description</string>
-    <string name="bug_report_no_password">Please enter your valid GitHub password</string>
+    <string name="bug_report_no_password">GitHub 비밀번호를 올바르게 입력해 주세요</string>
     <string name="bug_report_no_title">Please enter an issue title</string>
     <string name="bug_report_no_username">Please enter your valid GitHub username</string>
     <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
-    <string name="bug_report_use_account">Send using GitHub account</string>
+    <string name="bug_report_use_account">GitHub 계정을 사용하여 보내기</string>
     <string name="buy_now">Buy now</string>
     <string name="cancel_current_timer">현재 타이머 취소</string>
     <string name="card">카드</string>
