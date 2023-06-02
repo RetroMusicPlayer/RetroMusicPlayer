@@ -39,14 +39,14 @@
     <string name="action_save_playing_queue">Запазване на опашката за възпроизвеждане</string>
     <string name="action_scan">Сканиране</string>
     <string name="action_search">Търсене</string>
-    <string name="action_set">Напусни</string>
+    <string name="action_set">Пусни</string>
     <string name="action_set_as_ringtone">Задайте %1$s като мелодия</string>
     <string name="action_set_as_start_directory">Задайте като начална директория</string>
     <string name="action_settings">"Настройки"</string>
     <string name="action_share">Сподели</string>
     <string name="action_shuffle_all">Разбъркай всички</string>
     <string name="action_shuffle_playlist">Разбъркайте плейлиста</string>
-    <string name="action_sleep_timer">Таймер сна</string>
+    <string name="action_sleep_timer">Таймер за заспиване</string>
     <string name="action_sort_order">Ред на сортиране</string>
     <string name="action_tag_editor">Редактиране на тагове</string>
     <string name="action_toggle_favorite">Показване на любими</string>
