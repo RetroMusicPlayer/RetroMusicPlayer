@@ -338,7 +338,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Çalmakta olan şarkı albüm kapağını kilit ekranı duvar kağıdı olarak kullanın</string>
     <string name="pref_summary_album_artists_only">Sanatçı kategorisinde Albüm Sanatçılarını göster</string>
     <string name="pref_summary_audio_ducking">Sistem sesi çalındığında veya bir bildirim alındığında sesi kısın</string>
-    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
+    <string name="pref_summary_audio_fade">Şarkı duraklatıldığında veya çalındığında sesi kısma</string>
     <string name="pref_summary_blacklist">Kara listedeki klasörlerin içeriği kütüphanenizden gizlenir.</string>
     <string name="pref_summary_bluetooth_playback">Bluetooth cihazına bağlanır bağlanmaz çalmaya başla</string>
     <string name="pref_summary_blurred_album_art">Albüm kapağını kilit ekranında bulanıklaştır. Üçüncü taraf uygulamalar ve widget\'lar ile sorunlara neden olabilir</string>
@@ -421,7 +421,7 @@
     <string name="pref_title_wallpaper_accent">Duvar kağıdı vurgu rengi</string>
     <string name="pref_title_whitelist">Beyaz liste müziği</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Siyah tema, Şimdi çalınan temalar, Atlıkarınca efekti ve daha fazlası..</string>
     <string name="profile">Profil</string>
     <string name="purchase">Satın al</string>
     <string name="queue">Kuyruk</string>
