@@ -3,7 +3,7 @@
     <string name="about_album_label">ഏകദേശം %s</string>
     <string name="about_settings_summary">അണിയറ പ്രവർത്തകർ, സോഷ്യൽ മീഡിയ ലിങ്കുകൾ</string>
     <string name="accent_color">ആക്സന്റ് നിറം</string>
-    <string name="accent_color_desc">The theme accent color, defaults to purple</string>
+    <string name="accent_color_desc">തീമിന്റെ ഉച്ചസ്വര നിറം, സ്വതവേഗം പർപ്പിലേക്ക് മാറുന്നു</string>
     <string name="action_about">അപ്ലിക്കേഷനെക്കുറിച്ച് അറിയുവാൻ</string>
     <string name="action_add_to_blacklist">ബ്ലാക്ക്‌ലിസ്റ്റിലേക്ക് ആഡ് ചെയ്യൂ</string>
     <string name="action_add_to_favorites">പ്രിയപ്പെട്ടവയിലേയ്ക്ക് ചേർക്കുക</string>
