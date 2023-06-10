@@ -37,7 +37,7 @@
     <string name="action_remove_from_playlist">Remover de la lista de reproducción</string>
     <string name="action_rename">Renombrar</string>
     <string name="action_save_playing_queue">Guardar cola de reproducción</string>
-    <string name="action_scan">Examinar</string>
+    <string name="action_scan">Escanear</string>
     <string name="action_search">Buscar</string>
     <string name="action_set">Iniciar</string>
     <string name="action_set_as_ringtone">Establecer como tono de llamada</string>
