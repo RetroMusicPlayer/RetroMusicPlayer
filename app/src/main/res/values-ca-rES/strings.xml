@@ -13,7 +13,7 @@
     <string name="action_cast">Emet</string>
     <string name="action_clear_playing_queue">Esborra la cua de reproducció</string>
     <string name="action_cycle_repeat">Canvia el mode de repetició</string>
-    <string name="action_delete">Delete</string>
+    <string name="action_delete">Suprimir</string>
     <string name="action_delete_from_device">Elimina d\'aquest dispositiu</string>
     <string name="action_details">Detalls</string>
     <string name="action_edit">Editar</string>
@@ -22,7 +22,7 @@
     <string name="action_go_to_genre">Go to genre</string>
     <string name="action_go_to_lyrics">Go to Lyrics</string>
     <string name="action_go_to_start_directory">Go to start directory</string>
-    <string name="action_grant">Grant</string>
+    <string name="action_grant">Permet</string>
     <string name="action_grid_size">Mida de la graella</string>
     <string name="action_grid_size_land">Grid size (land)</string>
     <string name="action_new_playlist">Nova llista de reproducció</string>
@@ -41,7 +41,7 @@
     <string name="action_search">Cercar</string>
     <string name="action_set">Inicia</string>
     <string name="action_set_as_ringtone">Estableix com a to de trucada</string>
-    <string name="action_set_as_start_directory">Set as start directory</string>
+    <string name="action_set_as_start_directory">Estableix com a directori d\'inici</string>
     <string name="action_settings">"Configuració"</string>
     <string name="action_share">Comparteix</string>
     <string name="action_shuffle_all">Reprodueix aleatòriament</string>
