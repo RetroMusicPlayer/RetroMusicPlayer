@@ -329,7 +329,7 @@
     <string name="pref_header_library">Bibliotheek</string>
     <string name="pref_header_lockscreen">Vergrendelscherm</string>
     <string name="pref_header_playlists">Afspeellijsten</string>
-    <string name="pref_keep_pause_on_zero_volume_summary">Pauses the song when the volume decreases to zero and starts playing back when the volume level rises. Also works outside the app</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Pauzeert het nummer wanneer het volume afneemt tot nul en begint met afspelen als het volume level stijgt. Werkt ook buiten de app</string>
     <string name="pref_keep_pause_on_zero_volume_title">Pauzeer op nul</string>
     <string name="pref_keep_screen_on_summary">Houd er rekening mee dat het inschakelen van deze functie de levensduur van de batterij kan beïnvloeden</string>
     <string name="pref_keep_screen_on_title">Houd het scherm aan</string>
@@ -370,7 +370,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">Als er ruimte is in het nu afspelen scherm, zet volume knoppen aan</string>
     <string name="pref_summary_wallpaper_accent">Haal accentkleur uit achtergrond</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_whitelist">Toon alleen muziek uit de /Muziek Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Laat album cover zien</string>
     <string name="pref_title_album_artists_only">Navigeer via Album Artiest</string>
     <string name="pref_title_album_cover_style">Album cover thema</string>
@@ -381,7 +381,7 @@
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Automatisch downloaden artisten afbeeldingen</string>
     <string name="pref_title_blacklist">Zwarte lijst</string>
-    <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
+    <string name="pref_title_bluetooth_playback">Bluetooth afspelen</string>
     <string name="pref_title_blurred_album_art">Vervaag album cover</string>
     <string name="pref_title_circle_button">Ronde afspeelknop</string>
     <string name="pref_title_classic_notification">Klassiek notificatie design</string>
@@ -391,7 +391,7 @@
     <string name="pref_title_custom_font">Gebruik Manrope lettertype</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
-    <string name="pref_title_extra_controls">Extra controls</string>
+    <string name="pref_title_extra_controls">Extra opties</string>
     <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Afspelen zonder pauzes</string>
     <string name="pref_title_general_theme">Basis thema</string>
@@ -498,7 +498,7 @@
     <string name="sort_order_composer">Componist</string>
     <string name="sort_order_date">Datum toegevoegd</string>
     <string name="sort_order_date_modified">Datum aangepast</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Standaard</string>
     <string name="sort_order_num_songs">Aantal nummers</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Jaar</string>
@@ -509,7 +509,7 @@
     <string name="start_play_music">Begin muziek afspelen.</string>
     <string name="suggestion_songs">Suggesties</string>
     <string name="support_development">Ondersteun ontwikkelaars</string>
-    <string name="swipe_to_unlock">Swipe to unlock</string>
+    <string name="swipe_to_unlock">Swipe om te ontgrendelen</string>
     <string name="synced_lyrics">Synced lyrics</string>
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
