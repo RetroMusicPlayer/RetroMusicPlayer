@@ -460,7 +460,7 @@
     <!-- SAF guide -->
     <string name="saf_guide_slide1_title">%s heeft toegang tot de SD-kaart nodig</string>
     <string name="saf_guide_slide2_description">You need to select your SD card root directory</string>
-    <string name="saf_guide_slide2_title">Select your SD card in navigation drawer</string>
+    <string name="saf_guide_slide2_title">Selecteer uw SD-kaart in het navigatie menu</string>
     <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
     <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
     <string name="saf_write_failed">File write failed: %s</string>
@@ -538,10 +538,10 @@
     <string name="update_image">Update afbeelding</string>
     <string name="updating">Bijwerken...</string>
     <string name="user_images_description">User Images</string>
-    <string name="user_name">User Name</string>
+    <string name="user_name">Gebruikersnaam</string>
     <string name="username">Gebruikersnaam</string>
     <string name="version">Versie</string>
-    <string name="vertical_flip">Vertical flip</string>
+    <string name="vertical_flip">Verticaal omdraaien</string>
     <string name="view_on_telegram">Bekijk op Telegram</string>
     <string name="volume">Volume</string>
     <string name="web_search">Web zoekopdracht</string>
