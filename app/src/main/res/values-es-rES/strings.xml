@@ -46,7 +46,7 @@
     <string name="action_share">Compartir</string>
     <string name="action_shuffle_all">Mezclar todo</string>
     <string name="action_shuffle_playlist">Mezclar lista de reproducción</string>
-    <string name="action_sleep_timer">Temporizador de sueño</string>
+    <string name="action_sleep_timer">Temporizador de apagado</string>
     <string name="action_sort_order">Ordenar por</string>
     <string name="action_tag_editor">Editor de etiquetas</string>
     <string name="action_toggle_favorite">Alternar favoritos</string>
@@ -95,7 +95,7 @@
     <string name="bluetooth_title">Dispositivos cercanos</string>
     <string name="blur">Desenfoque</string>
     <string name="blur_card">Tarjeta con desenfoque</string>
-    <string name="bug_report_failed">No se puede enviar el informe</string>
+    <string name="bug_report_failed">No es posible enviar el informe</string>
     <string name="bug_report_failed_invalid_token">Token de acceso no válido. Por favor, contacta con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_issues_not_available">Las incidencias no están habilitadas para el repositorio seleccionado. Por favor, póngase en contacto con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_unknown">Se ha producido un error inesperado. Por favor, contacta con el desarrollador de la aplicación</string>
