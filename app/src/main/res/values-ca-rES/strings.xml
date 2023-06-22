@@ -21,7 +21,7 @@
     <string name="action_go_to_artist">Vés a l\'artista</string>
     <string name="action_go_to_genre">Go to genre</string>
     <string name="action_go_to_lyrics">Go to Lyrics</string>
-    <string name="action_go_to_start_directory">Go to start directory</string>
+    <string name="action_go_to_start_directory">Vés al directori d\'inici</string>
     <string name="action_grant">Permet</string>
     <string name="action_grid_size">Mida de la graella</string>
     <string name="action_grid_size_land">Grid size (land)</string>
@@ -52,7 +52,7 @@
     <string name="action_toggle_favorite">Afegeix o suprimeix dels preferits</string>
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
     <string name="adaptive">Adaptive</string>
-    <string name="add_action">Add</string>
+    <string name="add_action">Afegeix</string>
     <string name="add_playlist_title">"Afageix a la llista de reproducció"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
     <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
@@ -60,11 +60,11 @@
     <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
-        <item quantity="one">Song</item>
+        <item quantity="one">Cançó</item>
         <item quantity="other">Songs</item>
     </plurals>
-    <string name="album_artist">Album Artist</string>
-    <string name="albums">Albums</string>
+    <string name="album_artist">Artista de l\'àlbum</string>
+    <string name="albums">Àlbums</string>
     <plurals name="albums">
         <item quantity="one">Àlbum</item>
         <item quantity="other">Albums</item>
