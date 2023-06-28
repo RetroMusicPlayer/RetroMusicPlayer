@@ -344,7 +344,7 @@
     <string name="pref_summary_blurred_album_art">Flouter la couverture de l\'album sur l\'écran de verrouillage. Cela peut poser des problèmes avec des applications et widgets tiers</string>
     <string name="pref_summary_carousel_effect">Effet carrousel pour les couvertures d\'albums sur l\'écran de lecture en cours. Veuillez noter que les thèmes Carte et Carte floutée ne fonctionneront pas</string>
     <string name="pref_summary_classic_notification">Utiliser le design classique pour les notifications</string>
-    <string name="pref_summary_colored_app">La couleur du fond et des boutons de contrôles change en fonction de l\'image d\'album sur l\'écran de lecture en cours</string>
+    <string name="pref_summary_colored_app">La couleur du fond et les boutons de contrôle changent en fonction de l\'image de l\'album sur l\'écran de lecture en cours</string>
     <string name="pref_summary_colored_app_shortcuts">Raccourcis de l\'application selon la couleur d\'accent. Chaque fois que vous changez de couleur, veuillez activer ceci afin que le changement soit pris en compte</string>
     <string name="pref_summary_colored_notification">"Colorer la notification avec la couleur dominante des pochettes d'albums"</string>
     <string name="pref_summary_cross_fade">Durée du fondu enchaîné entre les morceaux</string>
@@ -556,7 +556,7 @@
     <string name="x_selected">%1$d sélectionné</string>
     <string name="year">Année</string>
     <string name="you_have_to_select_at_least_one_category">Vous devez sélectionner au moins une catégorie.</string>
-    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web d\'aide.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
     <string name="could_not_write_tags_to_file">Impossible d\'ajouter l\'étiquette au fichier!</string>
 </resources>
