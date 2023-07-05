@@ -558,5 +558,5 @@
     <string name="you_have_to_select_at_least_one_category">Tem que seleccionar pelo menos uma categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vai ser reencaminhado para o site de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">As informações da sua conta são utilizadas apenas autenticação.</string>
-    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
+    <string name="could_not_write_tags_to_file">Não foi possível gravar etiquetas para o ficheiro de música!</string>
 </resources>
