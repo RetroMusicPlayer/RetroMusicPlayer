@@ -20,7 +20,7 @@
     <string name="action_go_to_album">Přejít na album</string>
     <string name="action_go_to_artist">Přejít na interpreta</string>
     <string name="action_go_to_genre">Přejít na žánr</string>
-    <string name="action_go_to_lyrics">Go to Lyrics</string>
+    <string name="action_go_to_lyrics">Přejít na texty</string>
     <string name="action_go_to_start_directory">Přejít do začáteční složky</string>
     <string name="action_grant">Udělit</string>
     <string name="action_grid_size">Velikost mřížky</string>
@@ -55,7 +55,7 @@
     <string name="add_action">Přidat</string>
     <string name="add_playlist_title">"Přidat do seznamu skladeb"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_song_count_to_playlist">Přidáno %1$d skladeb do %2$s</string>
     <string name="added_title_to_playing_queue">"Přidán 1 titul do fronty přehrávání."</string>
     <string name="added_x_titles_to_playing_queue">Přidány %1$d tituly do fronty přehrávání.</string>
     <string name="album">Album</string>
@@ -85,11 +85,11 @@
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">Umělec</string>
     <string name="artists">Umělci</string>
-    <string name="audio_fade_duration">Audio fade duration</string>
+    <string name="audio_fade_duration">Doba prolínání</string>
     <string name="audio_focus_denied">Zaměření zvuku bylo zamítnuto.</string>
     <string name="audio_settings_summary">Změňte nastavení zvuku a upravte ovládání ekvalizéru</string>
     <string name="auto">Auto</string>
-    <string name="backup_restore_settings_summary">Backup and restore your settings, playlists</string>
+    <string name="backup_restore_settings_summary">Zálohovat a obnovit nastavení, seznamy skladeb</string>
     <string name="backup_restore_title"><![CDATA[Backup & Restore]]></string>
     <string name="backup_title">Backups</string>
     <string name="biography">Bio</string>
@@ -256,7 +256,7 @@
     <string name="message_limit_tabs">Not more than 5 items</string>
     <string name="message_pro_feature">%s is a Pro feature.</string>
     <string name="message_restore_success">Restore completed successfully.</string>
-    <string name="message_updated">Updated</string>
+    <string name="message_updated">Aktualizováno</string>
     <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
     <string name="my_name">Název</string>
     <string name="my_top_tracks">Moje top skladby</string>
