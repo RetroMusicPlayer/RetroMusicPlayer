@@ -39,14 +39,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
 
     private fun setupToolbar() {
         val navController: NavController = findNavController(R.id.contentFrame)
-        with(binding.appBarLayout.toolbar) {
-            if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
-                setNavigationIcon(R.drawable.ic_arrow_forward)
-            } else {
-                setNavigationIcon(R.drawable.ic_arrow_back)
-            }
-
-
+        with (binding.appBarLayout.toolbar) {
+            setNavigationIcon(R.drawable.ic_arrow_back)
             isTitleCentered = false
             setNavigationOnClickListener {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
