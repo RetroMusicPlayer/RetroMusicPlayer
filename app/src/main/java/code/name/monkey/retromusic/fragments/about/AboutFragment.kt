@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.fragments.about
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.adapter.ContributorAdapter
 import code.name.monkey.retromusic.databinding.FragmentAboutBinding
 import code.name.monkey.retromusic.extensions.openUrl
@@ -37,6 +39,23 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
     private val binding get() = _binding!!
     private val libraryViewModel by activityViewModel<LibraryViewModel>()
 
+    val mainActivity: MainActivity
+        get() = activity as MainActivity
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    if (!mainActivity.handleBackPress()) {
+                        remove()
+                        mainActivity.onBackPressedDispatcher.onBackPressed()
+                    }
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAboutBinding.bind(view)

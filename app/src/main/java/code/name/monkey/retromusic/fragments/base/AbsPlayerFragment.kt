@@ -73,8 +73,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
 
     val libraryViewModel: LibraryViewModel by activityViewModel()
 
-    val mainActivity: MainActivity
-        get() = activity as MainActivity
+
 
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
 

@@ -16,12 +16,14 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.FragmentSettingsBinding
 import code.name.monkey.retromusic.extensions.findNavController
@@ -31,7 +33,22 @@ import com.afollestad.materialdialogs.color.ColorCallback
 class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+    val mainActivity: MainActivity
+        get() = activity as MainActivity
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    if (!mainActivity.handleBackPress()) {
+                        remove()
+                        mainActivity.onBackPressedDispatcher.onBackPressed()
+                    }
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
 
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentSettingsBinding.bind(view)
         setupToolbar()
