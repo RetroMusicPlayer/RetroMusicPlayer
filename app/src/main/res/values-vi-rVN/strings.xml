@@ -443,7 +443,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="reset_action">Cài lại</string>
     <string name="reset_artist_image">Đặt lại ảnh nghệ sĩ</string>
     <string name="restore">Khôi phục</string>
-    <string name="restore_message">Do you want to restore backup?</string>
+    <string name="restore_message">Bạn có muốn khôi phục sao lưu không?</string>
     <string name="restored_previous_purchase_please_restart">Khôi phục mua trước đó. Vui lòng khởi động lại ứng dụng để sử dụng tất cả các tính năng.</string>
     <string name="restored_previous_purchases">Đã khôi phục lần mua trước.</string>
     <string name="restoring_purchase">Đang khôi phục mua hàng...</string>
@@ -520,7 +520,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="tiny">Nhỏ</string>
     <string name="tiny_card_style">Thẻ nhỏ</string>
     <string name="title">Tiêu đề</string>
-    <string name="title_new_backup">New Backup</string>
+    <string name="title_new_backup">Sao lưu mới</string>
     <string name="today">Hôm nay</string>
     <string name="top_albums">Album hàng đầu</string>
     <string name="top_artists">Nghệ sĩ hàng đầu</string>
