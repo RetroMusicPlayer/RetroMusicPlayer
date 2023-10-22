@@ -60,8 +60,8 @@
     <string name="added_x_titles_to_playing_queue">ଚାଲୁଥିବା ଧାଡ଼ିରେ %1$dଟି ଆଖ୍ୟା ଯୋଡ଼ାଗଲା।</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
-        <item quantity="one">Song</item>
-        <item quantity="other">Songs</item>
+        <item quantity="one">ଗୀତ</item>
+        <item quantity="other">ଗୀତ</item>
     </plurals>
     <string name="album_artist">Album Artist</string>
     <string name="albums">Albums</string>
@@ -360,7 +360,7 @@
     <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_remember_tab">ଆପ୍ ଆରମ୍ଭରେ ଗତ ବ୍ୟବହୃତ ଟ୍ୟାବ୍କୁ ଚାଲିଯିବା</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
@@ -372,7 +372,7 @@
     <string name="pref_summary_wallpaper_accent">Extract accent color from wallpaper</string>
     <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
-    <string name="pref_title_album_artists_only">Navigate by Album Artist</string>
+    <string name="pref_title_album_artists_only">ଆଲବମ୍ କଳାକାରଙ୍କ ଅନୁଯାୟୀ ଦିଗଚଳନ କରିବା</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
@@ -523,7 +523,7 @@
     <string name="title">Title</string>
     <string name="title_new_backup">New Backup</string>
     <string name="today">Today</string>
-    <string name="top_albums">Top albums</string>
+    <string name="top_albums">ଶ୍ରେଷ୍ଠ ଆଲବମ୍</string>
     <string name="top_artists">Top artists</string>
     <string name="track_hint">"Track (2 for track 2 or 3004 for CD3 track 4)"</string>
     <string name="track_list">Track number</string>
