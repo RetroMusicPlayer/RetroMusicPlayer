@@ -97,7 +97,7 @@
     <string name="blur_card">Desenfocar tarjeta</string>
     <string name="bug_report_failed">No es posible enviar el informe</string>
     <string name="bug_report_failed_invalid_token">Token de acceso no válido. Por favor póngase en contacto con el desarrollador de la aplicación.</string>
-    <string name="bug_report_failed_issues_not_available">Los problemas no están habilitados para el repositorio seleccionado. Póngase en contacto con el desarrollador de la aplicación.</string>
+    <string name="bug_report_failed_issues_not_available">Las incidencias no están habilitadas para el repositorio seleccionado. Por favor, contacte con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_unknown">Ocurrió un error inesperado. Ponte en contacto con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_wrong_credentials">Nombre de usuario o contraseña incorrectos</string>
     <string name="bug_report_issue">Problema</string>
