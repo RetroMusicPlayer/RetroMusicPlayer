@@ -12,7 +12,7 @@
     <string name="action_cancel">Cancelar</string>
     <string name="action_cast">Emitir</string>
     <string name="action_clear_playing_queue">Limpiar cola de reproducción</string>
-    <string name="action_cycle_repeat">Cambiar a modo repetición</string>
+    <string name="action_cycle_repeat">Modo de repetición</string>
     <string name="action_delete">Eliminar</string>
     <string name="action_delete_from_device">Eliminar del dispositivo</string>
     <string name="action_details">Detalles</string>
