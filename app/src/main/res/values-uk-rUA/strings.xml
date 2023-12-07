@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">Про застосунок %s</string>
+    <string name="about_album_label">Про альбом %s</string>
     <string name="about_settings_summary">Команда, посилання на соц. мережі</string>
     <string name="accent_color">Акцентний колір</string>
     <string name="accent_color_desc">Акцентний колір, за замовчуванням фіолетовий</string>
@@ -50,7 +50,7 @@
     <string name="action_sort_order">Порядок сортування</string>
     <string name="action_tag_editor">Редактор тегів</string>
     <string name="action_toggle_favorite">Перемкнути улюблене</string>
-    <string name="action_toggle_shuffle">Перемкнути режим змішування</string>
+    <string name="action_toggle_shuffle">Перемкнути режим</string>
     <string name="adaptive">Адаптивний</string>
     <string name="add_action">Додати</string>
     <string name="add_playlist_title">"Додати до списку відтворення"</string>
@@ -110,7 +110,7 @@
     <string name="bug_report_no_password">Введіть свій дійсний пароль користувача GitHub</string>
     <string name="bug_report_no_title">Введіть заголовок проблеми</string>
     <string name="bug_report_no_username">Введіть своє дійсне ім’я користувача GitHub</string>
-    <string name="bug_report_success">Повідомлення про помилку успішне</string>
+    <string name="bug_report_success">Звіт про помилку надіслано</string>
     <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте \"Очистити дані застосунку\" або надішліть лист на ел. пошту </string>
     <string name="bug_report_use_account">Надіслати через обліковий запис GitHub</string>
     <string name="buy_now">Придбайте вже</string>
@@ -562,5 +562,5 @@
     <string name="you_have_to_select_at_least_one_category">Виберіть принаймні одну категорію.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вас буде перенаправлено на сайт відстеження проблем.</string>
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
-    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
+    <string name="could_not_write_tags_to_file">Не вдалося записати теги у файл!</string>
 </resources>
