@@ -39,7 +39,7 @@
     <string name="action_save_playing_queue">Guardar la cola de reproducción</string>
     <string name="action_scan">Examinar</string>
     <string name="action_search">Buscar</string>
-    <string name="action_set">Iniciar</string>
+    <string name="action_set">Comenzar</string>
     <string name="action_set_as_ringtone">Establecer como tono de llamada</string>
     <string name="action_set_as_start_directory">Establecer como directorio de inicio</string>
     <string name="action_settings">"Configuración"</string>
@@ -51,7 +51,7 @@
     <string name="action_tag_editor">Editor de etiquetas</string>
     <string name="action_toggle_favorite">Alternar favoritos</string>
     <string name="action_toggle_shuffle">Alternar modo aleatorio</string>
-    <string name="adaptive">Adaptable</string>
+    <string name="adaptive">Adaptativo</string>
     <string name="add_action">Agregar</string>
     <string name="add_playlist_title">"Añadir a la lista de reproducción"</string>
     <string name="add_time_framed_lryics">Añadir letras sincronizadas</string>
@@ -63,7 +63,7 @@
         <item quantity="one">Canción</item>
         <item quantity="other">Canciones</item>
     </plurals>
-    <string name="album_artist">Artista del álbum</string>
+    <string name="album_artist">Artista</string>
     <string name="albums">Álbumes</string>
     <plurals name="albums">
         <item quantity="one">Álbum</item>
@@ -72,7 +72,7 @@
     <string name="always">Siempre</string>
     <string name="app_share">Echa un vistazo a este genial reproductor de música en: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Aleatorio</string>
-    <string name="app_shortcut_top_tracks_short">Canciones más reproducidas</string>
+    <string name="app_shortcut_top_tracks_short">Canciones más escuchadas</string>
     <string name="app_widget_big_name">Imagen completa</string>
     <string name="app_widget_card_name">Tarjeta</string>
     <string name="app_widget_classic_name">Clásico</string>
@@ -81,8 +81,8 @@
     <string name="app_widget_text_name">Texto mínimo</string>
     <string name="artist">Artista</string>
     <string name="artists">Artistas</string>
-    <string name="audio_fade_duration">Duración del desvanecimiento de audio</string>
-    <string name="audio_focus_denied">Enfoque de audio denegado.</string>
+    <string name="audio_fade_duration">Duración de fusion</string>
+    <string name="audio_focus_denied">Enfoque de audio no permitido.</string>
     <string name="audio_settings_summary">Cambiar los ajustes de sonido y ajustar los controles del ecualizador</string>
     <string name="auto">Auto</string>
     <string name="backup_restore_settings_summary">Haz una copia de seguridad y restaura tu configuración, listas de reproducción</string>
@@ -103,23 +103,23 @@
     <string name="bug_report_issue">Problema</string>
     <string name="bug_report_manual">Enviar manualmente</string>
     <string name="bug_report_no_description">Por favor escribe una descripción del problema</string>
-    <string name="bug_report_no_password">Ingrese su contraseña válida de GitHub</string>
+    <string name="bug_report_no_password">Por favor introduzca su contraseña válida de GitHub</string>
     <string name="bug_report_no_title">Por favor, ingresa un título del problema</string>
     <string name="bug_report_no_username">Por favor, introduce tu nombre de usuario de GitHub válido</string>
     <string name="bug_report_success">Error reportado correctamente</string>
     <string name="bug_report_summary">Ocurrió un error inesperado. Lamentamos que hayas encontrado este error, si sigue fallando \"Borra los datos de la aplicación\" o envíanos un correo electrónico </string>
-    <string name="bug_report_use_account">Enviar usando la cuenta de GitHub</string>
+    <string name="bug_report_use_account">Envíe usando la cuenta de GitHub</string>
     <string name="buy_now">Compra ahora</string>
     <string name="cancel_current_timer">Cancelar</string>
     <string name="card">Tarjeta</string>
-    <string name="card_color_style">Tarjeta coloreada</string>
+    <string name="card_color_style">Color de la tarjeta</string>
     <string name="card_square">Tarjeta cuadrada</string>
     <string name="card_style">Tarjeta</string>
     <string name="carousal_effect_on_now_playing_screen">Efecto Carrusel en la pantalla de reproducción</string>
     <string name="cascading">En cascada</string>
     <string name="changelog">Registro de cambios</string>
     <string name="changelog_summary">Ver las novedades</string>
-    <string name="choose_image">Elegir imágen</string>
+    <string name="choose_image">Elegir imagen</string>
     <string name="choose_restore_title">Elige qué restaurar</string>
     <string name="circle">Circular</string>
     <string name="circular">Circular</string>
