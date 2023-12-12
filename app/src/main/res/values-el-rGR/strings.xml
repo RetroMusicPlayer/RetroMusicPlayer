@@ -345,7 +345,7 @@
     <string name="pref_summary_carousel_effect">Εφέ καρουζέλ για το εξώφυλλο του άλμπουμ στην οθόνη του παίζει τώρα. Σημειώστε ότι τα θέματα Κάρτας και Θαμπές Κάρτες δεν θα λειτουργήσουν</string>
     <string name="pref_summary_classic_notification">Χρήση του κλασσικού σχεδιασμού ειδοποιήσεων.</string>
     <string name="pref_summary_colored_app">Το φόντο και το κουμπί ελέγχου αλλάζουν σύμφωνα με το εξώφυλλο άλμπουμ</string>
-    <string name="pref_summary_colored_app_shortcuts">Χρωματίζει τα app shortcuts με το επιλεγμένο χρώμα τονισμού.</string>
+    <string name="pref_summary_colored_app_shortcuts">Χρωματίζει τις συντομεύσεις εφαρμογής με το επιλεγμένο χρώμα τονισμού</string>
     <string name="pref_summary_colored_notification">"\u03a7\u03c1\u03c9\u03bc\u03b1\u03c4\u03af\u03b6\u03b5\u03b9 \u03c4\u03b7\u03bd \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7 \u03bc\u03b5 \u03c4\u03bf \u03b6\u03c9\u03bd\u03c4\u03b1\u03bd\u03cc \u03c7\u03c1\u03ce\u03bc\u03b1 \u03c4\u03bf\u03c5 \u03b5\u03be\u03c9\u03c6\u03cd\u03bb\u03bb\u03bf\u03c5 \u03ac\u03bb\u03bc\u03c0\u03bf\u03c5\u03bc."</string>
     <string name="pref_summary_cross_fade">Διάρκεια σταδιακής εξασθένησης μεταξύ τραγουδιών</string>
     <string name="pref_summary_desaturated_color">Σύμφωνα με τις γραμμές οδηγών του Material Design τα χρώματα θα πρέπει να αποκορεσθούν σε σκοτεινή λειτουργία</string>
@@ -375,7 +375,7 @@
     <string name="pref_title_album_artists_only">Πλοήγηση κατά Καλλιτέχνη Άλμπουμ</string>
     <string name="pref_title_album_cover_style">Θέμα εξώφυλλου άλμπουμ</string>
     <string name="pref_title_album_cover_transform">Παράλειψη εξώφυλλου άλμπουμ</string>
-    <string name="pref_title_app_shortcuts">Χρωματιστά app shortcuts</string>
+    <string name="pref_title_app_shortcuts">Χρωματιστές συντομεύσεις εφαρμογής</string>
     <string name="pref_title_appbar_mode">Μορφή επικεφαλίδας</string>
     <string name="pref_title_audio_ducking">Μείωση έντασης όταν υπάρχουν εισερχόμενες ειδοποιήσεις</string>
     <string name="pref_title_audio_fade">Εξασθένηση Ήχου</string>
@@ -558,5 +558,5 @@
     <string name="you_have_to_select_at_least_one_category">Πρέπει να επιλέξετε τουλάχιστον μία κατηγορία.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Θα προωθηθείτε στον ιστότοπο παρακολούθησης ζητημάτων.</string>
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
-    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
+    <string name="could_not_write_tags_to_file">Δεν ήταν δυνατή η εγγραφή ετικετών στο αρχείο μουσικής!</string>
 </resources>
