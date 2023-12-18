@@ -16,7 +16,7 @@
     <string name="action_delete">हटाएं</string>
     <string name="action_delete_from_device">डिवाइस से हटाएं</string>
     <string name="action_details">विवरण</string>
-    <string name="action_edit">Edit</string>
+    <string name="action_edit">संशोधन करें</string>
     <string name="action_go_to_album">एल्बम पर जाएं</string>
     <string name="action_go_to_artist">कलाकार पर जाएं</string>
     <string name="action_go_to_genre">शैली पर जाएं</string>
@@ -55,7 +55,7 @@
     <string name="add_action">जोड़ें</string>
     <string name="add_playlist_title">"प्लेलिस्ट में जोड़ें"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Added %1$d song(s) to %2$s</string>
+    <string name="added_song_count_to_playlist">%1$d गाना(गाने) को %2$s में जोड़ा गया।</string>
     <string name="added_title_to_playing_queue">"कतार मे 1 शीर्षक जोड़ा गया है।"</string>
     <string name="added_x_titles_to_playing_queue">कतार मे %1$d शीर्षक जोड़ा गया है।</string>
     <string name="album">एल्बम</string>
@@ -73,7 +73,7 @@
     <string name="app_share">इस बढ़िया म्यूजिक प्लेयर को यहां देखें:https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">शफ़ल</string>
     <string name="app_shortcut_top_tracks_short">टॉप गीत</string>
-    <string name="app_widget_big_name">Full Image</string>
+    <string name="app_widget_big_name">पूरी तस्वीर</string>
     <string name="app_widget_card_name">रेट्रो म्यूजिक - कार्ड</string>
     <string name="app_widget_classic_name">रेट्रो म्यूजिक - क्लासिक</string>
     <string name="app_widget_md3_name">MD3</string>
