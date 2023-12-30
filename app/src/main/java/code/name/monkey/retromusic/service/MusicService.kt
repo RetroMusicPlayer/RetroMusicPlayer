@@ -1058,35 +1058,38 @@ class MusicService : MediaBrowserServiceCompat(),
             if (isBlurredAlbumArt) {
                 request.transform(BlurTransformation.Builder(this@MusicService).build())
             }
-            request.into(object :
-                CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
-                override fun onLoadFailed(errorDrawable: Drawable?) {
-                    super.onLoadFailed(errorDrawable)
-                    metaData.putBitmap(
-                        MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
-                        BitmapFactory.decodeResource(
-                            resources,
-                            R.drawable.default_audio_art
+            try {
+                request.into(object :
+                    CustomTarget<Bitmap?>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
+                        metaData.putBitmap(
+                            MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
+                            BitmapFactory.decodeResource(
+                                resources,
+                                R.drawable.default_audio_art
+                            )
                         )
-                    )
-                    mediaSession?.setMetadata(metaData.build())
-                    onCompletion()
-                }
-
-                override fun onResourceReady(
-                    resource: Bitmap,
-                    transition: Transition<in Bitmap?>?,
-                ) {
-                    metaData.putBitmap(
-                        MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
-                        resource
-                    )
-                    mediaSession?.setMetadata(metaData.build())
-                    onCompletion()
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {}
-            })
+                        mediaSession?.setMetadata(metaData.build())
+                        onCompletion()
+                    }
+    
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap?>?,
+                    ) {
+                        metaData.putBitmap(
+                            MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
+                            resource
+                        )
+                        mediaSession?.setMetadata(metaData.build())
+                        onCompletion()
+                    }
+    
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                })
+            } catch (e: IllegalArgumentException) {
+            }
         } else {
             mediaSession?.setMetadata(metaData.build())
             onCompletion()
