@@ -1,0 +1,50 @@
+name: Bug report
+description: Create a report to help us improve. Please write in English only.
+labels: ['bug']
+body:
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Initial questions
+      options:
+        - label: I have read the [FAQ](https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/FAQ.md).
+          required: true
+        - label: I have searched for similar bugs and have not found any.
+          required: true
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Describe the bug
+      description: Describe the bug, include steps to reproduce and if applicable, add screenshots or any other additional information to help explain your problem.
+      placeholder: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      placeholder: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Desktop
+      value: |
+        - Device: [e.g. OnePlus 7]
+        - Android version: [e.g. Android 9]
+        - App version [e.g. 3.5.300_0517]
+    validations:
+      required: true
