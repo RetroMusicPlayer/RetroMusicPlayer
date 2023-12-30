@@ -1,40 +1,30 @@
 #built application files
 *.apk
 *.ap_
- 
-# files for the dex VM
+ # files for the dex VM
 *.dex
- 
-# Java class files
+ # Java class files
 *.class
- 
-# generated files
+ # generated files
 bin/
 gen/
- 
-# Local configuration file (sdk path, etc)
+ # Local configuration file (sdk path, etc)
 local.properties
- 
-# Windows thumbnail db
+ # Windows thumbnail db
 Thumbs.db
- 
-# OSX files
+ # OSX files
 .DS_Store
- 
-# Eclipse project files
+ # Eclipse project files
 .classpath
 .project
- 
-# Android Studio
+ # Android Studio
 *.iml
 .idea
 #.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
 .gradle
 build/
- 
-#NDK
+ #NDK
 obj/
-
 captures
 app/normal/release/
 /models/
