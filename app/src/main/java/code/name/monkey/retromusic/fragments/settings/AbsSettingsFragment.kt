@@ -19,12 +19,14 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.updatePadding
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.goToProVersion
 import code.name.monkey.retromusic.extensions.showToast
@@ -37,6 +39,23 @@ import dev.chrisbanes.insetter.applyInsetter
 
 abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
+    val mainActivity: MainActivity
+        get() = activity as MainActivity
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    if (!mainActivity.handleBackPress()) {
+                        remove()
+                        mainActivity.onBackPressedDispatcher.onBackPressed()
+                    }
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+    }
     internal fun showProToastAndNavigate(message: String) {
         showToast(getString(R.string.message_pro_feature, message))
         requireContext().goToProVersion()

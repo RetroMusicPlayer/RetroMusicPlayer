@@ -28,8 +28,6 @@ abstract class AbsMainActivityFragment(@LayoutRes layout: Int) : AbsMusicService
     MenuProvider {
     val libraryViewModel: LibraryViewModel by activityViewModel()
 
-    val mainActivity: MainActivity
-        get() = activity as MainActivity
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

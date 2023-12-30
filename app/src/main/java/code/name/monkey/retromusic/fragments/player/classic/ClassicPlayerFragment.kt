@@ -174,16 +174,16 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         binding.text.setOnClickListener {
             goToArtist(requireActivity())
         }
-        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
-                    getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
-                }
-                else{
-                    mainActivity.getBottomSheetBehavior().state=BottomSheetBehavior.STATE_COLLAPSED
-                }
-            }
-        })
+//        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                if (getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
+//                    getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
+//                }
+//                else{
+//                    mainActivity.getBottomSheetBehavior().state=BottomSheetBehavior.STATE_COLLAPSED
+//                }
+//            }
+//        })
     }
 
 

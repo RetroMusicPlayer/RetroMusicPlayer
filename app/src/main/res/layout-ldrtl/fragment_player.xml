@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:clickable="true"
+    android:focusable="true">
+
+    <View
+        android:id="@+id/colorGradientBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:id="@+id/snowfall_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:snowflakeSpeedMax="6"
+        app:snowflakeSpeedMin="2"
+        app:snowflakesNum="75" />
+
+    <include layout="@layout/shadow_statusbar_toolbar" />
+
+    <FrameLayout
+        android:id="@+id/statusBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/status_bar" />
+    </FrameLayout>
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/playerAlbumCoverFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statusBarContainer" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/playbackControlsFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.normal.PlayerPlaybackControlsFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/playerToolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playerAlbumCoverFragment"
+        tools:layout="@layout/fragment_player_playback_controls" />
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/playerToolbar"
+        style="@style/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playbackControlsFragment"
+        app:title="@null"
+        tools:menu="@menu/menu_player" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

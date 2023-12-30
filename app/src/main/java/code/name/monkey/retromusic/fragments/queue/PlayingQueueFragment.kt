@@ -50,8 +50,7 @@ class PlayingQueueFragment : AbsMusicServiceFragment(R.layout.fragment_playing_q
     private var playingQueueAdapter: PlayingQueueAdapter? = null
     private lateinit var linearLayoutManager: LinearLayoutManager
 
-    val mainActivity: MainActivity
-        get() = activity as MainActivity
+
 
     private fun getUpNextAndQueueTime(): String {
         val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)

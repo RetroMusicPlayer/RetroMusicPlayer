@@ -407,7 +407,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         }
     }
 
-    private fun handleBackPress(): Boolean {
+    fun handleBackPress(): Boolean {
         if (panelState == STATE_EXPANDED) {
             collapsePanel()
             return true
