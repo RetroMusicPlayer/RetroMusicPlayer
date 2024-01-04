@@ -33,6 +33,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.commit
+import androidx.navigation.fragment.NavHostFragment
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
 import code.name.monkey.retromusic.ALBUM_COVER_STYLE
@@ -130,6 +131,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     private var paletteColor: Int = Color.WHITE
     private var navigationBarColor = 0
 
+    private var panelStateBefore: Int? = null
+    private var panelStateCurrent: Int? = null
     private val panelState: Int
         get() = bottomSheetBehavior.state
     private lateinit var binding: SlidingMusicPanelLayoutBinding
@@ -140,10 +143,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            println("Handle back press ${bottomSheetBehavior.state}")
-            if (!handleBackPress()) {
-                remove()
-                onBackPressedDispatcher.onBackPressed()
+            if(handleBackPress()){
+                return
+            }
+            val navHostFragment  =
+                supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+            if(!navHostFragment.navController.navigateUp()){
+                finish()
             }
         }
     }
@@ -164,7 +170,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                onBackPressedCallback.isEnabled = newState == STATE_EXPANDED
+                if(panelStateCurrent != null){
+                    panelStateBefore = panelStateCurrent
+                }
+                panelStateCurrent = newState
                 when (newState) {
                     STATE_EXPANDED -> {
                         onPanelExpanded()
@@ -224,7 +233,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
         navigationBarColor = surfaceColor()
 
-        onBackPressedDispatcher.addCallback(onBackPressedCallback)
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     private fun setupBottomSheet() {
@@ -408,7 +417,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     }
 
     private fun handleBackPress(): Boolean {
-        if (panelState == STATE_EXPANDED) {
+        if (panelState == STATE_EXPANDED || (panelState == STATE_SETTLING && panelStateBefore != STATE_EXPANDED)) {
             collapsePanel()
             return true
         }
