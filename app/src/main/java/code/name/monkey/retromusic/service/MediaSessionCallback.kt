@@ -25,11 +25,17 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.repository.*
+import code.name.monkey.retromusic.repository.AlbumRepository
+import code.name.monkey.retromusic.repository.ArtistRepository
+import code.name.monkey.retromusic.repository.GenreRepository
+import code.name.monkey.retromusic.repository.PlaylistRepository
+import code.name.monkey.retromusic.repository.SongRepository
+import code.name.monkey.retromusic.repository.TopPlayedRepository
 import code.name.monkey.retromusic.service.MusicService.Companion.CYCLE_REPEAT
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_SHUFFLE
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.logD
 import code.name.monkey.retromusic.util.logE
 import org.koin.core.component.KoinComponent
@@ -170,7 +176,12 @@ class MediaSessionCallback(
 
     override fun onSkipToPrevious() {
         super.onSkipToPrevious()
-        musicService.playPreviousSong(true)
+        if ((PreferenceUtil.shouldPreviousSongOnBackHeadset && musicService.isHeadsetConnected) ||
+            (PreferenceUtil.shouldPreviousSongOnBackBluetooth && musicService.isBluetoothConnected)) {
+            musicService.playPreviousSong(true)
+        } else {
+            musicService.back(true)
+        }
     }
 
     override fun onStop() {
