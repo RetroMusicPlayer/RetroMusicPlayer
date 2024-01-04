@@ -14,15 +14,21 @@
  */
 package code.name.monkey.retromusic.fragments.settings
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
 import androidx.core.os.LocaleListCompat
 import androidx.preference.Preference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.LANGUAGE_NAME
 import code.name.monkey.retromusic.LAST_ADDED_CUTOFF
+import code.name.monkey.retromusic.PREF_PREV_SONG_ON_BACK_BLUETOOTH
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.extensions.installLanguageAndRecreate
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.HomeSections
@@ -37,6 +43,26 @@ class OtherSettingsFragment : AbsSettingsFragment() {
     private val libraryViewModel by activityViewModel<LibraryViewModel>()
 
     override fun invalidateSettings() {
+        val bluetoothPreference: Preference? = findPreference(PREF_PREV_SONG_ON_BACK_BLUETOOTH)
+        if (VersionUtils.hasS()) {
+            bluetoothPreference?.setOnPreferenceChangeListener { _, newValue ->
+                if (newValue as Boolean) {
+                    if (ActivityCompat.checkSelfPermission(
+                            requireContext(),
+                            Manifest.permission.BLUETOOTH_CONNECT
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        ActivityCompat.requestPermissions(
+                            requireActivity(), arrayOf(
+                                Manifest.permission.BLUETOOTH_CONNECT
+                            ), AbsBaseActivity.BLUETOOTH_PERMISSION_REQUEST
+                        )
+                    }
+                }
+                return@setOnPreferenceChangeListener true
+            }
+        }
+
         val languagePreference: ATEListPreference? = findPreference(LANGUAGE_NAME)
         languagePreference?.setOnPreferenceChangeListener { _, _ ->
             restartActivity()

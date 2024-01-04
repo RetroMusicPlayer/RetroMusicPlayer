@@ -13,22 +13,39 @@
  */
 package code.name.monkey.retromusic.service
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothDevice
-import android.content.*
+import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothProfile
+import android.content.BroadcastReceiver
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.database.ContentObserver
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
+import android.media.AudioDeviceInfo
 import android.media.AudioManager
-import android.os.*
+import android.os.Binder
+import android.os.Build
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
+import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
+import android.os.IBinder
+import android.os.Looper
+import android.os.PowerManager
 import android.os.PowerManager.WakeLock
 import android.provider.MediaStore
 import android.support.v4.media.MediaBrowserCompat
@@ -37,6 +54,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
@@ -45,9 +63,24 @@ import androidx.core.os.BundleCompat
 import androidx.media.MediaBrowserServiceCompat
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.ALBUM_ART_ON_LOCK_SCREEN
+import code.name.monkey.retromusic.BLURRED_ALBUM_ART
+import code.name.monkey.retromusic.BuildConfig
+import code.name.monkey.retromusic.CLASSIC_NOTIFICATION
+import code.name.monkey.retromusic.COLORED_NOTIFICATION
+import code.name.monkey.retromusic.CROSS_FADE_DURATION
+import code.name.monkey.retromusic.PLAYBACK_PITCH
+import code.name.monkey.retromusic.PLAYBACK_SPEED
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.TOGGLE_HEADSET
 import code.name.monkey.retromusic.activities.LockScreenActivity
-import code.name.monkey.retromusic.appwidgets.*
+import code.name.monkey.retromusic.appwidgets.AppWidgetBig
+import code.name.monkey.retromusic.appwidgets.AppWidgetCard
+import code.name.monkey.retromusic.appwidgets.AppWidgetCircle
+import code.name.monkey.retromusic.appwidgets.AppWidgetClassic
+import code.name.monkey.retromusic.appwidgets.AppWidgetMD3
+import code.name.monkey.retromusic.appwidgets.AppWidgetSmall
+import code.name.monkey.retromusic.appwidgets.AppWidgetText
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.auto.AutoMusicProvider
 import code.name.monkey.retromusic.extensions.showToast
@@ -89,12 +122,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.Runnable
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.java.KoinJavaComponent.get
-import java.util.*
+import java.util.Objects
+import java.util.Random
 
 
 /**
@@ -232,7 +271,31 @@ class MusicService : MediaBrowserServiceCompat(),
     @JvmField
     var shuffleMode = 0
     private val songPlayCountHelper = SongPlayCountHelper()
-
+    val isHeadsetConnected: Boolean
+        get(){
+            val audioManager = ContextCompat.getSystemService(this, AudioManager::class.java)
+                ?: return false
+            return VersionUtils.hasMarshmallow() &&
+                audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS).any { device ->
+                    device.type == AudioDeviceInfo.TYPE_WIRED_HEADPHONES
+                            || device.type == AudioDeviceInfo.TYPE_WIRED_HEADSET
+                }
+        }
+    val isBluetoothConnected: Boolean
+        get() {
+            val bluetoothAdapter = ContextCompat.getSystemService(
+                this,
+                BluetoothManager::class.java
+            )?.adapter ?: return false
+            if(VersionUtils.hasS() &&
+                ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED){
+                return false
+            }
+            val headsetState = bluetoothAdapter.getProfileConnectionState(BluetoothProfile.HEADSET)
+            return (headsetState == BluetoothProfile.STATE_CONNECTED)
+        }
     private val bluetoothReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action

@@ -64,6 +64,27 @@
 
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
+        android:title="@string/pref_header_media_back_behavior">
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="prev_song_on_back_h"
+            android:layout="@layout/list_item_view_switch"
+            android:summary="@string/pref_summary_prev_song_on_back_headset"
+            android:title="@string/pref_title_prev_song_on_back_headset" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="prev_song_on_back_b"
+            android:layout="@layout/list_item_view_switch"
+            android:summary="@string/pref_summary_prev_song_on_back_bluetooth"
+            android:title="@string/pref_title_prev_song_on_back_bluetooth" />
+
+    </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
         android:defaultValue="auto"
         android:entries="@array/pref_language_names"

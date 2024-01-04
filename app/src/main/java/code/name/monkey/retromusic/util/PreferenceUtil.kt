@@ -340,6 +340,18 @@ object PreferenceUtil {
             MANAGE_AUDIO_FOCUS, false
         )
 
+
+    val shouldPreviousSongOnBackHeadset
+        get() = sharedPreferences.getBoolean(
+            PREF_PREV_SONG_ON_BACK_HEADSET, false
+        )
+
+    val shouldPreviousSongOnBackBluetooth
+        get() = sharedPreferences.getBoolean(
+            PREF_PREV_SONG_ON_BACK_BLUETOOTH, false
+        )
+
+
     val isLockScreen get() = sharedPreferences.getBoolean(LOCK_SCREEN, false)
 
     @Suppress("deprecation")
