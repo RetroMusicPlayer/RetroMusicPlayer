@@ -117,9 +117,6 @@ class MainActivity : AbsCastActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean =
-        findNavController(R.id.fragment_container).navigateUp()
-
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         val expand = intent?.extra<Boolean>(EXPAND_PANEL)?.value ?: false
