@@ -68,6 +68,7 @@ import code.name.monkey.retromusic.service.notification.PlayingNotificationClass
 import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl24
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
+import code.name.monkey.retromusic.service.playback.PlaybackSleepTimer
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.MusicUtil.toggleFavorite
 import code.name.monkey.retromusic.util.PackageValidator
@@ -106,9 +107,6 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @JvmField
     var nextPosition = -1
-
-    @JvmField
-    var pendingQuit = false
 
     private lateinit var playbackManager: PlaybackManager
 
@@ -271,6 +269,14 @@ class MusicService : MediaBrowserServiceCompat(),
     private var wakeLock: WakeLock? = null
     private var notificationManager: NotificationManager? = null
     private var isForeground = false
+    val sleepTimer = PlaybackSleepTimer(
+        pausePlayback = {
+            notifyChange(PLAY_STATE_CHANGED)
+            seek(0, false)
+            quit()
+        }
+    )
+
     override fun onCreate() {
         super.onCreate()
         val powerManager = getSystemService<PowerManager>()
@@ -685,11 +691,8 @@ class MusicService : MediaBrowserServiceCompat(),
                     ACTION_REWIND -> back(true)
                     ACTION_SKIP -> playNextSong(true)
                     ACTION_STOP, ACTION_QUIT -> {
-                        pendingQuit = false
                         quit()
                     }
-
-                    ACTION_PENDING_QUIT -> pendingQuit = true
                     TOGGLE_FAVORITE -> toggleFavorite()
                 }
             }
@@ -700,13 +703,13 @@ class MusicService : MediaBrowserServiceCompat(),
     override fun onTrackEnded() {
         acquireWakeLock()
         // if there is a timer finished, don't continue
+        val pendingQuit = sleepTimer.onTrackEnded()
         if (pendingQuit
             || repeatMode == REPEAT_MODE_NONE && isLastTrack
         ) {
             notifyChange(PLAY_STATE_CHANGED)
             seek(0, false)
             if (pendingQuit) {
-                pendingQuit = false
                 quit()
             }
         } else {
@@ -721,12 +724,12 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     override fun onTrackWentToNext() {
+        val pendingQuit = sleepTimer.onTrackEnded()
         if (pendingQuit || repeatMode == REPEAT_MODE_NONE && isLastTrack) {
             playbackManager.setNextDataSource(null)
             pause(false)
             seek(0, false)
             if (pendingQuit) {
-                pendingQuit = false
                 quit()
             }
         } else {
@@ -1387,7 +1390,6 @@ class MusicService : MediaBrowserServiceCompat(),
         const val ACTION_SKIP = "$RETRO_MUSIC_PACKAGE_NAME.skip"
         const val ACTION_REWIND = "$RETRO_MUSIC_PACKAGE_NAME.rewind"
         const val ACTION_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.quitservice"
-        const val ACTION_PENDING_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.pendingquitservice"
         const val INTENT_EXTRA_PLAYLIST = RETRO_MUSIC_PACKAGE_NAME + "intentextra.playlist"
         const val INTENT_EXTRA_SHUFFLE_MODE =
             "$RETRO_MUSIC_PACKAGE_NAME.intentextra.shufflemode"
