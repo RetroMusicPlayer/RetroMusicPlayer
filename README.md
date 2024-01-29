@@ -9,7 +9,7 @@
     <img src="https://img.shields.io/badge/Platform-Android-green.svg">
   </a>
   <a href="https://github.com/RetroMusicPlayer/RetroMusicPlayer/actions/workflows/android.yml" style="text-decoration:none" area-label="Build Status">
-    <img src="https://github.com/RetroMusicPlayer/RetroMusicPlayer/actions/workflows/android.yml/badge.svg">
+    <img src="https://github.com/RetroMusicPlayer/RetroMusicPlayer/actigthtons/workflows/android.yml/badge.svg">
   </a>
   <a href="https://github.com/RetroMusicPlayer/RetroMusicPlayer" style="text-decoration:none" area-label="Min API: 21">
     <img src="https://img.shields.io/badge/minSdkVersion-21-green.svg">
