@@ -62,16 +62,16 @@
     <plurals name="albumSongs">
         <item quantity="one">Песня</item>
         <item quantity="few">Песни</item>
-        <item quantity="many">Песен</item>
-        <item quantity="other">Треков</item>
+        <item quantity="many">Песни</item>
+        <item quantity="other">Треки</item>
     </plurals>
     <string name="album_artist">Исполнитель альбома</string>
     <string name="albums">Альбомы</string>
     <plurals name="albums">
         <item quantity="one">Альбом</item>
-        <item quantity="few">Альбома</item>
-        <item quantity="many">Альбомов</item>
-        <item quantity="other">Альбомов</item>
+        <item quantity="few">Альбомы</item>
+        <item quantity="many">Альбомы</item>
+        <item quantity="other">Альбомы</item>
     </plurals>
     <string name="always">Всегда</string>
     <string name="app_share">Привет, попробуй этот классный музыкальный плеер для Android: https://play.google.com/store/apps/details?id=%s</string>
@@ -186,7 +186,7 @@
     <string name="faq">ЧаВО</string>
     <string name="favorites">Любимые</string>
     <string name="file_already_exists">Файл уже существует</string>
-    <string name="finish_last_song">Закончить вопсроизведение последнего трека</string>
+    <string name="finish_last_song">Закончить воспроизведение последнего трека</string>
     <string name="fit">По размеру</string>
     <string name="flat">Плоское</string>
     <string name="folders">Папки</string>
