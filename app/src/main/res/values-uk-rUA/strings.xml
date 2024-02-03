@@ -62,8 +62,8 @@
     <plurals name="albumSongs">
         <item quantity="one">Пісня</item>
         <item quantity="few">Пісні</item>
-        <item quantity="many">Пісні</item>
-        <item quantity="other">Пісні</item>
+        <item quantity="many">Пісень</item>
+        <item quantity="other">Пісень</item>
     </plurals>
     <string name="album_artist">Виконавець альбому</string>
     <string name="albums">Альбоми</string>
