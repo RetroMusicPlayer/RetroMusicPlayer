@@ -36,6 +36,7 @@ import code.name.monkey.retromusic.extensions.dipToPix
 import code.name.monkey.retromusic.glide.RetroGlideExtension.playlistOptions
 import code.name.monkey.retromusic.glide.playlistPreview.PlaylistPreview
 import code.name.monkey.retromusic.helper.SortOrder.PlaylistSortOrder
+import code.name.monkey.retromusic.helper.menu.PlaylistItemMenuHelper
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.IPlaylistClickListener
@@ -132,13 +133,21 @@ class PlaylistAdapter(
     }
 
     override fun onMultipleItemAction(menuItem: MenuItem, selection: List<PlaylistWithSongs>) {
-        when (menuItem.itemId) {
-            else -> SongsMenuHelper.handleMenuClick(
+        val actionHandled = PlaylistMenuHelper.handleMenuClick(
+            activity,
+            getPlayListEntities(selection),
+            menuItem
+        )
+        if (actionHandled.not()) {
+            SongsMenuHelper.handleMenuClick(
                 activity,
                 getSongList(selection),
-                menuItem.itemId
-            )
+                menuItem.itemId)
         }
+    }
+
+    private fun getPlayListEntities(playlists: List<PlaylistWithSongs>): List<PlaylistEntity> {
+        return playlists.map { it.playlistEntity }
     }
 
     private fun getSongList(playlists: List<PlaylistWithSongs>): List<Song> {
@@ -155,7 +164,7 @@ class PlaylistAdapter(
                 val popupMenu = PopupMenu(activity, view)
                 popupMenu.inflate(R.menu.menu_item_playlist)
                 popupMenu.setOnMenuItemClickListener { item ->
-                    PlaylistMenuHelper.handleMenuClick(activity, dataSet[layoutPosition], item)
+                    PlaylistItemMenuHelper.handleMenuClick(activity, dataSet[layoutPosition], item)
                 }
                 popupMenu.show()
             }
