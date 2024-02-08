@@ -24,7 +24,7 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.RetroGlideExtension.playlistOptions
 import code.name.monkey.retromusic.glide.playlistPreview.PlaylistPreview
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
+import code.name.monkey.retromusic.helper.menu.PlaylistItemMenuHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller
@@ -146,7 +146,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
     }
 
     override fun onMenuItemSelected(item: MenuItem): Boolean {
-        return PlaylistMenuHelper.handleMenuClick(requireActivity(), playlist, item)
+        return PlaylistItemMenuHelper.handleMenuClick(requireActivity(), playlist, item)
     }
 
     private fun checkIsEmpty() {
