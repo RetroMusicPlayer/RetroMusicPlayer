@@ -16,7 +16,7 @@
     <string name="action_delete">حذف</string>
     <string name="action_delete_from_device">حذف از دستگاه</string>
     <string name="action_details">جزئيات</string>
-    <string name="action_edit">ویرایش</string>
+    <string name="action_edit">اصلاح</string>
     <string name="action_go_to_album">رفتن به آلبوم</string>
     <string name="action_go_to_artist">رفتن به صفحه هنرمند</string>
     <string name="action_go_to_genre">رفتن به ژانر موسیقی</string>
