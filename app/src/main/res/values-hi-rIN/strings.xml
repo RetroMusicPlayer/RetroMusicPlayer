@@ -407,7 +407,7 @@
     <string name="pref_title_now_playing_screen_appearance">नाउ प्लेइंग थीम</string>
     <string name="pref_title_open_source_licences">ओपन सोर्स लाइसेंस</string>
     <string name="pref_title_pause_history">इतिहास रोकें</string>
-    <string name="pref_title_remember_tab">अंतिम टैब याद रखें I</string>
+    <string name="pref_title_remember_tab">अंतिम टैब याद रखें</string>
     <string name="pref_title_show_lyrics">बोल दिखाएँ</string>
     <string name="pref_title_suggestions">सुझाव दिखाएं</string>
     <string name="pref_title_swipe_anywhere_now_playing">गाना बदलने के लिए कहीं भी स्वाइप करें</string>
@@ -454,7 +454,7 @@
     <string name="ringtone_title">रिंगटोन (वैकल्पिक)</string>
     <string name="saf_delete_failed">फ़ाइल हटाना विफल: %s</string>
     <!-- SAF -->
-    <string name="saf_error_uri">एस-एए-फ यू-आर-आई नहीं मिल सका।</string>
+    <string name="saf_error_uri">एस-एए-फ यू-आर-आई नहीं मिल सका</string>
     <string name="saf_guide_slide1_description">नेविगेशन ड्रॉवर खोलें</string>
     <string name="saf_guide_slide1_description_before_o">ओवरफ़्लो मेनू में \'एसडी कार्ड दिखाएं\' सक्षम करें</string>
     <!-- SAF guide -->
