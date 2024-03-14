@@ -34,7 +34,7 @@
     <string name="action_previous">Anterior</string>
     <string name="action_remove_from_favorites">Eliminar de favoritos</string>
     <string name="action_remove_from_playing_queue">Eliminar de la cola de reproducción</string>
-    <string name="action_remove_from_playlist">Remover de la lista de reproducción</string>
+    <string name="action_remove_from_playlist">Quitar de la lista de reproducción</string>
     <string name="action_rename">Renombrar</string>
     <string name="action_save_playing_queue">Guardar cola de reproducción</string>
     <string name="action_scan">Escanear</string>
@@ -216,7 +216,7 @@
     <string name="horizontal_flip">Giro horizontal</string>
     <string name="image">Imagen</string>
     <string name="image_gradient">Imagen de degradado</string>
-    <string name="image_settings_summary">Cambiar los ajustes de descarga de imágenes del artista</string>
+    <string name="image_settings_summary">Cambia los ajustes de descarga de imágenes del artista</string>
     <string name="import_label">Importar</string>
     <string name="import_playlist">Importar lista de reproducción</string>
     <string name="import_playlist_message">Importa todas las listas de reproducción del almacenamiento Android con canciones, si las listas ya existen, las canciones se fusionarán.</string>
@@ -248,7 +248,7 @@
     <string name="material">Material</string>
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Error de permisos</string>
-    <string name="message_backup_create_success">Copia de seguridad creada con correctamente.</string>
+    <string name="message_backup_create_success">Copia de seguridad creada correctamente.</string>
     <string name="message_limit_tabs">No más de 5 artículos</string>
     <string name="message_pro_feature">%s es una característica Pro.</string>
     <string name="message_restore_success">La restauración se ha completado con éxito.</string>
