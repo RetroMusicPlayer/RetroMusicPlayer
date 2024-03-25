@@ -45,7 +45,7 @@
     <string name="action_settings">"Einstellungen"</string>
     <string name="action_share">Teilen</string>
     <string name="action_shuffle_all">Alle zufällig wiedergeben</string>
-    <string name="action_shuffle_playlist">Playlist zufällig abspielen</string>
+    <string name="action_shuffle_playlist">Wiedergabeliste zufällig abspielen</string>
     <string name="action_sleep_timer">Einschlafmodus</string>
     <string name="action_sort_order">Sortierreihenfolge</string>
     <string name="action_tag_editor">Tag-Editor</string>
@@ -558,4 +558,5 @@
     <string name="you_have_to_select_at_least_one_category">Du musst mindestens eine Kategorie auswählen.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Du wirst auf die Problembehandlungs-Seite weitergeleitet.</string>
     <string name="your_account_data_is_only_used_for_authentication">Deine Accountdaten werden ausschließlich zur Authentifizierung genutzt.</string>
+    <string name="could_not_write_tags_to_file">Konnte Tags nicht in der Musikdatei speichern!</string>
 </resources>
