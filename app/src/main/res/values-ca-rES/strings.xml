@@ -293,7 +293,7 @@
     <string name="past_three_months">Els darrers tres mesos</string>
     <string name="paste_lyrics_here">Enganxa la lletra aquí</string>
     <string name="paste_timeframe_lyrics_here">Enganxeu aquí el cronograma de la lletra</string>
-    <string name="peek">Peek</string>
+    <string name="peek">Fer una ullada</string>
     <string name="permission_bluetooth_denied">S\'ha denegat el permís dels dispositius propers.</string>
     <string name="permission_external_storage_denied">S\'ha denegat el permís per accedir a l’emmagatzematge.</string>
     <string name="permission_summary">L\'aplicació necessita permís per accedir a l\'emmagatzematge del dispositiu per reproduir música</string>
@@ -399,7 +399,7 @@
     <string name="pref_title_home_artist_grid_style">Graella d\'artistes</string>
     <string name="pref_title_home_banner">Capçalera</string>
     <string name="pref_title_ignore_media_store_artwork">Ignora les portades de la botiga multimèdia</string>
-    <string name="pref_title_last_added_interval">Last added playlist interval</string>
+    <string name="pref_title_last_added_interval">Llistes de reproducció afegides recentment</string>
     <string name="pref_title_lock_screen">Controls de pantalla completa</string>
     <string name="pref_title_lyrics_screen_on">Mantén la pantalla encesa mentre es mostri la lletra</string>
     <string name="pref_title_lyrics_type">Tipus de lletres</string>
