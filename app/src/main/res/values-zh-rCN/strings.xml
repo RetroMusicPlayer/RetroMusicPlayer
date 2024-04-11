@@ -185,7 +185,7 @@
     <string name="flat">扁平</string>
     <string name="folders">文件夹</string>
     <string name="follow_system">跟随系统</string>
-    <string name="for_you">私人订制</string>
+    <string name="for_you">推荐</string>
     <string name="free">免费</string>
     <string name="full">全屏</string>
     <string name="full_card">填充卡片</string>
@@ -226,7 +226,7 @@
     <string name="label_file_name">文件名</string>
     <string name="label_file_path">文件路径</string>
     <string name="label_file_size">文件大小</string>
-    <string name="label_last_modified">最后一次修改</string>
+    <string name="label_last_modified">修改时间</string>
     <string name="label_more_from">来自 %s 的更多歌曲</string>
     <string name="label_sampling_rate">采样率</string>
     <string name="label_track_length">长度</string>
@@ -242,7 +242,7 @@
     <string name="loading_products">正在加载产品...</string>
     <string name="login">登录</string>
     <string name="lyrics">歌词</string>
-    <string name="made_with_love">用❤️创造，印度出品</string>
+    <string name="made_with_love">❤️印度制造，情意绵长。❤️</string>
     <string name="material">质感</string>
     <string name="md_error_label">错误</string>
     <string name="md_storage_perm_error">权限错误</string>
