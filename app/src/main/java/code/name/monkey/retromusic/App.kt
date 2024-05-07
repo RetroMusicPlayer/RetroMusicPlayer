@@ -16,6 +16,7 @@ package code.name.monkey.retromusic
 
 import android.app.Application
 import androidx.preference.PreferenceManager
+import androidx.viewbinding.BuildConfig
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
