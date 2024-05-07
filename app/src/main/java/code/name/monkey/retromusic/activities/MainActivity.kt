@@ -121,6 +121,7 @@ class MainActivity : AbsCastActivity() {
         findNavController(R.id.fragment_container).navigateUp()
 
     override fun onNewIntent(intent: Intent?) {
+
         super.onNewIntent(intent)
         val expand = intent?.extra<Boolean>(EXPAND_PANEL)?.value ?: false
         if (expand && PreferenceUtil.isExpandPanel) {
@@ -193,6 +194,11 @@ class MainActivity : AbsCastActivity() {
                 setIntent(Intent())
             }
         }
+    }
+    override fun onStop() {
+        super.onStop()
+        // Stop the music playback when the activity is stopped
+        MusicPlayerRemote.pauseSong()
     }
 
     private fun parseLongFromIntent(
