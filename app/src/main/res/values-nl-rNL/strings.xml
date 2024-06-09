@@ -360,7 +360,7 @@
     <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Licentie details voor open source software</string>
     <string name="pref_summary_pause_history">Wanneer ingeschakeld, zullen nieuw afgespeelde nummers niet zichtbaar zijn in de geschiedenis</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_remember_tab">Navigeer naar het laatst gebruikte tabblad bij opstarten</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Toon Nieuwe Muziek Mix op het startscherm</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
@@ -392,10 +392,10 @@
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra opties</string>
-    <string name="pref_title_extra_song_info">Song info</string>
+    <string name="pref_title_extra_song_info">Nummer info</string>
     <string name="pref_title_gapless_playback">Afspelen zonder pauzes</string>
     <string name="pref_title_general_theme">Basis thema</string>
-    <string name="pref_title_home_album_grid_style">Album grid</string>
+    <string name="pref_title_home_album_grid_style">Album raster</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Negeer media store covers</string>
@@ -409,7 +409,7 @@
     <string name="pref_title_pause_history">Pauzeer geschiedenis</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
-    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_suggestions">Suggesties tonen</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
@@ -421,7 +421,7 @@
     <string name="pref_title_wallpaper_accent">Achtergrond accentkleur</string>
     <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Donker thema, \"speelt nu\" thema\'s, Carrousel-effect en nog veel meer..</string>
     <string name="profile">Profiel</string>
     <string name="purchase">Kopen</string>
     <string name="queue">Wachtrij</string>
@@ -445,7 +445,7 @@
     <string name="reset_artist_image">Reset artiest afbeelding</string>
     <string name="restore">Herstellen</string>
     <string name="restore_message">Do you want to restore backup?</string>
-    <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
+    <string name="restored_previous_purchase_please_restart">Vorige aankoop hersteld. Gelieve de app te herstarten om alle functies te benutten.</string>
     <string name="restored_previous_purchases">Teruggezette aankopen</string>
     <string name="restoring_purchase">Aankoop herstellen…</string>
     <string name="retro_music_player">Retro Music Player</string>
