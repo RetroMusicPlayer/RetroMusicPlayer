@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">%s ನ ಬಗ್ಗೆ</string>
+    <string name="about_album_label">%s ನ ಬಗ್ಗೆ%s</string>
     <string name="about_settings_summary">ತಂಡ, ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ ಲಿಂಕ್‌ಗಳು</string>
     <string name="accent_color">ಪ್ರಧಾನ ಬಣ್ಣ</string>
     <string name="accent_color_desc">ಪ್ರಧಾನ ಬಣ್ಣ, ಇದು ನೇರಳೆ ಬಣ್ಣಕ್ಕೆ ಪೂರ್ವನಿಯೋಜಿತವಾಗಿರುತ್ತದೆ</string>
