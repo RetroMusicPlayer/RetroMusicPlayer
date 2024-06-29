@@ -55,9 +55,9 @@
     <string name="add_action">Добавить</string>
     <string name="add_playlist_title">"Добавить в плейлист"</string>
     <string name="add_time_framed_lryics">Добавить синхронизированный текст</string>
-    <string name="added_song_count_to_playlist">Добавлено %1$d треков в %2$s</string>
+    <string name="added_song_count_to_playlist">Добавлено %1$d трек(ов) в %2$s</string>
     <string name="added_title_to_playing_queue">"В очередь добавлен 1 трек."</string>
-    <string name="added_x_titles_to_playing_queue">В очередь добавлено %1$d треков</string>
+    <string name="added_x_titles_to_playing_queue">В очередь добавлено %1$d треков.</string>
     <string name="album">Альбом</string>
     <plurals name="albumSongs">
         <item quantity="one">Трек</item>
@@ -65,7 +65,7 @@
         <item quantity="many">Треков</item>
         <item quantity="other">Треков</item>
     </plurals>
-    <string name="album_artist">Исполнитель альбома</string>
+    <string name="album_artist">Исполнители альбома</string>
     <string name="albums">Альбомы</string>
     <plurals name="albums">
         <item quantity="one">Альбом</item>
@@ -81,7 +81,7 @@
     <string name="app_widget_card_name">Карточка</string>
     <string name="app_widget_classic_name">Классический</string>
     <string name="app_widget_md3_name">MD3</string>
-    <string name="app_widget_small_name">Маленькая</string>
+    <string name="app_widget_small_name">Маленький</string>
     <string name="app_widget_text_name">Текстовый</string>
     <string name="artist">Исполнитель</string>
     <string name="artists">Исполнители</string>
@@ -101,7 +101,7 @@
     <string name="blur_card">Карточка с размытием</string>
     <string name="bug_report_failed">Невозможно отправить отчёт</string>
     <string name="bug_report_failed_invalid_token">Недопустимый ключ доступа. Пожалуйста, свяжитесь с разработчиком приложения.</string>
-    <string name="bug_report_failed_issues_not_available">Проблемы не характерны для данного репозитория. Пожалуйста, свяжитесь с разработчиком приложения</string>
+    <string name="bug_report_failed_issues_not_available">Проблемы не характерны для данного репозитория. Пожалуйста, свяжитесь с разработчиком приложения.</string>
     <string name="bug_report_failed_unknown">Произошла непредвиденная ошибка. Пожалуйста, свяжитесь с разработчиком приложения.</string>
     <string name="bug_report_failed_wrong_credentials">Неверное имя пользователя или пароль</string>
     <string name="bug_report_issue">Вопрос</string>
@@ -143,7 +143,7 @@
     <string name="could_not_scan_files">Не удалось просканировать %d файлов.</string>
     <string name="create_action">Создать</string>
     <string name="create_new_backup">Создать</string>
-    <string name="created_playlist_x">Плейлист %1$s создан</string>
+    <string name="created_playlist_x">Плейлист %1$s создан.</string>
     <string name="credit_title">Участники и помощники</string>
     <string name="currently_listening_to_x_by_x">Сейчас играет %1$s от %2$s.</string>
     <string name="custom_artist_images">Пользовательские изображения исполнителей</string>
@@ -259,7 +259,7 @@
     <string name="message_updated">Обновлено</string>
     <string name="message_welcome"><![CDATA[Здравствуйте! <br>Добро пожаловать в %s]]></string>
     <string name="my_name">Имя</string>
-    <string name="my_top_tracks">Часто воспроизводимые</string>
+    <string name="my_top_tracks">Частые</string>
     <string name="never">Никогда</string>
     <string name="new_music_mix">Новый Микс</string>
     <string name="new_playlist_title">Новый плейлист</string>
