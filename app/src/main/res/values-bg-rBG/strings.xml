@@ -2,7 +2,7 @@
 <resources>
     <string name="about_album_label">За албума %s</string>
     <string name="about_settings_summary">Връзки към екип и социални медии</string>
-    <string name="accent_color">Основен цвят</string>
+    <string name="accent_color">Акцентен цвят</string>
     <string name="accent_color_desc">Основният цвят, лилав по подразбиране</string>
     <string name="action_about">За програмата</string>
     <string name="action_add_to_blacklist">Добави към черния списък</string>
@@ -246,7 +246,7 @@
     <string name="login">Вход</string>
     <string name="lyrics">Текстове на песни</string>
     <string name="made_with_love">Създадено с ❤️ в Индия</string>
-    <string name="material">Material</string>
+    <string name="material">Материал</string>
     <string name="md_error_label">Грешка</string>
     <string name="md_storage_perm_error">Грешка при достъп</string>
     <string name="message_backup_create_success">Архивирането е създадено успешно.</string>
@@ -303,7 +303,7 @@
     <string name="personalize">Персонализация</string>
     <string name="personalize_settings_summary">Персонализиране на екрана за възпроизвеждане и интерфейса за управление на музиката</string>
     <string name="pick_from_local_storage">Изберете от хранилището</string>
-    <string name="pinterest_page">Pinterest</string>
+    <string name="pinterest_page">Пинтерест</string>
     <string name="pinterest_page_summary">Следвайте Retro Music в Pinterest</string>
     <string name="plain">Гладка</string>
     <string name="playList_already_exits">Плейлистът вече съществува</string>
@@ -421,7 +421,7 @@
     <string name="pref_title_toggle_volume">Контрол на звука</string>
     <string name="pref_title_wallpaper_accent">Цвят на акцента на тапета</string>
     <string name="pref_title_whitelist">Музика от белия списък</string>
-    <string name="pro">Pro</string>
+    <string name="pro">Про</string>
     <string name="pro_summary">Черна тема, повече стилове на екрана за игра, ефект на въртележка и други..</string>
     <string name="profile">Профил</string>
     <string name="purchase">Купи</string>
@@ -449,8 +449,8 @@
     <string name="restored_previous_purchase_please_restart">Предишната покупка е възстановена. Рестартирайте приложението, за да се възползвате от всички функции.</string>
     <string name="restored_previous_purchases">Възстановени са предишните покупки.</string>
     <string name="restoring_purchase">Възстановяване на покупката…</string>
-    <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_player">Ретро Плеър на Музика</string>
+    <string name="retro_music_pro">Ретро Плеър на Музика Про</string>
     <string name="ringtone_summary">Приложението се нуждае от разрешение за достъп до настройките на вашето устройство, за да зададе музика като ваш тон на звънене</string>
     <string name="ringtone_title">Мелодия (по избор)</string>
     <string name="saf_delete_failed">Грешка при изтриване на файл: %s</string>
@@ -512,7 +512,7 @@
     <string name="support_development">Подкрепете развитието</string>
     <string name="swipe_to_unlock">Плъзнете за отключване</string>
     <string name="synced_lyrics">Синхронизиран текст</string>
-    <string name="telegram_group">Telegram</string>
+    <string name="telegram_group">Телеграм</string>
     <string name="telegram_group_summary">Присъединете се към нашата група в Telegram, за да обсъждате грешки, да предлагате подобрения, да се показвате и много други.</string>
     <string name="thank_you">Благодаря!</string>
     <string name="the_audio_file">Аудиофайл</string>
@@ -531,7 +531,7 @@
     <string name="translate">Помощ за превод</string>
     <string name="translate_community">Помогнете ни да преведем приложението на вашия език</string>
     <string name="try_retro_music_premium">Изпробвайте Retro Music Premium</string>
-    <string name="twitter_page">Twitter</string>
+    <string name="twitter_page">Туитър</string>
     <string name="twitter_page_summary">Споделете своя дизайн за Retro Music</string>
     <string name="unlabeled">Не показвай</string>
     <string name="unplayable_file">Не мога да пусна този запис.</string>
