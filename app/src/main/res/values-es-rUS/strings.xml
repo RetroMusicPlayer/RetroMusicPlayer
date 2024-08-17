@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_album_label">About %s</string>
-    <string name="about_settings_summary">Equipo, redes sociales</string>
-    <string name="accent_color">Color de acento</string>
+    <string name="about_settings_summary">Team, social links</string>
+    <string name="accent_color">Accent color</string>
     <string name="accent_color_desc">El color de acento del tema, por defecto es morado</string>
-    <string name="action_about">Acerca de</string>
-    <string name="action_add_to_blacklist">Agregar a la lista negra</string>
-    <string name="action_add_to_favorites">Agregar a Favoritos</string>
-    <string name="action_add_to_playing_queue">Agregar a la cola de reproducción</string>
-    <string name="action_add_to_playlist">Agregar a playlist</string>
-    <string name="action_cancel">Cancelar</string>
-    <string name="action_cast">Lanzamiento</string>
+    <string name="action_about">About</string>
+    <string name="action_add_to_blacklist">Añadir a la lista negra</string>
+    <string name="action_add_to_favorites">Agregar a Favoritos.</string>
+    <string name="action_add_to_playing_queue">Agregar a la cola de reproducción.</string>
+    <string name="action_add_to_playlist">Agregar a playlist 2008</string>
+    <string name="action_cancel">Cancelar </string>
+    <string name="action_cast"> Lanzamiento</string>
     <string name="action_clear_playing_queue">Limpiar la cola de reproducción</string>
     <string name="action_cycle_repeat">Modo de repetición cíclica</string>
     <string name="action_delete">Eliminar</string>
