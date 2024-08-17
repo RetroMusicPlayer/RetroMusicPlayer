@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">Acerca de %s</string>
+    <string name="about_album_label">About %s</string>
     <string name="about_settings_summary">Equipo, redes sociales</string>
     <string name="accent_color">Color de acento</string>
     <string name="accent_color_desc">El color de acento del tema, por defecto es morado</string>
