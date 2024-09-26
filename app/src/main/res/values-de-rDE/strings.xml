@@ -29,7 +29,7 @@
     <string name="action_next">Nächstes</string>
     <string name="action_play">Abspielen</string>
     <string name="action_play_all">Alles abspielen</string>
-    <string name="action_play_next">Spiele danach ab</string>
+    <string name="action_play_next">Als Nächstes abspielen</string>
     <string name="action_play_pause">Abspielen/Pausieren</string>
     <string name="action_previous">Vorheriges</string>
     <string name="action_remove_from_favorites">Aus Favoriten entfernen</string>
@@ -89,9 +89,9 @@
     <string name="backup_restore_title"><![CDATA[Sichern & Wiederherstellen]]></string>
     <string name="backup_title">Sicherungen</string>
     <string name="biography">Biografie</string>
-    <string name="black_theme_name">Einfach Schwarz</string>
+    <string name="black_theme_name">AMOLED-Modus</string>
     <string name="blacklist">Ausschlussliste</string>
-    <string name="bluetooth_summary">Die App benötigt in der Nähe befindliche Geräte, um nach Bluetooth-Geräten zu suchen</string>
+    <string name="bluetooth_summary">Die App benötigt die Berechtigung für Geräte in der Nähe, um in der Umgebung nach Bluetooth-Geräten zu suchen</string>
     <string name="bluetooth_title">Geräte in der Nähe</string>
     <string name="blur">Weichzeichner</string>
     <string name="blur_card">Weichgezeichnete Karte</string>
