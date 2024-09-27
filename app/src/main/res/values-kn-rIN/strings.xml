@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">%s ನ ಬಗ್ಗೆ</string>
+    <string name="about_album_label">%s ನ ಬಗ್ಗೆ%s</string>
     <string name="about_settings_summary">ತಂಡ, ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ ಲಿಂಕ್‌ಗಳು</string>
     <string name="accent_color">ಪ್ರಧಾನ ಬಣ್ಣ</string>
     <string name="accent_color_desc">ಪ್ರಧಾನ ಬಣ್ಣ, ಇದು ನೇರಳೆ ಬಣ್ಣಕ್ಕೆ ಪೂರ್ವನಿಯೋಜಿತವಾಗಿರುತ್ತದೆ</string>
@@ -551,7 +551,7 @@
     <string name="welcome">ಸುಸ್ವಾಗತ,</string>
     <string name="what_do_you_want_to_share">ಏನನ್ನು ಹಂಚಿಕೊಳ್ಳಲು ಬಯಸುವಿರಿ?</string>
     <string name="whats_new">ಹೊಸತೇನಿದೆ</string>
-    <string name="window">ಕ್ರಿಯೆಯ ಕಿಟಿಕಿ</string>
+    <string name="window">Window</string>
     <string name="window_corner_edges">ದುಂಡಾದ ಮೂಲೆಗಳು</string>
     <string name="x_has_been_set_as_ringtone">%1$s ನನ್ನು ನಿಮ್ಮ ರಿಂಗ್ಟೊನ್ ಆಗಿ ಸೆಟ್ ಮಾಡಿ.</string>
     <string name="x_selected">%1$d‌ ಯನ್ನು ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ</string>
@@ -559,4 +559,5 @@
     <string name="you_have_to_select_at_least_one_category">ನೀವು ಕನಿಷ್ಠ ಒಂದು ವರ್ಗವನ್ನು ಆಯ್ಕೆ ಮಾಡಬೇಕು.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">ನಿಮ್ಮನ್ನು ಸಮಸ್ಯೆ ಟ್ರ್ಯಾಕರ್ ಜಾಲತಾಣಕ್ಕೆ ರವಾನಿಸಲಾಗುತ್ತದೆ.</string>
     <string name="your_account_data_is_only_used_for_authentication">ನಿಮ್ಮ ಖಾತೆಯ ಡೇಟಾವನ್ನು ದೃಢೀಕರಣಕ್ಕಾಗಿ ಮಾತ್ರ ಬಳಸಲಾಗುತ್ತದೆ.</string>
+    <string name="could_not_write_tags_to_file">ಸಂಗೀತ ಫೈಲ್‌ಗೆ ಟ್ಯಾಗ್‌ಗಳನ್ನು ಬರೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ!</string>
 </resources>
