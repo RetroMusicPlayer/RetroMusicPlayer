@@ -110,7 +110,7 @@
     <string name="bug_report_summary">Ein unerwarteter Fehler ist aufgetreten. Sorry, dass du ihn entdeckt hast. Wenn er weiterhin auftritt, App-\"Speicherinhalt löschen\" oder eine E-Mail schicken </string>
     <string name="bug_report_use_account">Über GitHub-Konto senden</string>
     <string name="buy_now">Jetzt kaufen</string>
-    <string name="cancel_current_timer">Timer stoppen</string>
+    <string name="cancel_current_timer">Abbrechen</string>
     <string name="card">Karte</string>
     <string name="card_color_style">Farbige Karte</string>
     <string name="card_square">Quadratische Karte</string>
@@ -255,7 +255,7 @@
     <string name="message_updated">Aktualisiert</string>
     <string name="message_welcome"><![CDATA[Hallo! <br>Willkommen bei %s]]></string>
     <string name="my_name">Name</string>
-    <string name="my_top_tracks">Meistgespielt</string>
+    <string name="my_top_tracks">Am häufigsten gespielt</string>
     <string name="never">Nie</string>
     <string name="new_music_mix">Neuer Musik-Mix</string>
     <string name="new_playlist_title">Neue Playlist</string>
@@ -305,10 +305,10 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Folge der Pinterest-Seite für Retro Music Design-Ideen</string>
     <string name="plain">Einfach</string>
-    <string name="playList_already_exits">Playlist bereits vorhanden</string>
+    <string name="playList_already_exits">Playlist existiert bereits</string>
     <string name="playback_pitch">Tonhöhe</string>
     <string name="playback_settings">Wiedergabe-Einstellungen</string>
-    <string name="playback_speed">Abspielgeschwindigkeit</string>
+    <string name="playback_speed">Wiedergabegeschwindigkeit</string>
     <string name="playing_notification_description">Die Wiedergabe-Benachrichtigung ermöglicht Play-/Pause-Steuerung etc.</string>
     <string name="playing_notification_name">Wiedergabe-Benachrichtigung</string>
     <string name="playlist_created_sucessfully">%s erfolgreich erstellt</string>
@@ -482,7 +482,7 @@
     <string name="share_summary">Teile die App mit deinen Freunden und Verwandten</string>
     <string name="share_to_stories">In Stories teilen</string>
     <string name="show_album_artists">Album-Interpreten anzeigen</string>
-    <string name="shuffle">Zufallswiedergabe</string>
+    <string name="shuffle">Zufällige Wiedergabe</string>
     <string name="simple">Einfach</string>
     <string name="sleep_timer_canceled">Einschlafmodus abgebrochen.</string>
     <string name="sleep_timer_set">Einschlafmodus auf %d Minuten gesetzt.</string>
@@ -508,7 +508,7 @@
     <string name="stack">Gestapelt</string>
     <string name="start_play_music">Spiele Musik ab.</string>
     <string name="suggestion_songs">Empfehlungen</string>
-    <string name="support_development">Entwicklung unterstützen</string>
+    <string name="support_development">Unterstütze die Entwicklung</string>
     <string name="swipe_to_unlock">Zum Entsperren Wischen</string>
     <string name="synced_lyrics">Synchronisierter Liedtext</string>
     <string name="telegram_group">Telegram</string>
