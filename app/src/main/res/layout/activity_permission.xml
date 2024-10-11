@@ -78,6 +78,19 @@
                 app:permissionTitleNumber="3"
                 app:permissionTitleSubTitle="@string/ringtone_summary"
                 tools:visibility="visible" />
+
+            <code.name.monkey.retromusic.views.PermissionItem
+                android:id="@+id/alarm_permission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/permission_layout_weight"
+                android:visibility="gone"
+                app:permissionButtonTitle="@string/grant_access"
+                app:permissionIcon="@drawable/ic_phonelink_ring"
+                app:permissionTitle="@string/permission_alarm_title"
+                app:permissionTitleNumber="4"
+                app:permissionTitleSubTitle="@string/permission_alarm_summary"
+                tools:visibility="visible" />
         </LinearLayout>
     </ScrollView>
 
