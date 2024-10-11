@@ -72,7 +72,7 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(),
         PreferenceUtil.unregisterOnSharedPreferenceChangedListener(this)
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             NOW_PLAYING_SCREEN_ID -> updateNowPlayingScreenSummary()
             ALBUM_COVER_STYLE -> updateAlbumCoverStyleSummary()

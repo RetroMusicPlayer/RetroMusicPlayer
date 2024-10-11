@@ -164,7 +164,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
         private var flingPlayBackController = GestureDetector(context,
             object : GestureDetector.SimpleOnGestureListener() {
                 override fun onFling(
-                    e1: MotionEvent,
+                    e1: MotionEvent?,
                     e2: MotionEvent,
                     velocityX: Float,
                     velocityY: Float

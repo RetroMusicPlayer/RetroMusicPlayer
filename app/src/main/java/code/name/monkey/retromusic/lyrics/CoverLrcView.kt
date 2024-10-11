@@ -104,7 +104,7 @@ class CoverLrcView @JvmOverloads constructor(
             }
 
             override fun onScroll(
-                e1: MotionEvent,
+                e1: MotionEvent?,
                 e2: MotionEvent,
                 distanceX: Float,
                 distanceY: Float,
@@ -124,7 +124,7 @@ class CoverLrcView @JvmOverloads constructor(
             }
 
             override fun onFling(
-                e1: MotionEvent,
+                e1: MotionEvent?,
                 e2: MotionEvent,
                 velocityX: Float,
                 velocityY: Float,
