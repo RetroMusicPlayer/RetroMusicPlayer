@@ -153,7 +153,7 @@ class SleepTimerDialog : DialogFragment() {
         timerDisplay.text = "$seekArcProgress min"
     }
 
-    private fun makeTimerPendingIntent(flag: Int): PendingIntent? {
+    private fun makeTimerPendingIntent(flag: Int): PendingIntent {
         return PendingIntent.getService(
             requireActivity(), 0, makeTimerIntent(), flag or if (VersionUtils.hasMarshmallow())
                 PendingIntent.FLAG_IMMUTABLE
