@@ -69,3 +69,8 @@
 -keep class code.name.monkey.retromusic.network.model.** { *; }
 -keep class code.name.monkey.retromusic.model.** { *; }
 -keep class com.google.android.material.bottomsheet.** { *; }
+
+# TypeToken https://stackoverflow.com/questions/70969756/caused-by-java-lang-runtimeexception-missing-type-parameter
+-keep class com.google.gson.reflect.TypeToken
+-keep class * extends com.google.gson.reflect.TypeToken
+-keep public class * implements java.lang.reflect.Type
