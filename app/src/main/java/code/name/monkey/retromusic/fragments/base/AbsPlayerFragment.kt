@@ -33,6 +33,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.viewpager.widget.ViewPager
@@ -273,7 +274,8 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
                 libraryViewModel.insertSongs(listOf(song.toSongEntity(playlist.playListId)))
             }
             libraryViewModel.forceReload(ReloadType.Playlists)
-            requireContext().sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
+            LocalBroadcastManager.getInstance(requireContext())
+                .sendBroadcast(Intent(MusicService.FAVORITE_STATE_CHANGED))
         }
     }
 
