@@ -32,7 +32,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.google.android.material.slider.Slider
+import android.widget.SeekBar
 
 /**
  * Created by hemanths on 2019-10-04.
@@ -43,7 +43,7 @@ class PeekPlayerControlFragment : AbsPlayerControlsFragment(R.layout.fragment_pe
     private var _binding: FragmentPeekControlPlayerBinding? = null
     private val binding get() = _binding!!
 
-    override val progressSlider: Slider
+    override val seekBar: SeekBar
         get() = binding.progressSlider
 
     override val shuffleButton: ImageButton
