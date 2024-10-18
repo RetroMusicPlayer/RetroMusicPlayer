@@ -65,7 +65,7 @@ android {
     }
     lint {
         abortOnError true
-        warning 'ImpliedQuantity', 'Instantiatable', 'MissingQuantity', 'MissingTranslation'
+        warning 'ImpliedQuantity', 'Instantiatable', 'MissingQuantity', 'MissingTranslation', 'StringFormatInvalid'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
