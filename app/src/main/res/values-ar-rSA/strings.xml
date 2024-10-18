@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">حول %s</string>
-    <string name="about_settings_summary">الفريق، وسائل التواصل الاجتماعي</string>
+    <string name="about_album_label">حول تطبيق: %s</string>
+    <string name="about_settings_summary">فريق عمل التطبيق، وسائل التواصل الاجتماعي</string>
     <string name="accent_color">اللون الأساسي</string>
-    <string name="accent_color_desc">لون تمييز المظهر ، يتم تعيينه إلى اللون الأرجواني</string>
+    <string name="accent_color_desc">لون تمييز المظهر، يتم تعيينه إلى اللون الأرجواني</string>
     <string name="action_about">حول</string>
     <string name="action_add_to_blacklist">إضافة إلى القائمة السوداء</string>
-    <string name="action_add_to_favorites">إضافة إلى المفضلة</string>
+    <string name="action_add_to_favorites">إضافة إلى القائمة المفضلة</string>
     <string name="action_add_to_playing_queue">إضافة إلى قائمة التشغيل الحالية</string>
     <string name="action_add_to_playlist">أضف إلى قائمة التشغيل</string>
     <string name="action_cancel">إلغاء</string>
     <string name="action_cast">ممثلين</string>
-    <string name="action_clear_playing_queue">إخلاء قائمة التشغيل الحالية</string>
+    <string name="action_clear_playing_queue">مسح قائمة التشغيل الحالية</string>
     <string name="action_cycle_repeat">وضع التكرار</string>
     <string name="action_delete">حذف</string>
     <string name="action_delete_from_device">حذف من الجهاز</string>
     <string name="action_details">تفاصيل</string>
     <string name="action_edit">تعديل</string>
-    <string name="action_go_to_album">إنتقل إلى الالبوم</string>
+    <string name="action_go_to_album">إنتقل إلى الألبوم</string>
     <string name="action_go_to_artist">إنتقل إلى الفنان</string>
     <string name="action_go_to_genre">إنتقل إلى النوع</string>
-    <string name="action_go_to_lyrics">انتقل إلى كلمات الأغاني</string>
-    <string name="action_go_to_start_directory">انتقل إلى المجلد</string>
+    <string name="action_go_to_lyrics">إنتقل إلى كلمات الأغاني</string>
+    <string name="action_go_to_start_directory">إنتقل إلى المجلد</string>
     <string name="action_grant">منح</string>
     <string name="action_grid_size">حجم الشبكة</string>
     <string name="action_grid_size_land">حجم الشبكة (أفقيا)</string>
@@ -32,7 +32,7 @@
     <string name="action_play_next">تشغيل التالي</string>
     <string name="action_play_pause">تشغيل/إيقاف</string>
     <string name="action_previous">السابق</string>
-    <string name="action_remove_from_favorites">إزالة من المفضلة</string>
+    <string name="action_remove_from_favorites">إزالة من قائمة المفضلة</string>
     <string name="action_remove_from_playing_queue">إزالة من قائمة التشغيل الحالية</string>
     <string name="action_remove_from_playlist">إزالة من قائمة التشغيل</string>
     <string name="action_rename">إعادة التسمية</string>
@@ -58,7 +58,7 @@
     <string name="added_song_count_to_playlist">تم إضافة %1$d أغنية إلى %2$s</string>
     <string name="added_title_to_playing_queue">"تمت الإضافة إلى قائمة الانتظار."</string>
     <string name="added_x_titles_to_playing_queue">إضافة %1$d من العناوين إلى قائمة الانتظار.</string>
-    <string name="album">البوم</string>
+    <string name="album">ألبوم</string>
     <plurals name="albumSongs">
         <item quantity="zero">الأغاني</item>
         <item quantity="one">الأغاني</item>
@@ -67,7 +67,7 @@
 
 أغاني</item>
         <item quantity="many">الأغاني</item>
-        <item quantity="other">الاغاني</item>
+        <item quantity="other">أخرى</item>
     </plurals>
     <string name="album_artist">ألبوم الفنان</string>
     <string name="albums">الألبومات</string>
@@ -80,9 +80,9 @@
         <item quantity="other">الألبومات</item>
     </plurals>
     <string name="always">دائما</string>
-    <string name="app_share">مرحبا القي نظرة على مشغل الموسيقى الرائع هذا في: https://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_share">مرحبا ندعوك إلى تحميل مشغل الموسيقى الرائع هذا من متجر بلاي عبر الرابط التالي: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">عشوائي</string>
-    <string name="app_shortcut_top_tracks_short">المسارات الاكثر شعبية</string>
+    <string name="app_shortcut_top_tracks_short">المسارات الأكثر شعبية</string>
     <string name="app_widget_big_name">صورة كاملة</string>
     <string name="app_widget_card_name">ريترو ميوزك - بطاقة</string>
     <string name="app_widget_classic_name">ريترو ميوزك - تقليدي</string>
@@ -90,7 +90,7 @@
     <string name="app_widget_small_name">ريترو ميوزك - صغير</string>
     <string name="app_widget_text_name">الحد الأدنى للنص</string>
     <string name="artist">فنان</string>
-    <string name="artists">فنانين</string>
+    <string name="artists">فنانون</string>
     <string name="audio_fade_duration">مدة تلاشي الصوت</string>
     <string name="audio_focus_denied">تم منع تركيز الصوت</string>
     <string name="audio_settings_summary">تغيير إعدادات الصوت وضبط عناصر التحكم في موازن الصوت</string>
