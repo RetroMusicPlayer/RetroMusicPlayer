@@ -522,7 +522,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         val heightOfBar = windowInsets.getBottomInsets() + dip(R.dimen.mini_player_height)
         val heightOfBarWithTabs = heightOfBar + dip(R.dimen.bottom_nav_height)
         if (hide) {
-            bottomSheetBehavior.peekHeight = -windowInsets.getBottomInsets()
+            bottomSheetBehavior.peekHeight = (-windowInsets.getBottomInsets()).coerceAtLeast(0)
             bottomSheetBehavior.state = STATE_COLLAPSED
             libraryViewModel.setFabMargin(
                 this,
