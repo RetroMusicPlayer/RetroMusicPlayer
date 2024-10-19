@@ -452,6 +452,8 @@
     <string name="retro_music_pro">Retro Müzik Pro</string>
     <string name="ringtone_summary">Müziği zil sesi yapmak için uygulamanın cihaz ayarlarına erişim yetkisi gereklidir</string>
     <string name="ringtone_title">Zil sesi (İsteğe Bağlı)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">Dosya silme başarısız oldu: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">SAF url\'si alınamıyor.</string>
@@ -559,4 +561,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
     <string name="could_not_write_tags_to_file">Etiketler müzik dosyasına yazılamadı!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>
